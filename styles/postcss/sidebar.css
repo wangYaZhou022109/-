@@ -1,0 +1,114 @@
+:root {
+    --sidebar-item-height: 50px;
+    --sidebar-min-width: 60px;
+}
+
+.sidebar {
+    float: left;
+    height: 100%;
+    width: var(--sidebar-width);
+    position: relative;
+    transition: width .2s linear;
+
+    & .menu {
+        height: 100%;
+        padding-bottom: calc(var(--sidebar-item-height) / 2);
+        overflow: hidden;;
+        position: relative;
+    }
+
+    & .indicator {
+        width: 2px;
+        height: var(--sidebar-item-height);
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: top .3s ease;
+        z-index: 11;
+    }
+
+    & .menu-text {
+        display: inline-block;
+        height: 100%;
+        margin-left: var(--space);
+    }
+
+    & ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        & li {
+            font-size: var(--font-size2);
+            line-height: var(--sidebar-item-height);
+            cursor: pointer;
+            padding: 0 calc(var(--space) * 1.5);
+            white-space: nowrap;
+
+            & .menu-handler {
+                display: none;
+                float: right;
+                margin-right: calc(var(--space) * 1.5);
+                height: var(--sidebar-item-height);
+                width: var(--font-size1);
+                font-size: calc(var(--font-size1) + var(--font-size2));
+            }
+
+            & .menu-icon {
+                font-size: var(--font-size5);
+            }
+
+            & .pe-va {
+                vertical-align: top;
+                font-size: var(--font-size5);
+            }
+        }
+
+        & li.has-child .pe-7s-angle-down {
+            display: block;
+        }
+
+        & li.open .pe-7s-angle-up{
+            display: block;
+        }
+
+        & li.open .pe-7s-angle-down {
+            display: none;
+        }
+
+        & ul.sub {
+            display: none;
+            margin: -0px -calc(var(--space) * 1.5) 0;
+
+            & li {
+                font-size: var(--font-size1);
+                line-height: var(--sidebar-item-height);
+                padding-left: calc(var(--space) * 5);
+
+
+            }
+        }
+
+        & li.open ul.sub {
+            display: block;
+        }
+    }
+
+    & .collapse-nav {
+        position: fixed;;
+        height: calc(var(--space) * 4);
+        line-height: calc(var(--space) * 4);
+        width: var(--sidebar-width);
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        padding: 0 calc(var(--space) * 1);
+        z-index: 11;
+        transition: width .2s linear;
+    }
+
+    & .pe-7s-angle-right {
+        display: none;
+    }
+
+}

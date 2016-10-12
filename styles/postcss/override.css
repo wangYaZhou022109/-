@@ -1,0 +1,96 @@
+.tags.single-line {
+
+    & .selectize-input {
+        padding: 2px;
+        border-width: 0;
+        border-color: inherit;
+        box-shadow: inherit;
+        border-radius: inherit;
+        outline: none;
+        height: 100%;
+
+        &.has-items {
+            padding: 0px;
+        }
+
+        & [data-value], & [data-value].active {
+            background-image: none;
+            border-radius: 0;
+            border-width: 0;
+            margin: 0px 4px 0 0px;
+            line-height: 1.5;
+            text-shadow: none;
+            box-shadow: none;
+
+            & .remove {
+                border-width: 0;
+            }
+        }
+    }
+}
+
+form.vertical .input.selectize-control {
+    padding: 0;
+
+    & .selectize-input {
+        border: none;
+        border-radius: 0;
+        overflow: inherit;
+        padding: calc(var(--space) / 2);
+        background-image: none;
+        line-height: var(--font-size2);
+        box-shadow: none;
+        height: calc(var(--input-height) -2);
+        line-height: calc(var(--space) * 2.5)
+    }
+}
+
+form.vertical .dtree-node-content > label {
+    display: inline-block;
+    margin: 0;
+    margin-left: var(--font-size4);
+}
+
+.alertify {
+    border: none;
+    border-radius: 0;
+    box-shadow:0 2px 20px -5px rgba(0,0,0,.9);
+}
+
+.alertify-buttons {
+    margin-top: calc(var(--space) * 3);
+    text-align: right;
+    border-top: 1px solid #ddd;
+    padding: calc(var(--space) * 2) 0 0;
+}
+
+.alertify-button,
+.alertify-button:hover,
+.alertify-button:focus,
+.alertify-button:active {
+    border: none;
+    border-radius: 0;
+    background: none;
+    text-shadow: none;
+    padding: 0;
+    box-shadow: none;
+    text-decoration: none;
+    margin-left: calc(var(--space) * 3);
+    font-weight: normal;
+}
+
+.alertify-button:hover,
+.alertify-button:focus,
+.alertify-button:active {
+    font-weight: bold;
+}
+
+.alertify-button-ok,
+a.alertify-button-ok {
+    color:var(--color21);
+}
+
+.alertify-button-cancel,
+a.alertify-button-cancel {
+    color: var(--color-black);
+}

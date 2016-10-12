@@ -1,0 +1,17 @@
+#!handlebars
+
+module
+    .menu#sidebar-menu(class='' data-region='menu')
+
+view('menu')
+    .indicator#indicator
+    .collapse-nav#toggle-nav-collapse > i.pe-7s-angle-left.pe-3x + i.pe-7s-angle-right.pe-3x
+    ul.par > each(menus)
+        li(id='menu-' + id)(data-menu=uri)(class='has-child')&if(children.length)
+            i.pe-7s-science.pe-va
+            span.menu-text > echo(name)
+            i.menu-handler.i.pe-7s-angle-up
+            i.menu-handler.i.pe-7s-angle-down
+            if(children.length)
+                ul.sub > each(children)
+                    li(id='sub-menu-' + id)(data-menu=uri) > span.menu-text > echo(name)

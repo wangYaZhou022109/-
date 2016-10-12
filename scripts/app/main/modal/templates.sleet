@@ -1,0 +1,15 @@
+#! handlebars
+
+module > .modal-overlay > .container > .modal.animated#animate
+    i.icon-dismiss.dismiss#dismiss
+    .modal-header(data-region='header')
+    .modal-content(data-region='content')
+    .modal-footer(data-region='footer')
+
+view('header')
+    .h1 > echo(state.title)
+
+view('footer')
+    .btn.reverse.large#close > echo(state.closeText)
+    each(btns)
+        .btn.large(id='btn-' + id) > echo(text)

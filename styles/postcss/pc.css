@@ -1,0 +1,209 @@
+@media (min-width: 960px) {
+    .default,.theme-white{
+        & .viewport{
+
+            &  .themes-list::after {
+                border-top-color: transparent;
+            }
+
+            & .top .nav-list {
+                background: none;
+                border: none;
+            }
+
+            & .shortcut-list {
+                display: block !important;
+            }
+
+        }
+    }
+}
+
+@media (min-width: 481px) {
+    .top .top-below {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .add-member-popup .border.left {
+        border:none;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 1170px) {
+
+    .viewport {
+
+        & .sidebar,
+        & .logo,
+        & .collapse-nav {
+            width: var(--sidebar-min-width);
+            white-space: nowrap;
+        }
+        & .collapse-nav {
+            display: none;
+        }
+
+        & .logo-full,
+        & .menu-handler,
+        & .sidebar .pe-7s-angle-left{
+            display: none !important;
+            margin: 0;
+        }
+
+        & .pe-7s-angle-right,
+        & .logo-min {
+            display: block;
+        }
+
+        & .menu-text{
+            visibility: hidden;
+            position: absolute;
+            left:0;
+            top: 0;
+            margin: 0;
+        }
+
+
+        & .sidebar  {
+            & .menu{
+                overflow: visible !important;
+            }
+
+            & .sub {
+                width: 0;
+                overflow: hidden;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                margin: 0;
+                z-index: 10;
+                padding: 0;
+                transition: all .15s linear;
+                display: block;
+                text-align: center;
+            }
+
+            & ul li {
+                & [class^="pe-7s-"],
+                & [class*=" pe-7s-"] {
+                    display: block;
+                }
+
+                & li {
+                    padding: 0;
+                }
+
+                &:hover .sub {
+                    width: var(--sidebar-width);
+
+                    & .menu-text,
+                    & .menu-handler{
+                        display: block !important;
+                        visibility: visible;;
+                        position: static;;
+                    }
+                }
+
+            }
+        }
+
+
+    }
+}
+
+@media (min-width: 1171px) {
+
+    .sidebar-collapsed {
+
+        & .sidebar,
+        & .logo,
+        & .collapse-nav {
+            width: var(--sidebar-min-width);
+            white-space: nowrap;
+        }
+
+        & .collapse-nav .pe-7s-angle-left {
+            display: none;
+        }
+
+        & .logo-full,
+        & .sidebar ul li .menu-handler{
+            display: none;
+            margin: 0;
+        }
+
+        & .pe-7s-angle-right,
+        & .logo-min {
+            display: block;
+        }
+
+        & .menu-text{
+            visibility: hidden;
+            position: absolute;
+            left:0;
+            top: 0;
+            margin: 0;
+        }
+
+
+        & .sidebar  {
+            & .menu{
+                overflow: visible !important;
+            }
+
+            & .sub {
+                width: 0;
+                overflow: hidden;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                margin: 0;
+                z-index: 10;
+                padding: 0;
+                transition: all .15s linear;
+                display: block;
+                text-align: center;
+            }
+
+            & ul li {
+
+                & li {
+                    padding: 0;
+                }
+
+                &:hover .sub {
+                    width: var(--sidebar-width);
+
+                    & .menu-text,
+                    & .menu-handler{
+                        display: block !important;
+                        visibility: visible;;
+                        position: static;;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media (min-width: 1300px) {
+    .popup.large {
+        width: 65%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .popup.large {
+        width: 95%;
+    }
+
+}
+
+@media (max-width: 1279px) {
+    .popup.ground {
+        left: 0;
+    }
+}

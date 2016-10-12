@@ -1,0 +1,9 @@
+#!handlebars
+
+module
+    .top > .container(data-region='top')
+    .content > .main-content(data-region='content')
+    .bottom > .container(data-region='bottom')
+    div(data-region='popup')
+    div(data-region='modal')
+    div(data-region='ground')

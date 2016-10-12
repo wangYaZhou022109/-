@@ -1,0 +1,28 @@
+#!handlebars
+
+module
+    .title
+        span
+        .h1 &nbsp;
+        .toolbox(data-region='toolbox')
+        .hr
+    .content-wrapper.clearfix
+        .content-left(data-region='left')
+        .content-main(data-region='content')
+
+
+view('toolbox') > form.vertical
+    input.input.tags.single-line(name='name')
+    .addon.btn#searchPosition > i.icon-search
+view('content')
+    .list
+        table.table
+            thead > tr
+                th > setting('human.position.name')
+                th(width='200px') > setting('system.all.organization')
+                th(width='100px') > string('picker.operator.select')
+            tbody > each(positions) > tr
+                td > echo(name)
+                td > echo(organizationName)
+                td > a(id='selectPosition'+id data-name='id' data-value=id) > string('picker.button.selected')
+    #pager.pagination(style='float:none')

@@ -1,0 +1,21 @@
+#! handlebars
+
+module
+    .content-wrapper
+        .content-left#contentLeft
+            .toggle-tree#toggleTree > i.pe-7s-angle-right.pe-3x + i.pe-7s-angle-left.pe-3x
+            .content-left-tree#tree-scrollbar-container(class='' data-region='left')
+        .content-main#content-main
+            .toolbox
+                .title(data-region='title')
+                .searchbar(data-region='toolbox')
+            .content-main-bottom(data-region='content')
+
+
+view('title')
+    .toolbx-toggle-tree.pointer#toggleTree > .pe-7s-angle-right.pe-3x
+
+view('toolbox') > if(state.search)
+    select.tags.single-line#tags('multiple') > each(tags)
+        option(value=id 'selected') > echo(text)
+    .buttons#search > i.pe-7s-search

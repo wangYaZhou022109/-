@@ -1,0 +1,197 @@
+@media (max-width: 960px) {
+
+    .top {
+
+        & .nav {
+            display: block;
+
+            & a {
+                padding-bottom: 0;
+                border:none;
+            }
+        }
+        & .logo {
+            width: var(--sidebar-min-width);
+            & .logo-min {
+                display: block;
+            }
+
+            & .logo-full {
+                display: none;
+            }
+        }
+
+
+        & .shortcut-list {
+            position: fixed;
+            bottom: 0;
+            right: -100%;
+            z-index: 100;
+            text-align: center;
+            width: var(--sidebar-width);
+            visibility: hidden;
+            transition: all .2s linear;
+
+            & .item {
+                display: block;
+                float: left;
+                width: 33.33%;
+            }
+        }
+
+        & .themes-list {
+            top: auto;
+            bottom: 100%;
+            margin: 0;
+
+            &::after {
+                left: 12%;
+                top: auto;
+                bottom: -20px;
+                border-bottom-color: transparent !important;
+            }
+        }
+
+        & .nav-list {
+            position: fixed;
+            right: -100%;
+            top: var(--nav-height);
+            bottom: 0;
+            width: var(--sidebar-width);
+            padding: calc(var(--space) * 2) 0;
+            z-index: 99;
+            opacity: 0;
+            filter: alpha(opacity=0);
+
+            & .item {
+                border-width: 0 0 1px 0;
+                line-height: var(--sidebar-item-height);
+                padding: 0 calc(var(--space) * 2);
+                display: block;
+                margin: 0 calc(var(--space) * 2);
+                &:after {
+                    display: none;
+                }
+                &:last-child {
+                    border:none;
+                }
+            }
+        }
+
+        & .navbar-toggle {
+            display: block;
+            text-align: right;
+
+            & [class^='pe-'] {
+                margin-right: 0;
+                position: relative;
+                width: 25px;
+                height: 20px;
+                border-width: 1px 0;
+                border-style: solid;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 1px;
+                    top: 50%;
+                    margin-top: -1px;
+                    left: 0;
+                }
+            }
+        }
+
+    }
+
+    .content {
+
+        & .content-left {
+            width: var(--sidebar-min-width);
+            text-align: center;
+            & .toggle-tree {
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                line-height: 1;
+                cursor: pointer;
+                position: absolute;
+                width: 100%;
+                z-index: 1;
+                background: white;
+                display: block;;
+            }
+
+            & .pe-7s-angle-left,
+            & .content-left-tree{
+                display: none;
+            }
+            & .pe-7s-angle-right {
+                display: block;
+            }
+
+            &.tree-opend {
+                text-align: left;
+                width: var(--sidebar-width);
+                & .pe-7s-angle-left,
+                & .content-left-tree {
+                    display: block;
+                }
+                & .pe-7s-angle-right{
+                    display: none;
+                }
+            }
+            & .toggle-tree {
+                display: block;
+            }
+        }
+
+        & .content-left-tree {
+            padding-top: calc(var(--space) * 5);
+        }
+
+        & .content-main {
+            padding: var(--space);
+        }
+
+        & .list {
+            overflow-x: auto;
+            height: calc(100% - 8rem);
+            & .table {
+                white-space: nowrap;
+            }
+        }
+
+    }
+
+
+    .viewport .pagination {
+        text-align: center;
+    }
+
+    .popup {
+        width: 80%;
+    }
+
+    .overlay {
+        margin-top: var(--nav-height);
+    }
+
+    .top-content {
+        &.show-menu {
+            & .shortcut-list {
+                visibility: visible;
+                right: 0;
+            }
+            & .nav-list {
+                right: 0;
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+
+            & .overlay {
+                display: block;
+            }
+        }
+    }
+
+}

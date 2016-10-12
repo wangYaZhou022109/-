@@ -1,0 +1,7 @@
+#!handlebars html
+
+module
+    div(data-region='picker')
+
+view('picker')
+    input.input

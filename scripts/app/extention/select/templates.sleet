@@ -1,0 +1,10 @@
+#!handlebars html
+
+module
+    div(data-region='select')
+
+view('select')
+    label(style='display: none;')&if(config.notShow) > echo(config.name)
+    select.input#select(x-marker='selectize')(x-rule='required')&if(config.isRequired)(type='hidden')&if(config.notShow)(name=inputName)
+        each(config.extentionOptions)
+            option(value=key)('selected')&if(selected) > echo(value)

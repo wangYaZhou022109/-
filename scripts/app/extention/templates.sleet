@@ -1,0 +1,4 @@
+#!handlebars html
+
+module
+    div(data-region="multiple:items")

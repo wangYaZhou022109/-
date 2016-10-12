@@ -1,0 +1,8 @@
+#!handlebars html
+
+module
+    div(data-region='date')
+
+view('date')
+    label > echo(config.name)
+    input.input#date(x-rule='required')&if(config.isRequired)(value=entity.text name=inputName)

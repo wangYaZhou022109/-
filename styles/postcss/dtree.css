@@ -1,0 +1,98 @@
+:root {
+    --tree-space: 16px;
+}
+
+.content-left-tree {
+    /*margin: var(--tree-space);*/
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    padding: calc(var(--space) * 1.5) 0 calc(var(--space) * 1.5) calc(var(--space) * 1.5);
+}
+
+.toggle-tree {
+    display: none;
+}
+
+.dtree {
+    padding: 0;
+
+    & ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    & > ul {
+        margin-left: calc(var(--tree-space) * -1);
+
+    }
+
+    & li {
+        margin: calc(var(--tree-space) / 5) 0 calc(var(--tree-space) * 0) var(--tree-space);
+        line-height: calc(var(--tree-space) * 1.5);
+        cursor: pointer;
+        white-space: nowrap;
+
+        & .dtree-node-content {
+            padding: 0 calc(var(--tree-space) / 2);
+            display: inline-block;
+            vertical-align: middle;
+
+            &:hover {
+                background-color: #eee;
+            }
+
+        }
+
+        &.dtree-has-child > .dtree-handler {
+            visibility: visible;
+        }
+
+        &.dtree-opened > .dtree-handler {
+            background-position: 0 0;
+        }
+
+        &.dtree-selected {
+            & > .dtree-node-content {
+
+                & > .dtree-checkbox {
+                    background-position: -64px 0;
+                }
+            }
+        }
+
+        &.dtree-indeterminate > .dtree-node-content > .dtree-checkbox {
+            background-position: calc(var(--tree-space) * -4) 0;
+        }
+
+        & > ul {
+            display: none;
+        }
+
+        &.dtree-opened > ul {
+            display: block;
+        }
+    }
+
+    & .dtree-handler {
+        display: inline-block;
+        visibility: hidden;
+        width: var(--tree-space);
+        height: var(--tree-space);
+        vertical-align: middle;
+        background: url('../images/dtree/handlers.png') no-repeat -20px 0;
+        margin-right: calc(var(--space) / 2);
+    }
+
+    & .dtree-checkbox {
+        display: inline-block;
+        width: var(--tree-space);
+        height: var(--tree-space);
+        vertical-align: middle;
+        background: url('../images/dtree/handlers.png') no-repeat -48px 0;
+        margin-right: 5px;
+    }
+
+
+}

@@ -1,0 +1,36 @@
+@import "common.css";
+@import 'theme.css';
+@import 'components.css';
+@import 'form.css';
+@import 'top.css';
+@import 'sidebar.css';
+@import 'content.css';
+@import 'popup.css';
+@import 'modal.css';
+@import 'override.css';
+@import 'dtree.css';
+@import 'modal-content.css';
+@import "exam.css";
+@import "pc.css";
+@import "pad.css" (max-width: 959px);
+@import "phone.css" (max-width: 480px);
+
+html, body {
+    height: 100%;
+    font-size: 14px;
+    font-weight: 100;
+    font-family: sans-serif;
+}
+
+.windows {
+    font-family: 'microsoft yahei';
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.viewport {
+    width: 100%;
+    height: 100%;
+}

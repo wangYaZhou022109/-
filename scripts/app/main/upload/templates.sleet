@@ -1,0 +1,6 @@
+#!handlebars
+
+module
+    div(data-region='upload')
+
+view('upload') > #uploader

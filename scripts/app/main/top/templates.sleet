@@ -1,0 +1,43 @@
+#!handlebars
+
+
+module > .top-content#top-content
+    .top-above.clearfix
+        .logo(data-region='logo')
+        .shortcut(data-region='shortcut')
+        .nav(data-region='nav')
+    .top-below > .top-tree > .sidebar(data-region='top-tree')
+
+
+view('nav')
+    .navbar-toggle > .pe-7s-menu.pointer#toggleNav
+    .top-back#back > .pe-7s-angle-right.pe-3x
+    .overlay.transparent#overlay
+    .nav-list > each(menus)
+        .item > a(id='menu-' + id href='#' + uri)(class='active')&if(active) > echo(name)
+
+view('shortcut')
+    .toggle-shortcut > i.pe-7s-angle-down
+    .shortcut-list
+        .item > a(href='#') > i.pe-7s-search
+        .item.toggleTheme
+            a(href='#') > i.pe-7s-magic-wand.pe-va
+            .themes-list
+                dl.theme-list-default.active(id='theme-default')
+                    dt.inline-block > .themes-color-bar.color1 + .themes-color-bar.color2 + .themes-color-bar.color3
+                    dd.inline-block 夜空中最亮的星(默认)
+                dl.theme-list-white(id='theme-theme-white')
+                    dt.inline-block > .themes-color-bar.color1 + .themes-color-bar.color2 + .themes-color-bar.color3
+                    dd.inline-block 简约线条
+
+        .item > a(href='#') > i.pe-7s-comment.pe-va
+        .item > a#logout(href='javascript:;') > i.icon-exit.inline-block
+        .hidden
+            form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
+                input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
+
+view('logo')
+    .logo-min.theme-default > img(src="images/logo/logo-zxy-min.png")
+    .logo-full.theme-default > img(src="images/logo/logo-zxy.png")
+    .logo-min.theme-white > img(src="images/logo/logo-zxy-1-min.png")
+    .logo-full.theme-white > img(src="images/logo/logo-zxy-1.png")

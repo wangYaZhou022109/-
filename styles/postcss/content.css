@@ -1,0 +1,108 @@
+.main-content {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+
+    & .toolbox {
+        position: relative;
+        & .tags {
+            vertical-align: middle;
+            position: relative;
+            margin-bottom: calc(var(--space) * 1);
+            height: calc(var(--input-height) * 1);
+        }
+
+        & .searchbar {
+            overflow: auto;
+            position: relative;
+        }
+
+        & .buttons {
+            height: calc(var(--space) * 3);
+            width:  calc(var(--space) * 3);
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+            position: absolute;
+            right: calc(var(--space) / 2);
+            top: 0;
+        }
+
+        & i {
+            line-height: var(--font-size6);
+            font-size: var(--font-size5);
+        }
+    }
+}
+
+.content {
+    height: 100%;
+    padding-top: var(--nav-height);
+
+    & .title {
+        color: var(--color13);
+        height: var(--input-height);
+        line-height: calc(var(--input-height) * 1);
+        float: left;
+        margin-right: var(--space);
+        display: none;
+    }
+
+    & .content-wrapper {
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+
+    }
+
+    & .content-left {
+        width: var(--sidebar-width);
+        float: left;
+        height: 100%;
+        border-right-width: 1px;
+        border-right-style: solid;
+        overflow: hidden;
+        transition: all .2s linear;
+        position: relative;
+
+
+    }
+
+    & .content-main {
+        padding: calc(var(--space) * 2) calc(var(--space) * 2) 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    & .content-main-bottom {
+        height: 100%;
+        overflow: auto;
+        padding-bottom: calc(var(--space) * 6);
+    }
+
+    & .list {
+        margin: calc(var(--space) / 1) 0 0;
+    }
+
+    & .ps-container>.ps-scrollbar-y-rail {
+        width: 11px;
+    }
+
+    & .ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y,
+    & .ps-container>.ps-scrollbar-x-rail>.ps-scrollbar-x {
+        border-radius: 0;
+        right: 0;
+    }
+    & .ps-container>.ps-scrollbar-x-rail {
+        height: 11px;
+    }
+
+    & .ps-container>.ps-scrollbar-x-rail>.ps-scrollbar-x {
+        bottom: 0;
+        right: auto;
+    }
+
+}

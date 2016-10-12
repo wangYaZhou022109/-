@@ -1,0 +1,157 @@
+/*reset*/
+ul,dl,dt,dd {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.clearfix::after,
+.clearfix::before {
+    display: table;
+    content: '';
+    clear: both;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.inline-block {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.fadeIn {
+    opacity: 1;
+    filter:alpha(opacity=100);
+}
+
+.fadeOut {
+    opacity: 0;
+    filter:alpha(opacity=0);
+}
+
+.transparent {
+    background: none !important;
+    border: none !important;
+    outline: none;
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.empty {
+    font-size: var(--font-size1);
+    padding: calc(var(--space) / 2);
+}
+.no-bg,
+.no-bg .selectize-input {
+    background: none !important;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    background-color: black;
+    filter: alpha(opacity=35);
+    opacity: 0.35;
+    display: none;
+
+    &.transparent {
+        filter: 0;
+        opacity: 0;
+    }
+}
+.pointer {
+    cursor: pointer;
+}
+.border {
+    border-width: 0;
+    border-style: solid;
+    &.left {
+        border-left-width: 1px;
+    }
+    &.right {
+        border-right-width: 1px;
+    }
+    &.border-top {
+        border-top-width: 1px;
+    }
+    &.bottom {
+        border-bottom-width: 1px;
+    }
+}
+
+.text-tips {
+    font-size: 12px;
+    font-weight: normal;
+
+}
+
+.m-left {
+    margin-left: var(--space);
+}
+.m-right {
+    margin-right: var(--space);
+}
+.m-top {
+    margin-top: var(--space);
+}
+.m-bottom {
+    margin-bottom: var(--space);
+}
+.tick {
+    width: var(--font-size1);
+    height: var(--font-size1);
+    background: url(../images/checked.png) no-repeat center center;
+    vertical-align: middle;
+}
+.w-full {
+    width: 100%;
+}
+.w-half {
+    width: 50%;
+}
+.no-margin {
+    margin: 0 !important;
+}
+.error {
+    color: red;
+}
+.block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.com-title {
+    font-size: var(--font-size2);
+    font-weight: bold;
+    margin: var(--space) 0;
+
+    &.inline-block {
+        margin-right: var(--font-size4);
+    }
+}

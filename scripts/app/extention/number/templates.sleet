@@ -1,0 +1,8 @@
+#!handlebars html
+
+module
+    div(data-region='number')
+
+view('number')
+    label(style='display: none;')&if(config.notShow) > echo(config.name)
+    input.input(x-rule=rule)(type='hidden')&if(config.notShow)(value=entity.text name=inputName)
