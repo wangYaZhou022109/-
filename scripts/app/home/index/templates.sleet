@@ -1,0 +1,8 @@
+#!handlebars
+
+
+module > .top-content#bottom-content(data-region='bottom')
+
+
+view('bottom')
+    p > echo(information.copyRight)

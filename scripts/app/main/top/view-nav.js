@@ -1,18 +1,18 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    state: true
+    menus: true
 };
 
 exports.dataForTemplate = {
     menus: function(data) {
-        return data.state.list;
+        return data.menus;
     }
 };
 
 exports.events = {
     'click toggleNav': 'toggleNav',
-    'click menu-*': 'showSidebar',
+    'click menu-*': 'showContent',
     'click back': 'backToMenu',
     'click overlay': 'backToMain'
 };
@@ -27,9 +27,9 @@ exports.handlers = {
         }
     },
 
-    showSidebar: function() {
-        var topContent = this.module.$('top-content');
-        $(topContent).addClass('show-tree');
+    showContent: function(id, e) {
+        var url = $(e.target).attr('href');
+        this.app.navigate(url, true);
     },
 
     backToMenu: function() {

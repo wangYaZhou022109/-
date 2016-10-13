@@ -1,5 +1,49 @@
-var _ = require('lodash/collection'),
-    D = require('drizzlejs');
+var menus = [{
+    createTime: 1474538557153,
+    icon: null,
+    id: '1',
+    level: 2,
+    name: '首页',
+    order: 0,
+    parentId: null,
+    uri: 'home/index'
+}, {
+    createTime: 1474538557153,
+    icon: null,
+    id: '2',
+    level: 2,
+    name: '课程',
+    order: 0,
+    parentId: null,
+    uri: 'course/index'
+}, {
+    createTime: 1474538557153,
+    icon: null,
+    id: '3',
+    level: 2,
+    name: '活动',
+    order: 0,
+    parentId: null,
+    uri: 'activity/index'
+}, {
+    createTime: 1474538557153,
+    icon: null,
+    id: '4',
+    level: 2,
+    name: '问道',
+    order: 0,
+    parentId: null,
+    uri: 'ask/index'
+}, {
+    createTime: 1474538557153,
+    icon: null,
+    id: '5',
+    level: 2,
+    name: '应用',
+    order: 0,
+    parentId: null,
+    uri: 'app/index'
+}];
 
 exports.items = {
     nav: 'nav',
@@ -11,91 +55,15 @@ exports.items = {
 exports.store = {
     models: {
         setting: { url: '../system/setting' },
-        menus: { url: '../system/menu/member-menu' },
-        extention: { url: '../human/extention/granted' },
-        state: { mixin: {
-            init: function(data) {
-                var d = this.data = { map: {}, list: [] };
-                _.map(data, function(item) {
-                    d.map[item.id] = D.assign({ children: [] }, item);
-                });
-
-                _.map(data, function(item) {
-                    if (!item.parentId || !d.map[item.parentId]) {
-                        d.list.push(d.map[item.id]);
-                    } else {
-                        d.map[item.parentId].children.push(d.map[item.id]);
-                    }
-                });
-
-                this.changed();
-            },
-
-            active: function(node) {
-                var n = node,
-                    old = this.data.active;
-
-                if (old && old.id === n.id) return false;
-                if (old) old.active = false;
-
-                this.data.active = n;
-                n.active = true;
-
-                this.changed();
-                return true;
-            }
-        } }
+        menus: { data: menus }
     },
-
     callbacks: {
         init: function() {
-            var setting = this.models.setting,
-                menus = this.models.menus,
-                state = this.models.state,
-                extention = this.models.extention,
-                obj = this.app.global.setting = {},
-                extentionObj = this.app.global.extention = {};
-
-            this.get(setting).then(function() {
-                _.map(setting.data, function(v) { obj[v.key] = v.value; });
-            });
-
-            this.get(extention).then(function() {
-                _.map(extention.data, function(value) {
-                    if (extentionObj[value.dataType]) {
-                        extentionObj[value.dataType].push(value);
-                    } else {
-                        extentionObj[value.dataType] = [value];
-                    }
-                });
-            });
-
-
-            return this.get(menus).then(function() {
-                state.init(menus.data);
-            });
+            var setting = this.models.setting;
+            this.get(setting).then();
         },
-
-        'app.pushState': function(hash) {
-            this.app.global.uri = hash;
-            this.chain(this.models.state.data.map || this.module.dispatch('init'), function() {
-                var map = this.models.state.data.map,
-                    current,
-                    parent;
-
-                current = _.find(this.models.menus.data, function(item) {
-                    return item.uri === hash && item.parentId;
-                });
-                if (!current) return;
-
-                parent = map[current.parentId];
-                if (!parent) return;
-
-                while (parent.parentId) parent = map[parent.parentId];
-                if (this.models.state.active(parent)) {
-                    this.app.dispatch('changeMenu', { parent: parent, current: current });
-                }
-            });
+        'app.pushState': function() {
+            this.module.dispatch('init');
         }
     }
 };

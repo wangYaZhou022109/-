@@ -78,7 +78,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['']
+    routers: ['', 'home', 'course', 'activity', 'ask']
 });
 D.assign(app.global, {
     ADD: '1',
@@ -96,7 +96,7 @@ require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
 
-app.start('permission/demo').then(function() {
+app.start('home/index').then(function() {
     if (!window.history.pushState) {
         app.dispatch('pushState', window.location.hash.slice(1));   // for ie8
     }
