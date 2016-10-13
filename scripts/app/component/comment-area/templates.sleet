@@ -1,0 +1,19 @@
+#!handlebars
+
+
+module
+    .content
+        .adiv-comment(data-region='add-comment')
+        .comment-list(data-region='comment-list')
+
+
+view('add-comment')
+    .content
+        textarea.input(name="content" length="500" placeholder="发表你的观点")
+        .btn(type="button") 发表
+
+
+view('comment-list')
+    div comment-list
+        each(comments)
+            p > echo(id ',') + echo(content ',') + echo(memberName)

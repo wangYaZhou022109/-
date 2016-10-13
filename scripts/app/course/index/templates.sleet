@@ -2,8 +2,9 @@
 
 
 module
-    #index(data-region='index')
+    #banner(data-region='advertising')
 
 
-view('index')
-    p course
+view('advertising')
+    p advertising
+    #comment-area

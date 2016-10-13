@@ -45,6 +45,7 @@ require('./app/ext/extention');
 require('./app/ext/question');
 require('./app/ext/exam-step');
 require('./app/ext/rich-text');
+require('./app/ext/comment-area');
 
 D.adapt({
     getFormData: function(form) {

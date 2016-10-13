@@ -1,3 +1,3 @@
 exports.items = {
-    index: 'index'
+    advertising: 'advertising'
 };
