@@ -1,19 +1,7 @@
-var infoData = {
-    copyRight: 'CopyRight © 2016 zhixueyun.com All Rights Reserved 版权所有 深圳知学云科技有限公司'
-};
-
 exports.items = {
-    bottom: 'bottom'
-};
-
-exports.store = {
-    models: {
-        information: { data: infoData }
-    },
-
-    callbacks: {
-        init: function() {
-
-        }
-    }
+    'home/banner': { region: 'banner', isModule: true },
+    'home/online-course': { region: 'online-course', isModule: true },
+    'home/study-subject': { region: 'study-subject', isModule: true },
+    'home/lecture': { region: 'lecture', isModule: true },
+    'home/ranklist': { region: 'ranklist', isModule: true }
 };

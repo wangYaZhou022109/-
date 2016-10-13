@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #lecture(data-region='lecture')
+
+
+view('lecture')
+    p lecture

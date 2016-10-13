@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #news(data-region='news')
+
+
+view('news')
+    p news

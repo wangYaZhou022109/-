@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #study-subject(data-region='study-subject')
+
+
+view('study-subject')
+    p study-subject

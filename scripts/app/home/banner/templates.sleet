@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #banner(data-region='advertising')
+
+
+view('advertising')
+    p advertising

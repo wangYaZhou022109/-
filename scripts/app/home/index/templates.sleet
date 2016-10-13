@@ -1,8 +1,8 @@
 #!handlebars
 
-
-module > .top-content#bottom-content(data-region='bottom')
-
-
-view('bottom')
-    p > echo(information.copyRight)
+module
+    .banner(data-region='banner')
+    .online-course(data-region='online-course')
+    .study-subject(data-region='study-subject')
+    .lecture(data-region='lecture')
+    .ranklist(data-region='ranklist')

@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #recommend-activity(data-region='recommend-activity')
+
+
+view('recommend-activity')
+    p recommend-activity

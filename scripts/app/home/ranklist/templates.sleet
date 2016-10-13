@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #ranklist(data-region='ranklist')
+
+
+view('ranklist')
+    p ranklist

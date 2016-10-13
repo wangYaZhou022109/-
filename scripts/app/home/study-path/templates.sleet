@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #study-path(data-region='study-path')
+
+
+view('study-path')
+    p study-path

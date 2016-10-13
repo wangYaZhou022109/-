@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #online-course(data-region='online-course')
+
+
+view('online-course')
+    p online-course

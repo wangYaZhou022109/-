@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #my-required(data-region='my-required')
+
+
+view('my-required')
+    p my-required

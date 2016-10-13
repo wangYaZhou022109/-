@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #open-class(data-region='open-class')
+
+
+view('open-class')
+    p open-class
