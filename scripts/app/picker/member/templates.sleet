@@ -1,9 +1,0 @@
-#!handlebars
-
-module
-    div(data-region='main')
-
-view('main') > .input-group
-    input#memberName.input(value=state.text 'readonly')(x-rule='required' x-marker='group')&if(state.required)
-    input#memberId(type='hidden' name=state.inputName value=state.value)
-    .addon.btn#select > i.icon-search

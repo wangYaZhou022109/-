@@ -1,8 +1,9 @@
 #!handlebars
 
 
-module > .top-content#bottom-content(data-region='bottom')
+module
+    #index(data-region='index')
 
 
-view('bottom')
-    p > echo(information.copyRight)
+view('index')
+    p course
