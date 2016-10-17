@@ -1,9 +1,12 @@
+exports.type = 'form';
+
 exports.bindings = {
-    comment: false
+    comment: false,
+    businessModel: false
 };
 
 exports.actions = {
-    'click add-comment': 'addComment'
+    'click add-comment-*': 'addComment'
 };
 
 exports.dataForActions = {

@@ -1,0 +1,9 @@
+#!handlebars
+
+
+module
+    #course-info(data-region='course-info')
+
+view('course-info')
+    p course-info
+    #comment-area
