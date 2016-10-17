@@ -12,7 +12,7 @@ exports.store = {
     },
 
     callbacks: {
-        init: function() {
+        'app.pushState': function() {
 
         }
     }

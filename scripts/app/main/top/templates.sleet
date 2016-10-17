@@ -1,12 +1,15 @@
 #!handlebars
 
 
-module > .top-content#top-content
-    .top-above.clearfix
-        .logo(data-region='logo')
-        .shortcut(data-region='shortcut')
-        .nav(data-region='nav')
-    .top-below > .top-tree > .sidebar(data-region='top-tree')
+module 
+    .top-content#top-content
+        .top-above.clearfix
+            .logo(data-region='logo')
+            .shortcut(data-region='shortcut')
+            .nav(data-region='nav')
+        .top-below
+            .top-tree
+                .sidebar(data-region='top-tree')
 
 
 view('nav')
@@ -14,7 +17,7 @@ view('nav')
     .top-back#back > .pe-7s-angle-right.pe-3x
     .overlay.transparent#overlay
     .nav-list > each(menus)
-        .item > a(id='menu-' + id href='#' + uri)(class='active')&if(active) > echo(name)
+        .item > a(id='menu-' + id)(href='#' + uri)(data-menu=uri)(class='active')&if(active) > echo(name)
 
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down

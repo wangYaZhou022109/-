@@ -28,7 +28,7 @@ exports.handlers = {
     },
 
     showContent: function(id, e) {
-        var url = $(e.target).attr('href');
+        var url = $(e.target).attr('href').slice(1);
         this.app.navigate(url, true);
     },
 

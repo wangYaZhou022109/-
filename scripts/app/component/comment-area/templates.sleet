@@ -31,14 +31,14 @@ view('comment-list')
                     echo('是否点赞:否')
                 div
                     form.vertical
-                        textarea#comment-content(name='content' x-rule='required' cols='100' rows='2' placeholder='发表你的观点')
+                        textarea(name='content' x-rule='required' cols='100' rows='2' placeholder='发表你的观点')
                         button(id='add-reply-' + id) 发表
                         input(type='hidden' data-name='parentId')
                         input(type='hidden' data-name='commentId' data-value=id)
                         input(type='hidden' data-name='toMemberId' data-value=memberId)
 
                 each(replies)
-                    li
+                    li(class='margin-left:10px')
                         echo('id:' id)
                         echo('回复人:' memberName)
                         echo('被回复人:' toMemberName)

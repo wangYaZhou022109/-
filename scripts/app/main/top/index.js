@@ -1,3 +1,6 @@
+var _ = require('lodash/collection'),
+    $ = require('jquery');
+
 var menus = [{
     createTime: 1474538557153,
     icon: null,
@@ -48,8 +51,7 @@ var menus = [{
 exports.items = {
     nav: 'nav',
     shortcut: 'shortcut',
-    logo: 'logo',
-    'main/menu': { region: 'top-tree', isModule: true }
+    logo: 'logo'
 };
 
 exports.store = {
@@ -62,8 +64,23 @@ exports.store = {
             var setting = this.models.setting;
             this.get(setting).then();
         },
-        'app.pushState': function() {
-            this.module.dispatch('init');
+        'app.pushState': function(hash) {
+            // 设置top菜单的active状态
+            var muduleName = hash.slice(0, hash.indexOf('/')),
+                dataMenus = this.module.items.nav.$$('a[data-menu]'),
+                matchModule;
+            if (!(muduleName)) {
+                return false;
+            }
+            matchModule = _.find(dataMenus, function(menu) {
+                return $(menu).attr('data-menu') && $(menu).attr('data-menu').indexOf(muduleName) > -1;
+            });
+            $(dataMenus).removeClass('active');
+            $(matchModule).addClass('active');
+            return true;
         }
     }
+};
+exports.beforeRender = function() {
+    this.dispatch('init');
 };

@@ -3,7 +3,7 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload;
 oauthOptions = {
     clientId: 11,
     provider: 'http://192.168.1.198:8888/oauth',
-    returnTo: 'http://192.168.3.191'
+    returnTo: 'http://192.168.9.105'
 };
 
 window.$ = window.jQuery = jQuery = require('jquery');
@@ -41,10 +41,6 @@ require('./app/ext/pickadate');
 require('./app/ext/upload');
 require('./app/ext/modules/tree-grid/tree-grid-module');
 require('./app/ext/modules/form/form-view');
-require('./app/ext/extention');
-require('./app/ext/question');
-require('./app/ext/exam-step');
-require('./app/ext/rich-text');
 require('./app/ext/comment-area');
 
 D.adapt({
@@ -81,12 +77,7 @@ app = window.app = new D.Application({
     },
     routers: ['', 'home', 'course', 'activity', 'ask']
 });
-D.assign(app.global, {
-    ADD: '1',
-    EDIT: '2',
-    REMOVE: '3',
-    OTHER: '4'
-});
+
 
 D.PageableModel.setDefault({
     pageKey: 'page'

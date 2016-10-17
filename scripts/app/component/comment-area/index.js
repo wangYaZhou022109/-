@@ -13,7 +13,6 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var businessId = payload.businessId;
-
             this.models.comments.set({ id: businessId });
             this.models.businessModel.data.businessId = businessId;
         },
