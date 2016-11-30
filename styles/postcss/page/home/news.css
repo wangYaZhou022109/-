@@ -1,0 +1,44 @@
+.home-page {
+
+    & > .section {
+        padding: var(--nav-height) 0;
+        overflow: hidden;
+
+        &.lecture {
+            background-image:linear-gradient(to bottom,transparent,white),linear-gradient(to right,#fff 0,#f9f9f9 0%,#d8d8d8 20%,#f5f5f5 50%,#d8d8d8 80%,#f9f9f9 100%,#fff 100%);
+        }
+    }
+
+    & .news-list {
+        padding: calc(var(--font-size) * 2) 0;
+        line-height: calc(var(--font-size) * 2);
+
+        & ul {
+            height: calc(var(--font-size) * 2);
+            overflow: hidden;
+            float: left;
+        }
+
+        & li {
+            @apply --text-overflow;
+        }
+
+        & .title {
+            float: left;
+            margin-right: var(--space);
+        }
+
+        & .navigator {
+            text-align: right;
+        }
+
+        & .icon {
+            display: inline-block;
+            background: var(--bg-color);
+            font-size: var(--small-font);
+            padding: 0 1em;
+            margin-right: -.3em;
+
+        }
+    }
+}

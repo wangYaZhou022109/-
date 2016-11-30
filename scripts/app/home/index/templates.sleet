@@ -1,8 +1,10 @@
 #!handlebars
 
-module
+module > .home-page
     .banner(data-region='banner')
-    .online-course(data-region='online-course')
-    .study-subject(data-region='study-subject')
-    .lecture(data-region='lecture')
-    .ranklist(data-region='ranklist')
+    .news(data-region='news')
+    .section.bg-highlight(data-region='online-course')
+    .section(data-region='study-subject')
+    .section.bg-highlight(data-region='recommend-activity')
+    .section.lecture(data-region='lecture')
+    .section(data-region='ranklist')

@@ -6,4 +6,17 @@ module
 
 
 view('advertising')
-    p advertising
+    #banner.banner > ul
+        li > img(src='images/banner.png')
+        li > img(src='images/banner1.png')
+        li > img(src='images/banner2.png')
+
+    #.
+        .swiper-container#swiper-container
+            ul
+                li > img.block(src='images/banner.png')
+                li > img.block(src='images/banner.png')
+                li > img.block(src='images/banner.png')
+            .pagination#pagination
+                .item#pagination-item-1.active
+                .item#pagination-item-2

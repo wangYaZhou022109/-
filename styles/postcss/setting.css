@@ -1,0 +1,30 @@
+:root {
+    --font-size: 1em;
+    --font-title: 1.1em;
+    --small-font: 0.8em;
+    --h4: 1.2em;
+    --h3: 1.4em;
+    --h2: 1.7em;
+    --h1: 2.1em;
+
+    --space: 0.7em;
+    --large-space: 2em;
+
+    --nav-height: 5em;
+}
+
+h1,.h1 {
+    font-size: var(--h1);
+}
+
+h2,.h2 {
+    font-size: var(--h2);
+}
+
+h3,.h3 {
+    font-size: var(--h3);
+}
+
+h4,.h4 {
+    font-size: var(--h4);
+}

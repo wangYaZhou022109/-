@@ -1,9 +1,98 @@
 #!handlebars
 
 
-module
+module > .recommend-activity-section > .container
     #recommend-activity(data-region='recommend-activity')
 
 
 view('recommend-activity')
-    p recommend-activity
+    .home-title-row
+        .title.line-color 推荐活动
+        .title-more
+            span.sub-title ACTIVITY
+            span.more MORE >>
+
+    .clearfix.section-cont
+        .section.large
+            .bar-horizontal
+                .below
+                    .bar.max-width
+                        .img > .img-cont >  img(src='http://img.ui.cn/data/file/3/0/9/706903.png')
+                        .content
+                            .cont
+                                .title.border 逆向思念训练实例
+                                .text-cont
+                                    .time 2016/08/09 ~ 2016/09/09
+                                    .text 逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例
+                                    .btn.block.border-main-color > span 我要参加
+                            .bottom.clearfix
+                                .pull-right.tip-text 123人已参加
+                        .activity-tag.custom-bg-color-3 > .text 调研
+
+                .above
+
+                    .bar-cont > .bar
+                        .img > .img-cont >  img(src='http://img.ui.cn/data/file/2/1/2/712212.png')
+                        .content
+                            .cont
+                                .title.border 逆向思念训练实例
+                                .text-cont
+                                    .time 2016/08/09 ~ 2016/09/09
+                                    .text 逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例
+                                    .btn.block.bg-main-color 我要参加
+                            .bottom.clearfix
+                                .pull-right.tip-text 123人已参加
+                        .activity-tag.custom-bg-color-1 > .text 调研
+                    .bar-cont > .bar
+                        .img > .img-cont >  img(src='http://img.ui.cn/data/file/2/2/7/861722.jpg')
+                        .content
+                            .cont
+                                .title.border 逆向思念训练实例
+                                .text-cont
+                                    .time 2016/08/09 ~ 2016/09/09
+                                    .text 逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例
+                                    .btn.block.bg-main-color 我要参加
+                            .bottom.clearfix
+                                .pull-right.tip-text 123人已参加
+                        .activity-tag.custom-bg-color-2 > .text 调研
+
+
+        .section
+            .bar
+                .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/9/1/881199.png')
+                .content
+                    .cont
+                        .title.border 逆向思念训练实例
+                        .text-cont
+                            .time 2016/08/09 ~ 2016/09/09
+                            .text 逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例
+                            .btn.block.bg-main-color 我要参加
+                    .bottom.clearfix
+                        .pull-right.tip-text 123人已参加
+                .activity-tag.custom-bg-color-5 > .text 调研
+            .bar
+                .img > .img-cont >  img(src='http://img.ui.cn/data/file/7/9/6/734697.jpg')
+                .content
+                    .cont
+                        .title.border 逆向思念训练实例
+                        .text-cont
+                            .time 2016/08/09 ~ 2016/09/09
+                            .text 逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例
+                            .btn.block.bg-main-color 我要参加
+                    .bottom.clearfix
+                        .pull-right.tip-text 123人已参加
+                .activity-tag.custom-bg-color-1 > .text 调研
+
+        .section
+            .bar.max-height
+                .img > .img-cont >  img(src='http://img.ui.cn/data/file/5/3/3/750335.png')
+                .content
+                    .cont
+                        .title.border 逆向思念训练实例
+                        .text-cont
+                            .time 2016/08/09 ~ 2016/09/09
+                            .text 逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例逆向思念训练实例
+                            .btn.block.border-main-color > span 我要参加
+                    .bottom.clearfix
+                        .pull-right.tip-text 123人已参加
+                .activity-tag.custom-bg-color-4 > .text 调研

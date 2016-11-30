@@ -1,0 +1,21 @@
+@import "news.css";
+@import "recommend.css";
+@import "study-subject.css";
+@import "recommend-activity.css";
+@import "lecture.css";
+@import "ranklist.css";
+
+:root {
+    --recommend-bar-height: 15em;
+    --bar-gap: calc(var(--space) * 2);
+}
+
+.banner {
+    height: 30em;
+    background: #eee;
+
+    & img {
+        height: 30em;
+        display: block;
+    }
+}

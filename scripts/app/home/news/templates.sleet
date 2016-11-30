@@ -1,9 +1,19 @@
 #!handlebars
 
 
-module
+module > .container
     #news(data-region='news')
 
 
 view('news')
-    p news
+    .news-list.clearfix
+        .pull-left.m-right > i.iconfont.icon-gonggao
+        b.title 资讯动态：
+        ul
+            li 中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会
+            li 中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会
+            li 中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-jiantouxia
+            .icon.arrow.next > .iconfont.icon-jiantoushang
+            .icon > .iconfont.icon-icon21

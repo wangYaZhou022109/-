@@ -19,7 +19,6 @@ html.default
 
         # build:css styles/common.css
         link(rel='stylesheet' href='node_modules/normalize.css/normalize.css')
-        link(rel='stylesheet' href='styles/fontello.css')
         link(rel='stylesheet' href='node_modules/animate.css/animate.css')
         link(rel='stylesheet' href='node_modules/pickadate/lib/themes/default.css')
         link(rel='stylesheet' href='node_modules/pickadate/lib/themes/default.date.css')
@@ -29,15 +28,12 @@ html.default
         link(rel='stylesheet' href='styles/selectize/selectize.default.css')
         link(rel='stylesheet' href='styles/alertify/alertify.core.css')
         link(rel='stylesheet' href='styles/alertify/alertify.default.css')
+        link(rel='stylesheet' href='//at.alicdn.com/t/font_v05tlcckf1b81tt9.css')
         link(rel='stylesheet' href='styles/jquery.plupload.queue/css/jquery.plupload.queue.css')
-        link(rel='stylesheet' href='styles/pe-icon-7-stroke/css/pe-icon-7-stroke.css')
-        link(rel='stylesheet' href='styles/bootstrap/css/bootstrap.min.css')
         # endbuild
 
         # build:css styles/main.css
         link(rel='stylesheet' href='bundle/main.css')
-        link(rel='stylesheet' href='bundle/theme.css')
-        link(rel='stylesheet' href='bundle/theme-white.css')
         # endbuild
 
     body

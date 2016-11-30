@@ -1,0 +1,95 @@
+.header {
+
+    & .container {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    & .nav {
+        & .item {
+            display: inline-block;
+            position: relative;
+            padding: 0 var(--large-space);
+            height: var(--nav-height);
+            line-height: var(--nav-height);
+        }
+
+        & a {
+            border-bottom-width: 0px;
+            border-bottom-style: solid;
+            font-size: var(--font-title);
+            padding: 0 0 calc(var(--space) / 1);
+            transition: all .2s linear;
+            width: 0;
+            overflow: visible;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                content: '';
+                width: 0%;
+                height: 3px;
+                left: 50%;
+                bottom: 0;
+                transition: all .2s linear;
+            }
+
+            &.active::after,
+            &:hover::after {
+                width: 100%;
+                margin-left: -50%;
+
+            }
+        }
+    }
+
+    & .shortcut {
+        float: right;
+        line-height: var(--nav-height);
+        height: var(--nav-height);
+        margin-right: calc(var(--large-space) / 2);
+
+        & .item {
+            display: inline-block;
+            position: relative;
+            margin-right: var(--large-space);
+        }
+
+        & .user-pic {
+            width: 2.5em;
+            height: 2.5em;
+            border-radius: 50%;
+            overflow: hidden;
+
+            & img {
+                max-height: 100%;
+                display: block;
+            }
+        }
+    }
+}
+
+.logo {
+    float: left;
+    height: var(--nav-height);
+    line-height: var(--nav-height);
+    text-align: center;
+    transition: width .2s linear;
+    overflow: hidden;
+    margin-right: var(--large-space);
+
+    & .logo-min {
+        display: none;
+    }
+
+    & img {
+        vertical-align: middle;
+    }
+
+}
+
+.footer p{
+    text-align: center;
+    padding: 5em 0;
+    margin: 0;
+}

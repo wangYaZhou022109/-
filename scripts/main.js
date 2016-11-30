@@ -42,6 +42,7 @@ require('./app/ext/upload');
 require('./app/ext/modules/tree-grid/tree-grid-module');
 require('./app/ext/modules/form/form-view');
 require('./app/ext/comment-area');
+require('./app/component/swiper');
 
 D.adapt({
     getFormData: function(form) {
