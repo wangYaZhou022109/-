@@ -1,0 +1,9 @@
+.banner {
+    height: 30em;
+    background: #eee;
+
+    & img {
+        height: 30em;
+        display: block;
+    }
+}
