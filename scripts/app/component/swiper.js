@@ -24,13 +24,12 @@ D.assign(Swiper.prototype, {
 
     goto: function(number) {
         var n = number % this.items.length,
-            me = this,
             inEl,
             outEl;
 
         if (n === this.current) {
             return;
-        };
+        }
 
         inEl = this.items[n];
         outEl = this.items[this.current];
@@ -93,25 +92,24 @@ D.assign(Swiper.prototype, {
             };
         }
 
-        this.items.map(function(item) {
+        this.items.forEach(function(item) {
             item.addEventListener('mouseover', me.actions.in, false);
             item.addEventListener('mouseout', me.actions.out, false);
         });
 
-        this.dots.map(function(item) {
+        this.dots.forEach(function(item) {
             item.addEventListener('click', me.actions.click, false);
         });
-
     },
 
     unbindListener: function() {
         var me = this;
-        this.items.map(function(item) {
+        this.items.forEach(function(item) {
             item.removeEventListener('mouseover', me.actions.in);
             item.removeEventListener('mouseout', me.actions.out);
         });
 
-        this.dots.map(function(item) {
+        this.dots.forEach(function(item) {
             item.removeEventListener('click', me.actions.click);
         });
     },
@@ -130,4 +128,4 @@ D.ComponentManager.register('swiper', function(view, el, options) {
     return new Swiper(el, options);
 }, function(view, comp) {
     comp.destroy();
-})
+});

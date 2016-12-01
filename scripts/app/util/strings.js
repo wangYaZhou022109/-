@@ -1,5 +1,4 @@
-var D = require('drizzlejs'),
-    picker = require('../picker/strings');
+var D = require('drizzlejs');
 
 var strings = {
     ok: '确定',
@@ -18,7 +17,7 @@ var strings = {
     'no-data': '没有数据'
 };
 
-var ss = D.assign({}, strings, picker);
+var ss = D.assign({}, strings);
 
 exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');

@@ -18,10 +18,7 @@ jQuery.each(helpers, function(k, v) {
     H.registerHelper(k, v);
 });
 
-require('es5-shim');
 D = require('drizzlejs');
-
-D.registerRegion('multiple', D.MultiRegion);
 
 plupload = require('./vendors/upload/moxie.min');
 window.moxie = plupload.moxie;
@@ -31,18 +28,12 @@ require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
 require('./vendors/upload/jquery.plupload.queue.min');
 require('./vendors/upload/zh_CN');
-require('./app/ext/tree');
-require('./app/ext/tag-view');
-require('./app/ext/picker');
-require('./app/ext/selectize');
-require('./app/ext/component-pager');
-require('./app/ext/perfect-scrollbar');
-require('./app/ext/pickadate');
-require('./app/ext/upload');
-require('./app/ext/modules/tree-grid/tree-grid-module');
-require('./app/ext/modules/form/form-view');
-require('./app/ext/comment-area');
+require('./app/component/selectize');
+require('./app/component/component-pager');
+require('./app/component/upload');
+require('./app/component/comment-area');
 require('./app/component/swiper');
+require('./app/component/views/form/form-view');
 
 D.adapt({
     getFormData: function(form) {
@@ -76,7 +67,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'course', 'activity', 'ask']
+    routers: ['', 'home']
 });
 
 
@@ -84,13 +75,8 @@ D.PageableModel.setDefault({
     pageKey: 'page'
 });
 
-require('./app/util/push-state').setup(app);
 require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
 
-app.start('home/index').then(function() {
-    if (!window.history.pushState) {
-        app.dispatch('pushState', window.location.hash.slice(1));   // for ie8
-    }
-});
+app.start('home/index');

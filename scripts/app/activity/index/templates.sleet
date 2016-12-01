@@ -1,9 +1,0 @@
-#!handlebars
-
-
-module
-    #index(data-region='index')
-
-
-view('index')
-    p activity

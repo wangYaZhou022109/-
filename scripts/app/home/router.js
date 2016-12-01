@@ -3,5 +3,5 @@ exports.routes = {
 };
 
 exports.showIndex = function() {
-    return this.app.show('content', 'home/index');
+    return this.app.show('content', 'home/default');
 };

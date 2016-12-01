@@ -1,8 +1,0 @@
-#!handlebars html
-
-module
-    div(data-region='datetime')
-
-view('datetime')
-    label(style='display: none;')&if(config.notShow) > echo(config.name)
-    input.input#datetime(x-rule='required')&if(config.isRequired)(type='hidden')&if(config.notShow)(value=entity.text name=inputName)
