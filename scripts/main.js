@@ -79,4 +79,4 @@ require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
 
-app.start('home/index');
+app.start('home');
