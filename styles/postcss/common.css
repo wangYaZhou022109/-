@@ -72,10 +72,6 @@ p {
     transition: all .2s linear;
 }
 
-.windows {
-    font-family: 'microsoft yahei';
-}
-
 .container {
     margin-left: calc(var(--h1) * 2);
     margin-right: calc(var(--h1) * 2);

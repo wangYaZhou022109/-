@@ -1,111 +1,111 @@
-.ranklist-section {
-    & .bar {
-        width: 33.33%;
-        float: left;
-        padding-right: calc(var(--font-size) * 6);
+.home-page {
+    & .ranklist-section {
+        & .bar {
+            width: 33.33%;
+            float: left;
+            padding-right: calc(var(--font-size) * 6);
 
-        &.studend {
-            & li {
-                &:before {
-                    counter-increment: section;
-                    content: counter(section) ".";
-                    font-weight: bold;
-                    width: var(--large-space);
-                    float: left;
-                }
-
-                &:not(:nth-child(1),:nth-child(2),:nth-child(3)) {
-                    & .icon {
-                        background: var(--border-color);
-
+            &.studend {
+                & li {
+                    &:before {
+                        counter-increment: section;
+                        content: counter(section) ".";
+                        font-weight: bold;
+                        width: var(--large-space);
+                        float: left;
                     }
 
+                    &:not(:nth-child(1),:nth-child(2),:nth-child(3)) {
+                        & .icon {
+                            background: var(--border-color);
+
+                        }
+
+                    }
+                }
+            }
+
+            & .icon {
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                line-height: 1em;
+                border-radius: 50%;
+                color: white;
+                text-align: center;
+                margin-right: var(--space);
+
+
+                & .iconfont {
+                    text-indent: 0;
+                    vertical-align: top;
+
+                    &:before {
+                        font-size: 1em;
+                    }
                 }
             }
         }
 
-        & .icon {
-            display: inline-block;
-            width: 1em;
+        & .bar-list {
+            @apply --clearfix;
+            margin-right: -calc(var(--font-size) * 6);
+        }
+
+        & li {
+            @apply --clearfix;
+
+            margin-bottom: var(--bar-gap);
             height: 1em;
             line-height: 1em;
-            border-radius: 50%;
-            color: white;
-            text-align: center;
-            margin-right: var(--space);
+        }
 
+        & .pull-right {
+            margin-left: var(--large-space);
+        }
 
-            & .iconfont {
-                text-indent: 0;
-                vertical-align: top;
+        & .ranklist-first {
+            border-bottom-width: 1px;
+            border-bottom-style: dashed;
+            padding-bottom: var(--large-space);
+            margin-bottom: var(--large-space);
+            display: none;
+        }
 
-                &:before {
-                    font-size: 1em;
-                }
+        & .rank-pic {
+            width: 4em;
+            height: 4em;
+            overflow: hidden;
+            margin-right: 1em;
+            display: none;
+
+            & .img {
+                height: 100%;
+                filter: grayscale(70%);
+                filter: gray;
+                border-radius: 50%;
+
+            }
+
+            & img {
+                max-height: 4em;
             }
         }
-    }
 
-    & .bar-list {
-        @apply --clearfix;
-        margin-right: -calc(var(--font-size) * 6);
-    }
+        & .rank-info {
+            overflow: hidden;
+            & .icon {
+                margin: 0;
+            }
 
-    & li {
-        @apply --clearfix;
-
-        margin-bottom: var(--bar-gap);
-        height: 1em;
-        line-height: 1em;
-    }
-
-    & .pull-right {
-        margin-left: var(--large-space);
-    }
-
-    & .ranklist-first {
-        border-bottom-width: 1px;
-        border-bottom-style: dashed;
-        padding-bottom: var(--large-space);
-        margin-bottom: var(--large-space);
-        display: none;
-    }
-
-    & .rank-pic {
-        width: 4em;
-        height: 4em;
-        overflow: hidden;
-        margin-right: 1em;
-        display: none;
-
-        & .img {
-            height: 100%;
-            filter: grayscale(70%);
-            filter: gray;
-            border-radius: 50%;
-
+            & .title {
+                max-width: 10em;
+                font-weight: bold;
+            }
         }
 
-        & img {
-            max-height: 4em;
+        & .text-row {
+            margin-top: 1em;
         }
     }
-
-    & .rank-info {
-        overflow: hidden;
-        & .icon {
-            margin: 0;
-        }
-
-        & .title {
-            max-width: 10em;
-            font-weight: bold;
-        }
-    }
-
-    & .text-row {
-        margin-top: 1em;
-    }
-
-
 }
