@@ -27,11 +27,7 @@ var fs = require('fs'),
     preprocess = require('gulp-preprocess');
 
 var libs = [
-        'jquery', 'handlebars/runtime', 'lodash/collection', 'lodash/object',
-        'get-form-data', 'drizzlejs', 'selectize',
-        'pickadate/lib/picker', 'pickadate/lib/picker.date',
-        'pickadate/lib/picker.time', 'pickadate/lib/translations/zh_CN',
-        'perfect-scrollbar', 'kindeditor',
+        'jquery', 'handlebars/runtime', 'lodash/collection', 'lodash/object', 'drizzlejs',
 
         './vendors/alertify',
         './vendors/upload/plupload.min',

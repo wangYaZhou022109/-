@@ -28,7 +28,6 @@ require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
 require('./vendors/upload/jquery.plupload.queue.min');
 require('./vendors/upload/zh_CN');
-require('./app/component/selectize');
 require('./app/component/component-pager');
 require('./app/component/upload');
 require('./app/component/comment-area');
