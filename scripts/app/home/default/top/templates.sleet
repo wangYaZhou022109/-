@@ -13,7 +13,7 @@ view('nav')
     .top-back#back > .pe-7s-angle-right.pe-3x
     .overlay.transparent#overlay
     .nav-list > each(menus)
-        .item > a.nav-color(id='menu-' + id)(href='#' + uri)(data-menu=uri)(class='active')&if(active) > echo(name)
+        .item > a.nav-color(id='menu-' + id)(href='#/' + uri)(data-menu=uri)(class='active')&if(active) > echo(name)
 
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down

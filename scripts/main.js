@@ -64,6 +64,7 @@ D.adapt({
 app = window.app = new D.Application({
     container: document.getElementById('content'),
     urlRoot: '/api/v1',
+    routerPrefix: '#/',
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },

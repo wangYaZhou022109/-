@@ -9,7 +9,7 @@ var menus = [{
     name: '首页',
     order: 0,
     parentId: null,
-    uri: 'home/index'
+    uri: 'home'
 }, {
     createTime: 1474538557153,
     icon: null,
