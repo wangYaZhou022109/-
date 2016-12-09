@@ -31,6 +31,7 @@
             margin-bottom: calc(var(--main-list-gap) + 1);
 
             & .content {
+                position: relative;
                 transition: all .2s linear;
             }
 
@@ -55,12 +56,86 @@
                 }
             }
 
+            & .detail-wrapper {
+                background-color: white /9;
+                background-color: rgba(255,255,255,.95);
+                transition: all .2s linear;
+                position: absolute;
+                left: 0;
+                right: 0;
+                overflow: hidden;
+                bottom: calc(var(--font-size) * 4);
+                margin-top: -calc(var(--main-list-img-height) - 2);
+                height: 0;
+
+                & p {
+                    height: calc(var(--font-size) * 1.8 * 2);
+                    overflow: hidden;
+                }
+            }
+
+            & .list-tag-wrapper {
+                position: absolute;
+                left: -5px;
+                top: -5px;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
+
+                & .list-tag {
+                    font-size: 12px;
+                    background-color: var(--main-color) /9;
+                    background-color: currentColor;
+                    position: absolute;
+                    left: -30px;
+                    top: 10px;
+                    width: 100px;
+                    text-align: center;
+                    transform: rotate(-45deg);
+                    padding: 2px 0;
+                    z-index: 2;
+
+                    &:after,
+                    &:before {
+                        position: absolute;
+                        content: '';
+                        border-width: 5px;
+                        border-style: solid;
+                        border-color: var(--font-color) transparent transparent var(--font-color);
+                        bottom: -10px;
+                        left: 10px;
+                    }
+
+                    &:after {
+                        border-color: var(--font-color) var(--font-color) transparent transparent;
+                        left: auto;
+                        right: 12px;
+                    }
+                }
+
+
+                & span {
+                    color: white;
+                }
+            }
+
             &:hover {
                 & .content {
                     @apply --box-shadow;
 
                     padding: 1em 1em var(--large-space);
                     margin: -1em -1em -var(--large-space);
+                }
+
+                & .detail-wrapper {
+                    height: calc(var(--main-list-img-height) - 2);
+                    padding: var(--space) var(--large-space);
+                    margin-bottom: var(--large-space);
+
+                }
+
+                & .list-tag-wrapper {
+                    margin: 1em;
                 }
 
                 & .title {

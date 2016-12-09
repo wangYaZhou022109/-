@@ -70,6 +70,10 @@ view('list')
                     .item(title='课时') > i.iconfont.icon-time + | 120分钟
                     .item(title='学习人数') > i.iconfont.icon-user + | 120人
                     .item(title='学分') > i.iconfont.icon-star + | 120分
+                .detail-wrapper
+                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+                    .btn.block 我要参与
+                .list-tag-wrapper.custom-color-1 > .list-tag > span 考试
 
             li > .content
                 .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
@@ -78,6 +82,8 @@ view('list')
                     .item(title='课时') > i.iconfont.icon-time + | 120分钟
                     .item(title='学习人数') > i.iconfont.icon-user + | 120人
                     .item(title='学分') > i.iconfont.icon-star + | 120分
+                .list-tag-wrapper.custom-color-2 > .list-tag > span 直播
+
 
             li > .content
                 .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
@@ -86,6 +92,8 @@ view('list')
                     .item(title='课时') > i.iconfont.icon-time + | 120分钟
                     .item(title='学习人数') > i.iconfont.icon-user + | 120人
                     .item(title='学分') > i.iconfont.icon-star + | 120分
+                .list-tag-wrapper.custom-color-3 > .list-tag > span 调研
+
 
             li > .content
                 .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
