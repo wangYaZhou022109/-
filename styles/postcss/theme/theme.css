@@ -158,7 +158,7 @@
 
 .section .activity-tag {
     background-color: currentColor;
-    background-color: var(--sub-color-1) /9;
+    background-color: var(--sub-color-1)\0;
     color: var(--white);
 
     & .text {
