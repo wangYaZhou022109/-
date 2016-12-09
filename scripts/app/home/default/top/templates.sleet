@@ -18,10 +18,10 @@ view('nav')
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down
     .shortcut-list
-        .item > a(href='#') > i.iconfont.icon-sousuo01
-        .item > a(href='#') > i.iconfont.icon-xinxi1
-        .item > a(href='#') > i.iconfont.icon-daiban2
-        .item > a(href='#') > i.iconfont.icon-shezhi
+        .item > a(href='#') > i.iconfont.icon-search
+        .item > a(href='#') > i.iconfont.icon-message
+        .item > a(href='#') > i.iconfont.icon-daiban
+        .item > a(href='#') > i.iconfont.icon-setting
         .user-info.inline-block
             .user-pic > img(src='images/2.jpeg')
 

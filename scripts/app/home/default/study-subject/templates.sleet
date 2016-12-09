@@ -18,7 +18,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -28,7 +28,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        ii.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -39,7 +39,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -49,7 +49,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -59,7 +59,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -70,7 +70,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -81,7 +81,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
@@ -92,7 +92,7 @@ view('study-subject')
             .bottom
                 .clearfix
                     .pull-right.tip-text
-                        .iconfont.icon-icon59
+                        i.iconfont.icon-view
                         span.m-left 123
                     .title.text-overflow 逆向思维训练实例
                 .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例

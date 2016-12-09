@@ -13,8 +13,8 @@ view('lecture')
             span.more MORE >>
 
     .reverse-btn-group
-        .iconbtn#iconbtn-1 > .bg-white > .hover-main-color > .iconfont.icon-jiantouxiangzuo
-        .iconbtn.show#iconbtn-2 > .bg-white > .hover-main-color > .iconfont.icon-jiantouxiangyou
+        .iconbtn#iconbtn-1 > .bg-white > .hover-main-color > .iconfont.icon-arrow-left
+        .iconbtn.show#iconbtn-2 > .bg-white > .hover-main-color > .iconfont.icon-arrow-right
 
     .lecture-list
         ul.clearfix.reverse

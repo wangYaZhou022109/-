@@ -1,0 +1,114 @@
+.course-page {
+    & .course-catalog {
+        float: left;
+        width: 20%;
+        position: relative;
+        top: -calc(var(--large-space) + var(--main-list-gap));
+        padding: var(--large-space) 0;
+        background-color: white;
+        box-shadow: 0 0 15px rgba(0,0,0,.1);
+
+        & .title-row {
+            margin: 0 var(--large-space);
+        }
+
+        & > ul > li {
+            line-height: calc(var(--font-size) * 4);
+            position: relative;
+            cursor: pointer;
+
+            &:after {
+                content: '';
+                display: block;
+                border-bottom: 1px solid var(--border-color);
+                margin-left: var(--large-space);
+                margin-right: var(--large-space);
+            }
+
+            & .iconfont {
+                transform: scale(1);
+            }
+
+            &.active {
+
+                & .down {
+                    display: none;
+                }
+
+                & .up {
+                    display: block;
+                }
+            }
+
+            & .text {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        & .up{
+            display: none;
+        }
+
+        & .item-parent {
+            @apply --clearfix;
+            padding: 0 var(--large-space);
+        }
+
+        & .item-child {
+            display: none;
+
+            & .text {
+                color: var(--font-color);
+                padding-right: var(--large-space);
+            }
+
+            & li {
+                position: relative;
+                padding: 0;
+                transition: all .2s linear;
+                text-indent: calc(var(--large-space) * 2);
+
+                &:before {
+                    width: 0;
+                    height: 100%;
+                    display: block;
+                    position: absolute;
+                    left: -2px;
+                    top: 0;
+                    content: '';
+                    transition: all .2s linear;
+                }
+
+                &:hover,
+                &.active {
+                    background-color: var(--light-gray-color);
+
+                    &:before {
+                        background: currentColor;
+                        width: 2px;
+                    }
+                }
+
+                &:after {
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    top: 50%;
+                    margin-top: -2px;
+                    left: var(--large-space);
+                    background-color: currentColor;
+                }
+            }
+        }
+
+    }
+
+    & .course-list {
+        margin-left: 25%;
+    }
+}

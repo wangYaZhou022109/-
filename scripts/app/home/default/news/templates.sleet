@@ -7,13 +7,14 @@ module > .container
 
 view('news')
     .news-list.clearfix
-        .pull-left.m-right > i.iconfont.icon-gonggao
+        .pull-left.m-right > i.iconfont.icon-notice
         b.title 资讯动态：
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-arrow-down
+            .icon.arrow.next > .iconfont.icon-arrow-up
+            .icon > .iconfont.icon-more
+
         ul
             li 中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会
             li 中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会
             li 中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会中国包装网络学院亮相中国包装联合会
-        .navigator
-            .icon.arrow.prev > .iconfont.icon-jiantouxia
-            .icon.arrow.next > .iconfont.icon-jiantoushang
-            .icon > .iconfont.icon-icon21

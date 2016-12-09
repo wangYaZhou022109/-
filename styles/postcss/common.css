@@ -25,7 +25,7 @@ html,body,p,ul,dl,dt,dd,br,hr {
 }
 
 html {
-    font-size: 20px;
+    font-size: 14px;
     color: var(--font-color);
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
@@ -39,11 +39,6 @@ body, button, input, select, textarea {
     outline: 0;
 }
 
-@media (max-width: 1281px) {
-    html,body {
-        font-size: 14px;
-    }
-}
 
 ul,dl {
     list-style-type: none;
@@ -177,6 +172,9 @@ p {
     &.bottom {
         border-bottom-width: 1px;
     }
+    &.around {
+        border-width: 1px;
+    }
     &.dashed {
         border-style: dashed;
     }
@@ -232,4 +230,10 @@ p {
 
 .tip-text {
     font-size: var(--small-font);
+}
+
+.top.top-bg-img {
+    background-image: url(../images/top-bg-img.png);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
 }

@@ -17,9 +17,9 @@ view('online-course') > .clearfix
                     .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                     p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                 .bottom.bg-white.sub-text
-                    .item.border > i.iconfont.icon-xianxingtubiao04(title='课程时长') + .inline-block.m-left 120m
-                    .item.border > i.iconfont.icon-renshuxianxing(title='报名学员') + .inline-block.m-left 120人
-                    .item.border > i.iconfont.icon-icon79(title='课程学分') + .inline-block.m-left 120分
+                    .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                    .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                    .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
     .section.second
         .bar
             .img > .img-cont >  img(src='http://img.ui.cn/data/file/1/9/2/765291.jpg' height='300px')
@@ -27,9 +27,9 @@ view('online-course') > .clearfix
                 .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                 p.sub-title.show 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                 .bottom.sub-text
-                    .item.border > i.iconfont.icon-xianxingtubiao04(title='课程时长') + .inline-block.m-left 120m
-                    .item.border > i.iconfont.icon-renshuxianxing(title='报名学员') + .inline-block.m-left 120人
-                    .item.border > i.iconfont.icon-icon79(title='课程学分') + .inline-block.m-left 120分
+                    .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                    .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                    .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
     .section.large
         .section-above > .bar
             .bar-cont
@@ -39,9 +39,9 @@ view('online-course') > .clearfix
                     .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                     p.sub-title.show 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                     .bottom.sub-text
-                        .item.border > i.iconfont.icon-xianxingtubiao04(title='课程时长') + .inline-block.m-left 120m
-                        .item.border > i.iconfont.icon-renshuxianxing(title='报名学员') + .inline-block.m-left 120人
-                        .item.border > i.iconfont.icon-icon79(title='课程学分') + .inline-block.m-left 120分
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
         .section-below
             .pull-left.w-half > .bar
                 .img > .img-cont >  img(src='http://img.ui.cn/data/file/3/9/6/773693.jpg')
@@ -50,9 +50,9 @@ view('online-course') > .clearfix
                         .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                         p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                     .bottom.bg-white.sub-text
-                        .item.border > i.iconfont.icon-xianxingtubiao04(title='课程时长') + .inline-block.m-left 120m
-                        .item.border > i.iconfont.icon-renshuxianxing(title='报名学员') + .inline-block.m-left 120人
-                        .item.border > i.iconfont.icon-icon79(title='课程学分') + .inline-block.m-left 120分
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
             .pull-left.w-half > .bar
                 .img > .img-cont >  img(src='http://img.ui.cn/data/file/8/6/1/877168.jpg')
                 .cont.bg-white
@@ -60,6 +60,6 @@ view('online-course') > .clearfix
                         .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                         p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
                     .bottom.bg-white.sub-text
-                        .item.border > i.iconfont.icon-xianxingtubiao04(title='课程时长') + .inline-block.m-left 120m
-                        .item.border > i.iconfont.icon-renshuxianxing(title='报名学员') + .inline-block.m-left 120人
-                        .item.border > i.iconfont.icon-icon79(title='课程学分') + .inline-block.m-left 120分
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分

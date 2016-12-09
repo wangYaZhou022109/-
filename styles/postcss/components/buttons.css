@@ -1,11 +1,11 @@
 .btn {
-    font-size: var(--font-title);
     display: inline-block;
-    padding: calc(var(--space) / 2) var(--large-space);
+    padding: calc(var(--space) / 1) var(--large-space);
     text-align: center;
     transition: all .2s linear;
     cursor: pointer;
     white-space: nowrap;
+    border: 1px solid transparent;
 
     &.block {
         display: block;
@@ -13,4 +13,25 @@
         margin-right: auto;
     }
 
+    &:hover {
+        opacity: .8;
+        filter: alpha(opacity=80);
+    }
+
+}
+
+.input {
+    transition: all .2s linear;
+    padding: var(--space);
+    border-width: 1px;
+    border-style: solid;
+
+    &:focus {
+        border-color: var(--main-color);
+        box-shadow: 0 0 10px -2px color(var(--main-color) alpha(-15%));
+    }
+
+    &.no-border {
+        border-width: 0;
+    }
 }

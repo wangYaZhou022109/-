@@ -1,0 +1,15 @@
+#!handlebars
+
+module > .activity-page
+    .activity-banner(data-region='top')
+    .activity-filter(data-region='filter')
+    .activity-list(data-region='list')
+
+view('top')
+    div slkdfjsldf
+
+view('filter')
+    div ksdfjlf
+
+view('list')
+    .main-list jlsdjfl

@@ -1,0 +1,28 @@
+.course-page {
+    & .top {
+        padding: calc(var(--search-bar-height) + 1) 0;
+
+        & .course-tabs {
+            height: var(--search-bar-height);
+            line-height: var(--search-bar-height);
+            width: 50%;
+            max-width: 40em;
+
+            & li {
+                float: left;
+                width: 33.333%;
+                text-align: center;
+                font-size: var(--h4);
+                background-color: rgba(255,255,255,.3);
+                color: white;
+                cursor: pointer;
+                transition: all .2s linear;
+
+                &.active {
+                    background-color: white;
+                    color: var(--main-color);
+                }
+            }
+        }
+    }
+}

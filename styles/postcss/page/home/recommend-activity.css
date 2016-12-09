@@ -108,6 +108,10 @@
                 }
             }
 
+            & .btn {
+                background: none;
+            }
+
             &:hover .btn {
                 background: currentColor;
                 border-color: transparent;

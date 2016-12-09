@@ -17,7 +17,7 @@ D.assign(Swiper.prototype, {
         this.el.classList.add('swiper-container');
         this.items[this.current].classList.add('current');
 
-        this.insertPagination();
+        this.insertNavigation();
         this.bindListener();
         this.start();
     },
@@ -57,25 +57,25 @@ D.assign(Swiper.prototype, {
         clearInterval(this.timer);
     },
 
-    insertPagination: function() {
+    insertNavigation: function() {
         var me = this;
-        this.pagination = document.createElement('div');
-        this.pagination.classList.add('pagination');
+        this.navigation = document.createElement('div');
+        this.navigation.classList.add('navigation');
 
         this.dots = this.items.map(function(item, i) {
             var d = document.createElement('div');
             d.classList.add('item');
             d.setAttribute('data-index', i);
-            me.pagination.appendChild(d);
+            me.navigation.appendChild(d);
             return d;
         });
 
         this.dots[0].classList.add('current');
-        this.el.appendChild(this.pagination);
+        this.el.appendChild(this.navigation);
     },
 
-    removePagination: function() {
-        this.el.removeChild(this.pagination);
+    removeNavigation: function() {
+        this.el.removeChild(this.navigation);
     },
 
     bindListener: function() {
@@ -117,7 +117,7 @@ D.assign(Swiper.prototype, {
     destroy: function() {
         this.stop();
         this.unbindListener();
-        this.removePagination();
+        this.removeNavigation();
 
         this.el.classList.remove('swiper-container');
         this.items[this.current].classList.remove('current');

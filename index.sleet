@@ -28,7 +28,7 @@ html.default
         link(rel='stylesheet' href='styles/selectize/selectize.default.css')
         link(rel='stylesheet' href='styles/alertify/alertify.core.css')
         link(rel='stylesheet' href='styles/alertify/alertify.default.css')
-        link(rel='stylesheet' href='//at.alicdn.com/t/font_v05tlcckf1b81tt9.css')
+        link(rel='stylesheet' href='//at.alicdn.com/t/font_7h0cku8r5gnzh0k9.css')
         link(rel='stylesheet' href='styles/jquery.plupload.queue/css/jquery.plupload.queue.css')
         # endbuild
 

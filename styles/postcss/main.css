@@ -1,6 +1,7 @@
 @import "setting.css";
 @import 'override.css';
 @import "common.css";
-@import 'theme/theme.css';
 @import 'components/components.css';
 @import "page/page.css";
+@import 'theme/theme.css';
+@import "media/media.css";

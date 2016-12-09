@@ -1,0 +1,15 @@
+@import "media-1280.css" (max-width: 1281px);
+@import "media-1136.css" (max-width: 1137px);
+@import "media-960.css" (max-width: 961px);
+
+@media (min-width: 1366px) {
+    html,body {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1920px) {
+    html,body {
+        font-size: 20px;
+    }
+}

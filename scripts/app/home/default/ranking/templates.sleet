@@ -8,7 +8,7 @@ module > .ranklist-section > .container
 view('ranklist') > .bar-list
     .bar.studend
         .clearfix
-            .pull-left > .title-icon > .iconfont.icon-icon79
+            .pull-left > .title-icon > .iconfont.icon-star-full
             .right-title
                 .home-title-row.horizontail.border
                     .title 学员榜
@@ -22,7 +22,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    .icon.bg-sub-color-1 > .iconfont.icon-icon78
+                    .icon.bg-sub-color-1 > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -30,7 +30,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    .icon.bg-sub-color-1 > .iconfont.icon-icon78
+                    .icon.bg-sub-color-1 > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -38,7 +38,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    .icon.bg-sub-color-1 > .iconfont.icon-icon78
+                    .icon.bg-sub-color-1 > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -46,7 +46,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    .icon > .iconfont.icon-icon78
+                    .icon > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -54,7 +54,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    i.icon > .iconfont.icon-icon78
+                    i.icon > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -62,7 +62,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    i.icon > .iconfont.icon-icon78
+                    i.icon > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -70,7 +70,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    i.icon > .iconfont.icon-icon78
+                    i.icon > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -78,7 +78,7 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    i.icon > .iconfont.icon-icon78
+                    i.icon > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
             li
@@ -86,13 +86,13 @@ view('ranklist') > .bar-list
                     b 123
                     sapn.sub-text 学分
                 .cont
-                    i.icon > .iconfont.icon-icon78
+                    i.icon > .iconfont.icon-star-full
                     span 罗会奇
                     span.sub-text 互联网中心
 
     .bar.question
         .clearfix
-            .pull-left > .title-icon > .iconfont.icon-wenti
+            .pull-left > .title-icon > .iconfont.icon-question
             .right-title
                 .home-title-row.horizontail.border
                     .title 热门问题

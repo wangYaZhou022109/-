@@ -17,7 +17,7 @@
 
                     &:not(:nth-child(1),:nth-child(2),:nth-child(3)) {
                         & .icon {
-                            background: var(--border-color);
+                            background-color: var(--border-color);
 
                         }
 
@@ -35,16 +35,15 @@
                 text-align: center;
                 margin-right: var(--space);
 
-
                 & .iconfont {
                     text-indent: 0;
                     vertical-align: top;
-
-                    &:before {
-                        font-size: 1em;
-                    }
+                    font-size: var(--small-font);
+                    transform: scale(1);
                 }
             }
+
+
         }
 
         & .bar-list {

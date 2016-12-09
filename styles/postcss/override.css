@@ -1,15 +1,11 @@
 .iconfont {
     font-size: 1em;
     display: inline-block;
-    line-height: 1em;
     vertical-align: middle;
-    width: 1em;
-    height: 1em;
-    text-align: center;
-    text-indent: -.5em;
+    transform: scale(1.25);
 
-    &:before {
-        font-size: 2em;
+    &.scale-1 {
+        transform: scale(1);
     }
 }
 
