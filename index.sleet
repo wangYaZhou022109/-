@@ -20,10 +20,6 @@ html.default
         # build:css styles/common.css
         link(rel='stylesheet' href='node_modules/normalize.css/normalize.css')
         link(rel='stylesheet' href='node_modules/animate.css/animate.css')
-        link(rel='stylesheet' href='node_modules/pickadate/lib/themes/default.css')
-        link(rel='stylesheet' href='node_modules/pickadate/lib/themes/default.date.css')
-        link(rel='stylesheet' href='node_modules/pickadate/lib/themes/default.time.css')
-        link(rel='stylesheet' href='node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css')
         link(rel='stylesheet' href='styles/selectize/selectize.css')
         link(rel='stylesheet' href='styles/selectize/selectize.default.css')
         link(rel='stylesheet' href='styles/alertify/alertify.core.css')
