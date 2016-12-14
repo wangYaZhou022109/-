@@ -11,8 +11,7 @@ exports.handlers = {
 
         if (el.hasClass('active')) {
             el.removeClass('active').find('.item-child').slideUp();
-
-        }else {
+        } else {
             el.addClass('active').find('.item-child').slideDown();
             el.siblings().removeClass('active').find('.item-child').slideUp();
         }
