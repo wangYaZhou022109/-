@@ -68,8 +68,8 @@ p {
 }
 
 .container {
-    margin-left: calc(var(--h1) * 2);
-    margin-right: calc(var(--h1) * 2);
+    margin-left: calc(var(--large-space) * 2);
+    margin-right: calc(var(--large-space) * 2);
 }
 
 .clearfix {

@@ -1,11 +1,12 @@
 .btn {
     display: inline-block;
-    padding: calc(var(--space) / 1) var(--large-space);
+    padding: var(--space) var(--large-space);
     text-align: center;
     transition: all .2s linear;
     cursor: pointer;
     white-space: nowrap;
     border: 1px solid transparent;
+    cursor: pointer;
 
     &.block {
         display: block;
@@ -28,7 +29,7 @@
 
     &:focus {
         border-color: var(--main-color);
-        box-shadow: 0 0 10px -2px color(var(--main-color) alpha(-15%));
+        box-shadow: 0 0 5px color(var(--main-color) alpha(-50%));
     }
 
     &.no-border {

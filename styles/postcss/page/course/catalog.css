@@ -84,7 +84,7 @@
 
                 &:hover,
                 &.active {
-                    background-color: var(--light-gray-color);
+                    background-color: var(--bg-color);
 
                     &:before {
                         background: currentColor;

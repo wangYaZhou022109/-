@@ -5,7 +5,7 @@
 .home-page {
 
     & > .section {
-        padding: var(--nav-height) 0;
+        padding: var(--section-gap) 0;
         overflow: hidden;
 
         &.lecture {
