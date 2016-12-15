@@ -10,7 +10,7 @@ view('study-subject')
         .title.line-color 学习专题
         .title-more
             span.sub-title SPECIAL
-            span.more MORE >>
+            span.more > a.normal(href='#/study-subject/index') MORE >>
 
     ul
         li > .content

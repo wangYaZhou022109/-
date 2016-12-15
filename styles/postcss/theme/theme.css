@@ -1,6 +1,8 @@
 :root {
     --font-color: #333;
-    --font-tip-color: #999;
+    --font-tip-color: #777;
+    --link-color: #1e54c4;
+    --danger-color: #d82525;
 
     --main-color: #3e8bd4; /* 蓝 */
     --sub-color-1: #363a3e; /* 蓝黑 */

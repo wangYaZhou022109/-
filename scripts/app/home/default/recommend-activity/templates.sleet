@@ -10,7 +10,7 @@ view('recommend-activity')
         .title.line-color 推荐活动
         .title-more
             span.sub-title ACTIVITY
-            span.more MORE >>
+            span.more > a.normal(href='#/activity/index') MORE >>
 
     .clearfix.section-cont
         .section.large

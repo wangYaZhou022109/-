@@ -1,0 +1,4 @@
+#!handlebars
+
+module > .study-subject-page
+    div 学习专题

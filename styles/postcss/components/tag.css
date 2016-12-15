@@ -1,0 +1,50 @@
+:root {
+    --tag {
+        position: absolute;
+        left: -5px;
+        top: -5px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+
+        & .tag {
+            font-size: 12px;
+            background-color: var(--main-color)\0;
+            background-color: currentColor;
+            position: absolute;
+            left: -30px;
+            top: 10px;
+            width: 100px;
+            width: 70px\0;
+            text-align: center;
+            text-align: right\0;
+            transform: rotate(-45deg);
+            padding: 4px 0;
+            padding: 4px 10px\0;
+            z-index: 2;
+
+            &:after,
+            &:before {
+                position: absolute;
+                content: '';
+                border-width: 5px;
+                border-style: solid;
+                border-color: transparent;
+                border-top-color: var(--font-color);
+                bottom: -10px;
+                left: 10px;
+            }
+
+            &:after {
+                left: auto;
+                right: 8px;
+                right: 30px\0;
+            }
+
+            & span {
+                color: white;
+            }
+        }
+    }
+
+}
