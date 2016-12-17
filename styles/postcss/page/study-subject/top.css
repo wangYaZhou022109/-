@@ -1,0 +1,6 @@
+.study-subject-page {
+    & .top {
+        padding: calc(var(--search-bar-height) + 1) 0;
+
+    }
+}
