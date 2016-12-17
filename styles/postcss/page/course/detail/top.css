@@ -1,0 +1,324 @@
+:root {
+    --note-textarea-height: 5em;
+}
+
+.course-detail-page .course-detail-top{
+    height: 40em;
+    background: black;
+    overflow: hidden;
+
+    & .player-wrapper {
+        position: relative;
+        height: 100%;
+        padding: var(--large-space);
+        overflow: hidden;
+        background: #333;
+    }
+
+    & .player-content {
+        width: 100%;
+        height: 100%;
+        background: #999;
+    }
+
+    & .player-title-row {
+        position: absolute;
+        left: var(--large-space);
+        right: var(--large-space);
+        top: var(--large-space);
+        line-height: calc(var(--font-size) * 4);
+        padding: 0 var(--large-space);
+        background: white;
+
+        & .share-bar .item {
+            margin-left: var(--large-space);
+            display: inline-block;
+        }
+    }
+
+    & .chapter-main,
+    & .course-note-main {
+        height: 100%;
+        padding-left: 1em;
+        padding-top: calc(var(--font-size) * 5);
+
+    }
+
+    & .course-side-catalog {
+        @apply --transition;
+
+        position: relative;
+        overflow: hidden;
+        width: 30%;
+        float: right;
+        height: 100%;
+        color: #ffffff;
+        background: #555;
+
+        &.show-note {
+            & .course-chapter,
+            & .course-chapter .course-side-title-row {
+                margin-left: -100%;
+            }
+
+            & .course-note {
+                margin-left: 0;
+            }
+        }
+
+        &.collapse {
+            margin-right: -30%;
+            left: -1em;
+
+            & .toggle-catalog {
+                & .left {
+                    display: block;
+                }
+
+                & .right {
+                    display: none;
+                }
+            }
+        }
+
+        & .course-side-title-row {
+            line-height: calc(var(--font-size) * 5);
+            padding: 0 var(--large-space) 0 calc(var(--large-space) + 1);
+            border-bottom: 1px solid var(--fade-color);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+
+            & .note-btn {
+                background: var(--fade-color);
+                padding: calc(var(--font-size) / 2) var(--font-size);
+                margin-left: var(--large-space);
+                line-height: 1em;
+            }
+        }
+    }
+
+    & .course-chapter {
+        height: 100%;
+        width: 100%;
+
+        & .toggle-catalog {
+            position: absolute;
+            width: 1em;
+            height: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+            background: #000;
+            z-index: 2;
+
+            & .iconfont {
+                position: absolute;;
+                top: 50%;
+                margin-top: -.5em;
+                left: 0;
+                cursor: pointer;
+            }
+
+            & .left {
+                display: none;
+            }
+        }
+    }
+    & .chapter-list {
+            overflow: auto;
+            height: 100%;
+            width: 100%;
+            transition: all .2s linear;
+
+            & li {
+                margin-bottom: var(--large-space);
+                padding: 0 var(--large-space);
+
+                & .common-title {
+                    border-bottom: 1px dashed var(--fade-color);
+                    padding: var(--font-size) 0;
+                    opacity: .5;
+                    filter: alpha(opacity=50);
+                }
+            }
+
+            & dl {
+                padding: 1em var(--large-space);
+                margin: 0 -var(--large-space);
+                transition: all .2s linear;
+                cursor: pointer;
+
+                &.required .required-tag {
+                    display: block;
+                }
+
+                &:hover {
+                    background: var(--fade-color);
+                }
+            }
+
+            & dt {
+                @apply --clearfix;
+
+                & .required-tag {
+                    float: right;
+                    background: var(--danger-color);
+                    padding: calc(var(--space) / 4) calc(var(--space) / 2);
+                    font-size: var(--small-font);
+                    margin-left: var(--space);
+                    display: none;
+                }
+            }
+
+            & dd {
+                font-size: var(--small-font);
+                margin-top: 1em;
+
+                & .item {
+                    display: inline-block;
+                    vertical-align: middle;
+                    border-right: 1px solid var(--fade-color);
+                    padding-right: 1em;
+                    margin-right: 1em;
+                    line-height: 1em;
+
+                    &:last-child {
+                        border: none;
+                    }
+                }
+            }
+        }
+
+
+        & .course-note { /* 课程笔记 */
+            @apply --transition;
+
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            height: 100%;
+            padding: 0 var(--large-space);
+            color: white;
+            margin-left: 100%;
+
+            & textarea {
+                @apply --transition;
+
+                display: block;
+                width: 100%;
+                margin-bottom: var(--space);
+                margin-top: var(--large-space);
+                border-color: transparent;
+                height: 3em;
+
+                &:focus {
+                    height: var(--note-textarea-height);
+                    border-color: var(--main-color);
+                }
+            }
+        }
+
+        & .note-add-wrapper {
+            overflow: hidden;
+
+            & .note-btn-group {
+                @apply --transition;
+                display: none;
+            }
+
+            &.editing {
+                & textarea {
+                    height: var(--note-textarea-height);
+                }
+
+                & .note-btn-group {
+                    display: block;
+                }
+            }
+        }
+
+        & .note-list {
+            & li {
+                margin-top: var(--font-size);
+
+                &.view {
+                    & .bottom {
+                        @apply --fade-in;
+
+                        margin: 1em 0 var(--large-space);
+                        height: 3em;
+                    }
+
+                    & .note-text {
+                        white-space: normal;
+                    }
+                }
+
+                &.editing {
+                    & textarea {
+                        @apply --fade-in;
+
+                        height: var(--note-textarea-height);
+                        position: relative;
+                        z-index: 1;
+                        transition: all .5s linear;
+                    }
+
+                    & .note-text,
+                    & .time,
+                    & .bottom {
+                        display: none;
+                    }
+                    & .note-btn-group {
+                        display: block;
+                    }
+                }
+            }
+
+            & textarea {
+                @apply --text-overflow;
+                @apply --fade-out;
+
+                height: auto;
+                padding: 0;
+                color: white;
+                margin-top: var(--font-size);
+                position: absolute;
+                z-index: -1;
+            }
+
+            & .note-text {
+                @apply --transition;
+
+                cursor: pointer;
+                line-height: 2;
+
+                &:hover {
+                    color: var(--main-color);
+                    text-decoration: underline;
+                }
+            }
+
+            & .note-btn-group {
+                display: none;
+            }
+
+            & .bottom {
+                @apply --fade-out;
+
+                border-top: 1px solid var(--fade-color);
+                overflow: hidden;
+                height: 0;
+                line-height: 3em;
+
+                & .item {
+                    display: inline-block;
+                    margin-left: var(--large-space);
+                }
+            }
+        }
+
+}

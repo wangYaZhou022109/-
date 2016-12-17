@@ -1,4 +1,6 @@
 .course-page {
+    overflow: hidden;
+    
     & .course-catalog {
         float: left;
         width: 20%;

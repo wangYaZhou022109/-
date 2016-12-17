@@ -72,7 +72,7 @@ view('list')
                     .item(title='学分') > i.iconfont.icon-star + | 120分
                 .detail-wrapper
                     p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    .btn.block 我要参与
+                    a.normal.block(href='#/course/detail') > .btn.block 我要参与
                 .list-tag.custom-color-1 > .tag > span 考试
 
             li > .content
