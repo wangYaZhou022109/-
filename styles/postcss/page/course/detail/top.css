@@ -81,7 +81,24 @@
             }
         }
 
+        & .side-content {
+            white-space: nowrap;
+            height: 100%;
+        }
+
+        & .course-chapter,
+        & .course-note {
+            @apply --transition;
+
+            display: inline-block;
+            vertical-align: top;
+            width: 100%;
+            height: 100%;
+        }
+
         & .course-side-title-row {
+            @apply --transition;
+
             line-height: calc(var(--font-size) * 5);
             padding: 0 var(--large-space) 0 calc(var(--large-space) + 1);
             border-bottom: 1px solid var(--fade-color);
@@ -195,14 +212,13 @@
         & .course-note { /* 课程笔记 */
             @apply --transition;
 
-            position: absolute;
+            position: relative;
             width: 100%;
-            left: 0;
-            top: 0;
             height: 100%;
             padding: 0 var(--large-space);
             color: white;
             margin-left: 100%;
+
 
             & textarea {
                 @apply --transition;
@@ -212,7 +228,7 @@
                 margin-bottom: var(--space);
                 margin-top: var(--large-space);
                 border-color: transparent;
-                height: 3em;
+                height: calc(calc(var(--font-size) * 2) + calc(var(--space) * 2));
 
                 &:focus {
                     height: var(--note-textarea-height);
@@ -243,17 +259,20 @@
         & .note-list {
             & li {
                 margin-top: var(--font-size);
+                position: relative;
 
                 &.view {
                     & .bottom {
                         @apply --fade-in;
 
-                        margin: 1em 0 var(--large-space);
+                        margin: 1em 0;
                         height: 3em;
                     }
 
                     & .note-text {
                         white-space: normal;
+                        text-decoration: none;
+                        color: inherit;
                     }
                 }
 
@@ -263,8 +282,9 @@
 
                         height: var(--note-textarea-height);
                         position: relative;
-                        z-index: 1;
                         transition: all .5s linear;
+                        visibility: visible;
+
                     }
 
                     & .note-text,
@@ -276,18 +296,21 @@
                         display: block;
                     }
                 }
+
+                &.fade {
+                    opacity: .2;
+                    filter: alpha(opacity=20);
+                }
             }
 
             & textarea {
-                @apply --text-overflow;
                 @apply --fade-out;
 
                 height: auto;
-                padding: 0;
-                color: white;
-                margin-top: var(--font-size);
+                margin-top: 0;
                 position: absolute;
-                z-index: -1;
+                visibility: hidden;
+                transition: none;
             }
 
             & .note-text {

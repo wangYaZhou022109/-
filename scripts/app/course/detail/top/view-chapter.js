@@ -1,4 +1,5 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    A = require('../../../util/animation');
 
 exports.events = {
     'click note-btn': 'showNote',
@@ -7,7 +8,8 @@ exports.events = {
 
 exports.handlers = {
     showNote: function() {
-        $(this.module.$('course-side-catalog')).addClass('show-note');
+        var courseSide = this.module.$('course-side-catalog');
+        A.animate(courseSide, 'show-note');
     },
 
     toggleCatalog: function() {

@@ -2,11 +2,11 @@ var $ = require('jquery');
 
 exports.events = {
     'click cancel-edit-item-*': 'cancelEditItem',
+    'click note-item-edit-*': 'editNoteItem',
     'click close-note': 'hideNote',
     'click add-note': 'editNote',
     'click cancel-edit': 'cancelEdit',
-    'click note-item-*': 'showNoteItem',
-    'click note-item-edit-*': 'editNoteItem'
+    'click note-item-*': 'showNoteItem'
 };
 
 exports.handlers = {
@@ -23,16 +23,24 @@ exports.handlers = {
     },
 
     showNoteItem: function(id, e, target) {
-        $(target).toggleClass('view').siblings().removeClass('view');
+        if ($(target).hasClass('view')) {
+            $(target).removeClass('view').siblings().removeClass('fade');
+        } else {
+            $(target).addClass('view').removeClass('fade').siblings()
+            .removeClass('view editing')
+            .addClass('fade');
+        }
     },
 
-    editNoteItem: function(id) {
-        $(this.$('note-item-' + id)).addClass('editing').removeClass('view');
+    editNoteItem: function(id, e) {
+        e.preventDefault();
+
+        $(this.$('note-item-' + id)).addClass('editing').removeClass('view').siblings().addClass('fade');
     },
 
     cancelEditItem: function(id, e) {
         e.preventDefault();
 
-        $(this.$('note-item-' + id)).removeClass('editing');
+        $(this.$('note-item-' + id)).removeClass('editing').siblings().removeClass('fade');
     }
 };
