@@ -35,7 +35,8 @@ exports.handlers = {
     editNoteItem: function(id, e) {
         e.preventDefault();
 
-        $(this.$('note-item-' + id)).addClass('editing').removeClass('view').siblings().addClass('fade');
+        $(this.$('note-item-' + id)).addClass('editing').removeClass('view').siblings()
+        .addClass('fade');
     },
 
     cancelEditItem: function(id, e) {

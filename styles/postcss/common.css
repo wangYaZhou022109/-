@@ -43,7 +43,7 @@
     margin-right: calc(var(--large-space) * 2);
 }
 
-.section {
+section.section {
     margin-top: var(--section-gap);
     margin-bottom: var(--section-gap);
 }
