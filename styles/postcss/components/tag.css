@@ -32,7 +32,7 @@
                 border-color: transparent;
                 border-top-color: var(--font-color);
                 bottom: -10px;
-                left: 10px;
+                left: 8px;
             }
 
             &:after {

@@ -12,7 +12,8 @@
         font-size: var(--small-font);
 
         & .item {
-            margin-right: 1em;
+            margin-right: var(--large-space);
+            display: inline-block;
 
             &:last-child {
                 margin: 0;
@@ -34,6 +35,33 @@
             & .content {
                 position: relative;
                 transition: all .2s linear;
+
+                &:hover {
+                    @apply --box-shadow;
+
+                    padding: 1em 1em var(--large-space);
+                    margin: -1em -1em -var(--large-space);
+
+                    & .detail-wrapper {
+                        height: calc(var(--font-size) * 10);
+                        padding: var(--space) var(--large-space);
+                        opacity: 1;
+                        filter: alpha(opacity=100);
+
+                    }
+
+                    & .list-tag {
+                        margin: 1em;
+                    }
+
+                    & .title {
+                        font-weight: bold;
+                    }
+
+                    & img {
+                        transform: scale(1.1);
+                    }
+                }
             }
 
             & .title {
@@ -64,9 +92,8 @@
                 position: absolute;
                 left: 0;
                 right: 0;
+                bottom: 0;
                 overflow: hidden;
-                bottom: calc(var(--font-size) * 4);
-                margin-top: -calc(var(--main-list-img-height) - 2);
                 height: 0;
                 opacity: 0;
                 filter: alpha(opacity=0);
@@ -82,35 +109,6 @@
                 @apply --tag;
             }
 
-            &:hover {
-                & .content {
-                    @apply --box-shadow;
-
-                    padding: 1em 1em var(--large-space);
-                    margin: -1em -1em -var(--large-space);
-                }
-
-                & .detail-wrapper {
-                    height: calc(var(--main-list-img-height) - 2);
-                    padding: var(--space) var(--large-space);
-                    margin-bottom: var(--large-space);
-                    opacity: 1;
-                    filter: alpha(opacity=100);
-
-                }
-
-                & .list-tag {
-                    margin: 1em;
-                }
-
-                & .title {
-                    font-weight: bold;
-                }
-
-                & img {
-                    transform: scale(1.1);
-                }
-            }
         }
     }
 
