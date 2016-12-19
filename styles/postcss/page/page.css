@@ -1,4 +1,5 @@
 @import "common/common.css";
 @import "home/home.css";
 @import "course/course.css";
-@import "study-subject/study-subject.css"
+@import "study-subject/study-subject.css";
+@import "activity/activity.css"
