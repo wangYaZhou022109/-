@@ -21,27 +21,13 @@ view('catalog')
     .title-row
         .pull-right > i.iconfont.icon-setting
         .common-title 课程目录
-    ul
-        li.text-hover-main-color(id='catalog-item-1')
+    ul > each(menus)
+        li.text-hover-main-color(id='catalog-item-'+id)
             .item-parent
                 .pull-right > i.iconfont.icon-arrow-up.up + i.iconfont.icon-arrow-down.down
-                .text(title='一级导航') 一级导航
-            ul.item-child
-                li(class='custom-color-1' id='sub-item-1') > .text(title='二级导航') 二级导航
-                li(class='custom-color-2' id='sub-item-2') > .text(title='二级导航') 二级导航
-                li(class='custom-color-3' id='sub-item-3') > .text(title='二级导航') 二级导航
-                li(class='custom-color-4' id='sub-item-4') > .text(title='二级导航') 二级导航
-
-        li.text-hover-main-color(id='catalog-item-2')
-            .item-parent
-                .pull-right > i.iconfont.icon-arrow-up.up + i.iconfont.icon-arrow-down.down
-                .text(title='一级导航') 一级导航
-            ul.item-child
-                li(class='custom-color-1' id='sub-item-5') > .text(title='二级导航') 二级导航
-                li(class='custom-color-2' id='sub-item-6') > .text(title='二级导航') 二级导航
-                li(class='custom-color-3' id='sub-item-7') > .text(title='二级导航') 二级导航
-                li(class='custom-color-4' id='sub-item-8') > .text(title='二级导航') 二级导航
-    
+                .text(title=name) > echo(name)
+            ul.item-child > each(children)
+                li(class='custom-color-2' id='sub-item-'+id) > .text(title=name) > echo(name)
 
 view('list')
     .main-list
