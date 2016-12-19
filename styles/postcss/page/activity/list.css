@@ -6,24 +6,9 @@
         max-width: 31em;/* 临时设置 */
     }
 
-    & .activity-category {
-        margin-top: var(--large-space);
-        margin-bottom: var(--large-space);
-        height: var(--search-bar-height);
-        line-height: var(--search-bar-height);
-
-        & a {
-            display: inline-block;
-            margin-right: var(--large-space);
-            font-size: var(--font-size);
-            color: var(--font-color);
-            &:hover {
-                color: var(--main-color);
-                text-decoration: none;
-            }
-        }
-
-        & a.active {
+    & .item {
+        cursor: pointer;
+        &.active {
             color: var(--main-color);
         }
     }

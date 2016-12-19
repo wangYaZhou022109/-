@@ -1,11 +1,11 @@
 var $ = require('jquery');
 
 exports.events = {
-    'click category-item-*': 'toggleItem'
+    'click item-*': 'toggleItem'
 };
 
 exports.handlers = {
     toggleItem: function(el) {
-        $(this.$('category-item-' + el)).addClass('active').siblings().removeClass('active');
+        $(this.$('item-' + el)).addClass('active').siblings().removeClass('active');
     }
 };
