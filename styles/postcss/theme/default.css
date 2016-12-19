@@ -13,7 +13,10 @@
     --custom-color-4: #6eb162; /* 绿 */
     --custom-color-5: #65bdad; /* 青 */
 
+    --star-color: #fd8c42;
+
     --border-color: #dedede;
+    --fade-color: rgba(255, 255, 255, .2);
 
     --bg-color: #f9f9f9;
 

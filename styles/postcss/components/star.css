@@ -1,0 +1,34 @@
+.star-bar {
+    height: 1em;
+    line-height: 1em;
+    white-space: nowrap;
+    position: relative;
+    font-size: 1.5em;
+    font-family: iconfont;
+
+    &:before {
+        content: '\e6f8  \e6f8  \e6f8  \e6f8  \e6f8';
+        opacity: .1;
+        filter: alpha(opacity=10);
+    }
+
+    & .star {
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--star-color);
+
+        &:before {
+            content: '\e6f8  \e6f8  \e6f8  \e6f8  \e6f8';
+        }
+    }
+
+    & .num {
+        color: var(--star-color);
+        position: absolute;
+        right: -2em;
+        top: 0;
+        line-height: 1.2em;
+    }
+}

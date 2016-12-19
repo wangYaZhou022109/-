@@ -1,9 +1,7 @@
 #!handlebars
 
-
-module
-    #course-info(data-region='course-info')
-
-view('course-info')
-    p course-info
-    #comment-area
+module > .course-detail-page
+    .top(data-region='top')
+    .page-main-wrapper
+        .side(data-region='side')
+        .main(data-region='main')

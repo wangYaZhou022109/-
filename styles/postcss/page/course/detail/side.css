@@ -1,0 +1,5 @@
+.course-detail-side {
+    width: 30%;
+    float: right;
+    background: var(--bg-color);
+}
