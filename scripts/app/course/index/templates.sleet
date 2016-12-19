@@ -41,7 +41,13 @@ view('catalog')
                 li(class='custom-color-2' id='sub-item-6') > .text(title='二级导航') 二级导航
                 li(class='custom-color-3' id='sub-item-7') > .text(title='二级导航') 二级导航
                 li(class='custom-color-4' id='sub-item-8') > .text(title='二级导航') 二级导航
-    
+    .CatalogView > .CatalogView-box
+        .clearfix.CatalogView-nav
+            i.pull-right.iconfont.icon-setting
+            h2.active 本公司课程目录全览
+            h2 集团课程目录全揽
+        .CatalogView-list
+            h2 这里就是一级导航的位置
 
 view('list')
     .main-list
