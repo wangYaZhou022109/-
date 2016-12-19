@@ -1,4 +1,4 @@
 exports.items = {
-    top:"top",
-    list:"list"
+    top: 'top',
+    list: 'list'
 };

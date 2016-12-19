@@ -41,6 +41,7 @@ view('catalog')
                 li(class='custom-color-2' id='sub-item-6') > .text(title='二级导航') 二级导航
                 li(class='custom-color-3' id='sub-item-7') > .text(title='二级导航') 二级导航
                 li(class='custom-color-4' id='sub-item-8') > .text(title='二级导航') 二级导航
+    
 
 view('list')
     .main-list
