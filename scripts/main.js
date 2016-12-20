@@ -1,9 +1,9 @@
-var D, H, jQuery, app, helpers, oauthOptions, plupload;
+var D, H, jQuery, app, helpers, oauthOptions, plupload, customGlobal;
 
 oauthOptions = {
-    clientId: 11,
-    provider: 'http://192.168.1.198:8888/oauth',
-    returnTo: 'http://192.168.9.105'
+    clientId: 22,
+    provider: 'https://oauth9.zhixueyun.com',
+    returnTo: 'http://192.168.9.121/front'
 };
 
 window.$ = window.jQuery = jQuery = require('jquery');
@@ -69,7 +69,7 @@ app = window.app = new D.Application({
     },
     routers: ['', 'home', 'course', 'activity', 'study-subject']
 });
-
+D.assign(app.global, {});
 
 D.PageableModel.setDefault({
     pageKey: 'page'
@@ -79,4 +79,12 @@ require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
 
+customGlobal = require('./app/util/global');
+
+D.assign(app.global, {
+    setting: customGlobal.setting()
+});
+D.assign(app.global, {
+    currentUser: customGlobal.currentUser()
+});
 app.start('home');

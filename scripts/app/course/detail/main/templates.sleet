@@ -6,17 +6,17 @@ module > .course-detail-main.page-main > .container
 
 view('info')
     .title-row
-        .inline-block.layout-mr > .h3 课程标题
+        .inline-block.layout-mr > .h3 > echo(course.name)
         .inline-block.layout-mr > .star-bar > .star(style='width:80%') + .num 8.0
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > i.iconfont.icon-share
             .inline-block.m-left > i.iconfont.icon-favorite
     .sub-title-row.layout-mb-small.layout-mt-small
-        .inline-block.layout-mr 课时：2
-        .inline-block.layout-mr 学分：无
+        .inline-block.layout-mr > echo('课时: ' course.courseHour)
+        .inline-block.layout-mr > echo('学分: ' course.credit)
         .inline-block.layout-mr 发布人：管理员
         .inline-block.layout-mr 发布时间：2016-09-09
-    p.course-info-detail 描述：压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神上的生理反应，人们的身人们的身人们的身人们的身人们的身体或者精神上的。
+    p.course-info-detail > echo('描述: ' course.description)
 
 view('comment')
     .h3 讨论区

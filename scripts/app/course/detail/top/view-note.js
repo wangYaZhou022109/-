@@ -1,4 +1,9 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    _ = require('lodash/collection');
+
+exports.bindings = {
+    notes: true
+};
 
 exports.events = {
     'click cancel-edit-item-*': 'cancelEditItem',
@@ -43,5 +48,16 @@ exports.handlers = {
         e.preventDefault();
 
         $(this.$('note-item-' + id)).removeClass('editing').siblings().removeClass('fade');
+    }
+};
+
+exports.dataForTemplate = {
+    notes: function(data) {
+        var notes = data.notes;
+        _.forEach(notes, function(item, i) {
+            var r = item;
+            r.i = i;
+        });
+        return data.notes;
     }
 };
