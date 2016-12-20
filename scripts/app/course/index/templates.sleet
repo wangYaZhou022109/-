@@ -29,6 +29,14 @@ view('catalog')
             ul.item-child > each(children)
                 li(class='custom-color-2' id='sub-item-'+id) > .text(title=name) > echo(name)
 
+    .CatalogView > .CatalogView-box
+        .clearfix.CatalogView-nav
+            i.pull-right.iconfont.icon-setting
+            h2.active 本公司课程目录全览
+            h2 集团课程目录全揽
+        .CatalogView-list
+            h2 这里就是一级导航的位置
+
 view('list')
     .main-list
         .filter
