@@ -1,5 +1,4 @@
 .course-page {
-    overflow: hidden;
 
     & .course-catalog {
         float: left;
@@ -114,23 +113,45 @@
         margin-left: 25%;
     }
 
-    & .CatalogView{
+    & .catalog-view{
         position: absolute;
         left: 0;
-        top: 0;
+        top: -calc(var(--space)*8.2);
         width: 500%;
         background: white;
         box-shadow:  0 0 25px 5px rgba(0,0,0,.1);
         z-index: 10;
-        display: none;
 
-        & .CatalogView-box{
+        & .catalog-view-box{
             padding: var(--large-space);
             min-height: calc(var(--space)*70);
 
-            & .CatalogView-nav{
-                h2{
-                    display: inline-block;
+            & .catalog-view-nav{
+                border-bottom: 2px solid var(--border-color);
+
+                & h3{
+                    display: inline-block; font-weight: normal; margin:0 calc(var(--space)*3) 0 0; padding: var(--space) 0; margin-bottom: -2px;
+
+                    &.active{border-bottom: 2px solid var(--black);}
+                }
+            }
+            & .catalog-view-list{
+                & h4{
+                    border-left: var(--space) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
+                }
+                & .clearfix{
+                    margin-bottom: var(--lage-space);
+                    & .level-second{width: 10%;}
+                    & .Level-three{
+                        float: left; width: 90%;
+
+                        & .Level-three-list{
+                            width: 33.3%; float: left; margin-bottom: var(--large-space);
+
+                            & .level-four a{display: inline-block; margin-right: var(--space); line-height: calc(var(--space)*3); color: var(--font-color);}
+                            & h5{margin-top: 0; margin-bottom: var(--space);}
+                        }
+                    }
                 }
             }
         }
