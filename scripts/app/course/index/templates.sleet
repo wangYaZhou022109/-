@@ -40,15 +40,17 @@ view('list')
                             i.iconfont.icon-arrow-down
                         .drop-down-content > .content
                             ul
-                                li 三级导航名称
-                                li 三级导航名称
-                                li 三级导航名称
-                                li 三级导航名称
-                                li 三级导航名称
-
+                                each(state.categories3)
+                                    li > echo(name)
                 .item
-                    | 四级导航
-                    i.iconfont.icon-arrow-down
+                    .drop-down-wrapper
+                        .drop-down-btn
+                            | 四级导航
+                            i.iconfont.icon-arrow-down
+                        .drop-down-content > .content
+                            ul
+                                each(state.categories4)
+                                    li > echo(name)
             .pull-right
                 .item
                     | 排序：上架时间

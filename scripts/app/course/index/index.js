@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     top: 'top',
     catalog: 'catalog',
@@ -5,13 +6,22 @@ exports.items = {
 };
 exports.store = {
     models: {
-        categories: { url: '../course-study/course-category' },
+        categories: {
+            url: '../course-study/course-category',
+            mixin: {
+                filterPid: function(pid) {
+                    return _.filter(this.data, function(item) {
+                        return item.parentId === pid;
+                    });
+                }
+            }
+        },
         courses: {
             url: '../course-study/course-info',
             type: 'pageable',
             root: 'items'
         },
-        state: {}
+        state: { data: {} }
     },
     callbacks: {
         init: function(options) {
@@ -19,6 +29,16 @@ exports.store = {
                 courses = this.models.courses;
             categories.params = options;
             return this.chain([this.get(categories), this.get(courses)]);
+        },
+        selectMenu2: function(payload) {
+            var categories3 = this.models.categories.filterPid(payload.id);
+            this.models.state.data.categories3 = categories3;
+            return this.models.state.changed();
+        },
+        selectMenu3: function(payload) {
+            var categories4 = this.models.categories.filterPid(payload.id);
+            this.models.state.data.categories4 = categories4;
+            return this.models.state.changed();
         }
     }
 };

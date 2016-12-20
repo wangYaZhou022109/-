@@ -1,12 +1,5 @@
 var $ = require('jquery'),
     _ = require('lodash/collection');
-var filterCategories = function(categories) {
-    return function(pid) {
-        return _.filter(categories, function(item) {
-            return item.parentId === pid;
-        });
-    };
-};
 
 exports.bindings = {
     categories: true
@@ -32,17 +25,18 @@ exports.handlers = {
     selectMenu: function(id, e, target) {
         var el = $(target);
         e.preventDefault();
-
         el.addClass('active').siblings().removeClass('active');
+
+        this.module.dispatch('selectMenu2', { id: id });
     }
 };
 exports.dataForTemplate = {
-    menus: function(data) {
+    menus: function() {
         // 一级导航 二级导航
-        var getMenu = filterCategories(data.categories);
-        return _.map(getMenu(null), function(obj) {
+        var categories = this.bindings.categories;
+        return _.map(categories.filterPid(null), function(obj) {
             var d = obj || {};
-            d.children = getMenu(d.id);
+            d.children = categories.filterPid(d.id);
             return d;
         });
     }
