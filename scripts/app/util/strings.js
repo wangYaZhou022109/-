@@ -1,4 +1,5 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    subject = require('../study-subject/strings');
 
 var strings = {
     ok: '确定',
@@ -17,7 +18,7 @@ var strings = {
     'no-data': '没有数据'
 };
 
-var ss = D.assign({}, strings);
+var ss = D.assign({}, strings, subject);
 
 exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');

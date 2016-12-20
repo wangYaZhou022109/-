@@ -7,145 +7,49 @@ module > .study-subject-page
 
 view('top')
     .container.clearfix > .search-bar.block
-        input.input(placeholder="请输入你需要寻找的专题")
-        i.iconfont.icon-search.scale-1.text-hover-main-color
+        form.vertical
+            input.input(id='searchContent' name='name' placeholder="请输入你需要寻找的专题")
+            i.iconfont.icon-search.scale-1.text-hover-main-color#searchByName
 
 view('list')
     .main-list
         .filter
-            .item.inline-block
-                | 好评
-                i.iconfont.icon-arrow-down
-            .item.inline-block
+            .item.inline-block#order-1
                 | 最新
-                i.iconfont.icon-arrow-down
-            .item.inline-block
+                compare(search.orderBy 'eq' '1')
+                    compare(search.order 'eq' 2)
+                        i.iconfont.icon-arrow-down.down
+                    compare(search.order 'eq' 1)
+                        i.iconfont.icon-arrow-up.up
+            .item.inline-block#order-3
+                | 好评
+                compare(search.orderBy 'eq' '3')
+                    compare(search.order 'eq' 2)
+                        i.iconfont.icon-arrow-down.down
+                    compare(search.order 'eq' 1)
+                        i.iconfont.icon-arrow-up.up
+            .item.inline-block#order-2
                 | 最热
-                i.iconfont.icon-arrow-down
-        ul
+                compare(search.orderBy 'eq' '2')
+                    compare(search.order 'eq' 2)
+                        i.iconfont.icon-arrow-down
+                    compare(search.order 'eq' 1)
+                        i.iconfont.icon-arrow-up.up
+        ul > each(subjects)
             li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
+                .img > .img-cont > img(src=imageUrl)
                 .clearfix
                     .pull-right.small-font.layout-ml
                         i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+                        span.m-let > echo(studyMemberCount) > string('study.member.count')
+                    .title.text-overflow > echo(name)
                 .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
+                    .pull-right > date(beginDate)
+                        echo('~')
+                        date(endDate)
+                    string('begin-end-time')
                 .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/vip/1480903156.gif')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/7/2/2/931227.png')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/4/5/0/931054.jpg')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/0/5/8/924850.gif')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/1/6/3/921361.jpg')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/9/4/5/915549.gif')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/8/1/9/913918.gif')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-            li > .content
-                .img > .img-cont > img(src='http://img.ui.cn/data/file/8/7/6/909678.jpg')
-                .clearfix
-                    .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
-                        span.m-let 986人已学习
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .clearfix.small-font
-                    .pull-right 2016-12-12 15:00 ~ 2016-12-26 18:00
-                    | 起止时间
-                .detail-wrapper
-                    p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                    | 目标学习天数：9天
-        .pagination
-            ul
-                li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
-                li.hover-main-color.active.bg-main-color 1
-                li.hover-main-color 2
-                li.hover-main-color 3
-                li.hover-main-color 4
-                li.hover-main-color 5
-                li.hover-main-color > i.iconfont.icon-arrow-right.scale-1
+                    p > echo(name)
+                    | 目标学习天数 ：
+                    echo(studyDays) > string('unit.day')
+        #pager.pagination
