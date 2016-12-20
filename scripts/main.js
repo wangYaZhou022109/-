@@ -28,11 +28,11 @@ require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
 require('./vendors/upload/jquery.plupload.queue.min');
 require('./vendors/upload/zh_CN');
-require('./app/component/component-pager');
-require('./app/component/upload');
-require('./app/component/comment-area');
-require('./app/component/swiper');
-require('./app/component/views/form/form-view');
+require('./app/ext/picker');
+require('./app/ext/component-pager');
+require('./app/ext/upload');
+require('./app/ext/swiper');
+require('./app/ext/views/form/form-view');
 
 D.adapt({
     getFormData: function(form) {
