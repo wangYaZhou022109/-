@@ -6,12 +6,12 @@ module > .course-page
         .course-catalog(data-region='catalog')
         .course-list(data-region='list')
 
-view('top')
+view('top') > form
     .container.clearfix
         .pull-right
             .search-bar
-                input.input(placeholder='请输入您要找的课程')
-                i.iconfont.icon-search.scale-1.text-hover-main-color
+                input#searchTitle.input(placeholder='请输入您要找的课程' value= search.searchContent)
+                i#searchTitleBtn.iconfont.icon-search.scale-1.text-hover-main-color
         .course-tabs > ul
             li.active(id='item-1') 本公司课程
             li(id='item-2') 集团课程
@@ -60,12 +60,14 @@ view('list')
                                 each(state.categories4)
                                     li > echo(name)
             .pull-right
-                .item
+                .item#sort-0
                     | 排序：上架时间
-                    i.iconfont.icon-arrow-down
-                .item
+                    i.iconfont.icon-arrow-up
+         
+                .item#sort-1
                     | 学习人数
-                    i.iconfont.icon-arrow-down
+                    i.iconfont.icon-arrow-up
+          
                 .item
                     .drop-down-wrapper.right
                         .drop-down-btn
@@ -79,62 +81,20 @@ view('list')
                                 li 更多筛选条件
                                 li 更多筛选条件
         ul
-            li > a.normal(href='#/course/detail') > .content
-                .img
-                    .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
-                    .detail-wrapper
-                        p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                        a.normal.block(href='#/course/detail') > .btn.radius.block 我要参与
+            each(courses)
+                li > a.normal(href='#/course/detail/'+id) > .content
+                    .img
+                        .img-cont 
+                            img(src=img)
+                        .detail-wrapper
+                            p > echo(description)
+                            a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 我要参与
 
-                .text-overflow.title 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .bottom
-                    .item(title='课时') > i.iconfont.icon-time + | 120分钟
-                    .item(title='学习人数') > i.iconfont.icon-user + | 120人
-                    .item(title='学分') > i.iconfont.icon-star + | 120分
-
-
-            li > .content
-                .img
-                    .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
-                    .detail-wrapper
-                        p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                        a.normal.block(href='#/course/detail') > .btn.radius.block 我要参与
-
-                .text-overflow.title 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .bottom
-                    .item(title='课时') > i.iconfont.icon-time + | 120分钟
-                    .item(title='学习人数') > i.iconfont.icon-user + | 120人
-                    .item(title='学分') > i.iconfont.icon-star + | 120分
-
-
-
-            li > .content
-                .img
-                    .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
-                    .detail-wrapper
-                        p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                        a.normal.block(href='#/course/detail') > .btn.radius.block 我要参与
-
-                .text-overflow.title 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .bottom
-                    .item(title='课时') > i.iconfont.icon-time + | 120分钟
-                    .item(title='学习人数') > i.iconfont.icon-user + | 120人
-                    .item(title='学分') > i.iconfont.icon-star + | 120分
-
-
-
-            li > .content
-                .img
-                    .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
-                    .detail-wrapper
-                        p 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                        a.normal.block(href='#/course/detail') > .btn.radius.block 我要参与
-
-                .text-overflow.title 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .bottom
-                    .item(title='课时') > i.iconfont.icon-time + | 120分钟
-                    .item(title='学习人数') > i.iconfont.icon-user + | 120人
-                    .item(title='学分') > i.iconfont.icon-star + | 120分
+                    .text-overflow.title > echo(name)
+                    .bottom
+                        .item(title='课时') > i.iconfont.icon-time + echo(courseHour) + | 分钟
+                        .item(title='学习人数') > i.iconfont.icon-user + echo(studyMemberCount) + | 人
+                        .item(title='学分') > i.iconfont.icon-star + echo(credit) + | 分
 
     .pagination > ul
         li.hover-main-color > i.iconfont.icon-arrow-left.scale-1

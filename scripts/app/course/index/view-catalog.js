@@ -20,6 +20,8 @@ exports.handlers = {
             el.addClass('active').find('.item-child').slideDown();
             el.siblings().removeClass('active').find('.item-child').slideUp();
         }
+
+        this.module.dispatch('search', { categoryId: id });
     },
 
     selectMenu: function(id, e, target) {
@@ -27,7 +29,10 @@ exports.handlers = {
         e.preventDefault();
         el.addClass('active').siblings().removeClass('active');
 
-        this.module.dispatch('selectMenu2', { id: id });
+        return this.chain([
+            this.module.dispatch('search', { categoryId: id }),
+            this.module.dispatch('selectMenu2', { id: id })
+        ]);
     }
 };
 exports.dataForTemplate = {

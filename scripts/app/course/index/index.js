@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 exports.items = {
     top: 'top',
     catalog: 'catalog',
@@ -6,28 +7,31 @@ exports.items = {
 };
 exports.store = {
     models: {
+        down: { url: '../human/file/download' },
         categories: {
             url: '../course-study/course-category',
             mixin: {
                 filterPid: function(pid) {
-                    return _.filter(this.data, function(item) {
-                        return item.parentId === pid;
-                    });
+                    return _.filter(this.data, function(item) { return item.parentId === pid; });
                 }
             }
         },
         courses: {
-            url: '../course-study/course-info',
+            url: '../course-study/course-front',
             type: 'pageable',
-            root: 'items'
+            root: 'items',
         },
-        state: { data: {} }
+        state: { data: {} },
+        search: { }
     },
     callbacks: {
         init: function(options) {
             var categories = this.models.categories,
-                courses = this.models.courses;
+                courses = this.models.courses,
+                search = this.models.search;
+            search.set({ type: 0 });
             categories.params = options;
+            courses.params = search.data;
             return this.chain([this.get(categories), this.get(courses)]);
         },
         selectMenu2: function(payload) {
@@ -39,6 +43,13 @@ exports.store = {
             var categories4 = this.models.categories.filterPid(payload.id);
             this.models.state.data.categories4 = categories4;
             return this.models.state.changed();
+        },
+        search: function(payload) {
+            var courses = this.models.courses,
+                search = this.models.search;
+            D.assign(search.data, payload);
+            courses.params = search.data;
+            return this.get(courses);
         }
     }
 };
