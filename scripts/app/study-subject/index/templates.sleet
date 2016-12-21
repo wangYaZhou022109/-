@@ -8,28 +8,28 @@ module > .study-subject-page
 view('top')
     .container.clearfix > .search-bar.block
         form.vertical
-            input.input(id='searchContent' name='name' placeholder="请输入你需要寻找的专题")
+            input.input(id='searchContent' name='name' placeholder=string('search.subject.placeholder'))
             i.iconfont.icon-search.scale-1.text-hover-main-color#searchByName
 
 view('list')
     .main-list
         .filter
             .item.inline-block#order-1
-                | 最新
+                string('the.latest')
                 compare(search.orderBy 'eq' '1')
                     compare(search.order 'eq' 2)
                         i.iconfont.icon-arrow-down.down
                     compare(search.order 'eq' 1)
                         i.iconfont.icon-arrow-up.up
             .item.inline-block#order-3
-                | 好评
+                string('the.high.praise')
                 compare(search.orderBy 'eq' '3')
                     compare(search.order 'eq' 2)
                         i.iconfont.icon-arrow-down.down
                     compare(search.order 'eq' 1)
                         i.iconfont.icon-arrow-up.up
             .item.inline-block#order-2
-                | 最热
+                string('the.hottest')
                 compare(search.orderBy 'eq' '2')
                     compare(search.order 'eq' 2)
                         i.iconfont.icon-arrow-down
@@ -50,6 +50,6 @@ view('list')
                     string('begin-end-time')
                 .detail-wrapper
                     p > echo(name)
-                    | 目标学习天数 ：
+                    setting('study.subject.study_days') ：
                     echo(studyDays) > string('unit.day')
         #pager.pagination

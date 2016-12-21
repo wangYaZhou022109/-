@@ -33,8 +33,10 @@ require('./app/ext/picker');
 require('./app/ext/swiper');
 require('./app/ext/tag-view');
 require('./app/ext/upload');
+require('./app/ext/selectize');
 require('./app/ext/views/form/form-view');
-
+require('./app/ext/views/dynamic-view');
+require('./app/ext/pdf');
 D.adapt({
     getFormData: function(form) {
         var result = {};

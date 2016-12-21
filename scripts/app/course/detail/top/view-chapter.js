@@ -9,7 +9,8 @@ exports.bindings = {
 
 exports.events = {
     'click note-btn': 'showNote',
-    'click toggle-catalog': 'toggleCatalog'
+    'click toggle-catalog': 'toggleCatalog',
+    'click showsection-*': 'showSection'
 };
 
 exports.handlers = {
@@ -20,6 +21,10 @@ exports.handlers = {
 
     toggleCatalog: function() {
         $(this.module.$('course-side-catalog')).toggleClass('collapse');
+    },
+    showSection: function(id, events, element) {
+        var chapterId = element.getAttribute('data-chapter-id');
+        this.module.dispatch('showSection', { sectionId: id, chapterId: chapterId });
     }
 };
 

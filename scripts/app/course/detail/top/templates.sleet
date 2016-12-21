@@ -25,7 +25,7 @@ view('player-title')
 
 
 view('player')
-    div 播放器
+    div(data-dynamic-key=state.code) |sfdasfsdf
 
 view('chapter')
     .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right
@@ -49,7 +49,7 @@ view('chapter')
                                 .item.continue
                                     i.iconfont.icon-reload
                                     span.progress 58%
-                                    span 继续学习
+                                    span(id='showsection-'+id data-chapter-id=chapterId) 继续学习
                                 .item.record
                                     i.iconfont.icon-time + | 学习记录
 
@@ -75,4 +75,3 @@ view('note')
                     .bottom > .text-right
                         .item(id='note-item-edit-'+i) > i.iconfont.icon-edit + | 编辑
                         .item > i.iconfont.icon-close-circle + | 删除
-    

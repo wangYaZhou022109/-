@@ -1,0 +1,32 @@
+#! handlebars
+module
+    div(data-region='toolbar')
+    div(data-region='viewer')
+
+view('toolbar')
+    .row
+    .hr
+        .col-sm-12
+            .col-sm-6
+                .icon.pe-7s-angle-left-circle.pe-3x.m-right#turnToPage-prev
+                .icon.pe-7s-angle-right-circle.pe-3x#turnToPage-next
+                input.input#currentPageNum(value=state.pageNum)
+                echo('/')
+                label#pageCount > echo(state.pageCount)
+            .col-sm-6
+                .col-sm-3
+                    .btn#zoom-out -
+                    .btn#zoom-in +
+                .col-sm-3
+                    select.input(id='scaleSelect')
+                        each(pdfScale)
+                            option(value = key)('selected')&if(selected) > echo(value)
+view('viewer')
+    .row
+    .hr
+        .col-sm-12 > .text-center
+            #progress.btn
+            .br
+            label#progressLabel
+        .col-sm-12 > .text-center
+            canvas#viewPdf
