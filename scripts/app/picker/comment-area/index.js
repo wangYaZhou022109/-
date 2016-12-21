@@ -1,42 +1,68 @@
+var D = require('drizzlejs');
+
 exports.items = {
-    'add-comment': 'add-comment',
-    'comment-list': 'comment-list'
+    main: 'main'
 };
 
 exports.store = {
     models: {
-        comments: { url: '../system/comment/list/', autoLoad: 'after' },
-        comment: { url: '../system/comment' },
+        comments: { url: '../system/comment', root: 'items', type: 'pageable' },
+        comment: { url: '' },
         reply: { url: '../system/comment/reply' },
-        businessModel: { data: {} }
+        state: {}
     },
     callbacks: {
         init: function(payload) {
-            var businessId = payload.businessId;
-            this.models.comments.set({ id: businessId });
-            this.models.businessModel.data.businessId = businessId;
+            var businessId = payload.businessId,
+                businessType = payload.businessType,
+                comments = this.models.comments,
+                state = this.models.state;
+            state.data.businessId = businessId;
+            state.data.businessType = businessType;
+            comments.params = { businessId: businessId };
+            this.get(comments);
+        },
+        setTop: function(payload) {
+            var comment = this.models.comment;
+            comment.options.url = '../system/comment/top';
+            comment.set(payload);
+            return this.save(comment);
+        },
+        setEssence: function(payload) {
+            var comment = this.models.comment;
+            comment.options.url = '../system/comment/essence';
+            comment.set(payload);
+            return this.save(comment);
+        },
+        hideComment: function(payload) {
+            var comment = this.models.comment;
+            comment.options.url = '../system/comment/hide';
+            comment.set(payload);
+            return this.save(comment);
+        },
+        delComment: function(payload) {
+            var comment = this.models.comment;
+            comment.options.url = '../system/comment';
+            comment.set(payload);
+            return this.del(comment);
+        },
+        addComment: function(payload) {
+            var comment = this.models.comment,
+                state = this.models.state;
+            comment.options.url = '../system/comment';
+            comment.set(payload);
+            D.assign(comment.data, state.data);
+            return this.save(comment);
         },
         addReply: function(payload) {
             var reply = this.models.reply,
                 comments = this.models.comments,
-                businessModel = this.models.businessModel,
+                state = this.models.state,
                 me = this;
             reply.set(payload);
             me.save(reply).then(function() {
                 me.app.message.success('操作成功');
-                comments.set({ id: businessModel.data.businessId });
-                me.get(comments);
-            });
-        },
-        addComment: function(payload) {
-            var comment = this.models.comment,
-                comments = this.models.comments,
-                businessModel = this.models.businessModel,
-                me = this;
-            comment.set(payload);
-            me.save(comment).then(function() {
-                me.app.message.success('操作成功');
-                comments.set({ id: businessModel.data.businessId });
+                comments.set({ id: state.data.businessId });
                 me.get(comments);
             });
         }

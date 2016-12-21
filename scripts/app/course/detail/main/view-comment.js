@@ -1,11 +1,20 @@
-var $ = require('jquery');
-
-exports.events = {
-    'click reply-*': 'showReply'
+exports.bindings = {
+    course: false
 };
 
-exports.handlers = {
-    showReply: function(id) {
-        $(this.$('reply-content-' + id)).addClass('show');
+exports.components = [
+    function() {
+        var courseId = this.bindings.course.data.id;
+        var obj = {
+            id: 'comment-area',
+            name: 'picker',
+            options: {
+                picker: 'comment-area',
+                componentId: 'comment-area',
+                businessId: courseId,
+                businessType: 1
+            }
+        };
+        return obj;
     }
-};
+];
