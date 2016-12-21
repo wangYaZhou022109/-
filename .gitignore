@@ -6,3 +6,4 @@ bundle
 *.hbs
 .sass-cache
 .DS_Store
+yarn.lock
