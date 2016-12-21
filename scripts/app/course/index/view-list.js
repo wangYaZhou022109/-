@@ -39,3 +39,7 @@ exports.dataForTemplate = {
         };
     }
 };
+
+exports.components = [{
+    id: 'pager', name: 'pager', options: { model: 'subjects' }
+}];

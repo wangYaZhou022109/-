@@ -96,10 +96,4 @@ view('list')
                         .item(title='学习人数') > i.iconfont.icon-user + echo(studyMemberCount) + | 人
                         .item(title='学分') > i.iconfont.icon-star + echo(credit) + | 分
 
-    .pagination > ul
-        li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
-        li.hover-main-color.active.bg-main-color 1
-        li.hover-main-color 2
-        li.hover-main-color 3
-        li.hover-main-color 4
-        li.hover-main-color > i.iconfont.icon-arrow-right.scale-1
+        #pager.pagination
