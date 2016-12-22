@@ -1,0 +1,12 @@
+#!handlebars
+
+module > .exam-index-main > .container
+    section.section(data-region='info')
+    section.section(data-region='list')
+
+view('info')
+    .h3 考前须知
+    .exam-info-detail 注意事项：下面说道的有很多的事情需要你们知道
+
+view('list')
+    div 这里就是列表

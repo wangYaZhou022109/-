@@ -1,0 +1,13 @@
+#!handlebars
+
+module > .page-side > .container
+    section.section.topic(data-region='topic')
+    section.section.student(data-region='student')
+
+view('topic')
+    .h3 相关话题
+    .layout-mt-small 加载中...
+
+view('student')
+    .h3 TA们也参加了考试
+    .layout-mt-small 加载中...

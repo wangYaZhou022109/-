@@ -23,4 +23,3 @@ view('course')
 view('student')
     .h3 最近TA们也学过
     .layout-mt-small 内容...
-    

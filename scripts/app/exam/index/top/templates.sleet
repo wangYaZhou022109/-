@@ -1,0 +1,21 @@
+#!handlebars
+
+module > .exam-page-top
+    .top-bg(data-region='bg')
+    .container.clearfix
+        .exam-top-img(data-region='img')
+        .exam-top-detail(data-region='detail')
+
+view('bg')
+    .img-bg(style='background-image:url(http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif)')
+
+
+view('img')
+    img(src='http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif')
+
+view('detail')
+    .detail-top.clearfix
+        .pull-left > .clearfix
+            h3  新员工入职培训考试
+                small > i.iconfont.icon-star + i.iconfont.icon-time
+        .pull-right

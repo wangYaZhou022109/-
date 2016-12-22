@@ -67,7 +67,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'course', 'activity', 'study-subject']
+    routers: ['', 'home', 'course', 'activity', 'study-subject', 'exam']
 });
 
 

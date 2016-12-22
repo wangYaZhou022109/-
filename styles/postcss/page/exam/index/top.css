@@ -1,0 +1,45 @@
+.exam-page{
+    & .top{
+        & .exam-page-top{
+            position: relative;
+            & .top-bg{
+                background: var(--black;);
+                height: calc(var(--space)*33);
+                overflow: hidden;
+
+                & .img-bg{
+                    background-position: 0 -873px;
+                    background-size: 100% auto;
+                    height: calc(var(--space)*33);
+                    width: 100%;
+                    opacity: 0.3;
+                    filter: Alpha(opacity=30);
+                    -moz-opacity:0.3;
+
+                }
+            }
+            & .container{
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding-top: calc(var(--large-space)*2);
+                width: 95%;
+
+                & .exam-top-img{
+                    float: left;
+                    width: 34%;
+                    & img{
+                        width: calc(var(--large-space)*10);
+                        height: calc(var(--large-space)*7.5);
+                        border: var(--space) solid white;
+                    }
+                }
+                & .exam-top-detail{
+                    float: left;
+                    width: 64%;
+                    color: white;
+                }
+            }
+        }
+    }
+}

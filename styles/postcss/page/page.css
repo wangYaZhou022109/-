@@ -2,4 +2,5 @@
 @import "home/home.css";
 @import "course/course.css";
 @import "study-subject/study-subject.css";
-@import "activity/activity.css"
+@import "activity/activity.css";
+@import "exam/exam.css";
