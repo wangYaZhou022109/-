@@ -64,7 +64,7 @@ exports.store = {
                 course = this.models.course,
                 sectionType;
             section.set(course.findSectionByIds(chapterId, sectionId));
-            sectionType = this.models.courseChapterSection.data.sectionType;
+            sectionType = this.models.section.data.sectionType;
             this.models.state.set({
                 code: dynamicCode[sectionType]
             });
