@@ -53,7 +53,7 @@ exports.beforeRender = function() {
 
 exports.mixin = {
     getData: function() {
-        var pdf = this.module.items.viewer.components.viewPdf;
+        var pdf = this.items.viewer.components.viewPdf;
         return pdf;
     }
 };

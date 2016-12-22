@@ -22,10 +22,11 @@ exports.beforeRender = function() {
     this.dispatch('init', this.renderOptions);
 };
 
-// exports.mixin = {
-//     getData: function() {
-//         var progress = this.store.models.courseSectionStudyProgress.data,
-//             pdfView = this.items.content.components.pdf.getData();
-//         return progress;
-//     }
-// };
+exports.mixin = {
+    getData: function() {
+        var progress = this.store.models.courseSectionStudyProgress.data,
+            pdfView = this.items.content.components.viewPdf.getData();
+        progress.lessonLocation = pdfView.pageNum;
+        return progress;
+    }
+};

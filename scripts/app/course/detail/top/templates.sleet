@@ -7,7 +7,7 @@ module
             .course-note(data-region='note')
         .player-wrapper
             .player-title-row(data-region='player-title')
-            .player-content(data-region='player')
+            .player-content(data-region='player' style='overflow:auto;')
 
 
 view('player-title')
@@ -25,7 +25,7 @@ view('player-title')
 
 
 view('player')
-    div(data-dynamic-key=state.code) |sfdasfsdf
+    div(data-dynamic-key=state.code)
 
 view('chapter')
     .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right
