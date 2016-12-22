@@ -138,7 +138,7 @@
             }
             & .catalog-view-list{
                 & h4{
-                    border-left: var(--space) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
+                    border-left: calc(var(--space)/2) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
                 }
                 & .clearfix{
                     margin-bottom: var(--large-space);
