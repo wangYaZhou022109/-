@@ -22,7 +22,7 @@ view('banner')
                         | 已有
                         strong 316
                         | 人参加
-                    .btn 我要参与
+                    a.normal(href='#/exam/detail') > .btn.radius 我要参与
         li.current
             .content
                 .covers
@@ -38,7 +38,7 @@ view('banner')
                         | 已有
                         strong 1052
                         | 人参加
-                    .btn 我要参与
+                    a.normal(href='#/live/detail') > .btn.radius 我要参与
         li.next
             .content
                 .covers
@@ -54,7 +54,7 @@ view('banner')
                         | 已有
                         strong 518
                         | 人参加
-                    .btn 我要参与
+                    a.normal(href='#/survey/detail') > .btn.radius 我要参与
 
 view('filter')
     .container
@@ -78,8 +78,12 @@ view('list')
         ul
             li
                 .content
-                    .img > .img-cont
-                        img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
+                    .img
+                        .img-cont
+                            a.normal(href='#/exam/detail') > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
+                        .detail-wrapper
+                            p 本课程主讲教师将通过对繁杂的历史现象条分缕析、去芜存菁的梳理，呈现清晰的历史画面，以各种珍贵的历史图片、视频等。
+                            a.normal.block(href='#/exam/detail') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习
@@ -87,14 +91,15 @@ view('list')
                     .bottom
                         .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
                         | 起至时间
-                    .detail-wrapper
-                        p 本课程主讲教师将通过对繁杂的历史现象条分缕析、去芜存菁的梳理，呈现清晰的历史画面，以各种珍贵的历史图片、视频等。
-                        .btn.block 我要参与
                     .list-tag.custom-color-1 > .tag > span 考试
             li
                 .content
-                    .img > .img-cont
-                        img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
+                    .img
+                        .img-cont
+                            a.normal(href='#/live/detail') > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
+                        .detail-wrapper
+                            p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
+                            a.normal.block(href='#/live/detail') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习
@@ -102,14 +107,15 @@ view('list')
                     .bottom
                         .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
                         | 起至时间
-                    .detail-wrapper
-                        p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
-                        .btn.block 我要参与
                     .list-tag.custom-color-2 > .tag > span 直播
             li
                 .content
-                    .img > .img-cont
-                        img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
+                    .img
+                        .img-cont
+                            a.normal(href='#/survey/detail') > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
+                        .detail-wrapper
+                            p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
+                            a.normal.block(href='#/survey/detail') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习
@@ -117,14 +123,15 @@ view('list')
                     .bottom
                         .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
                         | 起至时间
-                    .detail-wrapper
-                        p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
-                        .btn.block 我要参与
                     .list-tag.custom-color-3 > .tag > span 调研
             li
                 .content
-                    .img > .img-cont
-                        img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
+                    .img
+                        .img-cont
+                            a.normal(href='#/class/detail') > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
+                        .detail-wrapper
+                            p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
+                            a.normal.block(href='#/class/detail') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习
@@ -132,9 +139,6 @@ view('list')
                     .bottom
                         .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
                         | 起至时间
-                    .detail-wrapper
-                        p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
-                        .btn.block 我要参与
                     .list-tag.custom-color-4 > .tag > span 班级
     .pagination
         ul
