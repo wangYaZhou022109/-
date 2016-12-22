@@ -7,7 +7,7 @@ module
             .course-note(data-region='note')
         .player-wrapper
             .player-title-row(data-region='player-title')
-            .player-content(data-region='player')
+            .player-content(data-region='player' style='overflow:auto;')
 
 
 view('player-title')

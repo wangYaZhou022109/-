@@ -61,10 +61,12 @@ exports.store = {
                 state = this.models.state,
                 chapterId = payload.chapterId,
                 sectionId = payload.sectionId,
-                course = this.models.course;
+                course = this.models.course,
+                sectionType;
             section.set(course.findSectionByIds(chapterId, sectionId));
-            state.set({
-                code: dynamicCode[section.data.sectionType]
+            sectionType = this.models.courseChapterSection.data.sectionType;
+            this.models.state.set({
+                code: dynamicCode[sectionType]
             });
             state.changed();
         },

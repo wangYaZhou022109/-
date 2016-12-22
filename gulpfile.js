@@ -28,7 +28,7 @@ var fs = require('fs'),
 
 var libs = [
         'jquery', 'handlebars/runtime', 'lodash/collection', 'lodash/object', 'drizzlejs',
-
+        'selectize',
         './vendors/alertify',
         './vendors/upload/plupload.min',
         './vendors/upload/jquery.plupload.queue.min',

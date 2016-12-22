@@ -4,4 +4,4 @@ module
     div(data-region='content')
 
 view('content')
-    .col-sm-12 > #viewPdf
+    .row > #viewPdf
