@@ -1,5 +1,9 @@
 var $ = require('jquery');
 
+exports.bindings = {
+    activitys: true
+};
+
 exports.events = {
     'click category-item-*': 'toggleItem'
 };
