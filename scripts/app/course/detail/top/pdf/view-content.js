@@ -6,8 +6,8 @@ exports.bindings = {
 
 exports.components = [
     function() {
-        var section = this.bindings.courseChapterSection.data || {},
-            progress = this.bindings.courseSectionStudyProgress.data || {},
+        var section = this.bindings.section.data || {},
+            progress = this.bindings.sectionProgress.data || {},
             pageNum,
             pdfUrl;
         if (progress.lessonLocation) {

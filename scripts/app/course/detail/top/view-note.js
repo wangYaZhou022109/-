@@ -2,16 +2,22 @@ var $ = require('jquery'),
     _ = require('lodash/collection');
 
 exports.bindings = {
-    notes: true
+    notes: true,
+    course: false
 };
 
 exports.events = {
     'click cancel-edit-item-*': 'cancelEditItem',
     'click note-item-edit-*': 'editNoteItem',
     'click close-note': 'hideNote',
-    'click add-note': 'editNote',
+    'click note-content': 'noteContent',
     'click cancel-edit': 'cancelEdit',
     'click note-item-*': 'showNoteItem'
+};
+
+exports.actions = {
+    'click add-note': 'addNote',
+    'click remove-note*': 'removeNote'
 };
 
 exports.handlers = {
@@ -19,7 +25,7 @@ exports.handlers = {
         $(this.module.$('course-side-catalog')).removeClass('show-note');
     },
 
-    editNote: function(id, e) {
+    noteContent: function(id, e) {
         $(e).parent().addClass('editing');
     },
 
@@ -48,6 +54,28 @@ exports.handlers = {
         e.preventDefault();
 
         $(this.$('note-item-' + id)).removeClass('editing').siblings().removeClass('fade');
+    }
+};
+
+exports.dataForActions = {
+    addNote: function(payload) {
+        return payload;
+    }
+};
+exports.dataForActions = {
+    removeNote: function(payload) {
+        return payload;
+    }
+};
+
+exports.actionCallbacks = {
+    addNote: function() {
+        this.app.message.success('添加成功');
+        this.module.dispatch('initNotes');
+    },
+    removeNote: function() {
+        this.app.message.success('删除成功');
+        this.module.dispatch('initNotes');
     }
 };
 

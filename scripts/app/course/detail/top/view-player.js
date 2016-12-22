@@ -2,8 +2,8 @@ exports.type = 'dynamic';
 
 exports.bindings = {
     state: true,
-    courseChapterSection: false,
-    courseSectionStudyProgress: false
+    section: false,
+    sectionProgress: false
 };
 
 exports.getEntityModuleName = function(key) {
@@ -12,8 +12,8 @@ exports.getEntityModuleName = function(key) {
 
 exports.getEntity = function() {
     return {
-        courseChapterSection: this.bindings.courseChapterSection.data,
-        courseSectionStudyProgress: this.bindings.courseSectionStudyProgress.data
+        section: this.bindings.section.data,
+        sectionProgress: this.bindings.sectionProgress.data
     };
 };
 

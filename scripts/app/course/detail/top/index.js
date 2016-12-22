@@ -1,7 +1,7 @@
 var _ = require('lodash/collection'),
     dynamicCode = {
         1: 'pdf',
-        5: 'mp3',
+        5: 'audio',
         6: 'video'
     };
 
@@ -30,39 +30,74 @@ exports.store = {
                 }
             }
         },
-        note: {
-            url: '../course-study/course-front/course-note'
-        },
-        notes: {
-            url: '../course-study/course-front/course-notes'
-        },
-        courseChapterSection: {},
-        courseSectionStudyProgress: {},
+        section: {},
+        sectionProgress: {},
+        note: { url: '../course-study/course-front/course-note' },
+        notes: { url: '../course-study/course-front/course-notes' },
+        register: { url: '../course-study/course-front/register' },
+        collect: { url: '../system/collect' },
         state: {}
     },
     callbacks: {
         init: function(payload) {
             var course = this.models.course,
-                notes = this.models.notes;
+                notes = this.models.notes,
+                state = this.models.state;
             course.set({
                 id: payload.courseId
             });
             notes.params = {
                 courseId: payload.courseId
             };
+            state.data.code = 'audio';
             return this.chain(this.get(course), this.get(notes));
         },
+        initNotes: function() {
+            var notes = this.models.notes;
+            return this.get(notes);
+        },
         showSection: function(payload) {
-            var chapterId = payload.chapterId,
+            var section = this.models.section,
+                state = this.models.state,
+                chapterId = payload.chapterId,
                 sectionId = payload.sectionId,
-                course = this.models.course,
-                sectionType;
-            this.models.courseChapterSection.set(course.findSectionByIds(chapterId, sectionId));
-            sectionType = this.models.courseChapterSection.sectionType;
-            this.models.state.set({
-                code: dynamicCode[sectionType]
+                course = this.models.course;
+            section.set(course.findSectionByIds(chapterId, sectionId));
+            state.set({
+                code: dynamicCode[section.data.sectionType]
             });
-            this.models.state.changed();
+            state.changed();
+        },
+        register: function() {
+            var courseId = this.models.course.data.id,
+                register = this.models.register;
+            register.data = { courseId: courseId };
+            return this.save(register);
+        },
+        collect: function() {
+            var courseId = this.models.course.data.id,
+                courseName = this.models.course.data.name,
+                collect = this.models.collect;
+            collect.clear();
+            collect.data.businessId = courseId;
+            collect.data.businessType = 1;
+            collect.data.collectName = courseName;
+            return this.save(collect);
+        },
+        cancelCollect: function(payload) {
+            var collect = this.models.collect;
+            collect.set(payload);
+            return this.del(collect);
+        },
+        addNote: function(payload) {
+            var note = this.models.note;
+            note.set(payload);
+            return this.save(note);
+        },
+        removeNote: function(payload) {
+            var note = this.models.note;
+            note.set(payload);
+            return this.del(note);
         }
     }
 };

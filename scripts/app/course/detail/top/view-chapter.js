@@ -31,18 +31,14 @@ exports.handlers = {
 exports.dataForTemplate = {
     course: function(data) {
         var course = data.course;
-        if (course.addType === 1) {
-            course.courseChapters = course.courseChapters[0];
-        } else if (course.addType === 2) {
-            _.forEach(course.courseChapters, function(item, i) {
-                var r = item;
-                r.seq = courseUtil.seqName(i, 1);
-                _.forEach(r.courseChapterSections, function(obj, j) {
-                    var rr = obj;
-                    rr.seq = courseUtil.seqName(j, 2);
-                });
+        _.forEach(course.courseChapters, function(item, i) {
+            var r = item;
+            r.seq = courseUtil.seqName(i, 1);
+            _.forEach(r.courseChapterSections, function(obj, j) {
+                var rr = obj;
+                rr.seq = courseUtil.seqName(j, 2);
             });
-        }
+        });
         return data.course;
     }
 };

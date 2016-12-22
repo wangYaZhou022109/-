@@ -4,16 +4,16 @@ exports.items = {
 
 exports.store = {
     models: {
-        courseChapterSection: {},
-        courseSectionStudyProgress: {},
+        section: {},
+        sectionProgress: {},
         download: {
             url: '../human/file/download'
         }
     },
     callbacks: {
         init: function(options) {
-            this.models.courseChapterSection.set(options.courseChapterSection);
-            this.models.courseSectionStudyProgress.set(options.courseSectionStudyProgress);
+            this.models.section.set(options.section);
+            this.models.sectionProgress.set(options.sectionProgress);
         }
     }
 };
