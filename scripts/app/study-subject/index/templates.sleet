@@ -1,6 +1,6 @@
 #!handlebars
 
-module > .study-subject-page
+module > .course-page.study-subject-page
     .top.top-bg-img.bg-main-color(data-region='top')
     .main > .container > .study-subject-list(data-region='list')
 
