@@ -1,2 +1,4 @@
-@import "top.css";
-@import "list.css";
+@import "index/top.css";
+@import "detail/main.css";
+@import "detail/album.css";
+@import "detail/side.css";

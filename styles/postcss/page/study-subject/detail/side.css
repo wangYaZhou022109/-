@@ -1,0 +1,77 @@
+.page-side {
+    & .download .text-overflow {
+        width: 70%;
+    }
+    & .relevant-topic .sub-title {
+        padding: var(--space);
+    }
+
+    & .side-reload {
+        float: right;
+        cursor: pointer;
+        font-size: var(--small-font);
+        @apply --transition;
+
+        &:hover {
+            opacity: .6;
+            filter: alpha(opacity=60);
+        }
+    }
+
+    & .relevant-course {
+        & .img {
+            margin-bottom: var(--large-space);
+            height: 18em;
+            & img {
+                max-width: 26em;
+            }
+            &:hover {
+                & img {
+                    transform: scale(1.1);
+                }
+            }
+
+            & h4 {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: 0;
+                font-weight: 500;
+                padding: calc(var(--large-space) / 2) var(--space);
+            }
+        }
+    }
+
+    & .side-more {
+        display: inline-block;
+        cursor: pointer;
+        font-size: calc(var(--font-size) * .6);
+    }
+
+    & .side-rank-list {
+        padding-top: var(--large-space);
+        & li {
+            @apply --clearfix;
+            margin-bottom: var(--bar-gap);
+            height: var(--large-space);
+            line-height: var(--large-space);
+
+            &:before {
+                margin-right: var(--space);
+                counter-increment: section;
+                content: counter(section);
+                font-weight: bold;
+                width: var(--large-space);
+                height: var(--large-space);
+                float: left;
+                text-align: center;
+            }
+        }
+
+        & .text-overflow {
+            max-width: 30%;
+            font-weight: 700;
+        }
+    }
+}
