@@ -21,6 +21,7 @@
         &:before {
             background-color: var(--custom-color-4);
         }
+        
         & .catalog-state {
             &:after {
                 border-right-color: var(--bg-color-2);
