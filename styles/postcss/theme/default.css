@@ -19,6 +19,7 @@
     --fade-color: rgba(255, 255, 255, .2);
 
     --bg-color: #f9f9f9;
+    --bg-color-2: #eee;
 
     --black: #000;
     --white: #fff;
@@ -162,5 +163,24 @@
 
     &::after {
         border-left-color: currentColor;
+    }
+}
+.page-side {
+    & .side-rank-list {
+        & li:before {
+            background-color:var(--bg-color-2);
+        }
+    }
+    & .relevant-course {
+        & .img {
+            & h4 {
+                color: var(--white);
+                background-color: var(--black)\0;
+                background-color: color(var(--black) alpha(20%));
+            }
+        }
+    }
+    & .side-more {
+        color: var(--font-tip-color);
     }
 }

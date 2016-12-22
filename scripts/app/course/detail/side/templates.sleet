@@ -22,4 +22,14 @@ view('course')
 
 view('student')
     .h3 最近TA们也学过
-    .layout-mt-small 内容...
+
+    .layout-mt-small.user-picture
+        .grid-row
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')
+            .col-md-3 > img.block(src='images/2.jpeg')

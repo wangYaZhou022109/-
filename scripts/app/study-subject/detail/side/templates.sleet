@@ -1,0 +1,108 @@
+#!handlebars
+
+module > .page-side > .container
+    section.section.notice(data-region='notice')
+    section.section.download(data-region='download')
+    section.section.relevant-topic(data-region='topic')
+    section.section.relevant-course(data-region='course')
+    section.section.rank(data-region='rank')
+
+view('notice')
+    .h3 公告
+    .layout-mt-small > p 本课程主讲教师将通过对繁杂的历史现象条分缕析、去芜存菁的梳理，呈现清晰的历史画面，以各种珍贵的历史图片、视频等。
+
+view('download')
+    .h3 资料下载区
+    .layout-mt-small
+        .block.layout-mt-small
+            .pull-right
+                a(href='javascript:;') 查看
+                a(href='javascript:;') 下载
+            .text-overflow(title='零基础直达A1西班牙零基础直达A1西班牙语.doc') 零基础直达A1西班牙零基础直达A1西班牙语.doc
+
+        .block.layout-mt-small
+            .pull-right
+                a(href='javascript:;') 查看
+                a(href='javascript:;') 下载
+            .text-overflow(title='醒职场思维力系列课程.doc') 醒职场思维力系列课程.doc
+
+view('topic')
+    .h3 相关话题
+    .layout-mt-small
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题一
+        .inline-block.m-right.m-bottom.bg-white.sub-title 科学教育
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题区域经济学
+        .inline-block.m-right.m-bottom.bg-white.sub-title 生活方式
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题二
+        .inline-block.m-right.m-bottom.bg-white.sub-title 企业管企业管理理
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题三
+
+view('course')
+    .h3
+        .side-reload.sub-title > i.iconfont.icon-reload + | 换一组
+        | 相关课程
+    .layout-mt-small
+        .img
+            a.normal(href='#/course/detail')
+                .img-cont > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='市场从业者必学的互联网思维')
+            h4.text-overflow(title='市场从业者必学的互联网思维') 市场从业者必学的互联网思维
+        .img
+            a.normal(href='#/course/detail')
+                .img-cont > img(src='http://img.ui.cn/data/file/0/2/7/751720.jpg' alt='传统企业如何走好电子商务之路传统企业如何走好电子商务之路')
+            h4.text-overflow(title='传统企业如何走好电子商务之路传统企业如何走好电子商务之路') 传统企业如何走好电子商务之路传统企业如何走好电子商务之路
+
+view('rank')
+    .h3 排行榜
+        span.side-more MORE >>
+    .layout-mt-smal.side-rank-list
+        ul
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='张三丰张三丰张三丰张三丰张三丰') 张三丰张三丰张三丰张三丰张三丰
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='杨峰') 杨峰
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='王元波') 王元波
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='卢正华') 卢正华
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='黄大仙') 黄大仙
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='李小龙') 李小龙
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='龙朝阳') 龙朝阳
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='刘小牛') 刘小牛
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='谢长天') 谢长天
+            li
+                .pull-right.sub-text
+                    | 累积学习时长：
+                    strong 123分钟
+                .inline-block.text-overflow(title='陈浩南') 陈浩南
