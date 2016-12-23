@@ -2,7 +2,6 @@
     & .activity-filter {
         padding-top: var(--large-space);
         padding-bottom: var(--large-space);
-        background-color: color(var(--sub-color-1) alpha(80%));
     }
 
     & .activity-tabs {
@@ -16,15 +15,12 @@
             width: 25%;
             text-align: center;
             font-size: var(--h4);
-            color: var(--white);
             cursor: pointer;
             transition: all .2s linear;
 
             &.active {
                 color: var(--white);
                 border-radius: var(--search-bar-height);
-                background-color: var(--bg-color)\0;
-                background-color: rgba(255,255,255,.3);
             }
         }
     }

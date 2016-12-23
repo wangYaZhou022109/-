@@ -1,6 +1,5 @@
 .activity-banner {
     width: 100%;
-    background-color: var(--sub-color-1);
 
     & img {
         max-width: inherit;
@@ -8,8 +7,19 @@
         height: 100%;
     }
 
+    & .bg-img {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: calc(var(--large-space) * 15);
+        opacity: .3;
+        filter: alpha(opacity=30);
+        background-size: cover;
+    }
+
     & .container {
         position: relative;
+        z-index: 10;
         overflow: hidden;
         height: calc(var(--large-space) * 15);
     }
@@ -21,8 +31,6 @@
         display: inline-block;
         width: 30%;
         padding: calc(var(--large-space) * 0.5);
-        background-color: var(--bg-color)\0;
-        background-color: color(var(--bg-color) alpha(5%));
 
         & .img {
             height: calc(var(--large-space) * 10);
@@ -48,7 +56,6 @@
         top: var(--large-space);
         width: 60%;
         padding: calc(var(--large-space) * 0.75);
-        background-color: var(--white);
 
         & .covers {
             position: relative;
@@ -79,13 +86,12 @@
     }
 
     & .time {
-        color: var(--font-tip-color);
-        border-bottom: 1px var(--border-color) solid;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
     }
 
     & .information {
         margin: calc(var(--large-space) * 0.5) 0;
-        color: var(--font-tip-color);
         line-height: calc(var(--font-size) * 2);
         height: calc(var(--large-space) * 2);
         overflow: hidden;
