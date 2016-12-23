@@ -1,0 +1,14 @@
+#! handlebars
+
+module > .relevant-topic(data-region='pannel')
+
+view('pannel')
+    .h3 相关话题
+    .layout-mt-small
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题一
+        .inline-block.m-right.m-bottom.bg-white.sub-title 科学教育
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题区域经济学
+        .inline-block.m-right.m-bottom.bg-white.sub-title 生活方式
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题二
+        .inline-block.m-right.m-bottom.bg-white.sub-title 企业管企业管理理
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题三

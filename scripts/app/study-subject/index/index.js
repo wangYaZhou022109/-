@@ -15,7 +15,8 @@ exports.store = {
         search: {
             data: {
                 orderBy: '1',
-                order: 2
+                order: 2,
+                top: 'top'
             }
         },
         download: {

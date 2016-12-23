@@ -15,7 +15,8 @@ var strings = {
     add: '新增',
     save: '保存',
     search: '搜索',
-    'no-data': '没有数据'
+    'no-data': '没有数据',
+    download: '下载'
 };
 
 var ss = D.assign({}, strings, subject);

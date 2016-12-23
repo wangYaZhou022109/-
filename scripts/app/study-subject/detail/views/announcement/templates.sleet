@@ -1,0 +1,7 @@
+#! handlebars
+
+module > .notice(data-region='pannel')
+
+view('pannel')
+    .h3 > echo(region.regionModule.name)
+    .layout-mt-small > p > echo(region.regionModule.contentValue)

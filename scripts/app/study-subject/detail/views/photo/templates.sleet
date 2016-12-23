@@ -1,0 +1,16 @@
+#! handlebars
+
+module > div(data-region='pannel')
+
+view('pannel')
+    .h3 相册
+    #album.swiper-container
+        .swiper-wrapper
+            .swiper-slide > img(src='images/d1.jpg' alt='相片描述')
+            .swiper-slide > img(src='images/d2.jpg' alt='相片描述')
+            .swiper-slide > img(src='images/d3.jpg' alt='相片描述')
+            .swiper-slide > img(src='images/d4.jpg' alt='相片描述')
+            .swiper-slide > img(src='images/d5.jpg' alt='相片描述')
+
+        .swiper-button-prev(title='向左翻') > .iconfont.icon-arrow-left
+        .swiper-button-next(title='向右翻') > .iconfont.icon-arrow-right
