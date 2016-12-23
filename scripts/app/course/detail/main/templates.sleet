@@ -7,7 +7,10 @@ module > .course-detail-main.page-main > .container
 view('info')
     .title-row
         .inline-block.layout-mr > .h3 > echo(course.name)
-        .inline-block.layout-mr > .star-bar > .star(style='width:80%') + .num 8.0
+        .inline-block.layout-mr
+            .star-wrapper
+                .star-bar > .star(style='width:50%')
+                .num 4.0
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > i.iconfont.icon-share
             .inline-block.m-left > i.iconfont.icon-favorite

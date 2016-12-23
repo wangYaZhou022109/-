@@ -14,19 +14,26 @@ view('player-title')
     .clearfix
         .pull-left
             .common-title.inline-block > echo(course.name)
-            .inline-block.star-bar
-                if(course.addType)
-                    if(course.avgScore)
-                        .star(style='width:'+course.scorePercent+'%') + .num > echo(course.avgScore)
-                    else
-                        .star(style='width:0%') + .num 暂无评分
+            .inline-block
+                .star-wrapper.drop-down-wrapper
+                    .star-bar > .star(style='width:'+course.scorePercent+'%')
+                    .num > echo(course.avgScore)
+                    .drop-down-content > .content
+                        .text-center 我来评分
+                        .star-grade
+                            .item(title='1星') > i.iconfont.icon-star-full
+                            .item(title='2星') > i.iconfont.icon-star-full
+                            .item(title='3星') > i.iconfont.icon-star-full
+                            .item(title='4星') > i.iconfont.icon-star-full
+                            .item(title='5星') > i.iconfont.icon-star-full
+                        .block.btn 提交评分
         .text-right.share-bar
             .item
                 i.iconfont.icon-share
                 span 分享
             if(course.collectId)
                 .item
-                    i.iconfont.icon-favorite
+                    i.iconfont.icon-favorite-full
                     span#cancel-collect(data-name='id' data-value=course.collectId) 取消收藏
             else
                 .item

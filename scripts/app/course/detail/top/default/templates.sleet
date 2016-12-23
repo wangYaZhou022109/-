@@ -4,4 +4,4 @@ module
     div(data-region='main')
 
 view('main')
-    div(style = 'width: 800px') 哈哈
+    .player-start-btn > .btn 我要学习
