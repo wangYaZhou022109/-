@@ -16,7 +16,7 @@ exports.store = {
         params: { data: { isOverdue: false } }
     },
     callbacks: {
-        init: function(payload) {
+        init: function() {
             this.models.activitys.params = this.models.params.data;
             this.get(this.models.activitys);
         },

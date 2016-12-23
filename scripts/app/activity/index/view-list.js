@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 exports.bindings = {
     activitys: true,
     params: true
@@ -5,7 +7,7 @@ exports.bindings = {
 
 exports.events = {
     'click category-item-*': 'toggleItem',
-    'click show-paper': 'showPaper'
+    'click show-paper-*': 'showPaper'
 };
 
 exports.handlers = {
@@ -13,7 +15,9 @@ exports.handlers = {
         var me = this;
         me.module.dispatch('search', { type: el });
     },
-    showPaper: function() {
+    showPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
     }
 };
 
