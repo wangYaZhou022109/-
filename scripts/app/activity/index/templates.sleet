@@ -59,87 +59,44 @@ view('banner')
 view('filter')
     .container
         .pull-right > .search-bar
-            input.input(placeholder='请输入您要找的活动')
-            i.iconfont.icon-search.scale-1.text-hover-mail-color
+            input.input(name='activity-name' placeholder='请输入您要找的活动' value=params.name)
+            i.iconfont.icon-search.scale-1.text-hover-mail-color#search
 
         .activity-tabs > ul
-            li.active(id='item-1') 精彩进行中
-            li(id='item-2') 往期回顾
-
+            compare(params.isOverdue 'eq' false)
+                li(id='item-1' class = 'active') 精彩进行中
+                li(id='item-2') 往期回顾
+            compare(params.isOverdue 'ne' false)
+                li(id='item-1') 精彩进行中
+                li(id='item-2' class = 'active') 往期回顾
 view('list')
     .container > .main-list
         .activity-category
-            a.active(id='category-item-1')(href='javascript:;') 全部
-            a(id='category-item-2' href='javascript:;') 班级
-            a(id='category-item-3' href='javascript:;') 考试
-            a(id='category-item-4' href='javascript:;') 调研
-            a(id='category-item-5' href='javascript:;') 直播
+            a(id='category-item-' href='javascript:;')(class ='active')&if(params.types.all) 全部
+            a(id='category-item-1' href='javascript:;')(class ='active')&if(params.types.class) 班级
+            a(id='category-item-3' href='javascript:;')(class ='active')&if(params.types.exam) 考试
+            a(id='category-item-6' href='javascript:;')(class ='active')&if(params.types.survey) 调研
+            a(id='category-item-2' href='javascript:;')(class ='active')&if(params.types.live) 直播
+            a(id='show-paper') 进行考试（测试）
 
-        ul
+        ul > each(activitys)
             li
                 .content
                     .img
                         .img-cont
                             a.normal(href='#/exam/detail') > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
                         .detail-wrapper
-                            p 本课程主讲教师将通过对繁杂的历史现象条分缕析、去芜存菁的梳理，呈现清晰的历史画面，以各种珍贵的历史图片、视频等。
+                            p > echo(description)
                             a.normal.block(href='#/exam/detail') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习
-                        .title.text-overflow 市场从业者必学的互联网思维
+                        .title.text-overflow > echo(name)
                     .bottom
-                        .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
+                        .pull-right > dateTime(startTime) + echo('~') + dateTime(startTime)
                         | 起至时间
-                    .list-tag.custom-color-1 > .tag > span 考试
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal(href='#/live/detail') > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
-                        .detail-wrapper
-                            p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
-                            a.normal.block(href='#/live/detail') > .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                            i.iconfont.icon-user + | 218人已学习
-                        .title.text-overflow 墙外的世界不一样的精彩
-                    .bottom
-                        .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
-                        | 起至时间
-                    .list-tag.custom-color-2 > .tag > span 直播
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal(href='#/survey/detail') > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
-                        .detail-wrapper
-                            p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
-                            a.normal.block(href='#/survey/detail') > .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                            i.iconfont.icon-user + | 218人已学习
-                        .title.text-overflow 墙外的世界不一样的精彩
-                    .bottom
-                        .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
-                        | 起至时间
-                    .list-tag.custom-color-3 > .tag > span 调研
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal(href='#/class/detail') > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='墙外的世界不一样的精彩')
-                        .detail-wrapper
-                            p 在线照片编辑器 在线制作闪图动画 闪图动画编辑器 让图片动起来,可多张照片做成闪图动画
-                            a.normal.block(href='#/class/detail') > .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                            i.iconfont.icon-user + | 218人已学习
-                        .title.text-overflow 墙外的世界不一样的精彩
-                    .bottom
-                        .pull-right 2016-10-25 09:00 ~ 2016-10-25 11:30
-                        | 起至时间
-                    .list-tag.custom-color-4 > .tag > span 班级
+                    .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+
     .pagination
         ul
             li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
