@@ -140,7 +140,7 @@
                     border-left: var(--space) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
                 }
                 & .clearfix{
-                    margin-bottom: var(--lage-space);
+                    margin-bottom: var(--large-space);
                     & .level-second{width: 10%;}
                     & .Level-three{
                         float: left; width: 90%;
