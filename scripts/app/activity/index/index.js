@@ -1,3 +1,4 @@
+var D = require('drizzlejs');
 exports.items = {
     banner: 'banner',
     filter: 'filter',
@@ -11,14 +12,18 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        activity: { url: '../exam/activity' }
+        activity: { url: '../exam/activity' },
+        params: { data: { isOverdue: false } }
     },
     callbacks: {
         init: function(payload) {
+            this.models.activitys.params = this.models.params.data;
             this.get(this.models.activitys);
         },
         search: function(payload) {
-            var data = payload;
+            var data = this.models.params.data;
+            D.assign(data, payload);
+            this.models.params.changed();
             this.models.activitys.params = data;
             this.get(this.models.activitys);
         }

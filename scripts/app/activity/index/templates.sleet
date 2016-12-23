@@ -59,23 +59,25 @@ view('banner')
 view('filter')
     .container
         .pull-right > .search-bar
-            input.input(name='activity-name' placeholder='请输入您要找的活动')
+            input.input(name='activity-name' placeholder='请输入您要找的活动' value=params.name)
             i.iconfont.icon-search.scale-1.text-hover-mail-color#search
 
         .activity-tabs > ul
-            li.active(id='item-1') 精彩进行中
-            li(id='item-2') 往期回顾
-
+            compare(params.isOverdue 'eq' false)
+                li(id='item-1' class = 'active') 精彩进行中
+                li(id='item-2') 往期回顾
+            compare(params.isOverdue 'ne' false)
+                li(id='item-1') 精彩进行中
+                li(id='item-2' class = 'active') 往期回顾
 view('list')
     .container > .main-list
         .activity-category
-            a.active(id='category-item-1')(href='javascript:;') 全部
-            a(id='category-item-2' href='javascript:;') 班级
-            a(id='category-item-3' href='javascript:;') 考试
-            a(id='category-item-4' href='javascript:;') 调研
-            a(id='category-item-5' href='javascript:;') 直播
+            a(id='category-item-' href='javascript:;')(class ='active')&if(params.types.all) 全部
+            a(id='category-item-1' href='javascript:;')(class ='active')&if(params.types.class) 班级
+            a(id='category-item-3' href='javascript:;')(class ='active')&if(params.types.exam) 考试
+            a(id='category-item-6' href='javascript:;')(class ='active')&if(params.types.survey) 调研
+            a(id='category-item-2' href='javascript:;')(class ='active')&if(params.types.live) 直播
             a(id='show-paper') 进行考试（测试）
-
 
         ul > each(activitys)
             li
