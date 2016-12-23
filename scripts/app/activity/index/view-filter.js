@@ -1,12 +1,21 @@
 var $ = require('jquery');
 
+exports.bindings = {
+    params: true
+};
+
 exports.events = {
     'click item-*': 'toggleItem'
 };
 
 exports.handlers = {
     toggleItem: function(el) {
-        $(this.$('item-' + el)).addClass('active').siblings().removeClass('active');
+        var me = this,
+            isOverdue = true;
+        if (el === '1') {
+            isOverdue = false;
+        }
+        me.module.dispatch('search', { isOverdue: isOverdue });
     }
 };
 
