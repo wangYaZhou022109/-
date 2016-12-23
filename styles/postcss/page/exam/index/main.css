@@ -1,0 +1,13 @@
+.exam-page{
+    & .page-main-wrapper{
+        & .main-list{
+            margin-top: var(--large-space);
+            & ul{
+                width: 70%;
+                & li{
+                    width: 50%;
+                }
+            }
+        }
+    }
+}

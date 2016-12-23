@@ -1,13 +1,29 @@
 #!handlebars
 
 module > .page-side > .container
-    section.section.topic(data-region='topic')
+    section.section.relevant-topic(data-region='topic')
     section.section.student(data-region='student')
 
 view('topic')
     .h3 相关话题
-    .layout-mt-small 加载中...
+    .layout-mt-small
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题一
+        .inline-block.m-right.m-bottom.bg-white.sub-title 科学教育
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题区域经济学
+        .inline-block.m-right.m-bottom.bg-white.sub-title 生活方式
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题二
+        .inline-block.m-right.m-bottom.bg-white.sub-title 企业管企业管理理
+        .inline-block.m-right.m-bottom.bg-white.sub-title 话题三
 
 view('student')
     .h3 TA们也参加了考试
-    .layout-mt-small 加载中...
+    .layout-mt-small.user-picture
+        .grid-row
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
+            .col-md-4 > img.block(src='images/2.jpeg')
