@@ -36,6 +36,5 @@ exports.dataForTemplate = {
             params.types.live = true;
         }
         return status;
->>>>>>> c8618834afce48ef39962bc49581ed5d6f800b93
     }
 };
