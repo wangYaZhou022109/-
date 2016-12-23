@@ -83,12 +83,13 @@ view('note')
         .note-list > ul
             each(notes)
                 li(id='note-item-'+i)
-                    textarea.input
-                    .note-text.text-overflow > echo(content)
-                    .text-tips.sub-text.time 2016-09-09 20:23:34
-                    .note-btn-group > .text-right
-                        .btn.small.white(id='cancel-edit-item-'+i) 取消
-                        .btn.small 保存
-                    .bottom > .text-right
-                        .item(id='note-item-edit-'+i) > i.iconfont.icon-edit + | 编辑
-                        .item(id='remove-note'+id data-name='id' data-value=id) > i.iconfont.icon-close-circle + | 删除
+                    form
+                        textarea.input(name='content') > echo(content)
+                        .note-text.text-overflow > echo(content)
+                        .text-tips.sub-text.time 2016-09-09 20:23:34
+                        .note-btn-group > .text-right
+                            .btn.small.white(id='cancel-edit-item-'+i) 取消
+                            .btn.small(id='update-note'+id) 保存
+                        .bottom > .text-right
+                            .item(id='note-item-edit-'+i) > i.iconfont.icon-edit + | 编辑
+                            .item(id='remove-note'+id data-name='id' data-value=id) > i.iconfont.icon-close-circle + | 删除

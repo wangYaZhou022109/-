@@ -49,7 +49,7 @@ exports.store = {
             notes.params = {
                 courseId: payload.courseId
             };
-            state.data.code = 'audio';
+            state.data.code = 'default';
             return this.chain(this.get(course), this.get(notes));
         },
         initNotes: function() {
@@ -100,6 +100,11 @@ exports.store = {
             var note = this.models.note;
             note.set(payload);
             return this.del(note);
+        },
+        updateNote: function(payload) {
+            var note = this.models.note;
+            note.set(payload);
+            return this.save(note);
         }
     }
 };

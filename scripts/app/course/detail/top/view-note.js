@@ -17,7 +17,8 @@ exports.events = {
 
 exports.actions = {
     'click add-note': 'addNote',
-    'click remove-note*': 'removeNote'
+    'click remove-note*': 'removeNote',
+    'click update-note*': 'updateNote'
 };
 
 exports.handlers = {
@@ -60,10 +61,22 @@ exports.handlers = {
 exports.dataForActions = {
     addNote: function(payload) {
         return payload;
-    }
-};
-exports.dataForActions = {
+    },
     removeNote: function(payload) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定要删除该笔记吗?';
+            me.app.message.confirm(message, function() {
+                resolve(payload);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
+    updateNote: function(payload) {
+        if (!payload.content.trim()) {
+            return this.app.message.error('内容不能为空');
+        }
         return payload;
     }
 };
@@ -74,6 +87,10 @@ exports.actionCallbacks = {
         this.module.dispatch('initNotes');
     },
     removeNote: function() {
+        this.app.message.success('删除成功');
+        this.module.dispatch('initNotes');
+    },
+    updateNote: function() {
         this.app.message.success('删除成功');
         this.module.dispatch('initNotes');
     }
