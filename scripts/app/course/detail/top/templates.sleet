@@ -14,18 +14,38 @@ view('player-title')
     .clearfix
         .pull-left
             .common-title.inline-block 课程标题课程标题课程标题
-            .inline-block.star-bar > .star(style='width:50%') + .num 4.0
+            .inline-block
+                .star-wrapper.drop-down-wrapper
+                    .star-bar > .star(style='width:50%')
+                    .num 4.0
+                    .drop-down-content > .content
+                        .text-center 我来评分
+                        .star-grade
+                            .item(title='1星') > i.iconfont.icon-star-full
+                            .item(title='2星') > i.iconfont.icon-star-full
+                            .item(title='3星') > i.iconfont.icon-star-full
+                            .item(title='4星') > i.iconfont.icon-star-full
+                            .item(title='5星') > i.iconfont.icon-star-full
+                        .block.btn 提交评分
+
+
+
         .text-right.share-bar
             .item
                 i.iconfont.icon-share
                 span 分享
             .item
-                i.iconfont.icon-favorite
-                span 收藏
+                div.hide
+                    i.iconfont.icon-favorite
+                    span 收藏
+                div
+                    i.iconfont.icon-favorite-full
+                    span 取消收藏
 
 
 view('player')
     div 播放器
+    .player-start-btn > .btn 我要学习
 
 view('chapter')
     .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right

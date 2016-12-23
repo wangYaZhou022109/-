@@ -8,7 +8,7 @@ module > .ranklist-section > .container
 view('ranklist') > .bar-list
     .bar.studend
         .clearfix
-            .pull-left > .title-icon > .iconfont.icon-star-full
+            .pull-left > .title-icon > .iconfont.icon-star
             .right-title
                 .home-title-row.horizontail.border
                     .title 学员榜
