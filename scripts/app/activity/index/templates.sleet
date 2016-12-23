@@ -74,6 +74,8 @@ view('list')
             a(id='category-item-3' href='javascript:;') 考试
             a(id='category-item-4' href='javascript:;') 调研
             a(id='category-item-5' href='javascript:;') 直播
+            a(id='show-paper') 进行考试（测试）
+
 
         ul > each(activitys)
             li
