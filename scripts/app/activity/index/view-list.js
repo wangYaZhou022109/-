@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 exports.bindings = {
     activitys: true,
     params: true
@@ -13,7 +11,6 @@ exports.events = {
 exports.handlers = {
     toggleItem: function(el) {
         var me = this;
-        $(this.$('category-item-' + el)).addClass('active').siblings().removeClass('active');
         me.module.dispatch('search', { type: el });
     },
     showPaper: function() {
