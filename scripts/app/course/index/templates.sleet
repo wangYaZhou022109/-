@@ -41,13 +41,435 @@ view('catalog')
                 li(class='custom-color-2' id='sub-item-6') > .text(title='二级导航') 二级导航
                 li(class='custom-color-3' id='sub-item-7') > .text(title='二级导航') 二级导航
                 li(class='custom-color-4' id='sub-item-8') > .text(title='二级导航') 二级导航
-    .CatalogView > .CatalogView-box
-        .clearfix.CatalogView-nav
+    .catalog-view > .catalog-view-box
+        .clearfix.catalog-view-nav
             i.pull-right.iconfont.icon-setting
-            h2.active 本公司课程目录全览
-            h2 集团课程目录全揽
-        .CatalogView-list
-            h2 这里就是一级导航的位置
+            h3.active 本公司课程目录全览
+            h3 集团课程目录全揽
+        .catalog-view-list
+            h4 这里就是一级导航的位置
+            .clearfix
+                .level-second.pull-left 二级导航：
+                .Level-three
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+            .clearfix
+                .level-second.pull-left 二级导航：
+                .Level-three
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+            h4 这里就是一级导航的位置
+            .clearfix
+                .level-second.pull-left 二级导航：
+                .Level-three
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+            .clearfix
+                .level-second.pull-left 二级导航：
+                .Level-three
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                    .clearfix
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                        .Level-three-list
+                            h5 三级分类
+                            .level-four
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+                                a(href='javascript:;') 四级分类
+
 
 view('list')
     .main-list

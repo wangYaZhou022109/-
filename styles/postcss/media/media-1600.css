@@ -1,0 +1,7 @@
+@media (min-width: 1599px) {
+    .main-list {
+        & > ul > li {
+            width: 25%;
+        }
+    }
+}
