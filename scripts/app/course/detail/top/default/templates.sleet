@@ -4,4 +4,5 @@ module
     div(data-region='main')
 
 view('main')
-    .player-start-btn > .btn 我要学习
+    compare(course.register 'eq' false)
+        .player-start-btn > .btn#register 我要学习

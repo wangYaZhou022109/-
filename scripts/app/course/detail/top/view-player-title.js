@@ -3,7 +3,6 @@ exports.bindings = {
 };
 
 exports.actions = {
-    'click register': 'register',
     'click collect': 'collect',
     'click cancel-collect': 'cancelCollect'
 };
@@ -15,10 +14,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    register: function() {
-        this.app.message.success('注册成功');
-        this.module.dispatch('init', { courseId: this.bindings.course.data.id });
-    },
     collect: function() {
         this.app.message.success('收藏成功');
         this.module.dispatch('init', { courseId: this.bindings.course.data.id });

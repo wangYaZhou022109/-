@@ -1,8 +1,17 @@
 var _ = require('lodash/collection'),
     dynamicCode = {
         1: 'pdf',
+        2: 'survey',
+        3: 'url',
+        4: 'scorm',
         5: 'audio',
-        6: 'video'
+        6: 'video',
+        7: 'epub',
+        8: 'task',
+        9: 'exam',
+        10: 'course',
+        11: 'face',
+        12: 'evaluate'
     };
 
 exports.items = {
@@ -17,16 +26,17 @@ exports.store = {
         course: {
             url: '../course-study/course-front',
             mixin: {
-                findSectionByIds: function(chapterId, sectionId) {
-                    var chapter,
-                        section;
-                    chapter = _.find(this.data.courseChapters, {
-                        id: chapterId
+                init: function() {
+                    var chapters = {},
+                        sections = {};
+                    _.forEach(this.data.courseChapters, function(item) {
+                        chapters[item.id] = item;
+                        _.forEach(item.courseChapterSections, function(r) {
+                            sections[r.id] = r;
+                        });
                     });
-                    section = _.find(chapter.courseChapterSections, {
-                        id: sectionId
-                    });
-                    return section;
+                    this.data.chapters = chapters;
+                    this.data.sections = sections;
                 }
             }
         },
@@ -34,7 +44,6 @@ exports.store = {
         sectionProgress: {},
         note: { url: '../course-study/course-front/course-note' },
         notes: { url: '../course-study/course-front/course-notes' },
-        register: { url: '../course-study/course-front/register' },
         collect: { url: '../system/collect' },
         state: {}
     },
@@ -43,14 +52,18 @@ exports.store = {
             var course = this.models.course,
                 notes = this.models.notes,
                 state = this.models.state;
-            course.set({
-                id: payload.courseId
-            });
-            notes.params = {
-                courseId: payload.courseId
-            };
-            state.data.code = 'default';
-            return this.chain(this.get(course), this.get(notes));
+            course.set({ id: payload.courseId });
+            notes.params = { courseId: payload.courseId };
+            return this.chain(this.get(course).then(function() {
+                if (!course.data.owned) {
+                    this.app.message.error('您没有该课程的学习权限');
+                } else {
+                    course.init();
+                    state.data.code = 'default';
+                    state.data.ready = true;
+                    state.changed();
+                }
+            }), this.get(notes));
         },
         initNotes: function() {
             var notes = this.models.notes;
@@ -59,22 +72,10 @@ exports.store = {
         showSection: function(payload) {
             var section = this.models.section,
                 state = this.models.state,
-                chapterId = payload.chapterId,
-                sectionId = payload.sectionId,
-                course = this.models.course,
-                sectionType;
-            section.set(course.findSectionByIds(chapterId, sectionId));
-            sectionType = this.models.section.data.sectionType;
-            this.models.state.set({
-                code: dynamicCode[sectionType]
-            });
+                course = this.models.course;
+            section.set(course.data.sections[payload.sectionId]);
+            state.set({ code: dynamicCode[section.data.sectionType] });
             state.changed();
-        },
-        register: function() {
-            var courseId = this.models.course.data.id,
-                register = this.models.register;
-            register.data = { courseId: courseId };
-            return this.save(register);
         },
         collect: function() {
             var courseId = this.models.course.data.id,

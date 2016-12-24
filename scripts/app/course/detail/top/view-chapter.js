@@ -22,9 +22,32 @@ exports.handlers = {
     toggleCatalog: function() {
         $(this.module.$('course-side-catalog')).toggleClass('collapse');
     },
-    showSection: function(id, events, element) {
-        var chapterId = element.getAttribute('data-chapter-id');
-        this.module.dispatch('showSection', { sectionId: id, chapterId: chapterId });
+    showSection: function(id) {
+        var section = this.bindings.course.data.sections[id],
+            sectionType = section.sectionType,
+            url = section.url;
+        switch (sectionType) {
+        case 1:
+        case 5:
+        case 6:
+            this.module.dispatch('showSection', { sectionId: id });
+            break;
+        case 2:
+            break;
+        case 3:
+            window.open(url);
+            break;
+        case 7:
+            break;
+        case 8:
+            window.open('http://www.baidu.com');
+            break;
+        case 9:
+            break;
+        case 12:
+            break;
+        default:
+        }
     }
 };
 

@@ -4,11 +4,22 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: { data: {} }
+        course: {},
+        register: { url: '../course-study/course-front/register' }
     },
     callbacks: {
-        updateLearnTime: function() {
-            // console.log(payload);
+        init: function(payload) {
+            this.models.course.set(payload.course);
+        },
+        register: function() {
+            var courseId = this.models.course.data.id,
+                register = this.models.register;
+            register.data = { courseId: courseId };
+            return this.save(register);
         }
     }
+};
+
+exports.beforeRender = function() {
+    this.dispatch('init', this.renderOptions);
 };
