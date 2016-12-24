@@ -1,4 +1,6 @@
 #!handlebars
 
 module
-    div 我的档案内容区块hhhh
+    .section(data-region='information')
+    .section.bg-highlight(data-region='statistics')
+    .section(data-region='history')

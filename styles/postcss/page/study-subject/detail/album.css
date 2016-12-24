@@ -34,13 +34,11 @@
         position: absolute;
         z-index: 10;
         top: 0;
-        display: block;
+        bottom: 0;
         cursor: pointer;
-        padding-bottom: 99999px;
-        margin-bottom: -99999px;
-        padding-top: calc(var(--large-space) * 2.8);
         padding-left: calc(var(--large-space) / 4);
         padding-right: calc(var(--large-space) / 4);
+        width: calc(var(--h2) * 1.5);
         overflow: hidden;
         @apply --transition;
         opacity: .5;
@@ -51,6 +49,9 @@
             filter: alpha(opacity=80);
         }
         & .iconfont {
+            position: absolute;
+            top: 50%;
+            margin-top: -calc(var(--h2) / 2.5);
             font-size: var(--h2);
         }
     }
