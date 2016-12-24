@@ -121,6 +121,7 @@
         background: white;
         box-shadow:  0 0 25px 5px rgba(0,0,0,.1);
         z-index: 10;
+        display: none;
 
         & .catalog-view-box{
             padding: var(--large-space);
@@ -137,7 +138,7 @@
             }
             & .catalog-view-list{
                 & h4{
-                    border-left: var(--space) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
+                    border-left: calc(var(--space)/2) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
                 }
                 & .clearfix{
                     margin-bottom: var(--large-space);
