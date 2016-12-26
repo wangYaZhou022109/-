@@ -91,7 +91,7 @@ exports.actionCallbacks = {
         this.module.dispatch('initNotes');
     },
     updateNote: function() {
-        this.app.message.success('删除成功');
+        this.app.message.success('修改成功');
         this.module.dispatch('initNotes');
     }
 };

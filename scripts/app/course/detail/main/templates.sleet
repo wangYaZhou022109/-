@@ -9,11 +9,20 @@ view('info')
         .inline-block.layout-mr > .h3 > echo(course.name)
         .inline-block.layout-mr
             .star-wrapper
-                .star-bar > .star(style='width:50%')
-                .num 4.0
+                .star-bar > .star(style='width:'+course.scorePercent+'%')
+                if(course.addType)
+                    if(course.avgScore)
+                        .num > echo(course.avgScore)
+                    else
+                        .num > echo('暂无评分')
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > i.iconfont.icon-share
-            .inline-block.m-left > i.iconfont.icon-favorite
+            .inline-block.m-left
+            if(course.collectId)
+                i#cancel-collect.iconfont.icon-favorite-full(data-name='id' data-value=course.collectId)
+            else
+                i#collect.iconfont.icon-favorite
+                
     .sub-title-row.layout-mb-small.layout-mt-small
         .inline-block.layout-mr > echo('课时: ' course.courseHour)
         .inline-block.layout-mr > echo('学分: ' course.credit)

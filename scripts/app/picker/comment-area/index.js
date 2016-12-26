@@ -65,6 +65,18 @@ exports.store = {
                 comments.set({ id: state.data.businessId });
                 me.get(comments);
             });
+        },
+        praise: function(payload) {
+            var comment = this.models.comment;
+            comment.options.url = '../system/comment/praise';
+            comment.set(payload);
+            return this.save(comment);
+        },
+        cancelPraise: function(payload) {
+            var comment = this.models.comment;
+            comment.options.url = '../system/comment/cancel-praise';
+            comment.set(payload);
+            return this.del(comment);
         }
     }
 };

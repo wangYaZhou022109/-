@@ -17,10 +17,11 @@ view('player-title')
             .inline-block
                 .star-wrapper.drop-down-wrapper
                     .star-bar > .star(style='width:'+course.scorePercent+'%')
-                    if(course.avgScore)
-                        .num > echo(course.avgScore)
-                    else
-                        .num > echo('暂无评分')
+                    if(course.addType)
+                        if(course.avgScore)
+                            .num > echo(course.avgScore)
+                        else
+                            .num > echo('暂无评分')
                     .drop-down-content > .content
                         .text-center 我来评分
                         .star-grade
@@ -35,13 +36,13 @@ view('player-title')
                 i.iconfont.icon-share
                 span 分享
             if(course.collectId)
-                .item
+                .item#cancel-collect(data-name='id' data-value=course.collectId)
                     i.iconfont.icon-favorite-full
-                    span#cancel-collect(data-name='id' data-value=course.collectId) 取消收藏
+                    span 取消收藏
             else
-                .item
+                .item#collect
                     i.iconfont.icon-favorite
-                    span#collect 收藏
+                    span 收藏
 
 
 view('player')
@@ -70,8 +71,8 @@ view('chapter')
                                 .item.sub-text > map('section-type' sectionType)
                                 .item.continue
                                     i.iconfont.icon-reload
-                                    span.progress 58%
-                                    span(id='showsection-'+id) 继续学习
+                                    span.progress > percent(progress.completedRate)
+                                    span(id='showsection-'+id) > map('course-study-status' progress.finishStatus)
                                 .item.record
                                     i.iconfont.icon-time + | 学习记录
 

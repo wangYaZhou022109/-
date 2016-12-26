@@ -23,7 +23,9 @@ exports.actions = {
     'click top*': 'setTop',
     'click essence*': 'setEssence',
     'click hideComment*': 'hideComment',
-    'click delComment*': 'delComment'
+    'click delComment*': 'delComment',
+    'click praise*': 'praise',
+    'click cancel-praise*': 'cancelPraise'
 };
 exports.dataForActions = {
     addComment: function(data) {
@@ -67,6 +69,14 @@ exports.dataForActions = {
                 resolve(false);
             });
         });
+    },
+    praise: function(payload) {
+        return payload;
+    },
+    cancelPraise: function(payload) {
+        var data = {};
+        data.id = payload.praiseId;
+        return data;
     }
 };
 exports.actionCallbacks = {
@@ -89,6 +99,14 @@ exports.actionCallbacks = {
     setEssence: function() {
         this.app.message.success('修改成功!');
         this.module.dispatch('init', this.module.renderOptions);
+    },
+    praise: function() {
+        this.app.message.success('点赞成功!');
+        this.module.dispatch('init', this.module.renderOptions);
+    },
+    cancelPraise: function() {
+        this.app.message.success('取消成功!');
+        this.module.dispatch('init', this.module.renderOptions);
     }
 };
 
@@ -98,12 +116,6 @@ exports.dataForTemplate = {
         _.map(data.comments || [], function(comment, i) {
             var r = comment;
             r.i = i + 1 + ((pageNum - 1) * 10);
-            if (!r.praiseCount) {
-                r.praiseCount = 0;
-            }
-            if (!r.commentCount) {
-                r.commentCount = 0;
-            }
         });
         return data.comments;
     }

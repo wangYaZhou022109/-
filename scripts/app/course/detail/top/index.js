@@ -28,15 +28,18 @@ exports.store = {
             mixin: {
                 init: function() {
                     var chapters = {},
-                        sections = {};
+                        sections = {},
+                        progress = {};
                     _.forEach(this.data.courseChapters, function(item) {
                         chapters[item.id] = item;
                         _.forEach(item.courseChapterSections, function(r) {
                             sections[r.id] = r;
+                            progress[r.id] = r.progress;
                         });
                     });
                     this.data.chapters = chapters;
                     this.data.sections = sections;
+                    this.data.progress = progress;
                 }
             }
         },
@@ -75,6 +78,7 @@ exports.store = {
                 course = this.models.course;
             section.set(course.data.sections[payload.sectionId]);
             state.set({ code: dynamicCode[section.data.sectionType] });
+            state.data.ready = true;
             state.changed();
         },
         collect: function() {
