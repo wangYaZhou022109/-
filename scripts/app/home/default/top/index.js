@@ -54,15 +54,29 @@ exports.items = {
     logo: 'logo'
 };
 
+function getParams () {
+    var params = {};
+    window.location.search.substr(1).split('&').forEach(function(kv) {
+        var kvarr = kv.split('=');
+        params[kvarr[0]] = kvarr[1];
+    });
+    return params;
+}
+
 exports.store = {
     models: {
         setting: { url: '../system/setting' },
-        menus: { data: menus }
+        menus: { data: menus },
+        navs: { url: '../system/home-nav' }
     },
     callbacks: {
         init: function() {
-            var setting = this.models.setting;
-            this.get(setting).then();
+            // var setting = this.models.setting;
+            // this.get(setting).then();
+            this.models.navs.params = {
+                homeConfigId: getParams().configid
+            };
+            return this.get(this.models.navs);
         },
         'app.pushState': function(hash) {
             // 设置top菜单的active状态
