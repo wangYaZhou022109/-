@@ -41,5 +41,5 @@ exports.dataForTemplate = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'subjects' }
+    id: 'pager', name: 'pager', options: { model: 'courses' }
 }];

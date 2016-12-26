@@ -5,9 +5,17 @@ exports.bindings = {
     categories: true
 };
 
+
+exports.handlers = {
+    toggleCatalog: function() {
+        var ele = this.$$('.catalog-view')[0];
+        ele.hidden = !ele.hidden;
+    }
+};
 exports.events = {
     'click sub-item-*': 'selectMenu',
-    'click catalog-item-*': 'toggleCatalog'
+    'click catalog-item-*': 'toggleCatalog',
+    'click openCatalog': 'openCatalog',
 };
 
 exports.handlers = {
@@ -33,6 +41,10 @@ exports.handlers = {
             this.module.dispatch('search', { categoryId: id }),
             this.module.dispatch('selectMenu2', { id: id })
         ]);
+    },
+
+    openCatalog: function() {
+        this.module.items.catalogs.$$('.catalog-view')[0].hidden = false;
     }
 };
 exports.dataForTemplate = {
