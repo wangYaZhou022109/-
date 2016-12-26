@@ -78,6 +78,20 @@ module.exports = {
         return value / 100;
     },
 
+    inner: function(data, key, options) {
+        var fn = options.fn,
+            ret;
+        ret = fn(data[key]);
+        return ret;
+    },
+
+    pick: function(val, def) {
+        if (!val) {
+            return def;
+        }
+        return val;
+    },
+
     isGrant: function(operatorType, organizationId, options) {
         var view = options.data.root.Self,
             grants,

@@ -10,3 +10,9 @@
     --recommend-bar-height: 15em;
     --bar-gap: calc(var(--space) * 2);
 }
+
+.home-page{
+  & > .section:nth-child(odd) {
+      background-color: var(--bg-color);
+  }
+}

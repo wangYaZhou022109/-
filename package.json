@@ -56,7 +56,8 @@
       "block": [
         "module",
         "view",
-        "compare"
+        "compare",
+        "inner"
       ],
       "inline": [
         "date",
@@ -68,7 +69,8 @@
         "setting",
         "string",
         "percent",
-        "restoreNumber"
+        "restoreNumber",
+        "pick"
       ]
     }
   }

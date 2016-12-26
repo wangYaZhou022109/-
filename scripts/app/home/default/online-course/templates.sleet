@@ -8,58 +8,63 @@ module > .recommend-section > .container
 view('online-course') > .clearfix
     .section.first
         .bar.title > .cont.bg-white
-            .h1 推荐课程
+            .h1 > echo(homeConfig.name)
             .more > a.normal(href='#/course/index') MORE >>
-        .bar
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
-            .cont.bg-white
-                .text-cont.bg-white
-                    .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                    p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                .bottom.bg-white.sub-text
-                    .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
-                    .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
-                    .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+        inner(course '1')
+            .bar
+                .img > .img-cont >  img(src=cover)
+                .cont.bg-white
+                    .text-cont.bg-white
+                        .title-row > echo(name)
+                        p.sub-title {{{description}}}
+                    .bottom.bg-white.sub-text
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
     .section.second
-        .bar
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/1/9/2/765291.jpg' height='300px')
-            .cont.bg-white.show
-                .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                p.sub-title.show 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                .bottom.sub-text
-                    .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
-                    .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
-                    .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
-    .section.large
-        .section-above > .bar
-            .bar-cont
-                .img > .img-cont >  img(src='http://img.ui.cn/data/file/6/5/7/798756.png')
-            .bar-cont
+        inner(course '2')
+            .bar
+                .img > .img-cont >  img(src=cover height='300px')
                 .cont.bg-white.show
-                    .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                    p.sub-title.show 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                    .title-row > echo(name)
+                    p.sub-title {{{description}}}
                     .bottom.sub-text
-                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
-                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
-                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
+    .section.large
+        inner(course '3')
+            .section-above > .bar
+                .bar-cont
+                    .img > .img-cont >  img(src=cover)
+                .bar-cont
+                    .cont.bg-white.show
+                        .title-row > echo(name)
+                        p.sub-title {{{description}}}
+                        .bottom.sub-text
+                            .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
+                            .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
+                            .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
         .section-below
-            .pull-left.w-half > .bar
-                .img > .img-cont >  img(src='http://img.ui.cn/data/file/3/9/6/773693.jpg')
-                .cont.bg-white
-                    .text-cont.bg-white
-                        .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                        p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                    .bottom.bg-white.sub-text
-                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
-                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
-                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
-            .pull-left.w-half > .bar
-                .img > .img-cont >  img(src='http://img.ui.cn/data/file/8/6/1/877168.jpg')
-                .cont.bg-white
-                    .text-cont.bg-white
-                        .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                        p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
-                    .bottom.bg-white.sub-text
-                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
-                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
-                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+            inner(course '4')
+                .pull-left.w-half > .bar
+                    .img > .img-cont >  img(src=cover)
+                    .cont.bg-white
+                        .text-cont.bg-white
+                            .title-row > echo(name)
+                            p.sub-title {{{description}}}
+                        .bottom.bg-white.sub-text
+                            .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
+                            .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
+                            .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
+            inner(course '5')
+                .pull-left.w-half > .bar
+                    .img > .img-cont >  img(src=cover)
+                    .cont.bg-white
+                        .text-cont.bg-white
+                            .title-row > echo(name)
+                            p.sub-title {{{description}}}
+                        .bottom.bg-white.sub-text
+                            .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
+                            .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
+                            .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
