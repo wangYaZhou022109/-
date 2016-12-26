@@ -15,7 +15,8 @@ exports.components = [{
 
 exports.dataForTemplate = {
     banners: function(data) {
-        var banners = JSON.parse(data.region.regionModule.contentValue),
+        var contentValue = data.region.regionModule.contentValue,
+            banners = contentValue ? JSON.parse(contentValue) : [],
             me = this;
         _.map(banners || [], function(banner) {
             var b = banner;

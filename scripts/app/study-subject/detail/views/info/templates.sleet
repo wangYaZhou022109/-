@@ -5,8 +5,10 @@ module > div(data-region='pannel')
 view('pannel')
     .title-row
         .inline-block.layout-mr > .h3 > echo(subject.name)
-        .inline-block.layout-mr > .star-bar
-            .star(style='width:'+subject.scorePercent+'%') + .num > echo(subject.avgScore)
+        .inline-block.layout-mr
+            .star-wrapper
+                .star-bar > .star(style='width:'+subject.scorePercent+'%')
+                .num > echo(subject.avgScore)
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right
                 .drop-down-wrapper
