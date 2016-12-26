@@ -1,0 +1,9 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .side-top > .time
+        i.iconfont.icon-time
+        span#time
