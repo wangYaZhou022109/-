@@ -1,9 +1,9 @@
 var D, H, jQuery, app, helpers, oauthOptions, plupload;
 
 oauthOptions = {
-    clientId: 11,
-    provider: 'http://192.168.1.198:8888/oauth',
-    returnTo: 'http://192.168.9.105'
+    clientId: 3,
+    provider: 'https://oauth9.zhixueyun.com',
+    returnTo: 'http://192.168.9.106/front',
 };
 
 window.$ = window.jQuery = jQuery = require('jquery');
@@ -33,6 +33,8 @@ require('./app/ext/component-pager');
 require('./app/ext/upload');
 require('./app/ext/swiper');
 require('./app/ext/views/form/form-view');
+require('./app/ext/models/local-storage-model');
+require('./app/ext/selectize');
 
 D.adapt({
     getFormData: function(form) {
@@ -67,7 +69,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'course', 'activity', 'study-subject']
+    routers: ['', 'home', 'course', 'activity', 'study-subject', 'exam']
 });
 
 
