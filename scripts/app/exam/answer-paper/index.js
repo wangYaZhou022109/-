@@ -436,14 +436,14 @@ exports.afterRender = function() {
 
     if (t) {
         this.app.message.success('随机秒数' + (random / 1000));
-    }
-    timeOutId = setTimeout(autoSubmit, random);
-    connect(examId, function() {
-        return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
-            me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
-            closeConnect();
+        timeOutId = setTimeout(autoSubmit, random);
+        connect(examId, function() {
+            return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
+                me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
+                closeConnect();
+            });
         });
-    });
+    }
 };
 
 cancel = function() {

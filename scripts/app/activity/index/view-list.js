@@ -7,7 +7,9 @@ exports.bindings = {
 
 exports.events = {
     'click category-item-*': 'toggleItem',
-    'click show-paper-*': 'showPaper'
+    'click show-paper-*': 'showPaper',
+    'click score-detail-paper-*': 'showScoreDetailPaper',
+    'click mark-paper': 'showMarkPaper'
 };
 
 exports.handlers = {
@@ -16,6 +18,14 @@ exports.handlers = {
         me.module.dispatch('search', { type: el });
     },
     showPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    },
+    showScoreDetailPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    },
+    showMarkPaper: function(id, e) {
         var url = $(e.target).attr('href').slice(2);
         this.app.navigate(url, true);
     }
