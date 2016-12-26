@@ -29,7 +29,7 @@
 
 .star-wrapper {
     line-height: 1em;
-    
+
     & .num {
         color: var(--star-color);
         line-height: 1.2em;
@@ -48,7 +48,8 @@
             margin: 1em;
         }
 
-        &:hover .item{
+        &:hover .item,
+        &.active .item{
             @apply --fade-in;
 
             color: var(--star-color);
@@ -64,7 +65,8 @@
             padding: 0 calc(var(--space) / 2);
 
 
-            &:hover ~ .item {
+            &:hover ~ .item,
+            &.active ~ .item {
                 opacity: .1;
                 filter: alpha(opacity=10);
                 color: var(--font-color);
