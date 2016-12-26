@@ -8,6 +8,7 @@ view('pannel')
         each(courseAttachments)
             .block.layout-mt-small
                 .pull-right
-                    a(href='javascript:;') > string('view')
+                    if(isView)
+                        a(href='javascript:;') > string('view')
                     a(href=downUrl download=name) > string('download')
                 .text-overflow(title=name) > echo(name)

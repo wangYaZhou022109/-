@@ -12,6 +12,9 @@ exports.dataForTemplate = {
         _.map(subject.courseAttachments, function(attachment) {
             var atta = attachment;
             atta.downUrl = me.bindings.down.getFullUrl() + '?id=' + atta.attachmentId;
+            if (atta.attachmentType === 'application/pdf') {
+                atta.isView = true;
+            }
             return atta;
         });
         return subject.courseAttachments;

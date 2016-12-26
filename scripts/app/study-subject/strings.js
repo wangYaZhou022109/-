@@ -11,5 +11,8 @@ module.exports = {
     'subject.rest.day': '剩余天数',
     'btn.prefix': '进入',
     'check.the.record': '查看记录',
-    'study.total.time': '学习累计时长'
+    'study.total.time': '学习累计时长',
+    'left.page': '向左翻',
+    'right.page': '向右翻',
+    'reset.page': '换一组'
 };
