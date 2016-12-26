@@ -2,7 +2,8 @@ exports.routes = {
     index: 'showIndex',
     'answer-paper': 'showPaper',
     'score-detail-paper': 'showScoreDetailPaper',
-    'mark-paper': 'showMarkPaper'
+    'mark-paper': 'showMarkPaper',
+    demo: 'showDemo'
 };
 
 exports.showIndex = function() {
@@ -16,4 +17,8 @@ exports.showScoreDetailPaper = function() {
 };
 exports.showMarkPaper = function() {
     return this.app.show('content', 'exam/mark-paper');
+};
+
+exports.showDemo = function() {
+    return this.app.show('content', 'exam/demo');
 };
