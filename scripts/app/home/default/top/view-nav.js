@@ -29,7 +29,6 @@ exports.handlers = {
 
     showContent: function(id, e) {
         var url = $(e.target).attr('href').slice(2);
-        console.log(url);
         this.app.navigate(url, true);
     },
 

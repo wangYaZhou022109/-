@@ -258,6 +258,9 @@ exports.store = {
             var me = this,
                 data = this.models.state.data,
                 questionTypes = this.models.questionTypes;
+            D.assign(payload, {
+                examRecordId: 'd8697ea7-fabe-4ca5-872a-3fb2d7f40038'
+            });
             this.models.exam.set({ id: payload.examRecordId });
             D.assign(data, {
                 isOnePageOneQuestion: true
