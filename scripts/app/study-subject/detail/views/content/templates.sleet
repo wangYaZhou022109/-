@@ -7,7 +7,7 @@ view('pannel')
     .subject-catalog > ul
         li.catalog-main
             .catalog-state
-                .inline-block.layout-mr.custom-color-4 > .h3 > map('course-info-study-status' progress.status)
+                .inline-block.layout-mr.custom-color-4 > .h3 > map('course-info-study-status' subject.studyProgress.finishStatus)
                 .inline-block.layout-mr > string('subject.study.day') > echo('：' subject.studyDays)
                 .inline-block.layout-mr > string('subject.rest.day') > echo('：' subject.restDays)
         each(subject.courseChapters)
@@ -20,10 +20,12 @@ view('pannel')
                             .pull-right > a.normal(href=btnUrl)
                                 .btn.radius > string('btn.prefix') > map('section-type' sectionType)
                             .inline-block.attribute
-                                span
-                                    compare(required 'eq' '1') > .compulsory
-                                    map('is-required' required)
+                                compare(required 'eq' 1)
+                                    span.compulsory > map('is-required' required)
+                                else
+                                    span > map('is-required' required)
                                 span > echo('[') + map('section-type' sectionType) + echo(']')
                             .inline-block.title.text-overflow(title=name) > echo(name)
-                            .inline-block
-                                a(id='studyRecord-'+id href='javascript:;') > i.iconfont.icon-time + string('check.the.record')
+                            compare(sectionType 'eq' 10)
+                                .inline-block
+                                    a(id='studyRecord-'+id href='javascript:;') > i.iconfont.icon-time + string('check.the.record')

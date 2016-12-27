@@ -3,6 +3,7 @@ var _ = require('lodash/collection'),
 exports.items = {
     top: 'top',
     catalog: 'catalog',
+    catalogs: 'catalogs',
     list: 'list'
 };
 exports.store = {

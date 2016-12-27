@@ -4,14 +4,11 @@ module > .relevant-course(data-region='pannel')
 
 view('pannel')
     .h3
-        .side-reload.sub-title > i.iconfont.icon-reload + | 换一组
-        | 相关课程
+        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
+        echo(region.regionModule.name)
     .layout-mt-small
-        .img
-            a.normal(href='#/course/detail')
-                .img-cont > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='市场从业者必学的互联网思维')
-            h4.text-overflow(title='市场从业者必学的互联网思维') 市场从业者必学的互联网思维
-        .img
-            a.normal(href='#/course/detail')
-                .img-cont > img(src='http://img.ui.cn/data/file/0/2/7/751720.jpg' alt='传统企业如何走好电子商务之路传统企业如何走好电子商务之路')
-            h4.text-overflow(title='传统企业如何走好电子商务之路传统企业如何走好电子商务之路') 传统企业如何走好电子商务之路传统企业如何走好电子商务之路
+        each(courseRelated)
+            .img
+                a.normal(href='#/study-subject/detail/'+id)
+                    .img-cont > img(src=imageUrl)
+                h4.text-overflow(title=name) > echo(name)
