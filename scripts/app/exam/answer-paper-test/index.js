@@ -80,7 +80,7 @@ exports.store = {
                         duration: exam.duration,
                         isCollect: false
                     });
-                    this.data.isOnePageOneQuestion = true;
+                    this.data.isOnePageOneQuestion = false;
                 }
             }
         },
