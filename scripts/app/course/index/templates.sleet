@@ -19,7 +19,7 @@ view('top')
 
 view('catalog')
     .title-row
-        .pull-right > i.iconfont.icon-setting
+        .pull-right > i.iconfont.icon-full-screen.pointer
         .common-title 课程目录
     ul
         li.text-hover-main-color(id='catalog-item-1')
@@ -43,7 +43,7 @@ view('catalog')
                 li(class='custom-color-4' id='sub-item-8') > .text(title='二级导航') 二级导航
     .catalog-view > .catalog-view-box
         .clearfix.catalog-view-nav
-            i.pull-right.iconfont.icon-setting
+            i.pull-right.iconfont.icon-min-scrren.pointer
             h3.active 本公司课程目录全览
             h3 集团课程目录全揽
         .catalog-view-list
@@ -494,10 +494,10 @@ view('list')
             .pull-right
                 .item
                     | 排序：上架时间
-                    i.iconfont.icon-arrow-down
+                    i.iconfont.icon-sort-line
                 .item
                     | 学习人数
-                    i.iconfont.icon-arrow-down
+                    i.iconfont.icon-sort-line
                 .item
                     .drop-down-wrapper.right
                         .drop-down-btn
