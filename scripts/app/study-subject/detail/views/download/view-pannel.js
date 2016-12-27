@@ -3,6 +3,11 @@ exports.bindings = {
     region: false,
     subject: false,
     down: false,
+    attachment: false
+};
+
+exports.events = {
+    'click viewPdf-*': 'viewPdf'
 };
 
 exports.dataForTemplate = {
@@ -18,5 +23,16 @@ exports.dataForTemplate = {
             return atta;
         });
         return subject.courseAttachments;
+    }
+};
+
+exports.handlers = {
+    viewPdf: function(id) {
+        var view = this.module.items.pdf,
+            subject = this.bindings.subject.data;
+        this.bindings.attachment.set(_.find(subject.courseAttachments, {
+            attachmentId: id
+        }));
+        this.app.viewport.modal(view);
     }
 };

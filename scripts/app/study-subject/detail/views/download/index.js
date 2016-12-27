@@ -1,5 +1,6 @@
 exports.items = {
-    pannel: 'pannel'
+    pannel: 'pannel',
+    pdf: ''
 };
 
 exports.store = {
@@ -8,7 +9,8 @@ exports.store = {
         subject: {},
         down: {
             url: '../human/file/download'
-        }
+        },
+        attachment: {}
     }
 };
 
