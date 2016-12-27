@@ -2,7 +2,8 @@ var D = require('drizzlejs');
 exports.items = {
     banner: 'banner',
     filter: 'filter',
-    list: 'list'
+    list: 'list',
+    'exam/index': { isModule: true }
 };
 
 exports.store = {
