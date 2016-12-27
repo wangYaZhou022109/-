@@ -20,6 +20,6 @@ view('study-subject')
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-view
-                            span.m-left 123
+                            span.m-left > echo(studyMemberCount)
                         .title.text-overflow > echo(name)
                     .sub-title.text-overflow.m-top > echo(description)
