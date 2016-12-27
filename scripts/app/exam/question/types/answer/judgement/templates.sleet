@@ -9,10 +9,12 @@ view('content')
 
 
 view('options') > .answer
-    input.inline-block(type='radio' name='value-' + state.id value=1 id='check-0')('checked')&if(isCorrect)
-    .inline-block 正确
-    input.inline-block.m-left(type='radio' name='value-' + state.id value=0 id='check-1')('checked')&if(isError)
-    .inline-block 错误
+    .preview-list > dl.border.bottom
+        dd
+            input.inline-block(type='radio' name='value-' + state.id value=1 id='check-0')('checked')&if(isCorrect)
+            .inline-block 正确
+            input.inline-block.m-left(type='radio' name='value-' + state.id value=0 id='check-1')('checked')&if(isError)
+            .inline-block 错误
 
     if(state.detailMode)
         .show-answer.border.border-top

@@ -66,18 +66,9 @@
         margin-left: 20%;
         padding: var(--main-list-gap);
 
-        & .preview-list > li {
+        & .preview-list {
             line-height: 2;
-            margin-bottom: var(--main-list-gap);
-
-            & .bottom {
-                font-size: var(--small-font);
-
-                & .item {
-                    display: inline-block;
-                    margin-left: var(--large-space);
-                }
-            }
+            margin-bottom: var(--space);
 
             & dl {
                 @apply --clearfix;
@@ -88,7 +79,7 @@
             & dd {
                 width: 48%;
                 float: left;
-                margin-top: 1em;
+                margin-bottom: var(--space);
                 margin-right: 2%;
             }
         }
@@ -115,6 +106,15 @@
             display: inline-block;
             margin-right: 1em;
             padding-right: 1em;
+        }
+    }
+
+    & .bottom-favorite {
+        font-size: var(--small-font);
+
+        & .item {
+            display: inline-block;
+            margin-left: var(--large-space);
         }
     }
 }

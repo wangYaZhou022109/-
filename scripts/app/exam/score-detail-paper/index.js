@@ -248,7 +248,7 @@ exports.store = {
                 questionTypes = this.models.questionTypes;
 
             D.assign(payload, {
-                examRecordId: 'f1cdf21a-afd8-4daa-9de2-363606637088'
+                examRecordId: '1edca744-ce42-4d4a-af6b-a0644cffd00c'
             });
             this.models.exam.params = {
                 examRecordId: payload.examRecordId
