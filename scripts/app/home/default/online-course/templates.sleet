@@ -1,0 +1,65 @@
+#!handlebars
+
+
+module > .recommend-section > .container
+    #online-course(data-region='online-course')
+
+
+view('online-course') > .clearfix
+    .section.first
+        .bar.title > .cont.bg-white
+            .h1 推荐课程
+            .more > a.normal(href='#/course/index') MORE >>
+        .bar
+            .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg')
+            .cont.bg-white
+                .text-cont.bg-white
+                    .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                    p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                .bottom.bg-white.sub-text
+                    .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                    .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                    .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+    .section.second
+        .bar
+            .img > .img-cont >  img(src='http://img.ui.cn/data/file/1/9/2/765291.jpg' height='300px')
+            .cont.bg-white.show
+                .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                p.sub-title.show 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                .bottom.sub-text
+                    .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                    .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                    .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+    .section.large
+        .section-above > .bar
+            .bar-cont
+                .img > .img-cont >  img(src='http://img.ui.cn/data/file/6/5/7/798756.png')
+            .bar-cont
+                .cont.bg-white.show
+                    .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                    p.sub-title.show 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                    .bottom.sub-text
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+        .section-below
+            .pull-left.w-half > .bar
+                .img > .img-cont >  img(src='http://img.ui.cn/data/file/3/9/6/773693.jpg')
+                .cont.bg-white
+                    .text-cont.bg-white
+                        .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                        p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                    .bottom.bg-white.sub-text
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分
+            .pull-left.w-half > .bar
+                .img > .img-cont >  img(src='http://img.ui.cn/data/file/8/6/1/877168.jpg')
+                .cont.bg-white
+                    .text-cont.bg-white
+                        .title-row 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                        p.sub-title 热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示热门推荐课程标题超过宽度省略号显示
+                    .bottom.bg-white.sub-text
+                        .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left 120m
+                        .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left 120人
+                        .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left 120分

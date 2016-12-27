@@ -1,0 +1,30 @@
+@media (max-width: 961px) {
+    html,body {
+        font-size: 12px;
+    }
+
+    .container {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .home-page {
+        & .recommend-section {
+            & .bottom .item  {
+                & .iconfont {
+                    display: none;
+                }
+
+                & .m-left {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        & .recommend-activity-section .time {
+            @apply --text-overflow;
+        }
+
+    }
+
+}

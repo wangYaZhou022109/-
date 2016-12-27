@@ -1,0 +1,17 @@
+.pagination {
+    text-align: right;
+    margin-bottom: calc(var(--main-list-gap) * 2);
+
+    & ul {
+        display: inline-block;
+        margin-right: -var(--space);
+    }
+
+    & li {
+        display: inline-block;
+        padding: calc(var(--font-size) / 2) 1em;
+        background-color: var(--bg-color);
+        cursor: pointer;
+        margin-right: var(--space);
+    }
+}

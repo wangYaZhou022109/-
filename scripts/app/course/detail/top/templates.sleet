@@ -1,0 +1,176 @@
+#!handlebars
+
+module
+    .course-detail-top.top-bg
+        .course-side-catalog#course-side-catalog > .side-content
+            .course-chapter(data-region='chapter')
+            .course-note(data-region='note')
+        .player-wrapper
+            .player-title-row(data-region='player-title')
+            .player-content(data-region='player')
+
+
+view('player-title')
+    .clearfix
+        .pull-left
+            .common-title.inline-block 课程标题课程标题课程标题
+            .inline-block
+                .star-wrapper.drop-down-wrapper
+                    .star-bar > .star(style='width:50%')
+                    .num 4.0
+                    .drop-down-content > .content
+                        .text-center 我来评分
+                        .star-grade
+                            .item(title='1星') > i.iconfont.icon-star-full
+                            .item(title='2星') > i.iconfont.icon-star-full
+                            .item(title='3星') > i.iconfont.icon-star-full
+                            .item(title='4星') > i.iconfont.icon-star-full
+                            .item(title='5星') > i.iconfont.icon-star-full
+                        .block.btn 提交评分
+
+
+
+        .text-right.share-bar
+            .item
+                i.iconfont.icon-share
+                span 分享
+            .item
+                div.hide
+                    i.iconfont.icon-favorite
+                    span 收藏
+                div
+                    i.iconfont.icon-favorite-full
+                    span 取消收藏
+
+
+view('player')
+    div 播放器
+    .player-start-btn > .btn 我要学习
+
+view('chapter')
+    .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right
+    .chapter-main
+        .course-side-title-row
+            .pull-right > .inline-block
+                .note-btn#note-btn > i.iconfont.icon-note + | 课程笔记
+            .text-overflow 课程标题课程标题课程标题课程标题课程标题课程标题课程标题课程标题课程标题
+        .chapter-list > ul
+            li
+                .common-title 第一章：团结就是力量
+                dl.required
+                    dt
+                        .required-tag 必修
+                        .text-overflow 第一节：团结就是力量团结就是力量团结就是力量团结就是力量
+                    dd
+                        .item.sub-text 文档
+                        .item.continue
+                            i.iconfont.icon-play
+                            span.progress 58%
+                            span 继续学习
+                        .item.record
+                            i.iconfont.icon-time2 + | 学习记录
+                dl.required
+                    dt
+                        .required-tag 必修
+                        .text-overflow 第二节：团结就是力量团结就是力量团结就是力量团结就是力量
+                    dd
+                        .item.sub-text 文档
+                        .item.continue
+                            i.iconfont.icon-play
+                            span.progress 58%
+                            span 继续学习
+                        .item.record
+                            i.iconfont.icon-time2 + | 学习记录
+                dl
+                    dt
+                        .required-tag 必修
+                        .text-overflow 第三节：团结就是力量团结就是力量团结就是力量团结就是力量
+                    dd
+                        .item.sub-text 文档
+                        .item.continue
+                            i.iconfont.icon-play
+                            span.progress 58%
+                            span 继续学习
+                        .item.record
+                            i.iconfont.icon-time2 + | 学习记录
+
+            li
+                .common-title 第二章：团结就是力量
+                dl.required
+                    dt
+                        .required-tag 必修
+                        .text-overflow 第一节：团结就是力量团结就是力量团结就是力量团结就是力量
+                    dd
+                        .item.sub-text 文档
+                        .item.start
+                            i.iconfont.icon-play
+                            span.progress 58%
+                            span 开始学习
+                        .item.record
+                            i.iconfont.icon-time2 + | 学习记录
+                dl
+                    dt
+                        .required-tag 必修
+                        .text-overflow 第一节：团结就是力量团结就是力量团结就是力量团结就是力量
+                    dd
+                        .item.sub-text 文档
+                        .item.start
+                            i.iconfont.icon-play
+                            span.progress 58%
+                            span 开始学习
+                        .item.record
+                            i.iconfont.icon-time2 + | 学习记录
+                dl
+                    dt
+                        .required-tag 必修
+                        .text-overflow 第一节：团结就是力量团结就是力量团结就是力量团结就是力量
+                    dd
+                        .item.sub-text 文档
+                        .item.start
+                            i.iconfont.icon-play
+                            span.progress 58%
+                            span 开始学习
+                        .item.record
+                            i.iconfont.icon-time2 + | 学习记录
+
+view('note')
+    .course-side-title-row
+        .pull-right > .inline-block > i.iconfont.icon-close-circle#close-note
+        .text-overflow.h4 课程笔记
+    .course-note-main
+        .note-add-wrapper
+            textarea.input#add-note(placeholder='新增课程笔记...')
+            .note-btn-group > .text-right
+                .btn.small.white#cancel-edit 取消
+                .btn.small 保存
+        .note-list > ul
+            li#note-item-1
+                textarea.input
+                .note-text.text-overflow 课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记
+                .text-tips.sub-text.time 2016-09-09 20:23:34
+                .note-btn-group > .text-right
+                    .btn.small.white#cancel-edit-item-1 取消
+                    .btn.small 保存
+                .bottom > .text-right
+                    .item#note-item-edit-1 > i.iconfont.icon-edit + | 编辑
+                    .item > i.iconfont.icon-close-circle + | 删除
+            li#note-item-2
+                textarea.input
+                .note-text.text-overflow 课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记
+                .text-tips.sub-text.time 2016-09-09 20:23:34
+                .note-btn-group > .text-right
+                    .btn.small.white#cancel-edit-item-2 取消
+                    .btn.small 保存
+                .bottom > .text-right
+                    .item#note-item-edit-2 > i.iconfont.icon-edit + | 编辑
+                    .item > i.iconfont.icon-close-circle + | 删除
+            li#note-item-3
+                textarea.input 课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记
+                .note-text.text-overflow 课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记课程笔记
+                .text-tips.sub-text.time 2016-09-09 20:23:34
+                .note-btn-group > .text-right
+                    .btn.small.white#cancel-edit-item-3 取消
+                    .btn.small 保存
+                .bottom > .text-right
+                    .item#note-item-edit-3 > i.iconfont.icon-edit + | 编辑
+                    .item > i.iconfont.icon-close-circle + | 删除

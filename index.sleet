@@ -1,0 +1,56 @@
+doctype
+
+html.default
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(name='description' content='')
+        meta(name='keywords' content='')
+        meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
+        title ZXY
+        meta(name='renderer' content='webkit')
+        meta(http-equiv='Cache-Control' content='no-siteapp')
+        # link(href="images/favicon.png" rel="shortcut icon" type="image/x-icon")
+
+        ieif('lt IE 9')
+            # build:js scripts/ie.js
+            script(src='node_modules/es5-shim/es5-shim.js')
+            # endbuild
+
+        # build:css styles/common.css
+        link(rel='stylesheet' href='node_modules/normalize.css/normalize.css')
+        link(rel='stylesheet' href='node_modules/animate.css/animate.css')
+        link(rel='stylesheet' href='styles/selectize/selectize.css')
+        link(rel='stylesheet' href='styles/selectize/selectize.default.css')
+        link(rel='stylesheet' href='styles/alertify/alertify.core.css')
+        link(rel='stylesheet' href='styles/alertify/alertify.default.css')
+        link(rel='stylesheet' href='//at.alicdn.com/t/font_5newa6r874s7cik9.css')
+        link(rel='stylesheet' href='styles/jquery.plupload.queue/css/jquery.plupload.queue.css')
+        # endbuild
+
+        # build:css styles/main.css
+        link(rel='stylesheet' href='bundle/main.css')
+        # endbuild
+
+    body
+        #content.viewport
+        script.
+            if (!window.Promise) {
+                var s = document.createElement('script');
+                s.setAttribute('src', '<!-- @echo ES6PROMISE -->');
+                // <!-- @ifndef ES6PROMISE -->
+                s.setAttribute('src', 'node_modules/es6-promise/dist/es6-promise.js');
+                // <!-- @endif -->
+
+                document.body.insertBefore(s, document.body.childNodes[0]);
+            }
+        script.
+            if (window.ES6Promise) ES6Promise.polyfill();
+
+        # build:js scripts/common.js
+        script(src='bundle/common.js')
+        # endbuild
+
+        # build:js scripts/main.js
+        script(src='bundle/main.js')
+        # endbuild

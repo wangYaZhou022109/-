@@ -1,0 +1,160 @@
+.course-page {
+
+    & .course-catalog {
+        float: left;
+        width: 20%;
+        position: relative;
+        top: -calc(var(--large-space) + var(--main-list-gap));
+        padding: var(--large-space) 0;
+        background-color: white;
+        box-shadow: 0 0 15px rgba(0,0,0,.1);
+
+        & .title-row {
+            margin: 0 var(--large-space);
+        }
+
+        & > ul > li {
+            line-height: calc(var(--font-size) * 4);
+            position: relative;
+            cursor: pointer;
+
+            &:after {
+                content: '';
+                display: block;
+                border-bottom: 1px solid var(--border-color);
+                margin-left: var(--large-space);
+                margin-right: var(--large-space);
+            }
+
+            & .iconfont {
+                transform: scale(1);
+            }
+
+            &.active {
+
+                & .down {
+                    display: none;
+                }
+
+                & .up {
+                    display: block;
+                }
+            }
+
+            & .text {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        & .up{
+            display: none;
+        }
+
+        & .item-parent {
+            @apply --clearfix;
+            padding: 0 var(--large-space);
+        }
+
+        & .item-child {
+            display: none;
+
+            & .text {
+                color: var(--font-color);
+                padding-right: var(--large-space);
+            }
+
+            & li {
+                position: relative;
+                padding: 0;
+                transition: all .2s linear;
+                text-indent: calc(var(--large-space) * 2);
+
+                &:before {
+                    width: 0;
+                    height: 100%;
+                    display: block;
+                    position: absolute;
+                    left: -2px;
+                    top: 0;
+                    content: '';
+                    transition: all .2s linear;
+                }
+
+                &:hover,
+                &.active {
+                    background-color: var(--bg-color);
+
+                    &:before {
+                        background: currentColor;
+                        width: 2px;
+                    }
+                }
+
+                &:after {
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    top: 50%;
+                    margin-top: -2px;
+                    left: var(--large-space);
+                    background-color: currentColor;
+                }
+            }
+        }
+
+    }
+
+    & .course-list {
+        margin-left: 25%;
+    }
+
+    & .catalog-view{
+        position: absolute;
+        left: 0;
+        top: -calc(var(--space)*8.2);
+        width: 500%;
+        background: white;
+        box-shadow:  0 0 25px 5px rgba(0,0,0,.1);
+        z-index: 10;
+        display: none;
+
+        & .catalog-view-box{
+            padding: var(--large-space);
+            min-height: calc(var(--space)*70);
+
+            & .catalog-view-nav{
+                border-bottom: 2px solid var(--border-color);
+
+                & h3{
+                    display: inline-block; font-weight: normal; margin:0 calc(var(--space)*3) 0 0; padding: var(--space) 0; margin-bottom: -2px;
+
+                    &.active{border-bottom: 2px solid var(--black);}
+                }
+            }
+            & .catalog-view-list{
+                & h4{
+                    border-left: calc(var(--space)/2) solid var(--sub-color-1); font-weight: normal; padding-left: var(--space);
+                }
+                & .clearfix{
+                    margin-bottom: var(--large-space);
+                    & .level-second{width: 10%;}
+                    & .Level-three{
+                        float: left; width: 90%;
+
+                        & .Level-three-list{
+                            width: 33.3%; float: left; margin-bottom: var(--large-space);
+
+                            & .level-four a{display: inline-block; margin-right: var(--space); line-height: calc(var(--space)*3); color: var(--font-color);}
+                            & h5{margin-top: 0; margin-bottom: var(--space);}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

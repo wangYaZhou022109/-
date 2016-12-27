@@ -1,0 +1,60 @@
+#!handlebars
+
+module > .course-detail-main.page-main > .container
+    section.section(data-region='info')
+    section.section(data-region='comment')
+
+view('info')
+    .title-row
+        .inline-block.layout-mr > .h3 课程标题
+        .inline-block.layout-mr
+            .star-wrapper
+                .star-bar > .star(style='width:50%')
+                .num 4.0
+        .inline-block.layout-mr
+            .inline-block.layout-ml.m-right > i.iconfont.icon-share
+            .inline-block.m-left > i.iconfont.icon-favorite
+    .sub-title-row.layout-mb-small.layout-mt-small
+        .inline-block.layout-mr 课时：2
+        .inline-block.layout-mr 学分：无
+        .inline-block.layout-mr 发布人：管理员
+        .inline-block.layout-mr 发布时间：2016-09-09
+    p.course-info-detail 描述：压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神上的生理反应，人们的身人们的身人们的身人们的身人们的身体或者精神上的。
+
+view('comment')
+    .h3 讨论区
+    .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
+    textarea.input.w-full(rows='5')
+    .m-top.text-right > .btn 发表
+    .layout-mt
+        .comment-list > ul
+            li
+                .user-pic > img(src='images/logo/logo-zxy-1-min.png')
+                .comment-content
+                    .user-info
+                        a(href='javascript:;') 张三
+                        span 互联网中心
+                    .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
+                    .comment-operation
+                        .pull-left > .sub-text 2分钟前
+                        .text-right
+                            .item > i.iconfont.icon-zan + echo('赞') + echo('43')
+                            .item#reply-1 > i.iconfont.icon-message + echo('评论') + echo('43')
+                            .item > i.iconfont.icon-info + echo('举报') + echo('43')
+                    .comment-reply#reply-content-1
+                        textarea.input.w-full.block(rows='1')
+                        .btn 回复
+                    .comment-list.border.top > ul
+                        li
+                            .user-pic > img(src='images/logo/logo-zxy-1-min.png')
+                            .comment-content
+                                .user-info
+                                    a(href='javascript:;') 张三
+                                    span 互联网中心
+                                .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
+                                .comment-operation
+                                    .pull-left > .sub-text 2分钟前
+                                    .text-right
+                                        .item > i.iconfont.icon-zan + echo('赞') + echo('43')
+                                        .item > i.iconfont.icon-message + echo('评论') + echo('43')
+                                        .item > i.iconfont.icon-info + echo('举报') + echo('43')

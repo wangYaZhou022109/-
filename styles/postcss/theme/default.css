@@ -1,0 +1,186 @@
+:root {
+    --font-color: #333;
+    --font-tip-color: #777;
+    --link-color: #1e54c4;
+    --danger-color: #d82525;
+
+    --main-color: #577DD7; /* 蓝 */
+    --sub-color-1: #363a3e; /* 蓝黑 */
+
+    --custom-color-1: #e68474; /* 红 */
+    --custom-color-2: #7a9fe2; /* 蓝 */
+    --custom-color-3: #f1a77b; /* 橙 */
+    --custom-color-4: #6eb162; /* 绿 */
+    --custom-color-5: #65bdad; /* 青 */
+
+    --star-color: #fd8c42;
+
+    --border-color: #dedede;
+    --fade-color: rgba(255, 255, 255, .2);
+
+    --bg-color: #f9f9f9;
+    --bg-color-2: #eee;
+
+    --black: #000;
+    --white: #fff;
+
+}
+
+@custom-selector :--heading h1, h2, h3, h4, h5, .common-title;
+:--heading a{
+    color: var(--black);
+}
+
+.bg-highlight {
+    background-color: var(--bg-color);
+}
+
+.bg-white {
+    background-color: var(--white);
+}
+
+.border,
+.input {
+    border-color: var(--border-color);
+}
+
+.title-color {
+    color: var(--black);
+}
+
+.sub-title,
+.sub-text {
+    color: var(--font-tip-color);
+}
+
+/* color class */
+.bg-main-color,
+.bg-main-color.active,
+.btn,
+.hover-main-color:hover {
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+.border-main-color {
+    border-color: var(--main-color);
+    border-width: 1px;
+    color: var(--main-color);
+    border-style: solid;
+}
+
+.bg-sub-color-1,
+.hover-sub-color-1:hover {
+    background-color: var(--sub-color-1);
+    color: var(--white);
+}
+
+.text-hover-main-color:hover {
+    color: var(--main-color);
+}
+
+.nav-color.active,
+.nav-color:hover {
+    color: var(--main-color);
+
+    &::after {
+        background-color: currentColor;
+    }
+}
+
+.more {
+    background-color: var(--sub-color-1);
+    color: var(--white);
+}
+
+.footer {
+    background-color: var(--sub-color-1);
+    color: var(--white);
+}
+
+.line-color {
+    &::before,
+    &::after {
+        background-color: var(--border-color);
+    }
+}
+
+
+/* bg-color-class */
+.custom-bg-color-1 {
+    background-color: var(--custom-color-1);
+}
+
+.custom-bg-color-2 {
+    background-color: var(--custom-color-2);
+}
+
+.custom-bg-color-3 {
+    background-color: var(--custom-color-3);
+}
+
+.custom-bg-color-4 {
+    background-color: var(--custom-color-4);
+}
+
+.custom-bg-color-5 {
+    background-color: var(--custom-color-5);
+}
+
+/* text-color-class */
+.custom-color-1 {
+    color: var(--custom-color-1);
+}
+
+.custom-color-2 {
+    color: var(--custom-color-2);
+}
+
+.custom-color-3 {
+    color: var(--custom-color-3);
+}
+
+.custom-color-4 {
+    color: var(--custom-color-4);
+}
+
+.custom-color-5 {
+    color: var(--custom-color-5);
+}
+
+[class*=custom-bg-] {
+    color: var(--white);
+}
+
+.section .activity-tag {
+    background-color: currentColor;
+    background-color: var(--sub-color-1)\0;
+    color: var(--white);
+
+    & .text {
+        color: var(--black);
+    }
+
+    &::after {
+        border-left-color: currentColor;
+    }
+}
+.page-side {
+    & .side-rank-list {
+        & li:before {
+            background-color:var(--bg-color-2);
+        }
+    }
+    & .relevant-course {
+        & .img {
+            & h4 {
+                color: var(--white);
+                background-color: var(--black)\0;
+                background-color: color(var(--black) alpha(20%));
+            }
+        }
+    }
+    & .side-more {
+        color: var(--font-tip-color);
+    }
+}

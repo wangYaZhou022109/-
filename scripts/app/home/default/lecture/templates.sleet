@@ -1,0 +1,100 @@
+#!handlebars
+
+
+module > .lecture-section > .container
+    #lecture(data-region='lecture')
+
+
+view('lecture')
+    .home-title-row
+        .title.line-color 讲师榜
+        .title-more
+            span.sub-title LECTURE
+            span.more MORE >>
+
+    .reverse-btn-group
+        .iconbtn#iconbtn-1 > .bg-white > .hover-main-color > .iconfont.icon-arrow-left
+        .iconbtn.show#iconbtn-2 > .bg-white > .hover-main-color > .iconfont.icon-arrow-right
+
+    .lecture-list
+        ul.clearfix.reverse
+
+            li > .content
+                .img > .img-cont > img(src='images/1.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+            li > .content
+                .img > .img-cont > img(src='images/2.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+            li > .content
+                .img > .img-cont > img(src='images/1.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+            li > .content
+                .img > .img-cont > img(src='images/3.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+            li > .content
+                .img > .img-cont > img(src='images/4.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+        ul.clearfix.behind-list#behind-list
+
+            li > .content
+                .img > .img-cont > img(src='images/4.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+            li > .content
+                .img > .img-cont > img(src='images/3.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+            li > .content
+                .img > .img-cont > img(src='images/2.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+            li > .content
+                .img > .img-cont > img(src='images/1.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍
+
+            li > .content
+                .img > .img-cont > img(src='images/1.png')
+                .text-cont
+                    .title
+                        .h3 讲师名字
+                        .h4 高级讲师
+                    .text.border 讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍讲师语录或者介绍

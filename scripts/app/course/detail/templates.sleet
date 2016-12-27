@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .course-detail-page
+    .top(data-region='top')
+    .page-main-wrapper
+        .side(data-region='side')
+        .main(data-region='main')

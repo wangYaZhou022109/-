@@ -1,0 +1,63 @@
+.iconfont {
+    font-size: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    transform: scale(1.25);
+    vertical-align: top;
+
+    &.scale-1 {
+        transform: scale(1);
+    }
+}
+
+.alertify {
+    border: none;
+    border-radius: 0;
+    box-shadow:0 2px 20px -5px rgba(0,0,0,.9);
+}
+
+.alertify-buttons {
+    margin-top: calc(var(--space) * 3);
+    text-align: right;
+    border-top: 1px solid #ddd;
+    padding: calc(var(--space) * 2) 0 0;
+}
+
+.alertify-button,
+.alertify-button:hover,
+.alertify-button:focus,
+.alertify-button:active {
+    border: none;
+    border-radius: 0;
+    background: none;
+    text-shadow: none;
+    padding: 0;
+    box-shadow: none;
+    text-decoration: none;
+    margin-left: calc(var(--space) * 3);
+    font-weight: normal;
+}
+
+.alertify-button:hover,
+.alertify-button:focus,
+.alertify-button:active {
+    font-weight: bold;
+}
+
+.ps-container>.ps-scrollbar-y-rail {
+    width: 11px;
+}
+
+.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y,
+.ps-container>.ps-scrollbar-x-rail>.ps-scrollbar-x {
+    border-radius: 0;
+    right: 0;
+}
+.ps-container>.ps-scrollbar-x-rail {
+    height: 11px;
+}
+
+.ps-container>.ps-scrollbar-x-rail>.ps-scrollbar-x {
+    bottom: 0;
+    right: auto;
+}

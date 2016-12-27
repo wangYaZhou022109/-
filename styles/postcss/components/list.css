@@ -1,0 +1,125 @@
+:root {
+    --main-list-img-height: 12em;
+    --main-list-gap: calc(var(--font-size) * 3);
+}
+
+.main-list {
+
+    & .filter {
+        height: 1em;
+        line-height: 1em;
+        margin: var(--main-list-gap) 0;
+        font-size: var(--small-font);
+
+        & .item {
+            margin-right: var(--large-space);
+            display: inline-block;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    & > ul {
+        @apply --clearfix;
+
+        margin-right: -calc(var(--main-list-gap) - 0.1);
+
+        & li {
+            float: left;
+            width: 33.333%;
+            padding-right: var(--main-list-gap);
+            margin-bottom: calc(var(--main-list-gap) + 1);
+
+            & .content {
+                position: relative;
+                transition: all .2s linear;
+
+                &:hover {
+                    @apply --box-shadow;
+
+                    padding: 1em 1em var(--large-space);
+                    margin: -1em -1em -var(--large-space);
+
+                    & .detail-wrapper {
+                        @apply --fade-in;
+
+                        transform: scale(1,1);
+                        z-index: 1;
+
+                    }
+
+                    & .list-tag {
+                        margin: 1em;
+                    }
+
+                    & .title {
+                        font-weight: bold;
+                    }
+
+                    & img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            & .title {
+                margin: 1em 0;
+            }
+
+            & .bottom {
+                font-size: var(--small-font);
+                white-space: nowrap;
+
+                & .item {
+                    display: inline;
+                    padding-right: var(--font-size);
+                    margin-right: var(--font-size);
+                    border-right: 1px solid var(--border-color);
+
+                    &:last-child {
+                        border: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+
+            }
+
+            & .detail-wrapper {
+                @apply --fade-out;
+
+                background-color: white\0;
+                background-color: rgba(255,255,255,.95);
+                transition: all .2s linear;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
+                transform: scale(1,0);
+                transform-origin: 0 100%;
+                z-index: -1;
+                padding: var(--space) var(--large-space);
+
+
+                & p {
+                    height: calc(var(--font-size) * 1.8 * 2);
+                    overflow: hidden;
+                }
+            }
+
+            & .list-tag {
+                @apply --tag;
+            }
+
+        }
+    }
+
+    & .img {
+        height: var(--main-list-img-height);
+    }
+
+
+}

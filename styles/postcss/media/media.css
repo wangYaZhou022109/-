@@ -1,0 +1,21 @@
+@import "media-1136.css" (max-width: 1137px);
+@import "media-960.css" (max-width: 961px);
+@import "media-1600.css" (min-width: 1599px);
+
+@media (min-width: 1439px) {
+    html,body {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1919px) {
+    html,body {
+        font-size: 18px;
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1800px;
+    }
+}

@@ -1,0 +1,34 @@
+.home-page {
+    & .news-list {
+        padding: calc(var(--font-size) * 2) 0;
+        line-height: calc(var(--font-size) * 2);
+
+        & ul {
+            height: calc(var(--font-size) * 2);
+            overflow: hidden;
+        }
+
+        & li {
+            @apply --text-overflow;
+        }
+
+        & .title {
+            float: left;
+            margin-right: var(--space);
+        }
+
+        & .navigator {
+            text-align: right;
+            float: right;
+        }
+
+        & .icon {
+            display: inline-block;
+            background-color: var(--bg-color);
+            font-size: var(--small-font);
+            padding: 0 1em;
+            margin-right: -.3em;
+
+        }
+    }
+}

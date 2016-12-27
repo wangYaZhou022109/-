@@ -1,0 +1,110 @@
+#!handlebars
+
+module > .activity-page
+    .activity-banner(data-region='banner')
+    .activity-filter(data-region='filter')
+    .activity-list(data-region='list')
+
+view('banner')
+    .container > ul
+        li.prev
+            .content
+                .covers
+                    .img > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='绩效考核指标的量化技术')
+                    .list-tag.custom-color-1 > .tag > span 考试
+                .details
+                    .title.text-overflow 绩效考核指标的量化技术
+                    .time
+                        p 起：2016-10-25 09:00
+                        p 至：2016-10-25 11:30
+                    .information 从最普遍的模板套用出发，讲解学习有关于会声会影界面操作，素材管理，界面操作，剪辑编辑，转场特效，滤镜特效，运动特效的内容
+                    .num
+                        | 已有
+                        strong 316
+                        | 人参加
+                    a.normal(href='#/exam/detail') > .btn.radius 我要参与
+        li.current
+            .content
+                .covers
+                    .img > img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg' alt='微信运营从初级到高级全攻略')
+                    .list-tag.custom-color-2 > .tag > span 直播
+                .details
+                    .title.text-overflow 微信运营从初级到高级全攻略
+                    .time
+                        p 起：2016-10-25 09:00
+                        p 至：2016-10-25 11:30
+                    .information 从最普遍的模板套用出发，讲解学习有关于会声会影界面操作，素材管理，界面操作，剪辑编辑，转场特效，滤镜特效，运动特效的内容
+                    .num
+                        | 已有
+                        strong 1052
+                        | 人参加
+                    a.normal(href='#/live/detail') > .btn.radius 我要参与
+        li.next
+            .content
+                .covers
+                    .img > img(src='http://img.ui.cn/data/file/8/6/1/877168.jpg' alt='时间不够用？用时间日志找出原因')
+                    .list-tag.custom-color-3 > .tag > span 调研
+                .details
+                    .title.text-overflow 时间不够用？用时间日志找出原因
+                    .time
+                        p 起：2016-10-25 09:00
+                        p 至：2016-10-25 11:30
+                    .information 从最普遍的模板套用出发，讲解学习有关于会声会影界面操作，素材管理，界面操作，剪辑编辑，转场特效，滤镜特效，运动特效的内容
+                    .num
+                        | 已有
+                        strong 518
+                        | 人参加
+                    a.normal(href='#/survey/detail') > .btn.radius 我要参与
+
+view('filter')
+    .container
+        .pull-right > .search-bar
+            input.input(name='activity-name' placeholder='请输入您要找的活动' value=params.name)
+            i.iconfont.icon-search.scale-1.text-hover-mail-color#search
+
+        .activity-tabs > ul
+            compare(params.isOverdue 'eq' false)
+                li(id='item-1' class = 'active') 精彩进行中
+                li(id='item-2') 往期回顾
+            compare(params.isOverdue 'ne' false)
+                li(id='item-1') 精彩进行中
+                li(id='item-2' class = 'active') 往期回顾
+view('list')
+    .container > .main-list
+        .activity-category
+            a(id='category-item-' href='javascript:;')(class ='active')&if(params.types.all) 全部
+            a(id='category-item-1' href='javascript:;')(class ='active')&if(params.types.class) 班级
+            a(id='category-item-3' href='javascript:;')(class ='active')&if(params.types.exam) 考试
+            a(id='category-item-6' href='javascript:;')(class ='active')&if(params.types.survey) 调研
+            a(id='category-item-2' href='javascript:;')(class ='active')&if(params.types.live) 直播
+            a(id='show-paper-7' href='#/exam/answer-paper-test') 进行考试（测试）
+            a(id='score-detail-paper-7' href='#/exam/score-detail-paper') 成绩详情（测试）
+            a(id='mark-paper-7' href='#/exam/mark-paper') 评卷（测试）
+
+
+        ul > each(activitys)
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
+                        .detail-wrapper
+                            p > echo(description)
+                            a.normal.block(id='to-exam-'+ targetId href='javascript:;' ) > .btn.radius.block 我要参与
+                    .clearfix
+                        .pull-right.tip-text
+                            i.iconfont.icon-user + | 218人已学习
+                        .title.text-overflow > echo(name)
+                    .bottom
+                        .pull-right > dateTime(startTime) + echo('~') + dateTime(startTime)
+                        | 起至时间
+                    .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+
+    .pagination
+        ul
+            li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
+            li.hover-main-color.active.bg-main-color 1
+            li.hover-main-color 2
+            li.hover-main-color 3
+            li.hover-main-color 4
+            li.hover-main-color > i.iconfont.icon-arrow-right.scale-1
