@@ -5,11 +5,21 @@ module.exports = {
     },
     store: {
         models: {
-            homeConfig: {}
+            homeConfig: {},
+            course: { url: '../course-study/course-info/ids' },
+            down: { url: '../human/file/download' }
         },
         callbacks: {
             init: function(mod) {
-                this.models.homeConfig = mod;
+                var ids = [];
+                this.models.homeConfig.data = mod;
+                mod.items.forEach(function(item) {
+                    ids.push(item.sourceId);
+                });
+                this.models.course.params = {
+                    ids: ids.join(',')
+                };
+                return ids.length && this.get(this.models.course);
             }
         }
     }

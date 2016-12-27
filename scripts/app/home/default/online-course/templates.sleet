@@ -27,7 +27,7 @@ view('online-course') > .clearfix
                 .img > .img-cont >  img(src=cover height='300px')
                 .cont.bg-white.show
                     .title-row > echo(name)
-                    p.sub-title > echo(description)
+                    p.sub-title.show > echo(description)
                     .bottom.sub-text
                         .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                         .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
@@ -40,7 +40,7 @@ view('online-course') > .clearfix
                 .bar-cont
                     .cont.bg-white.show
                         .title-row > echo(name)
-                        p.sub-title > echo(description)
+                        p.sub-title.show > echo(description)
                         .bottom.sub-text
                             .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                             .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人

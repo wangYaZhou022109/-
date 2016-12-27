@@ -13,7 +13,7 @@ module.exports = {
             });
             data.homeConfig.items.forEach(function(item) {
                 var course = courseMap[item.sourceId];
-                var itemCourse = D.assign({}, course, item);
+                var itemCourse = D.assign({}, course, { name: item.name });
                 if (itemCourse.cover) {
                     itemCourse.cover = that.bindings.down.getFullUrl() + '?id=' + itemCourse.cover;
                 }

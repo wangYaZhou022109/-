@@ -92,6 +92,31 @@ module.exports = {
         return val;
     },
 
+    times: function() {
+        /* eslint-disable */
+        var fn, ret = [], i, count = 1, start, end, options, that = this;
+        if (arguments.length === 2) {
+            start = 0;
+            end = arguments[0];
+            options = arguments[1];
+        } else {
+            start = arguments[0];
+            end = arguments[1];
+            options = arguments[2];
+        }
+        fn = options.fn;
+
+        function execIteration (index) {
+            var innerData = D.assign({ count: count, index: index }, that);
+            ret.push(fn(innerData));
+            count++;
+        }
+        for (i = start; i < end; i++) {
+            execIteration(i);
+        }
+        return ret.join('');
+    },
+
     isGrant: function(operatorType, organizationId, options) {
         var view = options.data.root.Self,
             grants,

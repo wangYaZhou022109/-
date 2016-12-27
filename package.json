@@ -57,7 +57,8 @@
         "module",
         "view",
         "compare",
-        "inner"
+        "inner",
+        "times"
       ],
       "inline": [
         "date",

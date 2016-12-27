@@ -7,92 +7,19 @@ module > .study-subject-section > .container
 
 view('study-subject')
     .home-title-row
-        .title.line-color 学习专题
+        .title.line-color > echo(homeConfig.name)
         .title-more
             span.sub-title SPECIAL
             span.more > a.normal(href='#/study-subject/index') MORE >>
 
     ul
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/9/9/1/881199.png')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        ii.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/0/2/7/751720.jpg')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/5/3/3/750335.png')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/5/9/5/739595.jpg')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/1/9/7/737791.jpg')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/7/9/6/734697.jpg')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-
-
-        li > .content
-            .img > .img-cont >  img(src='http://img.ui.cn/data/file/4/0/0/889004.jpg')
-            .bottom
-                .clearfix
-                    .pull-right.tip-text
-                        i.iconfont.icon-view
-                        span.m-left 123
-                    .title.text-overflow 逆向思维训练实例
-                .sub-title.text-overflow.m-top 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+        times(8)
+            li > .content > inner(course count)
+                .img > .img-cont >  img(src=cover)
+                .bottom
+                    .clearfix
+                        .pull-right.tip-text
+                            i.iconfont.icon-view
+                            span.m-left 123
+                        .title.text-overflow > echo(name)
+                    .sub-title.text-overflow.m-top > echo(description)
