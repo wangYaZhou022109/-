@@ -10,7 +10,7 @@ exports.bindings = {
 exports.events = {
     'click note-btn': 'showNote',
     'click toggle-catalog': 'toggleCatalog',
-    'click showsection-*': 'showSection'
+    'click show-section-*': 'showSection'
 };
 
 exports.handlers = {
@@ -18,14 +18,34 @@ exports.handlers = {
         var courseSide = this.module.$('course-side-catalog');
         A.animate(courseSide, 'show-note');
     },
-
     toggleCatalog: function() {
         $(this.module.$('course-side-catalog')).toggleClass('collapse');
     },
-    showSection: function(id) {
-        var section = this.bindings.course.data.sections[id],
+    showSection: function(id, e, element) {
+        var course = this.bindings.course.data,
+            section = course.sections[id],
+            chapter = course.chapters[section.chapterId],
+            studyProgress = course.studyProgress,
             sectionType = section.sectionType,
             url = section.url;
+        // 如果点击的是当前节,直接返回
+        if (studyProgress.currentSectionId === id) {
+            return false;
+        }
+        // 判断章是否按顺序
+        if (course.learnSequence === 1 && studyProgress.currentChapterId !== chapter.id) {
+            return this.app.message.error('该课程必须按章节顺序学');
+        }
+        // 判断节是否按顺序
+        if (chapter.learnSequence === 1 && studyProgress.currentSectionId !== section.id) {
+            return this.app.message.error('该章节必须按顺序学');
+        }
+        // 设置样式
+        $(element).parents('dl').siblings().removeClass('focus');
+        $(element).parents('dl').addClass('focus');
+        // 设置当前章,节
+        studyProgress.currentChapterId = chapter.id;
+        studyProgress.currentSectionId = section.id;
         switch (sectionType) {
         // 1:文档 5:音频类 6:视频
         case 1:
@@ -45,7 +65,6 @@ exports.handlers = {
             break;
         // 任务
         case 8:
-            window.open('http://www.baidu.com');
             break;
         // 考试
         case 9:
@@ -55,20 +74,30 @@ exports.handlers = {
             break;
         default:
         }
+        return true;
     }
 };
 
 exports.dataForTemplate = {
     course: function(data) {
-        var course = data.course;
-        _.forEach(course.courseChapters, function(item, i) {
-            var r = item;
-            r.seq = courseUtil.seqName(i, 1);
-            _.forEach(r.courseChapterSections, function(obj, j) {
-                var rr = obj;
-                rr.seq = courseUtil.seqName(j, 2);
+        var course = data.course,
+            currentChapterId,
+            currentSectionId;
+        if (course.addType) {
+            currentChapterId = course.studyProgress.currentChapterId;
+            currentSectionId = course.studyProgress.currentSectionId;
+            _.forEach(course.courseChapters, function(item, i) {
+                var r = item;
+                r.seq = courseUtil.seqName(i, 1);
+                _.forEach(r.courseChapterSections, function(obj, j) {
+                    var rr = obj;
+                    rr.seq = courseUtil.seqName(j, 2);
+                    if (currentChapterId === r.id && currentSectionId === rr.id) {
+                        rr.focus = true;
+                    }
+                });
             });
-        });
+        }
         return data.course;
     }
 };

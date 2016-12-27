@@ -3,8 +3,8 @@ exports.type = 'dynamic';
 exports.bindings = {
     course: false,
     state: true,
-    section: false,
-    sectionProgress: false
+    section: true,
+    sectionProgress: true
 };
 
 exports.getEntityModuleName = function(key) {

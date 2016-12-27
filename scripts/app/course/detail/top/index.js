@@ -1,4 +1,10 @@
 var _ = require('lodash/collection'),
+    judgeSection = function(type) {
+        if (type === 1 || type === 3 || type === 5 || type === 6) {
+            return true;
+        }
+        return false;
+    },
     dynamicCode = {
         1: 'pdf',
         2: 'survey',
@@ -53,20 +59,34 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var course = this.models.course,
+                studyProgress = {},
                 notes = this.models.notes,
-                state = this.models.state;
-            course.set({ id: payload.courseId });
-            notes.params = { courseId: payload.courseId };
-            return this.chain(this.get(course).then(function() {
-                if (!course.data.owned) {
-                    this.app.message.error('您没有该课程的学习权限');
-                } else {
-                    course.init();
-                    state.data.code = 'default';
-                    state.data.ready = true;
-                    state.changed();
+                state = this.models.state,
+                currentSectionType;
+            course.set(payload.course);
+            notes.params = { courseId: course.data.id };
+            studyProgress = course.data.studyProgress;
+            state.data.code = 'default';
+            // 首次进入并没有数据,只有第二次加载时才会有数据
+            if (course.data.addType) {
+                course.init();
+
+                if (!studyProgress.currentChapterId) {
+                    studyProgress.currentChapterId = course.data.courseChapters[0].id;
+                    studyProgress.currentSectionId = course.data.courseChapters[0].courseChapterSections[0].id;
+                } else if (!studyProgress.currentSectionId) {
+                    // eslint-disable-next-line max-len
+                    studyProgress.currentSectionId = course.data.courseChapters[studyProgress.currentChapterId].courseChapterSections[0].id;
                 }
-            }), this.get(notes));
+                currentSectionType = course.data.sections[studyProgress.currentSectionId].sectionType;
+
+                if (judgeSection(currentSectionType)) {
+                    // eslint-disable-next-line max-len
+                    this.chain(this.module.dispatch('showSection', { sectionId: studyProgress.currentSectionId }), this.get(notes));
+                } else {
+                    this.get(notes);
+                }
+            }
         },
         initNotes: function() {
             var notes = this.models.notes;
@@ -74,11 +94,12 @@ exports.store = {
         },
         showSection: function(payload) {
             var section = this.models.section,
+                sectionProgress = this.models.sectionProgress,
                 state = this.models.state,
                 course = this.models.course;
             section.set(course.data.sections[payload.sectionId]);
-            state.set({ code: dynamicCode[section.data.sectionType] });
-            state.data.ready = true;
+            sectionProgress.set(course.data.progress[payload.sectionId]);
+            state.data.code = dynamicCode[section.data.sectionType];
             state.changed();
         },
         collect: function() {

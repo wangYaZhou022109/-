@@ -1,6 +1,6 @@
 exports.bindings = {
-    courseChapterSection: true,
-    courseSectionStudyProgress: true,
+    section: true,
+    sectionProgress: true,
     download: false
 };
 

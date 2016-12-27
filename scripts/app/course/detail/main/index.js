@@ -11,8 +11,7 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var course = this.models.course;
-            course.set({ id: payload.courseId });
-            return this.chain(this.get(course));
+            course.set(payload.course);
         },
         collect: function() {
             var courseId = this.models.course.data.id,

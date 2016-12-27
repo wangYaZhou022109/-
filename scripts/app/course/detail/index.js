@@ -1,6 +1,22 @@
-exports.afterRender = function() {
-    var options = { courseId: this.renderOptions.id };
-    this.regions.top.show('course/detail/top', options);
-    this.regions.main.show('course/detail/main', options);
-    this.regions.side.show('course/detail/side', options);
+exports.items = {
+    data: 'data'
+};
+
+exports.store = {
+    models: {
+        course: {
+            url: '../course-study/course-front'
+        },
+        state: {}
+    },
+    callbacks: {
+        init: function(payload) {
+            var course = this.models.course;
+            course.set({ id: payload.id });
+            return this.get(course);
+        },
+    }
+};
+exports.beforeRender = function() {
+    this.dispatch('init', this.renderOptions);
 };

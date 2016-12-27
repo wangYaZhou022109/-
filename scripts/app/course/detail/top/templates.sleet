@@ -46,7 +46,7 @@ view('player-title')
 
 
 view('player')
-    if(state.ready)
+    if(state.code)
         div(data-dynamic-key=state.code)
 
 view('chapter')
@@ -62,7 +62,7 @@ view('chapter')
                     compare(../course.addType 'eq' 2)
                         .common-title > echo(seq ': ' name)
                     each(courseChapterSections)
-                        dl.required
+                        dl.required(class = if(focus 'focus'))
                             dt
                                 compare(required 'eq' 1)
                                     .required-tag > echo('必修')
@@ -72,8 +72,8 @@ view('chapter')
                                 .item.continue
                                     i.iconfont.icon-reload
                                     span.progress > percent(progress.completedRate)
-                                    span(id='showsection-'+id) > map('course-study-status' progress.finishStatus)
-                                .item.record
+                                    span(id='show-section-'+id) > map('course-study-status' progress.finishStatus)
+                                .item.record(id='show-record'+id)
                                     i.iconfont.icon-time + | 学习记录
 
 view('note')
