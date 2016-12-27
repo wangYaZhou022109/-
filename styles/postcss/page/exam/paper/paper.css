@@ -94,6 +94,11 @@
             }
         }
 
+        & .question-number {
+            position: absolute;
+            font-weight: bold;
+        }
+
     }
 
     & .achievement-head {
@@ -121,6 +126,8 @@
 
     & .bottom-favorite {
         font-size: var(--small-font);
+        text-align: right;
+        margin-bottom: var(--section-gap);
 
         & .item {
             display: inline-block;
@@ -138,5 +145,14 @@
         white-space: normal;
         vertical-align: top;
         margin-right: 4%;
+    }
+
+    & .mark-row {
+        padding: 1em 0;
+        margin-top: var(--large-space);
+    }
+
+    & .answer-row {
+        margin-bottom: var(--section-gap);
     }
 }

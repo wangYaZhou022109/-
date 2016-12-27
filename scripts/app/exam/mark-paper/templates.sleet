@@ -6,7 +6,7 @@ module > .achievement-content.content
 
 view('side')
     .achievement-preview-top
-        .com-title.text-center 
+        .com-title.text-center
         | 提交评卷
     ul.achievement-preview > each(questionTypes)
         li.border.bottom(id='list-item-'+ @index)
@@ -26,7 +26,6 @@ view('main')
             select.input#paper-view-type > each(paperViewTypes)
                 option(value=key)('selected')&if(selected) > echo(value)
 
-    .hr
     .preview-content
         if(state.isOnePageOneQuestion)
             .row
@@ -44,8 +43,7 @@ view('main')
                 div
                     each(questionTypes)
                         label
-                            .com-title > echo(data.name '题' '(共' data.totalScore '分)')
+                            .common-title > echo(data.name '题' '(共' data.totalScore '分)')
                             each(data.data)
                                 echo(i)
                                 div(data-dynamic-key=id)
-

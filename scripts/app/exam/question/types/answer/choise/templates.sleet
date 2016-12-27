@@ -22,11 +22,11 @@ view('options') > .answer
                 .answer-options > @echo(content)
 
     if(state.detailMode)
-        .show-answer.border.border-top
-            .row
-                .col-xs-6 > .com-title > echo('答案：' state.answer)
-                .col-xs-6
+        .show-answer
+            .clearfix
+                .pull-left > .common-title > echo('答案：' state.answer)
+                .text-right
                     span > echo('本题得分：')
                     span > restoreNumber(state.gainScore 100)
-                    span > echo('本题易错率：')
+                    span.layout-ml > echo('本题易错率：')
                     span > restoreNumber(state.errorRate 10000) > echo('%')
