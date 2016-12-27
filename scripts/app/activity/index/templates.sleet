@@ -84,10 +84,10 @@ view('list')
                 .content
                     .img
                         .img-cont
-                            a.normal(href='#/exam/detail') > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
+                            a.normal > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
                         .detail-wrapper
                             p > echo(description)
-                            a.normal.block(href='#/exam/detail') > .btn.radius.block 我要参与
+                            a.normal.block(id='to-exam-'+ targetId href='javascript:;' ) > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习

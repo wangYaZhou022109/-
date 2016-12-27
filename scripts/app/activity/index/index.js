@@ -2,7 +2,8 @@ var D = require('drizzlejs');
 exports.items = {
     banner: 'banner',
     filter: 'filter',
-    list: 'list'
+    list: 'list',
+    'exam/index': { isModule: true }
 };
 
 exports.store = {
@@ -16,7 +17,7 @@ exports.store = {
         params: { data: { isOverdue: false } }
     },
     callbacks: {
-        init: function(payload) {
+        init: function() {
             this.models.activitys.params = this.models.params.data;
             this.get(this.models.activitys);
         },

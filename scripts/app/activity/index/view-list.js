@@ -5,6 +5,7 @@ exports.bindings = {
 
 exports.events = {
     'click category-item-*': 'toggleItem',
+    'click to-exam-*': 'toExam',
     'click show-paper': 'showPaper'
 };
 
@@ -12,6 +13,9 @@ exports.handlers = {
     toggleItem: function(el) {
         var me = this;
         me.module.dispatch('search', { type: el });
+    },
+    toExam: function(id) {
+        this.app.show('content', 'exam/index', { id: id });
     },
     showPaper: function() {
     }
