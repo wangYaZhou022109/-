@@ -8,7 +8,8 @@ module.exports = {
     store: {
         models: {
             homeConfig: {},
-            course: { url: '../course-study/course-info/ids' }
+            course: { url: '../course-study/course-info/ids' },
+            down: { url: '../human/file/download' }
         },
         callbacks: {
             init: function(mod) {

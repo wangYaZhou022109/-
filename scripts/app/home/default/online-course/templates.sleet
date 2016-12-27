@@ -16,7 +16,7 @@ view('online-course') > .clearfix
                 .cont.bg-white
                     .text-cont.bg-white
                         .title-row > echo(name)
-                        p.sub-title {{{description}}}
+                        p.sub-title > echo(description)
                     .bottom.bg-white.sub-text
                         .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                         .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
@@ -27,7 +27,7 @@ view('online-course') > .clearfix
                 .img > .img-cont >  img(src=cover height='300px')
                 .cont.bg-white.show
                     .title-row > echo(name)
-                    p.sub-title {{{description}}}
+                    p.sub-title > echo(description)
                     .bottom.sub-text
                         .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                         .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
@@ -40,7 +40,7 @@ view('online-course') > .clearfix
                 .bar-cont
                     .cont.bg-white.show
                         .title-row > echo(name)
-                        p.sub-title {{{description}}}
+                        p.sub-title > echo(description)
                         .bottom.sub-text
                             .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                             .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
@@ -52,7 +52,7 @@ view('online-course') > .clearfix
                     .cont.bg-white
                         .text-cont.bg-white
                             .title-row > echo(name)
-                            p.sub-title {{{description}}}
+                            p.sub-title > echo(description)
                         .bottom.bg-white.sub-text
                             .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                             .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
@@ -63,7 +63,7 @@ view('online-course') > .clearfix
                     .cont.bg-white
                         .text-cont.bg-white
                             .title-row > echo(name)
-                            p.sub-title {{{description}}}
+                            p.sub-title > echo(description)
                         .bottom.bg-white.sub-text
                             .item.border > i.iconfont.icon-time(title='课程时长') + .inline-block.m-left {{pick courseTime 0}} m
                             .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
