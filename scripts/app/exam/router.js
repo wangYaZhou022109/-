@@ -3,8 +3,11 @@ exports.routes = {
     'answer-paper': 'showPaper',
     'score-detail-paper': 'showScoreDetailPaper',
     'mark-paper': 'showMarkPaper',
+    'mark-paper-test': 'showMark2',
     demo: 'showDemo',
-    'answer-paper-test': 'showAnswerPaperTest'
+    demo: 'showDemo',
+    'answer-paper-test': 'showAnswerPaperTest',
+    'score-detail-paper-test': 'showScore2',
 };
 
 exports.showIndex = function() {
@@ -19,6 +22,9 @@ exports.showScoreDetailPaper = function() {
 exports.showMarkPaper = function() {
     return this.app.show('content', 'exam/mark-paper');
 };
+exports.showMark2 = function() {
+    return this.app.show('content', 'exam/mark-paper-test');
+};
 
 exports.showDemo = function() {
     return this.app.show('content', 'exam/demo');
@@ -26,4 +32,8 @@ exports.showDemo = function() {
 
 exports.showAnswerPaperTest = function() {
     return this.app.show('content', 'exam/answer-paper-test');
+};
+
+exports.showScore2 = function() {
+    return this.app.show('content', 'exam/score-detail-paper-test');
 };
