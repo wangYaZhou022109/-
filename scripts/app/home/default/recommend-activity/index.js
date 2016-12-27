@@ -5,11 +5,21 @@ module.exports = {
     },
     store: {
         models: {
-            homeConfig: {}
+            homeConfig: {},
+            activity: { url: '../exam/activity/ids' },
+            down: { url: '../human/file/download' }
         },
         callbacks: {
             init: function(mod) {
-                this.models.homeConfig = mod;
+                var ids = [];
+                this.models.homeConfig.data = mod;
+                mod.items.forEach(function(item) {
+                    ids.push(item.sourceId);
+                });
+                this.models.activity.params = {
+                    ids: ids.join(',')
+                };
+                return ids.length && this.get(this.models.activity);
             }
         }
     }
