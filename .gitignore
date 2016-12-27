@@ -6,3 +6,9 @@ bundle
 *.hbs
 .sass-cache
 .DS_Store
+.vscode
+jsconfig.json
+yarn-error.log
+yarn.lock
+.yarnclean
+.tern-project
