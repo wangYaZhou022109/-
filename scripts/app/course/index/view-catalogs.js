@@ -22,7 +22,6 @@ exports.events = {
 
 exports.handlers = {
     closeCatalog: function() {
-        var ele = this.$$('.catalog-view')[0];
-        ele.hidden = !ele.hidden;
+        this.$$('.catalog-view')[0].hidden = true;
     }
 };

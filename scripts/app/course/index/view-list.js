@@ -26,7 +26,14 @@ exports.dataForTemplate = {
         var defultImg = 'http://img.ui.cn/data/file/9/1/3/868319.jpg';
         data.courses.forEach(function(obj) {
             var course = obj || {};
+            var studyType = 1; // 继续学习
             course.img = course.cover ? (downUrl + '?id=' + course.cover) : defultImg;
+            if (course.description) {
+                course.description = course.description.replace(/<[^>]+>/g, '').substr(0, 20);
+            }
+            if (course.finishStatus === 2 || course.finishStatus === 4) studyType = 2;
+            else if (course.finishStatus === null) studyType = 0;
+            course.studyType = studyType;
         });
         return data.courses;
     },
