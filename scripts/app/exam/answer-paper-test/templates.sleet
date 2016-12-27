@@ -10,9 +10,9 @@ view('side')
 
     ul.list > each(questionTypes)
         li(id='list-item-'+ @index)
-            .list-title > echo(data.name '题' '(共' data.totalScore '分)')
+            .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
-                div(class='list-item' + if(isCurrent 'correct' ''))(id='q-'+id) > .num > echo(i)
+                div(class='list-item' + if(isCurrent 'correct' ''))(id='q-'+id) > echo(i)
 
 
 view('head')
@@ -39,8 +39,8 @@ view('main')
                         echo(i)
                         div(data-dynamic-key=id)
                         div(data-dynamic-key='collect-correct-' + id)
-           
-           
+
+
             #  .h3.m-bottom 单选题（共10题，总分10分）
             #      ul.preview-list
             #          li

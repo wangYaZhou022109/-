@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 exports.bindings = {
     state: false,
     exam: false,
@@ -10,10 +12,14 @@ exports.events = {
 };
 
 exports.handlers = {
-    toggleMore: function(id) {
+    toggleMore: function(id, e, target) {
         this.module.dispatch('changeState', { typeIndex: Number(id) });
+        $(target).find('.min-btn-groups').slideToggle();
+        $(target).siblings().find('.min-btn-groups').slideUp();
     },
-    showQuestion: function(id) {
+    showQuestion: function(id, e, target) {
+        e.preventDefault();
+        $(target).addClass('active').siblings().removeClass('active');
         return this.module.dispatch('changeState', { questionId: id });
     }
 };

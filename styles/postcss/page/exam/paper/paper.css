@@ -25,40 +25,45 @@
             margin-top: var(--base-gap);
 
             & .list-title {
-                margin-bottom: 1em;
+                margin-bottom: var(--large-space);
+                font-size: var(--font-title);
             }
 
             & li {
-                margin-bottom: var(--large-space);
+                margin-top: calc(var(--base-gap) + 1);
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
             }
         }
 
         & .list-item {
+            @apply --transition;
+
             display: inline-block;
             text-align: center;
             margin-right: var(--space);
             margin-bottom: 1em;
-
+            background: white;
+            width: 2em;
+            height: 2em;
+            line-height: 2em;
+            box-sizing: content-box;
             cursor: pointer;
 
-            & .num {
-                @apply --transition;
+            &.active,
+            &:hover {
+                background: var(--main-color);
+                color:white;
 
-                background: white;
-                width: 2em;
-                height: 2em;
-                line-height: 2em;
-                box-sizing: content-box;
-
-                &.active,
-                &:hover {
-                    background: var(--main-color);
-                    color:white;
-
-                }
             }
 
+        }
 
+        & .min-btn-groups  {
+            display: none;
         }
     }
 
@@ -80,7 +85,12 @@
                 width: 48%;
                 float: left;
                 margin-bottom: var(--space);
-                margin-right: 2%;
+                margin-right: 4%;
+                white-space: nowrap;
+
+                &:nth-child(even) {
+                    margin-right: 0;
+                }
             }
         }
 
@@ -114,7 +124,19 @@
 
         & .item {
             display: inline-block;
-            margin-left: var(--large-space);
+            margin-left: var(--base-gap);
         }
+    }
+
+    & .answer-options {
+        display: inline-block;
+        white-space: normal;
+    }
+
+    & .answer-options {
+        display: inline-block;
+        white-space: normal;
+        vertical-align: top;
+        margin-right: 4%;
     }
 }

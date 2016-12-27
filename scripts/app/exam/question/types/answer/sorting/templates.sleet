@@ -10,15 +10,16 @@ view('content')
 
 view('options')
     .answer > .preview-list
-        dl.border.bottom > each(state.options)
+        dl > each(state.options)
             dd(id='item-' + index)
                 label(for='answer-item-' + i)
-                    .inline-block.answer-options > span.option-num > @echo(code)
-                    .inline-block.answer-options > @echo(content)
-        form.vertical.pull-left.m-top
+                    span.option-num > @echo(code '：')
+                    .answer-options > @echo(content)
+        form.vertical.layout-mb
             .inline-block
                 input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
             .inline-block(id='error')
+        hr
 
     if(state.detailMode)
         .show-answer.border.border-top
