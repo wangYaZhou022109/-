@@ -1,0 +1,97 @@
+#! handlebars
+
+module > .achievement-content
+    .achievement-side.bg-color(data-region='side')
+    .achievement-head(data-region='head')
+    .achievement-main(data-region='main')
+
+view('side')
+    div(data-dynamic-key='countDown')
+
+    ul.list > each(questionTypes)
+        li(id='list-item-'+ @index)
+            .list-title > echo(data.name '题' '(共' data.totalScore '分)')
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
+                div(class='list-item' + if(isCurrent 'correct' ''))(id='q-'+id) > .num > echo(i)
+
+
+view('head')
+    .pull-left.title > echo('正在作答:' state.name)
+    .text-right
+        ul.head-info.inline-block
+            li.border.right > echo('本卷共' state.questionNum '题，总分' state.totalScore '分')
+            li.border.right > echo('已答' state.answeredNum)
+            li.border.right > echo('未答：' state.noAnswerNum)
+        .btn 我要交卷
+
+view('main')
+    .preview-content
+        if(state.isOnePageOneQuestion)
+            if(state.questionId)
+                div(data-dynamic-key=state.questionId)
+            .bottom.text-right
+                div(data-dynamic-key='collect-correct-' + state.questionId)
+        else
+            div
+                each(questionTypes)
+                    .h3.m-bottom > echo(data.name '题' '(共' data.totalScore '分)')
+                    each(data.data)
+                        echo(i)
+                        div(data-dynamic-key=id)
+                        div(data-dynamic-key='collect-correct-' + id)
+           
+           
+            #  .h3.m-bottom 单选题（共10题，总分10分）
+            #      ul.preview-list
+            #          li
+            #              dl.border.bottom
+            #                  dt 1.  山水园林城市目前来讲是人类理想的居住环境。为什么山水这么重要呢？因为人的本性里面有对自然亲和的一面。人本来来自于自然。本来就是动物，天然地具有自然性。我们长期居住在钢筋水泥里面，就好像孩子失去了母亲，一旦回归了自然，我们就得到了心里的安慰，就好像孩子找到了母亲一样。根据上述文字，山水园林城市目前之所以是人类理想的居住环境，是因为（    ）。
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #              .bottom.text-right
+            #                  .item
+            #                      i.iconfont.icon-favorite
+            #                      span.m-left 我要收藏
+            #                  .item
+            #                      i.iconfont.icon-favorite
+            #                      span.m-left 错误提报
+            #          li
+            #              dl.border.bottom
+            #                  dt 1.  山水园林城市目前来讲是人类理想的居住环境。为什么山水这么重要呢？因为人的本性里面有对自然亲和的一面。人本来来自于自然。本来就是动物，天然地具有自然性。我们长期居住在钢筋水泥里面，就好像孩子失去了母亲，一旦回归了自然，我们就得到了心里的安慰，就好像孩子找到了母亲一样。根据上述文字，山水园林城市目前之所以是人类理想的居住环境，是因为（    ）。
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #                  dd
+            #                      input.m-right(type='radio')
+            #                      .inline-block A:人类依赖自然的自然属性
+            #              .bottom.text-right
+            #                  .item
+            #                      i.iconfont.icon-favorite
+            #                      span.m-left 我要收藏
+            #                  .item
+            #                      i.iconfont.icon-favorite
+            #                      span.m-left 错误提报
+
+
+
+view('tips')
+    .title-row.row
+        .col-sm-12
+            .com-title
+                echo(message)

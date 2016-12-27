@@ -35,6 +35,7 @@ require('./app/ext/swiper');
 require('./app/ext/views/form/form-view');
 require('./app/ext/models/local-storage-model');
 require('./app/ext/selectize');
+require('./app/ext/views/dynamic-view');
 
 D.adapt({
     getFormData: function(form) {
