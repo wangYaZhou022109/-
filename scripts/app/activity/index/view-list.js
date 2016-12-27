@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 exports.bindings = {
     activitys: true,
     params: true
@@ -6,7 +8,9 @@ exports.bindings = {
 exports.events = {
     'click category-item-*': 'toggleItem',
     'click to-exam-*': 'toExam',
-    'click show-paper': 'showPaper'
+    'click show-paper-*': 'showPaper',
+    'click score-detail-paper-*': 'showScoreDetailPaper',
+    'click mark-paper': 'showMarkPaper'
 };
 
 exports.handlers = {
@@ -17,7 +21,17 @@ exports.handlers = {
     toExam: function(id) {
         this.app.show('content', 'exam/index', { id: id });
     },
-    showPaper: function() {
+    showPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    },
+    showScoreDetailPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    },
+    showMarkPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
     }
 };
 

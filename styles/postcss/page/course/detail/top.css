@@ -179,7 +179,8 @@
                     display: block;
                 }
 
-                &:hover {
+                &:hover,
+                &.focus {
                     background: var(--fade-color);
                 }
             }
