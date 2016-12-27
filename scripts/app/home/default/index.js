@@ -23,14 +23,28 @@ module.exports = {
     },
     store: {
         models: {
-            modules: { url: '../system/home-module' }
+            modules: { url: '../system/home-module' },
+            homeConfig: { url: '../system/home-config/config' }
         },
         callbacks: {
-            init: function() {
-                this.models.modules.params = {
-                    homeConfigId: getParams().configid
+            loadModules: function(cfgId) {
+                var modules = this.models.modules;
+                modules.params = {
+                    homeConfigId: cfgId
                 };
-                return this.get(this.models.modules);
+                return this.get(modules);
+            },
+            init: function() {
+                var configId = getParams().configid,
+                    that = this,
+                    homeConfig = this.models.homeConfig;
+                if (configId) {
+                    return this.module.dispatch('loadModules', configId);
+                }
+                return this.get(homeConfig).then(function() {
+                    var cfgId = homeConfig.data.id;
+                    return that.module.dispatch('loadModules', cfgId);
+                });
             }
         }
     }
