@@ -259,7 +259,7 @@ exports.store = {
                 data = this.models.state.data,
                 questionTypes = this.models.questionTypes;
             D.assign(payload, {
-                examRecordId: 'd8697ea7-fabe-4ca5-872a-3fb2d7f40038'
+                examRecordId: '1edca744-ce42-4d4a-af6b-a0644cffd00c'
             });
             this.models.exam.set({ id: payload.examRecordId });
             D.assign(data, {
