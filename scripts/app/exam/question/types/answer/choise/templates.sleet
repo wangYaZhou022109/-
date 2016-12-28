@@ -32,10 +32,3 @@ view('options') > .answer
                     span > restoreNumber(state.gainScore 100)
                     span.layout-ml > echo('本题易错率：')
                     span > restoreNumber(state.errorRate 10000) > echo('%')
-    .slider-question
-        .item
-            i.iconfont.icon-arrow-left-circle.line
-            i.iconfont.icon-arrow-left-circle-full.full
-        .item
-            i.iconfont.icon-arrow-right-circle.line
-            i.iconfont.icon-arrow-right-circle-full.full
