@@ -1,0 +1,34 @@
+#! handlebars
+
+module > div(data-region='pannel')
+
+view('pannel')
+    .h3 > echo(region.regionModule.name)
+    .subject-catalog > ul
+        li.catalog-main
+            .catalog-state
+                .inline-block.layout-mr.custom-color-4 > .h3 > map('course-info-study-status' subject.studyProgress.finishStatus)
+                .inline-block.layout-mr > string('subject.study.day') > echo('：' subject.studyDays)
+                .inline-block.layout-mr > string('subject.rest.day') > echo('：' subject.restDays)
+        each(subject.courseChapters)
+            li
+                .catalog-state
+                    .inline-block.layout-mr > .title-state > echo(i ': ' name)
+                each(courseChapterSections)
+                    .catalog-state-info
+                        .item.block
+                            .pull-right
+                                if(preview)
+                                    a.normal(href=btnUrl)
+                                        .btn.radius > string('btn.prefix') > map('section-type' sectionType)
+                            .inline-block.attribute
+                                compare(required 'eq' 1)
+                                    span.compulsory > map('is-required' required)
+                                else
+                                    span > map('is-required' required)
+                                span > echo('[') + map('section-type' sectionType) + echo(']')
+                            .inline-block.title.text-overflow(title=name) > echo(name)
+                            if(preview)
+                                compare(sectionType 'eq' 10)
+                                    .inline-block
+                                        a(id='studyRecord-'+id href='javascript:;') > i.iconfont.icon-time + string('check.the.record')

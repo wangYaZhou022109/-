@@ -1,0 +1,26 @@
+#! handlebars
+module
+    div(data-region='toolbar')
+    div(data-region='viewer')
+
+view('toolbar')
+    .row
+        label#turnToPage-prev 上一页
+        label#turnToPage-next 下一页
+        input#currentPageNum(style='width:50px;'value=state.pageNum)
+        echo('/')
+        label#pageCount > echo(state.pageCount)
+        .btn#zoom-out -
+        .btn#zoom-in +
+        select(style='width:100px;' id='scaleSelect')
+            each(pdfScale)
+                option(value = key)('selected')&if(selected) > echo(value)
+view('viewer')
+    .row
+    .hr
+        .row
+            #progress.btn
+            .br
+            label#progressLabel
+        .row > .text-center
+            canvas#viewPdf

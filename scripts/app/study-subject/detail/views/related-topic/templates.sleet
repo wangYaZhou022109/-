@@ -1,0 +1,9 @@
+#! handlebars
+
+module > .relevant-topic(data-region='pannel')
+
+view('pannel')
+    .h3 > echo(region.regionModule.name)
+    .layout-mt-small
+        each(subject.courseTopics)
+            .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
