@@ -8,7 +8,7 @@ exports.bindings = {
 exports.dataForTemplate = {
     subject: function(data) {
         var subject = data.subject,
-            progress = subject.studyProgress;
+            progress = subject.studyProgress || {};
         util.rowHeader(subject.courseChapters, {
             after: '',
             before: '阶段'

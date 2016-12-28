@@ -39,6 +39,7 @@ require('./app/ext/views/dynamic-view');
 require('./app/ext/pdf');
 require('./app/ext/videojs');
 require('./app/ext/audio-wavesurfer');
+require('./app/ext/photoswipe');
 
 D.adapt({
     getFormData: function(form) {
