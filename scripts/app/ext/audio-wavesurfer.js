@@ -35,13 +35,23 @@ D.ComponentManager.register('audio-waveform', function(view, el, options) {
             waveColor: 'red',
             progressColor: 'purple'
         };
+    var events = ['loading', 'pause', 'play', 'ready', 'finish', 'error'];
+
     D.assign(opt, options.opt, { container: el });
+
     wavesurfer = WaveSurfer.create(opt);
     wavesurfer.load(options.url);
+    if (view.options.audio) {
+        events.forEach(function(e) {
+            if (view.options.audio && view.options.audio[e]) {
+                wavesurfer.on(e, view.options.audio[e].bind(view));
+            }
+        });
+    }
+
     kit = wavesurfetKit(wavesurfer);
     wavesurfer.on('ready', function() {
         wavesurfer.setVolume(1);
-        wavesurfer.play(options.playPoint);
         kit.init();
     });
     wavesurfer.on('play', kit.begin);

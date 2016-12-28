@@ -96,7 +96,7 @@ view('list')
             each(courses)
                 li > a.normal(href='#/course/detail/'+id) > .content
                     .img
-                        .img-cont 
+                        .img-cont
                             img(src=img)
                         .detail-wrapper
                             p > echo(description)
