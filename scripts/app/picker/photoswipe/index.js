@@ -5,12 +5,18 @@ exports.items = {
 exports.store = {
     models: {
         photos: {},
-        state:{data:{index:0}}
+        state: {
+            data: {
+                index: 0
+            }
+        }
     },
     callbacks: {
         init: function(options) {
             this.models.photos.set(options.photos);
-            this.models.state.set({index: options.index});
+            this.models.state.set({
+                index: options.index
+            });
         }
     }
 };

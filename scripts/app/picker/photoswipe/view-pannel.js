@@ -3,14 +3,14 @@ exports.bindings = {
     state: false
 };
 exports.components = [function() {
-  var photos = this.bindings.photos.data || [],
-      index = this.bindings.state.data.index;
+    var photos = this.bindings.photos.data || [],
+        index = this.bindings.state.data.index;
     return {
         id: 'swipe',
         name: 'photoswipe',
         options: {
-          photos: photos,
-          index: index
+            photos: photos,
+            index: index
         }
     };
 }];
