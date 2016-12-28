@@ -13,8 +13,7 @@ exports.components = [
         if (progress.lessonLocation) {
             pageNum = progress.lessonLocation;
         }
-        section.attachmentId = '8870f1ed-1cf7-4f0b-b3b7-9d3c64c493e7';
-        pdfUrl = this.bindings.download.getFullUrl() + '?id=' + section.attachmentId;
+        pdfUrl = this.bindings.download.getFullUrl() + '?id=' + section.resourceId;
         return {
             id: 'viewPdf',
             name: 'picker',

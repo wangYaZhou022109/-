@@ -5,5 +5,4 @@ module
 
 view('video')
     video#player(class="video-js vjs-default-skin vjs-big-play-centered")
-        # source(src="http://devtest.qiniudn.com/Preparation.mp3" type='audio/mpeg')
-        source(src="http://static.qiakr.com/movie/0060202.mp4" type="video/mp4")
+        source(src=section.url type="video/mp4")

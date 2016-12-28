@@ -87,9 +87,12 @@ exports.dataForTemplate = {
             if (!course.studyProgress) {
                 currentChapterId = course.courseChapters[0].id;
                 currentChapterId = course.courseChapters[0].courseChapterSections[0].id;
-            } else {
+            } else if (course.studyProgress.currentChapterId && course.studyProgress.currentSectionId) {
                 currentChapterId = course.studyProgress.currentChapterId;
                 currentSectionId = course.studyProgress.currentSectionId;
+            } else {
+                currentChapterId = course.courseChapters[0].id;
+                currentSectionId = course.courseChapters[0].courseChapterSections[0].id;
             }
             _.forEach(course.courseChapters, function(item, i) {
                 var r = item;

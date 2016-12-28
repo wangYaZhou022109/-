@@ -101,11 +101,11 @@ view('list')
                         .detail-wrapper
                             p > echo(description)
                             compare(studyType 'eq' 0)
-                                a.normal.block(href='#/course/detail/'+id+ '?studyType=0') > .btn.radius.block 开始学习
+                                a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 开始学习
                             compare(studyType 'eq' 1)
-                                a.normal.block(href='#/course/detail/'+id+'?studyType=1') > .btn.radius.block 继续学习
+                                a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 继续学习
                             compare(studyType 'eq' 2)
-                                a.normal.block(href='#/course/detail/'+id+'?studyType=2') > .btn.radius.block 重新学习
+                                a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 重新学习
                     .text-overflow.title > echo(name)
                     .bottom
                         .item(title='课时') > i.iconfont.icon-time + echo(courseHour) + | 分钟

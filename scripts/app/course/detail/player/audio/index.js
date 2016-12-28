@@ -1,14 +1,27 @@
 exports.items = {
-    video: 'video'
+    audio: 'audio'
 };
 
 exports.store = {
     models: {
-        state: { data: {} }
+        section: {},
+        sectionProgress: {},
+        download: { url: '../human/file/download' },
+        state: {}
     },
     callbacks: {
-        updateLearnTime: function() {
+        init: function(payload) {
+            var section = this.models.section,
+                sectionProgress = this.models.sectionProgress;
+            section.set(payload.section);
+            sectionProgress.set(payload.sectionProgress);
+        },
+        updatePregress: function() {
             // console.log(payload);
         }
     }
+};
+
+exports.beforeRender = function() {
+    this.dispatch('init', this.renderOptions);
 };

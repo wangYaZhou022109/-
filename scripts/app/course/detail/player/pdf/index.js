@@ -6,14 +6,15 @@ exports.store = {
     models: {
         section: {},
         sectionProgress: {},
-        download: {
-            url: '../human/file/download'
-        }
+        download: { url: '../human/file/download' }
     },
     callbacks: {
-        init: function(options) {
-            this.models.section.set(options.section);
-            this.models.sectionProgress.set(options.sectionProgress);
+        init: function(payload) {
+            this.models.section.set(payload.section);
+            this.models.sectionProgress.set(payload.sectionProgress);
+        },
+        updatePregress: function() {
+
         }
     }
 };

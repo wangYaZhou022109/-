@@ -1,9 +1,9 @@
 #!handlebars
 
 module
-    div(data-region='video')
+    div(data-region='audio')
 
-view('video')
+view('audio')
     div(style = 'width: 800px')
         div(style="text-align: center")
             h3 播放歌曲

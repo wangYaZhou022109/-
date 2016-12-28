@@ -17,8 +17,8 @@ exports.getEntity = function() {
         course: this.bindings.course.data,
         section: this.bindings.section.data,
         sectionProgress: this.bindings.sectionProgress.data,
-        refresh: function() {
-            me.module.dispatch('init', { id: me.module.renderOptions.id });
+        refresh: function(course) {
+            me.module.dispatch('refresh', course);
         }
     };
 };

@@ -28,7 +28,7 @@ exports.items = {
     comment: 'comment',
     download: 'download',
     topic: 'topic',
-    course: 'course',
+    'releated-course': 'releated-course',
     student: 'student'
 };
 
@@ -59,45 +59,61 @@ exports.store = {
         note: { url: '../course-study/course-front/course-note' },
         notes: { url: '../course-study/course-front/course-notes' },
         collect: { url: '../system/collect' },
+        courseRelated: {
+            url: '../course-study/course-front/related',
+            type: 'pageable',
+            pageSize: 2,
+            root: 'items'
+        },
+        download: {
+            url: '../human/file/download'
+        },
         state: {}
     },
     callbacks: {
         init: function(payload) {
             var me = this,
                 course = me.models.course,
-                notes = me.models.notes,
+                courseRelated = me.models.courseRelated,
+                notes = me.models.notes;
+            course.set(payload);
+            notes.params.courseId = payload.id;
+            courseRelated.params.id = payload.id;
+            return me.get(course).then(function() {
+                me.module.dispatch('refresh', course.data);
+            }, me.get(notes), me.get(courseRelated));
+        },
+        refresh: function(payload) {
+            var me = this,
+                course = me.models.course,
                 state = me.models.state,
                 studyProgress,
                 currentSectionType;
             course.set(payload);
-            notes.params.courseId = payload.id;
+            course.init();
+            studyProgress = course.data.studyProgress || {};
 
-            return me.get(course).then(function() {
-                course.init();
-                studyProgress = course.data.studyProgress || {};
+            if (!studyProgress.currentChapterId) {
+                studyProgress.currentChapterId = course.data.courseChapters[0].id;
+                studyProgress.currentSectionId = course.data.courseChapters[0].courseChapterSections[0].id;
+            } else if (!studyProgress.currentSectionId) {
+                // eslint-disable-next-line max-len
+                studyProgress.currentSectionId = course.data.courseChapters[studyProgress.currentChapterId].courseChapterSections[0].id;
+            }
+            course.data.studyProgress = studyProgress;
+            currentSectionType = course.data.sections[studyProgress.currentSectionId].sectionType;
 
-                if (!studyProgress.currentChapterId) {
-                    studyProgress.currentChapterId = course.data.courseChapters[0].id;
-                    studyProgress.currentSectionId = course.data.courseChapters[0].courseChapterSections[0].id;
-                } else if (!studyProgress.currentSectionId) {
-                    // eslint-disable-next-line max-len
-                    studyProgress.currentSectionId = course.data.courseChapters[studyProgress.currentChapterId].courseChapterSections[0].id;
-                }
-                course.data.studyProgress = studyProgress;
-                currentSectionType = course.data.sections[studyProgress.currentSectionId].sectionType;
-
-                if (course.data.register) {
-                    if (judgeSection(currentSectionType)) {
-                        me.module.dispatch('showSection', { sectionId: studyProgress.currentSectionId });
-                    } else {
-                        state.data.code = 'default';
-                        state.changed();
-                    }
+            if (course.data.register) {
+                if (judgeSection(currentSectionType)) {
+                    me.module.dispatch('showSection', { sectionId: studyProgress.currentSectionId });
                 } else {
                     state.data.code = 'default';
                     state.changed();
                 }
-            }, me.get(notes));
+            } else {
+                state.data.code = 'default';
+                state.changed();
+            }
         },
         initNotes: function() {
             var notes = this.models.notes;

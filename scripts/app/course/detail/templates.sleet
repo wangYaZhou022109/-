@@ -14,7 +14,7 @@ module > .course-detail-page
             .page-side > .container
                 section.section.download(data-region='download')
                 section.section.relevant-topic(data-region='topic')
-                section.section.relevant-course(data-region='course')
+                section.section.relevant-course(data-region='releated-course')
                 section.section.student(data-region='student')
         .main
             .course-detail-main.page-main > .container
@@ -148,16 +148,32 @@ view('comment')
 
 view('download')
     .h3 资料下载区
-    .layout-mt-small 内容...
+    .layout-mt-small
+        each(attachments)
+            .block.layout-mt-small
+                .pull-right
+                    if(isView)
+                        a(id='viewPdf-'+attachmentId href='javascript:;') > string('view')
+                    a(href=downUrl download=name) > string('download')
+                .text-overflow(title=name) > echo(name)
 
 view('topic')
     .h3 相关话题
-    .layout-mt-small 内容...
+    .layout-mt-small
+        each(topics)
+            .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
 
 
-view('course')
-    .h3 相关课程
-    .layout-mt-small 内容...
+view('releated-course')
+    .h3
+        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
+        echo('相关课程')
+    .layout-mt-small
+        each(courseRelated)
+            .img
+                a.normal(href='#/course/detail/'+id)
+                    .img-cont > img(src=imageUrl)
+                h4.text-overflow(title=name) > echo(name)
 
 
 view('student')

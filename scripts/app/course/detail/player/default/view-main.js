@@ -7,7 +7,7 @@ exports.actions = {
 };
 
 exports.actionCallbacks = {
-    register: function() {
-        this.module.renderOptions.refresh.call(this);
+    register: function(data) {
+        this.module.renderOptions.refresh.call(this, data[0]);
     }
 };
