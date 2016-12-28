@@ -1,6 +1,6 @@
 var $ = require('jquery'),
-    A = require('../../../util/animation'),
-    courseUtil = require('../../course-util'),
+    A = require('../../util/animation'),
+    courseUtil = require('../course-util'),
     _ = require('lodash/collection');
 
 exports.bindings = {
@@ -84,8 +84,13 @@ exports.dataForTemplate = {
             currentChapterId,
             currentSectionId;
         if (course.addType) {
-            currentChapterId = course.studyProgress.currentChapterId;
-            currentSectionId = course.studyProgress.currentSectionId;
+            if (!course.studyProgress) {
+                currentChapterId = course.courseChapters[0].id;
+                currentChapterId = course.courseChapters[0].courseChapterSections[0].id;
+            } else {
+                currentChapterId = course.studyProgress.currentChapterId;
+                currentSectionId = course.studyProgress.currentSectionId;
+            }
             _.forEach(course.courseChapters, function(item, i) {
                 var r = item;
                 r.seq = courseUtil.seqName(i, 1);
@@ -95,9 +100,12 @@ exports.dataForTemplate = {
                     if (currentChapterId === r.id && currentSectionId === rr.id) {
                         rr.focus = true;
                     }
+                    if (rr.progress && !rr.progress.completedRate) {
+                        rr.progress.completedRate = 0;
+                    }
                 });
             });
         }
-        return data.course;
+        return course;
     }
 };

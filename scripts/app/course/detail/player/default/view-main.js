@@ -8,8 +8,6 @@ exports.actions = {
 
 exports.actionCallbacks = {
     register: function() {
-        this.app.message.success('注册成功');
-        this.bindings.course.data.register = true;
-        this.bindings.course.changed();
+        this.module.renderOptions.refresh.call(this);
     }
 };
