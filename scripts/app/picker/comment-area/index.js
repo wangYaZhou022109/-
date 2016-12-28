@@ -6,9 +6,17 @@ exports.items = {
 
 exports.store = {
     models: {
-        comments: { url: '../system/comment', root: 'items', type: 'pageable' },
-        comment: { url: '' },
-        reply: { url: '../system/comment/reply' },
+        comments: {
+            url: '../system/comment',
+            root: 'items',
+            type: 'pageable'
+        },
+        comment: {
+            url: ''
+        },
+        reply: {
+            url: '../system/comment/reply'
+        },
         state: {}
     },
     callbacks: {
@@ -23,8 +31,12 @@ exports.store = {
             if (typeof payload.available !== 'boolean') {
                 state.data.available = true;
             }
-            comments.params = { businessId: businessId };
-            this.get(comments);
+            if (businessId) {
+                comments.params = {
+                    businessId: businessId
+                };
+                this.get(comments);
+            }
         },
         setTop: function(payload) {
             var comment = this.models.comment;
@@ -66,7 +78,9 @@ exports.store = {
             reply.set(payload);
             me.save(reply).then(function() {
                 me.app.message.success('操作成功');
-                comments.set({ id: state.data.businessId });
+                comments.set({
+                    id: state.data.businessId
+                });
                 me.get(comments);
             });
         },

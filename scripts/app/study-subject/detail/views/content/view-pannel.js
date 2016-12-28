@@ -16,7 +16,7 @@ exports.dataForTemplate = {
         });
         // 计算剩余天数
         subject.restDays = 0;
-        if (progress) {
+        if (progress.createTime) {
             subject.restDays = util.restStudyDays(progress.createTime, subject.studyDays);
         }
         // 配置按钮地址

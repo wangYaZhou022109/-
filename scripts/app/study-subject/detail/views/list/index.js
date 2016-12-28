@@ -14,11 +14,14 @@ exports.store = {
         init: function(options) {
             this.models.region.set(options.region);
             this.models.subject.set(options.subject);
-            this.models.lists.params = {
-                businessId: options.subject.id,
-                limitCount: 10
-            };
-            return this.get(this.models.lists);
+            if (options.subject.id) {
+                this.models.lists.params = {
+                    businessId: options.subject.id,
+                    limitCount: 10
+                };
+                return this.get(this.models.lists);
+            }
+            return this.models.lists;
         }
     }
 };

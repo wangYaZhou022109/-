@@ -23,8 +23,11 @@ exports.store = {
         init: function(options) {
             this.models.region.set(options.region);
             this.models.subject.set(options.subject);
-            this.models.photos.params.subjectId = options.subject.id;
-            return this.get(this.models.photos);
+            if (options.subject.id) {
+                this.models.photos.params.subjectId = options.subject.id;
+                return this.get(this.models.photos);
+            }
+            return this.models.photos;
         },
         turnPage: function(data) {
             var state = this.models.state.data,

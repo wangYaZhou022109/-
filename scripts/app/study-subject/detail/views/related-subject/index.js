@@ -20,8 +20,11 @@ exports.store = {
         init: function(options) {
             this.models.region.set(options.region);
             this.models.subject.set(options.subject);
-            this.models.courseRelated.params.id = options.subject.id;
-            return this.get(this.models.courseRelated);
+            if (options.subject.id) {
+                this.models.courseRelated.params.id = options.subject.id;
+                return this.get(this.models.courseRelated);
+            }
+            return this.models.courseRelated;
         },
         turnPage: function() {
             var pageInfo = this.models.courseRelated.getPageInfo();
