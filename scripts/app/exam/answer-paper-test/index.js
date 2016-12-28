@@ -415,7 +415,6 @@ exports.store = {
             if (payload.submitType !== submitType.Auto) cancel();
             modify.covert(payload);
             this.models.form.set(modify.data.api);
-            window.close();
             if (t) {
                 return this.post(this.models.form).then(function() {
                     if (payload.submitType !== submitType.Auto) {
@@ -429,6 +428,7 @@ exports.store = {
                     } else {
                         me.models.modify.data = { answers: [], api: {} };
                     }
+                    window.close();
                 });
             }
             return '';
