@@ -439,12 +439,6 @@ exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
 
-exports.buttons = [{
-    text: '交卷',
-    fn: function() {
-        return this.dispatch('submit', { submitType: submitType.Hand });
-    }
-}];
 
 exports.afterRender = function() {
     var me = this,

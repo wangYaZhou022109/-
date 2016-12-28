@@ -22,7 +22,7 @@ view('head')
             li.border.right > echo('本卷共' state.questionNum '题，总分' state.totalScore '分')
             li.border.right > echo('已答：' state.answeredNum)
             li.border.right > echo('未答：' state.noAnswerNum)
-        .btn 我要交卷
+        .btn#submit 我要交卷
 
 view('main')
     .preview-content
