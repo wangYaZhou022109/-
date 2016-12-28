@@ -1,12 +1,17 @@
 #! handlebars
 
-module > div(data-region='pannel')
+module
+    div(data-region='pannel')
+    div(data-region='swipe')
 
 view('pannel')
     .h3 > echo(region.regionModule.name)
     #album.swiper-container
         .swiper-wrapper
             each(photos)
-                .swiper-slide > img(src=imageUrl alt=name)
+                .swiper-slide > img(id="showSwipe-"+attachmentId src=imageUrl alt=name)
         .swiper-button-prev(id='turnPage-prev' title=string('left.page')) > .iconfont.icon-arrow-left
         .swiper-button-next(id='turnPage-next' title=string('right.page')) > .iconfont.icon-arrow-right
+
+view('swipe')
+    #photoSwipe

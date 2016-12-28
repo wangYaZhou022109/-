@@ -1,30 +1,41 @@
-var _ = require('lodash/collection');
 exports.bindings = {
     region: false,
-    subject: false,
     download: false,
-    coursePhoto: true
+    photos: true,
+    state: true
 };
 
 exports.dataForTemplate = {
     photos: function(data) {
         var me = this,
-            coursePhotos = data.coursePhoto;
-        _.map(coursePhotos, function(opt) {
-            var photo = opt;
-            photo.imageUrl = me.bindings.download.getFullUrl() + '?id=' + photo.attachmentId;
-            return photo;
-        });
-        return coursePhotos;
+            photos = data.photos,
+            index = me.bindings.state.data.index,
+            pagePhotos = [],
+            i = 0,
+            photo;
+        for (; i < 6; i++) {
+            photo = photos[i + index];
+            if (photo) {
+                photo.imageUrl = me.bindings.download.getFullUrl() + '?id=' + photo.attachmentId;
+                pagePhotos.push(photo);
+            }
+        }
+        return pagePhotos;
     }
 };
 
 exports.events = {
-    'click turnPage-*': 'turnPage'
+    'click turnPage-*': 'turnPage',
+    'click showSwipe-*': 'showSwipe'
 };
 
 exports.handlers = {
     turnPage: function(data) {
         this.module.dispatch('turnPage', data);
+    },
+    showSwipe: function(id) {
+        var regions = this.module.regions;
+        this.bindings.state.data.currentId = id;
+        regions.swipe.show(this.module.items.swipe);
     }
 };

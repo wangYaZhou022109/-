@@ -10,7 +10,8 @@ view('main')
         .h3 讨论区
         .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
         textarea.input.w-full(name='content' rows='5')
-        .m-top.text-right > .btn#add-comment 发表
+        if(state.available)
+            .m-top.text-right > .btn#add-comment 发表
     .layout-mt
         .comment-list > ul
             each(comments)

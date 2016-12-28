@@ -19,6 +19,10 @@ exports.store = {
                 state = this.models.state;
             state.data.businessId = businessId;
             state.data.businessType = businessType;
+            state.data.available = payload.available;
+            if (typeof payload.available !== 'boolean') {
+                state.data.available = true;
+            }
             comments.params = { businessId: businessId };
             this.get(comments);
         },

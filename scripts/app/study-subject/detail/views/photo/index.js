@@ -1,5 +1,6 @@
 exports.items = {
-    pannel: 'pannel'
+    pannel: 'pannel',
+    swipe: ''
 };
 
 exports.store = {
@@ -9,23 +10,35 @@ exports.store = {
         download: {
             url: '../human/file/download'
         },
-        coursePhoto: {
-            url: '../course-study/course-front/course-photo',
-            type: 'pageable',
-            pageSize: 6,
-            root: 'items'
+        photos: {
+            url: '../course-study/course-info/photo'
+        },
+        state: {
+            data: {
+                index: 0
+            }
         }
     },
     callbacks: {
         init: function(options) {
             this.models.region.set(options.region);
             this.models.subject.set(options.subject);
-            this.models.coursePhoto.params.id = options.subject.id;
-            return this.get(this.models.coursePhoto);
+            this.models.photos.params.subjectId = options.subject.id;
+            return this.get(this.models.photos);
         },
         turnPage: function(data) {
-            this.models.coursePhoto[data + 'Page']();
-            this.get(this.models.coursePhoto);
+            var state = this.models.state.data,
+                photos = this.models.photos.data || [],
+                index = state.index;
+            if (data === 'prev' && index > 0) {
+                index--;
+            } else if (data === 'next' && index < (photos.length - 6)) {
+                index++;
+            }
+            this.models.state.set({
+                index: index
+            });
+            this.models.state.changed();
         }
     }
 };

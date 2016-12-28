@@ -19,5 +19,6 @@ view('pannel')
                             li 分享1
                             li 分享2
                             li 分享3
-            .inline-block.m-left > a.normal(href='javascript:;') > i.iconfont.icon-favorite
+            if(preview)
+                .inline-block.m-left > a.normal(href='javascript:;') > i.iconfont.icon-favorite
     p.info-detail > string('subject.description') > @echo(':' subject.description)
