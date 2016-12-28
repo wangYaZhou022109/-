@@ -11,7 +11,8 @@ exports.components = [{
     name: 'videojs',
     options: {
         video: {
-            height: 400
+            fluid: true,    // 自动缩放
+            // aspectRatio: '840:505' // 自定义比例缩放
         },
         currentTime: 30
     }

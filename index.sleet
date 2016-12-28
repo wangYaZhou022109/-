@@ -24,8 +24,10 @@ html.default
         link(rel='stylesheet' href='styles/selectize/selectize.default.css')
         link(rel='stylesheet' href='styles/alertify/alertify.core.css')
         link(rel='stylesheet' href='styles/alertify/alertify.default.css')
+        link(rel='stylesheet' href='styles/pe-icon-7-stroke/css/pe-icon-7-stroke.css')
         link(rel='stylesheet' href='//at.alicdn.com/t/font_5lzjs3ke8h93sor.css')
         link(rel='stylesheet' href='styles/jquery.plupload.queue/css/jquery.plupload.queue.css')
+        link(rel='stylesheet' href='node_modules/video.js/dist/video-js.css')
         # endbuild
 
         # build:css styles/main.css
