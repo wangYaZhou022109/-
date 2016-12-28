@@ -5,7 +5,6 @@ exports.routes = {
     'mark-paper': 'showMarkPaper',
     'mark-paper-test': 'showMark2',
     demo: 'showDemo',
-    demo: 'showDemo',
     'answer-paper-test': 'showAnswerPaperTest',
     'score-detail-paper-test': 'showScore2',
 };
