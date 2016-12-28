@@ -38,14 +38,13 @@ exports.handlers = {
 exports.beforeClose = function() {
     var learnTime = this.components.waveform.getLearnTime(),
         totalTime = this.components.waveform.getDuration();
-    console.log({ learnTime: learnTime, totalTime: totalTime });
     this.module.dispatch('updatePregress', { learnTime: learnTime, totalTime: totalTime });
 };
 
 // 支持的事件 loading,ready,play,pause,finish,error
 exports.audio = {
     loading: function(process) {
-        console.log('loading:', process);
+        return process;
     },
     ready: function() {
         var sectionProgress = this.bindings.sectionProgress.data || {},
