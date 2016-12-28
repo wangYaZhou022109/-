@@ -164,6 +164,8 @@
 }
 
 .slider-question {
+    margin-top: -var(--section-gap);
+    
     & .item {
         float: left;
         margin-right: var(--space);
