@@ -53,4 +53,9 @@
     &.no-border {
         border-width: 0;
     }
+
+    &.min {
+        padding: calc(var(--space) / 2);
+        width: 8em;
+    }
 }

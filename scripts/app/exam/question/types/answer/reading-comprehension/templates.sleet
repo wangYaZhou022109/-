@@ -10,6 +10,6 @@ view('content')
         span > echo(state.index '：')
         @echo(state.content)
 
-view('subs') > .m-bottom
+view('subs') > .m-bottom.reading-comprehension-view
     each(subs)
         div(data-dynamic-key=id)
