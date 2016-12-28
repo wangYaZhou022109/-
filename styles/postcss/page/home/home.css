@@ -15,4 +15,8 @@
   & > .section:nth-child(odd) {
       background-color: var(--bg-color);
   }
+  & a.bar, & a.content{
+      color:inherit;
+      display: block;
+  }
 }

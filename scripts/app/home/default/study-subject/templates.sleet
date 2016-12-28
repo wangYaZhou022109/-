@@ -14,12 +14,14 @@ view('study-subject')
 
     ul
         times(8)
-            li > .content > inner(course count)
-                .img > .img-cont >  img(src=cover)
-                .bottom
-                    .clearfix
-                        .pull-right.tip-text
-                            i.iconfont.icon-view
-                            span.m-left > echo(studyMemberCount)
-                        .title.text-overflow > echo(name)
-                    .sub-title.text-overflow.m-top > echo(description)
+            li > inner(course count)
+
+                a.content(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+                    .img > .img-cont >  img(src=cover)
+                    .bottom
+                        .clearfix
+                            .pull-right.tip-text
+                                i.iconfont.icon-view
+                                span.m-left > echo(studyMemberCount)
+                            .title.text-overflow > echo(name)
+                        .sub-title.text-overflow.m-top > echo(description)

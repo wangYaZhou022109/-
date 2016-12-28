@@ -71,7 +71,8 @@
         "string",
         "percent",
         "restoreNumber",
-        "pick"
+        "pick",
+        "routerLink"
       ]
     }
   }

@@ -13,7 +13,7 @@ module.exports = {
             });
             data.homeConfig.items.forEach(function(item) {
                 var activity = activityMap[item.sourceId];
-                var itemactivity = D.assign({}, activity, { name: item.name });
+                var itemactivity = D.assign({}, activity, { name: item.name, coverId: item.cover });
                 if (itemactivity.coverId) {
                     itemactivity.cover = that.bindings.down.getFullUrl() + '?id=' + itemactivity.coverId;
                 }

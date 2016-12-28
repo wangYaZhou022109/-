@@ -118,11 +118,21 @@ module.exports = {
         return ret.join('');
     },
 
+    routerLink: function() {
+        var Self = arguments[arguments.length - 1].data.root.Self,
+            prefix = Self.app.options.routerPrefix,
+            i,
+            uri = prefix;
+        for (i = 0; i < arguments.length - 1; i++) {
+            uri += arguments[i];
+        }
+        return uri;
+    },
+
     isGrant: function(operatorType, organizationId, options) {
         var view = options.data.root.Self,
             grants,
             types;
-
         if (!view) return '';
 
         grants = view.module.store.models.Grants;
