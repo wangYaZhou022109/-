@@ -4,10 +4,8 @@ exports.routes = {
     'score-detail-paper': 'showScoreDetailPaper',
     'mark-paper': 'showMarkPaper',
     'mark-paper-test': 'showMark2',
-    demo: 'showDemo',
-    demo: 'showDemo',
     'answer-paper-test': 'showAnswerPaperTest',
-    'score-detail-paper-test': 'showScore2',
+    'score-detail-paper-test': 'showScore2'
 };
 
 exports.showIndex = function() {
@@ -24,10 +22,6 @@ exports.showMarkPaper = function() {
 };
 exports.showMark2 = function() {
     return this.app.show('content', 'exam/mark-paper-test');
-};
-
-exports.showDemo = function() {
-    return this.app.show('content', 'exam/demo');
 };
 
 exports.showAnswerPaperTest = function() {
