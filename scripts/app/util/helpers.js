@@ -74,7 +74,8 @@ module.exports = {
         return value + '%';
     },
 
-    restoreNumber: function(value) {
+    restoreNumber: function(value, n) {
+        if (value && n) return value / n;
         return value / 100;
     },
 
