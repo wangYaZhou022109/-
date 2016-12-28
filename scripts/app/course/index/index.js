@@ -4,7 +4,7 @@ exports.items = {
     top: 'top',
     catalog: 'catalog',
     catalogs: 'catalogs',
-    list: 'list'
+    list: 'list',
 };
 exports.store = {
     models: {

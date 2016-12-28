@@ -5,13 +5,6 @@ exports.bindings = {
     categories: true
 };
 
-
-exports.handlers = {
-    toggleCatalog: function() {
-        var ele = this.$$('.catalog-view')[0];
-        ele.hidden = !ele.hidden;
-    }
-};
 exports.events = {
     'click sub-item-*': 'selectMenu',
     'click catalog-item-*': 'toggleCatalog',
