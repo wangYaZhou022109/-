@@ -24,15 +24,13 @@
     & > ul {
         @apply --clearfix;
 
+        margin-right: -calc(var(--main-list-gap) - 0.1);
+
         & li {
             float: left;
             width: 33.333%;
             padding-right: var(--main-list-gap);
             margin-bottom: calc(var(--main-list-gap) + 1);
-
-            &:last-child {
-                padding-right: 0;
-            }
 
             & .content {
                 position: relative;
@@ -71,20 +69,22 @@
             }
 
             & .bottom {
-                @apply --clearfix;
-
                 font-size: var(--small-font);
+                white-space: nowrap;
 
                 & .item {
-                    float: left;
+                    display: inline;
                     padding-right: var(--font-size);
                     margin-right: var(--font-size);
                     border-right: 1px solid var(--border-color);
 
                     &:last-child {
                         border: none;
+                        margin: 0;
+                        padding: 0;
                     }
                 }
+
             }
 
             & .detail-wrapper {

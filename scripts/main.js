@@ -33,6 +33,7 @@ require('./app/ext/picker');
 require('./app/ext/swiper');
 require('./app/ext/tag-view');
 require('./app/ext/upload');
+require('./app/ext/models/local-storage-model');
 require('./app/ext/selectize');
 require('./app/ext/views/form/form-view');
 require('./app/ext/views/dynamic-view');
@@ -74,7 +75,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'course', 'activity', 'study-subject']
+    routers: ['', 'home', 'course', 'activity', 'study-subject', 'exam']
 });
 D.assign(app.global, {});
 

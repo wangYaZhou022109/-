@@ -1,0 +1,27 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='options')
+
+view('content')
+    p.question > @echo(state.content)
+
+
+view('options') > .answer
+    .preview-list > dl.border.bottom
+        dd
+            input.inline-block(type='radio' name='value-' + state.id value=1 id='check-0')('checked')&if(isCorrect)
+            .inline-block 正确
+            input.inline-block.m-left(type='radio' name='value-' + state.id value=0 id='check-1')('checked')&if(isError)
+            .inline-block 错误
+
+    if(state.detailMode)
+        .show-answer.border.border-top
+            .row
+                .col-xs-6 > .com-title > echo('答案：' state.answer)
+                .col-xs-6
+                    span > echo('本题得分：')
+                    span > restoreNumber(state.gainScore 100)
+                    span.m-left > echo('本题易错率：')
+                    span > restoreNumber(state.errorRate 10000) > echo('%')

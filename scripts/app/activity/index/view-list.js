@@ -1,0 +1,55 @@
+var $ = require('jquery');
+
+exports.bindings = {
+    activitys: true,
+    params: true
+};
+
+exports.events = {
+    'click category-item-*': 'toggleItem',
+    'click to-exam-*': 'toExam',
+    'click show-paper-*': 'showPaper',
+    'click score-detail-paper-*': 'showScoreDetailPaper',
+    'click mark-paper': 'showMarkPaper'
+};
+
+exports.handlers = {
+    toggleItem: function(el) {
+        var me = this;
+        me.module.dispatch('search', { type: el });
+    },
+    toExam: function(id) {
+        this.app.show('content', 'exam/index', { id: id });
+    },
+    showPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    },
+    showScoreDetailPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    },
+    showMarkPaper: function(id, e) {
+        var url = $(e.target).attr('href').slice(2);
+        this.app.navigate(url, true);
+    }
+};
+
+exports.dataForTemplate = {
+    type: function() {
+        var params = this.bindings.params.data;
+        params.types = {};
+        if (!params.type || params.type === 0) {
+            params.types.all = true;
+        } else if (params.type === 1) {
+            params.types.class = true;
+        } else if (params.type === 3) {
+            params.types.exam = true;
+        } else if (params.type === 6) {
+            params.types.survey = true;
+        } else if (params.type === 2) {
+            params.types.live = true;
+        }
+        return status;
+    }
+};
