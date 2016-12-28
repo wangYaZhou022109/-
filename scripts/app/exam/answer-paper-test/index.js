@@ -33,7 +33,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {
-            data: { isOnePageOneQuestion: true },
+            type: 'localStorage',
             mixin: {
                 getCurrentState: function(questionTypes) {
                     var data = {
@@ -341,10 +341,12 @@ exports.store = {
             var me = this,
                 questionTypes = this.models.questionTypes,
                 answer = this.models.answer,
-                modify = this.models.modify;
+                modify = this.models.modify,
+                state = this.models.state;
 
             answer.load();
             modify.load();
+            state.load();
 
             if (!answer.data) answer.data = { answers: [] };
             if (!modify.data) modify.data = { answers: [], api: {} };
