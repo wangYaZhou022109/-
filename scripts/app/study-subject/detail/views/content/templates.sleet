@@ -17,8 +17,10 @@ view('pannel')
                 each(courseChapterSections)
                     .catalog-state-info
                         .item.block
-                            .pull-right > a.normal(href=btnUrl)
-                                .btn.radius > string('btn.prefix') > map('section-type' sectionType)
+                            .pull-right
+                                if(preview)
+                                    a.normal(href=btnUrl)
+                                        .btn.radius > string('btn.prefix') > map('section-type' sectionType)
                             .inline-block.attribute
                                 compare(required 'eq' 1)
                                     span.compulsory > map('is-required' required)
@@ -26,6 +28,7 @@ view('pannel')
                                     span > map('is-required' required)
                                 span > echo('[') + map('section-type' sectionType) + echo(']')
                             .inline-block.title.text-overflow(title=name) > echo(name)
-                            compare(sectionType 'eq' 10)
-                                .inline-block
-                                    a(id='studyRecord-'+id href='javascript:;') > i.iconfont.icon-time + string('check.the.record')
+                            if(preview)
+                                compare(sectionType 'eq' 10)
+                                    .inline-block
+                                        a(id='studyRecord-'+id href='javascript:;') > i.iconfont.icon-time + string('check.the.record')

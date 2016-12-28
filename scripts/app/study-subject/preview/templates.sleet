@@ -1,0 +1,6 @@
+#!handlebars
+module > div(data-region='main')
+
+view('main')
+    if(state.key)
+        div(data-dynamic-key=state.key)
