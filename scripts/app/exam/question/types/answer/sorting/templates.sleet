@@ -9,18 +9,17 @@ view('content')
 
 
 view('options')
-    .answer
-        ul > each(state.options)
-            li(id='item-' + index)
-                label.no-margin(for='answer-item-' + i)
-                    .answer-options > .option-num > @echo(code)
+    .answer > .preview-list
+        dl > each(state.options)
+            dd(id='item-' + index)
+                label(for='answer-item-' + i)
+                    span.option-num > @echo(code '：')
                     .answer-options > @echo(content)
-        form.vertical
-            .row
-                .col-md-3
-                    input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
-                .col-md-3
-                    div(id='error')
+        form.vertical.layout-mb
+            .inline-block
+                input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
+            .inline-block(id='error')
+        hr
 
     if(state.detailMode)
         .show-answer.border.border-top

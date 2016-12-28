@@ -9,24 +9,24 @@ view('content')
 
 
 view('options') > .answer
-    ul > each(options)
-        li(id='item-' + index)
+    .preview-list > dl.border.bottom > each(options)
+        dd(id='item-' + index)
             if(mutiple)
-                .checkbox.no-margin.inline-block
+                span.checkbox
                     input(type='checkbox' id='check-'+@index value=@index)('checked')&if(checked)
                     label(for='check-'+@index)
             else
-                input.inline-block(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
-            label.no-margin(for='answer-item-' + index)
-                .answer-options > .option-num > @echo(code)
+                input(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
+            label.m-left(for='answer-item-' + index)
+                span.option-num > @echo(code '：')
                 .answer-options > @echo(content)
 
     if(state.detailMode)
-        .show-answer.border.border-top
-            .row
-                .col-xs-6 > .com-title > echo('答案：' state.answer)
-                .col-xs-6
+        .show-answer
+            .clearfix
+                .pull-left > .common-title > echo('答案：' state.answer)
+                .text-right
                     span > echo('本题得分：')
                     span > restoreNumber(state.gainScore 100)
-                    span > echo('本题易错率：')
+                    span.layout-ml > echo('本题易错率：')
                     span > restoreNumber(state.errorRate 10000) > echo('%')

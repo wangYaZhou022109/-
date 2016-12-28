@@ -64,11 +64,11 @@ view('chapter')
                     dd
                         .item.sub-text 文档
                         .item.continue
-                            i.iconfont.icon-reload
+                            i.iconfont.icon-play
                             span.progress 58%
                             span 继续学习
                         .item.record
-                            i.iconfont.icon-time + | 学习记录
+                            i.iconfont.icon-time2 + | 学习记录
                 dl.required
                     dt
                         .required-tag 必修
@@ -76,11 +76,11 @@ view('chapter')
                     dd
                         .item.sub-text 文档
                         .item.continue
-                            i.iconfont.icon-reload
+                            i.iconfont.icon-play
                             span.progress 58%
                             span 继续学习
                         .item.record
-                            i.iconfont.icon-time + | 学习记录
+                            i.iconfont.icon-time2 + | 学习记录
                 dl
                     dt
                         .required-tag 必修
@@ -88,11 +88,11 @@ view('chapter')
                     dd
                         .item.sub-text 文档
                         .item.continue
-                            i.iconfont.icon-reload
+                            i.iconfont.icon-play
                             span.progress 58%
                             span 继续学习
                         .item.record
-                            i.iconfont.icon-time + | 学习记录
+                            i.iconfont.icon-time2 + | 学习记录
 
             li
                 .common-title 第二章：团结就是力量
@@ -103,11 +103,11 @@ view('chapter')
                     dd
                         .item.sub-text 文档
                         .item.start
-                            i.iconfont.icon-reload
+                            i.iconfont.icon-play
                             span.progress 58%
                             span 开始学习
                         .item.record
-                            i.iconfont.icon-time + | 学习记录
+                            i.iconfont.icon-time2 + | 学习记录
                 dl
                     dt
                         .required-tag 必修
@@ -115,11 +115,11 @@ view('chapter')
                     dd
                         .item.sub-text 文档
                         .item.start
-                            i.iconfont.icon-reload
+                            i.iconfont.icon-play
                             span.progress 58%
                             span 开始学习
                         .item.record
-                            i.iconfont.icon-time + | 学习记录
+                            i.iconfont.icon-time2 + | 学习记录
                 dl
                     dt
                         .required-tag 必修
@@ -127,11 +127,11 @@ view('chapter')
                     dd
                         .item.sub-text 文档
                         .item.start
-                            i.iconfont.icon-reload
+                            i.iconfont.icon-play
                             span.progress 58%
                             span 开始学习
                         .item.record
-                            i.iconfont.icon-time + | 学习记录
+                            i.iconfont.icon-time2 + | 学习记录
 
 view('note')
     .course-side-title-row

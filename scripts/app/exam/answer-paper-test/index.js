@@ -328,7 +328,7 @@ exports.store = {
             if (!modify.data) modify.data = { answers: [], api: {} };
 
             D.assign(payload, {
-                examId: '99e46f79-18d9-4f88-996c-120dfc789c63'
+                examId: '9cd12607-5927-4cd1-8e0e-e1657c7cef96'
             });
             this.models.exam.set({ id: payload.examId });
 

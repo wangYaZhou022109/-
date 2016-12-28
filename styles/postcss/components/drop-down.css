@@ -3,6 +3,12 @@
 
     & .drop-down-btn {
         cursor: pointer;
+
+        & .iconfont {
+            font-size: var(--small-font);
+            transform: scale(1);
+            vertical-align: middle;
+        }
     }
 
     & .drop-down-content {

@@ -11,16 +11,15 @@ view('content')
 
 view('options')
     form.vertical
-        .answer
+        .answer-row
             .row
                 .col-sm-6
                     p.question > @echo('标准答案：' state.answer)
-            .row
-                .col-sm-1
-                    label 评分:
-                .col-sm-3
-                    input.input#goal(value=goal.value)
-                .col-sm-3
-                    label > echo('分' ' (本试题' state.score '分)')
-                .col-sm-3
-                    div(id='error')
+            .clearfix.mark-row.border.top.dashed
+                .pull-right
+                    .inline-block > echo('本试题{{{state.score}}}分，')
+                    .inline-block 评分:
+                    input.input.inline-block.min#goal(value=goal.value)
+                    .inline-block 分
+
+                div(id='error')

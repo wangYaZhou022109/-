@@ -1,5 +1,23 @@
 exports.items = {
-    'exam/index/top': { region: 'top', isModule: true },
-    'exam/index/main': { region: 'main', isModule: true },
-    'exam/index/side': { region: 'side', isModule: true }
+    top: 'top',
+    main: 'main',
+    side: 'side'
+};
+
+exports.store = {
+    models: {
+        exam: {
+            url: '../exam/exam'
+        }
+    },
+    callbacks: {
+        init: function(payload) {
+            this.models.exam.set(payload);
+            this.get(this.models.exam);
+        }
+    }
+};
+
+exports.afterRender = function() {
+    return this.dispatch('init', { id: this.renderOptions.id });
 };
