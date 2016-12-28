@@ -3,12 +3,20 @@ exports.bindings = {
     exam: false
 };
 
-exports.events = {
+exports.actions = {
     'click submit': 'submit'
 };
 
-exports.handlers = {
+exports.dataForActions = {
     submit: function() {
-        return this.module.dispatch('submit', { submitType: 'Hand' });
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定要提交试卷？';
+            me.app.message.confirm(message, function() {
+                resolve({ submitType: 'Hand' });
+            }, function() {
+                resolve(false);
+            });
+        });
     }
 };

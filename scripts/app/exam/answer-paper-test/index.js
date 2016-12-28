@@ -415,6 +415,7 @@ exports.store = {
             if (payload.submitType !== submitType.Auto) cancel();
             modify.covert(payload);
             this.models.form.set(modify.data.api);
+            window.close();
             if (t) {
                 return this.post(this.models.form).then(function() {
                     if (payload.submitType !== submitType.Auto) {
@@ -465,6 +466,7 @@ exports.afterRender = function() {
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
                 me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
                 closeConnect();
+                window.close();
             });
         });
     }
