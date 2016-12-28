@@ -31,6 +31,13 @@ view('main')
                 div(data-dynamic-key=state.questionId)
             .bottom.text-right
                 div(data-dynamic-key='collect-correct-' + state.questionId)
+                .slider-question
+                    .item(id='prev')
+                        i.iconfont.icon-arrow-left-circle.line
+                        i.iconfont.icon-arrow-left-circle-full.full
+                    .item(id='next')
+                        i.iconfont.icon-arrow-right-circle.line
+                        i.iconfont.icon-arrow-right-circle-full.full
         else
             div
                 each(questionTypes)
