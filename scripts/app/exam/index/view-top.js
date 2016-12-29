@@ -1,6 +1,5 @@
 exports.bindings = {
-    exam: true,
-    signup: true
+    exam: true
 };
 
 exports.type = 'dynamic';
@@ -48,17 +47,16 @@ exports.handlers = {
 exports.dataForTemplate = {
     handlerBtn: function() {
         var exam = this.bindings.exam.data,
-            signup = this.bindings.signup.data,
             currentTime = new Date().getTime(),
             result = '';
         if (exam.type && exam.type === 1) {
-            if (!signup || !signup.id) {
+            if (!exam.signup || !exam.signup.status) {
                 result = 'signup';
             } else if (currentTime >= exam.startTime && currentTime < exam.endTime) {
                 result = 'startExam';
-            } else if (exam.type === 1 && signup.status === 1) {
+            } else if (exam.type === 1 && exam.signup.status === 1) {
                 result = 'waitReview';
-            } else if (exam.type === 1 && signup.status === 3) {
+            } else if (exam.type === 1 && exam.signup.status === 3) {
                 result = 'rejected';
             } else {
                 result = 'prepare';
