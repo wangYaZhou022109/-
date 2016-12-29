@@ -1,0 +1,9 @@
+#!handlebars
+
+module
+    #banner(data-region='advertising')
+
+view('advertising')
+    #banner.banner > ul
+        each(banners)
+            li > a(href=linkUrl target='_blank') > img(src=downUrl)

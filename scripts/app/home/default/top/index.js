@@ -54,15 +54,42 @@ exports.items = {
     logo: 'logo'
 };
 
+function getParams () {
+    var params = {};
+    window.location.search.substr(1).split('&').forEach(function(kv) {
+        var kvarr = kv.split('=');
+        params[kvarr[0]] = kvarr[1];
+    });
+    return params;
+}
+
 exports.store = {
     models: {
         setting: { url: '../system/setting' },
-        menus: { data: menus }
+        menus: { data: menus },
+        navs: { url: '../system/home-nav' },
+        homeConfig: { url: '../system/home-config/config' }
     },
     callbacks: {
+        loadNavs: function(configId) {
+            this.models.navs.params = {
+                homeConfigId: configId
+            };
+            return this.get(this.models.navs);
+        },
         init: function() {
             var setting = this.models.setting;
-            this.get(setting).then();
+            var configId = getParams().configid,
+                that = this,
+                homeConfig = this.models.homeConfig;
+            this.get(setting);
+            if (configId) {
+                return this.module.dispatch('loadNavs', configId);
+            }
+            return this.get(homeConfig).then(function() {
+                var cfgId = homeConfig.data.id;
+                return that.module.dispatch('loadNavs', cfgId);
+            });
         },
         'app.pushState': function(hash) {
             // 设置top菜单的active状态

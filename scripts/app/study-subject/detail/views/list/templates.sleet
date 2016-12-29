@@ -1,0 +1,14 @@
+#! handlebars
+
+module > .rank(data-region='pannel')
+
+view('pannel')
+    .h3 > echo(region.regionModule.name)
+    .layout-mt-smal.side-rank-list
+        ul
+            each(lists)
+                li
+                    .pull-right.sub-text
+                        string('study.total.time') :
+                        strong > echo(studyTotalTime '分钟')
+                    .inline-block.text-overflow(title=member.fullName) > echo(member.fullName)

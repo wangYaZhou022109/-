@@ -1,7 +1,8 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    menus: true
+    menus: true,
+    navs: true
 };
 
 exports.dataForTemplate = {

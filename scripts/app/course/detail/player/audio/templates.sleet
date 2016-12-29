@@ -1,0 +1,14 @@
+#!handlebars
+
+module
+    div(data-region='audio')
+
+view('audio')
+    div(style = 'width: 800px')
+        div(style="text-align: center")
+            h3 播放歌曲
+        #waveform
+        div(style="text-align: center")
+            button#playPause(class="btn btn-primary")
+                i(class="pe-7s-play")
+                echo('播放/暂停')
