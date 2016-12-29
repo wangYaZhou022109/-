@@ -38,12 +38,14 @@ module.exports = {
                 var configId = getParams().configid,
                     that = this,
                     homeConfig = this.models.homeConfig;
-                if (configId) {
-                    return this.module.dispatch('loadModules', configId);
-                }
+                homeConfig.params = { id: configId };
                 return this.get(homeConfig).then(function() {
-                    var cfgId = homeConfig.data.id;
-                    return that.module.dispatch('loadModules', cfgId);
+                    var cfgId;
+                    if (homeConfig.data) {
+                        cfgId = homeConfig.data.id;
+                        return that.module.dispatch('loadModules', cfgId);
+                    }
+                    return null;
                 });
             }
         }
