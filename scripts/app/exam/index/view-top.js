@@ -24,6 +24,8 @@ exports.dataForEntityModule = function(data) {
         }
     };
 };
+
+
 exports.events = {
     'click signup': 'signup',
     'click revoke': 'revoke',
@@ -33,7 +35,7 @@ exports.events = {
 exports.handlers = {
     signup: function() {
         var me = this;
-        return me.module.dispatch('signup');
+        return me.module.dispatch('signUp');
     },
     revoke: function() {
         var me = this;
@@ -50,13 +52,13 @@ exports.dataForTemplate = {
             currentTime = new Date().getTime(),
             result = '';
         if (exam.type && exam.type === 1) {
-            if (!exam.signup || !exam.signup.status) {
+            if (!exam.signUp || !exam.signUp.status) {
                 result = 'signup';
             } else if (currentTime >= exam.startTime && currentTime < exam.endTime) {
                 result = 'startExam';
-            } else if (exam.type === 1 && exam.signup.status === 1) {
+            } else if (exam.type === 1 && exam.signUp.status === 1) {
                 result = 'waitReview';
-            } else if (exam.type === 1 && exam.signup.status === 3) {
+            } else if (exam.type === 1 && exam.signUp.status === 3) {
                 result = 'rejected';
             } else {
                 result = 'prepare';

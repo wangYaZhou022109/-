@@ -7,7 +7,7 @@ exports.items = {
 exports.store = {
     models: {
         exam: {
-            url: '../exam/exam-signup'
+            url: '../exam/exam/exam-signup'
         }
     },
     callbacks: {
