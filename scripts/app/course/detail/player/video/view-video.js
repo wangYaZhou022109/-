@@ -27,6 +27,11 @@ exports.dataForTemplate = {
 
 exports.beforeClose = function() {
     var learnTime = this.components.player.getLearnTime(),
-        totalTime = this.components.player.duration();
-    this.module.dispatch('updateLearnTime', { learnTime: learnTime, totalTime: totalTime });
+        totalTime = this.components.player.duration(),
+        lessonLocation = this.components.player.currentTime();
+    this.module.dispatch('updateProgress', {
+        learnTime: learnTime,
+        totalTime: totalTime,
+        lessonLocation: lessonLocation
+    });
 };

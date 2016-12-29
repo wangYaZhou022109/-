@@ -83,16 +83,19 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     addNote: function() {
-        this.app.message.success('添加成功');
-        this.module.dispatch('initNotes');
+        return this.module.dispatch('initNotes').then(function() {
+            this.app.message.success('添加成功');
+        });
     },
     removeNote: function() {
-        this.app.message.success('删除成功');
-        this.module.dispatch('initNotes');
+        return this.module.dispatch('initNotes').then(function() {
+            this.app.message.success('删除成功');
+        });
     },
     updateNote: function() {
-        this.app.message.success('修改成功');
-        this.module.dispatch('initNotes');
+        this.module.dispatch('initNotes').then(function() {
+            this.app.message.success('修改成功');
+        });
     }
 };
 

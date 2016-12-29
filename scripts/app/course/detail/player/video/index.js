@@ -20,7 +20,7 @@ exports.store = {
             sectionProgress.set(payload.sectionProgress);
             D.assign(section.data, { url: download.getFullUrl() });
         },
-        updateLearnTime: function() {
+        updateProgress: function() {
             // console.log(payload);
         }
     }

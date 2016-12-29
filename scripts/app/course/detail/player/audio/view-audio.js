@@ -37,8 +37,14 @@ exports.handlers = {
 
 exports.beforeClose = function() {
     var learnTime = this.components.waveform.getLearnTime(),
-        totalTime = this.components.waveform.getDuration();
-    this.module.dispatch('updatePregress', { learnTime: learnTime, totalTime: totalTime });
+        totalTime = this.components.waveform.getDuration(),
+        lessonLocation = this.components.waveform.getCurrentTime();
+
+    this.module.dispatch('updatePregress', {
+        learnTime: learnTime,
+        totalTime: totalTime,
+        lessonLocation: lessonLocation
+    });
 };
 
 // 支持的事件 loading,ready,play,pause,finish,error
