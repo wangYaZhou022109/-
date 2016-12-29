@@ -1,24 +1,13 @@
-var $ = require('jquery'),
-    changeToFullScreen;
 
 exports.routes = {
     'index/:id': 'showIndex',
+    'answer-paper-test/:id': 'showAnswerPaperTest',
     'answer-paper': 'showPaper',
     'score-detail-paper': 'showScoreDetailPaper',
     'mark-paper': 'showMarkPaper',
     'mark-paper-test': 'showMark2',
     demo: 'showDemo',
-    'answer-paper-test/:id': 'showAnswerPaperTest',
     'score-detail-paper-test': 'showScore2'
-};
-
-
-exports.interceptors = {
-    'answer-paper-test': 'activeAnswerPaperTest'
-};
-
-exports.activeAnswerPaperTest = function() {
-    changeToFullScreen();
 };
 
 exports.showIndex = function(id) {
@@ -43,10 +32,4 @@ exports.showAnswerPaperTest = function(id) {
 
 exports.showScore2 = function() {
     return this.app.show('content', 'exam/score-detail-paper-test');
-};
-
-changeToFullScreen = function() {
-    $('.header').hide();
-    $('.footer').hide();
-    $('.achievement-content').attr('height', '100%');
 };

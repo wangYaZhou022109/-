@@ -2,6 +2,7 @@
 var _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
     D = require('drizzlejs'),
+    $ = require('jquery'),
     E = require('./app/exam/exam-websocket'),
     map = {
         1: 1,
@@ -20,14 +21,16 @@ var _ = require('lodash/collection'),
         Hand: 'Hand'
     },
     connect,
-    closeConnect;
+    closeConnect,
+    changeToFullScreen;
 
 
 exports.items = {
-    side: 'side',
+    'question-type': 'question-type',
     main: 'main',
     head: 'head',
-    tips: ''
+    tips: '',
+    'count-down': 'count-down'
 };
 
 exports.store = {
@@ -69,18 +72,17 @@ exports.store = {
                     this.data.noAnswerNum = this.data.questionNum - this.data.answeredNum;
                 },
                 init: function(exam, payload) {
-                    D.assign(this.data, {
+                    this.data = D.assign({}, {
                         name: exam.name,
                         isOnePageOneQuestion: exam.paperShowRule === 1,
                         mode: payload.mode || 1,
                         noAnswerNum: exam.paper.questionNum || 0,
                         answeredNum: 0,
                         questionNum: exam.paper.questionNum,
-                        totalScore: exam.paper.totalScore,
+                        totalScore: exam.paper.totalScore / 100,
                         duration: exam.duration,
                         isCollect: false
                     });
-                    this.data.isOnePageOneQuestion = true;
                 }
             }
         },
@@ -196,12 +198,12 @@ exports.store = {
                             });
                         },
                         changeQuestionAttrsSort = function() {
-                            var paperClassQuestions = this.store.models.paper.data.paperClassQuestions;
-                            _.forEach(paperClassQuestions, function(q) {
-                                var question = q.question;
+                            var questions = this.store.models.exam.data.paper.questions;
+                            _.forEach(questions, function(q) {
+                                var question = q;
                                 if (question.type === 1 || question.type === 2 || question.type === 8) {
                                     D.assign(question, {
-                                        questionAttrs: question.questionAttrs.sort(function() {
+                                        questionAttrs: question.questionAttrCopys.sort(function() {
                                             return Math.random() - 0.5;
                                         })
                                     });
@@ -225,10 +227,12 @@ exports.store = {
                         result = changeQuestionSort();
                         break;
                     case 3:
+                        setQuestions.call(this, questionTypes);
                         changeQuestionAttrsSort.call(this);
                         result = questionTypes;
                         break;
                     case 4:
+                        setQuestions.call(this, questionTypes);
                         changeQuestionAttrsSort.call(this);
                         result = changeQuestionSort();
                         break;
@@ -350,15 +354,14 @@ exports.store = {
 
             if (!answer.data) answer.data = { answers: [] };
             if (!modify.data) modify.data = { answers: [], api: {} };
+            if (!state.data) state.data = {};
 
-            D.assign(payload, {
-                examId: '9cd12607-5927-4cd1-8e0e-e1657c7cef96'
-            });
             this.models.exam.set({ id: payload.examId });
 
             return this.get(this.models.exam).then(function() {
                 var exam = me.models.exam.data;
-                me.models.state.init(exam, payload);
+
+                if (!state.data.isOnePageOneQuestion) me.models.state.init(exam, payload);
 
                 questionTypes.createQuestionTypes(exam.paper, exam.paperSortRule);
                 questionTypes.setFirstQuestionRemote();
@@ -412,9 +415,11 @@ exports.store = {
                 t = true;
             this.models.answer.save();
             this.models.modify.save();
+            this.models.state.save();
             if (payload.submitType !== submitType.Auto) cancel();
             modify.covert(payload);
             this.models.form.set(modify.data.api);
+
             if (t) {
                 return this.post(this.models.form).then(function() {
                     if (payload.submitType !== submitType.Auto) {
@@ -425,10 +430,10 @@ exports.store = {
                         me.models.state.clear();
                         me.app.message.success('交卷成功');
                         closeConnect();
+                        window.close();
                     } else {
                         me.models.modify.data = { answers: [], api: {} };
                     }
-                    window.close();
                 });
             }
             return '';
@@ -437,6 +442,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
+    changeToFullScreen();
     return this.dispatch('init', this.renderOptions);
 };
 
@@ -448,7 +454,7 @@ exports.afterRender = function() {
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 2) * (1000 * 60);
+                ms = (min + 0) * (1000 * 60);
             return ms;
         },
         random = getRandom(),
@@ -484,3 +490,10 @@ connect = function(examId, callback) {
 closeConnect = function() {
     E.disconnect();
 };
+
+changeToFullScreen = function() {
+    $('.header').hide();
+    $('.footer').hide();
+    $('.achievement-content').attr('height', '100%');
+};
+
