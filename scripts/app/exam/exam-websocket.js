@@ -15,7 +15,8 @@ ExamSocket = {
     open: function(app, examId, callbacks) {
         var prefix = app.options.urlRoot + '/exam',
             url = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-        url += window.location.host + window.location.pathname;
+        // url += window.location.host + window.location.pathname;
+        url += window.location.host;
         if (url.slice(-1) === '/') url = url.slice(0, -1);
         ExamSocket.app = app;
         ExamSocket.url = url + prefix + '/ws/exam';

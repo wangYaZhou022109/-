@@ -26,7 +26,7 @@ view('top')
                             span  考试时间：
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.startTime)
                     .pull-right.text-center
-                        p 1:30:00
+                        div(data-dynamic-key='countDown')
                         .small-font 距离考试开始时间
                 .detail-bottom.clearfix
                     .pull-left > ul.clearfix
@@ -35,7 +35,7 @@ view('top')
                             br
                             p.small-font 考试时长
                         li > div
-                            h3 >
+                            h3
                             br
                             p.small-font 总分
                         li > div
@@ -43,12 +43,21 @@ view('top')
                             br
                             p.small-font 及格成绩
                         li > div
-                            h3  > echo(exam.applicantNumber)
+                            h3 > echo(exam.applicantNumber)
                             br
                             p.small-font 报名人数
 
                     .pull-right
-                        button.btn.white 我要报名
+                        compare(handlerBtn 'eq' 'signup')
+                            button.btn.white#signup 报名
+                        compare(handlerBtn 'eq' 'startExam')
+                            a.btn.white#toExam 进入考试
+                        compare(handlerBtn 'eq' 'waitReview')
+                            button.btn.white 待审核
+                        compare(handlerBtn 'eq' 'rejected')
+                            button.btn.white 报名失败
+                        compare(handlerBtn 'eq' 'prepare')
+                            a.btn.white(href='#/exam/answer-paper-test/' + exam.id target='_blank') 进入考试(灰色)
 
 view('side')
     .page-side > .container
