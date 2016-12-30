@@ -103,7 +103,7 @@ view('list')
                             i.iconfont.icon-user + | 218人已学习
                         .title.text-overflow > echo(name)
                     .bottom
-                        .pull-right > dateTime(startTime) + echo('~') + dateTime(startTime)
+                        .pull-right > dateTime(startTime) + echo('~') + dateTime(endTime)
                         | 起至时间
                     .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
 
