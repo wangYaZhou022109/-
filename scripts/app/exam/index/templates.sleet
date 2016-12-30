@@ -24,7 +24,7 @@ view('top')
                             | 报名截至日期：
                             dateTime(exam.applicantEndTime)
                             span  考试时间：
-                            dateTime(exam.startTime) + echo('~') + dateTime(exam.startTime)
+                            dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
                         .small-font 距离考试开始时间
