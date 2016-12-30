@@ -13,7 +13,7 @@ exports.store = {
                     return Math.floor((new Date(endTime) - new Date()) / (1000 * 60));
                 };
             data.duration = getDuration(payload.data.endTime);
-            data.duration = 2;
+            // data.duration = 2;
             this.models.state.callback = payload.callback;
         }
     }
