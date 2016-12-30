@@ -1,0 +1,27 @@
+.activity-page {
+    & .activity-filter {
+        padding-top: var(--large-space);
+        padding-bottom: var(--large-space);
+    }
+
+    & .activity-tabs {
+        height: var(--search-bar-height);
+        line-height: var(--search-bar-height);
+        width: 50%;
+        max-width: 40em;
+
+        & li {
+            float: left;
+            width: 25%;
+            text-align: center;
+            font-size: var(--h4);
+            cursor: pointer;
+            transition: all .2s linear;
+
+            &.active {
+                color: var(--white);
+                border-radius: var(--search-bar-height);
+            }
+        }
+    }
+}

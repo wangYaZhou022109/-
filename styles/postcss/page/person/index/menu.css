@@ -1,0 +1,18 @@
+.person-menu {
+    width: 100%;
+    height: calc(var(--large-space) * 1.5);
+    line-height: calc(var(--large-space) * 1.5);
+    & li {
+        display: inline-block;
+
+        & a {
+            display: inline-block;
+            padding-left: calc(var(--space) * 2);
+            padding-right: calc(var(--space) * 2);
+            min-width: calc(var(--space) * 10);
+            text-align: center;
+            @apply --transition;
+        }
+    }
+
+}

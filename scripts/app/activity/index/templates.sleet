@@ -6,6 +6,7 @@ module > .activity-page
     .activity-list(data-region='list')
 
 view('banner')
+    .bg-img
     .container > ul
         li.prev
             .content
@@ -22,7 +23,7 @@ view('banner')
                         | 已有
                         strong 316
                         | 人参加
-                    a.normal(href='#/exam/detail') > .btn.radius 我要参与
+                    a.normal(href='#/exam/index') > .btn.radius 我要参与
         li.current
             .content
                 .covers
@@ -100,11 +101,11 @@ view('list')
                         | 起至时间
                     .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
 
-    .pagination
-        ul
-            li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
-            li.hover-main-color.active.bg-main-color 1
-            li.hover-main-color 2
-            li.hover-main-color 3
-            li.hover-main-color 4
-            li.hover-main-color > i.iconfont.icon-arrow-right.scale-1
+        .pagination
+            ul
+                li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
+                li.hover-main-color.active.bg-main-color 1
+                li.hover-main-color 2
+                li.hover-main-color 3
+                li.hover-main-color 4
+                li.hover-main-color > i.iconfont.icon-arrow-right.scale-1

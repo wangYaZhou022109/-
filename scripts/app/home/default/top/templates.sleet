@@ -23,7 +23,7 @@ view('shortcut')
         .item > a.normal(href='#') > i.iconfont.icon-daiban
         .item > a.normal(href='#') > i.iconfont.icon-setting
         .user-info.inline-block
-            .user-pic > img(src='images/2.jpeg')
+            a.normal(href='#/person/index' title='进入个人中心') > .user-pic > img(src='images/d4.jpg')
 
         .hide > .item > a.normal#logout(href='javascript:;') > i.icon-exit.inline-block
         .hide

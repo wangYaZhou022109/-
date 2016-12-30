@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .container
+    .person-statistics(data-region='statistics')
+
+view('statistics')
+    div 汇总

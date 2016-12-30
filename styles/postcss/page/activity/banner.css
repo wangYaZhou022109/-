@@ -1,0 +1,110 @@
+.activity-banner {
+    width: 100%;
+
+    & img {
+        max-width: inherit;
+        width: 100%;
+        height: 100%;
+    }
+
+    & .bg-img {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: calc(var(--large-space) * 15);
+        opacity: .3;
+        filter: alpha(opacity=30);
+        background-size: cover;
+    }
+
+    & .container {
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+        height: calc(var(--large-space) * 15);
+    }
+
+    & li {
+        position: absolute;
+        z-index: 1;
+        top: calc(var(--large-space) * 2);
+        display: inline-block;
+        width: 30%;
+        padding: calc(var(--large-space) * 0.5);
+
+        & .img {
+            height: calc(var(--large-space) * 10);
+        }
+
+        & .details {
+            display: none;
+        }
+    }
+
+    & li.prev {
+        left: 0;
+    }
+
+    & li.next {
+        right: 0;
+    }
+
+    & li.current {
+        @apply --box-shadow;
+        z-index: 10;
+        left: 20%;
+        top: var(--large-space);
+        width: 60%;
+        padding: calc(var(--large-space) * 0.75);
+
+        & .covers {
+            position: relative;
+            display: inline-block;
+            width: 55%;
+        }
+
+        & .img {
+            height: calc(var(--large-space) * 11.5);
+        }
+
+        & .details {
+            display: inline-block;
+            float: right;
+            width: 45%;
+            padding-left: var(--large-space);
+            padding-right: calc(var(--large-space) * 0.5);
+        }
+    }
+
+    & .content {
+        position: relative;
+    }
+
+    & .title {
+        margin: calc(var(--large-space) * 0.5) 0;
+        font-size: var(--h2);
+    }
+
+    & .time {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+    }
+
+    & .information {
+        margin: calc(var(--large-space) * 0.5) 0;
+        line-height: calc(var(--font-size) * 2);
+        height: calc(var(--large-space) * 2);
+        overflow: hidden;
+    }
+
+    & .num {
+        margin-bottom: calc(var(--large-space) * 0.5);
+        & strong {
+            font-size: var(--h2);
+        }
+    }
+
+    & .list-tag {
+        @apply --tag;
+    }
+}
