@@ -361,7 +361,7 @@ exports.store = {
             return this.get(this.models.exam).then(function() {
                 var exam = me.models.exam.data;
 
-                if (!state.data.isOnePageOneQuestion) me.models.state.init(exam, payload);
+                if (!state.data.name) me.models.state.init(exam, payload);
 
                 questionTypes.createQuestionTypes(exam.paper, exam.paperSortRule);
                 questionTypes.setFirstQuestionRemote();
