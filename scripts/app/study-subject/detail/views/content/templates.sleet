@@ -19,7 +19,7 @@ view('pannel')
                         .item.block
                             .pull-right
                                 if(preview)
-                                    a.normal(href=btnUrl)
+                                    a.normal(href='javascript:;' id='studyBtn-'+id data-chapter-id=chapterId data-url=btnUrl)
                                         .btn.radius > string('btn.prefix') > map('section-type' sectionType)
                             .inline-block.attribute
                                 compare(required 'eq' 1)

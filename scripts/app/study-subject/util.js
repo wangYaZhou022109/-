@@ -5,7 +5,7 @@ var D = require('drizzlejs'),
         before: '第',
         after: '节'
     };
-
+// 阶段序号转义
 exports.rowHeader = function(arr, payload) {
     var opt = D.assign(options, payload);
     _.map(arr || [], function(obj, i) {
@@ -16,6 +16,7 @@ exports.rowHeader = function(arr, payload) {
     });
 };
 
+// 计算剩余天数
 exports.restStudyDays = function(registerTime, studyDays) {
     var currentTime = new Date().getTime(),
         days = Math.floor((currentTime - registerTime) / (24 * 3600 * 1000)),
@@ -23,7 +24,8 @@ exports.restStudyDays = function(registerTime, studyDays) {
     return restDays < 0 ? 0 : restDays;
 };
 
-exports.setBtnUrl = function(chapters) {
+// 分配节按钮地址
+exports.setBtnUrl = function(chapters, type) {
     var courseChapters = chapters;
     _.map(courseChapters || [], function(obj) {
         _.map(obj.courseChapterSections || [], function(sec) {
@@ -35,6 +37,10 @@ exports.setBtnUrl = function(chapters) {
                 section.btnUrl = section.url;
             } else if (sectionType === 8) {
                 section.btnUrl = '#/task/detail/' + section.resourceId;
+            }
+            section.preview = true;
+            if (type === 'preview') {
+                section.preview = false;
             }
             return section;
         });
