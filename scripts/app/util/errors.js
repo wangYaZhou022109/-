@@ -1,4 +1,6 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    subject = require('../study-subject/errors'),
+    course = require('../course/errors');
 
 var messages = {
     1: '操作失败, 您没有此权限',
@@ -12,7 +14,7 @@ var messages = {
     900004: '文件类型不支持'
 };
 
-var ms = D.assign({}, messages);
+var ms = D.assign({}, messages, subject, course);
 
 exports.get = function(key) {
     if (!ms[key]) throw new Error('Key [' + key + '] is not defined');

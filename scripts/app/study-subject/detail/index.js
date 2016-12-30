@@ -25,10 +25,6 @@ exports.store = {
             return me.post(register).then(function(data) {
                 var obj = data[0],
                     styles;
-                if (!obj || !obj.id) {
-                    me.app.message.error('无法找到该资源!请确认该资源是否存在或已下架!');
-                    history.back(-1);
-                }
                 styles = JSON.parse(obj.styles);
                 state.set({
                     key: styles.code
@@ -36,6 +32,8 @@ exports.store = {
                 subject.set(obj);
                 me.models.styles.set(styles);
                 state.changed();
+            }, function(error) {
+                history.back(-1);
             });
         }
     }

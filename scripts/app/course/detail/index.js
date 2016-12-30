@@ -79,9 +79,11 @@ exports.store = {
             course.set(payload);
             notes.params.courseId = payload.id;
             courseRelated.params.id = payload.id;
-            return me.get(course).then(function() {
+            return me.chain(me.get(course).then(function() {
                 me.module.dispatch('refresh', course.data);
-            }, me.get(notes), me.get(courseRelated));
+            }, function(error) {
+                history.back(-1);
+            }), me.get(notes), me.get(courseRelated));
         },
         refresh: function(payload) {
             var me = this,
@@ -164,4 +166,3 @@ exports.store = {
 exports.afterRender = function() {
     return this.dispatch('init', { id: this.renderOptions.id });
 };
-
