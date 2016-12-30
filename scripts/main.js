@@ -1,9 +1,9 @@
 var D, H, jQuery, app, helpers, oauthOptions, plupload;
 
 oauthOptions = {
-    clientId: 3,
+    clientId: 99,
     provider: 'https://oauth9.zhixueyun.com',
-    returnTo: 'http://192.168.9.106/front',
+    returnTo: 'https://dev9.zhixueyun.com'
 };
 
 window.$ = window.jQuery = jQuery = require('jquery');
@@ -28,14 +28,19 @@ require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
 require('./vendors/upload/jquery.plupload.queue.min');
 require('./vendors/upload/zh_CN');
-require('./app/ext/picker');
 require('./app/ext/component-pager');
-require('./app/ext/upload');
+require('./app/ext/picker');
 require('./app/ext/swiper');
-require('./app/ext/views/form/form-view');
+require('./app/ext/tag-view');
+require('./app/ext/upload');
 require('./app/ext/models/local-storage-model');
 require('./app/ext/selectize');
+require('./app/ext/views/form/form-view');
 require('./app/ext/views/dynamic-view');
+require('./app/ext/pdf');
+require('./app/ext/videojs');
+require('./app/ext/audio-wavesurfer');
+require('./app/ext/photoswipe');
 
 D.adapt({
     getFormData: function(form) {
@@ -73,7 +78,6 @@ app = window.app = new D.Application({
     routers: ['', 'home', 'course', 'activity', 'study-subject', 'exam']
 });
 
-
 D.PageableModel.setDefault({
     pageKey: 'page'
 });
@@ -81,5 +85,6 @@ D.PageableModel.setDefault({
 require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
+require('./app/util/global').setup(app);
 
 app.start('home');

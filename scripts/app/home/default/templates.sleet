@@ -3,8 +3,14 @@
 module > .home-page
     .banner(data-region='banner')
     .news(data-region='news')
-    .section.bg-highlight(data-region='online-course')
-    .section(data-region='study-subject')
-    .section.bg-highlight(data-region='recommend-activity')
-    .section.lecture(data-region='lecture')
-    .section(data-region='ranklist')
+    div(data-region='main')
+    # .section.bg-highlight(data-region='online-course')
+    # .section(data-region='study-subject')
+    # .section.bg-highlight(data-region='recommend-activity')
+    # .section.lecture(data-region='lecture')
+    # .section(data-region='ranklist')
+
+view('main')
+    .home-page
+        each(modules)
+            .section(data-dynamic-key=id)

@@ -1,0 +1,6 @@
+#! handlebars
+
+module > div(data-region='pannel')
+
+view('pannel')
+    #comment-area

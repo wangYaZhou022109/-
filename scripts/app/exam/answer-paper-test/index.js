@@ -428,6 +428,7 @@ exports.store = {
                     } else {
                         me.models.modify.data = { answers: [], api: {} };
                     }
+                    window.close();
                 });
             }
             return '';
@@ -439,12 +440,6 @@ exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
 
-exports.buttons = [{
-    text: '交卷',
-    fn: function() {
-        return this.dispatch('submit', { submitType: submitType.Hand });
-    }
-}];
 
 exports.afterRender = function() {
     var me = this,
@@ -471,6 +466,7 @@ exports.afterRender = function() {
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
                 me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
                 closeConnect();
+                window.close();
             });
         });
     }

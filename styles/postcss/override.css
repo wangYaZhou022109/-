@@ -21,6 +21,7 @@
     text-align: right;
     border-top: 1px solid #ddd;
     padding: calc(var(--space) * 2) 0 0;
+    
 }
 
 .alertify-button,
@@ -35,6 +36,7 @@
     box-shadow: none;
     text-decoration: none;
     margin-left: calc(var(--space) * 3);
+    color: var(--font-color);
     font-weight: normal;
 }
 

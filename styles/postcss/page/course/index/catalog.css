@@ -13,7 +13,7 @@
             margin: 0 var(--large-space);
         }
 
-        & > ul > li {
+        & div > ul > li {
             line-height: calc(var(--font-size) * 4);
             position: relative;
             cursor: pointer;

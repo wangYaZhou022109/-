@@ -79,11 +79,67 @@ module.exports = {
         return value / 100;
     },
 
+    inner: function(data, key, options) {
+        var fn = options.fn,
+            ret;
+        ret = fn(data[key]);
+        return ret;
+    },
+
+    pick: function(val, def) {
+        if (!val) {
+            return def;
+        }
+        return val;
+    },
+
+    times: function() {
+        /* eslint-disable */
+        var fn, ret = [], i, count = 1, start, end, options, that = this;
+        if (arguments.length === 2) {
+            start = 0;
+            end = arguments[0];
+            options = arguments[1];
+        } else {
+            start = arguments[0];
+            end = arguments[1];
+            options = arguments[2];
+        }
+        fn = options.fn;
+
+        function execIteration (index) {
+            var innerData = D.assign({ count: count, index: index }, that);
+            ret.push(fn(innerData));
+            count++;
+        }
+        for (i = start; i < end; i++) {
+            execIteration(i);
+        }
+        return ret.join('');
+    },
+
+    downloadUrl: function(fileId, options) {
+        var Self = arguments[arguments.length - 1].data.root.Self,
+            rootPath = Self.app.options.urlRoot,
+            url = rootPath + '/human/file/download?id=' + fileId;
+        return fileId && url;
+    },
+
+    routerLink: function() {
+        var Self = arguments[arguments.length - 1].data.root.Self,
+            prefix = Self.app.options.routerPrefix,
+            i,
+            uri = prefix;
+        for (i = 0; i < arguments.length - 1; i++) {
+            uri += arguments[i];
+        }
+        return uri;
+    },
+
     isGrant: function(operatorType, organizationId, options) {
         var view = options.data.root.Self,
             grants,
             types;
-
         if (!view) return '';
 
         grants = view.module.store.models.Grants;
