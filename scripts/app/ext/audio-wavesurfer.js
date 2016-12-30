@@ -14,7 +14,7 @@ var wavesurfetKit = function() {
         learnTime += minusTime;
     };
     var getLearnTime = function() {
-        return Math.floor(learnTime);
+        return learnTime;
     };
     return {
         audioprocess: audioprocess,

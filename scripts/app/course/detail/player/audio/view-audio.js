@@ -1,7 +1,8 @@
 exports.bindings = {
     section: true,
     sectionProgress: true,
-    download: false
+    download: false,
+    time: false
 };
 
 exports.components = [
@@ -36,14 +37,24 @@ exports.handlers = {
 };
 
 exports.beforeClose = function() {
-    var learnTime = this.components.waveform.getLearnTime(),
+    var me = this,
+        beginTime = me.bindings.time.data,
+        endTime = 0,
+        studyTotalTime = this.components.waveform.getLearnTime(),
         totalTime = this.components.waveform.getDuration(),
+        completedRate = Math.ceil((studyTotalTime * 100) / totalTime),
         lessonLocation = this.components.waveform.getCurrentTime();
 
-    this.module.dispatch('updatePregress', {
-        learnTime: learnTime,
-        totalTime: totalTime,
-        lessonLocation: lessonLocation
+    return me.module.dispatch('time').then(function(data) {
+        endTime = data[0];
+        completedRate = 100;
+        me.module.dispatch('updatePregress', {
+            beginTime: beginTime,
+            endTime: endTime,
+            studyTotalTime: Math.ceil(studyTotalTime),
+            completedRate: completedRate,
+            lessonLocation: lessonLocation
+        });
     });
 };
 

@@ -2,7 +2,7 @@ var jQuery = require('jquery'),
     _ = require('lodash/collection'),
     setting = {},
     currentUser = {},
-    options = { url: 'http://192.168.9.121/api/v1/system/setting', method: 'GET', dataType: 'json' };
+    options = { url: '.' + window.app.options.urlRoot + '/system/setting', method: 'GET', dataType: 'json' };
 
 jQuery.ajax(options).done(function(data) {
     _.map(data.setting, function(v) { setting[v.key] = v.value; });

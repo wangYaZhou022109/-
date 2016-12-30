@@ -56,13 +56,11 @@ exports.items = {
 
 exports.store = {
     models: {
-        setting: { url: '../system/setting' },
         menus: { data: menus }
     },
     callbacks: {
         init: function() {
-            var setting = this.models.setting;
-            this.get(setting).then();
+
         },
         'app.pushState': function(hash) {
             // 设置top菜单的active状态

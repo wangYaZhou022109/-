@@ -5,29 +5,37 @@ exports.items = {
 exports.store = {
     models: {
         section: {},
-        sectionProgress: {},
-        download: { url: '../human/file/download' }
+        sectionProgress: { url: '../course-study/course-front/progress' },
+        download: { url: '../human/file/download' },
+        time: { url: '../system/setting/time' },
     },
     callbacks: {
         init: function(payload) {
             this.models.section.set(payload.section);
             this.models.sectionProgress.set(payload.sectionProgress);
-        },
-        updatePregress: function() {
 
+            return this.get(this.models.time);
+        },
+        time: function() {
+            var time = this.models.time;
+            return this.get(time);
+        },
+        updatePregress: function(payload) {
+            var sectionProgress = this.models.sectionProgress,
+                section = this.models.section;
+            sectionProgress.clear();
+            sectionProgress.set(payload);
+            sectionProgress.data.courseId = section.data.courseId;
+            sectionProgress.data.sectionId = section.data.id;
+            sectionProgress.data.chapterId = section.data.chapterId;
+            sectionProgress.data.clientType = 0;
+            sectionProgress.data.sectionType = section.data.sectionType;
+
+            this.save(sectionProgress);
         }
     }
 };
 
 exports.beforeRender = function() {
     this.dispatch('init', this.renderOptions);
-};
-
-exports.mixin = {
-    getData: function() {
-        var progress = this.store.models.courseSectionStudyProgress.data,
-            pdfView = this.items.content.components.viewPdf.getData();
-        progress.lessonLocation = pdfView.pageNum;
-        return progress;
-    }
 };

@@ -7,7 +7,7 @@ exports.items = {
 exports.store = {
     models: {
         section: {},
-        sectionProgress: {},
+        sectionProgress: { url: '../course-study/course-front/progress' },
         download: { url: '../human/file/download' },
         state: {}
     },
@@ -20,8 +20,18 @@ exports.store = {
             sectionProgress.set(payload.sectionProgress);
             D.assign(section.data, { url: download.getFullUrl() });
         },
-        updateProgress: function() {
-            // console.log(payload);
+        updateProgress: function(payload) {
+            var sectionProgress = this.models.sectionProgress,
+                section = this.models.section;
+            sectionProgress.clear();
+            sectionProgress.set(payload);
+            sectionProgress.data.courseId = section.data.courseId;
+            sectionProgress.data.sectionId = section.data.id;
+            sectionProgress.data.chapterId = section.data.chapterId;
+            sectionProgress.data.clientType = 0;
+            sectionProgress.data.sectionType = section.data.sectionType;
+
+            this.save(sectionProgress);
         }
     }
 };

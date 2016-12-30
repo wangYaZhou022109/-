@@ -26,12 +26,21 @@ exports.dataForTemplate = {
 };
 
 exports.beforeClose = function() {
-    var learnTime = this.components.player.getLearnTime(),
+    var me = this,
+        beginTime = me.bindings.time.data,
+        endTime = 0,
+        studyTotalTime = this.components.player.getLearnTime(),
         totalTime = this.components.player.duration(),
+        completedRate = studyTotalTime / totalTime,
         lessonLocation = this.components.player.currentTime();
-    this.module.dispatch('updateProgress', {
-        learnTime: learnTime,
-        totalTime: totalTime,
-        lessonLocation: lessonLocation
+    return me.module.dispatch('time').then(function(data) {
+        endTime = data[0];
+        me.module.dispatch('updatePregress', {
+            beginTime: beginTime,
+            endTime: endTime,
+            studyTotalTime: Math.ceil(studyTotalTime),
+            completedRate: completedRate,
+            lessonLocation: lessonLocation
+        });
     });
 };
