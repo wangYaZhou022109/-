@@ -29,7 +29,7 @@ view('recommend-activity')
                                     .btn.block.border-main-color > span 我要参加
                             .bottom.clearfix
                                 .pull-right.tip-text 19人已参加
-                        .activity-tag.custom-bg-color-3 > .text > map('activity-type' type)
+                        .activity-tag.custom-bg-color-3 > .text > map('home-activity-type' type)
 
                 .above
                     times(2 4)
@@ -46,7 +46,7 @@ view('recommend-activity')
                                         .btn.block.bg-main-color 我要参加
                                 .bottom.clearfix
                                     .pull-right.tip-text 123人已参加
-                            .activity-tag.custom-bg-color-1 > .text > map('activity-type' type)
+                            .activity-tag.custom-bg-color-1 > .text > map('home-activity-type' type)
 
 
         .section
@@ -64,7 +64,7 @@ view('recommend-activity')
                                 .btn.block.bg-main-color 我要参加
                         .bottom.clearfix
                             .pull-right.tip-text 123人已参加
-                    .activity-tag.custom-bg-color-5 > .text > map('activity-type' type)
+                    .activity-tag.custom-bg-color-5 > .text > map('home-activity-type' type)
 
         .section
             .bar.max-height > inner(activity 6)
@@ -80,4 +80,4 @@ view('recommend-activity')
                             .btn.block.border-main-color > span 我要参加
                     .bottom.clearfix
                         .pull-right.tip-text 123人已参加
-                .activity-tag.custom-bg-color-4 > .text > map('activity-type' type)
+                .activity-tag.custom-bg-color-4 > .text > map('home-activity-type' type)

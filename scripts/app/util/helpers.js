@@ -118,6 +118,13 @@ module.exports = {
         return ret.join('');
     },
 
+    downloadUrl: function(fileId, options) {
+        var Self = arguments[arguments.length - 1].data.root.Self,
+            rootPath = Self.app.options.urlRoot,
+            url = rootPath + '/human/file/download?id=' + fileId;
+        return fileId && url;
+    },
+
     routerLink: function() {
         var Self = arguments[arguments.length - 1].data.root.Self,
             prefix = Self.app.options.routerPrefix,

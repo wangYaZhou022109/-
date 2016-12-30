@@ -83,12 +83,15 @@ exports.store = {
                 that = this,
                 homeConfig = this.models.homeConfig;
             this.get(setting);
-            if (configId) {
-                return this.module.dispatch('loadNavs', configId);
-            }
+            homeConfig.params = { id: configId };
             return this.get(homeConfig).then(function() {
-                var cfgId = homeConfig.data.id;
-                return that.module.dispatch('loadNavs', cfgId);
+                var cfgId;
+                if (homeConfig.data) {
+                    cfgId = homeConfig.data.id;
+                    window.document.title = homeConfig.data.name;
+                    return that.module.dispatch('loadNavs', cfgId);
+                }
+                return null;
             });
         },
         'app.pushState': function(hash) {
