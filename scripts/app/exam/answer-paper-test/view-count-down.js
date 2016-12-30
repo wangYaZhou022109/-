@@ -1,3 +1,4 @@
+var getEndTime;
 
 exports.bindings = {
     exam: false,
@@ -6,9 +7,10 @@ exports.bindings = {
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
+    var data = this.bindings.exam.data;
     return {
-        endTime: this.bindings.exam.data.endTime,
-        duration: this.bindings.exam.data.duration
+        endTime: getEndTime(data.endTime, data.duration),
+        duration: data.duration
     };
 };
 
@@ -26,4 +28,11 @@ exports.dataForEntityModule = function(data) {
             me.app.viewport.modal(me.module.items.tips, { message: '交卷时间到,你本次考试已被强制交卷' });
         }
     };
+};
+
+getEndTime = function(examActivityEndTime, duration) {
+    var nowTime = new Date();
+    nowTime.setMinutes(nowTime.getMinutes() + duration, nowTime.getSeconds(), 0);
+    if (nowTime.getTime() > examActivityEndTime) return examActivityEndTime;
+    return nowTime;
 };

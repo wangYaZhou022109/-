@@ -4,17 +4,31 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: {}
+        state: {
+            type: 'localStorage'
+        }
     },
     callbacks: {
         init: function(payload) {
-            var data = this.models.state.data,
+            var state = this.models.state,
                 getDuration = function(endTime) {
-                    return Math.floor((new Date(endTime) - new Date()) / (1000 * 60));
-                };
-            data.duration = getDuration(payload.data.endTime);
-            // data.duration = 2;
-            this.models.state.callback = payload.callback;
+                    return Math.ceil((new Date(endTime).getTime() - new Date().getTime()) / (1000 * 60));
+                },
+                minute;
+
+            state.load();
+            if (!state.data) {
+                if (payload.data.endTime && payload.data.endTime > new Date().getTime()) {
+                    minute = getDuration(payload.data.endTime);
+                    this.models.state.data = {
+                        duration: minute,
+                        second: minute * 60
+                    };
+                    this.models.state.callback = payload.callback;
+                } else {
+                    this.models.state.set({ duration: 0 });
+                }
+            }
         }
     }
 };

@@ -17,18 +17,33 @@ exports.afterRender = function() {
             return [h, m, s].join(':');
         },
         callback = this.bindings.state.callback,
-        si;
+        si,
+        state = this.bindings.state,
+        data = state.data;
+
     hour = Math.floor(duration / 60);
     duration %= 60;
     minitus = duration < 1 ? 0 : duration;
     second = duration < 1 ? (duration % 60) * 60 : 0;
+
     el.innerHTML = getStr();
+
     si = setInterval(function() {
+        var s = data.second;
+        if (data.duration !== 0) {
+            data.second = s - 1;
+            data.duration = Math.round(data.second / 60);
+            state.save();
+        }
+
         if (second === 0) {
             if (minitus === 0) {
                 if (hour === 0) {
                     clearInterval(si);
-                    if (callback) callback();
+                    if (callback) {
+                        callback();
+                        state.clear();
+                    }
                     return;
                 }
                 hour -= 1;

@@ -6,13 +6,13 @@ exports.type = 'dynamic';
 
 exports.getEntity = function() {
     return {
-        endTime: this.bindings.exam.data.endTime,
+        endTime: this.bindings.exam.data.startTime,
         duration: this.bindings.exam.data.duration
     };
 };
 
 exports.getEntityModuleName = function() {
-    return 'exam/answer-paper/count-down';
+    return 'exam/answer-paper-test/count-down';
 };
 
 exports.dataForEntityModule = function(data) {
