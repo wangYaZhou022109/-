@@ -81,7 +81,7 @@ exports.store = {
             courseRelated.params.id = payload.id;
             return me.chain(me.get(course).then(function() {
                 me.module.dispatch('refresh', course.data);
-            }, function(error) {
+            }, function() {
                 history.back(-1);
             }), me.get(notes), me.get(courseRelated));
         },

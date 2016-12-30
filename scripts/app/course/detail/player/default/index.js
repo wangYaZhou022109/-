@@ -17,7 +17,7 @@ exports.store = {
             register.data = { courseId: courseId };
             return this.save(register).then(function(data) {
                 return data;
-            }, function(error) {
+            }, function() {
                 history.back(-1);
             });
         }

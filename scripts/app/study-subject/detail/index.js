@@ -32,7 +32,7 @@ exports.store = {
                 subject.set(obj);
                 me.models.styles.set(styles);
                 state.changed();
-            }, function(error) {
+            }, function() {
                 history.back(-1);
             });
         }
