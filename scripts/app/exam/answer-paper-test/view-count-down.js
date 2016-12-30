@@ -2,6 +2,7 @@ var getEndTime;
 
 exports.bindings = {
     exam: false,
+    countDown: true
 };
 
 exports.type = 'dynamic';
@@ -9,8 +10,8 @@ exports.type = 'dynamic';
 exports.getEntity = function() {
     var data = this.bindings.exam.data;
     return {
-        endTime: getEndTime(data.endTime, data.duration),
-        duration: data.duration
+        endTime: getEndTime.call(this, data.endTime, data.duration),
+        isDeday: this.bindings.countDown.data.isDeday
     };
 };
 
@@ -31,8 +32,26 @@ exports.dataForEntityModule = function(data) {
 };
 
 getEndTime = function(examActivityEndTime, duration) {
-    var nowTime = new Date();
-    nowTime.setMinutes(nowTime.getMinutes() + duration, nowTime.getSeconds(), 0);
-    if (nowTime.getTime() > examActivityEndTime) return examActivityEndTime;
-    return nowTime;
+    var nowTime = new Date(),
+        countDown = this.bindings.countDown.data,
+        endTime;
+    if (!countDown.endTime) {
+        nowTime.setMinutes(nowTime.getMinutes() + duration, nowTime.getSeconds(), 0);
+        if (nowTime.getTime() > examActivityEndTime) {
+            endTime = examActivityEndTime;
+        }
+        endTime = nowTime;
+        countDown.endTime = endTime;
+        countDown.isDeday = false;
+        this.bindings.countDown.data = countDown;
+    } else {
+        countDown.endTime.setMinutes(
+            countDown.endTime.getMinutes() + countDown.delay,
+            countDown.endTime.getSeconds(),
+            0
+        );
+        endTime = countDown.endTime;
+        this.bindings.countDown.data.isDeday = true;
+    }
+    return endTime;
 };

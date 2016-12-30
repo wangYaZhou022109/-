@@ -35,6 +35,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        countDown: {},
         state: {
             type: 'localStorage',
             mixin: {
@@ -437,6 +438,10 @@ exports.store = {
                 });
             }
             return '';
+        },
+        delay: function(payload) {
+            this.models.countDown.data.delay = payload.delay;
+            this.models.countDown.changed();
         }
     }
 };
@@ -474,6 +479,8 @@ exports.afterRender = function() {
                 closeConnect();
                 window.close();
             });
+        }, function(delay) {
+            return me.dispatch('delay', { delay: Number(delay) });
         });
     }
 };
@@ -483,8 +490,11 @@ cancel = function() {
     timeOutId = undefined;
 };
 
-connect = function(examId, callback) {
-    E.connect(examId, { submitPaper: callback });
+connect = function(examId, submitPaper, timeExpand) {
+    E.connect(examId, {
+        submitPaper: submitPaper,
+        timeExpand: timeExpand
+    });
 };
 
 closeConnect = function() {

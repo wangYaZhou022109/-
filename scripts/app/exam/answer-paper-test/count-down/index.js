@@ -15,6 +15,10 @@ exports.store = {
                     return Math.ceil((new Date(endTime).getTime() - new Date().getTime()) / (1000 * 60));
                 },
                 minute;
+            state.clear();
+            if (payload.data.isDelay) {
+                this.app.message.success('您被延时了');
+            }
 
             state.load();
             if (!state.data) {
