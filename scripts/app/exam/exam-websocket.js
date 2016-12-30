@@ -81,8 +81,9 @@ ExamSocket = {
     onMessage: function(msg) {
         if (msg === 'submitPaper' && ExamSocket.callbacks.submitPaper) {
             ExamSocket.callbacks.submitPaper();
-        }
-        if (msg && msg.indexOf('joined:') !== -1) {
+        } else if (msg && msg.indexOf('timeExpand_') !== -1 && ExamSocket.callbacks.timeExpand) {
+            ExamSocket.callbacks.timeExpand(msg.substring(11));
+        } else if (msg && msg.indexOf('joined:') !== -1) {
             ExamSocket.requests[msg.substring(7)].resolve();
             delete ExamSocket.requests[msg.substring(7)];
         }

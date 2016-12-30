@@ -2,7 +2,7 @@ var $ = require('jquery'),
     changeToFullScreen;
 
 exports.routes = {
-    index: 'showIndex',
+    'index/:id': 'showIndex',
     'answer-paper': 'showPaper',
     'score-detail-paper': 'showScoreDetailPaper',
     'mark-paper': 'showMarkPaper',
@@ -21,8 +21,8 @@ exports.activeAnswerPaperTest = function() {
     changeToFullScreen();
 };
 
-exports.showIndex = function() {
-    return this.app.show('content', 'exam/index');
+exports.showIndex = function(id) {
+    return this.app.show('content', 'exam/index', { id: id });
 };
 exports.showPaper = function() {
     return this.app.show('content', 'exam/answer-paper');

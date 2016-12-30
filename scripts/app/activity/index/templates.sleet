@@ -90,13 +90,20 @@ view('list')
                             a.normal > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
                         .detail-wrapper
                             p > echo(description)
-                            a.normal.block(id='to-activity-'+ targetId type=type  href='javascript:;' ) > .btn.radius.block 我要参与
+                            compare(type 'eq' 1)
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与1
+                            compare(type 'eq' 2)
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与2
+                            compare(type 'eq' 6)
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与6
+                            else
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习
                         .title.text-overflow > echo(name)
                     .bottom
-                        .pull-right > dateTime(startTime) + echo('~') + dateTime(startTime)
+                        .pull-right > dateTime(startTime) + echo('~') + dateTime(endTime)
                         | 起至时间
                     .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
 
