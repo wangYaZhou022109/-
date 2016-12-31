@@ -16,7 +16,7 @@ view('study-subject')
         times(8)
             li > inner(course count)
 
-                a.content(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+                a.content(target = "_blank" href="{{routerLink 'study-subject/detail/' sourceId}}")&if(sourceId)
                     .img > .img-cont >  img(src=cover)
                     .bottom
                         .clearfix

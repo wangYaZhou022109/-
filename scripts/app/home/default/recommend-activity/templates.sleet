@@ -26,7 +26,7 @@ view('recommend-activity')
                                         date(startTime) ~
                                         date(endTime)
                                     .text > echo(description)
-                                    .btn.block.border-main-color > span 我要参加
+                                    a.btn.block.border-main-color(href="{{routerLink url}}" target="_blank")&if(url) > span 我要参加
                             .bottom.clearfix
                                 .pull-right.tip-text 19人已参加
                         .activity-tag.custom-bg-color-3 > .text > map('home-activity-type' type)
@@ -43,7 +43,7 @@ view('recommend-activity')
                                             date(startTime) ~
                                             date(endTime)
                                         .text > echo(description)
-                                        .btn.block.bg-main-color 我要参加
+                                        a.btn.block.bg-main-color(href="{{routerLink url}}" target="_blank")&if(url) 我要参加
                                 .bottom.clearfix
                                     .pull-right.tip-text 123人已参加
                             .activity-tag.custom-bg-color-1 > .text > map('home-activity-type' type)
@@ -61,7 +61,7 @@ view('recommend-activity')
                                     date(startTime) ~
                                     date(endTime)
                                 .text > echo(description)
-                                .btn.block.bg-main-color 我要参加
+                                a.btn.block.bg-main-color(href="{{routerLink url}}" target="_blank")&if(url) 我要参加
                         .bottom.clearfix
                             .pull-right.tip-text 123人已参加
                     .activity-tag.custom-bg-color-5 > .text > map('home-activity-type' type)
@@ -77,7 +77,7 @@ view('recommend-activity')
                                 date(startTime) ~
                                 date(endTime)
                             .text > echo(description)
-                            .btn.block.border-main-color > span 我要参加
+                            a.btn.block.border-main-color(href="{{routerLink url}}" target="_blank")&if(url) > span 我要参加
                     .bottom.clearfix
                         .pull-right.tip-text 123人已参加
                 .activity-tag.custom-bg-color-4 > .text > map('home-activity-type' type)
