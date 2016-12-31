@@ -28,5 +28,25 @@ exports.dataForTemplate = {
         var answer = this.bindings.answer;
         if (answer.data.value.length > 0) return answer.data.value[0].value;
         return '';
+    },
+    isShowDetail: function() {
+        var mode = this.bindings.state.data.detailMode;
+        return mode && mode > 0;
+    }
+};
+
+exports.beforeRender = function() {
+    var data = this.bindings.state.data;
+    if (data.detailMode === 1) {
+        data.isShowAnswer = true;
+        data.isShowGainScore = true;
+    }
+    if (data.detailMode === 2) {
+        data.isShowAnswer = false;
+        data.isShowGainScore = true;
+    } else if (data.detailMode === 3) {
+        data.isShowAnswer = false;
+        data.isShowGainScore = true;
+        this.bindings.answer.data = {};
     }
 };

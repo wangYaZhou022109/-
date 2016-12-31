@@ -2,6 +2,7 @@
 var _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
     D = require('drizzlejs'),
+    $ = require('jquery'),
     E = require('./app/exam/exam-websocket'),
     map = {
         1: 1,
@@ -20,20 +21,26 @@ var _ = require('lodash/collection'),
         Hand: 'Hand'
     },
     connect,
-    closeConnect;
+    closeConnect,
+    changeToFullScreen;
 
 
 exports.items = {
-    side: 'side',
+    'question-type': 'question-type',
     main: 'main',
     head: 'head',
-    tips: ''
+    tips: '',
+    'count-down': 'count-down'
 };
 
 exports.store = {
     models: {
+        countDown: {
+            type: 'localStorage',
+            data: {}
+        },
         state: {
-            data: { isOnePageOneQuestion: true },
+            type: 'localStorage',
             mixin: {
                 getCurrentState: function(questionTypes) {
                     var data = {
@@ -69,14 +76,14 @@ exports.store = {
                     this.data.noAnswerNum = this.data.questionNum - this.data.answeredNum;
                 },
                 init: function(exam, payload) {
-                    D.assign(this.data, {
+                    this.data = D.assign({}, {
                         name: exam.name,
                         isOnePageOneQuestion: exam.paperShowRule === 1,
                         mode: payload.mode || 1,
                         noAnswerNum: exam.paper.questionNum || 0,
                         answeredNum: 0,
                         questionNum: exam.paper.questionNum,
-                        totalScore: exam.paper.totalScore,
+                        totalScore: exam.paper.totalScore / 100,
                         duration: exam.duration,
                         isCollect: false
                     });
@@ -195,12 +202,12 @@ exports.store = {
                             });
                         },
                         changeQuestionAttrsSort = function() {
-                            var paperClassQuestions = this.store.models.paper.data.paperClassQuestions;
-                            _.forEach(paperClassQuestions, function(q) {
-                                var question = q.question;
+                            var questions = this.store.models.exam.data.paper.questions;
+                            _.forEach(questions, function(q) {
+                                var question = q;
                                 if (question.type === 1 || question.type === 2 || question.type === 8) {
                                     D.assign(question, {
-                                        questionAttrs: question.questionAttrs.sort(function() {
+                                        questionAttrs: question.questionAttrCopys.sort(function() {
                                             return Math.random() - 0.5;
                                         })
                                     });
@@ -224,10 +231,12 @@ exports.store = {
                         result = changeQuestionSort();
                         break;
                     case 3:
+                        setQuestions.call(this, questionTypes);
                         changeQuestionAttrsSort.call(this);
                         result = questionTypes;
                         break;
                     case 4:
+                        setQuestions.call(this, questionTypes);
                         changeQuestionAttrsSort.call(this);
                         result = changeQuestionSort();
                         break;
@@ -236,6 +245,28 @@ exports.store = {
                     }
                     setQuestions.call(this, result);
                     return result;
+                },
+                getQuestionIndexInType: function(id) {
+                    var result = this.data,
+                        i = 0,
+                        j = 0,
+                        question,
+                        questions,
+                        index = 0;
+                    for (i; i < this.data.length; i++) {
+                        questions = result[i].data.data;
+                        question = _.find(questions, ['id', id]);
+                        if (question) {
+                            for (j; j < questions.length; j++) {
+                                if (questions[j].id === id) {
+                                    index = j + 1;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    return index;
                 }
             }
         },
@@ -318,22 +349,26 @@ exports.store = {
             var me = this,
                 questionTypes = this.models.questionTypes,
                 answer = this.models.answer,
-                modify = this.models.modify;
+                modify = this.models.modify,
+                state = this.models.state,
+                countDown = this.models.countDown;
 
             answer.load();
             modify.load();
+            state.load();
+            countDown.load();
 
             if (!answer.data) answer.data = { answers: [] };
             if (!modify.data) modify.data = { answers: [], api: {} };
+            if (!state.data) state.data = {};
+            if (!countDown.data) countDown.data = {};
 
-            D.assign(payload, {
-                examId: '99e46f79-18d9-4f88-996c-120dfc789c63'
-            });
             this.models.exam.set({ id: payload.examId });
 
             return this.get(this.models.exam).then(function() {
                 var exam = me.models.exam.data;
-                me.models.state.init(exam, payload);
+
+                if (!state.data.name) me.models.state.init(exam, payload);
 
                 questionTypes.createQuestionTypes(exam.paper, exam.paperSortRule);
                 questionTypes.setFirstQuestionRemote();
@@ -383,47 +418,55 @@ exports.store = {
         },
         submit: function(payload) {
             var modify = this.models.modify,
-                me = this;
+                me = this,
+                t = true;
             this.models.answer.save();
             this.models.modify.save();
+            this.models.state.save();
             if (payload.submitType !== submitType.Auto) cancel();
             modify.covert(payload);
             this.models.form.set(modify.data.api);
-            return this.post(this.models.form).then(function() {
-                if (payload.submitType !== submitType.Auto) {
-                    me.models.questionTypes.clear();
-                    me.models.questions.clear();
-                    me.models.answer.clear();
-                    me.models.modify.clear();
-                    me.app.message.success('交卷成功');
-                    closeConnect();
-                } else {
-                    me.models.modify.data = { answers: [], api: {} };
-                }
-            });
+
+            if (t) {
+                return this.post(this.models.form).then(function() {
+                    if (payload.submitType !== submitType.Auto) {
+                        me.models.questionTypes.clear();
+                        me.models.questions.clear();
+                        me.models.answer.clear();
+                        me.models.modify.clear();
+                        me.models.state.clear();
+                        me.models.countDown.clear();
+                        me.app.message.success('交卷成功');
+                        closeConnect();
+                        window.close();
+                    } else {
+                        me.models.modify.data = { answers: [], api: {} };
+                    }
+                });
+            }
+            return '';
+        },
+        delay: function(payload) {
+            this.models.countDown.data.delay = payload.delay;
+            this.models.countDown.changed();
         }
     }
 };
 
 exports.beforeRender = function() {
+    changeToFullScreen();
     return this.dispatch('init', this.renderOptions);
 };
 
-exports.buttons = [{
-    text: '交卷',
-    fn: function() {
-        return this.dispatch('submit', { submitType: submitType.Hand });
-    }
-}];
 
 exports.afterRender = function() {
     var me = this,
-        t = false,
+        t = true,
         examId = this.store.models.exam.data.id,
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 2) * (1000 * 60);
+                ms = (min + 0) * (1000 * 60);
             return ms;
         },
         random = getRandom(),
@@ -434,14 +477,17 @@ exports.afterRender = function() {
             });
         };
 
+    this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
-        this.app.message.success('随机秒数' + (random / 1000));
         timeOutId = setTimeout(autoSubmit, random);
         connect(examId, function() {
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
                 me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
                 closeConnect();
+                window.close();
             });
+        }, function(delay) {
+            return me.dispatch('delay', { delay: Number(delay) });
         });
     }
 };
@@ -451,10 +497,20 @@ cancel = function() {
     timeOutId = undefined;
 };
 
-connect = function(examId, callback) {
-    E.connect(examId, { submitPaper: callback });
+connect = function(examId, submitPaper, timeExpand) {
+    E.connect(examId, {
+        submitPaper: submitPaper,
+        timeExpand: timeExpand
+    });
 };
 
 closeConnect = function() {
     E.disconnect();
 };
+
+changeToFullScreen = function() {
+    $('.header').hide();
+    $('.footer').hide();
+    $('.achievement-content').attr('height', '100%');
+};
+

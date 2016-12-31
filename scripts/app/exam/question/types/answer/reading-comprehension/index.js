@@ -53,7 +53,7 @@ exports.store = {
             D.assign(data, question);
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
-            data.mode = payload.mode || 2;
+            data.detailMode = payload.mode;
             this.models.sub.data.questions = sortByQuestionType(question.subs);
             this.models.answer.init(payload.answer);
         },

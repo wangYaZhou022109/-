@@ -8,7 +8,8 @@ exports.store = {
     models: {
         exam: {
             url: '../exam/exam/exam-signup'
-        }
+        },
+        down: { url: '../human/file/download' },
     },
     callbacks: {
         init: function(payload) {

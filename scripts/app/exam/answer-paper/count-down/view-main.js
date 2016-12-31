@@ -18,17 +18,23 @@ exports.afterRender = function() {
         },
         callback = this.bindings.state.callback,
         si;
+
     hour = Math.floor(duration / 60);
     duration %= 60;
-    minitus = duration < 1 ? 0 : duration;
-    second = duration < 1 ? (duration % 60) * 60 : 0;
+    minitus = Math.floor(duration);
+    second = duration === 0
+        ? 0 : Math.floor(Number(duration.toFixed(2).toString().split('.')[1] / 100) * 60);
+
     el.innerHTML = getStr();
+
     si = setInterval(function() {
         if (second === 0) {
             if (minitus === 0) {
                 if (hour === 0) {
                     clearInterval(si);
-                    if (callback) callback();
+                    if (callback) {
+                        callback();
+                    }
                     return;
                 }
                 hour -= 1;

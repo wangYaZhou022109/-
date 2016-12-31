@@ -91,13 +91,13 @@ view('list')
                         .detail-wrapper
                             p > echo(description)
                             compare(type 'eq' 1)
-                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与1
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与1
                             compare(type 'eq' 2)
-                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与2
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与2
                             compare(type 'eq' 6)
-                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与6
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与6
                             else
-                                a.normal.block(type=type  href='#/exam/index/'+ targetId ) > .btn.radius.block 我要参与
+                                a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
                             i.iconfont.icon-user + | 218人已学习

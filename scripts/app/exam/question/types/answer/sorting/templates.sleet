@@ -23,10 +23,13 @@ view('options')
             .inline-block(id='error')
         hr
 
-    if(state.detailMode)
-        .show-answer.border.border-top
-            .row
-                .col-xs-6 > .com-title > echo('答案：' state.answer)
-                .col-xs-6
-                    span > echo('本题得分：' state.gainScore)
-                    span.m-left > echo('本题易错率：' state.errorRate)
+    if(isShowDetail)
+        .show-answer
+            .clearfix
+                .pull-left > .common-title
+                    if(state.isShowAnswer)
+                        echo('答案：' state.answer)
+                .text-right
+                    if(state.isShowGainScore)
+                        span > echo('本题得分：' state.gainScore)
+                    span.layout-ml > echo('本题易错率：' state.errorRate '%')

@@ -1,4 +1,5 @@
-var getEndTime;
+var D = require('drizzlejs'),
+    getEndTime;
 
 exports.bindings = {
     exam: false,
@@ -11,12 +12,12 @@ exports.getEntity = function() {
     var data = this.bindings.exam.data;
     return {
         endTime: getEndTime.call(this, data.endTime, data.duration),
-        isDeday: this.bindings.countDown.data.isDeday
+        isDelay: this.bindings.countDown.data.isDeday
     };
 };
 
 exports.getEntityModuleName = function() {
-    return 'exam/answer-paper-test/count-down';
+    return 'exam/answer-paper/count-down';
 };
 
 exports.dataForEntityModule = function(data) {
@@ -33,25 +34,34 @@ exports.dataForEntityModule = function(data) {
 
 getEndTime = function(examActivityEndTime, duration) {
     var nowTime = new Date(),
-        countDown = this.bindings.countDown.data,
+        data = this.bindings.countDown.data,
         endTime;
-    if (!countDown.endTime) {
+
+    if (!data.firstInTime) {
+        data.firstInTime = new Date(nowTime).getTime();
         nowTime.setMinutes(nowTime.getMinutes() + duration, nowTime.getSeconds(), 0);
         if (nowTime.getTime() > examActivityEndTime) {
-            endTime = examActivityEndTime;
+            data.endTime = examActivityEndTime;
         }
-        endTime = nowTime;
-        countDown.endTime = endTime;
-        countDown.isDeday = false;
-        this.bindings.countDown.data = countDown;
-    } else {
-        countDown.endTime.setMinutes(
-            countDown.endTime.getMinutes() + countDown.delay,
-            countDown.endTime.getSeconds(),
+        data.endTime = new Date(nowTime).getTime();
+        data.isDeday = false;
+        this.bindings.countDown.data = data;
+    }
+
+    if (data.delay) {
+        endTime = new Date(data.endTime);
+        endTime.setMinutes(
+            endTime.getMinutes() + data.delay,
+            endTime.getSeconds(),
             0
         );
-        endTime = countDown.endTime;
-        this.bindings.countDown.data.isDeday = true;
+        D.assign(this.bindings.countDown.data, {
+            endTime: endTime.getTime(),
+            isDeday: true
+        });
     }
-    return endTime;
+    data.delay = 0;
+
+    this.bindings.countDown.save();
+    return new Date(data.endTime);
 };
