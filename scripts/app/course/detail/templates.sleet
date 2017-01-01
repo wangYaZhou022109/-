@@ -46,8 +46,8 @@ view('player-title')
             .item
                 i.iconfont.icon-share
                 span 分享
-            if(course.collectId)
-                .item#cancel-collect(data-name='id' data-value=course.collectId)
+            if(collect.id)
+                .item#cancel-collect(data-name='id' data-value=collect.id)
                     i.iconfont.icon-favorite-full
                     span 取消收藏
             else

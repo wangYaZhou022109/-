@@ -78,11 +78,9 @@ exports.store = {
             return this.get(this.models.navs);
         },
         init: function() {
-            var setting = this.models.setting;
             var configId = getParams().configid,
                 that = this,
                 homeConfig = this.models.homeConfig;
-            this.get(setting);
             homeConfig.params = { id: configId };
             return this.get(homeConfig).then(function() {
                 var cfgId;

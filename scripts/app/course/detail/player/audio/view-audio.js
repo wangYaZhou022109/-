@@ -60,8 +60,7 @@ exports.beforeClose = function() {
 
 // 支持的事件 loading,ready,play,pause,finish,error
 exports.audio = {
-    loading: function(process) {
-        return process;
+    loading: function() {
     },
     ready: function() {
         var sectionProgress = this.bindings.sectionProgress.data || {},

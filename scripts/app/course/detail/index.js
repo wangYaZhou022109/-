@@ -75,15 +75,17 @@ exports.store = {
             var me = this,
                 course = me.models.course,
                 courseRelated = me.models.courseRelated,
+                collect = me.models.collect,
                 notes = me.models.notes;
             course.set(payload);
             notes.params.courseId = payload.id;
             courseRelated.params.id = payload.id;
+            collect.params.businessId = payload.id;
             return me.chain(me.get(course).then(function() {
                 me.module.dispatch('refresh', course.data);
             }, function() {
                 history.back(-1);
-            }), me.get(notes), me.get(courseRelated));
+            }), me.get(notes), me.get(courseRelated), me.get(collect));
         },
         refresh: function(payload) {
             var me = this,
@@ -120,6 +122,12 @@ exports.store = {
         initNotes: function() {
             var notes = this.models.notes;
             return this.get(notes);
+        },
+        initCollect: function(payload) {
+            var collect = this.models.collect;
+            collect.clear();
+            collect.params.businessId = payload.courseId;
+            return this.get(collect);
         },
         showSection: function(payload) {
             var section = this.models.section,

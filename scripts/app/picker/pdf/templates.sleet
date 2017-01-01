@@ -1,7 +1,7 @@
 #! handlebars
 module
-    div(data-region='toolbar')
     div(data-region='viewer')
+    div(data-region='toolbar')
 
 view('toolbar')
     .row

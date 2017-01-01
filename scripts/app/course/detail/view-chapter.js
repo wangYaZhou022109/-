@@ -83,7 +83,7 @@ exports.dataForTemplate = {
         var course = data.course,
             currentChapterId,
             currentSectionId;
-        if (course.addType) {
+        if (course.name) {
             if (!course.studyProgress) {
                 currentChapterId = course.courseChapters[0].id;
                 currentChapterId = course.courseChapters[0].courseChapterSections[0].id;
