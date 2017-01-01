@@ -6,9 +6,10 @@ module > .choise
 
 
 view('content')
-    p.question > @echo(state.content)
+    p.question
+        span > echo(state.index '：')
+        @echo(state.content)
 
-view('subs') > .m-bottom
+view('subs') > .m-bottom.reading-comprehension-view
     each(subs)
-        echo('(' index ')')
         div(data-dynamic-key=id)

@@ -24,7 +24,7 @@ html.default
         link(rel='stylesheet' href='styles/selectize/selectize.default.css')
         link(rel='stylesheet' href='styles/alertify/alertify.core.css')
         link(rel='stylesheet' href='styles/alertify/alertify.default.css')
-        link(rel='stylesheet' href='//at.alicdn.com/t/font_5newa6r874s7cik9.css')
+        link(rel='stylesheet' href='//at.alicdn.com/t/font_e8avii9o04oq1tt9.css')
         link(rel='stylesheet' href='styles/jquery.plupload.queue/css/jquery.plupload.queue.css')
         link(rel='stylesheet' href='node_modules/photoswipe/dist/photoswipe.css')
         link(rel='stylesheet' href='node_modules/photoswipe/dist/default-skin/default-skin.css')

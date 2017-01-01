@@ -5,7 +5,9 @@ module > .choise
     .options(data-region='options')
 
 view('content')
-    p.question > @echo(state.content)
+    p.question
+        span > echo(state.index '：')
+        @echo(state.content)
 
 
 view('options')
@@ -26,7 +28,5 @@ view('options')
             .row
                 .col-xs-6 > .com-title > echo('答案：' state.answer)
                 .col-xs-6
-                    span > echo('本题得分：')
-                    span > restoreNumber(state.gainScore 100)
-                    span.m-left > echo('本题易错率：')
-                    span > restoreNumber(state.errorRate 10000) > echo('%')
+                    span > echo('本题得分：' state.gainScore)
+                    span.m-left > echo('本题易错率：' state.errorRate)

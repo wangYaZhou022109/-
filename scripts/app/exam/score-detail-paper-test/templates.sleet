@@ -6,8 +6,6 @@ module > .achievement-content
     .achievement-main(data-region='main')
 
 view('side')
-    div(data-dynamic-key='countDown')
-
     ul.list > each(questionTypes)
         li(id='list-item-'+ @index)
             .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
@@ -16,35 +14,25 @@ view('side')
 
 
 view('head')
-    .pull-left.title > echo('正在作答:' state.name)
+    .pull-left.title > echo(state.name ' 考生：' state.examMember '总得分：' state.memberTotalScore ' ' state.passDec)
     .text-right
         ul.head-info.inline-block
             li.border.right > echo('本卷共' state.questionNum '题，总分' state.totalScore '分')
-            li.border.right > echo('已答：' state.answeredNum)
+            li.border.right > echo('正确：' state.rightNum)
+            li.border.right > echo('错误：' state.wrongNum)
             li.border.right > echo('未答：' state.noAnswerNum)
-        .btn#submit 我要交卷
 
 view('main')
     .preview-content
         if(state.isOnePageOneQuestion)
             if(state.questionId)
                 div(data-dynamic-key=state.questionId)
-            .bottom.text-right
-                div(data-dynamic-key='collect-correct-' + state.questionId)
-                .slider-question
-                    .item(id='prev')
-                        i.iconfont.icon-arrow-left-circle.line
-                        i.iconfont.icon-arrow-left-circle-full.full
-                    .item(id='next')
-                        i.iconfont.icon-arrow-right-circle.line
-                        i.iconfont.icon-arrow-right-circle-full.full
         else
             div
                 each(questionTypes)
                     .h3.m-bottom > echo(data.name '题' '(共' data.totalScore '分)')
                     each(data.data)
                         div(data-dynamic-key=id)
-                        div(data-dynamic-key='collect-correct-' + id)
 
 
 view('tips')

@@ -5,7 +5,9 @@ module > .choise.preview-content
     .options(data-region='options')
 
 view('content')
-    p.question > @echo(state.content)
+    p.question
+        span > echo(state.index '：')
+        @echo(state.content)
 
 
 view('options') > .answer

@@ -1,14 +1,28 @@
+var $ = require('jquery'),
+    changeToFullScreen;
+
 exports.routes = {
-    index: 'showIndex',
+    'index/:id': 'showIndex',
     'answer-paper': 'showPaper',
     'score-detail-paper': 'showScoreDetailPaper',
     'mark-paper': 'showMarkPaper',
+    'mark-paper-test': 'showMark2',
     demo: 'showDemo',
-    'answer-paper-test': 'showAnswerPaperTest'
+    'answer-paper-test/:id': 'showAnswerPaperTest',
+    'score-detail-paper-test': 'showScore2'
 };
 
-exports.showIndex = function() {
-    return this.app.show('content', 'exam/index');
+
+exports.interceptors = {
+    'answer-paper-test': 'activeAnswerPaperTest'
+};
+
+exports.activeAnswerPaperTest = function() {
+    changeToFullScreen();
+};
+
+exports.showIndex = function(id) {
+    return this.app.show('content', 'exam/index', { id: id });
 };
 exports.showPaper = function() {
     return this.app.show('content', 'exam/answer-paper');
@@ -19,11 +33,20 @@ exports.showScoreDetailPaper = function() {
 exports.showMarkPaper = function() {
     return this.app.show('content', 'exam/mark-paper');
 };
-
-exports.showDemo = function() {
-    return this.app.show('content', 'exam/demo');
+exports.showMark2 = function() {
+    return this.app.show('content', 'exam/mark-paper-test');
 };
 
-exports.showAnswerPaperTest = function() {
-    return this.app.show('content', 'exam/answer-paper-test');
+exports.showAnswerPaperTest = function(id) {
+    return this.app.show('content', 'exam/answer-paper-test', { examId: id });
+};
+
+exports.showScore2 = function() {
+    return this.app.show('content', 'exam/score-detail-paper-test');
+};
+
+changeToFullScreen = function() {
+    $('.header').hide();
+    $('.footer').hide();
+    $('.achievement-content').attr('height', '100%');
 };

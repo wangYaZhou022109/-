@@ -7,7 +7,7 @@ exports.bindings = {
 
 exports.events = {
     'click category-item-*': 'toggleItem',
-    'click to-exam-*': 'toExam',
+    'click to-activity-*': 'toActivity',
     'click show-paper-*': 'showPaper',
     'click score-detail-paper-*': 'showScoreDetailPaper',
     'click mark-paper': 'showMarkPaper'
@@ -18,8 +18,17 @@ exports.handlers = {
         var me = this;
         me.module.dispatch('search', { type: el });
     },
-    toExam: function(id) {
-        this.app.show('content', 'exam/index', { id: id });
+    toActivity: function(id, e, s) {
+        var type = s.type;
+        if (type === '1') {
+            this.app.show('content', 'exam/index', { id: id });
+        } else if (type === '2') {
+            this.app.show('content', 'exam/index', { id: id });
+        } else if (type === '3' || type === '4' || type === '5') {
+            this.app.show('content', 'exam/index', { id: id });
+        } else if (type === '6') {
+            this.app.show('content', 'exam/index', { id: id });
+        }
     },
     showPaper: function(id, e) {
         var url = $(e.target).attr('href').slice(2);
@@ -50,6 +59,6 @@ exports.dataForTemplate = {
         } else if (params.type === 2) {
             params.types.live = true;
         }
-        return status;
+        return params;
     }
 };

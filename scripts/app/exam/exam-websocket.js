@@ -15,7 +15,8 @@ ExamSocket = {
     open: function(app, examId, callbacks) {
         var prefix = app.options.urlRoot + '/exam',
             url = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-        url += window.location.host + window.location.pathname;
+        // url += window.location.host + window.location.pathname;
+        url += window.location.host;
         if (url.slice(-1) === '/') url = url.slice(0, -1);
         ExamSocket.app = app;
         ExamSocket.url = url + prefix + '/ws/exam';
@@ -80,8 +81,9 @@ ExamSocket = {
     onMessage: function(msg) {
         if (msg === 'submitPaper' && ExamSocket.callbacks.submitPaper) {
             ExamSocket.callbacks.submitPaper();
-        }
-        if (msg && msg.indexOf('joined:') !== -1) {
+        } else if (msg && msg.indexOf('timeExpand_') !== -1 && ExamSocket.callbacks.timeExpand) {
+            ExamSocket.callbacks.timeExpand(msg.substring(11));
+        } else if (msg && msg.indexOf('joined:') !== -1) {
             ExamSocket.requests[msg.substring(7)].resolve();
             delete ExamSocket.requests[msg.substring(7)];
         }

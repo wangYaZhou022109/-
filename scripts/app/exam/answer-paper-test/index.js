@@ -33,7 +33,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {
-            data: { isOnePageOneQuestion: true },
+            type: 'localStorage',
             mixin: {
                 getCurrentState: function(questionTypes) {
                     var data = {
@@ -237,6 +237,28 @@ exports.store = {
                     }
                     setQuestions.call(this, result);
                     return result;
+                },
+                getQuestionIndexInType: function(id) {
+                    var result = this.data,
+                        i = 0,
+                        j = 0,
+                        question,
+                        questions,
+                        index = 0;
+                    for (i; i < this.data.length; i++) {
+                        questions = result[i].data.data;
+                        question = _.find(questions, ['id', id]);
+                        if (question) {
+                            for (j; j < questions.length; j++) {
+                                if (questions[j].id === id) {
+                                    index = j + 1;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    return index;
                 }
             }
         },
@@ -319,10 +341,12 @@ exports.store = {
             var me = this,
                 questionTypes = this.models.questionTypes,
                 answer = this.models.answer,
-                modify = this.models.modify;
+                modify = this.models.modify,
+                state = this.models.state;
 
             answer.load();
             modify.load();
+            state.load();
 
             if (!answer.data) answer.data = { answers: [] };
             if (!modify.data) modify.data = { answers: [], api: {} };
@@ -384,24 +408,30 @@ exports.store = {
         },
         submit: function(payload) {
             var modify = this.models.modify,
-                me = this;
+                me = this,
+                t = true;
             this.models.answer.save();
             this.models.modify.save();
             if (payload.submitType !== submitType.Auto) cancel();
             modify.covert(payload);
             this.models.form.set(modify.data.api);
-            return this.post(this.models.form).then(function() {
-                if (payload.submitType !== submitType.Auto) {
-                    me.models.questionTypes.clear();
-                    me.models.questions.clear();
-                    me.models.answer.clear();
-                    me.models.modify.clear();
-                    me.app.message.success('交卷成功');
-                    closeConnect();
-                } else {
-                    me.models.modify.data = { answers: [], api: {} };
-                }
-            });
+            if (t) {
+                return this.post(this.models.form).then(function() {
+                    if (payload.submitType !== submitType.Auto) {
+                        me.models.questionTypes.clear();
+                        me.models.questions.clear();
+                        me.models.answer.clear();
+                        me.models.modify.clear();
+                        me.models.state.clear();
+                        me.app.message.success('交卷成功');
+                        closeConnect();
+                    } else {
+                        me.models.modify.data = { answers: [], api: {} };
+                    }
+                    window.close();
+                });
+            }
+            return '';
         }
     }
 };
@@ -410,16 +440,10 @@ exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
 
-exports.buttons = [{
-    text: '交卷',
-    fn: function() {
-        return this.dispatch('submit', { submitType: submitType.Hand });
-    }
-}];
 
 exports.afterRender = function() {
     var me = this,
-        t = false,
+        t = true,
         examId = this.store.models.exam.data.id,
         getRandom = function() {
             var r = Math.random() * 1,
@@ -435,13 +459,14 @@ exports.afterRender = function() {
             });
         };
 
+    this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
-        this.app.message.success('随机秒数' + (random / 1000));
         timeOutId = setTimeout(autoSubmit, random);
         connect(examId, function() {
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
                 me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
                 closeConnect();
+                window.close();
             });
         });
     }
