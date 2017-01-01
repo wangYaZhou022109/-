@@ -76,7 +76,8 @@
         "percent",
         "restoreNumber",
         "pick",
-        "routerLink"
+        "routerLink",
+        "downloadUrl"
       ]
     }
   }
