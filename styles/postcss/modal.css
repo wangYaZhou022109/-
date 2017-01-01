@@ -1,0 +1,227 @@
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    &.small .dialog{
+        width: 400px;
+    }
+
+    &.large .dialog{
+        width: 800px;
+    }
+
+    & .dialog {
+        width: 600px;
+        margin: 2.5% auto 0;
+        box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
+        padding: calc(var(--space) * 2) calc(var(--space) * 3) calc(var(--space) * 5);
+        position: relative;
+        max-height: 700px;
+
+        & .dialog-content {
+            height: 80%;
+            overflow: auto;
+            overflow-x: hidden;
+        }
+
+        & .dismiss {
+            position: absolute;
+            top: var(--font-size4);
+            right: calc(var(--font-size1) + var(--font-size2));
+            font-size: var(--font-size4);
+        }
+
+        & form {
+            height: 95%;
+        }
+
+        & .frame {
+            border: 0;
+            padding: 0;
+        }
+
+        & .dtree {
+            max-height: 412px;
+            border: 1px solid transparent;
+            overflow: auto;
+            padding: calc(var(--font-size1) / 2);
+        }
+
+        & .dialog-header .hr {
+            display: none;
+        }
+
+        & .dialog-footer {
+            width: 100%;
+            text-align: right;
+            margin-top: calc(var(--space) * 3);
+            height: 80%;
+
+            & .btn:not(:last-child) {
+                margin-right: var(--font-size4);
+            }
+        }
+
+        &.animated {
+            animation-duration: .5s;
+        }
+
+    }
+    & .preview-content {
+        border: 1px solid transparent;
+        padding: var(--font-size1);
+        margin: var(--font-size1) 0;
+
+        & .answer {
+            border: none;
+        }
+    }
+}
+
+.dialog-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    background-color: black;
+    filter: alpha(opacity=15);
+    opacity: 0.15;
+}
+
+.popup,
+.ground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    right: 0;
+
+    &.large {
+        width: 75%;
+    }
+}
+
+.dialog {
+    box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
+    height: 100%;
+
+    & .container {
+        overflow-y: auto;
+        padding: var(--font-size4) calc(var(--font-size1) + var(--font-size2));
+    }
+
+    & .dismiss {
+        position: absolute;
+        top: var(--font-size4);
+        right: var(--font-size4);
+        font-size: var(--font-size4);
+        z-index: 10;
+    }
+
+    & .dialog-footer {
+        text-align: right;
+        width: 100%;
+        margin-top: calc(var(--font-size1) + var(--font-size2));
+
+        & .btn:not(:last-child) {
+            margin-right: var(--font-size4);
+        }
+    }
+
+    &.animated {
+        animation-duration: .5s;
+    }
+}
+
+.ground {
+    width: auto;
+    box-shadow: none;
+    z-index: 998;
+    left: 0;
+
+    &.large {
+        left: 0;
+        width: 100%;
+
+        & .dialog-header {
+            display: none;
+        }
+    }
+}
+
+
+.dialog-content {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 1px;
+
+    & > .title {
+            margin-top: var(--font-size1);
+
+            &::after {
+                content:'';
+                clear: both;
+                display: table;
+            }
+
+        & .toolbox {
+            float: left;
+
+            & .tags {
+                min-width: 300px;
+                border-width: 1px;
+                border-style: solid;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            & .addon {
+                position: relative;
+                float: right;
+                top:  -calc(var(--input-height) + 0);
+                line-height: calc(var(--input-height) - 4);
+            }
+            & .btn{
+                padding: 1px 8px;
+            }
+
+            & .buttons {
+                height: var(--font-size6);
+                width: calc(var(--font-size6) * 1);
+                display: inline-block;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            & i {
+                line-height: var(--font-size6);
+                font-size: var(--font-size2);
+            }
+        }
+    }
+
+    & .content-wrapper {
+        height: 80%;
+    }
+
+    & .content-left {
+        width: 200px;
+        float: left;
+        height: 100%;
+        overflow: auto;
+    }
+
+    & .content-main {
+        margin-left: 230px;
+        overflow: auto;
+        height: 100%;
+    }
+
+
+
+}

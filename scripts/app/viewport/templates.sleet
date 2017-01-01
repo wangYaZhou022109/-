@@ -4,6 +4,4 @@ module
     .header(data-region='top')
     .content(data-region='content')
     .footer(data-region='bottom')
-    div(data-region='popup')
-    div(data-region='modal')
-    div(data-region='ground')
+    div(data-region='modal:modal')

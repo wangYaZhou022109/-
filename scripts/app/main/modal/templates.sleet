@@ -1,0 +1,18 @@
+#!handlebars
+
+module
+    .dialog.animated#animate > .container
+        i.icon-dismiss.dismiss#dismiss
+        .dialog-header(data-region='title')
+        .dialog-content(data-region='content')
+        .dialog-footer(data-region='buttons')
+
+view('title') > if(state.title)
+    .h1 > echo(state.title)
+    .hr
+
+
+view('buttons')
+    .btn.reverse.large#close > echo(state.closeText)
+    each(btns)
+        .btn.large(id='btn-' + id) > echo(text)

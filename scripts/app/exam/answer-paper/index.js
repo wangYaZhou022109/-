@@ -466,7 +466,7 @@ exports.afterRender = function() {
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 0) * (1000 * 60);
+                ms = (min + 2) * (1000 * 60);
             return ms;
         },
         random = getRandom(),

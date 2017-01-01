@@ -95,7 +95,7 @@ exports.dataForEntityModule = function(question) {
             me.bindings.state.calculate();
             return me.module.dispatch('reload');
         },
-        mode: 1
+        mode: undefined
     };
 };
 
