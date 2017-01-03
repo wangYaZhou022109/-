@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 exports.bindings = {
     activitys: true,
     params: true
