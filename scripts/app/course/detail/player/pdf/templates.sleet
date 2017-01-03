@@ -1,7 +1,7 @@
 #! handlebars
 
 module
-    div(data-region='content')
+    div(data-region='pdf')
 
-view('content')
+view('pdf')
     .row > #viewPdf

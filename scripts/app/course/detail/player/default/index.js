@@ -1,5 +1,5 @@
 exports.items = {
-    main: 'main'
+    default: 'default'
 };
 
 exports.store = {

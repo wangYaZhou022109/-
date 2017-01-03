@@ -1,20 +1,22 @@
 exports.items = {
-    pdf: 'pdf'
+    url: 'url'
 };
 
 exports.store = {
     models: {
         section: {},
         sectionProgress: { url: '../course-study/course-front/progress' },
-        download: { url: '../human/file/download' },
         time: { url: '../system/setting/time' },
+        state: {}
     },
     callbacks: {
         init: function(payload) {
-            this.models.section.set(payload.section);
-            this.models.sectionProgress.set(payload.sectionProgress);
-
-            return this.get(this.models.time);
+            var section = this.models.section,
+                sectionProgress = this.models.sectionProgress,
+                time = this.models.time;
+            section.set(payload.section);
+            sectionProgress.set(payload.sectionProgress);
+            return this.get(time);
         },
         time: function() {
             var time = this.models.time;

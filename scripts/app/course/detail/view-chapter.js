@@ -26,8 +26,7 @@ exports.handlers = {
             section = course.sections[id],
             chapter = course.chapters[section.chapterId],
             studyProgress = course.studyProgress,
-            sectionType = section.sectionType,
-            url = section.url;
+            sectionType = section.sectionType;
         // 如果点击的是当前节,直接返回
         if (studyProgress.currentSectionId === id) {
             return false;
@@ -47,18 +46,15 @@ exports.handlers = {
         studyProgress.currentChapterId = chapter.id;
         studyProgress.currentSectionId = section.id;
         switch (sectionType) {
-        // 1:文档 5:音频类 6:视频
+        // 1:文档 3:url 5:音频类 6:视频
         case 1:
         case 5:
+        case 3:
         case 6:
             this.module.dispatch('showSection', { sectionId: id });
             break;
         // 调研
         case 2:
-            break;
-        // url
-        case 3:
-            window.open(url);
             break;
         // 电子书
         case 7:

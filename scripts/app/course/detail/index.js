@@ -1,24 +1,7 @@
 var _ = require('lodash/collection'),
-    judgeSection = function(type) {
-        if (type === 1 || type === 5 || type === 6) {
-            return true;
-        }
-        return false;
-    },
-    sectionCode = {
-        1: 'pdf',
-        2: 'survey',
-        3: 'url',
-        4: 'scorm',
-        5: 'audio',
-        6: 'video',
-        7: 'epub',
-        8: 'task',
-        9: 'exam',
-        10: 'course',
-        11: 'face',
-        12: 'evaluate'
-    };
+    util = require('../course-util'),
+    judgeSection = util.judgeSection,
+    sectionCode = util.sectionCode;
 exports.items = {
     player: 'player',
     'player-title': 'player-title',
@@ -168,6 +151,15 @@ exports.store = {
             var note = this.models.note;
             note.set(payload);
             return this.save(note);
+        },
+        turnPage: function() {
+            var pageInfo = this.models.courseRelated.getPageInfo();
+            if (pageInfo.page === pageInfo.pageCount) {
+                this.models.courseRelated.turnToPage(1);
+            } else {
+                this.models.courseRelated.nextPage();
+            }
+            return this.get(this.models.courseRelated);
         }
     }
 };
