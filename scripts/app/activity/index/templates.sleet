@@ -6,8 +6,8 @@ module > .activity-page
     .activity-list(data-region='list')
 
 view('banner')
-    .container > ul
-        li.prev
+    .container > #activitys-ul.banner > ul
+        li
             .content
                 .covers
                     .img > img(src='http://img.ui.cn/data/file/6/4/3/771346.jpg' alt='绩效考核指标的量化技术')
@@ -23,7 +23,7 @@ view('banner')
                         strong 316
                         | 人参加
                     a.normal(href='#/exam/detail') > .btn.radius 我要参与
-        li.current
+        li
             .content
                 .covers
                     .img > img(src='http://img.ui.cn/data/file/9/1/3/868319.jpg' alt='微信运营从初级到高级全攻略')
@@ -39,7 +39,7 @@ view('banner')
                         strong 1052
                         | 人参加
                     a.normal(href='#/live/detail') > .btn.radius 我要参与
-        li.next
+        li
             .content
                 .covers
                     .img > img(src='http://img.ui.cn/data/file/8/6/1/877168.jpg' alt='时间不够用？用时间日志找出原因')
@@ -55,9 +55,6 @@ view('banner')
                         strong 518
                         | 人参加
                     a.normal(href='#/survey/detail') > .btn.radius 我要参与
-    div
-        .btn.radius.pre 上一个
-        .btn.radius.next 下一个
 
 view('filter')
     .container
