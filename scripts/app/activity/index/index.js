@@ -11,10 +11,12 @@ exports.store = {
         activitys: {
             url: '../exam/activity',
             type: 'pageable',
-            root: 'items'
+            root: 'items',
+            pageSize: 6
         },
         activity: { url: '../exam/activity' },
-        params: { data: { isOverdue: false } }
+        params: { data: { isOverdue: false } },
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function() {
