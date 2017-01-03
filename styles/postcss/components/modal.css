@@ -20,6 +20,7 @@
         padding: calc(var(--space) * 2) calc(var(--space) * 3) calc(var(--space) * 5);
         position: relative;
         max-height: 700px;
+        background: white;
 
         & .dialog-content {
             height: 80%;
