@@ -2,7 +2,7 @@
 
 module
     .dialog.animated#animate > .container
-        i.icon-dismiss.dismiss#dismiss
+        i.iconfont.icon-close-circle.dismiss#dismiss
         .dialog-header(data-region='title')
         .dialog-content(data-region='content')
         .dialog-footer(data-region='buttons')

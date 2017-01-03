@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    state: false,
+    state: true,
     exam: false,
     questionTypes: true
 };

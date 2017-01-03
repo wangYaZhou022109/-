@@ -17,7 +17,7 @@ view('question-type')
         li(id='list-item-'+ @index)
             .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
-                div(class='list-item' + if(isCurrent 'correct' ''))(id='q-'+id) > echo(i)
+                div(class='list-item' + if(isCurrent 'active' ''))(id='q-'+id) > echo(i)
 
 
 view('head')

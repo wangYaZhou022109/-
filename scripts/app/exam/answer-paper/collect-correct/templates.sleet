@@ -22,5 +22,4 @@ view('correct')
     div
         echo('您为什么要举报此题？请说明原因。')
     div
-        form.vertical
-            input.input(id='reason' value=state.correct.content placeholder='请描述举报理由')
+        input.input(id='reason' value=state.correct.content placeholder='请描述举报理由')
