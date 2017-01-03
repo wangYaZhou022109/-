@@ -1,6 +1,7 @@
 var $ = require('jquery'),
     A = require('../../util/animation'),
     courseUtil = require('../course-util'),
+    judgeSection = courseUtil.judgeSection,
     _ = require('lodash/collection');
 
 exports.bindings = {
@@ -28,7 +29,7 @@ exports.handlers = {
             studyProgress = course.studyProgress,
             sectionType = section.sectionType;
         // 如果点击的是当前节,直接返回
-        if (studyProgress.currentSectionId === id) {
+        if (studyProgress.currentSectionId === id && judgeSection(section.sectionType)) {
             return false;
         }
         // 判断章是否按顺序

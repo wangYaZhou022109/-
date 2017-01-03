@@ -23,7 +23,7 @@ exports.handlers = {
 exports.dataForTemplate = {
     courses: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'http://img.ui.cn/data/file/9/1/3/868319.jpg';
+        var defultImg = 'images/course-default.jpg';
         data.courses.forEach(function(obj) {
             var course = obj || {};
             var studyType = 1; // 继续学习

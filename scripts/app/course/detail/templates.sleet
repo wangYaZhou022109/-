@@ -131,8 +131,8 @@ view('info')
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > i.iconfont.icon-share
             .inline-block.m-left
-            if(course.collectId)
-                i#cancel-collect.iconfont.icon-favorite-full(data-name='id' data-value=course.collectId)
+            if(collect.id)
+                i#cancel-collect.iconfont.icon-favorite-full(data-name='id' data-value=collect.id)
             else
                 i#collect.iconfont.icon-favorite
                 
