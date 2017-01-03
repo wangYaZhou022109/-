@@ -55,6 +55,9 @@ view('banner')
                         strong 518
                         | 人参加
                     a.normal(href='#/survey/detail') > .btn.radius 我要参与
+    div
+        .btn.radius.pre 上一个
+        .btn.radius.next 下一个
 
 view('filter')
     .container

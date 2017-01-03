@@ -82,7 +82,25 @@ gulp.task('postcss', function() {
             'styles/postcss/theme.css',
             'styles/postcss/theme-white.css'
         ])
-        .pipe(postcss([cssimport(), cssnext()]))
+        .pipe(postcss([cssimport(), cssnext({
+            features: {
+                customProperties: {
+                    variables: {
+                        '--font-size1': '14px',
+                        '--font-size2': '16px',
+                        '--font-size3': '18px',
+                        '--font-size4': '20px',
+                        '--font-size5': '24px',
+                        '--font-size6': '28px',
+
+                        '--space': '10px',
+
+                        '--sidebar-width': '230px',
+                        '--nav-height': '70px'
+                    }
+                }
+            }
+        })]))
         .pipe(gulp.dest('bundle/'));
 });
 
