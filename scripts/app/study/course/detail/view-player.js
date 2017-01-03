@@ -8,7 +8,7 @@ exports.bindings = {
 };
 
 exports.getEntityModuleName = function(key) {
-    return 'course/detail/player/' + key;
+    return 'study/course/detail/player/' + key;
 };
 
 exports.getEntity = function() {

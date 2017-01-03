@@ -6,7 +6,7 @@ exports.bindings = {
 };
 
 exports.getEntityModuleName = function(key) {
-    return 'study-subject/detail/' + key;
+    return 'study/subject/detail/' + key;
 };
 
 exports.getEntity = function() {
@@ -14,10 +14,7 @@ exports.getEntity = function() {
         styles = this.bindings.styles.data;
     return {
         subject: subject,
-        styles: styles,
-        state: {
-            type: 'preview'
-        }
+        styles: styles
     };
 };
 

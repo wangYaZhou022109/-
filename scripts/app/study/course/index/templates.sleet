@@ -70,16 +70,16 @@ view('list')
                         .drop-down-content > .content
                             ul
                                 each(state.categories4)
-                                    li > echo(name) 
+                                    li > echo(name)
             .pull-right
                 .item#sort-0
                     | 排序：上架时间
                     i.iconfont.icon-arrow-up
-         
+
                 .item#sort-1
                     | 学习人数
                     i.iconfont.icon-arrow-up
-          
+
                 .item
                     .drop-down-wrapper.right
                         .drop-down-btn
@@ -94,18 +94,18 @@ view('list')
                                 li 更多筛选条件
         ul
             each(courses)
-                li > a.normal(href='#/course/detail/'+id) > .content
+                li > a.normal(href='#/study/course/detail/'+id) > .content
                     .img
                         .img-cont
                             img(src=img)
                         .detail-wrapper
                             p > echo(description)
                             compare(studyType 'eq' 0)
-                                a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 开始学习
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 开始学习
                             compare(studyType 'eq' 1)
-                                a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 继续学习
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 继续学习
                             compare(studyType 'eq' 2)
-                                a.normal.block(href='#/course/detail/'+id) > .btn.radius.block 重新学习
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
                     .text-overflow.title > echo(name)
                     .bottom
                         .item(title='课时') > i.iconfont.icon-time + echo(courseHour) + | 分钟

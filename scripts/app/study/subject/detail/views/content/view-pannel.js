@@ -1,4 +1,4 @@
-var util = require('./app/study-subject/util'),
+var util = require('./app/study/subject/util'),
     _ = require('lodash/collection');
 exports.bindings = {
     region: false,

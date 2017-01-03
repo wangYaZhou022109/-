@@ -1,5 +1,5 @@
 var _ = require('lodash/collection'),
-    util = require('../course-util'),
+    util = require('./app/study/course/course-util'),
     judgeSection = util.judgeSection,
     sectionCode = util.sectionCode;
 exports.items = {

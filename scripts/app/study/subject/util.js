@@ -32,7 +32,7 @@ exports.setBtnUrl = function(chapters, type) {
             var section = sec,
                 sectionType = Number(section.sectionType);
             if (sectionType === 10) {
-                section.btnUrl = '#/course/detail/' + section.resourceId;
+                section.btnUrl = '#/study/course/detail/' + section.resourceId;
             } else if (sectionType === 3) {
                 section.btnUrl = section.url;
             } else if (sectionType === 8) {

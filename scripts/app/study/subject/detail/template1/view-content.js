@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.getEntityModuleName = function(key) {
-    return 'study-subject/detail/views/' + key;
+    return 'study/subject/detail/views/' + key;
 };
 
 exports.getEntity = function(key) {

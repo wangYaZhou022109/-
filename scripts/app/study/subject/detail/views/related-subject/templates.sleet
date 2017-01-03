@@ -9,6 +9,6 @@ view('pannel')
     .layout-mt-small
         each(courseRelated)
             .img
-                a.normal(href='#/study-subject/detail/'+id)
+                a.normal(href='#/study/subject/detail/'+id)
                     .img-cont > img(src=imageUrl)
                 h4.text-overflow(title=name) > echo(name)

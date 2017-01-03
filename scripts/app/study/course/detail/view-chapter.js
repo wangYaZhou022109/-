@@ -1,5 +1,5 @@
 var $ = require('jquery'),
-    A = require('../../util/animation'),
+    A = require('./app/util/animation'),
     courseUtil = require('../course-util'),
     judgeSection = courseUtil.judgeSection,
     _ = require('lodash/collection');
