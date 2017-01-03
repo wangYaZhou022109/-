@@ -78,9 +78,7 @@ var libs = [
 
 gulp.task('postcss', function() {
     gulp.src([
-            'styles/postcss/main.css',
-            'styles/postcss/theme.css',
-            'styles/postcss/theme-white.css'
+            'styles/postcss/main.css'
         ])
         .pipe(postcss([cssimport(), cssnext({
             features: {
@@ -194,8 +192,8 @@ gulp.task('default', ['main', 'common', 'watch-css'], function() {
     });
     app.use(express.static('.'));
 
-    app.listen(8002, function() {
-        console.log('Server started at http://localhost:8002');
+    app.listen(8001, function() {
+        console.log('Server started at http://localhost:8001');
         console.log('in nginx you can started at http://localhost');
     });
 });
@@ -207,8 +205,8 @@ gulp.task('serve-dist', function() {
     });
     app.use(express.static('./dist'));
 
-    app.listen(8002, function() {
-        console.log('Server started at http://localhost:8002');
+    app.listen(8001, function() {
+        console.log('Server started at http://localhost:8001');
         console.log('in nginx you can started at http://localhost');
     });
 

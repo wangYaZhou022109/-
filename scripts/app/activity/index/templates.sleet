@@ -84,7 +84,7 @@ view('list')
                 .content
                     .img
                         .img-cont
-                            a.normal > img(src='http://img.ui.cn/data/file/6/5/7/798756.png' alt='市场从业者必学的互联网思维')
+                            a.normal > img(src=img alt=name)
                         .detail-wrapper
                             p > echo(description)
                             compare(type 'eq' 1)
@@ -103,12 +103,4 @@ view('list')
                         .pull-right > dateTime(startTime) + echo('~') + dateTime(endTime)
                         | 起至时间
                     .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
-
-    .pagination
-        ul
-            li.hover-main-color > i.iconfont.icon-arrow-left.scale-1
-            li.hover-main-color.active.bg-main-color 1
-            li.hover-main-color 2
-            li.hover-main-color 3
-            li.hover-main-color 4
-            li.hover-main-color > i.iconfont.icon-arrow-right.scale-1
+        #pager.pagination

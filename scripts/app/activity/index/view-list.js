@@ -1,6 +1,7 @@
 exports.bindings = {
     activitys: true,
-    params: true
+    params: true,
+    down: true
 };
 
 exports.events = {
@@ -28,6 +29,18 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
+    activitys: function(data) {
+        var downUrl = this.bindings.down.getFullUrl();
+        var defultImg = 'http://img.ui.cn/data/file/9/1/3/868319.jpg';
+        data.activitys.forEach(function(obj) {
+            var activity = obj || {};
+            activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
+            if (activity.description) {
+                activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
+            }
+        });
+        return data.activitys;
+    },
     type: function() {
         var params = this.bindings.params.data;
         params.types = {};
@@ -45,3 +58,7 @@ exports.dataForTemplate = {
         return params;
     }
 };
+
+exports.components = [{
+    id: 'pager', name: 'pager', options: { model: 'activitys' }
+}];
