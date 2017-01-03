@@ -13,6 +13,10 @@ exports.dataForTemplate = {
         var answer = this.bindings.answer.data;
         if (answer.value.length > 0) return Number(answer.value[0].value) === 0;
         return false;
+    },
+    isShowDetail: function() {
+        var mode = this.bindings.state.data.detailMode;
+        return mode && mode > 0;
     }
 };
 
@@ -31,5 +35,21 @@ exports.handlers = {
             }]
         });
         return this.module.dispatch('save');
+    }
+};
+
+exports.beforeRender = function() {
+    var data = this.bindings.state.data;
+    if (data.detailMode === 1) {
+        data.isShowAnswer = true;
+        data.isShowGainScore = true;
+    }
+    if (data.detailMode === 2) {
+        data.isShowAnswer = false;
+        data.isShowGainScore = true;
+    } else if (data.detailMode === 3) {
+        data.isShowAnswer = false;
+        data.isShowGainScore = true;
+        this.bindings.answer.data = {};
     }
 };

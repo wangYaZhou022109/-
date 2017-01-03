@@ -4,13 +4,18 @@ module
     div(data-region='main')
 
 view('main')
-    div
-        #  a(id='collect-' + state.id) 
+    .bottom-favorite
+        #  a(id='collect-' + state.id)
         #      if(state.isCollect)
         #          echo('取消收藏')
         #      else
         #          echo('我要收藏')
-        a(id='correct-' + state.id) 错误提报
+        #  .item
+        #      i.iconfont.icon-favorite
+        #      span.m-left 我要收藏
+        .item
+            i.iconfont.icon-favorite
+            span.m-left > a(id='correct-' + state.id) 错误提报
 
 view('correct')
     br
@@ -19,4 +24,3 @@ view('correct')
     div
         form.vertical
             input.input(id='reason' value=state.correct.content placeholder='请描述举报理由')
-

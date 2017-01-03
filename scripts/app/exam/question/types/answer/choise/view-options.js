@@ -17,6 +17,10 @@ exports.dataForTemplate = {
             if (_.find(data.value, ['id', item.id])) item.checked = true;
         });
         return this.bindings.state.data.options;
+    },
+    isShowDetail: function() {
+        var mode = this.bindings.state.data.detailMode;
+        return mode && mode > 0;
     }
 };
 
@@ -60,5 +64,21 @@ exports.handlers = {
             this.bindings.answer.data = temp;
         }
         return this.module.dispatch('save');
+    }
+};
+
+exports.beforeRender = function() {
+    var data = this.bindings.state.data;
+    if (data.detailMode === 1) {
+        data.isShowAnswer = true;
+        data.isShowGainScore = true;
+    }
+    if (data.detailMode === 2) {
+        data.isShowAnswer = false;
+        data.isShowGainScore = true;
+    } else if (data.detailMode === 3) {
+        data.isShowAnswer = false;
+        data.isShowGainScore = true;
+        this.bindings.answer.data = {};
     }
 };

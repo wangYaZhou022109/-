@@ -69,8 +69,7 @@ exports.store = {
                 if (question.answerRecord) {
                     data.gainScore = question.answerRecord.score;
                 }
-
-                data.detailMode = payload.mode === 2;
+                data.detailMode = payload.mode;
             }
             this.models.answer.init(payload.answer);
             this.models.state.changed();
