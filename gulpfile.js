@@ -29,6 +29,7 @@ var fs = require('fs'),
 var libs = [
         'jquery', 'handlebars/runtime', 'lodash/collection', 'lodash/object', 'drizzlejs',
         'selectize',
+        'video.js',
         './vendors/alertify',
         './vendors/upload/plupload.min',
         './vendors/upload/jquery.plupload.queue.min',
@@ -175,7 +176,16 @@ gulp.task('font', ['clean-build'], function() {
         .pipe(gulp.dest('./dist/font'));
 });
 
-gulp.task('files', ['clean-build', 'images', 'font'], function() {
+gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
+    return gulp.src([
+            'node_modules/pdfjs-dist/build/pdf.worker.js'
+        ], {
+            base: 'node_modules/pdfjs-dist/build'
+        })
+        .pipe(gulp.dest('./dist/scripts/pdfjs-dist'));
+});
+
+gulp.task('files', ['clean-build', 'images', 'font', 'pdf-worker'], function() {
     return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
         .pipe(gulp.dest('./dist/scripts'));
 });
@@ -183,10 +193,13 @@ gulp.task('files', ['clean-build', 'images', 'font'], function() {
 gulp.task('build', ['clean-build', 'lint', 'sleet', 'postcss', 'common', 'build-main', 'files'], function() {
     gulp.src('./index.html')
         .pipe(useref())
+        .pipe(gulpif('*.js', preprocess({context: {
+            PDF_WORKER: 'scripts/pdfjs-dist/'
+        }})))
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', csso()))
         .pipe(gulpif('!index.html', rev()))
-        .pipe(gulpif('index.html', preprocess({context: {ES6PROMISE: 'scripts/es6-promise.js'}})))
+        .pipe(gulpif('index.html', preprocess({context: { ES6PROMISE: 'scripts/es6-promise.js' }})))
         .pipe(revReplace())
         .pipe(gulp.dest('./dist'));
 });
