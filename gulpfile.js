@@ -192,8 +192,8 @@ gulp.task('default', ['main', 'common', 'watch-css'], function() {
     });
     app.use(express.static('.'));
 
-    app.listen(8001, function() {
-        console.log('Server started at http://localhost:8001');
+    app.listen(8002, function() {
+        console.log('Server started at http://localhost:8002');
         console.log('in nginx you can started at http://localhost');
     });
 });
@@ -205,8 +205,8 @@ gulp.task('serve-dist', function() {
     });
     app.use(express.static('./dist'));
 
-    app.listen(8001, function() {
-        console.log('Server started at http://localhost:8001');
+    app.listen(8002, function() {
+        console.log('Server started at http://localhost:8002');
         console.log('in nginx you can started at http://localhost');
     });
 
