@@ -20,7 +20,7 @@
       display: block;
       text-decoration: none;
   }
-  a.btn{
+  & a.btn{
     text-decoration: none;
   }
 }
