@@ -55,10 +55,9 @@ exports.dataForTemplate = {
 exports.getEntity = function(id) {
     var question = this.bindings.exam.getQuestionById(id),
         questionTypes = this.bindings.questionTypes;
-
-    D.assign(question, {
+    question = D.assign({}, question, {
         errorRate: question.errorRate / 10000,
-        questionAttrs: _.orderBy(question.questionAttrCopys, ['createTime'], ['asc']),
+        questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
         answerRecord: D.assign(question.answerRecord, { score: question.answerRecord.score / 100 }),
         index: questionTypes.getQuestionIndexInType(id)
     });
@@ -74,7 +73,7 @@ exports.dataForEntityModule = function(question) {
         data: question,
         multiple: question.type === 2,
         answer: this.bindings.answer.getAnswer(question.id),
-        mode: 2
+        mode: this.bindings.exam.data.showAnswerRule
     };
 };
 

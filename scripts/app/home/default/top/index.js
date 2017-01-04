@@ -65,7 +65,6 @@ function getParams () {
 
 exports.store = {
     models: {
-        setting: { url: '../system/setting' },
         menus: { data: menus },
         navs: { url: '../system/home-nav' },
         homeConfig: { url: '../system/home-config/config' }

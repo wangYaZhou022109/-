@@ -1,6 +1,7 @@
 var _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
     D = require('drizzlejs'),
+    $ = require('jquery'),
     map = {
         1: 1,
         2: 2,
@@ -10,7 +11,8 @@ var _ = require('lodash/collection'),
         6: 8,
         7: 5,
         8: 4
-    };
+    },
+    changeToFullScreen;
 
 
 exports.items = {
@@ -60,9 +62,9 @@ exports.store = {
                         isOnePageOneQuestion: exam.paperShowRule === 1,
                         mode: payload.mode || 1,
                         questionNum: exam.paper.questionNum,
-                        totalScore: exam.paper.totalScore,
+                        totalScore: exam.paper.totalScore / 100,
                         examMember: exam.examRecord.member.name,
-                        memberTotalScore: exam.examRecord.score,
+                        memberTotalScore: exam.examRecord.score / 100,
                         passDec: exam.examRecord.status < 7 ? '及格' : '不及格'
                     });
 
@@ -268,10 +270,6 @@ exports.store = {
         init: function(payload) {
             var me = this,
                 questionTypes = this.models.questionTypes;
-
-            D.assign(payload, {
-                examRecordId: '1edca744-ce42-4d4a-af6b-a0644cffd00c'
-            });
             this.models.exam.params = {
                 examRecordId: payload.examRecordId
             };
@@ -315,4 +313,14 @@ exports.store = {
 
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
+};
+
+exports.afterRender = function() {
+    changeToFullScreen();
+};
+
+changeToFullScreen = function() {
+    $('.header').hide();
+    $('.footer').hide();
+    $('.achievement-content').attr('height', '100%');
 };

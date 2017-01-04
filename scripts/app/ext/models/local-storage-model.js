@@ -9,7 +9,7 @@ LocalStorageModel = function() {
 
 D.extend(LocalStorageModel, D.Model, {
     _key: function() {
-        var key = 'Model.' + this.module.name + '.LS';
+        var key = 'Model.' + this.name + '.' + this.module.name + '.LS';
         if (this.app.currentUser) {
             key += '.' + this.app.global.currentUser.id;
         }

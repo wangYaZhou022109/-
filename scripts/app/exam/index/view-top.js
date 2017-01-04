@@ -1,13 +1,15 @@
+var remoteBackGround = 'http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif';
+
 exports.bindings = {
-    exam: true
+    exam: true,
+    down: true
 };
 
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
     return {
-        endTime: this.bindings.exam.data.endTime,
-        duration: this.bindings.exam.data.duration
+        endTime: this.bindings.exam.data.startTime
     };
 };
 
@@ -20,7 +22,7 @@ exports.dataForEntityModule = function(data) {
     return {
         data: data,
         callback: function() {
-            me.app.viewport.modal(me.module.items.tips, { message: '距离考试开始时间' });
+            return me.module.dispatch('init', { id: me.module.renderOptions.id });
         }
     };
 };
@@ -28,21 +30,19 @@ exports.dataForEntityModule = function(data) {
 
 exports.events = {
     'click signup': 'signup',
-    'click revoke': 'revoke',
-    'click toExam': 'toExam'
+    'click revoke': 'revoke'
 };
 
 exports.handlers = {
     signup: function() {
         var me = this;
-        return me.module.dispatch('signUp');
+        return me.module.dispatch('signUp').then(function() {
+            return me.module.dispatch('init', { id: me.module.renderOptions.id });
+        });
     },
     revoke: function() {
         var me = this;
         return me.module.dispatch('revoke');
-    },
-    toExam: function() {
-        this.app.show('content', 'exam/answer-paper', { examId: this.bindings.exam.data.id });
     }
 };
 
@@ -55,7 +55,15 @@ exports.dataForTemplate = {
             if (!exam.signUp || !exam.signUp.status) {
                 result = 'signup';
             } else if (currentTime >= exam.startTime && currentTime < exam.endTime) {
-                result = 'startExam';
+                if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
+                    result = 'detail';
+                } else if (exam.examRecord && exam.examRecord.status > 4) {
+                    result = 'overExam';
+                } else {
+                    result = 'startExam';
+                }
+            } else if (currentTime > exam.endTime) {
+                result = 'detail';
             } else if (exam.type === 1 && exam.signUp.status === 1) {
                 result = 'waitReview';
             } else if (exam.type === 1 && exam.signUp.status === 3) {
@@ -65,11 +73,26 @@ exports.dataForTemplate = {
             }
         } else if (exam.type && exam.type !== 1) {
             if (currentTime >= exam.startTime && currentTime < exam.endTime) {
-                result = 'startExam';
+                if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
+                    result = 'detail';
+                } else if (exam.examRecord && exam.examRecord.status > 4) {
+                    result = 'overExam';
+                } else {
+                    result = 'startExam';
+                }
+            } else if (currentTime > exam.endTime) {
+                result = 'detail';
             } else {
                 result = 'prepare';
             }
         }
+
         return result;
+    },
+    examCoverUrl: function() {
+        if (this.bindings.exam.data.coverId) {
+            return this.bindings.down.getFullUrl() + '?id=' + this.bindings.exam.data.coverId;
+        }
+        return remoteBackGround;
     }
 };

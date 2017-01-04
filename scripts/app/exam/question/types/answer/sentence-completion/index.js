@@ -32,7 +32,7 @@ exports.store = {
             data.answer = question.questionAttrs[0].value;
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
-            data.detailMode = payload.mode === 2;
+            data.detailMode = payload.mode;
             if (question.answerRecord) {
                 data.gainScore = question.answerRecord.score;
             }

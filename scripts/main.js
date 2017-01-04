@@ -4,6 +4,7 @@ oauthOptions = {
     clientId: 99,
     provider: 'https://oauth9.zhixueyun.com',
     returnTo: 'https://dev9.zhixueyun.com'
+
 };
 
 window.$ = window.jQuery = jQuery = require('jquery');
@@ -41,6 +42,7 @@ require('./app/ext/pdf');
 require('./app/ext/videojs');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
+require('./app/main/modal/modal-region');
 
 D.adapt({
     getFormData: function(form) {

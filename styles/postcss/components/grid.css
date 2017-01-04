@@ -12,12 +12,6 @@
         margin-bottom: calc(var(--space) * 2);
     }
 
-    &.no-gutter {
-        [class^=col-] {
-            margin: 0;
-        }
-    }
-
     & .col-md-12 {
       width: 100%;
     }
