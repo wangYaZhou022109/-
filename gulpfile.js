@@ -77,7 +77,7 @@ var libs = [
     };
 
 gulp.task('postcss', function() {
-    gulp.src([
+    return gulp.src([
             'styles/postcss/main.css'
         ])
         .pipe(postcss([cssimport(), cssnext({
