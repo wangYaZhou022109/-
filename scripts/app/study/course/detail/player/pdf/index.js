@@ -6,7 +6,7 @@ exports.store = {
     models: {
         section: {},
         sectionProgress: { url: '../course-study/course-front/progress' },
-        download: { url: '../human/file/download' },
+        download: { url: '../human/file/preview' },
         time: { url: '../system/setting/time' },
     },
     callbacks: {
