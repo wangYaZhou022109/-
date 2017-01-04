@@ -1,4 +1,4 @@
-var getAccessTokenFromHash, getAccessTokenFromCookie, _, $, haveReturnedToLogin;
+var getAccessTokenFromHash, getAccessTokenFromLocalStorage, _, $, haveReturnedToLogin;
 _ = require('lodash/collection');
 $ = require('jquery');
 haveReturnedToLogin = false;
@@ -6,37 +6,28 @@ haveReturnedToLogin = false;
 getAccessTokenFromHash = function() {
     var hash = window.location.hash,
         result = {},
-        state,
-        expire,
-        cookie;
+        state;
     if (hash.indexOf('access_token') < 0) return null;
-
     _.each(hash.slice(1).split('&'), function(v) {
         var s = v.split('=');
         result[s[0]] = s[1];
     });
-    expire = Number(result.expires_in);
     state = decodeURIComponent(result.state || 'demo/main');
     delete result.expires_in;
     delete result.state;
-    cookie = 'token=' + JSON.stringify(result);
-    cookie += '; expires=' + new Date(new Date().getTime() + (expire * 1000)).toUTCString();
-    document.cookie = cookie;
+    localStorage.setItem('token', JSON.stringify(result));
     window.location.hash = state || 'index';
     return result;
 };
 
-getAccessTokenFromCookie = function() {
-    var result = null;
-    _.some(document.cookie.split('; '), function(v) {
-        var items = v.split('=');
-        if (items[0] === 'token') {
-            result = JSON.parse(items[1]);
-            return true;
-        }
-        return false;
-    });
-    return result;
+getAccessTokenFromLocalStorage = function() {
+    var accessTokenStr = localStorage.getItem('token'),
+        accessToken;
+    if (accessTokenStr) {
+        accessToken = JSON.parse(accessTokenStr);
+        return accessToken;
+    }
+    return false;
 };
 
 exports.setup = function(app, options) {
@@ -46,7 +37,7 @@ exports.setup = function(app, options) {
         returnTo = options.returnTo,
         auth = provider + '/api/v1/auth',
         revoke = provider + '/api/v1/token/' + clientId,
-        accessToken = getAccessTokenFromHash() || getAccessTokenFromCookie() || {};
+        accessToken = getAccessTokenFromHash() || getAccessTokenFromLocalStorage() || {};
 
     root.redirectToLogin = function(append) {
         var queryString = '?response_type=token&client_id=' + clientId +

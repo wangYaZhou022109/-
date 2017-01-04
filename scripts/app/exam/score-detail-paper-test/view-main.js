@@ -58,7 +58,10 @@ exports.getEntity = function(id) {
     question = D.assign({}, question, {
         errorRate: question.errorRate / 10000,
         questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
-        answerRecord: D.assign(question.answerRecord, { score: question.answerRecord.score / 100 }),
+        answerRecord: D.assign(
+            question.answerRecord,
+            { score: question.answerRecord ? question.answerRecord.score / 100 : 0 }
+        ),
         index: questionTypes.getQuestionIndexInType(id)
     });
     return question;

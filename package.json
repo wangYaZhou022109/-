@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "animate.css": "^3.5.1",
-    "drizzlejs": "^0.4.9",
+    "drizzlejs": "^0.4.15",
     "es5-shim": "^4.5.9",
     "es6-promise": "^3.2.1",
     "handlebars": "^4.0.5",

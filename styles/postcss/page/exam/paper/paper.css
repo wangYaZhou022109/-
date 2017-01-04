@@ -161,15 +161,19 @@
 }
 
 .slider-question {
-    margin-top: -var(--section-gap);
+    text-align: center;
 
     & .item {
-        float: left;
-        margin-right: var(--space);
+        display: inline-block;
+        margin-right: 1em;
         font-size: var(--h1);
         position: relative;
         cursor: pointer;
         color: var(--font-tip-color);
+
+        &:last-child {
+            margin-right: 0;
+        }
 
         & .iconfont {
             @apply --transition;
