@@ -18,7 +18,7 @@ var menus = [{
     name: '课程',
     order: 0,
     parentId: null,
-    uri: 'course/index'
+    uri: 'study/course/index'
 }, {
     createTime: 1474538557153,
     icon: null,

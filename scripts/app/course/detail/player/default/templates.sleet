@@ -1,8 +1,0 @@
-#!handlebars
-
-module
-    div(data-region='main')
-
-view('main')
-    compare(course.register 'eq' false)
-        .player-start-btn > .btn#register 我要学习

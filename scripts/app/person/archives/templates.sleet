@@ -1,0 +1,6 @@
+#!handlebars
+
+module
+    .section(data-region='information')
+    .section.bg-highlight(data-region='statistics')
+    .section(data-region='history')

@@ -1,0 +1,40 @@
+.activity-page {
+    & .activity-banner {
+        background-color: #2d3042;
+
+        & .bg-img {
+            background-image: url(../images/bg-usercenter.png);
+        }
+
+        & li {
+            background-color: var(--bg-color)\0;
+            background-color: color(var(--bg-color) alpha(10%));
+        }
+        & li.current {
+            background-color: var(--white);
+        }
+        & .time {
+            color: var(--font-tip-color);
+            border-bottom-color: var(--border-color);
+        }
+
+        & .information {
+            color: var(--font-tip-color);
+        }
+    }
+    & .activity-filter {
+        background-color: #464957;
+    }
+    
+    & .activity-tabs {
+        & li {
+            color: var(--white);
+
+            &.active {
+                color: var(--white);
+                background-color: var(--bg-color)\0;
+                background-color: rgba(255,255,255,.3);
+            }
+        }
+    }
+}

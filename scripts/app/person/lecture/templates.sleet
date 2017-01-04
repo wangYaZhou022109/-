@@ -1,0 +1,4 @@
+#!handlebars
+
+module > .identity-lecture-page
+    div 讲师内容区块hhhh

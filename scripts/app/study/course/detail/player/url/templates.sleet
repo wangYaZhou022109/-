@@ -1,0 +1,7 @@
+#!handlebars
+
+module
+    div(data-region='url')
+
+view('url')
+    iframe(style='border: 0px;width:100%;height:500px' src=url)

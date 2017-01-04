@@ -1,0 +1,105 @@
+.person-top {
+    width: 100%;
+    height: calc(var(--large-space) * 9);
+
+    & .container {
+        position: relative;
+    }
+
+    & .head {
+        float: left;
+        margin-top: calc(var(--large-space) * 2);
+        margin-left: calc(var(--large-space) * 2);
+        width: calc(var(--large-space) * 5);
+        height: calc(var(--large-space) * 5);
+        overflow: hidden;
+        border-radius: 50%;
+        border-width: calc(var(--large-space) / 4);
+        border-style: solid;
+
+        & img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    & .info {
+        float: left;
+        margin-top: calc(var(--large-space) * 3);
+        margin-left: calc(var(--large-space) * 2);
+    }
+
+    & .name {
+        margin-bottom: calc(var(--space) * 2);
+    }
+
+    & .name .h2{
+        margin-right: var(--space);
+        font-size: calc(var(--font-size) * 3);
+    }
+
+    & .grade {
+        margin-top: calc(var(--space) * 2);
+        width: calc(var(--large-space) * 1.5);
+
+        & img {
+            width: 100%;
+        }
+    }
+
+    & .set .inline-block {
+        margin-right: calc(var(--large-space) * 2);
+        & a {
+            @apply --transition;
+            &:hover {
+                opacity: .5;
+                filter: alpha(opacity=50);
+            }
+        }
+    }
+
+    & .identity {
+        position: absolute;
+        top: calc(var(--large-space) * 2.5);
+        right: calc(var(--large-space) * 4);
+    }
+
+    & .btn-lecture,
+    & .btn-expert {
+        position: relative;
+        display: inline-block;
+        margin-left: calc(var(--large-space) * 3);
+        padding-top: calc(var(--large-space) / 2);
+        width: calc(var(--large-space) * 4);
+        height: calc(var(--large-space) * 4);
+        border-radius: 50%;
+        border-width: 1px;
+        border-style: solid;
+        text-align: center;
+        @apply --transition;
+
+        & strong {
+            display: block;
+            font-size: calc(var(--font-size) * 4);
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    & .btn-lecture.active,
+    & .btn-expert.active {
+        &:after {
+            position: absolute;
+            content: '';
+            top: -calc(var(--large-space) / 1.25);
+            left: -calc(var(--large-space) / 1.25);
+            width: calc(var(--large-space) * 5.5);
+            height: calc(var(--large-space) * 5.5);
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 50%;
+        }
+    }
+}

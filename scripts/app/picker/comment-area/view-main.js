@@ -81,32 +81,39 @@ exports.dataForActions = {
 };
 exports.actionCallbacks = {
     addComment: function() {
-        this.app.message.success('发表成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('发表成功!');
+        });
     },
     hideComment: function() {
-        this.app.message.success('修改成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('修改成功!');
+        });
     },
     delComment: function() {
-        this.app.message.success('删除成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('删除成功!');
+        });
     },
     setTop: function() {
-        this.app.message.success('修改成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('修改成功!');
+        });
     },
     setEssence: function() {
-        this.app.message.success('修改成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('修改成功!');
+        });
     },
     praise: function() {
-        this.app.message.success('点赞成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('点赞成功!');
+        });
     },
     cancelPraise: function() {
-        this.app.message.success('取消成功!');
-        this.module.dispatch('init', this.module.renderOptions);
+        this.module.dispatch('init', this.module.renderOptions).then(function() {
+            this.app.message.success('取消成功!');
+        });
     }
 };
 
