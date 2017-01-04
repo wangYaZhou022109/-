@@ -1,9 +1,9 @@
 var D, H, jQuery, app, helpers, oauthOptions, plupload;
 
 oauthOptions = {
-     clientId: 99,
-     provider: 'https://oauth9.zhixueyun.com',
-     returnTo: 'https://dev9.zhixueyun.com'
+    clientId: 99,
+    provider: 'https://oauth9.zhixueyun.com',
+    returnTo: 'https://dev9.zhixueyun.com'
 
 };
 
