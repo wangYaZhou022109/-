@@ -114,6 +114,13 @@ gulp.task('lint', function() {
         .pipe(eslint.formatEach());
 });
 
+gulp.task('lint-build', function() {
+    return gulp.src(['scripts/**/*.js', '!scripts/vendors/**/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
 gulp.task('common', function() {
     var b = browserify();
     b.require(libs.filter(function(item) { return item.charAt(0) !== '.';}));
