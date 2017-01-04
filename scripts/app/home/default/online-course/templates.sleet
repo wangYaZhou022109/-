@@ -9,9 +9,9 @@ view('online-course') > .clearfix
     .section.first
         .bar.title > .cont.bg-white
             .h1 > echo(homeConfig.name)
-            .more > a.normal(href=routerLink('course/index')) MORE >>
+            .more > a.normal(href=routerLink('study/course/index')) MORE >>
         inner(course '1')
-            a.bar(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+            a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
                 .img > .img-cont >  img(src=cover)
                 .cont.bg-white
                     .text-cont.bg-white
@@ -23,7 +23,7 @@ view('online-course') > .clearfix
                         .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
     .section.second
         inner(course '2')
-            a.bar(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+            a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
                 .img > .img-cont >  img(src=cover height='300px')
                 .cont.bg-white.show
                     .title-row > echo(name)
@@ -34,7 +34,7 @@ view('online-course') > .clearfix
                         .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
     .section.large
         inner(course '3')
-            .section-above > a.bar(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+            .section-above > a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
                 .bar-cont
                     .img > .img-cont >  img(src=cover)
                 .bar-cont
@@ -47,7 +47,7 @@ view('online-course') > .clearfix
                             .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
         .section-below
             inner(course '4')
-                .pull-left.w-half > a.bar(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+                .pull-left.w-half > a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
                     .img > .img-cont >  img(src=cover)
                     .cont.bg-white
                         .text-cont.bg-white
@@ -58,7 +58,7 @@ view('online-course') > .clearfix
                             .item.border > i.iconfont.icon-user(title='报名学员') + .inline-block.m-left {{pick studyMemberCount 0}} 人
                             .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
             inner(course '5')
-                .pull-left.w-half > a.bar(target = "_blank" href="{{routerLink 'course/detail/' sourceId}}")&if(sourceId)
+                .pull-left.w-half > a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
                     .img > .img-cont >  img(src=cover)
                     .cont.bg-white
                         .text-cont.bg-white

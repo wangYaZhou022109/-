@@ -10,13 +10,13 @@ view('study-subject')
         .title.line-color > echo(homeConfig.name)
         .title-more
             span.sub-title SPECIAL
-            span.more > a.normal(href='#/study-subject/index') MORE >>
+            span.more > a.normal(href='#/study/subject/index') MORE >>
 
     ul
         times(8)
             li > inner(course count)
 
-                a.content(target = "_blank" href="{{routerLink 'study-subject/detail/' sourceId}}")&if(sourceId)
+                a.content(target = "_blank" href="{{routerLink 'study/subject/detail/' sourceId}}")&if(sourceId)
                     .img > .img-cont >  img(src=cover)
                     .bottom
                         .clearfix

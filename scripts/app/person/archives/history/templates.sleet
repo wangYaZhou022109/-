@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .container
+    .person-history(data-region='history')
+
+view('history')
+    div 历史

@@ -1,0 +1,8 @@
+#!handlebars
+
+module
+    div(data-region='default')
+
+view('default')
+    compare(course.register 'eq' false)
+        .player-start-btn > .btn#register 我要学习

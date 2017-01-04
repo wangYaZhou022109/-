@@ -1,0 +1,24 @@
+#!handlebars
+
+module > .container
+    .person-information(data-region='information')
+
+view('information')
+    h1 张紫茵档案信息
+    .profiles 秋草逢霜之象，脆弱无力。骨肉离散，孤独生涯，百事不如意，徒劳无功，懦弱病弱，挫折困难，孤寂乏力，逆境不平，为此数者人生的写照。但也有伟人、豪杰出此数者。
+
+    .person-count
+        .item
+            strong 263
+            | 累积积分
+        .item
+            strong 30
+            | 累积学分
+        .item
+            .head > img(src='images/d4.jpg' title='张紫茵')
+        .item
+            strong 103
+            | 累积课时
+        .item
+            strong 5263
+            | 访问次数

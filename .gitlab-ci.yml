@@ -1,0 +1,26 @@
+before_script:
+  - cnpm install
+
+cache:
+  paths:
+    - node_modules
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - gulp lint-build
+
+deploy-master:
+  stage: deploy
+  only:
+    - master
+  script:
+    - export PRODUCTION=true
+    - gulp build
+    - tar -zcf dist.tgz dist
+    - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" dev9.zhixueyun.com:8005/frontend/student"
+    - rm -f dist.tgz

@@ -28,6 +28,7 @@ html.default
         link(rel='stylesheet' href='styles/jquery.plupload.queue/css/jquery.plupload.queue.css')
         link(rel='stylesheet' href='node_modules/photoswipe/dist/photoswipe.css')
         link(rel='stylesheet' href='node_modules/photoswipe/dist/default-skin/default-skin.css')
+        link(rel='stylesheet' href='node_modules/video.js/dist/video-js.css')
         # endbuild
 
         # build:css styles/main.css

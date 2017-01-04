@@ -1,11 +1,18 @@
 var D, H, jQuery, app, helpers, oauthOptions, plupload;
 
 oauthOptions = {
-     clientId: 99,
-     provider: 'https://oauth9.zhixueyun.com',
-     returnTo: 'https://dev9.zhixueyun.com'
-
+    clientId: 999,
+    provider: 'https://oauth9.zhixueyun.com/',
+    returnTo: 'https://dev9.zhixueyun.com'
 };
+
+// @ifndef PRODUCTION
+oauthOptions = {
+    clientId: 13,
+    provider: 'https://oauth9.zhixueyun.com',
+    returnTo: 'http://192.168.10.115'
+};
+// @endif
 
 window.$ = window.jQuery = jQuery = require('jquery');
 jQuery.ajaxSetup({ cache: false });
@@ -77,7 +84,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'course', 'activity', 'study-subject', 'exam']
+    routers: ['', 'home', 'study', 'activity', 'exam']
 });
 
 D.PageableModel.setDefault({

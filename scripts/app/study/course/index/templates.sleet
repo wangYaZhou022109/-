@@ -1,0 +1,115 @@
+#!handlebars
+
+module > .course-page
+    .top.top-bg-img.bg-main-color(data-region='top')
+    .main > .container
+        .course-catalog
+            div(data-region='catalog')
+            div(data-region='catalogs')
+        .course-list(data-region='list')
+
+view('top')
+    .container.clearfix
+        .pull-right
+            .search-bar
+                input.input(placeholder='请输入您要找的课程')
+                i.iconfont.icon-search.scale-1.text-hover-main-color
+        .course-tabs > ul
+            li.active(id='item-1') 本公司课程
+            li(id='item-2') 集团课程
+            li(id='item-3') 其他公司课程
+
+view('catalog')
+    .title-row
+        .pull-right > i#openCatalog.iconfont.icon-setting
+        .common-title 课程目录
+    ul > each(menus)
+        li.text-hover-main-color(id='catalog-item-'+id)
+            .item-parent
+                .pull-right > i.iconfont.icon-arrow-up.up + i.iconfont.icon-arrow-down.down
+                .text(title=name) > echo(name)
+            ul.item-child > each(children)
+                li(class='custom-color-2' id='sub-item-'+id) > .text(title=name) > echo(name)
+
+view('catalogs')
+    .catalog-view('hidden') > .catalog-view-box
+        .clearfix.catalog-view-nav
+            i#closeCatalog.pull-right.iconfont.icon-setting
+            h3.active 本公司课程目录全览
+            h3 集团课程目录全揽
+        each(categories)
+            .catalog-view-list
+                h4 > echo(name)
+                .clearfix > each(children)
+                    .level-second.pull-left > echo(name)
+                    .Level-three
+                        .clearfix > each(children)
+                            .Level-three-list
+                                h5 > echo(name)
+                                .level-four > each(children)
+                                    a(href='javascript:;') > echo(name)
+
+view('list')
+    .main-list
+        .filter
+            .pull-left
+                .item
+                    .drop-down-wrapper
+                        .drop-down-btn
+                            | 三级导航
+                            i.iconfont.icon-arrow-down
+                        .drop-down-content > .content
+                            ul
+                                each(state.categories3)
+                                    li > echo(name)
+                .item
+                    .drop-down-wrapper
+                        .drop-down-btn
+                            | 四级导航
+                            i.iconfont.icon-arrow-down
+                        .drop-down-content > .content
+                            ul
+                                each(state.categories4)
+                                    li > echo(name)
+            .pull-right
+                .item#sort-0
+                    | 排序：上架时间
+                    i.iconfont.icon-arrow-up
+
+                .item#sort-1
+                    | 学习人数
+                    i.iconfont.icon-arrow-up
+
+                .item
+                    .drop-down-wrapper.right
+                        .drop-down-btn
+                            | 更多筛选条件
+                            i.iconfont.icon-arrow-down
+                        .drop-down-content > .content
+                            ul
+                                li 更多筛选条件
+                                li 更多筛选条件
+                                li 更多筛选条件
+                                li 更多筛选条件
+                                li 更多筛选条件
+        ul
+            each(courses)
+                li > a.normal(href='#/study/course/detail/'+id) > .content
+                    .img
+                        .img-cont
+                            img(src=img)
+                        .detail-wrapper
+                            p > echo(description)
+                            compare(studyType 'eq' 0)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 开始学习
+                            compare(studyType 'eq' 1)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 继续学习
+                            compare(studyType 'eq' 2)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
+                    .text-overflow.title > echo(name)
+                    .bottom
+                        .item(title='课时') > i.iconfont.icon-time + echo(courseHour) + | 分钟
+                        .item(title='学习人数') > i.iconfont.icon-user + echo(studyMemberCount) + | 人
+                        .item(title='学分') > i.iconfont.icon-star + echo(credit) + | 分
+
+        #pager.pagination
