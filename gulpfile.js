@@ -180,7 +180,7 @@ gulp.task('files', ['clean-build', 'images', 'font'], function() {
         .pipe(gulp.dest('./dist/scripts'));
 });
 
-gulp.task('build', ['clean-build', 'lint', 'sleet', 'common', 'build-main', 'files'], function() {
+gulp.task('build', ['clean-build', 'lint', 'sleet', 'postcss', 'common', 'build-main', 'files'], function() {
     gulp.src('./index.html')
         .pipe(useref())
         .pipe(gulpif('*.js', uglify()))
