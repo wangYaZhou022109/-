@@ -42,7 +42,7 @@ D.ComponentManager.register('pdf', function(view, el, options) {
 
 renderPage = function(pdfjs, el, pageNum, scale) {
     var pdfViewer = pdfjs;
-    pdfViewer.getPage(pageNum).then(function(page) {
+    pdfViewer.getPage(Number(pageNum)).then(function(page) {
         var viewport = page.getViewport(scale),
             canvas = el,
             context = canvas.getContext('2d'),
