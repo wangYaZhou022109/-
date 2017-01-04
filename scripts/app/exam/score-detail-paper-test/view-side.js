@@ -1,7 +1,5 @@
-var $ = require('jquery');
-
 exports.bindings = {
-    state: false,
+    state: true,
     exam: false,
     questionTypes: true
 };
@@ -12,14 +10,14 @@ exports.events = {
 };
 
 exports.handlers = {
-    toggleMore: function(id, e, target) {
+    toggleMore: function(id) {
         this.module.dispatch('changeState', { typeIndex: Number(id) });
-        $(target).find('.min-btn-groups').slideToggle();
-        $(target).siblings().find('.min-btn-groups').slideUp();
+        // $(target).find('.min-btn-groups').slideToggle();
+        // $(target).siblings().find('.min-btn-groups').slideUp();
     },
-    showQuestion: function(id, e, target) {
-        e.preventDefault();
-        $(target).addClass('active').siblings().removeClass('active');
+    showQuestion: function(id) {
+        // e.preventDefault();
+        // $(target).addClass('active').siblings().removeClass('active');
         return this.module.dispatch('changeState', { questionId: id });
     }
 };

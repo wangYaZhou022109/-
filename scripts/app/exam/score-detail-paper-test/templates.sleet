@@ -10,7 +10,7 @@ view('side')
         li(id='list-item-'+ @index)
             .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
-                div(class='list-item' + if(isCurrent 'correct' ''))(id='q-'+id) > echo(i)
+                div(class='list-item' + if(isCurrent 'active' ''))(id='q-'+id) > echo(i)
 
 
 view('head')
@@ -37,13 +37,13 @@ view('main')
                     .h3.m-bottom > echo(data.name '题' '(共' data.totalScore '分)')
                     each(data.data)
                         div(data-dynamic-key=id)
-    .slider-question
-        .item(id='prev')
-            i.iconfont.icon-arrow-left-circle.line
-            i.iconfont.icon-arrow-left-circle-full.full
-        .item(id='next')
-            i.iconfont.icon-arrow-right-circle.line
-            i.iconfont.icon-arrow-right-circle-full.full
+        .slider-question
+            .item(id='prev')
+                i.iconfont.icon-arrow-left-circle.line
+                i.iconfont.icon-arrow-left-circle-full.full
+            .item(id='next')
+                i.iconfont.icon-arrow-right-circle.line
+                i.iconfont.icon-arrow-right-circle-full.full
 
 
 view('tips')
