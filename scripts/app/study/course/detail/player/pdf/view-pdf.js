@@ -10,14 +10,14 @@ exports.components = [
         var section = this.bindings.section.data || {},
             progress = this.bindings.sectionProgress.data || {},
             pageNum = progress.lessonLocation || 1,
-            url = this.bindings.download.getFullUrl() + '?id=' + section.resourceId;
+            url = this.bindings.download.getFullUrl() + '/' + section.resourceId;
         return {
             id: 'viewPdf',
             name: 'picker',
             options: {
                 picker: 'pdf',
                 pdfUrl: url,
-                pageNum: pageNum
+                pageNum: Number(pageNum)
             }
         };
     }
