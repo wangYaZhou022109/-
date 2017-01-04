@@ -121,12 +121,12 @@ exports.store = {
                                 obj[type] = { size: 0, totalScore: 0, name: '', data: [] };
                             }
                             obj[type].size++;
-                            obj[type].totalScore += q.score;
+                            obj[type].totalScore += q.score / 100;
                             obj[type].name = types[Number(q.type) - 1].value;
                             qq = {
                                 id: q.id,
                                 i: obj[type].data.length + 1,
-                                score: q.score,
+                                score: q.score / 100,
                                 isCurrent: false
                             };
                             obj[type].data.push(qq);

@@ -26,6 +26,10 @@ view('main')
     .preview-content
         if(state.isOnePageOneQuestion)
             if(state.questionId)
+                .row
+                .col-xs-6
+                    .com-title.inline-block > echo(state.questionType '(' state.questionIndex '/' state.questionTotalInType ')')
+                    .inline-block > echo('本题分数:' state.currentQuestionScore)
                 div(data-dynamic-key=state.questionId)
         else
             div
@@ -33,6 +37,13 @@ view('main')
                     .h3.m-bottom > echo(data.name '题' '(共' data.totalScore '分)')
                     each(data.data)
                         div(data-dynamic-key=id)
+    .slider-question
+        .item(id='prev')
+            i.iconfont.icon-arrow-left-circle.line
+            i.iconfont.icon-arrow-left-circle-full.full
+        .item(id='next')
+            i.iconfont.icon-arrow-right-circle.line
+            i.iconfont.icon-arrow-right-circle-full.full
 
 
 view('tips')
