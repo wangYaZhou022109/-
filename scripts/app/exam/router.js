@@ -1,31 +1,16 @@
-var $ = require('jquery'),
-    changeToFullScreen;
 
 exports.routes = {
     'index/:id': 'showIndex',
-    'answer-paper': 'showPaper',
+    'answer-paper/:id': 'showAnswerPaperTest',
     'score-detail-paper': 'showScoreDetailPaper',
     'mark-paper': 'showMarkPaper',
     'mark-paper-test': 'showMark2',
     demo: 'showDemo',
-    'answer-paper-test/:id': 'showAnswerPaperTest',
-    'score-detail-paper-test': 'showScore2'
-};
-
-
-exports.interceptors = {
-    'answer-paper-test': 'activeAnswerPaperTest'
-};
-
-exports.activeAnswerPaperTest = function() {
-    changeToFullScreen();
+    'score-detail-paper-test/:id': 'showScore2'
 };
 
 exports.showIndex = function(id) {
     return this.app.show('content', 'exam/index', { id: id });
-};
-exports.showPaper = function() {
-    return this.app.show('content', 'exam/answer-paper');
 };
 exports.showScoreDetailPaper = function() {
     return this.app.show('content', 'exam/score-detail-paper');
@@ -38,15 +23,9 @@ exports.showMark2 = function() {
 };
 
 exports.showAnswerPaperTest = function(id) {
-    return this.app.show('content', 'exam/answer-paper-test', { examId: id });
+    return this.app.show('content', 'exam/answer-paper', { examId: id });
 };
 
-exports.showScore2 = function() {
-    return this.app.show('content', 'exam/score-detail-paper-test');
-};
-
-changeToFullScreen = function() {
-    $('.header').hide();
-    $('.footer').hide();
-    $('.achievement-content').attr('height', '100%');
+exports.showScore2 = function(id) {
+    return this.app.show('content', 'exam/score-detail-paper-test', { examRecordId: id });
 };

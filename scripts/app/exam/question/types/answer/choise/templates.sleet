@@ -23,12 +23,13 @@ view('options') > .answer
                 span.option-num > @echo(code '：')
                 .answer-options > @echo(content)
 
-    if(state.detailMode)
+    if(isShowDetail)
         .show-answer
             .clearfix
-                .pull-left > .common-title > echo('答案：' state.answer)
+                .pull-left > .common-title
+                    if(state.isShowAnswer)
+                        echo('答案：' state.answer)
                 .text-right
-                    span > echo('本题得分：')
-                    span > restoreNumber(state.gainScore 100)
-                    span.layout-ml > echo('本题易错率：')
-                    span > restoreNumber(state.errorRate 10000) > echo('%')
+                    if(state.isShowGainScore)
+                        span > echo('本题得分：' state.gainScore)
+                    span.layout-ml > echo('本题易错率：' state.errorRate '%')

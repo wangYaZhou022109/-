@@ -1,16 +1,12 @@
-var $ = require('jquery');
-
 exports.bindings = {
     activitys: true,
-    params: true
+    params: true,
+    down: true
 };
 
 exports.events = {
     'click category-item-*': 'toggleItem',
-    'click to-activity-*': 'toActivity',
-    'click show-paper-*': 'showPaper',
-    'click score-detail-paper-*': 'showScoreDetailPaper',
-    'click mark-paper': 'showMarkPaper'
+    'click to-activity-*': 'toActivity'
 };
 
 exports.handlers = {
@@ -29,22 +25,22 @@ exports.handlers = {
         } else if (type === '6') {
             this.app.show('content', 'exam/index', { id: id });
         }
-    },
-    showPaper: function(id, e) {
-        var url = $(e.target).attr('href').slice(2);
-        this.app.navigate(url, true);
-    },
-    showScoreDetailPaper: function(id, e) {
-        var url = $(e.target).attr('href').slice(2);
-        this.app.navigate(url, true);
-    },
-    showMarkPaper: function(id, e) {
-        var url = $(e.target).attr('href').slice(2);
-        this.app.navigate(url, true);
     }
 };
 
 exports.dataForTemplate = {
+    activitys: function(data) {
+        var downUrl = this.bindings.down.getFullUrl();
+        var defultImg = 'http://img.ui.cn/data/file/9/1/3/868319.jpg';
+        data.activitys.forEach(function(obj) {
+            var activity = obj || {};
+            activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
+            if (activity.description) {
+                activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
+            }
+        });
+        return data.activitys;
+    },
     type: function() {
         var params = this.bindings.params.data;
         params.types = {};
@@ -62,3 +58,7 @@ exports.dataForTemplate = {
         return params;
     }
 };
+
+exports.components = [{
+    id: 'pager', name: 'pager', options: { model: 'activitys' }
+}];

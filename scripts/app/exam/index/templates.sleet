@@ -8,10 +8,12 @@ module > .exam-page
 
 view('top')
     .exam-page-top
-        .top-bg.img-bg(style='background-image:url(http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif)')
+        #  .top-bg.img-bg(style='background-image:url(http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif)')
+        .top-bg.img-bg(style='background-image:url('+examCoverUrl+')')
         .container.clearfix
             .exam-top-img
-                img(src='http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif')
+                #  img(src='http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif')
+                img(src=examCoverUrl)
             .exam-top-detail
                 .detail-top.clearfix
                     .pull-left > .clearfix
@@ -51,13 +53,17 @@ view('top')
                         compare(handlerBtn 'eq' 'signup')
                             button.btn.white#signup 报名
                         compare(handlerBtn 'eq' 'startExam')
-                            a.btn.white#toExam 进入考试
+                            a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 进入考试
                         compare(handlerBtn 'eq' 'waitReview')
                             button.btn.white 待审核
                         compare(handlerBtn 'eq' 'rejected')
                             button.btn.white 报名失败
                         compare(handlerBtn 'eq' 'prepare')
-                            a.btn.white(href='#/exam/answer-paper-test/' + exam.id target='_blank') 进入考试(灰色)
+                            h3 准备考试
+                        compare(handlerBtn 'eq' 'overExam')
+                            h3 考试结束 活动结束后可查看成绩
+                        compare(handlerBtn 'eq' 'detail')
+                            a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
 
 view('side')
     .page-side > .container

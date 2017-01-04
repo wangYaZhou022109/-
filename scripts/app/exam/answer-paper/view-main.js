@@ -57,7 +57,8 @@ exports.getEntity = function(id) {
     var questionId = id,
         question,
         isCollectCorrect = false,
-        marks = this.bindings.marks;
+        marks = this.bindings.marks,
+        questionTypes = this.bindings.questionTypes;
 
     if (marks.isCollectDynamicView(questionId)) {
         questionId = questionId.replace('collect-correct-', '');
@@ -67,14 +68,15 @@ exports.getEntity = function(id) {
     question = this.bindings.exam.getQuestionById(questionId);
     D.assign(question, {
         questionAttrs: question.questionAttrCopys,
-        isCollectCorrect: isCollectCorrect
+        isCollectCorrect: isCollectCorrect,
+        index: questionTypes.getQuestionIndexInType(questionId)
     });
     return question;
 };
 
 exports.getEntityModuleName = function(id, question) {
     if (this.bindings.marks.isCollectDynamicView(id)) {
-        return 'exam/paper/answer-paper/collect-correct';
+        return 'exam/answer-paper/collect-correct';
     }
     return types.get(question.type, 3);
 };
@@ -93,7 +95,7 @@ exports.dataForEntityModule = function(question) {
             me.bindings.state.calculate();
             return me.module.dispatch('reload');
         },
-        mode: 1
+        mode: undefined
     };
 };
 

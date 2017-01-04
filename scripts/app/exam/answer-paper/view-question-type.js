@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    state: false,
+    state: true,
     exam: false,
     questionTypes: true
 };
@@ -42,7 +42,8 @@ exports.dataForEntityModule = function(data) {
     return {
         data: data,
         callback: function() {
-            me.app.viewport.modal(me.module.items.tips, { message: '交卷时间到' });
+            me.module.dispatch('submit', { submitType: 'Hand' });
+            me.app.viewport.modal(me.module.items.tips, { message: '交卷时间到,你本次考试已被强制交卷' });
         }
     };
 };

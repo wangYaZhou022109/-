@@ -1,27 +1,22 @@
 exports.bindings = {
-    state: false,
+    state: true,
     exam: false
 };
 
-exports.type = 'dynamic';
-
-exports.getEntity = function() {
-    return {
-        endTime: this.bindings.exam.data.endTime,
-        duration: this.bindings.exam.data.duration
-    };
+exports.actions = {
+    'click submit': 'submit'
 };
 
-exports.getEntityModuleName = function() {
-    return 'exam/paper/answer-paper/count-down';
-};
-
-exports.dataForEntityModule = function(data) {
-    var me = this;
-    return {
-        data: data,
-        callback: function() {
-            me.app.viewport.modal(me.module.items.tips, { message: '交卷时间到' });
-        }
-    };
+exports.dataForActions = {
+    submit: function() {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定要提交试卷？';
+            me.app.message.confirm(message, function() {
+                resolve({ submitType: 'Hand' });
+            }, function() {
+                resolve(false);
+            });
+        });
+    }
 };
