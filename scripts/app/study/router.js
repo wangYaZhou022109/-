@@ -3,7 +3,8 @@ exports.routes = {
     'subject/index': 'showSubjectIndex',
     'course/detail/:id': 'showCourseDetail',
     'subject/detail/:id': 'showSubjectDetail',
-    'subject/preview/:config': 'showPreview'
+    'subject/preview/:config': 'showPreview',
+    'task/:id': 'showTask'
 };
 
 exports.showCourseIndex = function() {
@@ -24,4 +25,8 @@ exports.showSubjectDetail = function(id) {
 
 exports.showPreview = function(config) {
     return this.app.show('content', 'study/subject/preview', { config: config });
+};
+
+exports.showTask = function(id) {
+    return this.app.show('content', 'study/task', { id: id });
 };
