@@ -27,21 +27,21 @@ view('player-title')
             .common-title.inline-block > echo(course.name)
             .inline-block
                 .star-wrapper.drop-down-wrapper
-                    .star-bar > .star(style='width:'+course.scorePercent+'%')
+                    .star-bar > .star(style='width:'+score.scorePercent+'%')
                     if(course.addType)
-                        if(course.avgScore)
-                            .num > echo(course.avgScore)
+                        if(score.avgScore)
+                            .num > echo(score.avgScore)
                         else
                             .num > echo('暂无评分')
-                    .drop-down-content > .content
+                    .drop-down-content(class = if(score.hasScore 'hide')) > .content
                         .text-center 我来评分
                         .star-grade
-                            .item(title='1星') > i.iconfont.icon-star-full
-                            .item(title='2星') > i.iconfont.icon-star-full
-                            .item(title='3星') > i.iconfont.icon-star-full
-                            .item(title='4星') > i.iconfont.icon-star-full
-                            .item(title='5星') > i.iconfont.icon-star-full
-                        .block.btn 提交评分
+                            .item(id='star-2' title='1星') > i.iconfont.icon-star-full
+                            .item(id='star-4' title='2星') > i.iconfont.icon-star-full
+                            .item(id='star-6' title='3星') > i.iconfont.icon-star-full
+                            .item(id='star-8' title='4星') > i.iconfont.icon-star-full
+                            .item(id='star-10' title='5星') > i.iconfont.icon-star-full
+                        .block.btn#submit-score 提交评分
         .text-right.share-bar
             .item
                 i.iconfont.icon-share
@@ -72,7 +72,7 @@ view('chapter')
                     compare(../course.addType 'eq' 2)
                         .common-title > echo(seq ': ' name)
                     each(courseChapterSections)
-                        dl.required(class = if(focus 'focus'))
+                        dl.required(class = if(focus 'focus') t='1' id='show-sections'+id)
                             dt
                                 compare(required 'eq' 1)
                                     .required-tag > echo('必修')
@@ -83,11 +83,11 @@ view('chapter')
                                     .item.continue
                                         i.iconfont.icon-reload
                                         span.progress > percent(progress.completedRate)
-                                        span(id='show-section-'+id) > map('course-study-status' progress.finishStatus)
+                                        span > map('course-study-status' progress.finishStatus)
                                 else
                                     .item.continue
                                         i.iconfont.icon-reload
-                                        span(id='show-section-'+id) > map('course-study-status' 0)
+                                        span > map('course-study-status' 0)
                                 .item.record(id='show-record'+id)
                                     i.iconfont.icon-time + | 学习记录
 
@@ -109,7 +109,7 @@ view('note')
                     form
                         textarea.input(name='content') > echo(content)
                         .note-text.text-overflow > echo(content)
-                        .text-tips.sub-text.time 2016-09-09 20:23:34
+                        .text-tips.sub-text.time > dataTime(createTime)
                         .note-btn-group > .text-right
                             .btn.small.white(id='cancel-edit-item-'+i) 取消
                             .btn.small(id='update-note'+id) 保存
@@ -122,10 +122,10 @@ view('info')
         .inline-block.layout-mr > .h3 > echo(course.name)
         .inline-block.layout-mr
             .star-wrapper
-                .star-bar > .star(style='width:'+course.scorePercent+'%')
+                .star-bar > .star(style='width:'+score.scorePercent+'%')
                 if(course.addType)
-                    if(course.avgScore)
-                        .num > echo(course.avgScore)
+                    if(score.avgScore)
+                        .num > echo(score.avgScore)
                     else
                         .num > echo('暂无评分')
         .inline-block.layout-mr
@@ -180,11 +180,5 @@ view('student')
     .h3 最近TA们也学过
     .layout-mt-small.user-picture
         .grid-row
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
-            .col-md-3 > img.block(src='images/2.jpeg')
+            each(lastestUser)
+                .col-md-3 > img.block(src=headPortrait title=fullName)

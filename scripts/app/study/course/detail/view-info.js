@@ -1,6 +1,7 @@
 exports.bindings = {
     course: true,
-    collect: true
+    collect: true,
+    score: true
 };
 
 exports.actions = {
@@ -25,22 +26,5 @@ exports.actionCallbacks = {
         this.module.dispatch('initCollect', { courseId: this.bindings.course.data.id }).then(function() {
             this.app.message.success('取消收藏成功');
         });
-    }
-};
-
-exports.dataForTemplate = {
-    course: function(data) {
-        var course = data.course,
-            avgScore = 0;
-        if (course.id) {
-            if (course.avgScore) {
-                course.scorePercent = course.avgScore;
-                avgScore = course.avgScore / 10;
-                course.avgScore = avgScore.toFixed(1);
-            } else {
-                course.scorePercent = 0;
-            }
-        }
-        return course;
     }
 };

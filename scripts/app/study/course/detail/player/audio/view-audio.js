@@ -65,6 +65,6 @@ exports.audio = {
     ready: function() {
         var sectionProgress = this.bindings.sectionProgress.data || {},
             lessonLocation = sectionProgress.lessonLocation || 0;
-        this.components.waveform.play(lessonLocation); // 加载完成自动播放 。可以注释之后不播放
+        this.components.waveform.play(Number(lessonLocation)); // 加载完成自动播放 。可以注释之后不播放
     }
 };

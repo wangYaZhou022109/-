@@ -1,7 +1,6 @@
-var getAccessTokenFromHash, getAccessTokenFromLocalStorage, _, $, haveReturnedToLogin;
+var getAccessTokenFromHash, getAccessTokenFromLocalStorage, _, $;
 _ = require('lodash/collection');
 $ = require('jquery');
-haveReturnedToLogin = false;
 
 getAccessTokenFromHash = function() {
     var hash = window.location.hash,
@@ -44,11 +43,6 @@ exports.setup = function(app, options) {
             '&redirect_uri=' + encodeURIComponent(returnTo) +
             '&state=' + encodeURIComponent(window.location.hash.slice(1)) + (append || '');
 
-        if (haveReturnedToLogin) {
-            return;
-        }
-
-        haveReturnedToLogin = true;
         window.location = auth + queryString;
     };
 

@@ -1,11 +1,30 @@
+var $ = require('jquery');
+
 exports.bindings = {
     course: true,
-    collect: true
+    collect: true,
+    score: true
+};
+
+
+exports.events = {
+    'click star-*': 'star'
+};
+
+exports.handlers = {
+    star: function(star, e, target) {
+        var score = this.bindings.score;
+        score.data.score = star;
+        $(target).parent().addClass('active');
+        $(target).siblings().removeClass('active');
+        $(target).addClass('active');
+    }
 };
 
 exports.actions = {
     'click collect': 'collect',
-    'click cancel-collect': 'cancelCollect'
+    'click cancel-collect': 'cancelCollect',
+    'click submit-score': 'score'
 };
 
 exports.dataForActions = {
@@ -25,22 +44,16 @@ exports.actionCallbacks = {
         this.module.dispatch('initCollect', { courseId: this.bindings.course.data.id }).then(function() {
             this.app.message.success('取消收藏成功');
         });
+    },
+    score: function(data) {
+        this.module.dispatch('initScore', data[0]).then(function() {
+            this.app.message.success('评分成功');
+        });
     }
 };
 
 exports.dataForTemplate = {
-    course: function(data) {
-        var course = data.course,
-            avgScore = 0;
-        if (course.id) {
-            if (course.avgScore) {
-                course.scorePercent = course.avgScore;
-                avgScore = course.avgScore / 10;
-                course.avgScore = avgScore.toFixed(1);
-            } else {
-                course.scorePercent = 0;
-            }
-        }
-        return course;
+    score: function(data) {
+        return data.score;
     }
 };

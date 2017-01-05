@@ -25,7 +25,8 @@ exports.store = {
         },
         updatePregress: function(payload) {
             var sectionProgress = this.models.sectionProgress,
-                section = this.models.section;
+                section = this.models.section,
+                me = this;
             sectionProgress.clear();
             sectionProgress.set(payload);
             sectionProgress.data.courseId = section.data.courseId;
@@ -34,7 +35,9 @@ exports.store = {
             sectionProgress.data.clientType = 0;
             sectionProgress.data.sectionType = section.data.sectionType;
 
-            this.save(sectionProgress);
+            this.save(sectionProgress).then(function(data) {
+                me.module.renderOptions.refreshProgress.call(me, data[0]);
+            });
         }
     }
 };

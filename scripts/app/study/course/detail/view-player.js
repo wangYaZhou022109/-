@@ -19,6 +19,9 @@ exports.getEntity = function() {
         sectionProgress: this.bindings.sectionProgress.data,
         refresh: function(course) {
             me.module.dispatch('refresh', course);
+        },
+        refreshProgress: function(studyProgress) {
+            me.module.dispatch('refreshProgress', studyProgress);
         }
     };
 };
