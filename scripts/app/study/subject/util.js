@@ -36,7 +36,7 @@ exports.setBtnUrl = function(chapters, type) {
             } else if (sectionType === 3) {
                 section.btnUrl = section.url;
             } else if (sectionType === 8) {
-                section.btnUrl = '#/task/detail/' + section.resourceId;
+                section.btnUrl = '#/study/task/' + section.id;
             }
             section.preview = true;
             if (type === 'preview') {
