@@ -139,7 +139,7 @@ gulp.task('common', function() {
         .pipe(gulp.dest('./bundle'));
 });
 
-gulp.task('build-main', function() {
+gulp.task('build-main', ['sleet', 'postcss'], function() {
     var b = browserify(options);
     requireDrizzleModules('./scripts/app', './scripts', b);
 
