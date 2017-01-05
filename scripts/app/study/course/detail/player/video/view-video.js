@@ -30,17 +30,18 @@ exports.beforeClose = function() {
     var me = this,
         beginTime = me.bindings.time.data,
         endTime = 0,
-        studyTotalTime = this.components.player.getLearnTime(),
-        totalTime = this.components.player.duration(),
-        completedRate = (studyTotalTime / totalTime) * 100,
+        studyTime = this.components.player.getLearnTime() + 0.1,
+        totalTime = this.components.player.duration() + 0.1,
+        progressRate = (studyTime / totalTime) * 100,
         lessonLocation = this.components.player.currentTime();
     return me.module.dispatch('time').then(function(data) {
         endTime = data[0];
         me.module.dispatch('updateProgress', {
             beginTime: beginTime,
             endTime: endTime,
-            studyTotalTime: Math.ceil(studyTotalTime),
-            completedRate: Math.ceil(completedRate),
+            studyTime: Math.ceil(studyTime),
+            resourceTotalTime: Math.ceil(totalTime),
+            progressRate: Math.ceil(progressRate),
             lessonLocation: lessonLocation
         });
     });
