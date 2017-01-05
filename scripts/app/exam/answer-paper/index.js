@@ -63,6 +63,8 @@ exports.store = {
                         data.questionId = q.id;
                     }
                     D.assign(this.data, data);
+                    this.module.store.models.questionTypes.save();
+                    this.save();
                     return true;
                 },
                 setFirstQuestionRemote: function(questionTypes) {
@@ -100,6 +102,7 @@ exports.store = {
             }
         },
         questionTypes: {
+            type: 'localStorage',
             mixin: {
                 createQuestionTypes: function(paper, sort) {
                     var result = [],
@@ -115,12 +118,12 @@ exports.store = {
                                 obj[type] = { size: 0, totalScore: 0, name: '', data: [] };
                             }
                             obj[type].size++;
-                            obj[type].totalScore += q.score;
+                            obj[type].totalScore += q.score / 100;
                             obj[type].name = types[Number(q.type) - 1].value;
                             qq = {
                                 id: q.id,
                                 i: obj[type].data.length + 1,
-                                score: q.score,
+                                score: q.score / 100,
                                 isCurrent: false
                             };
                             obj[type].data.push(qq);
@@ -357,6 +360,7 @@ exports.store = {
             modify.load();
             state.load();
             countDown.load();
+            questionTypes.load();
 
             if (!answer.data) answer.data = { answers: [] };
             if (!modify.data) modify.data = { answers: [], api: {} };
@@ -370,11 +374,13 @@ exports.store = {
 
                 if (!state.data.name) me.models.state.init(exam, payload);
 
-                questionTypes.createQuestionTypes(exam.paper, exam.paperSortRule);
-                questionTypes.setFirstQuestionRemote();
+                if (questionTypes.data.length < 1) {
+                    questionTypes.createQuestionTypes(exam.paper, exam.paperSortRule);
+                    questionTypes.setFirstQuestionRemote();
 
-                me.models.state.getCurrentState(questionTypes.data);
-                me.models.state.setFirstQuestionRemote(questionTypes.data);
+                    me.models.state.getCurrentState(questionTypes.data);
+                    me.models.state.setFirstQuestionRemote(questionTypes.data);
+                }
             });
         },
         reload: function() {
@@ -422,7 +428,7 @@ exports.store = {
                 t = true;
             this.models.answer.save();
             this.models.modify.save();
-            this.models.state.save();
+
             if (payload.submitType !== submitType.Auto) cancel();
             modify.covert(payload);
             this.models.form.set(modify.data.api);
@@ -436,6 +442,7 @@ exports.store = {
                         me.models.modify.clear();
                         me.models.state.clear();
                         me.models.countDown.clear();
+                        me.models.questionTypes.clear();
                         me.app.message.success('交卷成功');
                         closeConnect();
                         window.close();
@@ -466,7 +473,7 @@ exports.afterRender = function() {
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 2) * (1000 * 60);
+                ms = (min + 0) * (1000 * 60);
             return ms;
         },
         random = getRandom(),

@@ -18,5 +18,9 @@
   & a.bar, & a.content{
       color:inherit;
       display: block;
+      text-decoration: none;
+  }
+  & a.btn{
+    text-decoration: none;
   }
 }

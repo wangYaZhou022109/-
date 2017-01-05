@@ -29,6 +29,7 @@ var fs = require('fs'),
 var libs = [
         'jquery', 'handlebars/runtime', 'lodash/collection', 'lodash/object', 'drizzlejs',
         'selectize',
+        'video.js',
         './vendors/alertify',
         './vendors/upload/plupload.min',
         './vendors/upload/jquery.plupload.queue.min',
@@ -77,7 +78,7 @@ var libs = [
     };
 
 gulp.task('postcss', function() {
-    gulp.src([
+    return gulp.src([
             'styles/postcss/main.css'
         ])
         .pipe(postcss([cssimport(), cssnext({
@@ -114,6 +115,13 @@ gulp.task('lint', function() {
         .pipe(eslint.formatEach());
 });
 
+gulp.task('lint-build', function() {
+    return gulp.src(['scripts/**/*.js', '!scripts/vendors/**/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
 gulp.task('common', function() {
     var b = browserify();
     b.require(libs.filter(function(item) { return item.charAt(0) !== '.';}));
@@ -131,7 +139,7 @@ gulp.task('common', function() {
         .pipe(gulp.dest('./bundle'));
 });
 
-gulp.task('build-main', function() {
+gulp.task('build-main', ['sleet', 'postcss'], function() {
     var b = browserify(options);
     requireDrizzleModules('./scripts/app', './scripts', b);
 
@@ -168,18 +176,30 @@ gulp.task('font', ['clean-build'], function() {
         .pipe(gulp.dest('./dist/font'));
 });
 
-gulp.task('files', ['clean-build', 'images', 'font'], function() {
+gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
+    return gulp.src([
+            'node_modules/pdfjs-dist/build/pdf.worker.js'
+        ], {
+            base: 'node_modules/pdfjs-dist/build'
+        })
+        .pipe(gulp.dest('./dist/scripts/pdfjs-dist'));
+});
+
+gulp.task('files', ['clean-build', 'images', 'font', 'pdf-worker'], function() {
     return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
         .pipe(gulp.dest('./dist/scripts'));
 });
 
-gulp.task('build', ['clean-build', 'lint', 'sleet', 'common', 'build-main', 'files'], function() {
+gulp.task('build', ['clean-build', 'lint', 'sleet', 'postcss', 'common', 'build-main', 'files'], function() {
     gulp.src('./index.html')
         .pipe(useref())
+        .pipe(gulpif('*.js', preprocess({context: {
+            PDF_WORKER: 'scripts/pdfjs-dist/'
+        }})))
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', csso()))
         .pipe(gulpif('!index.html', rev()))
-        .pipe(gulpif('index.html', preprocess({context: {ES6PROMISE: 'scripts/es6-promise.js'}})))
+        .pipe(gulpif('index.html', preprocess({context: { ES6PROMISE: 'scripts/es6-promise.js' }})))
         .pipe(revReplace())
         .pipe(gulp.dest('./dist'));
 });
@@ -192,8 +212,8 @@ gulp.task('default', ['main', 'common', 'watch-css'], function() {
     });
     app.use(express.static('.'));
 
-    app.listen(8001, function() {
-        console.log('Server started at http://localhost:8001');
+    app.listen(8002, function() {
+        console.log('Server started at http://localhost:8002');
         console.log('in nginx you can started at http://localhost');
     });
 });
@@ -205,8 +225,8 @@ gulp.task('serve-dist', function() {
     });
     app.use(express.static('./dist'));
 
-    app.listen(8001, function() {
-        console.log('Server started at http://localhost:8001');
+    app.listen(8002, function() {
+        console.log('Server started at http://localhost:8002');
         console.log('in nginx you can started at http://localhost');
     });
 

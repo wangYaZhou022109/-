@@ -3,10 +3,11 @@
         & ul {
             @apply --clearfix;
             margin-right: -var(--bar-gap);
+            display: flex;
+            flex-wrap: wrap;
         }
 
         & li {
-            float: left;
             width: 25%;
             padding-right: var(--bar-gap);
             margin-bottom: var(--bar-gap);

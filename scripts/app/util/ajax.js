@@ -53,8 +53,9 @@ Socket = function(app, prefix) {
 
     this.app = app;
     this.prefix = app.options.urlRoot + '/' + prefix;
-    this.url = url + this.prefix + '/ws-api';
+    this.url = url + this.prefix + '/ws/api';
     this.requests = {};
+    this.lastTime = new Date().getTime();
 
     this.connect();
 };
@@ -66,14 +67,23 @@ D.assign(Socket.prototype, {
         this.socket = new WS(this.url);
 
         this.socket.onmessage = function(e) {
-            var obj = JSON.parse(e.data);
-            obj.content = JSON.parse(obj.content);
+            var obj;
+            if (e.data === 'PANG') {
+                return;
+            }
+
+            obj = JSON.parse(e.data);
+            if (obj.content !== '') {
+                obj.content = JSON.parse(obj.content);
+            }
             me.onMessage(obj);
         };
 
         this.socket.onclose = function(e) {
             if (e.code === 1013) me.connect();
         };
+
+        this.startHeartBeat();
     },
 
     onMessage: function(obj) {
@@ -83,8 +93,8 @@ D.assign(Socket.prototype, {
 
         if (!req) return;
 
-        if (handleError(this.app, status, obj)) {
-            req.reject(obj);
+        if (handleError(this.app, status, obj.content)) {
+            req.reject(obj.content);
             return;
         }
 
@@ -92,7 +102,7 @@ D.assign(Socket.prototype, {
             cache[req.cacheKey] = obj.content;
         }
 
-        req.resolve([obj.content]);
+        req.resolve(obj.content);
         delete this.requests[id];
     },
 
@@ -102,6 +112,33 @@ D.assign(Socket.prototype, {
 
     match: function(url) {
         return this.isActive() && url.indexOf(this.prefix) === 0;
+    },
+
+    startHeartBeat: function() {
+        var me = this;
+        me.stopHeartBeat();
+
+        me.heartBeat = setInterval(function() {
+            var current = new Date().getTime(),
+                delta = current - me.lastTime;
+
+            if (!me.isActive()) {
+                me.stopHeartBeat();
+                return;
+            }
+
+            if (delta > 45000) {
+                me.socket.send('PING');
+                me.lastTime = new Date().getTime();
+            }
+        }, 10000);
+    },
+
+    stopHeartBeat: function() {
+        if (!this.heartBeat) return;
+
+        clearInterval(this.heartBeat);
+        delete this.heartBeat;
     },
 
     send: function(options, model) {
@@ -126,10 +163,11 @@ D.assign(Socket.prototype, {
 
         if (needCache) {
             cacheKey = toCacheKey(options);
-            if (cache[cacheKey]) return model.Promise.resolve([cache[cacheKey]]);
+            if (cache[cacheKey]) return model.Promise.resolve(cache[cacheKey]);
         }
 
         this.socket.send(JSON.stringify(opt));
+        this.lastTime = new Date().getTime();
         timeoutId = setTimeout(function() {
             if (!requests[opt.id]) return;
             requests[opt.id].reject();
