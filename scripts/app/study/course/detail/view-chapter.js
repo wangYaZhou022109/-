@@ -11,7 +11,7 @@ exports.bindings = {
 exports.events = {
     'click note-btn': 'showNote',
     'click toggle-catalog': 'toggleCatalog',
-    'click show-section-*': 'showSection'
+    'click show-sections*': 'showSection'
 };
 
 exports.handlers = {
@@ -28,6 +28,8 @@ exports.handlers = {
             chapter = course.chapters[section.chapterId],
             studyProgress = course.studyProgress,
             sectionType = section.sectionType;
+        // e.stopPropagation();
+        e.preventDefault();
         // 如果点击的是当前节,直接返回
         if (studyProgress.currentSectionId === id && judgeSection(section.sectionType)) {
             return false;
@@ -41,8 +43,13 @@ exports.handlers = {
             return this.app.message.error('该章节必须按顺序学');
         }
         // 设置样式
-        $(element).parents('dl').siblings().removeClass('focus');
-        $(element).parents('dl').addClass('focus');
+        if (element.getAttribute('t')) {
+            $(element).siblings().removeClass('focus');
+            $(element).addClass('focus');
+        } else {
+            $(element).parents('dl').siblings().removeClass('focus');
+            $(element).parents('dl').addClass('focus');
+        }
         // 设置当前章,节
         studyProgress.currentChapterId = chapter.id;
         studyProgress.currentSectionId = section.id;

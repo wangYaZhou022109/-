@@ -40,19 +40,19 @@ exports.beforeClose = function() {
     var me = this,
         beginTime = me.bindings.time.data,
         endTime = 0,
-        studyTotalTime = this.components.waveform.getLearnTime(),
-        totalTime = this.components.waveform.getDuration(),
-        completedRate = Math.ceil((studyTotalTime * 100) / totalTime),
+        studyTime = this.components.waveform.getLearnTime() + 0.1,
+        totalTime = this.components.waveform.getDuration() + 0.1,
+        progressRate = Math.ceil((studyTime * 100) / totalTime),
         lessonLocation = this.components.waveform.getCurrentTime();
 
     return me.module.dispatch('time').then(function(data) {
         endTime = data[0];
-        completedRate = 100;
         me.module.dispatch('updatePregress', {
             beginTime: beginTime,
             endTime: endTime,
-            studyTotalTime: Math.ceil(studyTotalTime),
-            completedRate: completedRate,
+            studyTime: Math.ceil(studyTime),
+            resourceTotalTime: Math.ceil(totalTime),
+            progressRate: progressRate,
             lessonLocation: lessonLocation
         });
     });
@@ -65,6 +65,6 @@ exports.audio = {
     ready: function() {
         var sectionProgress = this.bindings.sectionProgress.data || {},
             lessonLocation = sectionProgress.lessonLocation || 0;
-        this.components.waveform.play(lessonLocation); // 加载完成自动播放 。可以注释之后不播放
+        this.components.waveform.play(Number(lessonLocation)); // 加载完成自动播放 。可以注释之后不播放
     }
 };

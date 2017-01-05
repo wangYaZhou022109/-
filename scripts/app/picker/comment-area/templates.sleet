@@ -14,7 +14,7 @@ view('main')
         .comment-list > ul
             each(comments)
                 li
-                    .user-pic > img(src='images/logo/logo-zxy-1-min.png')
+                    .user-pic > img(src=avatarId)
                     .comment-content
                         .user-info
                             a(href='javascript:;') > echo(memberName)
@@ -41,7 +41,7 @@ view('main')
                             .comment-list.border.top > ul
                                 each(replies)
                                     li
-                                        .user-pic > img(src='images/logo/logo-zxy-1-min.png')
+                                        .user-pic > img(src=avatarId)
                                         .comment-content
                                             .user-info
                                                 a(href='javascript:;') > echo(memberName)

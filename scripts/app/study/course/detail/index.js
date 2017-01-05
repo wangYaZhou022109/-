@@ -48,8 +48,36 @@ exports.store = {
             pageSize: 2,
             root: 'items'
         },
-        download: {
-            url: '../human/file/download'
+        download: { url: '../human/file/download' },
+        lastestUser: {
+            url: '../course-study/course-front/lastest-user',
+            type: 'pageable',
+            pageSize: 8,
+            root: 'items'
+        },
+        score: {
+            url: '../course-study/course-front/score',
+            data: {},
+            mixin: {
+                init: function(data) {
+                    var course = data,
+                        avgScore;
+                    if (course) {
+                        // 判断当前用户是否评分
+                        if (course.courseScore) {
+                            this.data.hasScore = true;
+                        }
+                        if (course.avgScore) {
+                            this.data.scorePercent = course.avgScore;
+                            avgScore = course.avgScore / 10;
+                            this.data.avgScore = avgScore.toFixed(1);
+                        } else {
+                            this.data.scorePercent = 0;
+                        }
+                        this.changed();
+                    }
+                }
+            }
         },
         state: {}
     },
@@ -59,16 +87,20 @@ exports.store = {
                 course = me.models.course,
                 courseRelated = me.models.courseRelated,
                 collect = me.models.collect,
-                notes = me.models.notes;
+                lastestUser = me.models.lastestUser,
+                notes = me.models.notes,
+                score = me.models.score;
             course.set(payload);
             notes.params.courseId = payload.id;
             courseRelated.params.id = payload.id;
             collect.params.businessId = payload.id;
+            lastestUser.params.courseId = payload.id;
             return me.chain(me.get(course).then(function() {
                 me.module.dispatch('refresh', course.data);
+                score.init(course.data);
             }, function() {
-                history.back(-1);
-            }), me.get(notes), me.get(courseRelated), me.get(collect));
+                // this.app.navigate('study/course/index', true);
+            }), me.get(notes), me.get(courseRelated), me.get(lastestUser), me.get(collect));
         },
         refresh: function(payload) {
             var me = this,
@@ -93,6 +125,7 @@ exports.store = {
             if (course.data.register) {
                 if (judgeSection(currentSectionType)) {
                     me.module.dispatch('showSection', { sectionId: studyProgress.currentSectionId });
+                    course.changed();
                 } else {
                     state.data.code = 'default';
                     state.changed();
@@ -101,6 +134,20 @@ exports.store = {
                 state.data.code = 'default';
                 state.changed();
             }
+        },
+        refreshProgress: function(studyProgress) {
+            var course = this.models.course;
+            course.data.progress = [];
+            _.forEach(studyProgress.sectionProgress, function(item) {
+                course.data.progress[item.sectionId] = item;
+            });
+            _.forEach(course.data.courseChapters, function(chapter) {
+                _.forEach(chapter.courseChapterSections, function(section) {
+                    var r = section;
+                    r.progress = course.data.progress[section.id];
+                });
+            });
+            course.changed();
         },
         initNotes: function() {
             var notes = this.models.notes;
@@ -111,6 +158,16 @@ exports.store = {
             collect.clear();
             collect.params.businessId = payload.courseId;
             return this.get(collect);
+        },
+        initScore: function(payload) {
+            var score = this.models.score,
+                avgScore;
+            score.clear();
+            score.data.hasScore = true;
+            score.data.scorePercent = payload.avgScore;
+            avgScore = payload.avgScore / 10;
+            score.data.avgScore = avgScore.toFixed(1);
+            score.changed();
         },
         showSection: function(payload) {
             var section = this.models.section,
@@ -160,9 +217,18 @@ exports.store = {
                 this.models.courseRelated.nextPage();
             }
             return this.get(this.models.courseRelated);
+        },
+        score: function() {
+            var score = this.models.score,
+                course = this.models.course;
+            score.data.businessId = course.data.id;
+            score.data.businessType = 1;
+            return this.save(score);
         }
     }
 };
+
 exports.afterRender = function() {
     return this.dispatch('init', { id: this.renderOptions.id });
 };
+

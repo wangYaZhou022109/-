@@ -120,9 +120,23 @@ exports.actionCallbacks = {
 exports.dataForTemplate = {
     comments: function(data) {
         var pageNum = this.bindings.comments.getPageInfo().page;
-        _.map(data.comments || [], function(comment, i) {
+        _.forEach(data.comments || [], function(comment, i) {
             var r = comment;
             r.i = i + 1 + ((pageNum - 1) * 10);
+
+            if (!r.avatarId) {
+                r.avatarId = 'images/logo/logo-zxy-1-min.png';
+            } else {
+                r.avatarId = '/api/v1/human/file/download?id=' + r.avatarId;
+            }
+            _.forEach(r.replies || [], function(reply) {
+                var rr = reply;
+                if (!rr.avatarId) {
+                    rr.avatarId = 'images/logo/logo-zxy-1-min.png';
+                } else {
+                    rr.avatarId = '/api/v1/human/file/download?id=' + rr.avatarId;
+                }
+            });
         });
         return data.comments;
     }

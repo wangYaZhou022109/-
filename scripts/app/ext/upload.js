@@ -30,7 +30,11 @@ D.ComponentManager.register('uploader', function(view, el, options) {
                     var arr;
                     if (model && result.status === 200) {
                         arr = JSON.parse(result.response);
-                        model.set({ imgId: arr[0].id }, true);
+                        if (options.signle_file) {
+                            model.set({ imgs: arr }, true);
+                        } else {
+                            model.set({ imgId: arr[0].id, imgs: arr }, true);
+                        }
                     }
                 }
             }

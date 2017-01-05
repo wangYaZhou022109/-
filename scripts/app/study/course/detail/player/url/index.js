@@ -5,7 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         section: {},
-        sectionProgress: { url: '../course-study/course-front/progress' },
+        sectionProgress: { url: '../course-study/course-front/submit-progress' },
         time: { url: '../system/setting/time' },
         state: {}
     },
@@ -24,16 +24,21 @@ exports.store = {
         },
         updatePregress: function(payload) {
             var sectionProgress = this.models.sectionProgress,
-                section = this.models.section;
+                section = this.models.section,
+                me = this;
             sectionProgress.clear();
             sectionProgress.set(payload);
             sectionProgress.data.courseId = section.data.courseId;
             sectionProgress.data.sectionId = section.data.id;
             sectionProgress.data.chapterId = section.data.chapterId;
-            sectionProgress.data.clientType = 0;
+            sectionProgress.data.clientType = 0; // pc
             sectionProgress.data.sectionType = section.data.sectionType;
+            sectionProgress.data.finishStatus = 2; // 已完成
+            sectionProgress.data.completedRate = 100; // 已完成
 
-            this.save(sectionProgress);
+            this.save(sectionProgress).then(function(data) {
+                me.module.renderOptions.refreshProgress.call(me, data[0]);
+            });
         }
     }
 };

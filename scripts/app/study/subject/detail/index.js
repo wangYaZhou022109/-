@@ -25,10 +25,12 @@ exports.store = {
             return me.post(register).then(function(data) {
                 var obj = data[0],
                     styles;
-                styles = JSON.parse(obj.styles);
-                state.set({
-                    key: styles.code
-                });
+                if (obj.styles) {
+                    styles = JSON.parse(obj.styles);
+                    state.set({
+                        key: styles.code
+                    });
+                }
                 subject.set(obj);
                 me.models.styles.set(styles);
                 state.changed();
