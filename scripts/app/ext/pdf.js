@@ -11,9 +11,10 @@ D.ComponentManager.register('pdf', function(view, el, options) {
         pdfWorkerPath = '/* @echo PDF_WORKER */';
 
     // @ifndef PDF_WORKER
-    pdfWorkerPath = 'node_modules/pdfjs-dist/build/pdf.worker.js';
+    pdfWorkerPath = 'node_modules/pdfjs-dist/build/';
     // @endif
-    pdf.PDFJS.workerSrc = pdfWorkerPath;
+
+    pdf.PDFJS.workerSrc = pdfWorkerPath + 'pdf.worker.js';
 
     // 获得PDF文件
     pdfApplication = pdf.getDocument(url);
