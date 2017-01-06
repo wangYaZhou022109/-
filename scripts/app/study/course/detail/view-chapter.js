@@ -29,12 +29,17 @@ exports.handlers = {
             studyProgress = course.studyProgress,
             sectionType = section.sectionType;
         // e.stopPropagation();
+        // 首先要判断该课程是否注册,如果没有注册,要为其注册,并且要在注册后更新course数据,刷新页面
+        // 麻烦之处在于如何处理好刷新,不影响正在播放的当前节,让用户感知不到我们做了注册这一动作(待做)
         e.preventDefault();
         // 如果点击的是当前节,直接返回
         if (studyProgress.currentSectionId === id && judgeSection(section.sectionType)) {
             return false;
         }
         // 判断章是否按顺序
+        // 这里按顺序学,要获取上一节的学习进度completeRate,麻烦之处在于,我们更新上一节的进度是在
+        // beforeClose中做的,我们点击这下一节时,上一节的进度可能还没有保存成功,所以可能需要在前端算
+        // completeRate了,(待做)
         if (course.learnSequence === 1 && studyProgress.currentChapterId !== chapter.id) {
             return this.app.message.error('该课程必须按章节顺序学');
         }
