@@ -13,7 +13,6 @@ exports.components = [{
             fluid: true,    // 自动缩放
             // aspectRatio: '840:505' // 自定义比例缩放
         },
-        currentTime: 50
     }
 }];
 
@@ -21,7 +20,6 @@ exports.dataForTemplate = {
     section: function(data) {
         var section = data.section;
         section.url = section.url + '?id=' + section.resourceId;
-
         return section;
     }
 };
