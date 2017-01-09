@@ -23,4 +23,5 @@ deploy-master:
     - gulp build
     - tar -zcf dist.tgz dist
     - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" dev9.zhixueyun.com:8005/frontend/student"
+    - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 218.244.135.195:8005/frontend/student"
     - rm -f dist.tgz
