@@ -284,6 +284,7 @@ exports.store = {
                     temp.push(data);
                     this.data.answers = temp;
                     this.store.models.modify.saveAnswer(data);
+                    this.save();
                 },
                 getAnswer: function(id) {
                     return _.find(this.data.answers, ['key', id]);
@@ -298,6 +299,7 @@ exports.store = {
                     var temp = _.reject(this.data.answers, ['key', data.key]);
                     temp.push(data);
                     this.data.answers = temp;
+                    this.save();
                 },
                 covert: function(data) {
                     this.data.api = {
