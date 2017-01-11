@@ -1,7 +1,7 @@
 var D = require('drizzlejs'),
     _ = require('lodash/collection');
 exports.items = {
-    toolbar: 'toolbar',
+    toolbar: '',
     viewer: 'viewer'
 };
 
@@ -11,10 +11,10 @@ exports.store = {
     },
     callbacks: {
         init: function(options) {
-            this.models.state.set(D.assign({}, {
+            this.models.state.set(D.assign({}, options, {
                 pageNum: 1,
                 scale: 1
-            }, options));
+            }));
         },
         updatePage: function(payload) {
             var state = this.models.state;
@@ -49,11 +49,4 @@ exports.store = {
 
 exports.beforeRender = function() {
     this.dispatch('init', this.renderOptions);
-};
-
-exports.mixin = {
-    getData: function() {
-        var pdf = this.items.viewer.components.viewPdf;
-        return pdf;
-    }
 };

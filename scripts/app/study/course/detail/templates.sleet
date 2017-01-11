@@ -8,7 +8,7 @@ module > .course-detail-page
                 .course-note(data-region='note')
             .player-wrapper
                 .player-title-row(data-region='player-title')
-                .player-content(data-region='player' style='overflow:auto;')
+                .player-content(data-region='player' style='overflow:auto;position:relative;')
     .page-main-wrapper
         .side
             .page-side > .container
@@ -134,7 +134,7 @@ view('info')
                 i#cancel-collect.iconfont.icon-favorite-full(data-name='id' data-value=collect.id)
             else
                 i#collect.iconfont.icon-favorite
-                
+
     .sub-title-row.layout-mb-small.layout-mt-small
         .inline-block.layout-mr > echo('课时: ' course.courseHour)
         .inline-block.layout-mr > echo('学分: ' course.credit)

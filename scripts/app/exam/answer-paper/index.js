@@ -143,6 +143,9 @@ exports.store = {
                     var questionTypes = this.data,
                         state = this.store.models.state,
                         questionType = _.find(questionTypes, ['isCurrent', true]),
+                        typeIndex = questionTypes.findIndex(function(qt) {
+                            return qt.isCurrent === true;
+                        }),
                         questions, q, z;
                     if (questionType) {
                         questions = questionType.data.data;
@@ -152,9 +155,34 @@ exports.store = {
                             questions[z].isCurrent = true;
                             state.data.questionId = questions[z].id;
                             questions[q.i - 1].isCurrent = false;
-                        } else {
-                            this.app.message.error('已超出该类型题目范围');
-                            return false;
+                        } else if (index > 0 && questionTypes[typeIndex + 1]) {
+                            if (questionTypes[typeIndex + 1]) {
+                                questionTypes[typeIndex].isCurrent = false;
+                                questionTypes[typeIndex + 1].isCurrent = true;
+                                questionType = questionTypes[typeIndex + 1];
+                                questions = questionType.data.data;
+                                questions.forEach(function(question) {
+                                    var qq = question;
+                                    qq.isCurrent = false;
+                                });
+                                questions[0].isCurrent = true;
+                            } else {
+                                this.module.store.models.state.data.disableNext = true;
+                            }
+                        } else if (index < 0 && questionTypes[typeIndex - 1]) {
+                            if (questionTypes[typeIndex - 1]) {
+                                questionTypes[typeIndex].isCurrent = false;
+                                questionTypes[typeIndex - 1].isCurrent = true;
+                                questionType = questionTypes[typeIndex - 1];
+                                questions = questionType.data.data;
+                                questions.forEach(function(question) {
+                                    var qq = question;
+                                    qq.isCurrent = false;
+                                });
+                                questions[questions.length - 1].isCurrent = true;
+                            } else {
+                                this.module.store.models.state.data.disablePrev = true;
+                            }
                         }
                     }
                     return this.store.models.state.getCurrentState(questionTypes);
@@ -284,6 +312,7 @@ exports.store = {
                     temp.push(data);
                     this.data.answers = temp;
                     this.store.models.modify.saveAnswer(data);
+                    this.save();
                 },
                 getAnswer: function(id) {
                     return _.find(this.data.answers, ['key', id]);
@@ -298,6 +327,7 @@ exports.store = {
                     var temp = _.reject(this.data.answers, ['key', data.key]);
                     temp.push(data);
                     this.data.answers = temp;
+                    this.save();
                 },
                 covert: function(data) {
                     this.data.api = {

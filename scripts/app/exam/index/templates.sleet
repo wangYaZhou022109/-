@@ -37,7 +37,7 @@ view('top')
                             br
                             p.small-font 考试时长
                         li > div
-                            h3
+                            h3 > echo(totalScore '分')
                             br
                             p.small-font 总分
                         li > div
@@ -52,6 +52,8 @@ view('top')
                     .pull-right
                         compare(handlerBtn 'eq' 'signup')
                             button.btn.white#signup 报名
+                        compare(handlerBtn 'eq' 'disableSignup')
+                            button.btn.white 报名结束
                         compare(handlerBtn 'eq' 'startExam')
                             a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 进入考试
                         compare(handlerBtn 'eq' 'waitReview')

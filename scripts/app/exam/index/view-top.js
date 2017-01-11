@@ -47,13 +47,22 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
+    totalScore: function() {
+        var exam = this.bindings.exam.data;
+        if (exam && exam.paperClass && exam.paperClass.totalScore) {
+            return exam.paperClass.totalScore / 100;
+        }
+        return '';
+    },
     handlerBtn: function() {
         var exam = this.bindings.exam.data,
             currentTime = new Date().getTime(),
             result = '';
         if (exam.type && exam.type === 1) {
-            if (!exam.signUp || !exam.signUp.status) {
+            if ((!exam.signUp || !exam.signUp.status) && currentTime < exam.applicantEndTime) {
                 result = 'signup';
+            } else if ((!exam.signUp || !exam.signUp.status) && currentTime >= exam.applicantEndTime) {
+                result = 'disableSignup';
             } else if (currentTime >= exam.startTime && currentTime < exam.endTime) {
                 if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
                     result = 'detail';
