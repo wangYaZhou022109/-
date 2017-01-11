@@ -8,14 +8,21 @@ exports.components = [function() {
     var me = this,
         state = me.bindings.state.data;
     return {
-        id: 'viewPdf',
+        id: 'viewerContainer',
         name: 'pdf',
         options: {
             url: state.pdfUrl,
             pageNum: state.pageNum,
             scale: state.scale,
-            callback: function(data) {
-                progressBar(me, data);
+            callbacks: {
+                updateProgress: function(data) {
+                    progressBar(me, data);
+                },
+                updatePage: function(data) {
+                    me.module.dispatch('updatePage', {
+                        pageNum: data
+                    });
+                }
             }
         }
     };
@@ -23,10 +30,10 @@ exports.components = [function() {
 
 
 exports.afterRender = function() {
-    var pdf = this.components.viewPdf;
+    var viewer = this.components.viewerContainer;
     this.module.dispatch('updatePage', {
-        pageCount: pdf.numPages,
-        pageNum: pdf.pageNum
+        pageCount: viewer.numPages,
+        pageNum: viewer.currentPageNumber
     });
 };
 
@@ -35,6 +42,7 @@ progressBar = function(view, loadNum) {
         loadLabel = view.$('progressLabel'),
         loadProgress = view.$('progress');
     if (loadNum < 100) {
+        loadProgress.style.display = 'block';
         loadLabel.innerText = loadingText;
         loadProgress.style.width = loadingText;
     } else {

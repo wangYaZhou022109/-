@@ -1,26 +1,30 @@
 #! handlebars
-module
-    div(data-region='viewer')
+module > .clearfix > .col-sm-12.bg-white.m-top
     div(data-region='toolbar')
+    div(data-region='viewer')
 
 view('toolbar')
-    .row
-        label#turnToPage-prev 上一页
-        label#turnToPage-next 下一页
-        input#currentPageNum(style='width:50px;'value=state.pageNum)
-        echo('/')
-        label#pageCount > echo(state.pageCount)
-        .btn#zoom-out -
-        .btn#zoom-in +
-        select(style='width:100px;' id='scaleSelect')
-            each(pdfScale)
-                option(value = key)('selected')&if(selected) > echo(value)
+    .pdf-view-toolbar
+        .clearfix.border.bottom
+            .pull-left.m-top.m-bottom
+                .inline-block.pe-7s-angle-left-circle.pe-2x.m-right#turnToPage-prev
+                .inline-block.pe-7s-angle-right-circle.pe-2x#turnToPage-next
+                .inline-block.m-left
+                    input.input.min-input.inline-block#currentPageNum(value=state.pageNum)
+                    echo('/')
+                    label.inline-block#pageCount > echo(state.pageCount)
+            .pull-right.m-top.m-bottom
+                .inline-block
+                    .pe-7s-less.pe-2x.inline-block#zoom-out
+                    .pe-7s-less.plus.pe-2x.inline-block.m-left#zoom-in
+                .inline-block.m-left
+                    select.input.min-input(id='scaleSelect')
+                        each(pdfScale)
+                            option(value = key)('selected')&if(selected) > echo(value)
 view('viewer')
-    .row
-    .hr
-        .row
-            #progress.btn
-            .br
+    .row.m-top
+        .col-sm-12
+            #progress.btn(style='display:none;')
             label#progressLabel
-        .row > .text-center
-            canvas#viewPdf
+    .row > .col-sm-12#viewerContainer(style='overflow:auto;position:absolute;width:100%;height:800px;')
+        .pdfViewer#viewer

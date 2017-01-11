@@ -16,7 +16,7 @@ html.default
             # build:js scripts/ie.js
             script(src='node_modules/es5-shim/es5-shim.js')
             # endbuild
-            
+
         link(rel='stylesheet' href='//at.alicdn.com/t/font_e8avii9o04oq1tt9.css')
 
         # build:css styles/common.css
@@ -30,6 +30,7 @@ html.default
         link(rel='stylesheet' href='node_modules/photoswipe/dist/photoswipe.css')
         link(rel='stylesheet' href='node_modules/photoswipe/dist/default-skin/default-skin.css')
         link(rel='stylesheet' href='node_modules/video.js/dist/video-js.css')
+        link(rel='stylesheet' href='node_modules/pdfjs-dist/web/pdf_viewer.css')
         # endbuild
 
         # build:css styles/main.css
