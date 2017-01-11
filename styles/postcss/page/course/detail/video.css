@@ -1,12 +1,25 @@
 /*tianjun  video use */
 
-.vjs-skin-hotdog-stand .vjs-progress-holder { height: 20px; }
-.vjs-skin-hotdog-stand .vjs-progress-holder .vjs-play-progress { 
-    height: 20px;
+.vjs-skin-hotdog-stand {
+    & .vjs-progress-holder { 
+        height: 20px;
+        
+        & .vjs-play-progress { 
+            height: 20px;
+        }
+        & .vjs-play-progress:before {
+            display: none
+        }
+    }
+    & .vjs-progress-holder {
+        & .vjs-load-progress div {
+            height: 18px;
+        }
+    }
+    & .vjs-progress-control {
+        & .vjs-mouse-display {
+            width: 0px;
+        }
+    }
 }
-.vjs-skin-hotdog-stand .vjs-play-progress:before {
-    display: none
-}
-.vjs-skin-hotdog-stand .vjs-progress-holder .vjs-load-progress div {
-    height: 18px;
-}
+

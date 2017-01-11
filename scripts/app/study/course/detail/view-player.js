@@ -1,31 +1,35 @@
+var util = require('./app/study/course/course-util');
 exports.type = 'dynamic';
 
 exports.bindings = {
     course: false,
     state: true,
-    section: true,
-    sectionProgress: true
 };
 
-exports.getEntityModuleName = function(key) {
-    return 'study/course/detail/player/' + key;
+exports.getEntity = function(key) {
+    if (!key) return null;
+    return this.bindings.course.findSection(key);
 };
 
-exports.getEntity = function() {
-    var me = this;
-    return {
-        course: this.bindings.course.data,
-        section: this.bindings.section.data,
-        sectionProgress: this.bindings.sectionProgress.data,
-        refresh: function(course) {
-            me.module.dispatch('refresh', course);
-        },
-        refreshProgress: function(studyProgress) {
-            me.module.dispatch('refreshProgress', studyProgress);
-        }
-    };
+exports.getEntityModuleName = function(key, entity) {
+    var code = 'default';
+    if (entity) code = util.sectionCode[entity.sectionType];
+    if (!code) code = 'default';
+
+    return 'study/course/detail/player/' + code;
 };
 
 exports.dataForEntityModule = function(entity) {
-    return entity;
+    var me = this;
+    return {
+        state: this.bindings.state.data,
+        section: entity,
+        // refresh: function(course) { me.module.dispatch('refresh', course); },
+        callback: function() {
+            me.module.dispatch('initCourse');
+        },
+        register: function() {
+            me.module.dispatch('register');
+        }
+    };
 };
