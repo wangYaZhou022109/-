@@ -34,8 +34,8 @@ exports.store = {
             sectionProgress.data.finishStatus = 2; // 已完成
             sectionProgress.data.completedRate = 100; // 已完成
 
-            this.save(sectionProgress).then(function(data) {
-                me.module.renderOptions.refreshProgress.call(me, data[0]);
+            this.save(sectionProgress).then(function() {
+                me.module.renderOptions.callback();
             });
         }
     }

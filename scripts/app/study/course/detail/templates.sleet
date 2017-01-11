@@ -56,8 +56,7 @@ view('player-title')
                     span 收藏
 
 view('player')
-    if(state.code)
-        div(data-dynamic-key=state.code)
+    div(data-dynamic-key=state.sectionId)
 
 view('chapter')
     .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right
@@ -72,7 +71,7 @@ view('chapter')
                     compare(../course.addType 'eq' 2)
                         .common-title > echo(seq ': ' name)
                     each(courseChapterSections)
-                        dl.required(class = if(focus 'focus') t='1' id='show-sections'+id)
+                        dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType data-chapter-learnSequence = ./learnSequence)
                             dt
                                 compare(required 'eq' 1)
                                     .required-tag > echo('必修')

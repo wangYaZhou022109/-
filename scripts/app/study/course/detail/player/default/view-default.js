@@ -1,13 +1,22 @@
 exports.bindings = {
-    course: true
+    state: false
 };
 
-exports.actions = {
+exports.events = {
     'click register': 'register'
 };
 
-exports.actionCallbacks = {
-    register: function(data) {
-        this.module.renderOptions.refresh.call(this, data[0]);
+exports.handlers = {
+    register: function() {
+        this.module.renderOptions.register();
+    }
+};
+
+exports.dataForTemplate = {
+    loading: function(data) {
+        if (!data.state.state.id) { // 如果课程未加载完毕
+            return true;
+        }
+        return false;
     }
 };

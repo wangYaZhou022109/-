@@ -1,7 +1,6 @@
 var _ = require('lodash/collection'),
-    util = require('./app/study/course/course-util'),
-    judgeSection = util.judgeSection,
-    sectionCode = util.sectionCode;
+    D = require('drizzlejs'),
+    util = require('./app/study/course/course-util');
 exports.items = {
     player: 'player',
     'player-title': 'player-title',
@@ -20,41 +19,29 @@ exports.store = {
         course: {
             url: '../course-study/course-front',
             mixin: {
-                init: function() {
-                    var chapters = {},
-                        sections = {},
-                        progress = {};
-                    _.forEach(this.data.courseChapters, function(item) {
-                        chapters[item.id] = item;
-                        _.forEach(item.courseChapterSections, function(r) {
-                            sections[r.id] = r;
-                            progress[r.id] = r.progress;
-                        });
-                    });
-                    this.data.chapters = chapters;
-                    this.data.sections = sections;
-                    this.data.progress = progress;
+                findChapter: function(chapterId) {
+                    return _.find(this.data.courseChapters, { id: chapterId });
+                },
+                findSection: function(sectionId) {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { id: sectionId });
+                },
+                findFirstSection: function() {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.flatMap(this.data.courseChapters, duplicate)[0];
                 }
             }
         },
         section: {},
         sectionProgress: {},
+        // 注册课程
+        register: { url: '../course-study/course-front/register' },
         note: { url: '../course-study/course-front/course-note' },
         notes: { url: '../course-study/course-front/course-notes' },
         collect: { url: '../system/collect' },
-        courseRelated: {
-            url: '../course-study/course-front/related',
-            type: 'pageable',
-            pageSize: 2,
-            root: 'items'
-        },
+        courseRelated: { url: '../course-study/course-front/related', type: 'pageable', pageSize: 2, root: 'items' },
         download: { url: '../human/file/download' },
-        lastestUser: {
-            url: '../course-study/course-front/lastest-user',
-            type: 'pageable',
-            pageSize: 8,
-            root: 'items'
-        },
+        lastestUser: { url: '../course-study/course-front/lastest-user', type: 'pageable', pageSize: 8, root: 'items' },
         score: {
             url: '../course-study/course-front/score',
             data: {},
@@ -83,24 +70,44 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var me = this,
-                course = me.models.course,
-                courseRelated = me.models.courseRelated,
-                collect = me.models.collect,
-                lastestUser = me.models.lastestUser,
-                notes = me.models.notes,
-                score = me.models.score;
+            // 初始化当前课程
+            var course = this.models.course,
+                // score = this.models.score,
+                courseRelated = this.models.courseRelated,
+                notes = this.models.notes,
+                lastestUser = this.models.lastestUser,
+                collect = this.models.collect,
+                state = this.models.state;
             course.set(payload);
-            notes.params.courseId = payload.id;
-            courseRelated.params.id = payload.id;
-            collect.params.businessId = payload.id;
-            lastestUser.params.courseId = payload.id;
-            return me.chain(me.get(course).then(function() {
-                me.module.dispatch('refresh', course.data);
-                score.init(course.data);
-            }, function() {
-                // this.app.navigate('study/course/index', true);
-            }), me.get(notes), me.get(courseRelated), me.get(lastestUser), me.get(collect));
+            courseRelated.params = payload;
+            notes.params = { courseId: payload.id };
+            lastestUser.params = { courseId: payload.id };
+            collect.params = { businessId: payload.id };
+
+            this.chain([
+                this.get(course).then(function(c) {
+                    var sectionId = null;
+                    if (c[0].studyProgress && c[0].studyProgress.currentSectionId) {
+                        sectionId = c[0].studyProgress.currentSectionId;
+                    }
+                    state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
+                }),
+                this.get(courseRelated),
+                this.get(lastestUser),
+                this.get(collect),
+                this.get(notes)
+            ]);
+        },
+        initScore: function(payload) {
+            // 初始化评分
+            var score = this.models.score,
+                avgScore;
+            score.clear();
+            score.data.hasScore = true;
+            score.data.scorePercent = payload.avgScore;
+            avgScore = payload.avgScore / 10;
+            score.data.avgScore = avgScore.toFixed(1);
+            score.changed();
         },
         refresh: function(payload) {
             var me = this,
@@ -116,14 +123,14 @@ exports.store = {
                 studyProgress.currentChapterId = course.data.courseChapters[0].id;
                 studyProgress.currentSectionId = course.data.courseChapters[0].courseChapterSections[0].id;
             } else if (!studyProgress.currentSectionId) {
-                // eslint-disable-next-line max-len
-                studyProgress.currentSectionId = course.data.courseChapters[studyProgress.currentChapterId].courseChapterSections[0].id;
+                studyProgress.currentSectionId = course.data.courseChapters[studyProgress.currentChapterId]
+                .courseChapterSections[0].id;
             }
             course.data.studyProgress = studyProgress;
             currentSectionType = course.data.sections[studyProgress.currentSectionId].sectionType;
 
             if (course.data.register) {
-                if (judgeSection(currentSectionType)) {
+                if (util.judgeSection(currentSectionType)) {
                     me.module.dispatch('showSection', { sectionId: studyProgress.currentSectionId });
                     course.changed();
                 } else {
@@ -135,48 +142,15 @@ exports.store = {
                 state.changed();
             }
         },
-        refreshProgress: function(studyProgress) {
-            var course = this.models.course;
-            course.data.progress = [];
-            _.forEach(studyProgress.sectionProgress, function(item) {
-                course.data.progress[item.sectionId] = item;
-            });
-            _.forEach(course.data.courseChapters, function(chapter) {
-                _.forEach(chapter.courseChapterSections, function(section) {
-                    var r = section;
-                    r.progress = course.data.progress[section.id];
-                });
-            });
-            course.changed();
-        },
-        initNotes: function() {
-            var notes = this.models.notes;
-            return this.get(notes);
-        },
-        initCollect: function(payload) {
-            var collect = this.models.collect;
-            collect.clear();
-            collect.params.businessId = payload.courseId;
-            return this.get(collect);
-        },
-        initScore: function(payload) {
-            var score = this.models.score,
-                avgScore;
-            score.clear();
-            score.data.hasScore = true;
-            score.data.scorePercent = payload.avgScore;
-            avgScore = payload.avgScore / 10;
-            score.data.avgScore = avgScore.toFixed(1);
-            score.changed();
+        initCourse: function() {
+            var course = this.models.course,
+                state = this.models.state;
+            course.set({ id: state.data.id });
+            return this.get(course);
         },
         showSection: function(payload) {
-            var section = this.models.section,
-                sectionProgress = this.models.sectionProgress,
-                state = this.models.state,
-                course = this.models.course;
-            section.set(course.data.sections[payload.sectionId]);
-            sectionProgress.set(course.data.progress[payload.sectionId]);
-            state.data.code = sectionCode[section.data.sectionType];
+            var state = this.models.state;
+            state.data.sectionId = payload.sectionId;
             state.changed();
         },
         collect: function() {
@@ -219,16 +193,44 @@ exports.store = {
             return this.get(this.models.courseRelated);
         },
         score: function() {
+            // 评分
             var score = this.models.score,
                 course = this.models.course;
             score.data.businessId = course.data.id;
             score.data.businessType = 1;
             return this.save(score);
+        },
+        register: function(payload) {
+            var courseId = this.models.state.data.id,
+                model = this.models.register,
+                course = this.models.course,
+                state = this.models.state,
+                sectionId;
+            if (payload && payload.sectionId) {
+                sectionId = payload.sectionId;
+            } else {
+                sectionId = course.findFirstSection().id;
+            }
+            model.set({ courseId: courseId });
+            // 注册完毕自动播放第一章或者指定的章节
+            this.chain(
+                this.post(model), [
+                    function() {
+                        this.app.message.alert('注册完毕，开始刷新课程');
+                        course.get({ id: state.data.id }); // 刷新课程
+                        this.get(course);
+                    },
+                    function() {
+                        this.app.message.alert('注册完毕，开始播放课程');
+                        D.assign(state.data, { sectionId: sectionId, register: true });
+                        state.changed(); // 改变播放
+                    }
+                ]
+            );
         }
     }
 };
 
-exports.afterRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.id });
+exports.beforeRender = function() {
+    this.dispatch('init', { id: this.renderOptions.id });
 };
-

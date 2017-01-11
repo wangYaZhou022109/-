@@ -33,7 +33,7 @@ exports.store = {
             search.set({ type: 0 });
             categories.params = options;
             courses.params = search.data;
-            return this.chain([this.get(categories), this.get(courses)]);
+            return this.chain([this.get(courses), this.get(categories)]);
         },
         selectMenu2: function(payload) {
             var categories3 = this.models.categories.filterPid(payload.id);
