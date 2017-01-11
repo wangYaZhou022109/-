@@ -50,3 +50,10 @@ exports.store = {
 exports.beforeRender = function() {
     this.dispatch('init', this.renderOptions);
 };
+
+exports.mixin = {
+    getData: function() {
+        var pdf = this.items.viewer.components.viewerContainer;
+        return { pageNum: pdf.currentPageNumber };
+    }
+};
