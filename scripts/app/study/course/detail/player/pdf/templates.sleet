@@ -4,4 +4,4 @@ module
     div(data-region='pdf')
 
 view('pdf')
-    .row > #viewPdf
+    #viewPdf

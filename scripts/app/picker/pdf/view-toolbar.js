@@ -35,7 +35,7 @@ exports.events = {
 
 exports.handlers = {
     turnToPage: function(flag) {
-        var pdf = this.module.items.viewer.components.viewPdf,
+        var pdf = this.module.items.viewer.components.viewerContainer,
             state = this.bindings.state.data || {},
             page = 1,
             me = this;
@@ -49,7 +49,7 @@ exports.handlers = {
         pdf.reset(state);
     },
     currentPageNum: function(payload, el) {
-        var pdf = this.module.items.viewer.components.viewPdf,
+        var pdf = this.module.items.viewer.components.viewerContainer,
             state = this.bindings.state.data || {},
             page = 1,
             me = this;
@@ -65,13 +65,13 @@ exports.handlers = {
         pdf.reset(state);
     },
     scaleSelect: function(events, el) {
-        var pdf = this.module.items.viewer.components.viewPdf,
+        var pdf = this.module.items.viewer.components.viewerContainer,
             state = this.bindings.state.data;
         state.scale = el.value;
         pdf.reset(state);
     },
     zoomInOut: function(data) {
-        var pdf = this.module.items.viewer.components.viewPdf,
+        var pdf = this.module.items.viewer.components.viewerContainer,
             payload = {
                 type: data,
                 currentScale: this.components.scaleSelect.items[0],
