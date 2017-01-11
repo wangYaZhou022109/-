@@ -216,12 +216,12 @@ exports.store = {
             this.chain(
                 this.post(model), [
                     function() {
-                        this.app.message.alert('注册完毕，开始刷新课程');
+                        // this.app.message.alert('注册完毕，开始刷新课程');
                         course.get({ id: state.data.id }); // 刷新课程
                         this.get(course);
                     },
                     function() {
-                        this.app.message.alert('注册完毕，开始播放课程');
+                        // this.app.message.alert('注册完毕，开始播放课程');
                         D.assign(state.data, { sectionId: sectionId, register: true });
                         state.changed(); // 改变播放
                     }
