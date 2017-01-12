@@ -14,23 +14,23 @@ view('top')
 view('list')
     .main-list
         .filter
-            .item.inline-block#order-1
+            .item.inline-block#order-0
                 string('the.latest')
-                compare(search.orderBy 'eq' '1')
-                    compare(search.order 'eq' 2)
-                        i.iconfont.icon-arrow-down.down
-                    compare(search.order 'eq' 1)
-                        i.iconfont.icon-arrow-up.up
-            .item.inline-block#order-3
-                string('the.high.praise')
-                compare(search.orderBy 'eq' '3')
+                compare(search.orderBy 'eq' '0')
                     compare(search.order 'eq' 2)
                         i.iconfont.icon-arrow-down.down
                     compare(search.order 'eq' 1)
                         i.iconfont.icon-arrow-up.up
             .item.inline-block#order-2
-                string('the.hottest')
+                string('the.high.praise')
                 compare(search.orderBy 'eq' '2')
+                    compare(search.order 'eq' 2)
+                        i.iconfont.icon-arrow-down.down
+                    compare(search.order 'eq' 1)
+                        i.iconfont.icon-arrow-up.up
+            .item.inline-block#order-1
+                string('the.hottest')
+                compare(search.orderBy 'eq' '1')
                     compare(search.order 'eq' 2)
                         i.iconfont.icon-arrow-down
                     compare(search.order 'eq' 1)
