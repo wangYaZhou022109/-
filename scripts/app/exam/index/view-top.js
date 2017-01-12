@@ -1,4 +1,4 @@
-var remoteBackGround = 'http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif';
+var remoteBackGround = 'images/default-cover/default_exam.jpg';
 
 exports.bindings = {
     exam: true,

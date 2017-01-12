@@ -30,9 +30,9 @@
 
         & .dismiss {
             position: absolute;
-            top: var(--font-size4);
-            right: calc(var(--font-size1) + var(--font-size2));
-            font-size: var(--font-size4);
+            top: var(--space);
+            right: calc(var(--large-space) + var(--space));
+            font-size: var(--font-size);
         }
 
         & form {
@@ -48,7 +48,7 @@
             max-height: 412px;
             border: 1px solid transparent;
             overflow: auto;
-            padding: calc(var(--font-size1) / 2);
+            padding: calc(var(--font-size) / 2);
         }
 
         & .dialog-header .hr {
@@ -62,7 +62,7 @@
             height: 80%;
 
             & .btn:not(:last-child) {
-                margin-right: var(--font-size4);
+                margin-right: var(--font-size);
             }
         }
 
@@ -73,8 +73,8 @@
     }
     & .preview-content {
         border: 1px solid transparent;
-        padding: var(--font-size1);
-        margin: var(--font-size1) 0;
+        padding: var(--font-size);
+        margin: var(--font-size) 0;
 
         & .answer {
             border: none;
@@ -113,24 +113,24 @@
 
     & .container {
         overflow-y: auto;
-        padding: var(--font-size4) calc(var(--font-size1) + var(--font-size2));
+        padding: var(--font-size) calc(var(--font-size) + var(--font-size));
     }
 
     & .dismiss {
         position: absolute;
-        top: var(--font-size4);
-        right: var(--font-size4);
-        font-size: var(--font-size4);
+        top: var(--font-size);
+        right: var(--font-size);
+        font-size: var(--font-size);
         z-index: 10;
     }
 
     & .dialog-footer {
         text-align: right;
         width: 100%;
-        margin-top: calc(var(--font-size1) + var(--font-size2));
+        margin-top: calc(var(--font-size) + var(--font-size));
 
         & .btn:not(:last-child) {
-            margin-right: var(--font-size4);
+            margin-right: var(--font-size);
         }
     }
 
@@ -163,7 +163,7 @@
     padding-bottom: 1px;
 
     & > .title {
-            margin-top: var(--font-size1);
+            margin-top: var(--font-size);
 
             &::after {
                 content:'';
@@ -184,24 +184,23 @@
             & .addon {
                 position: relative;
                 float: right;
-                top:  -calc(var(--input-height) + 0);
-                line-height: calc(var(--input-height) - 4);
+
             }
             & .btn{
                 padding: 1px 8px;
             }
 
             & .buttons {
-                height: var(--font-size6);
-                width: calc(var(--font-size6) * 1);
+                height: var(--font-size);
+                width: calc(var(--font-size) * 1);
                 display: inline-block;
                 vertical-align: middle;
                 text-align: center;
             }
 
             & i {
-                line-height: var(--font-size6);
-                font-size: var(--font-size2);
+                line-height: var(--font-size);
+                font-size: var(--font-size);
             }
         }
     }
@@ -222,7 +221,5 @@
         overflow: auto;
         height: 100%;
     }
-
-
 
 }
