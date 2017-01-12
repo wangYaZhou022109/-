@@ -1,6 +1,5 @@
 var _ = require('lodash/collection'),
-    D = require('drizzlejs'),
-    util = require('./app/study/course/course-util');
+    D = require('drizzlejs');
 exports.items = {
     player: 'player',
     'player-title': 'player-title',
@@ -87,9 +86,7 @@ exports.store = {
             this.chain([
                 this.get(course).then(function(c) {
                     var sectionId = null;
-                    if (c[0].studyProgress && c[0].studyProgress.currentSectionId) {
-                        sectionId = c[0].studyProgress.currentSectionId;
-                    }
+                    if (c[0].register) sectionId = course.findFirstSection().id;
                     state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
                 }),
                 this.get(courseRelated),
@@ -108,39 +105,6 @@ exports.store = {
             avgScore = payload.avgScore / 10;
             score.data.avgScore = avgScore.toFixed(1);
             score.changed();
-        },
-        refresh: function(payload) {
-            var me = this,
-                course = me.models.course,
-                state = me.models.state,
-                studyProgress,
-                currentSectionType;
-            course.set(payload);
-            course.init();
-            studyProgress = course.data.studyProgress || {};
-
-            if (!studyProgress.currentChapterId) {
-                studyProgress.currentChapterId = course.data.courseChapters[0].id;
-                studyProgress.currentSectionId = course.data.courseChapters[0].courseChapterSections[0].id;
-            } else if (!studyProgress.currentSectionId) {
-                studyProgress.currentSectionId = course.data.courseChapters[studyProgress.currentChapterId]
-                .courseChapterSections[0].id;
-            }
-            course.data.studyProgress = studyProgress;
-            currentSectionType = course.data.sections[studyProgress.currentSectionId].sectionType;
-
-            if (course.data.register) {
-                if (util.judgeSection(currentSectionType)) {
-                    me.module.dispatch('showSection', { sectionId: studyProgress.currentSectionId });
-                    course.changed();
-                } else {
-                    state.data.code = 'default';
-                    state.changed();
-                }
-            } else {
-                state.data.code = 'default';
-                state.changed();
-            }
         },
         initCourse: function() {
             var course = this.models.course,
@@ -216,12 +180,12 @@ exports.store = {
             this.chain(
                 this.post(model), [
                     function() {
-                        this.app.message.alert('注册完毕，开始刷新课程');
+                        // this.app.message.alert('注册完毕，开始刷新课程');
                         course.get({ id: state.data.id }); // 刷新课程
                         this.get(course);
                     },
                     function() {
-                        this.app.message.alert('注册完毕，开始播放课程');
+                        // this.app.message.alert('注册完毕，开始播放课程');
                         D.assign(state.data, { sectionId: sectionId, register: true });
                         state.changed(); // 改变播放
                     }

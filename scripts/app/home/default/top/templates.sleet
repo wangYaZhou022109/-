@@ -15,7 +15,8 @@ view('nav')
     .nav-list
         if(navs.length)
             each(navs)
-                .item > a.normal.nav-color(id='menu-' + id)(href='#/' + url)(data-menu=url)(class='active')&if(active) > echo(name)
+                if(show)
+                    .item > a.normal.nav-color(id='menu-' + id)(href='#/' + url)(data-menu=url)(class='active')&if(active) > echo(name)
         else
             each(menus)
                 .item > a.normal.nav-color(id='menu-' + id)(href='#/' + uri)(data-menu=uri)(class='active')&if(active) > echo(name)

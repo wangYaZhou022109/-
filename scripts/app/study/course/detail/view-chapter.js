@@ -2,7 +2,7 @@ var $ = require('jquery'),
     A = require('./app/util/animation'),
     courseUtil = require('../course-util'),
     _ = require('lodash/collection');
-
+var currentSectionId = null;
 var showHandler = function(payload) {
     var map = {
         1: 'showSection',
@@ -52,9 +52,10 @@ exports.handlers = {
         // 麻烦之处在于如何处理好刷新,不影响正在播放的当前节,让用户感知不到我们做了注册这一动作(待做)
         e.preventDefault();
         // 如果点击的是当前节,直接返回
-        if (studyProgress.currentSectionId === id && courseUtil.judgeSection(sectionType)) {
+        if (currentSectionId === id && courseUtil.judgeSection(sectionType)) {
             return false;
         }
+        currentSectionId = id;
         // 判断章是否按顺序
         // 这里按顺序学,要获取上一节的学习进度completeRate,麻烦之处在于,我们更新上一节的进度是在
         // beforeClose中做的,我们点击这下一节时,上一节的进度可能还没有保存成功,所以可能需要在前端算
@@ -74,9 +75,6 @@ exports.handlers = {
             $(element).parents('dl').siblings().removeClass('focus');
             $(element).parents('dl').addClass('focus');
         }
-        // 设置当前章,节
-        studyProgress.currentChapterId = chapterId;
-        studyProgress.currentSectionId = id;
         hander(sectionType);
         return true;
     }
@@ -84,8 +82,7 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     course: function(data) {
-        var course = data.course,
-            currentSectionId;
+        var course = data.course;
         if (course.name) {
             currentSectionId = data.state.sectionId || null;
             _.forEach(course.courseChapters, function(item, i) {
