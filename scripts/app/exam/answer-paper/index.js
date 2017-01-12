@@ -80,6 +80,7 @@ exports.store = {
                 init: function(exam, payload) {
                     this.data = D.assign({}, {
                         name: exam.name,
+                        id: exam.id,
                         isOnePageOneQuestion: exam.paperShowRule === 1,
                         mode: payload.mode || 1,
                         noAnswerNum: exam.paper.questionNum || 0,
@@ -94,6 +95,7 @@ exports.store = {
         },
         exam: {
             url: '../exam/exam/exam-paper',
+            type: 'localStorage',
             mixin: {
                 getQuestionById: function(id) {
                     var questions = this.data.paper.questions;
@@ -384,6 +386,7 @@ exports.store = {
                 answer = this.models.answer,
                 modify = this.models.modify,
                 state = this.models.state,
+                exam = this.models.exam,
                 countDown = this.models.countDown;
 
             answer.load();
@@ -391,27 +394,30 @@ exports.store = {
             state.load();
             countDown.load();
             questionTypes.load();
+            exam.load();
 
-            if (!answer.data) answer.data = { answers: [] };
-            if (!modify.data) modify.data = { answers: [], api: {} };
-            if (!state.data) state.data = {};
-            if (!countDown.data) countDown.data = {};
+            if ((state.data.id && state.data.id !== payload.examId) || !state.data.id) {
+                this.models.exam.set({ id: payload.examId });
 
-            this.models.exam.set({ id: payload.examId });
+                return this.get(this.models.exam).then(function() {
+                    var examData = me.models.exam.data;
+                    me.models.exam.save();
 
-            return this.get(this.models.exam).then(function() {
-                var exam = me.models.exam.data;
+                    state.data = {};
+                    answer.data = { answers: [] };
+                    modify.data = { answers: [], api: {} };
+                    countDown.data = {};
 
-                if (!state.data.name) me.models.state.init(exam, payload);
+                    me.models.state.init(examData, payload);
 
-                if (questionTypes.data.length < 1) {
-                    questionTypes.createQuestionTypes(exam.paper, exam.paperSortRule);
+                    questionTypes.createQuestionTypes(examData.paper, examData.paperSortRule);
                     questionTypes.setFirstQuestionRemote();
 
                     me.models.state.getCurrentState(questionTypes.data);
                     me.models.state.setFirstQuestionRemote(questionTypes.data);
-                }
-            });
+                });
+            }
+            return '';
         },
         reload: function() {
             this.models.state.changed();
@@ -503,7 +509,7 @@ exports.afterRender = function() {
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 0) * (1000 * 60);
+                ms = (min + 2) * (1000 * 60);
             return ms;
         },
         random = getRandom(),
@@ -514,7 +520,7 @@ exports.afterRender = function() {
             });
         };
 
-    this.app.message.success('随机秒数' + (random / 1000));
+    // this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
         timeOutId = setTimeout(autoSubmit, random);
         connect(examId, function() {
