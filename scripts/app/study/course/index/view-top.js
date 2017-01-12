@@ -2,9 +2,9 @@ var $ = require('jquery');
 
 exports.events = {
     'click item-*': 'toggleItem',
-    'keypress searchTitle': 'search',
-    'click searchTitleBtn': 'searchBtn',
-    'click sort*': 'sort',
+    'keypress searchContent': 'search',
+    'click search': 'searchBtn',
+    'click sort*': 'sort'
 };
 
 exports.handlers = {
@@ -13,11 +13,12 @@ exports.handlers = {
         this.module.dispatch('search', { categoryId: '' });
     },
     search: function(e, item) {
+        var value = $.trim(item.value);
         if (e.keyCode !== 13) return false;
-        return this.module.dispatch('search', { searchContent: item.value });
+        return this.module.dispatch('search', { searchContent: value });
     },
     searchBtn: function() {
-        var value = this.$('searchTitle').value;
+        var value = $.trim(this.$('searchContent').value);
         return this.module.dispatch('search', { searchContent: value });
     }
 };
