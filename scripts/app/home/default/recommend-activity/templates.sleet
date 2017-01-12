@@ -17,7 +17,7 @@ view('recommend-activity')
             .bar-horizontal
                 .below
                     .bar.max-width > inner(activity '1')
-                        .img > .img-cont >  img(src=cover)
+                        .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_exam.jpg'}}")
                         .content
                             .cont
                                 .title.border > echo(name)
@@ -34,7 +34,7 @@ view('recommend-activity')
                 .above
                     times(2 4)
                         .bar-cont > .bar > inner(activity index)
-                            .img > .img-cont >  img(src=cover)
+                            .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_exam.jpg'}}")
                             .content
                                 .cont
                                     .title.border > echo(name)
@@ -52,7 +52,7 @@ view('recommend-activity')
         .section
             times(4 6)
                 .bar > inner(activity index)
-                    .img > .img-cont >  img(src=cover)
+                    .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_exam.jpg'}}")
                     .content
                         .cont
                             .title.border > echo(name)
@@ -68,7 +68,7 @@ view('recommend-activity')
 
         .section
             .bar.max-height > inner(activity 6)
-                .img > .img-cont >  img(src=cover)
+                .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_exam.jpg'}}")
                 .content
                     .cont
                         .title.border > echo(name)
