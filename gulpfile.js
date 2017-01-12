@@ -81,25 +81,7 @@ gulp.task('postcss', function() {
     return gulp.src([
             'styles/postcss/main.css'
         ])
-        .pipe(postcss([cssimport(), cssnext({
-            features: {
-                customProperties: {
-                    variables: {
-                        '--font-size1': '14px',
-                        '--font-size2': '16px',
-                        '--font-size3': '18px',
-                        '--font-size4': '20px',
-                        '--font-size5': '24px',
-                        '--font-size6': '28px',
-
-                        '--space': '10px',
-
-                        '--sidebar-width': '230px',
-                        '--nav-height': '70px'
-                    }
-                }
-            }
-        })]))
+        .pipe(postcss([cssimport(), cssnext()]))
         .pipe(gulp.dest('bundle/'));
 });
 
