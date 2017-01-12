@@ -30,7 +30,7 @@
     }
 
     & .player-title-row {
-        position: absolute;
+        // position: absolute;
         left: var(--large-space);
         right: var(--large-space);
         top: var(--large-space);
