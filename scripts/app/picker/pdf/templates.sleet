@@ -1,5 +1,5 @@
 #! handlebars
-module > .clearfix > .col-sm-12.bg-white.m-top
+module > .clearfix > .col-sm-12
     div(data-region='toolbar')
     div(data-region='viewer')
 
@@ -7,18 +7,18 @@ view('toolbar')
     .pdf-view-toolbar
         .clearfix.border.bottom
             .pull-left.m-top.m-bottom
-                .inline-block.pe-7s-angle-left-circle.pe-2x.m-right#turnToPage-prev
-                .inline-block.pe-7s-angle-right-circle.pe-2x#turnToPage-next
+                .inline-block.iconfont.icon-arrow-left.m-right#turnToPage-prev
+                .inline-block.iconfont.icon-arrow-right#turnToPage-next
                 .inline-block.m-left
-                    input.input.min-input.inline-block#currentPageNum(value=state.pageNum)
+                    input.input.min.inline-block#currentPageNum(value=state.pageNum)
                     echo('/')
                     label.inline-block#pageCount > echo(state.pageCount)
             .pull-right.m-top.m-bottom
                 .inline-block
-                    .pe-7s-less.pe-2x.inline-block#zoom-out
-                    .pe-7s-less.plus.pe-2x.inline-block.m-left#zoom-in
+                    .iconfont.icon-zoom-out#zoom-out
+                    .iconfont.icon-zoom-in.m-left#zoom-in
                 .inline-block.m-left
-                    select.input.min-input(id='scaleSelect')
+                    select(id='scaleSelect')
                         each(pdfScale)
                             option(value = key)('selected')&if(selected) > echo(value)
 view('viewer')
@@ -26,5 +26,5 @@ view('viewer')
         .col-sm-12
             #progress.btn(style='display:none;')
             label#progressLabel
-    .row > .col-sm-12#viewerContainer(style='overflow:auto;position:absolute;width:100%;height:800px;')
+    .row > .col-sm-12#viewerContainer(style='overflow:auto;position:absolute;width:100%;height:420px;')
         .pdfViewer#viewer

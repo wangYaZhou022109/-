@@ -33,13 +33,14 @@
     }
 
     & .player-title-row {
-        // position: absolute;
+        position: absolute;
         left: var(--large-space);
         right: var(--large-space);
         top: var(--large-space);
         line-height: calc(var(--font-size) * 4);
         padding: 0 var(--large-space);
         background: white;
+        z-index: 10;
 
         & .share-bar .item {
             margin-left: var(--large-space);
