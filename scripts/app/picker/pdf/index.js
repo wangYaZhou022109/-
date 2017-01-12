@@ -1,7 +1,7 @@
 var D = require('drizzlejs'),
     _ = require('lodash/collection');
 exports.items = {
-    toolbar: '',
+    toolbar: 'toolbar',
     viewer: 'viewer'
 };
 
