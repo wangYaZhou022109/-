@@ -13,10 +13,10 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
-    loading: function(data) {
-        if (!data.state.state.id) { // 如果课程未加载完毕
-            return true;
-        }
-        return false;
+    state: function(data) {
+        return {
+            loading: !data.state.state.id,
+            error: data.state.state.id && !data.state.section
+        };
     }
 };

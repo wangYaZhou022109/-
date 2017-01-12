@@ -16,6 +16,7 @@ exports.store = {
             var state = this.models.state,
                 time = this.models.time;
             state.set(payload);
+            state.loading = true;
             return this.get(time);
         },
         time: function() {
