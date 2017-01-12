@@ -12,7 +12,7 @@ view('online-course') > .clearfix
             .more > a.normal(href=routerLink('study/course/index')) MORE >>
         inner(course '1')
             a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
-                .img > .img-cont >  img(src=cover)
+                .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_course.jpg'}}")
                 .cont.bg-white
                     .text-cont.bg-white
                         .title-row > echo(name)
@@ -24,7 +24,7 @@ view('online-course') > .clearfix
     .section.second
         inner(course '2')
             a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
-                .img > .img-cont >  img(src=cover height='300px')
+                .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_course.jpg'}}" height='300px')
                 .cont.bg-white.show
                     .title-row > echo(name)
                     p.sub-title.show > echo(description)
@@ -36,7 +36,7 @@ view('online-course') > .clearfix
         inner(course '3')
             .section-above > a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
                 .bar-cont
-                    .img > .img-cont >  img(src=cover)
+                    .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_course.jpg'}}")
                 .bar-cont
                     .cont.bg-white.show
                         .title-row > echo(name)
@@ -48,7 +48,7 @@ view('online-course') > .clearfix
         .section-below
             inner(course '4')
                 .pull-left.w-half > a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
-                    .img > .img-cont >  img(src=cover)
+                    .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_course.jpg'}}")
                     .cont.bg-white
                         .text-cont.bg-white
                             .title-row > echo(name)
@@ -59,7 +59,7 @@ view('online-course') > .clearfix
                             .item.border > i.iconfont.icon-star(title='课程学分') + .inline-block.m-left {{pick credit 0}} 分
             inner(course '5')
                 .pull-left.w-half > a.bar(target = "_blank" href="{{routerLink 'study/course/detail/' sourceId}}")&if(sourceId)
-                    .img > .img-cont >  img(src=cover)
+                    .img > .img-cont >  img(src="{{pick cover 'images/default-cover/default_course.jpg'}}")
                     .cont.bg-white
                         .text-cont.bg-white
                             .title-row > echo(name)

@@ -6,10 +6,21 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click sort-*': 'sort'
+    'click sort-*': 'sort',
+    'click three-item*': 'selectThree',
+    'click four-item*': 'selectFour'
 };
 
 exports.handlers = {
+    selectThree: function(id) {
+        return this.chain([
+            this.module.dispatch('search', { categoryId: id }),
+            this.module.dispatch('selectMenu3', { id: id })
+        ]);
+    },
+    selectFour: function(id) {
+        return this.module.dispatch('search', { categoryId: id });
+    },
     sort: function(id) {
         var searchDate = this.bindings.search.data;
         var orderMap = { 1: 2, 2: 1 };

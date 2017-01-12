@@ -4,7 +4,10 @@ module
     div(data-region='default')
 
 view('default')
-    if(loading)
+    if(state.loading)
         .player-start-btn > .btn 加载中,请稍后
     else
-        .player-start-btn > .btn#register 开始学习
+        if(state.error)
+            .player-start-btn > .btn 加载出错，请稍后在点击
+        else
+            .player-start-btn > .btn#register 开始学习
