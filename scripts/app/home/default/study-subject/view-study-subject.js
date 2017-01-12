@@ -16,7 +16,7 @@ module.exports = {
                 var itemCourse = D.assign({}, course, { cover: item.cover, sourceId: item.sourceId });
                 if (itemCourse.cover) {
                     itemCourse.cover = that.bindings.down.getFullUrl() + '?id=' + itemCourse.cover;
-                } else
+                }
                 itemCourse.description = $('<span>').html(itemCourse.description).text();
                 sortItem[item.sort] = itemCourse;
             });
