@@ -17,9 +17,11 @@ exports.handlers = {
 
         if (el.hasClass('active')) {
             el.removeClass('active').find('.item-child').slideUp();
+            el.find('.custom-color-2').removeClass('active');
         } else {
             el.addClass('active').find('.item-child').slideDown();
             el.siblings().removeClass('active').find('.item-child').slideUp();
+            el.siblings().find('.custom-color-2').removeClass('active');
         }
 
         this.module.dispatch('search', { categoryId: id });
