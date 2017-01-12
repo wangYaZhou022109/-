@@ -34,7 +34,7 @@ exports.handlers = {
 exports.dataForTemplate = {
     courses: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'images/course-default.jpg';
+        var defultImg = 'images/default-cover/default_course.jpg';
         data.courses.forEach(function(obj) {
             var course = obj || {};
             var studyType = 1; // 继续学习
