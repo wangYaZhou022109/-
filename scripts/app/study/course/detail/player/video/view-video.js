@@ -1,46 +1,49 @@
 exports.bindings = {
-    section: true,
-    sectionProgress: true,
+    state: false,
+    download: false,
     time: false
 };
 
 
-exports.components = [{
-    id: 'player',
-    name: 'videojs',
-    options: {
-        video: {
-            fluid: true,    // 自动缩放
-            // aspectRatio: '840:505' // 自定义比例缩放
-        },
+exports.components = [function() {
+    var section = this.bindings.state.data.section;
+    var currentTime = 0;
+    if (section && section.progress) {
+        currentTime = section.progress.lessonLocation;
     }
+    return {
+        id: 'player',
+        name: 'videojs',
+        options: {
+            currentTime: currentTime,
+            video: {
+                fluid: true, // 自动缩放 aspectRatio
+                autoplay: true,
+            },
+        }
+    };
 }];
 
 exports.dataForTemplate = {
     section: function(data) {
-        var section = data.section;
-        section.url = section.url + '?id=' + section.resourceId;
+        var section = data.state.section;
+        section.url = this.bindings.download.getFullUrl() + '?id=' + section.resourceId;
         return section;
     }
 };
 
 exports.beforeClose = function() {
-    var me = this,
-        beginTime = me.bindings.time.data,
-        endTime = 0,
-        studyTime = this.components.player.getLearnTime() + 0.1,
-        totalTime = this.components.player.duration() + 0.1,
-        progressRate = (studyTime / totalTime) * 100,
-        lessonLocation = this.components.player.currentTime();
-    return me.module.dispatch('time').then(function(data) {
-        endTime = data[0];
-        me.module.dispatch('updateProgress', {
-            beginTime: beginTime,
-            endTime: endTime,
-            studyTime: Math.ceil(studyTime),
-            resourceTotalTime: Math.ceil(totalTime),
-            progressRate: Math.ceil(progressRate),
-            lessonLocation: lessonLocation
-        });
-    });
+    var beginTime = this.bindings.time.data,
+        player = this.components.player,
+        studyTime = player.getLearnTime(),
+        totalTime = player.duration(),
+        lessonLocation = player.currentTime();
+    var callback = this.module.renderOptions.callback;
+    this.module.dispatch('updateProgress', {
+        beginTime: beginTime,
+        studyTime: Math.ceil(studyTime),
+        resourceTotalTime: Math.ceil(totalTime),
+        lessonLocation: Math.ceil(lessonLocation),
+        clientType: 0,
+    }).then(function() { callback(); });
 };

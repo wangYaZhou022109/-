@@ -13,8 +13,8 @@ var D = require('drizzlejs'),
     };
 var voideKit = function(player) {
     return (function(p) {
-        var beginTime = -1;
-        var learnTime = -1;
+        var beginTime = 0;
+        var learnTime = 0;
         var init = function() {
             learnTime = 0;
         };

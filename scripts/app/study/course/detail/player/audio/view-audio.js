@@ -1,13 +1,12 @@
 exports.bindings = {
-    section: true,
-    sectionProgress: true,
+    state: false,
     download: false,
     time: false
 };
 
 exports.components = [
     function() {
-        var section = this.bindings.section.data || {},
+        var section = this.bindings.state.data.section,
             download = this.bindings.download,
             url;
         url = download.getFullUrl() + '?id=' + section.resourceId;
@@ -39,32 +38,32 @@ exports.handlers = {
 exports.beforeClose = function() {
     var me = this,
         beginTime = me.bindings.time.data,
-        endTime = 0,
         studyTime = this.components.waveform.getLearnTime() + 0.1,
         totalTime = this.components.waveform.getDuration() + 0.1,
-        progressRate = Math.ceil((studyTime * 100) / totalTime),
         lessonLocation = this.components.waveform.getCurrentTime();
+    var callback = this.module.renderOptions.callback;
 
-    return me.module.dispatch('time').then(function(data) {
-        endTime = data[0];
-        me.module.dispatch('updatePregress', {
-            beginTime: beginTime,
-            endTime: endTime,
-            studyTime: Math.ceil(studyTime),
-            resourceTotalTime: Math.ceil(totalTime),
-            progressRate: progressRate,
-            lessonLocation: lessonLocation
-        });
-    });
+    me.module.dispatch('updateProgress', {
+        beginTime: beginTime,
+        studyTime: Math.ceil(studyTime),
+        resourceTotalTime: Math.ceil(totalTime),
+        lessonLocation: Math.ceil(lessonLocation),
+        clientType: 0,
+    }).then(function() { callback(); });
 };
 
 // 支持的事件 loading,ready,play,pause,finish,error
 exports.audio = {
-    loading: function() {
+    loading: function(value) {
+        this.$('progress').value = value;
     },
     ready: function() {
-        var sectionProgress = this.bindings.sectionProgress.data || {},
-            lessonLocation = sectionProgress.lessonLocation || 0;
-        this.components.waveform.play(Number(lessonLocation)); // 加载完成自动播放 。可以注释之后不播放
+        var section = this.bindings.state.data.section;
+        var currentTime = 0;
+        this.$('progress').hidden = true;
+        if (section && section.progress) {
+            currentTime = section.progress.lessonLocation;
+        }
+        this.components.waveform.play(Number(currentTime));
     }
 };

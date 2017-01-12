@@ -4,5 +4,10 @@ module
     div(data-region='default')
 
 view('default')
-    compare(course.register 'eq' false)
-        .player-start-btn > .btn#register 我要学习
+    if(state.loading)
+        .player-start-btn > .btn 加载中,请稍后
+    else
+        if(state.error)
+            .player-start-btn > .btn 加载出错，请稍后在点击
+        else
+            .player-start-btn > .btn#register 开始学习
