@@ -1,5 +1,5 @@
 var _ = require('lodash/collection'),
-    remoteBackGround = 'http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif';
+    remoteBackGround = 'images/default-userpic.png';
 
 exports.bindings = {
     relatedTopics: true,
