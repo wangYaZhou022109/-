@@ -27,7 +27,8 @@ exports.seqName = function(order, type) {
 exports.sectionCode = sectionCode;
 
 exports.judgeSection = function(sectionType) {
-    if (sectionType === 1 || sectionType === 3 || sectionType === 5 || sectionType === 6) {
+    var type = window.parseInt(sectionType);
+    if (type === 1 || type === 3 || type === 5 || type === 6) {
         return true;
     }
     return false;

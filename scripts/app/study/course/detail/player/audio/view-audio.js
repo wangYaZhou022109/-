@@ -54,11 +54,13 @@ exports.beforeClose = function() {
 
 // 支持的事件 loading,ready,play,pause,finish,error
 exports.audio = {
-    loading: function() {
+    loading: function(value) {
+        this.$('progress').value = value;
     },
     ready: function() {
         var section = this.bindings.state.data.section;
         var currentTime = 0;
+        this.$('progress').hidden = true;
         if (section && section.progress) {
             currentTime = section.progress.lessonLocation;
         }
