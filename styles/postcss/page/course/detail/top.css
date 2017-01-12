@@ -4,15 +4,18 @@
 
 .course-detail-page .course-detail-top{
     height: 40em;
-    background: black;
     overflow: hidden;
+
+    &.top-bg {
+        background: url(../images/course-bg.jpg) no-repeat center center;
+        background-size: cover;
+    }
 
     & .player-wrapper {
         position: relative;
         height: 100%;
         padding: var(--large-space);
         overflow: hidden;
-        background: #333;
 
         & .player-start-btn {
             position: absolute;
@@ -26,7 +29,7 @@
     & .player-content {
         width: 100%;
         height: 100%;
-        background: #999;
+        background: black;
     }
 
     & .player-title-row {
@@ -61,7 +64,7 @@
         float: right;
         height: 100%;
         color: #ffffff;
-        background: #555;
+        background: rgba(0,0,0,.6);
 
         &.show-note {
             & .course-chapter,
@@ -135,7 +138,7 @@
             top: 0;
             left: 0;
             text-align: center;
-            background: #000;
+            background: var(--font-color);
             z-index: 2;
 
             & .iconfont {

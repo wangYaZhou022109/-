@@ -1,5 +1,5 @@
 .banner {
-    height: 30em;
+    height: var(--banner-height);
     background: #eee;
 
     & img {
