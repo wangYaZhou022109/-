@@ -31,7 +31,7 @@ exports.handlers = {
 exports.dataForTemplate = {
     activitys: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'http://img.ui.cn/data/file/9/1/3/868319.jpg';
+        var defultImg = 'images/default-cover/default_exam.jpg';
         data.activitys.forEach(function(obj) {
             var activity = obj || {};
             activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
