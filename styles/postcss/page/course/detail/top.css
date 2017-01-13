@@ -24,6 +24,12 @@
             right: 0;
             text-align: center;
         }
+
+        &:hover .player-title-row {
+            @apply --fade-in;
+
+            transform: scaleY(1);
+        }
     }
 
     & .player-content {
@@ -33,6 +39,9 @@
     }
 
     & .player-title-row {
+        @apply --transition;
+        @apply --fade-out;
+
         position: absolute;
         left: var(--large-space);
         right: var(--large-space);
@@ -41,12 +50,16 @@
         padding: 0 var(--large-space);
         background: white;
         z-index: 10;
+        transform: scaleY(0);
+        transform-origin: 0 100%;
 
         & .share-bar .item {
             margin-left: var(--large-space);
             display: inline-block;
         }
     }
+
+
 
     & .chapter-main,
     & .course-note-main {

@@ -3,7 +3,7 @@
     background-color: var(--sub-color-1);
 
     & .banner {
-        height: clac(var(--banner-height) + 3);
+        height: calc(var(--banner-height) + 3);
     }
 
     & img {
@@ -15,7 +15,6 @@
     & .container {
         position: relative;
         overflow: hidden;
-        height: calc(var(--large-space) * 15);
     }
 
     & li {

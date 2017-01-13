@@ -267,6 +267,9 @@ section.section {
     &.dashed {
         border-style: dashed;
     }
+    &.radius {
+        border-radius: 3px;
+    }
 }
 
 .circle {
