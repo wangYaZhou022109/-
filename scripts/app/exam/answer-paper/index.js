@@ -335,7 +335,8 @@ exports.store = {
                     this.data.api = {
                         examRecordId: this.module.store.models.exam.data.examRecord.id,
                         submitType: data.submitType,
-                        answerRecords: this.changeAnswerRecord()
+                        answerRecords: this.changeAnswerRecord(),
+                        clientType: 1
                     };
                 },
                 changeAnswerRecord: function() {
@@ -509,7 +510,7 @@ exports.afterRender = function() {
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 2) * (1000 * 60);
+                ms = (min + 1) * (1000 * 60);
             return ms;
         },
         random = getRandom(),
@@ -520,7 +521,7 @@ exports.afterRender = function() {
             });
         };
 
-    // this.app.message.success('随机秒数' + (random / 1000));
+    this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
         timeOutId = setTimeout(autoSubmit, random);
         connect(examId, function() {
