@@ -41,7 +41,7 @@ view('top')
                             br
                             p.small-font 总分
                         li > div
-                            h3 > echo(exam.passScore '分' handlerBtn)
+                            h3 > echo(exam.passScore '分')
                             br
                             p.small-font 及格成绩
                         li > div
