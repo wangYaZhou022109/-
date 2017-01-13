@@ -317,7 +317,10 @@ exports.store = {
                     this.save();
                 },
                 getAnswer: function(id) {
-                    return _.find(this.data.answers, ['key', id]);
+                    if (this.data) {
+                        return _.find(this.data.answers, ['key', id]);
+                    }
+                    return null;
                 }
             }
         },
@@ -390,6 +393,7 @@ exports.store = {
                 exam = this.models.exam,
                 countDown = this.models.countDown;
 
+            console.log('tttt');
             answer.load();
             modify.load();
             state.load();
