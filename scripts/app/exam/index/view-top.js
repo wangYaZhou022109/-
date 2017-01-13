@@ -2,7 +2,8 @@ var remoteBackGround = 'images/default-cover/default_exam.jpg';
 
 exports.bindings = {
     exam: true,
-    down: true
+    down: true,
+    certificate: true
 };
 
 exports.type = 'dynamic';
@@ -53,6 +54,10 @@ exports.dataForTemplate = {
             return exam.paperClass.totalScore / 100;
         }
         return '';
+    },
+    joinNumber: function() {
+        var exam = this.bindings.exam.data;
+        return exam.joinNumber || 0;
     },
     handlerBtn: function() {
         var exam = this.bindings.exam.data,

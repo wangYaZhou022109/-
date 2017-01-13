@@ -21,9 +21,9 @@ view('top')
                             small > i.iconfont.icon-star + i.iconfont.icon-time
                         p
                             i.iconfont.icon-star
-                            echo('给予证书：' name)
+                            echo('给予证书：' certificate.name)
                         p.detail-top-time.small-font
-                            | 报名截至日期：
+                            | 报名截至时间：
                             dateTime(exam.applicantEndTime)
                             span  考试时间：
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
@@ -45,9 +45,9 @@ view('top')
                             br
                             p.small-font 及格成绩
                         li > div
-                            h3 > echo(exam.applicantNumber)
+                            h3 > echo(joinNumber)
                             br
-                            p.small-font 报名人数
+                            p.small-font 参考人数
 
                     .pull-right
                         compare(handlerBtn 'eq' 'signup')
