@@ -393,7 +393,6 @@ exports.store = {
                 exam = this.models.exam,
                 countDown = this.models.countDown;
 
-            console.log('tttt');
             answer.load();
             modify.load();
             state.load();

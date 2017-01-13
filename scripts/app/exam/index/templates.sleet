@@ -63,9 +63,9 @@ view('top')
                             button.btn.white#revoke 取消报名
                         compare(handlerBtn 'eq' 'submittedShowDetail')
                             a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
-                            a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 重新考试
+                            #  a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 重新考试
                         compare(handlerBtn 'eq' 'submitted')
-                            a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 重新考试
+                            h3 待评卷
                         compare(handlerBtn 'eq' 'startExam')
                             a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 进入考试
                         compare(handlerBtn 'eq' 'detail')
