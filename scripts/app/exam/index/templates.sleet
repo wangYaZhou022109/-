@@ -41,7 +41,7 @@ view('top')
                             br
                             p.small-font 总分
                         li > div
-                            h3 > echo(exam.passScore '分')
+                            h3 > echo(exam.passScore '分' handlerBtn)
                             br
                             p.small-font 及格成绩
                         li > div
@@ -72,6 +72,9 @@ view('top')
                             a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
                         compare(handlerBtn 'eq' 'end')
                             h3 考试已结束
+                        compare(handlerBtn 'eq' 'noBegin')
+                            h3 未开始
+                        
 
 view('side')
     .page-side > .container

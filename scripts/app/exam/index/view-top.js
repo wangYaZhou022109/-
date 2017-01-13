@@ -105,6 +105,8 @@ exports.dataForTemplate = {
                 } else {
                     result = 'end';
                 }
+            } else if (currentTime < exam.startTime) {
+                result = 'noBegin';
             }
         }
         return result;
