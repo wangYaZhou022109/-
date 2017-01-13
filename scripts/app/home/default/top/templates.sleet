@@ -28,6 +28,10 @@ view('shortcut')
         .item > a.normal(href='#') > i.iconfont.icon-message
         .item > a.normal(href='#') > i.iconfont.icon-daiban
         .item > a.normal(href='/admin') > i.iconfont.icon-setting
+        .item > a.normal(href='#') > i.iconfont.icon-logout
+
+
+
         # .user-info.inline-block
         #     .user-pic > img(src='/images/2.jpeg')
 
