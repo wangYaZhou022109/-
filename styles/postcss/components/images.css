@@ -4,7 +4,7 @@
     position: relative;
     transition: all .5s linear;
 
-    & .img-cont {
+    & .not-user .img-cont {
         position: absolute;
         width: 2000px;
         height: 2000px;
@@ -21,6 +21,6 @@
         vertical-align: middle;
         transform:translateZ(0);
         transition: all .5s linear;
-        max-width: 25em;
+        max-width: 100%;
     }
 }

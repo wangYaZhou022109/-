@@ -1,6 +1,5 @@
 .banner {
     height: var(--banner-height);
-    background: #eee;
 
     & img {
         display: block;

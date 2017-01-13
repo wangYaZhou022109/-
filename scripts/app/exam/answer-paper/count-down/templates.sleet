@@ -4,4 +4,4 @@ module
     div(data-region='main')
 
 view('main')
-    #time
+    #time.time

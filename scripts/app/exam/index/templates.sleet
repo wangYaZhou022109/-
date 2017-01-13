@@ -29,7 +29,7 @@ view('top')
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
-                        .small-font 距离考试开始时间
+                        .small-font.m-top 距离考试开始时间
                 .detail-bottom.clearfix
                     .pull-left > ul.clearfix
                         li.first > div

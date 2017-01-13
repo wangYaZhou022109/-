@@ -6,8 +6,8 @@ module
 view('default')
     if(state.loading)
         .player-start-btn > .btn 加载中,请稍后
-    else
-        if(state.error)
-            .player-start-btn > .btn 加载出错，请稍后在点击
-        else
+    else 
+        if(state.register)
             .player-start-btn > .btn#register 开始学习
+        else
+            .player-start-btn > .btn 加载出错，请稍后在点击

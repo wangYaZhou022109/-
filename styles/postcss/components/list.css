@@ -118,7 +118,7 @@
     }
 
     & .img {
-        height: var(--main-list-img-height);
+        min-height: var(--main-list-img-height);
     }
 
 
