@@ -14,7 +14,7 @@ exports.store = {
         },
         search: {
             data: {
-                orderBy: '1',
+                orderBy: '0',
                 order: 2,
                 top: 'top'
             }

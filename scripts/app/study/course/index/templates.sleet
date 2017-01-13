@@ -12,8 +12,8 @@ view('top')
     .container.clearfix
         .pull-right
             .search-bar
-                input.input(placeholder='请输入您要找的课程')
-                i.iconfont.icon-search.scale-1.text-hover-main-color
+                input.input(id='searchContent' placeholder='请输入您要找的课程')
+                i#search.iconfont.icon-search.scale-1.text-hover-main-color
         .course-tabs > ul
             li.active(id='item-1') 本公司课程
             li(id='item-2') 集团课程
@@ -21,7 +21,7 @@ view('top')
 
 view('catalog')
     .title-row
-        .pull-right > i#openCatalog.iconfont.icon-setting
+        .pull-right > i#openCatalog.iconfont.icon-full-screen
         .common-title 课程目录
     ul > each(menus)
         li.text-hover-main-color(id='catalog-item-'+id)
@@ -34,7 +34,7 @@ view('catalog')
 view('catalogs')
     .catalog-view('hidden') > .catalog-view-box
         .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-setting
+            i#closeCatalog.pull-right.iconfont.icon-full-screen
             h3.active 本公司课程目录全览
             h3 集团课程目录全揽
         each(categories)
@@ -47,7 +47,7 @@ view('catalogs')
                             .Level-three-list
                                 h5 > echo(name)
                                 .level-four > each(children)
-                                    a(href='javascript:;') > echo(name)
+                                    .h6 > echo(name)
 
 view('list')
     .main-list
@@ -61,7 +61,7 @@ view('list')
                         .drop-down-content > .content
                             ul
                                 each(state.categories3)
-                                    li > echo(name)
+                                    li(id='three-item'+id) > echo(name)
                 .item
                     .drop-down-wrapper
                         .drop-down-btn
@@ -70,15 +70,15 @@ view('list')
                         .drop-down-content > .content
                             ul
                                 each(state.categories4)
-                                    li > echo(name)
+                                    li(id='four-item'+id) > echo(name)
             .pull-right
                 .item#sort-0
                     | 排序：上架时间
-                    i.iconfont.icon-arrow-up
+                    i.iconfont.icon-sort-line
 
                 .item#sort-1
                     | 学习人数
-                    i.iconfont.icon-arrow-up
+                    i.iconfont.icon-sort-line
 
                 .item
                     .drop-down-wrapper.right

@@ -10,7 +10,7 @@ exports.store = {
     models: {
         down: { url: '../human/file/download' },
         categories: {
-            url: '../course-study/course-category',
+            url: '../course-study/course-category/front',
             mixin: {
                 filterPid: function(pid) {
                     return _.filter(this.data, function(item) { return item.parentId === pid; });
@@ -55,6 +55,10 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
-    var options = { organizationId: '1' };
-    this.dispatch('init', options);
+    var currentUser = this.app.global.currentUser,
+        companyId = '1';
+    if (currentUser.companyOrganization) {
+        companyId = currentUser.companyOrganization.id;
+    }
+    this.dispatch('init', { organizationId: companyId });
 };

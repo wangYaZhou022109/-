@@ -6,10 +6,21 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click sort-*': 'sort'
+    'click sort-*': 'sort',
+    'click three-item*': 'selectThree',
+    'click four-item*': 'selectFour'
 };
 
 exports.handlers = {
+    selectThree: function(id) {
+        return this.chain([
+            this.module.dispatch('search', { categoryId: id }),
+            this.module.dispatch('selectMenu3', { id: id })
+        ]);
+    },
+    selectFour: function(id) {
+        return this.module.dispatch('search', { categoryId: id });
+    },
     sort: function(id) {
         var searchDate = this.bindings.search.data;
         var orderMap = { 1: 2, 2: 1 };
@@ -23,7 +34,7 @@ exports.handlers = {
 exports.dataForTemplate = {
     courses: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'images/course-default.jpg';
+        var defultImg = 'images/default-cover/default_course.jpg';
         data.courses.forEach(function(obj) {
             var course = obj || {};
             var studyType = 1; // 继续学习
