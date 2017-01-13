@@ -65,7 +65,7 @@
         float: right;
         height: 100%;
         color: #ffffff;
-        background: rgba(0,0,0,.6);
+        background: rgba(0,0,0,.8);
 
         &.show-note {
             & .course-chapter,
