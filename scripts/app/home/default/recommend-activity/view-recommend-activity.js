@@ -28,7 +28,7 @@ module.exports = {
                     itemactivity.cover = that.bindings.down.getFullUrl() + '?id=' + itemactivity.coverId;
                 }
                 if (itemactivity.type) {
-                    itemactivity.url = activityTypeMap[itemactivity.type] + item.sourceId;
+                    itemactivity.url = activityTypeMap[itemactivity.type] + activity.targetId;
                 }
                 itemactivity.description = $('<span>').html(itemactivity.description).text();
                 sortItem[item.sort] = itemactivity;

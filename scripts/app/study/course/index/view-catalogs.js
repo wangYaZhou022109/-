@@ -8,7 +8,8 @@ exports.dataForTemplate = {
             fillChild = function(pid) {
                 var menus = categories.filterPid(pid);
                 menus.forEach(function(obj) {
-                    menus.children = fillChild(obj.id);
+                    var r = obj;
+                    r.children = fillChild(obj.id);
                 });
                 return menus;
             };

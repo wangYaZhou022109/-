@@ -1,4 +1,4 @@
-var remoteBackGround = 'http://img.zcool.cn/community/0192475847b9d3a8012060c82f4741.gif';
+var remoteBackGround = 'images/default-cover/default_exam.jpg';
 
 exports.bindings = {
     exam: true,
@@ -68,15 +68,15 @@ exports.dataForTemplate = {
                     result = 'detail';
                 } else if (exam.examRecord && exam.examRecord.status > 4) {
                     result = 'overExam';
-                } else {
+                } else if (exam.signUp.status === 1) {
+                    result = 'waitReview';
+                } else if (exam.signUp.status === 3) {
+                    result = 'rejected';
+                } else if (exam.signUp.status === 2) {
                     result = 'startExam';
                 }
             } else if (currentTime > exam.endTime) {
                 result = 'detail';
-            } else if (exam.type === 1 && exam.signUp.status === 1) {
-                result = 'waitReview';
-            } else if (exam.type === 1 && exam.signUp.status === 3) {
-                result = 'rejected';
             } else {
                 result = 'prepare';
             }
