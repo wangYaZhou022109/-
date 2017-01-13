@@ -134,19 +134,28 @@ exports.store = {
             return this.del(collect);
         },
         addNote: function(payload) {
-            var note = this.models.note;
+            var me = this,
+                note = this.models.note;
             note.set(payload);
-            return this.save(note);
+            return this.save(note).then(function() {
+                me.get(me.models.notes);
+            });
         },
         removeNote: function(payload) {
-            var note = this.models.note;
+            var me = this,
+                note = this.models.note;
             note.set(payload);
-            return this.del(note);
+            return this.del(note).then(function() {
+                me.get(me.models.notes);
+            });
         },
         updateNote: function(payload) {
-            var note = this.models.note;
+            var me = this,
+                note = this.models.note;
             note.set(payload);
-            return this.save(note);
+            return this.save(note).then(function() {
+                me.get(me.models.notes);
+            });
         },
         turnPage: function() {
             var pageInfo = this.models.courseRelated.getPageInfo();
