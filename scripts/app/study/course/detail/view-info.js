@@ -46,4 +46,4 @@ exports.dataForTemplate = {
             avgScore: avgScore
         };
     }
-}
+};
