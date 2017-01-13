@@ -19,11 +19,16 @@ exports.store = {
             url: '../exam/exam/related-members'
         },
         down: { url: '../human/file/download' },
+        certificate: { url: '../system/certificate' }
     },
     callbacks: {
         init: function(payload) {
+            var me = this;
             this.models.exam.set(payload);
-            this.get(this.models.exam);
+            this.get(me.models.exam).then(function() {
+                me.models.certificate.set({ id: me.models.exam.data.certificateId });
+                me.get(me.models.certificate);
+            });
             this.models.relatedExams.params = payload;
             this.get(this.models.relatedExams);
             this.models.relatedTopics.params = payload;
