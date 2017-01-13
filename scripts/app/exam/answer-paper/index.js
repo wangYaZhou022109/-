@@ -483,9 +483,11 @@ exports.store = {
                         me.models.state.clear();
                         me.models.countDown.clear();
                         me.models.questionTypes.clear();
-                        me.app.message.success('交卷成功');
-                        closeConnect();
-                        window.close();
+                        me.app.viewport.modal(me.module.items.tips, { message: '交卷成功' });
+                        setTimeout(function() {
+                            closeConnect();
+                            window.close();
+                        }, 1500);
                     } else {
                         me.models.modify.data = { answers: [], api: {} };
                     }
@@ -526,12 +528,12 @@ exports.afterRender = function() {
 
     this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
+        autoSubmit();
         timeOutId = setTimeout(autoSubmit, random);
         connect(examId, function() {
+            me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
-                me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
                 closeConnect();
-                window.close();
             });
         }, function(delay) {
             return me.dispatch('delay', { delay: Number(delay) });
