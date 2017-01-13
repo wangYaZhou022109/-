@@ -28,7 +28,7 @@
             background: var(--border-color);
 
             & .time {
-                font-size: var(--h1);
+                font-size: 40px;
             }
         }
 

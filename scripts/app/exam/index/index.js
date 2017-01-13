@@ -20,7 +20,7 @@ exports.store = {
         },
         down: { url: '../human/file/download' },
         certificate: { url: '../system/certificate' },
-        signUp: { rul: '../exam/sign-up' }
+        signUp: { url: '../exam/sign-up' }
     },
     callbacks: {
         init: function(payload) {
@@ -46,7 +46,7 @@ exports.store = {
         },
         revoke: function() {
             var me = this;
-            me.models.signUp.params = { id: this.models.exam.data.id };
+            me.models.signUp.set({ id: this.models.exam.data.id });
             return me.del(me.models.signUp);
         },
         removeSingUp: function() {

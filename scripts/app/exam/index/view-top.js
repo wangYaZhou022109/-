@@ -79,6 +79,17 @@ exports.dataForTemplate = {
                 } else if (currentTime < exam.startTime) {
                     result = 'revoke';
                 }
+            } else if (exam.type === 1 && currentTime >= exam.applicantEndTime && currentTime < exam.endTime) {
+                if ((!exam.signUp || !exam.signUp.status)) {
+                    result = 'signupEnd';
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 1) {
+                    result = 'waitReview';
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 3) {
+                    result = 'rejected';
+                    return result;
+                }
             }
             if (currentTime >= exam.startTime && currentTime < exam.endTime) {
                 if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
