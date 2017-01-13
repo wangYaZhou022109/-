@@ -20,7 +20,7 @@ view('top')
                         h3 > echo(exam.name)
                             small > i.iconfont.icon-star + i.iconfont.icon-time
                         p
-                            i.iconfont.icon-star
+                            i.iconfont.icon-medal
                             echo('给予证书：' name)
                         p.detail-top-time.small-font
                             | 报名截至日期：
@@ -29,7 +29,7 @@ view('top')
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
-                        .small-font 距离考试开始时间
+                        .small-font.m-top 距离考试开始时间
                 .detail-bottom.clearfix
                     .pull-left > ul.clearfix
                         li.first > div
