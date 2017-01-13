@@ -49,7 +49,7 @@ D.assign(Swiper.prototype, {
         if (!this.options.autoplay) return;
         this.timer = setInterval(function() {
             me.goto(me.current + 1);
-        }, this.options.period || 5000);
+        }, this.options.period || 6000);
     },
 
     stop: function() {

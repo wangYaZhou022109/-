@@ -1,0 +1,9 @@
+.course-detail-top {
+    & .continue {
+        color: #26c526;
+    }
+
+    & .start {
+        color: #2f79f5;
+    }
+}

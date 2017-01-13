@@ -64,6 +64,10 @@
     right: auto;
 }
 
+.pdfViewer .page {
+  border: none;
+}
+
 .pdf-view-toolbar {
   padding: 0 var(--large-space);
   position: absolute;

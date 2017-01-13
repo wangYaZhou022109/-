@@ -14,7 +14,7 @@ exports.components = [
             id: 'viewPdf',
             name: 'picker',
             options: {
-                picker: 'pdf',
+                picker: 'player-pdf',
                 pdfUrl: url,
                 pageNum: Number(pageNum)
             }
@@ -39,4 +39,3 @@ exports.beforeClose = function() {
         me.module.renderOptions.callback(data);
     });
 };
-
