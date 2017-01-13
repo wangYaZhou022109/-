@@ -183,6 +183,10 @@ section.section {
     cursor: pointer;
 }
 
+.relative {
+  position: relative;
+}
+
 /* text */
 .text-overflow {
     @apply --text-overflow;
@@ -263,6 +267,9 @@ section.section {
     &.dashed {
         border-style: dashed;
     }
+    &.radius {
+        border-radius: 3px;
+    }
 }
 
 .circle {
@@ -282,6 +289,6 @@ section.section {
 }
 
 .user-picture img {
-    width: 100%;
+    max-width: 100%;
     max-height: 5em;
 }

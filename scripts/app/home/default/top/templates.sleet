@@ -28,14 +28,13 @@ view('shortcut')
         .item > a.normal(href='#') > i.iconfont.icon-message
         .item > a.normal(href='#') > i.iconfont.icon-daiban
         .item > a.normal(href='/admin') > i.iconfont.icon-setting
-        .item > a.normal(href='#') > i.iconfont.icon-logout
-
-
-
+        if(Global.currentUser.id)
+            .item > a.normal#logout(href='javascript:;') > i.iconfont.icon-logout
+        else
+            .item.hide> a.normal#logout(href='javascript:;') > i.iconfont.icon-logout
         # .user-info.inline-block
         #     .user-pic > img(src='/images/2.jpeg')
 
-        .hide > .item > a.normal#logout(href='javascript:;') > i.icon-exit.inline-block
         .hide
             form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
                 input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)

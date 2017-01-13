@@ -32,7 +32,7 @@ view('player-title')
                         if(score.avgScore)
                             .num > echo(score.avgScore)
                         else
-                            .num > echo('暂无评分')
+                            .inline-block.sub-text > echo('暂无评分')
                     .drop-down-content(class = if(score.hasScore 'hide')) > .content
                         .text-center 我来评分
                         .star-grade
@@ -80,12 +80,12 @@ view('chapter')
                                 .item.sub-text > map('section-type' sectionType)
                                 if(progress)
                                     .item.continue
-                                        i.iconfont.icon-reload
+                                        i.iconfont.icon-reload-full
                                         span.progress > percent(progress.completedRate)
                                         span > map('course-study-status' progress.finishStatus)
                                 else
-                                    .item.continue
-                                        i.iconfont.icon-reload
+                                    .item.start
+                                        i.iconfont.icon-play-full
                                         span > map('course-study-status' 0)
                                 .item.record(id='show-record'+id)
                                     i.iconfont.icon-time + | 学习记录
@@ -126,7 +126,7 @@ view('info')
                     if(score.avgScore)
                         .num > echo(score.avgScore)
                     else
-                        .num > echo('暂无评分')
+                        .inline-block.sub-text > echo('暂无评分')
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > i.iconfont.icon-share
             .inline-block.m-left

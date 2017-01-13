@@ -4,8 +4,8 @@ module
     #banner(data-region='advertising')
 
 view('advertising')
-    #banner.banner > ul
+    #banner.banner.home-banner > ul
         each(adverts)
-            li > img(src=../downUrl + pcFilePath)
+            li(style='background-image:url('+../downUrl + pcFilePath+')')
         else
             li

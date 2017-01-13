@@ -37,6 +37,7 @@ exports.handlers = {
 
 exports.beforeClose = function() {
     var me = this,
+        sectionId = this.bindings.state.data.section.id,
         beginTime = me.bindings.time.data,
         studyTime = this.components.waveform.getLearnTime() + 0.1,
         totalTime = this.components.waveform.getDuration() + 0.1,
@@ -49,7 +50,8 @@ exports.beforeClose = function() {
         resourceTotalTime: Math.ceil(totalTime),
         lessonLocation: Math.ceil(lessonLocation),
         clientType: 0,
-    }).then(function() { callback(); });
+        sectionId: sectionId
+    }).then(function(data) { callback(data); });
 };
 
 // 支持的事件 loading,ready,play,pause,finish,error
