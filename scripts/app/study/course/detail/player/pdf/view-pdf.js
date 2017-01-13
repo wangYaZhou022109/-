@@ -28,7 +28,9 @@ exports.beforeClose = function() {
         beginTime = me.bindings.time.data,
         pdfData = me.components.viewPdf.getData(),
         studyTime = 0,
-        lessonLocation = pdfData.pageNum;
+        lessonLocation;
+    if (!pdfData) return;
+    lessonLocation = pdfData.pageNum;
     // return me.module.dispatch('time').then(function(data) {
     //     var endTime = data[0];
     //     studyTime = (endTime - beginTime) / 1000;
