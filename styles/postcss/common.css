@@ -183,6 +183,10 @@ section.section {
     cursor: pointer;
 }
 
+.relative {
+  position: relative;
+}
+
 /* text */
 .text-overflow {
     @apply --text-overflow;
