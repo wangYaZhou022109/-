@@ -4,4 +4,15 @@
     & img {
         display: block;
     }
+
+    &.home-banner {
+        & li {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    }
 }

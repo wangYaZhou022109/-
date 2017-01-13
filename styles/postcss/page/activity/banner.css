@@ -2,6 +2,10 @@
     width: 100%;
     background-color: var(--sub-color-1);
 
+    & .banner {
+        height: calc(var(--banner-height) + 3);
+    }
+
     & img {
         max-width: inherit;
         width: 100%;
@@ -11,7 +15,6 @@
     & .container {
         position: relative;
         overflow: hidden;
-        height: calc(var(--large-space) * 15);
     }
 
     & li {
@@ -21,7 +24,6 @@
         display: inline-block;
         width: 30%;
         padding: calc(var(--large-space) * 0.5);
-        background-color: var(--bg-color)\0;
         background-color: color(var(--bg-color) alpha(5%));
 
         & .img {
@@ -39,6 +41,7 @@
 
     & li.next {
         right: 0;
+        left: auto;
     }
 
     & li.current {
