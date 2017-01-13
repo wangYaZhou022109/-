@@ -396,7 +396,7 @@ exports.store = {
             questionTypes.load();
             exam.load();
 
-            if ((state.data.id && state.data.id !== payload.examId) || !state.data.id) {
+            if (!state.data || (state.data.id && state.data.id !== payload.examId)) {
                 this.models.exam.set({ id: payload.examId });
 
                 return this.get(this.models.exam).then(function() {
