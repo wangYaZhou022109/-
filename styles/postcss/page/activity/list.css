@@ -1,10 +1,4 @@
 .activity-page{
-    & .main-list .img {
-        height: 22em;/* 临时设置 */
-    }
-    & .img img {
-        max-width: 31em;/* 临时设置 */
-    }
 
     & .activity-category {
         margin-top: var(--large-space);
