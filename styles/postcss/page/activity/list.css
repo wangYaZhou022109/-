@@ -1,5 +1,10 @@
 .activity-page{
-
+    & .main-list {
+        & img {
+            width: 100%;
+        }
+    }
+    
     & .activity-category {
         margin-top: var(--large-space);
         margin-bottom: var(--large-space);
