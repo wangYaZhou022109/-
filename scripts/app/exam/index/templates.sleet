@@ -21,15 +21,15 @@ view('top')
                             small > i.iconfont.icon-star + i.iconfont.icon-time
                         p
                             i.iconfont.icon-star
-                            echo('给予证书：' name)
+                            echo('给予证书：' certificate.name)
                         p.detail-top-time.small-font
-                            | 报名截至日期：
+                            | 报名截至时间：
                             dateTime(exam.applicantEndTime)
                             span  考试时间：
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
-                        .small-font 距离考试开始时间
+                        .small-font.m-top 距离考试开始时间
                 .detail-bottom.clearfix
                     .pull-left > ul.clearfix
                         li.first > div
@@ -45,9 +45,9 @@ view('top')
                             br
                             p.small-font 及格成绩
                         li > div
-                            h3 > echo(exam.applicantNumber)
+                            h3 > echo(joinNumber)
                             br
-                            p.small-font 报名人数
+                            p.small-font 参考人数
 
                     .pull-right
                         compare(handlerBtn 'eq' 'signup')
@@ -78,7 +78,7 @@ view('side')
             .h3 TA们也参加了考试
             .layout-mt-small.user-picture
                 .grid-row > each(relatedMembers)
-                    .col-md-4 > img.block(src=img)
+                    .col-md-3 > img.block(src=img)
 
 view('main')
     .exam-index-main > .container

@@ -1,4 +1,7 @@
-var D, H, jQuery, app, helpers, oauthOptions, plupload;
+var D, H, jQuery, app, helpers, oauthOptions, plupload,
+    _ = require('lodash/collection'),
+    setting = {},
+    currentUser = {};
 
 oauthOptions = {
     clientId: 999,
@@ -9,8 +12,8 @@ oauthOptions = {
 // @ifndef PRODUCTION
 oauthOptions = {
     clientId: 13,
-    provider: 'https://oauth9.zhixueyun.com',
-    returnTo: 'http://192.168.10.115'
+    provider: 'https://oauth9.zhixueyun.com/',
+    returnTo: 'http://192.168.9.115'
 };
 // @endif
 
@@ -94,6 +97,22 @@ D.PageableModel.setDefault({
 require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
-require('./app/util/global').setup(app);
-
-app.start('home');
+require('./app/util/global').setup(app).then(function(data) {
+    _.map(data.setting, function(v) {
+        setting[v.key] = v.value;
+    });
+    _.map(data.currentUser, function(v, item) {
+        currentUser[item] = v;
+    });
+    D.assign(app.global, { setting: setting });
+    D.assign(app.global, { currentUser: currentUser });
+}, function() {
+    app.message.error('加载初始化数据出错');
+    return app.Promise.reject();
+}).then(function() {
+    app.start('home').then(function() {
+        if (!window.history.pushState) {
+            app.dispatch('pushState', window.location.hash.slice(1));   // for ie8
+        }
+    });
+});

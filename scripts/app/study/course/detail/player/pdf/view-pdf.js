@@ -1,21 +1,20 @@
 exports.bindings = {
-    section: true,
-    sectionProgress: true,
+    state: false,
     download: false,
     time: false
 };
 
 exports.components = [
     function() {
-        var section = this.bindings.section.data || {},
-            progress = this.bindings.sectionProgress.data || {},
+        var section = this.bindings.state.data.section || {},
+            progress = section.sectionProgress || {},
             pageNum = progress.lessonLocation || 1,
             url = this.bindings.download.getFullUrl() + '/' + section.resourceId;
         return {
             id: 'viewPdf',
             name: 'picker',
             options: {
-                picker: 'pdf',
+                picker: 'player-pdf',
                 pdfUrl: url,
                 pageNum: Number(pageNum)
             }
@@ -28,15 +27,15 @@ exports.beforeClose = function() {
         beginTime = me.bindings.time.data,
         pdfData = me.components.viewPdf.getData(),
         studyTime = 0,
-        lessonLocation = pdfData.pageNum;
-    // return me.module.dispatch('time').then(function(data) {
-    //     var endTime = data[0];
-    //     studyTime = (endTime - beginTime) / 1000;
+        lessonLocation;
+    lessonLocation = pdfData ? pdfData.pageNum : 0;
     this.module.dispatch('updatePregress', {
         beginTime: beginTime,
         studyTime: Math.ceil(studyTime),
-        lessonLocation: lessonLocation
+        lessonLocation: lessonLocation,
+        clientType: 0,
+        sectionId: this.bindings.state.data.section.id,
+    }).then(function(data) {
+        me.module.renderOptions.callback(data);
     });
-    // });
 };
-

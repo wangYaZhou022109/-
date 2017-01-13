@@ -13,6 +13,8 @@ exports.dataForTemplate = {
             var subject = opt;
             if (opt.cover) {
                 subject.imageUrl = download.getFullUrl() + '?id=' + opt.cover;
+            } else {
+                subject.imageUrl = 'images/default-cover/default_spceial.jpg';
             }
             return subject;
         });

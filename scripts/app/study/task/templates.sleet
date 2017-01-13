@@ -1,46 +1,49 @@
 #! handlebars
 
-module > .achievement-content
+module > .achievement-content.main-side
     .achievement-side.bg-color
         div(data-region='side')
     .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
 view('side')
-    .side-top.title#closeTask 关闭任务
-    br
-    a.btn.block#viewDesc 任务说明
+    # .side-top.title#closeTask 关闭任务
+    # .content > .pointer#viewDesc 任务说明
     ul.list
         each(task.attachments)
-            li
+            li.clearfix
+                a.pull-right.m-left(href=downUrl download=name) > string('download')
                 if(preview)
-                    a.btn(id='preview-'+attachmentId href='javascript:;') > echo(name)
+                    .text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
                 else
-                    a.btn(href=downUrl download=name) > echo(name)
-                a.btn(href=downUrl download=name) > string('download')
-    br
-    compare(section.progress.finishStatus 'eq' 0)
-        a.btn.block#submitTask 提交任务
-    compare(section.progress.finishStatus 'eq' 5)
-        label 审核中...
-    compare(section.progress.finishStatus 'eq' 6)
-        a.btn.block#submitTask 审核不通过，重新提交
-    compare(section.progress.finishStatus 'eq' 2)
-        label 已完成
-    compare(section.progress.finishStatus 'eq' 4)
-        label 标记完成
+                    .text-overflow.pointer(href=downUrl download=name) > echo(name)
+
+    #.
+        compare(section.progress.finishStatus 'eq' 0)
+            a.btn.block#submitTask 提交任务
+        compare(section.progress.finishStatus 'eq' 5)
+            label 审核中...
+        compare(section.progress.finishStatus 'eq' 6)
+            a.btn.block#submitTask 审核不通过，重新提交
+        compare(section.progress.finishStatus 'eq' 2)
+            label 已完成
+        compare(section.progress.finishStatus 'eq' 4)
+            label 标记完成
 
 
 view('head')
     .pull-left.title > echo(task.name)
+    .text-right
+        .btn.white.m-right 关闭任务
+        .btn 提交任务
 
 view('main')
     .preview-content
-        .row
-            .col-xs-6
-                .com-title.inline-block 任务说明
-            p > @echo(task.description)
-        .row#viewPdf
+        .h3.m-bottom 任务说明
+        p.text-overflow
+            span > @echo(task.description)
+            a.pointer 查看详细
+        #viewPdf
 
 view('edit')
     form.vertical

@@ -41,30 +41,8 @@ exports.store = {
         courseRelated: { url: '../course-study/course-front/related', type: 'pageable', pageSize: 2, root: 'items' },
         download: { url: '../human/file/download' },
         lastestUser: { url: '../course-study/course-front/lastest-user', type: 'pageable', pageSize: 8, root: 'items' },
-        score: {
-            url: '../course-study/course-front/score',
-            data: {},
-            mixin: {
-                init: function(data) {
-                    var course = data,
-                        avgScore;
-                    if (course) {
-                        // 判断当前用户是否评分
-                        if (course.courseScore) {
-                            this.data.hasScore = true;
-                        }
-                        if (course.avgScore) {
-                            this.data.scorePercent = course.avgScore;
-                            avgScore = course.avgScore / 10;
-                            this.data.avgScore = avgScore.toFixed(1);
-                        } else {
-                            this.data.scorePercent = 0;
-                        }
-                        this.changed();
-                    }
-                }
-            }
-        },
+        score: { url: '../course-study/course-front/score' },
+        courseScore: {},
         state: {}
     },
     callbacks: {
@@ -95,57 +73,54 @@ exports.store = {
                 this.get(notes)
             ]);
         },
-        initScore: function(payload) {
-            // 初始化评分
-            var score = this.models.score,
-                avgScore;
-            score.clear();
-            score.data.hasScore = true;
-            score.data.scorePercent = payload.avgScore;
-            avgScore = payload.avgScore / 10;
-            score.data.avgScore = avgScore.toFixed(1);
-            score.changed();
-        },
-        initCourse: function() {
-            var course = this.models.course,
-                state = this.models.state;
-            course.set({ id: state.data.id });
-            return this.get(course);
+        updateProgress: function(payload) {
+            var course = this.models.course;
+            var courseSectionProgress = payload[0];
+            var section = course.findSection(courseSectionProgress.sectionId);
+            // set new progress
+            section.progress = courseSectionProgress;
+            course.changed();
         },
         showSection: function(payload) {
             var state = this.models.state;
             state.data.sectionId = payload.sectionId;
             state.changed();
         },
-        collect: function() {
-            var courseId = this.models.course.data.id,
-                courseName = this.models.course.data.name,
-                collect = this.models.collect;
-            collect.clear();
-            collect.data.businessId = courseId;
-            collect.data.businessType = 1;
-            collect.data.collectName = courseName;
+        collect: function(payload) {
+            var collect = this.models.collect;
+            collect.set(payload);
             return this.save(collect);
         },
         cancelCollect: function(payload) {
             var collect = this.models.collect;
             collect.set(payload);
-            return this.del(collect);
+            return this.del(collect, { slient: true }).then(function() {
+                collect.set({}, true);
+            });
         },
         addNote: function(payload) {
-            var note = this.models.note;
+            var me = this,
+                note = this.models.note;
             note.set(payload);
-            return this.save(note);
+            return this.save(note).then(function() {
+                me.get(me.models.notes);
+            });
         },
         removeNote: function(payload) {
-            var note = this.models.note;
+            var me = this,
+                note = this.models.note;
             note.set(payload);
-            return this.del(note);
+            return this.del(note).then(function() {
+                me.get(me.models.notes);
+            });
         },
         updateNote: function(payload) {
-            var note = this.models.note;
+            var me = this,
+                note = this.models.note;
             note.set(payload);
-            return this.save(note);
+            return this.save(note).then(function() {
+                me.get(me.models.notes);
+            });
         },
         turnPage: function() {
             var pageInfo = this.models.courseRelated.getPageInfo();
@@ -162,7 +137,10 @@ exports.store = {
                 course = this.models.course;
             score.data.businessId = course.data.id;
             score.data.businessType = 1;
-            return this.save(score);
+            return this.save(score).then(function(data) {
+                course.data.courseScore = data[0];
+                course.changed();
+            });
         },
         register: function(payload) {
             var courseId = this.models.state.data.id,
@@ -178,18 +156,15 @@ exports.store = {
             model.set({ courseId: courseId });
             // 注册完毕自动播放第一章或者指定的章节
             this.chain(
-                this.post(model), [
-                    function() {
-                        // this.app.message.alert('注册完毕，开始刷新课程');
-                        course.get({ id: state.data.id }); // 刷新课程
-                        this.get(course);
-                    },
-                    function() {
-                        // this.app.message.alert('注册完毕，开始播放课程');
-                        D.assign(state.data, { sectionId: sectionId, register: true });
-                        state.changed(); // 改变播放
-                    }
-                ]
+                this.post(model),
+                function(data) {
+                    course.set(data[0], true); // 刷新课程
+                },
+                function() {
+                    // this.app.message.alert('注册完毕，开始播放课程');
+                    D.assign(state.data, { sectionId: sectionId, register: true });
+                    state.changed(); // 改变播放
+                }
             );
         }
     }

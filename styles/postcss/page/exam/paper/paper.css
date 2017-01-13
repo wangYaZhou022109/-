@@ -1,6 +1,18 @@
 .achievement-content {
     height: 100%;
 
+    &.main-side {
+      & .achievement-side {
+        padding-top: var(--nav-height);
+      }
+
+      & .achievement-head {
+        margin-left: 0;
+        position: relative;
+        z-index: 2;
+      }
+    }
+
     & .achievement-side {
         width: 20%;
         position: fixed;
@@ -18,6 +30,11 @@
             & .time {
                 font-size: var(--h1);
             }
+        }
+
+        & .content {
+          padding: 0 var(--large-space);
+          margin-top: var(--large-space);
         }
 
         & .list {
@@ -67,6 +84,11 @@
     & .achievement-main {
         margin-left: 20%;
         padding: var(--main-list-gap);
+        overflow: auto;
+        position: absolute;
+        width: 80%;
+        top: var(--nav-height);
+        bottom: 0;
 
         & .preview-list {
             line-height: 2;

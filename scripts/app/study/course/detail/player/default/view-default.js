@@ -16,7 +16,8 @@ exports.dataForTemplate = {
     state: function(data) {
         return {
             loading: !data.state.state.id,
-            error: data.state.state.id && !data.state.section
+            register: !data.state.state.register,
+            error: data.state.state.register && !data.state.section
         };
     }
 };
