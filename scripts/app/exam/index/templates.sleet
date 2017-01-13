@@ -52,6 +52,8 @@ view('top')
                     .pull-right
                         compare(handlerBtn 'eq' 'signup')
                             button.btn.white#signup 报名
+                        compare(handlerBtn 'eq' 'signupEnd')
+                            button.btn.white 报名结束
                         compare(handlerBtn 'eq' 'waitReview')
                             i 审核中
                             button.btn.white#revoke 取消报名
