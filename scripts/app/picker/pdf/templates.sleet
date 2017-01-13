@@ -1,30 +1,29 @@
 #! handlebars
-module > .clearfix > .col-sm-12
+module > .layout-mt
     div(data-region='toolbar')
     div(data-region='viewer')
 
 view('toolbar')
-    .pdf-view-toolbar
-        .clearfix.border.bottom
-            .pull-left.m-top.m-bottom
-                .inline-block.iconfont.icon-arrow-left.m-right#turnToPage-prev
-                .inline-block.iconfont.icon-arrow-right#turnToPage-next
-                .inline-block.m-left
-                    input.input.min.inline-block#currentPageNum(value=state.pageNum)
-                    echo('/')
-                    label.inline-block#pageCount > echo(state.pageCount)
-            .pull-right.m-top.m-bottom
-                .inline-block
-                    .iconfont.icon-zoom-out#zoom-out
-                    .iconfont.icon-zoom-in.m-left#zoom-in
-                .inline-block.m-left
-                    select(id='scaleSelect')
-                        each(pdfScale)
-                            option(value = key)('selected')&if(selected) > echo(value)
+    .clearfix.border.bottom
+        .pull-left.m-top.m-bottom
+            .inline-block.iconfont.icon-arrow-left.m-right#turnToPage-prev
+            .inline-block.iconfont.icon-arrow-right#turnToPage-next
+            .inline-block.m-left
+                input.input.min.inline-block#currentPageNum(value=state.pageNum)
+                echo('/')
+                label.inline-block#pageCount > echo(state.pageCount)
+        .pull-right.m-top.m-bottom
+            .inline-block
+                .iconfont.icon-zoom-out#zoom-out
+                .iconfont.icon-zoom-in.m-left#zoom-in
+            .inline-block.m-left
+                select(id='scaleSelect')
+                    each(pdfScale)
+                        option(value = key)('selected')&if(selected) > echo(value)
 view('viewer')
     .row.m-top
         .col-sm-12
             #progress.btn(style='display:none;')
             label#progressLabel
-    .row > .col-sm-12#viewerContainer(style='overflow:auto;position:absolute;width:100%;height:420px;')
+    .relative > .col-sm-12#viewerContainer(style='overflow:auto;position:absolute;width:100%;height:800px;')
         .pdfViewer#viewer
