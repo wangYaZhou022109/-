@@ -96,7 +96,6 @@ exports.store = {
             ]);
         },
         initScore: function(payload) {
-            // 初始化评分
             var score = this.models.score,
                 avgScore;
             score.clear();
@@ -106,11 +105,13 @@ exports.store = {
             score.data.avgScore = avgScore.toFixed(1);
             score.changed();
         },
-        initCourse: function() {
-            var course = this.models.course,
-                state = this.models.state;
-            course.set({ id: state.data.id });
-            return this.get(course);
+        updateProgress: function(payload) {
+            var course = this.models.course;
+            var courseSectionProgress = payload[0];
+            var section = course.findSection(courseSectionProgress.sectionId);
+            // set new progress
+            section.progress = courseSectionProgress;
+            course.changed();
         },
         showSection: function(payload) {
             var state = this.models.state;
@@ -178,18 +179,15 @@ exports.store = {
             model.set({ courseId: courseId });
             // 注册完毕自动播放第一章或者指定的章节
             this.chain(
-                this.post(model), [
-                    function() {
-                        // this.app.message.alert('注册完毕，开始刷新课程');
-                        course.get({ id: state.data.id }); // 刷新课程
-                        this.get(course);
-                    },
-                    function() {
-                        // this.app.message.alert('注册完毕，开始播放课程');
-                        D.assign(state.data, { sectionId: sectionId, register: true });
-                        state.changed(); // 改变播放
-                    }
-                ]
+                this.post(model),
+                function(data) {
+                    course.set(data[0], true); // 刷新课程
+                },
+                function() {
+                    // this.app.message.alert('注册完毕，开始播放课程');
+                    D.assign(state.data, { sectionId: sectionId, register: true });
+                    state.changed(); // 改变播放
+                }
             );
         }
     }
