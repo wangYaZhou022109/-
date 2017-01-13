@@ -1,12 +1,11 @@
 exports.bindings = {
-    section: true,
-    sectionProgress: true,
-    time: false
+    time: false,
+    state: false
 };
 
 exports.dataForTemplate = {
     url: function(data) {
-        var url = data.section.url;
+        var url = data.state.section.url;
         if (!url.startsWith('http')) {
             url = '//' + url;
         }
@@ -16,17 +15,14 @@ exports.dataForTemplate = {
 
 exports.beforeClose = function() {
     var me = this,
-        beginTime = me.bindings.time.data,
-        endTime = 0,
-        studyTime = 0;
-    return me.module.dispatch('time').then(function(data) {
-        endTime = data[0];
-        studyTime = (endTime - beginTime) / 1000;
-        me.module.dispatch('updatePregress', {
-            beginTime: beginTime,
-            commitTime: endTime,
-            studyTime: Math.ceil(studyTime),
-            lessonLocation: Math.ceil(studyTime)
-        });
+        beginTime = this.bindings.time.data;
+    me.module.dispatch('updatePregress', {
+        sectionId: this.bindings.state.data.section.id,
+        beginTime: beginTime,
+        clientType: 0,
+        finishStatus: 2, // 已完成
+        completedRate: 100, // 已完成
+    }).then(function(data) {
+        me.module.renderOptions.callback(data);
     });
 };

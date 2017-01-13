@@ -25,8 +25,8 @@ exports.dataForEntityModule = function(entity) {
         state: this.bindings.state.data,
         section: entity,
         // refresh: function(course) { me.module.dispatch('refresh', course); },
-        callback: function() {
-            me.module.dispatch('initCourse');
+        callback: function(data) {
+            me.module.dispatch('updateProgress', data);
         },
         register: function() {
             me.module.dispatch('register');

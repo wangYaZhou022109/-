@@ -33,17 +33,20 @@ exports.dataForTemplate = {
 };
 
 exports.beforeClose = function() {
-    var beginTime = this.bindings.time.data,
-        player = this.components.player,
+    var player = this.components.player,
+        sectionId = this.bindings.state.data.section.id,
+        beginTime = this.bindings.time.data,
         studyTime = player.getLearnTime(),
         totalTime = player.duration(),
-        lessonLocation = player.currentTime();
-    var callback = this.module.renderOptions.callback;
+        lessonLocation = player.currentTime(),
+        callback = this.module.renderOptions.callback;
+
     this.module.dispatch('updateProgress', {
         beginTime: beginTime,
         studyTime: Math.ceil(studyTime),
         resourceTotalTime: Math.ceil(totalTime),
         lessonLocation: Math.ceil(lessonLocation),
         clientType: 0,
-    }).then(function() { callback(); });
+        sectionId: sectionId
+    }).then(function(data) { callback(data); });
 };
