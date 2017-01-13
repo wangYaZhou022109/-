@@ -19,7 +19,8 @@ exports.store = {
             url: '../exam/exam/related-members'
         },
         down: { url: '../human/file/download' },
-        certificate: { url: '../system/certificate' }
+        certificate: { url: '../system/certificate' },
+        signUp: { rul: '../exam/sign-up' }
     },
     callbacks: {
         init: function(payload) {
@@ -45,7 +46,12 @@ exports.store = {
         },
         revoke: function() {
             var me = this;
-            return me.del(me.models.exam);
+            me.models.signUp.params = { id: this.models.exam.data.id };
+            return me.del(me.models.signUp);
+        },
+        removeSingUp: function() {
+            delete this.models.exam.data.signUp;
+            this.models.exam.changed();
         }
     }
 };
