@@ -18,7 +18,6 @@ exports.components = [function() {
             currentTime: currentTime,
             video: {
                 fluid: true, // 自动缩放 aspectRatio
-                autoplay: true,
             },
         }
     };

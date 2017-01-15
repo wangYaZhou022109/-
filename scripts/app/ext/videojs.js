@@ -11,32 +11,25 @@ var D = require('drizzlejs'),
             };
         };
     };
-var voideKit = function(player) {
-    return (function(p) {
-        var beginTime = 0;
-        var learnTime = 0;
-        var init = function() {
-            learnTime = 0;
-        };
-        var begin = function() {
-            beginTime = p.currentTime();
-        };
-        var end = function() {
-            learnTime += (p.currentTime() - beginTime);
-            beginTime = p.currentTime(); // 重置开始时间
-        };
-        var getLearnTime = function() {
-            end();
-            return learnTime;
-        };
+var initVideo = function(payload) {
+    var beginTime;
+    var learnTime;
+    payload.on('timeupdate', function() {
+        var now = new Date().getTime();
+        beginTime = beginTime || now;
+        learnTime = learnTime || 0;
+        learnTime += (now - beginTime);
+        beginTime = now;
+        console.log('timeupdate', learnTime);
+    });
 
-        return {
-            init: init,
-            begin: begin,
-            end: end,
-            getLearnTime: getLearnTime,
-        };
-    }(player));
+    payload.on('end', function() {
+        beginTime = 0;
+    });
+
+    return function() {
+        return Math.floor(learnTime / 1000);
+    };
 };
 
 D.ComponentManager.register('videojs', function(view, el, options) {
@@ -44,14 +37,10 @@ D.ComponentManager.register('videojs', function(view, el, options) {
     var opt = {
         controls: true,
         loop: false,
-        techOrder: ['html5', 'flash'],
-        plugins: {}
+        techOrder: ['html5', 'flash']
     };
     return videojs(el, D.assign(opt, options.video), function() {
-        var kit = voideKit(this);
-        this.on('playing', kit.begin);
-        this.on('pause', kit.end);
-        this.getLearnTime = kit.getLearnTime;
+        this.getLearnTime = initVideo(this);
         if (options.currentTime) this.currentTime(options.currentTime);
         if (view.options.video) {
             this.on('timeupdate', handle(view.options.video.timeupdate));
