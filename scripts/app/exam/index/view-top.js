@@ -43,7 +43,9 @@ exports.handlers = {
     },
     revoke: function() {
         var me = this;
-        return me.module.dispatch('revoke');
+        return me.module.dispatch('revoke').then(function() {
+            me.module.dispatch('removeSingUp');
+        });
     }
 };
 
@@ -63,44 +65,50 @@ exports.dataForTemplate = {
         var exam = this.bindings.exam.data,
             currentTime = new Date().getTime(),
             result = '';
-        if (exam.type && exam.type === 1) {
-            if ((!exam.signUp || !exam.signUp.status) && currentTime < exam.applicantEndTime) {
-                result = 'signup';
-            } else if ((!exam.signUp || !exam.signUp.status) && currentTime >= exam.applicantEndTime) {
-                result = 'disableSignup';
-            } else if (currentTime >= exam.startTime && currentTime < exam.endTime) {
-                if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
-                    result = 'detail';
-                } else if (exam.examRecord && exam.examRecord.status > 4) {
-                    result = 'overExam';
-                } else if (exam.signUp.status === 1) {
+        if (exam.type) {
+            if (exam.type === 1 && currentTime < exam.applicantEndTime) {
+                if ((!exam.signUp || !exam.signUp.status)) {
+                    result = 'signup';
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 1) {
                     result = 'waitReview';
-                } else if (exam.signUp.status === 3) {
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 3) {
                     result = 'rejected';
-                } else if (exam.signUp.status === 2) {
-                    result = 'startExam';
+                    return result;
+                } else if (currentTime < exam.startTime) {
+                    result = 'revoke';
                 }
-            } else if (currentTime > exam.endTime) {
-                result = 'detail';
-            } else {
-                result = 'prepare';
+            } else if (exam.type === 1 && currentTime >= exam.applicantEndTime && currentTime < exam.endTime) {
+                if ((!exam.signUp || !exam.signUp.status)) {
+                    result = 'signupEnd';
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 1) {
+                    result = 'waitReview';
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 3) {
+                    result = 'rejected';
+                    return result;
+                }
             }
-        } else if (exam.type && exam.type !== 1) {
             if (currentTime >= exam.startTime && currentTime < exam.endTime) {
                 if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
-                    result = 'detail';
+                    result = 'submittedShowDetail';
                 } else if (exam.examRecord && exam.examRecord.status > 4) {
-                    result = 'overExam';
+                    result = 'submitted';
                 } else {
                     result = 'startExam';
                 }
             } else if (currentTime > exam.endTime) {
-                result = 'detail';
-            } else {
-                result = 'prepare';
+                if (exam.examRecord && exam.examRecord.status > 5) {
+                    result = 'detail';
+                } else {
+                    result = 'end';
+                }
+            } else if (currentTime < exam.startTime) {
+                result = 'noBegin';
             }
         }
-
         return result;
     },
     examCoverUrl: function() {

@@ -1,28 +1,14 @@
 var jQuery = require('jquery'),
-    _ = require('lodash/collection'),
-    setting = {},
-    currentUser = {},
     D = require('drizzlejs');
 exports.setup = function(app) {
-    var root, options;
-    root = app;
-    options = {
-        url: root.options.urlRoot + '/system/setting',
+    var options = {
+        url: app.options.urlRoot + '/system/setting',
         method: 'GET',
-        dataType: 'json'
+        dataType: 'json',
+        timeout: 10000
     };
-    jQuery.ajax(options).done(function(data) {
-        _.map(data.setting, function(v) {
-            setting[v.key] = v.value;
-        });
-        _.map(data.currentUser, function(v, item) {
-            currentUser[item] = v;
-        });
-    });
-    D.assign(root.global, {
-        setting: setting
-    });
-    D.assign(root.global, {
-        currentUser: currentUser
+    return app.Promise.create(function(resolve, reject) {
+        D.assign(options, { success: resolve, error: reject });
+        jQuery.get(options, resolve, reject);
     });
 };
