@@ -6,7 +6,7 @@ Swiper = function(el, options) {
     this.el = el;
     this.options = options;
 
-    this.current = 0;
+    this.current = options.current || 0;
     this.items = Array.prototype.slice.call(el.querySelectorAll('ul > li'));
 
     this.init();
@@ -14,8 +14,13 @@ Swiper = function(el, options) {
 
 D.assign(Swiper.prototype, {
     init: function() {
+        var i;
         this.el.classList.add('swiper-container');
         this.items[this.current].classList.add('current');
+
+        for (i = 0; i < this.current; i++) {
+            this.items[i].classList.add('prev');
+        }
 
         this.insertNavigation();
         this.bindListener();
@@ -25,7 +30,10 @@ D.assign(Swiper.prototype, {
     goto: function(number) {
         var n = number % this.items.length,
             inEl,
-            outEl;
+            outEl,
+            i,
+            toLeft = n > this.current,
+            me = this;
 
         if (n === this.current) {
             return;
@@ -38,10 +46,20 @@ D.assign(Swiper.prototype, {
         this.dots[n].classList.add('current');
 
         this.current = n;
-
-        outEl.classList.remove('current');
-        A.animate(outEl, 'prev');
-        inEl.classList.add('current');
+        this.el.classList.add('animating');
+        Promise.all([
+            A.transition(outEl, 'current', false),
+            A.transition(inEl, 'current', true),
+            toLeft ? A.transition(outEl, 'prev', true) : A.transition(inEl, 'prev', false)
+        ]).then(function() {
+            me.el.classList.remove('animating');
+            for (i = 0; i < me.current; i++) {
+                me.items[i].classList.add('prev');
+            }
+            for (i = me.current + 1; i < me.items.length; i++) {
+                me.items[i].classList.remove('prev');
+            }
+        });
     },
 
     start: function() {
@@ -49,7 +67,7 @@ D.assign(Swiper.prototype, {
         if (!this.options.autoplay) return;
         this.timer = setInterval(function() {
             me.goto(me.current + 1);
-        }, this.options.period || 5000);
+        }, this.options.period || 6000);
     },
 
     stop: function() {
@@ -70,7 +88,7 @@ D.assign(Swiper.prototype, {
             return d;
         });
 
-        this.dots[0].classList.add('current');
+        this.dots[this.current].classList.add('current');
         this.el.appendChild(this.navigation);
     },
 

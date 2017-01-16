@@ -6,7 +6,7 @@ module > .activity-page
     .activity-list(data-region='list')
 
 view('banner')
-    .container > #activitys-ul.banner > ul
+    .bg-img > .container > #activitys-ul.banner > ul
         each(activitys)
             li
                 .content
@@ -19,10 +19,10 @@ view('banner')
                             p > echo('起：') + dateTime(startTime)
                             p > echo('至：') + dateTime(endTime)
                         .information > echo(description)
-                        .num
-                            | 已有
-                            strong 316
-                            | 人参加
+                        #  .num
+                        #      | 已有
+                        #      strong 316
+                        #      | 人参加
                         compare(type 'eq' 1)
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与1
                         compare(type 'eq' 2)
@@ -73,7 +73,7 @@ view('list')
                                 a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与
                     .clearfix
                         .pull-right.tip-text
-                            i.iconfont.icon-user + | 218人已学习
+                            #  i.iconfont.icon-user + | 218人已学习
                         .title.text-overflow > echo(name)
                     .bottom
                         .pull-right > dateTime(startTime) + echo('~') + dateTime(endTime)

@@ -317,7 +317,10 @@ exports.store = {
                     this.save();
                 },
                 getAnswer: function(id) {
-                    return _.find(this.data.answers, ['key', id]);
+                    if (this.data) {
+                        return _.find(this.data.answers, ['key', id]);
+                    }
+                    return null;
                 }
             }
         },
@@ -335,7 +338,8 @@ exports.store = {
                     this.data.api = {
                         examRecordId: this.module.store.models.exam.data.examRecord.id,
                         submitType: data.submitType,
-                        answerRecords: this.changeAnswerRecord()
+                        answerRecords: this.changeAnswerRecord(),
+                        clientType: 1
                     };
                 },
                 changeAnswerRecord: function() {
@@ -396,7 +400,7 @@ exports.store = {
             questionTypes.load();
             exam.load();
 
-            if ((state.data.id && state.data.id !== payload.examId) || !state.data.id) {
+            if (!state.data || (state.data.id && state.data.id !== payload.examId)) {
                 this.models.exam.set({ id: payload.examId });
 
                 return this.get(this.models.exam).then(function() {
@@ -479,9 +483,11 @@ exports.store = {
                         me.models.state.clear();
                         me.models.countDown.clear();
                         me.models.questionTypes.clear();
-                        me.app.message.success('交卷成功');
-                        closeConnect();
-                        window.close();
+                        me.app.viewport.modal(me.module.items.tips, { message: '交卷成功' });
+                        setTimeout(function() {
+                            closeConnect();
+                            window.close();
+                        }, 1500);
                     } else {
                         me.models.modify.data = { answers: [], api: {} };
                     }
@@ -509,7 +515,7 @@ exports.afterRender = function() {
         getRandom = function() {
             var r = Math.random() * 1,
                 min = Number(r.toFixed(2)),
-                ms = (min + 2) * (1000 * 60);
+                ms = (min + 1) * (1000 * 60);
             return ms;
         },
         random = getRandom(),
@@ -520,14 +526,14 @@ exports.afterRender = function() {
             });
         };
 
-    // this.app.message.success('随机秒数' + (random / 1000));
+    this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
+        autoSubmit();
         timeOutId = setTimeout(autoSubmit, random);
         connect(examId, function() {
+            me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
-                me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
                 closeConnect();
-                window.close();
             });
         }, function(delay) {
             return me.dispatch('delay', { delay: Number(delay) });

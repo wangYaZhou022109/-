@@ -21,15 +21,15 @@ view('top')
                             small > i.iconfont.icon-star + i.iconfont.icon-time
                         p
                             i.iconfont.icon-star
-                            echo('给予证书：' name)
+                            echo('给予证书：' certificate.name)
                         p.detail-top-time.small-font
-                            | 报名截至日期：
+                            | 报名截至时间：
                             dateTime(exam.applicantEndTime)
                             span  考试时间：
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
-                        .small-font 距离考试开始时间
+                        .small-font.m-top 距离考试开始时间
                 .detail-bottom.clearfix
                     .pull-left > ul.clearfix
                         li.first > div
@@ -45,27 +45,36 @@ view('top')
                             br
                             p.small-font 及格成绩
                         li > div
-                            h3 > echo(exam.applicantNumber)
+                            h3 > echo(joinNumber)
                             br
-                            p.small-font 报名人数
+                            p.small-font 参考人数
 
                     .pull-right
                         compare(handlerBtn 'eq' 'signup')
                             button.btn.white#signup 报名
-                        compare(handlerBtn 'eq' 'disableSignup')
+                        compare(handlerBtn 'eq' 'signupEnd')
                             button.btn.white 报名结束
+                        compare(handlerBtn 'eq' 'waitReview')
+                            i 审核中
+                            button.btn.white#revoke 取消报名
+                        compare(handlerBtn 'eq' 'rejected')
+                            button.btn.white 审核未通过
+                        compare(handlerBtn 'eq' 'revoke')
+                            button.btn.white#revoke 取消报名
+                        compare(handlerBtn 'eq' 'submittedShowDetail')
+                            a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
+                            #  a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 重新考试
+                        compare(handlerBtn 'eq' 'submitted')
+                            h3 待评卷
                         compare(handlerBtn 'eq' 'startExam')
                             a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 进入考试
-                        compare(handlerBtn 'eq' 'waitReview')
-                            button.btn.white 待审核
-                        compare(handlerBtn 'eq' 'rejected')
-                            button.btn.white 报名失败
-                        compare(handlerBtn 'eq' 'prepare')
-                            h3 准备考试
-                        compare(handlerBtn 'eq' 'overExam')
-                            h3 考试结束 活动结束后可查看成绩
                         compare(handlerBtn 'eq' 'detail')
                             a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
+                        compare(handlerBtn 'eq' 'end')
+                            h3 考试已结束
+                        compare(handlerBtn 'eq' 'noBegin')
+                            h3 未开始
+                        
 
 view('side')
     .page-side > .container
@@ -78,7 +87,7 @@ view('side')
             .h3 TA们也参加了考试
             .layout-mt-small.user-picture
                 .grid-row > each(relatedMembers)
-                    .col-md-4 > img.block(src=img)
+                    .col-md-3 > img.block(src=img)
 
 view('main')
     .exam-index-main > .container

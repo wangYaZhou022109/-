@@ -4,41 +4,21 @@ exports.items = {
 
 exports.store = {
     models: {
-        section: {},
-        sectionProgress: { url: '../course-study/course-front/submit-progress' },
+        updateProgress: { url: '../course-study/course-front/doc-progress' },
         time: { url: '../system/setting/time' },
         state: {}
     },
     callbacks: {
         init: function(payload) {
-            var section = this.models.section,
-                sectionProgress = this.models.sectionProgress,
+            var state = this.models.state,
                 time = this.models.time;
-            section.set(payload.section);
-            sectionProgress.set(payload.sectionProgress);
-            return this.get(time);
-        },
-        time: function() {
-            var time = this.models.time;
+            state.set(payload);
             return this.get(time);
         },
         updatePregress: function(payload) {
-            var sectionProgress = this.models.sectionProgress,
-                section = this.models.section,
-                me = this;
-            sectionProgress.clear();
-            sectionProgress.set(payload);
-            sectionProgress.data.courseId = section.data.courseId;
-            sectionProgress.data.sectionId = section.data.id;
-            sectionProgress.data.chapterId = section.data.chapterId;
-            sectionProgress.data.clientType = 0; // pc
-            sectionProgress.data.sectionType = section.data.sectionType;
-            sectionProgress.data.finishStatus = 2; // 已完成
-            sectionProgress.data.completedRate = 100; // 已完成
-
-            this.save(sectionProgress).then(function() {
-                me.module.renderOptions.callback();
-            });
+            var updateProgress = this.models.updateProgress;
+            updateProgress.set(payload);
+            return this.save(updateProgress);
         }
     }
 };

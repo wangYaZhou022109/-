@@ -31,95 +31,96 @@
             width: 33.333%;
             padding-right: var(--main-list-gap);
             margin-bottom: calc(var(--main-list-gap) + 1);
+        }
 
-            & .content {
-                position: relative;
-                transition: all .2s linear;
+        & .content {
+            position: relative;
+            transition: all .2s linear;
 
-                &:hover {
-                    @apply --box-shadow;
+            &:hover {
+                @apply --box-shadow;
 
-                    padding: 1em 1em var(--large-space);
-                    margin: -1em -1em -var(--large-space);
+                padding: 1em 1em var(--large-space);
+                margin: -1em -1em -var(--large-space);
 
-                    & .detail-wrapper {
-                        @apply --fade-in;
+                & .detail-wrapper {
+                    @apply --fade-in;
 
-                        transform: scale(1,1);
-                        z-index: 1;
+                    transform: scale(1,1);
+                    z-index: 1;
 
-                    }
+                }
 
-                    & .list-tag {
-                        margin: 1em;
-                    }
+                & .list-tag {
+                    margin: 1em;
+                }
 
-                    & .title {
-                        font-weight: bold;
-                    }
+                & .title {
+                    font-weight: bold;
+                }
 
-                    & img {
-                        transform: scale(1.1);
-                    }
+                & img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        & .title {
+            margin: 1em 0;
+        }
+
+        & .bottom {
+            font-size: var(--small-font);
+            white-space: nowrap;
+
+            & .item {
+                display: inline;
+                padding-right: var(--font-size);
+                margin-right: var(--font-size);
+                border-right: 1px solid var(--border-color);
+
+                &:last-child {
+                    border: none;
+                    margin: 0;
+                    padding: 0;
                 }
             }
 
-            & .title {
-                margin: 1em 0;
-            }
-
-            & .bottom {
-                font-size: var(--small-font);
-                white-space: nowrap;
-
-                & .item {
-                    display: inline;
-                    padding-right: var(--font-size);
-                    margin-right: var(--font-size);
-                    border-right: 1px solid var(--border-color);
-
-                    &:last-child {
-                        border: none;
-                        margin: 0;
-                        padding: 0;
-                    }
-                }
-
-            }
-
-            & .detail-wrapper {
-                @apply --fade-out;
-
-                background-color: white\0;
-                background-color: rgba(255,255,255,.95);
-                transition: all .2s linear;
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                overflow: hidden;
-                transform: scale(1,0);
-                transform-origin: 0 100%;
-                z-index: -1;
-                padding: var(--space) var(--large-space);
-
-
-                & p {
-                    height: calc(var(--font-size) * 1.8 * 2);
-                    overflow: hidden;
-                }
-            }
-
-            & .list-tag {
-                @apply --tag;
+            & .iconfont {
+                margin-right: 3px;
             }
 
         }
+
+        & .detail-wrapper {
+            @apply --fade-out;
+
+            background-color: white\0;
+            background-color: rgba(255,255,255,.95);
+            transition: all .2s linear;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            transform: scale(1,0);
+            transform-origin: 0 100%;
+            z-index: -1;
+            padding: var(--space) var(--large-space);
+
+            & p {
+                height: calc(var(--font-size) * 1.8 * 2);
+                overflow: hidden;
+            }
+        }
+
+        & .list-tag {
+            @apply --tag;
+        }
+
     }
 
     & .img {
-        height: var(--main-list-img-height);
+        min-height: var(--main-list-img-height);
     }
-
-
 }

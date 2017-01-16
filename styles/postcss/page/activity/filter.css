@@ -1,24 +1,26 @@
 .activity-page {
     & .activity-filter {
-        padding-top: var(--large-space);
-        padding-bottom: var(--large-space);
+        padding-top: 1em;
+        padding-bottom: 1em;
         background-color: color(var(--sub-color-1) alpha(80%));
     }
 
     & .activity-tabs {
         height: var(--search-bar-height);
-        line-height: var(--search-bar-height);
+        line-height: var(--large-space);
         width: 50%;
         max-width: 40em;
+        padding: calc(var(--space) / 2) 0;
 
         & li {
             float: left;
             width: 25%;
             text-align: center;
-            font-size: var(--h4);
             color: var(--white);
             cursor: pointer;
             transition: all .2s linear;
+            padding: 0 1em;
+            margin-top: calc(var(--space) / 2);
 
             &.active {
                 color: var(--white);

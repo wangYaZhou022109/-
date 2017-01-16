@@ -19,11 +19,17 @@ exports.store = {
             url: '../exam/exam/related-members'
         },
         down: { url: '../human/file/download' },
+        certificate: { url: '../system/certificate' },
+        signUp: { url: '../exam/sign-up' }
     },
     callbacks: {
         init: function(payload) {
+            var me = this;
             this.models.exam.set(payload);
-            this.get(this.models.exam);
+            this.get(me.models.exam).then(function() {
+                me.models.certificate.set({ id: me.models.exam.data.certificateId });
+                me.get(me.models.certificate);
+            });
             this.models.relatedExams.params = payload;
             this.get(this.models.relatedExams);
             this.models.relatedTopics.params = payload;
@@ -40,7 +46,12 @@ exports.store = {
         },
         revoke: function() {
             var me = this;
-            return me.del(me.models.exam);
+            me.models.signUp.set({ id: this.models.exam.data.id });
+            return me.del(me.models.signUp);
+        },
+        removeSingUp: function() {
+            delete this.models.exam.data.signUp;
+            this.models.exam.changed();
         }
     }
 };
