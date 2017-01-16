@@ -3,6 +3,18 @@ exports.bindings = {
     state: true
 };
 
+exports.events = {
+    'click viewDesc': 'viewDesc'
+};
+
+exports.handlers = {
+    viewDesc: function() {
+        this.module.dispatch('preview', {
+            flag: 'desc'
+        });
+    }
+};
+
 exports.components = [
     function() {
         var state = this.bindings.state.data || {};

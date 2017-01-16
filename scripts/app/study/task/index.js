@@ -22,6 +22,9 @@ exports.store = {
         preview: {
             url: '../human/file/preview'
         },
+        download: {
+            url: '../human/file/download'
+        },
         file: {
             url: '../human/file/upload-parse-file'
         }
@@ -59,16 +62,10 @@ exports.store = {
                 section = this.models.section.data,
                 params = payload,
                 me = this,
-                attachments = D.assign(progressModel.data.attachments, payload),
+                attachments = [ D.assign(progressModel.data.attachments[0], payload) ],
                 progress = section.progress;
-            params.courseId = section.courseId;
-            params.chapterId = section.chapterId;
             params.sectionId = section.id;
-            params.studyTime = 0;
-            params.completedRate = 0;
             params.clientType = 0;
-            params.finishStatus = 5;
-            params.commitTime = new Date().getTime();
             params.attachments = JSON.stringify(attachments);
             progressModel.set(D.assign(progressModel.data, params));
             return this.save(progressModel).then(function() {
