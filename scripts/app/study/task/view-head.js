@@ -12,7 +12,6 @@ exports.events = {
 exports.dataForTemplate = {
     progress: function(data) {
         var section = data.section;
-        console.log(data.section);
         return section.progress;
     }
 };
