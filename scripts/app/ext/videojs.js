@@ -20,7 +20,6 @@ var initVideo = function(payload) {
         learnTime = learnTime || 0;
         learnTime += (now - beginTime);
         beginTime = now;
-        console.log('timeupdate', learnTime);
     });
 
     payload.on('end', function() {
