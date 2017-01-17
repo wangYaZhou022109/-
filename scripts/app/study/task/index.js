@@ -22,6 +22,9 @@ exports.store = {
         preview: {
             url: '../human/file/preview'
         },
+        download: {
+            url: '../human/file/download'
+        },
         file: {
             url: '../human/file/upload-parse-file'
         }
@@ -29,16 +32,15 @@ exports.store = {
     callbacks: {
         init: function(options) {
             var sectionModel = this.models.section,
-                taskModel = this.models.task;
+                taskModel = this.models.task,
+                progressModel = this.models.progress;
             sectionModel.set({
                 id: options.id
-            });
-            this.models.progress.set({
-                beginTime: new Date().getTime()
             });
             return this.get(sectionModel).then(function(data) {
                 if (data[0]) {
                     taskModel.set(data[0].studyTask);
+                    progressModel.set(data[0].progress);
                     taskModel.changed();
                 }
             });
@@ -51,7 +53,7 @@ exports.store = {
         addFile: function(payload) {
             var me = this,
                 attachments = payload;
-            me.models.progress.data.attachments = attachments;
+            me.models.progress.data.sectionAttachments = attachments;
             me.models.progress.changed();
         },
         submitTask: function(payload) {
@@ -59,18 +61,12 @@ exports.store = {
                 section = this.models.section.data,
                 params = payload,
                 me = this,
-                attachments = D.assign(progressModel.data.attachments, payload),
+                attachments = [D.assign(progressModel.data.sectionAttachments[0], payload)],
                 progress = section.progress;
-            params.courseId = section.courseId;
-            params.chapterId = section.chapterId;
             params.sectionId = section.id;
-            params.studyTime = 0;
-            params.completedRate = 0;
             params.clientType = 0;
-            params.finishStatus = 5;
-            params.commitTime = new Date().getTime();
             params.attachments = JSON.stringify(attachments);
-            progressModel.set(D.assign(progressModel.data, params));
+            progressModel.set(params);
             return this.save(progressModel).then(function() {
                 me.app.message.success('提交成功!');
                 progress.finishStatus = 5;

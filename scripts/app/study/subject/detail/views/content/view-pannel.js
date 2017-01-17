@@ -47,7 +47,7 @@ exports.dataForTemplate = {
             subject.restDays = util.restStudyDays(progress.createTime, subject.studyDays);
         }
         // 配置按钮地址
-        subject.courseChapters = util.setBtnUrl(subject.courseChapters, state.type);
+        subject.courseChapters = util.setBtn(subject.courseChapters, state.type);
         return subject;
     }
 };
