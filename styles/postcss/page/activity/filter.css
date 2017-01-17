@@ -16,11 +16,11 @@
             float: left;
             width: 25%;
             text-align: center;
-            font-size: var(--common-title);
             color: var(--white);
             cursor: pointer;
             transition: all .2s linear;
-            padding: calc(var(--space) / 2) 1em;
+            padding: 0 1em;
+            margin-top: calc(var(--space) / 2);
 
             &.active {
                 color: var(--white);

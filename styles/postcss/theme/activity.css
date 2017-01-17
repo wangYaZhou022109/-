@@ -4,6 +4,7 @@
 
         & .bg-img {
             background-image: url(../images/bg-usercenter.png);
+            background-size: contain;
         }
 
         & li {
@@ -25,7 +26,7 @@
     & .activity-filter {
         background-color: #464957;
     }
-    
+
     & .activity-tabs {
         & li {
             color: var(--white);

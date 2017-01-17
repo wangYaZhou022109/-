@@ -51,7 +51,7 @@
         background: white;
         z-index: 10;
         transform: scaleY(0);
-        transform-origin: 0 100%;
+        transform-origin: 0 0;
 
         & .share-bar .item {
             margin-left: var(--large-space);
