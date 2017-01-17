@@ -20,6 +20,7 @@ exports.dataForTemplate = {
             } else {
                 subject.imageUrl = 'images/default-cover/default_spceial.jpg';
             }
+            subject.studyDays = subject.studyDays || '暂无';
             return subject;
         });
         return subjects;

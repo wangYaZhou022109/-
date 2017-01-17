@@ -4,6 +4,10 @@ var D = require('drizzlejs'),
         charset: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
         before: '第',
         after: '节'
+    },
+    btnTexts = {
+        2: '重新学习',
+        4: '重新学习'
     };
 // 阶段序号转义
 exports.rowHeader = function(arr, payload) {
@@ -25,7 +29,7 @@ exports.restStudyDays = function(registerTime, studyDays) {
 };
 
 // 分配节按钮地址
-exports.setBtnUrl = function(chapters, type) {
+exports.setBtn = function(chapters, type) {
     var courseChapters = chapters;
     _.map(courseChapters || [], function(obj) {
         _.map(obj.courseChapterSections || [], function(sec) {
@@ -33,16 +37,23 @@ exports.setBtnUrl = function(chapters, type) {
                 sectionType = Number(section.sectionType);
             if (sectionType === 10) {
                 section.btnUrl = '#/study/course/detail/' + section.resourceId;
+                section.btnText = '进入课程';
             } else if (sectionType === 3) {
                 section.btnUrl = section.url;
+                section.btnText = '打开URL';
             } else if (sectionType === 8) {
                 section.btnUrl = '#/study/task/' + section.id;
+                section.btnText = '进入任务';
             } else if (sectionType === 9) {
                 section.btnUrl = '#/exam/index/' + section.resourceId;
+                section.btnText = '进入考试';
             }
             section.preview = true;
             if (type === 'preview') {
                 section.preview = false;
+            }
+            if (section.finishStatus !== 0) {
+                section.btnText = btnTexts[section.finishStatus] || '继续学习';
             }
             return section;
         });
