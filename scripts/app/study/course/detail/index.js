@@ -25,6 +25,10 @@ exports.store = {
                     var duplicate = function(x) { return x.courseChapterSections; };
                     return _.find(_.flatMap(this.data.courseChapters, duplicate), { id: sectionId });
                 },
+                findSectionForReferId: function(referenceId) {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { referenceId: referenceId });
+                },
                 findFirstSection: function() {
                     var duplicate = function(x) { return x.courseChapterSections; };
                     return _.flatMap(this.data.courseChapters, duplicate)[0];
@@ -76,7 +80,7 @@ exports.store = {
         updateProgress: function(payload) {
             var course = this.models.course;
             var courseSectionProgress = payload[0];
-            var section = course.findSection(courseSectionProgress.sectionId);
+            var section = course.findSectionForReferId(courseSectionProgress.sectionId);
             // set new progress
             section.progress = courseSectionProgress;
             course.changed();
