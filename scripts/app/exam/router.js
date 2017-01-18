@@ -1,11 +1,11 @@
 
 exports.routes = {
     'index/:id': 'showIndex',
-    'answer-paper/:id': 'showAnswerPaperTest',
+    'answer-paper/:id': 'showAnswerPaper',
     'mark-paper': 'showMarkPaper',
     'mark-paper-test': 'showMark2',
     demo: 'showDemo',
-    'score-detail-paper-test/:id': 'showScore2'
+    'score-detail-paper-test/:id': 'showScore'
 };
 
 exports.showIndex = function(id) {
@@ -18,10 +18,10 @@ exports.showMark2 = function() {
     return this.app.show('content', 'exam/mark-paper-test');
 };
 
-exports.showAnswerPaperTest = function(id) {
+exports.showAnswerPaper = function(id) {
     return this.app.show('content', 'exam/answer-paper', { examId: id });
 };
 
-exports.showScore2 = function(id) {
+exports.showScore = function(id) {
     return this.app.show('content', 'exam/score-detail-paper-test', { examRecordId: id });
 };

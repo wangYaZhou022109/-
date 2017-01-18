@@ -30,6 +30,14 @@ view('top')
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
                         .small-font.m-top 距离考试开始时间
+                .detail-top.clearfix
+                    .pull-left > .clearfix
+                        if(isNoLimitTime)
+                            p 考试不限次数
+                        else
+                            p 
+                                span 考试剩下次数：
+                                span > echo(exam.remainTimes)
                 .detail-bottom.clearfix
                     .pull-left > ul.clearfix
                         li.first > div
@@ -63,11 +71,11 @@ view('top')
                             button.btn.white#revoke 取消报名
                         compare(handlerBtn 'eq' 'submittedShowDetail')
                             a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
-                            #  a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 重新考试
+                            a#toExam(href='#/exam/answer-paper/' + exam.id) > .btn.white 重新考试
                         compare(handlerBtn 'eq' 'submitted')
                             h3 待评卷
                         compare(handlerBtn 'eq' 'startExam')
-                            a#toExam(href='#/exam/answer-paper/' + exam.id target='_blank') > .btn.white 进入考试
+                            a#toExam(href='#/exam/answer-paper/' + exam.id) > .btn.white 进入考试
                         compare(handlerBtn 'eq' 'detail')
                             a(href='#/exam/score-detail-paper-test/' + exam.examRecord.id target='_blank') > .btn.white 成绩详情
                         compare(handlerBtn 'eq' 'end')
