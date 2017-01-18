@@ -14,7 +14,7 @@ exports.buttons = [{
 
 exports.dataForTemplate = {
     attachment: function(data) {
-        var attachments = data.progress.attachments || [];
+        var attachments = data.progress.sectionAttachments || [];
         return attachments[0];
     }
 };
@@ -25,7 +25,7 @@ exports.actions = {
 
 exports.dataForActions = {
     submitTask: function(payload) {
-        var attachments = this.bindings.progress.data.attachments || [];
+        var attachments = this.bindings.progress.data.sectionAttachments || [];
         if (!payload.name) {
             this.app.message.error('附件名称不能为空!');
             return false;

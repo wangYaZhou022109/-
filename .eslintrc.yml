@@ -2,6 +2,8 @@ root: true
 extends: airbnb/legacy
 env:
     browser: true
+globals:
+    Promise: true
 
 rules:
     indent:

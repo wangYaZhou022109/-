@@ -19,6 +19,9 @@ view('pannel')
                             li 分享1
                             li 分享2
                             li 分享3
-            if(preview)
-                .inline-block.m-left > a.normal(href='javascript:;') > i.iconfont.icon-favorite
+            .inline-block.m-left
+                if(collect.id)
+                    a.normal(id='cancel-collect' href='javascript:;' data-name='id' data-value=collect.id) > i.iconfont.icon-favorite-full
+                else
+                    a.normal(id='collect' href='javascript:;') > i.iconfont.icon-favorite
     p.info-detail > string('subject.description') > @echo(':' subject.description)
