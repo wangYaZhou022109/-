@@ -8,9 +8,9 @@ exports.events = {
 };
 
 exports.handlers = {
-    toggleItem: function(id, e, obj) {
+    toggleItem: function(type, e, obj) {
         $(obj).addClass('active').siblings().removeClass('active');
-        this.module.dispatch('search', { categoryId: '' });
+        this.module.dispatch('init', { companyType: type });
     },
     search: function(e, item) {
         var value = $.trim(item.value);
