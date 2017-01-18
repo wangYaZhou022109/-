@@ -3,22 +3,26 @@
 module > div(data-region='pannel')
 
 view('pannel')
-    .title-row
-        .inline-block.layout-mr > .h3 > echo(subject.name)
-        .inline-block.layout-mr
-            .star-wrapper
-                .star-bar > .star(style='width:'+subject.scorePercent+'%')
-                .num > echo(subject.avgScore)
-        .inline-block.layout-mr
-            .inline-block.layout-ml.m-right
-                .drop-down-wrapper
-                    .drop-down-btn
-                        i.iconfont.icon-share
-                    .drop-down-content > .content
-                        ul
-                            li 分享1
-                            li 分享2
-                            li 分享3
-            if(preview)
-                .inline-block.m-left > a.normal(href='javascript:;') > i.iconfont.icon-favorite
-    p.info-detail > string('subject.description') > @echo(':' subject.description)
+    if(region.regionModule.display)
+        .title-row
+            .inline-block.layout-mr > .h3 > echo(subject.name)
+            .inline-block.layout-mr
+                .star-wrapper
+                    .star-bar > .star(style='width:'+subject.scorePercent+'%')
+                    .num > echo(subject.avgScore)
+            .inline-block.layout-mr
+                .inline-block.layout-ml.m-right
+                    .drop-down-wrapper
+                        .drop-down-btn
+                            i.iconfont.icon-share
+                        .drop-down-content > .content
+                            ul
+                                li 分享1
+                                li 分享2
+                                li 分享3
+                .inline-block.m-left
+                    if(collect.id)
+                        a.normal(id='cancel-collect' href='javascript:;' data-name='id' data-value=collect.id) > i.iconfont.icon-favorite-full
+                    else
+                        a.normal(id='collect' href='javascript:;') > i.iconfont.icon-favorite
+        p.info-detail > string('subject.description') > @echo(':' subject.description)

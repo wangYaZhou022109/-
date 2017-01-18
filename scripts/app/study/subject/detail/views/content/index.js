@@ -6,7 +6,10 @@ exports.store = {
     models: {
         region: {},
         subject: {},
-        state: {}
+        state: {},
+        updateProgress: {
+            url: '../course-study/course-front/doc-progress'
+        }
     },
     callbacks: {
         init: function(options) {
@@ -22,6 +25,11 @@ exports.store = {
             this.models.region.set(options.region);
             this.models.subject.set(subject);
             this.models.state.set(options.state);
+        },
+        updateProgress: function(payload) {
+            var model = this.models.updateProgress;
+            model.set(payload);
+            return this.post(model);
         }
     }
 };

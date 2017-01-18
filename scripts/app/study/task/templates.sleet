@@ -15,20 +15,6 @@ view('side')
                     a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
                 else
                     a.text-overflow.pointer(href=downUrl download=name) > echo(name)
-
-    #.
-        compare(section.progress.finishStatus 'eq' 0)
-            a.btn.block#submitTask 提交任务
-        compare(section.progress.finishStatus 'eq' 5)
-            label 审核中...
-        compare(section.progress.finishStatus 'eq' 6)
-            a.btn.block#submitTask 审核不通过，重新提交
-        compare(section.progress.finishStatus 'eq' 2)
-            label 已完成
-        compare(section.progress.finishStatus 'eq' 4)
-            label 标记完成
-
-
 view('head')
     .pull-left.title > echo(task.name)
     .text-right

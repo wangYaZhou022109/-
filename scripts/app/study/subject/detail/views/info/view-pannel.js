@@ -1,5 +1,6 @@
 exports.bindings = {
     region: false,
+    collect: true,
     subject: false
 };
 
@@ -18,5 +19,33 @@ exports.dataForTemplate = {
             }
         }
         return subject;
+    }
+};
+
+exports.actions = {
+    'click collect': 'collect',
+    'click cancel-collect': 'cancelCollect'
+};
+
+exports.dataForActions = {
+    collect: function() {
+        var subject = this.bindings.subject.data;
+        return {
+            businessId: subject.id,
+            businessType: 1,
+            collectName: subject.name
+        };
+    },
+    cancelCollect: function(payload) {
+        return payload;
+    }
+};
+
+exports.actionCallbacks = {
+    collect: function() {
+        this.app.message.success('收藏成功');
+    },
+    cancelCollect: function() {
+        this.app.message.success('取消收藏成功');
     }
 };
