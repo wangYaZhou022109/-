@@ -3,12 +3,13 @@
 module > .relevant-course(data-region='pannel')
 
 view('pannel')
-    .h3
-        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
-        echo(region.regionModule.name)
-    .layout-mt-small
-        each(courseRelated)
-            .img
-                a.normal(href='#/study/subject/detail/'+id)
-                    .img-cont > img(src=imageUrl)
-                h4.text-overflow(title=name) > echo(name)
+    if(region.regionModule.display)
+        .h3
+            .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
+            echo(region.regionModule.name)
+        .layout-mt-small
+            each(courseRelated)
+                .img
+                    a.normal(href='#/study/subject/detail/'+id)
+                        .img-cont > img(src=imageUrl)
+                    h4.text-overflow(title=name) > echo(name)

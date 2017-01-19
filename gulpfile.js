@@ -30,6 +30,7 @@ var libs = [
         'jquery', 'handlebars/runtime', 'lodash/collection', 'lodash/object', 'drizzlejs',
         'selectize',
         'video.js',
+        'pdfjs-dist/web/pdf_viewer',
         './vendors/alertify',
         './vendors/upload/plupload.min',
         './vendors/upload/jquery.plupload.queue.min',

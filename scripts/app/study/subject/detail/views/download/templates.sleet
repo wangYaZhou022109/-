@@ -3,12 +3,13 @@
 module > .download(data-region='pannel')
 
 view('pannel')
-    .h3 > echo(region.regionModule.name)
-    .layout-mt-small
-        each(courseAttachments)
-            .block.layout-mt-small
-                .pull-right
-                    if(isView)
-                        a(id='viewPdf-'+attachmentId href='javascript:;') > string('view')
-                    a(href=downUrl download=name) > string('download')
-                .text-overflow(title=name) > echo(name)
+    if(region.regionModule.display)
+        .h3 > echo(region.regionModule.name)
+        .layout-mt-small
+            each(courseAttachments)
+                .block.layout-mt-small
+                    .pull-right
+                        if(isView)
+                            a(id='viewPdf-'+attachmentId href='javascript:;') > string('view')
+                        a(href=downUrl download=name) > string('download')
+                    .text-overflow(title=name) > echo(name)
