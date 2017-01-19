@@ -93,7 +93,11 @@ exports.dataForTemplate = {
             }
             if (currentTime >= exam.startTime && currentTime < exam.endTime) {
                 if (exam.isShowAnswerImmed === 1 && exam.examRecord && exam.examRecord.status > 5) {
-                    result = 'submittedShowDetail';
+                    if (exam.remainTimes > 0 || exam.allowExamTimes === 0) {
+                        result = 'submittedShowDetail';
+                    } else {
+                        result = 'detail';
+                    }
                 } else if (exam.examRecord && exam.examRecord.status > 4) {
                     result = 'submitted';
                 } else {
@@ -116,5 +120,8 @@ exports.dataForTemplate = {
             return this.bindings.down.getFullUrl() + '?id=' + this.bindings.exam.data.coverId;
         }
         return remoteBackGround;
+    },
+    isNoLimitTime: function() {
+        return this.bindings.exam.data.allowExamTimes === 0;
     }
 };

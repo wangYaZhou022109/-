@@ -22,7 +22,8 @@ var _ = require('lodash/collection'),
     },
     connect,
     closeConnect,
-    changeToFullScreen;
+    changeToFullScreen,
+    navigateToExamDetail;
 
 
 exports.items = {
@@ -401,7 +402,7 @@ exports.store = {
             exam.load();
 
             if (!state.data || (state.data.id && state.data.id !== payload.examId)) {
-                this.models.exam.set({ id: payload.examId });
+                this.models.exam.params = { examId: payload.examId };
 
                 return this.get(this.models.exam).then(function() {
                     var examData = me.models.exam.data;
@@ -465,7 +466,9 @@ exports.store = {
         submit: function(payload) {
             var modify = this.models.modify,
                 me = this,
-                t = true;
+                t = true,
+                examId = this.models.exam.data.id;
+
             this.models.answer.save();
             this.models.modify.save();
 
@@ -483,10 +486,12 @@ exports.store = {
                         me.models.state.clear();
                         me.models.countDown.clear();
                         me.models.questionTypes.clear();
+                        me.models.exam.clear();
                         me.app.viewport.modal(me.module.items.tips, { message: '交卷成功' });
                         setTimeout(function() {
                             closeConnect();
-                            window.close();
+                            me.app.viewport.closeModal();
+                            navigateToExamDetail(examId);
                         }, 1500);
                     } else {
                         me.models.modify.data = { answers: [], api: {} };
@@ -563,3 +568,7 @@ changeToFullScreen = function() {
     $('.achievement-content').attr('height', '100%');
 };
 
+navigateToExamDetail = function(examId) {
+    var url = 'exam/index/' + examId;
+    this.app.navigate(url, true);
+};

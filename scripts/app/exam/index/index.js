@@ -6,43 +6,34 @@ exports.items = {
 
 exports.store = {
     models: {
-        exam: {
-            url: '../exam/exam/exam-signup'
-        },
-        relatedExams: {
-            url: '../exam/exam/related-exams'
-        },
-        relatedTopics: {
-            url: '../exam/exam/related-topics'
-        },
-        relatedMembers: {
-            url: '../exam/exam/related-members'
-        },
-        down: { url: '../human/file/download' },
+        exam: { url: '../exam/exam/exam-sign-up' },
+        signUp: { url: '../exam/sign-up' },
+        relatedExams: { url: '../exam/exam/related-exams' },
+        relatedTopics: { url: '../exam/exam/related-topics' },
+        relatedMembers: { url: '../exam/exam/related-members' },
         certificate: { url: '../system/certificate' },
-        signUp: { url: '../exam/sign-up' }
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function(payload) {
             var me = this;
             this.models.exam.set(payload);
-            this.get(me.models.exam).then(function() {
-                me.models.certificate.set({ id: me.models.exam.data.certificateId });
-                me.get(me.models.certificate);
-            });
             this.models.relatedExams.params = payload;
-            this.get(this.models.relatedExams);
             this.models.relatedTopics.params = payload;
-            this.get(this.models.relatedTopics);
             this.models.relatedMembers.params = payload;
-            this.get(this.models.relatedMembers);
+
+            return this.chain(me.get(me.models.exam), function() {
+                me.models.certificate.set({ id: me.models.exam.data.certificateId });
+                return me.get(me.models.certificate);
+            }, [
+                me.get(this.models.relatedExams),
+                me.get(this.models.relatedTopics),
+                me.get(this.models.relatedMembers)
+            ]);
         },
         signUp: function() {
-            var exam = this.models.exam;
-            if (exam.data.signUp === null) {
-                return this.put(exam);
-            }
-            return null;
+            this.models.signUp.set({ examId: this.models.exam.data.id });
+            return this.post(this.models.signUp);
         },
         revoke: function() {
             var me = this;

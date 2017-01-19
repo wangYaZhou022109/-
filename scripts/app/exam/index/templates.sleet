@@ -23,9 +23,10 @@ view('top')
                             i.iconfont.icon-star
                             echo('给予证书：' certificate.name)
                         p.detail-top-time.small-font
-                            | 报名截至时间：
-                            dateTime(exam.applicantEndTime)
-                            span  考试时间：
+                            compare(exam.type 'ne' 3)
+                                | 报名截至时间：
+                                dateTime(exam.applicantEndTime)
+                            | 考试时间：
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
                     .pull-right.text-center
                         div(data-dynamic-key='countDown')
@@ -74,7 +75,7 @@ view('top')
                             h3 考试已结束
                         compare(handlerBtn 'eq' 'noBegin')
                             h3 未开始
-                        
+
 
 view('side')
     .page-side > .container
