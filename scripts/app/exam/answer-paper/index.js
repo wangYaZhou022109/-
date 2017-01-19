@@ -525,13 +525,13 @@ exports.afterRender = function() {
         },
         random = getRandom(),
         autoSubmit = function() {
-            this.app.message.success('临时提交，请注意...');
+            this.app.message.success('答卷已自动保存成功');
             return me.dispatch('submit', { submitType: submitType.Auto }).then(function() {
                 timeOutId = setTimeout(autoSubmit, random);
             });
         };
 
-    this.app.message.success('随机秒数' + (random / 1000));
+    // this.app.message.success('随机秒数' + (random / 1000));
     if (t) {
         autoSubmit();
         timeOutId = setTimeout(autoSubmit, random);
