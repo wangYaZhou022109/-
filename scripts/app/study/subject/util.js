@@ -34,6 +34,7 @@ exports.setBtn = function(chapters, type) {
     _.map(courseChapters || [], function(obj) {
         _.map(obj.courseChapterSections || [], function(sec) {
             var section = sec,
+                progress = section.progress,
                 sectionType = Number(section.sectionType);
             if (sectionType === 10) {
                 section.btnUrl = '#/study/course/detail/' + section.resourceId;
@@ -52,7 +53,7 @@ exports.setBtn = function(chapters, type) {
             if (type === 'preview') {
                 section.preview = false;
             }
-            if (section.finishStatus !== 0) {
+            if (progress && progress.finishStatus !== 0) {
                 section.btnText = btnTexts[section.finishStatus] || '继续学习';
             }
             return section;

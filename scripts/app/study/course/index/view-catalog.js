@@ -45,8 +45,12 @@ exports.handlers = {
 exports.dataForTemplate = {
     menus: function() {
         // 一级导航 二级导航
-        var categories = this.bindings.categories;
-        return _.map(categories.filterPid(null), function(obj) {
+        var categories = this.bindings.categories,
+            root = _.map(categories.filterPid(null));
+        if (root.length) {
+            root = root[0];
+        }
+        return _.map(categories.filterPid(root.id), function(obj) {
             var d = obj || {};
             d.children = categories.filterPid(d.id);
             return d;

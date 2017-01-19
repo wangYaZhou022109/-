@@ -30,8 +30,8 @@ exports.store = {
             var categories = this.models.categories,
                 courses = this.models.courses,
                 search = this.models.search;
-            search.set({ type: 0 });
-            categories.params = options;
+            search.set({ type: 0, companyType: options.companyType });
+            categories.params.companyType = options.companyType;
             courses.params = search.data;
             return this.chain([this.get(courses), this.get(categories)]);
         },
@@ -55,10 +55,7 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
-    var currentUser = this.app.global.currentUser,
-        companyId = '1';
-    if (currentUser.companyOrganization) {
-        companyId = currentUser.companyOrganization.id;
-    }
-    this.dispatch('init', { organizationId: companyId });
+    // 默认是本公司
+    var options = { companyType: 1 };
+    this.dispatch('init', options);
 };

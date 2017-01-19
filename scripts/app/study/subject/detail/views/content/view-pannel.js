@@ -15,6 +15,7 @@ exports.handlers = {
         var subject = this.bindings.subject,
             chapterId = element.getAttribute('data-chapter-id'),
             url = element.getAttribute('data-url'),
+            sectionType = element.getAttribute('data-section-type'),
             studyProgress = subject.data.studyProgress,
             chapter = _.find(subject.data.courseChapters, {
                 id: chapterId
@@ -28,6 +29,16 @@ exports.handlers = {
             return;
         }
         window.open(url);
+        // 文档、URL打开即完成
+        if (Number(sectionType) === 1 || Number(sectionType) === 3) {
+            this.module.dispatch('updateProgress', {
+                sectionId: id,
+                beginTime: new Date().getTime(),
+                clientType: 0,
+                finishStatus: 2, // 已完成
+                completedRate: 100, // 已完成
+            });
+        }
     }
 };
 

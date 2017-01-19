@@ -3,4 +3,5 @@
 module > div(data-region='pannel')
 
 view('pannel')
-    #comment-area
+    if(region.regionModule.display)
+        #comment-area
