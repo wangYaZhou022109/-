@@ -88,7 +88,9 @@ view('side')
             .h3 TA们也参加了考试
             .layout-mt-small.user-picture
                 .grid-row > each(relatedMembers)
-                    .col-md-3 > img.block(src=img)
+                    .col-md-3
+                        img.block(src=img)
+                        span > echo(name)
 
 view('main')
     .exam-index-main > .container
