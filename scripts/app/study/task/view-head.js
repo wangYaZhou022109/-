@@ -11,8 +11,10 @@ exports.events = {
 
 exports.dataForTemplate = {
     progress: function(data) {
-        var section = data.section;
-        return section.progress;
+        var section = data.section,
+            progress = section.progress || {};
+        progress.finishStatus = progress.finishStatus || 0;
+        return progress;
     }
 };
 
