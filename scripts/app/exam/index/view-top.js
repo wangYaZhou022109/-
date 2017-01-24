@@ -37,14 +37,28 @@ exports.events = {
 exports.handlers = {
     signup: function() {
         var me = this;
-        return me.module.dispatch('signUp').then(function() {
-            return me.module.dispatch('init', { id: me.module.renderOptions.id });
+        return this.Promise.create(function(resolve) {
+            var message = '确认报名吗?';
+            me.app.message.confirm(message, function() {
+                return me.module.dispatch('signUp').then(function() {
+                    return me.module.dispatch('init', { id: me.module.renderOptions.id });
+                });
+            }, function() {
+                resolve(false);
+            });
         });
     },
     revoke: function() {
         var me = this;
-        return me.module.dispatch('revoke').then(function() {
-            me.module.dispatch('removeSingUp');
+        return this.Promise.create(function(resolve) {
+            var message = '确认取消报名吗？';
+            me.app.message.confirm(message, function() {
+                return me.module.dispatch('revoke').then(function() {
+                    return me.module.dispatch('removeSingUp');
+                });
+            }, function() {
+                resolve(false);
+            });
         });
     }
 };
@@ -75,6 +89,9 @@ exports.dataForTemplate = {
                     return result;
                 } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 3) {
                     result = 'rejected';
+                    return result;
+                } else if (exam.applicantNeedAudit === 1 && exam.signUp.status === 4) {
+                    result = 'signup';
                     return result;
                 } else if (currentTime < exam.startTime) {
                     result = 'revoke';

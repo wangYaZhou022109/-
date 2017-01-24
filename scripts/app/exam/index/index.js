@@ -37,8 +37,11 @@ exports.store = {
         },
         revoke: function() {
             var me = this;
-            me.models.signUp.set({ id: this.models.exam.data.id });
-            return me.del(me.models.signUp);
+            me.models.signUp.set({
+                signUpIds: JSON.stringify([this.models.exam.data.signUp.id]),
+                status: 4
+            });
+            return me.put(me.models.signUp);
         },
         removeSingUp: function() {
             delete this.models.exam.data.signUp;
