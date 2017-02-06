@@ -13,9 +13,9 @@ view('main')
         #  .item
         #      i.iconfont.icon-favorite
         #      span.m-left 我要收藏
-        .item
+        .item(id='correct-' + state.id)
             i.iconfont.icon-favorite
-            span.m-left > a(id='correct-' + state.id) 错误提报
+            span.m-left > a 错误提报
 
 view('correct')
     br
