@@ -37,7 +37,7 @@ view('list')
                         i.iconfont.icon-arrow-up.up
         ul > each(subjects)
             li > .content > a.normal(href='#/study/subject/detail/'+id)
-                .img > .img-cont > img(src=imageUrl)
+                .img > .img-cont > img(src=imageUrl width='380' height='200')
                 .clearfix
                     .pull-right.small-font.layout-ml
                         i.iconfont.icon-user

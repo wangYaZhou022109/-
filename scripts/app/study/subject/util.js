@@ -23,8 +23,14 @@ exports.rowHeader = function(arr, payload) {
 // 计算剩余天数
 exports.restStudyDays = function(registerTime, studyDays) {
     var currentTime = new Date().getTime(),
-        days = Math.floor((currentTime - registerTime) / (24 * 3600 * 1000)),
-        restDays = Number(studyDays) - days;
+        days,
+        restDays;
+    if (currentTime > registerTime) {
+        days = Math.floor((currentTime - registerTime) / (24 * 3600 * 1000));
+    } else {
+        days = 0;
+    }
+    restDays = Number(studyDays) - days;
     return restDays < 0 ? 0 : restDays;
 };
 
@@ -39,22 +45,31 @@ exports.setBtn = function(chapters, type) {
             if (sectionType === 10) {
                 section.btnUrl = '#/study/course/detail/' + section.resourceId;
                 section.btnText = '进入课程';
+                if (progress && progress.finishStatus !== 0) {
+                    section.btnText = btnTexts[progress.finishStatus] || '继续学习';
+                }
             } else if (sectionType === 3) {
                 section.btnUrl = section.url;
                 section.btnText = '打开URL';
+                if (progress && progress.finishStatus !== 0) {
+                    section.btnText = btnTexts[progress.finishStatus] || '继续学习';
+                }
             } else if (sectionType === 8) {
-                section.btnUrl = '#/study/task/' + section.id;
+                section.btnUrl = '#/study/task/' + section.referenceId;
                 section.btnText = '进入任务';
+                if (progress && progress.finishStatus !== 0) {
+                    section.btnText = '查看详情';
+                }
             } else if (sectionType === 9) {
                 section.btnUrl = '#/exam/index/' + section.resourceId;
                 section.btnText = '进入考试';
+                if (progress && progress.finishStatus !== 0) {
+                    section.btnText = btnTexts[progress.finishStatus] || '继续学习';
+                }
             }
             section.preview = true;
             if (type === 'preview') {
                 section.preview = false;
-            }
-            if (progress && progress.finishStatus !== 0) {
-                section.btnText = btnTexts[section.finishStatus] || '继续学习';
             }
             return section;
         });

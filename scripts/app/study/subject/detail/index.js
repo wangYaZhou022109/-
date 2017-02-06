@@ -4,9 +4,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        subject: {
-            url: '../course-study/course-front'
-        },
+        subject: {},
         register: {
             url: '../course-study/course-front/register'
         },
