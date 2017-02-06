@@ -402,6 +402,7 @@ exports.store = {
             exam.load();
 
             if (!state.data || (state.data.id && state.data.id !== payload.examId)) {
+                this.models.exam.clear();
                 this.models.exam.params = { examId: payload.examId };
 
                 return this.get(this.models.exam).then(function() {
@@ -494,6 +495,7 @@ exports.store = {
                             navigateToExamDetail(examId);
                         }, 1500);
                     } else {
+                        this.app.message.success('答卷已自动保存成功');
                         me.models.modify.data = { answers: [], api: {} };
                     }
                 });
@@ -525,7 +527,6 @@ exports.afterRender = function() {
         },
         random = getRandom(),
         autoSubmit = function() {
-            this.app.message.success('答卷已自动保存成功');
             return me.dispatch('submit', { submitType: submitType.Auto }).then(function() {
                 timeOutId = setTimeout(autoSubmit, random);
             });
