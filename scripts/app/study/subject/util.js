@@ -23,8 +23,14 @@ exports.rowHeader = function(arr, payload) {
 // 计算剩余天数
 exports.restStudyDays = function(registerTime, studyDays) {
     var currentTime = new Date().getTime(),
-        days = Math.floor((currentTime - registerTime) / (24 * 3600 * 1000)),
-        restDays = Number(studyDays) - days;
+        days,
+        restDays;
+    if (currentTime > registerTime) {
+        days = Math.floor((currentTime - registerTime) / (24 * 3600 * 1000));
+    } else {
+        days = 0;
+    }
+    restDays = Number(studyDays) - days;
     return restDays < 0 ? 0 : restDays;
 };
 
