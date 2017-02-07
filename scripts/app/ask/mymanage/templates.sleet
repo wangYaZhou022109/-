@@ -1,0 +1,22 @@
+#!handlebars
+module > .activity-page
+    .activity-filter(data-region='mymanage')
+view('mymanage')
+    ul 
+        li
+            echo('我的管理') 
+        li
+            echo('今日新增') 
+        li
+            echo('问题') 
+        li
+            echo('分享')    
+    ul 
+        li
+            echo('话题222222') 
+        li
+            echo('今日新增') 
+        li
+            echo('问题') 
+        li
+            echo('问题')    

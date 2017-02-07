@@ -11,6 +11,7 @@ exports.store = {
             type: 'pageable',
             root: 'items',
             pageSize: 6
+
         },
         askbar: { url: '../exam/activity' },
         params: { data: { isOverdue: '1' } },
