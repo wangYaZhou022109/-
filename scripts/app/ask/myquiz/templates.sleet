@@ -1,0 +1,22 @@
+#!handlebars
+module
+    div(data-region='list')
+view('list')
+    .list
+        table.table
+            thead > tr
+                th > echo('序号')
+                th > echo('用户名')
+            tbody > each(question)
+                tr
+                    td > echo(i)
+                    td > echo(no)
+                    td > echo(email)
+                    td > echo(name)
+                    td > echo(sexText)
+                    td > echo(organization.name)
+                    td > echo(position.name)
+                    td > echo(city.name)
+                    td > date(createTime)
+                   
+                
