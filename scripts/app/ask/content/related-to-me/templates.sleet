@@ -1,0 +1,22 @@
+#!handlebars
+module
+    div(data-region='main')
+view('main')
+    ul 
+        li
+            echo('与我相关') 
+        li
+            echo('展开1111111111111111111111111111111') 
+        li
+            echo('展开133333') 
+        li
+            echo('展开133333')    
+    ul 
+        li
+            echo('展开1111111111111111111111111111111') 
+        li
+            echo('展开1111111111111111111111111111111') 
+        li
+            echo('展开133333') 
+        li
+            echo('展开133333')    

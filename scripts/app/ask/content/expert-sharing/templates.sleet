@@ -1,0 +1,14 @@
+#!handlebars
+module
+    div(data-region='main')
+view('main')
+    ul 
+        li
+            echo('专家分享') 
+        li
+            echo('展开1111111111111111111111111111111') 
+        li
+            echo('展开133333') 
+        li
+            echo('展开133333')    
+     
