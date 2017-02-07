@@ -51,6 +51,6 @@ view('list')
                             tr > td(align='center') > a(id='category-item-5' href='javascript:;')(class ='active') 我的分享
                             tr > td(align='center') > a(id='category-item-6' href='javascript:;')(class ='active') 我的回复
                             tr > td(align='center') > a(id='category-item-7' href='javascript:;')(class ='active') 回复我的
-                            tr > td(align='center') > a(id='category-item-8' href='javascript:;')(class ='active') 我是管理
+                              a(id='mymanage-'+id data-name='id' data-value=id) > echo('我是管理')  
             div(id='list' name='list')
              

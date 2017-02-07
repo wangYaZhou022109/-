@@ -7,10 +7,17 @@ exports.bindings = {
 
 exports.events = {
     'click category-item-*': 'toggleItem',
-    'click to-activity-*': 'toActivity'
+    'click to-activity-*': 'toActivity',
+    'click mymanage-*': 'mymanage'
 };
 
 exports.handlers = {
+    mymanage: function(id) {
+        var region;
+        var el = this.$('list');
+        region = new D.Region(this.app, this.module, el, id);
+        region.show('ask/mymanage', { id: id });
+    },
     toggleItem: function(id) {
         var region;
         var el = this.$('list');
