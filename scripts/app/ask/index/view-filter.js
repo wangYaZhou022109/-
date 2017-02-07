@@ -1,5 +1,3 @@
-var $ = require('jquery');
-var D = require('drizzlejs');
 
 exports.bindings = {
     params: true
