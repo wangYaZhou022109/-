@@ -195,7 +195,7 @@ gulp.task('default', ['main', 'common', 'watch-css'], function() {
     });
     app.use(express.static('.'));
 
-    app.listen(8002, function() {
+    app.listen(8001, function() {
         console.log('Server started at http://localhost:8002');
         console.log('in nginx you can started at http://localhost');
     });

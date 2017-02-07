@@ -11,9 +11,9 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 13,
+    clientId: 212,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.9.115'
+    returnTo: 'http://192.168.1.27'
 };
 // @endif
 
@@ -87,7 +87,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'study', 'activity', 'exam']
+    routers: ['', 'home', 'study', 'activity', 'exam' , 'ask' ]
 });
 
 D.PageableModel.setDefault({

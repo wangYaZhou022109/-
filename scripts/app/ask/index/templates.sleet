@@ -1,4 +1,39 @@
 #!handlebars
 
-module > .ask-page
-    div 问道
+module > .activity-page
+    .activity-filter(data-region='filter')
+    .activity-list(data-region='list')
+
+view('filter')
+    .container
+        .pull-right > .search-bar
+            input.input(name='ask-name' placeholder='搜一搜' value=params.name)
+            i.iconfont.icon-search.scale-1.text-hover-mail-color#search
+
+        .activity-tabs > ul
+            compare(params.isOverdue 'eq' '1')
+                li(id='item-1' class = 'active') 内容
+                li(id='item-2') 话题
+                li(id='item-3') 专家
+            compare(params.isOverdue 'eq' '2')
+                li(id='item-1') 内容
+                li(id='item-2' class = 'active') 话题
+                li(id='item-3') 专家
+            compare(params.isOverdue 'eq' '3')
+                li(id='item-1') 内容
+                li(id='item-2') 话题
+                li(id='item-3'  class = 'active') 专家
+
+view('list')
+    .container
+        .main-list
+            .activity-category
+                .pull-left
+                    a(id='category-item-1' href='javascript:;')(class ='active') 全部动态
+                    a(id='category-item-2' href='javascript:;')(class ='active') 与我相关
+                    a(id='category-item-3' href='javascript:;')(class ='active') 专家分享
+                .pull-right
+                    a(id='category-item-4' href='javascript:;')(class ='active') 全部动态
+                    a(id='category-item-5' href='javascript:;')(class ='active') 与我相关
+            div(id='list' name='list')
+             
