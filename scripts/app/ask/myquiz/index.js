@@ -4,7 +4,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        question: { url: '' , type: 'items' , root: 'pageable' , pageSize: 10 }
+        question: { url: '../ask/myquiz', type: 'pageable', root: 'items', pageSize: 10 }
     },
     callbacks: {
         init: function() {
@@ -13,3 +13,8 @@ exports.store = {
         }
     }
 };
+
+exports.afterRender = function() {
+    this.dispatch('init');
+};
+

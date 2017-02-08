@@ -8,7 +8,8 @@ exports.bindings = {
 exports.events = {
     'click category-item-*': 'toggleItem',
     'click to-activity-*': 'toActivity',
-    'click mymanage-*': 'mymanage'
+    'click mymanage-*': 'mymanage',
+    'click myquiz-*': 'myquiz'
 };
 
 exports.handlers = {
@@ -17,6 +18,12 @@ exports.handlers = {
         var el = this.$('left');
         region = new D.Region(this.app, this.module, el);
         region.show('ask/mymanage');
+    },
+    myquiz: function() {
+        var region;
+        var el = this.$('left');
+        region = new D.Region(this.app, this.module, el);
+        region.show('ask/myquiz');
     },
     toggleItem: function(id) {
         var region;
