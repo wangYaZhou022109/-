@@ -21,7 +21,6 @@ exports.handlers = {
     toggleItem: function(id) {
         var region;
         var el = this.$('list');
-        console.log(id);
         region = new D.Region(this.app, this.module, el, id);
         if (id === '1') {
             region.show('ask/content/all-dynamic', { id: id });

@@ -11,7 +11,6 @@ exports.store = {
             type: 'pageable',
             root: 'items',
             pageSize: 6
-
         },
         askbar: { url: '../exam/activity' },
         params: { data: { isOverdue: '1' } },
@@ -21,6 +20,7 @@ exports.store = {
         init: function(payload) {
             var isOverdue = payload.isOverdue,
                 data = this.models.params.data;
+                
             if (isOverdue !== '1' && isOverdue !== '2' && isOverdue !== '3') {
                 this.models.askbar.params = this.models.params.data;
             } else {
