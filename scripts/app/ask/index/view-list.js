@@ -12,11 +12,11 @@ exports.events = {
 };
 
 exports.handlers = {
-    mymanage: function(id) {
+    mymanage: function() {
         var region;
-        var el = this.$('list');
-        region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/mymanage', { id: id });
+        var el = this.$('left');
+        region = new D.Region(this.app, this.module, el);
+        region.show('ask/mymanage');
     },
     toggleItem: function(id) {
         var region;
