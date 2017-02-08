@@ -74,7 +74,11 @@ exports.store = {
                 calculate: function() {
                     var answers = this.store.models.answer.data.answers;
                     this.data.answeredNum = _.filter(answers, function(a) {
-                        return a.value.length > 0 && a.value[0].value !== '';
+                        var readingQuetion = !_.every(a.value, function(sub) {
+                                return sub.value.length === 0 || sub.value[0].value === '';
+                            }),
+                            otherQuestion = a.value[0].value !== '';
+                        return Number(a.type) === 6 ? readingQuetion : otherQuestion;
                     }).length;
                     this.data.noAnswerNum = this.data.questionNum - this.data.answeredNum;
                 },
