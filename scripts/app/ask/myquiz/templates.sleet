@@ -1,15 +1,27 @@
 #!handlebars
 module
-    div(data-region='main')
+    div(data-region='list')
 view('list')
-.list
-        table.table
-                thead > tr
-                th > echo('我的提问')
-                th > echo('你共提问了99个问题')
-        table.table
-                tbody > tr
-                    td > a(id='detial-' href='javascript:;')(class ='active') echo('标题')
+each(question)
+        echo('我的提问' + '你共提问了99个问题')
+        hr
+        ul 
+            li(style='font-weight:bold')
+                echo(title) 
+                .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+            li
+                echo(content) 
+            li
+                echo(createMemberId + '提问·' + createTime) 
+            li
+                echo('来自话题 ：' + topic)
+                a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                echo('条讨论')
+                a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                echo('|')
+                a(id='quiz-report-' + id href='javascript:;')(class ='active') 举报
+                a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                hr
                     
                   
 

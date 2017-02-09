@@ -4,7 +4,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        question: { url: '../ask-bar/myquiz', type: 'pageable', root: 'items', pageSize: 5 }
+        question: { url: '../ask-bar/myquiz' },
+        params: { data: { isOverdue: '1' } }
     },
     callbacks: {
         init: function() {
