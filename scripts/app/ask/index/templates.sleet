@@ -49,16 +49,10 @@ view('list')
                                 a(id='category-item-11' href='javascript:;')(class ='active') 
                                     echo('99')
                                     .title.text-overflow > echo('关注专家')
-                            tr > td(align='center') > a(id='myquiz-' href='javascript:;')(class ='active') 我的提问
-                            tr > td(align='center') > a(id='category-item-5' href='javascript:;')(class ='active') 我的分享
-                            tr > td(align='center') > a(id='category-item-6' href='javascript:;')(class ='active') 我的回复
-                            tr > td(align='center') > a(id='category-item-7' href='javascript:;')(class ='active') 回复我的
-                            tr > td(align='center') > a(id='mymanage-' href='javascript:;')(class ='active') 我是管理
-                                hr
                             tr 
                                 td(style='width:30px;')
                                 td(align='center') 
-                                    a(id='category-item-4' href='javascript:;')(class ='active') 我的提问
+                                    a(id='myquiz-' href='javascript:;')(class ='active') 我的提问
                                     hr
                                 td(style='width:30px;')
                             tr 
