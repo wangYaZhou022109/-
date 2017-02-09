@@ -4,11 +4,12 @@ exports.items = {
 
 exports.store = {
     models: {
-        question: { url: '../ask/myquiz', type: 'pageable', root: 'items', pageSize: 10 }
+        question: { url: '../ask-bar/myquiz', type: 'pageable', root: 'items', pageSize: 5 }
     },
     callbacks: {
         init: function() {
             var question = this.models.question;
+            question.set({ id: 1 });
             return this.get(question);
         }
     }

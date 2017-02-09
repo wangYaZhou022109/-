@@ -4,23 +4,14 @@ module
 view('list')
 .list
         table.table
-            thead > tr
+                thead > tr
                 th > echo('我的提问')
-                th > echo('你共提出了99个问题')
-            tbody > each(question)
-                tr
-                    td > echo(title)
-                    td > echo(content)
-                    td > echo(member.fullName)
-                    td > echo(name)
-                    td > echo(topic)
-                    td > echo(reviewstatus)
-                    td > echo(position.name)
-                    td > echo(city.name)
-                    td > date(createTime)
-                    td
-                        a(id='edit-'+id data-name='id' data-value=id) > echo('状态')
-                        a(id='remove-'+id data-name='id' data-value=id) > echo('删除')
+                th > echo('你共提问了99个问题')
+        table.table
+                tbody > tr
+                    td > a(id='detial-' href='javascript:;')(class ='active') echo('标题')
+                    
+                  
 
                    
                 

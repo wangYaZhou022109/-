@@ -6,15 +6,9 @@ exports.items = {
 
 exports.store = {
     models: {
-        activitys: {
-            url: '../exam/activity',
-            type: 'pageable',
-            root: 'items',
-            pageSize: 6
-        },
         askbar: { url: '../exam/activity' },
-        params: { data: { isOverdue: '1' } },
-        down: { url: '../human/file/download' }
+        content: { url: '../ask/content' },
+        params: { data: { isOverdue: '1' } }
     },
     callbacks: {
         init: function(payload) {
@@ -29,7 +23,7 @@ exports.store = {
                 this.models.askbar.params = data;
             }
             // console.log(this.models.activitys.params);
-            // this.get(this.models.activitys);
+            // this.get(this.models.content);
         },
         search: function(payload) {
             var data = this.models.params.data;

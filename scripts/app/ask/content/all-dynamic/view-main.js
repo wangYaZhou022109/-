@@ -1,4 +1,8 @@
 exports.type = 'dynamic';
 exports.bindings = {
-    params: false
+    params: false,
+    trends: true
+};
+
+exports.dataForTemplate = {
 };
