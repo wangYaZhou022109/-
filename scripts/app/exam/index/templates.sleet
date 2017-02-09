@@ -83,6 +83,8 @@ view('top')
                             h3 考试已结束
                         compare(handlerBtn 'eq' 'noBegin')
                             h3 未开始
+                        compare(handlerBtn 'eq' 'detailByOverExam')
+                            h3 活动结束后才可查看详情
 
 
 view('side')
