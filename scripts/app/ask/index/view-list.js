@@ -1,8 +1,7 @@
 var D = require('drizzlejs');
 exports.bindings = {
-    askbar: true,
-    params: true,
-    down: true
+    askbar: false,
+    params: false
 };
 
 exports.events = {
