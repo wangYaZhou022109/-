@@ -1,15 +1,31 @@
 #!handlebars
 div(data-region='mymanage')
+div(data-region='reviewed')
 view('mymanage')
     echo('我的管理')
     br
     each(mymanage)
         br
-        echo('话题111:')
+        echo('话题名称:')
         echo(name)
         br
         echo('今日新增:')
         echo(todayQuestionSum)
         echo('问题|')
         echo(todayShareSum)
-        echo('分享') 
+        echo('分享')
+view('reviewed')
+    echo('我的审核')
+    br
+    each(reviewed)
+        br
+        echo('【')
+        map('ask-audit-type' auditType)
+        echo('】 ')
+        map('ask-audit-status' auditStatus)
+        echo('提交人：')
+        echo(member.fullName)
+        echo('提交时间: ')
+        date(createTime)
+        echo('内容:')
+        echo(question.content)
