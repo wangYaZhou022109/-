@@ -10,7 +10,7 @@ each(question)
         ul 
             li(style='font-weight:bold')
                 echo(title) 
-                .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+                .img(style='height:30px;width:30px;float:right;') > img(src=jsonImgs )
             li
                 echo(content) 
             li
