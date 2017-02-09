@@ -26,19 +26,20 @@ view('filter')
 
 view('list')
     .container
-        .main-list(style='height:100%;')
+        .main-list(style='height:3000px;')
             .activity-category
-                .pull-left(id='left' name='left' )
+                .pull-left(id='left' name='left' style='height:100px;width:70%;')
                     a(id='category-item-1' href='javascript:;')(class ='active') 全部动态
                     a(id='category-item-2' href='javascript:;')(class ='active') 与我相关
                     a(id='category-item-3' href='javascript:;')(class ='active') 专家分享
+                    hr
                     div(id='list' name='list' )
                 .pull-right(id='right' name='right' )
                     .content
                         table.table
-                            tr > td(align='center') > .btn.radius(id='question' data-name='id' data-value=details.id style='height:50px;width:300px;text-align:center') > echo('发问题')
-                            tr > td(align='center') > .btn.radius(id='article' data-name='id' data-value=details.id style='height:50px;width:300px;text-align:center') > echo('写文章')
-                            tr > td(align='center') 
+                            tr > td(align='center' colspan='3') > .btn.radius(id='question' data-name='id' data-value=details.id style='height:50px;width:300px;text-align:center') > echo('发问题')
+                            tr > td(align='center' colspan='3') > .btn.radius(id='article' data-name='id' data-value=details.id style='height:50px;width:300px;text-align:center') > echo('写文章')
+                            tr > td(align='center' colspan='3') 
                                 a(id='category-item-9' href='javascript:;')(class ='active') 
                                     echo('99')
                                     .title.text-overflow > echo('关注内容')
@@ -53,6 +54,36 @@ view('list')
                             tr > td(align='center') > a(id='category-item-6' href='javascript:;')(class ='active') 我的回复
                             tr > td(align='center') > a(id='category-item-7' href='javascript:;')(class ='active') 回复我的
                             tr > td(align='center') > a(id='mymanage-' href='javascript:;')(class ='active') 我是管理
+                                hr
+                            tr 
+                                td(style='width:30px;')
+                                td(align='center') 
+                                    a(id='category-item-4' href='javascript:;')(class ='active') 我的提问
+                                    hr
+                                td(style='width:30px;')
+                            tr 
+                                td(style='width:30px;')
+                                td(align='center') 
+                                    a(id='category-item-5' href='javascript:;')(class ='active') 我的分享
+                                    hr
+                                td(style='width:30px;')
+                            tr 
+                                td(style='width:30px;')
+                                td(align='center')
+                                    a(id='category-item-6' href='javascript:;')(class ='active') 我的回复
+                                    hr
+                                td(style='width:30px;')
+                            tr 
+                                td(style='width:30px;')
+                                td(align='center') 
+                                    a(id='category-item-7' href='javascript:;')(class ='active') 回复我的
+                                    hr
+                                td(style='width:30px;')
+                            tr
+                                td(style='width:30px;')
+                                td(align='center') 
+                                    a(id='mymanage-' href='javascript:;')(class ='active') 我是管理
+                                td(style='width:30px;')
                         table.table
                             tr 
                                 td(align='left' width='250') > echo('热门话题') 
