@@ -1,42 +1,24 @@
-var D = require('drizzlejs');
+exports.type = 'dynamic';
+
 exports.bindings = {
-    askbar: false,
-    params: false
+    state: true
 };
 
-exports.events = {
-    'click category-item-*': 'toggleItem',
-    'click to-activity-*': 'toActivity',
-    'click mymanage-*': 'mymanage',
-    'click myquiz-*': 'myquiz'
-};
-
-exports.handlers = {
-    mymanage: function() {
-        var region;
-        var el = this.$('left');
-        region = new D.Region(this.app, this.module, el);
-        region.show('ask/mymanage');
-    },
-    myquiz: function() {
-        var region;
-        var el = this.$('left');
-        region = new D.Region(this.app, this.module, el);
-        region.show('ask/myquiz');
-    },
-    toggleItem: function(id) {
-        var region;
-        var el = this.$('list');
-        region = new D.Region(this.app, this.module, el, id);
-        if (id === '1') {
-            region.show('ask/content/all-dynamic', { id: id });
-        } else if (id === '2') {
-            region.show('ask/content/related-to-me', { id: id });
-        } else if (id === '3') {
-            region.show('ask/content/expert-sharing', { id: id });
-        }
+exports.getEntityModuleName = function(key) {
+    var str = '';
+    if (key === 'all-dynamic' || key === 'expert-sharing' || key === 'related-to-me') {
+        str = 'ask/content/' + key;
+    } else {
+        str = 'ask/' + key;
     }
+    return str;
+};
+exports.getEntity = function() {
+    return {
+        state: this.bindings.state.data
+    };
 };
 
-exports.dataForTemplate = {
+exports.dataForEntityModule = function(entity) {
+    return entity;
 };
