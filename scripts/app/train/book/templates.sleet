@@ -1,0 +1,79 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .main(data-region='main')
+
+view('main') > form.vertical
+    div(style='padding:20px 50px 50px 100px;')
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 培训班名称：
+            .col-sm-2
+                label > echo(projectInfo.name)
+                input(type='hidden' name='id' value=projectInfo.id)
+            .col-sm-2(style='text-align:right')
+                label MIS编号：
+            .col-sm-2
+                label > echo(projectInfo.code)
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 需求方：
+            .col-sm-2
+                label > echo(projectInfo.organization.name)
+            .col-sm-2(style='text-align:right')
+                label 培训需求方联系人：
+            .col-sm-2
+                label > echo(projectInfo.member.name)
+            
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 联系电话：
+            .col-sm-2
+                input.input(name='contactPhone' value=projectInfo.contactPhone x-rule='required,maxLength:20')
+            .col-sm-2(style='text-align:right')
+                label 邮箱：
+            .col-sm-2
+                input.input(name='contactEmail' value=projectInfo.contactEmail x-rule='required,maxLength:100,email')
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 计划人数：
+            .col-sm-2
+                label > echo(projectInfo.amount)
+            .col-sm-2(style='text-align:right')
+                label 计划天数：
+            .col-sm-2
+                label > echo(projectInfo.days)
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 是否外部举办：
+            .col-sm-2
+                input.inline-block(name='isOutside' type='radio' value='1')('checked')&if(projectInfo.checked)
+                .inline-block 是
+                input.inline-block(name='isOutside' type='radio' value='0')('checked')&unless(projectInfo.checked)
+                .inline-block 否
+            .col-sm-2(style='text-align:right')
+                label 需求调研方式：
+            .col-sm-2
+                input.input(name='surveyType' value=projectInfo.classInfo.surveyType x-rule='required,maxLength:100')
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 往返日期：
+            .col-sm-6
+                input.input(name='arriveDate' value=date(projectInfo.classInfo.arriveDate) readonly='readonly' size=8)
+                label ~
+                input.input(name='returnDate' value=date(projectInfo.classInfo.returnDate) readonly='readonly' size=8)
+                a.btn.inline-block#bookTime 预定时间
+        .row
+            .col-sm-2(style='text-align:right')
+                label 培训目标：
+            .col-sm-4
+                textarea(name='target' value='' rows=5 cols=80 x-rule='required,maxLength:2000') > echo(projectInfo.classInfo.target)
+        .row
+            .col-sm-2(style='text-align:right')
+                label 培训对象：
+            .col-sm-4
+                textarea(name='object' value='' rows=5 cols=80 x-rule='required,maxLength:2000') > echo(projectInfo.object)
+        .row
+            .col-sm-8(style='text-align:center')
+                a.btn#submit 提交

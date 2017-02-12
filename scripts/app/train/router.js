@@ -1,7 +1,7 @@
 exports.routes = {
-    index: 'showIndex'
+    'index/:id': 'showIndex'
 };
 
-exports.showIndex = function() {
-    return this.app.show('content', 'activity/index');
+exports.showIndex = function(id) {
+    return this.app.show('content', 'train/index', { id: id });
 };

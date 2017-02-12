@@ -3,17 +3,11 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
     setting = {},
     currentUser = {};
 
-oauthOptions = {
-    clientId: 999,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'https://dev9.zhixueyun.com'
-};
-
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 13,
+    clientId: 66,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.9.115'
+    returnTo: 'http://192.168.1.10'
 };
 // @endif
 
@@ -53,6 +47,7 @@ require('./app/ext/videojs');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/main/modal/modal-region');
+require('./app/ext/flatpickr');
 
 D.adapt({
     getFormData: function(form) {
@@ -87,7 +82,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'study', 'activity', 'exam']
+    routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'train']
 });
 
 D.PageableModel.setDefault({

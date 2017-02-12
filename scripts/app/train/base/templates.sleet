@@ -1,0 +1,100 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .main(data-region='main')
+
+view('main') > form.vertical
+    div(style='padding:20px 50px 50px 100px;')
+        .row(style='line-height:50px;')
+            .col-sm-4.add-topic-img > .popup-side
+                #headFile
+            .col-sm-8.left
+                .row > .col-sm-2
+                    label 培训班名称：
+                .col-sm-2
+                    label 培训名称培训名称培训名称
+                .row > .col-sm-2
+                    label 培训起止时间
+                .col-sm-2
+                    label 2017-03-24~2017-03-25
+                .row > .col-sm-8
+                    label 学习地点：中国移动学院  客户：暂未分配  餐厅：暂未分配  教室：暂未分配
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 是否有省公司二级经理参加：
+            .col-sm-2
+                input.inline-block(name='' type='radio' value='1')
+                .inline-block 是
+                input.inline-block(name='' type='radio' value='0')
+                .inline-block 否
+            .col-sm-2(style='text-align:right')
+                label 是否有部长级及以上领导参加：
+            .col-sm-2
+                input.inline-block(name='' type='radio' value='1')
+                .inline-block 是
+                input.inline-block(name='' type='radio' value='0')
+                .inline-block 否
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 班级合影：
+            .col-sm-2
+                input.inline-block(name='' type='radio' value='1')
+                .inline-block 是
+                input.inline-block(name='' type='radio' value='0')
+                .inline-block 否
+            .col-sm-2(style='text-align:right')
+                label 合影时间：
+            .col-sm-2
+                input.input#phototime(name='' value='')
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 课程录像：
+            .col-sm-2
+                input.inline-block(name='' type='radio' value='1')
+                .inline-block 是
+                input.inline-block(name='' type='radio' value='0')
+                .inline-block 否
+            .col-sm-2(style='text-align:right')
+                label 录像需求：
+            .col-sm-2
+                input.input(name='' value='')
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 课程制作：
+            .col-sm-2
+                input.inline-block(name='' type='radio' value='1')
+                .inline-block 是
+                input.inline-block(name='' type='radio' value='0')
+                .inline-block 否
+            .col-sm-2(style='text-align:right')
+                label 制作需求：
+            .col-sm-2
+                input.input(name='' value='')
+        .row(style='line-height:50px;')
+            .col-sm-2(style='text-align:right')
+                label 教室是否需要网络：
+            .col-sm-2
+                input.inline-block(name='' type='radio' value='1')
+                .inline-block 是
+                input.inline-block(name='' type='radio' value='0')
+                .inline-block 否
+            .col-sm-2(style='text-align:right')
+                label 教室桌型：
+            .col-sm-2
+                select.input#typeId(name='') 
+                    option(value='1') > echo('圆型')
+                    option(value='0') > echo('其他')
+        .row
+            .col-sm-2(style='text-align:right')
+                label 其他需求：
+            .col-sm-4
+                textarea(name='target' value='' rows=5 cols=80)
+        .row
+            .col-sm-2(style='text-align:right')
+                label 上传banner：
+            .col-sm-4
+                a.btn#uploadBtn 上传
+        .row
+            .col-sm-8(style='text-align:center')
+                a.btn#submit 保存
