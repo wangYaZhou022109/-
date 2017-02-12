@@ -9,18 +9,19 @@ view('list')
 each(question)
         ul 
             li(style='font-weight:bold')
-                echo('标题标题标题标题标题标题标题标题标题标题标题标题') 
-                .img(style='height:30px;width:30px;float:right;') > img(src=jsonImgs )
+                echo(title) 
+                .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
-                echo('内容内容内容内容内容内容内容内容内容内容内容内容内容v内容内容内容内容内容...') 
+                echo(content) 
             li
-                echo('我' + '提问·' + '2017-02-12') 
+                echo(createMemberId + '提问·' + createTime ) 
             li
-                echo('来自话题 ：' + '花儿为什么这样红')
+                echo('来自话题 ：' + topic )
                 a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
                 echo('条讨论')
                 a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
                 echo('|')
+                echo(auditStatus)
                 a(id='quiz-report-' + id href='javascript:;')(class ='active') 举报
                 a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
                 hr
