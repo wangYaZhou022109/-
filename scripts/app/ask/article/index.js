@@ -1,0 +1,5 @@
+exports.items = {
+    details: 'details'
+
+};
+

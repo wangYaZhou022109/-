@@ -1,0 +1,24 @@
+#!handlebars
+
+module 
+    div(data-region='details')
+
+view('details') > form.vertical
+    label(class='required') > echo('用户名')
+    input.input(name='name'  value=''  x-rule='required')('disabled')
+
+    label(class='required') > echo('密码')
+    input.input(name='password' type='password'  value='user.password'  x-rule='required')('disabled')
+
+    input.input(type='hidden' name='id' value=user.id)
+
+    label(class='required') > echo('组织')
+
+    label(class='required') > echo('邮箱')
+    input.input(name='email' value='user.email' x-rule='required')
+
+    label > echo('姓名')
+    input.input(name='fullName' value='user.fullName')
+
+    label > echo('手机号码')
+    input.input(name='phoneNumber' value='user.phoneNumber')

@@ -16,8 +16,8 @@ view('left')
 
 view('top')
     table.table
-        tr > td(align='center') > .btn.radius(id='question' data-name='id' data-value='' style='height:50px;width:300px;text-align:center') > echo('发问题')
-        tr > td(align='center') > .btn.radius(id='article' data-name='id' data-value='' style='height:50px;width:300px;text-align:center') > echo('写文章')
+        tr > td(align='center') > .btn.radius(id='question-1' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
+        tr > td(align='center') > .btn.radius(id='article-2' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')
 
 
 view('middle') 
@@ -71,4 +71,6 @@ view('bottom')
         tr 
             td(align='left' width='250') > echo('活跃专家')
             td(align='right') > a(id='active-expert' href='javascript:;')(class ='active') 更多
-                
+
+
+

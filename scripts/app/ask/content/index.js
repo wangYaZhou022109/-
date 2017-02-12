@@ -1,8 +1,11 @@
 exports.items = {
+    'ask/question': { isModule: true },
     middle: 'middle',
     top: 'top',
     bottom: 'bottom',
-    left: 'left'
+    left: 'left',
+    'ask/article': { isModule: true }
+
 };
 exports.store = {
     models: {
