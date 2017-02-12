@@ -1,0 +1,5 @@
+#!handlebars
+module
+    div(data-region='list')
+view('list') 
+    div 与我相关

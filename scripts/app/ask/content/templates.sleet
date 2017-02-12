@@ -1,0 +1,74 @@
+#!handlebars
+
+module 
+    .activity-list
+        .container
+            .main-list(style='height:3000px;')
+                .activity-category
+                    .pull-left(style='height:100px;width:70%;' data-region='left')
+                    .pull-right
+                        .content
+                            div(data-region='top')
+                            div(data-region='middle')
+                            div(data-region='bottom')
+view('left') 
+    div(data-dynamic-key=state.menu)
+
+view('top')
+    table.table
+        tr > td(align='center') > .btn.radius(id='question' data-name='id' data-value='' style='height:50px;width:300px;text-align:center') > echo('发问题')
+        tr > td(align='center') > .btn.radius(id='article' data-name='id' data-value='' style='height:50px;width:300px;text-align:center') > echo('写文章')
+
+
+view('middle') 
+    tr > td(align='center' colspan='3') 
+        a(id='category-item-9' href='javascript:;')(class ='active') 
+            echo('99')
+            .title.text-overflow > echo('关注内容')
+        a(id='category-item-10' href='javascript:;')(class ='active') 
+            echo('99')
+            .title.text-overflow > echo('关注话题')
+        a(id='category-item-11' href='javascript:;')(class ='active') 
+            echo('99')
+            .title.text-overflow > echo('关注专家')
+        hr
+    tr 
+        td(style='width:50px;')
+        td(align='center') 
+            a(id='middle-menu-myquiz' href='javascript:;')(class ='active') 我的提问
+            hr
+        td(style='width:50px;')
+    tr 
+        td
+        td(align='center') 
+            a(id='middle-menu-5' href='javascript:;')(class ='active') 我的分享
+            hr
+        td
+    tr 
+        td
+        td(align='center')
+            a(id='middle-menu-6' href='javascript:;')(class ='active') 我的回复
+            hr
+        td
+    tr 
+        td
+        td(align='center') 
+            a(id='middle-menu-7' href='javascript:;')(class ='active') 回复我的
+            hr
+        td
+    tr
+        td
+        td(align='center') 
+            a(id='middle-menu-mymanage' href='javascript:;')(class ='active') 我是管理
+        td
+            
+view('bottom')
+    table.table
+        tr 
+            td(align='left' width='250') > echo('热门话题') 
+            td(align='right') > a(id='hot-topic' href='javascript:;' style='float:right;')(class ='active') 更多
+    table.table
+        tr 
+            td(align='left' width='250') > echo('活跃专家')
+            td(align='right') > a(id='active-expert' href='javascript:;')(class ='active') 更多
+                
