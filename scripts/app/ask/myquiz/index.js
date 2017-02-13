@@ -1,6 +1,5 @@
 exports.items = {
-    list: 'list',
-    top: ''
+    list: 'list'
 };
 
 exports.store = {
@@ -14,11 +13,6 @@ exports.store = {
             var question = this.models.question;
             question.set({ id: 1 });
             return this.get(question);
-        },
-        getCount: function() {
-            var count = this.models.count;
-            count.set({ id: 1 });
-            return this.get(count);
         }
     }
 };

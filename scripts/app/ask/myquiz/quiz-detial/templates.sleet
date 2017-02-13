@@ -17,12 +17,12 @@ each(question)
                 echo('张三' + '提问·' + '2017-02-12') 
             li
                 echo('来自话题 ：' + '花儿为什么这样红')
-                a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                a(id='quiz-concerna' + id href='javascript:;')(class ='active') 关注  
                 echo('条讨论')
-                a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                a(id='quiz-enjoys-' + id href='javascript:;')(class ='active') 分享
                 echo('|')
-                a(id='quiz-report-' + id href='javascript:;')(class ='active') 举报
-                a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                a(id='quiz-reports-' + id href='javascript:;')(class ='active') 举报
+                a(id='quiz-removes-' + id href='javascript:;')(class ='active') 删除
                 hr
                     
                   

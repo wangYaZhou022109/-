@@ -2,7 +2,7 @@ exports.type = 'dynamic';
 exports.bindings = {
     params: false,
     question: true,
-    count: true
+    count: false
 };
 
 exports.dataForTemplate = {
