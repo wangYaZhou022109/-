@@ -4,17 +4,17 @@ module
 view('list')
     ul 
         li
-            echo('我的提问'+'你共提问了' + question.length + '个问题') 
+            echo('我的提问'+'你共提问了' + questions.length + '个问题') 
             hr
-    each(question)
+    each(questions)
         ul 
             li(style='font-weight:bold')
-                echo(title) 
+                a(id='details-'+id data-name='id' data-value=id) > echo(title) 
                 .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
                 echo(content) 
             li
-                echo(createMemberId + '提问·' + createTime ) 
+                echo(fullName + '提问·' + createTime ) 
             li
                 echo('来自话题 ：' + topic )
                 a(href='javascript:;')(class ='active') 关注  
@@ -25,8 +25,7 @@ view('list')
                 a(href='javascript:;')(class ='active') 举报
                 a(href='javascript:;')(class ='active') 删除
                 hr
-            li 
-                a('更多》》')
+
                     
                   
 
