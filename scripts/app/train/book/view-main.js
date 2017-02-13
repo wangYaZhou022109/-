@@ -13,9 +13,14 @@ exports.events = {
 exports.handlers = {
     book: function() {
         var me = this,
-            model = me.module.items.toolbox;
+            model = me.module.items['picker/book-time'];
 
-        me.app.viewport.ground(model);
+        me.app.viewport.ground(model, {
+            callback: function(arriveDate, backDate) {
+                console.log(arriveDate);
+                console.log(backDate);
+            }
+        });
     }
 };
 

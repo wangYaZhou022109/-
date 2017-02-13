@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'picker/book-time': { isModule: true }
 };
 
 exports.store = {
