@@ -12,18 +12,18 @@ view('list')
                 a(id='details-'+id data-name='id' data-value=id) > echo(title) 
                 .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
-                echo(content) 
+                a(id='detailss-'+id data-name='id' data-value=id) > echo(content) 
             li
                 echo(fullName + '提问·' + createTime ) 
             li
                 echo('来自话题 ：' + topic )
-                a(href='javascript:;')(class ='active') 关注  
+                a(id='concern-' + id href='javascript:;')(class ='active') 关注  
                 echo('条讨论')
-                a(href='javascript:;')(class ='active') 分享
+                a(id='enjoy-' + id href='javascript:;')(class ='active') 分享
                 echo('|')
                 echo(auditStatus)
-                a(href='javascript:;')(class ='active') 举报
-                a(href='javascript:;')(class ='active') 删除
+                a(id='report-' + id href='javascript:;')(class ='active') 举报
+                a(id='remove-' + id href='javascript:;')(class ='active') 删除
                 hr
 
                     
