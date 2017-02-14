@@ -13,7 +13,7 @@ view('toolbox') > form.vertical
     label(style='float:left;') > echo('报道日：')
     input.input#arriveDate(name='arriveDate' style='width:180px;float:left')
     label(style='float:left;') > echo('返程日：')
-    input.input#backDate(name='backDate' style='width:180px;float:left')
+    input.input#backDate(name='backDate' style='width:180px;float:left' readonly='readonly')
 
     .btn#book(style='line-height:inherit; padding:5px 8px; float:left; margin-right:10px; margin-left:10px;') > echo('确定') + echo('&nbsp;&nbsp;')
     .btn#rule(style='line-height:inherit; padding:5px 8px;float:left;') > echo('查看预定规则')
@@ -38,15 +38,11 @@ view('content')
             td(style='text-align:center;') > echo('可用资源')
             each(state.data)
                 td(style='padding:6px;') > echo(allowed)
-        tr
-            td(style='text-align:center;') > echo('培训班A  5人3天')
-            td(colspan='31') > echo('哈哈')
-        tr
-            td(style='text-align:center;') > echo('培训班A  5人3天')
-            td(colspan='31') > echo('哈哈')
-        tr
-            td(style='text-align:center;') > echo('培训班A  5人3天')
-            td(colspan='31') > echo('哈哈')
+        each(projects)
+            tr
+                td(style='text-align:center;') > echo(name + ' ' + amount + '人' + days + '天') 
+                td(colspan='31') > date(classInfo.arriveDate) + echo('~') + date(classInfo.returnDate)
+
 
 view('tips')
     ol

@@ -13,7 +13,9 @@ exports.store = {
         state: { data: {} },
         month: { data: {} },
         occupy: { url: '../train/occupy' },
-        projects: { url: '../train/project/findByDate' }
+        projects: { url: '../train/project/findByDate' },
+        project: { },
+        check: { url: '../train/occupy/check' },
     },
     callbacks: {
         changeMonth: function(payload) {
@@ -21,12 +23,14 @@ exports.store = {
                 state = this.models.state,
                 occupy = this.models.occupy,
                 projects = this.models.projects,
+                project = this.models.project,
                 newdate,
                 days,
                 arrays,
                 weeks,
                 item;
             month.data = payload.month;
+            project.data = payload.project;
             newdate = new Date(month.data.split('-')[0], month.data.split('-')[1], 0);
             days = newdate.getDate();
             arrays = new Array(days);
@@ -50,12 +54,24 @@ exports.store = {
             state.clear();
             state.data = arrays;
             state.changed();
+        },
+        book: function(payload) {
+            var check = this.models.check,
+                project = this.models.project;
+            check.set(payload);
+            check.params.projectId = project.data.id;
+            return this.get(check);
         }
     }
 };
 
 exports.afterRender = function() {
-    var newdate = new Date();
+    var newdate = new Date(),
+        project = this.renderOptions.project,
+        year,
+        month;
     newdate = new Date(newdate.getFullYear(), newdate.getMonth() + 1, 0);
-    return this.dispatch('changeMonth', { month: [newdate.getFullYear(), newdate.getMonth() + 1].join('-') });
+    year = newdate.getFullYear();
+    month = newdate.getMonth() + 1;
+    return this.dispatch('changeMonth', { month: [year, month].join('-'), project: project });
 };

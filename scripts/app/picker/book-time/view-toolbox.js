@@ -1,15 +1,17 @@
 
 exports.bindings = {
-
+    state: true,
+    project: true
 };
 
 exports.actions = {
-    'change month': 'changeMonth'
+    'change month': 'changeMonth',
+    'click book': 'book'
 };
 
 exports.events = {
     'click rule': 'showRule',
-    'click book': 'book'
+    'change arriveDate': 'changeArriveDate'
 };
 
 exports.handlers = {
@@ -18,28 +20,15 @@ exports.handlers = {
             model = me.module.items.tips;
         me.app.viewport.modal(model, {});
     },
-    book: function() {
+    changeArriveDate: function() {
         var arriveDate = this.$('arriveDate').value,
-            backDate = this.$('backDate').value,
-            arriveDateObj,
-            backDateObj;
-        if (arriveDate === '') {
-            this.app.message.alert('请选择报道日');
-            return false;
-        }
-        if (backDate === '') {
-            this.app.message.alert('请选择返程日');
-            return false;
-        }
-        arriveDateObj = new Date(arriveDate);
-        backDateObj = new Date(backDate);
-        if (arriveDateObj.getTime() > backDateObj.getTime()) {
-            this.app.message.alert('报道日不能晚于返程日');
-            return false;
-        }
-        this.module.renderOptions.callback(arriveDate, backDate);
-        this.app.viewport.closeModal();
-        return true;
+            arriveLong,
+            project = this.bindings.project,
+            backDate;
+        arriveLong = new Date(arriveDate);
+        arriveLong.setDate(arriveLong.getDate() + project.data.days + 1);
+        backDate = arriveLong.getFullYear() + '-' + (arriveLong.getMonth() + 1) + '-' + arriveLong.getDate();
+        this.$('backDate').value = backDate;
     }
 };
 
@@ -56,14 +45,33 @@ exports.components = [{
     options: {
         minDate: new Date()
     }
-}, {
-    id: 'backDate',
-    name: 'flatpickr',
-    options: {
-        minDate: new Date()
-    }
 }];
 
-exports.actionCallbacks = {
+exports.dataForActions = {
+    book: function(payload) {
+        var arriveDate = payload.arriveDate,
+            backDate = payload.backDate;
+        if (arriveDate === '') {
+            this.app.message.alert('请选择报道日');
+            return false;
+        }
+        if (backDate === '') {
+            this.app.message.alert('请选择返程日');
+            return false;
+        }
+        return true;
+    },
+};
 
+exports.actionCallbacks = {
+    book: function(data) {
+        var d = data;
+        console.log(d);
+        if (d.result === 'ok') {
+            this.module.renderOptions.callback(d.arriveDate, d.backDate);
+            this.app.viewport.closeModal();
+        } else {
+            this.app.message.alert(d.message);
+        }
+    }
 };

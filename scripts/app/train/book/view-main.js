@@ -13,9 +13,10 @@ exports.events = {
 exports.handlers = {
     book: function() {
         var me = this,
-            model = me.module.items['picker/book-time'];
-
+            model = me.module.items['picker/book-time'],
+            projectInfo = this.bindings.projectInfo;
         me.app.viewport.ground(model, {
+            project: projectInfo.data,
             callback: function(arriveDate, backDate) {
                 console.log(arriveDate);
                 console.log(backDate);
