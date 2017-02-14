@@ -7,10 +7,10 @@ exports.bindings = {
 exports.components = [function() {
 }];
 
-exports.buttons = [{
-    text: '保存',
-    action: 'save'
-}];
+// exports.buttons = [{
+//     text: '保存',
+//     action: 'save'
+// }];
 
 exports.dataForActions = {
 };

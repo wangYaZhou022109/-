@@ -1,24 +1,34 @@
 #!handlebars
 
-module 
+module > .course-page
+    
     .activity-list
         .container
             .main-list(style='height:3000px;')
                 .activity-category
+                    div(data-region='popup')  
                     .pull-left(style='height:100px;width:70%;' data-region='left')
                     .pull-right
                         .content
                             div(data-region='top')
                             div(data-region='middle')
                             div(data-region='bottom')
+
 view('left') 
     div(data-dynamic-key=state.menu)
 
 view('top')
     table.table
-        tr > td(align='center') > .btn.radius(id='question-1' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
-        tr > td(align='center') > .btn.radius(id='article-2' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')
+        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
+        tr > td(align='center') > .btn.radius(id='article-article' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')
 
+view('popup')
+    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
+    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:10%;left:20%;') > .catalog-view-box
+        .clearfix.catalog-view-nav
+            i#closeCatalog.pull-right.iconfont.icon-full-screen
+            h3.active > string('my-question')
+        div(data-dynamic-key=popupstate.menu)
 
 view('middle') 
     tr > td(align='center' colspan='3') 

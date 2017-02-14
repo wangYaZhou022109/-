@@ -1,12 +1,13 @@
 #!handlebars
 module
     div(data-region='list')
-ul 
+    
+view('list')
+    ul 
         li
             echo('我的提问'+'你共提问了99个问题') 
         hr
-view('list')
-each(question)
+    each(question)
         ul 
             li(style='font-weight:bold')
                 echo(title) 

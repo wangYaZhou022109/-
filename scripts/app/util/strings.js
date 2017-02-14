@@ -1,4 +1,5 @@
 var D = require('drizzlejs'),
+    ask = require('../ask/strings'),
     study = require('../study/strings');
 
 var strings = {
@@ -19,7 +20,7 @@ var strings = {
     download: '下载'
 };
 
-var ss = D.assign({}, strings, study);
+var ss = D.assign({}, strings, study, ask);
 
 exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');

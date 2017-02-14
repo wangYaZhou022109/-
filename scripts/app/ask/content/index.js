@@ -4,12 +4,14 @@ exports.items = {
     top: 'top',
     bottom: 'bottom',
     left: 'left',
+    popup: 'popup',
     'ask/article': { isModule: true }
 
 };
 exports.store = {
     models: {
-        state: { data: { menu: 'contentleft' } }
+        state: { data: { menu: 'contentleft' } },
+        popupstate: {}
     },
     callbacks: {
         init: function() {
