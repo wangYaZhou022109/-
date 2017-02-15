@@ -11,11 +11,11 @@ exports.events = {
 
 exports.handlers = {
     details: function(data) {
-        var mod = this.module.items['ask-bar/myquiz/details'],
+        var mod = this.module.items['ask-bar/myquiz/details'];
         this.app.viewport.ground(mod, { id: data });
     },
     datailss: function(data) {
-        var mod = this.module.items['ask-bar/myquiz/details'],
+        var mod = this.module.items['ask-bar/myquiz/details'];
         this.app.viewport.ground(mod, { id: data });
     }
 };
@@ -51,5 +51,15 @@ exports.actionCallbacks = {
     remove: function() {
         this.app.message.success('删除成功！');
         this.module.dispatch('init');
+    }
+};
+
+exports.dataForTemplate = {
+    questions: function(data) {
+        var obj = data,
+            date = new Date(data.questions.createTime);
+        obj.questions.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+        + '   ' + date.getHours() + ':' + date.getMinutes();
+        return obj.questions;
     }
 };

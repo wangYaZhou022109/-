@@ -5,10 +5,10 @@ exports.items = {
 exports.store = {
     models: {
         details: {
-            url: '../ask-bar/myquiz/myQuizDetails'
+            url: '../ask-bar/question-details'
         },
-        discuss: { url: '../ask-bar/myquiz/question-discuss' },
-        reply: { url: '../ask-bar/myquiz/question-reply' },
+        discuss: { url: '../ask-bar/question-discuss' },
+        reply: { url: '../ask-bar/question-reply' },
         state: { data: {} }
     },
     callbacks: {

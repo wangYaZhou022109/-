@@ -10,10 +10,10 @@ view('list')
     each(questions)
         ul 
             li(style='font-weight:bold')
-                echo(title) 
+                a(id='details-'+id data-name='id' data-value=id) > echo(title) 
                 .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
-                echo(content) 
+                a(id='details-'+id data-name='id' data-value=id) > echo(content) 
             li
                 echo(createMemberId + '提问·' + createTime ) 
             li
