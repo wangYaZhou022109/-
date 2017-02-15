@@ -40,7 +40,6 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    console.log('invoke tag');
     return this.dispatch('init');
 };
 
