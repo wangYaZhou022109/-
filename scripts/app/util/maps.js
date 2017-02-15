@@ -214,6 +214,12 @@ module.exports = {
         5: '考试', // '报名考试',
         6: '问卷', // '问卷调查',
         7: '补考'
+    },
+    'trainee-auditStatus': {
+        0: '待审核', 1: '通过', 2: '拒绝'
+    },
+    'trainee-show-auditStatus': {
+        0: '待审核', 1: '-'
     }
 };
 

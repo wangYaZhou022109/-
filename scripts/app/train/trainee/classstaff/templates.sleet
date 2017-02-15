@@ -1,0 +1,8 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    echo('班务班务班务班务班务班务班务班务班务班务班务班务')
