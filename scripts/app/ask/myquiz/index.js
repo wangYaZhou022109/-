@@ -1,6 +1,5 @@
 exports.items = {
-    list: 'list',
-    detials: ''
+    list: 'list'
 };
 
 exports.store = {

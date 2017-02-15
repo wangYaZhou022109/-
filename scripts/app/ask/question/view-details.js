@@ -1,6 +1,5 @@
 // exports.title = '我要提问';
 // exports.type = 'form';
-var _ = require('lodash/collection');
 exports.bindings = {
 };
 

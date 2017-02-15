@@ -5,7 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         details: {
-            url: '../ask-bar/myquiz/question-details'
+            url: '../ask-bar/myquiz/myQuizDetails'
         },
         discuss: { url: '../ask-bar/myquiz/question-discuss' },
         reply: { url: '../ask-bar/myquiz/question-reply' },

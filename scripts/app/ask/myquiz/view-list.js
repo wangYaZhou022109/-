@@ -12,13 +12,11 @@ exports.events = {
 exports.handlers = {
     details: function(data) {
         var mod = this.module.items['ask-bar/myquiz/details'],
-            question = this.bindings.question.getQuestionById({ id: data });
-        this.app.viewport.ground(mod, { question: question });
+        this.app.viewport.ground(mod, { id: data });
     },
     datailss: function(data) {
         var mod = this.module.items['ask-bar/myquiz/details'],
-            question = this.bindings.question.getQuestionById({ id: data });
-        this.app.viewport.ground(mod, { question: question.id });
+        this.app.viewport.ground(mod, { id: data });
     }
 };
 
