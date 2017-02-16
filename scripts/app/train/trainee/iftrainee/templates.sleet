@@ -1,0 +1,51 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='search')
+        .div(data-region='main')
+
+view('search') > form.vertical
+    div.row.text-center
+        div.col-sm-3
+            echo('员工编号')
+            input.input(name='memberName')
+        div.col-sm-3
+            echo('姓名')
+            input.input(name='memberFullName')
+        div.col-sm-3
+            echo('所属单位')
+            input.input(name='organizationName')
+        div.col-sm-3
+            btn.btn#search > echo('搜索')
+
+view('main')
+    div.text-center
+        p.col-sm-2 > echo('学员列表')
+        .buttons
+            .btn#addTrainee > echo('添加学员')
+            .btn#importTrainee > echo('导入')
+            a(href=exportUrl target = "_blank") > .btn > echo('导出')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('机构')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+            th > echo('状态')
+            th > echo('操作')
+        tbody > each(iftrainees) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+            td > map('trainee-show-auditStatus' auditStatus)
+            td > echo(i)
+    #pager.pagination
+    

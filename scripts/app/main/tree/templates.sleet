@@ -1,0 +1,3 @@
+#!handlebars
+
+module > .dtree(data-region='main')
