@@ -11,9 +11,9 @@ exports.store = {
         release: function(payload) {
             var question = this.models.question,
                 data = payload;
-            data.id = -1;
+            data.id = 1;
             question.set(data);
-            return this.save(question);
+            return this.post(question);
         }
     }
 };

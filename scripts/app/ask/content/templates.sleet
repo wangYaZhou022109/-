@@ -1,7 +1,6 @@
 #!handlebars
 
 module > .course-page
-    
     .activity-list
         .container
             .main-list(style='height:3000px;')
