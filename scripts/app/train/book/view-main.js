@@ -34,6 +34,9 @@ exports.dataForTemplate = {
         var d = data.projectInfo;
         d.checked = false;
         d.checked = d.classInfo.isOutside === 1;
+        if (d.status !== 2 && d.status !== 3) {
+            d.isShowCommit = true;
+        }
         return d;
     }
 };

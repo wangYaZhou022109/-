@@ -220,6 +220,15 @@ module.exports = {
     },
     'trainee-show-auditStatus': {
         0: '待审核', 1: '-'
+    },
+    'project-address': {
+        1: '移动学院', 2: '南方基地'
+    },
+    'class-classroom': {
+        0: '暂不分配', 1: '红枫叶温泉酒店', 2: '东方文化'
+    },
+    'class-table-type': {
+        1: '其他', 2: '圆形'
     }
 };
 

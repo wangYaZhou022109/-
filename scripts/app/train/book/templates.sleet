@@ -63,7 +63,8 @@ view('main') > form.vertical
                 input.input#arriveDate(name='arriveDate' value=date(projectInfo.classInfo.arriveDate) readonly='readonly' size=8)
                 label ~
                 input.input#returnDate(name='returnDate' value=date(projectInfo.classInfo.returnDate) readonly='readonly' size=8)
-                a.btn.inline-block#bookTime 预定时间
+                if(projectInfo.isShowCommit)
+                    a.btn.inline-block#bookTime 预定时间
         .row
             .col-sm-2(style='text-align:right')
                 label 培训目标：
@@ -76,4 +77,7 @@ view('main') > form.vertical
                 textarea#object(name='object' value='' rows=5 cols=80) > echo(projectInfo.object)
         .row
             .col-sm-8(style='text-align:center')
-                a.btn#submit 提交
+                if(projectInfo.isShowCommit)
+                    a.btn#submit 提交
+                else
+                    a.btn#submit 保存

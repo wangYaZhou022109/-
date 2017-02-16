@@ -66,7 +66,6 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     book: function(data) {
         var d = data;
-        console.log(d);
         if (d.result === 'ok') {
             this.module.renderOptions.callback(d.arriveDate, d.backDate);
             this.app.viewport.closeModal();

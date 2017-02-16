@@ -7,94 +7,102 @@ module > .train-class-page
 view('main') > form.vertical
     div(style='padding:20px 50px 50px 100px;')
         .row(style='line-height:50px;')
-            .col-sm-4.add-topic-img > .popup-side
-                #headFile
+            .col-sm-4.add-topic-img(style='text-align: center')
+                div.user-pic > img(src = state.downUrl width=300 height=200)
+                a.btn#uploadFile 设置封面
+                input(type='hidden' name='coverId' value=state.attachmentId)
             .col-sm-8.left
-                .row > .col-sm-2
-                    label 培训班名称：
-                .col-sm-2
-                    label 培训名称培训名称培训名称
-                .row > .col-sm-2
-                    label 培训起止时间
-                .col-sm-2
-                    label 2017-03-24~2017-03-25
                 .row > .col-sm-8
-                    label 学习地点：中国移动学院  客户：暂未分配  餐厅：暂未分配  教室：暂未分配
+                    label > echo('培训班名称：' + classInfo.className)
+                    input(type='hidden' name='id' value=classInfo.id)
+                .row > .col-sm-8
+                    label > echo('培训起止时间：' + classInfo.startDate + '~' + classInfo.endDate)
+                .row > .col-sm-8
+                    label > echo('学习地点：' + classInfo.addressText +'&nbsp;&nbsp;客房：' + classInfo.rommText + '    &nbsp;&nbsp;餐厅：' + classInfo.diningRoomText + '&nbsp;&nbsp;教室：' + classInfo.classRoomName)
         .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 是否有省公司二级经理参加：
             .col-sm-2
-                input.inline-block(name='' type='radio' value='1')
+                input.inline-block(name='haveProvinceLeader' type='radio' value='1')('checked')&if(checked.provinceLeaderCheck)
                 .inline-block 是
-                input.inline-block(name='' type='radio' value='0')
+                input.inline-block(name='haveProvinceLeader' type='radio' value='0')('checked')&unless(checked.provinceLeaderCheck)
                 .inline-block 否
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 是否有部长级及以上领导参加：
             .col-sm-2
-                input.inline-block(name='' type='radio' value='1')
+                input.inline-block(name='haveMinister' type='radio' value='1')('checked')&if(checked.haveMinisterCheck)
                 .inline-block 是
-                input.inline-block(name='' type='radio' value='0')
+                input.inline-block(name='haveMinister' type='radio' value='0')('checked')&unless(checked.haveMinisterCheck)
                 .inline-block 否
         .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 班级合影：
             .col-sm-2
-                input.inline-block(name='' type='radio' value='1')
+                input.inline-block#needGroupPhoto-1(name='needGroupPhoto' type='radio' value='1')('checked')&if(checked.needGroupPhotoCheck)
                 .inline-block 是
-                input.inline-block(name='' type='radio' value='0')
+                input.inline-block#needGroupPhoto-0(name='needGroupPhoto' type='radio' value='0')('checked')&unless(checked.needGroupPhotoCheck)
                 .inline-block 否
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 合影时间：
             .col-sm-2
-                input.input#phototime(name='' value='')
+                input.input#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))
         .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 课程录像：
             .col-sm-2
-                input.inline-block(name='' type='radio' value='1')
+                input.inline-block#needVideo-1(name='needVideo' type='radio' value='1')('checked')&if(checked.needVideoCheck)
                 .inline-block 是
-                input.inline-block(name='' type='radio' value='0')
+                input.inline-block#needVideo-0(name='needVideo' type='radio' value='0')('checked')&unless(checked.needVideoCheck)
                 .inline-block 否
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 录像需求：
             .col-sm-2
-                input.input(name='' value='')
+                input.input#videoRequirement(name='videoRequirement' value=classInfo.classDetail.videoRequirement)
         .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 课程制作：
             .col-sm-2
-                input.inline-block(name='' type='radio' value='1')
+                input.inline-block#needMakeCourse-1(name='needMakeCourse' type='radio' value='1')('checked')&if(checked.needMakeCourseCheck)
                 .inline-block 是
-                input.inline-block(name='' type='radio' value='0')
+                input.inline-block#needMakeCourse-0(name='needMakeCourse' type='radio' value='0')('checked')&unless(checked.needMakeCourseCheck)
                 .inline-block 否
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 制作需求：
             .col-sm-2
-                input.input(name='' value='')
+                input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)
         .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 教室是否需要网络：
             .col-sm-2
-                input.inline-block(name='' type='radio' value='1')
+                input.inline-block(name='needNet' type='radio' value='1')('checked')&if(checked.needNetCheck)
                 .inline-block 是
-                input.inline-block(name='' type='radio' value='0')
+                input.inline-block(name='needNet' type='radio' value='0')('checked')&unless(checked.needNetCheck)
                 .inline-block 否
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 教室桌型：
             .col-sm-2
-                select.input#typeId(name='') 
-                    option(value='1') > echo('圆型')
-                    option(value='0') > echo('其他')
+                select#tableType(name='tableType') 
+                    option(value='1')('selected')&if(checked.tableType1) > map('class-table-type' '1')
+                    option(value='2')('selected')&if(checked.tableType2) > map('class-table-type' '2')
         .row
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 其他需求：
             .col-sm-4
-                textarea(name='target' value='' rows=5 cols=80)
+                textarea#otherRequirement(name='otherRequirement' rows=5 cols=80) > echo(classInfo.classDetail.otherRequirement)
         .row
-            .col-sm-2(style='text-align:right')
+            .col-sm-3(style='text-align:right')
                 label 上传banner：
             .col-sm-4
-                a.btn#uploadBtn 上传
+                label 推荐图片分辨率为：1000*290；图片大小小于1M。
+                a.btn#uploadBanner 上传
+                input(type='hidden' name='bannerId' value=state.bannerId)
         .row
             .col-sm-8(style='text-align:center')
+                img(src = state.bannerUrl width=500 height=145)
+        .row
+            .col-sm-12(style='text-align:center')
                 a.btn#submit 保存
+
+view('upload')
+    .row
+        #uploader
