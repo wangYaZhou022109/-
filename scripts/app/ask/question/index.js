@@ -13,7 +13,8 @@ exports.store = {
                 data = payload;
             data.id = -1;
             question.set(data);
-            return this.save(question);
+            console.log(question);
+            return this.post(question);
         }
     }
 };
