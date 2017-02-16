@@ -5,6 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {},
+        trends: { url: '../ask-bar/trends' },
         question: { url: '../ask-bar/question/insert-article' }
     },
     callbacks: {
