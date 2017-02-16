@@ -1,6 +1,8 @@
 exports.items = {
     mymanage: 'mymanage',
-    reviewed: 'reviewed'
+    reviewed: 'reviewed',
+    'ask/quizaudit': { isModule: true },
+    popup: 'popup'
 };
 
 exports.store = {
@@ -8,7 +10,12 @@ exports.store = {
         params: { data: { isOverdue: '1' } },
         mymanage: { url: '../ask-bar/my-manage' },
         reviewed: { url: '../ask-bar/my-manage/reviewed' },
-        display: { url: '../ask-bar/my-manage/reviewed' }
+        display: { url: '../ask-bar/my-manage/reviewed' },
+        // auditDetails: { url: '../ask-bar/questionReviewed' }
+        audit: { url: '../ask-bar/questionReviewed' },
+        state: { auditStatus: 1 },
+        popupstate: {}
+
     },
     callbacks: {
         init: function() {
@@ -26,8 +33,18 @@ exports.store = {
             var reviewed = this.models.reviewed;
             reviewed.set({ id: 1 });
             reviewed.params = params;
-            console.log(params);
             return this.get(reviewed);
+        },
+        audit: function() {  // 审核
+            var audit = this.models.audit;
+            audit.set({ id: 1 });
+            // audit.set(payload);
+            return this.get(audit);
+        },
+        auditDetails: function(payload) {           // 详情
+            var auditDetails = this.models.auditDetails;
+            auditDetails.set(payload);
+            return this.get(auditDetails);
         }
     }
 };
