@@ -12,7 +12,7 @@ exports.store = {
             root: 'items'
         },
         projectInfo: {},
-        state: { classId: 3 }
+        state: { data: { classId: 3 } }
     },
     callbacks: {
         init: function(payload) {
@@ -29,5 +29,6 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: 3 });
+    var classId = this.store.models.state.data;
+    return this.dispatch('init', classId);
 };
