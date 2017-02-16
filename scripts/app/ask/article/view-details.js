@@ -4,20 +4,37 @@
 exports.bindings = {
 };
 
-exports.components = [function() {
-}];
+// exports.components = [function() {
+// }];
 
 // exports.buttons = [{
 //     text: '保存',
 //     action: 'save'
 // }];
 
+// exports.dataForActions = {
+// };
+
+// exports.actionCallbacks = {
+// };
+
+
+// exports.dataForTemplate = {
+// };
+
+
+exports.actions = {
+    'click release': 'release'
+};
+
 exports.dataForActions = {
+    release: function(payload) {
+        return payload;
+    }
 };
 
 exports.actionCallbacks = {
-};
-
-
-exports.dataForTemplate = {
+    release: function() {
+        this.app.message.success('操作成功！');
+    }
 };

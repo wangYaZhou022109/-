@@ -3,16 +3,16 @@
 exports.bindings = {
 };
 
-exports.components = [function() { // 选择话题
-    return {
-        id: 'topics',
-        name: 'picker',
-        options: {
-            module: 'ask/question',
-            picker: 'test'
-        }
-    };
-}];
+// exports.components = [function() { // 选择话题
+//     return {
+//         id: 'topics',
+//         name: 'picker',
+//         options: {
+//             module: 'ask/question',
+//             picker: 'test'
+//         }
+//     };
+// }];
 
 // exports.components = [{
 //     id: 'topics',
@@ -38,8 +38,7 @@ exports.components = [function() { // 选择话题
 
 
 exports.actions = {
-    'click release': 'release',
-    'click remove-*': 'remove'
+    'click release': 'release'
 };
 
 exports.dataForActions = {
