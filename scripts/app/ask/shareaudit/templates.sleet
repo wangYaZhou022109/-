@@ -1,0 +1,26 @@
+#!handlebars
+module 
+    div(data-region='shareaudit')
+view('shareaudit') > form.vertical
+    ul
+        li
+            label(class='') >  echo(audit.question.title)
+               
+        li
+            label(class='') > echo(audit.question.content)
+        li
+            label(class='') > echo(audit.questionAttach.name)
+        li
+            label(class='') > echo(audit.member.fullName)
+        li   
+            label > echo('提问时间')
+                    date(audit.question.createTime)
+        li   
+            label > echo('关联话题')
+                    echo(audit.topicStr)
+        li
+            textarea.input.w-full(name='content' x-rule='required' rows='5')
+        li  
+            .a > string('upload-attachments')
+        li
+            .btn.radius.block(id='release' style='height:50px;width:200px;text-align:center') > string('release')
