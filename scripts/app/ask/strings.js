@@ -6,5 +6,12 @@ module.exports = {
     'article-title': '文章标题',
     'article-content': '文章内容',
     release: '发布',
-    'upload-attachments': '上传附件'
+    'upload-attachments': '上传附件',
+    'ask-a-question': '提问',
+    'from-topic': '来自话题',
+    follow: '关注',
+    share: '分享',
+    report: '举报',
+    discuss: '讨论',
+    strip: '条'
 };

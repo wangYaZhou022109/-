@@ -1,5 +1,6 @@
 var D = require('drizzlejs');
 var $ = require('jquery');
+var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true
@@ -27,4 +28,16 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
+    trends: function(data) {
+        var trends = data.trends;
+        _.forEach(trends, function(value) {
+            var obj = value,
+                date = new Date(obj.createTime);
+            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+            + '   ' + date.getHours() + ':' + date.getMinutes();
+        });
+        // data.trends =
+        console.log(trends);
+        return trends;
+    }
 };
