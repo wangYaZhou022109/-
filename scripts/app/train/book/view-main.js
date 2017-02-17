@@ -1,9 +1,11 @@
 var markers = require('./app/ext/views/form/markers'),
     validators = require('./app/ext/views/form/validators'),
+    helpers = require('./app/util/helpers'),
     $ = require('jquery');
 
 exports.bindings = {
-    projectInfo: true
+    projectInfo: true,
+    state: true
 };
 
 exports.events = {
@@ -15,11 +17,10 @@ exports.handlers = {
         var me = this,
             model = me.module.items['picker/book-time'],
             projectInfo = this.bindings.projectInfo;
-        me.app.viewport.ground(model, {
+        me.app.viewport.modal(model, {
             project: projectInfo.data,
             callback: function(arriveDate, backDate) {
-                console.log(arriveDate);
-                console.log(backDate);
+                me.module.dispatch('changeDate', { arriveDate: arriveDate, backDate: backDate });
             }
         });
     }
@@ -38,6 +39,15 @@ exports.dataForTemplate = {
             d.isShowCommit = true;
         }
         return d;
+    },
+    state: function() {
+        var state = this.bindings.state.data,
+            projectInfo = this.bindings.projectInfo.data;
+        if (projectInfo.classInfo) {
+            state.arriveDate = helpers.date(projectInfo.classInfo.arriveDate);
+            state.returnDate = helpers.date(projectInfo.classInfo.returnDate);
+        }
+        return state;
     }
 };
 
@@ -51,13 +61,7 @@ exports.actionCallbacks = {
 
 };
 
-exports.components = [{
-    id: 'arriveDate',
-    name: 'flatpickr'
-}, {
-    id: 'returnDate',
-    name: 'flatpickr'
-}];
+exports.components = [];
 
 exports.mixin = {
     validate: function() {

@@ -24,7 +24,7 @@ view('main') > form.vertical
             .col-sm-2(style='text-align:right')
                 label 培训需求方联系人：
             .col-sm-2
-                label > echo(projectInfo.member.name)
+                label > echo(projectInfo.member.fullName)
             
         .row(style='line-height:50px;')
             .col-sm-2(style='text-align:right')
@@ -60,9 +60,9 @@ view('main') > form.vertical
             .col-sm-2(style='text-align:right')
                 label 往返日期：
             .col-sm-6
-                input.input#arriveDate(name='arriveDate' value=date(projectInfo.classInfo.arriveDate) readonly='readonly' size=8)
+                input.input#arriveDate(name='arriveDate' value=state.arriveDate readonly='readonly' size=8)
                 label ~
-                input.input#returnDate(name='returnDate' value=date(projectInfo.classInfo.returnDate) readonly='readonly' size=8)
+                input.input#returnDate(name='returnDate' value=state.returnDate readonly='readonly' size=8)
                 if(projectInfo.isShowCommit)
                     a.btn.inline-block#bookTime 预定时间
         .row

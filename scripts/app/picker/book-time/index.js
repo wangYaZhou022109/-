@@ -2,6 +2,8 @@ var _ = require('lodash/collection');
 
 exports.title = '预定时间';
 
+exports.large = true;
+
 exports.items = {
     content: 'content',
     toolbox: 'toolbox',
@@ -48,17 +50,19 @@ exports.store = {
                     }
                     arrays[i] = r;
                 });
+                state.clear();
+                state.data = arrays;
+                state.changed();
             });
             projects.params.month = payload.month;
             this.get(projects);
-            state.clear();
-            state.data = arrays;
-            state.changed();
+            projects.changed();
         },
         book: function(payload) {
             var check = this.models.check,
                 project = this.models.project;
-            check.set(payload);
+            check.params.arriveDate = payload.arriveDate;
+            check.params.backDate = payload.backDate;
             check.params.projectId = project.data.id;
             return this.get(check);
         }

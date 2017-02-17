@@ -1,3 +1,4 @@
+var helpers = require('./app/util/helpers');
 
 exports.bindings = {
     state: true,
@@ -27,7 +28,7 @@ exports.handlers = {
             backDate;
         arriveLong = new Date(arriveDate);
         arriveLong.setDate(arriveLong.getDate() + project.data.days + 1);
-        backDate = arriveLong.getFullYear() + '-' + (arriveLong.getMonth() + 1) + '-' + arriveLong.getDate();
+        backDate = helpers.date(arriveLong);
         this.$('backDate').value = backDate;
     }
 };
@@ -59,13 +60,13 @@ exports.dataForActions = {
             this.app.message.alert('请选择返程日');
             return false;
         }
-        return true;
+        return payload;
     },
 };
 
 exports.actionCallbacks = {
     book: function(data) {
-        var d = data;
+        var d = data[0];
         if (d.result === 'ok') {
             this.module.renderOptions.callback(d.arriveDate, d.backDate);
             this.app.viewport.closeModal();

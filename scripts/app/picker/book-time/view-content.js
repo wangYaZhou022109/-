@@ -7,7 +7,10 @@ exports.bindings = {
 };
 
 exports.dataForTemplate = {
-
+    state: function() {
+        var data = this.bindings.state.data;
+        return data;
+    }
 };
 
 exports.events = {

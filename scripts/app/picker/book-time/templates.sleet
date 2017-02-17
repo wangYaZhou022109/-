@@ -29,14 +29,14 @@ view('content')
             td(rowspan='3' width='200' style='text-align:center;') 培训班可用资源
             td(colspan='31' style='text-align:center;') > echo(month)
         tr
-            each(state.data)
+            each(state)
                 td(style='padding:6px;') > echo(day)
         tr
-            each(state.data)
+            each(state)
                 td(style='padding:6px;') > echo(week)
         tr
             td(style='text-align:center;') > echo('可用资源')
-            each(state.data)
+            each(state)
                 td(style='padding:6px;') > echo(allowed)
         each(projects)
             tr

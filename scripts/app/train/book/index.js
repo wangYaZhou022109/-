@@ -7,7 +7,7 @@ exports.store = {
     models: {
         projectInfo: { url: '../train/project' },
         book: { url: '../train/project/book' },
-        state: {}
+        state: { data: {} }
     },
     callbacks: {
         init: function(payload) {
@@ -25,6 +25,17 @@ exports.store = {
                 this.app.message.success('提交成功');
                 me.get(project);
             });
+        },
+        changeDate: function(payload) {
+            var state = this.models.state,
+                projectInfo = this.models.projectInfo.data,
+                classInfo;
+            classInfo = projectInfo.classInfo;
+            if (classInfo) {
+                classInfo.arriveDate = new Date(payload.arriveDate).getTime();
+                classInfo.returnDate = new Date(payload.backDate).getTime();
+            }
+            state.changed();
         }
     }
 };
