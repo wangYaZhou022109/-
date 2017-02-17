@@ -1,7 +1,6 @@
 #!handlebars
 module
     div(data-region='list')
-    
 view('list')
     ul 
         li
@@ -10,12 +9,14 @@ view('list')
     each(questions)
         ul 
             li(style='font-weight:bold')
-                a(id='details-'+id data-name='id' data-value=id) > echo(title) 
+                a(id='myquiz-details' + id href='javascript:;')(class ='active') > echo(title) 
                 .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
-                a(id='details-'+id data-name='id' data-value=id) > echo(content) 
+                a(id='detailss-'+id data-name='id' data-value=id) > echo(content) 
             li
-                echo(createMemberId + '提问·' + createTime ) 
+                echo(fullName + '提问·')
+            li
+                date(createTime) 
             li
                 echo('来自话题 ：' + topic )
                 a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  

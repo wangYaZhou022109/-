@@ -1,3 +1,5 @@
+var D = require('drizzlejs');
+var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
@@ -5,18 +7,20 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click details-*': 'details',
-    'click detailss-*': 'datailss'
+    'click myquiz-*': 'showDetails'
 };
 
 exports.handlers = {
-    details: function(data) {
-        var mod = this.module.items['ask-bar/myquiz/details'];
-        this.app.viewport.ground(mod, { id: data });
-    },
-    datailss: function(data) {
-        var mod = this.module.items['ask-bar/myquiz/details'];
-        this.app.viewport.ground(mod, { id: data });
+    showDetails: function(id, e, target) {
+        var region;
+        var el = $(target).parents('.pull-left')[0];
+        region = new D.Region(this.app, this.module, el, id);
+        region.show('ask/question', { id: id });
+        console.log($(target).parents('.pull-left'));
+
+       // this.module.dispatch('changeState', { typeIndex: Number(id) });
+      //  $(target).find('.min-btn-groups').slideToggle();
+       // $(target).siblings().find('.min-btn-groups').slideUp();
     }
 };
 
@@ -54,12 +58,3 @@ exports.actionCallbacks = {
     }
 };
 
-exports.dataForTemplate = {
-    questions: function(data) {
-        var obj = data,
-            date = new Date(data.questions.createTime);
-        obj.questions.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-        + '   ' + date.getHours() + ':' + date.getMinutes();
-        return obj.questions;
-    }
-};
