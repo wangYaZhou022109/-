@@ -3,8 +3,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click middle-menu-*': 'showMenu',
-    'click category-item-*': 'category'
+    'click middle-menu-*': 'showMenu'
 };
 
 exports.handlers = {

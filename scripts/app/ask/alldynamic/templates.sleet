@@ -8,7 +8,7 @@ view('list')
             li(style='font-weight:bold')
                 compare(thumbnail 'ne' '')
                     .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
-                echo(title) 
+                a(id='dynamic-' + id data-name='id' data-value=id href='javascript:;') > echo(title) 
                 .img(style='height:80px;width:80px;float:right;') > img(src=thumbnail )
             li
                 echo(content) 
