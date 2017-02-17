@@ -6,8 +6,6 @@ exports.bindings = {
 
 exports.getEntityModuleName = function(key) {
     var url = this.bindings.state.data.menu;
-    console.log(url);
-    console.log(key);
     if (typeof key === 'string' && key !== '') {
         url = key;
     }
