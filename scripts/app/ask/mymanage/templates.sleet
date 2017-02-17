@@ -2,7 +2,6 @@
 module > .course-page
     div(data-region='mymanage')
     div(data-region='reviewed')
-    div(data-region='popup')
 
 view('mymanage')
     echo('我的管理')
@@ -35,7 +34,7 @@ view('reviewed')
             date(createTime)
             echo('内容:')
             echo(question.content)
-            a(id='audit-' + id href='javascript:;')(class ='active') 详情
+            a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') 详情
         compare(auditStatus 'eq' 1)
             echo('【')
             map('ask-audit-type' auditType)
@@ -60,13 +59,5 @@ view('reviewed')
             echo('内容:')
             echo(question.content)
             a(id='deal' + id href='javascript:;')(class ='active') 详情
-       
-view('popup')
-    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9997')
-    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:50%;left:20%;') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active > echo('审核')
-        .div(class='popup' style='z-index: 9998 ;display:block;float:left;left:50px;top:100px;')
             
 

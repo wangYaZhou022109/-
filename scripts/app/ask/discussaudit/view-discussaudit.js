@@ -1,27 +1,17 @@
-exports.title = '内容审核';
-
-exports.type = 'form';
-
 exports.bindings = {
-    audit: true,
-    download: false
+    discussaudit: true
 };
-
-exports.buttons = [{
-    text: '通过',
-    action: 'pass'
-}, {
-    text: '拒绝',
-    action: 'out'
-}];
-
 exports.events = {
-    'click preview*': 'preview'
 };
-
+exports.actions = {
+    'click pass': 'pass',
+    'click out': 'out',
+};
 exports.dataForActions = {
     pass: function(payload) {
-        var data = payload;
+        var data = payload,
+            auditType = this.bindings.discussaudit.data.auditType;
+        data.auditType = auditType;
         data.auditStatus = 1;
         return data;
     },
@@ -39,4 +29,11 @@ exports.actionCallbacks = {
     out: function() {
         this.app.message.success('完成审核！');
     }
+};
+exports.dataForTemplate = {
+    discussaudit: function(data) {
+        var discussaudit = data.discussaudit;
+        return discussaudit;
+    }
+
 };

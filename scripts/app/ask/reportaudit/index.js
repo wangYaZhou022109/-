@@ -1,18 +1,18 @@
 exports.items = {
-    shareaudit: 'shareaudit'
+    reportaudit: 'reportaudit'
 };
 exports.store = {
     models: {
         params: { data: { isOverdue: '1' } },
-        shareaudit: { url: '../ask-bar/questionReviewed' },
+        reportaudit: { url: '../ask-bar/pendingAudit/accuseRecord' },
         pass: { url: '../ask-bar/pendingAudit/pass' },
         out: { url: '../ask-bar/pendingAudit/out' },
     },
     callbacks: {
         init: function(paylaod) {
-            var shareaudit = this.models.shareaudit;
-            shareaudit.set({ id: paylaod.id });
-            return this.get(shareaudit);
+            var reportaudit = this.models.reportaudit;
+            reportaudit.set({ id: paylaod.id });
+            return this.get(reportaudit);
         },
         pass: function(payload) {           // 审核通过
             this.models.pass.set(payload);

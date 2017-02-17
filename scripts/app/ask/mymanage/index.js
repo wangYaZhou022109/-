@@ -2,7 +2,9 @@ exports.items = {
     mymanage: 'mymanage',
     reviewed: 'reviewed',
     'ask/quizaudit': { isModule: true },
-    popup: 'popup'
+    'ask/discussaudit': { isModule: true },
+    'ask/reportaudit': { isModule: true },
+    'ask/shareaudit': { isModule: true }
 };
 
 exports.store = {
@@ -13,9 +15,7 @@ exports.store = {
         display: { url: '../ask-bar/my-manage/reviewed' },
         // auditDetails: { url: '../ask-bar/questionReviewed' }
         audit: { url: '../ask-bar/questionReviewed' },
-        state: { auditStatus: 1 },
-        popupstate: {}
-
+        state: { auditStatus: 1 }
     },
     callbacks: {
         init: function() {

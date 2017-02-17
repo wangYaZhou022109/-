@@ -1,6 +1,6 @@
 
 exports.bindings = {
-    shareaudit: true
+    reportaudit: true
 };
 exports.events = {
 };
@@ -11,7 +11,7 @@ exports.actions = {
 exports.dataForActions = {
     pass: function(payload) {
         var data = payload,
-            auditType = this.bindings.shareaudit.data.auditType;
+            auditType = this.bindings.reportaudit.data.auditType;
         data.auditType = auditType;
         data.auditStatus = 1;
         return data;
@@ -32,9 +32,9 @@ exports.actionCallbacks = {
     }
 };
 exports.dataForTemplate = {
-    shareaudit: function(data) {
-        var shareaudit = data.shareaudit;
-        return shareaudit;
+    reportaudit: function(data) {
+        var reportaudit = data.reportaudit;
+        return reportaudit;
     }
 
 };

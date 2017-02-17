@@ -8,10 +8,6 @@ view('audit') > form.vertical
     br
     echo(audit.question.content)
     br
-    echo('附件：')
-    a(id='preview'+audit.questionAttach.originalFile) > echo(audit.questionAttach.name)
-    a(href=downUrl download=name) > string('download')
-    br
     echo(audit.member.fullName)
     br
     echo('提问时间：')
