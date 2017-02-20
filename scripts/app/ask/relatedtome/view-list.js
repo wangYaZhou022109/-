@@ -25,7 +25,7 @@ exports.handlers = {
         var region;
         var el = $(target).parents('.activity-category')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/question/details', { id: id });
+        region.show('ask/myquiz/details', { id: id });
     }
 };
 
