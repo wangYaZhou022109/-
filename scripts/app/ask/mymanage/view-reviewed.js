@@ -10,33 +10,41 @@ exports.actions = {
     'click display': 'display'
 };
 exports.events = {
-    'click auditDetails-*': 'auditDetails',
-    'click audit-*': 'audit'
+    'click audit-*': 'audit',
+    'click deal-*': 'deal'
 };
 exports.handlers = {
     audit: function(data, e, target) {
         var id = data,
             auditType = target.getAttribute('auditType');
-        console.log(auditType);
         if (auditType === '1') {
             this.app.viewport.modal(this.module.items['ask/quizaudit'], { id: id });
         }
         if (auditType === '2') {
-            console.log(222222222222222);
             this.app.viewport.modal(this.module.items['ask/discussaudit'], { id: id });
         }
         if (auditType === '4') {
-            console.log(444444444);
             this.app.viewport.modal(this.module.items['ask/reportaudit'], { id: id });
         }
         if (auditType === '12') {
             this.app.viewport.modal(this.module.items['ask/shareaudit'], { id: id });
         }
     },
-    auditDetails: function(payload) {
-        var data = payload;
-        this.app.viewport.modal(this.module.items['ask/auditDetails'], { id: data });
-        return data;
+    auditDetails: function(data, e, target) {
+        var id = data,
+            auditType = target.getAttribute('auditType');
+        if (auditType === '1') {
+            this.app.viewport.modal(this.module.items['ask/quizdeal'], { id: id });
+        }
+        if (auditType === '2') {
+            this.app.viewport.modal(this.module.items['ask/discussdeal'], { id: id });
+        }
+        if (auditType === '4') {
+            this.app.viewport.modal(this.module.items['ask/reportdeal'], { id: id });
+        }
+        if (auditType === '12') {
+            this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
+        }
     }
 };
 
