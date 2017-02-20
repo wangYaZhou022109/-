@@ -11,9 +11,10 @@
     --large-space: 2em;
     --base-gap: 3em;
 
-    --nav-height: 5em;
+    --nav-height: 3.5em;
     --section-gap: 5em;
     --banner-height: 28.571428571em;
+    --input-height: 2.5em;
 }
 
 h1,.h1 {
@@ -30,4 +31,8 @@ h3,.h3 {
 
 h4,.h4 {
     font-size: var(--h4);
+}
+
+input,button,.btn {
+    height: var(--input-height);
 }

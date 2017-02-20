@@ -1,9 +1,11 @@
 .header {
     & .nav {
+        background: #3F4147;
+
         & .item {
             display: inline-block;
             position: relative;
-            padding: 0 var(--large-space);
+            padding: 0 calc(var(--large-space) * 2);
             height: var(--nav-height);
             line-height: var(--nav-height);
         }
@@ -39,14 +41,83 @@
 
     & .shortcut {
         float: right;
-        line-height: var(--nav-height);
-        height: var(--nav-height);
-        margin-right: calc(var(--large-space) / 2);
+        margin: var(--space) 0;
 
         & .item {
             display: inline-block;
             position: relative;
             margin-right: var(--large-space);
+
+            &:nth-last-child(2) {
+                margin-right: 0;
+            }
+        }
+
+        & .header-search-bar {
+            border-width: 2px;
+            position: relative;
+        }
+
+        & .search-select,
+        & .search-input,
+        & .search-btn {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        & .search-select {
+            & select {
+                border: none;
+                background: none;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        & .search-input {
+            & input {
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        & .search-btn {
+            & .btn {
+                padding-left: 1em;
+                padding-right: 1em;
+            }
+        }
+
+        & .search-more-bar {
+            @apply --fade-out;
+            @apply --transition;
+
+            position: absolute;
+            left: -2px;
+            top: 100%;
+            background: white;
+            right: -2px;
+            margin-top: 2px;
+            z-index: -1;
+            transform: scaleY(0);
+            transform-origin: 0 0;
+
+            &.show {
+                @apply --fade-in;
+
+                z-index: 10;
+                transform: scaleY(1);
+            }
+
+            & li {
+                padding: 1em;
+                cursor: pointer;
+
+                &:nth-child(even) {
+                    background: var(--bg-color);
+                }
+            }
         }
 
         & .user-pic {
@@ -56,7 +127,7 @@
             overflow: hidden;
 
             & img {
-                max-height: 100%;
+                max-width: 100%;
                 display: block;
             }
         }
@@ -65,19 +136,25 @@
 
 .logo {
     float: left;
-    height: var(--nav-height);
-    line-height: var(--nav-height);
     text-align: center;
     transition: width .2s linear;
     overflow: hidden;
-    margin-right: var(--large-space);
+    margin: var(--space) var(--large-space) var(--space) 0;
 
     & .logo-min {
         display: none;
     }
 
+    & .item {
+        float: left;
+        margin-right: var(--base-gap);
+        height: var(--input-height);
+    }
+
     & img {
         vertical-align: middle;
+        height: 100%;
+        display: block;
     }
 
 }
