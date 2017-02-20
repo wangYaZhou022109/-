@@ -5,7 +5,7 @@ module > .person-page
     .person-content(data-region='main')
 
 view('search') > form.vertical
-    h1('响应中心')
+    echo('响应中心')
     br
     echo('MIS编号')
     input.input(name='MIScode')
