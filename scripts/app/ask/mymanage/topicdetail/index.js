@@ -9,3 +9,8 @@ exports.store = {
     callbacks: {}
 };
 
+exports.afterRender = function() {
+    console.log(this.renderOptions);
+    this.dispatch('init', this.renderOptions);
+    this.dispatch('reviewed');
+};

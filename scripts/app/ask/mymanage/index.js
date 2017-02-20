@@ -4,7 +4,11 @@ exports.items = {
     'ask/quizaudit': { isModule: true },
     'ask/discussaudit': { isModule: true },
     'ask/reportaudit': { isModule: true },
-    'ask/shareaudit': { isModule: true }
+    'ask/shareaudit': { isModule: true },
+    'ask/quizdeal': { isModule: true },
+    'ask/discussdeal': { isModule: true },
+    'ask/reportdeal': { isModule: true },
+    'ask/sharedeal': { isModule: true }
 };
 
 exports.store = {
@@ -13,7 +17,6 @@ exports.store = {
         mymanage: { url: '../ask-bar/my-manage' },
         reviewed: { url: '../ask-bar/my-manage/reviewed' },
         display: { url: '../ask-bar/my-manage/reviewed' },
-        // auditDetails: { url: '../ask-bar/questionReviewed' }
         audit: { url: '../ask-bar/questionReviewed' },
         state: { auditStatus: 1 }
     },
@@ -34,17 +37,6 @@ exports.store = {
             reviewed.set({ id: 1 });
             reviewed.params = params;
             return this.get(reviewed);
-        },
-        audit: function() {  // 审核
-            var audit = this.models.audit;
-            audit.set({ id: 1 });
-            // audit.set(payload);
-            return this.get(audit);
-        },
-        auditDetails: function(payload) {           // 详情
-            var auditDetails = this.models.auditDetails;
-            auditDetails.set(payload);
-            return this.get(auditDetails);
         }
     }
 };

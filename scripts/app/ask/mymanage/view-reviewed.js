@@ -30,7 +30,7 @@ exports.handlers = {
             this.app.viewport.modal(this.module.items['ask/shareaudit'], { id: id });
         }
     },
-    auditDetails: function(data, e, target) {
+    deal: function(data, e, target) {
         var id = data,
             auditType = target.getAttribute('auditType');
         if (auditType === '1') {

@@ -15,7 +15,7 @@ view('shareaudit') > form.vertical
     echo(shareaudit.member.fullName)
     br
     echo('提问时间：')
-    date(shareaudit.question.createTime)
+    date(shareaudit.createTime)
     br
     echo('关联话题')
     echo(shareaudit.topicStr)
