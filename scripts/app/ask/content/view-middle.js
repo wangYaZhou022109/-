@@ -1,9 +1,11 @@
 exports.bindings = {
-    state: true
+    state: true,
+    popupstate: true
 };
 
 exports.events = {
-    'click middle-menu-*': 'showMenu'
+    'click middle-menu-*': 'showMenu',
+    'click follow-*': 'follow'
 };
 
 exports.handlers = {
@@ -14,6 +16,13 @@ exports.handlers = {
         state.data[menu] = true;
         state.changed();
     },
-    category: function() {
+    follow: function(payload) {
+       // this.module.items.popup.$$('.shield')[0].hidden = false;
+       // this.module.items.popup.$$('.catalog-view')[0].hidden = false;
+        var state = this.bindings.popupstate;
+        state.data = {};
+        state.data.menu = payload || 'contentleft';
+        state.data[payload] = true;
+        state.changed();
     }
 };

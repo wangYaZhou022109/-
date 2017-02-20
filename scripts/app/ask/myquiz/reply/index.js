@@ -6,7 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         state: { data: {} },
-        reply: { url: '../ask-bar/myquiz/question-reply' }
+        reply: { url: '../ask-bar/question-reply' }
     },
     callbacks: {
         init: function(payload) {

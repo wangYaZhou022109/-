@@ -5,7 +5,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends' }
+        trends: { url: '../ask-bar/trends/all-dynamic' }
     },
     callbacks: {
         init: function() {

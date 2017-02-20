@@ -1,5 +1,5 @@
 var D = require('drizzlejs');
-exports.type = 'form';
+exports.type = 'dynamic';
 
 exports.bindings = {
     state: false,
@@ -16,7 +16,7 @@ exports.handlers = {
         if (el.style.display === 'none') {
             el.style.display = 'inline';
             region = new D.Region(this.app, this.module, el, id);
-            region.show('ask-bar/question/reply', { id: id });
+            region.show('ask/question/reply', { id: id });
         } else {
             el.style.display = 'none';
         }
@@ -41,7 +41,7 @@ exports.dataForActions = {
     },
     discuss: function(payload) {
         var data = payload;
-        return this.validate() ? data : false;
+        return data;
     },
     discussdel: function(payload) {
         return payload;

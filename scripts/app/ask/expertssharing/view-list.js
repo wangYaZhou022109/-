@@ -15,9 +15,9 @@ exports.handlers = {
     },
     toggleMore: function(id, e, target) {
         var region;
-        var el = $(target).parents('.pull-left')[0];
+        var el = $(target).parents('.activity-category')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/question', { id: id });
+        region.show('ask/question/details', { id: id });
     }
 };
 

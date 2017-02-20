@@ -6,7 +6,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/experts-sharing' }
+        trends: { url: '../ask-bar/trends/experts-sharing' }
     },
     callbacks: {
         init: function() {
