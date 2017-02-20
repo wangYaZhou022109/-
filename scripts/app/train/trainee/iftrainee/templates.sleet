@@ -46,6 +46,6 @@ view('main')
             td > echo(member.positionName)
             td > echo(phoneNumber)
             td > map('trainee-show-auditStatus' auditStatus)
-            td > echo(i)
+            td > a(id='delete'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination
     

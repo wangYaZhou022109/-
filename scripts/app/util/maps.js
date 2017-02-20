@@ -229,6 +229,9 @@ module.exports = {
     },
     'class-table-type': {
         1: '其他', 2: '圆形'
+    },
+    'classinfo-status': {
+        1: '未实施', 2: '实施中', 3: '已实施'
     }
 };
 

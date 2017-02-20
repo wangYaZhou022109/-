@@ -1,11 +1,19 @@
 var _ = require('lodash/collection');
 
 exports.bindings = {
-    fmtrainees: true
+    fmtrainees: true,
+    state: true
 };
 
 exports.events = {
     'click addTrainee': 'showMembers'
+};
+
+exports.actions = {
+    'click agree*': 'agree',
+    'click refuse*': 'refuse',
+    'click sort*': 'sort',
+    'click delete*': 'delete'
 };
 
 exports.handlers = {
@@ -16,6 +24,32 @@ exports.handlers = {
             callback: function() {
             }
         });
+    }
+};
+
+exports.dataForActions = {
+    agree: function(payload) {
+        var data = payload;
+        data.auditStatus = 1;
+        return data;
+    },
+    refuse: function(payload) {
+        var data = payload;
+        data.auditStatus = 2;
+        return data;
+    }
+};
+
+exports.actionCallbacks = {
+    agree: function() {
+        var classId = this.bindings.state.data;
+        this.app.message.success('审核成功!');
+        this.module.dispatch('init', classId);
+    },
+    refuse: function() {
+        var classId = this.bindings.state.data;
+        this.app.message.success('审核成功!');
+        this.module.dispatch('init', classId);
     }
 };
 

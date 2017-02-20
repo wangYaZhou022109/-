@@ -27,6 +27,9 @@ view('top')
             a.btn-expert(href='javascript:;' id='identity-expert')(class=if(state.expert 'active'))
                 strong 专
                 | 家信息
+            a(href='#/person/response' id='response-center' target='_parent') > echo('响应中心')
+            a(id='demand-side') > echo('需求方')
+            a(id='class-staff') > echo('班务')
 
 view('menu')
     .container > ul
