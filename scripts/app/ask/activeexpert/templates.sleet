@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .ask-page
+    table.table
+        tr 
+            td(align='left' width='250') > echo('活跃专家')
+            td(align='right') > a(id='active-expert' href='javascript:;')(class ='active') 更多

@@ -9,7 +9,7 @@ exports.handlers = {
 
 
 exports.bindings = {
-    activeexpertstate: true
+    hottopicstate: true
 };
 
 exports.getEntityModuleName = function(key) {
@@ -17,7 +17,7 @@ exports.getEntityModuleName = function(key) {
 };
 exports.getEntity = function() {
     return {
-        state: this.bindings.activeexpertstate.data
+        state: this.bindings.hottopicstate.data
     };
 };
 

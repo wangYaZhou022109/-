@@ -3,6 +3,7 @@ exports.items = {
     middle: 'middle',
     top: 'top',
     bottom: 'bottom',
+    hottopic: 'hottopic',
     left: 'left',
     popup: 'popup',
     'ask/article': { isModule: true }
@@ -12,6 +13,8 @@ exports.store = {
     models: {
         state: { data: { menu: 'contentleft' } },
         popupstate: { data: { menu: 'alldynamic' } },
+        hottopicstate: { data: { menu: 'hottopic' } },
+        activeexpertstate: { data: { menu: 'activeexpert' } },
         follow: { url: '../ask-bar/trends/follow' }
     },
     callbacks: {
