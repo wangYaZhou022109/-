@@ -1,4 +1,144 @@
 #!handlebars
 
-module > .identity-expert-page
-    div 日程安排
+module > .train-class-page
+    .page-main-wrapper
+        .main(data-region='offline')
+    .page-main-wrapper
+        .main(data-region='online')
+    .page-main-wrapper
+        .main(data-region='questionnaire')
+
+view('offline') 
+    div(style='padding:20px 50px 50px 20px;')
+        .row(style='line-height:50px;')
+            .col-sm-12(style='text-align: right')
+                a.btn#export 导出安排
+        .list.m-top
+            table.table
+                thead > tr
+                    td(colspan=8)
+                        .col-sm-4
+                            label 线下课程安排
+                            select#selectOffline(name='selectOffline')
+                                option(value='1') > echo('第一周')
+                                option(value='2') > echo('第二周')
+                                option(value='3') > echo('第三周')
+                        .col-sm-8(style='text-align:right;')
+                            a.btn(id='theme-offline' + state.classId) 配置周天数
+                            a.btn#addCourse 添加课程
+                            a.btn#importOffline 导入课程
+                            a > echo('最小化')
+                thead > tr
+                    th 日期
+                    th 时间
+                    th 课程名称
+                    th 类型
+                    th 教室
+                    th 讲师
+                    th 课件
+                    th 操作
+                tbody > each(offlineCourseList) > tr
+                    td > date(courseDate)
+                    td > echo(startTime + '-' + endTime)
+                    td > echo(name)
+                    td > map('class-offline-type' type)
+                    td > echo(classRoom.classroomName)
+                    td
+                        echo(teacherName)
+                        br
+                        echo('单位：' + teacherOrganization)
+                        br
+                        echo('职称：' + teacherTitle)
+                    td
+                        a(id='courseware-'+id) 查看课件
+                    td
+                        a(id='edit-offline-'+id) 编辑
+                        a(id='del-offline-'+id) 删除
+
+view('online') 
+    div(style='padding:20px 50px 50px 20px;')
+        .list.m-top
+            table.table
+                thead > tr
+                    td(colspan=8)
+                        .col-sm-4
+                            label 在线资源
+                        .col-sm-8(style='text-align:right;')
+                            a.btn#theme-online 配置主题
+                            a.btn#addCourse 配置资源
+                            a > echo('最小化')
+                thead > tr
+                    th 主题
+                    th(width='50%') 资源名称
+                    th 类型
+                    th 操作
+                tbody > each(onlineCourseList) > tr
+                    td > echo(themeName)
+                    td > echo(resourceName)
+                    td > map('class-online-type' type)
+                    td
+                        a(id='edit-online-'+id) 编辑
+                        a(id='view-online-'+id) 预览
+                        a(id='del-online-'+id) 删除
+
+view('questionnaire') 
+    div(style='padding:20px 50px 50px 20px;')
+        .list.m-top
+            table.table
+                thead > tr
+                    td(colspan=8)
+                        .col-sm-4
+                            label 问卷
+                        .col-sm-8(style='text-align:right;')
+                            a.btn#addExam 添加考试
+                            a.btn#addSurvey 添加调研
+                            a.btn#addEva 添加评估
+                            a > echo('最小化')
+                thead > tr
+                    th 序号
+                    th(width='50%') 问卷名称
+                    th 类型
+                    th 开始时间
+                    th 结束时间
+                    th 操作
+                tbody > each(questionnaireList) > tr
+                    td > echo(i)
+                    td > echo(resourceName)
+                    td > map('class-questionnaire-type' type)
+                    td > dateTime(startTIme)
+                    td > dateTime(endTime)
+                    td
+                        a(id='edit-qnr-'+id) 编辑
+                        a(id='view-qnr-'+id) 预览
+                        a(id='del-qnr-'+id) 删除
+
+view('configOffline')
+    
+
+view('configOnline') > form.vertical
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 配置主题
+                    .col-sm-2(style='text-align:right;')
+                        a.btn#saveTheme 保存
+            thead > tr
+                th 序号
+                th(width='50%') 主题
+                th 排序
+                th 操作
+            tbody > each(themeList) > tr
+                td > echo(i)
+                td
+                    label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+                    input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
+                td
+                    a(id='move-theme-up-'+id data-name='id' data-value=id) 上移
+                    a(id='move-theme-down-'+id data-name='id' data-value=id) 下移
+                td
+                    a(id='del-theme-'+id data-name='id' data-value=id) 删除
+            tr
+                td(colspan=4 style='text-align:center')
+                    a.btn#addTheme 添加主题

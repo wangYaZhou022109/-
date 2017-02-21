@@ -232,6 +232,15 @@ module.exports = {
     },
     'classinfo-status': {
         1: '未实施', 2: '实施中', 3: '已实施'
+    },
+    'class-offline-type': {
+        1: '面授', 2: '录像', 3: '直播', 4: '其他'
+    },
+    'class-online-type': {
+        1: '在线课程', 2: '知识'
+    },
+    'class-questionnaire-type': {
+        1: '考试', 2: '调研', 3: '评估', 4: '学员满意度评估', 5: '需求方满意度评估'
     }
 };
 
