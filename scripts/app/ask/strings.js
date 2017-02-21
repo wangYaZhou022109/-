@@ -14,11 +14,15 @@ module.exports = {
     report: '举报',
     discuss: '讨论',
     strip: '条',
+    content: '内容',
     topic: '话题',
     expert: '专家',
     'next-step': '下一步',
     'previous-step': '上一步',
     finish: '完成',
-    'prompt-1': '暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！'
+    'prompt-1': '暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！',
+    'all-dynamic': '全部动态',
+    'related-to-me': '与我相关',
+    'experts-sharing': '专家分享'
 
 };

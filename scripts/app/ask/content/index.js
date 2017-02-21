@@ -11,16 +11,19 @@ exports.items = {
 exports.store = {
     models: {
         state: { data: { menu: 'contentleft' } },
-        popupstate: {}
+        popupstate: { data: { menu: 'alldynamic' } },
+        follow: { url: '../ask-bar/trends/follow' }
     },
     callbacks: {
         init: function() {
+            var follow = this.models.follow;
+            follow.set({ id: 1 });
+            return this.get(follow);
         },
         search: function() {
         }
     }
 };
-
 
 exports.afterRender = function() {
     return this.dispatch('init');

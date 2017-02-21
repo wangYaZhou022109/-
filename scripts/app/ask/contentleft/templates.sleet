@@ -4,9 +4,9 @@ module
     div(data-region='list')
 
 view('menu')
-    a(id='menu-alldynamic' href='javascript:;')(class ='active') 全部动态
-    a(id='menu-relatedtome' href='javascript:;')(class ='active') 与我相关
-    a(id='menu-expertssharing' href='javascript:;')(class ='active') 专家分享
+    a(id='menu-alldynamic' href='javascript:;')(class ='active') > string('all-dynamic') 
+    a(id='menu-relatedtome' href='javascript:;')(class ='active') > string('related-to-me')
+    a(id='menu-expertssharing' href='javascript:;')(class ='active') > string('experts-sharing') 
     hr
 view('list') 
     div(data-dynamic-key=state.menu)

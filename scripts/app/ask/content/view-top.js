@@ -17,6 +17,12 @@ exports.handlers = {
     popup: function(menu) {
         var state = this.bindings.popupstate;
         state.data = {};
+        state.data.title = '';
+        if (menu === 'question') {
+            state.data.title = '我要提问';
+        } else if (menu === 'article') {
+            state.data.title = '我要分享';
+        }
         state.data.menu = menu || 'question';
         state.data[menu] = true;
         state.changed();

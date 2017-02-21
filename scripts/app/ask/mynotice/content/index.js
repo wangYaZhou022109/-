@@ -1,14 +1,16 @@
 exports.items = {
-    menu: 'menu',
     list: 'list'
 };
 
 exports.store = {
     models: {
-        state: { data: { menu: 'content' } }
+        content: { url: '../ask-bar/trends/attention-content' }
     },
     callbacks: {
         init: function() {
+            var content = this.models.content;
+            content.set({ id: 1222 });
+            return this.get(content);
         }
     }
 };

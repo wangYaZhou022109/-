@@ -27,7 +27,7 @@ exports.getEntityModuleName = function(key) {
     var titleDiv = this.module.items.popup.$$('.title')[0],
         title = this.bindings.popupstate.data.title;
     titleDiv.innerHTML = title;
-    if (key !== '') {
+    if (key === 'question' || key === 'mynotice' || key === 'article') {
         this.module.items.popup.$$('.shield')[0].hidden = false;
         this.module.items.popup.$$('.catalog-view')[0].hidden = false;
     }

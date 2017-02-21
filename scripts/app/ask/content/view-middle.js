@@ -1,6 +1,7 @@
 exports.bindings = {
     state: true,
-    popupstate: true
+    popupstate: true,
+    follow: true
 };
 
 exports.events = {
