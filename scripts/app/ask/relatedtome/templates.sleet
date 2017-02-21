@@ -25,7 +25,7 @@ view('list') > compare(trends.concernList.length 'gt' 0)
                     hr
     else
         ul
-            li 暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！
+            li > string('prompt-1') 
         .step-one
             .container > .main-list
                 ul > each(trends.topicList)
@@ -33,13 +33,13 @@ view('list') > compare(trends.concernList.length 'gt' 0)
                         .content
                             .img
                                 .img-cont
-                                    a.normal > img(src=member.headPortrait alt='话题')
-                                    input(type='checkbox') 
+                                    a.normal > img(src=member.headPortrait alt= string('topic'))
+                                    input(type='checkbox' id='topics-item' + id name='topics' value= id) 
                             .clearfix
                                 .title.text-overflow > echo(name)
                             .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
                 ul > li 
-                    .btn.radius.block(id='step-one' data-name='id' data-value='one') 下一步
+                    .btn.radius.block(id='step-one' data-name='id' data-value='one') > string('next-step')
         .step-two('hidden')
             .container > .main-list
                 ul > each(trends.expertList)
@@ -47,16 +47,16 @@ view('list') > compare(trends.concernList.length 'gt' 0)
                         .content
                             .img
                                 .img-cont
-                                    a.normal > img(src=member.headPortrait alt='专家')
-                                    input(type='checkbox') 
+                                    a.normal > img(src=member.headPortrait alt=string('expert'))
+                                    input(type='checkbox' id='expert-item' + id name='expert' value=id)
                             .clearfix
                                 .title.text-overflow > echo(member.fullName)
                             .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
                 ul 
                     li
-                        .btn.radius.block(id='step-two' data-name='id' data-value='two') 上一步 
+                        .btn.radius.block(id='step-two' data-name='id' data-value='two') > string('previous-step') 
                     li
-                        .btn.radius.block(id='end') 完  成
+                        .btn.radius.block(id='end') > string('finish')
                 
 
     

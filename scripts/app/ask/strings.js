@@ -13,5 +13,12 @@ module.exports = {
     share: '分享',
     report: '举报',
     discuss: '讨论',
-    strip: '条'
+    strip: '条',
+    topic: '话题',
+    expert: '专家',
+    'next-step': '下一步',
+    'previous-step': '上一步',
+    finish: '完成',
+    'prompt-1': '暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！'
+
 };

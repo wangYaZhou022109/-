@@ -1,0 +1,4 @@
+#!handlebars
+
+module > .ask-page
+    div 我的关注

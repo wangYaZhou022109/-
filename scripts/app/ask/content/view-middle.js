@@ -17,11 +17,10 @@ exports.handlers = {
         state.changed();
     },
     follow: function(payload) {
-       // this.module.items.popup.$$('.shield')[0].hidden = false;
-       // this.module.items.popup.$$('.catalog-view')[0].hidden = false;
         var state = this.bindings.popupstate;
         state.data = {};
-        state.data.menu = payload || 'contentleft';
+        state.data.title = '我的关注';
+        state.data.menu = 'mynotice';
         state.data[payload] = true;
         state.changed();
     }
