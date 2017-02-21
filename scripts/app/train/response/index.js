@@ -1,6 +1,7 @@
 exports.items = {
     search: 'search',
-    main: 'main'
+    main: 'main',
+    'train/response/trainees': { isModule: true }
 };
 exports.store = {
     models: {

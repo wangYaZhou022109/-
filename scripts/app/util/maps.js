@@ -216,7 +216,7 @@ module.exports = {
         7: '补考'
     },
     'trainee-auditStatus': {
-        0: '待审核', 1: '通过', 2: '拒绝'
+        0: '待审核', 1: '已通过'
     },
     'trainee-show-auditStatus': {
         0: '待审核', 1: '-'

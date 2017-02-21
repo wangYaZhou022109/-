@@ -12,3 +12,13 @@ exports.dataForTemplate = {
     }
 };
 
+exports.events = {
+    'click trainees*': 'showTrainees'
+};
+
+exports.handlers = {
+    showTrainees: function(id) {
+        var model = this.module.items['train/response/trainees'];
+        this.app.viewport.modal(model, { classId: id });
+    }
+};
