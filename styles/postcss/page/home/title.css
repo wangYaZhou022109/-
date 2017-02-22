@@ -1,4 +1,4 @@
-.home-title-row {
+.home-title-row-1 {
     position: relative;
     text-align: center;
     margin-bottom: var(--nav-height);
@@ -91,10 +91,17 @@
 
 .more {
     font-size: var(--small-font);
-    text-transform: uppercase;
-    padding: calc(var(--space) / 2) var(--space);
-    line-height: 1;
     display: inline-block;
     cursor: pointer;
-    font-family: arial;
+    vertical-align: bottom;
+    margin-left: calc(var(--space) * 1);
+}
+
+.home-title-row {
+    margin-bottom: calc(var(--space) * 2);
+    & .title {
+        font-size: 2em;
+        display: inline-block;
+        vertical-align: bottom;
+    }
 }
