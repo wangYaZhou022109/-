@@ -9,7 +9,7 @@ view('list')
     each(questions)
         ul 
             li(style='font-weight:bold')
-                a(id='myquiz-details' + id href='javascript:;')(class ='active') > echo(title) 
+                a(id='myquiz-details-' + id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(title) 
                 .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
                 a(id='detailss-'+id data-name='id' data-value=id) > echo(content) 

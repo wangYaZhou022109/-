@@ -26,9 +26,13 @@ view('main')
                         td(colspan='2') > each(details.questionAttachList) > echo(' '+ name)
             td(width='20%')
                 table.table
-                    tr > td > echo('该分享已有' + details.careNum + '人关注，' + details.praiseNum + '人赞')
+                    tr > td > echo('该分享已有' + details.careNum + '人关注')
                     tr > td 
                     tr > td > .btn(id='boutique' data-name='id' data-value=details.id) > echo('我要关注')
+                    tr > td > label(class='required') 相关专家
+                    tr > td(colspan='3') > each(details.expertList) > img(src=headPortrait)
+                    tr > td > label(class='required') 相关问题
+                    tr > td > each(details.questionList) > echo(title)
     table.table
         tr
             td
@@ -60,3 +64,4 @@ view('main')
                 td > echo('')
                 td
                     div(id='reply-'+id name='reply-' + id style='display:none')
+     

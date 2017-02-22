@@ -7,20 +7,15 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myquiz-*': 'showDetails'
+    'click myquiz-details-*': 'showDetails'
 };
 
 exports.handlers = {
     showDetails: function(id, e, target) {
         var region;
-        var el = $(target).parents('.pull-left')[0];
+        var el = $(target).parents('.activity-category')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/question', { id: id });
-        console.log($(target).parents('.pull-left'));
-
-       // this.module.dispatch('changeState', { typeIndex: Number(id) });
-      //  $(target).find('.min-btn-groups').slideToggle();
-       // $(target).siblings().find('.min-btn-groups').slideUp();
+        region.show('ask/myquiz/details', { id: id });
     }
 };
 

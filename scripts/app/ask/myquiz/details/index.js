@@ -22,6 +22,7 @@ exports.store = {
         questionDetails: function(payload) {
             var details = this.models.details,
                 data = payload;
+            console.log(details);
             details.set({ id: data.id });
             return this.get(details);
         },
