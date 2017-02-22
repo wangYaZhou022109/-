@@ -1,4 +1,5 @@
 exports.items = {
+    'min-banner': 'min-banner',
     'layout-1': 'layout-1',
     'layout-2': 'layout-2',
     'layout-3': 'layout-3',
