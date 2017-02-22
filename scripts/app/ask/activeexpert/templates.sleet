@@ -1,7 +1,13 @@
 #!handlebars
+module 
+    div(data-region='list')
 
-module > .ask-page
-    table.table
-        tr 
-            td(align='left' width='250') > echo('活跃专家')
-            td(align='right') > a(id='active-expert' href='javascript:;')(class ='active') 更多
+view('list') 
+    ul
+        li
+            string('active') + string('expert') + a(id='activeexpert' href='javascript:;' style='float:right;')(class ='active') > string('more')
+    table.table > tr > td
+            each(expert)
+                ul
+                    li(style='font-weight:bold')
+                        .img(style='height:120px;width:80px;float:left;' id='expert-' + id data-name='id' data-value=id ) > img(src='member.headPortrait')
