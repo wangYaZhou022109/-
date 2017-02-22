@@ -229,3 +229,237 @@ view('layout-5') > .container
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+view('lecture') > .container
+    .home-title-row
+        .title 讲师榜
+        .more more
+    .lecture-list > ul
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+
+view('rank') > .ranklist-section.container > .bar-list
+    .bar.studend
+        .clearfix
+            .pull-left > .title-icon > .iconfont.icon-star
+            .right-title
+                .home-title-row.horizontail.border
+                    .title 学员榜
+                    .more more
+                .title-more
+                    span.sub-title 阅览人数排行榜
+
+        ul
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon.custom-color-1 > .iconfont.icon-star-full
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon.custom-color-3 > .iconfont.icon-star-full
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon.custom-color-6 > .iconfont.icon-star-full
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon 4
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 5
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 6
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 7
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 8
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 9
+                    span 罗会奇
+                    span.sub-text 互联网中心
+
+    .bar.question
+        .clearfix
+            .pull-left > .title-icon > .iconfont.icon-question
+            .right-title
+                .home-title-row.horizontail.border
+                    .title 热门问题
+                    .more more
+                .title-more
+                    span.sub-title 浏览人数排行榜
+
+        ul
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+
+
+    .bar.question
+        .clearfix
+            .pull-left > .title-icon > .iconfont.icon-zhishiku
+            .right-title
+                .home-title-row.horizontail.border
+                    .title 热门知识
+                    .more more
+                .title-more
+                    span.sub-title 学员积分排行榜
+
+
+        ul
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例

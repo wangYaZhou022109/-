@@ -207,6 +207,8 @@
             & .bottom {
                 height: 50%;
                 box-sizing: content-box;
+                padding-bottom: 0;
+                padding-top: var(--home-bar-gap);
             }
 
             & .descoration {
