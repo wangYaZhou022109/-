@@ -5,7 +5,8 @@ exports.items = {
     online: 'online',
     questionnaire: 'questionnaire',
     configOffline: '',
-    configOnline: ''
+    configOnline: '',
+    editOffline: ''
 };
 
 exports.store = {
@@ -16,6 +17,8 @@ exports.store = {
         questionnaireList: { url: '../train/questionnaire' },
         themeList: { url: '../train/theme' },
         themeModel: { url: '../train/theme' },
+        offlineCourse: { url: '../train/offline-course' },
+        classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         delThemeList: { data: [] },
         state: { data: {} }
     },
@@ -139,6 +142,32 @@ exports.store = {
                 type: 2
             });
             return me.save(me.models.themeModel);
+        },
+        submitOffline: function(payload) {
+            var offlineCourse = this.models.offlineCourse,
+                offlineCourseList = this.models.offlineCourseList,
+                state = this.models.state,
+                me = this;
+            offlineCourse.set(payload);
+            offlineCourse.data.classId = state.data.classId;
+            this.save(offlineCourse).then(function() {
+                this.app.message.success('提交成功');
+                me.get(offlineCourseList);
+            });
+        },
+        editOfflineCourse: function(payload) {
+            var model = this.models.offlineCourse;
+            model.set(payload);
+            this.get(model);
+        },
+        delOfflineCourse: function(payload) {
+            var model = this.models.offlineCourse,
+                offlineCourseList = this.models.offlineCourseList,
+                me = this;
+            model.set(payload);
+            this.del(model).then(function() {
+                me.get(offlineCourseList);
+            });
         }
     }
 };

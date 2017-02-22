@@ -25,7 +25,7 @@ view('offline')
                                 option(value='3') > echo('第三周')
                         .col-sm-8(style='text-align:right;')
                             a.btn(id='theme-offline' + state.classId) 配置周天数
-                            a.btn#addCourse 添加课程
+                            a.btn#addOfflineCourse 添加课程
                             a.btn#importOffline 导入课程
                             a > echo('最小化')
                 thead > tr
@@ -50,10 +50,10 @@ view('offline')
                         br
                         echo('职称：' + teacherTitle)
                     td
-                        a(id='courseware-'+id) 查看课件
+                        a(id='courseware-'+id data-name='id' data-value=id) 查看课件
                     td
-                        a(id='edit-offline-'+id) 编辑
-                        a(id='del-offline-'+id) 删除
+                        a(id='edit-offline-'+id data-name='id' data-value=id) 编辑
+                        a(id='del-offline-'+id data-name='id' data-value=id) 删除
 
 view('online') 
     div(style='padding:20px 50px 50px 20px;')
@@ -77,9 +77,9 @@ view('online')
                     td > echo(resourceName)
                     td > map('class-online-type' type)
                     td
-                        a(id='edit-online-'+id) 编辑
-                        a(id='view-online-'+id) 预览
-                        a(id='del-online-'+id) 删除
+                        a(id='edit-online-'+id data-name='id' data-value=id) 编辑
+                        a(id='view-online-'+id data-name='id' data-value=id) 预览
+                        a(id='del-online-'+id data-name='id' data-value=id) 删除
 
 view('questionnaire') 
     div(style='padding:20px 50px 50px 20px;')
@@ -108,9 +108,9 @@ view('questionnaire')
                     td > dateTime(startTIme)
                     td > dateTime(endTime)
                     td
-                        a(id='edit-qnr-'+id) 编辑
-                        a(id='view-qnr-'+id) 预览
-                        a(id='del-qnr-'+id) 删除
+                        a(id='edit-qnr-'+id data-name='id' data-value=id) 编辑
+                        a(id='view-qnr-'+id data-name='id' data-value=id) 预览
+                        a(id='del-qnr-'+id data-name='id' data-value=id) 删除
 
 view('configOffline')
     
@@ -142,3 +142,63 @@ view('configOnline') > form.vertical
             tr
                 td(colspan=4 style='text-align:center')
                     a.btn#addTheme 添加主题
+
+view('editOffline') > form.vertical
+    .col-sm-2(style='text-align:right')
+        a.btn#submitOffline 保存
+    .row
+        label(style='float:left;') 课程类型：
+        select.select#type(name='type') 
+            option(value='1')('selected')&if(checked.type1) > map('class-offline-type' '1')
+            option(value='2')('selected')&if(checked.type2) > map('class-offline-type' '2')
+            option(value='3')('selected')&if(checked.type3) > map('class-offline-type' '3')
+            option(value='4')('selected')&if(checked.type4) > map('class-offline-type' '4')
+    .row
+        label(style='float:left;') 课程名称：
+        input.input#name(name='name' value=offlineCourse.name)
+        input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
+    .row
+        label(style='float:left;') 上课日期：
+        input.input#courseDate(name='courseDate' value=date(offlineCourse.courseDate) size=8 style='float:left')
+        label(style='float:left;') 上课时间：
+        input.input#startTime(name='startTime' value=offlineCourse.startTime size=8 style='float:left')
+        label(style='float:left;') ~
+        input.input#endTime(name='endTime' value=offlineCourse.endTime size=8)
+    .row
+        label(style='float:left;') 教室：
+        select.select#classRoomId(name='classRoomId')
+            each(classroomList)
+                option(value=id)('selected')&if(selected) > echo(classroomName)
+    .row
+        label(style='float:left;') 讲师姓名：
+        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName style='float:left')
+        label(style='float:left;') 讲师单位：
+        input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization)
+    .row
+        label(style='float:left;') 讲师职称：
+        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle style='float:left')
+        label(style='float:left;') 联系电话：
+        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone)
+
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 课件(最多上传3个)
+                    .col-sm-2(style='text-align:right;')
+                        a.btn#chooseFile 选择
+                        a.btn#uploadFile 上传
+                        a > echo('?')
+            thead > tr
+                th 序号
+                th(width='50%') 附件名称
+                th 类型
+                th 操作
+            tbody > each(attachList) > tr
+                td > echo(i)
+                td > echo(name)
+                td > echo(type)
+                td
+                    a(id='view-attach-'+id data-name='id' data-value=id) 预览
+                    a(id='del-attach-'+id data-name='id' data-value=id) 删除
