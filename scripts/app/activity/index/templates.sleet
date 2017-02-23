@@ -68,7 +68,7 @@ view('list')
                             compare(type 'eq' 2)
                                 a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与2
                             compare(type 'eq' 6)
-                                a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与6
+                                a.normal.block(type=type  href='#/activity/research-activity/'+ targetId target='_blank') > .btn.radius.block 我要参与6
                             else
                                 a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius.block 我要参与
                     .clearfix
