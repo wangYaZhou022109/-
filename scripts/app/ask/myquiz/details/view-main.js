@@ -16,7 +16,7 @@ exports.handlers = {
         if (el.style.display === 'none') {
             el.style.display = 'inline';
             region = new D.Region(this.app, this.module, el, id);
-            region.show('ask/question/reply', { id: id });
+            region.show('ask/myquiz/reply', { id: id });
         } else {
             el.style.display = 'none';
         }
@@ -28,7 +28,9 @@ exports.actions = {
     'click discuss': 'discuss',
     'click discuss-top-*': 'discusstop',
     'click discuss-boutique-*': 'discussboutique',
-    'click discuss-del-*': 'discussdel'
+    'click discuss-del-*': 'discussdel',
+    'click enjoy-*': 'enjoy',
+    'click report-*': 'report'
 };
 
 // actions绑定的方法调用前要干的事情
@@ -57,6 +59,12 @@ exports.dataForActions = {
     },
     replydel: function(payload) {
         return payload;
+    },
+    enjoy: function(payload) {
+        return payload;
+    },
+    report: function(payload) {
+        return payload;
     }
 };
 
@@ -67,9 +75,8 @@ exports.actionCallbacks = {
         this.app.viewport.closeModal();
         this.module.dispatch('refreshquestions');
     },
-    boutique: function(payload) {
-        this.app.message.success('精品设置成功！');
-        this.module.dispatch('refresh', payload);
+    boutique: function() {
+        this.app.message.success('关注成功！');
     },
     discuss: function(payload) {
         this.app.message.success('讨论发表成功！');
@@ -85,6 +92,14 @@ exports.actionCallbacks = {
     },
     discussboutique: function(payload) {
         this.app.message.success('加精成功！');
+        this.module.dispatch('refresh', payload);
+    },
+    enjoy: function(payload) {
+        this.app.message.success('分享成功！');
+        this.module.dispatch('refresh', payload);
+    },
+    report: function(payload) {
+        this.app.message.success('举报成功！');
         this.module.dispatch('refresh', payload);
     }
 };

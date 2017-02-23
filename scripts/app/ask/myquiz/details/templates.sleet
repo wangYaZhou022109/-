@@ -24,6 +24,9 @@ view('main')
                     tr
                         td > echo('附件：')
                         td(colspan='2') > each(details.questionAttachList) > echo(' '+ name)
+                    tr 
+                        td > a(id='enjoy-' + details.id data-name='id' data-value=details.id href='javascript:;')(class ='active') 分享
+                        td > a(id='report-' + details.id data-name='id' data-value=details.id href='javascript:;')(class ='active') 举报
             td(width='20%')
                 table.table
                     tr > td > echo('该分享已有' + details.careNum + '人关注')

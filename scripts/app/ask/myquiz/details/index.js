@@ -7,6 +7,15 @@ exports.store = {
         details: {
             url: '../ask-bar/question-details'
         },
+        enjoy: {
+            url: '../ask-bar/question-details/enjoy'
+        },
+        report: {
+            url: '../ask-bar/question-details/report'
+        },
+        boutique: {
+            url: '../ask-bar/question-details/boutique'
+        },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} }
@@ -22,7 +31,6 @@ exports.store = {
         questionDetails: function(payload) {
             var details = this.models.details,
                 data = payload;
-            console.log(details);
             details.set({ id: data.id });
             return this.get(details);
         },
@@ -44,9 +52,9 @@ exports.store = {
             return this.del(close);
         },
         boutique: function(payload) {
-            var boutique = this.models.details;
+            var boutique = this.models.boutique;
             boutique.set(payload);
-            return this.save(boutique);
+            return this.post(boutique);
         },
         discuss: function(payload) {
             var discuss = this.models.discuss;
@@ -71,6 +79,18 @@ exports.store = {
             data.essenceStatus = 1;
             discussboutique.set(data);
             return this.post(discussboutique);
+        },
+        enjoy: function(payload) {
+            var data = payload;
+            var enjoy = this.models.enjoy;
+            enjoy.set(data);
+            return this.post(enjoy);
+        },
+        report: function(payload) {
+            var data = payload;
+            var report = this.models.report;
+            report.set(data);
+            return this.post(report);
         }
     }
 };
