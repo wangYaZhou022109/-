@@ -5,8 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         questions: { url: '../ask-bar/myquiz/question' },
-        params: { data: { isOverdue: '1' } },
-        state: { data: { menu: 'contentleft' } }
+        params: { data: { isOverdue: '1' } }
     },
     callbacks: {
         init: function() {
