@@ -4,7 +4,7 @@ module
 
 view('list')
     each(trends)
-        ul 
+        ul
             li(style='font-weight:bold')
                 compare(thumbnail 'ne' '')
                     .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
