@@ -1,0 +1,35 @@
+#!handlebars
+
+module > .activity-page
+    .activity-banner(data-region='banner')
+    .activity-list
+        .container
+            .main-list(style='height:3000px;')
+                .activity-category
+                    .pull-left(style='height:100px;width:70%;' data-region='left')
+                    .pull-right
+                        .content
+                            div(data-region='top')
+
+view('banner')
+    .bg-img > .container > .activitys-ul.banner > ul
+        li
+            .content
+                .covers
+                    .img > img(src='1.jpg' alt=name)
+                    .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+                .details
+                    .title.text-overflow > echo(name)
+                    .time
+                        p > echo('起：') + dateTime(startTime)
+                        p > echo('至：') + dateTime(endTime)
+                    .information > echo(description)
+                        a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
+
+view('left')
+
+view('top')
+    table.table
+        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
+        tr > td(align='center') > .btn.radius(id='article-article' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')
+

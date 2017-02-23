@@ -4,12 +4,16 @@ module
 
 view('list')
     each(trends)
-        ul 
+        ul
             li(style='font-weight:bold')
                 compare(thumbnail 'ne' '')
                     .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
-                a(id='dynamic-' + questionId data-name='id' data-value=questionId href='javascript:;') > echo(title) 
-                .img(style='height:80px;width:80px;float:right;') > img(src=createUser.headPortrait )
+                a(id='dynamic-' + id + '_' + questionId data-name='id' data-value=id + '_' + questionId href='javascript:;') > echo(title) 
+                .img(style='height:80px;width:80px;float:right;') 
+                    compare(thumbnail 'ne' '')
+                        img(src='images/default-cover/default_exam.jpg' )
+                    else
+                        img(src=createUser.headPortrait )
             li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
                 echo(content) 
             li

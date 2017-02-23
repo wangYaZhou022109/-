@@ -22,10 +22,14 @@ exports.handlers = {
         }
     },
     details: function(id, e, target) {
-        var region;
+        var region,
+            data;
         var el = $(target).parents('.activity-category')[0];
-        region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/myquiz/details', { id: id });
+        if (id.indexOf(',') !== -1) {
+            data = id.split(',');
+            region = new D.Region(this.app, this.module, el, data[1]);
+            region.show('ask/myquiz/details', { id: data[1] });
+        }
     }
 };
 

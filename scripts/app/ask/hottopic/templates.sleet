@@ -1,21 +1,16 @@
 #!handlebars
-module > .activity-page
-    .activity-list(data-region='list')
+module 
+    div(data-region='list')
 
 view('list') 
-    .container
-        ul
-            li > echo('热门话题') + a(id='hot-topic' href='javascript:;' style='float:right;')(class ='active') 更多
+    ul
+        li > string('hot') + string('topic') + a(id='hot-topic' href='javascript:;' style='float:right;')(class ='active') > string('more')
+    table.table > tr > td
         ul
             each(topic)
-                li
-                    .content(style='height:100px;')
-                        .img
-                            .img-cont
-                                a.normal > img(src='1.jpg' alt= name)
-                        .clearfix
-                            .title.text-overflow > echo(name)
-                        .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+                li(style='font-weight:bold')
+                    .img(style='height:80px;width:80px;float:left;') > img(src='1.jpg' )
+                    a(id='topic-' + id data-name='id' data-value=id href='javascript:;') > echo(name) 
                 
 
     
