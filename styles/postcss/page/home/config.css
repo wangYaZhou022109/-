@@ -222,14 +222,15 @@
 
         & .big-pic {
             width: 50%;
-            padding-right: var(--home-bar-gap);
 
             & .item-bar {
                 height: 50%;
             }
 
             & .above {
-                padding-bottom: calc(var(--home-bar-gap) / 1);
+                margin-bottom: calc(var(--home-bar-gap) / 2);
+                padding-bottom: calc(var(--home-bar-gap) / 2);
+
             }
 
             & .below {

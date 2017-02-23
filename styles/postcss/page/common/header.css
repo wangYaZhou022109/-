@@ -159,8 +159,11 @@
 
 }
 
-.footer p{
-    text-align: center;
-    padding: 5em 0;
-    margin: 0;
+.footer {
+    margin-top: var(--section-gap);
+        & p {
+        text-align: center;
+        padding: 5em 0;
+        margin: 0;
+        }
 }
