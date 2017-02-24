@@ -1,4 +1,5 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    helpers = require('./app/util/helpers');
 
 exports.items = {
     offline: 'offline',
@@ -6,7 +7,8 @@ exports.items = {
     questionnaire: 'questionnaire',
     configOffline: '',
     configOnline: '',
-    editOffline: ''
+    editOffline: '',
+    upload: ''
 };
 
 exports.store = {
@@ -19,8 +21,10 @@ exports.store = {
         themeModel: { url: '../train/theme' },
         offlineCourse: { url: '../train/offline-course' },
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
+        file: { url: '../human/file/upload-parse-file' },
         delThemeList: { data: [] },
-        state: { data: {} }
+        state: { data: {} },
+        files: { data: [] }
     },
     callbacks: {
         init: function(payload) {
@@ -147,18 +151,33 @@ exports.store = {
             var offlineCourse = this.models.offlineCourse,
                 offlineCourseList = this.models.offlineCourseList,
                 state = this.models.state,
-                me = this;
+                fileList = this.models.files,
+                me = this,
+                courseDate;
+            courseDate = payload.courseDate.split(' ');
             offlineCourse.set(payload);
+            offlineCourse.data.id = payload.id[0];
             offlineCourse.data.classId = state.data.classId;
+            D.assign(me.models.offlineCourse.data, {
+                fileList: JSON.stringify(fileList.data)
+            });
+            offlineCourse.data.courseDate = courseDate[0];
+            offlineCourse.data.startTime = courseDate[1];
             this.save(offlineCourse).then(function() {
                 this.app.message.success('提交成功');
                 me.get(offlineCourseList);
             });
         },
         editOfflineCourse: function(payload) {
-            var model = this.models.offlineCourse;
+            var model = this.models.offlineCourse,
+                files = this.models.files;
             model.set(payload);
-            this.get(model);
+            files.clear();
+            this.get(model).then(function(data) {
+                files.data = data[0].attachList;
+                files.changed();
+                data[0].courseDate = helpers.date(data[0].courseDate) + ' ' + data[0].startTime;
+            });
         },
         delOfflineCourse: function(payload) {
             var model = this.models.offlineCourse,
@@ -168,6 +187,27 @@ exports.store = {
             this.del(model).then(function() {
                 me.get(offlineCourseList);
             });
+        },
+        uploadFile: function(payload) {
+            var img = payload[0],
+                files = this.models.files.data,
+                newFile = {};
+            newFile.id = img.attachmentId;
+            newFile.attachId = img.attachmentId;
+            newFile.attachType = img.contentType;
+            newFile.attachName = img.name;
+            newFile.extension = img.extension;
+            files.push(newFile);
+            this.models.files.changed();
+        },
+        delAttach: function(payload) {
+            var files = this.models.files.data,
+                index;
+            index = files.findIndex(function(e) {
+                return e.id === payload.id;
+            });
+            files.splice(index, 1);
+            this.models.files.changed();
         }
     }
 };

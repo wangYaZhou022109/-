@@ -148,37 +148,38 @@ view('editOffline') > form.vertical
         a.btn#submitOffline 保存
     .row
         label(style='float:left;') 课程类型：
-        select.select#type(name='type') 
+        select.select#type(name='type' x-rule='required') 
             option(value='1')('selected')&if(checked.type1) > map('class-offline-type' '1')
             option(value='2')('selected')&if(checked.type2) > map('class-offline-type' '2')
             option(value='3')('selected')&if(checked.type3) > map('class-offline-type' '3')
             option(value='4')('selected')&if(checked.type4) > map('class-offline-type' '4')
     .row
         label(style='float:left;') 课程名称：
-        input.input#name(name='name' value=offlineCourse.name)
+        input.input#name(name='name' value=offlineCourse.name x-rule='required,maxLength:30')
         input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
     .row
-        label(style='float:left;') 上课日期：
-        input.input#courseDate(name='courseDate' value=date(offlineCourse.courseDate) size=8 style='float:left')
-        label(style='float:left;') 上课时间：
-        input.input#startTime(name='startTime' value=offlineCourse.startTime size=8 style='float:left')
-        label(style='float:left;') ~
-        input.input#endTime(name='endTime' value=offlineCourse.endTime size=8)
-    .row
+        label(style='float:left;') 开始时间：
+        input.input#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) size=8 style='float:left' x-rule='required')
+        label(style='float:left;') 结束时间：
+        input.input#endTime(name='endTime' value=offlineCourse.endTime size=8 x-rule='required' style='float:left')
         label(style='float:left;') 教室：
-        select.select#classRoomId(name='classRoomId')
+        select.select#classroomId(name='classroomId' x-rule='required')
             each(classroomList)
                 option(value=id)('selected')&if(selected) > echo(classroomName)
     .row
         label(style='float:left;') 讲师姓名：
-        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName style='float:left')
+        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName style='float:left' size=8 x-rule='required,maxLength:30')
         label(style='float:left;') 讲师单位：
-        input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization)
+        input.input#teacherOrganization(name='teacherOrganization' size=8 value=offlineCourse.teacherOrganization x-rule='maxLength:30' style='float:left;')
+        label(style='float:left;') 讲师类别：
+        select.select#teacherType(name='teacherType' x-rule='required')
+            option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
+            option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
     .row
         label(style='float:left;') 讲师职称：
-        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle style='float:left')
+        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle style='float:left' x-rule='maxLength:30')
         label(style='float:left;') 联系电话：
-        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone)
+        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
 
     .list.m-top
         table.table
@@ -188,17 +189,20 @@ view('editOffline') > form.vertical
                         label 课件(最多上传3个)
                     .col-sm-2(style='text-align:right;')
                         a.btn#chooseFile 选择
-                        a.btn#uploadFile 上传
-                        a > echo('?')
+                        a(title='上传附件支持格式：xls/xlsx/doc/docx/ppt/pptx/zip/txt/rar/pdf/epub/mp3/mp4(大小<100M)') > echo('?')
             thead > tr
                 th 序号
                 th(width='50%') 附件名称
                 th 类型
                 th 操作
-            tbody > each(attachList) > tr
+            tbody > each(files) > tr
                 td > echo(i)
-                td > echo(name)
-                td > echo(type)
+                td > echo(attachName)
+                td > map('class-file-type' fileType)
                 td
                     a(id='view-attach-'+id data-name='id' data-value=id) 预览
                     a(id='del-attach-'+id data-name='id' data-value=id) 删除
+
+view('upload')
+    .row
+        #uploader

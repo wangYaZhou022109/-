@@ -1,11 +1,12 @@
-var markers = require('./app/ext/views/form/markers'),
-    validators = require('./app/ext/views/form/validators'),
-    _ = require('lodash/collection'),
-    $ = require('jquery');
+var _ = require('lodash/collection'),
+    $ = require('jquery'),
+    findExtension;
 
 var title = { add: '添加课程', update: '编辑课程' };
 
 exports.large = true;
+
+exports.type = 'form';
 
 exports.title = function() {
     return title[this.bindings.state.data.type];
@@ -14,17 +15,20 @@ exports.title = function() {
 exports.bindings = {
     state: true,
     offlineCourse: true,
-    classroomList: true
+    classroomList: true,
+    files: true
 };
 
 exports.dataForTemplate = {
     checked: function(data) {
         var offlineCourse = data.offlineCourse;
         return {
-            type1: offlineCourse.type === 1,
-            type2: offlineCourse.type === 2,
-            type3: offlineCourse.type === 3,
-            type4: offlineCourse.type === 4
+            type1: offlineCourse.type === '1' || offlineCourse.type === 1,
+            type2: offlineCourse.type === '2' || offlineCourse.type === 2,
+            type3: offlineCourse.type === '3' || offlineCourse.type === 3,
+            type4: offlineCourse.type === '4' || offlineCourse.type === 4,
+            teacherType0: offlineCourse.teacherType === '0' || offlineCourse.teacherType === 0,
+            teacherType1: offlineCourse.teacherType === '1' || offlineCourse.teacherType === 1
         };
     },
     classroomList: function(data) {
@@ -35,16 +39,69 @@ exports.dataForTemplate = {
             }
         });
         return data.classroomList;
+    },
+    files: function(data) {
+        var me = this;
+        _.map(data.files || [], function(file, i) {
+            var item = file,
+                extension;
+            extension = item.attachName.split('.').pop().toLowerCase();
+            item.fileType = findExtension.call(me, extension);
+            item.i = i + 1;
+        });
+        return data.files;
+    }
+};
+
+exports.events = {
+    'click chooseFile': 'uploadFile'
+};
+
+exports.handlers = {
+    uploadFile: function() {
+        var view = this.module.items.upload,
+            offlineCourse = this.bindings.offlineCourse.data,
+            files = this.bindings.files.data;
+        if (files.length >= 3) {
+            this.app.message.alert('课件最多只能上传3个');
+        } else {
+            offlineCourse.type = $(this.$('type')).val();
+            offlineCourse.name = $(this.$('name')).val();
+            offlineCourse.courseDate = $(this.$('courseDate')).val();
+            offlineCourse.endTime = $(this.$('endTime')).val();
+            offlineCourse.classroomId = $(this.$('classroomId')).val();
+            offlineCourse.teacherName = $(this.$('teacherName')).val();
+            offlineCourse.teacherOrganization = $(this.$('teacherOrganization')).val();
+            offlineCourse.teacherTitle = $(this.$('teacherTitle')).val();
+            offlineCourse.teacherPhone = $(this.$('teacherPhone')).val();
+            offlineCourse.teacherType = $(this.$('teacherType')).val();
+            this.app.viewport.modal(view);
+        }
     }
 };
 
 exports.actions = {
-    'click submitOffline': 'submitOffline'
+    'click submitOffline': 'submitOffline',
+    'click del-attach-*': 'delAttach'
 };
 
 exports.dataForActions = {
     submitOffline: function(payload) {
         return this.validate() ? payload : false;
+    },
+    delAttach: function(payload) {
+        var offlineCourse = this.bindings.offlineCourse.data;
+        offlineCourse.type = payload.type;
+        offlineCourse.name = payload.name;
+        offlineCourse.courseDate = payload.courseDate;
+        offlineCourse.endTime = payload.endTime;
+        offlineCourse.classroomId = payload.classroomId;
+        offlineCourse.teacherName = payload.teacherName;
+        offlineCourse.teacherOrganization = payload.teacherOrganization;
+        offlineCourse.teacherTitle = payload.teacherTitle;
+        offlineCourse.teacherPhone = payload.teacherPhone;
+        offlineCourse.teacherType = payload.teacherType;
+        return payload;
     }
 };
 
@@ -54,84 +111,27 @@ exports.actionCallbacks = {
     }
 };
 
-exports.mixin = {
-    validate: function() {
-        var type = $(this.$('type')),
-            name = $(this.$('name')),
-            courseDate = $(this.$('courseDate')),
-            startTime = $(this.$('startTime')),
-            endTime = $(this.$('endTime')),
-            classRoomId = $(this.$('classRoomId')),
-            teacherName = $(this.$('teacherName')),
-            teacherOrganization = $(this.$('teacherOrganization')),
-            teacherTitle = $(this.$('teacherTitle')),
-            teacherPhone = $(this.$('teacherPhone')),
-            st,
-            et,
-            flag = true,
-            reg = new RegExp('\\{' + 0 + '\\}', 'g');
-
-        markers.selectize.valid(type);
-        markers.text.valid(name);
-        markers.text.valid(courseDate);
-        markers.text.valid(startTime);
-        markers.text.valid(endTime);
-        markers.selectize.valid(classRoomId);
-        markers.text.valid(teacherName);
-        markers.text.valid(teacherOrganization);
-        markers.text.valid(teacherTitle);
-        markers.text.valid(teacherPhone);
-
-        if (!validators.required.fn(type.val())) {
-            markers.selectize.invalid(type, validators.required.message);
-            flag = false;
-        }
-        if (!validators.required.fn(name.val())) {
-            markers.text.invalid(name, validators.required.message);
-            flag = false;
-        }
-        if (!validators.maxLength.fn(name.val(), 30)) {
-            markers.text.invalid(name, validators.maxLength.message.replace(reg, 30));
-            flag = false;
-        }
-        if (!validators.required.fn(courseDate.val())) {
-            markers.text.invalid(courseDate, validators.required.message);
-            flag = false;
-        }
-        if (!validators.required.fn(startTime.val())) {
-            markers.text.invalid(startTime, validators.required.message);
-            flag = false;
-        }
-        if (!validators.required.fn(endTime.val())) {
-            markers.text.invalid(endTime, validators.required.message);
-            flag = false;
-        }
-        st = new Date(courseDate.val() + ' ' + startTime.val()).getTime();
-        et = new Date(courseDate.val() + ' ' + endTime.val()).getTime();
-        if (et <= st) {
-            markers.text.invalid(endTime, '结束时间必须大于开始时间');
-            flag = false;
-        }
-        if (!validators.required.fn(classRoomId.val())) {
-            markers.selectize.invalid(classRoomId, validators.required.message);
-            flag = false;
-        }
-        if (teacherName.val() !== '' && !validators.maxLength.fn(teacherName.val(), 30)) {
-            markers.text.invalid(teacherName, validators.maxLength.message.replace(reg, 30));
-            flag = false;
-        }
-        if (teacherOrganization.val() !== '' && !validators.maxLength.fn(teacherOrganization.val(), 30)) {
-            markers.text.invalid(teacherOrganization, validators.maxLength.message.replace(reg, 30));
-            flag = false;
-        }
-        if (teacherTitle.val() !== '' && !validators.maxLength.fn(teacherTitle.val(), 30)) {
-            markers.text.invalid(teacherTitle, validators.maxLength.message.replace(reg, 30));
-            flag = false;
-        }
-        if (teacherPhone.val() !== '' && !validators.phone.fn(teacherPhone.val())) {
-            markers.text.invalid(teacherPhone, validators.phone.message);
-            flag = false;
-        }
-        return flag;
+findExtension = function(value) {
+    var fileTypeDoc = 'xls,xlsx,doc,docx,ppt,pptx,txt,pdf',
+        fileTypeZip = 'zip,rar',
+        fileTypeMp3 = 'mp3',
+        fileTypeMp4 = 'mp4',
+        fileTypeMp5 = 'epub',
+        type;
+    if (fileTypeDoc.indexOf(value) > -1) {
+        type = 1;
     }
+    if (fileTypeZip.indexOf(value) > -1) {
+        type = 2;
+    }
+    if (fileTypeMp3.indexOf(value) > -1) {
+        type = 3;
+    }
+    if (fileTypeMp4.indexOf(value) > -1) {
+        type = 4;
+    }
+    if (fileTypeMp5.indexOf(value) > -1) {
+        type = 5;
+    }
+    return type;
 };
