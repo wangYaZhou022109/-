@@ -3,11 +3,11 @@
 module > .home-page.layout
     .banner > img.block(src='images/course-bg.jpg')
     .min-banner(data-region='min-banner')
+    .section(data-region='layout-4')
+    .section(data-region='layout-3')
+    .section(data-region='layout-5')
     .section(data-region='layout-1')
     .section(data-region='layout-2')
-    .section(data-region='layout-3')
-    .section(data-region='layout-4')
-    .section(data-region='layout-5')
     .section(data-region='lecture')
     .section(data-region='rank')
 

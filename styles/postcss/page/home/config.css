@@ -172,9 +172,33 @@
                 height: 100%;
             }
 
+            & .item {
+                &:nth-child(1) .bottom:before {
+                    left: -2em;
+                    border-right-color: var(--bg-color);
+                }
+
+                &:nth-child(2) .bottom:before {
+                    right: -2em;
+                    border-left-color: var(--bg-color);
+                }
+            }
+
             & .bottom {
                 padding-top: var(--large-space);
                 padding-bottom: var(--large-space);
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    content: '';
+                    border: 1em solid transparent;
+                    top: 50%;
+                    margin-top: -1em;
+                    z-index: 2;
+                }
+
+
             }
         }
 
@@ -209,6 +233,17 @@
                 box-sizing: content-box;
                 padding-bottom: 0;
                 padding-top: var(--home-bar-gap);
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    content: '';
+                    border: 1em solid transparent;
+                    top: -2em;
+                    left: 50%;
+                    margin-left: -1em;
+                    border-bottom-color: var(--bg-color);
+                }
             }
 
             & .descoration {
