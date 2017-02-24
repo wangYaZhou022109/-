@@ -20,6 +20,7 @@ exports.store = {
         courses: {
             url: '../course-study/course-front',
             type: 'pageable',
+            pageSize: 9,
             root: 'items',
         },
         state: { data: {} },

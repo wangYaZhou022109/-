@@ -28,10 +28,26 @@ exports.actions = {
     'click cancel-praise*': 'cancelPraise'
 };
 exports.dataForActions = {
-    addComment: function(data) {
+    addComment: function(payload) {
+        var data = payload;
+        data.content = $.trim(data.content);
+        if (!$.trim(data.content).length) {
+            return this.app.message.error('评论内容不能为空');
+        }
+        if ($.trim(data.content).length > 3000) {
+            return this.app.message.error('评论内容过长');
+        }
         return data;
     },
-    addReply: function(data) {
+    addReply: function(payload) {
+        var data = payload;
+        data.content = $.trim(data.content);
+        if (!$.trim(data.content).length) {
+            return this.app.message.error('回复内容不能为空');
+        }
+        if ($.trim(data.content).length > 300) {
+            return this.app.message.error('回复内容过长');
+        }
         return data;
     },
     setTop: function(payload) {
@@ -125,14 +141,14 @@ exports.dataForTemplate = {
             r.i = i + 1 + ((pageNum - 1) * 10);
 
             if (!r.avatarId) {
-                r.avatarId = 'images/logo/logo-zxy-1-min.png';
+                r.avatarId = 'images/default-userpic.png';
             } else {
                 r.avatarId = '/api/v1/human/file/download?id=' + r.avatarId;
             }
             _.forEach(r.replies || [], function(reply) {
                 var rr = reply;
                 if (!rr.avatarId) {
-                    rr.avatarId = 'images/logo/logo-zxy-1-min.png';
+                    rr.avatarId = 'images/default-userpic.png';
                 } else {
                     rr.avatarId = '/api/v1/human/file/download?id=' + rr.avatarId;
                 }
