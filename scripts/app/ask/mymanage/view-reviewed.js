@@ -1,4 +1,4 @@
-var D = require('drizzlejs');
+
 exports.type = 'dynamic';
 exports.bindings = {
     reviewed: true,

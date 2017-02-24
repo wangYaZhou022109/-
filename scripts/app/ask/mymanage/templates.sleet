@@ -10,7 +10,7 @@ view('mymanage')
         br
         echo(id)
         echo('话题名称:')
-        a(href='#/ask/mymanage/topicdetail' + id (class ='active')> echo(name)
+        a(id='topicDeal-' + id data-name='id' data-value=id href='javascript:;') > echo(name) 
         br
         echo('今日新增:')
         echo(todayQuestionSum)
