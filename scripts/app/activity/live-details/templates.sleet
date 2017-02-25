@@ -3,8 +3,8 @@
 module > .live-details-page
     .live-details-banner(data-region='banner')
     .page-main-wrapper
-        .main(data-region='side')
-        .side(data-region='main')
+        .side(data-region='side')
+        .main(data-region='main')
 
 view('banner')
     .banner.page-main-wrapper > img(src='images/ke.png')
