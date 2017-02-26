@@ -1,4 +1,4 @@
-
+var _ = require('lodash/collection');
 exports.items = {
     banner: 'banner',
     list: 'list'
@@ -6,16 +6,18 @@ exports.items = {
 
 exports.store = {
     models: {
-        activitys: {
-            url: '../exam/activity',
-            type: 'pageable',
-            root: 'items',
-            pageSize: 6
-        },
-        activity: { url: '../exam/activity' },
-        params: { data: { isOverdue: false } },
-        down: { url: '../human/file/download' },
-        expert: { url: '../ask-bar/expert' }
+        expert: { url: '../ask-bar/expert' },
+        state: {
+            data: {
+                menu: 'expertsanswer'
+            },
+            mixin: {
+                set: function(o) {
+                    console.log(o);
+                    this.module.store.models.state.data.id = 222;
+                }
+            }
+        }
     },
     callbacks: {
         init: function(payload) {
@@ -27,5 +29,6 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    this.store.models.state.set.call({ id: 'id' });
     return this.dispatch('init', this.renderOptions);
 };

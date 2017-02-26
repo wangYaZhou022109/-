@@ -10,4 +10,4 @@ view('list')
             each(expert)
                 ul
                     li(style='font-weight:bold')
-                        .img(style='height:120px;width:80px;float:left;' id='expert-' + id data-name='id' data-value=id ) > img(src='member.headPortrait')
+                        .img(style='height:120px;width:80px;float:left;' id='expert-' + member.id data-name='id' data-value=member.id  ) > img(src=member.headPortrait)

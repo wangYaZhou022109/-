@@ -17,6 +17,8 @@ module.exports = {
     content: '内容',
     topic: '话题',
     expert: '专家',
+    answer: '回答',
+    sharing: '分享',
     active: '活跃',
     hot: '热门',
     more: '更多',
