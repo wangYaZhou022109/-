@@ -11,7 +11,7 @@ exports.handlers = {
     showMenu: function(menu) {
         var state = this.bindings.state;
         state.data = {};
-        state.data.menu = menu || 'content';
+        state.data.menu = menu;
         state.data[menu] = true;
         state.changed();
     }

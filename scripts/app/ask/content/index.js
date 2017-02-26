@@ -1,3 +1,4 @@
+
 exports.items = {
     'ask/question': { isModule: true },
     middle: 'middle',
@@ -22,12 +23,10 @@ exports.store = {
             var follow = this.models.follow;
             follow.set({ id: 1 });
             return this.get(follow);
-        },
-        search: function() {
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    return this.dispatch('init', this.renderOptions);
 };

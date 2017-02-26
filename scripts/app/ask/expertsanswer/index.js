@@ -9,16 +9,18 @@ exports.store = {
         trends: { url: '../ask-bar/trends/expert-answer' }
     },
     callbacks: {
-        init: function() {
+        init: function(payload) {
             var trends = this.models.trends;
-            trends.set({ id: 1222 });
+            trends.set({ id: payload.state.id });
             return this.get(trends);
         }
     }
 };
 
 exports.afterRender = function() {
-    console.log(this.renderOptions);
-    return this.dispatch('init');
+    if (typeof this.renderOptions.state.id !== 'undefined' && this.renderOptions.state.id !== '') {
+        return this.dispatch('init', this.renderOptions);
+    }
+    return null;
 };
 

@@ -1,0 +1,6 @@
+exports.bindings = {
+};
+
+
+exports.dataForTemplate = {
+};

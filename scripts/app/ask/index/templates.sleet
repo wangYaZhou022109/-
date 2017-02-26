@@ -7,13 +7,10 @@ module > .activity-page
 
 view('filter')
     .container
-        .pull-right > .search-bar
-            input.input(name='ask-name' placeholder='搜一搜' value=params.name)
-            i.iconfont.icon-search.scale-1.text-hover-mail-color#search
         .activity-tabs > ul
-            li(id='filter-menu-content' name='filter-menu-content' class = '') 内容
-            li(id='filter-menu-topic' name='filter-menu-topic' class = '') 话题
-            li(id='filter-menu-expert' name='filter-menu-expert' class = '') 专家
+            li(id='filter-menu-content' name='filter-menu-content' class = '') > string('content')
+            li(id='filter-menu-topic' name='filter-menu-topic' class = '') > string('topic')
+            li(id='filter-menu-expert' name='filter-menu-expert' class = '') > string('expert')
 
 view('main') 
     div(data-dynamic-key=state.menu)

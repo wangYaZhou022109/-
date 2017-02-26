@@ -27,8 +27,10 @@ exports.events = {
 
 exports.handlers = {
     showMenu: function(menu) {
-        var state = this.bindings.state;
+        var state = this.bindings.state,
+            id = this.bindings.state.data.id;
         state.data = {};
+        state.data.id = id;
         state.data.menu = menu || 'expertsanswer';
         state.data[menu] = true;
         state.changed();

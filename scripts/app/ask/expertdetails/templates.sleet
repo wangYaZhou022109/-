@@ -1,16 +1,17 @@
 #!handlebars
 
 module > .activity-page
-    .activity-banner(data-region='banner')
     .activity-list
         .container
             .main-list(style='height:3000px;')
                 .activity-category
+                    .activity-banner(data-region='banner')
                     .pull-left(style='height:100px;width:70%;' data-region='list')
                     .pull-right
                         .content
                             div(data-region='top')
-
+                            div(data-region='relevantexperts')
+                            div(data-region='relatedquestions')
 view('banner')
     .bg-img > .container > .activitys-ul.banner
         ul
@@ -26,6 +27,10 @@ view('list')
     div(data-dynamic-key=state.menu)
 view('top')
     table.table
-        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
-        tr > td(align='center') > .btn.radius(id='article-article' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')
+        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('我要关注')
 
+view('relevantexperts')
+    div(data-dynamic-key=relevantexperts.menu)
+
+view('relatedquestions')
+    div(data-dynamic-key=relatedquestions.menu)
