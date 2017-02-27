@@ -7,17 +7,21 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click mydetail-*': 'toggleMore'
+    'click dynamic-*': 'toggleMore'
 };
 
 exports.handlers = {
     dynamic: function() {
     },
     toggleMore: function(id, e, target) {
-        var region;
+        var region,
+            data;
         var el = $(target).parents('.activity-category')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/mymanage/topicdetail/news/mydetail', { id: id });
+        if (id.indexOf(',') !== -1) {
+            data = id.split(',');
+            region.show('ask/mymanage/topicdetail/news/mydetail', { id: data[1] });
+        }
     }
 };
 

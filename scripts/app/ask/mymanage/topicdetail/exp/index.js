@@ -1,11 +1,12 @@
 
+
 exports.items = {
     list: 'list'
 };
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/news' }
+        trends: { url: '../ask-bar/trends/exp-sharing' }
     },
     callbacks: {
         init: function(payload) {
