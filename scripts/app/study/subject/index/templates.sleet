@@ -1,53 +1,34 @@
 #!handlebars
 
 module > .course-page.study-subject-page
-    .top.top-bg-img.bg-main-color(data-region='top')
     .main > .container > .study-subject-list(data-region='list')
-
-
-view('top')
-    .container.clearfix > .search-bar.block
-        form.vertical
-            input.input(id='searchContent' name='name' placeholder=string('search.subject.placeholder'))
-            i.iconfont.icon-search.scale-1.text-hover-main-color#searchByName
 
 view('list')
     .main-list
         .filter
-            .item.inline-block#order-0
-                string('the.latest')
-                compare(search.orderBy 'eq' '0')
-                    compare(search.order 'eq' 2)
-                        i.iconfont.icon-arrow-down.down
-                    compare(search.order 'eq' 1)
-                        i.iconfont.icon-arrow-up.up
-            .item.inline-block#order-2
-                string('the.high.praise')
-                compare(search.orderBy 'eq' '2')
-                    compare(search.order 'eq' 2)
-                        i.iconfont.icon-arrow-down.down
-                    compare(search.order 'eq' 1)
-                        i.iconfont.icon-arrow-up.up
-            .item.inline-block#order-1
-                string('the.hottest')
-                compare(search.orderBy 'eq' '1')
-                    compare(search.order 'eq' 2)
-                        i.iconfont.icon-arrow-down
-                    compare(search.order 'eq' 1)
-                        i.iconfont.icon-arrow-up.up
+            .pull-left
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+
+            .pull-right
+                .item#sort-0 > span 最新
+                .item#sort-1 > span 最热
+                .item#sort-2 > span 好评
         ul > each(subjects)
             li > .content > a.normal(href='#/study/subject/detail/'+id)
                 .img > .img-cont > img(src=imageUrl width='380' height='200')
                 .clearfix
                     .pull-right.small-font.layout-ml
-                        i.iconfont.icon-user
+                        i.iconfont.icon-view(title='浏览')
                         span.m-let > echo(studyMemberCount) > string('study.member.count')
                     .title.text-overflow > echo(name)
-                .clearfix.small-font
-                    .pull-right > date(beginDate)
-                        echo('~')
-                        date(endDate)
-                    string('begin-end-time')
+                .small-font.sub-text.text-overflow 简介简介简介简介简介简介简介简介简介简介简介简介简介简介
                 .detail-wrapper
                     p > echo(name)
                     setting('study.subject.study_days') ：

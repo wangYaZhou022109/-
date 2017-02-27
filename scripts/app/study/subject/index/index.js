@@ -1,6 +1,5 @@
 var D = require('drizzlejs');
 exports.items = {
-    top: 'top',
     list: 'list'
 };
 

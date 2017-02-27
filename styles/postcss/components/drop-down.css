@@ -28,6 +28,14 @@
             padding: 1em;
             background: white;
             box-shadow: 0 2px 5px rgba(0,0,0,.1);
+            border: 1px solid var(--border-color);
+        }
+
+        & li {
+            padding: 1em 2em;
+            &:hover {
+                color: var(--main-color);
+            }
         }
 
         &:before {
@@ -36,7 +44,6 @@
             border-color:transparent;
             border-bottom-color: var(--border-color);
             position: absolute;
-            content: '';
             left: 1em;
             top: 0;
         }

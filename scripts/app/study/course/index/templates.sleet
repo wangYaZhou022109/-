@@ -1,97 +1,76 @@
 #!handlebars
 
-module > .course-page
-    .top.top-bg-img.bg-main-color(data-region='top')
+module > .course-page-new
     .main > .container
         .course-catalog
             div(data-region='catalog')
-            div(data-region='catalogs')
         .course-list(data-region='list')
 
-view('top')
-    .container.clearfix
-        .pull-right
-            .search-bar
-                input.input(id='searchContent' placeholder='请输入您要找的课程')
-                i#search.iconfont.icon-search.scale-1.text-hover-main-color
-        .course-tabs > ul
-            li.active(id='item-1') 本公司课程
-            li(id='item-2') 集团课程
-            li(id='item-3') 其他公司课程
-
 view('catalog')
-    .title-row
-        .pull-right > i#openCatalog.iconfont.icon-full-screen
-        .common-title 课程目录
-    ul > each(menus)
-        li.text-hover-main-color(id='catalog-item-'+id)
-            .item-parent
-                .pull-right > i.iconfont.icon-arrow-up.up + i.iconfont.icon-arrow-down.down
-                .text(title=name) > echo(name)
-            ul.item-child > each(children)
-                li(class='custom-color-2' id='sub-item-'+id) > .text(title=name) > echo(name)
+    ul.list.bg-highlight.border.around
+        li.active
+            .course-menu 全部
 
-view('catalogs')
-    .catalog-view('hidden') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active 本公司课程目录全览
-            h3 集团课程目录全揽
-        each(categories)
-            .catalog-view-list
-                h4 > echo(name)
-                .clearfix > each(children)
-                    .level-second.pull-left > echo(name)
-                    .Level-three
-                        .clearfix > each(children)
-                            .Level-three-list
-                                h5 > echo(name)
-                                .level-four > each(children)
-                                    .h6 > echo(name)
+        li
+            .course-menu 管理
+
+        li
+            .course-menu 技术
+
+        li
+            .course-menu 业务
+
+        li
+            .course-menu 综合
+    .course-menu-child
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+        .item 无线
+
 
 view('list')
     .main-list
         .filter
             .pull-left
-                .item
-                    .drop-down-wrapper
-                        .drop-down-btn
-                            | 三级导航
-                            i.iconfont.icon-arrow-down
-                        .drop-down-content > .content
-                            ul
-                                each(state.categories3)
-                                    li(id='three-item'+id) > echo(name)
-                .item
-                    .drop-down-wrapper
-                        .drop-down-btn
-                            | 四级导航
-                            i.iconfont.icon-arrow-down
-                        .drop-down-content > .content
-                            ul
-                                each(state.categories4)
-                                    li(id='four-item'+id) > echo(name)
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+                .item > span 标签一
+
             .pull-right
-                .item#sort-0
-                    | 排序：上架时间
-                    i.iconfont.icon-sort-line
-
-                .item#sort-1
-                    | 学习人数
-                    i.iconfont.icon-sort-line
-
-                .item
-                    .drop-down-wrapper.right
-                        .drop-down-btn
-                            | 更多筛选条件
-                            i.iconfont.icon-arrow-down
-                        .drop-down-content > .content
-                            ul
-                                li 更多筛选条件
-                                li 更多筛选条件
-                                li 更多筛选条件
-                                li 更多筛选条件
-                                li 更多筛选条件
+                .item#sort-0 > span 最新
+                .item#sort-1 > span 最热
+                .item#sort-2 > span 好评
+                .item.drop-down-wrapper.right
+                    .drop-down-btn
+                        | 全部
+                        i.iconfont.icon-arrow-down
+                    .drop-down-content > .content
+                        ul
+                            li.active 集团课程
+                            li 本公司课程
+                            li 其它公司课程
         ul
             each(courses)
                 li > a.normal(href='#/study/course/detail/'+id) > .content
@@ -108,8 +87,7 @@ view('list')
                                 a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
                     .text-overflow.title > echo(name)
                     .bottom
-                        .item(title='课时') > i.iconfont.icon-time + echo(courseHour) + | 分钟
-                        .item(title='学习人数') > i.iconfont.icon-user + echo(studyMemberCount) + | 人
-                        .item(title='学分') > i.iconfont.icon-star + echo(credit) + | 分
+                        .item(title='浏览') > i.iconfont.icon-view + | 99.9万
+                        .item(title='评分') > i.iconfont.icon-star + | 99
 
         #pager.pagination
