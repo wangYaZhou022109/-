@@ -115,6 +115,8 @@ exports.dataForTemplate = {
                     } else {
                         result = 'detail';
                     }
+                } else if (exam.isShowAnswerImmed !== 1 && exam.examRecord && exam.examRecord.status > 5) {
+                    result = 'detailByOverExam';
                 } else if (exam.examRecord && exam.examRecord.status > 4) {
                     result = 'submitted';
                 } else {
