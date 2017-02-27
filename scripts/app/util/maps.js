@@ -239,6 +239,39 @@ module.exports = {
         18: '十八',
         19: '十九',
         20: '二十'
+    },
+    'trainee-auditStatus': {
+        0: '待审核', 1: '已通过'
+    },
+    'trainee-show-auditStatus': {
+        0: '待审核', 1: '-'
+    },
+    'project-address': {
+        1: '移动学院', 2: '南方基地'
+    },
+    'class-classroom': {
+        0: '暂不分配', 1: '红枫叶温泉酒店', 2: '东方文化'
+    },
+    'class-table-type': {
+        1: '其他', 2: '圆形'
+    },
+    'classinfo-status': {
+        1: '未实施', 2: '实施中', 3: '已实施'
+    },
+    'class-offline-type': {
+        1: '面授', 2: '录像', 3: '直播', 4: '其他'
+    },
+    'class-online-type': {
+        1: '在线课程', 2: '知识'
+    },
+    'class-questionnaire-type': {
+        1: '考试', 2: '调研', 3: '评估', 4: '学员满意度评估', 5: '需求方满意度评估'
+    },
+    'class-file-type': {
+        1: '文档', 2: '压缩文件', 3: '音频', 4: '视频', 5: '电子书'
+    },
+    'lecturer-type': {
+        0: '内部', 1: '外部'
     }
 };
 
