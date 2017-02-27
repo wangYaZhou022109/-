@@ -174,9 +174,10 @@ exports.store = {
             model.set(payload);
             files.clear();
             this.get(model).then(function(data) {
-                files.data = data[0].attachList;
+                var d = data;
+                files.data = d[0].attachList;
                 files.changed();
-                data[0].courseDate = helpers.date(data[0].courseDate) + ' ' + data[0].startTime;
+                d[0].courseDate = helpers.date(d[0].courseDate) + ' ' + d[0].startTime;
             });
         },
         delOfflineCourse: function(payload) {
