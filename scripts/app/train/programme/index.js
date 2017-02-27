@@ -8,7 +8,8 @@ exports.items = {
     configOffline: '',
     configOnline: '',
     editOffline: '',
-    upload: ''
+    upload: '',
+    courseware: ''
 };
 
 exports.store = {
@@ -22,6 +23,8 @@ exports.store = {
         offlineCourse: { url: '../train/offline-course' },
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         file: { url: '../human/file/upload-parse-file' },
+        attachList: { url: '../train/offline-course/findAttach' },
+        courseAttach: { url: '../train/course-attach' },
         delThemeList: { data: [] },
         state: { data: {} },
         files: { data: [] }
@@ -191,24 +194,77 @@ exports.store = {
         },
         uploadFile: function(payload) {
             var img = payload[0],
-                files = this.models.files.data,
-                newFile = {};
+                files = this.models.files.data || [],
+                courseAttach = this.models.courseAttach,
+                newFile = {},
+                state = this.models.state.data,
+                me = this;
             newFile.id = img.attachmentId;
             newFile.attachId = img.attachmentId;
             newFile.attachType = img.contentType;
             newFile.attachName = img.name;
             newFile.extension = img.extension;
-            files.push(newFile);
-            this.models.files.changed();
+            if (state.uploadType) {
+                courseAttach.clear();
+                courseAttach.data.courseId = state.courseId;
+                courseAttach.data.attachId = img.attachmentId;
+                courseAttach.data.attachType = img.contentType;
+                courseAttach.data.attachName = img.name;
+                this.save(courseAttach).then(function(data) {
+                    newFile.id = data[0].id;
+                    files.push(newFile);
+                    me.models.files.changed();
+                });
+            } else {
+                files.push(newFile);
+                this.models.files.changed();
+            }
         },
         delAttach: function(payload) {
             var files = this.models.files.data,
+                state = this.models.state.data,
+                courseAttach = this.models.courseAttach,
                 index;
             index = files.findIndex(function(e) {
                 return e.id === payload.id;
             });
             files.splice(index, 1);
             this.models.files.changed();
+            if (state.delType) {
+                courseAttach.set(payload);
+                this.del(courseAttach);
+            }
+        },
+        showCourseware: function(payload) {
+            var model = this.models.attachList,
+                files = this.models.files,
+                state = this.models.state;
+            model.set(payload);
+            files.clear();
+            state.data.courseId = payload.id;
+            this.get(model).then(function(data) {
+                var d = data;
+                files.data = d[0];
+                files.changed();
+            });
+        },
+        updateAttachName: function(data) {
+            var files = this.models.files.data,
+                state = this.models.state.data,
+                courseAttach = this.models.courseAttach,
+                target,
+                index;
+            index = files.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = files[index];
+            target.attachName = data.attachName;
+            this.models.files.changed();
+            if (state.updateType) {
+                courseAttach.clear();
+                courseAttach.set(data);
+                this.save(courseAttach);
+            }
         }
     }
 };

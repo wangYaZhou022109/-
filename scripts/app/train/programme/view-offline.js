@@ -18,7 +18,8 @@ exports.handlers = {
 
 exports.actions = {
     'click edit-offline-*': 'editOfflineCourse',
-    'click del-offline-*': 'delOfflineCourse'
+    'click del-offline-*': 'delOfflineCourse',
+    'click courseware-*': 'showCourseware'
 };
 
 exports.dataForActions = {
@@ -45,5 +46,8 @@ exports.actionCallbacks = {
     },
     editOfflineCourse: function() {
         this.app.viewport.modal(this.module.items.editOffline);
+    },
+    showCourseware: function() {
+        this.app.viewport.modal(this.module.items.courseware);
     }
 };

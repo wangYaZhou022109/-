@@ -54,14 +54,18 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click chooseFile': 'uploadFile'
+    'click chooseFile': 'uploadFile',
+    'click label-attach-*': 'changeName',
+    'change input-attach-*': 'updateAttachName'
 };
 
 exports.handlers = {
     uploadFile: function() {
         var view = this.module.items.upload,
             offlineCourse = this.bindings.offlineCourse.data,
-            files = this.bindings.files.data;
+            files = this.bindings.files.data,
+            state = this.bindings.state;
+        state.data.uploadType = false;
         if (files.length >= 3) {
             this.app.message.alert('课件最多只能上传3个');
         } else {
@@ -77,6 +81,20 @@ exports.handlers = {
             offlineCourse.teacherType = $(this.$('teacherType')).val();
             this.app.viewport.modal(view);
         }
+    },
+    changeName: function(id) {
+        $(this.$('input-attach-' + id)).css('display', 'block');
+        $(this.$('label-attach-' + id)).css('display', 'none');
+    },
+    updateAttachName: function(id) {
+        var state = this.bindings.state.data;
+        var val = $(this.$('input-attach-' + id)).val();
+        state.updateType = false;
+        if (val === '') {
+            this.app.message.alert('附件名称不能为空');
+        } else {
+            this.module.dispatch('updateAttachName', { id: id, attachName: val });
+        }
     }
 };
 
@@ -90,7 +108,8 @@ exports.dataForActions = {
         return this.validate() ? payload : false;
     },
     delAttach: function(payload) {
-        var offlineCourse = this.bindings.offlineCourse.data;
+        var offlineCourse = this.bindings.offlineCourse.data,
+            state = this.bindings.state.data;
         offlineCourse.type = payload.type;
         offlineCourse.name = payload.name;
         offlineCourse.courseDate = payload.courseDate;
@@ -101,6 +120,7 @@ exports.dataForActions = {
         offlineCourse.teacherTitle = payload.teacherTitle;
         offlineCourse.teacherPhone = payload.teacherPhone;
         offlineCourse.teacherType = payload.teacherType;
+        state.delType = false;
         return payload;
     }
 };

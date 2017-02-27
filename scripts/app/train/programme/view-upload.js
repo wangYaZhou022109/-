@@ -31,8 +31,7 @@ exports.changeFile = function() {
         return {
             contentType: v.contentType,
             attachmentId: v.id,
-            name: v.filename,
-            extension: v.extension
+            name: v.filename
         };
     });
     this.module.dispatch('uploadFile', items);

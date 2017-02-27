@@ -24,7 +24,7 @@ view('offline')
                                 option(value='2') > echo('第二周')
                                 option(value='3') > echo('第三周')
                         .col-sm-8(style='text-align:right;')
-                            a.btn(id='theme-offline' + state.classId) 配置周天数
+                            a.btn#theme-offline 配置周主题
                             a.btn#addOfflineCourse 添加课程
                             a.btn#importOffline 导入课程
                             a > echo('最小化')
@@ -113,7 +113,24 @@ view('questionnaire')
                         a(id='del-qnr-'+id data-name='id' data-value=id) 删除
 
 view('configOffline')
-    
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 配置主题
+                    .col-sm-2(style='text-align:right;')
+                        a.btn#saveOfflineTheme 保存
+            thead > tr
+                th 序号
+                th 周次
+                th(width='50%') 主题名称
+            tbody > each(themeOfflineList) > tr
+                td > echo(i)
+                td > echo('第' + i + '周')
+                td
+                    label(id='label-theme-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+                    input(id='input-theme-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
 
 view('configOnline') > form.vertical
     .list.m-top
@@ -197,12 +214,36 @@ view('editOffline') > form.vertical
                 th 操作
             tbody > each(files) > tr
                 td > echo(i)
-                td > echo(attachName)
+                td
+                    label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachName + '(点击可修改)')
+                    input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
                 td > map('class-file-type' fileType)
                 td
-                    a(id='view-attach-'+id data-name='id' data-value=id) 预览
                     a(id='del-attach-'+id data-name='id' data-value=id) 删除
 
 view('upload')
     .row
         #uploader
+
+view('courseware')
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 课件(最多上传3个)
+                    .col-sm-2(style='text-align:right;')
+                        a.btn#uploadFile 选择
+            thead > tr
+                th 序号
+                th(width='50%') 课件名称
+                th 类型
+                th 操作
+            tbody > each(files) > tr
+                td > echo(i)
+                td
+                    label(id='label-courseware-' + id data-name='id' data-value=id) > echo(attachName + '(点击可修改)')
+                    input(id='input-courseware-' + id value=attachName style='display:none;' data-name='id' data-value=id)
+                td > map('class-file-type' fileType)
+                td
+                    a(id='del-courseware-'+id data-name='id' data-value=id) 删除
