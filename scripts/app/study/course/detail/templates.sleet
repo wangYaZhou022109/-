@@ -43,9 +43,7 @@ view('player-title')
                             .item(id='star-10' title='5星') > i.iconfont.icon-star-full
                         .block.btn#submit-score 提交评分
         .text-right.share-bar
-            .item
-                i.iconfont.icon-share
-                span 分享
+            #share
             if(collect.id)
                 .item#cancel-collect(data-name='id' data-value=collect.id)
                     i.iconfont.icon-favorite-full
