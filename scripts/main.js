@@ -5,9 +5,9 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 111,
+    clientId: 66,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.3.181'
+    returnTo: 'http://192.168.1.10'
 };
 // @endif
 
