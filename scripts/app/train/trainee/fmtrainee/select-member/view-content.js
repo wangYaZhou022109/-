@@ -1,4 +1,4 @@
-var _ = require('lodash/Array');
+var _ = require('lodash/collection');
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'members' }
