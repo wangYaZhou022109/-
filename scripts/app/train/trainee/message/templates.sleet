@@ -1,0 +1,9 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    echo('发送短信发送短信发送短信发送短信发送短信发送短信')
+    

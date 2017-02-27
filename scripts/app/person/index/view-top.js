@@ -3,7 +3,9 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click identity-*': 'showIdentity'
+    'click identity-*': 'showIdentity',
+    'click demand-side': 'showProjects',
+    'click class-staff': 'showClassinfos'
 };
 
 exports.handlers = {
@@ -13,5 +15,13 @@ exports.handlers = {
         state.data.menu = menu;
         state.data[menu] = true;
         state.changed();
+    },
+    showProjects: function() {
+        var model = this.module.items['person/index/projects'];
+        this.app.viewport.modal(model);
+    },
+    showClassinfos: function() {
+        var model = this.module.items['person/index/classinfos'];
+        this.app.viewport.modal(model);
     }
 };
