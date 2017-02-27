@@ -11,6 +11,25 @@ exports.events = {
     'click star-*': 'star'
 };
 
+exports.components = [function() { // 分享组件
+    var data = {},
+        course = this.bindings.course.data;
+    if (course) {
+        data.id = course.id;
+        data.type = '1';
+        data.pics = 'images/default-cover/default_course.jpg';
+        data.title = '经济学人的动态图表与交互设计';
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
+}];
+
 exports.handlers = {
     star: function(star, e, target) {
         var score = this.bindings.score;

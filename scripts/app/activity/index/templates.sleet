@@ -46,7 +46,6 @@ view('filter')
                 li 正在进行
                 li 即将开始
                 li 往期回顾
-
 view('list')
     .container > .main-list
         .h3.m-bottom MOOC

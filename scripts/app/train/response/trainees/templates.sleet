@@ -1,0 +1,44 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='search')
+        .div(data-region='main')
+
+view('search') > form.vertical
+    echo('班级成员')
+    br
+    echo('姓名')
+    input.input(name='memberFullName')
+    echo('单位')
+    input.input(name='organizationId')
+    echo('状态')
+    select.input#auditStatus(name='auditStatus' x-marker='selectize' style='width:100px; display:inline;')
+        each(auditStatus)
+            option(value=key) > echo(value)
+    btn.btn#search > echo('查询')
+
+view('main')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('账号')
+            th > echo('机构')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+            th > echo('邮箱')
+            th > echo('状态')
+        tbody > each(trainees) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+            td > echo(email)
+            td > map('trainee-show-auditStatus' auditStatus)
+            else
+                tr > td(colspan='9') > p.text-center > echo('没有数据')
