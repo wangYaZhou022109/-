@@ -1,7 +1,9 @@
 exports.items = {
     top: 'top',
     menu: 'menu',
-    main: 'main'
+    main: 'main',
+    'person/index/projects': { isModule: true },
+    'person/index/classinfos': { isModule: true }
 };
 exports.store = {
     models: {

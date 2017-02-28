@@ -1,0 +1,21 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .inline-block
+        .star-wrapper.drop-down-wrapper
+            .inline-block.sub-text
+                .item
+                i.iconfont.icon-share
+                span 分享
+            .drop-down-content > .content
+                a#shareTo-qzone > i.iconfont.icon-share
+                span Q
+                a#shareTo-weibo > i.iconfont.icon-share
+                span 微
+                a#shareTo-bar > i.iconfont.icon-share
+                span 问
+
+view('bar')
