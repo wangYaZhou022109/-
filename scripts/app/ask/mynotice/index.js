@@ -1,13 +1,10 @@
 exports.items = {
-    filter: 'filter',
-    main: 'main'
+    menu: 'menu',
+    list: 'list'
 };
 
 exports.store = {
     models: {
-        params: {
-            data: { isOverdue: '1' }
-        },
         state: { data: { menu: 'content' } }
     },
     callbacks: {
@@ -15,7 +12,6 @@ exports.store = {
         }
     }
 };
-
 
 exports.afterRender = function() {
     return this.dispatch('init');

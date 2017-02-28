@@ -1,0 +1,20 @@
+#!handlebars
+module > .course-page
+    div(data-region='audit' style='height:100%;')
+
+view('audit') > form.vertical
+    echo('提问审核')
+    echo(audit.question.title)
+    br
+    echo(audit.question.content)
+    br
+    echo(audit.member.fullName)
+    br
+    echo('提问时间：')
+    date(audit.createTime)
+    br
+    echo('关联话题')
+    echo(audit.topicStr)
+    input.input(name='id' type='hidden' value=audit.id)
+    echo('审核备注:')
+    echo(audit.auditNote)

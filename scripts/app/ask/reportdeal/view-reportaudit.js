@@ -1,0 +1,4 @@
+
+exports.bindings = {
+    reportaudit: true
+};
