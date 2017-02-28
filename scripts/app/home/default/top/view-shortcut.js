@@ -5,7 +5,8 @@ exports.events = {
     'click logout': 'doLogout',
     'click register': 'toRegister',
     'click menu-*': 'taggleMenus',
-    'click theme-*': 'changeTheme'
+    'click theme-*': 'changeTheme',
+    'click search': 'showSearchMore'
 };
 
 exports.handlers = {
@@ -26,5 +27,8 @@ exports.handlers = {
     changeTheme: function(id) {
         document.querySelector('html').className = id;
         $(this.$('theme-' + id)).addClass('active').siblings().removeClass('active');
+    },
+    showSearchMore: function() {
+        $(this.$('searchMore')).addClass('show');
     }
 };

@@ -1,10 +1,8 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs');
 exports.items = {
-    top: 'top',
     catalog: 'catalog',
-    catalogs: 'catalogs',
-    list: 'list',
+    list: 'list'
 };
 exports.store = {
     models: {

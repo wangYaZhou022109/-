@@ -4,7 +4,7 @@ exports.routes = {
 };
 
 exports.showHome = function() {
-    return this.app.show('content', 'home/default');
+    return this.app.show('content', 'home/layout');
 };
 
 exports.showShare = function(id, type) {
