@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    bar: 'bar'
 };
 
 exports.store = {
