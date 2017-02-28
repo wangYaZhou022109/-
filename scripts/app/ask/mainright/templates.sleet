@@ -1,0 +1,9 @@
+#!handlebars
+module 
+    .content
+        div(data-region='top')
+
+view('top')
+    table.table
+        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
+        tr > td(align='center') > .btn.radius(id='article-article' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')

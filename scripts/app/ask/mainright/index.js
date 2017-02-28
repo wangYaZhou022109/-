@@ -1,6 +1,5 @@
 exports.items = {
-    left: 'left',
-    right: 'right'
+    top: 'top'
 };
 
 exports.store = {
