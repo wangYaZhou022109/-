@@ -1,0 +1,165 @@
+#!handlebars
+
+module > .live-details-page
+    .live-details-banner(data-region='banner')
+    .page-main-wrapper
+        .side(data-region='side')
+        .main(data-region='main')
+
+view('banner')
+    .banner.page-main-wrapper > img(src='images/ke.png')
+
+view('side')
+    .page-side > .container
+        section.section.relevant-topic
+            .h3 直播资源
+            .layout-mt-small
+                .block.layout-mt-small
+                    .pull-right
+                        a 参与考试
+                    .text-overflow > | 动画让你的PPT飞起来
+                .block.layout-mt-small
+                    .pull-right
+                        a 参与调研
+                    .text-overflow > | 零基础项目管理 新增年会项目管理
+
+        section.section.student
+            .h3 TA们也参加了考试
+            .layout-mt-small.user-picture
+                .grid-row
+                    .col-md-4 > img.block(src='images/1.png')
+                    .col-md-4 > img.block(src='images/2.png')
+                    .col-md-4 > img.block(src='images/3.png')
+                    .col-md-4 > img.block(src='images/4.png')
+                    .col-md-4 > img.block(src='images/4.png')
+                    .col-md-4 > img.block(src='images/3.png')
+                    .col-md-4 > img.block(src='images/2.png')
+                    .col-md-4 > img.block(src='images/1.png')
+                    .col-md-4 > img.block(src='images/2.png')
+
+
+view('main')
+    .live-details-main.page-main > .container
+        section.section
+            .clearfix
+                .pull-left
+                    .common-title.inline-block > | 经济学人的动态图表与交互设计
+                    .inline-block
+                        .star-wrapper.drop-down-wrapper
+                            .star-bar > .star(style='width:'+score.scorePercent+'%')
+                            .inline-block.sub-text > | 暂无评分
+                            .drop-down-content(class = if(score.hasScore 'hide')) > .content
+                                .text-center 我来评分
+                                .star-grade
+                                    .item(id='star-2' title='1星') > i.iconfont.icon-star-full
+                                    .item(id='star-4' title='2星') > i.iconfont.icon-star-full
+                                    .item(id='star-6' title='3星') > i.iconfont.icon-star-full
+                                    .item(id='star-8' title='4星') > i.iconfont.icon-star-full
+                                    .item(id='star-10' title='5星') > i.iconfont.icon-star-full
+                                .block.btn#submit-score 提交评分
+                .inline-block.layout-mr
+                    .inline-block.layout-ml.m-right > i.iconfont.icon-share
+                    .inline-block.m-left > i.iconfont.icon-favorite
+            .clearfix.live-details-teacher
+                .lecturer.clearfix
+                    .user-pic.pull-left > i.iconfont.icon-star-full
+                    .teacher.pull-left
+                        | 讲师：
+                        b 张三
+                        p 张三，中国人最耳熟能详的名字。张三可能真有其人，但更多时候与李四、王五一起指代不特定的某个人，揶揄或者概括常用。
+                .time.clearfix.pull-left
+                    .user-pic.pull-left > i.iconfont.icon-star-full
+                    | 直播时间
+                    p 2017-02-22 12：22
+                .btn.pull-right.m-top 预约
+            .clearfix
+                .btn-white 团队管理
+                .btn-white 团队管理
+                .btn-white 团队管理
+                .btn-white 团队管理
+                .btn-white 团队管理
+                .btn-white 团队管理
+                .btn-white 团队管理
+                .btn-white 团队管理
+
+        section.section
+            .h3 直播回顾
+            .main-list.layout-mt-small
+                ul
+                    li > .content > a.normal(href='#/exam/index/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src='images/1.png')
+                            .detail-wrapper
+                                p > | 这里是名称
+                        .clearfix
+                            .title.text-overflow > | 财报从入门到精通
+                        .clearfix.small-font.sub-title
+                            i.iconfont.icon-star-full
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+                    li > .content > a.normal(href='#/exam/index/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src='images/1.png')
+                            .detail-wrapper
+                                p > | 这里是名称
+                        .clearfix
+                            .title.text-overflow > | 财报从入门到精通
+                        .clearfix.small-font.sub-title
+                            i.iconfont.icon-star-full
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+                    li > .content > a.normal(href='#/exam/index/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src='images/1.png')
+                            .detail-wrapper
+                                p > | 这里是名称
+                        .clearfix
+                            .title.text-overflow > | 财报从入门到精通
+                        .clearfix.small-font.sub-title
+                            i.iconfont.icon-star-full
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+
+        section.section
+            .h3 相关直播
+            .main-list.layout-mt-small
+                ul
+                    li > .content > a.normal(href='#/exam/index/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src='images/1.png')
+                            .detail-wrapper
+                                p > | 这里是名称
+                        .clearfix
+                            .title.text-overflow > | 财报从入门到精通
+                        .clearfix.small-font.sub-title
+                            i.iconfont.icon-star-full
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+                    li > .content > a.normal(href='#/exam/index/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src='images/1.png')
+                            .detail-wrapper
+                                p > | 这里是名称
+                        .clearfix
+                            .title.text-overflow > | 财报从入门到精通
+                        .clearfix.small-font.sub-title
+                            i.iconfont.icon-star-full
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+                    li > .content > a.normal(href='#/exam/index/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src='images/1.png')
+                            .detail-wrapper
+                                p > | 这里是名称
+                        .clearfix
+                            .title.text-overflow > | 财报从入门到精通
+                        .clearfix.small-font.sub-title
+                            i.iconfont.icon-star-full
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1

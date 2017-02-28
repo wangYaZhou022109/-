@@ -17,3 +17,5 @@ view('main')
                 span 微
                 a#shareTo-bar > i.iconfont.icon-share
                 span 问
+
+view('bar')

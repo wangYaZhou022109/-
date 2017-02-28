@@ -11,9 +11,9 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 66,
+    clientId: 13,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.1.10'
+    returnTo: 'http://192.168.9.115'
 };
 // @endif
 
@@ -53,9 +53,6 @@ require('./app/ext/videojs');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/main/modal/modal-region');
-require('./app/ext/flatpickr');
-require('./app/ext/tree');
-require('./app/ext/background-pager');
 
 D.adapt({
     getFormData: function(form) {
@@ -90,7 +87,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'train', 'ask']
+    routers: ['', 'home', 'study', 'activity', 'exam']
 });
 
 D.PageableModel.setDefault({
