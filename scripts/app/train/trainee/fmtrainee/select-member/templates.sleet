@@ -10,25 +10,34 @@ module
         .content-left(data-region='left')
         .content-main(data-region='content')
 
-
 view('toolbox') > form.vertical
+    each(state)
+        echo(fullName+'|')
+    br
     echo('账号')
-    input.input.tags.single-line(name='name')
+    input(name='name')
     echo('姓名')
-    input.input.tags.single-line(name='fullName')
+    input(name='fullName')
     btn.btn#searchMember > echo('搜索')
-    btn.btn#addTrainee > echo('确认')
+
 view('content')
     .list
         table.table
             thead > tr
                 th > echo('选择')
                 th > setting('human.member.name')
-                th(width='200px') > setting('system.all.organization')
+                th > setting('human.member.full-name')
+                #  th > setting('human.member.major-position')
+                #  th(width='200px') > setting('system.all.organization')
+                #  th(width='200px') > setting('system.all.company')
             tbody > each(members) > tr
                 td
-                    input(type='checkbox' id='select_'+id)
+                    input(type='checkbox' id='select_'+id value=id fullName=fullName)('checked')&if(checked)
                     label(for='select_'+id)
                 td > echo(name)
-                td > echo(organization.name)
+                td > echo(fullName)
+                #  td > echo(majoyPosition.name)
+                #  td > echo(organization.name)
+                #  td > echo(organization.companyName)
     #pager.pagination(style='float:none')
+    btn.btn#addTrainee > echo('确认')

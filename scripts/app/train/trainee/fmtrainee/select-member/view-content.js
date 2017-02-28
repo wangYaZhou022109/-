@@ -12,41 +12,51 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click select_*': 'checkMember'
+    'click select_*': 'checkMember',
+    'click addTrainee': 'addTrainee'
 };
 
 exports.handlers = {
     checkMember: function(value, e, ele) {
-        // var member = _.find(this.bindings.members.data,
-        //     function(o) {
-        //         return o.id === value;
-        //     });
         var data = this.bindings.state.data,
-            id = value;
+            id = value,
+            fullName = ele.getAttribute('fullName');
         if (ele.checked) {
-            data.ids.push(id);
+            data.push({ id: id, fullName: fullName });
         } else {
-            _.remove(data.ids, function(n) {
-                return n === id;
+            _.remove(data, function(n) {
+                return n.id === id;
             });
         }
-        // this.module.renderOptions.callback(member, ele.checked);
+        this.bindings.state.changed();
+    },
+    addTrainee: function() {
+        var checkedMembers = this.bindings.state.data;
+        var ids = [];
+        _.forEach(checkedMembers, function(v) {
+            ids.push(v.id);
+        });
+        this.module.renderOptions.callback(ids.join(','));
     }
 };
 
 exports.dataForTemplate = {
     members: function(data) {
-        // var ids = this.module.renderOptions.ids;
-        // console.log(ids);
-        // if (ids) {
-        //     _.map(data.members || [], function(x) {
-        //         var m = x || {};
-        //         if (ids.indexOf(m.id) !== -1) m.checked = true;
-        //     });
-        // }
+        var checkedMembers = this.bindings.state.data;
+        var ids = [];
+        _.forEach(checkedMembers, function(v) {
+            ids.push(v.id);
+        });
+        if (ids) {
+            _.map(data.members || [], function(x) {
+                var m = x || {};
+                if (ids.indexOf(m.id) !== -1) m.checked = true;
+            });
+        }
         return data.members;
     }
 };
+
 exports.searchChange = function() {
     this.module.dispatch('refreshList', this.bindings.search.getQueryParams());
 };

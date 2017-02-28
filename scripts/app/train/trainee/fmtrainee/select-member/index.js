@@ -12,7 +12,7 @@ exports.items = {
 exports.store = {
     models: {
         members: { url: '../human/member', type: 'pageable', root: 'items' },
-        state: { data: { ids: [] } },
+        state: { data: [] },
         search: {
             data: {},
             mixin: { getQueryParams: function() {

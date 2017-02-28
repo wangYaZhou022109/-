@@ -20,7 +20,7 @@ exports.handlers = {
     showMembers: function() {
         var me = this,
             model = me.module.items['train/trainee/fmtrainee/select-member'];
-        me.app.viewport.ground(model, {
+        me.app.viewport.modal(model, {
             callback: function() {
             }
         });

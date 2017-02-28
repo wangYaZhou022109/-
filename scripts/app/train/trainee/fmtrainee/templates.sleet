@@ -84,4 +84,4 @@ view('main')
                             a(id='sort'+id data-name='id' data-value=id) > echo('排序')
                             echo('|')
                             a(id='delete'+id data-name='id' data-value=id) > echo('删除')
-    #pager.pagination
+    #pager.pagination(style='float:none')

@@ -11,8 +11,8 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var state = this.models.state;
-            state.data.tab = 'fmtrainee';
-            state.data.fmtrainee = true;
+            state.data.tab = 'manage';
+            state.data.manage = true;
             state.data.id = payload.id;
             state.changed();
         }

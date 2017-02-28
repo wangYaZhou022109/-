@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    fmtrainees: true
+    trainees: true
 };
 
 exports.actions = {
@@ -12,7 +12,7 @@ exports.dataForActions = {
     search: function() {
         return {
             classId: 3,
-            auditStatus: 1,
+            auditStatus: 0,
             memberName: $(this.$$('[name="memberName"]')).val(),
             memberFullName: $(this.$$('[name="memberFullName"]')).val(),
             organizationName: $(this.$$('[name="organizationName"]')).val()

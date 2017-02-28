@@ -1,5 +1,6 @@
 exports.bindings = {
-    search: true
+    search: true,
+    state: true
 };
 
 exports.actions = {

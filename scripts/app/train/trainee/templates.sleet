@@ -7,6 +7,7 @@ module > .train-class-page
 
 view('tab')
     .container > ul.row.text-center
+        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-manage') 报名管理
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-fmtrainee') 学员
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-classstaff') 班务人员
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-iftrainee') 非正式成员

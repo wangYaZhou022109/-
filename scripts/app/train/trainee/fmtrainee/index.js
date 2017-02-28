@@ -7,13 +7,14 @@ exports.items = {
 exports.store = {
     models: {
         fmtrainees: {
-            url: '../train/trainee/fmtrainees',
+            url: '../train/trainee/trainees',
             type: 'pageable',
             root: 'items'
         },
         agreeFmtrainee: { url: '../train/trainee/updateStatus' },
+        addFmTrainees: { url: '../train/trainee/saveAll' },
         projectInfo: {},
-        state: { data: { classId: 3 } }
+        state: { data: { classId: 3, auditStatus: 1 } }
     },
     callbacks: {
         init: function(payload) {
@@ -38,6 +39,10 @@ exports.store = {
             agreeFmtrainee.set(payload);
             return this.put(agreeFmtrainee);
         }
+        // addTrainee: function(payload) {
+        //     var addFmTrainees = this.models.addFmTrainees;
+        //     addFmTrainees.clear();
+        // }
     }
 };
 
