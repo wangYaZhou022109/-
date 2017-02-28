@@ -1,21 +1,19 @@
 exports.items = {
-    filter: 'filter',
-    main: 'main'
+    list: 'list'
 };
 
 exports.store = {
     models: {
-        params: {
-            data: { isOverdue: '1' }
-        },
-        state: { data: { menu: 'content' } }
+        expert: { url: '../ask-bar/expert/active-expert' }
     },
     callbacks: {
         init: function() {
+            var expert = this.models.expert;
+            expert.set({ id: 1222 });
+            return this.get(expert);
         }
     }
 };
-
 
 exports.afterRender = function() {
     return this.dispatch('init');
