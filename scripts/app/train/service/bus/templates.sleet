@@ -1,0 +1,54 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    div.text-center
+        p.col-sm-2 > echo('班车/订餐信息')
+        .buttons
+            .btn#addBus > echo('添加')
+    table.table
+        thead > tr
+            th > echo('主题')
+            th > echo('发布日期')
+            th > echo('截至日期')
+            th > echo('状态')
+            th > echo('操作')
+        tbody > each(buss) > tr
+            td > echo(name)
+            td > dateTime(startTime)
+            td > dateTime(endTime)
+            td > map('train-bus-state' state)
+            td.operation
+                compare(state 'eq' 0)
+                    a(id='edit'+id data-name='id' data-value=id) > echo('编辑')
+                    echo(' | ')
+                    a(id='publish'+id data-name='id' data-value=id) > echo('发布')
+                compare(state 'eq' 1)
+                    a(id='count'+id data-name='id' data-value=id) > echo('统计')
+                    echo(' | ')
+                    a(id='undo'+id data-name='id' data-value=id) > echo('取消发布')
+    #pager.pagination
+
+view('edit') > form.vertical
+    label(class='required') > echo('统计主题')
+    input.input(name='name'  value=bus.name  x-rule='required')
+    br
+    label(class='required') > echo('开始时间')
+    input.input(name='startTime' value=dateTime(bus.startTime))
+    label(class='required') > echo('结束时间')
+    input.input(name='endTime' value=dateTime(bus.endTime))
+    br
+    table.table
+        tbody > each(themeList) > tr
+        td
+            label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+            input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
+        tr
+            td(colspan=4 style='text-align:center')
+                a.btn#addTheme 添加
+    br
+    a.btn#publishTheme 发布
+    a.btn#saveTheme 保存

@@ -272,6 +272,12 @@ module.exports = {
     },
     'lecturer-type': {
         0: '内部', 1: '外部'
+    },
+    'train-signdetail-state': {
+        1: '正常', 2: '迟到', 3: '未签到', 4: '缺勤'
+    },
+    'train-bus-state': {
+        0: '草稿', 1: '已发布'
     }
 };
 
