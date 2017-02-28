@@ -3,27 +3,78 @@
         & img {
             width: 100%;
         }
-    }
-    
-    & .activity-category {
-        margin-top: var(--large-space);
-        margin-bottom: var(--large-space);
-        height: var(--search-bar-height);
-        line-height: var(--search-bar-height);
 
-        & a {
-            display: inline-block;
-            margin-right: var(--large-space);
-            font-size: var(--font-size);
-            color: var(--font-color);
-            &:hover {
-                color: var(--main-color);
-                text-decoration: none;
+        & .arrow-box {
+            position: relative;
+
+            & .arrow-left {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                height: 78%;
+                width: 2em;
+                text-align: center;
+                z-index: 9;
+                line-height: 20em;
+                cursor: pointer;
+            }
+
+            & .arrow-right {
+                position: absolute;
+                top: 0;
+                right: 3em;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                height: 78%;
+                width: 2em;
+                text-align: center;
+                z-index: 9;
+                line-height: 20em;
+                cursor: pointer;
             }
         }
+    }
 
-        & a.active {
-            color: var(--main-color);
+    & .activity-item-box {
+        & li {
+            margin-bottom: 2em;
+
+            & .activity-item {
+                border: 1px solid var(--border-color);
+                padding: var(--space);
+
+                & .activity-item-icon {
+                    font-size: calc(var(--font-size)*3);
+                    margin-right: var(--space);
+                }
+
+                & a {
+                    margin-bottom:  var(--space);
+                    color: var(--font-color);
+                    display: inline-block;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    & .activity-item-exam {
+        & .activity-item-icon {
+            color: #2a5483;
+        }
+    }
+
+    & .activity-item-class {
+        & .activity-item-icon {
+            color: #3f832a;
+        }
+    }
+
+    & .activity-item-research {
+        & .activity-item-icon {
+            color: #977d27;
         }
     }
 }
