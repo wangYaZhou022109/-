@@ -1,17 +1,13 @@
 exports.items = {
-    left: 'left',
-    right: 'right'
+    main: 'main'
 };
 
 exports.store = {
     models: {
-        leftstate: {},
-        rightstate: {}
+        state: {}
     },
     callbacks: {
         init: function() {
-        },
-        search: function() {
         }
     }
 };

@@ -1,11 +1,11 @@
 exports.type = 'dynamic';
 
 exports.bindings = {
-    state: true
+    leftstate: true
 };
 
 exports.getEntityModuleName = function(key) {
-    var url = this.bindings.state.data.menu;
+    var url = this.bindings.leftstate.data.menu;
     if (typeof key === 'string' && key !== '') {
         url = key;
     }
@@ -13,7 +13,7 @@ exports.getEntityModuleName = function(key) {
 };
 exports.getEntity = function() {
     return {
-        state: this.bindings.state.data
+        state: this.bindings.leftstate.data
     };
 };
 

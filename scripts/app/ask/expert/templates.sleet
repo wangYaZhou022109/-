@@ -5,7 +5,6 @@ module > .course-page
         .container
             .main-list(style='height:3000px;')
                 .activity-category
-                    div(data-region='popup')  
                     .pull-left(style='height:100px;width:70%;' data-region='left')
                     .pull-right(data-region='right')
  
@@ -13,5 +12,5 @@ module > .course-page
 view('left') 
     div(data-dynamic-key='expertgroup')
 
-view('left') 
-    div(data-dynamic-key='mainright')
+view('right') 
+    div(data-dynamic-key='expertright')

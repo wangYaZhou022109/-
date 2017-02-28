@@ -2,61 +2,19 @@
 module > .activity-page
     .activity-list(data-region='list')
 
-view('list') > compare(trends.concernList.length 'gt' 0)
-    div
-        each(trends.trendsList)
-            ul 
-                li(style='font-weight:bold')
-                    compare(thumbnail 'ne' '')
-                        .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
-                    a(id='details-'+ id + ',' + questionId data-name='id' data-value=id + ',' + questionId href='javascript:;') > echo(title) 
-                    .img(style='height:80px;width:80px;float:right;') > img(src=createUser.headPortrait )
-                li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
-                    echo(content) 
-                li
-                    echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
-                li
-                    string('from-topic') + echo(' ：' + relTopic)
-                    a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
-                    string('strip') + string('discuss')
-                    a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
-                    echo('|')
-                    a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
-                    hr
-    else
-        ul
-            li > string('prompt-1') 
-        .step-one
-            .container > .main-list
-                ul > each(trends.topicList)
-                    li
-                        .content
-                            .img
-                                .img-cont
-                                    a.normal > img(src=member.headPortrait alt= string('topic'))
-                                    input(type='checkbox' id='topics-item' + id name='topics' value= id) 
-                            .clearfix
-                                .title.text-overflow > echo(name)
-                            .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
-                ul > li 
-                    .btn.radius.block(id='step-one' data-name='id' data-value='one') > string('next-step')
-        .step-two('hidden')
-            .container > .main-list
-                ul > each(trends.expertList)
-                    li
-                        .content
-                            .img
-                                .img-cont
-                                    a.normal > img(src=member.headPortrait alt=string('expert'))
-                                    input(type='checkbox' id='expert-item' + id name='expert' value=id)
-                            .clearfix
-                                .title.text-overflow > echo(member.fullName)
-                            .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
-                ul 
-                    li
-                        .btn.radius.block(id='step-two' data-name='id' data-value='two') > string('previous-step') 
-                    li
-                        .btn.radius.block(id='end') > string('finish')
+view('list') 
+    .container > .main-list
+        ul > each(trends.expertList)
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src=member.headPortrait alt=string('expert'))
+                            input(type='checkbox' id='expert-item' + id name='expert' value=id)
+                    .clearfix
+                        .title.text-overflow > echo(member.fullName)
+                    .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+
                 
 
     
