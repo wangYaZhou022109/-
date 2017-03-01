@@ -11,8 +11,9 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        agreeFmtrainee: { url: '../train/trainee/updateStatus' },
         addFmTrainees: { url: '../train/trainee/saveAll' },
+        traineeSort: { url: '../train/trainee/updateSort' },
+        fmtrainee: { url: '../train/trainee' },
         projectInfo: {},
         state: { data: { classId: 3, auditStatus: 1 } }
     },
@@ -27,17 +28,17 @@ exports.store = {
             fmtrainees.params = payload;
             return this.get(fmtrainees);
         },
-        agree: function(payload) {
-            var agreeFmtrainee = this.models.agreeFmtrainee;
-            agreeFmtrainee.clear();
-            agreeFmtrainee.set(payload);
-            return this.put(agreeFmtrainee);
+        updateSort: function(payload) {
+            var traineeSort = this.models.traineeSort;
+            traineeSort.clear();
+            traineeSort.params = payload;
+            return this.get(traineeSort);
         },
-        refuse: function(payload) {
-            var agreeFmtrainee = this.models.agreeFmtrainee;
-            agreeFmtrainee.clear();
-            agreeFmtrainee.set(payload);
-            return this.put(agreeFmtrainee);
+        delete: function(payload) {
+            var fmtrainee = this.models.fmtrainee;
+            fmtrainee.clear();
+            fmtrainee.set(payload);
+            return this.del(fmtrainee);
         }
         // addTrainee: function(payload) {
         //     var addFmTrainees = this.models.addFmTrainees;

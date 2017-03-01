@@ -24,7 +24,7 @@ view('main')
         p.col-sm-2 > echo('报名列表')
         .buttons
             .btn#situation > echo('报名情况')
-            .btn#auditAll > echo('审核')
+            .btn#allAudit > echo('审核')
     table.table
         thead > tr
             th > .checkbox.no-margin
@@ -51,7 +51,7 @@ view('main')
             td > echo(member.positionName)
             td > echo(phoneNumber)
             td > map('trainee-show-auditStatus' auditStatus)
-            td > a(id='audit'+id data-name='id' data-value=id) > echo('审核')
+            td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId) > echo('审核')
     #pager.pagination
 
 view('situation')
@@ -66,3 +66,41 @@ view('situation')
                 td > echo(i)
                 td > echo(organizationName)
                 td > echo(signUpNumber) + echo('/') + echo(quantity)
+
+view('audit') > form.vertical
+    input.input(name='id' type='hidden' value=auditTrainee.id)
+    .row
+        .col-sm-3
+            echo('审核结果')
+        .col-sm-9
+            input(type='radio' name='auditStatus' value='1')
+            echo('同意')
+            input(type='radio' name='auditStatus' value='2')
+            echo('拒绝')
+    br
+    .row
+        .col-sm-2
+            label > echo('审核意见')
+        .col-sm-10
+            textarea.input.w-full(name='auditOpinion' x-rule='required' rows='2' placeholder='编辑审核意见')
+    br
+    btn.btn#auditTrainee > echo('确定')
+    
+view('auditAll') > form.vertical
+    input.input(name='id' type='hidden' value=auditAll.ids)
+    .row
+        .col-sm-3
+            echo('审核结果')
+        .col-sm-9
+            input(type='radio' name='auditStatus' value='1')
+            echo('同意')
+            input(type='radio' name='auditStatus' value='2')
+            echo('拒绝')
+    br
+    .row
+        .col-sm-2
+            label > echo('审核意见')
+        .col-sm-10
+            textarea.input.w-full(name='auditOpinion' x-rule='required' rows='2' placeholder='编辑审核意见')
+    br
+    btn.btn#auditAllTrainees > echo('确定')

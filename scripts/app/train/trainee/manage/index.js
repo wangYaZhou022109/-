@@ -1,7 +1,9 @@
 exports.items = {
     main: 'main',
     search: 'search',
-    situation: ''
+    situation: '',
+    audit: '',
+    auditAll: ''
 };
 
 exports.store = {
@@ -13,7 +15,9 @@ exports.store = {
         },
         projectInfo: {},
         state: { data: { classId: 3, auditStatus: 0 } },
-        situation: { url: '../train/class-quota/situation' }
+        situation: { url: '../train/class-quota/situation' },
+        auditTrainee: { url: '../train/trainee/updateStatus' },
+        auditAll: { url: '../train/trainee/auditAll' }
     },
     callbacks: {
         init: function(payload) {
@@ -32,6 +36,16 @@ exports.store = {
             situation.clear();
             situation.params = { classId: classId };
             return this.get(situation);
+        },
+        auditTrainee: function(payload) {
+            var auditTrainee = this.models.auditTrainee;
+            auditTrainee.set(payload);
+            return this.put(auditTrainee);
+        },
+        auditAllTrainees: function(payload) {
+            var auditAll = this.models.auditAll;
+            auditAll.set(payload);
+            return this.put(auditAll);
         }
     }
 };

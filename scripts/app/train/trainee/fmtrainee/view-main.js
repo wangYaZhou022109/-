@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+var $ = require('jquery');
 
 exports.bindings = {
     fmtrainees: true,
@@ -6,13 +7,14 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click addTrainee': 'showMembers'
+    'click addTrainee': 'showMembers',
+    'click sort*': 'showSortInput',
+    'change input-sort*': 'updateSort'
 };
 
 exports.actions = {
     'click agree*': 'agree',
     'click refuse*': 'refuse',
-    'click sort*': 'sort',
     'click delete*': 'delete'
 };
 
@@ -24,31 +26,50 @@ exports.handlers = {
             callback: function() {
             }
         });
+    },
+    showSortInput: function(id) {
+        $(this.$('input-sort' + id)).css('display', 'block');
+        $(this.$('sort' + id)).css('display', 'none');
+        $(this.$('delete' + id)).css('display', 'none');
+    },
+    updateSort: function(id) {
+        var me = this;
+        var data = {};
+        var val = $(this.$('input-sort' + id)).val();
+        var classId = this.bindings.state.data;
+        if (isNaN(val) || val === '') {
+            this.app.message.alert('请输入正整数！');
+        } else {
+            data.id = id;
+            data.sort = val;
+            me.module.dispatch('updateSort', data).then(function() {
+                $(me.$('input-sort' + id)).css('display', 'none');
+                $(me.$('sort' + id)).css('display', 'inline');
+                $(me.$('delete' + id)).css('display', 'inline');
+                me.module.dispatch('init', classId);
+            });
+        }
     }
 };
 
 exports.dataForActions = {
-    agree: function(payload) {
-        var data = payload;
-        data.auditStatus = 1;
-        return data;
+    delete: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '是否确定删除?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
-    refuse: function(payload) {
-        var data = payload;
-        data.auditStatus = 2;
-        return data;
-    }
 };
 
 exports.actionCallbacks = {
-    agree: function() {
+    delete: function() {
         var classId = this.bindings.state.data;
-        this.app.message.success('审核成功!');
-        this.module.dispatch('init', classId);
-    },
-    refuse: function() {
-        var classId = this.bindings.state.data;
-        this.app.message.success('审核成功!');
+        this.app.message.success('删除成功!');
         this.module.dispatch('init', classId);
     }
 };

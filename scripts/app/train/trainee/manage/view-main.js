@@ -2,7 +2,9 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     trainees: true,
-    state: false
+    state: false,
+    auditTrainee: false,
+    auditAll: false
 };
 
 exports.components = [{
@@ -11,7 +13,9 @@ exports.components = [{
 
 exports.events = {
     'click checkAll': 'checkAll',
-    'click check-item*': 'checkItem'
+    'click check-item*': 'checkItem',
+    'click audit*': 'audit',
+    'click allAudit': 'auditAll'
 };
 
 exports.actions = {
@@ -28,6 +32,32 @@ exports.handlers = {
     checkItem: function() {
         var flag = this.$$('input[name="traineeId"]').length === this.$$('input[name="traineeId"]:checked').length;
         this.$('checkAll').checked = flag;
+    },
+    audit: function(id) {
+        var aa = id,
+            model = this.module.items.audit,
+            auditTrainee = this.bindings.auditTrainee,
+            data = {};
+        data = { id: aa };
+        auditTrainee.data = data;
+        this.app.viewport.modal(model);
+    },
+    auditAll: function() {
+        var data = {};
+        var ids = [];
+        var auditAll = this.bindings.auditAll;
+        this.$$('input[name="traineeId"]:checked').forEach(function(x) {
+            var element = x || {};
+            var id = element.value;
+            ids.push(id);
+        });
+        data.ids = ids.join(',');
+        auditAll.data = data;
+        if (data.ids) {
+            this.app.viewport.modal(this.module.items.auditAll);
+        } else {
+            this.app.message.error('请至少选择一位学员！');
+        }
     }
 };
 
