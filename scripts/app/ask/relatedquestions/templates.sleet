@@ -1,0 +1,15 @@
+#!handlebars
+module 
+    div(data-region='list')
+
+view('list') 
+    table.table 
+        tr > td
+            ul
+                li
+                    string('relevant') + string('question')
+        tr    
+            td > each(expert)
+                ul 
+                    li(style='font-weight:bold')
+                        .img(style='height:120px;width:80px;float:left;' id='expert-' + member.id data-name='id' data-value=member.id  ) > img(src=member.headPortrait)

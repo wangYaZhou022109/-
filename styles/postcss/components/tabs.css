@@ -1,0 +1,20 @@
+.tabs {
+    & ul {
+        @apply --clearfix;
+        background: var(--bg-color);
+        line-height: 2.5;
+    }
+
+    & li {
+        float: left;
+        padding: 0 var(--large-space);
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+            background: var(--bg-color-3);
+            color: var(--main-color);
+        }
+
+    }
+}

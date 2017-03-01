@@ -1,0 +1,4 @@
+exports.bindings = {
+    discussaudit: true
+};
+

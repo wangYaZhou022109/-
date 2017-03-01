@@ -1,0 +1,14 @@
+#!handlebars
+
+module
+    div(data-region='tags')
+
+view('tags')
+    input(name=name value=values type='hidden')
+    .tag-group
+        each(tags)
+            .tag-item
+                span.text > echo(text)
+                span.remove > i.icon-dismiss(id='remove-' + value data-name='tag-view-remove' data-value=value)
+        else
+            .muted > echo(emptyText)
