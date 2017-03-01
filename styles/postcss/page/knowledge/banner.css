@@ -1,0 +1,8 @@
+.knowledge-banner {
+        background: var(--bg-color);
+
+        & .catalog ｛
+            width: 30%;
+            float: left;
+        ｝
+};
