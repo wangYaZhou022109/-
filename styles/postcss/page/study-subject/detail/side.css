@@ -82,6 +82,7 @@
                 margin-right: 0;
             }
         }
+
         & .user-pic {
             float: left;
             width: calc(var(--large-space) * 1.5);
@@ -89,6 +90,7 @@
 
             & img { width: 100%; }
         }
+
         & .user-info {
             float: left;
             padding-left: calc(var(--space) * 2);
