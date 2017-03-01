@@ -1,48 +1,180 @@
 #!handlebars
 
-module > .person-page
+module > .person-page > .container
     .person-top(data-region='top')
-    .person-menu(data-region='menu')
-    .person-content(data-region='main')
+    .person-notice(data-region='notice')
+    .person-content.clearfix
+        .person-menu(data-region='menu')
+        .person-main(data-region='main')
 
 view('top')
-    .container
-        .person-info
-            .head > img(src='images/d4.jpg' title='张紫茵')
-            .info
-                .block.name
-                    .h2.inline-block 张紫茵
-                    .inline-block.grade > img(src='images/medal.png' title='会员')
-                .block.set
-                    .inline-block > a.normal(href='javascript:;')
-                        i.iconfont.icon-edit.m-right + | 反馈
+    .user-pic > img(src='images/1.png')
+    .user-base-info.clearfix
+        .learn-info
+            .item
+                .h2 10小时50分
+                .sub-text 学习时长
+            .item
+                .h2 899
+                .sub-text 积分
+        .base-info
+            .info-row
+                span.h2 陈宗寭
+                span.lv lv3
+            .info-row
+                .item > i.iconfont.icon-warn + span 需求方
+                .item > i.iconfont.icon-mark + span 班务
+                .item > i.iconfont.icon-user-1 + span 讲师
+                .item > i.iconfont.icon-user-2 + span 专家
+                .item > a 编辑资料
+            .info-row
+                .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
 
-                    .inline-block > a.normal(href='javascript:;')
-                        i.iconfont.icon-setting.m-right + | 设置
+view('notice')
+    .news-list.clearfix
+        .pull-left.m-right > i.iconfont.icon-notice
+        b.title 公告：
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-arrow-down#next
+            .icon.arrow.next > .iconfont.icon-arrow-up#pre
+            .icon > .iconfont.icon-more
 
-        .identity
-            a.btn-lecture(href='javascript:;' id='identity-lecture')(class=if(state.lecture 'active'))
-                strong 讲
-                | 师信息
-            a.btn-expert(href='javascript:;' id='identity-expert')(class=if(state.expert 'active'))
-                strong 专
-                | 家信息
-            a(href='#/train/response' target='_parent') > echo('响应中心')
-            a(id='demand-side') > echo('需求方')
-            a(id='class-staff') > echo('班务')
+        ul > inner(news state.currentIndex)
+            li > echo(title)
+
 
 view('menu')
-    .container > ul
-        li > a.normal(href='javascript:;' id='menu-archives')(class=if(state.archives 'active')) 我的档案
-        li > a.normal(href='javascript:;' id='menu-course')(class=if(state.course 'active')) 课程
-        li > a.normal(href='javascript:;' id='menu-subject')(class=if(state.subject 'active')) 专题
-        li > a.normal(href='javascript:;' id='menu-activity')(class=if(state.activity 'active')) 活动
-        li > a.normal(href='javascript:;') 分享
-        li > a.normal(href='javascript:;') 收藏
-        li > a.normal(href='javascript:;') 关注
-        li > a.normal(href='javascript:;') 问答
-        li > a.normal(href='javascript:;') 职业发展
-        li > a.normal(href='javascript:;') 下属
+    ul.par
+        li
+            .menu-text
+                i.iconfont.icon-task
+                span 我的任务
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-type
+                span 我的学习
+            .sub
+                .item 我的课程
+                .item 我的专题
+                .item 我的知识
+                .item 岗位学习
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-tag-1
+                span 我的活动
+            .sub
+                .item 我的mooc
+                .item 我的直播
+                .item 我的考试
+                .item 我的班级
+                .item 我的调研
+        li
+            .menu-text
+                i.iconfont.icon-wen
+                span 我的问吧
+        li
+            .menu-text
+                i.iconfont.icon-favorite
+                span 我的收藏
+        li
+            .menu-text
+                i.iconfont.icon-file
+                span 我的档案
+
 
 view('main')
-    div(data-dynamic-key=state.menu)
+    .bg-highlight.graph-total-bar
+        .top
+            .left.border.around
+                .item 汇总
+                .item 近一周
+                .item 近三个月
+                .item 近一年
+            .right.inline-block
+                select.input.inline-block
+                span.sub-text 至
+                select.input.inline-block
+        .main.clearfix
+            .bar > .cont
+                .title-row.clearfix
+                    .pull-left 学习时长统计
+                    .pull-right 总学习时长：5小时30分
+                .content
+                    | 图表
+            .bar > .cont
+                .title-row.clearfix
+                    .pull-left 积分汇总
+                    a.pull-right 如何获得积分？
+                .content
+                    | 图表
+
+    .tabs > ul
+        li.active 课程
+        li 专题
+        li 班级
+        li 直播
+        li 考试
+        li 调研
+        li 知识
+        li 问道
+        li 证书
+    .table
+        .text-right.m-top
+            a > i.iconfont.icon-export + span 导出
+        table
+            thead
+                tr
+                    th 序号
+                    th 课程名称
+                    th 来源
+                    th 必/选修
+                    th 开始学习时间
+                    th 完成时间
+                    th 累积学习时长
+                    th 学习状态
+                    th 操作
+            tbody
+                tr
+                    td 1
+                    td.nowrap > .text-overflow 课程标题课程标题课程标题课程标题课程标题课程标题课程标题
+                    td 自主学习
+                    td 必修
+                    td 2016-09-09
+                    td -
+                    td 01:30:00
+                    td 已完成
+                    td > a 详情
+                tr
+                    td 1
+                    td.nowrap > .text-overflow 课程标题课程标题课程标题课程标题课程标题课程标题课程标题
+                    td 自主学习
+                    td 必修
+                    td 2016-09-09
+                    td -
+                    td 01:30:00
+                    td 已完成
+                    td > a 详情
+                tr
+                    td 1
+                    td.nowrap > .text-overflow 课程标题课程标题课程标题课程标题课程标题课程标题课程标题
+                    td 自主学习
+                    td 必修
+                    td 2016-09-09
+                    td -
+                    td 01:30:00
+                    td 已完成
+                    td > a 详情
+                tr
+                    td 1
+                    td.nowrap > .text-overflow 课程标题课程标题课程标题课程标题课程标题课程标题课程标题
+                    td 自主学习
+                    td 必修
+                    td 2016-09-09
+                    td -
+                    td 01:30:00
+                    td 已完成
+                    td > a 详情

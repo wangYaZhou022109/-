@@ -62,6 +62,7 @@
     padding: var(--space);
     border-width: 1px;
     border-style: solid;
+    background: white;
 
     &:focus {
         border-color: var(--main-color);

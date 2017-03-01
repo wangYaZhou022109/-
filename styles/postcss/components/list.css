@@ -42,9 +42,13 @@
 
         & li {
             float: left;
-            width: 33.333%;
+            width: 20%;
             padding-right: var(--main-list-gap);
             margin-bottom: calc(var(--main-list-gap) + 1);
+        }
+
+        &.cell-4 li {
+            width: 25%;
         }
 
         & .content {

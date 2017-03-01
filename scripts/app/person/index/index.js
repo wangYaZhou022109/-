@@ -2,6 +2,7 @@ exports.items = {
     top: 'top',
     menu: 'menu',
     main: 'main',
+    notice: 'notice',
     'person/index/projects': { isModule: true },
     'person/index/classinfos': { isModule: true }
 };
