@@ -17,9 +17,6 @@ exports.handlers = {
         this.module.dispatch('search', { menu2: id });
     },
     selectMenu1: function(id) {
-        if (id === 'default') {
-            return this.module.dispatch('search', { menu1: null, menu2: null });
-        }
         return this.chain([
             this.module.dispatch('selectMenu1', { id: id }),
             this.module.dispatch('search', { menu1: id, menu2: null })
@@ -29,9 +26,9 @@ exports.handlers = {
 exports.dataForTemplate = {
     menus: function(data) {
         // 一级导航 二级导航
-        var select1 = data.search.menu1 || 'default';
+        var select1 = data.search.menu1 || '';
         var list = this.bindings.categories.filterPid(null);
-        list.unshift({ name: '全部', id: 'default' });
+        list.unshift({ name: '全部', id: '' });
         list.forEach(function(m) {
             var obj = m || {};
             delete obj.active;
