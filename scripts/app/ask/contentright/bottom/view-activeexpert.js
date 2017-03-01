@@ -1,19 +1,15 @@
 exports.type = 'dynamic';
 
 exports.bindings = {
-    leftstate: true
+    activeexpertstate: true
 };
 
 exports.getEntityModuleName = function(key) {
-    var url = this.bindings.leftstate.data.menu;
-    if (typeof key === 'string' && key !== '') {
-        url = key;
-    }
-    return 'ask/' + url;
+    return 'ask/' + key;
 };
 exports.getEntity = function() {
     return {
-        state: this.bindings.leftstate.data
+        state: this.bindings.activeexpertstate.data
     };
 };
 

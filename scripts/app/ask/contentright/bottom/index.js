@@ -1,12 +1,12 @@
-
 exports.items = {
-    left: 'left',
-    right: 'right'
+    activeexpert: 'activeexpert',
+    hottopic: 'hottopic'
 };
+
 exports.store = {
     models: {
-        leftstate: { },
-        rightstate: { }
+        hottopicstate: {},
+        activeexpertstate: {}
     },
     callbacks: {
         init: function() {
