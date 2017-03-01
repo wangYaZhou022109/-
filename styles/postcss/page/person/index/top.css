@@ -68,14 +68,6 @@
             }
         }
 
-        & .edit-div {
-            white-space: nowrap;
-            height: 2em;
-            line-height: 2;
-            overflow: hidden;
-            max-width: 100%;
-        }
-
     }
 
     & .person-notice {

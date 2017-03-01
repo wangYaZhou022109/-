@@ -1,0 +1,19 @@
+.filter-row {
+    font-size: var(--small-font);
+    background: var(--bg-color);
+    padding: var(--space) 1em;
+
+
+    & .filter-item {
+        display: inline-block;
+        margin-right: 1em;
+    }
+
+    & input,
+    & button,
+    & .btn,
+    & .input {
+        height: 2em;
+        padding: calc(var(--space) / 2) var(--space);
+    }
+}
