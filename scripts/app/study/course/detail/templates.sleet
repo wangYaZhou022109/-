@@ -60,9 +60,9 @@ view('chapter')
     .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right
     .chapter-main
         .course-side-title-row
-            .pull-right > .inline-block
-                .note-btn#note-btn > i.iconfont.icon-note + | 课程笔记
-            .text-overflow > echo(course.name)
+            #  .pull-right > .inline-block
+            #      .note-btn#note-btn > i.iconfont.icon-note + | 课程笔记
+            .text-overflow 目录
         .chapter-list > ul
             each(course.courseChapters)
                 li
@@ -134,10 +134,8 @@ view('info')
                 i#collect.iconfont.icon-favorite
 
     .sub-title-row.layout-mb-small.layout-mt-small
-        .inline-block.layout-mr > echo('课时: ' course.courseHour)
-        .inline-block.layout-mr > echo('学分: ' course.credit)
-        .inline-block.layout-mr 发布人：管理员
-        .inline-block.layout-mr 发布时间：2016-09-09
+        .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrgId)
+        .inline-block.layout-mr > echo('发布时间: ') + date(course.shelveTime)
     p.course-info-detail > echo('描述: ' course.description)
 
 view('comment')

@@ -2,15 +2,15 @@ var _ = require('lodash/collection'),
     D = require('drizzlejs');
 exports.items = {
     player: 'player',
-    'player-title': 'player-title',
+    'player-title': '',
     chapter: 'chapter',
     note: 'note',
     info: 'info',
     comment: 'comment',
     download: 'download',
-    topic: 'topic',
+    topic: '',
     'releated-course': 'releated-course',
-    student: 'student'
+    student: ''
 };
 
 exports.store = {
