@@ -8,56 +8,16 @@ module > .course-page-new
 
 view('catalog')
     ul.list.bg-highlight.border.around
-        li.active
-            .course-menu 全部
-
-        li
-            .course-menu 管理
-
-        li
-            .course-menu 技术
-
-        li
-            .course-menu 业务
-
-        li
-            .course-menu 综合
-    .course-menu-child
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-        .item 无线
-
+        each(menus)
+            li(id='item-1-'+id)(class='active')&if(active) > .course-menu > echo(name)
+    .course-menu-child > each(menu2)
+        .item(id="item-2-"+id)(class = if(active 'active')) > echo(name)
 
 view('list')
     .main-list
         .filter
-            .pull-left
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-
+            .pull-left > each(topics)
+                .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
             .pull-right
                 .item#sort-0 > span 最新
                 .item#sort-1 > span 最热
@@ -87,7 +47,7 @@ view('list')
                                 a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
                     .text-overflow.title > echo(name)
                     .bottom
-                        .item(title='浏览') > i.iconfont.icon-view + | 99.9万
-                        .item(title='评分') > i.iconfont.icon-star + | 99
+                        .item(title='浏览') > i.iconfont.icon-view + echo(visits)
+                        .item(title='评分') > i.iconfont.icon-star + echo(avgScore)
 
         #pager.pagination

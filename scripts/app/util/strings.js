@@ -1,4 +1,5 @@
 var D = require('drizzlejs'),
+    ask = require('../ask/strings'),
     study = require('../study/strings'),
     activity = require('../activity/strings');
 
@@ -21,7 +22,7 @@ var strings = {
     'submit-success': '提交成功'
 };
 
-var ss = D.assign({}, strings, study, activity);
+var ss = D.assign({}, strings, study, activity, ask);
 
 exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');

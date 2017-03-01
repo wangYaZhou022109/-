@@ -1,0 +1,18 @@
+#!handlebars
+module > .course-page
+    div(data-region='discussaudit' style='height:100%;')
+
+view('discussaudit') > form.vertical
+    echo('讨论审核')
+    echo(discussaudit.content)
+    br
+    echo(discussaudit.member.fullName)
+    br
+    echo('讨论时间：')
+    date(discussaudit.createTime)
+    br
+    echo('来自问题：')
+    echo(discussaudit.question.title)
+    input.input(name='id' type='hidden' value=audit.id)
+    echo('审核备注:')
+    echo(audit.auditNote)

@@ -1,3 +1,4 @@
+
 .subject-catalog {
     margin-top: calc(var(--large-space) * 1.5);
     & ul {
@@ -140,5 +141,45 @@
     & .title {
         margin-right: calc(var(--large-space) / 2);
         max-width: 40%;
+    }
+}
+.subject-detail-page {
+    & .banner-info {
+        position: absolute;
+        margin-top: calc(var(--space) * 2);
+        margin-bottom: calc(var(--space) * 2);
+        width: 40%;
+        top: var(--large-space);
+        right: calc(var(--base-gap) * 3);
+        & .h3 {
+            font-size: var(--h2);
+        }
+        & .sub-title {
+            padding: calc(var(--large-space) / 4) calc(var(--large-space) / 2);
+        }
+        & .title-row {
+            margin-bottom: calc(var(--space) * 2);
+        }
+    }
+    & .layout-text,
+    & .small-banner {
+        min-height: calc(var(--large-space) * 4);
+        overflow: hidden;
+    }
+}
+.subject-banner {
+    height: var(--subject-banner-height);
+
+    & img {
+        display: block;
+    }
+
+    & li {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 }
