@@ -178,3 +178,9 @@ view('main')
                     td 01:30:00
                     td 已完成
                     td > a 详情
+    .pagination > ul
+        li.hover-main-color > i.iconfont.icon-arrow-left
+        li.hover-main-color.active.bg-main-color 1
+        li.hover-main-color 2
+        li.hover-main-color 3
+        li.hover-main-color > i.iconfont.icon-arrow-right
