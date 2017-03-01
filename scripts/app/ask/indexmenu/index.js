@@ -5,10 +5,14 @@ exports.items = {
 
 exports.store = {
     models: {
+        follow: { url: '../ask-bar/trends/follow' },
         popupstate: {}
     },
     callbacks: {
         init: function() {
+            var follow = this.models.follow;
+            follow.set({ id: 1 });
+            return this.get(follow);
         }
     }
 };
