@@ -1,11 +1,16 @@
+var $ = require('jquery'),
+    _ = require('lodash/collection');
+
 exports.bindings = {
     offlineCourseList: true,
     state: false,
-    offlineCourse: false
+    offlineCourse: false,
+    offlineThemeList: true
 };
 
 exports.events = {
-    'click addOfflineCourse': 'addOfflineCourse'
+    'click addOfflineCourse': 'addOfflineCourse',
+    'click theme-offline': 'showOfflineTheme'
 };
 
 exports.handlers = {
@@ -13,13 +18,17 @@ exports.handlers = {
         this.bindings.state.data.type = 'add';
         this.bindings.offlineCourse.clear();
         this.app.viewport.modal(this.module.items.editOffline);
+    },
+    showOfflineTheme: function() {
+        this.app.viewport.modal(this.module.items.configOffline);
     }
 };
 
 exports.actions = {
     'click edit-offline-*': 'editOfflineCourse',
     'click del-offline-*': 'delOfflineCourse',
-    'click courseware-*': 'showCourseware'
+    'click courseware-*': 'showCourseware',
+    'change selectOffline': 'searchOffline'
 };
 
 exports.dataForActions = {
@@ -37,17 +46,41 @@ exports.dataForActions = {
                 resolve(false);
             });
         });
+    },
+    searchOffline: function() {
+        var val = $(this.$('selectOffline')).val();
+        return { id: val };
     }
 };
 
 exports.actionCallbacks = {
-    showOnlineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOnline);
-    },
     editOfflineCourse: function() {
         this.app.viewport.modal(this.module.items.editOffline);
     },
     showCourseware: function() {
         this.app.viewport.modal(this.module.items.courseware);
+    }
+};
+
+exports.dataForTemplate = {
+    weeks: function() {
+        var weeks = this.bindings.offlineThemeList,
+            offlineCourseList = this.bindings.offlineCourseList,
+            startDate,
+            endDate;
+        startDate = offlineCourseList.params.startDate;
+        endDate = offlineCourseList.params.endDate;
+        _.map(weeks.data || [], function(data) {
+            var r = data;
+            r.checked = r.startDate === startDate && r.endDate === endDate;
+        });
+        return weeks.data;
+    },
+    isShowWeeks: function() {
+        var weeks = this.bindings.offlineThemeList;
+        if (weeks.data.length > 1) {
+            return true;
+        }
+        return false;
     }
 };

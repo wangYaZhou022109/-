@@ -19,6 +19,7 @@ exports.store = {
         onlineCourseList: { url: '../train/online-course' },
         questionnaireList: { url: '../train/questionnaire' },
         themeList: { url: '../train/theme' },
+        offlineThemeList: { url: '../train/theme/findOfflineTheme' },
         themeModel: { url: '../train/theme' },
         offlineCourse: { url: '../train/offline-course' },
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
@@ -27,7 +28,8 @@ exports.store = {
         courseAttach: { url: '../train/course-attach' },
         delThemeList: { data: [] },
         state: { data: {} },
-        files: { data: [] }
+        files: { data: [] },
+        weeks: { data: {} }
     },
     callbacks: {
         init: function(payload) {
@@ -35,13 +37,24 @@ exports.store = {
                 onlineCourseList = this.models.onlineCourseList,
                 questionnaireList = this.models.questionnaireList,
                 classInfo = this.models.classInfo,
+                offlineThemeList = this.models.offlineThemeList,
                 state = this.models.state,
+                weeks = this.models.weeks,
                 me = this;
             classInfo.set(payload);
             this.get(classInfo).then(function(data) {
+                offlineThemeList.params.classId = data[0].id;
+                me.get(offlineThemeList).then(function(list) {
+                    weeks.data = list[0];
+                    weeks.changed();
+                    if (weeks.data.length > 1) {
+                        offlineCourseList.params.startDate = weeks.data[0].startDate;
+                        offlineCourseList.params.endDate = weeks.data[0].endDate;
+                    }
+                    offlineCourseList.params.classId = data[0].id;
+                    me.get(offlineCourseList);
+                });
                 state.data.classId = data[0].id;
-                offlineCourseList.params.classId = data[0].id;
-                me.get(offlineCourseList);
                 onlineCourseList.params.classId = data[0].id;
                 me.get(onlineCourseList);
                 questionnaireList.params.classId = data[0].id;
@@ -265,6 +278,47 @@ exports.store = {
                 courseAttach.set(data);
                 this.save(courseAttach);
             }
+        },
+        updateOThemeName: function(data) {
+            var weeks = this.models.weeks.data,
+                target,
+                index;
+            index = weeks.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = weeks[index];
+            target.name = data.name;
+            this.models.weeks.changed();
+        },
+        saveOfflineTheme: function() {
+            var weeks = this.models.weeks,
+                state = this.models.state.data,
+                themeModel = this.models.themeModel,
+                me = this;
+            themeModel.clear();
+            D.assign(me.models.themeModel.data, {
+                newThemeList: JSON.stringify(weeks.data),
+                delThemeList: JSON.stringify([]),
+                classId: state.classId,
+                type: 1
+            });
+            return me.save(me.models.themeModel).then(function() {
+                me.models.offlineThemeList.data = weeks.data;
+                me.models.offlineThemeList.changed();
+            });
+        },
+        searchOffline: function(payload) {
+            var weeks = this.models.weeks.data,
+                offlineCourseList = this.models.offlineCourseList,
+                index,
+                target;
+            index = weeks.findIndex(function(e) {
+                return e.id === payload.id;
+            });
+            target = weeks[index];
+            offlineCourseList.params.startDate = target.startDate;
+            offlineCourseList.params.endDate = target.endDate;
+            this.get(offlineCourseList);
         }
     }
 };

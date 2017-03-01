@@ -19,12 +19,13 @@ view('offline')
                     td(colspan=8)
                         .col-sm-4
                             label 线下课程安排
-                            select#selectOffline(name='selectOffline')
-                                option(value='1') > echo('第一周')
-                                option(value='2') > echo('第二周')
-                                option(value='3') > echo('第三周')
+                            if(isShowWeeks)
+                                select#selectOffline(name='selectOffline')
+                                    each(weeks)
+                                        option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
                         .col-sm-8(style='text-align:right;')
-                            a.btn#theme-offline 配置周主题
+                            if(isShowWeeks)
+                                a.btn#theme-offline 配置周主题
                             a.btn#addOfflineCourse 添加课程
                             a.btn#importOffline 导入课程
                             a > echo('最小化')
@@ -125,9 +126,9 @@ view('configOffline')
                 th 序号
                 th 周次
                 th(width='50%') 主题名称
-            tbody > each(themeOfflineList) > tr
+            tbody > each(weeks) > tr
                 td > echo(i)
-                td > echo('第' + i + '周')
+                td > echo(name)
                 td
                     label(id='label-theme-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
                     input(id='input-theme-offline-' + id value=name style='display:none;' data-name='id' data-value=id)

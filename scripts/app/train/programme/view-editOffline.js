@@ -155,3 +155,18 @@ findExtension = function(value) {
     }
     return type;
 };
+
+exports.components = [{
+    id: 'courseDate',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true,
+        noCalendar: true
+    }
+}];
