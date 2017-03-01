@@ -521,7 +521,7 @@ exports.beforeRender = function() {
 
 exports.afterRender = function() {
     var me = this,
-        t = true,
+        t = false,
         examId = this.store.models.exam.data.id,
         getRandom = function() {
             var r = Math.random() * 1,
