@@ -1,60 +1,49 @@
-var $ = require('jquery'),
-    _ = require('lodash/collection');
+// var $ = require('jquery'),
+    // _ = require('lodash/collection');
 
 exports.bindings = {
-    categories: true
+    categories: true,
+    menu2: true,
+    search: true
 };
 
 exports.events = {
-    'click sub-item-*': 'selectMenu',
-    'click catalog-item-*': 'toggleCatalog',
-    'click openCatalog': 'openCatalog',
+    'click item-1-*': 'selectMenu1',
+    'click item-2-*': 'selectMenu2'
 };
 
 exports.handlers = {
-    toggleCatalog: function(id, e, target) {
-        var el = $(target);
-
-        if (el.hasClass('active')) {
-            el.removeClass('active').find('.item-child').slideUp();
-            el.find('.custom-color-2').removeClass('active');
-        } else {
-            el.addClass('active').find('.item-child').slideDown();
-            el.siblings().removeClass('active').find('.item-child').slideUp();
-            el.siblings().find('.custom-color-2').removeClass('active');
-        }
-
-        this.module.dispatch('search', { categoryId: id });
+    selectMenu2: function(id) {
+        this.module.dispatch('search', { menu2: id });
     },
-
-    selectMenu: function(id, e, target) {
-        var el = $(target);
-        e.preventDefault();
-        el.addClass('active').siblings().removeClass('active');
-
+    selectMenu1: function(id) {
         return this.chain([
-            this.module.dispatch('search', { categoryId: id }),
-            this.module.dispatch('selectMenu2', { id: id })
+            this.module.dispatch('selectMenu1', { id: id }),
+            this.module.dispatch('search', { menu1: id, menu2: null })
         ]);
-    },
-
-    openCatalog: function() {
-        this.module.items.catalogs.$$('.catalog-view')[0].hidden = false;
     }
 };
 exports.dataForTemplate = {
-    menus: function() {
+    menus: function(data) {
         // 一级导航 二级导航
-        var categories = this.bindings.categories,
-            root = _.map(categories.filterPid(null));
-        if (root.length) {
-            root = root[0];
-        }
-        return _.map(categories.filterPid(root.id), function(obj) {
-            var d = obj || {};
-            d.children = categories.filterPid(d.id);
-            return d;
+        var select1 = data.search.menu1 || '';
+        var list = this.bindings.categories.filterPid(null);
+        list.unshift({ name: '全部', id: '' });
+        list.forEach(function(m) {
+            var obj = m || {};
+            delete obj.active;
+            if (select1 === obj.id) obj.active = true;
         });
+        return list;
+    },
+    menus2: function(data) {
+        var select2 = data.search.menu2;
+        var list = data.menu2;
+        list.forEach(function(m) {
+            var obj = m || {};
+            delete obj.active;
+            if (select2 === obj.id) obj.active = true;
+        });
+        return list;
     }
 };
-

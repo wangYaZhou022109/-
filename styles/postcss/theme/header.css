@@ -1,0 +1,10 @@
+.header {
+    & .nav {
+        & .item.active,
+        & .item:hover {
+            cursor: pointer;
+            background: var(--fade-bg);
+
+        }
+    }
+}

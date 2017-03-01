@@ -71,16 +71,21 @@ exports.handlers = {
                     fullUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
                     fullUrl += 'title=' + typeName + ' ' + title;
                     fullUrl += '&desc=' + templateContent;
-                    fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share?id=' + id + '&type=' + type);
+                    fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share/' + id + '/' + type);
                     fullUrl += '&pics=' + pic;
                     window.open(fullUrl, '_blank');
                 } else if (templateCode === 'weibo') { // 新浪微博分享
                     fullUrl = 'http://v.t.sina.com.cn/share/share.php?';
                     fullUrl += 'title=' + templateContent + ' ' + typeName + ' ' + title;
-                    fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share?id=' + id + '&type=' + type);
+                    fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share/' + id + '/' + type);
                     fullUrl += '&pic=' + pic;
                     fullUrl += '&appkey=3697029777';
                     window.open(fullUrl, '_blank');
+                } else if (templateCode === 'bar') { // 分享到问吧
+                    // me.app.viewport.modal(me.module.items.bar, {
+                    //    shareObjId: id,
+                    //    shareType: type
+                   // });
                 }
             }
         });

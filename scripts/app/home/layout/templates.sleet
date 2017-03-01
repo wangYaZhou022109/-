@@ -1,0 +1,481 @@
+#!handlebars
+
+module > .home-page.layout
+    .banner > img.block(src='images/course-bg.jpg')
+    .min-banner(data-region='min-banner')
+    .section(data-region='layout-4')
+    .section(data-region='layout-3')
+    .section(data-region='layout-5')
+    .section(data-region='layout-1')
+    .section(data-region='layout-2')
+    .section(data-region='lecture')
+    .section(data-region='rank')
+
+view('min-banner') > .container
+    ul
+        li > img(src='images/1.png')
+        li > img(src='images/1.png')
+        li > img(src='images/1.png')
+        li > img(src='images/1.png')
+        li > img(src='images/1.png')
+
+view('layout-1') > .container
+    .home-title-row
+        .title 集团推荐
+        .more more
+    .layout-1
+        .big-pic > .content
+            .img >  img(src='images/1.png')
+
+        .base-list
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+view('layout-2') > .container
+    .home-title-row
+        .title 新课尝新
+        .more more
+    .layout-2
+        .big-pic > .content
+            .img >  img(src='images/1.png')
+
+        .base-list
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar.big-height
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+view('layout-3') > .container
+    .home-title-row
+        .title 党校系列
+        .more more
+    .layout-3
+        .big-pic > .content
+            .img >  img(src='images/1.png')
+            .bottom
+                .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                .descoration.sub-text.textoverflow 智能化新时代的客户渠道智能化户渠道智能化新时代的客户渠道
+                .sub-text.small-font
+                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
+                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+            .home-tag > .tag > span 直播
+
+
+        .base-list
+            .list-bar.big-width
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
+                        .sub-text.small-font
+                            .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
+                            .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                    .home-tag > .tag > span 班级
+                .item > .content
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
+                        .sub-text.small-font
+                            .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
+                            .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                    .img >  img(src='images/1.png') + .home-tag > .tag > span 调研
+
+
+            .list-bar.big-height
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
+                        .sub-text.small-font
+                            .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
+                            .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                    .home-tag > .tag > span 考试
+
+view('layout-4') > .container
+    .home-title-row
+        .title 精品课程
+        .more more
+    .layout-4
+        .big-pic > .content
+            .item-bar.above
+                .img >  img(src='images/1.png')
+            .item-bar.below
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+        .base-list
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+        .base-list
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+view('layout-5') > .container
+    .home-title-row
+        .title 常规版式
+        .more more
+    .layout-5
+        .base-list
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/1.png')
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+
+view('lecture') > .container
+    .home-title-row
+        .title 讲师榜
+        .more more
+    .lecture-list > ul
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+        li
+            .lecture-pic > img(src='images/1.png')
+            .lecture-info
+                .title 讲师姓名
+                .sub-text 深圳分公司/互联网中心
+                .sub-text 高级讲师
+
+view('rank') > .ranklist-section.container > .bar-list
+    .bar.studend
+        .clearfix
+            .pull-left > .title-icon > .iconfont.icon-star
+            .right-title
+                .home-title-row.horizontail.border
+                    .title 学员榜
+                    .more more
+                .title-more
+                    span.sub-title 阅览人数排行榜
+
+        ul
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon.custom-color-1 > .iconfont.icon-star-full
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon.custom-color-3 > .iconfont.icon-star-full
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon.custom-color-6 > .iconfont.icon-star-full
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    .icon 4
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 5
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 6
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 7
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 8
+                    span 罗会奇
+                    span.sub-text 互联网中心
+            li
+                .pull-right
+                    b 123
+                .cont
+                    i.icon 9
+                    span 罗会奇
+                    span.sub-text 互联网中心
+
+    .bar.question
+        .clearfix
+            .pull-left > .title-icon > .iconfont.icon-question
+            .right-title
+                .home-title-row.horizontail.border
+                    .title 热门问题
+                    .more more
+                .title-more
+                    span.sub-title 浏览人数排行榜
+
+        ul
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+
+
+    .bar.question
+        .clearfix
+            .pull-left > .title-icon > .iconfont.icon-zhishiku
+            .right-title
+                .home-title-row.horizontail.border
+                    .title 热门知识
+                    .more more
+                .title-more
+                    span.sub-title 学员积分排行榜
+
+
+        ul
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+            li
+                .pull-right
+                    b 123
+                .cont.text-overflow
+                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
