@@ -28,7 +28,6 @@ exports.store = {
             var signDetail = this.models.signDetail;
             signDetail.params = payload;
             signDetail.set({ id: payload.id });
-            console.log(signDetail);
             return this.get(signDetail);
         },
         search: function(payload) {

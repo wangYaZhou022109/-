@@ -6,7 +6,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        signDetail: {
+        busDetail: {
             url: '../train/bus-detail/busDetail',
             type: 'pageable',
             root: 'items'
@@ -25,21 +25,20 @@ exports.store = {
             this.get(this.models.export);
         },
         init: function(payload) {
-            var signDetail = this.models.signDetail;
-            signDetail.params = payload;
-            signDetail.set({ id: payload.id });
-            console.log(signDetail);
-            return this.get(signDetail);
+            var busDetail = this.models.busDetail;
+            busDetail.params = payload;
+            busDetail.set({ id: payload.id });
+            return this.get(busDetail);
         },
         search: function(payload) {
-            var signDetail = this.models.signDetail,
+            var busDetail = this.models.busDetail,
                 id = this.models.state.data.id;
-            signDetail.params = payload;
-            signDetail.params.id = id;
-            return this.get(signDetail);
+            busDetail.params = payload;
+            busDetail.params.id = id;
+            return this.get(busDetail);
         },
         refreshList: function(options) {
-            var model = this.models.signDetail;
+            var model = this.models.busDetail;
             model.clear();
             model.params = options;
             this.get(model);

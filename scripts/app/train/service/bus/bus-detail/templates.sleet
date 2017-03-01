@@ -7,32 +7,24 @@ module > .train-class-page
             .div(data-region='main')
 
 view('count')
-    echo('签到名称')
-    echo(sign.name)
-    echo('签到时间')
-    dateTime(sign.startTime) + echo(' 至 ') + dateTime(sign.endTime)
-    echo('迟到时间')
-    dateTime(sign.lateTime)
+    echo('统计名称')
+    echo(busDetail.[0].bus.name)
+    echo('统计时间')
+    dateTime(busDetail.[0].bus.startTime) + echo(' 至 ') + dateTime(busDetail.[0].bus.endTime)
     br
-    echo('应出勤')
-    echo('正常签到')
-    echo('迟到')
-    echo('未签到')
-    echo('请假')
+    echo('当日晚去往地铁')
+    echo('当日晚去往机场')
+    echo('0205晚餐')
+    echo('0206早餐')
 
 view('search') > form.vertical
     div.row.text-center
         div.col-sm-3
-            echo('员工姓名')
-            input.input(name='memberFullName')
-        div.col-sm-3
-            echo('状态')
+            echo('等级信息')
             select#state(name='state')
-                option(value='') > echo('全部')
-                option(value='1') > echo('正常')
-                option(value='2') > echo('迟到')
-                option(value='3') > echo('未签到')
-                option(value='4') > echo('请假')
+                option(value='0') > echo('当日晚去机场')
+                option(value='1') > echo('0206早餐')
+                option(value='2') > echo('不需要用车')
         div.col-sm-3
             btn.btn#search > echo('查询')
 
@@ -42,14 +34,12 @@ view('main')
             a(href=exportUrl ) > .btn > span 导出
     table.table
         thead > tr
-            th > echo('员工编号')
+            th > echo('序号')
             th > echo('员工姓名')
             th > echo('员工电话')
-            th > echo('签到时间')
-            th > echo('状态')
-        tbody > each(signDetail) > tr
-            td > echo(member.name)
+            th > echo('登记信息')
+        tbody > each(busDetail) > tr
+            td > echo(i)
             td > echo(member.fullName)
             td > echo(member.phoneNumber)
-            td > dateTime(signDate)
-            td > map('train-signdetail-state' state)
+            td > echo('')

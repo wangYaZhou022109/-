@@ -18,16 +18,17 @@ exports.store = {
         batchDelete: {
             url: '../train/sign/batchDelete'
         },
+        state: { data: { classId: 3 } }
     },
     callbacks: {
-        init: function() {
+        init: function(payload) {
             var signs = this.models.signs;
+            signs.params = payload;
             return this.get(signs);
         },
         batchDelete: function(payload) {
             var batchDelete = this.models.batchDelete;
             batchDelete.set(payload);
-            console.log(payload);
             return this.put(batchDelete);
         },
         search: function(payload) {
@@ -52,7 +53,6 @@ exports.store = {
         },
         save: function(payload) {
             var sign = this.models.sign;
-            console.log(payload);
             sign.set(payload);
             return this.save(sign);
         },
@@ -60,5 +60,6 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', { id: this.renderOptions.id });
+    var classId = this.store.models.state.data;
+    this.dispatch('init', classId);
 };

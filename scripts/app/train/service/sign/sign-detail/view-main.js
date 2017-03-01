@@ -1,4 +1,5 @@
-// var _ = require('lodash/collection');
+var _ = require('lodash/collection');
+
 exports.type = 'dynamic';
 
 exports.bindings = {
@@ -26,6 +27,18 @@ exports.dataForActions = {
 
 exports.actionCallBacks = {
 
+};
+
+exports.dataForTemplate = {
+    signDetail: function(data) {
+        var signDetail = data.signDetail,
+            pageNum = this.bindings.signDetail.getPageInfo().page;
+        _.map(signDetail || [], function(signdetail, i) {
+            var e = signdetail;
+            e.i = i + 1 + ((pageNum - 1) * 10);
+        });
+        return signDetail;
+    }
 };
 
 // exports.dataForTemplate = {

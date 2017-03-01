@@ -1,6 +1,7 @@
 exports.title = '二维码预览';
 
 exports.bindings = {
+    signs: true,
     sign: true
 };
 

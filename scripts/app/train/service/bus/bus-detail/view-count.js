@@ -1,3 +1,3 @@
 exports.bindings = {
-    signDetail: true,
+    busDetail: true,
 };

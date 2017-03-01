@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    signDetail: true,
+    busDetail: true,
 };
 
 exports.actions = {

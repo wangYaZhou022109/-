@@ -278,6 +278,9 @@ module.exports = {
     },
     'train-bus-state': {
         0: '草稿', 1: '已发布'
+    },
+    'train-sign-state': {
+        0: '未开始', 1: '已开始'
     }
 };
 

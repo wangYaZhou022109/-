@@ -1,15 +1,16 @@
-// var _ = require('lodash/collection');
+var _ = require('lodash/collection');
+
 exports.type = 'dynamic';
 
 exports.bindings = {
-    signDetail: true,
+    busDetail: true,
     export: false,
 };
 
 exports.components = [{
     id: 'pager',
     name: 'background-pager',
-    options: { model: 'signDetail' }
+    options: { model: 'busDetail' }
 }];
 
 exports.events = {
@@ -26,6 +27,18 @@ exports.dataForActions = {
 
 exports.actionCallBacks = {
 
+};
+
+exports.dataForTemplate = {
+    busDetail: function(data) {
+        var busDetail = data.busDetail,
+            pageNum = this.bindings.busDetail.getPageInfo().page;
+        _.map(busDetail || [], function(busDetai, i) {
+            var e = busDetai;
+            e.i = i + 1 + ((pageNum - 1) * 10);
+        });
+        return busDetail;
+    }
 };
 
 // exports.dataForTemplate = {

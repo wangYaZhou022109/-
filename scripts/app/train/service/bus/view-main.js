@@ -1,3 +1,5 @@
+var D = require('drizzlejs');
+var $ = require('jquery');
 exports.bindings = {
     buss: true,
     bus: false,
@@ -8,20 +10,26 @@ exports.components = [{
 }];
 
 exports.events = {
-    'click addBus': 'addBus',
+    'click count*': 'count',
+    'click addBus': 'addBus'
 };
 
 exports.handlers = {
+    count: function(id, e, target) {
+        var region;
+        var el = $(target).parents('.div')[0];
+        var model = this.module.items['train/service/bus/bus-detail'];
+        region = new D.Region(this.app, this.module, el, id);
+        region.show(model, { id: id });
+    },
     addBus: function() {
-        var model = this.module.items.edit;
-        this.bindings.bus.clear();
-        this.app.viewport.modal(model, true);
-    }
+        this.app.viewport.modal(this.module.items.edit);
+    },
 };
 
 exports.actions = {
     'click publish*': 'publish',
-    'click undo*': 'undo'
+    'click undo*': 'undo',
 };
 
 exports.dataForActions = {
@@ -46,7 +54,7 @@ exports.dataForActions = {
                 resolve(false);
             });
         });
-    }
+    },
 };
 
 exports.actionCallBacks = {

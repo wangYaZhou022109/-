@@ -1,23 +1,30 @@
 exports.title = '班车/订餐信息发布';
 
 exports.bindings = {
-    bus: true
+    bus: true,
+    optionList: true,
+    state: false
 };
 
-exports.actions = {
-    'click save': 'save'
+exports.events = {
+    'click addOption': 'addOption',
 };
 
-exports.dataForActions = {
-    save: function(payload) {
-        return this.validate() ? payload : false;
+exports.handlers = {
+    addOption: function() {
     }
 };
 
+exports.actions = {
+    'click saveOption': 'saveOption'
+};
+
+exports.dataForActions = {
+
+};
+
 exports.actionCallbacks = {
-    save: function() {
-        this.app.message.success('保存成功！');
-        // this.module.dispatch('init');
+    saveOption: function() {
         this.app.viewport.closeModal();
     }
 };

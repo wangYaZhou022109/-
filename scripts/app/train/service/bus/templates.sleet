@@ -33,22 +33,15 @@ view('main')
     #pager.pagination
 
 view('edit') > form.vertical
-    label(class='required') > echo('统计主题')
+    label(class='required') > echo('统计名称')
     input.input(name='name'  value=bus.name  x-rule='required')
     br
-    label(class='required') > echo('开始时间')
-    input.input(name='startTime' value=dateTime(bus.startTime))
+    label > echo('开始时间')
+    input.input(name='startTime' value=dateTime(bus.startTime) x-rule='required')
+
     label(class='required') > echo('结束时间')
-    input.input(name='endTime' value=dateTime(bus.endTime))
+    input.input(name='endTime' value=dateTime(bus.endTime) x-rule='required')
     br
-    table.table
-        tbody > each(themeList) > tr
-        td
-            label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
-            input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
-        tr
-            td(colspan=4 style='text-align:center')
-                a.btn#addTheme 添加
+    a.btn#addOption > span > echo('添加')
     br
-    a.btn#publishTheme 发布
-    a.btn#saveTheme 保存
+    a.btn#saveOption > span > echo('保存')
