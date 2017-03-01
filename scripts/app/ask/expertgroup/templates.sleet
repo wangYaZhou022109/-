@@ -3,7 +3,10 @@ module > .activity-page
     .activity-list(data-region='list')
 
 view('list') 
+    ul > li > a(id='menu-alldynamic' href='javascript:;')(class ='active') > string('expert') + string('meta')
+        hr
     .container > .main-list
+        
         ul > each(trends.expertList)
             li
                 .content

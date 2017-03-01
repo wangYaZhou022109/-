@@ -1,27 +1,30 @@
-
 exports.bindings = {
+    popupstate: true
 };
 
-
-exports.actions = {
-    'click release': 'release'
+exports.events = {
+    'click question-*': 'popup',
+    'click article-*': 'popup'
 };
 
-exports.dataForActions = {
-    release: function(payload) {
-        return payload;
+exports.handlers = {
+    question: function(payload) {
+        this.app.viewport.modal(this.module.items['ask/question'], { id: payload });
+    },
+    article: function(payload) {
+        this.app.viewport.modal(this.module.items['ask/article'], { id: payload });
+    },
+    popup: function(menu) {
+        var state = this.bindings.popupstate;
+        state.data = {};
+        state.data.title = '';
+        if (menu === 'question') {
+            state.data.title = '我要提问';
+        } else if (menu === 'article') {
+            state.data.title = '我要分享';
+        }
+        state.data.menu = menu || 'question';
+        state.data[menu] = true;
+        state.changed();
     }
-};
-
-exports.actionCallbacks = {
-    release: function() {
-        this.app.message.success('操作成功！');
-        setTimeout(function() {
-            window.location.reload();
-        }, 1000);
-    }
-};
-
-
-exports.dataForTemplate = {
 };
