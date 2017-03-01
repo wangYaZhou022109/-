@@ -47,7 +47,7 @@ view('list')
                                 a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
                     .text-overflow.title > echo(name)
                     .bottom
-                        .item(title='浏览') > i.iconfont.icon-view + | 99.9万
-                        .item(title='评分') > i.iconfont.icon-star + | 99
+                        .item(title='浏览') > i.iconfont.icon-view + echo(visits)
+                        .item(title='评分') > i.iconfont.icon-star + echo(avgScore)
 
         #pager.pagination

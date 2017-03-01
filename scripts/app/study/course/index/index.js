@@ -45,14 +45,7 @@ exports.store = {
             return this.models.state.changed();
         },
         search: function(payload) {
-            var search = this.models.search,
-                state = this.models.state;
-            if (payload.selected === 'menu1') {
-                state.data.select1 = payload.categoryId;
-            }
-            if (payload.selected === 'menu2') {
-                state.data.select2 = payload.categoryId;
-            }
+            var search = this.models.search;
             D.assign(search.data, payload);
             return search.changed();
         },
