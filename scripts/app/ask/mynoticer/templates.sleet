@@ -1,0 +1,25 @@
+#!handlebars
+module 
+    .content
+        div(data-region='main')
+        div(data-region='popup')
+view('main') 
+    table.table
+        tr > td(align='center' colspan='3') 
+            a(id='follow-9' href='javascript:;')(class ='active') 
+                echo(follow.contentCount)
+                .title.text-overflow > string('follow') + string('content')
+            a(id='follow-10' href='javascript:;')(class ='active') 
+                echo(follow.topicCount)
+                .title.text-overflow > string('follow') + string('topic')
+            a(id='follow-11' href='javascript:;')(class ='active') 
+                echo(follow.expertCount)
+                .title.text-overflow > string('follow') + string('expert')
+
+view('popup')
+    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
+    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:70%;left:25%;') > .catalog-view-box
+        .clearfix.catalog-view-nav
+            i#closeCatalog.pull-right.iconfont.icon-full-screen
+            h3.active.title > string('my-question')
+        div(data-dynamic-key=popupstate.menu)

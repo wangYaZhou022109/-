@@ -24,16 +24,25 @@ module.exports = {
     write: '写',
     answer: '回答',
     sharing: '分享',
+    my: '我的',
     active: '活跃',
     relevant: '相关',
     hot: '热门',
     more: '更多',
+    people: '人',
+    activation: '激活',
+    identity: '身份',
+    iam: '我是',
+    invitation: '邀请',
+    become: '成为',
+    apply: '申请',
     'next-step': '下一步',
     'previous-step': '上一步',
     finish: '完成',
     'prompt-1': '暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！',
     'all-dynamic': '全部动态',
     'related-to-me': '与我相关',
-    'experts-sharing': '专家分享'
+    'experts-sharing': '专家分享',
+    'my-sharing': '我要分享'
 
 };

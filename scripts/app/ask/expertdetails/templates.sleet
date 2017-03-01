@@ -15,7 +15,7 @@ module > .activity-page
 view('banner')
     .bg-img > .container > .activitys-ul.banner
         ul
-            li(style='height:300px;width:2000px;float:left;')
+            li(style='height:300px;width:100%;float:left;')
                 .img(style='height:100px;width:200px;float:left;') > img(src='images/default-cover/default_exam.jpg' )
                 a(href='javascript:;') > echo(expert.member.fullName)
                 div > echo('我擅长的话题:') 

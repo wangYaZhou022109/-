@@ -1,19 +1,18 @@
-
 exports.items = {
-    list: 'list',
+    main: 'main',
     popup: 'popup'
 };
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/related-to-me' },
+        follow: { url: '../ask-bar/trends/follow' },
         popupstate: {}
     },
     callbacks: {
         init: function() {
-            var trends = this.models.trends;
-            trends.set({ id: 1222 });
-            return this.get(trends);
+            var follow = this.models.follow;
+            follow.set({ id: 1 });
+            return this.get(follow);
         }
     }
 };
