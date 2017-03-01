@@ -1,0 +1,16 @@
+#!handlebars
+
+module > .knowledge
+    .knowledge-banner(data-region='banner')
+    .knowledge-main(data-region='main')
+    .knowledge-side(data-region='side')
+
+view('banner')
+    .knowledge-banner > .container
+        | 娃哈哈
+
+view('main')
+    | 娃哈哈
+
+view('side')
+    | 娃哈哈

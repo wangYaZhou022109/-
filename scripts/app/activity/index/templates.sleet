@@ -155,7 +155,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -163,7 +163,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -171,7 +171,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -179,7 +179,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -187,7 +187,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -195,7 +195,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
