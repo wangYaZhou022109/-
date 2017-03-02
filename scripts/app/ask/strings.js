@@ -42,6 +42,7 @@ module.exports = {
     submit: '提交',
     sharing: '分享',
     topic: '话题',
+    'take-part-in': '参与',
     'upload-attachments': '上传附件',
     write: '写',
     identity: '身份',

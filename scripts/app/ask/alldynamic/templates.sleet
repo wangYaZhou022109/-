@@ -17,12 +17,19 @@ view('list')
             li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
                 echo(content) 
             li
-                echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
+                echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)  
             li
-                string('from-topic') + echo(' ：' + relTopic)
+                string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                 a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
                 string('strip') + string('discuss')
+                a(id='discuss-' + id href='javascript:;')(class ='active') > string('take-part-in') + string('discuss')
                 a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
                 echo('|')
                 a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
-                hr
+            li > div(id= id name=id 'hidden')
+                input.input(name='t_content' value='' style='width:65%;')
+                input.input(type='hidden' name='organizationId' value='')
+                input.input(type='hidden' name='id' value=id)
+                .btn(id='release' + id) > echo('发表')
+            hr
+                                                

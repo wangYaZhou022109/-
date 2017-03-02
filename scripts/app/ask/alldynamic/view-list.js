@@ -7,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click dynamic-*': 'toggleMore'
+    'click dynamic-*': 'toggleMore',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
@@ -19,6 +20,14 @@ exports.handlers = {
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
             region.show('ask/myquiz/details', { id: data[1] });
+        }
+    },
+    discuss: function(payload) {
+        var el = this.$(payload);
+        if (el.hidden === false) {
+            el.hidden = true;
+        } else if (el.hidden === true) {
+            el.hidden = false;
         }
     }
 };
