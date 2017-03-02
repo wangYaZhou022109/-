@@ -7,9 +7,9 @@ view('list')
         ul
             li(style='font-weight:bold')
                 compare(thumbnail 'ne' '')
-                    .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
+                    div(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
                 a(id='dynamic-' + id + '_' + questionId data-name='id' data-value=id + '_' + questionId href='javascript:;') > echo(title) 
-                .img(style='height:80px;width:80px;float:right;') 
+                div(style='height:80px;width:80px;float:right;') 
                     compare(thumbnail 'ne' '')
                         img(src='images/default-cover/default_exam.jpg' )
                     else

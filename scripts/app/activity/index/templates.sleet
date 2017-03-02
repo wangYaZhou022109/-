@@ -102,54 +102,25 @@ view('list')
                         | 9.1
         .h3.m-bottom 直播
         ul
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 09-25 14：00
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 09-25 14：00
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 09-25 14：00
+            each(gensees)
+                li
+                    .content
+                        .img
+                            .img-cont
+                                a.normal > img(src=cover)
+                            .detail-wrapper
+                                p
+                                    .btn.radius.block
+                                        div(id='attendLive-'+id) 我要参与
+                        .clearfix
+                            .pull-right.tip-text
+                            .title.text-overflow
+                                echo(subject)
+                        .bottom.sub-text
+                            i.iconfont.icon-favorite
+                                echo(subNumber)
+                            i.iconfont.icon-favorite.m-left
+                                date(startTime)
         .h3.m-bottom 考试
         ul.activity-item-box.activity-item-exam.cell-3
             li
