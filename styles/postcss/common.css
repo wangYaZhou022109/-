@@ -125,6 +125,14 @@ section.section {
     margin-bottom: calc(var(--space) * 2);
 }
 
+.layout-ml-small {
+    margin-left: calc(var(--space) * 2);
+}
+
+.layout-mr-small {
+    margin-right: calc(var(--space) * 2);
+}
+
 .w-full {
     width: 100%;
 }
