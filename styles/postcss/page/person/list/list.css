@@ -1,0 +1,91 @@
+.person-main {
+    & .person-list {
+        @apply --clearfix;
+    }
+    & .filter {
+        @apply --clearfix;
+
+        line-height: 1em;
+        margin-bottom: 1.2em;
+        font-size: var(--small-font);
+        padding: 1em 0;
+        background: var(--bg-color);
+
+        & .m-left {
+            margin-left: var(--large-space);
+        }
+
+        & .item {
+            display: inline-block;
+            padding: 0 var(--space);
+            cursor: pointer;
+
+            &:last-child {
+                border: none;
+            }
+
+            &:hover > span{
+                color: var(--main-color);
+            }
+        }
+        & .item.active {
+            color: var(--main-color);
+        }
+    }
+    & .list-search {
+        @apply --clearfix;
+        & .input {
+            float: left;
+            width: 30%;
+        }
+        & .btn {
+            padding-left: calc(var(--large-space) / 2);
+            padding-right: calc(var(--large-space) / 2);
+        }
+    }
+}
+
+.list-text {
+    @apply --clearfix;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    & li {
+        @apply --clearfix;
+        padding-top: calc(var(--large-space) / 1.5);
+        padding-bottom: calc(var(--large-space) / 1.5);
+        &:hover {
+            background-color: var(--bg-color);
+        }
+    }
+    & .title-row {
+        float: left;
+        width: 50%;
+    }
+    & .title {
+        font-size: var(--font-title);
+    }
+    & .state {
+        float: left;
+        margin-top: calc(var(--space) * 1.5);
+        width: 30%;
+        text-align: right;
+    }
+    & .btn-row {
+        float: left;
+        margin-top: calc(var(--space) / 2);
+        width: 20%;
+        text-align: right;
+    }
+    & .tag {
+        padding: calc(var(--space) / 2.5) calc(var(--space) / 2);
+        color: var(--font-tip-color);
+        font-size: var(--small-font);
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-color);
+    }
+    & .time {
+        margin-top: var(--space);
+        color: var(--font-tip-color);
+    }
+
+}
