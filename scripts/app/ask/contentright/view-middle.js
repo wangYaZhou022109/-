@@ -1,23 +1,19 @@
-
 exports.type = 'dynamic';
 
-exports.events = {
-};
-
-exports.handlers = {
-};
-
-
 exports.bindings = {
-    activeexpertstate: true
+    middlestate: true
 };
 
 exports.getEntityModuleName = function(key) {
-    return 'ask/' + key;
+    var url = this.bindings.middlestate.data.menu;
+    if (typeof key === 'string' && key !== '') {
+        url = key;
+    }
+    return 'ask/' + url;
 };
 exports.getEntity = function() {
     return {
-        state: this.bindings.activeexpertstate.data
+        state: this.bindings.middlestate.data
     };
 };
 

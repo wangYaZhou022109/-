@@ -1,5 +1,7 @@
+var D = require('drizzlejs');
+var $ = require('jquery');
+
 exports.bindings = {
-    state: true,
     popupstate: true,
     follow: true
 };
@@ -10,19 +12,18 @@ exports.events = {
 };
 
 exports.handlers = {
-    showMenu: function(menu) {
-        var state = this.bindings.state;
-        state.data = {};
-        state.data.menu = menu || 'contentleft';
-        state.data[menu] = true;
-        state.changed();
+    showMenu: function(id, e, target) {
+        var region;
+        var el = $(target).parents('.activity-category')[0].children[0];
+        region = new D.Region(this.app, this.module, el);
+        region.show('ask/' + id);
     },
-    follow: function(payload) {
+    follow: function() {
         var state = this.bindings.popupstate;
         state.data = {};
         state.data.title = '我的关注';
         state.data.menu = 'mynotice';
-        state.data[payload] = true;
+        state.data.mynotice = true;
         state.changed();
     }
 };

@@ -1,0 +1,18 @@
+#!handlebars
+module 
+    .content
+        div(data-region='popup')  
+        div(data-region='main')
+
+view('main')
+    table.table
+        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > string('send') + string('question')
+        tr > td(align='center') > .btn.radius(id='article-article' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > string('write') + string('article')
+
+view('popup')
+    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
+    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:10%;left:25%;') > .catalog-view-box
+        .clearfix.catalog-view-nav
+            i#closeCatalog.pull-right.iconfont.icon-full-screen
+            h3.active.title > string('my-question')
+        div(data-dynamic-key=popupstate.menu)
