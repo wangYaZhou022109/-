@@ -34,11 +34,35 @@ exports.handlers = {
 };
 
 exports.actions = {
+    'click end': 'end'
 };
 exports.dataForActions = {
+    end: function(payload) {
+        var data = payload;
+        var topics = [],
+            expert = [];
+        this.$$('input[name="topics"]:checked').forEach(function(x) {
+            var element = x || {};
+            var value = element.value;
+            topics.push(value);
+        });
+        this.$$('input[name="expert"]:checked').forEach(function(x) {
+            var element = x || {};
+            var value = element.value;
+            expert.push(value);
+        });
+        data.id = 1;
+        data.topics = topics.join(',');
+        data.expert = expert.join(',');
+        return data;
+    }
 };
 
 exports.actionCallbacks = {
+    end: function() {
+        this.app.message.success('操作成功！');
+        this.module.dispatch('init');
+    }
 };
 
 exports.dataForTemplate = {

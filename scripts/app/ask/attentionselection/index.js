@@ -5,13 +5,19 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/related-to-me' }
+        trends: { url: '../ask-bar/trends/related-to-me' },
+        concern: { url: '../ask-bar/trends/concern' }
     },
     callbacks: {
         init: function() {
             var trends = this.models.trends;
             trends.set({ id: 1222 });
             return this.get(trends);
+        },
+        end: function(payload) {
+            var concern = this.models.concern;
+            concern.set(payload);
+            return this.post(concern);
         }
     }
 };
