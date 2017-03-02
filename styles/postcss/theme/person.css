@@ -13,3 +13,8 @@
         background: var(--bg-color);
     }
 }
+
+.lecture-top .lv {
+    background: var(--sub-color-1);
+    color: white;
+}

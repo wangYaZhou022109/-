@@ -1,9 +1,3 @@
-// exports.bindings = {
-// };
-
-// exports.dataForTemplate = {
-// };
-
 
 exports.type = 'dynamic';
 
@@ -25,13 +19,17 @@ exports.bindings = {
 
 exports.getEntityModuleName = function(key) {
     var titleDiv = this.module.items.popup.$$('.title')[0],
-        title = this.bindings.popupstate.data.title;
+        title = this.bindings.popupstate.data.title,
+        path = key;
     titleDiv.innerHTML = title;
-    if (key === 'question' || key === 'mynotice' || key === 'article') {
+    if (path === 'mynotice') {
         this.module.items.popup.$$('.shield')[0].hidden = false;
         this.module.items.popup.$$('.catalog-view')[0].hidden = false;
+    } else {
+        path = 'mynotice';
     }
-    return 'ask/' + key;
+
+    return 'ask/' + path;
 };
 exports.getEntity = function() {
     return {

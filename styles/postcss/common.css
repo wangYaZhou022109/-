@@ -187,6 +187,19 @@ section.section {
   position: relative;
 }
 
+.edit-div {
+    white-space: nowrap;
+    height: 2em;
+    line-height: 2;
+    overflow: hidden;
+    max-width: 100%;
+
+    &:focus {
+        outline: none;
+        border: none;
+    }
+}
+
 /* text */
 .text-overflow {
     @apply --text-overflow;
