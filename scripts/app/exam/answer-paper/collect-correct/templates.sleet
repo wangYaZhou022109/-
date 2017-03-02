@@ -14,7 +14,9 @@ view('main')
         #      i.iconfont.icon-favorite
         #      span.m-left 我要收藏
         .item(id='correct-' + state.id)
-            i.iconfont.icon-favorite
+            i.iconfont.icon-favorite.active
+            span.m-left > a 待检查
+            i.iconfont.icon-favorite.layout-ml-small
             span.m-left > a 错误提报
 
 view('correct')

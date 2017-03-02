@@ -1,0 +1,43 @@
+#!handlebars
+
+module > .knowledge
+    .knowledge-banner(data-region='banner')
+    .knowledge-main(data-region='main')
+    .knowledge-side(data-region='side')
+
+view('banner')
+    .knowledge-banner > .container
+        .catalog > ul
+            li
+                h3 管理
+                a 领导力发展
+                a 人力资源
+                a 财务审计
+                a 战略规划
+                a 法律事物
+                a 采购物流
+            li
+                h3 管理
+                a 领导力发展
+                a 人力资源
+                a 财务审计
+                a 战略规划
+                a 法律事物
+                a 采购物流
+            li
+                h3 管理
+                a 领导力发展
+                a 人力资源
+                a 财务审计
+                a 战略规划
+                a 法律事物
+                a 采购物流
+
+        .banner-img
+        .banner-right
+
+view('main')
+    | 娃哈哈
+
+view('side')
+    | 娃哈哈

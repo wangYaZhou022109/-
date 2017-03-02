@@ -86,7 +86,7 @@ exports.store = {
                     this.data = D.assign({}, {
                         name: exam.name,
                         id: exam.id,
-                        isOnePageOneQuestion: exam.paperShowRule === 1,
+                        isOnePageOneQuestion: false,
                         mode: payload.mode || 1,
                         noAnswerNum: exam.paper.questionNum || 0,
                         answeredNum: 0,
@@ -521,7 +521,7 @@ exports.beforeRender = function() {
 
 exports.afterRender = function() {
     var me = this,
-        t = true,
+        t = false,
         examId = this.store.models.exam.data.id,
         getRandom = function() {
             var r = Math.random() * 1,
