@@ -1,82 +1,15 @@
 #!handlebars
-
 module > .course-page
     .activity-list
         .container
             .main-list(style='height:3000px;')
                 .activity-category
-                    div(data-region='popup')  
                     .pull-left(style='height:100px;width:70%;' data-region='left')
-                    .pull-right
-                        .content
-                            div(data-region='top')
-                            div(data-region='middle')
-                            div(data-region='hottopic')
-                            div(data-region='bottom')
+                    .pull-right(data-region='right')
+ 
 
 view('left') 
-    div(data-dynamic-key=state.menu)
+    div(data-dynamic-key='contentleft')
 
-view('top')
-    table.table
-        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('发问题')
-        tr > td(align='center') > .btn.radius(id='article-article' data-name='id' data-value='2' style='height:50px;width:300px;text-align:center') > echo('写文章')
-
-view('popup')
-    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
-    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:10%;left:25%;') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active.title > string('my-question')
-        div(data-dynamic-key=popupstate.menu)
-
-view('middle') 
-    table.table
-        tr > td(align='center' colspan='3') 
-            a(id='follow-9' href='javascript:;')(class ='active') 
-                echo(follow.contentCount)
-                .title.text-overflow > string('follow') + string('content')
-            a(id='follow-10' href='javascript:;')(class ='active') 
-                echo(follow.topicCount)
-                .title.text-overflow > string('follow') + string('topic')
-            a(id='follow-11' href='javascript:;')(class ='active') 
-                echo(follow.expertCount)
-                .title.text-overflow > string('follow') + string('expert')
-            hr
-        tr 
-            td(style='width:50px;')
-            td(align='center') 
-                a(id='middle-menu-myquiz' href='javascript:;')(class ='active') 我的提问
-                hr
-            td(style='width:50px;')
-        tr 
-            td
-            td(align='center') 
-                a(id='middle-menu-5' href='javascript:;')(class ='active') 我的分享
-                hr
-            td
-        tr 
-            td
-            td(align='center')
-                a(id='middle-menu-6' href='javascript:;')(class ='active') 我的回复
-                hr
-            td
-        tr 
-            td
-            td(align='center') 
-                a(id='middle-menu-7' href='javascript:;')(class ='active') 回复我的
-                hr
-            td
-        tr
-            td
-            td(align='center') 
-                a(id='middle-menu-mymanage' href='javascript:;')(class ='active') 我是管理
-            td
-view('hottopic')
-    div(data-dynamic-key=hottopicstate.menu)
-    
-view('bottom')
-    div(data-dynamic-key=activeexpertstate.menu)
-
-
-
+view('right') 
+    div(data-dynamic-key='contentright')

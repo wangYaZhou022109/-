@@ -3,6 +3,7 @@
         float: left;
         width: 13em;
         margin-right: var(--large-space);
+        padding-top: var(--space);
 
         & li {
             border-bottom: 1px solid var(--white);
@@ -37,6 +38,12 @@
                 background: var(--white);
                 color: var(--main-color);
             }
+        }
+
+        & .menu-text.current,
+        & .item.current {
+            background: var(--white);
+            color: var(--main-color);
         }
 
         & .has-child .menu-text:hover {
