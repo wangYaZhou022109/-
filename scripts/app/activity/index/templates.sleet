@@ -151,7 +151,7 @@ view('list')
                         i.iconfont.icon-favorite.m-left
                         | 09-25 14：00
         .h3.m-bottom 考试
-        ul.activity-item-box.activity-item-exam
+        ul.activity-item-box.activity-item-exam.cell-3
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
@@ -201,7 +201,7 @@ view('list')
                         i.iconfont.icon-favorite.m-left.m-right
                         | 9-28 至 12-25
         .h3.m-bottom 班级
-        ul.activity-item-box.activity-item-class
+        ul.activity-item-box.activity-item-class.cell-3
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
@@ -251,7 +251,7 @@ view('list')
                         i.iconfont.icon-favorite.m-left.m-right
                         | 9-28 至 12-25
         .h3.m-bottom 调研
-        ul.activity-item-box.activity-item-research
+        ul.activity-item-box.activity-item-research.cell-3
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
