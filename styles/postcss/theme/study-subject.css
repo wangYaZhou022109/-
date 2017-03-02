@@ -14,6 +14,9 @@
         &:after {
             border-right-color: var(--bg-color-2);
         }
+        & .sub-text {
+            color: var(--font-tip-color);
+        }
     }
 
     & li.catalog-main {
@@ -46,13 +49,40 @@
         }
     }
 }
-.subject-detail-main {
+.subject-detail-page {
     & .swiper-button-prev,
     & .swiper-button-next {
         background-color: var(--black);
 
         & .iconfont {
             color: var(--white);
+        }
+    }
+    & .page-side {
+        & .side-rank-list {
+            & li:nth-child(odd) {
+                background: var(--white);
+            }
+            & li.forefront:before {
+                color: var(--white);
+            }
+            & li.forefront.first:before {
+                background-color: var(--custom-color-1);
+            }
+            & li.forefront.second:before {
+                background-color: var(--custom-color-3);
+            }
+            & li.forefront.third:before {
+                background-color: color(var(--custom-color-1) alpha(60%));
+            }
+        }
+    }
+    & .relevant-course a { color: var(--font-color);}
+    & .banner-info {
+        color: var(--white);
+        & .sub-title {
+            color: var(--font-color);
+            background: var(--white);
         }
     }
 }

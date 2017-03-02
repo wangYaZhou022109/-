@@ -1,4 +1,61 @@
 #!handlebars
 
-module > .identity-lecture-page
-    div 讲师内容区块hhhh
+module > .person-lecture-page > .container
+    .lecture-top(data-region='top')
+    .lecture-main(data-region='main')
+
+view('top')
+    .lecture-title
+        .h1.inline-block 罗会奇讲师信息
+        .inline-block.lv 行业翘楚
+    .lecture-info
+        .edit-div(contenteditable='true') 讲师简介讲师简介讲师简介讲师简介讲师简介讲师简介讲师简介讲师简介讲师简介讲师简介
+    .lecture-top-main
+        .item
+            .h1 59
+            .sub-text 累计课时数
+        .item
+            .h1 9.0
+            .sub-text 平均满意度
+        .item
+            .lecture-pic > img(src='images/1.png')
+        .item
+            .tags-list
+                span.sub-text 讲师标签：
+                .tag-btn.custom-bg-color-1 互联网
+                .tag-btn.custom-bg-color-2 数据库
+                .tag-btn.custom-bg-color-3 T.SQL
+
+view('main')
+    .filter-row
+        .filter-item
+            label 班级名称
+            input.input
+        .filter-item
+            label 班级名称
+            input.input
+        .filter-item
+            label 班级名称
+            input.input
+        .filter-item
+            label 班级名称
+            input.input
+        .filter-item
+            .btn > i.iconfont.icon-search
+    .table > table
+        thead
+            tr
+                th 序号
+                th 班级名称
+                th 课程名称
+                th 授课日期
+                th 授课时长（小时）
+                th 课程满意度
+        tbody
+            tr
+                td 1
+                td 班级名称班级名称
+                td 课程名称课程名称
+                td 2016-09-09
+                td 3
+                td 9.0

@@ -1,4 +1,4 @@
-.home-page {
+.home-page,.person-page {
     & .news-list {
         padding: calc(var(--font-size) * 2) 0;
         line-height: calc(var(--font-size) * 2);

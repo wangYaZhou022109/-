@@ -1,3 +1,41 @@
-.person-information {
-    
+.person-page {
+    & .graph-total-bar {
+        padding: var(--large-space);
+        margin-bottom: var(--large-space);
+
+        & .bar {
+            width: 50%;
+            float: left;
+
+            & .cont {
+                background: white;
+                padding: var(--large-space);
+                margin: 0 1em;
+            }
+        }
+
+        & .top {
+            font-size: var(--small-font);
+            text-align: center;
+            margin-bottom: var(--large-space);
+
+            & .left {
+                margin-right: 1em;
+                display: inline-block;
+                vertical-align: middle;
+                background: white;
+            }
+
+            & .item {
+                display: inline-block;
+                line-height: 2;
+                padding: 0 1em;
+                border-right: 1px solid var(--border-color);
+
+                &:last-child {
+                    border: none;
+                }
+            }
+        }
+    }
 }

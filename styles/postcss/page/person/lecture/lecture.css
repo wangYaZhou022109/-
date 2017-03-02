@@ -1,3 +1,44 @@
-.identity-lecture-page {
-    
+.person-lecture-page {
+    & .lecture-top {
+        text-align: center;
+        margin: var(--large-space) 0;
+
+        & .lv {
+            padding: calc(var(--space) / 2) 1em;
+            vertical-align: top;
+        }
+    }
+
+    & .lecture-top-main {
+        & .item {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 0 var(--large-space);
+        }
+
+        & .h1 {
+            margin-bottom: calc(var(--space) / 2);
+        }
+
+        & .lecture-pic {
+            width: 10em;
+            height: 10em;
+            border-radius: 50%;
+            overflow: hidden;
+
+            & img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        & .tag-btn {
+            border: none;
+            margin-left: 1em;
+        }
+    }
+    & .lecture-info {
+        margin: 1em 0 var(--large-space);
+    }
 }

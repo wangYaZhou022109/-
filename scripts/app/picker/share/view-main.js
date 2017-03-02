@@ -82,10 +82,10 @@ exports.handlers = {
                     fullUrl += '&appkey=3697029777';
                     window.open(fullUrl, '_blank');
                 } else if (templateCode === 'bar') { // 分享到问吧
-                    me.app.viewport.modal(me.module.items.bar, {
-                        shareObjId: id,
-                        shareType: type
-                    });
+                    // me.app.viewport.modal(me.module.items.bar, {
+                    //    shareObjId: id,
+                    //    shareType: type
+                   // });
                 }
             }
         });
