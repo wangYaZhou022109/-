@@ -6,4 +6,11 @@
     & .person-main {
         overflow: hidden;
     }
+    & .person-interest {
+        & .title-row {
+            margin-top: var(--large-space);
+            margin-bottom: var(--large-space);
+        }
+        & .main-list > ul .title { margin: 0;}
+    }
 }
