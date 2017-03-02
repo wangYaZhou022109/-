@@ -3,13 +3,13 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click collect-*': 'collect',
+    'click waiting-check-*': 'waitingCheck',
     'click correct-*': 'correct'
 };
 
 exports.handlers = {
-    collect: function(id) {
-        return this.module.dispatch('collect', { questionId: id });
+    waitingCheck: function(id) {
+        return this.module.dispatch('waitingCheck', { questionId: id });
     },
     correct: function(id) {
         var me = this;

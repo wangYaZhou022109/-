@@ -16,26 +16,21 @@ view('question-type')
     ul.list > each(questionTypes)
         li(id='list-item-'+ @index)
             .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
-            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
-                div(class='list-item' + if(isCurrent 'active' ''))(id='q-'+id) > echo(i)
-                .min-btn-groups
-                    span.up-arrow > i.iconfont.icon-arrow-left-circle
-                    span.down-arrow > i.iconfont.icon-arrow-left-circle
-                    .list-item.check 1
-                    .list-item.active 2
-                    .list-item.active 3
-                    .list-item.active 4
-                    .list-item.current 5
-                    .list-item 6
-                    .list-item 7
-                    .list-item 8
-                    .list-item 9
-                    .list-item 10
-                    .list-item 11
-                    .list-item 12
-                    .list-item 13
-                    .list-item 14
-                    .list-item 15
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) 
+                span.up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-left-circle
+                span.down-arrow(id='next-' + @index) > i.iconfont.icon-arrow-left-circle
+                each(data.data)
+                    compare(currentStatus 'eq' 'check')
+                        .list-item.check(id='q-'+id) > echo(i)
+
+                    compare(currentStatus 'eq' 'active')
+                        .list-item.active(id='q-'+id) > echo(i)
+
+                    compare(currentStatus 'eq' 'current')
+                        .list-item.current(id='q-'+id) > echo(i)
+
+                    compare(currentStatus 'eq' 'init')
+                        .list-item(id='q-'+id) > echo(i)
 
 view('head')
     .pull-left.title > echo('正在作答:' state.name)
@@ -57,13 +52,13 @@ view('main')
                 div(data-dynamic-key=state.questionId)
             .bottom.text-right
                 div(data-dynamic-key='collect-correct-' + state.questionId)
-            .slider-question
-                .item(id='prev')
-                    i.iconfont.icon-arrow-left-circle.line
-                    i.iconfont.icon-arrow-left-circle-full.full
-                .item(id='next')
-                    i.iconfont.icon-arrow-right-circle.line
-                    i.iconfont.icon-arrow-right-circle-full.full
+            #  .slider-question
+            #      .item(id='prev')
+            #          i.iconfont.icon-arrow-left-circle.line
+            #          i.iconfont.icon-arrow-left-circle-full.full
+            #      .item(id='next')
+            #          i.iconfont.icon-arrow-right-circle.line
+            #          i.iconfont.icon-arrow-right-circle-full.full
         else
             div
                 each(questionTypes)
