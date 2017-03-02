@@ -19,7 +19,8 @@ var strings = {
     search: '搜索',
     'no-data': '没有数据',
     download: '下载',
-    'submit-success': '提交成功'
+    'submit-success': '提交成功',
+    'operation-success': '操作成功'
 };
 
 var ss = D.assign({}, strings, study, activity, ask);
