@@ -7,9 +7,10 @@
         overflow: hidden;
     }
     & .person-interest {
-        & .title {
+        & .title-row {
             margin-top: var(--large-space);
             margin-bottom: var(--large-space);
         }
+        & .main-list > ul .title { margin: 0;}
     }
 }
