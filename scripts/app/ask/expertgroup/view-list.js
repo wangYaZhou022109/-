@@ -3,7 +3,8 @@ var $ = require('jquery');
 
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    trends: true,
+    popupstate: true
 };
 
 exports.events = {
@@ -13,7 +14,15 @@ exports.events = {
 };
 
 exports.handlers = {
-    activate: function() {
+    activate: function(menu) {
+        var state = this.bindings.popupstate;
+        state.data = {};
+        state.data.title = '';
+        state.data.title = '专家激活';
+        state.hidden = true;
+        state.data.menu = menu || 'expertactivation';
+        state.data[menu] = true;
+        state.changed();
     },
     myself: function(id, e, target) {
         var region;
@@ -21,7 +30,15 @@ exports.handlers = {
         region = new D.Region(this.app, this.module, el, id);
         region.show('ask/iamexpert', { id: id });
     },
-    apply: function() {
+    apply: function(menu) {
+        var state = this.bindings.popupstate;
+        state.data = {};
+        state.data.title = '';
+        state.data.title = '专家申请';
+        state.hidden = true;
+        state.data.menu = menu || 'expertapply';
+        state.data[menu] = true;
+        state.changed();
     }
 };
 

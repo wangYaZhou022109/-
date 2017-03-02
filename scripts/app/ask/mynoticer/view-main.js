@@ -22,7 +22,8 @@ exports.handlers = {
         var state = this.bindings.popupstate;
         state.data = {};
         state.data.title = '我的关注';
-        state.data.menu = 'mynotice';
+        state.hidden = true;
+        state.data.menu = 'mynotice/topic';
         state.data.mynotice = true;
         state.changed();
     }

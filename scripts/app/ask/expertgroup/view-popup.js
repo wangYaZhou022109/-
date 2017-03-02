@@ -22,13 +22,13 @@ exports.getEntityModuleName = function(key) {
         title = this.bindings.popupstate.data.title,
         path = key;
     titleDiv.innerHTML = title;
-    if (path === 'mynotice') {
+    if (this.bindings.popupstate.hidden) {
         this.module.items.popup.$$('.shield')[0].hidden = false;
         this.module.items.popup.$$('.catalog-view')[0].hidden = false;
-    } else {
+    }
+    if (typeof path === 'undefined') {
         path = 'expertactivation';
     }
-
     return 'ask/' + path;
 };
 exports.getEntity = function() {
