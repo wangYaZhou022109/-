@@ -1,0 +1,9 @@
+.person-page {
+    & .person-content {
+        margin-top: 1em;
+    }
+
+    & .person-main {
+        overflow: hidden;
+    }
+}
