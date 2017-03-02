@@ -7,9 +7,9 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click addTrainee': 'showMembers',
     'click sort*': 'showSortInput',
-    'change input-sort*': 'updateSort'
+    'change input-sort*': 'updateSort',
+    'click addTrainee': 'addTrainee'
 };
 
 exports.actions = {
@@ -49,6 +49,34 @@ exports.handlers = {
                 me.module.dispatch('init', classId);
             });
         }
+    },
+    addTrainee: function() {
+        var memberId = this.$$('input[name="add-trainee-input"]')[0].value;
+        var classId = this.bindings.state.data;
+        var data = {};
+        var me = this;
+        if (memberId === '') {
+            this.app.message.alert('请输入正确的人员编号！');
+        } else {
+            data.memberId = memberId;
+            data.type = 0;
+            data.classId = this.bindings.state.data.classId;
+            me.module.dispatch('addTrainee', data).then(function(result) {
+                var code = result[0];
+                if (code === 1) {
+                    this.app.message.success('添加成功!');
+                    me.module.dispatch('init', classId);
+                } else if (code === 888) {
+                    this.app.message.error('学员已存在!');
+                } else if (code === 666) {
+                    this.app.message.error('人员编号不存在！');
+                } else if (code === 999) {
+                    this.app.message.error('配额已满!');
+                } else if (code === 777) {
+                    this.app.message.error('尚未配额!');
+                }
+            });
+        }
     }
 };
 
@@ -63,7 +91,7 @@ exports.dataForActions = {
                 resolve(false);
             });
         });
-    },
+    }
 };
 
 exports.actionCallbacks = {

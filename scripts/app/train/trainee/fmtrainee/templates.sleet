@@ -23,8 +23,10 @@ view('main')
     div.text-center
         p.col-sm-2 > echo('学员列表')
         .buttons
+            input.input(name='add-trainee-input' placeholder='人员编号')
+            .btn#addTrainee > echo('添加')
             .btn#traineeGroup > echo('学员分组')
-            .btn#addTrainee > echo('添加学员')
+            .btn#addAllTrainee > echo('添加学员')
             .btn#importTrainee > echo('导入')
             a(href=exportUrl target = "_blank") > .btn > echo('导出')
     table.table
@@ -55,7 +57,7 @@ view('main')
                     td > echo(phoneNumber)
                     td
                         a(id='sort'+id data-name='id' data-value=id) > echo('排序')
-                        input(id='input-sort'+id value=name style='display:none;' data-name='id' data-value=id)
+                        input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
                         a(id='delete'+id data-name='id' data-value=id) > echo('| 删除')
             else
                 each(fmtrainees) > tr
@@ -68,7 +70,7 @@ view('main')
                     td > echo(phoneNumber)
                     td
                         a(id='sort'+id data-name='id' data-value=id) > echo('排序')
-                        input(id='input-sort'+id value=name style='display:none;' data-name='id' data-value=id)
+                        input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
                         echo('|')
                         a(id='delete'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination(style='float:none')

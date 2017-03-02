@@ -62,9 +62,13 @@ exports.handlers = {
 };
 
 exports.actionCallbacks = {
-    situation: function() {
+    situation: function(data) {
         var situation = this.module.items.situation;
-        this.app.viewport.modal(situation);
+        if (data[0]) {
+            this.app.viewport.modal(situation);
+        } else {
+            this.app.message.alert('尚未配额！');
+        }
     }
 };
 

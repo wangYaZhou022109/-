@@ -11,7 +11,7 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        addFmTrainees: { url: '../train/trainee/saveAll' },
+        addTrainee: { url: '../train/trainee/addTrainee' },
         traineeSort: { url: '../train/trainee/updateSort' },
         fmtrainee: { url: '../train/trainee' },
         projectInfo: {},
@@ -39,11 +39,13 @@ exports.store = {
             fmtrainee.clear();
             fmtrainee.set(payload);
             return this.del(fmtrainee);
+        },
+        addTrainee: function(payload) {
+            var addTrainee = this.models.addTrainee;
+            addTrainee.clear();
+            addTrainee.set(payload);
+            return this.save(addTrainee);
         }
-        // addTrainee: function(payload) {
-        //     var addFmTrainees = this.models.addFmTrainees;
-        //     addFmTrainees.clear();
-        // }
     }
 };
 
