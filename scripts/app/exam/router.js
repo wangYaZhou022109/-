@@ -2,6 +2,7 @@
 exports.routes = {
     'index/:id': 'showIndex',
     'answer-paper/:id': 'showAnswerPaper',
+    'answer-paper-2/:id': 'showAnswerPaper2',
     'mark-paper': 'showMarkPaper',
     'mark-paper-test': 'showMark2',
     demo: 'showDemo',
@@ -20,6 +21,9 @@ exports.showMark2 = function() {
 
 exports.showAnswerPaper = function(id) {
     return this.app.show('content', 'exam/answer-paper', { examId: id });
+};
+exports.showAnswerPaper2 = function(id) {
+    return this.app.show('content', 'exam/answer-paper-2', { examId: id });
 };
 
 exports.showScore = function(id) {
