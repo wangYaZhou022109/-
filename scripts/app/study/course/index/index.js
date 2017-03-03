@@ -1,17 +1,19 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs');
 exports.items = {
-    top: 'top',
     catalog: 'catalog',
-    catalogs: 'catalogs',
-    list: 'list',
+    list: 'list'
 };
 exports.store = {
     models: {
         down: { url: '../human/file/download' },
         categories: {
             url: '../course-study/course-category/front',
+            autoLoad: 'after',
             mixin: {
+                get: function(id) {
+                    return _.find(this.data, { id: id });
+                },
                 filterPid: function(pid) {
                     return _.filter(this.data, function(item) { return item.parentId === pid; });
                 }
@@ -23,40 +25,37 @@ exports.store = {
             pageSize: 9,
             root: 'items',
         },
-        state: { data: {} },
-        search: { }
+        topics: { data: [], url: '../system/topic/select', autoLoad: 'after' },
+        state: {},
+        menu2: { data: [] },
+        search: {}
     },
     callbacks: {
-        init: function(options) {
-            var categories = this.models.categories,
-                courses = this.models.courses,
-                search = this.models.search;
-            search.set({ type: 0, companyType: options.companyType });
-            categories.params.companyType = options.companyType;
-            courses.params = search.data;
-            return this.chain([this.get(courses), this.get(categories)]);
+        init: function() {
+            var search = this.models.search;
+            search.set({ type: 0 }, true);
         },
-        selectMenu2: function(payload) {
-            var categories3 = this.models.categories.filterPid(payload.id);
-            this.models.state.data.categories3 = categories3;
-            return this.models.state.changed();
+        selectMenu1: function(payload) {
+            var menu2 = this.models.menu2;
+            var categories2 = this.models.categories.filterPid(payload.id);
+            return menu2.set(categories2, true);
         },
-        selectMenu3: function(payload) {
-            var categories4 = this.models.categories.filterPid(payload.id);
-            this.models.state.data.categories4 = categories4;
+        clearMenu1: function() {
+            this.models.state.data.categories2 = [];
             return this.models.state.changed();
         },
         search: function(payload) {
-            var courses = this.models.courses,
-                search = this.models.search;
+            var search = this.models.search;
             D.assign(search.data, payload);
-            courses.params = search.data;
+            return search.changed();
+        },
+        searchCourse: function(payload) {
+            var courses = this.models.courses;
+            courses.params = payload.params;
             return this.get(courses);
         }
     }
 };
-exports.beforeRender = function() {
-    // 默认是本公司
-    var options = { companyType: 1 };
-    this.dispatch('init', options);
+exports.afterRender = function() {
+    this.dispatch('init');
 };

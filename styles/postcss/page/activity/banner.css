@@ -52,7 +52,7 @@
 
             & .details {
                 @apply --fade-in;
-                
+
                 width: 20em;
                 height: auto;
                 padding: 0 var(--large-space);
@@ -85,6 +85,14 @@
         line-height: calc(var(--font-size) * 2);
         height: calc(var(--large-space) * 2);
         overflow: hidden;
+    }
+
+    & .how-many {
+        padding-bottom: calc(var(--space)*2);
+
+        & b {
+            font-size: calc(var(--font-size)*2);
+        }
     }
 
     & .num {

@@ -1,0 +1,12 @@
+#!handlebars
+module
+    div(data-region='menu')
+    div(data-region='list')
+
+view('menu')
+    a(id='menu-content' href='javascript:;')(class ='active') > string('content')
+    a(id='menu-topic' href='javascript:;')(class ='active') > string('topic')
+    a(id='menu-expert' href='javascript:;')(class ='active') > string('expert')
+    hr
+view('list') 
+    div(data-dynamic-key=state.menu)

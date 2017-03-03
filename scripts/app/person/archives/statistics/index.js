@@ -1,3 +1,0 @@
-exports.items = {
-    statistics: 'statistics'
-};

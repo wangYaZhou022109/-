@@ -1,6 +1,7 @@
 :root {
     --font-color: #333;
-    --font-tip-color: #777;
+    --font-sub-color: #777;
+    --font-tip-color: #999;
     --link-color: #1e54c4;
     --danger-color: #d82525;
 
@@ -12,17 +13,22 @@
     --custom-color-3: #f1a77b; /* 橙 */
     --custom-color-4: #6eb162; /* 绿 */
     --custom-color-5: #65bdad; /* 青 */
+    --custom-color-6: #ddd737; /* 黄 */
+
 
     --star-color: #fd8c42;
 
     --border-color: #dedede;
     --fade-color: rgba(255, 255, 255, .15);
+    --fade-bg: rgba(0, 0, 0, .2);
 
     --bg-color: #f9f9f9;
     --bg-color-2: #eee;
+    --bg-color-3: #efefef;
 
     --black: #000;
     --white: #fff;
+    --golden: #ddc265;
 
 }
 
@@ -65,7 +71,6 @@
 .border-main-color {
     border-color: var(--main-color);
     border-width: 1px;
-    color: var(--main-color);
     border-style: solid;
 }
 
@@ -79,18 +84,12 @@
     color: var(--main-color);
 }
 
-.nav-color.active,
-.nav-color:hover {
+.text-main-color {
     color: var(--main-color);
-
-    &::after {
-        background-color: currentColor;
-    }
 }
 
 .more {
-    background-color: var(--sub-color-1);
-    color: var(--white);
+    color: var(--font-sub-color);
 }
 
 .footer {

@@ -1,17 +1,14 @@
 #!handlebars
 
 
-module > .container
-    .top-content#top-content
+module
+    .top-content.clearfix.container#top-content
         .logo(data-region='logo')
         .shortcut(data-region='shortcut')
-        .nav(data-region='nav')
+    .nav.bg-main-color > .container(data-region='nav')
 
 
 view('nav')
-    .navbar-toggle > .pe-7s-menu.pointer#toggleNav
-    .top-back#back > .pe-7s-angle-right.pe-3x
-    .overlay.transparent#overlay
     .nav-list
         if(navs.length)
             each(navs)
@@ -24,23 +21,34 @@ view('nav')
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down
     .shortcut-list
-        .item > a.normal(href='#') > i.iconfont.icon-search
+        .item
+            .header-search-bar.border-main-color
+                .search-select > select.input
+                    option 全部
+                    option 课程
+                    option 专题
+                .search-input > input.input#search(placeholder='请输入您要搜索的内容')
+                .search-btn > button.btn(type='button') > i.iconfont.icon-search
+                .search-more-bar#searchMore > ul
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+
+
+
         .item > a.normal(href='#') > i.iconfont.icon-message
-        .item > a.normal(href='#') > i.iconfont.icon-daiban
         .item > a.normal(href='/admin') > i.iconfont.icon-setting
         if(Global.currentUser.id)
-            .item > a.normal#logout(href='javascript:;') > i.iconfont.icon-logout
+            .item > a.normal#logout(href='javascript:;') > .user-info.inline-block > .user-pic > img(src='images/4.png')
         else
-            .item.hide> a.normal#logout(href='javascript:;') > i.iconfont.icon-logout
-        # .user-info.inline-block
-        #     .user-pic > img(src='/images/2.jpeg')
+            .item.hide> a.normal#logout(href='javascript:;') > .user-info.inline-block > .user-pic > img(src='images/4.png')
 
         .hide
             form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
                 input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
 
 view('logo')
-    .logo-min.theme-default > img(src=downloadUrl(homeConfig.logoMini))
-    .logo-full.theme-default > img(src=downloadUrl(homeConfig.logo))
-    .logo-min.theme-white > img(src=downloadUrl(homeConfig.logoMini))
-    .logo-full.theme-white > img(src=downloadUrl(homeConfig.logo))
+    .item > img(src='images/cmou-logo.png')
+    .item > img(src='images/dx-logo.png')

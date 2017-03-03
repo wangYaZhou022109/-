@@ -39,11 +39,43 @@
 
 }
 
+.btn-white {
+    display: inline-block;
+    padding: calc(var(--space) / 2) calc(var(--large-space) / 2);
+    text-align: center;
+    transition: all .2s linear;
+    cursor: pointer;
+    white-space: nowrap;
+    background: white;
+    color: var(--font-tip-color);
+    border: 1px solid var(--border-color);
+    margin: 0 var(--space) var(--space) 0;
+
+    &:hover {
+        opacity: .8;
+        filter: alpha(opacity=80);
+    }
+}
+
+.tag-btn {
+    @apply --transition;
+    
+    display: inline-block;
+    font-size: var(--small-font);
+    padding: calc(var(--space) / 2) calc(var(--large-space) / 2);
+    text-align: center;
+    cursor: pointer;
+    background: white;
+    border: 1px solid var(--border-color);
+
+}
+
 .input {
     transition: all .2s linear;
     padding: var(--space);
     border-width: 1px;
     border-style: solid;
+    background: white;
 
     &:focus {
         border-color: var(--main-color);

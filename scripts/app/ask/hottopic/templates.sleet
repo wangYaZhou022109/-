@@ -1,0 +1,16 @@
+#!handlebars
+module 
+    div(data-region='list')
+
+view('list') 
+    ul
+        li > string('hot') + string('topic') + a(id='hot-topic' href='javascript:;' style='float:right;')(class ='active') > string('more')
+    table.table > tr > td
+        ul
+            each(topic)
+                li(style='font-weight:bold')
+                    .img(style='height:80px;width:80px;float:left;') > img(src='1.jpg' )
+                    a(id='topic-' + id data-name='id' data-value=id href='javascript:;') > echo(name) 
+                
+
+    

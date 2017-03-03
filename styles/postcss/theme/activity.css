@@ -23,13 +23,9 @@
             color: var(--font-tip-color);
         }
     }
-    & .activity-filter {
-        background-color: #464957;
-    }
 
     & .activity-tabs {
         & li {
-            color: var(--white);
 
             &.active {
                 color: var(--white);

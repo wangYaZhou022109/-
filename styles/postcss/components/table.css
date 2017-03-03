@@ -1,0 +1,30 @@
+.table {
+    & table {
+        width: 100%;
+        margin: var(--space) 0;
+    }
+
+    & th {
+        background: var(--bg-color-3);
+        text-align: left;
+        font-weight: normal;
+    }
+
+    & th,
+    & td {
+        padding: 1em;
+
+        &.nowrap {
+            max-width: 10em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
+    }
+
+    & tr {
+        &:nth-child(even) {
+            background: var(--bg-color);
+        }
+    }
+}

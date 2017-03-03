@@ -24,7 +24,7 @@ view('top')
                             echo('给予证书：' certificate.name)
                         p.detail-top-time.small-font
                             compare(exam.type 'ne' 3)
-                                | 报名截至时间：
+                                | 报名截至时间：2017-08-08
                                 dateTime(exam.applicantEndTime)
                             | 考试时间：
                             dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
@@ -36,7 +36,7 @@ view('top')
                         if(isNoLimitTime)
                             p 考试不限次数
                         else
-                            p 
+                            p
                                 span 考试剩下次数：
                                 span > echo(exam.remainTimes)
                 .detail-bottom.clearfix
@@ -83,6 +83,8 @@ view('top')
                             h3 考试已结束
                         compare(handlerBtn 'eq' 'noBegin')
                             h3 未开始
+                        compare(handlerBtn 'eq' 'detailByOverExam')
+                            h3 活动结束后才可查看详情
 
 
 view('side')

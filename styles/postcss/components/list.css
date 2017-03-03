@@ -6,18 +6,32 @@
 .main-list {
 
     & .filter {
-        height: 1em;
+        @apply --clearfix;
+
         line-height: 1em;
-        margin: var(--main-list-gap) 0;
+        margin: 1em 0;
         font-size: var(--small-font);
+        padding: 1em 0;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
 
         & .item {
-            margin-right: var(--large-space);
             display: inline-block;
+            padding: 0 var(--large-space);
+            border-right: 1px solid var(--border-color);
+            cursor: pointer;
 
             &:last-child {
-                margin: 0;
+                border: none;
             }
+
+            &:hover > span,
+            &:hover .drop-down-btn,
+            &.active > span,
+            &.active .drop-down-btn{
+                color: var(--main-color);
+            }
+
         }
     }
 
@@ -28,9 +42,17 @@
 
         & li {
             float: left;
-            width: 33.333%;
+            width: 20%;
             padding-right: var(--main-list-gap);
             margin-bottom: calc(var(--main-list-gap) + 1);
+        }
+
+        &.cell-4 li {
+            width: 25%;
+        }
+
+        &.cell-3 li {
+            width: 33.3%;
         }
 
         & .content {

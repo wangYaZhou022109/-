@@ -2,32 +2,30 @@
     & .activity-filter {
         padding-top: 1em;
         padding-bottom: 1em;
-        background-color: color(var(--sub-color-1) alpha(80%));
     }
 
     & .activity-tabs {
-        height: var(--search-bar-height);
-        line-height: var(--large-space);
-        width: 50%;
-        max-width: 40em;
-        padding: calc(var(--space) / 2) 0;
+        & ul {
+            background: #efefef;
+            overflow: hidden;
+            display: inline-block;
 
-        & li {
-            float: left;
-            width: 25%;
-            text-align: center;
-            color: var(--white);
-            cursor: pointer;
-            transition: all .2s linear;
-            padding: 0 1em;
-            margin-top: calc(var(--space) / 2);
+             & li {
+                 float: left;
+                 cursor: pointer;
+                 padding: var(--space) calc(var(--space)*3);
 
-            &.active {
-                color: var(--white);
-                border-radius: var(--search-bar-height);
-                background-color: var(--bg-color)\0;
-                background-color: rgba(255,255,255,.3);
-            }
+                 &.active {
+                     color: white;
+                     background: var(--main-color);
+                 }
+
+                 &:hover {
+                     color: white;
+                     background: var(--main-color);
+                     transition: all 0.3s;
+                 }
+             }
         }
     }
 }
