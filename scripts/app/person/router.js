@@ -1,7 +1,8 @@
 exports.routes = {
     archives: 'showArchives',
     lecture: 'showLecture',
-    index: 'showIndex'
+    index: 'showIndex',
+    course: 'showCourse'
 };
 
 exports.showArchives = function() {
@@ -14,4 +15,8 @@ exports.showLecture = function() {
 
 exports.showIndex = function() {
     return this.app.show('content', 'person/index');
+};
+
+exports.showCourse = function() {
+    return this.app.show('content', 'person/course');
 };
