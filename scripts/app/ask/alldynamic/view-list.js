@@ -31,6 +31,38 @@ exports.handlers = {
         }
     }
 };
+exports.actions = {
+    'click trend-follow-*': 'follow',
+    'click publish-*': 'publish'
+};
+
+exports.dataForActions = {
+    follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    publish: function(payload) {
+        return payload;
+    }
+};
+exports.actionCallbacks = {
+    reply: function() {
+        this.app.message.success('操作成功！');
+        this.module.dispatch('init');
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
+        this.module.dispatch('init');
+    },
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    }
+};
 
 exports.dataForTemplate = {
     trends: function(data) {
