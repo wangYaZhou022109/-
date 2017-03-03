@@ -281,6 +281,9 @@ module.exports = {
     },
     'train-sign-state': {
         0: '未开始', 1: '已开始'
+    },
+    'compatible-client': {
+        0: '全部', 1: 'PC', 2: 'APP'
     }
 };
 

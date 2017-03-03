@@ -1,14 +1,27 @@
+var $ = require('jquery');
+
 exports.bindings = {
     onlineCourseList: true,
     state: true
 };
 
 exports.actions = {
-    'click theme-online': 'showOnlineTheme'
+    'click theme-online': 'showOnlineTheme',
+    'click del-online-*': 'delOnlineCourse'
 };
 
 exports.dataForActions = {
-
+    delOnlineCourse: function(payload) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定删除此课程吗?';
+            me.app.message.confirm(message, function() {
+                me.module.dispatch('delOnlineCourse', payload);
+            }, function() {
+                resolve(false);
+            });
+        });
+    }
 };
 
 exports.actionCallbacks = {
@@ -21,5 +34,33 @@ exports.dataForTemplate = {
     state: function() {
         var state = this.bindings.state.data;
         return state;
+    }
+};
+
+exports.events = {
+    'click addCourse': 'addCourse',
+    'click label-online-*': 'changeRequired',
+    'change input-online-*': 'updateRequired'
+};
+
+exports.handlers = {
+    addCourse: function() {
+        var model = this.module.items['train/programme/select-course'],
+            state = this.bindings.state,
+            me = this;
+        me.app.viewport.modal(model, {
+            id: state.data.classId,
+            callback: function(themeId, target, del) {
+                me.module.dispatch('saveOnlineCourse', { themeId: themeId, target: target, del: del });
+            }
+        });
+    },
+    changeRequired: function(id) {
+        $(this.$('input-online-' + id)).css('display', 'block');
+        $(this.$('label-online-' + id)).css('display', 'none');
+    },
+    updateRequired: function(id) {
+        var val = this.$('input-online-' + id).value;
+        this.module.dispatch('updateRequired', { id: id, isRequired: val });
     }
 };

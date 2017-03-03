@@ -66,7 +66,7 @@ view('online')
                             label 在线资源
                         .col-sm-8(style='text-align:right;')
                             a.btn#theme-online 配置主题
-                            a.btn#addCourse 配置资源
+                            a.btn#addCourse 添加课程
                             a > echo('最小化')
                 thead > tr
                     th 主题
@@ -76,9 +76,12 @@ view('online')
                 tbody > each(onlineCourseList) > tr
                     td > echo(themeName)
                     td > echo(resourceName)
-                    td > map('class-online-type' type)
                     td
-                        a(id='edit-online-'+id data-name='id' data-value=id) 编辑
+                        label(id='label-online-' + id data-name='id' data-value=id) > map('yes-or-no' isRequired)
+                        select(id='input-online-' + id style='display:none;' data-name='id' data-value=id)
+                            option(value='0')('selected')&if(isRequired 'eq' '0') > map('yes-or-no' '0')
+                            option(value='1')('selected')&if(isRequired 'eq' '1') > map('yes-or-no' '1')
+                    td
                         a(id='view-online-'+id data-name='id' data-value=id) 预览
                         a(id='del-online-'+id data-name='id' data-value=id) 删除
 
@@ -220,6 +223,7 @@ view('editOffline') > form.vertical
                     input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
                 td > map('class-file-type' fileType)
                 td
+                    a(href=downUrl download=attachName) 下载
                     a(id='del-attach-'+id data-name='id' data-value=id) 删除
 
 view('upload')
@@ -247,4 +251,5 @@ view('courseware')
                     input(id='input-courseware-' + id value=attachName style='display:none;' data-name='id' data-value=id)
                 td > map('class-file-type' fileType)
                 td
+                    a(href=downUrl download=attachName) 下载
                     a(id='del-courseware-'+id data-name='id' data-value=id) 删除

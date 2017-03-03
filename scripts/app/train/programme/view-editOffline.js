@@ -16,7 +16,8 @@ exports.bindings = {
     state: true,
     offlineCourse: true,
     classroomList: true,
-    files: true
+    files: true,
+    download: false
 };
 
 exports.dataForTemplate = {
@@ -47,6 +48,7 @@ exports.dataForTemplate = {
                 extension;
             extension = item.attachName.split('.').pop().toLowerCase();
             item.fileType = findExtension.call(me, extension);
+            item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachId;
             item.i = i + 1;
         });
         return data.files;
