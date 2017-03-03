@@ -2,7 +2,10 @@ exports.routes = {
     archives: 'showArchives',
     lecture: 'showLecture',
     index: 'showIndex',
-    course: 'showCourse'
+    course: 'showCourse',
+    subject: 'showSubject',
+    knowledge: 'showKnowledge',
+    post: 'showPost'
 };
 
 exports.showArchives = function() {
@@ -19,4 +22,16 @@ exports.showIndex = function() {
 
 exports.showCourse = function() {
     return this.app.show('content', 'person/course');
+};
+
+exports.showSubject = function() {
+    return this.app.show('content', 'person/subject');
+};
+
+exports.showKnowledge = function() {
+    return this.app.show('content', 'person/knowledge');
+};
+
+exports.showPost = function() {
+    return this.app.show('content', 'person/post');
 };
