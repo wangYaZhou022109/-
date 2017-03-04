@@ -136,6 +136,10 @@ section.section {
     margin: 0;
 }
 
+.vertical-top {
+    vertical-align: top;
+}
+
 /* display */
 .inline-block {
     display: inline-block;
