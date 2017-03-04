@@ -352,8 +352,14 @@ exports.store = {
                 me.get(onlineCourseList);
             });
         },
-        updateRequired: function() {
-
+        updateRequired: function(payload) {
+            var model = this.models.onlineCourse,
+                onlineCourseList = this.models.onlineCourseList,
+                me = this;
+            model.set(payload);
+            this.save(model).then(function() {
+                me.get(onlineCourseList);
+            });
         }
     }
 };

@@ -71,7 +71,7 @@ view('online')
                 thead > tr
                     th 主题
                     th(width='50%') 资源名称
-                    th 类型
+                    th 是否必修
                     th 操作
                 tbody > each(onlineCourseList) > tr
                     td > echo(themeName)
@@ -79,8 +79,8 @@ view('online')
                     td
                         label(id='label-online-' + id data-name='id' data-value=id) > map('yes-or-no' isRequired)
                         select(id='input-online-' + id style='display:none;' data-name='id' data-value=id)
-                            option(value='0')('selected')&if(isRequired 'eq' '0') > map('yes-or-no' '0')
-                            option(value='1')('selected')&if(isRequired 'eq' '1') > map('yes-or-no' '1')
+                            option(value='1')('selected')&if(isRequired1) > map('yes-or-no' '1')
+                            option(value='0')('selected')&if(isRequired0) > map('yes-or-no' '0')
                     td
                         a(id='view-online-'+id data-name='id' data-value=id) 预览
                         a(id='del-online-'+id data-name='id' data-value=id) 删除

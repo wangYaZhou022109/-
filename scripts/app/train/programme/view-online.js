@@ -1,4 +1,5 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    _ = require('lodash/collection');
 
 exports.bindings = {
     onlineCourseList: true,
@@ -34,6 +35,15 @@ exports.dataForTemplate = {
     state: function() {
         var state = this.bindings.state.data;
         return state;
+    },
+    onlineCourseList: function() {
+        var onlineCourseList = this.bindings.onlineCourseList;
+        _.map(onlineCourseList.data || [], function(course) {
+            var r = course;
+            r.isRequired1 = r.isRequired === 1;
+            r.isRequired0 = r.isRequired === 0;
+        });
+        return onlineCourseList.data;
     }
 };
 
