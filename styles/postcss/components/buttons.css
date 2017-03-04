@@ -57,11 +57,25 @@
     }
 }
 
+.tag-btn {
+    @apply --transition;
+    
+    display: inline-block;
+    font-size: var(--small-font);
+    padding: calc(var(--space) / 2) calc(var(--large-space) / 2);
+    text-align: center;
+    cursor: pointer;
+    background: white;
+    border: 1px solid var(--border-color);
+
+}
+
 .input {
     transition: all .2s linear;
     padding: var(--space);
     border-width: 1px;
     border-style: solid;
+    background: white;
 
     &:focus {
         border-color: var(--main-color);

@@ -125,6 +125,14 @@ section.section {
     margin-bottom: calc(var(--space) * 2);
 }
 
+.layout-ml-small {
+    margin-left: calc(var(--space) * 2);
+}
+
+.layout-mr-small {
+    margin-right: calc(var(--space) * 2);
+}
+
 .w-full {
     width: 100%;
 }
@@ -185,6 +193,19 @@ section.section {
 
 .relative {
   position: relative;
+}
+
+.edit-div {
+    white-space: nowrap;
+    height: 2em;
+    line-height: 2;
+    overflow: hidden;
+    max-width: 100%;
+
+    &:focus {
+        outline: none;
+        border: none;
+    }
 }
 
 /* text */

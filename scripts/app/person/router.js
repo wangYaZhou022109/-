@@ -1,12 +1,37 @@
 exports.routes = {
+    archives: 'showArchives',
+    lecture: 'showLecture',
     index: 'showIndex',
-    train: 'showTrain'
+    course: 'showCourse',
+    subject: 'showSubject',
+    knowledge: 'showKnowledge',
+    post: 'showPost'
+};
+
+exports.showArchives = function() {
+    return this.app.show('content', 'person/archives');
+};
+
+exports.showLecture = function() {
+    return this.app.show('content', 'person/lecture');
 };
 
 exports.showIndex = function() {
     return this.app.show('content', 'person/index');
 };
 
-exports.showTrain = function(id) {
-    return this.app.show('content', 'train/index/', { id: id });
+exports.showCourse = function() {
+    return this.app.show('content', 'person/course');
+};
+
+exports.showSubject = function() {
+    return this.app.show('content', 'person/subject');
+};
+
+exports.showKnowledge = function() {
+    return this.app.show('content', 'person/knowledge');
+};
+
+exports.showPost = function() {
+    return this.app.show('content', 'person/post');
 };

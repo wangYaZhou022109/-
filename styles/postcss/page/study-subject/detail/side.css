@@ -53,9 +53,8 @@
         padding-top: var(--large-space);
         & li {
             @apply --clearfix;
-            margin-bottom: var(--bar-gap);
-            height: var(--large-space);
-            line-height: var(--large-space);
+            margin-bottom: calc(var(--space) * 2);
+            padding: var(--space);
 
             &:before {
                 margin-right: var(--space);
@@ -64,14 +63,38 @@
                 font-weight: bold;
                 width: var(--large-space);
                 height: var(--large-space);
+                line-height: var(--large-space);
                 float: left;
                 text-align: center;
             }
         }
+        & .rank-top {
+            margin-top: calc(var(--space) / 1.5);
+        }
 
         & .text-overflow {
-            max-width: 30%;
             font-weight: 700;
+        }
+        & li.forefront {
+            &:before {
+                float:right;
+                margin-top: calc(var(--space) / 1.5);
+                margin-right: 0;
+            }
+        }
+
+        & .user-pic {
+            float: left;
+            width: calc(var(--large-space) * 1.5);
+            height: calc(var(--large-space) * 1.5);
+
+            & img { width: 100%; }
+        }
+
+        & .user-info {
+            float: left;
+            padding-left: calc(var(--space) * 2);
+            width: 40%;
         }
     }
 }

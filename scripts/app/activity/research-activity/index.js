@@ -12,7 +12,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        researchRecord: { url: '../exam/research-record/research-detail' },
+        researchRecord: { url: '../exam/research-record/front/research-detail' },
         questions: {
             mixin: {
                 init: function(dimensions) {

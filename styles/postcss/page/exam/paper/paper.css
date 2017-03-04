@@ -56,6 +56,32 @@
             }
         }
 
+        & .min-btn-groups {
+            position: relative;
+
+            & span {
+                position: absolute;
+                display: inline-block;
+                border-radius: 100%;
+                width: 1.5em;
+                height: 1.5em;
+                line-height: 1.5em;
+                cursor: pointer;
+                background: var(--border-color);
+                right: -1.5em;
+                color: white;
+                text-align: center;
+
+                &.up-arrow {
+                    top:1.5em;
+                }
+
+                &.down-arrow {
+                    top:3.5em;
+                }
+            }
+        }
+
         & .list-item {
             @apply --transition;
 
@@ -64,17 +90,30 @@
             margin-right: var(--space);
             margin-bottom: 1em;
             background: white;
-            width: 2em;
-            height: 2em;
-            line-height: 2em;
+            width: 1.8em;
+            height: 1.8em;
+            line-height: 1.8em;
             box-sizing: content-box;
             cursor: pointer;
+            border-radius: 100%;
+            font-size: 12px;
+
+            &.check {
+                background: var(--golden);
+                color: white;
+            }
+
+            &.current {
+                background: var(--main-color);
+                color:white;
+                box-shadow: 0 0 5px var(--font-tip-color);
+                border: 2px solid white;
+            }
 
             &.active,
             &:hover {
                 background: var(--main-color);
                 color:white;
-
             }
 
         }
@@ -147,6 +186,14 @@
         font-size: var(--small-font);
         text-align: right;
         margin-bottom: var(--section-gap);
+
+        & a {
+            color: var(--font-tip-color);
+        }
+
+        & .active {
+            color: var(--golden);
+        }
 
         & .item {
             display: inline-block;

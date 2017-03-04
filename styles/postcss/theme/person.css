@@ -1,55 +1,20 @@
 .person-page {
     & .person-top {
-        color: var(--white);
-        background-color: #333643;
-        background-image: url(../images/bg-usercenter.png);
-        background-size: cover;
-    }
-
-    & .head {
-        border-color: var(--bg-color)\0;
-        border-color: rgba(255,255,255,.2);
-    }
-
-    & .set .inline-block a {
-        color: color(var(--bg-color) alpha(50%));
-    }
-
-    & .btn-lecture {
-        color: rgb(50,252,88);
-    }
-    & .btn-expert {
-        color: rgb(228,255,0);
-    }
-    & .btn-lecture,
-    & .btn-expert {
-        &:hover {
-            background-color:rgba(135,135,135,.3);
-        }
-    }
-    & .btn-lecture.active,
-    & .btn-expert.active {
-        border-color: rgb(135,135,135);
-        background-color:rgba(135,135,135,.3);
-        &:after {
-            border-color: rgb(135,135,135);
+        & .lv {
+            display: inline-block;
+            background: #E18D07;
+            color: #FEFF00;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+            padding: 0 var(--space);
         }
     }
 
     & .person-menu {
-        color: var(--white);
-        background-color: #292c37;
+        background: var(--bg-color);
     }
+}
 
-    & .person-menu li a {
-        color: var(--font-tip-color);
-
-        &:hover{
-            background-color: var(--bg-color);
-        }
-    }
-    & .person-menu li a.active{
-        color: var(--font-color);
-        background-color: var(--white);
-    }
+.lecture-top .lv {
+    background: var(--sub-color-1);
+    color: white;
 }
