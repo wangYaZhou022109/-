@@ -1,0 +1,25 @@
+.ask-list {
+    & li {
+        padding-bottom: 0;
+    }
+
+    & .comment-operation {
+        margin-top: 1em;
+        padding-bottom: 1em;
+        font-size: var(--small-font);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    & .comment-text {
+        @apply --clearfix;
+
+        & img {
+            float: left;
+            margin-right: 1em;
+            width: 6em;
+            height: 4em;
+        }
+    }
+
+
+}

@@ -5,7 +5,8 @@ exports.routes = {
     course: 'showCourse',
     subject: 'showSubject',
     knowledge: 'showKnowledge',
-    post: 'showPost'
+    post: 'showPost',
+    ask: 'showAsk'
 };
 
 exports.showArchives = function() {
@@ -34,4 +35,8 @@ exports.showKnowledge = function() {
 
 exports.showPost = function() {
     return this.app.show('content', 'person/post');
+};
+
+exports.showAsk = function() {
+    return this.app.show('content', 'person/ask');
 };
