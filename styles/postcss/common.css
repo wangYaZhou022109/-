@@ -46,6 +46,10 @@
 section.section {
     margin-top: var(--section-gap);
     margin-bottom: var(--section-gap);
+
+    &:first-child {
+        margin-top: var(--large-space);
+    }
 }
 
 .page-main-wrapper {
@@ -131,6 +135,22 @@ section.section {
 
 .layout-mr-small {
     margin-right: calc(var(--space) * 2);
+}
+
+.mt-1 {
+    margin-top: 1em;
+}
+
+.mb-1 {
+    margin-bottom: 1em;
+}
+
+.ml-1 {
+    margin-left: 1em;
+}
+
+.mr-1 {
+    margin-right: 1em;
 }
 
 .w-full {
