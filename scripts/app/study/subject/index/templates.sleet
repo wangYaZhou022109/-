@@ -14,14 +14,14 @@ view('list')
                 .item#sort-1 > span 最热
                 .item#sort-2 > span 好评
         ul > each(subjects)
-            li > .content > a.normal(href='#/study/subject/detail/'+id)
+            li > .content > a.normal(href=url)
                 .img > .img-cont > img(src=imageUrl)
                 .clearfix
                     .pull-right.small-font.layout-ml
                         i.iconfont.icon-view(title='浏览')
                         span.m-let > echo(studyMemberCount) > string('study.member.count')
                     .title.text-overflow > echo(name)
-                .small-font.sub-text.text-overflow 简介简介简介简介简介简介简介简介简介简介简介简介简介简介
+                .small-font.sub-text.text-overflow > @echo(description)
                 .detail-wrapper
                     p > echo(name)
                     setting('study.subject.study_days') ：
