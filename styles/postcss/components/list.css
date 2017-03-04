@@ -128,7 +128,7 @@
             transform: scale(1,0);
             transform-origin: 0 100%;
             z-index: -1;
-            padding: var(--space) var(--large-space);
+            padding: var(--space) 0;
 
             & p {
                 height: calc(var(--font-size) * 1.8 * 2);

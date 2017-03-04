@@ -1,0 +1,48 @@
+.edit-info-page {
+    & .tabs {
+        margin-bottom: var(--large-space);
+    }
+
+    & .base-info {
+        & .layout-mr {
+            display: inline-block;
+        }
+
+        & .pic {
+            float: left;
+            margin-right: var(--large-space);
+            width: 10em;
+            position: relative;
+
+            & img {
+                width: 100%;
+                display: block;
+            }
+        }
+
+        & .info {
+            overflow: hidden;
+        }
+    }
+
+    & .phone-number-list {
+        margin-bottom: var(--large-space);
+        
+        & li {
+            @apply --clearfix;
+
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space) 0;
+
+            & .item {
+                display: inline-block;
+                border-right: 1px solid var(--border-color);
+                padding: 0 1em;
+
+                &:last-child {
+                    border: none;
+                }
+            }
+        }
+    }
+}
