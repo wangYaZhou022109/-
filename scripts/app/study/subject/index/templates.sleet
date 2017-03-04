@@ -6,15 +6,8 @@ module > .course-page.study-subject-page
 view('list')
     .main-list
         .filter
-            .pull-left
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
-                .item > span 标签一
+            .pull-left > each(topics)
+                .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
 
             .pull-right
                 .item#sort-0 > span 最新
@@ -22,7 +15,7 @@ view('list')
                 .item#sort-2 > span 好评
         ul > each(subjects)
             li > .content > a.normal(href='#/study/subject/detail/'+id)
-                .img > .img-cont > img(src=imageUrl width='380' height='200')
+                .img > .img-cont > img(src=imageUrl)
                 .clearfix
                     .pull-right.small-font.layout-ml
                         i.iconfont.icon-view(title='浏览')

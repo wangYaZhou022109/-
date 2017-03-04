@@ -5,11 +5,8 @@ module > .relevant-course(data-region='pannel')
 view('pannel')
     if(region.regionModule.display)
         .h3
-            .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
             echo(region.regionModule.name)
-        .layout-mt-small
+        .layout-mt-small.m-top
             each(courseRelated)
-                .img
-                    a.normal(href='#/study/subject/detail/'+id)
-                        .img-cont > img(src=imageUrl)
-                    h4.text-overflow(title=name) > echo(name)
+                .block.layout-mt-small.m-top
+                    a.text-overflow(href='#/study/subject/detail/'+id title=name) > echo(name)
