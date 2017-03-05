@@ -11,9 +11,6 @@ module
         .content-main(data-region='content')
 
 view('toolbox') > form.vertical
-    each(state)
-        echo(fullName+'|')
-    br
     echo('账号')
     input(name='name')
     echo('姓名')
@@ -32,7 +29,7 @@ view('content')
                 #  th(width='200px') > setting('system.all.company')
             tbody > each(members) > tr
                 td
-                    input(type='checkbox' id='select_'+id value=id fullName=fullName)('checked')&if(checked)
+                    input(type='checkbox' id='select_'+id value=id)('checked')&if(checked)
                     label(for='select_'+id)
                 td > echo(name)
                 td > echo(fullName)

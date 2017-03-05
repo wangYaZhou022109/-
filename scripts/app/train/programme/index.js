@@ -9,7 +9,8 @@ exports.items = {
     configOnline: '',
     editOffline: '',
     upload: '',
-    courseware: ''
+    courseware: '',
+    'train/programme/select-course': { isModule: true }
 };
 
 exports.store = {
@@ -17,6 +18,7 @@ exports.store = {
         classInfo: { url: '../train/classInfo/single' },
         offlineCourseList: { url: '../train/offline-course' },
         onlineCourseList: { url: '../train/online-course' },
+        onlineCourse: { url: '../train/online-course' },
         questionnaireList: { url: '../train/questionnaire' },
         themeList: { url: '../train/theme' },
         offlineThemeList: { url: '../train/theme/findOfflineTheme' },
@@ -26,6 +28,7 @@ exports.store = {
         file: { url: '../human/file/upload-parse-file' },
         attachList: { url: '../train/offline-course/findAttach' },
         courseAttach: { url: '../train/course-attach' },
+        download: { url: '../human/file/download' },
         delThemeList: { data: [] },
         state: { data: {} },
         files: { data: [] },
@@ -138,7 +141,7 @@ exports.store = {
                 index;
             index = state.data.index || themeList.length;
             index++;
-            newTheme.id = index + '';
+            newTheme.id = 'new-' + index;
             newTheme.classId = state.data.classId;
             newTheme.type = 2;
             newTheme.name = data;
@@ -319,6 +322,44 @@ exports.store = {
             offlineCourseList.params.startDate = target.startDate;
             offlineCourseList.params.endDate = target.endDate;
             this.get(offlineCourseList);
+        },
+        saveOnlineCourse: function(data) {
+            var target = data.target,
+                delList = data.del,
+                themeId = data.themeId,
+                onlineCourse = this.models.onlineCourse,
+                onlineCourseList = this.models.onlineCourseList,
+                state = this.models.state.data,
+                me = this;
+            onlineCourse.clear();
+            D.assign(onlineCourse.data, {
+                classId: state.classId,
+                themeId: themeId,
+                courseList: JSON.stringify(target),
+                delList: JSON.stringify(delList)
+            });
+            this.save(onlineCourse).then(function() {
+                this.app.message.success('提交成功');
+                me.get(onlineCourseList);
+            });
+        },
+        delOnlineCourse: function(payload) {
+            var model = this.models.onlineCourse,
+                onlineCourseList = this.models.onlineCourseList,
+                me = this;
+            model.set(payload);
+            this.del(model).then(function() {
+                me.get(onlineCourseList);
+            });
+        },
+        updateRequired: function(payload) {
+            var model = this.models.onlineCourse,
+                onlineCourseList = this.models.onlineCourseList,
+                me = this;
+            model.set(payload);
+            this.save(model).then(function() {
+                me.get(onlineCourseList);
+            });
         }
     }
 };

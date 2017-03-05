@@ -7,7 +7,8 @@ exports.large = true;
 exports.bindings = {
     offlineCourse: true,
     files: true,
-    state: true
+    state: true,
+    download: false
 };
 
 exports.dataForTemplate = {
@@ -18,7 +19,9 @@ exports.dataForTemplate = {
                 extension;
             extension = item.attachName.split('.').pop().toLowerCase();
             item.fileType = findExtension.call(me, extension);
+            item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachId;
             item.i = i + 1;
+            return item;
         });
         return data.files;
     }

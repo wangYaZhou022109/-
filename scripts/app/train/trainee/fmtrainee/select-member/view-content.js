@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _ = require('lodash/collection');
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'members' }
@@ -20,39 +20,32 @@ exports.handlers = {
     checkMember: function(value, e, ele) {
         var data = this.bindings.state.data,
             id = value,
-            fullName = ele.getAttribute('fullName');
+            i = 0;
         if (ele.checked) {
-            data.push({ id: id, fullName: fullName });
+            data.push(id);
         } else {
-            _.remove(data, function(n) {
-                return n.id === id;
-            });
+            for (i; i < data.length; i++) {
+                if (data[i] === id) {
+                    data.splice(i, 1);
+                    break;
+                }
+            }
         }
-        this.bindings.state.changed();
     },
     addTrainee: function() {
-        var checkedMembers = this.bindings.state.data;
-        var ids = [];
-        _.forEach(checkedMembers, function(v) {
-            ids.push(v.id);
-        });
+        var ids = this.bindings.state.data;
         this.module.renderOptions.callback(ids.join(','));
+        this.bindings.state.data = [];
     }
 };
 
 exports.dataForTemplate = {
     members: function(data) {
-        var checkedMembers = this.bindings.state.data;
-        var ids = [];
-        _.forEach(checkedMembers, function(v) {
-            ids.push(v.id);
+        var ids = this.bindings.state.data;
+        _.map(data.members || [], function(x) {
+            var m = x || {};
+            if (ids.indexOf(m.id) !== -1) m.checked = true;
         });
-        if (ids) {
-            _.map(data.members || [], function(x) {
-                var m = x || {};
-                if (ids.indexOf(m.id) !== -1) m.checked = true;
-            });
-        }
         return data.members;
     }
 };
