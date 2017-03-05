@@ -6,7 +6,13 @@ exports.routes = {
     subject: 'showSubject',
     knowledge: 'showKnowledge',
     post: 'showPost',
-    ask: 'showAsk'
+    ask: 'showAsk',
+    mooc: 'showMooc',
+    live: 'showLive',
+    exam: 'showExam',
+    class: 'showClass',
+    train: 'showTrain',
+    follow: 'showFollow'
 };
 
 exports.showArchives = function() {
@@ -39,4 +45,28 @@ exports.showPost = function() {
 
 exports.showAsk = function() {
     return this.app.show('content', 'person/ask');
+};
+
+exports.showMooc = function() {
+    return this.app.show('content', 'person/mooc');
+};
+
+exports.showLive = function() {
+    return this.app.show('content', 'person/live');
+};
+
+exports.showExam = function() {
+    return this.app.show('content', 'person/exam');
+};
+
+exports.showClass = function() {
+    return this.app.show('content', 'person/class');
+};
+
+exports.showTrain = function() {
+    return this.app.show('content', 'person/train');
+};
+
+exports.showFollow = function() {
+    return this.app.show('content', 'person/follow');
 };
