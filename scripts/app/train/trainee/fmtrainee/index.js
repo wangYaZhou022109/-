@@ -1,7 +1,8 @@
 exports.items = {
     main: 'main',
     search: 'search',
-    'train/trainee/fmtrainee/select-member': { isModule: true }
+    'train/trainee/fmtrainee/select-member': { isModule: true },
+    situation: ''
 };
 
 exports.store = {
@@ -12,8 +13,11 @@ exports.store = {
             root: 'items'
         },
         addTrainee: { url: '../train/trainee/addTrainee' },
+        addTrainees: { url: '../train/trainee/addTrainees' },
         traineeSort: { url: '../train/trainee/updateSort' },
         fmtrainee: { url: '../train/trainee' },
+        situation: { url: '../train/class-quota/situation' },
+        download: { url: '../train/trainee/download' },
         projectInfo: {},
         state: { data: { classId: 3, auditStatus: 1 } }
     },
@@ -45,6 +49,19 @@ exports.store = {
             addTrainee.clear();
             addTrainee.set(payload);
             return this.save(addTrainee);
+        },
+        addTrainees: function(payload) {
+            var addTrainees = this.models.addTrainees;
+            addTrainees.clear();
+            addTrainees.set(payload);
+            return this.save(addTrainees);
+        },
+        situation: function() {
+            var classId = this.models.state.data.classId,
+                situation = this.models.situation;
+            situation.clear();
+            situation.params = { classId: classId };
+            return this.get(situation);
         }
     }
 };

@@ -284,6 +284,9 @@ module.exports = {
     },
     'compatible-client': {
         0: '全部', 1: 'PC', 2: 'APP'
+    },
+    'trainee-sex': {
+        0: '男', 1: '女'
     }
 };
 

@@ -21,56 +21,53 @@ view('search') > form.vertical
 
 view('main')
     div.text-center
-        p.col-sm-2 > echo('学员列表')
-        .buttons
-            input.input(name='add-trainee-input' placeholder='人员编号')
-            .btn#addTrainee > echo('添加')
-            .btn#traineeGroup > echo('学员分组')
-            .btn#addAllTrainee > echo('添加学员')
-            .btn#importTrainee > echo('导入')
-            a(href=exportUrl target = "_blank") > .btn > echo('导出')
+        echo('学员列表')
+    .buttons
+        input.input(name='add-trainee-input' placeholder='人员编号')
+        .btn#addTrainee > echo('添加')
+        .btn#traineeGroup > echo('学员分组')
+        .btn#addAllTrainee > echo('添加学员')
+        .btn#situation > echo('查看分布')
+        .btn#importTrainee > echo('导入')
+        a(href=exportUrl target = "_blank") > .btn > echo('导出')
     table.table
         thead > tr
-            if(fmtrainees.isGroup)
-                th > echo('分组名称')
             th > echo('序号')
             th > echo('姓名')
             th > echo('员工编号')
+            th > echo('性别')
+            th > echo('民族')
             th > echo('机构')
             th > echo('部门')
             th > echo('职务')
             th > echo('手机')
             th > echo('操作')
-        tbody
-            if(fmtrainees.isGroup)
-                each(fmtrainees) > tr
-                    if(traineeGroup.id)
-                        td > echo(traineeGroup.name)
-                    else
-                        td > echo('待分组')
-                    td > echo(i)
-                    td > echo(member.fullName)
-                    td > echo(member.name)
-                    td > echo(companyName)
-                    td > echo(organizationName)
-                    td > echo(member.positionName)
-                    td > echo(phoneNumber)
-                    td
-                        a(id='sort'+id data-name='id' data-value=id) > echo('排序')
-                        input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
-                        a(id='delete'+id data-name='id' data-value=id) > echo('| 删除')
-            else
-                each(fmtrainees) > tr
-                    td > echo(i)
-                    td > echo(member.fullName)
-                    td > echo(member.name)
-                    td > echo(companyName)
-                    td > echo(organizationName)
-                    td > echo(member.positionName)
-                    td > echo(phoneNumber)
-                    td
-                        a(id='sort'+id data-name='id' data-value=id) > echo('排序')
-                        input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
-                        echo('|')
-                        a(id='delete'+id data-name='id' data-value=id) > echo('删除')
+        tbody > each(fmtrainees) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > map('trainee-sex' sex)
+            td > echo(nationName)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+            td
+                a(id='sort'+id data-name='id' data-value=id) > echo('排序')
+                input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                span(id='shuxian'+id) > echo('|')
+                a(id='delete'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination(style='float:none')
+
+view('situation')
+    echo('培训班审批情况:') + echo(situation.signUpNumber) + echo('/') + echo(situation.amount)
+    compare(situation.type 'eq' 2)
+        table.table
+            thead > tr
+                th > echo('序号')
+                th > echo('机构/部门')
+                th > echo('已报名人数/本省名额')
+            tbody > each(situation.classQuotaDetails) > tr
+                td > echo(i)
+                td > echo(organizationName)
+                td > echo(signUpNumber) + echo('/') + echo(quantity)
