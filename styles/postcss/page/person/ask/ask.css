@@ -1,0 +1,60 @@
+.ask-list {
+    & li {
+        padding-bottom: 0;
+    }
+
+    & .comment-operation {
+        margin-top: 1em;
+        padding-bottom: 1em;
+        font-size: var(--small-font);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    & .comment-text {
+        @apply --clearfix;
+
+        & img {
+            float: left;
+            margin-right: 1em;
+            width: 6em;
+            height: 4em;
+        }
+    }
+    & li.topic-item,
+    & li.expert-item {
+        float: left;
+        width: 33.33%;
+        padding-right: calc(var(--large-space) / 2);
+        & .img {
+            float: left;
+            margin-right: calc(var(--large-space) / 1.5);
+            width: calc(var(--large-space) * 3);
+        }
+        & h4 {
+            margin-top: 0;
+            margin-bottom: var(--space);
+        }
+        & .btn {
+            @apply --fade-out;
+            margin-top: var(--space);
+            height: auto;
+        }
+        & .row {
+            margin-top: var(--space);
+        }
+        & .sub-text {
+            margin-top: var(--space);
+        }
+        &:hover {
+            & .btn { @apply --fade-in}
+        }
+    }
+    & li.expert-item {
+        width: 50%;
+        & .img {
+            margin-bottom: var(--large-space);
+            width: calc(var(--large-space) * 4);
+        }
+    }
+
+}

@@ -73,6 +73,12 @@
     background: white;
     border: 1px solid var(--border-color);
 
+    &.active {
+        background: var(--main-color);
+        color: var(--white);
+        border: none;
+    }
+
 }
 
 .input {

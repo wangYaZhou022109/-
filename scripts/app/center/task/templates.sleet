@@ -1,0 +1,7 @@
+
+module > .person-page > .container
+    .person-top(data-region='main')
+
+
+view('main')
+    .news-list.clearfix

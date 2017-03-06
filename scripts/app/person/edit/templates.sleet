@@ -1,0 +1,99 @@
+#! handlebars
+
+module > .edit-info-page
+    .tabs.line > ul
+        li.active#item-1 基本信息
+        li#item-2 安全设置
+    .tabs-cont > ul
+        li.active.tabs-cont-item#tabs-cont-item-1(data-region='base-info')
+        li.tabs-cont-item#tabs-cont-item-2(data-region='security')
+
+view('base-info') > .base-info
+    .form
+        .pic > img(src='images/1.png') + .btn.block.white.border 修改头像
+        .info
+            .form-row
+                .layout-mr
+                    span 姓名：
+                    .content 罗会奇
+                .layout-mr
+                    span 性别：
+                    .content
+                        span.m-right > input.inline-block(type='radio') + .inline-block 男
+                        input.inline-block(type='radio') + .inline-block 女
+
+            .form-row
+                .layout-mr
+                    span 岗位：
+                    .content > select.input
+            .form-row
+                .layout-mr
+                    span 入职时间：
+                    .content 2016-09-09
+                .layout-mr
+                    span 员工编号：
+                    .content 124324234242
+            .form-row
+                .layout-mr
+                    span 单位：
+                    .content 互联网中心互联网中心互联网中心互联网中心互联网中心
+                .layout-mr
+                    label 部门：
+                    .content 互联网中心
+            .form-row
+                label 我感兴趣的：
+                .content
+                    .tag-btn 标签一
+                    .tag-btn 标签一
+                    .tag-btn 标签一
+                    .tag-btn 标签一
+            .form-row.textarea-row
+                span 个人简介：
+                .content > textarea.input(rows='3')
+
+view('security')
+    .tabs > ul
+        li.active#item-1 密码设置
+        li#item-2 邮箱设置
+        li#item-3 手机设置
+    .tabs-cont > ul
+        li.active.tabs-cont-item#tabs-cont-item-1
+            .form
+                .form-row
+                    label 旧密码：
+                    .content > input.input(placeholder='请输入您的旧密码')
+                .form-row
+                    label 新密码：
+                    .content > input.input(placeholder='请输入新密码')
+                .form-row
+                    label 确认新密码：
+                    .content
+                        input.input(placeholder='请再次输入新密码')
+                        .sub-text 6~20位字符（由字母、数字和符号组成）
+
+        li.tabs-cont-item#tabs-cont-item-2
+            .form
+                .form-row
+                    label 邮箱
+                    .content
+                        input.input(placeholder='请输入邮箱，绑定后可用于登录账号，接收邮件通知')
+                        .sub-text 您将收到一封激活邮件，点击邮件中的链接即可激活邮箱
+
+        li.tabs-cont-item#tabs-cont-item-3
+            ul.phone-number-list
+                li
+                    .pull-left 13800138000
+                    .pull-right
+                        .item 主号
+                        .item > a 删除
+                li
+                    .pull-left 13800138000
+                    .pull-right
+                        .item > a 设为主号
+                        .item > a 删除
+                li
+                    .pull-left 13800138000
+                    .pull-right
+                        .item > a 设为主号
+                        .item > a 删除
+            .text-center > a > i.iconfont.icon-add.m-right + span 添加号码

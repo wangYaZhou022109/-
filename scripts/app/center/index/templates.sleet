@@ -1,0 +1,61 @@
+#!handlebars
+
+module > .person-page > .container
+    .person-top(data-region='top')
+    .person-notice(data-region='notice')
+    .person-content.clearfix(data-region='menu')
+
+view('top')
+    .user-pic > img(src='images/1.png')
+    .user-base-info.clearfix
+        .learn-info
+            .item
+                .h2 10小时50分
+                .sub-text 学习时长
+            .item
+                .h2 899
+                .sub-text 积分
+        .base-info
+            .info-row
+                span.h2 陈宗寭
+                span.lv Lv3
+            .info-row
+                .item > i.iconfont.icon-warn + span 需求方
+                .item > i.iconfont.icon-mark + span 班务
+                .item > i.iconfont.icon-user-1 + span 讲师
+                .item > i.iconfont.icon-user-2 + span 专家
+                .item > a#edit-info 编辑资料
+            .info-row
+                .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
+
+view('notice')
+    .news-list.clearfix
+        .pull-left.m-right > i.iconfont.icon-notice
+        b.title 公告：
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-arrow-down#next
+            .icon.arrow.next > .iconfont.icon-arrow-up#pre
+            .icon > .iconfont.icon-more
+        ul
+            li > echo(title)
+
+
+view('menu')
+    .person-menu
+        ul.par > each(menus)
+            if(childs)
+                li.has-child
+                    .menu-text
+                        i.iconfont.icon-arrow-down.down
+                        i.iconfont.icon-arrow-up.up
+                        i.iconfont(class=icon)
+                        span >  echo(name)
+                    .sub > each(childs)
+                        .item(id='switch-'+id) > echo(name)
+            else
+                li(id='switch-'+id)
+                    .menu-text
+                        i.iconfont(class=icon)
+                        span > echo(name)
+    .person-main
+        div(id=state.menu data-dynamic-key=state.menu)

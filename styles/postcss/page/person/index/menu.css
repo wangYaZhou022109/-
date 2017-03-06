@@ -34,17 +34,13 @@
             padding: 0 1em;
             cursor: pointer;
 
-            &:hover {
+            &:hover,
+            &.current {
                 background: var(--white);
                 color: var(--main-color);
             }
         }
 
-        & .menu-text.current,
-        & .item.current {
-            background: var(--white);
-            color: var(--main-color);
-        }
 
         & .has-child .menu-text:hover {
             background: none;
