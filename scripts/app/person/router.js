@@ -12,7 +12,8 @@ exports.routes = {
     exam: 'showExam',
     class: 'showClass',
     train: 'showTrain',
-    follow: 'showFollow'
+    follow: 'showFollow',
+    favorite: 'showFavorite'
 };
 
 exports.showArchives = function() {
@@ -69,4 +70,8 @@ exports.showTrain = function() {
 
 exports.showFollow = function() {
     return this.app.show('content', 'person/follow');
+};
+
+exports.showFavorite = function() {
+    return this.app.show('content', 'person/favorite');
 };
