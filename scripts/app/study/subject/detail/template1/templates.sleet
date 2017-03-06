@@ -8,7 +8,6 @@ view('content')
     .page-main-wrapper
         .side
             .page-side > .container
-                section.section(data-dynamic-key=layout.right.region6.regionModule.code)
                 section.section(data-dynamic-key=layout.right.region7.regionModule.code)
                 section.section(data-dynamic-key=layout.right.region8.regionModule.code)
                 section.section(data-dynamic-key=layout.right.region9.regionModule.code)
@@ -19,3 +18,4 @@ view('content')
                 section.section(data-dynamic-key=layout.left.region3.regionModule.code)
                 section.section(data-dynamic-key=layout.left.region4.regionModule.code)
                 section.section(data-dynamic-key=layout.left.region5.regionModule.code)
+                section.section(data-dynamic-key=layout.right.region6.regionModule.code)

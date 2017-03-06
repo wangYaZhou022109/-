@@ -5,11 +5,13 @@ module > .rank(data-region='pannel')
 view('pannel')
     if(region.regionModule.display)
         .h3 > echo(region.regionModule.name)
+            span.text-tips.sub-text 学员时长排行榜
         .layout-mt-smal.side-rank-list
             ul
                 each(lists)
-                    li
-                        .pull-right.sub-text
-                            string('study.total.time') :
-                            strong > echo(studyTotalTime '分钟')
-                        .inline-block.text-overflow(title=member.fullName) > echo(member.fullName)
+                    li.forefront.first
+                        .user-pic > img(src=cover)
+                        .user-info
+                            .text-overflow(title=member.fullName) > echo(member.fullName)
+                            .text-overflow.m-top(title=member.organization.name) > echo(member.organization.name)
+                        strong > echo(studyTotalTime '分钟')
