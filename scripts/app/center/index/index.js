@@ -1,7 +1,8 @@
 exports.items = {
     top: 'top',
     notice: 'notice',
-    menu: 'menu'
+    menu: 'menu',
+    'center/edit': { isModule: true }
 };
 
 exports.store = {
