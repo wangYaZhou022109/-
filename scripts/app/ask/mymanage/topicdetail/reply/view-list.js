@@ -3,11 +3,11 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    reply: true
 };
 
 exports.events = {
-    'click my-question-detail-*': 'toggleMore'
+    'click mydetail-*': 'toggleMore'
 };
 
 exports.handlers = {
@@ -21,16 +21,15 @@ exports.handlers = {
     }
 };
 
-
 exports.dataForTemplate = {
-    trends: function(data) {
-        var trends = data.trends;
-        _.forEach(trends, function(value) {
+    reply: function(data) {
+        var reply = data.reply;
+        _.forEach(reply, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
         });
-        return trends;
+        return reply;
     }
 };
