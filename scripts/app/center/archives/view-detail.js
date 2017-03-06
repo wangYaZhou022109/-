@@ -1,9 +1,27 @@
-var _ = require('lodash/collection'),
-    $ = require('jquery'),
-    D = require('drizzlejs');
+var _ = require('lodash/collection');
+
+exports.type = 'dynamic';
 
 exports.bindings = {
-    detailMenu: true
+    detailMenu: true,
+    state: true,
+};
+
+exports.getEntityModuleName = function(key) {
+    var url = this.bindings.state.data.menu;
+    if (typeof key === 'string' && key !== '') {
+        url = key;
+    }
+    return 'center/archives/' + url;
+};
+exports.getEntity = function() {
+    return {
+        state: this.bindings.state.data
+    };
+};
+
+exports.dataForEntityModule = function(entity) {
+    return entity;
 };
 
 exports.events = {
@@ -12,29 +30,22 @@ exports.events = {
 
 exports.handlers = {
     showDetail: function(id) {
-        var menus = this.bindings.detailMenu.data,
-            me = this,
-            el = this.$('tableDiv'),
-            region = new D.Region(this.app, this.module, el, id),
-            item = '';
-        _.forEach(menus, function(menu) {
-            if (menu.id === id) {
-                $(me.$('detail-' + menu.id)).addClass('active');
-                item = menu.item;
+        var state = this.bindings.state,
+            menus = this.bindings.detailMenu.data,
+            menu = menus[id].url;
+        _.forEach(menus, function(m) {
+            var obj = m;
+            if (obj.id === id) {
+                obj.active = true;
             } else {
-                $(me.$('detail-' + menu.id)).removeClass('active');
+                obj.active = false;
             }
         });
-        region.show(item, { type: id });
+        state.data = {};
+        state.params = { type: id };
+        state.data.menu = menu;
+        state.data.menuId = id;
+        state.data[menu] = true;
+        state.changed();
     }
 };
-
-exports.afterRender = function() {
-    var el = this.$('tableDiv'),
-        me = this,
-        menus = this.bindings.detailMenu.data,
-        region = new D.Region(this.app, this.module, el);
-    region.show('center/archives/course', { type: menus[0].id });
-    $(me.$('detail-' + menus[0].id)).addClass('active');
-};
-

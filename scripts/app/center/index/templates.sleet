@@ -1,9 +1,11 @@
 #!handlebars
 
-module > .person-page > .container
-    .person-top(data-region='top')
-    .person-notice(data-region='notice')
-    .person-content.clearfix(data-region='menu')
+module > .person-page
+    .container
+        .person-top(data-region='top')
+        .person-notice(data-region='notice')
+        .person-content.clearfix(data-region='menu')
+    .person-interest(data-region='interest')
             
 view('top')
     .user-pic > img(src='images/1.png')
@@ -39,7 +41,6 @@ view('notice')
         ul
             li > echo(title)
 
-
 view('menu')
     .person-menu
         ul.par > each(menus)
@@ -51,11 +52,40 @@ view('menu')
                         i.iconfont(class=icon)
                         span >  echo(name)
                     .sub > each(childs)
-                        .item(id='switch-'+id) > echo(name)
+                        .item(id='switch-'+id class = if(current 'current')) > echo(name)
             else
                 li(id='switch-'+id)
-                    .menu-text
+                    .menu-text(class = if(current 'current'))
                         i.iconfont(class=icon)
                         span > echo(name)
     .person-main
         div(id=state.menu data-dynamic-key=state.menu)
+
+view('interest')
+    .border.top > .container
+        .title-row
+            .pull-right
+                a.normal(href="javascript:;") 换一组
+                a.normal(href="javascript:;") 关闭
+            | 猜你感兴趣
+        .main-list > ul
+            li > .content > a.normal(href='javascript:;')
+                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
+                .clearfix
+                    .title.text-overflow 让转化率提升10倍的标题怎么写？
+            li > .content > a.normal(href='javascript:;')
+                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
+                .clearfix
+                    .title.text-overflow 让转化率提升10倍的标题怎么写？
+            li > .content > a.normal(href='javascript:;')
+                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
+                .clearfix
+                    .title.text-overflow 让转化率提升10倍的标题怎么写？
+            li > .content > a.normal(href='javascript:;')
+                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
+                .clearfix
+                    .title.text-overflow 让转化率提升10倍的标题怎么写？
+            li > .content > a.normal(href='javascript:;')
+                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
+                .clearfix
+                    .title.text-overflow 让转化率提升10倍的标题怎么写？

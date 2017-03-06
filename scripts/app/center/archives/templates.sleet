@@ -7,8 +7,8 @@ module
 
 view('detail')
     .tabs > ul > each(detailMenu)
-        li(id='detail-'+ id) > echo(name)
-    div(id='tableDiv')
+        li(id='detail-'+ id class = if(active 'active')) > echo(name)
+    div(id=state.menu data-dynamic-key=state.menu)
 
 view('chart')
     .bg-highlight.graph-total-bar
