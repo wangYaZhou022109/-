@@ -16,9 +16,21 @@ view('question-type')
     ul.list > each(questionTypes)
         li(id='list-item-'+ @index)
             .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
-            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
-                div(class='list-item' + if(isCurrent 'active' ''))(id='q-'+id) > echo(i)
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) 
+                span.up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-left-circle
+                span.down-arrow(id='next-' + @index) > i.iconfont.icon-arrow-left-circle
+                each(data.data)
+                    compare(currentStatus 'eq' 'check')
+                        .list-item.check(id='q-'+id) > echo(i)
 
+                    compare(currentStatus 'eq' 'active')
+                        .list-item.active(id='q-'+id) > echo(i)
+
+                    compare(currentStatus 'eq' 'current')
+                        .list-item.current(id='q-'+id) > echo(i)
+
+                    compare(currentStatus 'eq' 'init')
+                        .list-item(id='q-'+id) > echo(i)
 
 view('head')
     .pull-left.title > echo('正在作答:' state.name)
@@ -40,13 +52,13 @@ view('main')
                 div(data-dynamic-key=state.questionId)
             .bottom.text-right
                 div(data-dynamic-key='collect-correct-' + state.questionId)
-            .slider-question
-                .item(id='prev')
-                    i.iconfont.icon-arrow-left-circle.line
-                    i.iconfont.icon-arrow-left-circle-full.full
-                .item(id='next')
-                    i.iconfont.icon-arrow-right-circle.line
-                    i.iconfont.icon-arrow-right-circle-full.full
+            #  .slider-question
+            #      .item(id='prev')
+            #          i.iconfont.icon-arrow-left-circle.line
+            #          i.iconfont.icon-arrow-left-circle-full.full
+            #      .item(id='next')
+            #          i.iconfont.icon-arrow-right-circle.line
+            #          i.iconfont.icon-arrow-right-circle-full.full
         else
             div
                 each(questionTypes)

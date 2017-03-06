@@ -102,60 +102,31 @@ view('list')
                         | 9.1
         .h3.m-bottom 直播
         ul
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 09-25 14：00
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 09-25 14：00
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 09-25 14：00
+            each(gensees)
+                li
+                    .content
+                        .img
+                            .img-cont
+                                a.normal > img(src=cover)
+                            .detail-wrapper
+                                p
+                                    .btn.radius.block
+                                        div(id='attendLive-'+id) 我要参与
+                        .clearfix
+                            .pull-right.tip-text
+                            .title.text-overflow
+                                echo(subject)
+                        .bottom.sub-text
+                            i.iconfont.icon-favorite
+                                echo(subNumber)
+                            i.iconfont.icon-favorite.m-left
+                                date(startTime)
         .h3.m-bottom 考试
-        ul.activity-item-box.activity-item-exam
+        ul.activity-item-box.activity-item-exam.cell-3
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a#toExam(href='#/exam/answer-paper/99e5b660-537b-4722-b2a2-c6209f028718') 测试考试，不要修改这个！
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -163,7 +134,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -171,7 +142,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -179,7 +150,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -187,7 +158,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -195,13 +166,13 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
                         | 9-28 至 12-25
         .h3.m-bottom 班级
-        ul.activity-item-box.activity-item-class
+        ul.activity-item-box.activity-item-class.cell-3
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
@@ -251,7 +222,7 @@ view('list')
                         i.iconfont.icon-favorite.m-left.m-right
                         | 9-28 至 12-25
         .h3.m-bottom 调研
-        ul.activity-item-box.activity-item-research
+        ul.activity-item-box.activity-item-research.cell-3
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon

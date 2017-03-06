@@ -1,0 +1,29 @@
+.knowledge-side {
+    width: 22%;
+    float: right;
+
+    & ul {
+        padding-top: calc(var(--space)*2);
+
+        & li {
+            list-style: inside decimal;
+            overflow: hidden;
+            line-height: 2.5em;
+
+            & .pull-right {
+                color: var(--font-sub-color);
+            }
+
+            & a {
+                color: var(--font-color);
+                padding-left: var(--space);
+                display: inline-block;
+                overflow: hidden;
+                height: calc(var(--space)*2.5);
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 80%;
+            }
+        }
+    }
+}
