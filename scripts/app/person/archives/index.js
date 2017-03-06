@@ -3,7 +3,8 @@ exports.items = {
     menu: 'menu',
     main: 'main',
     notice: 'notice',
-    'person/edit': { isModule: true }
+    'person/edit': { isModule: true },
+    'person/archives/detail': { isModule: true }
 };
 exports.store = {
     models: {

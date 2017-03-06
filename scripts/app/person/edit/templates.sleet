@@ -26,6 +26,7 @@ view('base-info') > .base-info
                 .layout-mr
                     span 岗位：
                     .content > select.input
+            .form-row
                 .layout-mr
                     span 入职时间：
                     .content 2016-09-09

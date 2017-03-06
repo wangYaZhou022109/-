@@ -147,7 +147,7 @@ view('main')
                     td -
                     td 01:30:00
                     td 已完成
-                    td > a 详情
+                    td > a#detail-item-1 详情
                 tr
                     td 1
                     td.nowrap > .text-overflow 课程标题课程标题课程标题课程标题课程标题课程标题课程标题
