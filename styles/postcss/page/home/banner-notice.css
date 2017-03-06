@@ -1,0 +1,65 @@
+.banner-bar {
+    position: relative;
+
+    & .banner-notice {
+        position: absolute;
+        width: 18em;
+        top: 4em;
+        right: var(--section-gap);
+        background: white;
+        font-size: var(--small-font);
+
+        & .notice-img {
+            height: 12em;
+            width: 100%;
+            position: relative;
+        }
+
+        & .img-title {
+            @apply --text-overflow;
+
+            background: rgba(255,255,255,.8);
+            padding: var(--space) var(--large-space);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        & li {
+            @apply --text-overflow;
+
+            padding: var(--space) var(--large-space);
+            margin-top: calc(var(--space) / 2);
+
+        }
+
+        & .notice-bottom {
+            @apply --clearfix;
+
+            background: var(--bg-color);
+            margin-top: var(--space);
+            padding: 1em 0;
+
+            & .item {
+                width: 50%;
+                float: left;
+                text-align: center;
+                border-right: 1px solid var(--border-color);
+                cursor: pointer;
+
+                &:last-child {
+                    border: none;
+                }
+
+                &:hover {
+                    color: var(--main-color);
+                }
+
+                & .iconfont {
+                    margin-right: calc(var(--space) / 2);
+                }
+            }
+        }
+    }
+}

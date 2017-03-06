@@ -8,6 +8,9 @@ exports.store = {
         subject: {},
         lists: {
             url: '../course-study/course-study-progress/list'
+        },
+        download: {
+            url: '../human/file/download'
         }
     },
     callbacks: {

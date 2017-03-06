@@ -28,6 +28,11 @@
 
     --black: #000;
     --white: #fff;
+    --golden: #ddc265;
+
+    --color-ing: #3965e3;
+    --color-pass: #31822c;
+    --color-error: #d30000;
 
 }
 
@@ -148,6 +153,18 @@
 
 [class*=custom-bg-] {
     color: var(--white);
+}
+
+.color-ing {
+    color: var(--color-ing);
+}
+
+.color-pass {
+    color: var(--color-pass);
+}
+
+.color-error {
+    color: var(--color-error);
 }
 
 .section .activity-tag {

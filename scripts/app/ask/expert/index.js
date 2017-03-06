@@ -1,8 +1,12 @@
 exports.items = {
+    left: 'left',
+    right: 'right'
 };
 
 exports.store = {
     models: {
+        leftstate: {},
+        rightstate: {}
     },
     callbacks: {
         init: function() {
