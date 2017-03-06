@@ -5,6 +5,15 @@ exports.bindings = {
     businessType: false
 };
 
+exports.events = {
+    'click showDeail*': 'showDetail'
+};
+
+exports.handlers = {
+    showDetail: function(id) {
+    }
+};
+
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'progressList' }
 }];

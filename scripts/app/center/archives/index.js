@@ -8,7 +8,7 @@ exports.store = {
         detailMenu: { data: [
             { id: '0', name: '课程', url: 'course' },
             { id: '1', name: '专题', url: 'course' },
-            { id: '2', name: '班级', url: '' },
+            { id: '2', name: '班级', url: 'class' },
             { id: '3', name: '直播', url: '' },
             { id: '4', name: '考试', url: '' },
             { id: '5', name: '调研', url: '' },
