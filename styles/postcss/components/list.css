@@ -4,6 +4,7 @@
 }
 
 .main-list {
+    overflow: visible;
 
     & .filter {
         @apply --clearfix;
@@ -38,7 +39,7 @@
     & > ul {
         @apply --clearfix;
 
-        margin-right: -calc(var(--main-list-gap) - 0.1);
+        margin-right: -var(--main-list-gap);
 
         & li {
             float: left;
