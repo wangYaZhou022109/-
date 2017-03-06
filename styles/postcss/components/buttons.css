@@ -19,6 +19,11 @@
         font-size: var(--small-font);
     }
 
+    &.big {
+        padding: calc(var(--space)*1.2) calc(var(--large-space)*2);
+        height: 3em;
+    }
+
     &.radius {
         border-radius: 3px;
     }
@@ -59,7 +64,7 @@
 
 .tag-btn {
     @apply --transition;
-    
+
     display: inline-block;
     font-size: var(--small-font);
     padding: calc(var(--space) / 2) calc(var(--large-space) / 2);

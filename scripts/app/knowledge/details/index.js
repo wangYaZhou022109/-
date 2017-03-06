@@ -1,6 +1,5 @@
 exports.items = {
-    catalog: 'catalog',
-    list: 'list',
+    banner: 'banner',
     main: 'main',
     side: 'side'
 };

@@ -1,17 +1,18 @@
 #!handlebars
 
-module > .activity-page
-    .activity-filter(data-region='filter')
-    .ask-list(data-region='main')
+module > .page-main-wrapper
+    .page-side.ask-side > .container(data-region='side')
+    .page-main.ask-main > .container(data-region='main')
 
 
-view('filter')
-    .container
-        .activity-tabs > ul
-            li(id='filter-menu-content' name='filter-menu-content' class = '') > string('content')
-            li(id='filter-menu-topic' name='filter-menu-topic' class = '') > string('topic')
-            li(id='filter-menu-expert' name='filter-menu-expert' class = '') > string('expert')
+view('side')
+    | 哈哈
 
-view('main') 
-    div(data-dynamic-key=state.menu)
-        
+view('main')
+    .ask-tab-box.layout-mt-small
+        ul
+            li.active > a.normal 全部动态
+            li > a.normal 与我相关
+            li > a.normal 专家分享
+
+        .ask-item

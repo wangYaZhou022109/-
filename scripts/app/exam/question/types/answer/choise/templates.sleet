@@ -18,10 +18,10 @@ view('options') > .answer
                     input(type='checkbox' id='check-'+@index value=@index)('checked')&if(checked)
                     label(for='check-'+@index)
             else
-                input(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
-            label.m-left(for='answer-item-' + index)
-                span.option-num > @echo(code '：')
-                .answer-options > @echo(content)
+                input.pull-left.m-right(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
+            label(for='answer-item-' + index)
+                span.pull-left.option-num > @echo(code '：')
+                .answer-options.pull-left > @echo(content)
 
     if(isShowDetail)
         .show-answer

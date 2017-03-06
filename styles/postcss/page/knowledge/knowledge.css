@@ -1,3 +1,5 @@
-@import "banner.css";
 @import "main.css";
 @import "side.css";
+@import "details/banner.css";
+@import "details/main.css";
+@import "details/side.css";
