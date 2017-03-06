@@ -22,9 +22,7 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    // console.log('1111111111111');
     var data = this.renderOptions.state.data;
-    console.log(data.topicid);
     if (typeof data.topicid !== 'undefined') {
         return this.dispatch('init', this.renderOptions);
     }
