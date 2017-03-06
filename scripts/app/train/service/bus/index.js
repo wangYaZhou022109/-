@@ -74,6 +74,10 @@ exports.store = {
             });
             return me.save(me.models.optionModel);
         },
+        remove: function(payload) {
+            this.models.bus.set(payload);
+            return this.del(this.models.bus);
+        },
     }
 };
 

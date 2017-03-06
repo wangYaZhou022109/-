@@ -23,16 +23,23 @@ exports.handlers = {
         region.show(model, { id: id });
     },
     addBus: function() {
+        this.bindings.bus.clear();
         this.app.viewport.modal(this.module.items.edit);
     },
 };
 
 exports.actions = {
+    'click remove*': 'remove',
     'click publish*': 'publish',
     'click undo*': 'undo',
+    'click editBus*': 'editBus',
 };
 
 exports.dataForActions = {
+    editBus: function(data) {
+        this.app.viewport.modal(this.module.items.edit);
+        return data;
+    },
     publish: function(data) {
         var me = this;
         return this.Promise.create(function(resolve) {
@@ -48,6 +55,17 @@ exports.dataForActions = {
         var me = this;
         return this.Promise.create(function(resolve) {
             var message = '确定取消发布该主题?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
+    remove: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定删除这条数据吗?';
             me.app.message.confirm(message, function() {
                 resolve(data);
             }, function() {

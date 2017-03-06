@@ -25,11 +25,13 @@ view('main')
                 compare(state 'eq' 0)
                     a(id='edit'+id data-name='id' data-value=id) > echo('编辑')
                     echo(' | ')
-                    a(id='publish'+id data-name='id' data-value=id) > echo('发布')
-                compare(state 'eq' 1)
                     a(id='count'+id data-name='id' data-value=id) > echo('统计')
                     echo(' | ')
-                    a(id='undo'+id data-name='id' data-value=id) > echo('取消发布')
+                    a(id='remove'+id data-name='id' data-value=id) > echo('删除')
+                else
+                    a(id='count'+id data-name='id' data-value=id) > echo('统计')
+                    echo(' | ')
+                    a(id='remove'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination
 
 view('edit') > form.vertical
