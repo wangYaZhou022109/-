@@ -3,8 +3,8 @@ exports.items = {
     menu: 'menu',
     main: 'main',
     notice: 'notice',
-    'person/index/projects': { isModule: true },
-    'person/index/classinfos': { isModule: true }
+    'person/edit': { isModule: true },
+    'person/archives/detail': { isModule: true }
 };
 exports.store = {
     models: {
