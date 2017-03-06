@@ -1,7 +1,7 @@
 exports.routes = {
     index: 'showIndex',
     'research-activity/:id': 'showResearchActivity',
-    'live-details': 'showLiveDetails',
+    'gensee/detail/:id': 'showLiveDetails',
     'class-details': 'showClassDetails'
 };
 
@@ -13,8 +13,8 @@ exports.showResearchActivity = function(targetId) {
     return this.app.show('content', 'activity/research-activity', { researchQuestionaryId: targetId });
 };
 
-exports.showLiveDetails = function() {
-    return this.app.show('content', 'activity/live-details');
+exports.showLiveDetails = function(targetId) {
+    return this.app.show('content', 'activity/live-details', { genseeId: targetId });
 };
 
 exports.showClassDetails = function() {

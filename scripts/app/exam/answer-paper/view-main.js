@@ -20,20 +20,12 @@ exports.components = [{
 }];
 
 exports.events = {
-    'change paper-view-type': 'changePaperViewType',
-    'click prev': 'prev',
-    'click next': 'next'
+    'change paper-view-type': 'changePaperViewType'
 };
 
 exports.handlers = {
     changePaperViewType: function() {
         return this.module.dispatch('changePaperViewType', { type: this.$('paper-view-type').value });
-    },
-    prev: function() {
-        return this.module.dispatch('move', -1);
-    },
-    next: function() {
-        return this.module.dispatch('move', 1);
     }
 };
 
@@ -59,7 +51,6 @@ exports.getEntity = function(id) {
         isCollectCorrect = false,
         marks = this.bindings.marks,
         questionTypes = this.bindings.questionTypes;
-
     if (marks.isCollectDynamicView(questionId)) {
         questionId = questionId.replace('collect-correct-', '');
         isCollectCorrect = true;
@@ -76,7 +67,7 @@ exports.getEntity = function(id) {
 
 exports.getEntityModuleName = function(id, question) {
     if (this.bindings.marks.isCollectDynamicView(id)) {
-        return 'exam/answer-paper/collect-correct';
+        return 'exam/answer-paper/waiting-check-correct';
     }
     return types.get(question.type, 3);
 };
@@ -103,11 +94,10 @@ getCollectCorrect = function(question) {
     var me = this;
     return {
         questionId: question.id,
-        isCollect: this.bindings.marks.isCollect(question.id),
         correct: this.bindings.marks.getCurrentCorrect(question.id) || {},
         callback: {
-            collect: function(data) {
-                return me.module.dispatch('collect', data);
+            waitingCheck: function(data) {
+                return me.module.dispatch('waitingCheck', data);
             },
             correct: function(data) {
                 return me.module.dispatch('correct', data);

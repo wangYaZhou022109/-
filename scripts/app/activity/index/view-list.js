@@ -1,12 +1,16 @@
+var _ = require('lodash/collection');
+
 exports.bindings = {
     activitys: true,
     params: true,
-    down: true
+    down: true,
+    gensees: true,
 };
 
 exports.events = {
     'click category-item-*': 'toggleItem',
-    'click to-activity-*': 'toActivity'
+    'click to-activity-*': 'toActivity',
+    'click attendLive-*': 'attendLive',
 };
 
 exports.handlers = {
@@ -25,6 +29,9 @@ exports.handlers = {
         } else if (type === '6') {
             this.app.show('content', 'exam/index', { id: id });
         }
+    },
+    attendLive: function(id) {
+        window.open('#/activity/gensee/detail/' + id, '_blank');
     }
 };
 
@@ -40,6 +47,15 @@ exports.dataForTemplate = {
             }
         });
         return data.activitys;
+    },
+    gensees: function(data) {
+        var defultImg = 'images/default-cover/default_live.jpg',
+            downUrl = this.bindings.down.getFullUrl();
+        _.map(data.gensees || [], function(item) {
+            var gensee = item;
+            gensee.cover = gensee.cover ? (downUrl + '?id=' + gensee.cover) : defultImg;
+        });
+        return data.gensees;
     },
     type: function() {
         var params = this.bindings.params.data;

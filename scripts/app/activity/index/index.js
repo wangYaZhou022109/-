@@ -14,6 +14,7 @@ exports.store = {
             root: 'items',
             pageSize: 6
         },
+        gensees: { url: '../course-study/gensee-student/list' },
         activity: { url: '../exam/activity' },
         params: { data: { isOverdue: false } },
         down: { url: '../human/file/download' }
@@ -22,6 +23,7 @@ exports.store = {
         init: function() {
             this.models.activitys.params = this.models.params.data;
             this.get(this.models.activitys);
+            this.get(this.models.gensees);
         },
         search: function(payload) {
             var data = this.models.params.data;

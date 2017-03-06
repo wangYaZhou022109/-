@@ -17,8 +17,8 @@ exports.store = {
             data.isCollect = payload.isCollect || false;
             data.correct = payload.correct;
         },
-        collect: function(payload) {
-            this.module.renderOptions.callback.collect(payload);
+        waitingCheck: function(payload) {
+            this.module.renderOptions.callback.waitingCheck(payload);
         },
         correct: function(payload) {
             this.module.renderOptions.callback.correct(payload);

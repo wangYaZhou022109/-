@@ -1,27 +1,37 @@
-var $ = require('jquery');
+// var $ = require('jquery');
 
 exports.bindings = {
-    state: true,
     exam: false,
     questionTypes: true
 };
 
 exports.events = {
+    'click prev-*': 'prev',
+    'click next-*': 'next',
     'click q-*': 'showQuestion',
     'click list-item-*': 'toggleMore'
 };
 
 exports.handlers = {
-    toggleMore: function(id, e, target) {
-        this.module.dispatch('changeState', { typeIndex: Number(id) });
-        $(target).find('.min-btn-groups').slideToggle();
-        $(target).siblings().find('.min-btn-groups').slideUp();
-    },
-    showQuestion: function(id, e, target) {
+    prev: function(id, e) {
         e.preventDefault();
-        $(target).addClass('active').siblings().removeClass('active');
+        return this.module.dispatch('move', -1);
+    },
+    next: function(id, e) {
+        e.preventDefault();
+        return this.module.dispatch('move', 1);
+    },
+    showQuestion: function(id, e) {
+        e.preventDefault();
+        // $(target).addClass('active').siblings().removeClass('active');
         return this.module.dispatch('changeState', { questionId: id });
-    }
+    },
+    toggleMore: function(id, e) {
+        e.stopPropagation();
+        this.module.dispatch('changeState', { typeIndex: Number(id) });
+        // $(target).find('.min-btn-groups').slideToggle();
+        // $(target).siblings().find('.min-btn-groups').slideUp();
+    },
 };
 
 exports.type = 'dynamic';

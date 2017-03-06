@@ -1,0 +1,299 @@
+#!handlebars
+
+module > .knowledge
+    .knowledge-banner(data-region='banner')
+    .container.layout-mt-small.clearfix
+        .knowledge-main(data-region='main')
+        .knowledge-side(data-region='side')
+
+view('banner')
+    .knowledge-banner > .container.clearfix
+        .catalog > ul
+            li
+                h3 管理
+                p
+                    a 领导力发展
+                    a 人力资源
+                    a 财务审计
+                    a 战略规划
+                    a 法律事物
+                    a 采购物流
+            li
+                h3 管理
+                p
+                    a 领导力发展
+                    a 人力资源
+                    a 财务审计
+                    a 战略规划
+                    a 法律事物
+                    a 采购物流
+            li
+                h3 管理
+                p
+                    a 领导力发展
+                    a 人力资源
+                    a 财务审计
+                    a 战略规划
+                    a 法律事物
+                    a 采购物流
+        .banner-img > img(src='images/knowledge-banner.png')
+        .banner-right
+            .banner-right-up
+                .btn.block 上传知识
+                | 共有
+                b 546513
+                | 份知识
+            .banner-right-down
+                a 标签
+                a 党团建设
+                a 电脑基础知识
+                a 互联网
+                a 互联网
+                a 计算机软件及应用
+                a 标签
+                a 党团建设
+                a 电脑基础知识
+                a 互联网
+                a 互联网
+                a 互联网
+                a 计算机软件及应用
+                a 标签
+                a 党团建设
+                a 电脑基础知识
+                a 互联网
+
+view('main')
+    .h3 推荐知识
+    .main-list.layout-mt-small
+        ul.cell-4
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+            li
+                .content
+                    .img
+                        .img-cont
+                            a.normal > img(src='images/d2.jpg')
+                    .clearfix
+                        .pull-right.tip-text
+                        .title.text-overflow > | PPT动画完全自学入门
+    .h3 精品知识
+    .main-list.layout-mt-small
+        ul.cell-3.boutique
+            li
+                h3 领导力发展
+                .img.clearfix
+                    img.pull-left(src='images/default-cover/default_news.jpg')
+                    a.list-tit 优秀领导者的进阶
+                    .list-con 本课程让学员学会突破自己、发展自己的优势、发挥出自己的领导风格
+                ol
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点掌握绩效的关键管理点掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+            li
+                h3 领导力发展
+                .img.clearfix
+                    img.pull-left(src='images/default-cover/default_news.jpg')
+                    a.list-tit 优秀领导者的进阶
+                    .list-con 本课程让学员学会突破自己、发展自己的优势、发挥出自己的领导风格
+                ol
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+            li
+                h3 领导力发展
+                .img.clearfix
+                    img.pull-left(src='images/default-cover/default_news.jpg')
+                    a.list-tit 优秀领导者的进阶
+                    .list-con 本课程让学员学会突破自己、发展自己的优势、发挥出自己的领导风格
+                ol
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+            li
+                h3 领导力发展
+                .img.clearfix
+                    img.pull-left(src='images/default-cover/default_news.jpg')
+                    a.list-tit 优秀领导者的进阶
+                    .list-con 本课程让学员学会突破自己、发展自己的优势、发挥出自己的领导风格
+                ol
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+            li
+                h3 领导力发展
+                .img.clearfix
+                    img.pull-left(src='images/default-cover/default_news.jpg')
+                    a.list-tit 优秀领导者的进阶
+                    .list-con 本课程让学员学会突破自己、发展自己的优势、发挥出自己的领导风格
+                ol
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+            li
+                h3 领导力发展
+                .img.clearfix
+                    img.pull-left(src='images/default-cover/default_news.jpg')
+                    a.list-tit 优秀领导者的进阶
+                    .list-con 本课程让学员学会突破自己、发展自己的优势、发挥出自己的领导风格
+                ol
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+                    li
+                        i.icon-favorite.icon.pull-left
+                        a 掌握绩效的关键管理点
+
+view('side')
+    .h3 热门知识
+    ul
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的好孩子是这样培养的好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+    hr
+    .h3.layout-mt-small 我的知识
+    ul
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的好孩子是这样培养的好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+        li
+            .pull-right 4页
+            a 好孩子是这样培养的
+    hr
