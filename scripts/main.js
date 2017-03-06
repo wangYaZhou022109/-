@@ -87,7 +87,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'study', 'activity', 'exam', 'news', 'person']
+    routers: ['', 'home', 'study', 'activity', 'exam', 'news', 'person', 'ask']
 });
 
 D.PageableModel.setDefault({
