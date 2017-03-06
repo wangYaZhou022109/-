@@ -2,6 +2,7 @@ exports.items = {
     main: 'main',
     search: 'search',
     count: 'count',
+    status: '',
 };
 
 exports.store = {
@@ -14,9 +15,21 @@ exports.store = {
         export: {
             url: '../train/sign-detail/download'
         },
+        updateState: {
+            url: '../train/sign-detail/update'
+        },
         state: { data: {} },
     },
     callbacks: {
+        update: function(payload) {
+            var updateState = this.models.updateState;
+            updateState.params = payload;
+            updateState.set(payload);
+            this.put(updateState).then(function() {
+                this.app.message.success('修改成功');
+                this.get(this.models.signDetail);
+            });
+        },
         export: function() {
             var params = this.models.search.getQueryParams();
             params.page = 1;

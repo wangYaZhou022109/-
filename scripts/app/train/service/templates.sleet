@@ -8,9 +8,8 @@ module > .train-class-page
 view('tab')
     .container > ul.row.text-center
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-sign') 考勤
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-bus') 班车信息
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-task') 作业管理
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-reward') 课酬管理
+        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-bus') 班车信息
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-settle') 结算数据
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-affiche') 班级公告
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-discuss') 讨论管理

@@ -33,15 +33,38 @@ view('main')
     #pager.pagination
 
 view('edit') > form.vertical
-    label(class='required') > echo('统计名称')
+    label(class='required') > echo('统计主题')
     input.input(name='name'  value=bus.name  x-rule='required')
     br
-    label > echo('开始时间')
+    label(class='required') > echo('开始时间')
     input.input(name='startTime' value=dateTime(bus.startTime) x-rule='required')
-
+    br
     label(class='required') > echo('结束时间')
     input.input(name='endTime' value=dateTime(bus.endTime) x-rule='required')
     br
-    a.btn#addOption > span > echo('添加')
-    br
+    div
+        div
+            label > echo('5点半去集团') 
+            br
+            input.input(name='name' value=bus.name)
+        div
+            label > echo('5点半去机场') 
+            br
+            input.input(name='name' value=bus.name)
+        div
+            label > echo('7点半去集团') 
+            br
+            input.input(name='name' value=bus.name)
+        div
+            label > echo('7点半去机场') 
+            br
+            input.input(name='name' value=bus.name)
+        div
+            label > echo('5点去晚餐') 
+            br
+            input.input(name='name' value=bus.name)
+        div
+            label > echo('7点早餐') 
+            br
+            input.input(name='name' value=bus.name)
     a.btn#saveOption > span > echo('保存')

@@ -21,6 +21,11 @@ exports.store = {
         state: { data: { classId: 3 } }
     },
     callbacks: {
+        preview: function(payload) {
+            var sign = this.models.sign;
+            sign.set(payload);
+            return this.get(sign);
+        },
         init: function(payload) {
             var signs = this.models.signs;
             signs.params = payload;

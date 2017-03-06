@@ -17,7 +17,6 @@ exports.events = {
     'click check-all': 'checkAll',
     'click check-item*': 'checkItem',
     'click detail*': 'detail',
-    'click preview*': 'preview'
 };
 
 exports.handlers = {
@@ -43,16 +42,12 @@ exports.handlers = {
         region = new D.Region(this.app, this.module, el, id);
         region.show(model, { id: id });
     },
-    preview: function(data) {
-        var model = this.module.items.preview;
-        this.app.viewport.modal(model, true);
-        return data;
-    },
 };
 
 exports.actions = {
     'click editSign*': 'editSign',
     'click batchDelete': 'batchDelete',
+    'click preview*': 'preview'
 };
 
 exports.dataForActions = {
@@ -75,7 +70,12 @@ exports.dataForActions = {
         });
         data.ids = ids.join(',');
         return data;
-    }
+    },
+    preview: function(data) {
+        var model = this.module.items.preview;
+        this.app.viewport.modal(model, true);
+        return data;
+    },
 };
 
 exports.actionCallBacks = {

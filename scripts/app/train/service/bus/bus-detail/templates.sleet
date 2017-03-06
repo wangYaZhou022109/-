@@ -20,7 +20,7 @@ view('count')
 view('search') > form.vertical
     div.row.text-center
         div.col-sm-3
-            echo('等级信息')
+            echo('登记信息')
             select#state(name='state')
                 option(value='0') > echo('当日晚去机场')
                 option(value='1') > echo('0206早餐')
