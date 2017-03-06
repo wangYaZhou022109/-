@@ -1,7 +1,8 @@
 exports.items = {
     top: 'top',
     notice: 'notice',
-    menu: 'menu'
+    menu: 'menu',
+    interest: 'interest'
 };
 
 exports.store = {
@@ -26,7 +27,7 @@ exports.store = {
         ] },
         state: {
             data: {
-                menu: 'archives' // 初始菜单
+                menu: 'archives', // 初始菜单
             }
         }
     },
