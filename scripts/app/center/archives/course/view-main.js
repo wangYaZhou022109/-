@@ -5,6 +5,13 @@ exports.bindings = {
     businessType: false
 };
 
+exports.events = {
+    'click showDeail*': 'showDetail'
+};
+
+exports.handlers = {
+};
+
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'progressList' }
 }];

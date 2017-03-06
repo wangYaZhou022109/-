@@ -37,7 +37,7 @@ view('main')
                             echo('—')
                     td > echo(studyTotalTime)
                     td > setting('person.archives.course.finished')
-                    td > a > setting('person.archives.details')
+                    td > a(id='showDeail'+id) > setting('person.archives.details')
                     else
                         tr > td(colspan='9') > p.text-center > string('no-data')
         #pager.pagination
