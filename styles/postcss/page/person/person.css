@@ -6,3 +6,6 @@
 @import "expert/expert.css";
 @import "lecture/lecture";
 @import "list/list.css";
+@import "edit/edit.css";
+@import "post/post.css";
+@import "ask/ask.css";

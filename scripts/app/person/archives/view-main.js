@@ -17,3 +17,15 @@ exports.getEntity = function() {
 exports.dataForEntityModule = function(entity) {
     return entity;
 };
+
+
+exports.events = {
+    'click detail-item-*': 'showDetail'
+};
+
+exports.handlers = {
+    showDetail: function() {
+        var model = this.module.items['person/archives/detail'];
+        this.app.viewport.modal(model);
+    }
+};

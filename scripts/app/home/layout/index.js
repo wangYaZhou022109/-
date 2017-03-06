@@ -6,5 +6,6 @@ exports.items = {
     'layout-4': 'layout-4',
     'layout-5': 'layout-5',
     lecture: 'lecture',
-    rank: 'rank'
+    rank: 'rank',
+    'banner-notice': 'banner-notice'
 };

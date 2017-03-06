@@ -1,0 +1,147 @@
+#!handlebars
+
+module > .person-page.person-post-page
+    .container
+        .person-top(data-region='top')
+        .person-notice(data-region='notice')
+        .person-content.clearfix
+            .person-menu(data-region='menu')
+            .person-main(data-region='main')
+
+view('top')
+    .user-pic > img(src='images/1.png')
+    .user-base-info.clearfix
+        .learn-info
+            .item
+                .h2 10小时50分
+                .sub-text 学习时长
+            .item
+                .h2 899
+                .sub-text 积分
+        .base-info
+            .info-row
+                span.h2 陈宗寭
+                span.lv lv3
+            .info-row
+                .item > i.iconfont.icon-warn + span 需求方
+                .item > i.iconfont.icon-mark + span 班务
+                .item > i.iconfont.icon-user-1 + span 讲师
+                .item > i.iconfont.icon-user-2 + span 专家
+                .item > a 编辑资料
+            .info-row
+                .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
+
+view('notice')
+    .news-list.clearfix
+        .pull-left.m-right > i.iconfont.icon-notice
+        b.title 公告：
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-arrow-down#next
+            .icon.arrow.next > .iconfont.icon-arrow-up#pre
+            .icon > .iconfont.icon-more
+
+        ul > inner(news state.currentIndex)
+            li > echo(title)
+
+view('menu')
+    ul.par
+        li
+            .menu-text
+                i.iconfont.icon-task
+                span 我的任务
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-type
+                span 我的学习
+            .sub
+                .item 我的课程
+                .item 我的专题
+                .item 我的知识
+                .item.current 岗位学习
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-tag-1
+                span 我的活动
+            .sub
+                .item 我的mooc
+                .item 我的直播
+                .item 我的考试
+                .item 我的班级
+                .item 我的调研
+        li
+            .menu-text
+                i.iconfont.icon-wen
+                span 我的问吧
+        li
+            .menu-text
+                i.iconfont.icon-favorite
+                span 我的收藏
+        li
+            .menu-text
+                i.iconfont.icon-file
+                span 我的档案
+
+view('main')
+    .tabs.line > ul
+        li.active 我的职位
+        li 产品助理
+    .mt-1
+        .tag-btn.active 发展职位
+        .tag-btn 产品经理
+        .tag-btn 首席体验师
+        .tag-btn 产品体验官
+    .person-post-main
+        section.section
+            .h3 岗位说明书
+            .layout-mt-small.post-description-content
+        section.section
+            .h3 专业能力标准/资质模型
+            .layout-mt-small
+                p 1.职业操守：诚信品质，较强业务能力，保持客观公正，保守秘密，保持职业谨慎和维护职业声誉。
+                p 2.数据分析和处理能力：对数字较敏感，熟练整合各类报表数据、理解财务指标含义，从数据中进行统计、分析并总结规律和判断，进行预警。
+                p 3.职业判断能力：面临不确定情况时，依据职业规则和自身经验，对经济事项做出分析、判断、选择和决策的能力。
+                p 4.沟通协调能力：掌握多种正式/非正式的沟通方式与技巧，团结合作精神强、能协调部门内、外部、集团和下属公司相关人员共同推动工作目标的达成。
+        section.section
+            .h3 学习要求
+            .layout-mt-small
+                .table > table
+                    thead > tr
+                        th 序号
+                        th 名称
+                        th 类型
+                        th 选/必修
+                        th 完成状态
+                        th 操作
+                    tbody
+                        tr
+                            td 1
+                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
+                            td 专题
+                            td 必修
+                            td 未完成
+                            td > a 我要学习
+                        tr
+                            td 1
+                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
+                            td 专题
+                            td 必修
+                            td 未完成
+                            td > a 我要学习
+                        tr
+                            td 1
+                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
+                            td 专题
+                            td 必修
+                            td 未完成
+                            td > a 我要学习
+                        tr
+                            td 1
+                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
+                            td 专题
+                            td 必修
+                            td 未完成
+                            td > a 我要学习

@@ -1,8 +1,93 @@
 .knowledge-banner {
         background: var(--bg-color);
 
-        & .catalog ｛
-            width: 30%;
+        & .container {
+            padding: calc(var(--space)*2) 0;
+        }
+
+        & .catalog {
+            width: 22%;
             float: left;
-        ｝
+            border: 1px solid var(--border-color);
+            padding: 0 var(--space);
+            background: white;
+
+            & li {
+                border-bottom: 1px solid var(--border-color);
+                padding: var(--space);
+
+                & h3 {
+                    font-size: calc(var(--font-size)*1.2);
+                    margin: 0;
+                }
+
+                & a {
+                    color: var(--font-color);
+                    line-height: calc(var(--space)*2);
+                    margin-right: var(--space);
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                & p {
+                    height: 3.8em;
+                    overflow: hidden;
+                    margin-bottom: 0;
+                }
+            }
+        };
+
+        & .banner-img {
+            width: 53%;
+            margin: 0 0 0 1em;
+            float: left;
+
+            & img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        & .banner-right {
+            width: 22%;
+            float: right;
+
+            & .banner-right-up {
+                padding: var(--space);
+                border:1px solid var(--border-color);
+                background: white;
+                margin-bottom: var(--space);
+                text-align: center;
+
+                & .btn {
+                    background: var(--custom-color-4);
+                    margin-bottom: var(--space);
+                }
+
+                & b {
+                    font-size: calc(var(--font-size)*1.2);
+                    color: var(--custom-color-1);
+                    padding: 0 calc(var(--space)/2);
+                }
+            }
+
+            & .banner-right-down {
+                padding: var(--space);
+                border:1px solid var(--border-color);
+                background: white;
+                height: 14.8em;
+                overflow: hidden;
+
+                & a {
+                    line-height: calc(var(--space)*2);
+                    color: var(--font-color);
+                    display: inline-block;
+                    background: var(--bg-color);
+                    padding: 0.2em 1em;
+                    margin-bottom: 1em;
+                }
+            }
+        }
 };

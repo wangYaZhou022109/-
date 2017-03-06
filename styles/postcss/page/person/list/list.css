@@ -1,7 +1,5 @@
-.person-main {
-    & .person-list {
-        @apply --clearfix;
-    }
+.person-list {
+    @apply --clearfix;
     & .filter {
         @apply --clearfix;
 
@@ -13,6 +11,15 @@
 
         & .m-left {
             margin-left: var(--large-space);
+        }
+
+        & .pull-left {
+            padding-right: var(--large-space);
+            border-right: 1px solid var(--border-color);
+
+            &:last-child {
+                border: none;
+            }
         }
 
         & .item {
@@ -44,49 +51,91 @@
             padding-right: calc(var(--large-space) / 2);
         }
     }
-}
 
-.list-text {
-    @apply --clearfix;
-    margin-top: 1.2em;
-    margin-bottom: 1.2em;
-    & li {
+    & .list-text {
         @apply --clearfix;
-        padding-top: calc(var(--large-space) / 1.5);
-        padding-bottom: calc(var(--large-space) / 1.5);
-        &:hover {
+        margin-top: 1.2em;
+        margin-bottom: 1.2em;
+        & li {
+            @apply --clearfix;
+            padding-top: calc(var(--large-space) / 1.5);
+            padding-bottom: calc(var(--large-space) / 1.5);
+            &:hover {
+                background-color: var(--bg-color);
+            }
+        }
+        & .title-row {
+            float: left;
+            width: 55%;
+            & .iconfont {
+                float: left;
+                margin-right: calc(var(--space) / 2);
+                margin-left: calc(var(--space) / 2);
+                font-size: var(--h1);
+            }
+        }
+        & .title {
+            font-size: var(--font-title);
+            & span {
+                font-size: var(--small-font);
+            }
+        }
+        & .state {
+            float: left;
+            margin-top: calc(var(--space) * 1.5);
+            width: 20%;
+            text-align: right;
+        }
+        & .btn-row {
+            float: left;
+            width: 25%;
+            text-align: right;
+            & .btn {
+                margin-top: calc(var(--space) / 2);
+                padding-left: calc(var(--large-space) / 2);
+                padding-right: calc(var(--large-space) / 2);
+            }
+            & .iconfont {
+                margin: calc(var(--space) / 1.5) var(--space) 0 var(--space);
+                font-size: var(--h2);
+                cursor: pointer;
+            }
+        }
+        & .tag {
+            padding: calc(var(--space) / 2.5) calc(var(--space) / 2);
+            color: var(--font-tip-color);
+            font-size: var(--small-font);
+            border: 1px solid var(--border-color);
             background-color: var(--bg-color);
         }
-    }
-    & .title-row {
-        float: left;
-        width: 50%;
-    }
-    & .title {
-        font-size: var(--font-title);
-    }
-    & .state {
-        float: left;
-        margin-top: calc(var(--space) * 1.5);
-        width: 30%;
-        text-align: right;
-    }
-    & .btn-row {
-        float: left;
-        margin-top: calc(var(--space) / 2);
-        width: 20%;
-        text-align: right;
-    }
-    & .tag {
-        padding: calc(var(--space) / 2.5) calc(var(--space) / 2);
-        color: var(--font-tip-color);
-        font-size: var(--small-font);
-        border: 1px solid var(--border-color);
-        background-color: var(--bg-color);
-    }
-    & .time {
-        margin-top: var(--space);
-        color: var(--font-tip-color);
-    }
+        & .time {
+            margin-top: var(--space);
+            color: var(--font-tip-color);
+        }
 
+        & .img {
+            float: left;
+            margin-right: var(--large-space);
+            width: calc(var(--large-space) * 2.1);
+        }
+        & .info-row {
+            float: left;
+            margin-top: var(--large-space);
+            width: 100%;
+        }
+        & .info-block {
+            float: left;
+            margin-left: calc(var(--large-space) * 2);
+            width: 25%;
+            & .iconfont {
+                float: left;
+                margin-right: calc(var(--space) / 2);
+                margin-bottom: var(--space);
+                font-size: var(--h4);
+            }
+            & .sub-text {
+                margin-top: calc(var(--space) / 2);
+            }
+        }
+    }
 }

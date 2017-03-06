@@ -1,0 +1,66 @@
+.knowledge-main {
+    width: 76%;
+    float: left;
+
+    & .boutique {
+        & li {
+            & h3 {
+                font-weight: normal;
+                font-size: var(--font-size);
+                margin-top: 0;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                height: calc(var(--space)*2);
+            }
+
+            & .img {
+                min-height: auto;
+
+                & .list-tit {
+                    margin-bottom: var(--space);
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    display: inline-block;
+                    color: var(--font-color);
+                }
+
+                & .list-con {
+                    color: var(--font-sub-color);
+                    font-size: var(--small-font);
+                    line-height: 1.3em;
+                    height: 3.9em;
+                    overflow: hidden;
+                }
+
+                & img {
+                    width: 40%;
+                    margin-right: var(--space);
+                }
+            }
+            & ol {
+                padding:1em 0 0 0;
+
+                & li {
+                    float: none;
+                    list-style: none;
+                    width: 100%;
+                    margin: 0;
+                    padding-right: 0;
+                    line-height: 1.8em;
+                    height: 1.8em;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+
+                    & a {
+                        color: var(--font-color);
+                    }
+
+                    & i {
+                        margin-right: var(--space);
+                    }
+                }
+            }
+        }
+    }
+}

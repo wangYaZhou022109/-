@@ -1,6 +1,7 @@
 // map key: {1:单选,2:多选,3:判断,4:问答,5:填空,6:阅读理解,7:连线,8:排序} value:排序
 var _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
+    strings = require('./app/util/strings'),
     D = require('drizzlejs'),
     $ = require('jquery'),
     E = require('./app/exam/exam-websocket'),
@@ -23,7 +24,14 @@ var _ = require('lodash/collection'),
     connect,
     closeConnect,
     changeToFullScreen,
-    navigateToExamDetail;
+    // navigateToExamDetail,
+    itemStatus = {
+        INIT: 'init',
+        CHECK: 'check',
+        ACTIVE: 'active',
+        CURRENT: 'current'
+    },
+    getCurrentStatus;
 
 
 exports.items = {
@@ -54,7 +62,7 @@ exports.store = {
                         q;
                     data.questionType = t.data.name;
                     data.questionTotalInType = t.data.data.length;
-                    q = _.find(t.data.data, ['isCurrent', true]);
+                    q = _.find(t.data.data, ['currentStatus', itemStatus.CURRENT]);
                     if (!q) {
                         data.questionIndex = 1;
                         data.currentQuestionScore = t.data.data[0].score;
@@ -86,14 +94,13 @@ exports.store = {
                     this.data = D.assign({}, {
                         name: exam.name,
                         id: exam.id,
-                        isOnePageOneQuestion: false,
+                        isOnePageOneQuestion: true,
                         mode: payload.mode || 1,
                         noAnswerNum: exam.paper.questionNum || 0,
                         answeredNum: 0,
                         questionNum: exam.paper.questionNum,
                         totalScore: exam.paper.totalScore / 100,
-                        duration: exam.duration,
-                        isCollect: false
+                        duration: exam.duration
                     });
                 }
             }
@@ -131,7 +138,8 @@ exports.store = {
                                 id: q.id,
                                 i: obj[type].data.length + 1,
                                 score: q.score / 100,
-                                isCurrent: false
+                                isCurrent: false,
+                                currentStatus: itemStatus.INIT
                             };
                             obj[type].data.push(qq);
                         });
@@ -144,53 +152,54 @@ exports.store = {
                 setFirstQuestionRemote: function() {
                     var questionTypes = this.data;
                     questionTypes[0].isCurrent = true;
-                    questionTypes[0].data.data[0].isCurrent = true;
+                    questionTypes[0].data.data[0].currentStatus = itemStatus.CURRENT;
                 },
                 move: function(index) {
                     var questionTypes = this.data,
                         state = this.store.models.state,
                         questionType = _.find(questionTypes, ['isCurrent', true]),
-                        typeIndex = questionTypes.findIndex(function(qt) {
-                            return qt.isCurrent === true;
-                        }),
+                        // typeIndex = questionTypes.findIndex(function(qt) {
+                        //     return qt.isCurrent === true;
+                        // }),
                         questions, q, z;
                     if (questionType) {
                         questions = questionType.data.data;
-                        q = _.find(questions, ['isCurrent', true]);
+                        q = _.find(questions, ['currentStatus', itemStatus.CURRENT]);
                         z = (q.i - 1) + index;
                         if (questions[z]) {
-                            questions[z].isCurrent = true;
+                            questions[z].currentStatus = itemStatus.CURRENT;
                             state.data.questionId = questions[z].id;
-                            questions[q.i - 1].isCurrent = false;
-                        } else if (index > 0 && questionTypes[typeIndex + 1]) {
-                            if (questionTypes[typeIndex + 1]) {
-                                questionTypes[typeIndex].isCurrent = false;
-                                questionTypes[typeIndex + 1].isCurrent = true;
-                                questionType = questionTypes[typeIndex + 1];
-                                questions = questionType.data.data;
-                                questions.forEach(function(question) {
-                                    var qq = question;
-                                    qq.isCurrent = false;
-                                });
-                                questions[0].isCurrent = true;
-                            } else {
-                                this.module.store.models.state.data.disableNext = true;
-                            }
-                        } else if (index < 0 && questionTypes[typeIndex - 1]) {
-                            if (questionTypes[typeIndex - 1]) {
-                                questionTypes[typeIndex].isCurrent = false;
-                                questionTypes[typeIndex - 1].isCurrent = true;
-                                questionType = questionTypes[typeIndex - 1];
-                                questions = questionType.data.data;
-                                questions.forEach(function(question) {
-                                    var qq = question;
-                                    qq.isCurrent = false;
-                                });
-                                questions[questions.length - 1].isCurrent = true;
-                            } else {
-                                this.module.store.models.state.data.disablePrev = true;
-                            }
+                            questions[q.i - 1].currentStatus = getCurrentStatus.call(this, questions[q.i - 1]);
                         }
+                        // } else if (index > 0 && questionTypes[typeIndex + 1]) {
+                        //     if (questionTypes[typeIndex + 1]) {
+                        //         questionTypes[typeIndex].isCurrent = false;
+                        //         questionTypes[typeIndex + 1].isCurrent = true;
+                        //         questionType = questionTypes[typeIndex + 1];
+                        //         questions = questionType.data.data;
+                        //         questions.forEach(function(question) {
+                        //             var qq = question;
+                        //             qq.isCurrent = false;
+                        //         });
+                        //         questions[0].isCurrent = true;
+                        //     } else {
+                        //         this.module.store.models.state.data.disableNext = true;
+                        //     }
+                        // } else if (index < 0 && questionTypes[typeIndex - 1]) {
+                        //     if (questionTypes[typeIndex - 1]) {
+                        //         questionTypes[typeIndex].isCurrent = false;
+                        //         questionTypes[typeIndex - 1].isCurrent = true;
+                        //         questionType = questionTypes[typeIndex - 1];
+                        //         questions = questionType.data.data;
+                        //         questions.forEach(function(question) {
+                        //             var qq = question;
+                        //             qq.isCurrent = false;
+                        //         });
+                        //         questions[questions.length - 1].isCurrent = true;
+                        //     } else {
+                        //         this.module.store.models.state.data.disablePrev = true;
+                        //     }
+                        // }
                     }
                     return this.store.models.state.getCurrentState(questionTypes);
                 },
@@ -198,14 +207,14 @@ exports.store = {
                     var questionTypes = this.data,
                         typeIndex = payload.typeIndex,
                         questionId = payload.questionId,
-                        questions, q;
+                        questions, q,
+                        me = this;
                     if (typeIndex >= 0) {
                         _.forEach(questionTypes, function(t) {
                             var tt = t;
                             tt.isCurrent = false;
-                            _.forEach(tt.data.data, function(qqq) {
-                                var qqqq = qqq;
-                                qqqq.isCurrent = false;
+                            _.forEach(tt.data.data, function(question) {
+                                D.assign(question, { isCurrent: false });
                             });
                         });
                         questionTypes[typeIndex].isCurrent = true;
@@ -214,14 +223,16 @@ exports.store = {
                     if (questionId) {
                         q = _.find(questions, ['id', questionId]);
                         if (q) {
-                            _.forEach(questions, function(qq) {
-                                var question = qq;
-                                question.isCurrent = false;
+                            _.map(questions, function(question) {
+                                if (question.currentStatus === itemStatus.CURRENT) {
+                                    D.assign(question, { currentStatus: getCurrentStatus.call(me, question) });
+                                }
                             });
                             q.isCurrent = true;
+                            q.currentStatus = itemStatus.CURRENT;
                         }
                     } else {
-                        questions[0].isCurrent = true;
+                        questions[0].currentStatus = itemStatus.CURRENT;
                     }
                 },
                 changeSort: function(questionTypes, sort) {
@@ -287,24 +298,25 @@ exports.store = {
                 getQuestionIndexInType: function(id) {
                     var result = this.data,
                         i = 0,
-                        j = 0,
-                        question,
                         questions,
                         index = 0;
                     for (i; i < this.data.length; i++) {
                         questions = result[i].data.data;
-                        question = _.find(questions, ['id', id]);
-                        if (question) {
-                            for (j; j < questions.length; j++) {
-                                if (questions[j].id === id) {
-                                    index = j + 1;
-                                    break;
-                                }
-                            }
-                            break;
-                        }
+                        index = questions.findIndex(function(q) {
+                            return q.id === id;
+                        });
+                        if (index !== -1) return index + 1;
                     }
-                    return index;
+                    return index + 1;
+                },
+                waitingCheck: function(questionId) {
+                    _.map(this.data, function(d) {
+                        _.map(d.data.data, function(q) {
+                            if (q.id === questionId) {
+                                D.assign(q, { currentStatus: itemStatus.CHECK });
+                            }
+                        });
+                    });
                 }
             }
         },
@@ -371,19 +383,33 @@ exports.store = {
             url: '../exam/exam-record/submitPaper'
         },
         marks: {
+            type: 'localStorage',
             data: {
-                collects: [],
-                corrects: []
+                corrects: [],
+                waitingChecks: []
             },
             mixin: {
                 getCurrentCorrect: function(id) {
                     return _.find(this.data.corrects, ['questionId', id]);
                 },
-                isCollect: function(id) {
-                    return _.find(this.data.collects, ['questionId', id]);
+                correct: function(data) {
+                    var temp = _.reject(this.data.corrects, ['questionId', data.questionId]);
+                    temp.push(data);
+                    this.data.corrects = temp;
+                    this.save();
                 },
                 isCollectDynamicView: function(id) {
                     return id.indexOf('collect-correct-') > -1;
+                },
+                waitingCheck: function(id) {
+                    var data = this.data.waitingChecks || [];
+                    if (_.find(data, ['key', id])) {
+                        this.data.waitingChecks = _.reject(data, ['key', id]);
+                    } else {
+                        data.push({ key: id });
+                        this.data.waitingChecks = data;
+                    }
+                    this.save();
                 }
             }
         }
@@ -396,7 +422,8 @@ exports.store = {
                 modify = this.models.modify,
                 state = this.models.state,
                 exam = this.models.exam,
-                countDown = this.models.countDown;
+                countDown = this.models.countDown,
+                marks = this.models.marks;
 
             answer.load();
             modify.load();
@@ -404,6 +431,7 @@ exports.store = {
             countDown.load();
             questionTypes.load();
             exam.load();
+            marks.load();
 
             if (!state.data || (state.data.id && state.data.id !== payload.examId)) {
                 this.models.exam.clear();
@@ -417,6 +445,7 @@ exports.store = {
                     answer.data = { answers: [] };
                     modify.data = { answers: [], api: {} };
                     countDown.data = {};
+                    marks.data = { corrects: [], waitingChecks: [] };
 
                     me.models.state.init(examData, payload);
 
@@ -427,6 +456,9 @@ exports.store = {
                     me.models.state.setFirstQuestionRemote(questionTypes.data);
                 });
             }
+            if (!answer.data) answer.data = { answers: [] };
+            if (!modify.data) modify.data = { answers: [], api: {} };
+            if (!marks.data) marks.data = { corrects: [], waitingChecks: [] };
             return '';
         },
         reload: function() {
@@ -440,6 +472,7 @@ exports.store = {
             this.models.questionTypes.click(side.data);
             this.models.state.getCurrentState(this.models.questionTypes.data);
             this.models.state.changed();
+            this.models.questionTypes.changed();
         },
         move: function(payload) {
             this.models.questionTypes.move(payload);
@@ -450,29 +483,19 @@ exports.store = {
             this.models.state.data.isOnePageOneQuestion = Number(payload.type) === 0;
             this.models.state.changed();
         },
-        collect: function(payload) {
-            var collects = this.models.marks.data.collects,
-                collect = _.find(collects, ['questionId', payload.questionId]),
-                temp;
-            if (collect) {
-                temp = _.reject(collects, ['questionId', payload.questionId]);
-                this.models.marks.data.collects = temp;
-            } else {
-                collects.push(payload);
-            }
-            this.models.state.changed();
+        waitingCheck: function(payload) {
+            this.models.marks.waitingCheck(payload.questionId);
+            this.app.message.success(strings.get('operation-success'));
         },
         correct: function(payload) {
-            var temp = _.reject(this.models.marks.data.corrects, ['questionId', payload.questionId]);
-            temp.push(payload);
-            this.models.marks.data.corrects = temp;
+            this.models.marks.correct(payload);
             this.models.state.changed();
         },
         submit: function(payload) {
             var modify = this.models.modify,
                 me = this,
-                t = true,
-                examId = this.models.exam.data.id;
+                t = true;
+                // examId = this.models.exam.data.id;
 
             this.models.answer.save();
             this.models.modify.save();
@@ -496,7 +519,8 @@ exports.store = {
                         setTimeout(function() {
                             closeConnect();
                             me.app.viewport.closeModal();
-                            navigateToExamDetail(examId);
+                            window.close();
+                            // navigateToExamDetail(examId);
                         }, 1500);
                     } else {
                         this.app.message.success('答卷已自动保存成功');
@@ -573,7 +597,18 @@ changeToFullScreen = function() {
     $('.achievement-content').attr('height', '100%');
 };
 
-navigateToExamDetail = function(examId) {
-    var url = 'exam/index/' + examId;
-    this.app.navigate(url, true);
+// navigateToExamDetail = function(examId) {
+//     var url = 'exam/index/' + examId;
+//     this.app.navigate(url, true);
+// };
+
+getCurrentStatus = function(question) {
+    var data = this.module.store.models.answer.data,
+        waitingCheck = this.module.store.models.marks.data.waitingChecks;
+    if (_.find(waitingCheck, ['key', question.id])) {
+        return itemStatus.CHECK;
+    } else if (_.find(data.answers, ['key', question.id])) {
+        return itemStatus.ACTIVE;
+    }
+    return itemStatus.INIT;
 };
