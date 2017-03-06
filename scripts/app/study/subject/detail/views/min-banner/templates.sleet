@@ -1,0 +1,10 @@
+#! handlebars
+
+module > .relevant-topic(data-region='pannel')
+
+view('pannel')
+    if(region.regionModule.display)
+        .h3 > echo(region.regionModule.name)
+        .layout-mt-small
+            if(imageUrl)
+                img(src=imageUrl alt=name)
