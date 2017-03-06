@@ -1,0 +1,43 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.course.order')
+                    th > setting('person.archives.course.name')
+                    th > setting('person.archives.course.source')
+                    th > setting('person.archives.course.select')
+                    th > setting('person.archives.course.startTime')
+                    th > setting('person.archives.course.finishTime')
+                    th > setting('person.archives.course.totalTime')
+                    th > setting('person.archives.course.status')
+                    th > setting('person.archives.operation')
+            tbody > each(progressList)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(courseName)
+                    td > map('course-register-type' type)
+                    td > map('is-required' isRequired)
+                    td
+                        if(beginTime)
+                            dateTime(beginTime)
+                        else
+                            echo('—')
+                    td
+                        if(finishTime)
+                            dateTime(finishTime)
+                        else
+                            echo('—')
+                    td > echo(studyTotalTime)
+                    td > setting('person.archives.course.finished')
+                    td > a > setting('person.archives.details')
+                    else
+                        tr > td(colspan='9') > p.text-center > string('no-data')
+        #pager.pagination

@@ -1,0 +1,38 @@
+#!handlebars
+
+module
+    div(data-region='chart')
+    div(data-region='detail')
+
+
+view('detail')
+    .tabs > ul > each(detailMenu)
+        li(id='detail-'+ id) > echo(name)
+    div(id='tableDiv')
+
+view('chart')
+    .bg-highlight.graph-total-bar
+        .top
+            .left.border.around
+                .item 汇总
+                .item 近一周
+                .item 近三个月
+                .item 近一年
+            .right.inline-block
+                select.input.inline-block
+                span.sub-text 至
+                select.input.inline-block
+        .main.clearfix
+            .bar > .cont
+                .title-row.clearfix
+                    .pull-left 学习时长统计
+                    .pull-right 总学习时长：5小时30分
+                .content
+                    | 图表
+            .bar > .cont
+                .title-row.clearfix
+                    .pull-left 积分汇总
+                    a.pull-right 如何获得积分？
+                .content
+                    | 图表
+
