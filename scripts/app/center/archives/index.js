@@ -7,6 +7,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {},
+        statistics: { url: '../course-study/course-study-progress/statistics', autoLoad: 'after' },
         detailMenu: { data: [
             { id: '1', name: '课程', item: 'center/archives/course' },
             { id: '2', name: '专题', item: 'center/archives/course' },
@@ -24,6 +25,9 @@ exports.store = {
             var state = this.models.state;
             state.data.menu = 'archives';
             state.data.archives = true;
+        },
+        search: function(payload) {
+            return this.get(this.models.statistics, { data: payload });
         }
     }
 };
