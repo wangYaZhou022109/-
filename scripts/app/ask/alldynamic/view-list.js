@@ -3,12 +3,14 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    trends: true,
+    popupstate: true
 };
 
 exports.events = {
     'click dynamic-*': 'toggleMore',
-    'click discuss-*': 'discuss'
+    'click discuss-*': 'discuss',
+    'click trend-report-*': 'report'
 };
 
 exports.handlers = {
@@ -29,6 +31,22 @@ exports.handlers = {
         } else if (el.hidden === true) {
             el.hidden = false;
         }
+    },
+    report: function(payload) {
+        var state = this.bindings.popupstate,
+            obj = payload,
+            data;
+        if (obj.indexOf('_') !== -1) {
+            data = obj.split('_');
+        }
+        state.hidden = true;
+        state.data = {};
+        state.data.objectType = data[0];
+        state.data.id = data[1];
+        state.data.title = '举报';
+        state.data.menu = 'report';
+        state.data.report = true;
+        state.changed();
     }
 };
 exports.actions = {

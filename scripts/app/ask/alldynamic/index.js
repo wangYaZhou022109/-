@@ -1,13 +1,15 @@
 
 exports.items = {
-    list: 'list'
+    list: 'list',
+    popup: 'popup'
 };
 
 exports.store = {
     models: {
         trends: { url: '../ask-bar/trends/all-dynamic' },
         discuss: { url: '../ask-bar/question-discuss' },
-        follow: { url: '../ask-bar/question-details/boutique' }
+        follow: { url: '../ask-bar/question-details/boutique' },
+        popupstate: { hidden: false, data: { menu: 'report' } }
     },
     callbacks: {
         init: function() {
