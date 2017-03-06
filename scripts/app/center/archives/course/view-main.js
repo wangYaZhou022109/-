@@ -10,8 +10,6 @@ exports.events = {
 };
 
 exports.handlers = {
-    showDetail: function(id) {
-    }
 };
 
 exports.components = [{
