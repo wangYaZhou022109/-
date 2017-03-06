@@ -35,6 +35,7 @@ plupload = require('./vendors/upload/moxie.min');
 window.moxie = plupload.moxie;
 window.mOxie = plupload.mOxie;
 
+require('highcharts/highcharts.src');
 require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
 require('./vendors/upload/jquery.plupload.queue.min');
@@ -52,6 +53,7 @@ require('./app/ext/pdf');
 require('./app/ext/videojs');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
+require('./app/ext/highcharts');
 require('./app/main/modal/modal-region');
 
 D.adapt({
