@@ -23,7 +23,7 @@ exports.store = {
         init: function() {
             this.models.activitys.params = this.models.params.data;
             this.get(this.models.activitys);
-            this.get(this.models.gensees);
+            // this.get(this.models.gensees);
         },
         search: function(payload) {
             var data = this.models.params.data;

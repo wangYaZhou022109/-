@@ -12,7 +12,7 @@ view('head')
     .text-right
         ul.head-info.inline-block
             li.border.right > echo(researchRecord.researchQuestionary.name)
-        .btn#submit > string('exam.activity.research-detail.submit')
+        .btn#submit > string('exam.research.research-detail.submit')
 
 view('side')
     ul.list > each(dimensions)
@@ -28,3 +28,6 @@ view('main')
             each(questions)
                 div(data-dynamic-key=id)
 
+view('notice')
+    .preview-content
+        echo(questionaryDetail)
