@@ -10,16 +10,14 @@ module > .course-detail-page
                 .player-title-row(data-region='player-title')
                 .player-content(data-region='player' style='overflow:auto;position:relative;')
     .page-main-wrapper
-        .side
-            .page-side > .container
-                section.section.download(data-region='download')
-                section.section.relevant-topic(data-region='topic')
-                section.section.relevant-course(data-region='releated-course')
-                section.section.student(data-region='student')
-        .main
-            .course-detail-main.page-main > .container
-                section.section(data-region='info')
-                section.section(data-region='comment')
+        .page-side > .container
+            section.section.download(data-region='download')
+            section.section.relevant-topic(data-region='topic')
+            section.section.relevant-course(data-region='releated-course')
+            section.section.student(data-region='student')
+        .page-main.course-detail-main > .container
+            section.section(data-region='info')
+            section.section(data-region='comment')
 
 view('player-title')
     .clearfix

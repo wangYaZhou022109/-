@@ -11,6 +11,6 @@
             margin-top: var(--large-space);
             margin-bottom: var(--large-space);
         }
-        & .main-list > ul .title { margin: 0;}
+        & .main-list > ul .title { margin-top: var(--space);}
     }
 }
