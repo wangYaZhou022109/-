@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 
 exports.bindings = {
     progressList: true,
@@ -5,19 +6,30 @@ exports.bindings = {
     businessType: false
 };
 
-exports.events = {
-    'click showDeail*': 'showDetail'
+exports.actions = {
+    'click showDeail-*': 'showDeail'
 };
 
-exports.handlers = {
+exports.dataForActions = {
+    showDeail: function(data) {
+        var me = this;
+        me.app.viewport.modal(me.module.items.detail);
+        return data;
+    }
 };
+
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'progressList' }
 }];
 
 exports.dataForTemplate = {
-    details: function(data) {
+    progressList: function(data) {
+        var pageNum = this.bindings.progressList.getPageInfo().page;
+        _.map(data.progressList || [], function(role, i) {
+            var r = role;
+            r.i = i + 1 + ((pageNum - 1) * 10);
+        });
         data.progressList.forEach(function(obj) {
             var progress = obj || {},
                 time = '',
