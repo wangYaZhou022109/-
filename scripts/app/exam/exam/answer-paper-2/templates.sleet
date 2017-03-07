@@ -57,10 +57,3 @@ view('main')
                 .h3.m-bottom > echo('单选题(共100分)')
                     div(data-dynamic-key=id)
                     div(data-dynamic-key='collect-correct-' + id)
-
-
-view('tips')
-    .title-row.row
-        .col-sm-12
-            .com-title
-                echo(message)
