@@ -1,4 +1,7 @@
 .ask-list {
+    & ul {
+        @apply --clearfix;
+    }
     & li {
         padding-bottom: 0;
     }
@@ -54,6 +57,15 @@
         & .img {
             margin-bottom: var(--large-space);
             width: calc(var(--large-space) * 4);
+        }
+    }
+
+    &.min li.topic-item,
+    &.min li.expert-item {
+        padding-right: 0;
+
+        & .img {
+            width: 4em;
         }
     }
 
