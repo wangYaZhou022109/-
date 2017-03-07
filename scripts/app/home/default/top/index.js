@@ -46,6 +46,15 @@ var menus = [{
     order: 0,
     parentId: null,
     uri: 'app/index'
+}, {
+    createTime: 1474538557153,
+    icon: null,
+    id: '6',
+    level: 2,
+    name: '知识',
+    order: 0,
+    parentId: null,
+    uri: 'knowledge/index'
 }];
 
 exports.items = {

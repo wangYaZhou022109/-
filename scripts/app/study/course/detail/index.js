@@ -72,9 +72,9 @@ exports.store = {
                     state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
                 }),
                 this.get(courseRelated),
-                this.get(lastestUser),
+                // this.get(lastestUser),
                 this.get(collect),
-                this.get(notes)
+                // this.get(notes)
             ]);
         },
         updateProgress: function(payload) {

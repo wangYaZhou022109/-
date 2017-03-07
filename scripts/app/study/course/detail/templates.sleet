@@ -85,8 +85,6 @@ view('chapter')
                                     .item.start
                                         i.iconfont.icon-play-full
                                         span > map('course-study-status' 0)
-                                .item.record(id='show-record'+id)
-                                    i.iconfont.icon-time + | 学习记录
 
 view('note')
     .course-side-title-row
@@ -134,9 +132,10 @@ view('info')
                 i#collect.iconfont.icon-favorite
 
     .sub-title-row.layout-mb-small.layout-mt-small
-        .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrgId)
+        .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)
         .inline-block.layout-mr > echo('发布时间: ') + date(course.shelveTime)
-    p.course-info-detail > echo('描述: ' course.description)
+    p.course-info-detail > echo('讲师: ') + echo(course.lecturer)
+    p.course-info-detail > echo('描述: ') + @echo(course.description)
 
 view('comment')
     #comment-area
