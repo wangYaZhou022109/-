@@ -10,7 +10,7 @@ view('main')
         table
             thead
                 tr
-                    th > setting('person.course.order')
+                    th > setting('person.archives.public.order')
                     th > setting('person.archives.course.name')
                     th > setting('person.archives.course.source')
                     th > setting('person.archives.course.select')

@@ -20,10 +20,6 @@ exports.store = {
             progressList.params = options;
             me.get(progressList);
         },
-        refreshList: function() {
-            var model = this.models.details;
-            this.get(model);
-        },
         showDeail: function(payload) {
             var me = this,
                 sectionList = this.models.sectionList;

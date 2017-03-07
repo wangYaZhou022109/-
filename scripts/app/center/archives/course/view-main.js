@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 
 exports.bindings = {
     progressList: true,
@@ -23,7 +24,12 @@ exports.components = [{
 }];
 
 exports.dataForTemplate = {
-    details: function(data) {
+    progressList: function(data) {
+        var pageNum = this.bindings.progressList.getPageInfo().page;
+        _.map(data.progressList || [], function(role, i) {
+            var r = role;
+            r.i = i + 1 + ((pageNum - 1) * 10);
+        });
         data.progressList.forEach(function(obj) {
             var progress = obj || {},
                 time = '',
