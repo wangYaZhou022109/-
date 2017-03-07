@@ -3,8 +3,8 @@
 module 
     div(data-region='details')
 
-view('details') > form.vertical
-    table.table
+view('details') > form
+    table
         tr
             td
                 input(type='radio' name='type'  value=1)
