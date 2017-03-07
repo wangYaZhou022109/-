@@ -110,7 +110,7 @@ view('main')
                 .state > span.custom-color-2 待审核
                 .btn-row
                     .btn 编辑
-                    .btn.border.white 删除
+                    i.iconfont.icon-trash
             li.border.bottom
                 .title-row
                     .img > .img-cont > img(src="images/default-cover/default_pdf.jpg")
@@ -118,7 +118,7 @@ view('main')
                     .time 上传时间：2017-02-27 09:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
                 .state > span.custom-color-3 被拒绝
                 .btn-row
-                    .btn.border.white 删除
+                    i.iconfont.icon-trash
             li.border.bottom
                 .title-row
                     .img > .img-cont > img(src="images/default-cover/default_ppt.jpg")
@@ -127,7 +127,7 @@ view('main')
                 .state > span.custom-color-4 已通过
                 .btn-row
                     .btn 编辑
-                    .btn.border.white 删除
+                    i.iconfont.icon-trash
             li.border.bottom
                 .title-row
                     .img > .img-cont > img(src="images/default-cover/default_epub.jpg")
@@ -136,4 +136,4 @@ view('main')
                 .state > span.custom-color-4 已通过
                 .btn-row
                     .btn 编辑
-                    .btn.border.white 删除
+                    i.iconfont.icon-trash

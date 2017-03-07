@@ -87,7 +87,7 @@ exports.store = {
         },
         showSection: function(payload) {
             var state = this.models.state;
-            state.data.sectionId = payload.sectionId;
+            state.data.sectionId = payload.id;
             state.changed();
         },
         collect: function(payload) {

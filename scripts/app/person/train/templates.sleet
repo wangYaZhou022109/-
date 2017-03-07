@@ -1,0 +1,135 @@
+#!handlebars
+
+module > .person-page
+    .container
+        .person-top(data-region='top')
+        .person-notice(data-region='notice')
+        .person-content.clearfix
+            .person-menu(data-region='menu')
+            .person-main(data-region='main')
+    .person-interest(data-region='interest')
+
+view('top')
+    .user-pic > img(src='images/1.png')
+    .user-base-info.clearfix
+        .learn-info
+            .item
+                .h2 10小时50分
+                .sub-text 学习时长
+            .item
+                .h2 899
+                .sub-text 积分
+        .base-info
+            .info-row
+                span.h2 陈宗寭
+                span.lv lv3
+            .info-row
+                .item > i.iconfont.icon-warn + span 需求方
+                .item > i.iconfont.icon-mark + span 班务
+                .item > i.iconfont.icon-user-1 + span 讲师
+                .item > i.iconfont.icon-user-2 + span 专家
+                .item > a 编辑资料
+            .info-row
+                .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
+
+view('notice')
+    .news-list.clearfix
+        .pull-left.m-right > i.iconfont.icon-notice
+        b.title 公告：
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-arrow-down#next
+            .icon.arrow.next > .iconfont.icon-arrow-up#pre
+            .icon > .iconfont.icon-more
+
+        ul > inner(news state.currentIndex)
+            li > echo(title)
+
+view('menu')
+    ul.par
+        li
+            .menu-text
+                i.iconfont.icon-task
+                span 我的任务
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-type
+                span 我的学习
+            .sub
+                .item 我的课程
+                .item 我的专题
+                .item 我的知识
+                .item 岗位学习
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-tag-1
+                span 我的活动
+            .sub
+                .item 我的mooc
+                .item 我的直播
+                .item 我的考试
+                .item 我的班级
+                .item.current 我的调研
+        li
+            .menu-text
+                i.iconfont.icon-wen
+                span 我的问吧
+        li
+            .menu-text
+                i.iconfont.icon-favorite
+                span 我的收藏
+        li
+            .menu-text
+                i.iconfont.icon-file
+                span 我的档案
+
+view('main')
+    .person-list
+        .filter
+            .pull-right.m-right.pointer
+                | 参与时间
+                i.iconfont.icon-sort-desc
+            .pull-left
+                .inline-block.m-left.sub-text 要求：
+                .item.active > span 全部
+                .item > span 未完成
+                .item > span 已完成
+        .list-search
+            input.input(placeholder='请输入您要搜索的内容名称')
+            .btn > i.iconfont.icon-search
+        ul.list-text.border.top
+            li.border.bottom
+                .title-row
+                    i.iconfont.icon-task
+                    .inline-block.title 中国品牌第一人李光斗脱口秀
+                    .time 调研时间：2017-02-28 10:00 至 2017-03-03 16:00
+                .state 未完成
+                .btn-row
+                    .btn 继续调研
+            li.border.bottom
+                .title-row
+                    i.iconfont.icon-task
+                    .inline-block.title 思维导图软件·自学速成指南
+                    .time 调研时间：2017-02-28 10:00 至 2017-03-03 16:00
+                .state 已完成
+                .btn-row
+                    .btn 查看详情
+            li.border.bottom
+                .title-row
+                    i.iconfont.icon-task
+                    .inline-block.title 经济学人的动态图表与交互设计
+                    .time 调研时间：2017-02-28 10:00 至 2017-03-03 16:00
+                .state 已完成
+                .btn-row
+                    .btn 查看详情
+            li.border.bottom
+                .title-row
+                    i.iconfont.icon-task
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time 调研时间：2017-02-28 10:00 至 2017-03-03 16:00
+                .state 已完成
+                .btn-row
+                    .btn 查看详情
