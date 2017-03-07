@@ -18,23 +18,20 @@ exports.store = {
             report.set(data);
             return this.save(report);
         },
-        init: function() {
-            // var trends = this.models.trends;
-          //  trends.set({ id: 1222 });
-           // return this.get(trends);
-            var me = this;
-            return this.get(this.models.trends).then(function() {
-                // var callback = me.module.renderOptions.state.callback;
-
-                // if (callback) callback();
-                var el = me.module.renderOptions.state.el;
-                console.log(el);
-            });
+        close: function() {
+            var state = this.module.renderOptions.popupstate;
+            state.hidden = false;
+            state.data = {};
+            state.data.title = '举报';
+            state.data.menu = 'report';
+            state.data.report = true;
+            state.changed();
         }
 
     }
 };
 
 exports.afterRender = function() {
+    console.log(this.renderOptions);
     this.store.models.state = this.renderOptions.state;
 };

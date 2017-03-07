@@ -29,7 +29,8 @@ exports.getEntityModuleName = function(key) {
 };
 exports.getEntity = function() {
     return {
-        state: this.bindings.popupstate.data
+        state: this.bindings.popupstate.data,
+        popupstate: this.bindings.popupstate
     };
 };
 

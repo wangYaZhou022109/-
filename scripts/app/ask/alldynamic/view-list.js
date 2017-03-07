@@ -32,11 +32,10 @@ exports.handlers = {
             el.hidden = false;
         }
     },
-    report: function(payload, e, target) {
+    report: function(payload) {
         var state = this.bindings.popupstate,
             obj = payload,
-            data,
-            el = $(target).parents('.activity-category')[0];;
+            data;
         if (obj.indexOf('_') !== -1) {
             data = obj.split('_');
         }
@@ -47,11 +46,6 @@ exports.handlers = {
         state.data.title = '举报';
         state.data.menu = 'report';
         state.data.report = true;
-        state.data.el = el;
-        state.data.callback = function() {
-            var el = $(target).parents('.activity-category')[0];
-            console.log(el);
-        };
         state.changed();
     }
 };

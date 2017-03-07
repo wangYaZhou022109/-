@@ -33,6 +33,10 @@ view('list')
                     a(id='discuss-' + id href='javascript:;')(class ='active') > string('take-part-in') + string('discuss')
                 else
                     echo(discussList.length) + string('strip') + string('discuss')
+                compare(trendsType 'eq' '3')
+                    string('praise') + echo('（'+ questionDiscuss.praiseNum +'）')
+                else
+                    string('praise') +  echo('（'+ question.praiseNum +'）')
                 a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
                 echo('|')
                 compare(trendsType 'eq' '1')

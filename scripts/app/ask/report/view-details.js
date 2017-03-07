@@ -17,6 +17,6 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     report: function() {
         this.app.message.success('操作成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('close');
     }
 };
