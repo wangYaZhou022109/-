@@ -27,7 +27,7 @@ exports.store = {
         ] },
         state: {
             data: {
-                menu: 'task', // 初始菜单
+                menu: 'archives', // 初始菜单
             }
         }
     },
