@@ -1,5 +1,5 @@
 exports.routes = {
-    index: 'showIndex',
+    index: 'showIndex'
 };
 
 exports.showIndex = function() {

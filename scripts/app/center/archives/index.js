@@ -5,6 +5,12 @@ exports.items = {
 };
 exports.store = {
     models: {
+        state: {
+            data: {
+                menu: 'course', // 初始菜单
+                menuId: '0'
+            }
+        },
         detailMenu: { data: [
             { id: '0', name: '课程', url: 'course' },
             { id: '1', name: '专题', url: 'course' },
@@ -16,11 +22,16 @@ exports.store = {
             { id: '7', name: '问道', url: '' },
             { id: '8', name: '证书', url: '' }
         ] },
-        state: {
-            data: {
-                menu: 'course', // 初始菜单
-                menuId: '0'
-            }
+        statistics: { url: '../course-study/course-study-progress/statistics', autoLoad: 'after' }
+    },
+    callbacks: {
+        init: function() {
+            var state = this.models.state;
+            state.data.menu = 'archives';
+            state.data.archives = true;
+        },
+        search: function(payload) {
+            return this.get(this.models.statistics, { data: payload });
         }
     }
 };
