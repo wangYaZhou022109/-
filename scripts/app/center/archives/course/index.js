@@ -1,12 +1,14 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    detail: ''
 };
 
 exports.store = {
     models: {
         progressList: { url: '../course-study/course-study-progress/person-list', type: 'pageable', root: 'items' },
         progress: { url: '../course-study/course-study-progress/export-person-list' },
-        businessType: { value: '0' }
+        businessType: { value: '0' },
+        sectionList: { url: '../course-study/course-study-progress/person-section-list' }
     },
     callbacks: {
         init: function(options) {
@@ -21,7 +23,14 @@ exports.store = {
         refreshList: function() {
             var model = this.models.details;
             this.get(model);
-        }
+        },
+        showDeail: function(payload) {
+            var me = this,
+                sectionList = this.models.sectionList;
+            sectionList.clear();
+            sectionList.params = payload;
+            return me.get(sectionList);
+        },
     }
 };
 

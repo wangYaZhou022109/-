@@ -5,12 +5,18 @@ exports.bindings = {
     businessType: false
 };
 
-exports.events = {
-    'click showDeail*': 'showDetail'
+exports.actions = {
+    'click showDeail-*': 'showDeail'
 };
 
-exports.handlers = {
+exports.dataForActions = {
+    showDeail: function(data) {
+        var me = this;
+        me.app.viewport.modal(me.module.items.detail);
+        return data;
+    }
 };
+
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'progressList' }

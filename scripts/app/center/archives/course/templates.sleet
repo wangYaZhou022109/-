@@ -37,7 +37,26 @@ view('main')
                             echo('—')
                     td > echo(studyTotalTime)
                     td > setting('person.archives.course.finished')
-                    td > a(id='showDeail'+id) > setting('person.archives.details')
+                    td > a(id='showDeail-'+id data-name='id' data-value=id) > setting('person.archives.details')
                     else
                         tr > td(colspan='9') > p.text-center > string('no-data')
         #pager.pagination
+
+view('detail')
+    .mb-1 课程名称：课程名称课程名称课程名称课程名称课程名称
+    .table > table
+        thead > tr
+            th > setting('person.archives.course.detail.sourceName')
+            th > setting('person.archives.course.detail.sourceType')
+            th > setting('person.archives.course.detail.choose')
+            th > setting('person.archives.course.detail.status')
+            th > setting('person.archives.course.detail')
+        tbody > each(sectionList)
+            tr
+                td.nowrap > .text-overflow > echo(sectionName)
+                td > map('section-type' type)
+                td > map('is-required' required)
+                td > map('course-info-study-status' finishStatus)
+                td > a > echo(completedRate)
+                else
+                    tr > td(colspan='5') > p.text-center > string('no-data')
