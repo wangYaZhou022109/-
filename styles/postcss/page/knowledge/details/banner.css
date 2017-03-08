@@ -1,0 +1,14 @@
+.details-banner {
+    background: #343643;
+
+    & .reader {
+        width: 80%;
+        margin: 0 auto;
+        padding: calc(var(--space)*3) 0;
+
+        & img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
