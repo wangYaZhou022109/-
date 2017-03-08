@@ -1,0 +1,58 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .person-list
+        .filter
+            .pull-right.m-right.pointer
+                | 开始时间
+                i.iconfont.icon-sort-desc
+            .pull-left
+                .inline-block.m-left.sub-text 要求：
+                .item.active > span 全部
+                .item > span 学习中
+                .item > span 待开始
+                .item > span 待审核
+                .item > span 已结束
+        .list-search
+            input.input(placeholder='请输入您要搜索的内容名称')
+            .btn > i.iconfont.icon-search
+        ul.list-text.border.top
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_course.jpg")
+                    .inline-block.title 中国品牌第一人李光斗脱口秀
+                    .time 起止时间：2017-02-28 10:00 至 2017-03-03 10:00
+                .state  学习中
+                .btn-row
+                    .btn 继续学习
+                    i.iconfont.icon-trash
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_course.jpg")
+                    .inline-block.title 思维导图软件·自学速成指南
+                    .time 起止时间：2017-02-28 10:00 至 2017-03-03 10:00
+                .state 待开始
+                .btn-row
+                    .btn 查看详情
+                    i.iconfont.icon-blank &nbsp;
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_course.jpg")
+                    .inline-block.title 经济学人的动态图表与交互设计
+                    .time 起止时间：2017-02-28 10:00 至 2017-03-03 10:00
+                .state 待审核
+                .btn-row
+                    .btn 查看详情
+                    i.iconfont.icon-trash
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_course.jpg")
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time 起止时间：2017-02-28 10:00 至 2017-03-03 10:00
+                .state 已结束
+                .btn-row
+                    .btn 查看详情
+                    i.iconfont.icon-trash

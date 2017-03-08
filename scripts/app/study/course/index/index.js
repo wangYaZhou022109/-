@@ -33,7 +33,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search;
-            search.set({ type: 0 }, true);
+            search.set({ type: 0, companyType: 0 }, true);
         },
         selectMenu1: function(payload) {
             var menu2 = this.models.menu2;

@@ -44,7 +44,7 @@ view('list')
 
 view('side')
     .knowledge-upload
-        .btn.block.clearfix.knowledge-upload
+        .btn.block.clearfix.knowledge-upload#upload
             .pull-left.text-right
                 .iconfont.icon-cloud-up
             .pull-right.text-left
@@ -311,5 +311,4 @@ view('main')
 
             .pull-right.knowledge-tit-out.text-right
                 a.normal.icon-add.iconfont
-                
     #pager.pagination

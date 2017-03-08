@@ -1,7 +1,105 @@
+#!handlebars
 
-module > .person-page > .container
-    .person-top(data-region='main')
-
+module
+    div(data-region='main')
 
 view('main')
-    .news-list.clearfix
+    .person-list
+        .filter
+            .pull-left
+                .inline-block.m-left.sub-text 状态：
+                .item.active > span 全部
+                .item > span 未完成
+                .item > span 未开始
+        .list-search
+            input.input(placeholder='请输入您要搜索的内容名称')
+            .btn > i.iconfont.icon-search
+        ul.list-text.border.top
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 直播
+                    .inline-block.title 中国品牌第一人李光斗脱口秀
+                    .time 直播开始时间：2017-02-28 10:00
+                .state 未开始
+                .btn-row
+                    .btn 进入直播
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 专题
+                    .inline-block.title 思维导图软件·自学速成指南
+                    .time 推送学习时间：2017-02-27 09:00
+                .state 未完成
+                .btn-row
+                    .btn 开始学习
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 课程
+                    .inline-block.title 经济学人的动态图表与交互设计
+                    .time 上次学习时间：2017-02-28 10:00
+                .state
+                    | 已学时长：
+                    span.custom-color-2 120
+                    | 分钟
+                .btn-row
+                    .btn 继续学习
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag MOOC
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time MOOC起始时间：2017-02-28 至 2017-03-15
+                .state 未开始
+                .btn-row
+                    .btn 开始学习
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 班级
+                    .inline-block.title 简单、实用的微信小程序开发与数据分析的教程
+                    .time 班级起始时间：2017-02-28 至 2017-03-15
+                .state 未完成
+                .btn-row
+                    .btn 进入班级
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 考试
+                    .inline-block.title Adobe PremierePro CC 2015 高级剪辑
+                    .time 进入考试时间：2017-02-28 10:00 至 2017-03-15 18:00
+                .state 未完成
+                .btn-row
+                    .btn 继续考试
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 调研
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time 调研时间：2017-02-28 10:00 至 2017-03-15 18:00
+                .state 未完成
+                .btn-row
+                    .btn 进入调研
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 班级
+                    .inline-block.title 简单、实用的微信小程序开发与数据分析的教程
+                    .time 班级起始时间：2017-02-28 至 2017-03-15
+                .state 未完成
+                .btn-row
+                    .btn 进入班级
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 考试
+                    .inline-block.title Adobe PremierePro CC 2015 高级剪辑
+                    .time 进入考试时间：2017-02-28 10:00 至 2017-03-15 18:00
+                .state 未完成
+                .btn-row
+                    .btn 继续考试
+            li.border.bottom
+                .title-row
+                    span.inline-block.tag 调研
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time 调研时间：2017-02-28 10:00 至 2017-03-15 18:00
+                .state 未完成
+                .btn-row
+                    .btn 进入调研
+
+        ul#pager.pagination
+            li.hover-main-color.bg-main-color.active 1
+            li.hover-main-color 2
+            li.hover-main-color > i.iconfont.icon-arrow-right.scale-1

@@ -1,12 +1,14 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    detail: ''
 };
 
 exports.store = {
     models: {
         progressList: { url: '../course-study/course-study-progress/person-list', type: 'pageable', root: 'items' },
         progress: { url: '../course-study/course-study-progress/export-person-list' },
-        businessType: { value: '0' }
+        businessType: { value: '0' },
+        sectionList: { url: '../course-study/course-study-progress/person-section-list' }
     },
     callbacks: {
         init: function(options) {
@@ -18,20 +20,21 @@ exports.store = {
             progressList.params = options;
             me.get(progressList);
         },
-        refreshList: function() {
-            var model = this.models.details;
-            this.get(model);
-        }
+        showDeail: function(payload) {
+            var me = this,
+                sectionList = this.models.sectionList;
+            sectionList.clear();
+            sectionList.params = payload;
+            return me.get(sectionList);
+        },
     }
 };
 
 
 exports.beforeRender = function() {
-    var type = this.renderOptions.type,
+    var menuId = this.renderOptions.state.menuId,
         businessType = '0';
-    if (type === '1') { // 课程
-        businessType = '0';
-    } else if (type === '2') { // 专题
+    if (menuId === '1') { // 专题
         businessType = '2';
     }
     // 注意菜单id和数据类型typ不一样，courseType: 0-课程；1-学习路径；2-专题',
