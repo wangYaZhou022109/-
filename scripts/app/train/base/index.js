@@ -7,10 +7,12 @@ exports.store = {
     models: {
         classInfo: { url: '../train/classInfo/findByProjectId' },
         saveModel: { url: '../train/classInfo' },
+        offlineCourse: { url: '../train/offline-course/init' },
         file: {
             url: '../human/file/upload'
         },
         down: { url: '../human/file/download' },
+        classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         state: { data: {} }
     },
     callbacks: {
@@ -21,6 +23,20 @@ exports.store = {
             return me.get(classInfo);
         },
         submit: function(payload) {
+            var model = this.models.saveModel,
+                classInfo = this.models.classInfo,
+                offlineCourse = this.models.offlineCourse,
+                me = this;
+            model.set(payload);
+            model.data.confirm = 1;
+            offlineCourse.data.classId = classInfo.data.id;
+            me.save(model).then(function() {
+                this.app.message.success('提交成功');
+                me.get(classInfo);
+                me.save(offlineCourse);
+            });
+        },
+        save: function(payload) {
             var model = this.models.saveModel,
                 classInfo = this.models.classInfo,
                 me = this;

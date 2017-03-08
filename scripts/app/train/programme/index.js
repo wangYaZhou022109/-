@@ -29,6 +29,8 @@ exports.store = {
         attachList: { url: '../train/offline-course/findAttach' },
         courseAttach: { url: '../train/course-attach' },
         download: { url: '../human/file/download' },
+        offlineClickUpdate: { url: '../train/offline-course/click-update' },
+        courseSalary: { url: '../train/courseSalary/updateByCourseId' },
         delThemeList: { data: [] },
         state: { data: {} },
         files: { data: [] },
@@ -174,14 +176,15 @@ exports.store = {
                 me = this,
                 courseDate;
             courseDate = payload.courseDate.split(' ');
-            offlineCourse.set(payload);
-            offlineCourse.data.id = payload.id[0];
-            offlineCourse.data.classId = state.data.classId;
-            D.assign(me.models.offlineCourse.data, {
-                fileList: JSON.stringify(fileList.data)
+            D.assign(payload, {
+                fileList: JSON.stringify(fileList.data),
+                id: fileList.data.length > 0 ? payload.id[0] : payload.id,
+                classId: state.data.classId,
+                courseDate: courseDate[0],
+                startTime: courseDate[1]
             });
-            offlineCourse.data.courseDate = courseDate[0];
-            offlineCourse.data.startTime = courseDate[1];
+            offlineCourse.clear();
+            offlineCourse.set(payload);
             this.save(offlineCourse).then(function() {
                 this.app.message.success('提交成功');
                 me.get(offlineCourseList);
@@ -359,6 +362,26 @@ exports.store = {
             model.set(payload);
             this.save(model).then(function() {
                 me.get(onlineCourseList);
+            });
+        },
+        updateOfflineName: function(payload) {
+            var model = this.models.offlineClickUpdate,
+                offlineCourseList = this.models.offlineCourseList,
+                me = this;
+            model.clear();
+            model.set(payload);
+            this.save(model).then(function() {
+                me.get(offlineCourseList);
+            });
+        },
+        updatePay: function(payload) {
+            var model = this.models.courseSalary,
+                offlineCourseList = this.models.offlineCourseList,
+                me = this;
+            model.clear();
+            model.set(payload);
+            this.save(model).then(function() {
+                me.get(offlineCourseList);
             });
         }
     }

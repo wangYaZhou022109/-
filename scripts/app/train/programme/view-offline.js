@@ -10,7 +10,17 @@ exports.bindings = {
 
 exports.events = {
     'click addOfflineCourse': 'addOfflineCourse',
-    'click theme-offline': 'showOfflineTheme'
+    'click theme-offline': 'showOfflineTheme',
+    'click label-name-offline-*': 'changeOfflineName',
+    'change input-name-offline-*': 'updateOfflineName',
+    'click label-teacher-offline-*': 'changeTeacherName',
+    'change input-teacher-offline-*': 'updateTeacherName',
+    'click label-torg-offline-*': 'changeTorgName',
+    'change input-torg-offline-*': 'updateTorgName',
+    'click label-title-offline-*': 'changeTitleName',
+    'change input-title-offline-*': 'updateTitleName',
+    'click label-paidPay-offline-*': 'changePay',
+    'change input-paidPay-offline-*': 'updatePay'
 };
 
 exports.handlers = {
@@ -21,6 +31,67 @@ exports.handlers = {
     },
     showOfflineTheme: function() {
         this.app.viewport.modal(this.module.items.configOffline);
+    },
+    changeOfflineName: function(id) {
+        $(this.$('input-name-offline-' + id)).css('display', 'block');
+        $(this.$('label-name-offline-' + id)).css('display', 'none');
+    },
+    updateOfflineName: function(id) {
+        var val = $(this.$('input-name-offline-' + id)).val();
+        if (val === '') {
+            this.app.message.alert('课程名称不能为空');
+        } else {
+            this.module.dispatch('updateOfflineName', { id: id, name: val });
+        }
+    },
+    changeTeacherName: function(id) {
+        $(this.$('input-teacher-offline-' + id)).css('display', 'block');
+        $(this.$('label-teacher-offline-' + id)).css('display', 'none');
+    },
+    updateTeacherName: function(id) {
+        var val = $(this.$('input-teacher-offline-' + id)).val();
+        if (val === '') {
+            this.app.message.alert('讲师名称不能为空');
+        } else {
+            this.module.dispatch('updateOfflineName', { id: id, teacherName: val });
+        }
+    },
+    changeTorgName: function(id) {
+        $(this.$('input-torg-offline-' + id)).css('display', 'block');
+        $(this.$('label-torg-offline-' + id)).css('display', 'none');
+    },
+    updateTorgName: function(id) {
+        var val = $(this.$('input-torg-offline-' + id)).val();
+        if (val === '') {
+            this.app.message.alert('讲师单位不能为空');
+        } else {
+            this.module.dispatch('updateOfflineName', { id: id, teacherOrganization: val });
+        }
+    },
+    changeTitleName: function(id) {
+        $(this.$('input-title-offline-' + id)).css('display', 'block');
+        $(this.$('label-title-offline-' + id)).css('display', 'none');
+    },
+    updateTitleName: function(id) {
+        var val = $(this.$('input-title-offline-' + id)).val();
+        if (val === '') {
+            this.app.message.alert('讲师职称不能为空');
+        } else {
+            this.module.dispatch('updateOfflineName', { id: id, teacherTitle: val });
+        }
+    },
+    changePay: function(id) {
+        $(this.$('input-paidPay-offline-' + id)).css('display', 'block');
+        $(this.$('label-paidPay-offline-' + id)).css('display', 'none');
+    },
+    updatePay: function(id) {
+        var val = $(this.$('input-paidPay-offline-' + id)).val(),
+            reg = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/;
+        if (val === '' || !reg.test(val)) {
+            this.app.message.alert('课酬实付不能为空并且为数字');
+        } else {
+            this.module.dispatch('updatePay', { courseId: id, paidPay: val });
+        }
     }
 };
 

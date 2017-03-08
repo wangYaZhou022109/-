@@ -33,23 +33,30 @@ view('offline')
                     th 日期
                     th 时间
                     th 课程名称
-                    th 类型
-                    th 教室
-                    th 讲师
+                    th 讲师名称
+                    th 讲师单位
+                    th 讲师职务
+                    th 课酬实付
                     th 课件
                     th 操作
                 tbody > each(offlineCourseList) > tr
                     td > date(courseDate)
                     td > echo(startTime + '-' + endTime)
-                    td > echo(name)
-                    td > map('class-offline-type' type)
-                    td > echo(classRoom.classroomName)
                     td
-                        echo(teacherName)
-                        br
-                        echo('单位：' + teacherOrganization)
-                        br
-                        echo('职称：' + teacherTitle)
+                        label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+                        input(id='input-name-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
+                    td
+                        label(id='label-teacher-offline-' + id data-name='id' data-value=id) > echo(teacherName + '(点击可修改)')
+                        input(id='input-teacher-offline-' + id value=teacherName style='display:none;' data-name='id' data-value=id)
+                    td
+                        label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
+                        input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
+                    td
+                        label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
+                        input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
+                    td
+                        label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
+                        input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
                     td
                         a(id='courseware-'+id data-name='id' data-value=id) 查看课件
                     td
