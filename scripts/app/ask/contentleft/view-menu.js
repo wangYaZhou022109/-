@@ -33,12 +33,12 @@ exports.actionCallbacks = {
             menu = 'relatedtome';
         state.data = {};
         if (typeof data[0] !== 'undefined') {
-            if (data[0].length > 0) {
+            if (data[0].concernList.length <= 0) {
                 menu = 'attentionselection';
             }
             state.data.menu = menu;
             state.data[menu] = true;
             state.changed();
-        } 
+        }
     }
 };

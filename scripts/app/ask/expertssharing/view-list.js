@@ -21,8 +21,8 @@ exports.handlers = {
             data;
         var el = $(target).parents('.activity-category')[0];
         region = new D.Region(this.app, this.module, el, id);
-        if (id.indexOf(',') !== -1) {
-            data = id.split(',');
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
             region.show('ask/myquiz/details', { id: data[1] });
         }
     },
