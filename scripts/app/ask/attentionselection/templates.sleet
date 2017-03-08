@@ -31,6 +31,7 @@ view('list')
                         .clearfix
                             .title.text-overflow > echo(member.fullName)
                         .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+                        echo(topicStr)
             ul 
                 li
                     .btn.radius.block(id='step-two' data-name='id' data-value='two') > string('previous-step') 

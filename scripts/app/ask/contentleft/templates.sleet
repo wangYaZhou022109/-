@@ -5,7 +5,7 @@ module
 
 view('menu')
     a(id='menu-alldynamic' href='javascript:;')(class ='active') > string('all-dynamic') 
-    a(id='menu-relatedtome' href='javascript:;')(class ='active') > string('related-to-me')
+    a(id='relatedtome' href='javascript:;')(class ='active') > string('related-to-me')
     a(id='menu-expertssharing' href='javascript:;')(class ='active') > string('experts-sharing') 
     hr
 view('list') 

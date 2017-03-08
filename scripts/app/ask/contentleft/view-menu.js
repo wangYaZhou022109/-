@@ -13,12 +13,32 @@ exports.handlers = {
         state.data = {};
         state.data.menu = menu || 'alldynamic';
         state.data[menu] = true;
-        if (menu === 'relatedtome') {
-            if (typeof this.bindings.attention.data.concernList === 'undefined'
-            || this.bindings.attention.data.concernList.length === 0) {
-                state.data.menu = 'attentionselection';
-            }
-        }
         state.changed();
+    }
+};
+
+
+exports.actions = {
+    'click relatedtome*': 'relatedtome',
+};
+
+exports.dataForActions = {
+    relatedtome: function(payload) {
+        return payload;
+    }
+};
+exports.actionCallbacks = {
+    relatedtome: function(data) {
+        var state = this.bindings.state,
+            menu = 'relatedtome';
+        state.data = {};
+        if (typeof data[0] !== 'undefined') {
+            if (data[0].length > 0) {
+                menu = 'attentionselection';
+            }
+            state.data.menu = menu;
+            state.data[menu] = true;
+            state.changed();
+        } 
     }
 };

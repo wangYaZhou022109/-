@@ -1,29 +1,17 @@
 #!handlebars
-module > .activity-page
-    .activity-list(data-region='list')
-
+module
+    div(data-region='list')
+    div(data-region='popup')  
 view('list')
-    div
-        each(trends.trendsList)
-            ul 
-                li(style='font-weight:bold')
-                    compare(thumbnail 'ne' '')
-                        div(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
-                    a(id='details-'+ id + ',' + questionId data-name='id' data-value=id + ',' + questionId href='javascript:;') > echo(title) 
-                    div(style='height:80px;width:80px;float:right;') > img(src=createUser.headPortrait )
-                li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
-                    echo(content) 
-                li
-                    echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
-                li
-                    string('from-topic') + echo(' ：' + relTopic)
-                    a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
-                    string('strip') + string('discuss')
-                    a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
-                    echo('|')
-                    a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
-                    hr
-    
-                
-
-    
+    each(trends.trendsList)
+        ul
+            li > echo('sdfsdfsdfs')
+            
+            
+view('popup')
+    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
+    .catalog-view('hidden' style='width:300px;margin:0 auto; position:absolute;z-index: 9999;top:50%;left:50%;') > .catalog-view-box
+        .clearfix.catalog-view-nav
+            i#closeCatalog.pull-right.iconfont.icon-full-screen
+            h3.active.title > string('my-question')
+        div(data-dynamic-key=popupstate.menu)                                                

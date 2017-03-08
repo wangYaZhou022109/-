@@ -32,6 +32,5 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    console.log(this.renderOptions);
     this.store.models.state = this.renderOptions.state;
 };
