@@ -13,13 +13,8 @@ exports.dataForTemplate = {
     list: function(data) {
         var pageNum = this.bindings.list.getPageInfo().page;
         _.map(data.list || [], function(role, i) {
-            var r = role,
-                totalScore = r.totalScore,
-                score = r.score;
+            var r = role;
             r.i = i + 1 + ((pageNum - 1) * 10);
-            r.totalScore = totalScore / 100;
-            r.score = score / 100;
-            r.showCert = r.exam.hasCert === 1;// 是否有证书
         });
         return data.list;
     },

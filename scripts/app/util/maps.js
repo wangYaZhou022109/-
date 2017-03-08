@@ -278,6 +278,9 @@ module.exports = {
     },
     'lecturer-type': {
         0: '内部', 1: '外部'
+    },
+    'research-record': {
+        0: '未参与', 1: '已完成'
     }
 };
 

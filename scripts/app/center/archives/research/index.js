@@ -4,8 +4,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        list: { url: '../exam/exam-record/person-list', type: 'pageable', root: 'items' },
-        export: { url: '../exam/exam-record/export-person-list' }
+        list: { url: '../exam/research-record/person-list', type: 'pageable', root: 'items' },
+        export: { url: '../exam/research-record/export-person-list' }
     },
     callbacks: {
         init: function() {
