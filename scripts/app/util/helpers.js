@@ -134,32 +134,5 @@ module.exports = {
             uri += arguments[i];
         }
         return uri;
-    },
-
-    isGrant: function(operatorType, organizationId, options) {
-        var view = options.data.root.Self,
-            grants,
-            types;
-        if (!view) return '';
-
-        grants = view.module.store.models.Grants;
-        if (!grants || !grants.data) return '';
-
-        grants = grants.data;
-
-        if (!organizationId && operatorType === window.app.global.EDIT) {
-            if (Object.keys(grants).some(function(k) {
-                if (grants[k].indexOf(operatorType) !== -1) return true;
-                return false;
-            })) {
-                return options.fn(this);
-            }
-        }
-
-        types = grants[organizationId];
-        if (types && types.indexOf(operatorType) !== -1) {
-            return options.fn(this);
-        }
-        return '';
     }
 };

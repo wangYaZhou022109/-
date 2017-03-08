@@ -278,6 +278,9 @@ module.exports = {
     },
     'lecturer-type': {
         0: '内部', 1: '外部'
+    },
+    'course-list-company-type': {
+        0: '全部', 1: '集团', 2: '本公司', 3: '其他公司'
     }
 };
 
