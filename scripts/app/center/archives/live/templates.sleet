@@ -1,0 +1,28 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.live.name')
+                    th > setting('person.archives.live.lecturer')
+                    th > setting('person.archives.class.startTime')
+                    th > setting('person.archives.class.endTime')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(subject)
+                    td > echo(lecturerNames)
+                    td > dateTime(startTime)
+                    td > dateTime(endTime)
+                    else
+                        tr > td(colspan='4') > p.text-center > string('no-data')
+        #pager.pagination
+
