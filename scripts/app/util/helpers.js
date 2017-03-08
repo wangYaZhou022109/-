@@ -61,6 +61,13 @@ module.exports = {
         return toDateString(value) + ' ' + toTimeString(value);
     },
 
+    dateMinute: function(value) {
+        var v = value;
+        if (!v) return '';
+        v = Number(new Date(value).getTime());
+        return toDateString(v) + ' ' + toTimeString(v, 'minute');
+    },
+
     setting: function(key) {
         var o = window.app.global.setting[key];
         return o || '';
