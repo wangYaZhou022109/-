@@ -20,3 +20,16 @@ exports.dataForTemplate = {
         return lists;
     }
 };
+
+exports.events = {
+    'click more': 'more'
+};
+
+exports.handlers = {
+    more: function() {
+        var me = this;
+        me.module.dispatch('more').then(function(data) {
+            me.app.viewport.modal(me.module.items.more, data[0]);
+        });
+    }
+};

@@ -11,7 +11,7 @@ exports.events = {
 exports.handlers = {
     submit: function() {
         var me = this;
-        this.app.message.confirm(strings.get('exam.activity.research-detail.confirm-submit'), function() {
+        this.app.message.confirm(strings.get('exam.research.research-detail.confirm-submit'), function() {
             return me.module.dispatch('saveResearchDetail');
         }, function() {
             return false;

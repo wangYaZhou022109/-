@@ -126,7 +126,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a#toExam(href='#/exam/answer-paper/99e5b660-537b-4722-b2a2-c6209f028718') 测试考试，不要修改这个！
+                    a#toExam(href='#/exam/exam/answer-paper-2/99e5b660-537b-4722-b2a2-c6209f028718') 测试考试，不要修改这个！
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right
@@ -226,7 +226,7 @@ view('list')
             li
                 .activity-item.clearfix
                     i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
+                    a(href='#/exam/research-activity/research-detail/7d7159f4-b889-42dd-8949-46570b2a15a9') 调研测试，不要删
                     .sub-text.small-font
                         | 5623参与
                         i.iconfont.icon-favorite.m-left.m-right

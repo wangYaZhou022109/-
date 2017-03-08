@@ -23,14 +23,11 @@ view('list')
                 .item#sort-1 > span 最热
                 .item#sort-2 > span 好评
                 .item.drop-down-wrapper.right
-                    .drop-down-btn
-                        | 全部
+                    .drop-down-btn > map('course-list-company-type', search.companyType)
                         i.iconfont.icon-arrow-down
                     .drop-down-content > .content
-                        ul
-                            li.active 集团课程
-                            li 本公司课程
-                            li 其它公司课程
+                        ul > each(companyTypes)
+                            li(id = 'companyType-'+key) > echo(value)
         ul
             each(courses)
                 li > a.normal(href='#/study/course/detail/'+id) > .content

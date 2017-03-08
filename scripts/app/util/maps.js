@@ -281,6 +281,9 @@ module.exports = {
     },
     'research-record': {
         0: '未参与', 1: '已完成'
+    },
+    'course-list-company-type': {
+        0: '全部', 1: '集团', 2: '本公司', 3: '其他公司'
     }
 };
 

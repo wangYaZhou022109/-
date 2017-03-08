@@ -1,0 +1,18 @@
+.ask-main {
+    & .ask-tab-box {
+        & li {
+            float: left;
+            padding: var(--space) calc(var(--space)*3);
+
+            &.active {
+                & a {
+                    color: var(--custom-color-2);
+                }
+            }
+
+            & a:hover {
+                color: var(--custom-color-2);
+            }
+        }
+    }
+}

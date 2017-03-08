@@ -47,3 +47,22 @@ exports.dataForTemplate = {
         };
     }
 };
+
+exports.components = [function() { // 分享组件
+    var data = {},
+        course = this.bindings.course.data;
+    if (course) {
+        data.id = course.id;
+        data.type = '1';
+        data.pics = 'images/default-cover/default_course.jpg';
+        data.title = course.name;
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
+}];

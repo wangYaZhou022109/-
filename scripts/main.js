@@ -4,18 +4,10 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
     currentUser = {};
 
 oauthOptions = {
-    clientId: 999,
+    clientId: 40,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'https://dev9.zhixueyun.com'
+    returnTo: 'http://localhost'
 };
-
-// @ifndef PRODUCTION
-oauthOptions = {
-    clientId: 13,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.9.115'
-};
-// @endif
 
 window.$ = window.jQuery = jQuery = require('jquery');
 jQuery.ajaxSetup({ cache: false });

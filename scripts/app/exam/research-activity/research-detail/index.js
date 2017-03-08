@@ -7,7 +7,8 @@ var $ = require('jquery'),
 exports.items = {
     side: 'side',
     main: 'main',
-    head: 'head'
+    head: 'head',
+    notice: ''
 };
 
 exports.store = {
@@ -95,6 +96,10 @@ exports.store = {
 exports.beforeRender = function() {
     changeToFullScreen();
     return this.dispatch('init', this.renderOptions);
+};
+
+exports.afterRender = function() {
+    this.app.viewport.modal(this.items.notice);
 };
 
 changeToFullScreen = function() {
