@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    maps = require('./app/util/maps');
 exports.bindings = {
     state: true,
     courses: true,
@@ -11,7 +12,8 @@ exports.events = {
     'click sort-*': 'sort',
     'click three-item*': 'selectThree',
     'click four-item*': 'selectFour',
-    'click topic-*': 'selectTopic'
+    'click topic-*': 'selectTopic',
+    'click companyType-*': 'changeCompanyType'
 };
 
 exports.handlers = {
@@ -33,6 +35,9 @@ exports.handlers = {
     },
     selectTopic: function(id) {
         this.module.dispatch('search', { topicId: id });
+    },
+    changeCompanyType: function(id) {
+        this.module.dispatch('search', { companyType: id });
     }
 };
 
@@ -71,6 +76,9 @@ exports.dataForTemplate = {
             if (selectId === obj.id) obj.active = true;
             return obj;
         });
+    },
+    companyTypes: function() {
+        return maps.get('course-list-company-type');
     }
 };
 

@@ -2,6 +2,7 @@ exports.items = {
     top: 'top',
     notice: 'notice',
     menu: 'menu',
+    'center/edit': { isModule: true },
     interest: 'interest'
 };
 

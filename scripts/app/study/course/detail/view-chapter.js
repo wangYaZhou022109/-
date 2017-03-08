@@ -4,19 +4,15 @@ var $ = require('jquery'),
     _ = require('lodash/collection');
 var currentSectionId = null;
 var showHandler = function(payload) {
-    var map = {
-        1: 'showSection',
-        3: 'showSection',
-        5: 'showSection',
-        6: 'showSection'
+    var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
+    var detailUrlMap = {
+        8: '#/study/task/'
     };
-    return function(sectionType) {
-        var url;
-        if (map[sectionType]) {
-            this.module.dispatch(map[sectionType], payload);
-        } else if (Number(sectionType) === 8) {
-            url = '#/study/task/' + payload.referenceId;
-            window.open(url);
+    return function() {
+        if (innerType.indexOf(payload.sectionType) !== -1) {
+            this.module.dispatch('showSection', payload);
+        } else {
+            window.open(detailUrlMap[payload.sectionType] + '' + payload.id);
         }
     };
 };

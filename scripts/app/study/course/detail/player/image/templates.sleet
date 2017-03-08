@@ -1,0 +1,7 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    img(src=url)

@@ -146,6 +146,12 @@
                 margin-right: 4%;
                 white-space: nowrap;
 
+                & label {
+                    padding-top: 0.2em;
+                    display: inline-block;
+                    width: 100%;
+                }
+
                 &:nth-child(even) {
                     margin-right: 0;
                 }
