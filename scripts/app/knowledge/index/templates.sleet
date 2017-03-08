@@ -311,5 +311,4 @@ view('main')
 
             .pull-right.knowledge-tit-out.text-right
                 a.normal.icon-add.iconfont
-
     #pager.pagination

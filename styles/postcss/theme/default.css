@@ -157,14 +157,50 @@
 
 .color-ing {
     color: var(--color-ing);
+
+    &.bg {
+        background: currentColor;
+
+        & span {
+            color: white;
+        }
+    }
+
+    &.border {
+        border: 1px solid currentColor;
+    }
 }
 
 .color-pass {
     color: var(--color-pass);
+
+    &.bg {
+        background: currentColor;
+
+        & span {
+            color: white;
+        }
+    }
+
+    &.border {
+        border: 1px solid currentColor;
+    }
 }
 
 .color-error {
     color: var(--color-error);
+
+    &.bg {
+        background: currentColor;
+
+        & span {
+            color: white;
+        }
+    }
+
+    &.border {
+        border: 1px solid currentColor;
+    }
 }
 
 .section .activity-tag {

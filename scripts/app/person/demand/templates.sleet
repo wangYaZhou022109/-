@@ -1,0 +1,25 @@
+#! handlebars
+
+module > .demand-manage-page
+    .demand-top(data-region='top')
+    .demand-main(data-region='main')
+
+view('top')
+    .layout-mt-small.clearfix
+        .pull-left
+            span.h3 班级名称班级名称班级名称班级名称班级名称班级名称班级名称班级名称
+            span.btn.btn.color-ing 进行中
+        .pull-right > .btn.white.border 进入班级
+
+view('main')
+    .tabs > ul
+        li.item.active#item-1 预定时间
+        li#item-2 班级基本信息
+        li#item-3 日程安排
+        li#item-4 配额管理
+        li#item-5 发布通知
+        li#item-6 成员管理
+        li#item-7 班务管理
+        li#item-8 学习效果考评
+        li#item-9 培训总结
+    .tabs-cont#tabsCont

@@ -1,0 +1,17 @@
+#! handlebars
+
+module > .edit-info-page
+    .tabs-cont > ul
+        li.tabs-cont-item.active > .base-info
+            .form
+                .pic > img(src='images/default-cover/default_user.png') + .btn.block.white.border 上传专家头像
+                .info
+                    .form-row.textarea-row
+                        label.m-top.required 名称：
+                        .content > input.input(placeholder='输入您的名称')
+                    .form-row.textarea-row
+                        label.m-top.required 擅长话题：
+                        .content > input.input
+                    .form-row.textarea-row
+                        label.required 您的优势：
+                        .content > textarea.input(rows='3' placeholder='请清晰描述您选择话题领域的优势和特长，这有助于提升您的通过率')

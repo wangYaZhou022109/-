@@ -6,7 +6,7 @@ module > .person-page
         .person-notice(data-region='notice')
         .person-content.clearfix(data-region='menu')
     .person-interest(data-region='interest')
-            
+
 view('top')
     .user-pic > img(src='images/1.png')
     .user-base-info.clearfix
@@ -20,13 +20,13 @@ view('top')
         .base-info
             .info-row
                 span.h2 陈宗寭
-                span.lv lv3
+                span.lv Lv3
             .info-row
                 .item > i.iconfont.icon-warn + span 需求方
                 .item > i.iconfont.icon-mark + span 班务
                 .item > i.iconfont.icon-user-1 + span 讲师
                 .item > i.iconfont.icon-user-2 + span 专家
-                .item > a 编辑资料
+                .item > a#edit-info 编辑资料
             .info-row
                 .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
 
