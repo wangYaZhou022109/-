@@ -16,7 +16,7 @@ exports.store = {
             { id: '1', name: '专题', url: 'course' },
             { id: '2', name: '班级', url: 'class' },
             { id: '3', name: '直播', url: 'live' },
-            { id: '4', name: '考试', url: '' },
+            { id: '4', name: '考试', url: 'exam' },
             { id: '5', name: '调研', url: '' },
             { id: '6', name: '知识', url: '' },
             { id: '7', name: '问道', url: '' },
