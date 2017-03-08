@@ -32,7 +32,7 @@
                 }
 
                 & p {
-                    height: 3.8em;
+                    max-height: 3.8em;
                     overflow: hidden;
                     margin-bottom: 0;
                 }
