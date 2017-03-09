@@ -10,7 +10,6 @@ view('shareaudit') > form.vertical
     br
     echo('附件：')
     a(id='preview'+shareaudit.questionAttach.originalFile) > echo(shareaudit.questionAttach.name)
-    a(href=downUrl download=name) > string('download')
     br
     echo(shareaudit.member.fullName)
     br

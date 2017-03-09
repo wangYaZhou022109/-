@@ -25,7 +25,7 @@ view('main')
         tr 
             td
             td(align='center') 
-                a(id='middle-menu-5' href='javascript:;')(class ='active') 我的分享
+                a(id='middle-menu-myshares' href='javascript:;')(class ='active') 我的分享
                 hr
             td
         tr 

@@ -1,3 +1,3 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
 };

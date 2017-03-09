@@ -16,9 +16,9 @@ view('question-type')
     ul.list > each(questionTypes)
         li(id='list-item-'+ @index)
             .list-title > i.iconfont.icon-type.m-right + echo(data.name '题' '(共' data.totalScore '分)')
-            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) 
-                span.up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-left-circle
-                span.down-arrow(id='next-' + @index) > i.iconfont.icon-arrow-left-circle
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
+                span.up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle
+                span.down-arrow(id='next-' + @index) > i.iconfont.icon-arrow-down-circle
                 each(data.data)
                     compare(currentStatus 'eq' 'check')
                         .list-item.check(id='q-'+id) > echo(i)
