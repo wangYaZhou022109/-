@@ -6,13 +6,9 @@ exports.bindings = {
     download: false
 };
 
-exports.events = {
-};
-
 exports.actions = {
     'click edit*': 'edit',
 };
-
 
 exports.dataForActions = {
     edit: function(data) {

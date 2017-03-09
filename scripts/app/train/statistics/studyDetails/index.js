@@ -1,37 +1,22 @@
 exports.items = {
     main: 'main',
-    search: 'search',
-    edit: ''
+    'train/statistics/studyDetails/particulars': { isModule: true }
 };
 
 exports.store = {
     models: {
-        classTwoBrings: {
-            url: '../train/classTwoBrings/background',
+        courseStudyProgresss: {
+            url: '../train/trainee/courseStudyProgresss',
             type: 'pageable',
             root: 'items'
         },
-        classTwoBring: { url: '../train/classTwoBrings' },
-        download: { url: '../train/classTwoBrings/download' },
-        state: { data: { classId: 3, auditStatus: 1 } }
+        state: { data: { classId: 3 } }
     },
     callbacks: {
         init: function(payload) {
-            var classTwoBrings = this.models.classTwoBrings;
-            classTwoBrings.params = payload;
-            return this.get(classTwoBrings);
-        },
-        search: function(payload) {
-            var classTwoBrings = this.models.classTwoBrings;
-            classTwoBrings.params = payload;
-            return this.get(classTwoBrings);
-        },
-        edit: function(payload) {
-            var model = this.models.classTwoBring,
-                me = this;
-            model.clear();
-            model.params = payload;
-            return me.get(model);
+            var courseStudyProgresss = this.models.courseStudyProgresss;
+            courseStudyProgresss.params = payload;
+            return this.get(courseStudyProgresss);
         }
     }
 };

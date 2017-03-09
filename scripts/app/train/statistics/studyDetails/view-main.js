@@ -1,55 +1,34 @@
 var _ = require('lodash/collection');
 
 exports.bindings = {
-    classTwoBrings: true,
-    state: true,
-    download: false
+    courseStudyProgresss: true,
+    state: true
 };
 
 exports.events = {
+    'click edit*': 'edit'
 };
 
-exports.actions = {
-    'click edit*': 'edit',
-};
-
-
-exports.dataForActions = {
+exports.handlers = {
     edit: function(data) {
-        return data;
+        var me = this;
+        var view1 = me.module.items['train/statistics/studyDetails/particulars'];
+        this.app.viewport.modal(view1, { memberId: data });
     }
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'classTwoBrings' }
+    id: 'pager', name: 'background-pager', options: { model: 'courseStudyProgresss' }
 }];
 
 exports.dataForTemplate = {
-    classTwoBrings: function(data) {
-        var classTwoBrings = data.classTwoBrings,
-            pageNum = this.bindings.classTwoBrings.getPageInfo().page;
-        _.map(classTwoBrings || [], function(classTwoBring, i) {
-            var e = classTwoBring;
+    courseStudyProgresss: function(data) {
+        var courseStudyProgresss = data.courseStudyProgresss,
+            pageNum = this.bindings.courseStudyProgresss.getPageInfo().page;
+        _.map(courseStudyProgresss || [], function(courseStudyProgress, i) {
+            var e = courseStudyProgress;
             e.i = i + 1 + ((pageNum - 1) * 10);
         });
-        return classTwoBrings;
-    },
-    exportUrl: function() {
-        var url = this.bindings.download.getFullUrl() + '?';
-        var params = this.bindings.classTwoBrings.params;
-        var token = this.app.global.OAuth.token.access_token;
-        params.pageSize = 100000;
-        params.page = 1;
-        _.map(params, function(v, k) {
-            url += (k + '=' + v + '&');
-        });
-        url += ('access_token=' + token);
-        return url;
-    }
-};
-
-exports.actionCallbacks = {
-    edit: function() {
-        this.app.viewport.modal(this.module.items.edit);
+        return courseStudyProgresss;
     }
 };

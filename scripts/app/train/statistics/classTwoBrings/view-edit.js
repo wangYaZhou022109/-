@@ -6,4 +6,3 @@ exports.type = 'form';
 exports.bindings = {
     classTwoBring: true
 };
-

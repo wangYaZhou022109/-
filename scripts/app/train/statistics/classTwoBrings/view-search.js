@@ -14,29 +14,23 @@
 // //         return data;
 // //     }
 // // };
-
-// // exports.components = [function() {
-// //     var operatorType = this.app.global.EDIT,
-// //         data = {},
-// //         project = this.bindings.project.data;
-// //     if (project.organization) {
-// //         data.value = project.organization.id;
-// //         data.text = project.organization.name;
-// //     }
-// //     return {
-// //         id: 'owner',
-// //         name: 'picker',
-// //         options: {
-// //             module: 'train/project',
-// //             picker: 'owner',
-// //             required: false,
-// //             params: { operatorType: operatorType },
-// //             data: data
-// //         }
-// //     };
-// // }];
-
 var $ = require('jquery');
+
+exports.components = [function() {
+    var operatorType = this.app.global.EDIT,
+        data = {};
+    return {
+        id: 'owner',
+        name: 'picker',
+        options: {
+            module: 'train/project',
+            picker: 'owner',
+            required: false,
+            params: { operatorType: operatorType },
+            data: data
+        }
+    };
+}];
 
 exports.bindings = {
     classTwoBrings: true
@@ -44,6 +38,25 @@ exports.bindings = {
 
 exports.actions = {
     'click search': 'search'
+};
+
+exports.events = {
+    'click showOrganization': 'show'
+};
+
+exports.actions = {
+    'click edit*': 'edit',
+};
+
+exports.handlers = {
+    show: function() {
+        var me = this,
+            model = me.module.items['train/statistics/classTwoBrings/owner'];
+        me.app.viewport.modal(model, { module: 'train/project',
+            callback: function() {
+            }
+        });
+    }
 };
 
 exports.dataForActions = {

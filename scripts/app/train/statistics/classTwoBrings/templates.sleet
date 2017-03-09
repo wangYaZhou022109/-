@@ -15,7 +15,7 @@ view('search') > form.vertical
             input.input(name='fullName')
         div.col-sm-3
             echo('所属单位')
-            #owner
+            a.btn.inline-block#showOrganization 选择
         div.col-sm-3
             btn.btn#search > echo('搜索')
 
@@ -44,6 +44,8 @@ view('main')
             td > echo(title2)
             td
                 a(id='edit'+id data-name='id' data-value=id) > echo('查看')
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')        
     #pager.pagination
 
 view('edit') > form.vertical
