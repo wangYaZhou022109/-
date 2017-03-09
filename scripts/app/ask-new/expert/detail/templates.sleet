@@ -7,7 +7,7 @@ module
             .title-row
                 .inline-block.layout-mr > .h3 张三丰
             .title-row
-                .inline-block.m-right 我擅长的话题 
+                .inline-block.m-right 我擅长的话题
                 .inline-block.m-right.bg-white.sub-title 话题一
                 .inline-block.m-right.bg-white.sub-title 科学教育
                 .inline-block.m-right.bg-white.sub-title 话题区域经济学
@@ -202,15 +202,15 @@ view('side')
         span.more more
         .layout-mt-small.user-picture
             .grid-row
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
 
     .section.relevant-course
         span.h3 相关问题

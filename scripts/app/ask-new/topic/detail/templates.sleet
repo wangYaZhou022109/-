@@ -6,7 +6,7 @@ module > .ask-page > .container
         .page-main(data-region='main')
 view('main')
     .topic-detail-title
-        .img > .img-cont > img(src="images/demo/1.jpg")
+        .img > .img-cont > img(src="images/demo/1.jpg" alt='温暖气氛')
         .w-full
             h4.text-overflow 温暖气氛
             .info 对儿童进行德育、智育、体育等方面的培养和训练。它是提高人口素质的重要环节。青春期到来以前的未成年人被称为儿童或少年，他们在思想、性格、智力、体魄等方面的可塑儿童教育性很强。儿童教育是整个教育事业的重要基础。儿童教育开发人类巨大潜能，这个潜能是人类亿万年进化的积淀，人人都有这种巨大的遗传潜能；但这种潜能只有在婴幼儿时期才得以较为充分地开发，不然将迅速被埋没。人的各种潜能只有大脑生长发育期才可能较为充分激发出来。
@@ -275,15 +275,15 @@ view('side')
         span.more more
         .layout-mt-small.user-picture
             .grid-row
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
 
     .section.relevant-course
         span.h3 热门问题
