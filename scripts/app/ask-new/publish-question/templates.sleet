@@ -1,0 +1,17 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main') > .form
+    .form-row
+        label.required 问题标题
+        .content > input.input + .tips 0/60
+    .form-row
+        label.required 关联话题
+        .content > input.input
+    .form-row.textarea-row
+        label 详情描述
+        .content > textarea.input(rows='5') + .tips 0/60
+    .form-row
+        .content > a > i.iconfont.icon-link + span 上传附件

@@ -1,13 +1,38 @@
 .form {
+
     & .form-row {
+        @apply --clearfix;
+
         margin-bottom: calc(var(--space) * 2);
 
-        & .content,
         & > label {
-            display: inline-block;
             position: relative;
-            overflow: visible;
-            visibility: visible;
+            float: left;
+            width: 6em;
+            text-align: right;
+            line-height: var(--input-height);
+
+            &.required:after {
+                content: '*';
+                position: absolute;
+                right: -var(--space);
+                top: 0;
+                color: var(--color-error);
+            }
+
+            &.auto {
+                width: auto;
+
+                & + .content {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        & .content {
+            overflow: hidden;
+            position: relative;
+            margin-left: 8em;
         }
 
         & .sub-text {
@@ -18,32 +43,25 @@
             bottom: -calc(var(--space) * 2);
         }
 
-        & > label {
-            width: 6em;
-            text-align: right;
+        & .tips {
+            position: absolute;
+            right: var(--space);
+            top: 50%;
+            font-size: var(--small-font);
+            margin-top: -.5em;
+            color: var(--font-sub-color);
         }
 
         & .input {
-            width: 20em;
+            width: 100%;
+            display: block;
         }
 
         &.textarea-row {
-            @apply --clearfix;
-
-            & span,
-            & label {
-                vertical-align: top;
-                float: left;
-            }
-            & .content {
-                display: block;
-                overflow: hidden;
-            }
-            & textarea {
-                display: block;
-                width: 100%;
+            & .tips {
+                top: auto;
+                bottom: var(--space);
             }
         }
     }
-
 }
