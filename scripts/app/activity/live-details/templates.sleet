@@ -77,7 +77,10 @@ view('main')
                     | 直播时间
                     p
                         date(gensee.startTime)
-                .btn.pull-right.m-top 预约
+                compare(sub.subStatus 'eq' 0)
+                    .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
+                else
+                    .btn.pull-right.m-top 已预约
             .clearfix
                 each(gensee.genseeTopics)
                     .btn-white > echo(topicName)
