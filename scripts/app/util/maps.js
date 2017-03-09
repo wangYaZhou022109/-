@@ -284,6 +284,9 @@ module.exports = {
     },
     'course-list-company-type': {
         0: '全部', 1: '集团', 2: '本公司', 3: '其他公司'
+    },
+    'questin-type': { // '问题类型
+        1: '问题', 2: '分享', 3: '班级讨论'
     }
 };
 

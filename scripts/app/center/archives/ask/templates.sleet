@@ -1,0 +1,30 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.ask.title')
+                    th > setting('person.archives.ask.type')
+                    th > setting('person.archives.ask.pushTime')
+                    th > setting('person.archives.ask.status')
+                    th > setting('person.archives.ask.integral')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(title)
+                    td > map('questin-type' type)
+                    td > dateTime(createTime)
+                    td > map('ask-audit-status' auditStatus)
+                    td > echo(integralScore)
+                    else
+                        tr > td(colspan='6') > p.text-center > string('no-data')
+        #pager.pagination
+

@@ -1,0 +1,33 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.knowledge.name')
+                    th > setting('person.archives.knowledge.uploadTime')
+                    th > setting('person.archives.knowledge.type')
+                    th > setting('person.archives.knowledge.score')
+                    th > setting('person.archives.knowledge.downNum')
+                    th > setting('person.archives.knowledge.viewNum')
+
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(name)
+                    td > dateTime(uploadTime)
+                    td > echo(type)
+                    td > echo(integralScore)
+                    td > echo(downloadMemberCount)
+                    td > echo(browseCount)
+                    else
+                        tr > td(colspan='7') > p.text-center > string('no-data')
+        #pager.pagination
+

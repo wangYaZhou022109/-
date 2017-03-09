@@ -18,8 +18,8 @@ exports.store = {
             { id: '3', name: '直播', url: 'live' },
             { id: '4', name: '考试', url: 'exam' },
             { id: '5', name: '调研', url: 'research' },
-            { id: '6', name: '知识', url: '' },
-            { id: '7', name: '问道', url: '' },
+            { id: '6', name: '知识', url: 'knowledge' },
+            { id: '7', name: '问吧', url: 'ask' },
             { id: '8', name: '证书', url: '' }
         ] },
         statistics: { url: '../course-study/course-study-progress/statistics', autoLoad: 'after' }
