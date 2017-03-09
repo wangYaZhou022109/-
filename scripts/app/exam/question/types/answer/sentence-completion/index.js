@@ -29,13 +29,19 @@ exports.store = {
                 types = maps.get('question-types'),
                 difficultys = maps.get('question-difficultys');
             D.assign(data, question);
-            data.answer = question.questionAttrs[0].value;
+
+            if (question.questionAttrs.length > 0) {
+                data.answer = question.questionAttrs[0].value;
+            }
+
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             data.detailMode = payload.mode;
+
             if (question.answerRecord) {
                 data.gainScore = question.answerRecord.score;
             }
+
             this.models.answer.init(payload.answer);
         },
         save: function() {

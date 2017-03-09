@@ -37,6 +37,9 @@ exports.store = {
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             data.options = [];
+            if (attrs.length > 0) {
+
+            }
             answer = _.find(attrs, ['type', '0']).value;
             attrs = _.filter(attrs, function(a) {
                 return Number(a.type) !== 0;

@@ -17,7 +17,7 @@ exports.getEntity = function() {
 };
 
 exports.getEntityModuleName = function() {
-    return 'exam/answer-paper/count-down';
+    return 'exam/exam/answer-paper-2/count-down';
 };
 
 exports.dataForEntityModule = function(data) {

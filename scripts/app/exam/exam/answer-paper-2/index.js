@@ -271,7 +271,7 @@ exports.store = {
                 },
                 changeAnswerRecord: function() {
                     var results = [];
-                    _.forEach(this.data.answers, function(a) {
+                    _.forEach(this.data, function(a) {
                         if (a.type && a.type === 6) {
                             _.forEach(a.value, function(v) {
                                 results.push(v);
@@ -340,6 +340,7 @@ exports.store = {
         },
         saveAnswer: function(payload) {
             this.models.answer.saveAnswer(payload);
+            this.models.modify.saveAnswer(payload);
             this.models.state.calculate();
             this.models.state.changed();
         },
