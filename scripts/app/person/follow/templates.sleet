@@ -203,19 +203,19 @@ view('main')
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow 温暖气氛
+                            h4.text-overflow(title='温暖气氛') 温暖气氛
                             .info 36关注 ｜ 1专家 ｜ 2问题
                         .btn.small 取消关注
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow 脱口秀
+                            h4.text-overflow(title='脱口秀') 脱口秀
                             .info 36关注 ｜ 1专家 ｜ 2问题
                         .btn.small 取消关注
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow 梦想常有
+                            h4.text-overflow(title='梦想常有') 梦想常有
                             .info 36关注 ｜ 1专家 ｜ 2问题
                         .btn.small 取消关注
                     li.topic-item
