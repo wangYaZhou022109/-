@@ -10,7 +10,10 @@ view('filter')
         .filter
             .pull-right.m-right.pointer#registerTimeOrder
                 | 注册时间
-                i.iconfont.icon-sort-desc
+                compare(search.registerTimeOrder 'eq' 'asc')
+                    i.iconfont.icon-sort-asc
+                else
+                    i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 要求：
                 .item#selectIsRequired-all(class=if(search.isAll 'active')) > span 全部
@@ -31,7 +34,7 @@ view('main')
                 compare(finishStatus 'eq' '0')
                     map('course-info-study-status' finishStatus)
                 else
-                    | 累计学习时长
+                    echo('累计学习时长：' studyTotalTime)
             .btn-row
                 a.normal(href=btnUrl target='_blank')
                     .btn > echo(btnText)

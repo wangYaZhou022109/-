@@ -24,8 +24,8 @@ exports.store = {
                 searchModel.data.registerTimeOrder = 'desc';
             }
             progressList.clear();
-            D.assign(progressList.params, searchModel);
-            this.get(progressList);
+            D.assign(progressList.params, searchModel.data);
+            return this.get(progressList);
         },
         search: function(params) {
             var searchModel = this.models.search,
