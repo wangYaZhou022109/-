@@ -16,14 +16,15 @@ exports.store = {
     },
     callbacks: {
         init: function(options) {
-            var menuId = options.state.menuId,
+            var menu = options.state.menu,
                 searchModel = this.models.search,
                 progressList = this.models.progressList;
-            if (menuId === '1') { // 专题
+            if (menu === 'study/subject') { // 专题
                 searchModel.data.businessType = 2;
+                searchModel.data.registerTimeOrder = 'desc';
             }
             progressList.clear();
-            progressList.params.businessType = searchModel.data.businessType;
+            D.assign(progressList.params, searchModel);
             this.get(progressList);
         },
         search: function(params) {

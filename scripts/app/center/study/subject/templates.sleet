@@ -1,0 +1,38 @@
+#!handlebars
+
+module
+    .person-list
+        div(data-region='filter')
+        div(data-region='main')
+
+view('filter')
+    form.vertical
+        .filter
+            .pull-right.m-right.pointer#registerTimeOrder
+                | 注册时间
+                i.iconfont.icon-sort-desc
+            .pull-left
+                .inline-block.m-left.sub-text 要求：
+                .item#selectIsRequired-all(class=if(search.isAll 'active')) > span 全部
+                .item#selectIsRequired-1(class=if(search.isb 'active')) > span 必修
+                .item#selectIsRequired-0(class=if(search.isx 'active')) > span 选修
+        .list-search
+            input.input(name='name' value=search.name placeholder='请输入您要搜索的内容名称')
+            .btn#searchByName > i.iconfont.icon-search
+view('main')
+    ul.list-text.border.top > each(progressList)
+        li.border.bottom
+            .title-row
+                .img > .img-cont > img(src=imgUrl)
+                .inline-block.title > echo(courseName)
+                span.custom-color-1 > map('is-required' isRequired)
+                .time > echo(prefixText)
+            .state
+                compare(finishStatus 'eq' '0')
+                    map('course-info-study-status' finishStatus)
+                else
+                    | 累计学习时长
+            .btn-row
+                a.normal(href=btnUrl target='_blank')
+                    .btn > echo(btnText)
+    #pager.pagination
