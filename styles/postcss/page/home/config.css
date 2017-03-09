@@ -6,6 +6,7 @@
 .home-page {
     & > .section {
         padding: var(--base-gap) 0 0;
+        overflow: hidden;
     }
 
     & .home-tag {
@@ -332,6 +333,49 @@
         & img {
             display: block;
             height: 100%;
+        }
+    }
+
+    & .content {
+        position: relative;
+        transition: all .2s linear;
+
+        &:hover {
+            & .detail-wrapper {
+                @apply --fade-in;
+
+                z-index: 1;
+                height: calc(var(--font-size) * 1.8 * 2 + 1);
+
+
+            }
+
+            & .title {
+                font-weight: bold;
+            }
+
+            & img {
+                transform: scale(1.1);
+            }
+        }
+
+
+        & .detail-wrapper {
+            @apply --fade-out;
+
+            background-color: white\0;
+            background-color: rgba(255,255,255,.95);
+            transition: all .2s linear;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: -1;
+            padding: var(--space) 1em;
+            height: 0;
+            line-height: 1.8;
+
         }
     }
 }

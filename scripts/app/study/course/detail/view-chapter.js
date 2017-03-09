@@ -4,17 +4,15 @@ var $ = require('jquery'),
     _ = require('lodash/collection');
 var currentSectionId = null;
 var showHandler = function(payload) {
-    var map = {
-        1: 'showSection',
-        3: 'showSection',
-        5: 'showSection',
-        6: 'showSection'
+    var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
+    var detailUrlMap = {
+        8: '#/study/task/'
     };
-    return function(sectionType) {
-        if (map[sectionType]) {
-            this.module.dispatch(map[sectionType], payload);
+    return function() {
+        if (innerType.indexOf(payload.sectionType) !== -1) {
+            this.module.dispatch('showSection', payload);
         } else {
-            window.open('http://www.baidu.com/?test=' + payload.sectionId);
+            window.open(detailUrlMap[payload.sectionType] + '' + payload.id);
         }
     };
 };
@@ -39,13 +37,15 @@ exports.handlers = {
         $(this.module.$('course-side-catalog')).toggleClass('collapse');
     },
     showSection: function(id, e, element) {
-        var course = this.bindings.course.data,
+        var courseModel = this.bindings.course,
+            course = courseModel.data,
             studyProgress = course.studyProgress,
             chapterId = element.getAttribute('data-chapterId'),
             chapterLearnSequence = element.getAttribute('data-chapter-learnSequence'),
-            sectionType = element.getAttribute('data-sectionType');
+            sectionType = element.getAttribute('data-sectionType'),
+            section = courseModel.findSection(id);
 
-        var hander = showHandler({ sectionId: id, sectionType: sectionType }).bind(this);
+        var hander = showHandler(section).bind(this);
 
         // e.stopPropagation();
         // 首先要判断该课程是否注册,如果没有注册,要为其注册,并且要在注册后更新course数据,刷新页面

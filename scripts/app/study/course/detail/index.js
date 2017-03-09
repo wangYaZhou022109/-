@@ -2,15 +2,15 @@ var _ = require('lodash/collection'),
     D = require('drizzlejs');
 exports.items = {
     player: 'player',
-    'player-title': 'player-title',
+    'player-title': '',
     chapter: 'chapter',
     note: 'note',
     info: 'info',
     comment: 'comment',
     download: 'download',
-    topic: 'topic',
+    topic: '',
     'releated-course': 'releated-course',
-    student: 'student'
+    student: ''
 };
 
 exports.store = {
@@ -72,9 +72,9 @@ exports.store = {
                     state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
                 }),
                 this.get(courseRelated),
-                this.get(lastestUser),
+                // this.get(lastestUser),
                 this.get(collect),
-                this.get(notes)
+                // this.get(notes)
             ]);
         },
         updateProgress: function(payload) {
@@ -87,7 +87,7 @@ exports.store = {
         },
         showSection: function(payload) {
             var state = this.models.state;
-            state.data.sectionId = payload.sectionId;
+            state.data.sectionId = payload.id;
             state.changed();
         },
         collect: function(payload) {

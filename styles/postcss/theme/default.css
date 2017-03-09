@@ -30,6 +30,10 @@
     --white: #fff;
     --golden: #ddc265;
 
+    --color-ing: #3965e3;
+    --color-pass: #31822c;
+    --color-error: #d30000;
+
 }
 
 @custom-selector :--heading h1, h2, h3, h4, h5, .common-title;
@@ -149,6 +153,54 @@
 
 [class*=custom-bg-] {
     color: var(--white);
+}
+
+.color-ing {
+    color: var(--color-ing);
+
+    &.bg {
+        background: currentColor;
+
+        & span {
+            color: white;
+        }
+    }
+
+    &.border {
+        border: 1px solid currentColor;
+    }
+}
+
+.color-pass {
+    color: var(--color-pass);
+
+    &.bg {
+        background: currentColor;
+
+        & span {
+            color: white;
+        }
+    }
+
+    &.border {
+        border: 1px solid currentColor;
+    }
+}
+
+.color-error {
+    color: var(--color-error);
+
+    &.bg {
+        background: currentColor;
+
+        & span {
+            color: white;
+        }
+    }
+
+    &.border {
+        border: 1px solid currentColor;
+    }
 }
 
 .section .activity-tag {

@@ -1,0 +1,161 @@
+#!handlebars
+
+module > .person-page > .container
+    .person-top(data-region='top')
+    .person-notice(data-region='notice')
+    .person-content.clearfix
+        .person-menu(data-region='menu')
+        .person-main(data-region='main')
+
+view('top')
+    .user-pic > img(src='images/1.png')
+    .user-base-info.clearfix
+        .learn-info
+            .item
+                .h2 10小时50分
+                .sub-text 学习时长
+            .item
+                .h2 899
+                .sub-text 积分
+        .base-info
+            .info-row
+                span.h2 陈宗寭
+                span.lv lv3
+            .info-row
+                .item > i.iconfont.icon-warn + span 需求方
+                .item > i.iconfont.icon-mark + span 班务
+                .item > i.iconfont.icon-user-1 + span 讲师
+                .item > i.iconfont.icon-user-2 + span 专家
+                .item > a#edit-info 编辑资料
+            .info-row
+                .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
+
+view('notice')
+    .news-list.clearfix
+        .pull-left.m-right > i.iconfont.icon-notice
+        b.title 公告：
+        .navigator
+            .icon.arrow.prev > .iconfont.icon-arrow-down#next
+            .icon.arrow.next > .iconfont.icon-arrow-up#pre
+            .icon > .iconfont.icon-more
+
+        ul > inner(news state.currentIndex)
+            li > echo(title)
+
+
+view('menu')
+    ul.par
+        li
+            .menu-text
+                i.iconfont.icon-task
+                span 我的任务
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-type
+                span 我的学习
+            .sub
+                .item 我的课程
+                .item 我的专题
+                .item 我的知识
+                .item 岗位学习
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-tag-1
+                span 我的活动
+            .sub
+                .item 我的mooc
+                .item 我的直播
+                .item 我的考试
+                .item 我的班级
+                .item 我的调研
+        li.has-child
+            .menu-text
+                i.iconfont.icon-arrow-down.down
+                i.iconfont.icon-arrow-up.up
+                i.iconfont.icon-tag-1
+                span 我的问吧
+            .sub
+                .item.current 我的问答
+                .item 我的关注
+        li
+            .menu-text
+                i.iconfont.icon-favorite
+                span 我的收藏
+        li
+            .menu-text
+                i.iconfont.icon-file
+                span 我的档案
+
+
+view('main')
+    .tabs.line.mb-1 > ul
+        li#item-1.active 提问
+        li#item-2 分享
+        li#item-3 回答
+    .tabs-cont > ul
+        li.tabs-cont-item.active#tabs-cont-item-1
+            .person-list
+                .filter
+                    .pull-right.m-right.pointer
+                        | 提问时间
+                        i.iconfont.icon-sort-desc
+                    .pull-left
+                        .inline-block.m-left.sub-text 状态：
+                        .item.active > span 全部
+                        .item > span 待审核
+                        .item > span 已通过
+                        .item > span 被拒绝
+
+                .comment-list.ask-list > ul
+                    li
+                        .user-pic > img(src='images/1.png')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 我
+                                span ·提问·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 关联标签：标签名称
+                                .text-right
+                                    .item > span.color-ing 待审核
+                                    .item 删除
+                    li
+                        .user-pic > img(src='images/1.png')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 我
+                                span ·提问·
+                                span.sub-text 2016-09-09 09:09
+                            .color-error.small-font.m-top 被拒绝的理由被拒绝的理由被拒绝的理由被拒绝的理由
+                            .comment-operation
+                                .pull-left > .sub-text 关联标签：标签名称
+                                .text-right
+                                    .item > span.color-error 被拒绝
+                                    .item 删除
+                    li
+                        .user-pic > img(src='images/1.png')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text
+                                img(src='images/1.png')
+                                | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 我
+                                span ·提问·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 关联标签：标签名称
+                                .text-right
+                                    .item 评论(2)
+                                    .item +关注
+                                    .item 分享
+        li.tabs-cont-item#tabs-cont-item-2 lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
+        li.tabs-cont-item#tabs-cont-item-3 11111111111332

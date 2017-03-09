@@ -1,0 +1,294 @@
+#!handlebars
+
+module > .ask-page > .container
+    .page-main-wrapper.knowledge-side
+        .page-side.side-min(data-region='side')
+        .page-main(data-region='main')
+view('main')
+    .topic-detail-title
+        .img > .img-cont > img(src="images/demo/1.jpg")
+        .w-full
+            h4.text-overflow 温暖气氛
+            .info 对儿童进行德育、智育、体育等方面的培养和训练。它是提高人口素质的重要环节。青春期到来以前的未成年人被称为儿童或少年，他们在思想、性格、智力、体魄等方面的可塑儿童教育性很强。儿童教育是整个教育事业的重要基础。儿童教育开发人类巨大潜能，这个潜能是人类亿万年进化的积淀，人人都有这种巨大的遗传潜能；但这种潜能只有在婴幼儿时期才得以较为充分地开发，不然将迅速被埋没。人的各种潜能只有大脑生长发育期才可能较为充分激发出来。
+
+    .tabs.line.mb-1 > ul
+        li#item-1.active 最新动态
+        li#item-2 专家分享
+        li#item-3 等待回答
+    .tabs-cont > ul
+        li.tabs-cont-item.active#tabs-cont-item-1
+            .comment-list.ask-list > ul
+                li
+                    .user-pic > img(src='images/d2.jpg')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 张三丰
+                            span ·提问·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：公司文化
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            span.inline-block.custom-bg-color-1 专
+                            a(href='javascript:;') 李大仙
+                            span ·分享·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：有温暖的公司
+                            .text-right
+                                .item > a.normal(href='javascript:;') 关注
+                                .item > a.normal(href='javascript:;') 赞(23)
+                                .item > a.normal(href='javascript:;') 18条讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 分享标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text
+                            img(src='images/1.png')
+                            | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 黄澄澄
+                            span ·分享·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：梦想万一实现了
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 赞(23)
+                                .item > a.normal(href='javascript:;') 18条讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+        li.tabs-cont-item#tabs-cont-item-2
+            .comment-list.ask-list > ul
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 张三丰
+                            span ·提问·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：公司文化
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            span.inline-block.custom-bg-color-1 专
+                            a(href='javascript:;') 李大仙
+                            span ·分享·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：有温暖的公司
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 赞(23)
+                                .item > a.normal(href='javascript:;') 18条讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 分享标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text
+                            img(src='images/1.png')
+                            | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 黄澄澄
+                            span ·分享·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：梦想万一实现了
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 赞(23)
+                                .item > a.normal(href='javascript:;') 18条讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+
+        li.tabs-cont-item#tabs-cont-item-3
+            .comment-list.ask-list > ul
+                li
+                    .user-pic > img(src='images/d4.jpg')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 张三丰
+                            span ·提问·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：公司文化
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            span.inline-block.custom-bg-color-1 专
+                            a(href='javascript:;') 李大仙
+                            span ·分享·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：有温暖的公司
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 赞(23)
+                                .item > a.normal(href='javascript:;') 18条讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 分享标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text
+                            img(src='images/1.png')
+                            | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 黄澄澄
+                            span ·分享·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 来自话题：梦想万一实现了
+                            .text-right
+                                .item > a.normal(href='javascript:;') 取消关注
+                                .item > a.normal(href='javascript:;') 赞(23)
+                                .item > a.normal(href='javascript:;') 18条讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 举报
+
+view('side')
+    .section
+        .btn.block.layout-mt-small.big 我要关注
+    .section.follow
+        .clearfix
+            dl
+                dt 99
+                dd 关注的内容
+            dl
+                dt 99
+                dd 关注的话题
+            dl
+                dt 99
+                dd 关注的专家
+
+    .section
+        span.h3 活跃专家
+        span.more more
+        .layout-mt-small.user-picture
+            .grid-row
+                .col-md-4 > img.block(src='images/d1.jpg')
+                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > img.block(src='images/d3.jpg')
+                .col-md-4 > img.block(src='images/d4.jpg')
+                .col-md-4 > img.block(src='images/d4.jpg')
+                .col-md-4 > img.block(src='images/d3.jpg')
+                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > img.block(src='images/d1.jpg')
+                .col-md-4 > img.block(src='images/d2.jpg')
+
+    .section.relevant-course
+        span.h3 热门问题
+        .layout-mt-small.m-top
+            .block.layout-mt-small.m-top
+                a.text-overflow(href="javascript:;" title="零基础直达A1西班牙零基础直达A1西班牙语") 零基础直达A1西班牙零基础
+            .block.layout-mt-small.m-top
+                a.text-overflow(href="javascript:;" title="醒职场思维力系列课程") 醒职场思维力系列课程

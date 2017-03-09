@@ -1,0 +1,120 @@
+#!handlebars
+
+module > .ask-page > .container
+    .page-main-wrapper.knowledge-side
+        .page-side.side-min(data-region='side')
+        .page-main(data-region='main')
+view('main')
+    .tabs.line.mb-1
+        .pull-right.btn#apply-expert 申请成为专家
+        ul
+            li.active 专家荟萃
+    .border.bottom.dashed
+        .tag-btn.active 全部
+        .tag-btn 生活
+        .tag-btn 科学教育
+        .tag-btn 发展经济学
+        .tag-btn 社会民生
+        .tag-btn 职业发展
+        .tag-btn 生活
+        .tag-btn 科学教育
+        .tag-btn 发展经济学
+        .tag-btn 社会民生
+        .tag-btn 职业发展
+        .tag-btn 生活
+        .tag-btn 科学教育
+        .tag-btn 发展经济学
+        .tag-btn 社会民生
+        .tag-btn 职业发展
+    .comment-list.ask-list > ul
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d2.jpg")
+                h4.text-overflow 赵小茵
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text.text-overflow 个人简介个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d4.jpg")
+                h4.text-overflow 晓杨杨
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text.text-overflow 个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d1.jpg")
+                h4.text-overflow 赵小茵
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text.text-overflow 个人简介个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d5.jpg")
+                h4.text-overflow 晓杨杨
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text.text-overflow 个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 取消关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d3.jpg")
+                h4.text-overflow 赵小茵
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text.text-overflow 个人简介个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 关注
+
+view('side')
+    .section
+        .btn.block.big > .inline-block.iconfont.icon-question-2 + .inline-block 发提问
+        .btn.block.big.custom-bg-color-5.m-top > .inline-block.iconfont.icon-edit-2 + .inline-block 写文章
+    .section.follow
+        .clearfix
+            dl
+                dt 99
+                dd 关注的内容
+            dl
+                dt 99
+                dd 关注的话题
+            dl
+                dt 99
+                dd 关注的专家
+        ul
+            li 我的提问
+            li 我的分享
+            li 我的回复
+            li 回复我的
+            li 我是管理
+    .section
+        span.h3 活跃专家
+        span.more more
+        .layout-mt-small.user-picture
+            .grid-row
+                .col-md-4 > img.block(src='images/d1.jpg')
+                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > img.block(src='images/d3.jpg')
+                .col-md-4 > img.block(src='images/d4.jpg')
+                .col-md-4 > img.block(src='images/d4.jpg')
+                .col-md-4 > img.block(src='images/d3.jpg')
+                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > img.block(src='images/d1.jpg')
+                .col-md-4 > img.block(src='images/d2.jpg')

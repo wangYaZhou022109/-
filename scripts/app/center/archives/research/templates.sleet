@@ -1,0 +1,32 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.research.name')
+                    th > setting('person.archives.class.startTime')
+                    th > setting('person.archives.class.endTime')
+                    th > setting('person.archives.research.submitTime')
+                    th > setting('person.archives.exam.status')
+                    th > setting('person.archives.exam.operation')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(researchQuestionary.name)
+                    td > dateTime(researchQuestionary.startTime)
+                    td > dateTime(researchQuestionary.endTime)
+                    td > dateTime(submitTime)
+                    td > map('research-record' status)
+                    td > a > setting('person.archives.exam.detail')
+                    else
+                        tr > td(colspan='7') > p.text-center > string('no-data')
+        #pager.pagination
+
