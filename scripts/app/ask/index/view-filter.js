@@ -7,6 +7,7 @@ exports.events = {
     'click filter-menu-*': 'showMenu'
 };
 
+
 exports.handlers = {
     showMenu: function(menu) {
         var state = this.bindings.state;

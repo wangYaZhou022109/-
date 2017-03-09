@@ -1,0 +1,72 @@
+#! handlebars
+
+module > .ask-page > .container
+    .page-main-wrapper
+        .page-side.side-min(data-region='side')
+        .page-main(data-region='main')
+
+view('main')
+    .tabs.line > ul
+        li.active#item-1 内容
+        li#item-2 话题
+        li#item-3 专家
+    .tabs-cont > ul
+        li.tabs-cont-item#tabs-cont-item-1.active
+            .topic-top.detail
+                .img.min > img(src='images/1.png')
+                .content
+                    .small-font
+                        a 阿端
+                        span ·提问·
+                        span.sub-text 2016-12-03   20:30
+                    p 来自话题：话题名称
+            .mb-1
+                .h3 问题标题问题标题问题标题问题标题问题标题问题标题问题标题？
+                p 内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            .clearfix
+                .pull-left
+                    span 附件：
+                    a
+                        i.iconfont.icon-file
+                        span 附件标题附件标题附件标题.pdf
+                .comment-list > .comment-operation.text-right
+                    .item 分享
+                    .item 举报
+            section.section
+                .h3 讨论区内容区域
+
+
+
+view('side')
+    .section
+        .text-center
+            span 该问题已有
+            b.h3 99
+            span 人关注
+        .btn.block.big.layout-mt-small > .inline-block.iconfont.icon-favorite + .inline-block 我要关注
+        .btn.block.big.m-top.custom-bg-color-3 > .inline-block.iconfont.icon-zan + .inline-block 赞(99)
+        .clearfix.m-top.btns
+            .pull-left.w-half
+                .btn.block.custom-bg-color-4 > .inline-block 关闭问题
+            .pull-right.w-half
+                .btn.block.custom-bg-color-5 > .inline-block 设为精品
+
+
+    .section
+        span.h3 相关专家
+        span.more more
+        .layout-mt-small.user-picture
+            .grid-row
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')
+    .section
+        .h3 相关问题
+        ul.layout-mt-small
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题
+            li.mb-1.text-overflow 热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题热门问题标题

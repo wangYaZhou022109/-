@@ -22,6 +22,7 @@
     &.big {
         padding: calc(var(--space)*1.2) calc(var(--large-space)*2);
         height: 3em;
+        font-size: var(--font-title);
     }
 
     &.radius {
@@ -40,6 +41,10 @@
     &:hover {
         opacity: .8;
         filter: alpha(opacity=80);
+    }
+
+    & .iconfont {
+        margin-right: calc(var(--space) / 2);
     }
 
 }
@@ -72,11 +77,16 @@
     cursor: pointer;
     background: white;
     border: 1px solid var(--border-color);
+    margin-bottom: calc(var(--space) / 2);
 
     &.active {
         background: var(--main-color);
         color: var(--white);
         border: none;
+    }
+
+    &.radius {
+        border-radius: 50%;
     }
 
 }
