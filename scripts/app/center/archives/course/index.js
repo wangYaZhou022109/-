@@ -5,7 +5,11 @@ exports.items = {
 
 exports.store = {
     models: {
-        progressList: { url: '../course-study/course-study-progress/person-list', type: 'pageable', root: 'items' },
+        progressList: {
+            url: '../course-study/course-study-progress/person-list?finishStatus=2',
+            type: 'pageable',
+            root: 'items'
+        },
         progress: { url: '../course-study/course-study-progress/export-person-list' },
         businessType: { value: '0' },
         sectionList: { url: '../course-study/course-study-progress/person-section-list' }
