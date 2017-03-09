@@ -1,0 +1,7 @@
+#!handlebars
+module > .course-page
+    div(data-region='topicsquare')
+
+view('topicsquare')
+    echo('话题广场')
+    each(topicname)

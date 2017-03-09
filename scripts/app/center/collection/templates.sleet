@@ -1,0 +1,68 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .person-list
+        .filter
+            .pull-right.m-right.pointer
+                | 收藏时间
+                i.iconfont.icon-sort-desc
+            .pull-left
+                .inline-block.m-left.sub-text 要求：
+                .item.active > span 全部
+                .item > span 课程
+                .item > span 专题
+                .item > span mooc
+                .item > span 直播
+                .item > span 知识
+        .list-search
+            input.input(placeholder='请输入您要搜索的内容名称')
+            .btn > i.iconfont.icon-search
+        ul.list-text.border.top
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_course.jpg")
+                    span.inline-block.tag 课程
+                    .inline-block.title 中国品牌第一人李光斗脱口秀
+                    .time 收藏时间：2017-02-28 10:00
+                .state &nbsp;
+                .btn-row
+                    .btn 取消收藏
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_spceial.jpg")
+                    pan.inline-block.tag 专题
+                    .inline-block.title 思维导图软件·自学速成指南
+                    .time 收藏时间：2017-02-28 10:00
+                .state &nbsp;
+                .btn-row
+                    .btn 取消收藏
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_live.jpg")
+                    pan.inline-block.tag 直播
+                    .inline-block.title 经济学人的动态图表与交互设计
+                    .time 收藏时间：2017-02-28 10:00
+                .state &nbsp;
+                .btn-row
+                    .btn 取消收藏
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_doc.jpg")
+                    pan.inline-block.tag 知识
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time 收藏时间：2017-02-28 10:00
+                .state &nbsp;
+                .btn-row
+                    .btn 取消收藏
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src="images/default-cover/default_course.jpg")
+                    pan.inline-block.tag MOOC
+                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
+                    .time 收藏时间：2017-02-28 10:00
+                .state &nbsp;
+                .btn-row
+                    .btn 取消收藏

@@ -1,29 +1,70 @@
 #!handlebars
 module > .activity-page
     .activity-list(data-region='list')
-
+    div(data-region='popup')  
 view('list')
-    div
-        each(trends.trendsList)
-            ul 
-                li(style='font-weight:bold')
-                    compare(thumbnail 'ne' '')
-                        div(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
-                    a(id='details-'+ id + ',' + questionId data-name='id' data-value=id + ',' + questionId href='javascript:;') > echo(title) 
-                    div(style='height:80px;width:80px;float:right;') > img(src=createUser.headPortrait )
-                li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
-                    echo(content) 
-                li
+    each(trends)
+        ul
+            li(style='font-weight:bold')
+                compare(thumbnail.length 'gt' 0)
+                    div(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
+                a(id='dynamic-' + id + '_' + questionId data-name='id' data-value=id + '_' + questionId href='javascript:;') > echo(title) 
+                div(style='height:80px;width:80px;float:right;') 
+                    compare(createUser.headPortrait.length 'gt' 0 )
+                        img(src='images/default-cover/default_exam.jpg' )
+                    else
+                        img(src=createUser.headPortrait )
+            li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
+                echo(content) 
+            li
+                compare(trendsType 'eq' '3')
+                    echo(createUser.fullName) + echo('.') + string('updated-discussion') + echo('.') + echo(createTime)
+                else
                     echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
-                li
-                    string('from-topic') + echo(' ：' + relTopic)
-                    a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
-                    string('strip') + string('discuss')
-                    a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
-                    echo('|')
-                    a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
-                    hr
-    
-                
-
-    
+            li
+                string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                compare(trendsType 'eq' '1')
+                    a(id='trend-follow-1_' + questionId data-name='id' data-value='1_' + questionId href='javascript:;')(class ='active') > string('follow')
+                compare(trendsType 'eq' '2')
+                    a(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId href='javascript:;')(class ='active') > string('follow') 
+                compare(trendsType 'eq' '3')
+                    a(id='trend-follow-3_' + discussId data-name='id' data-value='3_' + discussId href='javascript:;')(class ='active') > string('follow') 
+                compare(trendsType 'ne' '3')
+                    a(id='discuss-' + id href='javascript:;')(class ='active') > string('take-part-in') + string('discuss')
+                else
+                    echo(discussList.length) + string('strip') + string('discuss')
+                compare(trendsType 'eq' '3')
+                    string('praise') + echo('（'+ questionDiscuss.praiseNum +'）')
+                else
+                    string('praise') +  echo('（'+ question.praiseNum +'）')
+                a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
+                echo('|')
+                compare(trendsType 'eq' '1')
+                    a(id='trend-report-1_' + questionId data-name='id' data-value='1_' + questionId href='javascript:;')(class ='active') > string('report')
+                compare(trendsType 'eq' '2')
+                    a(id='trend-report-2_' + questionId data-name='id' data-value='2_' + questionId href='javascript:;')(class ='active') > string('report')
+                compare(trendsType 'eq' '3')
+                    a(id='trend-report-3_' + discussId data-name='id' data-value='3_' + discussId href='javascript:;')(class ='active') > string('report')
+            li > form.vertical
+                compare(trendsType 'eq' '3')
+                    div(id= id name=id 'hidden')
+                        input.input(name='content' value='' style='width:65%;')
+                        input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                        input.input(type='hidden' name='questionId' value=questionId)
+                        input.input(type='hidden' name='id' value=discussId)
+                        input.input(type='hidden' name='toUserId' value=createUserId)
+                        .btn(id='reply-' + id) > string('reply')
+                else
+                    div(id= id name=id 'hidden')
+                        input.input(name='t_content' value='' style='width:65%;')
+                        input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                        input.input(type='hidden' name='id' value=questionId)
+                        .btn(id='publish-' + id) > string('publish')
+            hr
+view('popup')
+    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
+    .catalog-view('hidden' style='width:300px;margin:0 auto; position:absolute;z-index: 9999;top:50%;left:50%;') > .catalog-view-box
+        .clearfix.catalog-view-nav
+            i#closeCatalog.pull-right.iconfont.icon-full-screen
+            h3.active.title > string('my-question')
+        div(data-dynamic-key=popupstate.menu)          

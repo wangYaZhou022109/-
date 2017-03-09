@@ -24,7 +24,8 @@
         }
     }
     & li.topic-item,
-    & li.expert-item {
+    & li.expert-item,
+    & li.my-topic-item {
         float: left;
         width: 33.33%;
         padding-right: calc(var(--large-space) / 2);
@@ -57,6 +58,20 @@
         & .img {
             margin-bottom: var(--large-space);
             width: calc(var(--large-space) * 4);
+        }
+    }
+    & li.my-topic-item {
+        width: 100%;
+        & .img {
+            margin-right: var(--space);
+            width: calc(var(--large-space) * 2);
+        }
+        & .title-row {
+            margin-bottom: var(--space);
+            & h4 {
+                margin-right: var(--space);
+                margin-bottom: 0;
+            }
         }
     }
 
