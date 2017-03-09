@@ -10,7 +10,9 @@ exports.store = {
         init: function() {
             var topic = this.models.topic;
             topic.set({ id: 'undefine', size: 3 });
-            return this.get(topic);
+            // topic.params = { id: 'undefine', size: 3 };
+            console.log(topic);
+            return this.post(topic);
         }
     }
 };
