@@ -3,13 +3,27 @@ var _ = require('lodash/collection');
 exports.bindings = {
     gensee: true,
     courses: true,
-    down: true
+    down: true,
+    sub: true
 };
 
 exports.events = {
 };
 
 exports.handlers = {
+};
+
+exports.actions = {
+    'click sub-*': 'subGensee',
+};
+
+exports.dataForActions = {
+    subGensee: function(data) {
+        return this.Promise.create(function(resolve) {
+            resolve(data);
+        });
+    },
+
 };
 
 exports.dataForTemplate = {

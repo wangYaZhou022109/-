@@ -9,7 +9,11 @@ exports.bindings = {
 exports.events = {
     'click dynamic-*': 'toggleMore'
 };
-
+exports.actions = {
+    'click setEssenceStatus-*': 'setEssenceStatus',
+    'click shut-*': 'shut',
+    'click discuss-top-*': 'discusstop'
+};
 exports.handlers = {
     dynamic: function() {
     },
@@ -24,7 +28,35 @@ exports.handlers = {
         }
     }
 };
-
+exports.dataForActions = {
+    setEssenceStatus: function(payload) {
+        var data = payload;
+        data.essenceStatus = 1;
+        return data;
+    },
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
+    },
+    discusstop: function(payload) {
+        return payload;
+    }
+};
+exports.actionCallbacks = {
+    setEssenceStatus: function() {
+        this.app.message.success('加精成功!');
+        this.module.dispatch('init');
+    },
+    shut: function() {
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('init');
+    },
+    discusstop: function(payload) {
+        this.app.message.success('置顶成功！');
+        this.module.dispatch('refresh', payload);
+    }
+};
 exports.dataForTemplate = {
     trends: function(data) {
         var trends = data.trends;

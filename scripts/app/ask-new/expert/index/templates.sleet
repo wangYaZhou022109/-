@@ -29,7 +29,7 @@ view('main')
     .comment-list.ask-list > ul
         li.expert-item
             a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/d2.jpg")
+                .img > .img-cont > img(src="images/d2.jpg" alt='赵小茵')
                 h4.text-overflow 赵小茵
                 .info 36关注 ｜ 1回答 ｜ 2分享
                 .row
@@ -40,7 +40,7 @@ view('main')
             .btn.small 关注
         li.expert-item
             a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/d4.jpg")
+                .img > .img-cont > img(src="images/d4.jpg" alt='晓杨杨')
                 h4.text-overflow 晓杨杨
                 .info 36关注 ｜ 1回答 ｜ 2分享
                 .row
@@ -109,12 +109,12 @@ view('side')
         span.more more
         .layout-mt-small.user-picture
             .grid-row
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')

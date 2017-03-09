@@ -1,0 +1,241 @@
+#!handlebars
+
+module
+    .expert-detail-top(style='background-image:url(images/bg-usercenter.png)') > .container
+        .head > img(src='images/d2.jpg' alt='张三丰')
+        section.section
+            .title-row
+                .inline-block.layout-mr > .h3 张三丰
+            .title-row
+                .inline-block.m-right 我擅长的话题
+                .inline-block.m-right.bg-white.sub-title 话题一
+                .inline-block.m-right.bg-white.sub-title 科学教育
+                .inline-block.m-right.bg-white.sub-title 话题区域经济学
+                .inline-block.m-right.bg-white.sub-title.pointer 更改
+            p.info-detail 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神上的生理反应，人们的身人们的身人们的身人们的身人们的身体或者精神上的。
+            a.normal(href='javascript:;')
+                i.iconfont.icon-warn
+                | 专家的权利与义务
+
+    .ask-page > .container
+        .page-main-wrapper.knowledge-side
+            .page-side.side-min(data-region='side')
+            .page-main(data-region='main')
+view('main')
+    section.section
+        .tabs.line.mb-1 > ul
+            li#item-1.active 问题回答
+            li#item-2 我的文章
+        .tabs-cont > ul
+            li.tabs-cont-item.active#tabs-cont-item-1
+                .person-list
+                    .filter
+                        .pull-left
+                            .item.active > span 邀请回答
+                            .item > span 我的回答
+
+                    .comment-list.ask-list > ul
+                        li
+                            .user-pic > img(src='images/d2.jpg')
+                            .comment-content
+                                .h4 提问标题提问标题提问标题提问标题提问标题提问
+                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                .user-info
+                                    a(href='javascript:;') 张三丰
+                                    span ·提问·
+                                    span.sub-text 2016-09-09 09:09
+                                .comment-operation
+                                    .pull-left > .sub-text 来自问题：标题提问标题提问标题提问标题
+                                    .text-right
+                                        .item > a.normal(href='javascript:;') 取消关注
+                                        .item > a.normal(href='javascript:;') 添加讨论
+                                        .item > a.normal(href='javascript:;') 分享
+                                        .item > a.normal(href='javascript:;') 举报
+                                .comment-reply.m-top
+                                    textarea.input.w-full.block(rows="1")
+                                    .btn 回复
+
+                        li
+                            .user-pic > img(src='images/d4.jpg')
+                            .comment-content
+                                .h4 提问标题提问标题提问标题提问标题提问标题提问
+                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                .user-info
+                                    a(href='javascript:;') 张三丰
+                                    span ·提问·
+                                    span.sub-text 2016-09-09 09:09
+                                .comment-operation
+                                    .pull-left > .sub-text 来自问题：标题提问标题提问标题提问标题
+                                    .text-right
+                                        .item > a.normal(href='javascript:;') +关注
+                                        .item > a.normal(href='javascript:;') 2条讨论
+                                        .item > a.normal(href='javascript:;') 分享
+                                        .item > a.normal(href='javascript:;') 举报
+                                .comment-reply.m-top
+                                    textarea.input.w-full.block(rows="1")
+                                    .btn 回复
+                        li
+                            .user-pic > img(src='images/d2.jpg')
+                            .comment-content
+                                .h4 提问标题提问标题提问标题提问标题提问标题提问
+                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                .user-info
+                                    a(href='javascript:;') 张三丰
+                                    span ·提问·
+                                    span.sub-text 2016-09-09 09:09
+                                .comment-operation
+                                    .pull-left > .sub-text 来自问题：标题提问标题提问标题提问标题
+                                    .text-right
+                                        .item > a.normal(href='javascript:;') +关注
+                                        .item > a.normal(href='javascript:;') 2条讨论
+                                        .item > a.normal(href='javascript:;') 分享
+                                        .item > a.normal(href='javascript:;') 举报
+                                .comment-reply.m-top
+                                    textarea.input.w-full.block(rows="1")
+                                    .btn 回复
+                    # 我的回答
+                    .comment-list.ask-list(style='display:none;') > ul
+                        li
+                            .user-pic > img(src='images/d2.jpg')
+                            .comment-content
+                                .h4 提问标题提问标题提问标题提问标题提问标题提问
+                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                .user-info
+                                    span 我讨论了
+                                    a(href='javascript:;') 张三丰
+                                    span ·问题·
+                                    span.sub-text 2016-09-09 09:09
+                                .comment-operation
+                                    .pull-left > .sub-text 来自问题：标题提问标题提问标题提问标题
+                                    .text-right
+                                        .item > span.color-ing 待审核
+                                        .item > a.normal(href='javascript:;') 删除
+                        li
+                            .user-pic > img(src='images/d4.jpg')
+                            .comment-content
+                                .h4 提问标题提问标题提问标题提问标题提问标题提问
+                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                .user-info
+                                    span 我讨论了
+                                    a(href='javascript:;') 张三丰
+                                    span ·问题·
+                                    span.sub-text 2016-09-09 09:09
+                                .comment-operation
+                                    .pull-left > .sub-text 来自问题：标题提问标题提问标题提问标题
+                                    .text-right
+                                        .item > span.color-ing 待审核
+                                        .item > a.normal(href='javascript:;') 删除
+                        li
+                            .user-pic > img(src='images/d2.jpg')
+                            .comment-content
+                                .h4 提问标题提问标题提问标题提问标题提问标题提问
+                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                .user-info
+                                    span 我讨论了
+                                    a(href='javascript:;') 张三丰
+                                    span ·问题·
+                                    span.sub-text 2016-09-09 09:09
+                                .comment-operation
+                                    .pull-left > .sub-text 来自问题：标题提问标题提问标题提问标题
+                                    .text-right
+                                        .item > span.color-ing 待审核
+                                        .item > a.normal(href='javascript:;') 删除
+
+
+            li.tabs-cont-item#tabs-cont-item-2
+                .comment-list.ask-list > ul
+                    li
+                        .user-pic > img(src='images/d2.jpg')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 张三丰
+                                span ·文章·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 来自话题：话题
+                                .text-right
+                                    .item > a.normal(href='javascript:;') 取消关注
+                                    .item > a.normal(href='javascript:;') 添加讨论
+                                    .item > a.normal(href='javascript:;') 分享
+                                    .item > a.normal(href='javascript:;') 举报
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+
+                    li
+                        .user-pic > img(src='images/d4.jpg')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 张三丰
+                                span ·文章·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 来自话题：话题
+                                .text-right
+                                    .item > a.normal(href='javascript:;') +关注
+                                    .item > a.normal(href='javascript:;') 2条讨论
+                                    .item > a.normal(href='javascript:;') 分享
+                                    .item > a.normal(href='javascript:;') 举报
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+                    li
+                        .user-pic > img(src='images/d2.jpg')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 张三丰
+                                span ·文章·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 来自话题：话题
+                                .text-right
+                                    .item > a.normal(href='javascript:;') +关注
+                                    .item > a.normal(href='javascript:;') 2条讨论
+                                    .item > a.normal(href='javascript:;') 分享
+                                    .item > a.normal(href='javascript:;') 举报
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+
+view('side')
+    .section
+        .btn.block.layout-mt-small.big 写文章
+    .section.follow
+        .clearfix
+            dl
+                dt 99
+                dd 关注者
+            dl
+                dt 99
+                dd 回答
+            dl
+                dt 99
+                dd 文章
+
+    .section
+        span.h3 关注我的人
+        span.more#follow-me more
+        .layout-mt-small.user-picture
+            .grid-row
+                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d3.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d4.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d5.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d3.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d3.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
+                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
