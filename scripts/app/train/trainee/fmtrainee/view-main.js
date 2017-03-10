@@ -11,14 +11,14 @@ exports.events = {
     'click sort*': 'showSortInput',
     'change input-sort*': 'updateSort',
     'click addTrainee': 'addTrainee',
-    'click addAllTrainee': 'showMembers'
+    'click addAllTrainee': 'showMembers',
+    'click importTrainee': 'importTrainee'
 };
 
 exports.actions = {
-    'click agree*': 'agree',
-    'click refuse*': 'refuse',
     'click delete*': 'delete',
-    'click situation': 'situation'
+    'click situation': 'situation',
+    'click group': 'group'
 };
 
 exports.handlers = {
@@ -101,6 +101,10 @@ exports.handlers = {
                 }
             });
         }
+    },
+    importTrainee: function() {
+        var importView = this.module.items.import;
+        this.app.viewport.modal(importView);
     }
 };
 
@@ -130,6 +134,14 @@ exports.actionCallbacks = {
             this.app.viewport.modal(situation);
         } else {
             this.app.message.alert('尚未配额！');
+        }
+    },
+    group: function(data) {
+        var model = this.module.items.group;
+        if (data[0]) {
+            this.app.viewport.modal(model);
+        } else {
+            this.app.message.alert('尚未分组！');
         }
     }
 };

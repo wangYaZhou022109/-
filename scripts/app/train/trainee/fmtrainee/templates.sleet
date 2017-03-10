@@ -25,7 +25,7 @@ view('main')
     .buttons
         input.input(name='add-trainee-input' placeholder='人员编号')
         .btn#addTrainee > echo('添加')
-        .btn#traineeGroup > echo('学员分组')
+        .btn#group > echo('学员分组')
         .btn#addAllTrainee > echo('添加学员')
         .btn#situation > echo('查看分布')
         .btn#importTrainee > echo('导入')
@@ -71,3 +71,43 @@ view('situation')
                 td > echo(i)
                 td > echo(organizationName)
                 td > echo(signUpNumber) + echo('/') + echo(quantity)
+
+view('import')
+    div > form(method='post' id='import-form')
+        input(type='hidden' id='importType' name='importType' value='1')
+        input(type='hidden' id='access_token' name='access_token')
+    div > echo('第一步:') + .btn#download-Excel-1 > echo('下载模板')
+    div > h4 > echo('第二步：导入更新模板')
+    div > #uploadExcel > echo('导入模板')
+    if(errors) > div
+        h4 > echo('共导入成功' + uploadExcel.imgs.successCount + '条数据，失败' + uploadExcel.imgs.failCount + '条数据  ') + .btn#download-Excel-0 > echo('下载失败记录')
+    div > ul
+        li > echo('1.下载标准模板，按示例格式和示例说明填写需要导入的电子表格文件。')
+        li > echo('2.导入模板，导入成功后，页面会提示成功数量，失败数量，并显示相关信息。')
+        li > echo('3.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。')
+
+view('group')
+    input.input(id='add-group-input' placeholder='请输入分组名称')
+    .btn#addGroup > echo('添加分组')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('分组名称')
+            th > echo('学员人数')
+            th > echo('排序')
+            th > echo('操作')
+        tbody > each(group) > tr
+            td > echo(i)
+            td
+                label(id='label-group-name' + id data-name='id' data-value=id) > echo(name)
+                input(id='input-group-name'+id value=name style='display:none;width:100px;' data-name='id' data-value=id)
+            td > echo(traineeNumber)
+            td
+                a(id='go-up'+id data-name='id' data-value=id) > echo('上移')
+                echo('|')
+                a(id='go-down'+id data-name='id' data-value=id) > echo('下移')
+            td
+                a(id='manage'+id data-name='id' data-value=id) > echo('管理')
+                echo('|')
+                a(id='delGroup'+id data-name='id' data-value=id) > echo('删除')
+    .btn#saveGroup > echo('保存')

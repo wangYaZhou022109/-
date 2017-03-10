@@ -1,8 +1,12 @@
+var D = require('drizzlejs');
+
 exports.items = {
     main: 'main',
     search: 'search',
     'train/trainee/fmtrainee/select-member': { isModule: true },
-    situation: ''
+    situation: '',
+    import: '',
+    group: ''
 };
 
 exports.store = {
@@ -18,7 +22,11 @@ exports.store = {
         fmtrainee: { url: '../train/trainee' },
         situation: { url: '../train/class-quota/situation' },
         download: { url: '../train/trainee/download' },
-        projectInfo: {},
+        dowloadExcel: { url: '../train/trainee/download-excel' },
+        uploadExcel: { url: '../train/trainee/import-trainee' },
+        group: { url: '../train/trainee-group' },
+        groupModel: { url: '../train/trainee-group' },
+        delGroups: { data: [] },
         state: { data: { classId: 3, auditStatus: 1 } }
     },
     callbacks: {
@@ -62,6 +70,103 @@ exports.store = {
             situation.clear();
             situation.params = { classId: classId };
             return this.get(situation);
+        },
+        group: function() {
+            var classId = this.models.state.data.classId,
+                group = this.models.group;
+            group.clear();
+            group.params = { classId: classId };
+            return this.get(group);
+        },
+        addGroup: function(payload) {
+            var groups = this.models.group.data,
+                state = this.models.state,
+                newGroup = {},
+                index;
+            index = state.data.index || groups.length;
+            index++;
+            newGroup.id = 'new-' + index;
+            newGroup.classId = state.data.classId;
+            newGroup.name = payload.name;
+            newGroup.traineeNumber = 0;
+            newGroup.sort = index;
+            newGroup.deleteFlag = 0;
+            groups.push(newGroup);
+            this.models.group.changed();
+            state.data.index = index;
+            state.changed();
+        },
+        delGroup: function(id) {
+            var groups = this.models.group.data,
+                delGroups = this.models.delGroups.data,
+                delGroup = {},
+                index;
+            index = groups.findIndex(function(e) {
+                return e.id === id;
+            });
+            groups.splice(index, 1);
+            this.models.group.changed();
+            delGroup.id = id;
+            delGroups.push(delGroup);
+        },
+        moveUp: function(id) {
+            var groups = this.models.group.data,
+                target, index, sort;
+            index = groups.findIndex(function(e) {
+                return e.id === id;
+            });
+            if (index <= 0) {
+                return;
+            }
+            target = groups[index];
+            sort = groups[index - 1].sort;
+            groups[index] = groups[index - 1];
+            groups[index].sort = target.sort;
+            groups[index - 1] = target;
+            groups[index - 1].sort = sort;
+            this.models.group.changed();
+        },
+        moveDown: function(id) {
+            var groups = this.models.group.data,
+                target, index, sort;
+            index = groups.findIndex(function(e) {
+                return e.id === id;
+            });
+            if (index >= groups.length - 1) {
+                return;
+            }
+            target = groups[index];
+            sort = groups[index + 1].sort;
+            groups[index] = groups[index + 1];
+            groups[index].sort = target.sort;
+            groups[index + 1] = target;
+            groups[index + 1].sort = sort;
+            this.models.group.changed();
+        },
+        changeName: function(data) {
+            var groups = this.models.group.data,
+                target, index;
+            index = groups.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = groups[index];
+            target.name = data.name;
+            this.models.group.changed();
+        },
+        saveGroup: function() {
+            var groups = this.models.group,
+                state = this.models.state.data,
+                delGroups = this.models.delGroups,
+                groupModel = this.models.groupModel,
+                me = this;
+            groupModel.clear();
+            D.assign(me.models.groupModel.data, {
+                newGroups: JSON.stringify(groups.data),
+                delGroups: JSON.stringify(delGroups.data),
+                classId: state.classId
+            });
+            console.log(groupModel.data);
+            return me.save(me.models.groupModel);
         }
     }
 };
