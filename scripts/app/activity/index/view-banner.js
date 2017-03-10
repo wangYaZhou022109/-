@@ -24,13 +24,15 @@ exports.dataForTemplate = {
     activitys: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
         var defultImg = 'images/default-cover/default_exam.jpg';
-        data.activitys.forEach(function(obj) {
-            var activity = obj || {};
-            activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
-            if (activity.description) {
-                activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
-            }
-        });
+        if (data.activitys.forEach) {
+            data.activitys.forEach(function(obj) {
+                var activity = obj || {};
+                activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
+                if (activity.description) {
+                    activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
+                }
+            });
+        }
         return data.activitys;
     }
 };

@@ -42,10 +42,11 @@ view('filter')
             .btn.pull-right 报名
             input.input.pull-right(placeholder='请输入报名码直接报名')
             ul
-                li.active 全部
-                li 正在进行
-                li 即将开始
-                li 往期回顾
+                li#item-(class = if(currentStep.all 'active')) 全部
+                li#item-1(class = if(currentStep.running 'active')) 正在进行
+                li#item-2(class = if(currentStep.notStart 'active')) 即将开始
+                li#item-3(class = if(currentStep.finish 'active')) 往期回顾
+
 view('list')
     .container > .main-list
         .h3.m-bottom MOOC
@@ -122,55 +123,19 @@ view('list')
                             i.iconfont.icon-favorite.m-left
                                 date(startTime)
         .h3.m-bottom 考试
-        ul.activity-item-box.activity-item-exam.cell-3
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a#toExam(href='#/exam/answer-paper/99e5b660-537b-4722-b2a2-c6209f028718') 测试考试，不要修改这个！
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
+        ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+            .arrow-left#exam-left > | <
+            .arrow-right#exam-right > | >
+            each(exams)
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        a(href='#/exam/index/'+ id target='_blank') > echo(name)
+                        .sub-text.small-font
+                            echo(joinNumber) | 参与
+                            i.iconfont.icon-favorite.m-left.m-right
+                            dateTime(startTime) + echo('至') + dateTime(endTime)
+
         .h3.m-bottom 班级
         ul.activity-item-box.activity-item-class.cell-3
             li
@@ -222,52 +187,15 @@ view('list')
                         i.iconfont.icon-favorite.m-left.m-right
                         | 9-28 至 12-25
         .h3.m-bottom 调研
-        ul.activity-item-box.activity-item-research.cell-3
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
+        ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+            .arrow-left#research-left > | <
+            .arrow-right#research-right > | >
+            each(researchActivitys)
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        a(href='#/exam/index/'+ id target='_blank') > echo(name)
+                        .sub-text.small-font
+                            echo(joinNumber) | 参与
+                            i.iconfont.icon-favorite.m-left.m-right
+                            dateTime(startTime) + echo('至') + dateTime(endTime)
