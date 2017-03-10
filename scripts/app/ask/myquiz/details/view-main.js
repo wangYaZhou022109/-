@@ -39,7 +39,9 @@ exports.dataForActions = {
         return payload;
     },
     boutique: function(payload) {
-        return payload;
+        var data = payload;
+        data.concernType = 2;
+        return data;
     },
     discuss: function(payload) {
         var data = payload;

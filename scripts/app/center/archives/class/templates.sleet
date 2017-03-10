@@ -1,0 +1,31 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.class.className')
+                    th > setting('person.archives.class.orgName')
+                    th > setting('person.archives.class.startTime')
+                    th > setting('person.archives.class.endTime')
+                    th > setting('person.archives.class.status')
+                    th > setting('person.archives.class.auditStatus')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(projectName)
+                    td > echo(organizationName)
+                    td > date(startTime)
+                    td > date(endTime)
+                    td > map('classinfo-status' classStatus)
+                    td > map('trainee-auditStatus' auditStatus)
+                    else
+                        tr > td(colspan='7') > p.text-center > string('no-data')
+        #pager.pagination

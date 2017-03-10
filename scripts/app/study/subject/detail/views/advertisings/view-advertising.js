@@ -1,7 +1,10 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    $ = require('jquery');
 exports.bindings = {
     region: false,
     subject: false,
+    collect: true,
+    score: true,
     download: false
 };
 
@@ -12,6 +15,26 @@ exports.components = [{
         autoplay: true
     }
 }];
+
+exports.events = {
+    'click star-*': 'star'
+};
+
+exports.handlers = {
+    star: function(star, e, target) {
+        var score = this.bindings.score;
+        score.data.score = star;
+        $(target).parent().addClass('active');
+        $(target).siblings().removeClass('active');
+        $(target).addClass('active');
+    }
+};
+
+exports.actions = {
+    'click collect': 'collect',
+    'click cancel-collect': 'cancelCollect',
+    'click submit-score': 'score'
+};
 
 exports.dataForTemplate = {
     advertisings: function(data) {
@@ -36,6 +59,35 @@ exports.dataForTemplate = {
                 subject.avgScore = '暂无评分';
             }
         }
+        subject.hasScore = !!subject.courseScore;
         return subject;
+    }
+};
+
+exports.dataForActions = {
+    collect: function() {
+        var subject = this.bindings.subject.data;
+        return {
+            businessId: subject.id,
+            businessType: 1,
+            collectName: subject.name
+        };
+    },
+    cancelCollect: function(payload) {
+        return payload;
+    }
+};
+
+exports.actionCallbacks = {
+    collect: function() {
+        this.app.message.success('收藏成功');
+    },
+    cancelCollect: function() {
+        this.app.message.success('取消收藏成功');
+    },
+    score: function(data) {
+        this.module.dispatch('initScore', data[0]).then(function() {
+            this.app.message.success('评分成功');
+        });
     }
 };

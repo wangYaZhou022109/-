@@ -1,0 +1,32 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.live.name')
+                    th > setting('person.archives.live.lecturer')
+                    th > setting('person.archives.live.startTime')
+                    th > setting('person.archives.live.endTime')
+                    th > setting('person.archives.live.liveStatus')
+                    th > setting('person.archives.live.joinTime')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(subject)
+                    td > echo(lecturerNames)
+                    td > dateMinute(startTime)
+                    td > dateMinute(endTime)
+                    td > map('gensee-status' status)
+                    td > dateMinute(joinTime)
+                    else
+                        tr > td(colspan='7') > p.text-center > string('no-data')
+        #pager.pagination
+

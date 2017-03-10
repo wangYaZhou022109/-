@@ -10,7 +10,7 @@ view('main')
         table
             thead
                 tr
-                    th > setting('person.course.order')
+                    th > setting('person.archives.public.order')
                     th > setting('person.archives.course.name')
                     th > setting('person.archives.course.source')
                     th > setting('person.archives.course.select')
@@ -36,8 +36,31 @@ view('main')
                         else
                             echo('—')
                     td > echo(studyTotalTime)
-                    td > setting('person.archives.course.finished')
-                    td > a(id='showDeail'+id) > setting('person.archives.details')
+                    td > map('course-info-study-status' finishStatus)
+                    td > a(id='showDeail-'+courseId data-name='id' data-value=courseId) > setting('person.archives.details')
                     else
                         tr > td(colspan='9') > p.text-center > string('no-data')
         #pager.pagination
+
+view('detail')
+    .mb-1 > setting('person.archives.course.detail.courseName') > echo(courseName)
+    .table > table
+        thead > tr
+            th > setting('person.archives.course.detail.sourceName')
+            th > setting('person.archives.course.detail.sourceType')
+            th > setting('person.archives.course.detail.choose')
+            th > setting('person.archives.course.detail.status')
+            th > setting('person.archives.course.detail')
+        tbody > each(sectionList)
+            tr
+                td.nowrap > .text-overflow > echo(sectionName)
+                td > map('section-type' sectionType)
+                td > map('is-required' required)
+                td > map('course-info-study-status' finishStatus)
+                td
+                    if(showRate)
+                        echo(completedRate)
+                    else
+                        a > setting('person.archives.details')
+                else
+                    tr > td(colspan='5') > p.text-center > string('no-data')

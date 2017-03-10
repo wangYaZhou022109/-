@@ -1,0 +1,48 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.exam.name')
+                    th > setting('person.archives.exam.type')
+                    th > setting('person.archives.class.startTime')
+                    th > setting('person.archives.class.endTime')
+                    th > setting('person.archives.exam.status')
+                    th > setting('person.archives.exam.totalScore')
+                    th > setting('person.archives.exam.passScore')
+                    th > setting('person.archives.course.signupStatus')
+                    th > setting('person.archives.class.submitTime')
+                    th > setting('person.archives.exam.score')
+                    th > setting('person.archives.class.isPass')
+                    th > setting('person.archives.exam.operation')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(exam.name)
+                    td > map('exam-type' exam.type)
+                    td > dateMinute(exam.startTime)
+                    td > dateMinute(exam.endTime)
+                    td >  map('exam-status' exam.status)
+                    td > echo(totalScore)
+                    td > echo(exam.passScore)
+                    td > map('signup-status' signupStatus)
+                    td > dateMinute(submitTime)
+                    td > echo(score)
+                    td > echo(isPass)
+                    td
+                        a > setting('person.archives.exam.detail')
+                        if(showCert)
+                            echo('|')
+                            a > setting('person.archives.exam.cert')
+                    else
+                        tr > td(colspan='13') > p.text-center > string('no-data')
+        #pager.pagination
+

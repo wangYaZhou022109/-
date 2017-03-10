@@ -9,7 +9,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var topic = this.models.topic;
-            topic.set({ id: 1222 });
+            topic.set({ id: 'undefine', size: 3 });
             return this.get(topic);
         }
     }

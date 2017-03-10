@@ -1,0 +1,113 @@
+#!handlebars
+
+module > .ask-page > .container
+    .page-main-wrapper.knowledge-side
+        .page-side.side-min(data-region='side')
+        .page-main(data-region='main')
+view('main')
+    .tabs.line.mb-1
+        .pull-right.btn#apply-topic 申请话题
+        ul
+            li.active 话题广场
+    .border.bottom.dashed
+        .tag-btn.active 全部
+        .tag-btn 生活
+        .tag-btn 科学教育
+        .tag-btn 发展经济学
+        .tag-btn 社会民生
+        .tag-btn 职业发展
+        .tag-btn 生活
+        .tag-btn 科学教育
+        .tag-btn 发展经济学
+        .tag-btn 社会民生
+        .tag-btn 职业发展
+        .tag-btn 生活
+        .tag-btn 科学教育
+        .tag-btn 发展经济学
+        .tag-btn 社会民生
+        .tag-btn 职业发展
+    .comment-list.ask-list > ul
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='温暖气氛') 温暖气氛
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 关注
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='脱口秀') 脱口秀
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 取消关注
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='梦想常有') 梦想常有
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 关注
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='脱口秀') 脱口秀
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 关注
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='梦想常有') 梦想常有
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 关注
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='脱口秀') 脱口秀
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 关注
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow(title='梦想常有') 梦想常有
+                .info 36关注 ｜ 1专家 ｜ 2问题
+            .btn.small 关注
+
+view('side')
+    .section
+        .btn.block.big > .inline-block.iconfont.icon-question-2 + .inline-block 发提问
+        .btn.block.big.custom-bg-color-5.m-top > .inline-block.iconfont.icon-edit-2 + .inline-block 写文章
+    .section.follow
+        .clearfix
+            dl
+                dt 99
+                dd 关注的内容
+            dl
+                dt 99
+                dd 关注的话题
+            dl
+                dt 99
+                dd 关注的专家
+        ul
+            li 我的提问
+            li 我的分享
+            li 我的回复
+            li 回复我的
+            li 我是管理
+    .section
+        span.h3 热门话题
+        span.more more
+        .layout-mt-small
+            .comment-list.ask-list > ul
+                li.topic-item
+                    a.normal(href="javascript:;")
+                        .img > .img-cont > img(src="images/demo/1.jpg")
+                        h4.text-overflow(title='温暖气氛') 温暖气氛
+                        .info 36关注 ｜ 1专家 ｜ 2问题
+                li.topic-item
+                    a.normal(href="javascript:;")
+                        .img > .img-cont > img(src="images/demo/1.jpg")
+                        h4.text-overflow(title='脱口秀') 脱口秀
+                        .info 36关注 ｜ 1专家 ｜ 2问题
+                li.topic-item
+                    a.normal(href="javascript:;")
+                        .img > .img-cont > img(src="images/demo/1.jpg")
+                        h4.text-overflow(title='梦想常有') 梦想常有
+                        .info 36关注 ｜ 1专家 ｜ 2问题

@@ -1,0 +1,118 @@
+#!handlebars
+
+module > .ask-page > .container
+    .page-main-wrapper.knowledge-side
+        .page-side.side-min(data-region='side')
+        .page-main(data-region='main')
+view('main')
+    .comment-list.ask-list > ul
+        li
+            .user-pic > img(src='images/1.png' alt='张三丰')
+            .comment-content
+                .user-info.m-top
+                    a(href='javascript:;') 张三丰
+                    span ·提问·
+                    span.sub-text 2016-09-09 09:09
+                .sub-text.m-top 来自话题：公司文化
+            .h4.mt-1 Uber 的动态定价是如何实现的？厉害在哪里？
+            .comment-text.m-top
+                p 其实，基于时间因素的差异化定价策略，一直以来都被人们广泛应用于商业世界的各个领域。同一部电影，夜场要比午场贵；同一款皮鞋，快过季时的价码一定比刚刚上市时的便宜（但同时需承担可能售罄的风险）。上世纪70年代末，美国航空公司首次启用真正意义上的动态定价机制。此后，这一机制逐渐成为航空业、酒店业、汽车租赁业的标准做法，甚至球赛、剧院、零售业和水电费的定价也逐步开始动态化。最近迪士尼乐园就准备开始采用基于需求量的定价模式，旺/淡季以不同价位出售门票(Disney Considers Uber-Style Pricing for Theme Parks)。
+                p 当然，Uber的动态定价有特殊的地方。
+                p > b 动态定价早已有之
+                p 其实，基于时间因素的差异化定价策略，一直以来都被人们广泛应用于商业世界的各个领域。同一部电影，夜场要比午场贵；同一款皮鞋，快过季时的价码一定比刚刚上市时的便宜（但同时需承担可能售罄的风险）。上世纪70年代末，美国航空公司首次启用真正意义上的动态定价机制。
+            .comment-operation
+                .pull-right
+                    .item
+                        .drop-down-wrapper
+                            .drop-down-btn 分享
+                            .drop-down-content > .content
+                                ul
+                                    li 分享1
+                                    li 分享2
+                                    li 分享3
+                    .item > a.normal(href='javascript:;') 举报
+                .pull-left
+                    span.pull-left 附件：
+                    i.iconfont.icon-image.pull-left.m-right
+                    a.normal(href="javascript") 百度是否真的.pdf
+    section.section
+        form.vertical
+            .h3 讨论区
+            .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
+            textarea.input.w-full(name='content' rows='5')
+            .m-top.text-right > .btn#add-comment 发表
+            .layout-mt
+                .comment-list > ul
+                    li
+                        .user-pic > img(src="images/demo/1.jpg")
+                        .comment-content
+                            .user-info
+                                a(href="javascript:;") 张三
+                                span 互联网中心
+                                span.sub-text 2分钟前
+                            .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
+                            .comment-operation
+                                .text-left
+                                    .item
+                                        i.iconfont.icon-zan
+                                        | 赞43
+                                    .item
+                                        i.iconfont.icon-message
+                                        | 评论43
+                                    .item
+                                        i.iconfont.icon-info
+                                        | 举报43
+                            .comment-reply
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+                            .comment-list.border > ul
+                                li
+                                    .user-pic > img(src="images/demo/2.jpg")
+                                    .comment-content
+                                        .user-info
+                                            a(href="javascript:;") 张三
+                                            span 互联网中心
+                                            span.sub-text 8分钟前
+                                        .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
+                                        .comment-operation
+                                            .text-left
+                                                .item
+                                                    i.iconfont.icon-zan
+                                                    | 赞43
+                                                .item
+                                                    i.iconfont.icon-message
+                                                    | 评论43
+                                                .item
+                                                    i.iconfont.icon-info
+                                                    | 举报43
+
+view('side')
+    .section
+        .h4.text-center
+            | 该问题已有
+            b.h2.custom-color-3 200
+            | 人关注
+        .btn.block.layout-mt-small.big 我要关注
+
+    .section
+        span.h3 相关专家
+        span.more more
+        .layout-mt-small.user-picture
+            .grid-row
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+
+    .section.relevant-course
+        span.h3 相关问题
+        .layout-mt-small.m-top
+            .block.layout-mt-small.m-top
+                a.text-overflow(href="javascript:;" title="零基础直达A1西班牙零基础直达A1西班牙语") 零基础直达A1西班牙零基础
+            .block.layout-mt-small.m-top
+                a.text-overflow(href="javascript:;" title="醒职场思维力系列课程") 醒职场思维力系列课程

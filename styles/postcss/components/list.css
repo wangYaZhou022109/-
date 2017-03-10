@@ -4,12 +4,13 @@
 }
 
 .main-list {
+    overflow: visible;
 
     & .filter {
         @apply --clearfix;
 
         line-height: 1em;
-        margin: 1em 0;
+        margin: 1em 0 var(--large-space);
         font-size: var(--small-font);
         padding: 1em 0;
         background: var(--bg-color);
@@ -38,7 +39,7 @@
     & > ul {
         @apply --clearfix;
 
-        margin-right: -calc(var(--main-list-gap) - 0.1);
+        margin-right: -var(--main-list-gap);
 
         & li {
             float: left;

@@ -1,28 +1,116 @@
 .knowledge-side {
-    width: 22%;
-    float: right;
+    & .page-side {
+        background: none;
+        padding-right: 0;
 
-    & ul {
-        padding-top: calc(var(--space)*2);
+        & .side-box {
+            border: 1px solid var(--border-color);
+            padding: var(--space);
+            margin-bottom: calc(var(--space)*3);
+        }
 
-        & li {
-            list-style: inside decimal;
-            overflow: hidden;
-            line-height: 2.5em;
+        & .knowledge-upload {
+            height: 3.6em;
 
-            & .pull-right {
-                color: var(--font-sub-color);
+            & .pull-left {
+                width: 32%;
+                font-size: calc(var(--font-size)*2);
             }
 
-            & a {
-                color: var(--font-color);
+            & .pull-right {
+                width: 64%;
                 padding-left: var(--space);
-                display: inline-block;
-                overflow: hidden;
-                height: calc(var(--space)*2.5);
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                width: 80%;
+
+                & .text-tips {
+                    padding-top: 0.3em;
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        & .statistics {
+            & p {
+                text-align: center;
+                margin: 0;
+
+                & b {
+                    color: var(--custom-color-2);
+                    font-size: calc(var(--font-size)*1.5);
+                }
+            }
+
+            & .pull-left {
+                width: 50%;
+
+                & b {
+                    color: var(--custom-color-2);
+                    padding-bottom: calc(var(--space)/2);
+                    display: inline-block;
+                }
+            }
+        }
+
+        & .knowledge-talent {
+            & b {
+                color: var(--custom-color-3);
+            }
+        }
+
+        & .charts {
+            & .h3 {
+                & small {
+                    color: var(--font-tip-color);
+                }
+            }
+
+            & .charts-img {
+                margin-right: var(--space);
+
+                & img {
+                    width: calc(var(--space)*4);
+                    height: calc(var(--space)*4);
+                }
+            }
+
+            & .charts-user {
+                width: 40%;
+                line-height: calc(var(--space)*2.4);
+                margin-top: -calc(var(--space)/2);
+            }
+
+            & .charts-list {
+                padding: var(--space);
+
+                &:nth-of-type(even) {
+                    background: white;
+                }
+            }
+
+            & .charts-nub {
+                & b {
+                    width: calc(var(--space)*2);
+                    height: calc(var(--space)*2);
+                    line-height: calc(var(--space)*2);
+                    font-weight: normal;
+                    background: #ddd;
+                    display: inline-block;
+                    text-align: center;
+
+                    &.charts01 {
+                        color: white;
+                        background: #f14949;
+                    }
+
+                    &.charts02 {
+                        color: white;
+                        background: #f49542;
+                    }
+
+                    &.charts03 {
+                        color: white;
+                        background: #efc93c;
+                    }
+                }
             }
         }
     }

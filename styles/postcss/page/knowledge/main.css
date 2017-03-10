@@ -1,65 +1,51 @@
-.knowledge-main {
-    width: 76%;
-    float: left;
+.knowledge-list {
+    & li {
+        overflow: hidden;
+        padding: calc(var(--space)*2) 0;
+        border-bottom: 1px solid var(--border-color);
 
-    & .boutique {
-        & li {
-            & h3 {
-                font-weight: normal;
-                font-size: var(--font-size);
-                margin-top: 0;
-                text-overflow: ellipsis;
+        & i.iconfont {
+            font-size: 2.2em;
+        }
+
+
+        &:hover {
+            background: var(--bg-color);
+        }
+
+        & .knowledge-tit-con {
+            width: 80%;
+            overflow: hidden;
+
+            & .star-bar {
+                font-size: 1em;
+            }
+
+            & .knowledge-tit {
+                max-width: 80%;
                 white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
                 height: calc(var(--space)*2);
+                display: inline-block;
+                margin-right: var(--space);
             }
 
-            & .img {
-                min-height: auto;
+            & .text-tips {
+                padding-top: var(--space);
 
-                & .list-tit {
-                    margin-bottom: var(--space);
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                & span {
                     display: inline-block;
-                    color: var(--font-color);
-                }
-
-                & .list-con {
-                    color: var(--font-sub-color);
-                    font-size: var(--small-font);
-                    line-height: 1.3em;
-                    height: 3.9em;
-                    overflow: hidden;
-                }
-
-                & img {
-                    width: 40%;
-                    margin-right: var(--space);
+                    padding-right: calc(var(--space)*2);
                 }
             }
-            & ol {
-                padding:1em 0 0 0;
+        }
 
-                & li {
-                    float: none;
-                    list-style: none;
-                    width: 100%;
-                    margin: 0;
-                    padding-right: 0;
-                    line-height: 1.8em;
-                    height: 1.8em;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
+        & .knowledge-tit-out {
+            width: 10%;
 
-                    & a {
-                        color: var(--font-color);
-                    }
-
-                    & i {
-                        margin-right: var(--space);
-                    }
-                }
+            & .iconfont {
+                margin-top: calc(var(--space)*1.5);
             }
         }
     }
