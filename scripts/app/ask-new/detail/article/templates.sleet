@@ -7,7 +7,7 @@ module > .ask-page > .container
 view('main')
     .comment-list.ask-list > ul
         li
-            .user-pic > img(src='images/1.png')
+            .user-pic > img(src='images/1.png' alt='张三丰')
             .comment-content
                 .user-info.m-top
                     a(href='javascript:;') 张三丰
@@ -102,15 +102,15 @@ view('side')
         span.more more
         .layout-mt-small.user-picture
             .grid-row
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d4.jpg')
-                .col-md-4 > img.block(src='images/d3.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
-                .col-md-4 > img.block(src='images/d1.jpg')
-                .col-md-4 > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+                .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
 
     section.section.relevant-course
         span.h3 相关文章
