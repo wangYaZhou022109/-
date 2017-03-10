@@ -5,10 +5,11 @@ module
 view('list')
     .section
         span.h3 > string('active') + string('expert')
-        span.more more
+        span.more(id='expert-more') more
         .layout-mt-small.user-picture
             .grid-row
                 each(expert)
-                    .col-md-4 > img.block( id='expert-' + member.id data-name='id' data-value=member.id src=member.headPortrait)
+                    .col-md-4 > a
+                        img.block( id='expert-' + member.id data-name='id' data-value=member.id src=member.headPortrait)
                 
     

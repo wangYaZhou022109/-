@@ -1,6 +1,7 @@
 exports.routes = {
     index: 'showIndex',
-    topicdetail: 'showDetails'
+    topicdetail: 'showDetails',
+    'expert/index': 'showExpertIndex'
 };
 
 exports.showIndex = function() {
@@ -9,4 +10,7 @@ exports.showIndex = function() {
 
 exports.showDetails = function(id) {
     return this.app.show('content', 'ask/mymanage/topicdetail', { id: id });
+};
+exports.showExpertIndex = function() {
+    return this.app.show('content', 'ask/expert');
 };

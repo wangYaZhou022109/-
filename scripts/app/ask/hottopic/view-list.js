@@ -1,6 +1,5 @@
 
-var D = require('drizzlejs');
-var $ = require('jquery');
+
 exports.type = 'dynamic';
 exports.bindings = {
     topic: true

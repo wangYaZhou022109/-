@@ -8,7 +8,7 @@ view('list')
             .user-pic > img(src=createUser.headPortrait)
             .comment-content
                 .h4 > echo(title) 
-                .comment-text(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;') 
+                .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
                     echo(content)
