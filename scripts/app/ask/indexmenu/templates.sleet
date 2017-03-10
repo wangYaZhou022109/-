@@ -21,6 +21,7 @@ view('main')
             li > a(id='middle-menu-7' href='javascript:;') > echo('回复我的')
             li > a(id='middle-menu-mymanage' href='javascript:;') > echo('我是管理')
 
+
 view('popup')
     div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
     .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:10%;left:25%;') > .catalog-view-box

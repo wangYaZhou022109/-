@@ -8,8 +8,8 @@ exports.routes = {
     'topic/index': 'showTopicIndex',
     'topic/detail': 'showTopicDetail',
     'expert/index': 'showExpertIndex',
-    'expert/detail': 'showExpertDetail'
-
+    'expert/detail': 'showExpertDetail',
+    'expert/me': 'showExpertMe'
 };
 
 exports.showIndex = function() {
@@ -50,4 +50,8 @@ exports.showExpertIndex = function() {
 
 exports.showExpertDetail = function() {
     return this.app.show('content', 'ask-new/expert/detail');
+};
+
+exports.showExpertMe = function() {
+    return this.app.show('content', 'ask-new/expert/me');
 };
