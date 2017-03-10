@@ -3,6 +3,7 @@ var $ = require('jquery');
 exports.bindings = {
     buss: true,
     bus: false,
+    optionList: true,
 };
 
 exports.components = [{
@@ -23,7 +24,35 @@ exports.handlers = {
         region.show(model, { id: id });
     },
     addBus: function() {
-        this.bindings.bus.clear();
+        var buss = this.bindings.buss.data,
+            optionList = this.bindings.optionList.data || [],
+            option1 = {},
+            option2 = {},
+            option3 = {},
+            option4 = {},
+            option5 = {},
+            option6 = {};
+        if (buss.length === 0 && optionList.length === 0) {
+            option1.name = '返程日前一天17:30去集团';
+            option1.id = option1.name;
+            optionList.push(option1);
+            option2.name = '返程日前一天17:30去机场';
+            option2.id = option2.name;
+            optionList.push(option2);
+            option3.name = '返程日7:30去集团';
+            option3.id = option3.name;
+            optionList.push(option3);
+            option4.name = '返程日7:30去机场';
+            option4.id = option4.name;
+            optionList.push(option4);
+            option5.name = '返程日前一天晚餐';
+            option5.id = option5.name;
+            optionList.push(option5);
+            option6.name = '返程日早餐';
+            option6.id = option6.name;
+            optionList.push(option6);
+            this.bindings.optionList.changed();
+        }
         this.app.viewport.modal(this.module.items.edit);
     },
 };
@@ -32,13 +61,13 @@ exports.actions = {
     'click remove*': 'remove',
     'click publish*': 'publish',
     'click undo*': 'undo',
-    'click editBus*': 'editBus',
+    'click edit*': 'editBus',
 };
 
 exports.dataForActions = {
-    editBus: function(data) {
+    editBus: function(payload) {
         this.app.viewport.modal(this.module.items.edit);
-        return data;
+        return payload;
     },
     publish: function(data) {
         var me = this;

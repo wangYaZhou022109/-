@@ -3,6 +3,7 @@ exports.items = {
     search: 'search',
     count: 'count',
     status: '',
+    batchStatus: '',
 };
 
 exports.store = {
@@ -18,6 +19,9 @@ exports.store = {
         updateState: {
             url: '../train/sign-detail/update'
         },
+        batchUpdate: {
+            url: '../train/sign-detail/batch'
+        },
         state: { data: {} },
     },
     callbacks: {
@@ -26,6 +30,15 @@ exports.store = {
             updateState.params = payload;
             updateState.set(payload);
             this.put(updateState).then(function() {
+                this.app.message.success('修改成功');
+                this.get(this.models.signDetail);
+            });
+        },
+        batch: function(payload) {
+            var batch = this.models.batchUpdate;
+            batch.params = payload;
+            batch.set(payload);
+            this.put(batch).then(function() {
                 this.app.message.success('修改成功');
                 this.get(this.models.signDetail);
             });

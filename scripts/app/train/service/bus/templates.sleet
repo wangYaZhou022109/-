@@ -36,37 +36,23 @@ view('main')
 
 view('edit') > form.vertical
     label(class='required') > echo('统计主题')
-    input.input(name='name'  value=bus.name  x-rule='required')
+    input.input#name(name='name'  value=bus.name  x-rule='required')
     br
     label(class='required') > echo('开始时间')
-    input.input(name='startTime' value=dateTime(bus.startTime) x-rule='required')
+    input.input#startTime(name='startTime' value=dateTime(bus.startTime) x-rule='required')
     br
     label(class='required') > echo('结束时间')
-    input.input(name='endTime' value=dateTime(bus.endTime) x-rule='required')
+    input.input#endTime(name='endTime' value=dateTime(bus.endTime) x-rule='required')
     br
-    div
-        div
-            label > echo('5点半去集团') 
-            br
-            input.input(name='name' value=bus.name)
-        div
-            label > echo('5点半去机场') 
-            br
-            input.input(name='name' value=bus.name)
-        div
-            label > echo('7点半去集团') 
-            br
-            input.input(name='name' value=bus.name)
-        div
-            label > echo('7点半去机场') 
-            br
-            input.input(name='name' value=bus.name)
-        div
-            label > echo('5点去晚餐') 
-            br
-            input.input(name='name' value=bus.name)
-        div
-            label > echo('7点早餐') 
-            br
-            input.input(name='name' value=bus.name)
+    .list.m-top
+        table.tables
+            tbody > each(optionList) > tr
+                td
+                    label(id='label-option-' + id data-name='id' data-value=id) > echo(name)
+                    input(id='input-option-' + id value=name style='display:none;' data-name='id' data-value=id)
+                td
+                    a(id='del-option-'+id data-name='id' data-value=id) 删除
+            tr
+                td(colspan=4 style='text-align:center')
+                    a.btn#addOption +
     a.btn#saveOption > span > echo('保存')

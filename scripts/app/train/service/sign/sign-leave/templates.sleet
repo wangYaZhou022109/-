@@ -1,0 +1,40 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    div.row.text-center
+    .list.m-top
+        table.table
+            thead > tr
+                th > echo('员工编号')
+                th > echo('员工姓名')
+                th > echo('员工电话')
+                th > echo('审核结果')
+                th > echo('操作')
+            tbody > each(leave) > tr
+                td > echo(member.Name)
+                td > echo(member.fullName)
+                td > echo(member.phoneNumber)
+                td > map('train-leave-state' state)
+                td.operation
+                    a(id='approval'+id data-name='id' data-value=id) > echo('审批')
+    #pager.pagination
+
+view('approval') > form.vertical
+    input.input(name='id' type='hidden' value=id)
+    .row
+        .col-sm-9
+            echo('请假原因')
+            input.input#reson(name='reason'  value=lea.reason  x-rule='required')
+            echo('审核意见')
+            select#state(name='state')
+                option(value='1') > echo('同意')
+                option(value='2') > echo('不同意')
+            echo('申请时间')
+            input.input#createTime(name='createTime' value=dateTime(lea.createTime) x-rule='required')
+            input.input(type='hidden' name='id' value=lea.id)
+        div.col-sm-3
+            btn.btn#update > echo('确定')

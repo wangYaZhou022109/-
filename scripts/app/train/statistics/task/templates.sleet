@@ -1,0 +1,20 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    div(style='padding:20px 50px 50px 100px;')
+        .list.m-top
+            table.table
+                thead > tr
+                    th > echo('作业名称')
+                    th > echo('提交人数')
+                    th > echo('操作')
+                tbody > each(tasks) > tr
+                    td > echo(name)
+                    td > echo(number)
+                    td > a(id='preview'+id data-name='id' data-value=id) > echo('详情')
+    #pager.pagination
+    

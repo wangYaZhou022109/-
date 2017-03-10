@@ -299,6 +299,9 @@ module.exports = {
     },
     'course-list-company-type': {
         0: '全部', 1: '集团', 2: '本公司', 3: '其他公司'
+    },
+    'train-leave-state': {
+        0: '待审核', 1: '同意', 2: '不同意'
     }
 };
 

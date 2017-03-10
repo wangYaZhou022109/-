@@ -2,7 +2,8 @@ exports.items = {
     main: 'main',
     edit: '',
     preview: '',
-    'train/service/sign/sign-detail': { isModule: true }
+    'train/service/sign/sign-detail': { isModule: true },
+    'train/service/sign/sign-leave': { isModule: true }
 };
 
 exports.store = {

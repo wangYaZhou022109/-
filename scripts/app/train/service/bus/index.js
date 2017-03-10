@@ -23,14 +23,26 @@ exports.store = {
             url: '../train/bus/undo'
         },
         optionList: {
-            url: '../train/busValue'
+            url: '../train/busValue',
+            data: []
         },
         optionModel: {
             url: '../train/busValue'
         },
         state: { data: { classId: 3 } },
+        delOptionList: { data: [] },
     },
     callbacks: {
+        editBus: function(payload) {
+            var bus = this.models.bus;
+            var optionList = this.models.optionList;
+            bus.params = payload;
+            bus.clear();
+            this.get(bus).then(function(data) {
+                optionList.data = data[0].optionList;
+                optionList.changed();
+            });
+        },
         init: function(payload) {
             var buss = this.models.buss;
             buss.params = payload;
@@ -47,37 +59,59 @@ exports.store = {
         addOption: function(data) {
             var optionList = this.models.optionList.data,
                 state = this.models.state,
-                newOption = [],
+                newOption = {},
                 index;
             index = state.data.index || optionList.length;
             index++;
-            newOption.id = index + '';
-            // newOption.classId = state.data.classId;
-            newOption.name = index + data;
-            newOption.address = index + data;
-            newOption.date = index + data;
-            newOption.explain = index + data;
+            newOption.id = 'new-' + index;
+            newOption.name = data;
             optionList.push(newOption);
             this.models.optionList.changed();
             state.data.index = index;
             state.changed();
         },
+        delOption: function(id) {
+            var optionList = this.models.optionList.data,
+                delOptionList = this.models.delOptionList.data,
+                index,
+                delOption = {};
+            index = optionList.findIndex(function(e) {
+                return e.id === id;
+            });
+            optionList.splice(index, 1);
+            this.models.optionList.changed();
+            delOption.id = id;
+            delOptionList.push(delOption);
+        },
         saveOption: function() {
             var optionList = this.models.optionList,
                 delOptionList = this.models.delOptionList,
                 optionModel = this.models.optionModel,
+                bus = this.models.bus,
                 me = this;
             optionModel.clear();
-            D.assign(me.models.OptionModel.data, {
-                newOptionList: JSON.stringify(optionList.data),
+            D.assign(bus.data, {
+                optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            return me.save(me.models.optionModel);
+            console.log(bus.data);
+            return me.save(bus);
+        },
+        updateName: function(data) {
+            var optionList = this.models.optionList.data,
+                target,
+                index;
+            index = optionList.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = optionList[index];
+            target.name = data.name;
+            this.models.optionList.changed();
         },
         remove: function(payload) {
             this.models.bus.set(payload);
             return this.del(this.models.bus);
-        },
+        }
     }
 };
 

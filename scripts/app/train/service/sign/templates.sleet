@@ -5,37 +5,40 @@ module > .train-class-page
         .div(data-region='main')
 
 view('main')
-    div.text-center
+    div.row.text-center
         .buttons
             .btn#addSign > echo('添加')
             .btn#batchDelete > echo('删除')
-    table.table
-        thead > tr
-            th > input(type='checkbox' id='check-all')
-                label(for='check-all')
-            th > echo('签到名称')
-            th > echo('签到时间')
-            th > echo('签到地点')
-            th > echo('签到结果')
-            th > echo('状态')
-            th > echo('二维码')
-            th > echo('操作')
-        tbody > each(signs) > tr
-            td > input(type='checkbox' id='check-item'+id name='signId' value=id)
-                label(for='check-item'+id)
-            td > echo(name)
-            td > dateTime(startTime) + echo(' 至 ') + dateTime(endTime)
-            td > echo(place)
-            td > echo(signNum) + echo('/') + echo(classNum)
-            td > map('train-sign-state' state)
-            td.operation
-                a(id='preview'+id data-name='id' data-value=id) > echo('预览')
-                echo('|')
-                a(id='down'+id data-name='id' data-value=id) > echo('下载')
-            td.operation
-                a(id='detail'+id data-name='id' data-value=id href='javascript:;') > echo('签到名单')
-                echo('|')
-                a(id='editSign'+id data-name='id' data-value=id) > echo('编辑')
+    .list.m-top
+        table.table
+            thead > tr
+                th > input(type='checkbox' id='check-all')
+                    label(for='check-all')
+                th > echo('签到名称')
+                th > echo('签到时间')
+                th > echo('签到地点')
+                th > echo('签到结果')
+                th > echo('状态')
+                th > echo('二维码')
+                th > echo('操作')
+            tbody > each(signs) > tr
+                td > input(type='checkbox' id='check-item'+id name='signId' value=id)
+                    label(for='check-item'+id)
+                td > echo(name)
+                td > dateTime(startTime) + echo(' 至 ') + dateTime(endTime)
+                td > echo(place)
+                td > echo(signNum) + echo('/') + echo(classNum)
+                td > map('train-sign-state' state)
+                td.operation
+                    a(id='preview'+id data-name='id' data-value=id) > echo('预览')
+                    echo('|')
+                    a(id='down'+id data-name='id' data-value=id) > echo('下载')
+                td.operation
+                    a(id='detail'+id data-name='id' data-value=id href='javascript:;') > echo('签到名单')
+                    echo('|')
+                    a(id='leave'+id data-name='id' data-value=id) > echo('请假')
+                    echo('|')
+                    a(id='editSign'+id data-name='id' data-value=id) > echo('编辑')
     #pager.pagination
 
 view('edit') > form.vertical

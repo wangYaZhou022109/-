@@ -17,6 +17,7 @@ exports.events = {
     'click check-all': 'checkAll',
     'click check-item*': 'checkItem',
     'click detail*': 'detail',
+    'click leave*': 'leave',
 };
 
 exports.handlers = {
@@ -42,6 +43,11 @@ exports.handlers = {
         region = new D.Region(this.app, this.module, el, id);
         region.show(model, { id: id });
     },
+    leave: function(data) {
+        var me = this,
+            model = me.module.items['train/service/sign/sign-leave'];
+        me.app.viewport.modal(model, { id: data });
+    }
 };
 
 exports.actions = {

@@ -40,14 +40,19 @@ view('main')
     div.text-center
         .buttons
             a(href=exportUrl ) > .btn > span 导出
+            btn.btn#batchStatus > echo('批量签到')
     table.table
         thead > tr
+            th > input(type='checkbox' id='check-all')
+                label(for='check-all')
             th > echo('员工编号')
             th > echo('员工姓名')
             th > echo('员工电话')
             th > echo('签到时间')
             th > echo('状态')
         tbody > each(signDetail) > tr
+            td > input(type='checkbox' id='check-item'+id name='detailId' value=id)
+                label(for='check-item'+id)
             td > echo(member.name)
             td > echo(member.fullName)
             td > echo(member.phoneNumber)
@@ -66,3 +71,16 @@ view('status') > form.vertical
                 option(value='4') > echo('请假')
         div.col-sm-3
             btn.btn#update > echo('确定')
+
+view('batchStatus') > form.vertical
+    input.input(name='id' type='hidden' value=id)
+    .row
+        .col-sm-9
+            echo('签到状态')
+            select#state(name='state')
+                option(value='1') > echo('正常')
+                option(value='2') > echo('迟到')
+                option(value='3') > echo('未签到')
+                option(value='4') > echo('请假')
+        div.col-sm-3
+            btn.btn#batch > echo('确定')

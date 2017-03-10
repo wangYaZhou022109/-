@@ -1,15 +1,19 @@
 exports.items = {
     main: 'main',
-    edit: ''
+    'train/statistics/task/task-detail': { isModule: true }
 };
 
 exports.store = {
     models: {
         tasks: {
-            url: '../train/task/page',
+            url: '../train/task/tasks',
             type: 'pageable',
             root: 'items'
-        }
+        },
+        task: {
+            url: '../train/task'
+        },
+        state: { data: { classId: 3 } },
     },
     callbacks: {
         init: function(payload) {
@@ -26,4 +30,6 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
+    var classId = this.store.models.state.data;
+    this.dispatch('init', classId);
 };
