@@ -1,11 +1,9 @@
-var $ = require('jquery'),
-    _ = require('lodash/collection'),
+var _ = require('lodash/collection'),
     D = require('drizzlejs'),
     E = require('./app/exam/exam-websocket'),
     maps = require('./app/util/maps'),
     qTypes = maps.get('question-types'),
     strings = require('./app/util/strings'),
-    changeToFullScreen,
     getCurrentStatus,
     constant = {
         ONE_HUNDRED: 100,
@@ -34,10 +32,9 @@ var $ = require('jquery'),
         Auto: 'Auto',
         Hand: 'Hand'
     },
-    connect,
-    closeConnect,
-    cancel,
-    timeOutId;
+    WS,
+    TO,
+    changeScreen;
 
 exports.items = {
     side: 'side',
@@ -358,7 +355,7 @@ exports.store = {
                     clientType: constant.PC_CLIENT_TYPE
                 };
 
-            if (payload.submitType !== submitType.Auto) cancel();
+            if (payload.submitType !== submitType.Auto) TO.cancel();
 
             this.models.form.set(data);
             return this.post(this.models.form).then(function() {
@@ -380,12 +377,25 @@ exports.store = {
         delay: function(payload) {
             this.models.countDown.data.delay = payload.delay;
             this.models.countDown.changed();
+        },
+        lowerSwitchTimes: function() {
+            var exam = this.models.exam.data;
+            if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
+                this.app.message.error('切屏次数已满，强制交卷');
+                return false;
+            } else {
+                D.assign(exam, {
+                    lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
+                });
+                this.models.exam.save();
+                this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
+                return true;
+            }
         }
     }
 };
 
 exports.beforeRender = function() {
-    changeToFullScreen();
     return this.dispatch('init', this.renderOptions);
 };
 
@@ -399,47 +409,49 @@ exports.afterRender = function() {
                 ms = (min + 1) * (1000 * 60);
             return ms;
         },
-        random = getRandom(),
+        f = false,
         autoSubmit = function() {
             return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
-                timeOutId = setTimeout(autoSubmit, random);
+                TO.timeOutId = setTimeout(autoSubmit, getRandom());
             });
         };
 
-    autoSubmit();
+    if (f) {
+        autoSubmit();
 
-    timeOutId = setTimeout(autoSubmit, random);
+        TO.timeOutId = setTimeout(autoSubmit, getRandom());
 
-    connect(examId, function() {
-        me.app.message.error('你本次考试已被管理员强制交卷');
-        return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
-            closeConnect();
+        WS.connect(examId, function() {
+            me.app.message.error('你本次考试已被管理员强制交卷');
+            return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
+                WS.closeConnect();
+            });
+        }, function(delay) {
+            return me.dispatch('delay', { delay: Number(delay) });
         });
-    }, function(delay) {
-        return me.dispatch('delay', { delay: Number(delay) });
-    });
+    }
+    debugger;
+    changeScreen.call(this);
 };
 
-connect = function(examId, submitPaper, timeExpand) {
-    E.connect(examId, {
-        submitPaper: submitPaper,
-        timeExpand: timeExpand
-    });
+WS = {
+    connect: function(examId, submitPaper, timeExpand) {
+        E.connect(examId, {
+            submitPaper: submitPaper,
+            timeExpand: timeExpand
+        });
+    },
+    closeConnect: function() {
+        E.disconnect();
+    }
 };
 
-closeConnect = function() {
-    E.disconnect();
-};
-
-cancel = function() {
-    clearTimeout(timeOutId);
-    timeOutId = undefined;
-};
-
-changeToFullScreen = function() {
-    $('.header').hide();
-    $('.footer').hide();
-    $('.achievement-content').attr('height', '100%');
+TO = {
+    cancel: function() {
+        clearTimeout(this.timeOutId);
+        this.timeOutId = undefined;
+    },
+    timeOutId: -1
 };
 
 getCurrentStatus = function(id) {
@@ -452,4 +464,18 @@ getCurrentStatus = function(id) {
         return itemStatus.ACTIVE;
     }
     return itemStatus.INIT;
+};
+
+changeScreen = function() {
+    var me = this;
+    debugger;
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'hidden') {
+            return me.dispatch('lowerSwitchTimes');
+        }
+        return true;
+    });
+    window.onblur = function() {
+        return me.dispatch('lowerSwitchTimes');
+    };
 };

@@ -37,13 +37,15 @@ exports.store = {
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             data.options = [];
-            if (attrs.length > 0) {
 
+            if (_.find(attrs, ['type', '0'])) {
+                answer = _.find(attrs, ['type', '0']).value;
             }
-            answer = _.find(attrs, ['type', '0']).value;
+
             attrs = _.filter(attrs, function(a) {
                 return Number(a.type) !== 0;
             });
+
             for (i; i < attrs.length; i++) {
                 code = String.fromCharCode(i + 'A'.charCodeAt(0));
                 data.options.push({ content: attrs[i].value, name: attrs[i].name, code: code, i: i });
@@ -52,7 +54,10 @@ exports.store = {
                     String.fromCharCode(Number(attrs[i].name) + 'A'.charCodeAt(0))
                 );
             }
-            data.answer = answer.split('|').join('');
+
+            if (answer !== '') {
+                data.answer = answer.split('|').join('');
+            }
 
             if (question.answerRecord) {
                 data.gainScore = question.answerRecord.score;
