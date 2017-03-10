@@ -9,5 +9,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.store.models.state.set(this.renderOptions);
+    this.store.models.state.set(this.renderOptions.state);
 };

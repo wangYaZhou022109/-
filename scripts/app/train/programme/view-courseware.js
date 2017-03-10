@@ -21,6 +21,7 @@ exports.dataForTemplate = {
             item.fileType = findExtension.call(me, extension);
             item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachId;
             item.i = i + 1;
+            item.canPreview = item.fileType !== 2;
             return item;
         });
         return data.files;
@@ -30,7 +31,8 @@ exports.dataForTemplate = {
 exports.events = {
     'click uploadFile': 'uploadFile',
     'click label-courseware-*': 'changeName',
-    'change input-courseware-*': 'updateAttachName'
+    'change input-courseware-*': 'updateAttachName',
+    'click preview-*': 'preview'
 };
 
 exports.handlers = {
@@ -58,6 +60,12 @@ exports.handlers = {
         } else {
             this.module.dispatch('updateAttachName', { id: id, attachName: val });
         }
+    },
+    preview: function(id) {
+        var viewPath,
+            url = window.location.protocol + '//' + window.location.host + '/';
+        viewPath = url + '#/train/programme/preview/' + id;
+        window.open(viewPath);
     }
 };
 

@@ -19,9 +19,9 @@ exports.store = {
             this.get(download).then(function(data) {
                 var file = data[0];
                 if (file.extention === 'mp3') {
-                    state.data.key = 'mp3';
+                    state.data.key = 'audio';
                 } else if (file.extention === 'mp4') {
-                    state.data.key = 'mp4';
+                    state.data.key = 'video';
                 } else {
                     state.data.key = 'pdf';
                 }

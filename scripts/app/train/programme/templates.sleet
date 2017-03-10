@@ -230,7 +230,10 @@ view('editOffline') > form.vertical
                     input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
                 td > map('class-file-type' fileType)
                 td
-                    a(href=downUrl download=attachName) 下载
+                    if(canPreview)
+                        a(href='javascript:;' id='preview-attach-'+attachId) 预览
+                    else
+                        a(href=downUrl download=attachName) 下载
                     a(id='del-attach-'+id data-name='id' data-value=id) 删除
 
 view('upload')
@@ -258,5 +261,8 @@ view('courseware')
                     input(id='input-courseware-' + id value=attachName style='display:none;' data-name='id' data-value=id)
                 td > map('class-file-type' fileType)
                 td
-                    a(href=downUrl download=attachName) 下载
+                    if(canPreview)
+                        a(href='javascript:;' id='preview-'+attachId) 预览
+                    else
+                        a(href=downUrl download=attachName) 下载
                     a(id='del-courseware-'+id data-name='id' data-value=id) 删除
