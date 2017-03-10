@@ -10,7 +10,9 @@ exports.items = {
     editOffline: '',
     upload: '',
     courseware: '',
-    'train/programme/select-course': { isModule: true }
+    'train/programme/select-course': { isModule: true },
+    import: '',
+    'import-upload': ''
 };
 
 exports.store = {
@@ -31,6 +33,10 @@ exports.store = {
         download: { url: '../human/file/download' },
         offlineClickUpdate: { url: '../train/offline-course/click-update' },
         courseSalary: { url: '../train/courseSalary/updateByCourseId' },
+        import: { url: '../train/offline-course/import' },
+        fileInfo: {},
+        importInfo: {},
+        downExcel: { url: '../train/offline-course/download-excel' },
         delThemeList: { data: [] },
         state: { data: {} },
         files: { data: [] },
@@ -382,6 +388,21 @@ exports.store = {
             model.set(payload);
             this.save(model).then(function() {
                 me.get(offlineCourseList);
+            });
+        },
+        importFile: function(payload) {
+            var me = this,
+                importData = me.models.import,
+                state = me.models.importInfo;
+            importData.set(payload);
+            me.save(importData).then(function(data) {
+                state.data = data[0];
+                state.data.imported = true;
+                if (state.data.failureCount > 0) {
+                    state.data.error = true;
+                }
+                state.changed();
+                me.get(me.models.offlineCourseList);
             });
         }
     }

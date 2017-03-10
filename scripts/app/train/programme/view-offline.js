@@ -20,7 +20,8 @@ exports.events = {
     'click label-title-offline-*': 'changeTitleName',
     'change input-title-offline-*': 'updateTitleName',
     'click label-paidPay-offline-*': 'changePay',
-    'change input-paidPay-offline-*': 'updatePay'
+    'change input-paidPay-offline-*': 'updatePay',
+    'click importOffline': 'importCourse'
 };
 
 exports.handlers = {
@@ -92,6 +93,9 @@ exports.handlers = {
         } else {
             this.module.dispatch('updatePay', { courseId: id, paidPay: val });
         }
+    },
+    importCourse: function() {
+        this.app.viewport.modal(this.module.items.import);
     }
 };
 

@@ -266,3 +266,23 @@ view('courseware')
                     else
                         a(href=downUrl download=attachName) 下载
                     a(id='del-courseware-'+id data-name='id' data-value=id) 删除
+
+view('import')
+    div > form(method='post' id='importCourse' target='_blank')
+        input(type='hidden' id='importType' name='importType' value='1')
+        input(type='hidden' id='access_token' name='access_token')
+    div > h3 > echo('第一步：下载模板')
+    div > .btn#downloadExcel-1 > span > echo('下载模板')
+    div > h3 > echo('第二步：导入模板')
+    div > .btn#uploadExcel > span > echo('导入模板')
+    if(errors) > div
+        h3 > echo('共导入成功') + echo(uploadExcel.imgs.successCount) + echo('条数据, 失败') + echo(uploadExcel.imgs.failCount) + echo('条数据  ') + .btn#downloadExcel-0 > span > echo('下载失败记录')
+    div > h3 > echo('步骤说明')
+    div > ul
+        li > echo('1.下载标准模板，按示例格式和示例说明填写需要导入的电子表格文件。')
+        li > echo('2.导入模板，导入成功后，页面会提示成功数量，失败数量，并显示相关信息。')
+        li > echo('3.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。')
+
+view('import-upload')
+    .row
+        #uploader2
