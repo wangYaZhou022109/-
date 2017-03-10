@@ -25,7 +25,8 @@
     }
     & li.topic-item,
     & li.expert-item,
-    & li.my-topic-item {
+    & li.my-topic-item,
+    & li.follow-item {
         float: left;
         width: 33.33%;
         padding-right: calc(var(--large-space) / 2);
@@ -74,7 +75,19 @@
             }
         }
     }
-
+    & li.follow-item {
+        width: 33.33%;
+        & .img {
+            margin-right: var(--space);
+            width: calc(var(--large-space) * 1.5);
+        }
+        & h4 {
+            font-size: var(--font-size);
+        }
+        & .info {
+            font-size: var(--small-font);
+        }
+    }
     &.min li.topic-item,
     &.min li.expert-item {
         padding-right: 0;
