@@ -13,17 +13,24 @@ exports.dataForTemplate = {
     list: function(data) {
         var pageNum = this.bindings.list.getPageInfo().page;
         _.map(data.list || [], function(role, i) {
-            var r = role,
-                totalScore = r.totalScore,
-                score = r.score;
+            var r = role;
             r.i = i + 1 + ((pageNum - 1) * 10);
-            r.totalScore = totalScore / 100;
-            r.score = score / 100;
-            r.showCert = r.exam.hasCert === 1;// 是否有证书
-            if (r.score >= r.exam.passScore) {
-                r.isPass = '是';
+            if (!r.integralScore) {
+                r.integralScore = '0';
+            }
+            if (!r.downloadMemberCount) {
+                r.downloadMemberCount = '0';
+            }
+            if (!r.browseCount) {
+                r.browseCount = '0';
+            }
+            if (!r.browseMemberCount) {
+                r.browseMemberCount = '0';
+            }
+            if (r.type === '0' || r.type === '1') {
+                r.type = '音／视频';
             } else {
-                r.isPass = '否';
+                r.type = '文档';
             }
         });
         return data.list;
