@@ -5,7 +5,7 @@ module
 view('list')
     .section
     span.h3 > string('hot') + string('topic')
-    span.more more
+    span.more(id = 'topic-more') more
     .layout-mt-small
         .comment-list.ask-list > ul
             each(topic)
