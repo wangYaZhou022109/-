@@ -20,6 +20,11 @@ exports.dataForTemplate = {
             r.totalScore = totalScore / 100;
             r.score = score / 100;
             r.showCert = r.exam.hasCert === 1;// 是否有证书
+            if (r.score >= r.exam.passScore) {
+                r.isPass = '是';
+            } else {
+                r.isPass = '否';
+            }
         });
         return data.list;
     },

@@ -20,7 +20,7 @@ exports.store = {
             { id: '5', name: '调研', url: 'research' },
             { id: '6', name: '知识', url: 'knowledge' },
             { id: '7', name: '问吧', url: 'ask' },
-            { id: '8', name: '证书', url: '' }
+            { id: '8', name: '证书', url: 'certificate' }
         ] },
         statistics: { url: '../course-study/course-study-progress/statistics', autoLoad: 'after' }
     },
