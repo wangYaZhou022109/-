@@ -55,6 +55,19 @@
         & .input {
             width: 100%;
             display: block;
+
+            & + .choice {
+                position: relative;
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: var(--input-height);
+                line-height: var(--input-height);
+                background: var(--main-color);
+                padding: 0 1em;
+                color: white;
+                cursor: pointer;
+            }
         }
 
         &.textarea-row {

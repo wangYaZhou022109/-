@@ -9,7 +9,7 @@ view('main') > .form
         .content > input.input + .tips 0/60
     .form-row
         label.required 关联话题
-        .content > input.input
+        .content > input.input + .choice 选择
     .form-row.textarea-row
         label 详情描述
         .content > textarea.input(rows='5') + .tips 0/60

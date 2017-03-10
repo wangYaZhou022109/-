@@ -28,7 +28,7 @@
         & .dialog-content {
             height: 100%;
             padding-bottom: 10em;
-            margin-top: 1em;
+            margin-top: var(--large-space);
         }
 
         & .dialog-main {
