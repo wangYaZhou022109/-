@@ -22,7 +22,6 @@ exports.actions = {
 
 exports.dataForActions = {
     approval: function(payload) {
-        console.log(payload);
         this.app.viewport.modal(this.module.items.approval);
         return payload;
     },

@@ -94,7 +94,6 @@ exports.store = {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            console.log(bus.data);
             return me.save(bus);
         },
         updateName: function(data) {
