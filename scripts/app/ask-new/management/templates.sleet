@@ -1,0 +1,119 @@
+#! handlebars
+
+module > .ask-page > .container
+    .page-main-wrapper
+        .page-side.side-min(data-region='side')
+        .page-main(data-region='main')
+
+view('main')
+    .tabs.line > ul
+        li.active 我的管理
+    .comment-list.ask-list.min > ul
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow 温暖气氛
+                .info 36关注 ｜ 1专家 ｜ 2问题
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow 脱口秀
+                .info 36关注 ｜ 1专家 ｜ 2问题
+        li.topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                h4.text-overflow 梦想常有
+                .info 36关注 ｜ 1专家 ｜ 2问题
+    .hr
+    .checkbox > input(type='checkbox') + label 显示待审核
+    ul.manage-list
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-ing 待审核
+                    .inline-block 【分享审核】
+            .clearfix.m-top
+                .pull-right > a 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-error 已拒绝
+                    .inline-block 【分享审核】
+            .clearfix.m-top
+                .pull-right > a 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-pass 已通过
+                    .inline-block 【分享审核】
+            .clearfix.m-top
+                .pull-right > a 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+
+
+view('side')
+    .section
+        .btn.block.big > .inline-block.iconfont.icon-question-2 + .inline-block 发提问
+        .btn.block.big.custom-bg-color-5.m-top > .inline-block.iconfont.icon-edit-2 + .inline-block 写文章
+    .section.follow
+        .clearfix
+            dl
+                dt 99
+                dd 关注的内容
+            dl
+                dt 99
+                dd 关注的话题
+            dl
+                dt 99
+                dd 关注的专家
+        ul
+            li 我的提问
+            li 我的分享
+            li 我的回复
+            li 回复我的
+            li 我是管理
+    .section
+        span.h3 热门话题
+        span.more more
+        .layout-mt-small
+            .comment-list.ask-list > ul
+                li.topic-item
+                    a.normal(href="javascript:;")
+                        .img > .img-cont > img(src="images/demo/1.jpg")
+                        h4.text-overflow 温暖气氛
+                        .info 36关注 ｜ 1专家 ｜ 2问题
+                li.topic-item
+                    a.normal(href="javascript:;")
+                        .img > .img-cont > img(src="images/demo/1.jpg")
+                        h4.text-overflow 脱口秀
+                        .info 36关注 ｜ 1专家 ｜ 2问题
+                li.topic-item
+                    a.normal(href="javascript:;")
+                        .img > .img-cont > img(src="images/demo/1.jpg")
+                        h4.text-overflow 梦想常有
+                        .info 36关注 ｜ 1专家 ｜ 2问题
+    .section
+        span.h3 活跃专家
+        span.more more
+        .layout-mt-small.user-picture
+            .grid-row
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')
+                .col-md-4 > img.block(src='images/1.png')

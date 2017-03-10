@@ -21,8 +21,8 @@ view('topicdetail')
     
 view('menu')
     a(id='menu-news')(class ='active') 最新动态
-    a(id='menu2-exp' href='javascript:;')(class ='active') 专家分享
-    a(id='menu3-' href='javascript:;')(class ='active') 等待回答
+    a(id='menu-exp')(class ='active') 专家分享
+    a(id='menu-reply' )(class ='active') 等你回答
     hr
 view('list') 
     div(data-dynamic-key=state.menu)

@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click mydetail-*': 'toggleMore'
+    'click my-question-detail-*': 'toggleMore'
 };
 
 exports.handlers = {
@@ -20,6 +20,7 @@ exports.handlers = {
         region.show('ask/mymanage/topicdetail/news/mydetail', { id: id });
     }
 };
+
 
 exports.dataForTemplate = {
     trends: function(data) {

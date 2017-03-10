@@ -110,8 +110,7 @@ view('list')
                                 a.normal > img(src=cover)
                             .detail-wrapper
                                 p
-                                    .btn.radius.block
-                                        div(id='attendLive-'+id) 我要参与
+                                    .btn.radius.block(id='attendLive-'+id) 我要参与
                         .clearfix
                             .pull-right.tip-text
                             .title.text-overflow

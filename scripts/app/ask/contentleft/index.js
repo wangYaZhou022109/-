@@ -13,6 +13,11 @@ exports.store = {
             var attention = this.models.attention;
             attention.set({ id: 'default' });
             return this.get(attention);
+        },
+        relatedtome: function() {
+            var attention = this.models.attention;
+            attention.set({ id: 'default' });
+            return this.get(attention);
         }
     }
 };

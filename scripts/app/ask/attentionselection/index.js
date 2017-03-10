@@ -5,7 +5,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/related-to-me' },
+        trends: { url: '../ask-bar/trends/attentionselection' },
         concern: { url: '../ask-bar/trends/concern' }
     },
     callbacks: {

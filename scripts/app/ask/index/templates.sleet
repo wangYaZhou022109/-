@@ -4,7 +4,6 @@ module > .activity-page
     .activity-filter(data-region='filter')
     .ask-list(data-region='main')
 
-
 view('filter')
     .container
         .activity-tabs > ul
@@ -12,6 +11,5 @@ view('filter')
             li(id='filter-menu-topic' name='filter-menu-topic' class = '') > string('topic')
             li(id='filter-menu-expert' name='filter-menu-expert' class = '') > string('expert')
 
-view('main') 
+view('main')
     div(data-dynamic-key=state.menu)
-        

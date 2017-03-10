@@ -1,5 +1,5 @@
 exports.items = {
-    filter: 'filter',
+    side: 'side',
     main: 'main'
 };
 

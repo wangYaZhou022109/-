@@ -1,4 +1,7 @@
 .ask-list {
+    & ul {
+        @apply --clearfix;
+    }
     & li {
         padding-bottom: 0;
     }
@@ -21,7 +24,9 @@
         }
     }
     & li.topic-item,
-    & li.expert-item {
+    & li.expert-item,
+    & li.my-topic-item,
+    & li.follow-item {
         float: left;
         width: 33.33%;
         padding-right: calc(var(--large-space) / 2);
@@ -54,6 +59,41 @@
         & .img {
             margin-bottom: var(--large-space);
             width: calc(var(--large-space) * 4);
+        }
+    }
+    & li.my-topic-item {
+        width: 100%;
+        & .img {
+            margin-right: var(--space);
+            width: calc(var(--large-space) * 2);
+        }
+        & .title-row {
+            margin-bottom: var(--space);
+            & h4 {
+                margin-right: var(--space);
+                margin-bottom: 0;
+            }
+        }
+    }
+    & li.follow-item {
+        width: 33.33%;
+        & .img {
+            margin-right: var(--space);
+            width: calc(var(--large-space) * 1.5);
+        }
+        & h4 {
+            font-size: var(--font-size);
+        }
+        & .info {
+            font-size: var(--small-font);
+        }
+    }
+    &.min li.topic-item,
+    &.min li.expert-item {
+        padding-right: 0;
+
+        & .img {
+            width: 4em;
         }
     }
 
