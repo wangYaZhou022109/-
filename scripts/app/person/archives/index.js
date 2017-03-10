@@ -1,5 +1,23 @@
 exports.items = {
-    'person/archives/information': { region: 'information', isModule: true },
-    'person/archives/statistics': { region: 'statistics', isModule: true },
-    'person/archives/history': { region: 'history', isModule: true }
+    top: 'top',
+    menu: 'menu',
+    main: 'main',
+    notice: 'notice',
+    'person/edit': { isModule: true },
+    'person/archives/detail': { isModule: true }
+};
+exports.store = {
+    models: {
+        state: {}
+    },
+    callbacks: {
+        init: function() {
+            var state = this.models.state;
+            state.data.menu = 'archives';
+            state.data.archives = true;
+        }
+    }
+};
+exports.beforeRender = function() {
+    this.dispatch('init');
 };

@@ -23,7 +23,8 @@
     "video.js": "^5.11.9",
     "wavesurfer.js": "^1.2.7",
     "flatpickr": "^2.3.4",
-    "qrcodejs2": "^0.0.2"
+    "qrcodejs2": "^0.0.2",
+    "highcharts": "^4.2.5"
   },
   "devDependencies": {
     "browserify": "^13.1.0",

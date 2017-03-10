@@ -5,35 +5,15 @@
             float: left;
             padding-right: calc(var(--font-size) * 6);
 
-            &.studend {
-                & li {
-                    &:before {
-                        counter-increment: section;
-                        content: counter(section) ".";
-                        font-weight: bold;
-                        width: var(--large-space);
-                        float: left;
-                    }
-
-                    &:not(:nth-child(1),:nth-child(2),:nth-child(3)) {
-                        & .icon {
-                            background-color: var(--border-color);
-
-                        }
-
-                    }
-                }
-            }
-
             & .icon {
                 display: inline-block;
                 width: 1em;
                 height: 1em;
                 line-height: 1em;
                 border-radius: 50%;
-                color: white;
                 text-align: center;
                 margin-right: var(--space);
+                font-style: normal;
 
                 & .iconfont {
                     text-indent: 0;
@@ -54,57 +34,50 @@
         & li {
             @apply --clearfix;
 
-            margin-bottom: var(--bar-gap);
-            height: 1em;
             line-height: 1em;
+            padding: var(--space);
+            cursor: pointer;
+
+            &:hover {
+                background: var(--bg-color);
+            }
         }
 
         & .pull-right {
-            margin-left: var(--large-space);
+            margin-left: calc(var(--large-space) * 2);
         }
 
-        & .ranklist-first {
-            border-bottom-width: 1px;
-            border-bottom-style: dashed;
-            padding-bottom: var(--large-space);
-            margin-bottom: var(--large-space);
-            display: none;
+        & b {
+            font-weight: normal;
+            color: var(--font-tip-color);
         }
 
-        & .rank-pic {
-            width: 4em;
-            height: 4em;
-            overflow: hidden;
-            margin-right: 1em;
-            display: none;
+            & .right-title {
+                margin-left: 5em;
+            }
 
-            & .img {
-                height: 100%;
-                filter: grayscale(70%);
-                filter: gray;
+            & .title-icon {
+                font-size: 2.5em;
+                border: 1px solid;
                 border-radius: 50%;
+                width: 1.5em;
+                height: 1.5em;
+                line-height: 1.5em;
+                text-align: center;
 
+                & .iconfont {
+                    transform: scale(.8);
+                }
             }
 
-            & img {
-                max-height: 4em;
-            }
-        }
-
-        & .rank-info {
-            overflow: hidden;
-            & .icon {
-                margin: 0;
+            & .title-more {
+                margin-top: -1em;
             }
 
-            & .title {
-                max-width: 10em;
-                font-weight: bold;
+            & ul {
+                margin-top: var(--large-space);
             }
-        }
 
-        & .text-row {
-            margin-top: 1em;
-        }
     }
+
 }

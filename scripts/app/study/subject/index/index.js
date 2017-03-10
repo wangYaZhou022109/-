@@ -1,6 +1,5 @@
 var D = require('drizzlejs');
 exports.items = {
-    top: 'top',
     list: 'list'
 };
 
@@ -9,7 +8,7 @@ exports.store = {
         subjects: {
             url: '../course-study/course-front',
             type: 'pageable',
-            pageSize: 9,
+            pageSize: 16,
             root: 'items'
         },
         search: {
@@ -21,12 +20,13 @@ exports.store = {
         },
         download: {
             url: '../human/file/download'
-        }
+        },
+        topics: { data: [], url: '../system/topic/select', autoLoad: 'after' }
     },
     callbacks: {
         init: function() {
             var subjects = this.models.subjects;
-            subjects.params.type = 1; // 资源类型为专题
+            subjects.params.type = 2; // 资源类型为专题
             return this.get(subjects);
         },
         order: function(payload) {
@@ -41,8 +41,11 @@ exports.store = {
             this.models.search.changed();
             return this.get(this.models.subjects);
         },
-        searchByName: function(payload) {
-            this.models.subjects.params.searchContent = payload.name;
+        search: function(payload) {
+            var search = this.models.search;
+            D.assign(search.data, payload);
+            D.assign(this.models.subjects.params, payload);
+            this.models.search.changed();
             return this.get(this.models.subjects);
         }
     }

@@ -1,0 +1,25 @@
+#!handlebars
+module > .course-page
+    div(data-region='shareaudit' style='height:100%;')
+
+view('shareaudit') > form.vertical
+    echo('分享审核')
+    echo(shareaudit.question.title)
+    br
+    echo(shareaudit.question.content)
+    br
+    echo('附件：')
+    a(id='preview'+shareaudit.questionAttach.originalFile) > echo(shareaudit.questionAttach.name)
+    br
+    echo(shareaudit.member.fullName)
+    br
+    echo('提问时间：')
+    date(shareaudit.createTime)
+    br
+    echo('关联话题')
+    echo(shareaudit.topicStr)
+    input.input(name='id' type='hidden' value=shareaudit.id)
+    textarea.input.w-full(name='auditNote' x-rule='required' rows='3' placeholder='审核备注')
+    .buttons
+        .btn#pass > i.icon-plus + span > echo('通过')
+        .btn#out > i.icon-plus + span > echo('拒绝')

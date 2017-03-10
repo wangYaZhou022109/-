@@ -1,0 +1,36 @@
+#!handlebars
+
+module > .activity-page
+    .activity-list
+        .container
+            .main-list(style='height:3000px;')
+                .activity-category
+                    .activity-banner(data-region='banner')
+                    .pull-left(style='height:100px;width:70%;' data-region='list')
+                    .pull-right
+                        .content
+                            div(data-region='top')
+                            div(data-region='relevantexperts')
+                            div(data-region='relatedquestions')
+view('banner')
+    .bg-img > .container > .activitys-ul.banner
+        ul
+            li(style='height:300px;width:100%;float:left;')
+                .img(style='height:100px;width:200px;float:left;') > img(src='images/default-cover/default_exam.jpg' )
+                a(href='javascript:;') > echo(expert.member.fullName)
+                div > echo('我擅长的话题:') 
+                div > echo(expert.introduce) 
+view('list')
+    a(id='menu-expertsanswer' href='javascript:;')(class ='active') > string('expert') + string('answer')
+    a(id='menu-expertssharing' href='javascript:;')(class ='active') > string('experts-sharing') 
+    hr
+    div(data-dynamic-key=state.menu)
+view('top')
+    table.table
+        tr > td(align='center') > .btn.radius(id='question-question' data-name='id' data-value='1' style='height:50px;width:300px;text-align:center') > echo('我要关注')
+
+view('relevantexperts')
+    div(data-dynamic-key=relevantexperts.menu)
+
+view('relatedquestions')
+    div(data-dynamic-key=relatedquestions.menu)

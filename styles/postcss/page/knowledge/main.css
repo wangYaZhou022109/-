@@ -1,0 +1,52 @@
+.knowledge-list {
+    & li {
+        overflow: hidden;
+        padding: calc(var(--space)*2) 0;
+        border-bottom: 1px solid var(--border-color);
+
+        & i.iconfont {
+            font-size: 2.2em;
+        }
+
+
+        &:hover {
+            background: var(--bg-color);
+        }
+
+        & .knowledge-tit-con {
+            width: 80%;
+            overflow: hidden;
+
+            & .star-bar {
+                font-size: 1em;
+            }
+
+            & .knowledge-tit {
+                max-width: 80%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                height: calc(var(--space)*2);
+                display: inline-block;
+                margin-right: var(--space);
+            }
+
+            & .text-tips {
+                padding-top: var(--space);
+
+                & span {
+                    display: inline-block;
+                    padding-right: calc(var(--space)*2);
+                }
+            }
+        }
+
+        & .knowledge-tit-out {
+            width: 10%;
+
+            & .iconfont {
+                margin-top: calc(var(--space)*1.5);
+            }
+        }
+    }
+}

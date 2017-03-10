@@ -1,0 +1,29 @@
+.details-side {
+    & .upload-knowledge {
+        background: var(--custom-color-3);
+    }
+
+    & .h3 {
+        & small {
+            cursor: pointer;
+        }
+    }
+
+    & .relevant-knowledge {
+        & li {
+            overflow: hidden;
+            line-height: calc(var(--space)*2);
+            padding: var(--space) 0;
+
+            & a {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 80%;
+                height: calc(var(--space)*2);
+                margin: 0;
+                display: inline-block;
+            }
+        }
+    }
+}

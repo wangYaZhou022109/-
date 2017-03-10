@@ -1,0 +1,125 @@
+#!handlebars
+
+module > .live-details-page
+    .live-details-banner(data-region='live')
+    .page-main-wrapper
+        .side(data-region='side')
+        .main(data-region='main')
+
+view('live')
+    .page-main-wrapper
+        iframe(src=liveUrl frameborder='0' scrolling='no' width='100%'  align='middle' height='680px')
+view('side')
+    .page-side > .container
+        if(businesses)
+            section.section.relevant-topic
+                .h3 直播资源
+                .layout-mt-small
+                    each(businesses)
+                        .block.layout-mt-small
+                            .pull-right
+                                compare(businessType 'eq' 0)
+                                    a(href='#/exam/answer-paper/'+ businessId target='_blank') 参与考试
+                                compare(businessType 'eq' 1)
+                                    a 参与调研
+                                compare(businessType 'eq' 2)
+                                    a 参与评估
+                            .text-overflow
+                                echo(businessName)
+
+        section.section.student
+            .h3 TA们也参加了直播
+            .layout-mt-small.user-picture
+                .grid-row
+                    each(accessList)
+                        .col-md-4 > img.block(src=headPhoto)
+
+
+view('main')
+    .live-details-main.page-main > .container
+        section.section
+            .clearfix
+                .pull-left
+                    .common-title.inline-block
+                        echo(gensee.subject)
+                    .inline-block
+                        .star-wrapper.drop-down-wrapper
+                            .star-bar > .star(style='width:'+score.scorePercent+'%')
+                            .inline-block.sub-text > | 暂无评分
+                            .drop-down-content(class = if(score.hasScore 'hide')) > .content
+                                .text-center 我来评分
+                                .star-grade
+                                    .item(id='star-2' title='1星') > i.iconfont.icon-star-full
+                                    .item(id='star-4' title='2星') > i.iconfont.icon-star-full
+                                    .item(id='star-6' title='3星') > i.iconfont.icon-star-full
+                                    .item(id='star-8' title='4星') > i.iconfont.icon-star-full
+                                    .item(id='star-10' title='5星') > i.iconfont.icon-star-full
+                                .block.btn#submit-score 提交评分
+                .inline-block.layout-mr
+                    .inline-block.layout-ml.m-right > i.iconfont.icon-share
+                    .inline-block.m-left > i.iconfont.icon-favorite
+            .clearfix.live-details-teacher
+                .lecturer.clearfix
+                    .user-pic.pull-left > i.iconfont.icon-star-full
+                    .teacher.pull-left
+                        | 讲师：
+                        b > echo(gensee.lecturerStr)
+                        p > echo(gensee.lecturerDesc)
+                .time.clearfix.pull-left
+                    .user-pic.pull-left > i.iconfont.icon-star-full
+                    | 直播时间
+                    p
+                        date(gensee.startTime)
+                compare(sub.subStatus 'eq' 0)
+                    .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
+                else
+                    .btn.pull-right.m-top 已预约
+            .clearfix
+                each(gensee.genseeTopics)
+                    .btn-white > echo(topicName)
+               
+        if(courses)
+            section.section
+                .h3 直播回顾
+                .main-list.layout-mt-small
+                    ul
+                        each(courses)
+                            li > .content > a.normal(href='#/study/course/detail/'+ id target='_blank')
+                                .img
+                                    .img-cont > img(src=cover)
+                                    .detail-wrapper
+                                        p > echo(description)
+                                .clearfix
+                                    .title.text-overflow
+                                        echo(name)
+                                .clearfix.small-font.sub-title
+                                    i.iconfont.icon-star-full
+                                        if(studyMemberCount)
+                                            echo(studyMemberCount)
+                                        else
+                                            echo(0)
+                                    i.iconfont.icon-star-full.m-left
+                                        if(avgScore)
+                                            echo(avgScore)
+                                        else
+                                            echo(0)
+      
+        if(relatedGensee)
+            section.section
+                .h3 相关直播
+                .main-list.layout-mt-small
+                    ul
+                        each(relatedGensee)
+                            li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
+                                .img
+                                    .img-cont > img(src=cover)
+                                    .detail-wrapper
+                                        p > echo(genseeDesc)
+                                .clearfix
+                                    .title.text-overflow
+                                        echo(subject)
+                                .clearfix.small-font.sub-title
+                                    i.iconfont.icon-star-full
+                                        echo(attendNumber)
+                                    i.iconfont.icon-star-full.m-left
+                                        date(startTime)

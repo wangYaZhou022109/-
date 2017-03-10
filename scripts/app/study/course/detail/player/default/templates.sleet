@@ -10,4 +10,4 @@ view('default')
         if(state.register)
             .player-start-btn > .btn#register 开始学习
         else
-            .player-start-btn > .btn 加载出错，请稍后在点击
+            .player-start-btn > .btn 点击左侧学习

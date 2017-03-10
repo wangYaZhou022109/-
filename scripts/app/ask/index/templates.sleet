@@ -1,4 +1,15 @@
 #!handlebars
 
-module > .ask-page
-    div 问道
+module > .activity-page
+    .activity-filter(data-region='filter')
+    .ask-list(data-region='main')
+
+view('filter')
+    .container
+        .activity-tabs > ul
+            li(id='filter-menu-content' name='filter-menu-content' class = '') > string('content')
+            li(id='filter-menu-topic' name='filter-menu-topic' class = '') > string('topic')
+            li(id='filter-menu-expert' name='filter-menu-expert' class = '') > string('expert')
+
+view('main')
+    div(data-dynamic-key=state.menu)

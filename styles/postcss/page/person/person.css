@@ -1,5 +1,11 @@
+@import "index/layout.css";
 @import "index/top.css";
 @import "index/menu.css";
 @import "archives/archives.css";
 @import "lecture/lecture.css";
 @import "expert/expert.css";
+@import "lecture/lecture";
+@import "list/list.css";
+@import "edit/edit.css";
+@import "post/post.css";
+@import "ask/ask.css";

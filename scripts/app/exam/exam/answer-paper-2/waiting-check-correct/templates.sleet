@@ -1,0 +1,19 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .bottom-favorite
+        .item
+            i.iconfont.icon-favorite.active
+            span.m-left > a(id='waiting-check-' + state.id) 待检查
+            i.iconfont.icon-favorite.layout-ml-small
+            span.m-left > a(id='correct-' + state.id) 错误提报
+
+view('correct')
+    br
+    div
+        echo('您为什么要举报此题？请说明原因。')
+    div
+        input.input(id='reason' value=state.correct.content placeholder='请描述举报理由')

@@ -1,0 +1,49 @@
+.tabs {
+    & ul {
+        @apply --clearfix;
+        background: var(--bg-color);
+        line-height: 2.5;
+    }
+
+    & li {
+        float: left;
+        padding: 0 var(--large-space);
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+            background: var(--bg-color-3);
+            color: var(--main-color);
+        }
+
+    }
+
+    &.line {
+        & ul {
+            background: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        & li {
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1px;
+            
+            &:hover,
+            &.active {
+                border-color: var(--main-color);
+                color: var(--main-color);
+                background: none;
+            }
+        }
+    }
+}
+
+.tabs-cont {
+    & .tabs-cont-item {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+#!handlebars
+module > .course-page
+    div(data-region='reportaudit' style='height:100%;')
+
+view('reportaudit') > form.vertical
+    echo('举报审核')
+    echo('举报人')
+    echo(reportaudit.member.fullName)
+    br
+    echo('举报次数')
+    echo(reportaudit.accuseNum)
+    br
+    echo('来源：')
+    echo('问吧')
+    br
+    echo('被举报人：')
+    echo(reportaudit.beUser)
+    echo('被举内容：')
+    echo(reportaudit.accuseRecord.objectId)
+    echo('被举理由：')
+    echo(reportaudit.accuseRecord.accuseNote)
+    echo('被举类型：')
+    echo(reportaudit.accuseRecord.type)
+    br
+    echo('举报时间：')
+    date(reportaudit.accuseRecord.createTime)
+    input.input(name='id' type='hidden' value=audit.id)
+    echo('审核备注:')
+    echo(audit.auditNote)

@@ -5,6 +5,8 @@
 @import "lecture.css";
 @import "ranklist.css";
 @import "title.css";
+@import "config.css";
+@import "banner-notice.css";
 
 :root {
     --recommend-bar-height: 15em;
@@ -12,9 +14,6 @@
 }
 
 .home-page{
-  & > .section:nth-child(odd) {
-      background-color: var(--bg-color);
-  }
   & a.bar, & a.content{
       color:inherit;
       display: block;

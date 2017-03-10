@@ -1,0 +1,49 @@
+.form {
+    & .form-row {
+        margin-bottom: calc(var(--space) * 2);
+
+        & .content,
+        & > label {
+            display: inline-block;
+            position: relative;
+            overflow: visible;
+            visibility: visible;
+        }
+
+        & .sub-text {
+            position: absolute;
+            font-size: var(--small-font);
+            white-space: nowrap;
+            left: 0;
+            bottom: -calc(var(--space) * 2);
+        }
+
+        & > label {
+            width: 6em;
+            text-align: right;
+        }
+
+        & .input {
+            width: 20em;
+        }
+
+        &.textarea-row {
+            @apply --clearfix;
+
+            & span,
+            & label {
+                vertical-align: top;
+                float: left;
+            }
+            & .content {
+                display: block;
+                overflow: hidden;
+            }
+            & textarea {
+                display: block;
+                width: 100%;
+            }
+        }
+    }
+
+}

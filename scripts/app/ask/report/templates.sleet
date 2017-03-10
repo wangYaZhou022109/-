@@ -1,0 +1,27 @@
+#!handlebars
+
+module 
+    div(data-region='details')
+
+view('details') > form
+    table
+        tr
+            td
+                input(type='radio' name='type'  value=1)
+                label(class='') > string('report-1')
+                input(type='radio' name='type' value=2)
+                label(class='') > string('report-2')
+        tr
+            td
+                input(type='radio' name='type' value=3)
+                label(class='') > string('report-3')
+                input(type='radio' name='type' value=4 'checked') 
+                label > string('report-4')
+        tr 
+            td
+                label > string('report') + string('explain') 
+                textarea.input.w-full(name='accuseNote' x-rule='required' rows='5')
+        tr
+            td
+                .btn.radius.block(id='report' style='height:50px;width:200px;text-align:center') > string('submit')
+            

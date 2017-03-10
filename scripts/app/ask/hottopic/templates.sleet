@@ -1,0 +1,19 @@
+#!handlebars
+module 
+    div(data-region='list')
+
+view('list') 
+    ul
+        li > string('hot') + string('topic') + a(id='hot-topic' href='javascript:;' style='float:right;')(class ='active') > string('more')
+    table.table(width='100%')
+        each(topic)
+            tr(height='80px'  )
+                td
+                    img(style='height:80px;width:80px;float:left;' src='1.jpg' )
+                    a(id='topic-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
+                    br
+                    echo(concernList.length) + string('follow') + echo('|') + echo(expertList.length) + string('expert') + echo('|') + echo(questionList.length) + string('question')
+                     
+                
+
+    

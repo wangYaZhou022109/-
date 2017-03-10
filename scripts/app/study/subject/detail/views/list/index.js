@@ -1,5 +1,6 @@
 exports.items = {
-    pannel: 'pannel'
+    pannel: 'pannel',
+    more: ''
 };
 
 exports.store = {
@@ -8,6 +9,15 @@ exports.store = {
         subject: {},
         lists: {
             url: '../course-study/course-study-progress/list'
+        },
+        pageList: {
+            url: '../course-study/course-study-progress/page-list',
+            type: 'pageable',
+            pageSize: 10,
+            root: 'items'
+        },
+        download: {
+            url: '../human/file/download'
         }
     },
     callbacks: {
@@ -22,6 +32,12 @@ exports.store = {
                 return this.get(this.models.lists);
             }
             return this.models.lists;
+        },
+        more: function() {
+            var subject = this.models.subject.data,
+                pageList = this.models.pageList;
+            pageList.params.businessId = subject.id;
+            return this.get(pageList);
         }
     }
 };

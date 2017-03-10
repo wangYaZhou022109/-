@@ -3,11 +3,17 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
     setting = {},
     currentUser = {};
 
+oauthOptions = {
+    clientId: 999,
+    provider: 'https://oauth9.zhixueyun.com/',
+    returnTo: 'https://dev9.zhixueyun.com'
+};
+
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 66,
+    clientId: 13,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.1.10'
+    returnTo: 'http://192.168.9.115'
 };
 // @endif
 
@@ -29,6 +35,7 @@ plupload = require('./vendors/upload/moxie.min');
 window.moxie = plupload.moxie;
 window.mOxie = plupload.mOxie;
 
+require('highcharts/highcharts.src');
 require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
 require('./vendors/upload/jquery.plupload.queue.min');
@@ -46,6 +53,7 @@ require('./app/ext/pdf');
 require('./app/ext/videojs');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
+require('./app/ext/highcharts');
 require('./app/main/modal/modal-region');
 require('./app/ext/flatpickr');
 require('./app/ext/tree');
@@ -85,7 +93,7 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'train']
+    routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'news', 'train', 'knowledge', 'ask-new', 'center']
 });
 
 D.PageableModel.setDefault({

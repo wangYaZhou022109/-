@@ -1,0 +1,40 @@
+#!handlebars
+module > .course-page
+    .activity-list
+        .container
+            .main-list(style='height:3000px;')
+                .activity-category
+                    div(data-region='popup')  
+                    .pull-left
+                        .content
+                            div(data-region='topicdetail')
+                            div(data-region='menu')
+                            div(data-region='list')
+                    .pull-right
+                        .content
+                            div(data-region='right')
+
+view('topicdetail')
+    echo('话题名称：')
+    echo(topicdetail.name)
+    echo(topicdetail.description)
+    
+view('menu')
+    a(id='menu-news')(class ='active') 最新动态
+    a(id='menu-exp')(class ='active') 专家分享
+    a(id='menu-reply' )(class ='active') 等你回答
+    hr
+view('list') 
+    div(data-dynamic-key=state.menu)
+view('right')
+    .buttons
+        .btn#display > i.icon-plus + span > echo('我要关注')
+    echo('999')
+    echo('8')
+    echo('88')
+    echo('88')
+    br
+    echo('关注者')
+    echo('专家')
+    echo('问题')
+    echo('分享')

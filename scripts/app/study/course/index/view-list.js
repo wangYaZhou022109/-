@@ -1,14 +1,19 @@
+var _ = require('lodash/collection'),
+    maps = require('./app/util/maps');
 exports.bindings = {
     state: true,
     courses: true,
     down: false,
-    search: true,
+    search: 'changeSearch',
+    topics: true
 };
 
 exports.events = {
     'click sort-*': 'sort',
     'click three-item*': 'selectThree',
-    'click four-item*': 'selectFour'
+    'click four-item*': 'selectFour',
+    'click topic-*': 'selectTopic',
+    'click companyType-*': 'changeCompanyType'
 };
 
 exports.handlers = {
@@ -27,6 +32,12 @@ exports.handlers = {
         // 如果相同 改变排序升降, 不同,默认降序
         var data = (searchDate.orderBy === id) ? { order: orderMap[searchDate.order] } : { order: 2, orderBy: id };
         return this.module.dispatch('search', data);
+    },
+    selectTopic: function(id) {
+        this.module.dispatch('search', { topicId: id });
+    },
+    changeCompanyType: function(id) {
+        this.module.dispatch('search', { companyType: id });
     }
 };
 
@@ -55,9 +66,28 @@ exports.dataForTemplate = {
             member_asc: data.search.orderBy === '1' && data.search.order === 1,
             member_desc: data.search.orderBy === '1' && data.search.order === 2
         };
+    },
+    topics: function(data) {
+        var selectId = data.search.topicId;
+        var list = data.topics;
+        return _.map(list, function(m) {
+            var obj = m || {};
+            delete obj.active;
+            if (selectId === obj.id) obj.active = true;
+            return obj;
+        });
+    },
+    companyTypes: function() {
+        return maps.get('course-list-company-type');
     }
 };
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'courses' }
 }];
+
+exports.changeSearch = function() {
+    var params = this.bindings.search.data;
+    params.categoryId = params.menu2 || params.menu1;
+    this.module.dispatch('searchCourse', { params: params });
+};
