@@ -1,6 +1,6 @@
-exports.items = {
-    details: 'details'
-};
+// exports.items = {
+//     details: 'details'
+// };
 
 exports.store = {
     models: {
@@ -21,3 +21,24 @@ exports.store = {
 
 exports.afterRender = function() {
 };
+
+exports.title = '专家申请';
+
+exports.buttons = [{
+    text: '提交申请'
+}];
+
+exports.components = [function() {
+    return {
+        id: 'topics',
+        name: 'picker',
+        options: {
+            module: 'ask-new/expertapply',
+            picker: 'topics',
+            componentId: 'tags',
+            required: true, // 不允许为空
+            limit: 3,       // 关联话题数
+            inputName: 'topicIds'
+        }
+    };
+}];

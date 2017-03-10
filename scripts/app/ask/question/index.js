@@ -20,3 +20,10 @@ exports.store = {
 
 exports.afterRender = function() {
 };
+
+
+exports.title = '我要提问';
+
+exports.buttons = [{
+    text: '发布'
+}];

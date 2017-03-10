@@ -1,3 +1,4 @@
+var $ = require('jquery');
 exports.bindings = {
     state: true,
     attention: true
@@ -10,6 +11,8 @@ exports.events = {
 exports.handlers = {
     showMenu: function(menu) {
         var state = this.bindings.state;
+        $(this.$('menu-' + menu)).addClass('active').siblings().removeClass('active');
+       // $(this.$('tabs-cont-item-' + menu)).addClass('active').siblings().removeClass('active');
         state.data = {};
         state.data.menu = menu || 'alldynamic';
         state.data[menu] = true;
