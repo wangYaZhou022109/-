@@ -247,7 +247,7 @@ module.exports = {
         20: '二十'
     },
     'trainee-auditStatus': {
-        0: '待审核', 1: '已通过'
+        0: '待审核', 1: '已通过', 2: '已拒绝'
     },
     'trainee-show-auditStatus': {
         0: '待审核', 1: '-'
