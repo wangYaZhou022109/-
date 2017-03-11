@@ -1,11 +1,14 @@
 var D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     RECOMMEND_SIZE = 6,
     RESEARCH_TYPE = 1;
 exports.items = {
     banner: 'banner',
     filter: 'filter',
     list: 'list',
-    'exam/index': { isModule: true }
+    'exam/index': { isModule: true },
+    'exam-tips': '',
+    'research-tips': ''
 };
 
 exports.store = {
@@ -77,6 +80,14 @@ exports.store = {
                 this.models.researchActivitys.turnToPage(page + 1);
                 this.get(this.models.researchActivitys);
             }
+        },
+        getExamById: function(payload) {
+            var exams = this.models.exams.data;
+            return _.find(exams, ['id', payload.id]);
+        },
+        getResearchById: function(payload) {
+            var researchs = this.models.researchActivitys.data;
+            return _.find(researchs, ['id', payload.id]);
         }
     }
 };

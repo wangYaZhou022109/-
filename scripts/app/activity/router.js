@@ -1,3 +1,4 @@
+
 exports.routes = {
     index: 'showIndex',
     'gensee/detail/:id': 'showLiveDetails',
@@ -15,3 +16,4 @@ exports.showLiveDetails = function(targetId) {
 exports.showClassDetails = function() {
     return this.app.show('content', 'activity/class-details');
 };
+
