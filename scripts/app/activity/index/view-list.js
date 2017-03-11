@@ -5,14 +5,21 @@ exports.bindings = {
     params: true,
     down: true,
     gensees: true,
+    exams: true,
+    researchActivitys: true
 };
 
 exports.events = {
     'click category-item-*': 'toggleItem',
     'click to-activity-*': 'toActivity',
-    'click attendLive-*': 'attendLive',
+    'click attendLive-*': 'attendLive'
 };
-
+exports.actions = {
+    'click exam-left': 'examLeft',
+    'click exam-right': 'examRight',
+    'click research-left': 'researchLeft',
+    'click research-right': 'researchRight'
+};
 exports.handlers = {
     toggleItem: function(el) {
         var me = this;
@@ -39,13 +46,15 @@ exports.dataForTemplate = {
     activitys: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
         var defultImg = 'images/default-cover/default_exam.jpg';
-        data.activitys.forEach(function(obj) {
-            var activity = obj || {};
-            activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
-            if (activity.description) {
-                activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
-            }
-        });
+        if (data.activitys.forEach) {
+            data.activitys.forEach(function(obj) {
+                var activity = obj || {};
+                activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
+                if (activity.description) {
+                    activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
+                }
+            });
+        }
         return data.activitys;
     },
     gensees: function(data) {
@@ -76,5 +85,5 @@ exports.dataForTemplate = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'activitys' }
+    id: 'pager', name: 'pager', options: { model: 'exams' }
 }];
