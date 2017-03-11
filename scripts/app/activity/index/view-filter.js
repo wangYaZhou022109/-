@@ -11,11 +11,11 @@ exports.events = {
 exports.handlers = {
     toggleItem: function(el) {
         var me = this,
-            isOverdue = true;
-        if (el === '1') {
-            isOverdue = false;
+            searchStatus = '';
+        if (el) {
+            searchStatus = el;
         }
-        me.module.dispatch('search', { isOverdue: isOverdue });
+        me.module.dispatch('search', { searchStatus: searchStatus });
     }
 };
 
@@ -27,6 +27,17 @@ exports.dataForActions = {
     search: function() {
         return {
             name: $(this.$$('[name="activity-name"]')).val()
+        };
+    }
+};
+exports.dataForTemplate = {
+    currentStep: function(data) {
+        var step = data.params.searchStatus;
+        return {
+            all: !step || step === '',
+            running: step === 1 || step === '1',
+            notStart: step === 2 || step === '2',
+            finish: step === 3 || step === '3'
         };
     }
 };
