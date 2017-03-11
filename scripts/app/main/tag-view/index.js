@@ -40,6 +40,7 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    console.log('我在这啊！');
     return this.dispatch('init');
 };
 

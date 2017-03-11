@@ -4,10 +4,10 @@ var D = require('drizzlejs');
 exports.title = '选择话题';
 exports.large = true;
 
-exports.items = {
-    content: 'content',
-    toolbox: 'toolbox'
-};
+// exports.items = {
+//     content: 'content',
+//     toolbox: 'toolbox'
+// };
 
 exports.store = {
     models: {
