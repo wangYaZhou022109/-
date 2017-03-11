@@ -383,14 +383,13 @@ exports.store = {
             if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
                 this.app.message.error('切屏次数已满，强制交卷');
                 return false;
-            } else {
-                D.assign(exam, {
-                    lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
-                });
-                this.models.exam.save();
-                this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
-                return true;
             }
+            D.assign(exam, {
+                lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
+            });
+            this.models.exam.save();
+            this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
+            return true;
         }
     }
 };
@@ -430,7 +429,6 @@ exports.afterRender = function() {
             return me.dispatch('delay', { delay: Number(delay) });
         });
     }
-    debugger;
     changeScreen.call(this);
 };
 
@@ -468,7 +466,6 @@ getCurrentStatus = function(id) {
 
 changeScreen = function() {
     var me = this;
-    debugger;
     document.addEventListener('visibilitychange', function() {
         if (document.visibilityState === 'hidden') {
             return me.dispatch('lowerSwitchTimes');

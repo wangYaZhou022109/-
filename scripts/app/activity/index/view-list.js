@@ -12,7 +12,9 @@ exports.bindings = {
 exports.events = {
     'click category-item-*': 'toggleItem',
     'click to-activity-*': 'toActivity',
-    'click attendLive-*': 'attendLive'
+    'click attendLive-*': 'attendLive',
+    'click exam-*': 'showExamPaper',
+    'click research-*': 'showResearchPaper'
 };
 exports.actions = {
     'click exam-left': 'examLeft',
@@ -39,6 +41,20 @@ exports.handlers = {
     },
     attendLive: function(id) {
         window.open('#/activity/gensee/detail/' + id, '_blank');
+    },
+    showExamPaper: function(id) {
+        var mod = this.module.items['exam-tips'],
+            me = this;
+        return this.module.dispatch('getExamById', { id: id }).then(function(data) {
+            me.app.viewport.modal(mod, { exam: data });
+        });
+    },
+    showResearchPaper: function(id) {
+        var mod = this.module.items['research-tips'],
+            me = this;
+        return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
+            me.app.viewport.modal(mod, { research: data });
+        });
     }
 };
 

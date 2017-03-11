@@ -8,10 +8,10 @@ module > .achievement-content
 
 
 view('head')
-    .pull-left.title > echo('正在作答: ' researchRecord.member.fullName)
+    .pull-left.title > echo('正在参与: ' researchRecord.researchQuestionary.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right > echo(researchRecord.researchQuestionary.name)
+            li.border.right > echo('调研人: ' researchRecord.member.fullName)
         .btn#submit > string('exam.research.research-detail.submit')
 
 view('side')
@@ -27,7 +27,3 @@ view('main')
             .h3.m-bottom > echo(dimensionIndex name)
             each(questions)
                 div(data-dynamic-key=id)
-
-view('notice')
-    .preview-content
-        echo(questionaryDetail)

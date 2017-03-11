@@ -10,6 +10,11 @@ exports.routes = {
     'research-activity/research-detail/:id': 'showResearchDetail'
 };
 
+exports.interceptors = {
+    'exam/answer-paper-2': 'clearHeadAndBottom',
+    'research-activity/research-detail': 'clearHeadAndBottom',
+};
+
 exports.showIndex = function(id) {
     return this.app.show('content', 'exam/index', { id: id });
 };
@@ -34,13 +39,8 @@ exports.showScore = function(id) {
     return this.app.show('content', 'exam/exam/score-detail-paper-test', { examRecordId: id });
 };
 
-exports.showResearchDetail = function(id) {
+exports.showResearchDetail = function(i, id) {
     return this.app.show('content', 'exam/research-activity/research-detail', { researchQuestionaryId: id });
-};
-
-
-exports.interceptors = {
-    'exam/answer-paper-2': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {
