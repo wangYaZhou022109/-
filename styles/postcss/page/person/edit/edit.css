@@ -27,7 +27,7 @@
 
     & .phone-number-list {
         margin-bottom: var(--large-space);
-        
+
         & li {
             @apply --clearfix;
 

@@ -48,7 +48,7 @@
             position: relative;
             margin-right: var(--large-space);
 
-            &:nth-last-child(2) {
+            &:nth-last-of-type(1) {
                 margin-right: 0;
             }
         }
@@ -86,6 +86,10 @@
             & .btn {
                 padding-left: 1em;
                 padding-right: 1em;
+            }
+
+            & .iconfont {
+                margin-right: 0;
             }
         }
 
@@ -129,6 +133,55 @@
             & img {
                 max-width: 100%;
                 display: block;
+            }
+        }
+
+        & .user-info-top {
+            @apply --clearfix;
+
+            & .user-pic {
+                width: 5em;
+                height: 5em;
+                margin-right: 1em;
+            }
+
+            & .item {
+                padding: var(--space) 0;
+                display: block;
+            }
+
+            & .lv {
+                @apply --lv;
+            }
+        }
+
+        & .user-info-list {
+            @apply --clearfix;
+
+            margin-top: 1em;
+            padding: 2em 0 1em;
+
+            & .item {
+                float: left;
+                width: 50%;
+                text-align: center;
+                margin: 0;
+
+            }
+        }
+
+        & .message-list {
+            max-width: 12em;
+            margin-bottom: 1em;
+
+            & li {
+                padding: 1em 0;
+                border-bottom: 1px dashed var(--border-color);
+            }
+
+            & .sub-text {
+                font-size: var(--small-font);
+                margin-top: 1em;
             }
         }
     }
