@@ -2,7 +2,7 @@
 module
     div(data-region='list')
 
-view('list')
+view('test')
     each(trends)
         ul 
             li(style='font-weight:bold')
@@ -22,3 +22,31 @@ view('list')
                 echo('|')
                 a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
                 hr
+
+view('list')
+    li
+        .user-pic > img(src='images/d2.jpg')
+        .comment-content
+            .h4 提问标题提问标题提问标题提问标题提问标题提问
+            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+            .user-info
+                a(href='javascript:;') 张三丰
+                span ·提问·
+                span.sub-text 2016-09-09 09:09
+            .comment-operation
+                .pull-left > .sub-text 来自话题：公司文化
+                .text-right
+                    .item > a.normal(href='javascript:;') 取消关注
+                    .item > a.normal(href='javascript:;') 添加讨论
+                    .item
+                        .drop-down-wrapper
+                            .drop-down-btn 分享
+                            .drop-down-content > .content
+                                ul
+                                    li 分享1
+                                    li 分享2
+                                    li 分享3
+                    .item > a.normal(href='javascript:;') 举报
+            .comment-reply.m-top
+                textarea.input.w-full.block(rows="1")
+                .btn 回复
