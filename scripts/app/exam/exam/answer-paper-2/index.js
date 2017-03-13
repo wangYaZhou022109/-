@@ -301,7 +301,7 @@ exports.store = {
                 answer = this.models.answer;
 
             exam.load();
-            if (!exam.data) {
+            if (!exam.data || (exam.data && exam.data.id !== payload.examId)) {
                 D.assign(exam.params, { examId: payload.examId });
                 return this.get(exam).then(function() {
                     exam.save();
@@ -382,7 +382,9 @@ exports.store = {
             var exam = this.models.exam.data;
             if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
                 this.app.message.error('切屏次数已满，强制交卷');
-                return false;
+                return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
+                    WS.closeConnect();
+                });
             }
             D.assign(exam, {
                 lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
