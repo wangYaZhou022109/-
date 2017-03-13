@@ -1,6 +1,6 @@
 #! handlebars
 
-module > .achievement-content
+module > .achievement-content.main-side
     .achievement-side.bg-color
         div(data-region='side')
     .achievement-head(data-region='head')
