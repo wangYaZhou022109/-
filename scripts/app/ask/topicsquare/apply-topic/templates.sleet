@@ -1,0 +1,56 @@
+#! handlebars
+
+module > .edit-info-page
+    .tabs.line > ul
+        li.active#item-1 申请话题
+        li#item-2 我的话题
+    .tabs-cont > ul
+        li.active.tabs-cont-item#tabs-cont-item-1(data-region='apply-topic')
+        li.tabs-cont-item#tabs-cont-item-2(data-region='my-topic')
+
+view('apply-topic') > .base-info
+    .form
+        .pic > img(src='images/default-cover/default_topic.jpg') + .btn.block.white.border 上传话题图标
+        .info
+            .form-row.textarea-row
+                label.m-top.required 话题名称：
+                .content > input.input(placeholder='输入您申请的话题名称')
+            .form-row.textarea-row
+                label.required 话题描述：
+                .content > textarea.input(rows='3' placeholder='输入您申请的话题描述')
+            .form-row.textarea-row
+                label.required 申请理由：
+                .content > textarea.input(rows='3' placeholder='输入您申请该话题的理由')
+
+view('my-topic')
+    .comment-list.ask-list > ul
+        li.my-topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                .title-row
+                    .pull-right.sub-title 申请时间：2016-12-17 20:45
+                    h4.pull-left.text-overflow 温暖气氛
+                    span.tag-stat.custom-bg-color-2 待审核
+                .info
+                    | 话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述
+                    a(href="javascript" target="_blank") 查看详情
+        li.my-topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                .title-row
+                    .pull-right.sub-title 申请时间：2016-12-17 20:45
+                    h4.pull-left.ext-overflow 脱口秀
+                    span.tag-stat.custom-bg-color-4 已通过
+                .info
+                    | 话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述
+                    a(href="javascript" target="_blank") 查看详情
+        li.my-topic-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/demo/1.jpg")
+                .title-row
+                    .pull-right.sub-title 申请时间：2016-12-17 20:45
+                    h4.pull-left.text-overflow 脱口秀
+                    span.tag-stat.custom-bg-color-3 被拒绝
+                .info
+                    | 话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话题描述话...
+                    a(href="javascript" target="_blank") 查看详情
