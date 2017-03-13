@@ -20,8 +20,7 @@ exports.handlers = {
         e.preventDefault();
         return this.module.dispatch('move', { id: id, offset: 1 });
     },
-    selectQuestion: function(id, e) {
-        e.preventDefault();
+    selectQuestion: function(id) {
         return this.module.dispatch('selectQuestion', { id: id });
     },
     toggleMore: function(id) {

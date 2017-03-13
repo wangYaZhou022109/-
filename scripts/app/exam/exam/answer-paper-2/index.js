@@ -62,7 +62,8 @@ exports.store = {
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
-                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                            // singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                            singleMode: false,
                             currentQuestion: types.getFirstQuestion()
                         };
                         this.save();
@@ -302,6 +303,7 @@ exports.store = {
 
             exam.load();
             if (!exam.data || (exam.data && exam.data.id !== payload.examId)) {
+                exam.clear();
                 D.assign(exam.params, { examId: payload.examId });
                 return this.get(exam).then(function() {
                     exam.save();
@@ -380,17 +382,19 @@ exports.store = {
         },
         lowerSwitchTimes: function() {
             var exam = this.models.exam.data;
-            if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
-                this.app.message.error('切屏次数已满，强制交卷');
-                return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
-                    WS.closeConnect();
+            if (exam.allowSwitchTimes) {
+                if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
+                    this.app.message.error('切屏次数已满，强制交卷');
+                    // return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
+                    //     WS.closeConnect();
+                    // });
+                }
+                D.assign(exam, {
+                    lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
                 });
+                this.models.exam.save();
+                this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
             }
-            D.assign(exam, {
-                lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
-            });
-            this.models.exam.save();
-            this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
             return true;
         }
     }

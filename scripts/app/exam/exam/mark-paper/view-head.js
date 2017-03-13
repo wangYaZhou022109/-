@@ -1,17 +1,18 @@
+var strings = require('./app/util/strings');
+
 exports.bindings = {
-    state: true,
-    exam: false
+    state: true
 };
 
 exports.actions = {
-    'click submit': 'submit'
+    'click submit': 'submitPaper'
 };
 
 exports.dataForActions = {
-    submit: function() {
+    submitPaper: function() {
         var me = this;
         return this.Promise.create(function(resolve) {
-            var message = '确定要提交试卷？';
+            var message = strings.get('exam.submit-paper-confirm');
             me.app.message.confirm(message, function() {
                 resolve({ submitType: 'Hand' });
             }, function() {

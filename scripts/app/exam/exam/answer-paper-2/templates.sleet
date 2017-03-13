@@ -22,16 +22,16 @@ view('side')
                     .down-arrow(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
                 each(questions)
                     compare(status 'eq' 'check')
-                        .list-item.check(id='question-'+id) > echo(index)
+                        a.list-item.check(id='question-'+id href='#question-' + id) > echo(index)
 
                     compare(status 'eq' 'active')
-                        .list-item.active(id='question-'+id) > echo(index)
+                        a.list-item.active(id='question-'+id href='#question-' + id) > echo(index)
 
                     compare(status 'eq' 'current')
-                        .list-item.current(id='question-'+id) > echo(index)
+                        a.list-item.current(id='question-'+id href='#question-' + id) > echo(index)
 
                     compare(status 'eq' 'init')
-                        .list-item(id='question-'+id) > echo(index)
+                        a.list-item(id='question-'+id href='#question-' + id) > echo(index)
 
 view('head')
     .pull-left.title > echo('正在作答: ' state.name)
