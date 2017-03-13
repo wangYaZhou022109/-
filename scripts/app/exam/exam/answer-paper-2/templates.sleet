@@ -17,8 +17,9 @@ view('side')
         li(id='list-item-' + @index)
             .list-title > i.iconfont.icon-type.m-right > echo(name '(共' totalScore '分)')
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
-                span.up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-left-circle
-                span.down-arrow(id='next-' + @index)> i.iconfont.icon-arrow-left-circle
+                .items-pagination
+                    .up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
+                    .down-arrow(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
                 each(questions)
                     compare(status 'eq' 'check')
                         .list-item.check(id='question-'+id) > echo(index)
