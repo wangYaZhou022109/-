@@ -1,5 +1,4 @@
 exports.title = '批量导入学员';
-exports.large = true;
 
 exports.bindings = {
     dowloadExcel: true,

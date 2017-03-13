@@ -1,7 +1,6 @@
 var D = require('drizzlejs');
 
 exports.title = '选择用户';
-exports.large = true;
 
 exports.items = {
     content: 'content',

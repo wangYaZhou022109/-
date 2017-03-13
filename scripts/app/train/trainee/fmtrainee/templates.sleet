@@ -1,29 +1,24 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='search')
-        .div(data-region='main')
+module
+    br
+    .div(data-region='search')
+    .div(data-region='main')
 
 view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('员工编号')
-            input.input(name='memberName')
-        div.col-sm-3
-            echo('姓名')
-            input.input(name='memberFullName')
-        div.col-sm-3
-            echo('所属单位')
-            input.input(name='organizationName')
-        div.col-sm-3
-            btn.btn#search > echo('搜索')
+    echo('员工编号')
+    input.input(name='memberName')
+    echo('姓名')
+    input.input(name='memberFullName')
+    echo('所属单位')
+    input.input(name='organizationName')
+    btn.btn#search > echo('搜索')
 
 view('main')
     div.text-center
-        echo('学员列表')
+        p.col-sm-2 > echo('学员列表')
     .buttons
-        input.input(name='add-trainee-input' placeholder='人员编号')
+        input.input(id='add-trainee-input' placeholder='人员编号')
         .btn#addTrainee > echo('添加')
         .btn#group > echo('学员分组')
         .btn#addAllTrainee > echo('添加学员')
@@ -37,7 +32,7 @@ view('main')
             th > echo('员工编号')
             th > echo('性别')
             th > echo('民族')
-            th > echo('机构')
+            th > echo('单位')
             th > echo('部门')
             th > echo('职务')
             th > echo('手机')
@@ -65,7 +60,7 @@ view('situation')
         table.table
             thead > tr
                 th > echo('序号')
-                th > echo('机构/部门')
+                th > echo('单位/部门')
                 th > echo('已报名人数/本省名额')
             tbody > each(situation.classQuotaDetails) > tr
                 td > echo(i)
@@ -76,7 +71,7 @@ view('import')
     div > form(method='post' id='import-form')
         input(type='hidden' id='importType' name='importType' value='1')
         input(type='hidden' id='access_token' name='access_token')
-    div > echo('第一步:') + .btn#download-Excel-1 > echo('下载模板')
+    div > h4 > echo('第一步：') + a(id='download-Excel-1') > echo('下载模板')
     div > h4 > echo('第二步：导入更新模板')
     div > #uploadExcel > echo('导入模板')
     if(errors) > div

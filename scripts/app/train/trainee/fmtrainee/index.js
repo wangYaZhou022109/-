@@ -165,7 +165,6 @@ exports.store = {
                 delGroups: JSON.stringify(delGroups.data),
                 classId: state.classId
             });
-            console.log(groupModel.data);
             return me.save(me.models.groupModel);
         }
     }

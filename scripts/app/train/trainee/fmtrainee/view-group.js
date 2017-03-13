@@ -20,6 +20,9 @@ exports.handlers = {
         var name = $(this.$('add-group-input')).val().trim();
         if (name !== '') {
             this.module.dispatch('addGroup', { name: name });
+        } else {
+            this.app.message.alert('分组名称不能为空');
+            $(this.$('add-group-input')).val('');
         }
     },
     delGroup: function(id) {

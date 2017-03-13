@@ -66,21 +66,21 @@ exports.handlers = {
             data.id = id;
             data.sort = val;
             me.module.dispatch('updateSort', data).then(function() {
-                $(me.$('input-sort' + id)).css('display', 'none');
-                $(me.$('sort' + id)).css('display', 'inline');
-                $(me.$('delete' + id)).css('display', 'inline');
-                $(this.$('shuxian' + id)).css('display', 'inline');
                 me.module.dispatch('init', classId);
             });
         }
+        $(me.$('input-sort' + id)).css('display', 'none');
+        $(me.$('sort' + id)).css('display', 'inline');
+        $(me.$('delete' + id)).css('display', 'inline');
+        $(this.$('shuxian' + id)).css('display', 'inline');
     },
     addTrainee: function() {
-        var memberId = this.$$('input[name="add-trainee-input"]')[0].value;
+        var memberId = $(this.$('add-trainee-input')).val().trim();
         var classId = this.bindings.state.data;
         var data = {};
         var me = this;
         if (memberId === '') {
-            this.app.message.alert('请输入正确的人员编号！');
+            this.app.message.alert('人员编号不能为空');
         } else {
             data.memberId = memberId;
             data.type = 0;
@@ -101,6 +101,7 @@ exports.handlers = {
                 }
             });
         }
+        $(this.$('add-trainee-input')).val('');
     },
     importTrainee: function() {
         var importView = this.module.items.import;
