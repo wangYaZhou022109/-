@@ -4,15 +4,19 @@ module
     .title
         span
         .h1 &nbsp;
-        .toolbox
-            input.input.tags.single-line(name='topicName')
-            .addon.btn#searchTopic > i.icon-search
-            a(id='type0' data-name='typeId' data-value='0') > echo('全部')
-            each(types)
-                a(id='type'+id data-name='typeId' data-value=id) > echo(name)
-                .hr
-    .content-wrapper
-        each(topics)
+        .toolbox(data-region='toolbox')
+        .hr
+    .content-wrapper(data-region='content')
+
+view('toolbox') > form.vertical
+    input.input.tags.single-line(name='topicName')
+    .addon.btn#searchTopic > i.icon-search
+    a(id='type0' data-name='typeId' data-value='0') > echo('全部')
+    each(types)
+        a(id='type'+id data-name='typeId' data-value=id) > echo(name)
+view('content')
+    each(topics)
         .btn(id='select_'+id value=id)
             echo(name)
             input(type='hidden' id='hid_'+id value=checked)
+

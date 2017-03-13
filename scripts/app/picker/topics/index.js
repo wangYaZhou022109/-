@@ -23,4 +23,3 @@ exports.mixin = {
 exports.beforeRender = function() {
     this.store.models.state.data = this.renderOptions;
 };
-
