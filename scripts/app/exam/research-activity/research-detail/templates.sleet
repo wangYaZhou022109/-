@@ -17,7 +17,7 @@ view('head')
 view('side')
     ul.list > each(dimensions)
         li(id='list-item-' + @index)
-            .list-title > i.iconfont.icon-type.m-right > echo(name)
+            .list-title > i.iconfont.icon-type.m-right + echo(name)
             div(class='min-btn-groups') > each(questions)
                 div(class='list-item')(id='q-' + id) > echo(questionIndex)
 
