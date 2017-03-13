@@ -15,5 +15,5 @@ view('correct')
     br
     div
         echo('您为什么要举报此题？请说明原因。')
-    div
-        input.input(id='reason' value=state.correct.content placeholder='请描述举报理由')
+    .layout-mt-small
+        textarea.input.w-full(rows='5' id='reason' value=state.correct.content placeholder='请描述举报理由')
