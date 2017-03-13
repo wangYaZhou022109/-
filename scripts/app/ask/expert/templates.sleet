@@ -1,13 +1,10 @@
 #!handlebars
 
-module > .course-page
-    .activity-list
-        .container
-            .main-list(style='height:3000px;')
-                .activity-category
-                    .pull-left(style='height:100px;width:70%;' data-region='left')
-                    .pull-right(data-region='right')
- 
+
+module > .ask-page > .container
+    .page-main-wrapper.knowledge-side
+        .page-side.side-min(data-region='right')
+        .page-main(data-region='left')
 
 view('left') 
     div(data-dynamic-key='expertgroup')

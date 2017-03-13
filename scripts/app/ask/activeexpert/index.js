@@ -9,8 +9,8 @@ exports.store = {
     callbacks: {
         init: function() {
             var expert = this.models.expert;
-            expert.set({ id: 1222 });
-            return this.get(expert);
+            expert.set({ id: 'undefined', size: 6 });
+            return this.post(expert);
         }
     }
 };

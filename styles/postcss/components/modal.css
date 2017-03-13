@@ -17,7 +17,7 @@
     & .dialog {
         margin: 10vh auto;
         box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
-        padding: calc(var(--space) * 2) calc(var(--space) * 3);
+        padding: 0 calc(var(--space) * 3);
         position: relative;
         max-height: 80vh;
         width: 60vw;
@@ -26,9 +26,14 @@
         display: inline-block;
 
         & .dialog-content {
-            height: 80%;
+            height: 100%;
+            padding-bottom: 10em;
+            margin-top: var(--large-space);
+        }
+
+        & .dialog-main {
+            height: 100%;
             overflow: auto;
-            overflow-x: hidden;
         }
 
 
@@ -80,28 +85,38 @@
     & > .container {
         margin: 0;
         height: 100%;
-        position: relative;
     }
 
     & .dismiss {
         position: absolute;
-        top: var(--font-size);
-        right: 0;
+        top: 1em;
+        right: calc(var(--space) * 3);
         font-size: var(--font-size);
         z-index: 10;
+        cursor: pointer;
     }
 
     & .dialog-footer {
         text-align: right;
-        width: 100%;
+        position: absolute;
+        bottom: 1em;
+        left: calc(var(--space) * 3);
+        right: calc(var(--space) * 3);
+        border-top: 1px solid var(--border-color);
+        padding-top: 1em;
+        z-index: 2;
+        background: white;
 
         & .btn:not(:last-child) {
             margin-right: var(--font-size);
         }
     }
 
-    & .dialog-header {
-        margin-bottom: calc(var(--space) * 2);
+    & .dialog-header .title {
+        margin: 0 -calc(var(--space) * 3);
+        padding: 1em calc(var(--space) * 3);
+        background: var(--bg-color);
+        border-bottom: 1px solid var(--border-color);
     }
 
     &.animated {

@@ -68,8 +68,8 @@ view('main')
 
 view('side')
     .section
-        .btn.block.big > .inline-block.iconfont.icon-question-2 + .inline-block 发提问
-        .btn.block.big.custom-bg-color-5.m-top > .inline-block.iconfont.icon-edit-2 + .inline-block 写文章
+        #question.btn.block.big > .inline-block.iconfont.icon-question-2 + .inline-block 发提问
+        #article.btn.block.big.custom-bg-color-5.m-top > .inline-block.iconfont.icon-edit-2 + .inline-block 写文章
     .section.follow
         .clearfix
             dl
