@@ -9,9 +9,9 @@ view('main')
         .list.m-top
             table.table
                 thead > tr
-                    th > echo('作业名称')
-                    th > echo('提交人数')
-                    th > echo('操作')
+                    th(width='400px') > echo('作业名称')
+                    th(width='200px') > echo('提交人数')
+                    th(width='200px') > echo('操作')
                 tbody > each(tasks) > tr
                     td > echo(name)
                     td > echo(number)

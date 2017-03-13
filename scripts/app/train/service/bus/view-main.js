@@ -32,7 +32,7 @@ exports.handlers = {
             option4 = {},
             option5 = {},
             option6 = {};
-        if (buss.length === 0 && optionList.length === 0) {
+        if (buss.length === 0) {
             option1.name = '返程日前一天17:30去集团';
             option1.id = option1.name;
             optionList.push(option1);
@@ -52,6 +52,8 @@ exports.handlers = {
             option6.id = option6.name;
             optionList.push(option6);
             this.bindings.optionList.changed();
+        } else {
+            this.bindings.bus.clear();
         }
         this.app.viewport.modal(this.module.items.edit);
     },

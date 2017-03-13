@@ -68,7 +68,15 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-
+    saveOption: function() {
+        var bus = this.bindings.bus.data;
+        var name = $(this.$('name')).val();
+        var startTime = $(this.$('startTime')).val();
+        var endTime = $(this.$('endTime')).val();
+        bus.name = name;
+        bus.startTime = startTime;
+        bus.endTime = endTime;
+    }
 };
 
 exports.actionCallbacks = {
