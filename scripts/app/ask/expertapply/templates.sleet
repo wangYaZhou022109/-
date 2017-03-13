@@ -11,7 +11,25 @@ module > .edit-info-page
                         .content > input.input(placeholder='输入您的名称')
                     .form-row.textarea-row
                         label.m-top.required 擅长话题：
-                        .content > #topics
+                        .content 
+                            input.input + .choice 选择
+                            #searchMore.border.bottom.dashed
+                                .tag-btn.active 全部
+                                .tag-btn 生活
+                                .tag-btn 科学教育
+                                .tag-btn 发展经济学
+                                .tag-btn 社会民生
+                                .tag-btn 职业发展
+                                .tag-btn 生活
+                                .tag-btn 科学教育
+                                .tag-btn 发展经济学
+                                .tag-btn 社会民生
+                                .tag-btn 职业发展
+                                .tag-btn 生活
+                                .tag-btn 科学教育
+                                .tag-btn 发展经济学
+                                .tag-btn 社会民生
+                                .tag-btn 职业发展
                     .form-row.textarea-row
                         label.required 您的优势：
                         .content > textarea.input(rows='3' placeholder='请清晰描述您选择话题领域的优势和特长，这有助于提升您的通过率')

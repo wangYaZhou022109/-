@@ -3,11 +3,9 @@ module
     div(data-region='list')
 
 view('list') 
-    ul
-        li
-            string('relevant') + string('expert') + a(id='activeexpert' href='javascript:;' style='float:right;')(class ='active') 
-    table.table > tr > td
-            each(expert)
-                ul
-                    li(style='font-weight:bold')
-                        .img(style='height:120px;width:80px;float:left;' id='expert-' + member.id data-name='id' data-value=member.id  ) > img(src=member.headPortrait)
+    .section
+        span.h3 > string('relevant') + string('expert')
+        span.more(id='activeexpert') more
+        .layout-mt-small.user-picture
+            .grid-row > each(expert)
+                .col-md-4 > a(href="javascript:;" title=member.fullName id='expert-' + member.id data-name='id' data-value=member.id  ) > img.block(src=member.headPortrait)
