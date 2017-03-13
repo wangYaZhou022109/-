@@ -1,0 +1,4 @@
+#! handlebars
+
+module > .edit-info-page
+    | 专家资质说明内容

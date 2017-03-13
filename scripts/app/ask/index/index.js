@@ -1,13 +1,9 @@
 exports.items = {
-    side: 'side',
     main: 'main'
 };
 
 exports.store = {
     models: {
-        params: {
-            data: { isOverdue: '1' }
-        },
         state: { data: { menu: 'content' } }
     },
     callbacks: {
