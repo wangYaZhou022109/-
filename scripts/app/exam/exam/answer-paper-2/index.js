@@ -408,7 +408,7 @@ exports.afterRender = function() {
                 ms = (min + 1) * (1000 * 60);
             return ms;
         },
-        f = false,
+        f = true,
         autoSubmit = function() {
             return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
                 TO.timeOutId = setTimeout(autoSubmit, getRandom());
