@@ -1,0 +1,37 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .table
+        .text-right.m-top
+            a(href=exportUrl) > i.iconfont.icon-export + span > setting('person.archives.export')
+        table
+            thead
+                tr
+                    th > setting('person.archives.public.order')
+                    th > setting('person.archives.certificate.name')
+                    th > setting('person.archives.certificate.code')
+                    th > setting('person.archives.certificate.type')
+                    th > setting('person.archives.certificate.org')
+                    th > setting('person.archives.certificate.source')
+                    th > setting('person.archives.certificate.time')
+                    th > setting('person.archives.exam.operation')
+            tbody > each(list)
+                tr
+                    td > echo(i)
+                    td.nowrap > .text-overflow > echo(certificateName)
+                    td > echo(code)
+                    td > map('certificate-type' type)
+                    td > echo(certificateUnit)
+                    td > echo(businessName)
+                    td > dateTime(certificateTime)
+                    td
+                        a > setting('person.archives.certificate.look')
+                        echo('|')
+                        a > setting('person.archives.certificate.down')
+                    else
+                        tr > td(colspan='8') > p.text-center > string('no-data')
+        #pager.pagination
+

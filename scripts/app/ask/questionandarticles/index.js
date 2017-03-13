@@ -1,6 +1,7 @@
 exports.items = {
     popup: 'popup',
     main: 'main',
+    'ask/question': { isModule: true },
     'ask/article': { isModule: true }
 };
 

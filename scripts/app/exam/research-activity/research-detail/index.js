@@ -1,14 +1,11 @@
-var $ = require('jquery'),
-    _ = require('lodash/collection'),
+var _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    strings = require('./app/util/strings'),
-    changeToFullScreen;
+    strings = require('./app/util/strings');
 
 exports.items = {
     side: 'side',
     main: 'main',
-    head: 'head',
-    notice: ''
+    head: 'head'
 };
 
 exports.store = {
@@ -68,7 +65,6 @@ exports.store = {
         init: function(payload) {
             var researchRecord = this.models.researchRecord,
                 questions = this.models.questions;
-
             if (payload.researchRecord) {
                 researchRecord.set(payload.researchRecord);
             } else if (payload.researchQuestionaryId) {
@@ -94,16 +90,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    changeToFullScreen();
     return this.dispatch('init', this.renderOptions);
-};
-
-exports.afterRender = function() {
-    this.app.viewport.modal(this.items.notice);
-};
-
-changeToFullScreen = function() {
-    $('.header').hide();
-    $('.footer').hide();
-    $('.achievement-content').attr('height', '100%');
 };

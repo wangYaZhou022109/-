@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 exports.routes = {
     home: 'showHome',
     'share/:id/:type': 'showShare' // 分享跳转
@@ -31,4 +33,14 @@ exports.showShare = function(id, type) {
         webUrl += '/#//' + id;
     }
     window.location.href = webUrl;
+};
+
+exports.interceptors = {
+    activity: 'showHead'
+};
+
+exports.showHead = function() {
+    $('.header').show();
+    $('.footer').show();
+    $('.achievement-content').attr('height', '0%');
 };

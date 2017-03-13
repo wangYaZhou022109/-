@@ -31,7 +31,11 @@ exports.store = {
                 difficultys = maps.get('question-difficultys');
 
             D.assign(data, question);
-            data.answer = judgement[Number(question.questionAttrs[0].value)].value;
+
+            if (question.questionAttrs.length > 0) {
+                data.answer = judgement[Number(question.questionAttrs[0].value)].value;
+            }
+
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
 

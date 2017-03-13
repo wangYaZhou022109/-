@@ -21,3 +21,10 @@ exports.store = {
 
 exports.afterRender = function() {
 };
+
+
+exports.title = '我要分享';
+
+exports.buttons = [{
+    text: '发布'
+}];

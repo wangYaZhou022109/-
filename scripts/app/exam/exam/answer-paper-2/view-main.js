@@ -3,7 +3,7 @@ var types = require('./app/exam/types'),
     constant = {
         ANSWER_PAPER_MODE: 3,
         NO_DETAIL_MODE: -1, // 除了题目内容，其他答案以及信息看不到
-        WAITING_CHECK_CORRECT: 'exam/answer-paper-2/waiting-check-correct'
+        WAITING_CHECK_CORRECT: 'exam/exam/answer-paper-2/waiting-check-correct'
     },
     getModuleDataForQuestion,
     getModuleDataForCorrect;
