@@ -30,10 +30,27 @@ exports.store = {
             data: {
                 menu: 'archives', // 初始菜单
             }
-        }
+        },
+        recommendList: {
+            url: '../course-study/course-info/person-index'
+        }, // 首页推荐
+        page: { data: { value: '1' } }, // 记录页码
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function() {
+            var me = this,
+                recommendList = me.models.recommendList;
+            recommendList.clear();
+            recommendList.params = { page: '1' };
+            me.get(recommendList);
+        },
+        changeRecommend: function() {
+            var me = this,
+                recommendList = me.models.recommendList,
+                page = this.models.page.data.value;
+            recommendList.params = { page: page };
+            me.get(recommendList);
         }
     }
 };

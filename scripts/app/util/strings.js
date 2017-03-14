@@ -2,7 +2,8 @@ var D = require('drizzlejs'),
     ask = require('../ask/strings'),
     study = require('../study/strings'),
     activity = require('../activity/strings'),
-    exam = require('../exam/strings');
+    exam = require('../exam/strings'),
+    center = require('../center/strings');
 
 var strings = {
     ok: '确定',
@@ -24,7 +25,7 @@ var strings = {
     'operation-success': '操作成功'
 };
 
-var ss = D.assign({}, strings, study, activity, ask, exam);
+var ss = D.assign({}, strings, study, activity, ask, exam, center);
 
 exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');
