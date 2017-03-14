@@ -4,17 +4,21 @@ exports.items = {
 
 exports.store = {
     models: {
-        expert: { url: '../ask-bar/expert/active-expert' }
+        questions: { url: '../ask-bar/question/relevant-questions' }
     },
     callbacks: {
-        init: function() {
-            var expert = this.models.expert;
-            expert.set({ id: 1222 });
-            return this.get(expert);
+        init: function(payload) {
+            var questions = this.models.questions;
+            questions.set({ id: payload.state.id });
+            return this.get(questions);
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+   // console.log(this.renderOptions);
+    if (typeof this.renderOptions.state.id !== 'undefined') {
+        return this.dispatch('init', this.renderOptions);
+    }
+    return null;
 };

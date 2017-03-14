@@ -2,7 +2,8 @@
 exports.items = {
     banner: 'banner',
     left: 'left',
-    right: 'right'
+    right: 'right',
+    'ask/changetopic': { isModule: true }
 };
 
 exports.store = {
@@ -12,14 +13,14 @@ exports.store = {
         rightstate: {}
     },
     callbacks: {
-        init: function(payload) {
+        init: function() {
             var expert = this.models.expert;
-            expert.set(payload);
+            expert.set({ id: 'me' });
             this.get(expert);
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    return this.dispatch('init');
 };

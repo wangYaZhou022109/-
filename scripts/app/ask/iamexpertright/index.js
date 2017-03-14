@@ -19,5 +19,5 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    // return this.dispatch('init', this.renderOptions);
 };
