@@ -9,16 +9,18 @@ view('list')
     each(myshares)
         ul 
             li(style='font-weight:bold')
-                a(id='myquiz-details-' + id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+                a(id='myshares-details-' + problem.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
                 .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
             li
-                a(id='detailss-'+id data-name='id' data-value=id) > echo(problem.content) 
+                echo(problem.content) 
             li
                 echo('我' + '分享·')
             li
                 date(enjoyTime) 
             li
-                echo('来自话题 ：' + problem.topic )
+                echo('来自话题 ：')
+                each(topicList)
+                    echo(name + ' ')
                 a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
                 echo('条讨论')
                 a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享

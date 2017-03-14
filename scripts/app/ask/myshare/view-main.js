@@ -3,7 +3,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click article-*': 'popup'
+    'click article-*': 'article'
 };
 
 exports.handlers = {
