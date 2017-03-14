@@ -5,7 +5,11 @@ exports.bindings = {
 
 exports.dataForTemplate = {
     contentValue: function(data) {
-        var textAreas = data.subject.textAreas || [{}];
-        return textAreas[0].content;
+        var textAreas = data.subject.textAreas,
+            textArea = {};
+        if (textAreas && textAreas.length > 0) {
+            textArea = textAreas[0];
+        }
+        return textArea.content;
     }
 };
