@@ -13,12 +13,12 @@ exports.store = {
             var state = this.models.state;
             state.data.tab = 'manage';
             state.data.manage = true;
-            state.data.id = payload.id;
+            state.data.classId = payload.classId;
             state.changed();
         }
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.id });
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

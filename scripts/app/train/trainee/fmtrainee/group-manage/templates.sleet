@@ -1,0 +1,41 @@
+#!handlebars
+
+module
+    div(data-region='toolbox')
+    div(style='width:70%;' data-region='content')
+    div(style='width:30%;float:right;' data-region='list')
+
+view('toolbox') > form.vertical
+    echo('员工编号')
+    input(name='name')
+    echo('所属单位')
+    input(name='organization')
+    echo('姓名')
+    input(name='name')
+    btn.btn#searchMember > echo('搜索')
+
+view('content')
+    .list
+        table.table
+            thead > tr
+                th > echo('选择')
+                th > echo('姓名')
+                th > echo('员工编号')
+                th > echo('所属部门')
+                th > echo('性别')
+    #          tbody > each(members) > tr
+    #              td
+    #                  input(type='checkbox' id='select_'+id value=id)('checked')&if(checked)
+    #                  label(for='select_'+id)
+    #              td > echo(fullName)
+    #              td > echo(name)
+    #              td > echo(sexText)
+    #              td > echo(majoyPosition.name)
+    #              td > echo(memberDetail.directSupervisor.fullName)
+    #              td > echo(organization.name)
+    #              td > echo(organization.companyName)
+    #  #pager.pagination(style='float:none')
+    #  btn.btn#addTrainee > echo('确认')
+
+view('list')
+    echo('右侧')

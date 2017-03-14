@@ -3,7 +3,8 @@ var $ = require('jquery');
 exports.title = '学员分组';
 
 exports.bindings = {
-    group: true
+    group: true,
+    state: true
 };
 
 exports.events = {
@@ -12,7 +13,8 @@ exports.events = {
     'click go-up*': 'moveUp',
     'click go-down*': 'moveDown',
     'click label-group-name*': 'showNameInput',
-    'change input-group-name*': 'updateName'
+    'change input-group-name*': 'updateName',
+    'click manage*': 'manage'
 };
 
 exports.handlers = {
@@ -53,21 +55,34 @@ exports.handlers = {
         } else {
             this.module.dispatch('changeName', { id: id, name: val });
         }
+    },
+    manage: function(id) {
+        var view = this.module.items['train/trainee/fmtrainee/group-manage'];
+        var state = this.bindings.state.data;
+        state.groupId = id;
+        this.app.viewport.modal(view, state);
     }
 };
 
 exports.actions = {
-    'click saveGroup': 'saveGroup'
+    'click saveGroup': 'saveGroup',
+    'click group-trainee*': 'groupTrainees'
 };
 
 exports.dataForActions = {
-
+    groupTrainees: function(id) {
+        this.bindings.state.data.groupId = id.id;
+    }
 };
 
 exports.actionCallbacks = {
     saveGroup: function() {
         this.app.viewport.closeModal();
         this.app.message.success('保存成功!');
+    },
+    groupTrainees: function() {
+        var view = this.module.items.groupTrainees;
+        this.app.viewport.modal(view);
     }
 };
 

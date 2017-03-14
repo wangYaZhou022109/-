@@ -11,12 +11,13 @@ exports.store = {
             root: 'items'
         },
         projectInfo: {},
-        state: { data: { classId: 3 } }
+        state: { data: { } }
     },
     callbacks: {
-        init: function(payload) {
+        init: function() {
             var classstaffs = this.models.classstaffs;
-            classstaffs.params = payload;
+            var classId = this.models.state.data.classId;
+            classstaffs.params = { classId: classId };
             return this.get(classstaffs);
         },
         search: function(payload) {
@@ -28,6 +29,8 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    return this.dispatch('init', classId);
+    var state = this.store.models.state.data;
+    state = this.renderOptions.state;
+    state.changed();
+    return this.dispatch('init');
 };

@@ -3,16 +3,23 @@ var D = require('drizzlejs');
 exports.items = {
     main: 'main',
     search: 'search',
-    'train/trainee/fmtrainee/select-member': { isModule: true },
     situation: '',
     import: '',
-    group: ''
+    group: '',
+    groupTrainees: '',
+    'train/trainee/fmtrainee/select-member': { isModule: true },
+    'train/trainee/fmtrainee/group-manage': { isModule: true }
 };
 
 exports.store = {
     models: {
         fmtrainees: {
             url: '../train/trainee/trainees',
+            type: 'pageable',
+            root: 'items'
+        },
+        groupTrainees: {
+            url: '../train/trainee/group-trainees',
             type: 'pageable',
             root: 'items'
         },
@@ -26,17 +33,23 @@ exports.store = {
         uploadExcel: { url: '../train/trainee/import-trainee' },
         group: { url: '../train/trainee-group' },
         groupModel: { url: '../train/trainee-group' },
+        updateTraineeGroup: { url: '../train/trainee/update-group' },
+        exportGroupTrainee: { url: '../train/trainee/export-group-trainee' },
         delGroups: { data: [] },
-        state: { data: { classId: 3, auditStatus: 1 } }
+        state: { data: { auditStatus: 1 } }
     },
     callbacks: {
         init: function(payload) {
-            var fmtrainees = this.models.fmtrainees;
-            fmtrainees.params = payload;
+            var fmtrainees = this.models.fmtrainees,
+                state = this.models.state.data;
+            state.classId = payload.classId;
+            fmtrainees.clear();
+            fmtrainees.params = state;
             return this.get(fmtrainees);
         },
         search: function(payload) {
             var fmtrainees = this.models.fmtrainees;
+            fmtrainees.clear();
             fmtrainees.params = payload;
             return this.get(fmtrainees);
         },
@@ -166,11 +179,21 @@ exports.store = {
                 classId: state.classId
             });
             return me.save(me.models.groupModel);
+        },
+        groupTrainees: function() {
+            var groupTrainees = this.models.groupTrainees,
+                state = this.models.state.data;
+            groupTrainees.params = state;
+            return this.get(groupTrainees);
+        },
+        deleteTraineeGroup: function(payload) {
+            var updateTraineeGroup = this.models.updateTraineeGroup;
+            updateTraineeGroup.params = { id: payload.id, groupId: '0' };
+            return this.get(updateTraineeGroup);
         }
     }
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    return this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

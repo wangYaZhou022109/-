@@ -34,12 +34,9 @@ exports.handlers = {
         this.$('checkAll').checked = flag;
     },
     audit: function(id) {
-        var aa = id,
-            model = this.module.items.audit,
-            auditTrainee = this.bindings.auditTrainee,
-            data = {};
-        data = { id: aa };
-        auditTrainee.data = data;
+        var model = this.module.items.audit,
+            auditTrainee = this.bindings.auditTrainee;
+        auditTrainee.data.id = id;
         this.app.viewport.modal(model);
     },
     auditAll: function() {

@@ -13,20 +13,23 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        projectInfo: {},
-        state: { data: { classId: 3, auditStatus: 0 } },
         situation: { url: '../train/class-quota/situation' },
         auditTrainee: { url: '../train/trainee/updateStatus' },
-        auditAll: { url: '../train/trainee/auditAll' }
+        auditAll: { url: '../train/trainee/auditAll' },
+        state: { data: { auditStatus: 0 } }
     },
     callbacks: {
         init: function(payload) {
-            var trainees = this.models.trainees;
-            trainees.params = payload;
+            var trainees = this.models.trainees,
+                state = this.models.state;
+            trainees.clear();
+            state.data.classId = payload.classId;
+            trainees.params = state.data;
             return this.get(trainees);
         },
         search: function(payload) {
             var trainees = this.models.trainees;
+            trainees.clear();
             trainees.params = payload;
             return this.get(trainees);
         },
@@ -51,6 +54,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    return this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

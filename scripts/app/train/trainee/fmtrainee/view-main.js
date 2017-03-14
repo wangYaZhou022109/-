@@ -3,7 +3,7 @@ var $ = require('jquery');
 
 exports.bindings = {
     fmtrainees: true,
-    state: true,
+    state: false,
     download: false
 };
 
@@ -27,11 +27,11 @@ exports.handlers = {
             model = me.module.items['train/trainee/fmtrainee/select-member'];
         me.app.viewport.modal(model, {
             callback: function(data) {
-                var classId = me.bindings.state.data;
+                var state = me.bindings.state.data;
                 var params = {};
                 me.app.viewport.closeModal();
                 if (data) {
-                    params.classId = classId.classId;
+                    params.classId = state.classId;
                     params.type = 0;
                     params.memberIds = data;
                     me.module.dispatch('addTrainees', params).then(function(result) {
@@ -40,7 +40,7 @@ exports.handlers = {
                         if (success === 0) {
                             this.app.message.error('添加失败！');
                         } else {
-                            me.module.dispatch('init', classId);
+                            me.module.dispatch('init', state);
                             this.app.message.success('添加成功' + success + '条！');
                             this.app.message.error('添加失败' + fail + '条！');
                         }
@@ -58,15 +58,15 @@ exports.handlers = {
     updateSort: function(id) {
         var me = this;
         var data = {};
-        var val = $(this.$('input-sort' + id)).val();
-        var classId = this.bindings.state.data;
+        var val = $(this.$('input-sort' + id)).val().trim();
+        var state = this.bindings.state.data;
         if (isNaN(val) || val === '') {
             this.app.message.alert('请输入正整数！');
         } else {
             data.id = id;
             data.sort = val;
             me.module.dispatch('updateSort', data).then(function() {
-                me.module.dispatch('init', classId);
+                me.module.dispatch('init', state);
             });
         }
         $(me.$('input-sort' + id)).css('display', 'none');
@@ -75,21 +75,21 @@ exports.handlers = {
         $(this.$('shuxian' + id)).css('display', 'inline');
     },
     addTrainee: function() {
-        var memberId = $(this.$('add-trainee-input')).val().trim();
-        var classId = this.bindings.state.data;
+        var memberName = $(this.$('add-trainee-input')).val().trim();
+        var state = this.bindings.state.data;
         var data = {};
         var me = this;
-        if (memberId === '') {
-            this.app.message.alert('人员编号不能为空');
+        if (memberName === '') {
+            this.app.message.alert('请输入人员编号');
         } else {
-            data.memberId = memberId;
+            data.memberName = memberName;
             data.type = 0;
-            data.classId = classId.classId;
+            data.classId = state.classId;
             me.module.dispatch('addTrainee', data).then(function(result) {
                 var code = result[0];
                 if (code === 1) {
                     this.app.message.success('添加成功!');
-                    me.module.dispatch('init', classId);
+                    me.module.dispatch('init', state);
                 } else if (code === 888) {
                     this.app.message.error('学员已存在!');
                 } else if (code === 666) {
@@ -125,9 +125,9 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     delete: function() {
-        var classId = this.bindings.state.data;
+        var state = this.bindings.state.data;
         this.app.message.success('删除成功!');
-        this.module.dispatch('init', classId);
+        this.module.dispatch('init', state);
     },
     situation: function(data) {
         var situation = this.module.items.situation;

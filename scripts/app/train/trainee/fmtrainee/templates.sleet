@@ -96,7 +96,11 @@ view('group')
             td
                 label(id='label-group-name' + id data-name='id' data-value=id) > echo(name)
                 input(id='input-group-name'+id value=name style='display:none;width:100px;' data-name='id' data-value=id)
-            td > echo(traineeNumber)
+            td
+                compare(traineeNumber 'eq' 0)
+                    echo('-')
+                else
+                    a(id='group-trainee'+id data-name='id' data-value=id) > echo(traineeNumber)
             td
                 a(id='go-up'+id data-name='id' data-value=id) > echo('上移')
                 echo('|')
@@ -106,3 +110,31 @@ view('group')
                 echo('|')
                 a(id='delGroup'+id data-name='id' data-value=id) > echo('删除')
     .btn#saveGroup > echo('保存')
+
+view('groupTrainees')
+    .buttons
+        a(href=exportGroupUrl target = "_blank") > .btn > echo('导出')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('单位')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+            th > echo('操作')
+        tbody > each(groupTrainees) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+            td
+                a(id='group-trainee-sort'+id data-name='id' data-value=id) > echo('排序')
+                input(id='group-trainee-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                span(id='groupshuxian'+id) > echo('|')
+                a(id='group-trainee-delete'+id data-name='id' data-value=id) > echo('删除')
+    #pager.pagination(style='float:none')
