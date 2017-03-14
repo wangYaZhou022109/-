@@ -1,6 +1,5 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    E = require('./app/exam/exam-websocket'),
     maps = require('./app/util/maps'),
     qTypes = maps.get('question-types'),
     strings = require('./app/util/strings'),
@@ -9,7 +8,9 @@ var _ = require('lodash/collection'),
         ZERO: 0,
         ONE: 1,
         SINGLE_MODE: 1,
-        PC_CLIENT_TYPE: 1
+        PC_CLIENT_TYPE: 1,
+        READING: 6,
+        QUESTION_ANSWER: 5
     },
     itemStatus = {
         INIT: 'init',
@@ -27,13 +28,7 @@ var _ = require('lodash/collection'),
         7: 5,
         8: 4
     },
-    submitType = {
-        Auto: 'Auto',
-        Hand: 'Hand'
-    },
-    WS,
-    TO,
-    changeScreen;
+    getCurrentStatus;
 
 exports.items = {
     side: 'side',
@@ -45,7 +40,12 @@ exports.store = {
     models: {
         exam: {
             type: 'localStorage',
-            url: '../exam/exam/exam-mark-paper/front'
+            url: '../exam/exam/exam-mark-paper/front',
+            mixin: {
+                getExam: function() {
+                    return this.data;
+                }
+            }
         },
         state: {
             type: 'localStorage',
@@ -176,7 +176,7 @@ exports.store = {
                             return q.status === itemStatus.CURRENT;
                         });
                     if (index > -1) {
-                        type.questions[index].status = itemStatus.INIT;
+                        type.questions[index].status = getCurrentStatus.call(this, id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
@@ -195,20 +195,87 @@ exports.store = {
                         question = type.questions[index + payload.offset];
                     if (question) {
                         question.status = itemStatus.CURRENT;
-                        type.questions[index].status = itemStatus.INIT;
+                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
                 }
             }
         },
+        grades: {
+            type: 'localStorage',
+            mixin: {
+                init: function(questions) {
+                    this.data = _.map(questions, function(q) {
+                        if (q.type === constant.READING) {
+                            return {
+                                key: q.id,
+                                value: _.map(_.filter(q.subs, function(s) {
+                                    return s.type === constant.QUESTION_ANSWER;
+                                }), function(ss) {
+                                    return { key: ss.id, value: ss.answerRecord ? '' : 0, type: ss.type, isRight: 0 };
+                                }),
+                                type: q.type,
+                                isRight: constant.ZERO
+                            };
+                        }
+                        return { key: q.id, value: q.answerRecord ? '' : 0, type: q.type, isRight: constant.ZERO };
+                    });
+                    this.save();
+                },
+                getGrade: function(id) {
+                    return _.find(this.data, ['key', id]);
+                },
+                saveGrade: function(data) {
+                    this.data = _.reject(this.data, ['key', data.key]);
+                    this.data.push(data);
+                    this.save();
+                },
+                getAnswerRecord: function() {
+                    var result = [];
+                    _.forEach(this.data, function(g) {
+                        if (g.type === constant.READING) {
+                            _.forEach(g.value, function(gg) {
+                                if (gg.type === constant.QUESTION_ANSWER) {
+                                    result.push({
+                                        questionId: gg.key,
+                                        score: gg.value * constant.ONE_HUNDRED,
+                                        questionCopy: { type: gg.type }
+                                    });
+                                }
+                            });
+                        } else {
+                            result.push({
+                                questionId: g.key,
+                                score: g.value * constant.ONE_HUNDRED,
+                                questionCopy: { type: g.type }
+                            });
+                        }
+                    });
+                    return result;
+                },
+                check: function(types) {
+                    var me = this;
+                    return _.every(types, function(t) {
+                        var f = _.every(t.questions, function(q) {
+                            if (_.find(me.data, ['key', q.id]).value !== '') {
+                                return true;
+                            }
+                            return false;
+                        });
+                        return f;
+                    });
+                }
+            }
+        },
         form: {
-            url: '../exam/exam-record/submitPaper'
+            url: '../exam/exam/mark-paper-info'
         }
     },
     callbacks: {
         init: function(payload) {
             var exam = this.models.exam,
                 types = this.models.types,
-                state = this.models.state;
+                state = this.models.state,
+                grades = this.models.grades;
 
             exam.load();
             if (!exam.data || (exam.data && exam.data.examRecord.id !== payload.examRecordId)) {
@@ -220,10 +287,9 @@ exports.store = {
                     exam.save();
                     types.init(exam.data.paper.questions);
                     state.init(exam.data);
+                    grades.init(exam.data.paper.questions);
                 });
             }
-            types.init(exam.data.paper.questions);
-            state.init(exam.data);
             return '';
         },
         selectType: function(payload) {
@@ -242,61 +308,30 @@ exports.store = {
             this.models.state.resetCurrentQuestion();
             this.models.state.changed();
         },
-        saveAnswer: function(payload) {
-            this.models.answer.saveAnswer(payload);
-            this.models.modify.saveAnswer(payload);
-            this.models.state.calculate();
-            this.models.state.changed();
+        saveGrade: function(data) {
+            this.models.grades.saveGrade(data);
         },
-        waitingCheck: function(payload) {
-            this.models.mark.waitingCheck(payload.questionId);
-            this.app.message.success(strings.get('operation-success'));
-        },
-        submitPaper: function(payload) {
-            var me = this,
-                examRecordId = this.module.store.models.exam.data.examRecord.id,
-                data = {
-                    examRecordId: examRecordId,
-                    submitType: payload.submitType,
-                    answerRecords: this.models.modify.changeAnswerRecord(),
-                    clientType: constant.PC_CLIENT_TYPE
-                };
+        submitGrade: function() {
+            var exam = this.models.exam.getExam(),
+                me = this;
 
-            if (payload.submitType !== submitType.Auto) TO.cancel();
-
-            this.models.form.set(data);
-            return this.post(this.models.form).then(function() {
-                if (payload.submitType === submitType.Auto) {
-                    this.app.message.success('答案已自动保存成功');
-                    me.models.modify.clear();
-                } else {
-                    me.models.exam.clear();
-                    me.models.state.clear();
-                    me.models.types.clear();
-                    me.models.mark.clear();
-                    me.models.answer.clear();
-                    me.models.modify.clear();
-                    this.app.message.success('交卷成功');
-                    setTimeout(window.close, 500);
-                }
-            });
-        },
-        lowerSwitchTimes: function() {
-            var exam = this.models.exam.data;
-            if (exam.allowSwitchTimes) {
-                if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
-                    this.app.message.error('切屏次数已满，强制交卷');
-                    // return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
-                    //     WS.closeConnect();
-                    // });
-                }
-                D.assign(exam, {
-                    lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
-                });
-                this.models.exam.save();
-                this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
+            if (!this.models.grades.check(this.models.types.data)) {
+                this.app.message.error(strings.get('exam.mark-paper-check'));
+                return false;
             }
-            return true;
+
+            this.models.form.set({
+                examRecordId: exam.examRecord.id,
+                examId: exam.id,
+                answerRecords: JSON.stringify(this.models.grades.getAnswerRecord())
+            });
+            return this.post(this.models.form).then(function() {
+                me.app.message.success(strings.get('operation-success'));
+                me.models.state.clear();
+                me.models.types.clear();
+                me.models.grades.clear();
+                window.close();
+            });
         }
     }
 };
@@ -305,69 +340,13 @@ exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
 
-
 exports.afterRender = function() {
-    var me = this,
-        examId = this.store.models.exam.data.id,
-        getRandom = function() {
-            var r = Math.random() * 1,
-                min = Number(r.toFixed(2)),
-                ms = (min + 1) * (1000 * 60);
-            return ms;
-        },
-        f = true,
-        autoSubmit = function() {
-            return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
-                TO.timeOutId = setTimeout(autoSubmit, getRandom());
-            });
-        };
+};
 
-    if (f) {
-        autoSubmit();
-
-        TO.timeOutId = setTimeout(autoSubmit, getRandom());
-
-        WS.connect(examId, function() {
-            me.app.message.error('你本次考试已被管理员强制交卷');
-            return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
-                WS.closeConnect();
-            });
-        }, function(delay) {
-            return me.dispatch('delay', { delay: Number(delay) });
-        });
+getCurrentStatus = function(id) {
+    var grades = this.store.models.grades.data;
+    if (_.find(grades, ['key', id]).value !== '') {
+        return itemStatus.ACTIVE;
     }
-    changeScreen.call(this);
-};
-
-WS = {
-    connect: function(examId, submitPaper, timeExpand) {
-        E.connect(examId, {
-            submitPaper: submitPaper,
-            timeExpand: timeExpand
-        });
-    },
-    closeConnect: function() {
-        E.disconnect();
-    }
-};
-
-TO = {
-    cancel: function() {
-        clearTimeout(this.timeOutId);
-        this.timeOutId = undefined;
-    },
-    timeOutId: -1
-};
-
-changeScreen = function() {
-    var me = this;
-    document.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'hidden') {
-            return me.dispatch('lowerSwitchTimes');
-        }
-        return true;
-    });
-    window.onblur = function() {
-        return me.dispatch('lowerSwitchTimes');
-    };
+    return itemStatus.INIT;
 };

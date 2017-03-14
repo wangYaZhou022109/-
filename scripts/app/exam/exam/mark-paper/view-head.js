@@ -5,16 +5,16 @@ exports.bindings = {
 };
 
 exports.actions = {
-    'click submit': 'submitPaper'
+    'click submit': 'submitGrade'
 };
 
 exports.dataForActions = {
-    submitPaper: function() {
+    submitGrade: function() {
         var me = this;
         return this.Promise.create(function(resolve) {
-            var message = strings.get('exam.submit-paper-confirm');
+            var message = strings.get('exam.submit-mark-paper-confirm');
             me.app.message.confirm(message, function() {
-                resolve({ submitType: 'Hand' });
+                resolve();
             }, function() {
                 resolve(false);
             });

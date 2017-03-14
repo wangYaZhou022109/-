@@ -8,7 +8,8 @@ var types = require('./app/exam/types'),
 
 exports.bindings = {
     state: true,
-    types: false
+    types: false,
+    grades: true
 };
 
 exports.type = 'dynamic';
@@ -33,10 +34,9 @@ getModuleDataForQuestion = function(question) {
     var me = this;
     return {
         data: question,
-        answer: null,
-        mode: constant.NO_DETAIL_MODE,
+        goal: this.bindings.grades.getGrade(question.id),
         callback: function(data) {
-            return me.module.dispatch('saveAnswer', data);
+            return me.module.dispatch('saveGrade', data);
         }
     };
 };

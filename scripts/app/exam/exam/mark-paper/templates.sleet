@@ -48,8 +48,6 @@ view('main')
                     .com-title.inline-block > echo(state.currentQuestion.typeDesc '(' state.currentQuestion.index '/' state.currentQuestion.totalCount ')')
                     .inline-block > echo('本题分数:' state.currentQuestion.score)
                 div(data-dynamic-key=state.currentQuestion.id)
-                .bottom.text-right
-                    div(data-dynamic-key='correct-' + state.currentQuestion.id)
         else
             div
                 each(types)
