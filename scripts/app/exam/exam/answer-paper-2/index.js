@@ -62,8 +62,7 @@ exports.store = {
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
-                            // singleMode: exam.paperShowRule === constant.SINGLE_MODE,
-                            singleMode: false,
+                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
                             currentQuestion: types.getFirstQuestion()
                         };
                         this.save();
@@ -300,10 +299,15 @@ exports.store = {
                 countDown = this.models.countDown,
                 mark = this.models.mark,
                 answer = this.models.answer;
-
             exam.load();
             if (!exam.data || (exam.data && exam.data.id !== payload.examId)) {
                 exam.clear();
+                types.clear();
+                state.clear();
+                countDown.clear();
+                mark.clear();
+                answer.clear();
+
                 D.assign(exam.params, { examId: payload.examId });
                 return this.get(exam).then(function() {
                     exam.save();
