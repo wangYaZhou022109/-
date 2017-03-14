@@ -2,7 +2,7 @@ var _ = require('lodash/collection'),
     $ = require('jquery');
 exports.bindings = {
     region: false,
-    subject: false,
+    subject: true,
     collect: true,
     score: true,
     download: false
