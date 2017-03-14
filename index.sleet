@@ -17,7 +17,7 @@ html.default
             script(src='node_modules/es5-shim/es5-shim.js')
             # endbuild
 
-        link(rel='stylesheet' href='//at.alicdn.com/t/font_npdl0qcglzqwipb9.css')
+        link(rel='stylesheet' href='//at.alicdn.com/t/font_acf0w4r0nkygy14i.css')
 
         # build:css styles/common.css
         link(rel='stylesheet' href='node_modules/normalize.css/normalize.css')
