@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click mydetail-*': 'toggleMore'
+    'click dynamic-*': 'toggleMore'
 };
 
 exports.handlers = {
