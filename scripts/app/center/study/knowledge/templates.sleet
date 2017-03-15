@@ -1,56 +1,46 @@
 #!handlebars
 
 module
-    div(data-region='main')
-
-view('main')
     .person-list
+        div(data-region='filter')
+        div(data-region='main')
+
+view('filter')
+    form.vertical
         .filter
-            .pull-right.m-right.pointer
+            .pull-right.m-right.pointer#timeOrder
                 | 上传时间
-                i.iconfont.icon-sort-desc
+                compare(search.timeOrder 'eq' 'asc')
+                    i.iconfont.icon-sort-asc
+                else
+                    i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 要求：
-                .item.active > span 全部
-                .item > span 待审核
-                .item > span 已通过
-                .item > span 被拒绝
+                .item#selectStatus-all(class=if(search.statusAll 'active')) > span 全部
+                .item#selectStatus-0(class=if(search.statusa 'active')) > span 待审核
+                .item#selectStatus-1(class=if(search.statusb 'active')) > span 已通过
+                .item#selectStatus-2(class=if(search.statusc 'active')) > span 被拒绝
         .list-search
-            input.input(placeholder='请输入您要搜索的内容名称')
-            .btn > i.iconfont.icon-search
-        ul.list-text.border.top
-            li.border.bottom
-                .title-row
-                    .img > .img-cont > img(src="images/default-cover/default_doc.jpg")
-                    .inline-block.title 中国品牌第一人李光斗脱口秀
-                    .time 上传时间：2017-02-28 10:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state > span.custom-color-2 待审核
-                .btn-row
-                    .btn 编辑
-                    i.iconfont.icon-trash
-            li.border.bottom
-                .title-row
-                    .img > .img-cont > img(src="images/default-cover/default_pdf.jpg")
-                    .inline-block.title 思维导图软件·自学速成指南
-                    .time 上传时间：2017-02-27 09:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state > span.custom-color-3 被拒绝
-                .btn-row
-                    i.iconfont.icon-trash
-            li.border.bottom
-                .title-row
-                    .img > .img-cont > img(src="images/default-cover/default_ppt.jpg")
-                    .inline-block.title 经济学人的动态图表与交互设计
-                    .time 上传时间：2017-02-28 10:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state > span.custom-color-4 已通过
-                .btn-row
-                    .btn 编辑
-                    i.iconfont.icon-trash
-            li.border.bottom
-                .title-row
-                    .img > .img-cont > img(src="images/default-cover/default_epub.jpg")
-                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
-                    .time 上传时间：2017-02-27 10:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state > span.custom-color-4 已通过
-                .btn-row
-                    .btn 编辑
-                    i.iconfont.icon-trash
+            input.input(name='name' value=search.name  placeholder='请输入您要搜索的内容名称')
+            .btn#searchByName > i.iconfont.icon-search
+
+view('main')
+    ul.list-text.border.top > each(list)
+        li.border.bottom
+            .title-row
+                .img > .img-cont > img(src=imgUrl)
+                .inline-block.title > echo(name)
+                .time
+                    echo(prefixText) &nbsp;&nbsp;
+                    echo(downAndViewText)
+            .state
+                compare(auditStatus 'eq' 0) > span.custom-color-2
+                    map('knowledge-audit-status' auditStatus)
+                compare(auditStatus 'eq' 1) > span.custom-color-4
+                    map('knowledge-audit-status' auditStatus)
+                compare(auditStatus 'eq' 2) > span.custom-color-3
+                    map('knowledge-audit-status' auditStatus)
+            .btn-row
+                .btn 编辑
+                i.iconfont.icon-trash
+    #pager.pagination
