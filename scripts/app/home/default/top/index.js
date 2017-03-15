@@ -60,7 +60,8 @@ var menus = [{
 exports.items = {
     nav: 'nav',
     shortcut: 'shortcut',
-    logo: 'logo'
+    logo: 'logo',
+    'home/message': { isModule: true }
 };
 
 function getParams () {

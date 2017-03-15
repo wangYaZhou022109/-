@@ -133,3 +133,8 @@
         color: var(--font-tip-color);
     }
 }
+
+.checkbox {
+    display: inline-block;
+    vertical-align: middle;
+}

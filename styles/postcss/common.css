@@ -189,9 +189,16 @@ section.section {
     outline: none;
 }
 
+.overflow {
+    overflow: hidden;
+}
+
 .empty {
     font-size: var(--small-font);
     padding: calc(var(--space) / 2);
+    text-align: center;
+    margin: var(--large-space) 0;
+    color: var(--font-tip-color);
 }
 
 .no-bg {
