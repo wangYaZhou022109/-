@@ -5,6 +5,50 @@ exports.bindings = {
     img: false
 };
 
+exports.events = {
+    'click edit*': 'edit',
+};
+
+exports.handlers = {
+    edit: function(data) {
+        var me = this,
+            params = me.bindings.list.params;
+        this.app.viewport.ground(this.module.items['course-study/knowledge/add-knowledge'], {
+            data: { id: data },
+            state: 'edit',
+            callbacks: function() {
+                me.app.message.success('操作成功');
+                me.module.dispatch('search', params);
+            }
+        });
+    }
+};
+
+
+exports.actions = {
+    'click delete*': 'delete'
+};
+
+exports.dataForActions = {
+    delete: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '是否确定删除该知识?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    }
+};
+
+exports.actionCallbacks = {
+    delete: function() {
+        this.app.message.success('删除成功');
+    }
+};
+
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'list' }
 }];
@@ -39,7 +83,7 @@ exports.dataForTemplate = {
             obj.downloadMemberCount = obj.downloadMemberCount == null ? 0 : obj.downloadMemberCount;
             obj.browseCount = obj.browseCount == null ? 0 : obj.browseCount;
             obj.downAndViewText = '下载：' + obj.downloadMemberCount + ' ｜ 浏览：' + obj.browseCount;
-            obj.btnUrl = '#/course-study/knowledge/detail/' + obj.id;
+            obj.btnUrl = '#/knowledge/details/' + obj.id;
             return obj;
         });
         return list;

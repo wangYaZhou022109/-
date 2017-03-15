@@ -17,8 +17,9 @@ exports.store = {
                 { id: '1-3', name: '岗位学习', url: 'study/jobs' }
             ] },
             { id: '2', name: '我的活动', icon: 'icon-tag-1', url: 'activity', childs: [ // eslint-disable-line object-property-newline,max-len
-                { id: '2-0', name: '我的mooc', url: 'mooc' },
-                { id: '2-1', name: '我的直播', url: 'live' },
+               // { id: '2-0', name: '我的mooc', url: 'mooc' },
+                { id: '2-0', name: '我的直播', url: 'live' },
+                { id: '2-1', name: '我的考试', url: 'exam' },
                 { id: '2-2', name: '我的班级', url: 'class' },
                 { id: '2-3', name: '我的调研', url: 'train' }
             ] },

@@ -32,7 +32,7 @@ exports.handlers = {
     timeOrder: function() {
         var timeOrder = this.bindings.search.data.timeOrder,
             params = {
-                timeOrder: timeOrder === 'desc' ? 'asc' : 'desc'
+                timeOrder: timeOrder === 'asc' ? 'desc' : 'asc'
             };
         this.module.dispatch('search', params);
     }
