@@ -2,24 +2,28 @@
 exports.items = {
     banner: 'banner',
     left: 'left',
-    right: 'right'
+    right: 'right',
+    'ask/changetopic': { isModule: true }
 };
 
 exports.store = {
     models: {
         expert: { url: '../ask-bar/expert' },
-        leftstate: { data: { menu: 'expertsanswer' } },
+        leftstate: { data: { menu: 'inviteanswer' } },
         rightstate: {}
     },
     callbacks: {
-        init: function(payload) {
-            var expert = this.models.expert;
-            expert.set(payload);
+        init: function() {
+            var expert = this.models.expert,
+                state = this.models.leftstate;
+            state.data.id = 'me';
+            // state.changed();
+            expert.set({ id: 'me' });
             this.get(expert);
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    return this.dispatch('init');
 };

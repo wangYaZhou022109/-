@@ -1,0 +1,69 @@
+#!handlebars
+module > .ask-page > .container
+    .page-main-wrapper.knowledge-side
+        .page-side.side-min(data-region='right')
+        .page-main(data-region='topicdetail')
+        .page-menu(data-region='menu')
+        .page-list(data-region='list')
+view('topicdetail')
+    .topic-detail-title
+        .img > .img-cont > img(src="images/demo/1.jpg" alt='温暖气氛')
+        .w-full
+            h4.text-overflow > echo(topicdetail.name)
+            .info > echo(topicdetail.description)
+    
+view('menu')
+    .tabs.line.mb-1 > ul
+        li > a(id='menu-news')(class ='active') 最新动态
+        li > a(id='menu-exp')(class ='active') 专家分享
+        li > a(id='menu-reply' )(class ='active') 等你回答
+view('list') 
+    div(data-dynamic-key=state.menu)
+view('right')
+    #  .section
+    #      .btn.block.layout-mt-small.big 我要关注
+    #  .section.follow
+    #      .clearfix
+    #          dl
+    #              dt 99
+    #              dd 关注的内容
+    #          dl
+    #              dt 99
+    #              dd 关注的话题
+    #          dl
+    #              dt 99
+    #              dd 关注的专家
+
+    #  .section
+    #      span.h3 活跃专家
+    #      span.more more
+    #      .layout-mt-small.user-picture
+    #          .grid-row
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d4.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d3.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d1.jpg')
+    #              .col-md-4 > a(href="javascript:;" title="专家名称") > img.block(src='images/d2.jpg')
+
+    #  .section.relevant-course
+    #      span.h3 热门问题
+    #      .layout-mt-small.m-top
+    #          .block.layout-mt-small.m-top
+    #              a.text-overflow(href="javascript:;" title="零基础直达A1西班牙零基础直达A1西班牙语") 零基础直达A1西班牙零基础
+    #          .block.layout-mt-small.m-top
+    #              a.text-overflow(href="javascript:;" title="醒职场思维力系列课程") 醒职场思维力系列课程
+        .buttons
+            .btn#display > i.icon-plus + span > echo('我要关注')
+        echo('999')
+        echo('8')
+        echo('88')
+        echo('88')
+        br
+        echo('关注者')
+        echo('专家')
+        echo('问题')
+        echo('分享')

@@ -2,11 +2,11 @@ var D = require('drizzlejs');
 var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
-    expert: true
+    member: true
 };
 
 exports.events = {
-    'click expert-*': 'details'
+    'click member-*': 'details'
 };
 
 exports.handlers = {
