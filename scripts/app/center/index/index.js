@@ -37,7 +37,8 @@ exports.store = {
         }, // 首页推荐
         page: { data: { value: '1' } }, // 记录页码
         down: { url: '../human/file/download' },
-        member: { url: '../human/member/center', autoLoad: 'after' }
+        member: { url: '../human/member/center', autoLoad: 'after' },
+        img: { url: '../human/file/download?id=' }
     },
     callbacks: {
         init: function() {

@@ -13,19 +13,23 @@ view('top')
         .learn-info
             .item
                 .h2 > echo(member.totalStudyTime)
-                .sub-text > setting('center.index.start-time')
+                .sub-text 学习时长
             .item
                 .h2 > echo(member.integralCount)
-                .sub-text > setting('center.index.integral')
+                .sub-text 积分
         .base-info
             .info-row
                 span.h2 > echo(member.fullName)
                 span.lv Lv3
             .info-row
-                .item > i.iconfont.icon-warn + span 需求方
-                .item > i.iconfont.icon-mark + span 班务
-                .item > i.iconfont.icon-user-1 + span 讲师
-                .item > i.iconfont.icon-user-2 + span 专家
+                if(isContact)
+                    .item > i.iconfont.icon-warn + span 需求方
+                if(isClass)
+                    .item > i.iconfont.icon-mark + span 班务
+                if(isLecture)
+                    .item > i.iconfont.icon-user-1 + span 讲师
+                if(isExpert)
+                    .item > i.iconfont.icon-user-2 + span 专家
                 .item > a#edit-info > setting('center.index.edit')
             .info-row
                 .edit-div(contenteditable='true') > echo(member.memberDetail.summary)

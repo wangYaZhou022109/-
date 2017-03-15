@@ -1,5 +1,6 @@
 exports.bindings = {
-    member: true
+    member: true,
+    img: false
 };
 
 exports.events = {
@@ -14,10 +15,17 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
+    member: function() {
+        var member = this.bindings.member.data,
+            downUrl = this.bindings.img.getFullUrl();
+        member.gradeCover = member.gradeCover == null ? '' : downUrl + member.gradeCover;
+        return member;
+    },
     photo: function() {
-        var memberDetail = this.bindings.member.memberDetail;
+        var memberDetail = this.bindings.member.data.memberDetail,
+            downUrl = this.bindings.img.getFullUrl();
         if (memberDetail && memberDetail.headPortrait) {
-            return '/api/v1/human/file/download?id=' + memberDetail.headPortrait;
+            return downUrl + memberDetail.headPortrait;
         }
         return 'images/default-userpic.png';
     }
