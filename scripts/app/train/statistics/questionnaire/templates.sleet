@@ -1,0 +1,24 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='mainA')
+
+view('mainA')
+    table.table
+        thead > tr
+            th > echo('问卷名称')
+            th > echo('问卷类型')
+            th > echo('开始时间')
+            th > echo('截止时间')
+            th > echo('操作')
+        tbody > each(classEvaluates) > tr
+            td > echo(resourceName)
+            td > map('questionnaire-type' type)
+            td > dateTime(createTime)
+            td > dateTime(createTime)
+            td
+                a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id typeId=type) > echo('查看')
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')
+

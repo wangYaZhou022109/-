@@ -1,0 +1,29 @@
+#! handlebars
+
+module > .achievement-content.main-side
+    .achievement-side.bg-color
+        div(data-region='side')
+    .achievement-head(data-region='head')
+    .achievement-main(data-region='main')
+
+
+view('head')
+    .pull-left.title > echo('正在参与: ' researchRecord.researchQuestionary.name)
+    .text-right
+        ul.head-info.inline-block
+            li.border.right > echo('调研人: ' researchRecord.member.fullName)
+        .btn#submit > string('exam.research.research-detail.submit')
+
+view('side')
+    ul.list > each(dimensions)
+        li(id='list-item-' + @index)
+            .list-title > i.iconfont.icon-type.m-right + echo(name)
+            div(class='min-btn-groups') > each(questions)
+                div(class='list-item')(id='q-' + id) > echo(questionIndex)
+
+view('main')
+    .preview-content
+        div > each(dimensions)
+            .h3.m-bottom > echo(dimensionIndex name)
+            each(questions)
+                div(data-dynamic-key=id)

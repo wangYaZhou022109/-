@@ -44,8 +44,8 @@ view('main')
             td > echo(title2)
             td
                 a(id='edit'+id data-name='id' data-value=id) > echo('查看')
-            else
-                tr > td(colspan='11') > p.text-center > string('no-data')        
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')        
     #pager.pagination
 
 view('edit') > form.vertical

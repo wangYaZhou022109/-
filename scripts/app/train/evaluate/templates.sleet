@@ -14,8 +14,8 @@ view('main') > form.vertical
         .hr
         .row
             .col-sm-2(style='text-align:left')
-                label 本次培训采用的考核方式：
-                input.input#method(name='method' value=Evaluate.method)
+                label(class='required') 本次培训采用的考核方式：
+                input.input#method(name='method' value=Evaluate.method x-rule='required')
                 input.input#id(type='hidden' name='id' value=Evaluate.classInfo.id)
         .row
             .col-sm-2(style='text-align:left')
@@ -43,9 +43,9 @@ view('main') > form.vertical
         hr
         .row
             .col-sm-2(style='text-align:left')
-                label 考核结果：
+                label(class='required') 考核结果：
             .col-sm-4
-                textarea#result(name='result' value='' rows=5 cols=80 x-rule='maxLength:1000') > echo(Evaluate.result)
+                textarea#result(name='result' value='' rows=5 cols=80 x-rule='maxLength:1000' x-rule='required') > echo(Evaluate.result)
         .row
             .col-sm-8(style='text-align:center')
                 if(Evaluate.method)

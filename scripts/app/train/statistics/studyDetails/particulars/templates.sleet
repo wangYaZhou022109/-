@@ -22,6 +22,6 @@ view('main')
             td > dateTime(courseStudyProgress.beginTime)
             td > date(courseStudyProgress.studyTotalTime)
             td > map('course-info-study-status' courseStudyProgress.finishStatus)
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
     #pager.pagination

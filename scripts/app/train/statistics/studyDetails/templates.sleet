@@ -28,5 +28,5 @@ view('main')
             td
                 a(id='edit'+memberId data-name='id' data-value=memberId) > echo('详情')
             else
-                    tr > td(colspan='11') > p.text-center > string('no-data')
+                tr > td(colspan='11') > p.text-center > string('no-data')
     #pager.pagination
