@@ -1,3 +1,4 @@
+var timeInterval;
 exports.bindings = {
     state: false,
     download: false,
@@ -6,10 +7,13 @@ exports.bindings = {
 
 exports.components = [
     function() {
-        var section = this.bindings.state.data.section || {},
+        var state = this.bindings.state.data,
+            section = state.section || {},
+            localLocation = state.localLocation,
             progress = section.sectionProgress || {},
             pageNum = progress.lessonLocation || 1,
             url = this.bindings.download.getFullUrl() + '/' + section.resourceId;
+        if (localLocation) pageNum = localLocation;
         return {
             id: 'viewPdf',
             name: 'picker',
@@ -29,6 +33,7 @@ exports.beforeClose = function() {
         studyTime = 0,
         lessonLocation;
     lessonLocation = pdfData ? pdfData.pageNum : 0;
+    clearInterval(timeInterval);
     this.module.dispatch('updatePregress', {
         beginTime: beginTime,
         studyTime: Math.ceil(studyTime),
@@ -38,4 +43,20 @@ exports.beforeClose = function() {
     }).then(function(data) {
         me.module.renderOptions.callback(data);
     });
+};
+exports.afterRender = function() {
+    // 每分钟保存进度, lessonLocation,studyTime,sectionId
+    var pdfData = this.components.viewPdf.getData(),
+        sectionId = this.bindings.state.data.section.id,
+        me = this;
+    var lessonLocation = pdfData ? pdfData.pageNum : 0;
+    var process = function() {
+        return {
+            lessonLocation: lessonLocation,
+            sectionId: sectionId
+        };
+    };
+    timeInterval = setInterval(function() {
+        me.module.dispatch('storeProcess', process());
+    }, 1000 * 10);
 };

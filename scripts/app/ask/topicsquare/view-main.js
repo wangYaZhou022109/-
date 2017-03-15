@@ -2,7 +2,8 @@ var D = require('drizzlejs');
 var $ = require('jquery');
 exports.bindings = {
     state: true,
-    topicname: true
+    topicname: true,
+    topicType: true
 };
 
 exports.events = {
@@ -19,7 +20,11 @@ exports.handlers = {
         var region;
         var el = $(target).parents('.activity-category')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/topicsquare/detail', { id: id });
+        region.show('ask/topicsquare/topicdetail', { id: id });
     }
+};
+exports.actions = {
+    'click checkOne-*': 'checkOne',
+    'click checkAll*': 'checkAll'
 };
 

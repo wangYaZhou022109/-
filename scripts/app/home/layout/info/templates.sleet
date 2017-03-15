@@ -1,0 +1,43 @@
+#! handlebars
+
+module > .edit-info-page(data-region='base-info')
+
+view('base-info') > .base-info
+    .sub-text.layout-mb.small-font 张三，您好！欢迎来到网大，为保证您的数据准确性，请您核对您的基本信息，如有错误，请给予反馈，管理员会尽快为你处理！
+    .form
+        .pic > img(src='images/1.png') + .btn.block.white.border 请上传您的头像
+        .info
+            .form-row
+                .layout-mr
+                    .inline-block 姓名：
+                    .inline-block 罗会奇
+                .layout-mr
+                    .inline-block 性别：
+                    .inline-block
+                        span.m-right > input.inline-block(type='radio') + .inline-block 男
+                        input.inline-block(type='radio') + .inline-block 女
+
+            .form-row
+                .inline-block 身份证号：
+                .inline-block 323234232342342350923
+
+            .form-row
+                .layout-mr
+                    .inline-block 岗位：
+                    .inline-block > select.input
+                        option 产品经理
+                .layout-mr
+                    .inline-block 员工编号：
+                    .inline-block 124324234242
+            .form-row
+                .inline-block 单位：
+                .inline-block 互联网中心互联网中心互联网中心互联网中心互联网中心
+            .form-row
+                .inline-block 部门：
+                .inline-block 互联网中心
+            .form-row
+                .inline-block 手机：
+                .inline-block > input.input(value='23423423423')
+            .form-row
+                .inline-block 邮箱：
+                .inline-block > input.input(value='23243234@3424.com')
