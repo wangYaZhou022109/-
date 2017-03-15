@@ -203,9 +203,10 @@ view('list')
 view('exam-tips')
     .container
         .row > .col-sm-12
-            echo(exam.examNotes)
+            echo(currentExam.content)
         .row > .col-sm-12
-            echo('点击下方“开始考试”后将会立即进入考试，该考卷考试时长为' exam.duration '分钟。')
+            each(currentExam.buttons)
+                a(id=id) > echo(text)
 
 view('research-tips')
     .container
