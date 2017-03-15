@@ -25,6 +25,9 @@ var initVideo = function(payload) {
     payload.on('end', function() {
         beginTime = 0;
     });
+    payload.on('pause', function() {
+        beginTime = 0;
+    });
 
     return function() {
         return Math.floor(learnTime / 1000);

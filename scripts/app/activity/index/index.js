@@ -32,6 +32,10 @@ exports.store = {
             type: 'pageable',
             root: 'items',
             pageSize: 6
+        },
+        // 待办 阅卷，暂时写在这里 测试
+        toDos: {
+            url: '../exam/to-do'
         }
     },
     callbacks: {
@@ -44,6 +48,7 @@ exports.store = {
             this.models.researchActivitys.params = this.models.params.data;
             this.models.researchActivitys.params.type = RESEARCH_TYPE;
             this.get(this.models.researchActivitys);
+            this.get(this.models.toDos);
         },
         search: function(payload) {
             D.assign(this.models.params.data, payload);

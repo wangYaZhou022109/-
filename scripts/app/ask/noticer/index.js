@@ -4,13 +4,13 @@ exports.items = {
 
 exports.store = {
     models: {
-        expert: { url: '../ask-bar/expert/active-expert' }
+        member: { url: '../ask-bar/concern/followMe' }
     },
     callbacks: {
         init: function() {
-            var expert = this.models.expert;
-            expert.set({ id: 1222 });
-            return this.get(expert);
+            var member = this.models.member;
+            member.set({ id: 'me' });
+            return this.get(member);
         }
     }
 };

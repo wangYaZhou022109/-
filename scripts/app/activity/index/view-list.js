@@ -6,7 +6,8 @@ exports.bindings = {
     down: true,
     gensees: true,
     exams: true,
-    researchActivitys: true
+    researchActivitys: true,
+    toDos: true
 };
 
 exports.events = {

@@ -99,6 +99,8 @@ exports.dataForTemplate = {
                     if (rr.progress && !rr.progress.completedRate) {
                         rr.progress.completedRate = 0;
                     }
+                    // Rate
+                    rr.showRate = [5, 6].indexOf(rr.sectionType) !== -1;
                 });
             });
         }
