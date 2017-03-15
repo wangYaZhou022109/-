@@ -1,18 +1,22 @@
 exports.items = {
-    topicsquare: 'topicsquare',
-    'ask/topicsquare/applytopic': { isModule: true },
+    main: 'main',
+    side: 'side',
+    'ask/topicsquare/apply-topic': { isModule: true }
 };
 
 exports.store = {
     models: {
-        params: { data: { isOverdue: '1' } },
-        state: { auditStatus: 1 }
+        topicname: { url: '../ask-bar/topic/topic-name' },
+        state: {}
     },
     callbacks: {
         init: function() {
+            var topicname = this.models.topicname;
+            // topicname.params = { id: 5 };
+            return this.get(topicname);
         }
     }
 };
-exports.afterRender = function() {
+exports.beforeRender = function() {
     this.dispatch('init');
 };
