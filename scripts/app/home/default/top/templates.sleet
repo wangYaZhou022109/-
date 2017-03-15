@@ -36,7 +36,14 @@ view('shortcut')
                     li.text-hover-main-color 热门搜索课程名称
                     li.text-hover-main-color 热门搜索课程名称
 
-
+        .item.small-font.drop-down-wrapper.right
+            .drop-down-btn
+                span 集团
+                i.iconfont.icon-triangle-down
+            .drop-down-content > .content
+                ul
+                    li 集团
+                    li 子公司
 
         .item.drop-down-wrapper.right
             a.normal(href='#') > i.iconfont.icon-message.drop-down-btn
