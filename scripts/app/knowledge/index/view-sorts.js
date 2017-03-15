@@ -1,0 +1,3 @@
+exports.bindings = {
+    search: 'changeSearch',
+};
