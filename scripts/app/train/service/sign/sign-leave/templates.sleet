@@ -28,13 +28,13 @@ view('approval') > form.vertical
     .row
         .col-sm-9
             echo('请假原因')
-            input.input#reson(name='reason'  value=lea.reason  x-rule='required')
+            input#reason(name='reason' value=lea.reason rows=5 cols=80 x-rule='maxLength:1000')
             echo('审核意见')
             select#state(name='state')
                 option(value='1') > echo('同意')
                 option(value='2') > echo('不同意')
             echo('申请时间')
             input.input#createTime(name='createTime' value=dateTime(lea.createTime) x-rule='required')
-            input.input(type='hidden' name='id' value=lea.id)
+            input.input#id(type='hidden' name='lulu' value=lea.id)
         div.col-sm-3
             btn.btn#update > echo('确定')

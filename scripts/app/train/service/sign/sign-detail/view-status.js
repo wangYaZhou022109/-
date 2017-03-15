@@ -14,27 +14,19 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    update: function(payload) {
-        var data = payload;
+    update: function() {
         var id = this.bindings.state.data.id;
-        data.id = id;
-        return this.validate() ? payload : false;
+        return {
+            id: id,
+            state: $(this.$$('[name="state"]')).val(),
+        };
     }
 };
 
 exports.actionCallbacks = {
     update: function() {
-        // this.app.message.success('保存成功！');
         this.app.viewport.closeModal();
     }
-};
-
-exports.mixin = {
-    validate: function() {
-        return {
-            state: $(this.$$('[name="state"]')),
-        };
-    },
 };
 
 exports.dataForTemplate = {

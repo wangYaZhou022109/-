@@ -7,6 +7,8 @@ module > .train-class-page
         .main(data-region='online')
     .page-main-wrapper
         .main(data-region='questionnaire')
+    .page-main-wrapper
+        .main(data-region='task')
 
 view('offline') 
     div(style='padding:20px 50px 50px 20px;')
@@ -122,6 +124,32 @@ view('questionnaire')
                         a(id='edit-qnr-'+id data-name='id' data-value=id) 编辑
                         a(id='view-qnr-'+id data-name='id' data-value=id) 预览
                         a(id='del-qnr-'+id data-name='id' data-value=id) 删除
+
+view('task') 
+    div(style='padding:20px 50px 50px 20px;')
+        .list.m-top
+            table.table
+                thead > tr
+                    td(colspan=8)
+                        .col-sm-4
+                            label 作业
+                        .col-sm-8(style='text-align:right;')
+                            a.btn#addTask 添加作业
+                            a > echo('最小化')
+                thead > tr
+                    th 序号
+                    th(width='50%') 问卷名称
+                    th 开始时间
+                    th 结束时间
+                    th 操作
+                tbody > each(taskList) > tr
+                    td > echo(i)
+                    td > echo(name)
+                    td > dateTime(startTime)
+                    td > dateTime(endTime)
+                    td
+                        a(id='edit-task-'+id data-name='id' data-value=id) 编辑
+                        a(id='del-task-'+id data-name='id' data-value=id) 删除
 
 view('configOffline')
     .list.m-top
@@ -286,3 +314,47 @@ view('import')
 view('import-upload')
     .row
         #uploader2
+
+view('editTask') > form.vertical
+    .col-sm-2(style='text-align:right')
+        a.btn#saveTask 保存
+    .row
+        label(style='float:left;') 课程名称
+        input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
+        input.input#id(type= 'hidden' name='id' value=task.id)
+    .row
+        label(style='float:left;') 开始时间
+        input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
+        label(style='float:left;') 结束时间
+        input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
+    .row
+        label(style='float:left;') 任务说明
+        textarea#explain(name='explain' value='task.explain' rows=5 cols=55 x-rule='maxLength:1000')
+
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 课件(最多上传3个)
+                    .col-sm-2(style='text-align:right;')
+                        a.btn#chooseFile 上传
+                        a(title='上传附件支持格式：xls/xlsx/doc/docx/ppt/pptx/zip/txt/rar/pdf/epub/mp3/mp4(大小<100M)') > echo('?')
+            thead > tr
+                th 序号
+                th(width='50%') 附件名称
+                th 类型
+                th 操作
+            tbody > each(files) > tr
+                td > echo(i)
+                td
+                    label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachName + '(点击可修改)')
+                    input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
+                td > map('class-file-type' fileType)
+                td
+                    if(canPreview)
+                        a(href='javascript:;' id='preview-attach-'+attachId) 预览
+                    else
+                        a(href=downUrl download=attachName) 下载
+                    a(id='del-attach-'+id data-name='id' data-value=id) 删除
+

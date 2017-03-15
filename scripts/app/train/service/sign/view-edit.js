@@ -12,7 +12,8 @@ exports.title = function() {
 };
 
 exports.bindings = {
-    sign: true
+    sign: true,
+    state: true,
 };
 
 exports.actions = {
@@ -20,30 +21,25 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    save: function(payload) {
-        return this.validate() ? payload : false;
+    save: function() {
+        var state = this.bindings.state.data,
+            classId = state.classId;
+        return {
+            classId: classId,
+            name: $(this.$$('[name="name"]')).val(),
+            startTime: $(this.$$('[name="startTime"]')).val(),
+            endTime: $(this.$$('[name="endTime"]')).val(),
+            lateTime: $(this.$$('[name="lateTime"]')).val(),
+            place: $(this.$$('[name="place"]')).val(),
+        };
     }
 };
 
 exports.actionCallbacks = {
     save: function() {
         this.app.message.success('保存成功！');
-        // this.module.dispatch('init');
         this.app.viewport.closeModal();
     }
-};
-
-exports.mixin = {
-    validate: function() {
-        return {
-            name: $(this.$$('[name="name"]')),
-            startTime: $(this.$$('[name="startTime"]')),
-            endTime: $(this.$$('[name="endTime"]')),
-            lateTime: $(this.$$('[name="lateTime"]')),
-            place: $(this.$$('[name="place"]')),
-        };
-    },
-
 };
 
 exports.components = [function() {

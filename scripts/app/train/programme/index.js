@@ -5,9 +5,11 @@ exports.items = {
     offline: 'offline',
     online: 'online',
     questionnaire: 'questionnaire',
+    task: 'task',
     configOffline: '',
     configOnline: '',
     editOffline: '',
+    editTask: '',
     upload: '',
     courseware: '',
     'train/programme/select-course': { isModule: true },
@@ -22,6 +24,8 @@ exports.store = {
         onlineCourseList: { url: '../train/online-course' },
         onlineCourse: { url: '../train/online-course' },
         questionnaireList: { url: '../train/questionnaire' },
+        taskList: { url: '../train/class-task' },
+        task: { url: '../train/class-task' },
         themeList: { url: '../train/theme' },
         offlineThemeList: { url: '../train/theme/findOfflineTheme' },
         themeModel: { url: '../train/theme' },
@@ -47,6 +51,7 @@ exports.store = {
             var offlineCourseList = this.models.offlineCourseList,
                 onlineCourseList = this.models.onlineCourseList,
                 questionnaireList = this.models.questionnaireList,
+                taskList = this.models.taskList,
                 classInfo = this.models.classInfo,
                 offlineThemeList = this.models.offlineThemeList,
                 state = this.models.state,
@@ -70,6 +75,8 @@ exports.store = {
                 me.get(onlineCourseList);
                 questionnaireList.params.classId = data[0].id;
                 me.get(questionnaireList);
+                taskList.params.classId = data[0].id;
+                me.get(taskList);
             });
         },
         showOnlineTheme: function() {
@@ -404,7 +411,34 @@ exports.store = {
                 state.changed();
                 me.get(me.models.offlineCourseList);
             });
-        }
+        },
+        delTask: function(payload) {
+            var model = this.models.task,
+                taskList = this.models.taskList,
+                me = this;
+            model.set(payload);
+            this.del(model).then(function() {
+                me.get(taskList);
+            });
+        },
+        saveTask: function(payload) {
+            var task = this.models.task,
+                taskList = this.models.taskList,
+                state = this.models.state,
+                fileList = this.models.files,
+                me = this;
+            D.assign(payload, {
+                fileList: JSON.stringify(fileList.data),
+                id: fileList.data.length > 0 ? payload.id[0] : payload.id,
+                classId: state.data.classId,
+            });
+            task.clear();
+            task.set(payload);
+            this.save(task).then(function() {
+                this.app.message.success('提交成功');
+                me.get(taskList);
+            });
+        },
     }
 };
 

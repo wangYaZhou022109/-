@@ -8,10 +8,13 @@ exports.events = {
 
 exports.handlers = {
     showTab: function(tab) {
-        var state = this.bindings.state;
+        var state = this.bindings.state,
+            classId = state.data.classId;
         state.data = {};
         state.data.tab = tab || 'sign';
+        state.data.classId = classId;
         state.data[tab] = true;
         state.changed();
     }
 };
+

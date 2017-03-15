@@ -26,21 +26,25 @@ exports.store = {
     },
     callbacks: {
         update: function(payload) {
-            var updateState = this.models.updateState;
+            var updateState = this.models.updateState,
+                signDetail = this.models.signDetail,
+                me = this;
             updateState.params = payload;
             updateState.set(payload);
-            this.put(updateState).then(function() {
-                this.app.message.success('修改成功');
-                this.get(this.models.signDetail);
+            me.put(updateState).then(function() {
+                me.app.message.success('修改成功');
+                me.get(signDetail);
             });
         },
         batch: function(payload) {
-            var batch = this.models.batchUpdate;
+            var batch = this.models.batchUpdate,
+                signDetail = this.models.signDetail,
+                me = this;
             batch.params = payload;
             batch.set(payload);
-            this.put(batch).then(function() {
-                this.app.message.success('修改成功');
-                this.get(this.models.signDetail);
+            me.put(batch).then(function() {
+                me.app.message.success('修改成功');
+                me.get(signDetail);
             });
         },
         export: function() {

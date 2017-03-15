@@ -29,10 +29,18 @@ exports.store = {
         optionModel: {
             url: '../train/busValue'
         },
-        state: { data: { classId: 3 } },
+        state: { data: {} },
         delOptionList: { data: [] },
     },
     callbacks: {
+        init: function(payload) {
+            var buss = this.models.buss,
+                state = this.models.state;
+            buss.clear();
+            state.data.classId = payload.classId;
+            buss.params = state.data;
+            return this.get(buss);
+        },
         editBus: function(payload) {
             var bus = this.models.bus;
             var optionList = this.models.optionList;
@@ -42,11 +50,6 @@ exports.store = {
                 optionList.data = data[0].optionList;
                 optionList.changed();
             });
-        },
-        init: function(payload) {
-            var buss = this.models.buss;
-            buss.params = payload;
-            return this.get(buss);
         },
         publish: function(payload) {
             this.models.publish.set(payload);
@@ -115,6 +118,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

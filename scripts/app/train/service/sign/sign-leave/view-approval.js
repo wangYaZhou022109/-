@@ -1,11 +1,10 @@
 var $ = require('jquery');
 
-exports.type = '请假审批';
+exports.title = '请假审批';
 
 exports.bindings = {
     leave: true,
     lea: true,
-    state: {}
 };
 
 exports.actions = {
@@ -13,22 +12,18 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    update: function(payload) {
-        return this.validate() ? payload : false;
+    update: function() {
+        return {
+            id: $(this.$$('[name="lulu"]')).val(),
+            // id: $(this.$('id')).val(),
+            state: $(this.$$('[name="state"]')).val(),
+        };
     }
 };
 
 exports.actionCallbacks = {
     update: function() {
-        // this.app.message.success('保存成功！');
         this.app.viewport.closeModal();
     }
 };
 
-exports.mixin = {
-    validate: function() {
-        return {
-            state: $(this.$$('[name="state"]')),
-        };
-    },
-};

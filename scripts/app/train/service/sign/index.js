@@ -19,23 +19,31 @@ exports.store = {
         batchDelete: {
             url: '../train/sign/batchDelete'
         },
-        state: { data: { classId: 3 } }
+        state: { data: {} }
     },
     callbacks: {
+        init: function(payload) {
+            var signs = this.models.signs,
+                state = this.models.state;
+            signs.clear();
+            state.data.classId = payload.classId;
+            signs.params = state.data;
+            return this.get(signs);
+        },
         preview: function(payload) {
             var sign = this.models.sign;
             sign.set(payload);
             return this.get(sign);
         },
-        init: function(payload) {
-            var signs = this.models.signs;
-            signs.params = payload;
-            return this.get(signs);
-        },
         batchDelete: function(payload) {
-            var batchDelete = this.models.batchDelete;
+            var batchDelete = this.models.batchDelete,
+                signs = this.models.signs,
+                me = this;
             batchDelete.set(payload);
-            return this.put(batchDelete);
+            me.put(batchDelete).then(function() {
+                me.app.message.success('删除成功');
+                me.get(signs);
+            });
         },
         search: function(payload) {
             var signs = this.models.signs;
@@ -47,25 +55,29 @@ exports.store = {
             sign.set(payload);
             return this.get(sign);
         },
-        addSign: function(payload) {
-            var sign = this.models.sign;
-            sign.set(payload);
-            return this.save(sign);
-        },
         del: function(payload) {
-            var sign = this.models.sign;
+            var sign = this.models.sign,
+                signs = this.models.signs,
+                me = this;
             sign.set(payload);
-            return this.del(sign);
+            this.del(sign).then(function() {
+                me.app.message.success('删除成功');
+                me.get(signs);
+            });
         },
         save: function(payload) {
-            var sign = this.models.sign;
+            var sign = this.models.sign,
+                signs = this.models.signs,
+                me = this;
             sign.set(payload);
-            return this.save(sign);
+            this.del(sign).then(function() {
+                me.app.message.success('保存成功');
+                me.get(signs);
+            });
         },
     }
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

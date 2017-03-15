@@ -45,12 +45,14 @@ exports.store = {
             return this.get(lea);
         },
         update: function(payload) {
-            var updateState = this.models.updateState;
+            var updateState = this.models.updateState,
+                leave = this.models.leave,
+                me = this;
             updateState.params = payload;
             updateState.set(payload);
-            this.put(updateState).then(function() {
-                this.app.message.success('修改成功');
-                this.get(this.models.lea);
+            me.put(updateState).then(function() {
+                me.app.message.success('修改成功');
+                me.get(leave);
             });
         },
     }
