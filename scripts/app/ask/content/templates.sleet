@@ -3,7 +3,7 @@
 module > .ask-page > .container
     .page-main-wrapper
         .page-side.side-min(data-region='right')
-        .page-main(data-region='left') 
+        .page-main(data-region='left' class = 'activity-category') 
 
 view('left')
     div(data-dynamic-key='contentleft')
