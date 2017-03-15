@@ -59,7 +59,8 @@
 }
 
 .sub-title,
-.sub-text {
+.sub-text,
+.text-tips {
     color: var(--font-tip-color);
 }
 
