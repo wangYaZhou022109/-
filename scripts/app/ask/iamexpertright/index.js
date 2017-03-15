@@ -6,9 +6,9 @@ exports.items = {
 
 exports.store = {
     models: {
-        topstate: {},
-        middlestate: {},
-        bottomstate: {}
+        topstate: { data: { menu: 'myshare' } },
+        middlestate: { data: { menu: 'mynoticer' } },
+        bottomstate: { data: { menu: 'noticer' } }
     },
     callbacks: {
         init: function() {

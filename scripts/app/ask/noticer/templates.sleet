@@ -19,19 +19,6 @@ view('list')
         span.more#follow-me more
         .layout-mt-small.user-picture
             .grid-row
-                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d3.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d4.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d5.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d3.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d3.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d1.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
-                .col-md-3 > img.block(src='images/d2.jpg' alt='名字')
+                each(member)
+                    .col-md-3 > img.block(src=headPortrait alt=fullName id='member-' + id data-name='id' data-value=id )
+               

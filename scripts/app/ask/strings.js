@@ -16,6 +16,7 @@ module.exports = {
     become: '成为',
     content: '内容',
     comment: '评论',
+    change: '更改',
     'detailed-description': '详细描述',
     discuss: '讨论',
     delete: '删除',

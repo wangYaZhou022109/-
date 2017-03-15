@@ -1,0 +1,26 @@
+#!handlebars
+module
+    div(data-region='list')
+
+view('list')
+    each(reply)
+        ul 
+            li(style='font-weight:bold')
+                compare(thumbnail 'ne' '')
+                    .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
+                a(id='dynamic-' + id + ',' + questionId data-name='id' data-value= id + ',' + questionId href='javascript:;') > echo(title) 
+                .img(style='height:80px;width:80px;float:right;') > img(src=createUser.headPortrait )
+            li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
+                echo(content) 
+            li
+                echo(member.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
+            li
+                string('from-topic') + echo(' ：' + relTopic)
+                a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
+                echo('添加讨论')
+                a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
+                echo('|')
+                a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
+                echo('|')
+                a(id='shut-' + id href='javascript:;')(class ='active') > echo('删除')
+                hr

@@ -14,9 +14,8 @@ exports.handlers = {
     showMenu: function(menu) {
         var state = this.bindings.leftstate,
             expert = this.bindings.expert;
-       // console.log(expert);
         state.data = {};
-        state.data.expertid = expert.id;
+        state.data.id = expert.data.id;
         state.data.menu = menu || 'expertsanswer';
         state.data[menu] = true;
         state.changed();
