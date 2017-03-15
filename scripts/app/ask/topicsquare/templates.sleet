@@ -10,22 +10,9 @@ view('main')
         ul
             li.active 话题广场
     .border.bottom.dashed
-        .tag-btn.active 全部
-        .tag-btn 生活
-        .tag-btn 科学教育
-        .tag-btn 发展经济学
-        .tag-btn 社会民生
-        .tag-btn 职业发展
-        .tag-btn 生活
-        .tag-btn 科学教育
-        .tag-btn 发展经济学
-        .tag-btn 社会民生
-        .tag-btn 职业发展
-        .tag-btn 生活
-        .tag-btn 科学教育
-        .tag-btn 发展经济学
-        .tag-btn 社会民生
-        .tag-btn 职业发展
+        a.tag-btn.active(id='checkAll' data-name='id' data-value=id ) > echo('全部')
+        each(topicType)
+            a.tag-btn(id='checkOne-' + id data-name='id' data-value=id ) > echo(name)
     .comment-list.ask-list > ul
         each(topicname)
             li.topic-item
