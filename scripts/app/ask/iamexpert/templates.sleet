@@ -39,15 +39,15 @@ view('right')
 view('left') 
     section.section
         .tabs.line.mb-1 > ul
-            li#menu-expertsanswer.active > string('question') + string('answer') 
+            li#menu-inviteanswer.active > string('question') + string('answer') 
             li#menu-expertssharing > string('my') + string('share')
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
                 .person-list
                     .filter
                         .pull-left
-                            .item.active > span 邀请回答
-                            .item > span 我的回答
+                            .item.active(id ='item-inviteanswer') > span 邀请回答
+                            .item(id ='item-myanswer') > span 我的回答
                     .comment-list.ask-list > ul
                         div(data-dynamic-key=leftstate.menu)
 
