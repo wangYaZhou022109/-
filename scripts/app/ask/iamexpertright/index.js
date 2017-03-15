@@ -6,9 +6,9 @@ exports.items = {
 
 exports.store = {
     models: {
-        topstate: {},
-        middlestate: {},
-        bottomstate: {}
+        topstate: { data: { menu: 'myshare' } },
+        middlestate: { data: { menu: 'mynoticer' } },
+        bottomstate: { data: { menu: 'noticer' } }
     },
     callbacks: {
         init: function() {
@@ -19,5 +19,5 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    // return this.dispatch('init', this.renderOptions);
+    return this.dispatch('init', this.renderOptions);
 };

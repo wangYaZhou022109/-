@@ -36,7 +36,6 @@ view('test')
 
 view('right') 
     div(data-dynamic-key='iamexpertright')
-
 view('left') 
     section.section
         .tabs.line.mb-1 > ul
