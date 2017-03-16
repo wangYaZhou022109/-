@@ -2,62 +2,99 @@
 module > .course-page
     div(data-region='mymanage')
     div(data-region='reviewed')
-
 view('mymanage')
-    echo('我的管理')
-    br
-    each(mymanage)
-        br
-        echo(id)
-        echo('话题名称:')
-        a(id='topicDeal-' + id data-name='id' data-value=id href='javascript:;') > echo(name) 
-        br
-        echo('今日新增:')
-        echo(todayQuestionSum)
-        echo('问题|')
-        echo(todayShareSum)
-        echo('分享')  
+    .tabs.line > ul
+        li.active > echo('我的管理')
+    .comment-list.ask-list.min > ul
+        each(mymanage)
+            li.topic-item
+                a.normal(id='topicDeal-' + id data-name='id' data-value=id href="javascript:;")
+                    .img > .img-cont > img(src="images/demo/1.jpg")
+                    h4.text-overflow > echo(name)
+                    .info > echo('今日新增:') + echo(todayQuestionSum) + echo('问题|') + echo(todayShareSum) + echo('分享')
+           
 view('reviewed')
-    .buttons
-        .btn#display > i.icon-plus + span > echo('显示待审核')
-    echo('我的审核')
-    each(reviewed)
-        br
-        compare(auditStatus 'eq' 0) 
-            echo('【')
-            map('ask-audit-type' auditType)
-            echo('】 ')
-            map('ask-audit-status' auditStatus)
-            echo('提交人：')
-            echo(member.fullName)
-            echo('提交时间: ')
-            date(createTime)
-            echo('内容:')
-            echo(question.content)
-            a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') 详情
-        compare(auditStatus 'eq' 1)
-            echo('【')
-            map('ask-audit-type' auditType)
-            echo('】 ')
-            map('ask-audit-status' auditStatus)
-            echo('审核人：')
-            echo(auditor)
-            echo('审核时间: ')
-            date(auditTime)
-            echo('内容:')
-            echo(question.content)
-            a(id='deal-' + id href='javascript:;' auditType=auditType)(class ='active') 详情
-        compare(auditStatus 'eq' 2)
-            echo('【')
-            map('ask-audit-type' auditType)
-            echo('】 ')
-            map('ask-audit-status' auditStatus)
-            echo('审核人：')
-            echo(auditor)
-            echo('审核时间: ')
-            date(auditTime)
-            echo('内容:')
-            echo(question.content)
-            a(id='deal-' + id href='javascript:;' auditType=auditType)(class ='active') 详情
+    #  .buttons
+    #      .btn#display > i.icon-plus + span > echo('显示待审核')
+    .hr
+    .checkbox > input(type='checkbox' id='check-all') + label 显示待审核
+    #  each(reviewed)
+    #      br
+    #      compare(auditStatus 'eq' 0) 
+    #          echo('【')
+    #          map('ask-audit-type' auditType)
+    #          echo('】 ')
+    #          map('ask-audit-status' auditStatus)
+    #          echo('提交人：')
+    #          echo(member.fullName)
+    #          echo('提交时间: ')
+    #          date(createTime)
+    #          echo('内容:')
+    #          echo(question.content)
+    #          a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') 详情
+    #      compare(auditStatus 'eq' 1)
+    #          echo('【')
+    #          map('ask-audit-type' auditType)
+    #          echo('】 ')
+    #          map('ask-audit-status' auditStatus)
+    #          echo('审核人：')
+    #          echo(auditor)
+    #          echo('审核时间: ')
+    #          date(auditTime)
+    #          echo('内容:')
+    #          echo(question.content)
+    #          a(id='deal-' + id href='javascript:;' auditType=auditType)(class ='active') 详情
+    #      compare(auditStatus 'eq' 2)
+    #          echo('【')
+    #          map('ask-audit-type' auditType)
+    #          echo('】 ')
+    #          map('ask-audit-status' auditStatus)
+    #          echo('审核人：')
+    #          echo(auditor)
+    #          echo('审核时间: ')
+    #          date(auditTime)
+    #          echo('内容:')
+    #          echo(question.content)
+    #          a(id='deal-' + id href='javascript:;' auditType=auditType)(class ='active') 详情
             
-
+    ul.manage-list
+        each(reviewed)
+            compare(auditStatus 'eq' 0)
+                li
+                    .clearfix
+                        .pull-right
+                            .sub-text.small-font
+                                span.m-right > echo('提交人：') + echo(member.fullName)
+                                span > echo('提交时间: ') + date(createTime)
+                        .title-row
+                            .inline-block.color-ing > map('ask-audit-status' auditStatus)
+                            .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
+                    .clearfix.m-top
+                        .pull-right > a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
+                        .text-overflow > echo(question.content)
+            compare(auditStatus 'eq' 1)
+                li
+                    .clearfix
+                        .pull-right
+                            .sub-text.small-font
+                                span.m-right > echo('审核人：') + echo(auditor)
+                                span > echo('审核时间: ') + date(auditTime)
+                        .title-row
+                            .inline-block.color-error > map('ask-audit-status' auditStatus)
+                            .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
+                    .clearfix.m-top
+                        .pull-right > a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
+                        .text-overflow > echo(question.content)
+            compare(auditStatus 'eq' 2)
+                li
+                    .clearfix
+                        .pull-right
+                            .sub-text.small-font
+                                span.m-right > echo('审核人：') + echo(auditor)
+                                span > echo('审核时间: ') + date(auditTime)
+                        .title-row
+                            .inline-block.color-pass > map('ask-audit-status' auditStatus)
+                            .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
+                    .clearfix.m-top
+                        .pull-right > a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
+                        .text-overflow > echo(question.content)
