@@ -1,11 +1,18 @@
 .form {
 
+    &.horizontail {
+        & .form-row {
+            float: left;
+        }
+    }
+
     & .form-row {
         @apply --clearfix;
 
         margin-bottom: calc(var(--space) * 2);
 
-        & > label {
+        & > label,
+        & label.label {
             position: relative;
             float: left;
             width: 6em;
@@ -43,6 +50,10 @@
             bottom: -calc(var(--space) * 2);
         }
 
+        & .sub-row {
+            margin: var(--space) 0;
+        }
+
         & .tips {
             position: absolute;
             right: var(--space);
@@ -74,6 +85,27 @@
             & .tips {
                 top: auto;
                 bottom: var(--space);
+            }
+        }
+
+        & .tag-input {
+            border: 1px solid var(--border-color);
+            padding: calc(var(--space) / 2) var(--space);
+            white-space: nowrap;
+
+            & input {
+                border: none;
+                box-shadow: none;
+                background: none;
+                outline: none;
+                width: 100%;
+                font-size: var(--small-font);
+                margin-left: var(--space);
+            }
+
+            & .tag-btn {
+                border: none;
+                background: var(--bg-color-2);
             }
         }
     }

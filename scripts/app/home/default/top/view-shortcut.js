@@ -6,7 +6,8 @@ exports.events = {
     'click register': 'toRegister',
     'click menu-*': 'taggleMenus',
     'click theme-*': 'changeTheme',
-    'click search': 'showSearchMore'
+    'click search': 'showSearchMore',
+    'click message-more': 'showMessage'
 };
 
 exports.handlers = {
@@ -30,5 +31,10 @@ exports.handlers = {
     },
     showSearchMore: function() {
         $(this.$('searchMore')).addClass('show');
+    },
+
+    showMessage: function() {
+        var model = this.module.items['home/message'];
+        this.app.viewport.modal(model);
     }
 };
