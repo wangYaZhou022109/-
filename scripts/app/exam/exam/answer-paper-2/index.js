@@ -18,6 +18,12 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
+    sort = {
+        REMOTE: 1,
+        QUESTION: 2,
+        QUESTION_ATTR: 3,
+        QUESTION_AND_ATTR: 4
+    },
     orderMap = {
         1: 1,
         2: 2,
@@ -133,8 +139,48 @@ exports.store = {
                                 isCurrent: j++ === constant.ZERO
                             });
                         });
-
+                        this.sortQuestion();
                         this.save();
+                    }
+                },
+                sortQuestion: function() {
+                    var exam = this.module.store.models.exam.data,
+                        paperSortRule = exam.paperSortRule;
+                    if (paperSortRule === sort.QUESTION) {
+                        this.data = _.map(this.data, function(t) {
+                            return _.map(t.questions.sort(function() {
+                                return Math.random() - 0.5;
+                            }), function(q, i) {
+                                return D.assign(q, { index: i + 1 });
+                            });
+                        });
+                    }
+
+                    if (paperSortRule === sort.QUESTION_ATTR) {
+                        this.data = _.map(this.data, function(t) {
+                            return _.map(t.questions, function(q) {
+                                return D.assign(q, {
+                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
+                                        return Math.random() - 0.5;
+                                    })
+                                });
+                            });
+                        });
+                    }
+
+                    if (paperSortRule === sort.QUESTION_AND_ATTR) {
+                        this.data = _.map(this.data, function(t) {
+                            return _.map(t.questions.sort(function() {
+                                return Math.random() - 0.5;
+                            }), function(q, i) {
+                                return D.assign(q, {
+                                    index: i + 1,
+                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
+                                        return Math.random() - 0.5;
+                                    })
+                                });
+                            });
+                        });
                     }
                 },
                 getQuestionById: function(id) {
@@ -206,8 +252,8 @@ exports.store = {
             type: 'localStorage',
             mixin: {
                 init: function() {
-                    this.load();
-                    if (!this.data) this.data = { corrects: [], waitingChecks: [] };
+                    this.data = { corrects: [], waitingChecks: [] };
+                    this.save();
                 },
                 isCorrectView: function(id) {
                     return id.indexOf('correct-') > -1;
@@ -235,8 +281,8 @@ exports.store = {
             type: 'localStorage',
             mixin: {
                 init: function() {
-                    this.load();
-                    if (!this.data) this.data = [];
+                    this.data = [];
+                    this.save();
                 },
                 saveAnswer: function(data) {
                     this.data = _.reject(this.data, ['key', data.key]);
@@ -301,12 +347,9 @@ exports.store = {
                 answer = this.models.answer;
             exam.load();
             if (!exam.data || (exam.data && exam.data.id !== payload.examId)) {
-                exam.clear();
-                types.clear();
-                state.clear();
-                countDown.clear();
-                mark.clear();
-                answer.clear();
+                _.forEach(this.models, function(m) {
+                    m.clear();
+                });
 
                 D.assign(exam.params, { examId: payload.examId });
                 return this.get(exam).then(function() {
@@ -318,11 +361,6 @@ exports.store = {
                     answer.init();
                 });
             }
-            types.init(exam.data.paper.questions);
-            state.init(exam.data);
-            countDown.init();
-            mark.init();
-            answer.init();
             return '';
         },
         selectType: function(payload) {
