@@ -7,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click menu-*': 'showMenu'
+    'click menu-*': 'showMenu',
+    'click item-*': 'showMenu'
 };
 
 exports.handlers = {
@@ -16,7 +17,7 @@ exports.handlers = {
             expert = this.bindings.expert;
         state.data = {};
         state.data.id = expert.data.id;
-        state.data.menu = menu || 'expertsanswer';
+        state.data.menu = menu || 'inviteanswer';
         state.data[menu] = true;
         state.changed();
     }

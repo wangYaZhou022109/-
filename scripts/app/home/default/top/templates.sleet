@@ -51,7 +51,7 @@ view('shortcut')
                 .drop-down-content > .content
                     ul.message-list
                         li
-                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                            a.underline(href='#/message/detail') > .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
                             .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
                         li
                             .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
@@ -65,7 +65,7 @@ view('shortcut')
                         li
                             .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
                             .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
-                    .text-center.small-font > a 查看更多
+                    .text-center.small-font > a#message-more 查看更多
             .item > a.normal(href='/admin/') > i.iconfont.icon-setting
             .item.drop-down-wrapper.right
                 .drop-down-btn.user-info.inline-block.user-pic

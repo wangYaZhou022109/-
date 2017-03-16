@@ -1,0 +1,6 @@
+.upload-knowledge-page {
+    & .side-width {
+        width: 15em;
+        height: 10em;
+    }
+}

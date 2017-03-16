@@ -16,7 +16,7 @@ exports.dataForTemplate = {
         for (; i < 6; i++) {
             photo = photos[i + index];
             if (photo) {
-                photo.imageUrl = me.bindings.download.getFullUrl() + '?id=' + photo.attachmentId;
+                photo.imageUrl = me.bindings.download.getFullUrl() + '?id=' + photo.thumbnailId;
                 pagePhotos.push(photo);
             }
         }

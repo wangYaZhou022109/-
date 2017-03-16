@@ -1,9 +1,10 @@
 #!handlebars
 
 module
-    div(data-region='main')
-
-view('main')
+    .person-list
+        div(data-region='filter')
+        div(data-region='main')
+view('filter')
     .person-list
         .filter
             .pull-right.m-right.pointer
@@ -11,62 +12,27 @@ view('main')
                 i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 要求：
-                .item.active > span 全部
-                .item > span 待开始
-                .item > span 开考中
-                .item > span 待审核
-                .item > span 已完成
-                .item > span 已过期
+                .item#status-all(class=if(search.statusAll 'active')) > span 全部
+                .item#status-2(class=if(search.statusb 'active')) > span 待开始
+                .item#status-1(class=if(search.statusa 'active')) > span 开考中
+                .item#status-3(class=if(search.statusc 'active')) > span 已完成
             .pull-left
                 .inline-block.m-left.sub-text 类型：
-                .item > span 正式
-                .item > span 非正式
+                .item#type-1(class=if(search.typea 'active')) > span 正式
+                .item#type-2(class=if(search.typeb 'active')) > span 非正式
 
         .list-search
-            input.input(placeholder='请输入您要搜索的内容名称')
-            .btn > i.iconfont.icon-search
-        ul.list-text.border.top
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-edit
-                    span.inline-block.tag 正式
-                    .inline-block.title 中国品牌第一人李光斗脱口秀
-                    .time 进入考试时间：2017-03-03 10:00 至 2017-03-04 18:00 &nbsp;&nbsp; 总分：100 ｜ 及格分：60
-                .state 待开始
-                .btn-row
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-edit
-                    span.inline-block.tag 正式
-                    .inline-block.title 思维导图软件·自学速成指南
-                    .time 上传时间：2017-02-27 09:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state 开考中
-                .btn-row
-                    .btn 进入考试
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-edit
-                    span.inline-block.tag 正式
-                    .inline-block.title 经济学人的动态图表与交互设计
-                    .time 上传时间：2017-02-28 10:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state 待审核
-                .btn-row
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-edit
-                    span.inline-block.tag 非正式
-                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
-                    .time 上传时间：2017-02-27 10:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state 待评卷
-                .btn-row
-                    .btn 查看详情
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-edit
-                    span.inline-block.tag 非正式
-                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
-                    .time 上传时间：2017-02-27 10:00 &nbsp;&nbsp; 下载：612 ｜ 浏览：2316
-                .state 成绩：89
-                .btn-row
-                    .btn 查看详情
-                    .btn 查看证书                    
+            input.input(name='name' value=search.name placeholder='请输入您要搜索的内容名称')
+            .btn#searchByName > i.iconfont.icon-search
+view('main')
+    ul.list-text.border.top > each(exams)
+        li.border.bottom
+            .title-row
+                i.iconfont.icon-edit
+                span.inline-block.tag > map('exam-type-simple' type)
+                .inline-block.title > echo(name)
+                .time > echo('进入考试时间：') + dateTime(startTime) + echo('至') + dateTime(endTime) + echo('&nbsp;&nbsp; 总分：' 100 '及格分：' 60)
+            .state > map('exam-status' status)
+            .btn-row > each(buttons)
+                .btn(id=id) > echo(text)
+    #pager.pagination
