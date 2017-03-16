@@ -12,7 +12,9 @@ exports.actions = {
 };
 
 exports.events = {
-    'click do-research-*': 'showResearchPaper'
+    'click do-research-*': 'showResearchPaper',
+    'click item-*': 'search',
+    'click view-detail-*': 'showResearchAnswerDetail'
 };
 
 exports.handlers = {
@@ -21,6 +23,18 @@ exports.handlers = {
             me = this;
         return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
             me.app.viewport.modal(mod, { research: data });
+        });
+    },
+    search: function(status) {
+        return this.module.dispatch('search', {
+            status: status,
+            name: this.$('name').value
+        });
+    },
+    showResearchAnswerDetail: function(id) {
+        var mod = this.module.items['exam/research-activity/research-answer-detail'];
+        this.app.viewport.ground(mod, {
+            researchRecordId: id
         });
     }
 };

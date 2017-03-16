@@ -3,7 +3,8 @@ var D = require('drizzlejs'),
 
 exports.items = {
     main: 'main',
-    'research-tips': ''
+    'research-tips': '',
+    'exam/research-activity/research-answer-detail': { isModule: true }
 };
 
 exports.store = {
@@ -13,15 +14,42 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        search: {}
+        search: {
+            data: {
+                all: true,
+                noFinish: false,
+                finished: false
+            },
+            mixin: {
+                saveStatus: function(status) {
+                    this.data.all = status === 'all';
+                    this.data.noFinish = status === 'no-finish';
+                    this.data.finished = status === 'finished';
+                },
+                getStatusInt: function(status) {
+                    if (status !== 'all') {
+                        if (status === 'no-finish') return 0;
+                        return 1;
+                    }
+                    return null;
+                }
+            }
+        }
     },
     callbacks: {
         init: function() {
             return this.get(this.models.researchRecords);
         },
         search: function(payload) {
-            D.assign(this.models.search.data, payload);
-            D.assign(this.models.researchRecords.params, payload);
+            if (payload.status) {
+                this.models.search.saveStatus(payload.status);
+            }
+
+            D.assign(this.models.researchRecords.params, {
+                status: this.models.search.getStatusInt(payload.status),
+                name: payload.name
+            });
+
             return this.get(this.models.researchRecords);
         },
         getResearchById: function(payload) {

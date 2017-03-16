@@ -1,4 +1,4 @@
-var types = require('./app/exam/types'),
+var types = require('./app/exam/exam-question-types'),
     maps = require('./app/util/maps'),
     D = require('drizzlejs'),
     _ = require('lodash/collection');
