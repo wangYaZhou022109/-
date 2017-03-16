@@ -29,7 +29,7 @@ view('main')
         li.border.bottom
             .title-row
                 i.iconfont.icon-edit
-                span.inline-block.tag > map('exam-type' type)
+                span.inline-block.tag > map('exam-type-simple' type)
                 .inline-block.title > echo(name)
                 .time > echo('进入考试时间：') + dateTime(startTime) + echo('至') + dateTime(endTime) + echo('&nbsp;&nbsp; 总分：' 100 '及格分：' 60)
             .state > map('exam-status' status)

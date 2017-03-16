@@ -15,13 +15,13 @@ exports.handlers = {
     cancelButton: function(examId) {
         var me = this;
         me.module.dispatch('revoke', examId).then(function() {
-            me.module.dispatch('refreshCurrentExam', examId);
+            me.module.dispatch('refreshList');
         });
     },
     signupButton: function(examId) {
         var me = this;
         me.module.dispatch('signUp', examId).then(function() {
-            me.module.dispatch('refreshCurrentExam', examId);
+            me.module.dispatch('refreshList');
         });
     },
     toExamButton: function(examId) {

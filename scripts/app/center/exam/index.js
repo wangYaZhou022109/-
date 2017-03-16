@@ -11,7 +11,8 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        search: { data: { startTimeOrderBy: 0 } }
+        search: { data: { startTimeOrderBy: 0 } },
+        signUp: { url: '../exam/sign-up' }
     },
     callbacks: {
         init: function() {
@@ -26,6 +27,20 @@ exports.store = {
             D.assign(exams.params, D.assign(searchModel.data, params));
             this.get(exams);
             searchModel.changed();
+        },
+        signUp: function(examId) {
+            this.models.signUp.set({ examId: examId });
+            return this.post(this.models.signUp);
+        },
+        revoke: function(examId) {
+            var me = this;
+            this.models.signUp.set({ id: examId });
+            return me.del(me.models.signUp);
+        },
+        refreshList: function() {
+            var exams = this.models.exams;
+            D.assign(exams.params, this.models.search.data);
+            return this.get(exams);
         }
     }
 };
