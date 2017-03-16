@@ -53,7 +53,7 @@ exports.handlers = {
         if (data.ids) {
             this.app.viewport.modal(this.module.items.auditAll);
         } else {
-            this.app.message.error('请至少选择一位学员！');
+            this.app.message.alert('请至少选择一位学员！');
         }
     }
 };

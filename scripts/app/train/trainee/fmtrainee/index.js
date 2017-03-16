@@ -19,7 +19,7 @@ exports.store = {
             root: 'items'
         },
         groupTrainees: {
-            url: '../train/trainee/group-trainees',
+            url: '../train/trainee/trainees',
             type: 'pageable',
             root: 'items'
         },
