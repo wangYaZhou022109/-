@@ -1,7 +1,7 @@
 #!handlebars
 
 module > .class-details-page
-    .class-details-page(data-region='banner')
+    .class-details-box(data-region='banner')
     .page-main-wrapper
         .side
             .page-side > .container
