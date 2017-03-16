@@ -6,8 +6,8 @@ module
         div(data-region='bottom')
 
 view('top')
-    div(data-dynamic-key='myshare')
+    div(data-dynamic-key=topstate.data.menu)
 view('middle')
-    div(data-dynamic-key='mynoticer')
+    div(data-dynamic-key=middlestate.data.menu)
 view('bottom')
-    div(data-dynamic-key='noticer')
+    div(data-dynamic-key=bottomstate.data.menu)

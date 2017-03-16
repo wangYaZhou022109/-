@@ -199,13 +199,24 @@ view('list')
                             echo(joinNumber) | 参与
                             i.iconfont.icon-favorite.m-left.m-right
                             dateTime(startTime) + echo('至') + dateTime(endTime)
+        .h3.m-bottom 待办
+        ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+            each(toDos)
+                li(id='to-do-' + id)
+                    .activity-item.clearfix
+                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        a(href='#/exam/exam/mark-paper/'+ targetId target='_blank') > echo('待办阅卷' + @index)
+                        .sub-text.small-font
+                            echo(joinNumber) | 参与
+                            i.iconfont.icon-favorite.m-left.m-right
 
 view('exam-tips')
     .container
         .row > .col-sm-12
-            echo(exam.examNotes)
+            echo(currentExam.content)
         .row > .col-sm-12
-            echo('点击下方“开始考试”后将会立即进入考试，该考卷考试时长为' exam.duration '分钟。')
+            each(currentExam.buttons)
+                a(id=id) > echo(text)
 
 view('research-tips')
     .container

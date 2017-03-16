@@ -22,16 +22,23 @@ exports.store = {
         params: { data: { all: true } },
         down: { url: '../human/file/download' },
         exams: {
-            url: '../exam/exam',
+            url: '../exam/exam/details',
             type: 'pageable',
             root: 'items',
             pageSize: 6
         },
+        exam: { url: '../exam/exam/exam-sign-up' },
+        currentExam: { },
+        signUp: { url: '../exam/sign-up' },
         researchActivitys: {
             url: '../exam/research-activity',
             type: 'pageable',
             root: 'items',
             pageSize: 6
+        },
+        // 待办 阅卷，暂时写在这里 测试
+        toDos: {
+            url: '../exam/to-do'
         }
     },
     callbacks: {
@@ -44,6 +51,7 @@ exports.store = {
             this.models.researchActivitys.params = this.models.params.data;
             this.models.researchActivitys.params.type = RESEARCH_TYPE;
             this.get(this.models.researchActivitys);
+            this.get(this.models.toDos);
         },
         search: function(payload) {
             D.assign(this.models.params.data, payload);
@@ -88,6 +96,25 @@ exports.store = {
         getResearchById: function(payload) {
             var researchs = this.models.researchActivitys.data;
             return _.find(researchs, ['id', payload.id]);
+        },
+        signUp: function(examId) {
+            this.models.signUp.set({ examId: examId });
+            return this.post(this.models.signUp);
+        },
+        revoke: function(examId) {
+            var me = this;
+            this.models.signUp.set({ id: examId });
+            return me.del(me.models.signUp);
+        },
+        refreshCurrentExam: function(examId) {
+            var me = this,
+                exams = me.models.exams.data;
+            me.models.currentExam.data = _.find(exams, ['id', examId]);
+            me.models.exam.set({ id: examId });
+            me.get(me.models.exam).then(function(data) {
+                me.models.currentExam.data.signUp = data[0].signUp;
+                me.models.currentExam.changed();
+            });
         }
     }
 };

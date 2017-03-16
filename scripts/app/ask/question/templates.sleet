@@ -3,7 +3,7 @@
 module 
     div(data-region='details' style='height:100%;')
 
-view('details') > form.vertical
+view('test') > form.vertical
     ul
         li
             label(class='') > string('question-title')
@@ -20,5 +20,17 @@ view('details') > form.vertical
         li
             .btn.radius.block(id='release' style='height:50px;width:200px;text-align:center') > string('release')
 
+view('details') > .form
+    .form-row
+        label.required > string('question-title')
+        .content > input.input(name='title'  value=''  x-rule='required') + .tips 0/60
+    .form-row
+        label.required > string('related-topics')
+        .content > input.input + .choice 选择
+    .form-row.textarea-row
+        label > string('detailed-description')
+        .content > textarea.input(rows='5')(name='content') + .tips 0/60
+    .form-row
+        .content > a > i.iconfont.icon-link + span > string('upload-attachments')
             
             

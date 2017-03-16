@@ -17,7 +17,7 @@ var maps, D, strings,
         date = date.length === 1 ? '0' + date : date;
         return [year, month, date].join('-');
     },
-    toTimeString = function(value) {
+    toTimeString = function(value, unit) {
         var d, hour, min, sec;
         d = new Date(value);
         hour = d.getHours() + '';
@@ -26,6 +26,9 @@ var maps, D, strings,
         hour = hour.length === 1 ? '0' + hour : hour;
         min = min.length === 1 ? '0' + min : min;
         sec = sec.length === 1 ? '0' + sec : sec;
+        if (unit === 'minute') {
+            return [hour, min].join(':');
+        }
         return [hour, min, sec].join(':');
     };
 

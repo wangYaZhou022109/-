@@ -20,7 +20,16 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var expert = this.models.expert;
+            var expert = this.models.expert,
+                relevantexperts = this.models.relevantexperts,
+                state = this.models.state,
+                relatedquestions = this.models.relatedquestions;
+            relevantexperts.data.id = payload.id;
+            relevantexperts.changed();
+            relatedquestions.data.id = payload.id;
+            relatedquestions.changed();
+            state.data.id = payload.id;
+            state.changed();
             expert.set(payload);
             this.get(expert);
         }
@@ -28,7 +37,5 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    this.store.models.state.data.id = this.renderOptions.id;
-    this.store.models.state.changed();
     return this.dispatch('init', this.renderOptions);
 };

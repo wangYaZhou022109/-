@@ -7,6 +7,7 @@
 @import "title.css";
 @import "config.css";
 @import "banner-notice.css";
+@import "tags.css";
 
 :root {
     --recommend-bar-height: 15em;

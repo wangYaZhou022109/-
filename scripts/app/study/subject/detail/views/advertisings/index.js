@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     advertising: 'advertising'
 };
@@ -10,13 +11,26 @@ exports.store = {
             url: '../human/file/download'
         },
         collect: { url: '../system/collect' },
-        score: { url: '../course-study/course-front/score' }
+        score: { url: '../course-study/course-front/score' },
+        topic: { url: '../system/topic/ids' }
     },
     callbacks: {
         init: function(options) {
-            var collect = this.models.collect;
+            var collect = this.models.collect,
+                topicModel = this.models.topic,
+                businessTopics = options.subject.businessTopics,
+                subject = this.models.subject,
+                ids;
             this.models.region.set(options.region);
-            this.models.subject.set(options.subject);
+            subject.set(options.subject);
+            if (businessTopics && businessTopics.length > 0) {
+                ids = _.map(businessTopics, 'topicId').join(',');
+                topicModel.params.ids = ids;
+                this.get(topicModel).then(function(data) {
+                    subject.data.businessTopics = data[0];
+                    subject.changed();
+                });
+            }
             collect.params = { businessId: options.subject.id };
             return this.get(collect);
         },

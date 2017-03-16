@@ -1,0 +1,11 @@
+#!handlebars
+
+module
+    #banner(data-region='advertising')
+
+view('advertising')
+    #banner.banner.home-banner > ul
+        each(adverts)
+            li(style='background-image:url('+../downUrl + pcFilePath+')')
+        else
+            li

@@ -1,3 +1,8 @@
+exports.bindings = {
+    totalFront: true,
+    talents: true
+};
+
 exports.events = {
     'click upload': 'showUpload'
 };

@@ -2,7 +2,7 @@ var D = require('drizzlejs');
 var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
-    expert: true
+    questions: true
 };
 
 exports.events = {
