@@ -8,17 +8,34 @@ exports.items = {
 
 exports.store = {
     models: {
-        expertlist: { url: '../ask-bar/expert/active-expert' },
+        expertlist: { url: '../ask-bar/expert/expert-group' },
+        topicType: { url: '../system/topic-type' }
     },
     callbacks: {
         init: function() {
             var expert = this.models.expertlist;
             expert.set({ id: 'undefined' });
             return this.post(expert);
+        },
+        topicType: function() {
+            var topicType = this.models.topicType;
+            return this.get(topicType);
+        },
+        check: function(payload) {
+            var expert = this.models.expertlist;
+            var topicType = this.models.topicType;
+            expert.set(payload);
+            // console.log(topicType);
+            return this.post(expert).then(function() {
+                // topicType.clear();
+                // topicType.data = topicType.data;
+               //  topicType.changed();
+            });
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    this.dispatch('topicType', this.renderOptions);
+    this.dispatch('init', this.renderOptions);
 };

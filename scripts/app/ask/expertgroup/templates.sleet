@@ -8,24 +8,11 @@ view('list')
         .pull-right.btn#expert-myself > string('iam') + string('expert')
         .pull-right.btn#expert-activate > string('activation') + string('expert') + string('identity')
         ul
-            li.active 专家荟萃
+            li.active > string('expert') + string('meta')
     .border.bottom.dashed
-        .tag-btn.active 全部
-        .tag-btn 生活
-        .tag-btn 科学教育
-        .tag-btn 发展经济学
-        .tag-btn 社会民生
-        .tag-btn 职业发展
-        .tag-btn 生活
-        .tag-btn 科学教育
-        .tag-btn 发展经济学
-        .tag-btn 社会民生
-        .tag-btn 职业发展
-        .tag-btn 生活
-        .tag-btn 科学教育
-        .tag-btn 发展经济学
-        .tag-btn 社会民生
-        .tag-btn 职业发展
+        .tag-btn.active(id='check-All' data-name='id' data-value='all' ) > string('all')
+        each(topicType)
+            a.tag-btn(id='check-' + id data-name='id' data-value=id ) > echo(name)
     .comment-list.ask-list > ul > each(expertlist)
         li.expert-item
             a.normal(href="javascript:;")
