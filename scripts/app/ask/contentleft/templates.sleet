@@ -8,9 +8,18 @@ module
                 div(data-region='list')
 
 view('menu')
-    li(id='menu-alldynamic' href='javascript:;')(class ='active') > string('all-dynamic')
-    li(id='relatedtome' href='javascript:;')(class ='') > string('related-to-me')
-    li(id='menu-expertssharing' href='javascript:;')(class ='') > string('experts-sharing')
-
+    compare(state.menu 'eq' 'alldynamic')
+        li(id='menu-alldynamic' href='javascript:;')(class ='active') > string('all-dynamic')
+    else
+        li(id='menu-alldynamic' href='javascript:;') > string('all-dynamic')
+    compare(state.menu 'eq' 'relatedtome')
+        li(id='relatedtome' href='javascript:;')(class ='active') > string('related-to-me')
+    else
+        li(id='relatedtome' href='javascript:;')(class ='') > string('related-to-me')
+    compare(state.menu 'eq' 'expertssharing')
+        li(id='menu-expertssharing' href='javascript:;')(class ='active') > string('experts-sharing')
+    else
+        li(id='menu-expertssharing' href='javascript:;')(class ='') > string('experts-sharing')
+        
 view('list') 
     div(data-dynamic-key=state.menu)

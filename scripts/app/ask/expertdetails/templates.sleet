@@ -26,15 +26,21 @@ view('banner')
 view('list')
     section.section
         .tabs.line.mb-1 > ul
-            li#menu-expertsanswer.active > string('expert') + string('answer')
-            li#menu-expertssharing > string('experts-sharing')
+            compare(state.menu 'eq' 'expertsanswer')
+                li#menu-expertsanswer.active > string('expert') + string('answer')
+            else
+                li#menu-expertsanswer > string('expert') + string('answer')
+            compare(state.menu 'eq' 'expertssharing')
+                li#menu-expertssharing.active > string('experts-sharing')
+            else
+                li#menu-expertssharing > string('experts-sharing')
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
                 .comment-list.ask-list > ul
                     div(data-dynamic-key=state.menu)
 view('top')
     .section
-        .btn.block.layout-mt-small.big(id='question-question' data-name='id' data-value='1') > echo('我要关注')
+        .btn.block.layout-mt-small.big(id='question-question' data-name='id' data-value='1') > string('my-follow') 
     .section.follow
         .clearfix
             dl
