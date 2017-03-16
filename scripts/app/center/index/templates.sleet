@@ -8,32 +8,36 @@ module > .person-page
     .person-interest(data-region='interest')
 
 view('top')
-    .user-pic > img(src='images/1.png')
+    .user-pic > img(src=photo)
     .user-base-info.clearfix
         .learn-info
             .item
-                .h2 10小时50分
+                .h2 > echo(member.totalStudyTime)
                 .sub-text 学习时长
             .item
-                .h2 899
+                .h2 > echo(member.integralCount)
                 .sub-text 积分
         .base-info
             .info-row
-                span.h2 陈宗寭
+                span.h2 > echo(member.fullName)
                 span.lv Lv3
             .info-row
-                .item > i.iconfont.icon-warn + span 需求方
-                .item > i.iconfont.icon-mark + span 班务
-                .item > i.iconfont.icon-user-1 + span 讲师
-                .item > i.iconfont.icon-user-2 + span 专家
-                .item > a#edit-info 编辑资料
+                if(isContact)
+                    .item > i.iconfont.icon-warn + span 需求方
+                if(isClass)
+                    .item > i.iconfont.icon-mark + span 班务
+                if(isLecture)
+                    .item > i.iconfont.icon-user-1 + span 讲师
+                if(isExpert)
+                    .item > i.iconfont.icon-user-2 + span 专家
+                .item > a#edit-info > setting('center.index.edit')
             .info-row
-                .edit-div(contenteditable='true') 个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
+                .edit-div(contenteditable='true') > echo(member.memberDetail.summary)
 
 view('notice')
     .news-list.clearfix
         .pull-left.m-right > i.iconfont.icon-notice
-        b.title 公告：
+        b.title > setting('center.index.notice')
         .navigator
             .icon.arrow.prev > .iconfont.icon-arrow-down#next
             .icon.arrow.next > .iconfont.icon-arrow-up#pre
@@ -62,30 +66,15 @@ view('menu')
         div(id=state.menu data-dynamic-key=state.menu)
 
 view('interest')
-    .border.top > .container
-        .title-row
-            .pull-right
-                a.normal(href="javascript:;") 换一组
-                a.normal(href="javascript:;") 关闭
-            | 猜你感兴趣
-        .main-list > ul
-            li > .content > a.normal(href='javascript:;')
-                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
-                .clearfix
-                    .title.text-overflow 让转化率提升10倍的标题怎么写？
-            li > .content > a.normal(href='javascript:;')
-                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
-                .clearfix
-                    .title.text-overflow 让转化率提升10倍的标题怎么写？
-            li > .content > a.normal(href='javascript:;')
-                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
-                .clearfix
-                    .title.text-overflow 让转化率提升10倍的标题怎么写？
-            li > .content > a.normal(href='javascript:;')
-                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
-                .clearfix
-                    .title.text-overflow 让转化率提升10倍的标题怎么写？
-            li > .content > a.normal(href='javascript:;')
-                .img > .img-cont > img(src="images/default-cover/default_class.jpg")
-                .clearfix
-                    .title.text-overflow 让转化率提升10倍的标题怎么写？
+    if(showInterest)
+        .border.top > .container
+            .title-row
+                .pull-right
+                    a#changeRecommend.normal(href="javascript:;") > string('center.index.change')
+                    a#closeRecommend.normal(href="javascript:;") > string('center.index.close')
+                string('center.index.guess')
+            .main-list > ul > each(recommendList)
+                li > .content > a.normal(href='#/study/course/detail/'+id target='_blank')
+                    .img > .img-cont > img(src=img)
+                    .clearfix
+                        .title.text-overflow > echo(name)

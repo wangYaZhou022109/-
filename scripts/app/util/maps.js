@@ -301,6 +301,9 @@ module.exports = {
     },
     'research-record-status': {
         0: '未参与', 1: '已完成'
+    },
+    'exam-type-simple': {
+        1: '正式', 2: '非正式'
     }
 };
 

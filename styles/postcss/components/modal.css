@@ -17,7 +17,7 @@
     & .dialog {
         margin: 10vh auto;
         box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
-        padding: 0 calc(var(--space) * 3);
+        padding-left: calc(var(--space) * 3);
         position: relative;
         max-height: 80vh;
         width: 60vw;
@@ -28,12 +28,14 @@
         & .dialog-content {
             height: 100%;
             padding-bottom: 10em;
-            margin-top: var(--large-space);
         }
 
         & .dialog-main {
             height: 100%;
             overflow: auto;
+            padding-top: var(--large-space);
+            padding-right: calc(var(--space) * 3);
+
         }
 
 
@@ -54,7 +56,7 @@
 }
 
 .dialog-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -113,7 +115,7 @@
     }
 
     & .dialog-header .title {
-        margin: 0 -calc(var(--space) * 3);
+        margin-left: -calc(var(--space) * 3);
         padding: 1em calc(var(--space) * 3);
         background: var(--bg-color);
         border-bottom: 1px solid var(--border-color);
