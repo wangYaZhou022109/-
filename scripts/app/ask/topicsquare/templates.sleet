@@ -5,8 +5,8 @@ module > .ask-page > .container
         .page-side.side-min(data-region='side')
         .page-main(data-region='main')
 view('main')
-    #  .tabs.line.mb-1
-    #      .pull-right.btn#apply-topic 申请话题
+    .tabs.line.mb-1
+        #  .pull-right.btn#apply-topic 申请话题
         ul
             li.active 话题广场
     .border.bottom.dashed
