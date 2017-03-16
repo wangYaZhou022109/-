@@ -6,14 +6,14 @@ view('list')
         li
             .user-pic > img(src='images/d2.jpg')
             .comment-content
-                .h4 提问标题提问标题提问标题提问标题提问标题提问
-                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                .comment-text > echo(questionDiscuss.content)
                 .user-info
-                    a(href='javascript:;') 张三丰
-                    span ·文章·
-                    span.sub-text 2016-09-09 09:09
+                    a(href='javascript:;') 我
+                    span ·讨论了· 
+                    span > echo(member.fullName)
+                    span.sub-text > echo(questionDiscuss.createTime)
                 .comment-operation
-                    .pull-left > .sub-text 来自话题：话题
+                    .pull-left > .sub-text > echo('来自问题：') + echo(title)
                     .text-right
                         .item > a.normal(href='javascript:;') 取消关注
                         .item > a.normal(href='javascript:;') 添加讨论
