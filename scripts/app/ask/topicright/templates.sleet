@@ -1,4 +1,16 @@
 #!handlebars
+#  module 
+#      .content
+#          div(data-region='top')
+#          div(data-region='middle')
+#          div(data-region='bottom')
+
+#  view('top')
+#      div(data-dynamic-key='questionandarticles')
+#  view('middle')
+#      div(data-dynamic-key='indexmenu')
+#  view('bottom')
+#      div(data-dynamic-key='expertright/bottom')
 module 
     .content
         div(data-region='top')
@@ -10,4 +22,4 @@ view('top')
 view('middle')
     div(data-dynamic-key='indexmenu')
 view('bottom')
-    div(data-dynamic-key='expertright/bottom')
+    div(data-dynamic-key='topicright/bottom')
