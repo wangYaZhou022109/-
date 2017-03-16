@@ -1,0 +1,87 @@
+.class-register-page {
+    & .class-register-banner {
+        background: var(--main-color);
+        padding: var(--large-space) 0;
+
+        & .cover {
+            width: 25%;
+
+            & img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        & .banner-con {
+            color: white;
+            width: 50%;
+            padding-left: var(--large-space);
+            padding-top: var(--large-space);
+
+            & h2 {
+                margin: 0;
+            }
+        }
+
+        & .banner-btn {
+            width: 25%;
+            padding-top: calc(var(--base-gap)*2);
+        }
+    }
+
+    & .page-main  {
+        padding-top: var(--large-space);
+
+        & .form {
+            margin-top: var(--large-space);
+        }
+
+        & .form-row {
+            & label {
+                width: calc(var(--large-space)*8);
+            }
+
+            & .content {
+                margin: 0 calc(var(--large-space)*5) 0 calc(var(--large-space)*9) !important;
+            }
+        }
+    }
+
+    & .page-side {
+        padding-top: var(--base-gap);
+
+        & .register-tel {
+            padding-top: var(--space);
+        }
+
+        & .qaq-list {
+            & li {
+                margin-bottom: var(--large-space);
+            }
+
+            & .qaq-tit {
+                padding-bottom: var(--space);
+            }
+
+            & .qaq-con {
+                font-size: var(--small-font);
+                line-height: var(--large-space);
+                color: var(--font-sub-color);
+            }
+        }
+
+        & .train-notice {
+            padding-top: var(--space);
+            display: block;
+
+            & span {
+                display: inline-block;
+                width: 80%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                height: calc(var(--space)*2);
+                overflow: hidden;
+            }
+        }
+    }
+}
