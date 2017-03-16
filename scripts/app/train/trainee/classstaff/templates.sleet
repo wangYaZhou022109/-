@@ -1,47 +1,40 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='search')
-        .div(data-region='main')
-
-view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('员工编号')
-            input.input(name='memberName')
-        div.col-sm-3
-            echo('姓名')
-            input.input(name='memberFullName')
-        div.col-sm-3.col-offset-sm-3
-            btn.btn#search > echo('搜索')
+module
+    br
+    .div(data-region='main')
 
 view('main')
     div.text-center
         p.col-sm-2 > echo('班务人员列表')
-        .buttons
-            .btn#addTrainee > echo('添加学员')
-    .list
-        table.table
-            thead > tr
-                th > echo('序号')
-                th > echo('姓名')
-                th > echo('员工编号')
-                th > echo('单位')
-                th > echo('称呼')
-                th > echo('手机')
-                th > echo('邮箱')
-                th > echo('操作')
-            tbody > each(classstaffs) > tr
-                td > echo(i)
-                td > echo(member.fullName)
-                td > echo(member.name)
-                td > echo(organizationName)
-                td > echo(callName)
-                td > echo(member.phoneNumber)
-                td > echo(member.email)
-                td
-                    a(id='sort'+id data-name='id' data-value=id) > echo('排序')
-                    echo('|')
-                    a(id='delete'+id data-name='id' data-value=id) > echo('删除')
+    .buttons
+        input.input(id='add-classstaff-input' placeholder='人员编号')
+        .btn#addClassstaff > echo('添加')
+        .btn#addAllClassstaff > echo('添加学员')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('单位')
+            th > echo('称呼')
+            th > echo('手机')
+            th > echo('邮箱')
+            th > echo('操作')
+        tbody > each(classstaffs) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(organizationName)
+            td 
+                label(id='label-callName'+id data-name='id' data-value=id) > echo(callName)
+                input(id='input-callName'+id value=callName style='display:none;width:100px;' data-name='id' data-value=id)
+            td > echo(member.phoneNumber)
+            td > echo(member.email)
+            td
+                compare(member.id 'ne' classTeacher)
+                    a(id='staff-sort'+id data-name='id' data-value=id) > echo('排序')
+                    input(id='staff-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                    span(id='staff-shuxian'+id) > echo('|')
+                    a(id='staff-delete'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination

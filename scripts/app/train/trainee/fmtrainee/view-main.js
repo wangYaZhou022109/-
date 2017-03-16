@@ -24,7 +24,7 @@ exports.actions = {
 exports.handlers = {
     showMembers: function() {
         var me = this,
-            model = me.module.items['train/trainee/fmtrainee/select-member'];
+            model = me.module.items['train/trainee/select-member'];
         me.app.viewport.modal(model, {
             callback: function(data) {
                 var state = me.bindings.state.data;
@@ -80,7 +80,7 @@ exports.handlers = {
         var data = {};
         var me = this;
         if (memberName === '') {
-            this.app.message.alert('请输入人员编号');
+            this.app.message.alert('请输入人员编号!');
         } else {
             data.memberName = memberName;
             data.type = 0;

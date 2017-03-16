@@ -7,7 +7,7 @@ exports.items = {
     import: '',
     group: '',
     groupTrainees: '',
-    'train/trainee/fmtrainee/select-member': { isModule: true },
+    'train/trainee/select-member': { isModule: true },
     'train/trainee/fmtrainee/group-manage': { isModule: true }
 };
 
