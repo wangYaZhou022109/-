@@ -10,6 +10,6 @@ view('list')
             .grid-row
                 each(expert)
                     .col-md-4 > a
-                        img.block( id='expert-' + member.id data-name='id' data-value=member.id src=member.headPortrait)
+                        img.block( id='expert-' + id data-name='id' data-value=id src=member.headPortrait)
                 
     

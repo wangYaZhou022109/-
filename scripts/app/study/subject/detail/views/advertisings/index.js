@@ -17,7 +17,7 @@ exports.store = {
     callbacks: {
         init: function(options) {
             var collect = this.models.collect,
-                topicModel = this.models.topicModel,
+                topicModel = this.models.topic,
                 businessTopics = options.subject.businessTopics,
                 subject = this.models.subject,
                 ids;

@@ -77,7 +77,8 @@ view('chapter')
                                 if(progress)
                                     .item.continue
                                         i.iconfont.icon-reload-full
-                                        span.progress > percent(progress.completedRate)
+                                        if(showRate)
+                                            span.progress > percent(progress.completedRate)
                                         span > map('course-study-status' progress.finishStatus)
                                 else
                                     .item.start
@@ -122,7 +123,7 @@ view('info')
                     else
                         .inline-block.sub-text > echo('暂无评分')
         .inline-block.layout-mr
-            .inline-block.layout-ml.m-right > i.iconfont.icon-share
+            .inline-block.layout-ml.m-right > #share
             .inline-block.m-left
             if(collect.id)
                 i#cancel-collect.iconfont.icon-favorite-full(data-name='id' data-value=collect.id)
