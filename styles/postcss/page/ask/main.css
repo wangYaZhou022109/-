@@ -10,7 +10,6 @@
         &.cell-4 dl {
             width: 25%;
         }
-
         & dt {
             font-size: var(--h3);
         }
