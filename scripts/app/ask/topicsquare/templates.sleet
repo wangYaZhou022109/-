@@ -8,7 +8,7 @@ view('main')
     .tabs.line.mb-1
         #  .pull-right.btn#apply-topic 申请话题
         ul
-            li.active 话题广场
+            li.active > echo('话题广场')
     .border.bottom.dashed
         a.tag-btn.active(id='checkAll' data-name='id' data-value=id ) > echo('全部')
         each(topicType)
@@ -20,5 +20,5 @@ view('main')
                     .img > .img-cont > img(src="images/demo/1.jpg")
                     h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
-                .btn.small 关注
+                .btn.small >echo('关注')
         
