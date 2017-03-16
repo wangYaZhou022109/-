@@ -1,0 +1,13 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    echo(question.index '.' '【')
+    map('research-question-types' question.type)
+    echo('】')
+    @echo(question.content)
+    .clearfix.statistics-list
+        .statistics-list-tit > echo('答' question.answerRecord.answer)
+        .statistics-list-time > dateTime(question.answerRecord.createTime)
