@@ -43,6 +43,9 @@ exports.dataForTemplate = {
         _.map(advertisings || [], function(banner) {
             var b = banner;
             b.downUrl = me.bindings.download.getFullUrl() + '?id=' + b.cover;
+            if (b.linkType === 0) {
+                b.linkUrl = '#/news/detail/' + b.id + '/1';
+            }
         });
         return advertisings;
     },
