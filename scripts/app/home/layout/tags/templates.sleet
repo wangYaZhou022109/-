@@ -1,0 +1,36 @@
+#! handlebars
+
+module
+    .choise-tags-page(data-region='main')
+
+view('main')
+    .clearfix.layout-mb-small
+        a.pull-right.layout-ml-small 跳过，直接进入首页
+        .pull-left
+            span.m-right 选择你喜欢的，让我们更了解你
+            a.pull-right 换一批
+    ul.list
+        li 标签一标签一标签一
+        li 标签一标签一
+        li 标签一标签
+        li.selected 标签一
+        li 标签一标签一
+        li 标签一标签一标签一
+        li.selected 标签一标
+        li 标签
+        li 标签一标签一
+        li 标签一
+        li.selected 标签一标签一标签一
+        li 标签一标签
+        li 标签一
+        li 标签一标
+        li 标签一
+        li 标签一标签
+    .clearfix
+        .pull-left.text 已选：
+        ul.selected
+            li 标签一
+            li 标签一
+            li 标签一
+            li 标签一
+            li 标签一

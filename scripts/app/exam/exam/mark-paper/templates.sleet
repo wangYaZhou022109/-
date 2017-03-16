@@ -1,49 +1,56 @@
 #! handlebars
 
-module > .achievement-content.content
-    .achievement-side(data-region='side')
+module > .achievement-content
+    .achievement-side.bg-color
+        div(data-region='side')
+    .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
+view('count-down')
+    .side-top > .time
+        i.iconfont.icon-time
+        div(class='inline-block' data-dynamic-key='countDown')
+
 view('side')
-    .achievement-preview-top
-        .com-title.text-center
-        | 提交评卷
-    ul.achievement-preview > each(questionTypes)
-        li.border.bottom(id='list-item-'+ @index)
-            label
-                echo(data.name '题' '(共' data.totalScore '分)')
-            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
-                div(class='num min-btn ' + if(isCurrent 'correct' ''))(id='q-'+id) > echo(i)
+    ul.list > each(types)
+        li(id='list-item-' + @index)
+            .list-title > i.iconfont.icon-type.m-right > echo(name '(共' totalScore '分)')
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
+                .items-pagination
+                    .up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
+                    .down-arrow(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
+                each(questions)
+                    compare(status 'eq' 'check')
+                        a.list-item.check(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'active')
+                        a.list-item.active(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'current')
+                        a.list-item.current(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'init')
+                        a.list-item(id='question-'+id href='#question-' + id) > echo(index)
+
+view('head')
+    .pull-left.title > echo('考试名称: ' state.name)
+    .text-right
+        ul.head-info.inline-block
+            li.border.right > echo('考生： ' state.member.name)
+        .btn#submit 提交评卷
 
 view('main')
-    .title-row.row
-        .col-sm-4 > .com-title > echo(state.name)
-        .col-sm-4 >
-            if(anonymityMark)
-                echo('考生： ' state.member.name)
-        .col-sm-4
-            input(type='hidden')
-            select.input#paper-view-type > each(paperViewTypes)
-                option(value=key)('selected')&if(selected) > echo(value)
-
     .preview-content
-        if(state.isOnePageOneQuestion)
-            .row
+        if(state.singleMode)
+            if(state.currentQuestion.id)
+                .row
                 .col-xs-6
-                    .com-title.inline-block > echo(state.questionType '(' state.questionIndex '/' state.questionTotalInType ')')
-                .col-xs-6 > .text-right
-                    if(state.isOnePageOneQuestion)
-                        .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev')
-                        .icon.pe-7s-angle-right-circle.pe-3x(id='next')
-        .row
-            if(state.isOnePageOneQuestion)
-                if(state.questionId)
-                    div(data-dynamic-key=state.questionId)
-            else
-                div
-                    each(questionTypes)
-                        label
-                            .common-title > echo(data.name '题' '(共' data.totalScore '分)')
-                            each(data.data)
-                                echo(i)
-                                div(data-dynamic-key=id)
+                    .com-title.inline-block > echo(state.currentQuestion.typeDesc '(' state.currentQuestion.index '/' state.currentQuestion.totalCount ')')
+                    .inline-block > echo('本题分数:' state.currentQuestion.score)
+                div(data-dynamic-key=state.currentQuestion.id)
+        else
+            div
+                each(types)
+                    .h3.m-bottom > echo(name '(共' totalScore '分)')
+                    each(questions)
+                        div(data-dynamic-key=id)

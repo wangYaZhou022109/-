@@ -5,6 +5,7 @@ exports.events = {
 };
 
 exports.handlers = {
+    expert: true
 };
 
 

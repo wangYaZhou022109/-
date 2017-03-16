@@ -4,17 +4,20 @@ exports.items = {
 
 exports.store = {
     models: {
-        expert: { url: '../ask-bar/expert/active-expert' }
+        expert: { url: '../ask-bar/expert/relevant-experts' }
     },
     callbacks: {
-        init: function() {
+        init: function(payload) {
             var expert = this.models.expert;
-            expert.set({ id: 1222 });
+            expert.set({ id: payload.state.id });
             return this.get(expert);
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    if (typeof this.renderOptions.state.id !== 'undefined') {
+        return this.dispatch('init', this.renderOptions);
+    }
+    return null;
 };

@@ -1,6 +1,6 @@
 #! handlebars
 
-module > .achievement-content
+module > .achievement-content.main-side
     .achievement-side.bg-color
         div(data-region='side')
     .achievement-head(data-region='head')
@@ -17,7 +17,7 @@ view('head')
 view('side')
     ul.list > each(dimensions)
         li(id='list-item-' + @index)
-            .list-title > i.iconfont.icon-type.m-right > echo(name)
+            .list-title > i.iconfont.icon-type.m-right + echo(name)
             div(class='min-btn-groups') > each(questions)
                 div(class='list-item')(id='q-' + id) > echo(questionIndex)
 

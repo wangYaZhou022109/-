@@ -112,3 +112,24 @@
         width: 8em;
     }
 }
+
+.btn-upload-file {
+    position: relative;
+    background: var(--bg-color);
+    border: 1px dashed var(--border-color);
+    padding: 5em var(--large-space) 1em;
+    display: inline-block;
+    cursor: pointer;
+
+    &:before {
+        position: absolute;
+        content: '+';
+        font-family: airal;
+        font-size: 5em;
+        left: 0;
+        right: 0;
+        text-align: center;
+        top: 0;
+        color: var(--font-tip-color);
+    }
+}

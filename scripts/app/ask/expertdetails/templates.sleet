@@ -13,15 +13,14 @@ module
 
 view('banner')
     .expert-detail-top(style='background-image:url(images/bg-usercenter.png)') > .container
-        .head > img(src='images/d2.jpg' alt=expert.member.fullName)
+        .head > img(src= expert.member.headPortrait alt=expert.member.fullName)
         section.section
             .title-row
                 .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
             .title-row
-                .inline-block.m-right > echo('我擅长的话题:') 
-                .inline-block.m-right.bg-white.sub-title 话题一
-                .inline-block.m-right.bg-white.sub-title 科学教育
-                .inline-block.m-right.bg-white.sub-title 话题区域经济学
+                .inline-block.m-right > string('be-good-at') + string('topic') + echo(':') 
+                each(topicList)
+                    .inline-block.m-right.bg-white.sub-title > echo(name)
             p.info-detail > echo(expert.introduce)
 
 view('list')
