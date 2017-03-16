@@ -49,30 +49,10 @@ view('side')
                 b > echo(totalFront.medias)
                 .text-tips 音视频
 
-    .side-box
+    .side-box 
         .h3.m-bottom 热门标签
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-
+        each(topics)
+            .tag-btn > echo(name)
     .side-box
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)
@@ -93,7 +73,7 @@ view('main')
             .pull-left.knowledge-tit-con
                 .clearfix
                     a.normal.knowledge-tit.pull-left(href = '#/knowledge/detail/'+id) > echo(name)
-                    .star-bar.pull-left > .star(style='width:'+avgScore+'%')
+                    .star-bar.pull-left > .star(style='width:'+ avgScore +'%')
                 .text-tips.sub-title
                     span > echo('发布人:') + echo(uploadMember.fullName)
                     span > echo('发布日期：') + date(uploadTime)

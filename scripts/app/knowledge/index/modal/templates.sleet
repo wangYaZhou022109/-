@@ -8,8 +8,9 @@ view('main')
             .form-row
                 span.required 上传资源：
                 .content.icon-choice
-                    input.input
-                    i.iconfont.icon-search
+                    .input-group
+                        input.input.mark#fileName(name='fileName' value=knowledge.fileName x-rule='required' x-marker='group' maxlength='100')
+                        .addon.btn#upload 上传
             .text-tips.layout-mb-small.modal-tips.sub-text
                 | 支持文件类型
                 br

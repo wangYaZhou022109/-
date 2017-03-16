@@ -1,6 +1,9 @@
+var _ = require('lodash/collection');
 exports.bindings = {
     totalFront: true,
-    talents: true
+    talents: true,
+    topicIds: 'changeTopics',
+    topics: true
 };
 
 exports.events = {
@@ -13,3 +16,11 @@ exports.handlers = {
         this.app.viewport.modal(model);
     }
 };
+
+exports.changeTopics = function() {
+    var ids = _.map(this.bindings.topicIds.data, 'id');
+    if (ids.length > 0) {
+        this.module.dispatch('searchTopics', { ids: ids.join() });
+    }
+};
+
