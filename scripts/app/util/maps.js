@@ -298,6 +298,9 @@ module.exports = {
     },
     'knowledge-audit-status': { // 知识审核状态
         0: '待审核', 1: '已通过', 2: '已拒绝'
+    },
+    'research-record-status': {
+        0: '未参与', 1: '已完成'
     }
 };
 
