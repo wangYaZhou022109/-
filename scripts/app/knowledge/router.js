@@ -1,6 +1,6 @@
 exports.routes = {
     index: 'showIndex',
-    'details/:id': 'showDetails'
+    'detail/:id': 'showDetails'
 };
 
 exports.showIndex = function() {
