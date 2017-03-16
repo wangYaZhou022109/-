@@ -15,6 +15,6 @@ exports.items = {
 };
 
 exports.afterRender = function() {
-    var model = this.items['home/layout/info'];
-    this.app.viewport.modal(model);
+    // var model = this.items['home/layout/info'];
+    // this.app.viewport.modal(model);
 };

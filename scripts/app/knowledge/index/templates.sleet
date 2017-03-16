@@ -2,28 +2,19 @@
 
 module > .course-page-new
     .page-catalog.course-catalog > .container(data-region='catalog')
-    .container > .course-list(data-region='list')
+    .container > .course-list(data-region='sorts')
     .container.page-main-wrapper.knowledge-side
         .page-side(data-region='side')
         .page-main(data-region='main')
 
 view('catalog')
     ul.list.bg-highlight.border.around
-        li.active > .course-menu  全部
-        li > .course-menu 管理
-        li > .course-menu 技术
+        each(menus)
+            li(id='item-1-'+id)(class='active')&if(active) > .course-menu > echo(name)
+    .course-menu-child > each(menu2)
+        .item(id="item-2-"+id)(class = if(active 'active')) > echo(name)
 
-    .course-menu-child
-        .item  无线
-        .item 交换
-        .item 数据
-        .item 传输
-        .item 动力
-        .item.active 网管
-        .item 安全
-        .item IT
-
-view('list')
+view('sorts')
     .main-list
         .filter
             .pull-left > each(topics)
@@ -32,15 +23,6 @@ view('list')
                 .item#sort-0 > span 最新
                 .item#sort-1 > span 最热
                 .item#sort-2 > span 好评
-                .item.drop-down-wrapper.right
-                    .drop-down-btn
-                        | 全部
-                        i.iconfont.icon-arrow-down
-                    .drop-down-content > .content
-                        ul
-                            li.active 集团课程
-                            li 本公司课程
-                            li 其它公司课程
 
 view('side')
     .knowledge-upload
@@ -50,265 +32,56 @@ view('side')
             .pull-right.text-left
                 | 上传知识
                 br
-                .text-tips 每篇积分 +2
+                .small-font 每篇积分 +2
 
     .statistics.text-center.side-box
         p
             | 共有
-            b 42
+            b > echo(totalFront.all)
             | 份知识
         hr
         .clearfix
             .pull-left
-                b 36
+                b > echo(totalFront.other)
                 br
                 .text-tips 文档
             .pull-left
-                b 6
+                b > echo(totalFront.medias)
                 .text-tips 音视频
 
-    .side-box
+    .side-box 
         .h3.m-bottom 热门标签
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-
+        each(topics)
+            .tag-btn > echo(name)
     .side-box
         .h3.m-bottom 知识达人
-        .charts.knowledge-talent
+        .charts.knowledge-talent > each(talents)
             .clearfix.charts-list
                 .pull-left.charts-img > img(src='images/1.png')
                 .pull-left.charts-user
-                    | 王英雄
+                    echo(memberName)
                     br
-                    | 互联网中心
+                    echo(organizationName)
                 .pull-right
-                    b 50
+                    b > echo(count)
                     | 份
-            .clearfix.charts-list
-                .pull-left.charts-img > img(src='images/1.png')
-                .pull-left.charts-user
-                    | 王英雄
-                    br
-                    | 互联网中心
-                .pull-right
-                    b 50
-                    | 份
-            .clearfix.charts-list
-                .pull-left.charts-img > img(src='images/1.png')
-                .pull-left.charts-user
-                    | 王英雄
-                    br
-                    | 互联网中心
-                .pull-right
-                    b 50
-                    | 份
-            .clearfix.charts-list
-                .pull-left.charts-img > img(src='images/1.png')
-                .pull-left.charts-user
-                    | 王英雄
-                    br
-                    | 互联网中心
-                .pull-right
-                    b 50
-                    | 份
-            .clearfix.charts-list
-                .pull-left.charts-img > img(src='images/1.png')
-                .pull-left.charts-user
-                    | 王英雄
-                    br
-                    | 互联网中心
-                .pull-right
-                    b 50
-                    | 份
-
 
 view('main')
-    ul.knowledge-list
+    ul.knowledge-list > each(knowledges)
         li
             i.iconfont.icon-zhishiku.pull-left.m-right
             .pull-left.knowledge-tit-con
                 .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
+                    a.normal.knowledge-tit.pull-left(href = '#/knowledge/detail/'+id) > echo(name)
+                    .star-bar.pull-left > .star(style='width:'+ avgScore +'%')
                 .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
+                    span > echo('发布人:') + echo(uploadMember.fullName)
+                    span > echo('发布日期：') + date(uploadTime)
+                    span > echo('浏览数：') + echo(browseCount)
+                    span > echo('下载数：') + echo(downloadMemberCount)
 
             .pull-right.knowledge-tit-out.text-right
                 a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-image.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 2017年 这9笔收入将打入你的账户这9笔收入将打入你的账户这9笔收入将打入你的账户
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
 
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-note.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 今年去产能扩大到煤电 要去5000万千瓦要去5000万千瓦要去5000万千瓦
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
 
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-note.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 贾康：房地产税可防房价大起大落 征收不能照搬美国征收不能照搬美国征收不能照搬美国
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-note.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 三大运营商：10月1日起全面取消国内长途和漫游费三大运营商：10月1日起全面取消国内长途和漫游费
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-note.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 央行官员：国内比特币市场交易存风险点 明确监管底线央行官员：国内比特币市场交易存风险点 明确监管底线
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-image.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-zhishiku.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-image.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-zhishiku.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-image.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-        li
-            i.iconfont.icon-zhishiku.pull-left.m-right
-            .pull-left.knowledge-tit-con
-                .clearfix
-                    a.normal.knowledge-tit.pull-left 经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析经营策略分析
-                    .star-bar.pull-left > .star(style='width:'+score.scorePercent+'%')
-                .text-tips.sub-title
-                    span 发布人：张三
-                    span 发布日期：2017-08-08
-                    span 浏览数：6548
-                    span 下次次数：654
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
     #pager.pagination

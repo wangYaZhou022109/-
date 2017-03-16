@@ -43,6 +43,7 @@ module.exports = {
     more: '更多',
     'my-sharing': '我要分享',
     'my-question': '我要提问',
+    'my-follow': '我要关注',
     name: '名称',
     people: '人',
     publish: '发表',

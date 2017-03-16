@@ -1,12 +1,12 @@
 exports.routes = {
     index: 'showIndex',
-    details: 'showDetails'
+    'detail/:id': 'showDetails'
 };
 
 exports.showIndex = function() {
     return this.app.show('content', 'knowledge/index');
 };
 
-exports.showDetails = function() {
-    return this.app.show('content', 'knowledge/details');
+exports.showDetails = function(id) {
+    return this.app.show('content', 'knowledge/details', { id: id });
 };

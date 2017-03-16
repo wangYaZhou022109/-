@@ -38,16 +38,23 @@ view('right')
     div(data-dynamic-key='iamexpertright')
 view('left') 
     section.section
-        .tabs.line.mb-1 > ul
-            li#menu-expertsanswer.active > string('question') + string('answer') 
-            li#menu-expertssharing > string('my') + string('share')
+        .tabs.line.mb-1 > ul 
+            compare(leftstate.menu 'eq' 'inviteanswer')
+                li#menu-inviteanswer.active > string('question') + string('answer') 
+            else
+                li#menu-inviteanswer > string('question') + string('answer') 
+            compare(leftstate.menu 'eq' 'expertssharing')
+                li#menu-expertssharing.active > string('my') + string('share') 
+            else
+                li#menu-expertssharing > string('my') + string('share')
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
-                .person-list
-                    .filter
-                        .pull-left
-                            .item.active > span 邀请回答
-                            .item > span 我的回答
+                .person-list 
+                    compare(leftstate.menu 'eq' 'inviteanswer')
+                        .filter
+                            .pull-left
+                                .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
+                                .item(id ='item-myanswer') > span > string('my') + string('answer')
                     .comment-list.ask-list > ul
                         div(data-dynamic-key=leftstate.menu)
 
