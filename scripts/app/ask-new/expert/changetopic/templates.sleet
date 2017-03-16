@@ -1,0 +1,11 @@
+#!handlebars
+
+module > .changetopic-page
+    .changetopic-title(data-region="title")
+    .changetopic-search(data-region="search")
+    .changetopic-contents(data-region="contents")
+view('title')
+    .choose.clearfix
+        .h4.pull-left 选择话题
+        .btn.pull-right
+            .small.radius 选择

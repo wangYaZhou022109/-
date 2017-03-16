@@ -1,0 +1,116 @@
+.page-main {
+    & .page1 {
+        /*z-index: 1;*/
+        position: absolute;
+    }
+    & .page2 {
+        /*z-index: 2;*/
+        display: none;
+    }
+    & .page3 {
+        display: none;
+    }
+    & .txt-center {
+        text-align: center;
+        margin-top: 1.5em;
+        margin-bottom: 2.5em;
+    }
+    & .aboutme-title {
+        margin-bottom: 1.5em;
+    }
+    & .aboutme-ul {
+        & .aboutme-li {
+            width: 14%;
+            padding-right: 4em;
+            margin-bottom: 1.3em;
+            & p.introduce {
+                text-align: center;
+                line-height: 0.6;
+            }
+            & .icon {
+                position: absolute;
+                left: 42%;
+                top: 4px;
+                cursor: pointer;
+                & .iconfont {
+                    color: var(--custom-color-1);
+                }
+            }
+        }
+    }
+    & .aboutme-btn {
+        text-align: center;
+        & .button1 {
+            width: 10em;
+            height: 3em;
+            line-height: 1.7em;
+            border-radius: .4em;
+            margin: 2.5em auto;
+        }
+    }
+    & .recommend-ul {
+        & .recommend-li {
+            width: 16%;
+            height: 12em;
+            padding-right: 1em;
+            margin-bottom: 1em;
+            & .icon {
+                position: absolute;
+                left: 76%;
+                top: 5px;
+                cursor: pointer;
+                & .iconfont {
+                    color: var(--custom-color-1);
+                }
+            }
+            & .recommend-item {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                color: #fff;
+                background-color: var(--font-sub-color);
+                cursor: pointer;
+                & .name {
+                    position: absolute;
+                    bottom: 1.3em;
+                    left: 50%;
+                    transform: translate(-50%);
+                    font-size: 1.2em;
+                }
+                & .intro {
+                    position: absolute;
+                    bottom: -.5em;;
+                    left: .6em;
+                    font-size: .2em;
+                }
+            }
+        }
+    }
+    & .recommend-btn {
+        transform: translate(50%);
+        margin-left: -35%;
+    }
+    & .button2 {
+        width: 6em;
+        height: 3em;
+        line-height: 3em;
+        background-color: #ccc;
+        margin: 2.5em auto;
+        margin-right: 1em;
+        color: #fff;
+        border-radius: .4em;
+        cursor: pointer;
+    }
+    & .button3 {
+        width: 10em;
+        height: 3em;
+        line-height: 1.7em;
+        border-radius: .4em;
+        margin: 2.5em auto;
+        cursor: pointer;
+    }
+    & .icon-opacity0 {
+        opacity: 0;
+    }
+}
