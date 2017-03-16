@@ -18,6 +18,5 @@ exports.getEntity = function() {
 };
 
 exports.dataForEntityModule = function(entity) {
-    console.log(entity);
     return entity;
 };
