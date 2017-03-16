@@ -50,8 +50,8 @@ view('shortcut')
                 a.normal(href='#') > i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content
                     ul.message-list
-                        li > a(href='#/message/detail')
-                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                        li
+                            a.underline(href='#/message/detail') > .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
                             .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
                         li
                             .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
