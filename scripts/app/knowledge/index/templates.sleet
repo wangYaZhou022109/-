@@ -23,7 +23,7 @@ view('sorts')
                 .item#sort-0 > span 最新
                 .item#sort-1 > span 最热
                 .item#sort-2 > span 好评
-            
+
 view('side')
     .knowledge-upload
         .btn.block.clearfix.knowledge-upload#upload
@@ -32,7 +32,7 @@ view('side')
             .pull-right.text-left
                 | 上传知识
                 br
-                .text-tips 每篇积分 +2
+                .small-font 每篇积分 +2
 
     .statistics.text-center.side-box
         p
@@ -102,6 +102,6 @@ view('main')
 
             .pull-right.knowledge-tit-out.text-right
                 a.normal.icon-add.iconfont
-        
- 
+
+
     #pager.pagination
