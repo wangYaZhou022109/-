@@ -14,8 +14,8 @@ exports.store = {
             root: 'items'
         },
         situation: { url: '../train/class-quota/situation' },
-        auditTrainee: { url: '../train/trainee/updateStatus' },
-        auditAll: { url: '../train/trainee/auditAll' },
+        auditTrainee: { url: '../train/trainee/update-status' },
+        auditAll: { url: '../train/trainee/audit-all' },
         state: { data: { auditStatus: 0 } }
     },
     callbacks: {

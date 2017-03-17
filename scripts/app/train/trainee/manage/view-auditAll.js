@@ -16,6 +16,8 @@ exports.actionCallbacks = {
         var state = this.bindings.state.data;
         if (success === 0) {
             this.app.message.error('配额已满！');
+        } else if (fail === 0) {
+            this.app.message.success('审核成功!');
         } else {
             this.app.message.success('审核成功' + success + '条，失败' + fail + '条。');
         }

@@ -23,9 +23,9 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        addTrainee: { url: '../train/trainee/addTrainee' },
-        addTrainees: { url: '../train/trainee/addTrainees' },
-        traineeSort: { url: '../train/trainee/updateSort' },
+        addTrainee: { url: '../train/trainee/add-trainee' },
+        addTrainees: { url: '../train/trainee/add-trainees' },
+        traineeSort: { url: '../train/trainee/update-sort' },
         fmtrainee: { url: '../train/trainee' },
         situation: { url: '../train/class-quota/situation' },
         download: { url: '../train/trainee/download' },

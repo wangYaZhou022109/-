@@ -15,7 +15,7 @@ exports.events = {
     'change staff-input-sort*': 'updateSort',
     'click label-callName*': 'showCallNameInput',
     'change input-callName*': 'updateCallName',
-    'click addClassstaff*': 'addClassstaff',
+    'click addClassstaff': 'addClassstaff',
     'click addAllClassstaff': 'showMembers'
 };
 

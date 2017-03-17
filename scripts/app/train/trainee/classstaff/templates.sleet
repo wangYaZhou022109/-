@@ -10,7 +10,7 @@ view('main')
     .buttons
         input.input(id='add-classstaff-input' placeholder='人员编号')
         .btn#addClassstaff > echo('添加')
-        .btn#addAllClassstaff > echo('添加学员')
+        .btn#addAllClassstaff > echo('人员选择')
     table.table
         thead > tr
             th > echo('序号')

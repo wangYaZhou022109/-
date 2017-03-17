@@ -5,7 +5,6 @@ exports.items = {
 
 exports.store = {
     models: {
-        projectInfo: {},
         state: {}
     },
     callbacks: {

@@ -38,11 +38,13 @@ exports.handlers = {
                         var success = result[0][0];
                         var fail = result[0][1];
                         if (success === 0) {
-                            this.app.message.error('添加失败！');
+                            me.app.message.error('添加失败！');
                         } else {
                             me.module.dispatch('init', state);
-                            this.app.message.success('添加成功' + success + '条！');
-                            this.app.message.error('添加失败' + fail + '条！');
+                            me.app.message.success('添加成功' + success + '条！');
+                            if (fail !== 0) {
+                                me.app.message.error('添加失败' + fail + '条！');
+                            }
                         }
                     });
                 }
