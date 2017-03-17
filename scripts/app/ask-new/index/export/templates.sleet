@@ -21,5 +21,3 @@ view('export')
         .report-area.layout-mt
             label(for="area") 举报说明
             textarea#area.w-full.m-top(rows="10" placeholder="请描述你举报理由")
-        .report-submit.text-center.m-top
-            .btn 提交

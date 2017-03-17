@@ -467,13 +467,13 @@ view('side')
         .clearfix
             dl
                 dt 99
-                dd 关注的内容
+                dd#attention-content 关注的内容
             dl
                 dt 99
-                dd 关注的话题
+                dd#attention-topic 关注的话题
             dl
                 dt 99
-                dd 关注的专家
+                dd#attention-expert 关注的专家
         ul
             li 我的提问
             li 我的分享
