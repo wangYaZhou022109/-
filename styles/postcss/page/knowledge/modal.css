@@ -11,8 +11,16 @@
     & .page-cal-con {
         width: 66%;
 
+        & .form-row {
+            & span {
+                float: left;
+                line-height: 2.5em;
+            }
+        }
+
         & .content {
             width: 80%;
+            margin-left: 6em;
 
             & .input {
                 width: 100%;
@@ -36,7 +44,7 @@
         }
 
         & .modal-tips {
-            padding-left: 6.6em;
+            padding-left: 7.5em;
             margin-top: -1em;
         }
 

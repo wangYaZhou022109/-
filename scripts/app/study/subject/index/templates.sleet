@@ -10,9 +10,9 @@ view('list')
                 .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
 
             .pull-right
-                .item#sort-0 > span 最新
-                .item#sort-1 > span 最热
-                .item#sort-2 > span 好评
+                .item#order-0 > span 最新
+                .item#order-1 > span 最热
+                .item#order-2 > span 好评
         ul > each(subjects)
             li > .content > a.normal(href=url)
                 .img > .img-cont > img(src=imageUrl)

@@ -1,10 +1,12 @@
 exports.items = {
-    main: 'main'
+    activeexpert: 'activeexpert',
+    hottopic: 'hottopic'
 };
 
 exports.store = {
     models: {
-        state: {}
+        hottopicstate: {},
+        // activeexpertstate: {}
     },
     callbacks: {
         init: function() {

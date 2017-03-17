@@ -1,4 +1,4 @@
-var types = require('./app/exam/types'),
+var types = require('./app/exam/exam-question-types'),
     D = require('drizzlejs'),
     constant = {
         MARK_PAPER_MODE: 4,

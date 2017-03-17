@@ -1,0 +1,31 @@
+.choise-tags-page {
+    & .list {
+        margin: var(--large-space) 0;
+        margin-right: -1em;
+    }
+
+    & li {
+        display: inline-block;
+        padding: var(--space) var(--large-space);
+        border: 1px solid var(--border-color);
+        margin: 0 1em 1em 0;
+        cursor: pointer;
+
+        &.selected {
+            background: var(--bg-color-2);
+        }
+    }
+
+    & ul.selected {
+        overflow: hidden;
+
+        & li {
+            background: var(--bg-color-2);
+        }
+
+    }
+
+    & .text {
+        padding: var(--space) 1em var(--space) 0;;
+    }
+}

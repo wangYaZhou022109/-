@@ -1,7 +1,7 @@
 // exports.title = '我要提问';
 // exports.type = 'form';
-exports.bindings = {
-};
+// exports.bindings = {
+// };
 
 // exports.components = [function() { // 选择话题
 //     return {
@@ -37,25 +37,25 @@ exports.bindings = {
 // }];
 
 
-exports.actions = {
-    'click release': 'release'
-};
+// exports.actions = {
+//     'click release': 'release'
+// };
 
-exports.dataForActions = {
-    release: function(payload) {
-        return payload;
-    }
-};
+// exports.dataForActions = {
+//     release: function(payload) {
+//         return payload;
+//     }
+// };
 
-exports.actionCallbacks = {
-    release: function() {
-        this.app.message.success('操作成功！');
-        setTimeout(function() {
-            window.location.reload();
-        }, 1000);
-    }
-};
+// exports.actionCallbacks = {
+//     release: function() {
+//         this.app.message.success('操作成功！');
+//         setTimeout(function() {
+//             window.location.reload();
+//         }, 1000);
+//     }
+// };
 
 
-exports.dataForTemplate = {
-};
+// exports.dataForTemplate = {
+// };

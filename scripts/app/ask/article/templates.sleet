@@ -1,7 +1,17 @@
 #!handlebars
 
-module 
-    div(data-region='details')
+module > .form
+    .form-row
+        label.required > string('article-title')
+        .content > input.input(name='title'  id='title' value=''  x-rule='') + .tips 0/60
+    .form-row
+        label.required > string('related-topics')
+        .content > input.input(name='topic'  id='topic' value=''  x-rule='') + .choice 选择
+    .form-row.textarea-row
+        label > string('article-content')
+        .content > textarea.input(rows='5')(name='content'  id='content' value=''  x-rule='') + .tips 0/60
+
+
 
 view('test') > form.vertical
     ul

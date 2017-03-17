@@ -8,11 +8,9 @@ exports.store = {
         share: {}
     },
     callbacks: {
-        getTemplate: function(data) {
-            var me = this,
-                templateCode = data;
+        init: function() {
+            var me = this;
             this.models.shareTemplate.clear();
-            this.models.shareTemplate.params.code = templateCode;
             return me.get(this.models.shareTemplate);
         }
     }
@@ -20,4 +18,5 @@ exports.store = {
 
 exports.beforeRender = function() {
     this.store.models.share.data = this.renderOptions;
+    this.dispatch('init');
 };

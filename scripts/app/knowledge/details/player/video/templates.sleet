@@ -1,0 +1,7 @@
+#!handlebars
+module
+    div(data-region='main')
+
+view('main')
+    video#player(class="video-js vjs-default-skin vjs-big-play-centered vjs-skin-hotdog-stand")
+        source(src=url type="video/mp4")

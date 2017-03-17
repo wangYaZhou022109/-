@@ -1,5 +1,6 @@
+
 exports.items = {
-    details: 'details'
+   // details: 'details'
 };
 
 exports.store = {
@@ -9,11 +10,16 @@ exports.store = {
     },
     callbacks: {
         release: function(payload) {
-            var question = this.models.question,
-                data = payload;
-            data.id = 1;
-            question.set(data);
-            return this.post(question);
+            var me = this;
+            this.models.question.set(payload);
+            // console.log(payload);
+            return this.post(this.models.question).then(function() {
+                me.app.message.success('操作成功');
+                // me.app.show('content', 'ask/content');
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            });
         }
     }
 };
@@ -21,9 +27,17 @@ exports.store = {
 exports.afterRender = function() {
 };
 
-
 exports.title = '我要提问';
 
 exports.buttons = [{
-    text: '发布'
+    text: '发布',
+    fn: function() {
+        var data = {
+            id: 1,
+            title: this.$('title').value,
+            topic: this.$('topic').value,
+            content: this.$('content').value
+        };
+        return this.dispatch('release', data);
+    }
 }];

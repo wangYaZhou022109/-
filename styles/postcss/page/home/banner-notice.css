@@ -8,6 +8,7 @@
         right: var(--section-gap);
         background: white;
         font-size: var(--small-font);
+        z-index: 5;
 
         & .notice-img {
             height: 12em;

@@ -2,9 +2,10 @@
 
 module > .home-page.layout
     .banner-bar
-        .banner > img.block(src='images/course-bg.jpg')
+        .banner(data-region='banner')
         .banner-notice(data-region='banner-notice')
     .min-banner(data-region='min-banner')
+    .section-news(data-region='news')
     .section(data-region='layout-4')
     .section(data-region='layout-3')
     .section(data-region='layout-5')
@@ -21,15 +22,15 @@ view('banner-notice')
         li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
     .notice-bottom
         .item > i.iconfont.icon-type + span 我的课程
-        .item > i.iconfont.icon-mark + span 我的活动
+        .item#showInfo > i.iconfont.icon-mark + span 我的活动
 
 view('min-banner') > .container
     ul
-        li > img(src='images/1.png')
-        li > img(src='images/1.png')
-        li > img(src='images/1.png')
-        li > img(src='images/1.png')
-        li > img(src='images/1.png')
+        li > img(src='images/home/m-1.png')
+        li > img(src='images/home/m-2.png')
+        li > img(src='images/home/m-3.png')
+        li > img(src='images/home/m-4.png')
+        li > img(src='images/home/m-5.png')
 
 view('layout-1') > .container
     .home-title-row
@@ -37,44 +38,44 @@ view('layout-1') > .container
         .more more
     .layout-1
         .big-pic > .content
-            .img >  img(src='images/1.png')
+            .img >  img(src='images/home/1-1.jpg')
 
         .base-list
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/1.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
-                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                    .bottom
-                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-            .list-bar
-                .item > .content
-                    .img >  img(src='images/1.png')
-                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                    .bottom
-                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/2.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/3.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/4.jpg')
+                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/home/5.jpg')
+                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/home/6.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
@@ -86,25 +87,25 @@ view('layout-2') > .container
         .more more
     .layout-2
         .big-pic > .content
-            .img >  img(src='images/1.png')
+            .img >  img(src='images/home/2-1.jpg' style='height: 100%;')
 
         .base-list
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/1.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/2.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
             .list-bar.big-height
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/1-1.jpg')
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
@@ -112,13 +113,13 @@ view('layout-2') > .container
 
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/4.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/5.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
@@ -130,7 +131,7 @@ view('layout-3') > .container
         .more more
     .layout-3
         .big-pic > .content
-            .img >  img(src='images/1.png')
+            .img >  img(src='images/home/2-1.jpg')
             .bottom
                 .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                 .descoration.sub-text.textoverflow 智能化新时代的客户渠道智能化户渠道智能化新时代的客户渠道
@@ -143,7 +144,7 @@ view('layout-3') > .container
         .base-list
             .list-bar.big-width
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/3.jpg')
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
@@ -158,12 +159,12 @@ view('layout-3') > .container
                         .sub-text.small-font
                             .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
                             .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                    .img >  img(src='images/1.png') + .home-tag > .tag > span 调研
+                    .img >  img(src='images/home/4.jpg') + .home-tag > .tag > span 调研
 
 
             .list-bar.big-height
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/1-1.jpg')
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
@@ -179,16 +180,16 @@ view('layout-4') > .container
     .layout-4
         .big-pic
             .item-bar.above > .content
-                .img >  img(src='images/1.png')
+                .img >  img(src='images/home/4-1.jpg')
             .item-bar.below
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/1.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/2.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
@@ -196,13 +197,13 @@ view('layout-4') > .container
         .base-list
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/3.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/4.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
@@ -211,13 +212,13 @@ view('layout-4') > .container
         .base-list
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/5.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/6.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
@@ -231,52 +232,52 @@ view('layout-5') > .container
         .base-list
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/3.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
-                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                    .bottom
-                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-            .list-bar
-                .item > .content
-                    .img >  img(src='images/1.png')
-                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                    .bottom
-                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/1.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/2.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/5.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
             .list-bar
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/7.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
                 .item > .content
-                    .img >  img(src='images/1.png')
+                    .img >  img(src='images/home/6.jpg')
+                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+            .list-bar
+                .item > .content
+                    .img >  img(src='images/home/4.jpg')
+                    .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                    .bottom
+                        .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
+                        .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                .item > .content
+                    .img >  img(src='images/home/1.jpg')
                     .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
                     .bottom
                         .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
@@ -288,37 +289,37 @@ view('lecture') > .container
         .more more
     .lecture-list > ul
         li
-            .lecture-pic > img(src='images/1.png')
+            .lecture-pic > img(src='images/d2.jpg')
             .lecture-info
                 .title 讲师姓名
                 .sub-text 深圳分公司/互联网中心
                 .sub-text 高级讲师
         li
-            .lecture-pic > img(src='images/1.png')
+            .lecture-pic > img(src='images/d4.jpg')
             .lecture-info
                 .title 讲师姓名
                 .sub-text 深圳分公司/互联网中心
                 .sub-text 高级讲师
         li
-            .lecture-pic > img(src='images/1.png')
+            .lecture-pic > img(src='images/d2.jpg')
             .lecture-info
                 .title 讲师姓名
                 .sub-text 深圳分公司/互联网中心
                 .sub-text 高级讲师
         li
-            .lecture-pic > img(src='images/1.png')
+            .lecture-pic > img(src='images/d4.jpg')
             .lecture-info
                 .title 讲师姓名
                 .sub-text 深圳分公司/互联网中心
                 .sub-text 高级讲师
         li
-            .lecture-pic > img(src='images/1.png')
+            .lecture-pic > img(src='images/d2.jpg')
             .lecture-info
                 .title 讲师姓名
                 .sub-text 深圳分公司/互联网中心
                 .sub-text 高级讲师
         li
-            .lecture-pic > img(src='images/1.png')
+            .lecture-pic > img(src='images/d4.jpg')
             .lecture-info
                 .title 讲师姓名
                 .sub-text 深圳分公司/互联网中心

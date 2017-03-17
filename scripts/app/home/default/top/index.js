@@ -42,10 +42,10 @@ var menus = [{
     icon: null,
     id: '5',
     level: 2,
-    name: '应用',
+    name: '专题',
     order: 0,
     parentId: null,
-    uri: 'app/index'
+    uri: 'study/subject/index'
 }, {
     createTime: 1474538557153,
     icon: null,
@@ -60,7 +60,8 @@ var menus = [{
 exports.items = {
     nav: 'nav',
     shortcut: 'shortcut',
-    logo: 'logo'
+    logo: 'logo',
+    'home/message': { isModule: true }
 };
 
 function getParams () {
