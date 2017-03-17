@@ -1,0 +1,10 @@
+.watch-detail2-page {
+    & .report-person {
+        & .item {
+            & img {
+                width: var(--large-space);
+                height: auto;
+            }
+        }
+    }
+}

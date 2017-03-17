@@ -1,0 +1,7 @@
+.watch-detail1-page {
+    & .detail-img {
+        & img {
+            width: 10%;
+        }
+    }
+}

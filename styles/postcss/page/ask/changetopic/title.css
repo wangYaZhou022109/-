@@ -1,0 +1,17 @@
+.changetopic-page {
+    & .choose {
+        padding: 0 1em;
+        & .choose-btn {
+            border-radius: 2em;
+            background-color: var(--font-sub-color);
+        }
+    }
+    & .p-left {
+        padding-left: 4%;
+    }
+    & .topic-icon {
+        position: absolute;
+        top: 50%;
+        left: 1%;
+    }
+}

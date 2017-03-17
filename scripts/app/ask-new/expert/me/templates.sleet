@@ -1,7 +1,15 @@
 #!handlebars
 
 module
-    .expert-detail-top(style='background-image:url(images/bg-usercenter.png)') > .container
+    .expert-detail-top(data-region="top")(style='background-image:url(images/bg-usercenter.png)')
+
+
+    .ask-page > .container
+        .page-main-wrapper.knowledge-side
+            .page-side.side-min(data-region='side')
+            .page-main(data-region='main')
+view('top')
+    .container
         .head > img(src='images/d2.jpg' alt='张三丰')
         section.section
             .title-row
@@ -11,16 +19,11 @@ module
                 .inline-block.m-right.bg-white.sub-title 话题一
                 .inline-block.m-right.bg-white.sub-title 科学教育
                 .inline-block.m-right.bg-white.sub-title 话题区域经济学
-                .inline-block.m-right.bg-white.sub-title.pointer 更改
+                .inline-block.m-right.bg-white.sub-title.pointer#changetopic 更改
             p.info-detail 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神上的生理反应，人们的身人们的身人们的身人们的身人们的身体或者精神上的。
             a.normal(href='javascript:;')
                 i.iconfont.icon-warn
                 | 专家的权利与义务
-
-    .ask-page > .container
-        .page-main-wrapper.knowledge-side
-            .page-side.side-min(data-region='side')
-            .page-main(data-region='main')
 view('main')
     section.section
         .tabs.line.mb-1 > ul
