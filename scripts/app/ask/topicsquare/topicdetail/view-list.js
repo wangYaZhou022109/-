@@ -9,7 +9,7 @@ exports.getEntityModuleName = function(key) {
     if (typeof key === 'string' && key !== '') {
         url = key;
     }
-    return 'ask/mymanage/topicdetail/' + url;
+    return 'ask/topicsquare/topicdetail/' + url;
 };
 exports.getEntity = function() {
     return {

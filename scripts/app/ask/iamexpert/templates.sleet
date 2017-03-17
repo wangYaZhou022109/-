@@ -55,6 +55,11 @@ view('left')
                             .pull-left
                                 .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
                                 .item(id ='item-myanswer') > span > string('my') + string('answer')
+                    compare(leftstate.menu 'eq' 'myanswer')
+                        .filter
+                            .pull-left
+                                .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
+                                .item(id ='item-myanswer') > span > string('my') + string('answer')
                     .comment-list.ask-list > ul
                         div(data-dynamic-key=leftstate.menu)
 
