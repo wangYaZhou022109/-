@@ -401,7 +401,63 @@ view('main')
                                         .item 评论(2)
                                         .item +关注
                                         .item 分享
-        li.tabs-cont-item#tabs-cont-item-3 11111111111332
+        li.tabs-cont-item#tabs-cont-item-3
+            .comment-list.ask-list > ul
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 我
+                            span ·提问·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 关联标签：标签名称
+                            .text-right
+                                .item > span.color-ing 待审核
+                                .item.color-err > span 被拒绝
+                                .item 删除
+                                .item
+                                    | +
+                                    span 关注
+                                .item 赞（8）
+                                .item 2条讨论
+                                .item > span 分享
+                                .item > span#report 举报
+
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 我
+                            span ·提问·
+                            span.sub-text 2016-09-09 09:09
+                        .color-error.small-font.m-top 被拒绝的理由被拒绝的理由被拒绝的理由被拒绝的理由
+                        .comment-operation
+                            .pull-left > .sub-text 关联标签：标签名称
+                            .text-right
+                                .item > span.color-error 被拒绝
+                                .item 删除
+                li
+                    .user-pic > img(src='images/1.png')
+                    .comment-content
+                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                        .comment-text
+                            img(src='images/1.png')
+                            | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .user-info
+                            a(href='javascript:;') 我
+                            span ·提问·
+                            span.sub-text 2016-09-09 09:09
+                        .comment-operation
+                            .pull-left > .sub-text 关联标签：标签名称
+                            .text-right
+                                .item 评论(2)
+                                .item +关注
+                                .item 分享
 
 view('side')
     .section

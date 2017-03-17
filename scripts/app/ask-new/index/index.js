@@ -1,5 +1,5 @@
 exports.items = {
     main: 'main',
     side: 'side',
-    'ask-new/publish-question': { isModule: true }
+    'ask-new/index/export': { isModule: true }
 };

@@ -1,9 +1,11 @@
 var $ = require('jquery');
-
+exports.bindings = {
+};
 exports.events = {
     'click item-*': 'toggleItem',
     'click button-*': 'togglePage',
-    'click icon-*': 'toggleIcon'
+    'click icon-*': 'toggleIcon',
+    'click report': 'showExport'
 };
 
 exports.handlers = {
@@ -32,5 +34,9 @@ exports.handlers = {
         var that;
         that = $(this.$('icon-' + id));
         that.toggleClass('icon-opacity0');
+    },
+    showExport: function() {
+        var model = this.module.items['ask-new/index/export'];
+        this.app.viewport.modal(model);
     }
 };
