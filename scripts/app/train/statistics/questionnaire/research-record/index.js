@@ -1,18 +1,20 @@
 exports.items = {
     details: 'details',
     main: 'main',
-    search: 'search'
+    search: 'search',
+    'exam/research-activity/research-answer-detail': { isModule: true }
 };
+
 
 exports.store = {
     models: {
         researchQuestionarys: {
-            url: '../train/questionnaireSurvey/researchAnswerRecord',
+            url: '../train/questionnaire-survey/research-record',
             type: 'pageable',
             root: 'items'
         },
-        researchQuestionary: { url: '../train/questionnaireSurvey/researchQuestionary' },
-        download: { url: '../train/questionnaireSurvey/researchAnswerRecordDownload' },
+        researchQuestionary: { url: '../train/questionnaire-rurvey/research-questionary' },
+        download: { url: '../train/questionnaire-survey/research-record-download' },
         state: { data: {} }
     },
     callbacks: {

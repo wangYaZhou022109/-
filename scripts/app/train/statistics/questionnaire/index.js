@@ -1,14 +1,14 @@
 exports.items = {
     mainA: 'mainA',
     'train/statistics/questionnaire/exam': { isModule: true },
-    'train/statistics/questionnaire/researchRecord': { isModule: true },
-    'train/statistics/questionnaire/researchAnswerRecord': { isModule: true }
+    'train/statistics/questionnaire/research-record': { isModule: true },
+    'train/statistics/questionnaire/research-answer-record': { isModule: true }
 };
 
 exports.store = {
     models: {
         classEvaluates: {
-            url: '../train/questionnaireSurvey/classEvaluate'
+            url: '../train/questionnaire-survey/class-evaluate'
         },
         state: { data: { classId: 3 } }
     },

@@ -1,12 +1,12 @@
 exports.items = {
     main: 'main',
-    'train/statistics/studyDetails/particulars': { isModule: true }
+    'train/statistics/study-details/particulars': { isModule: true }
 };
 
 exports.store = {
     models: {
         courseStudyProgresss: {
-            url: '../train/trainee/courseStudyProgresss',
+            url: '../train/trainee/course-study-progresss',
             type: 'pageable',
             root: 'items'
         },

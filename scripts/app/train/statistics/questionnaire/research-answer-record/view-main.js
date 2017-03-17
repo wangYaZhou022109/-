@@ -36,3 +36,15 @@ exports.dataForTemplate = {
         return data;
     }
 };
+
+exports.events = {
+    'click edit-researchQuestionarys*': 'edit'
+};
+
+exports.handlers = {
+    edit: function(data) {
+        var id = data,
+            url = '#/exam/research-activity/research-detail/' + id;
+        window.open(url, '_blank');
+    }
+};

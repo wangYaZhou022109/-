@@ -8,7 +8,7 @@ module > .train-class-page
 
 view('details') > form.vertical
     .row > .col-sm-12
-        .inline-block.com-title > echo('评估名称') :
+        .inline-block.com-title > echo('调研名称') :
         .inline-block > echo(researchQuestionary.name)
     .row
         .col-sm-4
@@ -31,8 +31,9 @@ view('search') > form.vertical
 
 view('main')
     div.text-center
-        echo('评估详情列表')
+        echo('调研详情列表')
     .buttons
+        a(href=collect target = "_blank") > .btn > echo('汇总统计')
         a(href=exportUrl target = "_blank") > .btn > echo('导出')
     table.table
         thead > tr
@@ -42,15 +43,15 @@ view('main')
             th > echo('所属部门')
             th > echo('开始时间')
             th > echo('提交时间')
-            th > echo('得分')
+            th > echo('操作')
         tbody > each(researchQuestionarys) > tr
             td > echo(i)
             td > echo(member.name)
             td > echo(member.fullName)
             td > echo(organization.name)
-            td > dateTime(sTime)
-            td > dateTime(suTime)
-            td > a(id='edit-researchQuestionarys'+researchRecord.researchQuestionaryId data-name='id' data-value=id) > echo(sumScore)
+            td > dateTime(startTime)
+            td > dateTime(submitTime)
+            td > a(id='edit_researchQuestionarys'+id data-name='id' data-value=id) > echo('详情')
         else
             tr > td(colspan='11') > p.text-center > string('no-data')        
     #pager.pagination

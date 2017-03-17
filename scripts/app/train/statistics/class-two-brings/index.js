@@ -1,19 +1,19 @@
 exports.items = {
     main: 'main',
     search: 'search',
-    'train/statistics/classTwoBrings/owner': { isModule: true },
+    'train/statistics/class-two-brings/owner': { isModule: true },
     edit: ''
 };
 
 exports.store = {
     models: {
         classTwoBrings: {
-            url: '../train/classTwoBrings/background',
+            url: '../train/class-two-brings/background',
             type: 'pageable',
             root: 'items'
         },
-        classTwoBring: { url: '../train/classTwoBrings' },
-        download: { url: '../train/classTwoBrings/download' },
+        classTwoBring: { url: '../train/class-two-brings' },
+        download: { url: '../train/class-two0brings/download' },
         state: { data: { classId: 3 } }
     },
     callbacks: {

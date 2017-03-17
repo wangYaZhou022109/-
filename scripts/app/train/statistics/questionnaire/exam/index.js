@@ -7,12 +7,12 @@ exports.items = {
 exports.store = {
     models: {
         exams: {
-            url: '../train/questionnaireSurvey/examRecord',
+            url: '../train/questionnaire-survey/exam-record',
             type: 'pageable',
             root: 'items'
         },
-        exam: { url: '../train/questionnaireSurvey/exam' },
-        download: { url: '../train/questionnaireSurvey/examDownload' },
+        exam: { url: '../train/questionnaire-survey/exam' },
+        download: { url: '../train/questionnaire-survey/exam-download' },
         state: { data: {} }
     },
     callbacks: {

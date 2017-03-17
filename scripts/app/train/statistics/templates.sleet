@@ -8,8 +8,8 @@ module > .train-class-page
 view('tab')
     .container > ul.row.text-center
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-questionnaire') 调查问卷
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-classTwoBrings') 两个带来
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-studyDetails') 学习详情
+        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-class-two-brings') 两个带来
+        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-study-details') 学习详情
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-task') 作业管理
 
 view('main')

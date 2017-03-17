@@ -1,19 +1,18 @@
 exports.items = {
     details: 'details',
     main: 'main',
-    search: 'search',
-    'train/statistics/questionnaire/researchRecord/research-detail': { isModule: true }
+    search: 'search'
 };
 
 exports.store = {
     models: {
         researchQuestionarys: {
-            url: '../train/questionnaireSurvey/researchRecord',
+            url: '../train/questionnaire-survey/research-answer-record',
             type: 'pageable',
             root: 'items'
         },
-        researchQuestionary: { url: '../train/questionnaireSurvey/researchQuestionary' },
-        download: { url: '../train/questionnaireSurvey/researchRecordDownload' },
+        researchQuestionary: { url: '../train/questionnaire-survey/research-questionary' },
+        download: { url: '../train/questionnaire-survey/research-answer-record-download' },
         state: { data: {} }
     },
     callbacks: {
