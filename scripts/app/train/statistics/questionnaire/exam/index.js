@@ -24,6 +24,7 @@ exports.store = {
             exams.params.resourceId = payload.id;
             exam.params.resourceId = payload.id;
             state.id = payload.id;
+            exam.clear();
             this.get(exam);
             return this.get(exams);
         },

@@ -24,6 +24,7 @@ exports.store = {
             researchQuestionarys.params.resourceId = payload.id;
             researchQuestionary.params.resourceId = payload.id;
             state.id = payload.id;
+            researchQuestionary.clear();
             this.get(researchQuestionary);
             return this.get(researchQuestionarys);
         },
