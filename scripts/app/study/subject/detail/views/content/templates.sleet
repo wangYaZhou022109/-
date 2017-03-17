@@ -14,7 +14,11 @@ view('pannel')
                 li
                     .catalog-state
                         .inline-block.layout-mr > .title-state > echo(i ': ' name)
-                    each(courseChapterSections)
+                        .pull-right
+                            a.normal.layout-mr.sub-text(id='sectionDisplay-' + id href="javascript:;")
+                                label(id='label-' + id) 收起
+                                i.iconfont.icon-arrow-up(id='icon-' + id)
+                    div(id='sectionDiv-' + id) > each(courseChapterSections)
                         .catalog-state-info
                             .item.block
                                 .pull-right

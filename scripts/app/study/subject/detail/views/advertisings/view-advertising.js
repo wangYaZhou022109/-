@@ -14,6 +14,23 @@ exports.components = [{
     options: {
         autoplay: true
     }
+}, function() { // 分享组件
+    var data = {},
+        subject = this.bindings.subject.data;
+    if (subject) {
+        data.id = subject.id;
+        data.type = '8';
+        data.pics = subject.cover || 'images/default-cover/default_spceial.jpg';
+        data.title = subject.name;
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
 }];
 
 exports.events = {
