@@ -2,10 +2,47 @@
 
 module > .changetopic-page
     .changetopic-title(data-region="title")
-    .changetopic-search(data-region="search")
     .changetopic-contents(data-region="contents")
 view('title')
-    .choose.clearfix
-        .h4.pull-left 选择话题
-        .btn.pull-right
-            .small.radius 选择
+    .change-title.clearfix
+        .like.ckearfix
+            p.pull-left.m-right 擅长话题：
+            .tag-btn.radius.m-top.m-right 话题  X
+            .tag-btn.radius.m-top.m-right 话题  X
+            .tag-btn.radius.m-top.m-right 话题  X
+    .topic-search.relative
+        input.input.w-full.m-top.p-left(placeholder="搜索你擅长的")
+        .iconfont.icon-search.topic-icon
+view('contents')
+    .topic-total
+        .topic-category.m-top
+            a.title-color.m-right 全部
+            a.sub-title.m-right 管理
+            a.sub-title.m-right 设计
+            a.sub-title.m-right 产品
+            a.sub-title.m-right 项目
+            a.sub-title.m-right 研发
+            a.sub-title.m-right 娱乐
+            a.sub-title.m-right 交友
+            a.sub-title.m-right 交互
+            a.sub-title.m-right 文件
+        .topics
+            .tag-btn.radius.m-top.m-right 话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 话题话题
+            .tag-btn.radius.m-top.m-right 12345678
+            .tag-btn.radius.m-top.m-right 12345678
+            .tag-btn.radius.m-top.m-right 12345678
+            .tag-btn.radius.m-top.m-right 研发研发研发研发
+            .tag-btn.radius.m-top.m-right 12345678
+            .tag-btn.radius.m-top.m-right 娱乐娱乐娱乐
+            .tag-btn.radius.m-top.m-right 娱乐娱乐娱乐
+            .tag-btn.radius.m-top.m-right 娱乐娱乐娱乐
+            .tag-btn.radius.m-top.m-right 娱乐娱乐娱乐娱乐

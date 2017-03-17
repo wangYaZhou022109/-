@@ -15,25 +15,17 @@ exports.handlers = {
         var div1;
         var div2;
         var div3;
-        var dv;
-        div1 = $(this.$('button-1')).parent('div').parent('div');
-        div2 = $(this.$('button-2')).parent('div').parent('div');
-        dv = $(this.$('button-3')).parent('div').parent('div').parent('div');
-        div3 = $(dv.children('div')[2]);
+        div1 = $(this.$('page1'));
+        div2 = $(this.$('page2'));
+        div3 = $(this.$('page3'));
         if (id === '1') {
-            div1.hide();
-            div2.show();
-            div3.hide();
+            div2.show().siblings().hide();
         }
         if (id === '2') {
-            div1.show();
-            div2.hide();
-            div3.hide();
+            div1.show().siblings().hide();
         }
         if (id === '3') {
-            div1.hide();
-            div2.hide();
-            div3.show();
+            div3.show().siblings().hide();
         }
     },
     toggleIcon: function(id) {
