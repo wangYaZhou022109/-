@@ -1,0 +1,10 @@
+.message-page {
+    & .list {
+
+        & li {
+            padding: var(--large-space) 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+    }
+
+}

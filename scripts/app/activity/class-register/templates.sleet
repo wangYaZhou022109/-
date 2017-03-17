@@ -1,0 +1,107 @@
+#!handlebars
+
+module > .class-register-page
+    .class-register-banner > .clearfix.container(data-region='banner')
+    .page-main-wrapper
+        .page-side > .container(data-region='side')
+        .page-main > .container(data-region='main')
+
+view('banner')
+    .cover.pull-left > img(src='images/default-cover/default_class.jpg')
+    .banner-con.pull-left
+        h2 新员工入职调研问卷
+        p 起至时间：2016-11-10 9:00～2016-11-10 9:00
+        p 往返日期：2016-11-10 9:00～2016-11-10 9:00
+        p 培训地点：中国移动学院
+    .banner-btn.pull-right.text-center > .btn.white 报名中
+
+view('side')
+    .h3 中国移动学院响应中心
+    .register-tel
+        i.iconfont.icon-phone
+        span.sub-title 15801696688 - 27260
+    .h3.layout-mt-small 中国移动学院培训须知
+    a.normal.clearfix.train-notice
+        span.pull-left 培训须知.docx
+        .iconfont.icon-cloud-down.pull-right
+    .h3.layout-mt-small 常见问题解答
+    ul.qaq-list.layout-mt-small
+        li
+            .qaq-tit 1、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 2、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 3、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 4、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 5、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 6、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 报到日将有四趟班车位于天通苑北地铁站南行（右）100米，上天桥行至马路对面，由右侧下天桥，即可看到班车。时间为11点，15点，17:30以及20点。返程日班车一般安排为课程结束当天的18点以及次日的8点分别送于机场、集团。
+        li
+            .qaq-tit 7、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+
+view('main')
+    .h3 填写报名信息
+    hr
+    .form
+        .form-row
+            label 培训班名称
+            .content > input.input(placeholder='中国移动学院PMP三期')
+        .form-row
+            label 报名码
+            .content > input.input(placeholder='98524556')
+        .form-row
+            label 姓名
+            .content > input.input(placeholder='陈柱端')
+        .form-row
+            label 公司
+            .content > input.input(placeholder='个人信息引入')
+        .form-row
+            label 二级部门/单位
+            .content > input.input(placeholder='个人信息引入')
+        .form-row
+            label 职务
+            .content > input.input(placeholder='个人信息引入')
+        .form-row
+            label 职级
+            .content > select.input
+        .form-row
+            label.required 性别
+            .content > select.input
+        .form-row
+            label.required 民族
+            .content > select.input
+        .form-row
+            label.required 移动电话
+            .content > input.input(placeholder='18576787846（引用个人信息数据，点击可修改）')
+        .form-row
+            label.required 邮箱
+            .content > input.input(placeholder='maxxie.liu@foxmail.com（引用个人信息数据，点击可修改）')
+        .form-row
+            label.auto 备注
+            .content > textarea.input(rows='3')
+        .form-row
+            label
+            .content > .btn 提交

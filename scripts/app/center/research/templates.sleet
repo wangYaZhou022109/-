@@ -1,0 +1,40 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main') > form
+    .person-list
+        .filter
+            .pull-right.m-right.pointer
+                | 参与时间
+                i.iconfont.icon-sort-desc
+            .pull-left
+                .inline-block.m-left.sub-text 要求：
+                .item(id='item-all' class=if(search.all 'active' '')) > span 全部
+                .item(id='item-no-finish' class=if(search.noFinish 'active' '')) > span 未完成
+                .item(id='item-finished' class=if(search.finished 'active' '')) > span 已完成
+        .list-search
+            input.input(id='name' name='name' value=search.name placeholder='请输入您要搜索的内容名称')
+            .btn#search > i.iconfont.icon-search
+        ul.list-text.border.top > each(researchRecords)
+            li.border.bottom
+                .title-row
+                    i.iconfont.icon-task
+                    .inline-block.title > echo(researchQuestionary.name)
+                    .time 调研时间：
+                        dateTime(researchQuestionary.startTime) 
+                        | 至
+                        dateTime(researchQuestionary.endTime)
+                .state > map('research-record-status', status)
+                .btn-row
+                    compare(status 'eq' 1)
+                        .btn(id='view-detail-' + id) 查看详情
+                    compare(status 'eq' 0)
+                        .btn(id='do-research-' + id) 继续调研
+        #pager.pagination
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(research.questionaryDetail)

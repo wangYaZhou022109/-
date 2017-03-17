@@ -23,7 +23,7 @@ view('sorts')
                 .item#sort-0 > span 最新
                 .item#sort-1 > span 最热
                 .item#sort-2 > span 好评
-            
+
 view('side')
     .knowledge-upload
         .btn.block.clearfix.knowledge-upload#upload
@@ -32,7 +32,7 @@ view('side')
             .pull-right.text-left
                 | 上传知识
                 br
-                .text-tips 每篇积分 +2
+                .small-font 每篇积分 +2
 
     .statistics.text-center.side-box
         p
@@ -49,30 +49,10 @@ view('side')
                 b > echo(totalFront.medias)
                 .text-tips 音视频
 
-    .side-box
+    .side-box 
         .h3.m-bottom 热门标签
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-        .tag-btn 管理
-        .tag-btn 团队协作
-        .tag-btn 管理
-        .tag-btn 自由活动
-        .tag-btn 拓展
-        .tag-btn 自行车
-        .tag-btn 游泳协会
-
+        each(topics)
+            .tag-btn > echo(name)
     .side-box
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)
@@ -93,7 +73,7 @@ view('main')
             .pull-left.knowledge-tit-con
                 .clearfix
                     a.normal.knowledge-tit.pull-left(href = '#/knowledge/detail/'+id) > echo(name)
-                    .star-bar.pull-left > .star(style='width:'+avgScore+'%')
+                    .star-bar.pull-left > .star(style='width:'+ avgScore +'%')
                 .text-tips.sub-title
                     span > echo('发布人:') + echo(uploadMember.fullName)
                     span > echo('发布日期：') + date(uploadTime)
@@ -102,6 +82,6 @@ view('main')
 
             .pull-right.knowledge-tit-out.text-right
                 a.normal.icon-add.iconfont
-        
- 
+
+
     #pager.pagination

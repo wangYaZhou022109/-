@@ -32,7 +32,6 @@ exports.handlers = {
     switchMenu: function(menuId) {
         var state = this.bindings.state,
             id = this.bindings.state.data.id,
-            menus = this.bindings.menus.data,
             menu = '',
             menuIds = menuId.split('-');
         if (menuIds.length > 1) {
@@ -40,9 +39,22 @@ exports.handlers = {
         } else {
             menu = this.bindings.menus.data[menuId].url;
         }
+        state.data = {};
+        state.data.id = id;
+        state.data.menu = menu;
+        state.data[menu] = true;
+        state.changed();
+    }
+};
+
+
+exports.dataForTemplate = {
+    menus: function() {
+        var menus = this.bindings.menus.data,
+            state = this.bindings.state.data;
         _.forEach(menus, function(m) {
             var obj = m;
-            if (obj.id === menuId) {
+            if (obj.url === state.menu) {
                 obj.current = true;
             } else {
                 obj.current = false;
@@ -50,7 +62,7 @@ exports.handlers = {
             if (obj.childs) {
                 _.forEach(obj.childs, function(child) {
                     var c = child;
-                    if (c.id === menuId) {
+                    if (c.url === state.menu) {
                         c.current = true;
                     } else {
                         c.current = false;
@@ -58,11 +70,6 @@ exports.handlers = {
                 });
             }
         });
-
-        state.data = {};
-        state.data.id = id;
-        state.data.menu = menu;
-        state.data[menu] = true;
-        state.changed();
+        return menus;
     }
 };
