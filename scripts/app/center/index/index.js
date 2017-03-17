@@ -23,7 +23,7 @@ exports.store = {
                 { id: '2-3', name: '我的调研', url: 'research' },
                 { id: '2-2', name: '我的考试', url: 'exam' }
             ] },
-            { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'bar' },
+            { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'ask' },
             { id: '4', name: '我的收藏', icon: 'icon-favorite', url: 'collection' },
             { id: '5', name: '我的档案', icon: 'icon-file', url: 'archives' }
         ] },
@@ -41,10 +41,26 @@ exports.store = {
         img: { url: '../human/file/download?id=' }
     },
     callbacks: {
-        init: function() {
+        init: function(options) {
             var me = this,
-                recommendList = me.models.recommendList;
+                recommendList = me.models.recommendList,
+               // member = me.models.member,
+                state = me.models.state.data;
+            if (options && options.name) {
+                if (options.name === 'course') {
+                    state.menu = 'study/course';
+                } else if (options.name === 'subject') {
+                    state.menu = 'study/subject';
+                } else if (options.name === 'knowledge') {
+                    state.menu = 'study/knowledge';
+                } else if (options.name === 'jobs') {
+                    state.menu = 'study/jobs';
+                } else {
+                    state.menu = options.name;
+                }
+            }
             recommendList.clear();
+            // member.clear();
             recommendList.params = { page: '1' };
             me.get(recommendList);
         },
@@ -59,5 +75,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init');
+    this.dispatch('init', this.renderOptions);
 };
