@@ -1,4 +1,4 @@
-var $ = require('jquery');
+
 exports.items = {
    // details: 'details'
 };

@@ -23,7 +23,7 @@ exports.store = {
         },
         check: function(payload) {
             var expert = this.models.expertlist;
-            var topicType = this.models.topicType;
+            // var topicType = this.models.topicType;
             expert.set(payload);
             // console.log(topicType);
             return this.post(expert).then(function() {
