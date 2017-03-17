@@ -30,7 +30,7 @@ exports.handlers = {
     },
     toExamButton: function() {
         var id = this.renderOptions.exam.id,
-            url = '#/exam/exam/answer-paper-2/' + id;
+            url = '#/exam/exam/answer-paper/' + id;
         window.open(url, '_blank');
     }
 };

@@ -37,7 +37,8 @@ exports.store = {
             }
         },   // 目录
         menu2: { data: [] },
-        topics: { data: [], url: '../system/topic/select', autoLoad: 'after' },
+        topicIds: { url: '../course-study/knowledge/topics', autoLoad: 'after' },
+        topics: { url: '../system/topic/ids' },
         members: {},    // 知识达人
         search: {}, // 搜索
     },
@@ -60,6 +61,11 @@ exports.store = {
             var knowledges = this.models.knowledges;
             knowledges.params = payload.params;
             return this.get(knowledges);
+        },
+        searchTopics: function(payload) {
+            var model = this.models.topics;
+            model.params = payload;
+            return this.get(model);
         }
     }
 };

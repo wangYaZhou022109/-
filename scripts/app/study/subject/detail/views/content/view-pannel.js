@@ -1,4 +1,5 @@
-var util = require('./app/study/subject/util');
+var util = require('./app/study/subject/util'),
+    $ = require('jquery');
 exports.bindings = {
     region: false,
     subject: false,
@@ -6,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click studyBtn-*': 'beginStudy'
+    'click studyBtn-*': 'beginStudy',
+    'click sectionDisplay-*': 'sectionDisplay'
 };
 
 exports.handlers = {
@@ -23,6 +25,18 @@ exports.handlers = {
                 finishStatus: 2, // 已完成
                 completedRate: 100, // 已完成
             });
+        }
+    },
+    sectionDisplay: function(id) {
+        var display = this.$('sectionDiv-' + id).style.display;
+        if (display === 'none') {
+            $(this.$('sectionDiv-' + id)).show();
+            $(this.$('icon-' + id)).removeClass('icon-arrow-down').addClass('icon-arrow-up');
+            $(this.$('label-' + id)).html('收起');
+        } else {
+            $(this.$('sectionDiv-' + id)).hide();
+            $(this.$('icon-' + id)).removeClass('icon-arrow-up').addClass('icon-arrow-down');
+            $(this.$('label-' + id)).html('展开');
         }
     }
 };

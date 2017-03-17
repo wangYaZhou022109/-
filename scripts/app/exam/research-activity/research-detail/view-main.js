@@ -1,7 +1,7 @@
 var _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
     D = require('drizzlejs'),
-    types = require('./app/exam/types'),
+    types = require('./app/exam/exam-question-types'),
     ANSWER_MODE = 3,
     MUTIPLE_CHOOSE = 2;
 

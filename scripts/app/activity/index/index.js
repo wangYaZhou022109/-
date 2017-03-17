@@ -31,7 +31,7 @@ exports.store = {
         currentExam: { },
         signUp: { url: '../exam/sign-up' },
         researchActivitys: {
-            url: '../exam/research-activity',
+            url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
             pageSize: 6
