@@ -18,7 +18,10 @@ view('menu')
         li > a(id='menu-exp')(class ='active') 专家分享
         li > a(id='menu-reply' )(class ='active') 等你回答
 view('list') 
-    div(data-dynamic-key=state.menu)
+    .tabs-cont > ul
+        li.tabs-cont-item.active#tabs-cont-item
+            .comment-list.ask-list > ul
+                div(data-dynamic-key=state.menu)
 view('right')
     #  .section
     #      .btn.block.layout-mt-small.big 我要关注
