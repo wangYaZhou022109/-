@@ -12,6 +12,7 @@ exports.store = {
         score: { url: '../course-study/knowledge/score' },
         download: { url: '../human/file/download' },
         recommends: { url: '../course-study/knowledge/recommend' },
+        integral: { url: '../system/integral-result', autoLoad: 'after' }
     },
     callbacks: {
         init: function(payload) {

@@ -7,11 +7,11 @@ view('main')
         .clearfix.layout-mb-small
             .pull-right.layout-ml-small
                 img.block.side-width(src='images/d1.jpg')
-                .btn.block.white.border 上传课程封面
+                .btn.block.white.border 上传知识封面
             .overflow
                 .form-row
                     label.required 上传资源
-                    .content > input.input + .choice 选择
+                    .content > input.input#filename + .choice#choice 选择
                     .content.m-top > .small-font
                         .color-error 支持文件类型
                         p
@@ -25,7 +25,7 @@ view('main')
             .form-row
                 label.label.required 所属目录
                 .content.icon-choice
-                    input.input + .choice 选择
+                    #categoryId
 
             .form-row
                 label.label 下载积分
@@ -34,22 +34,16 @@ view('main')
 
             .form-row.textarea-row
                 label 选择标签
-                .content
-                    .tag-input#tags
-                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
-                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
-                        input(placeholder='输入标签名按回车即可添加,最多添加五个')
-                    .sub-row#tag-list
-                        span.small-font 推荐标签：
-                        .tag-btn.radius.selected 标签一
-                        .tag-btn.radius 标签二
-                        .tag-btn.radius.selected 标签三
-                        .tag-btn.radius 标签一
-                        .tag-btn.radius 标签二
-                        .tag-btn.radius 标签三
-                        .tag-btn.radius ...
+                #topicIds
 
             .form-row.textarea-row
                 label 知识简介
                 .content
                     textarea.input(rows='3') + .tips 0/3000
+        input#resourceId(type='hidden' name='resourceId')
+        input#fileType(type='hidden' name='fileType')
+        input#type(type='hidden' name='type')
+view('upload')
+    .row
+        .col-sm-12
+            #uploader

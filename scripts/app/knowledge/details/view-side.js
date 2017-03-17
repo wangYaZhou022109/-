@@ -11,4 +11,3 @@ exports.dataForTemplate = {
 exports.actions = {
     'click changeRecommends': 'changeRecommends'
 };
-

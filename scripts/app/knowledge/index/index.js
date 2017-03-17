@@ -40,7 +40,7 @@ exports.store = {
         topicIds: { url: '../course-study/knowledge/topics', autoLoad: 'after' },
         topics: { url: '../system/topic/ids' },
         members: {},    // 知识达人
-        search: {}, // 搜索
+        search: {} // 搜索
     },
     callbacks: {
         init: function() {

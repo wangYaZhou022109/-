@@ -23,4 +23,3 @@ exports.changeTopics = function() {
         this.module.dispatch('searchTopics', { ids: ids.join() });
     }
 };
-
