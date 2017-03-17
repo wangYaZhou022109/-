@@ -12,6 +12,7 @@ module.exports = {
     activation: '激活',
     apply: '申请',
     'all-dynamic': '全部动态',
+    all: '全部',
     'be-good-at': '擅长',
     become: '成为',
     content: '内容',

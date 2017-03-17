@@ -31,14 +31,7 @@ view('advertising')
                                 .block.btn#submit-score 提交评分
                     .inline-block.layout-mr
                         .inline-block.layout-ml.m-right
-                            .drop-down-wrapper
-                                .drop-down-btn
-                                    i.iconfont.icon-share
-                                .drop-down-content > .content
-                                    ul
-                                        li 分享1
-                                        li 分享2
-                                        li 分享3
+                            #share
                         .inline-block.m-left
                             if(collect.id)
                                 .item#cancel-collect(data-name='id' data-value=collect.id)

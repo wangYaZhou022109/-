@@ -1,7 +1,8 @@
 
 exports.type = 'dynamic';
 exports.bindings = {
-    expertlist: true
+    expertlist: true,
+    topicType: true
 };
 
 exports.events = {
@@ -25,8 +26,13 @@ exports.handlers = {
 };
 
 exports.actions = {
+    'click check-*': 'check'
 };
+
 exports.dataForActions = {
+    check: function(payload) {
+        return payload;
+    }
 };
 
 exports.actionCallbacks = {
