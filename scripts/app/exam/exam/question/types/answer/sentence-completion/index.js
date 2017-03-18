@@ -8,7 +8,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: {},
+        state: {
+        },
         answer: {
             data: {},
             mixin: {

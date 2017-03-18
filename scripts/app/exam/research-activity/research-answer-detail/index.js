@@ -7,6 +7,8 @@ exports.items = {
     side: 'side'
 };
 
+exports.large = true;
+
 exports.title = '调研详情';
 
 exports.store = {

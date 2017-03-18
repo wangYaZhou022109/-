@@ -11,7 +11,8 @@ var _ = require('lodash/collection'),
         ZERO: 0,
         ONE: 1,
         SINGLE_MODE: 1,
-        PC_CLIENT_TYPE: 1
+        PC_CLIENT_TYPE: 1,
+        SHOW_ANSWER_IMMED: 1
     },
     itemStatus = {
         INIT: 'init',
@@ -42,7 +43,15 @@ var _ = require('lodash/collection'),
     WS,
     TO,
     changeScreen,
-    viewAnswerDetail;
+    viewAnswerDetail,
+    SINGLE_CHOOSE = 1,
+    MUTIPLE_CHOOSE = 2,
+    JUDGEMENT = 3,
+    SENTENCE = 4,
+    QUESTION_ANSWER = 5,
+    READING = 6,
+    SORTING = 8,
+    decryptAnswer;
 
 exports.items = {
     side: 'side',
@@ -229,7 +238,7 @@ exports.store = {
                             return q.status === itemStatus.CURRENT;
                         });
                     if (index > -1) {
-                        type.questions[index].status = getCurrentStatus.call(this, id);
+                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
@@ -251,6 +260,27 @@ exports.store = {
                         type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
                     this.save();
+                },
+                decryptAnswer: function() {
+                    var me = this;
+                    return _.map(this.data, function(t) {
+                        return D.assign(t, {
+                            questions: _.map(t.questions, function(q) {
+                                if (q.type === READING) {
+                                    return D.assign(q, {
+                                        subs: _.map(q.subs, function(sub) {
+                                            return D.assign(sub, {
+                                                questionAttrCopys: decryptAnswer.call(me, q.type, q.questionAttrCopys)
+                                            });
+                                        })
+                                    });
+                                }
+                                return D.assign(q, {
+                                    questionAttrCopys: decryptAnswer.call(me, q.type, q.questionAttrCopys)
+                                });
+                            })
+                        });
+                    });
                 }
             }
         },
@@ -341,6 +371,9 @@ exports.store = {
         },
         form: {
             url: '../exam/exam-record/submitPaper'
+        },
+        decryptKey: {
+            url: '../exam/exam/decrypt-key'
         }
     },
     callbacks: {
@@ -454,8 +487,15 @@ exports.store = {
             return true;
         },
         showAnswerDetail: function() {
-            this.models.state.data.showAnswerDetail = 1;
-            this.models.state.changed();
+            var me = this;
+            D.assign(this.models.decryptKey.params, {
+                examId: this.models.exam.data.id
+            });
+            me.models.state.data.showAnswerDetail = 1;
+            me.models.state.changed();
+            // return this.get(this.models.decryptKey).then(function() {
+            //     me.models.types.decryptAnswer();
+            // });
         }
     }
 };
@@ -546,7 +586,7 @@ changeScreen = function() {
 viewAnswerDetail = function() {
     var exam = this.models.exam.data,
         me = this;
-    if (exam.isShowAnswerImmed === 1) {
+    if (exam.isShowAnswerImmed === constant.SHOW_ANSWER_IMMED) {
         this.app.message.confirm('提交成功，是否马上查看详情', function() {
             $('.achievement-content').hide();
             return me.module.dispatch('showAnswerDetail');
@@ -555,4 +595,36 @@ viewAnswerDetail = function() {
         });
     }
     return '';
+};
+
+decryptAnswer = function(type, attrs) {
+    var key = this.store.models.decryptKey.data.key,
+        decrypt = function(k, v) {
+            return v;
+        };
+
+    if (type === SINGLE_CHOOSE || type === MUTIPLE_CHOOSE) {
+        return _.map(attrs, function(attr) {
+            return D.assign(attr, { type: decrypt(key, attr.type) });
+        });
+    }
+
+    if (type === JUDGEMENT || type === QUESTION_ANSWER || type === SENTENCE) {
+        return _.map(attrs, function(attr) {
+            return D.assign(attr, {
+                name: decrypt(key, attr.name),
+                value: decrypt(key, attr.value)
+            });
+        });
+    }
+
+    if (type === SORTING) {
+        return _.map(attrs, function(attr) {
+            if (attr.type === 0) {
+                return D.assign(attr, { name: decrypt(key, attr.name) });
+            }
+            return attr;
+        });
+    }
+    return attrs;
 };
