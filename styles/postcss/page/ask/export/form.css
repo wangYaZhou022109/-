@@ -1,0 +1,11 @@
+.export-form {
+    & .report-item {
+        margin-right: var(--base-gap);
+        width: 40%;
+    }
+    & .report-area {
+        & #area {
+            color:
+        }
+    }
+}

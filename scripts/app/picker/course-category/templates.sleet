@@ -1,0 +1,12 @@
+#!handlebars
+module
+    .content.icon-choicediv(data-region='main')
+
+view('main')
+    input#nodeName.input(value=state.parent.name 'readonly')
+    .choice#select 选择
+    input#nodeId(type='hidden' name=state.inputName value=state.parent.id)
+
+view('modal') > form.vertical
+    .frame
+        #tree

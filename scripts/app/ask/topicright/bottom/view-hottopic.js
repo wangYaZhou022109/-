@@ -1,19 +1,23 @@
+
 exports.type = 'dynamic';
 
+exports.events = {
+};
+
+exports.handlers = {
+};
+
+
 exports.bindings = {
-    state: true
+    hottopicstate: true
 };
 
 exports.getEntityModuleName = function(key) {
-    var url = this.bindings.state.data.menu;
-    if (typeof key === 'string' && key !== '') {
-        url = key;
-    }
-    return 'ask/' + url;
+    return 'ask/' + key;
 };
 exports.getEntity = function() {
     return {
-        state: this.bindings.state.data
+        state: this.bindings.hottopicstate.data
     };
 };
 
