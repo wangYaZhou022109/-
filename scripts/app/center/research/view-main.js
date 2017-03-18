@@ -32,8 +32,12 @@ exports.handlers = {
         });
     },
     showResearchAnswerDetail: function(id) {
-        var url = '#/exam/research-activity/research-answer-detail/' + id;
-        window.open(url, '_blank');
+        // var url = '#/exam/research-activity/research-answer-detail/' + id;
+        // window.open(url, '_blank');
+        return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
+            var url = '#/exam/research-activity/research-summary-detail/' + data.id;
+            window.open(url, '_blank');
+        });
     }
 };
 

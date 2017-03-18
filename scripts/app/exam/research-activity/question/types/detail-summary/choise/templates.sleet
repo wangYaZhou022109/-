@@ -1,0 +1,25 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    #main
+    echo(question.index '.' '【')
+    map('research-question-types' question.type)
+    echo('】')
+    @echo(question.content)
+    table.table.m-top
+        tr
+            th(width='45%')  选项
+            th(width='10%')   计数
+            th(width='45%')   比例
+        each(question.options)
+            tr
+                td > echo(code '.' text)
+                td > echo(selectCount)
+                td
+                    .progress.m-right > .progress-bar(style='width:' + selectPercent '%')
+                    echo(selectPercent '%')
+    .statistics-table-footer > echo('本题有效填写人数    ' question.answerCount)
+        

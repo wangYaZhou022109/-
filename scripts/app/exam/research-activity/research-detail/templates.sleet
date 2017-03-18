@@ -18,8 +18,19 @@ view('side')
     ul.list > each(dimensions)
         li(id='list-item-' + @index)
             .list-title > i.iconfont.icon-type.m-right + echo(name)
-            div(class='min-btn-groups') > each(questions)
-                div(class='list-item')(id='q-' + id) > echo(questionIndex)
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
+                .items-pagination.sub-text
+                    .up-arrow.text-hover-main-color(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
+                    .down-arrow.text-hover-main-color(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
+                each(questions)
+                    compare(status 'eq' 'active')
+                        a.list-item.active(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'current')
+                        a.list-item.current(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'init')
+                        a.list-item(id='question-'+id href='#question-' + id) > echo(index)
 
 view('main')
     .preview-content
