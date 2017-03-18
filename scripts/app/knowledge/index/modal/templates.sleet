@@ -3,7 +3,7 @@
 module > .upload-knowledge-page(data-region='main')
 
 view('main')
-    .form
+    .form > form
         .clearfix.layout-mb-small
             .pull-right.layout-ml-small
                 img.block.side-width(src='images/d1.jpg')
@@ -11,7 +11,7 @@ view('main')
             .overflow
                 .form-row
                     label.required 上传资源
-                    .content > input.input#filename + .choice#choice 选择
+                    .content > input.input#fileName(name='fileName') + .choice#choice 选择
                     .content.m-top > .small-font
                         .color-error 支持文件类型
                         p
@@ -21,25 +21,37 @@ view('main')
                 .form-row
                     label.required 知识名称
                     .content.icon-choice
-                        input.input + .tips 0/60
+                        input.input#name(name='name') + .tips 0/60
             .form-row
                 label.label.required 所属目录
-                .content.icon-choice
-                    #categoryId
+                #categoryId
 
             .form-row
                 label.label 下载积分
                 .content.icon-choice
-                    input.input
+                    input.input(name='integral')
 
             .form-row.textarea-row
                 label 选择标签
-                #topicIds
+                .content
+                    .tag-input#tags
+                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
+                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
+                        input(placeholder='输入标签名按回车即可添加,最多添加五个')
+                    .sub-row#tag-list
+                        span.small-font 推荐标签：
+                        .tag-btn.radius.selected 标签一
+                        .tag-btn.radius 标签二
+                        .tag-btn.radius.selected 标签三
+                        .tag-btn.radius 标签一
+                        .tag-btn.radius 标签二
+                        .tag-btn.radius 标签三
+                        .tag-btn.radius ...
 
             .form-row.textarea-row
                 label 知识简介
                 .content
-                    textarea.input(rows='3') + .tips 0/3000
+                    textarea.input(name= 'description' rows='3') + .tips 0/3000
         input#resourceId(type='hidden' name='resourceId')
         input#fileType(type='hidden' name='fileType')
         input#type(type='hidden' name='type')

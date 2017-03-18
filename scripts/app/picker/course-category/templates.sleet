@@ -1,11 +1,11 @@
 #!handlebars
 module
-    div(data-region='main')
+    .content.icon-choicediv(data-region='main')
 
-view('main') > .input-group
-    input#nodeName.input(value=state.parent.name 'readonly')(x-rule='required' x-marker='group')&if(state.required)
+view('main')
+    input#nodeName.input(value=state.parent.name 'readonly')
+    .choice#select 选择
     input#nodeId(type='hidden' name=state.inputName value=state.parent.id)
-    .addon.btn#select > i.icon-search
 
 view('modal') > form.vertical
     .frame

@@ -23,10 +23,12 @@ exports.handlers = {
             view = this.module.items.upload;
         this.app.viewport.modal(view, { callback: function(data) {
             var ext = data.filename.substring(data.filename.lastIndexOf('.') + 1).toLowerCase();
+            var name = data.filename.substring(0, data.filename.lastIndexOf('.'));
             me.$('resourceId').value = data.id;
             me.$('fileType').value = ext;
             me.$('type').value = parseType(ext);
-            me.$('filename').value = data.filename;
+            me.$('fileName').value = data.filename;
+            me.$('name').value = name;
         } });
     }
 };
@@ -61,6 +63,7 @@ exports.components = [{
         picker: 'course-category',
         inputName: 'categoryId',
         required: true,
-        searchType: 'knowledge'
+        searchType: 'knowledge',
+        data: { id: '64ce1f1b-9596-4d46-9e17-cf236e7f195e', name: '知识目录test' }
     }
 }];

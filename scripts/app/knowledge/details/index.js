@@ -2,31 +2,37 @@ exports.items = {
     banner: 'banner',
     main: 'main',
     side: 'side',
-    commit: 'commit'
+    commit: 'commit',
+    'knowledge/index/modal': { isModule: true }
 };
 
 exports.store = {
     models: {
-        knowledge: { url: '../course-study/knowledge' },
+        knowledge: { url: '../course-study/knowledge/front' },
         collect: { url: '../system/collect' },
         score: { url: '../course-study/knowledge/score' },
         download: { url: '../human/file/download' },
         recommends: { url: '../course-study/knowledge/recommend' },
-        integral: { url: '../system/integral-result', autoLoad: 'after' }
+        integral: { url: '../system/integral-result', autoLoad: 'after' },
+        readerMembers: { url: '../course-study/knowledge/readerMembers' }
     },
     callbacks: {
         init: function(payload) {
-            var model = this.models.knowledge,
+            var me = this,
+                model = this.models.knowledge,
                 collect = this.models.collect,
-                recommends = this.models.recommends;
+                recommends = this.models.recommends,
+                readerMembers = this.models.readerMembers;
             collect.params = { businessId: payload.id };
             recommends.params = { id: payload.id };
             model.set(payload);
-            return this.chain(
-                this.get(model),
-                this.get(collect),
-                this.get(recommends)
-            );
+            this.get(collect);
+            this.get(recommends);
+            return this.get(model).then(function(data) {
+                var knowledgeId = data[0].id;
+                readerMembers.params = { knowledgeId: knowledgeId };
+                me.get(readerMembers);
+            });
         },
         score: function() {
             // 评分
