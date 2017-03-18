@@ -4,7 +4,6 @@ exports.bindings = {
     gensee: true,
     courses: true,
     down: true,
-    sub: true
     sub: true,
     collect: true,
 };
