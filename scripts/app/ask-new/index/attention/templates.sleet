@@ -1,0 +1,10 @@
+#! handlebars
+
+module > .attention-page
+    .attention-tabs(data-region="tabs")
+
+view('tabs')
+    .tabs.line > ul
+        li#item-1.active 内容
+        li#item-2 话题
+        li#item-3 专家
