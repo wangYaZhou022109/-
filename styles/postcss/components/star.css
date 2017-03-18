@@ -29,6 +29,7 @@
 
 .star-wrapper {
     line-height: 1em;
+    color: var(--font-color);
 
     & .num {
         color: var(--star-color);

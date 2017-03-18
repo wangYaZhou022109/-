@@ -14,7 +14,7 @@ view('title')
 
 view('main')
     each(dimensions)
-        h3 > echo(dimensionIndex '、' name)
+        .h3 > echo(dimensionIndex '、' name)
         ul.statistics-ul
             each(questions)
                 li

@@ -149,8 +149,8 @@
         margin-top: calc(var(--space) * 2);
         margin-bottom: calc(var(--space) * 2);
         width: 40%;
-        top: var(--large-space);
         right: calc(var(--base-gap) * 3);
+        z-index: 3;
         & .h3 {
             font-size: var(--h2);
         }
