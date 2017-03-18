@@ -11,7 +11,7 @@ view('main')
             span > echo('发布时间：' news.createTime)
         .item
             i.iconfont.icon-user
-            span > echo('作者：' news.member.fullName)
+            span > echo('作者：' news.author)
         .item
             i.iconfont.icon-view
             span > echo('浏览数：' news.visitors)
