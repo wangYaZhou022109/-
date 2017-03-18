@@ -5,10 +5,13 @@ module
 
 view('main')
     #main
-    echo(question.index '.' '【')
-    map('research-question-types' question.type)
-    echo('】')
-    @echo(question.content)
+    p.question
+        span > a(name='question-' + question.id) > echo(question.index '.')
+        echo('【')
+        map('research-question-types' question.type)
+        echo('】')
+        @echo(question.content)
+
     if(mutiple)
         table.table.m-top > each(question.options)
             tr

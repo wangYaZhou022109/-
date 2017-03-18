@@ -5,7 +5,6 @@ var _ = require('lodash/collection'),
     CryptoJS = require('crypto-js'),
     maps = require('./app/util/maps'),
     qTypes = maps.get('question-types'),
-    strings = require('./app/util/strings'),
     getCurrentStatus,
     constant = {
         ONE_HUNDRED: 100,
@@ -216,15 +215,10 @@ exports.store = {
                     });
                 },
                 selectType: function(id) {
-                    var currentIndex = this.data.findIndex(function(d) {
-                        return d.isCurrent;
-                    });
-                    if (currentIndex > -1) {
-                        this.data[currentIndex].isCurrent = false;
-                        this.data[id].isCurrent = true;
-                    } else {
-                        this.data[id].isCurrent = true;
+                    if (!this.module.store.models.state.data.selectQuestion) {
+                        this.data[id].isCurrent = !this.data[id].isCurrent;
                     }
+                    this.module.store.models.state.data.selectQuestion = false;
                     this.save();
                 },
                 getType: function(questionId) {
@@ -238,18 +232,41 @@ exports.store = {
                     var type = this.getType(id),
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
-                        });
+                        }),
+                        me = this;
                     if (index > -1) {
                         type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
                     });
+
+                    //  把其他类型的题目的current 设置为其他状态
+                    _.forEach(_.filter(this.data, function(t) {
+                        return _.every(t.questions, function(q) {
+                            return q.id !== id;
+                        });
+                    }), function(tt) {
+                        var n = tt.questions.findIndex(function(qq) {
+                            return qq.status === itemStatus.CURRENT;
+                        });
+                        if (n !== -1) {
+                            D.assign(tt.questions[n], { status: getCurrentStatus.call(me, tt.questions[n].id) });
+                        }
+                    });
+                    this.module.store.models.state.data.selectQuestion = true;
                     this.save();
                 },
                 getCurrentQuestion: function() {
-                    var type = _.find(this.data, ['isCurrent', true]);
-                    return _.find(type.questions, ['status', itemStatus.CURRENT]);
+                    var question;
+                    _.forEach(this.data, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
                 },
                 move: function(payload) {
                     var type = this.data[payload.id],
@@ -283,6 +300,12 @@ exports.store = {
                             })
                         });
                     });
+                },
+                updateStatus: function(questionId, status) {
+                    D.assign(this.getQuestionById(questionId), {
+                        status: status
+                    });
+                    this.save();
                 }
             }
         },
@@ -300,8 +323,19 @@ exports.store = {
                     return _.find(this.data.corrects, ['key', questionId]);
                 },
                 waitingCheck: function(id) {
-                    this.data.waitingChecks = _.reject(this.data.waitingChecks, ['key', id]);
-                    this.data.waitingChecks.push({ key: id });
+                    var f = false;
+                    if (_.find(this.data.waitingChecks, ['key', id])) {
+                        this.data.waitingChecks = _.reject(this.data.waitingChecks, ['key', id]);
+                    } else {
+                        this.data.waitingChecks.push({ key: id });
+                        f = true;
+                    }
+                    this.save();
+                    return f;
+                },
+                correct: function(data) {
+                    this.data.corrects = _.reject(this.data.corrects, ['questionId', data.questionId]);
+                    this.data.corrects.push(data);
                     this.save();
                 }
             }
@@ -424,13 +458,29 @@ exports.store = {
             this.models.answer.saveAnswer(payload);
             this.models.modify.saveAnswer(payload);
             this.models.state.calculate();
-            if (this.models.state.singleMode) {
+            if (this.models.state.data.singleMode) {
                 this.models.state.changed();
+            } else {
+                this.models.types.updateStatus(payload.key, itemStatus.ACTIVE);
+                this.models.types.changed();
             }
         },
         waitingCheck: function(payload) {
-            this.models.mark.waitingCheck(payload.questionId);
-            this.app.message.success(strings.get('operation-success'));
+            var f = this.models.mark.waitingCheck(payload.questionId);
+            if (!this.models.state.singleMode) {
+                if (f) {
+                    this.models.types.updateStatus(payload.questionId, itemStatus.CHECK);
+                } else {
+                    this.models.types.updateStatus(
+                        payload.questionId,
+                        getCurrentStatus.call(this.module, payload.questionId)
+                    );
+                }
+                this.models.types.changed();
+            }
+        },
+        correct: function(payload) {
+            this.models.mark.correct(payload);
         },
         submitPaper: function(payload) {
             var me = this,
@@ -456,7 +506,6 @@ exports.store = {
                     } else {
                         viewAnswerDetail.call(me);
                         this.app.message.success('交卷成功');
-                        // setTimeout(window.close, 500);
                     }
                 });
             }
@@ -609,12 +658,12 @@ decryptAnswer = function(type, attrs) {
         decrypt = function(k, v) {
             var encryptedHexStr = CryptoJS.enc.Hex.parse(v),
                 encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr),
-                decrypted1 = CryptoJS.AES.decrypt(encryptedBase64Str, CryptoJS.enc.Utf8.parse(k), {
+                decrypted = CryptoJS.AES.decrypt(encryptedBase64Str, CryptoJS.enc.Utf8.parse(k), {
                     iv: CryptoJS.enc.Utf8.parse(IV),
                     mode: CryptoJS.mode.CBC,
                     padding: CryptoJS.pad.Pkcs7
                 }),
-                value = CryptoJS.enc.Utf8.stringify(decrypted1).toString();
+                value = CryptoJS.enc.Utf8.stringify(decrypted).toString();
             return value;
         };
 

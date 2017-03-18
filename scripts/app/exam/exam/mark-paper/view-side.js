@@ -1,7 +1,17 @@
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 
 exports.bindings = {
     types: true,
-    state: false
+    state: true
+};
+
+exports.dataForTemplate = {
+    types: function(data) {
+        return _.map(data.types, function(t) {
+            return D.assign(t, { singleMode: data.state.singleMode });
+        });
+    }
 };
 
 exports.events = {

@@ -195,7 +195,7 @@ view('list')
                 li
                     .activity-item.clearfix
                         i.iconfont.icon-favorite.pull-left.activity-item-icon
-                        a(id='research-' + id data-name='researchId' data-value=id) > echo(name)
+                        a(id='research-' + id) > echo(name)
                         .sub-text.small-font
                             echo(joinNumber) | 参与
                             i.iconfont.icon-favorite.m-left.m-right

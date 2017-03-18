@@ -26,19 +26,19 @@ exports.handlers = {
         });
     },
     toExam: function(examId) {
-        var url = '#/exam/exam/answer-paper-2/' + examId;
+        var url = '#/exam/exam/answer-paper/' + examId;
         window.open(url, '_blank');
     },
     toCert: function(examId) {
-        var url = '#/exam/exam/answer-paper-2/' + examId;
+        var url = '#/exam/exam/answer-paper/' + examId;
         window.open(url, '_blank');
     },
     toDetail: function(examId) {
-        var url = '#/exam/exam/answer-paper-2/' + examId;
+        var url = '#/exam/exam/score-detail/' + examId;
         window.open(url, '_blank');
     },
     retry: function(examId) {
-        var url = '#/exam/exam/answer-paper-2/' + examId;
+        var url = '#/exam/exam/answer-paper/' + examId;
         window.open(url, '_blank');
     }
 };

@@ -33,7 +33,7 @@ exports.dataForEntityModule = function(question) {
         multiple: question.type === MUTIPLE_CHOOSE,
         answer: this.bindings.answer.getAnswer(question.id),
         callback: function(data) {
-            me.bindings.answer.saveAnswer(data);
+            return me.module.dispatch('saveAnswer', data);
         }
     };
 };

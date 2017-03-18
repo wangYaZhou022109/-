@@ -104,7 +104,7 @@ exports.store = {
                         return false;
                     }).length;
                     this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
-                    this.data.examineeTotalScore = exam.examRecord.score;
+                    this.data.examineeTotalScore = exam.examRecord.score / 100;
                 },
                 selectQuestion: function(id) {
                     var types = this.module.store.models.types;
@@ -120,7 +120,8 @@ exports.store = {
             mixin: {
                 init: function(questions) {
                     var map = {},
-                        j = 0;
+                        j = 0,
+                        me = this;
 
                     if (questions) {
                         _.forEach(questions, function(q) {
@@ -149,16 +150,18 @@ exports.store = {
                             if (j === constant.ZERO) {
                                 D.assign(o.questions[0], { status: itemStatus.CURRENT });
                             }
-
                             _.map(o.questions, function(q) {
-                                D.assign(q, { totalCount: o.size });
+                                D.assign(q, {
+                                    totalCount: o.size,
+                                    status: getCurrentStatus.call(me, q.id)
+                                });
                             });
 
                             return D.assign(o, {
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
                                 }),
-                                isCurrent: j++ === constant.ZERO
+                                isCurrent: true
                             });
                         });
                     }
@@ -181,15 +184,10 @@ exports.store = {
                     });
                 },
                 selectType: function(id) {
-                    var currentIndex = this.data.findIndex(function(d) {
-                        return d.isCurrent;
-                    });
-                    if (currentIndex > -1) {
-                        this.data[currentIndex].isCurrent = false;
-                        this.data[id].isCurrent = true;
-                    } else {
-                        this.data[id].isCurrent = true;
+                    if (!this.module.store.models.state.data.selectQuestion) {
+                        this.data[id].isCurrent = !this.data[id].isCurrent;
                     }
+                    this.module.store.models.state.data.selectQuestion = false;
                 },
                 getType: function(questionId) {
                     return _.find(this.data, function(d) {
@@ -202,17 +200,41 @@ exports.store = {
                     var type = this.getType(id),
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
-                        });
+                        }),
+                        me = this;
+
                     if (index > -1) {
-                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
+                        type.questions[index].status = getCurrentStatus.call(me, type.questions[index].id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
                     });
+
+                    //  把其他类型的题目的current 设置为其他状态
+                    _.forEach(_.filter(this.data, function(t) {
+                        return _.every(t.questions, function(q) {
+                            return q.id !== id;
+                        });
+                    }), function(tt) {
+                        var n = tt.questions.findIndex(function(qq) {
+                            return qq.status === itemStatus.CURRENT;
+                        });
+                        if (n !== -1) {
+                            D.assign(tt.questions[n], { status: getCurrentStatus.call(me, tt.questions[n].id) });
+                        }
+                    });
+                    this.module.store.models.state.data.selectQuestion = true;
                 },
                 getCurrentQuestion: function() {
-                    var type = _.find(this.data, ['isCurrent', true]);
-                    return _.find(type.questions, ['status', itemStatus.CURRENT]);
+                    var question;
+                    _.forEach(this.data, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
                 },
                 move: function(payload) {
                     var type = this.data[payload.id],
@@ -319,8 +341,8 @@ exports.store = {
                 D.assign(this.models.exam.params, payload);
                 return this.get(this.models.exam).then(function() {
                     var exam = me.models.exam.data;
-                    me.models.types.init(exam.paper.questions);
                     me.models.answer.init(exam.paper.questions);
+                    me.models.types.init(exam.paper.questions);
                     me.models.state.initWithSuject(exam);
                 });
             }
@@ -350,8 +372,9 @@ exports.beforeRender = function() {
 };
 
 getCurrentStatus = function(id) {
-    var answer = this.store.models.answer.data;
-    if (_.find(answer, ['key', id])) {
+    var answer = this.store.models.answer.data,
+        o = _.find(answer, ['key', id]);
+    if (o && o.value.length > 0) {
         return itemStatus.ACTIVE;
     }
     return itemStatus.INIT;
