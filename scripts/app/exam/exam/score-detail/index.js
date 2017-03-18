@@ -228,7 +228,7 @@ exports.store = {
                 initStatus: function() {
                     this.data = _.map(this.data, function(t) {
                         return D.assign(t, {
-                            isCurrent: false
+                            isCurrent: true
                         });
                     });
                 }

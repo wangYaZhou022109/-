@@ -424,7 +424,9 @@ exports.store = {
             this.models.answer.saveAnswer(payload);
             this.models.modify.saveAnswer(payload);
             this.models.state.calculate();
-            this.models.state.changed();
+            if (this.models.state.singleMode) {
+                this.models.state.changed();
+            }
         },
         waitingCheck: function(payload) {
             this.models.mark.waitingCheck(payload.questionId);
@@ -452,14 +454,8 @@ exports.store = {
                         this.app.message.success('答案已自动保存成功');
                         me.models.modify.clear();
                     } else {
-                        me.models.exam.clear();
-                        me.models.state.clear();
-                        me.models.types.clear();
-                        me.models.mark.clear();
-                        me.models.answer.clear();
-                        me.models.modify.clear();
-                        this.app.message.success('交卷成功');
                         viewAnswerDetail.call(me);
+                        this.app.message.success('交卷成功');
                         // setTimeout(window.close, 500);
                     }
                 });
@@ -496,6 +492,11 @@ exports.store = {
                 me.models.types.decryptAnswer();
                 me.models.state.data.showAnswerDetail = 1;
                 me.models.state.changed();
+            });
+        },
+        clearModels: function() {
+            _.forEach(this.models, function(m) {
+                m.clear();
             });
         }
     }
@@ -593,6 +594,10 @@ viewAnswerDetail = function() {
             $('.achievement-content').hide();
             return me.module.dispatch('showAnswerDetail');
         }, function() {
+            _.forEach(me.models, function(m) {
+                m.clear();
+            });
+            window.close();
             return false;
         });
     }

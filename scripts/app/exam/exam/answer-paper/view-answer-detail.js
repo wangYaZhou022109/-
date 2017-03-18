@@ -25,3 +25,8 @@ exports.dataForEntityModule = function(data) {
         data: data
     };
 };
+
+exports.afterClose = function() {
+    return this.module.dispatch('clearModels');
+};
+

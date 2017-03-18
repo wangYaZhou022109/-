@@ -14,7 +14,7 @@ view('options') > .answer
     .preview-list > dl.border.bottom > each(options)
         dd(id='item-' + index)
             if(mutiple)
-                span.checkbox
+                .checkbox.no-margin
                     input(type='checkbox' id='check-'+@index value=@index)('checked')&if(checked)
                     label(for='check-'+@index)
             else
