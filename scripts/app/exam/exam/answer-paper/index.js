@@ -2,6 +2,7 @@ var _ = require('lodash/collection'),
     D = require('drizzlejs'),
     E = require('./app/exam/exam-websocket'),
     $ = require('jquery'),
+    CryptoJS = require('crypto-js'),
     maps = require('./app/util/maps'),
     qTypes = maps.get('question-types'),
     strings = require('./app/util/strings'),
@@ -51,7 +52,8 @@ var _ = require('lodash/collection'),
     QUESTION_ANSWER = 5,
     READING = 6,
     SORTING = 8,
-    decryptAnswer;
+    decryptAnswer,
+    IV = '1234567890123456';
 
 exports.items = {
     side: 'side',
@@ -430,7 +432,7 @@ exports.store = {
         },
         submitPaper: function(payload) {
             var me = this,
-                f = false,
+                f = true,
                 examRecordId = this.module.store.models.exam.data.examRecord.id,
                 data = {
                     examRecordId: examRecordId,
@@ -441,7 +443,6 @@ exports.store = {
 
             if (payload.submitType !== submitType.Auto) {
                 TO.cancel();
-                viewAnswerDetail.call(this);
             }
 
             this.models.form.set(data);
@@ -474,9 +475,9 @@ exports.store = {
             if (exam.allowSwitchTimes) {
                 if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
                     this.app.message.error('切屏次数已满，强制交卷');
-                    // return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
-                    //     WS.closeConnect();
-                    // });
+                    return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
+                        WS.closeConnect();
+                    });
                 }
                 D.assign(exam, {
                     lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
@@ -491,11 +492,11 @@ exports.store = {
             D.assign(this.models.decryptKey.params, {
                 examId: this.models.exam.data.id
             });
-            me.models.state.data.showAnswerDetail = 1;
-            me.models.state.changed();
-            // return this.get(this.models.decryptKey).then(function() {
-            //     me.models.types.decryptAnswer();
-            // });
+            return this.get(this.models.decryptKey).then(function() {
+                me.models.types.decryptAnswer();
+                me.models.state.data.showAnswerDetail = 1;
+                me.models.state.changed();
+            });
         }
     }
 };
@@ -514,7 +515,7 @@ exports.afterRender = function() {
                 ms = (min + 1) * (1000 * 60);
             return ms;
         },
-        f = false,
+        f = true,
         autoSubmit = function() {
             return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
                 TO.timeOutId = setTimeout(autoSubmit, getRandom());
@@ -588,6 +589,7 @@ viewAnswerDetail = function() {
         me = this;
     if (exam.isShowAnswerImmed === constant.SHOW_ANSWER_IMMED) {
         this.app.message.confirm('提交成功，是否马上查看详情', function() {
+            $('.achievement-content').html('');
             $('.achievement-content').hide();
             return me.module.dispatch('showAnswerDetail');
         }, function() {
@@ -600,7 +602,15 @@ viewAnswerDetail = function() {
 decryptAnswer = function(type, attrs) {
     var key = this.store.models.decryptKey.data.key,
         decrypt = function(k, v) {
-            return v;
+            var encryptedHexStr = CryptoJS.enc.Hex.parse(v),
+                encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr),
+                decrypted1 = CryptoJS.AES.decrypt(encryptedBase64Str, CryptoJS.enc.Utf8.parse(k), {
+                    iv: CryptoJS.enc.Utf8.parse(IV),
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                }),
+                value = CryptoJS.enc.Utf8.stringify(decrypted1).toString();
+            return value;
         };
 
     if (type === SINGLE_CHOOSE || type === MUTIPLE_CHOOSE) {

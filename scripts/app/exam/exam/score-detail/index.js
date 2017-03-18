@@ -44,11 +44,11 @@ exports.items = {
 exports.store = {
     models: {
         exam: {
-            url: '../exam/exam/exam-paper'
+            url: '../exam/exam/score-detail'
         },
         state: {
             mixin: {
-                init: function(exam) {
+                initNoSujective: function(exam) {
                     var types = this.module.store.models.types,
                         answer = this.module.store.models.answer,
                         questionSummary = answer.questionSummary();
@@ -64,6 +64,47 @@ exports.store = {
                         noAnswerCount: questionSummary.noAnswerCount,
                         examineeTotalScore: questionSummary.totalScore
                     };
+                },
+                initWithSuject: function(exam) {
+                    var types = this.module.store.models.types,
+                        questions = exam.paper.questions;
+                    this.data = {
+                        name: exam.name,
+                        examinee: this.app.global.currentUser.name,
+                        totalCount: exam.paper.questionNum,
+                        totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
+                        singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                        currentQuestion: types.getFirstQuestion(),
+                        correctNum: 0,
+                        errorNum: 0,
+                        noAnswerCount: 0,
+                        examineeTotalScore: 0
+                    };
+                    this.data.correctNum = _.filter(questions, function(q) {
+                        if (q.type === 6) {
+                            return _.every(q.subs, function(s) {
+                                return s.answerRecord && s.answerRecord.isRight === 1;
+                            });
+                        }
+                        if (q.answerRecord) {
+                            return q.answerRecord.isRight === 1;
+                        }
+                        return false;
+                    }).length;
+
+                    this.data.errorNum = _.filter(questions, function(q) {
+                        if (q.type === 6) {
+                            return !_.every(q.subs, function(s) {
+                                return s.answerRecord && s.answerRecord.isRight === 1;
+                            });
+                        }
+                        if (q.answerRecord) {
+                            return q.answerRecord.isRight === 0;
+                        }
+                        return false;
+                    }).length;
+                    this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
+                    this.data.examineeTotalScore = exam.examRecord.score;
                 },
                 selectQuestion: function(id) {
                     var types = this.module.store.models.types;
@@ -222,6 +263,44 @@ exports.store = {
                         });
                     });
                     return result;
+                },
+                init: function(questions) {
+                    var choose = function(question) {
+                            return _.map(question.answerRecord.answer.split(','), function(n) {
+                                return {
+                                    id: _.find(question.questionAttrCopys, ['name', n]).id,
+                                    value: n
+                                };
+                            });
+                        },
+                        subjective = function(question) {
+                            return [{ id: question.id, value: question.answerRecord.answer }];
+                        };
+
+                    this.data = _.map(questions, function(q) {
+                        var values = [];
+                        if (q.answerRecord) {
+                            if (q.type === 1 || q.type === 2) {
+                                values = choose(q);
+                            } else if (q.type === 6) {
+                                values = _.map(q.subs, function(s) {
+                                    var subValues = [];
+                                    if (s.answerRecord) {
+                                        if (s.type === 1 || s.type === 2) {
+                                            subValues = choose(s);
+                                        } else {
+                                            subValues = subjective(s);
+                                        }
+                                    }
+                                    return { key: s.id, value: subValues };
+                                });
+                            } else {
+                                values = subjective(q);
+                            }
+                        }
+
+                        return { key: q.id, value: values };
+                    });
                 }
             }
         }
@@ -229,15 +308,23 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var data = payload.data,
-                exam;
-            if (!payload.examRecordId) {
-                exam = data.exam;
+                me = this;
+            if (data) {
                 this.models.exam.set(data.exam);
                 this.models.types.set(data.types);
                 this.models.types.initStatus();
                 this.models.answer.set(data.answer);
-                this.models.state.init(exam);
+                this.models.state.initNoSujective(data.exam);
+            } else {
+                D.assign(this.models.exam.params, payload);
+                return this.get(this.models.exam).then(function() {
+                    var exam = me.models.exam.data;
+                    me.models.types.init(exam.paper.questions);
+                    me.models.answer.init(exam.paper.questions);
+                    me.models.state.initWithSuject(exam);
+                });
             }
+            return '';
         },
         selectType: function(payload) {
             this.models.types.selectType(payload.id);
