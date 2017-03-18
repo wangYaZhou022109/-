@@ -33,7 +33,7 @@ exports.handlers = {
     },
     showResearchAnswerDetail: function(id) {
         var mod = this.module.items['exam/research-activity/research-answer-detail'];
-        this.app.viewport.ground(mod, {
+        this.app.viewport.modal(mod, {
             researchRecordId: id
         });
     }
