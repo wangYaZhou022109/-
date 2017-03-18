@@ -120,8 +120,9 @@ view('list')
                         .bottom.sub-text
                             i.iconfont.icon-favorite
                                 echo(subNumber)
-                            i.iconfont.icon-favorite.m-left
-                                date(startTime)
+                            i.iconfont.icon-favorite.m-left 
+                                dateMinute(startTime)
+                                
         .h3.m-bottom 考试
         ul.arrow-box.activity-item-box.activity-item-exam.cell-3
             .arrow-left#exam-left > | <
