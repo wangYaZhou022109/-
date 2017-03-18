@@ -3,7 +3,7 @@
     overflow: hidden;
     position: relative;
 
-    &.home-banner {
+    &.banner {
         & li {
             position: absolute;
             left: 100%;

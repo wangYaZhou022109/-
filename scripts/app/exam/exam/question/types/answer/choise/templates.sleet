@@ -21,7 +21,7 @@ view('options') > .answer
                 input.m-right(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
             label(for='answer-item-' + index)
                 span.pull-left.option-num > @echo(code '：')
-                .answer-options.pull-left > @echo(content)
+                .answer-options > @echo(content)
 
     if(isShowDetail)
         .show-answer
