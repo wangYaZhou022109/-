@@ -1,5 +1,8 @@
 var maps = require('./app/util/maps'),
-    D = require('drizzlejs');
+    D = require('drizzlejs'),
+    _ = require('lodash/collection'),
+    SINGLE = 1,
+    MUTIPLE = 2;
 
 exports.items = {
     content: 'content',
@@ -12,6 +15,37 @@ exports.store = {
             mixin: {
                 getOption: function(index) {
                     return this.data.options[index];
+                },
+                countGainScore: function(answer) {
+                    var type = this.module.renderOptions.data.type,
+                        mutipleAnswer = [],
+                        isCorrect;
+                    if (!this.data.gainScore) {
+                        if (type === SINGLE) {
+                            if (_.find(this.data.options, ['name', answer.value[0].value]).isAnswer) {
+                                this.data.gainScore = this.data.score;
+                            } else {
+                                this.data.gainScore = 0;
+                            }
+                        }
+
+                        if (type === MUTIPLE) {
+                            mutipleAnswer = _.filter(this.data.options, function(o) {
+                                return o.isAnswer;
+                            });
+                            if (answer.value.length === mutipleAnswer.length) {
+                                isCorrect = _.every(answer.value, function(a) {
+                                    if (_.find(mutipleAnswer, ['name', a.value])) {
+                                        return true;
+                                    }
+                                    return false;
+                                });
+                                this.data.gainScore = isCorrect ? this.data.score : 0;
+                            } else {
+                                this.data.gainScore = 0;
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -69,9 +103,11 @@ exports.store = {
                 if (question.answerRecord) {
                     data.gainScore = question.answerRecord.score;
                 }
+
                 data.detailMode = payload.mode;
             }
             this.models.answer.init(payload.answer);
+            this.models.state.countGainScore(payload.answer || { key: data.id, value: [] });
             this.models.state.changed();
         },
         save: function() {

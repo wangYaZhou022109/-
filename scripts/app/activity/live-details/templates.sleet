@@ -56,8 +56,16 @@ view('main')
                                     .item(id='star-10' title='5星') > i.iconfont.icon-star-full
                                 .block.btn#submit-score 提交评分
                 .inline-block.layout-mr
-                    .inline-block.layout-ml.m-right > i.iconfont.icon-share
-                    .inline-block.m-left > i.iconfont.icon-favorite
+                    .inline-block.layout-ml.m-right 
+                        #share
+                        if(collect.id)
+                            .item#cancel-collect(data-name='id' data-value=collect.id)
+                                i.iconfont.icon-favorite-full
+                                span 取消收藏
+                        else
+                            .item#collect
+                                i.iconfont.icon-favorite
+                                span 收藏
             .clearfix.live-details-teacher
                 .lecturer.clearfix
                     .user-pic.pull-left > i.iconfont.icon-star-full
@@ -69,11 +77,11 @@ view('main')
                     .user-pic.pull-left > i.iconfont.icon-star-full
                     | 直播时间
                     p
-                        date(gensee.startTime)
+                        dateMinute(gensee.startTime)
                 compare(sub.subStatus 'eq' 0)
                     .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
                 else
-                    .btn.pull-right.m-top 已预约
+                    .btn.pull-right.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
             .clearfix
                 each(gensee.genseeTopics)
                     .btn-white > echo(topicName)

@@ -63,10 +63,10 @@ view('side')
     .page-side > .container
         section.section
             | 您当前积分：
-            b 200
+            b > echo(integral.totalScore)
             | 分
             a.btn.block.layout-mt-small.big(href=downUrl download=knowledge.name) > echo('下载当前阅览知识（-' + knowledge.integral+'积分）')
-            .btn.block.m-top.big.upload-knowledge 上传新知识（+2积分）
+            .btn.block.m-top.big.upload-knowledge#upload 上传新知识（+2积分）
 
         section.section
             .h3 相关知识
@@ -81,13 +81,5 @@ view('side')
         section.section.student
             .h3 最近查看的用户
             .layout-mt-small.user-picture
-                .grid-row
-                    .col-md-4 > img.block(src='images/d1.jpg')
-                    .col-md-4 > img.block(src='images/d2.jpg')
-                    .col-md-4 > img.block(src='images/d3.jpg')
-                    .col-md-4 > img.block(src='images/d4.jpg')
-                    .col-md-4 > img.block(src='images/d4.jpg')
-                    .col-md-4 > img.block(src='images/d3.jpg')
-                    .col-md-4 > img.block(src='images/d2.jpg')
-                    .col-md-4 > img.block(src='images/d1.jpg')
-                    .col-md-4 > img.block(src='images/d2.jpg')
+                .grid-row > each(readerMembers)
+                    .col-md-4 > img.block(src=head title=name)

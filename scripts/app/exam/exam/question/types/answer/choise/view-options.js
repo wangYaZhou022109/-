@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 
 exports.bindings = {
     state: true,
@@ -21,6 +22,11 @@ exports.dataForTemplate = {
     isShowDetail: function() {
         var mode = this.bindings.state.data.detailMode;
         return mode && mode > 0;
+    },
+    state: function(data) {
+        return D.assign(data.state, {
+            errorRate: data.state.errorRate / 10000
+        });
     }
 };
 

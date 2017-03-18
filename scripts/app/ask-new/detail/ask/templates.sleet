@@ -36,55 +36,7 @@ view('main')
                     i.iconfont.icon-image.pull-left.m-right
                     a.normal(href="javascript") 百度是否真的.pdf
     section.section
-        form.vertical
-            .h3 讨论区
-            .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
-            textarea.input.w-full(name='content' rows='5')
-            .m-top.text-right > .btn#add-comment 发表
-            .layout-mt
-                .comment-list > ul
-                    li
-                        .user-pic > img(src="images/demo/1.jpg")
-                        .comment-content
-                            .user-info
-                                a(href="javascript:;") 张三
-                                span 互联网中心
-                                span.sub-text 2分钟前
-                            .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
-                            .comment-operation
-                                .text-left
-                                    .item
-                                        i.iconfont.icon-zan
-                                        | 赞43
-                                    .item
-                                        i.iconfont.icon-message
-                                        | 评论43
-                                    .item
-                                        i.iconfont.icon-info
-                                        | 举报43
-                            .comment-reply
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复
-                            .comment-list.border > ul
-                                li
-                                    .user-pic > img(src="images/demo/2.jpg")
-                                    .comment-content
-                                        .user-info
-                                            a(href="javascript:;") 张三
-                                            span 互联网中心
-                                            span.sub-text 8分钟前
-                                        .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
-                                        .comment-operation
-                                            .text-left
-                                                .item
-                                                    i.iconfont.icon-zan
-                                                    | 赞43
-                                                .item
-                                                    i.iconfont.icon-message
-                                                    | 评论43
-                                                .item
-                                                    i.iconfont.icon-info
-                                                    | 举报43
+            #comment-area
 
 view('side')
     .section

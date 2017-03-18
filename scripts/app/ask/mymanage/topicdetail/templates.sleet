@@ -26,15 +26,15 @@ view('menu')
     hr
 view('list') 
     div(data-dynamic-key=state.menu)
-view('right')
-    .buttons
-        .btn#display > i.icon-plus + span > echo('我要关注')
-    echo('999')
-    echo('8')
-    echo('88')
-    echo('88')
-    br
-    echo('关注者')
-    echo('专家')
-    echo('问题')
-    echo('分享')
+#  view('right')
+#      .buttons
+#          .btn#display > i.icon-plus + span > echo('我要关注')
+#      echo('999')
+#      echo('8')
+#      echo('88')
+#      echo('88')
+#      br
+#      echo('关注者')
+#      echo('专家')
+#      echo('问题')
+#      echo('分享')

@@ -16,12 +16,6 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    sort = {
-        REMOTE: 1,
-        QUESTION: 2,
-        QUESTION_ATTR: 3,
-        QUESTION_AND_ATTR: 4
-    },
     orderMap = {
         1: 1,
         2: 2,
@@ -31,7 +25,15 @@ var _ = require('lodash/collection'),
         6: 8,
         7: 5,
         8: 4
-    };
+    },
+    SINGLE_CHOOSE = 1,
+    MUTIPLE_CHOOSE = 2,
+    JUDGE = 3,
+    SORTING = 8,
+    countChoose,
+    countJudge,
+    countSorting,
+    countOther;
 
 exports.items = {
     side: 'side',
@@ -47,15 +49,20 @@ exports.store = {
         state: {
             mixin: {
                 init: function(exam) {
-                    var types = this.module.store.models.types;
+                    var types = this.module.store.models.types,
+                        answer = this.module.store.models.answer,
+                        questionSummary = answer.questionSummary();
                     this.data = {
                         name: exam.name,
+                        examinee: this.app.global.currentUser.name,
                         totalCount: exam.paper.questionNum,
                         totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
-                        noAnswerCount: exam.paper.questionNum,
-                        answeredCount: constant.ZERO,
                         singleMode: exam.paperShowRule === constant.SINGLE_MODE,
-                        currentQuestion: types.getFirstQuestion()
+                        currentQuestion: types.getFirstQuestion(),
+                        correctNum: questionSummary.correctNum,
+                        errorNum: questionSummary.errorNum,
+                        noAnswerCount: questionSummary.noAnswerCount,
+                        examineeTotalScore: questionSummary.totalScore
                     };
                 },
                 selectQuestion: function(id) {
@@ -65,14 +72,6 @@ exports.store = {
                 resetCurrentQuestion: function() {
                     var types = this.module.store.models.types;
                     D.assign(this.data, { currentQuestion: types.getCurrentQuestion() });
-                },
-                calculate: function() {
-                    var answer = this.module.store.models.answer,
-                        answeredCount = answer.answeredCount();
-                    D.assign(this.data, {
-                        answeredCount: answeredCount,
-                        noAnswerCount: this.data.totalCount - answeredCount
-                    });
                 }
             }
         },
@@ -121,47 +120,6 @@ exports.store = {
                                 isCurrent: j++ === constant.ZERO
                             });
                         });
-                        this.sortQuestion();
-                    }
-                },
-                sortQuestion: function() {
-                    var exam = this.module.store.models.exam.data,
-                        paperSortRule = exam.paperSortRule;
-                    if (paperSortRule === sort.QUESTION) {
-                        this.data = _.map(this.data, function(t) {
-                            return _.map(t.questions.sort(function() {
-                                return Math.random() - 0.5;
-                            }), function(q, i) {
-                                return D.assign(q, { index: i + 1 });
-                            });
-                        });
-                    }
-
-                    if (paperSortRule === sort.QUESTION_ATTR) {
-                        this.data = _.map(this.data, function(t) {
-                            return _.map(t.questions, function(q) {
-                                return D.assign(q, {
-                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
-                                        return Math.random() - 0.5;
-                                    })
-                                });
-                            });
-                        });
-                    }
-
-                    if (paperSortRule === sort.QUESTION_AND_ATTR) {
-                        this.data = _.map(this.data, function(t) {
-                            return _.map(t.questions.sort(function() {
-                                return Math.random() - 0.5;
-                            }), function(q, i) {
-                                return D.assign(q, {
-                                    index: i + 1,
-                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
-                                        return Math.random() - 0.5;
-                                    })
-                                });
-                            });
-                        });
                     }
                 },
                 getQuestionById: function(id) {
@@ -205,7 +163,7 @@ exports.store = {
                             return q.status === itemStatus.CURRENT;
                         });
                     if (index > -1) {
-                        type.questions[index].status = getCurrentStatus.call(this, id);
+                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
@@ -229,9 +187,7 @@ exports.store = {
                 initStatus: function() {
                     this.data = _.map(this.data, function(t) {
                         return D.assign(t, {
-                            questions: _.map(t.questions, function(q) {
-                                return D.assign(q, { status: itemStatus.INIT });
-                            })
+                            isCurrent: false
                         });
                     });
                 }
@@ -239,26 +195,33 @@ exports.store = {
         },
         answer: {
             mixin: {
-                init: function() {
-                    this.data = [];
-                    this.save();
-                },
-                saveAnswer: function(data) {
-                    this.data = _.reject(this.data, ['key', data.key]);
-                    this.data.push(data);
-                    this.save();
-                },
-                answeredCount: function() {
-                    return _.filter(this.data, function(a) {
-                        var readingQuetion = !_.every(a.value, function(sub) {
-                                return sub.value.length === 0 || sub.value[0].value === '';
-                            }),
-                            otherQuestion = a.value[0].value !== '';
-                        return Number(a.type) === 6 ? readingQuetion : otherQuestion;
-                    }).length;
-                },
                 getAnswer: function(questionId) {
                     return _.find(this.data, ['key', questionId]);
+                },
+                questionSummary: function() {
+                    var result = {
+                            correctNum: 0,
+                            errorNum: 0,
+                            noAnswerCount: 0,
+                            totalScore: 0
+                        },
+                        types = this.module.store.models.types.data,
+                        me = this;
+                    _.forEach(types, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            var answer = _.find(me.data, ['key', q.id]);
+                            if (q.type === SINGLE_CHOOSE || q.type === MUTIPLE_CHOOSE) {
+                                result = countChoose.call(me, q, answer, result);
+                            } else if (q.type === JUDGE) {
+                                result = countJudge.call(me, q, answer, result);
+                            } else if (q.type === SORTING) {
+                                result = countSorting.call(me, q, answer, result);
+                            } else {
+                                result = countOther.call(me, q, answer, result);
+                            }
+                        });
+                    });
+                    return result;
                 }
             }
         }
@@ -272,8 +235,8 @@ exports.store = {
                 this.models.exam.set(data.exam);
                 this.models.types.set(data.types);
                 this.models.types.initStatus();
-                this.models.state.init(exam);
                 this.models.answer.set(data.answer);
+                this.models.state.init(exam);
             }
         },
         selectType: function(payload) {
@@ -299,7 +262,108 @@ exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
 
-getCurrentStatus = function() {
+getCurrentStatus = function(id) {
+    var answer = this.store.models.answer.data;
+    if (_.find(answer, ['key', id])) {
+        return itemStatus.ACTIVE;
+    }
     return itemStatus.INIT;
 };
 
+countChoose = function(question, answer, r) {
+    var mutipleAnswer = [],
+        isCorrect,
+        result = r;
+
+    if (!answer) {
+        D.assign(question, { gainScore: 0 });
+        D.assign(result, { noAnswerCount: ++result.noAnswerCount });
+    } else {
+        if (question.type === 1) {
+            if (_.find(question.questionAttrCopys, ['name', answer.value[0].value]).type === 1) {
+                D.assign(question, { gainScore: question.score });
+                D.assign(result, {
+                    correctNum: ++result.correctNum,
+                    totalScore: result.totalScore + question.score
+                });
+            } else {
+                D.assign(question, { gainScore: 0 });
+                D.assign(result, { errorNum: ++result.errorNum });
+            }
+        }
+
+        if (question.type === 2) {
+            mutipleAnswer = _.filter(question.questionAttrCopys, function(o) {
+                return o.type === 0;
+            });
+            if (answer.value.length === mutipleAnswer.length) {
+                isCorrect = _.every(mutipleAnswer, function(a) {
+                    if (_.find(answer.value, ['value', a.name])) {
+                        return true;
+                    }
+                    return false;
+                });
+                if (isCorrect) {
+                    D.assign(question, { gainScore: question.score });
+                    D.assign(result, {
+                        correctNum: ++result.correctNum,
+                        totalScore: result.totalScore + question.score
+                    });
+                } else {
+                    D.assign(question, { gainScore: 0 });
+                    D.assign(result, { errorNum: ++result.errorNum });
+                }
+            } else {
+                D.assign(question, { gainScore: 0 });
+                D.assign(result, { errorNum: ++result.errorNum });
+            }
+        }
+    }
+    return result;
+};
+
+countJudge = function(question, answer, r) {
+    var result = r;
+    if (!answer) {
+        D.assign(question, { gainScore: 0 });
+        D.assign(result, { noAnswerCount: ++result.noAnswerCount });
+    } else if (answer.value[0].value === question.questionAttrCopys[0].value) {
+        D.assign(question, { gainScore: question.score });
+        D.assign(result, {
+            correctNum: ++result.correctNum,
+            totalScore: result.totalScore + question.score
+        });
+    } else {
+        D.assign(question, { gainScore: 0 });
+        D.assign(result, { errorNum: ++result.errorNum });
+    }
+
+    return result;
+};
+
+countSorting = function(question, answer, r) {
+    var result = r;
+    if (!answer) {
+        D.assign(question, { gainScore: 0 });
+        D.assign(result, { noAnswerCount: ++result.noAnswerCount });
+    } else if (_.find(question.questionAttrCopys, ['type', '0']).value === answer.value[0].value) {
+        D.assign(question, { gainScore: question.score });
+        D.assign(result, {
+            correctNum: ++result.correctNum,
+            totalScore: result.totalScore + question.score
+        });
+    } else {
+        D.assign(question, { gainScore: 0 });
+        D.assign(result, { errorNum: ++result.errorNum });
+    }
+
+    return result;
+};
+
+countOther = function(question, answer, r) {
+    var result = r;
+    if (!answer) {
+        D.assign(result, { noAnswerCount: result.noAnswerCount++ });
+    }
+    return result;
+};
