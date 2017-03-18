@@ -37,7 +37,7 @@ view('main')
                     .inline-block.color-ing 待审核
                     .inline-block 【分享审核】
             .clearfix.m-top
-                .pull-right > a 查看详情
+                .pull-right > a#watch-detail1 查看详情
                 .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
         li
             .clearfix
@@ -49,7 +49,7 @@ view('main')
                     .inline-block.color-error 已拒绝
                     .inline-block 【分享审核】
             .clearfix.m-top
-                .pull-right > a 查看详情
+                .pull-right > a#watch-detail2 查看详情
                 .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
         li
             .clearfix

@@ -15,7 +15,8 @@ view('list')
             li
                 echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
             li
-                string('from-topic') + echo(' ：' + relTopic)
+                #  string('from-topic') + echo(' ：' + relTopic)
+                string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                 a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
                 string('strip') + string('discuss')
                 a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')

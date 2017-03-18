@@ -8,7 +8,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        menus: { data: [
+        menus: { data: [ // id必须从0开始
             { id: '0', name: '我的任务', icon: 'icon-task', url: 'task', current: true },
             { id: '1', name: '我的学习', icon: 'icon-type', url: 'study', childs: [ // eslint-disable-line object-property-newline,max-len
                 { id: '1-0', name: '我的课程', url: 'study/course' },
@@ -21,7 +21,7 @@ exports.store = {
                 { id: '2-1', name: '我的直播', url: 'live' },
                 { id: '2-2', name: '我的班级', url: 'class' },
                 { id: '2-3', name: '我的调研', url: 'research' },
-                { id: '2-2', name: '我的考试', url: 'exam' }
+                { id: '2-4', name: '我的考试', url: 'exam' }
             ] },
             { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'ask' },
             { id: '4', name: '我的收藏', icon: 'icon-favorite', url: 'collection' },

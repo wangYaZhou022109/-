@@ -1,20 +1,25 @@
 exports.items = {
-    details: 'details'
+   // details: 'details'
 };
 
 exports.store = {
     models: {
         state: {},
         trends: { url: '../ask-bar/trends' },
-        question: { url: '../ask-bar/question/insert-article' }
+        article: { url: '../ask-bar/question/insert-article' }
     },
     callbacks: {
         release: function(payload) {
-            var question = this.models.question,
-                data = payload;
-            data.id = 1;
-            question.set(data);
-            return this.post(question);
+            var me = this;
+            this.models.article.set(payload);
+            // console.log(payload);
+            return this.post(this.models.article).then(function() {
+                me.app.message.success('操作成功');
+                // me.app.show('content', 'ask/content');
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            });
         }
     }
 };
@@ -26,5 +31,14 @@ exports.afterRender = function() {
 exports.title = '我要分享';
 
 exports.buttons = [{
-    text: '发布'
+    text: '发布',
+    fn: function() {
+        var data = {
+            id: 1,
+            title: this.$('title').value,
+            topic: this.$('topic').value,
+            content: this.$('content').value
+        };
+        return this.dispatch('release', data);
+    }
 }];

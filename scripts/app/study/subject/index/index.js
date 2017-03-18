@@ -21,7 +21,7 @@ exports.store = {
         download: {
             url: '../human/file/download'
         },
-        topics: { data: [], url: '../system/topic/select', autoLoad: 'after' }
+        topics: { data: [], url: '../system/topic/hot?limit=8&type=5', autoLoad: 'after' }
     },
     callbacks: {
         init: function() {

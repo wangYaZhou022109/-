@@ -1,7 +1,9 @@
 exports.items = {
     main: 'main',
     side: 'side',
-    'ask-new/follow-me': { isModule: true }
+    top: 'top',
+    'ask-new/follow-me': { isModule: true },
+    'ask-new/expert/changetopic': { isModule: true }
 };
 
 exports.store = {

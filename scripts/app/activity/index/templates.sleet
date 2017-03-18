@@ -57,7 +57,7 @@ view('list')
                 .content
                     .img
                         .img-cont
-                            a.normal > img(src='images/2.png')
+                            a.normal > img(src='images/d1.jpg')
                         .detail-wrapper
                             p
                                 .btn.radius.block 我要参与
@@ -73,7 +73,7 @@ view('list')
                 .content
                     .img
                         .img-cont
-                            a.normal > img(src='images/2.png')
+                            a.normal > img(src='images/d1.jpg')
                         .detail-wrapper
                             p
                                 .btn.radius.block 我要参与
@@ -89,7 +89,7 @@ view('list')
                 .content
                     .img
                         .img-cont
-                            a.normal > img(src='images/2.png')
+                            a.normal > img(src='images/d1.jpg')
                         .detail-wrapper
                             p
                                 .btn.radius.block 我要参与
