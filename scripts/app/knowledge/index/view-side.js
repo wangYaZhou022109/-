@@ -2,6 +2,7 @@ var _ = require('lodash/collection');
 exports.bindings = {
     totalFront: true,
     talents: true,
+    download: false,
     topicIds: 'changeTopics',
     topics: true
 };
@@ -24,3 +25,17 @@ exports.changeTopics = function() {
     }
 };
 
+exports.dataForTemplate = {
+    talents: function(data) {
+        var dir = this.bindings.download.getFullUrl() + '?id=';
+        return _.map(data.talents, function(obj) {
+            var member = obj || {},
+                src = 'images/d1.jpg';
+            if (member.head) {
+                src = dir + member.head;
+            }
+            member.head = src;
+            return member;
+        });
+    }
+};
