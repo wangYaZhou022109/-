@@ -32,10 +32,8 @@ exports.handlers = {
         });
     },
     showResearchAnswerDetail: function(id) {
-        var mod = this.module.items['exam/research-activity/research-answer-detail'];
-        this.app.viewport.modal(mod, {
-            researchRecordId: id
-        });
+        var url = '#/exam/research-activity/research-answer-detail/' + id;
+        window.open(url, '_blank');
     }
 };
 
