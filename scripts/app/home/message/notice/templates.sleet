@@ -1,0 +1,28 @@
+#! handlebars
+
+module
+    li.tabs-cont-item.active
+        div(data-region='main')
+    
+view('main')
+    .clearfix.layout-mt-small
+        .pull-left
+            .checkbox > input(type='checkbox'  id='check-all') + label
+            a#markRead.m-left 标记已读
+            a#removeAll.m-left 删除
+        .pull-right
+            .checkbox > input(type='checkbox' id='showRead')('checked')&if(readCheck) + label 显示未读
+
+    ul.list > each(dataList)
+        li(class = if(isRead 'sub-text'))
+            .pull-left.layout-mr-small > .checkbox > input(type='checkbox' id='check-item'+id name='messageId' value=id) + label
+            .overflow
+                .clearfix
+                    .pull-left.common-title > echo(subject)
+                    .pull-right > echo('发送时间：') + dateTime(createTime)
+                .text-overflow.m-top > echo(textContent)
+    if(showMore)
+        #loadMore.empty(style='cursor:pointer;') 查看更多
+    else
+        .empty 没有更多了
+    
