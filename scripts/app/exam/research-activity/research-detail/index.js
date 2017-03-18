@@ -47,7 +47,7 @@ exports.store = {
 
                     this.data = _.map(dimensions, function(d, i) {
                         return D.assign(d, {
-                            isCurrent: false,
+                            isCurrent: true,
                             dimensionIndex: _.find(chineseNumber, ['key', (i + 1).toString()]).value,
                             questions: _.map(d.questions, function(q, n) {
                                 return D.assign(q, {
@@ -97,17 +97,6 @@ exports.store = {
                     D.assign(this.getQuestionById(questionId), {
                         status: itemStatus.CURRENT
                     });
-                },
-                move: function(payload) {
-                    var dimension = this.data[payload.id],
-                        index = dimension.questions.findIndex(function(q) {
-                            return q.status === itemStatus.CURRENT;
-                        }),
-                        question = dimension.questions[index + payload.offset];
-                    if (question) {
-                        question.status = itemStatus.CURRENT;
-                        dimension.questions[index].status = getCurrentStatus.call(this, dimension.questions[index].id);
-                    }
                 }
             }
         },
@@ -168,10 +157,6 @@ exports.store = {
                     window.close();
                 }, 500);
             });
-        },
-        move: function(payload) {
-            this.models.dimensions.move(payload);
-            this.models.dimensions.changed();
         },
         selectDimension: function(payload) {
             this.models.dimensions.selectDimension(payload.id);

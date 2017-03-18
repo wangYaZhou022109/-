@@ -57,11 +57,12 @@ exports.handlers = {
         return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
             var record = me.bindings.researchRecord.data;
             if (record.status === 0) {
-                return me.module.dispatch('getResearchById', { id: id }).then(function(data) {
-                    me.app.viewport.modal(mod, { research: data });
-                });
+                me.app.viewport.modal(mod, { research: record.researchQuestionary });
+            } else if (record.researchQuestionary.permitViewCount === 1) {
+                window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
+            } else {
+                window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
             }
-            window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
             me.module.dispatch('clearResearchRecord');
             return '';
         });

@@ -35,7 +35,7 @@ exports.showResearchAnswerDetail = function(fir, id) {
 };
 
 exports.showResearchSummaryDetail = function(fir, id) {
-    return this.app.show('content', 'exam/research-activity/research-summary-detail', { researchQuestionaryId: id });
+    return this.app.show('content', 'exam/research-activity/research-summary-detail', { researchRecordId: id });
 };
 
 exports.interceptors = {

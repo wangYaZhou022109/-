@@ -1,3 +1,3 @@
 exports.bindings = {
-    summaryDetail: true
+    researchRecord: true
 };

@@ -19,9 +19,6 @@ view('side')
         li(id='list-item-' + @index)
             .list-title > i.iconfont.icon-type.m-right + echo(name)
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
-                .items-pagination.sub-text
-                    .up-arrow.text-hover-main-color(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
-                    .down-arrow.text-hover-main-color(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
                 each(questions)
                     compare(status 'eq' 'active')
                         a.list-item.active(id='question-'+id href='#question-' + id) > echo(index)
@@ -35,6 +32,6 @@ view('side')
 view('main')
     .preview-content
         div > each(dimensions)
-            .h3.m-bottom > echo(dimensionIndex name)
+            .h3.m-bottom > echo(dimensionIndex '、' name)
             each(questions)
                 div(data-dynamic-key=id)

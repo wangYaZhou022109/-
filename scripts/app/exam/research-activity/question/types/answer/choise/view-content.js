@@ -1,5 +1,3 @@
-
 exports.bindings = {
-    question: true
+    state: true
 };
-

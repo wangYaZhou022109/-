@@ -1,6 +1,6 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    types = require('./app/exam/exam-question-types'),
+    types = require('./app/exam/research-question-types'),
     ANSWER_MODE = 3,
     MUTIPLE_CHOOSE = 2;
 
