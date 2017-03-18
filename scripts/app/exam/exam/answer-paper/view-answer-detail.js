@@ -12,7 +12,7 @@ exports.getEntity = function() {
         exam: this.bindings.exam.data,
         state: this.bindings.state.data,
         types: this.bindings.types.data,
-        answer: this.bindings.answer.data
+        answer: this.bindings.answer.data,
     };
 };
 
