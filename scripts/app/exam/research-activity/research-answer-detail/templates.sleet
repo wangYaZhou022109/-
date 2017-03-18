@@ -1,28 +1,44 @@
 #! handlebars
 
 module
-    .exam-base-info.add-info-popup
-        div(data-region='title')
-        .row
-            .col-sm-9.statistics-left
-                div(data-region='main')
-            .col-sm-3
-                div(data-region='side')
+    .achievement-content.main-side
+        .achievement-side.bg-color
+            div(data-region='side')
+        .achievement-head(data-region='title')
+        .achievement-main(data-region='main')
+
 
 view('title')
-    .statistics-top > echo(researchRecord.researchQuestionary.name)
+    .pull-left.title > echo(researchRecord.researchQuestionary.name)
+    .text-right
+        ul.head-info.inline-block
+            li.border.right 调研人：阿端
+        .btn#submit 提交
 
 view('main')
-    each(dimensions)
-        .h3 > echo(dimensionIndex '、' name)
-        ul.statistics-ul
+    .preview-content
+        each(dimensions)
+            .h3.m-bottom > echo(dimensionIndex '、' name)
             each(questions)
-                li
-                    div(data-dynamic-key=id)
+                div(data-dynamic-key=id)
 
 view('side')
-    ul.p-top.m-top.statistics-right > each(dimensions)
-        li
-            echo(name)
-            .research-list-num.clearfix.m-top > each(questions)
-                span > echo(questionIndex)
+    ul.list > each(dimensions)
+        li(id='list-item-' + @index)
+            .list-title > i.iconfont.icon-type.m-right + echo(name)
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
+                .items-pagination.sub-text
+                    .up-arrow.text-hover-main-color(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
+                    .down-arrow.text-hover-main-color(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
+                each(questions)
+                    compare(status 'eq' 'check')
+                        a.list-item.check(id='question-'+id href='#question-' + id) > echo(questionIndex)
+
+                    compare(status 'eq' 'active')
+                        a.list-item.active(id='question-'+id href='#question-' + id) > echo(questionIndex)
+
+                    compare(status 'eq' 'current')
+                        a.list-item.current(id='question-'+id href='#question-' + id) > echo(questionIndex)
+
+                    compare(status 'eq' 'init')
+                        a.list-item(id='question-'+id href='#question-' + id) > echo(questionIndex)
