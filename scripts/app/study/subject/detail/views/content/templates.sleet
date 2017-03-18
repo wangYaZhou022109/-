@@ -22,13 +22,20 @@ view('pannel')
                         .catalog-state-info
                             .item.block
                                 .pull-right
+                                    if(current)
+                                        i.iconfont.icon-hand-right
                                     if(preview)
                                         a.normal(href='javascript:;' id='studyBtn-'+id data-chapter-id=chapterId data-url=btnUrl data-section-type=sectionType)
                                             .btn.radius > echo(btnText)
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
                                 .inline-block.title.text-overflow(title=name) > echo(name)
-                                if(preview)
-                                    compare(sectionType 'eq' 10)
-                                        .inline-block
-                                            a(id='studyRecord-'+id href='javascript:;') > i.iconfont.icon-time + string('check.the.record')
+
+view('exam-tips')
+    .text-center
+        label 点击下方"开始考试"将会立即进入考试，该考卷考试时长为60分钟
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(research.questionaryDetail)

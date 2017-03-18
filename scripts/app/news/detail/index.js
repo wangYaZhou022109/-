@@ -11,7 +11,7 @@ exports.store = {
         init: function(options) {
             var id = options.id,
                 type = options.type,
-                newsModel = type === 0 ? this.models.homeNews : this.models.subjectNews;
+                newsModel = type === '0' ? this.models.homeNews : this.models.subjectNews;
             newsModel.params.id = id;
             return this.get(newsModel);
         }

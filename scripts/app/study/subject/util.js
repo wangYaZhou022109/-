@@ -5,10 +5,9 @@ var D = require('drizzlejs'),
         before: '第',
         after: '节'
     },
-    btnTexts = {
-        2: '重新学习',
-        4: '重新学习'
-    };
+    defaultBtnTexts = { 3: '打开URL', 8: '进入任务', 9: '进入考试', 10: '进入课程', 11: '进入面授', 12: '进入调研', 13: '进入评估', 14: '进入直播' },
+    studyBtnTexts = { 2: '重新学习', 4: '重新学习', 8: '查看详情' },
+    prefixUrl = { 8: '#/study/task/', 9: '#/exam/index/', 10: '#/study/course/detail/', 14: '#/gensee/detail/' };
 // 阶段序号转义
 exports.rowHeader = function(arr, payload) {
     var opt = D.assign(options, payload);
@@ -35,41 +34,29 @@ exports.restStudyDays = function(registerTime, studyDays) {
 };
 
 // 分配节按钮地址
-exports.setBtn = function(chapters, type) {
+exports.setBtn = function(chapters, type, currentSectionId) {
     var courseChapters = chapters;
     _.map(courseChapters || [], function(obj) {
         _.map(obj.courseChapterSections || [], function(sec) {
             var section = sec,
                 progress = section.progress,
                 sectionType = Number(section.sectionType);
-            if (sectionType === 10) {
-                section.btnUrl = '#/study/course/detail/' + section.resourceId;
-                section.btnText = '进入课程';
-                if (progress && progress.finishStatus !== 0) {
-                    section.btnText = btnTexts[progress.finishStatus] || '继续学习';
-                }
-            } else if (sectionType === 3) {
-                section.btnUrl = section.url;
-                section.btnText = '打开URL';
-                if (progress && progress.finishStatus !== 0) {
-                    section.btnText = btnTexts[progress.finishStatus] || '继续学习';
-                }
-            } else if (sectionType === 8) {
-                section.btnUrl = '#/study/task/' + section.referenceId;
-                section.btnText = '进入任务';
-                if (progress && progress.finishStatus !== 0) {
-                    section.btnText = '查看详情';
-                }
-            } else if (sectionType === 9) {
-                section.btnUrl = '#/exam/index/' + section.resourceId;
-                section.btnText = '进入考试';
-                if (progress && progress.finishStatus !== 0) {
-                    section.btnText = btnTexts[progress.finishStatus] || '继续学习';
-                }
+            section.btnText = defaultBtnTexts[sectionType];
+            if (progress && progress.finishStatus !== 0) {
+                section.btnText = studyBtnTexts[progress.finishStatus] || '继续学习';
             }
+            if (sectionType === 3) {
+                section.btnUrl = section.url;
+            } else if (sectionType === 8) {
+                section.btnUrl = prefixUrl[sectionType] + section.referenceId;
+            }
+            section.btnUrl = prefixUrl[sectionType] + section.resourceId;
             section.preview = true;
             if (type === 'preview') {
                 section.preview = false;
+            }
+            if (currentSectionId === section.id) {
+                section.current = true;
             }
             return section;
         });

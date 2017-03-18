@@ -14,10 +14,22 @@ exports.events = {
 exports.handlers = {
     beginStudy: function(id, events, element) {
         var url = element.getAttribute('data-url'),
-            sectionType = element.getAttribute('data-section-type');
-        window.open(url);
+            sectionType = Number(element.getAttribute('data-section-type')),
+            me = this,
+            view;
+        if (sectionType === 12 || sectionType === 13) {
+            view = this.module.items['research-tips'];
+            this.module.dispatch('getResearchById', { id: id }).then(function(data) {
+                me.app.viewport.modal(view, { research: data });
+            });
+        } else if (sectionType === 9) {
+            view = this.module.items['exam-tips'];
+            me.app.viewport.modal(view);
+        } else {
+            window.open(url);
+        }
         // 文档、URL打开即完成
-        if (Number(sectionType) === 1 || Number(sectionType) === 3) {
+        if (sectionType === 1 || sectionType === 3) {
             this.module.dispatch('updateProgress', {
                 sectionId: id,
                 beginTime: new Date().getTime(),
@@ -57,7 +69,9 @@ exports.dataForTemplate = {
             subject.restDays = util.restStudyDays(progress.createTime, subject.studyDays);
         }
         // 配置按钮地址
-        subject.courseChapters = util.setBtn(subject.courseChapters, state.type);
+        subject.courseChapters = util.setBtn(subject.courseChapters,
+          state.type,
+          subject.studyProgress.currentSectionId);
         return subject;
     }
 };
