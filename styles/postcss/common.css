@@ -84,7 +84,6 @@ section.section {
 .m-bottom {
     margin-bottom: var(--space);
 }
-
 .layout-mr {
     margin-right: var(--base-gap);
 }

@@ -150,16 +150,20 @@
                 white-space: nowrap;
 
                 & label {
-                    padding-top: 0.2em;
                     display: inline-block;
                     width: 100%;
                     vertical-align: middle;
-                    margin-left: .7em;
                 }
 
                 &:nth-child(even) {
                     margin-right: 0;
                 }
+            }
+
+            & input {
+                height: 2em;
+                line-height: 2em;
+                margin-right: 1em;
             }
         }
 
@@ -220,15 +224,15 @@
     & .answer-options {
         display: inline-block;
         white-space: normal;
-    }
-
-    & .answer-options {
-        white-space: normal;
         vertical-align: top;
-        margin-right: 5%;
+        margin-right: 10%;
         word-wrap: break-word;
         word-break: break-all;
         overflow: hidden;
+    }
+
+    & img {
+        max-width: 100%;
     }
 
     & .mark-row {

@@ -1,6 +1,14 @@
 #!handlebars
+#  module 
+#      div(data-region='main')
+#  view('main')
+#      div(data-dynamic-key='activeexpert')
 module 
-    div(data-region='main')
-view('main')
-    div(data-dynamic-key='activeexpert')
+    div(data-region='hottopic')
+    #  div(data-region='activeexpert')
+view('hottopic')
+    div(data-dynamic-key='hottopic')
+
+#  view('activeexpert')
+#      div(data-dynamic-key='activeexpert')
 
