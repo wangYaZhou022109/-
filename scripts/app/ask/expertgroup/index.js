@@ -14,7 +14,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var expert = this.models.expertlist;
-            expert.set({ id: 'undefined' });
+            expert.set({ id: 'all' });
             return this.post(expert);
         },
         topicType: function() {
@@ -23,14 +23,8 @@ exports.store = {
         },
         check: function(payload) {
             var expert = this.models.expertlist;
-            // var topicType = this.models.topicType;
             expert.set(payload);
-            // console.log(topicType);
-            return this.post(expert).then(function() {
-                // topicType.clear();
-                // topicType.data = topicType.data;
-               //  topicType.changed();
-            });
+            return this.post(expert);
         }
     }
 };

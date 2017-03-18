@@ -40,18 +40,11 @@ view('list')
                     div(data-dynamic-key=state.menu)
 view('top')
     .section
-        .btn.block.layout-mt-small.big(id='question-question' data-name='id' data-value='1') > string('my-follow') 
-    .section.follow
-        .clearfix
-            dl
-                dt 99
-                dd 关注的内容
-            dl
-                dt 99
-                dd 关注的话题
-            dl
-                dt 99
-                dd 关注的专家
+        compare(expert.concernList.length 'gt' 0)
+            .btn.block.layout-mt-small.big(id='unfollow-expert' data-name='id' data-value=expert.member.id) > string('unfollow')
+        else
+            .btn.block.layout-mt-small.big(id='follow-expert' data-name='id' data-value=expert.member.id) > string('my-follow')
+    div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)
