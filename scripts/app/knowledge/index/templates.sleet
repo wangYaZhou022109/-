@@ -57,7 +57,7 @@ view('side')
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)
             .clearfix.charts-list
-                .pull-left.charts-img > img(src='images/1.png')
+                .pull-left.charts-img > img(src=head)
                 .pull-left.charts-user
                     echo(memberName)
                     br

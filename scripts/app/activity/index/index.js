@@ -17,7 +17,10 @@ exports.store = {
             url: '../exam/activity/recommends',
             data: []
         },
-        gensees: { url: '../course-study/gensee-student/list' },
+        gensees: { url: '../course-study/gensee-student/list',
+            type: 'pageable',
+            root: 'items',
+            pageSize: 20 },
         activity: { url: '../exam/activity' },
         params: { data: { all: true } },
         down: { url: '../human/file/download' },
