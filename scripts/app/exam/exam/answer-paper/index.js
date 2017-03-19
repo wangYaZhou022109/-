@@ -66,7 +66,15 @@ exports.store = {
     models: {
         exam: {
             type: 'localStorage',
-            url: '../exam/exam/exam-paper'
+            url: '../exam/exam/exam-paper',
+            mixin: {
+                decryptAnswer: function() {
+                    D.assign(this.data, {
+                        encryptContent: decryptAnswer.call(this, this.data.paper.encryptContent)
+                    });
+                    return this.data.encryptContent;
+                }
+            }
         },
         state: {
             type: 'localStorage',
@@ -280,23 +288,54 @@ exports.store = {
                     }
                     this.save();
                 },
-                decryptAnswer: function() {
-                    var me = this;
-                    return _.map(this.data, function(t) {
+                decryptAnswer: function(answers) {
+                    var afterDecryptQuestion = function(q, answer) {
+                        if (q.type === SINGLE_CHOOSE || q.type === MUTIPLE_CHOOSE) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    if (_.find(answer.answer, ['value', attr.name])) {
+                                        return D.assign(attr, { type: 0 });
+                                    }
+                                    return D.assign(attr, { type: q.type });
+                                })
+                            });
+                        }
+
+                        if (q.type === JUDGEMENT || q.type === SENTENCE || q.type === QUESTION_ANSWER) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    return D.assign(attr, {
+                                        name: answer.answer,
+                                        value: answer.answer
+                                    });
+                                })
+                            });
+                        }
+
+                        if (q.type === SORTING) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    if (attr.type === 0) {
+                                        return D.assign(attr, { name: answer.answer });
+                                    }
+                                    return attr;
+                                })
+                            });
+                        }
+                        return q;
+                    };
+                    this.data = _.map(this.data, function(t) {
                         return D.assign(t, {
                             questions: _.map(t.questions, function(q) {
+                                var a = _.find(answers, ['questionId', q.id]);
                                 if (q.type === READING) {
                                     return D.assign(q, {
-                                        subs: _.map(q.subs, function(sub) {
-                                            return D.assign(sub, {
-                                                questionAttrCopys: decryptAnswer.call(me, q.type, q.questionAttrCopys)
-                                            });
+                                        subs: _.map(q.subs, function(s) {
+                                            return afterDecryptQuestion(s, a);
                                         })
                                     });
                                 }
-                                return D.assign(q, {
-                                    questionAttrCopys: decryptAnswer.call(me, q.type, q.questionAttrCopys)
-                                });
+                                return afterDecryptQuestion(q, a);
                             })
                         });
                     });
@@ -538,7 +577,7 @@ exports.store = {
                 examId: this.models.exam.data.id
             });
             return this.get(this.models.decryptKey).then(function() {
-                me.models.types.decryptAnswer();
+                me.models.types.decryptAnswer(JSON.parse(me.models.exam.decryptAnswer()));
                 me.models.state.data.showAnswerDetail = 1;
                 me.models.state.changed();
             });
@@ -653,42 +692,15 @@ viewAnswerDetail = function() {
     return '';
 };
 
-decryptAnswer = function(type, attrs) {
-    var key = this.store.models.decryptKey.data.key,
-        decrypt = function(k, v) {
-            var encryptedHexStr = CryptoJS.enc.Hex.parse(v),
-                encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr),
-                decrypted = CryptoJS.AES.decrypt(encryptedBase64Str, CryptoJS.enc.Utf8.parse(k), {
-                    iv: CryptoJS.enc.Utf8.parse(IV),
-                    mode: CryptoJS.mode.CBC,
-                    padding: CryptoJS.pad.Pkcs7
-                }),
-                value = CryptoJS.enc.Utf8.stringify(decrypted).toString();
-            return value;
-        };
-
-    if (type === SINGLE_CHOOSE || type === MUTIPLE_CHOOSE) {
-        return _.map(attrs, function(attr) {
-            return D.assign(attr, { type: decrypt(key, attr.type) });
-        });
-    }
-
-    if (type === JUDGEMENT || type === QUESTION_ANSWER || type === SENTENCE) {
-        return _.map(attrs, function(attr) {
-            return D.assign(attr, {
-                name: decrypt(key, attr.name),
-                value: decrypt(key, attr.value)
-            });
-        });
-    }
-
-    if (type === SORTING) {
-        return _.map(attrs, function(attr) {
-            if (attr.type === 0) {
-                return D.assign(attr, { name: decrypt(key, attr.name) });
-            }
-            return attr;
-        });
-    }
-    return attrs;
+decryptAnswer = function(v) {
+    var k = this.store.models.decryptKey.data.key,
+        hex = CryptoJS.enc.Hex.parse(v),
+        base64Str = CryptoJS.enc.Base64.stringify(hex),
+        decrypted = CryptoJS.AES.decrypt(base64Str, CryptoJS.enc.Utf8.parse(k), {
+            iv: CryptoJS.enc.Utf8.parse(IV),
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }),
+        value = CryptoJS.enc.Utf8.stringify(decrypted).toString();
+    return value;
 };
