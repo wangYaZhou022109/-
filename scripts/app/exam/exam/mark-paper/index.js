@@ -60,7 +60,8 @@ exports.store = {
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
-                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                            // singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                            singleMode: true,
                             currentQuestion: types.getFirstQuestion()
                         };
                         this.save();
@@ -123,12 +124,12 @@ exports.store = {
                             _.map(o.questions, function(q) {
                                 D.assign(q, { totalCount: o.size });
                             });
-
+                            j++;
                             return D.assign(o, {
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
                                 }),
-                                isCurrent: j++ === constant.ZERO
+                                isCurrent: true
                             });
                         });
 
@@ -153,15 +154,11 @@ exports.store = {
                     });
                 },
                 selectType: function(id) {
-                    var currentIndex = this.data.findIndex(function(d) {
-                        return d.isCurrent;
-                    });
-                    if (currentIndex > -1) {
-                        this.data[currentIndex].isCurrent = false;
-                        this.data[id].isCurrent = true;
-                    } else {
-                        this.data[id].isCurrent = true;
+                    if (!this.module.store.models.state.data.selectQuestion) {
+                        this.data[id].isCurrent = !this.data[id].isCurrent;
                     }
+                    this.module.store.models.state.data.selectQuestion = false;
+                    this.save();
                 },
                 getType: function(questionId) {
                     return _.find(this.data, function(d) {
@@ -174,18 +171,43 @@ exports.store = {
                     var type = this.getType(id),
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
-                        });
+                        }),
+                        me = this;
+
                     if (index > -1) {
-                        type.questions[index].status = getCurrentStatus.call(this, id);
+                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
+
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
                     });
+
+                    //  把其他类型的题目的current 设置为其他状态
+                    _.forEach(_.filter(this.data, function(t) {
+                        return _.every(t.questions, function(q) {
+                            return q.id !== id;
+                        });
+                    }), function(tt) {
+                        var n = tt.questions.findIndex(function(qq) {
+                            return qq.status === itemStatus.CURRENT;
+                        });
+                        if (n !== -1) {
+                            D.assign(tt.questions[n], { status: getCurrentStatus.call(me, tt.questions[n].id) });
+                        }
+                    });
+                    this.module.store.models.state.data.selectQuestion = true;
                     this.save();
                 },
                 getCurrentQuestion: function() {
-                    var type = _.find(this.data, ['isCurrent', true]);
-                    return _.find(type.questions, ['status', itemStatus.CURRENT]);
+                    var question;
+                    _.forEach(this.data, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
                 },
                 move: function(payload) {
                     var type = this.data[payload.id],
@@ -197,6 +219,12 @@ exports.store = {
                         question.status = itemStatus.CURRENT;
                         type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
+                },
+                updateStatus: function(questionId, status) {
+                    D.assign(this.getQuestionById(questionId), {
+                        status: status
+                    });
+                    this.save();
                 }
             }
         },
@@ -256,10 +284,13 @@ exports.store = {
                     var me = this;
                     return _.every(types, function(t) {
                         var f = _.every(t.questions, function(q) {
-                            if (_.find(me.data, ['key', q.id]).value !== '') {
-                                return true;
+                            var grade = _.find(me.data, ['key', q.id]);
+                            if (q.type === 6) {
+                                return _.every(grade.value, function(v) {
+                                    return v.value !== '';
+                                });
                             }
-                            return false;
+                            return grade.value !== '';
                         });
                         return f;
                     });
@@ -310,6 +341,10 @@ exports.store = {
         },
         saveGrade: function(data) {
             this.models.grades.saveGrade(data);
+            if (!this.models.state.data.singleMode) {
+                this.models.types.updateStatus(data.key, itemStatus.ACTIVE);
+                this.models.types.changed();
+            }
         },
         submitGrade: function() {
             var exam = this.models.exam.getExam(),
@@ -344,8 +379,17 @@ exports.afterRender = function() {
 };
 
 getCurrentStatus = function(id) {
-    var grades = this.store.models.grades.data;
-    if (_.find(grades, ['key', id]).value !== '') {
+    var grades = this.store.models.grades.data,
+        grade = _.find(grades, ['key', id]),
+        reading;
+    if (grade.value.length > 0) {
+        reading = _.some(grade.value, function(v) {
+            return v.value !== 0;
+        });
+        if (reading) {
+            return itemStatus.ACTIVE;
+        }
+    } else if (grade.value !== '' && grade.value !== 0) {
         return itemStatus.ACTIVE;
     }
     return itemStatus.INIT;

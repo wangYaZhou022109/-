@@ -25,6 +25,7 @@ exports.store = {
         },
         saveCorrect: function(payload) {
             var me = this;
+            this.models.state.data.correct = payload;
             this.models.correct.set(payload);
             return this.post(this.models.correct).then(function() {
                 me.app.message.success('提交错误成功');

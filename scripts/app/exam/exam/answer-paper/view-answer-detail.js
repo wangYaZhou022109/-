@@ -1,3 +1,5 @@
+var D = require('drizzlejs');
+
 exports.bindings = {
     state: true,
     exam: false,
@@ -8,12 +10,12 @@ exports.bindings = {
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
-    return {
+    return D.assign({}, {
         exam: this.bindings.exam.data,
         state: this.bindings.state.data,
         types: this.bindings.types.data,
         answer: this.bindings.answer.data,
-    };
+    });
 };
 
 exports.getEntityModuleName = function() {
@@ -21,6 +23,7 @@ exports.getEntityModuleName = function() {
 };
 
 exports.dataForEntityModule = function(data) {
+    this.module.dispatch('clearModels');
     return {
         data: data
     };

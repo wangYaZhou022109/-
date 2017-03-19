@@ -18,12 +18,20 @@ view('side')
     ul.list > each(dimensions)
         li(id='list-item-' + @index)
             .list-title > i.iconfont.icon-type.m-right + echo(name)
-            div(class='min-btn-groups') > each(questions)
-                div(class='list-item')(id='q-' + id) > echo(questionIndex)
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
+                each(questions)
+                    compare(status 'eq' 'active')
+                        a.list-item.active(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'current')
+                        a.list-item.current(id='question-'+id href='#question-' + id) > echo(index)
+
+                    compare(status 'eq' 'init')
+                        a.list-item(id='question-'+id href='#question-' + id) > echo(index)
 
 view('main')
     .preview-content
         div > each(dimensions)
-            .h3.m-bottom > echo(dimensionIndex name)
+            .h3.m-bottom > echo(dimensionIndex '、' name)
             each(questions)
                 div(data-dynamic-key=id)

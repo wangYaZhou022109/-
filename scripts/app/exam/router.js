@@ -6,6 +6,7 @@ exports.routes = {
     'exam/mark-paper/:id': 'showMarkPaper',
     'exam/score-detail/:id': 'showScoreDetail',
     'research-activity/research-answer-detail/:id': 'showResearchAnswerDetail',
+    'research-activity/research-summary-detail/:id': 'showResearchSummaryDetail',
     'research-activity/research-detail/:id': 'showResearchDetail'
 };
 
@@ -33,12 +34,17 @@ exports.showResearchAnswerDetail = function(fir, id) {
     return this.app.show('content', 'exam/research-activity/research-answer-detail', { researchRecordId: id });
 };
 
+exports.showResearchSummaryDetail = function(fir, id) {
+    return this.app.show('content', 'exam/research-activity/research-summary-detail', { researchRecordId: id });
+};
+
 exports.interceptors = {
     'exam/answer-paper': 'clearHeadAndBottom',
     'exam/mark-paper': 'clearHeadAndBottom',
     'exam/score-detail': 'clearHeadAndBottom',
     'research-activity/research-detail': 'clearHeadAndBottom',
-    'research-activity/research-answer-detail': 'clearHeadAndBottom'
+    'research-activity/research-answer-detail': 'clearHeadAndBottom',
+    'research-activity/research-summary-detail': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {
