@@ -14,7 +14,7 @@ exports.store = {
                 { id: '1-0', name: '我的课程', url: 'study/course' },
                 { id: '1-1', name: '我的专题', url: 'study/subject' },
                 { id: '1-2', name: '我的知识', url: 'study/knowledge' },
-                { id: '1-3', name: '岗位学习', url: 'study/jobs' }
+                { id: '1-3', name: '岗位学习', url: 'study/position' }
             ] },
             { id: '2', name: '我的活动', icon: 'icon-tag-1', url: 'activity', childs: [ // eslint-disable-line object-property-newline,max-len
                 { id: '2-0', name: '我的mooc', url: 'mooc' },
@@ -53,8 +53,8 @@ exports.store = {
                     state.menu = 'study/subject';
                 } else if (options.name === 'knowledge') {
                     state.menu = 'study/knowledge';
-                } else if (options.name === 'jobs') {
-                    state.menu = 'study/jobs';
+                } else if (options.name === 'position') {
+                    state.menu = 'study/position';
                 } else {
                     state.menu = options.name;
                 }
