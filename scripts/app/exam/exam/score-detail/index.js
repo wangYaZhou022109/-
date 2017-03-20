@@ -44,11 +44,11 @@ exports.items = {
 exports.store = {
     models: {
         exam: {
-            url: '../exam/exam/exam-paper'
+            url: '../exam/exam/score-detail'
         },
         state: {
             mixin: {
-                init: function(exam) {
+                initNoSujective: function(exam) {
                     var types = this.module.store.models.types,
                         answer = this.module.store.models.answer,
                         questionSummary = answer.questionSummary();
@@ -65,6 +65,47 @@ exports.store = {
                         examineeTotalScore: questionSummary.totalScore
                     };
                 },
+                initWithSuject: function(exam) {
+                    var types = this.module.store.models.types,
+                        questions = exam.paper.questions;
+                    this.data = {
+                        name: exam.name,
+                        examinee: this.app.global.currentUser.name,
+                        totalCount: exam.paper.questionNum,
+                        totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
+                        singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                        currentQuestion: types.getFirstQuestion(),
+                        correctNum: 0,
+                        errorNum: 0,
+                        noAnswerCount: 0,
+                        examineeTotalScore: 0
+                    };
+                    this.data.correctNum = _.filter(questions, function(q) {
+                        if (q.type === 6) {
+                            return _.every(q.subs, function(s) {
+                                return s.answerRecord && s.answerRecord.isRight === 1;
+                            });
+                        }
+                        if (q.answerRecord) {
+                            return q.answerRecord.isRight === 1;
+                        }
+                        return false;
+                    }).length;
+
+                    this.data.errorNum = _.filter(questions, function(q) {
+                        if (q.type === 6) {
+                            return !_.every(q.subs, function(s) {
+                                return s.answerRecord && s.answerRecord.isRight === 1;
+                            });
+                        }
+                        if (q.answerRecord) {
+                            return q.answerRecord.isRight === 0;
+                        }
+                        return false;
+                    }).length;
+                    this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
+                    this.data.examineeTotalScore = exam.examRecord.score / 100;
+                },
                 selectQuestion: function(id) {
                     var types = this.module.store.models.types;
                     D.assign(this.data, { currentQuestion: types.getQuestionById(id) });
@@ -79,7 +120,8 @@ exports.store = {
             mixin: {
                 init: function(questions) {
                     var map = {},
-                        j = 0;
+                        j = 0,
+                        me = this;
 
                     if (questions) {
                         _.forEach(questions, function(q) {
@@ -108,16 +150,18 @@ exports.store = {
                             if (j === constant.ZERO) {
                                 D.assign(o.questions[0], { status: itemStatus.CURRENT });
                             }
-
                             _.map(o.questions, function(q) {
-                                D.assign(q, { totalCount: o.size });
+                                D.assign(q, {
+                                    totalCount: o.size,
+                                    status: getCurrentStatus.call(me, q.id)
+                                });
                             });
 
                             return D.assign(o, {
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
                                 }),
-                                isCurrent: j++ === constant.ZERO
+                                isCurrent: true
                             });
                         });
                     }
@@ -140,15 +184,10 @@ exports.store = {
                     });
                 },
                 selectType: function(id) {
-                    var currentIndex = this.data.findIndex(function(d) {
-                        return d.isCurrent;
-                    });
-                    if (currentIndex > -1) {
-                        this.data[currentIndex].isCurrent = false;
-                        this.data[id].isCurrent = true;
-                    } else {
-                        this.data[id].isCurrent = true;
+                    if (!this.module.store.models.state.data.selectQuestion) {
+                        this.data[id].isCurrent = !this.data[id].isCurrent;
                     }
+                    this.module.store.models.state.data.selectQuestion = false;
                 },
                 getType: function(questionId) {
                     return _.find(this.data, function(d) {
@@ -161,17 +200,41 @@ exports.store = {
                     var type = this.getType(id),
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
-                        });
+                        }),
+                        me = this;
+
                     if (index > -1) {
-                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
+                        type.questions[index].status = getCurrentStatus.call(me, type.questions[index].id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
                     });
+
+                    //  把其他类型的题目的current 设置为其他状态
+                    _.forEach(_.filter(this.data, function(t) {
+                        return _.every(t.questions, function(q) {
+                            return q.id !== id;
+                        });
+                    }), function(tt) {
+                        var n = tt.questions.findIndex(function(qq) {
+                            return qq.status === itemStatus.CURRENT;
+                        });
+                        if (n !== -1) {
+                            D.assign(tt.questions[n], { status: getCurrentStatus.call(me, tt.questions[n].id) });
+                        }
+                    });
+                    this.module.store.models.state.data.selectQuestion = true;
                 },
                 getCurrentQuestion: function() {
-                    var type = _.find(this.data, ['isCurrent', true]);
-                    return _.find(type.questions, ['status', itemStatus.CURRENT]);
+                    var question;
+                    _.forEach(this.data, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
                 },
                 move: function(payload) {
                     var type = this.data[payload.id],
@@ -187,7 +250,7 @@ exports.store = {
                 initStatus: function() {
                     this.data = _.map(this.data, function(t) {
                         return D.assign(t, {
-                            isCurrent: false
+                            isCurrent: true
                         });
                     });
                 }
@@ -222,6 +285,44 @@ exports.store = {
                         });
                     });
                     return result;
+                },
+                init: function(questions) {
+                    var choose = function(question) {
+                            return _.map(question.answerRecord.answer.split(','), function(n) {
+                                return {
+                                    id: _.find(question.questionAttrCopys, ['name', n]).id,
+                                    value: n
+                                };
+                            });
+                        },
+                        subjective = function(question) {
+                            return [{ id: question.id, value: question.answerRecord.answer }];
+                        };
+
+                    this.data = _.map(questions, function(q) {
+                        var values = [];
+                        if (q.answerRecord) {
+                            if (q.type === 1 || q.type === 2) {
+                                values = choose(q);
+                            } else if (q.type === 6) {
+                                values = _.map(q.subs, function(s) {
+                                    var subValues = [];
+                                    if (s.answerRecord) {
+                                        if (s.type === 1 || s.type === 2) {
+                                            subValues = choose(s);
+                                        } else {
+                                            subValues = subjective(s);
+                                        }
+                                    }
+                                    return { key: s.id, value: subValues };
+                                });
+                            } else {
+                                values = subjective(q);
+                            }
+                        }
+
+                        return { key: q.id, value: values };
+                    });
                 }
             }
         }
@@ -229,15 +330,23 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var data = payload.data,
-                exam;
-            if (!payload.examRecordId) {
-                exam = data.exam;
+                me = this;
+            if (data) {
                 this.models.exam.set(data.exam);
                 this.models.types.set(data.types);
                 this.models.types.initStatus();
                 this.models.answer.set(data.answer);
-                this.models.state.init(exam);
+                this.models.state.initNoSujective(data.exam);
+            } else {
+                D.assign(this.models.exam.params, payload);
+                return this.get(this.models.exam).then(function() {
+                    var exam = me.models.exam.data;
+                    me.models.answer.init(exam.paper.questions);
+                    me.models.types.init(exam.paper.questions);
+                    me.models.state.initWithSuject(exam);
+                });
             }
+            return '';
         },
         selectType: function(payload) {
             this.models.types.selectType(payload.id);
@@ -263,8 +372,9 @@ exports.beforeRender = function() {
 };
 
 getCurrentStatus = function(id) {
-    var answer = this.store.models.answer.data;
-    if (_.find(answer, ['key', id])) {
+    var answer = this.store.models.answer.data,
+        o = _.find(answer, ['key', id]);
+    if (o && o.value.length > 0) {
         return itemStatus.ACTIVE;
     }
     return itemStatus.INIT;

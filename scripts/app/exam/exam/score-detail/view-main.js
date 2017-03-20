@@ -18,8 +18,10 @@ exports.getEntity = function(id) {
     var question;
 
     question = this.bindings.types.getQuestionById(id);
-    D.assign(question, { questionAttrs: question.questionAttrCopys });
-
+    question = D.assign(question, {
+        score: question.score / 100,
+        questionAttrs: question.questionAttrCopys
+    });
     return question;
 };
 

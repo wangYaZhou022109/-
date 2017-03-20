@@ -9,9 +9,9 @@ var map = {
         8: 'sorting'
     },
     mode = {
-        1: 'answer-summary',
-        2: 'detail-summary',
-        3: 'edit',
+        1: 'summary-detail',
+        2: 'answer-detail',
+        3: 'answer',
         4: 'preview'
     },
     typeToName = function(t, m) {
