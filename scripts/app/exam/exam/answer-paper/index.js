@@ -42,7 +42,7 @@ var _ = require('lodash/collection'),
     },
     WS,
     TO,
-    changeScreen,
+    switchScreen,
     viewAnswerDetail,
     SINGLE_CHOOSE = 1,
     MUTIPLE_CHOOSE = 2,
@@ -625,7 +625,7 @@ exports.afterRender = function() {
             return me.dispatch('delay', { delay: Number(delay) });
         });
     }
-    changeScreen.call(this);
+    switchScreen.call(this);
 };
 
 WS = {
@@ -660,17 +660,20 @@ getCurrentStatus = function(id) {
     return itemStatus.INIT;
 };
 
-changeScreen = function() {
-    var me = this;
-    document.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'hidden') {
+switchScreen = function() {
+    var me = this,
+        isAllowSwitch = this.store.models.exam.data.isAllowSwitch;
+    if (isAllowSwitch && isAllowSwitch === 1) {
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                return me.dispatch('lowerSwitchTimes');
+            }
+            return true;
+        });
+        window.onblur = function() {
             return me.dispatch('lowerSwitchTimes');
-        }
-        return true;
-    });
-    window.onblur = function() {
-        return me.dispatch('lowerSwitchTimes');
-    };
+        };
+    }
 };
 
 viewAnswerDetail = function() {

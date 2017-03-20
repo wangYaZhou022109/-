@@ -23,7 +23,7 @@ exports.showAnswerPaper = function(fir, id) {
 };
 
 exports.showScoreDetail = function(fir, id) {
-    return this.app.show('content', 'exam/exam/score-detail', { examId: id });
+    return this.app.show('content', 'exam/exam/score-detail', { examRecordId: id });
 };
 
 exports.showResearchDetail = function(fir, id) {
