@@ -1,9 +1,9 @@
 #! handlebars
 
-module > .watch-detail1-page
-    .watch-detail1-total(data-region="detail1-total")
+module > .ask-exam-page
+    .ask-exam-total(data-region="ask-exam")
 
-view('detail1-total')
+view('ask-exam')
     .title-img.pull-left.layout-mr-small
         img.title-radius(src="images/3.png")
     .title-main
@@ -12,16 +12,12 @@ view('detail1-total')
             | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             | Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    .detail-img.layout-mt-small
-        img(src="images/1.png")
-    .detail1-file.layout-mt-small
-        | 附件：
-        a
-            .iconfont.icon-tag-1
-            span 百度是否真的.pdf
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            | Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     .detail1-person.layout-mt-small
         span 张三
-        span.sub-title 分享时间：
+        span.sub-title 提问时间：
         span.sub-title 201-09-12 10:23
     .detail1-alink.layout-mt-small
         a 关联话题：

@@ -1,7 +1,7 @@
 exports.items = {
-    'detail2-title': 'detail2-title'
+    'discuss-exam': 'discuss-exam'
 };
-exports.title = '举报审核';
+exports.title = '讨论审核';
 exports.buttons = [{
     text: '拒绝'
 }, {

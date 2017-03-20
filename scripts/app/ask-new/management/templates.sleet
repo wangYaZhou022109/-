@@ -46,10 +46,34 @@ view('main')
                         span.m-right 提交人：阿端
                         span 提交时间：1990-09-09 23:45:30
                 .title-row
-                    .inline-block.color-error 已拒绝
-                    .inline-block 【分享审核】
+                    .inline-block.color-ing 待审核
+                    .inline-block 【提问审核】
             .clearfix.m-top
-                .pull-right > a#watch-detail2 查看详情
+                .pull-right > a#ask-exam 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-ing 待审核
+                    .inline-block 【讨论审核】
+            .clearfix.m-top
+                .pull-right > a#discuss-exam 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-ing 待审核
+                    .inline-block 【举报审核】
+            .clearfix.m-top
+                .pull-right > a#report-exam 查看详情
                 .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
         li
             .clearfix
@@ -61,7 +85,43 @@ view('main')
                     .inline-block.color-pass 已通过
                     .inline-block 【分享审核】
             .clearfix.m-top
-                .pull-right > a 查看详情
+                .pull-right > a#exam-pass 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-error 已拒绝
+                    .inline-block 【提问审核】
+            .clearfix.m-top
+                .pull-right > a#ask-reject 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-error 已拒绝
+                    .inline-block 【讨论审核】
+            .clearfix.m-top
+                .pull-right > a#discuss-reject 查看详情
+                .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
+        li
+            .clearfix
+                .pull-right
+                    .sub-text.small-font
+                        span.m-right 提交人：阿端
+                        span 提交时间：1990-09-09 23:45:30
+                .title-row
+                    .inline-block.color-error 已拒绝
+                    .inline-block 【举报审核】
+            .clearfix.m-top
+                .pull-right > a#report-reject 查看详情
                 .text-overflow 您好，需要您支持参加的调研《hghghghhghhghhhghghh》内容内容内容内容内容内容内容内容内容内容容内容...
 
 
