@@ -11,6 +11,7 @@ exports.store = {
             root: 'items'
         },
         classstaff: { url: '../train/classstaff' },
+        memberIds: { url: '../train/classstaff/members' },
         addAllClassstaff: { url: '../train/classstaff/save-all' },
         state: { data: {} }
     },
@@ -51,6 +52,13 @@ exports.store = {
             addAllClassstaff.clear();
             addAllClassstaff.params = payload;
             return this.get(addAllClassstaff);
+        },
+        getMemberIds: function() {
+            var memberIds = this.models.memberIds,
+                state = this.models.state.data;
+            memberIds.clear();
+            memberIds.params = { classId: state.classId };
+            return this.get(memberIds);
         }
     }
 };

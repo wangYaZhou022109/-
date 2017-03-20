@@ -88,23 +88,27 @@ exports.handlers = {
     showMembers: function() {
         var me = this;
         var view = me.module.items['train/trainee/select-member'];
-        me.app.viewport.modal(view, {
-            callback: function(data) {
-                var state = me.bindings.state.data;
-                var params = {};
-                me.app.viewport.closeModal();
-                if (data) {
-                    params.classId = state.classId;
-                    params.memberIds = data;
-                    me.module.dispatch('addAllClassstaff', params).then(function(result) {
-                        if (result[0] !== -1) {
-                            this.app.message.success('添加成功!');
-                        } else {
-                            this.app.message.error('添加失败!');
-                        }
-                    });
+        me.module.dispatch('getMemberIds').then(function(ret) {
+            me.app.viewport.modal(view, {
+                memberIds: ret[0],
+                callback: function(data) {
+                    var state = me.bindings.state.data;
+                    var params = {};
+                    me.app.viewport.closeModal();
+                    if (data) {
+                        params.classId = state.classId;
+                        params.memberIds = data;
+                        me.module.dispatch('addAllClassstaff', params).then(function(result) {
+                            if (result[0] !== -1) {
+                                me.app.message.success('添加成功!');
+                                me.module.dispatch('init', state);
+                            } else {
+                                me.app.message.error('添加失败!');
+                            }
+                        });
+                    }
                 }
-            }
+            });
         });
     }
 };

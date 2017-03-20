@@ -38,3 +38,12 @@ exports.mixin = {
         this.dispatch('refreshList');
     }
 };
+
+exports.buttons = [{
+    text: '确认',
+    fn: function() {
+        var ids = this.store.models.state.data;
+        this.renderOptions.callback(ids.join(','));
+        this.store.models.state.data = [];
+    }
+}];

@@ -12,8 +12,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click select_*': 'checkMember',
-    'click addTrainee': 'addTrainee'
+    'click select_*': 'checkMember'
 };
 
 exports.handlers = {
@@ -31,20 +30,16 @@ exports.handlers = {
                 }
             }
         }
-    },
-    addTrainee: function() {
-        var ids = this.bindings.state.data;
-        this.module.renderOptions.callback(ids.join(','));
-        this.bindings.state.data = [];
     }
 };
 
 exports.dataForTemplate = {
     members: function(data) {
         var ids = this.bindings.state.data;
+        var memberIds = this.module.renderOptions.memberIds;
         _.map(data.members || [], function(x) {
             var m = x || {};
-            if (ids.indexOf(m.id) !== -1) m.checked = true;
+            if (ids.indexOf(m.id) !== -1 || memberIds.indexOf(m.id) !== -1) m.checked = true;
         });
         return data.members;
     }

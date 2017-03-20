@@ -11,6 +11,7 @@ exports.store = {
             root: 'items'
         },
         addIftrainee: { url: '../train/trainee/add-trainee' },
+        memberIds: { url: '../train/trainee/members' },
         addAllIftrainee: { url: '../train/trainee/add-trainees' },
         iftrainee: { url: '../train/trainee' },
         state: { data: {} }
@@ -40,6 +41,13 @@ exports.store = {
             iftrainee.clear();
             iftrainee.set(payload);
             return this.del(iftrainee);
+        },
+        getMemberIds: function() {
+            var memberIds = this.models.memberIds,
+                state = this.models.state.data;
+            memberIds.clear();
+            memberIds.params = { classId: state.classId, type: 1 };
+            return this.get(memberIds);
         }
     }
 };

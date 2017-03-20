@@ -48,32 +48,35 @@ exports.handlers = {
         }
     },
     showMembers: function() {
-        var me = this;
-        var view = me.module.items['train/trainee/select-member'];
-        me.app.viewport.modal(view, {
-            callback: function(data) {
-                var state = me.bindings.state.data;
-                var params = {};
-                me.app.viewport.closeModal();
-                if (data) {
-                    params.classId = state.classId;
-                    params.memberIds = data;
-                    params.type = 1;
-                    me.module.dispatch('addAllIftrainee', params).then(function(result) {
-                        var success = result[0][0];
-                        var fail = result[0][1];
-                        if (success === 0) {
-                            me.app.message.error('添加失败！');
-                        } else {
-                            me.module.dispatch('init', state);
-                            me.app.message.success('添加成功' + success + '条！');
-                            if (fail !== 0) {
-                                me.app.message.error('添加失败' + fail + '条！');
+        var me = this,
+            view = me.module.items['train/trainee/select-member'];
+        me.module.dispatch('getMemberIds').then(function(ret) {
+            me.app.viewport.modal(view, {
+                memberIds: ret[0],
+                callback: function(data) {
+                    var state = me.bindings.state.data;
+                    var params = {};
+                    me.app.viewport.closeModal();
+                    if (data) {
+                        params.classId = state.classId;
+                        params.memberIds = data;
+                        params.type = 1;
+                        me.module.dispatch('addAllIftrainee', params).then(function(result) {
+                            var success = result[0][0];
+                            var fail = result[0][1];
+                            if (success === 0) {
+                                me.app.message.error('添加失败！');
+                            } else {
+                                me.module.dispatch('init', state);
+                                me.app.message.success('添加成功' + success + '条！');
+                                if (fail !== 0) {
+                                    me.app.message.error('添加失败' + fail + '条！');
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
+            });
         });
     }
 };

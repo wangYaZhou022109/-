@@ -24,6 +24,7 @@ exports.store = {
             root: 'items'
         },
         addTrainee: { url: '../train/trainee/add-trainee' },
+        memberIds: { url: '../train/trainee/members' },
         addTrainees: { url: '../train/trainee/add-trainees' },
         traineeSort: { url: '../train/trainee/update-sort' },
         fmtrainee: { url: '../train/trainee' },
@@ -183,13 +184,22 @@ exports.store = {
         groupTrainees: function() {
             var groupTrainees = this.models.groupTrainees,
                 state = this.models.state.data;
+            groupTrainees.clear();
             groupTrainees.params = state;
             return this.get(groupTrainees);
         },
         deleteTraineeGroup: function(payload) {
             var updateTraineeGroup = this.models.updateTraineeGroup;
+            updateTraineeGroup.clear();
             updateTraineeGroup.params = { id: payload.id, groupId: '0' };
             return this.get(updateTraineeGroup);
+        },
+        getMemberIds: function() {
+            var memberIds = this.models.memberIds,
+                state = this.models.state.data;
+            memberIds.clear();
+            memberIds.params = { classId: state.classId, type: 0 };
+            return this.get(memberIds);
         }
     }
 };
