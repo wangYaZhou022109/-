@@ -5,7 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         subjectNews: { url: '../course-study/course-front/subject-news' },
-        homeNews: {}
+        homeNews: { url: '../system/home-news/detail' }
     },
     callbacks: {
         init: function(options) {
