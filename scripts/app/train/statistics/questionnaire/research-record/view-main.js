@@ -43,7 +43,6 @@ exports.events = {
 
 exports.handlers = {
     edit: function(id) {
-        console.log(id);
         var mod = this.module.items['exam/research-activity/research-answer-detail'];
         this.app.viewport.ground(mod, {
             researchRecordId: id
