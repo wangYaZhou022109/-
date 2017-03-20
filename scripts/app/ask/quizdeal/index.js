@@ -5,8 +5,8 @@ exports.store = {
     models: {
         params: { data: { isOverdue: '1' } },
         audit: { url: '../ask-bar/questionReviewed' },
-        pass: { url: '../ask-bar/pendingAudit/pass' },
-        out: { url: '../ask-bar/pendingAudit/out' },
+        pass: { url: '../ask-bar/pending-audit/pass' },
+        out: { url: '../ask-bar/pending-audit/out' },
     },
     callbacks: {
         init: function(paylaod) {

@@ -1,23 +1,23 @@
 exports.items = {
-    top: 'top',
-    middle: 'middle',
-    bottom: 'bottom'
+    main: 'main'
 };
 
 exports.store = {
     models: {
-        topstate: { data: { menu: 'myshare' } },
-        middlestate: { data: { menu: 'mynoticer' } },
-        bottomstate: { data: { menu: 'noticer' } }
+        follow: { url: '../ask-bar/concern/follow' }
     },
     callbacks: {
-        init: function() {
-        },
-        search: function() {
+        init: function(payload) {
+            var follow = this.models.follow;
+            follow.set({ id: payload.state.id });
+            return this.get(follow);
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    if (typeof this.renderOptions.state.id !== 'undefined' && this.renderOptions.state.id !== '') {
+        return this.dispatch('init', this.renderOptions);
+    }
+    return null;
 };

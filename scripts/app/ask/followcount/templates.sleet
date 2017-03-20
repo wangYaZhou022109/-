@@ -1,7 +1,6 @@
 #!handlebars
 module 
     div(data-region='main')
-    div(data-region='popup')
 view('main') 
     .section.follow
         .clearfix
