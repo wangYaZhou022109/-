@@ -37,7 +37,7 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    follow: function() {
-        this.app.message.success('关注成功！');
-    }
+    // follow: function() {
+    //     this.app.message.success('关注成功！');
+    // }
 };

@@ -29,33 +29,39 @@ exports.store = {
                 relevantexperts = this.models.relevantexperts,
                 state = this.models.state,
                 relatedquestions = this.models.relatedquestions,
-                followcount = this.models.followcount;
-            relevantexperts.data.id = payload.id;
+                followcount = this.models.followcount,
+                data = payload.id.split(',');
+            relevantexperts.data.id = data[0];
             relevantexperts.changed();
-            relatedquestions.data.id = payload.id;
+            relatedquestions.data.id = data[0];
             relatedquestions.changed();
-            state.data.id = payload.id;
+            state.data.id = data[0];
             state.changed();
-            followcount.data.id = payload.id;
+            followcount.data.id = data[1];
             followcount.changed();
-            expert.set(payload);
+            expert.set({ id: data[0] });
             this.get(expert);
         },
         follow: function(payload) {
-            var follow = this.models.follow;
+            var follow = this.models.follow,
+                me = this,
+                expert = this.models.expert;
             follow.set(payload);
-            return this.post(follow);
+            expert.set({ id: this.models.expert.data.id, concernType: '1' });
+            return this.post(follow).then(function() {
+                me.app.message.success('关注成功');
+                me.get(expert);
+            });
         },
         unfollow: function(payload) {
             var unfollow = this.models.unfollow,
                 me = this,
-                followcount = this.models.followcount;
-            followcount.data.id = payload.id;
-            unfollow.set(payload);
-            console.log(unfollow);
+                expert = this.models.expert;
+            expert.set({ id: this.models.expert.data.id, concernType: '1' });
+            unfollow.set({ id: payload.id, concernType: '1' });
             return this.put(unfollow).then(function() {
                 me.app.message.success('取消成功');
-                followcount.changed();
+                me.get(expert);
             });
         }
     }
