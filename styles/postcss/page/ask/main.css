@@ -7,11 +7,9 @@
             width: 33.33%;
             text-align: center;
         }
-
         &.cell-4 dl {
             width: 25%;
         }
-
         & dt {
             font-size: var(--h3);
         }

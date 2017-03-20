@@ -1,5 +1,7 @@
 exports.items = {
-    pannel: 'pannel'
+    pannel: 'pannel',
+    'exam-tips': '',
+    'research-tips': ''
 };
 
 exports.store = {
@@ -9,6 +11,9 @@ exports.store = {
         state: {},
         updateProgress: {
             url: '../course-study/course-front/doc-progress'
+        },
+        researchActivity: {
+            url: '../exam/research-activity'
         }
     },
     callbacks: {
@@ -30,6 +35,11 @@ exports.store = {
             var model = this.models.updateProgress;
             model.set(payload);
             return this.post(model);
+        },
+        getResearchById: function(payload) {
+            var model = this.models.researchActivity;
+            model.set({ id: payload.id });
+            return this.get(model);
         }
     }
 };

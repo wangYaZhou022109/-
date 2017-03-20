@@ -85,7 +85,7 @@ view('shortcut')
                                 .inline-block.common-title > echo(Global.currentUser.name)
                                 .inline-block.lv LV3
                             .item.small-font
-                                a.mr-1(href='/#/center/index') 进入个人中心
+                                a.mr-1(href='#/center/index') 进入个人中心
                                 a#logout(href='javascript:;') 退出账号
                     .user-info-list.border.top
                         .item.border.right

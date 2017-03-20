@@ -1,5 +1,4 @@
-
-exports.type = 'form';
+// exports.type = 'form';
 
 exports.bindings = {
     state: false

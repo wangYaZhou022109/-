@@ -1,5 +1,6 @@
 var maps = require('./app/util/maps'),
-    D = require('drizzlejs');
+    D = require('drizzlejs'),
+    NO_DETAIL_MODE = -1;
 
 exports.items = {
     content: 'content',
@@ -8,7 +9,9 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: { data: {} },
+        state: {
+            data: {}
+        },
         answer: {
             data: {},
             mixin: {
@@ -29,10 +32,9 @@ exports.store = {
                 judgement = maps.get('judgement'),
                 types = maps.get('question-types'),
                 difficultys = maps.get('question-difficultys');
-
             D.assign(data, question);
 
-            if (question.questionAttrs.length > 0) {
+            if (payload.mode !== NO_DETAIL_MODE && question.questionAttrs.length > 0) {
                 data.answer = judgement[Number(question.questionAttrs[0].value)].value;
             }
 

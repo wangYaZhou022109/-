@@ -32,10 +32,12 @@ exports.handlers = {
         });
     },
     showResearchAnswerDetail: function(id) {
-        var mod = this.module.items['exam/research-activity/research-answer-detail'];
-        this.app.viewport.ground(mod, {
-            researchRecordId: id
-        });
+        var url = '#/exam/research-activity/research-answer-detail/' + id;
+        window.open(url, '_blank');
+        // return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
+        //     var url = '#/exam/research-activity/research-summary-detail/' + data.id;
+        //     window.open(url, '_blank');
+        // });
     }
 };
 

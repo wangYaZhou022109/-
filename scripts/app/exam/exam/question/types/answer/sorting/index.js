@@ -9,7 +9,9 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: { data: {} },
+        state: {
+            data: {}
+        },
         answer: {
             data: {},
             mixin: {

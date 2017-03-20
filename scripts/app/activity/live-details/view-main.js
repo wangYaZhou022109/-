@@ -4,7 +4,8 @@ exports.bindings = {
     gensee: true,
     courses: true,
     down: true,
-    sub: true
+    sub: true,
+    collect: true,
 };
 
 exports.events = {
@@ -15,6 +16,9 @@ exports.handlers = {
 
 exports.actions = {
     'click sub-*': 'subGensee',
+    'click cancelsub-*': 'cancelsubGensee',
+    'click collect': 'collect',
+    'click cancel-collect': 'cancelCollect',
 };
 
 exports.dataForActions = {
@@ -23,7 +27,33 @@ exports.dataForActions = {
             resolve(data);
         });
     },
+    cancelsubGensee: function(data) {
+        var d = this.Promise.create(function(resolve) {
+            resolve(data);
+        });
+        return d;
+    },
+    collect: function() {
+        var gensee = this.bindings.gensee.data;
+        return {
+            businessId: gensee.id,
+            businessType: 5,
+            collectName: gensee.subject
+        };
+    },
+    cancelCollect: function(payload) {
+        return payload;
+    }
 
+};
+
+exports.actionCallbacks = {
+    collect: function() {
+        this.app.message.success('收藏成功');
+    },
+    cancelCollect: function() {
+        this.app.message.success('取消收藏成功');
+    },
 };
 
 exports.dataForTemplate = {

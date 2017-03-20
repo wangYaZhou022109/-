@@ -3,7 +3,7 @@ module > .subject-detail-page(data-region='main')
 
 view('main')
     .top > #banner
-        .subject-banner.swiper-container
+        .banner.subject-banner
             ul
                 li.current(style="background-image:url(images/demo/banner1.jpg)")
                 li(style="background-image:url(images/demo/banner1.jpg)")

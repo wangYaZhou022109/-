@@ -21,11 +21,13 @@ exports.dataForTemplate = {
 };
 
 exports.getEntity = function(id) {
-    var question = this.module.store.models.sub.getQuestionById(id);
-    D.assign(question, {
+    var question = this.module.store.models.sub.getQuestionById(id),
+        q = {};
+    D.assign(q, question, {
+        score: question.score / 100,
         questionAttrs: question.questionAttrCopys
     });
-    return question;
+    return q;
 };
 
 exports.getEntityModuleName = function(id, question) {
