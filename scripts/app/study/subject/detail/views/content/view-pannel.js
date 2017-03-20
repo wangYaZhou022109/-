@@ -15,12 +15,13 @@ exports.handlers = {
     beginStudy: function(id, events, element) {
         var url = element.getAttribute('data-url'),
             sectionType = Number(element.getAttribute('data-section-type')),
+            resourceId = element.getAttribute('data-resource-id'),
             me = this,
             view;
         if (sectionType === 12 || sectionType === 13) {
             view = this.module.items['research-tips'];
-            this.module.dispatch('getResearchById', { id: id }).then(function(data) {
-                me.app.viewport.modal(view, { research: data });
+            this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
+                me.app.viewport.modal(view);
             });
         } else if (sectionType === 9) {
             view = this.module.items['exam-tips'];

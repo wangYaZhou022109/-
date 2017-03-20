@@ -25,7 +25,7 @@ view('pannel')
                                     if(current)
                                         i.iconfont.icon-hand-right
                                     if(preview)
-                                        a.normal(href='javascript:;' id='studyBtn-'+id data-chapter-id=chapterId data-url=btnUrl data-section-type=sectionType)
+                                        a.normal(href='javascript:;' id='studyBtn-'+id data-resource-id=resourceId data-url=btnUrl data-section-type=sectionType)
                                             .btn.radius > echo(btnText)
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
@@ -38,4 +38,4 @@ view('exam-tips')
 view('research-tips')
     .container
         .row > .col-sm-12
-            echo(research.questionaryDetail)
+            echo(researchActivity.questionaryDetail)
