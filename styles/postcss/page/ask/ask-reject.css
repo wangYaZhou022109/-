@@ -1,4 +1,4 @@
-.watch-detail1-page {
+.ask-reject-page {
     & .title-img {
         width: var(--base-gap);
         height: var(--base-gap);
@@ -13,10 +13,7 @@
     & .title-main {
         overflow: hidden;
     }
-    & .detail-img {
-        & img {
-            width: calc(var(--large-space)*4);
-            height: auto;
-        }
+    & .reject-content {
+        line-height: var(--large-space);
     }
 }

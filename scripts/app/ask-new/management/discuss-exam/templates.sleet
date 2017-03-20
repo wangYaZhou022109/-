@@ -1,9 +1,9 @@
 #! handlebars
 
-module > .watch-detail1-page
-    .watch-detail1-total(data-region="detail1-total")
+module > .discuss-exam-page
+    .discuss-exam-total(data-region="discuss-exam")
 
-view('detail1-total')
+view('discuss-exam')
     .title-img.pull-left.layout-mr-small
         img.title-radius(src="images/3.png")
     .title-main
@@ -14,11 +14,6 @@ view('detail1-total')
             | Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     .detail-img.layout-mt-small
         img(src="images/1.png")
-    .detail1-file.layout-mt-small
-        | 附件：
-        a
-            .iconfont.icon-tag-1
-            span 百度是否真的.pdf
     .detail1-person.layout-mt-small
         span 张三
         span.sub-title 分享时间：
