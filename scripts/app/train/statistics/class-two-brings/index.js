@@ -14,7 +14,7 @@ exports.store = {
         },
         classTwoBring: { url: '../train/class-two-brings' },
         download: { url: '../train/class-two0brings/download' },
-        state: { data: { classId: 3 } }
+        state: { data: { } }
     },
     callbacks: {
         init: function(payload) {
@@ -38,6 +38,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    return this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

@@ -4,6 +4,8 @@ exports.items = {
     search: 'search'
 };
 
+exports.large = true;
+
 exports.store = {
     models: {
         exams: {

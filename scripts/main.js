@@ -3,17 +3,11 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
     setting = {},
     currentUser = {};
 
-oauthOptions = {
-    clientId: 999,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'https://dev9.zhixueyun.com'
-};
-
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 21,
+    clientId: 8,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.3.208'
+    returnTo: 'http://192.168.3.183'
 };
 // @endif
 

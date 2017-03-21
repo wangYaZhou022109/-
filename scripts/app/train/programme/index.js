@@ -19,7 +19,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        classInfo: { url: '../train/classInfo/single' },
+        classInfo: { url: '../train/class-info/single' },
         offlineCourseList: { url: '../train/offline-course' },
         onlineCourseList: { url: '../train/online-course' },
         onlineCourse: { url: '../train/online-course' },
