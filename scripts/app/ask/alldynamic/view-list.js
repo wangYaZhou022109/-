@@ -51,11 +51,38 @@ exports.handlers = {
 };
 exports.actions = {
     'click trend-follow-*': 'follow',
-    'click publish-*': 'publish'
+    'click trend-unfollow-*': 'unfollow',
+    'click publish-*': 'publish',
+    'click del-question-*': 'delquestion',
+    'click del-share-*': 'delshare',
+    'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    delquestion: function(payload) {
+        var data = payload;
+        data.auditType = '1';
+        return data;
+    },
+    delshare: function(payload) {
+        var data = payload;
+        data.auditType = '2';
+        return data;
+    },
+    deldiscuss: function(payload) {
+        var data = payload;
+        data.auditType = '3';
+        return data;
+    },
     follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    unfollow: function(payload) {
         var id = payload.id,
             data = {};
         var obj = id.split('_');
@@ -78,6 +105,22 @@ exports.actionCallbacks = {
     },
     follow: function() {
         this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
+    delquestion: function() {
+        this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    delshare: function() {
+        this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    deldiscuss: function() {
+        this.app.message.success('删除成功！');
         this.module.dispatch('init');
     }
 };

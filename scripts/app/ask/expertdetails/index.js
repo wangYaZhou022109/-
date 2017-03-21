@@ -21,7 +21,7 @@ exports.store = {
         follow: {
             url: '../ask-bar/question-details/boutique'
         },
-        unfollow: { url: '../ask-bar/concern/unfollow' },
+        unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {
         init: function(payload) {
