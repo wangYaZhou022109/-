@@ -11,8 +11,10 @@ exports.items = {
     editOffline: '',
     editTask: '',
     upload: '',
+    uploadTask: '',
     courseware: '',
     'train/programme/select-course': { isModule: true },
+    'train/programme/select-member': { isModule: true },
     import: '',
     'import-upload': ''
 };
@@ -34,6 +36,7 @@ exports.store = {
         file: { url: '../human/file/upload-parse-file' },
         attachList: { url: '../train/offline-course/findAttach' },
         courseAttach: { url: '../train/course-attach' },
+        taskAttach: { url: '../train/task-attach' },
         download: { url: '../human/file/download' },
         offlineClickUpdate: { url: '../train/offline-course/click-update' },
         courseSalary: { url: '../train/courseSalary/updateByCourseId' },
@@ -421,6 +424,17 @@ exports.store = {
                 me.get(taskList);
             });
         },
+        editTask: function(payload) {
+            var model = this.models.task,
+                files = this.models.files;
+            model.set(payload);
+            files.clear();
+            this.get(model).then(function(data) {
+                var d = data;
+                files.data = d[0].attachList;
+                files.changed();
+            });
+        },
         saveTask: function(payload) {
             var task = this.models.task,
                 taskList = this.models.taskList,
@@ -438,6 +452,67 @@ exports.store = {
                 this.app.message.success('提交成功');
                 me.get(taskList);
             });
+        },
+        uploadTaskFile: function(payload) {
+            var img = payload[0],
+                files = this.models.files.data || [],
+                taskAttach = this.models.taskAttach,
+                newFile = {},
+                state = this.models.state.data,
+                me = this;
+            newFile.id = img.attachmentId;
+            newFile.attachmentId = img.attachmentId;
+            newFile.attachmentType = img.contentType;
+            newFile.attachmentName = img.name;
+            newFile.extension = img.extension;
+            if (state.uploadType) {
+                taskAttach.clear();
+                taskAttach.data.taskId = state.taskId;
+                taskAttach.data.attachmentId = img.attachmentId;
+                taskAttach.data.attachmentType = img.contentType;
+                taskAttach.data.attachmentName = img.name;
+                this.save(taskAttach).then(function(data) {
+                    newFile.id = data[0].id;
+                    files.push(newFile);
+                    me.models.files.changed();
+                });
+            } else {
+                files.push(newFile);
+                this.models.files.changed();
+            }
+        },
+        delTaskAttach: function(payload) {
+            var files = this.models.files.data,
+                state = this.models.state.data,
+                taskAttach = this.models.taskAttach,
+                index;
+            index = files.findIndex(function(e) {
+                return e.id === payload.id;
+            });
+            files.splice(index, 1);
+            this.models.files.changed();
+            if (state.delType) {
+                taskAttach.set(payload);
+                this.del(taskAttach);
+            }
+        },
+        updateTaskAttachName: function(data) {
+            var files = this.models.files.data,
+                state = this.models.state.data,
+                taskAttach = this.models.taskAttach,
+                target,
+                index;
+            index = files.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = files[index];
+            target.attachmentName = data.attachmentName;
+            this.models.files.changed();
+            if (state.updateType) {
+                taskAttach.clear();
+                taskAttach.set(data);
+                this.save(taskAttach);
+            }
         },
     }
 };

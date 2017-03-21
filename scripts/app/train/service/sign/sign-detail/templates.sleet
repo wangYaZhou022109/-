@@ -8,11 +8,11 @@ module > .train-class-page
 
 view('count')
     echo('签到名称')
-    echo(signDetail.[0].sign.name)
+    echo(signOne.name)
     echo('签到时间')
-    dateTime(signDetail.[0].sign.startTime) + echo(' 至 ') + dateTime(signDetail.[0].sign.endTime)
+    dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
     echo('迟到时间')
-    dateTime(signDetail.[0].sign.lateTime)
+    dateTime(signOne.lateTime)
     br
     echo('应出勤')
     echo('正常签到')

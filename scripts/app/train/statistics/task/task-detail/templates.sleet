@@ -6,21 +6,21 @@ module > .train-class-page
             .div(data-region='search')
             .div(data-region='main')
 
-view('count')
+view('count') > form.vertical
     echo('作业名称:')
-    echo(taskDetail.[0].task.name)
+    echo(taskOne.name)
     br
     echo('已提交人数')
-    echo(taskDetail.[0].task.number)
+    echo(taskOne.number)
 
 view('search') > form.vertical
     div.row.text-center
         div.col-sm-3
             echo('用户名')
-            input.input(name='memberName')
+            input.input(name='name')
         div.col-sm-3
             echo('姓名')
-            input.input(name='memberFullName')
+            input.input(name='fullName')
         div.col-sm-3
             btn.btn#search > echo('查询')
 
@@ -31,14 +31,14 @@ view('main')
                 th > echo('序号')
                 th > echo('员工编号')
                 th > echo('员工姓名')
-                th > echo('员工电话')
-                th > echo('签到时间')
-                th > echo('状态')
+                th > echo('所属部门')
+                th > echo('提交时间')
+                th > echo('得分')
             tbody > each(taskDetail) > tr
                 td > echo(i)
                 td > echo(member.name)
                 td > echo(member.fullName)
-                td > echo(member.organization)
+                td > echo(organizationName)
                 td > dateTime(createTime)
                 td > a(id='approval'+id data-name='id' data-value=id) > echo('审核')
     #pager.pagination

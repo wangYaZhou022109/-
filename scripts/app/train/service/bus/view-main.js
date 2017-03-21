@@ -1,5 +1,3 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
 exports.bindings = {
     buss: true,
     bus: false,
@@ -16,12 +14,10 @@ exports.events = {
 };
 
 exports.handlers = {
-    count: function(id, e, target) {
-        var region;
-        var el = $(target).parents('.div')[0];
-        var model = this.module.items['train/service/bus/bus-detail'];
-        region = new D.Region(this.app, this.module, el, id);
-        region.show(model, { id: id });
+    count: function(data) {
+        var me = this,
+            model = this.module.items['train/service/bus/bus-detail'];
+        me.app.viewport.modal(model, { id: data });
     },
     addBus: function() {
         var buss = this.bindings.buss.data,

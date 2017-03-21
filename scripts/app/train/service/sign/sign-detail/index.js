@@ -6,12 +6,17 @@ exports.items = {
     batchStatus: '',
 };
 
+exports.large = true;
+
 exports.store = {
     models: {
         signDetail: {
-            url: '../train/sign-detail/signDetail',
+            url: '../train/sign-detail/sign-detail',
             type: 'pageable',
             root: 'items'
+        },
+        signOne: {
+            url: '../train/sign-detail/one'
         },
         export: {
             url: '../train/sign-detail/download'
@@ -55,9 +60,13 @@ exports.store = {
             this.get(this.models.export);
         },
         init: function(payload) {
-            var signDetail = this.models.signDetail;
+            var signDetail = this.models.signDetail,
+                signOne = this.models.signOne;
             signDetail.params = payload;
             signDetail.set({ id: payload.id });
+            signOne.params.id = payload.id;
+            signOne.clear();
+            this.get(signOne);
             return this.get(signDetail);
         },
         search: function(payload) {

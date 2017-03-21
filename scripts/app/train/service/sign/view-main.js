@@ -1,6 +1,3 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
-exports.type = 'dynamic';
 exports.bindings = {
     signs: true,
     sign: false
@@ -36,12 +33,10 @@ exports.handlers = {
         var flag = this.$$('input[name="signId"]').length === this.$$('input[name="signId"]:checked').length;
         this.$('check-all').checked = flag;
     },
-    detail: function(id, e, target) {
-        var region;
-        var el = $(target).parents('.div')[0];
-        var model = this.module.items['train/service/sign/sign-detail'];
-        region = new D.Region(this.app, this.module, el, id);
-        region.show(model, { id: id });
+    detail: function(data) {
+        var me = this,
+            model = me.module.items['train/service/sign/sign-detail'];
+        me.app.viewport.modal(model, { id: data });
     },
     leave: function(data) {
         var me = this,

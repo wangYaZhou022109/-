@@ -6,11 +6,11 @@ module > .train-class-page
             .div(data-region='search')
             .div(data-region='main')
 
-view('count')
+view('count') > form.vertical
     echo('统计名称')
-    echo(busDetail.[0].bus.name)
+    echo(busOne.name)
     echo('统计时间')
-    dateTime(busDetail.[0].bus.startTime) + echo(' 至 ') + dateTime(busDetail.[0].bus.endTime)
+    dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
     br
     echo('当日晚去往地铁')
     echo('当日晚去往机场')

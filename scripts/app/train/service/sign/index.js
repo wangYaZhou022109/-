@@ -17,7 +17,7 @@ exports.store = {
             url: '../train/sign'
         },
         batchDelete: {
-            url: '../train/sign/batchDelete'
+            url: '../train/sign/batch-delete'
         },
         state: { data: {} }
     },

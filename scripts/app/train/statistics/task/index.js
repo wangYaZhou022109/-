@@ -13,7 +13,7 @@ exports.store = {
         task: {
             url: '../train/task'
         },
-        state: { data: { classId: 3 } },
+        state: { data: { classId: 1 } },
     },
     callbacks: {
         init: function(payload) {

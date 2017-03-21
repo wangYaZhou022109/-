@@ -34,11 +34,17 @@ exports.dataForActions = {
                 resolve(false);
             });
         });
-    }
+    },
+    editTask: function(data) {
+        this.bindings.state.data.type = 'update';
+        return data;
+    },
 };
 
 exports.actionCallbacks = {
-
+    editTask: function() {
+        this.app.viewport.modal(this.module.items.editTask);
+    },
 };
 
 exports.dataForTemplate = {
