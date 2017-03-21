@@ -320,14 +320,9 @@
 
     & .min-banner {
         margin: var(--space) 0;
-        & ul {
-            @apply --clearfix;
-        }
 
         & li {
-            width: 20%;
             border-right: 1px solid var(--border-color);
-            float: left;
 
             &:last-child {
                 border: none;
