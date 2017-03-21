@@ -91,15 +91,15 @@ D.assign(Swiper.prototype, {
     },
 
     toPrev: function() {
-        if(this.current > 0) {
+        if (this.current > 0) {
             this.goto(this.current - 1);
-        };
+        }
     },
 
     toNext: function() {
-        if(this.current < this.items.length) {
+        if (this.current < this.items.length) {
             this.goto(this.current + 1);
-        };
+        }
     },
 
     insertNavigation: function() {
@@ -175,14 +175,12 @@ D.assign(Swiper.prototype, {
                     }
 
                     me.translate(num);
-                    console.log(num);
                 },
 
                 translateRight: function() {
                     num--;
                     if (num < -Math.floor(listWidth / transformWidth)) {
                         num = -Math.floor(listWidth / transformWidth);
-                        console.log(num);
                         return;
                     }
                     if (num === -Number(listWidth / transformWidth)) {
@@ -190,7 +188,6 @@ D.assign(Swiper.prototype, {
                         return;
                     }
                     me.translate(num);
-
                 },
 
                 toPrev: function() { me.toPrev(); },
@@ -210,7 +207,7 @@ D.assign(Swiper.prototype, {
         if (this.options.slider) {
             this.btnPrev.addEventListener('click', me.actions.translateLeft, false);
             this.btnNext.addEventListener('click', me.actions.translateRight, false);
-        };
+        }
 
         if (this.options.btn) {
             this.btnPrev.addEventListener('click', me.actions.toPrev, false);
@@ -232,13 +229,12 @@ D.assign(Swiper.prototype, {
         if (this.options.slider) {
             this.btnPrev.removeEventListener('click', me.actions.translateLeft);
             this.btnNext.removeEventListener('click', me.actions.translateRight);
-        };
+        }
 
         if (this.options.slider) {
             this.btnPrev.removeEventListener('click', me.actions.toPrev);
             this.btnNext.removeEventListener('click', me.actions.toNext);
-        };
-
+        }
     },
 
     destroy: function() {

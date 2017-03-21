@@ -113,31 +113,31 @@ exports.dataForTemplate = {
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'exams' },
-},{
+}, {
     id: 'swiper-1',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-2',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-3',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-4',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-5',
     name: 'swiper',
     options: {
