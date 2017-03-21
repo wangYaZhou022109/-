@@ -304,6 +304,9 @@ module.exports = {
     },
     'exam-type-simple': {
         1: '正式', 2: '非正式'
+    },
+    'push-is-required': { // 推送元素性质
+        1: '选修', 2: '必修'
     }
 };
 

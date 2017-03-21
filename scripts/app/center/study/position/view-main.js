@@ -2,13 +2,9 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     positionList: true,
-    currentPId: true
-};
-
-exports.afterRender = function() {
-    var me = this,
-        currentPId = me.bindings.currentPId.value;
-    me.module.dispatch('loadStudy', { currentPId: currentPId });
+    currentPId: true,
+    studyList: true,
+    download: false
 };
 
 exports.events = {
@@ -56,5 +52,37 @@ exports.dataForTemplate = {
             }
         });
         return position;
+    },
+    studyList: function(data) {
+        var studyList = data.studyList;
+        _.map(studyList, function(m) {
+            var obj = m;
+            var opeText = { 1: '我要学习', 2: '继续学习', 3: '查看详情' };
+            obj.opeTxt = opeText[obj.taskStatus];
+            obj.btnUrl = '#/study/course/detail/' + obj.pushObject.businessId;
+            if (obj.businessType === '2') {
+                obj.btnUrl = '#/study/subject/detail/' + obj.pushObject.businessId;
+            }
+            return obj;
+        });
+        return studyList;
     }
 };
+
+exports.components = [
+    function() {
+        var positionList = this.bindings.positionList.data,
+            url = '';
+        if (positionList && positionList.length > 0) {
+            url = this.bindings.download.getFullUrl() + '/' + positionList[0].instructionId;
+        }
+        return {
+            id: 'viewPdf',
+            name: 'picker',
+            options: {
+                picker: 'player-pdf',
+                pdfUrl: url
+            }
+        };
+    }
+];

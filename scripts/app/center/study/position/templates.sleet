@@ -15,12 +15,13 @@ view('main')
     .person-post-main
         section.section
             .h3 岗位说明书
-            .layout-mt-small.post-description-content
-                echo(position.instructionId)
+            .layout-mt-small.post-description-content(style='overflow:auto;position:relative;height:400px')
+                if(position.instructionId)
+                    #viewPdf
         section.section
             .h3 专业能力标准/资质模型
             .layout-mt-small
-                echo(position.desc)
+                @echo(position.desc)
         section.section
             .h3 学习要求
             .layout-mt-small
@@ -32,32 +33,11 @@ view('main')
                         th 选/必修
                         th 完成状态
                         th 操作
-                    tbody
+                    tbody > each(studyList)
                         tr
-                            td 1
-                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
-                            td 专题
-                            td 必修
-                            td 未完成
-                            td > a 我要学习
-                        tr
-                            td 1
-                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
-                            td 专题
-                            td 必修
-                            td 未完成
-                            td > a 我要学习
-                        tr
-                            td 1
-                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
-                            td 专题
-                            td 必修
-                            td 未完成
-                            td > a 我要学习
-                        tr
-                            td 1
-                            td.nowrap > .text-overflow 名称名称名称名称名称名称名称名称名称名称名称
-                            td 专题
-                            td 必修
-                            td 未完成
-                            td > a 我要学习
+                            td > echo(i+1)
+                            td.nowrap > .text-overflow > echo(pushObject.businessName)
+                            td > map('push-business-type' pushObject.businessType)
+                            td > map('push-is-required' pushObject.isRequired)
+                            td > map('push-record-task-status' taskStatus)
+                            td > a(href=btnUrl target='_blank') > echo(opeTxt)
