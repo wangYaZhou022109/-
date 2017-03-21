@@ -24,12 +24,16 @@ view('banner-notice')
         .item#showInfo > i.iconfont.icon-mark + span 我的活动
 
 view('min-banner') > .container
-    ul
+    #min-banner > ul
         li > img(src='images/home/m-1.png')
         li > img(src='images/home/m-2.png')
         li > img(src='images/home/m-3.png')
         li > img(src='images/home/m-4.png')
         li > img(src='images/home/m-5.png')
+        li > img(src='images/home/m-1.png')
+        li > img(src='images/home/m-2.png')
+        li > img(src='images/home/m-3.png')
+
 
 view('layout-1') > .container
     .home-title-row
@@ -286,43 +290,83 @@ view('lecture') > .container
     .home-title-row
         .title 讲师榜
         .more more
-    .lecture-list > ul
-        li
-            .lecture-pic > img(src='images/d2.jpg')
-            .lecture-info
-                .title 讲师姓名
-                .sub-text 深圳分公司/互联网中心
-                .sub-text 高级讲师
-        li
-            .lecture-pic > img(src='images/d4.jpg')
-            .lecture-info
-                .title 讲师姓名
-                .sub-text 深圳分公司/互联网中心
-                .sub-text 高级讲师
-        li
-            .lecture-pic > img(src='images/d2.jpg')
-            .lecture-info
-                .title 讲师姓名
-                .sub-text 深圳分公司/互联网中心
-                .sub-text 高级讲师
-        li
-            .lecture-pic > img(src='images/d4.jpg')
-            .lecture-info
-                .title 讲师姓名
-                .sub-text 深圳分公司/互联网中心
-                .sub-text 高级讲师
-        li
-            .lecture-pic > img(src='images/d2.jpg')
-            .lecture-info
-                .title 讲师姓名
-                .sub-text 深圳分公司/互联网中心
-                .sub-text 高级讲师
-        li
-            .lecture-pic > img(src='images/d4.jpg')
-            .lecture-info
-                .title 讲师姓名
-                .sub-text 深圳分公司/互联网中心
-                .sub-text 高级讲师
+    #swiper > ul.full
+
+        li > .lecture-list > ul
+            li
+                .lecture-pic > img(src='images/d2.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d4.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d2.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d4.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d2.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d4.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+
+        li > .lecture-list > ul
+            li
+                .lecture-pic > img(src='images/d2.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d4.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d2.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d4.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d2.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
+            li
+                .lecture-pic > img(src='images/d4.jpg')
+                .lecture-info
+                    .title 讲师姓名
+                    .sub-text 深圳分公司/互联网中心
+                    .sub-text 高级讲师
 
 view('rank') > .ranklist-section.container > .bar-list
     .bar.studend

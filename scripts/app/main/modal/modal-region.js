@@ -24,12 +24,14 @@ D.extend(ModalRegion, D.MultiRegion, {
         this.style = type;
         if (renderable.options.large) this.style += ' large';
         if (renderable.options.small) this.style += ' small';
+        if (renderable.options.auto) this.style += ' auto';
         this._moveOverlay();
 
         return this.show('main/modal', {
             key: this.depth + '',
             options: D.assign({ animation: animates[type] }, options, { view: renderable })
         });
+
     },
 
     pop: function() {
