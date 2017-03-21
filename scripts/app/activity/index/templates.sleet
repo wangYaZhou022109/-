@@ -64,9 +64,9 @@ view('list')
                             .pull-right.tip-text
                             .title.text-overflow > | PPT动画完全自学入门
                         .bottom.sub-text
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-view
                             echo(subNumber)
-                            i.iconfont.icon-favorite.m-left
+                            i.iconfont.icon-star-full.m-left
                             dateMinute(startTime)
                 li
                     .content
@@ -80,9 +80,9 @@ view('list')
                             .pull-right.tip-text
                             .title.text-overflow > | PPT动画完全自学入门
                         .bottom.sub-text
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-view
                             | 999
-                            i.iconfont.icon-favorite.m-left
+                            i.iconfont.icon-star-full.m-left
                             | 9.1
                 li
                     .content
@@ -96,9 +96,9 @@ view('list')
                             .pull-right.tip-text
                             .title.text-overflow > | PPT动画完全自学入门
                         .bottom.sub-text
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-view
                             | 999
-                            i.iconfont.icon-favorite.m-left
+                            i.iconfont.icon-star-full.m-left
                             | 9.1
             li 5个一组，
             li 5个一组，
@@ -130,62 +130,62 @@ view('list')
                 each(exams)
                     li
                         .activity-item.clearfix
-                            i.iconfont.icon-favorite.pull-left.activity-item-icon
+                            i.iconfont.icon-exam.pull-left.activity-item-icon
                             a(id='exam-' + id) > echo(name)
                             .sub-text.small-font
                                 echo(joinNumber) | 参与
-                                i.iconfont.icon-favorite.m-left.m-right
+                                i.iconfont.icon-date.m-left.m-right
                                 dateTime(startTime) + echo('至') + dateTime(endTime)
         .h3.m-bottom 班级
         #swiper-4 > ul.full
             li > .main-list > ul.activity-item-box.activity-item-class.cell-3
                 li
                     .activity-item.clearfix
-                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        i.iconfont.icon-class.pull-left.activity-item-icon
                         a 中国移动“两学一做”学习教育
                         .sub-text.small-font
                             | 5623参与
-                            i.iconfont.icon-favorite.m-left.m-right
+                            i.iconfont.icon-date.m-left.m-right
                             | 9-28 至 12-25
                 li
                     .activity-item.clearfix
-                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        i.iconfont.icon-class.pull-left.activity-item-icon
                         a 中国移动“两学一做”学习教育
                         .sub-text.small-font
                             | 5623参与
-                            i.iconfont.icon-favorite.m-left.m-right
+                            i.iconfont.icon-date.m-left.m-right
                             | 9-28 至 12-25
                 li
                     .activity-item.clearfix
-                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        i.iconfont.icon-class.pull-left.activity-item-icon
                         a 中国移动“两学一做”学习教育
                         .sub-text.small-font
                             | 5623参与
-                            i.iconfont.icon-favorite.m-left.m-right
+                            i.iconfont.icon-date.m-left.m-right
                             | 9-28 至 12-25
                 li
                     .activity-item.clearfix
-                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        i.iconfont.icon-class.pull-left.activity-item-icon
                         a 中国移动“两学一做”学习教育
                         .sub-text.small-font
                             | 5623参与
-                            i.iconfont.icon-favorite.m-left.m-right
+                            i.iconfont.icon-date.m-left.m-right
                             | 9-28 至 12-25
                 li
                     .activity-item.clearfix
-                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        i.iconfont.icon-class.pull-left.activity-item-icon
                         a 中国移动“两学一做”学习教育
                         .sub-text.small-font
                             | 5623参与
-                            i.iconfont.icon-favorite.m-left.m-right
+                            i.iconfont.icon-date.m-left.m-right
                             | 9-28 至 12-25
                 li
                     .activity-item.clearfix
-                        i.iconfont.icon-favorite.pull-left.activity-item-icon
+                        i.iconfont.icon-class.pull-left.activity-item-icon
                         a 中国移动“两学一做”学习教育
                         .sub-text.small-font
                             | 5623参与
-                            i.iconfont.icon-favorite.m-left.m-right
+                            i.iconfont.icon-date.m-left.m-right
                             | 9-28 至 12-25
         .h3.m-bottom 调研
         #swiper-5 > ul.full
@@ -193,11 +193,11 @@ view('list')
                 each(researchActivitys)
                     li
                         .activity-item.clearfix
-                            i.iconfont.icon-favorite.pull-left.activity-item-icon
+                            i.iconfont.icon-note.pull-left.activity-item-icon
                             a(id='research-' + id) > echo(name)
                             .sub-text.small-font
                                 echo(joinNumber) | 参与
-                                i.iconfont.icon-favorite.m-left.m-right
+                                i.iconfont.icon-date.m-left.m-right
                                 dateTime(startTime) + echo('至') + dateTime(endTime)
         #  .h3.m-bottom 待办
         #  ul.arrow-box.activity-item-box.activity-item-exam.cell-3
