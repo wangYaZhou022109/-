@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
    // details: 'details'
 };
@@ -6,13 +7,34 @@ exports.store = {
     models: {
         state: {},
         trends: { url: '../ask-bar/trends' },
-        article: { url: '../ask-bar/question/insert-article' }
+        article: { url: '../ask-bar/question/insert-article' },
+        speech: {
+            url: '../system/speech-set',
+            mixin: {
+                getData: function(id) {
+                    var speechset;
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            speechset = d;
+                        }
+                    });
+                    return speechset;
+                }
+            }
+        }
     },
     callbacks: {
+        init: function() {
+            var speech = this.models.speech;
+            return this.get(speech);
+        },
         release: function(payload) {
-            var me = this;
+            var me = this,
+                data = payload,
+                speechset = this.models.speech.getData('1');
             this.models.article.set(payload);
-            // console.log(payload);
+            data.speechset = speechset.status;
+            this.models.article.set(data);
             return this.post(this.models.article).then(function() {
                 me.app.message.success('操作成功');
                 // me.app.show('content', 'ask/content');
@@ -25,6 +47,7 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    return this.dispatch('init');
 };
 
 
