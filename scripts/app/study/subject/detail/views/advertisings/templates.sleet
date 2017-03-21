@@ -1,12 +1,15 @@
 #!handlebars
 
 module
-    .top(data-region='advertising')
+    .top#banner(data-region='advertising')
 
 view('advertising')
-    #banner.banner.subject-banner
+    #  #banner.banner.subject-banner
+    #      ul > each(advertisings)
+    #          li(style='background:url(' + downUrl ')'  ) > a(href=linkUrl target='_blank')
+    #banner.subject-banner.swiper-container
         ul > each(advertisings)
-            li(style='background:url(' + downUrl ')'  ) > a(href=linkUrl target='_blank')
+            li > a(href=linkUrl target='_blank') > img(src=downUrl)
         section.section.banner-info
             .title-row
                 .inline-block.layout-mr > .h3 > echo(subject.name)
@@ -40,6 +43,8 @@ view('advertising')
                             .item#collect
                                 i.iconfont.icon-favorite
                                 span 收藏
-            .title-row > each(subject.topics)
-                .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
+            #  .title-row > each(subject.topics)
+            #      .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
+            .title-row > each(subject.businessTopics)
+                .inline-block.m-right.m-bottom.bg-white.sub-title > echo(name)
             p.info-detail > string('subject.description') > @echo(':' subject.description)

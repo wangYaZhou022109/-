@@ -12,9 +12,9 @@ oauthOptions = {
 // @ifndef PRODUCTION
 oauthOptions = {
 
-    clientId: 34,
+    clientId: 13,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.3.131'
+    returnTo: 'http://localhost'
 
 };
 // @endif
@@ -53,6 +53,7 @@ require('./app/ext/views/form/form-view');
 require('./app/ext/views/dynamic-view');
 require('./app/ext/pdf');
 require('./app/ext/videojs');
+require('./app/ext/tree');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/ext/highcharts');

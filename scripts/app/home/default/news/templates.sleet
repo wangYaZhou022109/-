@@ -1,9 +1,8 @@
 #!handlebars
 
-
-module > .container
-    #news(data-region='news')
-
+module
+    .section-news
+        #news(data-region='news')
 
 view('news')
     .news-list.clearfix
@@ -14,5 +13,5 @@ view('news')
             .icon.arrow.next > .iconfont.icon-arrow-up#pre
             .icon > .iconfont.icon-more
 
-        ul > inner(news state.currentIndex)
-            li > echo(title)
+        ul > inner(newsList state.currentIndex)
+            li > a(href='/#/news/detail/'+id+'/0' target='_blank') > echo(title)

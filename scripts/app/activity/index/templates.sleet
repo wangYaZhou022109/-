@@ -65,9 +65,9 @@ view('list')
                             .title.text-overflow > | PPT动画完全自学入门
                         .bottom.sub-text
                             i.iconfont.icon-favorite
-                            | 999
+                            echo(subNumber)
                             i.iconfont.icon-favorite.m-left
-                            | 9.1
+                            dateMinute(startTime)
                 li
                     .content
                         .img

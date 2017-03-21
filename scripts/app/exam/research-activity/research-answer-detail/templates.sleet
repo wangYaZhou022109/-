@@ -12,8 +12,7 @@ view('title')
     .pull-left.title > echo(researchRecord.researchQuestionary.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right 调研人：阿端
-        .btn#submit 提交
+            li.border.right > echo('调研人:' + researchRecord.member.name)
 
 view('main')
     .preview-content
@@ -27,9 +26,6 @@ view('side')
         li(id='list-item-' + @index)
             .list-title > i.iconfont.icon-type.m-right + echo(name)
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
-                .items-pagination.sub-text
-                    .up-arrow.text-hover-main-color(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
-                    .down-arrow.text-hover-main-color(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
                 each(questions)
                     compare(status 'eq' 'check')
                         a.list-item.check(id='question-'+id href='#question-' + id) > echo(questionIndex)

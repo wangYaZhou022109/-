@@ -7,7 +7,8 @@ exports.bindings = {
     gensees: true,
     exams: true,
     researchActivitys: true,
-    toDos: true
+    toDos: true,
+    researchRecord: false
 };
 
 exports.events = {
@@ -53,8 +54,17 @@ exports.handlers = {
     showResearchPaper: function(id) {
         var mod = this.module.items['research-tips'],
             me = this;
-        return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
-            me.app.viewport.modal(mod, { research: data });
+        return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
+            var record = me.bindings.researchRecord.data;
+            if (record.status === 0) {
+                me.app.viewport.modal(mod, { research: record.researchQuestionary });
+            } else if (record.researchQuestionary.permitViewCount === 1) {
+                window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
+            } else {
+                window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
+            }
+            me.module.dispatch('clearResearchRecord');
+            return '';
         });
     }
 };

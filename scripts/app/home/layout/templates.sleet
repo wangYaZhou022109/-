@@ -1,9 +1,8 @@
 #!handlebars
 
 module > .home-page.layout
-    .banner-bar
-        .banner(data-region='banner')
-        .banner-notice(data-region='banner-notice')
+    .banner(data-region='banner')
+    .banner-notice(data-region='banner-notice')
     .min-banner(data-region='min-banner')
     .section-news(data-region='news')
     .section(data-region='layout-4')

@@ -1,0 +1,7 @@
+#! handlebars
+module
+    .ranklist-section.container(data-region='main')
+view('main')
+    .bar-list
+        each(rankModules)
+            div(data-dynamic-key=moduleCode)

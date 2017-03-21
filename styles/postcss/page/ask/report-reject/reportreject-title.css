@@ -1,0 +1,17 @@
+.report-reject-page {
+    & .report-person {
+        & .item {
+            & img {
+                width: var(--large-space);
+                height: auto;
+            }
+        }
+    }
+    & .report-content-item {
+        line-height: var(--large-space);
+    }
+    & .reson-height {
+        height: calc(var(--section-gap)*2);
+        overflow: auto;
+    }
+}

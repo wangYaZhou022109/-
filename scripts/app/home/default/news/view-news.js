@@ -1,5 +1,5 @@
 module.exports = {
-    bindings: { news: true, state: true },
+    bindings: { newsList: true, state: true },
     events: {
         'click next': 'nextNews',
         'click pre': 'preNews'

@@ -69,5 +69,6 @@ module.exports = {
     iam: '我是',
     invitation: '邀请',
     'next-step': '下一步',
-    you: '你的'
+    you: '你的',
+    unfollow: '取消关注'
 };

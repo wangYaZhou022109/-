@@ -2,13 +2,10 @@ var D = require('drizzlejs');
 var $ = require('jquery');
 
 exports.bindings = {
-    popupstate: true,
     follow: true
 };
 
 exports.events = {
-    'click middle-menu-*': 'showMenu',
-    'click follow-*': 'follow'
 };
 
 exports.handlers = {

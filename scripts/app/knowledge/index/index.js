@@ -10,6 +10,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        download: { url: '../human/file/download' },
         knowledges: {
             url: '../course-study/knowledge/front',
             type: 'pageable',
@@ -39,8 +40,7 @@ exports.store = {
         menu2: { data: [] },
         topicIds: { url: '../course-study/knowledge/topics', autoLoad: 'after' },
         topics: { url: '../system/topic/ids' },
-        members: {},    // 知识达人
-        search: {}, // 搜索
+        search: {} // 搜索
     },
     callbacks: {
         init: function() {
