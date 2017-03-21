@@ -84,7 +84,7 @@ exports.dataForTemplate = {
             }
             if (currentTime > exam.applicantStartTime && currentTime < exam.applicantEndTime) {
                 exam.status = 4;
-                if (exam.needApplicant === 1) {
+                if (exam.needApplicant === 1 && (!exam.examRecord || exam.examRecord.status < 2)) {
                     if (!exam.signUp || !exam.signUp.status) {
                         exam.buttons = [signupButton];
                     } else if (exam.signUp

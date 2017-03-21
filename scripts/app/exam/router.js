@@ -2,16 +2,22 @@ var $ = require('jquery');
 
 exports.routes = {
     'index/:id': 'showIndex',
+    'exam/paper/:id': 'showPaper',
     'exam/answer-paper/:id': 'showAnswerPaper',
     'exam/mark-paper/:id': 'showMarkPaper',
     'exam/score-detail/:id': 'showScoreDetail',
     'research-activity/research-answer-detail/:id': 'showResearchAnswerDetail',
     'research-activity/research-summary-detail/:id': 'showResearchSummaryDetail',
-    'research-activity/research-detail/:id': 'showResearchDetail'
+    'research-activity/research-detail/:id': 'showResearchDetail',
+    'research-activity/index-demo/:id': 'showIndexDemo'
 };
 
 exports.showIndex = function(id) {
     return this.app.show('content', 'exam/index', { id: id });
+};
+
+exports.showPaper = function(fir, id) {
+    return this.app.show('content', 'exam/exam/paper', { examId: id });
 };
 
 exports.showMarkPaper = function(fir, id) {
@@ -39,6 +45,7 @@ exports.showResearchSummaryDetail = function(fir, id) {
 };
 
 exports.interceptors = {
+    'exam/paper': 'clearHeadAndBottom',
     'exam/answer-paper': 'clearHeadAndBottom',
     'exam/mark-paper': 'clearHeadAndBottom',
     'exam/score-detail': 'clearHeadAndBottom',
