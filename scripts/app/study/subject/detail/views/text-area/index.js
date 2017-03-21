@@ -1,1 +1,1 @@
-module.exports = require('./app/study/subject/detail/views/content/index');
+module.exports = require('./app/study/subject/detail/views/discuss/index');
