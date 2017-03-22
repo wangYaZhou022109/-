@@ -23,7 +23,7 @@ view('contents')
     .topic-total.layout-mt-small
         .topic-category.layout-mb-small 
             a.title-color.m-right(id='checkAll' data-name='id' data-value=id ) > echo('全部')
-            each(topicname)
+            each(topicType)
                 a.sub-title.m-right(id='checkOne-' + id data-name='id' data-value=id ) > echo(name)
         .topics.m-top > each(topicname)
             .tag-btn.radius > echo(name)
