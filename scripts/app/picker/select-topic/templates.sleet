@@ -17,12 +17,12 @@ view('title')
                 | 话题
                 .close.iconfont.icon-close
     .topic-search.relative
-        input.input.w-full.m-top.p-left(placeholder="搜索你擅长的")
+        input.input.w-full.p-left(placeholder="搜索你擅长的")
         .iconfont.icon-search.topic-icon
 view('contents')
     .topic-total.layout-mt-small
         .topic-category.layout-mb-small
-            a.title-color.m-right 全部
+            a.normal.m-right 全部
             a.sub-title.m-right 管理
             a.sub-title.m-right 设计
             a.sub-title.m-right 产品

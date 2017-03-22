@@ -21,7 +21,7 @@ view('main')
                 .form-row
                     label.required 知识名称
                     .content.icon-choice
-                        input.input#name(name='name') + .tips 0/60
+                        input.input.p-right#name(name='name') + .tips 0/60
             .form-row
                 label.label.required 所属目录
                 #categoryId
