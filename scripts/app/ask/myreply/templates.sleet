@@ -2,130 +2,247 @@
 module
     div(data-region='list')
 view('list')
-    ul 
-        li
-            echo('我的分享  '+'你共回复'+myreply.length+'次') 
-        hr
-    each(myreply)
-        compare(question.type 'eq' 1) 
-            ul 
-                li(style='font-weight:bold')
-                    a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+    .tabs.line.mb-1
+        .pull-right > echo('你共回复了'+myreply.length+'个问题')
+        ul
+            li.active > echo('我的回复')
+    .comment-list.ask-list > ul
+        #  li.text-right
+        #      echo('我的提问'+'你共提问了'+questions.length+'个问题') 
+        each(myreply)
+            compare(question.type 'eq' 1)
                 li
-                    echo(question.content) 
+                    .user-pic > img(src='images/d2.jpg')
+                    .comment-content
+                        .h4 > echo(problem.title)
+                        .comment-text > echo(problem.content)
+                        .user-info
+                            a(href='javascript:;') > echo('我')
+                            span > echo('讨论了'+replyman + '的问题') 
+                            span.sub-text > data(createTime)
+                        .comment-operation
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .text-right
+                                .item > a.normal(href='javascript:;') 关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 删除
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
                 li
-                    echo('我' + '讨论了'+replyman + '的问题')
+                    .user-pic > img(src='images/d2.jpg')
+                    .comment-content
+                        .h4 > echo(problem.title)
+                        .comment-text > echo(problem.content)
+                        .user-info
+                            a(href='javascript:;') > echo('我')
+                            span > echo('回复了'+replyman + '对问题的讨论') 
+                            span.sub-text > data(createTime)
+                        .comment-operation
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .text-right
+                                .item > a.normal(href='javascript:;') 关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 删除
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
+            compare(question.type 'eq' 2)
                 li
-                    date(createTime) 
+                    .user-pic > img(src='images/d2.jpg')
+                    .comment-content
+                        .h4 > echo(problem.title)
+                        .comment-text > echo(problem.content)
+                        .user-info
+                            a(href='javascript:;') > echo('我')
+                            span > echo('讨论了'+replyman + '的分享') 
+                            span.sub-text > data(createTime)
+                        .comment-operation
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .text-right
+                                .item > a.normal(href='javascript:;') 关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 删除
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
                 li
-                    echo('来自：')
-                    echo(question.title)
+                    .user-pic > img(src='images/d2.jpg')
+                    .comment-content
+                        .h4 > echo(problem.title)
+                        .comment-text > echo(problem.content)
+                        .user-info
+                            a(href='javascript:;') > echo('我')
+                            span > echo('回复了'+replyman + '对分享的讨论') 
+                            span.sub-text > data(createTime)
+                        .comment-operation
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .text-right
+                                .item > a.normal(href='javascript:;') 关注
+                                .item > a.normal(href='javascript:;') 添加讨论
+                                .item
+                                    .drop-down-wrapper
+                                        .drop-down-btn 分享
+                                        .drop-down-content > .content
+                                            ul
+                                                li 分享1
+                                                li 分享2
+                                                li 分享3
+                                .item > a.normal(href='javascript:;') 删除
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复                                                                        
+#  module
+#      div(data-region='list')
+#  view('list')
+#      ul 
+#          li
+#              echo('我的分享  '+'你共回复'+myreply.length+'次') 
+#          hr
+#      each(myreply)
+#          compare(question.type 'eq' 1) 
+#              ul 
+#                  li(style='font-weight:bold')
+#                      a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+#                      .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+#                  li
+#                      echo(question.content) 
+#                  li
+#                      echo('我' + '讨论了'+replyman + '的问题')
+#                  li
+#                      date(createTime) 
+#                  li
+#                      echo('来自：')
+#                      echo(question.title)
                     
-                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-                    echo('赞()')
-                    echo('2条讨论')
-                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-                    echo('|')
-                    echo(auditStatus)
-                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-                    hr
-                li 
-            ul 
-                li(style='font-weight:bold')
-                    a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
-                li
-                    echo(questionDiscuss.content) 
-                li
-                    echo('我' + '回复了'+replyman + '对问题的讨论')
-                li
-                    date(questionDiscuss.createTime) 
-                li
-                    echo('来自：')
-                    echo(questionDiscuss.content)
+#                      a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+#                      echo('赞()')
+#                      echo('2条讨论')
+#                      a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+#                      echo('|')
+#                      echo(auditStatus)
+#                      a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+#                      hr
+#                  li 
+#              ul 
+#                  li(style='font-weight:bold')
+#                      a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+#                      .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+#                  li
+#                      echo(questionDiscuss.content) 
+#                  li
+#                      echo('我' + '回复了'+replyman + '对问题的讨论')
+#                  li
+#                      date(questionDiscuss.createTime) 
+#                  li
+#                      echo('来自：')
+#                      echo(questionDiscuss.content)
                     
-                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-                    echo('赞()')
-                    echo('2条讨论')
-                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-                    echo('|')
-                    echo(auditStatus)
-                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-                    hr
-                li
-        compare(question.type 'eq' 2) 
-            ul 
-                li(style='font-weight:bold')
-                    a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
-                li
-                    echo(content) 
-                li
-                    echo('我' + '讨论了'+replyman + '的分享')
-                li
-                    date(createTime) 
-                li
-                    echo('来自：')
-                    echo(question.title)
+#                      a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+#                      echo('赞()')
+#                      echo('2条讨论')
+#                      a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+#                      echo('|')
+#                      echo(auditStatus)
+#                      a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+#                      hr
+#                  li
+#          compare(question.type 'eq' 2) 
+#              ul 
+#                  li(style='font-weight:bold')
+#                      a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+#                      .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+#                  li
+#                      echo(content) 
+#                  li
+#                      echo('我' + '讨论了'+replyman + '的分享')
+#                  li
+#                      date(createTime) 
+#                  li
+#                      echo('来自：')
+#                      echo(question.title)
                     
-                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-                    echo('赞()')
-                    echo('2条讨论')
-                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-                    echo('|')
-                    echo(auditStatus)
-                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-                    hr
-                li
-            ul 
-                li(style='font-weight:bold')
-                    a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
-                li
-                    echo(questionDiscuss.content) 
-                li
-                    echo('我' + '回复了'+replyman + '对分享的讨论')
-                li
-                    date(questionDiscuss.createTime) 
-                li
-                    echo('来自：')
-                    echo(questionDiscuss.content)
+#                      a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+#                      echo('赞()')
+#                      echo('2条讨论')
+#                      a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+#                      echo('|')
+#                      echo(auditStatus)
+#                      a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+#                      hr
+#                  li
+#              ul 
+#                  li(style='font-weight:bold')
+#                      a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+#                      .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+#                  li
+#                      echo(questionDiscuss.content) 
+#                  li
+#                      echo('我' + '回复了'+replyman + '对分享的讨论')
+#                  li
+#                      date(questionDiscuss.createTime) 
+#                  li
+#                      echo('来自：')
+#                      echo(questionDiscuss.content)
                     
-                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-                    echo('赞()')
-                    echo('2条讨论')
-                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-                    echo('|')
-                    echo(auditStatus)
-                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-                    hr
-                li
+#                      a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+#                      echo('赞()')
+#                      echo('2条讨论')
+#                      a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+#                      echo('|')
+#                      echo(auditStatus)
+#                      a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+#                      hr
+#                  li
 
-            ul 
-                li(style='font-weight:bold')
-                    a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
-                li
-                    echo(content) 
-                li
-                    echo('我' + '回复了'+replyman + '对讨论的回复')
-                li
-                    date(createTime) 
-                li
-                    echo('来自：')
-                    echo(content)
+#              ul 
+#                  li(style='font-weight:bold')
+#                      a(id='myreply-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+#                      .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+#                  li
+#                      echo(content) 
+#                  li
+#                      echo('我' + '回复了'+replyman + '对讨论的回复')
+#                  li
+#                      date(createTime) 
+#                  li
+#                      echo('来自：')
+#                      echo(content)
                     
-                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-                    echo('赞()')
-                    echo('2条讨论')
-                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-                    echo('|')
-                    echo(auditStatus)
-                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-                    hr
-                li     
-                    a('更多》》')
+#                      a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+#                      echo('赞()')
+#                      echo('2条讨论')
+#                      a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+#                      echo('|')
+#                      echo(auditStatus)
+#                      a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+#                      hr
+#                  li     
+#                      a('更多》》')
                     
                   
 
