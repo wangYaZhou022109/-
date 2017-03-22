@@ -14,14 +14,14 @@ view('list')
                 li
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
-                        .h4 > echo(problem.title)
-                        .comment-text > echo(problem.content)
+                        .h4 > echo(title)
+                        .comment-text > echo(content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('讨论了'+replyman + '的问题') 
                             span.sub-text > data(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(question.topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
@@ -40,14 +40,14 @@ view('list')
                 li
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
-                        .h4 > echo(problem.title)
-                        .comment-text > echo(problem.content)
+                        .h4 > echo(title)
+                        .comment-text > echo(content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('回复了'+replyman + '对问题的讨论') 
                             span.sub-text > data(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(question.topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
@@ -67,14 +67,14 @@ view('list')
                 li
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
-                        .h4 > echo(problem.title)
-                        .comment-text > echo(problem.content)
+                        .h4 > echo(title)
+                        .comment-text > echo(content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('讨论了'+replyman + '的分享') 
                             span.sub-text > data(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(question.topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
@@ -93,14 +93,14 @@ view('list')
                 li
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
-                        .h4 > echo(problem.title)
-                        .comment-text > echo(problem.content)
+                        .h4 > echo(title)
+                        .comment-text > echo(content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('回复了'+replyman + '对分享的讨论') 
                             span.sub-text > data(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(question.topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
