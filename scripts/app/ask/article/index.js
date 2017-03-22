@@ -1,8 +1,8 @@
 var _ = require('lodash/collection');
-exports.items = {
-   // details: 'details'
-};
 
+exports.items = {
+    details: 'main'
+};
 exports.store = {
     models: {
         state: {},
@@ -51,7 +51,7 @@ exports.afterRender = function() {
 };
 
 
-exports.title = '我要分享';
+exports.title = '发表文章';
 
 exports.buttons = [{
     text: '发布',

@@ -30,7 +30,7 @@ exports.store = {
                     var answerRecord = _.find(this.data.answerRecords, [
                         'researchRecordId', this.data.researchRecordId
                     ]);
-                    return name === answerRecord.answer;
+                    return answerRecord && name === answerRecord.answer;
                 }
             }
         }
