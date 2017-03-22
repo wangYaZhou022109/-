@@ -37,7 +37,6 @@ exports.store = {
             data.id = '1';
             data.topic = '1';
             this.models.article.set(data);
-            console.log(this.models.article);
             return this.post(this.models.article).then(function() {
                 me.app.message.success('操作成功');
                 // me.app.show('content', 'ask/content');
