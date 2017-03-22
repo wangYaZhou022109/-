@@ -11,10 +11,15 @@ var showHandler = function(payload) {
         12: '#/exam/research-activity/research-detail/'
     };
     return function() {
+        var me = this;
         if (innerType.indexOf(payload.sectionType) !== -1) {
             this.module.dispatch('showSection', payload);
         } else if (detailUrlMap[payload.sectionType]) {
             window.open(detailUrlMap[payload.sectionType] + '' + payload.id);
+        } else if (payload.sectionType === 12) {
+            this.module.dispatch('getResearchById', { id: payload.resourceId }).then(function() {
+                me.app.viewport.modal(me.module.items['research-tips']);
+            });
         }
     };
 };

@@ -169,3 +169,8 @@ view('student')
         .grid-row
             each(lastestUser)
                 .col-md-3 > img.block(src=headPortrait title=fullName)
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(researchActivity.questionaryDetail)
