@@ -118,7 +118,7 @@ view('questionnaire')
                     td > echo(i)
                     td > echo(resourceName)
                     td > map('class-questionnaire-type' type)
-                    td > dateTime(startTIme)
+                    td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
                         a(id='edit-qnr-'+id data-name='id' data-value=id) 编辑

@@ -3,7 +3,7 @@ var _ = require('lodash/collection');
 exports.title = '文件上传';
 
 exports.bindings = {
-    file: 'changeFile',
+    importFile: 'changeFile',
     fileInfo: true,
     state: false
 };
@@ -13,7 +13,7 @@ exports.components = function() {
         id: 'uploader2',
         name: 'uploader',
         options: {
-            model: 'file',
+            model: 'importFile',
             chunk_size: '100mb',
             multi_selection: false,
             filters: {
@@ -28,7 +28,7 @@ exports.components = function() {
 };
 
 exports.changeFile = function() {
-    var imgs = this.bindings.file.data.imgs,
+    var imgs = this.bindings.importFile.data.imgs,
         state = this.bindings.fileInfo,
         classId = this.bindings.state.data.classId;
     var items = _.map(imgs, function(v) {

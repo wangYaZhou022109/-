@@ -15,6 +15,7 @@ exports.items = {
     courseware: '',
     'train/programme/select-course': { isModule: true },
     'train/programme/select-member': { isModule: true },
+    'train/programme/select-research-activity': { isModule: true },
     import: '',
     'import-upload': ''
 };
@@ -26,6 +27,7 @@ exports.store = {
         onlineCourseList: { url: '../train/online-course' },
         onlineCourse: { url: '../train/online-course' },
         questionnaireList: { url: '../train/questionnaire' },
+        research: { url: '../train/questionnaire' },
         taskList: { url: '../train/class-task' },
         task: { url: '../train/class-task' },
         themeList: { url: '../train/theme' },
@@ -34,6 +36,7 @@ exports.store = {
         offlineCourse: { url: '../train/offline-course' },
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         file: { url: '../human/file/upload-parse-file' },
+        importFile: { url: '../human/file/upload-file' },
         attachList: { url: '../train/offline-course/findAttach' },
         courseAttach: { url: '../train/course-attach' },
         taskAttach: { url: '../train/task-attach' },
@@ -514,6 +517,31 @@ exports.store = {
                 this.save(taskAttach);
             }
         },
+        saveResearch: function(payload) {
+            var questionnaireList = this.models.questionnaireList,
+                research = this.models.research,
+                state = this.models.state.data,
+                me = this;
+            D.assign(payload, {
+                classId: state.classId
+            });
+            research.set(payload);
+            this.save(research).then(function() {
+                questionnaireList.params.classId = state.classId;
+                me.get(questionnaireList);
+            });
+        },
+        delQuestionnair: function(payload) {
+            var research = this.models.research,
+                questionnaireList = this.models.questionnaireList,
+                state = this.models.state.data,
+                me = this;
+            research.set(payload);
+            this.del(research).then(function() {
+                questionnaireList.params.classId = state.classId;
+                me.get(questionnaireList);
+            });
+        }
     }
 };
 
