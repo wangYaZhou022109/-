@@ -15,6 +15,7 @@ exports.store = {
         access: { url: '../course-study/gensee-student/access' },
         accessList: { url: '../course-study/gensee-student/access-list' },
         collect: { url: '../system/collect' },
+        score: { url: '../course-study/course-front/score' },
     },
     callbacks: {
         init: function(params) {
@@ -70,6 +71,17 @@ exports.store = {
             collect.set(payload);
             return this.del(collect, { slient: true }).then(function() {
                 collect.set({}, true);
+            });
+        },
+        score: function() {
+            // 评分
+            var score = this.models.score,
+                gensee = this.models.gensee;
+            score.data.businessId = gensee.data.id;
+            score.data.businessType = 5;
+            return this.save(score).then(function(data) {
+                gensee.data.courseScore = data[0];
+                gensee.changed();
             });
         },
     }

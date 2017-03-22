@@ -1,0 +1,25 @@
+#! handlebars
+
+module > .discuss-exam-page
+    .discuss-exam-total(data-region="discuss-exam")
+
+view('discuss-exam')
+    .title-img.pull-left.layout-mr-small
+        img.title-radius(src="images/3.png")
+    .title-main
+        .h5 圈内捧谷歌黑百度的风气是怎样形成的？百度是否真的不如谷歌那样[业界良心]？
+        .detail1-content.m-top.small-font
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            | Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    .detail-img.layout-mt-small
+        img(src="images/1.png")
+    .detail1-person.layout-mt-small
+        span 张三
+        span.sub-title 分享时间：
+        span.sub-title 201-09-12 10:23
+    .detail1-alink.layout-mt-small
+        a 关联话题：
+        a 话题名称
+        a 话题名称
+    textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注")

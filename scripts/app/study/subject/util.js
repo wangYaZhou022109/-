@@ -49,8 +49,10 @@ exports.setBtn = function(chapters, type, currentSectionId) {
                 section.btnUrl = section.url;
             } else if (sectionType === 8) {
                 section.btnUrl = prefixUrl[sectionType] + section.referenceId;
+            } else {
+                section.btnUrl = prefixUrl[sectionType] + section.resourceId;
             }
-            section.btnUrl = prefixUrl[sectionType] + section.resourceId;
+
             section.preview = true;
             if (type === 'preview') {
                 section.preview = false;

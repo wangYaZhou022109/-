@@ -99,11 +99,6 @@ exports.store = {
             var exams = this.models.exams.data;
             return _.find(exams, ['id', payload.id]);
         },
-        getResearchById: function(payload) {
-            var researchs = this.models.researchActivitys.data;
-            this.models.researchRecord.clear();
-            return _.find(researchs, ['id', payload.id]);
-        },
         signUp: function(examId) {
             this.models.signUp.set({ examId: examId });
             return this.post(this.models.signUp);
@@ -124,6 +119,7 @@ exports.store = {
             });
         },
         getResearchRecord: function(payload) {
+            this.models.researchRecord.clear();
             D.assign(this.models.researchRecord.params, payload);
             return this.get(this.models.researchRecord);
         },

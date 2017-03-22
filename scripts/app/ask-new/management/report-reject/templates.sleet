@@ -1,0 +1,54 @@
+#! handlebars
+
+module > .report-reject-page
+    .report-reject-title(data-region="reportreject-title")
+    .report-reject-content(data-region="reportreject-content")
+
+view('reportreject-title')
+    .report-person.clearfix
+        .item.pull-left.layout-mr
+            span 举报人：
+            img.inline-block(src="images/1.png")
+            img.inline-block(src="images/2.png")
+            img.inline-block(src="images/3.png")
+        .item.pull-left.layout-mr
+            span.inline-block 共举报次数：
+            span 99
+        .sourse.pull-left.layout-mr
+            span 来源：
+            span 问吧
+        .reported.pull-left.layout-mr
+            span 被举报人：
+            span 某某某
+view('reportreject-content')
+    .report-content.layout-mt-small
+        p 举报内容：
+        .report-content-item.small-font
+            | 圈内捧谷歌黑百度的风气是怎样形成的？圈内捧谷歌黑百度的风气是怎样形成的？圈内捧谷歌黑百度的风气是怎样形成的？圈内捧谷歌黑百度的风气是怎样形成的？
+    .report-reson.reson-height
+        p 举报理由：
+        .small-font
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            | magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        .report-type.border.bottom.clearfix.layout-mt-small
+            .small-font.pull-left.m-bottom.sub-title 举报类型：其他
+            .small-font.pull-right.m-bottom.sub-title 2015-09-08 14:55
+        p 举报理由：
+        .small-font
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            | magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        .report-type.border.bottom.clearfix.layout-mt-small
+            .small-font.pull-left.m-bottom.sub-title 举报类型：其他
+            .small-font.pull-right.m-bottom.sub-title 2015-09-08 14:55
+        p 举报理由：
+        .small-font
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            | magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        .report-type.border.bottom.clearfix.layout-mt-small
+            .small-font.pull-left.m-bottom.sub-title 举报类型：其他
+            .small-font.pull-right.m-bottom.sub-title 2015-09-08 14:55
+    p 审核备注：
+    .report-content-item.small-font
+        | 圈内捧谷歌黑百度的风气是怎样形成的？圈内捧谷歌黑百度的风气是怎样形成的
+        | 圈内捧谷歌黑百度的风气是怎样形成的？圈内捧谷歌黑百度的风气是怎样形成的
+        | 圈内捧谷歌黑百度的风气是怎样形成的？圈内捧谷歌黑百度的风气是怎样形成的
