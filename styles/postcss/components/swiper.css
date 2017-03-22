@@ -3,8 +3,8 @@
     overflow: hidden;
     position: relative;
 
-    &.banner {
-        & li {
+    &.banner{
+        & > ul > li {
             position: absolute;
             left: 100%;
             width: 100%;
@@ -28,7 +28,24 @@
                 max-width: 100%;
             }
         }
+    }
 
+
+    &  > ul {
+        @apply --transition;
+        white-space: nowrap;
+        width: 100%;
+
+        & > li {
+            display: inline-block;
+            white-space: normal;
+            overflow: hidden;
+            width: 20%;
+        }
+
+        &.full > li {
+            width: 100%;
+        }
     }
 
     & .navigation {
@@ -53,6 +70,41 @@
                 opacity: 1;
             }
         }
+    }
+
+    & .btn-prev,
+    & .btn-next {
+        @apply --transition;
+
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 2em 0;
+        cursor: pointer;
+        width: calc(var(--space) * 2);
+        overflow: hidden;
+        background-color: rgba(0,0,0,.1);
+        color: var(--font-tip-color);
+
+        &:hover {
+            background-color: rgba(0,0,0,.5);
+            color: white;
+        }
+        & .iconfont {
+            position: absolute;
+            top: 50%;
+            margin-top: -.5em;
+            left: 50%;
+            margin-left: -.5em;
+            cursor: pointer;
+        }
+    }
+    & .btn-prev {
+        left: 0;
+    }
+    & .btn-next {
+        right: calc(var(--large-space) / 4);
     }
 
 }

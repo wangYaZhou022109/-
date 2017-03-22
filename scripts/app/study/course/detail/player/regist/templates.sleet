@@ -1,0 +1,10 @@
+#!handlebars
+
+module
+    div(data-region='default')
+
+view('default')
+    if(state.loading)
+        .player-start-btn > .btn 加载中,请稍后
+    else 
+        .player-start-btn > .btn#register 开始学习

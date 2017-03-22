@@ -13,8 +13,6 @@ exports.components = [function() {
         id: 'activitys-ul',
         name: 'swiper',
         options: {
-            autoplay: false,
-            current: 1
         }
     };
     return obj;

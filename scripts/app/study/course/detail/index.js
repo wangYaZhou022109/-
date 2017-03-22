@@ -130,6 +130,7 @@ exports.store = {
         },
         turnPage: function() {
             var pageInfo = this.models.courseRelated.getPageInfo();
+            if (pageInfo.pageCount === 0) return false;
             if (pageInfo.page === pageInfo.pageCount) {
                 this.models.courseRelated.turnToPage(1);
             } else {

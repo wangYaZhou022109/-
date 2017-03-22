@@ -1,0 +1,22 @@
+#! handlebars
+module
+    .bar.studend(data-region='main')
+
+view('main')
+    .clearfix
+        .pull-left > .title-icon > .iconfont.icon-star
+        .right-title
+            .home-title-row.horizontail.border
+                .title > echo('学员榜')
+                .more more
+            .title-more
+                span.sub-title 学习时长排行榜
+
+    ul > each(studyRank)
+        li
+            .pull-right
+                b > echo(studyTotalTime)
+            .cont
+                .icon.custom-color-1 > .iconfont.icon-star-full
+                span > echo(memberName)
+                span.sub-text > echo(organizationName)

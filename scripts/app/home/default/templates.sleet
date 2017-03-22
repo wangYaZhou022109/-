@@ -1,16 +1,19 @@
 #!handlebars
 
-module > .home-page
-    .banner(data-region='banner')
-    .news(data-region='news')
+module > .home-page.layout
     div(data-region='main')
-    # .section.bg-highlight(data-region='online-course')
-    # .section(data-region='study-subject')
-    # .section.bg-highlight(data-region='recommend-activity')
-    # .section.lecture(data-region='lecture')
-    # .section(data-region='ranklist')
+    # .banner(data-region='banner')
+    # .banner-notice(data-region='banner-notice')
+    # .min-banner(data-region='min-banner')
+    # .section-news(data-region='news')
+    # .section(data-region='layout-4')
+    # .section(data-region='layout-3')
+    # .section(data-region='layout-5')
+    # .section(data-region='layout-1')
+    # .section(data-region='layout-2')
+    # .section(data-region='lecture')
+    # .section(data-region='rank')
 
 view('main')
-    .home-page
-        each(modules)
-            .section(data-dynamic-key=id)
+    each(modules)
+        div(data-dynamic-key=id)

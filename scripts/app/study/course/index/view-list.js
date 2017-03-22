@@ -34,7 +34,9 @@ exports.handlers = {
         return this.module.dispatch('search', data);
     },
     selectTopic: function(id) {
-        this.module.dispatch('search', { topicId: id });
+        var selectId = this.bindings.search.data.topicId;
+        var topicId = (selectId === id) ? null : id;
+        this.module.dispatch('search', { topicId: topicId });
     },
     changeCompanyType: function(id) {
         this.module.dispatch('search', { companyType: id });
@@ -61,10 +63,9 @@ exports.dataForTemplate = {
     },
     sortStatus: function(data) {
         return {
-            shelve_asc: data.search.orderBy === '0' && data.search.order === 1,
-            shelve_desc: data.search.orderBy === '0' && data.search.order === 2,
-            member_asc: data.search.orderBy === '1' && data.search.order === 1,
-            member_desc: data.search.orderBy === '1' && data.search.order === 2
+            new: data.search.orderBy === '0',
+            member: data.search.orderBy === '1',
+            best: data.search.orderBy === '2'
         };
     },
     topics: function(data) {

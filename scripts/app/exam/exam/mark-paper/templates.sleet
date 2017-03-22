@@ -6,11 +6,6 @@ module > .achievement-content
     .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
-view('count-down')
-    .side-top > .time
-        i.iconfont.icon-time
-        div(class='inline-block' data-dynamic-key='countDown')
-
 view('side')
     ul.list > each(types)
         li(id='list-item-' + @index)

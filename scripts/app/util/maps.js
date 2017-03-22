@@ -304,6 +304,9 @@ module.exports = {
     },
     'exam-type-simple': {
         1: '正式', 2: '非正式'
+    },
+    'live-status': {
+        1: '待开始', 2: '直播中', 3: '已结束'
     }
 };
 
