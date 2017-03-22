@@ -17,7 +17,10 @@ exports.store = {
             url: '../exam/activity/recommends',
             data: []
         },
-        gensees: { url: '../course-study/gensee-student/list' },
+        gensees: { url: '../course-study/gensee-student/list',
+            type: 'pageable',
+            root: 'items',
+            pageSize: 20 },
         activity: { url: '../exam/activity' },
         params: { data: { all: true } },
         down: { url: '../human/file/download' },
@@ -39,6 +42,9 @@ exports.store = {
         // 待办 阅卷，暂时写在这里 测试
         toDos: {
             url: '../exam/to-do'
+        },
+        researchRecord: {
+            url: '../exam/research-record/get-by-research'
         }
     },
     callbacks: {
@@ -93,10 +99,6 @@ exports.store = {
             var exams = this.models.exams.data;
             return _.find(exams, ['id', payload.id]);
         },
-        getResearchById: function(payload) {
-            var researchs = this.models.researchActivitys.data;
-            return _.find(researchs, ['id', payload.id]);
-        },
         signUp: function(examId) {
             this.models.signUp.set({ examId: examId });
             return this.post(this.models.signUp);
@@ -115,6 +117,14 @@ exports.store = {
                 me.models.currentExam.data.signUp = data[0].signUp;
                 me.models.currentExam.changed();
             });
+        },
+        getResearchRecord: function(payload) {
+            this.models.researchRecord.clear();
+            D.assign(this.models.researchRecord.params, payload);
+            return this.get(this.models.researchRecord);
+        },
+        clearResearchRecord: function() {
+            this.models.researchRecord.clear();
         }
     }
 };

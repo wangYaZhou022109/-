@@ -1,0 +1,16 @@
+.ask-exam-page {
+    & .title-img {
+        width: var(--base-gap);
+        height: var(--base-gap);
+        & img {
+            width: 100%;
+            height: 100%;
+            &.title-radius {
+                border-radius: var(--space);
+            }
+        }
+    }
+    & .title-main {
+        overflow: hidden;
+    }
+}

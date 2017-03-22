@@ -1,16 +1,31 @@
 #!handlebars
 
-module > .form(id = 'form')
-    .form-row
-        label.required > string('question-title')
-        .content > input.input(name='title' id= 'title' value=''  x-rule='') + .tips 0/60
-    .form-row
-        label.required > string('related-topics')
-        .content > input.input(name='topic'  id= 'topic' value=''  x-rule='') + .choice 选择
-    .form-row.textarea-row
-        label > string('detailed-description')
-        .content > textarea.input(rows='5')(name='content' id= 'content') + .tips 0/60
-    .form-row
-        .content > a > i.iconfont.icon-link + span > string('upload-attachments')
-            
- 
+module > .form-page
+    .form(id = 'form')
+        .form-row
+            label.required > string('question-title')
+            .content > input.input(name='title' id= 'title' value=''  x-rule='') + .tips 0/60
+        .form-row
+            label.required > string('related-topics')
+            .content > input.input(name='topic'  id= 'topic' value=''  x-rule='') + .choice 选择
+        .form-row.textarea-row
+            label > string('detailed-description')
+            .content > textarea.input(rows='5')(name='content' id= 'content') + .tips 0/60
+        .form-row
+            .content > a > i.iconfont.icon-link + span > string('upload-attachments')
+        .form-row.textarea-row
+            label 关联标签
+            .content
+                .tag-input#tags
+                    .tag-btn.radius > .close.iconfont.icon-close + | 标签一
+                    .tag-btn.radius > .close.iconfont.icon-close + | 标签一
+                    input(placeholder='输入标签名按回车即可添加,最多添加五个')
+                .sub-row#tag-list
+                    span.small-font 推荐标签：
+                    .tag-btn.radius.selected 标签一
+                    .tag-btn.radius 标签二
+                    .tag-btn.radius.selected 标签三
+                    .tag-btn.radius 标签一
+                    .tag-btn.radius 标签二
+                    .tag-btn.radius 标签三
+                    .tag-btn.radius ...

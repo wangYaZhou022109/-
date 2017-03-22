@@ -76,7 +76,7 @@ view('shortcut')
                                 .inline-block.common-title > echo(Global.currentUser.name)
                                 .inline-block.lv LV3
                             .item.small-font
-                                a.mr-1(href='/#/center/index') 进入个人中心
+                                a.mr-1(href='#/center/index') 进入个人中心
                                 a#logout(href='javascript:;') 退出账号
                     .user-info-list.border.top
                         .item.border.right
@@ -90,5 +90,8 @@ view('shortcut')
                             input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
 
 view('logo')
-    .item > img(src='images/cmou-logo.png')
+    if(homeConfig.logo)
+        .item > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
+    else
+        .item > img(src='images/cmou-logo.png')
     .item > img(src='images/dx-logo.png')

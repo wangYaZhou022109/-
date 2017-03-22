@@ -35,7 +35,8 @@ var libs = [
         './vendors/upload/plupload.min',
         './vendors/upload/jquery.plupload.queue.min',
         './vendors/upload/zh_CN',
-        './vendors/upload/moxie.min'
+        './vendors/upload/moxie.min',
+        'crypto-js','flatpickr'
     ],
     options = {
         entries: ['./main.js'],

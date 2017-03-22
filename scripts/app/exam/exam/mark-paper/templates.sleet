@@ -6,19 +6,15 @@ module > .achievement-content
     .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
-view('count-down')
-    .side-top > .time
-        i.iconfont.icon-time
-        div(class='inline-block' data-dynamic-key='countDown')
-
 view('side')
     ul.list > each(types)
         li(id='list-item-' + @index)
-            .list-title > i.iconfont.icon-type.m-right > echo(name '(共' totalScore '分)')
+            .list-title > i.iconfont.icon-type.m-right + echo(name '(共' totalScore '分)')
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
-                .items-pagination
-                    .up-arrow(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
-                    .down-arrow(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
+                if(singleMode)
+                    .items-pagination.sub-text
+                        .up-arrow.text-hover-main-color(id='prev-' + @index) > i.iconfont.icon-arrow-up-circle-full
+                        .down-arrow.text-hover-main-color(id='next-' + @index)> i.iconfont.icon-arrow-down-circle-full
                 each(questions)
                     compare(status 'eq' 'check')
                         a.list-item.check(id='question-'+id href='#question-' + id) > echo(index)

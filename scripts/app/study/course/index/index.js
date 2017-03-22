@@ -22,10 +22,11 @@ exports.store = {
         courses: {
             url: '../course-study/course-front',
             type: 'pageable',
-            pageSize: 9,
+            pageSize: 20,
             root: 'items',
         },
-        topics: { data: [], url: '../system/topic/select', autoLoad: 'after' },
+        hotTopicIds: { url: '../course-study/course-front/hotTopicIds', autoLoad: 'after' },
+        topics: { url: '../system/topic/ids' },
         state: {},
         menu2: { data: [] },
         search: {}
@@ -33,7 +34,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search;
-            search.set({ type: 0, companyType: 0 }, true);
+            search.set({ type: 0, companyType: 0, orderBy: 0 }, true);
         },
         selectMenu1: function(payload) {
             var menu2 = this.models.menu2;
@@ -53,6 +54,11 @@ exports.store = {
             var courses = this.models.courses;
             courses.params = payload.params;
             return this.get(courses);
+        },
+        searchTopics: function(payload) {
+            var model = this.models.topics;
+            model.params = payload;
+            return this.get(model);
         }
     }
 };

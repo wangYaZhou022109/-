@@ -6,7 +6,7 @@ exports.routes = {
 };
 
 exports.showHome = function() {
-    return this.app.show('content', 'home/layout');
+    return this.app.show('content', 'home/default');
 };
 
 exports.showMessageDetail = function(id) {

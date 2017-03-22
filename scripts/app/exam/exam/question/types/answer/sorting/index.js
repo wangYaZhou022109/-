@@ -10,22 +10,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {
-            data: {},
-            mixin: {
-                countGainScore: function(answer) {
-                    if (!this.data.gainScore) {
-                        if (answer.value.length > 0) {
-                            if (_.find(this.data.questionAttrs, ['type', '0']).value === answer.value[0].value) {
-                                this.data.gainScore = this.data.score;
-                            } else {
-                                this.data.gainScore = 0;
-                            }
-                        } else {
-                            this.data.gainScore = 0;
-                        }
-                    }
-                }
-            }
+            data: {}
         },
         answer: {
             data: {},
@@ -82,7 +67,6 @@ exports.store = {
 
             data.detailMode = payload.mode;
             this.models.answer.init(payload.answer);
-            this.models.state.countGainScore(payload.answer || { key: data.id, value: [] });
         },
         save: function() {
             var data = this.models.answer.data,

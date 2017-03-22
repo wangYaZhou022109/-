@@ -2,9 +2,9 @@ var _ = require('lodash/collection'),
     D = require('drizzlejs'),
     E = require('./app/exam/exam-websocket'),
     $ = require('jquery'),
+    CryptoJS = require('crypto-js'),
     maps = require('./app/util/maps'),
     qTypes = maps.get('question-types'),
-    strings = require('./app/util/strings'),
     getCurrentStatus,
     constant = {
         ONE_HUNDRED: 100,
@@ -42,7 +42,7 @@ var _ = require('lodash/collection'),
     },
     WS,
     TO,
-    changeScreen,
+    switchScreen,
     viewAnswerDetail,
     SINGLE_CHOOSE = 1,
     MUTIPLE_CHOOSE = 2,
@@ -51,7 +51,8 @@ var _ = require('lodash/collection'),
     QUESTION_ANSWER = 5,
     READING = 6,
     SORTING = 8,
-    decryptAnswer;
+    decryptAnswer,
+    IV = '1234567890123456';
 
 exports.items = {
     side: 'side',
@@ -65,7 +66,15 @@ exports.store = {
     models: {
         exam: {
             type: 'localStorage',
-            url: '../exam/exam/exam-paper'
+            url: '../exam/exam/exam-paper',
+            mixin: {
+                decryptAnswer: function() {
+                    D.assign(this.data, {
+                        encryptContent: decryptAnswer.call(this, this.data.paper.encryptContent)
+                    });
+                    return this.data.encryptContent;
+                }
+            }
         },
         state: {
             type: 'localStorage',
@@ -214,15 +223,10 @@ exports.store = {
                     });
                 },
                 selectType: function(id) {
-                    var currentIndex = this.data.findIndex(function(d) {
-                        return d.isCurrent;
-                    });
-                    if (currentIndex > -1) {
-                        this.data[currentIndex].isCurrent = false;
-                        this.data[id].isCurrent = true;
-                    } else {
-                        this.data[id].isCurrent = true;
+                    if (!this.module.store.models.state.data.selectQuestion) {
+                        this.data[id].isCurrent = !this.data[id].isCurrent;
                     }
+                    this.module.store.models.state.data.selectQuestion = false;
                     this.save();
                 },
                 getType: function(questionId) {
@@ -236,18 +240,41 @@ exports.store = {
                     var type = this.getType(id),
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
-                        });
+                        }),
+                        me = this;
                     if (index > -1) {
                         type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
                     }
                     D.assign(this.getQuestionById(id), {
                         status: itemStatus.CURRENT
                     });
+
+                    //  把其他类型的题目的current 设置为其他状态
+                    _.forEach(_.filter(this.data, function(t) {
+                        return _.every(t.questions, function(q) {
+                            return q.id !== id;
+                        });
+                    }), function(tt) {
+                        var n = tt.questions.findIndex(function(qq) {
+                            return qq.status === itemStatus.CURRENT;
+                        });
+                        if (n !== -1) {
+                            D.assign(tt.questions[n], { status: getCurrentStatus.call(me, tt.questions[n].id) });
+                        }
+                    });
+                    this.module.store.models.state.data.selectQuestion = true;
                     this.save();
                 },
                 getCurrentQuestion: function() {
-                    var type = _.find(this.data, ['isCurrent', true]);
-                    return _.find(type.questions, ['status', itemStatus.CURRENT]);
+                    var question;
+                    _.forEach(this.data, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
                 },
                 move: function(payload) {
                     var type = this.data[payload.id],
@@ -261,26 +288,63 @@ exports.store = {
                     }
                     this.save();
                 },
-                decryptAnswer: function() {
-                    var me = this;
-                    return _.map(this.data, function(t) {
+                decryptAnswer: function(answers) {
+                    var afterDecryptQuestion = function(q, answer) {
+                        if (q.type === SINGLE_CHOOSE || q.type === MUTIPLE_CHOOSE) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    if (_.find(answer.answer, ['value', attr.name])) {
+                                        return D.assign(attr, { type: 0 });
+                                    }
+                                    return D.assign(attr, { type: q.type });
+                                })
+                            });
+                        }
+
+                        if (q.type === JUDGEMENT || q.type === SENTENCE || q.type === QUESTION_ANSWER) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    return D.assign(attr, {
+                                        name: answer.answer,
+                                        value: answer.answer
+                                    });
+                                })
+                            });
+                        }
+
+                        if (q.type === SORTING) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    if (attr.type === 0) {
+                                        return D.assign(attr, { name: answer.answer });
+                                    }
+                                    return attr;
+                                })
+                            });
+                        }
+                        return q;
+                    };
+                    this.data = _.map(this.data, function(t) {
                         return D.assign(t, {
                             questions: _.map(t.questions, function(q) {
+                                var a = _.find(answers, ['questionId', q.id]);
                                 if (q.type === READING) {
                                     return D.assign(q, {
-                                        subs: _.map(q.subs, function(sub) {
-                                            return D.assign(sub, {
-                                                questionAttrCopys: decryptAnswer.call(me, q.type, q.questionAttrCopys)
-                                            });
+                                        subs: _.map(q.subs, function(s) {
+                                            return afterDecryptQuestion(s, a);
                                         })
                                     });
                                 }
-                                return D.assign(q, {
-                                    questionAttrCopys: decryptAnswer.call(me, q.type, q.questionAttrCopys)
-                                });
+                                return afterDecryptQuestion(q, a);
                             })
                         });
                     });
+                },
+                updateStatus: function(questionId, status) {
+                    D.assign(this.getQuestionById(questionId), {
+                        status: status
+                    });
+                    this.save();
                 }
             }
         },
@@ -298,8 +362,19 @@ exports.store = {
                     return _.find(this.data.corrects, ['key', questionId]);
                 },
                 waitingCheck: function(id) {
-                    this.data.waitingChecks = _.reject(this.data.waitingChecks, ['key', id]);
-                    this.data.waitingChecks.push({ key: id });
+                    var f = false;
+                    if (_.find(this.data.waitingChecks, ['key', id])) {
+                        this.data.waitingChecks = _.reject(this.data.waitingChecks, ['key', id]);
+                    } else {
+                        this.data.waitingChecks.push({ key: id });
+                        f = true;
+                    }
+                    this.save();
+                    return f;
+                },
+                correct: function(data) {
+                    this.data.corrects = _.reject(this.data.corrects, ['questionId', data.questionId]);
+                    this.data.corrects.push(data);
                     this.save();
                 }
             }
@@ -422,15 +497,33 @@ exports.store = {
             this.models.answer.saveAnswer(payload);
             this.models.modify.saveAnswer(payload);
             this.models.state.calculate();
-            this.models.state.changed();
+            if (this.models.state.data.singleMode) {
+                this.models.state.changed();
+            } else {
+                this.models.types.updateStatus(payload.key, itemStatus.ACTIVE);
+                this.models.types.changed();
+            }
         },
         waitingCheck: function(payload) {
-            this.models.mark.waitingCheck(payload.questionId);
-            this.app.message.success(strings.get('operation-success'));
+            var f = this.models.mark.waitingCheck(payload.questionId);
+            if (!this.models.state.singleMode) {
+                if (f) {
+                    this.models.types.updateStatus(payload.questionId, itemStatus.CHECK);
+                } else {
+                    this.models.types.updateStatus(
+                        payload.questionId,
+                        getCurrentStatus.call(this.module, payload.questionId)
+                    );
+                }
+                this.models.types.changed();
+            }
+        },
+        correct: function(payload) {
+            this.models.mark.correct(payload);
         },
         submitPaper: function(payload) {
             var me = this,
-                f = false,
+                f = true,
                 examRecordId = this.module.store.models.exam.data.examRecord.id,
                 data = {
                     examRecordId: examRecordId,
@@ -441,7 +534,6 @@ exports.store = {
 
             if (payload.submitType !== submitType.Auto) {
                 TO.cancel();
-                viewAnswerDetail.call(this);
             }
 
             this.models.form.set(data);
@@ -451,15 +543,15 @@ exports.store = {
                         this.app.message.success('答案已自动保存成功');
                         me.models.modify.clear();
                     } else {
-                        me.models.exam.clear();
-                        me.models.state.clear();
-                        me.models.types.clear();
-                        me.models.mark.clear();
-                        me.models.answer.clear();
-                        me.models.modify.clear();
                         this.app.message.success('交卷成功');
-                        viewAnswerDetail.call(me);
-                        // setTimeout(window.close, 500);
+                        if (!viewAnswerDetail.call(me)) {
+                            setTimeout(function() {
+                                _.forEach(me.models, function(m) {
+                                    m.clear();
+                                });
+                                window.close();
+                            }, 500);
+                        }
                     }
                 });
             }
@@ -474,9 +566,9 @@ exports.store = {
             if (exam.allowSwitchTimes) {
                 if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
                     this.app.message.error('切屏次数已满，强制交卷');
-                    // return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
-                    //     WS.closeConnect();
-                    // });
+                    return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
+                        WS.closeConnect();
+                    });
                 }
                 D.assign(exam, {
                     lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
@@ -491,11 +583,16 @@ exports.store = {
             D.assign(this.models.decryptKey.params, {
                 examId: this.models.exam.data.id
             });
-            me.models.state.data.showAnswerDetail = 1;
-            me.models.state.changed();
-            // return this.get(this.models.decryptKey).then(function() {
-            //     me.models.types.decryptAnswer();
-            // });
+            return this.get(this.models.decryptKey).then(function() {
+                me.models.types.decryptAnswer(JSON.parse(me.models.exam.decryptAnswer()));
+                me.models.state.data.showAnswerDetail = 1;
+                me.models.state.changed();
+            });
+        },
+        clearModels: function() {
+            _.forEach(this.models, function(m) {
+                m.clear();
+            });
         }
     }
 };
@@ -514,7 +611,7 @@ exports.afterRender = function() {
                 ms = (min + 1) * (1000 * 60);
             return ms;
         },
-        f = false,
+        f = true,
         autoSubmit = function() {
             return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
                 TO.timeOutId = setTimeout(autoSubmit, getRandom());
@@ -535,7 +632,7 @@ exports.afterRender = function() {
             return me.dispatch('delay', { delay: Number(delay) });
         });
     }
-    changeScreen.call(this);
+    switchScreen.call(this);
 };
 
 WS = {
@@ -570,17 +667,20 @@ getCurrentStatus = function(id) {
     return itemStatus.INIT;
 };
 
-changeScreen = function() {
-    var me = this;
-    document.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'hidden') {
+switchScreen = function() {
+    var me = this,
+        isAllowSwitch = this.store.models.exam.data.isAllowSwitch;
+    if (isAllowSwitch && isAllowSwitch === 1) {
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                return me.dispatch('lowerSwitchTimes');
+            }
+            return true;
+        });
+        window.onblur = function() {
             return me.dispatch('lowerSwitchTimes');
-        }
-        return true;
-    });
-    window.onblur = function() {
-        return me.dispatch('lowerSwitchTimes');
-    };
+        };
+    }
 };
 
 viewAnswerDetail = function() {
@@ -588,43 +688,30 @@ viewAnswerDetail = function() {
         me = this;
     if (exam.isShowAnswerImmed === constant.SHOW_ANSWER_IMMED) {
         this.app.message.confirm('提交成功，是否马上查看详情', function() {
+            $('.achievement-content').html('');
             $('.achievement-content').hide();
             return me.module.dispatch('showAnswerDetail');
         }, function() {
+            _.forEach(me.models, function(m) {
+                m.clear();
+            });
+            window.close();
             return false;
         });
+        return true;
     }
-    return '';
+    return false;
 };
 
-decryptAnswer = function(type, attrs) {
-    var key = this.store.models.decryptKey.data.key,
-        decrypt = function(k, v) {
-            return v;
-        };
-
-    if (type === SINGLE_CHOOSE || type === MUTIPLE_CHOOSE) {
-        return _.map(attrs, function(attr) {
-            return D.assign(attr, { type: decrypt(key, attr.type) });
-        });
-    }
-
-    if (type === JUDGEMENT || type === QUESTION_ANSWER || type === SENTENCE) {
-        return _.map(attrs, function(attr) {
-            return D.assign(attr, {
-                name: decrypt(key, attr.name),
-                value: decrypt(key, attr.value)
-            });
-        });
-    }
-
-    if (type === SORTING) {
-        return _.map(attrs, function(attr) {
-            if (attr.type === 0) {
-                return D.assign(attr, { name: decrypt(key, attr.name) });
-            }
-            return attr;
-        });
-    }
-    return attrs;
+decryptAnswer = function(v) {
+    var k = this.store.models.decryptKey.data.key,
+        hex = CryptoJS.enc.Hex.parse(v),
+        base64Str = CryptoJS.enc.Base64.stringify(hex),
+        decrypted = CryptoJS.AES.decrypt(base64Str, CryptoJS.enc.Utf8.parse(k), {
+            iv: CryptoJS.enc.Utf8.parse(IV),
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }),
+        value = CryptoJS.enc.Utf8.stringify(decrypted).toString();
+    return value;
 };

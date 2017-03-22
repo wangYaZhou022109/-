@@ -7,7 +7,8 @@ exports.bindings = {
     gensees: true,
     exams: true,
     researchActivitys: true,
-    toDos: true
+    toDos: true,
+    researchRecord: false
 };
 
 exports.events = {
@@ -53,8 +54,8 @@ exports.handlers = {
     showResearchPaper: function(id) {
         var mod = this.module.items['research-tips'],
             me = this;
-        return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
-            me.app.viewport.modal(mod, { research: data });
+        return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
+            me.app.viewport.modal(mod);
         });
     }
 };
@@ -102,5 +103,35 @@ exports.dataForTemplate = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'exams' }
+    id: 'pager', name: 'pager', options: { model: 'exams' },
+}, {
+    id: 'swiper-1',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-2',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-3',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-4',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-5',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
 }];

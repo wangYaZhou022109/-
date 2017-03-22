@@ -1,5 +1,6 @@
 var maps = require('./app/util/maps'),
-    D = require('drizzlejs');
+    D = require('drizzlejs'),
+    NO_DETAIL_MODE = -1;
 
 exports.items = {
     content: 'content',
@@ -9,18 +10,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {
-            data: {},
-            mixin: {
-                countGainScore: function(answer) {
-                    if (!this.data.gainScore) {
-                        if (answer.value.length > 0 && answer.value[0].value === this.data.questionAttrs[0].value) {
-                            this.data.gainScore = this.data.score;
-                        } else {
-                            this.data.gainScore = 0;
-                        }
-                    }
-                }
-            }
+            data: {}
         },
         answer: {
             data: {},
@@ -42,10 +32,9 @@ exports.store = {
                 judgement = maps.get('judgement'),
                 types = maps.get('question-types'),
                 difficultys = maps.get('question-difficultys');
-
             D.assign(data, question);
 
-            if (question.questionAttrs.length > 0) {
+            if (payload.mode !== NO_DETAIL_MODE && question.questionAttrs.length > 0) {
                 data.answer = judgement[Number(question.questionAttrs[0].value)].value;
             }
 
@@ -58,7 +47,6 @@ exports.store = {
 
             data.detailMode = payload.mode;
             this.models.answer.init(payload.answer);
-            this.models.state.countGainScore(payload.answer || { key: data.id, value: [] });
         },
         save: function() {
             var answer = this.models.answer.data,

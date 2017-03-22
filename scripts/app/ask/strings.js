@@ -38,6 +38,7 @@ module.exports = {
     'report-2': '内容不准确',
     'report-3': '垃圾信息',
     'report-4': '其他',
+    recommend: '推荐',
     meta: '荟萃',
     my: '我的',
     me: '我',
@@ -69,5 +70,6 @@ module.exports = {
     iam: '我是',
     invitation: '邀请',
     'next-step': '下一步',
-    you: '你的'
+    you: '你的',
+    unfollow: '取消关注'
 };

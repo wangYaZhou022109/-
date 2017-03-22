@@ -34,11 +34,11 @@ exports.store = {
                 me.get(readerMembers);
             });
         },
-        score: function() {
+        score: function(payload) {
             // 评分
             var score = this.models.score,
                 knowledge = this.models.knowledge;
-            score.data.id = knowledge.data.id;
+            score.set(payload);
             return this.save(score).then(function(data) {
                 knowledge.data.avgScore = data[0].avg;
                 knowledge.changed();

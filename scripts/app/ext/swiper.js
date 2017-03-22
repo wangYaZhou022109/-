@@ -7,7 +7,11 @@ Swiper = function(el, options) {
     this.options = options;
 
     this.current = options.current || 0;
-    this.items = Array.prototype.slice.call(el.querySelectorAll('ul > li'));
+    this.list = el.querySelectorAll('ul')[0];
+    this.items = Array.prototype.slice.call(this.list.children);
+    // this.swiperHeight = this.items[0].clientHeight;
+    // this.list.style.height = this.swiperHeight + 'px';
+    // console.log(this.swiperHeight);
 
     this.init();
 };
@@ -15,6 +19,7 @@ Swiper = function(el, options) {
 D.assign(Swiper.prototype, {
     init: function() {
         var i;
+
         this.el.classList.add('swiper-container');
         this.items[this.current].classList.add('current');
 
@@ -23,6 +28,7 @@ D.assign(Swiper.prototype, {
         }
 
         this.insertNavigation();
+        this.insertBtn();
         this.bindListener();
         this.start();
     },
@@ -62,6 +68,15 @@ D.assign(Swiper.prototype, {
         });
     },
 
+    translate: function(num) {
+        var me = this.el,
+            list = me.querySelector('ul'),
+            transformWidth = list.clientWidth,
+            transform = transformWidth * num;
+
+        list.style.webkitTransform = 'translateX(' + transform + 'px)';
+    },
+
     start: function() {
         var me = this;
         if (!this.options.autoplay) return;
@@ -73,6 +88,18 @@ D.assign(Swiper.prototype, {
     stop: function() {
         if (!this.timer) return;
         clearInterval(this.timer);
+    },
+
+    toPrev: function() {
+        if (this.current > 0) {
+            this.goto(this.current - 1);
+        }
+    },
+
+    toNext: function() {
+        if (this.current < this.items.length) {
+            this.goto(this.current + 1);
+        }
     },
 
     insertNavigation: function() {
@@ -96,8 +123,39 @@ D.assign(Swiper.prototype, {
         this.el.removeChild(this.navigation);
     },
 
+    insertBtn: function() {
+        if (!this.options.slider && !this.options.btn) return;
+
+        this.btnPrev = document.createElement('div');
+        this.btnPrev.classList.add('btn-prev');
+        this.btnPrev.icon = document.createElement('i');
+        this.btnPrev.icon.classList.add('iconfont');
+        this.btnPrev.icon.classList.add('icon-arrow-left');
+        this.btnPrev.appendChild(this.btnPrev.icon);
+
+        this.btnNext = document.createElement('div');
+        this.btnNext.classList.add('btn-next');
+        this.btnNext.icon = document.createElement('i');
+        this.btnNext.icon.classList.add('iconfont');
+        this.btnNext.icon.classList.add('icon-arrow-right');
+        this.btnNext.appendChild(this.btnNext.icon);
+
+        this.el.appendChild(this.btnPrev);
+        this.el.appendChild(this.btnNext);
+    },
+
+    removeBtn: function() {
+        this.el.removeChild(this.btnPrev);
+        this.el.removeChild(this.btnNext);
+    },
+
+
     bindListener: function() {
-        var me = this;
+        var me = this,
+            num = 0,
+            list = me.el.querySelector('ul'),
+            listWidth = this.items[0].clientWidth * this.items.length,
+            transformWidth = list.clientWidth;
 
         if (!this.actions) {
             this.actions = {
@@ -106,7 +164,34 @@ D.assign(Swiper.prototype, {
                 click: function(e) {
                     var idx = Number(e.target.getAttribute('data-index'));
                     me.goto(idx);
-                }
+                },
+
+                translateLeft: function() {
+                    num++;
+
+                    if (num > 0) {
+                        num = 0;
+                        return;
+                    }
+
+                    me.translate(num);
+                },
+
+                translateRight: function() {
+                    num--;
+                    if (num < -Math.floor(listWidth / transformWidth)) {
+                        num = -Math.floor(listWidth / transformWidth);
+                        return;
+                    }
+                    if (num === -Number(listWidth / transformWidth)) {
+                        num = -Number(listWidth / transformWidth) + 1;
+                        return;
+                    }
+                    me.translate(num);
+                },
+
+                toPrev: function() { me.toPrev(); },
+                toNext: function() { me.toNext(); }
             };
         }
 
@@ -118,6 +203,16 @@ D.assign(Swiper.prototype, {
         this.dots.forEach(function(item) {
             item.addEventListener('click', me.actions.click, false);
         });
+
+        if (this.options.slider) {
+            this.btnPrev.addEventListener('click', me.actions.translateLeft, false);
+            this.btnNext.addEventListener('click', me.actions.translateRight, false);
+        }
+
+        if (this.options.btn) {
+            this.btnPrev.addEventListener('click', me.actions.toPrev, false);
+            this.btnNext.addEventListener('click', me.actions.toNext, false);
+        }
     },
 
     unbindListener: function() {
@@ -130,6 +225,16 @@ D.assign(Swiper.prototype, {
         this.dots.forEach(function(item) {
             item.removeEventListener('click', me.actions.click);
         });
+
+        if (this.options.slider) {
+            this.btnPrev.removeEventListener('click', me.actions.translateLeft);
+            this.btnNext.removeEventListener('click', me.actions.translateRight);
+        }
+
+        if (this.options.slider) {
+            this.btnPrev.removeEventListener('click', me.actions.toPrev);
+            this.btnNext.removeEventListener('click', me.actions.toNext);
+        }
     },
 
     destroy: function() {

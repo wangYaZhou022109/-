@@ -4,9 +4,9 @@ exports.items = {
 exports.store = {
     models: {
         params: { data: { isOverdue: '1' } },
-        reportaudit: { url: '../ask-bar/pendingAudit/accuseRecord' },
-        pass: { url: '../ask-bar/pendingAudit/pass' },
-        out: { url: '../ask-bar/pendingAudit/out' },
+        reportaudit: { url: '../ask-bar/pending-audit/accuseRecord' },
+        pass: { url: '../ask-bar/pending-audit/pass' },
+        out: { url: '../ask-bar/pending-audit/out' },
     },
     callbacks: {
         init: function(paylaod) {

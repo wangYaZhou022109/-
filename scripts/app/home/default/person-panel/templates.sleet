@@ -1,0 +1,12 @@
+#! handlebars
+module
+    .banner-notice(data-region='banner-notice')
+
+view('banner-notice')
+    .notice-img > img.block(src='images/2.png') + .img-title 图片的标题图片的标题图片的标题图片的标题
+    ul
+        li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
+        li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
+        li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
+    .notice-bottom > each(personPanels)
+        .item > i.iconfont.icon-type + span > echo(name)

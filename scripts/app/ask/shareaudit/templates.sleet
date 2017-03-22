@@ -1,25 +1,46 @@
 #!handlebars
-module > .course-page
-    div(data-region='shareaudit' style='height:100%;')
+module > .watch-detail1-page
+    .watch-detail1-total(data-region="shareaudit")
 
 view('shareaudit') > form.vertical
-    echo('分享审核')
-    echo(shareaudit.question.title)
-    br
-    echo(shareaudit.question.content)
-    br
-    echo('附件：')
-    a(id='preview'+shareaudit.questionAttach.originalFile) > echo(shareaudit.questionAttach.name)
-    br
-    echo(shareaudit.member.fullName)
-    br
-    echo('提问时间：')
-    date(shareaudit.createTime)
-    br
-    echo('关联话题')
-    echo(shareaudit.topicStr)
+    .h5 > echo(shareaudit.question.title)
+    .detail1-content.m-top.small-font > echo(shareaudit.question.content)
+    .detail-img.layout-mt-small
+        img(src="images/1.png")
+    .detail1-file.layout-mt-small
+        | 附件：
+        a
+            .iconfont.icon-tag-1
+            span > echo(shareaudit.questionAttach.name)
+    .detail1-person.layout-mt-small
+        span > echo(shareaudit.member.fullName)
+        span 分享时间：
+        span > date(shareaudit.createTime)
+    .detail1-alink.layout-mt-smal > each(topicList) > echo(name) + echo(' ')
     input.input(name='id' type='hidden' value=shareaudit.id)
-    textarea.input.w-full(name='auditNote' x-rule='required' rows='3' placeholder='审核备注')
-    .buttons
-        .btn#pass > i.icon-plus + span > echo('通过')
-        .btn#out > i.icon-plus + span > echo('拒绝')
+    input.input(name='questionId' type='hidden' value=shareaudit.question.id)
+    textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注" name="auditNote")
+#  module > .course-page
+#      div(data-region='shareaudit' style='height:100%;')
+
+#  view('shareaudit') > form.vertical
+#      echo('分享审核')
+#      echo(shareaudit.question.title)
+#      br
+#      echo(shareaudit.question.content)
+#      br
+#      echo('附件：')
+#      a(id='preview'+shareaudit.questionAttach.originalFile) > echo(shareaudit.questionAttach.name)
+#      br
+#      echo(shareaudit.member.fullName)
+#      br
+#      echo('提问时间：')
+#      date(shareaudit.createTime)
+#      br
+#      echo('关联话题')
+#      echo(shareaudit.topicStr)
+#      input.input(name='id' type='hidden' value=shareaudit.id)
+#      textarea.input.w-full(name='auditNote' x-rule='required' rows='3' placeholder='审核备注')
+#      .buttons
+#          .btn#pass > i.icon-plus + span > echo('通过')
+#          .btn#out > i.icon-plus + span > echo('拒绝')

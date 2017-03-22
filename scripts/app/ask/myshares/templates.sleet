@@ -2,35 +2,72 @@
 module
     div(data-region='list')
 view('list')
-    ul 
-        li
-            echo('我的分享  '+'你共分享了'+myshares.length+'个问题') 
-        hr
-    each(myshares)
-        ul 
-            li(style='font-weight:bold')
-                a(id='myshares-details-' + problem.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-                .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+    .tabs.line.mb-1
+        .pull-right > echo('你共分享了'+myshares.length+'个问题')
+        ul
+            li.active > echo('我的分享')
+    .comment-list.ask-list > ul
+        #  li.text-right
+        #      echo('我的提问'+'你共提问了'+questions.length+'个问题') 
+        each(myshares)
             li
-                echo(problem.content) 
-            li
-                echo('我' + '分享·')
-            li
-                date(enjoyTime) 
-            li
-                echo('来自话题 ：')
-                each(topicList)
-                    echo(name + ' ')
-                a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-                echo('条讨论')
-                a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-                echo('|')
-                echo(auditStatus)
-                a(id='quiz-report-' + id href='javascript:;')(class ='active') 举报
-                a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-                hr
-            li 
-                a('更多》》')
+                .user-pic > img(src='images/d2.jpg')
+                .comment-content
+                    .h4 > echo(problem.title)
+                    .comment-text > echo(problem.content)
+                    .user-info
+                        a(href='javascript:;') > echo('我')
+                        span > echo('分享·')
+                        span.sub-text > data(enjoyTime)
+                    .comment-operation
+                        .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                        .text-right
+                            .item > a.normal(href='javascript:;') 关注
+                            .item > a.normal(href='javascript:;') 添加讨论
+                            .item
+                                .drop-down-wrapper
+                                    .drop-down-btn 分享
+                                    .drop-down-content > .content
+                                        ul
+                                            li 分享1
+                                            li 分享2
+                                            li 分享3
+                            .item > a.normal(href='javascript:;') 删除
+                    .comment-reply.m-top
+                        textarea.input.w-full.block(rows="1")
+                        .btn 回复
+#  module
+#      div(data-region='list')
+#  view('list')
+#      ul 
+#          li
+#              echo('我的分享  '+'你共分享了'+myshares.length+'个问题') 
+#          hr
+#      each(myshares)
+#          ul 
+#              li(style='font-weight:bold')
+#                  a(id='myshares-details-' + problem.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+#                  .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+#              li
+#                  echo(problem.content) 
+#              li
+#                  echo('我' + '分享·')
+#              li
+#                  date(enjoyTime) 
+#              li
+#                  echo('来自话题 ：')
+#                  each(topicList)
+#                      echo(name + ' ')
+#                  a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+#                  echo('条讨论')
+#                  a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+#                  echo('|')
+#                  echo(auditStatus)
+#                  a(id='quiz-report-' + id href='javascript:;')(class ='active') 举报
+#                  a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+#                  hr
+#              li 
+#                  a('更多》》')
                     
                   
 
