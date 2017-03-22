@@ -16,9 +16,9 @@ view('main')
     ul.list > each(dataList)
         li(class = if(isRead 'sub-text'))
             .pull-left.layout-mr-small > .checkbox > input(type='checkbox' id='check-item'+id name='messageId' value=id) + label
-            .overflow
+            .overflow > a.underline(href='#/message/detail/'+id  target='_blank')
                 .clearfix
-                    .pull-left.common-title > echo(subject)
+                    .pull-left.common-titlea > echo(subject)
                     .pull-right > echo('发送时间：') + dateTime(createTime)
                 .text-overflow.m-top > echo(textContent)
     if(showMore)

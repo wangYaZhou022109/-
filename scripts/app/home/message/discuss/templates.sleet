@@ -1,0 +1,39 @@
+#! handlebars
+
+module
+    .layout-mt-small.list
+        div(data-region='main')
+    
+view('main')
+    .comment-list > ul
+        li
+            .user-pic > img(src='images/1.png')
+            .comment-content
+                .user-info
+                    a(href='javascript:;') aaa
+                    span 回答了您
+                    a 问题问题问题问题问题问题问题问题问题问题问题问题
+                    span 的回复
+                .comment-text 内容内容内容内容内容内容内容内容内容...内容内容内容内容内容内容内容内容内容...内容内容内容内容内容内容内容内容内容...内容内容内容内容内容内容内容内容内容..
+                .comment-operation
+                    .pull-left > .sub-text 2016-09-09
+                    .text-right
+                        .item(id='praise'+id ) > i.iconfont.icon-zan + echo('赞 ') + echo(praiseCount)
+                        .item(id='showReply-'+id) > i.iconfont.icon-message + echo('回复 ') + echo(commentCount)
+                        .item > i.iconfont.icon-info + echo('举报')
+        li
+            .user-pic > img(src='images/1.png')
+            .comment-content
+                .user-info
+                    a(href='javascript:;') aaa
+                    span 回答了您
+                    a 问题问题问题问题问题问题问题问题问题问题问题问题
+                    span 的回复
+                .comment-text 内容内容内容内容内容内容内容内容内容...内容内容内容内容内容内容内容内容内容...内容内容内容内容内容内容内容内容内容...内容内容内容内容内容内容内容内容内容..
+                .comment-operation
+                    .pull-left > .sub-text 2016-09-09
+                    .text-right
+                        .item(id='praise'+id ) > i.iconfont.icon-zan + echo('赞 ') + echo(praiseCount)
+                        .item(id='showReply-'+id) > i.iconfont.icon-message + echo('回复 ') + echo(commentCount)
+                        .item > i.iconfont.icon-info + echo('举报')
+    .empty 没有更多了

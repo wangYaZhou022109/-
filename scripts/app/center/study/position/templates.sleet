@@ -5,34 +5,34 @@ module
 
 view('main')
     .tabs.line > ul
-        li 我的职位
+        li > setting('persion.position.my')
         each(positionList)
             li(id='switch-'+id class = if(current 'active')) > echo(name)
     .mt-1
-        .tag-btn.active 发展职位
+        .tag-btn.active > setting('persion.position.develop')
         each(position.devPositions)
             .tag-btn > echo(name)
     .person-post-main
         section.section
-            .h3 岗位说明书
+            .h3 > setting('persion.position.instructions')
             .layout-mt-small.post-description-content(style='overflow:auto;position:relative;height:400px')
                 if(position.instructionId)
                     #viewPdf
         section.section
-            .h3 专业能力标准/资质模型
+            .h3 > setting('persion.position.qualification')
             .layout-mt-small
                 @echo(position.desc)
         section.section
-            .h3 学习要求
+            .h3 > setting('persion.position.requirements')
             .layout-mt-small
                 .table > table
                     thead > tr
-                        th 序号
-                        th 名称
-                        th 类型
-                        th 选/必修
-                        th 完成状态
-                        th 操作
+                        th > setting('persion.position.order')
+                        th > setting('persion.position.name')
+                        th > setting('persion.position.type')
+                        th > setting('persion.position.require')
+                        th > setting('persion.position.finishStatus')
+                        th > setting('persion.position.operation')
                     tbody > each(studyList)
                         tr
                             td > echo(i+1)
