@@ -55,16 +55,7 @@ exports.handlers = {
         var mod = this.module.items['research-tips'],
             me = this;
         return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
-            var record = me.bindings.researchRecord.data;
-            if (record.status === 0) {
-                me.app.viewport.modal(mod, { research: record.researchQuestionary });
-            } else if (record.researchQuestionary.permitViewCount === 1) {
-                window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
-            } else {
-                window.open('#/exam/research-activity/research-answer-detail/' + record.id, '_blank');
-            }
-            me.module.dispatch('clearResearchRecord');
-            return '';
+            me.app.viewport.modal(mod);
         });
     }
 };
@@ -113,31 +104,31 @@ exports.dataForTemplate = {
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'exams' },
-},{
+}, {
     id: 'swiper-1',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-2',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-3',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-4',
     name: 'swiper',
     options: {
         slider: true
     }
-},{
+}, {
     id: 'swiper-5',
     name: 'swiper',
     options: {

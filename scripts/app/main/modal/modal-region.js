@@ -31,7 +31,6 @@ D.extend(ModalRegion, D.MultiRegion, {
             key: this.depth + '',
             options: D.assign({ animation: animates[type] }, options, { view: renderable })
         });
-
     },
 
     pop: function() {

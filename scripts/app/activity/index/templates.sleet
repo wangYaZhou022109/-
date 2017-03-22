@@ -221,4 +221,7 @@ view('exam-tips')
 view('research-tips')
     .container
         .row > .col-sm-12
-            echo(research.questionaryDetail)
+            echo(research.content)
+        .row > .col-sm-12
+            each(research.buttons)
+                a(id='button-' + id href=url target='_blank') > echo(text)

@@ -543,8 +543,15 @@ exports.store = {
                         this.app.message.success('答案已自动保存成功');
                         me.models.modify.clear();
                     } else {
-                        viewAnswerDetail.call(me);
                         this.app.message.success('交卷成功');
+                        if (!viewAnswerDetail.call(me)) {
+                            setTimeout(function() {
+                                _.forEach(me.models, function(m) {
+                                    m.clear();
+                                });
+                                window.close();
+                            }, 500);
+                        }
                     }
                 });
             }
@@ -691,8 +698,9 @@ viewAnswerDetail = function() {
             window.close();
             return false;
         });
+        return true;
     }
-    return '';
+    return false;
 };
 
 decryptAnswer = function(v) {
