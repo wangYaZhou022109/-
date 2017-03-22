@@ -1,36 +1,71 @@
 #!handlebars
-module 
+module
     div(data-region='list')
-    div(data-region='popup')
-view('list') 
-    div
-        ul > li 
-            string('expert') + string('meta')
-            .btn.radius(id='expert-activate' data-name='id' data-value='1' style='height:50px;width:150px;text-align:center') 
-                string('activation') + string('expert') + string('identity')
-            .btn.radius(id='expert-myself' data-name='id' data-value='1' style='height:50px;width:150px;text-align:center') 
-                string('iam') + string('expert')
-            .btn.radius(id='expert-apply' data-name='id' data-value='1' style='height:50px;width:150px;text-align:center') 
-                string('apply') + string('become') + string('expert')
-            hr
-    .container > .main-list
-        ul > each(trends.expertList)
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src=member.headPortrait alt=string('expert'))
-                            input(type='checkbox' id='expert-item' + id name='expert' value=id)
-                    .clearfix
-                        .title.text-overflow > echo(member.fullName)
-                    .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
 
-view('popup')
-    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
-    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:10%;left:25%;') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active.title > string('my-question')
-        div(data-dynamic-key=popupstate.menu)                
-
-    
+view('list')
+    .tabs.line.mb-1
+        .pull-right.btn#expert-apply > string('apply') + string('become') + string('expert')
+        .pull-right.btn#expert-myself > string('iam') + string('expert')
+        .pull-right.btn#expert-activate > string('activation') + string('expert') + string('identity')
+        ul
+            li.active > string('expert') + string('meta')
+    .border.bottom.dashed
+        .tag-btn.active(id='check-All' data-name='id' data-value='all' ) > string('all')
+        each(topicType)
+            a.tag-btn(id='check-' + id data-name='id' data-value=id ) > echo(name)
+    .comment-list.ask-list > ul
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d2.jpg")
+                h4.text-overflow 赵小茵
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
+            .btn.small 取消关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d4.jpg")
+                h4.text-overflow 晓杨杨
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text 个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 取消关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d1.jpg")
+                h4.text-overflow 赵小茵
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
+            .btn.small 取消关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d5.jpg")
+                h4.text-overflow 晓杨杨
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text 个人简介个人简介个人简介个人简介个人简介个人
+            .btn.small 取消关注
+        li.expert-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src="images/d3.jpg")
+                h4.text-overflow 赵小茵
+                .info 36关注 ｜ 1回答 ｜ 2分享
+                .row
+                    .tag-btn 话题
+                    .tag-btn 话题二
+                    .tag-btn 梦想
+                .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
+            .btn.small 取消关注

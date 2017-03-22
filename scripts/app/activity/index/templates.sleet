@@ -6,7 +6,7 @@ module > .activity-page
     .activity-list(data-region='list')
 
 view('banner')
-    .bg-img > .container > #activitys-ul.banner > ul
+    .bg-img > .container > #activitys-ul.banner > ul.activity-banner-list
         each(activitys)
             li
                 .content
@@ -42,231 +42,186 @@ view('filter')
             .btn.pull-right 报名
             input.input.pull-right(placeholder='请输入报名码直接报名')
             ul
-                li.active 全部
-                li 正在进行
-                li 即将开始
-                li 往期回顾
+                li#item-(class = if(currentStep.all 'active')) 全部
+                li#item-1(class = if(currentStep.running 'active')) 正在进行
+                li#item-2(class = if(currentStep.notStart 'active')) 即将开始
+                li#item-3(class = if(currentStep.finish 'active')) 往期回顾
+
 view('list')
-    .container > .main-list
+    .container
         .h3.m-bottom MOOC
-        ul.arrow-box
-            .arrow-left > | <
-            .arrow-right > | >
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 9.1
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 9.1
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/2.png')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 9.1
-        .h3.m-bottom 直播
-        ul
-            each(gensees)
+        #swiper-1 > ul.full
+            li > .main-list > ul.arrow-box
                 li
                     .content
                         .img
                             .img-cont
-                                a.normal > img(src=cover)
+                                a.normal > img(src='images/d1.jpg')
                             .detail-wrapper
                                 p
-                                    .btn.radius.block(id='attendLive-'+id) 我要参与
+                                    .btn.radius.block 我要参与
                         .clearfix
                             .pull-right.tip-text
-                            .title.text-overflow
-                                echo(subject)
+                            .title.text-overflow > | PPT动画完全自学入门
                         .bottom.sub-text
-                            i.iconfont.icon-favorite
-                                echo(subNumber)
-                            i.iconfont.icon-favorite.m-left
-                                date(startTime)
+                            i.iconfont.icon-view
+                            echo(subNumber)
+                            i.iconfont.icon-star-full.m-left
+                            dateMinute(startTime)
+                li
+                    .content
+                        .img
+                            .img-cont
+                                a.normal > img(src='images/d1.jpg')
+                            .detail-wrapper
+                                p
+                                    .btn.radius.block 我要参与
+                        .clearfix
+                            .pull-right.tip-text
+                            .title.text-overflow > | PPT动画完全自学入门
+                        .bottom.sub-text
+                            i.iconfont.icon-view
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+                li
+                    .content
+                        .img
+                            .img-cont
+                                a.normal > img(src='images/d1.jpg')
+                            .detail-wrapper
+                                p
+                                    .btn.radius.block 我要参与
+                        .clearfix
+                            .pull-right.tip-text
+                            .title.text-overflow > | PPT动画完全自学入门
+                        .bottom.sub-text
+                            i.iconfont.icon-view
+                            | 999
+                            i.iconfont.icon-star-full.m-left
+                            | 9.1
+            li 5个一组，
+            li 5个一组，
+        .h3.m-bottom 直播
+        #swiper-2 > ul.full
+            li > .main-list > ul
+                each(gensees)
+                    li
+                        .content
+                            .img
+                                .img-cont
+                                    a.normal > img(src=cover)
+                                .detail-wrapper
+                                    p
+                                        .btn.radius.block
+                                            div(id='attendLive-'+id) 我要参与
+                            .clearfix
+                                .pull-right.tip-text
+                                .title.text-overflow
+                                    echo(subject)
+                            .bottom.sub-text
+                                i.iconfont.icon-favorite
+                                    echo(subNumber)
+                                i.iconfont.icon-favorite.m-left
+                                    date(startTime)
         .h3.m-bottom 考试
-        ul.activity-item-box.activity-item-exam.cell-3
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a#toExam(href='#/exam/exam/answer-paper-2/99e5b660-537b-4722-b2a2-c6209f028718') 测试考试，不要修改这个！
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/index/8eab8165-45a4-43ee-a65d-c800247c8fc7') 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
+        #swiper-3 > ul.full
+            li > .main-list > ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+                each(exams)
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-exam.pull-left.activity-item-icon
+                            a(id='exam-' + id) > echo(name)
+                            .sub-text.small-font
+                                echo(joinNumber) | 参与
+                                i.iconfont.icon-date.m-left.m-right
+                                dateTime(startTime) + echo('至') + dateTime(endTime)
         .h3.m-bottom 班级
-        ul.activity-item-box.activity-item-class.cell-3
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
+        #swiper-4 > ul.full
+            li > .main-list > ul.activity-item-box.activity-item-class.cell-3
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-class.pull-left.activity-item-icon
+                        a 中国移动“两学一做”学习教育
+                        .sub-text.small-font
+                            | 5623参与
+                            i.iconfont.icon-date.m-left.m-right
+                            | 9-28 至 12-25
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-class.pull-left.activity-item-icon
+                        a 中国移动“两学一做”学习教育
+                        .sub-text.small-font
+                            | 5623参与
+                            i.iconfont.icon-date.m-left.m-right
+                            | 9-28 至 12-25
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-class.pull-left.activity-item-icon
+                        a 中国移动“两学一做”学习教育
+                        .sub-text.small-font
+                            | 5623参与
+                            i.iconfont.icon-date.m-left.m-right
+                            | 9-28 至 12-25
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-class.pull-left.activity-item-icon
+                        a 中国移动“两学一做”学习教育
+                        .sub-text.small-font
+                            | 5623参与
+                            i.iconfont.icon-date.m-left.m-right
+                            | 9-28 至 12-25
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-class.pull-left.activity-item-icon
+                        a 中国移动“两学一做”学习教育
+                        .sub-text.small-font
+                            | 5623参与
+                            i.iconfont.icon-date.m-left.m-right
+                            | 9-28 至 12-25
+                li
+                    .activity-item.clearfix
+                        i.iconfont.icon-class.pull-left.activity-item-icon
+                        a 中国移动“两学一做”学习教育
+                        .sub-text.small-font
+                            | 5623参与
+                            i.iconfont.icon-date.m-left.m-right
+                            | 9-28 至 12-25
         .h3.m-bottom 调研
-        ul.activity-item-box.activity-item-research.cell-3
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a(href='#/exam/research-activity/research-detail/7d7159f4-b889-42dd-8949-46570b2a15a9') 调研测试，不要删
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
+        #swiper-5 > ul.full
+            li > .main-list > ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+                each(researchActivitys)
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-note.pull-left.activity-item-icon
+                            a(id='research-' + id) > echo(name)
+                            .sub-text.small-font
+                                echo(joinNumber) | 参与
+                                i.iconfont.icon-date.m-left.m-right
+                                dateTime(startTime) + echo('至') + dateTime(endTime)
+        #  .h3.m-bottom 待办
+        #  ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+        #      each(toDos)
+        #          li(id='to-do-' + id)
+        #              .activity-item.clearfix
+        #                  i.iconfont.icon-favorite.pull-left.activity-item-icon
+        #                  a(href='#/exam/exam/mark-paper/'+ targetId target='_blank') > echo('待办阅卷' + @index)
+        #                  .sub-text.small-font
+        #                      echo(joinNumber) | 参与
+        #                      i.iconfont.icon-favorite.m-left.m-right
+
+view('exam-tips')
+    .container
+        .row > .col-sm-12
+            echo(currentExam.content)
+        .row > .col-sm-12
+            each(currentExam.buttons)
+                a(id=id) > echo(text)
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(research.content)
+        .row > .col-sm-12
+            each(research.buttons)
+                a(id='button-' + id href=url target='_blank') > echo(text)

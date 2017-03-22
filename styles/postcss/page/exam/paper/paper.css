@@ -28,7 +28,18 @@
             background: var(--border-color);
 
             & .time {
-                font-size: 40px;
+                font-size: var(--font-title);
+
+                & .time {
+                    width: 5em;
+                    text-align: left;
+                    margin-left: calc(var(--space) / 2);
+                }
+            }
+
+            & .icon-time {
+                margin-right: calc(var(--space) / 2);
+                vertical-align: middle;
             }
         }
 
@@ -43,7 +54,6 @@
 
             & .list-title {
                 margin-bottom: var(--large-space);
-                font-size: var(--font-title);
             }
 
             & li {
@@ -59,26 +69,15 @@
         & .min-btn-groups {
             position: relative;
 
-            & span {
+            & .items-pagination {
                 position: absolute;
-                display: inline-block;
-                border-radius: 100%;
-                width: 1.5em;
-                height: 1.5em;
-                line-height: 1.5em;
-                cursor: pointer;
-                background: var(--border-color);
-                right: -1.5em;
-                color: white;
-                text-align: center;
+                top: 50%;
+                margin-top: -2em;
+                right: 0em;
+            }
 
-                &.up-arrow {
-                    top:1.5em;
-                }
-
-                &.down-arrow {
-                    top:3.5em;
-                }
+            & .iconfont {
+                line-height: 2em;
             }
         }
 
@@ -116,6 +115,10 @@
                 color:white;
             }
 
+            &:nth-last-of-type(6) ~ .list-item {
+                margin-bottom: 0;
+            }
+
         }
 
     }
@@ -147,14 +150,20 @@
                 white-space: nowrap;
 
                 & label {
-                    padding-top: 0.2em;
                     display: inline-block;
                     width: 100%;
+                    vertical-align: middle;
                 }
 
                 &:nth-child(even) {
                     margin-right: 0;
                 }
+            }
+
+            & input {
+                height: 2em;
+                line-height: 2em;
+                margin-right: 1em;
             }
         }
 
@@ -185,6 +194,11 @@
             display: inline-block;
             margin-right: 1em;
             padding-right: 1em;
+            border-right-color: rgba(255,255,255,.3);
+
+            &:last-child {
+                border: none;
+            }
         }
     }
 
@@ -210,13 +224,15 @@
     & .answer-options {
         display: inline-block;
         white-space: normal;
+        vertical-align: top;
+        margin-right: 10%;
+        word-wrap: break-word;
+        word-break: break-all;
+        overflow: hidden;
     }
 
-    & .answer-options {
-        display: inline-block;
-        white-space: normal;
-        vertical-align: top;
-        margin-right: 4%;
+    & img {
+        max-width: 100%;
     }
 
     & .mark-row {

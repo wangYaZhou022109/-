@@ -1,3 +1,4 @@
+var timeInterval;
 exports.bindings = {
     state: false,
     download: false,
@@ -37,13 +38,15 @@ exports.handlers = {
 
 exports.beforeClose = function() {
     var me = this,
-        sectionId = this.bindings.state.data.section.id,
+        state = this.bindings.state.data,
+        sectionId = state.data.section.id,
+        localTime = state.localTime || 0,
         beginTime = me.bindings.time.data,
-        studyTime = this.components.waveform.getLearnTime() + 0.1,
-        totalTime = this.components.waveform.getDuration() + 0.1,
+        studyTime = this.components.waveform.getLearnTime() + localTime,
+        totalTime = this.components.waveform.getDuration(),
         lessonLocation = this.components.waveform.getCurrentTime();
     var callback = this.module.renderOptions.callback;
-
+    clearInterval(timeInterval);
     me.module.dispatch('updateProgress', {
         beginTime: beginTime,
         studyTime: Math.ceil(studyTime),
@@ -60,12 +63,34 @@ exports.audio = {
         this.$('progress').value = value;
     },
     ready: function() {
-        var section = this.bindings.state.data.section;
+        var state = this.bindings.state.data;
+        var section = state.section;
+        var localLocation = state.localLocation;
         var currentTime = 0;
         this.$('progress').hidden = true;
         if (section && section.progress) {
             currentTime = section.progress.lessonLocation;
         }
+        if (localLocation) {
+            currentTime = Math.floor(localLocation);
+        }
         this.components.waveform.play(Number(currentTime));
     }
 };
+exports.afterRender = function() {
+    // 每分钟保存进度, lessonLocation,studyTime,sectionId
+    var player = this.components.waveform,
+        sectionId = this.bindings.state.data.section.id,
+        me = this;
+    var process = function() {
+        return {
+            lessonLocation: player.getCurrentTime(),
+            studyTime: player.getLearnTime(),
+            sectionId: sectionId
+        };
+    };
+    timeInterval = setInterval(function() {
+        me.module.dispatch('storeProcess', process());
+    }, 1000 * 10);
+};
+

@@ -1,7 +1,7 @@
 exports.items = {
     main: 'main',
     side: 'side',
-    'ask-new/apply-topic': { isModule: true }
+    'ask/apply-topic': { isModule: true }
 };
 
 exports.store = {

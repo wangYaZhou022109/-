@@ -1,0 +1,15 @@
+#!handlebars
+module 
+    div(data-region='main')
+view('main') 
+    .section.follow
+        .clearfix
+            dl
+                dt > echo(follow.contentCount)
+                dd > string('follow') + string('content')
+            dl
+                dt > echo(follow.topicCount)
+                dd > string('follow') + string('topic')
+            dl
+                dt > echo(follow.expertCount)
+                dd > string('follow') + string('expert')

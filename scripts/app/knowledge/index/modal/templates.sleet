@@ -1,61 +1,61 @@
 #!handlebars
 
-module > .page-modal-main(data-region='main')
+module > .upload-knowledge-page(data-region='main')
 
 view('main')
-    .clearfix.page-cal.form
-        .pull-left.page-cal-con
+    .form > form
+        .clearfix.layout-mb-small
+            .pull-right.layout-ml-small
+                img.block.side-width(src='images/d1.jpg')
+                .btn.block.white.border 上传知识封面
+            .overflow
+                .form-row
+                    label.required 上传资源
+                    .content > input.input#fileName(name='fileName') + .choice#choice 选择
+                    .content.m-top > .small-font
+                        .color-error 支持文件类型
+                        p
+                            | 文档:xls,xlsx,doc,docx,ppt,pptx,pdf,epub,txt.，大小<100M
+                            br
+                            | 多媒体：mp3，mp4，大小<1G，epub电子书只支持IE10以上浏览器
+                .form-row
+                    label.required 知识名称
+                    .content.icon-choice
+                        input.input#name(name='name') + .tips 0/60
             .form-row
-                span.required 上传资源：
-                .content.icon-choice
-                    input.input
-                    i.iconfont.icon-search
-            .text-tips.layout-mb-small.modal-tips.sub-text
-                | 支持文件类型
-                br
-                | 文档:xls,xlsx,doc,docx,ppt,pptx,pdf,epub,txt.，大小<100M
-                br
-                | 多媒体：mp3，mp4，大小<1G，epub电子书只支持IE10以上浏览器
+                label.label.required 所属目录
+                #categoryId
+
             .form-row
-                span.required 知识名称：
+                label.label 下载积分
                 .content.icon-choice
-                    input.input.input-tips
-                    i.sub-title 0/30
-            .form-row
-                span.required 所属目录：
-                .content.icon-choice
-                    input.input
-                    i.iconfont.icon-search
-            .form-row
-                span 下载积分：
-                .content.icon-choice
-                    input.input
+                    input.input(name='integral')
+
             .form-row.textarea-row
-                span 选择标签：
-                .content.icon-choice
-                    .input
-                        .tag-btn.radius 标签一 x
-                        .tag-btn.radius 标签二 x
-                        .tag-btn.radius 标签三 x
-                        .tag-btn.radius 标签四 x
-                        .tag-btn.radius 标签五 x
-                        .text-tips.m-top 最多添加五个标签，没有对应标签可输入标签名按回车键即可添加标签
-            div.modal-tips.text-tips
-                span.sub-text 推荐标签：
-                .tag-btn.radius 标签一
-                .tag-btn.radius 标签二
-                .tag-btn.radius 标签三
-                .tag-btn.radius 标签一
-                .tag-btn.radius 标签二
-                .tag-btn.radius 标签三
-                .tag-btn.radius ...
-            .form-row.textarea-row.layout-mt-small
-                span 知识简介：
-                .content.modal-textarea
-                    textarea.input(rows='3')
-                    i.sub-title 0/3000
+                label 选择标签
+                .content
+                    .tag-input#tags
+                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
+                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
+                        input(placeholder='输入标签名按回车即可添加,最多添加五个')
+                    .sub-row#tag-list
+                        span.small-font 推荐标签：
+                        .tag-btn.radius.selected 标签一
+                        .tag-btn.radius 标签二
+                        .tag-btn.radius.selected 标签三
+                        .tag-btn.radius 标签一
+                        .tag-btn.radius 标签二
+                        .tag-btn.radius 标签三
+                        .tag-btn.radius ...
 
-
-        .pull-right.page-cal-img
-            img(src='images/d1.jpg')
-            .btn.block 上传课程封面
+            .form-row.textarea-row
+                label 知识简介
+                .content
+                    textarea.input(name= 'description' rows='3') + .tips 0/3000
+        input#resourceId(type='hidden' name='resourceId')
+        input#fileType(type='hidden' name='fileType')
+        input#type(type='hidden' name='type')
+view('upload')
+    .row
+        .col-sm-12
+            #uploader

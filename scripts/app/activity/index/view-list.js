@@ -5,14 +5,25 @@ exports.bindings = {
     params: true,
     down: true,
     gensees: true,
+    exams: true,
+    researchActivitys: true,
+    toDos: true,
+    researchRecord: false
 };
 
 exports.events = {
     'click category-item-*': 'toggleItem',
     'click to-activity-*': 'toActivity',
     'click attendLive-*': 'attendLive',
+    'click exam-*': 'showExamPaper',
+    'click research-*': 'showResearchPaper'
 };
-
+exports.actions = {
+    'click exam-left': 'examLeft',
+    'click exam-right': 'examRight',
+    'click research-left': 'researchLeft',
+    'click research-right': 'researchRight'
+};
 exports.handlers = {
     toggleItem: function(el) {
         var me = this;
@@ -32,6 +43,20 @@ exports.handlers = {
     },
     attendLive: function(id) {
         window.open('#/activity/gensee/detail/' + id, '_blank');
+    },
+    showExamPaper: function(id) {
+        var mod = this.module.items['exam-tips'],
+            me = this;
+        return this.module.dispatch('getExamById', { id: id }).then(function(data) {
+            me.app.viewport.modal(mod, { exam: data });
+        });
+    },
+    showResearchPaper: function(id) {
+        var mod = this.module.items['research-tips'],
+            me = this;
+        return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
+            me.app.viewport.modal(mod);
+        });
     }
 };
 
@@ -39,13 +64,15 @@ exports.dataForTemplate = {
     activitys: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
         var defultImg = 'images/default-cover/default_exam.jpg';
-        data.activitys.forEach(function(obj) {
-            var activity = obj || {};
-            activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
-            if (activity.description) {
-                activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
-            }
-        });
+        if (data.activitys.forEach) {
+            data.activitys.forEach(function(obj) {
+                var activity = obj || {};
+                activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
+                if (activity.description) {
+                    activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
+                }
+            });
+        }
         return data.activitys;
     },
     gensees: function(data) {
@@ -76,5 +103,35 @@ exports.dataForTemplate = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'activitys' }
+    id: 'pager', name: 'pager', options: { model: 'exams' },
+}, {
+    id: 'swiper-1',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-2',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-3',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-4',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-5',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
 }];

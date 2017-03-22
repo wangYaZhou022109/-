@@ -1,64 +1,62 @@
-.banner-bar {
-    position: relative;
 
-    & .banner-notice {
+.banner-notice {
+    position: absolute;
+    width: 18em;
+    top: 14em;
+    right: var(--section-gap);
+    background: white;
+    font-size: var(--small-font);
+    z-index: 5;
+
+    & .notice-img {
+        height: 12em;
+        width: 100%;
+        position: relative;
+    }
+
+    & .img-title {
+        @apply --text-overflow;
+
+        background: rgba(255,255,255,.8);
+        padding: var(--space) var(--large-space);
         position: absolute;
-        width: 18em;
-        top: 4em;
-        right: var(--section-gap);
-        background: white;
-        font-size: var(--small-font);
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
 
-        & .notice-img {
-            height: 12em;
-            width: 100%;
-            position: relative;
-        }
+    & li {
+        @apply --text-overflow;
 
-        & .img-title {
-            @apply --text-overflow;
+        padding: var(--space) var(--large-space);
+        margin-top: calc(var(--space) / 2);
 
-            background: rgba(255,255,255,.8);
-            padding: var(--space) var(--large-space);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
+    }
 
-        & li {
-            @apply --text-overflow;
+    & .notice-bottom {
+        @apply --clearfix;
 
-            padding: var(--space) var(--large-space);
-            margin-top: calc(var(--space) / 2);
+        background: var(--bg-color);
+        margin-top: var(--space);
+        padding: 1em 0;
 
-        }
+        & .item {
+            width: 50%;
+            float: left;
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+            cursor: pointer;
 
-        & .notice-bottom {
-            @apply --clearfix;
+            &:last-child {
+                border: none;
+            }
 
-            background: var(--bg-color);
-            margin-top: var(--space);
-            padding: 1em 0;
+            &:hover {
+                color: var(--main-color);
+            }
 
-            & .item {
-                width: 50%;
-                float: left;
-                text-align: center;
-                border-right: 1px solid var(--border-color);
-                cursor: pointer;
-
-                &:last-child {
-                    border: none;
-                }
-
-                &:hover {
-                    color: var(--main-color);
-                }
-
-                & .iconfont {
-                    margin-right: calc(var(--space) / 2);
-                }
+            & .iconfont {
+                margin-right: calc(var(--space) / 2);
             }
         }
     }

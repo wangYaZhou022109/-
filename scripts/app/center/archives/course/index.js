@@ -6,7 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         progressList: {
-            url: '../course-study/course-study-progress/person-list?finishStatus=2',
+            url: '../course-study/course-study-progress/person-list',
             type: 'pageable',
             root: 'items'
         },

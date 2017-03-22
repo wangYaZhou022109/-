@@ -1,23 +1,35 @@
 
 exports.items = {
     list: 'list',
-    popup: 'popup'
+    'ask/expertactivation': { isModule: true },
+    'ask/expertapply': { isModule: true },
+    'ask/applyexpertaptitude': { isModule: true }
 };
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/related-to-me' },
-        popupstate: {}
+        expertlist: { url: '../ask-bar/expert/expert-group' },
+        topicType: { url: '../system/topic-type' }
     },
     callbacks: {
         init: function() {
-            var trends = this.models.trends;
-            trends.set({ id: 1222 });
-            return this.get(trends);
+            var expert = this.models.expertlist;
+            expert.set({ id: 'all' });
+            return this.post(expert);
+        },
+        topicType: function() {
+            var topicType = this.models.topicType;
+            return this.get(topicType);
+        },
+        check: function(payload) {
+            var expert = this.models.expertlist;
+            expert.set(payload);
+            return this.post(expert);
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    this.dispatch('topicType', this.renderOptions);
+    this.dispatch('init', this.renderOptions);
 };

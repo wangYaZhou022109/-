@@ -30,6 +30,14 @@
     --transition: {
         transition: all .2s linear;
     }
+
+    --lv: {
+        display: inline-block;
+        background: #E18D07;
+        color: #FEFF00;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+        padding: 0 var(--space);
+    }
 }
 
 [class*=-color] {
@@ -49,49 +57,6 @@ section.section {
 
     &:first-child {
         margin-top: var(--large-space);
-    }
-}
-
-.page-main-wrapper {
-    overflow: hidden;
-}
-
-.page-main {
-    padding-bottom: 99999px;
-    margin-bottom: -99999px;
-    overflow: hidden;
-
-    & .container {
-        margin: 0 var(--base-gap);
-        max-width: none;
-    }
-}
-
-.page-side {
-    width: 30%;
-    float: right;
-    background: var(--bg-color);
-    padding: 0 var(--base-gap) 99999px;
-    margin-bottom: -99999px;
-
-    & .container {
-        max-width: 30em;
-        margin: 0;
-    }
-
-    &.side-min {
-        background: none;
-        width: 25%;
-        padding-right: 0;
-        margin-left: var(--base-gap);
-
-        & .section {
-            margin: var(--base-gap) 0;
-
-            &:first-child {
-                margin-top: 0;
-            }
-        }
     }
 }
 
@@ -119,7 +84,6 @@ section.section {
 .m-bottom {
     margin-bottom: var(--space);
 }
-
 .layout-mr {
     margin-right: var(--base-gap);
 }
@@ -224,9 +188,16 @@ section.section {
     outline: none;
 }
 
+.overflow {
+    overflow: hidden;
+}
+
 .empty {
     font-size: var(--small-font);
     padding: calc(var(--space) / 2);
+    text-align: center;
+    margin: var(--large-space) 0;
+    color: var(--font-tip-color);
 }
 
 .no-bg {

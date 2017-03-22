@@ -4,15 +4,14 @@ module
     .dialog.animated#animate > .container
         i.iconfont.icon-close-circle.dismiss#dismiss
         .dialog-header(data-region='title')
-        .dialog-content(data-region='content')
+        .dialog-content > .dialog-main(data-region='content')
         .dialog-footer(data-region='buttons')
 
 view('title') > if(state.title)
-    .h1 > echo(state.title)
-    .hr
+    .title > echo(state.title)
 
 
 view('buttons')
-    .btn.reverse.large#close > echo(state.closeText)
+    .btn.white.border#close > echo(state.closeText)
     each(btns)
-        .btn.large(id='btn-' + id) > echo(text)
+        .btn(id='btn-' + id) > echo(text)

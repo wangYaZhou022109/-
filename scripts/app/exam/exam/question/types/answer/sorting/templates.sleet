@@ -1,0 +1,35 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='options')
+
+view('content')
+    p.question
+        span > a(name='question-' + state.id) > echo(state.index '：')
+        @echo(state.content)
+
+
+view('options')
+    .answer > .preview-list
+        dl > each(state.options)
+            dd(id='item-' + index)
+                label(for='answer-item-' + i)
+                    span.option-num > @echo(code '：')
+                    .answer-options > @echo(content)
+        form.vertical.layout-mb
+            .inline-block
+                input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
+            .inline-block(id='error')
+        hr
+
+    if(isShowDetail)
+        .show-answer
+            .clearfix
+                .pull-left > .common-title
+                    if(state.isShowAnswer)
+                        echo('答案：' state.answer)
+                .text-right
+                    if(state.isShowGainScore)
+                        span > echo('本题得分：' state.gainScore)
+                    span.layout-ml > echo('本题易错率：' state.errorRate '%')

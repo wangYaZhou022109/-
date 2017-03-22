@@ -5,9 +5,9 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 8,
+    clientId: 66,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.3.183'
+    returnTo: 'http://192.168.1.10'
 };
 // @endif
 
@@ -45,6 +45,7 @@ require('./app/ext/views/form/form-view');
 require('./app/ext/views/dynamic-view');
 require('./app/ext/pdf');
 require('./app/ext/videojs');
+require('./app/ext/tree');
 require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/ext/highcharts');
@@ -87,7 +88,8 @@ app = window.app = new D.Application({
     getResource: function(path) {
         return require('./' + path);    // eslint-disable-line global-require
     },
-    routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'news', 'train', 'knowledge', 'ask-new', 'center']
+    routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'news', 'train', 'knowledge', 'ask-new', 'center',
+        'ask']
 });
 
 D.PageableModel.setDefault({

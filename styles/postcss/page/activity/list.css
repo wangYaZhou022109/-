@@ -1,4 +1,7 @@
 .activity-page{
+    & .btn-prev {
+        margin-top: -calc(var(--large-space)/2);
+    }
     & .main-list {
         & img {
             width: 100%;
@@ -9,29 +12,29 @@
 
             & .arrow-left {
                 position: absolute;
-                top: 0;
+                top: 30%;
                 left: 0;
                 background-color: rgba(0, 0, 0, 0.5);
                 color: white;
-                height: 78%;
-                width: 2em;
+                height: 5em;
+                width: 1.5em;
                 text-align: center;
-                z-index: 9;
-                line-height: 20em;
+                z-index: 99;
+                line-height: 5em;
                 cursor: pointer;
             }
 
             & .arrow-right {
                 position: absolute;
-                top: 0;
+                top: 30%;
                 right: 3em;
                 background-color: rgba(0, 0, 0, 0.5);
                 color: white;
-                height: 78%;
-                width: 2em;
+                height: 5em;
+                width: 1.5em;
                 text-align: center;
-                z-index: 9;
-                line-height: 20em;
+                z-index: 99;
+                line-height: 5em;
                 cursor: pointer;
             }
         }

@@ -1,0 +1,15 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='subs')
+
+
+view('content')
+    p.question
+        span > a(name='question-' + state.id) > echo(state.index '：')
+        @echo(state.content)
+
+view('subs') > .m-bottom.reading-comprehension-view
+    each(subs)
+        div(data-dynamic-key=id)

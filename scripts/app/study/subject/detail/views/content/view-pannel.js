@@ -1,4 +1,5 @@
-var util = require('./app/study/subject/util');
+var util = require('./app/study/subject/util'),
+    $ = require('jquery');
 exports.bindings = {
     region: false,
     subject: false,
@@ -6,16 +7,30 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click studyBtn-*': 'beginStudy'
+    'click studyBtn-*': 'beginStudy',
+    'click sectionDisplay-*': 'sectionDisplay'
 };
 
 exports.handlers = {
     beginStudy: function(id, events, element) {
         var url = element.getAttribute('data-url'),
-            sectionType = element.getAttribute('data-section-type');
-        window.open(url);
+            sectionType = Number(element.getAttribute('data-section-type')),
+            resourceId = element.getAttribute('data-resource-id'),
+            me = this,
+            view;
+        if (sectionType === 12 || sectionType === 13) {
+            view = this.module.items['research-tips'];
+            this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
+                me.app.viewport.modal(view);
+            });
+        } else if (sectionType === 9) {
+            view = this.module.items['exam-tips'];
+            me.app.viewport.modal(view);
+        } else {
+            window.open(url);
+        }
         // 文档、URL打开即完成
-        if (Number(sectionType) === 1 || Number(sectionType) === 3) {
+        if (sectionType === 1 || sectionType === 3) {
             this.module.dispatch('updateProgress', {
                 sectionId: id,
                 beginTime: new Date().getTime(),
@@ -23,6 +38,18 @@ exports.handlers = {
                 finishStatus: 2, // 已完成
                 completedRate: 100, // 已完成
             });
+        }
+    },
+    sectionDisplay: function(id) {
+        var display = this.$('sectionDiv-' + id).style.display;
+        if (display === 'none') {
+            $(this.$('sectionDiv-' + id)).show();
+            $(this.$('icon-' + id)).removeClass('icon-arrow-down').addClass('icon-arrow-up');
+            $(this.$('label-' + id)).html('收起');
+        } else {
+            $(this.$('sectionDiv-' + id)).hide();
+            $(this.$('icon-' + id)).removeClass('icon-arrow-up').addClass('icon-arrow-down');
+            $(this.$('label-' + id)).html('展开');
         }
     }
 };
@@ -43,7 +70,9 @@ exports.dataForTemplate = {
             subject.restDays = util.restStudyDays(progress.createTime, subject.studyDays);
         }
         // 配置按钮地址
-        subject.courseChapters = util.setBtn(subject.courseChapters, state.type);
+        subject.courseChapters = util.setBtn(subject.courseChapters,
+          state.type,
+          subject.studyProgress.currentSectionId);
         return subject;
     }
 };

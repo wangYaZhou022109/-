@@ -1,24 +1,35 @@
-module.exports = {
-    items: { news: 'news' },
-    beforeRender: function() {
-        this.dispatch('init');
-    },
-    store: {
-        models: {
-            news: { url: '../system/news/list' },
-            state: { data: { currentIndex: 0 } }
+exports.items = {
+    news: 'news'
+};
+
+exports.store = {
+    models: {
+        newsList: {
+            url: '../system/home-news'
         },
-        callbacks: {
-            init: function() {
-                return this.get(this.models.news);
-            },
-            changeIndex: function(num) {
-                var current = this.models.state.data.currentIndex + num;
-                if (this.models.news.data[current]) {
-                    this.models.state.data.currentIndex = current;
-                    this.models.state.changed();
-                }
+        state: {
+            data: {
+                currentIndex: 0
+            }
+        }
+    },
+    callbacks: {
+        init: function(payload) {
+            var newsList = this.models.newsList;
+            newsList.clear();
+            newsList.params.moduleHomeConfigId = payload.id;
+            return this.get(newsList);
+        },
+        changeIndex: function(num) {
+            var current = this.models.state.data.currentIndex + num;
+            if (this.models.newsList.data[current]) {
+                this.models.state.data.currentIndex = current;
+                this.models.state.changed();
             }
         }
     }
+};
+
+exports.beforeRender = function() {
+    this.dispatch('init', this.renderOptions.moduleHomeConfig);
 };

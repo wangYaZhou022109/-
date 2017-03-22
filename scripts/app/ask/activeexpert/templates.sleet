@@ -2,12 +2,14 @@
 module 
     div(data-region='list')
 
-view('list') 
-    ul
-        li
-            string('active') + string('expert') + a(id='activeexpert' href='javascript:;' style='float:right;')(class ='active') > string('more')
-    table.table > tr > td
-            each(expert)
-                ul
-                    li(style='font-weight:bold')
-                        .img(style='height:120px;width:80px;float:left;' id='expert-' + member.id data-name='id' data-value=member.id  ) > img(src=member.headPortrait)
+view('list')
+    .section
+        span.h3 > string('active') + string('expert')
+        span.more(id='expert-more') more
+        .layout-mt-small.user-picture
+            .grid-row
+                each(expert)
+                    .col-md-4 > a
+                        img.block( id='expert-' + id + ',' + member.id data-name='id' data-value=id + id + ',' + member.id src=member.headPortrait)
+                
+    

@@ -1,32 +1,29 @@
 :root {
     --tag {
         position: absolute;
-        left: -5px;
-        top: -5px;
+        left: 0;
+        top: 0;
         width: 70px;
         height: 70px;
         overflow: hidden;
 
         & .tag {
             font-size: 12px;
-            background-color: var(--main-color)\0;
-            background-color: currentColor;
+            background-color: rgba(0, 0, 0, 0.5);;
             position: absolute;
-            left: -30px;
-            top: 10px;
-            width: 100px;
-            /* width: 70px\0;*/
+            left: -35px;
+            top: -10px;
+            width: 90px;
+            height: 40px;
+            line-height: 50px;
             text-align: center;
-            /* text-align: right\0; */
             transform: rotate(-45deg);
             padding: 4px 0;
-            /* padding: 4px 10px\0; */
             z-index: 2;
 
             &:after,
             &:before {
                 position: absolute;
-                content: '';
                 border-width: 5px;
                 border-style: solid;
                 border-color: transparent;

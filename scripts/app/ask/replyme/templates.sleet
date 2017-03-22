@@ -1,0 +1,133 @@
+#!handlebars
+module
+    div(data-region='list')
+view('list')
+    ul 
+        li
+            echo('我的分享  '+'你共回复'+replyme.length+'次') 
+        hr
+    each(replyme)
+        compare(question.type 'eq' 1) 
+            ul 
+                li(style='font-weight:bold')
+                    a(id='replyme-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+                li
+                    echo(question.content) 
+                li
+                    echo(replyman + '讨论了' + '我' + '的问题')
+                li
+                    date(createTime) 
+                li
+                    echo('来自：')
+                    echo(question.title)
+                    
+                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                    echo('赞()')
+                    echo('2条讨论')
+                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                    echo('|')
+                    echo(auditStatus)
+                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                    hr
+                li 
+            ul 
+                li(style='font-weight:bold')
+                    a(id='replyme-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+                li
+                    echo(questionDiscuss.content) 
+                li
+                    echo(replyman + '回复了'+ '我' + '对问题的讨论')
+                li
+                    date(questionDiscuss.createTime) 
+                li
+                    echo('来自：')
+                    echo(questionDiscuss.content)
+                    
+                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                    echo('赞()')
+                    echo('2条讨论')
+                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                    echo('|')
+                    echo(auditStatus)
+                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                    hr
+                li
+        compare(question.type 'eq' 2) 
+            ul 
+                li(style='font-weight:bold')
+                    a(id='replyme-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+                li
+                    echo(content) 
+                li
+                    echo(replyman + '讨论了'+ '我' + '的分享')
+                li
+                    date(createTime) 
+                li
+                    echo('来自：')
+                    echo(question.title)
+                    
+                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                    echo('赞()')
+                    echo('2条讨论')
+                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                    echo('|')
+                    echo(auditStatus)
+                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                    hr
+                li
+            ul 
+                li(style='font-weight:bold')
+                    a(id='replyme-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+                li
+                    echo(questionDiscuss.content) 
+                li
+                    echo(replyman + '回复了'+ '我' + '对分享的讨论')
+                li
+                    date(questionDiscuss.createTime) 
+                li
+                    echo('来自：')
+                    echo(questionDiscuss.content)
+                    
+                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                    echo('赞()')
+                    echo('2条讨论')
+                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                    echo('|')
+                    echo(auditStatus)
+                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                    hr
+                li
+
+            ul 
+                li(style='font-weight:bold')
+                    a(id='replyme-details-' + question.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
+                    .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
+                li
+                    echo(content) 
+                li
+                    echo(replyman + '回复了'+ '我' + '对讨论的回复')
+                li
+                    date(createTime) 
+                li
+                    echo('来自：')
+                    echo(content)
+                    
+                    a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
+                    echo('赞()')
+                    echo('2条讨论')
+                    a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
+                    echo('|')
+                    echo(auditStatus)
+                    a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
+                    hr
+                li     
+                    a('更多》》')
+                    
+                  
+
+                   
+                

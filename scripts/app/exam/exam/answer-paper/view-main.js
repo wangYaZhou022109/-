@@ -1,100 +1,66 @@
-var types = require('./app/exam/types'),
-    maps = require('./app/util/maps'),
+var types = require('./app/exam/exam-question-types'),
     D = require('drizzlejs'),
-    getCollectCorrect;
+    constant = {
+        ANSWER_PAPER_MODE: 3,
+        NO_DETAIL_MODE: -1, // 除了题目内容，其他答案以及信息看不到
+        WAITING_CHECK_CORRECT: 'exam/exam/answer-paper/waiting-check-correct'
+    },
+    getModuleDataForQuestion,
+    getModuleDataForCorrect;
 
 exports.bindings = {
     state: true,
-    exam: true,
-    questions: true,
-    answer: true,
-    questionTypes: true,
-    marks: false
+    types: false,
+    mark: false,
+    answer: false
 };
 
 exports.type = 'dynamic';
 
-exports.components = [{
-    id: 'paper-view-type',
-    name: 'selectize'
-}];
-
-exports.events = {
-    'change paper-view-type': 'changePaperViewType'
-};
-
-exports.handlers = {
-    changePaperViewType: function() {
-        return this.module.dispatch('changePaperViewType', { type: this.$('paper-view-type').value });
-    }
-};
-
-exports.dataForTemplate = {
-    paperViewTypes: function() {
-        var paperViewTypes = maps.get('paper-view-type'),
-            data = this.bindings.state.data;
-        if (data.isOnePageOneQuestion) {
-            paperViewTypes[0].selected = true;
-        } else {
-            paperViewTypes[1].selected = true;
-        }
-        return paperViewTypes;
-    },
-    questions: function() {
-        return this.bindings.questions.data;
-    }
-};
-
 exports.getEntity = function(id) {
-    var questionId = id,
-        question,
-        isCollectCorrect = false,
-        marks = this.bindings.marks,
-        questionTypes = this.bindings.questionTypes;
-    if (marks.isCollectDynamicView(questionId)) {
-        questionId = questionId.replace('collect-correct-', '');
-        isCollectCorrect = true;
+    var question,
+        questionId;
+    questionId = id;
+    if (this.bindings.mark.isCorrectView(id)) {
+        questionId = id.replace('correct-', '');
     }
 
-    question = this.bindings.exam.getQuestionById(questionId);
-    D.assign(question, {
-        questionAttrs: question.questionAttrCopys,
-        isCollectCorrect: isCollectCorrect,
-        index: questionTypes.getQuestionIndexInType(questionId)
-    });
-    return question;
+    question = this.bindings.types.getQuestionById(questionId);
+    D.assign(question, { questionAttrs: question.questionAttrCopys });
+
+    return this.bindings.mark.isCorrectView(id)
+        ? { isCorrect: true, data: question } : { isCorrect: false, data: question };
 };
 
-exports.getEntityModuleName = function(id, question) {
-    if (this.bindings.marks.isCollectDynamicView(id)) {
-        return 'exam/answer-paper/waiting-check-correct';
-    }
-    return types.get(question.type, 3);
+exports.getEntityModuleName = function(id, entity) {
+    return entity.isCorrect
+        ? constant.WAITING_CHECK_CORRECT
+        : types.get(entity.data.type, constant.ANSWER_PAPER_MODE);
 };
 
-exports.dataForEntityModule = function(question) {
+exports.dataForEntityModule = function(entity) {
+    return entity.isCorrect
+        ? getModuleDataForCorrect.call(this, entity.data)
+        : getModuleDataForQuestion.call(this, entity.data);
+};
+
+getModuleDataForQuestion = function(question) {
     var me = this;
-    if (question.isCollectCorrect) {
-        return getCollectCorrect.call(this, question);
-    }
     return {
         data: question,
-        multiple: question.type === 2,
-        answer: this.bindings.answer.getAnswer(question.id),
+        answer: me.bindings.answer.getAnswer(question.id),
+        mode: constant.NO_DETAIL_MODE,
         callback: function(data) {
-            me.bindings.answer.saveAnswer(data);
-            me.bindings.state.calculate();
-            return me.module.dispatch('reload');
-        },
-        mode: undefined
+            return me.module.dispatch('saveAnswer', data);
+        }
     };
 };
 
-getCollectCorrect = function(question) {
+getModuleDataForCorrect = function(question) {
     var me = this;
     return {
         questionId: question.id,
-        correct: this.bindings.marks.getCurrentCorrect(question.id) || {},
+        correct: this.bindings.mark.getCorrect(question.id) || {},
         callback: {
             waitingCheck: function(data) {
                 return me.module.dispatch('waitingCheck', data);
@@ -105,3 +71,4 @@ getCollectCorrect = function(question) {
         }
     };
 };
+

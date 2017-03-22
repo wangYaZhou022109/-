@@ -1,23 +1,26 @@
 #!handlebars
 
-module > .activity-page
-    .activity-list
-        .container
-            .main-list(style='height:3000px;')
-                .activity-category
-                    .activity-banner(data-region='banner')
-                    .pull-left(style='height:100px;width:70%;' data-region='left')
-                    .pull-right(data-region='right')
-view('banner')
-    .bg-img > .container > .activitys-ul.banner
-        ul
-            li(style='height:300px;width:100%;float:left;')
-                .img(style='height:100px;width:200px;float:left;') > img(src='images/default-cover/default_exam.jpg' )
-                a(href='javascript:;') > echo(expert.member.fullName)
-                div > echo('我擅长的话题:') 
-                div > echo(expert.introduce) 
+module 
+    div(data-region='banner')
+    .ask-page > .container
+        .page-main-wrapper.knowledge-side
+            .page-side.side-min(data-region='right')
+            .page-main(data-region='left')
 
-view('left') 
+view('banner')
+    .expert-detail-top(style='background-image:url(images/bg-usercenter.png)') > .container
+        .head > img(src= expert.member.headPortrait alt=expert.member.fullName)
+        section.section
+            .title-row
+                .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
+            .title-row
+                .inline-block.m-right > string('be-good-at') + string('topic') + echo(':') 
+                each(expert.topicList)
+                    .inline-block.m-right.bg-white.sub-title > echo(name)
+                .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic') > string('change')
+            p.info-detail > echo(expert.introduce)
+
+view('test') 
     div
         ul > li
             a(id='menu-expertsanswer' href='javascript:;')(class ='active') > string('question') + string('answer')
@@ -29,6 +32,35 @@ view('left')
                 .btn.radius(id='expert-myself' data-name='id' data-value='1' style='height:50px;width:150px;text-align:center') 
                     string('my') + string('answer')
     div(data-dynamic-key=leftstate.menu)
+    div(data-dynamic-key='iamexpertright')
 
 view('right') 
     div(data-dynamic-key='iamexpertright')
+view('left') 
+    section.section
+        .tabs.line.mb-1 > ul 
+            compare(leftstate.menu 'eq' 'inviteanswer')
+                li#menu-inviteanswer.active > string('question') + string('answer') 
+            else
+                li#menu-inviteanswer > string('question') + string('answer') 
+            compare(leftstate.menu 'eq' 'expertssharing')
+                li#menu-expertssharing.active > string('my') + string('share') 
+            else
+                li#menu-expertssharing > string('my') + string('share')
+        .tabs-cont > ul
+            li.tabs-cont-item.active#tabs-cont-item-1
+                .person-list 
+                    compare(leftstate.menu 'eq' 'inviteanswer')
+                        .filter
+                            .pull-left
+                                .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
+                                .item(id ='item-myanswer') > span > string('my') + string('answer')
+                    compare(leftstate.menu 'eq' 'myanswer')
+                        .filter
+                            .pull-left
+                                .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
+                                .item(id ='item-myanswer') > span > string('my') + string('answer')
+                    .comment-list.ask-list > ul
+                        div(data-dynamic-key=leftstate.menu)
+
+                    

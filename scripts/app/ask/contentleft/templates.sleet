@@ -1,12 +1,25 @@
 #!handlebars
 module
-    div(data-region='menu')
-    div(data-region='list')
+    .tabs.line > ul
+        div(data-region='menu')
+    .tabs-cont > ul
+        li.tabs-cont-item#tabs-cont-item-1.active
+            .comment-list.ask-list > ul
+                div(data-region='list')
 
 view('menu')
-    a(id='menu-alldynamic' href='javascript:;')(class ='active') > string('all-dynamic') 
-    a(id='relatedtome' href='javascript:;')(class ='active') > string('related-to-me')
-    a(id='menu-expertssharing' href='javascript:;')(class ='active') > string('experts-sharing') 
-    hr
+    compare(state.menu 'eq' 'alldynamic')
+        li(id='menu-alldynamic' href='javascript:;')(class ='active') > string('all-dynamic')
+    else
+        li(id='menu-alldynamic' href='javascript:;') > string('all-dynamic')
+    compare(state.menu 'eq' 'relatedtome')
+        li(id='relatedtome' href='javascript:;')(class ='active') > string('related-to-me')
+    else
+        li(id='relatedtome' href='javascript:;')(class ='') > string('related-to-me')
+    compare(state.menu 'eq' 'expertssharing')
+        li(id='menu-expertssharing' href='javascript:;')(class ='active') > string('experts-sharing')
+    else
+        li(id='menu-expertssharing' href='javascript:;')(class ='') > string('experts-sharing')
+        
 view('list') 
     div(data-dynamic-key=state.menu)

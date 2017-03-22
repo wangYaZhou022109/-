@@ -1,25 +1,42 @@
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
+
 exports.bindings = {
-    paper: true,
-    state: true,
-    questionTypes: true
+    types: true,
+    state: true
+};
+
+exports.dataForTemplate = {
+    types: function(data) {
+        return _.map(data.types, function(t) {
+            return D.assign(t, { singleMode: data.state.singleMode });
+        });
+    }
 };
 
 exports.events = {
-    'click q-*': 'showQuestion',
+    'click prev-*': 'prev',
+    'click next-*': 'next',
+    'click question-*': 'selectQuestion',
     'click list-item-*': 'toggleMore'
 };
 
 exports.handlers = {
-    toggleMore: function(id) {
-        this.module.dispatch('changeState', { typeIndex: Number(id) });
+    prev: function(id, e) {
+        e.preventDefault();
+        return this.module.dispatch('move', { id: id, offset: -1 });
     },
-    showQuestion: function(id) {
-        return this.module.dispatch('changeState', { questionId: id });
+    next: function(id, e) {
+        e.preventDefault();
+        return this.module.dispatch('move', { id: id, offset: 1 });
+    },
+    selectQuestion: function(id) {
+        return this.module.dispatch('selectQuestion', { id: id });
+    },
+    toggleMore: function(id) {
+        return this.module.dispatch('selectType', { id: id });
     }
 };
 
-exports.dataForTemplate = {
-    questionTypes: function() {
-        return this.bindings.questionTypes.data;
-    }
+exports.afterRender = function() {
 };

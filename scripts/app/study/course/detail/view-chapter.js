@@ -6,12 +6,14 @@ var currentSectionId = null;
 var showHandler = function(payload) {
     var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
-        8: '#/study/task/'
+        8: '#/study/task/',
+        9: '#/exam/exam/answer-paper/',
+        12: '#/exam/research-activity/research-detail/'
     };
     return function() {
         if (innerType.indexOf(payload.sectionType) !== -1) {
             this.module.dispatch('showSection', payload);
-        } else {
+        } else if (detailUrlMap[payload.sectionType]) {
             window.open(detailUrlMap[payload.sectionType] + '' + payload.id);
         }
     };
@@ -97,6 +99,8 @@ exports.dataForTemplate = {
                     if (rr.progress && !rr.progress.completedRate) {
                         rr.progress.completedRate = 0;
                     }
+                    // Rate
+                    rr.showRate = [5, 6].indexOf(rr.sectionType) !== -1;
                 });
             });
         }

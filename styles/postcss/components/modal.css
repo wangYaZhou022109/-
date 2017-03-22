@@ -6,31 +6,28 @@
     right: 0;
     text-align: center;
 
-    &.small .dialog{
-        width: 40vw;
-    }
-
-    &.large .dialog{
-        width: 96vw;
-    }
-
     & .dialog {
         margin: 10vh auto;
         box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
-        padding: calc(var(--space) * 2) calc(var(--space) * 3);
+        padding-left: calc(var(--space) * 3);
         position: relative;
-        max-height: 80vh;
         width: 60vw;
         background: white;
         text-align: left;
         display: inline-block;
 
         & .dialog-content {
-            height: 80%;
-            overflow: auto;
-            overflow-x: hidden;
+            max-height: 70vh;
+            height: 60vh;
         }
 
+        & .dialog-main {
+            height: 100%;
+            overflow: auto;
+            padding-top: var(--large-space);
+            padding-right: calc(var(--space) * 3);
+
+        }
 
         &.animated {
             animation-duration: .5s;
@@ -46,10 +43,27 @@
             border: none;
         }
     }
+
+    &.small .dialog{
+        width: 40vw;
+    }
+
+    &.large .dialog{
+        width: 96vw;
+    }
+
+    &.auto {
+        & .dialog,
+        & .dialog-content {
+            width: auto;
+            height: auto;
+        }
+
+    }
 }
 
 .dialog-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -75,33 +89,38 @@
 
 .dialog {
     box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
-    height: 100%;
 
     & > .container {
         margin: 0;
         height: 100%;
-        position: relative;
     }
 
     & .dismiss {
         position: absolute;
-        top: var(--font-size);
-        right: 0;
+        top: 1em;
+        right: calc(var(--space) * 3);
         font-size: var(--font-size);
         z-index: 10;
+        cursor: pointer;
     }
 
     & .dialog-footer {
         text-align: right;
-        width: 100%;
+        border-top: 1px solid var(--border-color);
+        padding: 1em calc(var(--space) * 3) 1em 0;
+        margin-left: -calc(var(--space) * 3);
+        background: white;
 
         & .btn:not(:last-child) {
             margin-right: var(--font-size);
         }
     }
 
-    & .dialog-header {
-        margin-bottom: calc(var(--space) * 2);
+    & .dialog-header .title {
+        margin-left: -calc(var(--space) * 3);
+        padding: 1em calc(var(--space) * 3);
+        background: var(--bg-color);
+        border-bottom: 1px solid var(--border-color);
     }
 
     &.animated {

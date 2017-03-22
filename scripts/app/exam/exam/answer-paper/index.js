@@ -1,11 +1,32 @@
-// map key: {1:单选,2:多选,3:判断,4:问答,5:填空,6:阅读理解,7:连线,8:排序} value:排序
 var _ = require('lodash/collection'),
-    maps = require('./app/util/maps'),
-    strings = require('./app/util/strings'),
     D = require('drizzlejs'),
-    $ = require('jquery'),
     E = require('./app/exam/exam-websocket'),
-    map = {
+    $ = require('jquery'),
+    CryptoJS = require('crypto-js'),
+    maps = require('./app/util/maps'),
+    qTypes = maps.get('question-types'),
+    getCurrentStatus,
+    constant = {
+        ONE_HUNDRED: 100,
+        ZERO: 0,
+        ONE: 1,
+        SINGLE_MODE: 1,
+        PC_CLIENT_TYPE: 1,
+        SHOW_ANSWER_IMMED: 1
+    },
+    itemStatus = {
+        INIT: 'init',
+        CHECK: 'check',
+        ACTIVE: 'active',
+        CURRENT: 'current'
+    },
+    sort = {
+        REMOTE: 1,
+        QUESTION: 2,
+        QUESTION_ATTR: 3,
+        QUESTION_AND_ATTR: 4
+    },
+    orderMap = {
         1: 1,
         2: 2,
         3: 3,
@@ -15,353 +36,396 @@ var _ = require('lodash/collection'),
         7: 5,
         8: 4
     },
-    cancel,
-    timeOutId,
     submitType = {
         Auto: 'Auto',
         Hand: 'Hand'
     },
-    connect,
-    closeConnect,
-    changeToFullScreen,
-    // navigateToExamDetail,
-    itemStatus = {
-        INIT: 'init',
-        CHECK: 'check',
-        ACTIVE: 'active',
-        CURRENT: 'current'
-    },
-    getCurrentStatus;
-
+    WS,
+    TO,
+    switchScreen,
+    viewAnswerDetail,
+    SINGLE_CHOOSE = 1,
+    MUTIPLE_CHOOSE = 2,
+    JUDGEMENT = 3,
+    SENTENCE = 4,
+    QUESTION_ANSWER = 5,
+    READING = 6,
+    SORTING = 8,
+    decryptAnswer,
+    IV = '1234567890123456';
 
 exports.items = {
-    'question-type': 'question-type',
+    side: 'side',
     main: 'main',
     head: 'head',
-    tips: '',
-    'count-down': 'count-down'
+    'count-down': 'count-down',
+    'answer-detail': 'answer-detail'
 };
 
 exports.store = {
     models: {
-        countDown: {
+        exam: {
             type: 'localStorage',
-            data: {}
+            url: '../exam/exam/exam-paper',
+            mixin: {
+                decryptAnswer: function() {
+                    D.assign(this.data, {
+                        encryptContent: decryptAnswer.call(this, this.data.paper.encryptContent)
+                    });
+                    return this.data.encryptContent;
+                }
+            }
         },
         state: {
             type: 'localStorage',
             mixin: {
-                getCurrentState: function(questionTypes) {
-                    var data = {
-                            questionType: '',
-                            questionIndex: 0,
-                            questionTotalInType: 0,
-                            currentQuestionScore: 0
-                        },
-                        t = _.find(questionTypes, ['isCurrent', true]),
-                        q;
-                    data.questionType = t.data.name;
-                    data.questionTotalInType = t.data.data.length;
-                    q = _.find(t.data.data, ['currentStatus', itemStatus.CURRENT]);
-                    if (!q) {
-                        data.questionIndex = 1;
-                        data.currentQuestionScore = t.data.data[0].score;
-                    } else {
-                        data.questionIndex = q.i;
-                        data.currentQuestionScore = q.score;
-                        data.questionId = q.id;
+                init: function(exam) {
+                    var types = this.module.store.models.types;
+                    this.load();
+                    if (!this.data) {
+                        this.data = {
+                            name: exam.name,
+                            totalCount: exam.paper.questionNum,
+                            totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
+                            noAnswerCount: exam.paper.questionNum,
+                            answeredCount: constant.ZERO,
+                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                            currentQuestion: types.getFirstQuestion()
+                        };
+                        this.save();
                     }
-                    D.assign(this.data, data);
-                    this.module.store.models.questionTypes.save();
-                    this.save();
-                    return true;
                 },
-                setFirstQuestionRemote: function(questionTypes) {
-                    this.data.questionId = questionTypes[0].data.data[0].id;
+                selectQuestion: function(id) {
+                    var types = this.module.store.models.types;
+                    D.assign(this.data, { currentQuestion: types.getQuestionById(id) });
+                },
+                resetCurrentQuestion: function() {
+                    var types = this.module.store.models.types;
+                    D.assign(this.data, { currentQuestion: types.getCurrentQuestion() });
                 },
                 calculate: function() {
-                    var answers = this.store.models.answer.data.answers;
-                    this.data.answeredNum = _.filter(answers, function(a) {
+                    var answer = this.module.store.models.answer,
+                        answeredCount = answer.answeredCount();
+                    D.assign(this.data, {
+                        answeredCount: answeredCount,
+                        noAnswerCount: this.data.totalCount - answeredCount
+                    });
+                    this.save();
+                }
+            }
+        },
+        types: {
+            type: 'localStorage',
+            mixin: {
+                init: function(questions) {
+                    var map = {},
+                        j = 0;
+
+                    this.load();
+                    if (!this.data && questions) {
+                        _.forEach(questions, function(q) {
+                            var type = orderMap[q.type];
+
+                            if (!map[type]) {
+                                map[type] = {};
+                                D.assign(map[type], {
+                                    type: type,
+                                    name: _.find(qTypes, ['key', q.type.toString()]).value,
+                                    totalScore: constant.ZERO,
+                                    size: constant.ZERO,
+                                    status: itemStatus.INIT,
+                                    questions: []
+                                });
+                            }
+                            map[type].size++;
+                            map[type].questions.push(D.assign(q, {
+                                index: map[type].questions.length + constant.ONE,
+                                score: q.score / constant.ONE_HUNDRED,
+                                status: itemStatus.INIT
+                            }));
+                        });
+
+                        this.data = _.map(map, function(o) {
+                            if (j === constant.ZERO) {
+                                D.assign(o.questions[0], { status: itemStatus.CURRENT });
+                            }
+
+                            _.map(o.questions, function(q) {
+                                D.assign(q, { totalCount: o.size });
+                            });
+
+                            return D.assign(o, {
+                                totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
+                                    return sum + n;
+                                }),
+                                isCurrent: j++ === constant.ZERO
+                            });
+                        });
+                        this.sortQuestion();
+                        this.save();
+                    }
+                },
+                sortQuestion: function() {
+                    var exam = this.module.store.models.exam.data,
+                        paperSortRule = exam.paperSortRule;
+                    if (paperSortRule === sort.QUESTION) {
+                        this.data = _.map(this.data, function(t) {
+                            return _.map(t.questions.sort(function() {
+                                return Math.random() - 0.5;
+                            }), function(q, i) {
+                                return D.assign(q, { index: i + 1 });
+                            });
+                        });
+                    }
+
+                    if (paperSortRule === sort.QUESTION_ATTR) {
+                        this.data = _.map(this.data, function(t) {
+                            return _.map(t.questions, function(q) {
+                                return D.assign(q, {
+                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
+                                        return Math.random() - 0.5;
+                                    })
+                                });
+                            });
+                        });
+                    }
+
+                    if (paperSortRule === sort.QUESTION_AND_ATTR) {
+                        this.data = _.map(this.data, function(t) {
+                            return _.map(t.questions.sort(function() {
+                                return Math.random() - 0.5;
+                            }), function(q, i) {
+                                return D.assign(q, {
+                                    index: i + 1,
+                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
+                                        return Math.random() - 0.5;
+                                    })
+                                });
+                            });
+                        });
+                    }
+                },
+                getQuestionById: function(id) {
+                    var question;
+                    _.forEach(this.data, function(d) {
+                        _.forEach(d.questions, function(q) {
+                            if (q.id === id) question = q;
+                        });
+                    });
+                    return D.assign(question, {
+                        typeDesc: _.find(qTypes, ['key', question.type.toString()]).value + '题'
+                    });
+                },
+                getFirstQuestion: function() {
+                    var question = this.data[0].questions[0];
+                    return D.assign(question, {
+                        typeDesc: _.find(qTypes, ['key', question.type.toString()]).value + '题'
+                    });
+                },
+                selectType: function(id) {
+                    if (!this.module.store.models.state.data.selectQuestion) {
+                        this.data[id].isCurrent = !this.data[id].isCurrent;
+                    }
+                    this.module.store.models.state.data.selectQuestion = false;
+                    this.save();
+                },
+                getType: function(questionId) {
+                    return _.find(this.data, function(d) {
+                        return _.some(d.questions, function(q) {
+                            return q.id === questionId;
+                        });
+                    });
+                },
+                selectQuestion: function(id) {
+                    var type = this.getType(id),
+                        index = type.questions.findIndex(function(q) {
+                            return q.status === itemStatus.CURRENT;
+                        }),
+                        me = this;
+                    if (index > -1) {
+                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
+                    }
+                    D.assign(this.getQuestionById(id), {
+                        status: itemStatus.CURRENT
+                    });
+
+                    //  把其他类型的题目的current 设置为其他状态
+                    _.forEach(_.filter(this.data, function(t) {
+                        return _.every(t.questions, function(q) {
+                            return q.id !== id;
+                        });
+                    }), function(tt) {
+                        var n = tt.questions.findIndex(function(qq) {
+                            return qq.status === itemStatus.CURRENT;
+                        });
+                        if (n !== -1) {
+                            D.assign(tt.questions[n], { status: getCurrentStatus.call(me, tt.questions[n].id) });
+                        }
+                    });
+                    this.module.store.models.state.data.selectQuestion = true;
+                    this.save();
+                },
+                getCurrentQuestion: function() {
+                    var question;
+                    _.forEach(this.data, function(t) {
+                        _.forEach(t.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
+                },
+                move: function(payload) {
+                    var type = this.data[payload.id],
+                        index = type.questions.findIndex(function(q) {
+                            return q.status === itemStatus.CURRENT;
+                        }),
+                        question = type.questions[index + payload.offset];
+                    if (question) {
+                        question.status = itemStatus.CURRENT;
+                        type.questions[index].status = getCurrentStatus.call(this, type.questions[index].id);
+                    }
+                    this.save();
+                },
+                decryptAnswer: function(answers) {
+                    var afterDecryptQuestion = function(q, answer) {
+                        if (q.type === SINGLE_CHOOSE || q.type === MUTIPLE_CHOOSE) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    if (_.find(answer.answer, ['value', attr.name])) {
+                                        return D.assign(attr, { type: 0 });
+                                    }
+                                    return D.assign(attr, { type: q.type });
+                                })
+                            });
+                        }
+
+                        if (q.type === JUDGEMENT || q.type === SENTENCE || q.type === QUESTION_ANSWER) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    return D.assign(attr, {
+                                        name: answer.answer,
+                                        value: answer.answer
+                                    });
+                                })
+                            });
+                        }
+
+                        if (q.type === SORTING) {
+                            return D.assign(q, {
+                                questionAttrCopys: _.map(q.questionAttrCopys, function(attr) {
+                                    if (attr.type === 0) {
+                                        return D.assign(attr, { name: answer.answer });
+                                    }
+                                    return attr;
+                                })
+                            });
+                        }
+                        return q;
+                    };
+                    this.data = _.map(this.data, function(t) {
+                        return D.assign(t, {
+                            questions: _.map(t.questions, function(q) {
+                                var a = _.find(answers, ['questionId', q.id]);
+                                if (q.type === READING) {
+                                    return D.assign(q, {
+                                        subs: _.map(q.subs, function(s) {
+                                            return afterDecryptQuestion(s, a);
+                                        })
+                                    });
+                                }
+                                return afterDecryptQuestion(q, a);
+                            })
+                        });
+                    });
+                },
+                updateStatus: function(questionId, status) {
+                    D.assign(this.getQuestionById(questionId), {
+                        status: status
+                    });
+                    this.save();
+                }
+            }
+        },
+        mark: {
+            type: 'localStorage',
+            mixin: {
+                init: function() {
+                    this.data = { corrects: [], waitingChecks: [] };
+                    this.save();
+                },
+                isCorrectView: function(id) {
+                    return id.indexOf('correct-') > -1;
+                },
+                getCorrect: function(questionId) {
+                    return _.find(this.data.corrects, ['key', questionId]);
+                },
+                waitingCheck: function(id) {
+                    var f = false;
+                    if (_.find(this.data.waitingChecks, ['key', id])) {
+                        this.data.waitingChecks = _.reject(this.data.waitingChecks, ['key', id]);
+                    } else {
+                        this.data.waitingChecks.push({ key: id });
+                        f = true;
+                    }
+                    this.save();
+                    return f;
+                },
+                correct: function(data) {
+                    this.data.corrects = _.reject(this.data.corrects, ['questionId', data.questionId]);
+                    this.data.corrects.push(data);
+                    this.save();
+                }
+            }
+        },
+        countDown: {
+            type: 'localStorage',
+            mixin: {
+                init: function() {
+                    this.data = {};
+                    this.save();
+                }
+            }
+        },
+        answer: {
+            type: 'localStorage',
+            mixin: {
+                init: function() {
+                    this.data = [];
+                    this.save();
+                },
+                saveAnswer: function(data) {
+                    this.data = _.reject(this.data, ['key', data.key]);
+                    this.data.push(data);
+                    this.save();
+                },
+                answeredCount: function() {
+                    return _.filter(this.data, function(a) {
                         var readingQuetion = !_.every(a.value, function(sub) {
                                 return sub.value.length === 0 || sub.value[0].value === '';
                             }),
                             otherQuestion = a.value[0].value !== '';
                         return Number(a.type) === 6 ? readingQuetion : otherQuestion;
                     }).length;
-                    this.data.noAnswerNum = this.data.questionNum - this.data.answeredNum;
                 },
-                init: function(exam, payload) {
-                    this.data = D.assign({}, {
-                        name: exam.name,
-                        id: exam.id,
-                        isOnePageOneQuestion: true,
-                        mode: payload.mode || 1,
-                        noAnswerNum: exam.paper.questionNum || 0,
-                        answeredNum: 0,
-                        questionNum: exam.paper.questionNum,
-                        totalScore: exam.paper.totalScore / 100,
-                        duration: exam.duration
-                    });
-                }
-            }
-        },
-        exam: {
-            url: '../exam/exam/exam-paper',
-            type: 'localStorage',
-            mixin: {
-                getQuestionById: function(id) {
-                    var questions = this.data.paper.questions;
-                    return _.find(questions, ['id', id]);
-                }
-            }
-        },
-        questionTypes: {
-            type: 'localStorage',
-            mixin: {
-                createQuestionTypes: function(paper, sort) {
-                    var result = [],
-                        obj = {},
-                        qq,
-                        type,
-                        n = 0,
-                        types = maps.get('question-types');
-                    if (paper.questions && paper.questions.length > 0) {
-                        _.forEach(paper.questions, function(q) {
-                            type = map[q.type];
-                            if (!obj[type]) {
-                                obj[type] = { size: 0, totalScore: 0, name: '', data: [] };
-                            }
-                            obj[type].size++;
-                            obj[type].totalScore += q.score / 100;
-                            obj[type].name = types[Number(q.type) - 1].value;
-                            qq = {
-                                id: q.id,
-                                i: obj[type].data.length + 1,
-                                score: q.score / 100,
-                                isCurrent: false,
-                                currentStatus: itemStatus.INIT
-                            };
-                            obj[type].data.push(qq);
-                        });
-                        _.forEach(obj, function(v, k) {
-                            result.push({ type: k, data: obj[k], isCurrent: false, k: n });
-                        });
-                    }
-                    this.data = this.changeSort(result, sort);
-                },
-                setFirstQuestionRemote: function() {
-                    var questionTypes = this.data;
-                    questionTypes[0].isCurrent = true;
-                    questionTypes[0].data.data[0].currentStatus = itemStatus.CURRENT;
-                },
-                move: function(index) {
-                    var questionTypes = this.data,
-                        state = this.store.models.state,
-                        questionType = _.find(questionTypes, ['isCurrent', true]),
-                        // typeIndex = questionTypes.findIndex(function(qt) {
-                        //     return qt.isCurrent === true;
-                        // }),
-                        questions, q, z;
-                    if (questionType) {
-                        questions = questionType.data.data;
-                        q = _.find(questions, ['currentStatus', itemStatus.CURRENT]);
-                        z = (q.i - 1) + index;
-                        if (questions[z]) {
-                            questions[z].currentStatus = itemStatus.CURRENT;
-                            state.data.questionId = questions[z].id;
-                            questions[q.i - 1].currentStatus = getCurrentStatus.call(this, questions[q.i - 1]);
-                        }
-                        // } else if (index > 0 && questionTypes[typeIndex + 1]) {
-                        //     if (questionTypes[typeIndex + 1]) {
-                        //         questionTypes[typeIndex].isCurrent = false;
-                        //         questionTypes[typeIndex + 1].isCurrent = true;
-                        //         questionType = questionTypes[typeIndex + 1];
-                        //         questions = questionType.data.data;
-                        //         questions.forEach(function(question) {
-                        //             var qq = question;
-                        //             qq.isCurrent = false;
-                        //         });
-                        //         questions[0].isCurrent = true;
-                        //     } else {
-                        //         this.module.store.models.state.data.disableNext = true;
-                        //     }
-                        // } else if (index < 0 && questionTypes[typeIndex - 1]) {
-                        //     if (questionTypes[typeIndex - 1]) {
-                        //         questionTypes[typeIndex].isCurrent = false;
-                        //         questionTypes[typeIndex - 1].isCurrent = true;
-                        //         questionType = questionTypes[typeIndex - 1];
-                        //         questions = questionType.data.data;
-                        //         questions.forEach(function(question) {
-                        //             var qq = question;
-                        //             qq.isCurrent = false;
-                        //         });
-                        //         questions[questions.length - 1].isCurrent = true;
-                        //     } else {
-                        //         this.module.store.models.state.data.disablePrev = true;
-                        //     }
-                        // }
-                    }
-                    return this.store.models.state.getCurrentState(questionTypes);
-                },
-                click: function(payload) {
-                    var questionTypes = this.data,
-                        typeIndex = payload.typeIndex,
-                        questionId = payload.questionId,
-                        questions, q,
-                        me = this;
-                    if (typeIndex >= 0) {
-                        _.forEach(questionTypes, function(t) {
-                            var tt = t;
-                            tt.isCurrent = false;
-                            _.forEach(tt.data.data, function(question) {
-                                D.assign(question, { isCurrent: false });
-                            });
-                        });
-                        questionTypes[typeIndex].isCurrent = true;
-                    }
-                    questions = _.find(questionTypes, ['isCurrent', true]).data.data;
-                    if (questionId) {
-                        q = _.find(questions, ['id', questionId]);
-                        if (q) {
-                            _.map(questions, function(question) {
-                                if (question.currentStatus === itemStatus.CURRENT) {
-                                    D.assign(question, { currentStatus: getCurrentStatus.call(me, question) });
-                                }
-                            });
-                            q.isCurrent = true;
-                            q.currentStatus = itemStatus.CURRENT;
-                        }
-                    } else {
-                        questions[0].currentStatus = itemStatus.CURRENT;
-                    }
-                },
-                changeSort: function(questionTypes, sort) {
-                    var s = sort || 1,
-                        result,
-                        changeQuestionSort = function() {
-                            return _.map(questionTypes, function(qt) {
-                                var questionType = qt,
-                                    data = questionType.data.data;
-                                questionType.data.data = _.map(data.sort(function() {
-                                    return Math.random() - 0.5;
-                                }), function(q, i) {
-                                    return D.assign(q, { i: i + 1 });
-                                });
-                                return questionType;
-                            });
-                        },
-                        changeQuestionAttrsSort = function() {
-                            var questions = this.store.models.exam.data.paper.questions;
-                            _.forEach(questions, function(q) {
-                                var question = q;
-                                if (question.type === 1 || question.type === 2 || question.type === 8) {
-                                    D.assign(question, {
-                                        questionAttrs: question.questionAttrCopys.sort(function() {
-                                            return Math.random() - 0.5;
-                                        })
-                                    });
-                                }
-                            });
-                        },
-                        setQuestions = function(r) {
-                            var questions = [];
-                            _.forEach(r, function(questionType) {
-                                _.forEach(questionType.data.data, function(q) {
-                                    questions.push(q);
-                                });
-                            });
-                            this.store.models.questions.set(questions);
-                        };
-                    switch (s) {
-                    case 1:
-                        result = questionTypes;
-                        break;
-                    case 2:
-                        result = changeQuestionSort();
-                        break;
-                    case 3:
-                        setQuestions.call(this, questionTypes);
-                        changeQuestionAttrsSort.call(this);
-                        result = questionTypes;
-                        break;
-                    case 4:
-                        setQuestions.call(this, questionTypes);
-                        changeQuestionAttrsSort.call(this);
-                        result = changeQuestionSort();
-                        break;
-                    default:
-                        break;
-                    }
-                    setQuestions.call(this, result);
-                    return result;
-                },
-                getQuestionIndexInType: function(id) {
-                    var result = this.data,
-                        i = 0,
-                        questions,
-                        index = 0;
-                    for (i; i < this.data.length; i++) {
-                        questions = result[i].data.data;
-                        index = questions.findIndex(function(q) {
-                            return q.id === id;
-                        });
-                        if (index !== -1) return index + 1;
-                    }
-                    return index + 1;
-                },
-                waitingCheck: function(questionId) {
-                    _.map(this.data, function(d) {
-                        _.map(d.data.data, function(q) {
-                            if (q.id === questionId) {
-                                D.assign(q, { currentStatus: itemStatus.CHECK });
-                            }
-                        });
-                    });
-                }
-            }
-        },
-        questions: {},
-        side: { data: {} },
-        answer: {
-            type: 'localStorage',
-            data: { answers: [] },
-            mixin: {
-                saveAnswer: function(data) {
-                    var temp = _.reject(this.data.answers, ['key', data.key]);
-                    temp.push(data);
-                    this.data.answers = temp;
-                    this.store.models.modify.saveAnswer(data);
-                    this.save();
-                },
-                getAnswer: function(id) {
-                    if (this.data) {
-                        return _.find(this.data.answers, ['key', id]);
-                    }
-                    return null;
+                getAnswer: function(questionId) {
+                    return _.find(this.data, ['key', questionId]);
                 }
             }
         },
         modify: {
             type: 'localStorage',
-            data: { answers: [], api: {} },
             mixin: {
                 saveAnswer: function(data) {
-                    var temp = _.reject(this.data.answers, ['key', data.key]);
-                    temp.push(data);
-                    this.data.answers = temp;
+                    if (!this.data) this.data = [];
+                    this.data = _.reject(this.data, ['key', data.key]);
+                    this.data.push(data);
                     this.save();
-                },
-                covert: function(data) {
-                    this.data.api = {
-                        examRecordId: this.module.store.models.exam.data.examRecord.id,
-                        submitType: data.submitType,
-                        answerRecords: this.changeAnswerRecord(),
-                        clientType: 1
-                    };
                 },
                 changeAnswerRecord: function() {
                     var results = [];
-                    _.forEach(this.data.answers, function(a) {
+                    _.forEach(this.data, function(a) {
                         if (a.type && a.type === 6) {
                             _.forEach(a.value, function(v) {
                                 results.push(v);
@@ -377,154 +441,117 @@ exports.store = {
                         };
                     }));
                 }
+
             }
         },
         form: {
             url: '../exam/exam-record/submitPaper'
         },
-        marks: {
-            type: 'localStorage',
-            data: {
-                corrects: [],
-                waitingChecks: []
-            },
-            mixin: {
-                getCurrentCorrect: function(id) {
-                    return _.find(this.data.corrects, ['questionId', id]);
-                },
-                correct: function(data) {
-                    var temp = _.reject(this.data.corrects, ['questionId', data.questionId]);
-                    temp.push(data);
-                    this.data.corrects = temp;
-                    this.save();
-                },
-                isCollectDynamicView: function(id) {
-                    return id.indexOf('collect-correct-') > -1;
-                },
-                waitingCheck: function(id) {
-                    var data = this.data.waitingChecks || [];
-                    if (_.find(data, ['key', id])) {
-                        this.data.waitingChecks = _.reject(data, ['key', id]);
-                    } else {
-                        data.push({ key: id });
-                        this.data.waitingChecks = data;
-                    }
-                    this.save();
-                }
-            }
+        decryptKey: {
+            url: '../exam/exam/decrypt-key'
         }
     },
     callbacks: {
         init: function(payload) {
-            var me = this,
-                questionTypes = this.models.questionTypes,
-                answer = this.models.answer,
-                modify = this.models.modify,
+            var exam = this.models.exam,
+                types = this.models.types,
                 state = this.models.state,
-                exam = this.models.exam,
                 countDown = this.models.countDown,
-                marks = this.models.marks;
-
-            answer.load();
-            modify.load();
-            state.load();
-            countDown.load();
-            questionTypes.load();
+                mark = this.models.mark,
+                answer = this.models.answer;
             exam.load();
-            marks.load();
+            if (!exam.data || (exam.data && exam.data.id !== payload.examId)) {
+                _.forEach(this.models, function(m) {
+                    m.clear();
+                });
 
-            if (!state.data || (state.data.id && state.data.id !== payload.examId)) {
-                this.models.exam.clear();
-                this.models.exam.params = { examId: payload.examId };
-
-                return this.get(this.models.exam).then(function() {
-                    var examData = me.models.exam.data;
-                    me.models.exam.save();
-
-                    state.data = {};
-                    answer.data = { answers: [] };
-                    modify.data = { answers: [], api: {} };
-                    countDown.data = {};
-                    marks.data = { corrects: [], waitingChecks: [] };
-
-                    me.models.state.init(examData, payload);
-
-                    questionTypes.createQuestionTypes(examData.paper, examData.paperSortRule);
-                    questionTypes.setFirstQuestionRemote();
-
-                    me.models.state.getCurrentState(questionTypes.data);
-                    me.models.state.setFirstQuestionRemote(questionTypes.data);
+                D.assign(exam.params, { examId: payload.examId });
+                return this.get(exam).then(function() {
+                    exam.save();
+                    types.init(exam.data.paper.questions);
+                    state.init(exam.data);
+                    countDown.init();
+                    mark.init();
+                    answer.init();
                 });
             }
-            if (!answer.data) answer.data = { answers: [] };
-            if (!modify.data) modify.data = { answers: [], api: {} };
-            if (!marks.data) marks.data = { corrects: [], waitingChecks: [] };
             return '';
         },
-        reload: function() {
-            this.models.state.changed();
+        selectType: function(payload) {
+            this.models.types.selectType(payload.id);
+            this.models.types.changed();
         },
-        changeState: function(payload) {
-            var data = this.models.state.data,
-                side = this.models.side;
-            D.assign(data, payload);
-            D.assign(side.data, payload);
-            this.models.questionTypes.click(side.data);
-            this.models.state.getCurrentState(this.models.questionTypes.data);
+        selectQuestion: function(payload) {
+            this.models.state.selectQuestion(payload.id);
+            this.models.types.selectQuestion(payload.id);
             this.models.state.changed();
-            this.models.questionTypes.changed();
+            this.models.types.changed();
         },
         move: function(payload) {
-            this.models.questionTypes.move(payload);
-            this.models.questionTypes.changed();
+            this.models.types.move(payload);
+            this.models.types.changed();
+            this.models.state.resetCurrentQuestion();
             this.models.state.changed();
         },
-        changePaperViewType: function(payload) {
-            this.models.state.data.isOnePageOneQuestion = Number(payload.type) === 0;
-            this.models.state.changed();
+        saveAnswer: function(payload) {
+            this.models.answer.saveAnswer(payload);
+            this.models.modify.saveAnswer(payload);
+            this.models.state.calculate();
+            if (this.models.state.data.singleMode) {
+                this.models.state.changed();
+            } else {
+                this.models.types.updateStatus(payload.key, itemStatus.ACTIVE);
+                this.models.types.changed();
+            }
         },
         waitingCheck: function(payload) {
-            this.models.marks.waitingCheck(payload.questionId);
-            this.app.message.success(strings.get('operation-success'));
+            var f = this.models.mark.waitingCheck(payload.questionId);
+            if (!this.models.state.singleMode) {
+                if (f) {
+                    this.models.types.updateStatus(payload.questionId, itemStatus.CHECK);
+                } else {
+                    this.models.types.updateStatus(
+                        payload.questionId,
+                        getCurrentStatus.call(this.module, payload.questionId)
+                    );
+                }
+                this.models.types.changed();
+            }
         },
         correct: function(payload) {
-            this.models.marks.correct(payload);
-            this.models.state.changed();
+            this.models.mark.correct(payload);
         },
-        submit: function(payload) {
-            var modify = this.models.modify,
-                me = this,
-                t = true;
-                // examId = this.models.exam.data.id;
+        submitPaper: function(payload) {
+            var me = this,
+                f = true,
+                examRecordId = this.module.store.models.exam.data.examRecord.id,
+                data = {
+                    examRecordId: examRecordId,
+                    submitType: payload.submitType,
+                    answerRecords: this.models.modify.changeAnswerRecord(),
+                    clientType: constant.PC_CLIENT_TYPE
+                };
 
-            this.models.answer.save();
-            this.models.modify.save();
+            if (payload.submitType !== submitType.Auto) {
+                TO.cancel();
+            }
 
-            if (payload.submitType !== submitType.Auto) cancel();
-            modify.covert(payload);
-            this.models.form.set(modify.data.api);
-
-            if (t) {
+            this.models.form.set(data);
+            if (f) {
                 return this.post(this.models.form).then(function() {
-                    if (payload.submitType !== submitType.Auto) {
-                        me.models.questionTypes.clear();
-                        me.models.questions.clear();
-                        me.models.answer.clear();
+                    if (payload.submitType === submitType.Auto) {
+                        this.app.message.success('答案已自动保存成功');
                         me.models.modify.clear();
-                        me.models.state.clear();
-                        me.models.countDown.clear();
-                        me.models.questionTypes.clear();
-                        me.models.exam.clear();
-                        me.app.viewport.modal(me.module.items.tips, { message: '交卷成功' });
-                        setTimeout(function() {
-                            closeConnect();
-                            me.app.viewport.closeModal();
-                            window.close();
-                            // navigateToExamDetail(examId);
-                        }, 1500);
                     } else {
-                        this.app.message.success('答卷已自动保存成功');
-                        me.models.modify.data = { answers: [], api: {} };
+                        this.app.message.success('交卷成功');
+                        if (!viewAnswerDetail.call(me)) {
+                            setTimeout(function() {
+                                _.forEach(me.models, function(m) {
+                                    m.clear();
+                                });
+                                window.close();
+                            }, 500);
+                        }
                     }
                 });
             }
@@ -533,19 +560,50 @@ exports.store = {
         delay: function(payload) {
             this.models.countDown.data.delay = payload.delay;
             this.models.countDown.changed();
+        },
+        lowerSwitchTimes: function() {
+            var exam = this.models.exam.data;
+            if (exam.allowSwitchTimes) {
+                if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
+                    this.app.message.error('切屏次数已满，强制交卷');
+                    return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
+                        WS.closeConnect();
+                    });
+                }
+                D.assign(exam, {
+                    lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
+                });
+                this.models.exam.save();
+                this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
+            }
+            return true;
+        },
+        showAnswerDetail: function() {
+            var me = this;
+            D.assign(this.models.decryptKey.params, {
+                examId: this.models.exam.data.id
+            });
+            return this.get(this.models.decryptKey).then(function() {
+                me.models.types.decryptAnswer(JSON.parse(me.models.exam.decryptAnswer()));
+                me.models.state.data.showAnswerDetail = 1;
+                me.models.state.changed();
+            });
+        },
+        clearModels: function() {
+            _.forEach(this.models, function(m) {
+                m.clear();
+            });
         }
     }
 };
 
 exports.beforeRender = function() {
-    changeToFullScreen();
     return this.dispatch('init', this.renderOptions);
 };
 
 
 exports.afterRender = function() {
     var me = this,
-        t = false,
         examId = this.store.models.exam.data.id,
         getRandom = function() {
             var r = Math.random() * 1,
@@ -553,62 +611,107 @@ exports.afterRender = function() {
                 ms = (min + 1) * (1000 * 60);
             return ms;
         },
-        random = getRandom(),
+        f = true,
         autoSubmit = function() {
-            return me.dispatch('submit', { submitType: submitType.Auto }).then(function() {
-                timeOutId = setTimeout(autoSubmit, random);
+            return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
+                TO.timeOutId = setTimeout(autoSubmit, getRandom());
             });
         };
 
-    // this.app.message.success('随机秒数' + (random / 1000));
-    if (t) {
+    if (f) {
         autoSubmit();
-        timeOutId = setTimeout(autoSubmit, random);
-        connect(examId, function() {
-            me.app.viewport.modal(me.items.tips, { message: '你本次考试已被管理员强制交卷' });
+
+        TO.timeOutId = setTimeout(autoSubmit, getRandom());
+
+        WS.connect(examId, function() {
+            me.app.message.error('你本次考试已被管理员强制交卷');
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
-                closeConnect();
+                WS.closeConnect();
             });
         }, function(delay) {
             return me.dispatch('delay', { delay: Number(delay) });
         });
     }
+    switchScreen.call(this);
 };
 
-cancel = function() {
-    clearTimeout(timeOutId);
-    timeOutId = undefined;
+WS = {
+    connect: function(examId, submitPaper, timeExpand) {
+        E.connect(examId, {
+            submitPaper: submitPaper,
+            timeExpand: timeExpand
+        });
+    },
+    closeConnect: function() {
+        E.disconnect();
+    }
 };
 
-connect = function(examId, submitPaper, timeExpand) {
-    E.connect(examId, {
-        submitPaper: submitPaper,
-        timeExpand: timeExpand
-    });
+TO = {
+    cancel: function() {
+        clearTimeout(this.timeOutId);
+        this.timeOutId = undefined;
+    },
+    timeOutId: -1
 };
 
-closeConnect = function() {
-    E.disconnect();
-};
-
-changeToFullScreen = function() {
-    $('.header').hide();
-    $('.footer').hide();
-    $('.achievement-content').attr('height', '100%');
-};
-
-// navigateToExamDetail = function(examId) {
-//     var url = 'exam/index/' + examId;
-//     this.app.navigate(url, true);
-// };
-
-getCurrentStatus = function(question) {
-    var data = this.module.store.models.answer.data,
-        waitingCheck = this.module.store.models.marks.data.waitingChecks;
-    if (_.find(waitingCheck, ['key', question.id])) {
+getCurrentStatus = function(id) {
+    var answer = this.store.models.answer.data,
+        waitingChecks = this.store.models.mark.data.waitingChecks;
+    if (_.find(waitingChecks, ['key', id])) {
         return itemStatus.CHECK;
-    } else if (_.find(data.answers, ['key', question.id])) {
+    }
+    if (_.find(answer, ['key', id])) {
         return itemStatus.ACTIVE;
     }
     return itemStatus.INIT;
+};
+
+switchScreen = function() {
+    var me = this,
+        isAllowSwitch = this.store.models.exam.data.isAllowSwitch;
+    if (isAllowSwitch && isAllowSwitch === 1) {
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                return me.dispatch('lowerSwitchTimes');
+            }
+            return true;
+        });
+        window.onblur = function() {
+            return me.dispatch('lowerSwitchTimes');
+        };
+    }
+};
+
+viewAnswerDetail = function() {
+    var exam = this.models.exam.data,
+        me = this;
+    if (exam.isShowAnswerImmed === constant.SHOW_ANSWER_IMMED) {
+        this.app.message.confirm('提交成功，是否马上查看详情', function() {
+            $('.achievement-content').html('');
+            $('.achievement-content').hide();
+            return me.module.dispatch('showAnswerDetail');
+        }, function() {
+            _.forEach(me.models, function(m) {
+                m.clear();
+            });
+            window.close();
+            return false;
+        });
+        return true;
+    }
+    return false;
+};
+
+decryptAnswer = function(v) {
+    var k = this.store.models.decryptKey.data.key,
+        hex = CryptoJS.enc.Hex.parse(v),
+        base64Str = CryptoJS.enc.Base64.stringify(hex),
+        decrypted = CryptoJS.AES.decrypt(base64Str, CryptoJS.enc.Utf8.parse(k), {
+            iv: CryptoJS.enc.Utf8.parse(IV),
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }),
+        value = CryptoJS.enc.Utf8.stringify(decrypted).toString();
+    return value;
 };

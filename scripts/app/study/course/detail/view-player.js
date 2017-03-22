@@ -1,4 +1,11 @@
-var util = require('./app/study/course/course-util');
+var sectionCode = {
+    1: 'pdf',
+    2: 'image',
+    3: 'url',
+    5: 'audio',
+    6: 'video',
+    7: 'epub'
+};
 exports.type = 'dynamic';
 
 exports.bindings = {
@@ -13,9 +20,11 @@ exports.getEntity = function(key) {
 
 exports.getEntityModuleName = function(key, entity) {
     var code = 'default';
-    if (entity) code = util.sectionCode[entity.sectionType];
-    if (!code) code = 'default';
-
+    if (!entity) {
+        code = 'regist';
+    } else {
+        code = sectionCode[entity.sectionType] || 'default';
+    }
     return 'study/course/detail/player/' + code;
 };
 

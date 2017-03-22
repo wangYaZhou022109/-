@@ -3,109 +3,83 @@
 module > .knowledge-details
     .details-banner(data-region='banner')
     .page-main-wrapper
-        .details-main.pull-left(data-region='main')
+        .details-main.pull-left
+            .page-main > .container
+                section.section(data-region='main')
+                section.section(data-region='commit')
         .details-side(data-region='side')
 
 view('banner')
     .container > .reader
-        img(src='images/default-cover/knowledge_details.png')
+        div(data-dynamic-key='')
 
 view('main')
-    .page-main > .container
-        section.section
-            .clearfix
-                .pull-left
-                    .common-title.inline-block > | 经济学人的动态图表与交互设计
-                    .inline-block
-                        .star-wrapper.drop-down-wrapper
-                            .star-bar > .star(style='width:'+score.scorePercent+'%')
-                            .inline-block.sub-text > | 暂无评分
-                            .drop-down-content(class = if(score.hasScore 'hide')) > .content
-                                .text-center 我来评分
-                                .star-grade
-                                    .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                                    .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                                    .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                                    .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                                    .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                                .block.btn#submit-score 提交评分
-                .inline-block.layout-mr
-                    .inline-block.layout-ml.m-right > i.iconfont.icon-share
-                    .inline-block.m-left > i.iconfont.icon-favorite
-            p
-                | 发布人：管理员
-                span.layout-ml-small 发布时间：2017-08-08
-                span.layout-ml-small 下载积分：10
-                span.layout-ml-small
-                    | 相关话题：
-                    a.normal.m-right 管理
-                    a.normal.m-right 团队协作
-            p 描述：五分钟解剖一个热点，挖掘新闻背后的科学，坚持听榕哥唠嗑闲侃，包您掌握聚会话语权。了解更多内容
-        section.section
-            form.vertical
-                .h3 讨论区
-                .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
-                textarea.input.w-full(name='content' rows='5')
-                if(state.available)
-                    .m-top.text-right > .btn#add-comment 发表
-
+    .clearfix
+        .pull-left
+            .common-title.inline-block > echo(knowledge.name)
+            .inline-block
+                .star-wrapper.drop-down-wrapper
+                    .star-bar > .star(style='width:'+avgScoreFix+'%')
+                    if(knowledge.avgScore)
+                        .num > echo(knowledge.avgScore)
+                    else
+                        .inline-block.sub-text > echo('暂无评分')
+                    .drop-down-content > .content
+                        .text-center 我来评分
+                        .star-grade
+                            .item(id='star-2' title='1星') > i.iconfont.icon-star-full
+                            .item(id='star-4' title='2星') > i.iconfont.icon-star-full
+                            .item(id='star-6' title='3星') > i.iconfont.icon-star-full
+                            .item(id='star-8' title='4星') > i.iconfont.icon-star-full
+                            .item(id='star-10' title='5星') > i.iconfont.icon-star-full
+                        .block.btn#submit-score 提交评分
+        .inline-block.layout-mr
+            .inline-block.layout-ml.m-right > #share
+            .inline-block.m-left
+                if(collect.id)
+                    .item#cancel-collect(data-name='id' data-value=collect.id)
+                        i.iconfont.icon-favorite-full
+                        span 取消收藏
+                else
+                    .item#collect
+                        i.iconfont.icon-favorite
+                        span 收藏
+    p
+        | 发布人：管理员
+        span.layout-ml-small 
+            | 发布时间：
+            date(knowledge.releaseTime)
+        span.layout-ml-small 
+            | 下载积分：
+            echo(knowledge.integral)
+        span.layout-ml-small
+            | 相关话题：
+            each(knowledge.businessTopics)
+                a.normal.m-right > echo(topicName)
+    p > echo('描述：') + @echo(knowledge.description)
+view('commit')
+    #comment-area
 view('side')
     .page-side > .container
         section.section
             | 您当前积分：
-            b 200
+            b > echo(integral.totalScore)
             | 分
-            .btn.block.layout-mt-small.big 下载当前阅览知识（-2积分）
-            .btn.block.m-top.big.upload-knowledge 上传新知识（+2积分）
-            .clearfix.m-top
-                .pull-left 请评分
-                .inline-block.pull-left
-                    .star-wrapper.drop-down-wrapper
-                        .star-bar > .star(style='width:'+score.scorePercent+'%')
-                        .inline-block.sub-text > | 暂无评分
-                        .drop-down-content(class = if(score.hasScore 'hide')) > .content
-                            .text-center 我来评分
-                            .star-grade
-                                .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                                .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                                .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                                .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                                .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                            .block.btn#submit-score 提交评分
-                .pull-right.sub-text 20人已评分
+            a.btn.block.layout-mt-small.big(href=downUrl download=knowledge.name) > echo('下载当前阅览知识（-' + knowledge.integral+'积分）')
+            .btn.block.m-top.big.upload-knowledge#upload 上传新知识（+2积分）
 
         section.section
             .h3 相关知识
-                small.pull-right.sub-text
+                small.pull-right.sub-text#changeRecommends
                     .iconfont.icon-reload-full
                     | 换一组
-            ul.relevant-knowledge.layout-mt-small
+            ul.relevant-knowledge.layout-mt-small > each(recommends)
                 li
-                    .pull-right 2 积分
-                    a.normal 2017项目计划.doc
-                li
-                    .pull-right 2 积分
-                    a.normal 2017项目计划.doc
-                li
-                    .pull-right 2 积分
-                    a.normal 2017项目计划.doc
-                li
-                    .pull-right 2 积分
-                    a.normal 2017项目计划.doc
-                li
-                    .pull-right 2 积分
-                    a.normal 2017项目计划.doc
+                    .pull-right > echo(integral) + | 积分
+                    a.normal > echo(name)
 
         section.section.student
             .h3 最近查看的用户
             .layout-mt-small.user-picture
-                .grid-row
-                    .col-md-4 > img.block(src='images/d1.jpg')
-                    .col-md-4 > img.block(src='images/d2.jpg')
-                    .col-md-4 > img.block(src='images/d3.jpg')
-                    .col-md-4 > img.block(src='images/d4.jpg')
-                    .col-md-4 > img.block(src='images/d4.jpg')
-                    .col-md-4 > img.block(src='images/d3.jpg')
-                    .col-md-4 > img.block(src='images/d2.jpg')
-                    .col-md-4 > img.block(src='images/d1.jpg')
-                    .col-md-4 > img.block(src='images/d2.jpg')
+                .grid-row > each(readerMembers)
+                    .col-md-4 > img.block(src=head title=name)

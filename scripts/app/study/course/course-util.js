@@ -7,7 +7,7 @@ var options = {
     chapterOrSection = { 1: options.suffixChapter, 2: options.suffixSection },
     sectionCode = {
         1: 'pdf',
-        2: 'img',
+        2: 'image',
         3: 'url',
         // 4: 'scorm',
         5: 'audio',

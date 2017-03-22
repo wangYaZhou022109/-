@@ -1,0 +1,15 @@
+#!handlebars
+
+module > .section(data-region='lecturer')
+
+view('lecturer') > .container
+    .home-title-row
+        .title > echo(moduleHomeConfig.name)
+        .more more
+    .lecture-list > ul > each(lecturers)
+        li
+            .lecture-pic > img(src=downloadUrl(lecturer.memberHeadPortrait))
+            .lecture-info
+                .title > echo(lecturer.memberName)
+                .sub-text > echo(lecturer.organizationName)
+                .sub-text > echo(lecturer.levelName)

@@ -1,1 +1,13 @@
 @import "main.css";
+@import "aboutme.css";
+@import "changetopic/changetopic.css";
+@import "export/export.css";
+@import "watch-detail1.css";
+@import "report-exam/report-exam.css";
+@import "ask-exam.css";
+@import "discuss-exam.css";
+@import "exam-pass/exam-pass.css";
+@import "ask-reject.css";
+@import "discuss-reject.css";
+@import "report-reject/report-reject.css";
+@import "question.css";

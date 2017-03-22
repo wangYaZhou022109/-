@@ -44,8 +44,12 @@ view('main')
                         echo(gensee.subject)
                     .inline-block
                         .star-wrapper.drop-down-wrapper
-                            .star-bar > .star(style='width:'+score.scorePercent+'%')
-                            .inline-block.sub-text > | 暂无评分
+                            .star-bar 
+                                .star(style='width:'+score.scorePercent+'%')                 
+                            if(score.avgScore)
+                                .num > echo(score.avgScore)
+                            else
+                                .inline-block.sub-text > echo('暂无评分')
                             .drop-down-content(class = if(score.hasScore 'hide')) > .content
                                 .text-center 我来评分
                                 .star-grade
@@ -56,8 +60,16 @@ view('main')
                                     .item(id='star-10' title='5星') > i.iconfont.icon-star-full
                                 .block.btn#submit-score 提交评分
                 .inline-block.layout-mr
-                    .inline-block.layout-ml.m-right > i.iconfont.icon-share
-                    .inline-block.m-left > i.iconfont.icon-favorite
+                    .inline-block.layout-ml.m-right 
+                        #share
+                        if(collect.id)
+                            .item#cancel-collect(data-name='id' data-value=collect.id)
+                                i.iconfont.icon-favorite-full
+                                span 取消收藏
+                        else
+                            .item#collect
+                                i.iconfont.icon-favorite
+                                span 收藏
             .clearfix.live-details-teacher
                 .lecturer.clearfix
                     .user-pic.pull-left > i.iconfont.icon-star-full
@@ -69,14 +81,15 @@ view('main')
                     .user-pic.pull-left > i.iconfont.icon-star-full
                     | 直播时间
                     p
-                        date(gensee.startTime)
+                        dateMinute(gensee.startTime)
                 compare(sub.subStatus 'eq' 0)
                     .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
                 else
-                    .btn.pull-right.m-top 已预约
+                    .btn.pull-right.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
             .clearfix
-                each(gensee.genseeTopics)
-                    .btn-white > echo(topicName)
+            .side-box
+                each(gensee.businessTopics)
+                    .tag-btn > echo(topicName)
                
         if(courses)
             section.section

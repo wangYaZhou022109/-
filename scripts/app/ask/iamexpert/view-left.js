@@ -7,17 +7,17 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click menu-*': 'showMenu'
+    'click menu-*': 'showMenu',
+    'click item-*': 'showMenu'
 };
 
 exports.handlers = {
     showMenu: function(menu) {
         var state = this.bindings.leftstate,
             expert = this.bindings.expert;
-       // console.log(expert);
         state.data = {};
-        state.data.expertid = expert.id;
-        state.data.menu = menu || 'expertsanswer';
+        state.data.id = expert.data.id;
+        state.data.menu = menu || 'inviteanswer';
         state.data[menu] = true;
         state.changed();
     }

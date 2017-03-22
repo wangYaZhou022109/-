@@ -1,0 +1,196 @@
+#! handlebars
+
+module > .attention-page
+    .attention-tabs(data-region="tabs")
+
+view('tabs')
+    .tabs.line > ul
+        li#item-1.active 内容
+        li#item-2 话题
+        li#item-3 专家
+    .tabs-cont > ul
+        li.tabs-cont-item.active#tabs-cont-item-1
+            .person-list
+                .comment-list.ask-list > ul
+                    li
+                        .user-pic > img(src='images/1.png')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 张三丰
+                                span ·提问·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 来自话题：公司文化
+                                .text-right
+                                    .item > a.normal(href='javascript:;') 取消关注
+                                    .item > a.normal(href='javascript:;') 添加讨论
+                                    .item
+                                        .drop-down-wrapper
+                                            .drop-down-btn 分享
+                                            .drop-down-content > .content
+                                                ul
+                                                    li 分享1
+                                                    li 分享2
+                                                    li 分享3
+                                    .item > a.normal(href='javascript:;') 举报
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+                    li
+                        .user-pic > img(src='images/1.png')
+                        .comment-content
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                span.inline-block.custom-bg-color-1 专
+                                a(href='javascript:;') 李大仙
+                                span ·分享·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 来自话题：有温暖的公司
+                                .text-right
+                                    .item > a.normal(href='javascript:;') 取消关注
+                                    .item > a.normal(href='javascript:;') 赞(23)
+                                    .item > a.normal(href='javascript:;') 18条讨论
+                                    .item
+                                        .drop-down-wrapper
+                                            .drop-down-btn 分享
+                                            .drop-down-content > .content
+                                                ul
+                                                    li 分享1
+                                                    li 分享2
+                                                    li 分享3
+                                    .item > a.normal(href='javascript:;') 举报
+                    li
+                        .user-pic > img(src='images/1.png')
+                        .comment-content
+                            .h4 分享标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text
+                                img(src='images/1.png')
+                                | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 黄澄澄
+                                span ·分享·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 来自话题：梦想万一实现了
+                                .text-right
+                                    .item > a.normal(href='javascript:;') 取消关注
+                                    .item > a.normal(href='javascript:;') 赞(23)
+                                    .item > a.normal(href='javascript:;') 18条讨论
+                                    .item
+                                        .drop-down-wrapper
+                                            .drop-down-btn 分享
+                                            .drop-down-content > .content
+                                                ul
+                                                    li 分享1
+                                                    li 分享2
+                                                    li 分享3
+                                    .item > a.normal(href='javascript:;') 举报
+        li.tabs-cont-item#tabs-cont-item-2
+            .person-list
+                .filter.layout-mt-small
+                    .pull-left
+                        .inline-block.m-left.sub-text 话题类型：
+                        .item.active > span 全部
+                        .item > span 话题类型
+                        .item > span 类型
+
+                .comment-list.ask-list > ul
+                    li.topic-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/demo/1.jpg")
+                            h4.text-overflow(title='温暖气氛') 温暖气氛
+                            .info 36关注 ｜ 1专家 ｜ 2问题
+                        .btn.small 取消关注
+                    li.topic-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/demo/1.jpg")
+                            h4.text-overflow(title='脱口秀') 脱口秀
+                            .info 36关注 ｜ 1专家 ｜ 2问题
+                        .btn.small 取消关注
+                    li.topic-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/demo/1.jpg")
+                            h4.text-overflow(title='梦想常有') 梦想常有
+                            .info 36关注 ｜ 1专家 ｜ 2问题
+                        .btn.small 取消关注
+                    li.topic-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/demo/1.jpg")
+                            h4.text-overflow 脱口秀
+                            .info 36关注 ｜ 1专家 ｜ 2问题
+                        .btn.small 取消关注
+                    li.topic-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/demo/1.jpg")
+                            h4.text-overflow 梦想常有
+                            .info 36关注 ｜ 1专家 ｜ 2问题
+                        .btn.small 取消关注
+        li.tabs-cont-item#tabs-cont-item-3
+            .person-list
+                .filter.layout-mt-small
+                    .pull-left
+                        .inline-block.m-left.sub-text 话题类型：
+                        .item.active > span 全部
+                        .item > span 话题类型
+                        .item > span 类型
+
+                .comment-list.ask-list > ul
+                    li.expert-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/d2.jpg")
+                            h4.text-overflow 赵小茵
+                            .info 36关注 ｜ 1回答 ｜ 2分享
+                            .row
+                                .tag-btn 话题
+                                .tag-btn 话题二
+                                .tag-btn 梦想
+                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
+                        .btn.small 取消关注
+                    li.expert-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/d4.jpg")
+                            h4.text-overflow 晓杨杨
+                            .info 36关注 ｜ 1回答 ｜ 2分享
+                            .row
+                                .tag-btn 话题
+                                .tag-btn 话题二
+                                .tag-btn 梦想
+                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人
+                        .btn.small 取消关注
+                    li.expert-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/d1.jpg")
+                            h4.text-overflow 赵小茵
+                            .info 36关注 ｜ 1回答 ｜ 2分享
+                            .row
+                                .tag-btn 话题
+                                .tag-btn 话题二
+                                .tag-btn 梦想
+                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
+                        .btn.small 取消关注
+                    li.expert-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/d5.jpg")
+                            h4.text-overflow 晓杨杨
+                            .info 36关注 ｜ 1回答 ｜ 2分享
+                            .row
+                                .tag-btn 话题
+                                .tag-btn 话题二
+                                .tag-btn 梦想
+                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人
+                        .btn.small 取消关注
+                    li.expert-item
+                        a.normal(href="javascript:;")
+                            .img > .img-cont > img(src="images/d3.jpg")
+                            h4.text-overflow 赵小茵
+                            .info 36关注 ｜ 1回答 ｜ 2分享
+                            .row
+                                .tag-btn 话题
+                                .tag-btn 话题二
+                                .tag-btn 梦想
+                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
+                        .btn.small 取消关注

@@ -1,10 +1,8 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
 
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true,
-    popupstate: true
+    expertlist: true,
+    topicType: true
 };
 
 exports.events = {
@@ -14,37 +12,27 @@ exports.events = {
 };
 
 exports.handlers = {
-    activate: function(menu) {
-        var state = this.bindings.popupstate;
-        state.data = {};
-        state.data.title = '';
-        state.data.title = '专家激活';
-        state.hidden = true;
-        state.data.menu = menu || 'expertactivation';
-        state.data[menu] = true;
-        state.changed();
+    activate: function() {
+        var model = this.module.items['ask/expertactivation'];
+        this.app.viewport.modal(model);
     },
-    myself: function(id, e, target) {
-        var region;
-        var el = $(target).parents('.activity-page')[0];
-        region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/iamexpert', { id: id });
+    myself: function() {
+        this.app.show('content', 'ask/iamexpert');
     },
-    apply: function(menu) {
-        var state = this.bindings.popupstate;
-        state.data = {};
-        state.data.title = '';
-        state.data.title = '专家申请';
-        state.hidden = true;
-        state.data.menu = menu || 'expertapply';
-        state.data[menu] = true;
-        state.changed();
+    apply: function() {
+        var model = this.module.items['ask/applyexpertaptitude'];
+        this.app.viewport.modal(model);
     }
 };
 
 exports.actions = {
+    'click check-*': 'check'
 };
+
 exports.dataForActions = {
+    check: function(payload) {
+        return payload;
+    }
 };
 
 exports.actionCallbacks = {

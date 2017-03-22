@@ -1,7 +1,6 @@
 var _ = require('lodash/collection'),
-    maps = require('./app/util/maps'),
     D = require('drizzlejs'),
-    types = require('./app/exam/types'),
+    types = require('./app/exam/research-question-types'),
     ANSWER_MODE = 3,
     MUTIPLE_CHOOSE = 2;
 
@@ -10,27 +9,8 @@ exports.type = 'dynamic';
 exports.bindings = {
     researchRecord: true,
     questions: false,
-    answer: false
-};
-
-exports.dataForTemplate = {
-    dimensions: function(data) {
-        var questionTypes = maps.get('research-question-types'),
-            chineseNumber = maps.get('chineseNumber'),
-            dimensions = data.researchRecord.researchQuestionary.dimensions;
-
-        return _.map(dimensions, function(d, i) {
-            return D.assign(d, {
-                dimensionIndex: _.find(chineseNumber, ['key', (i + 1).toString()]).value,
-                questions: _.map(d.questions, function(q, n) {
-                    return D.assign(q, {
-                        questionIndex: n + 1,
-                        typeDesc: _.find(questionTypes, ['key', q.type.toString()]).value + '题'
-                    });
-                })
-            });
-        });
-    }
+    answer: false,
+    dimensions: true
 };
 
 exports.getEntity = function(id) {
@@ -53,7 +33,7 @@ exports.dataForEntityModule = function(question) {
         multiple: question.type === MUTIPLE_CHOOSE,
         answer: this.bindings.answer.getAnswer(question.id),
         callback: function(data) {
-            me.bindings.answer.saveAnswer(data);
+            return me.module.dispatch('saveAnswer', data);
         }
     };
 };

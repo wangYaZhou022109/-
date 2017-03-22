@@ -2,7 +2,7 @@ var _ = require('lodash/collection'),
     $ = require('jquery');
 exports.bindings = {
     region: false,
-    subject: false,
+    subject: true,
     collect: true,
     score: true,
     download: false
@@ -14,6 +14,23 @@ exports.components = [{
     options: {
         autoplay: true
     }
+}, function() { // 分享组件
+    var data = {},
+        subject = this.bindings.subject.data;
+    if (subject) {
+        data.id = subject.id;
+        data.type = '8';
+        data.pics = subject.cover || 'images/default-cover/default_spceial.jpg';
+        data.title = subject.name;
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
 }];
 
 exports.events = {
@@ -43,6 +60,9 @@ exports.dataForTemplate = {
         _.map(advertisings || [], function(banner) {
             var b = banner;
             b.downUrl = me.bindings.download.getFullUrl() + '?id=' + b.cover;
+            if (b.linkType === 0) {
+                b.linkUrl = '#/news/detail/' + b.id + '/1';
+            }
         });
         return advertisings;
     },

@@ -36,19 +36,71 @@ view('shortcut')
                     li.text-hover-main-color 热门搜索课程名称
                     li.text-hover-main-color 热门搜索课程名称
 
+        .item.small-font.drop-down-wrapper.right
+            .drop-down-btn
+                span 集团
+                i.iconfont.icon-triangle-down
+            .drop-down-content > .content
+                ul
+                    li 集团
+                    li 子公司
 
-
-        .item > a.normal(href='#') > i.iconfont.icon-message
-        .item > a.normal(href='/admin') > i.iconfont.icon-setting
         if(Global.currentUser.id)
-            .item > a.normal#logout(href='javascript:;') > .user-info.inline-block > .user-pic > img(src='images/4.png')
-        else
-            .item.hide> a.normal#logout(href='javascript:;') > .user-info.inline-block > .user-pic > img(src='images/4.png')
-
-        .hide
-            form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
-                input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
+            .item.drop-down-wrapper.right
+                a.normal(href='#') > i.iconfont.icon-message.drop-down-btn
+                .drop-down-content > .content
+                    ul.message-list
+                        li
+                            a.underline(href='#/message/detail') > .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
+                        li
+                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
+                        li
+                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
+                        li
+                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
+                        li
+                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
+                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
+                    .text-center.small-font > a#message-more 查看更多
+            .item > a.normal(href='/admin/') > i.iconfont.icon-setting
+            .item.drop-down-wrapper.right
+                .drop-down-btn.user-info.inline-block.user-pic
+                    if(Global.currentUser.headPortrait)
+                        img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
+                    else
+                        img(src='images/default-userpic.png')
+                .drop-down-content > .content
+                    .user-info-top
+                        .user-pic.inline-block
+                            if(Global.currentUser.headPortrait)
+                                img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
+                            else
+                                img(src='images/default-userpic.png')
+                        .user-info-main.inline-block
+                            .item
+                                .inline-block.common-title > echo(Global.currentUser.name)
+                                .inline-block.lv LV3
+                            .item.small-font
+                                a.mr-1(href='#/center/index') 进入个人中心
+                                a#logout(href='javascript:;') 退出账号
+                    .user-info-list.border.top
+                        .item.border.right
+                            b 1小时30分
+                            .small-font.m-top 学习时长
+                        .item
+                            b 999
+                            .small-font.m-top 积分
+                    .hide
+                        form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
+                            input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
 
 view('logo')
-    .item > img(src='images/cmou-logo.png')
+    if(homeConfig.logo)
+        .item > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
+    else
+        .item > img(src='images/cmou-logo.png')
     .item > img(src='images/dx-logo.png')

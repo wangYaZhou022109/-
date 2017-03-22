@@ -1,50 +1,26 @@
 #!handlebars
 module 
-    .content
-        div(data-region='main')
-        div(data-region='popup')
+    div(data-region='main')
+    div(data-region='popup')
 view('main') 
-    table.table
-        tr > td(align='center' colspan='3') 
-            a(id='follow-9' href='javascript:;')(class ='active') 
-                echo(follow.contentCount)
-                .title.text-overflow > string('follow') + string('content')
-            a(id='follow-10' href='javascript:;')(class ='active') 
-                echo(follow.topicCount)
-                .title.text-overflow > string('follow') + string('topic')
-            a(id='follow-11' href='javascript:;')(class ='active') 
-                echo(follow.expertCount)
-                .title.text-overflow > string('follow') + string('expert')
-            hr
-        tr 
-            td(style='width:50px;')
-            td(align='center') 
-                a(id='middle-menu-myquiz' href='javascript:;')(class ='active') 我的提问
-                hr
-            td(style='width:50px;')
-        tr 
-            td
-            td(align='center') 
-                a(id='middle-menu-myshares' href='javascript:;')(class ='active') 我的分享
-                hr
-            td
-        tr 
-            td
-            td(align='center')
-                a(id='middle-menu-6' href='javascript:;')(class ='active') 我的回复
-                hr
-            td
-        tr 
-            td
-            td(align='center') 
-                a(id='middle-menu-7' href='javascript:;')(class ='active') 回复我的
-                hr
-            td
-        tr
-            td
-            td(align='center') 
-                a(id='middle-menu-mymanage' href='javascript:;')(class ='active') 我是管理
-            td
+    .section.follow
+        .clearfix
+            dl
+                dt > echo(follow.contentCount)
+                dd > string('follow') + string('content')
+            dl
+                dt > echo(follow.topicCount)
+                dd > string('follow') + string('topic')
+            dl
+                dt > echo(follow.expertCount)
+                dd > string('follow') + string('expert')
+        ul
+            li > a(id='middle-menu-myquiz' href='javascript:;') > echo('我的提问')
+            li > a(id='middle-menu-myshares' href='javascript:;') > echo('我的分享')
+            li > a(id='middle-menu-myreply' href='javascript:;') > echo('我的回复')
+            li > a(id='middle-menu-replyme' href='javascript:;') > echo('回复我的')
+            li > a(id='middle-menu-mymanage' href='javascript:;') > echo('我是管理')
+
 
 view('popup')
     div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
