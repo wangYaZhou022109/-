@@ -16,18 +16,5 @@ exports.handlers = {
         var me = this,
             model = me.module.items['train/statistics/task/task-detail'];
         me.app.viewport.modal(model, { id: data });
-        // me.app.viewport.modal(model, { id: { id: data } });
     }
-};
-
-exports.actions = {
-
-};
-
-exports.dataForActions = {
-
-};
-
-exports.actionCallbacks = {
-
 };

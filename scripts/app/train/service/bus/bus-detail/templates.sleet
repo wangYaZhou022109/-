@@ -3,7 +3,7 @@ module > .train-class-page
     .page-main-wrapper
         .activity-category
             .div(data-region='count')
-            .div(data-region='search')
+            .div(data-region='option')
             .div(data-region='main')
 
 view('count') > form.vertical
@@ -11,22 +11,11 @@ view('count') > form.vertical
     echo(busOne.name)
     echo('统计时间')
     dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
-    br
-    echo('当日晚去往地铁')
-    echo('当日晚去往机场')
-    echo('0205晚餐')
-    echo('0206早餐')
 
-view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('登记信息')
-            select#state(name='state')
-                option(value='0') > echo('当日晚去机场')
-                option(value='1') > echo('0206早餐')
-                option(value='2') > echo('不需要用车')
-        div.col-sm-3
-            btn.btn#search > echo('查询')
+view('option')
+    table.table
+        tbody > each(busOption) > tr
+            td > echo(name)
 
 view('main')
     div.text-center
@@ -43,3 +32,4 @@ view('main')
             td > echo(member.fullName)
             td > echo(member.phoneNumber)
             td > echo('')
+    #pager.pagination

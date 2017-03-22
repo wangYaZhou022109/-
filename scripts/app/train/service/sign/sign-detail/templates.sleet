@@ -58,6 +58,7 @@ view('main')
             td > echo(member.phoneNumber)
             td > dateTime(signDate)
             td > a(id='update'+id data-name='id' data-value=id) > map('train-signdetail-state' state)
+    #pager.pagination
 
 view('status') > form.vertical
     input.input(name='id' type='hidden' value=id)

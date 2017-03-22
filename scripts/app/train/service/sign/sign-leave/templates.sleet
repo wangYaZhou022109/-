@@ -30,7 +30,7 @@ view('main')
                 th > echo('审核结果')
                 th > echo('操作')
             tbody > each(leave) > tr
-                td > echo(member.Name)
+                td > echo(member.name)
                 td > echo(member.fullName)
                 td > echo(member.phoneNumber)
                 td > map('train-leave-state' state)
