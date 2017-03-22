@@ -1,7 +1,7 @@
 #!handlebars
 module
     div(data-region='list')
-    div(data-region='popup')  
+    
 view('list')
     each(trends)
         li
@@ -66,6 +66,7 @@ view('list')
                                     else
                                         .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
                                     .item > string('share')
+                                    .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
                                 else
                                     compare(pendingAudit.auditStatus 'eq' 2) 
                                         .item > span.color-ing > string('auditStatus2')
@@ -74,6 +75,7 @@ view('list')
                                         .item > string('comment') + echo('(' + discussList.length +')')
                                         .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
                                         .item > string('share')
+                                        .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
                                         compare(createUserId 'eq' me)
                                             compare(discussList.length 'eq' 0)
                                                 .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
@@ -84,14 +86,8 @@ view('list')
                             else
                                 .item(id='trend-follow-3_' + discussId data-name='id' data-value='3_' + discussId ) > echo('+') + string('follow')
                             .item > string('share')
+                            .item > span(id ='trend-report-' + trendsType + '_' + discussId data-name='id' data-value=trendsType +'_' + discussId) > string('report')
                             compare(createUserId 'eq' me)
                                 compare(discussList.length 'eq' 0)
                                     .item(id = 'del-discuss-' + discussId data-name='id' data-value=discussId) > string('delete')
-            
-view('popup')
-    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
-    .catalog-view('hidden' style='width:300px;margin:0 auto; position:absolute;z-index: 9999;top:50%;left:50%;') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active.title > string('my-question')
-        div(data-dynamic-key=popupstate.menu)                                                
+                                           
