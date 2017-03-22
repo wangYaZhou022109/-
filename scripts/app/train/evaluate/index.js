@@ -10,13 +10,15 @@ exports.store = {
         download: { url: '../human/file/download' },
         file: { url: '../human/file/upload-parse-file' },
         files: { data: [] },
-        state: { data: { id: 3 } }
+        state: { data: {} }
     },
     callbacks: {
         init: function(payload) {
             var Evaluate = this.models.Evaluate,
-                files = this.models.files;
-            Evaluate.params = payload;
+                files = this.models.files,
+                state = this.models.state;
+            Evaluate.params.id = payload.id.classId;
+            state.data.classId = payload.id.classId;
             files.clear();
             this.get(Evaluate).then(function(data) {
                 var d = data,
@@ -30,11 +32,11 @@ exports.store = {
             return this.get(Evaluate);
         },
         submit: function(payload) {
-            var Evaluate = this.models.Evaluate;
-            var data = { attachmentId: this.models.files.data[0].attachId,
-                attachmentName: this.models.files.data[0].attachName };
-            var pay = payload;
-            pay.id = payload.id[0];
+            var Evaluate = this.models.Evaluate,
+                data = { attachmentId: this.models.files.data[0].attachId,
+                    attachmentName: this.models.files.data[0].attachName },
+                pay = payload;
+            pay.id = this.models.state.data.classId;
             D.assign(pay, data);
             Evaluate.set(pay);
             return this.save(Evaluate);
@@ -67,6 +69,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var id = this.store.models.state.data;
-    return this.dispatch('init', id);
+    return this.dispatch('init', { id: this.renderOptions.state });
 };

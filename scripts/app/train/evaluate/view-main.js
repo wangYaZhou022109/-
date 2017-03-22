@@ -1,4 +1,6 @@
-var _ = require('lodash/collection'),
+var markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators'),
+    _ = require('lodash/collection'),
     $ = require('jquery');
 
 exports.bindings = {
@@ -24,10 +26,7 @@ exports.dataForActions = {
         if (files.length < 1) {
             this.app.message.alert('请上传附件');
         }
-        if (data.id === '') {
-            data.id = this.bindings.Evaluate.params.id;
-        }
-        return data;
+        return this.validate() ? data : false;
     },
     delAttach: function(payload) {
         var me = this;
@@ -50,9 +49,10 @@ exports.handlers = {
         if (files.length >= 1) {
             this.app.message.alert('附件只能存在1个，请删除后在上传');
         } else {
-            Evaluate.classInfo.id = $(this.$('id')).val();
-            Evaluate.method = $(this.$('method')).val();
-            Evaluate.result = $(this.$('result')).val();
+            if (Evaluate) {
+                Evaluate.method = $(this.$('method')).val();
+                Evaluate.result = $(this.$('result')).val();
+            }
             this.app.viewport.modal(view);
         }
     }
@@ -60,9 +60,9 @@ exports.handlers = {
 
 exports.actionCallbacks = {
     submit: function() {
-        var id = this.bindings.state.data;
+        var classId = this.bindings.state.data.classId;
         this.app.message.success('保存成功！');
-        this.module.dispatch('init', id);
+        this.module.dispatch('init', { id: { classId: classId } });
     }
 };
 
@@ -76,5 +76,35 @@ exports.dataForTemplate = {
             return item;
         });
         return data.files;
+    }
+};
+
+exports.mixin = {
+    validate: function() {
+        var result = $(this.$('result')),
+            method = $(this.$('method')),
+            flag = true,
+            reg = new RegExp('\\{' + 0 + '\\}', 'g');
+
+        markers.text.valid(result);
+        markers.text.valid(method);
+
+        if (method.val() === '') {
+            markers.text.invalid(method, validators.required.message);
+            flag = false;
+        }
+        if (result.val() === '') {
+            markers.text.invalid(result, validators.required.message);
+            flag = false;
+        }
+        if (method.val() !== '' && !validators.maxLength.fn(method.val(), 100)) {
+            markers.text.invalid(method, validators.maxLength.message.replace(reg, 100));
+            flag = false;
+        }
+        if (result.val() !== '' && !validators.maxLength.fn(result.val(), 2000)) {
+            markers.text.invalid(result, validators.maxLength.message.replace(reg, 2000));
+            flag = false;
+        }
+        return flag;
     }
 };

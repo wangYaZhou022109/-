@@ -16,7 +16,6 @@ view('main') > form.vertical
             .col-sm-2(style='text-align:left')
                 label(class='required') 本次培训采用的考核方式：
                 input.input#method(name='method' value=Evaluate.method x-rule='required')
-                input.input#id(type='hidden' name='id' value=Evaluate.classInfo.id)
         .row
             .col-sm-2(style='text-align:left')
                 label 如：考试、学习汇报、小组作业、撰写学习心得、工作模拟、岗位考试认证或者其他具体的考试方式
