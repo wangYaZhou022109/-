@@ -29,11 +29,64 @@ view('main')
                     a
                         i.iconfont.icon-file
                         span 附件标题附件标题附件标题.pdf
-                .comment-list > .comment-operation.text-right
-                    .item 分享
-                    .item 举报
-            section.section
-                .h3 讨论区内容区域
+    .comment-list > .comment-operation.text-right
+        .item 分享
+        .item 举报
+        .layout-mt
+            .comment-list > ul
+                each(comments)
+                    li
+                        .user-pic > img(src=avatarId)
+                        .comment-content
+                            .user-info
+                                a(href='javascript:;') > echo(memberName)
+                                span > echo(memberOrg.name)
+                            .comment-text > echo(content)
+                            form
+                                input(type='hidden' name='toMemberId' value=memberId)
+                                input(type='hidden' name='commentId' value=id)
+                                input(type='hidden' name='objectId' value=id)
+                                input(type='hidden' name='objectType' value=1)
+                                .comment-operation
+                                    .pull-left > .sub-text > dateTime(createTime)
+                                    .text-right
+                                        if(praiseId)
+                                            .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId) > i.iconfont.icon-zan + echo('取消赞 ') + echo(praiseCount)
+                                        else
+                                            .item(id='praise'+id ) > i.iconfont.icon-zan + echo('赞 ') + echo(praiseCount)
+                                        .item(id='showReply-'+id) > i.iconfont.icon-message + echo('评论 ') + echo(commentCount)
+                                        .item > i.iconfont.icon-info + echo('举报')
+                                .comment-reply(id='reply-content-'+id)
+                                    textarea.input.w-full.block(name='content' rows='1')
+                                    .btn(id='add-reply-'+id) 回复
+                            compare(replies.length 'gt' 0)
+                                .comment-list.border.top > ul
+                                    each(replies)
+                                        li
+                                            .user-pic > img(src=avatarId)
+                                            .comment-content
+                                                .user-info
+                                                    a(href='javascript:;') > echo(memberName)
+                                                    span 回复
+                                                    a(href='javascript:;') > echo(toMemberName)
+                                                .comment-text > echo(content)
+                                                form
+                                                    input(type='hidden' name='toMemberId' value=memberId)
+                                                    input(type='hidden' name='commentId' value=../id)
+                                                    input(type='hidden' name='objectId' value=id)
+                                                    input(type='hidden' name='objectType' value=2)
+                                                    .comment-operation
+                                                        .pull-left > .sub-text 2分钟前
+                                                        .text-right
+                                                            if(praiseId)
+                                                                .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId) > i.iconfont.icon-zan + echo('取消赞 ') + echo(praiseCount)
+                                                            else
+                                                                .item(id='praise'+id ) > i.iconfont.icon-zan + echo('赞 ') + echo(praiseCount)
+                                                            .item(id='showReply-'+id) > i.iconfont.icon-message + echo('评论')
+                                                            .item > i.iconfont.icon-info + echo('举报')
+                                                    .comment-reply(id='reply-content-'+id)
+                                                        textarea.input.w-full.block(name='content' rows='1')
+                                                        .btn(id='add-reply-'+id) 回复
 
 
 
