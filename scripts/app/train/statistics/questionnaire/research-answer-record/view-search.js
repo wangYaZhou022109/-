@@ -25,8 +25,7 @@ exports.dataForActions = {
         return {
             resourceId: this.bindings.state.data.id,
             name: $(this.$$('[name="name"]')).val(),
-            fullName: $(this.$$('[name="fullName"]')).val(),
-            startTime: $(this.$$('[name="startTime"]')).val()
+            fullName: $(this.$$('[name="fullName"]')).val()
         };
     }
 };

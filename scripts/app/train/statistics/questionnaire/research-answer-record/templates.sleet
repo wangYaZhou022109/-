@@ -23,9 +23,6 @@ view('search') > form.vertical
         .col-sm-3 > .inline-block.m-right > .input-box
             .text 姓名:
             input.input(name='fullName')
-        .col-sm-3 > .inline-block.m-right > .input-box
-            .text 开始时间:
-            input.input#sign-up-time(name='startTime')
         .col-sm-3.clearfix
             .text-right > .btn.large.inline-block#search 搜索
 

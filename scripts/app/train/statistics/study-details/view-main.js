@@ -12,7 +12,7 @@ exports.events = {
 exports.handlers = {
     edit: function(data) {
         var me = this;
-        var view1 = me.module.items['train/statistics/studyDetails/particulars'];
+        var view1 = me.module.items['train/statistics/study-details/particulars'];
         this.app.viewport.modal(view1, { memberId: data });
     }
 };
