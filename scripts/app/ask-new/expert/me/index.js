@@ -3,7 +3,7 @@ exports.items = {
     side: 'side',
     top: 'top',
     'ask-new/follow-me': { isModule: true },
-    'ask-new/expert/changetopic': { isModule: true }
+    'picker/select-topic': { isModule: true }
 };
 
 exports.store = {

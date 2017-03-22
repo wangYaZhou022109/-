@@ -7,7 +7,7 @@ exports.events = {
 
 exports.handlers = {
     showTopic: function() {
-        var model = this.module.items['ask-new/expert/changetopic'];
+        var model = this.module.items['picker/select-topic'];
         this.app.viewport.modal(model);
     }
 };

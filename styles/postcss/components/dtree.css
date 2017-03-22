@@ -1,0 +1,104 @@
+:root {
+    --tree-space: 1em;
+}
+
+.dtree {
+    
+    & li {
+        margin: calc(var(--tree-space) / 5) 0 calc(var(--tree-space) * 0) 0;
+        line-height: calc(var(--tree-space) * 1.5);
+        cursor: pointer;
+        white-space: nowrap;
+
+        & span {
+            padding-left: var(--space);
+            vertical-align: middle;
+        }
+
+        & .dtree-node-content {
+            padding: calc(var(--tree-space) / 2);
+            display: inline-block;
+            vertical-align: middle;
+
+            &:hover {
+                background-color: #eee;
+            }
+
+        }
+
+        & li {
+            & .dtree-node-content {
+                padding-left: calc(var(--space)*3);
+            }
+
+            & li {
+                & .dtree-node-content {
+                    padding-left: calc(var(--space)*4);
+                }
+
+                & li {
+                    & .dtree-node-content {
+                        padding-left: calc(var(--space)*5);
+                    }
+                }
+            }
+        }
+        &.dtree-has-child > .dtree-node-content .dtree-handler {
+            visibility: visible;
+
+            &:before {
+                content: '\e9a4'
+            }
+        }
+
+        &.dtree-opened > .dtree-node-content .dtree-handler {
+            &:before {
+                content: '\e613'
+            }
+        }
+
+        &.dtree-selected {
+            & > .dtree-node-content {
+
+                & > .dtree-checkbox {
+                    background-position: -64px 0;
+                }
+            }
+        }
+
+        &.dtree-indeterminate > .dtree-node-content > .dtree-checkbox {
+            background-position: calc(var(--tree-space) * -4) 0;
+        }
+
+        & > ul {
+            display: none;
+        }
+
+        &.dtree-opened > ul {
+            display: block;
+        }
+    }
+
+    & .dtree-handler {
+        display: inline-block;
+        visibility: hidden;
+        vertical-align: middle;
+        margin-right: calc(var(--space) / 2);
+        font-family: 'iconfont';
+        font-style: normal;
+
+        &:before {
+            content: '\e613'
+        }
+    }
+
+    & .dtree-checkbox {
+        display: inline-block;
+        width: var(--tree-space);
+        height: var(--tree-space);
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+
+}
