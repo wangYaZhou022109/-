@@ -3,15 +3,14 @@ exports.type = 'dynamic';
 exports.bindings = {
     reviewed: true,
     state: true,
-    audit: true,
-    //popupstate: true
+    audit: true
+    // popupstate: true
 };
-exports.actions = {
-    'click display': 'display'
-};
+
 exports.events = {
     'click audit-*': 'audit',
-    'click deal-*': 'deal'
+    'click deal-*': 'deal',
+    'click display': 'display'
 };
 exports.handlers = {
     audit: function(data, e, target) {
@@ -45,30 +44,25 @@ exports.handlers = {
         if (auditType === '12') {
             this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
         }
-    }
-};
-
-exports.dataForActions = {
-    display: function() {
-        var status = this.bindings.state.data,
-            data = {};
-        if (status === 0) {
-            data.auditStatus = 0;
-            status = 1;
-        } else {
+    },
+    display: function(id, e) {
+        var status;
+        if (e.checked) {
             status = 0;
+        } else {
+            status = 1;
         }
-        this.bindings.state.data.status = status;
-        return data;
+        this.module.dispatch('display', { auditStatus: status });
     }
 };
-exports.actionCallbacks = {
 
-};
-exports.dataForActions = {
-    display: function() {
-        var data = {};
-        data.auditStatus = 0;
+exports.dataForTemplate = {
+    checked: function() {
+        var state = this.bindings.state;
+        var data = false;
+        if (state.auditStatus === 0) {
+            data = true;
+        }
         return data;
     }
 };

@@ -21,34 +21,4 @@ view('main')
                     h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
                 .btn.small > echo('关注')
-    .comment-list.ask-list > ul
-        li.topic-item
-            a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/demo/1.jpg")
-                h4.text-overflow(title='温暖气氛') 温暖气氛
-                .info 36关注 ｜ 1专家 ｜ 2问题
-            .btn.small 取消关注
-        li.topic-item
-            a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/demo/1.jpg")
-                h4.text-overflow(title='脱口秀') 脱口秀
-                .info 36关注 ｜ 1专家 ｜ 2问题
-            .btn.small 取消关注
-        li.topic-item
-            a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/demo/1.jpg")
-                h4.text-overflow(title='梦想常有') 梦想常有
-                .info 36关注 ｜ 1专家 ｜ 2问题
-            .btn.small 取消关注
-        li.topic-item
-            a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/demo/1.jpg")
-                h4.text-overflow 脱口秀
-                .info 36关注 ｜ 1专家 ｜ 2问题
-            .btn.small 取消关注
-        li.topic-item
-            a.normal(href="javascript:;")
-                .img > .img-cont > img(src="images/demo/1.jpg")
-                h4.text-overflow 梦想常有
-                .info 36关注 ｜ 1专家 ｜ 2问题
-            .btn.small 取消关注
+    

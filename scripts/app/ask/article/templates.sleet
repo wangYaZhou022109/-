@@ -1,6 +1,6 @@
 #!handlebars
 
-module > div(data-region='main')
+module > div(data-region='details')
 
 
 view('test') > form.vertical
@@ -19,7 +19,7 @@ view('test') > form.vertical
             textarea.input.w-full(name='content' x-rule='required' rows='5')
         li
             .btn.radius.block(id='release' style='height:50px;width:200px;text-align:center') > string('release')
-view('details') > .form
+view('details') > form.form
     .form-row
         label.required > string('article-title')
         .content > input.input(name='title'  value=''  x-rule='required') + .tips 0/60

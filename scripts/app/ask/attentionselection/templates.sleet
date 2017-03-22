@@ -1,42 +1,42 @@
 #!handlebars
-module > .activity-page
-    .activity-list(data-region='list')
+module 
+    div(data-region='list')
 
 view('list')
-    ul
-        li > string('prompt-1') 
-    .step-one
-        .container > .main-list
-            ul > each(trends.topicList)
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src=member.headPortrait alt= string('topic'))
-                        input(type='checkbox' id='topics-item' + id name='topics' value= id ) 
-                        .clearfix
-                            .title.text-overflow > echo(name)
-                        .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
-            ul > li 
-                .btn.radius.block(id='step-one' data-name='id' data-value='one') > string('next-step')
-    .step-two('hidden')
-        .container > .main-list
-            ul > each(trends.expertList)
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src=member.headPortrait alt=string('expert'))
-                        input(type='checkbox' id='expert-item' + id name='expert' value=id)
-                        .clearfix
-                            .title.text-overflow > echo(member.fullName)
-                        .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
-                        echo(topicStr)
-            ul 
-                li
-                    .btn.radius.block(id='step-two' data-name='id' data-value='two') > string('previous-step') 
-                li
-                    .btn.radius.block(id='end') > string('finish')
+    .page-contents2.topic-main
+        .page1#page1
+            section.section.sub-title.text-center > string('prompt-1')
+            .common-title.m-bottom > string('recommend') + string('topic')
+            .aboutme-contents
+                ul.aboutme-ul.clearfix > each(trends.topicList)
+                    input(type='hidden' id='topics-item' + id name='topics' value= id ) 
+                    li.aboutme-li.pull-left.relative.layout-mb-small
+                        .img-dv.relative
+                            img.w-full(src='images/img.png')
+                            .true-icon(id = 'topic-icon-' + id)
+                                .iconfont.icon-tick-circle
+                            p.text-center.introduce > echo(name)
+            .aboutme-btn.text-center
+                .btn#button-1 > string('next-step')
+        .page2#page2
+            section.section.sub-title.text-center > string('prompt-1')
+            .common-title.m-bottom > string('recommend') + string('expert')
+            .recommend-contents
+                ul.recommend-ul.clearfix > each(trends.expertList)
+                    input(type='hidden' id='expert-item' + id name='expert' value=id) 
+                    li.recommend-li.pull-left.relative.mb-1
+                        .recommend-total.relative
+                            img(src=member.headPortrait)
+                            .recommend-item.relative.text-center
+                                p.text-center > echo(member.fullName)
+                                p.text-center
+                                    span > echo(topicStr)
+                            .recommend-icon.text-right(id = 'icon-' + id)
+                                .iconfont.icon-tick-circle
+            .recommend-btn.text-center
+                .btn#button-2 > string('previous-step') 
+                .btn#end > string('finish')
+   
                 
 
     
