@@ -1,3 +1,2 @@
 exports.bindings = {
-    message: true
 };

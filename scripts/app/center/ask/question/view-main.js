@@ -25,7 +25,7 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     delete: function() {
-        this.app.message.success('取消收藏成功');
+        this.app.message.success('删除成功');
     }
 };
 
