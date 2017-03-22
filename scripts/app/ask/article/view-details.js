@@ -36,20 +36,20 @@ exports.components = [function() {
 
 
 exports.actions = {
-    'click release': 'release'
+   // 'click release': 'release'
 };
 
 exports.dataForActions = {
-    release: function(payload) {
-        return payload;
-    }
+    // release: function(payload) {
+    //     return payload;
+    // }
 };
 
 exports.actionCallbacks = {
-    release: function() {
-        this.app.message.success('操作成功！');
-        setTimeout(function() {
-            window.location.reload();
-        }, 1000);
-    }
+    // release: function() {
+    //     this.app.message.success('操作成功！');
+    //     setTimeout(function() {
+    //         window.location.reload();
+    //     }, 1000);
+    // }
 };

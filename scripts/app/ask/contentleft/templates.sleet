@@ -3,9 +3,7 @@ module
     .tabs.line > ul
         div(data-region='menu')
     .tabs-cont > ul
-        li.tabs-cont-item#tabs-cont-item-1.active
-            .comment-list.ask-list > ul
-                div(data-region='list')
+        div(data-region='list')
 
 view('menu')
     compare(state.menu 'eq' 'alldynamic')
@@ -22,4 +20,11 @@ view('menu')
         li(id='menu-expertssharing' href='javascript:;')(class ='') > string('experts-sharing')
         
 view('list') 
-    div(data-dynamic-key=state.menu)
+    compare(state.menu 'eq' 'attentionselection')
+        li.tabs-cont-item.active
+            div(data-dynamic-key=state.menu)
+    else
+        li.tabs-cont-item.active
+            .comment-list.ask-list > ul
+                div(data-dynamic-key=state.menu)
+        

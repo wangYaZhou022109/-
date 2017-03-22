@@ -1,7 +1,7 @@
 var _ = require('lodash/collection');
 
 exports.items = {
-    details: 'main'
+    details: 'details'
 };
 exports.store = {
     models: {
@@ -34,6 +34,8 @@ exports.store = {
                 speechset = this.models.speech.getData('1');
             this.models.article.set(payload);
             data.speechset = speechset.status;
+            data.id = '1';
+            data.topic = '1';
             this.models.article.set(data);
             return this.post(this.models.article).then(function() {
                 me.app.message.success('操作成功');
@@ -55,13 +57,7 @@ exports.title = '发表文章';
 
 exports.buttons = [{
     text: '发布',
-    fn: function() {
-        var data = {
-            id: 1,
-            title: this.$('title').value,
-            topic: this.$('topic').value,
-            content: this.$('content').value
-        };
+    fn: function(data) {
         return this.dispatch('release', data);
     }
 }];

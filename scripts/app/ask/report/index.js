@@ -6,31 +6,56 @@ exports.items = {
 exports.store = {
     models: {
         state: {},
-        trends: { url: '../ask-bar/trends/all-dynamic/1' },
         report: { url: '../ask-bar/accuse-record/report' }
     },
     callbacks: {
+        init: function(payload) {
+            this.models.state.id = payload.id;
+            this.models.state.objectType = payload.objectType;
+        },
         report: function(payload) {
             var report = this.models.report;
             var data = payload;
             data.id = this.models.state.id;
             data.objectType = this.models.state.objectType;
             report.set(data);
-            return this.save(report);
-        },
-        close: function() {
-            var state = this.module.renderOptions.popupstate;
-            state.hidden = false;
-            state.data = {};
-            state.data.title = '举报';
-            state.data.menu = 'report';
-            state.data.report = true;
-            state.changed();
+            return this.save(report).then(function() {
+                this.app.message.success('举报成功！');
+            });
         }
 
     }
 };
 
 exports.afterRender = function() {
-    this.store.models.state = this.renderOptions.state;
+    return this.dispatch('init', this.renderOptions);
 };
+
+exports.title = '举报';
+exports.buttons = [{
+    text: '提交',
+    fn: function(payload) {
+        var data = payload,
+            type = [];
+        if (data.input1 === 'on') {
+            data.type = '1,';
+            type.push(1);
+        }
+        if (data.input2 === 'on') {
+            data.type = '1,';
+            type.push(2);
+        }
+        if (data.input3 === 'on') {
+            data.type = '1,';
+            type.push(3);
+        }
+        if (data.input4 === 'on') {
+            data.type = '1,';
+            type.push(4);
+        }
+        data.type = type.toString();
+        return this.dispatch('report', data);
+    }
+}];
+
+exports.small = true;
