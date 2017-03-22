@@ -1,5 +1,3 @@
-var D = require('drizzlejs');
-
 exports.title = '@我的';
 
 exports.items = {
