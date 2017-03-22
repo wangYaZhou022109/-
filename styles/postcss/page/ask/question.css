@@ -1,0 +1,8 @@
+.form-page {
+    & .sub-height {
+        line-height: 2.5em;
+    }
+    & .tag-left {
+        margin-left: var(--large-space);
+    }
+}
