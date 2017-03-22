@@ -7,7 +7,12 @@ var D = require('drizzlejs'),
     },
     defaultBtnTexts = { 3: '打开URL', 8: '进入任务', 9: '进入考试', 10: '进入课程', 11: '进入面授', 12: '进入调研', 13: '进入评估', 14: '进入直播' },
     studyBtnTexts = { 2: '重新学习', 4: '重新学习', 8: '查看详情' },
-    prefixUrl = { 8: '#/study/task/', 9: '#/exam/index/', 10: '#/study/course/detail/', 14: '#/gensee/detail/' };
+    prefixUrl = {
+        8: '#/study/task/',
+        9: '#/exam/exam/answer-paper/',
+        10: '#/study/course/detail/',
+        14: '#/gensee/detail/'
+    };
 // 阶段序号转义
 exports.rowHeader = function(arr, payload) {
     var opt = D.assign(options, payload);
@@ -43,7 +48,7 @@ exports.setBtn = function(chapters, type, currentSectionId) {
                 sectionType = Number(section.sectionType);
             section.btnText = defaultBtnTexts[sectionType];
             if (progress && progress.finishStatus !== 0) {
-                section.btnText = studyBtnTexts[progress.finishStatus] || '继续学习';
+                section.btnText = studyBtnTexts[sectionType] || '继续学习';
             }
             if (sectionType === 3) {
                 section.btnUrl = section.url;

@@ -7,7 +7,7 @@ view('advertising')
     #  #banner.banner.subject-banner
     #      ul > each(advertisings)
     #          li(style='background:url(' + downUrl ')'  ) > a(href=linkUrl target='_blank')
-    #banner.subject-banner.swiper-container
+    #banner.subject-banner.swiper-container.banner
         ul > each(advertisings)
             li > a(href=linkUrl target='_blank') > img(src=downUrl)
         section.section.banner-info
