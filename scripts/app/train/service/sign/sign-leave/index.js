@@ -1,7 +1,10 @@
 exports.items = {
     main: 'main',
+    count: 'count',
     approval: '',
 };
+
+exports.large = true;
 
 exports.store = {
     models: {
@@ -13,6 +16,9 @@ exports.store = {
         lea: {
             url: '../train/leave'
         },
+        signOne: {
+            url: '../train/leave/one'
+        },
         updateState: {
             url: '../train/leave/update'
         },
@@ -20,9 +26,13 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var leave = this.models.leave;
+            var leave = this.models.leave,
+                signOne = this.models.signOne;
             leave.params = payload;
             leave.set({ id: payload.id });
+            signOne.params.id = payload.id;
+            signOne.clear();
+            this.get(signOne);
             return this.get(leave);
         },
         search: function(payload) {

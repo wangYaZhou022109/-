@@ -1,35 +1,47 @@
 exports.items = {
     main: 'main',
-    count: '',
-    search: ''
+    count: 'count',
+    search: 'search'
 };
 
 exports.store = {
     models: {
         taskDetail: {
-            url: '../train/task-detail/taskDetail',
+            url: '../train/task-detail/list',
             type: 'pageable',
             root: 'items'
+        },
+        taskOne: {
+            url: '../train/task-detail/one',
         },
         taskd: {
             url: '../train/task-detail'
         },
-        state: {}
+        state: { data: {} },
     },
     callbacks: {
         init: function(payload) {
-            var taskDetail = this.models.taskDetail;
+            var taskDetail = this.models.taskDetail,
+                taskOne = this.models.taskOne;
             taskDetail.params = payload;
+            taskDetail.set({ id: payload.id });
+            taskOne.params.id = payload.id;
+            taskOne.clear();
+            this.get(taskOne);
             return this.get(taskDetail);
         },
         search: function(payload) {
-            var taskDetail = this.models.taskDetail;
+            var taskDetail = this.models.taskDetail,
+                id = this.models.state.data.id;
             taskDetail.params = payload;
+            taskDetail.params.id = id;
             return this.get(taskDetail);
-        }
+        },
     }
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions.id);
+    var data = this.store.models.state.data;
+    data.id = this.renderOptions.id;
+    this.dispatch('init', { id: this.renderOptions.id });
 };

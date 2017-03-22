@@ -23,26 +23,60 @@ exports.dataForTemplate = {
         _.map(data.files || [], function(file, i) {
             var item = file,
                 extension;
-            extension = item.attachName.split('.').pop().toLowerCase();
+            extension = item.attachmentName.split('.').pop().toLowerCase();
             item.fileType = findExtension.call(me, extension);
-            item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachId;
+            item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachmentId;
             item.i = i + 1;
             item.canPreview = item.fileType !== 2;
         });
         return data.files;
-    }
+    },
 };
 
 exports.events = {
-    'click chooseFile': 'uploadFile',
-    'click label-attach-*': 'changeName',
-    'change input-attach-*': 'updateAttachName',
-    'click preview-attach-*': 'preview'
+    'click chooseFile': 'uploadTaskFile',
+    'click label-attach-*': 'changeTaskName',
+    'change input-attach-*': 'updateTaskAttachName',
+    'click preview-attach-*': 'preview',
+    'click selectMember': 'showMember',
+    'click clearMembers': 'clearMembers'
 };
 
 exports.handlers = {
-    uploadFile: function() {
-        var view = this.module.items.upload,
+    showMember: function() {
+        var me = this,
+            model = me.module.items['train/programme/select-member'];
+
+        me.app.viewport.modal(model, {
+            ids: me.components.tags.getValue(),
+            callback: function(payload, flag) {     // 选中添加，非选中取消添加。
+                flag ? me.components.tags.addItem({ value: payload.id, text: payload.name }) :
+                    me.components.tags.removeItem(payload.id);
+            }
+        });
+    },
+    // showMember: function() {
+    //     var me = this,
+    //         model = me.module.items['train/programme/select-member'];
+    //     me.app.viewport.modal(model, {
+    //         callback: function(data) {
+    //             var state = me.bindings.state.data;
+    //             var params = {};
+    //             me.app.viewport.closeModal();
+    //             if (data) {
+    //                 params.classId = state.classId;
+    //                 params.type = 0;
+    //                 params.memberIds = data;
+    //                 me.module.dispatch('addTrainees', params);
+    //             }
+    //         }
+    //     });
+    // },
+    clearMembers: function() {
+        this.components.tags.clear();
+    },
+    uploadTaskFile: function() {
+        var view = this.module.items.uploadTask,
             task = this.bindings.task.data,
             files = this.bindings.files.data,
             state = this.bindings.state;
@@ -51,24 +85,24 @@ exports.handlers = {
             this.app.message.alert('课件最多只能上传3个');
         } else {
             task.name = $(this.$('name')).val();
-            task.courseDate = $(this.$('startTime')).val();
+            task.startTime = $(this.$('startTime')).val();
             task.endTime = $(this.$('endTime')).val();
             task.explain = $(this.$('explain')).val();
             this.app.viewport.modal(view);
         }
     },
-    changeName: function(id) {
+    changeTaskName: function(id) {
         $(this.$('input-attach-' + id)).css('display', 'block');
         $(this.$('label-attach-' + id)).css('display', 'none');
     },
-    updateAttachName: function(id) {
+    updateTaskAttachName: function(id) {
         var state = this.bindings.state.data;
         var val = $(this.$('input-attach-' + id)).val();
         state.updateType = false;
         if (val === '') {
             this.app.message.alert('附件名称不能为空');
         } else {
-            this.module.dispatch('updateAttachName', { id: id, attachName: val });
+            this.module.dispatch('updateTaskAttachName', { id: id, attachmentName: val });
         }
     },
     preview: function(id) {
@@ -81,14 +115,14 @@ exports.handlers = {
 
 exports.actions = {
     'click saveTask': 'saveTask',
-    'click del-attach-*': 'delAttach'
+    'click del-attach-*': 'delTaskAttach'
 };
 
 exports.dataForActions = {
     saveTask: function(payload) {
         return this.validate() ? payload : false;
     },
-    delAttach: function(payload) {
+    delTaskAttach: function(payload) {
         var task = this.bindings.task.data,
             state = this.bindings.state.data;
         task.name = payload.name;
@@ -145,3 +179,17 @@ findExtension = function(value) {
 //         noCalendar: true
 //     }
 // }];
+exports.components = [function() {
+    var data = this.bindings.state.data;
+    var inputName = data.inputName || 'memberIds',
+        tags = data.tags || [];
+    return {
+        id: 'tags',
+        name: 'tag-view',
+        options: {
+            name: inputName,
+            emptyText: '请选择人员',
+            tags: tags
+        }
+    };
+}];

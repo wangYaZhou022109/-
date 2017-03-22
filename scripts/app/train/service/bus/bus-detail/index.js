@@ -4,12 +4,17 @@ exports.items = {
     count: 'count',
 };
 
+exports.large = true;
+
 exports.store = {
     models: {
         busDetail: {
-            url: '../train/bus-detail/busDetail',
+            url: '../train/bus-detail/bus-detail',
             type: 'pageable',
             root: 'items'
+        },
+        busOne: {
+            url: '../train/bus-detail/one',
         },
         export: {
             url: '../train/bus-detail/download'
@@ -26,8 +31,12 @@ exports.store = {
         },
         init: function(payload) {
             var busDetail = this.models.busDetail;
+            var busOne = this.models.busOne;
             busDetail.params = payload;
             busDetail.set({ id: payload.id });
+            busOne.params.id = payload.id;
+            busOne.clear();
+            this.get(busOne);
             return this.get(busDetail);
         },
         search: function(payload) {

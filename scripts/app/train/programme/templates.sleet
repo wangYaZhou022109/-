@@ -329,7 +329,7 @@ view('editTask') > form.vertical
         input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
     .row
         label(style='float:left;') 任务说明
-        textarea#explain(name='explain' value='task.explain' rows=5 cols=55 x-rule='maxLength:1000')
+        input.input#explain(name='explain' value=task.explain size=8 style='float:left' x-rule='required')
 
     .list.m-top
         table.table
@@ -348,13 +348,28 @@ view('editTask') > form.vertical
             tbody > each(files) > tr
                 td > echo(i)
                 td
-                    label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachName + '(点击可修改)')
-                    input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
+                    label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachmentName + '(点击可修改)')
+                    input(id='input-attach-' + id value=attachmentName style='display:none;' data-name='id' data-value=id)
                 td > map('class-file-type' fileType)
                 td
                     if(canPreview)
-                        a(href='javascript:;' id='preview-attach-'+attachId) 预览
+                        a(href='javascript:;' id='preview-attach-'+attachmentId) 预览
                     else
-                        a(href=downUrl download=attachName) 下载
+                        a(href=downUrl download=attachmentName) 下载
                     a(id='del-attach-'+id data-name='id' data-value=id) 删除
+        .row.m-top
+        .col-sm-2
+            label.required > echo('审核人')
+        .col-sm-10
+            label > echo('评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务')
+    .row > .col-sm-12
+        .input.btn-right-bottom(x-rule='required' x-target=state.componentId)&if(state.required)
+        #tags
+        .btn-group
+            .btn#clearMembers 清空
+            .btn#selectMember 继续添加
+
+view('uploadTask')
+    .row
+        #uploader
 

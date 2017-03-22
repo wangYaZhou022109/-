@@ -11,8 +11,8 @@ exports.actions = {
 exports.dataForActions = {
     search: function() {
         return {
-            memberName: $(this.$$('[name="memberName"]')).val(),
-            memberFullName: $(this.$$('[name="memberFullName"]')).val(),
+            name: $(this.$$('[name="name"]')).val(),
+            fullName: $(this.$$('[name="fullName"]')).val(),
         };
     }
 };
