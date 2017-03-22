@@ -63,7 +63,7 @@ view('situation')
                 td > echo(signUpNumber) + echo('/') + echo(quantity)
 
 view('audit') > form.vertical
-    input.input(name='id' type='text' value=traineeId)
+    input.input(name='id' type='hidden' value=traineeId)
     .row
         .col-sm-3
             echo('审核结果')
