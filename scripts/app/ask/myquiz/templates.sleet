@@ -13,7 +13,7 @@ view('list')
             li
                 .user-pic > img(src='images/d2.jpg')
                 .comment-content
-                    .h4 > echo(title)
+                    .h4 > a(id='myquiz-details-' + id )(class ='active') > echo(title)
                     .comment-text > echo(content)
                     .user-info
                         a(href='javascript:;') > echo(fullName)

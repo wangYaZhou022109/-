@@ -43,10 +43,8 @@ exports.buttons = [{
     text: '通过',
     fn: function(data) {
         var params = data;
-        console.log(data);
         params.auditStatus = 1;
         params.auditType = 12;
-        console.log(params);
         return this.dispatch('pass', params);
     }
 }];

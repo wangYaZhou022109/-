@@ -59,14 +59,14 @@ view('right')
     #              a.text-overflow(href="javascript:;" title="零基础直达A1西班牙零基础直达A1西班牙语") 零基础直达A1西班牙零基础
     #          .block.layout-mt-small.m-top
     #              a.text-overflow(href="javascript:;" title="醒职场思维力系列课程") 醒职场思维力系列课程
-        .buttons
-            .btn#display > i.icon-plus + span > echo('我要关注')
-        echo('999')
-        echo('8')
-        echo('88')
-        echo('88')
-        br
-        echo('关注者')
-        echo('专家')
-        echo('问题')
-        echo('分享')
+        #  .buttons
+        #      .btn#display > i.icon-plus + span > echo('我要关注')
+        #  echo('999')
+        #  echo('8')
+        #  echo('88')
+        #  echo('88')
+        #  br
+        #  echo('关注者')
+        #  echo('专家')
+        #  echo('问题')
+        #  echo('分享')
