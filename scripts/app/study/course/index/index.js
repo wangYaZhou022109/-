@@ -22,7 +22,7 @@ exports.store = {
         courses: {
             url: '../course-study/course-front',
             type: 'pageable',
-            pageSize: 9,
+            pageSize: 20,
             root: 'items',
         },
         topics: { data: [], url: '../system/topic/select', autoLoad: 'after' },

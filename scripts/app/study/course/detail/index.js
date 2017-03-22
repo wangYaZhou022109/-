@@ -10,7 +10,8 @@ exports.items = {
     download: 'download',
     topic: '',
     'releated-course': 'releated-course',
-    student: ''
+    student: '',
+    'research-tips': ''
 };
 
 exports.store = {
@@ -47,7 +48,8 @@ exports.store = {
         lastestUser: { url: '../course-study/course-front/lastest-user', type: 'pageable', pageSize: 8, root: 'items' },
         score: { url: '../course-study/course-front/score' },
         courseScore: {},
-        state: {}
+        state: {},
+        researchActivity: { url: '../exam/research-activity' }
     },
     callbacks: {
         init: function(payload) {
@@ -170,6 +172,11 @@ exports.store = {
                     state.changed(); // 改变播放
                 }
             );
+        },
+        getResearchById: function(payload) {
+            var model = this.models.researchActivity;
+            model.set({ id: payload.id });
+            return this.get(model);
         }
     }
 };
