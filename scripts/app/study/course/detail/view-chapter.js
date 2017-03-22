@@ -7,7 +7,7 @@ var showHandler = function(payload) {
     var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
         8: '#/study/task/',
-        9: '#/exam/exam/answer-paper-2/',
+        9: '#/exam/exam/answer-paper/',
         12: '#/exam/research-activity/research-detail/'
     };
     return function() {

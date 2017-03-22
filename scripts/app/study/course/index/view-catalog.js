@@ -1,10 +1,10 @@
-// var $ = require('jquery'),
-    // _ = require('lodash/collection');
-
+var _ = require('lodash/collection');
 exports.bindings = {
     categories: true,
     menu2: true,
-    search: true
+    search: true,
+    hotTopicIds: 'changeTopics',
+    topics: true
 };
 
 exports.events = {
@@ -45,5 +45,11 @@ exports.dataForTemplate = {
             if (select2 === obj.id) obj.active = true;
         });
         return list;
+    }
+};
+exports.changeTopics = function() {
+    var ids = _.map(this.bindings.hotTopicIds.data, 'id');
+    if (ids.length > 0) {
+        this.module.dispatch('searchTopics', { ids: ids.join() });
     }
 };
