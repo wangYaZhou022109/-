@@ -1,7 +1,5 @@
 var _ = require('lodash/collection');
 
-exports.type = 'dynamic';
-
 exports.bindings = {
     signDetail: true,
     export: false,

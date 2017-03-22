@@ -40,5 +40,9 @@ view('main')
                 td > echo(member.fullName)
                 td > echo(organizationName)
                 td > dateTime(createTime)
-                td > a(id='approval'+id data-name='id' data-value=id) > echo('审核')
+                td
+                    if(score)
+                        a(id='audit-preview'+id data-name='id' data-value=id) > echo(score) 
+                    else
+                        a(id='audit-preview'+id data-name='id' data-value=id) > echo('详情')
     #pager.pagination

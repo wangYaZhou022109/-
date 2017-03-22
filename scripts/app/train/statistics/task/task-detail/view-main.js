@@ -11,6 +11,18 @@ exports.components = [{
     options: { model: 'taskDetail' }
 }];
 
+exports.events = {
+    'click audit-preview*': 'audit',
+};
+
+exports.handlers = {
+    audit: function(data) {
+        var id = data,
+            url = '#/train/statistics/audit-task/' + id;
+        window.open(url, '_blank');
+    }
+};
+
 exports.dataForTemplate = {
     taskDetail: function(data) {
         var taskDetail = data.taskDetail,
