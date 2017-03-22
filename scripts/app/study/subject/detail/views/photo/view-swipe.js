@@ -18,6 +18,7 @@ exports.components = [function() {
         }
         return photo;
     });
+    debugger;
     return {
         id: 'photoSwipe',
         name: 'picker',
