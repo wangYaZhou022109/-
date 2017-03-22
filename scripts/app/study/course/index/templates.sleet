@@ -19,9 +19,9 @@ view('list')
             .pull-left > each(topics)
                 .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
             .pull-right
-                .item#sort-0 > span 最新
-                .item#sort-1 > span 最热
-                .item#sort-2 > span 好评
+                .item#sort-0(class = if(sortStatus.new 'active')) > span 最新
+                .item#sort-1(class = if(sortStatus.member 'active')) > span 最热
+                .item#sort-2(class = if(sortStatus.best 'active')) > span 好评
                 .item.drop-down-wrapper.right
                     .drop-down-btn > map('course-list-company-type', search.companyType)
                         i.iconfont.icon-arrow-down

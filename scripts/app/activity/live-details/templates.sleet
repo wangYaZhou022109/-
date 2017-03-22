@@ -44,8 +44,12 @@ view('main')
                         echo(gensee.subject)
                     .inline-block
                         .star-wrapper.drop-down-wrapper
-                            .star-bar > .star(style='width:'+score.scorePercent+'%')
-                            .inline-block.sub-text > | 暂无评分
+                            .star-bar 
+                                .star(style='width:'+score.scorePercent+'%')                 
+                            if(score.avgScore)
+                                .num > echo(score.avgScore)
+                            else
+                                .inline-block.sub-text > echo('暂无评分')
                             .drop-down-content(class = if(score.hasScore 'hide')) > .content
                                 .text-center 我来评分
                                 .star-grade
@@ -83,8 +87,9 @@ view('main')
                 else
                     .btn.pull-right.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
             .clearfix
-                each(gensee.genseeTopics)
-                    .btn-white > echo(topicName)
+            .side-box
+                each(gensee.businessTopics)
+                    .tag-btn > echo(topicName)
                
         if(courses)
             section.section
