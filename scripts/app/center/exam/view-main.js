@@ -59,6 +59,7 @@ exports.dataForTemplate = {
                 toCertButton = { id: 'to-cert-button-' + exam.id, text: '查看证书' },
                 toDetailButton = { id: 'to-detail-button-' + exam.id, text: '查看详情' },
                 retryButton = { id: 'retry-button-' + exam.id, text: '重新考试' };
+            exam.buttons = [];
             if (currentTime < exam.startTime) {
                 exam.status = 1;
             } else if (currentTime > exam.startTime && currentTime < exam.endTime) {
@@ -86,8 +87,10 @@ exports.dataForTemplate = {
                 if (exam.needApplicant === 1) {
                     if (!exam.signUp || !exam.signUp.status) {
                         exam.buttons = [signupButton];
-                    } else if (exam.signUp && (exam.signUp.status === 1 || exam.signUp.status === 2)) {
-                        exam.buttons = [cancelButton];
+                    } else if (exam.signUp
+                        && (exam.signUp.status === 1 || exam.signUp.status === 2)
+                        && exam.examRecord.status <= 3) {
+                        exam.buttons.push(cancelButton);
                     }
                 }
             }
@@ -96,6 +99,10 @@ exports.dataForTemplate = {
             }
             if (exam.signUp && exam.signUp.status === 3) {
                 exam.status = 6;
+            }
+            exam.passScore = exam.passScore ? exam.passScore / 100 : '';
+            if (exam.examRecord && exam.examRecord.totalScore) {
+                exam.examRecord.totalScore /= 100;
             }
             return exam;
         });
