@@ -1,6 +1,7 @@
 exports.bindings = {
     course: true,
-    collect: true
+    collect: true,
+    score: true
 };
 
 exports.actions = {
@@ -31,23 +32,6 @@ exports.actionCallbacks = {
     },
 };
 
-exports.dataForTemplate = {
-    score: function(data) {
-        var course = data.course,
-            avgScore = 0.0,
-            scorePercent = 0;
-        if (course.avgScore) {
-            scorePercent = course.avgScore;
-            avgScore = (scorePercent / 10).toFixed(1);
-        }
-        return {
-            hasScore: !!course.courseScore,
-            scorePercent: course.avgScore,
-            avgScore: avgScore
-        };
-    }
-};
-
 exports.components = [function() { // 分享组件
     var data = {},
         course = this.bindings.course.data;
@@ -63,6 +47,23 @@ exports.components = [function() { // 分享组件
         options: {
             picker: 'share',
             data: data
+        }
+    };
+}, function() {
+    var me = this;
+    var course = this.bindings.course.data;
+    return {
+        id: 'star-score',
+        name: 'picker',
+        options: {
+            picker: 'star-score',
+            data: {
+                id: course.id,
+                avgScore: (course.avgScore / 10).toFixed(1)
+            },
+            callback: function(score) {
+                me.module.dispatch('score', { score: score, businessId: course.id, businessType: 1 });
+            }
         }
     };
 }];
