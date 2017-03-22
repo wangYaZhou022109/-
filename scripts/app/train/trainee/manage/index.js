@@ -2,8 +2,7 @@ exports.items = {
     main: 'main',
     search: 'search',
     situation: '',
-    audit: '',
-    auditAll: ''
+    audit: ''
 };
 
 exports.store = {
@@ -14,8 +13,7 @@ exports.store = {
             root: 'items'
         },
         situation: { url: '../train/class-quota/situation' },
-        auditTrainee: { url: '../train/trainee/update-status' },
-        auditAll: { url: '../train/trainee/audit-all' },
+        auditTrainee: { url: '../train/trainee/audit' },
         state: { data: { auditStatus: 0 } }
     },
     callbacks: {
@@ -24,7 +22,9 @@ exports.store = {
                 state = this.models.state;
             trainees.clear();
             state.data.classId = payload.classId;
+            state.data.quotaType = payload.quotaType;
             trainees.params = state.data;
+            state.changed();
             return this.get(trainees);
         },
         search: function(payload) {
@@ -41,18 +41,16 @@ exports.store = {
             return this.get(situation);
         },
         auditTrainee: function(payload) {
-            var auditTrainee = this.models.auditTrainee;
-            auditTrainee.set(payload);
+            var auditTrainee = this.models.auditTrainee,
+                state = this.models.state.data,
+                params = payload;
+            params.quotaType = state.quotaType;
+            auditTrainee.set(params);
             return this.put(auditTrainee);
-        },
-        auditAllTrainees: function(payload) {
-            var auditAll = this.models.auditAll;
-            auditAll.set(payload);
-            return this.put(auditAll);
         }
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: this.renderOptions.state.classId });
+    return this.dispatch('init', this.renderOptions.state);
 };

@@ -109,7 +109,6 @@ view('group')
                 a(id='manage'+id data-name='id' data-value=id) > echo('管理')
                 echo('|')
                 a(id='delGroup'+id data-name='id' data-value=id) > echo('删除')
-    .btn#saveGroup > echo('保存')
 
 view('groupTrainees')
     .buttons

@@ -7,6 +7,11 @@ exports.bindings = {
     state: true
 };
 
+exports.buttons = [{
+    text: '保存',
+    action: 'saveGroup'
+}];
+
 exports.events = {
     'click addGroup': 'addGroup',
     'click delGroup*': 'delGroup',
@@ -65,7 +70,6 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click saveGroup': 'saveGroup',
     'click group-trainee*': 'groupTrainees'
 };
 
@@ -77,7 +81,6 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     saveGroup: function() {
-        this.app.viewport.closeModal();
         this.app.message.success('保存成功!');
     },
     groupTrainees: function() {

@@ -1,23 +1,36 @@
 exports.type = 'form';
 
 exports.bindings = {
-    auditTrainee: true,
     state: false
 };
 
-exports.actions = {
-    'click auditTrainee': 'auditTrainee'
-};
-
-exports.actionCallbacks = {
-    auditTrainee: function(data) {
-        var state = this.bindings.state.data;
-        if (data[0]) {
-            this.app.message.success('审核成功！');
+exports.buttons = [{
+    text: '确认',
+    fn: function(payload) {
+        var me = this;
+        if (me.validate()) {
+            me.module.dispatch('auditTrainee', payload).then(function(data) {
+                var success = data[0][0];
+                var fail = data[0][1];
+                var state = me.bindings.state.data;
+                if (success === 0) {
+                    me.app.message.error('配额已满！');
+                } else if (fail === 0) {
+                    me.app.message.success('审核成功!');
+                } else {
+                    me.app.message.success('审核成功' + success + '条!');
+                    me.app.message.error('审核失败' + fail + '条!');
+                }
+                me.module.dispatch('init', state);
+            });
         } else {
-            this.app.message.error('配额已满！');
+            me.app.message.error('审核状态必填！');
         }
-        this.app.viewport.closeModal();
-        this.module.dispatch('init', state);
+    }
+}];
+
+exports.dataForTemplate = {
+    traineeId: function() {
+        return this.renderOptions.traineeId;
     }
 };

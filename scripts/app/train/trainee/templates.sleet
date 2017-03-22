@@ -7,11 +7,14 @@ module > .train-class-page
 
 view('tab')
     .container > ul.row.text-center
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-manage') 报名管理
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-fmtrainee') 学员
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-classstaff') 班务人员
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-iftrainee') 非正式成员
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-message') 短信发送
+        if(state.tab)
+            compare(state.isAutoApprove 'ne' 1)
+                li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-manage') 报名管理
+            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-fmtrainee') 学员
+            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-classstaff') 班务人员
+            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-iftrainee') 非正式成员
+            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-message') 短信发送
 
 view('main')
-    div.container(data-dynamic-key=state.tab)
+    if(state.tab)
+        div.container(data-dynamic-key=state.tab)

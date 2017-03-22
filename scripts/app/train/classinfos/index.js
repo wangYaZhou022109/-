@@ -1,12 +1,14 @@
 exports.items = {
     search: 'search',
-    main: 'main',
-    'train/response/trainees': { isModule: true }
+    main: 'main'
 };
+
+exports.large = true;
+
 exports.store = {
     models: {
         state: {},
-        classinfos: { url: '../train/class-info/response', type: 'pageable', root: 'items' }
+        classinfos: { url: '../train/class-info/frontend', type: 'pageable', root: 'items' }
     },
     callbacks: {
         init: function() {

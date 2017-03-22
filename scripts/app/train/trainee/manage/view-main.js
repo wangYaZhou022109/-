@@ -3,8 +3,7 @@ var _ = require('lodash/collection');
 exports.bindings = {
     trainees: true,
     state: false,
-    auditTrainee: false,
-    auditAll: false
+    auditTrainee: false
 };
 
 exports.components = [{
@@ -34,24 +33,18 @@ exports.handlers = {
         this.$('checkAll').checked = flag;
     },
     audit: function(id) {
-        var model = this.module.items.audit,
-            auditTrainee = this.bindings.auditTrainee;
-        auditTrainee.data.id = id;
-        this.app.viewport.modal(model);
+        var model = this.module.items.audit;
+        this.app.viewport.modal(model, { traineeId: id });
     },
     auditAll: function() {
-        var data = {};
         var ids = [];
-        var auditAll = this.bindings.auditAll;
         this.$$('input[name="traineeId"]:checked').forEach(function(x) {
             var element = x || {};
             var id = element.value;
             ids.push(id);
         });
-        data.ids = ids.join(',');
-        auditAll.data = data;
-        if (data.ids) {
-            this.app.viewport.modal(this.module.items.auditAll);
+        if (ids.length !== 0) {
+            this.app.viewport.modal(this.module.items.audit, { traineeId: ids.join(',') });
         } else {
             this.app.message.alert('请至少选择一位学员！');
         }

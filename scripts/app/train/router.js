@@ -1,8 +1,11 @@
 exports.routes = {
     'index/:id': 'showIndex',
-    response: 'showResponse',
     'sign-detail': 'showSignDetail',
-    'programme/preview/:id': 'showPreview'
+    'programme/preview/:id': 'showPreview',
+    response: 'showResponse',
+    classinfos: 'showClassInfos',
+    projects: 'showProjects',
+    train: 'showTrain'
 };
 
 exports.showIndex = function(id) {
@@ -16,3 +19,16 @@ exports.showResponse = function() {
 exports.showPreview = function(id) {
     return this.app.show('content', 'train/programme/preview', { id: id });
 };
+
+exports.showClassInfos = function() {
+    return this.app.show('content', 'train/classinfos');
+};
+
+exports.showProjects = function() {
+    return this.app.show('content', 'train/projects');
+};
+
+exports.showTrain = function(id) {
+    return this.app.show('content', 'train/index/', { id: id });
+};
+
