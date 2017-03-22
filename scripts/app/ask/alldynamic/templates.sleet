@@ -36,14 +36,16 @@ view('list')
                             else
                                 compare(pendingAudit.auditStatus 'eq' 1) 
                                     .item > string('comment') +  echo('(' + discussList.length +')')
-                                    compare(concern.id 'ne' '') 
+                                    compare(concernNum 'gt' 0)  
                                         .item(id='trend-unfollow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('unfollow')
                                     else
                                         .item(id='trend-follow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('follow')
                                     .item > string('share')
+                                    .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
                                 else
                                     compare(pendingAudit.auditStatus 'eq' 2) 
                                         .item > span.color-ing > string('auditStatus2')
+                                        .item(id = 'del-question-' + questionId data-name='id' data-value=questionId) > string('delete')
                                     else
                                         .item > string('comment') + echo('(' + discussList.length +')')
                                         .item(id='trend-follow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('follow')
@@ -59,7 +61,7 @@ view('list')
                             else 
                                 compare(pendingAudit.auditStatus 'eq' 1) 
                                     .item > string('comment') +  echo('(' + discussList.length +')')
-                                    compare(concern.id 'ne' '') 
+                                    compare(concernNum 'gt' 0)  
                                         .item(id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
                                     else
                                         .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
@@ -67,6 +69,7 @@ view('list')
                                 else
                                     compare(pendingAudit.auditStatus 'eq' 2) 
                                         .item > span.color-ing > string('auditStatus2')
+                                        .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
                                     else
                                         .item > string('comment') + echo('(' + discussList.length +')')
                                         .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
@@ -76,7 +79,7 @@ view('list')
                                                 .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
                         compare(trendsType 'eq' '3') 
                             .item > string('comment') +  echo('(' + discussList.length +')')
-                            compare(concern.id 'ne' '') 
+                            compare(concernNum 'gt' 0) 
                                 .item(id='trend-unfollow-3_' + discussId data-name='id' data-value='3_' + discussId ) > echo('+') + string('unfollow')
                             else
                                 .item(id='trend-follow-3_' + discussId data-name='id' data-value='3_' + discussId ) > echo('+') + string('follow')

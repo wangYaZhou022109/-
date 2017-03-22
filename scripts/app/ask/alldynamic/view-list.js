@@ -3,8 +3,8 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true,
-    popupstate: true
+    trends: true
+   // popupstate: true
 };
 
 exports.events = {
@@ -33,20 +33,12 @@ exports.handlers = {
         }
     },
     report: function(payload) {
-        var state = this.bindings.popupstate,
-            obj = payload,
-            data;
-        if (obj.indexOf('_') !== -1) {
-            data = obj.split('_');
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
         }
-        state.hidden = true;
-        state.data = {};
-        state.data.objectType = data[0];
-        state.data.id = data[1];
-        state.data.title = '举报';
-        state.data.menu = 'report';
-        state.data.report = true;
-        state.changed();
     }
 };
 exports.actions = {

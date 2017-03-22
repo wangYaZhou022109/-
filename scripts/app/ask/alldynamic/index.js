@@ -1,7 +1,7 @@
 
 exports.items = {
     list: 'list',
-    popup: 'popup'
+    'ask/report': { isModule: true }
 };
 
 exports.store = {
@@ -10,8 +10,7 @@ exports.store = {
         discuss: { url: '../ask-bar/question-discuss' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' },
-        popupstate: { hidden: false, data: { menu: 'report' } }
+        del: { url: '../ask-bar/trends/del' }
     },
     callbacks: {
         init: function() {
