@@ -1,0 +1,11 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+
+view('main')
+    span > echo(research.name)
+    span > echo(research.startTime)
+    span > echo(research.endTime)
+    span > echo(research.questionaryDetail)
