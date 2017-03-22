@@ -51,16 +51,20 @@ view('main')
                     .comment-operation
                         .pull-left > .sub-text 2017-01-17
                         .text-right
-                            .item > i.iconfont.icon-zan
-                            | 取消赞
-                            .item > i.iconfont.icon-zan
-                            | 赞（8）
-                            .item > i.iconfont.icon-message
-                            | 回复
-                            .item > i.iconfont.icon-info
-                            | 举报
-                    .comment-reply
-                        textarea.input.w-full.block
+                            .item
+                                i.iconfont.icon-zan
+                                | 取消赞
+                            .item
+                                i.iconfont.icon-zan
+                                | 赞（8）
+                            .item#reply-1
+                                i.iconfont.icon-message
+                                | 回复
+                            .item
+                                i.iconfont.icon-info
+                                | 举报
+                    .comment-reply#comment-reply-1
+                        textarea.input.w-full.block(rows=1)
                         .btn 回复
             li
                 .user-pic > img(src="images/1.png")
@@ -74,16 +78,20 @@ view('main')
                     .comment-operation
                         .pull-left > .sub-text 23分钟前
                         .text-right
-                            .item > i.iconfont.icon-zan
-                            | 取消赞
-                            .item > i.iconfont.icon-zan
-                            | 赞（8）
-                            .item > i.iconfont.icon-message
-                            | 分享
-                            .item > i.iconfont.icon-info
-                            | 回复
-                    .comment-reply
-                        textarea.input.w-full.block
+                            .item
+                                i.iconfont.icon-zan
+                                | 取消赞
+                            .item
+                                i.iconfont.icon-zan
+                                | 赞（8）
+                            .item
+                                i.iconfont.icon-message
+                                | 分享
+                            .item#reply-2
+                                i.iconfont.icon-info
+                                | 回复
+                    .comment-reply#comment-reply-2
+                        textarea.input.w-full.block(rows=1)
                         .btn 回复
 
 view('side')

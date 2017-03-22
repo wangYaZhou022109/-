@@ -49,7 +49,7 @@ exports.showResearchPaper = function(fir, id) {
     return this.app.show('content', 'exam/research-activity/paper', { researchId: id });
 };
 
-exports.showIndexDemo = function(fir, id) {
+exports.showIndexDemo = function(id) {
     return this.app.show('content', 'exam/research-activity/index-demo', { researchId: id });
 };
 

@@ -1,3 +1,5 @@
 exports.bindings = {
-    research: true
+    research: true,
+    relativeResearchs: true,
+    relativeMembers: true
 };
