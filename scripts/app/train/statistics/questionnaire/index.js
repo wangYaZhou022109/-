@@ -15,14 +15,16 @@ exports.store = {
         classEvaluate: {
             url: '../train/questionnaire-survey/find'
         },
-        state: { data: { } }
+        state: { data: {} }
     },
     callbacks: {
         init: function(payload) {
             var classEvaluates = this.models.classEvaluates,
-                classEvaluate = this.models.classEvaluate;
+                classEvaluate = this.models.classEvaluate,
+                state = this.models.state;
             classEvaluates.params = payload;
             classEvaluate.params = payload;
+            state.data.classId = payload;
             this.get(classEvaluate);
             return this.get(classEvaluates);
         }

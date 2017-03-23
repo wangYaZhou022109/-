@@ -22,11 +22,14 @@ exports.store = {
         init: function(payload) {
             var researchQuestionarys = this.models.researchQuestionarys,
                 researchQuestionary = this.models.researchQuestionary,
-                state = this.models.state.data;
+                state = this.models.state;
             researchQuestionarys.params = {};
             researchQuestionarys.params.resourceId = payload.id;
+            researchQuestionarys.params.classId = payload.classId.classId;
             researchQuestionary.params.resourceId = payload.id;
-            state.id = payload.id;
+            researchQuestionary.params.classId = payload.classId.classId;
+            state.data.resourceId = payload.id;
+            state.data.classId = payload.classId.classId;
             researchQuestionary.clear();
             this.get(researchQuestionary);
             return this.get(researchQuestionarys);
@@ -38,6 +41,7 @@ exports.store = {
         }
     }
 };
+
 
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions.payload);

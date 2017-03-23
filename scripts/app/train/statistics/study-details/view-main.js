@@ -13,7 +13,10 @@ exports.handlers = {
     edit: function(data) {
         var me = this;
         var view1 = me.module.items['train/statistics/study-details/particulars'];
-        this.app.viewport.modal(view1, { memberId: data });
+        var options = {};
+        options.memberId = data;
+        options.classId = this.bindings.state.data.classId;
+        this.app.viewport.modal(view1, { memberId: options });
     }
 };
 

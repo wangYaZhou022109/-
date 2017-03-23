@@ -48,6 +48,6 @@ view('main')
             td > dateTime(sTime)
             td > dateTime(suTime)
             td > a(id='edit-researchQuestionarys'+rId data-name='id' data-value=id) > echo(sumScore)
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')
-            #pager.pagination
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
+    #pager.pagination

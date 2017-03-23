@@ -33,7 +33,8 @@ exports.components = [function() {
 }];
 
 exports.bindings = {
-    classTwoBrings: true
+    classTwoBrings: true,
+    state: true
 };
 
 exports.actions = {
@@ -62,7 +63,7 @@ exports.handlers = {
 exports.dataForActions = {
     search: function() {
         return {
-            classId: 3,
+            classId: this.bindings.state.data.classId,
             memberName: $(this.$$('[name="name"]')).val(),
             memberFullName: $(this.$$('[name="fullName"]')).val(),
             organizationName: $(this.$$('[name="organizationName"]')).val()

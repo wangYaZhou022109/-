@@ -14,7 +14,7 @@ var $ = require('jquery');
 var maps = require('./app/util/maps');
 
 exports.bindings = {
-    state: false
+    state: true
 };
 
 exports.actions = {
@@ -24,7 +24,8 @@ exports.actions = {
 exports.dataForActions = {
     search: function() {
         return {
-            resourceId: this.bindings.state.data.id,
+            resourceId: this.bindings.state.data.resourceId,
+            classId: this.bindings.state.data.classId,
             name: $(this.$$('[name="name"]')).val(),
             fullName: $(this.$$('[name="fullName"]')).val(),
             status: $(this.$$('[name="examStatus"]')).val() === '0' ? '' : $(this.$$('[name="examStatus"]')).val()

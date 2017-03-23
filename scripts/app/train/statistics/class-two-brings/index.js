@@ -18,8 +18,10 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var classTwoBrings = this.models.classTwoBrings;
+            var classTwoBrings = this.models.classTwoBrings,
+                state = this.models.state;
             classTwoBrings.params = payload;
+            state.data.classId = payload;
             return this.get(classTwoBrings);
         },
         search: function(payload) {
@@ -36,6 +38,7 @@ exports.store = {
         }
     }
 };
+
 
 exports.beforeRender = function() {
     return this.dispatch('init', { classId: this.renderOptions.state.classId });

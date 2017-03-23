@@ -52,6 +52,6 @@ view('main')
             td > dateTime(startTime)
             td > dateTime(submitTime)
             td > a(id='edit_researchQuestionarys'+id data-name='id' data-value=id) > echo('详情')
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')        
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
     #pager.pagination

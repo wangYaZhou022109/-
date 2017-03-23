@@ -19,7 +19,7 @@ exports.events = {
 exports.handlers = {
     editClassEvaluates: function(data) {
         var me = this,
-            classId = this.bindings.state.data,
+            classId = this.bindings.state.data.classId,
             view4 = me.module.items['train/statistics/questionnaire/research'],
             options = {};
         options.id = data;

@@ -67,6 +67,6 @@ view('main')
                     a(id='edit-exams'+id data-name='id' data-value=id) > echo(score)
                 else
                     a(id='edit-exams'+id data-name='id' data-value=id) > echo('评卷')
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')
-            #pager.pagination
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
+    #pager.pagination

@@ -36,6 +36,6 @@ view('main')
             td > echo(organization.name)
             td > echo(sumScore)
             td > a(id='edit-researchQuestionarys'+rId data-name='id' data-value=id) > echo('查看')
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')        
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
     #pager.pagination
