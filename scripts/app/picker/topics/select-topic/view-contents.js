@@ -1,8 +1,6 @@
 var _ = require('lodash/collection'),
     $ = require('jquery');
 
-exports.title = '选择话题';
-
 exports.bindings = {
     topics: true
 };
@@ -12,19 +10,21 @@ exports.events = {
 };
 
 exports.handlers = {
-    checkTopic: function(value) {
+    checkTopic: function(value, events, element) {
         var member = _.find(this.bindings.topics.data,
             function(o) {
                 return o.id === value;
             });
-        var checked = $(this.$('hid_' + value)).val(),
+        var checked = this.$('hid_' + value).value,
             state = false;
         if (checked === 'true') {
-            $(this.$('hid_' + value)).val(false);
+            this.$('hid_' + value).value = false;
             state = false;
+            $(element).removeClass('active');
         } else {
-            $(this.$('hid_' + value)).val(true);
+            this.$('hid_' + value).value = true;
             state = true;
+            $(element).addClass('active');
         }
         this.module.renderOptions.callback(member, state);
     }
@@ -35,7 +35,10 @@ exports.dataForTemplate = {
         if (ids) {
             _.map(data.topics || [], function(x) {
                 var m = x || {};
-                if (ids.indexOf(m.id) !== -1) m.checked = true;
+                if (ids.indexOf(m.id) !== -1) {
+                    m.checked = true;
+                    m.checkStyle = 'active';
+                }
             });
         }
         return data.topics;
