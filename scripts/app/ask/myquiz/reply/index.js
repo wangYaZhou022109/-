@@ -11,6 +11,7 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var reply = this.models.reply;
+            console.log(reply);
             reply.set(payload);
             this.models.state.data = payload;
             return this.get(reply);
