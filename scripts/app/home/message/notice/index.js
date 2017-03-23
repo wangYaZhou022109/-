@@ -17,14 +17,19 @@ exports.store = {
         removeAll: { url: '../system/message/removeAll' },
         markRead: { url: '../system/message/markRead' },
         dataList: { data: [] }, // 用于拼接组合分页数据
-        scrollFlag: { data: false }
+        scrollFlag: { data: false },
+        attr: { data: { value: '0' } } // 消息属性 0为通知 1为@我
     },
     callbacks: {
-        init: function() {
+        init: function(payload) {
             var list = this.models.list;
+            var parentMenu = payload.state.menu;
+            if (parentMenu === 'atme') {
+                this.models.attr.data.value = '1';
+            }
             list.clear();
             this.models.dataList.data = []; // 组合数据清空
-            D.assign(list.params, { page: 1, pageSize: 10 }); // 重置分页
+            D.assign(list.params, { page: 1, pageSize: 10, attr: this.models.attr.data.value }); // 重置分页
             return this.get(list);
         },
         showRead: function(payload) {
@@ -37,7 +42,7 @@ exports.store = {
                 this.models.readStatus.data.value = '';
             }
             D.assign(list.params, payload);
-            D.assign(list.params, { page: 1, pageSize: 10 }); // 重置分页
+            D.assign(list.params, { page: 1, pageSize: 10, attr: this.models.attr.data.value }); // 重置分页
             return this.get(list);
         },
         removeAll: function(payload) {
@@ -58,5 +63,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init');
+    this.dispatch('init', this.renderOptions);
 };
