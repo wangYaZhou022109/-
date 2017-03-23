@@ -1,0 +1,34 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    ul.list
+        li
+            .clearfix
+                .pull-left
+                    span.m-right 来自XXX班级
+                    span.color-ing 未参与
+                .pull-right 截止时间：2016-09-09 09:09:09
+            .clearfix.layout-mt-small
+                .pull-left 学员满意度评估
+                .pull-right > a 进入调研
+        li
+            .clearfix
+                .pull-left
+                    span.m-right 来自XXX班级
+                    span.color-pass 已提交
+                .pull-right 截止时间：2016-09-09 09:09:09
+            .clearfix.layout-mt-small
+                .pull-left 学员满意度评估
+                .pull-right > a 进入调研
+        li
+            .clearfix
+                .pull-left
+                    span.m-right 来自XXX班级
+                    span.sub-text 已过期
+                .pull-right 截止时间：2016-09-09 09:09:09
+            .clearfix.layout-mt-small
+                .pull-left 学员满意度评估
+    .empty 没有更多了
