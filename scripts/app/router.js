@@ -2,15 +2,15 @@
 exports.routes = {
     home: 'showHome',
     'share/:id/:type': 'showShare', // 分享跳转
-    'message/detail': 'showMessageDetail'
+    'message/detail/:id': 'showMessageDetail'
 };
 
 exports.showHome = function() {
     return this.app.show('content', 'home/default');
 };
 
-exports.showMessageDetail = function() {
-    return this.app.show('content', 'home/message/detail');
+exports.showMessageDetail = function(id) {
+    return this.app.show('content', 'home/message/detail', { id: id });
 };
 
 exports.showShare = function(id, type) {
