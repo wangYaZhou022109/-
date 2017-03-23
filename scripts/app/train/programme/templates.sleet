@@ -138,7 +138,7 @@ view('task')
                             a > echo('最小化')
                 thead > tr
                     th 序号
-                    th(width='50%') 问卷名称
+                    th(width='50%') 作业名称
                     th 开始时间
                     th 结束时间
                     th 操作
@@ -319,7 +319,7 @@ view('editTask') > form.vertical
     .col-sm-2(style='text-align:right')
         a.btn#saveTask 保存
     .row
-        label(style='float:left;') 课程名称
+        label(style='float:left;') 作业名称
         input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
         input.input#id(type= 'hidden' name='id' value=task.id)
     .row
@@ -329,7 +329,7 @@ view('editTask') > form.vertical
         input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
     .row
         label(style='float:left;') 任务说明
-        input.input#explain(name='explain' value=task.explain size=8 style='float:left' x-rule='required')
+        textarea#explain(name='explain' value='' rows=5 cols=80 x-rule='maxLength:1000' x-rule='required') > echo(task.explain)
 
     .list.m-top
         table.table
