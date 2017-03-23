@@ -9,7 +9,7 @@ var D = require('drizzlejs'),
     studyBtnTexts = { 2: '重新学习', 4: '重新学习', 8: '查看详情' },
     prefixUrl = {
         8: '#/study/task/',
-        9: '#/exam/exam/answer-paper/',
+        9: '#/exam/exam/paper/',
         10: '#/study/course/detail/',
         14: '#/gensee/detail/'
     };

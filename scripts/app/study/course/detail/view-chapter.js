@@ -7,7 +7,7 @@ var showHandler = function(payload) {
     var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
         8: '#/study/task/',
-        9: '#/exam/exam/answer-paper/',
+        9: '#/exam/exam/paper/',
         12: '#/exam/research-activity/research-detail/'
     };
     return function() {
@@ -15,7 +15,7 @@ var showHandler = function(payload) {
         if (innerType.indexOf(payload.sectionType) !== -1) {
             this.module.dispatch('showSection', payload);
         } else if (detailUrlMap[payload.sectionType]) {
-            window.open(detailUrlMap[payload.sectionType] + '' + payload.id);
+            window.open(detailUrlMap[payload.sectionType] + '' + payload.resourceId);
         } else if (payload.sectionType === 12) {
             this.module.dispatch('getResearchById', { id: payload.resourceId }).then(function() {
                 me.app.viewport.modal(me.module.items['research-tips']);
