@@ -21,8 +21,10 @@ view('main')
                     .pull-left.common-titlea > echo(subject)
                     .pull-right > echo('发送时间：') + dateTime(createTime)
                 .text-overflow.m-top > echo(textContent)
-    if(showMore)
+    compare(showMore 'eq' 0)
+        .empty 暂无内容
+    compare(showMore 'eq' 1)
         #loadMore.empty(style='cursor:pointer;') 查看更多
-    else
+    compare(showMore 'eq' 2)
         .empty 没有更多了
     
