@@ -1,4 +1,5 @@
 #!handlebars
+
 module > .ask-page > .container
     .page-main-wrapper.knowledge-side
         .page-side.side-min(data-region='side')
@@ -55,9 +56,7 @@ view('main')
                             .item > i.iconfont.icon-message(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                             .item > i.iconfont.icon-info
                             | 举报
-                    .comment-reply(id='reply-'+id name='reply-' + id style='display:none')
-                        textarea.input.w-full.block
-                        .btn 回复
+                    div(id='reply-'+id name='reply-' + id style='display:none')
 #  module > .course-page
 #      div(data-region='main')
 #  view('main')
