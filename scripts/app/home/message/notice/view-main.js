@@ -96,12 +96,15 @@ exports.dataForTemplate = {
         var page = this.bindings.list.params.page;
         var pageSize = this.bindings.list.params.pageSize;
         var recordCount = data.list.recordCount;
+        if (!recordCount || recordCount === 0) {
+            return 0;
+        }
         if (page * pageSize < recordCount) {
             // 页数加1
             this.bindings.list.params.page = page + 1;
-            return true;
+            return 1;
         }
-        return false;
+        return 2;
     },
     dataList: function(data) { // 拼接翻页数据
         var list = data.list.items;
