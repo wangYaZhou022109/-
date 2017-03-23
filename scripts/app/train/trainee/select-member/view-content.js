@@ -17,36 +17,34 @@ exports.events = {
 
 exports.handlers = {
     checkMember: function(value, e, ele) {
-        // var member = _.find(this.bindings.members.data,
-        //     function(o) {
-        //         return o.id === value;
-        //     });
         var data = this.bindings.state.data,
-            id = value;
+            id = value,
+            i = 0;
         if (ele.checked) {
-            data.ids.push(id);
+            data.push(id);
         } else {
-            _.remove(data.ids, function(n) {
-                return n === id;
-            });
+            for (i; i < data.length; i++) {
+                if (data[i] === id) {
+                    data.splice(i, 1);
+                    break;
+                }
+            }
         }
-        // this.module.renderOptions.callback(member, ele.checked);
     }
 };
 
 exports.dataForTemplate = {
     members: function(data) {
-        // var ids = this.module.renderOptions.ids;
-        // console.log(ids);
-        // if (ids) {
-        //     _.map(data.members || [], function(x) {
-        //         var m = x || {};
-        //         if (ids.indexOf(m.id) !== -1) m.checked = true;
-        //     });
-        // }
+        var ids = this.bindings.state.data;
+        var memberIds = this.module.renderOptions.memberIds;
+        _.map(data.members || [], function(x) {
+            var m = x || {};
+            if (ids.indexOf(m.id) !== -1 || memberIds.indexOf(m.id) !== -1) m.checked = true;
+        });
         return data.members;
     }
 };
+
 exports.searchChange = function() {
     this.module.dispatch('refreshList', this.bindings.search.getQueryParams());
 };

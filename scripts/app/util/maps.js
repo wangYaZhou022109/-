@@ -281,11 +281,32 @@ module.exports = {
     'lecturer-type': {
         0: '内部', 1: '外部'
     },
+    'train-signdetail-state': {
+        1: '正常', 2: '迟到', 3: '未签到', 4: '请假'
+    },
+    'train-bus-state': {
+        0: '未开始', 1: '进行中', 2: '已结束'
+    },
+    'train-sign-state': {
+        0: '未开始', 1: '已开始'
+    },
+    'compatible-client': {
+        0: '全部', 1: 'PC', 2: 'APP'
+    },
+    'trainee-sex': {
+        0: '男', 1: '女'
+    },
     'research-record': {
         0: '未参与', 1: '已完成'
     },
     'course-list-company-type': {
         0: '全部', 1: '集团', 2: '本公司', 3: '其他公司'
+    },
+    'train-leave-state': {
+        0: '待审核', 1: '同意', 2: '不同意'
+    },
+    'questionnaire-type': {
+        1: '考试', 2: '调研', 3: '评估', 4: '学员满意度评估', 5: '需求方满意度评估'
     },
     'questin-type': { // '问题类型
         1: '问题', 2: '分享', 3: '班级讨论'

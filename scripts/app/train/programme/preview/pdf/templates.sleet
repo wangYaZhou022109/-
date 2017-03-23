@@ -1,0 +1,7 @@
+#! handlebars
+
+module
+    div(data-region='pdf')
+
+view('pdf')
+    #viewPdf

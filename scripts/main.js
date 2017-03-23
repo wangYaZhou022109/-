@@ -3,19 +3,11 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
     setting = {},
     currentUser = {};
 
-oauthOptions = {
-    clientId: 999,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'https://dev9.zhixueyun.com'
-};
-
 // @ifndef PRODUCTION
 oauthOptions = {
-
-    clientId: 13,
+    clientId: 66,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://localhost'
-
+    returnTo: 'http://192.168.1.10'
 };
 // @endif
 
@@ -58,6 +50,10 @@ require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/ext/highcharts');
 require('./app/main/modal/modal-region');
+require('./app/ext/flatpickr');
+require('./app/ext/tree');
+require('./app/ext/background-pager');
+require('./app/ext/qr-code');
 
 D.adapt({
     getFormData: function(form) {

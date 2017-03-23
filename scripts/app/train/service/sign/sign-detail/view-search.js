@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 exports.bindings = {
-    classstaffs: true
+    signDetail: true,
 };
 
 exports.actions = {
@@ -11,9 +11,8 @@ exports.actions = {
 exports.dataForActions = {
     search: function() {
         return {
-            classId: 3,
-            memberName: $(this.$$('[name="memberName"]')).val(),
-            memberFullName: $(this.$$('[name="memberFullName"]')).val()
+            memberFullName: $(this.$$('[name="memberFullName"]')).val(),
+            state: $(this.$$('[name="state"]')).val()
         };
     }
 };

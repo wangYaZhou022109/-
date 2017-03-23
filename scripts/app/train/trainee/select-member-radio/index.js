@@ -1,7 +1,6 @@
 var D = require('drizzlejs');
 
 exports.title = '选择用户';
-exports.large = true;
 
 exports.items = {
     content: 'content',
@@ -12,7 +11,7 @@ exports.items = {
 exports.store = {
     models: {
         members: { url: '../human/member', type: 'pageable', root: 'items' },
-        state: { data: { ids: [] } },
+        state: { data: {} },
         search: {
             data: {},
             mixin: { getQueryParams: function() {
@@ -39,3 +38,12 @@ exports.mixin = {
         this.dispatch('refreshList');
     }
 };
+
+exports.buttons = [{
+    text: '确认',
+    fn: function() {
+        var member = this.store.models.state.data;
+        this.renderOptions.callback(member);
+        this.store.models.state.data = {};
+    }
+}];

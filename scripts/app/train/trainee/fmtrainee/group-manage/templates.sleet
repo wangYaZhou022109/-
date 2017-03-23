@@ -1,0 +1,51 @@
+#!handlebars
+
+module
+    div(style='width:60%;float:left;' data-region='toolbox')
+    div(style='width:60%;float:left;' data-region='content')
+    div(style='width:35%;float:right;' data-region='list')
+
+view('toolbox') > form.vertical
+    echo('员工编号')
+    input(name='memberName')
+    echo('所属单位')
+    input(name='organizationName')
+    br
+    echo('姓名')
+    input(name='memberFullName')
+    btn.btn#search > echo('搜索')
+
+view('content')
+    table.table
+        thead > tr
+            th > .checkbox.no-margin
+                input(type='checkbox' id='checkAll')('checked')&if(waitTrainees.checkStatus)
+                label(for='checkAll')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('所属部门')
+            th > echo('性别')
+        tbody > each(waitTrainees) > tr
+            td > .checkbox.no-margin
+                input(type='checkbox' id='check-item'+id name='trainee-id' value=id)('checked')&if(checked)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(organizationName)
+            td > map('trainee-sex' sex)
+    #pager.pagination(style='float:none')
+
+view('list')
+    table.table
+        thead > tr
+            th > echo('已选学员')
+            th > echo('员工编号')
+            th > echo('操作')
+        tbody > each(fmTrainees) > tr
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td
+                a(id='group-trainee-go-up'+id data-name='id' data-value=id) > echo('上移')
+                echo('|')
+                a(id='group-trainee-go-down'+id data-name='id' data-value=id) > echo('下移')
+                echo('|')
+                a(id='del-trainee'+id data-name='id' data-value=id) > echo('删除')
