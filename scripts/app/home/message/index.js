@@ -1,20 +1,20 @@
-var $ = require('jquery');
-
 exports.title = '我的消息';
 
 exports.items = {
-    notice: 'notice',
-    'to-do': 'to-do',
-    with: 'with'
+    main: 'main'
 };
 
-exports.events = {
-    'click item-*': 'showItem'
-};
-
-exports.handlers = {
-    showItem: function(id) {
-        $(this.$('item-' + id)).addClass('active').siblings().removeClass('active');
-        $(this.$('tabs-cont-item-' + id)).addClass('active').siblings().removeClass('active');
+exports.store = {
+    models: {
+        menus: { data: [
+            { id: '0', name: '通知', url: 'notice', current: true },
+            { id: '1', name: '待办', url: 'wait' },
+            { id: '2', name: '@我的', url: 'atme' }
+        ] },
+        state: {
+            data: {
+                menu: 'notice', // 初始菜单
+            }
+        }
     }
 };

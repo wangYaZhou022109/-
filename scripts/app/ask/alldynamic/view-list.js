@@ -3,8 +3,8 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true,
-    popupstate: true
+    trends: true
+   // popupstate: true
 };
 
 exports.events = {
@@ -33,29 +33,48 @@ exports.handlers = {
         }
     },
     report: function(payload) {
-        var state = this.bindings.popupstate,
-            obj = payload,
-            data;
-        if (obj.indexOf('_') !== -1) {
-            data = obj.split('_');
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
         }
-        state.hidden = true;
-        state.data = {};
-        state.data.objectType = data[0];
-        state.data.id = data[1];
-        state.data.title = '举报';
-        state.data.menu = 'report';
-        state.data.report = true;
-        state.changed();
     }
 };
 exports.actions = {
     'click trend-follow-*': 'follow',
-    'click publish-*': 'publish'
+    'click trend-unfollow-*': 'unfollow',
+    'click publish-*': 'publish',
+    'click del-question-*': 'delquestion',
+    'click del-share-*': 'delshare',
+    'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    delquestion: function(payload) {
+        var data = payload;
+        data.auditType = '1';
+        return data;
+    },
+    delshare: function(payload) {
+        var data = payload;
+        data.auditType = '2';
+        return data;
+    },
+    deldiscuss: function(payload) {
+        var data = payload;
+        data.auditType = '3';
+        return data;
+    },
     follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    unfollow: function(payload) {
         var id = payload.id,
             data = {};
         var obj = id.split('_');
@@ -78,6 +97,22 @@ exports.actionCallbacks = {
     },
     follow: function() {
         this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
+    delquestion: function() {
+        this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    delshare: function() {
+        this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    deldiscuss: function() {
+        this.app.message.success('删除成功！');
         this.module.dispatch('init');
     }
 };

@@ -10,7 +10,8 @@ exports.items = {
     download: 'download',
     topic: '',
     'releated-course': 'releated-course',
-    student: ''
+    student: '',
+    'research-tips': ''
 };
 
 exports.store = {
@@ -46,36 +47,30 @@ exports.store = {
         download: { url: '../human/file/download' },
         lastestUser: { url: '../course-study/course-front/lastest-user', type: 'pageable', pageSize: 8, root: 'items' },
         score: { url: '../course-study/course-front/score' },
-        courseScore: {},
-        state: {}
+        state: {},
+        examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
+        researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
+        researchActivity: { url: '../exam/research-activity' }
     },
     callbacks: {
         init: function(payload) {
             // 初始化当前课程
             var course = this.models.course,
-                // score = this.models.score,
                 courseRelated = this.models.courseRelated,
-                notes = this.models.notes,
-                lastestUser = this.models.lastestUser,
                 collect = this.models.collect,
                 state = this.models.state;
             course.set(payload);
             courseRelated.params = payload;
-            notes.params = { courseId: payload.id };
-            lastestUser.params = { courseId: payload.id };
             collect.params = { businessId: payload.id };
-
             this.chain([
-                this.get(course).then(function(c) {
-                    var sectionId = null;
-                    if (c[0].register) sectionId = course.findFirstSection().id;
-                    state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
-                }),
                 this.get(courseRelated),
-                // this.get(lastestUser),
-                this.get(collect),
-                // this.get(notes)
+                this.get(collect)
             ]);
+            return this.get(course).then(function(c) {
+                var sectionId = null;
+                if (c[0].register) sectionId = course.findFirstSection().id;
+                state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
+            });
         },
         updateProgress: function(payload) {
             var course = this.models.course;
@@ -136,14 +131,13 @@ exports.store = {
             }
             return this.get(this.models.courseRelated);
         },
-        score: function() {
+        score: function(payload) {
             // 评分
             var score = this.models.score,
                 course = this.models.course;
-            score.data.businessId = course.data.id;
-            score.data.businessType = 1;
+            score.set(payload);
             return this.save(score).then(function(data) {
-                course.data.courseScore = data[0];
+                course.data.avgScore = data[0].avgScore || course.data.avgScore;
                 course.changed();
             });
         },
@@ -171,10 +165,15 @@ exports.store = {
                     state.changed(); // 改变播放
                 }
             );
+        },
+        getResearchById: function(payload) {
+            var model = this.models.researchActivity;
+            model.set({ id: payload.id });
+            return this.get(model);
         }
     }
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', { id: this.renderOptions.id });
+    return this.dispatch('init', { id: this.renderOptions.id });
 };

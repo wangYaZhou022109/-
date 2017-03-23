@@ -25,6 +25,7 @@ exports.handlers = {
             });
         } else if (sectionType === 9) {
             view = this.module.items['exam-tips'];
+            this.bindings.state.examId = resourceId;
             me.app.viewport.modal(view);
         } else {
             window.open(url);

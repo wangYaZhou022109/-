@@ -11,8 +11,11 @@ exports.getEntityModuleName = function(key) {
     var url = this.bindings.state.data.menu;
     if (typeof key === 'string' && key !== '') {
         url = key;
+        if (key === 'atme') {
+            url = 'notice';
+        }
     }
-    return 'center/bar/' + url;
+    return 'home/message/' + url;
 };
 exports.getEntity = function() {
     return {

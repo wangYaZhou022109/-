@@ -1,0 +1,25 @@
+#! handlebars
+
+module
+    li.tabs-cont-item.active
+        div(data-region='label')
+        div(data-region='content')
+
+view('label')
+    .clearfix.layout-mt-small
+        .pull-left > each(menus)
+            span.m-right.tag-btn.radius(id='switch-'+id class = if(current 'active')) > echo(name)
+        .pull-right
+            .checkbox > input(type='checkbox' id='checkFinish')('checked')&if(finishCheck) + label 显示待处理
+                    
+view('content')
+    
+
+view('satisfaction')
+    ul.list
+    
+view('evaluation')
+    ul.list
+
+view('homework')
+    ul.list
