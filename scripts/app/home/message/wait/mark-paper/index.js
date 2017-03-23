@@ -16,4 +16,4 @@ exports.store = {
 
 exports.beforeRender = function() {
     return this.dispatch('init');
-}
+};
