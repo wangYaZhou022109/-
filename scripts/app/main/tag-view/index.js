@@ -24,7 +24,7 @@ exports.store = {
         remove: function(payload) {
             var state = this.models.state,
                 remain = _.filter(state.data.list, function(item) {
-                    return payload.values.indexOf(item.value) === -1;
+                    return payload.values.indexOf(item.value + '') === -1;
                 });
             return this.chain(this.module.dispatch('init'), function() {
                 return this.module.dispatch('add', { items: remain });

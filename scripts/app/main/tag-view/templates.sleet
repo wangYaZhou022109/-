@@ -1,14 +1,12 @@
 #!handlebars
 
 module
-    div(data-region='tags')
+    .tag-input(data-region='tags')
 
 view('tags')
+    each(tags)
+        .tag-btn.radius 
+            .close.iconfont.icon-close(id='remove-' + value data-name='tag-view-remove' data-value=value)
+            echo(text)
+    input(placeholder='输入标签名按回车即可添加,最多添加五个')
     input(name=name value=values type='hidden')
-    .tag-group
-        each(tags)
-            .tag-item
-                span.text > echo(text)
-                span.remove > i.icon-dismiss(id='remove-' + value data-name='tag-view-remove' data-value=value)
-        else
-            .muted > echo(emptyText)

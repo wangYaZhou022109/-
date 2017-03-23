@@ -5,7 +5,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: {}
+        state: {},
+        hot: { url: '../system/topic/hot', autoLoad: 'after', params: { type: 4, limit: 5 } },
     }
 };
 

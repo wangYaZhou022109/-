@@ -1,12 +1,14 @@
 // exports.type = 'form';
 
 exports.bindings = {
-    state: false
+    state: false,
+    hot: true
 };
 
 exports.events = {
     'click selectTopic': 'showTopic',
-    'click clearTopic': 'clearTopic'
+    'click clearTopic': 'clearTopic',
+    'click addTopic': 'addTopic',
 };
 
 exports.handlers = {
@@ -29,6 +31,9 @@ exports.handlers = {
                 }
             }
         });
+    },
+    addTopic: function(id, e, element) {
+        this.components.tags.addItem({ value: id, text: element.innerText });
     },
     clearTopic: function() {
         this.components.tags.clear();
