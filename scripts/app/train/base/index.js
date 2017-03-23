@@ -14,6 +14,7 @@ exports.store = {
         },
         down: { url: '../human/file/download' },
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
+        quota: { url: '../train/class-quota/init' },
         state: { data: {} }
     },
     callbacks: {
@@ -27,6 +28,7 @@ exports.store = {
             var model = this.models.saveModel,
                 classInfo = this.models.classInfo,
                 offlineCourse = this.models.offlineCourse,
+                quota = this.models.quota,
                 manyi = this.models.manyi,
                 newManYi = {},
                 me = this;
@@ -38,11 +40,13 @@ exports.store = {
             model.set(payload);
             model.data.confirm = 1;
             offlineCourse.data.classId = classInfo.data.id;
+            quota.data.classId = classInfo.data.id;
             me.save(model).then(function() {
                 this.app.message.success('提交成功');
                 me.get(classInfo);
                 me.save(offlineCourse);
                 me.save(manyi);
+                me.save(quota);
             });
         },
         save: function(payload) {

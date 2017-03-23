@@ -1,4 +1,45 @@
 #!handlebars
 
-module > .identity-expert-page
-    div 配额管理
+module > .train-class-page
+    .page-main-wrapper
+        .main(data-region='main')
+
+view('main')
+    div(style='padding:20px 50px 50px 20px;')
+        .row(style='line-height:50px;')
+            .col-sm-12
+                label > echo('配额方式')
+                a.btn#quota-type-2 分省配额
+                a.btn#quota-type-1 整体配额
+                label > echo('审核方式：')
+                input.inline-block#is-auto-1(name='isAutoApprove' type='radio' value='1')('checked')&if(checked.isAutoApprove1)
+                .inline-block 自动审批
+                input.inline-block#is-auto-0(name='isAutoApprove' type='radio' value='0')('checked')&unless(checked.isAutoApprove1)
+                .inline-block 手动审批
+                label > echo('该培训班总额度为：' + quotaInfo.amount + '，剩余额度为：' + quotaInfo.overplus)
+        compare(quotaInfo.type 'eq' 2)
+            .list.m-top
+                table.table
+                    thead > tr
+                        td(colspan=8)
+                            .col-sm-8(style='text-align:right;')
+                                a.btn#add 添加单位
+                                a.btn#deleteMulti 删除
+                    thead > tr
+                        th
+                            input#checkall(type='checkbox' name='checkall' )
+                        th 单位
+                        th 配额数量
+                        th 操作
+                    tbody > each(quotaList) > tr
+                        td
+                            input(type='checkbox' name='ids' id='ids-'+id value=id data-name='id' data-value=id)
+                        td > echo(organizationName)
+                        td > echo(quantity)
+                        td
+                            a(id='del-quota-'+id data-name='id' data-value=id) 删除
+        else
+            h2 当前班级配额方式为整体配额
+
+view('company')
+    div(style='padding:20px 50px 50px 20px;')
