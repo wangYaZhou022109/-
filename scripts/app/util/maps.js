@@ -310,13 +310,14 @@ module.exports = {
     },
     'live-status': {
         1: '待开始', 2: '直播中', 3: '已结束'
+    },
+    get: function(k) {
+        return _.map(this[k], function(value, key) {
+            return { key: key, value: value };
+        });
+    },
+    getValue: function(str, key) {
+        if (this[str]) return this[str][key] || '';
+        return '';
     }
-};
-
-module.exports.get = function(k) {
-    var arr = [];
-    _.forEach(this[k], function(value, key) {
-        arr.push({ key: key, value: value });
-    });
-    return arr;
 };

@@ -79,11 +79,11 @@ view('chapter')
                                         i.iconfont.icon-reload-full
                                         if(showRate)
                                             span.progress > percent(progress.completedRate)
-                                        span > map('course-study-status' progress.finishStatus)
+                                        span > echo(progress.finishStatus)
                                 else
                                     .item.start
                                         i.iconfont.icon-play-full
-                                        span > map('course-study-status' 0)
+                                        span 未开始
 
 view('note')
     .course-side-title-row
