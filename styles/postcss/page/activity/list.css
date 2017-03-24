@@ -1,5 +1,6 @@
 .activity-page{
-    & .activity-list .btn-prev {
+    & .activity-list .btn-prev,
+    & .activity-list .btn-next {
         margin-top: -calc(var(--large-space)/2);
     }
     & .main-list {
