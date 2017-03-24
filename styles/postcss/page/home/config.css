@@ -4,7 +4,7 @@
 }
 
 .home-page {
-    & > .section {
+    & section.section {
         padding: var(--base-gap) 0 0;
         overflow: hidden;
     }
@@ -322,6 +322,7 @@
         margin: var(--space) 0;
 
         & li {
+            display: inline-block;
             border-right: 1px solid var(--border-color);
 
             &:last-child {
