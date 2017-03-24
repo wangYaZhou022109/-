@@ -224,4 +224,8 @@ view('research-tips')
             echo(research.content)
         .row > .col-sm-12
             each(research.buttons)
-                a(id='button-' + id href=url target='_blank') > echo(text)
+                if(id 'eq' 'answer-next-time')
+                    a(id='button-' + id href=url) > echo(text)
+                else
+                    a(id='button-' + id href=url target='_blank') > echo(text)
+

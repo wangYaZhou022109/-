@@ -2,7 +2,7 @@ exports.bindings = {
     state: true
 };
 
-exports.type = 'form';
+// exports.type = 'form';
 
 exports.dataForTemplate = {
     name: function() {

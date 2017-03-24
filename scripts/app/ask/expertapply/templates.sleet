@@ -1,36 +1,51 @@
 #!handlebars
+module > div(data-region='details')
 
-module > .edit-info-page
+
+view('details') > .edit-info-page
     .tabs-cont > ul
         li.tabs-cont-item.active > .base-info
             .form
-                .pic > img(src='images/default-cover/default_user.png') + .btn.block.white.border 上传专家头像
+                #  .pic > img(src='images/default-cover/default_user.png') + .btn.block.white.border 上传专家头像
+                .pic > #headFile
                 .info
                     .form-row.textarea-row
                         label.m-top.required 名称：
-                        .content > input.input(placeholder='输入您的名称')
+                        .content > input.input(placeholder='输入您的名称' name ='fullName')
                     .form-row.textarea-row
-                        label.m-top.required 擅长话题：
-                        .content 
-                            input.input + .choice 选择
-                            #searchMore.border.bottom.dashed
-                                .tag-btn.active 全部
-                                .tag-btn 生活
-                                .tag-btn 科学教育
-                                .tag-btn 发展经济学
-                                .tag-btn 社会民生
-                                .tag-btn 职业发展
-                                .tag-btn 生活
-                                .tag-btn 科学教育
-                                .tag-btn 发展经济学
-                                .tag-btn 社会民生
-                                .tag-btn 职业发展
-                                .tag-btn 生活
-                                .tag-btn 科学教育
-                                .tag-btn 发展经济学
-                                .tag-btn 社会民生
-                                .tag-btn 职业发展
+                        label 擅长话题：
+                        .content
+                            .tag-input
+                                each(state)
+                                    .tag-btn.radius(id = 'del-topic-'+ id data-name='id' data-value=id ) > .close.iconfont.icon-close + echo(name)
+                                input(placeholder='输入标签名按回车即可添加,最多添加五个')
+                            .sub-row#tag-list 
+                                span.small-font 推荐标签：
+                                each(topicname)
+                                    .tag-btn.radius.selected(id = 'add-topic-' + id data-name='id' data-value=id ) > echo(name)
                     .form-row.textarea-row
                         label.required 您的优势：
                         .content > textarea.input(rows='3' placeholder='请清晰描述您选择话题领域的优势和特长，这有助于提升您的通过率')
 
+#  view('details') > form.vertical
+#      .row
+#          .col-sm-4 > .user-info
+#              br
+#              br
+#              #headFile
+#          .col-sm-8
+#              label > echo('支持png,jpg、jpeg图片格式;')
+#              label > echo('图片要小于2M;')
+#              label > echo('图片分辨率：xxxxx*xxxx;')
+#              label > echo('照片底色为浅色;')
+#              label > echo('请保证上传本申请人真实图片.')
+#              label(class='required') > setting('ask-bar.expert.add.fullName')
+#              #  #expertMember
+
+#      .row > .col-sm-12
+#          label(class='required') > setting('ask-bar.expert.add.topics')
+#          #  #topics
+
+#      .row > .col-sm-12
+#          label(class='required') > setting('ask-bar.expert.add.introduce')
+#          textarea.input.w-full(name='introduce' x-rule='required' rows='5')  

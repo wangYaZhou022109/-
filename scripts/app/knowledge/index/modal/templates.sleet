@@ -21,7 +21,7 @@ view('main')
                 .form-row
                     label.required 知识名称
                     .content.icon-choice
-                        input.input#name(name='name') + .tips 0/60
+                        input.input.p-right#name(name='name') + .tips 0/60
             .form-row
                 label.label.required 所属目录
                 #categoryId
@@ -33,21 +33,7 @@ view('main')
 
             .form-row.textarea-row
                 label 选择标签
-                .content
-                    .tag-input#tags
-                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
-                        .tag-btn.radius > .close.iconfont.icon-close + | 标签一
-                        input(placeholder='输入标签名按回车即可添加,最多添加五个')
-                    .sub-row#tag-list
-                        span.small-font 推荐标签：
-                        .tag-btn.radius.selected 标签一
-                        .tag-btn.radius 标签二
-                        .tag-btn.radius.selected 标签三
-                        .tag-btn.radius 标签一
-                        .tag-btn.radius 标签二
-                        .tag-btn.radius 标签三
-                        .tag-btn.radius ...
-
+                #select-topic
             .form-row.textarea-row
                 label 知识简介
                 .content

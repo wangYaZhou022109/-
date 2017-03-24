@@ -34,13 +34,13 @@ exports.handlers = {
 };
 
 exports.components = [{
-    id: 'topicIds',
+    id: 'select-topic',
     name: 'picker',
     options: {
         picker: 'topics',
         inputName: 'topicIds',
-        limit: 4,
-        tags: []
+        limit: 4
+        // tags: [{ text: '标签一', value: 1 }, { text: '标签三', value: 3 }]
     }
 }, {
     id: 'headFile',

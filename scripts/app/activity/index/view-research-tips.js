@@ -9,7 +9,7 @@ exports.dataForTemplate = {
         var researchRecord = data.researchRecord,
             research = researchRecord.researchQuestionary,
             now = new Date().getTime(),
-            buttons = [];
+            buttons = [{ id: 'answer-next-time', text: '下次来答' }];
 
         if (now >= research.startTime && now <= research.endTime) {
             if (researchRecord.status === 0) {
@@ -36,6 +36,18 @@ exports.dataForTemplate = {
             content: research.researchQuestionary,
             buttons: buttons
         };
+    }
+};
+
+exports.events = {
+    'click button-*': 'doSome'
+};
+
+exports.handlers = {
+    doSome: function(id) {
+        if (id.indexOf('answer-next-time') > -1) {
+            this.app.viewport.closeModal();
+        }
     }
 };
 

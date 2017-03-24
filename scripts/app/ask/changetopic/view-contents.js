@@ -1,6 +1,5 @@
 
 exports.bindings = {
-    state: true,
     topicname: true,
     topicType: true
 };
@@ -15,8 +14,10 @@ exports.handlers = {
         this.app.viewport.modal(model);
     }
 };
+
 exports.actions = {
     'click checkOne-*': 'checkOne',
-    'click checkAll*': 'checkAll'
+    'click checkAll*': 'checkAll',
+    'click search': 'searchLike',
+    'click add-topic-*': 'addTopic'
 };
-
