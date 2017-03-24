@@ -21,18 +21,14 @@ view('banner')
                         .information > echo(description)
                         .how-many
                             | 已有
-                            b 235
+                            b > echo(joinSize)
                             | 人参与
-                        #  .num
-                        #      | 已有
-                        #      strong 316
-                        #      | 人参加
                         compare(type 'eq' 1)
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与1
                         compare(type 'eq' 2)
-                            a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与2
+                            a.normal.block(type=type  href='#/activity/gensee/detail/'+ targetId target='_blank') > .btn.radius 我要参与
                         compare(type 'eq' 6)
-                            a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与6
+                            a.normal.block(type=type  href='#/exam/research-activity/research-answer-detail/'+ targetId target='_blank') > .btn.radius 我要参与
                         else
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
 
@@ -120,9 +116,9 @@ view('list')
                         .bottom.sub-text
                             i.iconfont.icon-favorite
                                 echo(subNumber)
-                            i.iconfont.icon-favorite.m-left 
+                            i.iconfont.icon-favorite.m-left
                                 dateMinute(startTime)
-                                
+
         .h3.m-bottom 考试
         ul.arrow-box.activity-item-box.activity-item-exam.cell-3
             .arrow-left#exam-left > | <
