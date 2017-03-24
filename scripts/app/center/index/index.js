@@ -50,7 +50,6 @@ exports.store = {
         init: function(options) {
             var me = this,
                 recommendList = me.models.recommendList,
-               // member = me.models.member,
                 state = me.models.state.data;
             if (options && options.name) {
                 if (options.name === 'course') {
@@ -66,7 +65,6 @@ exports.store = {
                 }
             }
             recommendList.clear();
-            // member.clear();
             recommendList.params = { page: '1' };
             me.get(recommendList);
         },

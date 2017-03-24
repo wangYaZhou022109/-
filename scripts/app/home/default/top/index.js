@@ -80,8 +80,7 @@ exports.store = {
         homeConfig: { url: '../system/home-config/config' },
         message: {
             url: '../system/message',
-            params: { page: 1, pageSize: 5, type: 1, readStatus: 0 },
-            autoLoad: 'after'
+            params: { page: 1, pageSize: 5, type: 1, readStatus: 0 }
         }
     },
     callbacks: {
@@ -123,9 +122,18 @@ exports.store = {
         },
         refreshMessage: function() {
             return this.get(this.models.message);
+        },
+        loadMessage: function() {
+            if (this.app.global.currentUser.id) {
+                this.get(this.models.message);
+            }
         }
     }
 };
 exports.beforeRender = function() {
     this.dispatch('init');
+};
+
+exports.afterRender = function() {
+    return this.dispatch('loadMessage');
 };

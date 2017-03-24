@@ -8,7 +8,7 @@ exports.bindings = {
 exports.events = {
     'click selectTopic': 'showTopic',
     'click clearTopic': 'clearTopic',
-    'click addTopic': 'addTopic',
+    'click hot-*': 'addTopic',
 };
 
 exports.handlers = {
@@ -41,7 +41,8 @@ exports.handlers = {
 };
 
 exports.components = [function() {
-    var data = this.bindings.state.data;
+    var me = this,
+        data = this.bindings.state.data;
     var inputName = data.inputName || 'topicIds',
         tags = data.tags || [];
     return {
@@ -50,7 +51,14 @@ exports.components = [function() {
         options: {
             name: inputName,
             emptyText: '请选择话题',
-            tags: tags
+            tags: tags,
+            placeholder: data.placeholder,
+            entryCallback: function(d) {
+                return me.module.dispatch('quick-add', { name: d, typeName: data.insertTypeName }).then(function(t) {
+                    var topic = t[0];
+                    me.components.tags.addItem({ value: topic.id, text: topic.name });
+                });
+            }
         }
     };
 }];
