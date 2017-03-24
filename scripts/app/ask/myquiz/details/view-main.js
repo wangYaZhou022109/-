@@ -1,4 +1,5 @@
 var D = require('drizzlejs');
+
 exports.type = 'dynamic';
 
 exports.bindings = {
@@ -6,7 +7,7 @@ exports.bindings = {
     details: true
 };
 exports.events = {
-    'click discuss-answer-*': 'discussanswer'
+    'click discuss-answer-*': 'discussanswer',
 };
 
 exports.handlers = {
@@ -20,8 +21,9 @@ exports.handlers = {
         } else {
             el.style.display = 'none';
         }
-    }
+    },
 };
+
 exports.actions = {
     'click close': 'close',
     'click boutique': 'boutique',
