@@ -9,7 +9,7 @@ exports.routes = {
     'research-activity/research-answer-detail/:id': 'showResearchAnswerDetail',
     'research-activity/research-summary-detail/:id': 'showResearchSummaryDetail',
     'research-activity/research-detail/:id': 'showResearchDetail',
-    'research-activity/index-demo/:id': 'showIndexDemo',
+    'research-activity/index/:id': 'showIndex',
     'research-activity/paper/:id': 'showResearchPaper'
 };
 
@@ -49,8 +49,8 @@ exports.showResearchPaper = function(fir, id) {
     return this.app.show('content', 'exam/research-activity/paper', { researchId: id });
 };
 
-exports.showIndexDemo = function(id) {
-    return this.app.show('content', 'exam/research-activity/index-demo', { researchId: id });
+exports.showIndex = function(id) {
+    return this.app.show('content', 'exam/research-activity/index', { researchId: id });
 };
 
 exports.interceptors = {
