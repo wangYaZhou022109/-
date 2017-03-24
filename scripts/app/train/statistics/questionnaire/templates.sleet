@@ -41,8 +41,12 @@ view('mainB')
             th > echo('操作')
         tbody > each(classEvaluate) > tr
             td > echo(resourceName)
-            td > date(startTime)
-            td > date(endTime)
+            td
+                label(id='label-startTime-' + id data-name='id' data-value=id) > dateTime(startTime) + echo('(点击可修改)')
+                input(id='input-startTime-' value=dateTime(startTime) style='display:none;')
+            td
+                label(id='label-endTime-' + id data-name='id' data-value=id) > dateTime(endTime) + echo('(点击可修改)')
+                input(id='input-endTime-' value=dateTime(endTime) style='display:none;')
             td > echo(response)
             td
                 a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id) > echo('查看')

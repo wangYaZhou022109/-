@@ -15,6 +15,9 @@ exports.store = {
         classEvaluate: {
             url: '../train/questionnaire-survey/find'
         },
+        updateManYi: {
+            url: '../train/questionnaire'
+        },
         state: { data: {} }
     },
     callbacks: {
@@ -27,6 +30,26 @@ exports.store = {
             state.data.classId = payload;
             this.get(classEvaluate);
             return this.get(classEvaluates);
+        },
+        updateStartTime: function(payload) {
+            var model = this.models.updateManYi,
+                classEvaluate = this.models.classEvaluate,
+                me = this;
+            model.clear();
+            model.set(payload);
+            this.save(model).then(function() {
+                me.get(classEvaluate);
+            });
+        },
+        updateEndTime: function(payload) {
+            var model = this.models.updateManYi,
+                classEvaluate = this.models.classEvaluate,
+                me = this;
+            model.clear();
+            model.set(payload);
+            this.save(model).then(function() {
+                me.get(classEvaluate);
+            });
         }
     }
 };

@@ -1,5 +1,4 @@
 exports.items = {
-    details: 'details',
     main: 'main',
     search: 'search'
 };
