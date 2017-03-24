@@ -13,7 +13,7 @@ exports.events = {
 exports.handlers = {
     showDetails: function(id, e, target) {
         var region;
-        var el = $(target).parents('.activity-category')[0];
+        var el = $(target).parents('.comment-list')[0];
         region = new D.Region(this.app, this.module, el, id);
         region.show('ask/myquiz/details', { id: id });
     }
