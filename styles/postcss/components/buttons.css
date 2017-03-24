@@ -137,6 +137,13 @@
     &.p-right {
         padding-right: calc(var(--font-size) * 3);
     }
+
+    &.date + .iconfont {
+        position: absolute;
+        right: calc(var(--font-size) / 2);
+        top: 50%;
+        margin-top: -calc(var(--font-size) / 2);
+    }
 }
 
 .btn-upload-file {
