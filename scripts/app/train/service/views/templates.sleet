@@ -1,0 +1,90 @@
+#!handlebars
+module
+    .subject-detail-page
+        .top
+        .page-main-wrapper
+            .side
+                .page-side > .container
+                    section.section(data-region='main')
+                    section.section(data-region='fmtrainees')
+                    section.section(data-region='class-information')
+                    section.section(data-region='class-notice')
+                    section.section(data-region='class-member')
+                    section.section(data-region='ranking-list')
+            .main
+                .subject-detail-main.page-main > .container
+                    section.section(data-region='curriculum-schedule')
+                    section.section(data-region='online-rresources')
+                    section.section(data-region='pannel')
+                    section.section(data-region='swipe')
+                    section.section(data-region='discussion-area')
+view('main')
+    .buttons
+        .btn#classGroup > i.icon-plus + span > echo('两个带来')
+        .btn#addRequired > i.icon-plus + span > echo('班车信息统计')
+        .btn#addCourse2 > i.icon-plus + span > echo('作业提交')
+        .btn#addCourse1 > i.icon-plus + span > echo('学员满意度')
+        .btn#addCourse3 > i.icon-plus + span > echo('调研与考试')
+        .btn#classMembers > i.icon-plus + span > echo('班级成员')
+view('class-information')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('班级信息')
+view('class-notice')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('班级公告')
+view('class-member')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('班级人员')
+view('ranking-list')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('排行榜')
+view('curriculum-schedule')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('课程表')
+view('online-rresources')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('在线资源')
+view('pannel')
+    .h3 > echo('图库')
+    #album.swiper-container
+        .swiper-wrapper
+            each(photos)
+                .swiper-slide > img(id="showSwipe-"+attachmentId src=imageUrl alt=name)
+        .swiper-button-prev(id='turnPage-prev' title=string('left.page')) > .iconfont.icon-arrow-left
+        .swiper-button-next(id='turnPage-next' title=string('right.page')) > .iconfont.icon-arrow-right
+
+view('swipe')
+    #classphotoSwipe
+    
+view('discussion-area')
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('讨论区')
+
+view('fmtrainees')
+    div.text-left
+        echo('班级学员')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('机构')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+        tbody > each(fmtrainees) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+    #pager.pagination(style='float:none')

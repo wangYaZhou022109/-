@@ -14,6 +14,7 @@ view('tab')
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-affiche') 班级公告
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-discuss') 讨论管理
         li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-album') 班级相册
+        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-views') 班级详情页
 
 view('main')
     div.container(data-dynamic-key=state.tab)
