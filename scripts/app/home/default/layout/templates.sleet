@@ -1,6 +1,6 @@
 #! handlebars
 module
-    .section(data-region='layout')
+    section(data-region='layout')
 
 view('layout') > .container
     .home-title-row
