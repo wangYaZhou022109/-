@@ -17,7 +17,7 @@ view('banner')
                 .inline-block.m-right > string('be-good-at') + string('topic') + echo(':') 
                 each(expert.topicList)
                     .inline-block.m-right.bg-white.sub-title > echo(name)
-                .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic') > string('change')
+                .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
             p.info-detail > echo(expert.introduce)
 
 view('test') 
