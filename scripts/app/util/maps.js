@@ -311,6 +311,9 @@ module.exports = {
     'live-status': {
         1: '待开始', 2: '直播中', 3: '已结束'
     },
+    'exam-source-type': {
+        1: '考试活动', 2: '在线课程', 3: '专题', 4: '班级', 5: '直播'
+    },
     get: function(k) {
         return _.map(this[k], function(value, key) {
             return { key: key, value: value };

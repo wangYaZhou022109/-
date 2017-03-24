@@ -1,4 +1,5 @@
-var STAISFACTION = 'satisfaction';
+var STAISFACTION = 'satisfaction',
+    D = require('drizzlejs');
 
 exports.title = '待办';
 
@@ -17,11 +18,19 @@ exports.store = {
                 menu: STAISFACTION,
                 satisfaction: true,
                 markpaper: false,
-                homework: false
+                homework: false,
+                wait: 0
             });
         },
         switchMenu: function(payload) {
             this.models.state.set(payload);
+            this.models.state.changed();
+        },
+        waitTodo: function(payload) {
+            D.assign(this.models.state.data, {
+                wait: payload.wait,
+                checked: payload.wait === 1
+            });
             this.models.state.changed();
         }
     }

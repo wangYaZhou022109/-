@@ -12,5 +12,8 @@ exports.getEntityModuleName = function(menu) {
 };
 
 exports.dataForEntityModule = function() {
-    return {};
+    return {
+        callback: function() {
+        }
+    };
 };

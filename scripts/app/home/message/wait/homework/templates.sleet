@@ -4,6 +4,8 @@ module
     div(data-region='main')
 
 view('main')
+    .pull-right
+        .checkbox > input(type='checkbox' id='waitTodo-1' value=1)('checked')&if(state.checked) + label 显示待处理
     ul.list
         li
             .clearfix
