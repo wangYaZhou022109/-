@@ -1,6 +1,6 @@
 .form-page {
     & .sub-height {
-        line-height: 2.5em;
+        line-height: var(--input-height);
     }
     & .tag-left {
         margin-left: var(--large-space);

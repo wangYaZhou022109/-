@@ -1,0 +1,18 @@
+#! handlebars
+
+module
+    li.tabs-cont-item.active
+        div(data-region='label')
+        div(data-region='content')
+
+view('label')
+    .clearfix.layout-mt-small
+        .pull-left
+            span.m-right.tag-btn.radius(id='switch-satisfaction' class=if(state.satisfaction 'active')) 满意度评估
+            span.m-right.tag-btn.radius(id='switch-mark-paper' class=if(state.markpaper 'active')) 考试评卷
+            span.m-right.tag-btn.radius(id='switch-homework' class=if(state.homework 'active')) 作业批阅
+        .pull-right
+            .checkbox > input(type='checkbox' id='checkFinish') + label 显示待处理
+
+view('content')
+    div(data-dynamic-key=state.menu)

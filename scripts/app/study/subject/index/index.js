@@ -21,13 +21,15 @@ exports.store = {
         download: {
             url: '../human/file/download'
         },
-        topics: { data: [], url: '../system/topic/hot?limit=8&type=5', autoLoad: 'after' }
+        topics: { data: [], url: '../system/topic/hot' }
     },
     callbacks: {
         init: function() {
-            var subjects = this.models.subjects;
+            var subjects = this.models.subjects,
+                topics = this.models.topics;
             subjects.params.type = 2; // 资源类型为专题
-            return this.get(subjects);
+            topics.params = { limit: 8, type: 5 }; // 热门标签
+            return this.chain(this.get(subjects), this.get(topics));
         },
         order: function(payload) {
             var search = this.models.search.data,

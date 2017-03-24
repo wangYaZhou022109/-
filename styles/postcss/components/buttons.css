@@ -129,6 +129,14 @@
         padding: calc(var(--space) / 2);
         width: 8em;
     }
+
+    &.p-left {
+        padding-left: var(--large-space);
+    }
+
+    &.p-right {
+        padding-right: calc(var(--font-size) * 3);
+    }
 }
 
 .btn-upload-file {

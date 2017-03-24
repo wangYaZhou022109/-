@@ -77,7 +77,12 @@ exports.store = {
     models: {
         menus: { data: menus },
         navs: { url: '../system/home-nav' },
-        homeConfig: { url: '../system/home-config/config' }
+        homeConfig: { url: '../system/home-config/config' },
+        message: {
+            url: '../system/message',
+            params: { page: 1, pageSize: 5, type: 1, readStatus: 0 },
+            autoLoad: 'after'
+        }
     },
     callbacks: {
         loadNavs: function(configId) {
@@ -115,6 +120,9 @@ exports.store = {
             $(dataMenus).removeClass('active');
             $(matchModule).addClass('active');
             return true;
+        },
+        refreshMessage: function() {
+            return this.get(this.models.message);
         }
     }
 };

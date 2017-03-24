@@ -40,8 +40,8 @@ exports.mixin = {
             html = '<li id="node-' + node.id + '"';
             html += ' class="' + (options.templates.state(node, state, options, data) || '') + '"';
             html += '>';
-            html += options.templates.handler(node, state, options, data) || '';
             html += '<div class="dtree-node-content">';
+            html += options.templates.handler(node, state, options, data) || '';
             html += options.templates.icon(node, state, options, data) || '';
             html += options.templates.checkbox(node, state, options, data) || '';
             html += options.templates.text(node, state, options, data) || '';

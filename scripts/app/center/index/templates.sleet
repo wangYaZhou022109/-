@@ -24,7 +24,7 @@ view('top')
             .info-row
                 if(member.isContact)
                     .item > i.iconfont.icon-warn + span 需求方
-                if(member.isClass)
+                if(member.isClassstff)
                     .item > i.iconfont.icon-mark + span 班务
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师

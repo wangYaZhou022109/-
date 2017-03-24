@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 exports.bindings = {
     knowledge: true,
     collect: true,
@@ -22,12 +20,28 @@ exports.components = [function() { // 分享组件
             data: data
         }
     };
+}, function() {
+    var me = this;
+    var knowledge = this.bindings.knowledge.data;
+    return {
+        id: 'star-score',
+        name: 'picker',
+        options: {
+            picker: 'star-score',
+            data: {
+                id: knowledge.id,
+                avgScore: knowledge.avgScore
+            },
+            callback: function(score) {
+                me.module.dispatch('score', { score: score, id: knowledge.id });
+            }
+        }
+    };
 }];
 
 exports.actions = {
     'click collect': 'collect',
     'click cancel-collect': 'cancelCollect',
-    'click submit-score': 'score'
 };
 
 exports.dataForActions = {
@@ -47,32 +61,5 @@ exports.actionCallbacks = {
     },
     cancelCollect: function() {
         this.app.message.success('取消收藏成功');
-    },
-    score: function(data) {
-        this.module.dispatch('initScore', data[0]).then(function() {
-            this.app.message.success('评分成功');
-        });
-    }
-};
-
-exports.events = {
-    'click star-*': 'star'
-};
-exports.handlers = {
-    star: function(star, e, target) {
-        var score = this.bindings.score;
-        score.data.score = star;
-        $(target).parent().addClass('active');
-        $(target).siblings().removeClass('active');
-        $(target).addClass('active');
-    }
-};
-
-exports.dataForTemplate = {
-    avgScoreFix: function(data) {
-        if (data.knowledge.avgScore) {
-            return data.knowledge.avgScore * 10;
-        }
-        return 0;
     }
 };

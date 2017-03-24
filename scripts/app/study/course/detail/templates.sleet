@@ -115,13 +115,7 @@ view('info')
     .title-row
         .inline-block.layout-mr > .h3 > echo(course.name)
         .inline-block.layout-mr
-            .star-wrapper
-                .star-bar > .star(style='width:'+score.scorePercent+'%')
-                if(course.addType)
-                    if(score.avgScore)
-                        .num > echo(score.avgScore)
-                    else
-                        .inline-block.sub-text > echo('暂无评分')
+            #star-score
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > #share
             .inline-block.m-left
