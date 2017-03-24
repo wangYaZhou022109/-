@@ -7,19 +7,12 @@ module
 
 view('label')
     .clearfix.layout-mt-small
-        .pull-left > each(menus)
-            span.m-right.tag-btn.radius(id='switch-'+id class = if(current 'active')) > echo(name)
+        .pull-left
+            span.m-right.tag-btn.radius(id='switch-satisfaction' class=if(state.satisfaction 'active')) 满意度评估
+            span.m-right.tag-btn.radius(id='switch-mark-paper' class=if(state.markpaper 'active')) 考试评卷
+            span.m-right.tag-btn.radius(id='switch-homework' class=if(state.homework 'active')) 作业批阅
         .pull-right
-            .checkbox > input(type='checkbox' id='checkFinish')('checked')&if(finishCheck) + label 显示待处理
-                    
+            .checkbox > input(type='checkbox' id='checkFinish') + label 显示待处理
+
 view('content')
-    
-
-view('satisfaction')
-    ul.list
-    
-view('evaluation')
-    ul.list
-
-view('homework')
-    ul.list
+    div(data-dynamic-key=state.menu)
