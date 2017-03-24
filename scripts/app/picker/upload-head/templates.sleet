@@ -1,0 +1,15 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    div(class=defaultCss) > img(src = downUrl)
+    input#headImageId( type='hidden' name=state.inputName value=fileId)
+    div#select(class='btn block' + btnClass) > i.icon-plus + span
+        if(btnName)
+            echo(btnName)
+        else
+            echo('修改头像')
+
+view('upload') > #uploader
