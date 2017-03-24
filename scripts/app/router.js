@@ -2,7 +2,9 @@
 exports.routes = {
     home: 'showHome',
     'share/:id/:type': 'showShare', // 分享跳转
-    'message/detail/:id': 'showMessageDetail'
+    'message/detail/:id': 'showMessageDetail',
+    'center/demand': 'showDmand',
+    'center/class-service': 'classService'
 };
 
 exports.showHome = function() {
@@ -37,4 +39,10 @@ exports.showShare = function(id, type) {
         webUrl += '/#//' + id;
     }
     window.location.href = webUrl;
+};
+exports.showDmand = function() {
+    return this.app.show('content', 'center/demand');
+};
+exports.classService = function() {
+    return this.app.show('content', 'center/class-service');
 };
