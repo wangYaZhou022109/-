@@ -50,7 +50,8 @@ exports.actions = {
     'click quota-type-1': 'changeType1',
     'click quota-type-2': 'changeType2',
     'click is-auto-1': 'changeApprove1',
-    'click is-auto-0': 'changeApprove0'
+    'click is-auto-0': 'changeApprove0',
+    'click add': 'showGroup'
 };
 
 exports.dataForActions = {
@@ -148,7 +149,13 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-
+    showGroup: function() {
+        this.app.viewport.modal(this.module.items.company);
+    },
+    deleteMulti: function() {
+        var check = this.bindings.check;
+        check.clear();
+    }
 };
 
 exports.dataForTemplate = {

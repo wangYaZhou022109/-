@@ -9,8 +9,11 @@ exports.store = {
         quotaList: { url: '../train/class-quota/list' },
         quota: { url: '../train/class-quota' },
         delMulti: { url: '../train/class-quota/del-multi' },
+        groupList: { url: '../train/group-configuration', params: { typeId: 9 } },
+        orgList: { url: '../train/group-configuration-value' },
         state: { data: {} },
-        check: { data: [] }
+        check: { data: [] },
+        orgs: { data: [] }
     },
     callbacks: {
         init: function(payload) {
@@ -62,6 +65,34 @@ exports.store = {
             quotaInfo.data.isAutoApprove = payload.isAutoApprove;
             quota.data = quotaInfo.data;
             this.save(quota);
+        },
+        showGroup: function() {
+            var groupList = this.models.groupList,
+                orgList = this.models.orgList,
+                me = this;
+            this.get(groupList).then(function(data) {
+                var g = data[0];
+                if (g.length > 0) {
+                    orgList.params.groupId = g[0].id;
+                    me.get(orgList);
+                }
+            });
+        },
+        addQuota: function(payload) {
+            var quota = this.models.quota,
+                quotaList = this.models.quotaList,
+                state = this.models.state.data,
+                me = this;
+            quota.set(payload);
+            this.save(quota).then(function() {
+                quotaList.params.classId = state.classId;
+                me.get(quotaList);
+            });
+        },
+        changeGroup: function(payload) {
+            var orgList = this.models.orgList;
+            orgList.params.groupId = payload.id;
+            this.get(orgList);
         }
     }
 };
