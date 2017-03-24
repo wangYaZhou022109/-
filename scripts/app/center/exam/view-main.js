@@ -57,7 +57,7 @@ exports.dataForTemplate = {
                 signupButton = { id: 'signup-button-' + exam.id, text: '我要报名' },
                 toExamButton = { id: 'to-exam-button-' + exam.id, text: '进入考试' },
                 toCertButton = { id: 'to-cert-button-' + exam.id, text: '查看证书' },
-                toDetailButton = { id: 'to-detail-button-' + exam.id, text: '查看详情' },
+                toDetailButton = { id: 'to-detail-button-' + exam.examRecord.id, text: '查看详情' },
                 retryButton = { id: 'retry-button-' + exam.id, text: '重新考试' };
             exam.buttons = [];
             if (currentTime < exam.startTime) {
