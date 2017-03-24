@@ -12,7 +12,9 @@ exports.dataForTemplate = {
     emptyText: function() {
         return this.module.renderOptions.emptyText;
     },
-
+    placeholder: function() {
+        return this.module.renderOptions.placeholder || '';
+    },
     values: function() {
         return this.module.getValue();
     },
@@ -29,5 +31,17 @@ exports.actions = {
 exports.dataForActions = {
     remove: function(data) {
         return { values: [data['tag-view-remove']] };
+    }
+};
+
+exports.events = {
+    'keyup addTopic': 'addTopic'
+};
+
+exports.handlers = {
+    addTopic: function(e, element) {
+        var pro = this.module.renderOptions.entryCallback;
+        if (!pro || e.keyCode !== 13) return false;
+        return pro(element.value);
     }
 };
