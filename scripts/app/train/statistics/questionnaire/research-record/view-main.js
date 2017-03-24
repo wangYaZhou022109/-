@@ -38,14 +38,22 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click edit_researchQuestionarys*': 'edit'
+    'click edit_researchQuestionarys*': 'edit',
+    'click summary': 'summary'
 };
 
 exports.handlers = {
     edit: function(id) {
-        var mod = this.module.items['exam/research-activity/research-answer-detail'];
+        var url = '#/exam/research-activity/research-answer-detail/' + id;
+        window.open(url, '_blank');
+    },
+    summary: function() {
+        var mod = this.module.items['train/statistics/questionnaire/research-record/summary'],
+            me = this;
         this.app.viewport.ground(mod, {
-            researchRecordId: id
+            researchQuestionaryId: me.bindings.researchQuestionary.data.id,
+            callback: function() {
+            }
         });
     }
 };

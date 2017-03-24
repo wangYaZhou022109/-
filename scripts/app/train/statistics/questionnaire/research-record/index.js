@@ -2,7 +2,8 @@ exports.items = {
     details: 'details',
     main: 'main',
     search: 'search',
-    'exam/research-activity/research-answer-detail': { isModule: true }
+    'exam/research-activity/research-answer-detail': { isModule: true },
+    'train/statistics/questionnaire/research-record/summary': { isModule: true }
 };
 
 exports.large = true;

@@ -33,7 +33,7 @@ view('main')
     div.text-center
         echo('调研详情列表')
     .buttons
-        a(href=collect target = "_blank") > .btn > echo('汇总统计')
+        .btn#summary 汇总统计
         a(href=exportUrl target = "_blank") > .btn > echo('导出')
     table.table
         thead > tr
