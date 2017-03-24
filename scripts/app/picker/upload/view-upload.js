@@ -1,27 +1,40 @@
+exports.title = '请选择文件';
+
+exports.bindings = {
+    img: 'changeImg',
+    state: false
+};
+
 exports.components = function() {
+    var data = this.bindings.state.data,
+        resize = data.data || {};
     return [{
         id: 'uploader',
         name: 'uploader',
         options: {
-            runtimes: 'html5,flash',
-            url: this.module.store.models.upload.getFullUrl(),
-            chunk_size: '1mb',
-            rename: true,
-            dragdrop: false,
-            filters: {
-                max_file_size: '10mb',
-                mime_types: [
-                    { title: 'Image files', extensions: 'jpg,jpeg,png,bmp,gif,ico,tif' },
-                    { title: 'Zip files', extensions: 'zip' }
-                ]
-            },
+            model: 'img',
             resize: {
-                width: 200,
-                height: 200,
-                quality: 90,
-                crop: true // crop to exact dimensions
+                width: resize.width || 200,
+                height: resize.height || 200,
+                quality: 100,
+                crop: true
             },
-            flash_swf_url: 'scripts/vendors/upload/Moxie.swf'
+            signle_file: data.signle_file || false,
+            filters: {
+                max_file_size: resize.maxFileSize || '2mb',
+                mime_types: [{
+                    extensions: data.extensions || '*'
+                }]
+            },
+            multi_selection: data.multi_selection || true,
+            multipart_params: {
+                thumbnailSize: data.thumbnailSize // 缩略图尺寸，格式为'高度,宽度',例:'300,200'，有值时会返回两条附件记录
+            }
         }
     }];
+};
+
+exports.changeImg = function() {
+    this.app.viewport.closeModal();
+    this.module.dispatch('uploadSuccess', this.bindings.img.data);
 };

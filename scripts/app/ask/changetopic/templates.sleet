@@ -7,23 +7,19 @@ view('title')
     .change-title
         .like
             span.m-right 擅长话题：
-            .tag-btn.radius
-                | 话题
-                .close.iconfont.icon-close
-            .tag-btn.radius
-                | 话题
-                .close.iconfont.icon-close
-            .tag-btn.radius
-                | 话题
-                .close.iconfont.icon-close
+            each(state)
+                .tag-btn.radius 
+                    echo(name)
+                    .close.iconfont.icon-close(id = 'del-topic-'+ id data-name='id' data-value=id )
+    
+view('contents') > form
     .topic-search.relative
-        input.input.w-full.m-top.p-left(placeholder="搜索你擅长的")
-        .iconfont.icon-search.topic-icon
-view('contents')
+        input.input.w-full.m-top.p-left(placeholder="搜索你擅长的" name = 'like' id = 'like')
+        a.iconfont.icon-search.topic-icon(id = 'search' )
     .topic-total.layout-mt-small
         .topic-category.layout-mb-small 
             a.title-color.m-right(id='checkAll' data-name='id' data-value=id ) > echo('全部')
             each(topicType)
                 a.sub-title.m-right(id='checkOne-' + id data-name='id' data-value=id ) > echo(name)
         .topics.m-top > each(topicname)
-            .tag-btn.radius > echo(name)
+            .tag-btn.radius(id = 'add-topic-' + id data-name='id' data-value=id )> echo(name)
