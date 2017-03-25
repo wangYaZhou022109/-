@@ -39,9 +39,20 @@ exports.events = {
 };
 
 exports.handlers = {
-    addTopic: function(e, element) {
-        var pro = this.module.renderOptions.entryCallback;
+    addTopic: function(e, elem) {
+        var element = elem || {};
+        var opt = this.module.renderOptions,
+            state = this.bindings.state.data;
+        var pro = opt.entryCallback,
+            limit = opt.limit,
+            size = state.list.length;
+
         if (!pro || e.keyCode !== 13) return false;
+        if (size >= limit) {
+            element.value = '';
+            return false;
+        }
+        element.focus();
         return pro(element.value);
     }
 };
