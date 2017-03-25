@@ -58,13 +58,15 @@ exports.dataForTemplate = {
             } else if (obj.businessType === 5) {
                 obj.typeName = '直播';
                 defultImg = 'images/default-cover/default_live.jpg';
+                obj.url = '#/activity/gensee/detail/' + obj.businessId;
             } else if (obj.businessType === 6) {
                 obj.typeName = '调研';
                 defultImg = 'images/default-cover/default_survey.jpg';
+                obj.url = '#/exam/research-activity/research-summary-detail/' + obj.businessId;
             } else if (obj.businessType === 7) {
                 obj.typeName = '知识';
                 defultImg = 'images/default-cover/default_doc.jpg';
-                obj.url = 's#/knowledge/details/' + obj.businessId;
+                obj.url = '#/knowledge/detail/' + obj.businessId;
             }
             obj.imgUrl = obj.cover ? (downUrl + '?id=' + obj.cover) : defultImg;
             obj.prefixText = '收藏时间：' + helpers.dateMinute(obj.createTime);
