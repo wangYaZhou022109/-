@@ -16,12 +16,11 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     downUrl: function(data) {
-        var img = data.img,
-            url;
+        var img = data.img;
         if (img.imgId || img.imgs) {
-            url = this.bindings.down.getFullUrl() + '?id=' + (img.imgId || img.imgs[0].id);
+            return this.bindings.down.getFullUrl() + '?id=' + (img.imgId || img.imgs[0].id);
         }
-        return url;
+        return 'images/d1.jpg';
     },
     fileId: function() {
         var img = this.bindings.img.data;
