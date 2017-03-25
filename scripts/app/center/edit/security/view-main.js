@@ -1,7 +1,22 @@
 var $ = require('jquery');
 
+exports.type = 'dynamic';
+
 exports.bindings = {
     member: true
+};
+
+exports.getEntityModuleName = function() {
+    return 'center/edit/security/phone';
+};
+exports.getEntity = function() {
+    return {
+        member: this.bindings.member.data
+    };
+};
+
+exports.dataForEntityModule = function(entity) {
+    return entity;
 };
 
 exports.events = {
@@ -14,4 +29,3 @@ exports.handlers = {
         $(this.$('tabs-cont-item-' + id)).addClass('active').siblings().removeClass('active');
     }
 };
-

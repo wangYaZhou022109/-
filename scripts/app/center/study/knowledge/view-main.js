@@ -46,6 +46,7 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     delete: function() {
         this.app.message.success('删除成功');
+        this.module.dispatch('init');
     }
 };
 

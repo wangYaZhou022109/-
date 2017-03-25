@@ -6,11 +6,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        member: {}
-    },
-    callbacks: {
-        init: function() {
-        },
+        member: {},
     }
 };
 

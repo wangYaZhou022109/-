@@ -21,7 +21,7 @@ view('main')
                 .form-row
                     label> setting('person.index.info.confromPasw')
                     .content
-                        input.input(name='rePassword' value=member.rePassword type='password' placeholder='请再次输入新密码')
+                        input.input(name='rePassword' value=member.rePassword type='password' placeholder='请再次输入新密码' x-rule='required,minLength:6,maxLength:20')
                         .sub-text 6~20位字符（由字母、数字和符号组成）
 
         li.tabs-cont-item#tabs-cont-item-2
@@ -33,21 +33,4 @@ view('main')
                         .sub-text 您将收到一封激活邮件，点击邮件中的链接即可激活邮箱
 
         li.tabs-cont-item#tabs-cont-item-3
-            ul.phone-number-list
-                li
-                    .pull-left 13800138000
-                    .pull-right
-                        .item 主号
-                        .item > a 删除
-                li
-                    .pull-left 13800138000
-                    .pull-right
-                        .item > a 设为主号
-                        .item > a 删除
-                li
-                    .pull-left 13800138000
-                    .pull-right
-                        .item > a 设为主号
-                        .item > a 删除
-            .text-center > a > i.iconfont.icon-add.m-right + span > setting('person.index.info.addPhone')
-
+            div(data-dynamic-key='phone')

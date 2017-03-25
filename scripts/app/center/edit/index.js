@@ -1,4 +1,5 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    validators = require('./app/ext/views/form/validators');
 
 exports.items = {
     main: 'main',
@@ -47,7 +48,6 @@ exports.buttons = [
     { text: '保存',
         fn: function(data) {
             var eg = /^(?![0-9]*$)[a-zA-Z0-9]{6,20}$/;
-            var emg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
             if (data.summary && data.summary.length > 200) {
                 this.app.message.error('个人简介字数不能大于200');
                 return false;
@@ -67,7 +67,7 @@ exports.buttons = [
                 }
             }
             if (data.newEmail) {
-                if (!emg.test(data.newEmail)) {
+                if (!validators.email.fn(data.newEmail)) {
                     this.app.message.error('邮箱输入不正确');
                     return false;
                 }
