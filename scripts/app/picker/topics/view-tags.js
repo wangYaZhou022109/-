@@ -12,6 +12,7 @@ exports.components = [function() {
         options: {
             name: inputName,
             emptyText: '请选择话题',
+            limit: data.limit,
             placeholder: data.placeholder,
             entryCallback: function(d) {
                 return me.module.dispatch('quick-add', { name: d, typeName: data.insertTypeName }).then(function(t) {
