@@ -57,7 +57,7 @@ exports.dataForTemplate = {
                 signupButton = { id: 'signup-button-' + exam.id, text: '我要报名' },
                 toExamButton = { id: 'to-exam-button-' + exam.id, text: '进入考试' },
                 toCertButton = { id: 'to-cert-button-' + exam.id, text: '查看证书' },
-                toDetailButton = { id: 'to-detail-button-' + exam.id, text: '查看详情' },
+                toDetailButton = { id: 'to-detail-button-' + exam.examRecord.id, text: '查看详情' },
                 retryButton = { id: 'retry-button-' + exam.id, text: '重新考试' };
             exam.buttons = [];
             if (currentTime < exam.startTime) {
@@ -65,12 +65,14 @@ exports.dataForTemplate = {
             } else if (currentTime > exam.startTime && currentTime < exam.endTime) {
                 exam.status = 2;
                 if (exam.needApplicant !== 1 || (exam.signUp && exam.signUp.status === 2)) {
-                    exam.buttons = [toExamButton];
+                    if (exam.examRecord.status < 4) {
+                        exam.buttons = [toExamButton];
+                    }
                     if (exam.examRecord.status >= 5 && exam.isShowAnswerImmed === 1) {
                         exam.buttons = [toDetailButton];
-                        if (exam.examRecord.status === 5 && exam.allowExamMuchTimes > 0) {
-                            exam.buttons.push(retryButton);
-                        }
+                    }
+                    if (exam.examRecord.status >= 5 && exam.allowExamMuchTimes >= 0) {
+                        exam.buttons.push(retryButton);
                     }
                 }
             } else if (currentTime > exam.endTime) {
@@ -82,16 +84,15 @@ exports.dataForTemplate = {
                     }
                 }
             }
-            if (currentTime > exam.applicantStartTime && currentTime < exam.applicantEndTime) {
+            if (currentTime > exam.applicantStartTime
+                && currentTime < exam.applicantEndTime
+                && exam.needApplicant === 1
+                && !exam.examRecord) {
                 exam.status = 4;
-                if (exam.needApplicant === 1 && (!exam.examRecord || exam.examRecord.status < 2)) {
-                    if (!exam.signUp || !exam.signUp.status) {
-                        exam.buttons = [signupButton];
-                    } else if (exam.signUp
-                        && (exam.signUp.status === 1 || exam.signUp.status === 2)
-                        && exam.examRecord.status <= 3) {
-                        exam.buttons.push(cancelButton);
-                    }
+                if (!exam.signUp || !exam.signUp.status) {
+                    exam.buttons = [signupButton];
+                } else {
+                    exam.buttons.push(cancelButton);
                 }
             }
             if (exam.signUp && exam.signUp.status === 1) {

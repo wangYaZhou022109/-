@@ -16,7 +16,7 @@ exports.events = {
     'click to-activity-*': 'toActivity',
     'click attendLive-*': 'attendLive',
     'click exam-*': 'showExamPaper',
-    'click research-*': 'showResearchPaper'
+    'click research-*': 'showResearchIndex'
 };
 exports.actions = {
     'click exam-left': 'examLeft',
@@ -51,12 +51,9 @@ exports.handlers = {
             me.app.viewport.modal(mod, { exam: data });
         });
     },
-    showResearchPaper: function(id) {
-        var mod = this.module.items['research-tips'],
-            me = this;
-        return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
-            me.app.viewport.modal(mod);
-        });
+    showResearchIndex: function(id) {
+        var url = '#/exam/research-activity/index/' + id;
+        window.open(url, '_blank');
     }
 };
 
@@ -102,6 +99,9 @@ exports.dataForTemplate = {
     }
 };
 
+// exports.components = [{
+//     id: 'pager', name: 'pager', options: { model: 'exams' }
+// }];
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'exams' },
 }, {

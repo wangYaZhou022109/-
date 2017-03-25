@@ -1,0 +1,69 @@
+#!handlebars
+
+module > .class-register-page
+    .class-register-banner > .clearfix.container(data-region='banner')
+    .page-main-wrapper
+        .page-side > .container(data-region='side')
+        .page-main > .container(data-region='main')
+
+view('banner')
+    .cover.pull-left > img(src='images/default-cover/default_class.jpg')
+    .banner-con.pull-left
+        h2 > echo(research.name)
+        p 调研时间：
+            dateTime(research.startTime)
+            | ~
+            dateTime(research.endTime)
+        p
+            span.m-right 相关标签
+            each(research.topics)
+                a.tag-btn > echo(name)
+
+view('side')
+    .btn#do-research 进入调研
+    section.section.student
+        .h3 TA们也参加了调研
+        .layout-mt-small.user-picture
+            .grid-row > each(relativeMembers)
+                .col-md-4 > img(src=headPortrait)
+
+view('main')
+    .h3 问卷须知
+    .layout-mt-small
+        echo(research.questionaryDetail)
+
+    section.section
+        .h3 相关调研
+        .main-list.layout-mt-small
+            ul.cell-2 > each(relativeResearchs)
+                li
+                    .content
+                        .img
+                            .img-cont
+                                a.normal > img(src=coverId)
+                            .detail-wrapper
+                                p
+                                    .btn.radius.block 我要参与
+                        .clearfix
+                            .pull-right.tip-text
+                                i.iconfont.icon-user
+                                echo(joinNumber '人参加')
+                            .title.text-overflow > echo(name)
+                        .bottom.sub-text.clearfix
+                            .pull-left 调研时间
+                            .pull-right
+                                dateTime(startTime)
+                                | ~
+                                dateTime(endTime)
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(research.content)
+        .row > .col-sm-12
+            each(research.buttons)
+                if(target)
+                    a(id='button-' + id href=url target=target) > echo(text)
+                else
+                    a(id='button-' + id) > echo(text)
+

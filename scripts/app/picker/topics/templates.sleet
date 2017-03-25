@@ -1,13 +1,13 @@
 #!handlebars
 
 module
+    .content(data-region='tags')
     .content(data-region='main')
-
-view('main')
+view('tags')
     #tags
+view('main')
     .sub-row#tag-list
         span.small-font 推荐标签：
         each(hot)
-            .tag-btn.radius(id='hot-'+id) > echo(name)
-        # .tag-btn.radius.selected .selected
+            .tag-btn.radius(id='hot-'+id)(class = if(selected 'selected')) > echo(name)
         .tag-btn.radius#selectTopic ...

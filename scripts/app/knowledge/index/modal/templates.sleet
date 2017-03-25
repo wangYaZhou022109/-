@@ -6,8 +6,9 @@ view('main')
     .form > form
         .clearfix.layout-mb-small
             .pull-right.layout-ml-small
-                img.block.side-width(src='images/d1.jpg')
-                .btn.block.white.border 上传知识封面
+                #  img.block.side-width(src='images/d1.jpg')
+                #  .btn.block.white.border 上传知识封面
+                #headFile
             .overflow
                 .form-row
                     label.required 上传资源

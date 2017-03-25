@@ -26,7 +26,7 @@ exports.dataForTemplate = {
             member = this.bindings.member.data,
             downUrl = this.bindings.img.getFullUrl(),
             time = '',
-            second = window.parseInt(data.courseTime), // 秒
+            second = 0, // 秒
             minute = 0, // 分
             hour = 0; // 小时
         if (data.lecturer === 1) {
@@ -43,7 +43,7 @@ exports.dataForTemplate = {
         }
         member.gradeCover = member.gradeCover == null ? '' : downUrl + member.gradeCover;
         member.integralCount = integral.totalScore == null ? 0 : integral.totalScore;
-        member.totalStudyTime = data.courseTime == null ? 0 : window.parseInt(data.courseTime);
+        second = data.courseTime == null ? 0 : window.parseInt(data.courseTime);
         if (second > 60) {
             minute = window.parseInt(second / 60);
             second = window.parseInt(second % 60);

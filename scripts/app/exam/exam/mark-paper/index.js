@@ -365,7 +365,9 @@ exports.store = {
                 me.models.state.clear();
                 me.models.types.clear();
                 me.models.grades.clear();
-                window.close();
+                setTimeout(function() {
+                    window.close();
+                }, 500);
             });
         }
     }
