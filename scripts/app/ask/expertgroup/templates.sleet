@@ -13,17 +13,16 @@ view('list')
         .tag-btn.active(id='check-All' data-name='id' data-value='all' ) > string('all')
         each(topicType)
             a.tag-btn(id='check-' + id data-name='id' data-value=id ) > echo(name)
-    .comment-list.ask-list > ul
-        each(expertlist)
+    .comment-list.ask-list > each(expertlist)
+        ul
             li.expert-item
                 a.normal(href="javascript:;")
-                    .img > .img-cont > img(src="images/d2.jpg")
+                    .img > .img-cont > img(src=member.headPortrait alt='赵小茵')
                     h4.text-overflow > echo(member.fullName)
-                    .info 36关注 ｜ 1回答 ｜ 2分享
-                    .row
-                        .tag-btn 话题
-                        .tag-btn 话题二
-                        .tag-btn 梦想
-                    .sub-text > echo(introduce)
-                .btn.small 取消关注
+                    .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '分享')
+                    .row > each(topicList) 
+                        .tag-btn > echo(name)
+                    .sub-text.text-overflow > echo(introduce)
+                .btn.small 关注
+
        

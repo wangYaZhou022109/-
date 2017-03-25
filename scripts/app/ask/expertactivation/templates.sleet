@@ -10,7 +10,10 @@ module > .edit-info-page
                     div(data-region='topic')
                     div(data-region='details')
 view('headfile')
-    #headFile
+    compare(expert.member.headPortrait 'ne' '')
+        img(src=expert.member.headPortrait)
+    else
+        img(src='images/default-cover/default_user.png')
 view('user') > .form-row.textarea-row
     label.m-top.required 名称：
     .content > input.input(placeholder='输入您的名称' name ='name' value= expert.member.fullName readonly='readonly')
