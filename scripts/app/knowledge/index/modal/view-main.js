@@ -15,10 +15,6 @@ var parseType = function(ext) {
     return types[ext] || defaule;
 };
 
-exports.bindings = {
-    download: false
-};
-
 exports.events = {
     'click choice': 'choice'
 };
