@@ -21,7 +21,11 @@ exports.showSubjectIndex = function() {
 };
 
 exports.showSubjectDetail = function(id) {
-    return this.app.show('content', 'study/subject/detail', { id: id });
+    var subjectId = id;
+    if (subjectId.indexOf('&') > -1) {
+        subjectId = subjectId.split('&')[0];
+    }
+    return this.app.show('content', 'study/subject/detail', { id: subjectId });
 };
 
 exports.showPreview = function(config) {
