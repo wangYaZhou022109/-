@@ -27,7 +27,7 @@ view('main')
                     td > map('publish-status' researchQuestionary.status)
                     td > map('research-record' status)
                     td > dateMinute(submitTime)
-                    td > a > setting('person.archives.exam.detail')
+                    td > a(href='#/exam/research-activity/research-summary-detail/'+id target='_blank') > setting('person.archives.exam.detail')
                     else
                         tr > td(colspan='8') > p.text-center > string('no-data')
         #pager.pagination

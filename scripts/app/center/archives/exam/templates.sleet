@@ -38,10 +38,12 @@ view('main')
                     td > echo(score)
                     td > echo(isPass)
                     td
-                        a > setting('person.archives.exam.detail')
+                        a(href='#/exam/index/'+id target='_blank') > setting('person.archives.exam.detail')
                         if(showCert)
                             echo('|')
                             a > setting('person.archives.exam.cert')
+                            echo('|')
+                            a > setting('person.archives.exam.cert.down')
                     else
                         tr > td(colspan='13') > p.text-center > string('no-data')
         #pager.pagination
