@@ -1,6 +1,8 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    _ = require('lodash/collection');
 exports.items = {
     main: 'main',
+    tags: 'tags',
     'picker/topics/select-topic': { isModule: true }
 };
 
@@ -19,19 +21,27 @@ exports.store = {
         'quick-add': function(payload) {
             this.models.topic.set(payload);
             return this.post(this.models.topic);
+        },
+        'change-hot': function(payload) {
+            var hot = this.models.hot;
+            _.forEach(hot.data, function(h) {
+                var temp = h || {};
+                temp.selected = payload.indexOf(h.id) !== -1;
+            });
+            hot.changed();
         }
     }
 };
 
 exports.mixin = {
     getValue: function() {
-        return this.items.main.components.tags.getValue();
+        return this.items.tags.components.tags.getValue();
     },
     getData: function() {
-        return this.items.main.components.tags.getData();
+        return this.items.tags.components.tags.getData();
     },
     validate: function() {
-        return this.items.main.validate();
+        return this.items.tags.validate();
     }
 };
 exports.beforeRender = function() {
