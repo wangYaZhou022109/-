@@ -45,3 +45,10 @@ exports.handlers = {
         return pro(element.value);
     }
 };
+exports.afterRender = function() {
+    var pro = this.module.renderOptions.changeCallback;
+    var ids = this.module.getValue();
+    if (pro) return pro(ids);
+    return false;
+};
+

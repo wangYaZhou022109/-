@@ -4,7 +4,7 @@ module
     div(data-region='main')
 
 view('main')
-    div(class=defaultCss) > img(src = downUrl)
+    img.block.side-width(src = downUrl class=defaultCss)
     input#headImageId( type='hidden' name=state.inputName value=fileId)
     div#select(class='btn block' + btnClass) > i.icon-plus + span
         if(btnName)
