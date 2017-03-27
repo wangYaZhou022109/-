@@ -68,14 +68,18 @@
             &:hover {
                 @apply --box-shadow;
 
-                padding: 1em 1em var(--large-space);
-                margin: -1em -1em -var(--large-space);
+                padding: 1em 1em 1em;
+                margin: -1em -1em -1em;
 
                 & .detail-wrapper {
                     @apply --fade-in;
 
                     transform: scale(1,1);
                     z-index: 1;
+
+                    & p {
+                        margin: 0;
+                    }
 
                 }
 
