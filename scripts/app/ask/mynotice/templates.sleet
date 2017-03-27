@@ -1,12 +1,16 @@
 #!handlebars
-module
-    div(data-region='menu')
-    div(data-region='list')
+module > .attention-page
+    .attention-tabs
+        .tabs.line > ul
+            div(data-region='menu')
+        .tabs-cont > ul
+            div(data-region='list')
 
 view('menu')
-    a(id='menu-content' href='javascript:;')(class ='active') > string('content')
-    a(id='menu-topic' href='javascript:;')(class ='active') > string('topic')
-    a(id='menu-expert' href='javascript:;')(class ='active') > string('expert')
-    hr
+    li#item-1.active(class ='') > a(id='menu-content' href='javascript:;') > string('content')
+    li#item-2(class ='') > a(id='menu-topic' href='javascript:;') > string('topic')
+    li#item-3(class ='') > a(id='menu-expert' href='javascript:;') > string('expert')
+
 view('list') 
-    div(data-dynamic-key=state.menu)
+    li.tabs-cont-item.active#tabs-cont-item-1
+        div(data-dynamic-key=state.menu)

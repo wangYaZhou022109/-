@@ -8,6 +8,7 @@ exports.bindings = {
 };
 exports.events = {
     'click discuss-answer-*': 'discussanswer',
+    'click report-*': 'report'
 };
 
 exports.handlers = {
@@ -22,6 +23,14 @@ exports.handlers = {
             el.style.display = 'none';
         }
     },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+        }
+    }
 };
 
 exports.actions = {
@@ -32,7 +41,7 @@ exports.actions = {
     'click discuss-boutique-*': 'discussboutique',
     'click discuss-del-*': 'discussdel',
     'click enjoy-*': 'enjoy',
-    'click report-*': 'report'
+    // 'click trend-report-*': 'report'
 };
 
 // actions绑定的方法调用前要干的事情
