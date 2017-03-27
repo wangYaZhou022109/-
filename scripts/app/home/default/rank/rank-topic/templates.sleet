@@ -7,7 +7,7 @@ view('main')
         .pull-left > .title-icon > .iconfont.icon-question
         .right-title
             .home-title-row.horizontail.border
-                .title 热门问题
+                .title 热门话题
                 .more more
             .title-more
                 span.sub-title 浏览人数排行榜
