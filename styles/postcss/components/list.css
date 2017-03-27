@@ -1,5 +1,5 @@
 :root {
-    --main-list-img-height: 12em;
+    --main-list-img-height: 10em;
     --main-list-gap: calc(var(--font-size) * 3);
 }
 
@@ -98,7 +98,7 @@
         }
 
         & .title {
-            margin: 1em 0;
+            margin: var(--space) 0;
         }
 
         & .bottom {
