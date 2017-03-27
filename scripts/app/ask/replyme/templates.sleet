@@ -15,7 +15,7 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > echo(title)
-                        .comment-text > echo(content)
+                        .comment-text > echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo(replyman)
                             span > echo('讨论了我的问题') 
@@ -68,7 +68,7 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > echo(title)
-                        .comment-text > echo(content)
+                        .comment-text > echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo(replyman)
                             span > echo('讨论了我的分享') 
