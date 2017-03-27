@@ -1,0 +1,28 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    #main
+    p.question
+        span > a(name='question-' + question.id) > echo(question.index '.')
+        echo('【')
+        map('research-question-types' question.type)
+        echo('】')
+        @echo(question.content)
+
+    if(mutiple)
+        table.table.m-top > each(question.options)
+            tr
+                td
+                    .checkbox.no-margin
+                    input(type='checkbox' id='checkbox-' +@index)('checked')&if(checked)
+                    label(for='checkbox-' + @index)
+                    span > echo(code '.' text)
+    else
+        table.table.m-top > each(question.options)
+            tr
+                td
+                    input(type='radio')('checked')&if(checked)
+                    span > echo(code '.' text)

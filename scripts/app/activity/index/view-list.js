@@ -99,9 +99,10 @@ exports.dataForTemplate = {
     }
 };
 
-// exports.components = [{
-//     id: 'pager', name: 'pager', options: { model: 'exams' }
-// }];
+exports.components = [{
+    id: 'pager', name: 'pager', options: { model: 'exams' }
+}];
+/**
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'exams' },
 }, {
@@ -135,3 +136,4 @@ exports.components = [{
         slider: true
     }
 }];
+**/
