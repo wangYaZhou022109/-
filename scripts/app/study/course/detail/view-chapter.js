@@ -15,9 +15,12 @@ var showHandler = function(payload) {
         var me = this;
         if (innerType.indexOf(payload.sectionType) !== -1) {
             this.module.dispatch('showSection', payload);
+        } else if (payload.sectionType === 8) {
+            window.open(detailUrlMap[payload.sectionType] + '' + payload.referenceId);
         } else if (detailUrlMap[payload.sectionType]) {
             window.open(detailUrlMap[payload.sectionType] + '' + payload.resourceId);
-        } else if (payload.sectionType === 12) {
+        } else if (payload.sectionType === 12 || payload.sectionType === 13) {
+            this.bindings.state.data.currentType = payload.sectionType;
             this.module.dispatch('getResearchById', { id: payload.resourceId }).then(function() {
                 me.app.viewport.modal(me.module.items['research-tips']);
             });
