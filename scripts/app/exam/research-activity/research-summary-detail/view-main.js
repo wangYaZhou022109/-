@@ -1,12 +1,14 @@
 var types = require('./app/exam/research-question-types'),
     D = require('drizzlejs'),
     _ = require('lodash/collection'),
-    SUMMARY_DETAIL_MODE = 1;
+    SUMMARY_DETAIL_MODE = 1,
+    MUTIPLE_TYPE = 1;
 
 exports.bindings = {
     researchRecord: true,
     questions: true,
-    dimensions: true
+    dimensions: true,
+    state: true
 };
 
 exports.type = 'dynamic';
@@ -28,4 +30,10 @@ exports.dataForEntityModule = function(question) {
         type: question.type,
         question: question
     };
+};
+
+exports.dataForTemplate = {
+    isMutiple: function(data) {
+        return data.researchRecord.researchQuestionary.answerPaperRule === MUTIPLE_TYPE;
+    }
 };
