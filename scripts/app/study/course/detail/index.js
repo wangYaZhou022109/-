@@ -72,7 +72,7 @@ exports.store = {
             return this.get(course).then(function(c) {
                 var sectionId = null;
                 if (c[0].register) sectionId = course.findFirstSection().id;
-                state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
+                state.set({ id: payload.id, sectionId: sectionId, register: c[0].register }, true);
                 return me.chain(
                     [(function() {
                         var researchIds = _.map(course.findSectionsForType(12), 'resourceId').join();

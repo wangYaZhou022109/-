@@ -85,6 +85,9 @@ exports.handlers = {
             $(element).parents('dl').siblings().removeClass('focus');
             $(element).parents('dl').addClass('focus');
         }
+        if (!course.register) {
+            this.module.dispatch('register', { sectionId: id });
+        }
         hander(sectionType);
         return true;
     }
