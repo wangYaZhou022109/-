@@ -13,10 +13,10 @@ view('nav')
         if(navs.length)
             each(navs)
                 if(show)
-                    .item > a.normal.nav-color(id='menu-' + id)(href='#/' + url)(data-menu=url)(class='active')&if(active) > echo(name)
+                    .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color(class='active')&if(active) > echo(name)
         else
             each(menus)
-                .item > a.normal.nav-color(id='menu-' + id)(href='#/' + uri)(data-menu=uri)(class='active')&if(active) > echo(name)
+                .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
 
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down

@@ -28,8 +28,8 @@ exports.handlers = {
         }
     },
 
-    showContent: function(id, e) {
-        var url = $(e.target).attr('href').slice(2);
+    showContent: function(id, e, element) {
+        var url = element.getAttribute('href').slice(2);
         this.app.navigate(url, true);
     },
 
