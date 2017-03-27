@@ -6,6 +6,8 @@ exports.bindings = {
     situation: true
 };
 
+exports.small = true;
+
 exports.dataForTemplate = {
     trainees: function(data) {
         var situation = data.situation;

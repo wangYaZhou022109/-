@@ -8,6 +8,8 @@ exports.bindings = {
     exportGroupTrainee: true
 };
 
+exports.auto = true;
+
 exports.components = [{
     id: 'pager', name: 'background-pager', options: { model: 'groupTrainees' }
 }];
@@ -42,7 +44,7 @@ exports.handlers = {
             this.app.message.alert('请输入正整数！');
         } else {
             data.id = id;
-            data.sort = val;
+            data.sortForGroup = val;
             me.module.dispatch('updateSort', data).then(function() {
                 me.module.dispatch('groupTrainees');
             });
@@ -76,4 +78,9 @@ exports.dataForTemplate = {
         url += ('access_token=' + token);
         return url;
     }
+};
+
+
+exports.beforeClose = function() {
+    this.renderOptions.callback();
 };

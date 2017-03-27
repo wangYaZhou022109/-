@@ -10,7 +10,6 @@ view('toolbox') > form.vertical
     input(name='memberName')
     echo('所属单位')
     input(name='organizationName')
-    br
     echo('姓名')
     input(name='memberFullName')
     btn.btn#search > echo('搜索')
@@ -43,9 +42,4 @@ view('list')
         tbody > each(fmTrainees) > tr
             td > echo(member.fullName)
             td > echo(member.name)
-            td
-                a(id='group-trainee-go-up'+id data-name='id' data-value=id) > echo('上移')
-                echo('|')
-                a(id='group-trainee-go-down'+id data-name='id' data-value=id) > echo('下移')
-                echo('|')
-                a(id='del-trainee'+id data-name='id' data-value=id) > echo('删除')
+            td > a(id='del-trainee'+id data-name='id' data-value=id) > echo('删除')

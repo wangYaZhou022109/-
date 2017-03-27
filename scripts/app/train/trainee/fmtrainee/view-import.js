@@ -6,6 +6,8 @@ exports.bindings = {
     state: true
 };
 
+exports.small = true;
+
 exports.events = {
     'click download-Excel-*': 'dowloadExcel'
 };

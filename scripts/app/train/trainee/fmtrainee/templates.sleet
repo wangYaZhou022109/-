@@ -106,7 +106,7 @@ view('group')
                 echo('|')
                 a(id='go-down'+id data-name='id' data-value=id) > echo('下移')
             td
-                a(id='manage'+id data-name='id' data-value=id) > echo('管理')
+                a(id='manage'+id data-name='id' data-value=id group-name=name) > echo('管理')
                 echo('|')
                 a(id='delGroup'+id data-name='id' data-value=id) > echo('删除')
 
@@ -133,7 +133,7 @@ view('groupTrainees')
             td > echo(phoneNumber)
             td
                 a(id='group-trainee-sort'+id data-name='id' data-value=id) > echo('排序')
-                input(id='group-trainee-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                input(id='group-trainee-input-sort'+id value=sortForGroup style='display:none;' data-name='id' data-value=id)
                 span(id='groupshuxian'+id) > echo('|')
-                a(id='group-trainee-delete'+id data-name='id' data-value=id) > echo('删除')
+                a(id='group-trainee-delete'+id data-name='id' data-value=id) > echo('移除')
     #pager.pagination(style='float:none')
