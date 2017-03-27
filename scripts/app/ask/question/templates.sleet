@@ -15,17 +15,7 @@ view('topic')
     .form-row.textarea-row
         label > string('related-topics') + echo(':') 
         #select-topic
-    #  .form-row.textarea-row
-    #  label > string('related-topics') + echo(':')
-    #  .content
-    #      .tag-input
-    #          each(state)
-    #              .tag-btn.radius(id = 'del-topic-'+ id data-name='id' data-value=id ) > .close.iconfont.icon-close + echo(name)
-    #          input(placeholder='输入标签名按回车即可添加,最多添加五个' readonly='readonly')
-    #      .sub-row#tag-list 
-    #          span.small-font 推荐标签：
-    #          each(topicname)
-    #              .tag-btn.radius.selected(id = 'add-topic-' + id data-name='id' data-value=id ) > echo(name)
+
 view('details')
     .form-row
         .content > a > i.iconfont.icon-link#uploadFile + span 

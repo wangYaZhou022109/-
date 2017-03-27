@@ -63,13 +63,6 @@ exports.store = {
             var speech = this.models.speech;
             return this.get(speech);
         },
-        initTopic: function() {
-            var topicname = this.models.topicname;
-            var state = this.models.state;
-            state.clear();
-            state.changed();
-            return this.get(topicname);
-        },
         release: function(payload) {
             var me = this,
                 data = payload,
@@ -95,10 +88,7 @@ exports.store = {
             }
             data.speechset = speechset.status;
             data.id = '1';
-           // data.topic = topic.toString();
-
             question.set(data);
-            // console.log(question);
             this.post(question).then(function() {
                 me.app.message.success('操作成功');
                 // me.app.show('content', 'ask/content');
@@ -106,39 +96,12 @@ exports.store = {
                     window.location.reload();
                 }, 1000);
             });
-        },
-        delTopic: function(payload) {
-            var state = this.models.state;
-            var newState = [];
-            var data = payload;
-            _.forEach(state.data, function(d) {
-                if (d.id !== data.id) {
-                    newState.push(d);
-                }
-            });
-            state.data = newState;
-            state.changed();
-        },
-        addTopic: function(payload) {
-            var data = this.models.topicname.getTopic(payload.id);
-            var state = this.models.state,
-                falg = true;
-            _.forEach(state.data, function(d) {
-                if (d.id === data.id) {
-                    falg = false;
-                }
-            });
-            if (typeof data === 'object' && falg) {
-                state.data.push(data);
-                state.changed();
-            }
         }
     }
 };
 
 exports.afterRender = function() {
-    this.dispatch('init');
-    this.dispatch('initTopic');
+    return this.dispatch('init');
 };
 
 exports.title = '我要提问';
@@ -150,7 +113,6 @@ exports.buttons = [{
         var str = stepView.getData();
         var img,
             begin,
-            src,
             end,
             data = payload;
         data.jsonImg = 'null';
@@ -158,8 +120,7 @@ exports.buttons = [{
             begin = str.indexOf('<img');
             end = str.indexOf('/>');
             img = $(str.substring(begin, end + 2));
-            src = img[0].src.split('/');
-            data.jsonImg = src[src.length - 1];
+            data.jsonImg = img[0].src;
         }
         data.content = str;
         return this.dispatch('release', data);
