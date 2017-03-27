@@ -2,6 +2,7 @@ var D = require('drizzlejs'),
     _ = require('lodash/collection'),
     RECOMMEND_SIZE = 6,
     RESEARCH_TYPE = 1;
+
 exports.items = {
     banner: 'banner',
     filter: 'filter',

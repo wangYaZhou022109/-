@@ -1,62 +1,33 @@
-var _ = require('lodash/collection');
-
 exports.bindings = {
-    state: true,
-    menus: true,
-    finishStatus: true
+    state: true
 };
+
 exports.events = {
     'click switch-*': 'switchMenu',
-    'click checkFinish': 'checkFinish'
-};
-
-exports.afterRender = function() {
-    var me = this,
-        currentMenu = me.bindings.state.data.menu,
-        finishStatus = me.bindings.finishStatus.data.value;
-    if (currentMenu === 'satisfaction') {
-        me.module.regions.content.show(me.module.items.satisfaction, { finishStatus: finishStatus });
-    } else if (currentMenu === 'evaluation') {
-        me.module.regions.content.show(me.module.items.evaluation, { finishStatus: finishStatus });
-    } else if (currentMenu === 'homework') {
-        me.module.regions.content.show(me.module.items.homework, { finishStatus: finishStatus });
-    }
+    'click waitTodo-*': 'waitTodo'
 };
 
 exports.handlers = {
-    switchMenu: function(menuId) {
-        var menus = this.bindings.menus.data,
-            menu = this.bindings.menus.data[menuId],
-            state = this.bindings.state,
-            currentMenu = menu.url;
-        state.data.menu = currentMenu;
-        _.forEach(menus, function(m) {
-            var obj = m;
-            if (obj.id === menuId) {
-                obj.current = true;
-            } else {
-                obj.current = false;
-            }
+    switchMenu: function(id) {
+        return this.module.dispatch('switchMenu', {
+            menu: id,
+            satisfaction: id === 'satisfaction',
+            markpaper: id === 'mark-paper',
+            homework: id === 'homework'
         });
-        this.bindings.finishStatus.data.value = '0'; // 勾选去掉
-        this.bindings.menus.changed();
     },
-    checkFinish: function() { // 是否未只显示待处理项
-        if (this.$('checkFinish').checked) {
-            this.bindings.finishStatus.data.value = '1';
-        } else {
-            this.bindings.finishStatus.data.value = '0';
-        }
-        this.bindings.finishStatus.changed();
+    waitTodo: function(id, target) {
+        return this.module.dispatch('waitTodo', {
+            wait: target.target.checked ? 1 : 0
+        });
     }
 };
 
 exports.dataForTemplate = {
-    finishCheck: function(data) { // 是否勾选只读
-        var finishStatus = data.finishStatus.value;
-        if (finishStatus === '1') {
-            return true;
-        }
-        return false;
+    waitTodo: function(data) {
+        if (data.state.satisfaction) return '仅显示待处理';
+        if (data.state.markpaper) return '显示待评卷';
+        if (data.state.homework) return '显示待审核';
+        return '';
     }
 };

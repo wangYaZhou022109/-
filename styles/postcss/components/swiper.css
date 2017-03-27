@@ -104,7 +104,7 @@
         left: 0;
     }
     & .btn-next {
-        right: calc(var(--large-space) / 4);
+        right: 0;
     }
 
 }

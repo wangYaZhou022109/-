@@ -1,7 +1,11 @@
 #!handlebars
+
 module > .ask-page > .container
     .page-main-wrapper.knowledge-side
-        .page-side.side-min(data-region='side')
+        .page-side.side-min
+                div(data-region='top')
+                div(data-region='relevantexperts')
+                div(data-region='relatedquestions')
         .page-main(data-region='main')
 view('main')
     .comment-list.ask-list > ul
@@ -10,7 +14,7 @@ view('main')
             .comment-content
                 .user-info.m-top
                     a(href='javascript:;') > echo(details.member.fullName)
-                    span ·提问·
+                    span > echo('·提问·')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') > each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
@@ -25,7 +29,7 @@ view('main')
                                     li 分享1
                                     li 分享2
                                     li 分享3
-                    .item > a.normal(href='javascript:;') 举报
+                    .item > span(id ='report-' + details.type + '_' + details.id data-name='id' data-value=details.type +'_' + details.id) > string('report')
                 .pull-left
                     span.pull-left 附件：
                     i.iconfont.icon-image.pull-left.m-right
@@ -51,13 +55,23 @@ view('main')
                     .comment-operation
                         #  .pull-left > .sub-text 2017-01-17
                         .text-right
-                            .item > i.iconfont.icon-zan > echo('赞（' + praiseNum +'）')                           
-                            .item > i.iconfont.icon-message(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
-                            .item > i.iconfont.icon-info
-                            | 举报
-                    .comment-reply(id='reply-'+id name='reply-' + id style='display:none')
-                        textarea.input.w-full.block
-                        .btn 回复
+                            .item > span > echo('赞（' + praiseNum +'）')                           
+                            .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
+                            .item > span(id ='report-' + id data-name='id' data-value=id) > string('report')
+                    div(id='reply-'+id name='reply-' + id style='display:none')
+view('top')
+    .section
+        compare(question.concernList.length 'gt' 0)
+            .btn.block.layout-mt-small.big(id='unfollow-question' data-name='id' data-value=expert.member.id) > string('unfollow')
+        else
+            .btn.block.layout-mt-small.big(id='follow-question' data-name='id' data-value=expert.member.id) > string('my-follow')
+    div(data-dynamic-key=followcount.menu) 
+
+view('relevantexperts')
+    div(data-dynamic-key=relevantexperts.menu)
+
+view('relatedquestions')
+    div(data-dynamic-key=relatedquestions.menu)
 #  module > .course-page
 #      div(data-region='main')
 #  view('main')

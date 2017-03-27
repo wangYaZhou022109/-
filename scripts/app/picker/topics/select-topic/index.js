@@ -1,14 +1,15 @@
-
 var D = require('drizzlejs');
-
-exports.title = '选择话题';
-exports.large = true;
-
 exports.items = {
-    content: 'content',
-    toolbox: 'toolbox'
+    title: 'title',
+    types: 'types',
+    contents: 'contents'
 };
 
+exports.title = '选择话题';
+
+exports.buttons = [{
+    text: '选择'
+}];
 exports.store = {
     models: {
         topics: { url: '../system/topic/select', autoLoad: 'after' },
@@ -26,12 +27,8 @@ exports.store = {
         refreshList: function(options) {
             var data = D.assign({}, this.models.search.getQueryParams(), options),
                 model = this.models.topics;
-            if (data.typeId === '0') {
-                data.typeId = '';
-            }
             model.params = data;
             this.get(model);
         }
     }
 };
-

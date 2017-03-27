@@ -1,3 +1,24 @@
+
+exports.items = {
+    details: 'details'
+};
+
+exports.store = {
+    models: {
+        expertQualifications: { url: '../ask-bar/expert_qualification' }
+    },
+    callbacks: {
+        init: function() {
+            var expertQualifications = this.models.expertQualifications;
+            return this.get(expertQualifications);
+        }
+    }
+};
+exports.beforeRender = function() {
+    this.dispatch('init');
+};
+
+
 exports.title = '专家资质';
 
 exports.buttons = [{

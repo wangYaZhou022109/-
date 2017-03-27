@@ -10,7 +10,7 @@ exports.buttons = [{
     text: '开始考试',
     fn: function() {
         var id = this.bindings.state.examId,
-            url = '#/exam/exam/answer-paper/' + id;
+            url = '#/exam/exam/paper/' + id;
         window.open(url, '_blank');
     }
 }];

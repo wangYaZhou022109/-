@@ -1,13 +1,14 @@
 var $ = require('jquery'),
     A = require('./app/util/animation'),
     courseUtil = require('../course-util'),
+    maps = require('./app/util/maps'),
     _ = require('lodash/collection');
 var currentSectionId = null;
 var showHandler = function(payload) {
     var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
         8: '#/study/task/',
-        9: '#/exam/exam/answer-paper/',
+        9: '#/exam/exam/paper/',
         12: '#/exam/research-activity/research-detail/'
     };
     return function() {
@@ -15,7 +16,7 @@ var showHandler = function(payload) {
         if (innerType.indexOf(payload.sectionType) !== -1) {
             this.module.dispatch('showSection', payload);
         } else if (detailUrlMap[payload.sectionType]) {
-            window.open(detailUrlMap[payload.sectionType] + '' + payload.id);
+            window.open(detailUrlMap[payload.sectionType] + '' + payload.resourceId);
         } else if (payload.sectionType === 12) {
             this.module.dispatch('getResearchById', { id: payload.resourceId }).then(function() {
                 me.app.viewport.modal(me.module.items['research-tips']);
@@ -27,6 +28,8 @@ var showHandler = function(payload) {
 exports.bindings = {
     course: true,
     state: true,
+    examStatus: true,
+    researchStatus: true
 };
 
 exports.events = {
@@ -97,6 +100,7 @@ exports.dataForTemplate = {
                 r.seq = courseUtil.seqName(i, 1);
                 _.forEach(r.courseChapterSections, function(obj, j) {
                     var rr = obj;
+                    var examStatus;
                     rr.seq = courseUtil.seqName(j, 2);
                     if (currentSectionId === rr.id) {
                         rr.focus = true;
@@ -106,6 +110,23 @@ exports.dataForTemplate = {
                     }
                     // Rate
                     rr.showRate = [5, 6].indexOf(rr.sectionType) !== -1;
+                    if (rr.progress) {
+                        rr.progress.finishStatus = maps.getValue('course-study-status', rr.progress.finishStatus);
+                    }
+                    if (rr.sectionType === 9) {
+                        examStatus = _.find(data.examStatus, { examId: rr.resourceId });
+                        if (examStatus && examStatus.status) {
+                            if (!rr.progress) rr.progress = {};
+                            rr.progress.finishStatus = maps.getValue('paper-instance-status', examStatus.status);
+                        }
+                    }
+                    if (rr.sectionType === 12) {
+                        examStatus = _.find(data.examStatus, { researchQuestionaryId: rr.resourceId });
+                        if (examStatus && examStatus.status) {
+                            if (!rr.progress) rr.progress = {};
+                            rr.progress.finishStatus = maps.getValue('research-record', examStatus.status);
+                        }
+                    }
                 });
             });
         }

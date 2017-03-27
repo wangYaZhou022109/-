@@ -1,29 +1,42 @@
+var STAISFACTION = 'satisfaction',
+    D = require('drizzlejs');
+
 exports.title = '待办';
 
 exports.items = {
     label: 'label',
-    content: 'content',
-    satisfaction: '', // 满意度评估
-    evaluation: '', // 考试评卷
-    homework: '' // 作业批阅
+    content: 'content'
 };
 
 exports.store = {
     models: {
-        menus: { data: [
-            { id: '0', name: '满意度评估', url: 'satisfaction', current: true },
-            { id: '1', name: '考试评卷', url: 'evaluation' },
-            { id: '2', name: '作业批阅', url: 'homework' }
-        ] },
-        state: {
-            data: {
-                menu: 'satisfaction', // 记录当前菜单
-            }
+        state: {}
+    },
+    callbacks: {
+        init: function() {
+            this.models.state.set({
+                menu: STAISFACTION,
+                satisfaction: true,
+                markpaper: false,
+                homework: false,
+                wait: 0
+            });
         },
-        finishStatus: {
-            data: {
-                value: '0', // 完成状态
-            }
+        switchMenu: function(payload) {
+            this.models.state.set(payload);
+            this.models.state.changed();
+        },
+        waitTodo: function(payload) {
+            D.assign(this.models.state.data, {
+                wait: payload.wait,
+                checked: payload.wait === 1
+            });
+            this.models.state.changed();
         }
     }
 };
+
+exports.beforeRender = function() {
+    return this.dispatch('init');
+};
+

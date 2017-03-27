@@ -1,11 +1,13 @@
 #!handlebars
 
 module
-    div(data-region='main')
-
+    .content(data-region='tags')
+    .content(data-region='main')
+view('tags')
+    #tags
 view('main')
-    .input.btn-right-bottom(x-rule='required' x-target=state.componentId)&if(state.required)
-        #tags
-        .btn-group
-            .btn.large#clearTopic 清空
-            .btn.large#selectTopic 继续添加
+    .sub-row#tag-list
+        span.small-font 推荐标签：
+        each(hot)
+            .tag-btn.radius(id='hot-'+id)(class = if(selected 'selected')) > echo(name)
+        .tag-btn.radius#selectTopic ...

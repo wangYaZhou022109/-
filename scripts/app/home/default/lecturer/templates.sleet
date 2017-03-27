@@ -1,6 +1,6 @@
 #!handlebars
 
-module > .section(data-region='lecturer')
+module > section(data-region='lecturer')
 
 view('lecturer') > .container
     .home-title-row

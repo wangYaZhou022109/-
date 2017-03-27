@@ -1,36 +1,31 @@
 #!handlebars
-
 module > .edit-info-page
     .tabs-cont > ul
         li.tabs-cont-item.active > .base-info
-            .form
-                .pic > img(src='images/default-cover/default_user.png') + .btn.block.white.border 上传专家头像
+            form.form 
+                .pic
+                    div(data-region='headfile')
                 .info
-                    .form-row.textarea-row
-                        label.m-top.required 名称：
-                        .content > input.input(placeholder='输入您的名称')
-                    .form-row.textarea-row
-                        label.m-top.required 擅长话题：
-                        .content 
-                            input.input + .choice 选择
-                            #searchMore.border.bottom.dashed
-                                .tag-btn.active 全部
-                                .tag-btn 生活
-                                .tag-btn 科学教育
-                                .tag-btn 发展经济学
-                                .tag-btn 社会民生
-                                .tag-btn 职业发展
-                                .tag-btn 生活
-                                .tag-btn 科学教育
-                                .tag-btn 发展经济学
-                                .tag-btn 社会民生
-                                .tag-btn 职业发展
-                                .tag-btn 生活
-                                .tag-btn 科学教育
-                                .tag-btn 发展经济学
-                                .tag-btn 社会民生
-                                .tag-btn 职业发展
-                    .form-row.textarea-row
-                        label.required 您的优势：
-                        .content > textarea.input(rows='3' placeholder='请清晰描述您选择话题领域的优势和特长，这有助于提升您的通过率')
+                    div(data-region='user')
+                    div(data-region='topic')
+                    div(data-region='details')
+view('headfile')
+    #headFile
+view('user') > .form-row.textarea-row
+    label.m-top.required 名称：
+    .content > input.input(placeholder='输入您的名称' name ='name' value= findUser.fullName readonly='readonly')
+view('topic') > .form-row.textarea-row
+    label 擅长话题：
+    .content
+        .tag-input
+            each(state)
+                .tag-btn.radius(id = 'del-topic-'+ id data-name='id' data-value=id ) > .close.iconfont.icon-close + echo(name)
+            input(placeholder='输入标签名按回车即可添加,最多添加五个' readonly='readonly')
+        .sub-row#tag-list 
+            span.small-font 推荐标签：
+            each(topicname)
+                .tag-btn.radius.selected(id = 'add-topic-' + id data-name='id' data-value=id ) > echo(name)
 
+view('details') > .form-row.textarea-row
+    label.required 您的优势：
+    .content > textarea.input( name='introduce' rows='3' placeholder='请清晰描述您选择话题领域的优势和特长，这有助于提升您的通过率')

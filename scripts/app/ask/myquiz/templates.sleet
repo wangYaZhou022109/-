@@ -32,7 +32,6 @@ view('list')
                                             li 分享1
                                             li 分享2
                                             li 分享3
-                            .item > a.normal(href='javascript:;') 举报
                             .item > a.normal(href='javascript:;') 删除
                     .comment-reply.m-top
                         textarea.input.w-full.block(rows="1")

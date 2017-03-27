@@ -10,7 +10,7 @@ view('list')
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
-                    echo(content)
+                    @echo(content)
                 .user-info
                     span
                         compare(createUserId 'eq' me) 
