@@ -2,6 +2,8 @@ module.exports = {
     auditStatus0: '待审核',
     auditStatus1: '通过',
     auditStatus2: '拒绝',
+    auditStatus3: '审核中',
+    auditStatus4: '审核未通过',
     article: '文章',
     'article-title': '文章标题',
     'article-content': '文章内容',

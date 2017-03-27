@@ -8,6 +8,7 @@ exports.store = {
     models: {
         trends: { url: '../ask-bar/trends/all-dynamic' },
         discuss: { url: '../ask-bar/question-discuss' },
+        reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         del: { url: '../ask-bar/trends/del' }
@@ -24,12 +25,18 @@ exports.store = {
             return this.post(follow);
         },
         unfollow: function(payload) {
-            var follow = this.models.follow;
+            var follow = this.models.unfollow;
+            console.log(payload);
             follow.set(payload);
-            return this.post(follow);
+            return this.put(follow);
         },
         publish: function(payload) {
             var discuss = this.models.discuss;
+            discuss.set(payload);
+            return this.save(discuss);
+        },
+        reply: function(payload) {
+            var discuss = this.models.reply;
             discuss.set(payload);
             return this.save(discuss);
         },

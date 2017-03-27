@@ -121,7 +121,6 @@ exports.buttons = [{
             img = $(str.substring(begin, end + 2));
             data.jsonImg = img[0].src;
         }
-        console.log(str);
         data.content = str;
         return this.dispatch('release', data);
     }

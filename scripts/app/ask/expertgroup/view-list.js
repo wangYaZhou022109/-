@@ -2,7 +2,8 @@
 exports.type = 'dynamic';
 exports.bindings = {
     expertlist: true,
-    topicType: true
+    topicType: true,
+    user: true
 };
 
 exports.events = {
