@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+var $ = require('jquery');
 exports.items = {
     top: 'top',
     topic: 'topic',
@@ -12,7 +13,9 @@ exports.store = {
         state: { data: [] },
         task: { data: [] },
         imgParse: { url: '../human/file/upload-parse-file' },
-        img: { url: '../system/file/upload' },
+        img: {
+            url: '../system/file/upload'
+        },
         topicname: {
             url: '../ask-bar/topic/topic-name',
             mixin: {
@@ -72,36 +75,37 @@ exports.store = {
                 data = payload,
                 task = me.models.task.data,
                 speechset = this.models.speech.getData('1');
-            var topicIds = this.models.state.data;
-            var topic = [];
-            _.forEach(topicIds, function(d) {
-                topic.push(d.id);
-            });
+            var question = this.models.question;
+            data.enclosureUrl = 'null';
+            data.enclosureName = 'null';
+            data.enclosureType = -1;
+            data.enclosureSuffix = 'null';
+            data.transferViewUrl = 'null';
+            data.transferFlag = -1;
+            data.enclosureSuffixImg = 'null';
             if (task.attachments) {
+                console.log(task);
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
                 data.enclosureType = task.attachments[0].idex;
                 data.enclosureSuffix = task.attachments[0].contentType;
-                data.transferViewUrl = '';
+                data.transferViewUrl = 'null';
                 data.transferFlag = 1;
-                data.enclosureSuffixImg = '';
+                data.enclosureSuffixImg = 'null';
             }
             data.speechset = speechset.status;
             data.id = '1';
-            data.topic = topic.toString();
-            this.models.question.set(data);
-            if (topic.length === 0) {
-                this.app.message.success('请关联话题，操作失败！');
-            }
-            if (topic.length > 0) {
-                this.post(this.models.question).then(function() {
-                    me.app.message.success('操作成功');
-                    // me.app.show('content', 'ask/content');
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 1000);
-                });
-            }
+           // data.topic = topic.toString();
+
+            question.set(data);
+            console.log(question);
+            this.post(question).then(function() {
+                me.app.message.success('操作成功');
+                // me.app.show('content', 'ask/content');
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            });
         },
         delTopic: function(payload) {
             var state = this.models.state;
@@ -141,7 +145,23 @@ exports.title = '我要提问';
 
 exports.buttons = [{
     text: '发布',
-    fn: function(data) {
+    fn: function(payload) {
+        var stepView = this.items.edit;
+        var str = stepView.getData();
+        var img,
+            begin,
+            src,
+            end,
+            data = payload;
+        data.jsonImg = 'null';
+        if (str.indexOf('<img') !== -1) {
+            begin = str.indexOf('<img');
+            end = str.indexOf('/>');
+            img = $(str.substring(begin, end + 2));
+            src = img[0].src.split('/');
+            data.jsonImg = src[src.length - 1];
+        }
+        data.content = str;
         return this.dispatch('release', data);
     }
 }];
