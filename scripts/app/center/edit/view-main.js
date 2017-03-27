@@ -1,5 +1,6 @@
 var _ = require('lodash/collection'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    validators = require('./app/ext/views/form/validators');
 
 exports.type = 'dynamic';
 
@@ -49,7 +50,6 @@ exports.handlers = {
         var rePassword = $(this.$$('[name="rePassword"]')).val();
         var newEmail = $(this.$$('[name="newEmail"]')).val();
         var eg = /^(?![0-9]*$)[a-zA-Z0-9]{6,20}$/;
-        var emg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
         _.forEach(menus, function(m) {
             var obj = m;
             if (obj.id === menuId) {
@@ -90,7 +90,7 @@ exports.handlers = {
                 }
             }
             if (newEmail) {
-                if (!emg.test(newEmail)) {
+                if (!validators.email.fn(newEmail)) {
                     this.app.message.error('邮箱输入不正确');
                     return false;
                 }

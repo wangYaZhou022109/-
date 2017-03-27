@@ -58,7 +58,7 @@ require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/ext/highcharts');
 require('./app/main/modal/modal-region');
-
+require('./app/ext/rich-text');
 D.adapt({
     getFormData: function(form) {
         var result = {};
