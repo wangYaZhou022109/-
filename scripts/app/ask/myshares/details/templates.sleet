@@ -74,7 +74,9 @@ view('top')
         else
             .btn.block.layout-mt-small.big(id='follow-question' data-name='id' data-value=expert.member.id) > string('my-follow')
     #  div(data-dynamic-key=followcount.menu) 
-
+    .btn.block.layout-mt-small.big.custom-bg-color-3
+        i.iconfont.icon-favorite
+        | 赞(88)
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)
 
