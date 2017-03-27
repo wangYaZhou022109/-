@@ -1,0 +1,39 @@
+#!handlebars
+
+module
+    .person-list
+        div(data-region='filter')
+        div(data-region='main')
+view('filter')
+    .person-list
+        .filter
+            .pull-right.m-right.pointer
+                | 进入时间
+                i.iconfont.icon-sort-desc
+            .pull-left
+                .inline-block.m-left.sub-text 要求：
+                .item#status-all(class=if(search.statusAll 'active')) > span 全部
+                .item#status-2(class=if(search.statusb 'active')) > span 待开始
+                .item#status-1(class=if(search.statusa 'active')) > span 开考中
+                .item#status-4(class=if(search.statusd 'active')) > span 待审核
+                .item#status-3(class=if(search.statusc 'active')) > span 已完成
+            .pull-left
+                .inline-block.m-left.sub-text 类型：
+                .item#type-1(class=if(search.typea 'active')) > span 正式
+                .item#type-2(class=if(search.typeb 'active')) > span 非正式
+
+        .list-search
+            input.input(name='exam-name' value=search.name placeholder='请输入您要搜索的内容名称')
+            .btn#searchByName > i.iconfont.icon-search
+view('main')
+    ul.list-text.border.top > each(exams)
+        li.border.bottom
+            .title-row
+                i.iconfont.icon-edit
+                span.inline-block.tag > map('exam-type-simple' type)
+                .inline-block.title > echo(name)
+                .time > echo('进入考试时间：') + dateTime(startTime) + echo('至') + dateTime(endTime) + echo('&nbsp;&nbsp; 总分：' examRecord.totalScore '及格分：' passScore)
+            .state > map('exam-status' status)
+            .btn-row > each(buttons)
+                .btn(id=id) > echo(text)
+    #pager.pagination

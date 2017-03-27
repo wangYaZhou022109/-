@@ -1,27 +1,29 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
+// var D = require('drizzlejs');
+// var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true
-   // popupstate: true
 };
 
 exports.events = {
-    'click dynamic-*': 'toggleMore',
+    'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
     'click trend-report-*': 'report'
 };
 
 exports.handlers = {
-    toggleMore: function(id, e, target) {
-        var region,
-            data;
-        var el = $(target).parents('.activity-category')[0];
-        region = new D.Region(this.app, this.module, el, id);
+    showDetails: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
+        var data = { },
+            id = payload;
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            region.show('ask/myquiz/details', { id: data[1] });
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
         }
     },
     discuss: function(payload) {
