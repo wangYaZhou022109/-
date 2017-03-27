@@ -20,11 +20,11 @@ exports.handlers = {
     toggleMore: function(id, e, target) {
         var region,
             data;
-        var el = $(target).parents('.activity-category')[0];
+        var el = $(target).parents('.comment-list')[0];
         region = new D.Region(this.app, this.module, el, id);
         if (id.indexOf(',') !== -1) {
             data = id.split(',');
-            region.show('ask/mymanage/topicdetail/news/mydetail', { id: data[1] });
+            region.show('ask/myquiz/details', { id: data[1] });
         }
     }
 };

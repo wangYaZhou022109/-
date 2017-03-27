@@ -1,20 +1,37 @@
 #!handlebars
-module > .activity-page
-    .activity-list(data-region='list')
+module
+    div(data-region='list')
 
 view('list')
-    .step-two
-        .container > .main-list
-            ul > each(experts.expertList)
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src=member.headPortrait alt=string('expert'))
-                                input(type='checkbox' id='expert-item' + id name='expert' value=id)
-                        .clearfix
-                            .title.text-overflow > echo(member.fullName)
-                        .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+    .person-list
+        .filter.layout-mt-small
+            .pull-left
+                .inline-block.m-left.sub-text 话题类型：
+                .item.active > span 全部
+                .item > span 话题类型
+                .item > span 类型
+        .comment-list.ask-list > ul > each(experts.expertList)
+            li.expert-item
+                a.normal(href="javascript:;")
+                    .img > .img-cont > img(src=member.headPortrait alt='赵小茵')
+                    h4.text-overflow > echo(member.fullName)
+                    .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '分享')
+                    .row > each(topicList) 
+                        .tag-btn > echo(name)
+                    .sub-text.text-overflow > echo(introduce)
+                .btn.small 关注
+    #  .step-two
+    #      .container > .main-list
+    #          ul > each(experts.expertList)
+    #              li
+    #                  .content
+    #                      .img
+    #                          .img-cont
+    #                              a.normal > img(src=member.headPortrait alt=string('expert'))
+    #                              input(type='checkbox' id='expert-item' + id name='expert' value=id)
+    #                      .clearfix
+    #                          .title.text-overflow > echo(member.fullName)
+    #                      .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
                 
 
     

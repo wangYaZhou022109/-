@@ -1,0 +1,8 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    each(announcements)
+        .h3 > echo(title)
