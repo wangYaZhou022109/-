@@ -1,2 +1,3 @@
 exports.bindings = {
+    research: true
 };
