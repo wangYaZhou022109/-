@@ -1,7 +1,8 @@
 var _ = require('lodash/collection');
 
 exports.bindings = {
-    sectionList: true
+    sectionList: true,
+    courseName: false
 };
 
 exports.title = '学习详情';
@@ -18,12 +19,8 @@ exports.dataForTemplate = {
         });
         return sectionList;
     },
-    courseName: function(data) {
-        var courseName = '',
-            sectionList = data.sectionList;
-        if (sectionList.length > 0) {
-            courseName = sectionList[0].courseName;
-        }
+    courseName: function() {
+        var courseName = this.bindings.courseName.value;
         return courseName;
     }
 };
