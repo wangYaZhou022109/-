@@ -45,58 +45,6 @@ view('filter')
 
 view('list')
     .container > .main-list
-        .h3.m-bottom MOOC
-        ul.arrow-box
-            .arrow-left > | <
-            .arrow-right > | >
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/d1.jpg')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 9.1
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/d1.jpg')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 9.1
-            li
-                .content
-                    .img
-                        .img-cont
-                            a.normal > img(src='images/d1.jpg')
-                        .detail-wrapper
-                            p
-                                .btn.radius.block 我要参与
-                    .clearfix
-                        .pull-right.tip-text
-                        .title.text-overflow > | PPT动画完全自学入门
-                    .bottom.sub-text
-                        i.iconfont.icon-favorite
-                        | 999
-                        i.iconfont.icon-favorite.m-left
-                        | 9.1
         .h3.m-bottom 直播
         ul
             each(gensees)
@@ -133,56 +81,6 @@ view('list')
                             i.iconfont.icon-favorite.m-left.m-right
                             dateTime(startTime) + echo('至') + dateTime(endTime)
 
-        .h3.m-bottom 班级
-        ul.activity-item-box.activity-item-class.cell-3
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
-            li
-                .activity-item.clearfix
-                    i.iconfont.icon-favorite.pull-left.activity-item-icon
-                    a 中国移动“两学一做”学习教育
-                    .sub-text.small-font
-                        | 5623参与
-                        i.iconfont.icon-favorite.m-left.m-right
-                        | 9-28 至 12-25
         .h3.m-bottom 调研
         ul.arrow-box.activity-item-box.activity-item-exam.cell-3
             .arrow-left#research-left > | <
@@ -196,6 +94,38 @@ view('list')
                             echo(joinNumber) | 参与
                             i.iconfont.icon-favorite.m-left.m-right
                             dateTime(startTime) + echo('至') + dateTime(endTime)
+
+                            #     .h3.m-bottom MOOC
+                            #     ul.arrow-box
+                            #         .arrow-left > | <
+                            #         .arrow-right > | >
+                            #         li
+                            #             .content
+                            #                 .img
+                            #                     .img-cont
+                            #                         a.normal > img(src='images/d1.jpg')
+                            #                     .detail-wrapper
+                            #                         p
+                            #                             .btn.radius.block 我要参与
+                            #                 .clearfix
+                            #                     .pull-right.tip-text
+                            #                     .title.text-overflow > | PPT动画完全自学入门
+                            #                 .bottom.sub-text
+                            #                     i.iconfont.icon-favorite
+                            #                     | 999
+                            #                     i.iconfont.icon-favorite.m-left
+                            #                     | 9.1
+
+                            # .h3.m-bottom 班级
+                            # ul.activity-item-box.activity-item-class.cell-3
+                            #     li
+                            #         .activity-item.clearfix
+                            #             i.iconfont.icon-favorite.pull-left.activity-item-icon
+                            #             a 中国移动“两学一做”学习教育
+                            #             .sub-text.small-font
+                            #                 | 5623参与
+                            #                 i.iconfont.icon-favorite.m-left.m-right
+                            #                 | 9-28 至 12-25
 view('exam-tips')
     .container
         .row > .col-sm-12
