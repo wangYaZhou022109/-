@@ -39,9 +39,9 @@ view('notice')
         .pull-left.m-right > i.iconfont.icon-notice
         b.title > setting('center.index.notice')
         .navigator
-            .icon.arrow.prev > .iconfont.icon-arrow-down#next
-            .icon.arrow.next > .iconfont.icon-arrow-up#pre
-            .icon > .iconfont.icon-more
+            .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
+            .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
+            .icon#showMore > .iconfont.icon-more
         ul > each(announcements)
             li > echo(title)
 
