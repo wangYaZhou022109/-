@@ -84,7 +84,7 @@ exports.store = {
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
             if (task.attachments) {
-                console.log(task);
+                // console.log(task);
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
                 data.enclosureType = task.attachments[0].idex;
@@ -98,7 +98,7 @@ exports.store = {
            // data.topic = topic.toString();
 
             question.set(data);
-            console.log(question);
+            // console.log(question);
             this.post(question).then(function() {
                 me.app.message.success('操作成功');
                 // me.app.show('content', 'ask/content');
