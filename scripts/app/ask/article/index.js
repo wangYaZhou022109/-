@@ -1,5 +1,5 @@
 var _ = require('lodash/collection');
-
+var $ = require('jquery');
 exports.items = {
     top: 'top',
     topic: 'topic',
@@ -7,6 +7,7 @@ exports.items = {
     edit: 'edit',
     details: 'details'
 };
+
 exports.store = {
     models: {
         state: { data: [] },
@@ -61,24 +62,19 @@ exports.store = {
             var speech = this.models.speech;
             return this.get(speech);
         },
-        initTopic: function() {
-            var topicname = this.models.topicname;
-            var state = this.models.state;
-            state.clear();
-            state.changed();
-            return this.get(topicname);
-        },
         release: function(payload) {
             var me = this,
                 data = payload,
                 task = me.models.task.data,
                 speechset = this.models.speech.getData('1');
-            var topicIds = this.models.state.data;
-            var topic = [];
-            this.models.article.set(payload);
-            _.forEach(topicIds, function(d) {
-                topic.push(d.id);
-            });
+            var article = this.models.article;
+            data.enclosureUrl = 'null';
+            data.enclosureName = 'null';
+            data.enclosureType = -1;
+            data.enclosureSuffix = 'null';
+            data.transferViewUrl = 'null';
+            data.transferFlag = -1;
+            data.enclosureSuffixImg = 'null';
             if (task.attachments) {
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
@@ -90,53 +86,20 @@ exports.store = {
             }
             data.speechset = speechset.status;
             data.id = '1';
-            data.topic = topic.toString();
-            this.models.article.set(data);
-            if (topic.length === 0) {
-                this.app.message.success('请关联话题，操作失败！');
-            }
-            if (topic.length > 0) {
-                this.post(this.models.article).then(function() {
-                    me.app.message.success('操作成功');
-                    // me.app.show('content', 'ask/content');
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 1000);
-                });
-            }
-        },
-        delTopic: function(payload) {
-            var state = this.models.state;
-            var newState = [];
-            var data = payload;
-            _.forEach(state.data, function(d) {
-                if (d.id !== data.id) {
-                    newState.push(d);
-                }
+            article.set(data);
+            this.post(article).then(function() {
+                me.app.message.success('操作成功');
+                // me.app.show('content', 'ask/content');
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
             });
-            state.data = newState;
-            state.changed();
-        },
-        addTopic: function(payload) {
-            var data = this.models.topicname.getTopic(payload.id);
-            var state = this.models.state,
-                falg = true;
-            _.forEach(state.data, function(d) {
-                if (d.id === data.id) {
-                    falg = false;
-                }
-            });
-            if (typeof data === 'object' && falg) {
-                state.data.push(data);
-                state.changed();
-            }
         }
     }
 };
 
 exports.afterRender = function() {
-    this.dispatch('init');
-    this.dispatch('initTopic');
+    return this.dispatch('init');
 };
 
 
@@ -144,7 +107,22 @@ exports.title = '发表文章';
 
 exports.buttons = [{
     text: '发布',
-    fn: function(data) {
+    fn: function(payload) {
+        var stepView = this.items.edit;
+        var str = stepView.getData();
+        var img,
+            begin,
+            end,
+            data = payload;
+        data.jsonImg = 'null';
+        if (str.indexOf('<img') !== -1) {
+            begin = str.indexOf('<img');
+            end = str.indexOf('/>');
+            img = $(str.substring(begin, end + 2));
+            data.jsonImg = img[0].src;
+        }
+        console.log(str);
+        data.content = str;
         return this.dispatch('release', data);
     }
 }];

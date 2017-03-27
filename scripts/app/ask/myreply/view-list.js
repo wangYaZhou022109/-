@@ -7,15 +7,16 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myshares-details-*': 'toggleMore'
+    'click myreply-details*': 'toggleMore'
 };
 
 exports.handlers = {
     toggleMore: function(id, e, target) {
         var region;
-        var el = $(target).parents('.activity-category')[0];
+        var el = $(target).parents('.comment-list')[0];
+        // console.log(id);
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/myreply/mydetail', { id: id });
+        region.show('ask/myquiz/details', { id: id });
     }
 };
 

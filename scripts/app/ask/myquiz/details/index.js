@@ -1,9 +1,16 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    relevantexperts: 'relevantexperts',
+    relatedquestions: 'relatedquestions',
+    top: 'top',
+    'ask/report': { isModule: true }
 };
 
 exports.store = {
     models: {
+        followcount: { data: { menu: 'followcount' } },
+        relevantexperts: { data: { menu: 'relevantexperts' } },
+        relatedquestions: { data: { menu: 'relatedquestions' } },
         details: {
             url: '../ask-bar/question-details'
         },
@@ -18,15 +25,35 @@ exports.store = {
         },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
-        state: { data: {} }
+        state: { data: {} },
+        follow: {
+            url: '../ask-bar/question-details/boutique'
+        },
+        unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {
         refreshrelpy: function() {
             this.models.state.changed();
         },
         init: function(payload) {
-            var question = payload.question;
-            this.models.details.set(question);
+            // var question = payload.question;
+            // this.models.details.set(question);
+            var question = this.models.details,
+                relevantexperts = this.models.relevantexperts,
+                state = this.models.state,
+                relatedquestions = this.models.relatedquestions,
+                followcount = this.models.followcount,
+                data = payload.id.split(',');
+            relevantexperts.data.id = data[0];
+            relevantexperts.changed();
+            relatedquestions.data.id = data[0];
+            relatedquestions.changed();
+            state.data.id = data[0];
+            state.changed();
+            followcount.data.id = data[1];
+            followcount.changed();
+            question.set({ id: data[0] });
+            this.get(question);
         },
         questionDetails: function(payload) {
             var details = this.models.details,
@@ -91,6 +118,28 @@ exports.store = {
             var report = this.models.report;
             report.set(data);
             return this.post(report);
+        },
+        follow: function(payload) {
+            var follow = this.models.follow,
+                me = this,
+                expert = this.models.expert;
+            follow.set(payload);
+            expert.set({ id: this.models.expert.data.id, concernType: '1' });
+            return this.post(follow).then(function() {
+                me.app.message.success('关注成功');
+                me.get(expert);
+            });
+        },
+        unfollow: function(payload) {
+            var unfollow = this.models.unfollow,
+                me = this,
+                expert = this.models.expert;
+            expert.set({ id: this.models.expert.data.id, concernType: '1' });
+            unfollow.set({ id: payload.id, concernType: '1' });
+            return this.put(unfollow).then(function() {
+                me.app.message.success('取消成功');
+                me.get(expert);
+            });
         }
     }
 };
