@@ -10,7 +10,6 @@ exports.components = [function() {
         state = this.bindings.state.data,
         me = this,
         index = 0;
-    console.log(photos);
     _.map(photos, function(opt, i) {
         var photo = opt;
         photo.imageUrl = me.bindings.download.getFullUrl() + '?id=' + photo.attachmentId;

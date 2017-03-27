@@ -10,6 +10,8 @@ exports.items = {
     'online-rresources': 'online-rresources',
     swipe: '',
     fmtrainees: '',
+    twoBrings: '',
+    questionnaire: '',
     main: 'main'
 };
 
@@ -33,6 +35,15 @@ exports.store = {
             url: '../train/trainee/trainees',
             type: 'pageable',
             root: 'items'
+        },
+        twoBrings: {
+            url: '../train/class-two-brings',
+        },
+        twoBringsResult: {
+            url: '../train/class-two-brings/result',
+        },
+        questionnaire: {
+            url: '../train/questionnaire-survey/class-evaluate'
         },
     },
 
@@ -65,6 +76,24 @@ exports.store = {
                 auditStatus: 1
             });
             return this.get(fmtrainees);
+        },
+        twoBring: function() {
+            var twoBringsResult = this.models.twoBringsResult,
+                classId = this.models.classId.data.classId;
+            twoBringsResult.params = { classId: classId };
+            return this.get(twoBringsResult);
+        },
+        commitTwoBrings: function(payload) {
+            var twoBrings = this.models.twoBrings,
+                me = this;
+            twoBrings.set(payload);
+            return me.save(twoBrings);
+        },
+        questionnaire: function() {
+            var questionnaire = this.models.questionnaire,
+                classId = this.models.classId.data.classId;
+            questionnaire.params = { classId: classId };
+            return this.get(questionnaire);
         },
     }
 };

@@ -6,7 +6,6 @@ module > .train-class-page
 
 view('main')
     div.text-center
-        p.col-sm-2 > echo('班车/订餐信息')
         .buttons
             .btn#addBus > echo('添加')
     table.table

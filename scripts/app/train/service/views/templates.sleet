@@ -20,11 +20,11 @@ module
                     section.section(data-region='discussion-area')
 view('main')
     .buttons
-        .btn#classGroup > i.icon-plus + span > echo('两个带来')
+        .btn#twoBring > i.icon-plus + span > echo('两个带来')
         .btn#addRequired > i.icon-plus + span > echo('班车信息统计')
         .btn#addCourse2 > i.icon-plus + span > echo('作业提交')
         .btn#addCourse1 > i.icon-plus + span > echo('学员满意度')
-        .btn#addCourse3 > i.icon-plus + span > echo('调研与考试')
+        .btn#questionnaire > i.icon-plus + span > echo('调研与考试')
         .btn#classMembers > i.icon-plus + span > echo('班级成员')
 view('class-information')
     .row
@@ -88,3 +88,51 @@ view('fmtrainees')
             td > echo(member.positionName)
             td > echo(phoneNumber)
     #pager.pagination(style='float:none')
+
+view('twoBrings') > form.vertical
+    .row
+        .col-sm-2
+            echo('1.优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新')
+    .row
+        .col-sm-2
+            .inline-block.com-title > echo('经验/案例主题') :
+            .inline-block > input.input(name='title1'  value=twoBringsResult.title1  x-rule='required')
+    br
+    .row
+        .col-sm-10
+            textarea#content1(name='content1' value='' rows=2 x-rule='required') > echo(twoBringsResult.content1)
+    br
+    .row
+        .col-sm-2
+            echo('2.棘手问题：您当前最关心的、当前工作中最棘手的一个问题')
+    br
+    .row
+        .col-sm-2
+            .inline-block.com-title > echo('问题/困难主题') :
+            .inline-block > input.input(name='title2'  value=twoBringsResult.title2  x-rule='required')
+    br
+    .row
+        .col-sm-10
+            textarea#content2(name='content2' value='' rows=2 x-rule='required') > echo(twoBringsResult.content2)
+    br
+    .row
+        .col-sm-2
+            btn.btn(id='commit') > echo('提交')
+
+view('questionnaire')
+    table.table
+        tbody > each(questionnaire) > tr
+            td > map('questionnaire-type' type)
+            td > echo(resourceName)
+            td
+                compare(type 'eq' 1)
+                    dateTime(exam.startTime)
+                else
+                    dateTime(researchQuestionary.startTime)
+            td
+                compare(type 'eq' 1)
+                    dateTime(exam.endTime)
+                else
+                    dateTime(researchQuestionary.endTime)
+            td
+                a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id typeId=type) > echo('查看')

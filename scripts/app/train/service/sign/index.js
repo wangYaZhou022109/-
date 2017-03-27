@@ -70,7 +70,7 @@ exports.store = {
                 signs = this.models.signs,
                 me = this;
             sign.set(payload);
-            this.del(sign).then(function() {
+            this.save(sign).then(function() {
                 me.app.message.success('保存成功');
                 me.get(signs);
             });

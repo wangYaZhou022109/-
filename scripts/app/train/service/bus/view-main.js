@@ -1,3 +1,5 @@
+exports.title = '班车/订餐信息';
+
 exports.bindings = {
     buss: true,
     bus: false,
