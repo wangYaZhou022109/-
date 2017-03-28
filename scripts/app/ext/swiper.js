@@ -13,7 +13,7 @@ Swiper = function(el, options) {
 
     this.current = options.current || 0;
     this.list = el.querySelectorAll('ul')[0];
-    this.items = Array.prototype.slice.call(this.list.getElementsByClassName('list-item'));
+    this.items = Array.prototype.slice.call(this.list.children);
 
     this.init();
 };
