@@ -86,7 +86,7 @@
         width: auto;
 
         & .main-list {
-            margin: var(--large-space) var(--large-space) 0;
+            margin: calc(var(--large-space) + 1) var(--large-space) 0;
         }
         & .btn-prev {
             left: var(--large-space);

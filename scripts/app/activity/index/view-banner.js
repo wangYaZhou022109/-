@@ -13,6 +13,7 @@ exports.components = [function() {
         id: 'activitys-ul',
         name: 'swiper',
         options: {
+            current: 1
         }
     };
     return obj;
