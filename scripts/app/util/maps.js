@@ -90,7 +90,7 @@ module.exports = {
         0: '否', 1: '是'
     },
     'activity-type': {
-        1: '班级', 2: '直播', 3: '模拟考试', 4: '指定考试', 5: '报名考试', 6: '调研'
+        1: '班级', 2: '直播', 3: '考试', 4: '调研'
     },
     'section-type': {
         0: '混合',
@@ -212,8 +212,7 @@ module.exports = {
         1: '班级',
         2: '直播',
         3: '考试',
-        4: '调研',
-        5: '问卷'
+        4: '调研'
     },
     'ask-audit-type': {
         1: '提问审核', 2: '讨论审核', 4: '举报审核', 12: '分享审核'
@@ -317,12 +316,36 @@ module.exports = {
         2: '直播',
         3: '考试',
         4: '调研',
-        5: '问卷',
+        5: '未知',
         6: '未知',
         7: '未知',
         8: 'mooc',
         9: '课程',
         10: '专题'
+    },
+    'home-default-image': {
+        1: 'images/default-cover/default_class.jpg',
+        2: 'images/default-cover/default_live.jpg',
+        3: 'images/default-cover/default_exam.jpg',
+        4: 'images/default-cover/default_survey.jpg',
+        5: 'unknow',
+        6: 'unknow',
+        7: 'unknow',
+        8: 'mooc',
+        9: 'images/default-cover/default_course.jpg',
+        10: 'images/default-cover/default_spceial.jpg'
+    },
+    'home-data-url': {
+        1: '#',
+        2: '/#/activity/gensee/detail/',
+        3: '#',
+        4: '/#/exam/research-activity/index/',
+        5: '#',
+        6: '#',
+        7: '#',
+        8: '#',
+        9: '/#/study/course/detail/',
+        10: '/#/study/subject/detail/'
     },
     get: function(k) {
         return _.map(this[k], function(value, key) {
