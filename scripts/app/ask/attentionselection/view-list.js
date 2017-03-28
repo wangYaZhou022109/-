@@ -79,8 +79,16 @@ exports.dataForActions = {
             expert.push(value);
         });
         data.id = 1;
-        data.topics = topics.join(',');
-        data.expert = expert.join(',');
+        if (topics.length > 0) {
+            data.topics = topics.join(',');
+        } else {
+            data.topics = 'null';
+        }
+        if (expert.length > 0) {
+            data.expert = expert.join(',');
+        } else {
+            data.expert = 'null';
+        }
         return data;
     }
 };

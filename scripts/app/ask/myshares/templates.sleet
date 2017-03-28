@@ -13,7 +13,7 @@ view('list')
             li
                 .user-pic > img(src='images/d2.jpg')
                 .comment-content
-                    .h4 > a(id='myshares-details-' + problem.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title)
+                    .h4 > a(id='myshares-details-' + id + '_' + problem.id ) > echo(problem.title)
                     .comment-text
                         compare(thumbnail.length 'gt' 0)
                             img(src=thumbnail)
@@ -73,7 +73,3 @@ view('list')
 #              li 
 #                  a('更多》》')
                     
-                  
-
-                   
-                

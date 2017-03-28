@@ -1,0 +1,13 @@
+#! handlebars
+module > .edit-info-page
+    .comment-list.ask-list > ul
+        div(data-region='list')
+
+view('list')
+    each(member)
+        li.follow-item
+            a.normal(href="javascript:;")
+                .img > .img-cont > img(src=headPortrait alt=fullName)
+                h4.text-overflow fullName
+                .info 36回答 ｜ 1提问 ｜ 2文章
+        
