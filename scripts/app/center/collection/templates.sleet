@@ -34,7 +34,7 @@ view('main')
             .title-row
                 .img > .img-cont > img(src=imgUrl)
                 span.inline-block.tag > echo(typeName)
-                .inline-block.title > echo(collectName)
+                .inline-block.title > a.normal.block(href=url target='_blank') > echo(collectName)
                 .time > echo(prefixText)
             .state &nbsp;
             .btn-row

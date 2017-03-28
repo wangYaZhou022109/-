@@ -8,10 +8,9 @@ D.ComponentManager.register('photoswipe', function(view, el, option) {
             index: option.index
         },
         gallery,
-        items = [],
-        img = new Image();
+        items = [];
     photos.forEach(function(photo) {
-        img.src = photo.imageUrl;
+        var img = photo.image;
         items.push({
             src: photo.imageUrl,
             w: img.width,
@@ -20,6 +19,7 @@ D.ComponentManager.register('photoswipe', function(view, el, option) {
     });
     gallery = new PhotoSwipe(el, uiDefault, items, options);
     gallery.init();
+    return gallery;
 }, function(view, comp) {
-    comp;
+    comp & comp.close();
 });

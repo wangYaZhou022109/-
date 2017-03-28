@@ -68,14 +68,18 @@
             &:hover {
                 @apply --box-shadow;
 
-                padding: 1em 1em var(--large-space);
-                margin: -1em -1em -var(--large-space);
+                padding: 1em 1em 1em;
+                margin: -1em -1em -1em;
 
                 & .detail-wrapper {
                     @apply --fade-in;
 
                     transform: scale(1,1);
                     z-index: 1;
+
+                    & p {
+                        margin: 0;
+                    }
 
                 }
 
@@ -94,7 +98,7 @@
         }
 
         & .title {
-            margin: 1em 0;
+            margin: var(--space) 0;
         }
 
         & .bottom {
@@ -148,7 +152,9 @@
 
     }
 
-    & .img {
-        min-height: var(--main-list-img-height);
+    & .img,
+    & .img img {
+        height: var(--main-list-img-height);
+        width: 100%;
     }
 }

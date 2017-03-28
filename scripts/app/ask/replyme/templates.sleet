@@ -3,7 +3,7 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你有回复了'+myreply.length+'个问题')
+        .pull-right > echo('你有回复了'+replyme.length+'个问题')
         ul
             li.active > echo('回复我的')
     .comment-list.ask-list > ul
@@ -15,7 +15,7 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > echo(title)
-                        .comment-text > echo(content)
+                        .comment-text > echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo(replyman)
                             span > echo('讨论了我的问题') 
@@ -68,7 +68,7 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > echo(title)
-                        .comment-text > echo(content)
+                        .comment-text > echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo(replyman)
                             span > echo('讨论了我的分享') 

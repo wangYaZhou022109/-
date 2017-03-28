@@ -16,7 +16,7 @@ exports.events = {
     'click to-activity-*': 'toActivity',
     'click attendLive-*': 'attendLive',
     'click exam-*': 'showExamPaper',
-    'click research-*': 'showResearchPaper'
+    'click research-*': 'showResearchIndex'
 };
 exports.actions = {
     'click exam-left': 'examLeft',
@@ -51,12 +51,9 @@ exports.handlers = {
             me.app.viewport.modal(mod, { exam: data });
         });
     },
-    showResearchPaper: function(id) {
-        var mod = this.module.items['research-tips'],
-            me = this;
-        return this.module.dispatch('getResearchRecord', { researchId: id }).then(function() {
-            me.app.viewport.modal(mod);
-        });
+    showResearchIndex: function(id) {
+        var url = '#/exam/research-activity/index/' + id;
+        window.open(url, '_blank');
     }
 };
 
@@ -99,37 +96,39 @@ exports.dataForTemplate = {
             params.types.live = true;
         }
         return params;
+    },
+    examArray: function(data) {
+        var array = [],
+            num = 0,
+            temp = [],
+            obj,
+            i;
+        if (data.exams && data.exams.length) {
+            for (i = 1; i <= data.exams.length; i++) {
+                temp.push(data.exams[i - 1]);
+                if (i % 6 === 0) {
+                    obj = {};
+                    obj.a = temp;
+                    array.push(obj);
+                    num++;
+                    temp = [];
+                }
+            }
+            if (temp.length > 0) {
+                obj = {};
+                obj[num] = temp;
+                array.push(obj);
+            }
+            return array;
+        }
+        return [];
     }
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'exams' },
-}, {
-    id: 'swiper-1',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
-}, {
-    id: 'swiper-2',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
+    id: 'pager', name: 'pager', options: { model: 'exams' }
 }, {
     id: 'swiper-3',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
-}, {
-    id: 'swiper-4',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
-}, {
-    id: 'swiper-5',
     name: 'swiper',
     options: {
         slider: true

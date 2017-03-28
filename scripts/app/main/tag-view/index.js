@@ -39,7 +39,7 @@ exports.store = {
     }
 };
 
-exports.afterRender = function() {
+exports.beforeRender = function() {
     return this.dispatch('init');
 };
 

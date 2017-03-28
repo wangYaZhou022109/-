@@ -2,6 +2,7 @@ var D = require('drizzlejs'),
     _ = require('lodash/collection'),
     RECOMMEND_SIZE = 6,
     RESEARCH_TYPE = 1;
+
 exports.items = {
     banner: 'banner',
     filter: 'filter',
@@ -28,7 +29,7 @@ exports.store = {
             url: '../exam/exam/details',
             type: 'pageable',
             root: 'items',
-            pageSize: 6
+            pageSize: 60
         },
         exam: { url: '../exam/exam/exam-sign-up' },
         currentExam: { },

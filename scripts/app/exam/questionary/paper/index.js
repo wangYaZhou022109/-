@@ -4,15 +4,15 @@ exports.items = {
 
 exports.store = {
     models: {
-        exam: {
-            url: '../exam/exam-record/exam'
+        research: {
+            url: '../exam/research-record/research'
         }
     },
     callbacks: {
         init: function(payload) {
-            if (payload.examId) {
-                this.models.exam.params = { examId: payload.examId };
-                return this.get(this.models.exam);
+            if (payload.researchId) {
+                this.models.research.params = { researchId: payload.researchId };
+                return this.get(this.models.research);
             }
             return '';
         }

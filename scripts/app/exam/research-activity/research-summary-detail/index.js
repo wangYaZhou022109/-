@@ -21,6 +21,29 @@ exports.title = '调研详情';
 
 exports.store = {
     models: {
+        state: {
+            mixin: {
+                init: function() {
+                    var dimensions = this.module.store.models.dimensions,
+                        currentDimension = dimensions.getFirstDimension();
+                    this.data = {
+                        currentDimension: currentDimension,
+                        currentQuestion: currentDimension.questions[0]
+                    };
+                },
+                selectQuestion: function(question) {
+                    var dimensions = this.module.store.models.dimensions;
+                    D.assign(this.data, {
+                        currentQuestion: question,
+                        currentDimension: dimensions.getDimension(question.id)
+                    });
+                },
+                resetCurrentQuestion: function() {
+                    var dimensions = this.module.store.models.dimensions;
+                    D.assign(this.data, { currentQuestion: dimensions.getCurrentQuestion() });
+                }
+            }
+        },
         researchRecord: {
             url: '../exam/research-record/detail',
             mixin: {
@@ -105,6 +128,17 @@ exports.store = {
                     });
                     return question;
                 },
+                getCurrentQuestion: function() {
+                    var question;
+                    _.forEach(this.data, function(d) {
+                        _.forEach(d.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
+                },
                 selectDimension: function(id) {
                     var currentIndex = this.data.findIndex(function(d) {
                         return d.isCurrent;
@@ -127,6 +161,17 @@ exports.store = {
                     D.assign(this.getQuestionById(questionId), {
                         status: itemStatus.CURRENT
                     });
+                },
+                move: function(payload) {
+                    var dimension = this.data[payload.id],
+                        index = dimension.questions.findIndex(function(q) {
+                            return q.status === itemStatus.CURRENT;
+                        }),
+                        question = dimension.questions[index + payload.offset];
+                    if (question) {
+                        question.status = itemStatus.CURRENT;
+                        dimension.questions[index].status = getCurrentStatus.call(this, dimension.questions[index].id);
+                    }
                 }
             }
         }
@@ -162,6 +207,12 @@ exports.store = {
         selectQuestion: function(payload) {
             this.models.dimensions.selectQuestion(payload.id);
             this.models.dimensions.changed();
+        },
+        move: function(payload) {
+            this.models.dimensions.move(payload);
+            this.models.dimensions.changed();
+            this.models.state.resetCurrentQuestion();
+            this.models.state.changed();
         }
     }
 };

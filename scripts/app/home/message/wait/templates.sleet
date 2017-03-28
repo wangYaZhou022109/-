@@ -11,8 +11,8 @@ view('label')
             span.m-right.tag-btn.radius(id='switch-satisfaction' class=if(state.satisfaction 'active')) 满意度评估
             span.m-right.tag-btn.radius(id='switch-mark-paper' class=if(state.markpaper 'active')) 考试评卷
             span.m-right.tag-btn.radius(id='switch-homework' class=if(state.homework 'active')) 作业批阅
-        .pull-right
-            .checkbox > input(type='checkbox' id='checkFinish') + label 显示待处理
+        #  .pull-right
+        #      .checkbox > input(type='checkbox' id='waitTodo-1' value=1)('checked')&if(state.checked) + label > echo(waitTodo)
 
 view('content')
     div(data-dynamic-key=state.menu)

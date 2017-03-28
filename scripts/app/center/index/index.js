@@ -1,9 +1,12 @@
+var D = require('drizzlejs');
+
 exports.items = {
     top: 'top',
     notice: 'notice',
     menu: 'menu',
     'center/edit': { isModule: true },
-    interest: 'interest'
+    interest: 'interest',
+    'center/index/more': { isModule: true }
 };
 
 exports.store = {
@@ -44,13 +47,14 @@ exports.store = {
         lecturer: { url: '../course-study/gensee/find-lecturer', autoLoad: 'after' }, // 是否为讲师
         expert: { url: '../ask-bar/expert/find-expert', autoLoad: 'after' }, // 是否专家
         contact: { url: '../train/project/find-contact', autoLoad: 'after' }, // 是否需求方
-        classstff: { url: '../train/classstaff/find-classstaff', autoLoad: 'after' } // 是否班务
+        classstff: { url: '../train/classstaff/find-classstaff', autoLoad: 'after' }, // 是否班务
+        announcements: { url: '../system/operation/announcement/person-list' } // 公告
     },
     callbacks: {
         init: function(options) {
             var me = this,
                 recommendList = me.models.recommendList,
-               // member = me.models.member,
+                announcements = me.models.announcements,
                 state = me.models.state.data;
             if (options && options.name) {
                 if (options.name === 'course') {
@@ -66,9 +70,11 @@ exports.store = {
                 }
             }
             recommendList.clear();
-            // member.clear();
             recommendList.params = { page: '1' };
             me.get(recommendList);
+            announcements.clear();
+            announcements.params = { page: '1', pageSize: '1' };
+            me.get(announcements);
         },
         changeRecommend: function() {
             var me = this,
@@ -76,6 +82,18 @@ exports.store = {
                 page = this.models.page.data.value;
             recommendList.params = { page: page };
             me.get(recommendList);
+        },
+        prevNotice: function(payload) {
+            var me = this,
+                announcements = me.models.announcements;
+            D.assign(announcements.params, payload);
+            me.get(announcements);
+        },
+        nextNotice: function(payload) {
+            var me = this,
+                announcements = me.models.announcements;
+            D.assign(announcements.params, payload);
+            me.get(announcements);
         }
     }
 };

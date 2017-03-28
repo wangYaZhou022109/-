@@ -1,18 +1,20 @@
 var parseType = function(ext) {
     var types = {
-        xls: 4,
-        xlsx: 4,
-        doc: 2,
-        docx: 2,
-        mp4: 1,
-        mp3: 2,
-        pdf: 3,
-        ppt: 5,
-        pptx: 5,
-        txt: 7,
-    };
-    return types[ext] || 8;
+            xls: 4,
+            xlsx: 4,
+            doc: 2,
+            docx: 2,
+            mp4: 1,
+            mp3: 2,
+            pdf: 3,
+            ppt: 5,
+            pptx: 5,
+            txt: 7,
+        },
+        defaule = 8;
+    return types[ext] || defaule;
 };
+
 exports.events = {
     'click choice': 'choice'
 };
@@ -40,7 +42,6 @@ exports.components = [{
         picker: 'topics',
         inputName: 'topicIds',
         limit: 4
-        // tags: [{ text: '标签一', value: 1 }, { text: '标签三', value: 3 }]
     }
 }, {
     id: 'headFile',
@@ -51,7 +52,7 @@ exports.components = [{
         data: {
             btnName: '上传知识封面',
             btnClass: 'block',
-            defaultCss: 'exam-pic',
+            defaultCss: 'block, side-width',
             width: 300,
             height: 200
         }

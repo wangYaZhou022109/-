@@ -30,6 +30,10 @@ exports.store = {
                     var duplicate = function(x) { return x.courseChapterSections; };
                     return _.find(_.flatMap(this.data.courseChapters, duplicate), { referenceId: referenceId });
                 },
+                findSectionsForType: function(type) {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.filter(_.flatMap(this.data.courseChapters, duplicate), { sectionType: type });
+                },
                 findFirstSection: function() {
                     var duplicate = function(x) { return x.courseChapterSections; };
                     return _.flatMap(this.data.courseChapters, duplicate)[0];
@@ -55,21 +59,35 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             // 初始化当前课程
-            var course = this.models.course,
+            var me = this,
+                course = this.models.course,
                 courseRelated = this.models.courseRelated,
                 collect = this.models.collect,
                 state = this.models.state;
             course.set(payload);
             courseRelated.params = payload;
             collect.params = { businessId: payload.id };
-            this.chain([
-                this.get(courseRelated),
-                this.get(collect)
-            ]);
+            this.get(courseRelated);
+            this.get(collect);
             return this.get(course).then(function(c) {
                 var sectionId = null;
                 if (c[0].register) sectionId = course.findFirstSection().id;
-                state.set({ id: payload.id, sectionId: sectionId, register: c.register }, true);
+                state.set({ id: payload.id, sectionId: sectionId, register: c[0].register }, true);
+                return me.chain(
+                    [(function() {
+                        var researchIds = _.map(course.findSectionsForType(12), 'resourceId').join();
+                        if (researchIds) {
+                            me.models.researchStatus.params = { researchIds: researchIds };
+                            me.get(me.models.researchStatus);
+                        }
+                    }()), (function() {
+                        var examIds = _.map(course.findSectionsForType(9), 'resourceId').join();
+                        if (examIds) {
+                            me.models.examStatus.params = { examIds: examIds };
+                            me.get(me.models.examStatus);
+                        }
+                    }())]
+                );
             });
         },
         updateProgress: function(payload) {

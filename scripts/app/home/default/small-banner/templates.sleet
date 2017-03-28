@@ -3,5 +3,5 @@ module
     .min-banner(data-region='min-banner')
 
 view('min-banner') > .container
-    ul > each(smallBanners)
+    #swiper > ul > each(smallBanners)
         li > a(href=linkAddress target='_blank') > img(src=downloadUrl(pcImage))

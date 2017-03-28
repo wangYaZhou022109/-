@@ -20,6 +20,7 @@ exports.handlers = {
             view;
         if (sectionType === 12 || sectionType === 13) {
             view = this.module.items['research-tips'];
+            this.bindings.state.data.currentType = sectionType;
             this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
                 me.app.viewport.modal(view);
             });
