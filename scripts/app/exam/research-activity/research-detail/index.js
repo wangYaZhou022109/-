@@ -18,7 +18,29 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: {},
+        state: {
+            mixin: {
+                init: function() {
+                    var dimensions = this.module.store.models.dimensions,
+                        currentDimension = dimensions.getFirstDimension();
+                    this.data = {
+                        currentDimension: currentDimension,
+                        currentQuestion: currentDimension.questions[0]
+                    };
+                },
+                selectQuestion: function(question) {
+                    var dimensions = this.module.store.models.dimensions;
+                    D.assign(this.data, {
+                        currentQuestion: question,
+                        currentDimension: dimensions.getDimension(question.id)
+                    });
+                },
+                resetCurrentQuestion: function() {
+                    var dimensions = this.module.store.models.dimensions;
+                    D.assign(this.data, { currentQuestion: dimensions.getCurrentQuestion() });
+                }
+            }
+        },
         researchRecord: { url: '../exam/research-record/front/research-detail' },
         questions: {
             mixin: {
@@ -54,11 +76,13 @@ exports.store = {
                                 return D.assign(q, {
                                     questionIndex: n + 1,
                                     typeDesc: _.find(questionTypes, ['key', q.type.toString()]).value + '题',
-                                    status: itemStatus.INIT
+                                    status: i === 0 && n === 0 ? itemStatus.CURRENT : itemStatus.INIT
                                 });
-                            })
+                            }),
+                            questionSize: d.questions.length
                         });
                     });
+                    return this.data;
                 },
                 getDimension: function(questionId) {
                     return _.find(this.data, function(d) {
@@ -114,6 +138,31 @@ exports.store = {
                     D.assign(this.getQuestionById(id), {
                         status: status
                     });
+                },
+                getFirstDimension: function() {
+                    return this.data[0];
+                },
+                getCurrentQuestion: function() {
+                    var question;
+                    _.forEach(this.data, function(d) {
+                        _.forEach(d.questions, function(q) {
+                            if (q.status === itemStatus.CURRENT) {
+                                question = q;
+                            }
+                        });
+                    });
+                    return question;
+                },
+                move: function(payload) {
+                    var dimension = this.data[payload.id],
+                        index = dimension.questions.findIndex(function(q) {
+                            return q.status === itemStatus.CURRENT;
+                        }),
+                        question = dimension.questions[index + payload.offset];
+                    if (question) {
+                        question.status = itemStatus.CURRENT;
+                        dimension.questions[index].status = getCurrentStatus.call(this, dimension.questions[index].id);
+                    }
                 }
             }
         },
@@ -151,15 +200,15 @@ exports.store = {
         init: function(payload) {
             var researchRecord = this.models.researchRecord,
                 questions = this.models.questions,
-                dimensions = this.models.dimensions;
-
+                dimensions = this.models.dimensions,
+                state = this.models.state;
             if (payload.researchRecord) {
                 researchRecord.set(payload.researchRecord);
             } else if (payload.researchQuestionaryId) {
                 researchRecord.params = { researchQuestionaryId: payload.researchQuestionaryId };
                 return this.get(researchRecord).then(function() {
-                    dimensions.init(researchRecord.data.researchQuestionary.dimensions);
-                    questions.init(researchRecord.data.researchQuestionary.dimensions);
+                    questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));
+                    state.init();
                     questions.changed();
                 });
             }
@@ -186,11 +235,18 @@ exports.store = {
         selectQuestion: function(payload) {
             this.models.dimensions.selectQuestion(payload.id);
             this.models.dimensions.changed();
+            this.models.state.selectQuestion(this.models.dimensions.getQuestionById(payload.id));
         },
         saveAnswer: function(data) {
             this.models.answer.saveAnswer(data);
             this.models.dimensions.updateStatus(data.key, itemStatus.ACTIVE);
             this.models.dimensions.changed();
+        },
+        move: function(payload) {
+            this.models.dimensions.move(payload);
+            this.models.dimensions.changed();
+            this.models.state.resetCurrentQuestion();
+            this.models.state.changed();
         }
     }
 };

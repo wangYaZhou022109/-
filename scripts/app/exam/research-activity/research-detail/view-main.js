@@ -2,7 +2,8 @@ var _ = require('lodash/collection'),
     D = require('drizzlejs'),
     types = require('./app/exam/research-question-types'),
     ANSWER_MODE = 3,
-    MUTIPLE_CHOOSE = 2;
+    MUTIPLE_CHOOSE = 2,
+    MUTIPLE_TYPE = 1;
 
 exports.type = 'dynamic';
 
@@ -10,13 +11,14 @@ exports.bindings = {
     researchRecord: true,
     questions: false,
     answer: false,
-    dimensions: true
+    dimensions: true,
+    state: true
 };
 
 exports.getEntity = function(id) {
     var question = this.module.store.models.questions.getQuestionById(id);
     question = D.assign({}, question, {
-        questionAttrs: _.orderBy(question.questionAttrs, ['createTime'], ['asc'])
+        questionAttrs: _.orderBy(question.questionAttrs, ['name'], ['asc'])
     });
     return question;
 };
@@ -38,3 +40,9 @@ exports.dataForEntityModule = function(question) {
     };
 };
 
+
+exports.dataForTemplate = {
+    isMutiple: function(data) {
+        return data.researchRecord.researchQuestionary.answerPaperRule === MUTIPLE_TYPE;
+    }
+};
