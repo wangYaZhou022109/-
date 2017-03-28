@@ -5,12 +5,6 @@ exports.bindings = {
 };
 
 exports.events = {
-<<<<<<< Updated upstream
-};
-
-exports.handlers = {
-
-=======
     'click commitTask': 'showTaskList'
 };
 
@@ -20,7 +14,6 @@ exports.handlers = {
         var classId = this.bindings.classId.data.classId;
         this.app.viewport.modal(view, { classId: classId });
     }
->>>>>>> Stashed changes
 };
 
 exports.actions = {

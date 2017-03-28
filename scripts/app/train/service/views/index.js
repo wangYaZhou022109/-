@@ -10,14 +10,9 @@ exports.items = {
     'online-rresources': 'online-rresources',
     swipe: '',
     fmtrainees: '',
-<<<<<<< Updated upstream
     twoBrings: '',
     questionnaire: '',
-    main: 'main'
-=======
-    main: 'main',
     'train/service/views/commit-task': { isModule: true }
->>>>>>> Stashed changes
 };
 
 exports.store = {
