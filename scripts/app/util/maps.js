@@ -90,7 +90,7 @@ module.exports = {
         0: '否', 1: '是'
     },
     'activity-type': {
-        1: '班级', 2: '直播', 3: '考试', 4: '调研'
+        1: '班级', 2: '直播', 3: '考试', 4: '调研', 5: 'mooc'
     },
     'section-type': {
         0: '混合',
@@ -212,7 +212,8 @@ module.exports = {
         1: '班级',
         2: '直播',
         3: '考试',
-        4: '调研'
+        4: '调研',
+        5: 'mooc'
     },
     'ask-audit-type': {
         1: '提问审核', 2: '讨论审核', 4: '举报审核', 12: '分享审核'
@@ -316,10 +317,10 @@ module.exports = {
         2: '直播',
         3: '考试',
         4: '调研',
-        5: '未知',
+        5: 'mooc',
         6: '未知',
         7: '未知',
-        8: 'mooc',
+        8: '未知',
         9: '课程',
         10: '专题'
     },
@@ -328,10 +329,10 @@ module.exports = {
         2: 'images/default-cover/default_live.jpg',
         3: 'images/default-cover/default_exam.jpg',
         4: 'images/default-cover/default_survey.jpg',
-        5: 'unknow',
+        5: 'mooc',
         6: 'unknow',
         7: 'unknow',
-        8: 'mooc',
+        8: 'unknow',
         9: 'images/default-cover/default_course.jpg',
         10: 'images/default-cover/default_spceial.jpg'
     },
