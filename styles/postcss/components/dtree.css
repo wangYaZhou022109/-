@@ -1,0 +1,94 @@
+:root {
+    --tree-space: 1em;
+}
+
+.dtree {
+
+    & li {
+        margin: calc(var(--tree-space) / 5) 0 calc(var(--tree-space) * 0) 0;
+        line-height: calc(var(--tree-space) * 1.5);
+        cursor: pointer;
+        white-space: nowrap;
+
+        & span {
+            vertical-align: middle;
+            padding: calc(var(--space) / 2) calc(var(--font-size) / 2);
+            margin-left: calc(var(--space) / 2);
+        }
+
+        & .dtree-node-content {
+            padding: calc(var(--space) / 2);
+            display: inline-block;
+            vertical-align: middle;
+
+            &:hover span{
+                background-color: var(--bg-color-2);
+            }
+
+        }
+
+        & ul {
+            padding-left: 1em;
+        }
+        &.dtree-has-child > .dtree-node-content .dtree-handler {
+            visibility: visible;
+
+            &:before {
+                content: '\e9a4'
+            }
+        }
+
+        &.dtree-opened > .dtree-node-content .dtree-handler {
+            &:before {
+                content: '\e613'
+            }
+        }
+
+        &.dtree-selected {
+            & > .dtree-node-content {
+                & span {
+                    background: var(--bg-color-2);
+                }
+
+                & > .dtree-checkbox {
+                    background-position: -64px 0;
+                }
+            }
+        }
+
+        &.dtree-indeterminate > .dtree-node-content > .dtree-checkbox {
+            background-position: calc(var(--tree-space) * -4) 0;
+        }
+
+        & > ul {
+            display: none;
+        }
+
+        &.dtree-opened > ul {
+            display: block;
+        }
+    }
+
+    & .dtree-handler {
+        display: inline-block;
+        visibility: hidden;
+        vertical-align: middle;
+        font-family: 'iconfont';
+        font-style: normal;
+        width: 1em;
+
+        &:before {
+            content: '\e613'
+        }
+    }
+
+    & .dtree-checkbox {
+        display: inline-block;
+        width: var(--tree-space);
+        height: var(--tree-space);
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+
+}

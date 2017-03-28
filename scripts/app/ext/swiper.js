@@ -5,13 +5,15 @@ var D = require('drizzlejs'),
 Swiper = function(el, options) {
     this.el = el;
     this.options = options;
+    /*
+        autuoplay: 自动滚动，
+        slider: 提供左右翻屏滚动按钮，
+        current: 当前定位。
+    */
 
     this.current = options.current || 0;
     this.list = el.querySelectorAll('ul')[0];
     this.items = Array.prototype.slice.call(this.list.children);
-    // this.swiperHeight = this.items[0].clientHeight;
-    // this.list.style.height = this.swiperHeight + 'px';
-    // console.log(this.swiperHeight);
 
     this.init();
 };
@@ -19,6 +21,7 @@ Swiper = function(el, options) {
 D.assign(Swiper.prototype, {
     init: function() {
         var i;
+        if (!this.items.length) return;
 
         this.el.classList.add('swiper-container');
         this.items[this.current].classList.add('current');
@@ -238,6 +241,7 @@ D.assign(Swiper.prototype, {
     },
 
     destroy: function() {
+        if (!this.items.length) return;
         this.stop();
         this.unbindListener();
         this.removeNavigation();

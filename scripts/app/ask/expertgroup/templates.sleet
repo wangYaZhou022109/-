@@ -1,8 +1,8 @@
 #!handlebars
-module 
+module
     div(data-region='list')
 
-view('list') 
+view('list')
     .tabs.line.mb-1
         .pull-right.btn#expert-apply > string('apply') + string('become') + string('expert')
         .pull-right.btn#expert-myself > string('iam') + string('expert')
@@ -13,19 +13,16 @@ view('list')
         .tag-btn.active(id='check-All' data-name='id' data-value='all' ) > string('all')
         each(topicType)
             a.tag-btn(id='check-' + id data-name='id' data-value=id ) > echo(name)
-    .comment-list.ask-list > ul > each(expertlist)
-        li.expert-item
-            a.normal(href="javascript:;")
-                .img > .img-cont > img(src=member.headPortrait alt=member.fullName)
-                h4.text-overflow > echo(member.fullName)
-                .info > echo(careNum) + string('follow') + echo('|') + echo(answerNum) + string('answer') + echo('|') +  echo(careNum) + string('share')
-                .row
-                    each(topicList)
+    .comment-list.ask-list > each(expertlist)
+        ul
+            li.expert-item
+                a.normal(href="javascript:;")
+                    .img > .img-cont > img(src=member.headPortrait alt='赵小茵')
+                    h4.text-overflow > echo(member.fullName)
+                    .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '分享')
+                    .row > each(topicList) 
                         .tag-btn > echo(name)
-                .sub-text.text-overflow > echo(introduce)
-            .btn.small > string('follow')
+                    .sub-text.text-overflow > echo(introduce)
+                .btn.small 关注
 
-
-            
-
-    
+       

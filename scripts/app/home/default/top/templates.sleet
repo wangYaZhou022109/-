@@ -13,10 +13,10 @@ view('nav')
         if(navs.length)
             each(navs)
                 if(show)
-                    .item > a.normal.nav-color(id='menu-' + id)(href='#/' + url)(data-menu=url)(class='active')&if(active) > echo(name)
+                    .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color(class='active')&if(active) > echo(name)
         else
             each(menus)
-                .item > a.normal.nav-color(id='menu-' + id)(href='#/' + uri)(data-menu=uri)(class='active')&if(active) > echo(name)
+                .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
 
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down
@@ -47,25 +47,16 @@ view('shortcut')
 
         if(Global.currentUser.id)
             .item.drop-down-wrapper.right
-                a.normal(href='#') > i.iconfont.icon-message.drop-down-btn
+                a#message-div.normal(href='#') > i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content
-                    ul.message-list
-                        li
-                            a.underline(href='#/message/detail') > .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
-                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
-                        li
-                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
-                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
-                        li
-                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
-                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
-                        li
-                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
-                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
-                        li
-                            .text-overflow 标题标题标题标题标题标题标题标题标题标题标题标题标题
-                            .sub-text.text-overflow 内容简介内容简介内容简介内容简介内容简介内容简介内容简介
-                    .text-center.small-font > a#message-more 查看更多
+                    compare(message.recordCount 'gt' 0)
+                        ul.message-list > each(message.items)
+                            li
+                                a.underline(href='#/message/detail/'+id  target='_blank') > .text-overflow > echo(subject)
+                                .sub-text.text-overflow > echo(textContent)
+                        .text-center.small-font > a#message-more 查看更多
+                    else
+                        .text-center.small-font 暂无新消息
             .item > a.normal(href='/admin/') > i.iconfont.icon-setting
             .item.drop-down-wrapper.right
                 .drop-down-btn.user-info.inline-block.user-pic

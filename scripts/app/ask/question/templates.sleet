@@ -1,16 +1,35 @@
 #!handlebars
 
-module > .form(id = 'form')
+module > form.form 
+    div(data-region='top')
+    div(data-region='edit')
+    div(data-region='details')
+    div(data-region='topic')
+
+view('top')
     .form-row
         label.required > string('question-title')
-        .content > input.input(name='title' id= 'title' value=''  x-rule='') + .tips 0/60
+        .content > input.input(name='title'  value=''  x-rule='required') + .tips 0/60
+
+view('topic') 
+    .form-row.textarea-row
+        label > string('related-topics') + echo(':') 
+        #select-topic
+
+view('details')
     .form-row
-        label.required > string('related-topics')
-        .content > input.input(name='topic'  id= 'topic' value=''  x-rule='') + .choice 选择
+        .content > a > i.iconfont.icon-link#uploadFile + span 
+            compare(task.length 'gt' 0)
+                each(task) 
+                    echo(enclosureName)
+            else
+                string('upload-attachments')
+view('edit') > form
     .form-row.textarea-row
         label > string('detailed-description')
-        .content > textarea.input(rows='5')(name='content' id= 'content') + .tips 0/60
-    .form-row
-        .content > a > i.iconfont.icon-link + span > string('upload-attachments')
-            
- 
+        .content > textarea.input(rows='5' name='content' id='content' value='') + .tips 0/60
+
+view('upload')
+    .row
+        .col-sm-12
+            #uploader

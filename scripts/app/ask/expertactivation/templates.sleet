@@ -1,25 +1,30 @@
 #!handlebars
+module > .edit-info-page
+    .tabs-cont > ul
+        li.tabs-cont-item.active > .base-info
+            form.form 
+                .pic
+                    div(data-region='headfile')
+                .info
+                    div(data-region='user')
+                    div(data-region='topic')
+                    div(data-region='details')
+view('headfile')
+    compare(expert.member.headPortrait 'ne' '')
+        img(src=expert.member.headPortrait)
+    else
+        img(src='images/default-cover/default_user.png')
+view('user') > .form-row.textarea-row
+    label.m-top.required 名称：
+    .content > input.input(placeholder='输入您的名称' name ='name' value= expert.member.fullName readonly='readonly')
+view('topic') > .form-row.textarea-row
+    label 擅长话题：
+    .content
+        .tag-input
+            each(state)
+                .tag-btn.radius > .close.iconfont.icon-close + echo(name)
+            input(placeholder='' readonly='readonly')
 
-module 
-    div(data-region='details')
-
-
-view('details') > form.vertical
-    .row
-        .col-sm-4 > .user-info
-            br
-            br
-            #headFile
-        .col-sm-8
-            label(class='required') > string('name')
-            #expertMember
-
-    .row > .col-sm-12
-        label(class='required') > string('be-good-at') + string('topic')
-        #topics
-
-    .row > .col-sm-12
-        label(class='required') > string('you') + string('advantage')
-        textarea.input.w-full(name='introduce' x-rule='required' rows='5')  
-    .row > .col-sm-12
-        .btn.radius.block(id='release' style='height:50px;width:200px;text-align:center') > string('submit') + string('apply')
+view('details') > .form-row.textarea-row
+    label.required 您的优势：
+    .content > textarea.input( name='introduce' rows='3' placeholder='请清晰描述您选择话题领域的优势和特长，这有助于提升您的通过率')

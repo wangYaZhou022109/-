@@ -36,7 +36,63 @@ view('main')
                     i.iconfont.icon-image.pull-left.m-right
                     a.normal(href="javascript") 百度是否真的.pdf
     section.section
-            #comment-area
+        #comment-area
+    .layout-mt
+        .comment-list > ul
+            li
+                .user-pic > img(src="images/1.png")
+                .comment-content
+                    .user-info
+                        a(href='#') 张三
+                        span 互联网中心
+                    .comment-text
+                        | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                        | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                    .comment-operation
+                        .pull-left > .sub-text 2017-01-17
+                        .text-right
+                            .item
+                                i.iconfont.icon-zan
+                                | 取消赞
+                            .item
+                                i.iconfont.icon-zan
+                                | 赞（8）
+                            .item#reply-1
+                                i.iconfont.icon-message
+                                | 回复
+                            .item
+                                i.iconfont.icon-info
+                                | 举报
+                    .comment-reply#comment-reply-1
+                        textarea.input.w-full.block(rows=1)
+                        .btn 回复
+            li
+                .user-pic > img(src="images/1.png")
+                .comment-content
+                    .user-info
+                        a(href='#') 张三
+                        span 互联网中心
+                    .comment-text
+                        | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                        | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                    .comment-operation
+                        .pull-left > .sub-text 23分钟前
+                        .text-right
+                            .item
+                                i.iconfont.icon-zan
+                                | 取消赞
+                            .item
+                                i.iconfont.icon-zan
+                                | 赞（8）
+                            .item
+                                i.iconfont.icon-message
+                                | 分享
+                            .item#reply-2
+                                i.iconfont.icon-info
+                                | 回复
+                    .comment-reply#comment-reply-2
+                        textarea.input.w-full.block(rows=1)
+                        .btn 回复
 
 view('side')
     .section

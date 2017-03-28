@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click my-question-detail-*': 'toggleMore'
+    'click news-*': 'toggleMore'
 };
 
 exports.handlers = {
@@ -15,9 +15,9 @@ exports.handlers = {
     },
     toggleMore: function(id, e, target) {
         var region;
-        var el = $(target).parents('.activity-category')[0];
+        var el = $(target).parents('.comment-list')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/mymanage/topicdetail/news/mydetail', { id: id });
+        region.show('ask/mymanage/news/mydetail', { id: id });
     }
 };
 

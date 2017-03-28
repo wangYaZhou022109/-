@@ -87,8 +87,8 @@ view('menu')
 
 view('main')
     .tabs.line > ul
-        li.active 我的职位
-        li 产品助理
+        li 我的职位
+        li.active 产品助理
     .mt-1
         .tag-btn.active 发展职位
         .tag-btn 产品经理

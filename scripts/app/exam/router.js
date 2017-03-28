@@ -9,7 +9,10 @@ exports.routes = {
     'research-activity/research-answer-detail/:id': 'showResearchAnswerDetail',
     'research-activity/research-summary-detail/:id': 'showResearchSummaryDetail',
     'research-activity/research-detail/:id': 'showResearchDetail',
-    'research-activity/index-demo/:id': 'showIndexDemo'
+    'research-activity/index/:id': 'showIndex',
+    'research-activity/paper/:id': 'showResearchPaper',
+    'questionary/index': 'showQuestionary',
+    'questionary/research-detail/:id': 'showQuestionaryDetail'
 };
 
 exports.showIndex = function(id) {
@@ -44,6 +47,20 @@ exports.showResearchSummaryDetail = function(fir, id) {
     return this.app.show('content', 'exam/research-activity/research-summary-detail', { researchRecordId: id });
 };
 
+exports.showResearchPaper = function(fir, id) {
+    return this.app.show('content', 'exam/research-activity/paper', { researchId: id });
+};
+
+exports.showIndex = function(id) {
+    return this.app.show('content', 'exam/research-activity/index', { researchId: id });
+};
+exports.showQuestionary = function() {
+    return this.app.show('content', 'exam/questionary/index');
+};
+exports.showQuestionaryDetail = function(fir, id) {
+    return this.app.show('content', 'exam/questionary/research-detail', { researchQuestionaryId: id });
+};
+
 exports.interceptors = {
     'exam/paper': 'clearHeadAndBottom',
     'exam/answer-paper': 'clearHeadAndBottom',
@@ -51,7 +68,9 @@ exports.interceptors = {
     'exam/score-detail': 'clearHeadAndBottom',
     'research-activity/research-detail': 'clearHeadAndBottom',
     'research-activity/research-answer-detail': 'clearHeadAndBottom',
-    'research-activity/research-summary-detail': 'clearHeadAndBottom'
+    'research-activity/research-summary-detail': 'clearHeadAndBottom',
+    'research-activity/paper/': 'clearHeadAndBottom',
+    'questionary/research-detail': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {

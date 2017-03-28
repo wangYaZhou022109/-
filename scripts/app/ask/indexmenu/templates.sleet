@@ -1,31 +1,22 @@
 #!handlebars
 module 
     div(data-region='main')
-    div(data-region='popup')
+
 view('main') 
     .section.follow
         .clearfix
             dl
                 dt > echo(follow.contentCount)
-                dd > string('follow') + string('content')
+                dd > a(id='follow-9' href='javascript:;') > string('follow') + string('content')
             dl
                 dt > echo(follow.topicCount)
-                dd > string('follow') + string('topic')
+                dd > a(id='follow-10' href='javascript:;') > string('follow') + string('topic')
             dl
                 dt > echo(follow.expertCount)
-                dd > string('follow') + string('expert')
+                dd > a(id='follow-11' href='javascript:;') > string('follow') + string('expert')
         ul
             li > a(id='middle-menu-myquiz' href='javascript:;') > echo('我的提问')
             li > a(id='middle-menu-myshares' href='javascript:;') > echo('我的分享')
             li > a(id='middle-menu-myreply' href='javascript:;') > echo('我的回复')
             li > a(id='middle-menu-replyme' href='javascript:;') > echo('回复我的')
             li > a(id='middle-menu-mymanage' href='javascript:;') > echo('我是管理')
-
-
-view('popup')
-    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
-    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:10%;left:25%;') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active.title > string('my-question')
-        div(data-dynamic-key=popupstate.menu)

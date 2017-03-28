@@ -34,6 +34,6 @@ h4,.h4 {
     font-size: var(--h4);
 }
 
-input,button,.btn {
+input,button,.btn,select {
     height: var(--input-height);
 }

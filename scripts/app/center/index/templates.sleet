@@ -24,7 +24,7 @@ view('top')
             .info-row
                 if(member.isContact)
                     .item > i.iconfont.icon-warn + span 需求方
-                if(member.isClass)
+                if(member.isClassstff)
                     .item > i.iconfont.icon-mark + span 班务
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师
@@ -39,10 +39,10 @@ view('notice')
         .pull-left.m-right > i.iconfont.icon-notice
         b.title > setting('center.index.notice')
         .navigator
-            .icon.arrow.prev > .iconfont.icon-arrow-down#next
-            .icon.arrow.next > .iconfont.icon-arrow-up#pre
-            .icon > .iconfont.icon-more
-        ul
+            .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
+            .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
+            .icon#showMore > .iconfont.icon-more
+        ul > each(announcements)
             li > echo(title)
 
 view('menu')

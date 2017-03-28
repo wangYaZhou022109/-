@@ -38,6 +38,7 @@ module.exports = {
     'report-2': '内容不准确',
     'report-3': '垃圾信息',
     'report-4': '其他',
+    recommend: '推荐',
     meta: '荟萃',
     my: '我的',
     me: '我',

@@ -1,7 +1,7 @@
 .topic-main {
     & .page1 {
         /*z-index: 1;*/
-        position: absolute;
+        /*position: absolute;*/
     }
     & .page2 {
         /*z-index: 2;*/
@@ -12,8 +12,11 @@
     }
     & .aboutme-ul {
         & .aboutme-li {
-            width: 14%;
+            width: calc(var(--section-gap)*2);
             padding-right: calc(var(--large-space)*2);
+            & .img-dv {
+                width: 100%;
+            }
             & p.introduce {
                 line-height: 0.6;
             }
@@ -45,11 +48,13 @@
             }
             & .recommend-total {
                 height: 100%;
-                background-color: var(--font-sub-color);
+                & img {
+                    width: 100%;
+                    height: 100%;
+                }
             }
             & .recommend-item {
                 width: 100%;
-                color: var(--white);
                 cursor: pointer;
                 position: absolute;
                 bottom: 0;

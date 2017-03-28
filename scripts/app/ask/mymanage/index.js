@@ -28,14 +28,16 @@ exports.store = {
         },
         reviewed: function() {
             var reviewed = this.models.reviewed;
-            reviewed.set({ id: 1 });
+            reviewed.clear();
+            reviewed.params = { auditStatus: 1 };
             return this.get(reviewed);
         },
         display: function(payload) {
-            var params = payload;
             var reviewed = this.models.reviewed;
-            reviewed.set({ id: 1 });
-            reviewed.params = params;
+            var state = this.models.state;
+            reviewed.clear();
+            state.auditStatus = payload.auditStatus;
+            reviewed.params = payload;
             return this.get(reviewed);
         }
     }

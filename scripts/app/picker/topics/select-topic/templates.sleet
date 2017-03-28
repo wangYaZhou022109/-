@@ -1,22 +1,33 @@
 #!handlebars
 
-module
-    .title
-        span
-        .h1 &nbsp;
-        .toolbox(data-region='toolbox')
-        .hr
-    .content-wrapper(data-region='content')
-
-view('toolbox') > form.vertical
-    input.input.tags.single-line(name='topicName')
-    .addon.btn#searchTopic > i.icon-search
-    a(id='type0' data-name='typeId' data-value='0') > echo('全部')
-    each(types)
-        a(id='type'+id data-name='typeId' data-value=id) > echo(name)
-view('content')
+module > .changetopic-page
+    .changetopic-title(data-region="title")
+    .changetopic-contents
+        .topic-total.layout-mt-small
+            .topic-category.layout-mb-small(data-region="types")
+            .topics.m-top(data-region="contents")
+view('title') > form.vertical
+    .change-title
+        #  .like
+        #      span.m-right 擅长话题：
+        #      .tag-btn.radius
+        #          | 话题
+        #          .close.iconfont.icon-close
+        #      .tag-btn.radius
+        #          | 话题
+        #          .close.iconfont.icon-close
+        #      .tag-btn.radius
+        #          | 话题
+        #          .close.iconfont.icon-close
+    .topic-search.relative
+        input#searchTopic.input.w-full.p-left(placeholder="搜索你擅长的" name='topicName')
+        .iconfont.icon-search.topic-icon
+view('types')
+    a.normal.m-right(id='type'+id data-name='typeId' data-value='') 全部
+        each(types)
+            a.sub-title.m-right(id='type'+id data-name='typeId' data-value=id) > echo(name)
+view('contents')
     each(topics)
-        .btn(id='select_'+id value=id)
+        .tag-btn.radius(id='select_'+id name='select_'+id value=id class=checkStyle)
             echo(name)
-            input(type='hidden' id='hid_'+id value=checked)
-
+            input(type='hidden' id='hid_'+id name='hid_'+id value=checked)

@@ -79,11 +79,11 @@ view('chapter')
                                         i.iconfont.icon-reload-full
                                         if(showRate)
                                             span.progress > percent(progress.completedRate)
-                                        span > map('course-study-status' progress.finishStatus)
+                                        span > echo(progress.finishStatus)
                                 else
                                     .item.start
                                         i.iconfont.icon-play-full
-                                        span > map('course-study-status' 0)
+                                        span 未开始
 
 view('note')
     .course-side-title-row
@@ -115,13 +115,7 @@ view('info')
     .title-row
         .inline-block.layout-mr > .h3 > echo(course.name)
         .inline-block.layout-mr
-            .star-wrapper
-                .star-bar > .star(style='width:'+score.scorePercent+'%')
-                if(course.addType)
-                    if(score.avgScore)
-                        .num > echo(score.avgScore)
-                    else
-                        .inline-block.sub-text > echo('暂无评分')
+            #star-score
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > #share
             .inline-block.m-left
@@ -175,3 +169,8 @@ view('student')
         .grid-row
             each(lastestUser)
                 .col-md-3 > img.block(src=headPortrait title=fullName)
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(researchActivity.questionaryDetail)
