@@ -11,11 +11,9 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-
     clientId: 13,
     provider: 'https://oauth9.zhixueyun.com/',
     returnTo: 'http://localhost'
-
 };
 // @endif
 

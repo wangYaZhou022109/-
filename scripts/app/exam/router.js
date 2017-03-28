@@ -9,7 +9,9 @@ exports.routes = {
     'research-activity/research-answer/:id': 'showResearchAnswerDetail',
     'research-activity/research-detail/:id': 'showResearchDetail',
     'research-activity/index/:id': 'showIndex',
-    'research-activity/paper/:id': 'showResearchPaper'
+    'research-activity/paper/:id': 'showResearchPaper',
+    'questionary/index': 'showQuestionary',
+    'questionary/research-detail/:id': 'showQuestionaryDetail'
 };
 
 exports.showIndex = function(id) {
@@ -47,6 +49,12 @@ exports.showResearchPaper = function(fir, id) {
 exports.showIndex = function(id) {
     return this.app.show('content', 'exam/research-activity/index', { researchId: id });
 };
+exports.showQuestionary = function() {
+    return this.app.show('content', 'exam/questionary/index');
+};
+exports.showQuestionaryDetail = function(fir, id) {
+    return this.app.show('content', 'exam/questionary/research-detail', { researchQuestionaryId: id });
+};
 
 exports.interceptors = {
     'exam/paper': 'clearHeadAndBottom',
@@ -55,7 +63,8 @@ exports.interceptors = {
     'exam/score-detail': 'clearHeadAndBottom',
     'research-activity/research-detail': 'clearHeadAndBottom',
     'research-activity/research-answer': 'clearHeadAndBottom',
-    'research-activity/paper/': 'clearHeadAndBottom'
+    'research-activity/paper/': 'clearHeadAndBottom',
+    'questionary/research-detail': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {
