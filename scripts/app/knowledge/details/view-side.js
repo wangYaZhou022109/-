@@ -5,7 +5,8 @@ exports.bindings = {
     download: false,
     recommends: true,
     integral: true,
-    readerMembers: true
+    readerMembers: true,
+    downCount: false
 };
 exports.dataForTemplate = {
     downUrl: function(data) {
@@ -29,12 +30,19 @@ exports.actions = {
 };
 
 exports.events = {
-    'click upload': 'showUpload'
+    'click upload': 'showUpload',
+    'click download': 'download'
 };
 
 exports.handlers = {
     showUpload: function() {
         var model = this.module.items['knowledge/index/modal'];
         this.app.viewport.modal(model);
+    },
+    download: function() {
+        var url = this.bindings.download.getFullUrl() + '?id=' + this.bindings.knowledge.data.resourceId;
+        this.module.dispatch('downCount', function() {
+            window.location.href = url;
+        });
     }
 };

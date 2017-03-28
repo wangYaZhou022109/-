@@ -49,9 +49,10 @@ view('side')
     .page-side > .container
         section.section
             | 您当前积分：
-            b > echo(integral.totalScore)
+            b > pick(integral.totalScore 0)
             | 分
-            a.btn.block.layout-mt-small.big(href=downUrl download=knowledge.name) > echo('下载当前阅览知识（-' + knowledge.integral+'积分）')
+            a.btn.block.layout-mt-small.big#download(href=downUrl download=knowledge.name)
+                echo('下载当前阅览知识（-') + pick(knowledge.integral 0) + echo('积分）')
             .btn.block.m-top.big.upload-knowledge#upload 上传新知识（+2积分）
 
         section.section

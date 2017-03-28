@@ -1,5 +1,8 @@
+var _ = require('lodash/collection'),
+    maps = require('./app/util/maps');
 exports.bindings = {
-    contents: true
+    contents: true,
+    down: false
 };
 
 exports.dataForTemplate = {
@@ -7,5 +10,24 @@ exports.dataForTemplate = {
         var moduleHomeConfig = data.moduleHomeConfig || {};
         moduleHomeConfig = this.module.renderOptions.moduleHomeConfig;
         return moduleHomeConfig;
+    },
+    contents: function(data) {
+        var array = {},
+            downUrl = this.bindings.down.getFullUrl();
+        _.map(data.contents, function(content, i) {
+            var r = content,
+                imageUrl = maps['home-default-image'][r.dataType],
+                dataUrl = maps['home-data-url'][r.dataType];
+            if (r.dataImage) {
+                imageUrl = downUrl + '?id=' + r.dataImage;
+            }
+            if (r.image) {
+                imageUrl = downUrl + '?id=' + r.image;
+            }
+            r.imageUrl = imageUrl;
+            r.dataUrl = dataUrl;
+            array[i + 1] = r;
+        });
+        return array;
     }
 };

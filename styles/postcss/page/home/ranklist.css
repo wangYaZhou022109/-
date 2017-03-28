@@ -1,5 +1,6 @@
 .home-page {
     & .ranklist-section {
+        overflow: hidden;
         & .bar {
             width: 33.33%;
             float: left;
@@ -62,11 +63,12 @@
                 border-radius: 50%;
                 width: 1.5em;
                 height: 1.5em;
-                line-height: 1.5em;
+                line-height: 1em;
                 text-align: center;
 
                 & .iconfont {
                     transform: scale(.8);
+                    margin-top: 10%;
                 }
             }
 

@@ -14,17 +14,21 @@ view('headfile')
 view('user') > .form-row.textarea-row
     label.m-top.required 名称：
     .content > input.input(placeholder='输入您的名称' name ='name' value= findUser.fullName readonly='readonly')
-view('topic') > .form-row.textarea-row
-    label 擅长话题：
-    .content
-        .tag-input
-            each(state)
-                .tag-btn.radius(id = 'del-topic-'+ id data-name='id' data-value=id ) > .close.iconfont.icon-close + echo(name)
-            input(placeholder='输入标签名按回车即可添加,最多添加五个' readonly='readonly')
-        .sub-row#tag-list 
-            span.small-font 推荐标签：
-            each(topicname)
-                .tag-btn.radius.selected(id = 'add-topic-' + id data-name='id' data-value=id ) > echo(name)
+view('topic') 
+    .form-row.textarea-row
+        label.required > string('related-topics') + echo(':') 
+        #select-topic
+#  > .form-row.textarea-row
+#      label 擅长话题：
+#      .content
+#          .tag-input
+#              each(state)
+#                  .tag-btn.radius(id = 'del-topic-'+ id data-name='id' data-value=id ) > .close.iconfont.icon-close + echo(name)
+#              input(placeholder='输入标签名按回车即可添加,最多添加五个' readonly='readonly')
+#          .sub-row#tag-list 
+#              span.small-font 推荐标签：
+#              each(topicname)
+#                  .tag-btn.radius.selected(id = 'add-topic-' + id data-name='id' data-value=id ) > echo(name)
 
 view('details') > .form-row.textarea-row
     label.required 您的优势：
