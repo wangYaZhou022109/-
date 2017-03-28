@@ -314,6 +314,9 @@ module.exports = {
     'exam-source-type': {
         1: '考试活动', 2: '在线课程', 3: '专题', 4: '班级', 5: '直播'
     },
+    'research-activity-status': {
+        1: '未发布', 2: '未开始', 3: '进行中', 4: '已结束', 5: '已撤销'
+    },
     get: function(k) {
         return _.map(this[k], function(value, key) {
             return { key: key, value: value };
