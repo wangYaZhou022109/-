@@ -8,3 +8,9 @@ exports.components = [{
         model: 'img'
     }
 }];
+
+exports.mixin = {
+    getData: function() {
+        return this.components.content.html();
+    }
+};

@@ -1,0 +1,19 @@
+#!handlebars
+
+module > .class-register-page
+    .container(data-region='side')
+
+
+view('side')
+    .btn#do-research-5fdf896f-55f5-4605-b1ce-75405815d1f5 进入调研
+
+view('research-tips')
+    .container
+        .row > .col-sm-12
+            echo(research.content)
+        .row > .col-sm-12
+            each(research.buttons)
+                if(target)
+                    a(id='button-' + id href=url target=target) > echo(text)
+                else
+                    a(id='button-' + id) > echo(text)

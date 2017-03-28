@@ -1,9 +1,12 @@
+var D = require('drizzlejs');
+
 exports.items = {
     top: 'top',
     notice: 'notice',
     menu: 'menu',
     'center/edit': { isModule: true },
-    interest: 'interest'
+    interest: 'interest',
+    'center/index/more': { isModule: true }
 };
 
 exports.store = {
@@ -79,6 +82,18 @@ exports.store = {
                 page = this.models.page.data.value;
             recommendList.params = { page: page };
             me.get(recommendList);
+        },
+        prevNotice: function(payload) {
+            var me = this,
+                announcements = me.models.announcements;
+            D.assign(announcements.params, payload);
+            me.get(announcements);
+        },
+        nextNotice: function(payload) {
+            var me = this,
+                announcements = me.models.announcements;
+            D.assign(announcements.params, payload);
+            me.get(announcements);
         }
     }
 };
