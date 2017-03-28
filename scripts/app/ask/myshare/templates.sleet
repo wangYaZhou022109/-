@@ -1,16 +1,8 @@
 #!handlebars
 module 
     .content
-        div(data-region='popup')  
         div(data-region='main')
 
 view('main')
     .section
         .btn.block.big.custom-bg-color-5.m-top(id='article-article' data-name='id' data-value='2') > .inline-block.iconfont.icon-edit-2 + .inline-block > string('write') + string('article')
-view('popup')
-    div(class='shield' 'hidden' style='height:3000px;position:absolute;top:0;bottom:0;left:0;right:0;background:#000;opacity:0.01;z-index: 9998')
-    .catalog-view('hidden' style='width:800px;margin:0 auto; position:absolute;z-index: 9999;top:70%;left:25%;') > .catalog-view-box
-        .clearfix.catalog-view-nav
-            i#closeCatalog.pull-right.iconfont.icon-full-screen
-            h3.active.title > string('my-question')
-        div(data-dynamic-key='article')

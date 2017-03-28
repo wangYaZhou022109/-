@@ -28,6 +28,7 @@ module.exports = {
     explain: '说明',
     'from-topic': '关联标签',
     follow: '关注',
+    followers: '关注者',
     finish: '完成',
     hot: '热门',
     'related-topics': '关联话题',
