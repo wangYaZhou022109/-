@@ -1,0 +1,315 @@
+#!handlebars
+
+moudle > .managements-page
+    .managements-title(data-region="managements-title")
+    .managements-ordertime(data-region="managements-ordertime")
+    .managements-classinfo(data-region="managements-classinfo")
+    .managements-dateplan(data-region="managements-dateplan")
+
+view('managements-title')
+    .container
+        .managements-main-title.layout-mt-small
+            .common-title.pull-left.layout-mr-small.padding 班级名称班级名称班级名称
+            span.bg-main-color 未实施
+            span.bg-main-color 进行中
+            span.bg-main-color 已结束
+            .tag-btn.radius.pull-right.active 进入班级
+        .managements-tabs
+            ul.clearfix.layout-mt
+                li.pull-left#managements-tab-1.active
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 预定时间
+                li.pull-left#managements-tab-2
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 班级基本信息
+                li.pull-left#managements-tab-3
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 日程安排
+                li.pull-left#managements-tab-4
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 配额管理
+                li.pull-left#managements-tab-5
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 发布通知
+                li.pull-left#managements-tab-6
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 成员管理
+                li.pull-left#managements-tab-7
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 班务管理
+                li.pull-left#managements-tab-8
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 统计与评估
+                li.pull-left#managements-tab-9
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 学习
+                li.pull-left#managements-tab-10
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 预定时间
+
+view('managements-ordertime')
+    #managements-content-1
+        .container.bg-highlight.overflow
+            section.managements-content-area
+                table.table
+                    tr
+                        td > label 培训班名称
+                        td 培训班名称
+                        td > label MIS编号
+                        td 093141102
+                    tr
+                        td > label 需求方
+                        td 中国移动通信集团
+                        td > label 需求方联系人
+                        td 某某某
+                    tr
+                        td > label 联系电话
+                        td > input.input(type="text")
+                        td 邮箱
+                        td > input.input(type="text")
+                    tr
+                        td 计划人数
+                        td 20
+                        td 培训天数
+                        td 20
+                    tr
+                        td > label.label.required 是否外部举办
+                        td
+                            input(type="radio" name="radio" checked="true") + label.layout-mr-small 是
+                            input(type="radio" name="radio") + label 否
+                        td > label.label 需求调研方式
+                        td > input.input(placeholder="如：无、工作分析、领导访谈、电话调研")
+                    tr
+                        td > label 往返日期
+                        td
+                            input.input.pull-left
+                            .btn 选择日期
+                    tr
+                        td > label 培训目标
+                        td(colspan="3") > textarea(cols="100" rows="5")
+                    tr
+                        td > label 培训对象
+                        td(colspan="3") > textarea(cols="100" rows="5")
+
+view('managements-classinfo')
+    #managements-content-2
+        .container.bg-highlight.overflow
+            section.managements-content-area
+                a 1111
+
+view('managements-dateplan')
+    #managements-content-3
+        .container.bg-highlight.overflow.dateplan-padding
+            section.layout-mt-small
+                .clearfix
+                    .tag-btn.radius.pull-right 导出安排
+                .pull-left
+                    label.m-right 线下课程安排
+                    select
+                        option 第一周（3月4日~3月6日）
+                        option 第二周（3月4日~3月6日）
+                        option 第三周（3月4日~3月6日）
+                .pull-right
+                    .tag-btn.radius#weektopic 配置周主题
+                    .tag-btn.radius#addclass 添加课程
+                    .tag-btn.radius 导入课程
+                    span 最小化 -
+                table.table
+                    tr
+                        th 日期
+                        th 时间
+                        th 课程名称
+                        th 讲师名称
+                        th 讲师单位
+                        th 讲师职务
+                        th 课酬实付
+                        th 课件
+                        th 操作
+                    tr
+                        td(rowspan="4") 2016-12-21
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                .pull-left.layout-mt-small
+                    label 在线资源
+                .pull-right.layout-mt-small
+                    .tag-btn.radius 配置主题
+                    .tag-btn.radius 添加课程
+                    span 最小化 -
+                table.table
+                    tr
+                        th 主题
+                        th 课程名称
+                        th 是否必修
+                        th 操作
+                    tr
+                        td(rowspan="2") 主题名称
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td(rowspan="2") 主题名称
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                .pull-left.layout-mt-small
+                    label 调研与问卷
+                .pull-right.layout-mt-small
+                    .tag-btn.radius 添加考试
+                    .tag-btn.radius 添加调研
+                    .tag-btn.radius 添加评估
+                    span 最小化 -
+                table.table
+                    tr
+                        th 序号
+                        th 问卷名称
+                        th 类型
+                        th 开始时间
+                        th 结束时间
+                        th 操作
+                    tr
+                        td 1
+                        td 考试名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 2
+                        td 调研名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 3
+                        td 评估名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                .pull-left.layout-mt-small
+                    label 调研与问卷
+                .pull-right.layout-mt-small
+                    .tag-btn.radius 添加作业
+                    span 最小化 -
+                table.table
+                    tr
+                        th 序号
+                        th 作业名称
+                        th 类型
+                        th 开始时间
+                        th 结束时间
+                        th 操作
+                    tr
+                        td 1
+                        td 考试名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 2
+                        td 调研名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 3
+                        td 评估名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
