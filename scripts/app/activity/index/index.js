@@ -29,7 +29,7 @@ exports.store = {
             url: '../exam/exam/details',
             type: 'pageable',
             root: 'items',
-            pageSize: 6
+            pageSize: 60
         },
         exam: { url: '../exam/exam/exam-sign-up' },
         currentExam: { },

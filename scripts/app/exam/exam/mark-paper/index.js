@@ -60,8 +60,7 @@ exports.store = {
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
-                            // singleMode: exam.paperShowRule === constant.SINGLE_MODE,
-                            singleMode: true,
+                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
                             currentQuestion: types.getFirstQuestion()
                         };
                         this.save();

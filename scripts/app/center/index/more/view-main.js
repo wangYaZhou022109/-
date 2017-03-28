@@ -1,3 +1,3 @@
 exports.bindings = {
-    topicRank: true
+    announcements: true
 };
