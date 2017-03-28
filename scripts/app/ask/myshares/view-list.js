@@ -1,5 +1,5 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
+// var D = require('drizzlejs');
+// var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
@@ -23,7 +23,7 @@ exports.handlers = {
        // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
-        console.log(payload);
+        // console.log(payload);
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
             // region = new D.Region(this.app, this.module, el, data[1]);
