@@ -12,6 +12,7 @@ exports.items = {
     fmtrainees: '',
     twoBrings: '',
     questionnaire: '',
+    main: 'main',
     'train/service/views/commit-task': { isModule: true }
 };
 
