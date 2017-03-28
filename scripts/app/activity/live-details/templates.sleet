@@ -21,7 +21,7 @@ view('side')
                                 compare(businessType 'eq' 0)
                                     a(href='#/exam/answer-paper/'+ businessId target='_blank') 参与考试
                                 compare(businessType 'eq' 1)
-                                    a 参与调研
+                                    a(href='#/exam/research-activity/research-summary-detail/'+ businessId target='_blank') 参与调研
                                 compare(businessType 'eq' 2)
                                     a 参与评估
                             .text-overflow

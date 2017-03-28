@@ -122,7 +122,7 @@ view('list')
                             .bottom.sub-text
                                 i.iconfont.icon-favorite
                                     echo(subNumber)
-                                i.iconfont.icon-favorite.m-left
+                                i.iconfont.icon-date.m-left
                                     date(startTime)
         .h3.m-bottom 考试
         #swiper-3 > ul.full

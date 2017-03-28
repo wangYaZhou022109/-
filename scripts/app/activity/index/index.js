@@ -20,7 +20,7 @@ exports.store = {
         gensees: { url: '../course-study/gensee-student/list',
             type: 'pageable',
             root: 'items',
-            pageSize: 20 },
+            pageSize: 6 },
         activity: { url: '../exam/activity' },
         params: { data: { all: true } },
         down: { url: '../human/file/download' },
@@ -79,6 +79,20 @@ exports.store = {
             if (page) {
                 this.models.exams.turnToPage(page + 1);
                 this.get(this.models.exams);
+            }
+        },
+        geenseLeft: function() {
+            var page = this.models.geenses.params.page;
+            if (page && page > 1) {
+                this.models.geenses.turnToPage(page - 1);
+                this.get(this.models.geenses);
+            }
+        },
+        geenseRight: function() {
+            var page = this.models.geenses.params.page;
+            if (page) {
+                this.models.geenses.turnToPage(page + 1);
+                this.get(this.models.geenses);
             }
         },
         researchLeft: function() {
