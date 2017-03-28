@@ -53,7 +53,7 @@ exports.store = {
             score.data.businessId = subject.data.id;
             score.data.businessType = 1;
             return this.save(score).then(function(data) {
-                subject.data.courseScore = data[0];
+                subject.data.avgScore = data[0].avgScore || subject.data.avgScore;
                 subject.changed();
             });
         }

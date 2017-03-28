@@ -20,20 +20,6 @@ view('banner')
                 .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
             p.info-detail > echo(expert.introduce)
 
-view('test') 
-    div
-        ul > li
-            a(id='menu-expertsanswer' href='javascript:;')(class ='active') > string('question') + string('answer')
-            a(id='menu-expertssharing' href='javascript:;')(class ='active') > string('my') + string('share')
-            hr
-            li 
-                .btn.radius(id='expert-myanswer' data-name='id' data-value='1' style='height:50px;width:150px;text-align:center') 
-                    string('invitation') + string('answer')
-                .btn.radius(id='expert-myself' data-name='id' data-value='1' style='height:50px;width:150px;text-align:center') 
-                    string('my') + string('answer')
-    div(data-dynamic-key=leftstate.menu)
-    div(data-dynamic-key='iamexpertright')
-
 view('right') 
     div(data-dynamic-key='iamexpertright')
 view('left') 

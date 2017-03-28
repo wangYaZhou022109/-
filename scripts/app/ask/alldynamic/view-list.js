@@ -1,5 +1,5 @@
 // var D = require('drizzlejs');
-// var $ = require('jquery');
+var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
@@ -27,12 +27,7 @@ exports.handlers = {
         }
     },
     discuss: function(payload) {
-        var el = this.$(payload);
-        if (el.hidden === false) {
-            el.hidden = true;
-        } else if (el.hidden === true) {
-            el.hidden = false;
-        }
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
     report: function(payload) {
         var id = payload,
@@ -47,6 +42,7 @@ exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click publish-*': 'publish',
+    'click reply-*': 'reply',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
     'click del-discuss-*': 'deldiscuss'
@@ -85,6 +81,9 @@ exports.dataForActions = {
         return data;
     },
     publish: function(payload) {
+        return payload;
+    },
+    reply: function(payload) {
         return payload;
     }
 };
