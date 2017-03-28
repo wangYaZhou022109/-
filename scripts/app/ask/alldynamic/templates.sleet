@@ -7,11 +7,11 @@ view('list')
         li
             .user-pic > img(src=createUser.headPortrait)
             .comment-content
-                .h4 > echo(title) 
+                .h4 > a(id='myquiz-details-' + id + '_' + questionId ) > echo(title) 
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
-                    echo(content)
+                    @echo(content)
                 .user-info
                     span
                         compare(createUserId 'eq' me) 

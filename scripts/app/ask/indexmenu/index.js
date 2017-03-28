@@ -1,12 +1,11 @@
 exports.items = {
     main: 'main',
-    popup: 'popup'
+    'ask/mynotice': { isModule: true }
 };
 
 exports.store = {
     models: {
-        follow: { url: '../ask-bar/concern/follow' },
-        popupstate: {}
+        follow: { url: '../ask-bar/concern/follow' }
     },
     callbacks: {
         init: function() {

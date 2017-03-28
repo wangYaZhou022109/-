@@ -15,13 +15,13 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > echo(title)
-                        .comment-text > echo(content)
+                        .comment-text > echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('讨论了'+replyman + '的问题') 
-                            span.sub-text > data(createTime)
+                            span.sub-text > data(questionDiscuss.createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题:') + each(question.topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题:') + a(id='myreply-details1-'+id +'_'+ question.id data-name='id' data-value=question.id href='javascript:;')(class ='active') > echo(question.title)
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
@@ -47,7 +47,7 @@ view('list')
                             span > echo('回复了'+replyman + '对问题的讨论') 
                             span.sub-text > data(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题:') + each(question.topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题:') + a(id='myreply-details2-'+id +'_'+ question.id data-name='id' data-value=question.id  href='javascript:;')(class ='active') > echo(question.title)
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
@@ -68,13 +68,13 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > echo(title)
-                        .comment-text > echo(content)
+                        .comment-text > echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('讨论了'+replyman + '的分享') 
-                            span.sub-text > data(createTime)
+                            span.sub-text > data(questionDiscuss.createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(question.topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + a(id='myreply-details-1' + id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(question.title)
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论
@@ -100,7 +100,7 @@ view('list')
                             span > echo('回复了'+replyman + '对分享的讨论') 
                             span.sub-text > data(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(question.topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + a(id='myreply-details-2' + id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(question.title)
                             .text-right
                                 .item > a.normal(href='javascript:;') 关注
                                 .item > a.normal(href='javascript:;') 添加讨论

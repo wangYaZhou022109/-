@@ -11,17 +11,11 @@ view('top')
         label.required > string('question-title')
         .content > input.input(name='title'  value=''  x-rule='required') + .tips 0/60
 
-view('topic') > .form-row.textarea-row
-    label > string('related-topics') + echo(':')
-    .content
-        .tag-input
-            each(state)
-                .tag-btn.radius(id = 'del-topic-'+ id data-name='id' data-value=id ) > .close.iconfont.icon-close + echo(name)
-            input(placeholder='输入标签名按回车即可添加,最多添加五个' readonly='readonly')
-        .sub-row#tag-list 
-            span.small-font 推荐标签：
-            each(topicname)
-                .tag-btn.radius.selected(id = 'add-topic-' + id data-name='id' data-value=id ) > echo(name)
+view('topic') 
+    .form-row.textarea-row
+        label > string('related-topics') + echo(':') 
+        #select-topic
+
 view('details')
     .form-row
         .content > a > i.iconfont.icon-link#uploadFile + span 
@@ -30,10 +24,10 @@ view('details')
                     echo(enclosureName)
             else
                 string('upload-attachments')
-view('edit')
+view('edit') > form
     .form-row.textarea-row
         label > string('detailed-description')
-        .content > textarea.input(rows='5')(name='content' id='content') + .tips 0/60
+        .content > textarea.input(rows='5' name='content' id='content' value='') + .tips 0/60
 
 view('upload')
     .row
