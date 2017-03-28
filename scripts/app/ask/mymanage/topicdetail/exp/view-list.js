@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click dynamic-*': 'toggleMore'
+    'click mymanage-details-*': 'showDetails'
 };
 exports.actions = {
     'click setEssenceStatus-*': 'setEssenceStatus',
@@ -25,6 +25,19 @@ exports.handlers = {
         if (id.indexOf(',') !== -1) {
             data = id.split(',');
             region.show('ask/myquiz/details', { id: data[1] });
+        }
+    },
+    showDetails: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
+        var data = { },
+            id = payload;
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/mymanage/topicdetail/exp/details', { id: data[1] });
         }
     }
 };

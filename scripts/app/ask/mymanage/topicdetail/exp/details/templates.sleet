@@ -71,13 +71,14 @@ view('main')
                             .item > span(id ='report-' + id data-name='id' data-value=id) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
-    .section
+    .m-bottom
         compare(question.concernList.length 'gt' 0)
             .btn.block.layout-mt-small.big(id='unfollow-question' data-name='id' data-value=expert.member.id) > string('unfollow')
         else
             .btn.block.layout-mt-small.big(id='follow-question' data-name='id' data-value=expert.member.id) > string('my-follow')
-    #  div(data-dynamic-key=followcount.menu) 
-
+    #  div(data-dynamic-key=followcount.menu)  
+    .btn.m-right > echo('关闭问题')
+    .btn.custom-bg-color-3 > echo('设为精品')
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)
 

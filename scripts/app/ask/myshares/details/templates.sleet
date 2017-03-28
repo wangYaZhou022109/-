@@ -26,7 +26,10 @@ view('main')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') > each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
-            .comment-text.m-top > echo(content)
+            .comment-text.m-top 
+                compare(jsonImg.length 'gt' 0)
+                    img(src=jsonImg)
+                @echo(details.content)
             .comment-operation
                 .pull-right
                     .item
