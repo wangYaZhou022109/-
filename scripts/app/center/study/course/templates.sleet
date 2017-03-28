@@ -39,4 +39,9 @@ view('main')
             .btn-row
                 a.normal(href=btnUrl target='_blank')
                     .btn > echo(btnText)
+                compare(isRequired 'eq' 0)
+                    i.iconfont.icon-close(id='delete-'+id data-name='id' data-value=id)
+                else
+                    i.iconfont.icon-blank &nbsp;
+
     #pager.pagination
