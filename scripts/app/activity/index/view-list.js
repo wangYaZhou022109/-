@@ -23,7 +23,9 @@ exports.actions = {
     'click exam-left': 'examLeft',
     'click exam-right': 'examRight',
     'click research-left': 'researchLeft',
-    'click research-right': 'researchRight'
+    'click research-right': 'researchRight',
+    'click gensee-left': 'genseeLeft',
+    'click gensee-right': 'genseeRight',
 };
 exports.handlers = {
     toggleItem: function(el) {
