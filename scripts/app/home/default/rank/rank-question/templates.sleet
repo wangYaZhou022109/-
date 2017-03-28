@@ -12,49 +12,9 @@ view('main')
             .title-more
                 span.sub-title 浏览人数排行榜
 
-        ul
+        ul > each(rank)
             li
                 .pull-right
-                    b 123
+                    b > echo(browseNum)
                 .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
-            li
-                .pull-right
-                    b 123
-                .cont.text-overflow
-                    span 逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例逆向思维训练实例
+                    span > echo(title)
