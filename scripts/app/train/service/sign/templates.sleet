@@ -49,10 +49,10 @@ view('edit') > form.vertical
     input.input#place(name='place'  value=sign.place)
     br
     label(class='required') > echo('签到开始时间')
-    input.input#startTime(name='startTime' value=dateTime(sign.startTime))
+    input.input#startTime(name='startTime' value=dateTime(sign.startTime) x-rule='required')
     br
     label(class='required') > echo('签到结束时间')
-    input.input#endTime(name='endTime' value=dateTime(sign.endTime))
+    input.input#endTime(name='endTime' value=dateTime(sign.endTime) x-rule='required')
     br
     label > echo('迟到时间设置')
     input.input#lateTime(name='lateTime' value=dateTime(sign.lateTime))

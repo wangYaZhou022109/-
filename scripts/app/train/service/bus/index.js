@@ -92,16 +92,23 @@ exports.store = {
                 optionModel = this.models.optionModel,
                 bus = this.models.bus,
                 buss = this.models.buss,
+                startTime = bus.data.startTime,
+                endTime = bus.data.endTime,
                 me = this;
             optionModel.clear();
             D.assign(bus.data, {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            me.save(bus).then(function() {
-                me.app.message.success('保存成功');
-                me.get(buss);
-            });
+            if (startTime >= endTime) {
+                this.app.message.alert('结束时间必须大于开始时间');
+            } else {
+                me.save(bus).then(function() {
+                    me.app.message.success('保存成功');
+                    me.app.viewport.closeModal();
+                    me.get(buss);
+                });
+            }
         },
         updateName: function(data) {
             var optionList = this.models.optionList.data,

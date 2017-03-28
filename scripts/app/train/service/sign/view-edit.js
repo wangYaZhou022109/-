@@ -36,10 +36,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    save: function() {
-        this.app.message.success('保存成功！');
-        this.app.viewport.closeModal();
-    }
 };
 
 exports.components = [function() {

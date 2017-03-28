@@ -35,7 +35,7 @@ view('main')
 
 view('edit') > form.vertical
     label(class='required') > echo('统计主题')
-    input.input#name(name='name'  value=bus.name  x-rule='required')
+    input.input#name(name='name'  value=bus.name x-rule='required')
     br
     label(class='required') > echo('开始时间')
     input.input#startTime(name='startTime' value=dateTime(bus.startTime) x-rule='required')

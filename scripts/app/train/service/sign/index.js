@@ -68,12 +68,26 @@ exports.store = {
         save: function(payload) {
             var sign = this.models.sign,
                 signs = this.models.signs,
+                startTime = payload.startTime,
+                endTime = payload.endTime,
+                lateTime = payload.lateTime,
                 me = this;
-            sign.set(payload);
-            this.save(sign).then(function() {
-                me.app.message.success('保存成功');
-                me.get(signs);
-            });
+            if (startTime >= endTime) {
+                this.app.message.alert('结束时间必须大于开始时间');
+            } else if (lateTime !== null && lateTime !== '') {
+                if (startTime >= lateTime) {
+                    this.app.message.alert('迟到时间必须大于开始时间');
+                } else if (lateTime >= endTime) {
+                    this.app.message.alert('结束时间必须大于迟到时间');
+                }
+            } else {
+                sign.set(payload);
+                this.save(sign).then(function() {
+                    me.app.message.success('保存成功');
+                    me.app.viewport.closeModal();
+                    me.get(signs);
+                });
+            }
         },
     }
 };
