@@ -91,13 +91,17 @@ exports.store = {
                 delOptionList = this.models.delOptionList,
                 optionModel = this.models.optionModel,
                 bus = this.models.bus,
+                buss = this.models.buss,
                 me = this;
             optionModel.clear();
             D.assign(bus.data, {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            return me.save(bus);
+            me.save(bus).then(function() {
+                me.app.message.success('保存成功');
+                me.get(buss);
+            });
         },
         updateName: function(data) {
             var optionList = this.models.optionList.data,
@@ -111,8 +115,14 @@ exports.store = {
             this.models.optionList.changed();
         },
         remove: function(payload) {
-            this.models.bus.set(payload);
-            return this.del(this.models.bus);
+            var bus = this.models.bus,
+                buss = this.models.buss,
+                me = this;
+            bus.set(payload);
+            this.del(bus).then(function() {
+                me.app.message.success('删除成功');
+                me.get(buss);
+            });
         }
     }
 };
