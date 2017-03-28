@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 exports.routes = {
     'index/:id': 'showIndex',
     'sign-detail': 'showSignDetail',
@@ -5,7 +7,7 @@ exports.routes = {
     response: 'showResponse',
     classinfos: 'showClassInfos',
     projects: 'showProjects',
-    train: 'showTrain'
+    'class-detail/task-detail/:id': 'showTaskDetail'
 };
 
 exports.showIndex = function(id) {
@@ -28,7 +30,16 @@ exports.showProjects = function() {
     return this.app.show('content', 'train/projects');
 };
 
-exports.showTrain = function(id) {
-    return this.app.show('content', 'train/index/', { id: id });
+exports.showTaskDetail = function(fir, id) {
+    return this.app.show('content', 'train/service/views/commit-task/task-detail', { id: id });
 };
 
+exports.interceptors = {
+    'class-detail/task-detail/': 'clearHeadAndBottom'
+};
+
+exports.clearHeadAndBottom = function() {
+    $('.header').hide();
+    $('.footer').hide();
+    $('.achievement-content').attr('height', '100%');
+};

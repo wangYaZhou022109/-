@@ -1,0 +1,12 @@
+#!handlebars
+module
+    div(style='width:100%;float:left;border:solid 1px red;' data-region='head')
+    div(style='width:80%;float:left;border:solid 1px red;' data-region='content')
+    div(style='width:20%;float:right;border:solid 1px red;' data-region='toolbox')
+view('head')
+    echo('headheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadheadhead')
+
+view('content')
+    echo('contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent')
+view('toolbox')
+    echo('toolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolboxtoolbox')

@@ -5,10 +5,22 @@ exports.bindings = {
 };
 
 exports.events = {
+<<<<<<< Updated upstream
 };
 
 exports.handlers = {
 
+=======
+    'click commitTask': 'showTaskList'
+};
+
+exports.handlers = {
+    showTaskList: function() {
+        var view = this.module.items['train/service/views/commit-task'];
+        var classId = this.bindings.classId.data.classId;
+        this.app.viewport.modal(view, { classId: classId });
+    }
+>>>>>>> Stashed changes
 };
 
 exports.actions = {
@@ -28,3 +40,4 @@ exports.actionCallbacks = {
         this.app.viewport.modal(this.module.items.questionnaire);
     },
 };
+

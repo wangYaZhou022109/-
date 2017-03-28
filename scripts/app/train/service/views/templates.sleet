@@ -22,7 +22,7 @@ view('main')
     .buttons
         .btn#twoBring > i.icon-plus + span > echo('两个带来')
         .btn#addRequired > i.icon-plus + span > echo('班车信息统计')
-        .btn#addCourse2 > i.icon-plus + span > echo('作业提交')
+        .btn#commitTask > i.icon-plus + span > echo('作业提交')
         .btn#addCourse1 > i.icon-plus + span > echo('学员满意度')
         .btn#questionnaire > i.icon-plus + span > echo('调研与考试')
         .btn#classMembers > i.icon-plus + span > echo('班级成员')
