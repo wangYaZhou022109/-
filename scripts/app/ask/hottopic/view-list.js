@@ -16,11 +16,6 @@ exports.handlers = {
         this.app.show('content', 'ask/topic');
     },
     topicDeal: function(id) {
-        console.log(id);
-        // var region;
-        // var el = $(target).parents('.page-main')[0];
-        // region = new D.Region(this.app, this.module, el, id);
-        // region.show('ask/mymanage/topicdetail', { id: id });
         this.app.show('content', 'ask/mymanage/topicdetail', { id: id });
     }
 };
