@@ -1,6 +1,9 @@
+exports.title = '关注者';
+
+exports.buttons = [];
+
 exports.items = {
-    list: 'list',
-    'ask/followme': { isModule: true }
+    list: 'list'
 };
 
 exports.store = {

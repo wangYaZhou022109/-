@@ -26,7 +26,7 @@ exports.store = {
         },
         unfollow: function(payload) {
             var follow = this.models.unfollow;
-            console.log(payload);
+            // console.log(payload);
             follow.set(payload);
             return this.put(follow);
         },
