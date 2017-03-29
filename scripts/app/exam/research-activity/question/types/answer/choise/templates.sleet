@@ -5,9 +5,9 @@ module > .choise.preview-content
     .options(data-region='options')
 
 view('content')
-    
+
     p.question
-        span > a(name='question-' + state.id) > echo(state.index '.')
+        span > a.normal(name='question-' + state.id) > echo(state.index '.')
         echo('【')
         map('research-question-types' state.type)
         echo('】')
@@ -15,7 +15,7 @@ view('content')
 
 
 view('options') > .answer
-    .preview-list > dl.border.bottom > each(options)
+    .preview-list > dl > each(options)
         dd(id='item-' + index)
             if(mutiple)
                 span.checkbox

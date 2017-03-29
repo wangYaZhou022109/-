@@ -103,12 +103,10 @@ view('list')
                                         dateTime(startTime) + echo('至') + dateTime(endTime)
 
 view('exam-tips')
-    .container
-        .row > .col-sm-12
-            echo(currentExam.content)
-        .row > .col-sm-12
-            each(currentExam.buttons)
-                a(id=id) > echo(text)
+    p > echo(currentExam.content)
+    .layout-mt-small
+        each(currentExam.buttons)
+            a(id=id) > echo(text)
 
 view('research-tips')
     .container
