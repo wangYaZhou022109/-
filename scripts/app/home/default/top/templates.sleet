@@ -80,10 +80,10 @@ view('shortcut')
                                 a#logout(href='javascript:;') 退出账号
                     .user-info-list.border.top
                         .item.border.right
-                            b 1小时30分
+                            b > echo(courseTime)
                             .small-font.m-top 学习时长
                         .item
-                            b 999
+                            b > echo(integral.totalScore)
                             .small-font.m-top 积分
                     .hide
                         form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
@@ -91,7 +91,7 @@ view('shortcut')
 
 view('logo')
     if(homeConfig.logo)
-        .item > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
+        .item > a.underline(href='/#/home') > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
     else
-        .item > img(src='images/cmou-logo.png')
+        .item > a.underline(href='/#/home') > img(src='images/cmou-logo.png')
     .item > img(src='images/dx-logo.png')

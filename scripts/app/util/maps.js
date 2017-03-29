@@ -339,7 +339,7 @@ module.exports = {
     'home-data-url': {
         1: '#',
         2: '/#/activity/gensee/detail/',
-        3: '#',
+        3: '/#/exam/exam/answer-paper/',
         4: '/#/exam/research-activity/index/',
         5: '#',
         6: '#',
