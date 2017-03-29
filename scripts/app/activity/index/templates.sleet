@@ -28,10 +28,10 @@ view('banner')
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
                         compare(type 'eq' 2)
                             a.normal.block(type=type  href='#/activity/gensee/detail/'+ targetId target='_blank') > .btn.radius 我要参与
-                        compare(type 'eq' 6)
-                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
-                        else
+                        compare(type 'eq' 3)
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
+                        compare(type 'eq' 4)
+                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
 
 view('filter')
     .container
@@ -68,7 +68,7 @@ view('list')
                                     echo(subNumber)
                                 i.iconfont.icon-date.m-left
                                     date(startTime)
-                                    
+
         .h3.m-bottom 考试
         #swiper-3 > ul.full > each(examArray)
             li.list-item > .main-list
