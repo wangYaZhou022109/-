@@ -1,6 +1,7 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
     maps = require('./app/util/maps'),
+    strings = require('./app/util/strings'),
     itemStatus = {
         INIT: 'init',
         CHECK: 'check',
@@ -170,7 +171,8 @@ exports.store = {
                 researchQuestionaryId: me.models.researchRecord.data.researchQuestionaryId
             }));
             return this.post(this.models.form).then(function() {
-                me.app.viewport.closeModal();
+                me.app.message.success(strings.get('submit-success'));
+                window.close();
             });
         },
         selectDimension: function(payload) {

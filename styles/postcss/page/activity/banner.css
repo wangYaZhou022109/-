@@ -2,7 +2,8 @@
     background-color: var(--sub-color-1);
 
     & ul.activity-banner-list {
-        padding: var(--base-gap) 0;
+        position: relative;
+        margin-top: var(--base-gap);
 
         & > li {
             z-index: 1;

@@ -105,9 +105,7 @@ exports.actionCallbacks = {
     cancelCollect: function() {
         this.app.message.success('取消收藏成功');
     },
-    score: function(data) {
-        this.module.dispatch('initScore', data[0]).then(function() {
-            this.app.message.success('评分成功');
-        });
+    score: function() {
+        this.app.message.success('评分成功');
     }
 };

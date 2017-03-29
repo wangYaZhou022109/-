@@ -25,4 +25,3 @@ exports.dataForTemplate = {
         return url;
     }
 };
-
