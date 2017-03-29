@@ -41,7 +41,8 @@ view('list')
                                         .item(id='trend-unfollow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('unfollow')
                                     else
                                         .item(id='trend-follow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('follow')
-                                    .item > string('share')
+                                    #  .item > string('share')
+                                    .item > #share
                                     .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
