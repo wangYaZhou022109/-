@@ -23,12 +23,16 @@ view('addclass')
                 .form-row
                     label.required 开始时间
                     .content
-                        input.input
+                        .relative
+                            input.input.date
+                            .iconfont.icon-riqi.text-main-color
             .class-form-width.pull-left
                 .form-row
                     label.required 结束时间
                     .content
-                        input.input
+                        .relative
+                            input.input.date
+                            .iconfont.icon-riqi.text-main-color
             .class-form-width.pull-left
                 .form-row
                     label.required 教室
@@ -69,7 +73,7 @@ view('addclass')
         .pull-right
             .tag-btn.radius 选择
             .tag-btn.radius 上传
-            span ?
+            i.iconfont.icon-question-2
     table.table
         tr
             th  序号

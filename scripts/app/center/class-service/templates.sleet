@@ -24,7 +24,7 @@ view('demand-title')
         .filter-item
             span 实施年月
             .relative.inline-block
-                input.input
+                input.input.date
                 .iconfont.icon-riqi
 view('demand-table')
     .container

@@ -24,7 +24,8 @@
     "video.js": "^5.11.9",
     "wavesurfer.js": "^1.2.7",
     "highcharts": "^4.2.5",
-    "flatpickr": "^2.3.4"
+    "flatpickr": "^2.3.4",
+    "kindeditor": "^4.1.10"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
