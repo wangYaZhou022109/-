@@ -18,21 +18,7 @@ view('main')
         .pull-left
             .common-title.inline-block > echo(knowledge.name)
             .inline-block
-                .star-wrapper.drop-down-wrapper
-                    .star-bar > .star(style='width:'+avgScoreFix+'%')
-                    if(knowledge.avgScore)
-                        .num > echo(knowledge.avgScore)
-                    else
-                        .inline-block.sub-text > echo('暂无评分')
-                    .drop-down-content > .content
-                        .text-center 我来评分
-                        .star-grade
-                            .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                            .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                            .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                            .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                            .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                        .block.btn#submit-score 提交评分
+                #star-score
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > #share
             .inline-block.m-left
@@ -63,9 +49,10 @@ view('side')
     .page-side > .container
         section.section
             | 您当前积分：
-            b > echo(integral.totalScore)
+            b > pick(integral.totalScore 0)
             | 分
-            a.btn.block.layout-mt-small.big(href=downUrl download=knowledge.name) > echo('下载当前阅览知识（-' + knowledge.integral+'积分）')
+            a.btn.block.layout-mt-small.big#download(href=downUrl download=knowledge.name)
+                echo('下载当前阅览知识（-') + pick(knowledge.integral 0) + echo('积分）')
             .btn.block.m-top.big.upload-knowledge#upload 上传新知识（+2积分）
 
         section.section

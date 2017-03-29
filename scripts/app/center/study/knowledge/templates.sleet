@@ -29,7 +29,7 @@ view('main')
         li.border.bottom
             .title-row
                 .img > .img-cont > img(src=imgUrl)
-                .inline-block.title > echo(name)
+                .inline-block.title > a.normal.block(href='#/knowledge/detail/'+id target='_blank') > echo(name)
                 .time
                     echo(prefixText) &nbsp;&nbsp;
                     echo(downAndViewText)

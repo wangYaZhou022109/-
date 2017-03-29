@@ -12,7 +12,8 @@ exports.store = {
         },
         progress: { url: '../course-study/course-study-progress/export-person-list' },
         businessType: { value: '0' },
-        sectionList: { url: '../course-study/course-study-progress/person-section-list' }
+        sectionList: { url: '../course-study/course-study-progress/person-section-list' },
+        courseName: { value: '' }
     },
     callbacks: {
         init: function(options) {

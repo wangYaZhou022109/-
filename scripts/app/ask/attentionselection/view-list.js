@@ -8,19 +8,12 @@ exports.bindings = {
 
 exports.events = {
     'click details-*': 'details',
-    'click step-*': 'step'
+    'click button-*': 'togglePage',
+    'click icon-*': 'expertToggleIcon',
+    'click topic-icon-*': 'topicsToggleIcon'
 };
 
 exports.handlers = {
-    step: function(id) {
-        if (id === 'one') {
-            this.$$('.step-one')[0].hidden = true;
-            this.$$('.step-two')[0].hidden = false;
-        } else if (id === 'two') {
-            this.$$('.step-one')[0].hidden = false;
-            this.$$('.step-two')[0].hidden = true;
-        }
-    },
     details: function(id, e, target) {
         var region,
             data;
@@ -30,6 +23,40 @@ exports.handlers = {
             data = id.split(',');
             region.show('ask/myquiz/details', { id: data[1] });
         }
+    },
+    togglePage: function(id) {
+        var div1;
+        var div2;
+        div1 = $(this.$('page1'));
+        div2 = $(this.$('page2'));
+        if (id === '1') {
+            div2.show().siblings().hide();
+        }
+        if (id === '2') {
+            div1.show().siblings().hide();
+        }
+    },
+    expertToggleIcon: function(id) {
+        var that;
+        var item = this.$('expert-item' + id);
+        if (item.value === '') {
+            this.$('expert-item' + id).value = id;
+        } else if (item.value !== '') {
+            this.$('expert-item' + id).value = '';
+        }
+        that = $(this.$('icon-' + id));
+        that.toggleClass('icon-opacity0');
+    },
+    topicsToggleIcon: function(id) {
+        var that;
+        var item = this.$('topics-item' + id);
+        if (item.value === '') {
+            this.$('topics-item' + id).value = id;
+        } else if (item.value !== '') {
+            this.$('topics-item' + id).value = '';
+        }
+        that = $(this.$('topic-icon-' + id));
+        that.toggleClass('icon-opacity0');
     }
 };
 
@@ -41,19 +68,27 @@ exports.dataForActions = {
         var data = payload;
         var topics = [],
             expert = [];
-        this.$$('input[name="topics"]:checked').forEach(function(x) {
+        this.$$('input[name="topics"]').forEach(function(x) {
             var element = x || {};
             var value = element.value;
             topics.push(value);
         });
-        this.$$('input[name="expert"]:checked').forEach(function(x) {
+        this.$$('input[name="expert"]').forEach(function(x) {
             var element = x || {};
             var value = element.value;
             expert.push(value);
         });
         data.id = 1;
-        data.topics = topics.join(',');
-        data.expert = expert.join(',');
+        if (topics.length > 0) {
+            data.topics = topics.join(',');
+        } else {
+            data.topics = 'null';
+        }
+        if (expert.length > 0) {
+            data.expert = expert.join(',');
+        } else {
+            data.expert = 'null';
+        }
         return data;
     }
 };

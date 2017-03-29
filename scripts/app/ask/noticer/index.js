@@ -1,5 +1,6 @@
 exports.items = {
-    list: 'list'
+    list: 'list',
+    'ask/followme': { isModule: true }
 };
 
 exports.store = {

@@ -1,23 +1,42 @@
 #!handlebars
-module > .course-page
-    div(data-region='shareaudit' style='height:100%;')
+module > .watch-detail1-page
+    .watch-detail1-total(data-region="shareaudit")
 
-view('shareaudit') > form.vertical
-    echo('分享审核')
-    echo(shareaudit.question.title)
-    br
-    echo(shareaudit.question.content)
-    br
-    echo('附件：')
-    a(id='preview'+shareaudit.questionAttach.originalFile) > echo(shareaudit.questionAttach.name)
-    br
-    echo(shareaudit.member.fullName)
-    br
-    echo('提问时间：')
-    date(shareaudit.question.createTime)
-    br
-    echo('关联话题')
-    echo(shareaudit.topicStr)
-    input.input(name='id' type='hidden' value=shareaudit.id)
-    echo('审核备注:')
-    echo(audit.auditNote)
+view('shareaudit')
+    .h5 > echo(shareaudit.question.title)
+    .detail1-content.m-top.small-font > echo(shareaudit.question.content)
+    #  .detail-img.layout-mt-small
+    #      img(src="images/1.png")
+    .detail1-file.layout-mt-small
+        | 附件：
+        a
+            .iconfont.icon-tag-1
+            span > echo(shareaudit.questionAttach.name)
+    .detail1-person.layout-mt-small
+        span > echo(shareaudit.member.fullName)
+        span 分享时间：
+        span > date(shareaudit.createTime)
+    .detail1-alink.layout-mt-smal > echo(shareaudit.topicStr)
+    textarea.w-full.layout-mt-small(rows="5"  readonly = readonly) > echo(audit.auditNote)
+#  module > .course-page
+#      div(data-region='shareaudit' style='height:100%;')
+
+#  view('shareaudit') > form.vertical
+#      echo('分享审核')
+#      echo(shareaudit.question.title)
+#      br
+#      echo(shareaudit.question.content)
+#      br
+#      echo('附件：')
+#      a(id='preview'+shareaudit.questionAttach.originalFile) > echo(shareaudit.questionAttach.name)
+#      br
+#      echo(shareaudit.member.fullName)
+#      br
+#      echo('提问时间：')
+#      date(shareaudit.question.createTime)
+#      br
+#      echo('关联话题')
+#      echo(shareaudit.topicStr)
+#      input.input(name='id' type='hidden' value=shareaudit.id)
+#      echo('审核备注:')
+#      echo(audit.auditNote)

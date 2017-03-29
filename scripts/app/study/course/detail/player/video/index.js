@@ -19,7 +19,7 @@ exports.store = {
                 localTemp;
             localProgress.load();
             state.set(payload);
-            if (localProgress.data[payload.section.id]) {
+            if (localProgress.data && localProgress.data[payload.section.id]) {
                 localTemp = localProgress.data[payload.section.id];
                 state.data.localTime = localTemp.studyTime || 0;
                 state.data.localLocation = localTemp.lessonLocation;

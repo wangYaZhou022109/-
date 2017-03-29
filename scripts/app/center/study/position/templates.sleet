@@ -1,0 +1,43 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .tabs.line > ul
+        li > setting('persion.position.my')
+        each(positionList)
+            li(id='switch-'+id class = if(current 'active')) > echo(name)
+    .mt-1
+        .tag-btn.active > setting('persion.position.develop')
+        each(position.devPositions)
+            .tag-btn > echo(name)
+    .person-post-main
+        section.section
+            .h3 > setting('persion.position.instructions')
+            .layout-mt-small.post-description-content(style='overflow:auto;position:relative;height:400px')
+                if(position.instructionId)
+                    #viewPdf
+        section.section
+            .h3 > setting('persion.position.qualification')
+            .layout-mt-small
+                @echo(position.desc)
+        section.section
+            .h3 > setting('persion.position.requirements')
+            .layout-mt-small
+                .table > table
+                    thead > tr
+                        th > setting('persion.position.order')
+                        th > setting('persion.position.name')
+                        th > setting('persion.position.type')
+                        th > setting('persion.position.require')
+                        th > setting('persion.position.finishStatus')
+                        th > setting('persion.position.operation')
+                    tbody > each(studyList)
+                        tr
+                            td > echo(i+1)
+                            td.nowrap > .text-overflow > echo(pushObject.businessName)
+                            td > map('push-business-type' pushObject.businessType)
+                            td > map('is-required' pushObject.isRequired)
+                            td > map('push-record-task-status' taskStatus)
+                            td > a(href=btnUrl target='_blank') > echo(opeTxt)

@@ -1,60 +1,70 @@
-var D = require('drizzlejs');
+// var D = require('drizzlejs');
 var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
-    popupstate: true
+    course: true
 };
 
 exports.events = {
-    'click dynamic-*': 'toggleMore',
+    'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
     'click trend-report-*': 'report'
 };
 
 exports.handlers = {
-    toggleMore: function(id, e, target) {
-        var region,
-            data;
-        var el = $(target).parents('.activity-category')[0];
-        region = new D.Region(this.app, this.module, el, id);
+    showDetails: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
+        var data = { },
+            id = payload;
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            region.show('ask/myquiz/details', { id: data[1] });
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
         }
     },
     discuss: function(payload) {
-        var el = this.$(payload);
-        if (el.hidden === false) {
-            el.hidden = true;
-        } else if (el.hidden === true) {
-            el.hidden = false;
-        }
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
     report: function(payload) {
-        var state = this.bindings.popupstate,
-            obj = payload,
-            data;
-        if (obj.indexOf('_') !== -1) {
-            data = obj.split('_');
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
         }
-        state.hidden = true;
-        state.data = {};
-        state.data.objectType = data[0];
-        state.data.id = data[1];
-        state.data.title = '举报';
-        state.data.menu = 'report';
-        state.data.report = true;
-        state.changed();
     }
 };
 exports.actions = {
     'click trend-follow-*': 'follow',
-    'click publish-*': 'publish'
+    'click trend-unfollow-*': 'unfollow',
+    'click publish-*': 'publish',
+    'click reply-*': 'reply',
+    'click del-question-*': 'delquestion',
+    'click del-share-*': 'delshare',
+    'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    delquestion: function(payload) {
+        var data = payload;
+        data.auditType = '1';
+        return data;
+    },
+    delshare: function(payload) {
+        var data = payload;
+        data.auditType = '2';
+        return data;
+    },
+    deldiscuss: function(payload) {
+        var data = payload;
+        data.auditType = '3';
+        return data;
+    },
     follow: function(payload) {
         var id = payload.id,
             data = {};
@@ -63,7 +73,18 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
+    unfollow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
     publish: function(payload) {
+        return payload;
+    },
+    reply: function(payload) {
         return payload;
     }
 };
@@ -78,6 +99,22 @@ exports.actionCallbacks = {
     },
     follow: function() {
         this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
+    delquestion: function() {
+        this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    delshare: function() {
+        this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    deldiscuss: function() {
+        this.app.message.success('删除成功！');
         this.module.dispatch('init');
     }
 };
@@ -94,3 +131,23 @@ exports.dataForTemplate = {
         return trends;
     }
 };
+
+
+exports.components = [function() { // 分享组件
+    var data = {},
+        course = this.bindings.course.data;
+    if (course) {
+        data.id = course.id;
+        data.type = '1';
+        data.pics = 'images/default-cover/default_course.jpg';
+        data.title = course.name;
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
+}];

@@ -1,20 +1,23 @@
 #!handlebars
-module > .activity-page
-    .activity-list(data-region='list')
+module
+    div(data-region='list')
 
 view('list') 
-    .step-one
-        .container > .main-list
-            ul > each(topic.topicList)
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src=member.headPortrait alt= string('topic'))
-                                input(type='checkbox' id='topics-item' + id name='topics' value= id) 
-                        .clearfix
-                            .title.text-overflow > echo(name)
-                        .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
+    .person-list
+        .filter.layout-mt-small
+            .pull-left
+                .inline-block.m-left.sub-text 话题类型：
+                .item.active > span(id='check-All' data-name='id' data-value='all' ) > string('all')
+                each(topicType)
+                    .item > span(id='check-' + id data-name='id' data-value=id ) > echo(name)
+        .comment-list.ask-list > ul > each(topic.topicList)
+            li.topic-item
+                a.normal(href="javascript:;")
+                    .img > .img-cont > img(src="images/demo/1.jpg")
+                    h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
+                    .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
+                .btn.small > echo('关注')
+   
                 
 
     

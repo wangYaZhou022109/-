@@ -2,17 +2,6 @@
 module 
     div(data-region='list')
 
-view('test') 
-    ul
-        li
-            string('follow') + string('my') + string('people') + a(id='activeexpert' href='javascript:;' style='float:right;')(class ='active')
-    table.table > tr > td
-            each(expert)
-                ul
-                    li(style='font-weight:bold')
-                        .img(style='height:120px;width:80px;float:left;' id='expert-' + member.id data-name='id' data-value=member.id  ) > img(src=member.headPortrait)
-
-
 view('list') 
     .section
         span.h3 关注我的人

@@ -1,6 +1,16 @@
 #!handlebars
 
 module
-    div(data-region='upload')
+    div(data-region='main')
+
+view('main')
+    img.block.side-width(src = downUrl class=defaultCss)
+    input#headImageId( type='hidden' name=state.inputName value=fileId)
+    div#select(class='btn block' + btnClass) > i.icon-plus + span
+        if(btnName)
+            echo(btnName)
+        else
+            string('picker.upload.label.select')
+
 
 view('upload') > #uploader

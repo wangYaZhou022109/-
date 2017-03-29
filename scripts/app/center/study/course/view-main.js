@@ -32,3 +32,28 @@ exports.dataForTemplate = {
         return progressList;
     }
 };
+
+exports.actions = {
+    'click delete-*': 'deleteProgress'
+};
+
+exports.dataForActions = {
+    deleteProgress: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '是否确定放弃该课程的学习?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    }
+};
+
+exports.actionCallbacks = {
+    deleteProgress: function() {
+        this.app.message.success('已成功放弃该课程!');
+        this.module.dispatch('search', this.bindings.search.data);
+    }
+};

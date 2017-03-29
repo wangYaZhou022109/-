@@ -1,0 +1,45 @@
+#! handlebars
+
+module
+    li.active.tabs-cont-item
+        div(data-region='main')
+
+view('main') > .base-info
+    .form
+        .pic
+            #headFile
+        .info
+            .form-row
+                .layout-mr
+                    .inline-block > setting('person.index.info.name')
+                    .inline-block > echo(member.fullName)
+                .layout-mr
+                    .inline-block > setting('person.index.info.sex')
+                    .inline-block
+                        span.m-right > each(sexs)
+                            input.inline-block(name='sex' type='radio' value=key)('checked')&if(selected)
+                            .inline-block > echo(value)
+            .form-row
+                .layout-mr
+                    .inline-block > setting('person.index.info.position')
+                    .inline-block
+                        if(member.majoyPosition) > echo(member.majoyPosition.name)
+            .form-row
+                .layout-mr
+                    .inline-block > setting('person.index.info.joinTime')
+                    .inline-block > date(member.memberDetail.entryTime)
+                .layout-mr
+                    .inline-block > setting('person.index.info.no')
+                    .inline-block > echo(member.name)
+            .form-row
+                .inline-block > setting('person.index.info.work')
+                .inline-block > echo(member.compOrganization.name)
+            .form-row
+                .inline-block > setting('person.index.info.department')
+                .inline-block > echo(member.organization.name)
+            .form-row
+                .inline-block > setting('person.index.info.like')
+                .inline-block
+            .form-row
+                label.auto > setting('person.index.info.introduce')
+                .content > textarea.input(id='summary' name='summary' rows='3' x-rule='maxLength:200') > echo(member.memberDetail.summary)

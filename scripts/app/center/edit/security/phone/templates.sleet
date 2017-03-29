@@ -1,0 +1,24 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    ul.phone-number-list
+        if(member.phoneNumber)
+            li
+                .pull-left > echo(member.phoneNumber)
+                .pull-right
+                    .item > setting('person.index.info.mainPhone')
+        each(phoneList)
+            li
+                .pull-left > echo(phoneNumber)
+                .pull-right
+                    .item > a(id='setMain'+id data-name='id' data-value=id) > setting('person.index.info.setMain')
+                    .item > a(id='deletePhone'+id data-name='id' data-value=id) > setting('person.index.info.delete')
+        li#newPhone(style='display:none;')
+            .pull-left > input.input(name='phone' id='phone' x-rule='phone')
+            .pull-right
+                .item > a#savePhone > setting('person.index.info.save' )
+    .text-center > a#addPhone > i.iconfont.icon-add.m-right + span > setting('person.index.info.addPhone')
+

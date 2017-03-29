@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     pannel: 'pannel',
     swipe: ''
@@ -21,8 +22,18 @@ exports.store = {
     },
     callbacks: {
         init: function(options) {
+            var photos = options.subject.photos,
+                download = this.models.download;
             this.models.region.set(options.region);
             this.models.subject.set(options.subject);
+            _.map(photos, function(obj) {
+                var photo = obj;
+                var img = new Image();
+                photo.imageUrl = download.getFullUrl() + '?id=' + photo.attachmentId;
+                img.src = photo.imageUrl;
+                photo.image = img;
+                return photo;
+            });
             this.models.photos.set(options.subject.photos);
         },
         turnPage: function(data) {

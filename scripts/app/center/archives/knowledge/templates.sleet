@@ -22,7 +22,7 @@ view('main')
             tbody > each(list)
                 tr
                     td > echo(i)
-                    td.nowrap > .text-overflow > echo(name)
+                    td.nowrap > .text-overflow > a.normal.block(href='#/knowledge/detail/'+id target='_blank') > echo(name)
                     td > map('knowledge-audit-status' auditStatus)
                     td > dateMinute(uploadTime)
                     td > echo(type)

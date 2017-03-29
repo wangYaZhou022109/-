@@ -21,20 +21,17 @@ view('banner')
                         .information > echo(description)
                         .how-many
                             | 已有
-                            b 235
+                            b > echo(joinSize)
                             | 人参与
-                        #  .num
-                        #      | 已有
-                        #      strong 316
-                        #      | 人参加
+
                         compare(type 'eq' 1)
-                            a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与1
-                        compare(type 'eq' 2)
-                            a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与2
-                        compare(type 'eq' 6)
-                            a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与6
-                        else
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
+                        compare(type 'eq' 2)
+                            a.normal.block(type=type  href='#/activity/gensee/detail/'+ targetId target='_blank') > .btn.radius 我要参与
+                        compare(type 'eq' 3)
+                            a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
+                        compare(type 'eq' 4)
+                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
 
 view('filter')
     .container
@@ -49,63 +46,10 @@ view('filter')
 
 view('list')
     .container
-        .h3.m-bottom MOOC
-        #swiper-1 > ul.full
-            li > .main-list > ul.arrow-box
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src='images/d1.jpg')
-                            .detail-wrapper
-                                p
-                                    .btn.radius.block 我要参与
-                        .clearfix
-                            .pull-right.tip-text
-                            .title.text-overflow > | PPT动画完全自学入门
-                        .bottom.sub-text
-                            i.iconfont.icon-view
-                            echo(subNumber)
-                            i.iconfont.icon-star-full.m-left
-                            dateMinute(startTime)
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src='images/d1.jpg')
-                            .detail-wrapper
-                                p
-                                    .btn.radius.block 我要参与
-                        .clearfix
-                            .pull-right.tip-text
-                            .title.text-overflow > | PPT动画完全自学入门
-                        .bottom.sub-text
-                            i.iconfont.icon-view
-                            | 999
-                            i.iconfont.icon-star-full.m-left
-                            | 9.1
-                li
-                    .content
-                        .img
-                            .img-cont
-                                a.normal > img(src='images/d1.jpg')
-                            .detail-wrapper
-                                p
-                                    .btn.radius.block 我要参与
-                        .clearfix
-                            .pull-right.tip-text
-                            .title.text-overflow > | PPT动画完全自学入门
-                        .bottom.sub-text
-                            i.iconfont.icon-view
-                            | 999
-                            i.iconfont.icon-star-full.m-left
-                            | 9.1
-            li 5个一组，
-            li 5个一组，
         .h3.m-bottom 直播
-        #swiper-2 > ul.full
+        #swiper-2 > ul.full > each(genseesArray)
             li > .main-list > ul
-                each(gensees)
+                each(a)
                     li
                         .content
                             .img
@@ -122,93 +66,36 @@ view('list')
                             .bottom.sub-text
                                 i.iconfont.icon-favorite
                                     echo(subNumber)
-                                i.iconfont.icon-favorite.m-left
+                                i.iconfont.icon-date.m-left
                                     date(startTime)
+
         .h3.m-bottom 考试
-        #swiper-3 > ul.full
-            li > .main-list > ul.arrow-box.activity-item-box.activity-item-exam.cell-3
-                each(exams)
-                    li
-                        .activity-item.clearfix
-                            i.iconfont.icon-exam.pull-left.activity-item-icon
-                            a(id='exam-' + id) > echo(name)
-                            .sub-text.small-font
-                                echo(joinNumber) | 参与
-                                i.iconfont.icon-date.m-left.m-right
-                                dateTime(startTime) + echo('至') + dateTime(endTime)
-        .h3.m-bottom 班级
-        #swiper-4 > ul.full
-            li > .main-list > ul.activity-item-box.activity-item-class.cell-3
-                li
-                    .activity-item.clearfix
-                        i.iconfont.icon-class.pull-left.activity-item-icon
-                        a 中国移动“两学一做”学习教育
-                        .sub-text.small-font
-                            | 5623参与
-                            i.iconfont.icon-date.m-left.m-right
-                            | 9-28 至 12-25
-                li
-                    .activity-item.clearfix
-                        i.iconfont.icon-class.pull-left.activity-item-icon
-                        a 中国移动“两学一做”学习教育
-                        .sub-text.small-font
-                            | 5623参与
-                            i.iconfont.icon-date.m-left.m-right
-                            | 9-28 至 12-25
-                li
-                    .activity-item.clearfix
-                        i.iconfont.icon-class.pull-left.activity-item-icon
-                        a 中国移动“两学一做”学习教育
-                        .sub-text.small-font
-                            | 5623参与
-                            i.iconfont.icon-date.m-left.m-right
-                            | 9-28 至 12-25
-                li
-                    .activity-item.clearfix
-                        i.iconfont.icon-class.pull-left.activity-item-icon
-                        a 中国移动“两学一做”学习教育
-                        .sub-text.small-font
-                            | 5623参与
-                            i.iconfont.icon-date.m-left.m-right
-                            | 9-28 至 12-25
-                li
-                    .activity-item.clearfix
-                        i.iconfont.icon-class.pull-left.activity-item-icon
-                        a 中国移动“两学一做”学习教育
-                        .sub-text.small-font
-                            | 5623参与
-                            i.iconfont.icon-date.m-left.m-right
-                            | 9-28 至 12-25
-                li
-                    .activity-item.clearfix
-                        i.iconfont.icon-class.pull-left.activity-item-icon
-                        a 中国移动“两学一做”学习教育
-                        .sub-text.small-font
-                            | 5623参与
-                            i.iconfont.icon-date.m-left.m-right
-                            | 9-28 至 12-25
+        #swiper-3 > ul.full > each(examArray)
+            li.list-item > .main-list
+                ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+                    each(a)
+                        li
+                            .activity-item.clearfix
+                                i.iconfont.icon-exam.pull-left.activity-item-icon
+                                .overflow
+                                    a(id='exam-' + id) > echo(name)
+                                    .sub-text.small-font
+                                        i.iconfont.icon-date
+                                        dateTime(startTime) + echo('至') + dateTime(endTime)
+
         .h3.m-bottom 调研
-        #swiper-5 > ul.full
-            li > .main-list > ul.arrow-box.activity-item-box.activity-item-exam.cell-3
-                each(researchActivitys)
-                    li
-                        .activity-item.clearfix
-                            i.iconfont.icon-note.pull-left.activity-item-icon
-                            a(id='research-' + id) > echo(name)
-                            .sub-text.small-font
-                                echo(joinNumber) | 参与
-                                i.iconfont.icon-date.m-left.m-right
-                                dateTime(startTime) + echo('至') + dateTime(endTime)
-        #  .h3.m-bottom 待办
-        #  ul.arrow-box.activity-item-box.activity-item-exam.cell-3
-        #      each(toDos)
-        #          li(id='to-do-' + id)
-        #              .activity-item.clearfix
-        #                  i.iconfont.icon-favorite.pull-left.activity-item-icon
-        #                  a(href='#/exam/exam/mark-paper/'+ targetId target='_blank') > echo('待办阅卷' + @index)
-        #                  .sub-text.small-font
-        #                      echo(joinNumber) | 参与
-        #                      i.iconfont.icon-favorite.m-left.m-right
+        #swiper-5 > ul.full > each(researchArray)
+            li.list-item > .main-list
+                ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+                    each(a)
+                        li
+                            .activity-item.clearfix
+                                i.iconfont.icon-note.pull-left.activity-item-icon
+                                .overflow
+                                    a(id='research-' + id) > echo(name)
+                                    .sub-text.small-font
+                                        i.iconfont.icon-date
+                                        dateTime(startTime) + echo('至') + dateTime(endTime)
 
 view('exam-tips')
     .container
@@ -221,7 +108,79 @@ view('exam-tips')
 view('research-tips')
     .container
         .row > .col-sm-12
-            echo(research.content)
+            echo(research.questionaryDetail)
         .row > .col-sm-12
             each(research.buttons)
-                a(id='button-' + id href=url target='_blank') > echo(text)
+                if(id 'eq' 'answer-next-time')
+                    a(id='button-' + id href=url) > echo(text)
+                else
+                    a(id='button-' + id href=url target='_blank') > echo(text)
+
+                    # .h3.m-bottom MOOC
+                    # #swiper-1.swiper-pic-list > ul.full
+                    #     li > .main-list > ul.arrow-box
+                    #         li
+                    #             .content
+                    #                 .img
+                    #                     .img-cont
+                    #                         a.normal > img(src='images/d1.jpg')
+                    #                     .detail-wrapper
+                    #                         p
+                    #                             .btn.radius.block(id='attendLive-' + id) 我要参与
+                    #                 .clearfix
+                    #                     .pull-right.tip-text
+                    #                     .title.text-overflow > echo(subject)
+                    #                 .bottom.sub-text
+                    #                     i.iconfont.icon-view
+                    #                     echo(subNumber)
+                    #                     i.iconfont.icon-star-full.m-left
+                    #                     dateMinute(startTime)
+                    #         li
+                    #             .content
+                    #                 .img
+                    #                     .img-cont
+                    #                         a.normal > img(src='images/d1.jpg')
+                    #                     .detail-wrapper
+                    #                         p
+                    #                             .btn.radius.block 我要参与
+                    #                 .clearfix
+                    #                     .pull-right.tip-text
+                    #                     .title.text-overflow > | PPT动画完全自学入门
+                    #                 .bottom.sub-text
+                    #                     i.iconfont.icon-view
+                    #                     | 999
+                    #                     i.iconfont.icon-star-full.m-left
+                    #                     | 9.1
+                    #         li
+                    #             .content
+                    #                 .img
+                    #                     .img-cont
+                    #                         a.normal > img(src='images/d1.jpg')
+                    #                     .detail-wrapper
+                    #                         p
+                    #                             .btn.radius.block 我要参与
+                    #                 .clearfix
+                    #                     .pull-right.tip-text
+                    #                     .title.text-overflow > | PPT动画完全自学入门
+                    #                 .bottom.sub-text
+                    #                     i.iconfont.icon-view
+                    #                     | 999
+                    #                     i.iconfont.icon-star-full.m-left
+                    #                     | 9.1
+                    #
+                    #     li > .main-list > ul.arrow-box
+                    #         li 5个一组
+                    #     li > .main-list > ul.arrow-box
+                    #         li 5个一组
+
+                    # .h3.m-bottom 班级
+                    # #swiper-4 > ul.full
+                    #     li > .main-list > ul.activity-item-box.activity-item-class.cell-3
+                    #         li
+                    #             .activity-item.clearfix
+                    #                 i.iconfont.icon-class.pull-left.activity-item-icon
+                    #                 .overflow
+                    #                     a(id='exam' + id) > echo(name)
+                    #                     .sub-text.small-font
+                    #                         i.iconfont.icon-date
+                    #                         dateTime(startTime) + echo('至') + dateTime(endTime)

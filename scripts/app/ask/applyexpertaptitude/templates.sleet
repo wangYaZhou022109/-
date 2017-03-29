@@ -1,4 +1,5 @@
 #! handlebars
-
-module > .edit-info-page
-    | 专家资质说明内容
+module > .edit-info-page(data-region='details')
+    
+view('details')
+    @echo(expertQualifications.qualifications)

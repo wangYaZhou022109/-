@@ -8,12 +8,12 @@ view('list')
             li
                 .user-pic > img(src='images/d2.jpg')
                 .comment-content
-                    .h4 > echo(title)
+                    .h4 > a(id='mymanage-details-' + id + '_' + questionId ) > echo(title)
                     .comment-text > echo(content)
                     .user-info
                         a(href='javascript:;') > echo(createUser.fullName)
                         span > echo('分享')
-                        span.sub-text > data(createTime)
+                        span.sub-text > echo(createTime)
                     .comment-operation
                         .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                         .text-right

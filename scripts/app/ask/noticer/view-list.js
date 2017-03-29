@@ -6,7 +6,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click member-*': 'details'
+    'click member-*': 'details',
+    'click follow-me': 'showFollowMe'
 };
 
 exports.handlers = {
@@ -15,6 +16,10 @@ exports.handlers = {
         var el = $(target).parents('.activity-page')[0];
         region = new D.Region(this.app, this.module, el, id);
         region.show('ask/expertdetails', { id: id });
+    },
+    showFollowMe: function() {
+        var model = this.module.items['ask/followme'];
+        this.app.viewport.modal(model);
     }
 };
 

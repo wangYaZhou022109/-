@@ -3,7 +3,8 @@ var _ = require('lodash/collection');
 exports.bindings = {
     progressList: true,
     progress: false,
-    businessType: false
+    businessType: false,
+    courseName: false
 };
 
 exports.actions = {
@@ -13,6 +14,8 @@ exports.actions = {
 exports.dataForActions = {
     showDeail: function(data) {
         var me = this;
+        var courseName = this.$('courseName' + data.id).value;
+        me.bindings.courseName.value = courseName;
         me.app.viewport.modal(me.module.items.detail);
         return data;
     }

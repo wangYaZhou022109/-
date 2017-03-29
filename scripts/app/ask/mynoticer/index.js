@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'ask/followme': { isModule: true }
 };
 
 exports.store = {

@@ -90,7 +90,7 @@ module.exports = {
         0: '否', 1: '是'
     },
     'activity-type': {
-        1: '班级', 2: '直播', 3: '模拟考试', 4: '指定考试', 5: '报名考试', 6: '调研'
+        1: '班级', 2: '直播', 3: '考试', 4: '调研', 5: 'mooc'
     },
     'section-type': {
         0: '混合',
@@ -209,13 +209,11 @@ module.exports = {
         50: '50%', 75: '75%', 100: '100%', 125: '125%', 150: '150%', 200: '200%', 300: '300%', 400: '400%'
     },
     'home-activity-type': {
-        1: '培训班级',
+        1: '班级',
         2: '直播',
-        3: '考试', // '模拟考试',
-        4: '考试', // '指定考试',
-        5: '考试', // '报名考试',
-        6: '问卷', // '问卷调查',
-        7: '补考'
+        3: '考试',
+        4: '调研',
+        5: 'mooc'
     },
     'ask-audit-type': {
         1: '提问审核', 2: '讨论审核', 4: '举报审核', 12: '分享审核'
@@ -328,13 +326,56 @@ module.exports = {
     },
     'live-status': {
         1: '待开始', 2: '直播中', 3: '已结束'
+    },
+    'exam-source-type': {
+        1: '考试活动', 2: '在线课程', 3: '专题', 4: '班级', 5: '直播'
+    },
+    'research-activity-status': {
+        1: '未发布', 2: '未开始', 3: '进行中', 4: '已结束', 5: '已撤销'
+    },
+    'home-data-type': {
+        1: '班级',
+        2: '直播',
+        3: '考试',
+        4: '调研',
+        5: 'mooc',
+        6: '未知',
+        7: '未知',
+        8: '未知',
+        9: '课程',
+        10: '专题'
+    },
+    'home-default-image': {
+        1: 'images/default-cover/default_class.jpg',
+        2: 'images/default-cover/default_live.jpg',
+        3: 'images/default-cover/default_exam.jpg',
+        4: 'images/default-cover/default_survey.jpg',
+        5: 'mooc',
+        6: 'unknow',
+        7: 'unknow',
+        8: 'unknow',
+        9: 'images/default-cover/default_course.jpg',
+        10: 'images/default-cover/default_spceial.jpg'
+    },
+    'home-data-url': {
+        1: '#',
+        2: '/#/activity/gensee/detail/',
+        3: '/#/exam/exam/answer-paper/',
+        4: '/#/exam/research-activity/index/',
+        5: '#',
+        6: '#',
+        7: '#',
+        8: '#',
+        9: '/#/study/course/detail/',
+        10: '/#/study/subject/detail/'
+    },
+    get: function(k) {
+        return _.map(this[k], function(value, key) {
+            return { key: key, value: value };
+        });
+    },
+    getValue: function(str, key) {
+        if (this[str]) return this[str][key] || '';
+        return '';
     }
-};
-
-module.exports.get = function(k) {
-    var arr = [];
-    _.forEach(this[k], function(value, key) {
-        arr.push({ key: key, value: value });
-    });
-    return arr;
 };

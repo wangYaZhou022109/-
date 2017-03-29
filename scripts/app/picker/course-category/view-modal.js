@@ -22,3 +22,5 @@ exports.buttons = [{
         return true;
     }
 }];
+
+exports.small = true;

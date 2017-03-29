@@ -14,7 +14,8 @@ exports.store = {
         download: { url: '../human/file/download' },
         recommends: { url: '../course-study/knowledge/recommend' },
         integral: { url: '../system/integral-result', autoLoad: 'after' },
-        readerMembers: { url: '../course-study/knowledge/readerMembers' }
+        readerMembers: { url: '../course-study/knowledge/readerMembers' },
+        downCount: { url: '../course-study/knowledge/down' }
     },
     callbacks: {
         init: function(payload) {
@@ -34,11 +35,11 @@ exports.store = {
                 me.get(readerMembers);
             });
         },
-        score: function() {
+        score: function(payload) {
             // 评分
             var score = this.models.score,
                 knowledge = this.models.knowledge;
-            score.data.id = knowledge.data.id;
+            score.set(payload);
             return this.save(score).then(function(data) {
                 knowledge.data.avgScore = data[0].avg;
                 knowledge.changed();
@@ -60,6 +61,11 @@ exports.store = {
             var recommends = this.models.recommends;
             recommends.params = { id: this.models.knowledge.data.id };
             this.get(recommends);
+        },
+        downCount: function() {
+            var modal = this.models.downCount;
+            modal.set({ id: this.models.knowledge.data.id });
+            return this.get(modal);
         }
     }
 };

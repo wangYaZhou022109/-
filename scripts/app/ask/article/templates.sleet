@@ -1,49 +1,35 @@
 #!handlebars
 
-module > div(data-region='main')
+module > form.form 
+    div(data-region='top')
+    div(data-region='edit')
+    div(data-region='details')
+    div(data-region='topic')
 
-
-view('test') > form.vertical
-    ul
-        li
-            label(class='') > string('article-title')
-        li
-            input.input(name='title'  value=''  x-rule='required')
-        li
-            label(class='') > string('related-topics')
-        li
-            #topics
-        li
-            label > string('article-content')
-        li
-            textarea.input.w-full(name='content' x-rule='required' rows='5')
-        li
-            .btn.radius.block(id='release' style='height:50px;width:200px;text-align:center') > string('release')
-view('details') > .form
+view('top')
     .form-row
         label.required > string('article-title')
         .content > input.input(name='title'  value=''  x-rule='required') + .tips 0/60
-    .form-row
-        label.required > string('related-topics')
-        .content > input.input + .choice 选择
+
+view('topic')
     .form-row.textarea-row
-        label > string('article-content')
-        .content > textarea.input(rows='5')(name='content') + .tips 0/60
+        label > string('related-topics') + echo(':') 
+        #select-topic
+   
+view('details')
     .form-row
-        .content > a > i.iconfont.icon-link + span > string('upload-attachments')
+        .content > a > i.iconfont.icon-link#uploadFile + span 
+            compare(task.data.length 'gt' 0)
+                each(task.data) 
+                    echo(enclosureName)
+            else
+                string('upload-attachments')
+view('edit')
     .form-row.textarea-row
-        label 关联标签
-        .content
-            .tag-input#tags
-                .tag-btn.radius > .close.iconfont.icon-close + | 标签一
-                .tag-btn.radius > .close.iconfont.icon-close + | 标签一
-                input(placeholder='输入标签名按回车即可添加,最多添加五个')
-            .sub-row#tag-list
-                span.small-font 推荐标签：
-                .tag-btn.radius.selected 标签一
-                .tag-btn.radius 标签二
-                .tag-btn.radius.selected 标签三
-                .tag-btn.radius 标签一
-                .tag-btn.radius 标签二
-                .tag-btn.radius 标签三
-                .tag-btn.radius ...
+        label > string('detailed-description')
+        .content > textarea.input(rows='5')(name='content' id='content') + .tips 0/60
+
+view('upload')
+    .row
+        .col-sm-12
+            #uploader

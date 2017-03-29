@@ -23,14 +23,15 @@ exports.store = {
                     var selectedCount = _.filter(this.data.answerRecords, function(a) {
                             return a.answer === name;
                         }).length,
-                        p = selectedCount / this.data.answerRecords.length;
+                        p = this.data.answerRecords.length !== 0
+                            ? (selectedCount / this.data.answerRecords.length) : 0;
                     return p * 100;
                 },
                 isChecked: function(name) {
                     var answerRecord = _.find(this.data.answerRecords, [
                         'researchRecordId', this.data.researchRecordId
                     ]);
-                    return name === answerRecord.answer;
+                    return answerRecord && name === answerRecord.answer;
                 }
             }
         }

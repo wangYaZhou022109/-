@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click my-question-detail-*': 'toggleMore'
+    'click news-*': 'showDetails'
 };
 
 exports.handlers = {
@@ -15,9 +15,22 @@ exports.handlers = {
     },
     toggleMore: function(id, e, target) {
         var region;
-        var el = $(target).parents('.activity-category')[0];
+        var el = $(target).parents('.comment-list')[0];
         region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/mymanage/topicdetail/news/mydetail', { id: id });
+        region.show('ask/mymanage/news/mydetail', { id: id });
+    },
+    showDetails: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
+        var data = { },
+            id = payload;
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/mymanage/topicdetail/exp/details', { id: data[1] });
+        }
     }
 };
 

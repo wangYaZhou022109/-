@@ -5,7 +5,7 @@ module
         #news(data-region='news')
 
 view('news')
-    .news-list.clearfix
+    .news-list.clearfix > .container
         .pull-left.m-right > i.iconfont.icon-notice
         b.title 资讯动态：
         .navigator

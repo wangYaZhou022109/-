@@ -1,0 +1,39 @@
+#!handlebars
+
+module > .choise.preview-content
+    div(data-region='content')
+    .options(data-region='options')
+
+view('content')
+    
+    p.question
+        span > a(name='question-' + state.id) > echo(state.index '.')
+        echo('【')
+        map('research-question-types' state.type)
+        echo('】')
+        @echo(state.content)
+
+
+view('options') > .answer
+    .preview-list > dl.border.bottom > each(options)
+        dd(id='item-' + index)
+            if(mutiple)
+                span.checkbox
+                    input(type='checkbox' id='check-'+@index value=@index)('checked')&if(checked)
+                    label(for='check-'+@index)
+            else
+                input.m-right(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
+            label(for='answer-item-' + index)
+                span.pull-left.option-num > @echo(code '：')
+                .answer-options > @echo(content)
+
+    if(isShowDetail)
+        .show-answer
+            .clearfix
+                .pull-left > .common-title
+                    if(state.isShowAnswer)
+                        echo('答案：' state.answer)
+                .text-right
+                    if(state.isShowGainScore)
+                        span > echo('本题得分：' state.gainScore)
+                    span.layout-ml > echo('本题易错率：' state.errorRate '%')
