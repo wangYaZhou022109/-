@@ -58,7 +58,12 @@ view('list')
                                 .detail-wrapper
                                     p
                                         .btn.radius.block
-                                            div(id='attendLive-'+id) 我要参与
+                                            compare(status 'eq' 1)
+                                                div(id='attendLive-'+id) 我要参与
+                                            compare(status 'eq' 2)
+                                                div(id='attendLive-'+id) 观看直播
+                                            compare(status 'eq' 3)
+                                                div(id='attendLive-'+id) 直播回顾
                             .clearfix
                                 .pull-right.tip-text
                                 .title.text-overflow
