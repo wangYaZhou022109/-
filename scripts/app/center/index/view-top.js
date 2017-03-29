@@ -51,6 +51,10 @@ exports.dataForTemplate = {
                 hour = window.parseInt(minute / 60);
                 minute = window.parseInt(minute % 60);
             }
+            // 大于等于30秒的时候加1分钟
+            if (second >= 30) {
+                minute += 1;
+            }
         }
         time = second;
         if (minute > 0) {
