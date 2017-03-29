@@ -30,7 +30,7 @@ exports.actionCallbacks = {
     },
     shuttleBusInformation: function() {
         this.app.viewport.modal(this.module.items.bus);
-    }
+    },
     twoBring: function() {
         this.app.viewport.modal(this.module.items.twoBrings);
     },

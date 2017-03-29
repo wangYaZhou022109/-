@@ -1,4 +1,3 @@
-
 #!handlebars
 module
     .subject-detail-page
@@ -26,7 +25,7 @@ view('main')
         .btn#commitTask > i.icon-plus + span > echo('作业提交')
         .btn#addCourse1 > i.icon-plus + span > echo('学员满意度')
         .btn#questionnaire > i.icon-plus + span > echo('调研与考试')
-        .btn#classMembers > i.icon-plus + span > echo('班级成员')
+        .btn#classMembers > i.icon-plus + span > echo('同学录')
 view('class-information')
     .row
         .col-sm-4
@@ -69,8 +68,8 @@ view('discussion-area')
             .inline-block.com-title > echo('讨论区')
 
 view('fmtrainees')
-    div.text-left
-        echo('班级学员')
+    div.text-righet
+        echo('同学录')
     table.table
         thead > tr
             th > echo('序号')

@@ -12,7 +12,7 @@ exports.items = {
     swipe: '',
     fmtrainees: '',
     main: 'main',
-    bus: ''
+    bus: '',
     twoBrings: '',
     questionnaire: '',
     'train/service/views/commit-task': { isModule: true }
@@ -130,7 +130,7 @@ exports.store = {
             var detail = this.models.detaildelete;
             detail.set({ id: params });
             return this.del(detail);
-        }
+        },
         twoBring: function() {
             var twoBringsResult = this.models.twoBringsResult,
                 classId = this.models.classId.data.classId;
