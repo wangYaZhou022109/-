@@ -35,6 +35,14 @@ exports.showTrain = function(id) {
     return this.app.show('content', 'train/index/', { id: id });
 };
 
+exports.showTaskDetail = function(fir, id) {
+    return this.app.show('content', 'train/service/views/commit-task/task-detail', { id: id });
+};
+
+exports.showTaskDetail = function(fir, id) {
+    return this.app.show('content', 'train/statistics/task/audit-task', { id: id });
+};
+
 exports.interceptors = {
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
