@@ -339,7 +339,7 @@ module.exports = {
     'home-data-url': {
         1: '#',
         2: '/#/activity/gensee/detail/',
-        3: '#',
+        3: '/#/exam/exam/answer-paper/',
         4: '/#/exam/research-activity/index/',
         5: '#',
         6: '#',
@@ -347,6 +347,9 @@ module.exports = {
         8: '#',
         9: '/#/study/course/detail/',
         10: '/#/study/subject/detail/'
+    },
+    'research-person-center-status': {
+        1: '待开始', 2: '待参加', 3: '已完成'
     },
     get: function(k) {
         return _.map(this[k], function(value, key) {

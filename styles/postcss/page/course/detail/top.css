@@ -78,7 +78,7 @@
         float: right;
         height: 100%;
         color: #ffffff;
-        background: rgba(0,0,0,.8);
+        background: rgba(0,0,0,.5);
 
         &.show-note {
             & .course-chapter,
@@ -207,7 +207,8 @@
 
                 & .required-tag {
                     float: right;
-                    background: var(--danger-color);
+                    color: var(--font-color);
+                    background: white;
                     padding: calc(var(--space) / 4) calc(var(--space) / 2);
                     font-size: var(--small-font);
                     margin-left: var(--space);

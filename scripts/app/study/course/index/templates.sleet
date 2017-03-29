@@ -35,7 +35,7 @@ view('list')
                         .img-cont
                             img(src=img)
                         .detail-wrapper
-                            p > echo(description)
+                            p > @echo(description)
                             compare(studyType 'eq' 0)
                                 a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 开始学习
                             compare(studyType 'eq' 1)

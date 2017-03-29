@@ -12,7 +12,8 @@ view('main') > form
             .pull-left
                 .inline-block.m-left.sub-text 要求：
                 .item(id='item-all' class=if(search.all 'active' '')) > span 全部
-                .item(id='item-no-finish' class=if(search.noFinish 'active' '')) > span 未完成
+                .item(id='item-wait-join' class=if(search.waitJoin 'active' '')) > span 待参加
+                .item(id='item-wait-start' class=if(search.waitStart 'active' '')) > span 待开始
                 .item(id='item-finished' class=if(search.finished 'active' '')) > span 已完成
         .list-search
             input.input(id='name' name='name' value=search.name placeholder='请输入您要搜索的内容名称')
@@ -26,12 +27,14 @@ view('main') > form
                         dateTime(researchQuestionary.startTime) 
                         | 至
                         dateTime(researchQuestionary.endTime)
-                .state > map('research-record-status', status)
+                .state > map('research-person-center-status', status)
                 .btn-row
-                    compare(status 'eq' 1)
+                    compare(status 'eq' 3)
                         .btn(id='view-detail-' + id) 查看详情
-                    compare(status 'eq' 0)
-                        .btn(id='do-research-' + id) 继续调研
+                    compare(status 'eq' 2)
+                        .btn(id='do-research-' + id) 参加调研
+                    compare(status 'eq' 1)
+                        .btn(id='do-research-' + id style='background: #dedede; pointer-events: none;') 参加调研
         #pager.pagination
 
 view('research-tips')

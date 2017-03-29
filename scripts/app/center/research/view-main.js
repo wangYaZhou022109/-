@@ -1,3 +1,9 @@
+var _ = require('lodash/collection'),
+    D = require('drizzlejs'),
+    WAIT_START = 1,
+    WAIT_JOIN = 2,
+    FINISHED = 3;
+
 exports.bindings = {
     researchRecords: true,
     search: true
@@ -19,10 +25,9 @@ exports.events = {
 
 exports.handlers = {
     showResearchPaper: function(id) {
-        var mod = this.module.items['research-tips'],
-            me = this;
         return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
-            me.app.viewport.modal(mod, { research: data });
+            var url = '#/exam/research-activity/index/' + data.id;
+            window.open(url, '_blank');
         });
     },
     search: function(status) {
@@ -32,12 +37,35 @@ exports.handlers = {
         });
     },
     showResearchAnswerDetail: function(id) {
-        var url = '#/exam/research-activity/research-answer-detail/' + id;
+        var url = '#/exam/research-activity/research-answer/' + id;
         window.open(url, '_blank');
-        // return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
-        //     var url = '#/exam/research-activity/research-summary-detail/' + data.id;
-        //     window.open(url, '_blank');
-        // });
     }
 };
 
+exports.dataForTemplate = {
+    researchRecords: function(data) {
+        var search = this.bindings.search.data;
+        return _.map(data.researchRecords, function(r) {
+            var status = '';
+            if (search.all) {
+                if (r.researchQuestionary.startTime > new Date().getTime()) {
+                    status = WAIT_START;
+                } else if (r.status === 0) {
+                    status = WAIT_JOIN;
+                } else {
+                    status = FINISHED;
+                }
+            }
+            if (search.waitJoin) {
+                status = WAIT_JOIN;
+            }
+            if (search.waitStart) {
+                status = WAIT_START;
+            }
+            if (search.finished) {
+                status = FINISHED;
+            }
+            return D.assign(r, { status: status });
+        });
+    }
+};

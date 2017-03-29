@@ -1,6 +1,6 @@
 #! handlebars
 module
-    .ranklist-section.container(data-region='main')
+    section.ranklist-section.container.section(data-region='main')
 view('main')
     .bar-list
         each(rankModules)
