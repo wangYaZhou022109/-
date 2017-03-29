@@ -14,7 +14,7 @@ exports.items = {
 exports.store = {
     models: {
         params: { data: { isOverdue: '1' } },
-        mymanage: { url: '../ask-bar/my-manage' },
+        mymanage: { url: '../system/topic/find-by-manager' },
         reviewed: { url: '../ask-bar/my-manage/reviewed' },
         display: { url: '../ask-bar/my-manage/reviewed' },
         audit: { url: '../ask-bar/questionReviewed' },
@@ -23,7 +23,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var mymanage = this.models.mymanage;
-            mymanage.set({ id: 1 });
+            // mymanage.set({ id: 1 });
             return this.get(mymanage);
         },
         reviewed: function() {

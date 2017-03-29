@@ -26,7 +26,10 @@ view('list')
                     .comment-operation
                         .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                         .text-right
-                            .item > a.normal(href='javascript:;') 关注
+                            compare(concernNum 'gt' 0)  
+                                .item(id='trend-unfollow-1_' + id data-name='id' data-value='1_' + id ) > echo('+') + string('unfollow')
+                            else
+                                .item(id='trend-follow-1_'  + id data-name='id' data-value='1_' + id) > echo('+') + string('follow')
                             .item > a.normal(href='javascript:;') 添加讨论
                             .item
                                 .drop-down-wrapper
