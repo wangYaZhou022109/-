@@ -28,5 +28,11 @@ exports.dataForTemplate = {
             return Number(data.state.avgScore) * 10;
         }
         return 0;
+    },
+    avgScore: function(data) {
+        if (data.state.avgScore) {
+            return data.state.avgScore.toFixed(1);
+        }
+        return 0;
     }
 };
