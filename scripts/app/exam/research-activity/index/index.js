@@ -44,6 +44,7 @@ exports.store = {
                     D.assign(topics.params, {
                         ids: _.map(research.data.topics, 'topicId').join(',')
                     });
+                    if (!topics.params.ids) return false;
                     return me.get(this.models.topics);
                 }, function() {
                     D.assign(me.models.research.data, {
