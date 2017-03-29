@@ -1,12 +1,12 @@
 exports.type = '班级详情页';
 exports.bindings = {
     classId: true,
-    fmtrainees: true,
     bus: true
 };
 
 exports.events = {
-    'click commitTask': 'showTaskList'
+    'click commitTask': 'showTaskList',
+    'click classMembers': 'classMembers'
 };
 
 exports.handlers = {
@@ -14,25 +14,26 @@ exports.handlers = {
         var view = this.module.items['train/service/views/commit-task'];
         var classId = this.bindings.classId.data.classId;
         this.app.viewport.modal(view, { classId: classId });
+    },
+    classMembers: function() {
+        var view = this.module.items['train/service/views/school-yearbook'];
+        var classId = this.bindings.classId.data.classId;
+        this.app.viewport.modal(view, { classId: classId });
     }
 };
 
 exports.actions = {
-    'click classMembers': 'fmtrainees',
     'click shuttleBusInformation': 'shuttleBusInformation',
     'click twoBring': 'twoBring',
     'click questionnaire': 'questionnaire',
 };
 
 exports.actionCallbacks = {
-    fmtrainees: function() {
-        this.app.viewport.modal(this.module.items.fmtrainees);
+    twoBring: function() {
+        this.app.viewport.modal(this.module.items.twoBrings);
     },
     shuttleBusInformation: function() {
         this.app.viewport.modal(this.module.items.bus);
-    },
-    twoBring: function() {
-        this.app.viewport.modal(this.module.items.twoBrings);
     },
     questionnaire: function() {
         this.app.viewport.modal(this.module.items.questionnaire);

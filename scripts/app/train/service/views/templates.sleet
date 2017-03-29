@@ -67,27 +67,6 @@ view('discussion-area')
         .col-sm-4
             .inline-block.com-title > echo('讨论区')
 
-view('fmtrainees')
-    div.text-righet
-        echo('同学录')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('姓名')
-            th > echo('员工编号')
-            th > echo('机构')
-            th > echo('部门')
-            th > echo('职务')
-            th > echo('手机')
-        tbody > each(fmtrainees) > tr
-            td > echo(i)
-            td > echo(member.fullName)
-            td > echo(member.name)
-            td > echo(companyName)
-            td > echo(organizationName)
-            td > echo(member.positionName)
-            td > echo(phoneNumber)
-    #pager.pagination(style='float:none')
 
 view('twoBrings') > form.vertical
     .row
@@ -136,3 +115,27 @@ view('questionnaire')
                     dateTime(researchQuestionary.endTime)
             td
                 a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id typeId=type) > echo('查看')
+view('bus')
+    tbody > each(bus)
+        div
+            tr
+                td > echo(name+'       '+startTime+'-'+endTime)
+                .pull-right
+                    a.normal.layout-mr.sub-text(id='sectionDisplay-'+ id href="javascript:;")
+                        label(id='label-' + id)
+                        i.iconfont.icon-arrow-up(id='icon-' + id)
+            if(show)
+                div(id='sectionDiv-' + id display = none )
+                    if(falg)
+                        each(busDetails)
+                            .item.block
+                                tr
+                                    td > echo(id)
+                    else
+                        each(optionList)
+                            .item.block
+                                tr
+                                    td > echo(id)
+                                    td > .checkbox.no-margin
+                                        input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                        label(for='check-item'+id)

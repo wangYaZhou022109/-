@@ -1,5 +1,4 @@
-var D = require('drizzlejs'),
-    _ = require('lodash/collection');
+var _ = require('lodash/collection');
 exports.title = '班级详情页';
 exports.items = {
     pannel: 'pannel',
@@ -10,12 +9,12 @@ exports.items = {
     'discussion-area': 'discussion-area',
     'online-rresources': 'online-rresources',
     swipe: '',
-    fmtrainees: '',
     main: 'main',
     bus: '',
     twoBrings: '',
     questionnaire: '',
-    'train/service/views/commit-task': { isModule: true }
+    'train/service/views/commit-task': { isModule: true },
+    'train/service/views/school-yearbook': { isModule: true }
 };
 
 exports.store = {
@@ -42,11 +41,6 @@ exports.store = {
         },
         classId: {
             data: {}
-        },
-        fmtrainees: {
-            url: '../train/trainee/trainees',
-            type: 'pageable',
-            root: 'items'
         },
         twoBrings: {
             url: '../train/class-two-brings',
@@ -80,14 +74,6 @@ exports.store = {
                 index: index
             });
             this.models.state.changed();
-        },
-        fmtrainees: function() {
-            var fmtrainees = this.models.fmtrainees;
-            D.assign(fmtrainees.params, {
-                classId: this.models.classId.data.classId,
-                auditStatus: 1
-            });
-            return this.get(fmtrainees);
         },
         shuttleBusInformation: function() {
             var bus = this.models.bus,
