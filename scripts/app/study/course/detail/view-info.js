@@ -59,7 +59,7 @@ exports.components = [function() { // 分享组件
             picker: 'star-score',
             data: {
                 id: course.id,
-                avgScore: (course.avgScore / 10).toFixed(1)
+                avgScore: course.avgScore / 10
             },
             callback: function(score) {
                 me.module.dispatch('score', { score: score, businessId: course.id, businessType: 1 });

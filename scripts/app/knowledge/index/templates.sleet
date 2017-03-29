@@ -81,7 +81,7 @@ view('main')
                     span > echo('下载数：') + echo(downloadMemberCount)
 
             .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
+                a.normal.icon-add.iconfont(href = '#/knowledge/detail/'+id)
 
 
     #pager.pagination
