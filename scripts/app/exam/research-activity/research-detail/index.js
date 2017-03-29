@@ -218,8 +218,7 @@ exports.store = {
             var me = this;
             this.models.form.set(this.models.answer.getData());
             return this.post(this.models.form).then(function() {
-                var record = me.models.researchRecord.data,
-                    research = record.researchQuestionary;
+                var record = me.models.researchRecord.data;
                 me.app.message.success(strings.get('submit-success'));
                 me.app.navigate('exam/research-activity/research-answer/' + record.id, true);
             });
