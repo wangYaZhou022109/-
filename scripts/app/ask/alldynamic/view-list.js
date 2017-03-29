@@ -1,9 +1,10 @@
 // var D = require('drizzlejs');
-// var $ = require('jquery');
+var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    trends: true,
+    course: true
 };
 
 exports.events = {
@@ -27,12 +28,7 @@ exports.handlers = {
         }
     },
     discuss: function(payload) {
-        var el = this.$(payload);
-        if (el.hidden === false) {
-            el.hidden = true;
-        } else if (el.hidden === true) {
-            el.hidden = false;
-        }
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
     report: function(payload) {
         var id = payload,
@@ -47,6 +43,7 @@ exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click publish-*': 'publish',
+    'click reply-*': 'reply',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
     'click del-discuss-*': 'deldiscuss'
@@ -85,6 +82,9 @@ exports.dataForActions = {
         return data;
     },
     publish: function(payload) {
+        return payload;
+    },
+    reply: function(payload) {
         return payload;
     }
 };
@@ -131,3 +131,23 @@ exports.dataForTemplate = {
         return trends;
     }
 };
+
+
+exports.components = [function() { // 分享组件
+    var data = {},
+        course = this.bindings.course.data;
+    if (course) {
+        data.id = course.id;
+        data.type = '1';
+        data.pics = 'images/default-cover/default_course.jpg';
+        data.title = course.name;
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
+}];

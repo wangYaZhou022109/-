@@ -7,11 +7,11 @@ view('main')
         .clearfix
             dl
                 dt > echo(follow.contentCount)
-                dd > string('follow') + string('content')
+                dd > a(id = 'follow-me-1') > string('followers') 
             dl
                 dt > echo(follow.topicCount)
-                dd > string('follow') + string('topic')
+                dd > a(id = 'follow-me-2') > string('answer') 
             dl
                 dt > echo(follow.expertCount)
-                dd > string('follow') + string('expert')
+                dd > a(id = 'follow-me-3') > string('share') 
 

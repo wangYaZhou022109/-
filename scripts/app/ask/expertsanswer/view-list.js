@@ -7,12 +7,13 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click dynamic-*': 'toggleMore'
+    'click dynamic-*': 'toggleMore',
+    'click myquiz-details-*': 'showDetails',
+    'click discuss-*': 'discuss',
+    'click trend-report-*': 'report'
 };
 
 exports.handlers = {
-    dynamic: function() {
-    },
     toggleMore: function(id, e, target) {
         var region,
             data;
@@ -21,6 +22,25 @@ exports.handlers = {
         if (id.indexOf(',') !== -1) {
             data = id.split(',');
             region.show('ask/myquiz/details', { id: data[1] });
+        }
+    },
+    showDetails: function(payload) {
+        var data = { },
+            id = payload;
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
+        }
+    },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
         }
     }
 };

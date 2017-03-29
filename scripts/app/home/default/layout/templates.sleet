@@ -9,234 +9,261 @@ view('layout') > .container
     compare(moduleHomeConfig.style 'eq' 'layout-1')
         .layout-1
             inner(contents '1')
-                .big-pic > .content
-                    .img >  img(src=downloadUrl(dataImage))
+                .big-pic > a.normal(href=dataUrl target='_blank') > .content
+                    .img > img(src=imageUrl)
 
             .base-list
                 .list-bar
-                    .item > .content > inner(contents '2')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '3')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img > img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content > inner(contents '4')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '5')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content > inner(contents '6')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '7')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '7')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
     compare(moduleHomeConfig.style 'eq' 'layout-2')
         .layout-2
             inner(contents '1')
-                .big-pic > .content
-                    .img >  img(src=downloadUrl(dataImage) style='height: 100%;')
+                .big-pic > a.normal(href=dataUrl target='_blank') > .content
+                    .img >  img(src=imageUrl style='height: 100%;')
 
             .base-list
                 .list-bar
-                    .item > .content > inner(contents '2')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '3')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar.big-height
-                    .item > .content > inner(contents '4')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .bottom
-                            .title > echo(dataName)
-                            .descoration.sub-text > @echo(dataSummary)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
 
                 .list-bar
-                    .item > .content > inner(contents '5')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '6')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
     compare(moduleHomeConfig.style 'eq' 'layout-3')
         .layout-3
-            .big-pic > .content > inner(contents '1')
-                .img >  img(src=downloadUrl(dataImage))
-                .bottom
-                    .title > echo(dataName)
-                    .descoration.sub-text.textoverflow > @echo(dataSummary)
-                    .sub-text.small-font
-                        .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                        .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                .home-tag > .tag > span > map('home-data-type' dataType)
-
+            inner(contents '1')
+                .big-pic > a.normal(href=dataUrl target='_blank') > .content
+                    .img >  img(src=imageUrl)
+                    .bottom
+                        .title > echo(dataName)
+                        .descoration.sub-text.textoverflow > @echo(dataSummary)
+                        .sub-text.small-font
+                            .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                            .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                    .home-tag > .tag > span > map('home-data-type' dataType)
 
             .base-list
                 .list-bar.big-width
-                    .item > .content > inner(contents '2')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .bottom
-                            .title > echo(dataName)
-                            .descoration.sub-text > @echo(dataSummary)
-                            .sub-text.small-font
-                                .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                                .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                        .home-tag > .tag > span > map('home-data-type' dataType)
-                    .item > .content > inner(contents '3')
-                        .bottom
-                            .title > echo(dataName)
-                            .descoration.sub-text > @echo(dataSummary)
-                            .sub-text.small-font
-                                .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                                .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                        .img >  img(src=downloadUrl(dataImage)) + .home-tag > .tag > span > map('home-data-type' dataType)
-
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font
+                                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .home-tag > .tag > span > map('home-data-type' dataType)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font
+                                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .img >  img(src=imageUrl) + .home-tag > .tag > span > map('home-data-type' dataType)
 
                 .list-bar.big-height
-                    .item > .content > inner(contents '4')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .bottom
-                            .title > echo(dataName)
-                            .descoration.sub-text > @echo(dataSummary)
-                            .sub-text.small-font
-                                .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                                .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                        .home-tag > .tag > span > map('home-data-type' dataType)
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font
+                                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .home-tag > .tag > span > map('home-data-type' dataType)
     compare(moduleHomeConfig.style 'eq' 'layout-4')
         .layout-4
             .big-pic
-                .item-bar.above > .content
-                    inner(contents '1')
-                        .img >  img(src=downloadUrl(dataImage))
+                inner(contents '1')
+                    .item-bar.above > a.normal(href=dataUrl target='_blank') > .content
+                        .img >  img(src=imageUrl)
                 .item-bar.below
-                    .item > .content > inner(contents '2')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '3')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
             .base-list
                 .list-bar
-                    .item > .content > inner(contents '4')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '5')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
 
             .base-list
                 .list-bar
-                    .item > .content > inner(contents '6')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '7')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '7')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
     compare(moduleHomeConfig.style 'eq' 'layout-5')
         .layout-5
             .base-list
                 .list-bar
-                    .item > .content > inner(contents '1')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '2')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '1')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content > inner(contents '3')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '4')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content > inner(contents '5')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '6')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content > inner(contents '7')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                    .item > .content > inner(contents '8')
-                        .img >  img(src=downloadUrl(dataImage))
-                        .detail-wrapper > @echo(dataSummary)
-                        .bottom
-                            .title > echo(dataName)
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '7')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '8')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)

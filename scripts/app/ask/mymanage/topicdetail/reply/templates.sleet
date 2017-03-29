@@ -8,12 +8,12 @@ view('list')
                 li
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
-                        .h4 > a(id='dynamic-' + id )(class ='active') > echo(title)
+                        .h4 > a(id='reply-' + id ) > echo(title)
                         .comment-text > echo(questionDiscuss.content)
                         .user-info
-                            a(href='javascript:;') > echo(createUser.fullName)
+                            a(href='javascript:;') > echo(member.fullName)
                             span > echo('提问')
-                            span.sub-text > data(createTime)
+                            span.sub-text > echo(createTime)
                         .comment-operation
                             .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right

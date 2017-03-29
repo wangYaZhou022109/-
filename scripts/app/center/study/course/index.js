@@ -11,7 +11,8 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        search: { data: { businessType: 0 } },
+        progress: { url: '../course-study/course-study-progress/give-up' },
+        search: { data: { businessType: 0, findStudy: 0 } },
         img: { url: '../human/file/download' }
     },
     callbacks: {
@@ -33,6 +34,11 @@ exports.store = {
             D.assign(progressList.params, D.assign(searchModel.data, params));
             this.get(progressList);
             searchModel.changed();
+        },
+        deleteProgress: function(params) {
+            var progressModel = this.models.progress;
+            progressModel.set(params);
+            return this.save(progressModel);
         }
     }
 };

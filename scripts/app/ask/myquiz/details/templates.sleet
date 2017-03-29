@@ -1,12 +1,20 @@
 #!handlebars
 
-module > .ask-page > .container
-    .page-main-wrapper.knowledge-side
-        .page-side.side-min
+#  module > .ask-page > .container
+#      .page-main-wrapper.knowledge-side
+#          .page-side.side-min
+#              div(data-region='top')
+#              div(data-region='relevantexperts')
+#              div(data-region='relatedquestions')
+#          .page-main(data-region='main')
+module
+    .ask-page > .container
+        .page-main-wrapper.knowledge-side
+            .page-side.side-min
                 div(data-region='top')
                 div(data-region='relevantexperts')
                 div(data-region='relatedquestions')
-        .page-main(data-region='main')
+            .page-main(data-region='main')
 view('main')
     .comment-list.ask-list > ul
         li
@@ -18,7 +26,10 @@ view('main')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') > each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
-            .comment-text.m-top > echo(details.content)
+            .comment-text.m-top
+                compare(jsonImg.length 'gt' 0)
+                    img(src=jsonImg)
+                @echo(details.content)
             .comment-operation
                 .pull-right
                     .item
@@ -65,13 +76,15 @@ view('top')
             .btn.block.layout-mt-small.big(id='unfollow-question' data-name='id' data-value=expert.member.id) > string('unfollow')
         else
             .btn.block.layout-mt-small.big(id='follow-question' data-name='id' data-value=expert.member.id) > string('my-follow')
-    div(data-dynamic-key=followcount.menu) 
+    #  div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)
 
 view('relatedquestions')
     div(data-dynamic-key=relatedquestions.menu)
+
+
 #  module > .course-page
 #      div(data-region='main')
 #  view('main')

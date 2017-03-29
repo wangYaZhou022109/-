@@ -1,5 +1,4 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
+
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
@@ -11,12 +10,23 @@ exports.events = {
 };
 
 exports.handlers = {
-    showDetails: function(id, e, target) {
-        var region;
-        var el = $(target).parents('.comment-list')[0];
-        region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/myquiz/details', { id: id });
-    }
+    // showDetails: function(id, e, target) {
+    //     var region;
+    //     var el = $(target).parents('.comment-list')[0];
+    //     region = new D.Region(this.app, this.module, el, id);
+    //     region.show('ask/myquiz/details', { id: id });
+    // },
+    showDetails: function(payload) {
+        // var data = { },
+        //     id = payload;
+        // console.log(payload);
+        // if (id.indexOf('_') !== -1) {
+        //     data = id.split('_');
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+        this.app.show('content', 'ask/myquiz/details', { id: payload });
+        // }
+    },
 };
 
 exports.actions = {

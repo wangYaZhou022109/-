@@ -9,4 +9,4 @@ view('banner-notice')
         li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
         li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
     .notice-bottom > each(personPanels)
-        .item > i.iconfont.icon-type + span > echo(name)
+        .item > i.iconfont.icon-type + span > a.underline(href='/#'+url) > echo(name)
