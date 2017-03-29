@@ -16,11 +16,7 @@ exports.events = {
 };
 
 exports.handlers = {
-    audit: function(data) {
-        var id = data,
-            url = '#/train/statistics/audit-task/' + id;
-        window.open(url, '_blank');
-    }
+
 };
 
 exports.dataForTemplate = {

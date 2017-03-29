@@ -1,11 +1,14 @@
+var $ = require('jquery');
+
 exports.routes = {
     'index/:id': 'showIndex',
-    'sign-detail': 'showSignDetail',
     'programme/preview/:id': 'showPreview',
     response: 'showResponse',
     classinfos: 'showClassInfos',
     projects: 'showProjects',
-    train: 'showTrain'
+    train: 'showTrain',
+    'class-detail/task-detail/:id': 'showTaskDetail',
+    'statistics/task/audit-task/:id': 'showTaskDetail'
 };
 
 exports.showIndex = function(id) {
@@ -32,3 +35,13 @@ exports.showTrain = function(id) {
     return this.app.show('content', 'train/index/', { id: id });
 };
 
+exports.interceptors = {
+    'class-detail/task-detail/': 'clearHeadAndBottom',
+    'statistics/task/audit-task/': 'clearHeadAndBottom',
+};
+
+exports.clearHeadAndBottom = function() {
+    $('.header').hide();
+    $('.footer').hide();
+    $('.achievement-content').attr('height', '100%');
+};

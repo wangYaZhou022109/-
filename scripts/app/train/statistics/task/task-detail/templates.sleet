@@ -44,5 +44,5 @@ view('main')
                     if(score)
                         a(id='audit-preview'+id data-name='id' data-value=id) > echo(score) 
                     else
-                        a(id='audit-preview'+id data-name='id' data-value=id) > echo('详情')
+                        a.btn(href='#/train/statistics/task/audit-task/'+id target='_blank') > echo('详情')
     #pager.pagination

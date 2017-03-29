@@ -1,0 +1,40 @@
+#!handlebars
+
+module
+    .achievement-content.main-side
+        .achievement-side.bg-color
+            div(data-region='side')
+        .achievement-head(data-region='head')
+        .achievement-main(data-region='main')
+
+view('head')
+    .pull-left.title > echo(all.task.name)
+    .text-right
+        ul.head-info.inline-block
+            li.border.right > echo('提交人:' + all.member.fullName)
+
+view('main')
+    echo('null')
+
+view('side') > form.vertical
+    .row
+        echo('作业说明')
+        echo(all.task.explain)
+    .row
+        echo('作业附件')
+    .row
+        echo('用户提交附件')
+    .row
+        .col-sm-2
+            input.inline-block(name='state' type='radio' value='0')('checked')&if(task.checked)
+            .inline-block 通过
+            input.inline-block(name='state' type='radio' value='1')('checked')&unless(task.checked)
+            .inline-block 打回重新提交
+    .row
+        echo('评分')
+        .col-sm-2
+            input.input#score(name='score' value=score)
+    .row
+        echo('评语')
+        .col-sm-4
+            textarea#commont(name='commont' value='' rows=15 cols=33) > echo(commont)
