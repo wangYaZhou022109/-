@@ -22,7 +22,8 @@ view('main') > .base-info
             .form-row
                 .layout-mr
                     .inline-block > setting('person.index.info.position')
-                    .inline-block > echo(member.majoyPosition.name)
+                    .inline-block
+                        if(member.majoyPosition) > echo(member.majoyPosition.name)
             .form-row
                 .layout-mr
                     .inline-block > setting('person.index.info.joinTime')

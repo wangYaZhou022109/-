@@ -18,10 +18,10 @@ exports.store = {
             url: '../exam/activity/recommends',
             data: []
         },
-        gensees: { url: '../course-study/gensee-student/list',
+        gensees: { url: '../course-study/gensee/details',
             type: 'pageable',
             root: 'items',
-            pageSize: 20 },
+            pageSize: 50 },
         activity: { url: '../exam/activity' },
         params: { data: { all: true } },
         down: { url: '../human/file/download' },
@@ -38,7 +38,7 @@ exports.store = {
             url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 6
+            pageSize: 60
         },
         // 待办 阅卷，暂时写在这里 测试
         toDos: {
@@ -52,6 +52,7 @@ exports.store = {
         init: function() {
             this.models.activitys.params.size = RECOMMEND_SIZE;
             this.get(this.models.activitys);
+            this.models.gensees.params = this.models.params.data;
             this.get(this.models.gensees);
             this.models.exams.params = this.models.params.data;
             this.get(this.models.exams);
@@ -67,6 +68,8 @@ exports.store = {
             this.get(this.models.exams);
             this.models.researchActivitys.params = this.models.params.data;
             this.get(this.models.researchActivitys);
+            this.models.gensees.params = this.models.params.data;
+            this.get(this.models.gensees);
         },
         examLeft: function() {
             var page = this.models.exams.params.page;

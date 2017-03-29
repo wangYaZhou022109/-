@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    toArray;
 
 exports.bindings = {
     activitys: true,
@@ -22,7 +23,9 @@ exports.actions = {
     'click exam-left': 'examLeft',
     'click exam-right': 'examRight',
     'click research-left': 'researchLeft',
-    'click research-right': 'researchRight'
+    'click research-right': 'researchRight',
+    'click gensee-left': 'genseeLeft',
+    'click gensee-right': 'genseeRight',
 };
 exports.handlers = {
     toggleItem: function(el) {
@@ -72,15 +75,6 @@ exports.dataForTemplate = {
         }
         return data.activitys;
     },
-    gensees: function(data) {
-        var defultImg = 'images/default-cover/default_live.jpg',
-            downUrl = this.bindings.down.getFullUrl();
-        _.map(data.gensees || [], function(item) {
-            var gensee = item;
-            gensee.cover = gensee.cover ? (downUrl + '?id=' + gensee.cover) : defultImg;
-        });
-        return data.gensees;
-    },
     type: function() {
         var params = this.bindings.params.data;
         params.types = {};
@@ -98,37 +92,64 @@ exports.dataForTemplate = {
         return params;
     },
     examArray: function(data) {
-        var array = [],
-            num = 0,
-            temp = [],
-            obj,
-            i;
-        if (data.exams && data.exams.length) {
-            for (i = 1; i <= data.exams.length; i++) {
-                temp.push(data.exams[i - 1]);
-                if (i % 6 === 0) {
-                    obj = {};
-                    obj.a = temp;
-                    array.push(obj);
-                    num++;
-                    temp = [];
-                }
-            }
-            if (temp.length > 0) {
-                obj = {};
-                obj[num] = temp;
-                array.push(obj);
-            }
-            return array;
-        }
-        return [];
-    }
+        return toArray(data.exams, 6);
+    },
+    researchArray: function(data) {
+        return toArray(data.researchActivitys, 6);
+    },
+    genseesArray: function(data) {
+        var defultImg = 'images/default-cover/default_live.jpg',
+            downUrl = this.bindings.down.getFullUrl();
+        _.map(data.gensees || [], function(item) {
+            var gensee = item;
+            gensee.cover = gensee.cover ? (downUrl + '?id=' + gensee.cover) : defultImg;
+        });
+        return toArray(data.gensees, 5);
+    },
 };
 
+toArray = function(objs, pageSize) {
+    var array = [],
+        num = 0,
+        temp = [],
+        obj,
+        i;
+    if (objs && objs.length) {
+        for (i = 1; i <= objs.length; i++) {
+            temp.push(objs[i - 1]);
+            if (i % pageSize === 0) {
+                obj = {};
+                obj.a = temp;
+                array.push(obj);
+                num++;
+                temp = [];
+            }
+        }
+        if (temp.length > 0) {
+            obj = {};
+            obj[num] = temp;
+            array.push(obj);
+        }
+        return array;
+    }
+    return [];
+};
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'exams' }
 }, {
     id: 'swiper-3',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-2',
+    name: 'swiper',
+    options: {
+        slider: true
+    }
+}, {
+    id: 'swiper-5',
     name: 'swiper',
     options: {
         slider: true

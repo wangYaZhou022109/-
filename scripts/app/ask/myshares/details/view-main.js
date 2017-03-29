@@ -1,4 +1,5 @@
 var D = require('drizzlejs');
+
 exports.type = 'dynamic';
 
 exports.bindings = {
@@ -6,7 +7,8 @@ exports.bindings = {
     details: true
 };
 exports.events = {
-    'click discuss-answer-*': 'discussanswer'
+    'click discuss-answer-*': 'discussanswer',
+    'click report-*': 'report'
 };
 
 exports.handlers = {
@@ -20,8 +22,17 @@ exports.handlers = {
         } else {
             el.style.display = 'none';
         }
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+        }
     }
 };
+
 exports.actions = {
     'click close': 'close',
     'click boutique': 'boutique',
@@ -30,9 +41,7 @@ exports.actions = {
     'click discuss-boutique-*': 'discussboutique',
     'click discuss-del-*': 'discussdel',
     'click enjoy-*': 'enjoy',
-    'click report-*': 'report',
-    'click setEssenceStatus-*': 'setEssenceStatus',
-    'click shut-*': 'shut'
+    // 'click trend-report-*': 'report'
 };
 
 // actions绑定的方法调用前要干的事情
@@ -41,7 +50,9 @@ exports.dataForActions = {
         return payload;
     },
     boutique: function(payload) {
-        return payload;
+        var data = payload;
+        data.concernType = 2;
+        return data;
     },
     discuss: function(payload) {
         var data = payload;
@@ -67,16 +78,6 @@ exports.dataForActions = {
     },
     report: function(payload) {
         return payload;
-    },
-    setEssenceStatus: function(payload) {
-        var data = payload;
-        data.essenceStatus = 1;
-        return data;
-    },
-    shut: function(payload) {
-        var data = payload;
-        data.closeStatus = 1;
-        return data;
     }
 };
 
@@ -98,10 +99,6 @@ exports.actionCallbacks = {
         this.app.message.success('讨论删除成功！');
         this.module.dispatch('refresh', payload);
     },
-    setEssenceStatus: function() {
-        this.app.message.success('加精成功!');
-        // this.module.dispatch('init');
-    },
     discusstop: function(payload) {
         this.app.message.success('置顶成功！');
         this.module.dispatch('refresh', payload);
@@ -117,10 +114,6 @@ exports.actionCallbacks = {
     report: function(payload) {
         this.app.message.success('举报成功！');
         this.module.dispatch('refresh', payload);
-    },
-    shut: function() {
-        this.app.message.success('关闭成功!');
-        // this.module.dispatch('init');
     }
 };
 

@@ -2,13 +2,15 @@
 exports.type = 'dynamic';
 exports.bindings = {
     expertlist: true,
-    topicType: true
+    topicType: true,
+    user: true
 };
 
 exports.events = {
     'click expert-activate*': 'activate',
     'click expert-myself*': 'myself',
-    'click expert-apply*': 'apply'
+    'click expert-apply*': 'apply',
+    'click expert-*': 'details'
 };
 
 exports.handlers = {
@@ -22,6 +24,9 @@ exports.handlers = {
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
         this.app.viewport.modal(model);
+    },
+    details: function(id) {
+        this.app.show('content', 'ask/expertdetails', { id: id });
     }
 };
 
