@@ -37,18 +37,16 @@ exports.store = {
         saveInner: function(payload) {
             var innerExpert = this.models.innerExpert;
             var data = {};
-            var topic = [];
             var me = this;
-            var topicIds = this.models.state.data;
             var user = this.models.findUser.data;
-            _.forEach(topicIds, function(d) {
-                topic.push(d.id);
-            });
             data.introduce = payload.introduce;
             data.headPortrait = payload.headPortrait;
             data.activeStatus = 0;
             data.memberId = user.id;
-            data.topicIds = topic.toString();
+            data.topicIds = payload.topicIds;
+            if (data.topicIds === '') {
+                this.app.message.success('请填写您擅长话题！');
+            }
             if (data.introduce === '') {
                 this.app.message.success('请填写您的优势！');
             }
@@ -63,32 +61,6 @@ exports.store = {
             var user = this.models.findUser;
             user.set({ id: 'me' });
             return this.put(user);
-        },
-        delTopic: function(payload) {
-            var state = this.models.state;
-            var newState = [];
-            var data = payload;
-            _.forEach(state.data, function(d) {
-                if (d.id !== data.id) {
-                    newState.push(d);
-                }
-            });
-            state.data = newState;
-            state.changed();
-        },
-        addTopic: function(payload) {
-            var data = this.models.topicname.getTopic(payload.id);
-            var state = this.models.state,
-                falg = true;
-            _.forEach(state.data, function(d) {
-                if (d.id === data.id) {
-                    falg = false;
-                }
-            });
-            if (typeof data === 'object' && falg) {
-                state.data.push(data);
-                state.changed();
-            }
         }
     }
 };

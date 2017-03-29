@@ -15,7 +15,7 @@ view('main')
     ul > each(studyRank)
         li
             .pull-right
-                b > echo(studyTotalTime)
+                b > echo(time)
             .cont
                 .icon.custom-color-1 > .iconfont.icon-star-full
                 span > echo(memberName)

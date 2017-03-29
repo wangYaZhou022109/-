@@ -8,232 +8,262 @@ view('layout') > .container
         .more more
     compare(moduleHomeConfig.style 'eq' 'layout-1')
         .layout-1
-            .big-pic > .content
-                .img >  img(src='images/home/1-1.jpg')
+            inner(contents '1')
+                .big-pic > a.normal(href=dataUrl target='_blank') > .content
+                    .img > img(src=imageUrl)
 
             .base-list
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/1.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/2.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img > img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/3.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/4.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/5.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/6.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '7')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
     compare(moduleHomeConfig.style 'eq' 'layout-2')
         .layout-2
-            .big-pic > .content
-                .img >  img(src='images/home/2-1.jpg' style='height: 100%;')
+            inner(contents '1')
+                .big-pic > a.normal(href=dataUrl target='_blank') > .content
+                    .img >  img(src=imageUrl style='height: 100%;')
 
             .base-list
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/1.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/2.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar.big-height
-                    .item > .content
-                        .img >  img(src='images/home/1-1.jpg')
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
 
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/4.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/5.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
     compare(moduleHomeConfig.style 'eq' 'layout-3')
         .layout-3
-            .big-pic > .content
-                .img >  img(src='images/home/2-1.jpg')
-                .bottom
-                    .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                    .descoration.sub-text.textoverflow 智能化新时代的客户渠道智能化户渠道智能化新时代的客户渠道
-                    .sub-text.small-font
-                        .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
-                        .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                .home-tag > .tag > span 直播
-
+            inner(contents '1')
+                .big-pic > a.normal(href=dataUrl target='_blank') > .content
+                    .img >  img(src=imageUrl)
+                    .bottom
+                        .title > echo(dataName)
+                        .descoration.sub-text.textoverflow > @echo(dataSummary)
+                        .sub-text.small-font
+                            .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                            .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                    .home-tag > .tag > span > map('home-data-type' dataType)
 
             .base-list
                 .list-bar.big-width
-                    .item > .content
-                        .img >  img(src='images/home/3.jpg')
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
-                            .sub-text.small-font
-                                .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
-                                .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                        .home-tag > .tag > span 班级
-                    .item > .content
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
-                            .sub-text.small-font
-                                .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
-                                .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                        .img >  img(src='images/home/4.jpg') + .home-tag > .tag > span 调研
-
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font
+                                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .home-tag > .tag > span > map('home-data-type' dataType)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font
+                                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .img >  img(src=imageUrl) + .home-tag > .tag > span > map('home-data-type' dataType)
 
                 .list-bar.big-height
-                    .item > .content
-                        .img >  img(src='images/home/1-1.jpg')
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .descoration.sub-text 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道户渠道智能化新时代的客户渠道智能化新时代的客户渠道...
-                            .sub-text.small-font
-                                .icon-item > i.iconfont.icon-view(title='浏览人次') + span 99
-                                .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
-                        .home-tag > .tag > span 考试
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .bottom
+                                .title > echo(dataName)
+                                .descoration.sub-text > @echo(dataSummary)
+                                .sub-text.small-font
+                                    .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .home-tag > .tag > span > map('home-data-type' dataType)
     compare(moduleHomeConfig.style 'eq' 'layout-4')
         .layout-4
             .big-pic
-                .item-bar.above > .content
-                    .img >  img(src='images/home/4-1.jpg')
+                inner(contents '1')
+                    .item-bar.above > a.normal(href=dataUrl target='_blank') > .content
+                        .img >  img(src=imageUrl)
                 .item-bar.below
-                    .item > .content
-                        .img >  img(src='images/home/1.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/2.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
             .base-list
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/3.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/4.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
 
             .base-list
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/5.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/6.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '7')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
     compare(moduleHomeConfig.style 'eq' 'layout-5')
         .layout-5
             .base-list
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/3.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/1.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '1')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '2')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/2.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/5.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '3')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '4')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/7.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/6.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '5')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '6')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .list-bar
-                    .item > .content
-                        .img >  img(src='images/home/4.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
-                    .item > .content
-                        .img >  img(src='images/home/1.jpg')
-                        .detail-wrapper 描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                        .bottom
-                            .title 智能化新时代的客户渠道智能化新时代的客户渠道智能化新时代的客户渠道
-                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span 99
+                    inner(contents '7')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+                    inner(contents '8')
+                        a.normal(href=dataUrl target='_blank') > .item > .content
+                            .img >  img(src=imageUrl)
+                            .detail-wrapper > @echo(dataSummary)
+                            .bottom
+                                .title > echo(dataName)
+                                .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
