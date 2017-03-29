@@ -4,7 +4,8 @@ exports.items = {
 exports.store = {
     models: {
         contents: { url: '../system/home-content' },
-        styleMap: { data: { 'layout-1': 7, 'layout-2': 6, 'layout-3': 4, 'layout-4': 7, 'layout-5': 8 } }
+        styleMap: { data: { 'layout-1': 7, 'layout-2': 6, 'layout-3': 4, 'layout-4': 7, 'layout-5': 8 } },
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function(payload) {

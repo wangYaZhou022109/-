@@ -134,7 +134,7 @@ module.exports = {
             url = rootPath + '/human/file/download?id=' + fileId;
         return fileId && url;
     },
-
+    
     routerLink: function() {
         var Self = arguments[arguments.length - 1].data.root.Self,
             prefix = Self.app.options.routerPrefix,

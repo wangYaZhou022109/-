@@ -13,8 +13,11 @@ view('list')
             li
                 .user-pic > img(src='images/d2.jpg')
                 .comment-content
-                    .h4 > a(id='myquiz-details-' + id )(class ='active') > echo(title)
-                    .comment-text > echo(content)
+                    .h4 > a(id='myquiz-details-' + id) > echo(title)
+                    .comment-text
+                        compare(jsonImg.length 'gt' 0)
+                            img(src=jsonImg)
+                        @echo(content)
                     .user-info
                         a(href='javascript:;') > echo(fullName)
                         span > echo('提问·')

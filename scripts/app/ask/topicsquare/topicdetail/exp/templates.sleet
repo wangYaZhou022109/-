@@ -8,7 +8,7 @@ view('list')
             li
                 .user-pic > img(src='images/d2.jpg')
                 .comment-content
-                    .h4 > echo(title)
+                    .h4 > a(id='exp-' + id + '_' + questionId ) > echo(title)
                     .comment-text > echo(content)
                     .user-info
                         a(href='javascript:;') > echo(createUser.fullName)

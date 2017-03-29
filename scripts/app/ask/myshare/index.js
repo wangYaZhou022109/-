@@ -1,5 +1,4 @@
 exports.items = {
-    popup: 'popup',
     main: 'main',
     'ask/article': { isModule: true }
 };
@@ -7,7 +6,6 @@ exports.items = {
 
 exports.store = {
     models: {
-        popupstate: {}
     },
     callbacks: {
         init: function() {

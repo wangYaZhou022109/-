@@ -4,7 +4,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        myreply: { url: '../ask-bar/question-discuss/answer' }
+        myreply: { url: '../ask-bar/question-discuss/answer' },
+        del: { url: '../ask-bar/trends/del' }
     },
     callbacks: {
         init: function() {
@@ -12,6 +13,11 @@ exports.store = {
             myreply.set({ id: 'me' });
             return this.post(myreply);
         },
+        remove: function(payload) {
+            var del = this.models.del;
+            del.set(payload);
+            return this.put(del);
+        }
     }
 };
 

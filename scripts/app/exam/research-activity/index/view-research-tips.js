@@ -9,7 +9,7 @@ exports.dataForTemplate = {
         var researchRecord = data.researchRecord,
             research = researchRecord.researchQuestionary,
             now = new Date().getTime(),
-            buttons = [{ id: 'answer-next-time', text: '下次来答', target: false }];
+            buttons = [{ id: 'answer-next-time', text: '下次再答', target: false }];
 
         if (now >= research.startTime && now <= research.endTime) {
             if (researchRecord.status === 0) {
@@ -19,20 +19,12 @@ exports.dataForTemplate = {
                     url: '#/exam/research-activity/research-detail/' + research.id,
                     target: true
                 });
-            } else if (researchRecord.researchQuestionary.permitViewCount === 1) {
-                buttons = [];
-                buttons.push({
-                    id: 'research-summary-detail',
-                    text: '查看详情',
-                    url: '#/exam/research-activity/research-summary-detail/' + researchRecord.id,
-                    target: true
-                });
             } else {
                 buttons = [];
                 buttons.push({
-                    id: 'research-answer-detail',
+                    id: 'research-answer',
                     text: '查看详情',
-                    url: '#/exam/research-activity/research-answer-detail/' + researchRecord.id,
+                    url: '#/exam/research-activity/research-answer/' + researchRecord.id,
                     target: true
                 });
             }

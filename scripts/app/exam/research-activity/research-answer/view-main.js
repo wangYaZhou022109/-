@@ -1,12 +1,15 @@
 var types = require('./app/exam/research-question-types'),
     D = require('drizzlejs'),
     _ = require('lodash/collection'),
-    ANSWER_DETAIL_MODE = 2;
+    SUMMARY_DETAIL_MODE = 1,
+    ANSWER_DETAIL_MODE = 2,
+    MUTIPLE_TYPE = 1;
 
 exports.bindings = {
     researchRecord: true,
-    questions: true,
-    dimensions: true
+    dimensions: true,
+    state: true,
+    questions: false
 };
 
 exports.type = 'dynamic';
@@ -20,6 +23,10 @@ exports.getEntity = function(id) {
 };
 
 exports.getEntityModuleName = function(id, question) {
+    var researchQuestionary = this.bindings.researchRecord.data.researchQuestionary;
+    if (researchQuestionary && researchQuestionary.permitViewCount === 1) {
+        return types.get(question.type, SUMMARY_DETAIL_MODE);
+    }
     return types.get(question.type, ANSWER_DETAIL_MODE);
 };
 
@@ -28,4 +35,13 @@ exports.dataForEntityModule = function(question) {
         type: question.type,
         question: question
     };
+};
+
+exports.dataForTemplate = {
+    isMutiple: function(data) {
+        if (data.researchRecord.researchQuestionary) {
+            return data.researchRecord.researchQuestionary.answerPaperRule === MUTIPLE_TYPE;
+        }
+        return true;
+    }
 };
