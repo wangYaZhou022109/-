@@ -348,6 +348,9 @@ module.exports = {
         9: '/#/study/course/detail/',
         10: '/#/study/subject/detail/'
     },
+    'research-person-center-status': {
+        1: '待开始', 2: '待参加', 3: '已完成'
+    },
     get: function(k) {
         return _.map(this[k], function(value, key) {
             return { key: key, value: value };
