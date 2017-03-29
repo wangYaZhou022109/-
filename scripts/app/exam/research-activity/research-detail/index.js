@@ -221,11 +221,7 @@ exports.store = {
                 var record = me.models.researchRecord.data,
                     research = record.researchQuestionary;
                 me.app.message.success(strings.get('submit-success'));
-                if (research.permitViewCount === 1) {
-                    me.app.navigate('exam/research-activity/research-summary-detail/' + record.id, true);
-                } else {
-                    me.app.navigate('exam/research-activity/research-answer-detail/' + record.id, true);
-                }
+                me.app.navigate('exam/research-activity/research-answer/' + record.id, true);
             });
         },
         selectDimension: function(payload) {

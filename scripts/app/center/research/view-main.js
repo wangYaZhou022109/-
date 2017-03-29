@@ -1,5 +1,8 @@
-// var _ = require('lodash/collection'),
-//     D = require('drizzlejs');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs'),
+    WAIT_START = 1,
+    WAIT_JOIN = 2,
+    FINISHED = 3;
 
 exports.bindings = {
     researchRecords: true,
@@ -39,30 +42,30 @@ exports.handlers = {
     }
 };
 
-// exports.dataForTemplate = {
-//     researchRecords: function(data) {
-//         var search = this.bindings.search.data;
-//         return _.map(data.researchRecords, function(r) {
-//             var status = '';
-//             if (search.all) {
-//                 if (r.researchQuestionary.startTime < new Date().getTime()) {
-//                     status = '待开始';
-//                 } else if (r.status === 0) {
-//                     status = '待参加';
-//                 } else {
-//                     status = '已完成';
-//                 }
-//             }
-//             if (search.waitJoin) {
-//                 status = '待参加';
-//             }
-//             if (search.waitStart) {
-//                 status = '待开始';
-//             }
-//             if (search.finished) {
-//                 status = '已完成';
-//             }
-//             return D.assign(r, { status: status });
-//         });
-//     }
-// };
+exports.dataForTemplate = {
+    researchRecords: function(data) {
+        var search = this.bindings.search.data;
+        return _.map(data.researchRecords, function(r) {
+            var status = '';
+            if (search.all) {
+                if (r.researchQuestionary.startTime > new Date().getTime()) {
+                    status = WAIT_START;
+                } else if (r.status === 0) {
+                    status = WAIT_JOIN;
+                } else {
+                    status = FINISHED;
+                }
+            }
+            if (search.waitJoin) {
+                status = WAIT_JOIN;
+            }
+            if (search.waitStart) {
+                status = WAIT_START;
+            }
+            if (search.finished) {
+                status = FINISHED;
+            }
+            return D.assign(r, { status: status });
+        });
+    }
+};

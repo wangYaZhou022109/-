@@ -27,12 +27,14 @@ view('main') > form
                         dateTime(researchQuestionary.startTime) 
                         | 至
                         dateTime(researchQuestionary.endTime)
-                .state > map('research-record-status', status)
+                .state > map('research-person-center-status', status)
                 .btn-row
-                    compare(status 'eq' 1)
+                    compare(status 'eq' 3)
                         .btn(id='view-detail-' + id) 查看详情
-                    compare(status 'eq' 0)
-                        .btn(id='do-research-' + id) 继续调研
+                    compare(status 'eq' 2)
+                        .btn(id='do-research-' + id) 参加调研
+                    compare(status 'eq' 1)
+                        .btn(id='do-research-' + id style='background: #dedede; pointer-events: none;') 参加调研
         #pager.pagination
 
 view('research-tips')
