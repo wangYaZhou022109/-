@@ -21,7 +21,7 @@ module
 view('main')
     .buttons
         .btn#classGroup > i.icon-plus + span > echo('两个带来')
-        .btn#addRequired > i.icon-plus + span > echo('班车信息统计')
+        .btn#shuttleBusInformation > i.icon-plus + span > echo('班车信息统计')
         .btn#addCourse2 > i.icon-plus + span > echo('作业提交')
         .btn#addCourse1 > i.icon-plus + span > echo('学员满意度')
         .btn#addCourse3 > i.icon-plus + span > echo('调研与考试')
@@ -88,3 +88,27 @@ view('fmtrainees')
             td > echo(member.positionName)
             td > echo(phoneNumber)
     #pager.pagination(style='float:none')
+view('bus')
+    tbody > each(bus)
+        div
+            tr
+                td > echo(name+'       '+startTime+'-'+endTime)
+                .pull-right
+                    a.normal.layout-mr.sub-text(id='sectionDisplay-'+ id href="javascript:;")
+                        label(id='label-' + id)
+                        i.iconfont.icon-arrow-up(id='icon-' + id)
+            if(show)
+                div(id='sectionDiv-' + id display = none )
+                    if(falg)
+                        each(busDetails)
+                            .item.block
+                                tr
+                                    td > echo(id)
+                    else
+                        each(optionList)
+                            .item.block
+                                tr
+                                    td > echo(id)
+                                    td > .checkbox.no-margin
+                                        input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                        label(for='check-item'+id)
