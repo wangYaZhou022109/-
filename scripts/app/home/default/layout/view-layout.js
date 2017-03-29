@@ -25,7 +25,7 @@ exports.dataForTemplate = {
                 imageUrl = downUrl + '?id=' + r.image;
             }
             r.imageUrl = imageUrl;
-            r.dataUrl = dataUrl + r.id;
+            r.dataUrl = dataUrl + r.dataId;
             array[i + 1] = r;
         });
         return array;
