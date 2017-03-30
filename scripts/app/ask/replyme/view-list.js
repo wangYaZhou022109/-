@@ -7,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myreply-details-*': 'showDetails'
+    'click myreply-details-*': 'showDetails',
+    'click report-*': 'report'
 };
 
 exports.handlers = {
@@ -28,6 +29,14 @@ exports.handlers = {
             // region = new D.Region(this.app, this.module, el, data[1]);
             // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myshares/details', { id: data[1] });
+        }
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
         }
     }
 };

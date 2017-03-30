@@ -15,6 +15,17 @@ exports.store = {
             myshares.params = { id: 1 };
             return this.get(myshares);
         },
+        follow: function(payload) {
+            var follow = this.models.follow;
+            follow.set(payload);
+            return this.post(follow);
+        },
+        unfollow: function(payload) {
+            var follow = this.models.unfollow;
+            // console.log(payload);
+            follow.set(payload);
+            return this.put(follow);
+        }
     }
 };
 

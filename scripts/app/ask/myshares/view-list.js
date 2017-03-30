@@ -82,6 +82,14 @@ exports.actionCallbacks = {
     remove: function() {
         this.app.message.success('删除成功！');
         this.module.dispatch('init');
-    }
+    },
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
 };
 

@@ -76,7 +76,7 @@ view('list')
                         .comment-operation
                             .pull-left > .sub-text > echo('来自分享') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
                             .text-right
-                                .item > a.normal(href='javascript:;') 关注
+                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                                 .item > a.normal(href='javascript:;') 添加讨论
                                 .item
                                     .drop-down-wrapper
