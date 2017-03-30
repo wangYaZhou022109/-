@@ -81,7 +81,9 @@ exports.store = {
         message: {
             url: '../system/message',
             params: { page: 1, pageSize: 5, type: 1, readStatus: 0 }
-        }
+        },
+        integral: { url: '../system/integral-result/grade' }, // 积分和等级
+        courseTime: { url: '../course-study/course-study-progress/total-time' } // 总学习时长
     },
     callbacks: {
         loadNavs: function(configId) {
@@ -99,7 +101,6 @@ exports.store = {
                 var cfgId;
                 if (homeConfig.data) {
                     cfgId = homeConfig.data.id;
-                    window.document.title = homeConfig.data.name;
                     return that.module.dispatch('loadNavs', cfgId);
                 }
                 return null;
@@ -127,6 +128,16 @@ exports.store = {
             if (this.app.global.currentUser.id) {
                 this.get(this.models.message);
             }
+        },
+        loadIntegral: function() {
+            if (this.app.global.currentUser.id) {
+                this.get(this.models.integral);
+            }
+        },
+        loadCourseTime: function() {
+            if (this.app.global.currentUser.id) {
+                this.get(this.models.courseTime);
+            }
         }
     }
 };
@@ -135,5 +146,7 @@ exports.beforeRender = function() {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('loadMessage');
+    this.dispatch('loadMessage');
+    this.dispatch('loadIntegral');
+    this.dispatch('loadCourseTime');
 };

@@ -6,7 +6,7 @@ module > .choise
 
 view('content')
     p.question
-        span > a(name='question-' + state.id) > echo(state.index '.')
+        span > a.normal(name='question-' + state.id) > echo(state.index '.')
         echo('【')
         map('research-question-types' state.type)
         echo('】')

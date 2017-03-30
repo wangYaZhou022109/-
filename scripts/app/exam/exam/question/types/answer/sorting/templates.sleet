@@ -6,7 +6,7 @@ module > .choise
 
 view('content')
     p.question
-        span > a(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index '：')
         @echo(state.content)
 
 
@@ -21,7 +21,6 @@ view('options')
             .inline-block
                 input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
             .inline-block(id='error')
-        hr
 
     if(isShowDetail)
         .show-answer

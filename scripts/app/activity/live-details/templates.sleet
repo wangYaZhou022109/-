@@ -8,7 +8,10 @@ module > .live-details-page
 
 view('live')
     .page-main-wrapper
-        iframe(src=liveUrl frameborder='0' scrolling='no' width='100%'  align='middle' height='680px')
+        compare(gensee.status 'eq' 2)
+            iframe(src=liveUrl frameborder='0' scrolling='no' width='100%'  align='middle' height='680px')
+        else
+            img(src=liveUrl  width='100%'  align='middle' height='680px')
 view('side')
     .page-side > .container
         if(businesses)
@@ -81,7 +84,7 @@ view('main')
                     .user-pic.pull-left > i.iconfont.icon-star-full
                     | 直播时间
                     p
-                        dateMinute(gensee.startTime)
+                        date(gensee.startTime)
                 compare(sub.subStatus 'eq' 0)
                     .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
                 else
@@ -106,12 +109,12 @@ view('main')
                                     .title.text-overflow
                                         echo(name)
                                 .clearfix.small-font.sub-title
-                                    i.iconfont.icon-star-full
+                                    i.iconfont.icon-view
                                         if(studyMemberCount)
                                             echo(studyMemberCount)
                                         else
                                             echo(0)
-                                    i.iconfont.icon-star-full.m-left
+                                    i.iconfont.icon-star.m-left
                                         if(avgScore)
                                             echo(avgScore)
                                         else
@@ -132,7 +135,7 @@ view('main')
                                     .title.text-overflow
                                         echo(subject)
                                 .clearfix.small-font.sub-title
-                                    i.iconfont.icon-star-full
+                                    i.iconfont.icon-view
                                         echo(attendNumber)
-                                    i.iconfont.icon-star-full.m-left
-                                        date(startTime)
+                                    i.iconfont.icon-star.m-left
+                                        echo(avgScore)

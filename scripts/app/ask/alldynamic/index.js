@@ -1,4 +1,4 @@
-
+var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -6,6 +6,30 @@ exports.items = {
 
 exports.store = {
     models: {
+        course: {
+            url: '../course-study/course-front',
+            mixin: {
+                findChapter: function(chapterId) {
+                    return _.find(this.data.courseChapters, { id: chapterId });
+                },
+                findSection: function(sectionId) {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { id: sectionId });
+                },
+                findSectionForReferId: function(referenceId) {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { referenceId: referenceId });
+                },
+                findSectionsForType: function(type) {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.filter(_.flatMap(this.data.courseChapters, duplicate), { sectionType: type });
+                },
+                findFirstSection: function() {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.flatMap(this.data.courseChapters, duplicate)[0];
+                }
+            }
+        },
         trends: { url: '../ask-bar/trends/all-dynamic' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
