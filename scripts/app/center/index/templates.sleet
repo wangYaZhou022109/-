@@ -35,15 +35,16 @@ view('top')
                 .edit-div(contenteditable='true') > echo(member.memberDetail.summary)
 
 view('notice')
-    .news-list.clearfix
-        .pull-left.m-right > i.iconfont.icon-notice
-        b.title > setting('center.index.notice')
-        .navigator
-            .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
-            .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
-            .icon#showMore > .iconfont.icon-more
-        ul > each(announcements)
-            li > echo(title)
+    compare(recordCount 'gt' 0)
+        .news-list.clearfix
+            .pull-left.m-right > i.iconfont.icon-notice
+            b.title 公告
+            .navigator
+                .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
+                .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
+                .icon#showMore > .iconfont.icon-more
+            ul > each(announcements)
+                li > echo(title)
 
 view('menu')
     .person-menu
