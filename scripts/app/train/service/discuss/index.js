@@ -10,7 +10,6 @@ exports.store = {
         init: function(payload) {
             var state = this.models.state;
             state.set(payload);
-            console.log(state);
             state.changed();
         }
     }

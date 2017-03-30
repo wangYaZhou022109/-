@@ -1,4 +1,4 @@
-var _ = require('lodash/collection');
+// var _ = require('lodash/collection');
 exports.bindings = {
     menu: true
 };
