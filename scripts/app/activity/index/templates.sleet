@@ -105,14 +105,11 @@ view('exam-tips')
 
 view('research-tips')
     .container
-        .row > .col-sm-12
-            echo(research.questionaryDetail)
-        .row > .col-sm-12
-            each(research.buttons)
-                if(id 'eq' 'answer-next-time')
-                    a(id='button-' + id href=url) > echo(text)
-                else
-                    a(id='button-' + id href=url target='_blank') > echo(text)
+        .row
+            .col-sm-12
+                echo(content)
+
+
 
                     # .h3.m-bottom MOOC
                     # #swiper-1.swiper-pic-list > ul.full
