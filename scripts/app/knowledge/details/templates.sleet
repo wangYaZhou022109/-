@@ -40,8 +40,8 @@ view('main')
             echo(knowledge.integral)
         span.layout-ml-small
             | 相关话题：
-            each(knowledge.businessTopics)
-                a.normal.m-right > echo(topicName)
+            each(topics)
+                a.normal.m-right > echo(name)
     p > echo('描述：') + @echo(knowledge.description)
 view('commit')
     #comment-area

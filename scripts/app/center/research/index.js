@@ -2,9 +2,7 @@ var D = require('drizzlejs'),
     _ = require('lodash/collection');
 
 exports.items = {
-    main: 'main',
-    'research-tips': '',
-    'exam/research-activity/research-answer-detail': { isModule: true }
+    main: 'main'
 };
 
 exports.store = {
@@ -23,7 +21,8 @@ exports.store = {
             mixin: {
                 saveStatus: function(status) {
                     this.data.all = status === 'all';
-                    this.data.noFinish = status === 'no-finish';
+                    this.data.waitJoin = status === 'wait-join';
+                    this.data.waitStart = status === 'wait-start';
                     this.data.finished = status === 'finished';
                 },
                 getStatusInt: function(status) {
@@ -41,15 +40,11 @@ exports.store = {
             return this.get(this.models.researchRecords);
         },
         search: function(payload) {
-            if (payload.status) {
-                this.models.search.saveStatus(payload.status);
-            }
-
+            this.models.search.saveStatus(payload.status);
             D.assign(this.models.researchRecords.params, {
-                status: this.models.search.getStatusInt(payload.status),
-                name: payload.name
+                name: payload.name,
+                status: payload.status
             });
-
             return this.get(this.models.researchRecords);
         },
         getResearchById: function(payload) {

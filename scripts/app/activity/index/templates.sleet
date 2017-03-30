@@ -28,10 +28,10 @@ view('banner')
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
                         compare(type 'eq' 2)
                             a.normal.block(type=type  href='#/activity/gensee/detail/'+ targetId target='_blank') > .btn.radius 我要参与
-                        compare(type 'eq' 6)
-                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
-                        else
+                        compare(type 'eq' 3)
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
+                        compare(type 'eq' 4)
+                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
 
 view('filter')
     .container
@@ -58,7 +58,12 @@ view('list')
                                 .detail-wrapper
                                     p
                                         .btn.radius.block
-                                            div(id='attendLive-'+id) 我要参与
+                                            compare(status 'eq' 1)
+                                                div(id='attendLive-'+id) 我要参与
+                                            compare(status 'eq' 2)
+                                                div(id='attendLive-'+id) 观看直播
+                                            compare(status 'eq' 3)
+                                                div(id='attendLive-'+id) 直播回顾
                             .clearfix
                                 .pull-right.tip-text
                                 .title.text-overflow
@@ -68,7 +73,7 @@ view('list')
                                     echo(subNumber)
                                 i.iconfont.icon-date.m-left
                                     date(startTime)
-                                    
+
         .h3.m-bottom 考试
         #swiper-3 > ul.full > each(examArray)
             li.list-item > .main-list
@@ -98,12 +103,10 @@ view('list')
                                         dateTime(startTime) + echo('至') + dateTime(endTime)
 
 view('exam-tips')
-    .container
-        .row > .col-sm-12
-            echo(currentExam.content)
-        .row > .col-sm-12
-            each(currentExam.buttons)
-                a(id=id) > echo(text)
+    p > echo(currentExam.content)
+    .layout-mt-small
+        each(currentExam.buttons)
+            a(id=id) > echo(text)
 
 view('research-tips')
     .container
