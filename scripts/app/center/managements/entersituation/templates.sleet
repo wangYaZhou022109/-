@@ -1,0 +1,24 @@
+#!handlebars
+
+module > .entersituation-page
+    .entersituation(data-region="entersituation")
+
+view('entersituation')
+    section.section
+        .layout-mt-small
+            span.m-right 培训班审批情况:
+            span.custom-color-3 14/16
+        .layout-mt-small
+            table.table
+                tr
+                    th 序号
+                    th 机构/部门
+                    th 已报名人数/本省名额
+                tr
+                    td 1
+                    td 河北公司
+                    td 1/2
+                tr
+                    td 2
+                    td 山西公司
+                    td 1/2

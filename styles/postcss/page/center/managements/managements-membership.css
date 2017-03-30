@@ -1,0 +1,43 @@
+.managements-page {
+    & .managements-membership {
+        & .page-main-wrapper {
+            & .page-side {
+                float: left;
+                max-width: 15%;
+                width: 15%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            & .page-main {
+                float: right;
+                width: 85%;
+                max-width: 85%;
+                & .membership-main-padding {
+                    padding-left: calc(var(--large-space)*2);
+                }
+            }
+            & li {
+                width: 100%;
+                height: var(--input-height);
+                line-height: var(--input-height);
+                background-color: var(--bg-color);
+                text-align: center;
+                &.active {
+                    background-color: var(--main-color);
+                    color: var(--white);
+                }
+            }
+        }
+        & .display-none {
+            display: none;
+        }
+        & .add-mr {
+            margin-right: 0;
+            cursor: auto;
+            text-align: left;
+        }
+        & .add-label {
+            line-height: var(--input-height);
+        }
+    }
+}

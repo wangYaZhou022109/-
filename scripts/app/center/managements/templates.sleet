@@ -7,6 +7,7 @@ moudle > .managements-page
     .managements-dateplan(data-region="managements-dateplan")
     .managements-quotamanage(data-region="managements-quotamanage")
     .managements-publishnotice(data-region="managements-publishnotice")
+    .managements-membership(data-region="managements-membership")
 
 view('managements-title')
     .container
@@ -433,3 +434,312 @@ view('managements-publishnotice')
                         p 2、时间：开班前20天左右发布通知，以保证OA顺利流转，省公司学员提前做好准备并按时报名。
                         p 3、注意事项：为保证学员顺利报到，审批单中移动学院联系人写“响应中心，
                             | 15801696688-27260”（响应中心是学院集中服务平台，负责解答培训前期相关问题，比如来院路线等）
+
+view('managements-membership')
+    .container
+        section.section
+            .tabs.line
+                ul
+                    li#membership-1.active 报名管理
+                    li#membership-2 学员
+                    li#membership-3 班务人员
+                    li#membership-4 非正式成员
+                    li#membership-5 短信发送
+            .membership-contents
+                #membership-content-1
+                    .membership-search.layout-mt
+                        .filter-row
+                            .filter-item
+                                label 员工编号
+                                input.input
+                            .filter-item
+                                label 姓名
+                                input.input
+                            .filter-item
+                                label 单位
+                                input.input
+                            .filter-item
+                                label |
+                                button.btn 搜素
+                    .membership-table.layout-mt-small.clearfix
+                        h5.pull-left 报名列表
+                        .pull-right
+                            button.btn.tag-btn#signup 报名情况
+                            button.btn.tag-btn#verify-1 审核
+                    table.table
+                        tr
+                            th > input(type="checkbox")
+                            th 序号
+                            th 姓名
+                            th 员工号
+                            th 单位
+                            th 部门
+                            th 职务
+                            th 手机
+                            th 状态
+                            th 操作
+                        tr
+                            td > input(type="checkbox")
+                            td 1
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-2 审核
+                        tr
+                            td > input(type="checkbox")
+                            td 2
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-3 审核
+                        tr
+                            td > input(type="checkbox")
+                            td 3
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-4 审核
+                        tr
+                            td > input(type="checkbox")
+                            td 4
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-5 审核
+                #membership-content-2.membership-content-2.display-none
+                    .membership-search.layout-mt
+                        .filter-row
+                            .filter-item
+                                label 员工编号
+                                input.input
+                            .filter-item
+                                label 姓名
+                                input.input
+                            .filter-item
+                                label 单位
+                                input.input
+                            .filter-item
+                                label |
+                                button.btn 搜索
+                    .membership-table.layout-mt-small.clearfix
+                        h5.pull-left 学员列表
+                        .pull-right
+                            label.pull-left.add-label.m-right 员工编号
+                            input.tag-btn.pull-left.add-mr
+                            button.tag-btn.selected.pull-left 添加
+                            button.btn.tag-btn#studentgroup 学员分组
+                            button.btn.tag-btn#addstudent 添加学员
+                            button.btn.tag-btn#entersituation 报名情况
+                            button.btn.tag-btn 导入
+                            button.btn.tag-btn 导出
+                    table.table.layout-mt-small
+                        tr
+                            th 序号
+                            th 姓名
+                            th 员工编号
+                            th 性别
+                            th 民族
+                            th 单位
+                            th 部门
+                            th 职务
+                            th 手机
+                            th 操作
+                        tr
+                            td 1
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 2
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 3
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 4
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 5
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 6
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                #membership-content-3.display-none
+                    .membership-table.layout-mt-small.clearfix
+                        h5.pull-left 班务人员列表
+                        .pull-right
+                            label.pull-left.add-label.m-right 员工编号
+                            input.tag-btn.pull-left.add-mr
+                            button.tag-btn.selected.pull-left 添加
+                            button.btn.tag-btn 人员选择
+                    table.table.layout-mt-small
+                        tr
+                            th 序号
+                            th 姓名
+                            th 员工编号
+                            th 单位
+                            th 称呼
+                            th 手机
+                            th 邮箱
+                            th 操作
+                        tr
+                            td 1
+                            td 名称
+                            td 123
+                            td 部门名称
+                            td 班主任（点击可修改）
+                            td 1234567890
+                            td 1283712837@qq.com
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 2
+                            td 名称
+                            td 123
+                            td 部门名称
+                            td 班主任（点击可修改）
+                            td 1234567890
+                            td 1283712837@qq.com
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 3
+                            td 名称
+                            td 123
+                            td 部门名称
+                            td 班主任（点击可修改）
+                            td 1234567890
+                            td 1283712837@qq.com
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                #membership-content-4.display-none
+                    .membership-table.layout-mt-small.clearfix
+                        h5.pull-left 学员列表
+                        .pull-right
+                            label.pull-left.add-label.m-right 员工编号
+                            input.tag-btn.pull-left.add-mr
+                            button.tag-btn.selected.pull-left 添加
+                            button.btn.tag-btn#studentgroup 人员选择
+                    table.table.layout-mt-small
+                        tr
+                            th 序号
+                            th 姓名
+                            th 员工编号
+                            th 单位
+                            th 部门
+                            th 职务
+                            th 手机
+                            th 操作
+                        tr
+                            td 1
+                            td 名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td > a 删除
+                        tr
+                            td 2
+                            td 名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td > a 删除
+                        tr
+                            td 3
+                            td 名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td > a 删除
