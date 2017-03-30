@@ -1,6 +1,6 @@
 exports.items = {
     main: 'main',
-    side: 'side',
+    // side: 'side',
     'ask/topicsquare/apply-topic': { isModule: true }
 };
 

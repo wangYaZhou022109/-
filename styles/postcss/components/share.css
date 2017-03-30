@@ -1,0 +1,21 @@
+.share-bar {
+    & .item {
+        padding: var(--space) 0;
+        cursor: pointer;
+
+        & .iconfont {
+            @apply --transition;
+            margin-right: var(--space);
+        }
+
+        & .icon-q-zone {
+            color: #1296db;
+        }
+        & .icon-sina {
+            color: #e82a17;
+        }
+        & .icon-ask {
+            color: #12a079;
+        }
+    }
+}

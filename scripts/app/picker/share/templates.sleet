@@ -4,16 +4,10 @@ module
     div(data-region='main')
 
 view('main')
-    .inline-block
-        .star-wrapper.drop-down-wrapper
-            .inline-block.sub-text
-                .item
-                i.iconfont.icon-share
-                span 分享
+    .share-bar
+        .drop-down-wrapper
+            i.iconfont.icon-share-2(title='分享')
             .drop-down-content > .content
-                a#shareTo-qzone > i.iconfont.icon-share
-                span Q
-                a#shareTo-weibo > i.iconfont.icon-share
-                span 微
-                a#shareTo-bar > i.iconfont.icon-share
-                span 问
+                .item > #shareTo-qzone > i.iconfont.icon-q-zone + span 分享到QQ空间
+                .item > #shareTo-weibo > i.iconfont.icon-sina + span 分享到新浪微博
+                .item > #shareTo-bar > i.iconfont.icon-ask + span 分享到问吧

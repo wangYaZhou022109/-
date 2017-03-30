@@ -4,6 +4,8 @@ exports.bindings = {
     state: true
 };
 
+exports.small = true;
+
 exports.buttons = [{
     text: '确定',
     fn: function() {

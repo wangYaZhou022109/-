@@ -1,7 +1,8 @@
 exports.bindings = {
     knowledge: true,
     collect: true,
-    score: true
+    score: true,
+    topics: true
 };
 exports.components = [function() { // 分享组件
     var data = {},

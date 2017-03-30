@@ -25,8 +25,8 @@ pop = function(mod) {
 };
 
 exports.items = {
-    'home/default/top': { region: 'top', isModule: true },
-    'home/default/bottom': { region: 'bottom', isModule: true }
+    'viewport/top': { region: 'top', isModule: true },
+    'viewport/bottom': { region: 'bottom', isModule: true }
 };
 
 exports.mixin = {

@@ -1,6 +1,11 @@
+input,button,.btn,select {
+    height: var(--input-height);
+    line-height: var(--input-height);
+}
+
 .btn {
     display: inline-block;
-    padding: var(--space) var(--large-space);
+    padding: 0 var(--large-space);
     text-align: center;
     transition: all .2s linear;
     cursor: pointer;
