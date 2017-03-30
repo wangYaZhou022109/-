@@ -1,6 +1,7 @@
 .page-main-wrapper {
     overflow: hidden;
-    
+    margin-bottom: -var(--section-gap);
+
     & .page-main {
         padding-bottom: 99999px;
         margin-bottom: -99999px;

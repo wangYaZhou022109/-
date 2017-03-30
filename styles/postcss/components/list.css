@@ -104,6 +104,7 @@
         & .bottom {
             font-size: var(--small-font);
             white-space: nowrap;
+            color: var(--font-sub-color);
 
             & .item {
                 display: inline;

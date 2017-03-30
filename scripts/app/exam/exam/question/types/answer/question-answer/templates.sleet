@@ -6,11 +6,11 @@ module > .choise
 
 view('content')
     p.question
-        span > a(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index '：')
         @echo(state.content)
 
 
-view('options') > form.vertical.m-bottom
+view('options') > form.vertical.layout-mb-small
     textarea.input.w-full(id='answer' name='value' rows='5' placeholder='请输入答案') > @echo(answer)
     if(isShowDetail)
         .show-answer

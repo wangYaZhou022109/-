@@ -20,6 +20,7 @@
         bottom: 0;
         left: 0;
         background: var(--bg-color);
+        overflow: auto;
 
         & .side-top {
             height: var(--nav-height);
@@ -49,7 +50,7 @@
         }
 
         & .list {
-            padding: 0 var(--large-space);
+            padding: 0 var(--large-space) var(--large-space);
             margin-top: var(--base-gap);
 
             & .list-title {
@@ -98,7 +99,7 @@
             font-size: 12px;
 
             &.check {
-                background: var(--golden);
+                background: var(--color-warn);
                 color: white;
             }
 
@@ -134,12 +135,11 @@
 
         & .preview-list {
             line-height: 2;
-            margin-bottom: var(--space);
+            margin-bottom: var(--base-gap);
 
             & dl {
                 @apply --clearfix;
 
-                padding-bottom: var(--large-space);
             }
 
             & dd {
@@ -152,7 +152,7 @@
                 & label {
                     display: inline-block;
                     width: 100%;
-                    vertical-align: middle;
+                    vertical-align: top;
                 }
 
                 &:nth-child(even) {
@@ -163,13 +163,34 @@
             & input {
                 height: 2em;
                 line-height: 2em;
-                margin-right: 1em;
+                margin-right: var(--space);
+                vertical-align: top;
             }
+        }
+
+        & .show-answer {
+            font-size: var(--small-font);
+            padding: 0 0 1em;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--section-gap);
+            color: var(--color-ing);
         }
 
         & .question-number {
             position: absolute;
             font-weight: bold;
+        }
+
+        & .question-type-item {
+            & p.question {
+                @apply --transition;
+            }
+
+            &.checked p.question{
+                border-left: 5px solid var(--color-warn);
+                padding-left: var(--large-space);
+            }
+
         }
 
     }
@@ -205,20 +226,24 @@
     & .bottom-favorite {
         font-size: var(--small-font);
         text-align: right;
-        margin-bottom: var(--section-gap);
+        margin-top: var(--base-gap);
+        padding-top: var(--space);
+        border-top: 1px solid var(--border-color);
 
         & a {
-            color: var(--font-tip-color);
-        }
-
-        & .active {
-            color: var(--golden);
+            color: inherit;
         }
 
         & .item {
             display: inline-block;
             margin-left: var(--base-gap);
         }
+
+        & .checked {
+            font-weight: bold;
+            color: var(--color-warn);
+        }
+
     }
 
     & .answer-options {
@@ -246,7 +271,7 @@
 
     & .reading-comprehension-view {
         & .choise {
-            margin-top: var(--base-gap);
+            /*margin-top: var(--base-gap);*/
         }
     }
 }

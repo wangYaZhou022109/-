@@ -6,12 +6,12 @@ module > .choise
 
 view('content')
     p.question
-        span > a(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index '：')
         @echo(state.content)
 
 
 view('options') > .answer
-    .preview-list > dl.border.bottom
+    .preview-list > dl
         dd
             input.inline-block(type='radio' name='value-' + state.id value=1 id='check-0')('checked')&if(isCorrect)
             .inline-block 正确
