@@ -33,7 +33,10 @@ exports.handlers = {
         }
     }
 };
-
+exports.actions = {
+    'click trend-follow-*': 'follow',
+    'click trend-unfollow-*': 'unfollow'
+};
 
 exports.dataForTemplate = {
     trends: function(data) {
@@ -45,5 +48,33 @@ exports.dataForTemplate = {
             + '   ' + date.getHours() + ':' + date.getMinutes();
         });
         return trends;
+    }
+    // follow: function(payload) {
+    //     var id = payload.id,
+    //         data = {};
+    //     var obj = id.split('_');
+    //     console.log(payload);
+    //     data.id = obj[1];
+    //     data.concernType = obj[0];
+    //     console.log(data);
+    //     return data;
+    // },
+    // unfollow: function(payload) {
+    //     var id = payload.id,
+    //         data = {};
+    //     var obj = id.split('_');
+    //     data.id = obj[1];
+    //     data.concernType = obj[0];
+    //     return data;
+    // }
+};
+exports.actionCallbacks = {
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
     }
 };

@@ -64,15 +64,6 @@ exports.items = {
     'home/message': { isModule: true }
 };
 
-function getParams () {
-    var params = {};
-    window.location.search.substr(1).split('&').forEach(function(kv) {
-        var kvarr = kv.split('=');
-        params[kvarr[0]] = kvarr[1];
-    });
-    return params;
-}
-
 exports.store = {
     models: {
         menus: { data: menus },
@@ -82,26 +73,22 @@ exports.store = {
             url: '../system/message',
             params: { page: 1, pageSize: 5, type: 1, readStatus: 0 }
         },
+        organizations: { url: '../system/home-config/organization', autoLoad: 'after' },
         integral: { url: '../system/integral-result/grade' }, // 积分和等级
         courseTime: { url: '../course-study/course-study-progress/total-time' } // 总学习时长
     },
     callbacks: {
-        loadNavs: function(configId) {
-            this.models.navs.params = {
-                homeConfigId: configId
-            };
-            return this.get(this.models.navs);
-        },
-        init: function() {
-            var configId = getParams().configid,
+        init: function(payload) {
+            var configId = payload.configId,
+                orgId = payload.orgId,
                 that = this,
-                homeConfig = this.models.homeConfig;
-            homeConfig.params = { id: configId };
+                homeConfig = this.models.homeConfig,
+                navs = this.models.navs;
+            homeConfig.params = { id: configId, orgId: orgId };
             return this.get(homeConfig).then(function() {
-                var cfgId;
                 if (homeConfig.data) {
-                    cfgId = homeConfig.data.id;
-                    return that.module.dispatch('loadNavs', cfgId);
+                    navs.params.homeConfigId = homeConfig.data.id;
+                    return that.get(navs);
                 }
                 return null;
             });
@@ -142,7 +129,7 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
-    this.dispatch('init');
+    this.dispatch('init', this.renderOptions || {});
 };
 
 exports.afterRender = function() {
