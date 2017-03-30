@@ -21,12 +21,15 @@ view('list')
                     #  > echo(problem.content)
                     .user-info
                         a(href='javascript:;') > echo('我')
-                        span > echo('分享·')
+                        span > echo('·分享·')
                         span.sub-text > data(enjoyTime)
                     .comment-operation
                         .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                         .text-right
-                            .item > a.normal(href='javascript:;') 关注
+                            compare(concernNum 'gt' 0)  
+                                .item(id='trend-unfollow-1_' + problem.id data-name='id' data-value='1_' + problem.id ) > echo('+') + string('unfollow')
+                            else
+                                .item(id='trend-follow-1_'  + problem.id data-name='id' data-value='1_' + problem.id) > echo('+') + string('follow')
                             .item > a.normal(href='javascript:;') 添加讨论
                             .item
                                 .drop-down-wrapper
