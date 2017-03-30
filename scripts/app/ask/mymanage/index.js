@@ -8,7 +8,8 @@ exports.items = {
     'ask/quizdeal': { isModule: true },
     'ask/discussdeal': { isModule: true },
     'ask/reportdeal': { isModule: true },
-    'ask/sharedeal': { isModule: true }
+    'ask/sharedeal': { isModule: true },
+    'ask/mymanage/topicdetail': { isModule: true }
 };
 
 exports.store = {
