@@ -20,7 +20,8 @@ view('banner')
             span.m-right 相关标签
             each(research.topics)
                 span.tag-btn > echo(name)
-        .m-top > .btn#do-research 进入调研
+        if(research.name)
+            .m-top > .btn#do-research 进入调研
 
 
 view('side')

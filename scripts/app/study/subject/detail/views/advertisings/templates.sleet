@@ -7,7 +7,7 @@ view('advertising')
     #  #banner.banner.subject-banner
     #      ul > each(advertisings)
     #          li(style='background:url(' + downUrl ')'  ) > a(href=linkUrl target='_blank')
-    #banner.subject-banner.swiper-container.banner
+    #banner.subject-banner.banner
         ul > each(advertisings)
             li > a(href=linkUrl target='_blank') > img(src=downUrl)
         section.section.banner-info
@@ -37,12 +37,10 @@ view('advertising')
                     .inline-block.m-left
                         if(collect.id)
                             .item#cancel-collect(data-name='id' data-value=collect.id)
-                                i.iconfont.icon-favorite-full
-                                span 取消收藏
+                                i.iconfont.icon-favorite-full(title='取消收藏')
                         else
                             .item#collect
-                                i.iconfont.icon-favorite
-                                span 收藏
+                                i.iconfont.icon-favorite(title='收藏')
             #  .title-row > each(subject.topics)
             #      .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
             .title-row > each(subject.businessTopics)

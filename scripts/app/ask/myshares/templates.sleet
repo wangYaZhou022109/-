@@ -30,7 +30,7 @@ view('list')
                                 .item(id='trend-unfollow-1_' + problem.id data-name='id' data-value='1_' + problem.id ) > echo('+') + string('unfollow')
                             else
                                 .item(id='trend-follow-1_'  + problem.id data-name='id' data-value='1_' + problem.id) > echo('+') + string('follow')
-                            .item > a.normal(href='javascript:;') 添加讨论
+                            .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                             .item
                                 .drop-down-wrapper
                                     .drop-down-btn 分享
@@ -39,11 +39,12 @@ view('list')
                                             li 分享1
                                             li 分享2
                                             li 分享3
-                            .item > a.normal(href='javascript:;') 删除
-                    .comment-reply.m-top
-                        textarea.input.w-full.block(rows="1")
-                        .btn 回复
-#  module
+                            .item > span(id = 'del-question-' + problem.id data-name='id' data-value=problem.id) > string('delete')
+                            form.comment-reply(id ='comment-reply-' + id)
+                                textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                input.input(type='hidden' name='organizationId' value=organizationId)
+                                input.input(type='hidden' name='id' value=problem.id)
+                                .btn(id='publish-' + id) > string('publish')
 #      div(data-region='list')
 #  view('list')
 #      ul 

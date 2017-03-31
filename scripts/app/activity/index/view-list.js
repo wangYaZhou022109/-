@@ -53,7 +53,7 @@ exports.handlers = {
         });
     },
     showResearchIndex: function(id) {
-        var url = '#/exam/research-activity/index/' + id,
+        var url = 'exam/research-activity/index/' + id,
             mod = this.module.items['research-tips'],
             me = this;
         return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
@@ -65,7 +65,8 @@ exports.handlers = {
                         + '进行调研，谢谢'
                 });
             } else {
-                window.open(url, '_blank');
+                // window.open(url);
+                me.app.navigate(url, true);
             }
         });
     }

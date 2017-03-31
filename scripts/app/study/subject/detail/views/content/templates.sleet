@@ -26,7 +26,7 @@ view('pannel')
                                         i.iconfont.icon-hand-right
                                     if(preview)
                                         a.normal(href='javascript:;' id='studyBtn-'+id data-resource-id=resourceId data-url=btnUrl data-section-type=sectionType)
-                                            .btn.radius > echo(btnText)
+                                            .btn.radius(class=btnColor) > echo(btnText)
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
                                 .inline-block.title.text-overflow(title=name) > echo(name)

@@ -107,11 +107,11 @@
     }
 
     &.animating {
-        &.prev {
+        & .prev {
             animation: swiperOut 1s 1;
         }
 
-        &.current {
+        & .current {
             animation: swiperIn 1s 1;
         }
     }
