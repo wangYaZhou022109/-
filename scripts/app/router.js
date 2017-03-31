@@ -20,17 +20,17 @@ exports.showShare = function(id, type) {
     } else if (type === '2') { // 学习路径
         webUrl += '/#//' + id;
     } else if (type === '3') { // 知识
-        webUrl += '/#//' + id;
+        webUrl += '/#/knowledge/detail/' + id;
     } else if (type === '4') { // 班级
         webUrl += '/#//' + id;
     } else if (type === '5') { // 调研
-        webUrl += '/#/exam/index/' + id;
+        webUrl += '/#/exam/research-activity/index/' + id;
     } else if (type === '6') { // 微课大赛
         webUrl += '/#//' + id;
     } else if (type === '7') { // 考试
         webUrl += '/#/exam/index/' + id;
     } else if (type === '8') { // 专题
-        webUrl += '/#//' + id;
+        webUrl += '/#/study/subject/detail/' + id;
     } else if (type === '10') { // 问题
         webUrl += '/#//' + id;
     } else if (type === '11') { // 讨论
