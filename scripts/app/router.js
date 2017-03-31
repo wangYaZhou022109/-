@@ -1,6 +1,7 @@
-
 exports.routes = {
     home: 'showHome',
+    'home/:configId': 'previewHome',
+    'home/org/:orgId': 'changeHome',
     'share/:id/:type': 'showShare', // 分享跳转
     'message/detail/:id': 'showMessageDetail'
 };
@@ -9,8 +10,18 @@ exports.showHome = function() {
     return this.app.show('content', 'home/default');
 };
 
+exports.previewHome = function(configId) {
+    return this.app.show('content', 'home/default', { configId: configId });
+};
+
+exports.changeHome = function(orgId) {
+    return this.app.show('content', 'home/default', { orgId: orgId });
+};
+
 exports.showMessageDetail = function(id) {
-    return this.app.show('content', 'home/message/detail', { id: id });
+    return this.app.show('content', 'home/message/detail', {
+        id: id
+    });
 };
 
 exports.showShare = function(id, type) {

@@ -5,7 +5,7 @@ module
 
 view('main')
     .bottom-favorite
-        .item#check
+        .item(class=if(state.waitingCheck 'checked'))
             i.iconfont.icon-mark
             span > a(id='waiting-check-' + state.id) 待检查
         .item

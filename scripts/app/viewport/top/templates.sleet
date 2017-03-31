@@ -38,12 +38,15 @@ view('shortcut')
 
         .item.small-font.drop-down-wrapper.right
             .drop-down-btn
-                span 集团
+                span#selected-name > echo(organization.name)
                 i.iconfont.icon-triangle-down
+                input(type='hidden' id='orgId' name='orgId' value=organization.id)
             .drop-down-content > .content
-                ul
-                    li 集团
-                    li 子公司
+                ul > each(organizations)
+                    if(shortName)
+                        li(id='org-'+id) > echo(shortName)
+                    else
+                        li(id='org-'+id) > echo(name)
 
         if(Global.currentUser.id)
             .item.drop-down-wrapper.right
