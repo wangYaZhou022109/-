@@ -54,7 +54,10 @@ view('main')
                     .inline-block > echo('本题分数:' state.currentQuestion.score)
                 .bottom.text-right
                     div(data-dynamic-key='correct-' + state.currentQuestion.id)
-                div(data-dynamic-key=state.currentQuestion.id)
+                compare(state.currentQuestion.status 'eq' 'check')
+                    div.question-type-item.checked(data-dynamic-key=state.currentQuestion.id)
+                compare(state.currentQuestion.status 'ne' 'check')
+                    div.question-type-item(data-dynamic-key=state.currentQuestion.id)
 
 
         else
@@ -63,7 +66,10 @@ view('main')
                     .h3.m-bottom > echo(name '(共' totalScore '分)')
                     each(questions)
                         div(data-dynamic-key='correct-' + id)
-                        div.question-type-item(data-dynamic-key=id)
+                        compare(status 'eq' 'check')
+                            div.question-type-item.checked(data-dynamic-key=id)
+                        compare(status 'ne' 'check')
+                            div.question-type-item(data-dynamic-key=id)
 
 view('answer-detail')
     if(state.showAnswerDetail)
