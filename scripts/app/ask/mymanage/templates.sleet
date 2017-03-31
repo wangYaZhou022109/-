@@ -9,7 +9,7 @@ view('mymanage')
         each(mymanage)
             li.topic-item
                 a.normal
-                    .img > .img-cont > img(src="images/demo/1.jpg")
+                    .img > .img-cont > img(src=attachmentId)
                     h4.text-overflow > a(id='topicDetail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     #  .info > echo('今日新增:') + echo(todayQuestionSum) + echo('问题|') + echo(todayShareSum) + echo('分享')
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')

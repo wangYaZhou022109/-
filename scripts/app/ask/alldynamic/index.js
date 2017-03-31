@@ -45,6 +45,7 @@ exports.store = {
         },
         follow: function(payload) {
             var follow = this.models.follow;
+            // console.log(payload);
             follow.set(payload);
             return this.post(follow);
         },
