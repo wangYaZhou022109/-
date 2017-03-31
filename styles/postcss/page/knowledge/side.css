@@ -9,22 +9,23 @@
             margin-bottom: calc(var(--space)*3);
         }
 
-        & .knowledge-upload {
-            height: 3.6em;
+        & .btn.knowledge-upload {
+            height: auto;
+            line-height: 1;
+            padding: calc(var(--space) / 2) 0;
+            margin-bottom: var(--space);
 
-            & .pull-left {
-                width: 32%;
-                font-size: calc(var(--font-size)*2);
+
+            & .text {
+                text-align: left;
+                padding-left: 1em;
+                border-left: 1px solid var(--fade-color);
             }
 
-            & .pull-right {
-                width: 64%;
-                padding-left: var(--space);
-
-                & .text-tips {
-                    padding-top: 0.3em;
-                    opacity: 0.5;
-                }
+            & .small-font {
+                padding-top: 0.5em;
+                opacity: 0.5;
+                filter: alpha(opacity=50);
             }
         }
 
@@ -79,7 +80,7 @@
             }
 
             & .charts-list {
-                padding: var(--space);
+                margin-bottom: 1em;
 
                 &:nth-of-type(even) {
                     background: white;
@@ -113,5 +114,9 @@
                 }
             }
         }
+    }
+
+    & .layout-mt {
+        margin-top: var(--large-space);
     }
 }

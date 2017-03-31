@@ -5,6 +5,8 @@ exports.items = {
 exports.store = {
     models: {
         myshares: { url: '../ask-bar/my-share' },
+        follow: { url: '../ask-bar/question-details/boutique' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
         params: { data: { isOverdue: '1' } }
     },
     callbacks: {

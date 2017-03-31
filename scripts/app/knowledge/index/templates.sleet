@@ -27,12 +27,11 @@ view('sorts')
 view('side')
     .knowledge-upload
         .btn.block.clearfix.knowledge-upload#upload
-            .pull-left.text-right
+            .inline-block.h1
                 .iconfont.icon-cloud-up
-            .pull-right.text-left
-                | 上传知识
-                br
-                .small-font 每篇积分 +2
+            .inline-block.text
+                span 上传知识
+                span.small-font > echo('(每篇积分 +2)')
 
     .statistics.text-center.side-box
         p
@@ -49,11 +48,11 @@ view('side')
                 b > echo(totalFront.medias)
                 .text-tips 音视频
 
-    .side-box 
+    .layout-mt
         .h3.m-bottom 热门标签
         each(topics)
             .tag-btn > echo(name)
-    .side-box
+    .layout-mt
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)
             .clearfix.charts-list
@@ -68,11 +67,11 @@ view('side')
 
 view('main')
     ul.knowledge-list > each(knowledges)
-        li
+        li(id = 'details-'+id)
             i.iconfont.icon-zhishiku.pull-left.m-right
             .pull-left.knowledge-tit-con
                 .clearfix
-                    a.normal.knowledge-tit.pull-left(href = '#/knowledge/detail/'+id) > echo(name)
+                    a.normal.knowledge-tit.pull-left > echo(name)
                     .star-bar.pull-left > .star(style='width:'+ avgScore +'%')
                 .text-tips.sub-title
                     span > echo('发布人:') + echo(uploadMember.fullName)
@@ -81,7 +80,7 @@ view('main')
                     span > echo('下载数：') + echo(downloadMemberCount)
 
             .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont(href = '#/knowledge/detail/'+id)
+                a.normal.icon-add.iconfont
 
 
     #pager.pagination

@@ -1,5 +1,6 @@
 .knowledge-list {
     & li {
+        cursor: pointer;
         overflow: hidden;
         padding: calc(var(--space)*2) 0;
         border-bottom: 1px solid var(--border-color);
@@ -8,10 +9,6 @@
             font-size: 2.2em;
         }
 
-
-        &:hover {
-            background: var(--bg-color);
-        }
 
         & .knowledge-tit-con {
             width: 80%;
