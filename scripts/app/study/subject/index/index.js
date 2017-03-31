@@ -8,7 +8,7 @@ exports.store = {
         subjects: {
             url: '../course-study/course-front',
             type: 'pageable',
-            pageSize: 16,
+            pageSize: 20,
             root: 'items'
         },
         search: {
