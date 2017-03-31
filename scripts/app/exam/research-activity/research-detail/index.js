@@ -218,14 +218,9 @@ exports.store = {
             var me = this;
             this.models.form.set(this.models.answer.getData());
             return this.post(this.models.form).then(function() {
-                var record = me.models.researchRecord.data,
-                    research = record.researchQuestionary;
+                var record = me.models.researchRecord.data;
                 me.app.message.success(strings.get('submit-success'));
-                if (research.permitViewCount === 1) {
-                    me.app.navigate('exam/research-activity/research-summary-detail/' + record.id, true);
-                } else {
-                    me.app.navigate('exam/research-activity/research-answer-detail/' + record.id, true);
-                }
+                me.app.navigate('exam/research-activity/research-answer/' + record.id, true);
             });
         },
         selectDimension: function(payload) {

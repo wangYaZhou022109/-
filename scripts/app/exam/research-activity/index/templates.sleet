@@ -14,6 +14,8 @@ view('banner')
             dateTime(research.startTime)
             | ~
             dateTime(research.endTime)
+        .inline-block.layout-mr
+            #share
         .m-top
             span.m-right 相关标签
             each(research.topics)
@@ -31,7 +33,7 @@ view('side')
 view('main')
     .h3 问卷须知
     .layout-mt-small
-        echo(research.questionaryDetail)
+        @echo(research.questionaryDetail)
 
     section.section
         .h3 相关调研
@@ -44,7 +46,7 @@ view('main')
                                 a.normal > img(src=coverId)
                             .detail-wrapper
                                 p
-                                    .btn.radius.block 我要参与
+                                    .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text
                                 i.iconfont.icon-user(title='参加人数')
@@ -53,9 +55,9 @@ view('main')
                         .bottom.sub-text.clearfix
                             .pull-left 调研时间
                             .pull-right
-                                dateTime(startTime)
+                                date(startTime)
                                 | ~
-                                dateTime(endTime)
+                                date(endTime)
 
 view('research-tips')
         div > echo(research.content)

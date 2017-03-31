@@ -27,10 +27,12 @@ exports.handlers = {
         return this.module.dispatch('search', { categoryId: id });
     },
     sort: function(id) {
+        var sortId = Number(id);
         var searchDate = this.bindings.search.data;
         var orderMap = { 1: 2, 2: 1 };
         // 如果相同 改变排序升降, 不同,默认降序
-        var data = (searchDate.orderBy === id) ? { order: orderMap[searchDate.order] } : { order: 2, orderBy: id };
+        var data = (searchDate.orderBy === sortId) ?
+            { order: orderMap[searchDate.order] } : { order: 2, orderBy: sortId };
         return this.module.dispatch('search', data);
     },
     selectTopic: function(id) {
@@ -58,14 +60,15 @@ exports.dataForTemplate = {
             if (course.finishStatus === 2 || course.finishStatus === 4) studyType = 2;
             else if (course.finishStatus === null) studyType = 0;
             course.studyType = studyType;
+            course.avgScore /= 10;
         });
         return data.courses;
     },
     sortStatus: function(data) {
         return {
-            new: data.search.orderBy === '0',
-            member: data.search.orderBy === '1',
-            best: data.search.orderBy === '2'
+            new: data.search.orderBy === 0,
+            member: data.search.orderBy === 1,
+            best: data.search.orderBy === 2
         };
     },
     topics: function(data) {

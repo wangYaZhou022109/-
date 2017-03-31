@@ -1,9 +1,10 @@
-var $ = require('jquery');
-
+var $ = require('jquery'),
+    _ = require('lodash/collection');
 exports.bindings = {
     message: true,
     integral: true,
-    courseTime: true
+    courseTime: true,
+    organizations: true
 };
 
 exports.events = {
@@ -15,7 +16,8 @@ exports.events = {
     'click search': 'showSearchMore',
     'click message-more': 'showMessage',
     'click message-div': 'showMessage',
-    'mouseover message-div': 'refreshMessage'
+    'mouseover message-div': 'refreshMessage',
+    'click org-*': 'changeHome'
 };
 
 exports.handlers = {
@@ -48,10 +50,20 @@ exports.handlers = {
     refreshMessage: function() {
        // var me = this;
         // me.module.dispatch('refreshMessage');
+    },
+    changeHome: function(id) {
+        var org = _.find(this.bindings.organizations.data, ['id', id]);
+        $(this.$('selected-name')).text(org.name);
+        this.$('orgId').value = id;
+        this.app.navigate('home/org/' + id, true);
     }
 };
 
 exports.dataForTemplate = {
+    organization: function(data) {
+        var orgs = data.organizations;
+        return orgs && orgs[0];
+    },
     courseTime: function(data) {
         var time = '',
             second = 0, // 秒

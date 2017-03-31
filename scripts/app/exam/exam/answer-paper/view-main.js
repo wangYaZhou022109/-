@@ -10,7 +10,7 @@ var types = require('./app/exam/exam-question-types'),
 
 exports.bindings = {
     state: true,
-    types: false,
+    types: true,
     mark: false,
     answer: false
 };
@@ -61,6 +61,7 @@ getModuleDataForCorrect = function(question) {
     return {
         questionId: question.id,
         correct: this.bindings.mark.getCorrect(question.id) || {},
+        waitingCheck: this.bindings.mark.getWaitingCheck(question.id),
         callback: {
             waitingCheck: function(data) {
                 return me.module.dispatch('waitingCheck', data);

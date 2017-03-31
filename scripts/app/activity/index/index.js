@@ -65,11 +65,11 @@ exports.store = {
             D.assign(this.models.params.data, payload);
             this.models.params.changed();
             this.models.exams.params = this.models.params.data;
-            this.get(this.models.exams);
             this.models.researchActivitys.params = this.models.params.data;
-            this.get(this.models.researchActivitys);
             this.models.gensees.params = this.models.params.data;
-            this.get(this.models.gensees);
+            return this.chain([this.get(this.models.exams),
+                this.get(this.models.researchActivitys),
+                this.get(this.models.gensees)]);
         },
         examLeft: function() {
             var page = this.models.exams.params.page;
@@ -129,6 +129,11 @@ exports.store = {
         },
         clearResearchRecord: function() {
             this.models.researchRecord.clear();
+        },
+        getResearchById: function(payload) {
+            return this.models.researchActivitys.data.find(function(r) {
+                return r.id === payload.id;
+            });
         }
     }
 };

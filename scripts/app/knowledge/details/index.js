@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     banner: 'banner',
     main: 'main',
@@ -15,7 +16,8 @@ exports.store = {
         recommends: { url: '../course-study/knowledge/recommend' },
         integral: { url: '../system/integral-result', autoLoad: 'after' },
         readerMembers: { url: '../course-study/knowledge/readerMembers' },
-        downCount: { url: '../course-study/knowledge/down' }
+        downCount: { url: '../course-study/knowledge/down' },
+        topics: { url: '../system/topic/ids' }
     },
     callbacks: {
         init: function(payload) {
@@ -31,8 +33,13 @@ exports.store = {
             this.get(recommends);
             return this.get(model).then(function(data) {
                 var knowledgeId = data[0].id;
+                var topicIds = _.map(data[0].businessTopics, 'id').join();
                 readerMembers.params = { knowledgeId: knowledgeId };
                 me.get(readerMembers);
+                if (topicIds) {
+                    me.models.topics.params = { ids: topicIds };
+                    me.get(me.models.topics);
+                }
             });
         },
         score: function(payload) {

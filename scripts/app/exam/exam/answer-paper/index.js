@@ -376,6 +376,9 @@ exports.store = {
                     this.data.corrects = _.reject(this.data.corrects, ['questionId', data.questionId]);
                     this.data.corrects.push(data);
                     this.save();
+                },
+                getWaitingCheck: function(questionId) {
+                    return _.find(this.data.waitingChecks, ['key', questionId]);
                 }
             }
         },

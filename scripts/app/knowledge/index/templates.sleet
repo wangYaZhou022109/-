@@ -67,11 +67,11 @@ view('side')
 
 view('main')
     ul.knowledge-list > each(knowledges)
-        li
+        li(id = 'details-'+id)
             i.iconfont.icon-zhishiku.pull-left.m-right
             .pull-left.knowledge-tit-con
                 .clearfix
-                    a.normal.knowledge-tit.pull-left(href = '#/knowledge/detail/'+id) > echo(name)
+                    a.normal.knowledge-tit.pull-left > echo(name)
                     .star-bar.pull-left > .star(style='width:'+ avgScore +'%')
                 .text-tips.sub-title
                     span > echo('发布人:') + echo(uploadMember.fullName)

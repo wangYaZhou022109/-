@@ -6,6 +6,9 @@ exports.dataForTemplate = {
     announcements: function() {
         var announcements = this.bindings.announcements.data.items;
         return announcements;
+    },
+    recordCount: function() {
+        return this.bindings.announcements.data.recordCount;
     }
 };
 
