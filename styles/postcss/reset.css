@@ -67,6 +67,13 @@ input[type='checkbox'] {
     vertical-align: middle;
     height: auto;
     margin-right: calc(var(--space) / 2);
+
+    &[disabled],
+    &.disabled {
+        opacity: .6;
+        filter: alpha(opacity=60);
+        pointer-events: none;
+    }
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -82,6 +89,19 @@ input[type="search"] {
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
+}
+
+input[disabled],
+input.disabled,
+.input.disabled,
+.input[disabled],
+.btn[disabled],
+.btn.disabled {
+    background: #eee;
+    color: #999;
+    border-color: #ddd;
+    cursor: default;
+    pointer-events: none;
 }
 
 textarea {

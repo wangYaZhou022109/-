@@ -10,10 +10,6 @@
         }
 
 
-        &:hover {
-            background: var(--bg-color);
-        }
-
         & .knowledge-tit-con {
             width: 80%;
             overflow: hidden;

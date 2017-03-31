@@ -4,7 +4,7 @@ module
     div(data-region='main')
 
 view('main')
-    .pull-right
+    .mt-1
         .checkbox > input(type='checkbox' id='waitTodo-1' value=1)('checked')&if(state.checked) + label 显示待评卷
     ul.list > each(waitMarkPapers)
         li
@@ -13,19 +13,19 @@ view('main')
                     span.m-right 来自
                     span.m-right > map('exam-source-type', examRecord.exam.sourceType)
                     span.color-ing > echo(statusDec)
-                .pull-right
+                .pull-right.text-tips
                     if(waitMark)
                         echo('提交时间：')
                         dateTime(examRecord.lastSubmitTime)
                     else
                         echo('评卷时间：')
                         dateTime(submitTime)
-            .clearfix.layout-mt-small
+            .clearfix.m-top
                 .pull-left > echo('考试名称： ' examRecord.exam.name)
-                .pull-right
+                .pull-right.ml-1
                     if(waitMark)
                         a(id='mark-' + examRecord.id) 点击评卷
                     else
                         echo('成绩：' score)
-                .pull-right > echo('参考人：' examRecord.member.name '｜ 所属部门： ' examRecord.member.organization.name '  ') 
+                .pull-right > echo('参考人：' examRecord.member.name ' ｜ 所属部门： ' examRecord.member.organization.name '  ')
     .empty 没有更多了

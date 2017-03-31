@@ -6,8 +6,9 @@ module
 view('tags')
     #tags
 view('main')
-    .sub-row#tag-list
-        span.small-font 推荐标签：
-        each(hot)
-            .tag-btn.radius(id='hot-'+id)(class = if(selected 'selected')) > echo(name)
-        .tag-btn.radius#selectTopic ...
+    .clearfix
+        .pull-right > .tag-btn.radius.no-margin#selectTopic > i.iconfont.icon-more
+        .sub-row.overflow.text-overflow#tag-list
+            .inline-block.small-font 推荐标签：
+            each(hot)
+                .tag-btn.radius(id='hot-'+id)(class = if(selected 'selected')) > echo(name)

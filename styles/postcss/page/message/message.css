@@ -2,7 +2,7 @@
     & .list {
 
         & li {
-            padding: var(--large-space) 0;
+            padding: calc(var(--space) * 2) 0;
             border-bottom: 1px dashed var(--border-color);
         }
     }
