@@ -69,8 +69,8 @@ view('chapter')
                     each(courseChapterSections)
                         dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType data-chapter-learnSequence = ./learnSequence)
                             dt
-                                compare(required 'eq' 1)
-                                    .required-tag > echo('必修')
+                                compare(required 'ne' 1)
+                                    .required-tag > echo('选修')
                                 .text-overflow > echo(seq ': ' name)
                             dd
                                 .item.sub-text > map('section-type' sectionType)

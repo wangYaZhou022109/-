@@ -8,7 +8,7 @@ exports.store = {
         updateProgress: { url: '../course-study/course-front/video-progress' },
         download: { url: '../human/file/download' },
         time: { url: '../system/setting/time' },
-        localProgress: { type: 'localStorage' },
+        localProgress: { type: 'localStorage', data: {} },
         state: {}
     },
     callbacks: {
