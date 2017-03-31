@@ -69,7 +69,7 @@ view('side')
 view('main')
     ul.knowledge-list > each(knowledges)
         li(id = 'details-'+id)
-            i.iconfont.icon-zhishiku.pull-left.m-right
+            i.iconfont.pull-left.m-right(class=icon)
             .pull-left.knowledge-tit-con
                 .clearfix
                     a.normal.knowledge-tit.pull-left > echo(name)

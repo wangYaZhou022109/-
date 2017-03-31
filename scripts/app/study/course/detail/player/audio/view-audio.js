@@ -39,7 +39,7 @@ exports.handlers = {
 exports.beforeClose = function() {
     var me = this,
         state = this.bindings.state.data,
-        sectionId = state.data.section.id,
+        sectionId = state.section.id,
         localTime = state.localTime || 0,
         beginTime = me.bindings.time.data,
         studyTime = this.components.waveform.getLearnTime() + localTime,
@@ -64,12 +64,11 @@ exports.audio = {
     },
     ready: function() {
         var state = this.bindings.state.data;
-        var section = state.section;
         var localLocation = state.localLocation;
         var currentTime = 0;
         this.$('progress').hidden = true;
-        if (section && section.progress) {
-            currentTime = section.progress.lessonLocation;
+        if (state.progress) {
+            currentTime = state.progress.lessonLocation;
         }
         if (localLocation) {
             currentTime = Math.floor(localLocation);

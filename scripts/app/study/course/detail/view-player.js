@@ -11,6 +11,7 @@ exports.type = 'dynamic';
 exports.bindings = {
     course: false,
     state: true,
+    progress: false
 };
 
 exports.getEntity = function(key) {
@@ -30,9 +31,15 @@ exports.getEntityModuleName = function(key, entity) {
 
 exports.dataForEntityModule = function(entity) {
     var me = this;
+    if (entity == null) {
+        return {
+            state: this.bindings.state.data
+        };
+    }
     return {
         state: this.bindings.state.data,
         section: entity,
+        progress: this.bindings.progress.findProgress(entity.referenceId),
         // refresh: function(course) { me.module.dispatch('refresh', course); },
         callback: function(data) {
             me.module.dispatch('updateProgress', data);
