@@ -460,7 +460,7 @@ view('managements-membership')
                                 input.input
                             .filter-item
                                 label |
-                                button.btn 搜素
+                                button.btn 搜索
                     .membership-table.layout-mt-small.clearfix
                         h5.pull-left 报名列表
                         .pull-right
@@ -705,7 +705,7 @@ view('managements-membership')
                             label.pull-left.add-label.m-right 员工编号
                             input.tag-btn.pull-left.add-mr
                             button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn#studentgroup 人员选择
+                            button.btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -743,3 +743,17 @@ view('managements-membership')
                             td 职务名称
                             td 1234567890
                             td > a 删除
+                #membership-content-5
+                    .title
+                        .clearfix.layout-mt-small
+                            .h5.pull-left.layout-mr-small 学员列表
+                            .check.pull-left
+                                input(type="checkbox")
+                                label 全选
+                        .clearfix.layout-mt-small
+                            .small-font.pull-left.layout-mr-small 组别一
+                            .check.pull-left
+                                input(type="checkbox")
+                                label 全选
+                        .clearfix.layout-mt-small
+                            button 学员名称

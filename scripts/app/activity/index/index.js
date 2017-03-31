@@ -129,6 +129,11 @@ exports.store = {
         },
         clearResearchRecord: function() {
             this.models.researchRecord.clear();
+        },
+        getResearchById: function(payload) {
+            return this.models.researchActivitys.data.find(function(r) {
+                return r.id === payload.id;
+            });
         }
     }
 };

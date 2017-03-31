@@ -39,5 +39,8 @@
         & .add-label {
             line-height: var(--input-height);
         }
+        & .tag-btn {
+            padding: 0 var(--font-size);
+        }
     }
 }
