@@ -58,7 +58,12 @@ view('list')
                                 .detail-wrapper
                                     p
                                         .btn.radius.block
-                                            div(id='attendLive-'+id) 我要参与
+                                            compare(status 'eq' 1)
+                                                div(id='attendLive-'+id) 我要参与
+                                            compare(status 'eq' 2)
+                                                div(id='attendLive-'+id) 观看直播
+                                            compare(status 'eq' 3)
+                                                div(id='attendLive-'+id) 直播回顾
                             .clearfix
                                 .pull-right.tip-text
                                 .title.text-overflow
@@ -98,23 +103,18 @@ view('list')
                                         dateTime(startTime) + echo('至') + dateTime(endTime)
 
 view('exam-tips')
-    .container
-        .row > .col-sm-12
-            echo(currentExam.content)
-        .row > .col-sm-12
-            each(currentExam.buttons)
-                a(id=id) > echo(text)
+    p > echo(currentExam.content)
+    .layout-mt-small
+        each(currentExam.buttons)
+            a(id=id) > echo(text)
 
 view('research-tips')
     .container
-        .row > .col-sm-12
-            echo(research.questionaryDetail)
-        .row > .col-sm-12
-            each(research.buttons)
-                if(id 'eq' 'answer-next-time')
-                    a(id='button-' + id href=url) > echo(text)
-                else
-                    a(id='button-' + id href=url target='_blank') > echo(text)
+        .row
+            .col-sm-12
+                echo(content)
+
+
 
                     # .h3.m-bottom MOOC
                     # #swiper-1.swiper-pic-list > ul.full

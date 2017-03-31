@@ -27,3 +27,14 @@ exports.dataForTemplate = {
         return result;
     }
 };
+
+exports.events = {
+    'click research-*': 'showResearchIndex'
+};
+
+exports.handlers = {
+    showResearchIndex: function(id) {
+        var url = '#/exam/research-activity/index/' + id;
+        window.open(url, '_blank');
+    }
+};

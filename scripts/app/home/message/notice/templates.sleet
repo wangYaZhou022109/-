@@ -3,7 +3,7 @@
 module
     li.tabs-cont-item.active
         div(data-region='main')
-    
+
 view('main')
     .clearfix.layout-mt-small
         .pull-left
@@ -19,7 +19,7 @@ view('main')
             .overflow > a.underline(href='#/message/detail/'+id  target='_blank')
                 .clearfix
                     .pull-left.common-titlea > echo(subject)
-                    .pull-right > echo('发送时间：') + dateTime(createTime)
+                    .pull-right.text-tips > echo('发送时间：') + dateTime(createTime)
                 .text-overflow.m-top > echo(textContent)
     compare(showMore 'eq' 0)
         .empty 暂无内容
@@ -27,4 +27,3 @@ view('main')
         #loadMore.empty(style='cursor:pointer;') 查看更多
     compare(showMore 'eq' 2)
         .empty 没有更多了
-    

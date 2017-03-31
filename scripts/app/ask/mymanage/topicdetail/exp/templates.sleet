@@ -19,6 +19,9 @@ view('list')
                         .text-right
                             .item > a.normal(href='javascript:;') 取消关注
                             .item > a.normal(href='javascript:;') 添加讨论
+                            .item > a(id='setEssenceStatus-' + id) > echo('加精')
+                            .item > a(id='discuss-top-' +questionId) > echo('置顶')
+                            .item > a(id='shut-' +questionId) > echo('关闭')
                             .item
                                 .drop-down-wrapper
                                     .drop-down-btn 分享

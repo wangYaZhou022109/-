@@ -69,8 +69,8 @@ view('chapter')
                     each(courseChapterSections)
                         dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType data-chapter-learnSequence = ./learnSequence)
                             dt
-                                compare(required 'eq' 1)
-                                    .required-tag > echo('必修')
+                                compare(required 'ne' 1)
+                                    .required-tag > echo('选修')
                                 .text-overflow > echo(seq ': ' name)
                             dd
                                 .item.sub-text > map('section-type' sectionType)
@@ -119,10 +119,10 @@ view('info')
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right > #share
             .inline-block.m-left
-            if(collect.id)
-                i#cancel-collect.iconfont.icon-favorite-full(data-name='id' data-value=collect.id)
-            else
-                i#collect.iconfont.icon-favorite
+                if(collect.id)
+                    i#cancel-collect.iconfont.icon-favorite-full.custom-color-1(data-name='id' data-value=collect.id title='取消收藏')
+                else
+                    i#collect.iconfont.icon-favorite(title='收藏')
 
     .sub-title-row.layout-mb-small.layout-mt-small
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)

@@ -1,7 +1,7 @@
 #!handlebars
 
 module > .class-register-page
-    .class-register-banner > .clearfix.container(data-region='banner')
+    .class-register-banner(style='background-image:url(images/default-cover/default_class.jpg)') > .clearfix.container(data-region='banner')
     .page-main-wrapper
         .page-side > .container(data-region='side')
         .page-main > .container(data-region='main')
@@ -14,13 +14,16 @@ view('banner')
             dateTime(research.startTime)
             | ~
             dateTime(research.endTime)
-        p
+        .inline-block.layout-mr
+            #share
+        .m-top
             span.m-right 相关标签
             each(research.topics)
-                a.tag-btn > echo(name)
+                span.tag-btn > echo(name)
+        .m-top > .btn#do-research 进入调研
+
 
 view('side')
-    .btn#do-research 进入调研
     section.section.student
         .h3 TA们也参加了调研
         .layout-mt-small.user-picture
@@ -30,12 +33,12 @@ view('side')
 view('main')
     .h3 问卷须知
     .layout-mt-small
-        echo(research.questionaryDetail)
+        @echo(research.questionaryDetail)
 
     section.section
         .h3 相关调研
         .main-list.layout-mt-small
-            ul.cell-2 > each(relativeResearchs)
+            ul.cell-3 > each(relativeResearchs)
                 li
                     .content
                         .img
@@ -43,27 +46,24 @@ view('main')
                                 a.normal > img(src=coverId)
                             .detail-wrapper
                                 p
-                                    .btn.radius.block 我要参与
+                                    .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text
-                                i.iconfont.icon-user
-                                echo(joinNumber '人参加')
+                                i.iconfont.icon-user(title='参加人数')
+                                echo(joinNumber)
                             .title.text-overflow > echo(name)
                         .bottom.sub-text.clearfix
                             .pull-left 调研时间
                             .pull-right
-                                dateTime(startTime)
+                                date(startTime)
                                 | ~
-                                dateTime(endTime)
+                                date(endTime)
 
 view('research-tips')
-    .container
-        .row > .col-sm-12
-            echo(research.content)
-        .row > .col-sm-12
+        div > echo(research.content)
+        div
             each(research.buttons)
                 if(target)
                     a(id='button-' + id href=url target=target) > echo(text)
                 else
                     a(id='button-' + id) > echo(text)
-

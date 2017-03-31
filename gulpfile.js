@@ -83,7 +83,9 @@ gulp.task('postcss', function() {
     return gulp.src([
             'styles/postcss/main.css'
         ])
+        .pipe(sourcemaps.init())
         .pipe(postcss([cssimport(), cssnext()]))
+        .pipe(sourcemaps.write('bundle/'))
         .pipe(gulp.dest('bundle/'));
 });
 

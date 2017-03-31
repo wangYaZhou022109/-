@@ -11,9 +11,7 @@ exports.store = {
     callbacks: {
         save: function(payload) {
             var model = this.models.knowledge;
-            var opt = { source: 5 };
-            D.assign(opt, payload);
-            model.set(opt);
+            model.set(payload);
             return this.save(model);
         }
     }
@@ -21,10 +19,12 @@ exports.store = {
 
 exports.title = '上传知识';
 exports.buttons = [
-    { text: '保存',
-        fn: function(data) {
+    { text: '提交审核',
+        fn: function(payload) {
             var me = this;
-            return this.dispatch('save', data).then(function() {
+            var opt = { source: 5, createClient: 0, auditStatus: 0 };
+            D.assign(opt, payload);
+            return this.dispatch('save', opt).then(function() {
                 me.app.message.success('上传成功，等待审核');
             });
         }

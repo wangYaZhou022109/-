@@ -46,6 +46,11 @@
 
     &.small .dialog{
         width: 40vw;
+        margin-top: 20vh;
+
+        & .dialog-content{
+            height: 30vh;
+        }
     }
 
     &.large .dialog{
