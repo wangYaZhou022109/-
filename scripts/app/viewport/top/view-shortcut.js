@@ -53,7 +53,7 @@ exports.handlers = {
     },
     changeHome: function(id) {
         var org = _.find(this.bindings.organizations.data, ['id', id]);
-        $(this.$('selected-name')).text(org.name);
+        $(this.$('selected-name')).text(org.shortName || org.name);
         this.$('orgId').value = id;
         this.app.navigate('home/org/' + id, true);
     }
@@ -61,8 +61,11 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     organization: function(data) {
-        var orgs = data.organizations;
-        return orgs && orgs[0];
+        var orgs = data.organizations,
+            org = _.find(orgs, function(item) {
+                return !item.parentId;
+            });
+        return org;
     },
     courseTime: function(data) {
         var time = '',
