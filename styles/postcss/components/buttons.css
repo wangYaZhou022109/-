@@ -1,4 +1,4 @@
-input,button,.btn,select {
+input,button,select,.btn {
     height: var(--input-height);
     line-height: var(--input-height);
 }
@@ -12,6 +12,7 @@ input,button,.btn,select {
     white-space: nowrap;
     border: 1px solid transparent;
     cursor: pointer;
+    vertical-align: middle;
 
     &.block {
         display: block;
@@ -20,13 +21,14 @@ input,button,.btn,select {
     }
 
     &.small {
-        padding: calc(var(--space) / 2) calc(var(--large-space) / 2);
+        padding: 0 calc(var(--large-space) / 2);
         font-size: var(--small-font);
     }
 
     &.big {
-        padding: calc(var(--space)*1.2) calc(var(--large-space)*2);
+        padding: 0 calc(var(--large-space)*2);
         height: 3em;
+        line-height: 3em;
         font-size: var(--font-title);
     }
 
