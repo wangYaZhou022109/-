@@ -45,12 +45,12 @@ exports.handlers = {
     sectionDisplay: function(id) {
         var display = this.$('sectionDiv-' + id).style.display;
         if (display === 'none') {
-            $(this.$('sectionDiv-' + id)).show();
-            $(this.$('icon-' + id)).removeClass('icon-arrow-down').addClass('icon-arrow-up');
+            $(this.$('sectionDiv-' + id)).slideDown();
+            $(this.$('icon-' + id)).removeClass('icon-triangle-down').addClass('icon-triangle-up');
             $(this.$('label-' + id)).html('收起');
         } else {
-            $(this.$('sectionDiv-' + id)).hide();
-            $(this.$('icon-' + id)).removeClass('icon-arrow-up').addClass('icon-arrow-down');
+            $(this.$('sectionDiv-' + id)).slideUp();
+            $(this.$('icon-' + id)).removeClass('icon-triangle-up').addClass('icon-triangle-down');
             $(this.$('label-' + id)).html('展开');
         }
     }

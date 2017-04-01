@@ -47,7 +47,7 @@ view('filter')
 view('list')
     .container
         .h3.m-bottom 直播
-        #swiper-2 > ul.full > each(genseesArray)
+        #swiper-2.swiper-pic-list > ul.full > each(genseesArray)
             li > .main-list > ul
                 each(a)
                     li
@@ -56,23 +56,23 @@ view('list')
                                 .img-cont
                                     a.normal > img(src=cover)
                                 .detail-wrapper
-                                    p
-                                        .btn.radius.block
-                                            compare(status 'eq' 1)
-                                                div(id='attendLive-'+id) 我要参与
-                                            compare(status 'eq' 2)
-                                                div(id='attendLive-'+id) 观看直播
-                                            compare(status 'eq' 3)
-                                                div(id='attendLive-'+id) 直播回顾
+                                    p 描述简介描述简介描述简介描述简介描述简介...
+                                    .btn.radius.block
+                                        compare(status 'eq' 1)
+                                            div(id='attendLive-'+id) 我要参与
+                                        compare(status 'eq' 2)
+                                            div(id='attendLive-'+id) 观看直播
+                                        compare(status 'eq' 3)
+                                            div(id='attendLive-'+id) 直播回顾
                             .clearfix
                                 .pull-right.tip-text
                                 .title.text-overflow
                                     echo(subject)
-                            .bottom.sub-text
-                                i.iconfont.icon-favorite
-                                    echo(subNumber)
+                            .bottom.text-tips
+                                i.iconfont.icon-view
+                                span > echo(subNumber)
                                 i.iconfont.icon-date.m-left
-                                    date(startTime)
+                                span > date(startTime)
 
         .h3.m-bottom 考试
         #swiper-3 > ul.full > each(examArray)
@@ -85,8 +85,12 @@ view('list')
                                 .overflow
                                     a(id='exam-' + id) > echo(name)
                                     .sub-text.small-font
-                                        i.iconfont.icon-date
-                                        dateTime(startTime) + echo('至') + dateTime(endTime)
+                                        .m-top
+                                            span 开始时间:
+                                            dateTime(startTime)
+                                        .m-top
+                                            span 截止时间:
+                                            dateTime(endTime)
 
         .h3.m-bottom 调研
         #swiper-5 > ul.full > each(researchArray)
@@ -99,9 +103,12 @@ view('list')
                                 .overflow
                                     a(id='research-' + id) > echo(name)
                                     .sub-text.small-font
-                                        i.iconfont.icon-date
-                                        dateTime(startTime) + echo('至') + dateTime(endTime)
-
+                                        .m-top
+                                            span 开始时间:
+                                            dateTime(startTime)
+                                        .m-top
+                                            span 截止时间:
+                                            dateTime(endTime)
 view('exam-tips')
     p > echo(currentExam.content)
     .layout-mt-small

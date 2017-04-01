@@ -55,7 +55,6 @@
                 }
 
                 & a {
-                    margin-bottom:  var(--space);
                     color: var(--font-color);
                     display: inline-block;
                     cursor: pointer;

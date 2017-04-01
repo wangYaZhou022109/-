@@ -153,7 +153,7 @@ view('topic')
 
 view('releated-course')
     .h3
-        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
+        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + span.text-tips > string('reset.page')
         echo('相关课程')
     .layout-mt-small
         each(courseRelated)
