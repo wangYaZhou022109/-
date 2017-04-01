@@ -29,19 +29,19 @@ exports.showAnswerPaper = function(id) {
 };
 
 exports.showScoreDetail = function(id) {
-    return this.app.showIt('content', 'exam/exam/score-detail', { examRecordId: id });
+    return this.app.viewport.showIt('content', 'exam/exam/score-detail', { examRecordId: id });
 };
 
 exports.showResearchDetail = function(id) {
-    return this.app.showIt('content', 'exam/research-activity/research-detail', { researchQuestionaryId: id });
+    return this.app.viewport.showIt('content', 'exam/research-activity/research-detail', { researchQuestionaryId: id });
 };
 
 exports.showResearchAnswerDetail = function(id) {
-    return this.app.showIt('content', 'exam/research-activity/research-answer', { researchRecordId: id });
+    return this.app.viewport.showIt('content', 'exam/research-activity/research-answer', { researchRecordId: id });
 };
 
 exports.showResearchPaper = function(id) {
-    return this.app.showIt('content', 'exam/research-activity/paper', { researchId: id });
+    return this.app.viewport.showIt('content', 'exam/research-activity/paper', { researchId: id });
 };
 
 exports.showIndex = function(id) {
@@ -53,5 +53,5 @@ exports.showQuestionary = function() {
 };
 
 exports.showQuestionaryDetail = function(id) {
-    return this.app.showIt('content', 'exam/questionary/research-detail', { researchQuestionaryId: id });
+    return this.app.viewport.showIt('content', 'exam/questionary/research-detail', { researchQuestionaryId: id });
 };

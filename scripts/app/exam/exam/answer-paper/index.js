@@ -151,7 +151,10 @@ exports.store = {
                             }
 
                             _.map(o.questions, function(q) {
-                                D.assign(q, { totalCount: o.size });
+                                D.assign(q, {
+                                    totalCount: o.size,
+                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc'])
+                                });
                             });
 
                             return D.assign(o, {
