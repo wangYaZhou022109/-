@@ -45,10 +45,11 @@ exports.store = {
         // 注册课程
         register: { url: '../course-study/course-front/registerStudy' },
         collect: { url: '../system/collect' }, // 收藏
-        courseRelated: { url: '../course-study/course-front/related', type: 'pageable', pageSize: 2, root: 'items' },
+        courseRelated: { url: '../course-study/course-front/related' },
         download: { url: '../human/file/download' },
         score: { url: '../course-study/course-front/score' },
         state: {},
+        playerState: {},
         examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
         researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
         researchActivity: { url: '../exam/research-activity' }
@@ -119,14 +120,9 @@ exports.store = {
                 collect.set({}, true);
             });
         },
-        turnPage: function() {
-            var pageInfo = this.models.courseRelated.getPageInfo();
-            if (pageInfo.pageCount === 0) return false;
-            if (pageInfo.page === pageInfo.pageCount) {
-                this.models.courseRelated.turnToPage(1);
-            } else {
-                this.models.courseRelated.nextPage();
-            }
+        selectCourseRelated: function() {
+            var model = this.models.courseRelated;
+            model.params = { id: this.models.course.data.id };
             return this.get(this.models.courseRelated);
         },
         score: function(payload) {
@@ -138,9 +134,6 @@ exports.store = {
                 course.data.avgScore = data[0].avgScore || course.data.avgScore;
                 course.changed();
             });
-        },
-        register: function() {
-
         },
         getResearchById: function(payload) {
             var model = this.models.researchActivity;

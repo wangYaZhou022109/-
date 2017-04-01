@@ -43,9 +43,6 @@ exports.dataForEntityModule = function(entity) {
         // refresh: function(course) { me.module.dispatch('refresh', course); },
         callback: function(data) {
             me.module.dispatch('updateProgress', data);
-        },
-        register: function() {
-            me.module.dispatch('register');
         }
     };
 };
