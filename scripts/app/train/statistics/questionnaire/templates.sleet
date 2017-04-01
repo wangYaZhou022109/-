@@ -47,11 +47,11 @@ view('mainB')
             td
                 label(id='label-endTime-' + id data-name='id' data-value=id) > dateTime(endTime) + echo('(点击可修改)')
                 input(id='input-endTime-' value=dateTime(endTime) style='display:none;')
-            td > echo(response)
+            td > echo(response + '%')
             td
                 a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id) > echo('查看')
                 echo(' | ')
-                a(id='statistics'+resourceId data-name='id' data-value=id) > echo('统计')
+                a(href='#/train/statistics/questionnaire/count/'+classId target='_blank') > echo('统计')
         else
             tr > td(colspan='11') > p.text-center > string('no-data')
     

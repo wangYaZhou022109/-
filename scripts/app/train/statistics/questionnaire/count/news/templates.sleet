@@ -1,0 +1,63 @@
+#!handlebars
+
+module
+    div(data-region='mainA')
+    div(data-region='mainB')
+    
+view('mainA')
+    table.table
+        thead > tr
+            th(width='600px') > echo('内容')
+            th > echo('满意')
+            th > echo('基本满意')
+            th > echo('不满意')
+            th > echo('很不满意')
+            th > echo('合计（个）')
+            th > echo('满意率（%）')
+            th > echo('满意（%）')
+            th > echo('基本满意率（%）')
+            th > echo('不满意率（%）')
+            th > echo('很不满意率（%）')
+        tbody > each(allA) > tr
+            td > echo(questionContent)
+            td > echo(manA)
+            td > echo(manB)
+            td > echo(manC)
+            td > echo(manD)
+            td > echo(manZ)
+            td > echo(manZF + '%')
+            td > echo(manAF + '%')
+            td > echo(manBF + '%')
+            td > echo(manCF + '%')
+            td > echo(manDF + '%' )
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')
+
+view('mainB')
+    table.table
+        thead > tr
+            th(width='600px') > echo('课程')
+            th > echo('满意')
+            th > echo('基本满意')
+            th > echo('不满意')
+            th > echo('很不满意')
+            th > echo('合计（个）')
+            th > echo('满意率（%）')
+            th > echo('满意（%）')
+            th > echo('基本满意率（%）')
+            th > echo('不满意率（%）')
+            th > echo('很不满意率（%）')
+        tbody > each(allB) > tr
+            td > echo(questionContent)
+            td > echo(manA)
+            td > echo(manB)
+            td > echo(manC)
+            td > echo(manD)
+            td > echo(manZ)
+            td > echo(manZF + '%')
+            td > echo(manAF + '%')
+            td > echo(manBF + '%')
+            td > echo(manCF + '%')
+            td > echo(manDF + '%' )
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')

@@ -1,0 +1,21 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    table.table
+        thead > tr
+            th(width='450px') > echo('问题')
+            th(width='750px') > echo('意见与建议')
+            th > echo('学员')
+            th > echo('手机号')
+            th(width='150px') > echo('单位')
+        tbody > each(all) > tr
+            td > echo(questionContent)
+            td > echo(answer)
+            td > echo(mName)
+            td > echo(phone)
+            td > echo(oName)
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')

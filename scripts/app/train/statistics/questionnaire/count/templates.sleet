@@ -1,0 +1,27 @@
+#!handlebars
+
+module > .achievement-content.main-side
+    .achievement-head(data-region='head')
+    .page-main-wrapper
+        .div(data-region='menu')
+    .page-main-wrapper
+        .div(data-region='list')
+
+view('head')
+    .topic-detail-title
+        .pull-left.title > echo(cla.className + '-学员满意度问卷统计结果')
+    
+view('menu')
+    .tabs.line.mb-1 > ul
+        li > a(id='menu-news')(class ='active') 客观题统计情况
+        li > a(id='menu-exp')(class ='active') 主观题统计情况
+        li > a(id='menu-reply')(class ='active') 跨班总统计
+        li > echo('总体满意率' + result.zong + '%')
+        li > echo('课程满意率' + result.ke + '%')
+        li > echo('满意率' + result.ping + '%')
+        
+view('list') 
+    .tabs-cont > ul
+        li.tabs-cont-item.active#tabs-cont-item
+            .comment-list.ask-list > ul
+                div(data-dynamic-key=state.menu)
