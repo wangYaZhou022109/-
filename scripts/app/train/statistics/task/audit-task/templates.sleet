@@ -11,8 +11,8 @@ view('head')
     .text-right
         ul.head-info.inline-block
             li.border.right > echo('提交人:' + all.member.fullName)
-    .text-right
-        .btn#closeTask 关闭批阅
+        .btn.blue.m-right#approval 确定
+        .btn.blue.m-right#closeTask 关闭批阅
 
 view('side') > form.vertical
     .row
