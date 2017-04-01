@@ -9,6 +9,7 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         shut: { url: '../ask-bar/question/close-status' },
+        discuss: { url: '../ask-bar/question-discuss' },
         params: { data: { isOverdue: '1' } }
     },
     callbacks: {
@@ -36,6 +37,11 @@ exports.store = {
         shut: function(payload) {
             this.models.shut.set(payload);
             return this.put(this.models.shut);
+        },
+        publish: function(payload) {
+            var discuss = this.models.discuss;
+            discuss.set(payload);
+            return this.save(discuss);
         }
     }
 };

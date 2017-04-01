@@ -68,7 +68,7 @@ view('main')
                         .text-right
                             .item > span > echo('赞（' + praiseNum +'）')                           
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
-                            .item > span(id ='report-' + id data-name='id' data-value=id) > string('report')
+                            .item > span(id ='report-' + details.type + '_' + questionDiscussList.id data-name='id' data-value=details.type +'_' + questionDiscussList.id) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .m-bottom

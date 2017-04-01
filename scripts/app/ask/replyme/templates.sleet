@@ -23,7 +23,7 @@ view('list')
                         .comment-operation
                             .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
                             .text-right
-                                .item > a.normal(href='javascript:;') 关注
+                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                                 .item > a.normal(href='javascript:;') 添加讨论
                                 .item
                                     .drop-down-wrapper
@@ -49,7 +49,7 @@ view('list')
                         .comment-operation
                             .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
                             .text-right
-                                .item > a.normal(href='javascript:;') 关注
+                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                                 .item > a.normal(href='javascript:;') 添加讨论
                                 .item
                                     .drop-down-wrapper
@@ -78,7 +78,7 @@ view('list')
                                 echo('来自分享：') 
                                 a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
                             .text-right
-                                .item > a.normal(href='javascript:;') 关注
+                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                                 .item > a.normal(href='javascript:;') 添加讨论
                                 .item
                                     .drop-down-wrapper
@@ -106,7 +106,7 @@ view('list')
                                 echo('来自讨论:')
                                 a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
                             .text-right
-                                .item > a.normal(href='javascript:;') 关注
+                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                                 .item > a.normal(href='javascript:;') 添加讨论
                                 .item
                                     .drop-down-wrapper
@@ -116,7 +116,7 @@ view('list')
                                                 li 分享1
                                                 li 分享2
                                                 li 分享3
-                                .item > a.normal(href='javascript:;') 删除
+                                .item > span(id ='report-' + question.type + '_' + id data-name='id' data-value=question.type +'_' + id) > string('report')
                         .comment-reply.m-top
                             textarea.input.w-full.block(rows="1")
                             .btn 回复  

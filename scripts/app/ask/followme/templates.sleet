@@ -8,6 +8,9 @@ view('list')
         li.follow-item
             a.normal(href="javascript:;")
                 .img > .img-cont > img(src=headPortrait alt=fullName)
-                h4.text-overflow fullName
-                .info 36回答 ｜ 1提问 ｜ 2文章
+                h4.text-overflow > echo(fullName)
+                .info 
+                    echo(questionNum) + string('answer') + echo('｜') 
+                    echo(articleNum) + string('ask')  + echo(' ｜')  
+                    echo(answerNum) + string('article')
         
