@@ -520,6 +520,7 @@ exports.store = {
                 }
                 this.models.types.changed();
             }
+            this.models.state.changed();
         },
         correct: function(payload) {
             this.models.mark.correct(payload);

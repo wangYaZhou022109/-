@@ -1,0 +1,6 @@
+#!handlebars
+
+module
+    .header(data-region='top')
+    .content(data-region='content')
+    .footer(data-region='bottom')
