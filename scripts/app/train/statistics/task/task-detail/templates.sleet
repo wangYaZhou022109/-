@@ -42,7 +42,7 @@ view('main')
                 td > dateTime(createTime)
                 td
                     if(score)
-                        a(id='audit-preview'+id data-name='id' data-value=id) > echo(score) 
+                        a(href='#/train/statistics/task/audit-task/'+id target='_blank') > echo(score) 
                     else
-                        a.btn(href='#/train/statistics/task/audit-task/'+id target='_blank') > echo('详情')
+                        a(href='#/train/statistics/task/audit-task/'+id target='_blank') > echo('审核')
     #pager.pagination

@@ -8,7 +8,7 @@ exports.routes = {
     projects: 'showProjects',
     train: 'showTrain',
     'class-detail/task-detail/:id': 'showTaskDetail',
-    'statistics/task/audit-task/:id': 'showTaskDetail'
+    'statistics/task/audit-task/:id': 'showAuditTask'
 };
 
 exports.showIndex = function(id) {
@@ -39,7 +39,7 @@ exports.showTaskDetail = function(fir, id) {
     return this.app.show('content', 'train/service/views/commit-task/task-detail', { id: id });
 };
 
-exports.showTaskDetail = function(fir, id) {
+exports.showAuditTask = function(fir, id) {
     return this.app.show('content', 'train/statistics/task/audit-task', { id: id });
 };
 

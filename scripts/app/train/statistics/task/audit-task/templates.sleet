@@ -1,40 +1,56 @@
 #!handlebars
 
-module
-    .achievement-content.main-side
-        .achievement-side.bg-color
-            div(data-region='side')
-        .achievement-head(data-region='head')
-        .achievement-main(data-region='main')
+module > .achievement-content.main-side
+    .achievement-side.bg-color
+        div(data-region='side')
+    .achievement-head(data-region='head')
+    .achievement-main(data-region='main')
 
 view('head')
     .pull-left.title > echo(all.task.name)
     .text-right
         ul.head-info.inline-block
             li.border.right > echo('提交人:' + all.member.fullName)
-
-view('main')
-    echo('null')
+    .text-right
+        .btn#closeTask 关闭批阅
 
 view('side') > form.vertical
+    .row
+        .btn#approval 确定
     .row
         echo('作业说明')
         echo(all.task.explain)
     .row
-        echo('作业附件')
+        echo('作业附件:')
+        ul.list
+        each(all.task.attachList)
+            li
+                a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
+                a(href=downUrl download=attachmentName) 下载
     .row
-        echo('用户提交附件')
+        echo('用户提交附件:')
+        br
+        a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(all.name) 
+        a(href=downUrl download=name) 下载
     .row
         .col-sm-2
-            input.inline-block(name='state' type='radio' value='0')('checked')&if(task.checked)
+            input.inline-block#state-0(name='state' type='radio' value='0')('checked')&if(all.checkedState)
             .inline-block 通过
-            input.inline-block(name='state' type='radio' value='1')('checked')&unless(task.checked)
+            input.inline-block#state-1(name='state' type='radio' value='1')('checked')&unless(all.checkedState)
             .inline-block 打回重新提交
     .row
         echo('评分')
         .col-sm-2
-            input.input#score(name='score' value=score)
+            input.input#score(name='score' value=all.taskApproval.score)
     .row
         echo('评语')
         .col-sm-4
-            textarea#commont(name='commont' value='' rows=15 cols=33) > echo(commont)
+            textarea#comment(name='comment' value='' rows=15 cols=33) > echo(all.taskApproval.comment)
+
+view('main')
+    .preview-content
+        .h3.m-bottom 作业说明
+        p.text-overflow
+            span > @echo(all.description)
+            # a.pointer#viewDesc 查看详细
+        #viewPdf

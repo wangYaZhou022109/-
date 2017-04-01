@@ -339,7 +339,7 @@ view('editTask') > form.vertical
                         label 课件(最多上传3个)
                     .col-sm-2(style='text-align:right;')
                         a.btn#chooseFile 上传
-                        a(title='上传附件支持格式：xls/xlsx/doc/docx/ppt/pptx/zip/txt/rar/pdf/epub/mp3/mp4(大小<100M)') > echo('?')
+                        a(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
             thead > tr
                 th 序号
                 th(width='50%') 附件名称
