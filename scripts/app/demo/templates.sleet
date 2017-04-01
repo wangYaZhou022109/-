@@ -1,0 +1,20 @@
+#! handlebars
+
+module > .container(style='line-height:2;margin-top:5em;')
+    div(data-region='tabs')
+    div(data-region='main')
+
+view('tabs')
+    a#a-aaa aaa
+    a#a-bbb bbb
+    a#a-ccc ccc
+
+
+view('aaa')
+    div aaa
+
+view('bbb')
+    div bbb
+
+view('ccc')
+    div ccc
