@@ -50,7 +50,7 @@
                 padding: var(--space);
 
                 & .activity-item-icon {
-                    font-size: calc(var(--font-size)*3);
+                    font-size: calc(var(--font-size) * 2.5);
                     margin-right: calc(var(--space) / 2);
                 }
 
