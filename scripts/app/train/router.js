@@ -8,7 +8,8 @@ exports.routes = {
     projects: 'showProjects',
     train: 'showTrain',
     'class-detail/task-detail/:id': 'showTaskDetail',
-    'statistics/task/audit-task/:id': 'showAuditTask'
+    'statistics/task/audit-task/:id': 'showAuditTask',
+    'statistics/questionnaire/count/:classId': 'showCount'
 };
 
 exports.showIndex = function(id) {
@@ -39,6 +40,10 @@ exports.showTaskDetail = function(fir, id) {
     return this.app.show('content', 'train/service/views/commit-task/task-detail', { id: id });
 };
 
+exports.showCount = function(fir, classId) {
+    return this.app.show('content', 'train/statistics/questionnaire/count', { classId: classId });
+};
+
 exports.showAuditTask = function(fir, id) {
     return this.app.show('content', 'train/statistics/task/audit-task', { id: id });
 };
@@ -46,6 +51,7 @@ exports.showAuditTask = function(fir, id) {
 exports.interceptors = {
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
+    'statistics/questionnaire/count/': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {
