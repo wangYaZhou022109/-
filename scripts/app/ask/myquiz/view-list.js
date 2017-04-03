@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
@@ -6,7 +6,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myquiz-details-*': 'showDetails'
+    'click myquiz-details-*': 'showDetails',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
@@ -27,6 +28,9 @@ exports.handlers = {
         this.app.show('content', 'ask/myquiz/details', { id: payload });
         // }
     },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
+    }
 };
 
 exports.actions = {
@@ -37,6 +41,7 @@ exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click del-question-*': 'shut',
+    'click publish-*': 'publish'
 };
 
 exports.dataForActions = {
@@ -72,12 +77,9 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
-    concern: function() {
-    },
-    enjoy: function() {
-    },
-    report: function() {
-    },
+    publish: function(payload) {
+        return payload;
+    }
 };
 
 exports.actionCallbacks = {
@@ -95,6 +97,10 @@ exports.actionCallbacks = {
     },
     shut: function() {
         this.app.message.success('关闭成功!');
+        this.module.dispatch('init');
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
         this.module.dispatch('init');
     }
 };

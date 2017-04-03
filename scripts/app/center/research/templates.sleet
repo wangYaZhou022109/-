@@ -34,7 +34,7 @@ view('main') > form
                     compare(status 'eq' 2)
                         .btn(id='do-research-' + id) 参加调研
                     compare(status 'eq' 1)
-                        .btn(id='do-research-' + id style='background: #dedede; pointer-events: none;') 参加调研
+                        .btn.disabled(id='do-research-' + id) 参加调研
         #pager.pagination
 
 view('research-tips')

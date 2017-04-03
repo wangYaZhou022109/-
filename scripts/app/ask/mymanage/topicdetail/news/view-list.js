@@ -7,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click news-*': 'showDetails'
+    'click news-*': 'showDetails',
+    'click trend-report-*': 'report'
 };
 
 exports.handlers = {
@@ -31,6 +32,14 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/mymanage/topicdetail/exp/details', { id: data[1] });
         }
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+        }
     }
 };
 exports.actions = {
@@ -49,24 +58,24 @@ exports.dataForTemplate = {
         });
         return trends;
     }
-    // follow: function(payload) {
-    //     var id = payload.id,
-    //         data = {};
-    //     var obj = id.split('_');
-    //     console.log(payload);
-    //     data.id = obj[1];
-    //     data.concernType = obj[0];
-    //     console.log(data);
-    //     return data;
-    // },
-    // unfollow: function(payload) {
-    //     var id = payload.id,
-    //         data = {};
-    //     var obj = id.split('_');
-    //     data.id = obj[1];
-    //     data.concernType = obj[0];
-    //     return data;
-    // }
+};
+exports.dataForActions = {
+    follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    unfollow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    }
 };
 exports.actionCallbacks = {
     follow: function() {
