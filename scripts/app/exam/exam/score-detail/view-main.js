@@ -18,7 +18,7 @@ exports.getEntity = function(id) {
     var question;
 
     question = this.bindings.types.getQuestionById(id);
-    question = D.assign(question, {
+    question = D.assign({}, question, {
         score: question.score / 100,
         questionAttrs: question.questionAttrCopys
     });

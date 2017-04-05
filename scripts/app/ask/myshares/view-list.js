@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
@@ -6,16 +6,11 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myshares-details-*': 'showDetails'
+    'click myshares-details-*': 'showDetails',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
-    // toggleMore: function(id, e, target) {
-    //     var region;
-    //     var el = $(target).parents('.activity-category')[0];
-    //     region = new D.Region(this.app, this.module, el, id);
-    //     region.show('ask/myshares/mydetail', { id: id });
-    // }
     showDetails: function(payload) {
        // var region,
        //     data = { };
@@ -29,31 +24,22 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myshares/details', { id: data[1] });
         }
+    },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     }
 
 };
 
 exports.actions = {
-    'click remove-*': 'remove',
-    'click concern-*': 'concern',
-    'click enjoy-*': 'enjoy',
     'click report-*': 'report',
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
+    'click del-question-*': 'shut',
+    'click publish-*': 'publish'
 };
 
 exports.dataForActions = {
-    remove: function(data) {
-        var me = this;
-        return this.Promise.create(function(resolve) {
-            var message = '确定要删除该数据?';
-            me.app.message.confirm(message, function() {
-                resolve(data);
-            }, function() {
-                resolve(false);
-            });
-        });
-    },
     follow: function(payload) {
         var id = payload.id,
             data = {};
@@ -70,17 +56,35 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
-    concern: function() {
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
     },
-    enjoy: function() {
-    },
-    report: function() {
+    publish: function(payload) {
+        return payload;
     }
 };
 
 exports.actionCallbacks = {
     remove: function() {
         this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
+    shut: function() {
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('init');
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
         this.module.dispatch('init');
     }
 };

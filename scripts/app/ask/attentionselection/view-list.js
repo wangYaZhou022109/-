@@ -3,7 +3,8 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    trends: true,
+    state: true
 };
 
 exports.events = {
@@ -94,10 +95,12 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    end: function() {
-        this.app.message.success('操作成功！');
-        this.module.dispatch('init');
-    }
+    // end: function() {
+    //     this.app.message.success('操作成功！');
+    //     console.log(this.models.state);
+    //     // this.module.dispatch('init');
+    //     // this.app.show('content', 'ask/index');
+    // }
 };
 
 exports.dataForTemplate = {
