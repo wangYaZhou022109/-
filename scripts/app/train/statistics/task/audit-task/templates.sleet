@@ -16,7 +16,7 @@ view('head')
 
 view('side') > form.vertical
     .row
-        .btn#approval 确定
+        .btn#explain 作业说明
     .row
         echo('作业说明')
         echo(all.task.explain)

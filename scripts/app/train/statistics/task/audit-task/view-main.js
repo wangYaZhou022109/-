@@ -34,8 +34,8 @@ exports.components = [
 ];
 
 exports.dataForTemplate = {
-    mainState: function(data) {
-        var mainState = data.mainState;
-        return mainState;
-    }
+    all: function(data) {
+        var all = data.all;
+        return all;
+    },
 };

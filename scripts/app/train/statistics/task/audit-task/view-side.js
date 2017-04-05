@@ -1,9 +1,11 @@
-// var _ = require('lodash/collection');
-var $ = require('jquery');
+var _ = require('lodash/collection'),
+    $ = require('jquery'),
+    findExtension;
 
 exports.bindings = {
     all: true,
     approval: true,
+    files: true,
     download: false,
     preview: false,
     state: true,
@@ -11,7 +13,6 @@ exports.bindings = {
 
 exports.events = {
     'click preview-*': 'preview',
-    'click submit': 'submit',
 };
 
 exports.handlers = {
@@ -48,15 +49,22 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
-    all: function(data) {
+    checked: function(data) {
         var all = data.all;
-        return all;
+        return {
+            checkedState: all.taskApproval.state === 1,
+        };
     },
-    // checked: function(data) {
-    //     var all = data.all;
-    //     console.log(all);
-    //     return {
-    //         checkedState: all.taskApproval.state === 0,
-    //     };
-    // },
+    files: function(data) {
+        var me = this;
+        _.map(data.files || [], function(file, i) {
+            var item = file,
+                extension;
+            extension = item.attachmentName.split('.').pop().toLowerCase();
+            item.fileType = findExtension.call(me, extension);
+            item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachmentId;
+            item.i = i + 1;
+        });
+        return data.files;
+    }
 };

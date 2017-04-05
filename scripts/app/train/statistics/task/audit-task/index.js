@@ -7,8 +7,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        all: { url: '../train/task-detail/all' },
-        approval: { url: '../train/task-detail/approval' },
+        all: { url: '../train/task-member/all' },
+        approval: { url: '../train/task-member/approval' },
         download: { url: '../human/file/download' },
         preview: { url: '../human/file/preview' },
         state: { data: {} },
