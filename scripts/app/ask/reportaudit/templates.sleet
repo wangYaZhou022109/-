@@ -1,12 +1,12 @@
 #!handlebars
 module > .report-exam-page
-    .report-exam-title(data-region="reportexam-title")
-    .report-exam-content(data-region="reportexam-content")
+    .report-exam-title(data-region="reportaudit")
+    #  .report-exam-content(data-region="reportexam-content")
 
-view('reportexam-title')
+view('reportaudit')
     .report-person.clearfix
         .item.pull-left.layout-mr
-            span > echo('举报人：') > echo(reportaudit.member.fullName) 
+            span > echo('举报人：') > echo(member.fullName) 
             #  img.inline-block(src="images/1.png")
             #  img.inline-block(src="images/2.png")
             #  img.inline-block(src="images/3.png")
@@ -19,17 +19,17 @@ view('reportexam-title')
         .reported.pull-left.layout-mr
             span 被举报人：
             span > echo(reportaudit.beUser)
-view('reportexam-content')
-    .report-content.layout-mt-small
-        p 举报内容：
-        .report-content-item.small-font > echo(reportaudit.accuseRecord.objectId)
-    .report-reson.reson-height
-        p 举报理由：
-        .small-font > echo(reportaudit.accuseRecord.accuseNote)
-        .report-type.border.bottom.clearfix.layout-mt-small
-            .small-font.pull-left.m-bottom.sub-title > echo('举报类型：') > echo(reportaudit.accuseRecord.type)
-            .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
-    textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5")
+#  view('reportexam-content')
+        .report-content.layout-mt-small
+            p 举报内容：
+            .report-content-item.small-font > echo(reportaudit.accuseRecord.objectId)
+        .report-reson.reson-height
+            p 举报理由：
+            .small-font > echo(reportaudit.accuseRecord.accuseNote)
+            .report-type.border.bottom.clearfix.layout-mt-small
+                .small-font.pull-left.m-bottom.sub-title > echo('举报类型：') > echo(reportaudit.accuseRecord.type)
+                .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
+        textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5")
 #  module > .course-page
 #      div(data-region='reportaudit' style='height:100%;')
 
