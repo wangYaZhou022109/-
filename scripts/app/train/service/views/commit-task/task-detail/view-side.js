@@ -1,35 +1,50 @@
+var _ = require('lodash/collection');
 exports.bindings = {
     task: true,
     preview: false,
-    mainState: true
+    mainState: true,
+    download: false,
+    taskMemberModel: true
 };
 
 exports.events = {
     'click attachment-*': 'preview',
-    'click taskDescription': 'changeMain'
+    'click taskDescription': 'changeMain',
+    'click commitTask': 'showCommitView'
 };
 
 exports.handlers = {
-    preview: function(id) {
-        var docUrl = this.bindings.preview.getFullUrl() + '/' + id,
+    preview: function(id, e, target) {
+        var attachType = target.getAttribute('attachType'),
+            docUrl = this.bindings.preview.getFullUrl() + '/' + id,
             mainState = this.bindings.mainState.data,
-            param = {
-                flag: 'doc',
-                docUrl: docUrl
-            };
+            taskMemberModel = this.bindings.taskMemberModel,
+            task = this.bindings.task.data,
+            param = { flag: 'doc', docUrl: docUrl };
         mainState.isExplain = false;
         this.bindings.mainState.changed();
+        if (attachType === '2') {
+            taskMemberModel.data = _.find(task.taskMemberList, ['attachmentId', id]);
+        }
+        if (attachType === '1') {
+            this.bindings.taskMemberModel.clear();
+        }
+        this.bindings.taskMemberModel.changed();
         this.module.dispatch('preview', param);
     },
     changeMain: function() {
         var mainState = this.bindings.mainState.data;
         mainState.isExplain = true;
         this.bindings.mainState.changed();
+    },
+    showCommitView: function() {
+        this.app.viewport.modal(this.module.items.edit);
     }
 };
 
 exports.dataForTemplate = {
     task: function(data) {
+        var me = this;
         var task = data.task;
         var attachs = data.task.attachList || [];
         var taskMembers = data.task.taskMemberList || [];
@@ -51,6 +66,19 @@ exports.dataForTemplate = {
         } else {
             task.btnType = 0;
         }
+        _.map(attachs || [], function(attach) {
+            var obj = attach;
+            obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
+            return obj;
+        });
         return task;
+    },
+    taskMemberModel: function(data) {
+        var taskMemberModel = data.taskMemberModel;
+        var taskApproval = data.taskMemberModel.taskApproval || {};
+        if (taskApproval.comment) {
+            taskMemberModel.hasComment = true;
+        }
+        return taskMemberModel;
     }
 };

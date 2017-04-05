@@ -7,6 +7,9 @@ view('main')
             echo(name)
             dateTime(startTime+'-'+endTime)
             if(taskMember.id)
-                a.btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('查看')
+                compare(taskMember.state 'ne' 4)
+                    a.btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('查看')
+                else
+                    a.btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')
             else
                 a.btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')

@@ -8,7 +8,6 @@ exports.events = {
 };
 
 exports.handlers = {
-
 };
 
 exports.components = [
@@ -28,10 +27,3 @@ exports.components = [
     }
 ];
 
-exports.dataForTemplate = {
-    mainState: function(data) {
-        var mainState = data.mainState;
-        console.log(mainState);
-        return mainState;
-    }
-};
