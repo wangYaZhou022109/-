@@ -16,11 +16,13 @@ exports.events = {
 exports.handlers = {
     preview: function(id, e, target) {
         var attachType = target.getAttribute('attachType'),
+            preview = target.getAttribute('preview'),
             docUrl = this.bindings.preview.getFullUrl() + '/' + id,
             mainState = this.bindings.mainState.data,
             taskMemberModel = this.bindings.taskMemberModel,
             task = this.bindings.task.data,
             param = { flag: 'doc', docUrl: docUrl };
+        console.log(preview);
         mainState.isExplain = false;
         this.bindings.mainState.changed();
         if (attachType === '2') {
@@ -30,7 +32,11 @@ exports.handlers = {
             this.bindings.taskMemberModel.clear();
         }
         this.bindings.taskMemberModel.changed();
-        this.module.dispatch('preview', param);
+        if (preview === '1') {
+            this.module.dispatch('preview', param);
+        } else {
+            this.app.message.alert('该文件为压缩文件,请下载查看!');
+        }
     },
     changeMain: function() {
         var mainState = this.bindings.mainState.data;
@@ -69,6 +75,19 @@ exports.dataForTemplate = {
         _.map(attachs || [], function(attach) {
             var obj = attach;
             obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
+            obj.preview = 1;
+            if (obj.attachmentType === 'application/octet-stream') {
+                obj.preview = 0;
+            }
+            return obj;
+        });
+        _.map(taskMembers || [], function(tm) {
+            var obj = tm;
+            obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
+            obj.preview = 1;
+            if (obj.attachmentType === 'application/octet-stream') {
+                obj.preview = 0;
+            }
             return obj;
         });
         return task;

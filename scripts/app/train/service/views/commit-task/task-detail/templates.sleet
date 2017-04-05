@@ -17,8 +17,8 @@ view('head')
                 li.border.right > echo('得分：' taskMemberModel.taskApproval.score)
         compare(taskMemberModel.type 'eq' 3)
             ul.head-info.inline-block
-                li.border.right > echo('提交人：' taskMemberModel.memberId)
-                li.border.right > echo('审核人：' taskMemberModel.taskApproval.approvalMemberId)
+                li.border.right > echo('提交人：' taskMemberModel.memberFullName)
+                li.border.right > echo('审核人：' taskMemberModel.taskApproval.approvalMemberFullName)
                 li.border.right > echo('得分：' taskMemberModel.taskApproval.score)
                 li.border.right(style='color:red;font-size:25px;') > echo('重新提交')
         .btn.white.m-right#closeTask 关闭任务
@@ -41,14 +41,14 @@ view('side')
                 each(task.attachList)
                     li
                         a.pull-right.m-left(href=downUrl download=attachmentName) > string('download')
-                        a(id='attachment-'+attachmentId attachType='1' href='javascript:;') > echo(attachmentName)
+                        a(id='attachment-'+attachmentId attachType='1' preview=preview href='javascript:;') > echo(attachmentName)
         if(task.hasTaskMember)
             label 我提交的附件：
             ul.list
                 each(task.taskMemberList)
                     li
                         a.pull-right.m-left(href=downUrl download=name) > string('download')
-                        a(id='attachment-'+attachmentId attachType='2' href='javascript:;') > echo(name)
+                        a(id='attachment-'+attachmentId attachType='2' preview=preview href='javascript:;') > echo(name)
         compare(task.btnType 'eq' 1)
             btn.btn#commitTask 提交作业
             br

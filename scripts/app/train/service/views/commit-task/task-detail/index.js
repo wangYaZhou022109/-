@@ -14,7 +14,7 @@ exports.store = {
         taskMemberModel: { data: {} },
         mainState: { data: { isExplain: true } },
         task: { url: '../train/task' },
-        taskMember: { url: '../train/aaaaa' },
+        taskMember: { url: '../train/task-member' },
         preview: { url: '../human/file/preview' },
         download: { url: '../human/file/download' },
         file: { url: '../human/file/upload-parse-file' }
@@ -40,12 +40,22 @@ exports.store = {
         submitTask: function(payload) {
             var taskMember = this.models.taskMember,
                 task = this.models.task,
-                params = taskMember.params;
+                params = taskMember.params,
+                me = this;
             params.name = payload.name;
             params.description = payload.description;
             params.taskId = task.data.id;
             params.state = 2;
-            return this.save(taskMember);
+            return me.save(taskMember).then(function(data) {
+                var taskApproval = {};
+                data[0].taskApproval = taskApproval;
+                if (data[1] === 'success') {
+                    me.app.message.success('提交成功!');
+                }
+
+                task.data.taskMemberList.push(data[0]);
+                me.models.task.changed();
+            });
         }
     }
 };

@@ -4,12 +4,6 @@ exports.bindings = {
     mainState: true
 };
 
-exports.events = {
-};
-
-exports.handlers = {
-};
-
 exports.components = [
     function() {
         var state = this.bindings.state.data || {};

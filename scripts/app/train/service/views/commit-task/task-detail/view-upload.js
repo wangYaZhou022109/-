@@ -27,7 +27,7 @@ exports.components = function() {
 exports.changeFile = function() {
     var img = this.bindings.file.data.imgs[0];
     var items = {
-        contentType: img.contentType,
+        attachmentType: img.contentType,
         attachmentId: img.id,
         name: img.filename
     };
