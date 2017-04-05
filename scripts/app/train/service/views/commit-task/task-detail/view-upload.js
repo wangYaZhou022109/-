@@ -1,5 +1,3 @@
-var _ = require('lodash/collection');
-
 exports.title = '文件上传';
 
 exports.bindings = {

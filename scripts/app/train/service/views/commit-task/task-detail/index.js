@@ -45,11 +45,11 @@ exports.store = {
             params.description = payload.description;
             params.taskId = task.data.id;
             params.state = 2;
-            console.log(taskMember);
             return this.save(taskMember);
         }
     }
 };
+
 
 exports.beforeRender = function() {
     this.dispatch('init', this.renderOptions.id);

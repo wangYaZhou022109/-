@@ -1,4 +1,3 @@
-var D = require('drizzlejs');
 exports.bindings = {
     task: false,
     taskMember: true
@@ -19,7 +18,6 @@ exports.events = {
 
 exports.dataForActions = {
     submitTask: function(payload) {
-        var taskMember = this.bindings.taskMember.data || [];
         if (!payload.name) {
             this.app.message.error('附件名称不能为空!');
             return false;
