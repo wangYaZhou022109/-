@@ -29,11 +29,22 @@ view('main')
                                 .pull-left > .sub-text > dateTime(createTime)
                                 .text-right
                                     if(praiseId)
-                                        .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId) > i.iconfont.icon-zan + echo('取消赞 ') + echo(praiseCount)
+                                        .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId)
+                                            i.iconfont.icon-zan
+                                            span.small-font > echo('取消赞 ')
+                                            span.small-font > echo(praiseCount)
                                     else
-                                        .item(id='praise'+id ) > i.iconfont.icon-zan + echo('赞 ') + echo(praiseCount)
-                                    .item(id='showReply-'+id) > i.iconfont.icon-message + echo('评论 ') + echo(commentCount)
-                                    .item > i.iconfont.icon-info + echo('举报')
+                                        .item(id='praise'+id )
+                                            i.iconfont.icon-zan
+                                            span.small-font > echo('赞 ')
+                                            span.small-font > echo(praiseCount)
+                                    .item(id='showReply-'+id)
+                                        i.iconfont.icon-message
+                                        span.small-font > echo('回复 ')
+                                        span > echo(commentCount)
+                                    .item
+                                        i.iconfont.icon-info
+                                        span.small-font > echo('举报')
                             .comment-reply(id='reply-content-'+id)
                                 textarea.input.w-full.block(name='content' rows='1')
                                 .btn(id='add-reply-'+id) 回复
@@ -57,11 +68,20 @@ view('main')
                                                     .pull-left > .sub-text 2分钟前
                                                     .text-right
                                                         if(praiseId)
-                                                            .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId) > i.iconfont.icon-zan + echo('取消赞 ') + echo(praiseCount)
+                                                            .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId)
+                                                                i.iconfont.icon-zan
+                                                                span.small-font > echo('取消赞 ')
+                                                                span.small-font > echo(praiseCount)
                                                         else
-                                                            .item(id='praise'+id ) > i.iconfont.icon-zan + echo('赞 ') + echo(praiseCount)
-                                                        .item(id='showReply-'+id) > i.iconfont.icon-message + echo('评论')
-                                                        .item > i.iconfont.icon-info + echo('举报')
+                                                            .item(id='praise'+id )
+                                                                i.iconfont.icon-zan
+                                                                span.small-font > echo('赞 ')
+                                                                span.small-font > echo(praiseCount)
+                                                        .item(id='showReply-'+id)
+                                                            i.iconfont.icon-message
+                                                            span.small-font > echo('评论')
+                                                        .item > i.iconfont.icon-info
+                                                            span.small-font > echo('举报')
                                                 .comment-reply(id='reply-content-'+id)
                                                     textarea.input.w-full.block(name='content' rows='1')
                                                     .btn(id='add-reply-'+id) 回复

@@ -3,7 +3,9 @@
         padding: calc(var(--font-size) * 1) 0;
         line-height: calc(var(--font-size) * 2);
         margin: 1em 0;
-        border: 1px solid var(--border-color);
+        border-width: 1px 0;
+        border-style: solid none;
+        border-color: var(--border-color);
 
         & ul {
             height: calc(var(--font-size) * 2);

@@ -13,20 +13,20 @@ view('pannel')
             each(subject.courseChapters)
                 li
                     .catalog-state
-                        .inline-block.layout-mr > .title-state > echo(i ': ' name)
+                        .inline-block.layout-mr-small > .title-state > echo(i ': ' name)
                         .pull-right
-                            a.normal.layout-mr.sub-text(id='sectionDisplay-' + id href="javascript:;")
+                            a.normal.layout-mr-small.sub-text(id='sectionDisplay-' + id href="javascript:;")
                                 label(id='label-' + id) 收起
-                                i.iconfont.icon-arrow-up(id='icon-' + id)
-                    div(id='sectionDiv-' + id) > each(courseChapterSections)
-                        .catalog-state-info
-                            .item.block
+                                i.iconfont.icon-triangle-up(id='icon-' + id)
+                    div(id='sectionDiv-' + id)
+                        .catalog-state-info > each(courseChapterSections)
+                            .item
                                 .pull-right
                                     if(current)
-                                        i.iconfont.icon-hand-right
+                                        i.iconfont.icon-hand-right.m-right.text-main-color
                                     if(preview)
                                         a.normal(href='javascript:;' id='studyBtn-'+id data-resource-id=resourceId data-url=btnUrl data-section-type=sectionType)
-                                            .btn.radius(class=btnColor) > echo(btnText)
+                                            .btn.small(class=btnColor) > echo(btnText)
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
                                 .inline-block.title.text-overflow(title=name) > echo(name)
