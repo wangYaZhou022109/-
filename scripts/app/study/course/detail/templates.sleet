@@ -89,12 +89,12 @@ view('download')
 
 view('releated-course')
     .h3
-        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + string('reset.page')
+        .side-reload.sub-title#resetPage > i.iconfont.icon-reload + string('reset.page')
         echo('相关课程')
     .layout-mt-small
         each(courseRelated)
             .img
-                a.normal(href='#/course/detail/'+id)
+                a.normal(href='#/study/course/detail/'+id)
                     .img-cont > img(src=imageUrl)
                 h4.text-overflow(title=name) > echo(name)
 

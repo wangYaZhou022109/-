@@ -67,12 +67,9 @@ exports.audio = {
         var localLocation = state.localLocation;
         var currentTime = 0;
         this.$('progress').hidden = true;
-        if (state.progress) {
-            currentTime = state.progress.lessonLocation;
-        }
-        if (localLocation) {
-            currentTime = Math.floor(localLocation);
-        }
+        if (state.progress) currentTime = state.progress.lessonLocation;
+        if (localLocation) currentTime = Math.floor(localLocation);
+        if (Number(currentTime) < 0) currentTime = 0;
         this.components.waveform.play(Number(currentTime));
     }
 };
