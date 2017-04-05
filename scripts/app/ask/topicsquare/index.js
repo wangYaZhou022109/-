@@ -9,6 +9,8 @@ exports.store = {
         topicType: { url: '../system/topic-type' },
         topicname: { url: '../ask-bar/topic/topic-name' },
         checkOne: { url: '../ask-bar/topic/topic-name' },
+        follow: { url: '../ask-bar/question-details/boutique' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
         state: {}
     },
     callbacks: {
@@ -34,6 +36,17 @@ exports.store = {
         checkAll: function() {
             var topicname = this.models.topicname;
             return this.get(topicname);
+        },
+        follow: function(payload) {
+            var follow = this.models.follow;
+            follow.set(payload);
+            return this.post(follow);
+        },
+        unfollow: function(payload) {
+            var follow = this.models.unfollow;
+            // console.log(payload);
+            follow.set(payload);
+            return this.put(follow);
         },
     }
 };
