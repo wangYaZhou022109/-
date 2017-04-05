@@ -390,7 +390,7 @@ countChoose = function(question, answer, r) {
         D.assign(result, { noAnswerCount: ++result.noAnswerCount });
     } else {
         if (question.type === 1) {
-            if (_.find(question.questionAttrCopys, ['name', answer.value[0].value]).type === 1) {
+            if (_.find(question.questionAttrCopys, ['name', answer.value[0].value]).type === 0) {
                 D.assign(question, { gainScore: question.score });
                 D.assign(result, {
                     correctNum: ++result.correctNum,

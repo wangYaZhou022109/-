@@ -39,11 +39,7 @@
 
     & .catalog-state {
         position: relative;
-        top: -calc(var(--large-space) / 2);
-        padding-left: var(--large-space);
-        padding-top: calc(var(--large-space) / 2.5);
-        padding-bottom: calc(var(--large-space) / 2.5);
-        line-height: var(--font-size);
+        padding: 1em 0 1em var(--large-space);
 
         &:after {
             position: absolute;
@@ -78,8 +74,6 @@
 
         & .catalog-state {
             display: inline-block;
-            top: -calc(var(--large-space) / 1.6);
-            padding-top: calc(var(--large-space) / 2);
             padding-bottom: calc(var(--large-space) / 2);
             line-height: calc(var(--font-size) * 1.5);
 
@@ -100,22 +94,20 @@
     & .catalog-state-info {
         @apply --clearfix;
         position: relative;
-        top: -calc(var(--large-space) / 2);
-        padding-left: var(--large-space);
-        padding-right: var(--large-space);
     }
 
     & .item {
-        padding-top: calc(var(--large-space) * .7);
-        padding-bottom: calc(var(--large-space) * .7);
+        @apply --transition;
+
         border-bottom-width: 1px;
-        border-bottom-style: solid;
+        border-bottom-style: dashed;
+        padding: calc(var(--space) * 2) 1em;
         & .pull-right {
             position: relative;
             top: -calc(var(--large-space) / 3.5);
         }
     }
-    & .item:last-child {
+    & .item:nth-last-of-type(1) {
         border-bottom: none;
     }
 

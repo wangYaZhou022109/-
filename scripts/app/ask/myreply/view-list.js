@@ -7,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myreply-details-*': 'showDetails'
+    'click myreply-details-*': 'showDetails',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
@@ -30,33 +31,25 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myshares/details', { id: data[1] });
         }
+    },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     }
 };
 
 exports.actions = {
-    'click remove-*': 'remove',
-    'click concern-*': 'concern',
-    'click enjoy-*': 'enjoy',
-    'click report-*': 'report'
+    'click del-question-*': 'shut',
+    'click publish-*': 'publish'
 };
 
 exports.dataForActions = {
-    remove: function(data) {
-        var me = this;
-        return this.Promise.create(function(resolve) {
-            var message = '确定要删除该数据?';
-            me.app.message.confirm(message, function() {
-                resolve(data);
-            }, function() {
-                resolve(false);
-            });
-        });
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
     },
-    concern: function() {
-    },
-    enjoy: function() {
-    },
-    report: function() {
+    publish: function(payload) {
+        return payload;
     }
 };
 

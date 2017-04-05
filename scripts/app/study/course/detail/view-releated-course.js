@@ -25,6 +25,6 @@ exports.events = {
 
 exports.handlers = {
     resetPage: function() {
-        this.module.dispatch('turnPage');
+        this.module.dispatch('selectCourseRelated');
     }
 };

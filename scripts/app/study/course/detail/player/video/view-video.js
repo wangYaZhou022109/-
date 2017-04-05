@@ -7,11 +7,10 @@ exports.bindings = {
 };
 exports.components = [function() {
     var state = this.bindings.state.data;
-    var section = state.section;
     var localLocation = state.localLocation;
     var currentTime = 0;
-    if (section && section.progress) {
-        currentTime = section.progress.lessonLocation;
+    if (state.progress) {
+        currentTime = state.progress.lessonLocation;
     }
     if (localLocation) {
         currentTime = Math.floor(localLocation);
