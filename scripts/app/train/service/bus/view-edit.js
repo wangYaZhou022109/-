@@ -2,6 +2,8 @@ var $ = require('jquery');
 
 exports.title = '班车/订餐信息发布';
 
+exports.type = 'form';
+
 exports.bindings = {
     buss: true,
     bus: true,
@@ -82,7 +84,4 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    saveOption: function() {
-        this.app.viewport.closeModal();
-    }
 };

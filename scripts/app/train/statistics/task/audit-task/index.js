@@ -12,7 +12,6 @@ exports.store = {
         download: { url: '../human/file/download' },
         preview: { url: '../human/file/preview' },
         state: { data: {} },
-        files: { data: [] },
     },
     callbacks: {
         init: function(payload) {
@@ -26,9 +25,12 @@ exports.store = {
         },
         approval: function(payload) {
             var approval = this.models.approval,
+                all = this.models.all,
                 me = this;
             approval.set(payload);
-            return me.save(approval);
+            me.save(approval).then(function() {
+                me.get(all);
+            });
         },
         preview: function(payload) {
             var state = this.models.state;

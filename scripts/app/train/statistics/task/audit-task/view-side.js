@@ -1,11 +1,9 @@
 var _ = require('lodash/collection'),
-    $ = require('jquery'),
-    findExtension;
+    $ = require('jquery');
 
 exports.bindings = {
     all: true,
     approval: true,
-    files: true,
     download: false,
     preview: false,
     state: true,
@@ -49,22 +47,21 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
-    checked: function(data) {
-        var all = data.all;
-        return {
-            checkedState: all.taskApproval.state === 1,
-        };
-    },
-    files: function(data) {
+    // checked: function(data) {
+    //     var taskApproval = data.all.approval;
+    //     return {
+    //         checkedState: taskApproval.state === 0,
+    //     };
+    // },
+    all: function(data) {
         var me = this;
-        _.map(data.files || [], function(file, i) {
-            var item = file,
-                extension;
-            extension = item.attachmentName.split('.').pop().toLowerCase();
-            item.fileType = findExtension.call(me, extension);
-            item.downUrl = me.bindings.download.getFullUrl() + '?id=' + item.attachmentId;
-            item.i = i + 1;
+        var all = data.all;
+        var attachs = data.all.task.attachList || [];
+        _.map(attachs || [], function(attach) {
+            var obj = attach;
+            obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
+            return obj;
         });
-        return data.files;
+        return all;
     }
 };
