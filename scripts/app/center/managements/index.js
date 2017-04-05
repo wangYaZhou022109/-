@@ -6,7 +6,9 @@ exports.items = {
     // 'managements-dateplan': 'managements-dateplan',
     // 'managements-quotamanage': 'managements-quotamanage',
     // 'managements-publishnotice': 'managements-publishnotice',
-    'managements-membership': 'managements-membership',
+    // 'managements-membership': 'managements-membership',
+    // 'managements-classmanage': 'managements-classmanage',
+    'managements-evaluate': 'managements-evaluate',
     'center/managements/weektopic': { isModule: true },
     'center/managements/addclass': { isModule: true },
     'center/managements/topic': { isModule: true },
@@ -14,7 +16,12 @@ exports.items = {
     'center/managements/verify': { isModule: true },
     'center/managements/studentgroup': { isModule: true },
     'center/managements/entersituation': { isModule: true },
-    'center/managements/addstudent': { isModule: true }
+    'center/managements/addstudent': { isModule: true },
+    'center/managements/watchexam': { isModule: true },
+    'center/managements/taskdetail': { isModule: true },
+    'center/managements/learndetail': { isModule: true },
+    'center/managements/watchbring': { isModule: true },
+    'center/managements/watchsurvey': { isModule: true }
 };
 exports.events = {
     'click managements-tab-*': 'showContents'
