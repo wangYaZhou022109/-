@@ -133,7 +133,7 @@ exports.dataForTemplate = {
 };
 
 exports.search = function() {
-    console.log('dfsdfsdfs');
+    // console.log('dfsdfsdfs');
     // var params = this.bindings.search.data;
     // params.categoryId = params.menu2 || params.menu1;
     // this.module.dispatch('searchCourse', { params: params });
