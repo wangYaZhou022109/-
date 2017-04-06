@@ -1,17 +1,16 @@
 #!handlebars
 
 module > .live-details-page
-    .live-details-banner(data-region='live')
+    .live-details-banner.banner(data-region='live')
     .page-main-wrapper
         .side(data-region='side')
         .main(data-region='main')
 
 view('live')
-    .page-main-wrapper
-        compare(gensee.status 'eq' 2)
-            iframe(src=liveUrl frameborder='0' scrolling='no' width='100%'  align='middle' height='680px')
-        else
-            img(src=liveUrl  width='100%'  align='middle' height='680px')
+    compare(gensee.status 'eq' 2)
+        iframe(src=liveUrl frameborder='0' scrolling='no' width='100%'  align='middle' height='680px')
+    else
+        img(src=liveUrl  width='100%'  align='middle' height='100%')
 view('side')
     .page-side > .container
         if(businesses)
@@ -47,8 +46,8 @@ view('main')
                         echo(gensee.subject)
                     .inline-block
                         .star-wrapper.drop-down-wrapper
-                            .star-bar 
-                                .star(style='width:'+score.scorePercent+'%')                 
+                            .star-bar
+                                .star(style='width:'+score.scorePercent+'%')
                             if(score.avgScore)
                                 .num > echo(score.avgScore)
                             else
@@ -63,42 +62,43 @@ view('main')
                                     .item(id='star-10' title='5星') > i.iconfont.icon-star-full
                                 .block.btn#submit-score 提交评分
                 .inline-block.layout-mr
-                    .inline-block.layout-ml.m-right 
+                    .inline-block.layout-ml.m-right
                         #share
+                    .inline-block
                         if(collect.id)
                             .item#cancel-collect(data-name='id' data-value=collect.id)
-                                i.iconfont.icon-favorite-full
-                                span 取消收藏
+                                i.iconfont.icon-favorite-full.custom-color-1(title='取消收藏')
                         else
                             .item#collect
-                                i.iconfont.icon-favorite
-                                span 收藏
-            .clearfix.live-details-teacher
-                .lecturer.clearfix
-                    .user-pic.pull-left > i.iconfont.icon-star-full
-                    .teacher.pull-left
-                        | 讲师：
-                        b > echo(gensee.lecturerStr)
-                        p > echo(gensee.lecturerDesc)
-                .time.clearfix.pull-left
-                    .user-pic.pull-left > i.iconfont.icon-star-full
-                    | 直播时间
-                    p
-                        date(gensee.startTime)
-                compare(sub.subStatus 'eq' 0)
-                    .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
-                else
-                    .btn.pull-right.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
-            .clearfix
-            .side-box
+                                i.iconfont.icon-favorite(title='收藏')
+            .clearfix.layout-mt-small
+                .pull-right
+                    compare(sub.subStatus 'eq' 0)
+                        .btn.pull-right.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
+                    else
+                    .btn.white.border.pull-right.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
+                .live-details-teacher
+                    .lecturer.clearfix
+                        .user-pic.pull-left > i.iconfont.icon-user
+                        .teacher.pull-left
+                            | 讲师：
+                            b > echo(gensee.lecturerStr)
+                            p.text-overflow > echo(gensee.lecturerDesc)
+                    .time.clearfix.pull-left
+                        .user-pic.pull-left > i.iconfont.icon-time
+                        | 直播时间
+                        p
+                            date(gensee.startTime)
+
+            .side-box.m-top
                 each(gensee.businessTopics)
                     .tag-btn > echo(topicName)
-               
+
         if(courses)
             section.section
                 .h3 直播回顾
                 .main-list.layout-mt-small
-                    ul
+                    ul.cell-4
                         each(courses)
                             li > .content > a.normal(href='#/study/course/detail/'+ id target='_blank')
                                 .img
@@ -106,25 +106,26 @@ view('main')
                                     .detail-wrapper
                                         p > echo(description)
                                 .clearfix
-                                    .title.text-overflow
-                                        echo(name)
-                                .clearfix.small-font.sub-title
-                                    i.iconfont.icon-view
+                                    .title.text-overflow > echo(name)
+                                .bottom
+                                    .item
+                                        i.iconfont.icon-view
                                         if(studyMemberCount)
                                             echo(studyMemberCount)
                                         else
                                             echo(0)
-                                    i.iconfont.icon-star.m-left
+                                    .item
+                                        i.iconfont.icon-star
                                         if(avgScore)
                                             echo(avgScore)
                                         else
                                             echo(0)
-      
+
         if(relatedGensee)
             section.section
                 .h3 相关直播
                 .main-list.layout-mt-small
-                    ul
+                    ul.cell-4
                         each(relatedGensee)
                             li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
                                 .img
@@ -132,10 +133,11 @@ view('main')
                                     .detail-wrapper
                                         p > echo(genseeDesc)
                                 .clearfix
-                                    .title.text-overflow
-                                        echo(subject)
-                                .clearfix.small-font.sub-title
-                                    i.iconfont.icon-view
+                                    .title.text-overflow > echo(subject)
+                                .bottom
+                                    .item
+                                        i.iconfont.icon-view
                                         echo(attendNumber)
-                                    i.iconfont.icon-star.m-left
+                                    .item
+                                        i.iconfont.icon-star
                                         echo(avgScore)
