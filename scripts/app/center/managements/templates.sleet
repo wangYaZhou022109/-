@@ -1351,7 +1351,34 @@ view('managements-evaluate')
                                     td > a#taskdetail-3 详情
 
 view('managements-learneffect')
-
+    .container
+        .container
+            .layout-mt-small.border.bottom.dashed
+                .w-half
+                    .color-error.layout-mb-small 开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度，开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度,开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度
+            .layout-mt
+                .form
+                    .form-row
+                        label.label.required 本次培训采用的考核方式：
+                        .content
+                            input.text-width(placeholder="考试方式")
+                            p 如：考试、学习汇报、小组作业、撰写学习心得、工作模拟、岗位考试认证
+                    .form-row
+                        label.label.required.text 附件上传：
+                        .content
+                            .accessory
+                                span 已有附件：
+                                span 设计规划
+                                a.m-left 删除附件
+                            .m-top
+                                input(type="file")
+                                p 注：请上传相关证明材料，如考试结果、小组汇报PPT、学员学习作业汇总
+                    .form-row
+                        label.label.required 考核结果：
+                        .content
+                            textarea.text-width(rows="5" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用，掌握情况")
+            .text-center
+                .btn 提交
 view('managements-trainsummary')
     .container
         .layout-mt-small.border.bottom.dashed
@@ -1360,45 +1387,179 @@ view('managements-trainsummary')
             p * 该总结内容将定期呈报集团领导及相关部门领导审阅参考，请主办部门培训联系人全面参与和最终把关。
         .clearfix.m-top
             .btn.radius.pull-right 导出培训总结
-        .trainsummary-content
+        .trainsummary-content.container
             h2.text-center XX培训班培训项目总结报告
             .layout-mt-small
-                h4 一、培训项目概况
-                .item
-                    p 1、基本信息
-                    p 本期培训是由业务支撑系统部 主办， 培训编号为00000 ， 培训对象为3山东省对此 ， 实际参训学员人数人 ， 培训时间：2016-12-20 至 2016-12-20 。
-                .clearfix
-                    p.pull-left 2、培训目标:
-                    p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
-                .clearfix
-                    p.pull-left 3、需求调研方式
-                    p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
-                .samll-font 培训前通过：培训问卷，明确了培训项目需求。
-                .layout-mt
-                    table.table
-                        tr > th.strong(colspan="7") 面授课程
-                        tr
-                            td.strong 日期
-                            td.strong 时间
-                            td.strong 课程名称
-                            td.strong 讲师
-                            td.strong 单位
-                            td.strong 职务/职称
-                            td.strong 学习方式
-                        tr
-                            td(rowspan="2") 2016-12-20
-                            td 09:00-12:00
-                            td 111
-                            td 张慧勇
-                            td 总部
-                            td 项目经理
-                            td 面授
-                        tr
-                            td 14:00-17:30
-                            td 222
-                            td 王岩
-                            td 总部
-                            td 项目经理
-                            td 面授
-                .layout-mt
-                    table.table
+                .trainsummary-item
+                    h4 一、培训项目概况
+                    .item
+                        p.strong 1、基本信息:
+                        span 本期培训是由业务支撑系统部 主办， 培训编号为
+                        span 00000
+                        span ，培训对象为3山东省对此,实际参训学员人数
+                        span 1000
+                        span ,培训时间：
+                        span 2016-12-20
+                        span 至
+                        span 2016-12-20 。
+                    .clearfix
+                        p.strong.pull-left 2、培训目标:
+                        p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                    textarea.w-full.recommend-padding(cols="2" placeholder="培训目标培训目标")
+                    .clearfix
+                        p.strong.pull-left 3、需求调研方式
+                        p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                    textarea.w-full.recommend-padding(cols="2" placeholder="培训前通过：培训问卷，明确了培训项目需求。")
+                    .layout-mt
+                        table.table
+                            tr > th.strong(colspan="7") 面授课程
+                            tr
+                                td.strong 日期
+                                td.strong 时间
+                                td.strong 课程名称
+                                td.strong 讲师
+                                td.strong 单位
+                                td.strong 职务/职称
+                                td.strong 学习方式
+                            tr
+                                td(rowspan="2") 2016-12-20
+                                td 09:00-12:00
+                                td 111
+                                td 张慧勇
+                                td 总部
+                                td 项目经理
+                                td 面授
+                            tr
+                                td 14:00-17:30
+                                td 222
+                                td 王岩
+                                td 总部
+                                td 项目经理
+                                td 面授
+                    .layout-mt
+                        table.table
+                            tr > th(colspan="2") 在线课程
+                            tr
+                                td 编号
+                                td 课程名称
+                            tr
+                                td 1
+                                td 111111111111111
+                    .clearfix
+                        p.strong.pull-left 4、培训形式:
+                        p.pull-left.color-error （班主任填写,请根据实际采用的培训形式对下方评语进行修改）
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 培训形式
+                            input(type="radio" name="check")
+                            label 混合式学习形式
+                            input.layout-ml(type="radio" name="check")
+                            label 面授与讨论形式
+                            input.layout-ml(type="radio" name="check")
+                            label 面授形式
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 混合式学习形式：
+                                    textarea.w-full.recommend-padding(cols="3" placeholder="培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式")
+                    .clearfix
+                        p.strong.pull-left 5、学员表现:
+                        p.pull-left.color-error （班主任填写,请根据实际学员表现情况对下方评语进行修改）
+                    .m-top
+                        .layout-ml-small
+                            p.strong 课堂表现
+                            input(type="radio" name="check")
+                            label 非常好
+                            input.layout-ml(type="radio" name="check")
+                            label 比较好
+                            input.layout-ml(type="radio" name="check")
+                            label 一般
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 非常好：
+                                    textarea.w-full.recommend-padding(cols="2" placeholder="参训学员课堂表现非常好，充分参与到培训过程中来")
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 出勤情况
+                            input(type="radio" name="check")
+                            label 全勤
+                            input.layout-ml(type="radio" name="check")
+                            label 良好
+                            input.layout-ml(type="radio" name="check")
+                            label 一般
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 全勤：
+                                    textarea.w-full.recommend-padding(cols="2" placeholder="没有学员迟到、早退或缺勤。")
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 优秀学员（选填）
+                            .clearfix
+                                p.pull-left 本次培训中，
+                                p.pull-left ___________________________
+                                p.pull-left 表现突出,被评为优秀学员。
+                            p 例子：本次培训中，某某公司某某人在小组研讨、汇报答辩中表现突出，被评为“优秀学员”。
+                    .item
+                        p.strong 6、学习效果考核方式:
+                        p 本次培训通过考试方式，进行了培训学习考核。
+                    .clearfix
+                        p.pull-left.strong 考核结果
+                        p.pull-left.color-error.strong （培训需求方填写）
+                    textarea.w-full.recommend-padding(cols="3" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用、通过考核评估学员对培训内容的掌握情况。")
+                .trainsummary-item
+                    h4 二、教学评估:
+                    .teach-item
+                        p.strong 1、培训项目设计：
+                        p 培训结束后，通过培训系统对学员进行了满意度调查，统计结果如下：
+                        .m-left
+                            span 学员对培训项目设计总体满意度为:
+                            span 100.00%
+                        table.table
+                            tr
+                                th 序号
+                                th 评价项目
+                                th 满意度
+                            tr > td.text-center(colspan="3") 无相关信息
+                    .teach-item
+                        p.strong 2、课程与讲师：
+                        p 培训结束后，通过培训系统对学员进行了满意度调查，统计结果如下：
+                        .m-left
+                            span 学员对培训项目设计总体满意度为:
+                            span 100.00%
+                        table.table
+                            tr
+                                th 序号
+                                th 课程名称
+                                th 讲师
+                                th 课程满意度
+                                th 讲师满意度
+                            tr > td.text-center(colspan="5") 无相关信息
+                .trainsummary-item
+                    .clearfix
+                        .h4.strong.pull-left.title-height 三、学员反馈意见:
+                        .btn.pull-left.m-left.radius 学员满意度问卷反馈建议导出
+                    .clearfix
+                        p.pull-left.strong 1、学员对集团业务、运营等方面的建议：
+                        p.pull-left.color-error.strong （培训需求方整理提炼）
+                    textarea.w-full.recommend-padding(rows="3" placeholder="点击上方“学员满意度问卷反馈建议导出”，将第n项问题的学员反馈建议、以及在培训过程中学员反馈的对公司业务、运营等方面的建议提炼整理后填写到此处，该建议将反馈至集团公司领导和相关部门领导。")
+                    .clearfix
+                        p.pull-left.strong 2、学员对培训项目的建议：
+                        p.pull-left.color-error.strong （班主任整理提炼）
+                    textarea.w-full.recommend-padding(rows="3" placeholder="点击上方“学员满意度问卷反馈建议导出”，将G、H、I、K四个问题的学员对项目的反馈建议填到此处。")
+                .trainsummary-item
+                    h4 四、其他（填写）：
+                    textarea.w-full.recommend-padding(rows="3")
+                .trainsummary-item.clearfix
+                    .pull-right
+                        .h5.strong.m-top.text-right 业务支撑系统部
+                        .h5.strong.m-top.text-right 中国移动学院
+                        .h5.strong.m-top.text-right 日期：
+                            span 2016-12-22
+                .text-center
+                    .btn.m-right 保存
+                    .btn 提交
