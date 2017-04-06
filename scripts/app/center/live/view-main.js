@@ -11,11 +11,11 @@ exports.events = {
 
 exports.handlers = {
     toLive: function(id) {
-        var url = '#/exam/exam/answer-paper/' + id;
+        var url = '#/activity/gensee/detail/' + id;
         window.open(url, '_blank');
     },
     toDetail: function(id) {
-        var url = '#/exam/exam/score-detail/' + id;
+        var url = '#/activity/gensee/detail/' + id;
         window.open(url, '_blank');
     }
 };
