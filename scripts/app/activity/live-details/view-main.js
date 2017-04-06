@@ -30,7 +30,7 @@ exports.components = [function() { // 分享组件
     if (gensee) {
         data.id = gensee.id;
         data.type = 5;
-        data.pics = 'images/default-cover/default_course.jpg';
+        data.pics = gensee.cover ? gensee.cover : 'images/default-cover/default_course.jpg';
         data.title = gensee.subject;
     }
     return {

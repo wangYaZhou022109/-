@@ -20,5 +20,5 @@ view('main')
                     .img > .img-cont > img(src="images/demo/1.jpg")
                     h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
-                .btn.small > echo('关注')
+                .btn.small(id="follow-"  + id data-name='id' data-value='1_' + id) > echo('关注')
     

@@ -1,0 +1,51 @@
+.managements-page {
+    & .managements-classmanage {
+        & .form-row-width {
+            width: 33.3%;
+        }
+        & .photos {
+            width: 80%;
+            & li {
+                width: 20%;
+                padding-right: var(--section-gap);
+                position: relative;
+                float: left;
+                margin-top: calc(var(--space) * 2);
+                & img {
+                    width: 100%;
+                }
+                & .photo-item {
+                    position: relative;
+                    &:hover {
+                        & .check {
+                            @apply --fade-in;
+                        }
+                    }
+                    & .progress {
+                        width: 80%;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: 10%;
+                        & .progress-item {
+                            width: 70%;
+                            height: calc(var(--base-gap)/10);
+                            background-color: var(--white);
+                        }
+                        & span {
+                            width: 30%;
+                            font-size: .1em;
+                        }
+                    }
+                }
+                & input {
+                    position: absolute;
+                    top: calc(var(--font-title)/3);
+                    right: 0;
+                    z-index: 2;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}
