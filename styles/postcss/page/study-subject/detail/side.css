@@ -72,9 +72,6 @@
             margin-top: calc(var(--space) / 1.5);
         }
 
-        & .text-overflow {
-            font-weight: 700;
-        }
         & li.forefront {
             &:before {
                 float:right;

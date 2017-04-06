@@ -9,16 +9,20 @@ module > .class-register-page
 view('banner')
     .cover.pull-left > img(src='images/default-cover/default_class.jpg')
     .banner-con.pull-left
-        h2 > echo(research.name)
+        .h2.inline-block > echo(research.name)
+        .inline-block.layout-ml-small
+            #share
         p 调研时间：
             dateTime(research.startTime)
             | ~
             dateTime(research.endTime)
+
         .m-top
             span.m-right 相关标签
             each(research.topics)
                 span.tag-btn > echo(name)
-        .m-top > .btn#do-research 进入调研
+        if(research.name)
+            .m-top > .btn#do-research 进入调研
 
 
 view('side')
@@ -31,7 +35,7 @@ view('side')
 view('main')
     .h3 问卷须知
     .layout-mt-small
-        echo(research.questionaryDetail)
+        @echo(research.questionaryDetail)
 
     section.section
         .h3 相关调研
@@ -43,8 +47,8 @@ view('main')
                             .img-cont
                                 a.normal > img(src=coverId)
                             .detail-wrapper
-                                p
-                                    .btn.radius.block 我要参与
+                                p 描述描述描述描述描述
+                                .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text
                                 i.iconfont.icon-user(title='参加人数')
@@ -53,9 +57,9 @@ view('main')
                         .bottom.sub-text.clearfix
                             .pull-left 调研时间
                             .pull-right
-                                dateTime(startTime)
+                                date(startTime)
                                 | ~
-                                dateTime(endTime)
+                                date(endTime)
 
 view('research-tips')
         div > echo(research.content)

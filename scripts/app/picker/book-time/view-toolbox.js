@@ -6,13 +6,13 @@ exports.bindings = {
 };
 
 exports.actions = {
-    'change month': 'changeMonth',
-    'click book': 'book'
+    'change month': 'changeMonth'
 };
 
 exports.events = {
     'click rule': 'showRule',
-    'change arriveDate': 'changeArriveDate'
+    'change arriveDate': 'changeArriveDate',
+    'click book': 'book'
 };
 
 exports.handlers = {
@@ -25,11 +25,27 @@ exports.handlers = {
         var arriveDate = this.$('arriveDate').value,
             arriveLong,
             project = this.bindings.project,
+            backDateNum,
             backDate;
+        backDateNum = project.data.days - 1;
         arriveLong = new Date(arriveDate);
-        arriveLong.setDate(arriveLong.getDate() + project.data.days + 1);
+        arriveLong.setDate(arriveLong.getDate() + backDateNum);
         backDate = helpers.date(arriveLong);
         this.$('backDate').value = backDate;
+    },
+    book: function() {
+        var arriveDate = this.$('arriveDate').value,
+            backDate = this.$('backDate').value;
+        if (arriveDate === '') {
+            this.app.message.alert('请选择报道日');
+            return;
+        }
+        if (backDate === '') {
+            this.app.message.alert('请选择返程日');
+            return;
+        }
+        this.module.renderOptions.callback(arriveDate, backDate);
+        this.app.viewport.closeModal();
     }
 };
 
@@ -49,29 +65,9 @@ exports.components = [{
 }];
 
 exports.dataForActions = {
-    book: function(payload) {
-        var arriveDate = payload.arriveDate,
-            backDate = payload.backDate;
-        if (arriveDate === '') {
-            this.app.message.alert('请选择报道日');
-            return false;
-        }
-        if (backDate === '') {
-            this.app.message.alert('请选择返程日');
-            return false;
-        }
-        return payload;
-    },
+
 };
 
 exports.actionCallbacks = {
-    book: function(data) {
-        var d = data[0];
-        if (d.result === 'ok') {
-            this.module.renderOptions.callback(d.arriveDate, d.backDate);
-            this.app.viewport.closeModal();
-        } else {
-            this.app.message.alert(d.message);
-        }
-    }
+
 };

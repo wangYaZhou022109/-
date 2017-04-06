@@ -4,4 +4,4 @@ module
 
 view('min-banner') > .container
     #swiper > ul > each(smallBanners)
-        li > a(href=linkAddress target='_blank') > img(src=downloadUrl(pcImage))
+        li > a(href=linkAddress) > img(src=downloadUrl(pcImage))

@@ -1,0 +1,81 @@
+#!handlebars
+
+module
+    br
+    .div(data-region='search')
+    .div(data-region='main')
+
+view('search') > form.vertical
+    echo('员工编号')
+    input.input(name='memberName')
+    echo('姓名')
+    input.input(name='memberFullName')
+    echo('所属单位')
+    input.input(name='organizationName')
+    btn.btn#search > echo('搜索')
+
+view('main')
+    div.text-center
+        p.col-sm-2 > echo('报名列表')
+        .buttons
+            .btn#situation > echo('报名情况')
+            .btn#allAudit > echo('审核')
+    table.table
+        thead > tr
+            th > .checkbox.no-margin
+                input(type='checkbox' id='checkAll')
+                label(for='checkAll')
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('单位')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+            th > echo('状态')
+            th > echo('操作')
+        tbody > each(trainees) > tr
+            td > .checkbox.no-margin
+                input(type='checkbox' id='check-item'+id name='traineeId' value=id)
+                label(for='check-item'+id)
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+            td > map('trainee-show-auditStatus' auditStatus)
+            td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId) > echo('审核')
+    #pager.pagination
+
+view('situation')
+    echo('培训班审批情况:') + echo(situation.signUpNumber) + echo('/') + echo(situation.amount)
+    compare(situation.type 'eq' 2)
+        table.table
+            thead > tr
+                th > echo('序号')
+                th > echo('机构/部门')
+                th > echo('已报名人数/本省名额')
+            tbody > each(situation.classQuotaDetails) > tr
+                td > echo(i)
+                td > echo(organizationName)
+                td > echo(signUpNumber) + echo('/') + echo(quantity)
+
+view('audit') > form.vertical
+    input.input(name='id' type='hidden' value=traineeId)
+    .row
+        .col-sm-3
+            echo('审核结果')
+        .col-sm-9
+            input(type='radio' name='auditStatus' value='1')
+            echo('同意')
+            input(type='radio' name='auditStatus' value='2')
+            echo('拒绝')
+    br
+    .row
+        .col-sm-2
+            label > echo('审核意见')
+        .col-sm-10
+            textarea.input.w-full(name='auditOpinion' x-rule='required' rows='2' placeholder='编辑审核意见')
+

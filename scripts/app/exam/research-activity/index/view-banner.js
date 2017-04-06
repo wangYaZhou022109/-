@@ -1,3 +1,5 @@
+var RESEARCH_TYPE = 5;
+
 exports.bindings = {
     research: true
 };
@@ -14,3 +16,22 @@ exports.handlers = {
         });
     }
 };
+
+exports.components = [function() {
+    var data = {},
+        research = this.bindings.research.data;
+    if (research) {
+        data.id = research.id;
+        data.type = RESEARCH_TYPE;
+        data.pics = research.coverId;
+        data.title = research.name;
+    }
+    return {
+        id: 'share',
+        name: 'picker',
+        options: {
+            picker: 'share',
+            data: data
+        }
+    };
+}];

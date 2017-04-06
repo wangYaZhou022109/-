@@ -1,0 +1,35 @@
+#!handlebars
+module > .train-class-page
+    .page-main-wrapper
+        .activity-category
+            .div(data-region='count')
+            .div(data-region='option')
+            .div(data-region='main')
+
+view('count') > form.vertical
+    echo('统计名称')
+    echo(busOne.name)
+    echo('统计时间')
+    dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
+
+view('option')
+    table.table
+        tbody > each(busOption) > tr
+            td > echo(name)
+
+view('main')
+    div.text-center
+        .buttons
+            a(href=exportUrl ) > .btn > span 导出
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('员工姓名')
+            th > echo('员工电话')
+            th > echo('登记信息')
+        tbody > each(busDetail) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.phoneNumber)
+            td > echo('')
+    #pager.pagination

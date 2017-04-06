@@ -1,0 +1,12 @@
+.managements-page {
+    & .managements-quotamanage {
+        & input {
+            &.r-input {
+                margin-right: 0;
+            }
+        }
+        & .quota-contents-2 {
+            display: none;
+        }
+    }
+}

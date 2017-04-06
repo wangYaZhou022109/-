@@ -1,5 +1,6 @@
 var _ = require('lodash/collection'),
-    toArray;
+    toArray,
+    H = require('./app/util/helpers');
 
 exports.bindings = {
     params: true,
@@ -52,8 +53,22 @@ exports.handlers = {
         });
     },
     showResearchIndex: function(id) {
-        var url = '#/exam/research-activity/index/' + id;
-        window.open(url, '_blank');
+        var url = 'exam/research-activity/index/' + id,
+            mod = this.module.items['research-tips'],
+            me = this;
+        return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
+            if (data.startTime > new Date().getTime()) {
+                me.app.viewport.modal(mod, {
+                    content: '你好，本次调研尚未到调研时间，请在调研时间'
+                        + H.dateTime(data.startTime)
+                        + '~' + H.dateTime(data.endTime)
+                        + '进行调研，谢谢'
+                });
+            } else {
+                // window.open(url);
+                me.app.navigate(url, true);
+            }
+        });
     }
 };
 

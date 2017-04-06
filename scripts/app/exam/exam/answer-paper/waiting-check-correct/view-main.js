@@ -9,7 +9,6 @@ exports.events = {
 
 exports.handlers = {
     waitingCheck: function(id) {
-        this.$('check').classList.add('checked');
         return this.module.dispatch('waitingCheck', { questionId: id });
     },
     correct: function(id) {

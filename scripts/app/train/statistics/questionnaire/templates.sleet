@@ -1,0 +1,53 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='mainA')
+        .div(data-region='mainB')
+
+view('mainA')
+    table.table
+        thead > tr
+            th > echo('问卷名称')
+            th > echo('问卷类型')
+            th > echo('开始时间')
+            th > echo('截止时间')
+            th > echo('操作')
+        tbody > each(classEvaluates) > tr
+            td > echo(resourceName)
+            td > map('questionnaire-type' type)
+            td
+                compare(type 'eq' 1)
+                    dateTime(exam.startTime)
+                else
+                    dateTime(researchQuestionary.startTime)
+            td
+                compare(type 'eq' 1)
+                    dateTime(exam.endTime)
+                else
+                    dateTime(researchQuestionary.endTime)
+            td
+                a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id typeId=type) > echo('查看')
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')
+
+view('mainB')
+    table.table
+        thead > tr
+            th > echo('问卷名称')
+            th > echo('开始时间')
+            th > echo('截止时间')
+            th > echo('反馈率')
+            th > echo('操作')
+        tbody > each(classEvaluate) > tr
+            td > echo(resourceName)
+            td > date(startTime)
+            td > date(endTime)
+            td > echo(response)
+            td
+                a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id) > echo('查看')
+                echo(' | ')
+                a(id='statistics'+resourceId data-name='id' data-value=id) > echo('统计')
+        else
+            tr > td(colspan='11') > p.text-center > string('no-data')
+    

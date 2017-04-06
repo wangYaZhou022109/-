@@ -9,7 +9,10 @@ view('list')
                     .user-pic > img(src='images/d2.jpg')
                     .comment-content
                         .h4 > a(id='reply-' + id ) > echo(title)
-                        .comment-text > echo(questionDiscuss.content)
+                        .comment-text 
+                            compare(jsonImg.length 'gt' 0)
+                                img(src=jsonImg)
+                            @echo(questionDiscuss.content)
                         .user-info
                             a(href='javascript:;') > echo(member.fullName)
                             span > echo('提问')
@@ -17,8 +20,12 @@ view('list')
                         .comment-operation
                             .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
-                                .item > a.normal(href='javascript:;') 取消关注
-                                .item > a.normal(href='javascript:;') 添加讨论
+                                #  .item > a.normal(href='javascript:;') 取消关注
+                                compare(concernNum 'gt' 0)  
+                                    .item(id='unfollow-1_' + id data-name='id' data-value='1_' + id ) > echo('+') + string('unfollow')
+                                else
+                                    .item(id='follow-1_'  + id data-name='id' data-value='1_' + id) > echo('+') + string('follow')
+                                .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                                 .item
                                     .drop-down-wrapper
                                         .drop-down-btn 分享
@@ -27,7 +34,13 @@ view('list')
                                                 li 分享1
                                                 li 分享2
                                                 li 分享3
-                                .item > a.normal(href='javascript:;') > string('report')
+                                .item > span(id ='report-' + type + '_' + id data-name='id' data-value=type +'_' + id) > string('report')
+                                .item > span(id = 'shut-' + id data-name='id' data-value=id) > string('delete')
+                                form.comment-reply(id ='comment-reply-' + id)
+                                    textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                    input.input(type='hidden' name='organizationId' value=organizationId)
+                                    input.input(type='hidden' name='id' value=id)
+                                    .btn(id='publish-' + id) > string('publish')
                         .comment-reply.m-top
                             textarea.input.w-full.block(rows="1")
                             .btn 回复

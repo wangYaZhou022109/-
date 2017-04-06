@@ -1,0 +1,100 @@
+#!handlebars
+
+
+module
+    .top-content.clearfix.container#top-content
+        .logo(data-region='logo')
+        .shortcut(data-region='shortcut')
+    .nav.bg-main-color > .container(data-region='nav')
+
+
+view('nav')
+    .nav-list
+        if(navs.length)
+            each(navs)
+                if(show)
+                    .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color(class='active')&if(active) > echo(name)
+        else
+            each(menus)
+                .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
+
+view('shortcut')
+    .toggle-shortcut > i.pe-7s-angle-down
+    .shortcut-list
+        .item
+            .header-search-bar.border-main-color
+                .search-select > select.input
+                    option 全部
+                    option 课程
+                    option 专题
+                .search-input > input.input#search(placeholder='请输入您要搜索的内容')
+                .search-btn > button.btn(type='button') > i.iconfont.icon-search
+                .search-more-bar#searchMore > ul
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+                    li.text-hover-main-color 热门搜索课程名称
+
+        .item.small-font.drop-down-wrapper.right
+            .drop-down-btn
+                span#selected-name > echo(organization.name)
+                i.iconfont.icon-triangle-down
+                input(type='hidden' id='orgId' name='orgId' value=organization.id)
+            .drop-down-content > .content
+                ul > each(organizations)
+                    if(shortName)
+                        li(id='org-'+id) > echo(shortName)
+                    else
+                        li(id='org-'+id) > echo(name)
+
+        if(Global.currentUser.id)
+            .item.drop-down-wrapper.right
+                a#message-div.normal(href='#') > i.iconfont.icon-message.drop-down-btn
+                .drop-down-content > .content
+                    compare(message.recordCount 'gt' 0)
+                        ul.message-list > each(message.items)
+                            li
+                                a.underline(href='#/message/detail/'+id  target='_blank') > .text-overflow > echo(subject)
+                                .sub-text.text-overflow > echo(textContent)
+                        .text-center.small-font > a#message-more 查看更多
+                    else
+                        .text-center.small-font 暂无新消息
+            .item > a.normal(href='/admin/') > i.iconfont.icon-setting
+            .item.drop-down-wrapper.right
+                .drop-down-btn.user-info.inline-block.user-pic
+                    if(Global.currentUser.headPortrait)
+                        img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
+                    else
+                        img(src='images/default-userpic.png')
+                .drop-down-content > .content
+                    .user-info-top
+                        .user-pic.inline-block
+                            if(Global.currentUser.headPortrait)
+                                img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
+                            else
+                                img(src='images/default-userpic.png')
+                        .user-info-main.inline-block
+                            .item
+                                .inline-block.common-title > echo(Global.currentUser.name)
+                                .inline-block.lv LV3
+                            .item.small-font
+                                a.mr-1(href='#/center/index') 进入个人中心
+                                a#logout(href='javascript:;') 退出账号
+                    .user-info-list.border.top
+                        .item.border.right
+                            b > echo(courseTime)
+                            .small-font.m-top 学习时长
+                        .item
+                            b > echo(integral.totalScore)
+                            .small-font.m-top 积分
+                    .hide
+                        form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
+                            input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
+
+view('logo')
+    if(homeConfig.logo)
+        .item > a.underline(href='/#/home') > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
+    else
+        .item > a.underline(href='/#/home') > img(src='images/cmou-logo.png')
+    .item > img(src='images/dx-logo.png')

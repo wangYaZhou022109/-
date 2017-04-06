@@ -1,7 +1,7 @@
 #!handlebars
 module
     div(data-region='list')
-    div(data-region='popup')  
+
 view('list')
     each(trends)
         li

@@ -1,12 +1,14 @@
 var helpers = require('./app/util/helpers'),
     markers = require('./app/ext/views/form/markers'),
     validators = require('./app/ext/views/form/validators'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    _ = require('lodash/collection');
 
 exports.bindings = {
     classInfo: true,
     down: false,
-    state: true
+    state: true,
+    classroomList: true
 };
 
 exports.events = {
@@ -57,7 +59,8 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click submit': 'submit'
+    'click submit': 'submit',
+    'click save': 'save'
 };
 
 exports.dataForTemplate = {
@@ -111,18 +114,30 @@ exports.dataForTemplate = {
         }
         if (state.bannerId) {
             bannerUrl = this.bindings.down.getFullUrl() + '?id=' + state.bannerId;
-        } else {
+        } else if (classInfo.classDetail && classInfo.classDetail.bannerId) {
             state.bannerId = classInfo.classDetail.bannerId;
             bannerUrl = this.bindings.down.getFullUrl() + '?id=' + classInfo.classDetail.bannerId;
         }
         state.downUrl = url;
         state.bannerUrl = bannerUrl;
         return state;
+    },
+    classroomList: function(data) {
+        _.map(data.classroomList || [], function(classroom) {
+            var item = classroom;
+            if (data.classInfo && data.classInfo.classRoom && item.id === data.classInfo.classRoom) {
+                item.selected = true;
+            }
+        });
+        return data.classroomList;
     }
 };
 
 exports.dataForActions = {
     submit: function(payload) {
+        return this.validate() ? payload : false;
+    },
+    save: function(payload) {
         return this.validate() ? payload : false;
     }
 };
@@ -146,25 +161,22 @@ exports.mixin = {
     validate: function() {
         var needGroupPhoto = $(this.$$('[name="needGroupPhoto"]:checked')),
             photoTime = $(this.$('photoTime')),
-            needVideo = $(this.$$('[name="needVideo"]:checked')),
-            videoRequirement = $(this.$('videoRequirement')),
             needMakeCourse = $(this.$$('[name="needMakeCourse"]:checked')),
             courseVideoRequirement = $(this.$('courseVideoRequirement')),
             otherRequirement = $(this.$('otherRequirement')),
+            restRoom = $(this.$('restRoom')),
+            diningRoom = $(this.$('diningRoom')),
             flag = true,
             reg = new RegExp('\\{' + 0 + '\\}', 'g');
 
         markers.text.valid(photoTime);
-        markers.text.valid(videoRequirement);
         markers.text.valid(courseVideoRequirement);
         markers.text.valid(otherRequirement);
+        markers.text.valid(restRoom);
+        markers.text.valid(diningRoom);
 
         if (needGroupPhoto.val() === '1' && photoTime.val() === '') {
             markers.text.invalid(photoTime, validators.required.message);
-            flag = false;
-        }
-        if (needVideo.val() === '1' && videoRequirement.val() === '') {
-            markers.text.invalid(videoRequirement, validators.required.message);
             flag = false;
         }
         if (needMakeCourse.val() === '1' && courseVideoRequirement.val() === '') {
@@ -175,16 +187,20 @@ exports.mixin = {
             markers.text.invalid(otherRequirement, validators.required.message);
             flag = false;
         }
-        if (videoRequirement.val() !== '' && !validators.maxLength.fn(videoRequirement.val(), 1000)) {
-            markers.text.invalid(videoRequirement, validators.maxLength.message.replace(reg, 1000));
-            flag = false;
-        }
         if (courseVideoRequirement.val() !== '' && !validators.maxLength.fn(courseVideoRequirement.val(), 1000)) {
             markers.text.invalid(courseVideoRequirement, validators.maxLength.message.replace(reg, 1000));
             flag = false;
         }
         if (!validators.maxLength.fn(otherRequirement.val(), 1000)) {
             markers.text.invalid(otherRequirement, validators.maxLength.message.replace(reg, 1000));
+            flag = false;
+        }
+        if (!validators.maxLength.fn(restRoom.val(), 200)) {
+            markers.text.invalid(restRoom, validators.maxLength.message.replace(reg, 200));
+            flag = false;
+        }
+        if (!validators.maxLength.fn(diningRoom.val(), 200)) {
+            markers.text.invalid(diningRoom, validators.maxLength.message.replace(reg, 200));
             flag = false;
         }
         return flag;

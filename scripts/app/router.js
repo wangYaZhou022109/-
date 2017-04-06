@@ -1,16 +1,34 @@
-
 exports.routes = {
     home: 'showHome',
+    'home/:configId': 'previewHome',
+    'home/org/:orgId': 'changeHome',
     'share/:id/:type': 'showShare', // 分享跳转
-    'message/detail/:id': 'showMessageDetail'
+    'message/detail/:id': 'showMessageDetail',
+    'center/demand': 'showDmand',
+    'center/class-service': 'classService',
+    'center/managements': 'showManagements'
 };
 
 exports.showHome = function() {
     return this.app.show('content', 'home/default');
 };
 
+exports.previewHome = function(configId) {
+    return this.app.show('content', 'home/default', { configId: configId });
+};
+
+exports.changeHome = function(orgId) {
+    return this.app.show('content', 'home/default', { orgId: orgId });
+};
+
 exports.showMessageDetail = function(id) {
-    return this.app.show('content', 'home/message/detail', { id: id });
+    return this.app.show('content', 'home/message/detail', {
+        id: id
+    });
+};
+
+exports.showDemo = function() {
+    return this.app.show('content', 'demo');
 };
 
 exports.showShare = function(id, type) {
@@ -37,4 +55,13 @@ exports.showShare = function(id, type) {
         webUrl += '/#//' + id;
     }
     window.location.href = webUrl;
+};
+exports.showDmand = function() {
+    return this.app.show('content', 'center/demand');
+};
+exports.classService = function() {
+    return this.app.show('content', 'center/class-service');
+};
+exports.showManagements = function() {
+    return this.app.show('content', 'center/managements');
 };

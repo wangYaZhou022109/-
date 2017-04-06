@@ -10,6 +10,8 @@ exports.dataForTemplate = {
             courseRelated = data.courseRelated;
         _.map(courseRelated, function(opt) {
             var course = opt;
+            var defultImg = 'images/default-cover/default_course.jpg';
+            course.imageUrl = defultImg;
             if (opt.cover) {
                 course.imageUrl = download.getFullUrl() + '?id=' + opt.cover;
             }
@@ -25,6 +27,6 @@ exports.events = {
 
 exports.handlers = {
     resetPage: function() {
-        this.module.dispatch('turnPage');
+        this.module.dispatch('selectCourseRelated');
     }
 };

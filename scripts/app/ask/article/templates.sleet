@@ -1,6 +1,6 @@
 #!handlebars
 
-module > form.form 
+module > form.form.align-left
     div(data-region='top')
     div(data-region='edit')
     div(data-region='details')
@@ -13,14 +13,14 @@ view('top')
 
 view('topic')
     .form-row.textarea-row
-        label > string('related-topics') + echo(':') 
+        label > string('related-topics')
         #select-topic
-   
+
 view('details')
     .form-row
-        .content > a > i.iconfont.icon-link#uploadFile + span 
+        .content > a > i.iconfont.icon-link#uploadFile + span
             compare(task.data.length 'gt' 0)
-                each(task.data) 
+                each(task.data)
                     echo(enclosureName)
             else
                 string('upload-attachments')

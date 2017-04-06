@@ -125,3 +125,4 @@ exports.dataForTemplate = {
         return trends;
     }
 };
+

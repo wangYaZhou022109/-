@@ -4,11 +4,12 @@ module > .rank(data-region='pannel')
 
 view('pannel')
     if(region.regionModule.display)
-        .h3
-            .pull-right.side-more#more more
+        .clearfix
+            .pull-right.text-tips.m-top#more more
             .pull-left
-                echo(region.regionModule.name)
-                span.text-tips.sub-text 学员时长排行榜
+                span.h3 > echo(region.regionModule.name)
+                span.sub-text 学员时长排行榜
+
         .layout-mt-smal.side-rank-list
             ul
                 each(lists)
@@ -17,7 +18,7 @@ view('pannel')
                         .user-info
                             .text-overflow(title=member.fullName) > echo(member.fullName)
                             .text-overflow.m-top(title=member.organization.name) > echo(member.organization.name)
-                        strong > echo(studyTotalTime '分钟')
+                        .strong > echo(studyTotalTime '分钟')
 view('more')
     .mb-1 排行榜
     .table > table

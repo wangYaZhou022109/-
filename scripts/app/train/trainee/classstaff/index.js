@@ -1,6 +1,6 @@
 exports.items = {
     main: 'main',
-    search: 'search'
+    'train/trainee/select-member': { isModule: true }
 };
 
 exports.store = {
@@ -10,24 +10,59 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        projectInfo: {},
-        state: { data: { classId: 3 } }
+        classstaff: { url: '../train/classstaff' },
+        memberIds: { url: '../train/classstaff/members' },
+        addAllClassstaff: { url: '../train/classstaff/save-all' },
+        state: { data: {} }
     },
     callbacks: {
         init: function(payload) {
             var classstaffs = this.models.classstaffs;
-            classstaffs.params = payload;
+            var state = this.models.state.data;
+            state.classId = payload.classId;
+            classstaffs.params = { classId: payload.classId };
             return this.get(classstaffs);
         },
-        search: function(payload) {
-            var classstaffs = this.models.classstaffs;
-            classstaffs.params = payload;
-            return this.get(classstaffs);
+        updateSort: function(payload) {
+            var classstaff = this.models.classstaff;
+            classstaff.clear();
+            classstaff.set(payload);
+            return this.put(classstaff);
+        },
+        delete: function(payload) {
+            var classstaff = this.models.classstaff;
+            classstaff.clear();
+            classstaff.set(payload);
+            return this.put(classstaff);
+        },
+        changeCallName: function(payload) {
+            var classstaff = this.models.classstaff;
+            classstaff.clear();
+            classstaff.set(payload);
+            return this.put(classstaff);
+        },
+        addClassstaff: function(payload) {
+            var classstaff = this.models.classstaff;
+            classstaff.clear();
+            classstaff.set(payload);
+            return this.save(classstaff);
+        },
+        addAllClassstaff: function(payload) {
+            var addAllClassstaff = this.models.addAllClassstaff;
+            addAllClassstaff.clear();
+            addAllClassstaff.params = payload;
+            return this.get(addAllClassstaff);
+        },
+        getMemberIds: function() {
+            var memberIds = this.models.memberIds,
+                state = this.models.state.data;
+            memberIds.clear();
+            memberIds.params = { classId: state.classId };
+            return this.get(memberIds);
         }
     }
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    return this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };
