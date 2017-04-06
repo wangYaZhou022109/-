@@ -47,13 +47,13 @@ exports.store = {
             params.taskId = task.data.id;
             params.state = 2;
             return me.save(taskMember).then(function(data) {
-                var taskApproval = {};
-                data[0].taskApproval = taskApproval;
+                var taskApproval = {},
+                    tm = data[0];
+                tm.taskApproval = taskApproval;
                 if (data[1] === 'success') {
                     me.app.message.success('提交成功!');
                 }
-
-                task.data.taskMemberList.push(data[0]);
+                task.data.taskMemberList.push(tm);
                 me.models.task.changed();
             });
         }

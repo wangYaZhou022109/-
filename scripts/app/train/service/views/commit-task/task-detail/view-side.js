@@ -22,7 +22,6 @@ exports.handlers = {
             taskMemberModel = this.bindings.taskMemberModel,
             task = this.bindings.task.data,
             param = { flag: 'doc', docUrl: docUrl };
-        console.log(preview);
         mainState.isExplain = false;
         this.bindings.mainState.changed();
         if (attachType === '2') {
