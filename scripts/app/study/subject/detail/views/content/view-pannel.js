@@ -74,7 +74,7 @@ exports.dataForTemplate = {
         // 配置按钮地址
         subject.courseChapters = util.setBtn(subject.courseChapters,
           state.type,
-          subject.studyProgress.currentSectionId);
+          progress.currentSectionId);
         return subject;
     }
 };
