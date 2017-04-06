@@ -1,0 +1,31 @@
+#!handlebars
+
+module > .watchbring-page
+    .watchbring(data-region="watchbring")
+
+view('watchbring')
+    .clearfix
+        .pull-left.title-width
+            span 学员姓名:
+            span 某某某
+        .pull-left.title-width
+            span 员工编号：
+            span 09314110102
+        .pull-right
+            span 提交时间：
+            span 2017-2-20 09：00
+    .watchbring-content
+        .watchbring-item.layout-mt-small.overflow
+            p 1.优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新
+            .layout-mt-small.clearfix
+                label 经验/案例
+                span _________________________________________________
+            .h5.m-top 主题：
+            textarea.w-full(placeholder="输入问题内容" rows="5")
+        .watchbring-item.layout-mt-small.overflow
+            p 2.棘手问题：您当前最关心的、当前工作中最棘手的一个问题
+            .layout-mt-small.clearfix
+                label 经验/案例
+                span __________________________________________0/30
+            .h5.m-top 主题：
+            textarea.w-full(placeholder="输入问题内容" rows="5")

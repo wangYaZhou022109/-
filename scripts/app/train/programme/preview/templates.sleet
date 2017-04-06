@@ -1,0 +1,16 @@
+#!handlebars
+
+module > .course-detail-page
+    .top
+        .course-detail-top.top-bg
+            .player-wrapper
+                .player-title-row(data-region='title')
+                .player-content(data-region='player' style='overflow:auto;position:relative;')
+
+view('title')
+    .clearfix
+        .pull-left
+            .common-title.inline-block > echo(download.filename)
+
+view('player')
+    div(data-dynamic-key=state.key)

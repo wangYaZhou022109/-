@@ -6,7 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         state: {},
-        classinfos: { url: '../train/classInfo/response', type: 'pageable', root: 'items' }
+        classinfos: { url: '../train/class-info/response', type: 'pageable', root: 'items' }
     },
     callbacks: {
         init: function() {

@@ -1,0 +1,10 @@
+.watchbring-page {
+    & .watchbring {
+        & .title-width {
+            width: 33.3%;
+        }
+        & .item-left {
+            margin-left: var(--section-gap);
+        }
+    }
+}

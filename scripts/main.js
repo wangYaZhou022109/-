@@ -1,20 +1,13 @@
 var D, H, jQuery, app, helpers, oauthOptions, plupload,
     _ = require('lodash/collection'),
     setting = {},
-    currentUser = {},
-    webConfig = {};
-
-oauthOptions = {
-    clientId: 999,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'https://dev9.zhixueyun.com'
-};
+    currentUser = {};
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 4,
-    provider: 'https://oauth9.zhixueyun.com',
-    returnTo: 'http://192.168.9.6/front'
+    clientId: 66,
+    provider: 'https://oauth9.zhixueyun.com/',
+    returnTo: 'http://192.168.1.10'
 };
 // @endif
 
@@ -57,7 +50,11 @@ require('./app/ext/audio-wavesurfer');
 require('./app/ext/photoswipe');
 require('./app/ext/highcharts');
 require('./app/main/modal/modal-region');
-require('./app/ext/rich-text');
+require('./app/ext/flatpickr');
+require('./app/ext/tree');
+require('./app/ext/background-pager');
+require('./app/ext/qr-code');
+
 D.adapt({
     getFormData: function(form) {
         var result = {};
@@ -109,18 +106,13 @@ require('./app/util/global').setup(app).then(function(data) {
     _.map(data.currentUser, function(v, item) {
         currentUser[item] = v;
     });
-    _.map(data.webConfig, function(v, item) {
-        webConfig[item] = v;
-    });
     D.assign(app.global, { setting: setting });
     D.assign(app.global, { currentUser: currentUser });
-    D.assign(app.global, { webConfig: webConfig });
 }, function() {
     app.message.error('加载初始化数据出错');
     return app.Promise.reject();
 }).then(function() {
     app.start('home').then(function() {
-        window.document.title = webConfig.value;
         if (!window.history.pushState) {
             app.dispatch('pushState', window.location.hash.slice(1));   // for ie8
         }

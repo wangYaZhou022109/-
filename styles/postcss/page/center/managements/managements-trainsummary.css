@@ -1,0 +1,10 @@
+.managements-page {
+    & .managements-trainsummary {
+        & table.table {
+            & th {
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+    }
+}
