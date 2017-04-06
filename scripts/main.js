@@ -3,6 +3,12 @@ var D, H, jQuery, app, helpers, oauthOptions, plupload,
     setting = {},
     currentUser = {};
 
+oauthOptions = {
+    clientId: 999,
+    provider: 'https://oauth9.zhixueyun.com/',
+    returnTo: 'https://dev9.zhixueyun.com'
+};
+
 // @ifndef PRODUCTION
 oauthOptions = {
     clientId: 66,
@@ -106,13 +112,18 @@ require('./app/util/global').setup(app).then(function(data) {
     _.map(data.currentUser, function(v, item) {
         currentUser[item] = v;
     });
+    _.map(data.webConfig, function(v, item) {
+        webConfig[item] = v;
+    });
     D.assign(app.global, { setting: setting });
     D.assign(app.global, { currentUser: currentUser });
+    D.assign(app.global, { webConfig: webConfig });
 }, function() {
     app.message.error('加载初始化数据出错');
     return app.Promise.reject();
 }).then(function() {
     app.start('home').then(function() {
+        window.document.title = webConfig.value;
         if (!window.history.pushState) {
             app.dispatch('pushState', window.location.hash.slice(1));   // for ie8
         }
