@@ -221,6 +221,12 @@ module.exports = {
     'ask-audit-status': {
         0: '待审核', 1: '已通过', 2: '已拒绝'
     },
+    'ask-report-type': {
+        1: '问吧', 2: '知识', 3: '课程', 4: '学习'
+    },
+    'ask-source-type': {
+        1: '违反法律', 2: '内容不准确', 3: '垃圾信息', 4: '其他'
+    },
     'research-question-types': {
         1: '单选', 2: '多选', 5: '问答'
     },
