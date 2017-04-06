@@ -1,7 +1,8 @@
 var D, H, jQuery, app, helpers, oauthOptions, plupload,
     _ = require('lodash/collection'),
     setting = {},
-    currentUser = {};
+    currentUser = {},
+    webConfig = {};
 
 oauthOptions = {
     clientId: 999,
