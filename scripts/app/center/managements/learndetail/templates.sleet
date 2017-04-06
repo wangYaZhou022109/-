@@ -1,0 +1,43 @@
+#!handlebars
+
+module > .learndetail-page
+    .learndetail(data-region="learndetail")
+
+view('learndetail')
+    table.table
+        tr
+            th 资源名称
+            th 资源类型
+            th 开始学习时间
+            th 学习时长
+            th 状态
+        tr
+            td 交互设计
+            td 在线课程
+            td -
+            td -
+            td 未开始
+        tr
+            td 交互设计
+            td 在线课程
+            td 2016-06-25 20:21
+            td 01:20:00
+            td 学习中
+        tr
+            td 交互设计
+            td 在线课程
+            td 2016-06-25 20:21
+            td 01:20:00
+            td 已完成
+        tr
+            td 交互设计
+            td 在线课程
+            td 2016-06-25 20:21
+            td 01:20:00
+            td 未查看
+        tr
+            td 交互设计
+            td 在线课程
+            td 2016-06-25 20:21
+            td 01:20:00
+            td 学习中

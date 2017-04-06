@@ -72,7 +72,6 @@
     }
 
     & .page-side {
-        padding-top: var(--base-gap);
 
         & .register-tel {
             padding-top: var(--space);

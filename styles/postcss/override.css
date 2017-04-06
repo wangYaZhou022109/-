@@ -68,12 +68,76 @@
 }
 
 .pdf-view-toolbar {
-  padding: 0 var(--large-space);
+  padding: 0 0 0 var(--large-space);
   position: absolute;
   width: 100%;
   background: white;
-  bottom: 0;
+  top: 0;
   left: 0;
+  height: 3em;
+  z-index: 7;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+}
+
+.pdf-view-toolbar.border {
+    padding: 0;
+    box-shadow: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.viewerContainer {
+    width: 100%;
+    position: absolute;
+    top:3em;
+    overflow: auto;
+    z-index: 6;
+}
+
+.pdf-progress {
+    position: absolute;
+    width: 100%;
+    top: 3em;
+    background: white;
+    height: 3px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.pdf-view-toolbar .selectize-input, .pdf-view-toolbar .selectize-control.single .selectize-input.input-active, .pdf-view-toolbar .selectize-control.single .selectize-input {
+    background: none;
+    border: none;
+    box-shadow: none;
+    width: 5em;
+    height: 2em;
+    padding: 0;
+    line-height: 2em;
+    margin-left: 1em;
+    width: 6em;
+}
+
+.selectize-control.single .selectize-input.input-active,
+.selectize-control.single .selectize-input.input-active input,
+.selectize-control.single .selectize-input, .selectize-control.single .selectize-input input {
+    height: 1em;
+}
+
+.pdf-view-toolbar .selectize-input.dropdown-active::before {
+    display: none;
+}
+
+.pdf-view-toolbar .input.min {
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+}
+
+.pdf-view-toolbar .iconfont {
+    @apply --transition;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--main-color);
+    }
 }
 
 .pswp__button--close,

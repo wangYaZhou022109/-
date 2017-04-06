@@ -12,7 +12,7 @@ exports.components = function() {
         name: 'uploader',
         options: {
             model: 'file',
-            chunk_size: '3mb',
+            chunk_size: '100mb',
             multi_selection: false,
             filters: {
                 max_file_size: '100mb',
@@ -31,8 +31,7 @@ exports.changeFile = function() {
         return {
             contentType: v.contentType,
             attachmentId: v.id,
-            name: v.filename,
-            extension: v.extension
+            name: v.filename
         };
     });
     this.module.dispatch('uploadFile', items);

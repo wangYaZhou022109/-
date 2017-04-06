@@ -1,9 +1,27 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='main')
+module
+    br
+    .div(data-region='main')
+    
 
 view('main')
-    echo('发送短信发送短信发送短信发送短信发送短信发送短信')
+    echo('学员列表')
+    input(type='checkbox' id='checkAllTrainee')
+    label(for='checkAllTrainee') > echo('全选')
+    br
+    each(traineeGroups)
+        echo(name)
+        input(type='checkbox' id='checkGroup'+id)
+        label(for='checkGroup'+id) > echo('全选')
+        ul > each(traineeList)
+            li(id='trainee-'+id) > echo(member.fullName + ' ')
+    echo('班务人员列表')
+    input(type='checkbox' id='checkAllStaff')
+    label(for='checkAllStaff') > echo('全选')
+    ul > each(classstaffs)
+        li(id='classstaff-'+id) > echo(member.fullName + ' ')
+
+
+
     

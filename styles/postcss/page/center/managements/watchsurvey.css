@@ -1,0 +1,10 @@
+.watchsurvey-page {
+    & .watchsurvey {
+        & .bg-color-3 {
+            background-color: var(--bg-color-3);
+        }
+        & .search-padding {
+            padding: calc(var(--base-gap)/2) calc(var(--section-gap)/2);
+        }
+    }
+}
