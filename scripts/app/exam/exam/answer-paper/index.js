@@ -112,6 +112,9 @@ exports.store = {
                         noAnswerCount: this.data.totalCount - answeredCount
                     });
                     this.save();
+                },
+                isComplete: function() {
+                    return this.data.noAnswerCount === 0;
                 }
             }
         },

@@ -4,6 +4,7 @@ module.exports = {
     'exam.research.questionary-detail': '问卷须知',
     'exam.begin-answer-question': '开始答题',
     'exam.submit-paper-confirm': '确定要提交试卷吗',
+    'exam.submit-paper-confirm.no-finish': '还有未答的题目，是否确定交卷',
     'exam.submit-mark-paper-confirm': '确定要提交评卷吗',
     'exam.mark-paper-check': '存在还没评分的题目',
     'exam.answer-paper.auto-submit-success': '答案已自动保存成功',
