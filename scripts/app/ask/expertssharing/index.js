@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -11,17 +11,37 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         reply: { url: '../ask-bar/question-reply' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 }
+        }
     },
     callbacks: {
         init: function(payload) {
-            var trends = this.models.trends,
-                id = 'all';
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            params.id = 'all';
             if (typeof payload.state.id !== 'undefined') {
-                id = payload.state.id;
+                params.id = payload.state.id;
             }
-            trends.set({ id: id });
-            return this.get(trends);
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
+        page: function(payload) {
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            var page = params.page;
+            var me = this;
+            params.id = 'all';
+            if (typeof payload.state.id !== 'undefined') {
+                params.id = payload.state.id;
+            }
+            trends.set(params);
+            this.post(trends).then(function() {
+                me.models.page.params.page = page + 1;
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -62,5 +82,11 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    var me = this;
+    $(window).scroll(function() {
+        if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
+            me.dispatch('page', this.renderOptions);
+        }
+    });
+    return this.dispatch('page', this.renderOptions);
 };

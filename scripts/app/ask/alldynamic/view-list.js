@@ -118,12 +118,21 @@ exports.dataForTemplate = {
     page: function(data) {
         var trends = data.trends;
         var page = this.bindings.page.data;
+        var me = this;
+        var flag = true;
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
-            page.push(obj);
+            _.forEach(me.bindings.page.data, function(v) {
+                if (v.id === obj.id) {
+                    flag = false;
+                }
+            });
+            if (flag) {
+                page.push(obj);
+            }
         });
         return page;
     }
