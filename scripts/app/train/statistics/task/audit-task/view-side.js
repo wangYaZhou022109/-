@@ -47,16 +47,20 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
-    // checked: function(data) {
-    //     var taskApproval = data.all.approval;
-    //     return {
-    //         checkedState: taskApproval.state === 0,
-    //     };
-    // },
+    checked: function(data) {
+        var all = data.all || {};
+        var taskApproval = all.taskApproval || {};
+        if (taskApproval.state === 0) {
+            return true;
+        }
+        return false;
+    },
     all: function(data) {
         var me = this;
-        var all = data.all;
-        var attachs = data.all.task.attachList || [];
+        var all = data.all || {};
+        var task = all.task || {};
+        var attachs = task.attachList || [];
+        all.downUrl = me.bindings.download.getFullUrl() + '?id=' + all.attachmentId;
         _.map(attachs || [], function(attach) {
             var obj = attach;
             obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;

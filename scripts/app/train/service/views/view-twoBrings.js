@@ -8,6 +8,16 @@ exports.bindings = {
     classId: true,
 };
 
+exports.events = {
+    'click close': 'close',
+};
+
+exports.handlers = {
+    close: function() {
+        this.app.viewport.closeModal();
+    }
+};
+
 exports.actions = {
     'click commit': 'commitTwoBrings',
 };

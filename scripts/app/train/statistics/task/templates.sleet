@@ -5,13 +5,13 @@ module > .train-class-page
         .div(data-region='main')
 
 view('main')
-    div(style='padding:20px 50px 50px 100px;')
-        .list.m-top
+    .contaniner
+        .layout-mt
             table.table
                 thead > tr
-                    th(width='400px') > echo('作业名称')
-                    th(width='200px') > echo('提交人数')
-                    th(width='200px') > echo('操作')
+                    th > echo('作业名称')
+                    th > echo('提交人数')
+                    th > echo('操作')
                 tbody > each(tasks) > tr
                     td > echo(name)
                     td > echo(number)

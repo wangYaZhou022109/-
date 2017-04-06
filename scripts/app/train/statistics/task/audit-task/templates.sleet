@@ -30,13 +30,16 @@ view('side') > form.vertical
     .row
         echo('用户提交附件:')
         br
-        a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(all.name) 
-        a(href=downUrl download=name) 下载
+        if(all.attachmentId)
+            a.text-overflow.pointer(id='preview-'+all.attachmentId href='javascript:;') > echo(all.name) 
+            a(href=all.downUrl download=all.name) 下载
+        else
+            echo(all.name)
     .row
         .col-sm-2
-            input.inline-block#state-0(name='state' type='radio' value='0')('checked')&if(all.checkedState)
+            input.inline-block#state-0(name='state' type='radio' value='0')('checked')&if(checked)
             .inline-block 通过
-            input.inline-block#state-1(name='state' type='radio' value='1')('checked')&unless(all.checkedState)
+            input.inline-block#state-1(name='state' type='radio' value='1')('checked')&unless(checked)
             .inline-block 打回重新提交
     .row
         echo('评分')

@@ -43,7 +43,7 @@ view('approval') > form.vertical
     .row
         .col-sm-9
             echo('请假原因')
-            input#reason(name='reason' value=lea.reason rows=5 cols=80 x-rule='maxLength:1000')
+            textarea.input#reason(name='reason' rows='5' cols='80' x-rule='maxLength:1000') > echo(lea.reason)
             echo('审核意见')
             select#state(name='state')
                 option(value='1') > echo('同意')

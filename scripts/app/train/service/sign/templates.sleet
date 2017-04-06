@@ -6,11 +6,16 @@ module > .train-class-page
 
 view('main')
     div.row.text-center
-        .buttons
-            .btn#addSign > echo('添加')
-            .btn#batchDelete > echo('删除')
+        .clearfix.layout-mt-small
+            .pull-left
+                label 签到规则
+                .tag-btn.active#half 半天
+                .tag-btn.active 全天
+            .pull-right
+                .btn#addSign > echo('添加')
+                .btn#batchDelete > echo('删除')
     .list.m-top
-        table.table
+        table.table.layout-mt-small
             thead > tr
                 th > input(type='checkbox' id='check-all')
                     label(for='check-all')

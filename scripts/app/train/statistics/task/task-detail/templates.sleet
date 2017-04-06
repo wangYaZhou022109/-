@@ -7,22 +7,27 @@ module > .train-class-page
             .div(data-region='main')
 
 view('count') > form.vertical
-    echo('作业名称:')
-    echo(taskOne.name)
-    br
-    echo('已提交人数')
-    echo(taskOne.number)
+    .layout-mt-small
+        echo('作业名称:')
+        echo(taskOne.name)
+    .layout-mt-small
+        echo('已提交人数')
+        echo(taskOne.number)
 
 view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('用户名')
-            input.input(name='name')
-        div.col-sm-3
-            echo('姓名')
-            input.input(name='fullName')
-        div.col-sm-3
-            btn.btn#search > echo('查询')
+    .layout-mt-small
+        .bg-color-3.search-padding
+            .clearfix
+                .layout-mr.pull-left
+                    echo('用户名')
+                    input.input(name='name')
+                .layout-mr.pull-left
+                    echo('姓名')
+                    input.input(name='fullName')
+                .pull-left
+                    btn.btn#search > echo('查询')
+    .layout-mt-small.clearfix
+        .btn.small.radius.pull-right 下载全部
 
 view('main')
     div.text-center
