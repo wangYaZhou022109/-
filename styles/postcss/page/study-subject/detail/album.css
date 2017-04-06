@@ -21,7 +21,6 @@
         display: flex;
         justify-content: center;
         text-align: center;
-        width: 25%;
         margin-right: calc(var(--large-space) / 4);
         & img {
             width: 100%;

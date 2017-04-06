@@ -37,6 +37,9 @@
 
     & .item {
         border-bottom-color: var(--border-color);
+        &:hover {
+            background-color: white;
+        }
     }
 
     & .attribute {

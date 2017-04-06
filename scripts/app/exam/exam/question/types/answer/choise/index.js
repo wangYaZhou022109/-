@@ -67,7 +67,7 @@ exports.store = {
                 if (Number(question.type) === 2) data.title = '多选题';
 
                 if (question.answerRecord) {
-                    data.gainScore = question.answerRecord.score;
+                    data.gainScore = question.answerRecord.score / 100;
                 }
 
                 data.detailMode = payload.mode;

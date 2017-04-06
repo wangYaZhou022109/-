@@ -10,6 +10,8 @@ moudle > .managements-page
     .managements-membership(data-region="managements-membership")
     .managements-classmanage(data-region="managements-classmanage")
     .managements-evaluate(data-region="managements-evaluate")
+    .managements-learneffect(data-region="managements-learneffect")
+    .managements-trainsummary(data-region="managements-trainsummary")
 
 view('managements-title')
     .container
@@ -1347,3 +1349,7 @@ view('managements-evaluate')
                                     td 作业名称作业名称作业名称作业名称
                                     td 20
                                     td > a#taskdetail-3 详情
+
+view('managements-learneffect')
+
+view('managements-trainsummary')

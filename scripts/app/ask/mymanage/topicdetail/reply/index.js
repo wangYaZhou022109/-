@@ -9,7 +9,8 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         reply: { url: '../ask-bar/my-manage/reply' },
-        shut: { url: '../ask-bar/question/close-status' }
+        shut: { url: '../ask-bar/question/close-status' },
+        discuss: { url: '../ask-bar/question-discuss' }
     },
     callbacks: {
         init: function(payload) {
@@ -31,6 +32,11 @@ exports.store = {
             // console.log(payload);
             follow.set(payload);
             return this.put(follow);
+        },
+        publish: function(payload) {
+            var discuss = this.models.discuss;
+            discuss.set(payload);
+            return this.save(discuss);
         }
     }
 };

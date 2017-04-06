@@ -1,0 +1,4 @@
+#!handlebars
+
+module
+    .content(data-region='content')

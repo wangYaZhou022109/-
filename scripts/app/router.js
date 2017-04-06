@@ -27,6 +27,10 @@ exports.showMessageDetail = function(id) {
     });
 };
 
+exports.showDemo = function() {
+    return this.app.show('content', 'demo');
+};
+
 exports.showShare = function(id, type) {
     var webUrl = window.location.protocol + '//' + window.location.host; // 域名加端口
     if (type === '1') { // 课程
