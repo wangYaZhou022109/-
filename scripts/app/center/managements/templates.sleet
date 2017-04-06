@@ -1353,3 +1353,52 @@ view('managements-evaluate')
 view('managements-learneffect')
 
 view('managements-trainsummary')
+    .container
+        .layout-mt-small.border.bottom.dashed
+            p * 完成培训项目总结是今年集团公司对培训项目管理的统一要求（必需环节），请在线填写。
+            p * 主要内容包括培训项目设计实施情况、评估结果及项目成果、学员对集团业务、运营等方面的建议等。
+            p * 该总结内容将定期呈报集团领导及相关部门领导审阅参考，请主办部门培训联系人全面参与和最终把关。
+        .clearfix.m-top
+            .btn.radius.pull-right 导出培训总结
+        .trainsummary-content
+            h2.text-center XX培训班培训项目总结报告
+            .layout-mt-small
+                h4 一、培训项目概况
+                .item
+                    p 1、基本信息
+                    p 本期培训是由业务支撑系统部 主办， 培训编号为00000 ， 培训对象为3山东省对此 ， 实际参训学员人数人 ， 培训时间：2016-12-20 至 2016-12-20 。
+                .clearfix
+                    p.pull-left 2、培训目标:
+                    p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                .clearfix
+                    p.pull-left 3、需求调研方式
+                    p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                .samll-font 培训前通过：培训问卷，明确了培训项目需求。
+                .layout-mt
+                    table.table
+                        tr > th.strong(colspan="7") 面授课程
+                        tr
+                            td.strong 日期
+                            td.strong 时间
+                            td.strong 课程名称
+                            td.strong 讲师
+                            td.strong 单位
+                            td.strong 职务/职称
+                            td.strong 学习方式
+                        tr
+                            td(rowspan="2") 2016-12-20
+                            td 09:00-12:00
+                            td 111
+                            td 张慧勇
+                            td 总部
+                            td 项目经理
+                            td 面授
+                        tr
+                            td 14:00-17:30
+                            td 222
+                            td 王岩
+                            td 总部
+                            td 项目经理
+                            td 面授
+                .layout-mt
+                    table.table
