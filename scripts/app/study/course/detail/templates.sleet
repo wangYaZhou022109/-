@@ -89,7 +89,7 @@ view('download')
 
 view('releated-course')
     .h3
-        .side-reload.sub-title#resetPage > i.iconfont.icon-reload + string('reset.page')
+        .side-reload.sub-title#resetPage > i.iconfont.icon-reload + span.text-tips > string('reset.page')
         echo('相关课程')
     .layout-mt-small
         each(courseRelated)
