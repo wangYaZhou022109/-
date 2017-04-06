@@ -105,6 +105,7 @@
             font-size: var(--small-font);
             white-space: nowrap;
             color: var(--font-sub-color);
+            overflow: hidden;
 
             & .item {
                 display: inline;
@@ -120,7 +121,9 @@
             }
 
             & .iconfont {
-                margin-right: 3px;
+                margin-right: 5px;
+                vertical-align: top;
+                transform: scale(1);
             }
 
         }

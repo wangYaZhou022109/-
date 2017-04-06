@@ -5,8 +5,9 @@
 
 .home-page {
     & section.section {
-        padding: var(--base-gap) 0 0;
+        padding: var(--base-gap) 0;
         overflow: hidden;
+        margin: 0;
     }
 
     & .home-tag {
