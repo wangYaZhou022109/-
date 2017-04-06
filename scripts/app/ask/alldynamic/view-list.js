@@ -4,7 +4,7 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
-    course: true
+    page: true
 };
 
 exports.events = {
@@ -15,15 +15,10 @@ exports.events = {
 
 exports.handlers = {
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myquiz/details', { id: data[1] });
         }
     },
@@ -120,34 +115,21 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    trends: function(data) {
+    page: function(data) {
         var trends = data.trends;
+        var page = this.bindings.page.data;
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
+            page.push(obj);
         });
-        return trends;
+        return page;
     }
 };
 
+exports.beforeClose = function() {
+    $(window).unbind('scroll');
+};
 
-exports.components = [function() { // 分享组件
-    var data = {},
-        course = this.bindings.course.data;
-    if (course) {
-        data.id = course.id;
-        data.type = '1';
-        data.pics = 'images/default-cover/default_course.jpg';
-        data.title = course.name;
-    }
-    return {
-        id: 'share',
-        name: 'picker',
-        options: {
-            picker: 'share',
-            data: data
-        }
-    };
-}];
