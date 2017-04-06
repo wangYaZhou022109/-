@@ -125,5 +125,3 @@ exports.buttons = [{
         return this.dispatch('release', data);
     }
 }];
-
-

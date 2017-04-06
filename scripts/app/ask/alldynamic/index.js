@@ -92,5 +92,3 @@ exports.afterRender = function() {
     });
     return this.dispatch('page');
 };
-
-
