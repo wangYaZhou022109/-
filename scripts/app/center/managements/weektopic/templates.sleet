@@ -1,0 +1,24 @@
+#!handlebars
+
+module > .weektopic-page
+    .weektopic(data-region="weektopic")
+
+view('weektopic')
+    section.section
+        table.table
+            tr
+                th 序号
+                th 周次
+                th 主题名称
+            tr
+                td 1
+                td 第一周
+                td.sub-title 主题名称（点击可修改）
+            tr
+                td 2
+                td 第二周
+                td.sub-title 主题名称（点击可修改）
+            tr
+                td 3
+                td 第三周
+                td.sub-title 主题名称（点击可修改）
