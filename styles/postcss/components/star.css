@@ -45,7 +45,6 @@
         margin: 1em;
 
         & + .btn {
-            line-height: 1;
             margin: 1em;
         }
 
