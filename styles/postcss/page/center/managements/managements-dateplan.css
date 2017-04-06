@@ -1,0 +1,17 @@
+.managements-page {
+    & .managements-dateplan {
+        & .dateplan-padding {
+            padding: 0 var(--large-space);
+        }
+        & table{
+            &.table {
+                & th {
+                    text-align: center;
+                }
+            }
+        }
+        & td {
+            text-align: center;
+        }
+    }
+}

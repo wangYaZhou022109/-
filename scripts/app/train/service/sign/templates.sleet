@@ -1,0 +1,67 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    div.row.text-center
+        .buttons
+            .btn#addSign > echo('添加')
+            .btn#batchDelete > echo('删除')
+    .list.m-top
+        table.table
+            thead > tr
+                th > input(type='checkbox' id='check-all')
+                    label(for='check-all')
+                th > echo('签到名称')
+                th > echo('签到时间')
+                th > echo('签到地点')
+                th > echo('签到结果')
+                th > echo('状态')
+                th > echo('二维码')
+                th > echo('操作')
+            tbody > each(signs) > tr
+                td > input(type='checkbox' id='check-item'+id name='signId' value=id)
+                    label(for='check-item'+id)
+                td > echo(name)
+                td > dateTime(startTime) + echo(' 至 ') + dateTime(endTime)
+                td > echo(place)
+                td > echo(signNum) + echo('/') + echo(classNum)
+                td > map('train-sign-state' state)
+                td.operation
+                    a(id='preview'+id data-name='id' data-value=id) > echo('预览')
+                    echo('|')
+                    a(id='down'+id data-name='id' data-value=id) > echo('下载')
+                td.operation
+                    a(id='detail'+id data-name='id' data-value=id href='javascript:;') > echo('签到名单')
+                    echo('|')
+                    a(id='leave'+id data-name='id' data-value=id) > echo('请假')
+                    echo('|')
+                    a(id='editSign'+id data-name='id' data-value=id) > echo('编辑')
+    #pager.pagination
+
+view('edit') > form.vertical
+    label(class='required') > echo('签到名称')
+    input.input(name='name'  value=sign.name  x-rule='required')
+    br
+    label > echo('签到地点')
+    input.input(name='place'  value=sign.place)
+    br
+    label(class='required') > echo('签到开始时间')
+    input.input(name='startTime' value=dateTime(sign.startTime))
+    br
+    label(class='required') > echo('签到结束时间')
+    input.input(name='endTime' value=dateTime(sign.endTime))
+    br
+    label > echo('迟到时间设置')
+    input.input(name='lateTime' value=dateTime(sign.lateTime))
+    br
+    label(class='required') > echo('生成签到二维码')
+    #qrcode
+
+    input.input(type='hidden' name='id' value=sign.id)
+    btn.btn(id='save') > echo('保存')
+
+view('preview') > form.vertical
+    #qrcode

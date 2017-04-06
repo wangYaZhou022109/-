@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
@@ -8,17 +8,10 @@ exports.bindings = {
 exports.events = {
     'click reply-*': 'showDetails',
     'click report-*': 'report',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
-    dynamic: function() {
-    },
-    // toggleMore: function(id, e, target) {
-    //     var region;
-    //     var el = $(target).parents('.activity-category')[0];
-    //     region = new D.Region(this.app, this.module, el, id);
-    //     region.show('ask/mymanage/topicdetail/news/mydetail', { id: id });
-    // },
     showDetails: function(payload) {
        // var region,
        //     data = { };
@@ -32,6 +25,9 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
         this.app.show('content', 'ask/mymanage/topicdetail/exp/details', { id: payload });
        //  }
+    },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
     report: function(payload) {
         var id = payload,
@@ -59,6 +55,7 @@ exports.actions = {
     'click follow-*': 'follow',
     'click unfollow-*': 'unfollow',
     'click shut-*': 'shut',
+    'click publish-*': 'publish'
 };
 exports.dataForActions = {
     shut: function(payload) {
@@ -81,6 +78,9 @@ exports.dataForActions = {
         data.id = obj[1];
         data.concernType = obj[0];
         return data;
+    },
+    publish: function(payload) {
+        return payload;
     }
 };
 exports.actionCallbacks = {

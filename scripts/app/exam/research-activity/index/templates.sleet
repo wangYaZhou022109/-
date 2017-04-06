@@ -9,13 +9,14 @@ module > .class-register-page
 view('banner')
     .cover.pull-left > img(src='images/default-cover/default_class.jpg')
     .banner-con.pull-left
-        h2 > echo(research.name)
+        .h2.inline-block > echo(research.name)
+        .inline-block.layout-ml-small
+            #share
         p 调研时间：
             dateTime(research.startTime)
             | ~
             dateTime(research.endTime)
-        .inline-block.layout-mr
-            #share
+
         .m-top
             span.m-right 相关标签
             each(research.topics)
@@ -46,8 +47,8 @@ view('main')
                             .img-cont
                                 a.normal > img(src=coverId)
                             .detail-wrapper
-                                p
-                                    .btn.radius.block(id='research-' + id) 我要参与
+                                p 描述描述描述描述描述
+                                .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text
                                 i.iconfont.icon-user(title='参加人数')

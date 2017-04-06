@@ -5,12 +5,15 @@ exports.items = {
 
 exports.store = {
     models: {
-        classInfo: { url: '../train/classInfo/findByProjectId' },
-        saveModel: { url: '../train/classInfo' },
+        classInfo: { url: '../train/class-info/find-by-project-id' },
+        saveModel: { url: '../train/class-info' },
+        offlineCourse: { url: '../train/offline-course/init' },
+        manyi: { url: '../train/questionnaire-survey/insert' },
         file: {
             url: '../human/file/upload'
         },
         down: { url: '../human/file/download' },
+        classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         state: { data: {} }
     },
     callbacks: {
@@ -21,6 +24,28 @@ exports.store = {
             return me.get(classInfo);
         },
         submit: function(payload) {
+            var model = this.models.saveModel,
+                classInfo = this.models.classInfo,
+                offlineCourse = this.models.offlineCourse,
+                manyi = this.models.manyi,
+                newManYi = {},
+                me = this;
+            newManYi.type = 4;
+            newManYi.classId = classInfo.data.classDetail.classId;
+            newManYi.resourceName = '满意度调查问卷（学员）';
+            newManYi.startTime = classInfo.data.returnDate;
+            manyi.set(newManYi);
+            model.set(payload);
+            model.data.confirm = 1;
+            offlineCourse.data.classId = classInfo.data.id;
+            me.save(model).then(function() {
+                this.app.message.success('提交成功');
+                me.get(classInfo);
+                me.save(offlineCourse);
+                me.save(manyi);
+            });
+        },
+        save: function(payload) {
             var model = this.models.saveModel,
                 classInfo = this.models.classInfo,
                 me = this;

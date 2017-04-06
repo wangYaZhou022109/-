@@ -5,32 +5,39 @@ module
 
 view('main')
     #main
-    p.question
-        span > a(name='question-' + question.id) > echo(question.index '.')
+    p.question.mb-1
+        span > a.normal(name='question-' + question.id) > echo(question.index '.')
         echo('【')
         map('research-question-types' question.type)
         echo('】')
         @echo(question.content)
 
     if(mutiple)
-        table.table.m-top > each(question.options)
-            tr
-                td
-                    .checkbox.no-margin
-                    input(type='checkbox' id='checkbox-' +@index)('checked')&if(checked)
-                    label(for='checkbox-' + @index)
-                    span > echo(code '.' text)
-                td
-                    .progress.m-right > .progress-bar(style='width:' + selectPercent + '%')
-                td
-                    echo(selectPercent '%')
+        .layout-mb.border.bottom.dashed
+            each(question.options)
+                .clearfix.layout-mb-small
+                    .pull-left.layout-mr-small
+                        .inline-block
+                            .checkbox.no-margin
+                                input(type='checkbox' id='checkbox-' +@index)('checked')&if(checked)
+                                label(for='checkbox-' + @index)
+                        b > echo(code '.')
+                    .overflow
+                        .m-bottom > echo(text)
+                        .w-half > .progress-box
+                            .progress.m-right > .progress-bar(style='width:' + selectPercent + '%')
+                            span.m-left.text-left > echo(selectPercent '%')
+            br
     else
-        table.table.m-top > each(question.options)
-            tr
-                td
-                    input(type='radio')('checked')&if(checked)
-                    span > echo(code '.' text)
-                td
-                    .progress.m-right > .progress-bar(style='width:' + selectPercent + '%')
-                td
-                    echo(selectPercent '%')
+        .layout-mb.border.bottom.dashed
+            each(question.options)
+                .clearfix.layout-mb-small
+                    .pull-left.layout-mr-small
+                        input(type='radio')('checked')&if(checked)
+                        b > echo(code '.')
+                    .overflow
+                        .m-bottom > echo(text)
+                        .w-half > .progress-box
+                            .progress.m-right > .progress-bar(style='width:' + selectPercent + '%')
+                            span.m-left.text-left > echo(selectPercent '%')
+            br

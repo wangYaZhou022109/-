@@ -1,39 +1,28 @@
 .live-details-page{
-    & .page-main-wrapper{
-        & .live-details-main {
-            & .lecturer {
-                width: 56%;
-                float: left;
+    & .live-details-main {
+        & .lecturer {
+            width: 60%;
+            float: left;
 
-                & .teacher {
-                    width: 80%;
+        }
 
-                    & p {
-                        height: calc(var(--space)*2);
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                    }
-                }
+        & .user-pic {
+            width: calc(var(--space)*5);
+            height: calc(var(--space)*5);
+            line-height: calc(var(--space)*5);
+            color: var(--main-color);
+
+            & .iconfont {
+                font-size: 2em;
             }
+        }
 
-            & .user-pic {
-                width: calc(var(--space)*5);
-                height: calc(var(--space)*5);
-                line-height: calc(var(--space)*5);
-                text-align: center;
-                background: var(--custom-color-5);
-                color: white;
-                margin-right: calc(var(--space)*2);
-            }
+        & .time {
+            width: 40%;
+        }
 
-            & .time {
-                width: 30%;
-            }
-
-            & .live-details-teacher {
-                padding: calc(var(--space)*3) 0 var(--space) 0;
-            }
+        & .live-details-teacher {
+            overflow: hidden;
         }
     }
 }

@@ -1,0 +1,125 @@
+#!handlebars
+
+module > .demand-page
+    .demand-title(data-region="demand-title")
+    .demand-table(data-region="demand-table")
+    .demand-footer(data-region="demand-footer")
+
+view('demand-title')
+    section.section.container
+        .h4 需求方管理
+    .filter-row.container
+        .filter-item
+            span MIS编号
+            input.input(type="text")
+        .filter-item
+            span 班级名称
+            input.input(type="text")
+        .filter-item
+            span 实施年月
+            input.input(type="text")
+        .filter-item
+            span |
+            button.btn 查询
+view('demand-table')
+    .container
+        table.table
+            tr
+                th MIS编号
+                th 培训班名称
+                th 计划人数
+                th 计划天数
+                th 班主任
+                th 计划月份
+                th 报到日
+                th 返程日
+                th 审核状态
+                th 操作
+            tr
+                td 09314110102
+                td 培训班名称
+                td 2
+                td 4
+                td 陈柱端
+                td 2017-12
+                td 2017-2-13
+                td 2017-2-18
+                td 已审核
+                td
+                    a.m-right 管理
+                    a 填写主办方满意度问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 2
+                td 4
+                td 陈柱端
+                td 2017-12
+                td 2017-2-13
+                td 2017-2-18
+                td 已审核
+                td
+                    a.m-right 管理
+                    a 填写主办方满意度问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 2
+                td 4
+                td 陈柱端
+                td 2017-12
+                td 2017-2-13
+                td 2017-2-18
+                td 已审核
+                td
+                    a.m-right 管理
+                    a 填写主办方满意度问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 2
+                td 4
+                td 陈柱端
+                td 2017-12
+                td 2017-2-13
+                td 2017-2-18
+                td 已审核
+                td
+                    a.m-right 管理
+                    a 填写主办方满意度问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 2
+                td 4
+                td 陈柱端
+                td 2017-12
+                td 2017-2-13
+                td 2017-2-18
+                td 已审核
+                td
+                    a.m-right 管理
+                    a 填写主办方满意度问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 2
+                td 4
+                td 陈柱端
+                td 2017-12
+                td 2017-2-13
+                td 2017-2-18
+                td 已审核
+                td
+                    a.m-right 管理
+                    a 填写主办方满意度问卷
+
+view('demand-footer')
+    .container
+        .pagination
+            ul
+                li 首页
+                li 上一页
+                li 3/60
+                li 下一页
+                li 尾页

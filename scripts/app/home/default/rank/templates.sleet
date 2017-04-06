@@ -1,7 +1,7 @@
 #! handlebars
 module
-    section.ranklist-section.container.section(data-region='main')
-view('main')
+    section.ranklist-section.section(data-region='main')
+view('main') > .container
     .bar-list
         each(rankModules)
             div(data-dynamic-key=moduleCode)

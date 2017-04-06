@@ -1,5 +1,6 @@
 var types = require('./app/exam/exam-question-types'),
     D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     constant = {
         ANSWER_PAPER_MODE: 3,
         NO_DETAIL_MODE: -1 // 除了题目内容，其他答案以及信息看不到
@@ -20,7 +21,7 @@ exports.getEntity = function(id) {
     question = this.bindings.types.getQuestionById(id);
     question = D.assign({}, question, {
         score: question.score / 100,
-        questionAttrs: question.questionAttrCopys
+        questionAttrs: _.orderBy(question.questionAttrCopys, ['name', 'asc'])
     });
     return question;
 };

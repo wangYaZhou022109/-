@@ -36,6 +36,35 @@ exports.handlers = {
 };
 exports.actions = {
     'click checkOne-*': 'checkOne',
-    'click checkAll*': 'checkAll'
+    'click checkAll*': 'checkAll',
+    'click follow-*': 'follow',
+};
+exports.dataForActions = {
+    follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    unfollow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    }
+};
+exports.actionCallbacks = {
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    }
 };
 
