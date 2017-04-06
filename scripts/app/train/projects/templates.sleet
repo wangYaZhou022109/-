@@ -1,0 +1,42 @@
+#!handlebars
+
+module > .person-page
+    .person-search(data-region='search')
+    .person-content(data-region='main')
+
+view('search') > form.vertical
+    echo('需求方管理')
+    br
+    echo('MIS编号')
+    input.input(name='MIScode')
+    echo('班级名称')
+    input.input(name='className')
+    echo('实施年月')
+    input.input(name='startTime')
+    btn.btn#search > echo('搜索')
+
+view('main')
+    table.table
+        thead > tr
+            th > echo('MIS编号')
+            th > echo('培训班名称')
+            th > echo('计划人数')
+            th > echo('计划天数')
+            th > echo('班主任')
+            th > echo('计划月份')
+            th > echo('报到日')
+            th > echo('返程日')
+            th > echo('审核结果')
+            th > echo('操作')
+        tbody > each(projects) > tr
+            td > echo(code)
+            td > echo(name)
+            td > echo(amount)
+            td > echo(days)
+            td > echo(teacherName)
+            td > echo(year+'-'+month)
+            td > date(classInfo.arriveDate)
+            td > date(classInfo.returnDate)
+            td > echo(status)
+            td > a(href='#/train/index/'+id) > echo('进入管理')
+    #pager.pagination

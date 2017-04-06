@@ -1,0 +1,87 @@
+#!handlebars
+module > .train-class-page
+    .page-main-wrapper
+        .activity-category
+            .div(data-region='count')
+            .div(data-region='search')
+            .div(data-region='main')
+
+view('count')
+    echo('签到名称')
+    echo(signOne.name)
+    echo('签到时间')
+    dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
+    echo('迟到时间')
+    dateTime(signOne.lateTime)
+    br
+    echo('应出勤')
+    echo('正常签到')
+    echo('迟到')
+    echo('请假')
+    echo('未签到')
+
+view('search') > form.vertical
+    div.row.text-center
+        div.col-sm-3
+            echo('员工姓名')
+            input.input(name='memberFullName')
+        div.col-sm-3
+            echo('状态')
+            select#state(name='state')
+                option(value='') > echo('全部')
+                option(value='1') > echo('正常')
+                option(value='2') > echo('迟到')
+                option(value='3') > echo('未签到')
+                option(value='4') > echo('请假')
+        div.col-sm-3
+            btn.btn#search > echo('查询')
+
+view('main')
+    div.text-center
+        .buttons
+            a(href=exportUrl ) > .btn > span 导出
+            btn.btn#batchStatus > echo('批量签到')
+    table.table
+        thead > tr
+            th > input(type='checkbox' id='check-all')
+                label(for='check-all')
+            th > echo('员工编号')
+            th > echo('员工姓名')
+            th > echo('员工电话')
+            th > echo('签到时间')
+            th > echo('状态')
+        tbody > each(signDetail) > tr
+            td > input(type='checkbox' id='check-item'+id name='detailId' value=id)
+                label(for='check-item'+id)
+            td > echo(member.name)
+            td > echo(member.fullName)
+            td > echo(member.phoneNumber)
+            td > dateTime(signDate)
+            td > a(id='update'+id data-name='id' data-value=id) > map('train-signdetail-state' state)
+    #pager.pagination
+
+view('status') > form.vertical
+    input.input(name='id' type='hidden' value=id)
+    .row
+        .col-sm-9
+            echo('签到状态')
+            select#state(name='state')
+                option(value='1') > echo('正常')
+                option(value='2') > echo('迟到')
+                option(value='3') > echo('未签到')
+                option(value='4') > echo('请假')
+        div.col-sm-3
+            btn.btn#update > echo('确定')
+
+view('batchStatus') > form.vertical
+    input.input(name='id' type='hidden' value=id)
+    .row
+        .col-sm-9
+            echo('签到状态')
+            select#state(name='state')
+                option(value='1') > echo('正常')
+                option(value='2') > echo('迟到')
+                option(value='3') > echo('未签到')
+                option(value='4') > echo('请假')
+        div.col-sm-3
+            btn.btn#batch > echo('确定')

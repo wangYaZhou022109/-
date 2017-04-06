@@ -1,0 +1,6 @@
+.managements-page {
+    & .managements-content-area {
+        max-width: 70%;
+        margin: calc(var(--base-gap) + 1) auto;
+    }
+}
