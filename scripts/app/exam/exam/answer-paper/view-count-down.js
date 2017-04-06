@@ -1,4 +1,5 @@
 var D = require('drizzlejs'),
+    strings = require('./app/util/strings'),
     getEndTime;
 
 exports.bindings = {
@@ -24,11 +25,23 @@ exports.dataForEntityModule = function(data) {
     var me = this;
     return {
         data: data,
-        callback: function() {
-            me.app.message.success('交卷时间到,你本次考试已被强制交卷');
-            me.module.dispatch('submit', { submitType: 'Hand' });
-            me.app.viewport.modal(me.module.items.tips, { message: '交卷时间到,你本次考试已被强制交卷' });
-        }
+        callback: [{
+            time: 0,
+            doing: function() {
+                me.app.message.success(strings.get('exam.answer-paper.time-out.submit'));
+                me.module.dispatch('submitPaper', { submitType: 'Hand' });
+            }
+        }, {
+            time: 1,
+            doing: function() {
+                me.app.message.success(strings.get('exam.answer-paper.remain-one-mins'));
+            }
+        }, {
+            time: 5,
+            doing: function() {
+                me.app.message.success(strings.get('exam.answer-paper.remain-five-mins'));
+            }
+        }]
     };
 };
 
@@ -40,9 +53,10 @@ getEndTime = function(examActivityEndTime, duration) {
     if (!data.firstInTime) {
         data.firstInTime = new Date(nowTime).getTime();
         nowTime.setMinutes(nowTime.getMinutes() + duration, nowTime.getSeconds(), 0);
-        if (nowTime.getTime() > examActivityEndTime) {
-            data.endTime = examActivityEndTime;
-        }
+        // 考试结束时间已经跟活动结束时间无关
+        // if (nowTime.getTime() > examActivityEndTime) {
+        //     data.endTime = examActivityEndTime;
+        // }
         data.endTime = new Date(nowTime).getTime();
         data.isDeday = false;
         this.bindings.countDown.data = data;
