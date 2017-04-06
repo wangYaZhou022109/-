@@ -5,5 +5,10 @@ module.exports = {
     'exam.begin-answer-question': '开始答题',
     'exam.submit-paper-confirm': '确定要提交试卷吗',
     'exam.submit-mark-paper-confirm': '确定要提交评卷吗',
-    'exam.mark-paper-check': '存在还没评分的题目'
+    'exam.mark-paper-check': '存在还没评分的题目',
+    'exam.answer-paper.auto-submit-success': '答案已自动保存成功',
+    'exam.answer-paper.force-submit': '你本次考试已被管理员强制交卷',
+    'exam.answer-paper.submit-success': '交卷成功',
+    'exam.answer-paper.switch-screen.full-times': '切屏次数已满，强制交卷',
+    'exam.answer-paper.switch-screen.remian-times': '还剩余{0}次切屏'
 };
