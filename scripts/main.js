@@ -12,9 +12,9 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 110,
+    clientId: 4,
     provider: 'https://oauth9.zhixueyun.com',
-    returnTo: 'http://127.0.0.1'
+    returnTo: 'http://192.168.9.6/front'
 };
 // @endif
 
