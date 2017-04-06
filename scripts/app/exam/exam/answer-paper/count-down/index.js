@@ -22,10 +22,10 @@ exports.store = {
             if (payload.data.endTime && payload.data.endTime > new Date().getTime()) {
                 minute = getDuration(payload.data.endTime);
                 state.data = { duration: minute };
-                state.callback = payload.callback;
             } else {
                 state.set({ duration: 0 });
             }
+            state.callback = payload.callback;
         }
     }
 };
