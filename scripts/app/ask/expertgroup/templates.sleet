@@ -26,7 +26,7 @@ view('list')
         ul
             li.expert-item
                 a.normal(href="javascript:;")
-                    .img > .img-cont > img(src=member.headPortrait alt=member.fullName)
+                    .img(id='expert-' + id + ',' + member.id data-name='id' data-value=id + id + ',' + member.id) > .img-cont > img(src=member.headPortrait alt=member.fullName)
                     h4.text-overflow > echo(member.fullName)
                     .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '分享')
                     .row > each(topicList) 

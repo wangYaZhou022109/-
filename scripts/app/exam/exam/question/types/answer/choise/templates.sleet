@@ -6,12 +6,12 @@ module > .choise.preview-content
 
 view('content')
     p.question
-        span > a(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index '：')
         @echo(state.content)
 
 
 view('options') > .answer
-    .preview-list > dl.border.bottom > each(options)
+    .preview-list > dl > each(options)
         dd(id='item-' + index)
             if(mutiple)
                 .checkbox.no-margin

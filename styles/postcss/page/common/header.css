@@ -181,7 +181,7 @@
 
             & .sub-text {
                 font-size: var(--small-font);
-                margin-top: 1em;
+                margin-top: calc(var(--space) / 2);
             }
         }
     }

@@ -1,3 +1,4 @@
+// var _ = require('lodash/collection');
 
 exports.items = {
     list: 'list',
@@ -11,7 +12,8 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        search: {}
     },
     callbacks: {
         init: function() {
@@ -21,6 +23,7 @@ exports.store = {
         },
         follow: function(payload) {
             var follow = this.models.follow;
+            // console.log(payload);
             follow.set(payload);
             return this.post(follow);
         },

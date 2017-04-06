@@ -38,12 +38,15 @@ view('shortcut')
 
         .item.small-font.drop-down-wrapper.right
             .drop-down-btn
-                span 集团
+                span#selected-name > echo(organization.name)
                 i.iconfont.icon-triangle-down
+                input(type='hidden' id='orgId' name='orgId' value=organization.id)
             .drop-down-content > .content
-                ul
-                    li 集团
-                    li 子公司
+                ul > each(organizations)
+                    if(shortName)
+                        li(id='org-'+id) > echo(shortName)
+                    else
+                        li(id='org-'+id) > echo(name)
 
         if(Global.currentUser.id)
             .item.drop-down-wrapper.right
@@ -80,10 +83,10 @@ view('shortcut')
                                 a#logout(href='javascript:;') 退出账号
                     .user-info-list.border.top
                         .item.border.right
-                            b 1小时30分
+                            b > echo(courseTime)
                             .small-font.m-top 学习时长
                         .item
-                            b 999
+                            b > echo(integral.totalScore)
                             .small-font.m-top 积分
                     .hide
                         form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
@@ -91,7 +94,7 @@ view('shortcut')
 
 view('logo')
     if(homeConfig.logo)
-        .item > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
+        .item > a.underline(href='/#/home') > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
     else
-        .item > img(src='images/cmou-logo.png')
+        .item > a.underline(href='/#/home') > img(src='images/cmou-logo.png')
     .item > img(src='images/dx-logo.png')

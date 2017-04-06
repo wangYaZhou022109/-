@@ -1,57 +1,55 @@
-var _ = require('lodash/collection'),
-    D = require('drizzlejs');
+var _ = require('lodash/collection');
 exports.items = {
     player: 'player',
-    'player-title': '',
     chapter: 'chapter',
-    note: 'note',
     info: 'info',
     comment: 'comment',
     download: 'download',
-    topic: '',
     'releated-course': 'releated-course',
-    student: '',
     'research-tips': ''
 };
 
 exports.store = {
     models: {
         course: {
-            url: '../course-study/course-front',
+            url: '../course-study/course-front/info',
             mixin: {
+                findAllSections: function() {
+                    var duplicate = function(x) { return x.courseChapterSections; };
+                    return _.flatMap(this.data.courseChapters, duplicate);
+                },
                 findChapter: function(chapterId) {
                     return _.find(this.data.courseChapters, { id: chapterId });
                 },
                 findSection: function(sectionId) {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { id: sectionId });
+                    return _.find(this.findAllSections(), { id: sectionId });
                 },
                 findSectionForReferId: function(referenceId) {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { referenceId: referenceId });
+                    return _.find(this.findAllSections(), { referenceId: referenceId });
                 },
                 findSectionsForType: function(type) {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.filter(_.flatMap(this.data.courseChapters, duplicate), { sectionType: type });
+                    return _.filter(this.findAllSections(), { sectionType: type });
                 },
                 findFirstSection: function() {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.flatMap(this.data.courseChapters, duplicate)[0];
+                    return this.findAllSections()[0];
                 }
             }
         },
-        section: {},
-        sectionProgress: {},
+        progress: { url: '../course-study/course-front/course-progress',
+            mixin: {
+                findProgress: function(sectionId) {
+                    return _.find(this.data, { sectionId: sectionId });
+                }
+            }
+        },
         // 注册课程
-        register: { url: '../course-study/course-front/register' },
-        note: { url: '../course-study/course-front/course-note' },
-        notes: { url: '../course-study/course-front/course-notes' },
-        collect: { url: '../system/collect' },
-        courseRelated: { url: '../course-study/course-front/related', type: 'pageable', pageSize: 2, root: 'items' },
+        register: { url: '../course-study/course-front/registerStudy' },
+        collect: { url: '../system/collect' }, // 收藏
+        courseRelated: { url: '../course-study/course-front/related' },
         download: { url: '../human/file/download' },
-        lastestUser: { url: '../course-study/course-front/lastest-user', type: 'pageable', pageSize: 8, root: 'items' },
         score: { url: '../course-study/course-front/score' },
         state: {},
+        playerState: {},
         examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
         researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
         researchActivity: { url: '../exam/research-activity' }
@@ -63,18 +61,26 @@ exports.store = {
                 course = this.models.course,
                 courseRelated = this.models.courseRelated,
                 collect = this.models.collect,
-                state = this.models.state;
+                state = this.models.state,
+                register = this.models.register,
+                progress = this.models.progress;
             course.set(payload);
             courseRelated.params = payload;
             collect.params = { businessId: payload.id };
+            register.set({ courseId: payload.id });
+
             this.get(courseRelated);
             this.get(collect);
-            return this.get(course).then(function(c) {
+            this.post(register);
+
+            return this.get(course).then(function() {
                 var sectionId = null;
-                if (c[0].register) sectionId = course.findFirstSection().id;
-                state.set({ id: payload.id, sectionId: sectionId, register: c[0].register }, true);
+                sectionId = course.findFirstSection().id;
+                progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
+
                 return me.chain(
-                    [(function() {
+                    [me.get(progress),
+                    (function() {
                         var researchIds = _.map(course.findSectionsForType(12), 'resourceId').join();
                         if (researchIds) {
                             me.models.researchStatus.params = { researchIds: researchIds };
@@ -86,17 +92,16 @@ exports.store = {
                             me.models.examStatus.params = { examIds: examIds };
                             me.get(me.models.examStatus);
                         }
-                    }())]
+                    }())],
+                    state.set({ id: payload.id, sectionId: sectionId }, true)
                 );
             });
         },
-        updateProgress: function(payload) {
-            var course = this.models.course;
-            var courseSectionProgress = payload[0];
-            var section = course.findSectionForReferId(courseSectionProgress.sectionId);
-            // set new progress
-            section.progress = courseSectionProgress;
-            course.changed();
+        updateProgress: function() {
+            var progress = this.models.progress,
+                course = this.models.course;
+            progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
+            return this.get(progress);
         },
         showSection: function(payload) {
             var state = this.models.state;
@@ -115,38 +120,9 @@ exports.store = {
                 collect.set({}, true);
             });
         },
-        addNote: function(payload) {
-            var me = this,
-                note = this.models.note;
-            note.set(payload);
-            return this.save(note).then(function() {
-                me.get(me.models.notes);
-            });
-        },
-        removeNote: function(payload) {
-            var me = this,
-                note = this.models.note;
-            note.set(payload);
-            return this.del(note).then(function() {
-                me.get(me.models.notes);
-            });
-        },
-        updateNote: function(payload) {
-            var me = this,
-                note = this.models.note;
-            note.set(payload);
-            return this.save(note).then(function() {
-                me.get(me.models.notes);
-            });
-        },
-        turnPage: function() {
-            var pageInfo = this.models.courseRelated.getPageInfo();
-            if (pageInfo.pageCount === 0) return false;
-            if (pageInfo.page === pageInfo.pageCount) {
-                this.models.courseRelated.turnToPage(1);
-            } else {
-                this.models.courseRelated.nextPage();
-            }
+        selectCourseRelated: function() {
+            var model = this.models.courseRelated;
+            model.params = { id: this.models.course.data.id };
             return this.get(this.models.courseRelated);
         },
         score: function(payload) {
@@ -158,31 +134,6 @@ exports.store = {
                 course.data.avgScore = data[0].avgScore || course.data.avgScore;
                 course.changed();
             });
-        },
-        register: function(payload) {
-            var courseId = this.models.state.data.id,
-                model = this.models.register,
-                course = this.models.course,
-                state = this.models.state,
-                sectionId;
-            if (payload && payload.sectionId) {
-                sectionId = payload.sectionId;
-            } else {
-                sectionId = course.findFirstSection().id;
-            }
-            model.set({ courseId: courseId });
-            // 注册完毕自动播放第一章或者指定的章节
-            this.chain(
-                this.post(model),
-                function(data) {
-                    course.set(data[0], true); // 刷新课程
-                },
-                function() {
-                    // this.app.message.alert('注册完毕，开始播放课程');
-                    D.assign(state.data, { sectionId: sectionId, register: true });
-                    state.changed(); // 改变播放
-                }
-            );
         },
         getResearchById: function(payload) {
             var model = this.models.researchActivity;

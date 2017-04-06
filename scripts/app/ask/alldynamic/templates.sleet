@@ -41,7 +41,27 @@ view('list')
                                         .item(id='trend-unfollow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('unfollow')
                                     else
                                         .item(id='trend-follow-1_' + questionId data-name='id' data-value='1_' + questionId ) > echo('+') + string('follow')
-                                    .item > string('share')
+                                    #  .item > string('share')
+                                    .item 
+                                        .inline-block.layout-mr
+                                            .inline-block.layout-ml.m-right
+                                                .share-bar
+                                                    .drop-down-wrapper
+                                                        i.iconfont.icon-share-2.share-i(title="分享")
+                                                        .drop-down-content
+                                                            .content
+                                                                .item
+                                                                    .qzone
+                                                                        i.iconfont.icon-q-zone
+                                                                        span 分享到QQ空间
+                                                                .item
+                                                                    .qzone
+                                                                        i.iconfont.icon-sina
+                                                                        span 分享到新浪微博
+                                                                .item
+                                                                    .qzone
+                                                                        i.iconfont.icon-ask
+                                                                        span 分享到问吧
                                     .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')

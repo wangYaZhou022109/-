@@ -16,9 +16,16 @@ exports.store = {
             data.id = payload.questionId;
             data.isCollect = payload.isCollect || false;
             data.correct = payload.correct;
+            data.waitingCheck = payload.waitingCheck;
         },
         waitingCheck: function(payload) {
+            if (this.models.state.data.waitingCheck) {
+                this.models.state.data.waitingCheck = undefined;
+            } else {
+                this.models.state.data.waitingCheck = payload;
+            }
             this.module.renderOptions.callback.waitingCheck(payload);
+            this.models.state.changed();
         },
         correct: function(payload) {
             this.module.renderOptions.callback.correct(payload);

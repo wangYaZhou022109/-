@@ -28,10 +28,10 @@ view('banner')
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
                         compare(type 'eq' 2)
                             a.normal.block(type=type  href='#/activity/gensee/detail/'+ targetId target='_blank') > .btn.radius 我要参与
-                        compare(type 'eq' 6)
-                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
-                        else
+                        compare(type 'eq' 3)
                             a.normal.block(type=type  href='#/exam/index/'+ targetId target='_blank') > .btn.radius 我要参与
+                        compare(type 'eq' 4)
+                            a.normal.block(type=type  href='#/exam/research-activity/index/'+ targetId target='_blank') > .btn.radius 我要参与
 
 view('filter')
     .container
@@ -47,7 +47,7 @@ view('filter')
 view('list')
     .container
         .h3.m-bottom 直播
-        #swiper-2 > ul.full > each(genseesArray)
+        #swiper-2.swiper-pic-list > ul.full > each(genseesArray)
             li > .main-list > ul
                 each(a)
                     li
@@ -56,24 +56,24 @@ view('list')
                                 .img-cont
                                     a.normal > img(src=cover)
                                 .detail-wrapper
-                                    p
-                                        .btn.radius.block
-                                            compare(status 'eq' 1)
-                                                div(id='attendLive-'+id) 我要参与
-                                            compare(status 'eq' 2)
-                                                div(id='attendLive-'+id) 观看直播
-                                            compare(status 'eq' 3)
-                                                div(id='attendLive-'+id) 直播回顾
+                                    p 描述简介描述简介描述简介描述简介描述简介...
+                                    .btn.radius.block
+                                        compare(status 'eq' 1)
+                                            div(id='attendLive-'+id) 我要参与
+                                        compare(status 'eq' 2)
+                                            div(id='attendLive-'+id) 观看直播
+                                        compare(status 'eq' 3)
+                                            div(id='attendLive-'+id) 直播回顾
                             .clearfix
                                 .pull-right.tip-text
                                 .title.text-overflow
                                     echo(subject)
-                            .bottom.sub-text
-                                i.iconfont.icon-favorite
-                                    echo(subNumber)
+                            .bottom.text-tips
+                                i.iconfont.icon-view
+                                span > echo(subNumber)
                                 i.iconfont.icon-date.m-left
-                                    date(startTime)
-                                    
+                                span > date(startTime)
+
         .h3.m-bottom 考试
         #swiper-3 > ul.full > each(examArray)
             li.list-item > .main-list
@@ -84,9 +84,8 @@ view('list')
                                 i.iconfont.icon-exam.pull-left.activity-item-icon
                                 .overflow
                                     a(id='exam-' + id) > echo(name)
-                                    .sub-text.small-font
-                                        i.iconfont.icon-date
-                                        dateTime(startTime) + echo('至') + dateTime(endTime)
+                                    .text-tips.m-top.text-overflow
+                                        dateTime(startTime) + echo(' ~ ') + dateTime(endTime)
 
         .h3.m-bottom 调研
         #swiper-5 > ul.full > each(researchArray)
@@ -98,28 +97,21 @@ view('list')
                                 i.iconfont.icon-note.pull-left.activity-item-icon
                                 .overflow
                                     a(id='research-' + id) > echo(name)
-                                    .sub-text.small-font
-                                        i.iconfont.icon-date
-                                        dateTime(startTime) + echo('至') + dateTime(endTime)
-
+                                    .text-tips.m-top.text-overflow
+                                        dateTime(startTime) + echo(' ~ ') + dateTime(endTime)
 view('exam-tips')
-    .container
-        .row > .col-sm-12
-            echo(currentExam.content)
-        .row > .col-sm-12
-            each(currentExam.buttons)
-                a(id=id) > echo(text)
+    p > echo(currentExam.content)
+    .layout-mt-small
+        each(currentExam.buttons)
+            a(id=id) > echo(text)
 
 view('research-tips')
     .container
-        .row > .col-sm-12
-            echo(research.questionaryDetail)
-        .row > .col-sm-12
-            each(research.buttons)
-                if(id 'eq' 'answer-next-time')
-                    a(id='button-' + id href=url) > echo(text)
-                else
-                    a(id='button-' + id href=url target='_blank') > echo(text)
+        .row
+            .col-sm-12
+                echo(content)
+
+
 
                     # .h3.m-bottom MOOC
                     # #swiper-1.swiper-pic-list > ul.full

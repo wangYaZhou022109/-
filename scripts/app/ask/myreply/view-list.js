@@ -7,7 +7,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myreply-details*': 'toggleMore'
+    'click myreply-details-*': 'showDetails',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
@@ -17,33 +18,38 @@ exports.handlers = {
         // console.log(id);
         region = new D.Region(this.app, this.module, el, id);
         region.show('ask/myquiz/details', { id: id });
+    },
+    showDetails: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
+        var data = { },
+            id = payload;
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/myshares/details', { id: data[1] });
+        }
+    },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
     }
 };
 
 exports.actions = {
-    'click remove-*': 'remove',
-    'click concern-*': 'concern',
-    'click enjoy-*': 'enjoy',
-    'click report-*': 'report'
+    'click del-question-*': 'shut',
+    'click publish-*': 'publish'
 };
 
 exports.dataForActions = {
-    remove: function(data) {
-        var me = this;
-        return this.Promise.create(function(resolve) {
-            var message = '确定要删除该数据?';
-            me.app.message.confirm(message, function() {
-                resolve(data);
-            }, function() {
-                resolve(false);
-            });
-        });
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
     },
-    concern: function() {
-    },
-    enjoy: function() {
-    },
-    report: function() {
+    publish: function(payload) {
+        return payload;
     }
 };
 

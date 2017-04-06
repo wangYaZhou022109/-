@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
@@ -6,7 +6,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myquiz-details-*': 'showDetails'
+    'click myquiz-details-*': 'showDetails',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
@@ -27,13 +28,20 @@ exports.handlers = {
         this.app.show('content', 'ask/myquiz/details', { id: payload });
         // }
     },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
+    }
 };
 
 exports.actions = {
     'click remove-*': 'remove',
     'click concern-*': 'concern',
     'click enjoy-*': 'enjoy',
-    'click report-*': 'report'
+    'click report-*': 'report',
+    'click trend-follow-*': 'follow',
+    'click trend-unfollow-*': 'unfollow',
+    'click del-question-*': 'shut',
+    'click publish-*': 'publish'
 };
 
 exports.dataForActions = {
@@ -48,17 +56,51 @@ exports.dataForActions = {
             });
         });
     },
-    concern: function() {
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
     },
-    enjoy: function() {
+    follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
     },
-    report: function() {
+    unfollow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    publish: function(payload) {
+        return payload;
     }
 };
 
 exports.actionCallbacks = {
     remove: function() {
         this.app.message.success('删除成功！');
+        this.module.dispatch('init');
+    },
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
+    shut: function() {
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('init');
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
         this.module.dispatch('init');
     }
 };

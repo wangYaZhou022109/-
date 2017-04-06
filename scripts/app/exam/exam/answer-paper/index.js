@@ -151,7 +151,10 @@ exports.store = {
                             }
 
                             _.map(o.questions, function(q) {
-                                D.assign(q, { totalCount: o.size });
+                                D.assign(q, {
+                                    totalCount: o.size,
+                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc'])
+                                });
                             });
 
                             return D.assign(o, {
@@ -376,6 +379,9 @@ exports.store = {
                     this.data.corrects = _.reject(this.data.corrects, ['questionId', data.questionId]);
                     this.data.corrects.push(data);
                     this.save();
+                },
+                getWaitingCheck: function(questionId) {
+                    return _.find(this.data.waitingChecks, ['key', questionId]);
                 }
             }
         },
@@ -517,6 +523,7 @@ exports.store = {
                 }
                 this.models.types.changed();
             }
+            this.models.state.changed();
         },
         correct: function(payload) {
             this.models.mark.correct(payload);

@@ -3,7 +3,8 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    trends: true,
+    search: 'search'
 };
 
 exports.events = {
@@ -129,4 +130,11 @@ exports.dataForTemplate = {
         });
         return trends;
     }
+};
+
+exports.search = function() {
+    // console.log('dfsdfsdfs');
+    // var params = this.bindings.search.data;
+    // params.categoryId = params.menu2 || params.menu1;
+    // this.module.dispatch('searchCourse', { params: params });
 };

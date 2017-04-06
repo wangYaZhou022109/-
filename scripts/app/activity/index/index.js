@@ -21,7 +21,7 @@ exports.store = {
         gensees: { url: '../course-study/gensee/details',
             type: 'pageable',
             root: 'items',
-            pageSize: 500 },
+            pageSize: 50 },
         activity: { url: '../exam/activity' },
         params: { data: { all: true } },
         down: { url: '../human/file/download' },
@@ -29,7 +29,7 @@ exports.store = {
             url: '../exam/exam/details',
             type: 'pageable',
             root: 'items',
-            pageSize: 600
+            pageSize: 60
         },
         exam: { url: '../exam/exam/exam-sign-up' },
         currentExam: { },
@@ -38,7 +38,7 @@ exports.store = {
             url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 600
+            pageSize: 60
         },
         // 待办 阅卷，暂时写在这里 测试
         toDos: {
@@ -65,11 +65,11 @@ exports.store = {
             D.assign(this.models.params.data, payload);
             this.models.params.changed();
             this.models.exams.params = this.models.params.data;
-            this.get(this.models.exams);
             this.models.researchActivitys.params = this.models.params.data;
-            this.get(this.models.researchActivitys);
             this.models.gensees.params = this.models.params.data;
-            this.get(this.models.gensees);
+            return this.chain([this.get(this.models.exams),
+                this.get(this.models.researchActivitys),
+                this.get(this.models.gensees)]);
         },
         examLeft: function() {
             var page = this.models.exams.params.page;
@@ -129,6 +129,11 @@ exports.store = {
         },
         clearResearchRecord: function() {
             this.models.researchRecord.clear();
+        },
+        getResearchById: function(payload) {
+            return this.models.researchActivitys.data.find(function(r) {
+                return r.id === payload.id;
+            });
         }
     }
 };
