@@ -2,7 +2,7 @@
 module
     div(data-region='list')  
 view('list')
-    each(trends)
+    each(page)
         li
             .user-pic > img(src=createUser.headPortrait)
             .comment-content

@@ -4,7 +4,7 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
-    search: 'search'
+    page: true
 };
 
 exports.events = {
@@ -15,15 +15,10 @@ exports.events = {
 
 exports.handlers = {
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myquiz/details', { id: data[1] });
         }
     },
@@ -120,21 +115,30 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    trends: function(data) {
+    page: function(data) {
         var trends = data.trends;
+        var page = this.bindings.page.data;
+        var me = this;
+        var flag = true;
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
+            _.forEach(me.bindings.page.data, function(v) {
+                if (v.id === obj.id) {
+                    flag = false;
+                }
+            });
+            if (flag) {
+                page.push(obj);
+            }
         });
-        return trends;
+        return page;
     }
 };
 
-exports.search = function() {
-    // console.log('dfsdfsdfs');
-    // var params = this.bindings.search.data;
-    // params.categoryId = params.menu2 || params.menu1;
-    // this.module.dispatch('searchCourse', { params: params });
+exports.beforeClose = function() {
+    $(window).unbind('scroll');
 };
+

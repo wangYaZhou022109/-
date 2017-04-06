@@ -19,38 +19,6 @@ module > .course-detail-page
             section.section(data-region='info')
             section.section(data-region='comment')
 
-view('player-title')
-    .clearfix
-        .pull-left
-            .common-title.inline-block > echo(course.name)
-            .inline-block
-                .star-wrapper.drop-down-wrapper
-                    .star-bar > .star(style='width:'+score.scorePercent+'%')
-                    if(course.addType)
-                        if(score.avgScore)
-                            .num > echo(score.avgScore)
-                        else
-                            .inline-block.sub-text > echo('暂无评分')
-                    .drop-down-content(class = if(score.hasScore 'hide')) > .content
-                        .text-center 我来评分
-                        .star-grade
-                            .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                            .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                            .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                            .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                            .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                        .block.btn#submit-score 提交评分
-        .text-right.share-bar
-            #share
-            if(collect.id)
-                .item#cancel-collect(data-name='id' data-value=collect.id)
-                    i.iconfont.icon-favorite-full
-                    span 取消收藏
-            else
-                .item#collect
-                    i.iconfont.icon-favorite
-                    span 收藏
-
 view('player')
     div(data-dynamic-key=state.sectionId)
 
@@ -74,42 +42,16 @@ view('chapter')
                                 .text-overflow > echo(seq ': ' name)
                             dd
                                 .item.sub-text > map('section-type' sectionType)
-                                if(progress)
+                                if(finishStatus)
                                     .item.continue
                                         i.iconfont.icon-reload-full
                                         if(showRate)
-                                            span.progress > percent(progress.completedRate)
-                                        span > echo(progress.finishStatus)
+                                            span.progress > percent(completedRate)
+                                        span > echo(finishStatus)
                                 else
                                     .item.start
                                         i.iconfont.icon-play-full
                                         span 未开始
-
-view('note')
-    .course-side-title-row
-        .pull-right > .inline-block > i.iconfont.icon-close-circle#close-note
-        .text-overflow.h4 课程笔记
-    .course-note-main
-        form
-            .note-add-wrapper
-                input(type='hidden' name='courseId' value=course.id)
-                textarea.input#note-content(name='content' placeholder='新增课程笔记...')
-                .note-btn-group > .text-right
-                    .btn.small.white#cancel-edit 取消
-                    .btn#add-note.small 保存
-        .note-list > ul
-            each(notes)
-                li(id='note-item-'+i)
-                    form
-                        textarea.input(name='content') > echo(content)
-                        .note-text.text-overflow > echo(content)
-                        .text-tips.sub-text.time > dataTime(createTime)
-                        .note-btn-group > .text-right
-                            .btn.small.white(id='cancel-edit-item-'+i) 取消
-                            .btn.small(id='update-note'+id) 保存
-                        .bottom > .text-right
-                            .item(id='note-item-edit-'+i) > i.iconfont.icon-edit + | 编辑
-                            .item(id='remove-note'+id data-name='id' data-value=id) > i.iconfont.icon-close-circle + | 删除
 
 view('info')
     .title-row
@@ -144,21 +86,15 @@ view('download')
                     a(href=downUrl download=name) > string('download')
                 .text-overflow(title=name) > echo(name)
 
-view('topic')
-    .h3 相关话题
-    .layout-mt-small
-        each(topics)
-            .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
-
 
 view('releated-course')
     .h3
-        .side-reload.sub-title > i.iconfont.icon-reload#resetPage + span.text-tips > string('reset.page')
+        .side-reload.sub-title#resetPage > i.iconfont.icon-reload + span.text-tips > string('reset.page')
         echo('相关课程')
     .layout-mt-small
         each(courseRelated)
             .img
-                a.normal(href='#/course/detail/'+id)
+                a.normal(href='#/study/course/detail/'+id)
                     .img-cont > img(src=imageUrl)
                 h4.text-overflow(title=name) > echo(name)
 
