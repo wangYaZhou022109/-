@@ -14,7 +14,7 @@ view('offline')
     div(style='padding:20px 50px 50px 20px;')
         .row(style='line-height:50px;')
             .col-sm-12(style='text-align: right')
-                a.btn#export 导出安排
+                a.btn#export(href=downUrl) 导出安排
         .list.m-top
             table.table
                 thead > tr

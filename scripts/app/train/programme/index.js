@@ -44,6 +44,7 @@ exports.store = {
         offlineClickUpdate: { url: '../train/offline-course/click-update' },
         courseSalary: { url: '../train/courseSalary/updateByCourseId' },
         import: { url: '../train/offline-course/import' },
+        export: { url: '../train/offline-course/exportData' },
         fileInfo: {},
         importInfo: {},
         downExcel: { url: '../train/offline-course/download-excel' },
