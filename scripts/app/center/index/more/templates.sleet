@@ -5,4 +5,10 @@ module
 
 view('main')
     each(announcements)
-        .h3 > echo(title)
+        .clearfix.layout-mb-small
+            .h3.m-bottom > echo(title)
+            p 详情详情详情详情详情详情详情
+            .pull-right
+                .sub-text 来自XXXXX
+                .text-tips.m-top 2016-09-09 09:09:09
+        .hr.dashed

@@ -45,13 +45,15 @@ view('notice')
     compare(recordCount 'gt' 0)
         .news-list.clearfix
             .pull-left.m-right > i.iconfont.icon-notice
-            b.title 公告
+            b.title 公告：
             .navigator
                 .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
                 .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
                 .icon#showMore > .iconfont.icon-more
             ul > each(announcements)
-                li > echo(title)
+                li.clearfix
+                    .pull-right.sub-text.layout-mr 2016-09-09 09:09:09
+                    .m-right > echo(title)
 
 view('menu')
     .person-menu
