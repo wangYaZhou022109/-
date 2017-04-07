@@ -12,10 +12,12 @@ exports.store = {
             var homeConfig = this.models.homeConfig,
                 bottom = this.models.bottom,
                 me = this;
-            homeConfig.params = { id: payload.configId || '', orgId: payload.orgId || '' };
+            homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
+            homeConfig.clear();
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     bottom.params.homeConfigId = homeConfig.data.id;
+                    bottom.clear();
                     return me.get(bottom);
                 }
                 return null;

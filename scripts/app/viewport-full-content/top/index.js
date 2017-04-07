@@ -82,10 +82,12 @@ exports.store = {
             var that = this,
                 homeConfig = this.models.homeConfig,
                 navs = this.models.navs;
-            homeConfig.params = { id: payload.configId || '', orgId: payload.orgId || '' };
+            homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
+            homeConfig.clear();
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     navs.params.homeConfigId = homeConfig.data.id;
+                    navs.clear();
                     return that.get(navs);
                 }
                 return null;
