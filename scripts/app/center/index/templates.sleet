@@ -22,11 +22,17 @@ view('top')
                 span.h2 > echo(member.fullName)
                 span.lv Lv3
             .info-row
-                .item > a.iconfont.icon-warn(href='#/train/response'  target='_parent') > echo('响应中心')
+                .item > a(href='#/train/response'  target='_parent')
+                    i.iconfont.icon-warn
+                    echo('响应中心')
                 if(member.isContact)
-                    .item > a.iconfont.icon-warn(href='#/train/projects' target='_parent') > echo('需求方')
+                    .item > a(href='#/train/projects' target='_parent')
+                        i.iconfont.icon-type
+                        echo('需求方')
                 if(member.isClassstff)
-                    .item > a.iconfont.icon-mark(href='#/train/classinfos' target='_parent') > echo('班务')
+                    .item > a(href='#/train/classinfos' target='_parent')
+                    i.iconfont.icon-mark
+                    echo('班务')
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师
                 if(member.isExpert)
@@ -52,9 +58,9 @@ view('menu')
         ul.par > each(menus)
             if(childs)
                 li.has-child
-                    .menu-text
-                        i.iconfont.icon-arrow-down.down
-                        i.iconfont.icon-arrow-up.up
+                    .menu-text(id='toggle-menu-' + id)
+                        i.iconfont.icon-triangle-down.down
+                        i.iconfont.icon-triangle-up.up
                         i.iconfont(class=icon)
                         span >  echo(name)
                     .sub > each(childs)

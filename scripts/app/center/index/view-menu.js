@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+var $ = require('jquery');
 
 exports.type = 'dynamic';
 
@@ -25,7 +26,8 @@ exports.dataForEntityModule = function(entity) {
 };
 
 exports.events = {
-    'click switch-*': 'switchMenu'
+    'click switch-*': 'switchMenu',
+    'click toggle-menu-*': 'toggleMenuChild'
 };
 
 exports.handlers = {
@@ -44,6 +46,9 @@ exports.handlers = {
         state.data.menu = menu;
         state.data[menu] = true;
         state.changed();
+    },
+    toggleMenuChild: function(id, el, target) {
+        $(target).toggleClass('show-menu');
     }
 };
 
