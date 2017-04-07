@@ -75,12 +75,22 @@
             padding: 0 0 0 1em;
             background: var(--bg-color);
             line-height: 2.5em;
+            border: none;
 
             & .icon {
                 float: right;
                 margin: 0 2px 0 0;
                 line-height: 3em;
                 background: var(--bg-color-3);
+
+                &:hover {
+                    background-color: var(--border-color);
+
+                }
+
+                &:first-child {
+                    margin: 0;
+                }
             }
         }
     }
