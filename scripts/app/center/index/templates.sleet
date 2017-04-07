@@ -52,7 +52,7 @@ view('notice')
                 .icon#showMore > .iconfont.icon-more
             ul > each(announcements)
                 li.clearfix
-                    .pull-right.sub-text.layout-mr 2016-09-09 09:09:09
+                    .pull-right.sub-text.layout-mr > dateTime(lastModifyTime)
                     .m-right > echo(title)
 
 view('menu')
