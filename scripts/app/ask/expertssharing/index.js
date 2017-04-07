@@ -32,7 +32,6 @@ exports.store = {
         page: function(payload) {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            var page = params.page;
             var me = this;
             params.id = 'all';
             if (typeof payload.state.id !== 'undefined') {
@@ -40,7 +39,7 @@ exports.store = {
             }
             trends.set(params);
             this.post(trends).then(function() {
-                me.models.page.params.page = page + 1;
+                me.models.page.params.page++;
             });
         },
         follow: function(payload) {
@@ -85,7 +84,7 @@ exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
         if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
-            me.dispatch('page', this.renderOptions);
+            me.dispatch('page', me.renderOptions);
         }
     });
     return this.dispatch('page', this.renderOptions);
