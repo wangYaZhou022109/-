@@ -12,7 +12,7 @@ exports.store = {
             var homeConfig = this.models.homeConfig,
                 bottom = this.models.bottom,
                 me = this;
-            homeConfig.params = { id: payload.configId, orgId: payload.orgId };
+            homeConfig.params = { id: payload.configId || '', orgId: payload.orgId || '' };
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     bottom.params.homeConfigId = homeConfig.data.id;
@@ -24,5 +24,14 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions || {});
+    var payload = {};
+    if (document.cookie) {
+        document.cookie.split(';').forEach(function(item) {
+            var arr = item.split('=');
+            if (arr[1] !== 'undefined') {
+                payload[arr[0]] = arr[1];
+            }
+        });
+    }
+    this.dispatch('init', payload);
 };
