@@ -52,9 +52,6 @@ exports.handlers = {
         // me.module.dispatch('refreshMessage');
     },
     changeHome: function(id) {
-        var org = _.find(this.bindings.organizations.data, ['id', id]);
-        $(this.$('selected-name')).text(org.shortName || org.name);
-        this.$('orgId').value = id;
         this.app.navigate('home/org/' + id, true);
     }
 };
@@ -62,9 +59,22 @@ exports.handlers = {
 exports.dataForTemplate = {
     organization: function(data) {
         var orgs = data.organizations,
+            params = {},
+            org = {};
+        if (document.cookie) {
+            document.cookie.split(';').forEach(function(item) {
+                var arr = item.split('=');
+                if (arr[1] !== 'undefined') {
+                    params[arr[0]] = arr[1];
+                }
+            });
+            org = _.find(orgs, ['id', params.orgId]);
+        }
+        if (!params.orgId) {
             org = _.find(orgs, function(item) {
                 return !item.parentId;
             });
+        }
         return org;
     },
     courseTime: function(data) {

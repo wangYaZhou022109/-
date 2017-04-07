@@ -16,9 +16,15 @@ exports.events = {
 exports.handlers = {
     showContent: function(id, e, element) {
         var url = element.getAttribute('href').slice(2),
-            shortcutView = this.module.items.shortcut;
-        if (url === 'home') {
-            url = url + '/org/' + shortcutView.$('orgId').value;
+            params = {};
+        if (url === 'home' && document.cookie) {
+            document.cookie.split(';').forEach(function(item) {
+                var arr = item.split('=');
+                if (arr[1] !== 'undefined') {
+                    params[arr[0]] = arr[1];
+                }
+            });
+            url = url + '/org/' + params.orgId;
             this.app.navigate(url, true);
         }
         this.app.navigate(url, true);
