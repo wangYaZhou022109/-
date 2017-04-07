@@ -2,10 +2,15 @@ exports.items = {
     topicdetail: 'topicdetail',
     menu: 'menu',
     list: 'list',
-    right: 'right'
+    relevantexperts: 'relevantexperts',
+    relatedquestions: 'relatedquestions',
+    top: 'top',
 };
 exports.store = {
     models: {
+        followcount: { data: { menu: 'followcount' } },
+        relevantexperts: { data: { menu: 'relevantexperts' } },
+        relatedquestions: { data: { menu: 'relatedquestions' } },
         params: { data: { isOverdue: '1' } },
         topicdetail: { url: '../ask-bar/my-manage/topicdeal' },
         state: { data: { menu: 'news' } }

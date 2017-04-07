@@ -13,7 +13,6 @@
         float: left;
         width: calc(var(--font-size) * 4);
         height: calc(var(--font-size) * 4);
-        margin-right: 1em;
         border: 1px solid var(--border-color);
 
         & img {
@@ -23,7 +22,7 @@
     }
 
     & .comment-content {
-        overflow: hidden;
+        margin-left: calc(var(--font-size) * 6);
     }
 
     & .comment-text {
@@ -36,6 +35,7 @@
 
         & .item {
             display: inline-block;
+            padding: 0;
             margin-left: var(--base-gap);
             cursor: pointer;
             color: var(--font-tip-color);
@@ -45,9 +45,11 @@
             }
         }
 
-        & .iconfont {
-            margin-right: var(--space);
+        & .drop-down-content {
+            left: auto;
+            right: 0;
         }
+
     }
 
     & .comment-reply {
@@ -67,6 +69,7 @@
 
         & textarea {
             padding-right: calc(var(--font-size) * 6);
+            height: var(--input-height);
         }
 
         & .btn {

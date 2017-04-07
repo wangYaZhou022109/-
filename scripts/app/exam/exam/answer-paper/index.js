@@ -4,6 +4,7 @@ var _ = require('lodash/collection'),
     $ = require('jquery'),
     CryptoJS = require('crypto-js'),
     maps = require('./app/util/maps'),
+    strings = require('./app/util/strings'),
     qTypes = maps.get('question-types'),
     getCurrentStatus,
     constant = {
@@ -111,6 +112,9 @@ exports.store = {
                         noAnswerCount: this.data.totalCount - answeredCount
                     });
                     this.save();
+                },
+                isComplete: function() {
+                    return this.data.noAnswerCount === 0;
                 }
             }
         },
@@ -151,7 +155,10 @@ exports.store = {
                             }
 
                             _.map(o.questions, function(q) {
-                                D.assign(q, { totalCount: o.size });
+                                D.assign(q, {
+                                    totalCount: o.size,
+                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc'])
+                                });
                             });
 
                             return D.assign(o, {
@@ -376,6 +383,9 @@ exports.store = {
                     this.data.corrects = _.reject(this.data.corrects, ['questionId', data.questionId]);
                     this.data.corrects.push(data);
                     this.save();
+                },
+                getWaitingCheck: function(questionId) {
+                    return _.find(this.data.waitingChecks, ['key', questionId]);
                 }
             }
         },
@@ -517,6 +527,7 @@ exports.store = {
                 }
                 this.models.types.changed();
             }
+            this.models.state.changed();
         },
         correct: function(payload) {
             this.models.mark.correct(payload);
@@ -540,10 +551,9 @@ exports.store = {
             if (f) {
                 return this.post(this.models.form).then(function() {
                     if (payload.submitType === submitType.Auto) {
-                        this.app.message.success('答案已自动保存成功');
                         me.models.modify.clear();
                     } else {
-                        this.app.message.success('交卷成功');
+                        this.app.message.success(strings.get('exam.answer-paper.submit-success'));
                         if (!viewAnswerDetail.call(me)) {
                             setTimeout(function() {
                                 _.forEach(me.models, function(m) {
@@ -562,19 +572,25 @@ exports.store = {
             this.models.countDown.changed();
         },
         lowerSwitchTimes: function() {
-            var exam = this.models.exam.data;
+            var exam = this.models.exam.data,
+                message;
             if (exam.allowSwitchTimes) {
                 if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
-                    this.app.message.error('切屏次数已满，强制交卷');
+                    this.app.message.error(strings.get('exam.answer-paper.switch-screen.full-times'));
                     return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
                         WS.closeConnect();
                     });
                 }
-                D.assign(exam, {
-                    lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1
-                });
+
+                D.assign(exam, { lowerSwitchTimes: (exam.lowerSwitchTimes || 0) + 1 });
                 this.models.exam.save();
-                this.app.message.success('还剩余' + (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次切屏');
+
+                message = strings.getWithParams(
+                    'exam.answer-paper.switch-screen.remain-times',
+                    exam.allowSwitchTimes - exam.lowerSwitchTimes
+                );
+
+                this.app.message.success(message);
             }
             return true;
         },
@@ -604,6 +620,7 @@ exports.beforeRender = function() {
 
 exports.afterRender = function() {
     var me = this,
+        firstTime = 1,
         examId = this.store.models.exam.data.id,
         getRandom = function() {
             var r = Math.random() * 1,
@@ -612,19 +629,22 @@ exports.afterRender = function() {
             return ms;
         },
         f = true,
-        autoSubmit = function() {
+        autoSubmit = function(time) {
+            if (time !== 1) {
+                me.app.message.success(strings.get('exam.answer-paper.auto-submit-success'));
+            }
             return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
                 TO.timeOutId = setTimeout(autoSubmit, getRandom());
             });
         };
 
     if (f) {
-        autoSubmit();
+        autoSubmit(firstTime);
 
         TO.timeOutId = setTimeout(autoSubmit, getRandom());
 
         WS.connect(examId, function() {
-            me.app.message.error('你本次考试已被管理员强制交卷');
+            me.app.message.error(strings.get('exam.answer-paper.force-submit'));
             return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
                 WS.closeConnect();
             });

@@ -37,6 +37,7 @@
         color: #FEFF00;
         text-shadow: 0 -1px 0 rgba(0,0,0,.3);
         padding: 0 var(--space);
+        font-weight: bold;
     }
 }
 
@@ -140,7 +141,7 @@ section.section {
 }
 
 .no-margin {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .vertical-top {
@@ -201,7 +202,7 @@ section.section {
 }
 
 .no-bg {
-    background: none;
+    background: none !important;
 }
 
 .pointer {

@@ -81,7 +81,7 @@
         transform: translateY(-50%);
         padding: 2em 0;
         cursor: pointer;
-        width: calc(var(--space) * 2);
+        width: 1em;
         overflow: hidden;
         background-color: rgba(0,0,0,.1);
         color: var(--font-tip-color);
@@ -91,6 +91,7 @@
             color: white;
         }
         & .iconfont {
+            font-size: .5em;
             position: absolute;
             top: 50%;
             margin-top: -.5em;
@@ -107,11 +108,11 @@
     }
 
     &.animating {
-        &.prev {
+        & .prev {
             animation: swiperOut 1s 1;
         }
 
-        &.current {
+        & .current {
             animation: swiperIn 1s 1;
         }
     }

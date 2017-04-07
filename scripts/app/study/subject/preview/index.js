@@ -24,7 +24,8 @@ exports.store = {
                     styles = subject.styles;
                     this.models.styles.set(styles);
                     this.models.state.set({
-                        key: styles.code
+                        key: styles.code,
+                        type: 'preview'
                     });
                 } else if (subject.id) {
                     this.models.subject.set({
@@ -35,7 +36,8 @@ exports.store = {
                             styles = JSON.parse(data[0].styles);
                             me.models.styles.set(styles);
                             me.models.state.set({
-                                key: styles.code
+                                key: styles.code,
+                                type: 'preview'
                             });
                             me.models.state.changed();
                         }

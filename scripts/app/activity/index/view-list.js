@@ -1,15 +1,13 @@
 var _ = require('lodash/collection'),
-    toArray;
+    toArray,
+    H = require('./app/util/helpers');
 
 exports.bindings = {
-    activitys: true,
     params: true,
     down: true,
     gensees: true,
     exams: true,
-    researchActivitys: true,
-    toDos: true,
-    researchRecord: false
+    researchActivitys: true
 };
 
 exports.events = {
@@ -55,26 +53,26 @@ exports.handlers = {
         });
     },
     showResearchIndex: function(id) {
-        var url = '#/exam/research-activity/index/' + id;
-        window.open(url, '_blank');
+        var url = 'exam/research-activity/index/' + id,
+            mod = this.module.items['research-tips'],
+            me = this;
+        return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
+            if (data.startTime > new Date().getTime()) {
+                me.app.viewport.modal(mod, {
+                    content: '你好，本次调研尚未到调研时间，请在调研时间'
+                        + H.dateTime(data.startTime)
+                        + '~' + H.dateTime(data.endTime)
+                        + '进行调研，谢谢'
+                });
+            } else {
+                // window.open(url);
+                me.app.navigate(url, true);
+            }
+        });
     }
 };
 
 exports.dataForTemplate = {
-    activitys: function(data) {
-        var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'images/default-cover/default_exam.jpg';
-        if (data.activitys.forEach) {
-            data.activitys.forEach(function(obj) {
-                var activity = obj || {};
-                activity.img = activity.coverId ? (downUrl + '?id=' + activity.coverId) : defultImg;
-                if (activity.description) {
-                    activity.description = activity.description.replace(/<[^>]+>/g, '').substr(0, 20);
-                }
-            });
-        }
-        return data.activitys;
-    },
     type: function() {
         var params = this.bindings.params.data;
         params.types = {};
@@ -91,11 +89,13 @@ exports.dataForTemplate = {
         }
         return params;
     },
-    examArray: function(data) {
-        return toArray(data.exams, 6);
+    examArray: function() {
+        var data = this.bindings.exams.data;
+        return toArray(data, 6);
     },
-    researchArray: function(data) {
-        return toArray(data.researchActivitys, 6);
+    researchArray: function() {
+        var data = this.bindings.researchActivitys.data;
+        return toArray(data, 6);
     },
     genseesArray: function(data) {
         var defultImg = 'images/default-cover/default_live.jpg',
@@ -105,12 +105,11 @@ exports.dataForTemplate = {
             gensee.cover = gensee.cover ? (downUrl + '?id=' + gensee.cover) : defultImg;
         });
         return toArray(data.gensees, 5);
-    },
+    }
 };
 
 toArray = function(objs, pageSize) {
     var array = [],
-        num = 0,
         temp = [],
         obj,
         i;
@@ -121,13 +120,12 @@ toArray = function(objs, pageSize) {
                 obj = {};
                 obj.a = temp;
                 array.push(obj);
-                num++;
                 temp = [];
             }
         }
         if (temp.length > 0) {
             obj = {};
-            obj[num] = temp;
+            obj.a = temp;
             array.push(obj);
         }
         return array;
@@ -135,8 +133,6 @@ toArray = function(objs, pageSize) {
     return [];
 };
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'exams' }
-}, {
     id: 'swiper-3',
     name: 'swiper',
     options: {

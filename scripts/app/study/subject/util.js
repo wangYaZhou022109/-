@@ -6,7 +6,8 @@ var D = require('drizzlejs'),
         after: '节'
     },
     defaultBtnTexts = { 3: '打开URL', 8: '进入任务', 9: '进入考试', 10: '进入课程', 11: '进入面授', 12: '进入调研', 13: '进入评估', 14: '进入直播' },
-    studyBtnTexts = { 2: '重新学习', 4: '重新学习', 8: '查看详情' },
+    studyBtnTexts = { 2: '重新学习', 4: '重新学习', 5: '查看详情', 6: '查看详情' },
+    studyBtnColor = { 2: 'custom-bg-color-5', 4: 'custom-bg-color-5' },
     prefixUrl = {
         8: '#/study/task/',
         10: '#/study/course/detail/',
@@ -46,8 +47,13 @@ exports.setBtn = function(chapters, type, currentSectionId) {
                 progress = section.progress,
                 sectionType = Number(section.sectionType);
             section.btnText = defaultBtnTexts[sectionType];
+            section.btnColor = 'custom-bg-color-2';
             if (progress && progress.finishStatus !== 0) {
-                section.btnText = studyBtnTexts[sectionType] || '继续学习';
+                section.btnText = studyBtnTexts[progress.finishStatus] || '继续学习';
+                if (sectionType === 8) {
+                    section.btnText = '查看详情';
+                }
+                section.btnColor = studyBtnColor[progress.finishStatus] || 'custom-bg-color-4';
             }
             if (sectionType === 3) {
                 section.btnUrl = section.url;
@@ -56,7 +62,6 @@ exports.setBtn = function(chapters, type, currentSectionId) {
             } else {
                 section.btnUrl = prefixUrl[sectionType] + section.resourceId;
             }
-
             section.preview = true;
             if (type === 'preview') {
                 section.preview = false;

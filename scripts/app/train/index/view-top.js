@@ -18,6 +18,9 @@ exports.handlers = {
             state.data.menu = menu || 'book';
             state.data[menu] = true;
             state.data.id = id;
+            if (projectInfo.classInfo) {
+                state.data.classId = projectInfo.classInfo.id;
+            }
             state.changed();
         } else {
             this.app.message.alert('当前计划为未通过状态');

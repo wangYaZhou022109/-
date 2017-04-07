@@ -1,9 +1,21 @@
 .form {
-
     &.horizontail {
         & .form-row {
             float: left;
         }
+    }
+
+    &.align-left .form-row{
+        & > label,
+        & label.label {
+            text-align: left;
+
+            &.required:after {
+                right: auto;
+                margin-left: var(--space);
+            }
+        }
+
     }
 
     & .form-row {
@@ -27,13 +39,7 @@
                 color: var(--color-error);
             }
 
-            &.auto {
-                width: auto;
 
-                & + .content {
-                    margin-left: 0;
-                }
-            }
         }
 
         & .content {

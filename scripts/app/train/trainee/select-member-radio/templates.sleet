@@ -1,0 +1,38 @@
+#!handlebars
+
+module
+    .toolbox(data-region='toolbox')
+    .content-left(data-region='left')
+    .content-main(data-region='content')
+
+view('toolbox') > form.vertical
+    echo('账号')
+    input(name='name')
+    echo('姓名')
+    input(name='fullName')
+    btn.btn#searchMember > echo('搜索')
+
+view('content')
+    .list
+        table.table
+            thead > tr
+                th > echo('选择')
+                th > setting('human.member.full-name')
+                th > setting('human.member.name')
+                th > setting('human.member.sex')
+                th > setting('human.member.position-alias')
+                th > setting('human.member.direct-supervisor')
+                th > setting('system.all.organization')
+                th > setting('system.all.company')
+            tbody > each(members) > tr
+                td
+                    input(type='radio' id='select_'+id name='memberId' value=id)('checked')&if(checked)
+                    label(for='select_'+id)
+                td > echo(fullName)
+                td > echo(name)
+                td > echo(sexText)
+                td > echo(majoyPosition.name)
+                td > echo(memberDetail.directSupervisor.fullName)
+                td > echo(organization.name)
+                td > echo(organization.companyName)
+    #pager.pagination(style='float:none')

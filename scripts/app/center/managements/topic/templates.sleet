@@ -1,0 +1,42 @@
+#!handlebars
+
+module > .topic-page
+    .topic(data-region="topic")
+
+view('topic')
+    table.table
+        tr
+            th 序号
+            th 主题
+            th 排序
+            th 操作
+        tr
+            td 1
+            td.sub-title 主题名称（点击可修改）
+            td
+                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-desc.color-pass
+            td > a 删除
+        tr
+            td 2
+            td.sub-title 主题名称（点击可修改）
+            td
+                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-desc.color-pass
+            td > a 删除
+        tr
+            td 3
+            td.sub-title 主题名称（点击可修改）
+            td
+                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-desc.color-pass
+            td > a 删除
+        tr
+            td 4
+            td.sub-title 主题名称（点击可修改）
+            td
+                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-desc.color-pass
+            td > a 删除
+    .add-topic.text-center
+        .btn 添加主题

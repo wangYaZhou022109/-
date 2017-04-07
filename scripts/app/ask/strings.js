@@ -4,6 +4,7 @@ module.exports = {
     auditStatus2: '拒绝',
     auditStatus3: '审核中',
     auditStatus4: '审核未通过',
+    ask: '提问',
     article: '文章',
     'article-title': '文章标题',
     'article-content': '文章内容',

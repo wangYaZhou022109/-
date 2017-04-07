@@ -1,0 +1,10 @@
+.taskdetail-page {
+    & .taskdetail {
+        & .bg-color-3 {
+            background-color: var(--bg-color-3);
+        }
+        & .search-padding {
+            padding: 1em 2em;
+        }
+    }
+}

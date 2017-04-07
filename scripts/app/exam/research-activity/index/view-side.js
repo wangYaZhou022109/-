@@ -6,7 +6,7 @@ exports.bindings = {
     down: true
 };
 
-exports.dateForTemplate = {
+exports.dataForTemplate = {
     relativeMembers: function(data) {
         var me = this;
         return _.map(data.relativeMembers, function(r) {

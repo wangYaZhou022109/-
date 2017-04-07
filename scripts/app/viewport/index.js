@@ -25,8 +25,8 @@ pop = function(mod) {
 };
 
 exports.items = {
-    'home/default/top': { region: 'top', isModule: true },
-    'home/default/bottom': { region: 'bottom', isModule: true }
+    'viewport-full-content': { isModule: true },
+    'viewport-over-screen': { isModule: true }
 };
 
 exports.mixin = {
@@ -49,5 +49,20 @@ exports.mixin = {
     },
     closeGround: function() {
         return pop(this);
+    },
+    showIt: function(name, mod, options) {
+        var me = this;
+        return this.regions.content.show(me.items['viewport-over-screen']).then(function(m) {
+            return m.regions[name].show(mod, options);
+        });
     }
+};
+
+exports.beforeRender = function() {
+    var me = this;
+    this.app.show = function(name, mod, options) {
+        return me.regions.content.show(me.items['viewport-full-content']).then(function(m) {
+            return m.regions[name].show(mod, options);
+        });
+    };
 };

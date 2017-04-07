@@ -22,12 +22,12 @@
 
         & ul {
             margin-top: var(--base-gap);
-            border-top: 1px solid var(--border-color);
+            border-top: 1px dashed var(--border-color);
         }
 
         & li {
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px dashed var(--border-color);
             padding: 1em 0;
             cursor: pointer;
         }

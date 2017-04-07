@@ -21,13 +21,16 @@ view('list')
                     #  > echo(problem.content)
                     .user-info
                         a(href='javascript:;') > echo('我')
-                        span > echo('分享·')
+                        span > echo('·分享·')
                         span.sub-text > data(enjoyTime)
                     .comment-operation
                         .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                         .text-right
-                            .item > a.normal(href='javascript:;') 关注
-                            .item > a.normal(href='javascript:;') 添加讨论
+                            compare(concernNum 'gt' 0)  
+                                .item(id='trend-unfollow-1_' + problem.id data-name='id' data-value='1_' + problem.id ) > echo('+') + string('unfollow')
+                            else
+                                .item(id='trend-follow-1_'  + problem.id data-name='id' data-value='1_' + problem.id) > echo('+') + string('follow')
+                            .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                             .item
                                 .drop-down-wrapper
                                     .drop-down-btn 分享
@@ -36,11 +39,12 @@ view('list')
                                             li 分享1
                                             li 分享2
                                             li 分享3
-                            .item > a.normal(href='javascript:;') 删除
-                    .comment-reply.m-top
-                        textarea.input.w-full.block(rows="1")
-                        .btn 回复
-#  module
+                            .item > span(id = 'del-question-' + problem.id data-name='id' data-value=problem.id) > string('delete')
+                            form.comment-reply(id ='comment-reply-' + id)
+                                textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                input.input(type='hidden' name='organizationId' value=organizationId)
+                                input.input(type='hidden' name='id' value=problem.id)
+                                .btn(id='publish-' + id) > string('publish')
 #      div(data-region='list')
 #  view('list')
 #      ul 
