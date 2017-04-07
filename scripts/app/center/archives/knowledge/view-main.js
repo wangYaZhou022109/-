@@ -1,5 +1,5 @@
-var _ = require('lodash/collection');
-
+var _ = require('lodash/collection'),
+    helpers = require('./app/util/helpers');
 exports.bindings = {
     list: true,
     export: false
@@ -32,6 +32,7 @@ exports.dataForTemplate = {
             } else {
                 r.type = '文档';
             }
+            r.uploadTimeStr = helpers.dateMinute(r.uploadTime);
         });
         return data.list;
     },

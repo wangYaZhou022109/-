@@ -27,12 +27,12 @@ view('main')
                     td > map('is-required' isRequired)
                     td
                         if(beginTime)
-                            dateTime(beginTime)
+                            echo(beginTimeStr)
                         else
                             echo('—')
                     td
                         if(finishTime)
-                            dateTime(finishTime)
+                            echo(finishTimeStr)
                         else
                             echo('—')
                     td > echo(studyTotalTime)
