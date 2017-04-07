@@ -31,6 +31,7 @@ exports.store = {
                 styles = options.styles;
             this.models.subject.set(subject);
             this.models.regions.set(styles.regions);
+            this.models.state.set(options.state);
             layout.set(initLayout(this.models.regions));
             layout.changed();
         }
