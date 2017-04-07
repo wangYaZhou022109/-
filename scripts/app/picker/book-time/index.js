@@ -57,14 +57,6 @@ exports.store = {
             projects.params.month = payload.month;
             this.get(projects);
             projects.changed();
-        },
-        book: function(payload) {
-            var check = this.models.check,
-                project = this.models.project;
-            check.params.arriveDate = payload.arriveDate;
-            check.params.backDate = payload.backDate;
-            check.params.projectId = project.data.id;
-            return this.get(check);
         }
     }
 };

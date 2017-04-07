@@ -1,0 +1,27 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='main')
+
+view('main')
+    div.text-center
+        echo('学习详情')
+    table.table
+        thead > tr
+            td > echo('序号')
+            th > echo('资源名称')
+            th > echo('是否必修')
+            th > echo('开始学习时间')
+            th > echo('学习时长')
+            th > echo('状态')
+        tbody > each(particularss) > tr
+            td > echo(i)
+            td > echo(resourceName)
+            td > map('is-required' courseStudyProgress.isRequired)
+            td > dateTime(courseStudyProgress.beginTime)
+            td > date(courseStudyProgress.studyTotalTime)
+            td > map('course-info-study-status' courseStudyProgress.finishStatus)
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
+    #pager.pagination

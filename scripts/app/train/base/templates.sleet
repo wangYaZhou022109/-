@@ -7,17 +7,19 @@ module > .train-class-page
 view('main') > form.vertical
     div(style='padding:20px 50px 50px 100px;')
         .row(style='line-height:50px;')
-            .col-sm-4.add-topic-img(style='text-align: center')
-                div.user-pic > img(src = state.downUrl width=300 height=200)
-                a.btn#uploadFile 设置封面
-                input(type='hidden' name='coverId' value=state.attachmentId)
-            .col-sm-8.left
-                .row > .col-sm-8
+            .col-sm-8
+                .col-sm-4
                     label > echo('培训班名称：' + classInfo.className)
                     input(type='hidden' name='id' value=classInfo.id)
-                .row > .col-sm-8
+                .col-sm-4
+                    label > echo('学习地点：' + classInfo.addressText)
+        .row(style='line-height:50px;')
+            .col-sm-8
+                .col-sm-8
                     label > echo('培训起止时间：' + classInfo.startDate + '~' + classInfo.endDate)
-                .row > .col-sm-8
+        .row(style='line-height:50px;')
+            .col-sm-8
+                .col-sm-8
                     label > echo('学习地点：' + classInfo.addressText +'&nbsp;&nbsp;客房：' + classInfo.rommText + '    &nbsp;&nbsp;餐厅：' + classInfo.diningRoomText + '&nbsp;&nbsp;教室：' + classInfo.classRoomName)
         .row(style='line-height:50px;')
             .col-sm-3(style='text-align:right')
@@ -48,18 +50,6 @@ view('main') > form.vertical
                 input.input#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))
         .row(style='line-height:50px;')
             .col-sm-3(style='text-align:right')
-                label 课程录像：
-            .col-sm-2
-                input.inline-block#needVideo-1(name='needVideo' type='radio' value='1')('checked')&if(checked.needVideoCheck)
-                .inline-block 是
-                input.inline-block#needVideo-0(name='needVideo' type='radio' value='0')('checked')&unless(checked.needVideoCheck)
-                .inline-block 否
-            .col-sm-3(style='text-align:right')
-                label 录像需求：
-            .col-sm-2
-                input.input#videoRequirement(name='videoRequirement' value=classInfo.classDetail.videoRequirement)
-        .row(style='line-height:50px;')
-            .col-sm-3(style='text-align:right')
                 label 课程制作：
             .col-sm-2
                 input.inline-block#needMakeCourse-1(name='needMakeCourse' type='radio' value='1')('checked')&if(checked.needMakeCourseCheck)
@@ -72,13 +62,6 @@ view('main') > form.vertical
                 input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)
         .row(style='line-height:50px;')
             .col-sm-3(style='text-align:right')
-                label 教室是否需要网络：
-            .col-sm-2
-                input.inline-block(name='needNet' type='radio' value='1')('checked')&if(checked.needNetCheck)
-                .inline-block 是
-                input.inline-block(name='needNet' type='radio' value='0')('checked')&unless(checked.needNetCheck)
-                .inline-block 否
-            .col-sm-3(style='text-align:right')
                 label 教室桌型：
             .col-sm-2
                 select#tableType(name='tableType') 
@@ -89,6 +72,22 @@ view('main') > form.vertical
                 label 其他需求：
             .col-sm-4
                 textarea#otherRequirement(name='otherRequirement' rows=5 cols=80) > echo(classInfo.classDetail.otherRequirement)
+
+        .row
+            .col-sm-2(style='text-align:right')
+                label 客房：
+            .col-sm-2
+                input.input#restRoom(name='restRoom' value=classInfo.romm)
+            .col-sm-2(style='text-align:right')
+                label 餐厅：
+            .col-sm-2
+                input.input#diningRoom(name='diningRoom' value=classInfo.diningRoom)
+            .col-sm-2(style='text-align:right')
+                label 教室：
+            .col-sm-2
+                select.select#classRoom(name='classRoom' x-rule='required')
+                    each(classroomList)
+                        option(value=id)('selected')&if(selected) > echo(classroomName)
         .row
             .col-sm-3(style='text-align:right')
                 label 上传banner：
@@ -101,7 +100,8 @@ view('main') > form.vertical
                 img(src = state.bannerUrl width=500 height=145)
         .row
             .col-sm-12(style='text-align:center')
-                a.btn#submit 保存
+                a.btn#save 保存
+                a.btn#submit 提交
 
 view('upload')
     .row

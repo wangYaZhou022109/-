@@ -1,0 +1,20 @@
+#!handlebars
+
+module > .verify-page
+    .verify(data-region="verify")
+
+view('verify')
+    .container
+        section.section
+            .clearfix
+                label.pull-left.layout-mr 审核结果
+                .pull-left.layout-mr
+                    input(type="radio")
+                    label 同意
+                .pull-left
+                    input(type="radio")
+                    label 拒绝
+            .clearfix.layout-mt-small
+                label.pull-left.layout-mr 审核意见
+                .pull-left
+                    textarea

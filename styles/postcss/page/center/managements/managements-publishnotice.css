@@ -1,0 +1,11 @@
+.managements-page {
+    & .managements-publishnotice {
+        & .qrcode {
+            width: calc(var(--section-gap)*2);
+            height: calc(var(--section-gap)*2);
+        }
+        & .form-line-height {
+            line-height: var(--input-height);
+        }
+    }
+}

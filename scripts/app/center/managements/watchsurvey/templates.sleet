@@ -1,0 +1,9 @@
+#!handlebars
+
+module > .watchsurvey-page
+    .watchsurvey(data-region='watchsurvey')
+
+view('watchsurvey')
+    span 调研名称：
+    span 调研名称调研名称调研名称
+    

@@ -12,10 +12,12 @@ exports.getEntityModuleName = function(key) {
 
 exports.getEntity = function(key) {
     var region = this.bindings.regions.findByModuleCode(key),
-        subject = this.bindings.subject.data;
+        subject = this.bindings.subject.data,
+        state = this.bindings.state.data;
     return {
         region: region,
-        subject: subject
+        subject: subject,
+        state: state
     };
 };
 
