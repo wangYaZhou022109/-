@@ -14,10 +14,12 @@ exports.showHome = function() {
 };
 
 exports.previewHome = function(configId) {
+    document.cookie = 'configId=' + configId;
     return this.app.show('content', 'home/default', { configId: configId });
 };
 
 exports.changeHome = function(orgId) {
+    document.cookie = 'orgId=' + orgId;
     return this.app.show('content', 'home/default', { orgId: orgId });
 };
 
