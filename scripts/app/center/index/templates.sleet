@@ -31,8 +31,8 @@ view('top')
                         echo('需求方')
                 if(member.isClassstff)
                     .item > a(href='#/train/classinfos' target='_parent')
-                    i.iconfont.icon-mark
-                    echo('班务')
+                        i.iconfont.icon-mark
+                        echo('班务')
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师
                 if(member.isExpert)
@@ -60,7 +60,7 @@ view('menu')
         ul.par > each(menus)
             if(childs)
                 li.has-child
-                    .menu-text(id='toggle-menu-' + id)
+                    .menu-text(id='toggle-menu-' + id class = if(openMenu 'show-menu'))
                         i.iconfont.icon-triangle-down.down
                         i.iconfont.icon-triangle-up.up
                         i.iconfont(class=icon)

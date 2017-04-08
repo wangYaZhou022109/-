@@ -9,6 +9,6 @@ view('main')
             .h3.m-bottom > echo(title)
             p > @echo(content)
             .pull-right
-                .sub-text 来自XXXXX
+                .sub-text > echo('来自 ') + echo(organization.name)
                 .text-tips.m-top > dateTime(lastModifyTime)
         .hr.dashed

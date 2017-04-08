@@ -26,7 +26,10 @@ exports.store = {
                // { id: '2-2', name: '我的班级', url: 'class' },
                 { id: '2-2', name: '我的调研', url: 'research' }
             ] },
-            { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'ask' },
+            { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'ask', childs: [ // eslint-disable-line object-property-newline,max-len
+                { id: '3-0', name: '我的回答', url: 'answer' },
+               // { id: '3-1', name: '我的关注', url: 'follow' },
+            ] },
             { id: '4', name: '我的收藏', icon: 'icon-favorite', url: 'collection' },
             { id: '5', name: '我的档案', icon: 'icon-file', url: 'archives' }
         ] },
