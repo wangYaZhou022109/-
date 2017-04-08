@@ -8,4 +8,7 @@
     & .bg-gray {
         background: var(--font-sub-color);
     }
+    & .select-width {
+        width: calc(var(--base-gap)*4);
+    }
 }

@@ -873,7 +873,7 @@ view('managements-classmanage')
                             .tag-btn.active 半天
                             .tag-btn 全天
                         .pull-right
-                            .tag-btn.selected
+                            .tag-btn.selected#addattendance
                                 | +添加
                             .tag-btn.selected 删除
                     table.table.layout-mt-small
@@ -895,11 +895,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-1 签到名单
                                 span |
-                                a 请假
+                                a#leave-1 请假
                                 span |
-                                a 编辑
+                                a#edit-1 编辑
                         tr
                             td > input(type="checkbox")
                             td 2016-1-9 上午签到
@@ -909,11 +909,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-2 签到名单
                                 span |
-                                a 请假
+                                a#leave-2 请假
                                 span |
-                                a 编辑
+                                a#edit-2 编辑
                         tr
                             td > input(type="checkbox")
                             td 2016-1-9 上午签到
@@ -923,11 +923,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-3 签到名单
                                 span |
-                                a 请假
+                                a#leave-3 请假
                                 span |
-                                a 编辑
+                                a#edit-3 编辑
                         tr
                             td > input(type="checkbox")
                             td 2016-1-9 上午签到
@@ -937,11 +937,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-4 签到名单
                                 span |
-                                a 请假
+                                a#leave-4 请假
                                 span |
-                                a 编辑
+                                a#edit-4 编辑
                 #classmanage-content-2.display-none
                     section.section
                         .clearfix
@@ -964,7 +964,7 @@ view('managements-classmanage')
                                 td -
                                 td -
                                 td -
-                                td > a 编辑
+                                td > a#classedit-1 编辑
                             tr
                                 td 标题标题标题标题标题标题
                                 td 某某某
@@ -972,7 +972,7 @@ view('managements-classmanage')
                                 td 123
                                 td 123
                                 td 123
-                                td > a 编辑
+                                td > a#classedit-2 编辑
                             tr
                                 td 标题标题标题标题标题标题
                                 td 某某某
@@ -980,7 +980,10 @@ view('managements-classmanage')
                                 td 456
                                 td 456
                                 td 456
-                                td > a 编辑
+                                td > a#classedit-3 编辑
+                        .layout-mt.text-center
+                            .btn 保存
+
                 #classmanage-content-3.display-none
                     section.section
                         .clearfix
@@ -1000,8 +1003,8 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 进行中
                                 td
-                                    a 统计
-                                    span |
+                                    a#count-1 统计
+                                    span.text-main-color |
                                     a 删除
                             tr
                                 td 培训返程日统计
@@ -1009,10 +1012,10 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 未开始
                                 td
-                                    a 统计
-                                    span |
-                                    a 统计
-                                    span |
+                                    a 编辑
+                                    span.text-main-color |
+                                    a#count-2 统计
+                                    span.text-main-color |
                                     a 删除
                             tr
                                 td 培训返程日统计
@@ -1020,41 +1023,42 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 已结束
                                 td
-                                    a 统计
-                                    span |
+                                    a#count-3 统计
+                                    span.text-main-color |
                                     a 删除
                 #classmanage-content-4.display-none
                     section.section
-                        .form
-                            .clearfix
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                            .form-row
-                                label.label.required 说明
-                                .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
-                        .text-center > .btn.bg-gray 提交
+                        .container
+                            .form.align-left
+                                .clearfix
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                .form-row
+                                    label.label.required 说明
+                                    .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
+                            .text-center > .btn.bg-gray 提交
                 #classmanage-content-5.display-none
                     .container
                         section.section.w-half
@@ -1065,7 +1069,7 @@ view('managements-classmanage')
                                 input(type="radio" name="rank")
                                 label.layout-mr 否
                                 label.strong 显示规则：
-                                select
+                                select.select-width
                                     option 显示前十名
                                     option 显示全部
                             .classnotice-content.layout-mt
@@ -1076,9 +1080,11 @@ view('managements-classmanage')
                 #classmanage-content-6.display-none
                     .container
                         section.section
-                            span 共
-                            span.text-main-color 10
-                            span 条评论
+                            .border.bottom
+                                .m-bottom
+                                    span 共
+                                    span.text-main-color 10
+                                    span 条评论
                             .comment-list > ul
                                 li
                                     .user-pic > img(src="images/1.png")
@@ -1145,6 +1151,49 @@ view('managements-classmanage')
                                         .text-center
                                             .sub-title 照片名称
                                             .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+
 
 view('managements-evaluate')
     .container.bg-highlight
@@ -1182,7 +1231,7 @@ view('managements-evaluate')
                                 td 评估
                                 td 2017-03-01 19:00
                                 td 2017-03-01 19:00
-                                td > a 查看
+                                td > a#watchevaluate 查看
                         .layout-mt-small
                         table.table
                             tr
@@ -1201,7 +1250,7 @@ view('managements-evaluate')
                                     i.iconfont.icon-note
                                 td 0%
                                 td
-                                    a 查看
+                                    a#studentwatch 查看
                                     span |
                                     a 统计
                             tr

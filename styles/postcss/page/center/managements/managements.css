@@ -9,7 +9,12 @@
 @import "managements-page.css";
 @import "managements-classmanage.css";
 @import "watchexam.css";
-@import "taskdetail.css";
+@import "watchsurvey.css";
+@import "watchevaluate.css";
 @import "watchbring.css";
 @import "managements-trainsummary.css";
 @import "managements-learneffect.css";
+@import "addattendance.css";
+@import "attendancelist.css";
+@import "leave.css";
+@import "classedit.css";

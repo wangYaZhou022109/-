@@ -16,12 +16,12 @@ exports.showIndex = function(id) {
     return this.app.show('content', 'exam/index', { id: id });
 };
 
-exports.showPaper = function(fir, id) {
-    return this.app.show('content', 'exam/exam/paper', { examId: id });
+exports.showPaper = function(id) {
+    return this.app.viewport.showIt('content', 'exam/exam/paper', { examId: id });
 };
 
-exports.showMarkPaper = function(fir, id) {
-    return this.app.show('content', 'exam/exam/mark-paper', { examRecordId: id });
+exports.showMarkPaper = function(id) {
+    return this.app.viewport.showIt('content', 'exam/exam/mark-paper', { examRecordId: id });
 };
 
 exports.showAnswerPaper = function(id) {

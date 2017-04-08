@@ -3,17 +3,17 @@
         & .text-width {
             width: 70%;
         }
-    }
-    & .form {
-        & .form-row {
-            & label.label {
-                width: calc(var(--base-gap)*4);
-            }
-            & label.label.text {
-                line-height: calac(var(--base-gap)*2);
-            }
-            & .content {
-                margin-left: calc(var(--base-gap)*5);
+        & .form {
+            & .form-row {
+                & label.label {
+                    width: calc(var(--base-gap)*4);
+                }
+                & label.label.text {
+                    line-height: calac(var(--base-gap)*2);
+                }
+                & .content {
+                    margin-left: calc(var(--base-gap)*5);
+                }
             }
         }
     }

@@ -79,15 +79,15 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var configId = payload.configId,
-                orgId = payload.orgId,
-                that = this,
+            var that = this,
                 homeConfig = this.models.homeConfig,
                 navs = this.models.navs;
-            homeConfig.params = { id: configId, orgId: orgId };
+            homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
+            homeConfig.clear();
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     navs.params.homeConfigId = homeConfig.data.id;
+                    navs.clear();
                     return that.get(navs);
                 }
                 return null;
@@ -129,7 +129,16 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions || {});
+    var payload = {};
+    if (document.cookie) {
+        document.cookie.split(';').forEach(function(item) {
+            var arr = item.split('=');
+            if (arr[1] !== 'undefined') {
+                payload[arr[0]] = arr[1];
+            }
+        });
+    }
+    this.dispatch('init', payload);
 };
 
 exports.afterRender = function() {

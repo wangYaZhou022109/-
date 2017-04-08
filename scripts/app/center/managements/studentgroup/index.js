@@ -3,5 +3,3 @@ exports.items = {
 };
 
 exports.title = '学员分组';
-
-exports.small = true;
