@@ -1,0 +1,29 @@
+#!handlebars
+
+module
+    form.vertical(data-region='main')
+
+view('main')
+    .row
+        .col-sm-12
+            label
+                .inline-block.m-right
+                .checkbox.inline-block.no-margin
+                    input(type='checkbox' id='isNoticeUser' value=1)
+                    label(for='isNoticeUser') 是否通知相关用户
+        .col-sm-12
+            textarea.col-sm-12
+                echo(state.noticeTemplate)
+    .row
+        .col-sm-3
+            label
+                .inline-block.m-right 调研链接
+        .col-sm-9
+            echo(state.researchUrl)
+
+    .row
+        .col-sm-3
+            label
+                .inline-block.m-right 调研二维码
+        .col-sm-9
+            #code

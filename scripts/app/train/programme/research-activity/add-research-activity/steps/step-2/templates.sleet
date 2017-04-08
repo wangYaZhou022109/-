@@ -1,0 +1,55 @@
+#! handlebars
+
+module
+    .exam-base-info.add-info-popup
+        .row
+            .col-sm-9(data-region='main')
+            .col-sm-3(data-region='side')
+
+view('main')
+    h3 > echo(research.name)
+    form.vertical
+        ul.question-list.paper.research-act-topic-box > each(dimensions)
+            p
+                echo(dimensionIndex)
+                span.p-left > echo(name)
+            each(questions)
+                li.question-item > .row
+                    .col-md-12.research-act-topic
+                        span.research-act-topic-s > echo(questionIndex typeDesc)
+                        div(data-dynamic-key=id)
+                    .col-md-12 > .row
+                        .col-xs-6
+                        .col-xs-6 > .text-right
+                            .inline-block > .row
+                                .col-xs-3 > i.pe-7s-up-arrow.pe-2x.pe-va.pointer(id='up-question-' + id)
+                                .col-xs-3 > i.pe-7s-bottom-arrow.pe-2x.pe-va.pointer(id='down-question-' + id)
+                                .col-xs-3 > i.pe-7s-note.pe-2x.pe-va.pointer(id='edit-question-' + id)
+                                .col-xs-3 > i.pe-7s-trash.pe-2x.pe-va.pointer(id='delete-question-' + id)
+
+
+view('side')
+    .research-list-box
+        h3.p-top 试题列表
+        .clearfix.research-act-list.text-center
+            .research-act-list-d#add-dimension 新增
+            .research-act-list-x |
+            .research-act-list-d#edit-dimension 编辑
+            .research-act-list-x |
+            .research-act-list-d#delete-dimension 删除
+        ul > each(dimensions)
+            li
+                p.clearfix
+                    input(type='radio' id='d-' + id name='dimension-radio' value=id)('checked')&if(checked)
+                    echo(name)
+                    i.pe-7s-bottom-arrow.pe-2x.pe-va.pointer.pull-right(id='down-' + id)
+                    i.pe-7s-up-arrow.pe-2x.pe-va.pointer.pull-right.m-right(id='up-' + id)
+                .research-list-num.clearfix > each(questions)
+                    span > echo(questionIndex)
+        .hr
+        .row.research-act-btn
+            .col-xs-3 > .btn.reverse#question-1 单选
+            .col-xs-3 > .btn.reverse#question-5 问答
+            .col-xs-3 > .btn.reverse#question-2 多选
+            .col-xs-3 > .btn.reverse#import 导入
+            .col-xs-3 > .btn#preview 预览

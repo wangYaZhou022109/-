@@ -1,0 +1,16 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    div#main-form
+        .row > .col-sm-12
+            label.required 可见范围
+                span > map("exam-type-desc", exam.type)
+            #audience-object
+        .row > .col-sm-3
+            label.required 是否推送个人中心
+            select.input#push-personal-center(name='pushPersonalCenter' 'readonly')
+                option(value='1')('selected')&if(check.pushPersonalCenter.yes) > string('yes')
+                option(value='0')('selected')&if(check.pushPersonalCenter.no) > string('no')

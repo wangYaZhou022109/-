@@ -1,0 +1,41 @@
+#! handlebars
+
+module > .achievement-content.content
+    .achievement-side(data-region='side')
+    .achievement-main(data-region='main')
+
+view('side')
+    .achievement-preview-top
+        .com-title.text-center 关闭
+
+    ul.achievement-preview > each(dimensions)
+
+        li.border.bottom(id='list-item-' + @index)
+            label > echo(name)
+            div(class='min-btn-groups') > each(questions)
+                compare(status 'eq' 'init')
+                    div(class='num min-btn')(id='q-' + id) > a(href='#mlj' + id ) > echo(questionIndex)
+                compare(status 'eq' 'current')
+                    div(class='num min-btn correct')(id='q-' + id) > a(href='#mlj' + id ) > echo(questionIndex)
+
+view('main')
+    .title-row.row
+        .col-sm-12 > .com-title > echo(research.name)
+
+    .row > .col-sm-12
+        span > setting('exam.research.questionary-detail') > echo(':' research.questionaryDetail)
+
+    .hr
+    .preview-content
+        if(isMutiple)
+            div > each(dimensions)
+                label.com-title
+                    echo(dimensionIndex name)
+                each(questions)
+                    div(data-dynamic-key=id)
+        else
+            label.com-title
+                echo(state.currentDimension.name '(' state.currentQuestion.index '/' state.currentDimension.questionSize ')')
+            div(data-dynamic-key=state.currentQuestion.id)
+            #  .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev')
+            #  .icon.pe-7s-angle-right-circle.pe-3x(id='next')

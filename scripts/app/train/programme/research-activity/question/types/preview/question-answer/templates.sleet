@@ -1,0 +1,19 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='options')
+
+view('content')
+    .row
+        .col-xs-6 > .com-title 问答题
+        #  .col-xs-6 > .m-top.text-right
+        #      | 本题分数：
+        #      echo(state.score)
+    p.question > @echo(state.content)
+
+
+view('options') > .answer
+    ul > each(options)
+        li(id='item-' + index)
+            .inline-block > label.no-margin(for='answer-item-1') > @echo(content)

@@ -1,9 +1,11 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    titleType = { ADD: 'add', EDIT: 'edit' };
 
 exports.items = {
     search: 'search',
     content: 'content',
-    'train/trainee/select-member-radio': { isModule: true }
+    'train/trainee/select-member-radio': { isModule: true },
+    'train/programme/research-activity/add-research-third-party': { isModule: true }
 };
 
 exports.title = '选择问卷';
@@ -51,6 +53,22 @@ exports.buttons = [{
         }
         if (callback) callback(content.getData());
         return true;
+    }
+}, {
+    text: '新增',
+    fn: function() {
+        var mod = this.items['train/programme/research-activity/add-research-third-party'],
+            researchId = this.store.models.research.data.id,
+            me = this;
+        this.app.viewport.modal(mod, {
+            researchId: researchId,
+            titleType: researchId ? titleType.EDIT : titleType.ADD,
+            callback: function(data) {
+                var callback = me.renderOptions.callback;
+                if (callback) callback(data);
+            }
+        });
+        return false;
     }
 }];
 

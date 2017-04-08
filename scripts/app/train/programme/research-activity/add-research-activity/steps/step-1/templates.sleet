@@ -1,0 +1,56 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .exam-base-info.row
+        .col-sm-4 > .popup-side
+            #exam-cover.examcover
+        .col-sm-8.left
+            .row > .col-sm-12
+                label.required > setting('exam.research.name')
+                input.input.mark(x-rule='required,maxLength:30' name='name' value=research.name)
+            .row
+                .col-sm-12
+                    label.required > setting('system.all.organization')
+                    #organization
+            .row
+                .col-sm-6
+                    label.required > setting('exam.research.publisher-organization')
+                    #publishOrganization
+                .col-sm-6
+                    label.required > setting('exam.research.publish-member')
+                    #publisherMember
+    .row
+        .col-sm-3
+            label.required > setting('exam.research.start-time')
+            input.input.mark#start-time(name='startTime' value=dateTime(research.startTime) x-rule="required" x-action='change')
+        .col-sm-3
+            label.required > setting('exam.research.end-time')
+            input.input.mark#end-time(name='endTime' value=dateTime(research.endTime) x-rule="required" x-action='change')
+        .col-sm-3
+            label.required > setting('exam.research.is-anonymity')
+            select.input#is-anonymity(name='isAnonymity' 'readonly')
+                option(value='1')('selected')&if(check.isAnonymity.yes) > string('yes')
+                option(value='0')('selected')&if(check.isAnonymity.no) > string('no')
+        .col-sm-3
+            label.required > setting('exam.research.permit-view-count')
+            select.input#permit-view-count(name='permitViewCount' 'readonly')
+                option(value='1')('selected')&if(check.permitViewCount.yes) > string('yes')
+                option(value='0')('selected')&if(check.permitViewCount.no) > string('no')
+    .row
+        .col-sm-3
+            label.required 答卷方式
+            select.input#answer-paper-rule(name='answerPaperRule' 'readonly')
+                option(value='1')('selected')&if(check.answerPaperRule.mutiple) 一页所有题
+                option(value='2')('selected')&if(check.answerPaperRule.single) 一页一题
+    .row
+        .col-sm-12
+            label 选择标签
+            #topic
+
+    .row > .col-sm-12
+        label > setting('exam.research.questionary-detail')
+        textarea#questionary-detail.input.w-full( placeholder='问卷须知...' rows='5' x-rule='maxLength:3000' x-target='questionary-detail')
+            echo(research.questionaryDetail)
