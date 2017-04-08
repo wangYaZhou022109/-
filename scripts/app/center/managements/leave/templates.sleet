@@ -1,0 +1,112 @@
+#!handlebars
+
+module > .leave-page
+    .leave-title(data-region="leave-title")
+    .leave-content(data-region="leave-content")
+
+view('leave-title')
+    .border.bottom.solid
+        .layout-mt-small.clearfix
+            .leave-title-item.pull-left.layout-mr
+                span 签到名称：
+                span 2016-1-9
+                span 上午签到
+            .leave-title-item.pull-left.layout-mr
+                span 2016-1-9 9:00
+                span 至
+                span 2016-1-9 9:00
+            .leave-title-item.pull-left.layout-mr
+                span 迟到时间：
+                span 2016-1-9 9:00
+        .layout-mt-small.clearfix.layout-mb-small
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                span.m-right 应出勤
+                span 28
+                span 人
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-time.m-right.text-main-color
+                span.m-right 正常签到
+                span 24
+                span.m-right 人
+                span.m-right 迟到
+                span 2
+                span.m-right 人
+                span.m-right 未签到
+                span 2
+                span 人
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user.m-right
+                span.m-right 请假
+                span 1
+                span 人
+
+view('leave-content')
+    .layout-mt-small
+        .attendancelist-search.clearfix
+            .pull-left
+                input.input.layout-mr-small(placeholder="请输入员工姓名")
+                label 签到状态
+                select
+                    option 全部
+                    option 正常
+                    option 迟到
+                    option 缺勤
+                    option 请假
+            .pull-right
+                .btn 查询
+                .btn.m-left 导出
+                .btn.m-left 批量签到
+        .layout-mt-small
+            table.table
+                tr
+                    th 员工编号
+                    th 员工姓名
+                    th 员工电话
+                    th 审核结果
+                    th 操作
+                tr
+                    td 18576787846
+                    td 某某某
+                    td 18576787846
+                    td 待审批
+                    td > a 审批
+                tr
+                    td 18576787846
+                    td 某某某
+                    td 18576787846
+                    td 同意
+                    td > a 审批
+                tr
+                    td 18576787846
+                    td 某某某
+                    td 18576787846
+                    td 不同意
+                    td > a 审批
+                tr
+                    td 18576787846
+                    td 某某某
+                    td 18576787846
+                    td 不同意
+                    td > a 审批
+                tr
+                    td 18576787846
+                    td 某某某
+                    td 18576787846
+                    td 不同意
+                    td > a 审批
+                tr
+                    td 18576787846
+                    td 某某某
+                    td 18576787846
+                    td 不同意
+                    td > a 审批
+        .pagination
+            ul
+                li 首页
+                li 上一页
+                li
+                    input(value="3")
+                    span /10
+                li 下一页
+                li 尾页
