@@ -27,6 +27,7 @@
 
         & .sub {
             text-indent: 2em;
+            display: none;
         }
 
         & .menu-text,
@@ -36,11 +37,24 @@
 
             &:hover,
             &.current {
-                background: var(--white);
+                background-color: var(--white);
                 color: var(--main-color);
             }
         }
 
+        & .menu-text.show-menu{
+            & .up {
+                display: block;
+            }
+
+            & .down {
+                display: none;
+            }
+
+            & + .sub {
+                display: block;
+            }
+        }
 
         & .has-child .menu-text:hover {
             background: none;
