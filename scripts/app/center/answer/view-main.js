@@ -12,7 +12,7 @@ exports.getEntityModuleName = function(key) {
     if (typeof key === 'string' && key !== '') {
         url = key;
     }
-    return 'center/ask/' + url;
+    return 'center/answer/' + url;
 };
 exports.getEntity = function() {
     return {

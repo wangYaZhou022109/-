@@ -23,7 +23,7 @@ exports.store = {
                 subject = this.models.subject,
                 ids;
             this.models.region.set(options.region);
-            this.models.state.set(options.state);
+            this.models.state.set(options.state || {});
             subject.set(options.subject);
             if (businessTopics && businessTopics.length > 0) {
                 ids = _.map(businessTopics, 'topicId').join(',');

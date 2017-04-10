@@ -27,12 +27,12 @@ view('main')
                     td > map('is-required' isRequired)
                     td
                         if(beginTime)
-                            dateTime(beginTime)
+                            echo(beginTimeStr)
                         else
                             echo('—')
                     td
                         if(finishTime)
-                            dateTime(finishTime)
+                            echo(finishTimeStr)
                         else
                             echo('—')
                     td > echo(studyTotalTime)
@@ -55,13 +55,13 @@ view('detail')
             th > setting('person.archives.course.detail')
         tbody > each(sectionList)
             tr
-                td.nowrap > .text-overflow > echo(courseChapterSection.name)
-                td > map('section-type' courseChapterSection.sectionType)
-                td > map('is-required' courseChapterSection.required)
-                td > map('course-info-study-status' finishStatus)
+                td.nowrap > .text-overflow > echo(name)
+                td > map('section-type' sectionType)
+                td > map('is-required' required)
+                td > map('course-info-study-status' progress.finishStatus)
                 td
                     if(showRate)
-                        echo(completedRate)
+                        echo(progress.completedRate)
                     else
                         a > setting('person.archives.details')
                 else

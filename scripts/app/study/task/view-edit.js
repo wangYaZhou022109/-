@@ -5,7 +5,7 @@ exports.bindings = {
 };
 
 exports.type = 'form';
-exports.title = '提交任务';
+exports.title = '提交作业';
 
 exports.buttons = [{
     text: '提交',
