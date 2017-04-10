@@ -84,6 +84,7 @@ exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
         if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
+            console.log(1);
             me.dispatch('page');
         }
     });

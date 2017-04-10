@@ -1,3 +1,4 @@
+var $ = require('jquery');
 exports.bindings = {
     menus: true,
     navs: true
@@ -17,6 +18,7 @@ exports.handlers = {
     showContent: function(id, e, element) {
         var url = element.getAttribute('href').slice(2),
             params = {};
+        $(window).unbind('scroll');
         if (url === 'home' && document.cookie) {
             document.cookie.split(';').forEach(function(item) {
                 var arr = item.split('=');

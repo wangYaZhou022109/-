@@ -17,6 +17,7 @@ exports.handlers = {
     showDetails: function(payload) {
         var data = { },
             id = payload;
+        $(window).unbind('scroll');
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
             this.app.show('content', 'ask/myquiz/details', { id: data[1] });
