@@ -16,6 +16,7 @@ exports.store = {
         init: function() {
             var content = this.models.content;
             content.set({ id: 1222 });
+            // console.log(content);
             return this.get(content);
         },
         follow: function(payload) {
