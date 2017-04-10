@@ -23,11 +23,11 @@ exports.store = {
             url: '../train/bus/undo'
         },
         optionList: {
-            url: '../train/busValue',
+            url: '../train/bus-value',
             data: []
         },
         optionModel: {
-            url: '../train/busValue'
+            url: '../train/bus-value'
         },
         state: { data: {} },
         delOptionList: { data: [] },
@@ -119,6 +119,18 @@ exports.store = {
             });
             target = optionList[index];
             target.name = data.name;
+            target.explain = data.explain;
+            this.models.optionList.changed();
+        },
+        updateExplain: function(data) {
+            var optionList = this.models.optionList.data,
+                target,
+                index;
+            index = optionList.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = optionList[index];
+            target.explain = data.explain;
             this.models.optionList.changed();
         },
         remove: function(payload) {

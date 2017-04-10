@@ -15,8 +15,7 @@ exports.events = {
     'click addOption': 'addOption',
     'click label-option-*': 'changeName',
     'change input-option-*': 'updateName',
-    'click label-op-*': 'changeExplain',
-    'change input-op-*': 'updatExplain',
+    'change input-explain-*': 'updateExplain',
     'click del-option-*': 'delOption',
 };
 
@@ -27,18 +26,15 @@ exports.handlers = {
     },
     updateName: function(id) {
         var val = $(this.$('input-option-' + id)).val();
+        var explain = $(this.$('input-explain-' + id)).val();
         if (val === '') {
             this.app.message.alert('选项名称不能为空');
         } else {
-            this.module.dispatch('updateName', { id: id, name: val });
+            this.module.dispatch('updateName', { id: id, name: val, explain: explain });
         }
     },
-    changeExplain: function(id) {
-        $(this.$('input-op-' + id)).css('display', 'block');
-        $(this.$('label-op-' + id)).css('display', 'none');
-    },
-    updatExplain: function(id) {
-        var val = $(this.$('input-op-' + id)).val();
+    updateExplain: function(id) {
+        var val = $(this.$('input-explain-' + id)).val();
         this.module.dispatch('updateExplain', { id: id, explain: val });
     },
     delOption: function(id) {
@@ -62,7 +58,7 @@ exports.handlers = {
         bus.startTime = startTime;
         bus.endTime = endTime;
         bus.classId = classId;
-        this.module.dispatch('addOption', '新的选项');
+        this.module.dispatch('addOption', '选项名称');
     }
 };
 

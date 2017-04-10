@@ -49,6 +49,8 @@ view('edit') > form.vertical
                 td
                     label(id='label-option-' + id data-name='id' data-value=id) > echo(name)
                     input(id='input-option-' + id value=name style='display:none;' data-name='id' data-value=id)
+                    br
+                    input(id='input-explain-' + id value=explain placeholder="说明内容(可为空)")
                 td
                     a(id='del-option-'+id data-name='id' data-value=id) 删除
             tr
