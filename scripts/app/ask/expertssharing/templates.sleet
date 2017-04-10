@@ -2,7 +2,7 @@
 module
     div(data-region='list')  
 view('list')
-    each(trends)
+    each(page)
         li
             .user-pic > img(src=createUser.headPortrait)
             .comment-content
@@ -40,7 +40,6 @@ view('list')
                                         .item(id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
                                     else
                                         .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
-                                    #  .item > string('share')
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             i.iconfont.icon-share-2(title='分享')
@@ -48,7 +47,7 @@ view('list')
                                                 .item > div(id ='shareTo-qzone' + questionId) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo' + questionId) > i.iconfont.icon-sina + span 分享到新浪微博
                                                 .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
-                                    .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
+                                    .item > span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=createUser.organizationId)
@@ -69,7 +68,7 @@ view('list')
                                                     .item > div(id ='shareTo-qzone' + questionId) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                     .item > div(id ='shareTo-weibo' + questionId) > i.iconfont.icon-sina + span 分享到新浪微博
                                                     .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
-                                        .item > span(id ='trend-report-' + trendsType + '_' + questionId data-name='id' data-value=trendsType +'_' + questionId) > string('report')
+                                        .item > span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
                                         compare(createUserId 'eq' me)
                                             compare(discussList.length 'eq' 0)
                                                 .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')

@@ -1,5 +1,5 @@
-var _ = require('lodash/collection');
-
+var _ = require('lodash/collection'),
+    helpers = require('./app/util/helpers');
 exports.bindings = {
     progressList: true,
     progress: false,
@@ -55,6 +55,8 @@ exports.dataForTemplate = {
                 time = hour + ':' + time;
             }
             progress.studyTotalTime = time;
+            progress.beginTimeStr = helpers.dateMinute(progress.beginTime);
+            progress.finishTimeStr = helpers.dateMinute(progress.finishTime);
         });
         return data.progressList;
     },

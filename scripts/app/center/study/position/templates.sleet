@@ -20,7 +20,7 @@ view('main')
                     #viewPdf
         section.section
             .h3 > setting('persion.position.qualification')
-            .layout-mt-small
+            p.layout-mt-small
                 @echo(position.desc)
         section.section
             .h3 > setting('persion.position.requirements')

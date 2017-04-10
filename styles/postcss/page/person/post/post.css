@@ -1,6 +1,12 @@
-.person-post-page{
+.person-post-main {
     & .post-description-content {
         min-height: 20em;
         background: var(--bg-color);
+    }
+
+    & .pdf-view-toolbar {
+        padding: 0;
+        box-shadow: none;
+        border-bottom: 1px solid #dedede;
     }
 }

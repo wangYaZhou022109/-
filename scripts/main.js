@@ -12,9 +12,9 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 66,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.1.10'
+    clientId: 4,
+    provider: 'https://oauth9.zhixueyun.com',
+    returnTo: 'http://192.168.9.6/front'
 };
 // @endif
 
@@ -61,7 +61,7 @@ require('./app/ext/flatpickr');
 require('./app/ext/tree');
 require('./app/ext/background-pager');
 require('./app/ext/qr-code');
-
+require('./app/ext/rich-text');
 D.adapt({
     getFormData: function(form) {
         var result = {};
