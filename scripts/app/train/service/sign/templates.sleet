@@ -11,6 +11,7 @@ view('main')
                 label 签到规则
                 .tag-btn.active#half 半天
                 .tag-btn.active 全天
+                .tag-btn.active 不签到
             .pull-right
                 .btn#addSign > echo('添加')
                 .btn#batchDelete > echo('删除')

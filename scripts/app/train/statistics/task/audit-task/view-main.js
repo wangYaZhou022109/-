@@ -2,6 +2,7 @@ exports.bindings = {
     all: true,
     download: false,
     state: true,
+    mainState: true
 };
 
 exports.events = {

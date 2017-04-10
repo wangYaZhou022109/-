@@ -96,10 +96,11 @@ view('twoBrings') > form.vertical
             textarea#content2(name='content2' value='' rows=2 x-rule='required') > echo(twoBringsResult.content2)
     br
     .row
-        .col-sm-2
-            compare(id)
+        if(twoBringsResult.id)
+            .col-sm-2           
                 btn.btn(id='close') > echo('确定')
-            else
+        else
+            .col-sm-2
                 btn.btn(id='commit') > echo('提交')
 
 view('questionnaire')

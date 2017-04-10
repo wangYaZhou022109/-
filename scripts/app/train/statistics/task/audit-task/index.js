@@ -11,6 +11,7 @@ exports.store = {
         approval: { url: '../train/task-member/approval' },
         download: { url: '../human/file/download' },
         preview: { url: '../human/file/preview' },
+        mainState: { data: { isExplain: true, isDescription: true } },
         state: { data: {} },
     },
     callbacks: {
@@ -29,6 +30,7 @@ exports.store = {
                 me = this;
             approval.set(payload);
             me.save(approval).then(function() {
+                me.app.message.success('审批成功');
                 me.get(all);
             });
         },

@@ -7,26 +7,40 @@ exports.bindings = {
     download: false,
     preview: false,
     state: true,
+    mainState: true,
 };
 
 exports.events = {
     'click preview-*': 'preview',
+    'click explain': 'explain',
+    'click description': 'description',
 };
 
 exports.handlers = {
-    viewDesc: function() {
-        this.module.dispatch('preview', {
-            flag: 'desc'
-        });
-    },
     preview: function(id) {
+        var mainState = this.bindings.mainState.data;
         var docUrl = this.bindings.preview.getFullUrl() + '/' + id,
             param = {
                 flag: 'doc',
                 docUrl: docUrl
             };
+        mainState.isExplain = false;
+        mainState.isDescription = false;
+        this.bindings.mainState.changed();
         this.module.dispatch('preview', param);
-    }
+    },
+    explain: function() {
+        var mainState = this.bindings.mainState.data;
+        mainState.isExplain = true;
+        mainState.isDescription = true;
+        this.bindings.mainState.changed();
+    },
+    description: function() {
+        var mainState = this.bindings.mainState.data;
+        mainState.isExplain = true;
+        mainState.isDescription = false;
+        this.bindings.mainState.changed();
+    },
 };
 
 exports.actions = {

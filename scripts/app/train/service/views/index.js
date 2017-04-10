@@ -120,6 +120,7 @@ exports.store = {
         twoBring: function() {
             var twoBringsResult = this.models.twoBringsResult,
                 classId = this.models.classId.data.classId;
+            twoBringsResult.clear();
             twoBringsResult.params = { classId: classId };
             return this.get(twoBringsResult);
         },
