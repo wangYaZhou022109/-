@@ -30,15 +30,15 @@ view('head')
                 li.border.right > echo('提交人：' progress.commitMemberName)
                 li.border.right > echo('审核人：' progress.auditMemberName)
                 li.border.right > echo('得分：' progress.score)
-        .btn.white.m-right#closeTask 关闭任务
+        .btn.white.m-right#closeTask 关闭作业
         compare(progress.finishStatus 'eq' 0)
-            .btn#submitTask 提交任务
+            .btn#submitTask 提交作业
         compare(progress.finishStatus 'eq' 6)
             .btn#submitTask 重新编辑
 
 view('main')
     .preview-content
-        .h3.m-bottom 任务说明
+        .h3.m-bottom 作业说明
         p.text-overflow
             span > @echo(task.description)
             # a.pointer#viewDesc 查看详细

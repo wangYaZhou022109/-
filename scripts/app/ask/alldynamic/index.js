@@ -35,23 +35,20 @@ exports.store = {
         page: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            var page = params.page;
             var me = this;
             params.id = 'null';
             trends.set(params);
             this.post(trends).then(function() {
-                me.models.page.params.page = page + 1;
+                me.models.page.params.page++;
             });
         },
         follow: function(payload) {
             var follow = this.models.follow;
-            // console.log(payload);
             follow.set(payload);
             return this.post(follow);
         },
         unfollow: function(payload) {
             var follow = this.models.unfollow;
-            // console.log(payload);
             follow.set(payload);
             return this.put(follow);
         },
@@ -87,6 +84,7 @@ exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
         if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
+            console.log(1);
             me.dispatch('page');
         }
     });

@@ -60,9 +60,6 @@
             @apply --clearfix;
             padding-top: calc(var(--large-space) / 1.5);
             padding-bottom: calc(var(--large-space) / 1.5);
-            &:hover {
-                background-color: var(--bg-color);
-            }
         }
         & .title-row {
             float: left;
@@ -96,9 +93,13 @@
                 padding-right: calc(var(--large-space) / 2);
             }
             & .iconfont {
-                margin: calc(var(--space) / 1.5) var(--space) 0 var(--space);
-                font-size: var(--h2);
+                margin: calc(var(--space) / 2) 0 0 1em;
                 cursor: pointer;
+                width: 1em;
+
+                &:hover {
+                    color: var(--color-error);
+                }
             }
         }
         & .tag {
@@ -111,6 +112,8 @@
         & .time {
             margin-top: var(--space);
             color: var(--font-tip-color);
+            font-size: var(--small-font);
+            white-space: nowrap;
         }
 
         & .img {

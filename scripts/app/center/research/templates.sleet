@@ -10,7 +10,7 @@ view('main') > form
                 | 参与时间
                 i.iconfont.icon-sort-desc
             .pull-left
-                .inline-block.m-left.sub-text 要求：
+                .inline-block.m-left.sub-text 状态：
                 .item(id='item-all' class=if(search.all 'active' '')) > span 全部
                 .item(id='item-wait-join' class=if(search.waitJoin 'active' '')) > span 待参加
                 .item(id='item-wait-start' class=if(search.waitStart 'active' '')) > span 待开始

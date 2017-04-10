@@ -22,10 +22,10 @@ view('main')
                     td > echo(i)
                     td.nowrap > .text-overflow > echo(subject)
                     td > echo(lecturerNames)
-                    td > dateMinute(startTime)
-                    td > dateMinute(endTime)
+                    td > echo(startTimeStr)
+                    td > echo(endTimeStr)
                     td > map('gensee-status' status)
-                    td > dateMinute(joinTime)
+                    td > echo(joinTimeStr)
                     else
                         tr > td(colspan='7') > p.text-center > string('no-data')
         #pager.pagination
