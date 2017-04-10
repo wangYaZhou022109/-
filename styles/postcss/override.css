@@ -63,6 +63,10 @@
     right: auto;
 }
 
+.pdfViewer {
+    background: white;
+}
+
 .pdfViewer .page {
   border: none;
 }
