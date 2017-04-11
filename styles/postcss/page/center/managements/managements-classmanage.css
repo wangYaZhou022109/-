@@ -3,6 +3,9 @@
         & .form-row-width {
             width: 33.3%;
         }
+        & .train-padding {
+            padding-right: var(--large-space);
+        }
         & .photos {
             width: 80%;
             & li {

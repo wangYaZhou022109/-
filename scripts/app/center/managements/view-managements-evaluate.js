@@ -6,7 +6,9 @@ exports.events = {
     'click taskdetail-*': 'showTaskdetail',
     'click learndetail-*': 'showLearndetail',
     'click watchbring-*': 'showWatchbring',
-    'click watchsurvey': 'showWatchsurvey'
+    'click watchsurvey': 'showWatchsurvey',
+    'click watchevaluate': 'showWatchevaluate',
+    'click studentwatch': 'showStudentwatch'
 };
 
 exports.handlers = {
@@ -32,6 +34,14 @@ exports.handlers = {
     },
     showWatchsurvey: function() {
         var model = this.module.items['center/managements/watchsurvey'];
+        this.app.viewport.modal(model);
+    },
+    showWatchevaluate: function() {
+        var model = this.module.items['center/managements/watchevaluate'];
+        this.app.viewport.modal(model);
+    },
+    showStudentwatch: function() {
+        var model = this.module.items['center/managements/studentwatch'];
         this.app.viewport.modal(model);
     }
 };

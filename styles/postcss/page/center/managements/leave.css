@@ -1,0 +1,12 @@
+.leave-page {
+    & .leave-title {
+        & .iconfont {
+            font-size: var(--base-gap);
+        }
+    }
+    & .leave-content {
+        & select {
+            width: calc(var(--large-space)*7);
+        }
+    }
+}

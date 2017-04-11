@@ -1,0 +1,115 @@
+#!handlebars
+
+module > .watchevaluate-page
+    .watchevaluate(data-region="watchevaluate")
+
+view('watchevaluate')
+    .watchsurvey-title
+        span 评估名称：
+        span 评估评估评估评估
+    .evaluate-total.layout-mt-small
+        span 已参加人数:
+        span 50
+    .layout-mt-small
+        .bg-color-3.search-padding
+            .search-item
+                .inline-block.input-width.input-padding
+                    label.block 员工编号
+                    input.input.m-top
+                .inline-block.input-width.input-padding
+                    label.block 姓名
+                    input.input.m-top
+                .inline-block.input-width.input-padding
+                    label.block 状态
+                    select.m-top
+                        option 全部
+                        option 合格
+                        option 不合格
+                        option 待评卷
+                .btn-block.vertical-bottom.btn-width
+                    label
+                    .btn 搜索
+        .clearfix.layout-mt-small
+            .btn.pull-right 导出
+        .m-top
+            table.table
+                tr
+                    th 序号
+                    th 员工编号
+                    th 姓名
+                    th 所属部门
+                    th 开始时间
+                    th 提交时间
+                    th 得分
+                tr
+                    td 1
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 2
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 3
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 4
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 5
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 6
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 7
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 8
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56
+                tr
+                    td 9
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 2016-03-04 17:00
+                    td > a 56

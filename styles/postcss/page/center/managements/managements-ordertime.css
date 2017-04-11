@@ -1,0 +1,21 @@
+.managements-page {
+    & .managements-ordertime {
+        & .form {
+            & .form-row.specical {
+                width: 50%;
+                & label.label {
+                    width: calc(var(--space)*10);
+                }
+                & .content {
+                    margin-left: calc(var(--base-gap)*3);
+                }
+                & .content > span {
+                    line-height: var(--input-height);
+                }
+                & .content > label {
+                    line-height: var(--input-height);
+                }
+            }
+        }
+    }
+}
