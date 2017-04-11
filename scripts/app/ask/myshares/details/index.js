@@ -8,6 +8,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        concern: { url: '../ask-bar/my-share/findconcern' },
         followcount: { data: { menu: 'followcount' } },
         relevantexperts: { data: { menu: 'relevantexperts' } },
         relatedquestions: { data: { menu: 'relatedquestions' } },
@@ -27,9 +28,10 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} },
         follow: {
-            url: '../ask-bar/question-details/boutique'
+            url: '../ask-bar/my-share/concern'
         },
-        unfollow: { url: '../ask-bar/concern/unfollow' }
+        unfollow: { url: '../ask-bar/my-share/cancel-concern' },
+        praise: { url: '../ask-bar/my-share/praise' }
     },
     callbacks: {
         refreshrelpy: function() {
@@ -107,12 +109,6 @@ exports.store = {
             discussboutique.set(data);
             return this.post(discussboutique);
         },
-        enjoy: function(payload) {
-            var data = payload;
-            var enjoy = this.models.enjoy;
-            enjoy.set(data);
-            return this.post(enjoy);
-        },
         report: function(payload) {
             var data = payload;
             var report = this.models.report;
@@ -120,31 +116,41 @@ exports.store = {
             return this.post(report);
         },
         follow: function(payload) {
-            var follow = this.models.follow,
-                me = this,
-                expert = this.models.expert;
+            // var follow = this.models.follow,
+            //     me = this,
+            //     expert = this.models.expert;
+            // follow.set(payload);
+            // expert.set({ id: this.models.expert.data.id, concernType: '1' });
+            var follow = this.models.follow;
             follow.set(payload);
-            expert.set({ id: this.models.expert.data.id, concernType: '1' });
-            return this.post(follow).then(function() {
-                me.app.message.success('关注成功');
-                me.get(expert);
-            });
+            console.log(payload);
+            return this.put(follow);
+            // return this.post(follow).then(function() {
+            //     me.app.message.success('关注成功');
+            //     me.get(expert);
+            // });
         },
         unfollow: function(payload) {
-            var unfollow = this.models.unfollow,
-                me = this,
-                expert = this.models.expert;
-            expert.set({ id: this.models.expert.data.id, concernType: '1' });
-            unfollow.set({ id: payload.id, concernType: '1' });
-            return this.put(unfollow).then(function() {
-                me.app.message.success('取消成功');
-                me.get(expert);
-            });
-        }
+            var unfollow = this.models.unfollow;
+            unfollow.set(payload);
+            console.log(payload);
+            return this.put(unfollow);
+        },
+        praise: function(payload) {
+            var praise = this.models.praise;
+            praise.set(payload);
+            return this.put(praise);
+        },
+        concern: function(payload) {
+            var concern = this.models.concern;
+            concern.set(payload);
+            return this.get(concern);
+        },
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('questionDetails', this.renderOptions);
+    this.dispatch('questionDetails', this.renderOptions);
+    this.dispatch('concern', this.renderOptions);
 };
 
