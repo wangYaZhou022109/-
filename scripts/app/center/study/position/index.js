@@ -20,7 +20,8 @@ exports.store = {
                 var list = data[0];
                 if (list && list.length > 0) {
                     D.assign(studyList.params, {
-                        positionId: list[0].id
+                        positionId: list[0].id,
+                        jobId: list[0].jobId
                     });
                     me.get(studyList);
                 }

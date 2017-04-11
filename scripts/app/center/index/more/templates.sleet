@@ -10,5 +10,5 @@ view('main')
             p > @echo(content)
             .pull-right
                 .sub-text > echo('来自 ') + echo(organization.name)
-                .text-tips.m-top > dateTime(lastModifyTime)
+                .text-tips.m-top > dateTime(publishTime)
         .hr.dashed
