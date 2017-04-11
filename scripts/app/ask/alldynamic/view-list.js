@@ -10,10 +10,20 @@ exports.bindings = {
 exports.events = {
     'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
-    'click trend-report-*': 'report'
+    'click trend-report-*': 'report',
+    'click myshares-details-*': 'sharesDetails'
 };
 
 exports.handlers = {
+    sharesDetails: function(payload) {
+        var data = { },
+            id = payload;
+        $(window).unbind('scroll');
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.show('content', 'ask/myshares/details', { id: data[1] });
+        }
+    },
     showDetails: function(payload) {
         var data = { },
             id = payload;

@@ -1,3 +1,4 @@
+var $ = require('jquery');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -10,13 +11,27 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 }
+        }
     },
     callbacks: {
         init: function() {
             var content = this.models.content;
-            content.set({ id: 1222 });
+            var params = this.models.page.params;
+            params.id = 'null';
+            content.set(params);
             return this.get(content);
+        },
+        page: function() {
+            var content = this.models.content;
+            var params = this.models.page.params;
+            params.id = 'null';
+            content.set(params);
+            this.post(content).then(function() {
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -57,5 +72,17 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    var me = this;
+    // console.log($('.person-list'));
+    $('.person-list').scroll(function() {
+        var page = me.store.models.page.params.page;
+        var size = me.store.models.page.params.size;
+        if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
+            if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
+                me.store.models.page.params.page++;
+                me.dispatch('page');
+            }
+        }
+    });
     return this.dispatch('init');
 };
