@@ -56,10 +56,20 @@ exports.store = {
     callbacks: {
         init: function(options) {
             var photos = this.models.photos,
+                download = this.models.download,
                 classId = options.classId;
             this.models.classId.data.classId = classId;
             photos.params = { classId: classId };
-            this.get(photos);
+            this.get(photos).then(function(data) {
+                _.map(data[0], function(obj) {
+                    var photo = obj;
+                    var img = new Image();
+                    photo.imageUrl = download.getFullUrl() + '?id=' + photo.attachmentId;
+                    img.src = photo.imageUrl;
+                    photo.image = img;
+                    return photo;
+                });
+            });
         },
         turnPage: function(data) {
             var state = this.models.state.data,
