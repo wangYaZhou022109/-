@@ -13,7 +13,7 @@ view('list')
                     span > echo(member.fullName)
                     span.sub-text > echo(questionDiscuss.createTime)
                 .comment-operation
-                    .pull-left > .sub-text > echo('来自问题：') + a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
+                    .pull-left > .sub-text > echo('来自问题：') + a(id='myquiz-details-' + questionDiscuss.id + '_' + id ) > echo(title)
                     .text-right
                         compare(pendingAudit.auditStatus 'eq' 0) 
                             .item > span.color-ing > string('auditStatus0')
