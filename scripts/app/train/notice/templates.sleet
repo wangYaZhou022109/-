@@ -55,11 +55,14 @@ view('main') > form.vertical
         .row(style='line-height:50px;')
             .col-sm-8
                 label > echo('二维码报名入口：')
-                #qrcode
+                .inline-block
+                    #qrcode
         div > ul
             li > echo('【重要】发文注意事项')
             li > echo('一、培训通知附件：')
-            li > echo('1、《中国移动学院培训报名及参加须知》(下载)（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。')
+            li > echo('1、《中国移动学院培训报名及参加须知》(')
+            a#download-doc(href=docUrl) > echo('下载') 
+            echo(')（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。')
             li > echo('2、《课程安排》')
             a#download-course(href=downUrl) > echo('(下载)')
             li > echo('二、培训通知发布路径及时间要求: ')
