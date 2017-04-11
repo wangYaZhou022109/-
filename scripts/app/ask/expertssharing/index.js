@@ -91,7 +91,7 @@ exports.afterRender = function() {
         // }
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
-            me.dispatch('page');
+            me.dispatch('page', me.renderOptions);
         }
     });
     return this.dispatch('page', this.renderOptions);
