@@ -26,9 +26,8 @@ exports.store = {
                 detailData = data,
                 me = this;
             detailData.classId = this.models.state.data.classId;
-            console.log(detailData);
             detail.set(detailData);
-            return this.save(detail);
+            return me.save(detail);
             // .then(function() {
             //     return me.get(detail);
             // });

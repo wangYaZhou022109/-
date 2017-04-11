@@ -1,0 +1,43 @@
+#!handlebars
+
+module > .train-class-page
+    .page-main-wrapper
+        .div(data-region='content')
+view('content') > form.vertical
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('培训人数') :
+            .inline-block > input.input(name='peopleDayEntity' readonly='true' value= settlement.peopleDayEntity)
+        .col-sm-4
+            .inline-block.com-title > echo('培训天数') :
+            .inline-block > input.input(name='dayNumberEntity' readonly='true' value= settlement.dayNumberEntity)
+        .col-sm-4
+            .inline-block.com-title > echo('培训人日') :
+            .inline-block > input.input(name='peopleNumberEntity' readonly='true' value= settlement.peopleNumberEntity)
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('结算人数') :
+            .inline-block > input.input( id ='input-class-1' name='peopleNumber' value= settlement.peopleNumber)
+        .col-sm-4
+            .inline-block.com-title > echo('结算天数') :
+            .inline-block > input.input(name='dayNumber' value= settlement.dayNumber)
+        .col-sm-4
+            .inline-block.com-title > echo('结算人日') :
+            .inline-block > input.input(name='peopleDay' value= settlement.peopleDay)
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('上课天数') :
+            .inline-block > input.input(name='attendDays' value= settlement.attendDays)
+        .col-sm-4
+            .inline-block.com-title > echo('结算月份') :
+            .inline-block > input.input(name='createMouth' value= settlement.createMouth)
+    .row
+        .col-sm-4
+            .inline-block.com-title > echo('说明') :
+            .inline-block > textarea.input(name='explain' rows='5') > echo(settlement.explain)
+        .col-sm-4
+            .inline-block > input.input(type='hidden' name='id' value=settlement.id)
+            .inline-block > input.input(type='hidden' name='classId' value=settlement.classId)
+    div.text-content
+        .buttons
+            btn.btn(id='saveBalanceSubmit') > echo('提交')
