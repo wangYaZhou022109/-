@@ -20,7 +20,8 @@ view('top')
         .base-info
             .info-row
                 span.h2 > echo(member.fullName)
-                span.lv Lv3
+                if(integral.integralGrade)
+                    span.lv > echo(integral.integralGrade.gradeName)
             .info-row
                 .item > a(href='#/train/response'  target='_parent')
                     i.iconfont.icon-warn
@@ -52,7 +53,7 @@ view('notice')
                 .icon#showMore > .iconfont.icon-more
             ul > each(announcements)
                 li.clearfix
-                    .pull-right.sub-text.layout-mr > dateTime(lastModifyTime)
+                    .pull-right.sub-text.layout-mr > dateTime(publishTime)
                     .m-right > echo(title)
 
 view('menu')

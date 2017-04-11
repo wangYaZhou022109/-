@@ -12,7 +12,10 @@ exports.events = {
 exports.actions = {
     'click setEssenceStatus-*': 'setEssenceStatus',
     'click shut-*': 'shut',
-    'click discuss-top-*': 'discusstop'
+    'click discuss-top-*': 'discusstop',
+    'click follow-*': 'follow',
+    'click unfollow-*': 'unfollow',
+    'click publish-*': 'publish'
 };
 exports.handlers = {
     dynamic: function() {
@@ -54,6 +57,25 @@ exports.dataForActions = {
     },
     discusstop: function(payload) {
         return payload;
+    },
+    follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    unfollow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    publish: function(payload) {
+        return payload;
     }
 };
 exports.actionCallbacks = {
@@ -68,6 +90,14 @@ exports.actionCallbacks = {
     discusstop: function(payload) {
         this.app.message.success('置顶成功！');
         this.module.dispatch('refresh', payload);
+    },
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
     }
 };
 exports.dataForTemplate = {

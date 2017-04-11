@@ -13,5 +13,15 @@
         & td {
             text-align: center;
         }
+        & .minimize {
+            border-radius: 50%;
+            background-color: var(--main-color);
+            width: calc(var(--large-space)/2);
+            height: calc(var(--large-space)/2);
+            color: var(--white);
+            cursor: pointer;
+            line-height: calc(var(--large-space)/2);
+            text-align: center;
+        }
     }
 }

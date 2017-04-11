@@ -17,7 +17,10 @@ view('list')
                     .comment-operation
                         .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                         .text-right
-                            .item > a.normal(href='javascript:;') 取消关注
+                            compare(concernNum 'gt' 0)  
+                                .item(id='unfollow-1_' + id data-name='id' data-value='1_' + id ) > echo('+') + string('unfollow')
+                            else
+                                .item(id='follow-1_'  + id data-name='id' data-value='1_' + id) > echo('+') + string('follow')
                             .item > a.normal(href='javascript:;') 添加讨论
                             .item > a(id='setEssenceStatus-' + id) > echo('加精')
                             .item > a(id='discuss-top-' +questionId) > echo('置顶')
@@ -31,32 +34,11 @@ view('list')
                                             li 分享2
                                             li 分享3
                             .item > a.normal(href='javascript:;') 举报
+                            form.comment-reply(id ='comment-reply-' + id)
+                                    textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                    input.input(type='hidden' name='organizationId' value=organizationId)
+                                    input.input(type='hidden' name='id' value=id)
+                                    .btn(id='publish-' + id) > string('publish')
                     .comment-reply.m-top
                         textarea.input.w-full.block(rows="1")
                         .btn 回复
-
-    #  each(trends)
-    #      ul
-    #          li(style='font-weight:bold')
-    #              compare(thumbnail 'ne' '')
-    #                  .img(style='height:100px;width:120px;float:left;') > img(src=thumbnail )
-    #              a(id='dynamic-' + id + ',' + questionId data-name='id' data-value= id + ',' + questionId href='javascript:;') > echo(title) 
-    #              .img(style='height:80px;width:80px;float:right;') > img(src=createUser.headPortrait )
-    #          li(style='text-overflow:ellipsis;white-space:nowrap;max-width: 1000px;overflow: hidden;')
-    #              echo(content) 
-    #          li
-    #              echo(createUser.fullName) + echo('.') + string('ask-a-question') + echo('.') + echo(createTime)
-    #          li
-    #              string('from-topic') + echo(' ：' + relTopic)
-    #              a(id='trend-follow-' + id href='javascript:;')(class ='active') > string('follow')  
-    #              string('strip') + string('discuss')
-    #              a(id='setEssenceStatus-' + id href='javascript:;')(class ='active') > echo('加精')
-    #              echo('|')
-    #              a(id='discuss-top-' + id href='javascript:;')(class ='active') > echo('置顶')
-    #              echo('|')
-    #              a(id='trend-share-' + id href='javascript:;')(class ='active') > string('share')
-    #              echo('|')
-    #              a(id='trend-report-' + id href='javascript:;')(class ='active') > string('report')
-    #              echo('|')
-    #              a(id='shut-' + id href='javascript:;')(class ='active') > echo('关闭')
-    #              hr
