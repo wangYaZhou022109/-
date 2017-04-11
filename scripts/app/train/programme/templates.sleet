@@ -363,7 +363,6 @@ view('editTask') > form.vertical
         .col-sm-10
             label > echo('评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务')
     .row > .col-sm-12
-        .input.btn-right-bottom(x-rule='required' x-target=state.componentId)&if(state.required)
         #tags
         .btn-group
             .btn#clearMembers 清空
