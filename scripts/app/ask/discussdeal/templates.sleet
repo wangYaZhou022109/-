@@ -1,8 +1,8 @@
 #!handlebars
 module > .discuss-exam-page
-    .discuss-exam-total(data-region="discuss-exam")
+    .discuss-exam-total(data-region="discussaudit")
 
-view('discuss-exam')
+view('discussaudit')
     .title-img.pull-left.layout-mr-small
         img.title-radius(src="images/3.png")
     .title-main
@@ -13,7 +13,7 @@ view('discuss-exam')
         span > echo(discussaudit.member.fullName)
         span.sub-title 讨论时间：
         span.sub-title > date(discussaudit.createTime)
-    .detail1-alink.layout-mt-small > echo('来自问题：') > echo(discussaudit.question.title)
+    .detail1-alink.layout-mt-small > echo('来自问题：') + echo(discussaudit.question.title)
     textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注")
 #  module > .course-page
 #      div(data-region='discussaudit' style='height:100%;')

@@ -18,10 +18,10 @@ view('reportaudit')
             span > map('ask-report-type' reportaudit.sourceType)
         .reported.pull-left.layout-mr
             span 被举报人：
-            span > echo(reportaudit.type)
+            span > echo(reportaudit.member.fullName)
     .report-content.layout-mt-small
         p 举报内容：
-        .report-content-item.small-font > echo(reportaudit.content)
+        .report-content-item.small-font > echo(reportaudit.question.title)
     .report-reson.reson-height
         p 举报理由：
         .small-font > echo(reportaudit.content)
