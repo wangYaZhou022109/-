@@ -35,7 +35,10 @@ view('main')
                 td > echo(member.phoneNumber)
                 td > map('train-leave-state' state)
                 td.operation
-                    a(id='approval'+id data-name='id' data-value=id) > echo('审批')
+                    compare(state 'eq' 0)
+                        a(id='approval'+id data-name='id' data-value=id) > echo('审批')
+                    else
+                        label 审核
     #pager.pagination
 
 view('approval') > form.vertical

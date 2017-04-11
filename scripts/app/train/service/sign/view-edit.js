@@ -60,21 +60,22 @@ exports.dataForTemplate = {
         return sign;
     }
 };
-// exports.components = [{
-//     id: 'startTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
-// }, {
-//     id: 'endTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
-// }, {
-//     id: 'lateTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
+exports.components = [{
+    id: 'startTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'lateTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}];
