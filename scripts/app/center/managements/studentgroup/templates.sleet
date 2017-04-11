@@ -22,7 +22,7 @@ view('studentgroup')
                 i.iconfont.icon-sort-asc
                 i.iconfont.icon-sort-desc.custom-color-4
             td
-                a.text-main-color 管理
+                a.text-main-color#groupmanage-1 管理
                 span.text-main-color |
                 a.text-main-color 删除
         tr
@@ -33,7 +33,7 @@ view('studentgroup')
                 i.iconfont.icon-sort-asc
                 i.iconfont.icon-sort-desc.custom-color-4
             td
-                a.text-main-color 管理
+                a.text-main-color#groupmanage-2 管理
                 span.text-main-color |
                 a.text-main-color 删除
         tr
@@ -44,7 +44,7 @@ view('studentgroup')
                 i.iconfont.icon-sort-asc
                 i.iconfont.icon-sort-desc.custom-color-4
             td
-                a.text-main-color 管理
+                a.text-main-color#groupmanage-3 管理
                 span.text-main-color |
                 a.text-main-color 删除
         tr
@@ -55,6 +55,6 @@ view('studentgroup')
                 i.iconfont.icon-sort-asc
                 i.iconfont.icon-sort-desc.custom-color-4
             td
-                a.text-main-color 管理
+                a.text-main-color#groupmanage-4 管理
                 span.text-main-color |
                 a.text-main-color 删除

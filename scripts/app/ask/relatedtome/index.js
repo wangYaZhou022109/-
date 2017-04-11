@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -11,13 +11,29 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         reply: { url: '../ask-bar/question-reply' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 }
+        }
     },
     callbacks: {
         init: function() {
             var trends = this.models.trends;
-            trends.set({ id: 1222 });
-            return this.get(trends);
+            var params = this.models.page.params;
+            params.id = 'null';
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
+        page: function() {
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            params.id = 'null';
+            trends.set(params);
+            this.post(trends).then(function() {
+                // me.models.page.params.page = page + 1;
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -58,5 +74,16 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    var me = this;
+    $(window).scroll(function() {
+        var page = me.store.models.page.params.page;
+        var size = me.store.models.page.params.size;
+        if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
+            if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
+                me.store.models.page.params.page++;
+                me.dispatch('page');
+            }
+        }
+    });
+    return this.dispatch('page');
 };

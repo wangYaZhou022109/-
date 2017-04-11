@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    helpers = require('./app/util/helpers');
 
 exports.bindings = {
     list: true,
@@ -25,6 +26,9 @@ exports.dataForTemplate = {
             } else {
                 r.isPass = '否';
             }
+            r.startTimeStr = helpers.dateMinute(r.exam.startTime);
+            r.endTimeStr = helpers.dateMinute(r.exam.endTime);
+            r.submitTimeStr = helpers.dateMinute(r.submitTime);
         });
         return data.list;
     },

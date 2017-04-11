@@ -8,7 +8,7 @@ view('addclass')
         .form-row
             label.required 课程类型
             .content
-                select.tag-input
+                select.w-half
                     option 面授
                     option 观看录像
                     option 直播
@@ -71,9 +71,9 @@ view('addclass')
     .layout-mt-small
         .pull-left > label.label 课件（最多上传三个）
         .pull-right
-            .tag-btn.radius 选择
-            .tag-btn.radius 上传
-            i.iconfont.icon-question-2
+            .tag-btn.radius.active 选择
+            .tag-btn.radius.active 上传
+            .inline-block.help ?
     table.table
         tr
             th  序号

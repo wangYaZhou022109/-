@@ -11,4 +11,8 @@
     & .select-width {
         width: calc(var(--base-gap)*4);
     }
+    & .input-height {
+        line-height: var(--input-height);
+        height: var(--input-height);
+    }
 }

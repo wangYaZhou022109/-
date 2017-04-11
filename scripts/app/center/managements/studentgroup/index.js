@@ -1,5 +1,6 @@
 exports.items = {
-    studentgroup: 'studentgroup'
+    studentgroup: 'studentgroup',
+    'center/managements/studentgroup/groupmanage': { isModule: true }
 };
 
 exports.title = '学员分组';

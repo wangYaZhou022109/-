@@ -11,7 +11,7 @@ view('filter')
                 | 进入时间
                 i.iconfont.icon-sort-desc
             .pull-left
-                .inline-block.m-left.sub-text 要求：
+                .inline-block.m-left.sub-text 状态：
                 .item#status-all(class=if(search.statusAll 'active')) > span 全部
                 .item#status-2(class=if(search.statusb 'active')) > span 待开始
                 .item#status-1(class=if(search.statusa 'active')) > span 开考中

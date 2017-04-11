@@ -63,7 +63,7 @@ exports.store = {
                 me = this,
                 attachments = [D.assign(progressModel.data.sectionAttachments[0], payload)],
                 progress = section.progress;
-            params.sectionId = section.id;
+            params.sectionId = section.referenceId;
             params.clientType = 0;
             params.attachments = JSON.stringify(attachments);
             progressModel.set(params);
