@@ -6,16 +6,16 @@ view('list')
     .tabs.line.mb-1
         compare(user.expert.id 'ne' '')
             compare(user.expert.activeStatus 'eq' 2)
-                .pull-right.btn#expert-activate > string('activation') + string('expert') + string('identity')
+                .pull-right.btn#activate > string('activation') + string('expert') + string('identity')
             else
                 compare(user.expert.auditStatus 'eq' 0)
                     .pull-right.btn > string('auditStatus3')
                 compare(user.expert.auditStatus 'eq' 1)  
-                    .pull-right.btn#expert-myself > string('iam') + string('expert')  
+                    .pull-right.btn#myself > string('iam') + string('expert')  
                 compare(user.expert.auditStatus 'eq' 2)
-                    .pull-right.btn#expert-apply > string('auditStatus4')
+                    .pull-right.btn#apply > string('auditStatus4')
         compare(user.expert 'eq' null)
-            .pull-right.btn#expert-apply > string('apply') + string('become') + string('expert')
+            .pull-right.btn#apply > string('apply') + string('become') + string('expert')
         ul
             li.active > string('expert') + string('meta') 
     .border.bottom.dashed

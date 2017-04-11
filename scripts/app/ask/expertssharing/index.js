@@ -32,14 +32,12 @@ exports.store = {
         page: function(payload) {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            var me = this;
             params.id = 'all';
             if (typeof payload.state.id !== 'undefined') {
                 params.id = payload.state.id;
             }
             trends.set(params);
             this.post(trends).then(function() {
-                me.models.page.params.page++;
             });
         },
         follow: function(payload) {
@@ -83,8 +81,13 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
-        if ($(window).scrollTop() === ($(document).height() - $(window).height())) {
-            me.dispatch('page', me.renderOptions);
+        var page = me.store.models.page.params.page;
+        var size = me.store.models.page.params.size;
+        if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
+            if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
+                me.store.models.page.params.page++;
+                me.dispatch('page');
+            }
         }
     });
     return this.dispatch('page', this.renderOptions);
