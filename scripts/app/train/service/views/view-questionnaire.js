@@ -11,3 +11,21 @@ exports.dataForTemplate = {
         return questionnaire;
     }
 };
+
+exports.events = {
+    'click edit-exams*': 'editExam',
+    'click edit-questionary*': 'editQuestionary',
+};
+
+exports.handlers = {
+    editExam: function(data) {
+        var id = data,
+            url = '#/exam/exam/answer-paper/' + id;
+        window.open(url, '_blank');
+    },
+    editQuestionary: function(data) {
+        var id = data,
+            url = '#/' + id;
+        window.open(url, '_blank');
+    }
+};

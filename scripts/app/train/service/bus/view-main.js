@@ -1,3 +1,5 @@
+exports.title = '班车/订餐信息';
+
 exports.bindings = {
     buss: true,
     bus: false,
@@ -21,13 +23,14 @@ exports.handlers = {
     },
     addBus: function() {
         var buss = this.bindings.buss.data,
-            optionList = this.bindings.optionList.data || [],
+            optionList = [],
             option1 = {},
             option2 = {},
             option3 = {},
             option4 = {},
             option5 = {},
             option6 = {};
+        this.bindings.optionList.clear();
         if (buss.length === 0) {
             option1.name = '返程日前一天17:30去集团';
             option1.id = option1.name;
@@ -47,6 +50,7 @@ exports.handlers = {
             option6.name = '返程日早餐';
             option6.id = option6.name;
             optionList.push(option6);
+            this.bindings.optionList.data = optionList;
             this.bindings.optionList.changed();
         } else {
             this.bindings.bus.clear();

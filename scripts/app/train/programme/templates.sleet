@@ -14,7 +14,7 @@ view('offline')
     div(style='padding:20px 50px 50px 20px;')
         .row(style='line-height:50px;')
             .col-sm-12(style='text-align: right')
-                a.btn#export 导出安排
+                a.btn#export(href=downUrl) 导出安排
         .list.m-top
             table.table
                 thead > tr
@@ -329,7 +329,7 @@ view('editTask') > form.vertical
         input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
     .row
         label(style='float:left;') 任务说明
-        textarea#explain(name='explain' value='' rows=5 cols=80 x-rule='maxLength:1000' x-rule='required') > echo(task.explain)
+        textarea.input#explain(name='explain' rows='5' cols='80' x-rule='maxLength:1000,required') > echo(task.explain)
 
     .list.m-top
         table.table
@@ -339,7 +339,7 @@ view('editTask') > form.vertical
                         label 课件(最多上传3个)
                     .col-sm-2(style='text-align:right;')
                         a.btn#chooseFile 上传
-                        a(title='上传附件支持格式：xls/xlsx/doc/docx/ppt/pptx/zip/txt/rar/pdf/epub/mp3/mp4(大小<100M)') > echo('?')
+                        a(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
             thead > tr
                 th 序号
                 th(width='50%') 附件名称

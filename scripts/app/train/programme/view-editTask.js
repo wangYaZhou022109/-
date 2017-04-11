@@ -135,9 +135,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    saveTask: function() {
-        this.app.viewport.closeModal();
-    }
 };
 
 findExtension = function(value) {

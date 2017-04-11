@@ -6,11 +6,17 @@ module > .train-class-page
 
 view('main')
     div.row.text-center
-        .buttons
-            .btn#addSign > echo('添加')
-            .btn#batchDelete > echo('删除')
+        .clearfix.layout-mt-small
+            .pull-left
+                label 签到规则
+                .tag-btn.active#half 半天
+                .tag-btn.active 全天
+                .tag-btn.active 不签到
+            .pull-right
+                .btn#addSign > echo('添加')
+                .btn#batchDelete > echo('删除')
     .list.m-top
-        table.table
+        table.table.layout-mt-small
             thead > tr
                 th > input(type='checkbox' id='check-all')
                     label(for='check-all')
@@ -42,24 +48,40 @@ view('main')
     #pager.pagination
 
 view('edit') > form.vertical
-    label(class='required') > echo('签到名称')
-    input.input(name='name'  value=sign.name  x-rule='required')
-    br
-    label > echo('签到地点')
-    input.input(name='place'  value=sign.place)
-    br
-    label(class='required') > echo('签到开始时间')
-    input.input(name='startTime' value=dateTime(sign.startTime))
-    br
-    label(class='required') > echo('签到结束时间')
-    input.input(name='endTime' value=dateTime(sign.endTime))
-    br
-    label > echo('迟到时间设置')
-    input.input(name='lateTime' value=dateTime(sign.lateTime))
-    br
-    label(class='required') > echo('生成签到二维码')
-    #qrcode
-
+    .form.align-left
+        .form-row
+            label.label.required 签到名称
+            .content
+                input.input#name(name='name'  value=sign.name  x-rule='required')
+        .form-row
+            label.label 签到地点
+            .content
+                input.input#place(name='place'  value=sign.place)
+        .clearfix
+            .form-row.pull-left.w-half.input-padding
+                label.label.required 签到开始时间
+                .content
+                    input.input#startTime(name='startTime' value=dateTime(sign.startTime) x-rule='required')
+            .form-row.pull-right.w-half
+                label.label.required 签到结束时间
+                .content
+                    input.input#endTime(name='endTime' value=dateTime(sign.endTime) x-rule='required')
+        .clearfix
+            .form-row.pull-left.w-half.input-padding
+                label.label 生成签到二维码
+            .form-row.pull-right.w-half
+                label.label 迟到时间设置
+                .content
+                    input.input#lateTime(name='lateTime' value=dateTime(sign.lateTime))
+        .clearfix
+            .pull-left.layout-mr
+                #qrcode
+            .pull-left
+                p 让学员通过APP扫一扫功能，手机签到；
+                p 1.投影到幕布上扫（PPT图片）
+                p 2.打印出来
+                .m-top
+                    p 使用手机学堂扫描二维码签到
     input.input(type='hidden' name='id' value=sign.id)
     btn.btn(id='save') > echo('保存')
 

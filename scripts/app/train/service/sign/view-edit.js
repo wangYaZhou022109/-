@@ -26,6 +26,7 @@ exports.dataForActions = {
             classId = state.classId;
         return {
             classId: classId,
+            id: $(this.$$('[name="id"]')).val(),
             name: $(this.$$('[name="name"]')).val(),
             startTime: $(this.$$('[name="startTime"]')).val(),
             endTime: $(this.$$('[name="endTime"]')).val(),
@@ -36,10 +37,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    save: function() {
-        this.app.message.success('保存成功！');
-        this.app.viewport.closeModal();
-    }
 };
 
 exports.components = [function() {

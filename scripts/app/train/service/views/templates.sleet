@@ -1,5 +1,6 @@
 #!handlebars
 module
+    br
     .subject-detail-page
         .top
         .page-main-wrapper
@@ -95,8 +96,12 @@ view('twoBrings') > form.vertical
             textarea#content2(name='content2' value='' rows=2 x-rule='required') > echo(twoBringsResult.content2)
     br
     .row
-        .col-sm-2
-            btn.btn(id='commit') > echo('提交')
+        if(twoBringsResult.id)
+            .col-sm-2           
+                btn.btn(id='close') > echo('确定')
+        else
+            .col-sm-2
+                btn.btn(id='commit') > echo('提交')
 
 view('questionnaire')
     table.table
@@ -114,7 +119,8 @@ view('questionnaire')
                 else
                     dateTime(researchQuestionary.endTime)
             td
-                a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id typeId=type) > echo('查看')
+                a(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+                
 view('bus')
     tbody > each(bus)
         div

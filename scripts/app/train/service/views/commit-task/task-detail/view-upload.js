@@ -1,9 +1,8 @@
-var _ = require('lodash/collection');
-
 exports.title = '文件上传';
 
 exports.bindings = {
-    file: 'changeFile'
+    file: 'changeFile',
+    task: false
 };
 
 exports.components = function() {
@@ -12,13 +11,13 @@ exports.components = function() {
         name: 'uploader',
         options: {
             model: 'file',
-            chunk_size: '100mb',
+            chunk_size: '3mb',
             multi_selection: false,
             filters: {
                 max_file_size: '100mb',
                 mime_types: [{
                     title: 'files',
-                    extensions: 'xls,xlsx,doc,docx,ppt,pptx,txt,pdf,zip'
+                    extensions: 'xls,xlsx,doc,docx,ppt,pptx,pdf,txt,zip'
                 }]
             }
         }
@@ -26,14 +25,12 @@ exports.components = function() {
 };
 
 exports.changeFile = function() {
-    var imgs = this.bindings.file.data.imgs;
-    var items = _.map(imgs, function(v) {
-        return {
-            contentType: v.contentType,
-            attachmentId: v.id,
-            name: v.filename
-        };
-    });
-    this.module.dispatch('uploadTaskFile', items);
+    var img = this.bindings.file.data.imgs[0];
+    var items = {
+        attachmentType: img.contentType,
+        attachmentId: img.id,
+        name: img.filename
+    };
+    this.module.dispatch('uploadTaskMember', items);
     this.app.viewport.closeModal();
 };

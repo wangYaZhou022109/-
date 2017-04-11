@@ -1,40 +1,78 @@
 #!handlebars
 
-module
-    .achievement-content.main-side
-        .achievement-side.bg-color
-            div(data-region='side')
-        .achievement-head(data-region='head')
-        .achievement-main(data-region='main')
+module > .achievement-content.main-side
+    .achievement-side.bg-color
+        div(data-region='side')
+    .achievement-head(data-region='head')
+    .achievement-main(data-region='main')
 
 view('head')
     .pull-left.title > echo(all.task.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right > echo('提交人:' + all.member.fullName)
-
-view('main')
-    echo('null')
+            if(all.taskApproval.id)
+                li.border.right > echo('提交人:' + all.member.fullName)
+                li.border.right > echo('审核人:' + all.taskApproval.approvalMemberFullName)
+                li.border.right > echo('得分:' + all.taskApproval.score)
+            else
+                li.border.right > echo('提交人:' + all.member.fullName)
+            if(all.taskApproval.id)
+                .btn.blue.m-right#closeTask 关闭批阅
+            else
+                .btn.blue.m-right#approval 确定
+                .btn.blue.m-right#closeTask 关闭批阅
 
 view('side') > form.vertical
     .row
-        echo('作业说明')
-        echo(all.task.explain)
+        btn.btn#explain 作业说明
     .row
-        echo('作业附件')
+        echo('作业附件:')
+        ul.list
+        each(all.task.attachList)
+            li
+                a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
+                a(href=downUrl download=attachmentName) 下载
     .row
-        echo('用户提交附件')
-    .row
-        .col-sm-2
-            input.inline-block(name='state' type='radio' value='0')('checked')&if(task.checked)
-            .inline-block 通过
-            input.inline-block(name='state' type='radio' value='1')('checked')&unless(task.checked)
-            .inline-block 打回重新提交
-    .row
-        echo('评分')
-        .col-sm-2
-            input.input#score(name='score' value=score)
-    .row
-        echo('评语')
-        .col-sm-4
-            textarea#commont(name='commont' value='' rows=15 cols=33) > echo(commont)
+        echo('用户提交:')
+        br
+        btn.btn#description 作业详情
+        br
+        if(all.attachmentId)
+            a.text-overflow.pointer(id='preview-'+all.attachmentId href='javascript:;') > echo(all.name) 
+            a(href=all.downUrl download=all.name) 下载
+        else
+            echo(all.name)
+    if(all.taskApproval.id)
+        .row
+            echo('评语')
+            .col-sm-4
+                textarea#comment(name='comment' value='' rows=15 cols=33) > echo(all.taskApproval.comment)
+    else
+        .row
+            .col-sm-2
+                input.inline-block#state-0(name='state' type='radio' value='0')('checked')&if(checked)
+                .inline-block 通过
+                input.inline-block#state-1(name='state' type='radio' value='1')('checked')&unless(checked)
+                .inline-block 打回重新提交
+        .row
+            echo('评分')
+            .col-sm-2
+                input.input#score(name='score' value=all.taskApproval.score)
+        .row
+            echo('评语')
+            .col-sm-4
+                textarea#comment(name='comment' value='' rows=15 cols=33) > echo(all.taskApproval.comment)
+
+view('main')
+    .preview-content
+        if(mainState.isExplain)
+            if(mainState.isDescription)
+                .h3.m-bottom 任务说明
+                    p.text-overflow
+                        span > @echo(all.task.explain)
+            else
+                .h3.m-bottom 任务详情
+                    p.text-overflow
+                        span > @echo(all.description)
+        else
+            #viewPdf
