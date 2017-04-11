@@ -83,11 +83,15 @@ exports.afterRender = function() {
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
-        if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
-            if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
-                me.store.models.page.params.page++;
-                me.dispatch('page');
-            }
+        // if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
+        //     if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
+        //         me.store.models.page.params.page++;
+        //         me.dispatch('page');
+        //     }
+        // }
+        if (page * size === me.store.models.page.data.length) {
+            me.store.models.page.params.page++;
+            me.dispatch('page', me.renderOptions);
         }
     });
     return this.dispatch('page', this.renderOptions);

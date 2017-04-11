@@ -4,7 +4,10 @@ module > .watch-detail1-page
 
 view('audit') > form.vertical
     .h5 > echo(audit.question.title)
-    .detail1-content.m-top.small-font > echo(audit.question.content)
+    .detail1-content.m-top.small-font
+        compare(jsonImg.length 'gt' 0)
+            img(src=jsonImg)
+        @echo(audit.question.content)
     .detail1-person.layout-mt-small
         span > echo(audit.member.fullName)
         span 分享时间：
