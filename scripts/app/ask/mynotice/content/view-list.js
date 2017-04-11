@@ -1,9 +1,10 @@
-
+var _ = require('lodash/collection');
 var $ = require('jquery');
 
 exports.type = 'dynamic';
 exports.bindings = {
-    content: true
+    content: true,
+    page: true
 };
 
 exports.events = {
@@ -111,4 +112,32 @@ exports.actionCallbacks = {
         this.app.message.success('删除成功！');
         this.module.dispatch('init');
     }
+};
+
+exports.dataForTemplate = {
+    page: function(data) {
+        var trends = data.content.trendsList;
+        var page = this.bindings.page.data;
+        var me = this;
+        var flag = true;
+        _.forEach(trends, function(value) {
+            var obj = value,
+                date = new Date(obj.createTime);
+            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+            + '   ' + date.getHours() + ':' + date.getMinutes();
+            _.forEach(me.bindings.page.data, function(v) {
+                if (v.id === obj.id) {
+                    flag = false;
+                }
+            });
+            if (flag) {
+                page.push(obj);
+            }
+        });
+        return page;
+    }
+};
+
+exports.beforeClose = function() {
+    $('.dialog-main').unbind('scroll');
 };
