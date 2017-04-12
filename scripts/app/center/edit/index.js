@@ -29,6 +29,9 @@ exports.store = {
             var memberForm = this.models.memberForm,
                 me = this;
             D.assign(memberForm.data, options);// 把新值和旧值合并,用新值覆盖旧值
+            if (memberForm.data.id) {
+                memberForm.data.id = null;
+            }
             return this.put(memberForm).then(function(data) {
                 if (data[0].password === '2') {
                     me.app.message.error('密码修改失败，旧密码输入不正确');

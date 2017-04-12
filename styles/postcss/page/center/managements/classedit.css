@@ -1,0 +1,7 @@
+.classedit-page {
+    & .classedit {
+        & .classedit-form-width {
+            width: 33.3%;
+        }
+    }
+}

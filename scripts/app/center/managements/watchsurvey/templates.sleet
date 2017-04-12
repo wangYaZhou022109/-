@@ -4,6 +4,68 @@ module > .watchsurvey-page
     .watchsurvey(data-region='watchsurvey')
 
 view('watchsurvey')
-    span 调研名称：
-    span 调研名称调研名称调研名称
-    
+    .watchsurvey-title
+        p 调研名称：
+        p 调研名称调研名称调研名称
+    .watchsurvey-search.layout-mt-small
+        .bg-color-3.search-padding
+            .search-item
+                .inline-block.input-width.input-padding
+                    label.block 员工编号
+                    input.input.m-top
+                .inline-block.input-width.input-padding
+                    label.block 姓名
+                    input.input.m-top
+                .inline-block.input-width.input-padding
+                    label.block 开始时间
+                    .relative
+                        input.input.m-top.date
+                        .iconfont.icon-riqi
+                .btn-block.vertical-bottom.btn-width
+                    label
+                    .btn 搜索
+        .clearfix.layout-mt-small
+            .pull-right
+                .btn.m-right 汇总统计
+                .btn 导出
+        table.table.m-top
+            tr
+                th 序号
+                th 员工编号
+                th 姓名
+                th 所属部门
+                th 开始时间
+                th 提交时间
+                th 操作
+            tr
+                td 1
+                td duan
+                td 端
+                td 产品部
+                td 2016-01-22 14:25
+                td 2016-01-22 14:25
+                td > a 详情
+            tr
+                td 2
+                td duan
+                td 端
+                td 产品部
+                td 2016-01-22 14:25
+                td 2016-01-22 14:25
+                td > a 详情
+            tr
+                td 3
+                td duan
+                td 端
+                td 产品部
+                td 2016-01-22 14:25
+                td 2016-01-22 14:25
+                td > a 详情
+            tr
+                td 4
+                td duan
+                td 端
+                td 产品部
+                td 2016-01-22 14:25
+                td 2016-01-22 14:25
+                td > a 详情

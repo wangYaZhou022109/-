@@ -1,24 +1,21 @@
 .topic-main {
-    & .page1 {
-        /*z-index: 1;*/
-        /*position: absolute;*/
-    }
     & .page2 {
-        /*z-index: 2;*/
         display: none;
     }
     & .page3 {
         display: none;
     }
     & .aboutme-ul {
+        margin-right: -calc(var(--large-space)*2);
         & .aboutme-li {
-            width: calc(var(--section-gap)*2);
+            width: 14%;
+            vertical-align: top;
+            display: inline-block;
+            float: none;
+            vertical-align: top;
             padding-right: calc(var(--large-space)*2);
             & .img-dv {
                 width: 100%;
-            }
-            & p.introduce {
-                line-height: 0.6;
             }
             & .true-icon {
                 position: absolute;

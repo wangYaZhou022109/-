@@ -38,5 +38,6 @@ view('topic')
                 i.iconfont.icon-sort-asc.color-pass
                 i.iconfont.icon-sort-desc.color-pass
             td > a 删除
-    .add-topic.text-center
-        .btn 添加主题
+    .add-topic.text-center.clearfix
+        .line.relative.border.bottom
+            .btn.addtopic-btn 添加主题

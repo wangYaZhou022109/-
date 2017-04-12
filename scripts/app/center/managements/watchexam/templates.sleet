@@ -4,33 +4,43 @@ module > .watchexam-page
     .watchexam(data-region="watchexam")
 
 view('watchexam')
-    .h5 考试名称：考试名称考试名称考试名称
+    .watchexam-title
+        p 调研名称：
+        p 调研名称调研名称调研名称
     .exam-total.layout-mt-small
-        span 参考人数：50
-        span 及格分数：60
-        span 及格人数：40
-        span 及格率：80%
+        .examtitle-item
+            span 参考人数：
+            span 50
+        .examtitle-item
+            span 及格分数：
+            span 60
+        .examtitle-item
+            span 及格人数：
+            span 40
+        .examtitle-item
+            span 及格率：
+            span 80%
     .layout-mt-small
         .bg-color-3.search-padding
             .search-item
-                .inline-block.layout-mr-small.input-width
+                .inline-block.input-width.input-padding
                     label.block 员工编号
                     input.input.m-top
-                .inline-block.layout-mr-small.input-width
+                .inline-block.input-width.input-padding
                     label.block 姓名
                     input.input.m-top
-                .inline-block.layout-mr-small.input-width
+                .inline-block.input-width.input-padding
                     label.block 状态
                     select.m-top
                         option 全部
                         option 合格
                         option 不合格
                         option 待评卷
-                .btn-block.btn-width.vertical-bottom
+                .btn-block.vertical-bottom.btn-width
                     label
-                    .btn.small 搜索
+                    .btn 搜索
         .clearfix.layout-mt-small
-            .btn.radius.pull-right 导出
+            .btn.pull-right 导出
         .m-top
             table.table
                 tr

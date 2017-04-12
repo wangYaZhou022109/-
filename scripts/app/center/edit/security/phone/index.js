@@ -9,7 +9,8 @@ exports.store = {
         member: {},
         phoneList: { url: '../human/member-phone' },
         phone: { url: '../human/member-phone' },
-        memberForm: { url: '../human/member/update-person' }
+        memberForm: { url: '../human/member/update-person' },
+        findMember: { url: '../human/member/find-phone-exist' }
     },
     callbacks: {
         init: function() {
@@ -19,11 +20,20 @@ exports.store = {
         savePhone: function(payload) {
             var phone = this.models.phone,
                 phoneList = this.models.phoneList,
+                findMember = this.models.findMember,
                 me = this;
             phone.set(payload);
-            this.put(phone).then(function() {
-                this.app.message.success('添加成功');
-                return me.get(phoneList);
+            // 验证手要号是否已存在
+            findMember.params = { phone: payload.phone };
+            me.get(findMember).then(function(data) {
+                if (data[0] > 0) {
+                    me.app.message.error('该手机号已存在');
+                    return;
+                }
+                me.put(phone).then(function() {
+                    me.app.message.success('添加成功');
+                    return me.get(phoneList);
+                });
             });
         },
         deletePhone: function(payload) {
@@ -38,7 +48,7 @@ exports.store = {
             var memberForm = this.models.memberForm,
                 me = this;
             memberForm.set(payload);
-            return this.put(memberForm).then(function(data) {
+            return me.put(memberForm).then(function(data) {
                 me.models.member.data.phoneNumber = data[0].phoneNumber;
             });
         }
