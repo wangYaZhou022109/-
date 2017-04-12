@@ -103,10 +103,13 @@ exports.dataForActions = {
     }
 };
 exports.actionCallbacks = {
-    addComment: function() {
-        this.module.dispatch('init', this.module.renderOptions).then(function() {
+    addComment: function(data) {
+        if (data[0].auditStatus === 0) {
+            this.app.message.success('发表成功，等待管理员审核!');
+        } else {
             this.app.message.success('发表成功!');
-        });
+        }
+        this.module.dispatch('init', this.module.renderOptions);
     },
     hideComment: function() {
         this.module.dispatch('init', this.module.renderOptions).then(function() {

@@ -23,10 +23,12 @@ exports.store = {
         init: function(payload) {
             var businessId = payload.businessId,
                 businessType = payload.businessType,
+                title = payload.title,
                 comments = this.models.comments,
                 state = this.models.state;
             state.data.businessId = businessId;
             state.data.businessType = businessType;
+            state.data.title = title;
             state.data.available = payload.available;
             if (typeof payload.available !== 'boolean') {
                 state.data.available = true;
@@ -74,10 +76,16 @@ exports.store = {
             var reply = this.models.reply,
                 comments = this.models.comments,
                 state = this.models.state,
+                params = payload,
                 me = this;
-            reply.set(payload);
-            me.save(reply).then(function() {
-                me.app.message.success('操作成功');
+            params.title = state.data.title;
+            reply.set(params);
+            me.save(reply).then(function(data) {
+                if (data[0].auditStatus === 0) {
+                    me.app.message.success('发表成功，等待管理员审核');
+                } else {
+                    me.app.message.success('发表成功');
+                }
                 comments.set({
                     id: state.data.businessId
                 });
