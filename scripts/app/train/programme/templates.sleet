@@ -317,7 +317,11 @@ view('import-upload')
 
 view('editTask') > form.vertical
     .col-sm-2(style='text-align:right')
-        a.btn#saveTask 保存
+        if(task.id)
+            a.btn(href='#/train/programme/preview-task/'+task.id target='_blank') 预览
+            a.btn#saveTask 保存
+        else
+            a.btn#saveTask 保存
     .row
         label(style='float:left;') 作业名称
         input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
