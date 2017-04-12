@@ -14,7 +14,7 @@ exports.store = {
         del: { url: '../ask-bar/trends/del' },
         page: {
             data: [],
-            params: { page: 1, size: 2 }
+            params: { page: 1, size: 3 }
         }
     },
     callbacks: {

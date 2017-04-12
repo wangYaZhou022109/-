@@ -58,7 +58,11 @@ exports.dataForTemplate = {
         var flag = true;
         _.forEach(trends, function(value) {
             var obj = value,
-                date = new Date(obj.questionDiscuss.createTime);
+                date = new Date(obj.questionDiscuss.createTime),
+                replyNum = obj.questionDiscuss.replyNum;
+            if (replyNum === null) {
+                obj.questionDiscuss.replyNum = 0;
+            }
             obj.questionDiscuss.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {
