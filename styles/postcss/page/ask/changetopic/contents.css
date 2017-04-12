@@ -1,5 +1,10 @@
 .changetopic-page {
-    & .topic-category {
-        
+    & .topic-category a {
+        display: inline-block;
+        margin: 0 calc(var(--space) / 2) calc(var(--space) / 2) 0;
+
+        &.active {
+            color: black;
+        }
     }
 }
