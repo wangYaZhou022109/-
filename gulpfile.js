@@ -36,7 +36,7 @@ var libs = [
         './vendors/upload/jquery.plupload.queue.min',
         './vendors/upload/zh_CN',
         './vendors/upload/moxie.min',
-        'crypto-js','flatpickr'
+        'crypto-js', 'flatpickr', 'kindeditor', 'kindeditor/kindeditor-all', 'kindeditor/lang/zh-CN'
     ],
     options = {
         entries: ['./main.js'],
@@ -78,6 +78,20 @@ var libs = [
             .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest('./bundle'));
     };
+gulp.task('kindeditor', ['clean-build', 'images', 'font'], function() {
+    return gulp.src([
+            'node_modules/kindeditor/plugins/**/*', 'node_modules/kindeditor/themes/**/*'
+        ], {
+            base: 'node_modules/kindeditor'
+        })
+        .pipe(gulp.dest('./dist/scripts/kindeditor'));
+});
+
+gulp.task('files', ['clean-build', 'images', 'font', 'kindeditor', 'pdf-worker'], function() {
+    return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
+        .pipe(gulp.dest('./dist/scripts'));
+});
+
 
 gulp.task('postcss', function() {
     return gulp.src([
@@ -180,6 +194,8 @@ gulp.task('build', ['clean-build', 'lint', 'sleet', 'postcss', 'common', 'build-
     gulp.src('./index.html')
         .pipe(useref())
         .pipe(gulpif('*.js', preprocess({context: {
+            KINDEDITOR_THEME: 'scripts/kindeditor/themes/',
+            KINDEDITOR_PLUGIN: 'scripts/kindeditor/plugins/',
             PDF_WORKER: 'scripts/pdfjs-dist/'
         }})))
         .pipe(gulpif('*.js', uglify()))
