@@ -41,7 +41,7 @@ exports.actions = {
     'click discuss-boutique-*': 'discussboutique',
     'click discuss-del-*': 'discussdel',
     'click enjoy-*': 'enjoy',
-    // 'click trend-report-*': 'report'
+    'click praise-*': 'praise'
 };
 
 // actions绑定的方法调用前要干的事情
@@ -77,6 +77,11 @@ exports.dataForActions = {
         return payload;
     },
     report: function(payload) {
+        return payload;
+    },
+    praise: function(payload) {
+        var data = payload;
+        data.objectType = 2;
         return payload;
     }
 };
