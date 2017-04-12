@@ -1,0 +1,59 @@
+#!handlebars
+
+module > .studentwatch-page
+    .studentwatch(data-region="studentwatch")
+
+view('studentwatch')
+    .studentwatch-title.clearfix
+        .pull-left.layout-mr-small
+            label 员工号
+            input.input
+        .pull-left
+            label 姓名
+            input.input
+    table.table.layout-mt-small
+        tr
+            th 员工号
+            th 姓名
+            th 单位
+            th 分数
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90
+        tr
+            td 09314110
+            td 刘宇超
+            td 移动学院
+            td 90

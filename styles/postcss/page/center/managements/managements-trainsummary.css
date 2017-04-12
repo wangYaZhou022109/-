@@ -6,5 +6,23 @@
                 font-weight: bold;
             }
         }
+        & .study-top {
+            margin-top: var(--base-gap);
+        }
+        & .mix-height {
+            height: calc(var(--section-gap)*3);
+        }
+        & .sub-boxheight {
+            height: var(--section-gap);
+        }
+        & .sub-height {
+            line-height: calc(var(--base-gap)/2);
+        }
+        & .title-height  {
+            line-height: var(--large-space);
+        }
+        & .recommend-padding {
+            padding: var(--space) var(--space);
+        }
     }
 }

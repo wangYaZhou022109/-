@@ -4,7 +4,8 @@ exports.type = 'dynamic';
 
 exports.bindings = {
     state: false,
-    details: true
+    details: true,
+    concern: true
 };
 exports.events = {
     'click discuss-answer-*': 'discussanswer',

@@ -8,11 +8,13 @@ view('addstudent')
         label.pull-left.add-label.m-right 员工编号
         input.tag-btn.pull-left.add-mr
         button.tag-btn.selected.pull-left 添加
-    .m-top
-        label 账号
-        input.input.layout-mr(placeholder="输入用户名、手机号、邮箱皆可")
-        label 姓名
-        input.input
+    .m-top.clearfix
+        .addstudent-title-item.pull-left
+            label 账号
+            input.input.layout-mr(placeholder="输入用户名、手机号、邮箱皆可")
+        .addstudent-title-item.pull-left
+            label 姓名
+            input.input
     .layout-mt-small
         .pull-left
             .dtree

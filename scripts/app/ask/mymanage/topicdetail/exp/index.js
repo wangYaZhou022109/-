@@ -5,6 +5,8 @@ exports.items = {
 
 exports.store = {
     models: {
+        follow: { url: '../ask-bar/question-details/boutique' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
         trends: { url: '../ask-bar/trends/exp-sharing' },
         setEssenceStatus: { url: '../ask-bar/question/essence-status' },
         shut: { url: '../ask-bar/question/close-status' },
@@ -30,6 +32,22 @@ exports.store = {
             data.topsStatus = 1;
             discusstop.set(data);
             return this.post(discusstop);
+        },
+        follow: function(payload) {
+            var follow = this.models.follow;
+            follow.set(payload);
+            return this.post(follow);
+        },
+        unfollow: function(payload) {
+            var follow = this.models.unfollow;
+            // console.log(payload);
+            follow.set(payload);
+            return this.put(follow);
+        },
+        publish: function(payload) {
+            var discuss = this.models.discuss;
+            discuss.set(payload);
+            return this.save(discuss);
         }
     }
 };
