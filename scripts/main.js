@@ -61,6 +61,7 @@ require('./app/ext/flatpickr');
 require('./app/ext/tree');
 require('./app/ext/background-pager');
 require('./app/ext/qr-code');
+require('./app/ext/rich-text');
 
 D.adapt({
     getFormData: function(form) {
