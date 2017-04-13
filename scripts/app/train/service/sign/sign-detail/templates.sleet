@@ -81,26 +81,24 @@ view('main')
 
 view('status') > form.vertical
     input.input(name='id' type='hidden' value=id)
-    .row
-        .col-sm-9
-            echo('签到状态')
-            select#state(name='state')
-                option(value='1') > echo('正常')
-                option(value='2') > echo('迟到')
-                option(value='3') > echo('未签到')
-                option(value='4') > echo('请假')
+    .layout-mt-small.container
+        label.m-right 签到状态
+        select#state(name='state')
+            option(value='1') > echo('正常')
+            option(value='2') > echo('迟到')
+            option(value='3') > echo('未签到')
+            option(value='4') > echo('请假')
         div.col-sm-3
             btn.btn#update > echo('确定')
 
 view('batchStatus') > form.vertical
     input.input(name='id' type='hidden' value=id)
-    .row
-        .col-sm-9
-            echo('签到状态')
-            select#state(name='state')
-                option(value='1') > echo('正常')
-                option(value='2') > echo('迟到')
-                option(value='3') > echo('未签到')
-                option(value='4') > echo('请假')
+    .layout-mt-small.container
+        label.m-right 签到状态
+        select#state(name='state')
+            option(value='1') > echo('正常')
+            option(value='2') > echo('迟到')
+            option(value='3') > echo('未签到')
+            option(value='4') > echo('请假')
         div.col-sm-3
             btn.btn#batch > echo('确定')

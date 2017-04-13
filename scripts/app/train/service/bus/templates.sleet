@@ -37,14 +37,20 @@ view('main')
     #pager.pagination
 
 view('edit') > form.vertical
-    label(class='required') > echo('统计主题')
-    input.input#name(name='name' value=bus.name x-rule='required')
-    br
-    label(class='required') > echo('开始时间')
-    input.input#startTime(name='startTime' value=dateTime(bus.startTime) x-rule='required')
-    br
-    label(class='required') > echo('结束时间')
-    input.input#endTime(name='endTime' value=dateTime(bus.endTime) x-rule='required')
+    .form.align-left
+        .form-row
+            label.label.required 统计主题
+            .content
+                input.input#name(name='name' value=bus.name x-rule='required')
+        .clearfix
+            .form-row.pull-left.w-half.input-padding
+                label.label.required 开始时间
+                .content
+                    input.w-full#startTime(name='startTime' value=dateTime(bus.startTime) x-rule='required')
+            .form-row.pull-right.w-half
+                label.label.required 结束日期
+                .content
+                    input.w-full#endTime(name='endTime' value=dateTime(bus.endTime) x-rule='required')
     br
     .list.m-top
         table.tables
@@ -58,5 +64,5 @@ view('edit') > form.vertical
                     a(id='del-option-'+id data-name='id' data-value=id) 删除
             tr
                 td(colspan=4 style='text-align:center')
-                    a.btn#addOption +
+                    a.btn#addOption 添加
     a.btn#saveOption > span > echo('保存')

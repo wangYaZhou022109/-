@@ -100,14 +100,20 @@ exports.store = {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            if (startTime >= endTime) {
-                this.app.message.alert('结束时间必须大于开始时间');
+            if (startTime < endTime) {
+                if (optionList.data.length > 6) {
+                    this.app.message.alert('一条统计主题最多只能发布六个选项');
+                } else if (optionList.data.length < 1) {
+                    this.app.message.alert('一条统计主题至少需要一个选项');
+                } else {
+                    me.save(bus).then(function() {
+                        me.app.message.success('保存成功');
+                        me.app.viewport.closeModal();
+                        me.get(buss);
+                    });
+                }
             } else {
-                me.save(bus).then(function() {
-                    me.app.message.success('保存成功');
-                    me.app.viewport.closeModal();
-                    me.get(buss);
-                });
+                this.app.message.alert('结束时间必须大于开始时间');
             }
         },
         updateName: function(data) {

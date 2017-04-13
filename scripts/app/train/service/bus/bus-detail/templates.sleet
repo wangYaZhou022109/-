@@ -9,10 +9,10 @@ module > .train-class-page
 view('count') > form.vertical
     .count-title.clearfix
         .count-title-item.pull-left.layout-mr
-            span 统计名称
+            span 统计名称：
             span > echo(busOne.name)
         .count-title-item.pull-left
-            span 统计时间
+            span 统计时间：
             span > dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
 
 view('option')
