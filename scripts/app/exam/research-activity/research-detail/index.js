@@ -187,6 +187,7 @@ exports.store = {
                             return {
                                 questionId: a.key,
                                 answer: _.map(a.value, 'value').join(','),
+                                score: a.value[0].score,
                                 researchRecordId: me.store.models.researchRecord.data.id
                             };
                         }))
@@ -215,8 +216,13 @@ exports.store = {
             return '';
         },
         saveResearchDetail: function() {
-            var me = this;
-            this.models.form.set(this.models.answer.getData());
+            var me = this,
+                researchRecord = this.models.researchRecord;
+
+            this.models.form.set(D.assign({}, this.models.answer.getData(), {
+                researchQuestionaryId: researchRecord.params.researchQuestionaryId
+            }));
+
             return this.post(this.models.form).then(function() {
                 var record = me.models.researchRecord.data;
                 me.app.message.success(strings.get('submit-success'));

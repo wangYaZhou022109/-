@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-classmanage {
+    & .classmanage {
         & .form-row-width {
             width: 33.3%;
         }

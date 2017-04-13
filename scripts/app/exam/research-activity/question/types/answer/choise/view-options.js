@@ -45,6 +45,7 @@ exports.handlers = {
             data.value.push({
                 id: option.id,
                 value: option.name,
+                score: option.score
             });
         } else {
             temp = _.reject(data.value, ['id', option.id]);
@@ -64,6 +65,7 @@ exports.handlers = {
             data.value = [{
                 id: option.id,
                 value: option.name,
+                score: option.score
             }];
         } else {
             temp = _.reject(data.value, ['id', option.id]);

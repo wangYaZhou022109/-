@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-ordertime {
+    & .ordertime {
         & .form {
             & .form-row.specical {
                 width: 50%;
