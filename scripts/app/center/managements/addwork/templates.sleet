@@ -1,0 +1,66 @@
+#!handlebars
+
+module > .addwork-page
+    .addwork(data-region="addwork")
+
+view('addwork')
+    .form.align-left
+        .form-row
+            label.label.required 任务名称
+            .content
+                input.input
+                .tips 0/30
+        .clearfix
+            .form-row.pull-left.w-half.start-time
+                label.label.required 开始时间
+                .content > input.w-full
+            .form-row.pull-left.w-half
+                label.label.required 结束时间
+                .content > input.w-full
+        .form-row
+            .clearfix
+                label.label.required.pull-left 任务说明
+                .pull-right 0/5000
+            textarea.w-full(rows="3")
+    .task-table.layout-mt-small
+        .clearfix
+            .pull-left
+                span 添加附件
+                span.small-font.sub-title （最多添加3个）
+            .pull-right
+                .tag-btn.m-right.radius.selected 上传
+                .inline-block.ask-help ?
+        table.table
+            tr
+                th 序号
+                th 附件名字
+                th 类型
+                th 操作
+            tr
+                td 1
+                td 显示附件名称（点击可修改）
+                td pdf
+                td > i.iconfont.icon-close-circle.custom-color-3
+            tr
+                td 2
+                td 显示附件名称（点击可修改）
+                td doc
+                td
+                    i.iconfont.icon-edit.text-main-color.m-right
+                    i.iconfont.icon-search.custom-color-4.m-right
+                    i.iconfont.icon-close-circle.custom-color-3
+        .form.layout-mt-small.align-left
+            .form-choice
+                .form-row
+                    label.label.required 审核人
+                    .inline-block.introduce.sub-title （评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务）
+                    .content
+                        .addwork-check-item.m-top
+                            input(type="radio" name="person")
+                            label 关系人（直接上级）
+                        .addwork-check-item.m-top
+                            input(type="radio" name="person" checked="true")
+                            label 指定人
+            .layout-mt-small.form-choice
+                .form-row > .content
+                    input.input + .choice 选择

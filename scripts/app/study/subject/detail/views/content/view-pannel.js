@@ -3,7 +3,9 @@ var util = require('./app/study/subject/util'),
 exports.bindings = {
     region: false,
     subject: false,
-    state: false
+    state: false,
+    examStatus: true,
+    researchStatus: true
 };
 
 exports.events = {

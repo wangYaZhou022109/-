@@ -7,6 +7,7 @@ exports.bindings = {
 exports.components = [
     function() {
         var subjectId = this.bindings.subject.data.id,
+            title = this.bindings.subject.data.name,
             state = this.bindings.state.data || {},
             available = true;
         if (state.type === 'preview') {
@@ -20,6 +21,7 @@ exports.components = [
                 componentId: 'comment-area',
                 businessId: subjectId,
                 businessType: 2,
+                title: title,
                 available: available
             }
         };

@@ -6,7 +6,7 @@ module > .report-exam-page
 view('reportaudit')
     .report-person.clearfix
         .item.pull-left.layout-mr
-            span > echo('举报人：') > echo(member.fullName) 
+            span > echo('举报人：') > echo(reportaudit.member.fullName) 
             #  img.inline-block(src="images/1.png")
             #  img.inline-block(src="images/2.png")
             #  img.inline-block(src="images/3.png")
@@ -15,21 +15,22 @@ view('reportaudit')
             span > echo(reportaudit.accuseNum)
         .sourse.pull-left.layout-mr
             span 来源：
-            span 问吧
+            span > map('ask-report-type' reportaudit.sourceType)
         .reported.pull-left.layout-mr
             span 被举报人：
-            span > echo(reportaudit.beUser)
-#  view('reportexam-content')
-        .report-content.layout-mt-small
-            p 举报内容：
-            .report-content-item.small-font > echo(reportaudit.accuseRecord.objectId)
-        .report-reson.reson-height
-            p 举报理由：
-            .small-font > echo(reportaudit.accuseRecord.accuseNote)
-            .report-type.border.bottom.clearfix.layout-mt-small
-                .small-font.pull-left.m-bottom.sub-title > echo('举报类型：') > echo(reportaudit.accuseRecord.type)
-                .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
-        textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5")
+            span > echo(reportaudit.member.fullName)
+    .report-content.layout-mt-small
+        p 举报内容：
+        .report-content-item.small-font > echo(reportaudit.question.title)
+    .report-reson.reson-height
+        p 举报理由：
+        .small-font > echo(reportaudit.content)
+        .report-type.border.bottom.clearfix.layout-mt-small
+            .small-font.pull-left.m-bottom.sub-title
+                span 举报类型:
+                span > map('ask-source-type' reportaudit.type)
+            .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
+    textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5")
 #  module > .course-page
 #      div(data-region='reportaudit' style='height:100%;')
 

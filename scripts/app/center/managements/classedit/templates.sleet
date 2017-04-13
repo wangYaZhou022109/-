@@ -1,0 +1,57 @@
+#!handlebars
+
+module > .classedit-page
+    .classedit(data-region="classedit")
+
+view('classedit')
+    .layout-mt-small
+        .classedit-title.clearfix
+            .pull-left
+                span 课程名称
+                span 课程名称课程名称
+            .pull-right
+                span 学习方式：
+                soan 面授
+        .classedit-form.form.m-top
+            .clearfix
+                .form-row.pull-left.w-half
+                    label.label.required 讲师姓名
+                    .content
+                        input.input.w-full(placeholder="刘宇超")
+                .form-row.pull-left.w-half
+                    label.label.required 讲师电话
+                    .content
+                        input.input.w-full(placeholder="1234576890")
+                .form-row.pull-left.w-half
+                    label.label.required 讲师部门
+                    .content
+                        input.input.w-full(placeholder="部门名称")
+                .form-row.pull-left.w-half
+                    label.label.required 讲师职务
+                    .content
+                        input.input.w-full(placeholder="职务名称")
+            .form-row
+                label.label.required 讲师身份证
+                .content
+                    input.input(placeholder="2132425345436467567567")
+            .form-row
+                label.lable.required 讲师银行名称
+                .content
+                    input.input(placeholder="中国银行")
+            .form-row
+                label.label.required 讲师银行卡号
+                .content
+                    input.input(placeholder="2132425345436467567567")
+            .clearfix
+                .form-row.pull-left.classedit-form-width
+                    label.label.required 实付
+                    .content
+                        input.input(placeholder="800")
+                .form-row.pull-left.classedit-form-width
+                    label.label.required 酬金
+                    .content
+                        input.input(placeholder="700")
+                .form-row.pull-left.classedit-form-width
+                    label.label.required 税金
+                    .content
+                        input.input(placeholder="100")

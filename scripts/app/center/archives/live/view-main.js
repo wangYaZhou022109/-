@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    helpers = require('./app/util/helpers');
 
 exports.bindings = {
     list: true,
@@ -15,6 +16,10 @@ exports.dataForTemplate = {
         _.map(data.list || [], function(role, i) {
             var r = role;
             r.i = i + 1 + ((pageNum - 1) * 10);
+
+            r.startTimeStr = helpers.dateMinute(r.startTime);
+            r.endTimeStr = helpers.dateMinute(r.endTime);
+            r.joinTimeStr = helpers.dateMinute(r.joinTime);
         });
         return data.list;
     },

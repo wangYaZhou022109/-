@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     expert: true
@@ -10,6 +10,7 @@ exports.events = {
 
 exports.handlers = {
     details: function(id) {
+        $(window).unbind('scroll');
         if (id === 'more') {
             this.app.show('content', 'ask/expert');
         } else {

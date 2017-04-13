@@ -3,6 +3,8 @@ exports.items = {
     main: 'main'
 };
 
+exports.title = '公告';
+
 exports.store = {
     models: {
         announcements: { url: '../system/operation/announcement/person-list-all' } // 公告

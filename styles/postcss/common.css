@@ -153,6 +153,10 @@ section.section {
     display: block;
     height: 0;
     border-bottom: 1px solid var(--border-color);
+
+    &.dashed {
+        border-bottom-style: dashed;
+    }
 }
 
 /* display */

@@ -47,6 +47,7 @@ module.exports = {
     my: '我的',
     me: '我',
     more: '更多',
+    manage: '管理',
     'my-sharing': '我要分享',
     'my-question': '我要提问',
     'my-follow': '我要关注',

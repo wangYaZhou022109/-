@@ -33,11 +33,9 @@ exports.dataForTemplate = {
             me = this;
         _.map(task.attachments || [], function(attach) {
             var obj = attach;
+            obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
             if (obj.contentType && obj.contentType === 1) {
                 obj.preview = true;
-                obj.downUrl = me.bindings.preview.getFullUrl() + '/' + obj.attachmentId;
-            } else {
-                obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
             }
             return obj;
         });

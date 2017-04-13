@@ -7,9 +7,18 @@ module > .attention-page
             div(data-region='list')
 
 view('menu')
-    li#item-1.active(class ='') > a(id='menu-content' href='javascript:;') > string('content')
-    li#item-2(class ='') > a(id='menu-topic' href='javascript:;') > string('topic')
-    li#item-3(class ='') > a(id='menu-expert' href='javascript:;') > string('expert')
+    compare(state.menu 'eq' 'content')
+        li#item-1(class ='active') > a(id='menu-content' href='javascript:;') > string('content')
+    else
+        li#item-1(class ='') > a(id='menu-content' href='javascript:;') > string('content')
+    compare(state.menu 'eq' 'topic')    
+        li#item-2(class ='active') > a(id='menu-topic' href='javascript:;') > string('topic')
+    else
+        li#item-2(class ='') > a(id='menu-topic' href='javascript:;') > string('topic')
+    compare(state.menu 'eq' 'expert')
+        li#item-3(class ='active') > a(id='menu-expert' href='javascript:;') > string('expert')
+    else
+        li#item-3(class ='') > a(id='menu-expert' href='javascript:;') > string('expert')
 
 view('list') 
     li.tabs-cont-item.active#tabs-cont-item-1

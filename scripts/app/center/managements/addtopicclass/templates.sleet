@@ -1,0 +1,126 @@
+#!handlebars
+
+module > .addtopicclass-page
+    .addtopicclass(data-region="addtopicclass")
+
+view('addtopicclass')
+    .page-main-wrapper
+        .page-side.bg-highlight.layout-ml-small
+            h5 已选课程
+            table.table
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+                tr
+                    td 课程名称课程名称课程名称
+                    td
+                        i.iconfont.icon-sort-asc
+                        i.iconfont.icon-sort-desc
+
+        .page-main
+            .choosetopic.clearfix
+                label.pull-left.m-right.choosetopic-title 选择主题
+                .content.overflow
+                    select.w-full.choosetopic-title
+                        option 主题1
+                        option 主题2
+            .filter-row.clearfix.m-top.relative
+                .pull-left
+                    .filter-item.w-full.m-bottom.classname
+                        label.m-right.pull-left 课程名称
+                        input
+                    .filter-item.clearfix
+                        label.pull-left.m-right 课程分类
+                        input.pull-left(placeholder="全部")
+                        .btn.pull-left 选择
+                    .filter-item.clearfix
+                        label.pull-left.m-right 归属部门
+                        input.pull-left(placeholder="全部")
+                        .btn.pull-left 选择
+                .pull-right > .btn.addtopic-btn 搜索
+            table.table
+                tr
+                    th(colspan="2") 课程名称
+                    th 归属部门
+                    th 课程分类
+                    th 适用终端
+                tr
+                    td > input(type="checkbox")
+                    td 课程名称课程名称
+                    td 产品部
+                    td 目录名称
+                    td 全部
+                tr
+                    td > input(type="checkbox")
+                    td 课程名称课程名称
+                    td 产品部
+                    td 目录名称
+                    td 全部
+                tr
+                    td > input(type="checkbox")
+                    td 课程名称课程名称
+                    td 产品部
+                    td 目录名称
+                    td 全部
+                tr
+                    td > input(type="checkbox")
+                    td 课程名称课程名称
+                    td 产品部
+                    td 目录名称
+                    td 全部
+                tr
+                    td > input(type="checkbox")
+                    td 课程名称课程名称
+                    td 产品部
+                    td 目录名称
+                    td pc
+                tr
+                    td > input(type="checkbox")
+                    td 课程名称课程名称
+                    td 产品部
+                    td 目录名称
+                    td APP
+            .pagination
+                ul
+                    li 首页
+                    li 上一页
+                    li 3/10
+                    li 下一页
+                    li 尾页

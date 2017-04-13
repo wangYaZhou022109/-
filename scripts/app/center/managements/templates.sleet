@@ -16,10 +16,10 @@ moudle > .managements-page
 view('managements-title')
     .container
         .managements-main-title.layout-mt-small
-            .common-title.pull-left.layout-mr-small.padding 班级名称班级名称班级名称
-            span.bg-main-color 未实施
-            span.bg-main-color 进行中
-            span.bg-main-color 已结束
+            .h4.pull-left.strong.layout-mr-small 班级名称班级名称班级名称
+            .tag-btn.bg-main-color 未实施
+            .tag-btn.bg-main-color 进行中
+            .tag-btn.bg-main-color 已结束
             .tag-btn.radius.pull-right.active 进入班级
         .managements-tabs
             ul.clearfix.layout-mt
@@ -78,70 +78,176 @@ view('managements-ordertime')
     #managements-content-1
         .container.bg-highlight.overflow
             section.managements-content-area
-                table.table
-                    tr
-                        td > label 培训班名称
-                        td 培训班名称
-                        td > label MIS编号
-                        td 093141102
-                    tr
-                        td > label 需求方
-                        td 中国移动通信集团
-                        td > label 需求方联系人
-                        td 某某某
-                    tr
-                        td > label 联系电话
-                        td > input.input(type="text")
-                        td 邮箱
-                        td > input.input(type="text")
-                    tr
-                        td 计划人数
-                        td 20
-                        td 培训天数
-                        td 20
-                    tr
-                        td > label.label.required 是否外部举办
-                        td
-                            input(type="radio" name="radio" checked="true") + label.layout-mr-small 是
-                            input(type="radio" name="radio") + label 否
-                        td > label.label 需求调研方式
-                        td > input.input(placeholder="如：无、工作分析、领导访谈、电话调研")
-                    tr
-                        td > label 往返日期
-                        td
-                            input.input.pull-left
+                .form
+                    .clearfix
+                        .form-row.specical.pull-left
+                            label.label 培训班名称
+                            .content > span 培训班名称
+                        .form-row.specical.pull-left
+                            label.label MIS编号
+                            .content > span 09314110102
+                        .form-row.specical.pull-left
+                            label.label 需求方
+                            .content > span 中国移动通信集团
+                        .form-row.specical.pull-left
+                            label.label 需求方联系人
+                            .content > span 刘宇超
+                        .form-row.specical.pull-left
+                            label.label 联系电话
+                            .content > input(placeholder="1234567890")
+                        .form-row.specical.pull-left
+                            label.label 邮箱
+                            .content > input(placeholder="maxxie.liu@foxmail.com")
+                        .form-row.specical.pull-left
+                            label.label 计划人数
+                            .content > span 22
+                        .form-row.specical.pull-left
+                            label.label 培训天数
+                            .content > span 20
+                        .form-row.specical.pull-left
+                            label.label.required 是否外部举办
+                            .content
+                                input(type="radio" name="out")
+                                label.m-right 是
+                                input(type="radio" name="out" checked="true")
+                                label 否
+                        .form-row.specical.pull-left
+                            label.label.required 需求调研方式
+                            .content > input.input(placeholder="如：工作分析、领导访谈")
+                    .form-row.clearfix
+                        label.label.required 往返日期
+                        .content
+                            input.pull-left.w-half(placeholder="2016-12-24  ~  2016-12-25")
                             .btn 选择日期
-                    tr
-                        td > label 培训目标
-                        td(colspan="3") > textarea(cols="100" rows="5")
-                    tr
-                        td > label 培训对象
-                        td(colspan="3") > textarea(cols="100" rows="5")
+                    .form-row
+                        label.label.required 培训目标
+                        .content > textarea.w-full(rows="5" placeholder="几句话介绍举办本次培训的目标和背景")
+                    .form-row
+                        label.label.required 培训对象
+                        .content > textarea.w-full(rows="5")
 
 view('managements-classinfo')
     #managements-content-2
         .container.bg-highlight.overflow
             section.managements-content-area
-                a 1111
+                .classinfo-top
+                    .clearfix
+                        .pull-left.layout-mr
+                            span.layout-mr-small 培训班名称
+                            span 培训班名称培训班名称培训班名称
+                        .pull-left
+                            span 学习地点：
+                            span 中国移动学院
+                    .clearfix.layout-mt-small
+                        .pull-left.m-right
+                            span.layout-mr-small 培训起止时间
+                            span 2015-03-24  ～ 2015-03-24
+                        .pull-left.color-error （注：开始时间自动生成为报到日后一天，结束时间自动生成为返程日前一天）
+                    .clearfix.layout-mt-small
+                        .pull-left.layout-mr
+                            span 学习地点：
+                            span 中国移动学院
+                        .pull-left.layout-mr
+                            span 客房：
+                            span 暂未分配
+                        .pull-left.layout-mr
+                            span 餐厅：
+                            span 暂未分配
+                        .pull-left.layout-mr
+                            span 教室
+                            span 暂未分配
+                    .form.align-left.m-top
+                        .clearfix
+                            .form-row.pull-left.w-half.special
+                                label.label.required 是否有省公司二级经理参加
+                                .content
+                                    input(type="radio" name="enter" checked="true")
+                                    label.layout-mr-small 是
+                                    input(type="radio" name="enter")
+                                    label 否
+                            .form-row.pull-left.w-half.special
+                                label.label.required 是否有部长级及以上领导参加
+                                .content
+                                    input(type="radio" name="minister" checked="true")
+                                    label.layout-mr-small 是
+                                    input(type="radio" name="minister")
+                                    label 否
+                            .form-row.pull-left.w-half
+                                label.label.required 班级合影
+                                .content
+                                    input(type="radio" name="photo" checked="true")
+                                    label.layout-mr-small 是
+                                    input(type="radio" name="photo")
+                                    label 否
+                            .form-row.pull-left.w-half
+                                label.label.required 合影时间
+                                .content
+                                    .relative
+                                        input.input.date(placeholder="2016-03-04 13:00")
+                                        .iconfont.icon-riqi.text-main-color
+                            .form-row.pull-left.w-half
+                                label.label.required 课程制作
+                                .content
+                                    input(type="radio" name="classmake" checked="true")
+                                    label.m-right 是
+                                    input(type="radio" name="classmake")
+                                    label 否
+                            .form-row.pull-left.w-half
+                                label.label.required 制作需求
+                                .content > input.input(placeholder="课程名称、时间及需求")
+                            .form-row.pull-left.w-half
+                                label.label.required 教室桌型
+                                .content
+                                    select.w-full
+                                        option 圆形
+                                        option 其他
+                            .form-row.pull-left.w-half
+                                .content > a 查看移动通信学院资源
+                        .form-row
+                            label.label.required 其他需求
+                            .content > textarea.w-full.pull-left(rows="2" placeholder="填写课程名称、时间及需求")
+                .classinfo-bottom.layout-mt
+                    .clearfix
+                        .classinfo-bottom-item.pull-left
+                            label 客房：
+                            input.input
+                        .classinfo-bottom-item.pull-left
+                            label 餐厅：
+                            input.input
+                        .classinfo-bottom-item.pull-left
+                            label 教室：
+                            select.select-width
+                                option 701
+                                option 702
+                                option 703
+                    .clearfix.layout-mt-small
+                        .pull-left.layout-mr
+                            span.m-right.pull-left.m-right 班级首页图片
+                            span.sub-text.pull-left 推荐图片分辨率为：1000*290；图片大小小于1M。
+                        .tag-btn.pull-left.active 上传
+                .text-center.layout-mt > .btn.bg-gray 提交
 
 view('managements-dateplan')
     #managements-content-3
         .container.bg-highlight.overflow.dateplan-padding
             section.layout-mt-small
                 .clearfix
-                    .tag-btn.radius.pull-right 导出安排
-                .pull-left
-                    label.m-right 线下课程安排
-                    select
-                        option 第一周（3月4日~3月6日）
-                        option 第二周（3月4日~3月6日）
-                        option 第三周（3月4日~3月6日）
-                .pull-right
-                    .tag-btn.radius#weektopic 配置周主题
-                    .tag-btn.radius#addclass 添加课程
-                    .tag-btn.radius 导入课程
-                    span 最小化 -
+                    .tag-btn.radius.pull-right.selected 导出安排
                 table.table
+                    tr
+                        td(colspan="9")
+                            .pull-left
+                                label.m-right 线下课程安排
+                                select
+                                    option 第一周（3月4日~3月6日）
+                                    option 第二周（3月4日~3月6日）
+                                    option 第三周（3月4日~3月6日）
+                            .pull-right
+                                .tag-btn.radius#weektopic 配置周主题
+                                .tag-btn.radius#addclass 添加课程
+                                .tag-btn.radius 导入课程
+                                .inline-block 最小化
+                                .inline-block.minimize -
                     tr
                         th 日期
                         th 时间
@@ -197,13 +303,15 @@ view('managements-dateplan')
                         td
                             i.iconfont.icon-edit.text-main-color.m-right
                             i.iconfont.icon-close-circle.custom-color-3
-                .pull-left.layout-mt-small
-                    label 在线资源
-                .pull-right.layout-mt-small
-                    .tag-btn.radius#topic 配置主题
-                    .tag-btn.radius 添加课程
-                    span 最小化 -
                 table.table
+                    tr
+                        td(colspan="9")
+                            label.pull-left 在线资源
+                            .pull-right
+                                .tag-btn.radius#topic 配置主题
+                                .tag-btn.radius#addtopicclass 添加课程
+                                .inline-block 最小化
+                                .inline-block.minimize -
                     tr
                         th 主题
                         th 课程名称
@@ -235,14 +343,16 @@ view('managements-dateplan')
                         td
                             i.iconfont.icon-search.custom-color-4.m-right
                             i.iconfont.icon-close-circle.custom-color-3
-                .pull-left.layout-mt-small
-                    label 调研与问卷
-                .pull-right.layout-mt-small
-                    .tag-btn.radius 添加考试
-                    .tag-btn.radius 添加调研
-                    .tag-btn.radius 添加评估
-                    span 最小化 -
                 table.table
+                    tr
+                        td(colspan="9")
+                            label.pull-left 调研与问卷
+                            .pull-right
+                                .tag-btn.radius#addexam 添加考试
+                                .tag-btn.radius#addevaluation-1 添加调研
+                                .tag-btn.radius#addevaluation-2 添加评估
+                                .inline-block 最小化
+                                .inline-block.minimize -
                     tr
                         th 序号
                         th 问卷名称
@@ -280,12 +390,14 @@ view('managements-dateplan')
                             i.iconfont.icon-edit.text-main-color.m-right
                             i.iconfont.icon-search.custom-color-4.m-right
                             i.iconfont.icon-close-circle.custom-color-3
-                .pull-left.layout-mt-small
-                    label 调研与问卷
-                .pull-right.layout-mt-small
-                    .tag-btn.radius 添加作业
-                    span 最小化 -
                 table.table
+                    tr
+                        td(colspan="9")
+                            label.pull-left 调研与问卷
+                            .pull-right
+                                .tag-btn.radius#addwork 添加作业
+                                .inline-block 最小化
+                                .inline-block.minimize -
                     tr
                         th 序号
                         th 作业名称
@@ -873,7 +985,7 @@ view('managements-classmanage')
                             .tag-btn.active 半天
                             .tag-btn 全天
                         .pull-right
-                            .tag-btn.selected
+                            .tag-btn.selected#addattendance
                                 | +添加
                             .tag-btn.selected 删除
                     table.table.layout-mt-small
@@ -895,11 +1007,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-1 签到名单
                                 span |
-                                a 请假
+                                a#leave-1 请假
                                 span |
-                                a 编辑
+                                a#edit-1 编辑
                         tr
                             td > input(type="checkbox")
                             td 2016-1-9 上午签到
@@ -909,11 +1021,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-2 签到名单
                                 span |
-                                a 请假
+                                a#leave-2 请假
                                 span |
-                                a 编辑
+                                a#edit-2 编辑
                         tr
                             td > input(type="checkbox")
                             td 2016-1-9 上午签到
@@ -923,11 +1035,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-3 签到名单
                                 span |
-                                a 请假
+                                a#leave-3 请假
                                 span |
-                                a 编辑
+                                a#edit-3 编辑
                         tr
                             td > input(type="checkbox")
                             td 2016-1-9 上午签到
@@ -937,11 +1049,11 @@ view('managements-classmanage')
                             td 已开始
                             td 预览 下载
                             td
-                                a 签到名单
+                                a#attendancelist-4 签到名单
                                 span |
-                                a 请假
+                                a#leave-4 请假
                                 span |
-                                a 编辑
+                                a#edit-4 编辑
                 #classmanage-content-2.display-none
                     section.section
                         .clearfix
@@ -964,7 +1076,7 @@ view('managements-classmanage')
                                 td -
                                 td -
                                 td -
-                                td > a 编辑
+                                td > a#classedit-1 编辑
                             tr
                                 td 标题标题标题标题标题标题
                                 td 某某某
@@ -972,7 +1084,7 @@ view('managements-classmanage')
                                 td 123
                                 td 123
                                 td 123
-                                td > a 编辑
+                                td > a#classedit-2 编辑
                             tr
                                 td 标题标题标题标题标题标题
                                 td 某某某
@@ -980,7 +1092,10 @@ view('managements-classmanage')
                                 td 456
                                 td 456
                                 td 456
-                                td > a 编辑
+                                td > a#classedit-3 编辑
+                        .layout-mt.text-center
+                            .btn 保存
+
                 #classmanage-content-3.display-none
                     section.section
                         .clearfix
@@ -1000,8 +1115,8 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 进行中
                                 td
-                                    a 统计
-                                    span |
+                                    a#count-1 统计
+                                    span.text-main-color |
                                     a 删除
                             tr
                                 td 培训返程日统计
@@ -1009,10 +1124,10 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 未开始
                                 td
-                                    a 统计
-                                    span |
-                                    a 统计
-                                    span |
+                                    a 编辑
+                                    span.text-main-color |
+                                    a#count-2 统计
+                                    span.text-main-color |
                                     a 删除
                             tr
                                 td 培训返程日统计
@@ -1020,41 +1135,42 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 已结束
                                 td
-                                    a 统计
-                                    span |
+                                    a#count-3 统计
+                                    span.text-main-color |
                                     a 删除
                 #classmanage-content-4.display-none
                     section.section
-                        .form
-                            .clearfix
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                                .form-row.pull-left.form-row-width
-                                    label.label.required 培训人数
-                                    .content > input.input(placeholder="计划信息带入")
-                            .form-row
-                                label.label.required 说明
-                                .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
-                        .text-center > .btn.bg-gray 提交
+                        .container
+                            .form.align-left
+                                .clearfix
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                .form-row
+                                    label.label.required 说明
+                                    .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
+                            .text-center > .btn.bg-gray 提交
                 #classmanage-content-5.display-none
                     .container
                         section.section.w-half
@@ -1065,7 +1181,7 @@ view('managements-classmanage')
                                 input(type="radio" name="rank")
                                 label.layout-mr 否
                                 label.strong 显示规则：
-                                select
+                                select.select-width
                                     option 显示前十名
                                     option 显示全部
                             .classnotice-content.layout-mt
@@ -1076,9 +1192,11 @@ view('managements-classmanage')
                 #classmanage-content-6.display-none
                     .container
                         section.section
-                            span 共
-                            span.text-main-color 10
-                            span 条评论
+                            .border.bottom
+                                .m-bottom
+                                    span 共
+                                    span.text-main-color 10
+                                    span 条评论
                             .comment-list > ul
                                 li
                                     .user-pic > img(src="images/1.png")
@@ -1145,6 +1263,49 @@ view('managements-classmanage')
                                         .text-center
                                             .sub-title 照片名称
                                             .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+
 
 view('managements-evaluate')
     .container.bg-highlight
@@ -1182,7 +1343,7 @@ view('managements-evaluate')
                                 td 评估
                                 td 2017-03-01 19:00
                                 td 2017-03-01 19:00
-                                td > a 查看
+                                td > a#watchevaluate 查看
                         .layout-mt-small
                         table.table
                             tr
@@ -1201,7 +1362,7 @@ view('managements-evaluate')
                                     i.iconfont.icon-note
                                 td 0%
                                 td
-                                    a 查看
+                                    a#studentwatch 查看
                                     span |
                                     a 统计
                             tr
@@ -1351,7 +1512,34 @@ view('managements-evaluate')
                                     td > a#taskdetail-3 详情
 
 view('managements-learneffect')
-
+    .container
+        .container
+            .layout-mt-small.border.bottom.dashed
+                .w-half
+                    .color-error.layout-mb-small 开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度，开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度,开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度
+            .layout-mt
+                .form
+                    .form-row
+                        label.label.required 本次培训采用的考核方式：
+                        .content
+                            input.text-width(placeholder="考试方式")
+                            p 如：考试、学习汇报、小组作业、撰写学习心得、工作模拟、岗位考试认证
+                    .form-row
+                        label.label.required.text 附件上传：
+                        .content
+                            .accessory
+                                span 已有附件：
+                                span 设计规划
+                                a.m-left 删除附件
+                            .m-top
+                                input(type="file")
+                                p 注：请上传相关证明材料，如考试结果、小组汇报PPT、学员学习作业汇总
+                    .form-row
+                        label.label.required 考核结果：
+                        .content
+                            textarea.text-width(rows="5" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用，掌握情况")
+            .text-center
+                .btn 提交
 view('managements-trainsummary')
     .container
         .layout-mt-small.border.bottom.dashed
@@ -1360,45 +1548,179 @@ view('managements-trainsummary')
             p * 该总结内容将定期呈报集团领导及相关部门领导审阅参考，请主办部门培训联系人全面参与和最终把关。
         .clearfix.m-top
             .btn.radius.pull-right 导出培训总结
-        .trainsummary-content
+        .trainsummary-content.container
             h2.text-center XX培训班培训项目总结报告
             .layout-mt-small
-                h4 一、培训项目概况
-                .item
-                    p 1、基本信息
-                    p 本期培训是由业务支撑系统部 主办， 培训编号为00000 ， 培训对象为3山东省对此 ， 实际参训学员人数人 ， 培训时间：2016-12-20 至 2016-12-20 。
-                .clearfix
-                    p.pull-left 2、培训目标:
-                    p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
-                .clearfix
-                    p.pull-left 3、需求调研方式
-                    p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
-                .samll-font 培训前通过：培训问卷，明确了培训项目需求。
-                .layout-mt
-                    table.table
-                        tr > th.strong(colspan="7") 面授课程
-                        tr
-                            td.strong 日期
-                            td.strong 时间
-                            td.strong 课程名称
-                            td.strong 讲师
-                            td.strong 单位
-                            td.strong 职务/职称
-                            td.strong 学习方式
-                        tr
-                            td(rowspan="2") 2016-12-20
-                            td 09:00-12:00
-                            td 111
-                            td 张慧勇
-                            td 总部
-                            td 项目经理
-                            td 面授
-                        tr
-                            td 14:00-17:30
-                            td 222
-                            td 王岩
-                            td 总部
-                            td 项目经理
-                            td 面授
-                .layout-mt
-                    table.table
+                .trainsummary-item
+                    h4 一、培训项目概况
+                    .item
+                        p.strong 1、基本信息:
+                        span 本期培训是由业务支撑系统部 主办， 培训编号为
+                        span 00000
+                        span ，培训对象为3山东省对此,实际参训学员人数
+                        span 1000
+                        span ,培训时间：
+                        span 2016-12-20
+                        span 至
+                        span 2016-12-20 。
+                    .clearfix
+                        p.strong.pull-left 2、培训目标:
+                        p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                    textarea.w-full.recommend-padding(cols="2" placeholder="培训目标培训目标")
+                    .clearfix
+                        p.strong.pull-left 3、需求调研方式
+                        p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                    textarea.w-full.recommend-padding(cols="2" placeholder="培训前通过：培训问卷，明确了培训项目需求。")
+                    .layout-mt
+                        table.table
+                            tr > th.strong(colspan="7") 面授课程
+                            tr
+                                td.strong 日期
+                                td.strong 时间
+                                td.strong 课程名称
+                                td.strong 讲师
+                                td.strong 单位
+                                td.strong 职务/职称
+                                td.strong 学习方式
+                            tr
+                                td(rowspan="2") 2016-12-20
+                                td 09:00-12:00
+                                td 111
+                                td 张慧勇
+                                td 总部
+                                td 项目经理
+                                td 面授
+                            tr
+                                td 14:00-17:30
+                                td 222
+                                td 王岩
+                                td 总部
+                                td 项目经理
+                                td 面授
+                    .layout-mt
+                        table.table
+                            tr > th(colspan="2") 在线课程
+                            tr
+                                td 编号
+                                td 课程名称
+                            tr
+                                td 1
+                                td 111111111111111
+                    .clearfix
+                        p.strong.pull-left 4、培训形式:
+                        p.pull-left.color-error （班主任填写,请根据实际采用的培训形式对下方评语进行修改）
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 培训形式
+                            input(type="radio" name="check")
+                            label 混合式学习形式
+                            input.layout-ml(type="radio" name="check")
+                            label 面授与讨论形式
+                            input.layout-ml(type="radio" name="check")
+                            label 面授形式
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 混合式学习形式：
+                                    textarea.w-full.recommend-padding(cols="3" placeholder="培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式")
+                    .clearfix
+                        p.strong.pull-left 5、学员表现:
+                        p.pull-left.color-error （班主任填写,请根据实际学员表现情况对下方评语进行修改）
+                    .m-top
+                        .layout-ml-small
+                            p.strong 课堂表现
+                            input(type="radio" name="check")
+                            label 非常好
+                            input.layout-ml(type="radio" name="check")
+                            label 比较好
+                            input.layout-ml(type="radio" name="check")
+                            label 一般
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 非常好：
+                                    textarea.w-full.recommend-padding(cols="2" placeholder="参训学员课堂表现非常好，充分参与到培训过程中来")
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 出勤情况
+                            input(type="radio" name="check")
+                            label 全勤
+                            input.layout-ml(type="radio" name="check")
+                            label 良好
+                            input.layout-ml(type="radio" name="check")
+                            label 一般
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 全勤：
+                                    textarea.w-full.recommend-padding(cols="2" placeholder="没有学员迟到、早退或缺勤。")
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 优秀学员（选填）
+                            .clearfix
+                                p.pull-left 本次培训中，
+                                p.pull-left ___________________________
+                                p.pull-left 表现突出,被评为优秀学员。
+                            p 例子：本次培训中，某某公司某某人在小组研讨、汇报答辩中表现突出，被评为“优秀学员”。
+                    .item
+                        p.strong 6、学习效果考核方式:
+                        p 本次培训通过考试方式，进行了培训学习考核。
+                    .clearfix
+                        p.pull-left.strong 考核结果
+                        p.pull-left.color-error.strong （培训需求方填写）
+                    textarea.w-full.recommend-padding(cols="3" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用、通过考核评估学员对培训内容的掌握情况。")
+                .trainsummary-item
+                    h4 二、教学评估:
+                    .teach-item
+                        p.strong 1、培训项目设计：
+                        p 培训结束后，通过培训系统对学员进行了满意度调查，统计结果如下：
+                        .m-left
+                            span 学员对培训项目设计总体满意度为:
+                            span 100.00%
+                        table.table
+                            tr
+                                th 序号
+                                th 评价项目
+                                th 满意度
+                            tr > td.text-center(colspan="3") 无相关信息
+                    .teach-item
+                        p.strong 2、课程与讲师：
+                        p 培训结束后，通过培训系统对学员进行了满意度调查，统计结果如下：
+                        .m-left
+                            span 学员对培训项目设计总体满意度为:
+                            span 100.00%
+                        table.table
+                            tr
+                                th 序号
+                                th 课程名称
+                                th 讲师
+                                th 课程满意度
+                                th 讲师满意度
+                            tr > td.text-center(colspan="5") 无相关信息
+                .trainsummary-item
+                    .clearfix
+                        .h4.strong.pull-left.title-height 三、学员反馈意见:
+                        .btn.pull-left.m-left.radius 学员满意度问卷反馈建议导出
+                    .clearfix
+                        p.pull-left.strong 1、学员对集团业务、运营等方面的建议：
+                        p.pull-left.color-error.strong （培训需求方整理提炼）
+                    textarea.w-full.recommend-padding(rows="3" placeholder="点击上方“学员满意度问卷反馈建议导出”，将第n项问题的学员反馈建议、以及在培训过程中学员反馈的对公司业务、运营等方面的建议提炼整理后填写到此处，该建议将反馈至集团公司领导和相关部门领导。")
+                    .clearfix
+                        p.pull-left.strong 2、学员对培训项目的建议：
+                        p.pull-left.color-error.strong （班主任整理提炼）
+                    textarea.w-full.recommend-padding(rows="3" placeholder="点击上方“学员满意度问卷反馈建议导出”，将G、H、I、K四个问题的学员对项目的反馈建议填到此处。")
+                .trainsummary-item
+                    h4 四、其他（填写）：
+                    textarea.w-full.recommend-padding(rows="3")
+                .trainsummary-item.clearfix
+                    .pull-right
+                        .h5.strong.m-top.text-right 业务支撑系统部
+                        .h5.strong.m-top.text-right 中国移动学院
+                        .h5.strong.m-top.text-right 日期：
+                            span 2016-12-22
+                .text-center
+                    .btn.m-right 保存
+                    .btn 提交

@@ -10,13 +10,24 @@ exports.bindings = {
 exports.events = {
     'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
-    'click trend-report-*': 'report'
+    'click trend-report-*': 'report',
+    'click myshares-details-*': 'sharesDetails'
 };
 
 exports.handlers = {
+    sharesDetails: function(payload) {
+        var data = { },
+            id = payload;
+        $(window).unbind('scroll');
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.show('content', 'ask/myshares/details', { id: data[1] });
+        }
+    },
     showDetails: function(payload) {
         var data = { },
             id = payload;
+        $(window).unbind('scroll');
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
             this.app.show('content', 'ask/myquiz/details', { id: data[1] });
@@ -30,7 +41,10 @@ exports.handlers = {
             data = { };
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+            this.app.viewport.modal(this.module.items['ask/report'], {
+                id: data[1],
+                objectType: data[0],
+                beUserId: data[2] });
         }
     }
 };
@@ -118,12 +132,21 @@ exports.dataForTemplate = {
     page: function(data) {
         var trends = data.trends;
         var page = this.bindings.page.data;
+        var me = this;
+        var flag = true;
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
-            page.push(obj);
+            _.forEach(me.bindings.page.data, function(v) {
+                if (v.id === obj.id) {
+                    flag = false;
+                }
+            });
+            if (flag) {
+                page.push(obj);
+            }
         });
         return page;
     }
