@@ -1,6 +1,0 @@
-#! handlebars
-
-module
-    div(data-region='main')
-
-view('main')

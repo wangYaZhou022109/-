@@ -31,7 +31,7 @@ exports.components = [function() {
 exports.dataForTemplate = {
     section: function(data) {
         var section = data.state.section;
-        section.url = this.bindings.download.getFullUrl() + '?id=' + section.resourceId;
+        section.url = this.bindings.download.getFullUrl() + '?id=' + section.resourceId + '&type=mp4';
         return section;
     }
 };

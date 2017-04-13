@@ -9,7 +9,7 @@ var showHandler = function(payload) {
     var detailUrlMap = {
         8: '#/study/task/',
         9: '#/exam/exam/paper/',
-        12: '#/exam/research-activity/research-detail/'
+        12: '#/exam/research-activity/paper/'
     };
     return function() {
         var me = this;
