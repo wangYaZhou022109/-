@@ -110,19 +110,21 @@ exports.buttons = [{
     text: '发布',
     fn: function(payload) {
         var stepView = this.items.edit;
-        var str = stepView.getData();
+        var obj = stepView.getData();
+        var content = obj.html();
         var img,
             begin,
             end,
             data = payload;
         data.jsonImg = 'null';
-        if (str.indexOf('<img') !== -1) {
-            begin = str.indexOf('<img');
-            end = str.indexOf('/>');
-            img = $(str.substring(begin, end + 2));
+        if (content.indexOf('<img') !== -1) {
+            begin = content.indexOf('<img');
+            end = content.indexOf('/>');
+            img = $(content.substring(begin, end + 2));
             data.jsonImg = img[0].src;
         }
-        data.content = str;
+        data.content = content;
+        data.content_txt = obj.text();
         return this.dispatch('release', data);
     }
 }];
