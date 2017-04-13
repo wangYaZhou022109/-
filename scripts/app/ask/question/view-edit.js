@@ -11,6 +11,6 @@ exports.components = [{
 
 exports.mixin = {
     getData: function() {
-        return this.components.content.html();
+        return this.components.content;
     }
 };
