@@ -31,7 +31,7 @@ exports.handlers = {
             id = this.bindings.state.data.id;
         state.data = {};
         state.data.id = id;
-        state.data.menu = menu || 'expertsanswer';
+        state.data.menu = menu || 'myanswer';
         state.data[menu] = true;
         state.changed();
     }

@@ -15,7 +15,8 @@ exports.store = {
         relatedquestions: { data: { menu: 'relatedquestions' } },
         state: {
             data: {
-                menu: 'expertsanswer'
+                // menu: 'expertsanswer'
+                menu: 'myanswer'
             }
         },
         follow: {
