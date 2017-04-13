@@ -11,7 +11,7 @@ exports.buttons = [{
             state = this.bindings.state.data,
             url = '#/exam/research-activity/research-detail/' + id;
         if (state.currentType === 13) {
-            url = '#/exam/questionary/research-detail/' + id;
+            url = '#/exam/research-activity/paper/' + id;
         }
         window.open(url, '_blank');
     }

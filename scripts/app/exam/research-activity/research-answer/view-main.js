@@ -3,7 +3,9 @@ var types = require('./app/exam/research-question-types'),
     _ = require('lodash/collection'),
     SUMMARY_DETAIL_MODE = 1,
     ANSWER_DETAIL_MODE = 2,
-    MUTIPLE_TYPE = 1;
+    MUTIPLE_TYPE = 1,
+    EVALUTE_QUESTIONARY_TYPE = 3,
+    PERMIT_VIEW_COUNT = 1;
 
 exports.bindings = {
     researchRecord: true,
@@ -24,7 +26,8 @@ exports.getEntity = function(id) {
 
 exports.getEntityModuleName = function(id, question) {
     var researchQuestionary = this.bindings.researchRecord.data.researchQuestionary;
-    if (researchQuestionary && researchQuestionary.permitViewCount === 1) {
+    if (researchQuestionary && researchQuestionary.type !== EVALUTE_QUESTIONARY_TYPE
+        && researchQuestionary.permitViewCount === PERMIT_VIEW_COUNT) {
         return types.get(question.type, SUMMARY_DETAIL_MODE);
     }
     return types.get(question.type, ANSWER_DETAIL_MODE);
