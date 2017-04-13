@@ -26,7 +26,7 @@ view('banner')
 view('list')
     section.section
         .tabs.line.mb-1 > ul
-            compare(state.menu 'eq' 'myanswer')
+            compare(state.menu 'eq' 'expertsanswer')
                 li#menu-expertsanswer.active > string('expert') + string('answer')
             else
                 li#menu-expertsanswer > string('expert') + string('answer')

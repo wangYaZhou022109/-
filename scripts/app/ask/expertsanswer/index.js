@@ -7,7 +7,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/expert-answer' },
+        expertdiscuss: { url: '../ask-bar/question-discuss/answer' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
@@ -20,18 +20,18 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var trends = this.models.trends;
+            var discuss = this.models.expertdiscuss;
             var params = this.models.page.params;
             params.id = payload.state.id;
-            trends.set(params);
-            return this.post(trends);
+            discuss.set(params);
+            return this.post(discuss);
         },
         page: function(payload) {
-            var trends = this.models.trends;
+            var discuss = this.models.expertdiscuss;
             var params = this.models.page.params;
             params.id = payload.state.id;
-            trends.set(params);
-            this.post(trends).then(function() {
+            discuss.set(params);
+            this.post(discuss).then(function() {
             });
         },
         follow: function(payload) {

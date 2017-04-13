@@ -16,7 +16,7 @@ exports.handlers = {
         var state = this.bindings.leftstate,
             expert = this.bindings.expert;
         state.data = {};
-        state.data.id = expert.data.id;
+        state.data.id = expert.data.member.id;
         state.data.menu = menu || 'inviteanswer';
         state.data[menu] = true;
         state.changed();

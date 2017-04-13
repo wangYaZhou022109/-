@@ -3,7 +3,7 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true,
+    expertdiscuss: true,
     page: true
 };
 
@@ -58,17 +58,17 @@ exports.dataForTemplate = {
     //     return trends;
     // },
     page: function(data) {
-        var trends = data.trends;
+        var trends = data.expertdiscuss;
         var page = this.bindings.page.data;
         var me = this;
         var flag = true;
         _.forEach(trends, function(value) {
             var obj = value,
-                date = new Date(obj.createTime);
-            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+                date = new Date(obj.questionDiscuss.createTime);
+            obj.questionDiscuss.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {
-                if (v.id === obj.id) {
+                if (v.questionDiscuss.id === obj.questionDiscuss.id) {
                     flag = false;
                 }
             });
