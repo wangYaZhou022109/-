@@ -1,0 +1,44 @@
+#!handlebars
+
+module > .addcarinfo-page
+    .addcarinfo-title(data-region="addcarinfo-title")
+    .addcarinfo-content(data-region="addcarinfo-content")
+
+view('addcarinfo-title')
+    .form.align-left
+        .form-row
+            label.required 统计主题
+            .content > input.input
+        .clearfix
+            .form-row.pull-left.w-half.addcarinfo-padding
+                label.required 开始时间
+                .content > input.w-full
+            .form-row.pull-left.w-half
+                label.required 结束日期
+                .content > input.w-full
+
+view('addcarinfo-content')
+    .addcarinfo-item.border.around.inline-block.m-right.m-top
+        .small-font.border.bottom.s-padding 2017/3/1 17:30去集团
+        p 说名内容说名内容说名内容（可为空）
+    .addcarinfo-close.inline-block —
+    .addcarinfo-item.border.around.inline-block.m-right.m-top
+        .small-font.border.bottom.s-padding 2017/3/1 17:30去集团
+        p 说名内容说名内容说名内容（可为空）
+    .addcarinfo-close.inline-block —
+    .addcarinfo-item.border.around.inline-block.m-right.m-top
+        .small-font.border.bottom.s-padding 2017/3/1 17:30去集团
+        p 说名内容说名内容说名内容（可为空）
+    .addcarinfo-close.inline-block —
+    .addcarinfo-item.border.around.inline-block.m-right.m-top
+        .small-font.border.bottom.s-padding 2017/3/1 17:30去集团
+        p 说名内容说名内容说名内容（可为空）
+    .addcarinfo-close.inline-block —
+    .addcarinfo-item.border.around.inline-block.m-right.m-top
+        .small-font.border.bottom.s-padding 2017/3/1 17:30去集团
+        p 说名内容说名内容说名内容（可为空）
+    .addcarinfo-close.inline-block —
+    .addcarinfo-item.border.around.inline-block.m-right.m-top
+        .small-font.border.bottom.s-padding 2017/3/1 17:30去集团
+        p 说名内容说名内容说名内容（可为空）
+    .addcarinfo-close.inline-block —

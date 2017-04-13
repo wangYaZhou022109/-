@@ -72,7 +72,7 @@ view('managements-title')
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 预定时间
+                    p.layout-mt-small.sub-title 培训总结
 
 view('managements-ordertime')
     #managements-content-1
@@ -438,14 +438,14 @@ view('managements-quotamanage')
         .container.bg-highlight.overflow.dateplan-padding
             section.section.container
                 .layout-mr-small.pull-left
-                    .small-font.sub-title.pull-left.m-right 配额方式：
+                    .small-font.sub-title.inline-block.m-right 配额方式：
                     .tag-btn.active#quota-1 分省配额
                     .tag-btn#quota-2 整体配额
                 .quotamanage-title.clearfix
                     .layout-mr-small.pull-left
-                        .small-font.sub-title.pull-left.m-right 审核方式:
+                        .small-font.sub-title.inline-block.m-right 审核方式:
                         input.r-input(type="radio" checked="true" name="approve")
-                        label.small-font 自动审批
+                        label.small-font.m-right 自动审批
                         input.r-input(type="radio" name="approve")
                         label.small-font 手动审批
                     .pull-right
@@ -458,7 +458,7 @@ view('managements-quotamanage')
                         .quotamanage-content.layout-mt-small
                             .clearfix
                                 .pull-right
-                                    .tag-btn 添加单位
+                                    .tag-btn#addunit 添加单位
                                     .tag-btn 删除
                             table.table
                                 tr
@@ -985,7 +985,7 @@ view('managements-classmanage')
                             .tag-btn.active 半天
                             .tag-btn 全天
                         .pull-right
-                            .tag-btn.selected#addattendance
+                            .tag-btn.selected#addattendance-1
                                 | +添加
                             .tag-btn.selected 删除
                     table.table.layout-mt-small
@@ -1100,7 +1100,7 @@ view('managements-classmanage')
                     section.section
                         .clearfix
                             label.pull-left 班车/订餐信息
-                            .tag-btn.pull-right.selected
+                            .tag-btn.pull-right.selected#addcarinfo-1
                                 | +添加
                         table.table.layout-mt-small
                             tr
@@ -1124,7 +1124,7 @@ view('managements-classmanage')
                                 td 2016-12-22 09:00
                                 td 未开始
                                 td
-                                    a 编辑
+                                    a#addcarinfo-2 编辑
                                     span.text-main-color |
                                     a#count-2 统计
                                     span.text-main-color |
@@ -1251,60 +1251,65 @@ view('managements-classmanage')
                         section.section
                             .tag-btn.active.radius 上传照片
                             .tag-btn.active.radius 删除
-                            .photos.clearfix
+                            .photos
                                 ul
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                            .progress
-                                                .inline-block.progress-item.pull-left
-                                                span.inline-block.pull-left 75%
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                            .progress-box
+                                                .progress
+                                                    .progress-bar(style="width:100%")
+                                                    span 100%
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）点击可修改
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                            .progress-box
+                                                .progress
+                                                    .progress-bar(style="width:80%")
+                                                    span 80%
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
-                                        .text-center
-                                            .sub-title 照片名称
-                                            .sub-title （点击可修改）
+                                        .text-center.m-top
+                                            .sub-title.small-font 照片名称
+                                            .sub-title.small-font （点击可修改）
 
 
 view('managements-evaluate')
@@ -1555,14 +1560,7 @@ view('managements-trainsummary')
                     h4 一、培训项目概况
                     .item
                         p.strong 1、基本信息:
-                        span 本期培训是由业务支撑系统部 主办， 培训编号为
-                        span 00000
-                        span ，培训对象为3山东省对此,实际参训学员人数
-                        span 1000
-                        span ,培训时间：
-                        span 2016-12-20
-                        span 至
-                        span 2016-12-20 。
+                        span 本期培训是由业务支撑系统部 主办，培训编号为00000，培训对象为3山东省对此,实际参训学员人数1000,培训时间：2016-12-20至2016-12-20 。
                     .clearfix
                         p.strong.pull-left 2、培训目标:
                         p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）

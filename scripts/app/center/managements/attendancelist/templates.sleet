@@ -8,37 +8,34 @@ view('attendancelist-title')
     .border.bottom.solid
         .layout-mt-small.clearfix
             .attendancelist-title-item.pull-left.layout-mr
-                span 签到名称：
-                span 2016-1-9
-                span 上午签到
+                span 签到名称：2016-1-9上午签到
             .attendancelist-title-item.pull-left.layout-mr
                 span 2016-1-9 9:00
                 span 至
                 span 2016-1-9 9:00
             .attendancelist-title-item.pull-left.layout-mr
-                span 迟到时间：
-                span 2016-1-9 9:00
+                span 迟到时间：2016-1-9 9:00
         .layout-mt-small.clearfix.layout-mb-small
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
                 span.m-right 应出勤
-                span 28
+                span.strong 28
                 span 人
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-time.m-right.text-main-color
                 span.m-right 正常签到
-                span 24
+                span.strong 24
                 span.m-right 人
                 span.m-right 迟到
-                span 2
+                span.strong 2
                 span.m-right 人
                 span.m-right 未签到
-                span 2
+                span.strong 2
                 span 人
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user.m-right
                 span.m-right 请假
-                span 1
+                span.strong 1
                 span 人
 
 view('attendancelist-content')
@@ -56,7 +53,7 @@ view('attendancelist-content')
             .pull-right
                 .btn 查询
                 .btn.m-left 导出
-                .btn.m-left 批量签到
+                .btn.m-left#mostsign-1 批量签到
         .layout-mt-small
             table.table
                 tr
@@ -72,46 +69,46 @@ view('attendancelist-content')
                     td 某某某
                     td 18576787846
                     td 2016-1-9 09：00
-                    td > a 已签到
+                    td > a#mostsign-2 已签到
                 tr
                     td > input(type="checkbox")
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 2016-1-9 09：00
-                    td > a 迟到
+                    td > a#mostsign-3 迟到
                 tr
                     td > input(type="checkbox")
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td
-                    td > a 未签到
+                    td > a#mostsign-4 未签到
                 tr
                     td > input(type="checkbox")
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td
-                    td > a 请假
+                    td > a#mostsign-5 请假
                 tr
                     td > input(type="checkbox")
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td
-                    td > a 请假
+                    td > a#mostsign-6 请假
                 tr
                     td > input(type="checkbox")
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 2016-1-9 09：00
-                    td > a 请假
+                    td > a#mostsign-7 请假
                 tr
                     td > input(type="checkbox")
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 2016-1-9 09：00
-                    td > a 请假
+                    td > a#mostsign-8 请假

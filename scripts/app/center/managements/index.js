@@ -3,8 +3,8 @@ exports.items = {
     'managements-title': 'managements-title',
     // 'managements-ordertime': 'managements-ordertime',
     // 'managements-classinfo': 'managements-classinfo',
-    'managements-dateplan': 'managements-dateplan',
-    // 'managements-quotamanage': 'managements-quotamanage',
+    // 'managements-dateplan': 'managements-dateplan',
+    'managements-quotamanage': 'managements-quotamanage',
     // 'managements-publishnotice': 'managements-publishnotice',
     // 'managements-membership': 'managements-membership',
     // 'managements-classmanage': 'managements-classmanage',
@@ -34,7 +34,9 @@ exports.items = {
     'center/managements/addtopicclass': { isModule: true },
     'center/managements/addwork': { isModule: true },
     'center/managements/addevaluation': { isModule: true },
-    'center/managements/addexam': { isModule: true }
+    'center/managements/addexam': { isModule: true },
+    'center/managements/addunit': { isModule: true },
+    'center/managements/addcarinfo': { isModule: true }
 };
 exports.events = {
     'click managements-tab-*': 'showContents'

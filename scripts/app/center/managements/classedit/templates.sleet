@@ -12,7 +12,7 @@ view('classedit')
             .pull-right
                 span 学习方式：
                 soan 面授
-        .classedit-form.form.m-top
+        .classedit-form.form.layout-mt-small
             .clearfix
                 .form-row.pull-left.w-half
                     label.label.required 讲师姓名

@@ -1,0 +1,7 @@
+.addunit-page {
+    & .addunit {
+        & .addunit-label {
+            line-height: var(--input-height);
+        }
+    }
+}
