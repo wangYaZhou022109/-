@@ -7,37 +7,56 @@ module > .train-class-page
             .div(data-region='main')
 
 view('count')
-    echo('签到名称')
-    echo(signOne.name)
-    echo('签到时间')
-    dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
-    echo('迟到时间')
-    dateTime(signOne.lateTime)
-    br
-    echo('应出勤')
-    echo('正常签到')
-    echo('迟到')
-    echo('请假')
-    echo('未签到')
+    .border.bottom.solid
+        .layout-mt-small.clearfix
+            .attendancelist-title-item.pull-left.layout-mr
+                span 签到名称：
+                span > echo(signOne.name)
+            .attendancelist-title-item.pull-left.layout-mr
+                span 签到时间：
+                span > dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
+            .attendancelist-title-item.pull-left.layout-mr
+                span 迟到时间：
+                span > dateTime(signOne.lateTime)
+        .layout-mt-small.clearfix.layout-mb-small
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 应出勤
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 正常签到
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 迟到
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 请假
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 未签到
+                    span > echo('人')
 
 view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('员工姓名')
-            input.input(name='memberFullName')
-        div.col-sm-3
-            echo('状态')
-            select#state(name='state')
-                option(value='') > echo('全部')
-                option(value='1') > echo('正常')
-                option(value='2') > echo('迟到')
-                option(value='3') > echo('未签到')
-                option(value='4') > echo('请假')
-        div.col-sm-3
-            btn.btn#search > echo('查询')
+    .layout-mt-small
+        .attendancelist-search.clearfix
+            .pull-left
+                input.input.layout-mr-small(name='memberFullName' placeholder="请输入员工姓名")
+                label 签到状态
+                select#state(name='state')
+                    option(value='') > echo('全部')
+                    option(value='1') > echo('正常')
+                    option(value='2') > echo('迟到')
+                    option(value='3') > echo('未签到')
+                    option(value='4') > echo('请假')
+            .pull-right
+                btn.btn#search > echo('查询')
 
 view('main')
-    div.text-center
+    .pull-right
         .buttons
             a(href=exportUrl ) > .btn > span 导出
             btn.btn#batchStatus > echo('批量签到')

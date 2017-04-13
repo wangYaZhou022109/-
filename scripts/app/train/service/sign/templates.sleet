@@ -1,11 +1,13 @@
 #!handlebars
 
-module > .train-class-page
+module
+    br
+    .train-class-page
     .page-main-wrapper
         .div(data-region='main')
 
 view('main')
-    div.row.text-center
+    section.section
         .clearfix.layout-mt-small
             .pull-left
                 label 签到规则
@@ -15,7 +17,6 @@ view('main')
             .pull-right
                 .btn#addSign > echo('添加')
                 .btn#batchDelete > echo('删除')
-    .list.m-top
         table.table.layout-mt-small
             thead > tr
                 th > input(type='checkbox' id='check-all')

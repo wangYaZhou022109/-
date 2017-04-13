@@ -81,3 +81,17 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
 };
+
+exports.components = [{
+    id: 'startTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}];

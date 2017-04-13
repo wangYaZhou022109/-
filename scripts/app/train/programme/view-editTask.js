@@ -146,21 +146,19 @@ findExtension = function(value) {
     return type;
 };
 
-// exports.components = [{
-//     id: 'startTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
-// }, {
-//     id: 'endTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true,
-//         noCalendar: true
-//     }
-// }];
-exports.components = [function() {
+exports.components = [{
+    id: 'startTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, function() {
     var data = this.bindings.state.data;
     var inputName = data.inputName || 'memberIds',
         tags = data.tags || [];

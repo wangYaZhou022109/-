@@ -5,19 +5,39 @@ module > .train-class-page
         .div(data-region='count')
         .div(data-region='main')
 
-view('count') > form.vertical
-    echo('签到名称') > form
-    echo(signOne.name)
-    echo('签到时间')
-    dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
-    echo('迟到时间')
-    dateTime(signOne.lateTime)
-    br
-    echo('应出勤')
-    echo('正常签到')
-    echo('迟到')
-    echo('请假')
-    echo('未签到')
+view('count')
+    .border.bottom.solid
+        .layout-mt-small.clearfix
+            .attendancelist-title-item.pull-left.layout-mr
+                span 签到名称：
+                span > echo(signOne.name)
+            .attendancelist-title-item.pull-left.layout-mr
+                span 签到时间：
+                span > dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
+            .attendancelist-title-item.pull-left.layout-mr
+                span 迟到时间：
+                span > dateTime(signOne.lateTime)
+        .layout-mt-small.clearfix.layout-mb-small
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 应出勤
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 正常签到
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 迟到
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 请假
+                    span > echo('人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                    span 未签到
+                    span > echo('人')
 
 view('main')
     div.row.text-center

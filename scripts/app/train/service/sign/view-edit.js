@@ -39,19 +39,6 @@ exports.dataForActions = {
 exports.actionCallbacks = {
 };
 
-exports.components = [function() {
-    var signId = this.bindings.sign.data.id;
-    return {
-        id: 'qrcode',
-        name: 'qrcode',
-        options: {
-            width: 128,
-            height: 128,
-            text: signId
-        }
-    };
-}];
-
 exports.dataForTemplate = {
     sign: function(data) {
         var sign = data.sign,
@@ -78,4 +65,15 @@ exports.components = [{
     options: {
         enableTime: true
     }
+}, function() {
+    var signId = this.bindings.sign.data.id;
+    return {
+        id: 'qrcode',
+        name: 'qrcode',
+        options: {
+            width: 128,
+            height: 128,
+            text: signId
+        }
+    };
 }];
