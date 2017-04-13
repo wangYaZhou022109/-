@@ -2,7 +2,7 @@
 module
     br
     .subject-detail-page
-        .top
+        .top#banner(data-region='banner')
         .page-main-wrapper
             .side
                 .page-side > .container
@@ -19,6 +19,17 @@ module
                     section.section(data-region='pannel')
                     section.section(data-region='swipe')
                     section.section(data-region='discussion-area')
+
+view('banner')
+    .subject-banner.banner
+        ul > li > img(src=classDetail.bannerUrl)
+        section.section.banner-info
+            .title-row
+                .inline-block.layout-mr(style='color:#000000') > .h3 > echo(classInfo.className)
+
+            .title-row > each(groups)
+                .inline-block.m-right.m-bottom.bg-white.sub-title > echo(shortName)
+
 view('main')
     .buttons
         .btn#twoBring > i.icon-plus + span > echo('两个带来')
@@ -31,14 +42,36 @@ view('class-information')
     .row
         .col-sm-4
             .inline-block.com-title > echo('班级信息')
+    .row
+        .col-sm-4
+            .inline-block > echo('班级名称：' + classInfo.className)
+    .row
+        .col-sm-4
+            .inline-block > echo('主办单位：' + classInfo.organization)
+    .row
+        .col-sm-4
+            .inline-block > echo('起止时间：') + date(classInfo.arriveDate) + echo('~') + date(classInfo.returnDate)
+    .row
+        .col-sm-4
+            .inline-block > echo('培训地点：' + classInfo.address)
+    .row
+        .col-sm-4
+            .inline-block > echo('教室：' + classInfo.classRoomName)
+    .row
+        .col-sm-4
+            .inline-block > echo('餐厅：' + classInfo.diningRoom)
+
 view('class-notice')
     .row
         .col-sm-4
             .inline-block.com-title > echo('班级公告')
+    label > echo(classDetail.notice)
 view('class-member')
     .row
         .col-sm-4
-            .inline-block.com-title > echo('班级人员')
+            .inline-block.com-title > echo('班务人员')
+    each(staff)
+        .inline-block > echo(member.fullName + '   ' + callName + '   ' + member.phoneNumber)
 view('ranking-list')
     .row
         .col-sm-4
@@ -47,6 +80,28 @@ view('curriculum-schedule')
     .row
         .col-sm-4
             .inline-block.com-title > echo('课程表')
+    each(content)
+        li
+            .catalog-state
+                .inline-block.layout-mr > .title-state > date(date)
+                .pull-right
+                    a.normal.layout-mr.sub-text
+            div > each(courses)
+                .catalog-state-info
+                    .item.block
+                        echo(startTime+'~'+endTime)
+                        .inline-block.title.text-overflow
+                            map('class-offline-type' type) + echo(':' + name) 
+                    .item.block
+                        .inline-block.title.text-overflow
+                            compare(type 'eq' 1)
+                                echo(classRoom.classroomName + '   ') 
+                            echo(teacherTitle + ':' + teacherName)
+                            .btn.radius(id='courseware-view-'+id) > echo('下载')
+                            compare(onlineCourseStatus 'eq' 1)
+                                a.btn.radius(href=courseUrl + onlineCourseId target='_blank') > echo('查看')
+
+
 view('online-rresources')
     .row
         .col-sm-4

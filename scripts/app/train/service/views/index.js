@@ -14,7 +14,9 @@ exports.items = {
     twoBrings: '',
     questionnaire: '',
     'train/service/views/commit-task': { isModule: true },
-    'train/service/views/school-yearbook': { isModule: true }
+    'train/service/views/school-yearbook': { isModule: true },
+    banner: 'banner',
+    'train/service/views/courseware': { isModule: true }
 };
 
 exports.store = {
@@ -51,13 +53,48 @@ exports.store = {
         questionnaire: {
             url: '../train/questionnaire-survey/class-evaluate'
         },
+        classInfo: {
+            url: '../train/class-info/get'
+        },
+        groups: {
+            url: '../train/class-group/get'
+        },
+        checkMember: {
+            url: '../train/trainee/find-by-memberId'
+        },
+        classDetail: {
+            url: '../train/class-detail/find'
+        },
+        staff: {
+            url: '../train/classstaff/classstaffs'
+        },
+        offlineThemeList: {
+            url: '../train/theme/findOfflineTheme'
+        },
+        offlineCourseList: {
+            url: '../train/offline-course'
+        },
+        content: {
+            data: []
+        },
+        bridge: {
+            data: { init: 1 }
+        }
     },
 
     callbacks: {
         init: function(options) {
             var photos = this.models.photos,
                 download = this.models.download,
-                classId = options.classId;
+                classId = options.classId,
+                classInfo = this.models.classInfo,
+                groups = this.models.groups,
+                checkMember = this.models.checkMember,
+                classDetail = this.models.classDetail,
+                staff = this.models.staff,
+                offlineThemeList = this.models.offlineThemeList,
+                offlineCourseList = this.models.offlineCourseList,
+                me = this;
             this.models.classId.data.classId = classId;
             photos.params = { classId: classId };
             this.get(photos).then(function(data) {
@@ -70,6 +107,29 @@ exports.store = {
                     return photo;
                 });
             });
+            offlineThemeList.params.classId = classId;
+            this.get(offlineThemeList);
+            offlineCourseList.params.classId = classId;
+            this.get(offlineCourseList);
+            classInfo.params.id = classId;
+            this.get(classInfo).then(function(data) {
+                var obj = data[0];
+                if (obj.groupId) {
+                    groups.params.id = obj.groupId;
+                    me.get(groups);
+                }
+                checkMember.params = { type: 0, classId: classId };
+                me.get(checkMember).then(function(member) {
+                    var m = member[0];
+                    if (m && m.auditStatus === 1) {
+                        classInfo.data.isFormal = true;
+                    }
+                });
+            });
+            classDetail.params.id = classId;
+            this.get(classDetail);
+            staff.params.classId = classId;
+            this.get(staff);
         },
         turnPage: function(data) {
             var state = this.models.state.data,

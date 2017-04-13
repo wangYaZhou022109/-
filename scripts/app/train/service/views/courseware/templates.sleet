@@ -1,0 +1,25 @@
+#!handlebars
+module
+    .page-main-wrapper
+        .main(data-region='main')
+view('main')
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 课件
+            thead > tr
+                th 序号
+                th(width='50%') 课件名称
+                th 类型
+                th 操作
+            tbody > each(files) > tr
+                td > echo(i)
+                td
+                    label > echo(attachName)
+                td > map('class-file-type' fileType)
+                td
+                    if(canPreview)
+                        a(href='javascript:;' id='preview-'+attachId) 预览
+                    a(href=downUrl download=attachName) 下载
