@@ -123,7 +123,6 @@ exports.store = {
             // expert.set({ id: this.models.expert.data.id, concernType: '1' });
             var follow = this.models.follow;
             follow.set(payload);
-            console.log(payload);
             return this.put(follow);
             // return this.post(follow).then(function() {
             //     me.app.message.success('关注成功');
@@ -133,7 +132,6 @@ exports.store = {
         unfollow: function(payload) {
             var unfollow = this.models.unfollow;
             unfollow.set(payload);
-            console.log(payload);
             return this.put(unfollow);
         },
         praise: function(payload) {
