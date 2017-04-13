@@ -7,9 +7,9 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click expert-activate*': 'activate',
-    'click expert-myself*': 'myself',
-    'click expert-apply*': 'apply',
+    'click activate*': 'activate',
+    'click myself*': 'myself',
+    'click apply*': 'apply',
     'click expert-*': 'details'
 };
 

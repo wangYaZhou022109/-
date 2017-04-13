@@ -12,7 +12,8 @@ exports.store = {
         },
         collect: { url: '../system/collect' },
         score: { url: '../course-study/course-front/score' },
-        topic: { url: '../system/topic/ids' }
+        topic: { url: '../system/topic/ids' },
+        state: {}
     },
     callbacks: {
         init: function(options) {
@@ -22,6 +23,7 @@ exports.store = {
                 subject = this.models.subject,
                 ids;
             this.models.region.set(options.region);
+            this.models.state.set(options.state || {});
             subject.set(options.subject);
             if (businessTopics && businessTopics.length > 0) {
                 ids = _.map(businessTopics, 'topicId').join(',');

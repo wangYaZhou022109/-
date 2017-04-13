@@ -1,13 +1,13 @@
 .watchexam-page {
     & .watchexam {
         & .exam-total {
-            & span {
+            & .examtitle-item {
                 display: inline-block;
-                width: 20%;
+                width: 24%;
             }
         }
         & .input-width  {
-            width: 25%;
+            width: 28%;
             & input {
                 width: 100%;
             }
@@ -15,20 +15,23 @@
                 width: 100%;
             }
         }
+        & .btn-width {
+            width: 10%;
+        }
         & .btn-block {
             display: inline-block;
         }
         & .vertical-bottom {
             vertical-align: bottom;
         }
-        & .btn-width {
-            width: 15%;
-        }
         & .bg-color-3 {
             background: var(--bg-color-3)
         }
         & .search-padding {
             padding: calc(var(--base-gap)/2) calc(var(--section-gap)/2);
+        }
+        & .input-padding {
+            padding-right: calc(var(--space)*2);
         }
     }
 }

@@ -20,13 +20,20 @@ view('top')
         .base-info
             .info-row
                 span.h2 > echo(member.fullName)
-                span.lv Lv3
+                if(integral.integralGrade)
+                    span.lv > echo(integral.integralGrade.gradeName)
             .info-row
-                .item > a.iconfont.icon-warn(href='#/train/response'  target='_parent') > echo('响应中心')
+                .item > a(href='#/train/response'  target='_parent')
+                    i.iconfont.icon-warn
+                    echo('响应中心')
                 if(member.isContact)
-                    .item > a.iconfont.icon-warn(href='#/train/projects' target='_parent') > echo('需求方')
+                    .item > a(href='#/train/projects' target='_parent')
+                        i.iconfont.icon-type
+                        echo('需求方')
                 if(member.isClassstff)
-                    .item > a.iconfont.icon-mark(href='#/train/classinfos' target='_parent') > echo('班务')
+                    .item > a(href='#/train/classinfos' target='_parent')
+                        i.iconfont.icon-mark
+                        echo('班务')
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师
                 if(member.isExpert)
@@ -39,22 +46,24 @@ view('notice')
     compare(recordCount 'gt' 0)
         .news-list.clearfix
             .pull-left.m-right > i.iconfont.icon-notice
-            b.title 公告
+            b.title 公告：
             .navigator
                 .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
                 .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
                 .icon#showMore > .iconfont.icon-more
             ul > each(announcements)
-                li > echo(title)
+                li.clearfix
+                    .pull-right.sub-text.layout-mr > dateTime(publishTime)
+                    .m-right > echo(title)
 
 view('menu')
     .person-menu
         ul.par > each(menus)
             if(childs)
                 li.has-child
-                    .menu-text
-                        i.iconfont.icon-arrow-down.down
-                        i.iconfont.icon-arrow-up.up
+                    .menu-text(id='toggle-menu-' + id class = if(openMenu 'show-menu'))
+                        i.iconfont.icon-triangle-down.down
+                        i.iconfont.icon-triangle-up.up
                         i.iconfont(class=icon)
                         span >  echo(name)
                     .sub > each(childs)

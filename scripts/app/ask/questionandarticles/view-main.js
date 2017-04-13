@@ -1,3 +1,4 @@
+var $ = require('jquery');
 exports.bindings = {
 };
 
@@ -8,9 +9,11 @@ exports.events = {
 
 exports.handlers = {
     question: function(payload) {
+        $(window).unbind('scroll');
         this.app.viewport.modal(this.module.items['ask/question'], { id: payload });
     },
     article: function(payload) {
+        $(window).unbind('scroll');
         this.app.viewport.modal(this.module.items['ask/article'], { id: payload });
     }
 };

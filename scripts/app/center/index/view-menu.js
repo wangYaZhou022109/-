@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+var $ = require('jquery');
 
 exports.type = 'dynamic';
 
@@ -25,7 +26,8 @@ exports.dataForEntityModule = function(entity) {
 };
 
 exports.events = {
-    'click switch-*': 'switchMenu'
+    'click switch-*': 'switchMenu',
+    'click toggle-menu-*': 'toggleMenuChild'
 };
 
 exports.handlers = {
@@ -34,7 +36,7 @@ exports.handlers = {
             id = this.bindings.state.data.id,
             menu = '',
             menuIds = menuId.split('-');
-        if (menuIds.length > 1) {
+        if (menuIds.length > 1) { // 二级菜单
             menu = this.bindings.menus.data[menuIds[0]].childs[menuIds[1]].url;
         } else {
             menu = this.bindings.menus.data[menuId].url;
@@ -44,6 +46,9 @@ exports.handlers = {
         state.data.menu = menu;
         state.data[menu] = true;
         state.changed();
+    },
+    toggleMenuChild: function(id, el, target) {
+        $(target).toggleClass('show-menu');
     }
 };
 
@@ -64,6 +69,7 @@ exports.dataForTemplate = {
                     var c = child;
                     if (c.url === state.menu) {
                         c.current = true;
+                        obj.openMenu = true; // 上级菜单展开
                     } else {
                         c.current = false;
                     }

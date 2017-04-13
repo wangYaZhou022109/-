@@ -5,4 +5,10 @@ module
 
 view('main')
     each(announcements)
-        .h3 > echo(title)
+        .clearfix.layout-mb-small
+            .h3.m-bottom > echo(title)
+            p > @echo(content)
+            .pull-right
+                .sub-text > echo('来自 ') + echo(organization.name)
+                .text-tips.m-top > dateTime(publishTime)
+        .hr.dashed

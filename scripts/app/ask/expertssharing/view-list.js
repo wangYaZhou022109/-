@@ -2,16 +2,27 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true
+    trends: true,
+    page: true
 };
 
 exports.events = {
     'click discuss-*': 'discuss',
     'click trend-report-*': 'report',
-    'click myquiz-details-*': 'showDetails'
+    'click myquiz-details-*': 'showDetails',
+    'click myshares-details-*': 'sharesDetails'
 };
 
 exports.handlers = {
+    sharesDetails: function(payload) {
+        var data = { },
+            id = payload;
+        $(window).unbind('scroll');
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.show('content', 'ask/myshares/details', { id: data[1] });
+        }
+    },
     showDetails: function(payload) {
         var data = { },
             id = payload;
@@ -28,7 +39,10 @@ exports.handlers = {
             data = { };
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+            this.app.viewport.modal(this.module.items['ask/report'], {
+                id: data[1],
+                objectType: data[0],
+                beUserId: data[2] });
         }
     }
 };
@@ -114,15 +128,29 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    trends: function(data) {
+    page: function(data) {
         var trends = data.trends;
+        var page = this.bindings.page.data;
+        var me = this;
+        var flag = true;
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
+            _.forEach(me.bindings.page.data, function(v) {
+                if (v.id === obj.id) {
+                    flag = false;
+                }
+            });
+            if (flag) {
+                page.push(obj);
+            }
         });
-        return trends;
+        return page;
     }
 };
 
+exports.beforeClose = function() {
+    $(window).unbind('scroll');
+};

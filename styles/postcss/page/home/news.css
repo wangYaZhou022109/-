@@ -26,12 +26,18 @@
         }
 
         & .icon {
+            @apply --transition;
+            
             display: inline-block;
             background-color: var(--bg-color);
             font-size: var(--small-font);
             padding: 0 1em;
             margin-right: -.3em;
+            cursor: pointer;
 
+            &:hover {
+                background-color: var(--bg-color-2);
+            }
         }
 
         & a {

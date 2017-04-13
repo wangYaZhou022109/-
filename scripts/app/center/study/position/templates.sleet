@@ -20,7 +20,7 @@ view('main')
                     #viewPdf
         section.section
             .h3 > setting('persion.position.qualification')
-            .layout-mt-small
+            p.layout-mt-small
                 @echo(position.desc)
         section.section
             .h3 > setting('persion.position.requirements')
@@ -36,8 +36,8 @@ view('main')
                     tbody > each(studyList)
                         tr
                             td > echo(i+1)
-                            td.nowrap > .text-overflow > echo(pushObject.businessName)
-                            td > map('push-business-type' pushObject.businessType)
-                            td > map('is-required' pushObject.isRequired)
+                            td.nowrap > .text-overflow > echo(businessName)
+                            td > map('push-business-type' businessType)
+                            td > map('is-required' isRequired)
                             td > map('push-record-task-status' taskStatus)
                             td > a(href=btnUrl target='_blank') > echo(opeTxt)

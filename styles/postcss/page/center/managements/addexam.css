@@ -1,0 +1,51 @@
+.addexam-page {
+    & .addexam-titlebar {
+        & .form {
+            & .form-row {
+                & > label,
+                & label.label {
+                    display: block;
+                    float: none;
+                    width: auto;
+                }
+                & .content {
+                    margin-left: 0;
+                    & input,
+                    & input.input {
+                        height: var(--large-space);
+                        line-height: var(--large-space);
+                    }
+                    & select {
+                        height: var(--large-space);
+                        line-height: var(--large-space);
+                    }
+                }
+            }
+        }
+        & .addexam-search-padding {
+            padding-right: 1em;
+        }
+        & .w-fourth {
+            width: 25%;
+        }
+        & .select-width {
+            width: calc(var(--base-gap)*4);
+        }
+        & .input-height {
+            line-height: var(--input-height);
+            height: var(--input-height);
+        }
+    }
+    & .addexam-content {
+        & .test {
+            font-size: calc(var(--small-font) *2);
+            background-color: var(--bg-color-2);
+            line-height: var(--input-height);
+            padding: calc(var(--space)/2) 0;
+        }
+        & .tag-height {
+            height: var(--large-space);
+            line-height: var(--large-space);
+        }
+    }
+}

@@ -12,12 +12,14 @@ exports.store = {
         init: function(payload) {
             this.models.state.id = payload.id;
             this.models.state.objectType = payload.objectType;
+            this.models.state.beUserId = payload.beUserId;
         },
         report: function(payload) {
             var report = this.models.report;
             var data = payload;
             data.id = this.models.state.id;
             data.objectType = this.models.state.objectType;
+            data.beUserId = this.models.state.beUserId;
             report.set(data);
             return this.save(report).then(function() {
                 this.app.message.success('举报成功！');
