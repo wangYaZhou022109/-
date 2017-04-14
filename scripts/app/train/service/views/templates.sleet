@@ -80,6 +80,11 @@ view('curriculum-schedule')
     .row
         .col-sm-4
             .inline-block.com-title > echo('课程表')
+    if(isShowTheme)
+        select#theme-list > each(offlineThemeList)
+            option(value=id)('selected')&if(checked) > echo(name)
+    if(isShowPrevious)
+        a#previous > echo('查看之前的课程')
     each(content)
         li
             .catalog-state
@@ -100,7 +105,8 @@ view('curriculum-schedule')
                             .btn.radius(id='courseware-view-'+id) > echo('下载')
                             compare(onlineCourseStatus 'eq' 1)
                                 a.btn.radius(href=courseUrl + onlineCourseId target='_blank') > echo('查看')
-
+    if(isShowMore)
+        a#next > echo('查看更多课程')
 
 view('online-rresources')
     .row
