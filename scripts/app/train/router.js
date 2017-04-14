@@ -9,7 +9,8 @@ exports.routes = {
     train: 'showTrain',
     'class-detail/task-detail/:id': 'showTaskDetail',
     'statistics/task/audit-task/:id': 'showAuditTask',
-    'statistics/questionnaire/count/:classId': 'showCount'
+    'statistics/questionnaire/count/:classId': 'showCount',
+    'programme/preview-task/:id': 'previewTask'
 };
 
 exports.showIndex = function(id) {
@@ -48,10 +49,15 @@ exports.showAuditTask = function(fir, id) {
     return this.app.show('content', 'train/statistics/task/audit-task', { id: id });
 };
 
+exports.previewTask = function(fir, id) {
+    return this.app.show('content', 'train/programme/preview-task', { id: id });
+};
+
 exports.interceptors = {
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
-    'statistics/questionnaire/count/': 'clearHeadAndBottom'
+    'statistics/questionnaire/count/': 'clearHeadAndBottom',
+    'programme/preview-task': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {

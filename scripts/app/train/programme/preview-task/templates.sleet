@@ -1,0 +1,30 @@
+#!handlebars
+module > .achievement-content.main-side
+    .achievement-side.bg-color
+        div(data-region='side')
+    .achievement-head(data-region='head')
+    .achievement-main(data-region='main')
+
+view('head')
+    .pull-left.title > echo(task.name)
+    .text-right
+        .btn.white.m-right#closeTask 关闭预览
+view('main')
+    .preview-content
+        if(mainState.isExplain)
+            if(task.explain)
+                .h3.m-bottom 任务说明
+                    p.text-overflow
+                        span > @echo(task.explain)
+        else
+            #viewPdf
+view('side')
+    if(task.name)
+        btn.btn#explain 任务说明
+        br
+        label 任务附件：
+        ul.list
+            each(task.attachList)
+                li
+                    a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
+                    a(href=downUrl download=attachmentName) 下载

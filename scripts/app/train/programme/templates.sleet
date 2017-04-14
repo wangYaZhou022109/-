@@ -317,19 +317,28 @@ view('import-upload')
 
 view('editTask') > form.vertical
     .col-sm-2(style='text-align:right')
-        a.btn#saveTask 保存
-    .row
-        label(style='float:left;') 作业名称
-        input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
-        input.input#id(type= 'hidden' name='id' value=task.id)
-    .row
-        label(style='float:left;') 开始时间
-        input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
-        label(style='float:left;') 结束时间
-        input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
-    .row
-        label(style='float:left;') 任务说明
-        textarea.input#explain(name='explain' rows='5' cols='80' x-rule='maxLength:1000,required') > echo(task.explain)
+        if(task.id)
+            a.btn(href='#/train/programme/preview-task/'+task.id target='_blank') 预览
+            a.btn#saveTask 确定
+        else
+            a.btn#saveTask 确定
+    .form.align-left
+        .form-row
+            label.label.required 作业名称
+            .content
+                input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
+                input.input#id(type= 'hidden' name='id' value=task.id)
+        .clearfix
+            .form-row.pull-left.w-half.start-time
+                label.label.required 开始时间
+                .content > input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
+            .form-row.pull-left.w-half
+                label.label.required 结束时间
+                .content > input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
+        .form-row
+            .clearfix
+                label.label.required.pull-left 任务说明
+                textarea.input#explain(name='explain' rows='5' cols='80' x-rule='maxLength:1000,required') > echo(task.explain)
 
     .list.m-top
         table.table
@@ -363,7 +372,6 @@ view('editTask') > form.vertical
         .col-sm-10
             label > echo('评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务')
     .row > .col-sm-12
-        .input.btn-right-bottom(x-rule='required' x-target=state.componentId)&if(state.required)
         #tags
         .btn-group
             .btn#clearMembers 清空

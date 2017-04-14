@@ -278,7 +278,7 @@ exports.store = {
             var model = this.models.attachList,
                 files = this.models.files,
                 state = this.models.state;
-            model.set(payload);
+            model.params.id = payload.id;
             files.clear();
             state.data.courseId = payload.id;
             this.get(model).then(function(data) {

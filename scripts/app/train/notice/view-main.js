@@ -6,7 +6,8 @@ var markers = require('./app/ext/views/form/markers'),
 exports.bindings = {
     signupInfo: true,
     state: true,
-    export: false
+    export: false,
+    downloadDoc: false
 };
 
 exports.events = {
@@ -82,21 +83,29 @@ exports.dataForTemplate = {
         url += ('classId=' + state.classId);
         url += ('&access_token=' + token);
         return url;
+    },
+    docUrl: function() {
+        var model = this.bindings.downloadDoc,
+            state = this.bindings.state.data,
+            url = model.getFullUrl() + '?',
+            token = this.app.global.OAuth.token.access_token;
+        url += ('classId=' + state.classId);
+        url += ('&access_token=' + token);
+        return url;
     }
 };
 
-exports.components = [{
-    id: 'startTime',
-    name: 'flatpickr',
-    options: {
-        enableTime: true
-    }
-}, {
-    id: 'endTime',
-    name: 'flatpickr',
-    options: {
-        enableTime: true
-    }
+exports.components = [function() {
+    var code = this.bindings.signupInfo.data.signupCode;
+    return {
+        id: 'qrcode',
+        name: 'qrcode',
+        options: {
+            width: 128,
+            height: 128,
+            text: code
+        }
+    };
 }];
 
 exports.mixin = {

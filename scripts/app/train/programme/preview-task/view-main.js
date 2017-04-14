@@ -1,20 +1,7 @@
 exports.bindings = {
-    all: true,
-    download: false,
+    task: true,
     state: true,
     mainState: true
-};
-
-exports.events = {
-    'click viewDesc': 'viewDesc'
-};
-
-exports.handlers = {
-    viewDesc: function() {
-        this.module.dispatch('preview', {
-            flag: 'desc'
-        });
-    }
 };
 
 exports.components = [
@@ -33,10 +20,3 @@ exports.components = [
         return false;
     }
 ];
-
-exports.dataForTemplate = {
-    all: function(data) {
-        var all = data.all;
-        return all;
-    },
-};

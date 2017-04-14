@@ -258,6 +258,9 @@ module.exports = {
     'class-classroom': {
         0: '暂不分配', 1: '红枫叶温泉酒店', 2: '东方文化'
     },
+    'display-rule': {
+        0: '显示全部', 1: '显示前10名'
+    },
     'class-table-type': {
         1: '其他', 2: '圆形'
     },

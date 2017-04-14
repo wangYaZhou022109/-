@@ -8,6 +8,7 @@ exports.store = {
         signupInfo: { url: '../train/sign-up' },
         download: { url: '../train/notice/download' },
         export: { url: '../train/sign-up/export' },
+        downloadDoc: { url: '../train/sign-up/download-doc' },
         state: { data: {} }
     },
     callbacks: {

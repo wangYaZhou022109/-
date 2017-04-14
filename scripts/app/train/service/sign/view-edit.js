@@ -39,7 +39,33 @@ exports.dataForActions = {
 exports.actionCallbacks = {
 };
 
-exports.components = [function() {
+exports.dataForTemplate = {
+    sign: function(data) {
+        var sign = data.sign,
+            url = window.location.protocol + '//' + window.location.host + '/';
+        sign.path = url + '#/train/service/sign/' + sign.id;
+        return sign;
+    }
+};
+exports.components = [{
+    id: 'startTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'lateTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, function() {
     var signId = this.bindings.sign.data.id;
     return {
         id: 'qrcode',
@@ -51,30 +77,3 @@ exports.components = [function() {
         }
     };
 }];
-
-exports.dataForTemplate = {
-    sign: function(data) {
-        var sign = data.sign,
-            url = window.location.protocol + '//' + window.location.host + '/';
-        sign.path = url + '#/train/service/sign/' + sign.id;
-        return sign;
-    }
-};
-// exports.components = [{
-//     id: 'startTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
-// }, {
-//     id: 'endTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
-// }, {
-//     id: 'lateTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
