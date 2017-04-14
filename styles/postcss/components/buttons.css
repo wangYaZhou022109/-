@@ -14,12 +14,6 @@ input,button,select,.btn {
     cursor: pointer;
     vertical-align: middle;
 
-    &.block {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     &.small {
         padding: 0 calc(var(--large-space) / 2);
         font-size: var(--small-font);
@@ -30,6 +24,14 @@ input,button,select,.btn {
         height: 3em;
         line-height: 3em;
         font-size: var(--font-title);
+    }
+    
+    &.block {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+        text-align: center;
     }
 
     &.radius {
