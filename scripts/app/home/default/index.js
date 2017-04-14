@@ -17,7 +17,7 @@ module.exports = {
                     that = this,
                     homeConfig = this.models.homeConfig,
                     modules = this.models.modules;
-                homeConfig.params = { id: configId, orgId: orgId };
+                homeConfig.params = { configId: configId, orgId: orgId };
                 homeConfig.clear();
                 return this.get(homeConfig).then(function() {
                     if (homeConfig.data) {

@@ -62,15 +62,16 @@ exports.dataForTemplate = {
             params = {},
             org = {};
         if (document.cookie) {
-            document.cookie.split(';').forEach(function(item) {
+            document.cookie.split('; ').forEach(function(item) {
                 var arr = item.split('=');
-                if (arr[1] !== 'undefined') {
+                if (arr[1] !== 'undefined' || arr[1] !== '') {
                     params[arr[0]] = arr[1];
                 }
             });
-            org = _.find(orgs, ['id', params.orgId]);
         }
-        if (!params.orgId) {
+        if (params.orgId) {
+            org = _.find(orgs, ['id', params.orgId]);
+        } else {
             org = _.find(orgs, function(item) {
                 return !item.parentId;
             });
