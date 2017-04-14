@@ -20,13 +20,15 @@ exports.handlers = {
             params = {};
         $(window).unbind('scroll');
         if (url === 'home' && document.cookie) {
-            document.cookie.split(';').forEach(function(item) {
+            document.cookie.split('; ').forEach(function(item) {
                 var arr = item.split('=');
-                if (arr[1] !== 'undefined') {
+                if (arr[1] !== 'undefined' || arr[1] !== '') {
                     params[arr[0]] = arr[1];
                 }
             });
-            url = url + '/org/' + params.orgId;
+            if (params.orgId) {
+                url = url + '/org/' + params.orgId;
+            }
             this.app.navigate(url, true);
         }
         this.app.navigate(url, true);

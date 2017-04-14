@@ -6,8 +6,8 @@ exports.store = {
     models: {
         menus: { data: [
             { id: '0', name: '内容', url: 'question', current: true },
-            { id: '1', name: '话题', url: 'topic' },
-            { id: '2', name: '专家', url: 'expert' }
+           // { id: '1', name: '话题', url: 'topic' },
+          //  { id: '2', name: '专家', url: 'expert' }
         ] },
         state: {
             data: {
