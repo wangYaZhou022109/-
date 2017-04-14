@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 
 exports.items = {
     list: 'list',
@@ -12,13 +12,27 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 }
+        }
     },
     callbacks: {
         init: function(payload) {
             var trends = this.models.trends;
-            trends.set({ id: payload.state.id });
-            return this.get(trends);
+            var params = this.models.page.params;
+            params.id = payload.state.id;
+            trends.set(params);
+            return this.post(trends);
+        },
+        page: function(payload) {
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            params.id = payload.state.id;
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -60,9 +74,17 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    var me = this;
     if (typeof this.renderOptions.state.id !== 'undefined' && this.renderOptions.state.id !== '') {
-        return this.dispatch('init', this.renderOptions);
+        $(window).scroll(function() {
+            var page = me.store.models.page.params.page;
+            var size = me.store.models.page.params.size;
+            if (page * size === me.store.models.page.data.length) {
+                me.store.models.page.params.page++;
+                me.dispatch('page', me.renderOptions);
+            }
+        });
+        this.dispatch('init', this.renderOptions);
     }
-    return null;
 };
 

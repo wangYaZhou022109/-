@@ -51,7 +51,8 @@ exports.store = {
                         isRichText: false,
                         mutiple: question.type === 2,
                         id: questionAttrs[i].id,
-                        name: questionAttrs[i].name
+                        name: questionAttrs[i].name,
+                        score: questionAttrs[i].score || 0
                     });
                     if (Number(questionAttrs[i].type) === 0) {
                         data.answer += String.fromCharCode(i + 'A'.charCodeAt(0));
