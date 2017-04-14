@@ -1,30 +1,27 @@
 var D = require('drizzlejs');
 exports.items = {
     main: 'main',
-    filter: 'filter'
+    filter: 'filter',
+    'ask/report': { isModule: true }
 };
 
 exports.store = {
     models: {
         list: {
-            url: '../ask-bar/question/person-question-list',
+            url: '../ask-bar/my-follow/question',
             type: 'pageable',
             root: 'items'
         },
         img: { url: '../human/file/download?id=' },
         object: { url: '../ask-bar/question' },
-        search: { data: { type: '1' } },
+        search: {},
+        unfollow: { url: '../ask-bar/concern/unfollow' },
+        discuss: { url: '../ask-bar/question-discuss' },
     },
     callbacks: {
-        init: function(payload) {
+        init: function() {
             var list = this.models.list,
-                menuId = payload.state.menuId,
                 searchModel = this.models.search;
-            if (menuId === '0') {
-                searchModel.data.type = '1';
-            } else if (menuId === '1') {
-                searchModel.data.type = '2';
-            }
             list.clear();
             D.assign(list.params, searchModel.data);
             return this.get(list);
@@ -36,17 +33,19 @@ exports.store = {
             this.get(list);
             searchModel.changed();
         },
-        delete: function(payload) {
-            var object = this.models.object,
-                me = this;
-            object.set(payload);
-            return me.del(object).then(function() {
-                return me.get(me.models.list);
-            });
+        unfollow: function(payload) {
+            var follow = this.models.unfollow;
+            follow.set(payload);
+            return this.put(follow);
+        },
+        publish: function(payload) {
+            var discuss = this.models.discuss;
+            discuss.set(payload);
+            return this.save(discuss);
         }
     }
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
+    this.dispatch('init');
 };
