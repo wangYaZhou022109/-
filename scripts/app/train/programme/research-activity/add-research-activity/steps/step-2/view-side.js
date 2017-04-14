@@ -1,7 +1,10 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    $ = require('jquery'),
-    strings = require('./app/util/strings');
+    $ = require('jquery');
+
+// 调研活动 题目类型：2
+exports.SOURCE_TYPE = 3;
+exports.HIDE_SCORE = true;
 
 exports.bindings = {
     dimensions: true,
@@ -42,7 +45,7 @@ exports.handlers = {
             me = this;
 
         if (!id) {
-            this.app.message.error(strings.get('exam.dimension.edit-dimension-check-tips'));
+            this.app.message.error('请选择维度');
             return false;
         }
 
@@ -66,25 +69,26 @@ exports.handlers = {
             questions,
             me = this;
 
-        return this.module.dispatch('getDimension', { id: id }).then(function() {
-            dimension = _.find(dimensions, ['id', id]);
-            if (!dimension) {
-                dimension = _.find(dimensions, ['name', null]);
-            }
-            questions = dimension.questions || [];
+        if (!id) {
+            this.app.message.error('请选择维度');
+            return false;
+        }
+        dimension = _.find(dimensions, ['id', id]);
+        questions = dimension.questions || [];
 
-            this.app.viewport.modal(mod, {
-                type: type,
-                hideScore: true,
-                data: {
-                    order: questions.length + 1,
-                    dimensionId: dimension.id,
-                },
-                callback: function(question) {
-                    return me.module.dispatch('addQuestion', question);
-                },
-            });
+        this.app.viewport.modal(mod, {
+            type: type,
+            hideScore: me.options.HIDE_SCORE,
+            data: {
+                sourceType: me.options.SOURCE_TYPE,
+                order: questions.length + 1,
+                dimensionId: dimension.id,
+            },
+            callback: function(question) {
+                return me.module.dispatch('addQuestion', question);
+            },
         });
+        return true;
     },
     chooseDimension: function(id) {
         _.forEach(this.bindings.dimensions.data, function(d) {
@@ -106,10 +110,10 @@ exports.handlers = {
             message;
 
         if (!id) {
-            this.app.message.error(strings.get('exam.dimension.edit-dimension-check-tips'));
+            this.app.message.error('请选择维度');
             return false;
         }
-        message = strings.getWithParams('delete-warn', strings.get('exam.research.dimension'));
+        message = '维度删除后将无法恢复，是否确定删除该维度';
         this.app.message.confirm(message, function() {
             return me.module.dispatch('deleteDimension', { id: id });
         }, function() {
@@ -120,6 +124,7 @@ exports.handlers = {
     preview: function() {
         var mod = this.module.items['train/programme/research-activity/preview-questionary'];
         this.app.viewport.modal(mod, {
+            hideScore: this.options.HIDE_SCORE,
             research: D.assign(this.bindings.research.data, {
                 dimensions: this.bindings.dimensions.data
             })

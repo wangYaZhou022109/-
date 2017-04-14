@@ -1,10 +1,10 @@
 var strings = require('./app/util/strings'),
     D = require('drizzlejs'),
     titleType = {
-        add: '新增调研',
-        edit: '编辑调研'
-    },
-    RESEARCH_ACTIVITY_TYPE = 1;
+        add: '新增',
+        edit: '编辑'
+    };
+exports.RESEARCH_TYPE = 2;
 
 exports.items = {
     main: 'main'
@@ -34,13 +34,23 @@ exports.store = {
             return '';
         },
         save: function(payload) {
-            var me = this;
-            this.models.form.set(payload);
-            return this.save(this.models.form).then(function() {
-                var callback = me.module.renderOptions.callback;
-                if (callback) callback(me.models.form.data);
-                me.app.message.success(strings.get('save-success'));
-            });
+            var me = this,
+                right,
+                validate = payload.validate;
+            if (validate) {
+                me.models.form.set(payload);
+                right = me.save(me.models.form).then(function() {
+                    var callback = me.module.renderOptions.callback,
+                        data = me.models.form.data;
+                    data.startTime = payload.startTime;
+                    data.endTime = payload.endTime;
+                    if (callback) callback(data);
+                    me.app.message.success('保存成功！');
+                });
+            } else {
+                right = false;
+            }
+            return right;
         },
         changeInfo: function(payload) {
             var main = this.module.items.main.getEntities()[0];
@@ -63,7 +73,8 @@ exports.buttons = [{
             {
                 dimensions: JSON.stringify(view.getData().dimensions),
                 id: this.store.models.research.data.id,
-                type: RESEARCH_ACTIVITY_TYPE
+                type: this.module.options.RESEARCH_TYPE,
+                validate: this.items.main.validate(),
             }
         ));
     }

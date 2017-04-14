@@ -6,17 +6,17 @@ module
 view('main')
     form.vertical
         .exam-base-info.row 
-            .col-sm-12
-                label.required > setting('exam.research.name')
-                input.input.mark(x-rule='required,maxLength:30' name='name' id='name' value=research.name)
-            .col-sm-6
-                label.required > echo('开始时间')
-                input.input#start-time(name='startTime' x-rule='required' value=research.startTime)
-            .col-sm-6
-                label.required > echo('结束时间')
-                input.input#end-time(name='endTime' x-rule='required' value=research.endTime)
-            .col-sm-12
-                label.required > setting('exam.research.questionary-detail')
-                textarea.input(name='questionaryDetail' id='questionaryDetail' placeholder='问卷须知...' rows='5' x-rule='required,maxLength:1000')
-                    echo(research.questionaryDetail)
-        div(data-dynamic-key='')
+            label.required > setting('exam.research.name')
+            input.input#name(name='name' value=research.name) + span#checkName
+            br
+            br
+            label.required > echo('开始时间')
+            input.input#startTime(name='startTime' x-rule='required' value=research.startTime)
+            label.required > echo('结束时间')
+            input.input#endTime(name='endTime' x-rule='required' value=research.endTime)
+            br
+            br
+            label.required > setting('exam.research.questionary-detail')
+            br
+            textarea.input(name='questionaryDetail' id='questionaryDetail' placeholder='问卷须知...' rows='5' cols='100%') > echo(research.questionaryDetail)
+        div(data-dynamic-key='' style='margin-top: 20px;')

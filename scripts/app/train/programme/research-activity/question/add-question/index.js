@@ -1,5 +1,4 @@
 var D = require('drizzlejs'),
-    strings = require('./app/util/strings'),
     getData,
     titles = { add: '新增试题', edit: '修改试题' },
     covert,
@@ -51,7 +50,7 @@ exports.store = {
                 r;
             this.models.question.set(D.assign(state.data, payload, this.module.renderOptions.data));
             return this.save(this.models.question).then(function() {
-                me.app.message.success(strings.get('save-success'));
+                me.app.message.success('保存成功！');
                 if (callback) {
                     r = D.assign(state.data, {
                         id: question.data.id,
@@ -115,7 +114,7 @@ exports.buttons = function() {
                 questionValidate = mod.isValidate(),
                 result;
 
-            if (!mainValidate || !questionValidate) {
+            if (!mainValidate && !questionValidate) {
                 return false;
             }
 
@@ -134,7 +133,6 @@ exports.buttons = function() {
             if (this.renderOptions.callback) {
                 D.assign(this.store.models.state.data, result);
             }
-
             return this.dispatch('saveQuestion', result);
         }
     };

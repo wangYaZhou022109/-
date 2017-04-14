@@ -15,7 +15,6 @@ exports.handlers = {
         var model = this.module.items['train/programme/select-research-activity'],
             me = this;
         me.app.viewport.modal(model, {
-            searchType: 1,
             callback: function(data) {
                 var param = {
                     type: 2,
@@ -29,10 +28,9 @@ exports.handlers = {
         });
     },
     addEva: function() {
-        var model = this.module.items['train/programme/select-research-activity'],
+        var model = this.module.items['train/programme/select-evaluate-questionary'],
             me = this;
         me.app.viewport.modal(model, {
-            searchType: 2,
             callback: function(data) {
                 var param = {
                     type: 3,
@@ -80,3 +78,12 @@ exports.actionCallbacks = {
         this.app.viewport.modal(this.module.items.configOnline);
     }
 };
+
+// exports.mixin = {
+//     findById: function(id) {
+//         var questionnaireList = this.bindings.questionnaireList;
+//         return _.find(questionnaireList, {
+//             id: id
+//         });
+//     }
+// };

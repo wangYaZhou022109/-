@@ -1,12 +1,14 @@
 var maps = require('./app/util/maps'),
     _ = require('lodash/collection'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators');
 
 exports.bindings = {
     state: false
 };
 
-exports.type = 'form';
+// exports.type = 'form';
 
 exports.large = true;
 
@@ -75,5 +77,17 @@ exports.mixin = {
         data.type = $(this.$$('[name="type"]')).val();
         data.difficulty = $(this.$$('[name="difficulty"]')).val();
         return data;
+    },
+    validate: function() {
+        var type = $(this.$$('[name="type"]')),
+            flag = true;
+        markers.text.valid(type);
+
+        if (type.val() === '' || type.val() === null) {
+            markers.text.invalid(type, validators.required.message);
+            flag = false;
+        }
+
+        return flag;
     }
 };

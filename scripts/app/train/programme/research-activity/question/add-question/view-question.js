@@ -1,8 +1,6 @@
-var types = require('./app/exam/research-question-types'),
+var types = require('./app/train/programme/research-activity/research-question-types'),
     D = require('drizzlejs'),
-    EDIT = 3,
-    NO_OPTION_SCORE = 0;
-
+    EDIT = 3;
 
 exports.type = 'dynamic';
 
@@ -28,6 +26,6 @@ exports.dataForEntityModule = function(question) {
         type: type,
         data: question,
         multiple: Number(type) === 2,
-        mode: NO_OPTION_SCORE
+        mode: this.module.renderOptions.hideScore ? 0 : 1
     };
 };

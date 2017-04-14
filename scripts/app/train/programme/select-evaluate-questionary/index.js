@@ -1,16 +1,16 @@
 var D = require('drizzlejs'),
     titleType = { ADD: 'add', EDIT: 'edit' };
 
-exports.RESEARCH_TYPE = 2;
+exports.RESEARCH_TYPE = 3;
 
 exports.items = {
     search: 'search',
     content: 'content',
     'train/trainee/select-member-radio': { isModule: true },
-    'train/programme/research-activity/add-research-third-party': { isModule: true }
+    'train/programme/select-evaluate-questionary/add-research-refrence': { isModule: true }
 };
 
-exports.title = '选择问卷';
+exports.title = '添加评估';
 
 exports.store = {
     models: {
@@ -58,7 +58,7 @@ exports.buttons = [{
 }, {
     text: '新增',
     fn: function() {
-        var mod = this.items['train/programme/research-activity/add-research-third-party'],
+        var mod = this.items['train/programme/select-evaluate-questionary/add-research-refrence'],
             researchId = this.store.models.research.data.id,
             me = this;
         this.app.viewport.modal(mod, {

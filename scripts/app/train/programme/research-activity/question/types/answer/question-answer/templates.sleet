@@ -1,0 +1,8 @@
+#!handlebars
+
+module > .choise > form.vertical
+    div(data-region='content')
+
+view('content')
+    label(class='required') 试题信息
+    textarea.input#content(name='content' x-rule='required' x-marker='rich-text' x-target='content') > @echo(state.content)

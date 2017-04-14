@@ -1,5 +1,4 @@
 var _ = require('lodash/collection'),
-    strings = require('./app/util/strings'),
     D = require('drizzlejs');
 
 exports.items = {
@@ -191,7 +190,7 @@ exports.store = {
                 dimensionId: question.dimensionId
             });
             return this.post(this.models.dimensionDel).then(function() {
-                me.app.message.success(strings.get('delete-success'));
+                me.app.message.success('操作成功！');
                 me.models.dimensions.deleteQuestion(question);
                 me.models.questions.deleteQuestion(question);
                 me.models.dimensions.changed();
@@ -205,7 +204,7 @@ exports.store = {
             var me = this;
             this.models.dimension.set(payload);
             return this.del(this.models.dimension).then(function() {
-                me.app.message.success(strings.get('delete-success'));
+                me.app.message.success('操作成功！');
                 me.models.dimensions.deleteDimension(payload.id);
                 me.models.dimensions.changed();
             });

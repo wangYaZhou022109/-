@@ -31,7 +31,7 @@ view('content')
         table.table.table2.text-center
             thead > tr
                 th 选择
-                th > setting('exam.research.name')
+                th > setting('exam.questionnaire.name')
                 th > setting('exam.research.publish-member')
                 th > setting('system.all.create-time')
                 th > setting('exam.all.operator')
@@ -46,4 +46,3 @@ view('content')
                 else
                     tr > td(colspan='5') > p.text-center > string('no-data')
     #pager.pagination
-    

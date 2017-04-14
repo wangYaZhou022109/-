@@ -1,4 +1,5 @@
-var maps = require('./app/util/maps');
+var maps = require('./app/util/maps'),
+    NO_OPTIONS_SCORE = 0;
 
 exports.items = {
     content: 'content',
@@ -22,7 +23,6 @@ exports.store = {
                 questionAttrs,
                 difficultys = maps.get('question-difficultys'),
                 types = maps.get('question-types');
-
             if (question) {
                 questionAttrs = question.questionAttrs;
                 for (i = 0; i < questionAttrs.length; i++) {
@@ -44,7 +44,9 @@ exports.store = {
                 data.type = types[Number(question.type) - 1].value;
                 if (Number(question.type) === 2) data.title = '多选题';
             }
-
+            if (!data.mode) {
+                data.mode = payload.mode || NO_OPTIONS_SCORE;
+            }
             this.models.state.changed();
         }
     }

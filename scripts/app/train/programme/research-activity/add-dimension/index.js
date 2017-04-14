@@ -35,7 +35,7 @@ exports.store = {
                 state = this.models.state;
             this.models.dimension.set(D.assign(payload, this.models.state.data));
             return this.save(this.models.dimension).then(function() {
-                me.app.message.success(strings.get('save-success'));
+                me.app.message.success('操作成功！');
                 state.callback(me.models.dimension.data);
                 me.models.dimension.clear();
             });
@@ -52,7 +52,8 @@ exports.buttons = [{
         return strings.get('ok');
     },
     fn: function(payload) {
-        if (!this.items.main.validate()) {
+        var me = this;
+        if (!me.items.main.validate()) {
             return false;
         }
         return this.dispatch('save', payload);

@@ -1,8 +1,8 @@
 #! handlebars
 
-module > .achievement-content.content
-    .achievement-side(data-region='side')
-    .achievement-main(data-region='main')
+module
+    div(style='width:30%;float:left;' data-region='side')
+    div(style='width:65%;float:right;' data-region='main')
 
 view('side')
     .achievement-preview-top

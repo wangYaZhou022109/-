@@ -3,13 +3,11 @@
 module > .exam-manage
     div(data-region='main')
 
-view('main') > form.vertical
-    .row
-        .col-sm-12
-            label(class='required') > setting('exam.dimension.name')
-            input.input(name='name' x-rule='required' x-action='change' value=dimension.name)
-    .row
-        .col-sm-12
-            label > setting('exam.dimension.description')
-            textarea.input.block(placeholder='输入描述' rows=3 name='description')
-                echo(dimension.description)
+view('main')
+    form.vertical
+        label(class='required') > setting('exam.dimension.name')
+        input.input#name(name='name' value=dimension.name x-rule='required,maxLength:10')
+        br
+        br
+        label > setting('exam.dimension.description')
+        textarea.input(placeholder='输入描述' cols='100%' name='description') >  echo(dimension.description)

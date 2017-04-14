@@ -1,10 +1,9 @@
 var maps = require('./app/util/maps'),
     _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    types = require('./app/exam/exam-question-types'),
+    types = require('./app/train/programme/research-activity/research-question-types'),
     MUTIPLE_CHOOSE_TYPE = 2,
-    ANSWER_MODE = 3,
-    HIDE_ANSWER_SCORE_MODE = -1;
+    ANSWER_MODE = 4;
 
 exports.type = 'dynamic';
 
@@ -52,7 +51,7 @@ exports.dataForEntityModule = function(question) {
     return {
         data: question,
         multiple: question.type === MUTIPLE_CHOOSE_TYPE,
-        mode: HIDE_ANSWER_SCORE_MODE
+        mode: this.module.renderOptions.hideScore ? 0 : 1
     };
 };
 

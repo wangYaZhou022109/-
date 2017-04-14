@@ -1,10 +1,11 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    types = require('./app/exam/research-question-types'),
+    types = require('./app/train/programme/research-activity/research-question-types'),
     maps = require('./app/util/maps'),
-    strings = require('./app/util/strings'),
-    PREVIEW_MODE = 4,
-    NO_OPTION_SCORE = 0;
+    PREVIEW_MODE = 4;
+
+exports.HIDE_SCORE = true;
+exports.OPTION_SCORE_MODE = 0;
 
 exports.type = 'dynamic';
 
@@ -25,8 +26,8 @@ exports.handlers = {
     editQuestion: function(id) {
         var mod = this.module.items['train/programme/research-activity/question/add-question'],
             me = this;
-        this.app.viewport.popup(mod, {
-            hideScore: true,
+        this.app.viewport.modal(mod, {
+            hideScore: me.options.HIDE_SCORE,
             question: this.bindings.questions.getQuestionById(id),
             callback: function(question) {
                 return me.module.dispatch('editQuestion', question);
@@ -35,7 +36,7 @@ exports.handlers = {
     },
     deleteQuestion: function(id) {
         var me = this;
-        this.app.message.confirm(strings.getWithParams('delete-warn', strings.get('exam.question')), function() {
+        this.app.message.confirm('试题删除之后将无法恢复，是否确定删除该试题', function() {
             return me.module.dispatch('deleteQuestion', { id: id });
         }, function() {
             return false;
@@ -84,6 +85,6 @@ exports.getEntityModuleName = function(id, question) {
 exports.dataForEntityModule = function(question) {
     return {
         type: question.type,
-        data: D.assign(question, { mode: NO_OPTION_SCORE })
+        data: D.assign(question, { mode: this.options.OPTION_SCORE_MODE })
     };
 };
