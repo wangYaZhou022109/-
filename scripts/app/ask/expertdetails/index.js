@@ -35,7 +35,7 @@ exports.store = {
             relevantexperts.changed();
             relatedquestions.data.id = data[0];
             relatedquestions.changed();
-            state.data.id = data[0];
+            state.data.id = data[1];
             state.changed();
             followcount.data.id = data[1];
             followcount.changed();
