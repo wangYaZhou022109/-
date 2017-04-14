@@ -5,7 +5,7 @@ module
 
 view('toolbar')
     .pdf-view-toolbar
-        .clearfix.m-top.m-bottom
+        .clearfix
             .pull-left
                 .inline-block.iconfont.icon-arrow-left-circle.m-right#turnToPage-prev
                 .inline-block.iconfont.icon-arrow-right-circle#turnToPage-next
@@ -26,5 +26,5 @@ view('viewer')
         #progress.btn(style='display:none;')
         label#progressLabel
     .relative
-        #viewerContainer.viewerContainer(style='height:45vh;')
+        #viewerContainer.viewerContainer(style='height:50vh;')
             .pdfViewer#viewer

@@ -55,18 +55,18 @@ view('chapter')
 
 view('info')
     .title-row
-        .inline-block.layout-mr > .h3 > echo(course.name)
-        .inline-block.layout-mr
+        .inline-block.layout-mr-small > .h3.strong > echo(course.name)
+        .inline-block.layout-mr-small
             #star-score
-        .inline-block.layout-mr
-            .inline-block.layout-ml.m-right > #share
+        .inline-block.layout-mr-small
+            .inline-block.m-right > #share
             .inline-block.m-left
                 if(collect.id)
                     i#cancel-collect.iconfont.icon-favorite-full.custom-color-1(data-name='id' data-value=collect.id title='取消收藏')
                 else
                     i#collect.iconfont.icon-favorite(title='收藏')
 
-    .sub-title-row.layout-mb-small.layout-mt-small
+    .sub-title-row.mt-1.m-bottom
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)
         .inline-block.layout-mr > echo('发布时间: ') + date(course.releaseTime)
     p.course-info-detail > echo('讲师: ') + echo(course.lecturer)
@@ -77,26 +77,29 @@ view('comment')
 
 view('download')
     .h3 资料下载区
-    .layout-mt-small
+    .mt-1
         each(attachments)
             .block.layout-mt-small
                 .pull-right
                     if(isView)
                         a(id='viewPdf-'+attachmentId href='javascript:;') > string('view')
                     a(href=downUrl download=name) > string('download')
-                .text-overflow(title=name) > echo(name)
+                a.text-overflow.underline(title=name) > echo(name)
 
 
 view('releated-course')
-    .h3
-        .side-reload.sub-title#resetPage > i.iconfont.icon-reload + span.text-tips > string('reset.page')
-        echo('相关课程')
-    .layout-mt-small
+    .clearfix
+        .side-reload.text-tips#resetPage
+            i.iconfont.icon-reload-full
+            span > string('reset.page')
+        .h3 > echo('相关课程')
+    .mt-1.grid-row
         each(courseRelated)
-            .img
-                a.normal(href='#/study/course/detail/'+id)
-                    .img-cont > img(src=imageUrl)
-                h4.text-overflow(title=name) > echo(name)
+            .col-md-6
+                .img
+                    a.normal(href='#/study/course/detail/'+id)
+                        .img-cont > img(src=imageUrl)
+                    .title.text-overflow(title=name) > echo(name)
 
 
 view('student')
