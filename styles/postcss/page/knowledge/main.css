@@ -5,13 +5,11 @@
         padding: calc(var(--space)*2) 0;
         border-bottom: 1px solid var(--border-color);
 
-        & i.iconfont {
-            font-size: 2.2em;
+        & .iconfont {
+            font-size: 2.8em;
         }
 
-
         & .knowledge-tit-con {
-            width: 80%;
             overflow: hidden;
 
             & .star-bar {
@@ -19,7 +17,6 @@
             }
 
             & .knowledge-tit {
-                max-width: 80%;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
