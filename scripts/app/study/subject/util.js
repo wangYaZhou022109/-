@@ -12,7 +12,8 @@ var D = require('drizzlejs'),
         8: '#/study/task/',
         10: '#/study/course/detail/',
         14: '#/gensee/detail/'
-    };
+    },
+    btnTextStudy;
 // 阶段序号转义
 exports.rowHeader = function(arr, payload) {
     var opt = D.assign(options, payload);
@@ -50,9 +51,7 @@ exports.setBtn = function(chapters, type, currentSectionId) {
             section.btnColor = 'custom-bg-color-2';
             if (progress && progress.finishStatus !== 0) {
                 section.btnText = studyBtnTexts[progress.finishStatus] || '继续学习';
-                if (sectionType === 8) {
-                    section.btnText = '查看详情';
-                }
+                if (btnTextStudy[sectionType]) section.btnText = btnTextStudy[sectionType].call(this, progress);
                 section.btnColor = studyBtnColor[progress.finishStatus] || 'custom-bg-color-4';
             }
             if (sectionType === 3) {
@@ -74,4 +73,24 @@ exports.setBtn = function(chapters, type, currentSectionId) {
         return obj.courseChapterSections;
     });
     return courseChapters;
+};
+
+
+btnTextStudy = {
+    8: function() {
+        return '查看详情';
+    },
+    9: function(progress) {
+        var examScore = progress.examScore || 0,
+            score = (examScore / 100).toFixed(1);
+        if (progress.finishStatus === 7) return '待评卷';
+        if (progress.finishStatus === 1 || progress.finishStatus === 2) return '成绩' + score;
+        return '进入考试';
+    },
+    12: function() {
+        return '查看详情';
+    },
+    13: function() {
+        return '查看详情';
+    }
 };
