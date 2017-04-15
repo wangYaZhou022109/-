@@ -13,16 +13,14 @@
         & li {
             overflow: hidden;
             line-height: calc(var(--space)*2);
-            padding: var(--space) 0;
+            margin-bottom: var(--space);
 
             & a {
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                width: 80%;
+                @apply --text-overflow;
+
                 height: calc(var(--space)*2);
                 margin: 0;
-                display: inline-block;
+                display: block;
             }
         }
     }

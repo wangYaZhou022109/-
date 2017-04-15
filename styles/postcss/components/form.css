@@ -112,6 +112,7 @@
             & .tag-btn {
                 border: none;
                 background: var(--bg-color-2);
+                margin-bottom: 0;
             }
         }
     }

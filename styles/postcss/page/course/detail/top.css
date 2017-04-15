@@ -65,7 +65,7 @@
     & .course-note-main {
         height: 100%;
         padding-left: 1em;
-        padding-top: calc(var(--font-size) * 5);
+        padding-top: calc(var(--font-size) * 3);
 
     }
 
@@ -78,7 +78,7 @@
         float: right;
         height: 100%;
         color: #ffffff;
-        background: rgba(0,0,0,.5);
+        background: rgba(0,0,0,.65);
 
         &.show-note {
             & .course-chapter,
@@ -124,13 +124,14 @@
         & .course-side-title-row {
             @apply --transition;
 
-            line-height: calc(var(--font-size) * 5);
+            line-height: calc(var(--font-size) * 3);
             padding: 0 var(--large-space) 0 calc(var(--large-space) + 1);
             border-bottom: 1px solid var(--fade-color);
             position: absolute;
             width: 100%;
             top: 0;
             left: 0;
+            color: var(--font-sub-color);
 
             & .note-btn {
                 background: var(--fade-color);

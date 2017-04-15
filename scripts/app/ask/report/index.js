@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.items = {
     details: 'details'
 };
@@ -56,6 +56,15 @@ exports.buttons = [{
             type.push(4);
         }
         data.type = type.toString();
+        if (!data.type) {
+            this.app.message.error('请选择举报类型');
+            return false;
+        }
+        if (!data.accuseNote || $.trim(data.accuseNote) === '') {
+            this.app.message.error('请填写举报理由');
+            return false;
+        }
+        data.accuseNote = $.trim(data.accuseNote);
         return this.dispatch('report', data);
     }
 }];
