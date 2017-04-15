@@ -13,6 +13,6 @@ exports.buttons = [{
         if (state.currentType === 13) {
             url = '#/exam/research-activity/paper/' + id;
         }
-        window.open(url, '_blank');
+        window.open(url);
     }
 }];
