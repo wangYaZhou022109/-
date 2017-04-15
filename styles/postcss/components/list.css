@@ -40,11 +40,13 @@
     & ul.list {
         @apply --clearfix;
 
-        margin-right: -var(--main-list-gap);
+        margin-right: -3rem;
+        font-size: 0;
 
         & li {
-            float: left;
             width: 20%;
+            display: inline-block;
+            font-size: 1rem;
             padding-right: var(--main-list-gap);
             margin-bottom: calc(var(--main-list-gap) + 1);
         }
