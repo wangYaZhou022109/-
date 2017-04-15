@@ -32,14 +32,13 @@
         @apply --transition;
         white-space: nowrap;
         width: 100%;
-        word-spacing: -.3em;
-
+        font-size: 0;
         & > li {
             display: inline-block;
+            font-size: 1rem;
             white-space: normal;
             overflow: hidden;
             width: 20%;
-            word-spacing: 0;
         }
 
         &.full > li {
