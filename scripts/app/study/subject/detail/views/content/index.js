@@ -19,6 +19,10 @@ exports.store = {
                 },
                 findSectionsForType: function(type) {
                     return _.filter(this.findAllSections(), { sectionType: type });
+                },
+                findSectionsForId: function(id) {
+                    var sections = _.filter(this.findAllSections(), { id: id }) || [];
+                    return sections[0] || {};
                 }
             }
         },

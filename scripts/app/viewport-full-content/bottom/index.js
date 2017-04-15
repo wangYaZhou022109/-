@@ -28,9 +28,9 @@ exports.store = {
 exports.beforeRender = function() {
     var payload = {};
     if (document.cookie) {
-        document.cookie.split(';').forEach(function(item) {
+        document.cookie.split('; ').forEach(function(item) {
             var arr = item.split('=');
-            if (arr[1] !== 'undefined') {
+            if (arr[1] !== 'undefined' || arr[1] !== '') {
                 payload[arr[0]] = arr[1];
             }
         });

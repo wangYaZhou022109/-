@@ -18,30 +18,35 @@ exports.handlers = {
         var url = element.getAttribute('data-url'),
             sectionType = Number(element.getAttribute('data-section-type')),
             resourceId = element.getAttribute('data-resource-id'),
+            section = this.bindings.subject.findSectionsForId(id),
+            progress = section.progress,
             me = this,
             view;
         if (sectionType === 12 || sectionType === 13) {
+            if (progress.finishStatus === 2) {
+                url = '#/exam/research-activity/research-detail/' + resourceId;
+                if (sectionType === 13) {
+                    url = '#/exam/research-activity/paper/' + resourceId;
+                }
+                window.open(url);
+                return;
+            }
             view = this.module.items['research-tips'];
             this.bindings.state.data.currentType = sectionType;
             this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
                 me.app.viewport.modal(view);
             });
         } else if (sectionType === 9) {
+            if (progress.finishStatus === 2) {
+                url = '#/exam/exam/paper/' + resourceId;
+                window.open(url);
+                return;
+            }
             view = this.module.items['exam-tips'];
             this.bindings.state.examId = resourceId;
             me.app.viewport.modal(view);
         } else {
             window.open(url);
-        }
-        // 文档、URL打开即完成
-        if (sectionType === 1 || sectionType === 3) {
-            this.module.dispatch('updateProgress', {
-                sectionId: id,
-                beginTime: new Date().getTime(),
-                clientType: 0,
-                finishStatus: 2, // 已完成
-                completedRate: 100, // 已完成
-            });
         }
     },
     sectionDisplay: function(id) {
