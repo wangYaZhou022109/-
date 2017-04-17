@@ -172,6 +172,10 @@ section.section {
     visibility: hidden;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .block {
     display: block;
     margin-left: auto;
