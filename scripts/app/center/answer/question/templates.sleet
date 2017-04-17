@@ -29,8 +29,7 @@ view('main')
                 .comment-content
                     .h4 > echo(title)
                     .comment-text
-                        if(contentImg) > img(src=contentImg)
-                        echo(contentTxt)
+                        @echo(contentTxt)
                     .user-info
                         a(href='javascript:;') 我
                         span > echo(typeName)

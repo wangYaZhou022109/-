@@ -1,5 +1,5 @@
 var $ = require('jquery');
-
+var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -15,7 +15,13 @@ exports.store = {
         del: { url: '../ask-bar/trends/del' },
         page: {
             data: [],
-            params: { page: 1, size: 2 }
+            params: { page: 1, size: 2 },
+            mixin: {
+                findById: function(id) {
+                    var trends = this.module.store.models.page.data;
+                    return _.find(trends, ['id', id]);
+                }
+            }
         }
     },
     callbacks: {
@@ -41,7 +47,6 @@ exports.store = {
         },
         unfollow: function(payload) {
             var follow = this.models.unfollow;
-            // console.log(payload);
             follow.set(payload);
             return this.put(follow);
         },
@@ -54,21 +59,6 @@ exports.store = {
             var discuss = this.models.reply;
             discuss.set(payload);
             return this.save(discuss);
-        },
-        delquestion: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        },
-        delshare: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        },
-        deldiscuss: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
         }
     }
 };

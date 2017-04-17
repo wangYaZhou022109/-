@@ -1,0 +1,31 @@
+#!handlebars
+
+module
+    li.tabs-cont-item.active#tabs-cont-item-1
+        .person-list
+            div(data-region='filter')
+            div(data-region='main')
+            
+view('filter')
+    .filter
+        .pull-right.m-right.pointer#timeOrder
+            | 关注时间
+            compare(search.timeOrder 'eq' 'asc')
+                i.iconfont.icon-sort-asc
+            else
+                i.iconfont.icon-sort-desc
+        .pull-left
+            .inline-block.m-left.sub-text 话题类型：
+            .item#topicType-all(class=if(search.topicTypeAll 'active')) > span 全部
+            each(topicType)
+                .item(id='topicType-'+id class=if(active 'active')) > span > echo(name)
+
+view('main')
+    .comment-list.ask-list
+        ul.list-text.border.top > each(list)
+            li.topic-item
+                a.normal(href="javascript:;")
+                    .img > .img-cont > img(src="images/demo/1.jpg")
+                    h4.text-overflow(title=name) > echo(name)
+                    .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
+                .btn.small 取消关注

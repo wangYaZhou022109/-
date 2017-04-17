@@ -26,7 +26,9 @@ exports.handlers = {
                     params[arr[0]] = arr[1];
                 }
             });
-            url = url + '/org/' + params.orgId;
+            if (params.orgId) {
+                url = url + '/org/' + params.orgId;
+            }
             this.app.navigate(url, true);
         }
         this.app.navigate(url, true);
