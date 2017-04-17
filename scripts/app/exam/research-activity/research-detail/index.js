@@ -209,6 +209,7 @@ exports.store = {
             } else if (payload.researchQuestionaryId) {
                 researchRecord.params = {
                     researchQuestionaryId: payload.researchQuestionaryId,
+                    businessId: payload.businessId,
                     clientType: PC_TYPE
                 };
                 return this.get(researchRecord).then(function() {
