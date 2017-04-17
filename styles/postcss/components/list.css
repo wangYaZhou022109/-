@@ -40,11 +40,13 @@
     & ul.list {
         @apply --clearfix;
 
-        margin-right: -var(--main-list-gap);
+        margin-right: -3rem;
+        font-size: 0;
 
         & li {
-            float: left;
             width: 20%;
+            display: inline-block;
+            font-size: 1rem;
             padding-right: var(--main-list-gap);
             margin-bottom: calc(var(--main-list-gap) + 1);
         }
@@ -64,12 +66,11 @@
         & .content {
             position: relative;
             transition: all .2s linear;
+            padding: 1em;
+            margin: -1em;
 
             &:hover {
                 @apply --box-shadow;
-
-                padding: 1em 1em 1em;
-                margin: -1em -1em -1em;
 
                 & .detail-wrapper {
                     @apply --fade-in;

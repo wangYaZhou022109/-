@@ -12,12 +12,6 @@ view('list')
                         a(href='javascript:;') > string('me')
                     else
                         a(href='javascript:;') > echo(createUser.fullName)
-                    compare(trendsType 'eq' '3')
-                        echo('.') + string('updated-discussion') + echo('.') 
-                    compare(trendsType 'eq' '1')
-                        echo('.') + string('ask-a-question') + echo('.') 
-                    compare(trendsType 'eq' '2')
-                        echo('.') + string('share') + echo('.') 
                     span ·讨论了· 
                     span > echo(member.fullName)
                     span.sub-text > echo(questionDiscuss.createTime)
@@ -35,12 +29,17 @@ view('list')
                                     .drop-down-wrapper
                                         i.iconfont.icon-share-2(title='分享')
                                         form.drop-down-content > .content
-                                            .item > div(id ='shareTo-qzone' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                            .item > div(id ='shareTo-weibo' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                            .item > div(id ='shareTo-bar' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
-                                .item > span(id ='trend-report-' + trendsType + '_' + questionDiscuss.id data-name='id' data-value=trendsType +'_' + questionDiscuss.id) > string('report')
-                                compare(questionDiscuss.replyNum 'eq' 0)
-                                    .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
+                                            .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                            .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                            .item > div(id ='shareTo-bar_' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
+                                .item > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
+                                form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
+                                    textarea.input.w-full.block(rows=1 name='content' value='' )
+                                    input.input(type='hidden' name='organizationId' value=questionDiscuss.organizationId)
+                                    input.input(type='hidden' name='questionId' value=questionDiscuss.questionId)
+                                    input.input(type='hidden' name='id' value=questionDiscuss.id)
+                                    input.input(type='hidden' name='toUserId' value=questionDiscuss.createMemberId)
+                                    .btn(id='reply-' + questionDiscuss.id ) > string('publish')
                             else
                                 compare(pendingAudit.auditStatus 'eq' 2) 
                                     .item > span.color-ing > string('auditStatus2')
@@ -52,12 +51,17 @@ view('list')
                                         .drop-down-wrapper
                                             i.iconfont.icon-share-2(title='分享')
                                             form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                                .item > div(id ='shareTo-bar' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
-                                    compare(questionDiscuss.replyNum 'eq' 0)
-                                        .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
-                
+                                                .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                                .item > div(id ='shareTo-bar_' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
+                                    .item > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
+                                    form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
+                                        textarea.input.w-full.block(rows=1 name='content' value='' )
+                                        input.input(type='hidden' name='organizationId' value=questionDiscuss.organizationId)
+                                        input.input(type='hidden' name='questionId' value=questionDiscuss.questionId)
+                                        input.input(type='hidden' name='id' value=questionDiscuss.id)
+                                        input.input(type='hidden' name='toUserId' value=questionDiscuss.createMemberId)
+                                        .btn(id='reply-' + questionDiscuss.id ) > string('publish')
 
                 
             

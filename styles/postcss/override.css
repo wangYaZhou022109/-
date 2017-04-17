@@ -95,7 +95,6 @@
     top:2em;
     overflow: auto;
     z-index: 6;
-    max-height: 50vh;
 }
 
 .pdf-progress {

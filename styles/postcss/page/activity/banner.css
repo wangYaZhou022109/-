@@ -3,7 +3,7 @@
 
     & ul.activity-banner-list {
         position: relative;
-        margin-top: var(--base-gap);
+        margin-top: 3rem;
 
         & > li {
             z-index: 1;

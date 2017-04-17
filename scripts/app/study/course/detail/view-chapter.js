@@ -9,7 +9,6 @@ var showHandler = function(payload) {
     var detailUrlMap = {
         8: '#/study/task/',
         9: '#/exam/exam/paper/'
-        // 12: '#/exam/research-activity/paper/'
     };
     return function() {
         var me = this;
@@ -107,6 +106,7 @@ exports.dataForTemplate = {
                 _.forEach(r.courseChapterSections, function(obj, j) {
                     var rr = obj;
                     var examStatus;
+                    var researchStatus;
                     var sectionProcess = progress.findProgress(rr.referenceId);
                     rr.seq = courseUtil.seqName(j, 2);
                     if (currentSectionId === rr.id) {
@@ -119,17 +119,19 @@ exports.dataForTemplate = {
                     rr.completedRate = sectionProcess.completedRate || 0;
                     // Rate
                     rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
-
                     if (rr.sectionType === 9) {
                         examStatus = _.find(data.examStatus, { examId: rr.resourceId });
                         if (examStatus && examStatus.status) {
-                            rr.finishStatus = maps.getValue('paper-instance-status', examStatus.status);
+                            rr.finishStatus = examStatus.score ? '成绩' +
+                            (Number(examStatus.score) / 100).toFixed(1) :
+                            maps.getValue('paper-instance-status', examStatus.status);
                         }
                     }
-                    if (rr.sectionType === 12) {
-                        examStatus = _.find(data.examStatus, { researchQuestionaryId: rr.resourceId });
-                        if (examStatus && examStatus.status) {
-                            rr.finishStatus = maps.getValue('research-record', examStatus.status);
+                    if (rr.sectionType === 12 || rr.sectionType === 13) {
+                        researchStatus = _.find(data.researchStatus, { researchQuestionaryId: rr.resourceId });
+                        if (researchStatus && researchStatus.status) {
+                            rr.finishStatus = researchStatus.status === 1 ?
+                            '查看详情' : maps.getValue('research-record', researchStatus.status);
                         }
                     }
                 });

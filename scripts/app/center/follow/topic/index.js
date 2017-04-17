@@ -1,21 +1,15 @@
 var D = require('drizzlejs');
 exports.items = {
     main: 'main',
-    filter: 'filter',
-    'ask/report': { isModule: true }
+    filter: 'filter'
 };
 
 exports.store = {
     models: {
-        list: {
-            url: '../ask-bar/my-follow/question',
-            type: 'pageable',
-            root: 'items'
-        },
+        list: { url: '../ask-bar/my-follow/topic' },
+        topicType: { url: '../system/topic-type' },
         img: { url: '../human/file/download?id=' },
         search: {},
-        unfollow: { url: '../ask-bar/concern/unfollow' },
-        discuss: { url: '../ask-bar/question-discuss' },
     },
     callbacks: {
         init: function() {
@@ -32,19 +26,14 @@ exports.store = {
             this.get(list);
             searchModel.changed();
         },
-        unfollow: function(payload) {
-            var follow = this.models.unfollow;
-            follow.set(payload);
-            return this.put(follow);
-        },
-        publish: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
-            return this.save(discuss);
+        topicType: function() {
+            var topicType = this.models.topicType;
+            return this.get(topicType);
         }
     }
 };
 
 exports.beforeRender = function() {
     this.dispatch('init');
+    this.dispatch('topicType');
 };
