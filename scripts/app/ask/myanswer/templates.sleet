@@ -26,9 +26,9 @@ view('list')
                                     .drop-down-wrapper
                                         i.iconfont.icon-share-2(title='分享')
                                         form.drop-down-content > .content
-                                            .item > div(id ='shareTo-qzone' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                            .item > div(id ='shareTo-weibo' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                            .item > div(id ='shareTo-bar' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
+                                            .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                            .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                            .item > div(id ='shareTo-bar_' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
                                 .item > span(id ='trend-report-' + trendsType + '_' + questionDiscuss.id data-name='id' data-value=trendsType +'_' + questionDiscuss.id) > string('report')
                                 compare(questionDiscuss.replyNum 'eq' 0)
                                     .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
@@ -43,9 +43,9 @@ view('list')
                                         .drop-down-wrapper
                                             i.iconfont.icon-share-2(title='分享')
                                             form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                                .item > div(id ='shareTo-bar' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
+                                                .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                                .item > div(id ='shareTo-bar_' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
                                     compare(questionDiscuss.replyNum 'eq' 0)
                                         .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
                 

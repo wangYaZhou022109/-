@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var _ = require('lodash/collection');
 exports.items = {
     list: 'list'
 };
@@ -9,7 +10,13 @@ exports.store = {
         del: { url: '../ask-bar/trends/del' },
         page: {
             data: [],
-            params: { page: 1, size: 2 }
+            params: { page: 1, size: 2 },
+            mixin: {
+                findById: function(id) {
+                    var trends = this.module.store.models.page.data;
+                    return _.find(trends, ['questionDiscuss.id', id]);
+                }
+            }
         }
     },
     callbacks: {
