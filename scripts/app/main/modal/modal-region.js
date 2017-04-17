@@ -48,6 +48,7 @@ D.extend(ModalRegion, D.MultiRegion, {
     _moveOverlay: function() {
         var zidx = this._zIndex();
         this.overlay.className = 'dialog-overlay' + (zidx === zIndex ? ' hidden' : '');
+        document.body.className = zidx === zIndex ? '' : 'overflow-hidden';
         this.overlay.setAttribute('style', 'z-index:' + (zidx - 1));
     },
 

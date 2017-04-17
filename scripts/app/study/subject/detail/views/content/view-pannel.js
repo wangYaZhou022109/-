@@ -19,7 +19,7 @@ exports.handlers = {
             sectionType = Number(element.getAttribute('data-section-type')),
             resourceId = element.getAttribute('data-resource-id'),
             section = this.bindings.subject.findSectionsForId(id),
-            progress = section.progress,
+            progress = section.progress || {},
             me = this,
             view;
         if (sectionType === 12 || sectionType === 13) {
