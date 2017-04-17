@@ -25,7 +25,7 @@ input,button,select,.btn {
         line-height: 3em;
         font-size: var(--font-title);
     }
-    
+
     &.block {
         display: block;
         margin-left: auto;
@@ -120,7 +120,7 @@ input,button,select,.btn {
 
 .input {
     transition: all .2s linear;
-    padding: var(--space);
+    padding: 0 var(--space);
     border-width: 1px;
     border-style: solid;
     background: white;
@@ -147,12 +147,20 @@ input,button,select,.btn {
         padding-right: calc(var(--font-size) * 3);
     }
 
-    &.date + .iconfont {
-        position: absolute;
-        right: calc(var(--font-size) / 2);
-        top: 50%;
-        margin-top: -calc(var(--font-size) / 2);
+    &.date {
+        padding-right: 2em;
+
+        & + .iconfont {
+            position: absolute;
+            right: calc(var(--font-size) / 2);
+            top: 50%;
+            margin-top: -calc(var(--font-size) / 2);
+        }
     }
+}
+
+textarea.input {
+    padding: var(--space);
 }
 
 .btn-upload-file {
