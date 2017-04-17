@@ -8,7 +8,8 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    getCurrentStatus;
+    getCurrentStatus,
+    PC_TYPE = 1;
 
 exports.items = {
     side: 'side',
@@ -206,7 +207,10 @@ exports.store = {
             if (payload.researchRecord) {
                 researchRecord.set(payload.researchRecord);
             } else if (payload.researchQuestionaryId) {
-                researchRecord.params = { researchQuestionaryId: payload.researchQuestionaryId };
+                researchRecord.params = {
+                    researchQuestionaryId: payload.researchQuestionaryId,
+                    clientType: PC_TYPE
+                };
                 return this.get(researchRecord).then(function() {
                     questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));
                     state.init();

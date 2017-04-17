@@ -1,9 +1,0 @@
-#! handlebars
-
-module
-    .feedback-page(data-region='main')
-
-view('main')
-    textarea.input.w-full(rows='5' placeholder='填下您想反馈的意见，提交给我们，我们会尽早为您解决。')
-    .layout-mt-small
-        .btn-upload-file 上传图片

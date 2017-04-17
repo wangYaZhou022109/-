@@ -13,14 +13,14 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click auditStatus-*': 'selectAudit',
+    'click type-*': 'type',
     'click timeOrder': 'timeOrder'
 };
 
 exports.handlers = {
-    selectAudit: function(auditStatus) {
+    type: function(type) {
         var params = {
-            auditStatus: auditStatus === 'all' ? '' : auditStatus
+            type: type === 'all' ? '' : type
         };
         this.module.dispatch('search', params);
     },

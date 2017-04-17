@@ -1,5 +1,5 @@
-
-
+var $ = require('jquery');
+var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -7,18 +7,38 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/expert-answer' },
+        expertdiscuss: { url: '../ask-bar/question-discuss/answer' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 },
+            mixin: {
+                findById: function(id) {
+                    var trends = this.module.store.models.page.data;
+                    return _.find(trends, ['questionDiscuss.id', id]);
+                }
+            }
+        }
     },
     callbacks: {
         init: function(payload) {
-            var trends = this.models.trends;
-            trends.set({ id: payload.state.id });
-            return this.get(trends);
+            var discuss = this.models.expertdiscuss;
+            var params = this.models.page.params;
+            params.id = payload.state.id;
+            discuss.set(params);
+            return this.post(discuss);
+        },
+        page: function(payload) {
+            var discuss = this.models.expertdiscuss;
+            var params = this.models.page.params;
+            params.id = payload.state.id;
+            discuss.set(params);
+            this.post(discuss).then(function() {
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -39,29 +59,22 @@ exports.store = {
             var discuss = this.models.reply;
             discuss.set(payload);
             return this.save(discuss);
-        },
-        delquestion: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        },
-        delshare: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        },
-        deldiscuss: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
         }
     }
 };
 
 exports.afterRender = function() {
+    var me = this;
     if (typeof this.renderOptions.state.id !== 'undefined' && this.renderOptions.state.id !== '') {
-        return this.dispatch('init', this.renderOptions);
+        $(window).scroll(function() {
+            var page = me.store.models.page.params.page;
+            var size = me.store.models.page.params.size;
+            if (page * size === me.store.models.page.data.length) {
+                me.store.models.page.params.page++;
+                me.dispatch('page', me.renderOptions);
+            }
+        });
+        this.dispatch('init', this.renderOptions);
     }
-    return null;
 };
 

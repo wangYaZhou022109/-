@@ -1,7 +1,4 @@
 .page-side {
-    & .download .text-overflow {
-        width: 70%;
-    }
     & .relevant-topic .sub-title {
         padding: var(--space);
     }
@@ -20,10 +17,9 @@
 
     & .relevant-course {
         & .img {
-            margin-bottom: var(--large-space);
-            height: 18em;
+            max-height: 14em;
             & img {
-                max-width: 26em;
+                max-width: 100%;
             }
             &:hover {
                 & img {
@@ -31,14 +27,14 @@
                 }
             }
 
-            & h4 {
+            & .title {
+                font-size: var(--small-font);
                 position: absolute;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 margin: 0;
-                font-weight: 500;
-                padding: calc(var(--large-space) / 2) var(--space);
+                padding: calc(var(--space) / 2) 1em;
             }
         }
     }

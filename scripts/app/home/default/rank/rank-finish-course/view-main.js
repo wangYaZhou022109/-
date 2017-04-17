@@ -3,9 +3,9 @@ exports.bindings = {
 };
 
 exports.dataForTemplate = {
-    moduleHomeConfig: function(data) {
-        var moduleHomeConfig = data.moduleHomeConfig || {};
-        moduleHomeConfig = this.module.renderOptions.rankModuleConfig;
-        return moduleHomeConfig;
+    rankModule: function(data) {
+        var rankModule = data.moduleHomeConfig || {};
+        rankModule = this.module.renderOptions.rankModule;
+        return rankModule;
     }
 };
