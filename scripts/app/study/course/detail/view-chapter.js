@@ -8,8 +8,8 @@ var showHandler = function(payload) {
     var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
         8: '#/study/task/',
-        9: '#/exam/exam/paper/',
-        12: '#/exam/research-activity/paper/'
+        9: '#/exam/exam/paper/'
+        // 12: '#/exam/research-activity/paper/'
     };
     return function() {
         var me = this;

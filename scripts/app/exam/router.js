@@ -4,7 +4,7 @@ exports.routes = {
     'exam/answer-paper/:id': 'showAnswerPaper',
     'exam/mark-paper/:id': 'showMarkPaper',
     'exam/score-detail/:id': 'showScoreDetail',
-    'research-activity/research-answer/:id/:businessId': 'showResearchAnswerDetail',
+    'research-activity/research-answer/:id': 'showResearchAnswerDetail',
     'research-activity/research-detail/:id/:businessId': 'showResearchDetail',
     'research-activity/paper/:id/:businessId': 'showResearchPaper',
     'research-activity/index/:id': 'showIndex'
@@ -37,10 +37,9 @@ exports.showResearchDetail = function(id, businessId) {
     });
 };
 
-exports.showResearchAnswerDetail = function(id, businessId) {
+exports.showResearchAnswerDetail = function(id) {
     return this.app.viewport.showIt('content', 'exam/research-activity/research-answer', {
-        researchRecordId: id,
-        businessId: businessId
+        researchRecordId: id
     });
 };
 

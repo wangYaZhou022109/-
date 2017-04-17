@@ -11,7 +11,7 @@ exports.buttons = [{
         var id = this.bindings.researchActivity.data.id,
             state = this.bindings.state.data,
             course = this.bindings.course.data,
-            url = '#/exam/research-activity/research-detail/' + id + '/' + course.id;
+            url = '#/exam/research-activity/paper/' + id + '/' + course.id;
         if (state.currentType === 13) {
             url = '#/exam/research-activity/paper/' + id + '/' + course.id;
         }

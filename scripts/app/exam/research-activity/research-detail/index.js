@@ -225,7 +225,8 @@ exports.store = {
                 researchRecord = this.models.researchRecord;
 
             this.models.form.set(D.assign({}, this.models.answer.getData(), {
-                researchQuestionaryId: researchRecord.params.researchQuestionaryId
+                researchQuestionaryId: researchRecord.params.researchQuestionaryId,
+                businessId: researchRecord.params.businessId
             }));
 
             return this.post(this.models.form).then(function() {
