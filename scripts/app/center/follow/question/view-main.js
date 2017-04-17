@@ -93,7 +93,6 @@ exports.dataForTemplate = {
             obj.typeName = obj.type === '1' ? '·提问·' : '·分享·';
             obj.prefixText = helpers.dateMinute(obj.createTime);
             obj.discussTxt = '评论(' + obj.discussNum + ')';
-            obj.contentImg = 'images/1.png';
         });
         return list;
     }
