@@ -19,7 +19,7 @@ exports.type = 'dynamic';
 exports.getEntity = function(id) {
     var question = this.bindings.questions.getQuestionById(id);
     return D.assign({}, question, {
-        questionAttrs: _.orderBy(question.questionAttrs, ['createTime'], ['asc']),
+        questionAttrs: _.orderBy(question.questionAttrs, ['name'], ['asc']),
         score: question.score / 100
     });
 };
