@@ -28,7 +28,7 @@ exports.handlers = {
         });
     },
     addEva: function() {
-        var model = this.module.items['train/programme/select-evaluate-questionary'],
+        var model = this.module.items['train/programme/evaluate-questionary/select-evaluate-questionary'],
             me = this;
         me.app.viewport.modal(model, {
             callback: function(data) {

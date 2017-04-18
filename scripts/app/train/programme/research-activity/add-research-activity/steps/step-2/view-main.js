@@ -85,6 +85,7 @@ exports.getEntityModuleName = function(id, question) {
 exports.dataForEntityModule = function(question) {
     return {
         type: question.type,
-        data: D.assign(question, { mode: this.options.OPTION_SCORE_MODE })
+        data: question,
+        mode: this.options.OPTION_SCORE_MODE
     };
 };

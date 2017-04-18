@@ -4,7 +4,7 @@ module
     div(data-region='main')
 
 view('main')
-    form.vertical
+    form.vertical(id='add-form')
         .exam-base-info.row 
             label.required > setting('exam.research.name')
             input.input#name(name='name' value=research.name) + span#checkName

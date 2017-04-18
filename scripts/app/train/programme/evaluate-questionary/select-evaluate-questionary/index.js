@@ -7,7 +7,7 @@ exports.items = {
     search: 'search',
     content: 'content',
     'train/trainee/select-member-radio': { isModule: true },
-    'train/programme/select-evaluate-questionary/add-research-refrence': { isModule: true }
+    'train/programme/evaluate-questionary/select-evaluate-questionary/add-research-refrence': { isModule: true }
 };
 
 exports.title = '添加评估';
@@ -58,7 +58,7 @@ exports.buttons = [{
 }, {
     text: '新增',
     fn: function() {
-        var mod = this.items['train/programme/select-evaluate-questionary/add-research-refrence'],
+        var mod = this.items['train/programme/evaluate-questionary/select-evaluate-questionary/add-research-refrence'],
             researchId = this.store.models.research.data.id,
             me = this;
         this.app.viewport.modal(mod, {

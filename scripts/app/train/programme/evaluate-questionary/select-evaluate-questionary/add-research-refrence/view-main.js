@@ -3,7 +3,7 @@ var options = require('./app/train/programme/research-activity/add-research-thir
     obj = D.assign({}, options);
 
 D.assign(obj, {
-    ADD_QUESTIONARY: 'train/programme/add-evaluate-questionary/steps/step-2'
+    ADD_QUESTIONARY: 'train/programme/evaluate-questionary/add-evaluate-questionary/steps/step-2'
 });
 
 module.exports = obj;

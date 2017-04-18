@@ -45,6 +45,7 @@ exports.store = {
                     data.startTime = payload.startTime;
                     data.endTime = payload.endTime;
                     if (callback) callback(data);
+                    me.models.research.clear();
                     me.app.message.success('保存成功！');
                 });
             } else {

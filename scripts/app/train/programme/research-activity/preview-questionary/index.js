@@ -38,7 +38,7 @@ exports.store = {
                                 return D.assign(q, {
                                     index: i + 1,
                                     dimensionIndex: dindex + 1,
-                                    status: dindex === 0 && i === 0 ? 'current' : 'init'
+                                    statuss: dindex === 0 && i === 0 ? 'current' : 'init'
                                 });
                             }),
                             questionSize: d.questions.length
@@ -54,12 +54,12 @@ exports.store = {
                 selectQuestion: function(questionId) {
                     var index = this.data.findIndex(function(d) {
                         return _.some(d.questions, function(q) {
-                            return q.status === 'current';
+                            return q.statuss === 'current';
                         });
                     });
 
-                    D.assign(_.find(this.data[index].questions, ['status', 'current']), {
-                        status: 'init'
+                    D.assign(_.find(this.data[index].questions, ['statuss', 'current']), {
+                        statuss: 'init'
                     });
 
                     index = this.data.findIndex(function(d) {
@@ -70,7 +70,7 @@ exports.store = {
                     });
 
                     D.assign(_.find(this.data[index].questions, ['id', questionId]), {
-                        status: 'current'
+                        statuss: 'current'
                     });
                 }
             }

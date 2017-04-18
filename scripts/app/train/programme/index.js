@@ -1,4 +1,5 @@
 var D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     helpers = require('./app/util/helpers');
 
 exports.items = {
@@ -16,6 +17,7 @@ exports.items = {
     'train/programme/select-course': { isModule: true },
     'train/programme/select-member': { isModule: true },
     'train/programme/select-research-activity': { isModule: true },
+    'train/programme/evaluate-questionary/select-evaluate-questionary': { isModule: true },
     import: '',
     'import-upload': ''
 };
@@ -529,15 +531,25 @@ exports.store = {
             var questionnaireList = this.models.questionnaireList,
                 research = this.models.research,
                 state = this.models.state.data,
-                me = this;
+                me = this,
+                questionary;
             D.assign(payload, {
                 classId: state.classId
             });
-            research.set(payload);
-            this.save(research).then(function() {
+            questionary = _.find(questionnaireList.data, {
+                resourceId: payload.resourceId,
+                classId: payload.classId
+            });
+            if (questionary) {
                 questionnaireList.params.classId = state.classId;
                 me.get(questionnaireList);
-            });
+            } else {
+                research.set(payload);
+                this.save(research).then(function() {
+                    questionnaireList.params.classId = state.classId;
+                    me.get(questionnaireList);
+                });
+            }
         },
         delQuestionnair: function(payload) {
             var research = this.models.research,
