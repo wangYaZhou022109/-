@@ -26,5 +26,5 @@ view('viewer')
         #progress.btn(style='display:none;')
         label#progressLabel
     .relative
-        #viewerContainer.viewerContainer(style='height:50vh;')
+        #viewerContainer.viewerContainer(style='height:36em;')
             .pdfViewer#viewer
