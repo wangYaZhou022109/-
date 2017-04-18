@@ -18,16 +18,19 @@
     }
 
     .header .nav .item {
-        padding: 0 calc(var(--space) * 2);
+        padding: 0 calc(var(--space) * 4);
     }
 
     .main-list {
-        & > ul > li .bottom .item {
-            margin-right: 10px;
-            padding-right: 10px;
+        & > ul > li {
+            width: 25%;
+            & .bottom .item {
+                margin-right: 10px;
+                padding-right: 10px;
 
-            & .iconfont {
-                display: none;
+                & .iconfont {
+                    display: none;
+                }
             }
         }
     }

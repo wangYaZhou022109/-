@@ -1,3 +1,0 @@
-exports.bindings = {
-    question: true
-};

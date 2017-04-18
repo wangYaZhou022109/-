@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
@@ -6,18 +6,12 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click reply-*': 'showDetails'
+    'click reply-*': 'showDetails',
+    'click report-*': 'report',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
-    dynamic: function() {
-    },
-    // toggleMore: function(id, e, target) {
-    //     var region;
-    //     var el = $(target).parents('.activity-category')[0];
-    //     region = new D.Region(this.app, this.module, el, id);
-    //     region.show('ask/mymanage/topicdetail/news/mydetail', { id: id });
-    // },
     showDetails: function(payload) {
        // var region,
        //     data = { };
@@ -31,6 +25,17 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
         this.app.show('content', 'ask/mymanage/topicdetail/exp/details', { id: payload });
        //  }
+    },
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+        }
     }
 };
 
@@ -44,5 +49,51 @@ exports.dataForTemplate = {
             + '   ' + date.getHours() + ':' + date.getMinutes();
         });
         return reply;
+    }
+};
+exports.actions = {
+    'click follow-*': 'follow',
+    'click unfollow-*': 'unfollow',
+    'click shut-*': 'shut',
+    'click publish-*': 'publish'
+};
+exports.dataForActions = {
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
+    },
+    follow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    unfollow: function(payload) {
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    publish: function(payload) {
+        return payload;
+    }
+};
+exports.actionCallbacks = {
+    follow: function() {
+        this.app.message.success('关注成功！');
+        this.module.dispatch('init');
+    },
+    unfollow: function() {
+        this.app.message.success('取消成功！');
+        this.module.dispatch('init');
+    },
+    shut: function() {
+        this.app.message.success('关闭成功！');
+        this.module.dispatch('init');
     }
 };

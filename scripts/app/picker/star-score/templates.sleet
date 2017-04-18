@@ -6,7 +6,7 @@ view('main')
     .star-wrapper.drop-down-wrapper
         .star-bar > .star(style='width:'+percentage+'%')
         if(state.avgScore)
-            .num > echo(state.avgScore)
+            .num > echo(avgScore)
         else
             .inline-block.sub-text > echo('暂无评分')
         unless(userScore)

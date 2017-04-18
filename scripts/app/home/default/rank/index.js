@@ -8,7 +8,7 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            this.models.moduleHomeConfig = payload;
+            this.models.moduleHomeConfig.set(payload);
         }
     }
 };

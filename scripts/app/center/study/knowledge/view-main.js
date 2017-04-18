@@ -61,19 +61,19 @@ exports.dataForTemplate = {
             defultImg = '';
         _.map(list, function(opt) {
             var obj = opt;
-            if (obj.type === '0') {
+            if (obj.type === 0) {
                 defultImg = 'images/default-cover/default_mp4.jpg';
-            } else if (obj.type === '1') {
+            } else if (obj.type === 1) {
                 defultImg = 'images/default-cover/default_mp3.jpg';
-            } else if (obj.type === '2') {
+            } else if (obj.type === 2) {
                 defultImg = 'images/default-cover/default_doc.jpg';
-            } else if (obj.type === '3') {
+            } else if (obj.type === 3) {
                 defultImg = 'images/default-cover/default_pdf.jpg';
-            } else if (obj.type === '4') {
+            } else if (obj.type === 4) {
                 defultImg = 'images/default-cover/default_xls.jpg';
-            } else if (obj.type === '5') {
+            } else if (obj.type === 5) {
                 defultImg = 'images/default-cover/default_ppt.jpg';
-            } else if (obj.type === '6') {
+            } else if (obj.type === 6) {
                 defultImg = 'images/default-cover/default_epub.jpg';
             } else {
                 defultImg = 'images/default-cover/default_txt.jpg';

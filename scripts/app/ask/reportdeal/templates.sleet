@@ -1,29 +1,61 @@
 #!handlebars
-module > .course-page
-    div(data-region='reportaudit' style='height:100%;')
+module > .report-exam-page
+    .report-exam-title(data-region="reportaudit")
+    #  .report-exam-content(data-region="reportexam-content")
 
-view('reportaudit') > form.vertical
-    echo('举报审核')
-    echo('举报人')
-    echo(reportaudit.member.fullName)
-    br
-    echo('举报次数')
-    echo(reportaudit.accuseNum)
-    br
-    echo('来源：')
-    echo('问吧')
-    br
-    echo('被举报人：')
-    echo(reportaudit.beUser)
-    echo('被举内容：')
-    echo(reportaudit.accuseRecord.objectId)
-    echo('被举理由：')
-    echo(reportaudit.accuseRecord.accuseNote)
-    echo('被举类型：')
-    echo(reportaudit.accuseRecord.type)
-    br
-    echo('举报时间：')
-    date(reportaudit.accuseRecord.createTime)
-    input.input(name='id' type='hidden' value=audit.id)
-    echo('审核备注:')
-    echo(audit.auditNote)
+view('reportaudit')
+    .report-person.clearfix
+        .item.pull-left.layout-mr
+            span > echo('举报人：') > echo(reportaudit.member.fullName) 
+            #  img.inline-block(src="images/1.png")
+            #  img.inline-block(src="images/2.png")
+            #  img.inline-block(src="images/3.png")
+        .item.pull-left.layout-mr
+            span.inline-block 共举报次数：
+            span > echo(reportaudit.accuseNum)
+        .sourse.pull-left.layout-mr
+            span 来源：
+            span > map('ask-report-type' reportaudit.sourceType)
+        .reported.pull-left.layout-mr
+            span 被举报人：
+            span > echo(reportaudit.beUser)
+        .report-content.layout-mt-small
+            p 举报内容：
+            .report-content-item.small-font > echo(reportaudit.content)
+        .report-reson.reson-height
+            p 举报理由：
+            .small-font > echo(reportaudit.content)
+            .report-type.border.bottom.clearfix.layout-mt-small
+                .small-font.pull-left.m-bottom.sub-title
+                    span 举报类型： 
+                    span > map('ask-report-type' reportaudit.type)
+                .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
+        textarea.w-full.layout-mt-small(rows="5"  readonly = readonly) > echo(audit.auditNote)
+#  module > .course-page
+#      div(data-region='reportaudit' style='height:100%;')
+
+#  view('reportaudit') > form.vertical
+#      echo('举报审核')
+#      echo('举报人')
+#      echo(reportaudit.member.fullName)
+#      br
+#      echo('举报次数')
+#      echo(reportaudit.accuseNum)
+#      br
+#      echo('来源：')
+#      echo('问吧')
+#      br
+#      echo('被举报人：')
+#      echo(reportaudit.beUser)
+#      echo('被举内容：')
+#      echo(reportaudit.accuseRecord.objectId)
+#      echo('被举理由：')
+#      echo(reportaudit.accuseRecord.accuseNote)
+#      echo('被举类型：')
+#      echo(reportaudit.accuseRecord.type)
+#      br
+#      echo('举报时间：')
+#      date(reportaudit.accuseRecord.createTime)
+#      input.input(name='id' type='hidden' value=audit.id)
+#      echo('审核备注:')
+#      echo(audit.auditNote)

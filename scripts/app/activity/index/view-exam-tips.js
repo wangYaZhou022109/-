@@ -1,5 +1,7 @@
 exports.title = '考试须知';
 
+exports.small = true;
+
 exports.bindings = {
     currentExam: true
 };
@@ -56,8 +58,17 @@ exports.dataForTemplate = {
                     exam.content = '您好,本次考试您已经报名，正在审核中，如要取消报名请点击下方“取消报名”';
                     exam.buttons = [cancelButton];
                 } else if (exam.signUp && exam.signUp.status === 2) {
-                    exam.content = '您好,本次考试您已经报名，请在考试时间内参与考试，谢谢';
-                    exam.buttons = [cancelButton, closeButton];
+                    if (currentTime > exam.startTime && currentTime < exam.endTime) {
+                        if (exam.examNotes && exam.examNotes !== '') {
+                            exam.content = exam.examNotes;
+                        } else {
+                            exam.content = '点击下方“开始考试”后将会立即进入考试，该考试时长为' + exam.duration + '分钟';
+                        }
+                        exam.buttons = [toExamButton];
+                    } else {
+                        exam.content = '您好,本次考试您已经报名，请在考试时间内参与考试，谢谢';
+                        exam.buttons = [cancelButton, closeButton];
+                    }
                 } else if (exam.signUp && exam.signUp.status === 3) {
                     exam.content = '您好,本次考试您的报名未审核通过';
                     exam.buttons = [closeButton];

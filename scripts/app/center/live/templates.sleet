@@ -9,11 +9,11 @@ view('filter')
             .pull-right.m-right.pointer
                 i.iconfont.icon-sort-desc
             .pull-left
-                .inline-block.m-left.sub-text 要求：
+                .inline-block.m-left.sub-text 状态：
                 .item#status-all(class=if(search.statusAll 'active')) > span 全部
-                .item#status-2(class=if(search.statusb 'active')) > span 直播中
-                .item#status-1(class=if(search.statusa 'active')) > span 待开始
-                .item#status-3(class=if(search.statusd 'active')) > span 已结束
+                .item#status-1(class=if(search.statusa 'active')) > span 直播中
+                .item#status-2(class=if(search.statusb 'active')) > span 待开始
+                .item#status-3(class=if(search.statusc 'active')) > span 已结束
         .list-search
             input.input(name='live-name' value=search.subject placeholder='请输入您要搜索的内容名称')
             .btn#searchByName > i.iconfont.icon-search

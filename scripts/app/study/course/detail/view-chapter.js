@@ -8,8 +8,7 @@ var showHandler = function(payload) {
     var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
         8: '#/study/task/',
-        9: '#/exam/exam/paper/',
-        12: '#/exam/research-activity/research-detail/'
+        9: '#/exam/exam/paper/'
     };
     return function() {
         var me = this;
@@ -32,7 +31,8 @@ exports.bindings = {
     course: true,
     state: true,
     examStatus: true,
-    researchStatus: true
+    researchStatus: true,
+    progress: true
 };
 
 exports.events = {
@@ -88,9 +88,7 @@ exports.handlers = {
             $(element).parents('dl').siblings().removeClass('focus');
             $(element).parents('dl').addClass('focus');
         }
-        if (!course.register) {
-            this.module.dispatch('register', { sectionId: id });
-        }
+
         hander(sectionType);
         return true;
     }
@@ -99,6 +97,7 @@ exports.handlers = {
 exports.dataForTemplate = {
     course: function(data) {
         var course = data.course;
+        var progress = this.bindings.progress;
         if (course.name) {
             currentSectionId = data.state.sectionId || null;
             _.forEach(course.courseChapters, function(item, i) {
@@ -107,30 +106,32 @@ exports.dataForTemplate = {
                 _.forEach(r.courseChapterSections, function(obj, j) {
                     var rr = obj;
                     var examStatus;
+                    var researchStatus;
+                    var sectionProcess = progress.findProgress(rr.referenceId);
                     rr.seq = courseUtil.seqName(j, 2);
                     if (currentSectionId === rr.id) {
                         rr.focus = true;
                     }
-                    if (rr.progress && !rr.progress.completedRate) {
-                        rr.progress.completedRate = 0;
-                    }
-                    // Rate
                     rr.showRate = [5, 6].indexOf(rr.sectionType) !== -1;
-                    if (rr.progress) {
-                        rr.progress.finishStatus = maps.getValue('course-study-status', rr.progress.finishStatus);
-                    }
+
+                    if (!sectionProcess) return;
+
+                    rr.completedRate = sectionProcess.completedRate || 0;
+                    // Rate
+                    rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
                     if (rr.sectionType === 9) {
                         examStatus = _.find(data.examStatus, { examId: rr.resourceId });
                         if (examStatus && examStatus.status) {
-                            if (!rr.progress) rr.progress = {};
-                            rr.progress.finishStatus = maps.getValue('paper-instance-status', examStatus.status);
+                            rr.finishStatus = examStatus.score ? '成绩' +
+                            (Number(examStatus.score) / 100).toFixed(1) :
+                            maps.getValue('paper-instance-status', examStatus.status);
                         }
                     }
-                    if (rr.sectionType === 12) {
-                        examStatus = _.find(data.examStatus, { researchQuestionaryId: rr.resourceId });
-                        if (examStatus && examStatus.status) {
-                            if (!rr.progress) rr.progress = {};
-                            rr.progress.finishStatus = maps.getValue('research-record', examStatus.status);
+                    if (rr.sectionType === 12 || rr.sectionType === 13) {
+                        researchStatus = _.find(data.researchStatus, { researchQuestionaryId: rr.resourceId });
+                        if (researchStatus && researchStatus.status) {
+                            rr.finishStatus = researchStatus.status === 1 ?
+                            '查看详情' : maps.getValue('research-record', researchStatus.status);
                         }
                     }
                 });

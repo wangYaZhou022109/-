@@ -1,0 +1,22 @@
+.addclass-page {
+    & .class-form-width  {
+        max-width: 33.3%;
+    }
+    & .form {
+        & .form-row {
+            & > label,
+            & label.label {
+                text-align: center;
+            }
+        }
+    }
+    & .help {
+        width: calc(var(--base-gap) /2);
+        height: calc(var(--base-gap) /2);
+        border-radius: 50%;
+        background-color: var(--bg-color-2);
+        color: var(--font-color);
+        text-align: center;
+        line-height: calc(var(--base-gap) /2);
+    }
+}

@@ -1,0 +1,60 @@
+#!handlebars
+
+module > .studentgroup-page
+    .studentgroup(data-region="studentgroup")
+
+view('studentgroup')
+    .studentgroup-title
+        input.input.pull-left(placeholder="请输入分组名称")
+        .btn 添加分组
+    table.table
+        tr
+            th 序号
+            th 分组名称
+            th 学员人数
+            th 排序
+            th 操作
+        tr
+            td 1
+            td > .sub-title 分组名称（点击可修改）
+            td.text-main-color 9
+            td
+                i.iconfont.icon-sort-asc
+                i.iconfont.icon-sort-desc.custom-color-4
+            td
+                a.text-main-color#groupmanage-1 管理
+                span.text-main-color |
+                a.text-main-color 删除
+        tr
+            td 2
+            td > .sub-title 分组名称（点击可修改）
+            td.text-main-color 9
+            td
+                i.iconfont.icon-sort-asc
+                i.iconfont.icon-sort-desc.custom-color-4
+            td
+                a.text-main-color#groupmanage-2 管理
+                span.text-main-color |
+                a.text-main-color 删除
+        tr
+            td 3
+            td > .sub-title 分组名称（点击可修改）
+            td.text-main-color 9
+            td
+                i.iconfont.icon-sort-asc
+                i.iconfont.icon-sort-desc.custom-color-4
+            td
+                a.text-main-color#groupmanage-3 管理
+                span.text-main-color |
+                a.text-main-color 删除
+        tr
+            td 4
+            td > .sub-title 分组名称（点击可修改）
+            td.text-main-color 9
+            td
+                i.iconfont.icon-sort-asc
+                i.iconfont.icon-sort-desc.custom-color-4
+            td
+                a.text-main-color#groupmanage-4 管理
+                span.text-main-color |
+                a.text-main-color 删除

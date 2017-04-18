@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
@@ -6,42 +7,46 @@ exports.items = {
 
 exports.store = {
     models: {
-        course: {
-            url: '../course-study/course-front',
-            mixin: {
-                findChapter: function(chapterId) {
-                    return _.find(this.data.courseChapters, { id: chapterId });
-                },
-                findSection: function(sectionId) {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { id: sectionId });
-                },
-                findSectionForReferId: function(referenceId) {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.find(_.flatMap(this.data.courseChapters, duplicate), { referenceId: referenceId });
-                },
-                findSectionsForType: function(type) {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.filter(_.flatMap(this.data.courseChapters, duplicate), { sectionType: type });
-                },
-                findFirstSection: function() {
-                    var duplicate = function(x) { return x.courseChapterSections; };
-                    return _.flatMap(this.data.courseChapters, duplicate)[0];
-                }
-            }
-        },
         trends: { url: '../ask-bar/trends/all-dynamic' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 },
+            mixin: {
+                findById: function(id) {
+                    var trends = this.module.store.models.page.data;
+                    return _.find(trends, ['id', id]);
+                }
+            }
+        }
     },
     callbacks: {
         init: function() {
             var trends = this.models.trends;
-            trends.set({ id: 1222 });
-            return this.get(trends);
+            var params = this.models.page.params;
+            // var me = this;
+            params.id = 'null';
+            trends.set(params);
+            this.post(trends).then(function() {
+                // me.models.page = {
+                //     data: [],
+                //     params: { page: 1, size: 2 }
+                // };
+            });
+        },
+        page: function() {
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            // var me = this;
+            params.id = 'null';
+            trends.set(params);
+            this.post(trends).then(function() {
+                // me.models.page.params.page++;
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -50,7 +55,6 @@ exports.store = {
         },
         unfollow: function(payload) {
             var follow = this.models.unfollow;
-            // console.log(payload);
             follow.set(payload);
             return this.put(follow);
         },
@@ -83,5 +87,14 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    var me = this;
+    $(window).scroll(function() {
+        var page = me.store.models.page.params.page;
+        var size = me.store.models.page.params.size;
+        if (page * size === me.store.models.page.data.length) {
+            me.store.models.page.params.page++;
+            me.dispatch('page');
+        }
+    });
+    return this.dispatch('page');
 };

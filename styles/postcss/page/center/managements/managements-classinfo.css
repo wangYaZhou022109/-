@@ -1,0 +1,27 @@
+.managements-page {
+    & .managements-classinfo {
+        & .form {
+            & .form-row.special {
+                & label.label {
+                    width: calc(var(--large-space)*7);
+                }
+                & .content {
+                    margin-left: calc(var(--large-space)*8);
+                }
+            }
+            & .form-row {
+                & .content {
+                    line-height: var(--input-height);
+                }
+            }
+            & .input {
+                &.date + .iconfont {
+                    margin-top: -calc(var(--input-height) / 2);
+                }
+            }
+        }
+        & .classinfo-bottom-item {
+            width: 33.3%;
+        }
+    }
+}

@@ -17,7 +17,6 @@ exports.store = {
             var expert = this.models.expert,
                 state = this.models.leftstate;
             state.data.id = 'me';
-            // state.changed();
             expert.set({ id: 'me' });
             this.get(expert);
         }

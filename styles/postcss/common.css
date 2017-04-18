@@ -37,6 +37,7 @@
         color: #FEFF00;
         text-shadow: 0 -1px 0 rgba(0,0,0,.3);
         padding: 0 var(--space);
+        font-weight: bold;
     }
 }
 
@@ -140,7 +141,7 @@ section.section {
 }
 
 .no-margin {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .vertical-top {
@@ -152,6 +153,10 @@ section.section {
     display: block;
     height: 0;
     border-bottom: 1px solid var(--border-color);
+
+    &.dashed {
+        border-bottom-style: dashed;
+    }
 }
 
 /* display */
@@ -165,6 +170,10 @@ section.section {
 [hidden] {
     display: none !important;
     visibility: hidden;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
 
 .block {
@@ -200,8 +209,16 @@ section.section {
     color: var(--font-tip-color);
 }
 
+.empty-img {
+    width: 100%;
+    height: 100%;
+    min-height: 14em;
+    background: url(../images/empty.png) no-repeat center center;
+    background-size: contain;
+}
+
 .no-bg {
-    background: none;
+    background: none !important;
 }
 
 .pointer {

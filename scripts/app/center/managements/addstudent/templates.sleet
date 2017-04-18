@@ -1,0 +1,131 @@
+#!handlebars
+
+module > .addstudent-page
+    .addstudent(data-region="addstudent")
+
+view('addstudent')
+    .clearfix
+        label.pull-left.add-label.m-right 员工编号
+        input.tag-btn.pull-left.add-mr
+        button.tag-btn.selected.pull-left 添加
+    .m-top.clearfix
+        .addstudent-title-item.pull-left
+            label 账号
+            input.input.layout-mr(placeholder="输入用户名、手机号、邮箱皆可")
+        .addstudent-title-item.pull-left
+            label 姓名
+            input.input
+    .layout-mt-small
+        .pull-left
+            .dtree
+                ul
+                    li.dtree-opened.dtree-has-child
+                        .dtree-node-content
+                            i.dtree-handler
+                            span 深圳知学云
+                        ul
+                            li.dtree-opened.dtree-has-child
+                                .dtree-node-content
+                                    i.dtree-handler
+                                    span 互联网中心
+                                ul
+                                    li.dtree-opened
+                                        .dtree-node-content
+                                            i.dtree-handler
+                                            span 产品部
+                                    li.dtree-opened
+                                        .dtree-node-content
+                                            i.dtree-handler
+                                            span 研发部
+                                    li.dtree-opened
+                                        .dtree-node-content
+                                            i.dtree-handler
+                                            span 测试部
+                                    li.dtree-opened
+                                        .dtree-node-content
+                                            i.dtree-handler
+                                            span 移动部
+                            li.dtree-opened
+                                .dtree-node-content
+                                    i.dtree-handler
+                                    span 运营中心
+                            li.dtree-opened.dtree-has-child
+                                .dtree-node-content
+                                    i.dtree-handler
+                                    span 学习资源
+                                ul
+                                    li.dtree-opened
+                                        .dtree-node-content
+                                            i.dtree-handler
+                                            span 内容组
+                                    li.dtree-opened
+                                        .dtree-node-content
+                                            i.dtree-handler
+                                            span 技术组
+                                li.dtree-opened
+                                    .dtree-node-content
+                                        i.dtree-handler
+                                        span 管理中心
+        .pull-right
+            table.table
+                tr
+                    th > input(type="checkbox")
+                    th 姓名
+                    th 用户名
+                    th 性别
+                    th 职位
+                    th 直接上级
+                    th 所属部门
+                    th 所属机构
+                tr
+                    td > input(type="checkbox")
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td > input(type="checkbox")
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td > input(type="checkbox")
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td > input(type="checkbox")
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr
+                    td > input(type="checkbox")
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+            .pagination.layout-mt
+                ul
+                    li.hover-main-color.active.bg-main-color 首页
+                    li.hover-main-color  上一页
+                    li 3 / 10
+                    li.hover-main-color  下一页
+                    li.hover-main-color  尾页

@@ -10,13 +10,12 @@ module > .knowledge-details
         .details-side(data-region='side')
 
 view('banner')
-    .container > .reader
-        div(data-dynamic-key='')
+    div(data-dynamic-key='')
 
 view('main')
     .clearfix
         .pull-left
-            .common-title.inline-block > echo(knowledge.name)
+            b.common-title.inline-block > echo(knowledge.name)
             .inline-block
                 #star-score
         .inline-block.layout-mr
@@ -24,24 +23,22 @@ view('main')
             .inline-block.m-left
                 if(collect.id)
                     .item#cancel-collect(data-name='id' data-value=collect.id)
-                        i.iconfont.icon-favorite-full
-                        span 取消收藏
+                        i.iconfont.icon-favorite-full(title='取消收藏')
                 else
                     .item#collect
-                        i.iconfont.icon-favorite
-                        span 收藏
+                        i.iconfont.icon-favorite(title='收藏')
     p
         | 发布人：管理员
-        span.layout-ml-small 
+        span.layout-ml-small
             | 发布时间：
             date(knowledge.releaseTime)
-        span.layout-ml-small 
+        span.layout-ml-small
             | 下载积分：
             echo(knowledge.integral)
         span.layout-ml-small
             | 相关话题：
-            each(knowledge.businessTopics)
-                a.normal.m-right > echo(topicName)
+            each(topics)
+                a.normal.m-right > echo(name)
     p > echo('描述：') + @echo(knowledge.description)
 view('commit')
     #comment-area
@@ -51,19 +48,22 @@ view('side')
             | 您当前积分：
             b > pick(integral.totalScore 0)
             | 分
-            a.btn.block.layout-mt-small.big#download(href=downUrl download=knowledge.name)
-                echo('下载当前阅览知识（-') + pick(knowledge.integral 0) + echo('积分）')
-            .btn.block.m-top.big.upload-knowledge#upload 上传新知识（+2积分）
+            a.btn.block.m-top.big.upload#download(href=downUrl download=knowledge.name)
+                span > echo('下载当前阅览知识')
+                span.small-font > pick('(-' + knowledge.integral 0) + echo('积分）')
+            .btn.block.m-top.big.custom-bg-color-5#upload
+                span 上传新知识
+                span.small-font （+2积分）
 
         section.section
             .h3 相关知识
-                small.pull-right.sub-text#changeRecommends
+                .pull-right.text-tips#changeRecommends
                     .iconfont.icon-reload-full
-                    | 换一组
+                    span 换一组
             ul.relevant-knowledge.layout-mt-small > each(recommends)
                 li
                     .pull-right > echo(integral) + | 积分
-                    a.normal > echo(name)
+                    a.underline > echo(name)
 
         section.section.student
             .h3 最近查看的用户

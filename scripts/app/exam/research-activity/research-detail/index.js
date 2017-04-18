@@ -8,7 +8,8 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    getCurrentStatus;
+    getCurrentStatus,
+    PC_TYPE = 1;
 
 exports.items = {
     side: 'side',
@@ -187,6 +188,7 @@ exports.store = {
                             return {
                                 questionId: a.key,
                                 answer: _.map(a.value, 'value').join(','),
+                                score: a.value[0].score,
                                 researchRecordId: me.store.models.researchRecord.data.id
                             };
                         }))
@@ -205,7 +207,11 @@ exports.store = {
             if (payload.researchRecord) {
                 researchRecord.set(payload.researchRecord);
             } else if (payload.researchQuestionaryId) {
-                researchRecord.params = { researchQuestionaryId: payload.researchQuestionaryId };
+                researchRecord.params = {
+                    researchQuestionaryId: payload.researchQuestionaryId,
+                    businessId: payload.businessId,
+                    clientType: PC_TYPE
+                };
                 return this.get(researchRecord).then(function() {
                     questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));
                     state.init();
@@ -215,17 +221,18 @@ exports.store = {
             return '';
         },
         saveResearchDetail: function() {
-            var me = this;
-            this.models.form.set(this.models.answer.getData());
+            var me = this,
+                researchRecord = this.models.researchRecord;
+
+            this.models.form.set(D.assign({}, this.models.answer.getData(), {
+                researchQuestionaryId: researchRecord.params.researchQuestionaryId,
+                businessId: researchRecord.params.businessId
+            }));
+
             return this.post(this.models.form).then(function() {
-                var record = me.models.researchRecord.data,
-                    research = record.researchQuestionary;
+                var record = me.models.researchRecord.data;
                 me.app.message.success(strings.get('submit-success'));
-                if (research.permitViewCount === 1) {
-                    me.app.navigate('exam/research-activity/research-summary-detail/' + record.id, true);
-                } else {
-                    me.app.navigate('exam/research-activity/research-answer-detail/' + record.id, true);
-                }
+                me.app.navigate('exam/research-activity/research-answer/' + record.id, true);
             });
         },
         selectDimension: function(payload) {

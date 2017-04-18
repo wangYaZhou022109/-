@@ -33,6 +33,7 @@
     --color-ing: #3965e3;
     --color-pass: #31822c;
     --color-error: #d30000;
+    --color-warn: #cd9822;
 
 }
 
@@ -224,12 +225,10 @@
         }
     }
     & .relevant-course {
-        & .img {
-            & h4 {
-                color: var(--white);
-                background-color: var(--black)\0;
-                background-color: color(var(--black) alpha(20%));
-            }
+        & .title {
+            color: var(--white);
+            background-color: var(--black)\0;
+            background-color: color(var(--black) alpha(20%));
         }
     }
     & .side-more {

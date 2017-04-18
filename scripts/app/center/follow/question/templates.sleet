@@ -1,0 +1,57 @@
+#!handlebars
+
+module
+    li.tabs-cont-item.active#tabs-cont-item-1
+        .person-list
+            div(data-region='filter')
+            div(data-region='main')
+            
+view('filter')
+    .filter
+        .pull-right.m-right.pointer#timeOrder
+            | 关注时间
+            compare(search.timeOrder 'eq' 'asc')
+                i.iconfont.icon-sort-asc
+            else
+                i.iconfont.icon-sort-desc
+        .pull-left
+            .inline-block.m-left.sub-text 类型：
+            .item#type-all(class=if(search.typeAll 'active')) > span 全部
+            .item#type-1(class=if(search.typeQuestion 'active')) > span 问题
+            .item#type-2(class=if(search.typeShare 'active')) > span 分享
+
+view('main')
+    .comment-list.ask-list
+        ul.list-text.border.top > each(list)
+            li
+                .user-pic > img(src=member.headPortrait)
+                .comment-content
+                    .h4 > a(id='myquiz-details-' + id) > echo(title)
+                    .comment-text
+                        compare(thumbnail.length 'gt' 0)
+                            img(src=thumbnail)
+                        @echo(contentTxt)
+                    .user-info
+                        a(href='javascript:;') > echo(member.fullName)
+                        span > echo(typeName)
+                        span.sub-text > echo(prefixText)
+                    .comment-operation
+                        .pull-left > .sub-text > echo('关联标签 ：') + each(topicList) > echo(name) + echo(' ')
+                        .text-right
+                            .item(id='unfollow'+id data-name='id' data-value=concern.concernType+'_'+id) > a.normal(href='javascript:;') 取消关注
+                            .item > a.normal(href='javascript:;') > echo('赞(') + echo(praiseNum) + echo(')')
+                            .item(id='discuss' + id) > a.normal(href='javascript:;') > echo(discussNum) + echo('条讨论')
+                            .item > .share-bar
+                                .drop-down-wrapper
+                                    i.iconfont.icon-share-2(title='分享')
+                                    form.drop-down-content > .content
+                                        .item > div(id ='shareTo-qzone'+id + questionId) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                        .item > div(id ='shareTo-weibo'+id + questionId) > i.iconfont.icon-sina + span 分享到新浪微博
+                                        .item > div(id ='shareTo-bar'+id + questionId) > i.iconfont.icon-ask + span 分享到问吧
+                            .item > span(id ='report-'+ id+'_' + createMemberId data-name='id' data-value=id+'_' + createMemberId) 举报
+                            form.comment-reply(id ='comment-reply-' + id)
+                                textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                input.input(type='hidden' name='organizationId' value=member.organizationId)
+                                input.input(type='hidden' name='id' value=id)
+                                .btn(id='publish-' + id) > string('publish')
+    #pager.pagination

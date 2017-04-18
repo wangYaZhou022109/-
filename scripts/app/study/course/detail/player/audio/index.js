@@ -8,7 +8,7 @@ exports.store = {
         download: { url: '../human/file/download' },
         time: { url: '../system/setting/time' },
         state: {},
-        localProgress: { type: 'localStorage' },
+        localProgress: { type: 'localStorage', data: {} },
     },
     callbacks: {
         init: function(payload) {

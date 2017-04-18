@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.items = {
     details: 'details'
 };
@@ -12,12 +12,14 @@ exports.store = {
         init: function(payload) {
             this.models.state.id = payload.id;
             this.models.state.objectType = payload.objectType;
+            this.models.state.beUserId = payload.beUserId;
         },
         report: function(payload) {
             var report = this.models.report;
             var data = payload;
             data.id = this.models.state.id;
             data.objectType = this.models.state.objectType;
+            data.beUserId = this.models.state.beUserId;
             report.set(data);
             return this.save(report).then(function() {
                 this.app.message.success('举报成功！');
@@ -54,6 +56,15 @@ exports.buttons = [{
             type.push(4);
         }
         data.type = type.toString();
+        if (!data.type) {
+            this.app.message.error('请选择举报类型');
+            return false;
+        }
+        if (!data.accuseNote || $.trim(data.accuseNote) === '') {
+            this.app.message.error('请填写举报理由');
+            return false;
+        }
+        data.accuseNote = $.trim(data.accuseNote);
         return this.dispatch('report', data);
     }
 }];

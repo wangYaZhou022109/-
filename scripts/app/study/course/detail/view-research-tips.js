@@ -1,7 +1,8 @@
 exports.title = '问卷须知';
 exports.bindings = {
     researchActivity: true,
-    state: false
+    state: false,
+    course: false
 };
 
 exports.buttons = [{
@@ -9,9 +10,10 @@ exports.buttons = [{
     fn: function() {
         var id = this.bindings.researchActivity.data.id,
             state = this.bindings.state.data,
-            url = '#/exam/research-activity/research-detail/' + id;
+            course = this.bindings.course.data,
+            url = '#/exam/research-activity/paper/' + id + '/' + course.id;
         if (state.currentType === 13) {
-            url = '#/exam/questionary/research-detail/' + id;
+            url = '#/exam/research-activity/paper/' + id + '/' + course.id;
         }
         window.open(url, '_blank');
     }

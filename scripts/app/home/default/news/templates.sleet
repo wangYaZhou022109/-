@@ -14,4 +14,4 @@ view('news')
             .icon > .iconfont.icon-more
 
         ul > inner(newsList state.currentIndex)
-            li > a(href='/#/news/detail/'+id+'/0' target='_blank') > echo(title)
+            li > a(href='/#/news/detail/'+id+'/0') > echo(title)

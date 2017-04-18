@@ -1,16 +1,38 @@
-
 exports.routes = {
     home: 'showHome',
+    'home/:configId': 'previewHome',
+    'home/org/:orgId': 'changeHome',
     'share/:id/:type': 'showShare', // 分享跳转
-    'message/detail/:id': 'showMessageDetail'
+    'message/detail/:id': 'showMessageDetail',
+    'center/demand': 'showDmand',
+    'center/class-service': 'classService',
+    'center/managements': 'showManagements'
 };
 
 exports.showHome = function() {
     return this.app.show('content', 'home/default');
 };
 
+exports.previewHome = function(configId) {
+    document.cookie = 'orgId=';
+    document.cookie = 'configId=' + configId;
+    return this.app.show('content', 'home/default', { configId: configId });
+};
+
+exports.changeHome = function(orgId) {
+    document.cookie = 'configId=';
+    document.cookie = 'orgId=' + orgId;
+    return this.app.show('content', 'home/default', { orgId: orgId });
+};
+
 exports.showMessageDetail = function(id) {
-    return this.app.show('content', 'home/message/detail', { id: id });
+    return this.app.show('content', 'home/message/detail', {
+        id: id
+    });
+};
+
+exports.showDemo = function() {
+    return this.app.show('content', 'demo');
 };
 
 exports.showShare = function(id, type) {
@@ -20,21 +42,30 @@ exports.showShare = function(id, type) {
     } else if (type === '2') { // 学习路径
         webUrl += '/#//' + id;
     } else if (type === '3') { // 知识
-        webUrl += '/#//' + id;
+        webUrl += '/#/knowledge/detail/' + id;
     } else if (type === '4') { // 班级
         webUrl += '/#//' + id;
     } else if (type === '5') { // 调研
-        webUrl += '/#/exam/index/' + id;
+        webUrl += '/#/exam/research-activity/index/' + id;
     } else if (type === '6') { // 微课大赛
         webUrl += '/#//' + id;
     } else if (type === '7') { // 考试
         webUrl += '/#/exam/index/' + id;
     } else if (type === '8') { // 专题
-        webUrl += '/#//' + id;
+        webUrl += '/#/study/subject/detail/' + id;
     } else if (type === '10') { // 问题
         webUrl += '/#//' + id;
     } else if (type === '11') { // 讨论
         webUrl += '/#//' + id;
     }
     window.location.href = webUrl;
+};
+exports.showDmand = function() {
+    return this.app.show('content', 'center/demand');
+};
+exports.classService = function() {
+    return this.app.show('content', 'center/class-service');
+};
+exports.showManagements = function() {
+    return this.app.show('content', 'center/managements');
 };

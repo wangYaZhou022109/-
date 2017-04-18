@@ -15,7 +15,7 @@ view('filter')
                 else
                     i.iconfont.icon-sort-desc
             .pull-left
-                .inline-block.m-left.sub-text 要求：
+                .inline-block.m-left.sub-text 状态：
                 .item#selectStatus-all(class=if(search.statusAll 'active')) > span 全部
                 .item#selectStatus-0(class=if(search.statusa 'active')) > span 待审核
                 .item#selectStatus-1(class=if(search.statusb 'active')) > span 已通过
@@ -42,5 +42,5 @@ view('main')
                     map('knowledge-audit-status' auditStatus)
             .btn-row
                 .btn(id='edit'+id data-name='id' data-value=id) 编辑
-                i.iconfont.icon-trash(id='delete'+id data-name='id' data-value=id)
+                i.iconfont.icon-close(id='delete'+id data-name='id' data-value=id)
     #pager.pagination

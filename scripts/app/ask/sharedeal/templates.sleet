@@ -4,9 +4,10 @@ module > .watch-detail1-page
 
 view('shareaudit')
     .h5 > echo(shareaudit.question.title)
-    .detail1-content.m-top.small-font > echo(shareaudit.question.content)
-    #  .detail-img.layout-mt-small
-    #      img(src="images/1.png")
+    .detail1-content.m-top.small-font
+        compare(jsonImg.length 'gt' 0)
+            img(src=jsonImg)
+        @echo(shareaudit.question.content)
     .detail1-file.layout-mt-small
         | 附件：
         a
@@ -17,7 +18,7 @@ view('shareaudit')
         span 分享时间：
         span > date(shareaudit.createTime)
     .detail1-alink.layout-mt-smal > echo(shareaudit.topicStr)
-    textarea.w-full.layout-mt-small(rows="5"  readonly = readonly) > echo(audit.auditNote)
+    textarea.w-full.layout-mt-small(rows="5"  readonly = readonly) > echo(shareaudit.auditNote)
 #  module > .course-page
 #      div(data-region='shareaudit' style='height:100%;')
 

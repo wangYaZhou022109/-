@@ -9,13 +9,13 @@ exports.bindings = {
 exports.afterRender = function() {
     var research = this.bindings.research.data,
         record = research.researchRecord;
-
     if (record && record.status === FINISHED) {
         return this.module.regions.main.show(RESEARCH_ANSWER, {
             researchRecordId: record.id
         });
     }
     return this.module.regions.main.show(RESEARCH_DETAIL, {
-        researchQuestionaryId: research.id
+        researchQuestionaryId: research.id,
+        businessId: this.bindings.research.params.businessId
     });
 };

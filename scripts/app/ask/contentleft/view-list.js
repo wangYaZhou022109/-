@@ -13,6 +13,7 @@ exports.getEntityModuleName = function(key) {
 };
 exports.getEntity = function() {
     return {
+        me: this.bindings.state,
         state: this.bindings.state.data
     };
 };

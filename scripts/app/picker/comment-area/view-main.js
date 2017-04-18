@@ -1,4 +1,5 @@
 var $ = require('jquery'),
+    sensitive = require('./app/util/sensitive'),
     _ = require('lodash/collection');
 
 exports.bindings = {
@@ -37,6 +38,9 @@ exports.dataForActions = {
         if ($.trim(data.content).length > 3000) {
             return this.app.message.error('评论内容过长');
         }
+        if (sensitive.judge(data.content) > 0) {
+            return this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+        }
         return data;
     },
     addReply: function(payload) {
@@ -47,6 +51,9 @@ exports.dataForActions = {
         }
         if ($.trim(data.content).length > 300) {
             return this.app.message.error('回复内容过长');
+        }
+        if (sensitive.judge(data.content) > 0) {
+            return this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
         }
         return data;
     },
@@ -96,10 +103,13 @@ exports.dataForActions = {
     }
 };
 exports.actionCallbacks = {
-    addComment: function() {
-        this.module.dispatch('init', this.module.renderOptions).then(function() {
+    addComment: function(data) {
+        if (data[0].auditStatus === 0) {
+            this.app.message.success('发表成功，等待管理员审核!');
+        } else {
             this.app.message.success('发表成功!');
-        });
+        }
+        this.module.dispatch('init', this.module.renderOptions);
     },
     hideComment: function() {
         this.module.dispatch('init', this.module.renderOptions).then(function() {

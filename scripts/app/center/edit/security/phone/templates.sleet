@@ -19,6 +19,6 @@ view('main')
         li#newPhone(style='display:none;')
             .pull-left > input.input(name='phone' id='phone' x-rule='phone')
             .pull-right
-                .item > a#savePhone > setting('person.index.info.save' )
+                .item > a#savePhone > setting('person.index.info.save')
     .text-center > a#addPhone > i.iconfont.icon-add.m-right + span > setting('person.index.info.addPhone')
 

@@ -1,18 +1,9 @@
-function getParams () {
-    var params = {};
-    window.location.search.substr(1).split('&').forEach(function(kv) {
-        var kvarr = kv.split('=');
-        params[kvarr[0]] = kvarr[1];
-    });
-    return params;
-}
-
 module.exports = {
     items: {
         main: 'main'
     },
-    beforeRender: function() {
-        this.dispatch('init');
+    afterRender: function() {
+        this.dispatch('init', this.renderOptions || {});
     },
     store: {
         models: {
@@ -20,23 +11,18 @@ module.exports = {
             homeConfig: { url: '../system/home-config/config' }
         },
         callbacks: {
-            loadModules: function(cfgId) {
-                var modules = this.models.modules;
-                modules.params = {
-                    homeConfigId: cfgId
-                };
-                return this.get(modules);
-            },
-            init: function() {
-                var configId = getParams().configid,
+            init: function(payload) {
+                var configId = payload.configId,
+                    orgId = payload.orgId,
                     that = this,
-                    homeConfig = this.models.homeConfig;
-                homeConfig.params = { id: configId };
+                    homeConfig = this.models.homeConfig,
+                    modules = this.models.modules;
+                homeConfig.params = { configId: configId, orgId: orgId };
+                homeConfig.clear();
                 return this.get(homeConfig).then(function() {
-                    var cfgId;
                     if (homeConfig.data) {
-                        cfgId = homeConfig.data.id;
-                        return that.module.dispatch('loadModules', cfgId);
+                        modules.params.homeConfigId = homeConfig.data.id;
+                        return that.get(modules);
                     }
                     return null;
                 });

@@ -1,0 +1,135 @@
+#!handlebars
+
+module > .watchexam-page
+    .watchexam(data-region="watchexam")
+
+view('watchexam')
+    .watchexam-title
+        p 调研名称：
+        p 调研名称调研名称调研名称
+    .exam-total.layout-mt-small
+        .examtitle-item
+            span 参考人数：
+            span 50
+        .examtitle-item
+            span 及格分数：
+            span 60
+        .examtitle-item
+            span 及格人数：
+            span 40
+        .examtitle-item
+            span 及格率：
+            span 80%
+    .layout-mt-small
+        .bg-color-3.search-padding
+            .search-item
+                .inline-block.input-width.input-padding
+                    label.block 员工编号
+                    input.input.m-top
+                .inline-block.input-width.input-padding
+                    label.block 姓名
+                    input.input.m-top
+                .inline-block.input-width.input-padding
+                    label.block 状态
+                    select.m-top
+                        option 全部
+                        option 合格
+                        option 不合格
+                        option 待评卷
+                .btn-block.vertical-bottom.btn-width
+                    label
+                    .btn 搜索
+        .clearfix.layout-mt-small
+            .btn.pull-right 导出
+        .m-top
+            table.table
+                tr
+                    th 序号
+                    th 员工编号
+                    th 姓名
+                    th 所属部门
+                    th 交卷时间
+                    th 用时
+                    th 状态
+                    th 总分
+                tr
+                    td 1
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 2
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 不合格
+                    td > a 96
+                tr
+                    td 3
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 4
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 5
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 6
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 7
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 8
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷
+                tr
+                    td 9
+                    td duan
+                    td 端
+                    td 产品部
+                    td 2016-03-04 17:00
+                    td 50m
+                    td 待评卷
+                    td > a 评卷

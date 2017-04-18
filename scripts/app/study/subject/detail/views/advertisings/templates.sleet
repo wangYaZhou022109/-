@@ -7,7 +7,7 @@ view('advertising')
     #  #banner.banner.subject-banner
     #      ul > each(advertisings)
     #          li(style='background:url(' + downUrl ')'  ) > a(href=linkUrl target='_blank')
-    #banner.subject-banner.swiper-container.banner
+    #banner.subject-banner.banner
         ul > each(advertisings)
             li > a(href=linkUrl target='_blank') > img(src=downUrl)
         section.section.banner-info
@@ -22,27 +22,26 @@ view('advertising')
                                 .num > echo(subject.avgScore)
                             else
                                 .inline-block.sub-text > echo('暂无评分')
-                        .drop-down-content(class = if(subject.hasScore 'hide')) > .content
-                            .text-center 我来评分
-                            .star-grade
-                                .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                                .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                                .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                                .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                                .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                            .block.btn#submit-score 提交评分
+                        compare(state.type 'ne' 'preview')
+                            .drop-down-content(class = if(subject.hasScore 'hide')) > .content
+                                .text-center 我来评分
+                                .star-grade
+                                    .item(id='star-2' title='1星') > i.iconfont.icon-star-full
+                                    .item(id='star-4' title='2星') > i.iconfont.icon-star-full
+                                    .item(id='star-6' title='3星') > i.iconfont.icon-star-full
+                                    .item(id='star-8' title='4星') > i.iconfont.icon-star-full
+                                    .item(id='star-10' title='5星') > i.iconfont.icon-star-full
+                                .block.btn#submit-score 提交评分
                 .inline-block.layout-mr
                     .inline-block.layout-ml.m-right
                         #share
                     .inline-block.m-left
                         if(collect.id)
                             .item#cancel-collect(data-name='id' data-value=collect.id)
-                                i.iconfont.icon-favorite-full
-                                span 取消收藏
+                                i.iconfont.icon-favorite-full(title='取消收藏')
                         else
                             .item#collect
-                                i.iconfont.icon-favorite
-                                span 收藏
+                                i.iconfont.icon-favorite(title='收藏')
             #  .title-row > each(subject.topics)
             #      .inline-block.m-right.m-bottom.bg-white.sub-title > echo(topicName)
             .title-row > each(subject.businessTopics)

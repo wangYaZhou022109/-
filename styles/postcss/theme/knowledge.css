@@ -1,0 +1,21 @@
+.knowledge-list {
+    & .icon-excel {
+        color: #249F25;
+    }
+    & .icon-pdf {
+        color: #F15C5C;
+    }
+    & .icon-word {
+        color: #4E77ED;
+    }
+    & .icon-ppt {
+        color: #23B6AF;
+    }
+    & .icon-mp3 {
+        color: #F68E38;
+    }
+    & .icon-mmp4 {
+        color: #F68E38;
+    }
+
+}

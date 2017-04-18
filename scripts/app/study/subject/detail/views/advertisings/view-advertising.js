@@ -5,7 +5,8 @@ exports.bindings = {
     subject: true,
     collect: true,
     score: true,
-    download: false
+    download: false,
+    state: false
 };
 
 exports.components = [{

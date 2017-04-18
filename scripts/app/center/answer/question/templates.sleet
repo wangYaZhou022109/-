@@ -1,0 +1,50 @@
+#!handlebars
+
+module
+    li.tabs-cont-item.active#tabs-cont-item-1
+        .person-list
+            div(data-region='filter')
+            div(data-region='main')
+            
+view('filter')
+    .filter
+        .pull-right.m-right.pointer#timeOrder
+            | 提问时间
+            compare(search.timeOrder 'eq' 'asc')
+                i.iconfont.icon-sort-asc
+            else
+                i.iconfont.icon-sort-desc
+        .pull-left
+            .inline-block.m-left.sub-text 状态：
+            .item#auditStatus-all(class=if(search.statusAll 'active')) > span 全部
+            .item#auditStatus-0(class=if(search.statusWait 'active')) > span 待审核
+            .item#auditStatus-1(class=if(search.statusPass 'active')) > span 已通过
+            .item#auditStatus-2(class=if(search.statusRefuse 'active')) > span 被拒绝
+
+view('main')
+    .comment-list.ask-list
+        ul.list-text.border.top > each(list)
+            li
+                .user-pic > img(src=member.headPortrait)
+                .comment-content
+                    .h4 > echo(title)
+                    .comment-text
+                        @echo(contentTxt)
+                    .user-info
+                        a(href='javascript:;') 我
+                        span > echo(typeName)
+                        span.sub-text > echo(prefixText)
+                    .comment-operation
+                        .pull-left > .sub-text > echo('关联标签 ：') + each(topicList) > echo(name) + echo(' ')
+                        .text-right
+                            compare(auditStatus 'eq' 0)
+                                .item > span.color-ing > map('ask-audit-status' auditStatus)
+                                .item 删除
+                            compare(auditStatus 'eq' 2)
+                                .item > span.color-ing > map('ask-audit-status' auditStatus)
+                                .item 删除
+                            compare(auditStatus 'eq' 1)
+                                .item > echo(discussTxt)
+                                .item +关注
+                                .item 分享
+    #pager.pagination

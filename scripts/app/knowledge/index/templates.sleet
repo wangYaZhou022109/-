@@ -17,8 +17,12 @@ view('catalog')
 view('sorts')
     .main-list
         .filter
-            .pull-left > each(topics)
-                .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
+            .pull-left
+                .item 全部
+                .item word
+                .item pdf
+                .item excel
+                .item mp3
             .pull-right
                 .item#sort-0 > span 最新
                 .item#sort-1 > span 最热
@@ -26,34 +30,30 @@ view('sorts')
 
 view('side')
     .knowledge-upload
-        .btn.block.clearfix.knowledge-upload#upload
-            .pull-left.text-right
+        .btn.block.clearfix.upload#upload
+            .inline-block.h1
                 .iconfont.icon-cloud-up
-            .pull-right.text-left
-                | 上传知识
-                br
-                .small-font 每篇积分 +2
-
-    .statistics.text-center.side-box
-        p
-            | 共有
-            b > echo(totalFront.all)
-            | 份知识
-        hr
+            .inline-block.text
+                span 上传知识
+                span.small-font > echo('(每篇积分 +2)')
         .clearfix
             .pull-left
-                b > echo(totalFront.other)
-                br
-                .text-tips 文档
-            .pull-left
-                b > echo(totalFront.medias)
-                .text-tips 音视频
+                span 共有知识:
+                b > echo(totalFront.all)
+                span 份
+            .text-tips.text-right
+                .item
+                    span 文档:
+                    span > echo(totalFront.other)
+                .item
+                    span 音视频:
+                    span > echo(totalFront.medias)
 
-    .side-box 
+    section.section
         .h3.m-bottom 热门标签
-        each(topics)
-            .tag-btn > echo(name)
-    .side-box
+        .side-box.tag-group > each(topics)
+            .tag-btn.white > echo(name)
+    .layout-mt
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)
             .clearfix.charts-list
@@ -61,27 +61,23 @@ view('side')
                 .pull-left.charts-user
                     echo(memberName)
                     br
-                    echo(organizationName)
+                    .text-tips > echo(organizationName)
                 .pull-right
                     b > echo(count)
                     | 份
 
 view('main')
     ul.knowledge-list > each(knowledges)
-        li
-            i.iconfont.icon-zhishiku.pull-left.m-right
-            .pull-left.knowledge-tit-con
+        li(id = 'details-'+id)
+            i.iconfont.pull-left.m-right(class=icon)
+            .knowledge-tit-con
                 .clearfix
-                    a.normal.knowledge-tit.pull-left(href = '#/knowledge/detail/'+id) > echo(name)
-                    .star-bar.pull-left > .star(style='width:'+ avgScore +'%')
-                .text-tips.sub-title
+                    a.normal.knowledge-tit.pull-left > echo(name)
+                    .star-bar.pull-right > .star(style='width:'+ avgScore +'%')
+                .text-tips
                     span > echo('发布人:') + echo(uploadMember.fullName)
                     span > echo('发布日期：') + date(uploadTime)
                     span > echo('浏览数：') + echo(browseCount)
                     span > echo('下载数：') + echo(downloadMemberCount)
-
-            .pull-right.knowledge-tit-out.text-right
-                a.normal.icon-add.iconfont
-
 
     #pager.pagination

@@ -6,7 +6,7 @@ exports.bindings = {
     down: true
 };
 
-exports.dateForTemplate = {
+exports.dataForTemplate = {
     relativeMembers: function(data) {
         var me = this;
         return _.map(data.relativeMembers, function(r) {
@@ -20,17 +20,3 @@ exports.dateForTemplate = {
         });
     }
 };
-
-exports.events = {
-    'click do-research': 'doResearch'
-};
-
-exports.handlers = {
-    doResearch: function() {
-        var me = this;
-        return this.module.dispatch('getRecordByResearch').then(function() {
-            me.app.viewport.modal(me.module.items['research-tips']);
-        });
-    }
-};
-

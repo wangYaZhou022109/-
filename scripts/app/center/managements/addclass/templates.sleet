@@ -1,0 +1,89 @@
+#!handlebars
+
+module > .addclass-page
+    .addclass(data-region="addclass")
+
+view('addclass')
+    .form
+        .form-row
+            label.required 课程类型
+            .content
+                select.w-half
+                    option 面授
+                    option 观看录像
+                    option 直播
+                    option 其他
+                span.color-error 注： 与观看录像 其他 字段一致
+        .form-row
+            label.required 课程名称
+            .content
+                input.input
+        .clearfix
+            .class-form-width.pull-left
+                .form-row
+                    label.required 开始时间
+                    .content
+                        .relative
+                            input.input.date
+                            .iconfont.icon-riqi.text-main-color
+            .class-form-width.pull-left
+                .form-row
+                    label.required 结束时间
+                    .content
+                        .relative
+                            input.input.date
+                            .iconfont.icon-riqi.text-main-color
+            .class-form-width.pull-left
+                .form-row
+                    label.required 教室
+                    .content
+                        select.tag-input
+                            option 第一教室
+                            option 第二教室
+                            option 第三教室
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师姓名
+                    .content
+                        input.input
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师单位
+                    .content
+                        input.input
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师类别
+                    .content
+                        select.tag-input
+                            option 外部讲师
+                            option 内部讲师
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师职务
+                    .content
+                        input.input
+            .class-form-width.pull-left
+                .form-row
+                    label.required 联系电话
+                    .content
+                        input.input
+    .layout-mt-small
+        .pull-left > label.label 课件（最多上传三个）
+        .pull-right
+            .tag-btn.radius.active 选择
+            .tag-btn.radius.active 上传
+            .inline-block.help ?
+    table.table
+        tr
+            th  序号
+            th  附件名字
+            th  类型
+            th  操作
+        tr
+            td 1
+            td 显示附件名称（点击可修改）
+            td 文档
+            td
+                i.iconfont.icon-search.custom-color-4.m-right
+                i.iconfont.icon-close-circle.custom-color-3

@@ -62,7 +62,16 @@ view('main')
                             .text-right
                                 .item 评论(2)
                                 .item +关注
-                                .item 分享
+                                .item
+                                    .share-bar
+                                        .drop-down-wrapper
+                                            i.iconfont.icon-share-2(title='分享')
+                                            .drop-down-content > .content
+                                                .item > #shareTo-qzone > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > #shareTo-weibo > i.iconfont.icon-sina + span 分享到新浪微博
+                                                .item > #shareTo-bar > i.iconfont.icon-ask + span 分享到问吧
+
+
         li.tabs-cont-item#tabs-cont-item-2.relative
             .page-contents2
                 .page1#page1

@@ -1,7 +1,8 @@
 @import "reset.css";
 @import "setting.css";
-@import 'override.css';
+@import "iconfont.css";
 @import "common.css";
+@import 'override.css';
 @import 'components/components.css';
 @import "page/page.css";
 @import 'theme/theme.css';

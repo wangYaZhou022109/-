@@ -1,0 +1,18 @@
+.managements-page {
+    & .display-none {
+        display: none;
+    }
+    & .width-full {
+        width: 100%;
+    }
+    & .bg-gray {
+        background: var(--font-sub-color);
+    }
+    & .select-width {
+        width: calc(var(--base-gap)*4);
+    }
+    & .input-height {
+        line-height: var(--input-height);
+        height: var(--input-height);
+    }
+}

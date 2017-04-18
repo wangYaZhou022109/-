@@ -17,7 +17,7 @@ exports.type = 'dynamic';
 exports.getEntity = function(id) {
     var question;
     question = this.bindings.types.getQuestionById(id);
-    D.assign(question, { questionAttrs: question.questionAttrCopys });
+    question = D.assign({}, question, { questionAttrs: question.questionAttrCopys });
 
     return { isCorrect: true, data: question };
 };

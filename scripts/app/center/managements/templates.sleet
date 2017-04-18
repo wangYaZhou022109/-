@@ -1,0 +1,1726 @@
+#!handlebars
+
+moudle > .managements-page
+    .managements-title(data-region="managements-title")
+    .managements-ordertime(data-region="managements-ordertime")
+    .managements-classinfo(data-region="managements-classinfo")
+    .managements-dateplan(data-region="managements-dateplan")
+    .managements-quotamanage(data-region="managements-quotamanage")
+    .managements-publishnotice(data-region="managements-publishnotice")
+    .managements-membership(data-region="managements-membership")
+    .managements-classmanage(data-region="managements-classmanage")
+    .managements-evaluate(data-region="managements-evaluate")
+    .managements-learneffect(data-region="managements-learneffect")
+    .managements-trainsummary(data-region="managements-trainsummary")
+
+view('managements-title')
+    .container
+        .managements-main-title.layout-mt-small
+            .h4.pull-left.strong.layout-mr-small 班级名称班级名称班级名称
+            .tag-btn.bg-main-color 未实施
+            .tag-btn.bg-main-color 进行中
+            .tag-btn.bg-main-color 已结束
+            .tag-btn.radius.pull-right.active 进入班级
+        .managements-tabs
+            ul.clearfix.layout-mt
+                li.pull-left#managements-tab-1.active
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 预定时间
+                li.pull-left#managements-tab-2
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 班级基本信息
+                li.pull-left#managements-tab-3
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 日程安排
+                li.pull-left#managements-tab-4
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 配额管理
+                li.pull-left#managements-tab-5
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 发布通知
+                li.pull-left#managements-tab-6
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 成员管理
+                li.pull-left#managements-tab-7
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 班务管理
+                li.pull-left#managements-tab-8
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 统计与评估
+                li.pull-left#managements-tab-9
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 学习
+                li.pull-left#managements-tab-10
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 预定时间
+
+view('managements-ordertime')
+    #managements-content-1
+        .container.bg-highlight.overflow
+            section.managements-content-area
+                .form
+                    .clearfix
+                        .form-row.specical.pull-left
+                            label.label 培训班名称
+                            .content > span 培训班名称
+                        .form-row.specical.pull-left
+                            label.label MIS编号
+                            .content > span 09314110102
+                        .form-row.specical.pull-left
+                            label.label 需求方
+                            .content > span 中国移动通信集团
+                        .form-row.specical.pull-left
+                            label.label 需求方联系人
+                            .content > span 刘宇超
+                        .form-row.specical.pull-left
+                            label.label 联系电话
+                            .content > input(placeholder="1234567890")
+                        .form-row.specical.pull-left
+                            label.label 邮箱
+                            .content > input(placeholder="maxxie.liu@foxmail.com")
+                        .form-row.specical.pull-left
+                            label.label 计划人数
+                            .content > span 22
+                        .form-row.specical.pull-left
+                            label.label 培训天数
+                            .content > span 20
+                        .form-row.specical.pull-left
+                            label.label.required 是否外部举办
+                            .content
+                                input(type="radio" name="out")
+                                label.m-right 是
+                                input(type="radio" name="out" checked="true")
+                                label 否
+                        .form-row.specical.pull-left
+                            label.label.required 需求调研方式
+                            .content > input.input(placeholder="如：工作分析、领导访谈")
+                    .form-row.clearfix
+                        label.label.required 往返日期
+                        .content
+                            input.pull-left.w-half(placeholder="2016-12-24  ~  2016-12-25")
+                            .btn 选择日期
+                    .form-row
+                        label.label.required 培训目标
+                        .content > textarea.w-full(rows="5" placeholder="几句话介绍举办本次培训的目标和背景")
+                    .form-row
+                        label.label.required 培训对象
+                        .content > textarea.w-full(rows="5")
+
+view('managements-classinfo')
+    #managements-content-2
+        .container.bg-highlight.overflow
+            section.managements-content-area
+                .classinfo-top
+                    .clearfix
+                        .pull-left.layout-mr
+                            span.layout-mr-small 培训班名称
+                            span 培训班名称培训班名称培训班名称
+                        .pull-left
+                            span 学习地点：
+                            span 中国移动学院
+                    .clearfix.layout-mt-small
+                        .pull-left.m-right
+                            span.layout-mr-small 培训起止时间
+                            span 2015-03-24  ～ 2015-03-24
+                        .pull-left.color-error （注：开始时间自动生成为报到日后一天，结束时间自动生成为返程日前一天）
+                    .clearfix.layout-mt-small
+                        .pull-left.layout-mr
+                            span 学习地点：
+                            span 中国移动学院
+                        .pull-left.layout-mr
+                            span 客房：
+                            span 暂未分配
+                        .pull-left.layout-mr
+                            span 餐厅：
+                            span 暂未分配
+                        .pull-left.layout-mr
+                            span 教室
+                            span 暂未分配
+                    .form.align-left.m-top
+                        .clearfix
+                            .form-row.pull-left.w-half.special
+                                label.label.required 是否有省公司二级经理参加
+                                .content
+                                    input(type="radio" name="enter" checked="true")
+                                    label.layout-mr-small 是
+                                    input(type="radio" name="enter")
+                                    label 否
+                            .form-row.pull-left.w-half.special
+                                label.label.required 是否有部长级及以上领导参加
+                                .content
+                                    input(type="radio" name="minister" checked="true")
+                                    label.layout-mr-small 是
+                                    input(type="radio" name="minister")
+                                    label 否
+                            .form-row.pull-left.w-half
+                                label.label.required 班级合影
+                                .content
+                                    input(type="radio" name="photo" checked="true")
+                                    label.layout-mr-small 是
+                                    input(type="radio" name="photo")
+                                    label 否
+                            .form-row.pull-left.w-half
+                                label.label.required 合影时间
+                                .content
+                                    .relative
+                                        input.input.date(placeholder="2016-03-04 13:00")
+                                        .iconfont.icon-riqi.text-main-color
+                            .form-row.pull-left.w-half
+                                label.label.required 课程制作
+                                .content
+                                    input(type="radio" name="classmake" checked="true")
+                                    label.m-right 是
+                                    input(type="radio" name="classmake")
+                                    label 否
+                            .form-row.pull-left.w-half
+                                label.label.required 制作需求
+                                .content > input.input(placeholder="课程名称、时间及需求")
+                            .form-row.pull-left.w-half
+                                label.label.required 教室桌型
+                                .content
+                                    select.w-full
+                                        option 圆形
+                                        option 其他
+                            .form-row.pull-left.w-half
+                                .content > a 查看移动通信学院资源
+                        .form-row
+                            label.label.required 其他需求
+                            .content > textarea.w-full.pull-left(rows="2" placeholder="填写课程名称、时间及需求")
+                .classinfo-bottom.layout-mt
+                    .clearfix
+                        .classinfo-bottom-item.pull-left
+                            label 客房：
+                            input.input
+                        .classinfo-bottom-item.pull-left
+                            label 餐厅：
+                            input.input
+                        .classinfo-bottom-item.pull-left
+                            label 教室：
+                            select.select-width
+                                option 701
+                                option 702
+                                option 703
+                    .clearfix.layout-mt-small
+                        .pull-left.layout-mr
+                            span.m-right.pull-left.m-right 班级首页图片
+                            span.sub-text.pull-left 推荐图片分辨率为：1000*290；图片大小小于1M。
+                        .tag-btn.pull-left.active 上传
+                .text-center.layout-mt > .btn.bg-gray 提交
+
+view('managements-dateplan')
+    #managements-content-3
+        .container.bg-highlight.overflow.dateplan-padding
+            section.layout-mt-small
+                .clearfix
+                    .tag-btn.radius.pull-right.selected 导出安排
+                table.table
+                    tr
+                        td(colspan="9")
+                            .pull-left
+                                label.m-right 线下课程安排
+                                select
+                                    option 第一周（3月4日~3月6日）
+                                    option 第二周（3月4日~3月6日）
+                                    option 第三周（3月4日~3月6日）
+                            .pull-right
+                                .tag-btn.radius#weektopic 配置周主题
+                                .tag-btn.radius#addclass 添加课程
+                                .tag-btn.radius 导入课程
+                                .inline-block 最小化
+                                .inline-block.minimize -
+                    tr
+                        th 日期
+                        th 时间
+                        th 课程名称
+                        th 讲师名称
+                        th 讲师单位
+                        th 讲师职务
+                        th 课酬实付
+                        th 课件
+                        th 操作
+                    tr
+                        td(rowspan="4") 2016-12-21
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 8:30-10:30
+                        td 课程名称（点击可修改）
+                        td 刘宇超（点击可修改）
+                        td 移动学院（点击可修改）
+                        td 高级讲师
+                        td 50
+                        td > i.iconfont.icon-zhishiku.custom-color-4
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                table.table
+                    tr
+                        td(colspan="9")
+                            label.pull-left 在线资源
+                            .pull-right
+                                .tag-btn.radius#topic 配置主题
+                                .tag-btn.radius#addtopicclass 添加课程
+                                .inline-block 最小化
+                                .inline-block.minimize -
+                    tr
+                        th 主题
+                        th 课程名称
+                        th 是否必修
+                        th 操作
+                    tr
+                        td(rowspan="2") 主题名称
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td(rowspan="2") 主题名称
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 课程名称课程名称
+                        td 是
+                        td
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                table.table
+                    tr
+                        td(colspan="9")
+                            label.pull-left 调研与问卷
+                            .pull-right
+                                .tag-btn.radius#addexam 添加考试
+                                .tag-btn.radius#addevaluation-1 添加调研
+                                .tag-btn.radius#addevaluation-2 添加评估
+                                .inline-block 最小化
+                                .inline-block.minimize -
+                    tr
+                        th 序号
+                        th 问卷名称
+                        th 类型
+                        th 开始时间
+                        th 结束时间
+                        th 操作
+                    tr
+                        td 1
+                        td 考试名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 2
+                        td 调研名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 3
+                        td 评估名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-search.custom-color-4.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                table.table
+                    tr
+                        td(colspan="9")
+                            label.pull-left 调研与问卷
+                            .pull-right
+                                .tag-btn.radius#addwork 添加作业
+                                .inline-block 最小化
+                                .inline-block.minimize -
+                    tr
+                        th 序号
+                        th 作业名称
+                        th 类型
+                        th 开始时间
+                        th 结束时间
+                        th 操作
+                    tr
+                        td 1
+                        td 考试名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 2
+                        td 调研名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+                    tr
+                        td 3
+                        td 评估名称
+                        td 考试
+                        td 2016-12-21 9:00
+                        td 2016-12-21 9:00
+                        td
+                            i.iconfont.icon-edit.text-main-color.m-right
+                            i.iconfont.icon-close-circle.custom-color-3
+
+view('managements-quotamanage')
+    #managements-content-4
+        .container.bg-highlight.overflow.dateplan-padding
+            section.section.container
+                .layout-mr-small.pull-left
+                    .small-font.sub-title.pull-left.m-right 配额方式：
+                    .tag-btn.active#quota-1 分省配额
+                    .tag-btn#quota-2 整体配额
+                .quotamanage-title.clearfix
+                    .layout-mr-small.pull-left
+                        .small-font.sub-title.pull-left.m-right 审核方式:
+                        input.r-input(type="radio" checked="true" name="approve")
+                        label.small-font 自动审批
+                        input.r-input(type="radio" name="approve")
+                        label.small-font 手动审批
+                    .pull-right
+                        span.small-font 该培训班总额度为：
+                        span.small-font.text-main-color 45
+                        span.small-font 剩余额度为：
+                        span.small-font.text-main-color 1
+                .quota-toggle
+                    #quota-contents-1
+                        .quotamanage-content.layout-mt-small
+                            .clearfix
+                                .pull-right
+                                    .tag-btn 添加单位
+                                    .tag-btn 删除
+                            table.table
+                                tr
+                                    th > input(type="checkbox")
+                                    th 单位
+                                    th 配额数量
+                                    th 操作
+                                tr
+                                    td > input(type="checkbox")
+                                    td 单位名称
+                                    td 2
+                                    td > a 删除
+                                tr
+                                    td > input(type="checkbox")
+                                    td 单位名称
+                                    td 2
+                                    td > a 删除
+                        .quotamanage-footer.text-center.layout-mt-small
+                            .btn 保存
+                    #quota-contents-2.quota-contents-2
+                        .text-center.layout-mt
+                            .h3 当前班级配额方式为整体配额!
+                            .btn.layout-mt 保存
+
+view('managements-publishnotice')
+    #managements-content-5
+        .container.bg-highlight.overflow
+            section.managements-content-area
+                h4 培训班报名信息
+                .w-half
+                    .form
+                        .form-row
+                            label.label.required 是否开放报名
+                            .content.form-line-height
+                                input(type="radio" name="open" checked="true")
+                                label 是
+                                input(type="radio" name="open")
+                                label 否
+                        .form-row
+                            label.label.required 报名开始时间
+                            .content
+                                .relative.overflow
+                                    input.input.date(placeholder="201-12-16")
+                                    .iconfont.icon-riqi.text-main-color
+                        .form-row
+                            label.label.required 报名结束时间
+                            .content
+                                .relative.overflow
+                                    input.input.date(placeholder="201-12-16")
+                                    .iconfont.icon-riqi.text-main-color
+                        .form-row
+                            label.label.required 报名码
+                            .content
+                                span.m-right.form-line-height 21321382103
+                                .tag-btn.radius 复制
+                span.layout-mt-small
+                    | 引导语：请在下发培训公文时通知学员在报到前登录网大培训班填写“两个带来”问题，
+                    | 培训期间进行交流分享(两个带来示例模板下载)。 “两个带来”，即带来一个优秀经验分享、带来一个棘手问题讨论，
+                    | 以解决问题为导向，有效地引导学员带着实际工作问题参与培训学习和思考，并在培训班积极推广各单位的优秀实践经验，
+                    | 促进学员的相互分享和工作借鉴。
+                h4.m-top 启用“两个带来”
+                .check-choice
+                    input(type="checkbox") + span 学员填写“两个带来”问题，培训期间组织互动分享
+                .form.layout-mt-small
+                    .form-row
+                        label.label.auto.layout-mr-small.required 问题1
+                        .content
+                            input.input(placeholder="优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新经验")
+                    .form-row
+                        label.label.auto.layout-mr-small.required 问题2
+                        .content
+                            input.input(placeholder="棘手问题：您当前最关心的、当前工作中最棘手的一个问题")
+                section.section
+                    p 此为培训班的报名链接:
+                    .alink.layout-mt-small
+                        span.small-font.layout-mr http://sign.chinamobile.com
+                        .tag-btn.radius 复制
+                        .enter.layout-mt-small
+                            span.small-font.vertical-top.m-right 二维码报名入口:
+                            img.qrcode(src="images/3.png")
+                .important-notice
+                    p 【重要】发文注意事项：
+                    p 一、培训通知附件：
+                    p 1、《中国移动学院培训报名及参加须知》(下载)（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。
+                    p 2、《课程安排》(下载)
+                    .layout-mt-small
+                        p 二、培训通知发布路径及时间要求:
+                        p 1、路径：须通过OA“培训项目审批单”下发培训通知(OA首页-通用办公-培训项目-部门项目审批单)。
+                        p 2、时间：开班前20天左右发布通知，以保证OA顺利流转，省公司学员提前做好准备并按时报名。
+                        p 3、注意事项：为保证学员顺利报到，审批单中移动学院联系人写“响应中心，
+                            | 15801696688-27260”（响应中心是学院集中服务平台，负责解答培训前期相关问题，比如来院路线等）
+
+view('managements-membership')
+    .container.bg-highlight
+        section.section
+            .tabs.line
+                ul
+                    li#membership-1.active 报名管理
+                    li#membership-2 学员
+                    li#membership-3 班务人员
+                    li#membership-4 非正式成员
+                    li#membership-5 短信发送
+            .membership-contents
+                #membership-content-1
+                    .membership-search.layout-mt
+                        .filter-row
+                            .filter-item
+                                label 员工编号
+                                input.input
+                            .filter-item
+                                label 姓名
+                                input.input
+                            .filter-item
+                                label 单位
+                                input.input
+                            .filter-item
+                                label |
+                                button.btn 搜索
+                    .membership-table.layout-mt-small.clearfix
+                        .h5.pull-left.strong 报名列表
+                        .pull-right
+                            button.btn.tag-btn#signup 报名情况
+                            button.btn.tag-btn#verify-1 审核
+                    table.table
+                        tr
+                            th > input(type="checkbox")
+                            th 序号
+                            th 姓名
+                            th 员工号
+                            th 单位
+                            th 部门
+                            th 职务
+                            th 手机
+                            th 状态
+                            th 操作
+                        tr
+                            td > input(type="checkbox")
+                            td 1
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-2 审核
+                        tr
+                            td > input(type="checkbox")
+                            td 2
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-3 审核
+                        tr
+                            td > input(type="checkbox")
+                            td 3
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-4 审核
+                        tr
+                            td > input(type="checkbox")
+                            td 4
+                            td 学员名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td 待审核
+                            td > a#verify-5 审核
+                #membership-content-2.membership-content-2.display-none
+                    .membership-search.layout-mt
+                        .filter-row
+                            .filter-item
+                                label 员工编号
+                                input.input
+                            .filter-item
+                                label 姓名
+                                input.input
+                            .filter-item
+                                label 单位
+                                input.input
+                            .filter-item
+                                label |
+                                button.btn 搜索
+                    .membership-table.layout-mt-small.clearfix
+                        .h5.pull-left.strong 学员列表
+                        .pull-right
+                            label.pull-left.add-label.m-right 员工编号
+                            input.tag-btn.pull-left.add-mr
+                            button.tag-btn.selected.pull-left 添加
+                            button.btn.tag-btn#studentgroup 学员分组
+                            button.btn.tag-btn#addstudent 添加学员
+                            button.btn.tag-btn#entersituation 报名情况
+                            button.btn.tag-btn 导入
+                            button.btn.tag-btn 导出
+                    table.table.layout-mt-small
+                        tr
+                            th 序号
+                            th 姓名
+                            th 员工编号
+                            th 性别
+                            th 民族
+                            th 单位
+                            th 部门
+                            th 职务
+                            th 手机
+                            th 操作
+                        tr
+                            td 1
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 2
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 3
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 4
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 5
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 6
+                            td 学员名称
+                            td 123
+                            td 男
+                            td 汉族
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                #membership-content-3.display-none
+                    .membership-table.layout-mt-small.clearfix
+                        .h5.pull-left.strong 班务人员列表
+                        .pull-right
+                            label.pull-left.add-label.m-right 员工编号
+                            input.tag-btn.pull-left.add-mr
+                            button.tag-btn.selected.pull-left 添加
+                            button.btn.tag-btn 人员选择
+                    table.table.layout-mt-small
+                        tr
+                            th 序号
+                            th 姓名
+                            th 员工编号
+                            th 单位
+                            th 称呼
+                            th 手机
+                            th 邮箱
+                            th 操作
+                        tr
+                            td 1
+                            td 名称
+                            td 123
+                            td 部门名称
+                            td 班主任（点击可修改）
+                            td 1234567890
+                            td 1283712837@qq.com
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 2
+                            td 名称
+                            td 123
+                            td 部门名称
+                            td 班主任（点击可修改）
+                            td 1234567890
+                            td 1283712837@qq.com
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                        tr
+                            td 3
+                            td 名称
+                            td 123
+                            td 部门名称
+                            td 班主任（点击可修改）
+                            td 1234567890
+                            td 1283712837@qq.com
+                            td
+                                a 排序
+                                span.text-main-color |
+                                a 删除
+                #membership-content-4.display-none
+                    .membership-table.layout-mt-small.clearfix
+                        .h5.pull-left.strong 学员列表
+                        .pull-right
+                            label.pull-left.add-label.m-right 员工编号
+                            input.tag-btn.pull-left.add-mr
+                            button.tag-btn.selected.pull-left 添加
+                            button.btn.tag-btn 人员选择
+                    table.table.layout-mt-small
+                        tr
+                            th 序号
+                            th 姓名
+                            th 员工编号
+                            th 单位
+                            th 部门
+                            th 职务
+                            th 手机
+                            th 操作
+                        tr
+                            td 1
+                            td 名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td > a 删除
+                        tr
+                            td 2
+                            td 名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td > a 删除
+                        tr
+                            td 3
+                            td 名称
+                            td 123
+                            td 机构名称机构名称
+                            td 部门名称
+                            td 职务名称
+                            td 1234567890
+                            td > a 删除
+                #membership-content-5.membership-content-5.display-none
+                    .container
+                        .title
+                            .clearfix.layout-mt-small
+                                .h5.pull-left.layout-mr-small.strong 学员列表
+                                .check.pull-left
+                                    input(type="checkbox")
+                                    label 全选
+                            .clearfix.layout-mt-small
+                                .small-font.pull-left.layout-mr-small 组别一
+                                .check.pull-left
+                                    input(type="checkbox")
+                                    label 全选
+                            .student-list.layout-mt-small.overflow
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                .clearfix.layout-mt-small
+                                    .small-font.pull-left.layout-mr-small 组别二
+                                    .check.pull-left
+                                        input(type="checkbox")
+                                        label 全选
+                            .student-list.layout-mt-small.overflow
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                            .clearfix.layout-mt-small
+                                .h5.pull-left.layout-mr-small.strong 班务人员列表
+                                .check.pull-left
+                                    input(type="checkbox")
+                                    label 全选
+                            .student-list.layout-mt-small.overflow
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                                span 学员名称
+                                span 学员名称
+                                span.active 学员名称
+                        .layout-mt
+                            .clearfix
+                                .pull-left.strong 短信内容
+                                span.pull-right 0/600
+                            .m-top
+                                textarea(placeholder="填写短信内容" rows="10")
+                        .btn.layout-mt-small 发送
+
+view('managements-classmanage')
+    .container.bg-highlight
+        section.section
+            .tabs.line
+                ul
+                    li#classmanage-1.active 考勤
+                    li#classmanage-2 课酬管理
+                    li#classmanage-3 班车信息
+                    li#classmanage-4 结算数据
+                    li#classmanage-5 班级公告
+                    li#classmanage-6 讨论管理
+                    li#classmanage-7 班级相册
+            .classmanage-contents
+                #classmanage-content-1
+                    .clearfix.layout-mt-small
+                        .pull-left
+                            label 签到规则：
+                            .tag-btn.active 半天
+                            .tag-btn 全天
+                        .pull-right
+                            .tag-btn.selected#addattendance
+                                | +添加
+                            .tag-btn.selected 删除
+                    table.table.layout-mt-small
+                        tr
+                            th > input(type="checkbox")
+                            th 签到名称
+                            th 签到时间
+                            th 签到地点
+                            th 签到结果
+                            th 状态
+                            th 二维码
+                            th 操作
+                        tr
+                            td > input(type="checkbox")
+                            td 2016-1-9 上午签到
+                            td 1-9 09:00 至 1-9 09:00
+                            td 教室名称
+                            td 5 / 30
+                            td 已开始
+                            td 预览 下载
+                            td
+                                a#attendancelist-1 签到名单
+                                span |
+                                a#leave-1 请假
+                                span |
+                                a#edit-1 编辑
+                        tr
+                            td > input(type="checkbox")
+                            td 2016-1-9 上午签到
+                            td 1-9 09:00 至 1-9 09:00
+                            td 教室名称
+                            td 5 / 30
+                            td 已开始
+                            td 预览 下载
+                            td
+                                a#attendancelist-2 签到名单
+                                span |
+                                a#leave-2 请假
+                                span |
+                                a#edit-2 编辑
+                        tr
+                            td > input(type="checkbox")
+                            td 2016-1-9 上午签到
+                            td 1-9 09:00 至 1-9 09:00
+                            td 教室名称
+                            td 5 / 30
+                            td 已开始
+                            td 预览 下载
+                            td
+                                a#attendancelist-3 签到名单
+                                span |
+                                a#leave-3 请假
+                                span |
+                                a#edit-3 编辑
+                        tr
+                            td > input(type="checkbox")
+                            td 2016-1-9 上午签到
+                            td 1-9 09:00 至 1-9 09:00
+                            td 教室名称
+                            td 5 / 30
+                            td 已开始
+                            td 预览 下载
+                            td
+                                a#attendancelist-4 签到名单
+                                span |
+                                a#leave-4 请假
+                                span |
+                                a#edit-4 编辑
+                #classmanage-content-2.display-none
+                    section.section
+                        .clearfix
+                            .pull-right
+                                .tag-btn.selected 导出内部讲师
+                                .tag-btn.selected 导出外部讲师
+                        table.table.layout-mt-small
+                            tr
+                                th 课程名称
+                                th 讲师名称
+                                th 授课时长（分钟）
+                                th 酬金
+                                th 税金
+                                th 实付
+                                th 操作
+                            tr
+                                td 标题标题标题标题标题标题
+                                td 某某某
+                                td 100
+                                td -
+                                td -
+                                td -
+                                td > a#classedit-1 编辑
+                            tr
+                                td 标题标题标题标题标题标题
+                                td 某某某
+                                td 100
+                                td 123
+                                td 123
+                                td 123
+                                td > a#classedit-2 编辑
+                            tr
+                                td 标题标题标题标题标题标题
+                                td 某某某
+                                td 100
+                                td 456
+                                td 456
+                                td 456
+                                td > a#classedit-3 编辑
+                        .layout-mt.text-center
+                            .btn 保存
+
+                #classmanage-content-3.display-none
+                    section.section
+                        .clearfix
+                            label.pull-left 班车/订餐信息
+                            .tag-btn.pull-right.selected
+                                | +添加
+                        table.table.layout-mt-small
+                            tr
+                                th 主题
+                                th 发布日期
+                                th 截止日期
+                                th 状态
+                                th 操作
+                            tr
+                                td 培训返程日统计
+                                td 2016-12-22 09:00
+                                td 2016-12-22 09:00
+                                td 进行中
+                                td
+                                    a#count-1 统计
+                                    span.text-main-color |
+                                    a 删除
+                            tr
+                                td 培训返程日统计
+                                td 2016-12-22 09:00
+                                td 2016-12-22 09:00
+                                td 未开始
+                                td
+                                    a 编辑
+                                    span.text-main-color |
+                                    a#count-2 统计
+                                    span.text-main-color |
+                                    a 删除
+                            tr
+                                td 培训返程日统计
+                                td 2016-12-22 09:00
+                                td 2016-12-22 09:00
+                                td 已结束
+                                td
+                                    a#count-3 统计
+                                    span.text-main-color |
+                                    a 删除
+                #classmanage-content-4.display-none
+                    section.section
+                        .container
+                            .form.align-left
+                                .clearfix
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                    .form-row.pull-left.form-row-width.train-padding
+                                        label.label.required 培训人数
+                                        .content > input.input(placeholder="计划信息带入")
+                                .form-row
+                                    label.label.required 说明
+                                    .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
+                            .text-center > .btn.bg-gray 提交
+                #classmanage-content-5.display-none
+                    .container
+                        section.section.w-half
+                            .classnotice-title.clearfix
+                                span.strong.layout-mr 是否显示排行榜
+                                input(type="radio" name="rank" checked="true")
+                                label.layout-mr 是
+                                input(type="radio" name="rank")
+                                label.layout-mr 否
+                                label.strong 显示规则：
+                                select.select-width
+                                    option 显示前十名
+                                    option 显示全部
+                            .classnotice-content.layout-mt
+                                .strong 班级公告
+                                textarea.m-top.w-full(rows="5")
+                            .text-center
+                                .btn.bg-gray.layout-mt-small 保存
+                #classmanage-content-6.display-none
+                    .container
+                        section.section
+                            .border.bottom
+                                .m-bottom
+                                    span 共
+                                    span.text-main-color 10
+                                    span 条评论
+                            .comment-list > ul
+                                li
+                                    .user-pic > img(src="images/1.png")
+                                    .comment-content
+                                        .user-info
+                                            a(href='#') 张三
+                                            span 互联网中心
+                                        .comment-text
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                        .comment-operation
+                                            .pull-left > .sub-text 2017-01-17
+                                            .text-right
+                                                span.pointer 置顶
+                                                span |
+                                                span.pointer 精华
+                                                span |
+                                                span.pointer 隐藏
+                                                span |
+                                                span.pointer#reply-1 回复
+                                                span |
+                                                span.pointer 删除
+                                        .comment-reply#comment-reply-1
+                                            textarea.input.w-full.block(rows=1)
+                                            .btn 回复
+                                li
+                                    .user-pic > img(src="images/1.png")
+                                    .comment-content
+                                        .user-info
+                                            a(href='#') 张三
+                                            span 互联网中心
+                                        .comment-text
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                        .comment-operation
+                                            .pull-left > .sub-text 2017-01-17
+                                            .text-right
+                                                span.pointer 置顶
+                                                span |
+                                                span.pointer 精华
+                                                span |
+                                                span.pointer 隐藏
+                                                span |
+                                                span.pointer#reply-2 回复
+                                                span |
+                                                span.pointer 删除
+                                        .comment-reply#comment-reply-2
+                                            textarea.input.w-full.block(rows=1)
+                                            .btn 回复
+                #classmanage-content-7.display-none
+                    .container
+                        section.section
+                            .tag-btn.active.radius 上传照片
+                            .tag-btn.active.radius 删除
+                            .photos.clearfix
+                                ul
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                            .progress
+                                                .inline-block.progress-item.pull-left
+                                                span.inline-block.pull-left 75%
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+                                    li
+                                        .photo-item
+                                            img(src="images/1.png")
+                                            input.check(type="checkbox")
+                                        .text-center
+                                            .sub-title 照片名称
+                                            .sub-title （点击可修改）
+
+
+view('managements-evaluate')
+    .container.bg-highlight
+        section.section
+            .tabs.line
+                ul
+                    li#evaluate-1 调查问卷
+                    li#evaluate-2.active 两个带来
+                    li#evaluate-3 学习详情
+                    li#evaluate-4 作业管理
+            .evaluate-contents
+                #evaluate-content-1.display-none
+                    .layout-mt-small
+                        table.table
+                            tr
+                                th 问卷名称
+                                th 问卷类型
+                                th 开始时间
+                                th 截止时间
+                                th 操作
+                            tr
+                                td 考试名称考试名称考试名称
+                                td 考试
+                                td 2017-03-01 19:00
+                                td 2017-03-01 19:00
+                                td > a#watchexam 查看
+                            tr
+                                td 调研名称
+                                td 调研
+                                td 2017-03-01 19:00
+                                td 2017-03-01 19:00
+                                td > a#watchsurvey 查看
+                            tr
+                                td 评估名称
+                                td 评估
+                                td 2017-03-01 19:00
+                                td 2017-03-01 19:00
+                                td > a#watchevaluate 查看
+                        .layout-mt-small
+                        table.table
+                            tr
+                                th 问卷名称
+                                th 开始时间
+                                th 截止时间
+                                th 反馈率
+                                th 操作
+                            tr
+                                td 培训满意度调查问卷（学员）
+                                td
+                                    | 2017-02-16 00:00
+                                    i.iconfont.icon-note
+                                td
+                                    | 2017-02-16 00:00
+                                    i.iconfont.icon-note
+                                td 0%
+                                td
+                                    a#studentwatch 查看
+                                    span |
+                                    a 统计
+                            tr
+                                td 培训满意度调查问卷（主办方）
+                                td
+                                    | 2017-02-16 00:00
+                                    i.iconfont.icon-note
+                                td
+                                    | 2017-02-16 00:00
+                                    i.iconfont.icon-note
+                                td 100%
+                                td > a 查看
+                #evaluate-content-2
+                    .evaluate-search.layout-mt
+                        .filter-row
+                            .filter-item
+                                label 员工编号
+                                input.input
+                            .filter-item
+                                label 姓名
+                                input.input
+                            .filter-item
+                                label 单位
+                                input.input
+                            .filter-item
+                                label |
+                                button.btn 搜索
+                    .layout-mt-small
+                        .clearfix
+                            .h5.pull-left 两个带来列表
+                            .btn.small.active.pull-right 导出
+                        .m-top
+                            table.table
+                                tr
+                                    th 序号
+                                    th 学员姓名
+                                    th 员工编号
+                                    th 单位
+                                    th 提交时间
+                                    th 经验/案例 主题
+                                    th 问题/困难 主题
+                                    th 操作
+                                tr
+                                    td 1
+                                    td 某某某
+                                    td 123
+                                    td
+                                    td 2016-12-23 01:44
+                                    td 主题主题主题主题主题主题主题
+                                    td 主题主题主题主题主题主题
+                                    td > a#watchbring-1 查看
+                                tr
+                                    td 2
+                                    td 某某某
+                                    td 123
+                                    td
+                                    td 2016-12-23 01:44
+                                    td 主题主题主题主题主题主题主题
+                                    td 主题主题主题主题主题主题
+                                    td > a 查看
+                                tr
+                                    td 3
+                                    td 某某某
+                                    td 123
+                                    td
+                                    td 2016-12-23 01:44
+                                    td 主题主题主题主题主题主题主题
+                                    td 主题主题主题主题主题主题
+                                    td > a#watchbring-3 查看
+                                tr
+                                    td 4
+                                    td 某某某
+                                    td 123
+                                    td
+                                    td 2016-12-23 01:44
+                                    td 主题主题主题主题主题主题主题
+                                    td 主题主题主题主题主题主题
+                                    td > a#watchbring-4 查看
+                                tr
+                                    td 5
+                                    td 某某某
+                                    td 123
+                                    td
+                                    td 2016-12-23 01:44
+                                    td 主题主题主题主题主题主题主题
+                                    td 主题主题主题主题主题主题
+                                    td > a#watchbring-5 查看
+                #evaluate-content-3.display-none
+                    .container
+                        .layout-mt-small
+                            table.table
+                                tr
+                                    th 序号
+                                    th 账号
+                                    th 姓名
+                                    th 单位
+                                    th 职位
+                                    th 联系电话
+                                    th 学习时长
+                                    th 操作
+                                tr
+                                    td 1
+                                    td zhixueyun
+                                    td 某某某
+                                    td 在线学习部
+                                    td 产品经理
+                                    td 1234567890
+                                    td 01:20:00
+                                    td > a#learndetail-1 详情
+                                tr
+                                    td 2
+                                    td zhixueyun
+                                    td 某某某
+                                    td 在线学习部
+                                    td 产品经理
+                                    td 1234567890
+                                    td 01:20:00
+                                    td > a#learndetail-2 详情
+                                tr
+                                    td 3
+                                    td zhixueyun
+                                    td 某某某
+                                    td 在线学习部
+                                    td 产品经理
+                                    td 1234567890
+                                    td 01:20:00
+                                    td > a#learndetail-3 详情
+                #evaluate-content-4.display-none
+                    .container
+                        .layout-mt
+                            table.table
+                                tr
+                                    th 作业名称
+                                    th 提交人数
+                                    th 操作
+                                tr
+                                    td 作业名称作业名称作业名称作业名称
+                                    td -
+                                    td > a#taskdetail-1 详情
+                                tr
+                                    td 作业名称作业名称作业名称作业名称
+                                    td 20
+                                    td > a#taskdetail-2 详情
+                                tr
+                                    td 作业名称作业名称作业名称作业名称
+                                    td 20
+                                    td > a#taskdetail-3 详情
+
+view('managements-learneffect')
+    .container
+        .container
+            .layout-mt-small.border.bottom.dashed
+                .w-half
+                    .color-error.layout-mb-small 开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度，开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度,开展学习效果考核是今年集团公司对培训项目管理的统一要求（必须环节），有利于提高员工参训重视程度
+            .layout-mt
+                .form
+                    .form-row
+                        label.label.required 本次培训采用的考核方式：
+                        .content
+                            input.text-width(placeholder="考试方式")
+                            p 如：考试、学习汇报、小组作业、撰写学习心得、工作模拟、岗位考试认证
+                    .form-row
+                        label.label.required.text 附件上传：
+                        .content
+                            .accessory
+                                span 已有附件：
+                                span 设计规划
+                                a.m-left 删除附件
+                            .m-top
+                                input(type="file")
+                                p 注：请上传相关证明材料，如考试结果、小组汇报PPT、学员学习作业汇总
+                    .form-row
+                        label.label.required 考核结果：
+                        .content
+                            textarea.text-width(rows="5" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用，掌握情况")
+            .text-center
+                .btn 提交
+view('managements-trainsummary')
+    .container
+        .layout-mt-small.border.bottom.dashed
+            p * 完成培训项目总结是今年集团公司对培训项目管理的统一要求（必需环节），请在线填写。
+            p * 主要内容包括培训项目设计实施情况、评估结果及项目成果、学员对集团业务、运营等方面的建议等。
+            p * 该总结内容将定期呈报集团领导及相关部门领导审阅参考，请主办部门培训联系人全面参与和最终把关。
+        .clearfix.m-top
+            .btn.radius.pull-right 导出培训总结
+        .trainsummary-content.container
+            h2.text-center XX培训班培训项目总结报告
+            .layout-mt-small
+                .trainsummary-item
+                    h4 一、培训项目概况
+                    .item
+                        p.strong 1、基本信息:
+                        span 本期培训是由业务支撑系统部 主办， 培训编号为
+                        span 00000
+                        span ，培训对象为3山东省对此,实际参训学员人数
+                        span 1000
+                        span ,培训时间：
+                        span 2016-12-20
+                        span 至
+                        span 2016-12-20 。
+                    .clearfix
+                        p.strong.pull-left 2、培训目标:
+                        p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                    textarea.w-full.recommend-padding(cols="2" placeholder="培训目标培训目标")
+                    .clearfix
+                        p.strong.pull-left 3、需求调研方式
+                        p.pull-left.color-error （培训需求方填写，请在“预定时间”节点填写）
+                    textarea.w-full.recommend-padding(cols="2" placeholder="培训前通过：培训问卷，明确了培训项目需求。")
+                    .layout-mt
+                        table.table
+                            tr > th.strong(colspan="7") 面授课程
+                            tr
+                                td.strong 日期
+                                td.strong 时间
+                                td.strong 课程名称
+                                td.strong 讲师
+                                td.strong 单位
+                                td.strong 职务/职称
+                                td.strong 学习方式
+                            tr
+                                td(rowspan="2") 2016-12-20
+                                td 09:00-12:00
+                                td 111
+                                td 张慧勇
+                                td 总部
+                                td 项目经理
+                                td 面授
+                            tr
+                                td 14:00-17:30
+                                td 222
+                                td 王岩
+                                td 总部
+                                td 项目经理
+                                td 面授
+                    .layout-mt
+                        table.table
+                            tr > th(colspan="2") 在线课程
+                            tr
+                                td 编号
+                                td 课程名称
+                            tr
+                                td 1
+                                td 111111111111111
+                    .clearfix
+                        p.strong.pull-left 4、培训形式:
+                        p.pull-left.color-error （班主任填写,请根据实际采用的培训形式对下方评语进行修改）
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 培训形式
+                            input(type="radio" name="check")
+                            label 混合式学习形式
+                            input.layout-ml(type="radio" name="check")
+                            label 面授与讨论形式
+                            input.layout-ml(type="radio" name="check")
+                            label 面授形式
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 混合式学习形式：
+                                    textarea.w-full.recommend-padding(cols="3" placeholder="培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式培训项目采用混合式学习形式，通过面授、在线、手机、直播等多种培训形式")
+                    .clearfix
+                        p.strong.pull-left 5、学员表现:
+                        p.pull-left.color-error （班主任填写,请根据实际学员表现情况对下方评语进行修改）
+                    .m-top
+                        .layout-ml-small
+                            p.strong 课堂表现
+                            input(type="radio" name="check")
+                            label 非常好
+                            input.layout-ml(type="radio" name="check")
+                            label 比较好
+                            input.layout-ml(type="radio" name="check")
+                            label 一般
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 非常好：
+                                    textarea.w-full.recommend-padding(cols="2" placeholder="参训学员课堂表现非常好，充分参与到培训过程中来")
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 出勤情况
+                            input(type="radio" name="check")
+                            label 全勤
+                            input.layout-ml(type="radio" name="check")
+                            label 良好
+                            input.layout-ml(type="radio" name="check")
+                            label 一般
+                    .layout-mt-small
+                        .border.around.dashed.w-full.mix-height.overflow
+                            .container
+                                .study-top
+                                    .small-font.strong 全勤：
+                                    textarea.w-full.recommend-padding(cols="2" placeholder="没有学员迟到、早退或缺勤。")
+                    .layout-mt-small
+                        .layout-ml-small
+                            p.strong 优秀学员（选填）
+                            .clearfix
+                                p.pull-left 本次培训中，
+                                p.pull-left ___________________________
+                                p.pull-left 表现突出,被评为优秀学员。
+                            p 例子：本次培训中，某某公司某某人在小组研讨、汇报答辩中表现突出，被评为“优秀学员”。
+                    .item
+                        p.strong 6、学习效果考核方式:
+                        p 本次培训通过考试方式，进行了培训学习考核。
+                    .clearfix
+                        p.pull-left.strong 考核结果
+                        p.pull-left.color-error.strong （培训需求方填写）
+                    textarea.w-full.recommend-padding(cols="3" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用、通过考核评估学员对培训内容的掌握情况。")
+                .trainsummary-item
+                    h4 二、教学评估:
+                    .teach-item
+                        p.strong 1、培训项目设计：
+                        p 培训结束后，通过培训系统对学员进行了满意度调查，统计结果如下：
+                        .m-left
+                            span 学员对培训项目设计总体满意度为:
+                            span 100.00%
+                        table.table
+                            tr
+                                th 序号
+                                th 评价项目
+                                th 满意度
+                            tr > td.text-center(colspan="3") 无相关信息
+                    .teach-item
+                        p.strong 2、课程与讲师：
+                        p 培训结束后，通过培训系统对学员进行了满意度调查，统计结果如下：
+                        .m-left
+                            span 学员对培训项目设计总体满意度为:
+                            span 100.00%
+                        table.table
+                            tr
+                                th 序号
+                                th 课程名称
+                                th 讲师
+                                th 课程满意度
+                                th 讲师满意度
+                            tr > td.text-center(colspan="5") 无相关信息
+                .trainsummary-item
+                    .clearfix
+                        .h4.strong.pull-left.title-height 三、学员反馈意见:
+                        .btn.pull-left.m-left.radius 学员满意度问卷反馈建议导出
+                    .clearfix
+                        p.pull-left.strong 1、学员对集团业务、运营等方面的建议：
+                        p.pull-left.color-error.strong （培训需求方整理提炼）
+                    textarea.w-full.recommend-padding(rows="3" placeholder="点击上方“学员满意度问卷反馈建议导出”，将第n项问题的学员反馈建议、以及在培训过程中学员反馈的对公司业务、运营等方面的建议提炼整理后填写到此处，该建议将反馈至集团公司领导和相关部门领导。")
+                    .clearfix
+                        p.pull-left.strong 2、学员对培训项目的建议：
+                        p.pull-left.color-error.strong （班主任整理提炼）
+                    textarea.w-full.recommend-padding(rows="3" placeholder="点击上方“学员满意度问卷反馈建议导出”，将G、H、I、K四个问题的学员对项目的反馈建议填到此处。")
+                .trainsummary-item
+                    h4 四、其他（填写）：
+                    textarea.w-full.recommend-padding(rows="3")
+                .trainsummary-item.clearfix
+                    .pull-right
+                        .h5.strong.m-top.text-right 业务支撑系统部
+                        .h5.strong.m-top.text-right 中国移动学院
+                        .h5.strong.m-top.text-right 日期：
+                            span 2016-12-22
+                .text-center
+                    .btn.m-right 保存
+                    .btn 提交

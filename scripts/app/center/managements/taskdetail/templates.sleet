@@ -1,0 +1,61 @@
+#!handlebars
+
+module > .taskdetail-page
+    .taskdetail(data-region="taskdetail")
+
+view('taskdetail')
+    .taskdetail-title
+        span 作业名称：
+        span 作业名称作业名称作业名称
+    .layout-mt-small
+        span 已提交人数：
+        span 50
+    .layout-mt-small
+        .filter-row
+            .filter-item
+                label 用户名
+                input.input
+            .filter-item
+                label 姓名
+                input.input
+            .filter-item
+                .btn 查询
+    .layout-mt-small.clearfix
+        .btn.small.radius.pull-right 下载全部
+    .m-top
+        table.table
+            tr
+                th 序号
+                th 用户名
+                th 姓名
+                th 所属部门
+                th 提交时间
+                th 得分
+            tr
+                td 1
+                td duan
+                td 端
+                td 产品部
+                td 2016-03-04 14:25
+                td > a 审核
+            tr
+                td 2
+                td duan
+                td 端
+                td 产品部
+                td 2016-03-04 14:25
+                td > a 90
+            tr
+                td 3
+                td duan
+                td 端
+                td 产品部
+                td 2016-03-04 14:25
+                td > a 50
+            tr
+                td 4
+                td duan
+                td 端
+                td 产品部
+                td 2016-03-04 14:25
+                td > a 100

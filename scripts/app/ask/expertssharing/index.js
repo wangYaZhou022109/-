@@ -1,5 +1,5 @@
-
-
+var $ = require('jquery');
+var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -12,17 +12,40 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         reply: { url: '../ask-bar/question-reply' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        del: { url: '../ask-bar/trends/del' }
+        del: { url: '../ask-bar/trends/del' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 },
+            mixin: {
+                findById: function(id) {
+                    var trends = this.module.store.models.page.data;
+                    return _.find(trends, ['id', id]);
+                }
+            }
+        }
     },
     callbacks: {
         init: function(payload) {
-            var trends = this.models.trends,
-                id = 'all';
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            params.id = 'all';
             if (typeof payload.state.id !== 'undefined') {
-                id = payload.state.id;
+                params.id = payload.state.id;
             }
-            trends.set({ id: id });
-            return this.get(trends);
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
+        page: function(payload) {
+            var trends = this.models.trends;
+            var params = this.models.page.params;
+            params.id = 'all';
+            if (typeof payload.state.id !== 'undefined') {
+                params.id = payload.state.id;
+            }
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
         },
         follow: function(payload) {
             var follow = this.models.follow;
@@ -63,5 +86,20 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    var me = this;
+    $(window).scroll(function() {
+        var page = me.store.models.page.params.page;
+        var size = me.store.models.page.params.size;
+        // if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
+        //     if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
+        //         me.store.models.page.params.page++;
+        //         me.dispatch('page');
+        //     }
+        // }
+        if (page * size === me.store.models.page.data.length) {
+            me.store.models.page.params.page++;
+            me.dispatch('page', me.renderOptions);
+        }
+    });
+    return this.dispatch('page', this.renderOptions);
 };

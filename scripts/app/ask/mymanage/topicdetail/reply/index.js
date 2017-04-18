@@ -1,12 +1,16 @@
 
 exports.items = {
-    list: 'list'
+    list: 'list',
+    'ask/report': { isModule: true }
 };
 
 exports.store = {
     models: {
+        follow: { url: '../ask-bar/question-details/boutique' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
         reply: { url: '../ask-bar/my-manage/reply' },
-        shut: { url: '../ask-bar/question/close-status' }
+        shut: { url: '../ask-bar/question/close-status' },
+        discuss: { url: '../ask-bar/question-discuss' }
     },
     callbacks: {
         init: function(payload) {
@@ -17,6 +21,22 @@ exports.store = {
         shut: function(payload) {
             this.models.shut.set(payload);
             return this.put(this.models.shut);
+        },
+        follow: function(payload) {
+            var follow = this.models.follow;
+            follow.set(payload);
+            return this.post(follow);
+        },
+        unfollow: function(payload) {
+            var follow = this.models.unfollow;
+            // console.log(payload);
+            follow.set(payload);
+            return this.put(follow);
+        },
+        publish: function(payload) {
+            var discuss = this.models.discuss;
+            discuss.set(payload);
+            return this.save(discuss);
         }
     }
 };
