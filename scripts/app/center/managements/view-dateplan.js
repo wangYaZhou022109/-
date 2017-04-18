@@ -41,7 +41,10 @@ exports.handlers = {
     },
     showMinimize: function(id) {
         $(this.$('minitable-' + id)).toggle();
-        $(this.$('minimize-' + id)).toggle();
-        $(this.$('maximizaton-' + id)).toggle();
+        if ($(this.$('minimize-' + id)).text() === '-') {
+            $(this.$('minimize-' + id)).text('+').prev().text('最大化');
+        } else {
+            $(this.$('minimize-' + id)).text('-').prev().text('最小化');
+        }
     }
 };

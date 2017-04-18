@@ -23,15 +23,5 @@
             line-height: calc(var(--large-space)/2);
             text-align: center;
         }
-        & .change-min {
-            & .change-item {
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-        }
-        & .max {
-            display: none;
-        }
     }
 }
