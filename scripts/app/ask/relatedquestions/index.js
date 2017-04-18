@@ -9,6 +9,7 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var questions = this.models.questions;
+            // console.log(payload);
             questions.set({ id: payload.state.id });
             return this.get(questions);
         }

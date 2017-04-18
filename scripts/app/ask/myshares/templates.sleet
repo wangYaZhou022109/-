@@ -31,14 +31,21 @@ view('list')
                             else
                                 .item(id='trend-follow-1_'  + problem.id data-name='id' data-value='1_' + problem.id) > echo('+') + string('follow')
                             .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-                            .item
+                            #  .item
+                            #      .drop-down-wrapper
+                            #          .drop-down-btn 分享
+                            #          .drop-down-content > .content
+                            #              ul
+                            #                  li 分享1
+                            #                  li 分享2
+                            #                  li 分享3
+                            .item > .share-bar
                                 .drop-down-wrapper
-                                    .drop-down-btn 分享
-                                    .drop-down-content > .content
-                                        ul
-                                            li 分享1
-                                            li 分享2
-                                            li 分享3
+                                    i.iconfont.icon-share-2(title='分享')
+                                    form.drop-down-content > .content
+                                        .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                        .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                        .item > div(id ='shareTo-bar' + id) > i.iconfont.icon-ask + span 分享到问吧
                             .item > span(id = 'del-question-' + problem.id data-name='id' data-value=problem.id) > string('delete')
                             form.comment-reply(id ='comment-reply-' + id)
                                 textarea.input.w-full.block(rows=1 name='t_content' value='')
