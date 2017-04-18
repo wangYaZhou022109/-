@@ -16,7 +16,7 @@ exports.dataForTemplate = {
                 buttons.push({
                     id: 'research-detail',
                     text: '开始答题',
-                    url: '#/exam/research-activity/research-detail/' + research.id,
+                    url: '#/exam/research-activity/research-detail/' + research.id + '/' + research.id,
                     target: true
                 });
             } else {
