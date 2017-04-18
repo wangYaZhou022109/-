@@ -32,8 +32,6 @@ exports.store = {
                 subject.set(obj);
                 me.models.styles.set(styles);
                 state.changed();
-            }, function() {
-                history.back(-1);
             });
         }
     }
