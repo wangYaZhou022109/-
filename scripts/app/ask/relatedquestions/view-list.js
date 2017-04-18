@@ -1,20 +1,16 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
+
 exports.type = 'dynamic';
 exports.bindings = {
     questions: true
 };
 
 exports.events = {
-    'click expert-*': 'details'
+    'click question-*': 'details'
 };
 
 exports.handlers = {
-    details: function(id, e, target) {
-        var region;
-        var el = $(target).parents('.activity-category')[0];
-        region = new D.Region(this.app, this.module, el, id);
-        region.show('ask/expertdetails', { id: id });
+    details: function(id) {
+        this.app.show('content', 'ask/myquiz/details', { id: id });
     }
 };
 

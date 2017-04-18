@@ -5,15 +5,15 @@ module
 view('main') 
     .section.follow
         .clearfix
-            dl
+            dl > a(id='follow-9' href='javascript:;')
                 dt > echo(follow.contentCount)
-                dd > a(id='follow-9' href='javascript:;') > string('follow') + string('content')
-            dl
+                dd > string('follow') + string('content')
+            dl > a(id='follow-10' href='javascript:;')
                 dt > echo(follow.topicCount)
-                dd > a(id='follow-10' href='javascript:;') > string('follow') + string('topic')
-            dl
+                dd >  string('follow') + string('topic')
+            dl > a(id='follow-11' href='javascript:;')
                 dt > echo(follow.expertCount)
-                dd > a(id='follow-11' href='javascript:;') > string('follow') + string('expert')
+                dd > string('follow') + string('expert')
         ul
             li > a(id='middle-menu-myquiz' href='javascript:;') > string('my') + string('ask-a-question')
             li > a(id='middle-menu-myshares' href='javascript:;') > string('my') + string('article')
