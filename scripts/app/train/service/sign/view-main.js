@@ -79,6 +79,6 @@ exports.dataForActions = {
     },
 };
 
-exports.actionCallBacks = {
-};
+exports.dataForTemplate = {
 
+};

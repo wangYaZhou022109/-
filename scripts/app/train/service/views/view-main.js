@@ -30,7 +30,7 @@ exports.actions = {
 
 exports.actionCallbacks = {
     twoBring: function() {
-        this.app.viewport.modal(this.module.items.twoBrings);
+        this.app.viewport.modal(this.module.items['two-brings']);
     },
     shuttleBusInformation: function() {
         this.app.viewport.modal(this.module.items.bus);
@@ -39,4 +39,3 @@ exports.actionCallbacks = {
         this.app.viewport.modal(this.module.items.questionnaire);
     },
 };
-

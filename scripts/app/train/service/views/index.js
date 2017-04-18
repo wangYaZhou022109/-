@@ -11,7 +11,7 @@ exports.items = {
     swipe: '',
     main: 'main',
     bus: '',
-    twoBrings: '',
+    'two-brings': '',
     questionnaire: '',
     'train/service/views/commit-task': { isModule: true },
     'train/service/views/school-yearbook': { isModule: true },

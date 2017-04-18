@@ -130,7 +130,7 @@ view('discussion-area')
             .inline-block.com-title > echo('讨论区')
 
 
-view('twoBrings') > form.vertical
+view('two-brings') > form.vertical
     .row
         .col-sm-2
             echo('1.优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新')

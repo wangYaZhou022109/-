@@ -3,7 +3,7 @@ exports.items = {
     search: 'search',
     count: 'count',
     status: '',
-    batchStatus: '',
+    'batch-status': '',
 };
 
 exports.large = true;

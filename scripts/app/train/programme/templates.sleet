@@ -371,11 +371,11 @@ view('editTask') > form.vertical
             label.required > echo('审核人')
         .col-sm-10
             label > echo('评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务')
-    .row > .col-sm-12
-        #tags
-        .btn-group
-            .btn#clearMembers 清空
-            .btn#selectMember 继续添加
+        .row > .col-sm-12
+            #tags
+            .btn-group
+                .btn#clearMembers 清空
+                .btn#selectMember 继续添加
 
 view('uploadTask')
     .row

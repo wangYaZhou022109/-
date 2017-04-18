@@ -29,6 +29,9 @@ exports.store = {
         optionModel: {
             url: '../train/bus-value'
         },
+        classInfo: {
+            url: '../train/class-info/get'
+        },
         state: { data: {} },
         delOptionList: { data: [] },
     },
@@ -38,8 +41,15 @@ exports.store = {
                 state = this.models.state;
             buss.clear();
             state.data.classId = payload.classId;
+            state.changed();
             buss.params = state.data;
             return this.get(buss);
+        },
+        getClassInfo: function() {
+            var classInfo = this.models.classInfo,
+                state = this.models.state;
+            classInfo.params = { id: state.data.classId };
+            return this.get(classInfo);
         },
         editBus: function(payload) {
             var bus = this.models.bus;

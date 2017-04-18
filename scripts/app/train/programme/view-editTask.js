@@ -31,6 +31,16 @@ exports.dataForTemplate = {
         });
         return data.files;
     },
+    task: function(data) {
+        var task = data.task || {};
+        var taskReviewer = task.taskReviewer || [];
+        _.map(taskReviewer || [], function(reviewer) {
+            var obj = reviewer;
+            obj.memberId = obj.approvalMemberId;
+            return obj;
+        });
+        return task;
+    },
 };
 
 exports.events = {
@@ -169,6 +179,27 @@ exports.components = [{
             name: inputName,
             emptyText: '请选择人员',
             tags: tags
+        }
+    };
+}, function() {
+    var data = this.bindings.task.data,
+        memberItem = [];
+    if (data.members) {
+        _.map(data.members, function(x) {
+            memberItem.push({
+                text: x.auditUserName || x.text,
+                value: x.memberId || x.value
+            });
+        });
+    }
+    return {
+        id: 'auditMembers',
+        name: 'picker',
+        options: {
+            picker: 'members',
+            componentId: 'tags',
+            inputName: 'auditMemberIds',
+            tags: memberItem
         }
     };
 }];

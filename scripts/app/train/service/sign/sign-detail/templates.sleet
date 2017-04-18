@@ -91,7 +91,7 @@ view('status') > form.vertical
         div.col-sm-3
             btn.btn#update > echo('确定')
 
-view('batchStatus') > form.vertical
+view('batch-status') > form.vertical
     input.input(name='id' type='hidden' value=id)
     .layout-mt-small.container
         label.m-right 签到状态
