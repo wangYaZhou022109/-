@@ -1,0 +1,99 @@
+#!handlebars
+
+module > .randomtest-page
+    .randomtest(data-region="randomtest")
+
+view('randomtest')
+    .pull-left
+        .dtree
+            ul
+                li.dtree-opened.dtree-has-child
+                    .dtree-node-content
+                        i.dtree-handler
+                        span 测试题库1
+                        span.sub-title （142）
+                    ul
+                        li.dtree-opened.dtree-has-child
+                            .dtree-node-content
+                                i.dtree-handler
+                                span 测试题库2
+                                span.sub-title （4）
+                            ul
+                                li.dtree-opened
+                                    .dtree-node-content
+                                        i.dtree-handler
+                                        span 中文题库
+                                        span.sub-title （4）
+    .pull-left.relative
+        .clearfix.m-right
+            .pull-right 共20题100分
+        .clearfix.layout-mt-small
+            .h5.strong.pull-left.layout-mr-small 单选
+            .randomtest-item.pull-left.m-right.relative
+                span 高难度
+                span.sub-title.small-font 共48题可用
+                .add-big.randomtest-add.m-top
+                    span 已选20题共200分
+                    span.pointer x
+                    span.pointer#addtest-1 +
+                .add-small.randomtest-add.m-top.opacityhide#addsmall-1
+                    span +
+            .randomtest-item.pull-left.m-right.relative
+                span 高难度
+                span.sub-title.small-font 共48题可用
+                .randomtest-add.m-top
+                    span 已选20题共200分
+                    span.pointer x
+                    span.pointer#addtest-2 +
+                .add-small.randomtest-add.m-top.opacityhide#addsmall-2
+                    span +
+            .randomtest-item.pull-left.relative
+                span 高难度
+                span.sub-title.small-font 共48题可用
+                .randomtest-add.m-top
+                    span 已选20题共200分
+                    span.pointer x
+                    span.pointer#addtest-3 +
+                .add-small.randomtest-add.opacityhide.m-top#addsmall-3
+                    span +
+        .clearfix.layout-mt-small
+            .h5.strong.pull-left.layout-mr-small 多选
+            .randomtest-item.pull-left.m-right.relative
+                span 高难度
+                span.sub-title.small-font 共48题可用
+                .randomtest-add.m-top
+                    span 已选20题共200分
+                    span.pointer x
+                    span.pointer#addtest-4 +
+                .add-small.randomtest-add.opacityhide.m-top#addsmall-4
+                    span +
+            .randomtest-item.pull-left.m-right.relative
+                span 高难度
+                span.sub-title.small-font 共48题可用
+                .randomtest-add.m-top
+                    span 已选20题共200分
+                    span.pointer x
+                    span.pointer#addtest-5 +
+                .add-small.randomtest-add.m-top.opacityhide#addsmall-5
+                    span +
+            .randomtest-item.pull-left.relative
+                span 高难度
+                span.sub-title.small-font 共48题可用
+                .randomtest-add.m-top
+                    span 已选20题共200分
+                    span.pointer x
+                    span.pointer#addtest-6 +
+                .add-small.randomtest-add.m-top.opacityhide#addsmall-6
+                    span +
+        .addtest#addtest-block
+            .clearfix.m-top
+                .pull-left 数量
+                .pull-right.small-font.sub-title 共48题可用
+            input.input.w-full
+            .clearfix.m-top
+                .pull-left 分数
+                .pull-right.small-font.sub-title 共100分可用
+            input.input.w-full.m-top
+            .text-right.m-top
+                .btn.small#cancel 取消
+                .btn.small 添加

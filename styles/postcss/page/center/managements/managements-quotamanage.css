@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-quotamanage {
+    & .quotamanage {
         & input {
             &.r-input {
                 margin-right: 0;

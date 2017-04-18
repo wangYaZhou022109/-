@@ -22,7 +22,7 @@ exports.dataForTemplate = {
                 subject.imageUrl = 'images/default-cover/default_spceial.jpg';
             }
             subject.studyDays = subject.studyDays || '暂无';
-            subject.url = subject.url || '#/study/subject/detail/' + subject.id;
+            // subject.url = subject.url || '#/study/subject/detail/' + subject.id;
             return subject;
         });
         return subjects;
@@ -41,7 +41,8 @@ exports.dataForTemplate = {
 
 exports.events = {
     'click order-*': 'order',
-    'click topic-*': 'selectTopic'
+    'click topic-*': 'selectTopic',
+    'click openDetail-*': 'openDetail'
 };
 
 exports.handlers = {
@@ -55,5 +56,11 @@ exports.handlers = {
             param = { topicId: id };
         if (search.topicId === param.topicId) delete param.topicId;
         this.module.dispatch('search', param);
+    },
+    openDetail: function(id) {
+        var subject = _.find(this.bindings.subjects.data || [], { id: id }),
+            url = subject.url || '#/study/subject/detail/' + id;
+        window.open(url);
+        if (subject.url) this.module.dispatch('register', { id: id });
     }
 };

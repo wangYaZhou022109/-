@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-trainsummary {
+    & .trainsummary {
         & table.table {
             & th {
                 text-align: center;
