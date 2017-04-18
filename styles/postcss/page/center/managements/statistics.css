@@ -1,0 +1,18 @@
+.statistics-page {
+    & .statistics {
+        & .statistics-head {
+            height: var(--nav-height);
+            line-height: var(--nav-height);
+            background-color: var(--black);
+            color: var(--white);
+        }
+        & ul > .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            height: var(--large-space);
+            line-height: var(--large-space);
+        }
+    }
+}

@@ -1,0 +1,7 @@
+#! handlebars
+
+module > .workmarking-page
+    .head(data-region="head")
+
+view('head')
+    .aaa aaa
