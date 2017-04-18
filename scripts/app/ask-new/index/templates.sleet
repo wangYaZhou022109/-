@@ -18,19 +18,22 @@ view('main')
         li.tabs-cont-item#tabs-cont-item-1.active
             .comment-list.ask-list > ul
                 li
-                    .user-pic > img(src='images/1.png')
+                    .user-pic
+                        img.pointer(src='images/1.png')
                     .comment-content
-                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                        .user-info
-                            a(href='javascript:;') 我
-                            span ·提问·
-                            span.sub-text 2016-09-09 09:09
-                        .comment-operation
-                            .pull-left > .sub-text 关联标签：标签名称
-                            .text-right
-                                .item > span.color-ing 待审核
-                                .item 删除
+                        img.boutique.pull-left(src="images/boutique.png")
+                        .comment-boutique
+                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .user-info
+                                a(href='javascript:;') 我
+                                span ·提问·
+                                span.sub-text 2016-09-09 09:09
+                            .comment-operation
+                                .pull-left > .sub-text 关联标签：标签名称
+                                .text-right
+                                    .item > span.color-ing 待审核
+                                    .item 删除
                 li
                     .user-pic > img(src='images/1.png')
                     .comment-content

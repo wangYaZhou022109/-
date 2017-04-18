@@ -1,0 +1,25 @@
+.addcarinfo-page {
+    & .addcarinfo-title {
+        & .addcarinfo-padding {
+            padding-right: 1em;
+        }
+    }
+    & .addcarinfo-content {
+        & .addcarinfo-item {
+            padding: calc(var(--large-space) /2) var(--large-space);
+            width: 95%;
+            & .s-padding {
+                padding-bottom: calc(var(--large-space)/4);
+            }
+        }
+        & .addcarinfo-close {
+            width: calc(var(--base-gap) /2);
+            height: calc(var(--base-gap) /2);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: calc(var(--base-gap) /2);
+            color: var(--border-color);
+        }
+    }
+}

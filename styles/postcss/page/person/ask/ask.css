@@ -12,7 +12,14 @@
         font-size: var(--small-font);
         border-bottom: 1px solid var(--border-color);
     }
+    & .boutique {
+        width: calc(var(--space) *2);
+        height: calc(var(--space) *2);
+    }
 
+    & .comment-boutique {
+        padding-left: calc(var(--small-font) *2);
+    }
     & .comment-text {
         @apply --clearfix;
 

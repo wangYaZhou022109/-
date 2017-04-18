@@ -18,7 +18,7 @@ view('addevaluation')
             .relative
                 input.input.date.w-full
                 .iconfont.icon-riqi
-        .text-center.layout-mt-small > .btn.radius.bg-gray 搜索
+        .text-center.layout-mt-small > .btn.radius 搜索
     table.table
         tr
             th 选择

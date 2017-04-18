@@ -20,5 +20,11 @@
         & .introduce {
             line-height: var(--input-height);
         }
+        & .progress-box {
+            width: 70%;
+            & .progress-bar {
+                background-color: var(--font-sub-color);
+            }
+        }
     }
 }
