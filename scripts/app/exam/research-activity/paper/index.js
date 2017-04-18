@@ -11,7 +11,10 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             if (payload.researchId) {
-                this.models.research.params = { researchId: payload.researchId };
+                this.models.research.params = {
+                    researchId: payload.researchId,
+                    businessId: payload.businessId
+                };
                 return this.get(this.models.research);
             }
             return '';
