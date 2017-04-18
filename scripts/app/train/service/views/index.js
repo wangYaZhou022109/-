@@ -7,7 +7,7 @@ exports.items = {
     'class-notice': 'class-notice',
     'curriculum-schedule': 'curriculum-schedule',
     'discussion-area': 'discussion-area',
-    'online-rresources': 'online-rresources',
+    'online-resources': 'online-resources',
     swipe: '',
     main: 'main',
     bus: '',
@@ -17,7 +17,8 @@ exports.items = {
     'train/service/views/school-yearbook': { isModule: true },
     banner: 'banner',
     'train/service/views/courseware': { isModule: true },
-    'research-tips': ''
+    'research-tips': '',
+    'train/service/views/online-attach': { isModule: true }
 };
 
 exports.store = {
@@ -75,6 +76,9 @@ exports.store = {
         offlineCourseList: {
             url: '../train/offline-course'
         },
+        onlineCourseList: {
+            url: '../train/online-course/front'
+        },
         content: {
             data: []
         },
@@ -101,6 +105,7 @@ exports.store = {
                 staff = this.models.staff,
                 offlineThemeList = this.models.offlineThemeList,
                 offlineCourseList = this.models.offlineCourseList,
+                onlineCourseList = this.models.onlineCourseList,
                 me = this;
             this.models.classId.data.classId = classId;
             photos.params = { classId: classId };
@@ -137,6 +142,8 @@ exports.store = {
             this.get(classDetail);
             staff.params.classId = classId;
             this.get(staff);
+            onlineCourseList.params.classId = classId;
+            this.get(onlineCourseList);
         },
         turnPage: function(data) {
             var state = this.models.state.data,

@@ -16,12 +16,14 @@ exports.dataForTemplate = {
             now = new Date(),
             tmpDate,
             gb,
-            arr = [];
+            arr = [],
+            url = window.location.protocol + '//' + window.location.host + '/';
         if (bridge.init === 1) {
             this.bindings.content.clear();
             tmpDate = new Date(helpers.date(now) + ' 00:00:00');
             _.map(courseList.data || [], function(data) {
                 var d = data;
+                d.courseUrl = url + '#/study/course/detail/' + d.onlineCourseId;
                 if (d.courseDate >= tmpDate.getTime() && arr.length < 8) {
                     arr.push(d);
                 }
@@ -69,18 +71,18 @@ exports.dataForTemplate = {
     isShowPrevious: function() {
         var offlineCourseList = this.bindings.offlineCourseList.data,
             bridge = this.bindings.bridge.data,
-            index;
+            index = -1;
         if (bridge.init === 0) {
             index = offlineCourseList.findIndex(function(o) {
                 return o.id === bridge.start.id;
             });
         }
-        return index !== 0;
+        return index > 0;
     },
     isShowMore: function() {
         var offlineCourseList = this.bindings.offlineCourseList.data,
             bridge = this.bindings.bridge.data,
-            index;
+            index = -1;
         if (bridge.init === 0) {
             index = offlineCourseList.findIndex(function(o) {
                 return o.id === bridge.end.id;

@@ -15,7 +15,7 @@ module
             .main
                 .subject-detail-main.page-main > .container
                     section.section(data-region='curriculum-schedule')
-                    section.section(data-region='online-rresources')
+                    section.section(data-region='online-resources')
                     section.section(data-region='pannel')
                     section.section(data-region='swipe')
                     section.section(data-region='discussion-area')
@@ -102,16 +102,27 @@ view('curriculum-schedule')
                             compare(type 'eq' 1)
                                 echo(classRoom.classroomName + '   ') 
                             echo(teacherTitle + ':' + teacherName)
-                            .btn.radius(id='courseware-view-'+id) > echo('下载')
+                            .btn.radius(id='courseware-view-'+id) > string('download')
                             compare(onlineCourseStatus 'eq' 1)
-                                a.btn.radius(href=courseUrl + onlineCourseId target='_blank') > echo('查看')
+                                a.btn.radius(href=courseUrl target='_blank') > string('view')
     if(isShowMore)
         a#next > echo('查看更多课程')
 
-view('online-rresources')
+view('online-resources')
     .row
         .col-sm-4
             .inline-block.com-title > echo('在线资源')
+    each(onlineCourseList)
+        .catalog-state-info
+            .item.block
+                echo('[在线课程]')
+                if(required)
+                    echo('[必修]')
+                else
+                    echo(themeName)
+                echo(resourceName)
+                .btn.radius(id='online-attach-'+resourceId) > string('download')
+                a.btn.radius(href=courseUrl target='_blank') > string('view')
 view('pannel')
     .h3 > echo('图库')
     #album.swiper-container
@@ -125,9 +136,7 @@ view('swipe')
     #classphotoSwipe
     
 view('discussion-area')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('讨论区')
+    #comment-area
 
 
 view('two-brings') > form.vertical
