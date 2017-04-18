@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-dateplan {
+    & .dateplan {
         & .dateplan-padding {
             padding: 0 var(--large-space);
         }

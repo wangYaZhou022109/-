@@ -1,0 +1,7 @@
+.mostsign-page {
+    & .mostsign {
+        & select {
+            width: calc(var(--large-space) *8);
+        }
+    }
+}

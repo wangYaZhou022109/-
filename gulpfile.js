@@ -172,7 +172,7 @@ gulp.task('images', ['clean-build'], function() {
 });
 
 gulp.task('font', ['clean-build'], function() {
-    return gulp.src(['font/**/*'])
+    return gulp.src(['styles/font/**/*'])
         .pipe(gulp.dest('./dist/font'));
 });
 

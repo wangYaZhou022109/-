@@ -1,0 +1,78 @@
+#!handlebars
+
+module > .choosepapertopic-page
+    .choosepapertopic-title(data-region="choosepapertopic-title")
+
+view('choosepapertopic-title')
+    .bg-highlight
+        .form.align-left
+            .form-row
+                label 试题描述
+                input.input
+            .choosepapertopic-item
+                .form-row.w-half.pull-left
+                    label.required 所属部门
+                    .content.clearfix
+                        input.pull-left
+                        .btn.pull-left 选择
+                .form-row.w-half.pull-left
+                    label.required 所属题库
+                    .content.clearfix
+                        input.pull-left
+                        .btn.pull-left 选择
+                .form-row.w-half.pull-left
+                    label 试题类型
+                    .conent
+                        select
+                            option 单选
+                            option 多选
+                            option 填空
+                            option 判断
+                            option 问答
+                            option 阅读理解
+                            option 排序
+                            option 连线
+                .form-row.w-half.pull-left
+                    label 难易度
+                    .conent
+                        select
+                            option 全部
+                            option 低
+                            option 中
+                            option 难
+        .text-center > .btn.layout-mt-small 搜索
+    .layout-mt-small
+        table.table
+            tr
+                th > input(type="checkbox")
+                th 试题描述
+            tr
+                td(rowspan="2") > input(type="checkbox")
+                td
+                    span 沃斯比乔丹大，麦瑞比沃斯小。下列陈述中哪一句是正确的？
+                    .small-font.sub-text
+                        p A、麦瑞比乔丹大;
+                        p B、麦瑞比乔丹小;
+                        p C、麦瑞和乔丹一样大;
+                        p D、无法确定麦瑞与乔丹谁大;
+            tr
+                td
+                    .color-error 标准答案:D
+                    span.layout-mr-small 题型：多选
+                    span.layout-mr-small 分数：10
+                    span 难度：高
+            tr
+                td(rowspan="2") > input(type="checkbox")
+                td
+                    span 沃斯比乔丹大，麦瑞比沃斯小。下列陈述中哪一句是正确的？
+                    .small-font.sub-text
+                        p A、麦瑞比乔丹大;
+                        p B、麦瑞比乔丹小;
+                        p C、麦瑞和乔丹一样大;
+                        p D、无法确定麦瑞与乔丹谁大;
+            tr
+                td
+                    .color-error 标准答案:D
+                    span.layout-mr-small 题型：多选
+                    span.layout-mr-small 分数：10
+                    span 难度：高

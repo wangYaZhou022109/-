@@ -33,8 +33,10 @@ exports.store = {
                     subject.changed();
                 });
             }
-            collect.params = { businessId: options.subject.id };
-            return this.get(collect);
+            if (options.subject.id) {
+                collect.params = { businessId: options.subject.id };
+                this.get(collect);
+            }
         },
         collect: function(payload) {
             var collect = this.models.collect;

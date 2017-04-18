@@ -6,13 +6,11 @@ view('main')
     .form > form
         .clearfix.layout-mb-small
             .pull-right.layout-ml-small
-                #  img.block.side-width(src='images/d1.jpg')
-                #  .btn.block.white.border 上传知识封面
                 #headFile
             .overflow
                 .form-row
                     label.required 上传资源
-                    .content > input.input#fileName(name='fileName') + .choice#choice 选择
+                    .content > input.input#fileName(name='fileName' value=knowledge.fileName) + .choice#choice 选择
                     .content.m-top > .small-font
                         .color-error 支持文件类型
                         p
@@ -22,7 +20,7 @@ view('main')
                 .form-row
                     label.required 知识名称
                     .content.icon-choice
-                        input.input.p-right#name(name='name') + .tips 0/60
+                        input.input.p-right#name(name='name' value=knowledge.name) + .tips 0/60
             .form-row
                 label.label.required 所属目录
                 #categoryId
@@ -30,7 +28,7 @@ view('main')
             .form-row
                 label.label 下载积分
                 .content.icon-choice
-                    input.input(name='integral')
+                    input.input(name='integral' value=knowledge.integral)
 
             .form-row.textarea-row
                 label 选择标签
@@ -38,10 +36,11 @@ view('main')
             .form-row.textarea-row
                 label 知识简介
                 .content
-                    textarea.input(name= 'description' rows='3') + .tips 0/3000
-        input#resourceId(type='hidden' name='resourceId')
-        input#fileType(type='hidden' name='fileType')
-        input#type(type='hidden' name='type')
+                    textarea.input(name= 'description' rows='3') > echo(knowledge.description)
+        input#resourceId(type='hidden' name='resourceId' value=knowledge.resourceId)
+        input#fileType(type='hidden' name='fileType' value=knowledge.fileType)
+        input#type(type='hidden' name='type' value=knowledge.type)
+        input(type='hidden' name='id' value=knowledge.id)
 view('upload')
     .row
         .col-sm-12

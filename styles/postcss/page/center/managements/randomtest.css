@@ -1,0 +1,36 @@
+.randomtest-page {
+    & .randomtest {
+        & .randomtest-item {
+            & .randomtest-add {
+                background-color: var(--font-color);
+                padding: calc(var(--large-space) /10) calc(var(--large-space) /4);
+                color: var(--white);
+            }
+            & .add-small {
+                position: absolute;
+                top: -var(--space);
+                left: 0;
+                top: calc(var(--space) *2);
+            }
+            & .opacityhide {
+                opacity: 0;
+            }
+            & .opacityshow {
+                opacity: 1;
+            }
+        }
+    }
+    & .addtest {
+        z-index: 10;
+        width: 40%;
+        background: #fff;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1em;
+        box-shadow: 0px 1px 1px #000, 0px 0px 1px #000, 0px 0px 1px #000,0px 1px 1px #000;
+        display: none;
+    }
+}
