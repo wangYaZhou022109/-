@@ -1,0 +1,15 @@
+.importest-page {
+    & .importest {
+        & .form {
+            width: 60%;
+            & .form-row {
+                & .content {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+    .btn {
+        background-color: var(--color-pass);
+    }
+}
