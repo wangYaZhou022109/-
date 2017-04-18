@@ -15,6 +15,9 @@ exports.events = {
     'click shareTo-*': 'shareTo'
 };
 
+
+
+
 exports.handlers = {
     sharesDetails: function(payload) {
         var data = { },
