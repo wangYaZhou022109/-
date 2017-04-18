@@ -10,7 +10,7 @@ view('list')
                 .img > .img-cont > img(src=headPortrait alt=fullName)
                 h4.text-overflow > echo(fullName)
                 .info 
-                    echo(questionNum) + string('answer') + echo('｜') 
-                    echo(articleNum) + string('ask')  + echo(' ｜')  
+                    echo(questionNum) + string('answer') + echo('｜')
+                    echo(articleNum) + string('ask') + echo('｜')
                     echo(answerNum) + string('article')
         
