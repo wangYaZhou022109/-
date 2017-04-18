@@ -4,7 +4,11 @@ exports.bindings = {
     state: true,
     cla: true,
     allA: true,
-    allB: true
+    allB: true,
+    all: true,
+    downloadA: true,
+    downloadC: true,
+    downloadZ: true
 };
 
 exports.events = {
@@ -46,5 +50,34 @@ exports.dataForTemplate = {
         result.ke = (fenK / reB.length).toFixed(2);
         result.ping = (((fenZ / reA.length) + (fenK / reB.length)) / 2).toFixed(2);
         return result;
+    },
+    exportUrl: function() {
+        var urlA = this.bindings.downloadA.getFullUrl() + '?';
+        var urlC = this.bindings.downloadC.getFullUrl() + '?';
+        var urlZ = this.bindings.downloadZ.getFullUrl() + '?';
+        var params = this.bindings.allA.params;
+        var state = this.bindings.state.data;
+        var token = this.app.global.OAuth.token.access_token;
+        if (state.menu === 'news') {
+            params.classId = this.bindings.state.data.classId;
+            _.map(params, function(v, k) {
+                urlA += (k + '=' + v + '&');
+            });
+            urlA += ('access_token=' + token);
+            return urlA;
+        }
+        if (state.menu === 'exp') {
+            params.classId = this.bindings.state.data.classId;
+            _.map(params, function(v, k) {
+                urlC += (k + '=' + v + '&');
+            });
+            urlC += ('access_token=' + token);
+            return urlC;
+        }
+        if (state.menu === 'reply') {
+            urlZ += ('access_token=' + token);
+            return urlZ;
+        }
+        return null;
     }
 };

@@ -3,7 +3,8 @@ var _ = require('lodash/collection');
 exports.bindings = {
     researchQuestionarys: true,
     download: false,
-    researchQuestionary: true
+    researchQuestionary: true,
+    state: true
 };
 
 exports.components = [{
@@ -44,7 +45,7 @@ exports.events = {
 
 exports.handlers = {
     edit: function(id) {
-        var url = '#/exam/research-activity/research-answer-detail/' + id;
+        var url = '#/exam/research-activity/research-answer/' + id;
         window.open(url, '_blank');
     },
     summary: function() {

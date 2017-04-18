@@ -15,6 +15,13 @@ exports.store = {
         allB: {
             url: '../train/questionnaire-survey/count-b',
         },
+        all: {
+            url: '../train/questionnaire-survey/count-zong',
+        },
+        downloadA: { url: '../train/questionnaire-survey/download/count-a' },
+        downloadB: { url: '../train/questionnaire-survey/download/count-b' },
+        downloadC: { url: '../train/questionnaire-survey/download/count-c' },
+        downloadZ: { url: '../train/questionnaire-survey/download/count-z' },
         state: { data: {} },
     },
     callbacks: {

@@ -12,7 +12,9 @@ exports.routes = {
     'statistics/questionnaire/count/:classId': 'showCount',
     'programme/preview-task/:id': 'previewTask',
     'signup/:id': 'showSignupPage',
-    signup: 'showUnregisterSignupPage'
+    signup: 'showUnregisterSignupPage',
+    'service/views/research-answer/:id': 'showResearchAnswerDetail',
+    'service/views/research-detail/:id': 'showResearchDetail'
 };
 
 exports.showIndex = function(id) {
@@ -63,11 +65,21 @@ exports.showUnregisterSignupPage = function() {
     return this.app.show('content', 'train/unregister-signup');
 };
 
+exports.showResearchDetail = function(fir, id) {
+    return this.app.show('content', 'train/service/views/research-detail', { researchQuestionaryId: id });
+};
+
+exports.showResearchAnswerDetail = function(fir, id) {
+    return this.app.show('content', 'train/service/views/research-answer', { researchRecordId: id });
+};
+
 exports.interceptors = {
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
     'statistics/questionnaire/count/': 'clearHeadAndBottom',
-    'programme/preview-task': 'clearHeadAndBottom'
+    'programme/preview-task': 'clearHeadAndBottom',
+    'service/views/research-answer/': 'clearHeadAndBottom',
+    'service/views/research-detail/': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {

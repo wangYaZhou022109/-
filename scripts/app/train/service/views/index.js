@@ -16,7 +16,8 @@ exports.items = {
     'train/service/views/commit-task': { isModule: true },
     'train/service/views/school-yearbook': { isModule: true },
     banner: 'banner',
-    'train/service/views/courseware': { isModule: true }
+    'train/service/views/courseware': { isModule: true },
+    'research-tips': ''
 };
 
 exports.store = {
@@ -79,6 +80,12 @@ exports.store = {
         },
         bridge: {
             data: { init: 1 }
+        },
+        research: {
+            url: '../train/questionnaire-survey/research-detail'
+        },
+        researchRecord: {
+            url: '../train/questionnaire-survey/get-by-research'
         }
     },
 
@@ -206,6 +213,18 @@ exports.store = {
             questionnaire.params = { classId: classId };
             return this.get(questionnaire);
         },
+        getRecordByResearch: function() {
+            var research = this.models.research,
+                classId = this.models.classId.data.classId,
+                me = this;
+            research.params = { classId: classId };
+            this.models.research.clear();
+            this.models.researchRecord.clear();
+            this.get(research).then(function(data) {
+                D.assign(me.models.researchRecord.params, { researchId: data[0].id });
+                return me.get(me.models.researchRecord);
+            });
+        }
     }
 };
 

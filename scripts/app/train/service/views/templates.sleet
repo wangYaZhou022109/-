@@ -206,3 +206,16 @@ view('bus')
                                     td > .checkbox.no-margin
                                         input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
                                         label(for='check-item'+id)
+
+view('research-tips')
+        div
+            if(research.content)
+                echo(research.content)
+            else
+                echo('暂无学员满意度问卷')
+        div
+            each(research.buttons)
+                if(target)
+                    a(id='button-' + id href=url target=target) > echo(text)
+                else
+                    a(id='button-' + id) > echo(text)

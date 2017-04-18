@@ -12,7 +12,7 @@ exports.title = '汇总统计';
 exports.store = {
     models: {
         summaryDetail: {
-            url: '../exam/research-activity/summary-detail',
+            url: '../train/questionnaire-survey/summary-detail',
             mixin: {
                 getAnswerRecordsByQuestionId: function(questionId) {
                     var researchAnswerRecordMaps = this.data.researchAnswerRecordMaps;
@@ -61,7 +61,6 @@ exports.store = {
         init: function(payload) {
             var summaryDetail = this.models.summaryDetail,
                 questions = this.models.questions;
-
             summaryDetail.clear();
 
             if (payload.summaryDetail) {
