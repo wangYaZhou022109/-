@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 // exports.type = 'form';
 exports.bindings = {
     state: false,
@@ -34,6 +35,16 @@ exports.handlers = {
     },
     addTopic: function(id, e, element) {
         var comp = this.module.items.tags.components.tags;
+        var topics = this.bindings.state.data.topics;
+        var isExist = false;
+        _.forEach(topics, function(obj) {
+            var topic = obj || {};
+            if (topic.value === id) {
+                this.app.message.error('你已选择该话题');
+                isExist = true;
+            }
+        });
+        if (isExist) return;
         comp.addItem({ value: id, text: element.innerText });
     },
     clearTopic: function() {
