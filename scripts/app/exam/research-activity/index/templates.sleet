@@ -7,7 +7,7 @@ module > .class-register-page
         .page-main > .container(data-region='main')
 
 view('banner')
-    .cover.pull-left > img(src='images/default-cover/default_class.jpg')
+    .cover.pull-left > img(src=img)
     .banner-con.pull-left
         .h2.inline-block > echo(research.name)
         .inline-block.layout-ml-small

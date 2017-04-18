@@ -7,6 +7,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        down: { url: '../human/file/download' },
         researchRecords: {
             url: '../exam/research-activity/person-center-list',
             type: 'pageable',
