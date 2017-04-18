@@ -1,3 +1,5 @@
+var _ = require('lodash/collection');
+
 var parseType = function(ext) {
     var types = {
             xls: 4,
@@ -13,6 +15,11 @@ var parseType = function(ext) {
         },
         defaule = 8;
     return types[ext] || defaule;
+};
+
+exports.bindings = {
+    knowledge: true,
+    state: true
 };
 
 exports.events = {
@@ -35,36 +42,55 @@ exports.handlers = {
     }
 };
 
-exports.components = [{
-    id: 'select-topic',
-    name: 'picker',
-    options: {
-        picker: 'topics',
-        inputName: 'topicIds',
-        limit: 4
+exports.components = [function() {
+    var topics = [];
+    var knowledge = this.bindings.knowledge.data;
+    if (knowledge.businessTopics) {
+        _.map(knowledge.businessTopics, function(opt) {
+            var topic = opt;
+            topics.push({ value: topic.topicId, text: topic.topicName });
+        });
     }
-}, {
-    id: 'headFile',
-    name: 'picker',
-    options: {
-        picker: 'upload',
-        inputName: 'cover',
-        data: {
-            btnName: '上传知识封面',
-            btnClass: 'block',
-            defaultCss: 'block, side-width',
-            width: 300,
-            height: 200
+    return {
+        id: 'select-topic',
+        name: 'picker',
+        options: {
+            picker: 'topics',
+            inputName: 'topicIds',
+            limit: 4,
+            topics: topics
         }
+    };
+}, function() {
+    var data = {};
+    var knowledge = this.bindings.knowledge.data;
+    if (knowledge.cover) data.value = knowledge.cover;
+    return {
+        id: 'headFile',
+        name: 'picker',
+        options: {
+            picker: 'upload',
+            inputName: 'cover',
+            data: data
+        }
+    };
+}, function() {
+    var knowledgeCategory = this.bindings.knowledge.data.knowledgeCategory;
+    var categoryId = '';
+    var categoryName = '';
+    if (knowledgeCategory) {
+        categoryId = knowledgeCategory.id;
+        categoryName = knowledgeCategory.name;
     }
-}, {
-    id: 'categoryId',
-    name: 'picker',
-    options: {
-        picker: 'course-category',
-        inputName: 'categoryId',
-        required: true,
-        searchType: 'knowledge',
-        data: { id: '64ce1f1b-9596-4d46-9e17-cf236e7f195e', name: '知识目录test' }
-    }
+    return {
+        id: 'categoryId',
+        name: 'picker',
+        options: {
+            picker: 'course-category',
+            inputName: 'categoryId',
+            required: true,
+            searchType: 'knowledge',
+            data: { id: categoryId, name: categoryName }
+        }
+    };
 }];
