@@ -24,6 +24,7 @@ exports.handlers = {
         }
     },
     report: function(payload) {
+        console.log(payload);
         var id = payload,
             data = { };
         if (id.indexOf('_') !== -1) {
