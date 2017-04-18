@@ -209,6 +209,7 @@ exports.store = {
             } else if (payload.researchQuestionaryId) {
                 researchRecord.params = {
                     researchQuestionaryId: payload.researchQuestionaryId,
+                    businessId: payload.businessId,
                     clientType: PC_TYPE
                 };
                 return this.get(researchRecord).then(function() {
@@ -224,7 +225,8 @@ exports.store = {
                 researchRecord = this.models.researchRecord;
 
             this.models.form.set(D.assign({}, this.models.answer.getData(), {
-                researchQuestionaryId: researchRecord.params.researchQuestionaryId
+                researchQuestionaryId: researchRecord.params.researchQuestionaryId,
+                businessId: researchRecord.params.businessId
             }));
 
             return this.post(this.models.form).then(function() {

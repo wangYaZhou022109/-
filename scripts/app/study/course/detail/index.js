@@ -81,7 +81,9 @@ exports.store = {
                 return me.chain(
                     [me.get(progress),
                     (function() {
-                        var researchIds = _.map(course.findSectionsForType(12), 'resourceId').join();
+                        var researchIdArr = _.map(course.findSectionsForType(12), 'resourceId') || [];
+                        var researchQueIdArr = _.map(course.findSectionsForType(13), 'resourceId') || [];
+                        var researchIds = researchIdArr.concat(researchQueIdArr).join();
                         if (researchIds) {
                             me.models.researchStatus.params = { researchIds: researchIds };
                             me.get(me.models.researchStatus);
