@@ -7,10 +7,10 @@ view('main')
         .pull-left > .title-icon > .iconfont.icon-star
         .right-title
             .home-title-row.horizontail.border
-                .title > echo('学员榜')
+                .title > echo(rankModule.name)
                 .more more
             .title-more
-                span.sub-title 学习时长排行榜
+                span.sub-title 学员榜
 
     ul > each(studyRank)
         li

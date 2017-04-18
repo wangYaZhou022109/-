@@ -58,7 +58,7 @@ view('manage-tabs')
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 学习
+                    p.layout-mt-small.sub-title 学习效果考评
                 li.pull-left#managements-trainsummary
                     .managements-tabs-item
                         .managements-tabs-circle
@@ -104,11 +104,11 @@ view('ordertime')
                     .form-row.specical.pull-left
                         label.label.required 需求调研方式
                         .content > input.input(placeholder="如：工作分析、领导访谈")
-                .form-row.clearfix
+                .form-row
                     label.label.required 往返日期
-                    .content
-                        input.pull-left.w-half(placeholder="2016-12-24  ~  2016-12-25")
-                        .btn 选择日期
+                    .content.w-half
+                        input.input(placeholder="2016-12-24  ~  2016-12-25")
+                        .btn.choice 选择日期
                 .form-row
                     label.label.required 培训目标
                     .content > textarea.w-full(rows="5" placeholder="几句话介绍举办本次培训的目标和背景")
@@ -122,29 +122,24 @@ view('classinfo')
             .classinfo-top
                 .clearfix
                     .pull-left.layout-mr
-                        span.layout-mr-small 培训班名称
+                        span.layout-mr-small 培训班名称：
                         span 培训班名称培训班名称培训班名称
                     .pull-left
-                        span 学习地点：
-                        span 中国移动学院
+                        span 学习地点：中国移动学院
                 .clearfix.layout-mt-small
                     .pull-left.m-right
-                        span.layout-mr-small 培训起止时间
+                        span.layout-mr-small 培训起止时间：
                         span 2015-03-24  ～ 2015-03-24
                     .pull-left.color-error （注：开始时间自动生成为报到日后一天，结束时间自动生成为返程日前一天）
                 .clearfix.layout-mt-small
                     .pull-left.layout-mr
-                        span 学习地点：
-                        span 中国移动学院
+                        span 学习地点：中国移动学院
                     .pull-left.layout-mr
-                        span 客房：
-                        span 暂未分配
+                        span 客房：暂未分配
                     .pull-left.layout-mr
-                        span 餐厅：
-                        span 暂未分配
+                        span 餐厅：暂未分配
                     .pull-left.layout-mr
-                        span 教室
-                        span 暂未分配
+                        span 教室：暂未分配
                 .form.align-left.m-top
                     .clearfix
                         .form-row.pull-left.w-half.special
@@ -221,21 +216,25 @@ view('dateplan')
         section.layout-mt-small
             .clearfix
                 .tag-btn.radius.pull-right.selected 导出安排
-            table.table
-                tr
-                    td(colspan="9")
-                        .pull-left
-                            label.m-right 线下课程安排
-                            select
-                                option 第一周（3月4日~3月6日）
-                                option 第二周（3月4日~3月6日）
-                                option 第三周（3月4日~3月6日）
-                        .pull-right
-                            .tag-btn.radius#weektopic 配置周主题
-                            .tag-btn.radius#addclass 添加课程
-                            .tag-btn.radius 导入课程
+            .clearfix
+                .pull-left
+                    label.m-right 线下课程安排
+                    select
+                        option 第一周（3月4日~3月6日）
+                        option 第二周（3月4日~3月6日）
+                        option 第三周（3月4日~3月6日）
+                .pull-right
+                    .tag-btn.radius#weektopic 配置周主题
+                    .tag-btn.radius#addclass 添加课程
+                    .tag-btn.radius 导入课程
+                    .change-min.inline-block.relative
+                        .change-item.min
                             .inline-block 最小化
-                            .inline-block.minimize -
+                            .inline-block.pointer#minimize-1 -
+                        .change-item.max
+                            .inline-block 最大化
+                            .inline-block.pointer#maximizaton-1 +
+            table.table#minitable-1
                 tr
                     th 日期
                     th 时间
@@ -542,8 +541,8 @@ view('membership')
         section.section
             .tabs.line
                 ul
-                    li#membership-1.active 报名管理
-                    li#membership-2 学员
+                    li#membership-1 报名管理
+                    li#membership-2.active 学员
                     li#membership-3 班务人员
                     li#membership-4 非正式成员
                     li#membership-5 短信发送
@@ -971,7 +970,7 @@ view('classmanage')
                             .tag-btn.active 半天
                             .tag-btn 全天
                         .pull-right
-                            .tag-btn.selected#addattendance-1
+                            .tag-btn.selected#addattendance
                                 | +添加
                             .tag-btn.selected 删除
                     table.table.layout-mt-small
@@ -1531,6 +1530,7 @@ view('learneffect')
                             textarea.text-width(rows="5" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用，掌握情况")
             .text-center
                 .btn 提交
+
 view('trainsummary')
     .trainsummary.container
         .layout-mt-small.border.bottom.dashed

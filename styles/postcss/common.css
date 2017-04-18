@@ -172,6 +172,10 @@ section.section {
     visibility: hidden;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .block {
     display: block;
     margin-left: auto;
@@ -203,6 +207,14 @@ section.section {
     text-align: center;
     margin: var(--large-space) 0;
     color: var(--font-tip-color);
+}
+
+.empty-img {
+    width: 100%;
+    height: 100%;
+    min-height: 14em;
+    background: url(../images/empty.png) no-repeat center center;
+    background-size: contain;
 }
 
 .no-bg {

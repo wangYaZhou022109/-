@@ -1,50 +1,57 @@
 #!handlebars
 
 module > .addunit-page
-    .addunit(data-region="addunit")
+    .tabs.line > ul
+        div(data-region="tabs")
+    .tabs-cont > ul
+        div(data-region="main")
 
-view('addunit')
-    .tabs.line
-        ul
-            li.active#companytype-1 公司类型
-            li#companytype-2 公司类型
-            li#companytype-3 公司类型
-    .tabs-cont
-        ul
-            li
-                .clearfix.layout-mt-small > .pull-right
-                    input(type="checkbox")
-                    label 全选
-                table.table
-                    tr
-                        th 公司名称
-                        th 公司名称
-                        th 公司名称
-                    tr
-                        td 公司名称
-                        td 公司名称
-                        td 公司名称
-                    tr
-                        td 公司名称
-                        td 公司名称
-                        td 公司名称
-                    tr
-                        td 公司名称
-                        td 公司名称
-                        td 公司名称
-                    tr
-                        td 公司名称
-                        td 公司名称
-                        td 公司名称
-                    tr
-                        td 公司名称
-                        td 公司名称
-                        td 公司名称
-                .layout-mt-small
-                    .inline-block.layout-mr
-                        span 剩余额度:
-                        span 5
-                    .inline-block.clearfix
-                        label.addunit-label.pull-left 配置额度：
-                        input.pull-left.m-right
-                        .btn.pull-left 添加
+view('tabs')
+    li.active#company-typeone 公司类型
+    li#company-typetwo 公司类型
+    li#company-typethree 公司类型
+
+view('typeone')
+    li.active#tabs-cont-item-1
+        .clearfix.layout-mt-small > .pull-right
+            input(type="checkbox")
+            label 全选
+        table.table
+            tr
+                th 公司名称
+                th 公司名称
+                th 公司名称
+            tr
+                td 公司名称
+                td 公司名称
+                td 公司名称
+            tr
+                td 公司名称
+                td 公司名称
+                td 公司名称
+            tr
+                td 公司名称
+                td 公司名称
+                td 公司名称
+            tr
+                td 公司名称
+                td 公司名称
+                td 公司名称
+            tr
+                td 公司名称
+                td 公司名称
+                td 公司名称
+        .layout-mt-small
+            .inline-block.layout-mr
+                span 剩余额度:
+                span 5
+            .inline-block.clearfix
+                label.addunit-label.pull-left 配置额度：
+                input.pull-left.m-right
+                .btn.pull-left 添加
+
+view('typetwo')
+    li#tabs-cont-item-2 aaa
+
+view('typethree')
+    li#tabs-cont-item-3 bbb

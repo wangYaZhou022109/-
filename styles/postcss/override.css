@@ -63,6 +63,10 @@
     right: auto;
 }
 
+.pdfViewer {
+    background: white;
+}
+
 .pdfViewer .page {
   border: none;
 }
@@ -74,7 +78,7 @@
   background: white;
   top: 0;
   left: 0;
-  height: 3em;
+  height: 2em;
   z-index: 7;
   box-shadow: 0 2px 5px rgba(0,0,0,.3);
 }
@@ -88,7 +92,7 @@
 .viewerContainer {
     width: 100%;
     position: absolute;
-    top:3em;
+    top:2em;
     overflow: auto;
     z-index: 6;
 }
@@ -96,7 +100,7 @@
 .pdf-progress {
     position: absolute;
     width: 100%;
-    top: 3em;
+    top: 2em;
     background: white;
     height: 3px;
     overflow: hidden;

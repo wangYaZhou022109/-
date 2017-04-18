@@ -11,6 +11,6 @@ exports.buttons = [{
     fn: function() {
         var id = this.bindings.state.examId,
             url = '#/exam/exam/paper/' + id;
-        window.open(url, '_blank');
+        window.open(url);
     }
 }];

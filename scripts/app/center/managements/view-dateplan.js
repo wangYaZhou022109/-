@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.events = {
     'click weektopic': 'showWeektopic',
     'click addclass': 'showAddclass',
@@ -6,7 +6,8 @@ exports.events = {
     'click addtopicclass': 'showAddtopicclass',
     'click addwork': 'showAddwork',
     'click addevaluation-*': 'showAddevaluation',
-    'click addexam': 'showAddexam'
+    'click addexam': 'showAddexam',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -37,5 +38,10 @@ exports.handlers = {
     showAddexam: function() {
         var model = this.module.items['center/managements/addexam'];
         this.app.viewport.modal(model);
+    },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        $(this.$('minimize-' + id)).toggle();
+        $(this.$('maximizaton-' + id)).toggle();
     }
 };

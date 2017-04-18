@@ -1,7 +1,5 @@
 .addunit-page {
-    & .addunit {
-        & .addunit-label {
-            line-height: var(--input-height);
-        }
+    & .addunit-label {
+        line-height: var(--input-height);
     }
 }

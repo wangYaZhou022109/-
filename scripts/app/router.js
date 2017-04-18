@@ -6,7 +6,9 @@ exports.routes = {
     'message/detail/:id': 'showMessageDetail',
     'center/demand': 'showDmand',
     'center/class-service': 'classService',
-    'center/managements': 'showManagements'
+    'center/managements': 'showManagements',
+    'center/managements/statistics': 'showStatistics',
+    'center/managements/workmarking': 'workmarking'
 };
 
 exports.showHome = function() {
@@ -14,11 +16,13 @@ exports.showHome = function() {
 };
 
 exports.previewHome = function(configId) {
+    document.cookie = 'orgId=';
     document.cookie = 'configId=' + configId;
     return this.app.show('content', 'home/default', { configId: configId });
 };
 
 exports.changeHome = function(orgId) {
+    document.cookie = 'configId=';
     document.cookie = 'orgId=' + orgId;
     return this.app.show('content', 'home/default', { orgId: orgId });
 };
@@ -66,4 +70,10 @@ exports.classService = function() {
 };
 exports.showManagements = function() {
     return this.app.show('content', 'center/managements');
+};
+exports.showStatistics = function() {
+    return this.app.viewport.showIt('content', 'center/managements/statistics');
+};
+exports.showStatistics = function() {
+    return this.app.viewport.showIt('content', 'center/managements/workmarking');
 };

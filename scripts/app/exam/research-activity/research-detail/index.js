@@ -8,7 +8,8 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    getCurrentStatus;
+    getCurrentStatus,
+    PC_TYPE = 1;
 
 exports.items = {
     side: 'side',
@@ -206,7 +207,11 @@ exports.store = {
             if (payload.researchRecord) {
                 researchRecord.set(payload.researchRecord);
             } else if (payload.researchQuestionaryId) {
-                researchRecord.params = { researchQuestionaryId: payload.researchQuestionaryId };
+                researchRecord.params = {
+                    researchQuestionaryId: payload.researchQuestionaryId,
+                    businessId: payload.businessId,
+                    clientType: PC_TYPE
+                };
                 return this.get(researchRecord).then(function() {
                     questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));
                     state.init();
@@ -220,7 +225,8 @@ exports.store = {
                 researchRecord = this.models.researchRecord;
 
             this.models.form.set(D.assign({}, this.models.answer.getData(), {
-                researchQuestionaryId: researchRecord.params.researchQuestionaryId
+                researchQuestionaryId: researchRecord.params.researchQuestionaryId,
+                businessId: researchRecord.params.businessId
             }));
 
             return this.post(this.models.form).then(function() {

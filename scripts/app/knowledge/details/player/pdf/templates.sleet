@@ -1,6 +1,6 @@
 #!handlebars
 module
-    div(data-region='main' style='overflow:auto;position:relative;height:400px')
+    .container.relative > .viewerContainer(data-region='main' style='height:36em;')
 
 view('main')
     #viewPdf

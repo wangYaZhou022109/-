@@ -5,9 +5,9 @@ exports.routes = {
     'exam/mark-paper/:id': 'showMarkPaper',
     'exam/score-detail/:id': 'showScoreDetail',
     'research-activity/research-answer/:id': 'showResearchAnswerDetail',
-    'research-activity/research-detail/:id': 'showResearchDetail',
-    'research-activity/index/:id': 'showIndex',
-    'research-activity/paper/:id': 'showResearchPaper'
+    'research-activity/research-detail/:id/:businessId': 'showResearchDetail',
+    'research-activity/paper/:id/:businessId': 'showResearchPaper',
+    'research-activity/index/:id': 'showIndex'
 };
 
 exports.showIndex = function(id) {
@@ -30,16 +30,24 @@ exports.showScoreDetail = function(id) {
     return this.app.viewport.showIt('content', 'exam/exam/score-detail', { examRecordId: id });
 };
 
-exports.showResearchDetail = function(id) {
-    return this.app.viewport.showIt('content', 'exam/research-activity/research-detail', { researchQuestionaryId: id });
+exports.showResearchDetail = function(id, businessId) {
+    return this.app.viewport.showIt('content', 'exam/research-activity/research-detail', {
+        researchQuestionaryId: id,
+        businessId: businessId
+    });
 };
 
 exports.showResearchAnswerDetail = function(id) {
-    return this.app.viewport.showIt('content', 'exam/research-activity/research-answer', { researchRecordId: id });
+    return this.app.viewport.showIt('content', 'exam/research-activity/research-answer', {
+        researchRecordId: id
+    });
 };
 
-exports.showResearchPaper = function(id) {
-    return this.app.viewport.showIt('content', 'exam/research-activity/paper', { researchId: id });
+exports.showResearchPaper = function(id, businessId) {
+    return this.app.viewport.showIt('content', 'exam/research-activity/paper', {
+        researchId: id,
+        businessId: businessId
+    });
 };
 
 exports.showIndex = function(id) {

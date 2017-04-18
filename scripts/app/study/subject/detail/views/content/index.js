@@ -19,6 +19,10 @@ exports.store = {
                 },
                 findSectionsForType: function(type) {
                     return _.filter(this.findAllSections(), { sectionType: type });
+                },
+                findSectionsForId: function(id) {
+                    var sections = _.filter(this.findAllSections(), { id: id }) || [];
+                    return sections[0] || {};
                 }
             }
         },
@@ -48,7 +52,9 @@ exports.store = {
             this.models.subject.set(subject);
             this.models.state.set(options.state || {});
             this.chain([(function() {
-                var researchIds = _.map(me.models.subject.findSectionsForType(12), 'resourceId').join();
+                var researchIdArr = _.map(me.models.subject.findSectionsForType(12), 'resourceId') || [];
+                var researchQueIdArr = _.map(me.models.subject.findSectionsForType(13), 'resourceId') || [];
+                var researchIds = researchIdArr.concat(researchQueIdArr).join();
                 if (researchIds) {
                     me.models.researchStatus.params = { researchIds: researchIds };
                     me.get(me.models.researchStatus).then(function(data) {
