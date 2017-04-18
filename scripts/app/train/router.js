@@ -10,7 +10,9 @@ exports.routes = {
     'class-detail/task-detail/:id': 'showTaskDetail',
     'statistics/task/audit-task/:id': 'showAuditTask',
     'statistics/questionnaire/count/:classId': 'showCount',
-    'programme/preview-task/:id': 'previewTask'
+    'programme/preview-task/:id': 'previewTask',
+    'signup/:id': 'showSignupPage',
+    signup: 'showUnregisterSignupPage'
 };
 
 exports.showIndex = function(id) {
@@ -51,6 +53,14 @@ exports.showAuditTask = function(fir, id) {
 
 exports.previewTask = function(fir, id) {
     return this.app.show('content', 'train/programme/preview-task', { id: id });
+};
+
+exports.showSignupPage = function(classId) {
+    return this.app.show('content', 'train/signup', { classId: classId });
+};
+
+exports.showUnregisterSignupPage = function() {
+    return this.app.show('content', 'train/unregister-signup');
 };
 
 exports.interceptors = {

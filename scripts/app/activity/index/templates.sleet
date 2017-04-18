@@ -36,8 +36,8 @@ view('banner')
 view('filter')
     .container
         .activity-tabs.clearfix
-            .btn.pull-right 报名
-            input.input.pull-right(placeholder='请输入报名码直接报名')
+            .btn.pull-right#signup 报名
+            input.input.pull-right(placeholder='请输入报名码直接报名' name='signup-code')
             ul
                 li#item-(class = if(currentStep.all 'active')) 全部
                 li#item-1(class = if(currentStep.running 'active')) 正在进行

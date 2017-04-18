@@ -24,7 +24,7 @@ view('main')
         .btn#addAllTrainee > echo('添加学员')
         .btn#situation > echo('查看分布')
         .btn#importTrainee > echo('导入')
-        a(href=exportUrl target = "_blank") > .btn > echo('导出')
+        a(href=exportUrl target = '_blank') > .btn > echo('导出')
     table.table
         thead > tr
             th > echo('序号')

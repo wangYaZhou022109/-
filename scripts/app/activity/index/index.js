@@ -46,6 +46,9 @@ exports.store = {
         },
         researchRecord: {
             url: '../exam/research-record/get-by-research'
+        },
+        classSignupInfo: {
+            url: '../train/sign-up/find-by-code'
         }
     },
     callbacks: {
@@ -134,6 +137,12 @@ exports.store = {
             return this.models.researchActivitys.data.find(function(r) {
                 return r.id === payload.id;
             });
+        },
+        getClassSignupInfo: function(payload) {
+            var classSignupInfo = this.models.classSignupInfo;
+            classSignupInfo.clear();
+            classSignupInfo.params = payload;
+            return this.get(classSignupInfo);
         }
     }
 };
