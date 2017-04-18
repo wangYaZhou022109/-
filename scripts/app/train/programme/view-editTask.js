@@ -181,25 +181,4 @@ exports.components = [{
             tags: tags
         }
     };
-}, function() {
-    var data = this.bindings.task.data,
-        memberItem = [];
-    if (data.members) {
-        _.map(data.members, function(x) {
-            memberItem.push({
-                text: x.auditUserName || x.text,
-                value: x.memberId || x.value
-            });
-        });
-    }
-    return {
-        id: 'auditMembers',
-        name: 'picker',
-        options: {
-            picker: 'members',
-            componentId: 'tags',
-            inputName: 'auditMemberIds',
-            tags: memberItem
-        }
-    };
 }];

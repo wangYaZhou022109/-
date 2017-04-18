@@ -73,9 +73,11 @@ exports.dataForActions = {
         var name = $(this.$('name')).val();
         var startTime = $(this.$('startTime')).val();
         var endTime = $(this.$('endTime')).val();
+        var classId = this.bindings.state.data.classId;
         bus.name = name;
         bus.startTime = startTime;
         bus.endTime = endTime;
+        bus.classId = classId;
     }
 };
 
