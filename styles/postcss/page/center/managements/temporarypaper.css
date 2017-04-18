@@ -1,0 +1,50 @@
+.temporarypaper-page {
+    & .temporarypaper-content {
+        & .button-total {
+            line-height: var(--large-space);
+            padding: calc(var(--large-space) /4) 0;
+            background-color: var(--bg-color-2);
+            & .button-item {
+                width: 33.3%;
+            }
+            & .button-item > .iconfont {
+                font-size: calc(var(--small-font) *2);
+            }
+        }
+        & .icons {
+            margin-top: 45%;
+            & .iconfont {
+                font-size: var(--font-title);
+            }
+        }
+        & .score {
+            & input {
+                height: calc(var(--base-gap) /2);
+                line-height: calc(var(--base-gap) /2);
+                width: var(--large-space);
+            }
+        }
+        & .temporarytest {
+            position: relative;
+            & .temporarypaper-slidedown {
+                overflow: hidden;
+                width: 100%;
+                top: 100%;
+                left: 0;
+                height: 0;
+                position: absolute;
+                & table.table {
+                    margin: 0;
+                    & tr {
+                        background: var(--bg-color-2);
+                    }
+                }
+            }
+        }
+        & .temporarytest:hover {
+            & .temporarypaper-slidedown {
+                height: 20em;
+            }
+        }
+    }
+}

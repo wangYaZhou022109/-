@@ -5,8 +5,8 @@ module > .watchsurvey-page
 
 view('watchsurvey')
     .watchsurvey-title
-        p 调研名称：
-        p 调研名称调研名称调研名称
+        p 调研名称：调研名称调研名称调研名称
+        p 已参加人数：50
     .watchsurvey-search.layout-mt-small
         .bg-color-3.search-padding
             .search-item

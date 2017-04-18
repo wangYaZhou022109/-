@@ -46,10 +46,10 @@ view('addexam-titlebar')
 
 view('addexam-content')
     .test.clearfix
-        .w-half.text-center.border.right.pull-left
+        .w-half.text-center.border.right.pull-left.pointer#temporarypaper
             i.iconfont.icon-note.m-right
             span 临时组卷
-        .text-center.w-half.pull-left
+        .text-center.w-half.pull-left#randomtest.pointer
             i.iconfont.icon-tag.m-right
             span 随机组卷
     .clearfix
