@@ -47,7 +47,7 @@ view('list')
                                     form.drop-down-content > .content
                                         .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                         .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                        .item > div(id ='shareTo-bar' + id) > i.iconfont.icon-ask + span 分享到问吧
+                                        #  .item > div(id ='shareTo-bar' + id) > i.iconfont.icon-ask + span 分享到问吧
                             form.comment-reply(id ='comment-reply-' + id)
                                 textarea.input.w-full.block(rows=1 name='t_content' value='')
                                 input.input(type='hidden' name='organizationId' value=organizationId)

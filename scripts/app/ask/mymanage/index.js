@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     mymanage: 'mymanage',
     reviewed: 'reviewed',
@@ -16,6 +17,7 @@ exports.store = {
     models: {
         params: { data: { isOverdue: '1' } },
         mymanage: { url: '../system/topic/find-by-manager' },
+        todayadd: { url: '../ask-bar/my-manage' },
         reviewed: { url: '../ask-bar/my-manage/reviewed' },
         display: { url: '../ask-bar/my-manage/reviewed' },
         audit: { url: '../ask-bar/questionReviewed' },
@@ -24,8 +26,19 @@ exports.store = {
     callbacks: {
         init: function() {
             var mymanage = this.models.mymanage;
+            var todayadd = this.models.todayadd;
+            var me = this;
             // mymanage.set({ id: 1 });
-            return this.get(mymanage);
+            return me.get(mymanage).then(function(data) {
+                var topicList = data[0];
+                var params = [];
+                _.forEach(topicList, function(d) {
+                    params.push(d.id);
+                });
+                todayadd.set({ id: params.toString() });
+                console.log(todayadd);
+                me.get(todayadd);
+            });
         },
         reviewed: function() {
             var reviewed = this.models.reviewed;
