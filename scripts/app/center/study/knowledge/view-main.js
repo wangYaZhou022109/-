@@ -6,14 +6,14 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click edit*': 'edit',
+    'click edit*': 'showEdit'
 };
 
 exports.handlers = {
-    edit: function(data) {
+    showEdit: function(data) {
         var me = this,
             params = me.bindings.list.params;
-        this.app.viewport.ground(this.module.items['course-study/knowledge/add-knowledge'], {
+        this.app.viewport.modal(this.module.items['knowledge/index/modal'], {
             data: { id: data },
             state: 'edit',
             callbacks: function() {
