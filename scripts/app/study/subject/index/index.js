@@ -21,7 +21,8 @@ exports.store = {
         download: {
             url: '../human/file/download'
         },
-        topics: { data: [], url: '../system/topic/hot' }
+        topics: { data: [], url: '../system/topic/hot' },
+        register: { url: '../course-study/course-front/register' }
     },
     callbacks: {
         init: function() {
@@ -49,6 +50,14 @@ exports.store = {
             D.assign(this.models.subjects.params, payload);
             this.models.search.changed();
             return this.get(this.models.subjects);
+        },
+        register: function(paylaod) {
+            var register = this.models.register,
+                me = this;
+            register.set({
+                courseId: paylaod.id
+            });
+            return me.post(register);
         }
     }
 };

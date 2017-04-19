@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-classmanage {
+    & .classmanage {
         & .form-row-width {
             width: 33.3%;
         }
@@ -8,11 +8,15 @@
         }
         & .photos {
             width: 80%;
+            & ul {
+                margin-right: -var(--section-gap);
+            }
             & li {
-                width: 20%;
+                width: 19%;
                 padding-right: var(--section-gap);
                 position: relative;
-                float: left;
+                display: inline-block;
+                vertical-align: top;
                 margin-top: calc(var(--space) * 2);
                 & img {
                     width: 100%;
@@ -24,20 +28,21 @@
                             @apply --fade-in;
                         }
                     }
-                    & .progress {
+                    & .progress-box {
                         width: 80%;
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
                         left: 10%;
-                        & .progress-item {
-                            width: 70%;
-                            height: calc(var(--base-gap)/10);
-                            background-color: var(--white);
+                        & .progress {
+                            height: 5px;
+                        }
+                        & .progress-bar {
+                            background-color: var(--font-color);
                         }
                         & span {
-                            width: 30%;
-                            font-size: .1em;
+                            color: var(--font-color);
+                            font-size: 6px;
                         }
                     }
                 }

@@ -5,8 +5,8 @@ module > .watchexam-page
 
 view('watchexam')
     .watchexam-title
-        p 调研名称：
-        p 调研名称调研名称调研名称
+        p 考试名称：
+        p 考试名称考试名称考试名称
     .exam-total.layout-mt-small
         .examtitle-item
             span 参考人数：

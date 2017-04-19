@@ -7,8 +7,12 @@ exports.items = {
 exports.store = {
     models: { state: {} },
     callbacks: {
-        init: function() {
-            return this.models.state.set({ map: {}, list: [] });
+        init: function(options) {
+            var list = [];
+            if (options.topics) { // 修改时带过来的话题
+                list = options.topics;
+            }
+            return this.models.state.set({ map: {}, list: list });
         },
 
         add: function(payload) {
@@ -40,7 +44,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init');
+    return this.dispatch('init', this.renderOptions);
 };
 
 exports.mixin = {

@@ -1,5 +1,5 @@
 .managements-page {
-    & .managements-publishnotice {
+    & .publishnotice {
         & .qrcode {
             width: calc(var(--section-gap)*2);
             height: calc(var(--section-gap)*2);
