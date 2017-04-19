@@ -185,7 +185,7 @@ gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
         .pipe(gulp.dest('./dist/scripts/pdfjs-dist'));
 });
 
-gulp.task('files', ['clean-build', 'images', 'font', 'pdf-worker'], function() {
+gulp.task('files', ['clean-build', 'images', 'font','kindeditor', 'pdf-worker'], function() {
     return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
         .pipe(gulp.dest('./dist/scripts'));
 });
