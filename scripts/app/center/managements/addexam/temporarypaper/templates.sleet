@@ -113,5 +113,5 @@ view('temporarypaper-content')
                     p C. 城市居民对乡村生活的怀
                     p D. 城市居民对自然生活的向往
             .m-top
-                span.color-error.m-right 难易度：高
-                span.color-error 标准答案： A
+                span.strong.color-error.m-right 难易度：高
+                span.strong.color-error 标准答案： A
