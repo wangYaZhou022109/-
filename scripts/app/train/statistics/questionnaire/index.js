@@ -29,7 +29,7 @@ exports.store = {
             classEvaluate.params = payload;
             state.data.classId = payload;
             this.get(classEvaluate);
-            return this.get(classEvaluates);
+            this.get(classEvaluates);
         },
         updateStartTime: function(payload) {
             var model = this.models.updateManYi,

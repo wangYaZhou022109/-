@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var D = require('drizzlejs'),
+    _ = require('lodash/collection');
 exports.title = '班级详情页';
 exports.items = {
     pannel: 'pannel',

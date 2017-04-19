@@ -21,7 +21,7 @@ exports.handlers = {
         var classId = this.bindings.classId.data.classId;
         this.app.viewport.modal(view, { classId: classId });
     },
-     addCourse1: function() {
+    addCourse1: function() {
         var me = this;
         return this.module.dispatch('getRecordByResearch').then(function() {
             me.app.viewport.modal(me.module.items['research-tips']);

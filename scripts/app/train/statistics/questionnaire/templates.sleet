@@ -28,8 +28,8 @@ view('mainA')
                     dateTime(researchQuestionary.endTime)
             td
                 a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id typeId=type) > echo('查看')
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
 
 view('mainB')
     table.table
@@ -52,6 +52,6 @@ view('mainB')
                 a(id='edit-classEvaluates'+resourceId data-name='id' data-value=id) > echo('查看')
                 echo(' | ')
                 a(href='#/train/statistics/questionnaire/count/'+classId target='_blank') > echo('统计')
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
     
