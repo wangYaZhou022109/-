@@ -28,9 +28,9 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} },
         follow: {
-            url: '../ask-bar/my-share/concern'
+            url: '../ask-bar/question-details/boutique'
         },
-        unfollow: { url: '../ask-bar/my-share/cancel-concern' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' }
     },
     callbacks: {
@@ -115,20 +115,42 @@ exports.store = {
             report.set(data);
             return this.post(report);
         },
+        // follow: function(payload) {
+        //     // var follow = this.models.follow,
+        //     //     me = this,
+        //     //     expert = this.models.expert;
+        //     // follow.set(payload);
+        //     // expert.set({ id: this.models.expert.data.id, concernType: '1' });
+        //     var follow = this.models.follow;
+        //     follow.set(payload);
+        //     return this.put(follow);
+        //     // return this.post(follow).then(function() {
+        //     //     me.app.message.success('关注成功');
+        //     //     me.get(expert);
+        //     // });
+        // },
         follow: function(payload) {
-            // var follow = this.models.follow,
-            //     me = this,
-            //     expert = this.models.expert;
-            // follow.set(payload);
-            // expert.set({ id: this.models.expert.data.id, concernType: '1' });
-            var follow = this.models.follow;
+            var follow = this.models.follow,
+                me = this,
+                details = this.models.details;
             follow.set(payload);
-            return this.put(follow);
-            // return this.post(follow).then(function() {
-            //     me.app.message.success('关注成功');
-            //     me.get(expert);
-            // });
+            details.set({ id: this.models.details.data.id, concernType: '1' });
+            return this.post(follow).then(function() {
+                me.app.message.success('关注成功');
+                me.get(details);
+            });
         },
+        // unfollow: function(payload) {
+        //     var unfollow = this.models.unfollow,
+        //         me = this,
+        //         expert = this.models.expert;
+        //     expert.set({ id: this.models.expert.data.id, concernType: '1' });
+        //     unfollow.set({ id: payload.id, concernType: '1' });
+        //     return this.put(unfollow).then(function() {
+        //         me.app.message.success('取消成功');
+        //         me.get(expert);
+        //     });
+        // }
         unfollow: function(payload) {
             var unfollow = this.models.unfollow;
             unfollow.set(payload);
