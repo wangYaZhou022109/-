@@ -73,7 +73,7 @@ view('main')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section
-        compare(concern.deleteFlag 'eq' 1)
+        compare(details.concernList.length 'gt' 0)
             .btn.block.layout-mt-small.big(id='unfollow-question-'+ id data-name='id' data-value=details.id) > string('unfollow')
         else
             .btn.block.layout-mt-small.big(id='follow-question-'+ id data-name='id' data-value= details.id ) > string('my-follow')

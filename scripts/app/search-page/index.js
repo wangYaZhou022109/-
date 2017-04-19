@@ -1,3 +1,3 @@
 exports.items = {
-    head: 'head'
+    main: 'main'
 };
