@@ -7,8 +7,7 @@ exports.routes = {
     'center/demand': 'showDmand',
     'center/class-service': 'classService',
     'center/managements': 'showManagements',
-    'center/managements/statistics': 'showStatistics',
-    'center/managements/workmarking': 'workmarking'
+    'center/managements/statistics': 'showStatistics'
 };
 
 exports.showHome = function() {
@@ -73,7 +72,4 @@ exports.showManagements = function() {
 };
 exports.showStatistics = function() {
     return this.app.viewport.showIt('content', 'center/managements/statistics');
-};
-exports.showStatistics = function() {
-    return this.app.viewport.showIt('content', 'center/managements/workmarking');
 };

@@ -259,7 +259,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    return this.dispatch('init', this.renderOptions);// 调研
 };
 
 getCurrentStatus = function(id) {

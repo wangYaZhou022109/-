@@ -1,0 +1,95 @@
+#!handlebars
+
+module > .newevaluation-page
+    .newevaluation(data-region="newevaluation")
+
+view('newevaluation')
+    .page-main-wrapper.layout-mb-small
+        .page-side
+            .clearfix
+                span.h4.pull-left.test-list 试题列表
+                select.pull-right.test-list
+                    option 多维度
+                    option 单维度
+            .side-item.m-top
+                a#choosenewevaluation 选择
+                span |
+                a#addnewevaluation 新增
+                span |
+                a 编辑
+                span |
+                a 删除
+            .radio-item
+                .clearfix.m-top
+                    .pull-left
+                        input(type="radio")
+                        label.small-font 维度一维度一维度
+                    .pull-right
+                        i.iconfont.icon-sort-asc.m-right
+                        i.iconfont.icon-sort-desc.text-main-color
+                .m-top
+                    span.active.choice.m-right.m-top 1
+                    span.choice.m-top 2
+                .clearfix.m-top
+                    .pull-left
+                        input(type="radio")
+                        label.small-font 维度二维度二维度
+                    .pull-right
+                        i.iconfont.icon-sort-asc.m-right
+                        i.iconfont.icon-sort-desc.text-main-color
+                .m-top
+                    span.active.choice.m-right.m-top 1
+                    span.choice.m-right.m-top 2
+                    span.choice.m-right.m-top 3
+                    span.choice.m-right.m-top 4
+                .clearfix.m-top
+                    .pull-left
+                        input(type="radio")
+                        label.small-font 维度三维度三维度
+                    .pull-right
+                        i.iconfont.icon-sort-asc.m-right
+                        i.iconfont.icon-sort-desc.text-main-color
+                .m-top
+                    span.active.choice.m-right.m-top 1
+                    span.choice.m-right.m-top 2
+                    span.choice.m-right.m-top 3
+                    span.choice.m-right.m-top 4
+                    span.choice.m-right.m-top 5
+                    span.choice.m-right.m-top 6
+                    span.choice.m-right.m-top 7
+                    span.choice.m-right.m-top 8
+                    span.choice.m-top 9
+            .btn-item.layout-mt
+                .tag-btn.radius.pull-left#choosequestion-1
+                    | +单选
+                .tag-btn.radius.pull-right#choosequestion-2
+                    | +多选
+                .tag-btn.radius.pull-left#choosequestion-3
+                    | +问答
+                .tag-btn.radius.pull-right
+                    | +导入
+            .btn.m-top.w-full 预览
+        .page-main
+            .form.align-left
+                .form-row
+                    label.required 调研名称
+                    input.input
+                .form-row
+                    label.required 考卷须知
+                    textarea.w-full(rows="4")
+            .layout-mt-small
+                .h4.m-bottom 一 维度一试题列表
+                .heading.pull-left.m-right  1 单选
+                .test-content.overflow
+                    span 山水园林城市目前来讲是人类理想的居住环境。为什么山水这么重要呢？因为人的本性里面有对自然亲和的一面。人本来来自于自然。本来就是动物，天然地具有自然性。我们长期居住在钢筋水泥里面，就好像孩子失去了母亲，一旦回归了自然，我们就得到了心里的安慰，就好像孩子找到了母亲一样。根据上述文字，山水园林城市目前之所以是人类理想的居住环境，是因为（    ）。
+                    .layout-mt-small
+                        p A. 人类依恋母亲的自然属性
+                        p B. 人类依赖自然的动物属性
+                        p C. 城市居民对乡村生活的怀念
+                        p D.  城市居民对自然生活的向往
+                .layout-mt-small.clearfix
+                    .icons.w-full.text-right
+                        i.iconfont.icon-sort-asc.m-right
+                        i.iconfont.icon-sort-desc.m-right
+                        i.iconfont.icon-exam.m-right
+                        i.iconfont.icon-trash
