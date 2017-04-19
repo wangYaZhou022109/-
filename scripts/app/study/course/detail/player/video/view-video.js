@@ -21,7 +21,8 @@ exports.components = [function() {
         options: {
             currentTime: currentTime,
             video: {
-                fluid: true, // 自动缩放 aspectRatio
+                height: 520, // 自动缩放 aspectRatio
+                // aspectRatio: true,
                 autoplay: true
             },
         }
