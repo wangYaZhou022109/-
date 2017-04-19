@@ -13,7 +13,11 @@ view('details') > form.vertical
     .row
         .col-sm-4
             .inline-block.com-title > echo('参考人数') :
-            .inline-block > echo(exam.applicantNumber)
+            .inline-block
+                if(exam.applicantNumber)
+                    echo(exam.applicantNumber)
+                else
+                    echo('0')
         .col-sm-4
             .inline-block.com-title > echo('及格分数') :
             .inline-block > echo(exam.passScore)

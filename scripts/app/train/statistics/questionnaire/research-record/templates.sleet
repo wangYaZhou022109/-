@@ -17,7 +17,7 @@ view('details') > form.vertical
                 if(researchQuestionary.num)
                     echo(researchQuestionary.num)
                 else
-                    echo('暂无意见')
+                    echo('0')
 
 view('search') > form.vertical
     .row.m-bottom
