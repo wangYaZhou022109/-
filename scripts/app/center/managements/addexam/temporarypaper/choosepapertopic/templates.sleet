@@ -58,9 +58,10 @@ view('choosepapertopic-title')
             tr
                 td
                     .color-error 标准答案:D
-                    span.layout-mr-small 题型：多选
-                    span.layout-mr-small 分数：10
-                    span 难度：高
+                    .m-top
+                        span.layout-mr-small 题型：多选
+                        span.layout-mr-small 分数：10
+                        span 难度：高
             tr
                 td(rowspan="2") > input(type="checkbox")
                 td
@@ -73,6 +74,7 @@ view('choosepapertopic-title')
             tr
                 td
                     .color-error 标准答案:D
-                    span.layout-mr-small 题型：多选
-                    span.layout-mr-small 分数：10
-                    span 难度：高
+                    .m-top
+                        span.layout-mr-small 题型：多选
+                        span.layout-mr-small 分数：10
+                        span 难度：高

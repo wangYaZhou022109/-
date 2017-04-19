@@ -47,28 +47,28 @@ view('temporarytest')
                 td 操作
             tr
                 td A
-                td
+                td > textarea.w-full
                 td > input(type="radio")
                 td
                     a 高级编辑
                     a 删除
             tr
                 td B
-                td
+                td > textarea.w-full
                 td > input(type="radio")
                 td
                     a 高级编辑
                     a 删除
             tr
                 td C
-                td
+                td > textarea.w-full
                 td > input(type="radio")
                 td
                     a 高级编辑
                     a 删除
             tr
                 td D
-                td
+                td > textarea.w-full
                 td > input(type="radio")
                 td
                     a 高级编辑

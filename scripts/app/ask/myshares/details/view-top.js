@@ -46,10 +46,10 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    follow: function() {
-        this.app.message.success('关注成功！');
-        // this.module.dispatch('refresh');
-    },
+    // follow: function() {
+    //     this.app.message.success('关注成功！');
+    //     // this.module.dispatch('refresh');
+    // },
     unfollow: function() {
         this.app.message.success('取消关注成功！');
         // this.module.dispatch('refresh');

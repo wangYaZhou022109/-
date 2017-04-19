@@ -8,7 +8,7 @@ exports.store = {
         setCareNum: { url: '../ask-bar/question/care-num' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
-        shut: { url: '../ask-bar/question/close-status' },
+        shut: { url: '../ask-bar/myquiz' },
         discuss: { url: '../ask-bar/question-discuss' },
         params: { data: { isOverdue: '1' } }
     },
