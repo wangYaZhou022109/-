@@ -9,7 +9,7 @@
             }
         }
     }
-    .btn {
+    & .btn {
         background-color: var(--color-pass);
     }
 }
