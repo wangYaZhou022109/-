@@ -1,0 +1,41 @@
+#! handlebars
+
+module > .search-page(data-region='main')
+
+view('main') > .container
+    .main-list
+        .filter
+            .item > span 课程
+            .item > span 专题
+            .item > span mooc
+            .item > span 班级
+            .item > span 考试
+            .item > span 调研
+            .item > span 直播
+            .item > span 知识
+            .item > span 问题
+            .item > span 文章
+            .item > span 专家
+            .item > span 话题
+        .layout-mt-small
+            span.sub-text 为您找到相关结果约
+            span.color-pass 100
+            span.sub-text 个
+        ul
+            each(courses)
+                li > a.normal(href='#/study/course/detail/'+id) > .content
+                    .img
+                        .img-cont
+                            img(src=img)
+                        .detail-wrapper
+                            p > @echo(description)
+                            compare(studyType 'eq' 0)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 开始学习
+                            compare(studyType 'eq' 1)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 继续学习
+                            compare(studyType 'eq' 2)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
+                    .text-overflow.title > echo(name)
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + echo(visits)
+                        .item(title='评分') > i.iconfont.icon-star + echo(avgScore)
