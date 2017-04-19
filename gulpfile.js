@@ -93,7 +93,7 @@ gulp.task('files', ['clean-build', 'images', 'font', 'kindeditor', 'pdf-worker']
 });
 
 
-gulp.task('postcss', ['font-bundle'], function() {
+gulp.task('postcss', function() {
     return gulp.src([
             'styles/postcss/main.css'
         ])
@@ -172,13 +172,8 @@ gulp.task('images', ['clean-build'], function() {
 });
 
 gulp.task('font', ['clean-build'], function() {
-    return gulp.src(['styles/font/**/*'])
+    return gulp.src(['font/**/*'])
         .pipe(gulp.dest('./dist/font'));
-});
-
-gulp.task('font-bundle', function() {
-    return gulp.src(['styles/font/**/*'])
-        .pipe(gulp.dest('./bundle/font'));
 });
 
 gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
