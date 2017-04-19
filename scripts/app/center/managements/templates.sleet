@@ -541,7 +541,7 @@ view('membership')
                     li#membership-4 非正式成员
                     li#membership-5 短信发送
             .membership-contents
-                #membership-content-1
+                #membership-content-1.display-none
                     .membership-search.layout-mt
                         .filter-row
                             .filter-item
@@ -617,7 +617,7 @@ view('membership')
                             td 1234567890
                             td 待审核
                             td > a#verify-5 审核
-                #membership-content-2.membership-content-2.display-none
+                #membership-content-2.membership-content-2
                     .membership-search.layout-mt
                         .filter-row
                             .filter-item

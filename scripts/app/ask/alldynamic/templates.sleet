@@ -6,7 +6,6 @@ view('list')
     each(page)
         li
             .user-pic
-                | aaaaa
                 img(src=createUser.headPortrait)
             .comment-content
                 .h4
