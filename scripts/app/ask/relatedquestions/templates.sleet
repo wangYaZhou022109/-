@@ -7,4 +7,4 @@ view('list')
         span.h3 > string('relevant') + string('question')
         .layout-mt-small.m-top > each(questions)
             .block.layout-mt-small.m-top
-                a.text-overflow(href="javascript:;" title=title id='expert-' + id data-name='id' data-value=id  ) > echo(title)
+                a.text-overflow(href="javascript:;" title=title id='question-' + id data-name='id' data-value=id  ) > echo(title)

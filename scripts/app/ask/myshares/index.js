@@ -4,7 +4,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        myshares: { url: '../ask-bar/my-share' },
+        myshares: { url: '../ask-bar/my-share/question' },
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         shut: { url: '../ask-bar/question/close-status' },
@@ -14,7 +14,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var myshares = this.models.myshares;
-            myshares.params = { id: 1 };
+            myshares.set({ id: 1 });
             return this.get(myshares);
         },
         follow: function(payload) {
