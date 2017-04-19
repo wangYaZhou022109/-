@@ -23,7 +23,7 @@ exports.handlers = {
     },
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
-        this.app.viewport.modal(model);
+        this.app.viewport.modal(model, { bindings: this.bindings });
     },
     details: function(id) {
         this.app.show('content', 'ask/expertdetails', { id: id });
