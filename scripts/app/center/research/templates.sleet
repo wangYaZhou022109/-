@@ -21,7 +21,7 @@ view('main') > form
         ul.list-text.border.top > each(researchRecords)
             li.border.bottom
                 .title-row
-                    i.iconfont.icon-task
+                    .img > .img-cont > img(src=imgUrl)
                     .inline-block.title > echo(researchQuestionary.name)
                     .time 调研时间：
                         dateTime(researchQuestionary.startTime) 

@@ -1,0 +1,15 @@
+#!handlebars
+
+module > .addnewevaluation-page
+    .addnewevaluation(data-region="addnewevaluation")
+
+view('addnewevaluation')
+    .form
+        .form-row
+            label.required 维度名称
+            .content
+                input.input
+                .tips 0/10
+        .form-row
+            label 维度描述
+            .content > textarea.w-full(rows="5")
