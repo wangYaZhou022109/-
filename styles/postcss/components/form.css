@@ -22,6 +22,9 @@
         @apply --clearfix;
 
         margin-bottom: calc(var(--space) * 2);
+        &.r-padding {
+            padding-right: calc(var(--large-space) /2);
+        }
 
         & > label,
         & label.label {

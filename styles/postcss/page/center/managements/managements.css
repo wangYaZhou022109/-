@@ -5,12 +5,9 @@
 @import "managements-quotamanage.css";
 @import "managements-publishnotice.css";
 @import "managements-membership.css";
-@import "addstudent.css";
 @import "managements-page.css";
 @import "managements-classmanage.css";
 @import "watchexam.css";
-@import "watchsurvey.css";
-@import "watchevaluate.css";
 @import "watchbring.css";
 @import "managements-trainsummary.css";
 @import "managements-learneffect.css";
@@ -28,7 +25,6 @@
 @import "mostsign.css";
 @import "addcarinfo.css";
 @import "addunit.css";
-@import "exam-verify.css";
 @import "statistics.css";
 @import "temporarypaper.css";
 @import "choosepapertopic.css";

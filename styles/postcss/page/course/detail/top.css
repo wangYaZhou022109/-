@@ -11,6 +11,12 @@
         background-size: cover;
     }
 
+    & .empty-img {
+        height: 36em;
+        background-size: auto;
+        opacity: .65;
+    }
+
     & .player-wrapper {
         position: relative;
         height: 100%;

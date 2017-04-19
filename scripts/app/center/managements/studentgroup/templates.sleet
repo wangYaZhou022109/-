@@ -5,8 +5,8 @@ module > .studentgroup-page
 
 view('studentgroup')
     .studentgroup-title
-        input.input.pull-left(placeholder="请输入分组名称")
-        .btn 添加分组
+        input.tag-height.pull-left(placeholder="请输入分组名称")
+        .btn.tag-height.gray 添加分组
     table.table
         tr
             th 序号

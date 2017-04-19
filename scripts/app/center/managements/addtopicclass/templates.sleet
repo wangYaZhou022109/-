@@ -56,25 +56,25 @@ view('addtopicclass')
 
         .page-main
             .choosetopic.clearfix
-                label.pull-left.m-right.choosetopic-title 选择主题
+                label.pull-left.m-right.tag-height 选择主题
                 .content.overflow
-                    select.w-full.choosetopic-title
+                    select.w-full.tag-height
                         option 主题1
                         option 主题2
             .filter-row.clearfix.m-top.relative
                 .pull-left
-                    .filter-item.w-full.m-bottom.classname
+                    .filter-item.w-full.m-bottom.block
                         label.m-right.pull-left 课程名称
                         input
                     .filter-item.clearfix
                         label.pull-left.m-right 课程分类
                         input.pull-left(placeholder="全部")
-                        .btn.pull-left 选择
+                        .btn.pull-left.gray 选择
                     .filter-item.clearfix
                         label.pull-left.m-right 归属部门
                         input.pull-left(placeholder="全部")
-                        .btn.pull-left 选择
-                .pull-right > .btn.addtopic-btn 搜索
+                        .btn.pull-left.gray 选择
+                .pull-right > .btn.addtopic-btn.radius.gray 搜索
             table.table
                 tr
                     th(colspan="2") 课程名称

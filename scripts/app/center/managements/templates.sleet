@@ -215,11 +215,11 @@ view('dateplan')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
-                .tag-btn.radius.pull-right.selected 导出安排
+                .btn.gray.tag-height.m-bottom.circle-radius.pull-right 导出安排
             .clearfix
                 .pull-left
                     label.m-right 线下课程安排
-                    select
+                    select.tag-select
                         option 第一周（3月4日~3月6日）
                         option 第二周（3月4日~3月6日）
                         option 第三周（3月4日~3月6日）
@@ -438,8 +438,8 @@ view('quotamanage')
                     .quotamanage-content.layout-mt-small
                         .clearfix
                             .pull-right
-                                .tag-btn#addunit 添加单位
-                                .tag-btn 删除
+                                .btn.gray.tag-height#addunit 添加单位
+                                .btn.gray.tag-height 删除
                         table.table
                             tr
                                 th > input(type="checkbox")
@@ -457,11 +457,11 @@ view('quotamanage')
                                 td 2
                                 td > a 删除
                     .quotamanage-footer.text-center.layout-mt-small
-                        .btn 保存
+                        .btn.gray.circle-radius.tag-height 保存
                 #quota-contents-2.quota-contents-2
                     .text-center.layout-mt
                         .h3 当前班级配额方式为整体配额!
-                        .btn.layout-mt 保存
+                        .btn.gray.circle-radius.tag-height.layout-mt 保存
 
 view('publishnotice')
     .publishnotice.container.bg-highlight.overflow
@@ -635,14 +635,14 @@ view('membership')
                     .membership-table.layout-mt-small.clearfix
                         .h5.pull-left.strong 学员列表
                         .pull-right
-                            label.pull-left.add-label.m-right 员工编号
-                            input.tag-btn.pull-left.add-mr
-                            button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn#studentgroup 学员分组
-                            button.btn.tag-btn#addstudent 添加学员
-                            button.btn.tag-btn#entersituation 报名情况
-                            button.btn.tag-btn 导入
-                            button.btn.tag-btn 导出
+                            label.pull-left.m-right.tag-height 员工编号
+                            input.pull-left.tag-height
+                            .btn.pull-left.tag-height.gray.m-right 添加
+                            .btn.tag-btn#studentgroup 学员分组
+                            .btn.tag-btn#addstudent 添加学员
+                            .btn.tag-btn#entersituation 报名情况
+                            .btn.tag-btn 导入
+                            .btn.tag-btn 导出
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -743,10 +743,10 @@ view('membership')
                     .membership-table.layout-mt-small.clearfix
                         .h5.pull-left.strong 班务人员列表
                         .pull-right
-                            label.pull-left.add-label.m-right 员工编号
-                            input.tag-btn.pull-left.add-mr
-                            button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn 人员选择
+                            label.pull-left.tag-height.m-right 员工编号
+                            input.tag-height.pull-left.
+                            .btn.gray.tag-height.pull-left.m-right 添加
+                            .btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -797,10 +797,10 @@ view('membership')
                     .membership-table.layout-mt-small.clearfix
                         .h5.pull-left.strong 学员列表
                         .pull-right
-                            label.pull-left.add-label.m-right 员工编号
-                            input.tag-btn.pull-left.add-mr
-                            button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn 人员选择
+                            label.pull-left.tag-height.m-right 员工编号
+                            input.tag-height.pull-left.
+                            .btn.gray.tag-height.pull-left.m-right 添加
+                            .btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -961,12 +961,12 @@ view('classmanage')
                     .clearfix.layout-mt-small
                         .pull-left
                             label 签到规则：
-                            .tag-btn.active 半天
-                            .tag-btn 全天
+                            .tag-btn.active#toggleday-1 半天
+                            .tag-btn#toggleday-2 全天
                         .pull-right
-                            .tag-btn.selected#addattendance
+                            .btn.small.tag-height.gray#addattendance
                                 | +添加
-                            .tag-btn.selected 删除
+                            .btn.small.tag-height.gray 删除
                     table.table.layout-mt-small
                         tr
                             th > input(type="checkbox")
@@ -1037,8 +1037,8 @@ view('classmanage')
                     section.section
                         .clearfix
                             .pull-right
-                                .tag-btn.selected 导出内部讲师
-                                .tag-btn.selected 导出外部讲师
+                                .btn.gray.tag-height  导出内部讲师
+                                .btn.gray.tag-height  导出外部讲师
                         table.table.layout-mt-small
                             tr
                                 th 课程名称
@@ -1073,13 +1073,13 @@ view('classmanage')
                                 td 456
                                 td > a#classedit-3 编辑
                         .layout-mt.text-center
-                            .btn 保存
+                            .btn.gray 保存
 
                 #classmanage-content-3.display-none
                     section.section
                         .clearfix
                             label.pull-left 班车/订餐信息
-                            .tag-btn.pull-right.selected#addcarinfo-1
+                            .btn.pull-right.gray.tag-height#addcarinfo-1
                                 | +添加
                         table.table.layout-mt-small
                             tr
@@ -1149,7 +1149,7 @@ view('classmanage')
                                 .form-row
                                     label.label.required 说明
                                     .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
-                            .text-center > .btn.bg-gray 提交
+                            .text-center > .btn.gray.tag-height 提交
                 #classmanage-content-5.display-none
                     .container
                         section.section.w-half
@@ -1160,14 +1160,14 @@ view('classmanage')
                                 input(type="radio" name="rank")
                                 label.layout-mr 否
                                 label.strong 显示规则：
-                                select.select-width
+                                select.tag-select
                                     option 显示前十名
                                     option 显示全部
                             .classnotice-content.layout-mt
                                 .strong 班级公告
                                 textarea.m-top.w-full(rows="5")
                             .text-center
-                                .btn.bg-gray.layout-mt-small 保存
+                                .btn.gray.tag-height.layout-mt-small 保存
                 #classmanage-content-6.display-none
                     .container
                         section.section
@@ -1180,24 +1180,26 @@ view('classmanage')
                                 li
                                     .user-pic > img(src="images/1.png")
                                     .comment-content
-                                        .user-info
-                                            a(href='#') 张三
-                                            span 互联网中心
-                                        .comment-text
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                        .comment-operation
-                                            .pull-left > .sub-text 2017-01-17
-                                            .text-right
-                                                span.pointer 置顶
-                                                span |
-                                                span.pointer 精华
-                                                span |
-                                                span.pointer 隐藏
-                                                span |
-                                                span.pointer#reply-1 回复
-                                                span |
-                                                span.pointer 删除
+                                        img.boutique.pull-left(src="images/boutique.png")
+                                        .comment-boutique
+                                            .user-info
+                                                a(href='#') 张三
+                                                span 互联网中心
+                                            .comment-text
+                                                | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                                | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                            .comment-operation
+                                                .pull-left > .sub-text 2017-01-17
+                                                .text-right
+                                                    span.pointer 置顶
+                                                    span |
+                                                    span.pointer 精华
+                                                    span |
+                                                    span.pointer 隐藏
+                                                    span |
+                                                    span.pointer#reply-1 回复
+                                                    span |
+                                                    span.pointer 删除
                                         .comment-reply#comment-reply-1
                                             textarea.input.w-full.block(rows=1)
                                             .btn 回复
@@ -1241,8 +1243,7 @@ view('classmanage')
                                                     .progress-bar(style="width:100%")
                                                     span 100%
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）点击可修改
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）点击可修改")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
@@ -1252,43 +1253,37 @@ view('classmanage')
                                                     .progress-bar(style="width:80%")
                                                     span 80%
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
 
 
 view('evaluate')
@@ -1297,8 +1292,8 @@ view('evaluate')
             .tabs.line
                 ul
                     li#evaluate-1 调查问卷
-                    li#evaluate-2.active 两个带来
-                    li#evaluate-3 学习详情
+                    li#evaluate-2 两个带来
+                    li#evaluate-3.active 学习详情
                     li#evaluate-4 作业管理
             .evaluate-contents
                 #evaluate-content-1.display-none
@@ -1359,7 +1354,7 @@ view('evaluate')
                                     i.iconfont.icon-note
                                 td 100%
                                 td > a 查看
-                #evaluate-content-2
+                #evaluate-content-2.display-none
                     .evaluate-search.layout-mt
                         .filter-row
                             .filter-item
@@ -1368,7 +1363,7 @@ view('evaluate')
                             .filter-item
                                 label 姓名
                                 input.input
-                            .filter-item
+                            .filter-item.clearfix
                                 label 单位
                                 input.input
                             .filter-item
@@ -1434,7 +1429,7 @@ view('evaluate')
                                     td 主题主题主题主题主题主题主题
                                     td 主题主题主题主题主题主题
                                     td > a#watchbring-5 查看
-                #evaluate-content-3.display-none
+                #evaluate-content-3
                     .container
                         .layout-mt-small
                             table.table
@@ -1523,7 +1518,7 @@ view('learneffect')
                         .content
                             textarea.text-width(rows="5" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用，掌握情况")
             .text-center
-                .btn 提交
+                .btn.circle-radius.gray 提交
 
 view('trainsummary')
     .trainsummary.container
@@ -1532,7 +1527,7 @@ view('trainsummary')
             p * 主要内容包括培训项目设计实施情况、评估结果及项目成果、学员对集团业务、运营等方面的建议等。
             p * 该总结内容将定期呈报集团领导及相关部门领导审阅参考，请主办部门培训联系人全面参与和最终把关。
         .clearfix.m-top
-            .btn.radius.pull-right 导出培训总结
+            .btn.circle-radius.tag-height.gray.pull-right 导出培训总结
         .trainsummary-content.container
             h2.text-center XX培训班培训项目总结报告
             .layout-mt-small
@@ -1579,8 +1574,8 @@ view('trainsummary')
                         table.table
                             tr > th(colspan="2") 在线课程
                             tr
-                                td 编号
-                                td 课程名称
+                                td.strong 编号
+                                td.strong 课程名称
                             tr
                                 td 1
                                 td 111111111111111
@@ -1640,7 +1635,7 @@ view('trainsummary')
                             p.strong 优秀学员（选填）
                             .clearfix
                                 p.pull-left 本次培训中，
-                                p.pull-left ___________________________
+                                input.pull-left.border.bottom
                                 p.pull-left 表现突出,被评为优秀学员。
                             p 例子：本次培训中，某某公司某某人在小组研讨、汇报答辩中表现突出，被评为“优秀学员”。
                     .item
@@ -1700,5 +1695,5 @@ view('trainsummary')
                         .h5.strong.m-top.text-right 日期：
                             span 2016-12-22
                 .text-center
-                    .btn.m-right 保存
-                    .btn 提交
+                    .btn.circle-radius.m-right.tag-height.gray 保存
+                    .btn.circle-radius.m-right.tag-height.gray 提交

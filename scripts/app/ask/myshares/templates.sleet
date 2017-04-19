@@ -13,23 +13,23 @@ view('list')
             li
                 .user-pic > img(src='images/d2.jpg')
                 .comment-content
-                    .h4 > a(id='myshares-details-' + id + '_' + problem.id ) > echo(problem.title)
+                    .h4 > a(id='myshares-details-' + id + '_' + id ) > echo(title)
                     .comment-text
                         compare(thumbnail.length 'gt' 0)
                             img(src=thumbnail)
-                        @echo(problem.content) 
+                        @echo(content) 
                     #  > echo(problem.content)
                     .user-info
                         a(href='javascript:;') > echo('我')
-                        span > echo('·分享·')
+                        span > echo('·的文章·')
                         span.sub-text > data(enjoyTime)
                     .comment-operation
                         .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                         .text-right
                             compare(concernNum 'gt' 0)  
-                                .item(id='trend-unfollow-1_' + problem.id data-name='id' data-value='1_' + problem.id ) > echo('+') + string('unfollow')
+                                .item(id='trend-unfollow-1_' + id data-name='id' data-value='1_' + problem.id ) > echo('+') + string('unfollow')
                             else
-                                .item(id='trend-follow-1_'  + problem.id data-name='id' data-value='1_' + problem.id) > echo('+') + string('follow')
+                                .item(id='trend-follow-1_'  + id data-name='id' data-value='1_' + problem.id) > echo('+') + string('follow')
                             .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                             #  .item
                             #      .drop-down-wrapper
@@ -46,7 +46,7 @@ view('list')
                                         .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                         .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                         .item > div(id ='shareTo-bar' + id) > i.iconfont.icon-ask + span 分享到问吧
-                            .item > span(id = 'del-question-' + problem.id data-name='id' data-value=problem.id) > string('delete')
+                            .item > span(id = 'del-question-' + id data-name='id' data-value=problem.id) > string('delete')
                             form.comment-reply(id ='comment-reply-' + id)
                                 textarea.input.w-full.block(rows=1 name='t_content' value='')
                                 input.input(type='hidden' name='organizationId' value=organizationId)

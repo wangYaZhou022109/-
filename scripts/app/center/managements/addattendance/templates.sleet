@@ -14,7 +14,7 @@ view('addattendance')
             .content
                 input.input(placeholder="默认为班级教室")
         .clearfix
-            .form-row.pull-left.w-half.input-padding
+            .form-row.pull-left.w-half.r-padding
                 label.label.required 签到开始时间
                 .content
                     input.tag-input.w-full(placeholder="2016-01-09 09:00")
@@ -23,7 +23,7 @@ view('addattendance')
                 .content
                     input.tag-input.w-full(placeholder="2016-01-09 09:00")
         .clearfix
-            .form-row.pull-left.w-half.input-padding
+            .form-row.pull-left.w-half.r-padding
                 label.label 生成签到二维码
                 .content
             .form-row.pull-right.w-half
