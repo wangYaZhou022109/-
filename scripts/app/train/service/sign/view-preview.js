@@ -5,6 +5,8 @@ exports.bindings = {
     sign: true
 };
 
+exports.auto = true;
+
 exports.components = [function() {
     var signId = this.bindings.sign.data.id;
     return {

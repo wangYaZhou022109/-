@@ -1,6 +1,7 @@
 exports.bindings = {
     signs: true,
-    sign: false
+    sign: false,
+    state: true
 };
 
 exports.components = [{
@@ -15,9 +16,42 @@ exports.events = {
     'click check-item*': 'checkItem',
     'click detail*': 'detail',
     'click leave*': 'leave',
+    'click checkout1': 'checkout1',
+    'click checkout2': 'checkout2',
+    'click checkout3': 'checkout3',
 };
 
 exports.handlers = {
+    checkout1: function() {
+        var state = this.bindings.state,
+            classId = state.data.classId;
+        state.data.type = 1;
+        this.module.dispatch('editType', 1);
+        this.module.dispatch('signs', { type: 1, classId: classId });
+    },
+    checkout2: function() {
+        var state = this.bindings.state,
+            classId = state.data.classId,
+            me = this;
+        state.data.type = 2;
+        this.module.dispatch('editType', 2);
+        this.module.dispatch('signs', { type: 2, classId: classId }).then(function(data) {
+            if (!data[0] || data[0].items.length === 0) {
+                me.module.dispatch('autoFull').then(function(result) {
+                    if (result[0] > 0) {
+                        me.module.dispatch('signs', { type: 2, classId: state.data.classId });
+                    }
+                });
+            }
+        });
+    },
+    checkout3: function() {
+        var state = this.bindings.state,
+            classId = state.data.classId;
+        state.data.type = 3;
+        this.module.dispatch('editType', 3);
+        this.module.dispatch('signs', { type: 3, classId: classId });
+    },
     addSign: function() {
         var model = this.module.items.edit;
         this.bindings.sign.clear();

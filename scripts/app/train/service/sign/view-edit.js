@@ -23,7 +23,8 @@ exports.actions = {
 exports.dataForActions = {
     save: function() {
         var state = this.bindings.state.data,
-            classId = state.classId;
+            classId = state.classId,
+            type = state.type;
         return {
             classId: classId,
             id: $(this.$$('[name="id"]')).val(),
@@ -32,6 +33,7 @@ exports.dataForActions = {
             endTime: $(this.$$('[name="endTime"]')).val(),
             lateTime: $(this.$$('[name="lateTime"]')).val(),
             place: $(this.$$('[name="place"]')).val(),
+            type: type,
         };
     }
 };

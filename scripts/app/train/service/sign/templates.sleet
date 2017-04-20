@@ -11,9 +11,9 @@ view('main')
         .clearfix.layout-mt-small
             .pull-left
                 label 签到规则
-                .tag-btn.active#half 半天
-                .tag-btn.active 全天
-                .tag-btn.active 不签到
+                a.tag-btn#checkout1 半天
+                a.tag-btn#checkout2 全天
+                a.tag-btn#checkout3 不签到
             .pull-right
                 .btn#addSign > echo('添加')
                 .btn#batchDelete > echo('删除')
