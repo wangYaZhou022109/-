@@ -5,10 +5,10 @@ module > .temporarytest-page
 
 view('temporarytest')
     .form.align-left
-        .form-row.pull-left.w-fourth
-            label.required 试题类型
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 试题类型
             .conent
-                select
+                select.tag-height
                     option 单选
                     option 多选
                     option 填空
@@ -17,22 +17,22 @@ view('temporarytest')
                     option 阅读理解
                     option 排序
                     option 连线
-        .form-row.pull-left.w-fourth
-            label.required 难易度
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 难易度
             .conent
-                select
+                select.tag-height
                     option 全部
                     option 低
                     option 中
                     option 难
-        .form-row.pull-left.w-fourth
-            label.required 试题分数
-            .content > input.input
-        .form-row.pull-left.w-fourth
-            label.required 添至试题库
-            .content.clearfix
-                input.input.pull-left
-                .btn.pull-left.choice 选择
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 试题分数
+            .content > input.input.tag-height
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 添至试题库
+            .content
+                input.input.tag-height
+                .btn.choice.tag-height 选择
         .form-row
             label 试题信息
             textarea.w-full(rows="5")
@@ -74,4 +74,4 @@ view('temporarytest')
                     a 高级编辑
                     a 删除
             tr
-                th(colspan="4") 添加选项时
+                th.text-main-color(colspan="4") 添加选项时

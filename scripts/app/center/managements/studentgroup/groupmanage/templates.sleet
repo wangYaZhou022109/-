@@ -102,13 +102,12 @@ view('groupmanage')
                     input.input
                 .filter-item
                     label 所属单位
-                    select.select-width
+                    select
                         option 全部
                 .filter-item
                     label 姓名
                     input.input
-                .filter-item
-                    .btn 搜索
+                .btn.gray 搜索
             .layout-mt-small
                 table.table
                     tr

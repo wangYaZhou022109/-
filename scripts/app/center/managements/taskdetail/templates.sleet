@@ -19,9 +19,9 @@ view('taskdetail')
                 label 姓名
                 input.input
             .filter-item
-                .btn 查询
+                .btn.radius.gray 查询
     .layout-mt-small.clearfix
-        .btn.small.radius.pull-right 下载全部
+        .btn.small.radius.gray.pull-right 下载全部
     .m-top
         table.table
             tr

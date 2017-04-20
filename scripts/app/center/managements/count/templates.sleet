@@ -6,34 +6,28 @@ module > .count-page
 view('count')
     .count-title.clearfix
         .count-title-item.pull-left.layout-mr
-            span 统计名称:
-            span 培训报到日统计
+            span 统计名称：培训报到日统计
         .count-title-item.pull-left
-            span 统计时间：
-            span 2016-1-9 09：00 至 2016-1-9 15：00
+            span 统计时间：2016-1-9 09：00 至 2016-1-9 15：00
     .count-sub.layout-mt-small.clearfix
         .count-sub-item.pull-left.layout-mr
-            span 当日晚去往地铁:
-            span 8人
+            span 当日晚去往地铁:8人
         .count-sub-item.pull-left
-            span 当日晚去往机场:
-            span 5人
+            span 当日晚去往机场:5人
     .count-search.clearfix.m-top
         .pull-left
             .count-search-item.pull-left.layout-mr
-                span 0205晚餐：
-                span 5人
+                span 0205晚餐：5人
             .count-search-item.pull-left
-                span 0206晚餐：
-                span 5人
+                span 0206晚餐：5人
         .pull-right
             label 登记信息
-            select.m-right
+            select.tag-select.m-right
                 option 当日晚去机场
                 option 0206早餐
                 option 不需要用餐
-            .btn.m-right 查询
-            .btn.m-right 导出
+            .btn.gray.tag-height.m-right 查询
+            .btn.gray.tag-height.m-right 导出
     .count-table.layout-mt-small
         table.table
             tr
