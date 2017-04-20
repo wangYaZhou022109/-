@@ -43,5 +43,5 @@ view('main')
             .btn-row
                 compare(auditStatus 'ne' 2)
                     .btn(id='edit'+id data-name='id' data-value=id) 编辑
-                    i.iconfont.icon-close(id='delete'+id data-name='id' data-value=id)
+                i.iconfont.icon-close(id='delete'+id data-name='id' data-value=id)
     #pager.pagination

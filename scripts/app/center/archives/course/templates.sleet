@@ -11,14 +11,17 @@ view('main')
             thead
                 tr
                     th > setting('person.archives.public.order')
-                    th > setting('person.archives.course.name')
+                    th
+                        compare(businessType 'eq' '0')
+                            setting('person.archives.course.name')
+                        compare(businessType 'eq' '2')
+                            echo('专题名称')
                     th > setting('person.archives.course.source')
                     th > setting('person.archives.course.select')
                     th > setting('person.archives.course.startTime')
                     th > setting('person.archives.course.finishTime')
                     th > setting('person.archives.course.totalTime')
                     th > setting('person.archives.course.status')
-                    th > setting('person.archives.operation')
             tbody > each(progressList)
                 tr
                     td > echo(i)
@@ -37,9 +40,6 @@ view('main')
                             echo('—')
                     td > echo(studyTotalTime)
                     td > map('course-info-study-status' finishStatus)
-                    td
-                        a(id='showDeail-'+courseId data-name='id' data-value=courseId) > setting('person.archives.details')
-                        input(type='hidden' id='courseName'+courseId  value=courseName)
                     else
                         tr > td(colspan='9') > p.text-center > string('no-data')
         #pager.pagination

@@ -28,14 +28,6 @@
                 }
             }
         }
-        & .add-mr {
-            margin-right: 0;
-            cursor: auto;
-            text-align: left;
-        }
-        & .add-label {
-            line-height: var(--input-height);
-        }
         & .tag-btn {
             padding: 0 var(--font-size);
         }
