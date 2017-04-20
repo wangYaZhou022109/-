@@ -69,8 +69,8 @@ view('info')
     .sub-title-row.mt-1.m-bottom
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)
         .inline-block.layout-mr > echo('发布时间: ') + date(course.releaseTime)
-    p.course-info-detail > echo('讲师: ') + echo(course.lecturer)
-    p.course-info-detail > echo('描述: ') + @echo(course.description)
+    p.course-info-detail > echo('讲师: ') + pick(course.lecturer '-')
+    p.course-info-detail > echo('描述: ') + pick(course.description '-')
 
 view('comment')
     #comment-area
@@ -85,7 +85,8 @@ view('download')
                         a(id='viewPdf-'+attachmentId href='javascript:;') > string('view')
                     a(href=downUrl download=name) > string('download')
                 a.text-overflow.underline(title=name) > echo(name)
-
+        else
+            .text-tips 暂无
 
 view('releated-course')
     .clearfix
@@ -100,7 +101,8 @@ view('releated-course')
                     a.normal(href='#/study/course/detail/'+id)
                         .img-cont > img(src=imageUrl)
                     .title.text-overflow(title=name) > echo(name)
-
+        else
+            .text-tips 暂无
 
 view('student')
     .h3 最近TA们也学过
