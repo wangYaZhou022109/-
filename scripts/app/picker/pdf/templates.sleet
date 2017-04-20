@@ -25,4 +25,4 @@ view('viewer')
         #progress.btn(style='display:none;')
         label#progressLabel
     #viewerContainer.viewerContainer(style='height:36em;')
-    .pdfViewer#viewer
+        .pdfViewer#viewer

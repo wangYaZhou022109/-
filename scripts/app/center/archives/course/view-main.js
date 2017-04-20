@@ -67,6 +67,9 @@ exports.dataForTemplate = {
         url += 'businessType=' + businessType + '&';
         url += ('access_token=' + token);
         return url;
+    },
+    businessType: function() {
+        return this.bindings.businessType.value;
     }
 };
 

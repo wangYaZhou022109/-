@@ -7,11 +7,9 @@ view('classedit')
     .layout-mt-small
         .classedit-title.clearfix
             .pull-left
-                span 课程名称
-                span 课程名称课程名称
+                span 课程名称：课程名称课程名称
             .pull-right
-                span 学习方式：
-                soan 面授
+                span 学习方式：面授
         .classedit-form.form.layout-mt-small
             .clearfix
                 .form-row.pull-left.w-half

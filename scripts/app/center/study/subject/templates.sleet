@@ -28,10 +28,11 @@ view('main')
             .title-row
                 .img > .img-cont > img(src=imgUrl)
                 .inline-block.title > echo(courseName)
-                span.custom-color-1 > map('is-required' isRequired)
+                compare(isRequired 'eq' 1)
+                    span.custom-color-1 > map('is-required' isRequired)
                 .time > echo(prefixText)
             .state
-                compare(finishStatus 'eq' '0')
+                compare(finishStatus 'eq' 0)
                     map('course-info-study-status' finishStatus)
                 else
                     echo('累计学习时长：' studyTotalTime)

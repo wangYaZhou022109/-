@@ -5,18 +5,18 @@ module > .addwork-page
 
 view('addwork')
     .form.align-left
-        .form-row
+        .form-row.row-block
             label.label.required 任务名称
             .content
-                input.input
+                input.input.tag-height
                 .tips 0/30
         .clearfix
-            .form-row.pull-left.w-half.start-time
+            .form-row.pull-left.w-half.start-time.row-block.r-padding
                 label.label.required 开始时间
-                .content > input.w-full
-            .form-row.pull-left.w-half
+                .content > input.input.tag-height
+            .form-row.pull-left.w-half.row-block
                 label.label.required 结束时间
-                .content > input.w-full
+                .content > input.input.tag-height
         .form-row
             .clearfix
                 label.label.required.pull-left 任务说明
@@ -66,6 +66,6 @@ view('addwork')
                         .addwork-check-item.m-top
                             input(type="radio" name="person" checked="true")
                             label 指定人
-            .layout-mt-small.form-choice
-                .form-row > .content
-                    input.input + .choice 选择
+            .layout-mt-small
+                .form-row.row-block > .content
+                    input.input.tag-height + .choice 选择
