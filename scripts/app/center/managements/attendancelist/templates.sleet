@@ -42,18 +42,18 @@ view('attendancelist-content')
     .layout-mt-small
         .attendancelist-search.clearfix
             .pull-left
-                input.input.layout-mr-small(placeholder="请输入员工姓名")
+                input.input.tag-height.layout-mr-small(placeholder="请输入员工姓名")
                 label 签到状态
-                select
+                select.tag-height
                     option 全部
                     option 正常
                     option 迟到
                     option 缺勤
                     option 请假
             .pull-right
-                .btn 查询
-                .btn.m-left 导出
-                .btn.m-left#mostsign-1 批量签到
+                .btn.gray.tag-height 查询
+                .btn.gray.tag-height.m-left 导出
+                .btn.gray.tag-height.m-left#mostsign-1 批量签到
         .layout-mt-small
             table.table
                 tr

@@ -68,11 +68,11 @@ view('addclass')
                     label.required 联系电话
                     .content
                         input.input
-    .layout-mt-small
+    .layout-mt-small.clearfix
         .pull-left > label.label 课件（最多上传三个）
         .pull-right
-            .tag-btn.radius.active 选择
-            .tag-btn.radius.active 上传
+            .btn.small.tag-height.gray.circle-radius.m-right 选择
+            .btn.small.tag-height.gray.circle-radius.m-right 上传
             .inline-block.help ?
     table.table
         tr

@@ -1,8 +1,5 @@
 .addattendance-page {
     & .addattendance {
-        & .input-padding {
-            padding-right: calc(var(--large-space)/2);
-        }
         & .form-row {
             & label.label {
                 width: calc(var(--space)*10);

@@ -46,7 +46,7 @@
                         }
                     }
                 }
-                & input {
+                & .check {
                     position: absolute;
                     top: calc(var(--font-title)/3);
                     right: 0;
@@ -54,6 +54,13 @@
                     opacity: 0;
                 }
             }
+        }
+        & .boutique {
+            width: calc(var(--space) *2);
+            height: calc(var(--space) *2);
+        }
+        & .comment-boutique {
+            padding-left: calc(var(--small-font) *2);
         }
     }
 }

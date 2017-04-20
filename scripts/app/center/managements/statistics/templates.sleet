@@ -3,7 +3,7 @@
 module > .statistics-page
     .statistics
         .statistics-head
-            h4.m-left 培训班名称 - 学员满意度调查统计结果
+            .h4.m-left 培训班名称 - 学员满意度调查统计结果
         div(data-region="tabs")
         div(data-region="main")
 

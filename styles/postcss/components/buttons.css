@@ -17,6 +17,12 @@ input,button,select,.btn {
     &.small {
         padding: 0 calc(var(--large-space) / 2);
         font-size: var(--small-font);
+        &.radius {
+            border-radius: 20%/50%;
+        }
+        &.gray {
+            background: var(--font-sub-color);
+        }
     }
 
     &.big {
@@ -32,6 +38,17 @@ input,button,select,.btn {
         margin-right: auto;
         padding: 0;
         text-align: center;
+    }
+    &.circle-radius {
+        border-radius: 20%/50%;
+    }
+    &.gray {
+        background: var(--font-sub-color);
+    }
+    &.tag-height {
+        &.circle-radius {
+            border-radius: 1em;
+        }
     }
 
     &.radius {
@@ -55,7 +72,9 @@ input,button,select,.btn {
     & .iconfont {
         margin-right: calc(var(--space) / 2);
     }
-
+    &.delete {
+        background-color: var(--font-tip-color);
+    }
 }
 
 .btn-white {
@@ -187,4 +206,12 @@ textarea.input {
 .checkbox {
     display: inline-block;
     vertical-align: middle;
+}
+.tag-height {
+    height: var(--large-space);
+    line-height: var(--large-space);
+}
+.tag-select {
+    width: calc(var(--large-space) *6);
+    height: 2em;
 }

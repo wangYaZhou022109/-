@@ -3,7 +3,8 @@ var timeInterval;
 exports.bindings = {
     state: false,
     download: false,
-    time: false
+    time: false,
+    attachment: false
 };
 exports.components = [function() {
     var state = this.bindings.state.data;
@@ -30,10 +31,9 @@ exports.components = [function() {
 }];
 
 exports.dataForTemplate = {
-    section: function(data) {
-        var section = data.state.section;
-        section.url = this.bindings.download.getFullUrl() + '?id=' + section.resourceId + '&type=mp4';
-        return section;
+    url: function(data) {
+        var path = data.attachment.path;
+        return '/' + path + '?type=mp4';
     }
 };
 

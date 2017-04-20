@@ -10,7 +10,7 @@ view('exam-verify')
         .m-top.clearfix.m-bottom
             .pull-left
                 label 审核意见：
-                select
+                select.tag-select
                     option 不同意
                     option 同意
-            .pull-right.r-block > span 申请时间：2017-02-20 09:44
+            .pull-right.m-top > span 申请时间：2017-02-20 09:44

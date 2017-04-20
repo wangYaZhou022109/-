@@ -16,4 +16,16 @@
         height: 2em;
         line-height: 2em;
     }
+    & .btn {
+        &.radius {
+            border-radius: 20%/50%;
+        }
+        &.gray {
+            background: var(--font-sub-color);
+        }
+    }
+    & select {
+        width: calc(var(--large-space) *6);
+        height: 2em;
+    }
 }
