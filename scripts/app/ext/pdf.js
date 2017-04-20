@@ -6,7 +6,7 @@ var D = require('drizzlejs'),
 D.ComponentManager.register('pdf', function(view, el, options) {
     var opt = options || {},
         pageNum = opt.pageNum,
-        scale = opt.scale || 'auto',
+        scale = opt.scale || 'page-width',
         container = el,
         pdfWorkerPath = '/* @echo PDF_WORKER */',
         pdfApplication;
@@ -30,6 +30,7 @@ D.ComponentManager.register('pdf', function(view, el, options) {
             opt.callbacks.updatePage.call(this, window.parseInt(evt.pageNumber));
         }
     });
+
 
     // 获得PDF文件
     pdfApplication = viewer.PDFJS.getDocument(opt.url);
