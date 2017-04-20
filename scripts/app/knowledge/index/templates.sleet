@@ -17,16 +17,13 @@ view('catalog')
 view('sorts')
     .main-list
         .filter
-            .pull-left
-                .item 全部
-                .item word
-                .item pdf
-                .item excel
-                .item mp3
+            .pull-left > each(types)
+                .item(id='type-'+value)(class = if(active 'active'))
+                    span > echo(text)
             .pull-right
-                .item#sort-0 > span 最新
-                .item#sort-1 > span 最热
-                .item#sort-2 > span 好评
+                .item#sort-0(class = if(sortStatus.sort0 'active')) > span 最新
+                .item#sort-1(class = if(sortStatus.sort1 'active')) > span 最热
+                .item#sort-2(class = if(sortStatus.sort2 'active')) > span 好评
 
 view('side')
     .knowledge-upload
@@ -52,7 +49,7 @@ view('side')
     section.section
         .h3.m-bottom 热门标签
         .side-box.tag-group > each(topics)
-            .tag-btn.white > echo(name)
+            .tag-btn.white(id='topic-'+id)(class = if(active 'active')) > echo(name)
     .layout-mt
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)
