@@ -22,8 +22,8 @@ view('list')
         .tag-btn.active(id='check-All' data-name='id' data-value='all' ) > string('all')
         each(topicType)
             a.tag-btn(id='check-' + id data-name='id' data-value=id ) > echo(name)
-    .comment-list.ask-list > each(expertlist)
-        ul
+    .comment-list.ask-list
+        ul > each(expertlist)
             li.expert-item
                 a.normal(href="javascript:;")
                     .img(id='expert-' + id + ',' + member.id data-name='id' data-value=id + id + ',' + member.id) > .img-cont > img(src=member.headPortrait alt=member.fullName)
@@ -32,6 +32,8 @@ view('list')
                     .row > each(topicList) 
                         .tag-btn > echo(name)
                     .sub-text.text-overflow > echo(introduce)
-                .btn.small 关注
-
+                compare(concernList.length 'gt' 0)
+                    .btn.small(id='unfollow-expert' + member.id  data-name='id' data-value=member.id) 已关注
+                else
+                    .btn.small(id='follow-expert'  + member.id  data-name='id' data-value=member.id) 关注
        
