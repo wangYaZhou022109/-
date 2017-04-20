@@ -12,11 +12,13 @@ exports.components = [{
 }];
 
 exports.events = {
-    'click audit-preview*': 'audit',
+    'click downAll': 'attachAll',
 };
 
 exports.handlers = {
-
+    attachAll: function() {
+        this.module.dispatch('attachAll');
+    },
 };
 
 exports.dataForTemplate = {

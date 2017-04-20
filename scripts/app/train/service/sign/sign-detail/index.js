@@ -18,6 +18,9 @@ exports.store = {
         signOne: {
             url: '../train/sign-detail/one'
         },
+        signCount: {
+            url: '../train/sign-detail/count'
+        },
         export: {
             url: '../train/sign-detail/download'
         },
@@ -61,12 +64,16 @@ exports.store = {
         },
         init: function(payload) {
             var signDetail = this.models.signDetail,
-                signOne = this.models.signOne;
+                signOne = this.models.signOne,
+                signCount = this.models.signCount;
             signDetail.params = payload;
             signDetail.set({ id: payload.id });
             signOne.params.id = payload.id;
             signOne.clear();
+            signCount.params.id = payload.id;
+            signCount.clear();
             this.get(signOne);
+            this.get(signCount);
             return this.get(signDetail);
         },
         search: function(payload) {

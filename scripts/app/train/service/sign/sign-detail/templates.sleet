@@ -22,23 +22,23 @@ view('count')
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
                     span 应出勤
-                    span > echo('人')
+                    span > echo(signCount.classNum + '人')
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
                     span 正常签到
-                    span > echo('人')
+                    span > echo(signCount.normal + '人')
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
                     span 迟到
-                    span > echo('人')
+                    span > echo(signCount.late + '人')
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
                     span 请假
-                    span > echo('人')
+                    span > echo(signCount.leave + '人')
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
                     span 未签到
-                    span > echo('人')
+                    span > echo(signCount.notSign + '人')
 
 view('search') > form.vertical
     .layout-mt-small
