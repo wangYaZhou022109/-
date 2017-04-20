@@ -34,6 +34,11 @@ exports.store = {
                 },
                 filterPid: function(pid) {
                     return _.filter(this.data, function(item) { return item.parentId === pid; });
+                },
+                findAllThree: function() {
+                    var me = this;
+                    var pro = function(data) { return me.filterPid(data); };
+                    return _.flatMap(me.filterPid(null), pro);
                 }
             }
         },   // 目录
@@ -45,7 +50,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search;
-            search.set({ orderType: 0 }, true);
+            search.set({ orderType: '0' }, true);
         },
         search: function(payload) {
             var search = this.models.search;

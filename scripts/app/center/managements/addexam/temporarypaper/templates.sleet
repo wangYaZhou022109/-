@@ -14,15 +14,15 @@ view('temporarypaper-title')
         table.table
             tr
                 th 类型
-                th 单选
-                th 多选
-                th 判断
-                th 填空
-                th 问答
-                th 阅读理解
-                th 排序
-                th 连线
-                th 全部
+                th.text-main-color 单选
+                th.text-main-color 多选
+                th.text-main-color 判断
+                th.text-main-color 填空
+                th.text-main-color 问答
+                th.text-main-color 阅读理解
+                th.text-main-color 排序
+                th.text-main-color 连线
+                th.custom-color-3 全部
             tr
                 td 数量
                 td 2

@@ -64,14 +64,14 @@ view('addtopicclass')
             .filter-row.clearfix.m-top.relative
                 .pull-left
                     .filter-item.w-full.m-bottom.block
-                        label.m-right.pull-left 课程名称
+                        label.m-right.pull-left.tag-height 课程名称
                         input
                     .filter-item.clearfix
-                        label.pull-left.m-right 课程分类
+                        label.pull-left.m-right.tag-height 课程分类
                         input.pull-left(placeholder="全部")
                         .btn.pull-left.gray 选择
                     .filter-item.clearfix
-                        label.pull-left.m-right 归属部门
+                        label.pull-left.m-right.tag-height 归属部门
                         input.pull-left(placeholder="全部")
                         .btn.pull-left.gray 选择
                 .pull-right > .btn.addtopic-btn.radius.gray 搜索

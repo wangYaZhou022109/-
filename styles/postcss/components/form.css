@@ -118,5 +118,26 @@
                 margin-bottom: 0;
             }
         }
+        &.row-block {
+            &.w-fourth {
+                width: 25%;
+            }
+            & > label,
+            & label.label {
+                display: block;
+                float: none;
+                width: auto;
+            }
+            & .content {
+                margin-left: 0;
+            }
+            & .input {
+                & + .choice {
+                    height: var(--large-space);
+                    line-height: var(--large-space);
+                    background: var(--font-sub-color);
+                }
+            }
+        }
     }
 }

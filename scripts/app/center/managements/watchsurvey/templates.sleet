@@ -23,8 +23,8 @@ view('watchsurvey')
             .btn.gray 搜索
         .clearfix.layout-mt-small
             .pull-right
-                .btn.circle-radius.gray.tag-height.m-right 汇总统计
-                .btn.circle-radius.gray.tag-height 导出
+                .btn.circle-radius.gray.tag-height.m-right.small 汇总统计
+                .btn.circle-radius.gray.tag-height.small 导出
         table.table.m-top
             tr
                 th 序号

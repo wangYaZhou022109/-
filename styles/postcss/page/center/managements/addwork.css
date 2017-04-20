@@ -9,14 +9,6 @@
             text-align: center;
             line-height: calc(var(--base-gap) /2);
         }
-        & .start-time {
-            padding-right: calc(var(--large-space) /2);
-        }
-        & .form > .form-choice > .form-row {
-            & .content {
-                margin-left: 0;
-            }
-        }
         & .introduce {
             line-height: var(--input-height);
         }

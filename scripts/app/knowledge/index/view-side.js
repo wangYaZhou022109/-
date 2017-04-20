@@ -4,17 +4,25 @@ exports.bindings = {
     talents: true,
     download: false,
     topicIds: 'changeTopics',
+    search: true,
     topics: true
 };
 
 exports.events = {
-    'click upload': 'showUpload'
+    'click upload': 'showUpload',
+    'click topic-*': 'searchTopic'
 };
 
 exports.handlers = {
     showUpload: function() {
         var model = this.module.items['knowledge/index/modal'];
         this.app.viewport.modal(model);
+    },
+    searchTopic: function(topicId) {
+        var tempId = topicId;
+        var currentTopicId = this.bindings.search.data.topicId;
+        if (currentTopicId === topicId) tempId = '';
+        return this.module.dispatch('search', { topicId: tempId });
     }
 };
 
@@ -37,5 +45,14 @@ exports.dataForTemplate = {
             member.head = src;
             return member;
         });
+    },
+    topics: function(data) {
+        var selectTopicId = data.search.topicId;
+        if (!selectTopicId) return data.topics;
+        data.topics.forEach(function(t) {
+            var topic = t || {};
+            if (topic.id === selectTopicId) topic.active = true;
+        });
+        return data.topics;
     }
 };
