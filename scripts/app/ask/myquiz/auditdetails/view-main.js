@@ -81,7 +81,7 @@ exports.dataForActions = {
     },
     praise: function(payload) {
         var data = payload;
-        data.objectType = 1;
+        data.objectType = 2;
         return payload;
     }
 };
