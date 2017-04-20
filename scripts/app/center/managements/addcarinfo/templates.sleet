@@ -20,25 +20,25 @@ view('addcarinfo-title')
 view('addcarinfo-content')
     .addcarinfo-item.border.around.inline-block.m-right.m-top
         .small-font.border.bottom.s-padding.strong 2017/3/1 17:30去集团
-        p.sub-text.small-font 说名内容说名内容说名内容（可为空）
+        textarea.sub-text.small-font.w-full 说名内容说名内容说名内容（可为空）
     .addcarinfo-close.inline-block —
     .addcarinfo-item.border.around.inline-block.m-right.m-top
         .small-font.border.bottom.s-padding.strong 2017/3/1 17:30去集团
-        p.sub-text.small-font 说名内容说名内容说名内容（可为空）
+        textarea.sub-text.small-font.w-full 说名内容说名内容说名内容（可为空）
     .addcarinfo-close.inline-block —
     .addcarinfo-item.border.around.inline-block.m-right.m-top
         .small-font.border.bottom.s-padding.strong 2017/3/1 17:30去集团
-        p.sub-text.small-font 说名内容说名内容说名内容（可为空）
+        textarea.sub-text.small-font.w-full 说名内容说名内容说名内容（可为空）
     .addcarinfo-close.inline-block —
     .addcarinfo-item.border.around.inline-block.m-right.m-top
         .small-font.border.bottom.s-padding.strong 2017/3/1 17:30去集团
-        p.sub-text.small-font 说名内容说名内容说名内容（可为空）
+        textarea.sub-text.small-font.w-full 说名内容说名内容说名内容（可为空）
     .addcarinfo-close.inline-block —
     .addcarinfo-item.border.around.inline-block.m-right.m-top
         .small-font.border.bottom.s-padding.strong 2017/3/1 17:30去集团
-        p.sub-text.small-font 说名内容说名内容说名内容（可为空）
+        textarea.sub-text.small-font.w-full 说名内容说名内容说名内容（可为空）
     .addcarinfo-close.inline-block —
     .addcarinfo-item.border.around.inline-block.m-right.m-top
         .small-font.border.bottom.s-padding.strong 2017/3/1 17:30去集团
-        p.sub-text.small-font 说名内容说名内容说名内容（可为空）
+        textarea.sub-text.small-font.w-full 说名内容说名内容说名内容（可为空）
     .addcarinfo-close.inline-block —

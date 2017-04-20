@@ -8,26 +8,23 @@ view('watchsurvey')
         p 调研名称：调研名称调研名称调研名称
         p 已参加人数：50
     .watchsurvey-search.layout-mt-small
-        .bg-color-3.search-padding
-            .search-item
-                .inline-block.input-width.input-padding
-                    label.block 员工编号
-                    input.input.m-top
-                .inline-block.input-width.input-padding
-                    label.block 姓名
-                    input.input.m-top
-                .inline-block.input-width.input-padding
-                    label.block 开始时间
-                    .relative
-                        input.input.m-top.date
-                        .iconfont.icon-riqi
-                .btn-block.vertical-bottom.btn-width
-                    label
-                    .btn 搜索
+        .filter-row
+            .filter-item
+                label 员工编号
+                input
+            .filter-item
+                label 姓名
+                input
+            .filter-item
+                label 开始时间
+                .relative.inline-block
+                    input.input.date
+                    .iconfont.icon-riqi
+            .btn.gray 搜索
         .clearfix.layout-mt-small
             .pull-right
-                .btn.m-right 汇总统计
-                .btn 导出
+                .btn.circle-radius.gray.tag-height.m-right.small 汇总统计
+                .btn.circle-radius.gray.tag-height.small 导出
         table.table.m-top
             tr
                 th 序号

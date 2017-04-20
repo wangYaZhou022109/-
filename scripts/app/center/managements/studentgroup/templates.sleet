@@ -4,9 +4,10 @@ module > .studentgroup-page
     .studentgroup(data-region="studentgroup")
 
 view('studentgroup')
-    .studentgroup-title
-        input.input.pull-left(placeholder="请输入分组名称")
-        .btn 添加分组
+    .form > .form-row.row-block.w-half
+        .content
+            input.input.tag-height(placeholder="请输入分组名称")
+            .btn.choice 添加分组
     table.table
         tr
             th 序号
