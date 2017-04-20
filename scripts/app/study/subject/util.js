@@ -49,7 +49,7 @@ exports.setBtn = function(chapters, type, currentSectionId) {
                 sectionType = Number(section.sectionType);
             section.btnText = defaultBtnTexts[sectionType];
             section.btnColor = 'custom-bg-color-2';
-            debugger;
+
             if (progress && progress.id && progress.finishStatus !== 0) {
                 section.btnText = studyBtnTexts[progress.finishStatus] || '继续学习';
                 if (btnTextStudy[sectionType]) section.btnText = btnTextStudy[sectionType].call(this, progress);
