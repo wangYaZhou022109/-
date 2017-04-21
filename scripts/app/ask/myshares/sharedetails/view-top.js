@@ -24,27 +24,21 @@ exports.dataForEntityModule = function(entity) {
 exports.actions = {
     'click follow-question-*': 'follow',
     'click unfollow-question-*': 'unfollow',
-    'click praise-*': 'praise',
-    'click unpraise-*': 'unpraise',
+    'click praise-*': 'praise'
 };
 
 exports.dataForActions = {
     follow: function(payload) {
         var data = payload;
-        data.concernType = 3;
+        data.concernType = 2;
         return data;
     },
     unfollow: function(payload) {
         var data = payload;
-        data.concernType = 3;
+        data.concernType = 2;
         return payload;
     },
     praise: function(payload) {
-        var data = payload;
-        data.objectType = 3;
-        return payload;
-    },
-    unpraise: function(payload) {
         var data = payload;
         data.objectType = 3;
         return payload;

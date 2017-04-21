@@ -171,19 +171,19 @@ exports.actionCallbacks = {
     },
     follow: function() {
         this.app.message.success('关注成功！');
-        this.module.dispatch('init');
+        // this.module.dispatch('init');
     },
     unfollow: function() {
         this.app.message.success('取消成功！');
-        this.module.dispatch('init');
+        // this.module.dispatch('init');
     },
     shut: function() {
-        this.app.message.success('关闭成功!');
-        this.module.dispatch('init');
+        this.app.message.success('删除成功!');
+        // this.module.dispatch('init');
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        this.module.dispatch('init');
+        // this.module.dispatch('init');
     }
 };
 exports.dataForTemplate = {
@@ -207,6 +207,15 @@ exports.dataForTemplate = {
             }
         });
         return page;
+    },
+    countNum: function(data) {
+        // console.log(data);
+        var questions = data.questions,
+            countNum = 0;
+        if (questions.length > 0) {
+            countNum = questions[0].countNum;
+        }
+        return countNum;
     }
 };
 

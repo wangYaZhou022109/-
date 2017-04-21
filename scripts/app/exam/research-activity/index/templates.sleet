@@ -62,7 +62,7 @@ view('main')
                                 dateMinute(endTime)
 
 view('research-tips')
-        div > echo(research.content)
+        div > @echo(research.content)
         div
             each(research.buttons)
                 if(target)

@@ -10,7 +10,11 @@ exports.store = {
     models: {
         expertlist: { url: '../ask-bar/expert/expert-group' },
         user: { url: '../ask-bar/member/find-expert' },
-        topicType: { url: '../system/topic-type' }
+        topicType: { url: '../system/topic-type' },
+        follow: {
+            url: '../ask-bar/question-details/boutique'
+        },
+        unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {
         init: function() {
@@ -31,6 +35,24 @@ exports.store = {
             var expert = this.models.expertlist;
             expert.set(payload);
             return this.post(expert);
+        },
+        follow: function(payload) {
+            var follow = this.models.follow,
+                me = this;
+            follow.set(payload);
+            return this.post(follow).then(function() {
+                me.app.message.success('关注成功');
+                me.app.show('content', 'ask/expert');
+            });
+        },
+        unfollow: function(payload) {
+            var unfollow = this.models.unfollow,
+                me = this;
+            unfollow.set(payload);
+            return this.put(unfollow).then(function() {
+                me.app.message.success('取消成功');
+                me.app.show('content', 'ask/expert');
+            });
         }
     }
 };

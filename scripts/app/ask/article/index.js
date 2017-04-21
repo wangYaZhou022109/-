@@ -89,10 +89,9 @@ exports.store = {
             article.set(data);
             this.post(article).then(function() {
                 me.app.message.success('操作成功');
-                // me.app.show('content', 'ask/content');
                 setTimeout(function() {
-                    window.location.reload();
-                }, 1000);
+                    me.app.show('content', 'ask/content');
+                }, 2000);
             });
         }
     }
