@@ -6,7 +6,8 @@ exports.bindings = {
     down: true,
     gensees: true,
     exams: true,
-    researchActivitys: true
+    researchActivitys: true,
+    examOfUser: false
 };
 
 exports.events = {
@@ -47,8 +48,9 @@ exports.handlers = {
     showExamPaper: function(id) {
         var mod = this.module.items['exam-tips'],
             me = this;
-        return this.module.dispatch('getExamById', { id: id }).then(function(data) {
-            me.app.viewport.modal(mod, { exam: data });
+        return this.module.dispatch('getExamById', { id: id }).then(function() {
+            var examOfUser = me.bindings.examOfUser.data;
+            me.app.viewport.modal(mod, { exam: examOfUser });
         });
     },
     showResearchIndex: function(id) {
