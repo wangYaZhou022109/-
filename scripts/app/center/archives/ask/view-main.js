@@ -15,6 +15,9 @@ exports.dataForTemplate = {
         _.map(data.list || [], function(role, i) {
             var r = role;
             r.i = i + 1 + ((pageNum - 1) * 10);
+            r.integralScore = r.integralScore ? r.integralScore : '0';
+            r.discussNum = r.discussNum ? r.discussNum : '0';
+            r.careNum = r.careNum ? r.careNum : '0';
         });
         return data.list;
     },
