@@ -3,7 +3,8 @@ D = require('drizzlejs');
 jQuery = require('jquery');
 
 D.ComponentManager.register('uploader', function(view, el, options) {
-    var model = view.bindings[options.model],
+    var instance,
+        model = view.bindings[options.model],
         url = model.getFullUrl(),
         opt = D.assign({}, {
             url: url,
@@ -40,7 +41,32 @@ D.ComponentManager.register('uploader', function(view, el, options) {
             }
         }, options);
     jQuery(el).pluploadQueue(opt); // this is return document Object
-    return jQuery(el).pluploadQueue(); // this is return pluploadQueue Object
+    instance = jQuery(el).pluploadQueue(); // this is return pluploadQueue Object
+
+    instance.bind('Error', function(it, error) {
+        /*eslint-disable */
+        if (error.code === plupload.HTTP_ERROR) {
+            ajax.handleError(window.app, error.status, error.response && JSON.parse(error.response));
+        }
+        if (error.code === plupload.FILE_SIZE_ERROR) {
+            window.app.message.error('文件太大');
+            return false;
+        }
+        if (error.code === plupload.FILE_EXTENSION_ERROR) {
+            window.app.message.error('无效的文件扩展名');
+            return false;
+        }
+        /*eslint-disable */
+        return true;
+    }, instance, 9);
+    if (options.signle_file !== false) {
+        instance.bind('QueueChanged', function(u) {
+            if (u.files.length > 1) {
+                view.app.message.error('只能上传单个文件');
+                u.removeFile(u.files[1]);
+            }
+        });
+    }
 }, function(view, comp) {
     comp;
 });
