@@ -8,7 +8,8 @@ exports.events = {
     'click attendancelist-*': 'showAttendancelist',
     'click leave-*': 'showLeave',
     'click classedit-*': 'showClassedit',
-    'click count-*': 'showCount'
+    'click count-*': 'showCount',
+    'click addcarinfo-*': 'showAddcarinfo'
 };
 
 exports.handlers = {
@@ -37,6 +38,10 @@ exports.handlers = {
     },
     showCount: function() {
         var model = this.module.items['center/managements/count'];
+        this.app.viewport.modal(model);
+    },
+    showAddcarinfo: function() {
+        var model = this.module.items['center/managements/addcarinfo'];
         this.app.viewport.modal(model);
     }
 };

@@ -1,0 +1,14 @@
+#!handlebars
+
+module > .mostsign-page
+    .mostsign(data-region="mostsign")
+
+view('mostsign')
+    p 请选择您要变更的签到状态
+    .layout-mt-small.container
+        label.m-right 签到状态
+        select
+            option 已签到
+            option 迟到
+            option 未签到
+            option 请假

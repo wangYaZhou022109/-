@@ -1,0 +1,50 @@
+#!handlebars
+
+module > .addunit-page
+    .addunit(data-region="addunit")
+
+view('addunit')
+    .tabs.line
+        ul
+            li.active#companytype-1 公司类型
+            li#companytype-2 公司类型
+            li#companytype-3 公司类型
+    .tabs-cont
+        ul
+            li
+                .clearfix.layout-mt-small > .pull-right
+                    input(type="checkbox")
+                    label 全选
+                table.table
+                    tr
+                        th 公司名称
+                        th 公司名称
+                        th 公司名称
+                    tr
+                        td 公司名称
+                        td 公司名称
+                        td 公司名称
+                    tr
+                        td 公司名称
+                        td 公司名称
+                        td 公司名称
+                    tr
+                        td 公司名称
+                        td 公司名称
+                        td 公司名称
+                    tr
+                        td 公司名称
+                        td 公司名称
+                        td 公司名称
+                    tr
+                        td 公司名称
+                        td 公司名称
+                        td 公司名称
+                .layout-mt-small
+                    .inline-block.layout-mr
+                        span 剩余额度:
+                        span 5
+                    .inline-block.clearfix
+                        label.addunit-label.pull-left 配置额度：
+                        input.pull-left.m-right
+                        .btn.pull-left 添加

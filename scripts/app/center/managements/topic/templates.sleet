@@ -14,28 +14,28 @@ view('topic')
             td 1
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-asc.color-warn
                 i.iconfont.icon-sort-desc.color-pass
             td > a 删除
         tr
             td 2
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-asc.color-warn
                 i.iconfont.icon-sort-desc.color-pass
             td > a 删除
         tr
             td 3
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-asc.color-warn
                 i.iconfont.icon-sort-desc.color-pass
             td > a 删除
         tr
             td 4
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-pass
+                i.iconfont.icon-sort-asc.color-warn
                 i.iconfont.icon-sort-desc.color-pass
             td > a 删除
     .add-topic.text-center.clearfix

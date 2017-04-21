@@ -8,7 +8,6 @@
                 top: var(--input-height);
                 height: var(--input-height);
                 line-height: var(--input-height);
-                background: var(--font-sub-color);
                 padding: 0 1em;
                 color: white;
                 cursor: pointer;
@@ -16,9 +15,6 @@
         }
         & .form-padding {
             padding-right: calc(var(--large-space) /2);
-        }
-        & .bg-gray {
-            background: var(--font-sub-color);
         }
     }
 }
