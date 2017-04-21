@@ -22,7 +22,7 @@ exports.store = {
                     var answerRecord = _.find(this.data.answerRecords, [
                         'researchRecordId', this.data.researchRecordId
                     ]);
-                    return answerRecord && name === answerRecord.answer;
+                    return answerRecord && answerRecord.answer.indexOf(name) > -1;
                 }
             }
         }

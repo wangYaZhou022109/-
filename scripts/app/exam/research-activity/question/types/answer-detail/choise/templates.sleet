@@ -17,12 +17,12 @@ view('main')
             tr
                 td
                     .checkbox.no-margin
-                    input(type='checkbox' id='checkbox-' +@index)('checked')&if(checked)
+                    input(type='checkbox' id='checkbox-' +@index disabled='disabled')('checked')&if(checked)
                     label(for='checkbox-' + @index)
                     span > echo(code '.' text)
     else
         table.table.m-top > each(question.options)
             tr
                 td
-                    input(type='radio')('checked')&if(checked)
+                    input(type='radio' disabled='disabled')('checked')&if(checked)
                     span > echo(code '.' text)
