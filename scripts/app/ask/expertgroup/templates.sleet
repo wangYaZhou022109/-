@@ -33,7 +33,7 @@ view('list')
                         .tag-btn > echo(name)
                     .sub-text.text-overflow > echo(introduce)
                 compare(concernList.length 'gt' 0)
-                    .btn.small(id='unfollow-expert' + member.id  data-name='id' data-value=member.id) 已关注
+                    .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
                 else
-                    .btn.small(id='follow-expert'  + member.id  data-name='id' data-value=member.id) 关注
+                    .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) 关注
        
