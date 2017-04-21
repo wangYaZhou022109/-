@@ -6,7 +6,7 @@ module
 
 view('main') > .base-info
     .form
-        .pic
+        .pic(style='background-image:url(images/default-userpic.png)')
             #headFile
         .info
             .form-row
