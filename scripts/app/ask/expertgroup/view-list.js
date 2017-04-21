@@ -32,8 +32,8 @@ exports.handlers = {
 
 exports.actions = {
     'click check-*': 'check',
-    'click follow-expert': 'follow',
-    'click unfollow-expert': 'unfollow'
+    'click follow-expert-*': 'follow',
+    'click unfollow-expert-*': 'unfollow'
 };
 
 exports.dataForActions = {
@@ -46,7 +46,9 @@ exports.dataForActions = {
         return data;
     },
     unfollow: function(payload) {
-        return payload;
+        var data = payload;
+        data.concernType = '1';
+        return data;
     }
 };
 

@@ -9,19 +9,10 @@ view('list')
                 img(src=createUser.headPortrait)
             .comment-content
                 .h4
-                    compare(pendingAudit 'eq' null)
-                        compare(trendsType 'eq' '1')
-                            a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
-                        else
-                            a(id='myshares-details-' + id + '_' + questionId ) > echo(title)
+                    compare(trendsType 'eq' '1')
+                        a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
                     else
-                        compare(pendingAudit.auditStatus 'eq' 1)
-                            compare(trendsType 'eq' '1')
-                                a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
-                            else
-                                a(id='myshares-details-' + id + '_' + questionId ) > echo(title)
-                        else
-                            echo(title)
+                        a(id='myshares-details-' + id + '_' + questionId ) > echo(title)
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
