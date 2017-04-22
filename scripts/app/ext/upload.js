@@ -27,6 +27,12 @@ D.ComponentManager.register('uploader', function(view, el, options) {
             },
             flash_swf_url: 'scripts/vendors/upload/Moxie.swf',
             init: {
+                FileFiltered: function(uploader, file) {
+                    if (file.name.length > 100) {
+                        uploader.removeFile(file);
+                        view.app.message.error('文件名过长');
+                    }
+                },
                 FileUploaded: function(loader, file, result) {
                     var arr;
                     if (model && result.status === 200) {
