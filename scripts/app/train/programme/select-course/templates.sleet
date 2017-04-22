@@ -1,55 +1,50 @@
 #!handlebars
 
-module > .train-class-page
+module > .addtopicclass-page
+    .addtopicclass(data-region='selected')
+
+view('selceted')
     .page-main-wrapper
-        .main(data-region='coursePool')
-    .page-main-wrapper
-        .main(data-region='selected')
+        .page-side.bg-highlight.layout-ml-small
+            h5 已选课程
+            table.table
+                each(targetList) > tr
+                    td > echo(resourceName)
+                    td
+                        i.iconfont.icon-sort-asc(id='move-up-'+id data-name='id' data-value=id)
+                        i.iconfont.icon-sort-desc(id='move-down-'+id data-name='id' data-value=id)
 
-view('coursePool')
-    .col-sm-2(style='text-align:right')
-        a.btn#submitOffline 保存
-    .row
-        label(style='float:left;') 选择主题：
-        select.select#selectTheme(name='themeId' style='width:200px') 
-            each(themeList)
-                option(value=id)('selected')&if(selected) > echo(name)
-    .row
-        label 课程名称：
-        input.input#name(name='name' value=search.name size=8)
-        a.btn.small#btnSearch 搜索
-    .row
-        label 课程分类：
-        input.input#categoryName(name='categoryName' value=search.categoryName size=8 readonly='readonly')
-        input#categoryId(type='hidden' name='categoryId' value=csearch.categoryId)
-        a.btn.small#btnCategory 选择
-        label 归属部门：
-        input.input#organizationName(name='organizationName' value=search.organizationName size=8 readonly='readonly')
-        input#organizationId(type='hidden' name='organizationId' value=search.organizationId)
-        a.btn.small#btnOrg 选择
-
-    table.table
-        thead > tr
-            th > echo('选择')
-            th > echo('课程名称')
-            th > echo('归属部门')
-            th > echo('课程分类')
-            th > echo('适用终端')
-        tbody
-            each(courseList) > tr
-                td
-                    input(type='checkbox' name='ids' value=id id='course-'+id )('checked')&if(checked)
-                td > echo(name)
-                td > echo(organization.name)
-                td > echo(category.name)
-                td > map('compatible-client' publishClient)
-    #pager.pagination(style='float:none')
-
-view('selected')
-    label 已选课程
-    table.table
-        each(targetList) > tr
-            td(width='60%') > echo(resourceName)
-            td
-                a(id='move-up-'+id data-name='id' data-value=id) 上移
-                a(id='move-down-'+id data-name='id' data-value=id) 下移
+        .page-main
+            .choosetopic.clearfix
+                label.pull-left.m-right.choosetopic-title 选择主题
+                .content.overflow
+                    select.w-full.choosetopic-title#selectTheme(name='themeId') 
+                        each(themeList)
+                            option(value=id)('selected')&if(selected) > echo(name)
+            .filter-row.clearfix.m-top.relative
+                .pull-left
+                    .filter-item.w-full.m-bottom.classname
+                        label.m-right.pull-left 课程名称
+                        input#name(name='name' value=search.name)
+                    .filter-item.clearfix
+                        label.pull-left.m-right 课程分类
+                        input.pull-left(placeholder="全部")
+                        .btn.pull-left 选择
+                    .filter-item.clearfix
+                        label.pull-left.m-right 归属部门
+                        input.pull-left(placeholder="全部")
+                        .btn.pull-left 选择
+                .pull-right > .btn.addtopic-btn#btnSearch 搜索
+            table.table
+                tr
+                    th(colspan="2") 课程名称
+                    th 归属部门
+                    th 课程分类
+                    th 适用终端
+                each(courseList) > tr
+                    td > input(type='checkbox' name='ids' value=id id='course-'+id )('checked')&if(checked)
+                    td > echo(name)
+                    td > echo(organization.name)
+                    td > echo(category.name)
+                    td > map('compatible-client' publishClient)
+            #pager.pagination(style='float:none')

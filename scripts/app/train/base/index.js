@@ -19,8 +19,10 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var classInfo = this.models.classInfo,
+                state = this.models.state,
                 me = this;
             classInfo.set(payload);
+            state.data.classId = payload.id;
             return me.get(classInfo);
         },
         submit: function(payload) {
@@ -28,6 +30,7 @@ exports.store = {
                 classInfo = this.models.classInfo,
                 offlineCourse = this.models.offlineCourse,
                 quota = this.models.quota,
+                state = this.models.state,
                 me = this;
             model.set(payload);
             model.data.confirm = 1;
@@ -35,6 +38,7 @@ exports.store = {
             quota.data.classId = classInfo.data.id;
             me.save(model).then(function() {
                 this.app.message.success('提交成功');
+                classInfo.set({ id: state.data.classId });
                 me.get(classInfo);
                 me.save(offlineCourse);
                 me.save(quota);
@@ -43,8 +47,10 @@ exports.store = {
         save: function(payload) {
             var model = this.models.saveModel,
                 classInfo = this.models.classInfo,
+                state = this.models.state,
                 me = this;
             model.set(payload);
+            classInfo.set({ id: state.data.classId });
             me.save(model).then(function() {
                 this.app.message.success('保存成功');
                 me.get(classInfo);

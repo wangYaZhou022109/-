@@ -29,7 +29,6 @@ html.default
         link(rel='stylesheet' href='node_modules/photoswipe/dist/default-skin/default-skin.css')
         link(rel='stylesheet' href='node_modules/video.js/dist/video-js.css')
         link(rel='stylesheet' href='node_modules/pdfjs-dist/web/pdf_viewer.css')
-        link(rel='stylesheet' href='styles/progress-bar/bs-is-fun.css')
         link(rel='stylesheet' href='node_modules/flatpickr/dist/flatpickr.min.css')
         # endbuild
 
