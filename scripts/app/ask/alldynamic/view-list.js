@@ -176,12 +176,18 @@ exports.actionCallbacks = {
         this.module.dispatch('init');
     },
     follow: function() {
+        var me = this;
         this.app.message.success('关注成功！');
-        this.module.dispatch('init');
+        setTimeout(function() {
+            me.app.show('content', 'ask/content');
+        }, 2000);
     },
     unfollow: function() {
+        var me = this;
         this.app.message.success('取消成功！');
-        this.module.dispatch('init');
+        setTimeout(function() {
+            me.app.show('content', 'ask/content');
+        }, 2000);
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
@@ -219,9 +225,5 @@ exports.dataForTemplate = {
         });
         return page;
     }
-};
-
-exports.beforeClose = function() {
-    $(window).unbind('scroll');
 };
 

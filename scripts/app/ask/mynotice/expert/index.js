@@ -6,7 +6,8 @@ exports.items = {
 exports.store = {
     models: {
         experts: { url: '../ask-bar/trends/focus-experts' },
-        topicType: { url: '../system/topic-type' }
+        topicType: { url: '../system/topic-type' },
+        unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {
         init: function() {
@@ -22,6 +23,15 @@ exports.store = {
             var experts = this.models.experts;
             experts.set(payload);
             return this.get(experts);
+        },
+        unfollow: function(payload) {
+            var unfollow = this.models.unfollow,
+                me = this;
+            unfollow.set(payload);
+            return this.put(unfollow).then(function() {
+                me.app.message.success('取消成功');
+                me.module.dispatch('init');
+            });
         }
     }
 };
