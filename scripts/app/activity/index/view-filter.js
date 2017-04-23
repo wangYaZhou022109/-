@@ -1,7 +1,5 @@
-var $ = require('jquery');
-
 exports.bindings = {
-    params: true
+    search: true
 };
 
 exports.events = {
@@ -9,35 +7,19 @@ exports.events = {
 };
 
 exports.handlers = {
-    toggleItem: function(el) {
-        var me = this,
-            searchStatus = '';
-        if (el) {
-            searchStatus = el;
-        }
-        me.module.dispatch('search', { searchStatus: searchStatus });
+    toggleItem: function(value) {
+        return this.module.dispatch('search', { searchStatus: value === 0 ? null : Number(value) });
     }
 };
 
-exports.actions = {
-    'click search': 'search'
-};
-
-exports.dataForActions = {
-    search: function() {
-        return {
-            name: $(this.$$('[name="activity-name"]')).val()
-        };
-    }
-};
 exports.dataForTemplate = {
     currentStep: function(data) {
-        var step = data.params.searchStatus;
+        var search = data.search;
         return {
-            all: !step || step === '',
-            running: step === 1 || step === '1',
-            notStart: step === 2 || step === '2',
-            finish: step === 3 || step === '3'
+            all: search.searchStatus === 0,
+            running: search.searchStatus === 1,
+            notStart: search.searchStatus === 2,
+            finish: search.searchStatus === 3,
         };
     }
 };
