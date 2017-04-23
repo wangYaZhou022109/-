@@ -26,10 +26,10 @@ view('search') > form.vertical
                     input.input(name='fullName')
                 .pull-left
                     btn.btn#search > echo('查询')
+    .layout-mt-small.clearfix
+        a.btn.small.radius.pull-right(href=taskDetail.downUrl download='') 下载全部
 
 view('main')
-    .layout-mt-small.clearfix
-        btn.btn.small.radius.pull-right#downAll 下载全部
     div.text-center
         table.table
             thead > tr

@@ -17,8 +17,8 @@ exports.store = {
         taskd: {
             url: '../train/task-member'
         },
-        attachAll: {
-            url: '../train/task-member/attach-all'
+        downAttach: {
+            url: '../train/task-member/download'
         },
         state: { data: {} },
     },
@@ -39,14 +39,6 @@ exports.store = {
             taskDetail.params = payload;
             taskDetail.params.id = id;
             return this.get(taskDetail);
-        },
-        attachAll: function() {
-            var attachAll = this.models.attachAll,
-                id = this.models.state.data.id;
-            attachAll.params.id = id;
-            return this.get(attachAll);
-            // this.get(attachAll).then(function(data) {
-            //     console.log(data);
         },
     }
 };
