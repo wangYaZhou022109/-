@@ -6,7 +6,7 @@ module
 
 view('main') > .base-info
     .form
-        .pic
+        .pic(style='background-image:url(images/default-userpic.png)')
             #headFile
         .info
             .form-row
@@ -39,7 +39,8 @@ view('main') > .base-info
                 .inline-block > echo(member.organization.name)
             .form-row
                 .inline-block > setting('person.index.info.like')
-                .inline-block
+                .inline-block > each(topicList)
+                    .tag-btn > echo(name)
             .form-row
                 label.auto > setting('person.index.info.introduce')
                 .content > textarea.input(id='summary' name='summary' rows='3' x-rule='maxLength:200') > echo(member.memberDetail.summary)

@@ -11,11 +11,13 @@ view('main')
             thead
                 tr
                     th > setting('person.archives.public.order')
-                    th > setting('person.archives.ask.title')
+                    th 标题
                     th > setting('person.archives.ask.type')
-                    th > setting('person.archives.ask.status')
+                    th 状态
                     th > setting('person.archives.ask.pushTime')
                     th > setting('person.archives.ask.integral')
+                    th 讨论数
+                    th 关注人数
             tbody > each(list)
                 tr
                     td > echo(i)
@@ -24,6 +26,8 @@ view('main')
                     td > map('ask-audit-status' auditStatus)
                     td > dateTime(createTime)
                     td > echo(integralScore)
+                    td > echo(discussNum)
+                    td > echo(careNum)
                     else
                         tr > td(colspan='6') > p.text-center > string('no-data')
         #pager.pagination

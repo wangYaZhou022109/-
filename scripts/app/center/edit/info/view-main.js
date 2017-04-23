@@ -1,7 +1,8 @@
 var maps = require('./app/util/maps'),
     _ = require('lodash/collection');
 exports.bindings = {
-    member: false
+    member: false,
+    topicList: true
 };
 
 exports.components = [function() {
