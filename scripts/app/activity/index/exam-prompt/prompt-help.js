@@ -1,6 +1,6 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
-    signUpExam, isInApplantTimeRange, waitApprove;
+    signUpExam, isInApplantTimeRange, waitApprove, examCanceled;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -12,12 +12,13 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 8: 考试结束
 // 9: 考试活动结束 可查看考试详情
 // 10: 报名考试，超出报名时间范围
-// 11: 查看证书
+// 11: 查看证书 查看详情
 // 12: 考试已撤销
+// 13: 考试结束，没有详情
 exports.getUserStatusOfExam = function(exam) {
     var signUp = signUpExam(exam);
 
-    if (exam.status === 1) {
+    if (examCanceled(exam)) {
         return 12;
     }
 
@@ -43,10 +44,13 @@ exports.getUserStatusOfExam = function(exam) {
         return 5;
     }
     if (afterExam(exam.endTime)) {
-        if (exam.hasCert) {
+        if (exam.hasCert && exam.examRecord && exam.examRecord.status > 5) {
             return 11;
         }
-        return 9;
+        if (exam.examRecord && exam.examRecord.status > 5) {
+            return 9;
+        }
+        return 13;
     }
     return 0;
 };
@@ -88,7 +92,7 @@ needSignUp = function(exam) {
 };
 
 canExamMore = function(exam) {
-    return exam.allowExamTimes > exam.examedTimes;
+    return exam.allowExamTimes > exam.examedTimes || exam.allowExamTimes === 0;
 };
 
 canViewDetailImmd = function(exam) {
@@ -105,5 +109,9 @@ isInApplantTimeRange = function(exam) {
 };
 
 waitApprove = function(exam) {
-    return exam.signUp && exam.signUp.status === 1;
+    return exam.signUp && exam.signUp.status === 1 && exam.applicantNeedAudit === 1;
+};
+
+examCanceled = function(exam) {
+    return exam.status === 1;
 };

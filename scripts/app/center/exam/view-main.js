@@ -18,13 +18,11 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    cancel: function() {
-        var examId = this.bindings.exam.data.id;
-        return { examId: examId };
+    cancel: function(data) {
+        return { examId: data.id };
     },
-    signUp: function() {
-        var examId = this.bindings.exam.data.id;
-        return { examId: examId };
+    signUp: function(data) {
+        return { examId: data.id };
     },
 };
 
@@ -64,20 +62,26 @@ exports.components = [{
 // 8: 考试结束
 // 9: 考试活动结束 可查看考试详情
 // 10: 报名考试，超出报名时间范围
+// 11: 查看证书
+// 12: 考试已撤销
 exports.dataForTemplate = {
     exams: function(data) {
         var exams = data.exams;
         return _.map(exams, function(e, n) {
-            var cancelButton = { id: 'cancel-button-' + e.id, text: '取消报名' },
-                signupButton = { id: 'signup-button-' + e.id, text: '我要报名' },
-                toExamButton = { id: 'to-exam-button-' + e.id, text: '进入考试' },
-                toCertButton = { id: 'to-cert-button-' + e.id, text: '查看证书' },
-                toDetailButton = { id: 'to-detail-button-' + (e.examRecord.id || n), text: '查看详情' },
-                retryButton = { id: 'retry-button-' + e.id, text: '重新考试' },
+            var cancelButton = { id: 'cancel-button-' + e.signUp.id, value: e.signUp.id, text: '取消报名' },
+                signupButton = { id: 'signup-button-' + e.id, value: e.id, text: '我要报名' },
+                toExamButton = { id: 'to-exam-button-' + e.id, value: e.id, text: '进入考试' },
+                toCertButton = { id: 'to-cert-button-' + e.id, value: e.id, text: '查看证书' },
+                toDetailButton = {
+                    id: 'to-detail-button-' + (e.examRecord.id || n),
+                    value: e.examRecord.id || n,
+                    text: '查看详情'
+                },
+                retryButton = { id: 'retry-button-' + e.id, value: e.id, text: '重新考试' },
                 buttonMap = {
                     1: [signupButton],
                     2: [cancelButton],
-                    3: [],
+                    3: [cancelButton],
                     4: [],
                     5: [toExamButton],
                     6: [retryButton, toDetailButton],
@@ -85,14 +89,18 @@ exports.dataForTemplate = {
                     8: [],
                     9: [toDetailButton],
                     10: [],
-                    11: [toDetailButton, toCertButton]
+                    11: [toDetailButton, toCertButton],
+                    12: [],
+                    13: []
                 };
             return D.assign(e, {
                 status: getRecordStatus(e),
                 examRecord: D.assign(
-                    e.examRecord, { score: e.examRecord.score ? e.examRecord.score / 100 : 0 }
+                    e.examRecord,
+                    { score: e.examRecord.score ? e.examRecord.score / 100 : 0 },
+                    { totalScore: e.examRecord.totalScore ? e.examRecord.totalScore / 100 : 0 }
                 ),
-                buttons: buttonMap[P.getUserStatusOfExam(e)]
+                buttons: buttonMap[P.getUserStatusOfExam(e)],
             });
         });
     }
@@ -100,17 +108,34 @@ exports.dataForTemplate = {
 
 getRecordStatus = function(exam) {
     var currentTime = new Date().getTime();
-    if (exam.examRecord && exam.examRecord.status >= 4) {
-        return 3;
-    }
-
-    if (currentTime < exam.startTime) {
+    if (exam.startTime < currentTime && exam.examRecord.status === 1) {
         return 1;
     }
 
-    if (currentTime >= exam.startTime && currentTime <= exam.endTime) {
+    if (currentTime < exam.startTime) {
         return 2;
     }
 
+    if (exam.signUp && exam.signUp.status === 1) {
+        return 3;
+    }
+
+    if (exam.examRecord && exam.examRecord.status === 5) {
+        return 4;
+    }
+
+    if (exam.examRecord && exam.examRecord.status >= 4) {
+        return 5;
+    }
+
     return 0;
+};
+
+exports.actionCallbacks = {
+    signUp: function() {
+        this.app.message.success('报名成功');
+    },
+    cancel: function() {
+        this.app.message.success('取消报名成功');
+    }
 };

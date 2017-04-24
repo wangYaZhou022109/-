@@ -20,9 +20,10 @@ exports.store = {
             }
             return '';
         },
-        cancel: function(payload) {
-            var me = this;
-            this.models.signUp.set({ id: payload.examId });
+        cancel: function() {
+            var me = this,
+                exam = this.models.exam;
+            this.models.signUp.set({ id: exam.data.signUp.id });
             return this.del(this.models.signUp).then(function() {
                 return me.get(me.models.exam);
             });
