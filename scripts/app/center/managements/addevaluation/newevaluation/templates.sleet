@@ -25,8 +25,8 @@ view('newevaluation')
                         input(type="radio")
                         label.small-font 维度一维度一维度
                     .pull-right
-                        i.iconfont.icon-sort-asc.m-right
-                        i.iconfont.icon-sort-desc.text-main-color
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
                 .m-top
                     span.active.choice.m-right.m-top 1
                     span.choice.m-top 2
@@ -35,8 +35,8 @@ view('newevaluation')
                         input(type="radio")
                         label.small-font 维度二维度二维度
                     .pull-right
-                        i.iconfont.icon-sort-asc.m-right
-                        i.iconfont.icon-sort-desc.text-main-color
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
                 .m-top
                     span.active.choice.m-right.m-top 1
                     span.choice.m-right.m-top 2
@@ -47,8 +47,8 @@ view('newevaluation')
                         input(type="radio")
                         label.small-font 维度三维度三维度
                     .pull-right
-                        i.iconfont.icon-sort-asc.m-right
-                        i.iconfont.icon-sort-desc.text-main-color
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
                 .m-top
                     span.active.choice.m-right.m-top 1
                     span.choice.m-right.m-top 2
@@ -68,7 +68,7 @@ view('newevaluation')
                     | +问答
                 .tag-btn.radius.pull-right
                     | +导入
-            .btn.m-top.w-full 预览
+            .btn.m-top.w-full.gray 预览
         .page-main
             .form.align-left
                 .form-row
@@ -89,7 +89,7 @@ view('newevaluation')
                         p D.  城市居民对自然生活的向往
                 .layout-mt-small.clearfix
                     .icons.w-full.text-right
-                        i.iconfont.icon-sort-asc.m-right
-                        i.iconfont.icon-sort-desc.m-right
-                        i.iconfont.icon-exam.m-right
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-5
                         i.iconfont.icon-trash

@@ -1,0 +1,10 @@
+.groupmanage-page {
+    & .groupmanage {
+        & .iconfont {
+            font-size: .7em;
+        }
+        & .gray-font {
+            color: var(--font-sub-color);
+        }
+    }
+}

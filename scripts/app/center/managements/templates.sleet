@@ -11,7 +11,7 @@ view('manage-tabs')
             .tag-btn.bg-main-color 未实施
             .tag-btn.bg-main-color 进行中
             .tag-btn.bg-main-color 已结束
-            .btn.circle-radius.gray.tag-height.pull-right.small 进入班级
+            .small-btn.pull-right.radius 进入班级
         .managements-tabs
             ul.clearfix.layout-mt
                 li.pull-left#managements-ordertime.active
@@ -108,7 +108,7 @@ view('ordertime')
                     label.label.required 往返日期
                     .content.w-half
                         input.input(placeholder="2016-12-24  ~  2016-12-25")
-                        .btn.choice 选择日期
+                        .btn.choice#choosedate 选择日期
                 .form-row
                     label.label.required 培训目标
                     .content > textarea.w-full(rows="5" placeholder="几句话介绍举办本次培训的目标和背景")
@@ -215,7 +215,7 @@ view('dateplan')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
-                .btn.gray.tag-height.m-bottom.circle-radius.pull-right.small 导出安排
+                .small-btn.radius.pull-right 导出安排
             .clearfix.m-top
                 .pull-left
                     label.m-right 线下课程安排
@@ -227,10 +227,9 @@ view('dateplan')
                     .tag-btn.radius#weektopic 配置周主题
                     .tag-btn.radius#addclass 添加课程
                     .tag-btn.radius 导入课程
-                    .change-min.inline-block
-                        .change-item.min
-                            .inline-block 最小化
-                            .inline-block.pointer.minimize#minimize-1 -
+                    .inline-block
+                        span#min-1 最小化
+                        i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-1
             table.table#minitable-1
                 tr
                     th 日期
@@ -250,10 +249,10 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 8:30-10:30
                     td 课程名称（点击可修改）
@@ -261,10 +260,10 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 8:30-10:30
                     td 课程名称（点击可修改）
@@ -272,10 +271,10 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 8:30-10:30
                     td 课程名称（点击可修改）
@@ -283,17 +282,17 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
             .clearfix
                 label.pull-left 在线资源
                 .pull-right
                     .tag-btn.radius#topic 配置主题
                     .tag-btn.radius#addtopicclass 添加课程
-                    .inline-block 最小化
-                    .inline-block.minimize#minimize-2 -
+                    span#min-2 最小化
+                    i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-2
             table.table#minitable-2
                 tr
                     th 主题
@@ -305,35 +304,35 @@ view('dateplan')
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td(rowspan="2") 主题名称
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
             .clearfix
                 label.pull-left 调研与问卷
                 .pull-right
                     .tag-btn.radius#addexam 添加考试
                     .tag-btn.radius#addevaluation-1 添加调研
                     .tag-btn.radius#addevaluation-2 添加评估
-                    .inline-block 最小化
-                    .inline-block.minimize#minimize-3 -
+                    span#min-3 最小化
+                    i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-3
             table.table#minitable-3
                 tr
                     th 序号
@@ -349,9 +348,9 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 2
                     td 调研名称
@@ -359,9 +358,9 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 3
                     td 评估名称
@@ -369,15 +368,15 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
             .clearfix
                 label.pull-left 调研与问卷
                 .pull-right
                     .tag-btn.radius#addwork 添加作业
-                    .inline-block 最小化
-                    .inline-block.minimize#minimize-4 -
+                    span#min-4 最小化
+                    i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-4
             table.table#minitable-4
                 tr
                     th 序号
@@ -393,8 +392,8 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 2
                     td 调研名称
@@ -402,8 +401,8 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 3
                     td 评估名称
@@ -411,8 +410,8 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
 
 view('quotamanage')
     .quotamanage.container.bg-highlight.overflow.dateplan-padding
@@ -438,8 +437,8 @@ view('quotamanage')
                     .quotamanage-content.layout-mt-small
                         .clearfix
                             .pull-right
-                                .btn.gray.tag-height#addunit 添加单位
-                                .btn.gray.tag-height 删除
+                                .btn.gray.tag-height.small#addunit 添加单位
+                                .btn.gray.tag-height.small 删除
                         table.table
                             tr
                                 th > input(type="checkbox")
@@ -521,8 +520,12 @@ view('publishnotice')
             .important-notice
                 p 【重要】发文注意事项：
                 p 一、培训通知附件：
-                p 1、《中国移动学院培训报名及参加须知》(下载)（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。
-                p 2、《课程安排》(下载)
+                p.block 1、《中国移动学院培训报名及参加须知》（
+                    a 下载
+                    span ）（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。
+                p.block 2、《课程安排》 （
+                    a 下载
+                    span ）
                 .layout-mt-small
                     p 二、培训通知发布路径及时间要求:
                     p 1、路径：须通过OA“培训项目审批单”下发培训通知(OA首页-通用办公-培训项目-部门项目审批单)。
@@ -637,7 +640,7 @@ view('membership')
                         .pull-right
                             label.pull-left.m-right.tag-height 员工编号
                             input.pull-left.tag-height
-                            .btn.pull-left.tag-height.gray.m-right 添加
+                            .small-btn.pull-left.m-right 添加
                             .btn.tag-btn#studentgroup 学员分组
                             .btn.tag-btn#addstudent 添加学员
                             .btn.tag-btn#entersituation 报名情况
@@ -745,7 +748,7 @@ view('membership')
                         .pull-right
                             label.pull-left.tag-height.m-right 员工编号
                             input.tag-height.pull-left.
-                            .btn.gray.tag-height.pull-left.m-right 添加
+                            .small-btn.pull-left.m-right 添加
                             .btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
@@ -798,8 +801,8 @@ view('membership')
                         .h5.pull-left.strong 学员列表
                         .pull-right
                             label.pull-left.tag-height.m-right 员工编号
-                            input.tag-height.pull-left.
-                            .btn.gray.tag-height.pull-left.m-right 添加
+                            input.tag-height.pull-left
+                            .small-btn.pull-left.m-right 添加
                             .btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
@@ -964,9 +967,9 @@ view('classmanage')
                             .tag-btn.active#toggleday-1 半天
                             .tag-btn#toggleday-2 全天
                         .pull-right
-                            .btn.small.tag-height.gray#addattendance
+                            .small-btn.m-right#addattendance
                                 | +添加
-                            .btn.small.tag-height.gray 删除
+                            .small-btn 删除
                     table.table.layout-mt-small
                         tr
                             th > input(type="checkbox")
@@ -1037,8 +1040,8 @@ view('classmanage')
                     section.section
                         .clearfix
                             .pull-right
-                                .btn.gray.tag-height.s  导出内部讲师
-                                .btn.gray.tag-height.s  导出外部讲师
+                                .btn.gray.tag-height.small  导出内部讲师
+                                .btn.gray.tag-height.small  导出外部讲师
                         table.table.layout-mt-small
                             tr
                                 th 课程名称
@@ -1079,7 +1082,7 @@ view('classmanage')
                     section.section
                         .clearfix
                             label.pull-left 班车/订餐信息
-                            .btn.pull-right.gray.tag-height#addcarinfo-1
+                            .small-btn.pull-right#addcarinfo-1
                                 | +添加
                         table.table.layout-mt-small
                             tr
@@ -1363,10 +1366,11 @@ view('evaluate')
                             .filter-item
                                 label 姓名
                                 input.input
-                            .filter-item.clearfix
-                                label 单位
-                                input.input
-                            .filter-item
+                            .filter-item.clearfix.vertical-top
+                                label.tag-height.pull-left.m-right 单位
+                                input.input.pull-left
+                                .btn.gray.small.pull-left 选择
+                            .filter-item.vertical-top
                                 label |
                                 button.btn 搜索
                     .layout-mt-small

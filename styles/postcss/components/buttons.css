@@ -215,3 +215,17 @@ textarea.input {
     width: calc(var(--large-space) *6);
     height: 2em;
 }
+.small-btn {
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    height: var(--large-space);
+    line-height: var(--large-space);
+    padding: 0 1em;
+    background: var(--font-sub-color);
+    color: var(--white);
+    margin-bottom: var(--space);
+    &.radius {
+        border-radius: 1em;
+    }
+}

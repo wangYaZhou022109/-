@@ -12,12 +12,18 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click check-*': 'check'
+    'click check-*': 'check',
+    'click unfollow-topic-*': 'unfollow'
 };
 
 exports.dataForActions = {
     check: function(payload) {
         return payload;
+    },
+    unfollow: function(payload) {
+        var data = payload;
+        data.concernType = '4';
+        return data;
     }
 };
 

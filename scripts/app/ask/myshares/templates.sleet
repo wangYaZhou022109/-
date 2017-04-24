@@ -27,8 +27,8 @@ view('list')
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
-                            .item > span.color-ing > string('auditStatus0')
-                            .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                .item > span.color-ing > string('auditStatus0')
+                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
             compare(auditStatus 'eq' 1)
                 li
                     .user-pic > img(src='images/d2.jpg')
@@ -80,8 +80,8 @@ view('list')
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
-                            .item > span.color-error > string('auditStatus2')
-                            .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                .item > span.color-error > string('auditStatus2')
+                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
 #      div(data-region='list')
 #  view('list')
 #      ul 

@@ -7,4 +7,8 @@
             right: var(--large-space);
         }
     }
+    & .iconfont {
+        font-size: .7em;
+        color: var(--font-sub-color);
+    }
 }
