@@ -1,6 +1,6 @@
 var D = require('drizzlejs');
 
-exports.type = 'dynamic';
+// exports.type = 'dynamic';
 
 exports.bindings = {
     state: false,
@@ -81,7 +81,7 @@ exports.dataForActions = {
     },
     praise: function(payload) {
         var data = payload;
-        data.objectType = 2;
+        data.objectType = 1;
         return payload;
     }
 };

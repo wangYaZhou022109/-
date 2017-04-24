@@ -22,6 +22,9 @@
         @apply --clearfix;
 
         margin-bottom: calc(var(--space) * 2);
+        &.r-padding {
+            padding-right: calc(var(--large-space) /2);
+        }
 
         & > label,
         & label.label {
@@ -113,6 +116,27 @@
                 border: none;
                 background: var(--bg-color-2);
                 margin-bottom: 0;
+            }
+        }
+        &.row-block {
+            &.w-fourth {
+                width: 25%;
+            }
+            & > label,
+            & label.label {
+                display: block;
+                float: none;
+                width: auto;
+            }
+            & .content {
+                margin-left: 0;
+            }
+            & .input {
+                & + .choice {
+                    height: var(--large-space);
+                    line-height: var(--large-space);
+                    background: var(--font-sub-color);
+                }
             }
         }
     }

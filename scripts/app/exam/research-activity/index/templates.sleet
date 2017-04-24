@@ -52,17 +52,17 @@ view('main')
                         .clearfix
                             .pull-right.tip-text
                                 i.iconfont.icon-user(title='参加人数')
-                                echo(joinNumber)
+                                echo(joinNumber '人已参加')
                             .title.text-overflow > echo(name)
                         .bottom.sub-text.clearfix
                             .pull-left 调研时间
                             .pull-right
-                                date(startTime)
+                                dateMinute(startTime)
                                 | ~
-                                date(endTime)
+                                dateMinute(endTime)
 
 view('research-tips')
-        div > echo(research.content)
+        div > @echo(research.content)
         div
             each(research.buttons)
                 if(target)

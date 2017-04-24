@@ -511,6 +511,7 @@ exports.store = {
                 this.models.state.changed();
             } else {
                 this.models.types.updateStatus(payload.key, itemStatus.ACTIVE);
+                this.models.state.changed();
                 this.models.types.changed();
             }
         },
@@ -554,6 +555,7 @@ exports.store = {
                         me.models.modify.clear();
                     } else {
                         this.app.message.success(strings.get('exam.answer-paper.submit-success'));
+                        WS.closeConnect();
                         if (!viewAnswerDetail.call(me)) {
                             setTimeout(function() {
                                 _.forEach(me.models, function(m) {
@@ -630,6 +632,7 @@ exports.afterRender = function() {
         },
         f = true,
         autoSubmit = function(time) {
+            if (!me.store.models.exam.data.id) return '';
             if (time !== 1) {
                 me.app.message.success(strings.get('exam.answer-paper.auto-submit-success'));
             }
@@ -710,6 +713,7 @@ viewAnswerDetail = function() {
         this.app.message.confirm('提交成功，是否马上查看详情', function() {
             $('.achievement-content').html('');
             $('.achievement-content').hide();
+
             return me.module.dispatch('showAnswerDetail');
         }, function() {
             _.forEach(me.models, function(m) {

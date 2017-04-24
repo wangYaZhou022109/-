@@ -1,5 +1,7 @@
 exports.items = {
     side: 'side',
     main: 'main',
-    banner: 'banner'
+    head: 'head',
+    edit: '',
+    upload: ''
 };

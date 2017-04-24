@@ -65,16 +65,25 @@ view('main')
                     .comment-operation
                         #  .pull-left > .sub-text 2017-01-17
                         .text-right
-                            .item > span(id='praise-'+ id data-name='id' data-value= details.id) > echo('赞（' + praiseNum +'）')                           
+                            .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')                           
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                             .item > span(id ='report-' + 5 + '_' + id+'_' + createMemberId data-name='id' data-value=details.type +'_' + id+'_' + createMemberId) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section
-        compare(concern.deleteFlag 'eq' 1)
-            .btn.block.layout-mt-small.big(id='unfollow-question-'+ id data-name='id' data-value=details.id) > string('unfollow')
-        else
-            .btn.block.layout-mt-small.big(id='follow-question-'+ id data-name='id' data-value= details.id ) > string('my-follow')
+        compare(details.auditStatus 'eq' 0)
+            .text-main-color.h2 
+                echo('审核中')
+            .btn.block.layout-mt-small.big(id='del-question-' + id data-name='id' data-value=details.id ) > echo('删除问题')
+        compare(details.auditStatus 'eq' 1)    
+            compare(details.concernNum 'gt' 0)
+                .btn.block.layout-mt-small.big(id='unfollow-2_' + id data-name='id' data-value='2_' + details.id ) > string('unfollow')
+            else
+                .btn.block.layout-mt-small.big(id='follow-2_'+ id data-name='id' data-value='2_' + details.id ) > string('my-follow')
+        compare(details.auditStatus 'eq' 2)
+            .color-error.h2 
+                echo('已拒绝')
+            .btn.block.layout-mt-small.big(id = 'del-question-' + id data-name='id' data-value=details.id ) > echo('删除问题')        
     #  div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')

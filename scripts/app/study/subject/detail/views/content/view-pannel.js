@@ -46,6 +46,16 @@ exports.handlers = {
         } else {
             window.open(url);
         }
+        // URL打开即完成
+        if (sectionType === 3) {
+            this.module.dispatch('updateProgress', {
+                sectionId: id,
+                beginTime: new Date().getTime(),
+                clientType: 0,
+                finishStatus: 2, // 已完成
+                completedRate: 100, // 已完成
+            });
+        }
     },
     sectionDisplay: function(id) {
         var display = this.$('sectionDiv-' + id).style.display;

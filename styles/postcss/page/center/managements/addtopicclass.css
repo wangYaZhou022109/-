@@ -1,24 +1,14 @@
 .addtopicclass-page {
     & .addtopicclass {
-        & .filter-row {
-            & .filter-item {
-                & label {
-                    line-height: var(--large-space);
-                }
-            }
-        }
-        & .choosetopic-title {
-            line-height: var(--large-space);
-            height: var(--large-space);
-        }
-        & .classname {
-            display: block;
-        }
         & .addtopic-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             right: var(--large-space);
         }
+    }
+    & .iconfont {
+        font-size: .7em;
+        color: var(--font-sub-color);
     }
 }

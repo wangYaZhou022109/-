@@ -11,7 +11,7 @@ view('banner')
             li
                 .content
                     .covers
-                        .img > img(src=img alt=name)
+                        .img > img(src=coverId alt=name)
                         .list-tag.custom-color-1 > .tag > span > map('activity-type' type)
                     .details
                         .title.text-overflow > echo(name)
@@ -39,7 +39,7 @@ view('filter')
             .btn.pull-right 报名
             input.input.pull-right(placeholder='请输入报名码直接报名')
             ul
-                li#item-(class = if(currentStep.all 'active')) 全部
+                li#item-0(class = if(currentStep.all 'active')) 全部
                 li#item-1(class = if(currentStep.running 'active')) 正在进行
                 li#item-2(class = if(currentStep.notStart 'active')) 即将开始
                 li#item-3(class = if(currentStep.finish 'active')) 往期回顾
@@ -85,7 +85,7 @@ view('list')
                                 .overflow
                                     a(id='exam-' + id) > echo(name)
                                     .text-tips.m-top.text-overflow
-                                        dateTime(startTime) + echo(' ~ ') + dateTime(endTime)
+                                        dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
 
         .h3.m-bottom 调研
         #swiper-5 > ul.full > each(researchArray)
@@ -98,7 +98,7 @@ view('list')
                                 .overflow
                                     a(id='research-' + id) > echo(name)
                                     .text-tips.m-top.text-overflow
-                                        dateTime(startTime) + echo(' ~ ') + dateTime(endTime)
+                                        dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
 view('exam-tips')
     p > echo(currentExam.content)
     .layout-mt-small
@@ -110,74 +110,3 @@ view('research-tips')
         .row
             .col-sm-12
                 echo(content)
-
-
-
-                    # .h3.m-bottom MOOC
-                    # #swiper-1.swiper-pic-list > ul.full
-                    #     li > .main-list > ul.arrow-box
-                    #         li
-                    #             .content
-                    #                 .img
-                    #                     .img-cont
-                    #                         a.normal > img(src='images/d1.jpg')
-                    #                     .detail-wrapper
-                    #                         p
-                    #                             .btn.radius.block(id='attendLive-' + id) 我要参与
-                    #                 .clearfix
-                    #                     .pull-right.tip-text
-                    #                     .title.text-overflow > echo(subject)
-                    #                 .bottom.sub-text
-                    #                     i.iconfont.icon-view
-                    #                     echo(subNumber)
-                    #                     i.iconfont.icon-star-full.m-left
-                    #                     dateMinute(startTime)
-                    #         li
-                    #             .content
-                    #                 .img
-                    #                     .img-cont
-                    #                         a.normal > img(src='images/d1.jpg')
-                    #                     .detail-wrapper
-                    #                         p
-                    #                             .btn.radius.block 我要参与
-                    #                 .clearfix
-                    #                     .pull-right.tip-text
-                    #                     .title.text-overflow > | PPT动画完全自学入门
-                    #                 .bottom.sub-text
-                    #                     i.iconfont.icon-view
-                    #                     | 999
-                    #                     i.iconfont.icon-star-full.m-left
-                    #                     | 9.1
-                    #         li
-                    #             .content
-                    #                 .img
-                    #                     .img-cont
-                    #                         a.normal > img(src='images/d1.jpg')
-                    #                     .detail-wrapper
-                    #                         p
-                    #                             .btn.radius.block 我要参与
-                    #                 .clearfix
-                    #                     .pull-right.tip-text
-                    #                     .title.text-overflow > | PPT动画完全自学入门
-                    #                 .bottom.sub-text
-                    #                     i.iconfont.icon-view
-                    #                     | 999
-                    #                     i.iconfont.icon-star-full.m-left
-                    #                     | 9.1
-                    #
-                    #     li > .main-list > ul.arrow-box
-                    #         li 5个一组
-                    #     li > .main-list > ul.arrow-box
-                    #         li 5个一组
-
-                    # .h3.m-bottom 班级
-                    # #swiper-4 > ul.full
-                    #     li > .main-list > ul.activity-item-box.activity-item-class.cell-3
-                    #         li
-                    #             .activity-item.clearfix
-                    #                 i.iconfont.icon-class.pull-left.activity-item-icon
-                    #                 .overflow
-                    #                     a(id='exam' + id) > echo(name)
-                    #                     .sub-text.small-font
-                    #                         i.iconfont.icon-date
-                    #                         dateTime(startTime) + echo('至') + dateTime(endTime)

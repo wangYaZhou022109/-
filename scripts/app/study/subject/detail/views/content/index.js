@@ -28,7 +28,7 @@ exports.store = {
         },
         state: { data: {} },
         updateProgress: {
-            url: '../course-study/course-front/doc-progress'
+            url: '../course-study/course-front/url-progress'
         },
         researchActivity: {
             url: '../exam/research-activity'

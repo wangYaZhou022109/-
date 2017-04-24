@@ -15,6 +15,7 @@ exports.handlers = {
             me = this,
             disply = el.style.display,
             questionReplylist = this.bindings.reply.data.questionReplylist;
+        // console.log(el);
         _.forEach(questionReplylist, function(value) {
             if (value.id !== id) {
                 me.$('replyandreply-answer-' + value.id).style.display = 'none';
