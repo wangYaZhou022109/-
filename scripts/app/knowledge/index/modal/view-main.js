@@ -23,7 +23,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click choice': 'choice'
+    'click choice': 'choice',
+    'onKeyUp integral': 'filterIntegral'
 };
 
 exports.handlers = {
@@ -71,6 +72,8 @@ exports.components = [function() {
         options: {
             picker: 'upload',
             inputName: 'cover',
+            btnName: '选择图片',
+            defaultImg: 'images/d1.jpg',
             data: data
         }
     };
