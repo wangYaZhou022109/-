@@ -1,0 +1,101 @@
+#!handlebars
+
+module
+    div(data-region='content')
+
+view('filter') > form.vertical
+    label > setting('exam.question.content')
+    input.input(name='content' value=search.content)
+
+    label > setting('exam.all.catalog')
+    #questionDepot
+
+    label > setting('exam.question.type')
+    select.input#type(name='type' x-marker='selectize')
+        each(type)
+            option(value=key)('checked')&if(checked) > echo(value)
+
+    label > setting('exam.question.difficulty')
+    select.input#difficulty(name='difficulty' x-marker='selectize')
+        each(difficultys)
+            option(value=key)('checked')&if(checked) > echo(value)
+
+    label > setting('exam.question.status')
+    select.input#status(name='status' x-marker='selectize')
+        each(status)
+            option(value=key)('checked')&if(checked) > echo(value)
+
+    label > setting('exam.question.subjective')
+    select.input#subjective(name='subjective' x-marker='selectize')
+        each(subjective)
+            option(value=key)('checked')&if(checked) > echo(value)
+
+    label > setting('exam.exam.start-time')
+    input.input#start-time(name='createTimeStart')
+
+    label > setting('exam.exam.end-time')
+    input.input#end-time(name='createTimeEnd')
+
+
+view('content')
+    .buttons
+        .btn#add-question > i.icon-plus + span 新增
+        .btn#import > span 导入
+        a(href=exportQuestionUrl) > .btn > span 导出
+        .btn#questions > span 云题库
+    .list
+        table.table
+            thead > tr
+                th(width='10px') > string('index')
+                th(width='20px') > setting('exam.question.content')
+                th > setting('system.all.organization')
+                th > setting('exam.all.catalog')
+                th > setting('exam.question.type')
+                th > setting('exam.question.error-rate')
+                th > setting('exam.question.difficulty')
+                th > setting('exam.question.status')
+                th > setting('system.all.create-time')
+                th > setting('system.all.operator')
+                tbody > each(questions)
+                    tr
+                        td > echo(i)
+                        td > .td-content > a(id='question-' + id) > @echo(content)
+                        td > echo(organization.name)
+                        td > echo(questionDepot.name)
+                        td > map('question-types', type)
+                        td > echo(errorRate)
+                        td > map('question-difficultys', difficulty)
+                        td > map('publish-status', status)
+                        td > dateTime(createTime)
+                        td.operation
+                            compare(status 'eq' 0)
+                                a(id='publish-question-' + id data-name='id' data-value=id ) > string('publish')
+                                echo(' | ')
+                                a(id='edit-question-' + id data-name='id' data-value=id ) > string('edit')
+                                echo(' | ')
+                                a(id='delete-question-' + id data-name='id' data-value=id ) > string('remove')
+                            compare(status 'eq' 1)
+                                a(id='undo-question-' + id data-name='id' data-value=id ) > string('undo')
+    #pager.pagination
+
+view('preview')
+    div(data-dynamic-key=state.id)
+
+view('recovery')
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th 序号
+                th 纠错用户
+                th 账号
+                th 部门
+                th 原因
+            tbody > each(questionRecoverys)
+                tr
+                    td > echo(i)
+                    td > echo(member.fullName)
+                    td > echo(member.name)
+                    td > echo(member.organization.name)
+                    td > echo(reason)
+                else
+                    tr > td(colspan='5') > p.text-center > strings('no-data')

@@ -1,39 +1,18 @@
-exports.bindings = {
-    search: true
-};
+var options = require('./app/train/programme/select-research-activity/view-search'),
+    D = require('drizzlejs'),
+    obj = D.assign({}, options);
 
-exports.components = [{
-    id: 'create-time',
-    name: 'flatpickr',
-    options: {
-        mode: 'range',
-        enableTime: true
-    }
-}];
+module.exports = obj;
 
-exports.events = {
-    'click search': 'search',
-    'click btnMember': 'openMember'
-};
+D.assign(obj, {
+    components: [{
+        id: 'create-time',
+        name: 'flatpickr',
+        options: {
+            mode: 'range',
+            enableTime: true
+        }
+    }]
+});
 
-exports.handlers = {
-    search: function() {
-        var param = {
-            name: this.$('name').value,
-            publishMemberId: this.$('publishMemberId').value,
-            createTime: this.$('create-time').value
-        };
-        this.module.dispatch('search', param);
-    },
-    openMember: function() {
-        var me = this,
-            model = me.module.items['train/trainee/select-member-radio'];
-        me.app.viewport.modal(model, {
-            memberIds: [],
-            callback: function(data) {
-                me.$('publishMemberId').value = data.id;
-                me.$('publishMemberName').value = data.fullName;
-            }
-        });
-    }
-};
+module.exports = obj;

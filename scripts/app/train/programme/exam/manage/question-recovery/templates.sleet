@@ -1,0 +1,47 @@
+#! handlebars
+
+module > .exam-manage-review
+    .review-main(data-region='main')
+
+view('main')
+    .hr
+    .clearfix
+        .pull-left.m-top 纠错列表
+        .pull-right
+            .btn#import 导入
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th 序号
+                th 试题
+                th 纠错次数
+                th 操作
+            tbody > each(questions)
+                tr
+                    td > echo(i)
+                    td > .td-content > echo(content)
+                    td > echo(recoveryCount)
+                    td
+                        a(id='detail-' + id) > string('detail')
+                else
+                    tr > td(colspan='4') > p.text-center > strings('no-data')
+    #pager.pagination
+
+view('detail')
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th 序号
+                th 纠错用户
+                th 账号
+                th 部门
+                th 原因
+            tbody > each(questionRecoverys)
+                tr
+                    td > echo(i)
+                    td > echo(member.fullName)
+                    td > echo(member.name)
+                    td > echo(member.organization.name)
+                    td > echo(reason)
+                else
+                    tr > td(colspan='5') > p.text-center > strings('no-data')

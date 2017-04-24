@@ -1,0 +1,53 @@
+#!handlebars
+
+module
+    .title
+        span
+        .course-search-row(data-region='toolbox')
+        .hr
+    .content-wrapper.clearfix
+        .content-left(data-region='left')
+        .content-main(data-region='content')
+
+
+view('toolbox') > form.vertical
+    .row
+        .col-sm-11
+            .input-bar-item
+                .m-bottom > setting('human.member.name') :
+                input.input(name='name')
+            .input-bar-item
+                .m-bottom > setting('human.member.full-name') :
+                input.input(name='fullName')
+            .input-bar-item
+                .m-bottom &nbsp;
+                .btn.inline-block#searchMember 搜索
+view('content')
+    .list
+        table.table
+            thead > tr
+                th
+                    input(type='checkbox' id='check-all')('checked')&if(checkAll)
+                    label(for='check-all')
+                th > setting('human.member.full-name')
+                th > setting('human.member.name')
+                th > setting('human.member.sex')
+                th > setting('human.member.position-alias')
+                th > setting('human.member.direct-supervisor')
+                th > setting('system.all.organization')
+                th > setting('system.all.company')
+
+            tbody > each(members) > tr
+                td
+                    input(type='checkbox' id='select_'+id value=id)('checked')&if(checked)
+                    label(for='select_'+id)
+                td > echo(fullName)
+                td > echo(name)
+                td > echo(sexText)
+                td > echo(majoyPosition.name)
+                td > echo(memberDetail.directSupervisor.fullName)
+                td > echo(organization.name)
+                td > echo(organization.companyName)
+                else
+                    tr > td(colspan='8') > p.text-center > string('no-data')
+    #pager.pagination(style='float:none')

@@ -1,0 +1,25 @@
+#! handlebars
+
+module
+    .exam-base-info
+        div(data-region='main')
+
+view('main')
+    .row
+        .col-sm-12
+            label 考试名称
+            input.input(value=exam.name 'readonly')
+    .row
+        .col-sm-4
+            label.required 开始时间
+            input.input#start-time(name='startTime' value=dateTime(retest.startTime))
+        .col-sm-4
+            label.required 结束时间
+            input.input#end-time(name='endTime' value=dateTime(retest.endTime))
+        .col-sm-4
+            label.required 考试时长
+            input.input#duration(name='duration' value=retest.duration)
+    .row
+        .col-sm-12
+            label.required 参考人员
+            div(data-dynamic-key='select-retest-member')

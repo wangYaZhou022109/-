@@ -1,0 +1,22 @@
+#!handlebars
+module
+    div.current-sector(data-region='main')
+        div(data-region='organization-selector')
+        div(data-region='depot-tree')
+
+view('organization-selector')
+    div(data-dynamic-key='organization-selector')
+
+view('depot-tree')
+    .col-xs-12.text-center.sub-text.m-top
+        a#add 新增
+        | |
+        a#edit 修改
+        | |
+        a#remove 删除
+        | |
+        a#import 导入
+        | |
+        a#export 导出
+    .sector-tree.m-top
+        #tree

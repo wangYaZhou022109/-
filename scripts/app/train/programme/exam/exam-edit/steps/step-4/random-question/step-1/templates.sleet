@@ -1,0 +1,98 @@
+#!handlebars
+module
+    .random-question-main.row.m-top
+        .col-sm-2.side-tree-content > .side-tree.setting-amount
+            div(data-region='left1')
+        .col-sm-2.side-tree-content > .side-tree.setting-amount
+            div(data-region='left2')
+        .col-sm-8
+            div(data-region='right')
+
+
+view('dq-table') > form.vertical
+    .list.border.around.add-random-question-list.add-random.select
+        .total > echo('共' table.total.amount '题' table.total.score '分')
+        ul > each(table.rows)
+            li.clearfix.border.border-top
+                .com-title > echo(typeName)
+                .clearfix.cont
+                    .select-question-item
+                        .level
+                            span 高难度
+                            span.text-tips.m-left > echo('共' d1.amount '题可用')
+                        .selected-question-bar.inline-block > if(d1.usable)
+                            span > compare(d1.tacticAmount 'ne' 0)
+                                span.m-left > echo('已选' d1.tacticAmount '题共' d1.totalScore '分')
+                                span.iconbtn(id='remove-tactic-' + id + '|1') > .pe-7s-close
+                            span.iconbtn.btn.small(id='edit-popup-' + id + '|1') +
+                    .select-question-item
+                        .level
+                            span 中难度
+                            span.text-tips.m-left > echo('共' d2.amount '题可用')
+                        .selected-question-bar.inline-block > if(d2.usable)
+                            span > compare(d2.tacticAmount 'ne' 0)
+                                span.m-left > echo('已选' d2.tacticAmount '题共' d2.totalScore '分')
+                                span.iconbtn(id='remove-tactic-' + id + '|2') > .pe-7s-close
+                            span.iconbtn.btn.small(id='edit-popup-' + id + '|2') +
+                    .select-question-item
+                        .level
+                            span 低难度
+                            span.text-tips.m-left > echo('共' d3.amount '题可用')
+                        .selected-question-bar.inline-block > if(d3.usable)
+                            span > compare(d3.tacticAmount 'ne' 0)
+                                span.m-left > echo('已选' d3.tacticAmount '题共' d3.totalScore '分')
+                                span.iconbtn(id='remove-tactic-' + id + '|3') > .pe-7s-close
+                            span.iconbtn.btn.small(id='edit-popup-' + id + '|3') +
+
+        div(id='setting-popup')(class='setting-popup show')&if(currentTactic.id)(class='setting-popup')&unLess(currentTactic.id)
+            label.clearfix
+                .pull-left 数量
+                .text-right.text-tips > echo('共' currentTactic.totalAmount '题可用')
+            label.clearfix
+                input.input(id='popupAmount' value=currentTactic.amount x-rule='number,number,range:0:'+currentTactic.totalAmount+',keepDecimal:0')
+            label.clearfix
+            label.clearfix
+                .pull-left 每题分数
+                .text-right.text-tips
+            label.clearfix
+                input.input(id='popupScore' value=currentTactic.score x-rule='number,interval:0:1:1000:1,keepDecimal:1')
+            label.clearfix
+            label > .text-right
+                .btn#cancel 取消
+                .btn(id='save-tactic-' + currentTactic.id) 添加
+
+
+
+
+
+view('dq-table22') > form.vertical
+    table.table.no-padding.nowrap
+        thead
+            tr
+                th
+                    .checkbox.inline-block.no-margin
+                        input(type="checkbox" id="all")
+                        label(for="all")
+                th(width='20%') 题型
+                th(width='25%') 高
+                th(width='25%') 中
+                th(width='25%') 低
+        tbody > each(table)
+            tr
+                td
+                    .checkbox.inline-block.no-margin
+                        if(checked)
+                            input(type="checkbox" id="item-" + id checked="checked")
+                        else
+                            input(type="checkbox" id="item-" + id)
+                        label(for="item-" + id)
+                td > echo(typeName)
+                td > .inline-block
+                    echo(d1.amount)
+                    input.input.transparent(id='input-' + id + '-1' value=d1.tacticAmount x-rule='number,range:0:'+d1.amount)
+                td > .inline-block
+                    echo(d2.amount)
+                    input.input.transparent(id='input-' + id+ '-2' value=d2.tacticAmount x-rule='number,range:0:'+d2.amount)
+                td > .inline-block
+                    echo(d3.amount)
+                    input.input.transparent(id='input-' + id+ '-3' value=d3.tacticAmount x-rule='number,range:0:'+d3.amount)

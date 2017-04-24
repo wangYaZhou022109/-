@@ -1,13 +1,19 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    editHander;
+    // $ = require('jquery'),
+    // markers = require('./app/ext/views/form/markers'),
+    // validators = require('./app/ext/views/form/validators');
 
 exports.bindings = {
     questionnaireList: true,
-    state: false
+    state: false,
+    research: true
 };
 
 exports.events = {
     'click addSurvey': 'addSurvey',
-    'click addEva': 'addEva'
+    'click addEva': 'addEva',
+    'click addExam': 'addExam'
 };
 
 exports.handlers = {
@@ -21,7 +27,8 @@ exports.handlers = {
                     resourceId: data.id,
                     resourceName: data.name,
                     startTime: data.startTime,
-                    endTime: data.endTime
+                    endTime: data.endTime,
+                    isAdd: data.isAdd
                 };
                 me.module.dispatch('saveResearch', param);
             }
@@ -29,6 +36,23 @@ exports.handlers = {
     },
     addEva: function() {
         var model = this.module.items['train/programme/evaluate-questionary/select-evaluate-questionary'],
+            me = this;
+        me.app.viewport.modal(model, {
+            callback: function(data) {
+                var param = {
+                    type: 3,
+                    resourceId: data.id,
+                    resourceName: data.name,
+                    startTime: data.startTime,
+                    endTime: data.endTime,
+                    isAdd: data.isAdd
+                };
+                me.module.dispatch('saveResearch', param);
+            }
+        });
+    },
+    addExam: function() {
+        var model = this.module.items['train/programme/exam/other-module-exam'],
             me = this;
         me.app.viewport.modal(model, {
             callback: function(data) {
@@ -56,7 +80,8 @@ exports.dataForTemplate = {
 };
 
 exports.actions = {
-    'click del-qnr-*': 'delQuestionnair'
+    'click del-qnr-*': 'delQuestionnair',
+    'click edit-qnr-*': 'toEdit'
 };
 
 exports.dataForActions = {
@@ -76,14 +101,83 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     showOnlineTheme: function() {
         this.app.viewport.modal(this.module.items.configOnline);
+    },
+    toEdit: function() {
+        var isAdd = this.bindings.research.data.isAdd,
+            type = this.bindings.research.data.type,
+            id = this.bindings.research.data.id,
+            me = this,
+            callback = function(data) {
+                return me.module.dispatch('editQuestionnair', {
+                    id: id,
+                    data: data
+                });
+            },
+            result;
+        if (isAdd === 1) {
+            result = editHander[type].call(this, {
+                id: id,
+                questionnaire: this.bindings.research.data
+            }, callback);
+        }
+
+        if (isAdd === 0) {
+            result = this.app.viewport.modal(this.module.items.editQnrTime);
+        }
+        return result;
     }
 };
 
-// exports.mixin = {
-//     findById: function(id) {
-//         var questionnaireList = this.bindings.questionnaireList;
-//         return _.find(questionnaireList, {
-//             id: id
-//         });
-//     }
-// };
+editHander = {
+    1: function(payload, callback) {
+        var view = this.module.items['train/programme/exam/other-module-exam'],
+            questionnaire = payload.questionnaire;
+        return this.app.viewport.modal(view, {
+            id: questionnaire.resourceId,
+            sourceType: 2,
+            callback: function(exam) {
+                return callback({ id: payload.id, resourceName: exam.name, item: exam });
+            }
+        });
+    },
+    2: function(payload, callback) {
+        var view = this.module.items['train/programme/research-activity/add-research-third-party'],
+            questionnaire = payload.questionnaire;
+        return this.app.viewport.modal(view, {
+            researchId: questionnaire.resourceId,
+            titleType: questionnaire.resourceId ? 'edit' : 'add',
+            sourceType: 2,
+            callback: function(research) {
+                return callback({
+                    id: payload.id,
+                    resourceName: research.name,
+                    startTime: research.startTime,
+                    endTime: research.endTime,
+                    item: research
+                });
+            }
+        });
+    },
+    3: function(payload, callback) {
+        var view = this.module.items['train/programme/evaluate-questionary' +
+        '/select-evaluate-questionary/add-research-refrence'],
+            questionnaire = payload.questionnaire;
+        return this.app.viewport.modal(view, {
+            researchId: questionnaire.resourceId,
+            name: questionnaire.name,
+            startTime: questionnaire.startTime,
+            endTime: questionnaire.endTime,
+            titleType: questionnaire.resourceId ? 'edit' : 'add',
+            sourceType: 2,
+            callback: function(questionary) {
+                return callback({
+                    id: payload.id,
+                    resourceName: questionary.name,
+                    startTime: questionary.startTime,
+                    endTime: questionary.endTime,
+                    item: questionary
+                });
+            }
+        });
+    }
+};

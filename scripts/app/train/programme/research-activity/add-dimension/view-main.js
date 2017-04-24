@@ -19,7 +19,7 @@ exports.mixin = {
             flag = false;
         }
 
-        if (name.val() === '' || name.val() === null) {
+        if (name.val().trim() === '' || name.val().trim() === null) {
             markers.text.invalid(name, validators.required.message);
             flag = false;
         }

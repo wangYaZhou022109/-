@@ -1,0 +1,42 @@
+#!handlebars
+
+module
+    div(data-region='item-pool')
+    div(data-region='main')
+    div(data-region='question')
+
+view('item-pool') > form.vertical
+    if(itemPool.interim)
+        .row
+            .col-sm-12
+                .checkbox.inline-block.no-margin
+                    input(type='checkbox' name='selectBox' id='check-owner')('checked')&if(itemPool.entryDepot)
+                    label(for='check-owner')
+                .inline-block 加入题库
+    if(itemPool.entryDepot)
+        .row
+            .col-sm-6
+                label(class='required') 所属部门
+                #owner
+
+            .col-sm-6
+                label(class='required') 所属目录
+                #questionDepot
+                
+view('main') > form.vertical
+    .row
+        .col-sm-6
+            label(class='required') 试题类型
+            select.input#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
+                option(value=key)('selected')&if(selected) > echo(value)
+        .col-sm-6
+            label(class='required') 难易度
+            select.input#level(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
+                option(value=key)('selected')&if(selected) > echo(value)
+
+view('question')
+    form.vertical
+        div(data-dynamic-key=state.type)
+
+view('preview')
+    div(data-dynamic-key=state.id)

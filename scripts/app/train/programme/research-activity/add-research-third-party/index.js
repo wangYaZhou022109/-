@@ -3,7 +3,8 @@ var strings = require('./app/util/strings'),
     titleType = {
         add: '新增',
         edit: '编辑'
-    };
+    },
+    EXAM_SOURCE_TYPE = 1;
 exports.RESEARCH_TYPE = 2;
 
 exports.items = {
@@ -28,9 +29,16 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             if (payload.researchId) {
-                this.models.research.set({ id: payload.researchId });
+                this.models.research.set({
+                    id: payload.researchId,
+                    sourceType: payload.sourceType || EXAM_SOURCE_TYPE
+                });
                 return this.get(this.models.research);
             }
+
+            D.assign(this.models.research.data, {
+                sourceType: payload.sourceType || EXAM_SOURCE_TYPE
+            });
             return '';
         },
         save: function(payload) {
@@ -38,7 +46,9 @@ exports.store = {
                 right,
                 validate = payload.validate;
             if (validate) {
-                me.models.form.set(payload);
+                this.models.form.set(D.assign(payload, {
+                    sourceType: this.models.research.data.sourceType
+                }));
                 right = me.save(me.models.form).then(function() {
                     var callback = me.module.renderOptions.callback,
                         data = me.models.form.data;
@@ -53,7 +63,7 @@ exports.store = {
             }
             return right;
         },
-        changeInfo: function(payload) {
+        changeInfoDetaile: function(payload) {
             var main = this.module.items.main.getEntities()[0];
             D.assign(this.models.research.data, payload, main.getData());
             this.models.research.changed();
@@ -68,9 +78,10 @@ exports.beforeRender = function() {
 exports.buttons = [{
     text: strings.get('ok'),
     fn: function() {
-        var view = this.items.main.getEntities()[0];
-        return this.dispatch('save', D.assign(
-            this.items.main.getData(),
+        var view = this.items.main.getEntities()[0],
+            me = this;
+        return me.dispatch('save', D.assign(
+            me.items.main.getData(),
             {
                 dimensions: JSON.stringify(view.getData().dimensions),
                 id: this.store.models.research.data.id,

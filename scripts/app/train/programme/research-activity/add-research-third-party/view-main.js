@@ -12,38 +12,40 @@ exports.type = 'dynamic';
 
 exports.events = {
     'change name': 'changeInfo',
-    'change startTime': 'changeInfo',
-    'change endTime': 'changeInfo',
+    'change start-time': 'changeTime',
+    'change end-time': 'changeTime',
     'change questionaryDetail': 'changeInfo'
 };
 
 exports.handlers = {
     changeInfo: function() {
-        var start = $(this.$('startTime')).val(),
-            end = $(this.$('endTime')).val();
+        return this.module.dispatch('changeInfoDetaile', this.getData());
+    },
+    changeTime: function() {
+        var start = $(this.$('start-time')).val(),
+            end = $(this.$('end-time')).val();
         if (end !== '' && end !== null) {
             if (start !== '' && start !== null) {
                 if (start >= end) {
                     this.app.message.alert('结束时间不能早于开始时间');
-                    $(this.$('endTime')).val('');
+                    $(this.$('end-time')).val('');
                 }
             } else {
                 this.app.message.alert('请先填写开始时间');
-                $(this.$('endTime')).val('');
+                $(this.$('end-time')).val('');
             }
         }
-        return this.module.dispatch('changeInfo', this.getData());
     }
 };
 
 exports.components = [{
-    id: 'startTime',
+    id: 'start-time',
     name: 'flatpickr',
     options: {
         enableTime: true
     }
 }, {
-    id: 'endTime',
+    id: 'end-time',
     name: 'flatpickr',
     options: {
         enableTime: true
@@ -66,15 +68,15 @@ exports.mixin = {
     getData: function() {
         return {
             name: this.$('name').value,
-            startTime: this.$('startTime').value,
-            endTime: this.$('endTime').value,
+            startTime: this.$('start-time').value,
+            endTime: this.$('end-time').value,
             questionaryDetail: $(this.$('questionaryDetail')).val().trim()
         };
     },
     validate: function() {
         var name = $(this.$('name')),
-            start = $(this.$('startTime')),
-            end = $(this.$('endTime')),
+            start = $(this.$('start-time')),
+            end = $(this.$('end-time')),
             questionaryDetail = $(this.$('questionaryDetail')),
             flag = true,
             reg = new RegExp('\\{' + 0 + '\\}', 'g');
@@ -84,7 +86,7 @@ exports.mixin = {
         markers.text.valid(end);
         markers.text.valid(questionaryDetail);
 
-        if (name.val() === '' || name.val() === null) {
+        if (name.val().trim() === '' || name.val().trim() === null) {
             markers.text.invalid(name, validators.required.message);
             flag = false;
         }
@@ -101,7 +103,7 @@ exports.mixin = {
             markers.text.invalid(questionaryDetail, validators.required.message);
             flag = false;
         }
-        if (name.val() !== '' && !validators.maxLength.fn(name.val(), 30)) {
+        if (name.val().trim() !== '' && !validators.maxLength.fn(name.val(), 30)) {
             markers.text.invalid(name, validators.maxLength.message.replace(reg, 30));
             flag = false;
         }

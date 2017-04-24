@@ -1,0 +1,13 @@
+#!handlebars
+module
+    div(data-region='top')
+
+view('tab') > form.vertical
+    .step-row.row-full.avg-2
+        .step-item#step-1(class = if(currentStep.amount 'current'))
+            span.num 1
+            | 设置选项
+        .step-item#step-2(class = if(currentStep.score 'current'))
+            span.num 2
+            | 设置分数
+    div(data-dynamic-key=step)

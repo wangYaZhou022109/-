@@ -8,7 +8,7 @@ module > .choise > form.vertical
 view('content')
     div(style='width: 100%;height: 5%;border: 1px solid #ccc;margin-top:20px;margin-bottom:20px;')
         label(class='required') 试题信息
-        textarea.input#content(name='content' x-rule='required' x-marker='rich-text' x-target='content')
+        textarea.input#content(name='content')
     if(showDiffculty)
         div
             label(class='required') 难易度

@@ -19,7 +19,11 @@ exports.items = {
     'train/programme/select-research-activity': { isModule: true },
     'train/programme/evaluate-questionary/select-evaluate-questionary': { isModule: true },
     import: '',
-    'import-upload': ''
+    'import-upload': '',
+    'train/programme/exam/other-module-exam': { isModule: true },
+    editQnrTime: '',
+    'train/programme/research-activity/add-research-third-party': { isModule: true },
+    'train/programme/evaluate-questionary/select-evaluate-questionary/add-research-refrence': { isModule: true },
 };
 
 exports.store = {
@@ -560,6 +564,33 @@ exports.store = {
             this.del(research).then(function() {
                 questionnaireList.params.classId = state.classId;
                 me.get(questionnaireList);
+            });
+        },
+        toEdit: function(payload) {
+            var research = this.models.research;
+            research.clear();
+            research.set(payload);
+            return this.get(research);
+        },
+        editQuestionnair: function(payload) {
+            var questionnaireList = this.models.questionnaireList,
+                research = this.models.research,
+                me = this;
+            research.clear();
+            research.set(payload.data);
+            me.put(research).then(function() {
+                me.app.message.success('操作成功');
+                me.get(questionnaireList);
+            });
+        },
+        editTime: function(payload) {
+            var research = this.models.research,
+                me = this;
+            research.clear();
+            research.set(payload);
+            me.put(research).then(function() {
+                me.app.message.success('操作成功');
+                me.get(me.models.questionnaireList);
             });
         }
     }

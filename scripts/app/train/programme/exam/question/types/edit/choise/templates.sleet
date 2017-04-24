@@ -1,0 +1,48 @@
+#!handlebars
+
+module > .choise > form.vertical
+    div(data-region='content')
+    .options(data-region='options')
+    div(data-region='score')
+
+view('content')
+    .row > .col-sm-12
+        label(class='required') 试题信息
+        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
+    if(showDiffculty)
+        .row > .col-sm-12
+            label(class='required') 难易度
+            select.input#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
+                option(value=key)('selected')&if(selected) > echo(value)
+
+view('options')
+    label
+        | 选项
+        a.m-left#add(href='javascript:;') 添加选项
+    ul.row > each(options)
+        li.col-sm-6.options(id='item-' + index)
+            .input-box
+                .text
+                    span.list-option > echo('选项' + code ':')
+                if(isRichText)
+                    .input.block.choise-content
+                        @echo(content)
+                        input(type='hidden' id='content-' + index value=content)
+                else
+                    textarea.input.block(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3) > echo(content)
+            .clearfix.set-row
+                .pull-left
+                    span.set-answer(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected'))
+                        span.tick > .pe-7s-check
+                        echo('设为答案')
+                .pull-right.text-tips
+                    span(data-dynamic-key=index)
+                    a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
+
+
+view('score')
+    if(showScore)
+        .row
+            .col-sm-6
+                label(class='required') 试题分数
+                input.input(id='score' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')

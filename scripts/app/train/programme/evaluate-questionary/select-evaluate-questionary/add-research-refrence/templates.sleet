@@ -12,9 +12,9 @@ view('main')
                 br
                 br
                 label.required > echo('开始时间')
-                input.input#startTime(name='startTime' x-rule='required' value=research.startTime)
+                input.input#start-time(name='startTime' x-rule='required' value=research.startTime)
                 label.required > echo('结束时间')
-                input.input#endTime(name='endTime' x-rule='required' value=research.endTime)
+                input.input#end-time(name='endTime' x-rule='required' value=research.endTime)
             .col-sm-12
                 label.required > setting('exam.research.questionary-detail')
                 br

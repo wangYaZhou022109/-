@@ -1,0 +1,34 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='subs')
+    div(data-region='score')
+
+
+view('content')
+    .row
+        .col-xs-6 > .com-title 阅读理解
+        #  .col-xs-6 > .m-top.text-right
+        #      | 本题分数：
+        #      echo(state.score)
+    p.question > @echo(state.content)
+
+view('subs')
+    each(subs)
+        echo('(' index ')')
+        div(data-dynamic-key=id)
+
+view('score')
+    .clearfix
+        .pull-right.m-bottom
+            .inline-block
+                span.text-tips 题型:
+                span > echo(state.type)
+            if(showScore)
+                .inline-block.m-left
+                    span.text-tips 分数:
+                    span > echo(state.score)
+            .inline-block.m-left
+                span.text-tips 难度:
+                span > echo(state.difficulty)
