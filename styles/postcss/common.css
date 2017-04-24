@@ -251,6 +251,51 @@ section.section {
     }
 }
 
+.number-tips {
+    position: relative;
+    display: inline-block;
+
+    &:after {
+        @apply --fade-out;
+
+        position: absolute;
+        white-space: nowrap;
+        content: attr(data-tips);
+        left: 100%;
+        top: 0em;
+        opacity: 0;
+        visibility: hidden;
+        color: red;
+        font-weight: bold;
+    }
+
+    &:visited{
+        &:after {
+            animation: numberTips .5s linear 1;
+        }
+    }
+}
+
+@keyframes numberTips {
+
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(1.2);
+    }
+
+    50% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        top: -1rem;
+        transform: translate(.5);
+    }
+
+}
 
 /* text */
 .text-overflow {

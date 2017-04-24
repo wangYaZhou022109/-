@@ -5,7 +5,7 @@ module
         div(data-region='main')
 
 view('main') > .base-info
-    .form
+    .form.align-left
         .pic(style='background-image:url(images/default-userpic.png)')
             #headFile
         .info
