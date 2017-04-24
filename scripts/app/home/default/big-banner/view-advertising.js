@@ -9,7 +9,8 @@ module.exports = {
         id: 'banner',
         name: 'swiper',
         options: {
-            autoplay: true
+            autoplay: true,
+            navigation: true
         }
     }]
 };

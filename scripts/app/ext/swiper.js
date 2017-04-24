@@ -107,6 +107,7 @@ D.assign(Swiper.prototype, {
 
     insertNavigation: function() {
         var me = this;
+        if (!this.options.navigation) return;
         this.navigation = document.createElement('div');
         this.navigation.classList.add('navigation');
 
