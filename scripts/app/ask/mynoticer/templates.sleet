@@ -6,12 +6,12 @@ view('main')
     .section.follow
         .clearfix
             dl
-                dt > echo(follow.contentCount)
+                dt > echo(follow.concernNum)
                 dd > a(id = 'follow-me-1') > string('followers') 
             dl
-                dt > echo(follow.topicCount)
+                dt > echo(follow.answerNum)
                 dd > a(id = 'follow-me-2') > string('answer') 
             dl
-                dt > echo(follow.expertCount)
+                dt > echo(follow.articleNum)
                 dd > a(id = 'follow-me-3') > string('share') 
 
