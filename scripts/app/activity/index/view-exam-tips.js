@@ -3,7 +3,6 @@ exports.title = '考试须知';
 exports.small = true;
 
 exports.bindings = {
-    currentExam: true
 };
 exports.events = {
     'click close-button': 'closeButton',

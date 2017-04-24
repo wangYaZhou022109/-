@@ -45,15 +45,15 @@ view('addwork')
                         .progress
                             .progress-bar(style="width:80%")
                             span 80%
-                    i.iconfont.icon-close-circle.custom-color-3.inline-block
+                    i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3.inline-block
             tr
                 td 2
                 td 显示附件名称（点击可修改）
                 td doc
                 td
-                    i.iconfont.icon-edit.text-main-color.m-right
-                    i.iconfont.icon-search.custom-color-4.m-right
-                    i.iconfont.icon-close-circle.custom-color-3
+                    i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                    i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                    i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
         .form.layout-mt-small.align-left
             .form-choice
                 .form-row

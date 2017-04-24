@@ -5,7 +5,7 @@ exports.items = {
     contents: 'contents'
 };
 
-exports.title = '选择话题';
+exports.title = '选择标签';
 
 exports.buttons = [{
     text: '选择'
@@ -14,20 +14,17 @@ exports.store = {
     models: {
         topics: { url: '../system/topic/select', autoLoad: 'after' },
         state: { data: {} },
-        search: {
-            data: {},
-            mixin: { getQueryParams: function() {
-                if (this.data.organizationId) return { organizationId: this.data.organizationId };
-                return {};
-            } }
-        },
+        search: { data: {} },
         types: { url: '../system/topic-type', autoLoad: 'after' }
     },
     callbacks: {
+        changeSearch: function(payload) {
+            var search = this.models.search;
+            search.set(D.assign(search.data, payload), true);
+        },
         refreshList: function(options) {
-            var data = D.assign({}, this.models.search.getQueryParams(), options),
-                model = this.models.topics;
-            model.params = data;
+            var model = this.models.topics;
+            model.params = options;
             this.get(model);
         }
     }

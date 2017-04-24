@@ -22,10 +22,11 @@ exports.events = {
 };
 
 exports.handlers = {
-    buttonClicked: function(id) {
+    buttonClicked: function(id, e, target) {
         var button = this.bindings.state.data.buttons[id],
             view = this.module.renderOptions.options.view,
-            el, form, data, i, item, name, value, v, actions, callbacks;
+            el, form, data, i, item, name, value, v, actions, callbacks,
+            disabledClass = this.app.options.disabledClass;
 
         el = view._getElement();    // eslint-disable-line no-underscore-dangle
         form = el.querySelector('form');
@@ -49,9 +50,16 @@ exports.handlers = {
             }
         }
 
+        if ($(target).hasClass(disabledClass)) return true;
+        $(target).addClass(disabledClass);
+
         if (!button.action) {
             return this.chain(button.fn && button.fn.call(view, data), function(result) {
                 result !== false && this.module.close();
+            }).then(function() {
+                $(target).removeClass(disabledClass);
+            }, function() {
+                $(target).removeClass(disabledClass);
             });
         }
 
@@ -72,7 +80,11 @@ exports.handlers = {
                 var r = result[0];
                 r !== false && callbacks[button.action] && callbacks[button.action].call(view, r);
             }
-        );
+        ).then(function() {
+            $(target).removeClass(disabledClass);
+        }, function() {
+            $(target).removeClass(disabledClass);
+        });
     },
 
     closeIt: function() {

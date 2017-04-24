@@ -1,4 +1,4 @@
-var $ = require('jquery');
+
 exports.bindings = {
     search: true
 };
@@ -6,44 +6,44 @@ exports.bindings = {
 exports.dataForTemplate = {
     search: function(data) {
         var search = data.search;
-        if (!search.searchStatus) search.statusAll = true;
-        if (search.searchStatus === '1') search.statusa = true;
-        if (search.searchStatus === '2') search.statusb = true;
-        if (search.searchStatus === '3') search.statusc = true;
-        if (search.searchStatus === '4') search.statusd = true;
-        if (search.type === '1') search.typea = true;
-        if (search.type === '2') search.typeb = true;
-        return search;
+        return {
+            all: search.searchStatus === null,
+            waitStart: search.searchStatus === 1,
+            begining: search.searchStatus === 2,
+            finished: search.searchStatus === 3,
+            allType: search.type === null,
+            formal: search.type === 1,
+            unFormal: search.type === 2,
+            name: search.name
+        };
     }
 };
 
 exports.events = {
-    'click status-*': 'selectStatus',
+    'click item-*': 'selectItem',
     'click type-*': 'selectType',
-    'click startTimeOrderBy': 'startTimeOrderBy',
-    'click searchByName': 'searchByName'
+    'click start-time-order': 'selectStartTimeOrder'
 };
 
 exports.handlers = {
-    selectStatus: function(status) {
-        var params = {
-            searchStatus: status === 'all' ? '' : status
-        };
-        this.module.dispatch('search', params);
+    selectItem: function(value) {
+        return this.module.dispatch('selectItem', { searchStatus: Number(value) === 0 ? null : Number(value) });
     },
-    selectType: function(type) {
-        var params = {
-            type: type === 'all' ? '' : type
-        };
-        this.module.dispatch('search', params);
+    selectType: function(value) {
+        return this.module.dispatch('selectItem', { type: Number(value) === 0 ? null : Number(value) });
     },
-    startTimeOrderBy: function() {
-        this.module.dispatch('search', {
-            startTimeOrderBy: this.bindings.search.data.startTimeOrderBy
-        });
-    },
-    searchByName: function() {
-        var name = $(this.$$('[name="exam-name"]')).val();
-        this.module.dispatch('search', { name: name });
+    selectStartTimeOrder: function() {
+        return this.module.dispatch('selectItem', { startTimeOrderBy: 1 });
     }
 };
+
+exports.actions = {
+    'click search': 'selectItem'
+};
+
+exports.dataForActions = {
+    selectItem: function() {
+        return { name: this.$('name').value };
+    }
+};
+

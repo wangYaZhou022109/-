@@ -15,18 +15,13 @@ exports.handlers = {
     showTopic: function() {
         var me = this,
             model = me.module.items['picker/topics/select-topic'],
-            comp = this.module.items.tags.components.tags,
-            data = this.bindings.state.data;
+            comp = this.module.items.tags.components.tags;
 
         me.app.viewport.modal(model, {
             ids: comp.getValue(),
             callback: function(payload, flag) {     // 选中添加，非选中取消添加。
                 if (flag) {
-                    if (data.limit && comp.getData().length >= data.limit) {
-                        me.app.message.error('只能添加' + data.limit + '个');
-                    } else {
-                        comp.addItem({ value: payload.id, text: payload.name });
-                    }
+                    comp.addItem({ value: payload.id, text: payload.name });
                 } else {
                     comp.removeItem(payload.id);
                 }

@@ -17,12 +17,16 @@ exports.type = 'dynamic';
 
 exports.getEntity = function(id) {
     var question;
-
     question = this.bindings.types.getQuestionById(id);
     question = D.assign({}, question, {
         score: question.score / 100,
         questionAttrs: _.orderBy(question.questionAttrCopys, ['name', 'asc'])
     });
+    question.answerRecord = D.assign(
+        {},
+        question.answerRecord,
+        { score: question.answerRecord ? question.answerRecord.score / 100 : 0 }
+    );
     return question;
 };
 

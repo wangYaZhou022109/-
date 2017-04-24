@@ -11,7 +11,7 @@ var D = require('drizzlejs'),
     prefixUrl = {
         8: '#/study/task/',
         10: '#/study/course/detail/',
-        14: '#/gensee/detail/'
+        14: '#/activity/gensee/detail/'
     },
     btnTextStudy;
 // 阶段序号转义
