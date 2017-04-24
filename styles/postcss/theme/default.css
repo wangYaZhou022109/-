@@ -153,6 +153,10 @@
     color: var(--custom-color-5);
 }
 
+.gray-7 {
+    color: var(--font-sub-color);
+}
+
 [class*=custom-bg-] {
     color: var(--white);
 }

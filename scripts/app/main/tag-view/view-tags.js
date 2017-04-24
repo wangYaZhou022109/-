@@ -12,7 +12,8 @@ exports.dataForTemplate = {
     emptyText: function() {
         return this.module.renderOptions.emptyText;
     },
-    placeholder: function() {
+    placeholder: function(data) {
+        if (data.state.list.length > 0) return '';
         return this.module.renderOptions.placeholder || '';
     },
     values: function() {
@@ -49,6 +50,14 @@ exports.handlers = {
 
         if (!pro || e.keyCode !== 13) return false;
         if (size >= limit) {
+            element.value = '';
+            return false;
+        }
+        if (element.value.length > 10) {
+            this.app.message.error('标签长度不能超过10个字符');
+            return false;
+        }
+        if (element.value.trim() === '') { // 输入空格，不允许添加标签
             element.value = '';
             return false;
         }

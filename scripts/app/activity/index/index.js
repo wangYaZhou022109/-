@@ -1,5 +1,4 @@
 var D = require('drizzlejs'),
-    _ = require('lodash/collection'),
     RECOMMEND_SIZE = 6,
     RESEARCH_TYPE = 1;
 
@@ -7,124 +6,70 @@ exports.items = {
     banner: 'banner',
     filter: 'filter',
     list: 'list',
-    'exam/index': { isModule: true },
-    'exam-tips': '',
-    'research-tips': ''
+    'activity/index/exam-prompt': { isModule: true }
 };
 
 exports.store = {
     models: {
+        search: {},
         activitys: {
-            url: '../exam/activity/recommends',
-            data: []
+            url: '../exam/activity/recommends-activity-list'
         },
-        gensees: { url: '../course-study/gensee/details',
+        gensees: {
+            url: '../course-study/gensee/details',
             type: 'pageable',
             root: 'items',
-            pageSize: 25 },
-        activity: { url: '../exam/activity' },
-        params: { data: { all: true } },
-        down: { url: '../human/file/download' },
+            pageSize: 50
+        },
         exams: {
-            url: '../exam/exam/details',
+            url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 18
+            pageSize: 60
         },
-        exam: { url: '../exam/exam/exam-sign-up' },
-        examOfUser: { url: '../exam/exam/exam-of-user/' },
-        currentExam: { },
-        signUp: { url: '../exam/sign-up' },
         researchActivitys: {
             url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 18
+            pageSize: 60
         },
-        researchRecord: {
-            url: '../exam/research-record/get-by-research'
-        }
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function() {
-            this.models.activitys.params.size = RECOMMEND_SIZE;
-            this.get(this.models.activitys);
-            this.models.gensees.params = this.models.params.data;
-            this.get(this.models.gensees);
-            this.models.exams.params = this.models.params.data;
-            this.get(this.models.exams);
-            this.models.researchActivitys.params = this.models.params.data;
-            this.models.researchActivitys.params.type = RESEARCH_TYPE;
-            this.get(this.models.researchActivitys);
+            var activitys = this.models.activitys,
+                exams = this.models.exams,
+                gensees = this.models.gensees,
+                researchActivitys = this.models.researchActivitys,
+                search = this.models.search;
+
+            D.assign(activitys.params, { size: RECOMMEND_SIZE });
+            D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
+            D.assign(search.data, { searchStatus: 0 });
+            return this.chain([
+                this.get(activitys),
+                this.get(gensees),
+                this.get(exams),
+                this.get(researchActivitys)
+            ]);
         },
         search: function(payload) {
-            D.assign(this.models.params.data, payload);
-            this.models.params.changed();
-            this.models.exams.params = this.models.params.data;
-            this.models.researchActivitys.params = this.models.params.data;
-            this.models.gensees.params = this.models.params.data;
-            return this.chain([this.get(this.models.exams),
-                this.get(this.models.researchActivitys),
-                this.get(this.models.gensees)]);
-        },
-        examLeft: function() {
-            var page = this.models.exams.params.page;
-            if (page && page > 1) {
-                this.models.exams.turnToPage(page - 1);
-                this.get(this.models.exams);
-            }
-        },
-        examRight: function() {
-            var page = this.models.exams.params.page;
-            if (page) {
-                this.models.exams.turnToPage(page + 1);
-                this.get(this.models.exams);
-            }
-        },
-        researchLeft: function() {
-            var page = this.models.researchActivitys.params.page;
-            if (page && page > 1) {
-                this.models.researchActivitys.turnToPage(page - 1);
-                this.get(this.models.researchActivitys);
-            }
-        },
-        researchRight: function() {
-            var page = this.models.researchActivitys.params.page;
-            if (page) {
-                this.models.researchActivitys.turnToPage(page + 1);
-                this.get(this.models.researchActivitys);
-            }
-        },
-        getExamById: function(payload) {
-            this.models.examOfUser.set({ id: payload.id });
-            return this.get(this.models.examOfUser);
-        },
-        signUp: function(examId) {
-            this.models.signUp.set({ examId: examId });
-            return this.post(this.models.signUp);
-        },
-        revoke: function(examId) {
-            var me = this;
-            this.models.signUp.set({ id: examId });
-            return me.del(me.models.signUp);
-        },
-        refreshCurrentExam: function(examId) {
-            var me = this,
-                exams = me.models.exams.data;
-            me.models.currentExam.data = _.find(exams, ['id', examId]);
-            me.models.exam.set({ id: examId });
-            me.get(me.models.exam).then(function(data) {
-                me.models.currentExam.data.signUp = data[0].signUp;
-                me.models.currentExam.changed();
-            });
-        },
-        getResearchRecord: function(payload) {
-            this.models.researchRecord.clear();
-            D.assign(this.models.researchRecord.params, payload);
-            return this.get(this.models.researchRecord);
-        },
-        clearResearchRecord: function() {
-            this.models.researchRecord.clear();
+            var gensees = this.models.gensees,
+                exams = this.models.exams,
+                researchActivitys = this.models.researchActivitys,
+                search = this.models.search;
+
+            D.assign(gensees.params, payload);
+            D.assign(exams.params, payload);
+            D.assign(researchActivitys.params, payload);
+            D.assign(search.data, payload);
+            search.changed();
+
+            return this.chain([
+                this.get(gensees),
+                this.get(exams),
+                this.get(researchActivitys)
+            ]);
         },
         getResearchById: function(payload) {
             return this.models.researchActivitys.data.find(function(r) {
@@ -134,6 +79,6 @@ exports.store = {
     }
 };
 
-exports.afterRender = function() {
+exports.beforeRender = function() {
     return this.dispatch('init');
 };
