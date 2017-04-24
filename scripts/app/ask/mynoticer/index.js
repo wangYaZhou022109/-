@@ -5,7 +5,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        follow: { url: '../ask-bar/concern/follow' }
+        follow: { url: '../ask-bar/concern/followMeCount' }
     },
     callbacks: {
         init: function() {

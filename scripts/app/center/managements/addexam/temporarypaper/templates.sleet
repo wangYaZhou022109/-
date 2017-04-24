@@ -70,7 +70,7 @@ view('temporarypaper-content')
                         td > a#test-8 排序
 
         .text-center.pull-left.button-item.pointer#importest
-            i.iconfont.icon-tag.m-right.strong
+            i.iconfont.icon-cloud-up.m-right.strong
             span 导入试题
     .page-main-wrapper.layout-mt-small
         .page-side.text-center

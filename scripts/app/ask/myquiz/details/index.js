@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     main: 'main',
     relevantexperts: 'relevantexperts',
@@ -32,11 +33,29 @@ exports.store = {
         },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' },
-        shut: { url: '../ask-bar/myquiz' }
+        shut: { url: '../ask-bar/myquiz' },
+        speech: {
+            url: '../system/speech-set',
+            mixin: {
+                getData: function(id) {
+                    var speechset;
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            speechset = d;
+                        }
+                    });
+                    return speechset;
+                }
+            }
+        }
     },
     callbacks: {
         refreshrelpy: function() {
             this.models.state.changed();
+        },
+        speech: function() {
+            var speech = this.models.speech;
+            return this.get(speech);
         },
         init: function(payload) {
             // var question = payload.question;
@@ -87,8 +106,11 @@ exports.store = {
             return this.post(boutique);
         },
         discuss: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
+            var discuss = this.models.discuss,
+                data = payload,
+                speechset = this.models.speech.getData('2');
+            data.speechset = speechset.status;
+            discuss.set(data);
             return this.save(discuss);
         },
         discussdel: function(payload) {
@@ -161,13 +183,13 @@ exports.store = {
         praise: function(payload) {
             var praise = this.models.praise;
             praise.set(payload);
-            return this.put(praise);
+            return this.post(praise);
         }
     }
 };
 
 exports.beforeRender = function() {
     this.dispatch('questionDetails', this.renderOptions);
-    // this.dispatch('concern', this.renderOptions);
+    this.dispatch('speech');
 };
 
