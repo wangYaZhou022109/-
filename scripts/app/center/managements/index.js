@@ -36,7 +36,8 @@ exports.items = {
     'center/managements/addevaluation': { isModule: true },
     'center/managements/addexam': { isModule: true },
     'center/managements/addunit': { isModule: true },
-    'center/managements/addcarinfo': { isModule: true }
+    'center/managements/addcarinfo': { isModule: true },
+    'center/managements/choosedate': { isModule: true }
 };
 exports.events = {
     'click managements-tab-*': 'showContents'

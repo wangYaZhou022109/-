@@ -41,10 +41,12 @@ exports.handlers = {
     },
     showMinimize: function(id) {
         $(this.$('minitable-' + id)).toggle();
-        if ($(this.$('minimize-' + id)).text() === '-') {
-            $(this.$('minimize-' + id)).text('+').prev().text('最大化');
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
         } else {
-            $(this.$('minimize-' + id)).text('-').prev().text('最小化');
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
         }
     }
 };
