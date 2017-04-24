@@ -4,7 +4,7 @@ module > .edit-info-page
         div(data-region='list')
 
 view('list')
-    each(member)
+    each(page)
         li.follow-item
             a.normal(href="javascript:;")
                 .img > .img-cont > img(src=headPortrait alt=fullName)
