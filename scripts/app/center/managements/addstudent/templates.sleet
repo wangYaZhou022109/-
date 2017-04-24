@@ -7,7 +7,7 @@ view('addstudent')
     .clearfix
         label.pull-left.tag-height.m-right 员工编号
         input.pull-left.tag-height
-        .btn.pull-left.gray.tag-height 添加
+        .small-btn.pull-left 添加
     .m-top.clearfix
         .addstudent-title-item.pull-left
             label 账号

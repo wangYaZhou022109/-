@@ -17,7 +17,6 @@
 @import "classedit.css";
 @import "managements-classinfo.css";
 @import "managements-ordertime.css";
-@import "topic.css";
 @import "addtopicclass.css";
 @import "addwork.css";
 @import "mostsign.css";
@@ -31,3 +30,5 @@
 @import "newevaluation.css";
 @import "addexam.css";
 @import "taskmarking.css";
+@import "topic.css";
+@import "choosedate.css";
