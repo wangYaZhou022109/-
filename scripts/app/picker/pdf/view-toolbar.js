@@ -1,5 +1,7 @@
 var _ = require('lodash/collection'),
-    maps = require('./app/util/maps');
+    maps = require('./app/util/maps'),
+    $ = require('jquery'),
+    isFullscreen;
 exports.bindings = {
     state: true
 };
@@ -15,7 +17,7 @@ exports.dataForTemplate = {
             pdfScale = maps.get('pdf-scale');
         _.map(pdfScale, function(opt) {
             var scale = opt;
-            scale.key = Number(scale.key) / 100;
+            scale.key = !isNaN(scale.key) ? Number(scale.key) / 100 : scale.key;
             if (scale.key === state.scale) {
                 scale.selected = true;
             }
@@ -30,7 +32,8 @@ exports.events = {
     'click turnToPage-*': 'turnToPage',
     'change currentPageNum': 'currentPageNum',
     'change scaleSelect': 'scaleSelect',
-    'click zoom-*': 'zoomInOut'
+    'click zoom-*': 'zoomInOut',
+    'click fullScreen': 'fullScreen'
 };
 
 exports.handlers = {
@@ -80,5 +83,39 @@ exports.handlers = {
         this.module.dispatch('zoomInOut', payload).then(function(state) {
             pdf.reset(state);
         });
+    },
+    fullScreen: function() {
+        var pdf = this.module.items.viewer.components.viewerContainer,
+            container = pdf.container;
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+            container.mozRequestFullScreen();
+        } else if (container.webkitRequestFullscreen) {
+            $(container).css('height', '100%');
+            container.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (container.msRequestFullscreen) {
+            container.msRequestFullscreen();
+        }
     }
+};
+
+exports.afterRender = function() {
+    var container, height;
+    if (this.module.items.viewer.components.viewerContainer) {
+        container = this.module.items.viewer.components.viewerContainer.container;
+        height = $(container).css('height');
+        document.addEventListener('webkitfullscreenchange', function() {
+            if (!isFullscreen()) {
+                $(container).css('height', height);
+            }
+        });
+    }
+};
+
+isFullscreen = function() {
+    return !!(document.fullscreenElement ||
+        document.mozFullScreen ||
+        document.webkitIsFullScreen ||
+        document.msFullscreenElement);
 };

@@ -6,20 +6,22 @@ module > .layout-mt
 view('toolbar')
     .pdf-view-toolbar.border > .clearfix
         .pull-left
-            .inline-block.iconfont.icon-arrow-left-circle.m-right#turnToPage-prev
-            .inline-block.iconfont.icon-arrow-right-circle#turnToPage-next
+            .inline-block.iconfont.icon-arrow-left-circle.m-right#turnToPage-prev(title="上一页")
+            .inline-block.iconfont.icon-arrow-right-circle#turnToPage-next(title="下一页")
             .inline-block.m-left
                 input.input.min.inline-block#currentPageNum(value=state.pageNum)
                 echo('/')
                 label.inline-block#pageCount > echo(state.pageCount)
         .pull-right
             .inline-block
-                .iconfont.icon-zoom-out#zoom-out
-                .iconfont.icon-zoom-in.m-left#zoom-in
+                .iconfont.icon-full-screen.m-right#fullScreen(title="切换到演示模式")
+                .iconfont.icon-zoom-out#zoom-out(title="缩小")
+                .iconfont.icon-zoom-in.m-left#zoom-in(title="放大")
             .inline-block.m-left
                 select(id='scaleSelect')
                     each(pdfScale)
                         option(value = key)('selected')&if(selected) > echo(value)
+
 view('viewer')
     .pdf-progress
         #progress.btn(style='display:none;')
