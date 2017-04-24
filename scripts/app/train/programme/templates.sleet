@@ -106,7 +106,6 @@ view('questionnaire')
                 tr
                     th 序号
                     th 问卷名称
-                    th(width='40%') 问卷名称
                     th 类型
                     th 开始时间
                     th 结束时间
