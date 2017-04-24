@@ -15,86 +15,86 @@ view('groupmanage')
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-fontgray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-fontgray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-fontgray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
                 tr
                     td 刘宇超
                     td 0000000
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
-                        i.iconfont.icon-close
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray-font
+                        i.pointer.m-right.iconfont.icon-delete-solid.gray-font
         .page-main
             .filter-row
                 .filter-item

@@ -1,6 +1,6 @@
 var D = require('drizzlejs');
 
-exports.type = 'dynamic';
+// exports.type = 'dynamic';
 
 exports.bindings = {
     state: false,

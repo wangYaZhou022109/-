@@ -18,7 +18,7 @@ exports.components = [
             id: 'viewPdf',
             name: 'picker',
             options: {
-                picker: 'player-pdf',
+                picker: 'pdf',
                 pdfUrl: url,
                 pageNum: Number(pageNum)
             }

@@ -11,48 +11,48 @@ view('addtopicclass')
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
                 tr
                     td 课程名称课程名称课程名称
                     td
-                        i.iconfont.icon-sort-asc
-                        i.iconfont.icon-sort-desc
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
 
         .page-main
             .choosetopic.clearfix

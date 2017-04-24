@@ -8,6 +8,5 @@ view('list')
         span.more#follow-me more
         .layout-mt-small.user-picture
             .grid-row
-                each(member)
+                each(page)
                     .col-md-3 > img.block(src=headPortrait alt=fullName id='member-' + id data-name='id' data-value=id )
-               

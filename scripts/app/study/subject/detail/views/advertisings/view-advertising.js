@@ -13,7 +13,8 @@ exports.components = [{
     id: 'banner',
     name: 'swiper',
     options: {
-        autoplay: true
+        autoplay: true,
+        navigation: true
     }
 }, function() { // 分享组件
     var data = {},

@@ -13,7 +13,7 @@ exports.store = {
         init: function(options) {
             this.models.state.set(D.assign({}, options, {
                 pageNum: 1,
-                scale: 1
+                scale: 'page-width'
             }));
         },
         updatePage: function(payload) {
@@ -40,7 +40,7 @@ exports.store = {
                 if (scaleIndex < 0) scaleIndex = 0;
             }
             currentScale = payload.scaleMap[scaleIndex].key;
-            state.scale = Number(currentScale) / 100;
+            state.scale = !isNaN(currentScale) ? Number(currentScale) / 100 : currentScale;
             this.models.state.changed();
             return state;
         }

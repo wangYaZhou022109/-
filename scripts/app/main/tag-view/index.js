@@ -7,16 +7,18 @@ exports.items = {
 exports.store = {
     models: { state: {} },
     callbacks: {
-        init: function(options) {
-            var list = [];
-            if (options.topics) { // 修改时带过来的话题
-                list = options.topics;
-            }
-            return this.models.state.set({ map: {}, list: list });
+        init: function() {
+            return this.models.state.set({ map: {}, list: [] });
         },
 
         add: function(payload) {
             var state = this.models.state;
+            var limit = this.module.renderOptions.limit;
+            if (state.data.list.length === limit) {
+                this.app.message.error('最多添加' + limit + '项');
+                return;
+            }
+
             _.map(payload.items, function(item) {
                 if (state.data.map[item.value]) return;
                 state.data.map[item.value] = item;
@@ -44,7 +46,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    return this.dispatch('init');
 };
 
 exports.mixin = {

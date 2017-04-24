@@ -1,15 +1,7 @@
 .topic-page {
     & .topic {
-        & .line {
-            height: var(--input-height);
-            & .addtopic-btn {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translateX(-50%);
-                margin: 0 calc(var(--large-space) /2);
-                border-radius: 20%/50%;
-            }
+        & .iconfont {
+            font-size: var(--small-font);
         }
     }
 }

@@ -17,23 +17,23 @@ exports.handlers = {
 exports.dataForTemplate = {
     downUrl: function(data) {
         var img = data.img,
-            url;
+            url = data.state.defaultImg;
         if (img.imgId || img.imgs) {
             url = this.bindings.down.getFullUrl() + '?id=' + (img.imgId || img.imgs[0].id);
         }
         return url;
     },
-    fileId: function() {
-        var img = this.bindings.img.data;
+    fileId: function(data) {
+        var img = data.img;
         return img.imgId || (img.imgs && img.imgs.length && img.imgs[0].id);
     },
     btnName: function(data) {
-        return data.state.data.btnName || false;
+        return data.state.btnName || false;
     },
     btnClass: function(data) {
-        return data.state.data.btnClass;
+        return data.state.btnClass;
     },
     defaultCss: function(data) {
-        return data.state.data.defaultCss || 'user-pic';
+        return data.state.defaultCss || 'user-pic';
     }
 };
