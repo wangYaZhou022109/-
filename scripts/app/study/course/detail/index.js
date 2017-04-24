@@ -124,7 +124,7 @@ exports.store = {
         },
         selectCourseRelated: function() {
             var model = this.models.courseRelated;
-            model.params = { id: this.models.course.data.id };
+            model.params = { id: this.models.course.data.id, limit: 2 };
             return this.get(this.models.courseRelated);
         },
         score: function(payload) {

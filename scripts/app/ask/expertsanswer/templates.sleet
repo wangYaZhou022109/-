@@ -17,51 +17,23 @@ view('list')
                     span.sub-text > echo(questionDiscuss.createTime)
                 .comment-operation
                     .pull-left > .sub-text > echo('来自问题：') + a(id='myquiz-details-' + questionDiscuss.id + '_' + id ) > echo(title)
-                    .text-right
-                        compare(pendingAudit.auditStatus 'eq' 0) 
-                            .item > span.color-ing > string('auditStatus0')
-                            .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
-                        else
-                            compare(pendingAudit.auditStatus 'eq' 1) 
-                                .item > string('praise') +  echo('('+ questionDiscuss.praiseNum +')')
-                                .item > string('comment') +  echo('(' + questionDiscuss.replyNum +')')
-                                .item > .share-bar
-                                    .drop-down-wrapper
-                                        i.iconfont.icon-share-2(title='分享')
-                                        form.drop-down-content > .content
-                                            .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                            .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                            .item > div(id ='shareTo-bar_' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
-                                .item > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
-                                form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
-                                    textarea.input.w-full.block(rows=1 name='content' value='' )
-                                    input.input(type='hidden' name='organizationId' value=questionDiscuss.organizationId)
-                                    input.input(type='hidden' name='questionId' value=questionDiscuss.questionId)
-                                    input.input(type='hidden' name='id' value=questionDiscuss.id)
-                                    input.input(type='hidden' name='toUserId' value=questionDiscuss.createMemberId)
-                                    .btn(id='reply-' + questionDiscuss.id ) > string('publish')
-                            else
-                                compare(pendingAudit.auditStatus 'eq' 2) 
-                                    .item > span.color-ing > string('auditStatus2')
-                                    .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
-                                else
-                                    .item > string('praise') +  echo('('+ questionDiscuss.praiseNum +')')
-                                    .item(id='discuss-' + questionDiscuss.id ) > string('comment') + echo('(' + questionDiscuss.replyNum +')')
-                                    .item > .share-bar
-                                        .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
-                                            form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                                .item > div(id ='shareTo-bar_' + questionDiscuss.id) > i.iconfont.icon-ask + span 分享到问吧
-                                    .item > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
-                                    form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
-                                        textarea.input.w-full.block(rows=1 name='content' value='' )
-                                        input.input(type='hidden' name='organizationId' value=questionDiscuss.organizationId)
-                                        input.input(type='hidden' name='questionId' value=questionDiscuss.questionId)
-                                        input.input(type='hidden' name='id' value=questionDiscuss.id)
-                                        input.input(type='hidden' name='toUserId' value=questionDiscuss.createMemberId)
-                                        .btn(id='reply-' + questionDiscuss.id ) > string('publish')
+                    .text-right 
+                        .item > string('praise') +  echo('('+ questionDiscuss.praiseNum +')')
+                        .item(id='discuss-' + questionDiscuss.id ) > string('comment') + echo('(' + questionDiscuss.replyNum +')')
+                        .item > .share-bar
+                            .drop-down-wrapper
+                                i.iconfont.icon-share-2(title='分享')
+                                form.drop-down-content > .content
+                                    .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                    .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
+                        .item > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
+                        form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
+                            textarea.input.w-full.block(rows=1 name='content' value='' )
+                            input.input(type='hidden' name='organizationId' value=questionDiscuss.organizationId)
+                            input.input(type='hidden' name='questionId' value=questionDiscuss.questionId)
+                            input.input(type='hidden' name='id' value=questionDiscuss.id)
+                            input.input(type='hidden' name='toUserId' value=questionDiscuss.createMemberId)
+                            .btn(id='reply-' + questionDiscuss.id ) > string('publish')
 
                 
             

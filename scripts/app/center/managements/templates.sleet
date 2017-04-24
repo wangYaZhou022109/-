@@ -11,59 +11,59 @@ view('manage-tabs')
             .tag-btn.bg-main-color 未实施
             .tag-btn.bg-main-color 进行中
             .tag-btn.bg-main-color 已结束
-            .tag-btn.radius.pull-right.active 进入班级
+            .small-btn.pull-right.radius 进入班级
         .managements-tabs
             ul.clearfix.layout-mt
                 li.pull-left#managements-ordertime.active
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 预定时间
+                    p.layout-mt-small.strong 预定时间
                 li.pull-left#managements-classinfo
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 班级基本信息
+                    p.layout-mt-small.strong 班级基本信息
                 li.pull-left#managements-dateplan
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 日程安排
+                    p.layout-mt-small.strong 日程安排
                 li.pull-left#managements-quotamanage
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 配额管理
+                    p.layout-mt-small.strong 配额管理
                 li.pull-left#managements-publishnotice
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 发布通知
+                    p.layout-mt-small.strong 发布通知
                 li.pull-left#managements-membership
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 成员管理
+                    p.layout-mt-small.strong 成员管理
                 li.pull-left#managements-classmanage
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 班务管理
+                    p.layout-mt-small.strong 班务管理
                 li.pull-left#managements-evaluate
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 统计与评估
+                    p.layout-mt-small.strong 统计与评估
                 li.pull-left#managements-learneffect
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 学习效果考评
+                    p.layout-mt-small.strong 学习效果考评
                 li.pull-left#managements-trainsummary
                     .managements-tabs-item
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 培训总结
+                    p.layout-mt-small.strong 培训总结
 
 view('ordertime')
     .ordertime.container.bg-highlight.overflow
@@ -108,7 +108,7 @@ view('ordertime')
                     label.label.required 往返日期
                     .content.w-half
                         input.input(placeholder="2016-12-24  ~  2016-12-25")
-                        .btn.choice 选择日期
+                        .btn.choice#choosedate 选择日期
                 .form-row
                     label.label.required 培训目标
                     .content > textarea.w-full(rows="5" placeholder="几句话介绍举办本次培训的目标和背景")
@@ -194,13 +194,13 @@ view('classinfo')
                 .clearfix
                     .classinfo-bottom-item.pull-left
                         label 客房：
-                        input.input
+                        input.input.tag-height
                     .classinfo-bottom-item.pull-left
                         label 餐厅：
-                        input.input
+                        input.input.tag-height
                     .classinfo-bottom-item.pull-left
                         label 教室：
-                        select.select-width
+                        select.tag-select
                             option 701
                             option 702
                             option 703
@@ -209,17 +209,17 @@ view('classinfo')
                         span.m-right.pull-left.m-right 班级首页图片
                         span.sub-text.pull-left 推荐图片分辨率为：1000*290；图片大小小于1M。
                     .tag-btn.pull-left.active 上传
-            .text-center.layout-mt > .btn.bg-gray 提交
+            .text-center.layout-mt > .btn.circle-radius.gray 提交
 
 view('dateplan')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
-                .tag-btn.radius.pull-right.selected 导出安排
-            .clearfix
+                .small-btn.radius.pull-right 导出安排
+            .clearfix.m-top
                 .pull-left
                     label.m-right 线下课程安排
-                    select
+                    select.tag-select
                         option 第一周（3月4日~3月6日）
                         option 第二周（3月4日~3月6日）
                         option 第三周（3月4日~3月6日）
@@ -227,10 +227,9 @@ view('dateplan')
                     .tag-btn.radius#weektopic 配置周主题
                     .tag-btn.radius#addclass 添加课程
                     .tag-btn.radius 导入课程
-                    .change-min.inline-block
-                        .change-item.min
-                            .inline-block 最小化
-                            .inline-block.pointer.minimize#minimize-1 -
+                    .inline-block
+                        span#min-1 最小化
+                        i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-1
             table.table#minitable-1
                 tr
                     th 日期
@@ -250,10 +249,10 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 8:30-10:30
                     td 课程名称（点击可修改）
@@ -261,10 +260,10 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 8:30-10:30
                     td 课程名称（点击可修改）
@@ -272,10 +271,10 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 8:30-10:30
                     td 课程名称（点击可修改）
@@ -283,17 +282,17 @@ view('dateplan')
                     td 移动学院（点击可修改）
                     td 高级讲师
                     td 50
-                    td > i.iconfont.icon-zhishiku.custom-color-4
+                    td > i.iconfont.icon-tag.custom-color-5
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
             .clearfix
                 label.pull-left 在线资源
                 .pull-right
                     .tag-btn.radius#topic 配置主题
                     .tag-btn.radius#addtopicclass 添加课程
-                    .inline-block 最小化
-                    .inline-block.minimize#minimize-2 -
+                    span#min-2 最小化
+                    i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-2
             table.table#minitable-2
                 tr
                     th 主题
@@ -305,35 +304,35 @@ view('dateplan')
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td(rowspan="2") 主题名称
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 课程名称课程名称
                     td 是
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
             .clearfix
                 label.pull-left 调研与问卷
                 .pull-right
                     .tag-btn.radius#addexam 添加考试
                     .tag-btn.radius#addevaluation-1 添加调研
                     .tag-btn.radius#addevaluation-2 添加评估
-                    .inline-block 最小化
-                    .inline-block.minimize#minimize-3 -
+                    span#min-3 最小化
+                    i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-3
             table.table#minitable-3
                 tr
                     th 序号
@@ -349,9 +348,9 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 2
                     td 调研名称
@@ -359,9 +358,9 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 3
                     td 评估名称
@@ -369,15 +368,15 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-search.custom-color-4.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
             .clearfix
                 label.pull-left 调研与问卷
                 .pull-right
                     .tag-btn.radius#addwork 添加作业
-                    .inline-block 最小化
-                    .inline-block.minimize#minimize-4 -
+                    span#min-4 最小化
+                    i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-4
             table.table#minitable-4
                 tr
                     th 序号
@@ -393,8 +392,8 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 2
                     td 调研名称
@@ -402,8 +401,8 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
                 tr
                     td 3
                     td 评估名称
@@ -411,8 +410,8 @@ view('dateplan')
                     td 2016-12-21 9:00
                     td 2016-12-21 9:00
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right
-                        i.iconfont.icon-close-circle.custom-color-3
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3
 
 view('quotamanage')
     .quotamanage.container.bg-highlight.overflow.dateplan-padding
@@ -438,8 +437,8 @@ view('quotamanage')
                     .quotamanage-content.layout-mt-small
                         .clearfix
                             .pull-right
-                                .tag-btn#addunit 添加单位
-                                .tag-btn 删除
+                                .btn.gray.tag-height.small#addunit 添加单位
+                                .btn.gray.tag-height.small 删除
                         table.table
                             tr
                                 th > input(type="checkbox")
@@ -457,11 +456,11 @@ view('quotamanage')
                                 td 2
                                 td > a 删除
                     .quotamanage-footer.text-center.layout-mt-small
-                        .btn 保存
+                        .btn.gray.circle-radius.tag-height 保存
                 #quota-contents-2.quota-contents-2
                     .text-center.layout-mt
                         .h3 当前班级配额方式为整体配额!
-                        .btn.layout-mt 保存
+                        .btn.gray.circle-radius.tag-height.layout-mt 保存
 
 view('publishnotice')
     .publishnotice.container.bg-highlight.overflow
@@ -521,8 +520,12 @@ view('publishnotice')
             .important-notice
                 p 【重要】发文注意事项：
                 p 一、培训通知附件：
-                p 1、《中国移动学院培训报名及参加须知》(下载)（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。
-                p 2、《课程安排》(下载)
+                p.block 1、《中国移动学院培训报名及参加须知》（
+                    a 下载
+                    span ）（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。
+                p.block 2、《课程安排》 （
+                    a 下载
+                    span ）
                 .layout-mt-small
                     p 二、培训通知发布路径及时间要求:
                     p 1、路径：须通过OA“培训项目审批单”下发培训通知(OA首页-通用办公-培训项目-部门项目审批单)。
@@ -541,7 +544,7 @@ view('membership')
                     li#membership-4 非正式成员
                     li#membership-5 短信发送
             .membership-contents
-                #membership-content-1
+                #membership-content-1.display-none
                     .membership-search.layout-mt
                         .filter-row
                             .filter-item
@@ -617,7 +620,7 @@ view('membership')
                             td 1234567890
                             td 待审核
                             td > a#verify-5 审核
-                #membership-content-2.membership-content-2.display-none
+                #membership-content-2.membership-content-2
                     .membership-search.layout-mt
                         .filter-row
                             .filter-item
@@ -635,14 +638,14 @@ view('membership')
                     .membership-table.layout-mt-small.clearfix
                         .h5.pull-left.strong 学员列表
                         .pull-right
-                            label.pull-left.add-label.m-right 员工编号
-                            input.tag-btn.pull-left.add-mr
-                            button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn#studentgroup 学员分组
-                            button.btn.tag-btn#addstudent 添加学员
-                            button.btn.tag-btn#entersituation 报名情况
-                            button.btn.tag-btn 导入
-                            button.btn.tag-btn 导出
+                            label.pull-left.m-right.tag-height 员工编号
+                            input.pull-left.tag-height
+                            .small-btn.pull-left.m-right 添加
+                            .btn.tag-btn#studentgroup 学员分组
+                            .btn.tag-btn#addstudent 添加学员
+                            .btn.tag-btn#entersituation 报名情况
+                            .btn.tag-btn 导入
+                            .btn.tag-btn 导出
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -743,10 +746,10 @@ view('membership')
                     .membership-table.layout-mt-small.clearfix
                         .h5.pull-left.strong 班务人员列表
                         .pull-right
-                            label.pull-left.add-label.m-right 员工编号
-                            input.tag-btn.pull-left.add-mr
-                            button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn 人员选择
+                            label.pull-left.tag-height.m-right 员工编号
+                            input.tag-height.pull-left.
+                            .small-btn.pull-left.m-right 添加
+                            .btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -797,10 +800,10 @@ view('membership')
                     .membership-table.layout-mt-small.clearfix
                         .h5.pull-left.strong 学员列表
                         .pull-right
-                            label.pull-left.add-label.m-right 员工编号
-                            input.tag-btn.pull-left.add-mr
-                            button.tag-btn.selected.pull-left 添加
-                            button.btn.tag-btn 人员选择
+                            label.pull-left.tag-height.m-right 员工编号
+                            input.tag-height.pull-left
+                            .small-btn.pull-left.m-right 添加
+                            .btn.tag-btn 人员选择
                     table.table.layout-mt-small
                         tr
                             th 序号
@@ -961,12 +964,12 @@ view('classmanage')
                     .clearfix.layout-mt-small
                         .pull-left
                             label 签到规则：
-                            .tag-btn.active 半天
-                            .tag-btn 全天
+                            .tag-btn.active#toggleday-1 半天
+                            .tag-btn#toggleday-2 全天
                         .pull-right
-                            .tag-btn.selected#addattendance
+                            .small-btn.m-right#addattendance
                                 | +添加
-                            .tag-btn.selected 删除
+                            .small-btn 删除
                     table.table.layout-mt-small
                         tr
                             th > input(type="checkbox")
@@ -1037,8 +1040,8 @@ view('classmanage')
                     section.section
                         .clearfix
                             .pull-right
-                                .tag-btn.selected 导出内部讲师
-                                .tag-btn.selected 导出外部讲师
+                                .btn.gray.tag-height.small  导出内部讲师
+                                .btn.gray.tag-height.small  导出外部讲师
                         table.table.layout-mt-small
                             tr
                                 th 课程名称
@@ -1073,13 +1076,13 @@ view('classmanage')
                                 td 456
                                 td > a#classedit-3 编辑
                         .layout-mt.text-center
-                            .btn 保存
+                            .btn.gray 保存
 
                 #classmanage-content-3.display-none
                     section.section
                         .clearfix
                             label.pull-left 班车/订餐信息
-                            .tag-btn.pull-right.selected#addcarinfo-1
+                            .small-btn.pull-right#addcarinfo-1
                                 | +添加
                         table.table.layout-mt-small
                             tr
@@ -1149,7 +1152,7 @@ view('classmanage')
                                 .form-row
                                     label.label.required 说明
                                     .content > textarea.width-full(placeholder="结算人数及费用说明" rows="5")
-                            .text-center > .btn.bg-gray 提交
+                            .text-center > .btn.gray.tag-height 提交
                 #classmanage-content-5.display-none
                     .container
                         section.section.w-half
@@ -1160,14 +1163,14 @@ view('classmanage')
                                 input(type="radio" name="rank")
                                 label.layout-mr 否
                                 label.strong 显示规则：
-                                select.select-width
+                                select.tag-select
                                     option 显示前十名
                                     option 显示全部
                             .classnotice-content.layout-mt
                                 .strong 班级公告
                                 textarea.m-top.w-full(rows="5")
                             .text-center
-                                .btn.bg-gray.layout-mt-small 保存
+                                .btn.gray.tag-height.layout-mt-small 保存
                 #classmanage-content-6.display-none
                     .container
                         section.section
@@ -1180,24 +1183,26 @@ view('classmanage')
                                 li
                                     .user-pic > img(src="images/1.png")
                                     .comment-content
-                                        .user-info
-                                            a(href='#') 张三
-                                            span 互联网中心
-                                        .comment-text
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                        .comment-operation
-                                            .pull-left > .sub-text 2017-01-17
-                                            .text-right
-                                                span.pointer 置顶
-                                                span |
-                                                span.pointer 精华
-                                                span |
-                                                span.pointer 隐藏
-                                                span |
-                                                span.pointer#reply-1 回复
-                                                span |
-                                                span.pointer 删除
+                                        img.boutique.pull-left(src="images/boutique.png")
+                                        .comment-boutique
+                                            .user-info
+                                                a(href='#') 张三
+                                                span 互联网中心
+                                            .comment-text
+                                                | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                                | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                            .comment-operation
+                                                .pull-left > .sub-text 2017-01-17
+                                                .text-right
+                                                    span.pointer 置顶
+                                                    span |
+                                                    span.pointer 精华
+                                                    span |
+                                                    span.pointer 隐藏
+                                                    span |
+                                                    span.pointer#reply-1 回复
+                                                    span |
+                                                    span.pointer 删除
                                         .comment-reply#comment-reply-1
                                             textarea.input.w-full.block(rows=1)
                                             .btn 回复
@@ -1241,8 +1246,7 @@ view('classmanage')
                                                     .progress-bar(style="width:100%")
                                                     span 100%
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）点击可修改
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）点击可修改")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
@@ -1252,43 +1256,37 @@ view('classmanage')
                                                     .progress-bar(style="width:80%")
                                                     span 80%
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
                                     li
                                         .photo-item
                                             img(src="images/1.png")
                                             input.check(type="checkbox")
                                         .text-center.m-top
-                                            .sub-title.small-font 照片名称
-                                            .sub-title.small-font （点击可修改）
+                                            input.sub-title.small-font.border(value="照片名称（点击可修改）")
 
 
 view('evaluate')
@@ -1297,8 +1295,8 @@ view('evaluate')
             .tabs.line
                 ul
                     li#evaluate-1 调查问卷
-                    li#evaluate-2.active 两个带来
-                    li#evaluate-3 学习详情
+                    li#evaluate-2 两个带来
+                    li#evaluate-3.active 学习详情
                     li#evaluate-4 作业管理
             .evaluate-contents
                 #evaluate-content-1.display-none
@@ -1359,7 +1357,7 @@ view('evaluate')
                                     i.iconfont.icon-note
                                 td 100%
                                 td > a 查看
-                #evaluate-content-2
+                #evaluate-content-2.display-none
                     .evaluate-search.layout-mt
                         .filter-row
                             .filter-item
@@ -1368,10 +1366,11 @@ view('evaluate')
                             .filter-item
                                 label 姓名
                                 input.input
-                            .filter-item
-                                label 单位
-                                input.input
-                            .filter-item
+                            .filter-item.clearfix.vertical-top
+                                label.tag-height.pull-left.m-right 单位
+                                input.input.pull-left
+                                .btn.gray.small.pull-left 选择
+                            .filter-item.vertical-top
                                 label |
                                 button.btn 搜索
                     .layout-mt-small
@@ -1434,7 +1433,7 @@ view('evaluate')
                                     td 主题主题主题主题主题主题主题
                                     td 主题主题主题主题主题主题
                                     td > a#watchbring-5 查看
-                #evaluate-content-3.display-none
+                #evaluate-content-3
                     .container
                         .layout-mt-small
                             table.table
@@ -1523,7 +1522,7 @@ view('learneffect')
                         .content
                             textarea.text-width(rows="5" placeholder="几句话介绍本次培训的考核结果，如考核情况、对培训学习产生的促进作用，掌握情况")
             .text-center
-                .btn 提交
+                .btn.circle-radius.gray 提交
 
 view('trainsummary')
     .trainsummary.container
@@ -1532,7 +1531,7 @@ view('trainsummary')
             p * 主要内容包括培训项目设计实施情况、评估结果及项目成果、学员对集团业务、运营等方面的建议等。
             p * 该总结内容将定期呈报集团领导及相关部门领导审阅参考，请主办部门培训联系人全面参与和最终把关。
         .clearfix.m-top
-            .btn.radius.pull-right 导出培训总结
+            .btn.circle-radius.tag-height.gray.pull-right.small 导出培训总结
         .trainsummary-content.container
             h2.text-center XX培训班培训项目总结报告
             .layout-mt-small
@@ -1579,8 +1578,8 @@ view('trainsummary')
                         table.table
                             tr > th(colspan="2") 在线课程
                             tr
-                                td 编号
-                                td 课程名称
+                                td.strong 编号
+                                td.strong 课程名称
                             tr
                                 td 1
                                 td 111111111111111
@@ -1640,7 +1639,7 @@ view('trainsummary')
                             p.strong 优秀学员（选填）
                             .clearfix
                                 p.pull-left 本次培训中，
-                                p.pull-left ___________________________
+                                input.pull-left.border.bottom
                                 p.pull-left 表现突出,被评为优秀学员。
                             p 例子：本次培训中，某某公司某某人在小组研讨、汇报答辩中表现突出，被评为“优秀学员”。
                     .item
@@ -1700,5 +1699,5 @@ view('trainsummary')
                         .h5.strong.m-top.text-right 日期：
                             span 2016-12-22
                 .text-center
-                    .btn.m-right 保存
-                    .btn 提交
+                    .btn.circle-radius.m-right.tag-height.gray 保存
+                    .btn.circle-radius.m-right.tag-height.gray 提交

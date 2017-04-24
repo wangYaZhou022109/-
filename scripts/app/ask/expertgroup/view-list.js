@@ -31,12 +31,24 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click check-*': 'check'
+    'click check-*': 'check',
+    'click follow-expert-*': 'follow',
+    'click unfollow-expert-*': 'unfollow'
 };
 
 exports.dataForActions = {
     check: function(payload) {
         return payload;
+    },
+    follow: function(payload) {
+        var data = payload;
+        data.concernType = '1';
+        return data;
+    },
+    unfollow: function(payload) {
+        var data = payload;
+        data.concernType = '1';
+        return data;
     }
 };
 

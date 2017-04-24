@@ -32,3 +32,25 @@ exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');
     return ss[key];
 };
+
+exports.getWithParams = function(key, params) {
+    var str,
+        i,
+        p;
+
+    if (!ss[key]) throw new Error('Key [' + key + '] is not defined');
+
+    if (!params) throw new Error('params [' + params + '] is not defined');
+
+    if (params && !(params instanceof Array)) {
+        p = [params];
+    } else {
+        p = params;
+    }
+
+    str = ss[key];
+    for (i = 0; i < p.length; i++) {
+        str = str.replace(new RegExp('\\{' + i + '\\}', 'g'), p[i]);
+    }
+    return str;
+};

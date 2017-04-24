@@ -23,9 +23,9 @@ view('title') > form.vertical
         input#searchTopic.input.w-full.p-left(placeholder="搜索你擅长的" name='topicName')
         .iconfont.icon-search.topic-icon
 view('types')
-    a.sub-title.active(id='type'+id data-name='typeId' data-value='') 全部
+    a.sub-title(id='type-'+id data-name='typeId' data-value='')(class = if(selectAll 'active')) 全部
         each(types)
-            a.sub-title.m-right(id='type'+id data-name='typeId' data-value=id) > echo(name)
+            a.sub-title.m-right(id='type-'+id data-name='typeId' data-value=id)(class = if(active 'active')) > echo(name)
 view('contents')
     each(topics)
         .tag-btn.radius(id='select_'+id name='select_'+id value=id class=checkStyle)

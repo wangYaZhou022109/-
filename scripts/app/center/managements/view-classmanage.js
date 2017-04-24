@@ -9,13 +9,17 @@ exports.events = {
     'click leave-*': 'showLeave',
     'click classedit-*': 'showClassedit',
     'click count-*': 'showCount',
-    'click addcarinfo-*': 'showAddcarinfo'
+    'click addcarinfo-*': 'showAddcarinfo',
+    'click toggleday-*': 'toggleDay'
 };
 
 exports.handlers = {
     toggleClassmanage: function(id) {
         $(this.$('classmanage-' + id)).addClass('active').siblings().removeClass('active');
         $(this.$('classmanage-content-' + id)).show().siblings().hide();
+    },
+    toggleDay: function(id) {
+        $(this.$('toggleday-' + id)).addClass('active').siblings().removeClass('active');
     },
     showComment: function(id) {
         $(this.$('comment-reply-' + id)).toggleClass('show');

@@ -3,7 +3,7 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你共提问了'+questions.length+'个问题')
+        .pull-right > echo('你共提问了'+countNum+'个问题')
         ul
             li.active > echo('我的提问')
     .comment-list.ask-list > ul
@@ -83,7 +83,7 @@ view('list')
                             .pull-left > .sub-text > echo('关联话题名称') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
-                                .item(id = 'del-share-' + id data-name='id' data-value=id) > string('delete')
+                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                   
 
                    

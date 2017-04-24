@@ -5,4 +5,4 @@ module
 
 view('video')
     video#player(class="video-js vjs-default-skin vjs-big-play-centered vjs-skin-hotdog-stand" preload='auto' style='margin: auto')
-        source(src=section.url type="video/mp4" )
+        source(src=url type="video/mp4" )

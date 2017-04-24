@@ -14,30 +14,29 @@ view('topic')
             td 1
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-warn
-                i.iconfont.icon-sort-desc.color-pass
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
             td > a 删除
         tr
             td 2
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-warn
-                i.iconfont.icon-sort-desc.color-pass
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
             td > a 删除
         tr
             td 3
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-warn
-                i.iconfont.icon-sort-desc.color-pass
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
             td > a 删除
         tr
             td 4
             td.sub-title 主题名称（点击可修改）
             td
-                i.iconfont.icon-sort-asc.color-warn
-                i.iconfont.icon-sort-desc.color-pass
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4
             td > a 删除
-    .add-topic.text-center.clearfix
-        .line.relative.border.bottom
-            .btn.addtopic-btn 添加主题
+    .text-center.layout-mt-small
+        .btn.small 添加主题

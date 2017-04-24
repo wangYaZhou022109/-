@@ -6,7 +6,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        member: {}
+        member: {},
+        topicList: { url: '../system/topic/my-topic', autoLoad: 'after' }
     },
     callbacks: {
         init: function() {
