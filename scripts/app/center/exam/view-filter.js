@@ -8,13 +8,15 @@ exports.dataForTemplate = {
         var search = data.search;
         return {
             all: search.searchStatus === null,
-            waitStart: search.searchStatus === 1,
-            begining: search.searchStatus === 2,
-            finished: search.searchStatus === 3,
+            waitExam: search.searchStatus === 1,
+            waitStart: search.searchStatus === 2,
+            waitApprove: search.searchStatus === 3,
+            finished: search.searchStatus === 4,
             allType: search.type === null,
             formal: search.type === 1,
             unFormal: search.type === 2,
-            name: search.name
+            name: search.name,
+            startTimeOrderBy: search.startTimeOrderBy
         };
     }
 };
@@ -33,7 +35,10 @@ exports.handlers = {
         return this.module.dispatch('selectItem', { type: Number(value) === 0 ? null : Number(value) });
     },
     selectStartTimeOrder: function() {
-        return this.module.dispatch('selectItem', { startTimeOrderBy: 1 });
+        var search = this.bindings.search.data;
+        return this.module.dispatch('selectItem', {
+            startTimeOrderBy: search.startTimeOrderBy === 1 ? 0 : 1
+        });
     }
 };
 
