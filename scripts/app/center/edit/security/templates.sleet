@@ -11,7 +11,7 @@ view('main')
         li#item-3 > setting('person.index.info.phoneSet')
     .tabs-cont > ul
         li.active.tabs-cont-item#tabs-cont-item-1
-            .form
+            .form.align-left
                 .form-row
                     label > setting('person.index.info.oldPasw')
                     .content > input.input(name='oldPassword' value=member.oldPassword type='password' placeholder='请输入您的旧密码')
@@ -25,7 +25,7 @@ view('main')
                         .sub-text 6~20位字符（由字母、数字和符号组成）
 
         li.tabs-cont-item#tabs-cont-item-2
-            .form
+            .form.align-left
                 .form-row
                     label > setting('person.index.info.email')
                     .content

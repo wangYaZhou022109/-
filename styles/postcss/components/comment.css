@@ -11,8 +11,8 @@
 
     & .user-pic {
         float: left;
-        width: calc(var(--font-size) * 4);
-        height: calc(var(--font-size) * 4);
+        width: calc(var(--font-size) * 3);
+        height: calc(var(--font-size) * 3);
         border: 1px solid var(--border-color);
 
         & img {
@@ -22,7 +22,7 @@
     }
 
     & .comment-content {
-        margin-left: calc(var(--font-size) * 6);
+        margin-left: calc(var(--font-size) * 5);
     }
 
     & .comment-text {

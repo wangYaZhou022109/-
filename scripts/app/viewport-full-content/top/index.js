@@ -61,7 +61,8 @@ exports.items = {
     nav: 'nav',
     shortcut: 'shortcut',
     logo: 'logo',
-    'home/message': { isModule: true }
+    'home/message': { isModule: true },
+    'home/member-info': { isModule: true }
 };
 
 exports.store = {
@@ -109,21 +110,29 @@ exports.store = {
             return true;
         },
         refreshMessage: function() {
+            this.models.message.clear();
             return this.get(this.models.message);
         },
         loadMessage: function() {
             if (this.app.global.currentUser.id) {
+                this.models.message.clear();
                 this.get(this.models.message);
             }
         },
         loadIntegral: function() {
             if (this.app.global.currentUser.id) {
+                this.models.integral.clear();
                 this.get(this.models.integral);
             }
         },
         loadCourseTime: function() {
             if (this.app.global.currentUser.id) {
                 this.get(this.models.courseTime);
+            }
+        },
+        showSetting: function() {
+            if (this.app.global.currentUser && this.app.global.currentUser.initSetting === 0) {
+                this.app.viewport.modal(this.module.items['home/member-info']);
             }
         }
     }
@@ -145,4 +154,5 @@ exports.afterRender = function() {
     this.dispatch('loadMessage');
     this.dispatch('loadIntegral');
     this.dispatch('loadCourseTime');
+    this.dispatch('showSetting');
 };

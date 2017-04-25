@@ -123,7 +123,7 @@ exports.dataForTemplate = {
                         if (examStatus && examStatus.status) {
                             rr.finishStatus = examStatus.score ? '成绩' +
                             (Number(examStatus.score) / 100).toFixed(1) :
-                            maps.getValue('paper-instance-status', examStatus.status);
+                            maps.getValue('exam-record-status', examStatus.status);
                         }
                     }
                     if (rr.sectionType === 12 || rr.sectionType === 13) {

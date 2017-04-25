@@ -1,4 +1,5 @@
 var D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     A = require('../util/animation'),
     Swiper;
 
@@ -107,6 +108,7 @@ D.assign(Swiper.prototype, {
 
     insertNavigation: function() {
         var me = this;
+        if (!this.options.navigation) return;
         this.navigation = document.createElement('div');
         this.navigation.classList.add('navigation');
 
@@ -123,7 +125,7 @@ D.assign(Swiper.prototype, {
     },
 
     removeNavigation: function() {
-        this.el.removeChild(this.navigation);
+        if (this.navigation) this.el.removeChild(this.navigation);
     },
 
     insertBtn: function() {
@@ -198,12 +200,13 @@ D.assign(Swiper.prototype, {
             };
         }
 
-        this.items.forEach(function(item) {
+        _.forEach(this.items, function(item) {
             item.addEventListener('mouseover', me.actions.in, false);
             item.addEventListener('mouseout', me.actions.out, false);
         });
 
-        this.dots.forEach(function(item) {
+
+        _.forEach(this.dots, function(item) {
             item.addEventListener('click', me.actions.click, false);
         });
 
@@ -220,12 +223,12 @@ D.assign(Swiper.prototype, {
 
     unbindListener: function() {
         var me = this;
-        this.items.forEach(function(item) {
+        _.forEach(this.items, function(item) {
             item.removeEventListener('mouseover', me.actions.in);
             item.removeEventListener('mouseout', me.actions.out);
         });
 
-        this.dots.forEach(function(item) {
+        _.forEach(this.dots, function(item) {
             item.removeEventListener('click', me.actions.click);
         });
 

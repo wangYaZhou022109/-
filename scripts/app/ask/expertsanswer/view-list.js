@@ -4,7 +4,8 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     expertdiscuss: true,
-    page: true
+    page: true,
+    down: false
 };
 
 exports.events = {
@@ -197,6 +198,8 @@ exports.dataForTemplate = {
                 date = new Date(obj.questionDiscuss.createTime);
             var praiseNum = obj.questionDiscuss.praiseNum;
             var replyNum = obj.questionDiscuss.replyNum;
+            var url = obj.member.headPortrait;
+            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             if (praiseNum === null) {
                 obj.questionDiscuss.praiseNum = 0;
             }

@@ -4,7 +4,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        expert: { url: '../ask-bar/expert/relevant-experts' }
+        expert: { url: '../ask-bar/expert/relevant-experts' },
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function(payload) {
