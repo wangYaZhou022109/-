@@ -9,7 +9,7 @@ exports.bindings = {
 exports.dataForTemplate = {
     url: function(data) {
         var section = data.state.section || {};
-        return this.bindings.download.getFullUrl() + '/' + section.resourceId;
+        return this.bindings.download.getFullUrl() + '?id=' + section.resourceId;
     }
 };
 exports.beforeClose = function() {

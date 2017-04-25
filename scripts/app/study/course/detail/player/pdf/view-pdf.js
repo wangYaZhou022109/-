@@ -6,7 +6,7 @@ exports.components = [
             localLocation = state.localLocation,
             progress = state.progress || {},
             pageNum = progress.lessonLocation || 1,
-            url = this.bindings.download.getFullUrl() + '/' + section.resourceId;
+            url = this.bindings.preview.getFullUrl() + '/' + section.resourceId;
         if (localLocation) pageNum = localLocation;
         return {
             id: 'viewPdf',
@@ -22,7 +22,7 @@ exports.components = [
 
 exports.bindings = {
     state: false,
-    download: false,
+    preview: false,
     startProgress: 'startProgress'
 };
 

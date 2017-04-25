@@ -5,7 +5,8 @@ exports.items = {
 exports.store = {
     models: {
         startProgress: { url: '../course-study/course-front/start-progress' },
-        download: { url: '../human/file/preview' },
+        preview: { url: '../human/file/preview' },
+        download: { url: '../human/file/download' },
         state: {}
     },
     callbacks: {
