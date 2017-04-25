@@ -14,7 +14,7 @@ view('main')
                     th 标题
                     th > setting('person.archives.ask.type')
                     th 状态
-                    th > setting('person.archives.ask.pushTime')
+                    th 发表时间
                     th > setting('person.archives.ask.integral')
                     th 讨论数
                     th 关注人数
