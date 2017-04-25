@@ -5,7 +5,9 @@ push = function(mod, type, view, options) {
     if (me.busy) return me.Promise.reject();
     me.busy = true;
 
-    setTimeout(function() { me.busy = false; }, 1000);
+    setTimeout(function() {
+        me.busy = false;
+    }, 1000);
 
     return me.regions.modal.push(view, options, type).then(function() {
         me.busy = false;
@@ -17,7 +19,9 @@ pop = function(mod) {
     if (me.busy) return me.Promise.reject();
     me.busy = true;
 
-    setTimeout(function() { me.busy = false; }, 1000);
+    setTimeout(function() {
+        me.busy = false;
+    }, 1000);
 
     return me.regions.modal.pop().then(function() {
         me.busy = false;
@@ -25,8 +29,12 @@ pop = function(mod) {
 };
 
 exports.items = {
-    'viewport-full-content': { isModule: true },
-    'viewport-over-screen': { isModule: true }
+    'viewport-full-content': {
+        isModule: true
+    },
+    'viewport-over-screen': {
+        isModule: true
+    }
 };
 
 exports.mixin = {
@@ -51,17 +59,29 @@ exports.mixin = {
         return pop(this);
     },
     showIt: function(name, mod, options) {
-        var me = this;
-        return this.regions.content.show(me.items['viewport-over-screen'], { forceRender: false }).then(function(m) {
+        var me = this,
+            forceRender = false;
+        if (options && options.forceRender) {
+            forceRender = options.forceRender;
+        }
+        return this.regions.content.show(me.items['viewport-over-screen'], {
+            forceRender: forceRender
+        }).then(function(m) {
             return m.regions[name].show(mod, options);
         });
     }
 };
 
 exports.beforeRender = function() {
-    var me = this;
+    var me = this,
+        forceRender = false;
     this.app.show = function(name, mod, options) {
-        return me.regions.content.show(me.items['viewport-full-content'], { forceRender: false }).then(function(m) {
+        if (options && options.forceRender) {
+            forceRender = options.forceRender;
+        }
+        return me.regions.content.show(me.items['viewport-full-content'], {
+            forceRender: forceRender
+        }).then(function(m) {
             return m.regions[name].show(mod, options);
         });
     };
