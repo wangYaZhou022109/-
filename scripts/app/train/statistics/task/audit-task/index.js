@@ -17,8 +17,6 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var all = this.models.all,
-            //     id = payload;
-            // all.params = { id: id };
                 state = this.models.state;
             state.data.id = payload.id;
             all.params = state.data;

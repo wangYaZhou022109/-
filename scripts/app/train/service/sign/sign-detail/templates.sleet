@@ -21,24 +21,22 @@ view('count')
         .layout-mt-small.clearfix.layout-mb-small
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
-                    span 应出勤
-                    span > echo(signCount.classNum + '人')
+                span 应出勤
+                span > echo(signCount.classNum + '人')
             .recommend-item.layout-mr.pull-left
-                i.iconfont.icon-user-1.m-right
-                    span 正常签到
-                    span > echo(signCount.normal + '人')
+                i.iconfont.icon-time.m-right.text-main-color
+                span 正常签到
+                span > echo(signCount.normal + '人')
             .recommend-item.layout-mr.pull-left
-                i.iconfont.icon-user-1.m-right
-                    span 迟到
-                    span > echo(signCount.late + '人')
+                span 迟到
+                span > echo(signCount.late + '人')
             .recommend-item.layout-mr.pull-left
-                i.iconfont.icon-user-1.m-right
-                    span 请假
-                    span > echo(signCount.leave + '人')
+                span 未签到
+                span > echo(signCount.notSign + '人')
             .recommend-item.layout-mr.pull-left
-                i.iconfont.icon-user-1.m-right
-                    span 未签到
-                    span > echo(signCount.notSign + '人')
+                i.iconfont.icon-user.m-right
+                span 请假
+                span > echo(signCount.leave + '人')
 
 view('search') > form.vertical
     .layout-mt-small
@@ -54,6 +52,8 @@ view('search') > form.vertical
                     option(value='4') > echo('请假')
             .pull-right
                 btn.btn#search > echo('查询')
+                a(href=exportUrl ) > .btn > span 导出
+                btn.btn#batchStatus > echo('批量签到')
 
 view('main')
     .pull-right

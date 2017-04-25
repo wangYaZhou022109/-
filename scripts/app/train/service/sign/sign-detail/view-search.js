@@ -5,7 +5,8 @@ exports.bindings = {
 };
 
 exports.actions = {
-    'click search': 'search'
+    'click search': 'search',
+    'click batchStatus': 'batchStatus',
 };
 
 exports.dataForActions = {

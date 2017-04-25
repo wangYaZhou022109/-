@@ -10,7 +10,7 @@ view('main')
     section.section
         .clearfix
             label.pull-left 班车/订餐信息
-            .btn.pull-right#addBus > echo('添加')
+            .tag-btn.pull-right.selected#addBus > echo('添加')
     table.table
         thead > tr
             th > echo('主题')

@@ -1,5 +1,7 @@
 var _ = require('lodash/collection');
 
+exports.title = '作业详情';
+
 exports.bindings = {
     taskDetail: true,
     state: {}

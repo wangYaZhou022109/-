@@ -42,7 +42,7 @@ exports.showTrain = function(id) {
 };
 
 exports.showTaskDetail = function(fir, id) {
-    return this.app.show('content', 'train/service/views/commit-task/task-detail', { id: id });
+    return this.app.viewport.showIt('content', 'train/service/views/commit-task/task-detail', { id: id });
 };
 
 exports.showCount = function(fir, classId) {
@@ -50,11 +50,11 @@ exports.showCount = function(fir, classId) {
 };
 
 exports.showAuditTask = function(fir, id) {
-    return this.app.show('content', 'train/statistics/task/audit-task', { id: id });
+    return this.app.viewport.showIt('content', 'train/statistics/task/audit-task', { id: id });
 };
 
 exports.previewTask = function(fir, id) {
-    return this.app.show('content', 'train/programme/preview-task', { id: id });
+    return this.app.viewport.showIt('content', 'train/programme/preview-task', { id: id });
 };
 
 exports.showSignupPage = function(classId) {

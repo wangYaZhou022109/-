@@ -189,7 +189,10 @@ view('questionnaire')
                 else
                     dateTime(researchQuestionary.endTime)
             td
-                a(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+                compare(type 'eq' 1)
+                    a(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+                else
+                    a(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
                 
 view('bus')
     tbody > each(bus)

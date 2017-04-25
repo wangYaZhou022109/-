@@ -16,16 +16,15 @@ view('count') > form.vertical
 
 view('search') > form.vertical
     .layout-mt-small
-        .bg-color-3.search-padding
-            .clearfix
-                .layout-mr.pull-left
-                    echo('用户名')
-                    input.input(name='name')
-                .layout-mr.pull-left
-                    echo('姓名')
-                    input.input(name='fullName')
-                .pull-left
-                    btn.btn#search > echo('查询')
+        .filter-row
+            .filter-item
+                echo('用户名')
+                input.input(name='name')
+            .filter-item
+                echo('姓名')
+                input.input(name='fullName')
+            .filter-item
+                btn.btn#search > echo('查询')
     .layout-mt-small.clearfix
         a.btn.small.radius.pull-right(href=taskDetail.downUrl download='') 下载全部
 

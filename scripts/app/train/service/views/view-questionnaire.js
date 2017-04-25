@@ -25,7 +25,7 @@ exports.handlers = {
     },
     editQuestionary: function(data) {
         var id = data,
-            url = '#/' + id;
+            url = '#/exam/research-activity/research-answer/' + id;
         window.open(url, '_blank');
     }
 };
