@@ -8,7 +8,7 @@ exports.events = {
 
 exports.handlers = {
     register: function() {
-        this.module.renderOptions.register();
+        // this.module.renderOptions.register();
     }
 };
 

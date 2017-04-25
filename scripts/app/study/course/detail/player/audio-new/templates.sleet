@@ -1,0 +1,8 @@
+#!handlebars
+
+module
+    div(data-region='video')
+
+view('video')
+    audio#player(class='video-js vjs-default-skin' 'controls' style="height:36em;width:100%" poster='./images/default-cover/music.jpg')
+        source(src=url type="audio/mp3" )

@@ -4,21 +4,24 @@ exports.items = {
 
 exports.store = {
     models: {
-        updateProgress: { url: '../course-study/course-front/doc-progress' },
-        time: { url: '../system/setting/time' },
+        startProgress: { url: '../course-study/course-front/start-progress' },
+        preview: { url: '../human/file/preview' },
+        download: { url: '../human/file/download' },
         state: {}
     },
     callbacks: {
         init: function(payload) {
-            var state = this.models.state,
-                time = this.models.time;
-            state.set(payload);
-            return this.get(time);
+            this.models.state.set(payload);
         },
-        updatePregress: function(payload) {
-            var updateProgress = this.models.updateProgress;
-            updateProgress.set(payload);
-            return this.save(updateProgress);
+        updateProgress: function(payload) {
+            return this.models.state.data.docProgress(payload);
+        },
+        startProgress: function() {
+            var id = this.models.state.data.section.id;
+            var model = this.models.startProgress;
+            model.set({ id: id });
+            model.params = { clientType: 0 };
+            return this.get(model);
         }
     }
 };

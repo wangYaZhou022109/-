@@ -2,7 +2,7 @@ var sectionCode = {
     1: 'pdf',
     2: 'image',
     3: 'url',
-    5: 'audio',
+    5: 'audio-new',
     6: 'video',
     7: 'epub'
 };
@@ -10,7 +10,7 @@ exports.type = 'dynamic';
 
 exports.bindings = {
     course: false,
-    state: true,
+    playerState: true,
     progress: false
 };
 
@@ -33,16 +33,23 @@ exports.dataForEntityModule = function(entity) {
     var me = this;
     if (entity == null) {
         return {
-            state: this.bindings.state.data
+            state: this.bindings.playerState.data
         };
     }
     return {
-        state: this.bindings.state.data,
+        state: this.bindings.playerState.data,
         section: entity,
         progress: this.bindings.progress.findProgress(entity.referenceId),
         // refresh: function(course) { me.module.dispatch('refresh', course); },
-        callback: function(data) {
-            me.module.dispatch('updateProgress', data);
-        }
+        mediaProgress: function(data) {
+            return me.module.dispatch('mediaProgress', data).then(function() {
+                return me.module.dispatch('updateProgress');
+            });
+        },
+        docProgress: function(data) {
+            return me.module.dispatch('docProgress', data).then(function() {
+                return me.module.dispatch('updateProgress');
+            });
+        },
     };
 };
