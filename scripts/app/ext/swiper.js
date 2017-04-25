@@ -125,7 +125,7 @@ D.assign(Swiper.prototype, {
     },
 
     removeNavigation: function() {
-        this.el.removeChild(this.navigation);
+        if (this.navigation) this.el.removeChild(this.navigation);
     },
 
     insertBtn: function() {

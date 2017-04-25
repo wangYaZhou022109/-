@@ -3,7 +3,8 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     myreply: true,
-    page: true
+    page: true,
+    down: false
 };
 
 exports.events = {
@@ -129,6 +130,8 @@ exports.dataForTemplate = {
             var obj = value,
                 date = new Date(obj.questionDiscuss.createTime),
                 replyNum = obj.questionDiscuss.replyNum;
+            var url = obj.member.headPortrait;
+            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             if (replyNum === null) {
                 obj.questionDiscuss.replyNum = 0;
             }

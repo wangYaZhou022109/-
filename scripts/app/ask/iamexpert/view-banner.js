@@ -1,5 +1,6 @@
 exports.bindings = {
-    expert: true
+    expert: true,
+    down: false
 };
 
 exports.events = {
@@ -12,4 +13,13 @@ exports.handlers = {
     }
 };
 exports.dataForTemplate = {
+    expert: function(data) {
+        var expert = data.expert,
+            url = { };
+        if (typeof expert.member !== 'undefined') {
+            url = expert.member.headPortrait;
+            expert.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+        }
+        return expert;
+    }
 };

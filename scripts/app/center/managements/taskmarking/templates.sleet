@@ -1,48 +1,63 @@
 #!handlebars
 
-moudle > .taskmarking-page.main-side
-    .taskmarking-side.bg-color
+module > .taskmarking-content.main-side
+    .taskmarking-side.bg-highlight
         div(data-region='side')
     .taskmarking-head(data-region='head')
     .taskmarking-main(data-region='main')
 
 view('side')
-    ul.list
-        li
-            a.pull-right.m-left(href="/api/v1/human/file/download?id=9395bdd2-6f0d-45de-ae28-6acf2271e3ea" download="2016年员工手册发.pdf") 下载
-            a.text-overflow.pointer 2016年员工手册发.pdf
+    .side-item.layout-mt-small.text-center 作业说明
+    .h4.m-top 作业附件：
+    .side-item.clearfix.m-top
+        .inline-block 百度是否真的.pdf
+        a.inline-block.pull-right 下载
+    .side-item.clearfix.m-top
+        .inline-block 百度是否真的.pdf
+        a.inline-block.pull-right 下载
+    .side-item.clearfix.m-top
+        .inline-block 百度是否真的.pdf
+        a.inline-block.pull-right 下载
+    .h4.m-top 用户提交附件：
+    .side-botitem.clearfix.m-top
+        .inline-block 百度是否真的.pdf
+        a.inline-block.pull-right 下载
+    .layout-mt-small
+        input(type="radio")
+        label.layout-mr-small 通过
+        input(type="radio")
+        label 打回重新提交
+    .layout-mt-small
+        label 评分：
+        input.w-full.m-top
+    .m-top
+        label.block 评语：
+        textarea.w-full.m-top(rows="5")
 view('head')
-    .bg-highlight
-        .pull-left.title 任务a
-        .text-right
-            ul.head-info.inline-block
-                li.border.right
-                li.border.right
-                li.border.right
-            label(style='color:#66CC00;font-size:15px;') 审核中 &nbsp;&nbsp;
-            ul.head-info.inline-block
-                li.border.right
-                li.border.right
-                li.border.right
-            .btn.white.m-right 关闭作业
-            .btn 提交作业
-            .btn 重新编辑
+    .pull-left.title 任务a
+    .text-right
+        ul.head-info.inline-block
+            li.m-right 提交人：某某
+        .btn.white.m-right#closeTask 关闭作业
+        .btn#submittask 提交作业
+
 
 view('main')
     .preview-content
-        .h3.m-bottom 作业说明
-        p.text-overflow
-            span
+        .h3.m-bottom.strong 作业说明:
+        span.small-font Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            # a.pointer#viewDesc 查看详细
+        #viewPdf
 
 view('edit')
     form.vertical
         .row
             label 附件名称:
-            input.input(name='name')
-            a.btn 上传附件
+            input.input(name='name' value=attachment.name)
+            a.btn#uploadFile 上传附件
         .row
             label 附件描述:
-            textarea.input.w-full(name='description' rows='5')
+            textarea.input.w-full#description(name='description' rows='5') > echo(attachment.description)
 view('upload')
     .row
         #uploader

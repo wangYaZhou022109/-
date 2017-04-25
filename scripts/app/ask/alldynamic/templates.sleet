@@ -15,7 +15,7 @@ view('list')
                         a(id='myshares-details-' + id + '_' + questionId ) > echo(title)
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
-                        img(src=thumbnail)
+                        .img(src=thumbnail)
                     @echo(content)
                 .user-info
                     span

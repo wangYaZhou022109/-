@@ -13,6 +13,7 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         del: { url: '../ask-bar/trends/del' },
+        down: { url: '../human/file/download' },
         page: {
             data: [],
             params: { page: 1, size: 2 },
@@ -20,6 +21,20 @@ exports.store = {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
+                }
+            }
+        },
+        speech: {
+            url: '../system/speech-set',
+            mixin: {
+                getData: function(id) {
+                    var speechset;
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            speechset = d;
+                        }
+                    });
+                    return speechset;
                 }
             }
         }
@@ -35,6 +50,10 @@ exports.store = {
             trends.set(params);
             this.post(trends).then(function() {
             });
+        },
+        speech: function() {
+            var speech = this.models.speech;
+            this.get(speech);
         },
         page: function(payload) {
             var trends = this.models.trends;
@@ -53,8 +72,11 @@ exports.store = {
             return this.post(follow);
         },
         publish: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
+            var discuss = this.models.discuss,
+                speechset = this.models.speech.getData('2'),
+                data = payload;
+            data.speechset = speechset.status;
+            discuss.set(data);
             return this.save(discuss);
         },
         unfollow: function(payload) {
@@ -101,5 +123,6 @@ exports.afterRender = function() {
             me.dispatch('page', me.renderOptions);
         }
     });
+    this.dispatch('speech');
     return this.dispatch('page', this.renderOptions);
 };
