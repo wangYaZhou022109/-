@@ -10,14 +10,17 @@ view('filter')
         .filter
             #start-time-order.pull-right.m-right.pointer
                 | 进入时间
-                i.iconfont.icon-sort-desc
+                compare(search.startTimeOrderBy 'eq' 1)
+                    i.iconfont.icon-sort-asc
+                compare(search.startTimeOrderBy 'ne' 1)
+                    i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 状态：
                 .item#item-0(class=if(search.all 'active')) > span 全部
-                .item#item-1(class=if(search.waitStart 'active')) > span 待开始
-                .item#item-2(class=if(search.begining 'active')) > span 开考中
-                .item#item-3(class=if(search.finished 'active')) > span 已完成
-                #  .item#status-4(class=if(search.statusd 'active')) > span 待审核
+                .item#item-1(class=if(search.waitExam 'active')) > span 待考试
+                .item#item-2(class=if(search.waitStart 'active')) > span 待开始
+                .item#item-3(class=if(search.waitApprove 'active')) > span 待审核
+                .item#item-4(class=if(search.finished 'active')) > span 已完成
             .pull-left
                 .inline-block.m-left.sub-text 类型：
                 .item#type-0(class=if(search.allType 'active')) > span 全部
@@ -36,12 +39,12 @@ view('main')
                 span.inline-block.tag > map('exam-type-simple' type)
                 .inline-block.title > echo(name)
                 .time
-                    echo('进入考试时间：') + dateMinute(startTime) + echo('至') + dateMinute(endTime) + echo('&nbsp;&nbsp; 总分：' examRecord.score '及格分：' passScore)
+                    echo('进入考试时间：') + dateMinute(startTime) + echo('至') + dateMinute(endTime) + echo('&nbsp;&nbsp; 总分：' examRecord.totalScore '&nbsp;&nbsp; 及格分：' passScore)
             .state
                 compare(examRecord.status 'ge' 6)
                     echo('成绩:' examRecord.score)
                 compare(examRecord.status 'lt' 6)
                     map('exam-person-center-status' status)
             .btn-row > each(buttons)
-                .btn(id=id) > echo(text)
+                .btn(id=id data-name='id' data-value=value) > echo(text)
     #pager.pagination

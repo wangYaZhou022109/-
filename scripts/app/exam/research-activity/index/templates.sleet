@@ -13,9 +13,9 @@ view('banner')
         .inline-block.layout-ml-small
             #share
         p 调研时间：
-            dateTime(research.startTime)
+            dateMinute(research.startTime)
             | ~
-            dateTime(research.endTime)
+            dateMinute(research.endTime)
 
         .m-top
             span.m-right 相关标签
@@ -47,7 +47,7 @@ view('main')
                             .img-cont
                                 a.normal > img(src=coverId)
                             .detail-wrapper
-                                p 描述描述描述描述描述
+                                p > echo(questionaryDetail)
                                 .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text

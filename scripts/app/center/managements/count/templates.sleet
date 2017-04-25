@@ -26,8 +26,8 @@ view('count')
                 option 当日晚去机场
                 option 0206早餐
                 option 不需要用餐
-            .btn.gray.tag-height.m-right 查询
-            .btn.gray.tag-height.m-right 导出
+            .btn.gray.m-right.small 查询
+            .btn.gray.m-right.small 导出
     .count-table.layout-mt-small
         table.table
             tr

@@ -1,0 +1,21 @@
+.choosedate-page {
+    & .choosedate {
+        & .w-third {
+            width: 33.3%;
+        }
+        & .w-three {
+            width: 30%;
+        }
+        & table {
+            width: 100%;
+            & th {
+                border: 1px solid #777;
+                text-align: center;
+            }
+            & td {
+                border: 1px solid #777;
+                text-align: center;
+            }
+        }
+    }
+}

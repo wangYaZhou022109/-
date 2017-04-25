@@ -36,5 +36,11 @@
             background-color: var(--bg-color-3);
             padding: var(--space);
         }
+        & .gray-font {
+            color: var(--font-sub-color);
+        }
+        & .iconfont {
+            font-size: .7em;
+        }
     }
 }
