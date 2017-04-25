@@ -22,7 +22,8 @@ exports.events = {
     'change input-title-offline-*': 'updateTitleName',
     'click label-paidPay-offline-*': 'changePay',
     'change input-paidPay-offline-*': 'updatePay',
-    'click importOffline': 'importCourse'
+    'click importOffline': 'importCourse',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -97,6 +98,16 @@ exports.handlers = {
     },
     importCourse: function() {
         this.app.viewport.modal(this.module.items.import);
+    },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
+        } else {
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
     }
 };
 

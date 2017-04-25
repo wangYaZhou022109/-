@@ -8,8 +8,12 @@ view('main')
         section.section.container
             .layout-mr-small.pull-left
                 .small-font.sub-title.inline-block.m-right 配额方式：
-                .tag-btn.active#quota-type-2 分省配额
-                .tag-btn#quota-type-1 整体配额
+                if(checked.isType1)
+                    .tag-btn#quota-type-2 分省配额
+                    .tag-btn.active#quota-type-1 整体配额
+                else
+                    .tag-btn.active#quota-type-2 分省配额
+                    .tag-btn#quota-type-1 整体配额
             .quotamanage-title.clearfix
                 .layout-mr-small.pull-left
                     .small-font.sub-title.inline-block.m-right 审核方式:

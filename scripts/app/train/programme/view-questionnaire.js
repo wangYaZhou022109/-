@@ -1,4 +1,5 @@
 var _ = require('lodash/collection'),
+    $ = require('jquery'),
     editHander;
     // $ = require('jquery'),
     // markers = require('./app/ext/views/form/markers'),
@@ -13,7 +14,8 @@ exports.bindings = {
 exports.events = {
     'click addSurvey': 'addSurvey',
     'click addEva': 'addEva',
-    'click addExam': 'addExam'
+    'click addExam': 'addExam',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -66,6 +68,16 @@ exports.handlers = {
                 me.module.dispatch('saveResearch', param);
             }
         });
+    },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
+        } else {
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
     }
 };
 

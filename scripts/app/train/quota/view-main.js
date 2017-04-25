@@ -165,7 +165,9 @@ exports.dataForTemplate = {
     checked: function() {
         var quotaInfo = this.bindings.quotaInfo;
         return {
-            isAutoApprove1: quotaInfo.data.isAutoApprove === 1
+            isAutoApprove1: quotaInfo.data.isAutoApprove === 1,
+            isType1: quotaInfo.data.type === 1,
+            isType2: quotaInfo.data.type === 2
         };
     },
     quotaInfo: function() {

@@ -10,68 +10,66 @@ view('offline')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
-                .tag-btn.radius.pull-right.selected#export(href=downUrl) 导出安排
-            table.table
-                tr
-                    td(colspan="9")
-                        .pull-left
-                            label.m-right 线下课程安排
-                            if(isShowWeeks)
-                                select#selectOffline(name='selectOffline')
-                                    each(weeks)
-                                        option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
-                        .pull-right
-                            .tag-btn.radius#theme-offline 配置周主题
-                            .tag-btn.radius#addOfflineCourse 添加课程
-                            .tag-btn.radius#importOffline 导入课程
-                            .inline-block 最小化
-                            .inline-block.minimize -
-                tr
-                    th 日期
-                    th 时间
-                    th 课程名称
-                    th 讲师名称
-                    th 讲师单位
-                    th 讲师职务
-                    th 课酬实付
-                    th 课件
-                    th 操作
-                each(offlineCourseList) > tr
-                    td > date(courseDate)
-                    td > echo(startTime + '-' + endTime)
-                    td
-                        label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
-                        input(id='input-name-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-teacher-offline-' + id data-name='id' data-value=id) > echo(teacherName + '(点击可修改)')
-                        input(id='input-teacher-offline-' + id value=teacherName style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
-                        input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
-                        input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
-                        input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
-                    td > i.iconfont.icon-zhishiku.custom-color-4(id='courseware-'+id data-name='id' data-value=id)
-                    td
-                        i.iconfont.icon-edit.text-main-color.m-right(id='edit-offline-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-close-circle.custom-color-3(id='del-offline-'+id data-name='id' data-value=id)
-
+                a.small-btn.radius.pull-right#export(href=downUrl) 导出安排
+            .clearfix.m-top
+                .pull-left
+                    label.m-right 线下课程安排
+                    if(isShowWeeks)
+                        select.tag-select#selectOffline(name='selectOffline')
+                            each(weeks)
+                                option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
+                .pull-right
+                    .tag-btn.radius#theme-offline 配置周主题
+                    .tag-btn.radius#addOfflineCourse 添加课程
+                    .tag-btn.radius#importOffline 导入课程
+                    .inline-block
+                        span#min-1 最小化
+                        i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-1
+                table.table#minitable-1
+                    tr
+                        th 日期
+                        th 时间
+                        th 课程名称
+                        th 讲师名称
+                        th 讲师单位
+                        th 讲师职务
+                        th 课酬实付
+                        th 课件
+                        th 操作
+                    each(offlineCourseList) > tr
+                        td > date(courseDate)
+                        td > echo(startTime + '-' + endTime)
+                        td
+                            label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+                            input(id='input-name-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-teacher-offline-' + id data-name='id' data-value=id) > echo(teacherName + '(点击可修改)')
+                            input(id='input-teacher-offline-' + id value=teacherName style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
+                            input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
+                            input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
+                            input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
+                        td > i.iconfont.icon-tag.custom-color-5(id='courseware-'+id data-name='id' data-value=id)
+                        td
+                            i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-offline-'+id data-name='id' data-value=id)
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-offline-'+id data-name='id' data-value=id)
 
 view('online') 
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
-            table.table
-                tr
-                    td(colspan="9")
-                        label.pull-left 在线资源
-                        .pull-right
-                            .tag-btn.radius#theme-online 配置主题
-                            .tag-btn.radius#addCourse 添加课程
-                            .inline-block 最小化
-                            .inline-block.minimize -
+            .clearfix
+                label.pull-left 在线资源
+                .pull-right
+                    .tag-btn.radius#theme-online 配置主题
+                    .tag-btn.radius#addCourse 添加课程
+                    span#min-2 最大化
+                    i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-2
+            table.table#minitable-2(style='display:none')
                 tr
                     th 主题
                     th 课程名称
@@ -86,23 +84,21 @@ view('online')
                             option(value='1')('selected')&if(isRequired1) > map('yes-or-no' '1')
                             option(value='0')('selected')&if(isRequired0) > map('yes-or-no' '0')
                     td
-                        i.iconfont.icon-search.custom-color-4.m-right(id='view-online-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-close-circle.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
-
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
 
 view('questionnaire') 
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
-            table.table
-                tr
-                    td(colspan="9")
-                        label.pull-left 调研与问卷
-                        .pull-right
-                            .tag-btn.radius#addExam 添加考试
-                            .tag-btn.radius#addSurvey 添加调研
-                            .tag-btn.radius#addEva 添加评估
-                            .inline-block 最小化
-                            .inline-block.minimize -
+            .clearfix
+                label.pull-left 调研与问卷
+                .pull-right
+                    .tag-btn.radius#addExam 添加考试
+                    .tag-btn.radius#addSurvey 添加调研
+                    .tag-btn.radius#addEva 添加评估
+                    span#min-3 最大化
+                    i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-3
+            table.table#minitable-3(style='display:none')
                 tr
                     th 序号
                     th 问卷名称
@@ -117,21 +113,21 @@ view('questionnaire')
                     td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right(id='edit-qnr-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-search.custom-color-4.m-right(id='view-qnr-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-close-circle.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
+
 
 view('task')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
-            table.table
-                tr
-                    td(colspan="9")
-                        label.pull-left 作业
-                        .pull-right
-                            .tag-btn.radius#addTask 添加作业
-                            .inline-block 最小化
-                            .inline-block.minimize -
+            .clearfix
+                label.pull-left 作业
+                .pull-right
+                    .tag-btn.radius#addTask 添加作业
+                    span#min-4 最大化
+                    i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-4
+            table.table#minitable-4(style='display:none')
                 tr
                     th 序号
                     th 作业名称
@@ -144,9 +140,8 @@ view('task')
                     td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
-                        i.iconfont.icon-edit.text-main-color.m-right(id='edit-task-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-close-circle.custom-color-3(id='del-task-'+id data-name='id' data-value=id)
-
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-task-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-task-'+id data-name='id' data-value=id)
 
 view('configOffline')
     section.section

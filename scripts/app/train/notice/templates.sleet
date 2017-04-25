@@ -5,67 +5,76 @@ module > .train-class-page
         .main(data-region='main')
 
 view('main') > form.vertical
-    input(name='id' type='hidden' value=signupInfo.id)
-    h3 培训班报名信息
-    .row(style='line-height:50px;')
-        .col-sm-8
-            label > echo('是否开放报名：')
-            input.inline-block#isOpen-1(name='isOpen' type='radio' value='1')('checked')&if(signupInfo.checked)
-            .inline-block 是
-            input.inline-block#isOpen-0(name='isOpen' type='radio' value='0')('checked')&unless(signupInfo.checked)
-            .inline-block 否
-    .row(style='line-height:50px;')
-        .col-sm-8
-            label > echo('报名开始时间：')
-            input.input#startTime(name='startTime' value=dateTime(signupInfo.startTime))
-    .row(style='line-height:50px;')
-        .col-sm-8
-            label > echo('报名结束时间：')
-            input.input#endTime(name='endTime' value=dateTime(signupInfo.endTime))
-    .row(style='line-height:50px;')
-        .col-sm-8
-            label#code > echo('报名码：' + signupInfo.signupCode)
-            a.btn#copy > echo('复制')
-    label > echo('引导语：请在下发培训公文时通知学员在报到前登录网大培训班填写“两个带来”问题，培训期间进行交流分享(两个带来示例模板下载)。 “两个带来”，即带来一个优秀经验分享、带来一个棘手问题讨论，以解决问题为导向，有效地引导学员带着实际工作问题参与培训学习和思考，并在培训班积极推广各单位的优秀实践经验，促进学员的相互分享和工作借鉴。')
-
-    label > echo('启用两个带来')
-
-    input#usingTwoBrings(type='checkbox' name='usingTwoBrings' value='1')('checked')&if(signupInfo.isUsingTwoB)
-    label(for='usingTwoBrings') 学员填写“两个带来”问题，培训期间组织互动分享
-
-    .row(style='line-height:50px;')
-        .col-sm-8
-            label > echo('问题1：')
-            input.input#question1(name='question1' value=signupInfo.question1)
-    .row(style='line-height:50px;')
-        .col-sm-8
-            label > echo('问题2：')
-            input.input#question2(name='question2' value=signupInfo.question2)
-    .row
-        .col-sm-8(style='text-align:center')
-            a.btn#save 保存
-    if(signupInfo.id)
-        .row(style='line-height:50px;')
-            .col-sm-8
-                label > echo('此培训班的报名链接为：')
-        .row(style='line-height:50px;')
-            .col-sm-8
-                label > echo('http://sign.chinamobile.com')
-                a.btn > echo('复制')
-        .row(style='line-height:50px;')
-            .col-sm-8
-                label > echo('二维码报名入口：')
-                .inline-block
-                    #qrcode
-        div > ul
-            li > echo('【重要】发文注意事项')
-            li > echo('一、培训通知附件：')
-            li > echo('1、《中国移动学院培训报名及参加须知》(')
-            a#download-doc(href=docUrl) > echo('下载') 
-            echo(')（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。')
-            li > echo('2、《课程安排》')
-            a#download-course(href=downUrl) > echo('(下载)')
-            li > echo('二、培训通知发布路径及时间要求: ')
-            li > echo('1、路径：须通过OA“培训项目审批单”下发培训通知(OA首页-通用办公-培训项目-部门项目审批单)。')
-            li > echo('2、时间：开班前20天左右发布通知，以保证OA顺利流转，省公司学员提前做好准备并按时报名。')
-            li > echo('3、注意事项：为保证学员顺利报到，审批单中移动学院联系人写“响应中心，15801696688-27260”（响应中心是学院集中服务平台，负责解答培训前期相关问题，比如来院路线等）')
+    .publishnotice.container.bg-highlight.overflow
+        section.managements-content-area
+            h4 培训班报名信息
+            .w-half
+                .form
+                    .form-row
+                        label.label.required 是否开放报名
+                        .content.form-line-height
+                            input(name='id' type='hidden' value=signupInfo.id)
+                            input#isOpen-1(name='isOpen' type='radio' value='1')('checked')&if(signupInfo.checked)
+                            label 是
+                            input#isOpen-0(name='isOpen' type='radio' value='0')('checked')&unless(signupInfo.checked)
+                            label 否
+                    .form-row
+                        label.label.required 报名开始时间
+                        .content
+                            .relative.overflow
+                                input.input.date#startTime(name='startTime' value=dateTime(signupInfo.startTime))
+                                .iconfont.icon-riqi.text-main-color
+                    .form-row
+                        label.label.required 报名结束时间
+                        .content
+                            .relative.overflow
+                                input.input.date#endTime(name='endTime' value=dateTime(signupInfo.endTime))
+                                .iconfont.icon-riqi.text-main-color
+                    .form-row
+                        label.label.required 报名码
+                        .content
+                            span.m-right.form-line-height > echo(signupInfo.signupCode)
+                            .tag-btn.radius 复制
+            span.layout-mt-small
+                | 引导语：请在下发培训公文时通知学员在报到前登录网大培训班填写“两个带来”问题，
+                | 培训期间进行交流分享(两个带来示例模板下载)。 “两个带来”，即带来一个优秀经验分享、带来一个棘手问题讨论，
+                | 以解决问题为导向，有效地引导学员带着实际工作问题参与培训学习和思考，并在培训班积极推广各单位的优秀实践经验，
+                | 促进学员的相互分享和工作借鉴。
+            h4.m-top 启用“两个带来”
+            .check-choice
+                input#usingTwoBrings(type='checkbox' name='usingTwoBrings' value='1')('checked')&if(signupInfo.isUsingTwoB) + span 学员填写“两个带来”问题，培训期间组织互动分享
+            .form.layout-mt-small
+                .form-row
+                    label.label.auto.layout-mr-small.required 问题1
+                    .content
+                        input.input#question1(name='question1' value=signupInfo.question1 placeholder='优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新经验')
+                .form-row
+                    label.label.auto.layout-mr-small.required 问题2
+                    .content
+                        input.input#question2(name='question2' value=signupInfo.question2 placeholder='棘手问题：您当前最关心的、当前工作中最棘手的一个问题')
+                    .text-center.layout-mt
+                        a.btn#save 保存
+            if(signupInfo.id)    
+                section.section
+                    p 此为培训班的报名链接:
+                    .alink.layout-mt-small
+                        span.small-font.layout-mr http://sign.chinamobile.com
+                        .tag-btn.radius 复制
+                        .enter.layout-mt-small
+                            span.small-font.vertical-top.m-right 二维码报名入口:
+                            #qrcode
+                .important-notice
+                    p 【重要】发文注意事项：
+                    p 一、培训通知附件：
+                    p.block 1、《中国移动学院培训报名及参加须知》（
+                        a#download-doc(href=docUrl) 下载
+                        span ）（注意：请将报名链接复制到参训须知首页。为保证链接正确性，请提前自行报名试用）。
+                    p.block 2、《课程安排》 （
+                        a#download-course(href=downUrl) 下载
+                        span ）
+                    .layout-mt-small
+                        p 二、培训通知发布路径及时间要求:
+                        p 1、路径：须通过OA“培训项目审批单”下发培训通知(OA首页-通用办公-培训项目-部门项目审批单)。
+                        p 2、时间：开班前20天左右发布通知，以保证OA顺利流转，省公司学员提前做好准备并按时报名。
+                        p 3、注意事项：为保证学员顺利报到，审批单中移动学院联系人写“响应中心，
+                            | 15801696688-27260”（响应中心是学院集中服务平台，负责解答培训前期相关问题，比如来院路线等）

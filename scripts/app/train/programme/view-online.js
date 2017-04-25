@@ -50,7 +50,8 @@ exports.dataForTemplate = {
 exports.events = {
     'click addCourse': 'addCourse',
     'click label-online-*': 'changeRequired',
-    'change input-online-*': 'updateRequired'
+    'change input-online-*': 'updateRequired',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -72,5 +73,15 @@ exports.handlers = {
     updateRequired: function(id) {
         var val = this.$('input-online-' + id).value;
         this.module.dispatch('updateRequired', { id: id, isRequired: val });
+    },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
+        } else {
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
     }
 };

@@ -95,7 +95,19 @@ exports.dataForTemplate = {
     }
 };
 
-exports.components = [function() {
+exports.components = [{
+    id: 'startTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, function() {
     var code = this.bindings.signupInfo.data.signupCode;
     return {
         id: 'qrcode',
