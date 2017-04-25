@@ -70,10 +70,10 @@ exports.beforeRender = function() {
 exports.buttons = [{
     text: '保存',
     fn: function() {
-        var targetList = this.bindings.targetList.data,
-            delList = this.bindings.delList.data;
-        var themeId = this.$('selectTheme').value;
-        this.module.renderOptions.callback(themeId, targetList, delList);
-        this.app.viewport.closeModal();
+        var targetList = this.store.models.targetList.data,
+            delList = this.store.models.delList.data,
+            state = this.store.models.state.data;
+        var themeId = state.themeId;
+        this.renderOptions.callback(themeId, targetList, delList);
     }
 }];

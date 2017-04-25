@@ -3,7 +3,7 @@
 module > .addtopicclass-page
     .addtopicclass(data-region='selected')
 
-view('selceted')
+view('selected')
     .page-main-wrapper
         .page-side.bg-highlight.layout-ml-small
             h5 已选课程

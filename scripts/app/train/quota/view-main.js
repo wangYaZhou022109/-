@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    $ = require('jquery');
 
 exports.bindings = {
     quotaInfo: true,
@@ -92,6 +93,7 @@ exports.dataForActions = {
             var message = '确定要将配额方式修改为整体配额吗?';
             me.app.message.confirm(message, function() {
                 me.module.dispatch('changeType', { type: 1 });
+                $(me.$('quota-type-1')).addClass('active').siblings().removeClass('active');
             }, function() {
                 resolve(false);
             });
@@ -107,6 +109,7 @@ exports.dataForActions = {
             var message = '确定要将配额方式修改为分省配额吗?';
             me.app.message.confirm(message, function() {
                 me.module.dispatch('changeType', { type: 2 });
+                $(me.$('quota-type-2')).addClass('active').siblings().removeClass('active');
             }, function() {
                 resolve(false);
             });

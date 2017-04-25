@@ -395,6 +395,9 @@ module.exports = {
     'exam-person-center-status': {
         1: '待考试', 2: '待开始', 3: '待审核', 4: '待评卷', 5: '已完成'
     },
+    'train-project-status': {
+        1: '未实施', 2: '进行中', 3: '已结束'
+    },
     get: function(k) {
         return _.map(this[k], function(value, key) {
             return { key: key, value: value };
