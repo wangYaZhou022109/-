@@ -1,7 +1,8 @@
 var D = require('drizzlejs');
 
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'picker/comment-area/accuse': { isModule: true }
 };
 
 exports.store = {
