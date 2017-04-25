@@ -13,6 +13,7 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         del: { url: '../ask-bar/trends/del' },
+        down: { url: '../human/file/download' },
         page: {
             data: [],
             params: { page: 1, size: 2 },

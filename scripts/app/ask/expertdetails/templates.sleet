@@ -41,9 +41,9 @@ view('list')
 view('top')
     .section
         compare(expert.concernList.length 'gt' 0)
-            .btn.block.layout-mt-small.big(id='unfollow-expert' data-name='id' data-value=expert.member.id) > string('unfollow')
+            .btn.block.layout-mt-small.big(id='unfollow-expert' data-name='id' data-value=expert.id) > string('unfollow')
         else
-            .btn.block.layout-mt-small.big(id='follow-expert' data-name='id' data-value=expert.member.id) > string('my-follow')
+            .btn.block.layout-mt-small.big(id='follow-expert' data-name='id' data-value=expert.id) > string('my-follow')
     div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')

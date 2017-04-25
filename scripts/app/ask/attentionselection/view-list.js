@@ -4,7 +4,8 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
-    state: true
+    state: true,
+    down: false
 };
 
 exports.events = {
@@ -95,22 +96,19 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    // end: function() {
-    //     this.app.message.success('操作成功！');
-    //     console.log(this.models.state);
-    //     // this.module.dispatch('init');
-    //     // this.app.show('content', 'ask/index');
-    // }
 };
 
 exports.dataForTemplate = {
     trends: function(data) {
         var trends = data.trends;
+        var me = this;
         _.forEach(trends, function(value) {
             var obj = value,
-                date = new Date(obj.createTime);
-            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-            + '   ' + date.getHours() + ':' + date.getMinutes();
+                url = { };
+            if (typeof obj.member !== 'undefined') {
+                url = obj.member.headPortrait;
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
         });
         return trends;
     }

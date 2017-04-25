@@ -1,9 +1,10 @@
-
+var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     expertlist: true,
     topicType: true,
-    user: true
+    user: true,
+    down: false
 };
 
 exports.events = {
@@ -56,4 +57,17 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
+    expert: function(data) {
+        var expertlist = data.expertlist;
+        var me = this;
+        _.forEach(expertlist, function(value) {
+            var obj = value,
+                url = {};
+            if (typeof obj.member !== 'undefined') {
+                url = obj.member.headPortrait;
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return expertlist;
+    }
 };
