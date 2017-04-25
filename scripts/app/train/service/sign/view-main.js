@@ -1,7 +1,10 @@
+var _ = require('lodash/collection');
+
 exports.bindings = {
     signs: true,
     sign: false,
-    state: true
+    state: true,
+    download: false,
 };
 
 exports.components = [{
@@ -114,5 +117,16 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
-
+    signs: function(data) {
+        var me = this;
+        var signs = data.signs || {};
+        var pageNum = me.bindings.signs.getPageInfo().page;
+        _.map(signs || [], function(sign1, i) {
+            var e = sign1;
+            e.downUrl = me.bindings.download.getFullUrl() + '?id=' + e.id;
+            e.i = i + 1 + ((pageNum - 1) * 10);
+            return e;
+        });
+        return signs;
+    }
 };

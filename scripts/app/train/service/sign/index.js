@@ -31,6 +31,9 @@ exports.store = {
         autoFull: {
             url: '../train/sign/auto-full'
         },
+        download: {
+            url: '../train/sign/down-qr'
+        },
         state: { data: {} }
     },
     callbacks: {

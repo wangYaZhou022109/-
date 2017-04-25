@@ -15,8 +15,8 @@ view('main')
                 a.tag-btn#checkout2 全天
                 a.tag-btn#checkout3 不签到
             .pull-right
-                .btn#addSign > echo('添加')
-                .btn#batchDelete > echo('删除')
+                .tag-btn.selected#addSign > echo('添加')
+                .tag-btn.selected#batchDelete > echo('删除')
         table.table.layout-mt-small
             thead > tr
                 th > input(type='checkbox' id='check-all')
@@ -39,7 +39,7 @@ view('main')
                 td.operation
                     a(id='preview'+id data-name='id' data-value=id) > echo('预览')
                     echo('|')
-                    a(id='down'+id data-name='id' data-value=id) > echo('下载')
+                    a(href=downUrl download=id) 下载
                 td.operation
                     a(id='detail'+id data-name='id' data-value=id href='javascript:;') > echo('签到名单')
                     echo('|')
@@ -70,6 +70,7 @@ view('edit') > form.vertical
         .clearfix
             .form-row.pull-left.w-half.input-padding
                 label.label 生成签到二维码
+                .content
             .form-row.pull-right.w-half
                 label.label 迟到时间设置
                 .content
