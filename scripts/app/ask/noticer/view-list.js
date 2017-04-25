@@ -4,7 +4,8 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     member: true,
-    page: true
+    page: true,
+    down: false
 };
 
 exports.events = {
@@ -33,6 +34,8 @@ exports.dataForTemplate = {
         var flag = true;
         _.forEach(member, function(value) {
             var obj = value;
+            var url = obj.headPortrait;
+            obj.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             _.forEach(me.bindings.page.data, function(v) {
                 if (v.id === obj.id) {
                     flag = false;

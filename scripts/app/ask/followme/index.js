@@ -10,6 +10,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        down: { url: '../human/file/download' },
         member: { url: '../ask-bar/concern/followMe' },
         page: {
             data: [],

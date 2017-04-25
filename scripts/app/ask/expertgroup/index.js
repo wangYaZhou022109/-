@@ -14,6 +14,7 @@ exports.store = {
         follow: {
             url: '../ask-bar/question-details/boutique'
         },
+        down: { url: '../human/file/download' },
         unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {

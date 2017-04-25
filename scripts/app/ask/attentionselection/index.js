@@ -7,6 +7,7 @@ exports.store = {
     models: {
         state: {},
         trends: { url: '../ask-bar/trends/attentionselection' },
+        down: { url: '../human/file/download' },
         concern: { url: '../ask-bar/trends/concern' }
     },
     callbacks: {
