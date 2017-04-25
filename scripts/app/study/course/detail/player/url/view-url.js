@@ -1,6 +1,9 @@
+var timeInterval, logId;
+
 exports.bindings = {
-    time: false,
-    state: false
+    state: false,
+    download: false,
+    startProgress: 'startProgress'
 };
 
 exports.dataForTemplate = {
@@ -14,15 +17,34 @@ exports.dataForTemplate = {
 };
 
 exports.beforeClose = function() {
-    var me = this,
-        beginTime = this.bindings.time.data;
-    me.module.dispatch('updatePregress', {
-        sectionId: this.bindings.state.data.section.id,
-        beginTime: beginTime,
-        clientType: 0,
-        finishStatus: 2, // 已完成
-        completedRate: 100, // 已完成
-    }).then(function(data) {
-        me.module.renderOptions.callback(data);
-    });
+    clearInterval(timeInterval);
+    this.commitProgress();
+};
+
+exports.afterRender = function() {
+    var me = this;
+    timeInterval = setInterval(function() {
+        me.commitProgress();
+    }, 1000 * 60);
+
+    window.onunload = function() {
+        me.commitProgress(false);
+    };
+
+    setTimeout(function() {
+        me.commitProgress(false);
+    }, 1000 * 10); // 10秒后完成 10秒提交一次
+    // 加载完毕之后 开始进度
+    return this.module.dispatch('startProgress');
+};
+
+exports.mixin = {
+    commitProgress: function(flag) {
+        return this.module.dispatch('updateProgress', { logId: logId }).then(function() {
+            if (flag !== false) this.module.dispatch('startProgress');
+        });
+    }
+};
+exports.startProgress = function() {
+    logId = this.bindings.startProgress.data.id;
 };

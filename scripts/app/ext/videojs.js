@@ -29,8 +29,14 @@ var initVideo = function(payload) {
         beginTime = 0;
     });
 
-    return function() {
-        return Math.floor(learnTime / 1000);
+    return {
+        getLearnTime: function() {
+            return Math.floor(learnTime / 1000);
+        },
+        resetLearnTime: function() {
+            // 重制learnTime
+            learnTime = 0;
+        }
     };
 };
 
@@ -42,8 +48,10 @@ D.ComponentManager.register('videojs', function(view, el, options) {
         techOrder: ['html5', 'flash']
     };
     return videojs(el, D.assign(opt, options.video), function() {
-        this.getLearnTime = initVideo(this);
-        if (options.currentTime) this.currentTime(options.currentTime);
+        D.assign(this, initVideo(this));
+        if (options.currentTime) {
+            this.currentTime(options.currentTime);
+        }
         if (view.options.video) {
             this.on('timeupdate', handle(view.options.video.timeupdate));
             this.on('pause', handle(view.options.video.pause));
