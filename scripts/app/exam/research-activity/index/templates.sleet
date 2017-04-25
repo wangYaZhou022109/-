@@ -47,7 +47,7 @@ view('main')
                             .img-cont
                                 a.normal > img(src=coverId)
                             .detail-wrapper
-                                p > echo(questionaryDetail)
+                                p > @echo(questionaryDetail)
                                 .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text
