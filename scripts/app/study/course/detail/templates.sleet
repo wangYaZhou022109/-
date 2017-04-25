@@ -94,7 +94,7 @@ view('releated-course')
             i.iconfont.icon-reload-full
             span > string('reset.page')
         .h3 > echo('相关课程')
-    .mt-1.grid-row
+    .mt-1
         each(courseRelated)
             .col-md-6
                 .img
@@ -113,5 +113,4 @@ view('student')
 
 view('research-tips')
     .container
-        .row > .col-sm-12
-            echo(researchActivity.questionaryDetail)
+        echo(researchActivity.questionaryDetail)
