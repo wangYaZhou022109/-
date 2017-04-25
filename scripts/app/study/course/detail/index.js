@@ -42,6 +42,9 @@ exports.store = {
                 }
             }
         },
+        startProgress: { url: '../course-study/course-study-progress/start-progress' },
+        mediaProgress: { url: '../course-study/course-front/video-progress' },
+        docProgress: { url: '../course-study/course-front/doc-progress' },
         // 注册课程
         register: { url: '../course-study/course-front/registerStudy' },
         collect: { url: '../system/collect' }, // 收藏
@@ -61,7 +64,7 @@ exports.store = {
                 course = this.models.course,
                 courseRelated = this.models.courseRelated,
                 collect = this.models.collect,
-                state = this.models.state,
+                playerState = this.models.playerState,
                 register = this.models.register,
                 progress = this.models.progress;
             course.set(payload);
@@ -95,9 +98,24 @@ exports.store = {
                             me.get(me.models.examStatus);
                         }
                     }())],
-                    state.set({ id: payload.id, sectionId: sectionId }, true)
+                    playerState.set({ id: payload.id, sectionId: sectionId }, true)
                 );
             });
+        },
+        startProgress: function(payload) {
+            var model = this.models.startProgress;
+            model.set(payload);
+            return this.get(model);
+        },
+        mediaProgress: function(payload) {
+            var model = this.models.mediaProgress;
+            model.set(payload);
+            return this.post(model);
+        },
+        docProgress: function(payload) {
+            var model = this.models.docProgress;
+            model.set(payload);
+            return this.post(model);
         },
         updateProgress: function() {
             var progress = this.models.progress,
@@ -106,9 +124,9 @@ exports.store = {
             return this.get(progress);
         },
         showSection: function(payload) {
-            var state = this.models.state;
-            state.data.sectionId = payload.id;
-            state.changed();
+            var playerState = this.models.playerState;
+            playerState.data.sectionId = payload.id;
+            playerState.changed();
         },
         collect: function(payload) {
             var collect = this.models.collect;

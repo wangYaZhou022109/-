@@ -30,7 +30,7 @@ D.ComponentManager.register('uploader', function(view, el, options) {
                 FileFiltered: function(uploader, file) {
                     if (file.name.length > 100) {
                         uploader.removeFile(file);
-                        view.app.message.error('文件名过长');
+                        view.app.message.error('文件名称不能超过100个字符长度');
                     }
                 },
                 FileUploaded: function(loader, file, result) {
