@@ -44,14 +44,21 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    cancel: function() {
-        var examId = this.bindings.exam.data.id;
-        return { examId: examId };
-    },
     signUp: function() {
         var examId = this.bindings.exam.data.id;
         return { examId: examId };
+    }
+};
+
+exports.actionCallbacks = {
+    cancel: function() {
+        this.app.viewport.closeModal();
+        this.app.message.success('取消报名成功');
     },
+    signUp: function() {
+        this.app.viewport.closeModal();
+        this.app.message.success('报名成功');
+    }
 };
 
 exports.handlers = {
@@ -82,6 +89,7 @@ exports.handlers = {
 // 8: 考试结束
 // 9: 考试活动结束 可查看考试详情
 // 10: 报名考试，超出报名时间范围
+// 12: 考试已撤销
 getCurrentExam = function(exam) {
     var status = P.getUserStatusOfExam(exam),
         closeButton = { id: 'close-button', text: '我已经知道了' },
@@ -93,7 +101,7 @@ getCurrentExam = function(exam) {
         buttonMap = {
             1: [signupButton, closeButton],
             2: [cancelButton, closeButton],
-            3: [closeButton],
+            3: [cancelButton, closeButton],
             4: [closeButton],
             5: [toExamButton, closeButton],
             6: [examAgainButton, viewDetailButton, closeButton],
@@ -101,7 +109,8 @@ getCurrentExam = function(exam) {
             8: [closeButton],
             9: [viewDetailButton],
             10: [closeButton],
-            12: [closeButton]
+            12: [closeButton],
+            13: [closeButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 5) {

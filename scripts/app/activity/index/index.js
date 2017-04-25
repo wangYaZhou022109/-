@@ -46,10 +46,10 @@ exports.store = {
             D.assign(activitys.params, { size: RECOMMEND_SIZE });
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
+            this.get(gensees);
             return this.chain([
-                this.get(activitys),
-                this.get(gensees),
                 this.get(exams),
+                this.get(activitys),
                 this.get(researchActivitys)
             ]);
         },
@@ -79,6 +79,6 @@ exports.store = {
     }
 };
 
-exports.beforeRender = function() {
+exports.afterRender = function() {
     return this.dispatch('init');
 };
