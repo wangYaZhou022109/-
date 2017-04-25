@@ -24,21 +24,27 @@ exports.dataForEntityModule = function(entity) {
 exports.actions = {
     'click follow-question-*': 'follow',
     'click unfollow-question-*': 'unfollow',
-    'click praise-*': 'praise'
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
 };
 
 exports.dataForActions = {
     follow: function(payload) {
         var data = payload;
-        data.concernType = 2;
+        data.concernType = 3;
         return data;
     },
     unfollow: function(payload) {
         var data = payload;
-        data.concernType = 2;
+        data.concernType = 3;
         return payload;
     },
     praise: function(payload) {
+        var data = payload;
+        data.objectType = 3;
+        return payload;
+    },
+    unpraise: function(payload) {
         var data = payload;
         data.objectType = 3;
         return payload;
@@ -46,10 +52,10 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    follow: function() {
-        this.app.message.success('关注成功！');
-        // this.module.dispatch('refresh');
-    },
+    // follow: function() {
+    //     this.app.message.success('关注成功！');
+    //     // this.module.dispatch('refresh');
+    // },
     unfollow: function() {
         this.app.message.success('取消关注成功！');
         // this.module.dispatch('refresh');

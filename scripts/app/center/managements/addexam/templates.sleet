@@ -6,60 +6,60 @@ module > .addexam-page
 
 view('addexam-titlebar')
     .form.align-left.clearfix
-        .form-row.pull-left.addexam-search-padding.w-half
+        .form-row.pull-left.r-padding.w-half.row-block
             label.required 考试名称
             .content
-                input.input
+                input.input.tag-height
                 .tips 0/30
-        .form-row.pull-left.addexam-search-padding.w-fourth
+        .form-row.pull-left.r-padding.w-fourth.row-block
             label 开始时间
             .content
                 .relative
-                    input.input.date
+                    input.input.date.tag-height
                     .iconfont.icon-riqi
-        .form-row.pull-left.addexam-search-padding.w-fourth
+        .form-row.pull-left.r-padding.w-fourth.row-block
             label 结束时间
             .content
                 .relative
-                    input.input.date
+                    input.input.date.tag-height
                     .iconfont.icon-riqi
-        .form-row.pull-left.addexam-search-padding.w-fourth
+        .form-row.pull-left.r-padding.w-fourth.row-block
             label.required 考试时长（分）
-            .content > input
-        .form-row.pull-left.addexam-search-padding.w-fourth
+            .content > input.tag-height
+        .form-row.pull-left.r-padding.w-fourth.row-block
             label.required 及格成绩
-            .content > input
-        .form-row.pull-left.addexam-search-padding.w-fourth
+            .content > input.tag-height
+        .form-row.pull-left.r-padding.w-fourth.row-block
             label.required 是否考试及格才算完成
-            .content
+            .content.tag-height
                 input(type="radio" name="addexam")
                 label.m-right 是
                 input(type="radio" name="addexam")
                 label 否
-        .form-row.pull-left.addexam-search-padding.w-fourth
+        .form-row.pull-left.r-padding.w-fourth.row-block
             label.required 考卷显示规则
             .content
-                select.select-width
+                select.tag-height.w-full
                     option 一页一题
                     option 一页多题
 
 
 view('addexam-content')
     .test.clearfix
-        .w-half.text-center.border.right.pull-left
-            i.iconfont.icon-note.m-right
+        .w-half.text-center.border.right.pull-left.pointer#temporarypaper
+            i.iconfont.icon-note.m-right.strong
             span 临时组卷
-        .text-center.w-half.pull-left
-            i.iconfont.icon-tag.m-right
+        .text-center.w-half.pull-left#randomtest.pointer
+            i.iconfont.icon-tag.m-right.strong
             span 随机组卷
     .clearfix
         .layout-mt-small.pull-right
-            select.tag-height.m-right
+            select.tag-select.m-right
                 option 默认顺序
                 option 试题打乱顺序
                 option 选项打乱顺序
                 option 试题及选项打乱顺序
-            .btn.tag-height.radius 预览
+            .btn.tag-height.circle-radius.gray 预览
     table.table.layout-mt-small
         tr
             th 类型

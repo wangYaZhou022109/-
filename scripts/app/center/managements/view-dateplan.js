@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.events = {
     'click weektopic': 'showWeektopic',
     'click addclass': 'showAddclass',
@@ -6,7 +6,8 @@ exports.events = {
     'click addtopicclass': 'showAddtopicclass',
     'click addwork': 'showAddwork',
     'click addevaluation-*': 'showAddevaluation',
-    'click addexam': 'showAddexam'
+    'click addexam': 'showAddexam',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -37,5 +38,15 @@ exports.handlers = {
     showAddexam: function() {
         var model = this.module.items['center/managements/addexam'];
         this.app.viewport.modal(model);
+    },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
+        } else {
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
     }
 };

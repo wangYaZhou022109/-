@@ -28,24 +28,19 @@ exports.store = {
         init: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            // var me = this;
+            var page = this.models.page;
+            page.data = [];
             params.id = 'null';
+            params.page = 1;
             trends.set(params);
-            this.post(trends).then(function() {
-                // me.models.page = {
-                //     data: [],
-                //     params: { page: 1, size: 2 }
-                // };
-            });
+            this.post(trends);
         },
         page: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            // var me = this;
             params.id = 'null';
             trends.set(params);
             this.post(trends).then(function() {
-                // me.models.page.params.page++;
             });
         },
         follow: function(payload) {

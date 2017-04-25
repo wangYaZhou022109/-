@@ -7,44 +7,46 @@ exports.items = {
 exports.store = {
     models: {
         exams: {
-            url: '../exam/exam/details',
+            url: '../exam/exam/person-center-list',
             type: 'pageable',
             root: 'items'
         },
-        search: { data: { startTimeOrderBy: 0 } },
+        search: {
+            data: {
+                searchStatus: null,
+                type: null,
+                startTimeOrderBy: 0
+            }
+        },
         signUp: { url: '../exam/sign-up' }
     },
     callbacks: {
         init: function() {
-            var searchModel = this.models.search,
-                exams = this.models.exams;
-            D.assign(exams.params, searchModel.data);
-            return this.get(exams);
+            return this.get(this.models.exams);
         },
-        search: function(params) {
-            var searchModel = this.models.search,
-                exams = this.models.exams;
-            D.assign(exams.params, D.assign(searchModel.data, params));
-            this.get(exams);
-            searchModel.changed();
+        selectItem: function(payload) {
+            D.assign(this.models.search.data, payload);
+            this.models.search.changed();
+            D.assign(this.models.exams.params, this.models.search.data);
+            return this.get(this.models.exams);
         },
-        signUp: function(examId) {
-            this.models.signUp.set({ examId: examId });
-            return this.post(this.models.signUp);
-        },
-        revoke: function(examId) {
+        cancel: function(payload) {
             var me = this;
-            this.models.signUp.set({ id: examId });
-            return me.del(me.models.signUp);
+            this.models.signUp.set({ id: payload.examId });
+            return this.del(this.models.signUp).then(function() {
+                return me.get(me.models.exams);
+            });
         },
-        refreshList: function() {
-            var exams = this.models.exams;
-            D.assign(exams.params, this.models.search.data);
-            return this.get(exams);
+        signUp: function(payload) {
+            var me = this;
+            this.models.signUp.set(payload);
+            return this.post(this.models.signUp).then(function() {
+                return me.get(me.models.exams);
+            });
         }
     }
 };
 
-exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
+exports.afterRender = function() {
+    return this.dispatch('init');
 };

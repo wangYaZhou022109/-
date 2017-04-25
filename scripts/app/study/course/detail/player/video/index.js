@@ -6,6 +6,7 @@ exports.store = {
     models: {
         // 音视频更新进度
         updateProgress: { url: '../course-study/course-front/video-progress' },
+        attachment: { url: '../human/file' },
         download: { url: '../human/file/download' },
         time: { url: '../system/setting/time' },
         localProgress: { type: 'localStorage', data: {} },
@@ -24,7 +25,13 @@ exports.store = {
                 state.data.localTime = localTemp.studyTime || 0;
                 state.data.localLocation = localTemp.lessonLocation;
             }
-            return this.get(time);
+            return this.chain([
+                this.get(time),
+                function() {
+                    this.models.attachment.set({ id: payload.section.resourceId });
+                    return this.get(this.models.attachment);
+                }
+            ]);
         },
         updateProgress: function(payload) {
             var model = this.models.updateProgress,
@@ -45,5 +52,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
+    return this.dispatch('init', this.renderOptions);
 };

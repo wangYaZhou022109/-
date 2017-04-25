@@ -2,13 +2,17 @@ var _ = require('lodash/collection'),
     $ = require('jquery');
 
 exports.bindings = {
-    topics: true
+    topics: true,
+    search: 'searchChange'
+};
+
+exports.searchChange = function() {
+    this.module.dispatch('refreshList', this.bindings.search.data);
 };
 
 exports.events = {
     'click select_*': 'checkTopic'
 };
-
 exports.handlers = {
     checkTopic: function(value, events, element) {
         var member = _.find(this.bindings.topics.data,
@@ -35,7 +39,7 @@ exports.dataForTemplate = {
         if (ids) {
             _.map(data.topics || [], function(x) {
                 var m = x || {};
-                if (ids.indexOf(m.id) !== -1) {
+                if ((ids + ',').indexOf(m.id + ',') !== -1) {
                     m.checked = true;
                     m.checkStyle = 'active';
                 }
@@ -43,7 +47,4 @@ exports.dataForTemplate = {
         }
         return data.topics;
     }
-};
-exports.searchChange = function() {
-    this.module.dispatch('refreshList', this.bindings.search.getQueryParams());
 };

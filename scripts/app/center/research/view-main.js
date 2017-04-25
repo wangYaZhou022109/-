@@ -6,7 +6,8 @@ var _ = require('lodash/collection'),
 
 exports.bindings = {
     researchRecords: true,
-    search: true
+    search: true,
+    down: false
 };
 
 exports.components = [{
@@ -15,6 +16,14 @@ exports.components = [{
 
 exports.actions = {
     'click search': 'search'
+};
+
+exports.dataForActions = {
+    search: function(payload) {
+        var data = payload;
+        data.status = this.bindings.search.data.status;
+        return data;
+    }
 };
 
 exports.events = {
@@ -44,28 +53,31 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     researchRecords: function(data) {
-        var search = this.bindings.search.data;
+        var downUrl = this.bindings.down.getFullUrl(),
+            // search = this.bindings.search.data,
+            defultImg = 'images/default-cover/default_survey.jpg';
         return _.map(data.researchRecords, function(r) {
-            var status = '';
-            if (search.all) {
-                if (r.researchQuestionary.startTime > new Date().getTime()) {
-                    status = WAIT_START;
-                } else if (r.status === 0) {
-                    status = WAIT_JOIN;
-                } else {
-                    status = FINISHED;
-                }
-            }
-            if (search.waitJoin) {
-                status = WAIT_JOIN;
-            }
-            if (search.waitStart) {
+            var status = '',
+                imgUrl = r.researchQuestionary.coverId ? (downUrl + '?id=' + r.researchQuestionary.coverId) : defultImg;
+            // if (search.all) {
+            if (r.researchQuestionary.startTime > new Date().getTime()) {
                 status = WAIT_START;
-            }
-            if (search.finished) {
+            } else if (r.status === 0) {
+                status = WAIT_JOIN;
+            } else {
                 status = FINISHED;
             }
-            return D.assign(r, { status: status });
+            // }
+            // if (search.waitJoin) {
+            //     status = WAIT_JOIN;
+            // }
+            // if (search.waitStart) {
+            //     status = WAIT_START;
+            // }
+            // if (search.finished) {
+            //     status = FINISHED;
+            // }
+            return D.assign(r, { status: status, imgUrl: imgUrl });
         });
     }
 };

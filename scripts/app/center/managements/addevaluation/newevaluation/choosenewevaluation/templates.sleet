@@ -1,0 +1,54 @@
+#!handlebars
+
+module > .choosenewevaluation-page
+    .choosenewevaluation(data-region="choosenewevaluation")
+
+view('choosenewevaluation')
+    .filter-row
+        .filter-item
+            label 维度名称
+            input
+        .filter-item
+            label 创建时间
+            .relative.inline-block
+                input.input.date
+                .iconfont.icon-riqi
+        .btn 搜索
+    .layout-mt-small
+        table.table
+            tr
+                th > input(type="checkbox")
+                th 维度名称
+                th 业务类型
+                th 创建人
+                th 创建时间
+            tr
+                td > input(type="checkbox")
+                td 维度名称
+                td 调研
+                td 端端
+                td 2016-03-04 14:23
+            tr
+                td > input(type="checkbox")
+                td 维度名称
+                td 调研
+                td 端端
+                td 2016-03-04 14:23
+            tr
+                td > input(type="checkbox")
+                td 维度名称
+                td 调研
+                td 端端
+                td 2016-03-04 14:23
+            tr
+                td > input(type="checkbox")
+                td 维度名称
+                td 调研
+                td 端端
+                td 2016-03-04 14:23
+            tr
+                td > input(type="checkbox")
+                td 维度名称
+                td 调研
+                td 端端
+                td 2016-03-04 14:23

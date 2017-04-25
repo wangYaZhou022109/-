@@ -1,7 +1,5 @@
-var $ = require('jquery');
-
 exports.bindings = {
-    params: true
+    search: true
 };
 
 exports.events = {
@@ -9,36 +7,11 @@ exports.events = {
 };
 
 exports.handlers = {
-    toggleItem: function(el) {
-        var me = this,
-            searchStatus = '';
-        if (el) {
-            searchStatus = el;
-        }
-        me.module.dispatch('search', { searchStatus: searchStatus });
+    toggleItem: function(value) {
+        return this.module.dispatch('search', { searchStatus: value === 0 ? null : Number(value) });
     }
 };
 
-exports.actions = {
-    'click search': 'search',
-    'click signup': 'getClassSignupInfo'
-};
-
-exports.dataForActions = {
-    search: function() {
-        return {
-            name: $(this.$$('[name="activity-name"]')).val()
-        };
-    },
-    getClassSignupInfo: function() {
-        var code = $(this.$$('[name="signup-code"]')).val().trim();
-        if (code === '') {
-            this.app.message.error('æŠ¥åç ä¸èƒ½ä¸ºç©º!');
-            return false;
-        }
-        return { signupCode: code };
-    }
-};
 
 exports.actionCallbacks = {
     getClassSignupInfo: function(data) {
@@ -47,28 +20,28 @@ exports.actionCallbacks = {
         var url = '#/train/signup/' + classSignupInfo.classId;
         if (classSignupInfo) {
             if (classSignupInfo.isOpen === 0) {
-                this.app.message.error('è¯¥åŸ¹è®­ç­æš‚æœªå¼€æ”¾æŠ¥å!');
+                this.app.message.error('¸ÃÅàÑµ°àÔİÎ´¿ª·Å±¨Ãû!');
             } else if (nowTime < classSignupInfo.startTime) {
-                this.app.message.error('å½“å‰åŸ¹è®­ç­æŠ¥åå°šæœªå¼€å§‹!');
+                this.app.message.error('µ±Ç°ÅàÑµ°à±¨ÃûÉĞÎ´¿ªÊ¼!');
             } else if (nowTime > classSignupInfo.endTime) {
-                this.app.message.error('å½“å‰åŸ¹è®­ç­æŠ¥åå·²ç»“æŸ!');
+                this.app.message.error('µ±Ç°ÅàÑµ°à±¨ÃûÒÑ½áÊø!');
             } else {
                 window.location.href = url;
             }
         } else {
-            this.app.message.error('æŠ¥åç ä¸å­˜åœ¨!');
+            this.app.message.error('±¨ÃûÂë²»´æÔÚ!');
         }
     }
 };
 
 exports.dataForTemplate = {
     currentStep: function(data) {
-        var step = data.params.searchStatus;
+        var search = data.search;
         return {
-            all: !step || step === '',
-            running: step === 1 || step === '1',
-            notStart: step === 2 || step === '2',
-            finish: step === 3 || step === '3'
+            all: search.searchStatus === 0,
+            running: search.searchStatus === 1,
+            notStart: search.searchStatus === 2,
+            finish: search.searchStatus === 3,
         };
     }
 };

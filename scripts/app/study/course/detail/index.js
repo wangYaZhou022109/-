@@ -65,7 +65,7 @@ exports.store = {
                 register = this.models.register,
                 progress = this.models.progress;
             course.set(payload);
-            courseRelated.params = payload;
+            courseRelated.params = { limit: 2, id: payload.id };
             collect.params = { businessId: payload.id };
             register.set({ courseId: payload.id });
 
@@ -124,7 +124,7 @@ exports.store = {
         },
         selectCourseRelated: function() {
             var model = this.models.courseRelated;
-            model.params = { id: this.models.course.data.id };
+            model.params = { id: this.models.course.data.id, limit: 2 };
             return this.get(this.models.courseRelated);
         },
         score: function(payload) {

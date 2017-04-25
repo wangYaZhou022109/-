@@ -27,8 +27,9 @@ view('top')
 view('main')
     section.section
         .tabs.line.mb-1 > ul
-            li#item-1.active 问题回答
-            li#item-2 我的文章
+            li#item-1.active 等我来答
+            li#item-2 我的回答
+            li#item-3 我的文章
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
                 .person-list
@@ -205,6 +206,7 @@ view('main')
                             .comment-reply.m-top
                                 textarea.input.w-full.block(rows="1")
                                 .btn 回复
+            li.tabs-cont-item.active#tabs-cont-item-3
 
 view('side')
     .section

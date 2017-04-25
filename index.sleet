@@ -16,6 +16,11 @@ html.default
             # build:js scripts/ie.js
             script(src='node_modules/es5-shim/es5-shim.js')
             # endbuild
+        
+        ieif('lte IE 9')
+            # build:js scripts/pdf-compatibility.js
+            script(src='node_modules/pdfjs-dist/web/compatibility.js')
+            # endbuild
 
         # build:css styles/common.css
         link(rel='stylesheet' href='node_modules/normalize.css/normalize.css')

@@ -45,18 +45,14 @@ view('leave-content')
     .layout-mt-small
         .attendancelist-search.clearfix
             .pull-left
-                input.input.layout-mr-small(placeholder="请输入员工姓名")
+                input.input.tag-height.layout-mr-small(placeholder="请输入员工姓名")
                 label 签到状态
-                select
+                select.tag-height
                     option 全部
                     option 正常
                     option 迟到
                     option 缺勤
                     option 请假
-            .pull-right
-                .btn 查询
-                .btn.m-left 导出
-                .btn.m-left 批量签到
         .layout-mt-small
             table.table
                 tr
@@ -70,43 +66,41 @@ view('leave-content')
                     td 某某某
                     td 18576787846
                     td 待审批
-                    td > a 审批
+                    td > a#exam-verify-1 审批
                 tr
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 同意
-                    td > a 审批
+                    td > a#exam-verify-2 审批
                 tr
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 不同意
-                    td > a 审批
+                    td > a#exam-verify-3 审批
                 tr
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 不同意
-                    td > a 审批
+                    td > a#exam-verify-4 审批
                 tr
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 不同意
-                    td > a 审批
+                    td > a#exam-verify-5 审批
                 tr
                     td 18576787846
                     td 某某某
                     td 18576787846
                     td 不同意
-                    td > a 审批
+                    td > a#exam-verify-6 审批
         .pagination
             ul
                 li 首页
                 li 上一页
-                li
-                    input(value="3")
-                    span /10
+                li 3/10
                 li 下一页
                 li 尾页

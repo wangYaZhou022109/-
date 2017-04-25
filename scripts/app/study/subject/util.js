@@ -5,13 +5,13 @@ var D = require('drizzlejs'),
         before: '第',
         after: '节'
     },
-    defaultBtnTexts = { 3: '打开URL', 8: '进入作业', 9: '进入考试', 10: '进入课程', 11: '进入面授', 12: '进入调研', 13: '进入评估', 14: '进入直播' },
+    defaultBtnTexts = { 3: '开始学习', 8: '查看作业', 9: '参与考试', 10: '开始学习', 12: '参与调研', 13: '参与评估', 14: '进入直播' },
     studyBtnTexts = { 2: '重新学习', 4: '重新学习', 5: '查看详情', 6: '查看详情' },
     studyBtnColor = { 2: 'custom-bg-color-5', 4: 'custom-bg-color-5' },
     prefixUrl = {
         8: '#/study/task/',
         10: '#/study/course/detail/',
-        14: '#/gensee/detail/'
+        14: '#/activity/gensee/detail/'
     },
     btnTextStudy;
 // 阶段序号转义
@@ -49,7 +49,8 @@ exports.setBtn = function(chapters, type, currentSectionId) {
                 sectionType = Number(section.sectionType);
             section.btnText = defaultBtnTexts[sectionType];
             section.btnColor = 'custom-bg-color-2';
-            if (progress && progress.finishStatus !== 0) {
+
+            if (progress && progress.id && progress.finishStatus !== 0) {
                 section.btnText = studyBtnTexts[progress.finishStatus] || '继续学习';
                 if (btnTextStudy[sectionType]) section.btnText = btnTextStudy[sectionType].call(this, progress);
                 section.btnColor = studyBtnColor[progress.finishStatus] || 'custom-bg-color-4';
@@ -77,8 +78,12 @@ exports.setBtn = function(chapters, type, currentSectionId) {
 
 
 btnTextStudy = {
-    8: function() {
-        return '查看详情';
+    8: function(progress) {
+        var auditSocre = progress.score || 0,
+            score = (auditSocre / 100).toFixed(1);
+        if (progress.finishStatus === 5) return '待评审';
+        if (progress.finishStatus === 1 || progress.finishStatus === 2) return '成绩' + score;
+        return '查看作业';
     },
     9: function(progress) {
         var examScore = progress.examScore || 0,

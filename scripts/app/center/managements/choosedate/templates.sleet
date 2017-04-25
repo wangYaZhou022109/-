@@ -1,0 +1,239 @@
+#!handlebars
+
+module > .choosedate-page
+    .choosedate(data-region="choosedate")
+
+view('choosedate')
+    .form.clearfix
+        .form-row.w-third.pull-left
+            label.required.tag-height 报到日
+            .content > .relative
+                input.input.date.tag-height(placeholder="2016-12-24")
+                .iconfont.icon-riqi
+        .form-row.w-third.pull-left
+            label.required.tag-height 返程日
+            .content > input.input.tag-height(placeholder="2016-12-24")
+        .form-row.w-third.pull-left
+            label.required.tag-height 计划人数
+            .content > .num.tag-height 30
+    .clearfix
+        p.pull-left.small-font  注:图显示的是本月已预定的资源信息,不显示代表本月无预定,本月可用的资源数为<<300>>。
+        .form.pull-right.w-three > .form-row
+            label.required.small-font.tag-height 月份
+            .content
+                .relative
+                    input.input.date.tag-height(placeholder="2017-01")
+                    .iconfont.icon-riqi
+    .layout-mt-small
+        table
+            tr
+                th(rowspan="3") 培训班可用资源
+                th(colspan="31") 1月
+            tr
+                td 1
+                td 2
+                td 3
+                td 4
+                td 5
+                td 6
+                td 7
+                td 8
+                td 9
+                td 10
+                td 11
+                td 12
+                td 13
+                td 14
+                td 15
+                td 16
+                td 17
+                td 18
+                td 19
+                td 20
+                td 21
+                td 22
+                td 23
+                td 24
+                td 25
+                td 26
+                td 27
+                td 28
+                td 29
+                td 30
+                td 31
+            tr
+                td 二
+                td 三
+                td 四
+                td 五
+                td 六
+                td 日
+                td 一
+                td 二
+                td 三
+                td 四
+                td 五
+                td 六
+                td 日
+                td 二
+                td 三
+                td 四
+                td 五
+                td 六
+                td 日
+                td 二
+                td 三
+                td 四
+                td 五
+                td 六
+                td 日
+                td 二
+                td 三
+                td 四
+                td 二
+                td 三
+                td 四
+            tr
+                td 可用资源
+                td.custom-bg-color-3 1
+                td.custom-bg-color-4 2
+                td.custom-bg-color-3 3
+                td.custom-bg-color-4 4
+                td.custom-bg-color-4 5
+                td.custom-bg-color-4 6
+                td.custom-bg-color-3 7
+                td.custom-bg-color-4 8
+                td.custom-bg-color-4 9
+                td.custom-bg-color-4 10
+                td.custom-bg-color-4 11
+                td.custom-bg-color-4 12
+                td.custom-bg-color-4 13
+                td.custom-bg-color-3 14
+                td.custom-bg-color-4 15
+                td.custom-bg-color-4 16
+                td.custom-bg-color-4 17
+                td.custom-bg-color-4 18
+                td.custom-bg-color-4 19
+                td.custom-bg-color-4 20
+                td.custom-bg-color-4 21
+                td.custom-bg-color-4 22
+                td.custom-bg-color-3 23
+                td.custom-bg-color-4 24
+                td.custom-bg-color-4 25
+                td.custom-bg-color-4 26
+                td.custom-bg-color-4 27
+                td.custom-bg-color-4 28
+                td.custom-bg-color-4 29
+                td.custom-bg-color-4 30
+                td.custom-bg-color-3 30
+            tr
+                td 培训班名称X人Y天
+                td.bg-main-color(colspan="9") 占用25
+                td 10
+                td 11
+                td 12
+                td 13
+                td 14
+                td 15
+                td 16
+                td 17
+                td 18
+                td 19
+                td 20
+                td 21
+                td 22
+                td 23
+                td 24
+                td 25
+                td 26
+                td 27
+                td 28
+                td 29
+                td 30
+                td 30
+            tr
+                td 培训班名称X人Y天
+                td 10
+                td 11
+                td 12
+                td 13
+                td 14
+                td 15
+                td 16
+                td 17
+                td.bg-main-color(colspan="9") 占用25
+                td 18
+                td 19
+                td 20
+                td 21
+                td 22
+                td 23
+                td 24
+                td 25
+                td 26
+                td 27
+                td 28
+                td 29
+                td 30
+                td 30
+            tr
+                td 培训班名称X人Y天
+                td 10
+                td 11
+                td 12
+                td 13
+                td 14
+                td 15
+                td 16
+                td 17
+                td 18
+                td 19
+                td 20
+                td.bg-main-color(colspan="14") 占用25
+                td 21
+                td 22
+                td 23
+                td 24
+                td 24
+                td 24
+            tr
+                td 培训班名称X人Y天
+                td 10
+                td 11
+                td 12
+                td 13
+                td 14
+                td 15
+                td 16
+                td 17
+                td 18
+                td 19
+                td 20
+                td.bg-main-color(colspan="14") 占用25
+                td 21
+                td 22
+                td 23
+                td 24
+                td 24
+                td 24
+            tr
+                td 培训班名称X人Y天
+                td 10
+                td 11
+                td 12
+                td 13
+                td 14
+                td 15
+                td 16
+                td 17
+                td 18
+                td 19
+                td 20
+                td.bg-main-color(colspan="14") 占用25
+                td 21
+                td 22
+                td 23
+                td 24
+                td 24
+                td 24
+    .layout-mt-small.clearfix > .small-btn.pull-right.radius#watchrules 查看预定规则

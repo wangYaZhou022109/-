@@ -29,20 +29,18 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
-    recordList: function(data) {
-        var me = this;
-        var currentPId = me.bindings.currentPId.value;
-        var positionList = data.positionList;
-        if (positionList && positionList.length > 0 && !currentPId) {
-            me.bindings.currentPId.value = positionList[0].id;
-            positionList[0].current = true;
-        }
-        return positionList;
-    },
     position: function(data) {
         var positionList = data.positionList;
         var currentPId = this.bindings.currentPId.value;
         var position = {};
+        if (positionList && positionList.length > 0) {
+            if (!currentPId) {
+                this.bindings.currentPId.value = positionList[0].id;
+            }
+            if (this.bindings.currentPId.value === positionList[0].id) {
+                positionList[0].current = true;
+            }
+        }
         _.forEach(positionList, function(m) {
             var obj = m;
             if (obj.id === currentPId) {
@@ -80,7 +78,7 @@ exports.components = [
             id: 'viewPdf',
             name: 'picker',
             options: {
-                picker: 'player-pdf',
+                picker: 'pdf',
                 pdfUrl: url
             }
         };

@@ -76,5 +76,5 @@ module.exports = {
     invitation: '邀请',
     'next-step': '下一步',
     you: '你的',
-    unfollow: '取消关注'
+    unfollow: '已关注'
 };

@@ -6,7 +6,11 @@ exports.routes = {
     'message/detail/:id': 'showMessageDetail',
     'center/demand': 'showDmand',
     'center/class-service': 'classService',
-    'center/managements': 'showManagements'
+    'center/managements': 'showManagements',
+    'center/managements/statistics': 'showStatistics',
+    'center/managements/taskmarking': 'showTaskmarking',
+    'search-page': 'showSearchPage'
+
 };
 
 exports.showHome = function() {
@@ -68,4 +72,13 @@ exports.classService = function() {
 };
 exports.showManagements = function() {
     return this.app.show('content', 'center/managements');
+};
+exports.showStatistics = function() {
+    return this.app.viewport.showIt('content', 'center/managements/statistics');
+};
+exports.showTaskmarking = function() {
+    return this.app.viewport.showIt('content', 'center/managements/taskmarking');
+};
+exports.showSearchPage = function() {
+    return this.app.show('content', 'search-page');
 };

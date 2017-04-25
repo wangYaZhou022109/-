@@ -5,16 +5,14 @@ var $ = require('jquery'),
     _ = require('lodash/collection');
 var currentSectionId = null;
 var showHandler = function(payload) {
-    var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
+    // var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
         8: '#/study/task/',
         9: '#/exam/exam/paper/'
     };
     return function() {
         var me = this;
-        if (innerType.indexOf(payload.sectionType) !== -1) {
-            this.module.dispatch('showSection', payload);
-        } else if (payload.sectionType === 8) {
+        if (payload.sectionType === 8) {
             window.open(detailUrlMap[payload.sectionType] + '' + payload.referenceId);
         } else if (detailUrlMap[payload.sectionType]) {
             window.open(detailUrlMap[payload.sectionType] + '' + payload.resourceId);
@@ -24,6 +22,7 @@ var showHandler = function(payload) {
                 me.app.viewport.modal(me.module.items['research-tips']);
             });
         }
+        this.module.dispatch('showSection', payload);
     };
 };
 
@@ -124,7 +123,7 @@ exports.dataForTemplate = {
                         if (examStatus && examStatus.status) {
                             rr.finishStatus = examStatus.score ? '成绩' +
                             (Number(examStatus.score) / 100).toFixed(1) :
-                            maps.getValue('paper-instance-status', examStatus.status);
+                            maps.getValue('exam-record-status', examStatus.status);
                         }
                     }
                     if (rr.sectionType === 12 || rr.sectionType === 13) {

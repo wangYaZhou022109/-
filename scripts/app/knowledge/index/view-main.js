@@ -22,6 +22,9 @@ exports.dataForTemplate = {
             var know = k || {};
             know.avgScore *= 10;
             know.icon = icons[know.type] || defaultIcons;
+            if (know.name.lastIndexOf('.') !== -1) {
+                know.name = know.name.substring(0, know.name.lastIndexOf('.'));
+            }
             return know;
         });
     }

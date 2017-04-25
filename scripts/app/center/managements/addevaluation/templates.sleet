@@ -6,20 +6,20 @@ module > .addevaluation-page
 view('addevaluation')
     .bg-highlight
         .form.align-left
-            .form-row.pull-left.w-half.form-padding
-                label.label 调研名称
-                input.input
-            .form-row.pull-left.w-half
-                label.label 创建人
+            .form-row.pull-left.w-half.r-padding.row-block
+                label.label.tag-height 调研名称
+                input.input.tag-height
+            .form-row.pull-left.w-half.r-padding.row-block
+                label.label.tag-height 创建人
                 .relative
-                    input.input
+                    input.input.tag-height
                     .choice 选择
-            label.label 创建时间
+            label.label.tag-height 创建时间
             .relative
-                input.input.date.w-full
+                input.input.date.w-full.tag-height
                 .iconfont.icon-riqi
-        .text-center.layout-mt-small > .btn.radius 搜索
-    table.table
+        .text-center.layout-mt-small > .btn.circle-radius.gray.tag-height 搜索
+    table.table.layout-mt-small
         tr
             th 选择
             th 评估名称
@@ -62,3 +62,5 @@ view('addevaluation')
             td 端
             td 2015-10-09 12:30
             td > a 预览
+    .text-center
+        .btn.circle-radius.tag-height.gray#newevaluation 新增

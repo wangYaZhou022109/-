@@ -65,7 +65,7 @@ view('main')
             td > echo(organization.name)
             td > dateTime(submitTime)
             td > dateTime(examTime)
-            td > map('paper-instance-status' status)
+            td > map('exam-record-status' status)
             td
                 if(score)
                     a(id='edit-exams'+id data-name='id' data-value=id) > echo(score)

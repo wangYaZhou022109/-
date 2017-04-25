@@ -19,7 +19,7 @@ view('main')
                     .pull-left.layout-mr-small
                         .inline-block
                             .checkbox.no-margin
-                                input(type='checkbox' id='checkbox-' +@index)('checked')&if(checked)
+                                input(type='checkbox' id='checkbox-' +@index disabled='disabled')('checked')&if(checked)
                                 label(for='checkbox-' + @index)
                         b > echo(code '.')
                     .overflow
@@ -33,7 +33,7 @@ view('main')
             each(question.options)
                 .clearfix.layout-mb-small
                     .pull-left.layout-mr-small
-                        input(type='radio')('checked')&if(checked)
+                        input(type='radio' disabled='disabled')('checked')&if(checked)
                         b > echo(code '.')
                     .overflow
                         .m-bottom > echo(text)

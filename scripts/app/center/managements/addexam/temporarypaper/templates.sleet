@@ -1,0 +1,117 @@
+#!handlebars
+
+module > .temporarypaper-page
+    .temporarypaper-title(data-region="temporarypaper-title")
+    .temporarypaper-content(data-region="temporarypaper-content")
+
+view('temporarypaper-title')
+    .intro
+        span 试题总数：
+        span.layout-mr-small 49
+        span 试卷总分：
+        span 100
+    .layout-mt-small
+        table.table
+            tr
+                th 类型
+                th.text-main-color 单选
+                th.text-main-color 多选
+                th.text-main-color 判断
+                th.text-main-color 填空
+                th.text-main-color 问答
+                th.text-main-color 阅读理解
+                th.text-main-color 排序
+                th.text-main-color 连线
+                th.custom-color-3 全部
+            tr
+                td 数量
+                td 2
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td 2
+            tr
+                td 分数
+                td 20
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td 20
+
+view('temporarypaper-content')
+    .layout-mt-small.clearfix.bg-highlight.button-total
+        .text-center.border.right.pull-left.button-item.pointer#choosepapertopic
+            i.iconfont.icon-note.m-right.strong
+            span 选择试题
+        .text-center.border.right.pull-left.button-item.pointer.temporarytest#temporarytest
+            i.iconfont.icon-tag.m-right.strong
+            span 临时试题
+            .temporarypaper-slidedown
+                table.table.text-center.table-bg
+                    tr
+                        td > a#test-1 单选
+                        td > a#test-2 多选
+                    tr
+                        td > a#test-3 填空
+                        td > a#test-4 判断
+                    tr
+                        td > a#test-5 问答
+                        td > a#test-6 阅读理解
+                    tr
+                        td > a#test-7 连线
+                        td > a#test-8 排序
+
+        .text-center.pull-left.button-item.pointer#importest
+            i.iconfont.icon-cloud-up.m-right.strong
+            span 导入试题
+    .page-main-wrapper.layout-mt-small
+        .page-side.text-center
+            .icons
+                i.iconfont.icon-sort-asc.m-right
+                i.iconfont.icon-sort-desc.m-right
+                i.iconfont.icon-edit.m-right
+                i.iconfont.icon-trash
+            .score.layout-mt-small
+                label 题目分数
+                input(placeholder="10")
+                span 分
+        .page-main
+            .problem.border.bottom.dashed
+                span 1.（单选题）山水园林城市目前来讲是人类理想的居住环境。为什么山水这么重要呢？因为人的本性里面有对自然亲和的一面。人本来来自于自然。本来就是动物，天然地具有自然性。我们长期居住在钢筋水泥里面，就好像孩子失去了母亲，一旦回归了自然，我们就得到了心里的安慰，就好像孩子找到了母亲一样。根据上述文字，山水园林城市目前之所以是人类理想的居住环境，是因为（    ）。
+                .m-top.m-bottom
+                    p A. 人类一脸母亲的自然属性
+                    P B. 人类依赖自然的动物属性
+                    p C. 城市居民对乡村生活的怀
+                    p D. 城市居民对自然生活的向往
+            .m-top
+                span.color-error.m-right 难易度：高
+                span.color-error 标准答案： A
+        .page-side.text-center
+            .icons
+                i.iconfont.icon-sort-asc.m-right
+                i.iconfont.icon-sort-desc.m-right
+                i.iconfont.icon-edit.m-right
+                i.iconfont.icon-trash
+            .score.layout-mt-small
+                label 题目分数
+                input(placeholder="10")
+                span 分
+        .page-main
+            .problem.border.bottom.dashed.layout-mt-small
+                span 1.（单选题）山水园林城市目前来讲是人类理想的居住环境。为什么山水这么重要呢？因为人的本性里面有对自然亲和的一面。人本来来自于自然。本来就是动物，天然地具有自然性。我们长期居住在钢筋水泥里面，就好像孩子失去了母亲，一旦回归了自然，我们就得到了心里的安慰，就好像孩子找到了母亲一样。根据上述文字，山水园林城市目前之所以是人类理想的居住环境，是因为（    ）。
+                .m-top.m-bottom
+                    p A. 人类一脸母亲的自然属性
+                    P B. 人类依赖自然的动物属性
+                    p C. 城市居民对乡村生活的怀
+                    p D. 城市居民对自然生活的向往
+            .m-top
+                span.strong.color-error.m-right 难易度：高
+                span.strong.color-error 标准答案： A

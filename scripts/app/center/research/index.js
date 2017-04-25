@@ -7,6 +7,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        down: { url: '../human/file/download' },
         researchRecords: {
             url: '../exam/research-activity/person-center-list',
             type: 'pageable',
@@ -16,7 +17,8 @@ exports.store = {
             data: {
                 all: true,
                 noFinish: false,
-                finished: false
+                finished: false,
+                status: 'all'
             },
             mixin: {
                 saveStatus: function(status) {
@@ -24,6 +26,7 @@ exports.store = {
                     this.data.waitJoin = status === 'wait-join';
                     this.data.waitStart = status === 'wait-start';
                     this.data.finished = status === 'finished';
+                    this.data.status = status;
                 },
                 getStatusInt: function(status) {
                     if (status !== 'all') {
@@ -41,6 +44,7 @@ exports.store = {
         },
         search: function(payload) {
             this.models.search.saveStatus(payload.status);
+            this.models.search.data.name = payload.name;
             D.assign(this.models.researchRecords.params, {
                 name: payload.name,
                 status: payload.status

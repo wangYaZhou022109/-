@@ -21,7 +21,12 @@ view('content') > form
                 .comment-operation
                     .text-right
                         .item > i.iconfont.icon-zan > echo('赞（' + praiseNum +'）')                           
-                        #  .item > i.iconfont.icon-message(id='answer-'+ id) > echo('回复')
+                        .item > i.iconfont.icon-message(id='answer-'+ id) > echo('回复')
                         .item > i.iconfont.icon-info(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                 div(id='replyandreply-answer-'+id style='display:none')
-   
+                    input.input(name='content-' + id value='' )
+                    .btn(id='reply-answer-' + id  data-name='id' data-value=id) > echo('回复')
+                    input.input(type='hidden' name='id-' + id value=discussId id='id-' + id)
+                    input.input(type='hidden' name='organizationId-' + id value=organizationId id='organizationId-' + id)
+                    input.input(type='hidden' name='toUserId-' + id value=createMemberId id='toUserId-' + id)
+                    input.input(type='hidden' name='questionId-' + id value=questionId id='questionId-' + id)

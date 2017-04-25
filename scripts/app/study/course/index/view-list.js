@@ -61,6 +61,7 @@ exports.dataForTemplate = {
             else if (course.finishStatus === null) studyType = 0;
             course.studyType = studyType;
             course.avgScore /= 10;
+            course.visits = course.visits || 0;
         });
         return data.courses;
     },

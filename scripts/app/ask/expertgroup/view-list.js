@@ -23,7 +23,7 @@ exports.handlers = {
     },
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
-        this.app.viewport.modal(model);
+        this.app.viewport.modal(model, { bindings: this.bindings });
     },
     details: function(id) {
         this.app.show('content', 'ask/expertdetails', { id: id });
@@ -31,12 +31,24 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click check-*': 'check'
+    'click check-*': 'check',
+    'click follow-expert-*': 'follow',
+    'click unfollow-expert-*': 'unfollow'
 };
 
 exports.dataForActions = {
     check: function(payload) {
         return payload;
+    },
+    follow: function(payload) {
+        var data = payload;
+        data.concernType = '1';
+        return data;
+    },
+    unfollow: function(payload) {
+        var data = payload;
+        data.concernType = '1';
+        return data;
     }
 };
 

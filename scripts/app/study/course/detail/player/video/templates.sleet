@@ -4,5 +4,5 @@ module
     div(data-region='video')
 
 view('video')
-    video#player(class="video-js vjs-default-skin vjs-big-play-centered vjs-skin-hotdog-stand" preload='auto')
-        source(src=section.url type="video/mp4" )
+    video#player(class="video-js vjs-default-skin vjs-big-play-centered vjs-skin-hotdog-stand" preload='auto' style='margin: auto')
+        source(src=url type="video/mp4" )

@@ -25,7 +25,7 @@ exports.store = {
                         }).length,
                         p = this.data.answerRecords.length !== 0
                             ? (selectedCount / this.data.answerRecords.length) : 0;
-                    return p * 100;
+                    return Number(p * 100).toFixed(2);
                 },
                 isChecked: function(name) {
                     var answerRecord = _.find(this.data.answerRecords, [

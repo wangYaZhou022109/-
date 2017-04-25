@@ -1,0 +1,551 @@
+#!handlebars
+
+module > .statistics-page
+    .statistics
+        .statistics-head
+            .h4.m-left 培训班名称 - 学员满意度调查统计结果
+        div(data-region="tabs")
+        div(data-region="main")
+
+view('tabs')
+    .tabs.line
+        ul.relative
+            li.active#statistics-objective 客观题统计情况
+            li#statistics-subjective 主观题统计情况
+            li#statistics-cross 跨班汇总统计
+            span 总体满意率：
+            span.text-main-color.m-right 99.69%
+            span 课程满意率：
+            span.text-main-color.m-right 99.69%
+            span 满意率：
+            span.text-main-color.m-right 99.48%
+            .btn.small.pull-right 导出
+view('objective')
+    table.table
+        tr
+            th 序号
+            th 内容
+            th 满意
+            th 基本满意
+            th 不满意
+            th 很不满意
+            th 合计（个）
+            th 满意率（%）
+            th 满意（%）
+            th 基本满意（%）
+            th 不满意%）
+            th 很不满意（%）
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+
+    table.table
+        tr
+            th 序号
+            th 课程
+            th 满意
+            th 基本满意
+            th 不满意
+            th 很不满意
+            th 合计（个）
+            th 满意率（%）
+            th 满意（%）
+            th 基本满意（%）
+            th 不满意%）
+            th 很不满意（%）
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+
+view('subjective')
+    table.table
+        tr
+            th 序号
+            th 问题
+            th 意见与建议
+            th 学员
+            th 手机号
+            th 单位
+        tr
+            td.small-font(rowspan="6") 1
+            td.small-font(rowspan="6") 本次培训您感觉哪些方面最有价值？您的收获有哪些？
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font(rowspan="5") 2
+            td.small-font(rowspan="5") 觉得本次培训存在哪些不足？您的建议是什么？
+            td.small-font 互联网思维、集客发展的目标与重点
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font(rowspan="4") 3
+            td.small-font(rowspan="4") 其他意见与建议？
+            td.small-font 建立适应公司战略的矩阵式的组织架构和考核方式
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+        tr
+            td.small-font 2015年集客重点工作，“互联网+”政策解读
+            td.small-font 段飞
+            td.small-font 13903119871
+            td.small-font 河北公司
+
+
+
+view('cross')
+    table.table
+        tr
+            th 序号
+            th 内容
+            th 满意
+            th 基本满意
+            th 不满意
+            th 很不满意
+            th 合计（个）
+            th 满意率（%）
+            th 满意（%）
+            th 基本满意（%）
+            th 不满意%）
+            th 很不满意（%）
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%
+        tr
+            td.small-font 1
+            td.small-font 培训内容对实际工作有所帮助
+            td.small-font 15
+            td.small-font 3
+            td.small-font 0
+            td.small-font 0
+            td.small-font 18
+            td.small-font 100.00%
+            td.small-font 100.00%
+            td.small-font 97.00%
+            td.small-font 0.00%
+            td.small-font 0.00%

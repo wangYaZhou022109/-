@@ -68,11 +68,11 @@ view('addclass')
                     label.required 联系电话
                     .content
                         input.input
-    .layout-mt-small
+    .layout-mt-small.clearfix
         .pull-left > label.label 课件（最多上传三个）
         .pull-right
-            .tag-btn.radius.active 选择
-            .tag-btn.radius.active 上传
+            .small-btn.radius.m-right 选择
+            .small-btn.radius.m-right 上传
             .inline-block.help ?
     table.table
         tr
@@ -85,5 +85,5 @@ view('addclass')
             td 显示附件名称（点击可修改）
             td 文档
             td
-                i.iconfont.icon-search.custom-color-4.m-right
-                i.iconfont.icon-close-circle.custom-color-3
+                i.pointer.m-right.iconfont.icon-preview.custom-color-5
+                i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3

@@ -2,7 +2,7 @@ var D = require('drizzlejs');
 exports.items = {
     main: 'main',
     filter: 'filter',
-    //  'course-study/knowledge/add-knowledge': { isModule: true }
+    'knowledge/index/modal': { isModule: true }
 };
 
 exports.store = {

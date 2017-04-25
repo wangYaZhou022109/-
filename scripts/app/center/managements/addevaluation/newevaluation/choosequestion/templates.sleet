@@ -1,0 +1,39 @@
+#!handlebars
+
+module > .choosequestion-page
+    .choosequestion(data-region="choosequestion")
+
+view('choosequestion')
+    .form
+        .form-row
+            label.required 题目类型
+            .content
+                select.w-half
+                    option 单选
+                    option 多选
+                    option 问答
+        .form-row
+            label 题目信息
+            .content
+                textarea.w-full(rows="5")
+    .layout-mt-small
+        table.table
+            tr
+                th(colspan="2") 选项
+            tr
+                td 题号
+                td 描述
+            tr
+                td A
+                td > textarea.w-full
+            tr
+                td B
+                td > textarea.w-full
+            tr
+                td C
+                td > textarea.w-full
+            tr
+                td D
+                td > textarea.w-full
+            tr
+                td(colspan="2") > a 添加选项

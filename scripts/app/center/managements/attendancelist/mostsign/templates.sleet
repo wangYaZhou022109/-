@@ -5,7 +5,7 @@ module > .mostsign-page
 
 view('mostsign')
     p 请选择您要变更的签到状态
-    .layout-mt-small.container
+    .layout-mt-small.container.layout-mb
         label.m-right 签到状态
         select
             option 已签到

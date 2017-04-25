@@ -13,7 +13,7 @@ exports.store = {
         relevantexperts: { data: { menu: 'relevantexperts' } },
         relatedquestions: { data: { menu: 'relatedquestions' } },
         details: {
-            url: '../ask-bar/question-details'
+            url: '../ask-bar/question-details/share'
         },
         enjoy: {
             url: '../ask-bar/question-details/enjoy'
@@ -28,10 +28,11 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} },
         follow: {
-            url: '../ask-bar/my-share/concern'
+            url: '../ask-bar/question-details/boutique'
         },
-        unfollow: { url: '../ask-bar/my-share/cancel-concern' },
-        praise: { url: '../ask-bar/my-share/praise' }
+        unfollow: { url: '../ask-bar/concern/unfollow' },
+        praise: { url: '../ask-bar/my-share/praise' },
+        unpraise: { url: '../ask-bar/my-share/unpraise' }
     },
     callbacks: {
         refreshrelpy: function() {
@@ -115,30 +116,81 @@ exports.store = {
             report.set(data);
             return this.post(report);
         },
+        // follow: function(payload) {
+        //     // var follow = this.models.follow,
+        //     //     me = this,
+        //     //     expert = this.models.expert;
+        //     // follow.set(payload);
+        //     // expert.set({ id: this.models.expert.data.id, concernType: '1' });
+        //     var follow = this.models.follow;
+        //     follow.set(payload);
+        //     return this.put(follow);
+        //     // return this.post(follow).then(function() {
+        //     //     me.app.message.success('关注成功');
+        //     //     me.get(expert);
+        //     // });
+        // },
         follow: function(payload) {
-            // var follow = this.models.follow,
-            //     me = this,
-            //     expert = this.models.expert;
-            // follow.set(payload);
-            // expert.set({ id: this.models.expert.data.id, concernType: '1' });
-            var follow = this.models.follow;
+            var follow = this.models.follow,
+                me = this,
+                details = this.models.details;
             follow.set(payload);
-            return this.put(follow);
-            // return this.post(follow).then(function() {
-            //     me.app.message.success('关注成功');
-            //     me.get(expert);
-            // });
+            details.set({ id: this.models.details.data.id, concernType: '3' });
+            return this.post(follow).then(function() {
+                me.app.message.success('关注成功');
+                me.get(details);
+            });
         },
         unfollow: function(payload) {
-            var unfollow = this.models.unfollow;
-            unfollow.set(payload);
-            return this.put(unfollow);
+            var unfollow = this.models.unfollow,
+                me = this,
+                details = this.models.details;
+            details.set({ id: this.models.details.data.id, concernType: '3' });
+            unfollow.set({ id: payload.id, concernType: '3' });
+            return this.put(unfollow).then(function() {
+                me.app.message.success('取消成功');
+                me.get(details);
+            });
         },
         praise: function(payload) {
-            var praise = this.models.praise;
+            var praise = this.models.praise,
+                me = this,
+                details = this.models.details;
             praise.set(payload);
-            return this.put(praise);
+            details.set({ id: this.models.details.data.id, concernType: '3' });
+            return this.post(praise).then(function() {
+                me.app.message.success('点赞成功');
+                me.get(details);
+            });
         },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this,
+                details = this.models.details;
+            details.set({ id: this.models.details.data.id, objectType: '3' });
+            // console.log(details);
+            unpraise.set({ id: payload.id, objectType: '3' });
+            return this.put(unpraise).then(function() {
+                me.app.message.success('取消成功');
+                me.get(details);
+            });
+        },
+        // unfollow: function(payload) {
+        //     var unfollow = this.models.unfollow;
+        //     unfollow.set(payload);
+        //     return this.put(unfollow);
+        // },
+        // praise: function(payload) {
+        //     var praise = this.models.praise;
+        //     praise.set(payload);
+        //     return this.put(praise);
+        // },
+        // unpraise: function(payload) {
+        //     var unpraise = this.models.unpraise;
+        //     console.log(payload);
+        //     unpraise.set(payload);
+        //     return this.put(unpraise);
+        // },
         concern: function(payload) {
             var concern = this.models.concern;
             concern.set(payload);

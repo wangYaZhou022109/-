@@ -13,6 +13,12 @@ exports.store = {
 
         add: function(payload) {
             var state = this.models.state;
+            var limit = this.module.renderOptions.limit;
+            if (state.data.list.length === limit) {
+                this.app.message.error('最多添加' + limit + '项');
+                return;
+            }
+
             _.map(payload.items, function(item) {
                 if (state.data.map[item.value]) return;
                 state.data.map[item.value] = item;

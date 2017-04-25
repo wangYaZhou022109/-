@@ -27,7 +27,8 @@
     "flatpickr": "^2.3.4",
     "qrcodejs2": "^0.0.2",
     "highcharts": "^4.2.5",
-    "wavesurfer.js": "^1.2.7"
+    "flatpickr": "^2.3.4",
+    "qrcodejs2": "^0.0.2"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
@@ -83,7 +84,8 @@
         "restoreNumber",
         "pick",
         "routerLink",
-        "downloadUrl"
+        "downloadUrl",
+        "dateMinute"
       ]
     }
   }}

@@ -5,21 +5,21 @@ module > .addstudent-page
 
 view('addstudent')
     .clearfix
-        label.pull-left.add-label.m-right 员工编号
-        input.tag-btn.pull-left.add-mr
-        button.tag-btn.selected.pull-left 添加
+        label.pull-left.tag-height.m-right 员工编号
+        input.pull-left.tag-height
+        .small-btn.pull-left 添加
     .m-top.clearfix
         .addstudent-title-item.pull-left
             label 账号
-            input.input.layout-mr(placeholder="输入用户名、手机号、邮箱皆可")
+            input.input.tag-height.layout-mr(placeholder="输入用户名、手机号、邮箱皆可")
         .addstudent-title-item.pull-left
             label 姓名
-            input.input
+            input.input.tag-height
     .layout-mt-small
         .pull-left
             .dtree
                 ul
-                    li.dtree-opened.dtree-has-child
+                    li.dtree-opened.dtree-has-child#tree-1
                         .dtree-node-content
                             i.dtree-handler
                             span 深圳知学云

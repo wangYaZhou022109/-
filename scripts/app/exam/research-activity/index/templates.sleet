@@ -7,15 +7,15 @@ module > .class-register-page
         .page-main > .container(data-region='main')
 
 view('banner')
-    .cover.pull-left > img(src='images/default-cover/default_class.jpg')
+    .cover.pull-left > img(src=img)
     .banner-con.pull-left
         .h2.inline-block > echo(research.name)
         .inline-block.layout-ml-small
             #share
         p 调研时间：
-            dateTime(research.startTime)
+            dateMinute(research.startTime)
             | ~
-            dateTime(research.endTime)
+            dateMinute(research.endTime)
 
         .m-top
             span.m-right 相关标签
@@ -47,22 +47,22 @@ view('main')
                             .img-cont
                                 a.normal > img(src=coverId)
                             .detail-wrapper
-                                p 描述描述描述描述描述
+                                p > echo(questionaryDetail)
                                 .btn.radius.block(id='research-' + id) 我要参与
                         .clearfix
                             .pull-right.tip-text
                                 i.iconfont.icon-user(title='参加人数')
-                                echo(joinNumber)
+                                echo(joinNumber '人已参加')
                             .title.text-overflow > echo(name)
                         .bottom.sub-text.clearfix
                             .pull-left 调研时间
                             .pull-right
-                                date(startTime)
+                                dateMinute(startTime)
                                 | ~
-                                date(endTime)
+                                dateMinute(endTime)
 
 view('research-tips')
-        div > echo(research.content)
+        div > @echo(research.content)
         div
             each(research.buttons)
                 if(target)

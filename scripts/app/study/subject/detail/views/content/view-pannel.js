@@ -20,14 +20,12 @@ exports.handlers = {
             resourceId = element.getAttribute('data-resource-id'),
             section = this.bindings.subject.findSectionsForId(id),
             progress = section.progress || {},
+            subject = this.bindings.subject.data,
             me = this,
             view;
         if (sectionType === 12 || sectionType === 13) {
             if (progress.finishStatus === 2) {
-                url = '#/exam/research-activity/research-detail/' + resourceId;
-                if (sectionType === 13) {
-                    url = '#/exam/research-activity/paper/' + resourceId;
-                }
+                url = '#/exam/research-activity/paper/' + resourceId + '/' + subject.id;
                 window.open(url);
                 return;
             }
@@ -47,6 +45,16 @@ exports.handlers = {
             me.app.viewport.modal(view);
         } else {
             window.open(url);
+        }
+        // URL打开即完成
+        if (sectionType === 3) {
+            this.module.dispatch('updateProgress', {
+                sectionId: id,
+                beginTime: new Date().getTime(),
+                clientType: 0,
+                finishStatus: 2, // 已完成
+                completedRate: 100, // 已完成
+            });
         }
     },
     sectionDisplay: function(id) {

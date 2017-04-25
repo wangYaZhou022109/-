@@ -14,11 +14,15 @@ view('list')
                 .item#order-1 > span 最热
                 .item#order-2 > span 好评
         ul > each(subjects)
-            li > a.normal(href=url) > .content
+            li > a.normal(id='openDetail-'+id) > .content
                 .img
                     .img-cont > img(src=imageUrl)
                     .detail-wrapper
-                        p > echo(description)
+                        p
+                            if(description)
+                                @echo(description)
+                            else
+                                echo('暂无')
                 .clearfix
                     .pull-right.small-font.m-left
                         i.iconfont.icon-view(title='浏览')
@@ -26,7 +30,7 @@ view('list')
                     .title.text-overflow > echo(name)
                     .sub-text.text-overflow
                         if(description)
-                            echo(description)
+                            @echo(description)
                         else
                             echo('&nbsp;')
         #pager.pagination

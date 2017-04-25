@@ -40,7 +40,7 @@ exports.components = [{
 
 exports.dataForTemplate = {
     examStatus: function() {
-        var result = maps.get('paper-instance-status').sort(function(a, b) {
+        var result = maps.get('exam-record-status').sort(function(a, b) {
             return Number(a.key) - Number(b.key);
         });
         result.unshift({ key: '0', value: '全部' });
