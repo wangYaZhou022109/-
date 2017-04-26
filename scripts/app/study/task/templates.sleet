@@ -7,9 +7,9 @@ module > .achievement-content.main-side
     .achievement-main(data-region='main')
 
 view('side')
-    ul.list
+    ul.m-top
         each(task.attachments)
-            li
+            li.mb-1
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
                 if(preview)
                     a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)

@@ -14,7 +14,13 @@ exports.dataForTemplate = {
             var list = opt;
             list.i = i + 1;
             list.studyTotalTime = (Number(list.studyTotalTime) / 60).toFixed(1); // 转换为分钟
-            list.cover = me.bindings.download.getFullUrl() + '?id=' + list.member.headPortrait;
+            if (i <= 2) {
+                if (list.member.headPortrait) {
+                    list.cover = me.bindings.download.getFullUrl() + '?id=' + list.member.headPortrait;
+                } else {
+                    list.cover = 'images/default-userpic.png';
+                }
+            }
             return list;
         });
         return lists;
