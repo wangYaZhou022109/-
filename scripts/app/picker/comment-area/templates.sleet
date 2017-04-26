@@ -42,7 +42,7 @@ view('main')
                                         i.iconfont.icon-message
                                         span.small-font > echo('回复 ')
                                         span > echo(commentCount)
-                                    .item
+                                    .item(id='accuse-1_'+id+'_'+memberId+'_'+content)
                                         i.iconfont.icon-info
                                         span.small-font > echo('举报')
                             .comment-reply(id='reply-content-'+id)
@@ -80,7 +80,7 @@ view('main')
                                                         .item(id='showReply-'+id)
                                                             i.iconfont.icon-message
                                                             span.small-font > echo('评论')
-                                                        .item > i.iconfont.icon-info
+                                                        .item(id='accuse-2_'+id+'_'+memberId+'_'+content) > i.iconfont.icon-info
                                                             span.small-font > echo('举报')
                                                 .comment-reply(id='reply-content-'+id)
                                                     textarea.input.w-full.block(name='content' rows='1')

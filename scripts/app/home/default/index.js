@@ -12,12 +12,10 @@ module.exports = {
         },
         callbacks: {
             init: function(payload) {
-                var configId = payload.configId,
-                    orgId = payload.orgId,
-                    that = this,
+                var that = this,
                     homeConfig = this.models.homeConfig,
                     modules = this.models.modules;
-                homeConfig.params = { configId: configId, orgId: orgId };
+                homeConfig.params = { configId: payload.configId, orgId: payload.orgId };
                 homeConfig.clear();
                 return this.get(homeConfig).then(function() {
                     if (homeConfig.data) {
