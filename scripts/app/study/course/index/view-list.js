@@ -58,7 +58,7 @@ exports.dataForTemplate = {
                 course.description = course.description.replace(/<[^>]+>/g, '').substr(0, 20);
             }
             if (course.finishStatus === 2 || course.finishStatus === 4) studyType = 2;
-            else if (course.finishStatus === null) studyType = 0;
+            else if (course.finishStatus === null || course.finishStatus === 0) studyType = 0;
             course.studyType = studyType;
             course.avgScore /= 10;
             course.visits = course.visits || 0;

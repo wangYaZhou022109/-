@@ -42,7 +42,6 @@ exports.store = {
                 }
             }
         },
-        startProgress: { url: '../course-study/course-study-progress/start-progress' },
         mediaProgress: { url: '../course-study/course-front/video-progress' },
         docProgress: { url: '../course-study/course-front/doc-progress' },
         // 注册课程
@@ -76,9 +75,11 @@ exports.store = {
             this.get(collect);
             this.post(register);
 
-            return this.get(course).then(function() {
-                var sectionId = null;
-                sectionId = course.findFirstSection().id;
+            return this.chain([this.get(course), this.post(register)]).then(function(data) {
+                var sectionId = data[1][0].currentSectionId;
+                if (sectionId) sectionId = course.findSectionForReferId(sectionId).id;
+                if (!sectionId) sectionId = course.findFirstSection().id;
+
                 progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
 
                 return me.chain(
@@ -101,11 +102,6 @@ exports.store = {
                     playerState.set({ id: payload.id, sectionId: sectionId }, true)
                 );
             });
-        },
-        startProgress: function(payload) {
-            var model = this.models.startProgress;
-            model.set(payload);
-            return this.get(model);
         },
         mediaProgress: function(payload) {
             var model = this.models.mediaProgress;
