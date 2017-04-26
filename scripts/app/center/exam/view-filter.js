@@ -1,4 +1,4 @@
-
+var trim;
 exports.bindings = {
     search: true
 };
@@ -48,7 +48,10 @@ exports.actions = {
 
 exports.dataForActions = {
     selectItem: function() {
-        return { name: this.$('name').value };
+        return { name: trim(this.$('name').value) };
     }
 };
 
+trim = function(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+};

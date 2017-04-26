@@ -1,4 +1,4 @@
-
+var _ = require('lodash/collection');
 exports.items = {
     list: 'list'
 };
@@ -7,7 +7,18 @@ exports.store = {
     models: {
         experts: { url: '../ask-bar/trends/focus-experts' },
         topicType: { url: '../system/topic-type' },
-        unfollow: { url: '../ask-bar/concern/unfollow' }
+        down: { url: '../human/file/download' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
+        page: {
+            data: [],
+            params: { page: 1, size: 2 },
+            mixin: {
+                findById: function(id) {
+                    var trends = this.module.store.models.page.data;
+                    return _.find(trends, ['id', id]);
+                }
+            }
+        }
     },
     callbacks: {
         init: function() {

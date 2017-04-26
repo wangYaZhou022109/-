@@ -6,7 +6,10 @@ view('list')
     .tabs.line.mb-1
         compare(user.expert.id 'ne' '')
             compare(user.expert.activeStatus 'eq' 2)
-                .pull-right.btn#activate > string('activation') + string('expert') + string('identity')
+                compare(user.activationApply 'eq' 0)
+                    .pull-right.btn#activate > string('activation') + string('expert') + string('identity')
+                else
+                    .pull-right.btn > string('auditStatus3')
             else
                 compare(user.expert.auditStatus 'eq' 0)
                     .pull-right.btn > string('auditStatus3')
