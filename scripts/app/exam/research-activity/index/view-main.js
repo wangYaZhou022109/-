@@ -10,7 +10,7 @@ exports.dataForTemplate = {
     relativeResearchs: function(data) {
         var me = this,
             result = [],
-            remote = 300, // 相关调研，最多显示三个
+            remote = 3, // 相关调研，最多显示三个
             i = 0,
             url = 'images/default-cover/default_survey.jpg',
             relativeResearchs = data.relativeResearchs;
