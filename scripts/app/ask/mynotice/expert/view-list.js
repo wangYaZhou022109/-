@@ -1,8 +1,11 @@
 
+var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     experts: true,
-    topicType: true
+    topicType: true,
+    down: true,
+    page: true
 };
 
 exports.events = {
@@ -31,4 +34,14 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
+    page: function(data) {
+        var expert = data.experts.concernList;
+        var me = this;
+        _.forEach(expert, function(value) {
+            var obj = value,
+                url = obj.member.headPortrait;
+            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+        });
+        return expert;
+    }
 };
