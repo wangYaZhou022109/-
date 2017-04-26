@@ -1,0 +1,7 @@
+#!handlebars
+
+moudle > .responsecenter-page
+    .responsecenter(data-region="responsecenter")
+
+view('responsecenter')
+    .aaa aaa

@@ -6,7 +6,14 @@ module
 view('main') > .form
     .form-row
         label.required 问题标题
-        .content > input.input + .tips 0/60
+        .content
+            input.input#selectquestion
+            .tips 0/60
+            .select-drop.border.around
+                .select-drop-item 问题一
+                .select-drop-item 问题一问题一问题一
+                .select-drop-item 问题一问题一问题一
+                .select-drop-item 问题一问题一问题一
     .form-row
         label.required 关联话题
         .content > input.input + .choice 选择

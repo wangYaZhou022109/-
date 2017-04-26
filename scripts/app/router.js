@@ -9,6 +9,7 @@ exports.routes = {
     'center/managements': 'showManagements',
     'center/managements/statistics': 'showStatistics',
     'center/managements/taskmarking': 'showTaskmarking',
+    'center/managements/responsecenter': 'showResponsecenter',
     'search-page': 'showSearchPage'
 
 };
@@ -78,6 +79,9 @@ exports.showStatistics = function() {
 };
 exports.showTaskmarking = function() {
     return this.app.viewport.showIt('content', 'center/managements/taskmarking');
+};
+exports.showResponsecenter = function() {
+    return this.app.viewport.showIt('content', 'center/managements/responsecenter');
 };
 exports.showSearchPage = function() {
     return this.app.show('content', 'search-page');
