@@ -1,65 +1,59 @@
 #!handlebars
-module > .achievement-content.main-side
-    .achievement-side.bg-color
+module > .taskmarking-content.main-side
+    .taskmarking-side.bg-highlight
         div(data-region='side')
-    .achievement-head(data-region='head')
-    .achievement-main(data-region='main')
+    .taskmarking-head(data-region='head')
+    .taskmarking-main(data-region='main')
 
 view('head')
-    .pull-left.title > echo(task.name)
-    .text-right
+    .pull-left.title > echo(all.task.name)
+    .pull-right.title
         compare(taskMemberModel.type 'eq' 1)
             label(style='color:#66CC00;font-size:15px;') 审核中 &nbsp;&nbsp;
         compare(taskMemberModel.type 'eq' 2)
-            ul.head-info.inline-block
-                li.border.right > echo('提交人：' taskMemberModel.memberId)
-                li.border.right > echo('审核人：' taskMemberModel.taskApproval.approvalMemberId)
-                li.border.right > echo('得分：' taskMemberModel.taskApproval.score)
+            echo('提交人：' taskMemberModel.memberId)
+            echo('审核人：' taskMemberModel.taskApproval.approvalMemberId)
+            echo('得分：' taskMemberModel.taskApproval.score)
         compare(taskMemberModel.type 'eq' 3)
-            ul.head-info.inline-block
-                li.border.right > echo('提交人：' taskMemberModel.memberFullName)
-                li.border.right > echo('审核人：' taskMemberModel.taskApproval.approvalMemberFullName)
-                li.border.right > echo('得分：' taskMemberModel.taskApproval.score)
-                li.border.right(style='color:red;font-size:25px;') > echo('重新提交')
-        .btn.white.m-right#closeTask 关闭任务
+            echo('提交人：' taskMemberModel.memberFullName)
+            echo('审核人：' taskMemberModel.taskApproval.approvalMemberFullName)
+            echo('得分：' taskMemberModel.taskApproval.score)
+            .border(style='color:red;font-size:25px;') > echo('重新提交')
+        .btn.white.m#closeTask 关闭任务
+
 view('main')
     .preview-content
         if(mainState.isExplain)
             if(task.explain)
-                .h3.m-bottom 任务说明
+                .h3.m-bottom.strong 任务说明:
                     p.text-overflow
-                        span > @echo(task.explain)
+                    span.small-font > echo(task.explain)
         else
             #viewPdf
 view('side')
     if(task.name)
-        btn.btn#taskDescription 任务说明
-        br
-        if(task.hasAttach)
-            label 任务附件：
-            ul.list
-                each(task.attachList)
-                    li
-                        a.pull-right.m-left(href=downUrl download=attachmentName) > string('download')
-                        a(id='attachment-'+attachmentId attachType='1' preview=preview href='javascript:;') > echo(attachmentName)
-        if(task.hasTaskMember)
-            label 我提交的附件：
-            ul.list
-                each(task.taskMemberList)
-                    li
-                        a.pull-right.m-left(href=downUrl download=name) > string('download')
-                        a(id='attachment-'+attachmentId attachType='2' preview=preview href='javascript:;') > echo(name)
+        .btn.block.gray.layout-mt-small#taskDescription 任务说明
+    if(task.hasAttach)
+        .h4.m-top 任务附件：
+        each(task.attachList)
+            .side-item.clearfix.m-top
+                a.inline-blockr(href=downUrl download=attachmentName) > string('download')
+                a.inline-block.pull-right(id='attachment-'+attachmentId attachType='1' preview=preview href='javascript:;') > echo(attachmentName)
+    if(task.hasTaskMember)
+        .h4.m-top 我提交的附件：
+        each(task.taskMemberList)
+            .side-item.clearfix.m-top
+                a.inline-blockr(href=downUrl download=name) > string('download')
+                a.inline-block.pull-right(id='attachment-'+attachmentId attachType='2' preview=preview href='javascript:;') > echo(name)
         compare(task.btnType 'eq' 1)
-            btn.btn#commitTask 提交作业
-            br
+            .btn.block.gray.layout-mt-small.yellow#commitTask 提交作业
         compare(task.btnType 'eq' 2)
-            btn.btn#commitTask 重新提交
-            br
-        if(taskMemberModel.hasComment)
-            br
-            label 评语：
-            br
-            echo(taskMemberModel.taskApproval.comment)
+            .btn.block.gray.layout-mt-small.yellow#commitTask 重新提交
+    if(taskMemberModel.hasComment)
+        .m-top
+        label.block 评语：
+        br
+        echo(taskMemberModel.taskApproval.comment)
             
 view('edit')
     form.vertical

@@ -24,7 +24,7 @@ view('side') > form.vertical
     .h4.m-top 作业附件：
     each(all.task.attachList)
         .side-item.clearfix.m-top
-            a.inline-blockr(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
+            a.inline-block(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
             a.inline-block.pull-right(href=downUrl download=attachmentName) 下载
     .h4.m-top 用户提交：
     .btn.block.gray.layout-mt-small#description 作业详情

@@ -10,6 +10,11 @@ exports.title = function() {
     return title[this.bindings.state.data.type];
 };
 
+exports.buttons = [{
+    text: '确定',
+    action: 'saveTask',
+}];
+
 exports.bindings = {
     state: true,
     task: true,

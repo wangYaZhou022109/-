@@ -60,17 +60,17 @@ view('main')
     #pager.pagination
 
 view('approval') > form.vertical
-    input.input(name='id' type='hidden' value=id)
-    .row
-        .col-sm-9
-            echo('请假原因')
-            textarea.input#reason(name='reason' rows='5' cols='80' x-rule='maxLength:1000') > echo(lea.reason)
-            echo('审核意见')
-            select#state(name='state')
-                option(value='1') > echo('同意')
-                option(value='2') > echo('不同意')
-            echo('申请时间')
-            input.input#createTime(name='createTime' value=dateTime(lea.createTime) x-rule='required')
-            input.input#id(type='hidden' name='lulu' value=lea.id)
-        div.col-sm-3
-            btn.btn#update > echo('确定')
+    .layout-mt-small
+        label 请假原因
+        textarea.w-full#reason(name='reason' rows='5' x-rule='maxLength:1000') > echo(lea.reason)
+        .m-top.clearfix.m-bottom
+            .pull-left
+                label 审核意见：
+                select.tag-select#state(name='state')
+                    option(value='1') > echo('同意')
+                    option(value='2') > echo('不同意')
+            .pull-right.m-top
+                label 申请时间：
+                dateTime(lea.createTime)
+                input.input#id(type='hidden' name='lulu' value=lea.id)
+                input.input(name='id' type='hidden' value=id)

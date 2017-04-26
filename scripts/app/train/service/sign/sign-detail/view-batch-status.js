@@ -4,10 +4,17 @@ exports.title = '请选择您要变更的签到状态';
 
 exports.type = 'form';
 
+exports.small = true;
+
 exports.bindings = {
     signDetail: true,
     state: true,
 };
+
+exports.buttons = [{
+    text: '确定',
+    action: 'batch',
+}];
 
 exports.actions = {
     'click batch': 'batch'

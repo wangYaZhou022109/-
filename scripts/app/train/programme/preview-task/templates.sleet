@@ -1,30 +1,29 @@
 #!handlebars
-module > .achievement-content.main-side
-    .achievement-side.bg-color
+
+module > .taskmarking-content.main-side
+    .taskmarking-side.bg-highlight
         div(data-region='side')
-    .achievement-head(data-region='head')
-    .achievement-main(data-region='main')
+    .taskmarking-head(data-region='head')
+    .taskmarking-main(data-region='main')
 
 view('head')
     .pull-left.title > echo(task.name)
-    .text-right
-        .btn.white.m-right#closeTask 关闭预览
+    .pull-right.title
+        .btn.white.m#closeTask 关闭预览
+
 view('main')
     .preview-content
         if(mainState.isExplain)
             if(task.explain)
-                .h3.m-bottom 任务说明
-                    p.text-overflow
-                        span > @echo(task.explain)
+                .h3.m-bottom.strong 任务说明:
+                span.small-font > echo(task.explain)
         else
             #viewPdf
 view('side')
     if(task.name)
-        btn.btn#explain 任务说明
-        br
-        label 任务附件：
-        ul.list
-            each(task.attachList)
-                li
-                    a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
-                    a(href=downUrl download=attachmentName) 下载
+        .btn.block.gray.layout-mt-small#explain 任务说明
+        .h4.m-top 任务附件：
+        each(task.attachList)
+            .side-item.clearfix.m-top
+                a.inline-blockr(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
+                a.inline-block.pull-right(href=downUrl download=attachmentName) 下载
