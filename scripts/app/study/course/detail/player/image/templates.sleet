@@ -4,4 +4,4 @@ module
     div(data-region='main')
 
 view('main')
-    img(src=url)
+    img(src=url style='max-height: 36em')
