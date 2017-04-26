@@ -1,6 +1,7 @@
 var D = require('drizzlejs'),
     RECOMMEND_SIZE = 6,
-    RESEARCH_TYPE = 1;
+    RESEARCH_TYPE = 1,
+    _ = require('lodash/collection');
 
 exports.items = {
     banner: 'banner',
@@ -72,7 +73,7 @@ exports.store = {
             ]);
         },
         getResearchById: function(payload) {
-            return this.models.researchActivitys.data.find(function(r) {
+            return _.find(this.models.researchActivitys.data, function(r) {
                 return r.id === payload.id;
             });
         }
