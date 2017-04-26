@@ -20,13 +20,13 @@ exports.showHome = function() {
 exports.previewHome = function(configId) {
     document.cookie = 'orgId=';
     document.cookie = 'configId=' + configId;
-    return this.app.show('content', 'home/default', { configId: configId });
+    return this.app.show('content', 'home/default', { configId: configId, forceRender: true });
 };
 
 exports.changeHome = function(orgId) {
     document.cookie = 'configId=';
     document.cookie = 'orgId=' + orgId;
-    return this.app.show('content', 'home/default', { orgId: orgId });
+    return this.app.show('content', 'home/default', { orgId: orgId, forceRender: true });
 };
 
 exports.showMessageDetail = function(id) {

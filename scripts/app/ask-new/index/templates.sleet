@@ -467,9 +467,55 @@ view('main')
                         .comment-operation
                             .pull-left > .sub-text 关联标签：标签名称
                             .text-right
-                                .item 评论(2)
+                                .item#discuss-1 评论(2)
                                 .item +关注
                                 .item 分享
+                                form.comment-reply#comment-reply-1
+                                    textarea.input.w-full.block(rows=1)
+                                    input.input(type='hidden')
+                                    input.input(type='hidden')
+                                    .btn 评论
+                            .border.around.hide#comment-list-1(style="margin-top:-1.5em;") > ul.layout-ml-small.layout-mr-small.layout-mb-small
+                                li
+                                    .user-pic > img(src="images/1.png")
+                                    .comment-content
+                                        .user-info
+                                            a(href='#') 张三
+                                            span 互联网中心
+                                        .comment-text
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                        .comment-operation
+                                            .pull-left > .sub-text 2017-01-17
+                                            .text-right
+                                                span.pointer 赞（8）
+                                                span |
+                                                span.pointer 添加回复
+                                                span |
+                                                span.pointer 分享
+                                                span |
+                                                span.pointer 举报
+                                li
+                                    .user-pic > img(src="images/1.png")
+                                    .comment-content
+                                        .user-info
+                                            a(href='#') 张三
+                                            span 互联网中心
+                                        .comment-text
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+                                        .comment-operation
+                                            .pull-left > .sub-text 2017-01-17
+                                            .text-right
+                                                span.pointer 赞（8）
+                                                span |
+                                                span.pointer 添加回复
+                                                span |
+                                                span.pointer 分享
+                                                span |
+                                                span.pointer 举报
+
+
 
 view('side')
     .section

@@ -1,23 +1,41 @@
-.taskmarking-page {
+.taskmarking-content {
     & .taskmarking-head {
         margin-left: 0;
         position: relative;
         z-index: 2;
-        background: #000;
-        color: #fff;
-        height: 3.5em;
-        line-height: 3.5em;
-        padding: 0 2em;
-        color: #fff;
+        background: var(--black);
+        color: var(--white);
+        height: var(--nav-height);
+        line-height: var(--nav-height);
+        padding: 0 var(--large-space);
     }
     & .taskmarking-side {
-        width: 20%;
+        width: 25%;
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
-        background: #f9f9f9;
+        background: var(--bg-color);
         overflow: auto;
-        padding-top: 3.5em;
+        padding-top: var(--nav-height);
+        padding: 0 var(--large-space) var(--large-space);
+        margin-top: var(--base-gap);
+        & .side-item {
+            background-color: var(--border-color);
+            padding: var(--space);
+        }
+        & .side-botitem {
+            background-color: var(--font-tip-color);
+            padding: var(--space);
+        }
+    }
+    & .taskmarking-main {
+        margin-left: 25%;
+        padding: var(--base-gap);
+        overflow: auto;
+        position: absolute;
+        width: 75%;
+        top: var(--nav-height);
+        bottom: 0;
     }
 }

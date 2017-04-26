@@ -3,5 +3,6 @@ exports.items = {
     main: 'main',
     head: 'head',
     edit: '',
-    upload: ''
+    upload: '',
+    'center/managements/taskmarking/submittask': { isModule: true }
 };

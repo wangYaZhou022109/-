@@ -1,0 +1,16 @@
+#!handlebars
+
+module > .submittask-page
+    .submittask(data-region="submittask")
+
+view('submittask')
+    .layout-mt-small.clearfix
+        input.border.w-half(placeholder="附件名称（点击可修改名称）")
+        .btn.pull-right.gray 上传附件
+    .layout-mt-small
+        .progress-box > .progress
+            .progress-bar(style="width: 80%")
+            span 80%
+        a 删除
+    .m-top 作业说明
+    textarea.w-full.m-top(rows="5")

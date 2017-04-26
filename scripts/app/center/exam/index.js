@@ -14,7 +14,8 @@ exports.store = {
         search: {
             data: {
                 searchStatus: null,
-                type: null
+                type: null,
+                startTimeOrderBy: 0
             }
         },
         signUp: { url: '../exam/sign-up' }
@@ -46,6 +47,6 @@ exports.store = {
     }
 };
 
-exports.beforeRender = function() {
+exports.afterRender = function() {
     return this.dispatch('init');
 };

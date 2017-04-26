@@ -4,49 +4,28 @@ exports.items = {
 
 exports.store = {
     models: {
-        // 音视频更新进度
-        updateProgress: { url: '../course-study/course-front/video-progress' },
+        startProgress: { url: '../course-study/course-front/start-progress' },
         attachment: { url: '../human/file' },
         download: { url: '../human/file/download' },
-        time: { url: '../system/setting/time' },
-        localProgress: { type: 'localStorage', data: {} },
         state: {}
     },
     callbacks: {
         init: function(payload) {
             var state = this.models.state,
-                time = this.models.time,
-                localProgress = this.models.localProgress,
-                localTemp;
-            localProgress.load();
+                attachment = this.models.attachment;
             state.set(payload);
-            if (localProgress.data && localProgress.data[payload.section.id]) {
-                localTemp = localProgress.data[payload.section.id];
-                state.data.localTime = localTemp.studyTime || 0;
-                state.data.localLocation = localTemp.lessonLocation;
-            }
-            return this.chain([
-                this.get(time),
-                function() {
-                    this.models.attachment.set({ id: payload.section.resourceId });
-                    return this.get(this.models.attachment);
-                }
-            ]);
+            attachment.set({ id: payload.section.resourceId });
+            return this.get(attachment);
         },
         updateProgress: function(payload) {
-            var model = this.models.updateProgress,
-                localProgress = this.models.localProgress;
-            model.set(payload);
-            delete localProgress.data[payload.sectionId];
-            localProgress.save();
-            return this.post(model);
+            return this.models.state.data.mediaProgress(payload);
         },
-        storeProcess: function(payload) {
-            var localProgress = this.models.localProgress;
-            var mapData = localProgress.data || {};
-            mapData[payload.sectionId] = payload;
-            localProgress.set(mapData);
-            localProgress.save();
+        startProgress: function() {
+            var id = this.models.state.data.section.id;
+            var model = this.models.startProgress;
+            model.set({ id: id });
+            model.params = { clientType: 0 };
+            return this.get(model);
         }
     }
 };
