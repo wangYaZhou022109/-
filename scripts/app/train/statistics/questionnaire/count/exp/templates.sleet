@@ -1,7 +1,8 @@
 #!handlebars
 
 module
-    div(data-region='main')
+    br
+    .div(data-region='main')
 
 view('main')
     table.table

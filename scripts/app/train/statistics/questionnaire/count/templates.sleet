@@ -19,7 +19,7 @@ view('menu')
         li > echo('总体满意率' + result.zong + '%')
         li > echo('课程满意率' + result.ke + '%')
         li > echo('满意率' + result.ping + '%')
-        a(href=exportUrl target = "_blank" float='right') > .btn > echo('导出')
+        a.btn.circle-radius.gray(href=exportUrl target = "_blank" float='right') > echo('导出')
         
 view('list') 
     .tabs-cont > ul

@@ -6,34 +6,34 @@ module > .train-class-page
         .div(data-region='main')
 
 view('search') > form.vertical
-    .row
-        .col-sm-4
-            .inline-block > label > echo('员工号 :&nbsp;&nbsp;&nbsp;')
-            .inline-block > input.input(name='name')
-        .col-sm-4
-            .inline-block > label > echo('姓名 :&nbsp;&nbsp;&nbsp;')
-            .inline-block > input.input(name='fullName')
-        .col-sm-4
-            .buttons
-                .btn#search > echo('搜索')
+    .studentwatch-title.clearfix
+        .pull-left.layout-mr-small
+            label 员工号
+            input.input(name='name')
+        .pull-left
+            label 姓名
+            input.input(name='fullName')
+        .pull-left
+            .btn.gray#search 搜索
 view('main')
-    div.text-center
-        echo('培训满意度问卷（学员）')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('员工编号')
-            th > echo('姓名')
-            th > echo('所属部门')
-            th > echo('得分')
-            th > echo('操作')
-        tbody > each(researchQuestionarys) > tr
-            td > echo(i)
-            td > echo(member.name)
-            td > echo(member.fullName)
-            td > echo(organization.name)
-            td > echo(sumScore)
-            td > a(id='edit-researchQuestionarys'+rId data-name='id' data-value=id) > echo('查看')
-            else
-                tr > td(colspan='11') > p.text-center > string('no-data')
-    #pager.pagination
+    .clearfix.layout-mt-small
+        .h5.pull-left 满意度问卷（学员）
+    .m-top
+        table.table.layout-mt-small
+            thead > tr
+                th > echo('序号')
+                th > echo('员工编号')
+                th > echo('姓名')
+                th > echo('所属部门')
+                th > echo('得分')
+                th > echo('操作')
+            tbody > each(researchQuestionarys) > tr
+                td > echo(i)
+                td > echo(member.name)
+                td > echo(member.fullName)
+                td > echo(organization.name)
+                td > echo(sumScore)
+                td > a(id='edit-researchQuestionarys'+rId data-name='id' data-value=id) > echo('查看')
+                else
+                    tr > td(colspan='11') > p.text-center > string('no-data')
+        #pager.pagination

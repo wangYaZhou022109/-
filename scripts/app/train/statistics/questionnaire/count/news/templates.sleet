@@ -1,13 +1,14 @@
 #!handlebars
 
 module
-    div(data-region='mainA')
-    div(data-region='mainB')
+    br
+    .div(data-region='mainA')
+    .div(data-region='mainB')
     
 view('mainA')
     table.table
         thead > tr
-            th(width='600px') > echo('内容')
+            th > echo('内容')
             th > echo('满意')
             th > echo('基本满意')
             th > echo('不满意')
@@ -36,7 +37,7 @@ view('mainA')
 view('mainB')
     table.table
         thead > tr
-            th(width='600px') > echo('课程')
+            th > echo('课程')
             th > echo('满意')
             th > echo('基本满意')
             th > echo('不满意')
