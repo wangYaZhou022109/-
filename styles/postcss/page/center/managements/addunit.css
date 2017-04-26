@@ -2,4 +2,21 @@
     & .addunit-label {
         line-height: var(--input-height);
     }
+    & .companyname {
+        & li {
+            float: left;
+            padding: var(--space) var(--large-space);
+            width: 33%;
+            text-align: center;
+            margin-right: 2px;
+            margin-bottom: 2px;
+            height: var(--input-height);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &.active {
+                background: var(--bg-color-3);
+            }
+        }
+    }
 }

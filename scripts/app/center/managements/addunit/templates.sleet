@@ -16,39 +16,25 @@ view('typeone')
         .clearfix.layout-mt-small > .pull-right
             input(type="checkbox")
             label 全选
-        table.table
-            tr
-                th 公司名称
-                th 公司名称
-                th 公司名称
-            tr
-                td 公司名称
-                td 公司名称
-                td 公司名称
-            tr
-                td 公司名称
-                td 公司名称
-                td 公司名称
-            tr
-                td 公司名称
-                td 公司名称
-                td 公司名称
-            tr
-                td 公司名称
-                td 公司名称
-                td 公司名称
-            tr
-                td 公司名称
-                td 公司名称
-                td 公司名称
-        .layout-mt-small
+        ul.companyname.m-top.clearfix
+            li.active 知学云
+            li.active 公司名称
+            li.active 公司名称公司
+            li.active 公司名称
+            li.active 中国移动中国移动
+            li.active 公司名称
+            li.active 公司名称
+            li.active 公司名称
+            li.active 公司名称
+            li.active 公司名称
+        .layout-mt-small.layout-mb-small
             .inline-block.layout-mr
                 span 剩余额度:
                 span 5
-            .inline-block.clearfix
-                label.addunit-label.pull-left 配置额度：
-                input.pull-left.m-right
-                .btn.pull-left 添加
+            .inline-block
+                label.addunit-label.tag-height 配置额度：
+                input.tag-height.m-right
+                .btn.tag-height.gray 添加
 
 view('typetwo')
     li#tabs-cont-item-2 aaa
