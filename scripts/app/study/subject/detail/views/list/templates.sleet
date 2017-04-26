@@ -13,12 +13,18 @@ view('pannel')
         .layout-mt-smal.side-rank-list
             ul
                 each(lists)
-                    li.forefront.first
-                        .user-pic > img(src=cover)
-                        .user-info
-                            .text-overflow(title=member.fullName) > echo(member.fullName)
-                            .text-overflow.m-top(title=member.organization.name) > echo(member.organization.name)
-                        .strong > echo(studyTotalTime '分钟')
+                    if(cover)
+                        li.forefront.first
+                            .user-pic > img(src=cover)
+                            .user-info
+                                .text-overflow(title=member.fullName) > echo(member.fullName)
+                                .text-overflow.m-top(title=member.organization.name) > echo(member.organization.name)
+                            .strong > echo(studyTotalTime '分钟')
+                    else
+                        li
+                            .pull-right.rank-top > echo(studyTotalTime '分钟')
+                            .inline-block.text-overflow.m-left.rank-top(title=member.fullName) > echo(member.fullName)
+                            .inline-block.text-overflow.m-left.rank-top(title=member.organization.name) > echo(member.organization.name)
 view('more')
     .mb-1 排行榜
     .table > table

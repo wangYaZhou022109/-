@@ -74,6 +74,7 @@ exports.components = [function() {
             inputName: 'cover',
             btnName: '选择图片',
             defaultImg: 'images/d1.jpg',
+            extensions: 'jpg,jpeg,png,bmp',
             data: data
         }
     };
