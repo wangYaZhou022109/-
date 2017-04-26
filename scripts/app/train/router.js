@@ -46,7 +46,7 @@ exports.showTaskDetail = function(fir, id) {
 };
 
 exports.showCount = function(fir, classId) {
-    return this.app.show('content', 'train/statistics/questionnaire/count', { classId: classId });
+    return this.app.viewport.showIt('content', 'train/statistics/questionnaire/count', { classId: classId });
 };
 
 exports.showAuditTask = function(fir, id) {
@@ -66,11 +66,11 @@ exports.showUnregisterSignupPage = function() {
 };
 
 exports.showResearchDetail = function(fir, id) {
-    return this.app.show('content', 'train/service/views/research-detail', { researchQuestionaryId: id });
+    return this.app.viewport.showIt('content', 'train/service/views/research-detail', { researchQuestionaryId: id });
 };
 
 exports.showResearchAnswerDetail = function(fir, id) {
-    return this.app.show('content', 'train/service/views/research-answer', { researchRecordId: id });
+    return this.app.viewport.showIt('content', 'train/service/views/research-answer', { researchRecordId: id });
 };
 
 exports.interceptors = {

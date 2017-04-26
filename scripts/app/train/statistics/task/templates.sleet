@@ -1,6 +1,8 @@
 #!handlebars
 
-module > .train-class-page
+module
+    br
+    .train-class-page
     .page-main-wrapper
         .div(data-region='main')
 
