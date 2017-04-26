@@ -45,14 +45,10 @@ exports.events = {
     'click showOrganization': 'show'
 };
 
-exports.actions = {
-    'click edit*': 'edit',
-};
-
 exports.handlers = {
     show: function() {
         var me = this,
-            model = me.module.items['train/statistics/classTwoBrings/owner'];
+            model = me.module.items['train/statistics/classTwoBrings/owner1'];
         me.app.viewport.modal(model, { module: 'train/project',
             callback: function() {
             }
@@ -64,7 +60,7 @@ exports.dataForActions = {
     search: function() {
         return {
             classId: this.bindings.state.data.classId,
-            memberName: $(this.$$('[name="name"]')).val(),
+            name: $(this.$$('[name="name"]')).val(),
             memberFullName: $(this.$$('[name="fullName"]')).val(),
             organizationName: $(this.$$('[name="organizationName"]')).val()
         };

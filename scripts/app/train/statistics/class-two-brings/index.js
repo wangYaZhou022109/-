@@ -1,7 +1,7 @@
 exports.items = {
     main: 'main',
     search: 'search',
-    'train/statistics/class-two-brings/owner': { isModule: true },
+    'train/statistics/class-two-brings/owner1': { isModule: true },
     edit: ''
 };
 
@@ -13,7 +13,7 @@ exports.store = {
             root: 'items'
         },
         classTwoBring: { url: '../train/class-two-brings' },
-        download: { url: '../train/class-two0brings/download' },
+        download: { url: '../train/class-two-brings/download' },
         state: { data: { } }
     },
     callbacks: {

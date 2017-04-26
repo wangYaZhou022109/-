@@ -24,14 +24,14 @@ view('main')
                         .content
                             .accessory
                                 table
-                                    thead > tr(width=200 class="text-left")
+                                    thead > tr(width=250 class="text-left")
                                         th(width=150) 已有附件
-                                        th(width=50) 操作
+                                        th(width=100) 操作
                                     tbody > each(files) > tr(class="text-left")
                                         td
                                             echo(attachName)
                                         td
-                                            # a(href=downUrl download=attachName) 下载
+                                            a(href=downUrl download=attachName) 下载
                                             a(id='del-attach-'+id data-name='id' data-value=id) 删除
                             .m-top
                                 a.btn.circle-radius.gray#chooseFile 选择文件
