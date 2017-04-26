@@ -34,7 +34,10 @@ view('list')
                         compare(trendsType 'eq' '2') 
                             .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                             .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
-                            .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
+                            compare(concernNum 'gt' 0)
+                                .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
+                            else
+                                .item(id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     i.iconfont.icon-share-2(title='分享')

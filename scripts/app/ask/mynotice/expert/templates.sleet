@@ -10,16 +10,16 @@ view('list')
                 .item.active > span(id='check-All' data-name='id' data-value='all' ) > string('all')
                 each(topicType)
                     .item > span(id='check-' + id data-name='id' data-value=id ) > echo(name)
-        .comment-list.ask-list > ul > each(experts.expertList)
+        .comment-list.ask-list > ul > each(experts.concernList)
             li.expert-item
                 a.normal(href="javascript:;")
-                    .img > .img-cont > img(src=member.headPortrait alt='赵小茵')
+                    .img > .img-cont > img(src=member.headPortrait alt= member.fullName)
                     h4.text-overflow > echo(member.fullName)
                     .info > echo(member.careNum + '关注 ｜ ') + echo(member.answerNum + '回答 ｜ ') + echo(member.articleNum + '分享')
-                    .row > each(topicList) 
+                    .row > each(member.expert.topicList) 
                         .tag-btn > echo(name)
                     .sub-text.text-overflow > echo(introduce)
-                .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                .btn.small(id='unfollow-expert-' + member.expert.id  data-name='id' data-value=member.expert.id) 已关注
 
                 
 
