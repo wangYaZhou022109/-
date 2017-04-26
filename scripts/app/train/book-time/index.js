@@ -1,8 +1,7 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    helpers = require('./app/util/helpers');
 
 exports.title = '预定时间';
-
-exports.large = true;
 
 exports.items = {
     content: 'content',
@@ -16,8 +15,7 @@ exports.store = {
         month: { data: {} },
         occupy: { url: '../train/occupy' },
         projects: { url: '../train/project/findByDate' },
-        project: { },
-        check: { url: '../train/occupy/check' },
+        project: { }
     },
     callbacks: {
         changeMonth: function(payload) {
@@ -44,9 +42,10 @@ exports.store = {
                     newdate.setDate(i + 1);
                     r.day = i + 1;
                     r.week = weeks[newdate.getDay()];
-                    item = _.find(data, { day: r.day });
+                    item = _.find(data[0], { day: r.day });
                     if (item) {
                         r.allowed = item.available;
+                        r.green = item.available >= project.data.amount;
                     }
                     arrays[i] = r;
                 });
@@ -64,10 +63,9 @@ exports.store = {
 exports.afterRender = function() {
     var newdate = new Date(),
         project = this.renderOptions.project,
-        year,
-        month;
-    newdate = new Date(newdate.getFullYear(), newdate.getMonth() + 1, 0);
-    year = newdate.getFullYear();
-    month = newdate.getMonth() + 1;
-    return this.dispatch('changeMonth', { month: [year, month].join('-'), project: project });
+        dateArray,
+        dateStr;
+    dateStr = helpers.date(newdate.getTime());
+    dateArray = dateStr.split('-');
+    return this.dispatch('changeMonth', { month: dateArray[0] + '-' + dateArray[1], project: project });
 };

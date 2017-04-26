@@ -1,47 +1,61 @@
 #!handlebars
 
-module
-    .title
-        span
-        .h1 &nbsp;
-        .toolbox(data-region='toolbox')
-        .hr
-    .content-wrapper(data-region='content')
+module > .choosedate-page
+    .choosedate(data-region='toolbox')
+    .choosedate(data-region='content')
 
 
-view('toolbox') > form.vertical
-    label(style='float:left;') > echo('报道日：')
-    input.input#arriveDate(name='arriveDate' style='width:180px;float:left')
-    label(style='float:left;') > echo('返程日：')
-    input.input#backDate(name='backDate' style='width:180px;float:left' readonly='readonly')
-
-    .btn#book(style='line-height:inherit; padding:5px 8px; float:left; margin-right:10px; margin-left:10px;') > echo('确定') + echo('&nbsp;&nbsp;')
-    .btn#rule(style='line-height:inherit; padding:5px 8px;float:left;') > echo('查看预定规则')
-    label(style='width:200px') > echo('计划人数：30')
-
-    label(style='float:left') > echo('注:图显示的是本月已预定的资源信息,不显示代表本月无预定,本月可用的资源数为300。') + echo('月份：') 
-    input.input#month(name='month' style='width:200px')
-
+view('toolbox')
+    .form.clearfix
+        .form-row.w-third.pull-left
+            label.required.tag-height 报到日
+            .content > .relative
+                input.input.date.tag-height#arriveDate(name='arriveDate' style='width:200px')
+                .iconfont.icon-riqi
+        .form-row.w-third.pull-left
+            label.required.tag-height 返程日
+            .content > input.input.tag-height#backDate(name='backDate' readonly='readonly' style='width:200px')
+        .form-row.w-third.pull-left
+            label.required.tag-height 计划人数
+            .content > .num.tag-height > echo(project.amount)
+    .clearfix
+        p.pull-left.small-font  注:图显示的是本月已预定的资源信息,不显示代表本月无预定,本月可用的资源数为<<300>>。
+        .form.pull-right.w-three > .form-row
+            label.required.small-font.tag-height 月份
+            .content
+                .relative
+                    input.input.date.tag-height#month(name='month' style='width:200px' value=month)
+                    .iconfont.icon-riqi
                 
 view('content')
-    table.table
-        tr
-            td(rowspan='3' width='200' style='text-align:center;') 培训班可用资源
-            td(colspan='31' style='text-align:center;') > echo(month)
-        tr
-            each(state)
-                td(style='padding:6px;') > echo(day)
-        tr
-            each(state)
-                td(style='padding:6px;') > echo(week)
-        tr
-            td(style='text-align:center;') > echo('可用资源')
-            each(state)
-                td(style='padding:6px;') > echo(allowed)
-        each(projects)
+    .layout-mt-small
+        table
             tr
-                td(style='text-align:center;') > echo(name + ' ' + amount + '人' + days + '天') 
-                td(colspan='31') > date(classInfo.arriveDate) + echo('~') + date(classInfo.returnDate)
+                th(rowspan="3") 培训班可用资源
+                th(colspan="31") > echo(month + '月')
+            tr > each(state)
+                td > echo(day)
+            tr > each(state)
+                td > echo(week)
+            tr
+                td 可用资源
+                each(state)
+                    if(green)
+                        td.custom-bg-color-4 > echo(allowed)
+                    else
+                        td.custom-bg-color-3 > echo(allowed)
+            each(projects) > tr
+                td > echo(name + ' ' + amount + '人' + days + '天')
+                each(occupyDays)
+                    if(isPass)
+                        echo('')
+                    else
+                        if(isOccupy)
+                            td.bg-main-color(colspan=colspan) > echo(text)
+                        else
+                            td > echo('')
+    .layout-mt-small.clearfix > .small-btn.pull-right.radius#rule 查看预定规则
+
 
 
 view('tips')

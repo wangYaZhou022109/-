@@ -2,25 +2,21 @@ var helpers = require('./app/util/helpers');
 
 exports.bindings = {
     state: true,
-    project: true
+    project: false,
+    month: true
 };
 
 exports.actions = {
-    'change month': 'changeMonth'
+
 };
 
 exports.events = {
-    'click rule': 'showRule',
     'change arriveDate': 'changeArriveDate',
-    'click book': 'book'
+    'click book': 'book',
+    'change month': 'changeMonth'
 };
 
 exports.handlers = {
-    showRule: function() {
-        var me = this,
-            model = me.module.items.tips;
-        me.app.viewport.modal(model, {});
-    },
     changeArriveDate: function() {
         var arriveDate = this.$('arriveDate').value,
             arriveLong,
@@ -46,6 +42,18 @@ exports.handlers = {
         }
         this.module.renderOptions.callback(arriveDate, backDate);
         this.app.viewport.closeModal();
+    },
+    changeMonth: function() {
+        var month = this.$('month').value,
+            project = this.bindings.project.data;
+        this.module.dispatch('changeMonth', { month: month, project: project });
+    }
+};
+
+exports.dataForTemplate = {
+    month: function() {
+        var month = this.bindings.month.data;
+        return month;
     }
 };
 
@@ -53,8 +61,7 @@ exports.components = [{
     id: 'month',
     name: 'flatpickr',
     options: {
-        dateFormat: 'Y-m',
-        defaultDate: new Date()
+        dateFormat: 'Y-m'
     }
 }, {
     id: 'arriveDate',

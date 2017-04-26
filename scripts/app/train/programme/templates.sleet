@@ -84,7 +84,7 @@ view('online')
                             option(value='1')('selected')&if(isRequired1) > map('yes-or-no' '1')
                             option(value='0')('selected')&if(isRequired0) > map('yes-or-no' '0')
                     td
-                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+resourceId data-name='resourceId' data-value=resourceId)
                         i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
 
 view('questionnaire') 

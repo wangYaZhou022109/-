@@ -51,7 +51,8 @@ exports.events = {
     'click addCourse': 'addCourse',
     'click label-online-*': 'changeRequired',
     'change input-online-*': 'updateRequired',
-    'click minimize-*': 'showMinimize'
+    'click minimize-*': 'showMinimize',
+    'click view-online-*': 'viewCourse'
 };
 
 exports.handlers = {
@@ -83,5 +84,8 @@ exports.handlers = {
             $(this.$('min-' + id)).text('最小化');
             $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
         }
+    },
+    viewCourse: function(id) {
+        window.open('#/study/course/detail/' + id, '_blank');
     }
 };

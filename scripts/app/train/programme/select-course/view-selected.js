@@ -176,10 +176,10 @@ exports.dataForActions = {
     doSearch: function() {
         return {
             name: this.$('name').value,
-            categoryId: this.$('categoryId').value,
-            categoryName: this.$('categoryName').value,
-            organizationId: this.$('organizationId').value,
-            organizationName: this.$('organizationName').value
+            // categoryId: this.$('categoryId').value,
+            // categoryName: this.$('categoryName').value,
+            // organizationId: this.$('organizationId').value,
+            // organizationName: this.$('organizationName').value
         };
     }
 };
