@@ -1,25 +1,144 @@
+var _ = require('lodash/collection');
 exports.items = {
     layout: 'layout'
 };
 exports.store = {
     models: {
-        contents: { url: '../system/home-content' },
-        styleMap: { data: { 'layout-1': 7, 'layout-2': 6, 'layout-3': 4, 'layout-4': 7, 'layout-5': 8 } },
-        down: { url: '../human/file/download' }
+        contents: {
+            url: '../system/home-content'
+        },
+        styleMap: {
+            data: {
+                'layout-1': 7,
+                'layout-2': 6,
+                'layout-3': 4,
+                'layout-4': 7,
+                'layout-5': 8
+            }
+        },
+        down: {
+            url: '../human/file/download'
+        },
+        dataType: {
+            data: {
+                trainClass: 1,
+                gensee: 2,
+                exam: 3,
+                research: 4,
+                mooc: 5,
+                course: 9,
+                subject: 10
+            }
+        },
+        trainClass: {
+            data: []
+        },
+        gensee: {
+            url: '../course-study/gensee/front/find-by-ids'
+        },
+        exam: {
+            url: '../exam/exam/front/find-by-ids'
+        },
+        research: {
+            url: '../exam/research-activity/front/find-by-ids'
+        },
+        mooc: {
+            data: []
+        },
+        course: {
+            url: '../course-study/course-info/front/find-by-ids'
+        },
+        subject: {
+            url: '../course-study/course-info/front/find-by-ids'
+        }
     },
     callbacks: {
         init: function(payload) {
             var contents = this.models.contents,
-                style = payload.style || 'layout-1';
+                style = payload.style || 'layout-1',
+                dataType = this.models.dataType.data,
+                me = this;
             contents.clear();
             contents.params.moduleHomeConfigId = payload.id;
             contents.params.size = this.models.styleMap.data[style] || 7;
             contents.params.clientType = payload.clientType || 1;
-            return this.get(contents);
+            contents.clear();
+            return this.chain(
+                function() {
+                    return me.get(contents).then(function(data) {
+                        return data && data[0];
+                    });
+                },
+                // 课程
+                function(result) {
+                    var courseIds = [];
+                    if (result.length > 0) {
+                        courseIds = _.map(_.filter(result, ['dataType', dataType.course]), 'dataId') || [];
+                        if (courseIds.length > 0) {
+                            me.models.course.clear();
+                            me.models.course.params.ids = courseIds.join(',');
+                            me.get(me.models.course);
+                        }
+                    }
+                    return result;
+                },
+                // 专题
+                function(result) {
+                    var subjectIds = [];
+                    if (result.length > 0) {
+                        subjectIds = _.map(_.filter(result, ['dataType', dataType.subject]), 'dataId') || [];
+                        if (subjectIds.length > 0) {
+                            me.models.subject.clear();
+                            me.models.subject.params.ids = subjectIds.join(',');
+                            me.get(me.models.subject);
+                        }
+                    }
+                    return result;
+                },
+                // 直播
+                function(result) {
+                    var genseeIds = [];
+                    if (result.length > 0) {
+                        genseeIds = _.map(_.filter(result, ['dataType', dataType.gensee]), 'dataId') || [];
+                        if (genseeIds.length > 0) {
+                            me.models.gensee.clear();
+                            me.models.gensee.params.ids = genseeIds.join(',');
+                            me.get(me.models.gensee);
+                        }
+                    }
+                    return result;
+                },
+                // 考试
+                function(result) {
+                    var examIds = [];
+                    if (result.length > 0) {
+                        examIds = _.map(_.filter(result, ['dataType', dataType.exam]), 'dataId') || [];
+                        if (examIds.length > 0) {
+                            me.models.exam.clear();
+                            me.models.exam.params.ids = examIds.join(',');
+                            me.get(me.models.exam);
+                        }
+                    }
+                    return result;
+                },
+                // 调研
+                function(result) {
+                    var researchIds = [];
+                    if (result.length > 0) {
+                        researchIds = _.map(_.filter(result, ['dataType', dataType.research]), 'dataId') || [];
+                        if (researchIds.length > 0) {
+                            me.models.research.clear();
+                            me.models.research.params.ids = researchIds.join(',');
+                            me.get(me.models.research);
+                        }
+                    }
+                    return result;
+                }
+            );
         }
     }
 };
 
-exports.beforeRender = function() {
+exports.afterRender = function() {
     this.dispatch('init', this.renderOptions.moduleHomeConfig);
 };

@@ -1,7 +1,8 @@
 exports.bindings = {
     course: true,
     collect: true,
-    score: true
+    score: true,
+    download: false
 };
 
 exports.actions = {
@@ -35,10 +36,14 @@ exports.actionCallbacks = {
 exports.components = [function() { // 分享组件
     var data = {},
         course = this.bindings.course.data;
+    var pics = 'images/default-cover/default_course.jpg';
     if (course) {
+        if (course.cover) {
+            pics = course.cover;
+        }
         data.id = course.id;
         data.type = '1';
-        data.pics = 'images/default-cover/default_course.jpg';
+        data.pics = pics;
         data.title = course.name;
     }
     return {

@@ -19,10 +19,15 @@ exports.handlers = {
         this.app.viewport.modal(model);
     },
     searchTopic: function(topicId) {
-        var tempId = topicId;
-        var currentTopicId = this.bindings.search.data.topicId;
-        if (currentTopicId === topicId) tempId = '';
-        return this.module.dispatch('search', { topicId: tempId });
+        var currentTopicIds = this.bindings.search.data.topicIds || [];
+        if (currentTopicIds.indexOf(topicId) !== -1) {
+            currentTopicIds = _.filter(currentTopicIds, function(i) {
+                return i !== topicId;
+            });
+        } else {
+            currentTopicIds.push(topicId);
+        }
+        return this.module.dispatch('search', { topicIds: currentTopicIds });
     }
 };
 
@@ -47,11 +52,11 @@ exports.dataForTemplate = {
         });
     },
     topics: function(data) {
-        var selectTopicId = data.search.topicId;
+        var selectTopicId = data.search.topicIds;
         if (!selectTopicId) return data.topics;
         data.topics.forEach(function(t) {
             var topic = t || {};
-            if (topic.id === selectTopicId) topic.active = true;
+            if (selectTopicId.indexOf(topic.id) !== -1) topic.active = true;
         });
         return data.topics;
     }

@@ -1,11 +1,16 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 exports.bindings = {
     knowledges: true,
     search: 'changeSearch',
 };
 exports.changeSearch = function() {
-    var params = this.bindings.search.data;
+    var params = D.assign({}, this.bindings.search.data);
     params.categoryId = params.menu2 || params.menu1;
+    if (params.topicIds) {
+        params.topicId = params.topicIds.join();
+        delete params.topicIds;
+    }
     this.module.dispatch('searchKnowledges', { params: params });
 };
 

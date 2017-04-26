@@ -30,6 +30,6 @@ exports.store = {
     }
 };
 
-exports.beforeRender = function() {
+exports.afterRender = function() {
     this.dispatch('init', this.renderOptions.moduleHomeConfig);
 };
