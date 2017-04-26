@@ -4,7 +4,8 @@ var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     content: true,
-    page: true
+    page: true,
+    down: false
 };
 
 exports.events = {
@@ -200,6 +201,8 @@ exports.dataForTemplate = {
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
+            var url = obj.createUser.headPortrait;
+            obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {

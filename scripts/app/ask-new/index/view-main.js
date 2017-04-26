@@ -5,10 +5,15 @@ exports.events = {
     'click item-*': 'toggleItem',
     'click button-*': 'togglePage',
     'click icon-*': 'toggleIcon',
-    'click report': 'showExport'
+    'click report': 'showExport',
+    'click discuss-*': 'discuss'
 };
 
 exports.handlers = {
+    discuss: function(id) {
+        $(this.$('comment-reply-' + id)).toggleClass('show');
+        $(this.$('comment-list-' + id)).toggleClass('hide');
+    },
     toggleItem: function(id) {
         $(this.$('item-' + id)).addClass('active').siblings().removeClass('active');
         $(this.$('tabs-cont-item-' + id)).addClass('active').siblings().removeClass('active');

@@ -54,7 +54,7 @@ exports.store = {
                 innerExpert.set(data);
                 this.post(innerExpert).then(function() {
                     me.app.message.success('专家申请成功！');
-                    me.app.show('content', 'ask/expert');
+                   // me.app.show('content', 'ask/expert');
                 });
             }
         },

@@ -2,7 +2,7 @@ module.exports = {
     items: {
         advertising: 'advertising'
     },
-    beforeRender: function() {
+    afterRender: function() {
         this.dispatch('init', this.renderOptions.moduleHomeConfig);
     },
     store: {
