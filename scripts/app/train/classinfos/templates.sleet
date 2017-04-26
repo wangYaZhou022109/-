@@ -12,7 +12,7 @@ view('search') > form.vertical
     echo('班级名称')
     input.input(name='className')
     echo('实施年月')
-    input.input(name='startTime')
+    input.input#month(name='startTime' style='width:200px')
     btn.btn#search > echo('搜索')
 
 view('main')
@@ -37,4 +37,6 @@ view('main')
             td > date(returnDate)
             td > echo(status)
             td > a(href='#/train/index/'+projectId) > echo('进入管理')
+            else
+                tr > td(colspan='9') > p.text-center > string('no-data')
     #pager.pagination

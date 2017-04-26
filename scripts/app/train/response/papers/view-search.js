@@ -9,7 +9,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'auditStatus',
+    id: 'commitQuestionary',
     name: 'selectize'
 }];
 
@@ -21,14 +21,14 @@ exports.dataForActions = {
     search: function() {
         var data = {
             classId: this.bindings.state.data.classId,
-            auditStatus: $(this.$$('[name="auditStatus"]')).val(),
+            commitQuestionary: $(this.$$('[name="commitQuestionary"]')).val(),
             memberFullName: $(this.$$('[name="memberFullName"]')).val(),
             organizationId: $(this.$$('[name="organizationId"]')).val()
         };
         _.forEach(data, function(v, k) {
-            if (k === 'auditStatus') {
+            if (k === 'commitQuestionary') {
                 if (v === '999') {
-                    data.auditStatus = '';
+                    data.commitQuestionary = '';
                 }
             }
         });
@@ -37,8 +37,8 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
-    auditStatus: function() {
-        var result = maps.get('trainee-auditStatus').sort(function(a, b) {
+    commitQuestionary: function() {
+        var result = maps.get('trainee-commit-questionary').sort(function(a, b) {
             return Number(a.key) - Number(b.key);
         });
         result.unshift({ key: '999', value: '全部' });

@@ -12,7 +12,7 @@ view('search') > form.vertical
     echo('班级名称')
     input.input(name='className')
     echo('班级状态')
-    select.input#classStatus(name='classStatus' x-marker='selectize' style='width:100px; display:inline;')
+    select.input#classStatus(name='classStatus' x-marker='selectize')
         each(classStatus)
             option(value=key) > echo(value)
     btn.btn#search > echo('查询')
