@@ -1,5 +1,7 @@
 var $ = require('jquery'),
-    D = require('drizzlejs');
+    D = require('drizzlejs'),
+    markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators');
 
 // exports.type = 'form';
 
@@ -30,7 +32,7 @@ exports.components = [function() {
             id: 'owner',
             name: 'picker',
             options: {
-                module: 'train/programme/question-depot',
+                module: 'exam/question-depot',
                 picker: 'owner',
                 required: true,
                 params: { operatorType: operatorType },
@@ -90,5 +92,24 @@ exports.mixin = {
             });
         }
         return null;
+    },
+    validate: function() {
+        var organizationId = $(this.$('organizationId')),
+            depot = $(this.$('questionDepotId')),
+            flag = true;
+
+        markers.text.valid(organizationId);
+        markers.text.valid(depot);
+
+        if (organizationId.val() === '') {
+            markers.text.invalid(organizationId, validators.required.message);
+            flag = false;
+        }
+
+        if (depot.val() === '') {
+            markers.text.invalid(depot, validators.required.message);
+            flag = false;
+        }
+        return flag;
     }
 };

@@ -119,11 +119,11 @@ exports.handlers = {
         }
     },
     backToTop: function(e) {
-        var container = $(e.target).parents('.container');
+        var container = $(e.target).parents();
         container.animate({ scrollTop: 0 }, 500);
     },
     goToBottom: function(e) {
-        var container = $(e.target).parents('.container');
+        var container = $(e.target).parents();
         container.animate({ scrollTop: container[0].scrollHeight }, 500);
     }
 };

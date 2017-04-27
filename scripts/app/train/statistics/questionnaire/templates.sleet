@@ -44,10 +44,12 @@ view('mainB')
             tbody > each(classEvaluate) > tr
                 td > echo(resourceName)
                 td
-                    label(id='label-startTime-' + id data-name='id' data-value=id) > dateTime(startTime) + echo('(点击可修改)')
+                    label(id='label-startTime-' + id data-name='id' data-value=id) > dateTime(startTime)
+                    i.iconfont.icon-note
                     input(id='input-startTime-' value=dateTime(startTime) style='display:none;')
                 td
-                    label(id='label-endTime-' + id data-name='id' data-value=id) > dateTime(endTime) + echo('(点击可修改)')
+                    label(id='label-endTime-' + id data-name='id' data-value=id) > dateTime(endTime)
+                    i.iconfont.icon-note
                     input(id='input-endTime-' value=dateTime(endTime) style='display:none;')
                 td > echo(response + '%')
                 td

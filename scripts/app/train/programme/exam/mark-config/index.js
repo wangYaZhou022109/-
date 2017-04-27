@@ -5,7 +5,7 @@ var D = require('drizzlejs'),
 
 exports.items = {
     main: 'main',
-    'picker/select-member': { isModule: true }
+    'train/programme/select-member': { isModule: true, uri: 'train/programme' }
 };
 
 exports.store = {

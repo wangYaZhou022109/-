@@ -267,6 +267,11 @@ exports.store = {
                 data = this.models.state.data,
                 questionTypes = this.models.questionTypes,
                 paperSortRule = payload.paperSortRule || 1;
+
+            _.forEach(this.models, function(m) {
+                m.clear();
+            });
+
             this.models.exam.set(exam);
             this.models.paper.set({ id: payload.paperId });
             D.assign(data, {

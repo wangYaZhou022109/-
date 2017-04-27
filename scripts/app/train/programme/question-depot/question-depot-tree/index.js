@@ -4,7 +4,7 @@ var D = require('drizzlejs'),
 exports.items = {
     'organization-selector': 'organization-selector',
     'depot-tree': 'depot-tree',
-    'exam/question-depot/add-question-depot': { isModule: true }
+    'train/programme/question-depot/add-question-depot': { isModule: true }
 };
 
 exports.store = {

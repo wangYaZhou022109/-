@@ -10,8 +10,8 @@ exports.events = {
 
 exports.handlers = {
     viewMore: function() {
-        var mod = this.module.items['exam/question/types/research-detail-summary/question-answer/more'];
-        this.app.viewport.popup(mod, {
+        var mod = this.module.items['train/programme/research-activity/question/types/summary/question-answer/more'];
+        this.app.viewport.modal(mod, {
             question: this.bindings.question.data
         });
     }

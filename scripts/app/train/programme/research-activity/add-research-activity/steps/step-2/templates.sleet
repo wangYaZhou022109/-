@@ -11,13 +11,14 @@ view('main')
         form.vertical
             ul.question-list.paper.research-act-topic-box > each(dimensions)
                 p
-                    echo(dimensionIndex)
-                    span.p-left > echo(name)
+                    compare(isEmpty 'ne' 1)
+                        echo(dimensionIndex)
+                        span.p-left > echo(name)
                 each(questions)
                     li.question-item > .row
                         .col-md-12.research-act-topic
-                            span.research-act-topic-s > echo(questionIndex typeDesc)
-                            div(data-dynamic-key=id)
+                            span.research-act-topic-s > echo(questionIndex)
+                            div(data-dynamic-key=id style='display: inline;')
                     hr
                     .btn(id='delete-question-' + id style='float:right ') > echo('删除')
                     .btn(id='edit-question-' + id style='float:right ') > echo('编辑')
@@ -47,8 +48,8 @@ view('side')
                         span > echo(questionIndex)
             .hr
             div
-                .btn.reverse#question-1 单选
-                .btn.reverse#question-5 问答
-                .btn.reverse#question-2 多选
+                .btn.reverse#question-1 +单选
+                .btn.reverse#question-2 +多选
+                .btn.reverse#question-5 +问答
                 .btn.reverse#import 导入
                 .btn#preview 预览

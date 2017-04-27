@@ -1,8 +1,8 @@
 #! handlebars
 
-module > .achievement-content.content
-    .achievement-side(data-region='side')
-    .achievement-main(data-region='main')
+module > div
+    div(style='width: 35%;float: left;')(data-region='side')
+    div(style='width: 60%;float: right;')(data-region='main')
 
 view('side')
     .achievement-preview-top
@@ -23,10 +23,10 @@ view('side')
 view('main')
     .title-row.row
         .col-sm-12 > .com-title > echo(state.name)
-        .col-sm-4
-            input(type='hidden')
-            select.input#paper-view-type > each(paperViewTypes)
-                option(value=key)('selected')&if(selected) > echo(value)
+        #  .col-sm-4
+        #      input(type='hidden')
+        #      select.input#paper-view-type > each(paperViewTypes)
+        #          option(value=key)('selected')&if(selected) > echo(value)
 
     .hr
     .preview-content

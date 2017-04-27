@@ -1,5 +1,7 @@
 var maps = require('./app/util/maps'),
-    NO_OPTIONS_SCORE = 0;
+    D = require('drizzlejs'),
+    NO_OPTIONS_SCORE = 0,
+    _ = require('lodash/collection');
 
 exports.items = {
     content: 'content',
@@ -16,15 +18,21 @@ exports.store = {
             var data = this.models.state.data = {
                     options: [],
                     title: '单选题',
-                    answer: ''
+                    answer: '',
+                    id: payload.data.id,
+                    index: payload.data.index
                 },
                 i,
                 question = payload.data,
                 questionAttrs,
                 difficultys = maps.get('question-difficultys'),
                 types = maps.get('question-types');
+
             if (question) {
+                D.assign(data, question);
                 questionAttrs = question.questionAttrs;
+                // questionAttrs 需要按照name排序，防止选项被打乱
+                questionAttrs = _.sortBy(questionAttrs, 'name');
                 for (i = 0; i < questionAttrs.length; i++) {
                     data.options.push({
                         content: questionAttrs[i].value,

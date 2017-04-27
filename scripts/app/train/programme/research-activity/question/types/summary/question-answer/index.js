@@ -1,7 +1,7 @@
 
 exports.items = {
     main: 'main',
-    'exam/question/types/research-detail-summary/question-answer/more': { isModule: true }
+    'train/programme/research-activity/question/types/summary/question-answer/more': { isModule: true }
 };
 
 exports.store = {

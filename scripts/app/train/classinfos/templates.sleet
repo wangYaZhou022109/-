@@ -1,42 +1,49 @@
 #!handlebars
 
-module > .person-page
-    .person-search(data-region='search')
-    .person-content(data-region='main')
+module > .demand-page
+    .demand-title(data-region='search')
+    .demand-table(data-region='main')
 
-view('search') > form.vertical
-    echo('班务管理')
-    br
-    echo('MIS编号')
-    input.input(name='MIScode')
-    echo('班级名称')
-    input.input(name='className')
-    echo('实施年月')
-    input.input#month(name='startTime' style='width:200px')
-    btn.btn#search > echo('搜索')
+view('search') > form
+    section.section.container
+        .h4 > echo('班务管理')
+    .filter-row.container
+        .filter-item
+            span > echo('MIS编号')
+            input.input(name='MIScode')
+        .filter-item
+            span > echo('班级名称')
+            input.input(name='className')
+        .filter-item
+            span > echo('实施年月')
+            input.input#month(name='startTime' style='width:200px')
+        .filter-item
+            span |
+            button.btn#search > echo('查询')
 
 view('main')
-    table.table
-        thead > tr
-            th > echo('MIS编号')
-            th > echo('培训班名称')
-            th > echo('培训需求方部门')
-            th > echo('培训需求方联系人')
-            th > echo('培训需求方联系方式')
-            th > echo('报到日')
-            th > echo('返程日')
-            th > echo('班级状态')
-            th > echo('操作')
-        tbody > each(classinfos) > tr
-            td > echo(code)
-            td > echo(className)
-            td > echo(organization)
-            td > echo(contactPeople)
-            td > echo(contactPhone)
-            td > date(arriveDate)
-            td > date(returnDate)
-            td > echo(status)
-            td > a(href='#/train/index/'+projectId) > echo('进入管理')
-            else
-                tr > td(colspan='9') > p.text-center > string('no-data')
-    #pager.pagination
+    .container
+        table.table
+            thead > tr
+                th > echo('MIS编号')
+                th > echo('培训班名称')
+                th > echo('培训需求方部门')
+                th > echo('培训需求方联系人')
+                th > echo('培训需求方联系方式')
+                th > echo('报到日')
+                th > echo('返程日')
+                th > echo('班级状态')
+                th > echo('操作')
+            tbody > each(classinfos) > tr
+                td > echo(code)
+                td > echo(className)
+                td > echo(organization)
+                td > echo(contactPeople)
+                td > echo(contactPhone)
+                td > date(arriveDate)
+                td > date(returnDate)
+                td > echo(status)
+                td > a(href='#/train/index/'+projectId) > echo('进入管理')
+                else
+                    tr > td(colspan='9') > p.text-center > string('no-data')
+        #pager.pagination

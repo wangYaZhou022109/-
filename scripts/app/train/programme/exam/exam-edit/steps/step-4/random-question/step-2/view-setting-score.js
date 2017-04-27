@@ -1,4 +1,4 @@
-exports.type = 'form';
+// exports.type = 'form';
 exports.bindings = {
     scoreTable: true
 };

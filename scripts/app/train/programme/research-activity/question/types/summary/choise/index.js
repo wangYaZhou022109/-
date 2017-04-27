@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 
 exports.items = {
     main: 'main'
@@ -11,26 +12,22 @@ exports.store = {
                 init: function() {
                     var me = this;
                     this.data.options = _.map(this.data.questionAttrs, function(attr, i) {
-                        return {
+                        return D.assign({
                             code: String.fromCharCode(i + 'A'.charCodeAt(0)),
                             text: attr.value,
-                            selectPercent: me.countPercent(attr.name),
-                            checked: me.isChecked(attr.name)
-                        };
+                        }, me.getSelectData(attr.name));
                     });
+                    this.data.answerCount = this.data.answerRecords.length;
                 },
-                countPercent: function(name) {
+                getSelectData: function(name) {
                     var selectedCount = _.filter(this.data.answerRecords, function(a) {
-                            return a.answer === name;
+                            return a && a.answer === name;
                         }).length,
-                        p = selectedCount / this.data.answerRecords.length;
-                    return p * 100;
-                },
-                isChecked: function(name) {
-                    var answerRecord = _.find(this.data.answerRecords, [
-                        'researchRecordId', this.data.researchRecordId
-                    ]);
-                    return name === answerRecord.answer;
+                        p = this.data.answerRecords.length === 0 ? 0 : selectedCount / this.data.answerRecords.length;
+                    return {
+                        selectPercent: Number(p * 100).toFixed(2),
+                        selectCount: selectedCount
+                    };
                 }
             }
         }

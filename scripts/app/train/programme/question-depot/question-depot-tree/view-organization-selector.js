@@ -5,7 +5,7 @@ exports.getEntity = function() {
 };
 
 exports.getEntityModuleName = function() {
-    return 'exam/question-depot/organization-selector';
+    return 'train/programme/question-depot/organization-selector';
 };
 
 exports.dataForEntityModule = function(data) {

@@ -28,8 +28,7 @@ exports.mixin = {
         return this.items.content.getResult();
     },
     isValidate: function() {
-        var validate = this.items.content.validate();
-        return validate;
+        return this.items.content.validate();
     },
     clear: function() {
         this.renderOptions = {};

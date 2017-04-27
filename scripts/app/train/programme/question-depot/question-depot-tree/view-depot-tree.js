@@ -42,9 +42,9 @@ exports.handlers = {
         nodeChanged.call(this, data);
     },
     add: function() {
-        var mod = this.module.items['exam/question-depot/add-question-depot'],
+        var mod = this.module.items['train/programme/question-depot/add-question-depot'],
             me = this;
-        this.app.viewport.popup(mod, {
+        this.app.viewport.modal(mod, {
             organizationId: this.bindings.questionDepots.params.organizationId,
             titleType: 'add',
             callback: function() {
@@ -53,9 +53,9 @@ exports.handlers = {
         });
     },
     edit: function() {
-        var mod = this.module.items['exam/question-depot/add-question-depot'],
+        var mod = this.module.items['train/programme/question-depot/add-question-depot'],
             me = this;
-        this.app.viewport.popup(mod, {
+        this.app.viewport.modal(mod, {
             titleType: 'edit',
             questionDepotId: this.components.tree.getSelected(),
             callback: function() {

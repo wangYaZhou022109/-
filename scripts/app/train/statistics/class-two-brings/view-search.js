@@ -48,7 +48,7 @@ exports.events = {
 exports.handlers = {
     show: function() {
         var me = this,
-            model = me.module.items['train/statistics/classTwoBrings/owner1'];
+            model = me.module.items['train/statistics/classTwoBrings/owner'];
         me.app.viewport.modal(model, { module: 'train/project',
             callback: function() {
             }

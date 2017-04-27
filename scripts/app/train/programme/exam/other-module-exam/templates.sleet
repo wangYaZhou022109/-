@@ -14,7 +14,7 @@ view('main')
                     span(style='color: red;') > echo('*')
                     br
                     br
-                    input.input(x-rule='required' name='name' value=exam.name style='width: 80%;')
+                    input.input#name(x-rule='required' name='name' value=exam.name style='width: 80%;')
                 .div(style='width: 20%;float: left;margin-top: 10px;margin-bottom: 10px;')
                     label 开始时间
                     br
@@ -32,13 +32,13 @@ view('main')
                     span(style='color: red;') > echo('*')
                     br
                     br
-                    input.input.mark(x-rule='required,number,keepDecimal:0,range:1:500' name='duration' value=exam.duration)
+                    input.input.mark#duration(x-rule='required,number,keepDecimal:0,range:1:500' name='duration' value=exam.duration)
                 .div(style='float: left;width: 20%;margin: 10px;')
                     label.required > setting('exam.exam.pass-score')
                     span(style='color: red;') > echo('*')
                     br
                     br
-                    input.input.mark(x-rule='required,number,keepDecimal:0,range:0:1000' name='passScore' value=exam.passScore)
+                    input.input.mark#passScore(x-rule='required,number,keepDecimal:0,range:0:1000' name='passScore' value=exam.passScore)
                 .div(style='float: left;width: 20%;margin: 10px;')
                     label.required > setting('exam.exam.paper-show-rule')
                     span(style='color: red;') > echo('*')
@@ -52,11 +52,12 @@ view('main')
                     span(style='color: red;') > echo('*')
                     br
                     br
-                    span
-                        input(name='isOverByPassExam' type='radio' value=1)
-                        | 是
-                    span
-                        input.m-left(name='isOverByPassExam' type='radio' value=0)
-                        | 否
+                    #is-over-by-pass-exam(x-rule='required' x-target='is-over-by-pass-exam' x-marker='radiox' value=exam.isOverByPassExam)
+                        span
+                            input(name='isOverByPassExam' type='radio' value=1)
+                            | 是
+                        span
+                            input(name='isOverByPassExam' type='radio' value=0)
+                            | 否
         div(style='width: 100%;float: left;')
             hr

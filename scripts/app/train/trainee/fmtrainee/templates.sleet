@@ -1,71 +1,81 @@
 #!handlebars
 
 module
-    br
-    .div(data-region='search')
-    .div(data-region='main')
+    .membership-search.layout-mt(data-region='search')
+    div(data-region='main')
 
 view('search') > form.vertical
-    echo('员工编号')
-    input.input(name='memberName')
-    echo('姓名')
-    input.input(name='memberFullName')
-    echo('所属单位')
-    input.input(name='organizationName')
-    btn.btn#search > echo('搜索')
+    .filter-row
+        .filter-item
+            leabel > echo('员工编号')
+            input.input(name='memberName')
+        .filter-item
+            leabel > echo('姓名')
+            input.input(name='memberFullName')
+        .filter-item
+            label > echo('所属单位')
+            input.input(name='organizationName')
+        .filter-item
+            label |
+            button.btn#search > echo('搜索')
 
 view('main')
-    div.text-center
-        p.col-sm-2 > echo('学员列表')
-    .buttons
-        input.input(id='add-trainee-input' placeholder='人员编号')
-        .btn#addTrainee > echo('添加')
-        .btn#group > echo('学员分组')
-        .btn#addAllTrainee > echo('添加学员')
-        .btn#situation > echo('查看分布')
-        .btn#importTrainee > echo('导入')
-        a(href=exportUrl target = '_blank') > .btn > echo('导出')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('姓名')
-            th > echo('员工编号')
-            th > echo('性别')
-            th > echo('民族')
-            th > echo('单位')
-            th > echo('部门')
-            th > echo('职务')
-            th > echo('手机')
-            th > echo('操作')
-        tbody > each(fmtrainees) > tr
-            td > echo(i)
-            td > echo(member.fullName)
-            td > echo(member.name)
-            td > map('trainee-sex' sex)
-            td > echo(nationName)
-            td > echo(companyName)
-            td > echo(organizationName)
-            td > echo(member.positionName)
-            td > echo(phoneNumber)
-            td
-                a(id='sort'+id data-name='id' data-value=id) > echo('排序')
-                input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
-                span(id='shuxian'+id) > echo('|')
-                a(id='delete'+id data-name='id' data-value=id) > echo('删除')
-    #pager.pagination(style='float:none')
-
-view('situation')
-    echo('培训班审批情况:') + echo(situation.signUpNumber) + echo('/') + echo(situation.amount)
-    compare(situation.type 'eq' 2)
-        table.table
+    .membership-table.layout-mt-small.clearfix
+        .h5.pull-left.strong > echo('学员列表')
+        .pull-right
+            label.pull-left.m-right.tag-height > echo('员工编号')
+            input.pull-left.tag-height(id='add-trainee-input')
+            .small-btn.pull-left.m-right#addTrainee > echo('添加')
+            .btn.tag-btn#group > echo('学员分组')
+            .btn.tag-btn#addAllTrainee > echo('添加学员')
+            .btn.tag-btn#situation > echo('查看分布')
+            .btn.tag-btn#importTrainee > echo('导入')
+            a.btn.tag-btn(href=exportUrl target = '_blank') > echo('导出')
+        table.table.layout-mt-small
             thead > tr
                 th > echo('序号')
-                th > echo('单位/部门')
-                th > echo('已报名人数/本省名额')
-            tbody > each(situation.classQuotaDetails) > tr
+                th > echo('姓名')
+                th > echo('员工编号')
+                th > echo('性别')
+                th > echo('民族')
+                th > echo('单位')
+                th > echo('部门')
+                th > echo('职务')
+                th > echo('手机')
+                th > echo('操作')
+            tbody > each(fmtrainees) > tr
                 td > echo(i)
+                td > echo(member.fullName)
+                td > echo(member.name)
+                td > map('trainee-sex' sex)
+                td > echo(nationName)
+                td > echo(companyName)
                 td > echo(organizationName)
-                td > echo(signUpNumber) + echo('/') + echo(quantity)
+                td > echo(member.positionName)
+                td > echo(phoneNumber)
+                td
+                    a(id='sort'+id data-name='id' data-value=id href='javascript:;') > echo('排序')
+                    input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                    span.text-main-color(id='shuxian'+id) > echo('|')
+                    a(id='delete'+id data-name='id' data-value=id href='javascript:;') > echo('删除')
+        #pager.pagination(style='float:none')
+
+view('situation') > .entersituation-page.entersituation
+    section.section
+        .layout-mt-small
+            span.m-right > echo('培训班审批情况:')
+            span.custom-color-3 > echo(situation.signUpNumber + '/' + situation.amount)
+        compare(situation.type 'eq' 2)
+            .layout-mt-small
+                table.table
+                    thead > tr
+                        th > echo('序号')
+                        th > echo('单位/部门')
+                        th > echo('已报名人数/本省名额')
+                    tbody > each(situation.classQuotaDetails) > tr
+                        td > echo(i)
+                        td > echo(organizationName)
+                        td > echo(signUpNumber) + echo('/') + echo(quantity)
 
 view('import')
     div > form(method='post' id='import-form')
@@ -81,9 +91,11 @@ view('import')
         li > echo('2.导入模板，导入成功后，页面会提示成功数量，失败数量，并显示相关信息。')
         li > echo('3.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。')
 
-view('group')
-    input.input(id='add-group-input' placeholder='请输入分组名称')
-    .btn#addGroup > echo('添加分组')
+view('group') > .studentgroup-page.studentgroup
+    .form > .form-row.row-block.w-half
+        .content
+            input.input.tag-height(id='add-group-input' placeholder='请输入分组名称')
+            .btn.choice#addGroup > echo('添加分组')
     table.table
         thead > tr
             th > echo('序号')
@@ -94,46 +106,46 @@ view('group')
         tbody > each(group) > tr
             td > echo(i)
             td
-                label(id='label-group-name' + id data-name='id' data-value=id) > echo(name)
-                input(id='input-group-name'+id value=name style='display:none;width:100px;' data-name='id' data-value=id)
+                label.sub-title(id='label-group-name' + id data-name='id' data-value=id) > echo(name)
+                input.input(id='input-group-name'+id value=name style='display:none;width:100px;' data-name='id' data-value=id)
             td
                 compare(traineeNumber 'eq' 0)
                     echo('-')
                 else
-                    a(id='group-trainee'+id data-name='id' data-value=id) > echo(traineeNumber)
+                    a(id='group-trainee'+id data-name='id' data-value=id href='javascript:;') > echo(traineeNumber)
             td
-                a(id='go-up'+id data-name='id' data-value=id) > echo('上移')
-                echo('|')
-                a(id='go-down'+id data-name='id' data-value=id) > echo('下移')
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray(id='go-up'+id data-name='id' data-value=id)
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(id='go-down'+id data-name='id' data-value=id)
             td
-                a(id='manage'+id data-name='id' data-value=id) > echo('管理')
-                echo('|')
-                a(id='delGroup'+id data-name='id' data-value=id) > echo('删除')
+                a.text-main-color(id='manage'+id data-name='id' data-value=id href='javascript:;') > echo('管理')
+                span.text-main-color > echo('|')
+                a.text-main-color(id='delGroup'+id data-name='id' data-value=id href='javascript:;') > echo('删除')
 
 view('groupTrainees')
-    .buttons
-        a(href=exportGroupUrl target = "_blank") > .btn > echo('导出')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('姓名')
-            th > echo('员工编号')
-            th > echo('单位')
-            th > echo('部门')
-            th > echo('职务')
-            th > echo('手机')
-            th > echo('操作')
-        tbody > each(groupTrainees) > tr
-            td > echo(i)
-            td > echo(member.fullName)
-            td > echo(member.name)
-            td > echo(companyName)
-            td > echo(organizationName)
-            td > echo(member.positionName)
-            td > echo(phoneNumber)
-            td
-                a(id='group-trainee-sort'+id data-name='id' data-value=id) > echo('排序')
-                input(id='group-trainee-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
-                span(id='groupshuxian'+id) > echo('|')
-                a(id='group-trainee-delete'+id data-name='id' data-value=id) > echo('删除')
-    #pager.pagination(style='float:none')
+    .membership-table.layout-mt-small.clearfix
+        .pull-right
+            a.btn.tag-btn(href=exportGroupUrl target = "_blank") > echo('导出')
+        table.table.layout-mt-small
+            thead > tr
+                th > echo('序号')
+                th > echo('姓名')
+                th > echo('员工编号')
+                th > echo('单位')
+                th > echo('部门')
+                th > echo('职务')
+                th > echo('手机')
+                th > echo('操作')
+            tbody > each(groupTrainees) > tr
+                td > echo(i)
+                td > echo(member.fullName)
+                td > echo(member.name)
+                td > echo(companyName)
+                td > echo(organizationName)
+                td > echo(member.positionName)
+                td > echo(phoneNumber)
+                td
+                    a(id='group-trainee-sort'+id data-name='id' data-value=id) > echo('排序')
+                    input(id='group-trainee-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                    span.text-main-color(id='groupshuxian'+id) > echo('|')
+                    a(id='group-trainee-delete'+id data-name='id' data-value=id) > echo('删除')
+        #pager.pagination(style='float:none')

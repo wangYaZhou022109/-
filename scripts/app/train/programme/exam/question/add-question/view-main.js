@@ -1,6 +1,8 @@
 var maps = require('./app/util/maps'),
     _ = require('lodash/collection'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators');
 
 exports.bindings = {
     state: false
@@ -29,16 +31,16 @@ exports.handlers = {
     }
 };
 
-exports.components = [{
-    id: 'type',
-    name: 'selectize'
-}, {
-    id: 'level',
-    name: 'selectize'
-}, {
-    id: 'mark',
-    name: 'selectize'
-}];
+// exports.components = [{
+//     id: 'type',
+//     name: 'selectize'
+// }, {
+//     id: 'level',
+//     name: 'selectize'
+// }, {
+//     id: 'mark',
+//     name: 'selectize'
+// }];
 
 exports.dataForTemplate = {
     types: function() {
@@ -75,5 +77,24 @@ exports.mixin = {
         data.type = $(this.$$('[name="type"]')).val();
         data.difficulty = $(this.$$('[name="difficulty"]')).val();
         return data;
+    },
+    validate: function() {
+        var type = $(this.$('type')),
+            level = $(this.$('level')),
+            flag = true;
+
+        markers.text.valid(type);
+        markers.text.valid(level);
+
+        if (type.val() === '') {
+            markers.text.invalid(type, validators.required.message);
+            flag = false;
+        }
+
+        if (level.val() === '') {
+            markers.text.invalid(level, validators.required.message);
+            flag = false;
+        }
+        return flag;
     }
 };

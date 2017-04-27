@@ -25,7 +25,7 @@ exports.store = {
                 this.models.state.callback = payload.callback;
             }
 
-            D.assign(organizations.params, { uri: this.app.global.uri });
+            D.assign(organizations.params, { uri: 'course-study/course-info' });
             return this.get(organizations).then(function() {
                 var name = me.app.global.currentUser.rootOrganization.name;
                 me.models.state.data.organizationName = name;

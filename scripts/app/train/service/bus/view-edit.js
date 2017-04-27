@@ -1,8 +1,7 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    validators = require('./app/ext/views/form/validators');
 
 exports.title = '班车/订餐信息发布';
-
-exports.type = 'form';
 
 exports.bindings = {
     buss: true,
@@ -10,6 +9,11 @@ exports.bindings = {
     optionList: true,
     state: false,
 };
+
+exports.buttons = [{
+    text: '添加',
+    action: 'saveOption',
+}];
 
 exports.events = {
     'click addOption': 'addOption',
@@ -74,10 +78,36 @@ exports.dataForActions = {
         var startTime = $(this.$('startTime')).val();
         var endTime = $(this.$('endTime')).val();
         var classId = this.bindings.state.data.classId;
+        var optionList = this.bindings.optionList;
         bus.name = name;
         bus.startTime = startTime;
         bus.endTime = endTime;
         bus.classId = classId;
+        if (!validators.required.fn(name)) {
+            this.app.message.error('名称必填');
+            return false;
+        }
+        if (!validators.required.fn(startTime)) {
+            this.app.message.error('开始时间必填');
+            return false;
+        }
+        if (!validators.required.fn(endTime)) {
+            this.app.message.error('结束时间必填');
+            return false;
+        }
+        if (startTime >= endTime) {
+            this.app.message.alert('结束时间必须大于开始时间');
+            return false;
+        } else if (startTime < endTime) {
+            if (optionList.data.length > 6) {
+                this.app.message.alert('一条统计主题最多只能发布六个选项');
+                return false;
+            } else if (optionList.data.length < 1) {
+                this.app.message.alert('一条统计主题至少需要一个选项');
+                return false;
+            }
+        }
+        return true;
     }
 };
 

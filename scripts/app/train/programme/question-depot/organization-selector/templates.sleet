@@ -4,8 +4,7 @@ module
 
 
 view('main')
-    .col-xs-12.current-sector-txt#btn-toggle-tree
-        p.text-overflow(title=state.organizationName) > echo('当前部门：' state.organizationName)
-        i.iconfont.icon-arrow-down
+    .btn#btn-toggle-tree(style='background: #white;')
+        p.text-overflow(title=state.organizationName) > echo('当前部门：' state.organizationName) + i.iconfont.icon-arrow-down
     .tree-layer#toggle-tree-content
         #tree

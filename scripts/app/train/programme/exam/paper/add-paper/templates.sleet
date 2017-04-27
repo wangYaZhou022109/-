@@ -63,10 +63,10 @@ view('question-classes') > form.vertical
                 compare(isFromSelected 'eq' 0)
                     .btn(id='edit-question-' + question.id style='float: right;') > i.pe-7s-note.pe-2x.pe-va.pointer
                 .btn(id='remove-question-' + question.id style='float: right;') 移除
-    .top-bottom
-        .back-box#backToTop
-            a 返回
+    .top-bottom(style='position: fixed;right: var(--space);bottom: calc(var(--space)*15);')
+        .back-box#backToTop(style='background-color: rgba(255,255,255,.5);width: 50px;height: 50px;padding-top: 3px;margin-bottom: 10px;border: 1px solid #ddd;')
+            a(style='color: #363a3e;line-height: 20px;text-align: center;display: block;') 返回
             a 顶部
-        .back-box#goToBottom
+        .back-box#goToBottom(style='background-color: rgba(255,255,255,.5);width: 50px;height: 50px;padding-top: 3px;margin-bottom: 10px;border: 1px solid #ddd;')
             a 返回
             a 底部

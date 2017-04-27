@@ -1,7 +1,7 @@
 exports.items = {
     main: 'main',
     search: 'search',
-    'train/statistics/class-two-brings/owner1': { isModule: true },
+    'train/statistics/class-two-brings/owner': { isModule: true },
     edit: ''
 };
 

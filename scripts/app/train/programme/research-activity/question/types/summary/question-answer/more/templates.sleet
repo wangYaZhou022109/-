@@ -18,7 +18,7 @@ view('main')
             thead > tr
                 th 姓名
                 th 答案内容
-                th 答案时间
+                th 答题时间
             tbody > each(question.answerRecords)
                 tr
                     td > echo(member.fullName)
