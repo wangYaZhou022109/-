@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .student-page
+    .student(data-region="student")
+
+view('student')
+    .aaa aaa
