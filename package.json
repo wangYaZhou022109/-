@@ -16,14 +16,9 @@
     "es6-promise": "^3.2.1",
     "flatpickr": "^2.3.4",
     "handlebars": "^4.0.5",
-<<<<<<< Updated upstream
     "highcharts": "^4.2.5",
-=======
     "kindeditor": "^4.1.10",
-    "crypto-js": "^3.1.9-1",
->>>>>>> Stashed changes
     "jquery": "^1.10.0",
-    "kindeditor": "^4.1.10",
     "lodash": "^4.14.2",
     "normalize.css": "^4.2.0",
     "pdfjs-dist": "~1.6.317",
