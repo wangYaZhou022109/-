@@ -18,7 +18,7 @@ module > .class-details-page
                 section.section(data-region='comment')
 
 view('banner')
-    .banner.page-main-wrapper > img(src='images/ke.png')
+    .banner > img(src='images/ke.png')
 
 view('domain')
     .domain.clearfix.small-font
@@ -27,24 +27,28 @@ view('domain')
             br
             | 两个带来
         .domain02.pull-left
-            i.iconfont.icon-favorite
+            i.iconfont.icon-bus
             br
             | 班车信息统计
         .domain03.pull-left.m-bottom
-            i.iconfont.icon-favorite
+            i.iconfont.icon-exam
             | 作业提交
         .domain04.pull-left
-            i.iconfont.icon-favorite
+            i.iconfont.icon-smile
             br
             | 学员满意度
-        .domain05.pull-left
+        .domain05.pull-left.m-bottom
+            | 作业提交
+        .domain06.pull-left.m-bottom
+            | 学员满意度
+        .domain07.pull-left
             | 调研与考试
 
 view('class-info')
     .class-info
         .h3.clearfix
-            i.iconfont.icon-favorite.pull-right
-            | 班级信息
+            span.strong 班级信息
+            i.iconfont.icon-zhishiku.pull-right
         ul.m-top
             li
                 .class-info-left > | 班级名称
@@ -75,39 +79,39 @@ view('class-info')
 
 view('class-notice')
     .class-notice
-        .h3.m-bottom 班级公告
-        p 动力即一切力量的来源，主要分为机械类和管理类。1.使机械作功的各种作用力，如水力、风力、电力、热力等。 2.比喻对工作、事业等前进和发展起促进作用力量。例句：人民是创造世界历史的动力。
+        .h3.m-bottom.strong 班级公告
+        p.small-font 动力即一切力量的来源，主要分为机械类和管理类。1.使机械作功的各种作用力，如水力、风力、电力、热力等。 2.比喻对工作、事业等前进和发展起促进作用力量。例句：人民是创造世界历史的动力。
 
 view('class-clerk')
     .class-clerk
-        .h3.m-bottom 班务人员
+        .h3.m-bottom.strong 班务人员
         ul
             li
                 .pull-left.class-clerk-img > img(src='images/1.png')
                 .pull-left.m-right > | 王汉明
                 .pull-left.class-clerk-zhi > | 班主任
-                .pull-right > i.iconfont.icon-share + | 1234567890
+                .pull-right > i.iconfont.icon-phone + | 1234567890
             li
                 .pull-left.class-clerk-img > img(src='images/1.png')
                 .pull-left.m-right > | 王汉明
                 .pull-left.class-clerk-zhi > | 班主任
-                .pull-right > i.iconfont.icon-share + | 1234567890
+                .pull-right > i.iconfont.icon-phone + | 1234567890
             li
                 .pull-left.class-clerk-img > img(src='images/1.png')
                 .pull-left.m-right > | 王汉明
                 .pull-left.class-clerk-zhi > | 班主任
-                .pull-right > i.iconfont.icon-share + | 1234567890
+                .pull-right > i.iconfont.icon-phone + | 1234567890
             li
                 .pull-left.class-clerk-img > img(src='images/1.png')
                 .pull-left.m-right > | 王汉明
                 .pull-left.class-clerk-zhi > | 班主任
-                .pull-right > i.iconfont.icon-share + | 1234567890
+                .pull-right > i.iconfont.icon-phone + | 1234567890
 
 view('charts')
     .charts
         .h3.clearfix.m-bottom
             a.pull-right.small-font > | more
-            | 排行榜
+            span.strong 排行榜
             small 学员时长排行榜
         .clearfix.charts-list
             .pull-left.charts-img > img(src='images/1.png')
@@ -135,23 +139,29 @@ view('charts')
             .pull-right.charts-nub > b.charts03 3
         .clearfix.charts-list
             .pull-left.charts-nub > b 4
-            .pull-left.m-left > | 王英雄
+            .pull-left.m-left.strong > | 王英雄
             .pull-left.m-left > | 互联网中心
-            .pull-right > | 120分钟
+            .pull-right.strong > | 120分钟
         .clearfix.charts-list
             .pull-left.charts-nub > b 5
-            .pull-left.m-left > | 王英雄
+            .pull-left.m-left.strong > | 王英雄
             .pull-left.m-left > | 互联网中心
-            .pull-right > | 120分钟
+            .pull-right.strong > | 120分钟
         .clearfix.charts-list
             .pull-left.charts-nub > b 6
-            .pull-left.m-left > | 王英雄
+            .pull-left.m-left.strong > | 王英雄
             .pull-left.m-left > | 互联网中心
-            .pull-right > | 120分钟
+            .pull-right.strong > | 120分钟
 
 view('schedule')
     .schedule
-        .h3.m-bottom 课程表
+        .form.align-left > .form-row.m-bottom
+            label.h3 课程表
+            .content
+                select.w-full
+                    option 第一周  主题主题
+                    option 第二周  主题主题名称名称
+                    option 第三周  主题主题
         .btn.block.m-bottom 查看之前的课程
         .schedule-list.clearfix
             .pull-left.data
@@ -168,13 +178,13 @@ view('schedule')
                             i.iconfont.icon-favorite.icon-down
                             | 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-favorite.m-left.icon-see
+                            i.iconfont.icon-view.m-left.icon-see
                             | 查看
                         a
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-logout
                             | 进入直播
                         span.m-left.gray-line |
-                        i.iconfont.icon-favorite.m-left.sub-text
+                        i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
                         | 华凯华
             .pull-right.clearfix.right-line
@@ -188,13 +198,13 @@ view('schedule')
                             i.iconfont.icon-favorite.icon-down
                             | 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-favorite.m-left.icon-see
+                            i.iconfont.icon-view.m-left.icon-see
                             | 查看
                         a
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-logout
                             | 进入直播
                         span.m-left.gray-line |
-                        i.iconfont.icon-favorite.m-left.sub-text
+                        i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
                         | 华凯华
             .pull-right.clearfix.right-line
@@ -208,13 +218,13 @@ view('schedule')
                             i.iconfont.icon-favorite.icon-down
                             | 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-favorite.m-left.icon-see
+                            i.iconfont.icon-view.m-left.icon-see
                             | 查看
                         span.sub-text
                             i.iconfont.icon-favorite
                             | 教室一
                         span.m-left.gray-line |
-                        i.iconfont.icon-favorite.m-left.sub-text
+                        i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
                         | 华凯华
         .schedule-list.clearfix
@@ -232,13 +242,13 @@ view('schedule')
                             i.iconfont.icon-favorite.icon-down
                             | 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-favorite.m-left.icon-see
+                            i.iconfont.icon-view.m-left.icon-see
                             | 查看
                         a
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-logout
                             | 进入直播
                         span.m-left.gray-line |
-                        i.iconfont.icon-favorite.m-left.sub-text
+                        i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
                         | 华凯华
             .pull-right.clearfix.right-line
@@ -252,13 +262,13 @@ view('schedule')
                             i.iconfont.icon-favorite.icon-down
                             | 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-favorite.m-left.icon-see
+                            i.iconfont.icon-view.m-left.icon-see
                             | 查看
                         a
-                            i.iconfont.icon-favorite
+                            i.iconfont.icon-logout
                             | 进入直播
                         span.m-left.gray-line |
-                        i.iconfont.icon-favorite.m-left.sub-text
+                        i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
                         | 华凯华
             .pull-right.clearfix.right-line
@@ -272,13 +282,13 @@ view('schedule')
                             i.iconfont.icon-favorite.icon-down
                             | 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-favorite.m-left.icon-see
+                            i.iconfont.icon-view.m-left.icon-see
                             | 查看
                         span.sub-text
                             i.iconfont.icon-favorite
                             | 教室一
                         span.m-left.gray-line |
-                        i.iconfont.icon-favorite.m-left.sub-text
+                        i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
                         | 华凯华
         .btn.block.m-bottom 查看更多课程
@@ -293,7 +303,7 @@ view('resources')
                     i.iconfont.icon-favorite.icon-down
                     | 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-favorite.m-left.icon-see
+                    i.iconfont.icon-view.m-left.icon-see
                     | 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
@@ -304,7 +314,7 @@ view('resources')
                     i.iconfont.icon-favorite.icon-down
                     | 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-favorite.m-left.icon-see
+                    i.iconfont.icon-view.m-left.icon-see
                     | 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
@@ -315,7 +325,7 @@ view('resources')
                     i.iconfont.icon-favorite.icon-down
                     | 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-favorite.m-left.icon-see
+                    i.iconfont.icon-view.m-left.icon-see
                     | 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
@@ -326,7 +336,7 @@ view('resources')
                     i.iconfont.icon-favorite.icon-down
                     | 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-favorite.m-left.icon-see
+                    i.iconfont.icon-view.m-left.icon-see
                     | 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
@@ -337,7 +347,7 @@ view('resources')
                     i.iconfont.icon-favorite.icon-down
                     | 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-favorite.m-left.icon-see
+                    i.iconfont.icon-view.m-left.icon-see
                     | 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
@@ -346,13 +356,17 @@ view('resources')
 
 view('gallery')
     .gallery
-        ul.clearfix
-            .gallery-arrow.gallery-left > | <
-            li > a > img(src='images/d3.jpg')
-            li > a > img(src='images/d1.jpg')
-            li > a > img(src='images/d2.jpg')
-            li > a > img(src='images/d4.jpg')
-            .gallery-arrow.gallery-right > | >
+        .h3.strong.layout-mb-small 图库
+        .swiper-container
+            .gallery-banner
+                .gallery-item > a > img(src='images/d3.jpg')
+                .gallery-item > a > img(src='images/d1.jpg')
+                .gallery-item > a > img(src='images/d2.jpg')
+                .gallery-item > a > img(src='images/d4.jpg')
+            .gallery-arrow-prev.gallery-arrow
+                .iconfont.icon-arrow-left
+            .gallery-arrow-next.gallery-arrow
+                .iconfont.icon-arrow-right
 
 
 view('comment')

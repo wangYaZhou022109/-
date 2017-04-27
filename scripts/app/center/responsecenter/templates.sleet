@@ -1,0 +1,174 @@
+#!handlebars
+
+module > .responsecenter-page
+    .responsecenter-title(data-region="responsecenter-title")
+    .responsecenter-table(data-region="responsecenter-table")
+    .responsecenter-footer(data-region="responsecenter-footer")
+
+view('responsecenter-title')
+    .filter-row.container.layout-mt
+        .filter-item
+            span MIS编号
+            input.input(type="text")
+        .filter-item
+            span 班级名称
+            input.input(type="text")
+        .filter-item
+            span 班级状态
+            select.tag-select
+                option 未实施
+                option 已实施
+        .filter-item
+            span |
+            button.btn 查询
+view('responsecenter-table')
+    .container
+        table.table
+            tr
+                th MIS编号
+                th 培训班名称
+                th 计划人数
+                th 已报名人数
+                th 主办单位
+                th 主办单位联系人
+                th 联系电话
+                th 操作
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-57 学员
+                    span |
+                    a#unit-57 单位
+                    span |
+                    a#askpaper-57 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-57 学员
+                    span |
+                    a#unit-57 单位
+                    span |
+                    a#askpaper-57 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-57 学员
+                    span |
+                    a#unit-57 单位
+                    span |
+                    a#askpaper-57 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-57 学员
+                    span |
+                    a#unit-57 单位
+                    span |
+                    a#askpaper-57 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-57 学员
+                    span |
+                    a#unit-57 单位
+                    span |
+                    a#askpaper-57 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-7 学员
+                    span |
+                    a#unit-7 单位
+                    span |
+                    a#askpaper-7 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-7 学员
+                    span |
+                    a#unit-7 单位
+                    span |
+                    a#askpaper-7 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-8 学员
+                    span |
+                    a#unit-8 单位
+                    span |
+                    a#askpaper-8 问卷
+            tr
+                td 09314110102
+                td 培训班名称
+                td 25
+                td 44
+                td 主办单位名称
+                td 陈柱端
+                td 1234567890
+                td
+                    a#student-9 学员
+                    span |
+                    a#unit-9 单位
+                    span |
+                    a#askpaper-9 问卷
+
+
+
+
+view('responsecenter-footer')
+    .container
+        .pagination
+            ul
+                li 首页
+                li 上一页
+                li 3/60
+                li 下一页
+                li 尾页

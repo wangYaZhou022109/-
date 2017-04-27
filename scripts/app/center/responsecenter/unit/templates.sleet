@@ -1,0 +1,22 @@
+#!handlebars
+
+moudle > .unit-page
+    .unit(data-region="unit")
+
+view('unit')
+    table.table
+        tr
+            th 公司部门
+            th 成员/配额
+        tr
+            td 集团公司领导
+            td 4/5
+        tr
+            td 集团公司领导
+            td 4/5
+        tr
+            td 集团公司领导
+            td 4/5
+        tr
+            td 集团公司领导
+            td 4/5
