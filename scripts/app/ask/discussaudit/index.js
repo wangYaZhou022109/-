@@ -28,3 +28,22 @@ exports.store = {
 exports.afterRender = function() {
     this.dispatch('init', this.renderOptions);
 };
+exports.title = '讨论审核';
+exports.buttons = [{
+    text: '拒绝',
+    fn: function(data) {
+        var params = data;
+        params.auditStatus = 2;
+        params.auditType = 2;
+        return this.dispatch('out', params);
+    }
+}, {
+    text: '通过',
+    fn: function(data) {
+        var params = data;
+        params.auditStatus = 1;
+        params.auditType = 2;
+        return this.dispatch('pass', params);
+    }
+
+}];

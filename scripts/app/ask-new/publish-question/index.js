@@ -5,5 +5,8 @@ exports.items = {
 };
 
 exports.buttons = [{
-    text: '发布'
+    text: '发布',
+    fn: function() {
+        return false;
+    }
 }];

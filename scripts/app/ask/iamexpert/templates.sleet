@@ -14,7 +14,7 @@ view('banner')
             .title-row
                 .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
             .title-row
-                .inline-block.m-right > string('be-good-at') + string('topic') + echo(':') 
+                .inline-block.m-right > string('me') + string('be-good-at') + string('topic') + echo(':') 
                 each(expert.topicList)
                     .inline-block.m-right.bg-white.sub-title > echo(name)
                 .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
