@@ -108,22 +108,7 @@ exports.store = {
         save: function(payload) {
             var sign = this.models.sign,
                 signs = this.models.signs,
-                startTime = payload.startTime,
-                endTime = payload.endTime,
-                lateTime = payload.lateTime,
                 me = this;
-            if (startTime >= endTime) {
-                this.app.message.alert('结束时间必须大于开始时间');
-            } else if (lateTime) {
-            // } else if (lateTime !== null && lateTime !== '') {
-                if (startTime >= lateTime) {
-                    this.app.message.alert('迟到时间必须大于开始时间');
-                    return false;
-                } else if (lateTime >= endTime) {
-                    this.app.message.alert('结束时间必须大于迟到时间');
-                    return false;
-                }
-            }
             sign.set(payload);
             return this.save(sign).then(function() {
                 me.app.message.success('保存成功');

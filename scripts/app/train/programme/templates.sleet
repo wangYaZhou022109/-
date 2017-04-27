@@ -1,10 +1,10 @@
 #!handlebars
 
-module > .train-class-page
+module > .addwork-page
     .main(data-region='offline')
     .main(data-region='online')
     .main(data-region='questionnaire')
-    .main(data-region='task')
+    .addwork(data-region='task')
 
 view('offline') 
     .dateplan.container.bg-highlight.overflow.dateplan-padding
@@ -323,20 +323,17 @@ view('editTask') > form.vertical
     .col-sm-2(style='text-align:right')
         if(task.id)
             a.btn(href='#/train/programme/preview-task/'+task.id target='_blank') 预览
-            a.btn#saveTask 确定
-        else
-            a.btn#saveTask 确定
     .form.align-left
-        .form-row
+        .form-row.row-block
             label.label.required 作业名称
             .content
                 input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
                 input.input#id(type= 'hidden' name='id' value=task.id)
         .clearfix
-            .form-row.pull-left.w-half.start-time
+            .form-row.pull-left.w-half.start-time.row-block.r-padding
                 label.label.required 开始时间
                 .content > input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
-            .form-row.pull-left.w-half
+            .form-row.pull-left.w-half.row-block
                 label.label.required 结束时间
                 .content > input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
         .form-row
@@ -344,32 +341,32 @@ view('editTask') > form.vertical
                 label.label.required.pull-left 任务说明
                 textarea.input#explain(name='explain' rows='3' x-rule='maxLength:1000,required') > echo(task.explain)
 
-        .list.m-top
-            table.table
-                thead > tr
-                    td(colspan=8)
-                        .col-sm-2
-                            label 课件(最多上传3个)
-                        .col-sm-2(style='text-align:right;')
-                            a.tag-btn.m-right.radius.selected#chooseFile 上传
-                            a.inline-block.ask-help(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
-                thead > tr
-                    th 序号
-                    th(width='50%') 附件名称
-                    th 类型
-                    th 操作
-                tbody > each(files) > tr
-                    td > echo(i)
-                    td
-                        label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachmentName + '(点击可修改)')
-                        input(id='input-attach-' + id value=attachmentName style='display:none;' data-name='id' data-value=id)
-                    td > map('class-file-type' fileType)
-                    td
-                        if(canPreview)
-                            i.iconfont.icon-search.custom-color-4.m-right(href='javascript:;' id='preview-attach-'+attachmentId)
-                        else
-                            a(href=downUrl download=attachmentName) 下载
-                        i.iconfont.icon-close-circle.custom-color-3(id='del-attach-'+id data-name='id' data-value=id)
+        .task-table.layout-mt-small
+            .clearfix
+                .pull-left
+                    span 添加附件
+                    span.small-font.sub-title （最多添加3个）
+                .pull-right
+                    a.tag-btn.m-right.radius.selected#chooseFile 上传
+                    a.inline-block.ask-help(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
+                table.table
+                    thead > tr
+                        th 序号
+                        th 附件名称
+                        th 类型
+                        th 操作
+                    tbody > each(files) > tr
+                        td > echo(i)
+                        td
+                            label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachmentName + '(点击可修改)')
+                            input(id='input-attach-' + id value=attachmentName style='display:none;' data-name='id' data-value=id)
+                        td > map('class-file-type' fileType)
+                        td
+                            if(canPreview)
+                                i.pointer.m-right.iconfont.icon-preview.custom-color-5(href='javascript:;' id='preview-attach-'+attachmentId)
+                            else
+                                a(href=downUrl download=attachmentName) 下载
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-attach-'+id data-name='id' data-value=id)
         .form.layout-mt-small.align-left
             .form-choice
                 .form-row

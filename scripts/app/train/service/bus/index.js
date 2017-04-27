@@ -102,29 +102,17 @@ exports.store = {
                 optionModel = this.models.optionModel,
                 bus = this.models.bus,
                 buss = this.models.buss,
-                startTime = bus.data.startTime,
-                endTime = bus.data.endTime,
                 me = this;
             optionModel.clear();
             D.assign(bus.data, {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            if (startTime < endTime) {
-                if (optionList.data.length > 6) {
-                    this.app.message.alert('一条统计主题最多只能发布六个选项');
-                } else if (optionList.data.length < 1) {
-                    this.app.message.alert('一条统计主题至少需要一个选项');
-                } else {
-                    me.save(bus).then(function() {
-                        me.app.message.success('保存成功');
-                        me.app.viewport.closeModal();
-                        me.get(buss);
-                    });
-                }
-            } else {
-                this.app.message.alert('结束时间必须大于开始时间');
-            }
+            this.save(bus).then(function() {
+                me.app.message.success('保存成功');
+                me.app.viewport.closeModal();
+                me.get(buss);
+            });
         },
         updateName: function(data) {
             var optionList = this.models.optionList.data,

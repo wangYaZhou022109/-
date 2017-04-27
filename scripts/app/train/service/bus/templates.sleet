@@ -2,7 +2,7 @@
 
 module
     br
-    .train-class-page
+    .addcarinfo-page
     .page-main-wrapper
         .div(data-region='main')
 
@@ -39,18 +39,18 @@ view('main')
 view('edit') > form.vertical
     .form.align-left
         .form-row
-            label.label.required 统计主题
+            label.required 统计主题
             .content
                 input.input#name(name='name' value=bus.name x-rule='required')
         .clearfix
-            .form-row.pull-left.w-half.input-padding
-                label.label.required 开始时间
+            .form-row.pull-left.w-half.addcarinfo-padding
+                label.required 开始时间
                 .content
-                    input.w-full#startTime(name='startTime' value=dateTime(bus.startTime) x-rule='required')
-            .form-row.pull-right.w-half
+                    input.w-full#startTime(name='startTime' value=dateTime(bus.startTime))
+            .form-row.pull-left.w-half
                 label.label.required 结束日期
                 .content
-                    input.w-full#endTime(name='endTime' value=dateTime(bus.endTime) x-rule='required')
+                    input.w-full#endTime(name='endTime' value=dateTime(bus.endTime))
     br
     .list.m-top
         table.tables
@@ -65,4 +65,3 @@ view('edit') > form.vertical
             tr
                 td(colspan=4 style='text-align:center')
                     a.btn#addOption 添加
-    a.btn#saveOption > span > echo('保存')
