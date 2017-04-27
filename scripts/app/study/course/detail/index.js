@@ -73,7 +73,6 @@ exports.store = {
 
             this.get(courseRelated);
             this.get(collect);
-            this.post(register);
 
             return this.chain([this.get(course), this.post(register)]).then(function(data) {
                 var sectionId = data[1][0].currentSectionId;
