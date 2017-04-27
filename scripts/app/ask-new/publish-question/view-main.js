@@ -1,7 +1,8 @@
 var $ = require('jquery');
 exports.events = {
     'click selectquestion': 'showSelectquestion',
-    'change selectquestion': 'hideSelectquestion'
+    'change selectquestion': 'hideSelectquestion',
+    'input selectquestion': 'showMaxlength'
 };
 
 exports.handlers = {
@@ -10,6 +11,8 @@ exports.handlers = {
     },
     hideSelectquestion: function() {
         $(this.$('selectquestion')).parent().css('overflow', 'hidden');
+    },
+    showMaxlength: function() {
         if ($(this.$('selectquestion')).val().trim().length > 0) {
             $(this.$('selectquestion')).next().hide();
         } else {
