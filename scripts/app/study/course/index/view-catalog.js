@@ -27,8 +27,7 @@ exports.dataForTemplate = {
     menus: function(data) {
         // 一级导航 二级导航
         var select1 = data.search.menu1 || '';
-        var list = this.bindings.categories.filterPid(null);
-        if (list.length > 0) list = this.bindings.categories.filterPid(list[0].id);
+        var list = this.bindings.categories.findLevel(2);
         list.unshift({ name: '全部', id: '' });
         list.forEach(function(m) {
             var obj = m || {};
