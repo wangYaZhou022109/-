@@ -11,6 +11,7 @@ exports.store = {
     models: {
         // concern: { url: '../ask-bar/my-share/findconcern' },
         followcount: { data: { menu: 'followcount' } },
+        // expert: { url: '../ask-bar/expert' },
         relevantexperts: { data: { menu: 'relevantexperts' } },
         relatedquestions: { data: { menu: 'relatedquestions' } },
         details: {
@@ -47,7 +48,8 @@ exports.store = {
                     return speechset;
                 }
             }
-        }
+        },
+        expert: { url: '../ask-bar//myquiz/findExpert' }
     },
     callbacks: {
         refreshrelpy: function() {
@@ -57,10 +59,15 @@ exports.store = {
             var speech = this.models.speech;
             return this.get(speech);
         },
+        expert: function(payload) {
+            var expert = this.models.expert;
+            expert.set(payload);
+            return this.get(expert);
+        },
         init: function(payload) {
-            // var question = payload.question;
-            // this.models.details.set(question);
-            var question = this.models.details,
+                // var question = payload.question;
+                // this.models.details.set(question);
+            var expert = this.models.expert,
                 relevantexperts = this.models.relevantexperts,
                 state = this.models.state,
                 relatedquestions = this.models.relatedquestions,
@@ -74,14 +81,20 @@ exports.store = {
             state.changed();
             followcount.data.id = data[1];
             followcount.changed();
-            question.set({ id: data[0] });
-            this.get(question);
+            expert.set({ id: data[0] });
+            this.get(expert);
         },
         questionDetails: function(payload) {
             var details = this.models.details,
-                data = payload;
-            details.set({ id: data.id });
-            return this.get(details);
+                me = this,
+                expert = this.models.expert,
+                d = payload;
+            details.set({ id: d.id });
+            this.get(details).then(function(data) {
+                var params = _.map(data[0].topicList, 'id').join(',');
+                expert.params.ids = params;
+                me.get(expert);
+            });
         },
         details: function(payload) {
             var details = this.models.details;
@@ -189,6 +202,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
+    // this.dispatch('init', this.renderOptions);
     this.dispatch('questionDetails', this.renderOptions);
     this.dispatch('speech');
 };
