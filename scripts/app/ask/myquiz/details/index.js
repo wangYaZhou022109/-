@@ -93,8 +93,6 @@ exports.store = {
             this.get(details).then(function(data) {
                 var params = _.map(data[0].topicList, 'id').join(',');
                 expert.params.ids = params;
-                console.log(data[0]);
-                console.log(params);
                 me.get(expert);
             });
         },
