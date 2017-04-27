@@ -36,7 +36,6 @@ exports.store = {
                     params.push(d.id);
                 });
                 todayadd.set({ id: params.toString() });
-                // console.log(todayadd);
                 me.get(todayadd);
             });
         },

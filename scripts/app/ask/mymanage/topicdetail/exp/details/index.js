@@ -29,7 +29,11 @@ exports.store = {
         follow: {
             url: '../ask-bar/question-details/boutique'
         },
-        unfollow: { url: '../ask-bar/concern/unfollow' }
+        unfollow: { url: '../ask-bar/concern/unfollow' },
+        setEssenceStatus: { url: '../ask-bar/question/essence-status' },
+        unEssenceStatus: { url: '../ask-bar/question/essence-status' },
+        shut: { url: '../ask-bar/question/close-status' },
+        fire: { url: '../ask-bar/question/close-status' },
     },
     callbacks: {
         refreshrelpy: function() {
@@ -122,24 +126,40 @@ exports.store = {
         follow: function(payload) {
             var follow = this.models.follow,
                 me = this,
-                expert = this.models.expert;
+                details = this.models.details;
             follow.set(payload);
-            expert.set({ id: this.models.expert.data.id, concernType: '1' });
+            details.set({ id: this.models.details.data.id, concernType: '3' });
             return this.post(follow).then(function() {
                 me.app.message.success('关注成功');
-                me.get(expert);
+                me.get(details);
             });
         },
         unfollow: function(payload) {
             var unfollow = this.models.unfollow,
                 me = this,
-                expert = this.models.expert;
-            expert.set({ id: this.models.expert.data.id, concernType: '1' });
-            unfollow.set({ id: payload.id, concernType: '1' });
+                details = this.models.details;
+            details.set({ id: this.models.details.data.id, concernType: '3' });
+            unfollow.set({ id: payload.id, concernType: '3' });
             return this.put(unfollow).then(function() {
                 me.app.message.success('取消成功');
-                me.get(expert);
+                me.get(details);
             });
+        },
+        setEssenceStatus: function(payload) {
+            this.models.setEssenceStatus.set(payload);
+            return this.put(this.models.setEssenceStatus);
+        },
+        unEssenceStatus: function(payload) {
+            this.models.unEssenceStatus.set(payload);
+            return this.put(this.models.unEssenceStatus);
+        },
+        shut: function(payload) {
+            this.models.shut.set(payload);
+            return this.put(this.models.shut);
+        },
+        fire: function(payload) {
+            this.models.fire.set(payload);
+            return this.put(this.models.fire);
         }
     }
 };

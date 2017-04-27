@@ -9,7 +9,7 @@ D.ComponentManager.register('uploader', function(view, el, options) {
         opt = D.assign({}, {
             url: url,
             runtimes: 'html5,flash',
-            chunk_size: '1mb',
+            chunk_size: '1024mb',
             rename: true,
             dragdrop: false,
             filters: {

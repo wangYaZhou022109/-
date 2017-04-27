@@ -36,9 +36,9 @@ view('main')
                         .drop-down-wrapper
                             i.iconfont.icon-share-2(title='分享')
                             form.drop-down-content > .content
-                                .item > div(id ='shareTo-qzone' + questionId) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                .item > div(id ='shareTo-weibo' + questionId) > i.iconfont.icon-sina + span 分享到新浪微博
-                                .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
+                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                #  .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
                     .item > span(id ='report-' + 4 + '_' + details.id+'_' + details.createMemberId data-name='id' data-value=4 +'_' + details.id+'_' + details.createMemberId) > string('report')
                 .pull-left
                     span.pull-left 附件：
@@ -69,8 +69,12 @@ view('main')
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                             .item > span(id ='report-' + 5 + '_' + id+'_' + createMemberId data-name='id' data-value=details.type +'_' + id+'_' + createMemberId) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
-view('top')
+view('top')        
     .section
+        .h4.text-center
+            | 该问题已有
+            b.h2.custom-color-3 > echo(details.concernNum)
+            | 人关注
         compare(details.auditStatus 'eq' 0)
             .text-main-color.h2 
                 echo('审核中')
@@ -87,7 +91,17 @@ view('top')
     #  div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
-    div(data-dynamic-key=relevantexperts.menu)
+    #  div(data-dynamic-key=relevantexperts.menu)
+    .h3 > echo('相关专家')
+        
+    .comment-list.ask-list > ul
+        each(expert)
+            li.topic-item
+                a.normal(href="javascript:;")
+                    .img > .img-cont > img(src="images/demo/1.jpg")
+                    h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
+                    #  .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
+                #  .btn.small(id="follow-4_"  + id data-name='id' data-value='4_' + id) > echo('关注')
 
 view('relatedquestions')
     div(data-dynamic-key=relatedquestions.menu)
