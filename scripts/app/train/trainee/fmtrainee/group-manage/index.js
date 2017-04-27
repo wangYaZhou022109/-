@@ -6,6 +6,8 @@ exports.items = {
     list: 'list'
 };
 
+exports.large = true;
+
 exports.store = {
     models: {
         state: { data: {} },

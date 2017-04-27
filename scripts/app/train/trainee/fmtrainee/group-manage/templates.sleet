@@ -1,33 +1,36 @@
 #!handlebars
 
-module
-    div(style='width:60%;float:left;' data-region='toolbox')
-    div(style='width:60%;float:left;' data-region='content')
-    div(style='width:35%;float:right;' data-region='list')
+module > .groupmanage-page
+    .groupmanage
+        .page-main-wrapper
+            .page-main
+                div(data-region='toolbox')
+                div(data-region='content')
+            .page-side(data-region='list')
 
 view('toolbox') > form.vertical
-    echo('员工编号')
-    input(name='memberName')
-    echo('所属单位')
-    input(name='organizationName')
-    br
-    echo('姓名')
-    input(name='memberFullName')
-    btn.btn#search > echo('搜索')
+    .filter-row
+        .filter-item
+            label > echo('员工编号')
+            input.input(name='memberName')
+        .filter-item
+            label > echo('所属单位')
+            input.input(name='organizationName')
+        .filter-item
+            label > echo('姓名')
+            input.input(name='memberFullName')
+        btn.btn.gray > echo('搜索')
 
-view('content')
+view('content') > .layout-mt-small
     table.table
         thead > tr
-            th > .checkbox.no-margin
-                input(type='checkbox' id='checkAll')('checked')&if(waitTrainees.checkStatus)
-                label(for='checkAll')
+            th > input(type='checkbox' id='checkAll')('checked')&if(waitTrainees.checkStatus)
             th > echo('姓名')
             th > echo('员工编号')
             th > echo('所属部门')
             th > echo('性别')
         tbody > each(waitTrainees) > tr
-            td > .checkbox.no-margin
-                input(type='checkbox' id='check-item'+id name='trainee-id' value=id)('checked')&if(checked)
+            td > input(type='checkbox' id='check-item'+id name='trainee-id' value=id)('checked')&if(checked)
             td > echo(member.fullName)
             td > echo(member.name)
             td > echo(organizationName)

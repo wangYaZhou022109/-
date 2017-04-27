@@ -269,6 +269,9 @@ module.exports = {
     'trainee-show-auditStatus': {
         0: '待审核', 1: '-'
     },
+    'trainee-commit-questionary': {
+        0: '未提交', 1: '已提交'
+    },
     'project-address': {
         1: '移动学院', 2: '南方基地'
     },

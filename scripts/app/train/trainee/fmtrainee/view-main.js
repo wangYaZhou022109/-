@@ -153,7 +153,7 @@ exports.actionCallbacks = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'fmtrainees' }
+    id: 'pager', name: 'pager', options: { model: 'fmtrainees' }
 }];
 
 exports.dataForTemplate = {
