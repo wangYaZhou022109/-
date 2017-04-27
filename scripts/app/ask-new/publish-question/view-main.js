@@ -7,9 +7,13 @@ exports.events = {
 exports.handlers = {
     showSelectquestion: function() {
         $(this.$('selectquestion')).parent().css('overflow', 'inherit');
-        $(this.$('selectquestion')).next().hide();
     },
     hideSelectquestion: function() {
         $(this.$('selectquestion')).parent().css('overflow', 'hidden');
+        if ($(this.$('selectquestion')).val().trim().length > 0) {
+            $(this.$('selectquestion')).next().hide();
+        } else {
+            $(this.$('selectquestion')).next().show();
+        }
     }
 };

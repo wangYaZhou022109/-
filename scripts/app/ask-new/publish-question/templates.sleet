@@ -7,7 +7,7 @@ view('main') > .form
     .form-row
         label.required 问题标题
         .content
-            input.input#selectquestion
+            input.input#selectquestion(maxlength='60')
             .tips 0/60
             .select-drop.border.around
                 .select-drop-item 问题一
