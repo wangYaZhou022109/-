@@ -31,7 +31,6 @@ exports.store = {
         },
         updateClass: function(payload) {
             var updateClass = this.models.updateClass;
-            console.log(payload);
             updateClass.set(payload);
             return this.save(updateClass);
         },

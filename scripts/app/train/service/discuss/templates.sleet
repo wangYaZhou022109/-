@@ -1,7 +1,10 @@
 #!handlebars
 
-module
-    div(data-region='comment')
+module > .classmanage-page
+    classmanage(data-region='comment')
 
 view('comment')
+    br
+    br
+    br
     #comment-area

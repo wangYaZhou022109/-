@@ -19,9 +19,9 @@ view('content')
                 th > echo('实付')
                 th > echo('操作')
             tbody > each(courseSalary) > tr
-                td > echo(courseId)
-                td > echo(lectrerName)
-                td > echo(id)
+                td > echo(classOfflineCourse.name)
+                td > echo(classOfflineCourse.teacherName)
+                td > echo(time)
                 td > echo(pay)
                 td > echo(tax)
                 td > echo(paidPay)
@@ -32,7 +32,7 @@ view('edit') > form.vertical
         .classedit-title.clearfix
             .pull-left
                 .inline-block.com-title > echo('课程名称') :
-                label > echo(edit.id)
+                label > echo(edit.classOfflineCourse.name)
             .pull-right
                 label 学习方式：面授
         .classedit-form.form.layout-mt-small
@@ -40,19 +40,19 @@ view('edit') > form.vertical
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师姓名') :
                     .content
-                        input.input.w-full(name='lectrerName' readonly='true' value= edit.lectrerName)
+                        input.input.w-full(name='lectrerName' readonly='true' value= edit.classOfflineCourse.teacherName)
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师电话') :
                     .content
-                        input.input.w-full(name='id' readonly='true' value= edit.id)
+                        input.input.w-full(name='id' readonly='true' value= edit.classOfflineCourse.teacherPhone)
                 .form-row.pull-left.w-half
-                    label.label.required > echo('讲师单位') :
+                    label.label.required > echo('讲师部门') :
                     .content
-                        input.input(name='lectrerName' readonly='true' value= lectrerName)
+                        input.input(name='lectrerName' readonly='true' value= edit.classOfflineCourse.teacherOrganization)
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师职务') :
                     .content
-                        input.input(name='phone' value= edit.id)
+                        input.input(name='phone' value= edit.classOfflineCourse.teacherTitle)
             .form-row
                 label.label.required 讲师身份证
                 .content
