@@ -18,7 +18,12 @@ view('reviewed')
     #  .buttons
     #      .btn#display > i.icon-plus + span > echo('显示待审核')
     .hr
-    .checkbox > input(type='checkbox' id='display')('checked')&if(checked) + label 显示待审核
+    #  .checkbox > input(type='checkbox' id='display')('checked')&if(checked) + echo('显示待审核')
+    .checkbox-slider
+        input(type="checkbox" id='display')
+        label('checked')&if(checked)
+        span 显示待审核
+
     #  each(reviewed)
     #      br
     #      compare(auditStatus 'eq' 0) 

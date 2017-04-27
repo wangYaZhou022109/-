@@ -53,7 +53,9 @@ exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click del-question-*': 'shut',
-    'click publish-*': 'publish'
+    'click publish-*': 'publish',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
 };
 
 exports.dataForActions = {
@@ -80,6 +82,16 @@ exports.dataForActions = {
     },
     publish: function(payload) {
         return payload;
+    },
+    praise: function(payload) {
+        var data = payload;
+        data.objectType = 3;
+        return payload;
+    },
+    unpraise: function(payload) {
+        var data = payload;
+        data.objectType = 3;
+        return payload;
     }
 };
 
@@ -97,11 +109,19 @@ exports.actionCallbacks = {
     //     // this.module.dispatch('init');
     // },
     shut: function() {
-        this.app.message.success('关闭成功!');
+        this.app.message.success('删除成功!');
         // this.module.dispatch('init');
     },
     publish: function() {
         this.app.message.success('操作成功！');
+        // this.module.dispatch('init');
+    },
+    praise: function() {
+        this.app.message.success('点赞成功！');
+        // this.module.dispatch('init');
+    },
+    unpraise: function() {
+        this.app.message.success('取消点赞成功！');
         // this.module.dispatch('init');
     }
 };

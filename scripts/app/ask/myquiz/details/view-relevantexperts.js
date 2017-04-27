@@ -1,27 +1,11 @@
 
 exports.type = 'dynamic';
-
-exports.events = {
-};
-
-exports.handlers = {
+exports.bindings = {
+    state: false,
+    details: true,
     expert: true
 };
-
-
-exports.bindings = {
-    relevantexperts: true
+exports.events = {
 };
-
-exports.getEntityModuleName = function(key) {
-    return 'ask/' + key;
-};
-exports.getEntity = function() {
-    return {
-        state: this.bindings.relevantexperts.data
-    };
-};
-
-exports.dataForEntityModule = function(entity) {
-    return entity;
+exports.handlers = {
 };

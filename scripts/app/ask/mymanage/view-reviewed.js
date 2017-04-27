@@ -25,8 +25,14 @@ exports.handlers = {
         if (auditType === '4') {
             this.app.viewport.modal(this.module.items['ask/reportaudit'], { id: id });
         }
+        if (auditType === '5') {
+            this.app.viewport.modal(this.module.items['ask/disscusreportaudit'], { id: id });
+        }
         if (auditType === '12') {
             this.app.viewport.modal(this.module.items['ask/shareaudit'], { id: id });
+        }
+        if (auditType === '13') {
+            this.app.viewport.modal(this.module.items['ask/sharereportaudit'], { id: id });
         }
     },
     deal: function(data, e, target) {
