@@ -35,10 +35,11 @@ exports.store = {
                 filterPid: function(pid) {
                     return _.filter(this.data, function(item) { return item.parentId === pid; });
                 },
-                findAllThree: function() {
-                    var me = this;
-                    var pro = function(data) { return me.filterPid(data); };
-                    return _.flatMap(me.filterPid(null), pro);
+                findLevel: function(n) {
+                    var level = n || 1;
+                    return _.filter(this.data, function(item) {
+                        return (item.path.split(',').length - 1) === level;
+                    });
                 }
             }
         },   // 目录
@@ -50,7 +51,8 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search;
-            search.set({ orderType: '0' }, true);
+            search.set({ orderType: '0' });
+            return this.models.menu2.set(this.models.categories.findLevel(3));
         },
         search: function(payload) {
             var search = this.models.search;
@@ -58,8 +60,10 @@ exports.store = {
             return search.changed();
         },
         selectMenu1: function(payload) {
-            var menu2 = this.models.menu2;
-            var categories2 = this.models.categories.filterPid(payload.id);
+            var menu2 = this.models.menu2,
+                categories2;
+            if (payload.id) categories2 = this.models.categories.filterPid(payload.id);
+            else categories2 = this.models.categories.findLevel(3);
             return menu2.set(categories2, true);
         },
         searchKnowledges: function(payload) {
@@ -75,6 +79,6 @@ exports.store = {
     }
 };
 exports.afterRender = function() {
-    this.dispatch('init');
+    return this.dispatch('init');
 };
 
