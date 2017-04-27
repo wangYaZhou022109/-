@@ -61,7 +61,6 @@ exports.store = {
             contents.clear();
             contents.params.moduleHomeConfigId = payload.id;
             contents.params.size = this.models.styleMap.data[style] || 7;
-            contents.params.clientType = payload.clientType || 1;
             contents.clear();
             return this.chain(
                 function() {
@@ -77,7 +76,9 @@ exports.store = {
                         if (courseIds.length > 0) {
                             me.models.course.clear();
                             me.models.course.params.ids = courseIds.join(',');
-                            me.get(me.models.course);
+                            return me.get(me.models.course).then(function() {
+                                return result;
+                            });
                         }
                     }
                     return result;
@@ -90,7 +91,9 @@ exports.store = {
                         if (subjectIds.length > 0) {
                             me.models.subject.clear();
                             me.models.subject.params.ids = subjectIds.join(',');
-                            me.get(me.models.subject);
+                            return me.get(me.models.subject).then(function() {
+                                return result;
+                            });
                         }
                     }
                     return result;
@@ -103,7 +106,9 @@ exports.store = {
                         if (genseeIds.length > 0) {
                             me.models.gensee.clear();
                             me.models.gensee.params.ids = genseeIds.join(',');
-                            me.get(me.models.gensee);
+                            return me.get(me.models.gensee).then(function() {
+                                return result;
+                            });
                         }
                     }
                     return result;
@@ -116,7 +121,9 @@ exports.store = {
                         if (examIds.length > 0) {
                             me.models.exam.clear();
                             me.models.exam.params.ids = examIds.join(',');
-                            me.get(me.models.exam);
+                            return me.get(me.models.exam).then(function() {
+                                return result;
+                            });
                         }
                     }
                     return result;
@@ -129,7 +136,9 @@ exports.store = {
                         if (researchIds.length > 0) {
                             me.models.research.clear();
                             me.models.research.params.ids = researchIds.join(',');
-                            me.get(me.models.research);
+                            return me.get(me.models.research).then(function() {
+                                return result;
+                            });
                         }
                     }
                     return result;
@@ -140,5 +149,5 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    this.dispatch('init', this.renderOptions.moduleHomeConfig);
+    return this.dispatch('init', this.renderOptions.moduleHomeConfig);
 };
