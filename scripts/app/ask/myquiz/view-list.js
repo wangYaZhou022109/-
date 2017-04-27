@@ -210,10 +210,10 @@ exports.dataForTemplate = {
     },
     countNum: function(data) {
         // console.log(data);
-        var questions = data.questions,
+        var page = data.page,
             countNum = 0;
-        if (questions.length > 0) {
-            countNum = questions[0].countNum;
+        if (page.length > 0) {
+            countNum = page[0].countNum;
         }
         return countNum;
     }

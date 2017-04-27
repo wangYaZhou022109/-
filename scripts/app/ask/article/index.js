@@ -102,7 +102,7 @@ exports.afterRender = function() {
 };
 
 
-exports.title = '发表文章';
+exports.title = '写文章';
 
 exports.buttons = [{
     text: '发布',

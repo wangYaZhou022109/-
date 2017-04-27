@@ -23,7 +23,7 @@ view('main')
             .comment-content
                 .user-info.m-top
                     a(href='javascript:;') > echo(details.member.fullName)
-                    span > echo('·提问·')
+                    span > echo('·文章·')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') + each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)

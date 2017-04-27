@@ -23,7 +23,7 @@ view('main')
             .comment-content
                 .user-info.m-top
                     a(href='javascript:;') > echo(details.member.fullName)
-                    span > echo('·提问·')
+                    span > echo('·文章·')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') + each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
@@ -73,21 +73,26 @@ view('main')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section
+        .h4.text-center
+            | 该问题已有
+            b.h2.custom-color-3 > echo(details.concernNum)
+            | 人关注
         compare(details.concernNum 'gt' 0)
             .btn.block.layout-mt-small.big(id='unfollow-question-3_'+ id data-name='id' data-value=details.id) > string('unfollow')
         else
             .btn.block.layout-mt-small.big(id='follow-question-3_'+ id data-name='id' data-value= details.id ) > string('my-follow')
-        compare(details.praNum 'gt' 0)
-            .btn.block.layout-mt-small.big.custom-bg-color-3
-                i.iconfont.icon-favorite(id='unpraise-'+ id data-name='id' data-value= details.id) > echo('已点赞（' + details.praiseNum +'）')
-        else
-            .btn.block.layout-mt-small.big.custom-bg-color-3
-                i.iconfont.icon-favorite(id='praise-'+ id data-name='id' data-value= details.id) > echo('赞（' + details.praiseNum +'）')
+        #  compare(details.praiseNum 'gt' 0)
+        #      .btn.block.layout-mt-small.big.custom-bg-color-3
+        #          i.iconfont.icon-favorite(id='unpraise-'+ id data-name='id' data-value= details.id) > echo('已点赞（' + details.praiseNum +'）')
+        #  else
+        #      .btn.block.layout-mt-small.big.custom-bg-color-3
+        #          i.iconfont.icon-favorite(id='praise-'+ id data-name='id' data-value= details.id) > echo('赞（' + details.praiseNum +'）')
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)
 
 view('relatedquestions')
-    div(data-dynamic-key=relatedquestions.menu)
+    #  div(data-dynamic-key=relatedquestions.menu)
+    .h3 > echo('相关文章')
 
 
 #  module > .course-page
