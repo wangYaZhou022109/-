@@ -16,10 +16,14 @@ exports.store = {
         updateClass: {
             url: '../train/courseSalary'
         },
+        state: {
+            data: {}
+        }
     },
     callbacks: {
         courseSalaryList: function(options) { // 课酬管理
             var courseSalary = this.models.courseSalary;
+            this.models.state.data.classId = options.classId;
             courseSalary.params = { id: options.classId };
             return this.get(courseSalary);
         },
@@ -31,8 +35,11 @@ exports.store = {
         },
         updateClass: function(payload) {
             var updateClass = this.models.updateClass;
+            var courseSalary = this.models.courseSalary;
             updateClass.set(payload);
-            return this.save(updateClass);
+            return this.put(updateClass).then(function() {
+                this.get(courseSalary);
+            });
         },
     }
 };
