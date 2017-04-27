@@ -33,7 +33,7 @@ exports.buttons = [{
     fn: function(data) {
         var params = data;
         params.auditStatus = 2;
-        params.auditType = 12;
+        params.auditType = 4;
         return this.dispatch('out', params);
     }
 }, {
@@ -41,7 +41,7 @@ exports.buttons = [{
     fn: function(data) {
         var params = data;
         params.auditStatus = 1;
-        params.auditType = 12;
+        params.auditType = 4;
         return this.dispatch('pass', params);
     }
 }];

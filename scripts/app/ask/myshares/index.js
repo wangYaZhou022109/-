@@ -21,7 +21,9 @@ exports.store = {
                     return _.find(myshares, ['id', id]);
                 }
             }
-        }
+        },
+        praise: { url: '../ask-bar/my-share/praise' },
+        unpraise: { url: '../ask-bar/my-share/unpraise' }
     },
     callbacks: {
         init: function() {
@@ -29,17 +31,6 @@ exports.store = {
             myshares.set({ id: 1 });
             return this.get(myshares);
         },
-        // follow: function(payload) {
-        //     var follow = this.models.follow;
-        //     follow.set(payload);
-        //     return this.post(follow);
-        // },
-        // unfollow: function(payload) {
-        //     var follow = this.models.unfollow;
-        //     // console.log(payload);
-        //     follow.set(payload);
-        //     return this.put(follow);
-        // },
         page: function() {
             var myshares = this.models.myshares;
             var params = this.models.page.params;
@@ -81,6 +72,35 @@ exports.store = {
             var discuss = this.models.discuss;
             discuss.set(payload);
             return this.save(discuss);
+        },
+        praise: function(payload) {
+            var praise = this.models.praise,
+                me = this,
+                init = this.models.init;
+            praise.set(payload);
+            init.set({ id: this.models.init.data.id, concernType: '3' });
+            return this.post(praise).then(function() {
+                me.app.message.success('点赞成功');
+                me.get(init);
+            });
+            // var praise = this.models.praise;
+            // praise.set(payload);
+            // return this.post(praise);
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this,
+                init = this.models.init;
+            init.set({ id: this.models.init.data.id, objectType: '3' });
+            // console.log(details);
+            unpraise.set({ id: payload.id, objectType: '3' });
+            return this.put(unpraise).then(function() {
+                me.app.message.success('取消成功');
+                me.get(init);
+            });
+            // var unpraise = this.models.unpraise;
+            // unpraise.set(payload);
+            // return this.post(unpraise);
         }
     }
 };

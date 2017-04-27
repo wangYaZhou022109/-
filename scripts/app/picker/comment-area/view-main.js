@@ -8,13 +8,41 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click showReply-*': 'showReply'
+    'click showReply-*': 'showReply',
+    'click accuse-*': 'accuse',
 };
 
 exports.handlers = {
     showReply: function(id) {
         var jqReply = $(this.$('reply-content-' + id));
         jqReply.toggleClass('show');
+    },
+    accuse: function(payload) {
+        var data = payload.split('_');
+        var title = this.bindings.state.data.title;
+        var businessId = this.bindings.state.data.businessId;
+        var sourceType = 0;
+         //  评论业务类型：1:课程,2:专题,3:知识,4:班级
+        var businessType = this.bindings.state.data.businessType;
+        // 举报业务类型 ：1问吧 2知识 3课程 4专题 5班级 6幕课
+        if (businessType === 1) {
+            sourceType = 3;
+        } else if (businessType === 2) {
+            sourceType = 4;
+        } else if (businessType === 3) {
+            sourceType = 2;
+        } else if (businessType === 4) {
+            sourceType = 5;
+        }
+        this.app.viewport.modal(this.module.items['picker/comment-area/accuse'], {
+            id: data[1],
+            objectType: data[0],
+            beUserId: data[2],
+            sourceTitle: title,
+            sourceType: sourceType,
+            content: data[3],
+            sourceId: businessId
+        });
     }
 };
 

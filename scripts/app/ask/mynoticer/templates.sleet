@@ -4,14 +4,14 @@ module
         div(data-region='main')
 view('main') 
     .section.follow
-        .clearfix
+        .clearfixa > a(id = 'follow-me-')
             dl
                 dt > echo(follow.concernNum)
-                dd > a(id = 'follow-me-1') > string('followers') 
+                dd > string('followers') 
             dl
                 dt > echo(follow.answerNum)
-                dd > a(id = 'follow-me-2') > string('answer') 
+                dd > string('answer') 
             dl
                 dt > echo(follow.articleNum)
-                dd > a(id = 'follow-me-3') > string('share') 
+                dd > string('share') 
 

@@ -3,6 +3,7 @@ exports.type = 'dynamic';
 
 exports.bindings = {
     followcount: true,
+    details: true
 };
 
 exports.getEntityModuleName = function(key) {
@@ -21,17 +22,49 @@ exports.dataForEntityModule = function(entity) {
 
 exports.actions = {
     'click follow-expert': 'follow',
-    'click unfollow-expert': 'unfollow'
+    'click unfollow-expert': 'unfollow',
+    'click shut-*': 'shut',
+    'click fire-*': 'fire',
+    'click setEssenceStatus-*': 'setEssenceStatus',
+    'click unEssenceStatus-*': 'unEssenceStatus',
 };
 
 exports.dataForActions = {
     follow: function(payload) {
-        var data = payload;
-        data.concernType = '1';
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
         return data;
     },
     unfollow: function(payload) {
-        return payload;
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
+    },
+    shut: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
+    },
+    fire: function(payload) {
+        var data = payload;
+        data.closeStatus = 0;
+        return data;
+    },
+    setEssenceStatus: function(payload) {
+        var data = payload;
+        data.essenceStatus = 1;
+        return data;
+    },
+    unEssenceStatus: function(payload) {
+        var data = payload;
+        data.essenceStatus = 0;
+        return data;
     }
 };
 

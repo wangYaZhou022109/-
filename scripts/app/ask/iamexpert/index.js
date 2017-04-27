@@ -10,6 +10,7 @@ exports.store = {
     models: {
         expert: { url: '../ask-bar/expert' },
         leftstate: { data: { menu: 'inviteanswer' } },
+        down: { url: '../human/file/download' },
         rightstate: {}
     },
     callbacks: {

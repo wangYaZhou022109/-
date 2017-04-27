@@ -50,11 +50,28 @@
         }
 
         & .domain05 {
+            width: 35%;
+            height: calc(var(--nav-height) + var(--large-space));
+            line-height: calc(var(--nav-height) + var(--large-space));
+            background: #e0ecbb;
+            color: #8fa0bd;
+            margin-right: 5%;
+        }
+
+        & .domain06 {
+            width: 60%;
+            height: calc(var(--nav-height) + var(--large-space));
+            line-height: calc(var(--nav-height) + var(--large-space));
+            background: #dbe3f8;
+            color: #6c7eaf;
+        }
+
+        & .domain07 {
             width: 100%;
             height: calc(var(--space)*4);
             line-height: calc(var(--space)*4);
-            background: #dbe3f8;
-            color: #6c7eaf;
+            background: #e0ecbb;
+            color: #8fa0bd;
         }
     }
 

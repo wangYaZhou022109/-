@@ -1,10 +1,10 @@
-var timeInterval;
+var timeInterval, logId;
 
 exports.bindings = {
     state: false,
     download: false,
-    time: false,
-    attachment: false
+    attachment: false,
+    startProgress: 'startProgress'
 };
 exports.components = [function() {
     var state = this.bindings.state.data;
@@ -38,39 +38,47 @@ exports.dataForTemplate = {
 };
 
 exports.beforeClose = function() {
-    var player = this.components.player,
-        state = this.bindings.state.data,
-        sectionId = state.section.id,
-        localTime = state.localTime || 0,
-        beginTime = this.bindings.time.data,
-        studyTime = player.getLearnTime() + localTime,
-        totalTime = player.duration(),
-        lessonLocation = player.currentTime(),
-        callback = this.module.renderOptions.callback;
     clearInterval(timeInterval);
-    this.module.dispatch('updateProgress', {
-        beginTime: beginTime,
-        studyTime: Math.floor(studyTime),
-        resourceTotalTime: Math.floor(totalTime),
-        lessonLocation: Math.floor(lessonLocation),
-        clientType: 0,
-        sectionId: sectionId
-    }).then(function(data) { callback(data); });
+    this.commitProgress();
 };
 
 exports.afterRender = function() {
-    // 每分钟保存进度, lessonLocation,studyTime,sectionId
-    var player = this.components.player,
-        sectionId = this.bindings.state.data.section.id,
-        me = this;
-    var process = function() {
-        return {
-            lessonLocation: player.currentTime(),
-            studyTime: player.getLearnTime(),
-            sectionId: sectionId
-        };
-    };
+    var me = this;
     timeInterval = setInterval(function() {
-        me.module.dispatch('storeProcess', process());
-    }, 1000 * 10);
+        var flag = me.commitProgress();
+        if (flag) me.module.dispatch('startProgress');
+    }, 1000 * 60);
+
+    window.onunload = function() {
+        me.commitProgress();
+    };
+    return this.module.dispatch('startProgress');
+};
+exports.video = {
+    ended: function() {
+        var flag = this.commitProgress();
+        if (flag) this.module.dispatch('startProgress');
+    }
+};
+
+exports.mixin = {
+    commitProgress: function() {
+        var player = this.components.player;
+        var time = player.getLearnTime();
+        var process = {
+            logId: logId,
+            lessonLocation: Math.floor(player.currentTime()),
+            studyTime: player.getLearnTime(),
+            resourceTotalTime: Math.floor(player.duration()),
+        };
+        if (time < 1) return false;
+        return this.chain([
+            this.module.dispatch('updateProgress', process),
+            function() { player.resetLearnTime(); }
+        ]);
+    }
+};
+
+exports.startProgress = function() {
+    logId = this.bindings.startProgress.data.id;
 };

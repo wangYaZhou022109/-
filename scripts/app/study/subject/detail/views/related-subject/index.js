@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     pannel: 'pannel'
 };
@@ -10,21 +11,24 @@ exports.store = {
             url: '../human/file/download'
         },
         courseRelated: {
-            url: '../course-study/course-front/related',
+            url: '../course-study/course-info/related',
             type: 'pageable',
-            pageSize: 2,
+            pageSize: 4,
             root: 'items'
         }
     },
     callbacks: {
         init: function(options) {
+            var businessTopics = options.subject.businessTopics;
             this.models.region.set(options.region);
             this.models.subject.set(options.subject);
-            if (options.subject.id) {
-                this.models.courseRelated.params.id = options.subject.id;
-                return this.get(this.models.courseRelated);
+            if (businessTopics && businessTopics.length > 0) {
+                this.models.courseRelated.params = {
+                    topicIds: _.map(businessTopics, 'topicId').join(','),
+                    businessType: 2
+                };
+                this.get(this.models.courseRelated);
             }
-            return this.models.courseRelated;
         },
         turnPage: function() {
             var pageInfo = this.models.courseRelated.getPageInfo();

@@ -9,7 +9,7 @@ D.ComponentManager.register('uploader', function(view, el, options) {
         opt = D.assign({}, {
             url: url,
             runtimes: 'html5,flash',
-            chunk_size: '1mb',
+            chunk_size: '1024mb',
             rename: true,
             dragdrop: false,
             filters: {
@@ -30,7 +30,7 @@ D.ComponentManager.register('uploader', function(view, el, options) {
                 FileFiltered: function(uploader, file) {
                     if (file.name.length > 100) {
                         uploader.removeFile(file);
-                        view.app.message.error('文件名过长');
+                        view.app.message.error('文件名称不能超过100个字符长度');
                     }
                 },
                 FileUploaded: function(loader, file, result) {

@@ -13,3 +13,6 @@ exports.handlers = {
         this.app.viewport.modal(model);
     }
 };
+
+exports.dataForTemplate = {
+};

@@ -5,6 +5,7 @@ exports.routes = {
     'share/:id/:type': 'showShare', // 分享跳转
     'message/detail/:id': 'showMessageDetail',
     'center/demand': 'showDmand',
+    'center/responsecenter': 'showResponsecenter',
     'center/class-service': 'classService',
     'center/managements': 'showManagements',
     'center/managements/statistics': 'showStatistics',
@@ -20,13 +21,13 @@ exports.showHome = function() {
 exports.previewHome = function(configId) {
     document.cookie = 'orgId=';
     document.cookie = 'configId=' + configId;
-    return this.app.show('content', 'home/default', { configId: configId });
+    return this.app.show('content', 'home/default', { configId: configId, forceRender: true });
 };
 
 exports.changeHome = function(orgId) {
     document.cookie = 'configId=';
     document.cookie = 'orgId=' + orgId;
-    return this.app.show('content', 'home/default', { orgId: orgId });
+    return this.app.show('content', 'home/default', { orgId: orgId, forceRender: true });
 };
 
 exports.showMessageDetail = function(id) {
@@ -66,6 +67,9 @@ exports.showShare = function(id, type) {
 };
 exports.showDmand = function() {
     return this.app.show('content', 'center/demand');
+};
+exports.showResponsecenter = function() {
+    return this.app.show('content', 'center/responsecenter');
 };
 exports.classService = function() {
     return this.app.show('content', 'center/class-service');

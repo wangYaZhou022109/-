@@ -4,7 +4,8 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
-    page: true
+    page: true,
+    down: false
 };
 
 exports.events = {
@@ -166,11 +167,11 @@ exports.actionCallbacks = {
     },
     follow: function() {
         this.app.message.success('关注成功！');
-        this.module.dispatch('init');
+       // this.module.dispatch('init');
     },
     unfollow: function() {
         this.app.message.success('取消成功！');
-        this.module.dispatch('init');
+       // this.module.dispatch('init');
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
@@ -205,6 +206,8 @@ exports.dataForTemplate = {
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
+            var url = obj.createUser.headPortrait;
+            obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {

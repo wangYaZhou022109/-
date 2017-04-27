@@ -25,7 +25,7 @@ view('main')
                 h4.text-overflow 梦想常有
                 .info 36关注 ｜ 1专家 ｜ 2问题
     .hr
-    .checkbox > input(type='checkbox') + label 显示待审核
+    .checkbox-slider > input(type='checkbox') + label#showRead + span 显示待审核
     ul.manage-list
         li
             .clearfix

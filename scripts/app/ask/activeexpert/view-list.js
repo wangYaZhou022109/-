@@ -1,7 +1,9 @@
 var $ = require('jquery');
+var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    expert: true
+    expert: true,
+    down: false
 };
 
 exports.events = {
@@ -20,4 +22,14 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
+    expert: function(data) {
+        var expert = data.expert;
+        var me = this;
+        _.forEach(expert, function(value) {
+            var obj = value,
+                url = obj.member.headPortrait;
+            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+        });
+        return expert;
+    }
 };
