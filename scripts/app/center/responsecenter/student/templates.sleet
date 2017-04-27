@@ -4,4 +4,81 @@ module > .student-page
     .student(data-region="student")
 
 view('student')
-    .aaa aaa
+    .filter-row
+        .filter-item
+            label 姓名
+            input
+        .filter-item
+            label 单位
+            select.tag-select
+                option 陕西省分公司
+                option 山东省分公司
+        .filter-item
+            label 状态
+            select.tag-select
+                option 待审核
+                option 已通过
+        .filter-item
+            span |
+            .btn 查询
+    table.table.layout-mt-small
+        tr
+            th 序号
+            th 姓名
+            th 账号
+            th 机构
+            th 部门
+            th 职务
+            th 手机
+            th 邮箱
+            th 状态
+        tr
+            td -
+            td 学院名称
+            td 123
+            td 机构名称
+            td 部门名称
+            td 职务名称
+            td 1234567890
+            td 12345@qq.com
+            td 待审核
+        tr
+            td -
+            td 学院名称
+            td 123
+            td 机构名称
+            td 部门名称
+            td 职务名称
+            td 1234567890
+            td 12345@qq.com
+            td 待审核
+        tr
+            td -
+            td 学院名称
+            td 123
+            td 机构名称
+            td 部门名称
+            td 职务名称
+            td 1234567890
+            td 12345@qq.com
+            td 待审核
+        tr
+            td -
+            td 学院名称
+            td 123
+            td 机构名称
+            td 部门名称
+            td 职务名称
+            td 1234567890
+            td 12345@qq.com
+            td 待审核
+        tr
+            td -
+            td 学院名称
+            td 123
+            td 机构名称
+            td 部门名称
+            td 职务名称
+            td 1234567890
+            td 12345@qq.com
+            td 待审核

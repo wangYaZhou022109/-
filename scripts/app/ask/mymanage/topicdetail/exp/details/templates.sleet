@@ -72,13 +72,20 @@ view('main')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .m-bottom
-        compare(question.concernList.length 'gt' 0)
-            .btn.block.layout-mt-small.big(id='unfollow-question' data-name='id' data-value=expert.member.id) > string('unfollow')
+        compare(details.concernNum 'gt' 0)
+            .btn.block.layout-mt-small.big(id='unfollow-3_' + id data-name='id' data-value='3_' + details.id ) > string('unfollow')
         else
-            .btn.block.layout-mt-small.big(id='follow-question' data-name='id' data-value=expert.member.id) > string('my-follow')
-    #  div(data-dynamic-key=followcount.menu)  
-    .btn.m-right > echo('关闭问题')
-    .btn.custom-bg-color-3 > echo('设为精品')
+            .btn.block.layout-mt-small.big(id='follow-3_' + id data-name='id' data-value='3_' + details.id) > string('my-follow')
+    #  div(data-dynamic-key=followcount.menu
+    compare(details.closeStatus 'gt'0)  
+        .btn.m-right(id='shut-' + id data-name='id' data-value=details.id) > echo('关闭问题')
+        
+    else
+        .btn.m-right(id='fire-' + id data-name='id' data-value=details.id)> echo('激活问题')
+    compare(details.essenceStatus 'gt' 0)
+        .btn.custom-bg-color-3(id='setEssenceStatus-' + id data-name='id' data-value=details.id) > echo('设为精品')
+    else
+        .btn.custom-bg-color-3(id='unEssenceStatus-' + id data-name='id' data-value=details.id) > echo('取消加精')
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)
 

@@ -1,6 +1,7 @@
 exports.items = {
-    student: 'student',
-    'center/responsecenter/student': { isModule: true }
+    student: 'student'
 };
 
 exports.title = '班级成员';
+
+exports.large = true;

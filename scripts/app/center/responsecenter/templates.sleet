@@ -42,11 +42,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a#student-1 学员
+                    a#student-57 学员
                     span |
-                    a 单位
+                    a#unit-57 单位
                     span |
-                    a 问卷
+                    a#askpaper-57 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -56,11 +56,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-57 学员
                     span |
-                    a 单位
+                    a#unit-57 单位
                     span |
-                    a 问卷
+                    a#askpaper-57 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -70,11 +70,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-57 学员
                     span |
-                    a 单位
+                    a#unit-57 单位
                     span |
-                    a 问卷
+                    a#askpaper-57 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -84,11 +84,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-57 学员
                     span |
-                    a 单位
+                    a#unit-57 单位
                     span |
-                    a 问卷
+                    a#askpaper-57 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -98,11 +98,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-57 学员
                     span |
-                    a 单位
+                    a#unit-57 单位
                     span |
-                    a 问卷
+                    a#askpaper-57 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -112,11 +112,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-7 学员
                     span |
-                    a 单位
+                    a#unit-7 单位
                     span |
-                    a 问卷
+                    a#askpaper-7 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -126,11 +126,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-7 学员
                     span |
-                    a 单位
+                    a#unit-7 单位
                     span |
-                    a 问卷
+                    a#askpaper-7 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -140,11 +140,11 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-8 学员
                     span |
-                    a 单位
+                    a#unit-8 单位
                     span |
-                    a 问卷
+                    a#askpaper-8 问卷
             tr
                 td 09314110102
                 td 培训班名称
@@ -154,53 +154,12 @@ view('responsecenter-table')
                 td 陈柱端
                 td 1234567890
                 td
-                    a 学员
+                    a#student-9 学员
                     span |
-                    a 单位
+                    a#unit-9 单位
                     span |
-                    a 问卷
-            tr
-                td 09314110102
-                td 培训班名称
-                td 25
-                td 44
-                td 主办单位名称
-                td 陈柱端
-                td 1234567890
-                td
-                    a 学员
-                    span |
-                    a 单位
-                    span |
-                    a 问卷
-            tr
-                td 09314110102
-                td 培训班名称
-                td 25
-                td 44
-                td 主办单位名称
-                td 陈柱端
-                td 1234567890
-                td
-                    a 学员
-                    span |
-                    a 单位
-                    span |
-                    a 问卷
-            tr
-                td 09314110102
-                td 培训班名称
-                td 25
-                td 44
-                td 主办单位名称
-                td 陈柱端
-                td 1234567890
-                td
-                    a 学员
-                    span |
-                    a 单位
-                    span |
-                    a 问卷
+                    a#askpaper-9 问卷
+
 
 
 
