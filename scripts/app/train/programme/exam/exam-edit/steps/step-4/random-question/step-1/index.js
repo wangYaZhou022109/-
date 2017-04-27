@@ -14,7 +14,7 @@ exports.items = {
 exports.store = {
     models: {
         table: { data: {} },
-        questionDepots: { url: '../exam/question-category/detail' },
+        questionDepots: { url: '../exam/question-depot/detail' },
         currentOrgId: { data: '' },
         currentTactic: { data: {} },
         tableParams: { data: {} }

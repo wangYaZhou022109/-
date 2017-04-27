@@ -1,17 +1,17 @@
 #!handlebars
 module
-    .random-question-main.row.m-top
-        .col-sm-2.side-tree-content > .side-tree.setting-amount
+    div
+        div(style='width: 20%;float: left;')
             div(data-region='left1')
-        .col-sm-2.side-tree-content > .side-tree.setting-amount
+        div(style='width: 20%;float: left;')
             div(data-region='left2')
-        .col-sm-8
+        div(style='width: 60%;float: left;')
             div(data-region='right')
 
 
 view('dq-table') > form.vertical
     .list.border.around.add-random-question-list.add-random.select
-        .total > echo('共' table.total.amount '题' table.total.score '分')
+        .total.text-right > echo('共' table.total.amount '题' table.total.score '分')
         ul > each(table.rows)
             li.clearfix.border.border-top
                 .com-title > echo(typeName)
@@ -44,7 +44,7 @@ view('dq-table') > form.vertical
                                 span.iconbtn(id='remove-tactic-' + id + '|3') > .pe-7s-close
                             span.iconbtn.btn.small(id='edit-popup-' + id + '|3') +
 
-        div(id='setting-popup')(class='setting-popup show')&if(currentTactic.id)(class='setting-popup')&unLess(currentTactic.id)
+        div(id='setting-popup')(class='setting-popup show')&if(currentTactic.id)(style='display: none;')&unLess(currentTactic.id)
             label.clearfix
                 .pull-left 数量
                 .text-right.text-tips > echo('共' currentTactic.totalAmount '题可用')

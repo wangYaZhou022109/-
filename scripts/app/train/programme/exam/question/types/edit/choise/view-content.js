@@ -1,7 +1,7 @@
 var maps = require('./app/util/maps'),
     _ = require('lodash/collection');
 
-exports.type = 'form';
+// exports.type = 'form';
 
 exports.bindings = {
     img: true,

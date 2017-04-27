@@ -24,7 +24,7 @@ exports.components = [function() {
         id: 'owner',
         name: 'picker',
         options: {
-            module: 'train/programme/question-depot',
+            module: 'exam/question-depot',
             picker: 'owner',
             required: true,
             data: {
@@ -34,12 +34,6 @@ exports.components = [function() {
         }
     };
     return obj;
-}, {
-    id: 'type',
-    name: 'selectize'
-}, {
-    id: 'level',
-    name: 'selectize'
 }, function() {
     return {
         id: 'question-depot',

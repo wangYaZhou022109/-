@@ -1,7 +1,10 @@
 var _ = require('lodash/collection'),
     $ = require('jquery'),
-    validator = require('./app/train/programme/research-activity/validators'),
-    OPTION_SCORE = 1;
+    validator = require('./app/ext/views/form/validators'),
+    OPTION_SCORE = 1,
+    trim = function(str) {
+        return str.replace(/^\s+|\s+$/g, '');
+    };
 
 exports.type = 'dynamic';
 
@@ -42,7 +45,7 @@ exports.getEntity = function(id) {
 };
 
 exports.getEntityModuleName = function() {
-    return 'train/programme/research-activity/question/senior-editor';
+    return 'train/programme/exam/question/senior-editor';
 };
 
 exports.dataForEntityModule = function(data) {
@@ -68,6 +71,10 @@ exports.mixin = {
             this.app.message.error('存在选项数据填写不完整');
             return false;
         }
+        if (this.checkMaxLengthOption()) {
+            this.app.message.error('存在选项内容最大长度为：5000');
+            return false;
+        }
         return true;
     },
     getResult: function(options) {
@@ -88,7 +95,7 @@ exports.mixin = {
                     value: value,
                     name: i,
                     type: state.multiple ? 2 : 1,
-                    score: state.mode === OPTION_SCORE ? $(this.$('score-' + i)).val() : 0
+                    score: state.mode === OPTION_SCORE ? ($(this.$('score-' + i)).val() * 100) : 0
                 });
             }
         }
@@ -143,17 +150,67 @@ exports.mixin = {
         }
         return isEmpty;
     },
+    checkMaxLengthOption: function() {
+        var options = this.bindings.state.data.options,
+            i = 0,
+            contentEl,
+            isGtMaxLength = false,
+            maxLength = 3000;
+
+        if (options) {
+            for (i; i < options.length; i++) {
+                contentEl = this.$('content-' + i);
+                if (contentEl.value.length > maxLength) {
+                    isGtMaxLength = true;
+                    $(contentEl).addClass('error');
+                } else {
+                    $(contentEl).removeClass('error');
+                }
+            }
+        }
+        return isGtMaxLength;
+    },
     checkScore: function(value) {
         if (!validator.number.fn(value)) {
             this.app.message.error('分数' + validator.number.message);
             return false;
         }
 
-        if (!validator.interval.fn(value, 0, 1, 10, 0)) {
-            this.app.message.error('分数范围0~10分');
+        if (!this.interval.fn(value, 0, 1, 9999999.99, 0)) {
+            this.app.message.error('分数范围为0-9999999.99');
+            return false;
+        }
+
+        if (!this.keepDecimal.fn(value, 2)) {
+            this.app.message.error('分数最多保留两位小数');
             return false;
         }
 
         return true;
+    },
+    interval: {
+        fn: function(value, min, minInclude, max, maxInclude) {
+            var v;
+            if (!value) return true;
+            v = Number(value);
+            if (minInclude === '1' && maxInclude === '1') return v >= min && v <= max;
+            if (minInclude === '1' && maxInclude !== '1') return v >= min && v < max;
+            if (minInclude !== '1' && maxInclude === '1') return v > min && v <= max;
+            if (minInclude !== '1' && maxInclude !== '1') return v > min && v < max;
+            return true;
+        },
+        length: 4,
+        message: '必须在 {0} ~ {2} 之间'
+    },
+    keepDecimal: {
+        fn: function(value, n) {
+            var v;
+            if (trim(value) === '') return true;
+            v = value.toString().split('.');
+            if (v.length > 1) return v[1].length <= n;
+            return true;
+        },
+        length: 1,
+        message: '超出保留小数位'
     }
 };

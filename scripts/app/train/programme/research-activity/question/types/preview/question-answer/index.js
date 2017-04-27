@@ -21,6 +21,8 @@ exports.store = {
             data.answer = question.questionAttrs[0].value;
             data.score = question.score;
             data.type = types[Number(question.type) - 1].value;
+            data.id = question.id;
+            data.index = question.index;
             if (question.difficulty) {
                 data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             }

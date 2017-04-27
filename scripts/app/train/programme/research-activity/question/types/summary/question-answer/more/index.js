@@ -2,6 +2,8 @@ exports.items = {
     main: 'main'
 };
 
+exports.title = '查看答题明细';
+
 exports.large = true;
 
 exports.store = {

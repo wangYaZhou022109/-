@@ -1,6 +1,6 @@
 var $ = require('jquery'),
     getProperties;
-exports.type = 'form';
+// exports.type = 'form';
 exports.bindings = {
     table: true,
     currentTactic: true

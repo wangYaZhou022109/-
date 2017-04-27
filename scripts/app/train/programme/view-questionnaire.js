@@ -23,6 +23,7 @@ exports.handlers = {
         var model = this.module.items['train/programme/select-research-activity'],
             me = this;
         me.app.viewport.modal(model, {
+            sourceType: 2,
             callback: function(data) {
                 var param = {
                     type: 2,
@@ -40,6 +41,7 @@ exports.handlers = {
         var model = this.module.items['train/programme/evaluate-questionary/select-evaluate-questionary'],
             me = this;
         me.app.viewport.modal(model, {
+            sourceType: 2,
             callback: function(data) {
                 var param = {
                     type: 3,
@@ -57,6 +59,7 @@ exports.handlers = {
         var model = this.module.items['train/programme/exam/other-module-exam'],
             me = this;
         me.app.viewport.modal(model, {
+            sourceType: 2,
             callback: function(data) {
                 var param = {
                     type: 3,

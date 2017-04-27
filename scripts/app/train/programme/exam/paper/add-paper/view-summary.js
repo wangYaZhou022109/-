@@ -4,7 +4,7 @@ var _ = require('lodash/collection'),
         { id: 2, type: 2, name: '多选' },
         { id: 3, type: 3, name: '判断' },
         { id: 4, type: 8, name: '排序' },
-        { id: 5, type: 7, name: '连线' },
+        // { id: 5, type: 7, name: '连线' },
         { id: 6, type: 4, name: '填空' },
         { id: 7, type: 5, name: '问答' },
         { id: 8, type: 6, name: '阅读理解' }

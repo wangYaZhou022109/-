@@ -1,4 +1,5 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    _ = require('lodash/collection');
 
 exports.items = {
     content: 'content',
@@ -33,10 +34,13 @@ exports.store = {
                 if (!data.options) {
                     D.assign(data, question);
                     data.options = [];
+                    // questionAttrs 需要按照name排序，防止选项被打乱
+                    questionAttrs = _.sortBy(questionAttrs, 'name');
                     for (i = 0; i < questionAttrs.length; i++) {
                         isRichText = this.models.state.isRichText(questionAttrs[i].value);
                         data.options.push({
                             content: questionAttrs[i].value,
+                            score: questionAttrs[i].score || 0,
                             isRichText: isRichText
                         });
                     }
@@ -99,8 +103,7 @@ exports.mixin = {
         return view.getResult(options);
     },
     isValidate: function() {
-        var validate = this.items.content.validate();
-        return validate;
+        return this.items.content.validate();
     },
     clear: function() {
         this.renderOptions = {};

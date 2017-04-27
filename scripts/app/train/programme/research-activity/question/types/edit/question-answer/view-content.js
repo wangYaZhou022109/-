@@ -1,6 +1,7 @@
 var $ = require('jquery'),
     markers = require('./app/ext/views/form/markers'),
     validators = require('./app/ext/views/form/validators');
+// exports.type = 'form';
 
 exports.bindings = {
     img: true,

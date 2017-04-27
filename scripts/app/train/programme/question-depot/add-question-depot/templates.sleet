@@ -6,22 +6,27 @@ module
 view('main') > form.vertical
     label > setting('exam.question-depot.parent-name')
     #question-depot
-
+    br
     label(class='required') > setting('exam.question-depot.name')
-    input.input(name='name' value=questionDepot.name x-rule='required,maxLength:10')
+    br
+    input.input#name(name='name' value=questionDepot.name x-rule='required,maxLength:10')
     input.input(type='hidden' name='id' value=questionDepot.id)
     input.input(type='hidden' name='organizationId' value=questionDepot.organizationId)
-
+    br
+    br
     label(class='required') > setting('exam.question-depot.code')
-    input.input(name='code' value=questionDepot.code x-rule='required,maxLength:20')
-
+    br
+    input.input#code(name='code' value=questionDepot.code x-rule='required,maxLength:20')
+    br
+    br
     label > setting('course.course.category.category-state')
     #state.radix(x-target='state' x-marker='radiox' value=questionDepot.state)
         input.inline-block(type='radio' name='state' value='1' id='state-1')('checked')&if(checked)
         .inline-block > label.no-margin(for='radio-y') 活动
         input.inline-block.m-left(type='radio' name='state' value='0' id='state-0')('checked')&unless(checked)
         .inline-block > label.no-margin(for='radio-n') 禁用
-
+    br
+    br
     label > setting('exam.share.range')
     #auto-to-lower.radix(x-target='auto-to-lower' x-marker='radiox' value=questionDepot.authToLower)
         input.inline-block(type='radio' name='authToLower' value='1' id='authToLower-1')('checked')&if(authToLower)

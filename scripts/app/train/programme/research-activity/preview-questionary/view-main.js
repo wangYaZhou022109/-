@@ -32,15 +32,23 @@ exports.dataForTemplate = {
     },
     isMutiple: function(data) {
         return data.research.answerPaperRule === 1;
+    },
+    hasQuestion: function(data) {
+        if (data.state.currentQuestion) return true;
+        return false;
     }
 };
-
 exports.getEntity = function(id) {
-    var question = this.module.store.models.questions.getQuestionById(id);
-    question = D.assign(question, {
-        questionAttrs: _.orderBy(question.questionAttrs, ['name'], ['asc'])
+    var question = this.module.store.models.questions.getQuestionById(id) || {},
+        newQuestion = JSON.parse(JSON.stringify(question)); // clone一份，不改变对象值
+    newQuestion = D.assign({}, newQuestion, {
+        questionAttrs: _.orderBy(_.map(newQuestion.questionAttrs, function(qr) {
+            if (qr.score) return D.assign(qr, { score: qr.score / 100 });
+            return qr;
+        }), ['name'], ['asc']),
+        score: newQuestion.score / 100
     });
-    return question;
+    return newQuestion;
 };
 
 exports.getEntityModuleName = function(id, question) {
@@ -51,7 +59,7 @@ exports.dataForEntityModule = function(question) {
     return {
         data: question,
         multiple: question.type === MUTIPLE_CHOOSE_TYPE,
-        mode: this.module.renderOptions.hideScore ? 0 : 1
+        mode: this.module.store.models.research.data.type < 3 ? 0 : 1 // 调研不需要分数
     };
 };
 

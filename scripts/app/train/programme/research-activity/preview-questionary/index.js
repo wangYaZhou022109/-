@@ -12,7 +12,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        research: {},
+        research: { url: '../exam/research-activity' },
         questions: {
             mixin: {
                 init: function(dimensions) {
@@ -33,15 +33,16 @@ exports.store = {
             mixin: {
                 init: function(research) {
                     this.data = _.map(research.dimensions, function(d, dindex) {
+                        var qs = d.questions || [];
                         return D.assign(d, {
-                            questions: _.map(d.questions, function(q, i) {
+                            questions: _.map(qs, function(q, i) {
                                 return D.assign(q, {
                                     index: i + 1,
                                     dimensionIndex: dindex + 1,
                                     statuss: dindex === 0 && i === 0 ? 'current' : 'init'
                                 });
                             }),
-                            questionSize: d.questions.length
+                            questionSize: qs.length
                         });
                     });
                 },
@@ -80,10 +81,14 @@ exports.store = {
                 init: function() {
                     var dimensions = this.module.store.models.dimensions,
                         currentDimension = dimensions.getFirstDimension();
-                    this.data = {
-                        currentDimension: currentDimension,
-                        currentQuestion: currentDimension.questions[0]
-                    };
+                    if (currentDimension) {
+                        this.data = {
+                            currentDimension: currentDimension,
+                            currentQuestion: currentDimension.questions[0]
+                        };
+                    } else {
+                        this.data = {};
+                    }
                 },
                 selectQuestion: function(question) {
                     var dimensions = this.module.store.models.dimensions;
@@ -97,12 +102,24 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
+            var me = this;
+            if (payload.researchId) {
+                this.models.research.set({
+                    id: payload.researchId
+                });
+                return this.get(this.models.research).then(function() {
+                    me.models.dimensions.init(me.models.research.data);
+                    me.models.questions.init(me.models.dimensions.data);
+                    me.models.state.init();
+                });
+            }
             if (payload.research) {
                 this.models.research.set(payload.research || {});
                 this.models.dimensions.init(payload.research);
                 this.models.questions.init(this.models.dimensions.data);
                 this.models.state.init();
             }
+            return true;
         },
         selectQuestion: function(payload) {
             this.models.state.selectQuestion(this.models.questions.getQuestionById(payload.id));

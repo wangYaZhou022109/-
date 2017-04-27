@@ -29,20 +29,20 @@ view('options')
                         @echo(content)
                         input(type='hidden' id='content-' + index value=content)
                 else
-                    textarea.input.block(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3) > echo(content)
-            .clearfix.set-row
-                .pull-left
+                    textarea(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3 cols='100%') > echo(content)
+            div(style='margin-top: -1px;position: relative;padding: 5px 10px;border: 1px solid transparent;overflow: hidden;')
+                div(style='float: left;')
                     span.set-answer(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected'))
                         span.tick > .pe-7s-check
                         echo('设为答案')
-                .pull-right.text-tips
+                div(style='float: right;')
                     span(data-dynamic-key=index)
                     a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
-
+ 
 
 view('score')
     if(showScore)
         .row
             .col-sm-6
                 label(class='required') 试题分数
-                input.input(id='score' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')
+                input.input(id='score' width='40%' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值,可保留一位小数')

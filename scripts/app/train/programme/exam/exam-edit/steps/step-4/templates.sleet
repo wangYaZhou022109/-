@@ -9,7 +9,7 @@ view('main')
         .div(style='width: 60%;float: left;margin: 10px;') > label
             .btn#add-temp-paper > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('临时组卷')
             .btn#add-tactic > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('随机组卷')
-            input.input(type='hidden' name='paperClassId' value=paperClass.id x-rule='required' x-marker='show-error' x-message='请选择试卷')
+            input.input#paperClassId(type='hidden' name='paperClassId' value=paperClass.id x-rule='required' x-marker='show-error' x-message='请选择试卷')
         .div(style='width: 3%;float: right;margin: 10px;') > .btn#preview-paper 预览
         .div(style='width: 30%;float: right;margin: 10px;')
             .m-right > select.input#paperSortRule(name='paperSortRule' style='width: 70%;height: 40px;')

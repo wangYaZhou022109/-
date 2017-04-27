@@ -10,7 +10,9 @@ var maps = require('./app/util/maps'),
         { id: 6, type: 4, name: '填空' },
         { id: 7, type: 5, name: '问答' },
         { id: 8, type: 6, name: '阅读理解' }
-    ];
+    ],
+    $ = require('jquery'),
+    markers = require('./app/ext/views/form/markers');
 
 // exports.type = 'form';
 
@@ -38,7 +40,7 @@ exports.handlers = {
             id: paperClassId,
             type: 2,
             callback: function(id) {
-                that.app.viewport.closeGround();
+                that.app.viewport.closeModal();
                 that.module.dispatch('selectPaperId', id);
             }
         });
@@ -48,7 +50,7 @@ exports.handlers = {
             that = this;
         this.app.viewport.modal(view, {
             callback: function(data) {
-                that.app.viewport.closePopup();
+                that.app.viewport.closeModal();
                 that.module.dispatch('selectPaper', data);
             }
         });
@@ -160,6 +162,20 @@ exports.dataForTemplate = {
     }
 };
 
+exports.mixin = {
+    validate: function() {
+        var name = $(this.$('paperClassId')),
+            flag = true;
+
+        markers.text.valid(name);
+
+        if (name.val().trim() === '' || name.val().trim() === null) {
+            flag = false;
+        }
+
+        return flag;
+    }
+};
 
 // exports.components = [{
 //     id: 'paperSortRule',

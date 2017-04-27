@@ -1,8 +1,8 @@
 var D = require('drizzlejs'),
-    strings = require('./app/util/strings'),
+    // strings = require('./app/util/strings'),
     titleType = {
-        add: strings.get('exam.question-depot.add'),
-        edit: strings.get('exam.question-depot.edit')
+        add: '新增题库',
+        edit: '修改题库'
     };
 
 exports.items = {
@@ -37,13 +37,16 @@ exports.store = {
         },
         saveQuestionDepot: function(payload) {
             var me = this;
-            this.models.questionDepot.set(D.assign(payload, {
-                organizationId: this.models.state.data.organizationId || ''
-            }));
-            return this.save(this.models.questionDepot).then(function() {
-                me.module.renderOptions.callback();
-                me.app.message.success('保存成功');
-            });
+            if (payload.validate) {
+                this.models.questionDepot.set(D.assign(payload, {
+                    organizationId: this.models.state.data.organizationId || ''
+                }));
+                return this.save(this.models.questionDepot).then(function() {
+                    me.module.renderOptions.callback();
+                    me.app.message.success('保存成功');
+                });
+            }
+            return false;
         }
     }
 };
@@ -55,7 +58,7 @@ exports.beforeRender = function() {
 exports.buttons = [{
     text: '保存',
     fn: function(payload) {
-        return this.dispatch('saveQuestionDepot', payload);
+        return this.dispatch('saveQuestionDepot', D.assign(payload, { validate: this.items.main.validate() }));
     }
 }];
 

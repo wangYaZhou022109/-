@@ -34,7 +34,7 @@ exports.handlers = {
         });
     },
     selectTeacher: function(data) {
-        var view = this.module.items['picker/select-member'],
+        var view = this.module.items['train/programme/select-member'],
             state = this.bindings.state.data,
             me = this,
             getIds = function() {
@@ -77,6 +77,7 @@ exports.handlers = {
             };
         this.app.viewport.modal(view, {
             ids: getIds(),
+            uri: 'course-study/course-info',
             callback: callback
         });
     },
