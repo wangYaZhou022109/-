@@ -34,7 +34,7 @@ view('main')
                                             a(href=downUrl download=attachName) 下载
                                             a(id='del-attach-'+id data-name='id' data-value=id) 删除
                             .m-top
-                                a.btn.circle-radius.gray#chooseFile 选择文件
+                                a.btn.circle-radius.gray#chooseFile 浏览
                                 p 注：请上传相关证明材料，如考试结果、小组汇报ppt、学员学习心得作业汇总等
                     .form-row
                         label.label.required 考核结果：

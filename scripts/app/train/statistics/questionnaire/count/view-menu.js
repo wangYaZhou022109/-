@@ -79,5 +79,26 @@ exports.dataForTemplate = {
             return urlZ;
         }
         return null;
+    },
+    isManage: function() {
+        var state = this.bindings.state;
+        if (state.data.tab === 'manage') {
+            return true;
+        }
+        return false;
+    },
+    isFmtrainee: function() {
+        var state = this.bindings.state;
+        if (state.data.tab === 'fmtrainee') {
+            return true;
+        }
+        return false;
+    },
+    isClassstaff: function() {
+        var state = this.bindings.state;
+        if (state.data.tab === 'classstaff') {
+            return true;
+        }
+        return false;
     }
 };

@@ -2,8 +2,8 @@
 
 module > .achievement-content.main-side
     .achievement-head(data-region='head')
-    .page-main-wrapper
-        .div(data-region='menu')
+    section.section
+        .tabs.line(data-region='menu')
     .page-main-wrapper
         .div(data-region='list')
 
@@ -12,13 +12,11 @@ view('head')
         .pull-left.title > echo(cla.className + '-学员满意度问卷统计结果')
     
 view('menu')
-    .tabs.line.mb-1 > ul
-        li > a(id='menu-news')(class ='active') 客观题统计情况
-        li > a(id='menu-exp')(class ='active') 主观题统计情况
-        li > a(id='menu-reply')(class ='active') 跨班总统计
-        li > echo('总体满意率' + result.zong + '%')
-        li > echo('课程满意率' + result.ke + '%')
-        li > echo('满意率' + result.ping + '%')
+    ul
+        li#menu-news(class = if(isManage 'active')) > echo('客观题统计情况')
+        li#menu-exp(class = if(isFmtrainee 'active')) > echo('主观题统计情况')
+        li#menu-reply(class = if(isClassstaff 'active')) > echo('跨班总统计')
+        span > echo('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总体满意率' + result.zong + '%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;课程满意率' + result.ke + '%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;满意率' + result.ping + '%')
         .pull-right
             a.btn.circle-radius.gray(href=exportUrl target = "_blank" float='right') > echo('导出')
         
