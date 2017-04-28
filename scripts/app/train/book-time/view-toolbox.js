@@ -3,7 +3,8 @@ var helpers = require('./app/util/helpers');
 exports.bindings = {
     state: true,
     project: false,
-    month: true
+    month: true,
+    result: false
 };
 
 exports.actions = {
@@ -21,6 +22,7 @@ exports.handlers = {
         var arriveDate = this.$('arriveDate').value,
             arriveLong,
             project = this.bindings.project,
+            result = this.bindings.result.data,
             backDateNum,
             backDate;
         backDateNum = project.data.days - 1;
@@ -28,6 +30,8 @@ exports.handlers = {
         arriveLong.setDate(arriveLong.getDate() + backDateNum);
         backDate = helpers.date(arriveLong);
         this.$('backDate').value = backDate;
+        result.arriveDate = arriveDate;
+        result.returnDate = backDate;
     },
     book: function() {
         var arriveDate = this.$('arriveDate').value,
