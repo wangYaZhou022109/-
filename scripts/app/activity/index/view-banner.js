@@ -36,7 +36,8 @@ exports.dataForTemplate = {
         return _.map(data.activitys, function(a) {
             return D.assign(a, {
                 coverId: a.coverId ? (downUrl + '?id=' + a.coverId) : defaultImg[a.type],
-                description: a.description.replace(/<[^>]+>/g, '').substr(0, 20)
+                description: a.description
+                    && a.description.replace(/<[^>]+>/g, '').substr(0, 20)
             });
         });
     }
