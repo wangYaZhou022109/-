@@ -52,7 +52,25 @@ exports.handlers = {
     },
     uploadBanner: function() {
         var view = this.module.items.upload,
-            state = this.bindings.state.data;
+            state = this.bindings.state.data,
+            classInfo = this.bindings.classInfo.data;
+        if (!classInfo.classDetail) {
+            classInfo.classDetail = {};
+        }
+        if (!classInfo.classRoom) {
+            classInfo.classRoom = {};
+        }
+        classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
+        classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
+        classInfo.classDetail.needGroupPhoto = Number($(this.$$('[name="needGroupPhoto"]:checked')).val());
+        classInfo.classDetail.photoTime = this.$('photoTime').value;
+        classInfo.classDetail.needMakeCourse = Number($(this.$$('[name="needMakeCourse"]:checked')).val());
+        classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
+        classInfo.classDetail.tableType = Number(this.$('tableType').value);
+        classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
+        classInfo.romm = this.$('restRoom').value;
+        classInfo.diningRoom = this.$('diningRoom').value;
+        classInfo.classRoom.classRoom = this.$('classRoom').value;
         state.type = 'banner';
         this.app.viewport.modal(view);
     }
@@ -80,7 +98,7 @@ exports.dataForTemplate = {
         classInfo.endDate = helpers.date(returnDate);
         address = helpers.map('project-address', classInfo.address);
         classInfo.addressText = address !== '' ? address : '暂未分配';
-        romm = helpers.map('class-classroom', classInfo.romm);
+        romm = classInfo.romm;
         classInfo.rommText = romm !== '' ? romm : '暂未分配';
         diningRoom = classInfo.diningRoom !== null ? classInfo.diningRoom : '暂未分配';
         classInfo.diningRoomText = diningRoom;
@@ -88,8 +106,8 @@ exports.dataForTemplate = {
         classInfo.classRoomName = classRoom;
         return classInfo;
     },
-    checked: function(data) {
-        var classInfo = data.classInfo;
+    checked: function() {
+        var classInfo = this.bindings.classInfo.data;
         return {
             tableType1: classInfo.classDetail.tableType === 1,
             tableType2: classInfo.classDetail.tableType === 2,
@@ -147,9 +165,6 @@ exports.actionCallbacks = {
 };
 
 exports.components = [{
-    id: 'tableType',
-    name: 'selectize'
-}, {
     id: 'photoTime',
     name: 'flatpickr',
     options: {

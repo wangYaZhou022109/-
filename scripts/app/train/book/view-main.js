@@ -15,7 +15,7 @@ exports.events = {
 exports.handlers = {
     book: function() {
         var me = this,
-            model = me.module.items['picker/book-time'],
+            model = me.module.items['train/book-time'],
             projectInfo = this.bindings.projectInfo;
         me.app.viewport.modal(model, {
             project: projectInfo.data,
@@ -42,10 +42,15 @@ exports.dataForTemplate = {
     },
     state: function() {
         var state = this.bindings.state.data,
-            projectInfo = this.bindings.projectInfo.data;
+            projectInfo = this.bindings.projectInfo.data,
+            arriveDate,
+            returnDate;
         if (projectInfo.classInfo) {
-            state.arriveDate = helpers.date(projectInfo.classInfo.arriveDate);
-            state.returnDate = helpers.date(projectInfo.classInfo.returnDate);
+            arriveDate = helpers.date(projectInfo.classInfo.arriveDate);
+            returnDate = helpers.date(projectInfo.classInfo.returnDate);
+            state.roundDate = arriveDate + '~' + returnDate;
+            state.arriveDate = arriveDate;
+            state.returnDate = returnDate;
         }
         return state;
     }
@@ -68,8 +73,8 @@ exports.mixin = {
         var contactPhone = $(this.$('contactPhone')),
             contactEmail = $(this.$('contactEmail')),
             surveyType = $(this.$('surveyType')),
+            roundDate = $(this.$('roundDate')),
             arriveDate = $(this.$('arriveDate')),
-            returnDate = $(this.$('returnDate')),
             target = $(this.$('target')),
             object = $(this.$('object')),
             flag = true,
@@ -78,8 +83,7 @@ exports.mixin = {
         markers.text.valid(contactPhone);
         markers.text.valid(contactEmail);
         markers.text.valid(surveyType);
-        markers.text.valid(returnDate);
-        markers.text.valid(arriveDate);
+        markers.text.valid(roundDate);
         markers.text.valid(target);
         markers.text.valid(object);
 
@@ -107,12 +111,8 @@ exports.mixin = {
             markers.text.invalid(surveyType, validators.maxLength.message.replace(reg, 100));
             flag = false;
         }
-        if (!validators.required.fn(returnDate.val())) {
-            markers.text.invalid(returnDate, validators.required.message);
-            flag = false;
-        }
         if (!validators.required.fn(arriveDate.val())) {
-            markers.text.invalid(arriveDate, validators.required.message);
+            markers.text.invalid(roundDate, validators.required.message);
             flag = false;
         }
         if (!validators.required.fn(target.val())) {

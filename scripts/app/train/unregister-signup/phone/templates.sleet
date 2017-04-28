@@ -1,0 +1,23 @@
+#! handlebars
+
+module 
+    div(data-region='main')
+
+view('main')
+    .h3 填写报名信息
+    hr
+    .form
+        .form-row
+            label.required 报名码
+            .content > input.input(placeholder='请填写您要参加活动的报名码' name='signupCode')
+        .form-row
+            label.required 手机号
+            .content
+                input.input(id='phoneNumber' placeholder='请输入您的手机号' name='phoneNumber')
+                .btn(id='getVerCode') 获取验证码
+        .form-row
+            label.required 验证码
+            .content > input.input(placeholder='请输入您收到的验证码' name='verCode')
+        .form-row
+            label
+            .content > .btn(id='next-step') 下一步

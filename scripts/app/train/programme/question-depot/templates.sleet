@@ -1,0 +1,29 @@
+#! handlebars
+
+view('filter') > form.vertical
+    .row
+        .col-sm-4
+            label 试题标题
+            input.input#questionName(x-rule='maxLength:30' name='content')
+        .col-sm-4
+            label 题型
+            select.input#type(name='type' x-marker='selectize')
+                each(type)
+                    option(value=key)('checked')&if(checked) > echo(value)
+        .col-sm-4
+            label 难易度
+            select.input#difficulty(name='difficulty' x-marker='selectize')
+                each(difficultys)
+                    option(value=key)('checked')&if(checked) > echo(value)
+    .row.hidden
+        .col-sm-4
+            label 状态
+            select.input#status(name='status' x-marker='selectize')
+                each(status)
+                    option(value=key)('checked')&if(checked) > echo(value)
+        .col-sm-4
+            label 创建时间
+            input.input#create-time(name='createTime')
+
+view('content')
+    div(data-dynamic-key='question')

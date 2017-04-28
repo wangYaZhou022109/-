@@ -1,14 +1,16 @@
 #!handlebars
 
-module > .train-class-page
+module
+    br
+    .addcarinfo-page
     .page-main-wrapper
         .div(data-region='main')
 
 view('main')
-    div.text-center
-        p.col-sm-2 > echo('班车/订餐信息')
-        .buttons
-            .btn#addBus > echo('添加')
+    section.section
+        .clearfix
+            label.pull-left 班车/订餐信息
+            .tag-btn.pull-right.selected#addBus > echo('添加')
     table.table
         thead > tr
             th > echo('主题')
@@ -35,14 +37,20 @@ view('main')
     #pager.pagination
 
 view('edit') > form.vertical
-    label(class='required') > echo('统计主题')
-    input.input#name(name='name'  value=bus.name  x-rule='required')
-    br
-    label(class='required') > echo('开始时间')
-    input.input#startTime(name='startTime' value=dateTime(bus.startTime) x-rule='required')
-    br
-    label(class='required') > echo('结束时间')
-    input.input#endTime(name='endTime' value=dateTime(bus.endTime) x-rule='required')
+    .form.align-left
+        .form-row
+            label.required 统计主题
+            .content
+                input.input#name(name='name' value=bus.name x-rule='required')
+        .clearfix
+            .form-row.pull-left.w-half.addcarinfo-padding
+                label.required 开始时间
+                .content
+                    input.w-full#startTime(name='startTime' value=dateTime(bus.startTime))
+            .form-row.pull-left.w-half
+                label.label.required 结束日期
+                .content
+                    input.w-full#endTime(name='endTime' value=dateTime(bus.endTime))
     br
     .list.m-top
         table.tables
@@ -50,9 +58,10 @@ view('edit') > form.vertical
                 td
                     label(id='label-option-' + id data-name='id' data-value=id) > echo(name)
                     input(id='input-option-' + id value=name style='display:none;' data-name='id' data-value=id)
+                    br
+                    input(id='input-explain-' + id value=explain placeholder="说明内容(可为空)")
                 td
                     a(id='del-option-'+id data-name='id' data-value=id) 删除
             tr
                 td(colspan=4 style='text-align:center')
-                    a.btn#addOption +
-    a.btn#saveOption > span > echo('保存')
+                    a.btn#addOption 添加

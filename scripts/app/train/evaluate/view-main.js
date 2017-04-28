@@ -20,12 +20,15 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    submit: function(payload) {
-        var data = payload,
+    submit: function() {
+        var data = {},
             files = this.bindings.files.data;
         if (files.length < 1) {
             this.app.message.alert('请上传附件');
         }
+        data.id = $(this.$('id')).val();
+        data.method = $(this.$('method')).val();
+        data.result = $(this.$('result')).val();
         return this.validate() ? data : false;
     },
     delAttach: function(payload) {
@@ -50,6 +53,7 @@ exports.handlers = {
             this.app.message.alert('附件只能存在1个，请删除后在上传');
         } else {
             if (Evaluate) {
+                Evaluate.id = $(this.$('id')).val();
                 Evaluate.method = $(this.$('method')).val();
                 Evaluate.result = $(this.$('result')).val();
             }

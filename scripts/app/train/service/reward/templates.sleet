@@ -1,0 +1,85 @@
+#!handlebars
+
+module > .train-class-page
+    .div(data-region='content')
+
+view('content')
+    #classmanage-content-2.display-none
+    section.section
+        .clearfix
+            .pull-right
+                a(href=inside target = "_blank") > .btn > echo('导出内部讲师')
+        table.table.layout-mt-small
+            thead > tr
+                th > echo('课程名称')
+                th > echo('讲师名称')
+                th > echo('授课时长')
+                th > echo('酬金')
+                th > echo('税金')
+                th > echo('实付')
+                th > echo('操作')
+            tbody > each(courseSalary) > tr
+                td > echo(classOfflineCourse.name)
+                td > echo(classOfflineCourse.teacherName)
+                td > echo(time)
+                td > echo(pay)
+                td > echo(tax)
+                td > echo(paidPay)
+                td.operation
+                    a(id='edit'+id data-name='id' data-value=id) > echo('编辑')
+view('edit') > form.vertical
+    .layout-mt-small
+        .classedit-title.clearfix
+            .pull-left
+                .inline-block.com-title > echo('课程名称') :
+                label > echo(edit.classOfflineCourse.name)
+            .pull-right
+                label 学习方式：面授
+        .classedit-form.form.layout-mt-small
+            .clearfix
+                .form-row.pull-left.w-half
+                    label.label.required > echo('讲师姓名') :
+                    .content
+                        input.input.w-full(name='lectrerName' readonly='true' value= edit.classOfflineCourse.teacherName)
+                .form-row.pull-left.w-half
+                    label.label.required > echo('讲师电话') :
+                    .content
+                        input.input.w-full(name='id' readonly='true' value= edit.classOfflineCourse.teacherPhone)
+                .form-row.pull-left.w-half
+                    label.label.required > echo('讲师部门') :
+                    .content
+                        input.input(name='lectrerName' readonly='true' value= edit.classOfflineCourse.teacherOrganization)
+                .form-row.pull-left.w-half
+                    label.label.required > echo('讲师职务') :
+                    .content
+                        input.input(name='phone' value= edit.classOfflineCourse.teacherTitle)
+            .form-row
+                label.label.required 讲师身份证
+                .content
+                    input.input(name='lecturerCard' value= edit.lecturerCard)
+            .form-row
+                label.label.required 开户银行
+                .content
+                    input.input(name='lecturerBankName' value= edit.lecturerBankName)
+            .form-row
+                label.label.required 银行卡号
+                .content
+                    input.input(name='lecturerBankCard' value= edit.lecturerBankCard)
+            .clearfix
+                .form-row.pull-left.classedit-form-width
+                    label.label.required 实付
+                    .content
+                        input.input(name='paidPay' value= edit.paidPay)
+                .form-row.pull-left.classedit-form-width
+                    label.label.required 酬金
+                    .content
+                        input.input(name='pay' value= edit.pay)
+                .form-row.pull-left.classedit-form-width
+                    label.label.required 税金
+                    .content
+                        input.input(name='tax' value= edit.tax)
+            .form-row
+                label.label.required
+                .content
+                    input.input(type='hidden' name='id' value=edit.id)
+

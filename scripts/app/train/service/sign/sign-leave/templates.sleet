@@ -5,19 +5,37 @@ module > .train-class-page
         .div(data-region='count')
         .div(data-region='main')
 
-view('count') > form.vertical
-    echo('签到名称') > form
-    echo(signOne.name)
-    echo('签到时间')
-    dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
-    echo('迟到时间')
-    dateTime(signOne.lateTime)
-    br
-    echo('应出勤')
-    echo('正常签到')
-    echo('迟到')
-    echo('请假')
-    echo('未签到')
+view('count')
+    .border.bottom.solid
+        .layout-mt-small.clearfix
+            .leave-title-item.pull-left.layout-mr
+                span 签到名称：
+                span > echo(signOne.name)
+            .leave-title-item.pull-left.layout-mr
+                span 签到时间：
+                span > dateTime(signOne.startTime) + echo(' 至 ') + dateTime(signOne.endTime)
+            .leave-title-item.pull-left.layout-mr
+                span 迟到时间：
+                span > dateTime(signOne.lateTime)
+        .layout-mt-small.clearfix.layout-mb-small
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user-1.m-right
+                span 应出勤
+                span > echo(signCount.classNum + '人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-time.m-right.text-main-color
+                span 正常签到
+                span > echo(signCount.normal + '人')
+            .recommend-item.layout-mr.pull-left
+                span 迟到
+                span > echo(signCount.late + '人')
+            .recommend-item.layout-mr.pull-left
+                span 未签到
+                span > echo(signCount.notSign + '人')
+            .recommend-item.layout-mr.pull-left
+                i.iconfont.icon-user.m-right
+                span 请假
+                span > echo(signCount.leave + '人')
 
 view('main')
     div.row.text-center
@@ -35,21 +53,24 @@ view('main')
                 td > echo(member.phoneNumber)
                 td > map('train-leave-state' state)
                 td.operation
-                    a(id='approval'+id data-name='id' data-value=id) > echo('审批')
+                    compare(state 'eq' 0)
+                        a(id='approval'+id data-name='id' data-value=id) > echo('审批')
+                    else
+                        label 审核
     #pager.pagination
 
 view('approval') > form.vertical
-    input.input(name='id' type='hidden' value=id)
-    .row
-        .col-sm-9
-            echo('请假原因')
-            input#reason(name='reason' value=lea.reason rows=5 cols=80 x-rule='maxLength:1000')
-            echo('审核意见')
-            select#state(name='state')
-                option(value='1') > echo('同意')
-                option(value='2') > echo('不同意')
-            echo('申请时间')
-            input.input#createTime(name='createTime' value=dateTime(lea.createTime) x-rule='required')
-            input.input#id(type='hidden' name='lulu' value=lea.id)
-        div.col-sm-3
-            btn.btn#update > echo('确定')
+    .layout-mt-small
+        label 请假原因
+        textarea.w-full#reason(name='reason' rows='5' x-rule='maxLength:1000') > echo(lea.reason)
+        .m-top.clearfix.m-bottom
+            .pull-left
+                label 审核意见：
+                select.tag-select#state(name='state')
+                    option(value='1') > echo('同意')
+                    option(value='2') > echo('不同意')
+            .pull-right.m-top
+                label 申请时间：
+                dateTime(lea.createTime)
+                input.input#id(type='hidden' name='lulu' value=lea.id)
+                input.input(name='id' type='hidden' value=id)

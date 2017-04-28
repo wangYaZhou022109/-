@@ -19,15 +19,55 @@ exports.store = {
         batchDelete: {
             url: '../train/sign/batch-delete'
         },
+        classDetail: {
+            url: '../train/class-detail/find'
+        },
+        editClassDetail: {
+            url: '../train/class-detail/sign'
+        },
+        autoHalf: {
+            url: '../train/sign/auto-half'
+        },
+        autoFull: {
+            url: '../train/sign/auto-full'
+        },
+        download: {
+            url: '../train/sign/down-qr'
+        },
         state: { data: {} }
     },
     callbacks: {
         init: function(payload) {
-            var signs = this.models.signs,
-                state = this.models.state;
-            signs.clear();
+            var state = this.models.state,
+                classDetail = this.models.classDetail;
             state.data.classId = payload.classId;
-            signs.params = state.data;
+            state.changed();
+            classDetail.clear();
+            classDetail.params = { id: state.data.classId };
+            return this.get(classDetail);
+        },
+        editType: function(payload) {
+            var state = this.models.state,
+                editClassDetail = this.models.editClassDetail;
+            editClassDetail.clear();
+            editClassDetail.set({ classId: state.data.classId, attendanceType: payload });
+            return this.put(editClassDetail);
+        },
+        autoHalf: function() {
+            var state = this.models.state,
+                autoHalf = this.models.autoHalf;
+            autoHalf.set({ classId: state.data.classId });
+            return this.save(autoHalf);
+        },
+        autoFull: function() {
+            var state = this.models.state,
+                autoFull = this.models.autoFull;
+            autoFull.set({ classId: state.data.classId });
+            return this.save(autoFull);
+        },
+        signs: function(payload) {
+            var signs = this.models.signs;
+            signs.params = payload;
             return this.get(signs);
         },
         preview: function(payload) {
@@ -70,8 +110,9 @@ exports.store = {
                 signs = this.models.signs,
                 me = this;
             sign.set(payload);
-            this.del(sign).then(function() {
+            return this.save(sign).then(function() {
                 me.app.message.success('保存成功');
+                me.app.viewport.closeModal();
                 me.get(signs);
             });
         },
@@ -79,5 +120,26 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: this.renderOptions.state.classId });
+    var state = this.store.models.state,
+        me = this;
+    return this.dispatch('init', { classId: this.renderOptions.state.classId }).then(function(data) {
+        if (data[0].attendanceType == null || data[0].attendanceType === '' || data[0].attendanceType === 0) {
+            me.dispatch('editType', 1);
+            me.renderOptions.state.type = 1;
+            me.dispatch('autoHalf').then(function(result) {
+                if (result[0] > 0) {
+                    me.dispatch('signs', { type: 1, classId: me.renderOptions.state.classId });
+                }
+            });
+        } else if (data[0].attendanceType === 1) {
+            me.dispatch('signs', { type: 1, classId: me.renderOptions.state.classId });
+            state.data.type = 1;
+        } else if (data[0].attendanceType === 2) {
+            me.dispatch('signs', { type: 2, classId: me.renderOptions.state.classId });
+            state.data.type = 2;
+        } else if (data[0].attendanceType === 3) {
+            me.dispatch('signs', { type: 3, classId: me.renderOptions.state.classId });
+            state.data.type = 3;
+        }
+    });
 };

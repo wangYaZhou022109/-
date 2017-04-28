@@ -1,0 +1,34 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='options')
+    div(data-region='score')
+
+view('content')
+    .row > .col-sm-12
+        label(class='required') 试题信息
+        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content') > echo(state.content)
+
+view('options')
+    label
+        | 选项
+        a.m-left#add(href='javascript:;') 添加选项
+    ul.row > each(options)
+        li.col-sm-6.options(id='item-' + index)
+            .input-box
+                .text
+                    span.list-option > echo('选项' + code ':')
+                textarea.input.block(placeholder='输入描述' id='content-' + index data-name='index' data-value=index) > echo(content)
+            .input-box
+                .text 匹配项：
+                textarea.input.block(placeholder='输入匹配描述' id='match-' + index value=match)
+            .pull-right.text-tips.m-top
+                a.m-right 高级编辑
+                a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
+
+view('score')
+    .row
+        .col-sm-6
+            label(class='required') 试题分数
+            input.input(id='score' x-rule='required,number,interval:0:1:100:0,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')

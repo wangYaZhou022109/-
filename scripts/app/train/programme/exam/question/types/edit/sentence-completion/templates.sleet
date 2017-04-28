@@ -1,0 +1,24 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    div(data-region='score')
+
+view('content')
+    .row > .col-sm-12
+        label(class='required') 试题信息
+        .text-tips.clearfix
+            span.error 右下角图标代表一个空(中文括号无效)
+            span 如：在中国古代，“慈”是()对()的道德义务
+        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content') > echo(state.content)
+        br
+        .text-tips.clearfix
+            span.error 填空题用|来隔开各个填空答案
+            span 如：父母|子女
+        textarea.input#answer(x-rule='required') > echo(state.answer)
+
+view('score')
+    .row
+        .col-sm-6
+            label(class='required') 试题分数
+            input.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')

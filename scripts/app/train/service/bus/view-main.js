@@ -1,3 +1,5 @@
+exports.title = '班车/订餐信息';
+
 exports.bindings = {
     buss: true,
     bus: false,
@@ -21,33 +23,44 @@ exports.handlers = {
     },
     addBus: function() {
         var buss = this.bindings.buss.data,
-            optionList = this.bindings.optionList.data || [],
+            optionList = [],
             option1 = {},
             option2 = {},
             option3 = {},
             option4 = {},
             option5 = {},
-            option6 = {};
+            option6 = {},
+            me = this;
+        this.bindings.optionList.clear();
         if (buss.length === 0) {
-            option1.name = '返程日前一天17:30去集团';
-            option1.id = option1.name;
-            optionList.push(option1);
-            option2.name = '返程日前一天17:30去机场';
-            option2.id = option2.name;
-            optionList.push(option2);
-            option3.name = '返程日7:30去集团';
-            option3.id = option3.name;
-            optionList.push(option3);
-            option4.name = '返程日7:30去机场';
-            option4.id = option4.name;
-            optionList.push(option4);
-            option5.name = '返程日前一天晚餐';
-            option5.id = option5.name;
-            optionList.push(option5);
-            option6.name = '返程日早餐';
-            option6.id = option6.name;
-            optionList.push(option6);
-            this.bindings.optionList.changed();
+            this.module.dispatch('getClassInfo').then(function(data) {
+                var returnDate = Number(data[0].returnDate);
+                var yesterday = returnDate - (24 * 60 * 60 * 1000);
+                var time1 = new Date(returnDate);
+                var time2 = new Date(yesterday);
+                var returnDateStr = time1.getFullYear() + '/' + (time1.getMonth() + 1) + '/' + time1.getDate();
+                var yesterdayStr = time2.getFullYear() + '/' + (time2.getMonth() + 1) + '/' + time2.getDate();
+                option1.name = yesterdayStr + ' 17:30去集团';
+                option1.id = option1.name;
+                optionList.push(option1);
+                option2.name = yesterdayStr + ' 17:30去机场';
+                option2.id = option2.name;
+                optionList.push(option2);
+                option3.name = returnDateStr + ' 7:30去集团';
+                option3.id = option3.name;
+                optionList.push(option3);
+                option4.name = returnDateStr + ' 7:30去机场';
+                option4.id = option4.name;
+                optionList.push(option4);
+                option5.name = yesterdayStr + '  晚餐';
+                option5.id = option5.name;
+                optionList.push(option5);
+                option6.name = returnDateStr + ' 早餐';
+                option6.id = option6.name;
+                optionList.push(option6);
+                me.bindings.optionList.data = optionList;
+                me.bindings.optionList.changed();
+            });
         } else {
             this.bindings.bus.clear();
         }

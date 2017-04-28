@@ -1,0 +1,83 @@
+#! handlebars
+
+module
+    .exam-manage
+        .info(data-region='info')
+        div(data-region='search')
+        div(data-region='content')
+
+view('info') > form.vertical
+    .row
+        .col-sm-12.inline-block.info-bar
+            .row > .col-sm-12
+                .inline-block.com-title > setting('exam.research.name') > echo('：')
+                .inline-block > echo(research.name)
+            .row
+                .col-sm-6.inline-block
+                    .inline-block.com-title 已参加人数：
+                    .inline-block > echo(research.joinNumber)
+                .col-sm-6.inline-block
+                    .inline-block.com-title 未参加人数：
+                    .inline-block > echo(research.noJoinNumber)
+            .row
+                .col-sm-6.inline-block
+                    .inline-block.com-title 调研二维码：
+                    .inline-block > #qrcode
+                .col-sm-6.inline-block
+                    .inline-block.com-title 调研链接：
+                    .inline-block > echo(researchUrl)
+
+view('search')
+    form.vertical
+        .row
+            .col-sm-6
+                label 账号:
+                input.input(name='name')
+            .col-sm-6
+                label 姓名:
+                input.input(name='fullName')
+        .row
+            .col-sm-6
+                label 调研状态:
+                select.input#status(name='status')> each(status)
+                    option(value=key) > echo(value)
+            .col-sm-6
+                label 参与时间:
+                input.input.mark#joinTime(name='joinTime')
+        br
+        .row
+            .col-sm-12
+                .text-right > .btn.inline-block#search 搜索
+
+view('content')
+    .hr
+    .clearfix
+        .pull-right
+            .btn#summary 汇总统计
+            .btn#member 添加人员
+            .btn#one-key-urge 一键催办
+            .btn 导出
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th 用户名
+                th 姓名
+                th 所属部门
+                th 参与时间
+                th 状态
+                th 操作
+            tbody > each(researchRecords)
+                tr
+                    td > echo(member.name)
+                    td > echo(member.fullName)
+                    td > echo(member.organization.name)
+                    td > dateTime(createTime)
+                    td > map('research-record-status' status)
+                    td.operation
+                        compare(status 'eq' 0)
+                            a(id='urge-'+id data-name='id' data-value=id) > string('exam.exam.urge')
+                        compare(status 'eq' 1)
+                            a(id='detail-'+id data-name='id' data-value=id) > string('detail')
+                else
+                    tr > td(colspan='6') > p.text-center > string('no-data')
+    #pager.pagination

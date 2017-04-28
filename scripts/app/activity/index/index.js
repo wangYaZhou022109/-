@@ -79,6 +79,12 @@ exports.store = {
             return _.find(this.models.researchActivitys.data, function(r) {
                 return r.id === payload.id;
             });
+        },
+        getClassSignupInfo: function(payload) {
+            var classSignupInfo = this.models.classSignupInfo;
+            classSignupInfo.clear();
+            classSignupInfo.params = payload;
+            return this.get(classSignupInfo);
         }
     }
 };

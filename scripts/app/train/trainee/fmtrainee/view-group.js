@@ -25,11 +25,17 @@ exports.events = {
 exports.handlers = {
     addGroup: function() {
         var name = $(this.$('add-group-input')).val().trim();
+        var group = this.bindings.group.data;
+        var me = this;
         if (name !== '') {
-            this.module.dispatch('addGroup', { name: name });
+            if (_.find(group, ['name', name])) {
+                me.app.message.alert('分组名称不能重复!');
+            } else {
+                me.module.dispatch('addGroup', { name: name });
+            }
         } else {
-            this.app.message.alert('分组名称不能为空');
-            $(this.$('add-group-input')).val('');
+            me.app.message.alert('分组名称不能为空!');
+            $(me.$('add-group-input')).val('');
         }
     },
     delGroup: function(id) {
@@ -61,11 +67,34 @@ exports.handlers = {
             this.module.dispatch('changeName', { id: id, name: val });
         }
     },
-    manage: function(id) {
-        var view = this.module.items['train/trainee/fmtrainee/group-manage'];
-        var state = this.bindings.state.data;
-        state.groupId = id;
-        this.app.viewport.modal(view, state);
+    manage: function(id, e, target) {
+        var me = this;
+        var view = me.module.items['train/trainee/fmtrainee/group-manage'];
+        var state = me.bindings.state.data;
+        if (id.substring(0, 4) === 'new-') {
+            me.module.dispatch('saveGroup').then(function() {
+                me.module.dispatch('group').then(function(data) {
+                    var groupName = target.getAttribute('group-name');
+                    var ret = data[0];
+                    var groupId = _.find(ret, ['name', groupName]).id;
+                    state.groupId = groupId;
+                    me.app.viewport.modal(view, {
+                        state: state,
+                        callback: function() {
+                            me.module.dispatch('group');
+                        }
+                    });
+                });
+            });
+        } else {
+            state.groupId = id;
+            me.app.viewport.modal(view, {
+                state: state,
+                callback: function() {
+                    me.module.dispatch('group');
+                }
+            });
+        }
     }
 };
 
@@ -84,8 +113,13 @@ exports.actionCallbacks = {
         this.app.message.success('保存成功!');
     },
     groupTrainees: function() {
+        var me = this;
         var view = this.module.items.groupTrainees;
-        this.app.viewport.modal(view);
+        this.app.viewport.modal(view, {
+            callback: function() {
+                me.module.dispatch('group');
+            }
+        });
     }
 };
 

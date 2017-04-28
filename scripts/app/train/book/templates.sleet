@@ -5,79 +5,60 @@ module > .train-class-page
         .main(data-region='main')
 
 view('main') > form.vertical
-    div(style='padding:20px 50px 50px 100px;')
-        .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
-                label 培训班名称：
-            .col-sm-2
-                label > echo(projectInfo.name)
-                input(type='hidden' name='id' value=projectInfo.id)
-            .col-sm-2(style='text-align:right')
-                label MIS编号：
-            .col-sm-2
-                label > echo(projectInfo.code)
-        .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
-                label 需求方：
-            .col-sm-2
-                label > echo(projectInfo.organization.name)
-            .col-sm-2(style='text-align:right')
-                label 培训需求方联系人：
-            .col-sm-2
-                label > echo(projectInfo.member.fullName)
-            
-        .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
-                label 联系电话：
-            .col-sm-2
-                input.input#contactPhone(name='contactPhone' value=projectInfo.contactPhone)
-            .col-sm-2(style='text-align:right')
-                label 邮箱：
-            .col-sm-2
-                input.input#contactEmail(name='contactEmail' value=projectInfo.contactEmail)
-        .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
-                label 计划人数：
-            .col-sm-2
-                label > echo(projectInfo.amount)
-            .col-sm-2(style='text-align:right')
-                label 计划天数：
-            .col-sm-2
-                label > echo(projectInfo.days)
-        .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
-                label 是否外部举办：
-            .col-sm-2
-                input.inline-block(name='isOutside' type='radio' value='1')('checked')&if(projectInfo.checked)
-                .inline-block 是
-                input.inline-block(name='isOutside' type='radio' value='0')('checked')&unless(projectInfo.checked)
-                .inline-block 否
-            .col-sm-2(style='text-align:right')
-                label 需求调研方式：
-            .col-sm-2
-                input.input#surveyType(name='surveyType' value=projectInfo.classInfo.surveyType)
-        .row(style='line-height:50px;')
-            .col-sm-2(style='text-align:right')
-                label 往返日期：
-            .col-sm-6
-                input.input#arriveDate(name='arriveDate' value=state.arriveDate readonly='readonly' size=8)
-                label ~
-                input.input#returnDate(name='returnDate' value=state.returnDate readonly='readonly' size=8)
-                if(projectInfo.isShowCommit)
-                    a.btn.inline-block#bookTime 预定时间
-        .row
-            .col-sm-2(style='text-align:right')
-                label 培训目标：
-            .col-sm-4
-                textarea#target(name='target' value='' rows=5 cols=80) > echo(projectInfo.classInfo.target)
-        .row
-            .col-sm-2(style='text-align:right')
-                label 培训对象：
-            .col-sm-4
-                textarea#object(name='object' value='' rows=5 cols=80) > echo(projectInfo.object)
-        .row
-            .col-sm-8(style='text-align:center')
-                if(projectInfo.isShowCommit)
-                    a.btn#submit 提交
-                else
-                    a.btn#submit 保存
+    .ordertime.container.bg-highlight.overflow
+        section.managements-content-area
+            .form
+                .clearfix
+                    .form-row.specical.pull-left
+                        label.label 培训班名称
+                        .content > span > echo(projectInfo.name)
+                        input(type='hidden' name='id' value=projectInfo.id)
+                        input#arriveDate(type='hidden' name='arriveDate' value=state.arriveDate)
+                        input#returnDate(type='hidden' name='returnDate' value=state.returnDate)
+                    .form-row.specical.pull-left
+                        label.label MIS编号
+                        .content > span > echo(projectInfo.code)
+                    .form-row.specical.pull-left
+                        label.label 需求方
+                        .content > span > echo(projectInfo.organization.name)
+                    .form-row.specical.pull-left
+                        label.label 需求方联系人
+                        .content > span > echo(projectInfo.member.fullName)
+                    .form-row.specical.pull-left
+                        label.label 联系电话
+                        .content > input#contactPhone(name='contactPhone' value=projectInfo.contactPhone)
+                    .form-row.specical.pull-left
+                        label.label 邮箱
+                        .content > input#contactEmail(name='contactEmail' value=projectInfo.contactEmail)
+                    .form-row.specical.pull-left
+                        label.label 计划人数
+                        .content > span > echo(projectInfo.amount)
+                    .form-row.specical.pull-left
+                        label.label 培训天数
+                        .content > span > echo(projectInfo.days)
+                    .form-row.specical.pull-left
+                        label.label.required 是否外部举办
+                        .content
+                            input(name='isOutside' type='radio' value='1')('checked')&if(projectInfo.checked)
+                            label.m-right 是
+                            input(name='isOutside' type='radio' value='0')('checked')&unless(projectInfo.checked)
+                            label 否
+                    .form-row.specical.pull-left
+                        label.label.required 需求调研方式
+                        .content > input.input#surveyType(name='surveyType' value=projectInfo.classInfo.surveyType)
+                .form-row.clearfix
+                    label.label.required 往返日期
+                    .content
+                        input.pull-left.w-half#roundDate(name='roundDate' value=state.roundDate readonly='readonly')
+                        if(projectInfo.isShowCommit)
+                            .btn#bookTime 选择日期
+                .form-row
+                    label.label.required 培训目标
+                    .content > textarea.w-full#target(name='target' value='' rows=5) > echo(projectInfo.classInfo.target)
+                .form-row
+                    label.label.required 培训对象
+                    .content > textarea.w-full#object(name='object' value='' rows=5) > echo(projectInfo.object)
+        if(projectInfo.isShowCommit)
+            .text-center.layout-mt > .btn#submit 提交
+        else
+            .text-center.layout-mt > .btn#submit 保存
