@@ -1,50 +1,49 @@
 #!handlebars
 
 module
-    br
     .addattendance-page
         .addattendance(data-region='main')
 
-view('main')
-    section.section
-        .clearfix.layout-mt-small
-            .pull-left
-                label 签到规则
-                a.tag-btn#checkout1 半天
-                a.tag-btn#checkout2 全天
-                a.tag-btn#checkout3 不签到
-            .pull-right
-                .tag-btn.selected#addSign > echo('添加')
-                .tag-btn.selected#batchDelete > echo('删除')
-        table.table.layout-mt-small
-            thead > tr
-                th > input(type='checkbox' id='check-all')
-                    label(for='check-all')
-                th > echo('签到名称')
-                th > echo('签到时间')
-                th > echo('签到地点')
-                th > echo('签到结果')
-                th > echo('状态')
-                th > echo('二维码')
-                th > echo('操作')
-            tbody > each(signs) > tr
-                td > input(type='checkbox' id='check-item'+id name='signId' value=id)
-                    label(for='check-item'+id)
-                td > echo(name)
-                td > dateTime(startTime) + echo(' 至 ') + dateTime(endTime)
-                td > echo(place)
-                td > echo(signNum) + echo('/') + echo(classNum)
-                td > map('train-sign-state' state)
-                td.operation
-                    a(id='preview'+id data-name='id' data-value=id) > echo('预览')
-                    echo('|')
-                    a(href=downUrl download=id) 下载
-                td.operation
-                    a(id='detail'+id data-name='id' data-value=id href='javascript:;') > echo('签到名单')
-                    echo('|')
-                    a(id='leave'+id data-name='id' data-value=id) > echo('请假')
-                    echo('|')
-                    a(id='editSign'+id data-name='id' data-value=id) > echo('编辑')
+view('main')        
+    .clearfix.layout-mt-small
+        .pull-left
+            label 签到规则：
+            .tag-btn#checkout1(class = if(isCheckout1 'active')) 半天
+            .tag-btn#checkout2(class = if(isCheckout2 'active')) 全天
+            .tag-btn#checkout3(class = if(isCheckout3 'active')) 不签到
+        .pull-right
+            .small-btn.m-right#addSign 
+                | +添加
+            .small-btn#batchDelete 删除
+    table.table.layout-mt-small
+        thead > tr
+            th > input(type='checkbox' id='check-all')
+                label(for='check-all')
+            th > echo('签到名称')
+            th > echo('签到时间')
+            th > echo('签到地点')
+            th > echo('签到结果')
+            th > echo('状态')
+            th > echo('二维码')
+            th > echo('操作')
+        tbody > each(signs) > tr
+            td > input(type='checkbox' id='check-item'+id name='signId' value=id)
+                label(for='check-item'+id)
+            td > echo(name)
+            td > dateTime(startTime) + echo(' 至 ') + dateTime(endTime)
+            td > echo(place)
+            td > echo(signNum) + echo('/') + echo(classNum)
+            td > map('train-sign-state' state)
+            td.operation
+                a(id='preview'+id data-name='id' data-value=id) > echo('预览')
+                echo('|')
+                a(href=downUrl download=id) 下载
+            td.operation
+                a(id='detail'+id data-name='id' data-value=id href='javascript:;') > echo('签到名单')
+                echo('|')
+                a(id='leave'+id data-name='id' data-value=id) > echo('请假')
+                echo('|')
+                a(id='editSign'+id data-name='id' data-value=id) > echo('编辑')
     #pager.pagination
 
 view('edit') > form.vertical

@@ -1,16 +1,16 @@
 #!handlebars
 
 module
-    br
     .addcarinfo-page
-    .page-main-wrapper
-        .div(data-region='main')
+        .page-main-wrapper
+            .div(data-region='main')
 
 view('main')
     section.section
         .clearfix
             label.pull-left 班车/订餐信息
-            .tag-btn.pull-right.selected#addBus > echo('添加')
+            .small-btn.pull-right#addBus 
+                | +添加
     table.table
         thead > tr
             th > echo('主题')
@@ -36,7 +36,7 @@ view('main')
                     a(id='remove'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination
 
-view('edit') > form.vertical
+view('edit') > form.vertical > .addcarinfo-page > .addcarinfo-content
     .form.align-left
         .form-row
             label.required 统计主题
@@ -51,17 +51,14 @@ view('edit') > form.vertical
                 label.label.required 结束日期
                 .content
                     input.w-full#endTime(name='endTime' value=dateTime(bus.endTime))
-    br
-    .list.m-top
-        table.tables
-            tbody > each(optionList) > tr
-                td
-                    label(id='label-option-' + id data-name='id' data-value=id) > echo(name)
-                    input(id='input-option-' + id value=name style='display:none;' data-name='id' data-value=id)
+    ul
+        each(optionList)
+            li
+                .addcarinfo-item.border.around.inline-block.m-right.m-top
+                    label.small-font.border.bottom.s-padding.strong(id='label-option-' + id data-name='id' data-value=id) > echo(name)
+                    input.small-font.border.bottom.s-padding.strong(id='input-option-' + id value=name style='display:none;' data-name='id' data-value=id)
                     br
-                    input(id='input-explain-' + id value=explain placeholder="说明内容(可为空)")
-                td
-                    a(id='del-option-'+id data-name='id' data-value=id) 删除
-            tr
-                td(colspan=4 style='text-align:center')
-                    a.btn#addOption 添加
+                    textarea.sub-text.small-font.w-full(id='input-explain-' + id value=explain placeholder="说明内容(可为空)") > echo(explain)
+                .addcarinfo-close.inline-block(id='del-option-'+id data-name='id' data-value=id) —
+        .row.text-center
+            a.btn#addOption 添加

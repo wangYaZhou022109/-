@@ -16,9 +16,8 @@ view('count') > form.vertical
             span > dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
 
 view('option')
-    table.table
-        tbody > each(busOption) > tr
-            td > echo(name)
+    each(busOption)
+        echo(name)
 
 view('main')
     .count-search.clearfix.m-top

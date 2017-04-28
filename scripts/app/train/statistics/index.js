@@ -12,7 +12,6 @@ exports.store = {
         init: function(payload) {
             var state = this.models.state;
             state.data.tab = 'questionnaire';
-            state.data.manage = true;
             state.data.id = payload.id;
             state.data.classId = payload.id.classId;
             state.changed();

@@ -36,7 +36,6 @@ exports.store = {
             allB.params = { classId: classId };
             state.data = {};
             state.data.menu = 'news';
-            state.data.news = true;
             state.data.classId = payload;
             state.changed();
             this.get(allA);

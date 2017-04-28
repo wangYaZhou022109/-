@@ -100,19 +100,13 @@ exports.store = {
             var optionList = this.models.optionList,
                 delOptionList = this.models.delOptionList,
                 optionModel = this.models.optionModel,
-                bus = this.models.bus,
-                buss = this.models.buss,
-                me = this;
+                bus = this.models.bus;
             optionModel.clear();
             D.assign(bus.data, {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            this.save(bus).then(function() {
-                me.app.message.success('保存成功');
-                me.app.viewport.closeModal();
-                me.get(buss);
-            });
+            return this.save(bus);
         },
         updateName: function(data) {
             var optionList = this.models.optionList.data,

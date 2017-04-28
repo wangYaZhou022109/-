@@ -5,6 +5,8 @@ exports.items = {
 
 exports.large = true;
 
+exports.title = '问卷提交情况';
+
 exports.store = {
     models: {
         state: {},

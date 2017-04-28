@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 exports.bindings = {
     search: true
 };
@@ -12,6 +14,26 @@ exports.handlers = {
     }
 };
 
+exports.actions = {
+    'click search': 'search',
+    'click signup': 'getClassSignupInfo'
+};
+
+exports.dataForActions = {
+    search: function() {
+        return {
+            name: $(this.$$('[name="activity-name"]')).val()
+        };
+    },
+    getClassSignupInfo: function() {
+        var code = $(this.$$('[name="signup-code"]')).val().trim();
+        if (code === '') {
+            this.app.message.error('æŠ¥åç ä¸èƒ½ä¸ºç©º!');
+            return false;
+        }
+        return { signupCode: code };
+    }
+};
 
 exports.actionCallbacks = {
     getClassSignupInfo: function(data) {
@@ -20,16 +42,16 @@ exports.actionCallbacks = {
         var url = '#/train/signup/' + classSignupInfo.classId;
         if (classSignupInfo) {
             if (classSignupInfo.isOpen === 0) {
-                this.app.message.error('¸ÃÅàÑµ°àÔİÎ´¿ª·Å±¨Ãû!');
+                this.app.message.error('è¯¥åŸ¹è®­ç­æš‚æœªå¼€æ”¾æŠ¥å!');
             } else if (nowTime < classSignupInfo.startTime) {
-                this.app.message.error('µ±Ç°ÅàÑµ°à±¨ÃûÉĞÎ´¿ªÊ¼!');
+                this.app.message.error('å½“å‰åŸ¹è®­ç­æŠ¥åå°šæœªå¼€å§‹!');
             } else if (nowTime > classSignupInfo.endTime) {
-                this.app.message.error('µ±Ç°ÅàÑµ°à±¨ÃûÒÑ½áÊø!');
+                this.app.message.error('å½“å‰åŸ¹è®­ç­æŠ¥åå·²ç»“æŸ!');
             } else {
                 window.location.href = url;
             }
         } else {
-            this.app.message.error('±¨ÃûÂë²»´æÔÚ!');
+            this.app.message.error('æŠ¥åç ä¸å­˜åœ¨!');
         }
     }
 };

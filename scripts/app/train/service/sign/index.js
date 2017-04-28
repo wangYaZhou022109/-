@@ -112,7 +112,6 @@ exports.store = {
             sign.set(payload);
             return this.save(sign).then(function() {
                 me.app.message.success('保存成功');
-                me.app.viewport.closeModal();
                 me.get(signs);
             });
         },

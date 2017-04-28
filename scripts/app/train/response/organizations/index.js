@@ -2,7 +2,7 @@ exports.items = {
     main: 'main'
 };
 
-exports.large = true;
+exports.title = '培训班报名情况列表';
 
 exports.store = {
     models: {
