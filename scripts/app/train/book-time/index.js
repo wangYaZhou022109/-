@@ -15,7 +15,8 @@ exports.store = {
         month: { data: {} },
         occupy: { url: '../train/occupy' },
         projects: { url: '../train/project/findByDate' },
-        project: { }
+        project: { },
+        result: { data: {} }
     },
     callbacks: {
         changeMonth: function(payload) {
@@ -69,3 +70,11 @@ exports.afterRender = function() {
     dateArray = dateStr.split('-');
     return this.dispatch('changeMonth', { month: dateArray[0] + '-' + dateArray[1], project: project });
 };
+
+exports.buttons = [{
+    text: '确定',
+    fn: function() {
+        var result = this.store.models.result.data;
+        this.renderOptions.callback(result.arriveDate, result.returnDate);
+    }
+}];

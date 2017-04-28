@@ -7,7 +7,7 @@ exports.bindings = {
     buss: true,
     bus: true,
     optionList: true,
-    state: false,
+    state: true,
 };
 
 exports.buttons = [{
@@ -112,6 +112,10 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
+    saveOption: function() {
+        this.app.message.success('保存成功');
+        this.module.dispatch('init', this.bindings.state.data);
+    }
 };
 
 exports.components = [{
