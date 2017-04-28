@@ -272,6 +272,9 @@ module.exports = {
     'trainee-commit-questionary': {
         0: '未提交', 1: '已提交'
     },
+    'project-approval-result': {
+        1: '待预定', 2: '待审核', 3: '已审核', 4: '已审核', 5: '已审核'
+    },
     'project-address': {
         1: '移动学院', 2: '南方基地'
     },
