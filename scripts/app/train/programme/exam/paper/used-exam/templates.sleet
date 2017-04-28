@@ -1,0 +1,18 @@
+#!handlebars
+module
+    div(data-region='content')
+
+view('content')
+    .list
+        table.table
+            thead > tr
+                th(width='10px') > echo('#')
+                th > setting('exam.exam.name')
+                th > setting('exam.exam.publish-organization-id')
+            tbody > each(exams) > tr
+                td > echo(i)
+                td > echo(name)
+                td > echo(publishOrganization.name)
+                else
+                    tr > td(colspan='12') > p.text-center > string('no-data')
+    #pager.pagination

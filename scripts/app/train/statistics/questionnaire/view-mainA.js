@@ -25,6 +25,7 @@ exports.handlers = {
         var options = {};
         options.id = data;
         options.type = typeId;
+        options.classId = this.bindings.state.data.classId;
         if (typeId === '1') {
             this.app.viewport.modal(view1, { payload: options });
         }

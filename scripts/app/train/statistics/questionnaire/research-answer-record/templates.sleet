@@ -7,47 +7,46 @@ module > .train-class-page
         .div(data-region='main')
 
 view('details') > form.vertical
-    .row > .col-sm-12
-        .inline-block.com-title > echo('评估名称') :
-        .inline-block > echo(researchQuestionary.name)
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('参与人数') :
-            .inline-block > echo(researchQuestionary.num)
+    .watchsurvey-title
+        p > echo('调研名称：' + researchQuestionary.name)
+        p
+            if(researchQuestionary.num)
+                echo('已参加人数：' + researchQuestionary.num)
+            else
+                echo('已参加人数：0')
 
 view('search') > form.vertical
-    .row.m-bottom
-        .col-sm-3 > .inline-block.m-right > .input-box
-            .text 员工编号:
+    .filter-row
+        .filter-item
+            label 员工编号
             input.input(name='name')
-        .col-sm-3 > .inline-block.m-right > .input-box
-            .text 姓名:
+        .filter-item
+            label 姓名
             input.input(name='fullName')
-        .col-sm-3.clearfix
-            .text-right > .btn.large.inline-block#search 搜索
+        .btn.gray#search 搜索
 
 view('main')
-    div.text-center
-        echo('评估详情列表')
-    .buttons
-        a(href=exportUrl target = "_blank") > .btn > echo('导出')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('员工编号')
-            th > echo('姓名')
-            th > echo('所属部门')
-            th > echo('开始时间')
-            th > echo('提交时间')
-            th > echo('得分')
-        tbody > each(researchQuestionarys) > tr
-            td > echo(i)
-            td > echo(member.name)
-            td > echo(member.fullName)
-            td > echo(organization.name)
-            td > dateTime(sTime)
-            td > dateTime(suTime)
-            td > a(id='edit-researchQuestionarys'+rId data-name='id' data-value=id) > echo(sumScore)
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')
-            #pager.pagination
+    .clearfix.layout-mt-small
+        .h5.pull-left 评估详情列表
+        a.btn.circle-radius.gray.tag-height.pull-right(href=exportUrl target = "_blank") 导出
+    .m-top
+        table.table
+            thead > tr
+                th > echo('序号')
+                th > echo('员工编号')
+                th > echo('姓名')
+                th > echo('所属部门')
+                th > echo('开始时间')
+                th > echo('提交时间')
+                th > echo('得分')
+            tbody > each(researchQuestionarys) > tr
+                td > echo(i)
+                td > echo(member.name)
+                td > echo(member.fullName)
+                td > echo(organization.name)
+                td > dateTime(sTime)
+                td > dateTime(suTime)
+                td > a(id='edit-researchQuestionarys'+rId data-name='id' data-value=id) > echo(sumScore)
+                else
+                    tr > td(colspan='11') > p.text-center > string('no-data')
+        #pager.pagination

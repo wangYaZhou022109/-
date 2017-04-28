@@ -7,15 +7,18 @@ exports.items = {
 exports.store = {
     models: {
         taskDetail: {
-            url: '../train/task-detail/list',
+            url: '../train/task-member/list',
             type: 'pageable',
             root: 'items'
         },
         taskOne: {
-            url: '../train/task-detail/one',
+            url: '../train/task-member/one',
         },
         taskd: {
-            url: '../train/task-detail'
+            url: '../train/task-member'
+        },
+        downAttach: {
+            url: '../train/task-member/download'
         },
         state: { data: {} },
     },

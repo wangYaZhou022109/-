@@ -1,16 +1,18 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='tab')
-        .div(data-region='main')
+module > .membership.container.bg-highlight
+    section.section
+        .tabs.line(data-region='tab')
+        .membership-contents(data-region='main')
 
 view('tab')
-    .container > ul.row.text-center
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-questionnaire') 调查问卷
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-class-two-brings') 两个带来
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-study-details') 学习详情
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-task') 作业管理
+    if(state.tab)
+        ul
+            li#tab-questionnaire(class = if(isManage 'active')) > echo('调查问卷')
+            li#tab-class-two-brings(class = if(isFmtrainee 'active')) > echo('两个带来')
+            li#tab-study-details(class = if(isClassstaff 'active')) > echo('学习详情')
+            li#tab-task(class = if(isIftrainee 'active')) > echo('作业管理')
 
 view('main')
-    div.container(data-dynamic-key=state.tab)
+    if(state.tab)
+        div.container(data-dynamic-key=state.tab)

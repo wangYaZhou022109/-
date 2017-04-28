@@ -4,12 +4,13 @@ var prompts = {
         3: '您好,本次考试您已经报名，请在考试时间内参与考试，谢谢',
         4: '您好,请在考试时间内参与考试，谢谢',
         5: '点击下方“开始考试”后将会立即进入考试，该考试时长为{0}分钟',
-        6: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即进行考试，点击下方“查看详情”可查看上次考试成绩详情',
+        6: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，点击下方“查看详情”可查看上次考试成绩详情',
         7: '点击下方“查看详情”可查看上次考试成绩详情',
         8: '您好，本次考试已经结束, 待考试活动结束后可查看详情',
         9: '您好,本次考试已结束或已到进入考试截止时间, 点击下方“查看详情”可查看上次考试成绩详情',
         10: '您好,本次考试尚未到报名时间，请在报名时间{0}内报名，谢谢',
-        12: '您好，本次考试已撤销'
+        12: '您好，本次考试已撤销',
+        14: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，成绩详情待考试活动结束后方可查看'
     },
     P = require('./app/activity/index/exam-prompt/prompt-help'),
     getWithParams,
@@ -90,6 +91,7 @@ exports.handlers = {
 // 9: 考试活动结束 可查看考试详情
 // 10: 报名考试，超出报名时间范围
 // 12: 考试已撤销
+// 14: 可考多次 不能马上查看详情
 getCurrentExam = function(exam) {
     var status = P.getUserStatusOfExam(exam),
         closeButton = { id: 'close-button', text: '我已经知道了' },
@@ -110,7 +112,8 @@ getCurrentExam = function(exam) {
             9: [viewDetailButton],
             10: [closeButton],
             12: [closeButton],
-            13: [closeButton]
+            13: [closeButton],
+            14: [examAgainButton, closeButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 5) {

@@ -2,8 +2,7 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     waitTrainees: true,
-    fmTrainees: true,
-    newTrainees: false
+    fmTrainees: true
 };
 
 exports.events = {
@@ -15,7 +14,6 @@ exports.handlers = {
     checkAll: function(events, obj) {
         var waitTrainees = this.bindings.waitTrainees.data;
         var fmTrainees = this.bindings.fmTrainees.data;
-        var newTrainees = this.bindings.newTrainees.data;
         var ids = [];
         this.$$('input[name="trainee-id"]').forEach(function(x) {
             var element = x || {};
@@ -24,17 +22,13 @@ exports.handlers = {
             ids.push(id);
         });
         if (obj.checked) {
-            _.forEach(ids, function(id) {
-                if (newTrainees.indexOf(id) === -1) {
-                    newTrainees.push(id);
-                }
-            });
             _.forEach(waitTrainees, function(value) {
                 var data = {};
                 var member = {};
                 if (!_.find(fmTrainees, ['id', value.id])) {
                     data.id = value.id;
                     data.sort = value.sort;
+                    data.sortForGroup = value.sortForGroup;
                     data.organizationName = value.organizationName;
                     data.organizationOrder = value.organizationOrder;
                     member.fullName = value.member.fullName;
@@ -45,55 +39,44 @@ exports.handlers = {
                 }
             });
         } else {
-            newTrainees = _.filter(newTrainees, function(id) {
-                return ids.indexOf(id) === -1;
-            });
             fmTrainees = _.filter(fmTrainees, function(fm) {
                 return ids.indexOf(fm.id) === -1;
             });
         }
-        fmTrainees = _.sortBy(fmTrainees, ['sort', 'organizationOrder']);
+        fmTrainees = _.sortBy(fmTrainees, ['sortForGroup', 'organizationOrder']);
         this.bindings.fmTrainees.data = fmTrainees;
-        this.bindings.newTrainees.data = newTrainees;
         this.bindings.fmTrainees.changed();
-        this.bindings.newTrainees.changed();
     },
     checkItem: function(id, obj, target) {
         var fmTrainees = this.bindings.fmTrainees.data;
         var waitTrainees = this.bindings.waitTrainees.data;
-        var newTrainees = this.bindings.newTrainees.data;
         var addModel = {};
-        var i = 0,
-            j = 0;
+        var i = 0;
         var flag = this.$$('input[name="trainee-id"]').length === this.$$('input[name="trainee-id"]:checked').length;
         this.$('checkAll').checked = flag;
         if (target.checked) {
-            newTrainees.push(id);
             addModel = _.find(waitTrainees, ['id', id]) || {};
             fmTrainees.push({
                 id: addModel.id,
                 sort: addModel.sort,
+                sortForGroup: addModel.sortForGroup,
+                organizationName: addModel.organizationName,
+                organizationOrder: addModel.organizationOrder,
                 member: {
                     fullName: addModel.member.fullName,
-                    name: addModel.member.name
+                    name: addModel.member.name,
+                    sex: addModel.member.sex
                 }
             });
         } else {
-            for (i; i < newTrainees.length; i++) {
-                if (newTrainees[i] === id) {
-                    newTrainees.splice(i, 1);
-                    break;
-                }
-            }
-            for (j; j < fmTrainees.length; j++) {
-                if (fmTrainees[j].id === id) {
-                    fmTrainees.splice(j, 1);
+            for (i; i < fmTrainees.length; i++) {
+                if (fmTrainees[i].id === id) {
+                    fmTrainees.splice(i, 1);
                     break;
                 }
             }
         }
-        this.bindings.fmTrainees.data = _.sortBy(fmTrainees, 'sort');
-        this.bindings.newTrainees.changed();
+        this.bindings.fmTrainees.data = _.sortBy(fmTrainees, ['sortForGroup', 'organizationOrder']);
         this.bindings.fmTrainees.changed();
     }
 };

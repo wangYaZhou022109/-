@@ -4,7 +4,8 @@ var $ = require('jquery'),
 
 exports.bindings = {
     trainees: true,
-    state: false
+    state: false,
+    organizations: true
 };
 
 exports.components = [{
@@ -42,5 +43,12 @@ exports.dataForTemplate = {
         });
         result.unshift({ key: '999', value: '全部' });
         return result;
+    },
+    organizations: function(data) {
+        var organizations = [{ key: '', value: '全部' }];
+        _.forEach(data.organizations, function(o) {
+            organizations.push({ key: o.organizationId, value: o.organizationName });
+        });
+        return organizations;
     }
 };

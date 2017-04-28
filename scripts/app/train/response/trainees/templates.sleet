@@ -1,25 +1,31 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='search')
-        .div(data-region='main')
+module > .student-page.student
+    .div(data-region='search')
+    .div(data-region='main')
 
 view('search') > form.vertical
-    echo('班级成员')
-    br
-    echo('姓名')
-    input.input(name='memberFullName')
-    echo('单位')
-    input.input(name='organizationId')
-    echo('状态')
-    select.input#auditStatus(name='auditStatus' x-marker='selectize' style='width:100px; display:inline;')
-        each(auditStatus)
-            option(value=key) > echo(value)
-    btn.btn#search > echo('查询')
+    .filter-row
+        .filter-item
+            label > echo('姓名')
+            input.input(name='memberFullName')
+        .filter-item
+            label > echo('单位')
+            select.input#organizationId(name='organizationId' x-marker='selectize')
+                each(organizations)
+                    option(value=key) > echo(value)
+        .filter-item
+            label > echo('状态')
+        .filter-item
+            select.input#auditStatus(name='auditStatus' x-marker='selectize')
+                each(auditStatus)
+                    option(value=key) > echo(value)
+        .filter-item
+            span > echo('|')
+            .btn#search > echo('查询')
 
 view('main')
-    table.table
+    table.table.layout-mt-small
         thead > tr
             th > echo('序号')
             th > echo('姓名')
@@ -42,3 +48,4 @@ view('main')
             td > map('trainee-show-auditStatus' auditStatus)
             else
                 tr > td(colspan='9') > p.text-center > echo('没有数据')
+    #pager.pagination

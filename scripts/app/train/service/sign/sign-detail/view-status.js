@@ -1,13 +1,18 @@
 var $ = require('jquery');
 
-exports.title = '请选择您要变更的签到状态';
-
 exports.type = 'form';
+
+exports.small = true;
 
 exports.bindings = {
     signDetail: true,
     state: true,
 };
+
+exports.buttons = [{
+    text: '确定',
+    action: 'update',
+}];
 
 exports.actions = {
     'click update': 'update'

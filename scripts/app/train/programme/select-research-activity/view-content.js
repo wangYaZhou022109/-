@@ -31,3 +31,18 @@ exports.mixin = {
         ]);
     }
 };
+
+exports.events = {
+    'click preview-*': 'previewResearch'
+};
+
+exports.handlers = {
+    previewResearch: function(id) {
+        var mod = this.module.items['train/programme/research-activity/preview-questionary'];
+        this.app.viewport.modal(mod, {
+            researchId: id,
+            callback: function() {
+            }
+        });
+    }
+};

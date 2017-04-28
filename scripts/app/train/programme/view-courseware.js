@@ -2,8 +2,6 @@ var _ = require('lodash/collection'),
     $ = require('jquery'),
     findExtension;
 
-exports.large = true;
-
 exports.bindings = {
     offlineCourse: true,
     files: true,

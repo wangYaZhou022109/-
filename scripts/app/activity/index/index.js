@@ -12,7 +12,11 @@ exports.items = {
 
 exports.store = {
     models: {
-        search: {},
+        search: {
+            data: {
+                searchStatus: 0
+            }
+        },
         activitys: {
             url: '../exam/activity/recommends-activity-list'
         },
@@ -34,7 +38,10 @@ exports.store = {
             root: 'items',
             pageSize: 60
         },
-        down: { url: '../human/file/download' }
+        down: { url: '../human/file/download' },
+        classSignupInfo: {
+            url: '../train/sign-up/find-by-code'
+        }
     },
     callbacks: {
         init: function() {
@@ -43,7 +50,6 @@ exports.store = {
                 gensees = this.models.gensees,
                 researchActivitys = this.models.researchActivitys,
                 search = this.models.search;
-
             D.assign(activitys.params, { size: RECOMMEND_SIZE });
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
@@ -76,6 +82,12 @@ exports.store = {
             return _.find(this.models.researchActivitys.data, function(r) {
                 return r.id === payload.id;
             });
+        },
+        getClassSignupInfo: function(payload) {
+            var classSignupInfo = this.models.classSignupInfo;
+            classSignupInfo.clear();
+            classSignupInfo.params = payload;
+            return this.get(classSignupInfo);
         }
     }
 };

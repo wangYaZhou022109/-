@@ -1,0 +1,5 @@
+
+exports.bindings = {
+    question: true
+};
+

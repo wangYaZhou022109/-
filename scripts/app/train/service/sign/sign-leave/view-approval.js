@@ -7,6 +7,13 @@ exports.bindings = {
     lea: true,
 };
 
+exports.small = true;
+
+exports.buttons = [{
+    text: '确定',
+    action: 'update',
+}];
+
 exports.actions = {
     'click update': 'update'
 };
@@ -15,7 +22,6 @@ exports.dataForActions = {
     update: function() {
         return {
             id: $(this.$$('[name="lulu"]')).val(),
-            // id: $(this.$('id')).val(),
             state: $(this.$$('[name="state"]')).val(),
         };
     }

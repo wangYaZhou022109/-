@@ -21,11 +21,14 @@ exports.store = {
         init: function(payload) {
             var exams = this.models.exams,
                 exam = this.models.exam,
-                state = this.models.state.data;
+                state = this.models.state;
             exams.params = {};
             exams.params.resourceId = payload.id;
+            exams.params.classId = payload.classId.classId;
             exam.params.resourceId = payload.id;
-            state.id = payload.id;
+            exam.params.classId = payload.classId.classId;
+            state.data.resourceId = payload.id;
+            state.data.classId = payload.classId.classId;
             exam.clear();
             this.get(exam);
             return this.get(exams);
