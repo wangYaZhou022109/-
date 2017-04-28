@@ -4,11 +4,11 @@ var _ = require('lodash/collection'),
 exports.bindings = {
     contents: true,
     down: false,
-    course: false,
-    subject: false,
-    gensee: false,
-    exam: false,
-    research: false
+    course: true,
+    subject: true,
+    gensee: true,
+    exam: true,
+    research: true
 };
 
 exports.dataForTemplate = {
@@ -27,14 +27,12 @@ exports.dataForTemplate = {
             genseeData = this.bindings.gensee.data || [];
         // 拼接课程
         if (courseData.length > 0) {
-            _.map(data.conents, function(content) {
+            _.map(data.contents, function(content) {
                 var course = _.find(courseData, ['id', content.dataId]);
                 if (course) {
                     D.assign(content, {
                         dataId: course.id,
                         dataName: course.name,
-                        dataOrganization: course.organization.id,
-                        dataClient: course.publishClient || 0,
                         dataSummary: course.description || '',
                         browseCount: course.visits || 0,
                         beginTime: course.beginDate,
@@ -52,8 +50,6 @@ exports.dataForTemplate = {
                     D.assign(content, {
                         dataId: subject.id,
                         dataName: subject.name,
-                        dataOrganization: subject.organization.id,
-                        dataClient: subject.publishClient || 0,
                         dataSummary: subject.description || '',
                         browseCount: subject.visits || 0,
                         beginTime: subject.beginDate,
@@ -71,8 +67,6 @@ exports.dataForTemplate = {
                     D.assign(content, {
                         dataId: exam.id,
                         dataName: exam.name,
-                        dataOrganization: exam.organization.id,
-                        dataClient: exam.supportApp || 0,
                         dataSummary: exam.examNotes || '',
                         browseCount: exam.applicantNumber || 0,
                         beginTime: exam.startTime,
@@ -90,8 +84,6 @@ exports.dataForTemplate = {
                     D.assign(content, {
                         dataId: research.id,
                         dataName: research.name,
-                        dataOrganization: research.organization.id,
-                        dataClient: 0,
                         dataSummary: research.questionaryDetail || '',
                         browseCount: 0,
                         beginTime: research.startTime,
@@ -109,8 +101,6 @@ exports.dataForTemplate = {
                     D.assign(content, {
                         dataId: gensee.id,
                         dataName: gensee.subject,
-                        dataOrganization: gensee.organization.id,
-                        dataClient: 0,
                         dataSummary: gensee.genseeDesc || '',
                         browseCount: gensee.attendNumber,
                         beginTime: gensee.startTime,

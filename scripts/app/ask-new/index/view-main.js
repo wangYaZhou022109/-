@@ -6,7 +6,9 @@ exports.events = {
     'click button-*': 'togglePage',
     'click icon-*': 'toggleIcon',
     'click report': 'showExport',
-    'click discuss-*': 'discuss'
+    'click discuss-*': 'discuss',
+    'click selectquestion-*': 'showSlectdrop',
+    'change selectquestion-*': 'hideSlectdrop'
 };
 
 exports.handlers = {
@@ -43,5 +45,13 @@ exports.handlers = {
     showExport: function() {
         var model = this.module.items['ask-new/index/export'];
         this.app.viewport.modal(model);
+    },
+    showSlectdrop: function(id) {
+        $(this.$('selectquestion-' + id)).parent().css('overflow', 'inherit');
+        $(this.$('selectdrop-' + id)).css('margin-top', '-.5em');
+    },
+    hideSlectdrop: function(id) {
+        $(this.$('selectquestion-' + id)).parent().css('overflow', 'hidden');
+        $(this.$('selectdrop-' + id)).css('margin-top', '0');
     }
 };
