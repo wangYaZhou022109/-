@@ -18,12 +18,9 @@ view('topic')
 
 view('details')
     .form-row
-        .content > a > i.iconfont.icon-link#uploadFile + span
-            compare(task.data.length 'gt' 0)
-                each(task.data)
-                    echo(enclosureName)
-            else
-                string('upload-attachments')
+        .content > a > i.iconfont.icon-link#uploadFile + span(id='attachments')
+            string('upload-attachments')
+
 view('edit')
     .form-row.textarea-row
         label > string('detailed-description')

@@ -12,7 +12,11 @@ exports.items = {
 
 exports.store = {
     models: {
-        search: {},
+        search: {
+            data: {
+                searchStatus: 0
+            }
+        },
         activitys: {
             url: '../exam/activity/recommends-activity-list'
         },
@@ -43,7 +47,6 @@ exports.store = {
                 gensees = this.models.gensees,
                 researchActivitys = this.models.researchActivitys,
                 search = this.models.search;
-
             D.assign(activitys.params, { size: RECOMMEND_SIZE });
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
