@@ -25,8 +25,8 @@ view('main')
                             .accessory
                                 table
                                     thead > tr(width=250 class="text-left")
-                                        th(width=150) 已有附件
-                                        th(width=100) 操作
+                                        th(width=150) > echo('已有附件')
+                                        th(width=100) > echo('操作')
                                     tbody > each(files) > tr(class="text-left")
                                         td
                                             echo(attachName)
@@ -34,7 +34,7 @@ view('main')
                                             a(href=downUrl download=attachName) 下载
                                             a(id='del-attach-'+id data-name='id' data-value=id) 删除
                             .m-top
-                                a.btn.circle-radius.gray#chooseFile 浏览
+                                input(id='chooseFile' type='button' value='浏览...')
                                 p 注：请上传相关证明材料，如考试结果、小组汇报ppt、学员学习心得作业汇总等
                     .form-row
                         label.label.required 考核结果：
