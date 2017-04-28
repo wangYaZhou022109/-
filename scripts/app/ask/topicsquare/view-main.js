@@ -47,7 +47,6 @@ exports.dataForActions = {
         var obj = id.split('_');
         data.id = obj[1];
         data.concernType = obj[0];
-        console.log(data);
         return data;
     },
     unfollow: function(payload) {

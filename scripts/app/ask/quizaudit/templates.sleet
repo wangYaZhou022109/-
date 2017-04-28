@@ -15,4 +15,5 @@ view('audit') > form.vertical
     .detail1-alink.layout-mt-small > each(topicList) > echo(name) + echo(' ')
     input.input(name='id' type='hidden' value=audit.id)
     input.input(name='questionId' type='hidden' value=audit.question.id)
+    input.input(name='objectId' type='hidden' value=audit.objectId)
     textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注" name="auditNote")

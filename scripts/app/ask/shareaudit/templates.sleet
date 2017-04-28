@@ -21,6 +21,7 @@ view('shareaudit') > form.vertical
     .detail1-alink.layout-mt-smal > each(topicList) > echo(name) + echo(' ')
     input.input(name='id' type='hidden' value=shareaudit.id)
     input.input(name='questionId' type='hidden' value=shareaudit.question.id)
+    input.input(name='objectId' type='hidden' value=shareaudit.objectId)
     textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注" name="auditNote")
 #  module > .course-page
 #      div(data-region='shareaudit' style='height:100%;')
