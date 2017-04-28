@@ -42,10 +42,13 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var fmtrainees = this.models.fmtrainees,
-                state = this.models.state.data;
+                state = this.models.state.data,
+                params = {};
             state.classId = payload.classId;
+            params.classId = state.classId;
+            params.auditStatus = state.auditStatus;
             fmtrainees.clear();
-            fmtrainees.params = state;
+            fmtrainees.params = params;
             return this.get(fmtrainees);
         },
         search: function(payload) {
@@ -190,8 +193,9 @@ exports.store = {
         },
         deleteTraineeGroup: function(payload) {
             var updateTraineeGroup = this.models.updateTraineeGroup;
+            var groupId = this.models.state.data.groupId;
             updateTraineeGroup.clear();
-            updateTraineeGroup.params = { id: payload.id, groupId: '0' };
+            updateTraineeGroup.params = { id: payload.id, groupId: groupId };
             return this.get(updateTraineeGroup);
         },
         getMemberIds: function() {

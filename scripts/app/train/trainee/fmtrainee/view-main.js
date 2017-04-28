@@ -142,18 +142,15 @@ exports.actionCallbacks = {
             this.app.message.alert('尚未配额！');
         }
     },
-    group: function(data) {
+    group: function() {
         var model = this.module.items.group;
-        if (data[0]) {
-            this.app.viewport.modal(model);
-        } else {
-            this.app.message.alert('尚未分组！');
-        }
+        this.bindings.state.data.index = 0;
+        this.app.viewport.modal(model);
     }
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'fmtrainees' }
+    id: 'pager', name: 'background-pager', options: { model: 'fmtrainees' }
 }];
 
 exports.dataForTemplate = {

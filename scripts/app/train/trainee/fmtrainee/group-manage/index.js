@@ -1,3 +1,5 @@
+var _ = require('lodash/collection');
+
 exports.title = '分组管理';
 
 exports.items = {
@@ -13,12 +15,12 @@ exports.store = {
         state: { data: {} },
         fmTrainees: { url: '../train/trainee/group-trainees' },
         waitTrainees: {
-            url: '../train/trainee/trainees',
+            url: '../train/trainee/wait-group-trainees',
             type: 'pageable',
             root: 'items'
         },
-        updateTraineeGroup: { url: '../train/trainee/update-group' },
-        newTrainees: { data: [] }
+        saveGroupManage: { url: '../train/trainee/save-group-manage' },
+        updateTraineeGroup: { url: '../train/trainee/update-group' }
     },
     callbacks: {
         init: function(payload) {
@@ -36,7 +38,7 @@ exports.store = {
                 data = {};
             data.classId = payload.classId;
             data.auditStatus = payload.auditStatus;
-            data.groupId = 0;
+            data.groupId = payload.groupId;
             waitTrainees.clear();
             waitTrainees.params = data;
             return this.get(waitTrainees);
@@ -52,12 +54,40 @@ exports.store = {
             updateTraineeGroup.clear();
             updateTraineeGroup.params = { id: payload.id, groupId: '0' };
             return this.get(updateTraineeGroup);
+        },
+        save: function(payload) {
+            var saveGroupManage = this.models.saveGroupManage;
+            saveGroupManage.clear();
+            saveGroupManage.params = payload;
+            return this.get(saveGroupManage);
         }
     }
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
-    this.dispatch('wait', this.renderOptions);
-    this.store.models.newTrainees.clear();
+    this.dispatch('init', this.renderOptions.state);
+    this.dispatch('wait', this.renderOptions.state);
 };
+
+exports.buttons = [{
+    text: '保存',
+    fn: function() {
+        var me = this,
+            fmTrainees = me.store.models.fmTrainees.data,
+            state = me.store.models.state.data,
+            ids = [];
+        _.forEach(fmTrainees, function(fm) {
+            ids.push(fm.id);
+        });
+        me.dispatch('save', {
+            classId: state.classId,
+            groupId: state.groupId,
+            ids: ids.join(',')
+        }).then(function(data) {
+            if (data[0]) {
+                me.app.message.success('保存成功!');
+                me.renderOptions.callback();
+            }
+        });
+    }
+}];
