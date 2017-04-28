@@ -74,8 +74,7 @@ exports.afterRender = function() {
 exports.buttons = [{
     text: '确定',
     fn: function() {
-        var result = this.store.models.result.data,
-            callback = this.module.renderOptions.callback;
+        var result = this.store.models.result.data;
         this.renderOptions.callback(result.arriveDate, result.returnDate);
     }
 }];
