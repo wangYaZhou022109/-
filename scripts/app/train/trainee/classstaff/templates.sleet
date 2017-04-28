@@ -1,17 +1,16 @@
 #!handlebars
 
 module
-    br
-    .div(data-region='main')
+    .membership-table.layout-mt-small.clearfix(data-region='main')
 
 view('main')
-    div.text-center
-        p.col-sm-2 > echo('班务人员列表')
-    .buttons
-        input.input(id='add-classstaff-input' placeholder='人员编号')
-        .btn#addClassstaff > echo('添加')
-        .btn#addAllClassstaff > echo('人员选择')
-    table.table
+    .h5.pull-left.strong > echo('班务人员列表')
+    .pull-right
+        label.pull-left.tag-height.m-right > echo('员工编号')
+        input.tag-height.pull-left(id='add-classstaff-input')
+        .small-btn.pull-left.m-right#addClassstaff > echo('添加')
+        .btn.tag-btn#addAllClassstaff > echo('人员选择')
+    table.table.layout-mt-small
         thead > tr
             th > echo('序号')
             th > echo('姓名')
@@ -35,6 +34,6 @@ view('main')
                 compare(member.id 'ne' classTeacher)
                     a(id='staff-sort'+id data-name='id' data-value=id) > echo('排序')
                     input(id='staff-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
-                    span(id='staff-shuxian'+id) > echo('|')
+                    span.text-main-color(id='staff-shuxian'+id) > echo('|')
                     a(id='staff-delete'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination
