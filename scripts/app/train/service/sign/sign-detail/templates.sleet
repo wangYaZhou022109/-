@@ -1,10 +1,10 @@
 #!handlebars
-module > .train-class-page
+module > .attendancelist-page
     .page-main-wrapper
         .activity-category
-            .div(data-region='count')
+            .attendancelist-title(data-region='count')
             .div(data-region='search')
-            .div(data-region='main')
+            .attendancelist-content(data-region='main')
 
 view('count')
     .border.bottom.solid
@@ -21,22 +21,25 @@ view('count')
         .layout-mt-small.clearfix.layout-mb-small
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user-1.m-right
-                span 应出勤
-                span > echo(signCount.classNum + '人')
+                span.m-right 应出勤
+                span > echo(signCount.classNum)
+                span 人
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-time.m-right.text-main-color
-                span 正常签到
-                span > echo(signCount.normal + '人')
-            .recommend-item.layout-mr.pull-left
-                span 迟到
-                span > echo(signCount.late + '人')
-            .recommend-item.layout-mr.pull-left
-                span 未签到
-                span > echo(signCount.notSign + '人')
+                span.m-right 正常签到
+                span > echo(signCount.normal)
+                span.m-right 人
+                span.m-right 迟到
+                span > echo(signCount.late)
+                span.m-right 人
+                span.m-right 未签到
+                span > echo(signCount.notSign)
+                span.m-right 人
             .recommend-item.layout-mr.pull-left
                 i.iconfont.icon-user.m-right
-                span 请假
-                span > echo(signCount.leave + '人')
+                span.m-right 请假
+                span > echo(signCount.leave)
+                span 人
 
 view('search') > form.vertical
     .layout-mt-small

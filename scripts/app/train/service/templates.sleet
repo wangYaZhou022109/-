@@ -15,7 +15,7 @@ view('tab')
             li#tab-affiche(class = if(isAffiche 'active')) > echo('班级公告')
             li#tab-discuss(class = if(isDiscuss 'active')) > echo('讨论管理')
             li#tab-album(class = if(isAlbum 'active')) > echo('班级相册')
-            li#tab-views(class = if(isViews 'active')) > echo('班级详情页')
+            # li#tab-views(class = if(isViews 'active')) > echo('班级详情页')
 
 view('main')
     if(state.tab)
