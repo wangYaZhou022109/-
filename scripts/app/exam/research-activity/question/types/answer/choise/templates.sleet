@@ -15,10 +15,10 @@ view('content')
 
 
 view('options') > .answer
-    .preview-list > ul > each(options)
-        li(id='item-' + index style='width:48%;float:left')
+    .preview-list > dl > each(options)
+        dd(id='item-' + index)
             if(mutiple)
-                .pull-left.checkbox.no-margin
+                span.checkbox.no-margin
                     input(type='checkbox' id='check-'+@index value=@index)('checked')&if(checked)
                     label(for='check-'+@index)
             else
