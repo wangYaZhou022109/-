@@ -2,22 +2,22 @@
 module > .discuss-exam-page
     .discuss-exam-total(data-region="discussaudit")
 
-view('discussaudit')
+view('discussaudit') > form.vertical
     .title-img.pull-left.layout-mr-small
         img.title-radius(src="images/3.png")
     .title-main
         .detail1-content.m-top.small-font > echo(discussaudit.content)
     .detail-img.layout-mt-small
-        img(src="images/1.png")
+        #  img(src="images/1.png")
     .detail1-person.layout-mt-small
         span > echo(discussaudit.member.fullName)
         span.sub-title 讨论时间：
         span.sub-title > date(discussaudit.createTime)
     .detail1-alink.layout-mt-small > echo('来自问题：') + echo(discussaudit.question.title)
-        #  a 关联话题：
-        #  a 话题名称
-        #  a 话题名称
-    textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注")
+    input.input(name='id' type='hidden' value=discussaudit.id)
+    input.input(name='questionId' type='hidden' value=discussaudit.questionId)
+    input.input(name='objectId' type='hidden' value=discussaudit.objectId)
+    textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注" name="auditNote")
 
 #  module > .course-page
 #      div(data-region='discussaudit' style='height:100%;')
