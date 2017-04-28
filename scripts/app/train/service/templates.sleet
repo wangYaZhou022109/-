@@ -7,14 +7,6 @@ module > .membership.container.bg-highlight
 
 view('tab')
     if(state.tab)
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-sign') 考勤
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-reward') 课酬管理
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-bus') 班车信息
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-settle') 结算数据
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-affiche') 班级公告
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-discuss') 讨论管理
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-album') 班级相册
-        #  li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-views') 班级详情页
         ul    
             li#tab-sign(class = if(isSign 'active')) > echo('考勤')
             li#tab-reward(class = if(isReward 'active')) > echo('课酬管理')

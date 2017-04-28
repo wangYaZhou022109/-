@@ -1,10 +1,9 @@
 #!handlebars
 
 module
-    br
     .train-class-page
-    .page-main-wrapper
-        .div(data-region='main')
+        .page-main-wrapper
+            .div(data-region='main')
 
 view('main')
     .contaniner
