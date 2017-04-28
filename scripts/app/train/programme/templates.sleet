@@ -1,88 +1,81 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .main(data-region='offline')
-    .page-main-wrapper
-        .main(data-region='online')
-    .page-main-wrapper
-        .main(data-region='questionnaire')
-    .page-main-wrapper
-        .main(data-region='task')
+module > .addwork-page
+    .main(data-region='offline')
+    .main(data-region='online')
+    .main(data-region='questionnaire')
+    .addwork(data-region='task')
 
 view('offline') 
-    div(style='padding:20px 50px 50px 20px;')
-        .row(style='line-height:50px;')
-            .col-sm-12(style='text-align: right')
-                a.btn#export 导出安排
-        .list.m-top
-            table.table
-                thead > tr
-                    td(colspan=8)
-                        .col-sm-4
-                            label 线下课程安排
-                            if(isShowWeeks)
-                                select#selectOffline(name='selectOffline')
-                                    each(weeks)
-                                        option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
-                        .col-sm-8(style='text-align:right;')
-                            if(isShowWeeks)
-                                a.btn#theme-offline 配置周主题
-                            a.btn#addOfflineCourse 添加课程
-                            a.btn#importOffline 导入课程
-                            a > echo('最小化')
-                thead > tr
-                    th 日期
-                    th 时间
-                    th 课程名称
-                    th 讲师名称
-                    th 讲师单位
-                    th 讲师职务
-                    th 课酬实付
-                    th 课件
-                    th 操作
-                tbody > each(offlineCourseList) > tr
-                    td > date(courseDate)
-                    td > echo(startTime + '-' + endTime)
-                    td
-                        label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
-                        input(id='input-name-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-teacher-offline-' + id data-name='id' data-value=id) > echo(teacherName + '(点击可修改)')
-                        input(id='input-teacher-offline-' + id value=teacherName style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
-                        input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
-                        input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
-                    td
-                        label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
-                        input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
-                    td
-                        a(id='courseware-'+id data-name='id' data-value=id) 查看课件
-                    td
-                        a(id='edit-offline-'+id data-name='id' data-value=id) 编辑
-                        a(id='del-offline-'+id data-name='id' data-value=id) 删除
+    .dateplan.container.bg-highlight.overflow.dateplan-padding
+        section.layout-mt-small
+            .clearfix
+                a.small-btn.radius.pull-right#export(href=downUrl) 导出安排
+            .clearfix.m-top
+                .pull-left
+                    label.m-right 线下课程安排
+                    if(isShowWeeks)
+                        select.tag-select#selectOffline(name='selectOffline')
+                            each(weeks)
+                                option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
+                .pull-right
+                    .tag-btn.radius#theme-offline 配置周主题
+                    .tag-btn.radius#addOfflineCourse 添加课程
+                    .tag-btn.radius#importOffline 导入课程
+                    .inline-block
+                        span#min-1 最小化
+                        i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-1
+                table.table#minitable-1
+                    tr
+                        th 日期
+                        th 时间
+                        th 课程名称
+                        th 讲师名称
+                        th 讲师单位
+                        th 讲师职务
+                        th 课酬实付
+                        th 课件
+                        th 操作
+                    each(offlineCourseList) > tr
+                        td > date(courseDate)
+                        td > echo(startTime + '-' + endTime)
+                        td
+                            label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+                            input(id='input-name-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-teacher-offline-' + id data-name='id' data-value=id) > echo(teacherName + '(点击可修改)')
+                            input(id='input-teacher-offline-' + id value=teacherName style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
+                            input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
+                            input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
+                        td
+                            label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
+                            input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
+                        td > i.iconfont.icon-tag.custom-color-5(id='courseware-'+id data-name='id' data-value=id)
+                        td
+                            i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-offline-'+id data-name='id' data-value=id)
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-offline-'+id data-name='id' data-value=id)
 
 view('online') 
-    div(style='padding:20px 50px 50px 20px;')
-        .list.m-top
-            table.table
-                thead > tr
-                    td(colspan=8)
-                        .col-sm-4
-                            label 在线资源
-                        .col-sm-8(style='text-align:right;')
-                            a.btn#theme-online 配置主题
-                            a.btn#addCourse 添加课程
-                            a > echo('最小化')
-                thead > tr
+    .dateplan.container.bg-highlight.overflow.dateplan-padding
+        section.layout-mt-small
+            .clearfix
+                label.pull-left 在线资源
+                .pull-right
+                    .tag-btn.radius#theme-online 配置主题
+                    .tag-btn.radius#addCourse 添加课程
+                    span#min-2 最大化
+                    i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-2
+            table.table#minitable-2(style='display:none')
+                tr
                     th 主题
-                    th(width='50%') 资源名称
+                    th 课程名称
                     th 是否必修
                     th 操作
-                tbody > each(onlineCourseList) > tr
+                each(onlineCourseList) > tr
                     td > echo(themeName)
                     td > echo(resourceName)
                     td
@@ -91,178 +84,189 @@ view('online')
                             option(value='1')('selected')&if(isRequired1) > map('yes-or-no' '1')
                             option(value='0')('selected')&if(isRequired0) > map('yes-or-no' '0')
                     td
-                        a(id='view-online-'+id data-name='id' data-value=id) 预览
-                        a(id='del-online-'+id data-name='id' data-value=id) 删除
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+resourceId data-name='resourceId' data-value=resourceId)
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
 
 view('questionnaire') 
-    div(style='padding:20px 50px 50px 20px;')
-        .list.m-top
-            table.table
-                thead > tr
-                    td(colspan=8)
-                        .col-sm-4
-                            label 问卷
-                        .col-sm-8(style='text-align:right;')
-                            a.btn#addExam 添加考试
-                            a.btn#addSurvey 添加调研
-                            a.btn#addEva 添加评估
-                            a > echo('最小化')
-                thead > tr
+    .dateplan.container.bg-highlight.overflow.dateplan-padding
+        section.layout-mt-small
+            .clearfix
+                label.pull-left 调研与问卷
+                .pull-right
+                    .tag-btn.radius#addExam 添加考试
+                    .tag-btn.radius#addSurvey 添加调研
+                    .tag-btn.radius#addEva 添加评估
+                    span#min-3 最大化
+                    i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-3
+            table.table#minitable-3(style='display:none')
+                tr
                     th 序号
-                    th(width='50%') 问卷名称
+                    th 问卷名称
                     th 类型
                     th 开始时间
                     th 结束时间
                     th 操作
-                tbody > each(questionnaireList) > tr
+                each(questionnaireList) > tr
                     td > echo(i)
                     td > echo(resourceName)
                     td > map('class-questionnaire-type' type)
                     td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
-                        a(id='edit-qnr-'+id data-name='id' data-value=id) 编辑
-                        a(id='view-qnr-'+id data-name='id' data-value=id) 预览
-                        a(id='del-qnr-'+id data-name='id' data-value=id) 删除
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
 
-view('task') 
-    div(style='padding:20px 50px 50px 20px;')
-        .list.m-top
-            table.table
-                thead > tr
-                    td(colspan=8)
-                        .col-sm-4
-                            label 作业
-                        .col-sm-8(style='text-align:right;')
-                            a.btn#addTask 添加作业
-                            a > echo('最小化')
-                thead > tr
+
+view('task')
+    .dateplan.container.bg-highlight.overflow.dateplan-padding
+        section.layout-mt-small
+            .clearfix
+                label.pull-left 作业
+                .pull-right
+                    .tag-btn.radius#addTask 添加作业
+                    span#min-4 最大化
+                    i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-4
+            table.table#minitable-4(style='display:none')
+                tr
                     th 序号
-                    th(width='50%') 问卷名称
+                    th 作业名称
                     th 开始时间
                     th 结束时间
                     th 操作
-                tbody > each(taskList) > tr
+                each(taskList) > tr
                     td > echo(i)
                     td > echo(name)
                     td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
-                        a(id='edit-task-'+id data-name='id' data-value=id) 编辑
-                        a(id='del-task-'+id data-name='id' data-value=id) 删除
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-task-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-task-'+id data-name='id' data-value=id)
 
 view('configOffline')
-    .list.m-top
+    section.section
         table.table
-            thead > tr
-                td(colspan=8)
-                    .col-sm-2
-                        label 配置主题
-                    .col-sm-2(style='text-align:right;')
-                        a.btn#saveOfflineTheme 保存
-            thead > tr
+            tr
                 th 序号
                 th 周次
-                th(width='50%') 主题名称
-            tbody > each(weeks) > tr
+                th 主题名称
+            each(weeks) > tr
                 td > echo(i)
                 td > echo(name)
-                td
+                td.sub-title
                     label(id='label-theme-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
                     input(id='input-theme-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
 
+
 view('configOnline') > form.vertical
-    .list.m-top
-        table.table
-            thead > tr
-                td(colspan=8)
-                    .col-sm-2
-                        label 配置主题
-                    .col-sm-2(style='text-align:right;')
-                        a.btn#saveTheme 保存
-            thead > tr
-                th 序号
-                th(width='50%') 主题
-                th 排序
-                th 操作
-            tbody > each(themeList) > tr
-                td > echo(i)
-                td
-                    label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
-                    input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
-                td
-                    a(id='move-theme-up-'+id data-name='id' data-value=id) 上移
-                    a(id='move-theme-down-'+id data-name='id' data-value=id) 下移
-                td
-                    a(id='del-theme-'+id data-name='id' data-value=id) 删除
-            tr
-                td(colspan=4 style='text-align:center')
-                    a.btn#addTheme 添加主题
+    table.table
+        tr
+            th 序号
+            th 主题
+            th 排序
+            th 操作
+        each(themeList) > tr
+            td > echo(i)
+            td.sub-title
+                label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
+                input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
+            td
+                i.iconfont.icon-sort-asc.color-warn(id='move-theme-up-'+id data-name='id' data-value=id)
+                i.iconfont.icon-sort-desc.color-pass(id='move-theme-down-'+id data-name='id' data-value=id)
+            td > a(id='del-theme-'+id data-name='id' data-value=id) 删除
+    .add-topic.text-center.clearfix
+        .line.relative.border.bottom
+            .btn.addtopic-btn#addTheme 添加主题
+
 
 view('editOffline') > form.vertical
-    .col-sm-2(style='text-align:right')
-        a.btn#submitOffline 保存
-    .row
-        label(style='float:left;') 课程类型：
-        select.select#type(name='type' x-rule='required') 
-            option(value='1')('selected')&if(checked.type1) > map('class-offline-type' '1')
-            option(value='2')('selected')&if(checked.type2) > map('class-offline-type' '2')
-            option(value='3')('selected')&if(checked.type3) > map('class-offline-type' '3')
-            option(value='4')('selected')&if(checked.type4) > map('class-offline-type' '4')
-    .row
-        label(style='float:left;') 课程名称：
-        input.input#name(name='name' value=offlineCourse.name x-rule='required,maxLength:30')
-        input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
-    .row
-        label(style='float:left;') 开始时间：
-        input.input#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) size=8 style='float:left' x-rule='required')
-        label(style='float:left;') 结束时间：
-        input.input#endTime(name='endTime' value=offlineCourse.endTime size=8 x-rule='required' style='float:left')
-        label(style='float:left;') 教室：
-        select.select#classroomId(name='classroomId' x-rule='required')
-            each(classroomList)
-                option(value=id)('selected')&if(selected) > echo(classroomName)
-    .row
-        label(style='float:left;') 讲师姓名：
-        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName style='float:left' size=8 x-rule='required,maxLength:30')
-        label(style='float:left;') 讲师单位：
-        input.input#teacherOrganization(name='teacherOrganization' size=8 value=offlineCourse.teacherOrganization x-rule='maxLength:30' style='float:left;')
-        label(style='float:left;') 讲师类别：
-        select.select#teacherType(name='teacherType' x-rule='required')
-            option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
-            option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
-    .row
-        label(style='float:left;') 讲师职称：
-        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle style='float:left' x-rule='maxLength:30')
-        label(style='float:left;') 联系电话：
-        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
-
-    .list.m-top
-        table.table
-            thead > tr
-                td(colspan=8)
-                    .col-sm-2
-                        label 课件(最多上传3个)
-                    .col-sm-2(style='text-align:right;')
-                        a.btn#chooseFile 选择
-                        a(title='上传附件支持格式：xls/xlsx/doc/docx/ppt/pptx/zip/txt/rar/pdf/epub/mp3/mp4(大小<100M)') > echo('?')
-            thead > tr
-                th 序号
-                th(width='50%') 附件名称
-                th 类型
-                th 操作
-            tbody > each(files) > tr
-                td > echo(i)
-                td
-                    label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachName + '(点击可修改)')
-                    input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
-                td > map('class-file-type' fileType)
-                td
-                    if(canPreview)
-                        a(href='javascript:;' id='preview-attach-'+attachId) 预览
-                    else
-                        a(href=downUrl download=attachName) 下载
-                    a(id='del-attach-'+id data-name='id' data-value=id) 删除
+    .form
+        .form-row
+            label.required 课程类型
+            .content
+                select.w-half#type(name='type' x-rule='required') 
+                    option(value='1')('selected')&if(checked.type1) > map('class-offline-type' '1')
+                    option(value='2')('selected')&if(checked.type2) > map('class-offline-type' '2')
+                    option(value='3')('selected')&if(checked.type3) > map('class-offline-type' '3')
+                    option(value='4')('selected')&if(checked.type4) > map('class-offline-type' '4')
+                span.color-error 注： 与观看录像 其他 字段一致
+        .form-row
+            label.required 课程名称
+            .content
+                input.input#name(name='name' value=offlineCourse.name x-rule='required,maxLength:30')
+                input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
+        .clearfix
+            .class-form-width.pull-left
+                .form-row
+                    label.required 开始时间
+                    .content
+                        .relative
+                            input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
+                            .iconfont.icon-riqi.text-main-color
+            .class-form-width.pull-left
+                .form-row
+                    label.required 结束时间
+                    .content
+                        .relative
+                            input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
+                            .iconfont.icon-riqi.text-main-color
+            .class-form-width.pull-left
+                .form-row
+                    label.required 教室
+                    .content
+                        select.tag-input#classroomId(name='classroomId' x-rule='required')
+                            each(classroomList)
+                                option(value=id)('selected')&if(selected) > echo(classroomName)
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师姓名
+                    .content
+                        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师单位
+                    .content
+                        input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization x-rule='maxLength:30')
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师类别
+                    .content
+                        select.tag-input#teacherType(name='teacherType' x-rule='required')
+                            option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
+                            option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
+            .class-form-width.pull-left
+                .form-row
+                    label 讲师职务
+                    .content
+                        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle  x-rule='maxLength:30')
+            .class-form-width.pull-left
+                .form-row
+                    label.required 联系电话
+                    .content
+                        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
+    .layout-mt-small
+        .pull-left > label.label 课件（最多上传三个）
+        .pull-right
+            .tag-btn.radius.active#chooseFile 选择
+            .inline-block.help ?
+    table.table
+        tr
+            th  序号
+            th  附件名字
+            th  类型
+            th  操作
+        each(files) > tr
+            td > echo(i)
+            td
+                label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachName + '(点击可修改)')
+                input(id='input-attach-' + id value=attachName style='display:none;' data-name='id' data-value=id)
+            td > map('class-file-type' fileType)
+            td
+                if(canPreview)
+                    i.iconfont.icon-search.custom-color-4.m-right(href='javascript:;' id='preview-attach-'+attachId)
+                else
+                    i.iconfont.icon-search.custom-color-4.m-right(href=downUrl download=attachName)
+                i.iconfont.icon-close-circle.custom-color-3(id='del-attach-'+id data-name='id' data-value=id)
 
 view('upload')
     .row
@@ -317,59 +321,76 @@ view('import-upload')
 
 view('editTask') > form.vertical
     .col-sm-2(style='text-align:right')
-        a.btn#saveTask 保存
-    .row
-        label(style='float:left;') 课程名称
-        input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
-        input.input#id(type= 'hidden' name='id' value=task.id)
-    .row
-        label(style='float:left;') 开始时间
-        input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
-        label(style='float:left;') 结束时间
-        input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
-    .row
-        label(style='float:left;') 任务说明
-        input.input#explain(name='explain' value=task.explain size=8 style='float:left' x-rule='required')
+        if(task.id)
+            a.btn(href='#/train/programme/preview-task/'+task.id target='_blank') 预览
+    .form.align-left
+        .form-row.row-block
+            label.label.required 作业名称
+            .content
+                input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
+                input.input#id(type= 'hidden' name='id' value=task.id)
+        .clearfix
+            .form-row.pull-left.w-half.start-time.row-block.r-padding
+                label.label.required 开始时间
+                .content > input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
+            .form-row.pull-left.w-half.row-block
+                label.label.required 结束时间
+                .content > input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
+        .form-row
+            .clearfix
+                label.label.required.pull-left 任务说明
+                textarea.input#explain(name='explain' rows='3' x-rule='maxLength:1000,required') > echo(task.explain)
 
-    .list.m-top
-        table.table
-            thead > tr
-                td(colspan=8)
-                    .col-sm-2
-                        label 课件(最多上传3个)
-                    .col-sm-2(style='text-align:right;')
-                        a.btn#chooseFile 上传
-                        a(title='上传附件支持格式：xls/xlsx/doc/docx/ppt/pptx/zip/txt/rar/pdf/epub/mp3/mp4(大小<100M)') > echo('?')
-            thead > tr
-                th 序号
-                th(width='50%') 附件名称
-                th 类型
-                th 操作
-            tbody > each(files) > tr
-                td > echo(i)
-                td
-                    label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachmentName + '(点击可修改)')
-                    input(id='input-attach-' + id value=attachmentName style='display:none;' data-name='id' data-value=id)
-                td > map('class-file-type' fileType)
-                td
-                    if(canPreview)
-                        a(href='javascript:;' id='preview-attach-'+attachmentId) 预览
-                    else
-                        a(href=downUrl download=attachmentName) 下载
-                    a(id='del-attach-'+id data-name='id' data-value=id) 删除
-        .row.m-top
-        .col-sm-2
-            label.required > echo('审核人')
-        .col-sm-10
-            label > echo('评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务')
-    .row > .col-sm-12
-        .input.btn-right-bottom(x-rule='required' x-target=state.componentId)&if(state.required)
-        #tags
-        .btn-group
-            .btn#clearMembers 清空
-            .btn#selectMember 继续添加
+        .task-table.layout-mt-small
+            .clearfix
+                .pull-left
+                    span 添加附件
+                    span.small-font.sub-title （最多添加3个）
+                .pull-right
+                    a.tag-btn.m-right.radius.selected#chooseFile 上传
+                    a.inline-block.ask-help(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
+                table.table
+                    thead > tr
+                        th 序号
+                        th 附件名称
+                        th 类型
+                        th 操作
+                    tbody > each(files) > tr
+                        td > echo(i)
+                        td
+                            label(id='label-attach-' + id data-name='id' data-value=id) > echo(attachmentName + '(点击可修改)')
+                            input(id='input-attach-' + id value=attachmentName style='display:none;' data-name='id' data-value=id)
+                        td > map('class-file-type' fileType)
+                        td
+                            if(canPreview)
+                                i.pointer.m-right.iconfont.icon-preview.custom-color-5(href='javascript:;' id='preview-attach-'+attachmentId)
+                            else
+                                a(href=downUrl download=attachmentName) 下载
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-attach-'+id data-name='id' data-value=id)
+        .form.layout-mt-small.align-left
+            .form-choice
+                .form-row
+                    label.label.required 审核人
+                    .inline-block.introduce.sub-title （评分采用百分制，低于60分默认为任务未完成，学员需重新提交任务）
+            .layout-mt-small.form-choice
+                .row > .col-sm-12
+                #tags
+                .btn-group
+                    .btn#clearMembers 清空
+                    .btn#selectMember 继续添加
 
 view('uploadTask')
     .row
         #uploader
 
+view('editQnrTime')
+    form.vertical
+        div
+            label > echo('问卷名称：')
+            input(name='resourceName' value=research.resourceName readonly='readonly' style='border-style: none;')
+        div
+            label > echo('开始时间：')
+            input(id='startTime' style='width:300px;' name='startTime' value=dateTime(research.startTime))
+            label > echo('结束时间：')
+            input(id='endTime' style='width:300px;' name='endTime' value=dateTime(research.endTime))
+            input(name='id' value=research.id type='hidden')

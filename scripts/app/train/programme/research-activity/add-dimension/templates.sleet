@@ -1,0 +1,13 @@
+#!handlebars
+
+module > .exam-manage
+    div(data-region='main')
+
+view('main')
+    form.vertical
+        label(class='required') > setting('exam.dimension.name')
+        input.input#name(name='name' value=dimension.name x-rule='required,maxLength:10')
+        br
+        br
+        label > setting('exam.dimension.description')
+        textarea.input(placeholder='输入描述' cols='100%' name='description') >  echo(dimension.description)

@@ -1,0 +1,105 @@
+#! handlebars
+
+module > .achievement-content.content
+    .achievement-side(data-region='side')
+    .achievement-main(data-region='head')
+    .achievement-main(data-region='main')
+
+view('side')
+    .achievement-preview-top
+        .com-title.text-center
+            | 本卷共
+            echo(state.questionNum)
+            | 题，总分
+            echo(state.totalScore)
+            | 分
+            compare(state.mode 'eq' 1)
+                .text-center.m-top
+                    .m-right.inline-block
+                        .num.min-btn.correct > echo(state.answeredNum)
+                        .inline-block 已答
+                    .m-right.inline-block
+                        .num.min-btn.error > echo(state.noAnswerNum)
+                        .inline-block 未答
+            compare(state.mode 'eq' 2)
+                .text-center.m-top
+                    .m-right.inline-block
+                        .num.min-btn.correct > echo(state.correctNum)
+                        .inline-block 正确
+                    .m-right.inline-block
+                        .num.min-btn.error > echo(state.wrongNum)
+                        .inline-block 错误
+                    .inline-block
+                        .num.min-btn > echo(state.noAnswerNum)
+                        .inline-block 未答
+
+    ul.achievement-preview > each(questionTypes)
+        li.border.bottom(id='list-item-'+ @index)
+            label
+                echo(data.name '题' '(共' data.totalScore '分)')
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
+                div(class='num min-btn ' + if(isCurrent 'correct' ''))(id='q-'+id) > echo(i)
+
+view('head')
+    compare(state.mode 'eq' 1)
+        .title-row.row
+            .col-sm-4.pull-left
+                .com-title > echo('正在作答:' state.name)
+            .col-sm-4
+                .com-title > echo('开始 倒计时' )
+            .col-sm-4.pull-right
+                .com-title
+                    div(data-dynamic-key='countDown')
+    compare(state.mode 'eq' 2)
+        .title-row.row
+            .col-sm-4.pull-left
+                .com-title > echo(state.name)
+            .col-sm-6.pull-right
+                .com-title > echo('考生：' '总得分：' '及格')
+        #  .row
+        #      .col-sm-4
+        #          input(type='hidden')
+        #          select.input#paper-view-type > each(paperViewTypes)
+        #              option(value=key)('selected')&if(selected) > echo(value)
+
+view('main')
+    .hr
+    .preview-content
+        if(state.isOnePageOneQuestion)
+            .row
+                .col-xs-6
+                    .com-title.inline-block > echo(state.questionType '(' state.questionIndex '/' state.questionTotalInType ')')
+                    .inline-block > echo('本题分数:' state.currentQuestionScore)
+                .col-xs-6 > .text-right
+                    if(state.isOnePageOneQuestion)
+                        .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev')
+                        .icon.pe-7s-angle-right-circle.pe-3x(id='next')
+        .row
+            if(state.isOnePageOneQuestion)
+                if(state.questionId)
+                    .col-xs-12(data-dynamic-key=state.questionId)
+                    .col-xs-12(data-dynamic-key='collect-correct-' + state.questionId)
+            else
+                .col-xs-12
+                    each(questionTypes)
+                        label
+                            .com-title > echo(data.name '题' '(共' data.totalScore '分)')
+                            each(data.data)
+                                echo(i)
+                                div(data-dynamic-key=id)
+                                div(data-dynamic-key='collect-correct-' + id)
+
+    compare(state.mode 'eq' 2)
+        .show-answer.border.border-top
+            .row
+                .col-xs-6 >  .com-title 答案：A
+                .col-xs-6.text-right
+                    span 本题得分：1
+                    span.m-left 本题易错率：9%
+
+
+view('tips')
+    .title-row.row
+        .col-sm-12
+            .com-title
+                echo(message)

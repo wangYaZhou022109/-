@@ -1,0 +1,87 @@
+#! handlebars
+
+module
+    .exam-manage
+        .info(data-region='info')
+        .exam-manage-menu(data-region='menu')
+        div(data-region='content')
+
+view('info') > form.vertical
+    .row
+        .col-sm-2.inline-block.info-bar.ewm-bar.border.text-center
+            .ewm > img(src=headId)
+            # .text-tips 活动二维码
+
+        .col-sm-10.inline-block.info-bar
+            .row > .col-sm-12
+                .inline-block.com-title 考试名称：
+                .inline-block > echo(exam.name)
+            .row
+                if(isSignUpExam)
+                    .col-sm-3.inline-block
+                        .inline-block.com-title 报名截止：
+                        .inline-block > dateTime(exam.applicantEndTime)
+                .col-sm-3.inline-block
+                    .inline-block.com-title  开始时间：
+                    .inline-block > dateTime(exam.startTime)
+                .col-sm-3.inline-block
+                    .inline-block.com-title 结束时间：
+                    .inline-block > dateTime(exam.endTime)
+                .col-sm-3.inline-block
+                    a#changeTime 变更时间
+            .row
+                .col-sm-3.inline-block
+                    .inline-block.com-title 考试时长：
+                    .inline-block > echo(exam.duration)
+                .col-sm-3.inline-block
+                    .inline-block.com-title 考试类型：
+                    .inline-block > map('exam-type' exam.type)
+                .col-sm-3.inline-block
+                    .inline-block.com-title 考试状态：
+                    .inline-block > map('exam-status' exam.status)
+                .col-sm-3.inline-block
+                    .inline-block.com-title 参考人数：
+                    .inline-block > echo(exam.joinNumber)
+            .row
+                .col-sm-6.inline-block
+                    .inline-block.com-title 关联话题：
+                    .inline-block
+                        each(exam.topic)
+                            echo(topicName)
+                .col-sm-3.inline-block
+                    .inline-block.com-title 考试二维码：
+                    .inline-block > #qrcode
+            .row > .col-sm-12
+                .inline-block.m-right
+                    .inline-block.com-title 考试链接：
+                    .inline-block > echo(examUrl)
+
+
+
+
+view('menu') > form.vertical
+    ul.menu-list.clearfix
+        compare(exam.type 'eq' 1)
+            li#menu-1(data-value='1' class=if(active.menu1 'current' '')) 报名审核
+        li#menu-2(data-value='2' class=if(active.menu2 'current' '')) 考试监考
+        if(subjective)
+            li#menu-3(data-value='3' class=if(active.menu3 'current' '')) 评卷配置
+        #  暂时都不需要了纠错和补考
+        #  li#menu-4(data-value='4' class=if(active.menu4 'current' '')) 纠错记录
+        #  compare(exam.status 'eq' 4)
+        #      li#menu-5(data-value='5' class=if(active.menu5 'current' '')) 补考管理
+
+view('content')
+    div(data-dynamic-key=state.menuId)
+
+view('change-time') > form.vertical
+    input(type="hidden")
+    compare(exam.type 'eq' '1')
+        label 报名截止时间
+        input.input#applicant-end-time(name='applicantEndTime' value=dateMinute(exam.applicantEndTime) placeholder='该字段只在报名考试显示，当报名截止时间到达后不能修改' readonly='1')
+
+    label 开始时间
+    input.input#start-time(name='startTime' value=dateMinute(exam.startTime) placeholder='当开始时间到达后不能修改' readonly='1')
+
+    label 结束时间
+    input.input#end-time(name='endTime' value=dateMinute(exam.endTime) readonly='1')

@@ -1,26 +1,40 @@
 #!handlebars
 
-module
-    br
+module > .membership-content-5
     .div(data-region='main')
     
 
 view('main')
-    echo('学员列表')
-    input(type='checkbox' id='checkAllTrainee')
-    label(for='checkAllTrainee') > echo('全选')
-    br
-    each(traineeGroups)
-        echo(name)
-        input(type='checkbox' id='checkGroup'+id)
-        label(for='checkGroup'+id) > echo('全选')
-        ul > each(traineeList)
-            li(id='trainee-'+id) > echo(member.fullName + ' ')
-    echo('班务人员列表')
-    input(type='checkbox' id='checkAllStaff')
-    label(for='checkAllStaff') > echo('全选')
-    ul > each(classstaffs)
-        li(id='classstaff-'+id) > echo(member.fullName + ' ')
+    .title
+        .clearfix.layout-mt-small
+            .h5.pull-left.layout-mr-small.strong > echo('学员列表')
+            .check.pull-left
+                input(type='checkbox' id='checkAllTrainee')
+                label(for='checkAllTrainee') > echo('全选')
+        each(traineeGroups)
+            .clearfix.layout-mt-small
+                .small-font.pull-left.layout-mr-small > echo(name)
+                .check.pull-left
+                    input(type='checkbox' id='checkGroup'+id)
+                    label(for='checkGroup'+id) > echo('全选')
+            .student-list.layout-mt-small.overflow
+                each(traineeList)
+                    span.active(id='trainee-'+id) > echo(member.fullName)
+        .clearfix.layout-mt-small
+            .h5.pull-left.layout-mr-small.strong > echo('班务人员列表')
+            .check.pull-left
+                input(type='checkbox' id='checkAllStaff')
+                label(for='checkAllStaff') > echo('全选')
+        .student-list.layout-mt-small.overflow
+            each(classstaffs)
+                span.active(id='classstaff-'+id) > echo(member.fullName)
+    .layout-mt
+        .clearfix
+            .pull-left.strong 短信内容
+            span.pull-right 0/600
+        .m-top
+            textarea(placeholder="填写短信内容" rows="10")
+    .btn.layout-mt-small 发送
 
 
 

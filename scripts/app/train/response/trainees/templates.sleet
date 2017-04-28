@@ -11,9 +11,11 @@ view('search') > form.vertical
     echo('姓名')
     input.input(name='memberFullName')
     echo('单位')
-    input.input(name='organizationId')
+    select.input#organizationId(name='organizationId' x-marker='selectize')
+        each(organizations)
+            option(value=key) > echo(value)
     echo('状态')
-    select.input#auditStatus(name='auditStatus' x-marker='selectize' style='width:100px; display:inline;')
+    select.input#auditStatus(name='auditStatus' x-marker='selectize')
         each(auditStatus)
             option(value=key) > echo(value)
     btn.btn#search > echo('查询')
@@ -42,3 +44,4 @@ view('main')
             td > map('trainee-show-auditStatus' auditStatus)
             else
                 tr > td(colspan='9') > p.text-center > echo('没有数据')
+    #pager.pagination

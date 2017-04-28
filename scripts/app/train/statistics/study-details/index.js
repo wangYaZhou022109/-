@@ -14,7 +14,9 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var courseStudyProgresss = this.models.courseStudyProgresss;
+            var courseStudyProgresss = this.models.courseStudyProgresss,
+                state = this.models.state;
+            state.data.classId = payload.classId;
             courseStudyProgresss.params = payload;
             return this.get(courseStudyProgresss);
         }

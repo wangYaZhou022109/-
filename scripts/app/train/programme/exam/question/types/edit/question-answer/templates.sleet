@@ -1,0 +1,25 @@
+#!handlebars
+
+module > .choise > form.vertical
+    div(data-region='content')
+    div(data-region='score')
+
+view('content')
+    .row > .col-sm-12
+        label(class='required') 试题信息
+        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content') > @echo(state.content)
+        if(showDiffculty)
+            .row > .col-sm-12
+                label(class='required') 难易度
+                select.input#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
+                    option(value=key)('selected')&if(selected) > echo(value)
+        .text-tips
+        label(class='required') 参考答案
+        textarea.input#answer(x-rule='required' x-marker='rich-text' x-target='answer') > @echo(state.answer)
+
+view('score')
+    if(showScore)
+        .row
+            .col-sm-6
+                label(class='required') 试题分数
+                input.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')

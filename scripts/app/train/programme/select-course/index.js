@@ -1,13 +1,12 @@
 var _ = require('lodash/collection');
 
 exports.items = {
-    coursePool: 'coursePool',
     selected: 'selected'
 };
 
-exports.large = true;
-
 exports.title = '添加课程';
+
+exports.large = true;
 
 exports.store = {
     models: {
@@ -67,3 +66,14 @@ exports.store = {
 exports.beforeRender = function() {
     return this.dispatch('init', { classId: this.renderOptions.id });
 };
+
+exports.buttons = [{
+    text: '保存',
+    fn: function() {
+        var targetList = this.store.models.targetList.data,
+            delList = this.store.models.delList.data,
+            state = this.store.models.state.data;
+        var themeId = state.themeId;
+        this.renderOptions.callback(themeId, targetList, delList);
+    }
+}];

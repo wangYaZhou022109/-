@@ -1,0 +1,23 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='options')
+    div(data-region='score')
+
+view('content')
+    .row > .col-sm-12
+        label(class='required') 试题信息
+        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content') > echo(state.content)
+
+view('options')
+    input.inline-block(type='radio' name='judge' value=1)('checked')&if(state.correct)
+    .inline-block 正确
+    input.inline-block.m-left(type='radio' name='judge' value=0)('checked')&if(state.error)
+    .inline-block 错误
+
+view('score')
+    .row
+        .col-sm-6
+            label(class='required') 试题分数
+            input.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')

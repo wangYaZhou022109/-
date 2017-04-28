@@ -1,0 +1,11 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .input.btn-right-bottom(x-rule='required' x-target=state.componentId)&if(state.required)
+        #tags
+        .btn-group
+            .btn#clearMembers 清空
+            .btn#selectMember 继续添加

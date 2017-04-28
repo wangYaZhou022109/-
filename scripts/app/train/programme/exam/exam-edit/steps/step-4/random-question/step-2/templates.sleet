@@ -1,0 +1,42 @@
+#!handlebars
+module
+    div(data-region='setting-score')
+    
+view('setting-score') > form.vertical
+    .random-question-main.row
+        .col-sm-12 > .list
+            table.table.no-padding.nowrap
+                thead
+                    tr
+                        th(width='20%') 题型
+                        th(width='20%') 高
+                        th(width='20%') 中
+                        th(width='20%') 低
+                        th(width='20%') 全部
+                tbody
+                    each(scoreTable.rows)
+                        tr
+                            td > echo(typeName)
+                            td > .inline-block
+                                echo(d1.amount)
+                            td > .inline-block
+                                echo(d2.amount)
+                            td > .inline-block
+                                echo(d3.amount)
+                            td > .inline-block
+                                echo(total.amount)
+                                input.input.transparent(value=total.score)
+                    tr
+                        td > | 总分
+                        td > .inline-block
+                            echo(scoreTable.total1.amount)
+                            input.input.transparent(value=scoreTable.total1.score)
+                        td > .inline-block
+                            echo(scoreTable.total2.amount)
+                            input.input.transparent(value=scoreTable.total2.score)
+                        td > .inline-block
+                            echo(scoreTable.total3.amount)
+                            input.input.transparent(value=scoreTable.total3.score)
+                        td > .inline-block
+                            echo(scoreTable.total.amount)
+                            input.input.transparent(value=scoreTable.total.score)

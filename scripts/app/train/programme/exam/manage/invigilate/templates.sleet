@@ -1,0 +1,112 @@
+#! handlebars
+
+module > .exam-manage-review
+    .review-search(data-region='search')
+    .review-main(data-region='main')
+
+view('search')
+    form.vertical
+        .row
+            .col-sm-11 > .row > .col-sm-12
+                .inline-block.m-right > .input-box
+                    .text 姓名:
+                    input.input-left60.input(name='memberFullName')
+                .inline-block.m-right > .input-box
+                    .text 用户名:
+                    input.input-left60.input(name='memberName')
+                .inline-block.m-right > .input-box
+                    .text 类型:
+                    .input.cont > .min-input > select.input#type(name='type')> each(type)
+                        option(value=key) > echo(value)
+                .inline-block.m-right > .input-box
+                    .text 使用终端:
+                    .input.cont > .min-input > select.input#clientType(name='clientType')
+                        option(value='') 全部
+                        option(value='1') pc
+                        option(value='2') app
+                        option(value='3') 微信
+                .inline-block.m-right > .input-box
+                    .text 答题状态:
+                    .input.cont > .min-input > select.input#status(name='status')> each(status)
+                        option(value=key) > echo(value)
+            .col-sm-1.clearfix
+                .text-right > .btn.inline-block#search 搜索
+        .row
+            .col-sm-12
+                label
+                .inline-block.m-right > .input-box
+                    .text 所属部门:
+                    #owner
+
+
+view('main')
+    .hr
+    .clearfix
+        .pull-left.m-top 考生列表
+        .pull-right
+            .btn 催办
+            compare(exam.status 'ne' 4)
+                .btn#addMember 添加考生
+            a(href=exportUrl) > .btn > span 导出
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th > .checkbox.no-margin
+                    input(type='checkbox' id='checkbox-all')
+                    label(for='checkbox-all')
+                th 考生姓名
+                th 考生账号
+                th 部门
+                th 岗位
+                th 开始时间
+                th 最后保存时间
+                th 交卷时间
+                th 总分
+                th 使用终端
+                th 状态
+                th 操作
+            tbody > each(examRecords)
+                tr
+                    td > .checkbox.no-margin
+                        input(type='checkbox' id='checkbox-'+id)
+                        label(for='checkbox-'+id)
+                    td > echo(member.fullName)
+                    td > echo(member.name)
+                    td > echo(organization.name)
+                    td > echo(member.majorPositionName)
+                    td > dateTime(startTime)
+                    td > dateTime(lastSubmitTime)
+                    td > dateTime(submitTime)
+                    td > echo(score)
+                    td > echo(clientType)
+                    td > map('paper-instance-status' status)
+                    td.operation
+                        compare(status 'eq' 1)
+                            a(id='urge-'+id data-name='id' data-value=id) > string('exam.exam.urge')
+                            echo('|')
+                            a(id='delete-'+id data-name='id' data-value=id) > string('remove')
+                        compare(status 'eq' 3)
+                            a(id='enforce-'+ member.id data-name='id' data-value=member.id) > string('exam.exam.enforce')
+                            echo('|')
+                            a(id='error-handle-'+id data-name='id' data-value=id) > string('exam.error-handle')
+                        compare(status 'eq' 4)
+                            a(id='reset-'+id data-name='id' data-value=id) > string('reset')
+                        compare(status 'eq' 5)
+                            a(id='detail-'+id data-name='id' data-value=id) > string('detail')
+                            echo('|')
+                            a(id='mark-'+id data-name='id' data-value=id) > string('exam.exam.mark')
+                        compare(status 'eq' 6)
+                            a(id='detail-'+id data-name='id' data-value=id) > string('detail')
+                            echo('|')
+                            a(id='reset-'+id data-name='id' data-value=id) > string('reset')
+                        compare(status 'eq' 7)
+                            a(id='detail-'+id data-name='id' data-value=id) > string('detail')
+                            echo('|')
+                            a(id='reset-'+id data-name='id' data-value=id) > string('reset')
+    #pager.pagination
+
+view('error-handle') > form.vertical
+    label > setting('exam.error-handle')
+    echo('恢复考卷（恢复后，考卷恢复到系统最后保存的状态，用户可继续答卷）延长该用户答卷时长')
+    input.input(name='time' x-rule='required')
+    echo('分钟')

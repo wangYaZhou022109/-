@@ -1,0 +1,41 @@
+#!handlebars
+
+module > .classmanage-page
+    .classmanage(data-region='content')
+
+view('content') > form.vertical
+    section.section
+        .container.layout-mt
+            .form.align-left
+                .clearfix
+                    .form-row.pull-left.form-row-width.r-padding
+                        label.label.required 培训人数
+                        .content > input.input(name='peopleDayEntity' readonly='true' value= settlement.peopleDayEntity)
+                    .form-row.pull-left.form-row-width.r-padding
+                        label.label.required 培训天数
+                        .content> input.input(name='dayNumberEntity' readonly='true' value= settlement.dayNumberEntity)
+                    .form-row.pull-left.form-row-width
+                        label.label.required 培训人日
+                        .content > input.input(name='peopleNumberEntity' readonly='true' value= settlement.peopleNumberEntity)
+                    .form-row.pull-left.form-row-width.r-padding
+                        label.label.required 结算人数
+                        .content > input.input( id ='input-class-1' name='peopleNumber' value= settlement.peopleNumber)
+                    .form-row.pull-left.form-row-width.r-padding
+                        label.label.required 结算天数
+                        .content > input.input(name='dayNumber' value= settlement.dayNumber)
+                    .form-row.pull-left.form-row-width
+                        label.label.required 结算人日
+                        .content > input.input(name='peopleDay' value= settlement.peopleDay)
+                    .form-row.pull-left.form-row-width.r-padding
+                        label.label.required 上课天数
+                        .content > input.input(name='attendDays' value= settlement.attendDays)
+                    .form-row.pull-left.form-row-width.r-padding
+                        label.label.required 结算月份 
+                        .content > input.input(name='createMouth' value= settlement.createMouth)
+                .form-row
+                    label.label.required 说明
+                    .content > textarea.width-full(name='explain' rows='5') > echo(settlement.explain)
+                    .col-sm-4
+                    .inline-block > input.input(type='hidden' name='id' value=settlement.id)
+                    .content > input.input(type='hidden' name='classId' value=settlement.classId)
+            .text-center > .btn.gray.tag-height(id='saveBalanceSubmit') > echo('提交')

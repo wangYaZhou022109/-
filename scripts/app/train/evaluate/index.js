@@ -29,7 +29,7 @@ exports.store = {
                 files.data.push(newFile);
                 files.changed();
             });
-            return this.get(Evaluate);
+            return null;
         },
         submit: function(payload) {
             var Evaluate = this.models.Evaluate,

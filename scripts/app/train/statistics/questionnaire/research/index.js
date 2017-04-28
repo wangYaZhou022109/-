@@ -1,5 +1,4 @@
 exports.items = {
-    details: 'details',
     main: 'main',
     search: 'search'
 };
@@ -18,12 +17,12 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var researchQuestionarys = this.models.researchQuestionarys,
-                state = this.models.state.data;
+                state = this.models.state;
             researchQuestionarys.params = {};
             researchQuestionarys.params.resourceId = payload.id;
             researchQuestionarys.params.classId = payload.classId.classId;
-            state.id = payload.id;
-            state.classId = payload.classId.classId;
+            state.data.resourceId = payload.id;
+            state.data.classId = payload.classId.classId;
             return this.get(researchQuestionarys);
         },
         search: function(payload) {
@@ -33,7 +32,6 @@ exports.store = {
         }
     }
 };
-
 
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions.payload);

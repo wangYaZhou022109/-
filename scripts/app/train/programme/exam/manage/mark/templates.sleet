@@ -1,0 +1,15 @@
+#! handlebars
+
+module > .exam-manage-review
+    .review-main(data-region='main')
+    div(data-region='mark-config')
+
+view('main')
+    .m-top > .row
+        .col-sm-3.col-sm-offset-4.text-right.pull-right
+            .inline-block > .btn(id='save') 保存
+            .inline-block > .btn 通知
+    br
+
+view('mark-config')
+    div(data-dynamic-key='')

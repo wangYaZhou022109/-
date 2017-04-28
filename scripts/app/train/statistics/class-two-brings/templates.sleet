@@ -1,81 +1,80 @@
 #!handlebars
 
-module > .train-class-page
+module
+    br
     .page-main-wrapper
         .div(data-region='search')
         .div(data-region='main')
 
 view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('员工编号')
+    .filter-row
+        .filter-item
+            label 员工编号
             input.input(name='name')
-        div.col-sm-3
-            echo('姓名')
+        .filter-item
+            label 姓名
             input.input(name='fullName')
-        div.col-sm-3
-            echo('所属单位')
-            a.btn.inline-block#showOrganization 选择
-        div.col-sm-3
+        .filter-item.clearfix.vertical-top
+            label.tag-height.pull-left.m-right 所属单位
+            input.input.pull-left
+            a.btn.gray.small.pull-left#showOrganization 选择
+        .filter-item.vertical-top
+            label |
             btn.btn#search > echo('搜索')
 
 view('main')
-    div.text-center
-        echo('两个带来列表')
-    .buttons
-        a(href=exportUrl target = "_blank") > .btn > echo('导出')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('学员姓名')
-            th > echo('员工编号')
-            th > echo('单位')
-            th > echo('提交时间')
-            th > echo('经验/案例主题')
-            th > echo('问题/困难主题')
-            th > echo('操作')
-        tbody > each(classTwoBrings) > tr
-            td > echo(i)
-            td > echo(member.fullName)
-            td > echo(member.name)
-            td > echo(organization.name)
-            td > dateTime(createTime)
-            td > echo(title1)
-            td > echo(title2)
-            td
-                a(id='edit'+id data-name='id' data-value=id) > echo('查看')
-        else
-            tr > td(colspan='11') > p.text-center > string('no-data')        
-    #pager.pagination
+    .layout-mt-small
+        .clearfix
+            .h5.pull-left 两个带来列表
+            a.btn.small.active.pull-right(href=exportUrl target = "_blank") 导出
+        .m-top
+            table.table
+                thead > tr
+                    th > echo('序号')
+                    th > echo('学员姓名')
+                    th > echo('员工编号')
+                    th > echo('单位')
+                    th > echo('提交时间')
+                    th > echo('经验/案例主题')
+                    th > echo('问题/困难主题')
+                    th > echo('操作')
+                tbody > each(classTwoBrings) > tr
+                    td > echo(i)
+                    td > echo(member.fullName)
+                    td > echo(member.name)
+                    td > echo(organization.name)
+                    td > dateTime(createTime)
+                    td > echo(title1)
+                    td > echo(title2)
+                    td
+                        a(id='edit'+id data-name='id' data-value=id) > echo('查看')
+                    else
+                        tr > td(colspan='11') > p.text-center > string('no-data')
+            #pager.pagination
+
+            
 
 view('edit') > form.vertical
-    input.input(name='id' type='hidden' value=auditTrainee.id)
-    hr
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('学员姓名') :
-            .inline-block > echo(classTwoBring.member.fullName)
-        .col-sm-4
-            .inline-block.com-title > echo('员工编号') :
-            .inline-block > echo(classTwoBring.member.name)
-        .col-sm-4
-            .inline-block.com-title > echo('提交时间') :
-            .inline-block > dateTime(classTwoBring.createTime)
-    br
-    .row
-        .col-sm-2
-            .inline-block.com-title > echo('经验/案例主题') :
-            .inline-block > echo(classTwoBring.title1)
-    br
-    .row
-        .col-sm-10
-            textarea.input.w-full(rows='2') > echo(classTwoBring.content1)
-    br
-    .row
-        .col-sm-2
-            .inline-block.com-title > echo('问题/困难主题') :
-            .inline-block > echo(classTwoBring.title2)
-    br
-    .row
-        .col-sm-10
-            textarea.input.w-full(rows='2') > echo(classTwoBring.content2)
+    .clearfix
+        .pull-left.title-width
+            span 学员姓名:
+            span > echo(classTwoBring.member.fullName)
+        .pull-middle.title-width
+            span 员工编号：
+            span > echo(classTwoBring.member.name)
+        .pull-right
+            span 提交时间：
+            span > dateTime(classTwoBring.createTime)
+    .watchbring-content
+        .watchbring-item.layout-mt-small.overflow
+            p 1.优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新
+            .form.align-left > .form-row
+                span > echo('经典/案例主题：' + classTwoBring.title1)
+            textarea.w-full.m-top(placeholder="输入问题内容" rows="5" value= classTwoBring.content1) > echo(classTwoBring.content1)
+        .watchbring-item.layout-mt-small.overflow
+            p 2.棘手问题：您当前最关心的、当前工作中最棘手的一个问题
+            .form.align-left > .form-row
+                span > echo('经典/案例主题：' + classTwoBring.title2)
+            textarea.w-full.m-top(placeholder="输入问题内容" rows="5" value= classTwoBring.content2) > echo(classTwoBring.content1)
+        input.input(name='id' type='hidden' value=auditTrainee.id)
+        

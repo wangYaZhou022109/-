@@ -1,0 +1,16 @@
+#! handlebars
+
+module
+    .step-row.row-full.avg-2(data-region='step')
+    form.vertical > div(data-region='main')
+
+view('step')
+    .step-item#step-1.current
+        span.num 1
+        | 基本信息
+    .step-item#step-2(class = if(currentStep.b 'current'))
+        span.num 2
+        | 设置考卷
+
+view('main')
+    if(state.step) > div(data-dynamic-key=state.step)

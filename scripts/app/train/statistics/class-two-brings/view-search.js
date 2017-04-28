@@ -33,7 +33,8 @@ exports.components = [function() {
 }];
 
 exports.bindings = {
-    classTwoBrings: true
+    classTwoBrings: true,
+    state: true
 };
 
 exports.actions = {
@@ -42,10 +43,6 @@ exports.actions = {
 
 exports.events = {
     'click showOrganization': 'show'
-};
-
-exports.actions = {
-    'click edit*': 'edit',
 };
 
 exports.handlers = {
@@ -62,8 +59,8 @@ exports.handlers = {
 exports.dataForActions = {
     search: function() {
         return {
-            classId: 3,
-            memberName: $(this.$$('[name="name"]')).val(),
+            classId: this.bindings.state.data.classId,
+            name: $(this.$$('[name="name"]')).val(),
             memberFullName: $(this.$$('[name="fullName"]')).val(),
             organizationName: $(this.$$('[name="organizationName"]')).val()
         };

@@ -23,11 +23,14 @@ exports.store = {
             url: '../train/bus/undo'
         },
         optionList: {
-            url: '../train/busValue',
+            url: '../train/bus-value',
             data: []
         },
         optionModel: {
-            url: '../train/busValue'
+            url: '../train/bus-value'
+        },
+        classInfo: {
+            url: '../train/class-info/get'
         },
         state: { data: {} },
         delOptionList: { data: [] },
@@ -38,8 +41,15 @@ exports.store = {
                 state = this.models.state;
             buss.clear();
             state.data.classId = payload.classId;
+            state.changed();
             buss.params = state.data;
             return this.get(buss);
+        },
+        getClassInfo: function() {
+            var classInfo = this.models.classInfo,
+                state = this.models.state;
+            classInfo.params = { id: state.data.classId };
+            return this.get(classInfo);
         },
         editBus: function(payload) {
             var bus = this.models.bus;
@@ -91,13 +101,18 @@ exports.store = {
                 delOptionList = this.models.delOptionList,
                 optionModel = this.models.optionModel,
                 bus = this.models.bus,
+                buss = this.models.buss,
                 me = this;
             optionModel.clear();
             D.assign(bus.data, {
                 optionList: JSON.stringify(optionList.data),
                 delOptionList: JSON.stringify(delOptionList.data),
             });
-            return me.save(bus);
+            this.save(bus).then(function() {
+                me.app.message.success('保存成功');
+                me.app.viewport.closeModal();
+                me.get(buss);
+            });
         },
         updateName: function(data) {
             var optionList = this.models.optionList.data,
@@ -108,11 +123,29 @@ exports.store = {
             });
             target = optionList[index];
             target.name = data.name;
+            target.explain = data.explain;
+            this.models.optionList.changed();
+        },
+        updateExplain: function(data) {
+            var optionList = this.models.optionList.data,
+                target,
+                index;
+            index = optionList.findIndex(function(e) {
+                return e.id === data.id;
+            });
+            target = optionList[index];
+            target.explain = data.explain;
             this.models.optionList.changed();
         },
         remove: function(payload) {
-            this.models.bus.set(payload);
-            return this.del(this.models.bus);
+            var bus = this.models.bus,
+                buss = this.models.buss,
+                me = this;
+            bus.set(payload);
+            this.del(bus).then(function() {
+                me.app.message.success('删除成功');
+                me.get(buss);
+            });
         }
     }
 };
