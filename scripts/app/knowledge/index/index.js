@@ -51,8 +51,8 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search;
-            search.set({ orderType: '0' });
-            return this.models.menu2.set(this.models.categories.findLevel(3));
+            search.set({ orderType: '0' }, true);
+            this.models.menu2.set(this.models.categories.findLevel(3));
         },
         search: function(payload) {
             var search = this.models.search;
