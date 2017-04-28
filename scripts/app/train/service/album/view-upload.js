@@ -24,10 +24,7 @@ exports.components = function() {
 };
 
 exports.changeFile = function() {
-    var imgs = this.bindings.img.data.imgs,
-        uploader = this.components.uploader,
-        fileCount = uploader.files.length,
-        uploadCount = uploader.uploadCount || 1;
+    var imgs = this.bindings.img.data.imgs;
     var items = _.map(imgs, function(v) {
         return {
             attachmentId: v.id,
@@ -36,9 +33,5 @@ exports.changeFile = function() {
         };
     });
     this.module.dispatch('addFile', items);
-    if (uploadCount >= fileCount) {
-        this.app.viewport.closeModal();
-    } else {
-        uploader.uploadCount = uploadCount + 1;
-    }
+    this.app.viewport.closeModal();
 };

@@ -64,7 +64,7 @@ exports.store = {
         remove: function(ids) {
             var deletePnoto = this.models.deletePnoto;
             deletePnoto.set({ ids: ids.join(',') });
-            this.put(deletePnoto);
+            return this.put(deletePnoto);
         },
         update: function(payload) {
             var updatePhoto = this.models.updatePhoto;

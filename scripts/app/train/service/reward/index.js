@@ -35,11 +35,8 @@ exports.store = {
         },
         updateClass: function(payload) {
             var updateClass = this.models.updateClass;
-            var courseSalary = this.models.courseSalary;
             updateClass.set(payload);
-            return this.put(updateClass).then(function() {
-                this.get(courseSalary);
-            });
+            return this.put(updateClass);
         },
     }
 };

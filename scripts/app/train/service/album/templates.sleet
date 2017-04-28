@@ -1,24 +1,35 @@
 #! handlebars
 
-module
-    .exam-base-info(data-region='pannel')
+module > .managements-page
+    .classmanage(data-region='pannel')
 
 view('pannel')
-    ul.tabs-cont
-        # 图库内容
-        li.item#cont-item-content(class=if(state.content 'current'))
-            form.vertical.horizontail
-                .form-row
-                    .btn#upload 上传照片
-                    .btn#remove 删除
-                .form-row > .row
+    .container
+        section.section
+            .tag-btn.active.radius#upload 上传照片
+            .tag-btn.active.radius#remove 删除
+            .photos
+                ul
                     each(photo)
-                        .col-sm-4.img-list(id='img-' + id)
-                            .img
-                                .img-cont > img(src=imageUrl)
-                                .choose > i.iconfont.icon-choose
-                            input(id='name-'+id value=name)
-                            input(type='checkbox' name='photoChecked' id='photo-'+id value=id)
+                        li(id='img-' + id)
+                            .photo-item
+                                img(src=imageUrl)
+                                input.check(type='checkbox' name='photoChecked' id='photo-'+id value=id)
+                            .text-center.m-top
+                                input.sub-title.small-font.border(id='name-'+id value=name)
+        #  li.item#cont-item-content(class=if(state.content 'current'))
+        #      form.vertical.horizontail
+        #          .form-row
+        #              .btn 上传照片
+        #              .btn#remove 删除
+        #          .form-row > .row
+        #              each(photo)
+        #                  .col-sm-4.img-list(id='img-' + id)
+        #                      .img
+        #                          .img-cont > img(src=imageUrl)
+        #                      input.check(type="checkbox")
+        #                          .choose > i.iconfont.icon-choose
+        #                      input(id='name-'+id value=name)
 
 view('upload')
     #uploader
