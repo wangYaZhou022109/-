@@ -48,7 +48,7 @@ view('main')
             td > echo(phoneNumber)
             td > map('trainee-show-auditStatus' auditStatus)
             td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId href='javascript:;') > echo('审核')
-    #pager.pagination
+    #pager.pagination(style='float:none')
 
 view('situation') > .signup-page.signup
     section.section

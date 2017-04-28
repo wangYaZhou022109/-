@@ -1,7 +1,5 @@
 var _ = require('lodash/collection');
 
-exports.title = '报名情况列表';
-
 exports.bindings = {
     situation: true
 };

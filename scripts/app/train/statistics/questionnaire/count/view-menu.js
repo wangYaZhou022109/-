@@ -23,6 +23,7 @@ exports.handlers = {
         state.data.classId = cla.data.id;
         state.data.menu = menu || 'news';
         state.data[menu] = true;
+        state.data.isManage = true;
         state.changed();
     }
 };
@@ -82,21 +83,21 @@ exports.dataForTemplate = {
     },
     isManage: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'manage') {
+        if (state.data.menu === 'news') {
             return true;
         }
         return false;
     },
     isFmtrainee: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'fmtrainee') {
+        if (state.data.menu === 'exp') {
             return true;
         }
         return false;
     },
     isClassstaff: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'classstaff') {
+        if (state.data.menu === 'reply') {
             return true;
         }
         return false;

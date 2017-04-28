@@ -5,6 +5,8 @@ exports.items = {
 
 exports.large = true;
 
+exports.title = '班级学员';
+
 exports.store = {
     models: {
         state: {},

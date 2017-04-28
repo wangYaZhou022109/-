@@ -8,7 +8,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click batchStatus': 'batchStatus',
+    'click batchStatus1': 'batchStatus',
 };
 
 exports.handlers = {
