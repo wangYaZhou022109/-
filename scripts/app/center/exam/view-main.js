@@ -64,6 +64,7 @@ exports.components = [{
 // 10: 报名考试，超出报名时间范围
 // 11: 查看证书
 // 12: 考试已撤销
+// 14: 可考多次 不能马上查看详情
 exports.dataForTemplate = {
     exams: function(data) {
         var exams = data.exams;
@@ -91,7 +92,8 @@ exports.dataForTemplate = {
                     10: [],
                     11: [toDetailButton, toCertButton],
                     12: [],
-                    13: []
+                    13: [],
+                    14: [retryButton]
                 };
             return D.assign(e, {
                 status: getRecordStatus(e),

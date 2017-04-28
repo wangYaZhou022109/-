@@ -15,6 +15,7 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 11: 查看证书 查看详情
 // 12: 考试已撤销
 // 13: 考试结束，没有详情
+// 14: 可考多次 不能马上查看详情
 exports.getUserStatusOfExam = function(exam) {
     var signUp = signUpExam(exam);
 
@@ -34,6 +35,9 @@ exports.getUserStatusOfExam = function(exam) {
         }
         if (canExamMore(exam) && canViewDetailImmd(exam)) {
             return 6;
+        }
+        if (canExamMore(exam)) {
+            return 14;
         }
         if (canViewDetailImmd(exam)) {
             return 7;
