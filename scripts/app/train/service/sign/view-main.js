@@ -128,5 +128,26 @@ exports.dataForTemplate = {
             return e;
         });
         return signs;
-    }
+    },
+    isCheckout1: function() {
+        var state = this.bindings.state;
+        if (state.data.type === 1) {
+            return true;
+        }
+        return false;
+    },
+    isCheckout2: function() {
+        var state = this.bindings.state;
+        if (state.data.type === 2) {
+            return true;
+        }
+        return false;
+    },
+    isCheckout3: function() {
+        var state = this.bindings.state;
+        if (state.data.type === 3) {
+            return true;
+        }
+        return false;
+    },
 };
