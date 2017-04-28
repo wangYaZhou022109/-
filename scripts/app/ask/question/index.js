@@ -48,14 +48,18 @@ exports.store = {
     },
     callbacks: {
         addFile: function(payload) {
+            // var me = this,
+            //     attachments = me.models.task.data.attachments || [];
+            // _.forEach(payload || [], function(data, i) {
+            //     var obj = data,
+            //         index = i + 1;
+            //     obj.idx = attachments.length + index;
+            //     attachments.push(obj);
+            // });
+            // me.models.task.data.attachments = attachments;
+            // me.models.task.changed();
             var me = this,
-                attachments = me.models.task.data.attachments || [];
-            _.forEach(payload || [], function(data, i) {
-                var obj = data,
-                    index = i + 1;
-                obj.idx = attachments.length + index;
-                attachments.push(obj);
-            });
+                attachments = payload;
             me.models.task.data.attachments = attachments;
             me.models.task.changed();
         },
@@ -80,9 +84,9 @@ exports.store = {
                 // console.log(task);
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
-                data.enclosureType = task.attachments[0].idex;
+                data.enclosureType = 1;
                 data.enclosureSuffix = task.attachments[0].contentType;
-                data.transferViewUrl = 'null';
+                data.transferViewUrl = task.attachments[0].attachmentId;
                 data.transferFlag = 1;
                 data.enclosureSuffixImg = 'null';
             }

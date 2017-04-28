@@ -1,3 +1,4 @@
+
 exports.bindings = {
     task: true
 };
@@ -12,3 +13,4 @@ exports.dataForActions = {
         return false;
     }
 };
+

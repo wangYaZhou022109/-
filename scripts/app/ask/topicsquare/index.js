@@ -9,7 +9,11 @@ exports.store = {
         topicType: { url: '../system/topic-type' },
         topicname: { url: '../ask-bar/topic/topic-name' },
         checkOne: { url: '../ask-bar/topic/topic-name' },
-        follow: { url: '../ask-bar/question-details/boutique' },
+        // follow: { url: '../ask-bar/question-details/boutique' },
+        // unfollow: { url: '../ask-bar/concern/unfollow' },
+        follow: {
+            url: '../ask-bar/question-details/boutique'
+        },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         state: {}
     },
@@ -37,6 +41,28 @@ exports.store = {
             var topicname = this.models.topicname;
             return this.get(topicname);
         },
+        // follow: function(payload) {
+        //     var follow = this.models.follow,
+        //         me = this,
+        //         init = this.models.init;
+        //     follow.set(payload);
+        //     init.set({ id: this.models.init.data.id, concernType: '4' });
+        //     return this.post(follow).then(function() {
+        //         me.app.message.success('关注成功');
+        //         me.get(init);
+        //     });
+        // },
+        // unfollow: function(payload) {
+        //     var unfollow = this.models.unfollow,
+        //         me = this,
+        //         init = this.models.init;
+        //     init.set({ id: this.models.init.data.id, concernType: '4' });
+        //     unfollow.set({ id: payload.id, concernType: '4' });
+        //     return this.put(unfollow).then(function() {
+        //         me.app.message.success('取消成功');
+        //         me.get(init);
+        //     });
+        // },
         follow: function(payload) {
             var follow = this.models.follow;
             follow.set(payload);
