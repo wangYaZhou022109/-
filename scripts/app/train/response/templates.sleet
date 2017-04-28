@@ -1,46 +1,51 @@
 #!handlebars
 
-module > .person-page
-    .person-search(data-region='search')
-    .person-content(data-region='main')
+module > .responsecenter-page
+    .responsecenter-title(data-region='search')
+    .responsecenter-table(data-region='main')
 
 view('search') > form.vertical
-    echo('响应中心')
-    br
-    echo('MIS编号')
-    input.input(name='MIScode')
-    echo('班级名称')
-    input.input(name='className')
-    echo('班级状态')
-    select.input#classStatus(name='classStatus' x-marker='selectize')
-        each(classStatus)
-            option(value=key) > echo(value)
-    btn.btn#search > echo('查询')
-
+    .filter-row.container.layout-mt
+        .filter-item
+            span > echo('MIS编号')
+            input.input(name='MIScode')
+        .filter-item
+            span > echo('班级名称')
+            input.input(name='className')
+        .filter-item
+            span > echo('班级状态')
+        .filter-item
+            select.tag-select#classStatus(name='classStatus' x-marker='selectize')
+                each(classStatus)
+                    option(value=key) > echo(value)
+        .filter-item
+            span > echo('|')
+            button.btn#search > echo('查询')
 
 view('main')
-    table.table
-        thead > tr
-            th > echo('MIS编号')
-            th > echo('培训班名称')
-            th > echo('计划人数')
-            th > echo('已报名人数')
-            th > echo('主办单位')
-            th > echo('主办单位联系人')
-            th > echo('联系电话')
-            th > echo('操作')
-        tbody > each(classinfos) > tr
-            td > echo(code)
-            td > echo(className)
-            td > echo(amount)
-            td > echo(registNumber)
-            td > echo(organization)
-            td > echo(contactPeople)
-            td > echo(contactPhone)
-            td
-                a(id='trainees'+id data-name='id' data-value=id) > echo('学员')
-                echo('|')
-                a(id='organizations'+id data-name='id' data-value=id) > echo('单位')
-                echo('|')
-                a(id='pagers'+id data-name='id' data-value=id) > echo('问卷')
-    #pager.pagination
+    .container
+        table.table
+            thead > tr
+                th > echo('MIS编号')
+                th > echo('培训班名称')
+                th > echo('计划人数')
+                th > echo('已报名人数')
+                th > echo('主办单位')
+                th > echo('主办单位联系人')
+                th > echo('联系电话')
+                th > echo('操作')
+            tbody > each(classinfos) > tr
+                td > echo(code)
+                td > echo(className)
+                td > echo(amount)
+                td > echo(registNumber)
+                td > echo(organization)
+                td > echo(contactPeople)
+                td > echo(contactPhone)
+                td
+                    a(id='trainees'+id data-name='id' data-value=id) > echo('学员')
+                    echo('|')
+                    a(id='organizations'+id data-name='id' data-value=id) > echo('单位')
+                    echo('|')
+                    a(id='pagers'+id data-name='id' data-value=id) > echo('问卷')
+        #pager.pagination

@@ -38,7 +38,10 @@ exports.store = {
             root: 'items',
             pageSize: 60
         },
-        down: { url: '../human/file/download' }
+        down: { url: '../human/file/download' },
+        classSignupInfo: {
+            url: '../train/sign-up/find-by-code'
+        }
     },
     callbacks: {
         init: function() {
