@@ -19,12 +19,12 @@ view('content')
                 th > echo('实付')
                 th > echo('操作')
             tbody > each(courseSalary) > tr
-                td > echo(classOfflineCourse.name)
-                td > echo(classOfflineCourse.teacherName)
-                td > echo(time)
-                td > echo(pay)
-                td > echo(tax)
-                td > echo(paidPay)
+                td > echo(name)
+                td > echo(teacherName)
+                td > echo(courseSalary.time)
+                td > echo(courseSalary.pay)
+                td > echo(courseSalary.tax)
+                td > echo(courseSalary.paidPay)
                 td.operation
                     a(id='edit'+id data-name='id' data-value=id) > echo('编辑')
 view('edit') > form.vertical
