@@ -55,6 +55,7 @@ module.exports = {
     people: '人',
     publish: '回复',
     praise: '赞',
+    unpraise: '已点赞',
     'positive-bracket': '(',
     'previous-step': '上一步',
     'prompt-1': '暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！',

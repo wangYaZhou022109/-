@@ -17,6 +17,13 @@ exports.events = {
 };
 
 exports.handlers = {
+    // refresh: function(id, e, target) {
+    //     console.log(11111111);
+    //     // var region;
+    //     // var el = $(target).parents('.comment-list')[0];
+    //     // region = new D.Region(this.app, this.module, el, id);
+    //     // region.show('ask/myquiz/details', { id: id });
+    // },
     sharesDetails: function(payload) {
         var data = { },
             id = payload;
@@ -125,10 +132,23 @@ exports.actions = {
     'click reply-*': 'reply',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
+    'click praise-*': 'praise',
     'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = payload;
+        data.objectType = 3;
+        return payload;
+    },
     delquestion: function(payload) {
         var data = payload;
         data.auditType = '1';

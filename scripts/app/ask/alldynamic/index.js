@@ -14,6 +14,8 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         del: { url: '../ask-bar/trends/del' },
         down: { url: '../human/file/download' },
+        praise: { url: '../ask-bar/my-share/praise' },
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
         page: {
             data: [],
             params: { page: 1, size: 2 },
@@ -40,6 +42,29 @@ exports.store = {
         }
     },
     callbacks: {
+        // refresh: function() {
+        //     // this.models.middlestate.changed();
+        //    // var callback = this.module.middlestate;
+        //     //payload.changed();
+        //    // console.log(payload);
+        // },
+        praise: function(payload) {
+            var praise = this.models.praise,
+                me = this;
+            praise.set(payload);
+            return this.post(praise).then(function() {
+                me.app.message.success('点赞成功');
+                // me.get(details);
+            });
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this;
+            unpraise.set(payload);
+            return this.put(unpraise).then(function() {
+                me.app.message.success('取消成功');
+            });
+        },
         init: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;

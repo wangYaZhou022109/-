@@ -14,5 +14,5 @@ exports.store = {
     }
 };
 
-exports.afterRender = function(payload, e, target) {
+exports.afterRender = function() {
 };
