@@ -9,7 +9,7 @@ exports.bindings = {
 
 exports.events = {
     'click activate*': 'activate',
-    'click myself*': 'myself',
+    // 'click myself*': 'myself',
     'click apply*': 'apply',
     'click expert-*': 'details'
 };
@@ -19,9 +19,9 @@ exports.handlers = {
         var model = this.module.items['ask/expertactivation'];
         this.app.viewport.modal(model);
     },
-    myself: function() {
-        this.app.show('content', 'ask/iamexpert');
-    },
+    // myself: function() {
+    //     this.app.show('content', 'ask/iamexpert');
+    // },
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
         this.app.viewport.modal(model, { bindings: this.bindings });
@@ -65,7 +65,11 @@ exports.dataForTemplate = {
                 url = {};
             if (typeof obj.member !== 'undefined') {
                 url = obj.member.headPortrait;
-                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+                if (typeof url === 'undefined' || url === null || url === '') {
+                    obj.member.headPortrait = 'images/default-userpic.png';
+                } else {
+                    obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+                }
             }
         });
         return expertlist;

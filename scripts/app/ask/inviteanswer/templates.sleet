@@ -24,10 +24,12 @@ view('list') > each(page)
                 .text-right
                     .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                     .item(id='discuss-' + id ) > string('comment') + echo('(' + question.discussNum +')')
-                    compare(concernNum 'gt' 0)  
-                        .item(id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
-                    else
-                        .item(id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
+                    compare(concernNum 'gt' 0)
+                        .item( id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
+                        .item( 'hidden' id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
+                    else 
+                        .item( 'hidden' id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
+                        .item(  id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
                     .item > .share-bar
                         .drop-down-wrapper
                             i.iconfont.icon-share-2(title='分享')

@@ -16,10 +16,21 @@ view('list')
                     span > echo(member.fullName)
                     span.sub-text > echo(questionDiscuss.createTime)
                 .comment-operation
-                    .pull-left > .sub-text > echo('来自问题：') + a(id='myquiz-details-' + questionDiscuss.id + '_' + id ) > echo(title)
+                    .pull-left > .sub-text 
+                        echo('来自问题：')
+                        compare(type 'eq' 1)
+                            a(href='#/ask/questiondetails/'+ questionDiscuss.questionId ) > echo(title)
+                        else
+                            a(href='#/ask/articledetails/'+ questionDiscuss.questionId ) > echo(title)
                     .text-right 
                         .item > string('praise') +  echo('('+ questionDiscuss.praiseNum +')')
                         .item(id='discuss-' + questionDiscuss.id ) > string('comment') + echo('(' + questionDiscuss.replyNum +')')
+                        compare(concern 'ne' null)
+                            .item(id='trend-unfollow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('unfollow')
+                            .item( 'hidden' id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('follow')
+                        else
+                            .item( 'hidden' id='trend-unfollow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('unfollow')
+                            .item(id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('follow')
                         .item > .share-bar
                             .drop-down-wrapper
                                 i.iconfont.icon-share-2(title='分享')

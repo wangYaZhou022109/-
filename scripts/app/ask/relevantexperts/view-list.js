@@ -26,7 +26,11 @@ exports.dataForTemplate = {
         _.forEach(expert, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
-            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
         });
         return expert;
     }

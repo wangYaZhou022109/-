@@ -12,7 +12,7 @@ view('list')
                     .item > span(id='check-' + id data-name='id' data-value=id ) > echo(name)
         .comment-list.ask-list > ul > each(experts.concernList)
             li.expert-item
-                a.normal(href="javascript:;")
+                a.normal(href="#/ask/noticerexpertdetails/" + member.expert.id + ',' + member.expert.emberId)
                     .img > .img-cont > img(src=member.headPortrait alt= member.fullName)
                     h4.text-overflow > echo(member.fullName)
                     .info > echo(member.careNum + '关注 ｜ ') + echo(member.answerNum + '回答 ｜ ') + echo(member.articleNum + '分享')

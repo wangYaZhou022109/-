@@ -8,9 +8,9 @@ view('list')
             .comment-content
                 .h4
                     compare(trendsType 'eq' '1')
-                        a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
+                        a(href='#/ask/questiondetails/'+ questionId ) > echo(title)
                     else
-                        a(id='myshares-details-' + id + '_' + questionId ) > echo(title)
+                        a(href='#/ask/articledetails/' + questionId ) > echo(title)
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
@@ -36,7 +36,9 @@ view('list')
                             .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
                             compare(concernNum 'gt' 0)
                                 .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
+                                .item( 'hidden' id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
                             else
+                                .item( 'hidden' id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
                                 .item(id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
                             .item > .share-bar
                                 .drop-down-wrapper

@@ -5,13 +5,13 @@ module
 view('list')
     .section
     span.h3 > string('hot') + string('topic')
-    span.more(id = 'topic-more') more
+    span.more > a.normal(href='#/ask/topic/index') > echo('more')
     .layout-mt-small
         .comment-list.ask-list > ul
             each(topic)
                 li.topic-item
-                    a.normal(href="javascript:;")
-                        .img(id='topicDeal-' + id data-name='id' data-value=id) > .img-cont > img(src="images/demo/1.jpg")
+                    a.normal(href='#/ask/topicdetail/'+ id )
+                        .img > .img-cont > img(src=attachmentId)
                         h4.text-overflow > echo(name)
                         .info > echo(concernList.length) + string('follow') + echo(' | ') + echo(expertList.length) + string('expert') + echo(' | ') + echo(questionList.length) + string('question')
     

@@ -10,12 +10,14 @@
 // });
 
 exports.items = {
-    main: 'main'
+    left: 'left',
+    right: 'right'
 };
 
 exports.store = {
     models: {
-        state: { data: { menu: 'content' } }
+        leftstate: { },
+        rightstate: { }
     },
     callbacks: {
         init: function() {

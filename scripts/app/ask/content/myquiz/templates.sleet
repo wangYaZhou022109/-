@@ -1,17 +1,12 @@
 #!handlebars
 
-#  module
-#      div(data-region='main')
-
-#  view('main')
-#      div(data-dynamic-key=state.menu)
 module > .ask-page > .container
     .page-main-wrapper
         .page-side.side-min(data-region='right')
         .page-main(data-region='left' class = 'activity-category') 
 
 view('left')
-    div(data-dynamic-key='contentleft')
+    div(data-dynamic-key=leftstate.menu)
 
 view('right')
     div(data-dynamic-key='contentright')
