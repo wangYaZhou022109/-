@@ -23,6 +23,70 @@ exports.store = {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
+                },
+                praise: function(id, type) {
+                    var data = [];
+                    // console.log(id + ' ' + type);
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        // console.log(type + ' - ' + d.questionId + ' - ' + d.trendsType);
+                        if (type === 1 && d.discussId === id && d.trendsType === '3') { // 讨论
+                            // console.log('讨论');
+                            if (d.questionDiscuss.praiseNum >= 0) {
+                                obj.questionDiscuss.praiseNum = d.questionDiscuss.praiseNum + 1;
+                            } else {
+                                obj.questionDiscuss.praiseNum = 1;
+                            }
+                            obj.isPraise = 1;
+                        } else if (type === 2) { // 回复
+                            obj.isPraise = 1;
+                        } else if (type === 3 && d.questionId === id && d.trendsType === '2') { // 文章
+                            // console.log('文章');
+                            if (d.question.praiseNum >= 0) {
+                                obj.question.praiseNum = d.question.praiseNum + 1;
+                            } else {
+                                obj.question.praiseNum = 1;
+                            }
+                            obj.isPraise = 1;
+                        } else if (type === 4) { // 分享
+                            obj.isPraise = 1;
+                        }
+                        data.push(obj);
+                    });
+                    // console.log(data);
+                    return data;
+                },
+                unpraise: function(id, type) {
+                    var data = [];
+                    // console.log(id + ' ' + type);
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        // console.log(type + ' - ' + d.questionId + ' - ' + d.trendsType);
+                        if (type === 1 && d.discussId === id && d.trendsType === '3') { // 讨论
+                            // console.log('讨论');
+                            if (d.questionDiscuss.praiseNum > 0) {
+                                obj.questionDiscuss.praiseNum = d.questionDiscuss.praiseNum - 1;
+                            } else {
+                                obj.questionDiscuss.praiseNum = 0;
+                            }
+                            obj.isPraise = 0;
+                        } else if (type === 2) { // 回复
+                            obj.isPraise = 0;
+                        } else if (type === 3 && d.questionId === id && d.trendsType === '2') { // 文章
+                            // console.log('文章');
+                            if (d.question.praiseNum > 0) {
+                                obj.question.praiseNum = d.question.praiseNum - 1;
+                            } else {
+                                obj.question.praiseNum = 0;
+                            }
+                            obj.isPraise = 0;
+                        } else if (type === 4) { // 分享
+                            obj.isPraise = 0;
+                        }
+                        data.push(obj);
+                    });
+                    // console.log(data);
+                    return data;
                 }
             }
         },
@@ -52,17 +116,26 @@ exports.store = {
             var praise = this.models.praise,
                 me = this;
             praise.set(payload);
-            return this.post(praise).then(function() {
+            return this.post(praise).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.praise(obj.objectId, obj.objectType);
                 me.app.message.success('点赞成功');
-                // me.get(details);
+                page.data = pageData;
+                page.changed();
             });
         },
         unpraise: function(payload) {
             var unpraise = this.models.unpraise,
                 me = this;
             unpraise.set(payload);
-            return this.put(unpraise).then(function() {
+            return this.put(unpraise).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
                 me.app.message.success('取消成功');
+                page.data = pageData;
+                page.changed();
             });
         },
         init: function() {
