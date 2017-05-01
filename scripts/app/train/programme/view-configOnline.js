@@ -6,6 +6,15 @@ exports.bindings = {
     state: false
 };
 
+exports.title = '配置主题';
+
+exports.buttons = [{
+    text: '保存',
+    fn: function() {
+        return this.module.dispatch('saveTheme');
+    }
+}];
+
 exports.dataForTemplate = {
     themeList: function(data) {
         var state = this.bindings.state;
@@ -15,23 +24,6 @@ exports.dataForTemplate = {
         });
         state.changed();
         return data.themeList;
-    }
-};
-
-exports.actions = {
-    'click saveTheme': 'saveTheme'
-};
-
-exports.dataForActions = {
-
-};
-
-exports.actionCallbacks = {
-    showOnlineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOnline);
-    },
-    saveTheme: function() {
-        this.app.viewport.closeModal();
     }
 };
 

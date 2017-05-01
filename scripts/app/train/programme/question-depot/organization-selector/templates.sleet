@@ -1,0 +1,10 @@
+#!handlebars
+module
+    div(data-region='main')
+
+
+view('main')
+    .btn#btn-toggle-tree(style='background: #white;')
+        p.text-overflow(title=state.organizationName) > echo('当前部门：' state.organizationName) + i.iconfont.icon-arrow-down
+    .tree-layer#toggle-tree-content
+        #tree

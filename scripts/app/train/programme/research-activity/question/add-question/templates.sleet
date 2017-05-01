@@ -1,0 +1,18 @@
+#!handlebars
+
+module
+    div(data-region='main')
+    div(data-region='question')
+
+view('main') > form.vertical
+    input(type='hidden')
+    label(class='required') 试题类型
+    select.input#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
+        option(value=key)('selected')&if(selected) > echo(value)
+
+view('question')
+    form.vertical
+        div(data-dynamic-key=state.type)
+
+view('preview')
+    div(data-dynamic-key=state.id)

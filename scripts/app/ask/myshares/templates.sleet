@@ -30,10 +30,11 @@ view('list')
                                 .item > span.color-ing > string('auditStatus0')
                                 .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
             compare(auditStatus 'eq' 1)
-                compare(ssenceStatus 'eq' 1)
+                compare(essenceStatus 'eq' 1)
                     li
                         .user-pic > img(src='images/d2.jpg')
                         .comment-content
+                            img.boutique.pull-left(src="images/boutique.png")
                             .h4 > a(id='myshares-details-' + id + '_' + id ) > echo(title)
                             .comment-text
                                 compare(thumbnail.length 'gt' 0)

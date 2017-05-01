@@ -7,6 +7,17 @@ exports.bindings = {
     weeks: true
 };
 
+exports.title = '配置主题';
+
+exports.buttons = [{
+    text: '保存',
+    fn: function() {
+        return this.module.dispatch('saveOfflineTheme');
+    }
+}];
+
+exports.small = true;
+
 exports.dataForTemplate = {
     weeks: function() {
         var weeks = this.bindings.weeks;
@@ -15,20 +26,6 @@ exports.dataForTemplate = {
             r.i = i + 1;
         });
         return weeks.data;
-    }
-};
-
-exports.actions = {
-    'click saveOfflineTheme': 'saveOfflineTheme'
-};
-
-exports.dataForActions = {
-
-};
-
-exports.actionCallbacks = {
-    saveOfflineTheme: function() {
-        this.app.viewport.closeModal();
     }
 };
 

@@ -48,7 +48,7 @@ exports.handlers = {
         });
         data.ids = ids.join(',');
         this.bindings.state.data.ids = data.ids;
-        this.app.viewport.modal(this.module.items.batchStatus);
+        this.app.viewport.modal(this.module.items['batch-status']);
         return data;
     },
 };

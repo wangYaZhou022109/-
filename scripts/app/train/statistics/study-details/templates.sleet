@@ -1,32 +1,35 @@
 #!handlebars
 
-module > .train-class-page
+module
+    br
+    .train-class-page
     .page-main-wrapper
         .div(data-region='main')
 
 view('main')
-    div.text-center
-        echo('学习详情列表')
-    table.table
-        thead > tr
-            th > echo('序号')
-            th > echo('账号')
-            th > echo('姓名')
-            th > echo('单位')
-            th > echo('职位')
-            th > echo('联系电话')
-            th > echo('学习时长')
-            th > echo('操作')
-        tbody > each(courseStudyProgresss) > tr
-            td > echo(i)
-            td > echo(member.name)
-            td > echo(member.fullName)
-            td > echo(organizationName)
-            td > echo(member.positionName)
-            td > echo(phoneNumber)
-            td > date(studyTotalTime)
-            td
-                a(id='edit'+memberId data-name='id' data-value=memberId) > echo('详情')
-            else
-                tr > td(colspan='11') > p.text-center > string('no-data')
-    #pager.pagination
+    .clearfix.layout-mt-small
+        .h5.pull-left 学习详情列表
+    .m-top
+        table.table
+            thead > tr
+                th > echo('序号')
+                th > echo('账号')
+                th > echo('姓名')
+                th > echo('单位')
+                th > echo('职位')
+                th > echo('联系电话')
+                th > echo('学习时长')
+                th > echo('操作')
+            tbody > each(courseStudyProgresss) > tr
+                td > echo(i)
+                td > echo(member.name)
+                td > echo(member.fullName)
+                td > echo(organizationName)
+                td > echo(member.positionName)
+                td > echo(phoneNumber)
+                td > date(studyTotalTime)
+                td
+                    a(id='edit'+memberId data-name='id' data-value=memberId cId=id) > echo('详情')
+                else
+                    tr > td(colspan='11') > p.text-center > string('no-data')
+        #pager.pagination

@@ -38,6 +38,7 @@ exports.actions = {
     'click checkOne-*': 'checkOne',
     'click checkAll*': 'checkAll',
     'click follow-*': 'follow',
+    'click unfollow-*': 'unfollow',
 };
 exports.dataForActions = {
     follow: function(payload) {

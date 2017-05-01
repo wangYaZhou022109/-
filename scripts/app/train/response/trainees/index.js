@@ -5,6 +5,8 @@ exports.items = {
 
 exports.large = true;
 
+exports.title = '班级学员';
+
 exports.store = {
     models: {
         state: {},
@@ -12,7 +14,8 @@ exports.store = {
             url: '../train/trainee/response',
             type: 'pageable',
             root: 'items'
-        }
+        },
+        organizations: { url: '../train/class-quota/list' }
     },
     callbacks: {
         init: function(payload) {
@@ -27,10 +30,17 @@ exports.store = {
             var trainees = this.models.trainees;
             trainees.params = payload;
             return this.get(trainees);
+        },
+        organizations: function(payload) {
+            var organizations = this.models.organizations;
+            organizations.clear();
+            organizations.params = payload;
+            return this.get(organizations);
         }
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: this.renderOptions.classId });
+    this.dispatch('init', { classId: this.renderOptions.classId });
+    this.dispatch('organizations', { classId: this.renderOptions.classId });
 };

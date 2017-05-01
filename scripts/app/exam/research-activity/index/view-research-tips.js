@@ -24,8 +24,8 @@ exports.dataForTemplate = {
         } else if (research.startTime > now) { // 未开始
             this.options.title = '温馨提示';
             content = '您好，本次调研尚未到调研时间，请在调研时间 '
-                + H.dateTime(research.startTime)
-                + ' ~ ' + H.dateTime(research.endTime)
+                + H.dateMinute(research.startTime)
+                + ' ~ ' + H.dateMinute(research.endTime)
                 + ' 进行调研，谢谢';
         } else if (now >= research.startTime && now <= research.endTime) { // 进行中
             if (researchRecord.status === 0) {

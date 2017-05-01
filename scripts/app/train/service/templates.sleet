@@ -1,19 +1,22 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='tab')
-        .div(data-region='main')
+module > .membership.container.bg-highlight
+    section.section
+        .tabs.line(data-region='tab')
+        .membership-contents(data-region='main')
 
 view('tab')
-    .container > ul.row.text-center
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-sign') 考勤
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-reward') 课酬管理
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-bus') 班车信息
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-settle') 结算数据
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-affiche') 班级公告
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-discuss') 讨论管理
-        li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-album') 班级相册
+    if(state.tab)
+        ul    
+            li#tab-sign(class = if(isSign 'active')) > echo('考勤')
+            li#tab-reward(class = if(isReward 'active')) > echo('课酬管理')
+            li#tab-bus(class = if(isBus 'active')) > echo('班车信息')
+            li#tab-settle(class = if(isSettle 'active')) > echo('结算数据')
+            li#tab-affiche(class = if(isAffiche 'active')) > echo('班级公告')
+            li#tab-discuss(class = if(isDiscuss 'active')) > echo('讨论管理')
+            li#tab-album(class = if(isAlbum 'active')) > echo('班级相册')
+            # li#tab-views(class = if(isViews 'active')) > echo('班级详情页')
 
 view('main')
-    div.container(data-dynamic-key=state.tab)
+    if(state.tab)
+        div.container(data-dynamic-key=state.tab)

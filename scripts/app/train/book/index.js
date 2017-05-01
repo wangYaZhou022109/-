@@ -1,6 +1,6 @@
 exports.items = {
     main: 'main',
-    'picker/book-time': { isModule: true }
+    'train/book-time': { isModule: true }
 };
 
 exports.store = {

@@ -5,7 +5,8 @@ exports.bindings = {
     offlineCourseList: true,
     state: false,
     offlineCourse: false,
-    offlineThemeList: true
+    offlineThemeList: true,
+    export: false
 };
 
 exports.events = {
@@ -21,7 +22,8 @@ exports.events = {
     'change input-title-offline-*': 'updateTitleName',
     'click label-paidPay-offline-*': 'changePay',
     'change input-paidPay-offline-*': 'updatePay',
-    'click importOffline': 'importCourse'
+    'click importOffline': 'importCourse',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -96,6 +98,16 @@ exports.handlers = {
     },
     importCourse: function() {
         this.app.viewport.modal(this.module.items.import);
+    },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
+        } else {
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
     }
 };
 
@@ -157,5 +169,14 @@ exports.dataForTemplate = {
             return true;
         }
         return false;
+    },
+    downUrl: function() {
+        var model = this.bindings.export,
+            state = this.bindings.state.data,
+            url = model.getFullUrl() + '?',
+            token = this.app.global.OAuth.token.access_token;
+        url += ('classId=' + state.classId);
+        url += ('&access_token=' + token);
+        return url;
     }
 };

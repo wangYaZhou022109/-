@@ -14,14 +14,7 @@ exports.handlers = {
     delFm: function(id) {
         var waitTrainees = this.bindings.waitTrainees.data;
         var fmTrainees = this.bindings.fmTrainees.data;
-        if (!_.find(waitTrainees, ['id', id])) {
-            // me.module.dispatch('delFm', id).then(function(data) {
-            //     if (data[0]) {
-            //         me.module.dispatch('init', state);
-            //         me.module.dispatch('wait', state);
-            //     }
-            // });
-        } else {
+        if (_.find(waitTrainees, ['id', id])) {
             fmTrainees = _.filter(fmTrainees, function(fm) {
                 return fm.id !== id;
             });
@@ -30,7 +23,4 @@ exports.handlers = {
         this.bindings.fmTrainees.changed();
         this.bindings.waitTrainees.changed();
     }
-};
-
-exports.actions = {
 };
