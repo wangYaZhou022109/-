@@ -122,10 +122,26 @@ exports.handlers = {
 exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
     'click reply-*': 'reply'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     follow: function(payload) {
         var id = payload.id,
             data = {};
@@ -186,16 +202,6 @@ exports.actionCallbacks = {
     }
 };
 exports.dataForTemplate = {
-    // trends: function(data) {
-    //     var trends = data.trends;
-    //     _.forEach(trends, function(value) {
-    //         var obj = value,
-    //             date = new Date(obj.createTime);
-    //         obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    //         + '   ' + date.getHours() + ':' + date.getMinutes();
-    //     });
-    //     return trends;
-    // },
     page: function(data) {
         var trends = data.expertdiscuss;
         var page = this.bindings.page.data;

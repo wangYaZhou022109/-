@@ -111,5 +111,34 @@ exports.dataForTemplate = {
             }
         });
         return trends;
+    },
+    topic: function(data) {
+        var topic = data.trends.topicList,
+            me = this;
+        _.forEach(topic, function(value) {
+            var obj = value,
+                url = obj.attachmentId;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.attachmentId = 'images/default-cover/default_topic.jpg';
+            } else {
+                obj.attachmentId = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return topic;
+    },
+    expert: function(data) {
+        var expert = data.trends.expertList;
+        var me = this;
+        _.forEach(expert, function(value) {
+            var obj = value,
+                url = obj.member.headPortrait;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return expert;
     }
 };
+

@@ -124,10 +124,26 @@ exports.actions = {
     'click reply-*': 'reply',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
     'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     delquestion: function(payload) {
         var data = payload;
         data.auditType = '1';

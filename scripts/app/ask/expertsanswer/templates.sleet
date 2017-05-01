@@ -23,8 +23,13 @@ view('list')
                         else
                             a(href='#/ask/articledetails/'+ questionDiscuss.questionId ) > echo(title)
                     .text-right 
-                        .item > string('praise') +  echo('('+ questionDiscuss.praiseNum +')')
-                        .item(id='discuss-' + questionDiscuss.id ) > string('comment') + echo('(' + questionDiscuss.replyNum +')')
+                        compare(questionDiscuss.isPraise 'gt' 0)
+                            .item(id='unpraise-1_'+ questionDiscuss.id data-name='id' data-value='1_' + questionDiscuss.id) 
+                                i.iconfont.icon-zan > string('unpraise') +  echo('（'+ questionDiscuss.praiseNum +'）')
+                        else
+                            .item(id='praise-1_'+ questionDiscuss.id data-name='id' data-value='1_' + questionDiscuss.id) 
+                                i.iconfont.icon-zan > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
+                        .item(id='discuss-' + questionDiscuss.id ) > i.iconfont.icon-message > string('comment') + echo('(' + questionDiscuss.replyNum +')')
                         compare(concern 'ne' null)
                             .item(id='trend-unfollow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('unfollow')
                             .item( 'hidden' id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('follow')
@@ -37,7 +42,8 @@ view('list')
                                 form.drop-down-content > .content
                                     .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                     .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                        .item > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
+                        .item
+                            i.iconfont.icon-info > span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
                         form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
                             textarea.input.w-full.block(rows=1 name='content' value='' )
                             input.input(type='hidden' name='organizationId' value=questionDiscuss.organizationId)

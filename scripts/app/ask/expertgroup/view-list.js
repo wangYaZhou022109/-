@@ -54,6 +54,22 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
+    follow: function(data) {
+        var concern = data[0];
+        var unf = this.$('unfollow-expert-' + concern.concernId);
+        var f = this.$('follow-expert-' + concern.concernId);
+        this.app.message.success('关注成功');
+        f.hidden = true;
+        unf.hidden = false;
+    },
+    unfollow: function(data) {
+        var concern = data[0];
+        var unf = this.$('unfollow-expert-' + concern.concernId);
+        var f = this.$('follow-expert-' + concern.concernId);
+        this.app.message.success('取消成功');
+        f.hidden = false;
+        unf.hidden = true;
+    }
 };
 
 exports.dataForTemplate = {

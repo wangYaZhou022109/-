@@ -26,12 +26,9 @@ exports.store = {
                 },
                 praise: function(id, type) {
                     var data = [];
-                    // console.log(id + ' ' + type);
                     _.forEach(this.data, function(d) {
                         var obj = d;
-                        // console.log(type + ' - ' + d.questionId + ' - ' + d.trendsType);
                         if (type === 1 && d.discussId === id && d.trendsType === '3') { // 讨论
-                            // console.log('讨论');
                             if (d.questionDiscuss.praiseNum >= 0) {
                                 obj.questionDiscuss.praiseNum = d.questionDiscuss.praiseNum + 1;
                             } else {
@@ -41,7 +38,6 @@ exports.store = {
                         } else if (type === 2) { // 回复
                             obj.isPraise = 1;
                         } else if (type === 3 && d.questionId === id && d.trendsType === '2') { // 文章
-                            // console.log('文章');
                             if (d.question.praiseNum >= 0) {
                                 obj.question.praiseNum = d.question.praiseNum + 1;
                             } else {
@@ -53,17 +49,13 @@ exports.store = {
                         }
                         data.push(obj);
                     });
-                    // console.log(data);
                     return data;
                 },
                 unpraise: function(id, type) {
                     var data = [];
-                    // console.log(id + ' ' + type);
                     _.forEach(this.data, function(d) {
                         var obj = d;
-                        // console.log(type + ' - ' + d.questionId + ' - ' + d.trendsType);
                         if (type === 1 && d.discussId === id && d.trendsType === '3') { // 讨论
-                            // console.log('讨论');
                             if (d.questionDiscuss.praiseNum > 0) {
                                 obj.questionDiscuss.praiseNum = d.questionDiscuss.praiseNum - 1;
                             } else {
@@ -73,7 +65,6 @@ exports.store = {
                         } else if (type === 2) { // 回复
                             obj.isPraise = 0;
                         } else if (type === 3 && d.questionId === id && d.trendsType === '2') { // 文章
-                            // console.log('文章');
                             if (d.question.praiseNum > 0) {
                                 obj.question.praiseNum = d.question.praiseNum - 1;
                             } else {
@@ -85,7 +76,6 @@ exports.store = {
                         }
                         data.push(obj);
                     });
-                    // console.log(data);
                     return data;
                 }
             }

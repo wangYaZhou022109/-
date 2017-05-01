@@ -37,6 +37,8 @@ view('list')
                     .sub-text.text-overflow > echo(introduce)
                 compare(concernList.length 'gt' 0)
                     .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                    .btn.small( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) 关注
                 else
+                    .btn.small( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
                     .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) 关注
        

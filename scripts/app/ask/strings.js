@@ -72,6 +72,7 @@ module.exports = {
     'upload-attachments': '上传附件',
     write: '发表',
     writing: '写',
+    'wait-for-me-to-answer': '等我来答',
     identity: '身份',
     'Inverse-parenthesis': ')',
     iam: '我是',
