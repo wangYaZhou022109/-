@@ -2,7 +2,7 @@ var prompts = {
         1: '您好,本次考试需要进行报名，请点击下方“我要报名”进行报名，谢谢',
         2: '您好,本次考试您已经报名，正在审核中，如要取消报名请点击下方“取消报名',
         3: '您好,本次考试您已经报名，请在考试时间内参与考试，谢谢',
-        4: '您好,请在考试时间内参与考试，谢谢',
+        4: '您好,本次考试尚未到考试时间，请在考试时间{0}内参与考试，谢谢',
         5: '点击下方“开始考试”后将会立即进入考试，该考试时长为{0}分钟',
         6: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，点击下方“查看详情”可查看上次考试成绩详情',
         7: '点击下方“查看详情”可查看上次考试成绩详情',
@@ -34,6 +34,7 @@ exports.dataForTemplate = {
 
 exports.events = {
     'click close-button': 'close',
+    'click exam-later-button': 'close',
     'click to-exam-button': 'toExam',
     'click view-detail-button': 'viewDetail',
     'click exam-again-button': 'toExam'
@@ -95,9 +96,10 @@ exports.handlers = {
 getCurrentExam = function(exam) {
     var status = P.getUserStatusOfExam(exam),
         closeButton = { id: 'close-button', text: '我已经知道了' },
+        examLaterButton = { id: 'exam-later-button', text: '以后再考' },
         cancelButton = { id: 'cancel-button', text: '取消报名' },
         signupButton = { id: 'signup-button', text: '我要报名' },
-        toExamButton = { id: 'to-exam-button', text: '进入考试' },
+        toExamButton = { id: 'to-exam-button', text: '开始考试' },
         viewDetailButton = { id: 'view-detail-button', text: '查看详情' },
         examAgainButton = { id: 'exam-again-button', text: '重新考试' },
         buttonMap = {
@@ -105,7 +107,7 @@ getCurrentExam = function(exam) {
             2: [cancelButton, closeButton],
             3: [cancelButton, closeButton],
             4: [closeButton],
-            5: [toExamButton, closeButton],
+            5: [toExamButton, examLaterButton],
             6: [examAgainButton, viewDetailButton, closeButton],
             7: [viewDetailButton, closeButton],
             8: [closeButton],
@@ -125,6 +127,12 @@ getCurrentExam = function(exam) {
                     helper.dateMinute(exam0.applicantStartTime)
                         + '  ~  ' + helper.dateMinute(exam0.applicantEndTime)
                 );
+            }
+            if (status0 === 4) {
+                return getWithParams(
+                    str,
+                    helper.dateMinute(exam0.startTime)
+                        + '  ~  ' + helper.dateMinute(exam0.endTime));
             }
             return str;
         };
