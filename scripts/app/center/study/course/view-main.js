@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var _ = require('lodash/collection'),
     helpers = require('./app/util/helpers');
 exports.bindings = {
@@ -5,6 +6,20 @@ exports.bindings = {
     img: false,
     search: false
 };
+exports.events = {
+    'mouseover list-*': 'showClose',
+    'mouseout list-*': 'hideClose'
+};
+
+exports.handlers = {
+    showClose: function(id) {
+        $(this.$('delete-' + id)).addClass('fade-in').removeClass('fade-out');
+    },
+    hideClose: function(id) {
+        $(this.$('delete-' + id)).addClass('fade-out').removeClass('fade-in');
+    }
+};
+
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'progressList' }

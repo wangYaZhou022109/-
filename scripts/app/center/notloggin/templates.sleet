@@ -1,0 +1,52 @@
+#!handlebars
+
+module > .notloggin-page
+	.notloggin-title(data-region="notloggin-title")
+	.notloggin-content(data-region="notloggin-content")
+
+view('notloggin-title')
+	.logobar.border.bottom
+		span l
+		span o
+		span g
+		span o
+
+view('notloggin-content')
+	.notloggin-form.border.around
+		.notloggin-info.text-center
+			.besure.m-right.inline-block > img(src='images/besure.png')
+			.info.inline-block > img(src='images/info.png')
+			.layout-mt.text-center
+				.form
+					.form-row
+						label.label.required 报名码
+						.content > input.input(placeholder="请您填写您要参加活动的报名码")
+					.form-row.relative
+						label.label.required 手机号
+						.content
+							input.input(placeholder="请输入您的手机号")
+						.btn.small.verifycode 获取验证码
+
+					.form-row
+						label.label.required 验证码
+						.content > input.input(placeholder="请输入您收到的验证码")
+				.btn.radius.gray.tag-height 下一步
+			.layout-mt
+				p.text-main-color Q/A
+				.sub-text
+					p 1，学员报名时报名链接无法访问？
+					p 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+					p 2，学员报名时提示网大无此用户？
+					p 请联系本省网上大学管理员核实个人在网上大学是否有账号，若没有，需添加后才能报名。本省管理员联系方式可致电响应中心查询。
+					p 3，学员在线报名是否成功？
+					p 提交报名后，页面提示“报名成功“则说明已成功。若仍有疑问，可致电响应中心
+					p 4，学员成功报名培训班后需要取消报名？
+					p 请致电响应中心，告知需调整的人员的员工编号。
+					p 5，学员班车情况？
+					p 报到日将有四趟班车位于天通苑北地铁站南行（右）100米，上天桥行至马路对面，由右侧下天桥，即可看到班车。时间为11点，15点，17:30以及20点。返程日班车一般安排为课程结束当天的18点以及次日的8点分别送于机场、集团。
+					p 6，班车司机电话？
+					p 由于班车司机随机安排，如乘坐那趟班车请提前30分钟致电响应中心，可查询接站司机电话。
+					p 7，学员食堂用餐时间？
+					.text-left
+						.timeone 早7:30—8:50 午餐12:00—13:00
+						.timetwo 晚餐18:00—19:00 培训结束当天餐厅提前至17:30开餐
