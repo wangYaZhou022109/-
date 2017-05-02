@@ -8,11 +8,11 @@ view('list')
             section.section.sub-title.text-center > string('prompt-1')
             .common-title.m-bottom > string('recommend') + string('topic')
             .aboutme-contents
-                ul.aboutme-ul.clearfix > each(trends.topicList)
+                ul.aboutme-ul.clearfix > each(topic)
                     input(type='hidden' id='topics-item' + id name='topics' value= id ) 
                     li.aboutme-li.pull-left.relative.layout-mb-small
                         .img-dv.relative
-                            img.w-full(src='images/img.png')
+                            img.w-full(src=attachmentId)
                             .true-icon(id = 'topic-icon-' + id)
                                 .iconfont.icon-tick-circle
                             p.text-center.introduce > echo(name)
@@ -22,7 +22,7 @@ view('list')
             section.section.sub-title.text-center > string('prompt-1')
             .common-title.m-bottom > string('recommend') + string('expert')
             .recommend-contents
-                ul.recommend-ul.clearfix > each(trends.expertList)
+                ul.recommend-ul.clearfix > each(expert)
                     input(type='hidden' id='expert-item' + id name='expert' value=id) 
                     li.recommend-li.pull-left.relative.mb-1
                         .recommend-total.relative

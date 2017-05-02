@@ -5,7 +5,7 @@ exports.items = {
 };
 exports.store = {
     models: {
-        leftstate: { },
+        leftstate: { data: { menu: 'myshares' } },
         rightstate: { }
     },
     callbacks: {
@@ -15,5 +15,4 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    // return this.dispatch('init', this.renderOptions);
 };

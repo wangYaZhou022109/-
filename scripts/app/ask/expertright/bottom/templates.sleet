@@ -2,5 +2,5 @@
 module 
     div(data-region='main')
 view('main')
-    div(data-dynamic-key='activeexpert')
+    div(data-dynamic-key='hottopic')
 

@@ -124,10 +124,26 @@ exports.actions = {
     'click reply-*': 'reply',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
     'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     delquestion: function(payload) {
         var data = payload;
         data.auditType = '1';
@@ -175,13 +191,21 @@ exports.actionCallbacks = {
         this.app.message.success('操作成功！');
         this.module.dispatch('init');
     },
-    follow: function() {
+    follow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        follow.hidden = true;
+        unfollow.hidden = false;
         this.app.message.success('关注成功！');
-        this.module.dispatch('init');
     },
-    unfollow: function() {
+    unfollow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        follow.hidden = false;
+        unfollow.hidden = true;
         this.app.message.success('取消成功！');
-        this.module.dispatch('init');
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
@@ -207,7 +231,11 @@ exports.dataForTemplate = {
             var obj = value,
                 date = new Date(obj.createTime),
                 url = obj.createUser.headPortrait;
-            obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.createUser.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {
