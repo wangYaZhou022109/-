@@ -19,6 +19,9 @@ exports.store = {
         signOne: {
             url: '../train/leave/one'
         },
+        signCount: {
+            url: '../train/sign-detail/count'
+        },
         updateState: {
             url: '../train/leave/update'
         },
@@ -27,12 +30,16 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var leave = this.models.leave,
-                signOne = this.models.signOne;
+                signOne = this.models.signOne,
+                signCount = this.models.signCount;
             leave.params = payload;
             leave.set({ id: payload.id });
             signOne.params.id = payload.id;
             signOne.clear();
+            signCount.params.id = payload.id;
+            signCount.clear();
             this.get(signOne);
+            this.get(signCount);
             return this.get(leave);
         },
         search: function(payload) {

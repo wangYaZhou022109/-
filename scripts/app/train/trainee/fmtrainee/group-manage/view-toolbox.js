@@ -13,11 +13,12 @@ exports.dataForActions = {
     search: function() {
         var state = this.bindings.state.data,
             classId = state.classId,
-            auditStatus = state.auditStatus;
+            auditStatus = state.auditStatus,
+            groupId = state.groupId;
         return {
             classId: classId,
             auditStatus: auditStatus,
-            groupId: 0,
+            groupId: groupId,
             memberName: $(this.$$('[name="memberName"]')).val().trim(),
             memberFullName: $(this.$$('[name="memberFullName"]')).val().trim(),
             organizationName: $(this.$$('[name="organizationName"]')).val().trim()

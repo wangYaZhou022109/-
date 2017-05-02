@@ -21,7 +21,11 @@ exports.dataForTemplate = {
         _.map(progressList, function(opt) {
             var progress = opt;
             progress.imgUrl = progress.cover ? (downUrl + '?id=' + progress.cover) : defultImg;
-            progress.prefixText = prefix[progress.finishStatus] + helpers.dateMinute(progress.lastAccessTime);
+            if (progress.finishStatus === 0) { // 推送学习时间取值为注册时间
+                progress.prefixText = prefix[progress.finishStatus] + helpers.dateMinute(progress.registerTime);
+            } else {
+                progress.prefixText = prefix[progress.finishStatus] + helpers.dateMinute(progress.lastAccessTime);
+            }
             progress.btnText = btnText[progress.finishStatus];
             progress.btnUrl = '#/study/course/detail/' + progress.courseId;
             if (search.businessType === 2) {

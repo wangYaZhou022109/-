@@ -1,0 +1,50 @@
+#!handlebars
+
+module
+    div(data-region='search-param')
+    div(data-region='questions')
+
+view('search-param') > form.vertical
+    # .row > .col-sm-12.text-right > label > .btn#selectQuestions > string('exam.buttons.select')
+    div(style='margin: 10px;')
+        label > setting('exam.question.describe')
+        input.input(name='content')
+    div(style='margin: 15px;height: 40px;')
+        div(style='float: left;width: 45%;')
+            label(class='required') > setting('exam.all.organization')
+            #owner
+        div(style='float: right;width: 45%;')
+            label(class='required') > setting('exam.all.question.depot')
+            #question-depot
+    div(style='margin: 15px;height: 40px;margin-top: 10px;')
+        div(style='float: left;width: 45%;')
+            label > setting('exam.question.type')
+            select.input#type(name='type') > each(types)
+                option(value=key)('selected')&if(selected) > echo(value)
+        div(style='float: right;width: 45%;')
+            label > setting('exam.question.difficulty')
+            select.input#level(name='difficulty' x-marker='selectize')
+                option(value='') > echo('全选')
+                each(difficultys)
+                    option(value=key)('selected')&if(selected) > echo(value)
+    .text-center(style='margin: 15px;') > label > .btn#searchQuestion.large > .inline-block > string('search')
+
+view('questions')
+    div
+        div(style='width: 3%;float: rigth;margin-rigth:10px;')
+            .checkbox.no-margin
+                input(type='checkbox' id='check-all' value='all')('checked')&if(checkAll)
+                label(for='check-all')
+        div(style='float: left;')
+            | 全选
+    hr
+    each(questions)
+        div
+            div(style='width: 3%;float: left;')
+                .checkbox.com-title
+                    input(type='checkbox' name='selectBox-'+ id id='select-'+ id value=id)('checked')&if(checked)
+                    label(for='select-' + id)
+            div(tyle='width: 90%;float: right;')
+                div(data-dynamic-key=id)
+
+    #pager.pagination

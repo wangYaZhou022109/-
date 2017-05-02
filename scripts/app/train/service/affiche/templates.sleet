@@ -1,0 +1,25 @@
+#!handlebars
+
+module > .train-class-page
+    .div(data-region='content')
+
+view('content') > form.vertical
+    .container
+        section.section.w-half
+            .classnotice-title.clearfix
+                span.strong.layout-mr 是否显示排行榜
+                input( id = 'detail_1' name='detail' type='radio' value=1)('checked')&if(detail.type)
+                label.layout-mr 是
+                input(id = 'detail_0' name='detail' type='radio' value=0)('checked')&unless(detail.type)
+                label.layout-mr 否
+                compare(detail.showRanking 'eq' 1)
+                    label.strong 显示规则：
+                    select#rankingRule.tag-select(name='rankingRule' style="border:solid 1px #ccc;") > each(rankingRule)
+                        option(value=key) > echo(value)
+            .classnotice-content.layout-mt
+                .strong 班级公告
+                textarea.m-top.w-full#notice(name='notice' value=detail.notice rows=5 cols=80 x-rule='maxLength:1000') > echo(detail.notice)
+                input.input(type='hidden' name='id' value=detail.id)
+                input.input(type='hidden' name='showRanking' value=detail.showRanking)
+            .text-center
+                .btn.gray.tag-height.layout-mt-small#saveBulletin 保存

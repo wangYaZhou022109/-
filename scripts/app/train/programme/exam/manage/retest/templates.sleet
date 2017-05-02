@@ -1,0 +1,54 @@
+#! handlebars
+
+module > .exam-manage-review
+    .review-search(data-region='search')
+    .review-main(data-region='main')
+
+view('search')
+    .row
+        .col-sm-10 > .row
+            .col-sm-3.no-margin > .input-box
+                .text 状态:
+                .input.cont > select.input#status
+                    each(status)
+                        option(value=key) > echo(value)
+        .col-sm-2.clearfix
+            .text-right > #search.btn.inline-block 搜索
+
+
+view('main')
+    .hr
+    .clearfix
+        .pull-left.m-top 补考列表
+        .pull-right
+            .btn#add-retest 安排补考
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th 补考次数
+                th 开始时间
+                th 结束时间
+                th 时长
+                th 活动状态
+                th 补考人数
+                th 操作
+            tbody > each(retests)
+                tr
+                    td > echo(name)
+                    td > date(startTime)
+                    td > date(endTime)
+                    td > echo(duration)
+                    td > map('exam-status',status)
+                    td > echo(joinNumber)
+                    td
+                        compare(status 'eq' 1)
+                            a(id='edit-' + id) > string('edit')
+                            span /
+                            a(id='publish-' + id data-name='id' data-value=id) > string('publish')
+                            span /
+                            a(id='delete-' + id) > string('remove')
+                        compare(status 'eq' 2)
+                            a(id='cancel-' + id data-name='id' data-value=id) > string('undo')
+                    else
+                        tr > td(colspan='7') > p.text-center > string('no-data')
+    #pager.pagination

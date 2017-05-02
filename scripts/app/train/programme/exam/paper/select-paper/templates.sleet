@@ -1,0 +1,56 @@
+#!handlebars
+
+module
+    div(data-region='search-param')
+    div(data-region='paper-list')
+
+view('search-param') > form.vertical
+    #  .row > .col-sm-12.text-right > label > .btn#selectPapers > string('exam.buttons.select')
+    .row > .col-sm-12
+        label > setting('exam.paper.name')
+        input.input(name='name')
+    .row
+        .col-sm-6
+            label > setting('exam.all.organization')
+            #owner
+        .col-sm-6
+            label > setting('exam.paper.is-subjective')
+            select.input#is-subjective(name='isSubjective')
+                option(value='') > string('exam.option.all')
+                each(isSubjectives)
+                    option(value=key)('selected')&if(selected) > echo(value)
+    .row
+        .col-sm-12
+            label > setting('system.all.create-time')
+            .row
+                .col-xs-6 > input#start-time.input(name='createTimeStart')
+                .col-xs-6 > input#end-time.input(name='createTimeEnd')
+    .row > .col-sm-12.text-center > label > .btn#searchPapers.large > .inline-block > string('search')
+
+view('paper-list')
+    .row > .col-sm-12.text-left > label > setting('exam.paper.list')
+    .paper-list
+        .paper-item
+            table.table
+                thead
+                    tr
+                        th > string('exam.buttons.select')
+                        th > setting('exam.paper.name')
+                        th > setting('exam.paper.is-subjective')
+                        th > setting('exam.paper.question-num')
+                        th > setting('exam.paper.total-score')
+                        th > setting('system.all.create-time')
+                    tbody > each(papers)
+                        tr
+                            td
+                                .checkbox.inline-block.no-margin(id='select'+id data-id=id)
+                                    input(type='checkbox')
+                                    label(for='select_'+id)
+                            td > echo(name)
+                            td > map('yes-or-no', isSubjective)
+                            td > echo(questionNum)
+                            td > echo(totalScore)
+                            td > dateTime(createTime)
+                        else
+                            tr > td(colspan='6') > p.text-center > string('no-data')
+        #pager.pagination

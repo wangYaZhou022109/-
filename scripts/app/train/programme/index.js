@@ -1,4 +1,5 @@
 var D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     helpers = require('./app/util/helpers');
 
 exports.items = {
@@ -16,8 +17,13 @@ exports.items = {
     'train/programme/select-course': { isModule: true },
     'train/programme/select-member': { isModule: true },
     'train/programme/select-research-activity': { isModule: true },
+    'train/programme/evaluate-questionary/select-evaluate-questionary': { isModule: true },
     import: '',
-    'import-upload': ''
+    'import-upload': '',
+    'train/programme/exam/other-module-exam': { isModule: true },
+    editQnrTime: '',
+    'train/programme/research-activity/add-research-third-party': { isModule: true },
+    'train/programme/evaluate-questionary/select-evaluate-questionary/add-research-refrence': { isModule: true },
 };
 
 exports.store = {
@@ -44,6 +50,7 @@ exports.store = {
         offlineClickUpdate: { url: '../train/offline-course/click-update' },
         courseSalary: { url: '../train/courseSalary/updateByCourseId' },
         import: { url: '../train/offline-course/import' },
+        export: { url: '../train/offline-course/exportData' },
         fileInfo: {},
         importInfo: {},
         downExcel: { url: '../train/offline-course/download-excel' },
@@ -277,7 +284,7 @@ exports.store = {
             var model = this.models.attachList,
                 files = this.models.files,
                 state = this.models.state;
-            model.set(payload);
+            model.params.id = payload.id;
             files.clear();
             state.data.courseId = payload.id;
             this.get(model).then(function(data) {
@@ -443,6 +450,8 @@ exports.store = {
                 taskList = this.models.taskList,
                 state = this.models.state,
                 fileList = this.models.files,
+                startTime = payload.startTime,
+                endTime = payload.endTime,
                 me = this;
             D.assign(payload, {
                 fileList: JSON.stringify(fileList.data),
@@ -451,10 +460,15 @@ exports.store = {
             });
             task.clear();
             task.set(payload);
-            this.save(task).then(function() {
-                this.app.message.success('提交成功');
-                me.get(taskList);
-            });
+            if (startTime >= endTime) {
+                this.app.message.alert('结束时间必须大于开始时间');
+            } else {
+                this.save(task).then(function() {
+                    this.app.message.success('提交成功');
+                    this.app.viewport.closeModal();
+                    me.get(taskList);
+                });
+            }
         },
         uploadTaskFile: function(payload) {
             var img = payload[0],
@@ -521,15 +535,25 @@ exports.store = {
             var questionnaireList = this.models.questionnaireList,
                 research = this.models.research,
                 state = this.models.state.data,
-                me = this;
+                me = this,
+                questionary;
             D.assign(payload, {
                 classId: state.classId
             });
-            research.set(payload);
-            this.save(research).then(function() {
+            questionary = _.find(questionnaireList.data, {
+                resourceId: payload.resourceId,
+                classId: payload.classId
+            });
+            if (questionary) {
                 questionnaireList.params.classId = state.classId;
                 me.get(questionnaireList);
-            });
+            } else {
+                research.set(payload);
+                this.save(research).then(function() {
+                    questionnaireList.params.classId = state.classId;
+                    me.get(questionnaireList);
+                });
+            }
         },
         delQuestionnair: function(payload) {
             var research = this.models.research,
@@ -540,6 +564,33 @@ exports.store = {
             this.del(research).then(function() {
                 questionnaireList.params.classId = state.classId;
                 me.get(questionnaireList);
+            });
+        },
+        toEdit: function(payload) {
+            var research = this.models.research;
+            research.clear();
+            research.set(payload);
+            return this.get(research);
+        },
+        editQuestionnair: function(payload) {
+            var questionnaireList = this.models.questionnaireList,
+                research = this.models.research,
+                me = this;
+            research.clear();
+            research.set(payload.data);
+            me.put(research).then(function() {
+                me.app.message.success('操作成功');
+                me.get(questionnaireList);
+            });
+        },
+        editTime: function(payload) {
+            var research = this.models.research,
+                me = this;
+            research.clear();
+            research.set(payload);
+            me.put(research).then(function() {
+                me.app.message.success('操作成功');
+                me.get(me.models.questionnaireList);
             });
         }
     }

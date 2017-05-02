@@ -1,19 +1,19 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='tab')
-        .div(data-region='main')
+module > .membership.container.bg-highlight
+    section.section
+        .tabs.line(data-region='tab')
+        .membership-contents(data-region='main')
 
 view('tab')
-    .container > ul.row.text-center
-        if(state.tab)
+    if(state.tab)
+        ul
             compare(state.isAutoApprove 'ne' 1)
-                li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-manage') 报名管理
-            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-fmtrainee') 学员
-            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-classstaff') 班务人员
-            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-iftrainee') 非正式成员
-            li(style='float:left;width:100px;') > a(href='javascript:;' id='tab-message') 短信发送
+                li#tab-manage(class = if(isManage 'active')) > echo('报名管理')
+            li#tab-fmtrainee(class = if(isFmtrainee 'active')) > echo('学员')
+            li#tab-classstaff(class = if(isClassstaff 'active')) > echo('班务人员')
+            li#tab-iftrainee(class = if(isIftrainee 'active')) > echo('非正式成员')
+            li#tab-message(class = if(isMessage 'active')) > echo('短信发送')
 
 view('main')
     if(state.tab)

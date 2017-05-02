@@ -1,0 +1,86 @@
+#!handlebars
+
+view('filter') > form.vertical
+    .row
+        .col-sm-4
+            label > setting('exam.exam.name')
+            input.input(name='name' x-rule='maxLength:30' x-action='change')
+        .col-sm-4
+            label > setting('exam.exam.type')
+            select.input#type(name='type' x-marker='selectize')
+                each(type)
+                    option(value=key) > echo(value)
+        .col-sm-4
+            label > setting('exam.exam.status')
+            select.input#status(name='status' x-marker='selectize')
+                each(status)
+                    option(value=key) > echo(value)
+    .row.hidden
+        .col-sm-4
+            label > setting('exam.exam.owner-organization')
+            #ownerOrganization
+        .col-sm-4
+            label > setting('exam.exam.start-time')
+            input.input#start-time(name='startTime' value=dateTime(exam.startTime))
+        .col-sm-4
+            label > setting('exam.exam.end-time')
+            input.input#end-time(name='endTime' value=dateTime(exam.endTime))
+
+
+
+view('content')
+    .buttons
+        .btn#add-exam > i.icon-plus + span 新增
+
+    .list
+        table.table
+            thead > tr
+                th(width='10px') > string('index')
+                th > setting('exam.exam.name')
+                th > setting('exam.exam.owner-organization')
+                th > setting('exam.exam.start-time')
+                th > setting('exam.exam.end-time')
+                th > setting('exam.exam.type')
+                th > setting('exam.exam.applicant-number')
+                th > setting('exam.exam.join-number')
+                th > setting('exam.exam.pass-percent')
+                th > setting('exam.exam.duration')
+                th > setting('exam.exam.status')
+                th > setting('system.all.operator')
+            tbody > each(exams) > tr
+                td > echo(i)
+                td > echo(name)
+                td > echo(organization.name)
+                td > dateTime(startTime)
+                td > dateTime(endTime)
+                td > map('exam-type',type)
+                td > echo(applicantNumber)
+                td > echo(joinNumber)
+                td > echo(passPercent)
+                td > echo(duration)
+                td > map('exam-status',status)
+                td.operation
+                    compare(status 'eq' 1)
+                        a(id='publish-exam-' + id data-name='id' data-value=id ) > string('publish')
+                        echo('|')
+                        a(id='delete-exam-' + id data-name='id' data-value=id ) > string('remove')
+                        echo('|')
+                        a(id='edit-exam-' + id) > string('edit')
+                    compare(status 'eq' 2)
+                        a(id='manage-exam-' + id data-name='id' data-value=id ) > string('manage')
+                        echo('|')
+                        a(id='cancel-exam-' + id data-name='id' data-value=id ) > string('undo')
+                    compare(status 'eq' 3)
+                        a(id='manage-exam-' + id data-name='id' data-value=id ) > string('manage')
+                        echo('|')
+                        a(id='cancel-exam-' + id data-name='id' data-value=id ) > string('undo')
+                    compare(status 'eq' 4)
+                        a(id='manage-exam-' + id data-name='id' data-value=id ) > string('manage')
+                    compare(status 'eq' 5)
+                        a(id='manage-exam-' + id data-name='id' data-value=id ) > string('manage')
+                        echo('|')
+                        a(id='cancel-exam-' + id data-name='id' data-value=id ) > string('undo')
+                    a(id='copy-exam-'+id data-name='id' data-value=id) > string('copy')
+                else
+                    tr > td(colspan='12') > p.text-center > string('no-data')
+    #pager.pagination

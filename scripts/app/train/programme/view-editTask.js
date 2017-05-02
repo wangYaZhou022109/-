@@ -10,6 +10,11 @@ exports.title = function() {
     return title[this.bindings.state.data.type];
 };
 
+exports.buttons = [{
+    text: '确定',
+    action: 'saveTask',
+}];
+
 exports.bindings = {
     state: true,
     task: true,
@@ -31,6 +36,16 @@ exports.dataForTemplate = {
         });
         return data.files;
     },
+    task: function(data) {
+        var task = data.task || {};
+        var taskReviewer = task.taskReviewer || [];
+        _.map(taskReviewer || [], function(reviewer) {
+            var obj = reviewer;
+            obj.memberId = obj.approvalMemberId;
+            return obj;
+        });
+        return task;
+    },
 };
 
 exports.events = {
@@ -46,7 +61,6 @@ exports.handlers = {
     showMember: function() {
         var me = this,
             model = me.module.items['train/programme/select-member'];
-
         me.app.viewport.modal(model, {
             ids: me.components.tags.getValue(),
             callback: function(payload, flag) {     // 选中添加，非选中取消添加。
@@ -55,25 +69,9 @@ exports.handlers = {
             }
         });
     },
-    // showMember: function() {
-    //     var me = this,
-    //         model = me.module.items['train/programme/select-member'];
-    //     me.app.viewport.modal(model, {
-    //         callback: function(data) {
-    //             var state = me.bindings.state.data;
-    //             var params = {};
-    //             me.app.viewport.closeModal();
-    //             if (data) {
-    //                 params.classId = state.classId;
-    //                 params.type = 0;
-    //                 params.memberIds = data;
-    //                 me.module.dispatch('addTrainees', params);
-    //             }
-    //         }
-    //     });
-    // },
     clearMembers: function() {
-        this.components.tags.clear();
+        var me = this;
+        me.components.tags.clear();
     },
     uploadTaskFile: function() {
         var view = this.module.items.uploadTask,
@@ -88,6 +86,7 @@ exports.handlers = {
             task.startTime = $(this.$('startTime')).val();
             task.endTime = $(this.$('endTime')).val();
             task.explain = $(this.$('explain')).val();
+            task.memberIds = this.components.tags.getValue();
             this.app.viewport.modal(view);
         }
     },
@@ -135,9 +134,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    saveTask: function() {
-        this.app.viewport.closeModal();
-    }
 };
 
 findExtension = function(value) {
@@ -165,21 +161,19 @@ findExtension = function(value) {
     return type;
 };
 
-// exports.components = [{
-//     id: 'startTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true
-//     }
-// }, {
-//     id: 'endTime',
-//     name: 'flatpickr',
-//     options: {
-//         enableTime: true,
-//         noCalendar: true
-//     }
-// }];
-exports.components = [function() {
+exports.components = [{
+    id: 'startTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, {
+    id: 'endTime',
+    name: 'flatpickr',
+    options: {
+        enableTime: true
+    }
+}, function() {
     var data = this.bindings.state.data;
     var inputName = data.inputName || 'memberIds',
         tags = data.tags || [];

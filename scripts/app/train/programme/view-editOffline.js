@@ -4,7 +4,15 @@ var _ = require('lodash/collection'),
 
 var title = { add: '添加课程', update: '编辑课程' };
 
-exports.large = true;
+exports.buttons = [{
+    text: '添加',
+    fn: function(payload) {
+        if (this.validate()) {
+            return this.module.dispatch('submitOffline', payload);
+        }
+        return false;
+    }
+}];
 
 exports.type = 'form';
 

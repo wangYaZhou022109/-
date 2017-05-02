@@ -1,0 +1,51 @@
+#!handlebars
+
+module > .askpaper-page.askpaper
+    .div(data-region='search')
+    .div(data-region='main')
+
+view('search') > form.vertical
+    .filter-row
+        .filter-item
+            label > echo('姓名')
+            input.input(name='memberFullName')
+        .filter-item
+            label > echo('单位')
+            select.input#organizationId(name='organizationId' x-marker='selectize')
+                each(organizations)
+                    option(value=key) > echo(value)
+        .filter-item
+            label > echo('提交状态')
+        .filter-item
+            select.input#commitQuestionary(name='commitQuestionary' x-marker='selectize')
+                each(commitQuestionary)
+                    option(value=key) > echo(value)
+        .filter-item
+            span > echo('|')
+            .btn#search > echo('查询')
+
+view('main')
+    table.table.layout-mt-small
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('账号')
+            th > echo('机构')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+            th > echo('邮箱')
+            th > echo('提交状态')
+        tbody > each(trainees) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+            td > echo(email)
+            td > map('trainee-commit-questionary' commitQuestionary)
+            else
+                tr > td(colspan='9') > p.text-center > echo('没有数据')
+    #pager.pagination
