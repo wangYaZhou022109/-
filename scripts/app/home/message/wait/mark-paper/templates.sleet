@@ -16,10 +16,10 @@ view('main')
                 .pull-right.text-tips
                     if(waitMark)
                         echo('提交时间：')
-                        dateTime(examRecord.lastSubmitTime)
+                        dateMinute(examRecord.lastSubmitTime)
                     else
                         echo('评卷时间：')
-                        dateTime(submitTime)
+                        dateMinute(submitTime)
             .clearfix.m-top
                 .pull-left > echo('考试名称： ' examRecord.exam.name)
                 .pull-right.ml-1
