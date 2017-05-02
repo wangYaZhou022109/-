@@ -1,0 +1,27 @@
+#!handlebars
+module
+    div(style='width:20%;float:left;border:solid 1px red;' data-region='menu')
+    div(style='width:80%;float:right;border:solid 1px red;' data-region='list')
+view('menu')
+    each(menu)
+        a(id='menu-'+id name='id' value = name) > echo(name)
+    a(id='menu-'+ 0 name='id' value = name) > echo('其他')
+view('list')
+    table.table
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('机构')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+        tbody > each(list) > tr
+            td > echo(i)
+            td > echo(member.fullName)
+            td > echo(member.name)
+            td > echo(companyName)
+            td > echo(organizationName)
+            td > echo(member.positionName)
+            td > echo(phoneNumber)
+    #pager.pagination(style='float:none')

@@ -1,0 +1,3 @@
+exports.bindings = {
+    all: true,
+};

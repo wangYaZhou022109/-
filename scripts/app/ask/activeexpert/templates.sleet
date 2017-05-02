@@ -5,11 +5,11 @@ module
 view('list')
     .section
         span.h3 > string('active') + string('expert')
-        span.more(id='expert-more') more
+        span.more > a.normal(href='#/ask/expert/index') > echo('more')
         .layout-mt-small.user-picture
             .grid-row
                 each(expert)
-                    .col-md-4 > a
-                        img.block( id='expert-' + id + ',' + member.id data-name='id' data-value=id + id + ',' + member.id src=member.headPortrait)
+                    .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
+                        img.block(src=member.headPortrait)
                 
     

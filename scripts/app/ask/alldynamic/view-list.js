@@ -17,6 +17,13 @@ exports.events = {
 };
 
 exports.handlers = {
+    // refresh: function(id, e, target) {
+    //     console.log(11111111);
+    //     // var region;
+    //     // var el = $(target).parents('.comment-list')[0];
+    //     // region = new D.Region(this.app, this.module, el, id);
+    //     // region.show('ask/myquiz/details', { id: id });
+    // },
     sharesDetails: function(payload) {
         var data = { },
             id = payload;
@@ -125,10 +132,26 @@ exports.actions = {
     'click reply-*': 'reply',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
     'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     delquestion: function(payload) {
         var data = payload;
         data.auditType = '1';
@@ -176,19 +199,21 @@ exports.actionCallbacks = {
         this.app.message.success('操作成功！');
         this.module.dispatch('init');
     },
-    follow: function() {
-        var me = this;
+    follow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        follow.hidden = true;
+        unfollow.hidden = false;
         this.app.message.success('关注成功！');
-        setTimeout(function() {
-            me.app.show('content', 'ask/content');
-        }, 2000);
     },
-    unfollow: function() {
-        var me = this;
+    unfollow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        follow.hidden = false;
+        unfollow.hidden = true;
         this.app.message.success('取消成功！');
-        setTimeout(function() {
-            me.app.show('content', 'ask/content');
-        }, 2000);
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
@@ -214,7 +239,11 @@ exports.dataForTemplate = {
             var obj = value,
                 date = new Date(obj.createTime);
             var url = obj.createUser.headPortrait;
-            obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.createUser.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {

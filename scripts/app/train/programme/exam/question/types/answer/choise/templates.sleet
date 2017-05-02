@@ -1,0 +1,38 @@
+#!handlebars
+
+module > .choise.preview-content
+    div(data-region='content')
+    .options(data-region='options')
+
+view('content')
+    a.question(name='mlj'+state.id) > @echo(state.content)
+
+
+view('options') > .answer
+    ul > each(options)
+        li(id='item-' + index)
+            if(mutiple)
+                .checkbox.no-margin.inline-block
+                    input(type='checkbox' id='check-'+@index value=@index)('checked')&if(checked)
+                    label(for='check-'+@index)
+            else
+                input.inline-block(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
+            label.no-margin(for='answer-item-' + index)
+                .answer-options > .option-num > @echo(code)
+                .answer-options > @echo(content)
+
+    if(isShowDetail)
+        .show-answer
+            .clearfix
+                .pull-left > .common-title
+                    if(state.isShowAnswer)
+                        echo('答案：' state.answer)
+                .text-right
+                    if(state.isShowGainScore)
+                        span > echo('本题得分：' state.gainScore)
+                    span.layout-ml > echo('本题易错率：' state.errorRate '%')
+    else
+        .show-answer
+            .clearfix
+                .pull-left > .common-title
+                    echo('答案：' state.answer)

@@ -1,30 +1,33 @@
 #!handlebars
 
 module
-    br
-    .div(data-region='search')
-    .div(data-region='main')
+    .membership-search.layout-mt(data-region='search')
+    div(data-region='main')
 
 view('search') > form.vertical
-    echo('员工编号')
-    input.input(name='memberName')
-    echo('姓名')
-    input.input(name='memberFullName')
-    echo('所属单位')
-    input.input(name='organizationName')
-    btn.btn#search > echo('搜索')
+    .filter-row
+        .filter-item
+            leabel > echo('员工编号')
+            input.input(name='memberName')
+        .filter-item
+            leabel > echo('姓名')
+            input.input(name='memberFullName')
+        .filter-item
+            label > echo('所属单位')
+            input.input(name='organizationName')
+        .filter-item
+            label |
+            button.btn#search > echo('搜索')
 
 view('main')
-    div.text-center
-        p.col-sm-2 > echo('报名列表')
-        .buttons
-            .btn#situation > echo('报名情况')
-            .btn#allAudit > echo('审核')
+    .membership-table.layout-mt-small.clearfix
+        .h5.pull-left.strong > echo('报名列表')
+        .pull-right
+            button.btn.tag-btn#situation > echo('报名情况')
+            button.btn.tag-btn#allAudit > echo('审核')
     table.table
         thead > tr
-            th > .checkbox.no-margin
-                input(type='checkbox' id='checkAll')
-                label(for='checkAll')
+            th > input(type='checkbox' id='checkAll')
             th > echo('序号')
             th > echo('姓名')
             th > echo('员工编号')
@@ -35,9 +38,7 @@ view('main')
             th > echo('状态')
             th > echo('操作')
         tbody > each(trainees) > tr
-            td > .checkbox.no-margin
-                input(type='checkbox' id='check-item'+id name='traineeId' value=id)
-                label(for='check-item'+id)
+            td > input(type='checkbox' id='check-item'+id name='traineeId' value=id)
             td > echo(i)
             td > echo(member.fullName)
             td > echo(member.name)
@@ -46,36 +47,40 @@ view('main')
             td > echo(member.positionName)
             td > echo(phoneNumber)
             td > map('trainee-show-auditStatus' auditStatus)
-            td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId) > echo('审核')
-    #pager.pagination
+            td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId href='javascript:;') > echo('审核')
+    #pager.pagination(style='float:none')
 
-view('situation')
-    echo('培训班审批情况:') + echo(situation.signUpNumber) + echo('/') + echo(situation.amount)
-    compare(situation.type 'eq' 2)
-        table.table
-            thead > tr
-                th > echo('序号')
-                th > echo('机构/部门')
-                th > echo('已报名人数/本省名额')
-            tbody > each(situation.classQuotaDetails) > tr
-                td > echo(i)
-                td > echo(organizationName)
-                td > echo(signUpNumber) + echo('/') + echo(quantity)
+view('situation') > .signup-page.signup
+    section.section
+        .layout-mt-small
+            span.m-right > echo('培训班审批情况:')
+            span.custom-color-3 > echo(situation.signUpNumber + '/' + situation.amount)
+        compare(situation.type 'eq' 2)
+            .layout-mt-small
+                table.table
+                    thead > tr
+                        th > echo('序号')
+                        th > echo('机构/部门')
+                        th > echo('已报名人数/本省名额')
+                    tbody > each(situation.classQuotaDetails) > tr
+                        td > echo(i)
+                        td > echo(organizationName)
+                        td > echo(signUpNumber + '/' + quantity)
 
-view('audit') > form.vertical
-    input.input(name='id' type='hidden' value=traineeId)
-    .row
-        .col-sm-3
-            echo('审核结果')
-        .col-sm-9
-            input(type='radio' name='auditStatus' value='1')
-            echo('同意')
-            input(type='radio' name='auditStatus' value='2')
-            echo('拒绝')
-    br
-    .row
-        .col-sm-2
-            label > echo('审核意见')
-        .col-sm-10
-            textarea.input.w-full(name='auditOpinion' x-rule='required' rows='2' placeholder='编辑审核意见')
+view('audit') > form.verify-page.verify
+    .container
+        section.section
+            .clearfix
+                label.pull-left.layout-mr 审核结果
+                .pull-left.layout-mr
+                    input(type='radio' name='auditStatus' value='1')
+                    label > echo('同意')
+                .pull-left
+                    input(type='radio' name='auditStatus' value='2')
+                    label > echo('拒绝')
+                input.input(name='id' type='hidden' value=traineeId)
+            .clearfix.layout-mt-small
+                label.pull-left.layout-mr > echo('审核意见')
+                textarea(name='auditOpinion' x-rule='required' rows='3' placeholder='编辑审核意见')
+
 

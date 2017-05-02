@@ -6,7 +6,7 @@ module > .report-exam-page
 view('reportaudit')
     .report-person.clearfix
         .item.pull-left.layout-mr
-            span > echo('举报人：') > echo(reportaudit.member.fullName) 
+            span > echo('举报人：') > echo(member.fullName) 
             #  img.inline-block(src="images/1.png")
             #  img.inline-block(src="images/2.png")
             #  img.inline-block(src="images/3.png")
@@ -18,7 +18,7 @@ view('reportaudit')
             span > map('ask-report-type' reportaudit.sourceType)
         .reported.pull-left.layout-mr
             span 被举报人：
-            span > echo(reportaudit.member.fullName)
+            span > echo(member.fullName)
     .report-content.layout-mt-small
         p 举报内容：
         .report-content-item.small-font > echo(reportaudit.question.title)
@@ -30,7 +30,10 @@ view('reportaudit')
                 span 举报类型:
                 span > map('ask-source-type' reportaudit.type)
             .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
-    textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5")
+        input.input(name='id' type='hidden' value=reportaudit.id)
+        input.input(name='questionId' type='hidden' value=reportaudit.question.id)
+        input.input(name='objectId' type='hidden' value=audit.objectId)
+    textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5" name="auditNote")
 #  module > .course-page
 #      div(data-region='reportaudit' style='height:100%;')
 

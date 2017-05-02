@@ -1,33 +1,69 @@
 #!handlebars
 
-module > .train-class-page
-    .top(data-region='top')
-    .page-main-wrapper
-        .main(data-region='main')
+moudle > .managements-page
+    .manage-tabs(data-region="top")
+    .main(data-region="main")
 
 view('top')
-    .h3 培训班名称培训班名称  已实施
-    ul.nav.nav-pills.nav-justified.step.step-round
-        li.active#menu-book
-            a 预定时间
-        li#menu-base
-            a 班级基本信息
-        li#menu-programme
-            a 日程安排
-        li#menu-quota
-            a 配额管理
-        li#menu-notice
-            a 发布通知
-        li#menu-trainee
-            a 成员管理
-        li#menu-service
-            a 班务管理
-        li#menu-statistics
-            a 统计与评估
-        li#menu-evaluate
-            a 学习效果考评
-        li#menu-summary
-            a 培训总结
+    .container
+        .managements-main-title.layout-mt-small
+            .h4.pull-left.strong.layout-mr-small > echo(projectInfo.name)
+            .tag-btn.bg-main-color > map('train-project-status' projectInfo.classStatus)
+            if(projectInfo.showDetailButton)
+                .tag-btn.radius.pull-right.active
+                    a(href=classUrl target='_blank') 进入班级
+        .managements-tabs
+            ul.clearfix.layout-mt
+                li.pull-left#menu-book.active
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 预定时间
+                li.pull-left#menu-base
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 班级基本信息
+                li.pull-left#menu-programme
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 日程安排
+                li.pull-left#menu-quota
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 配额管理
+                li.pull-left#menu-notice
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 发布通知
+                li.pull-left#menu-trainee
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 成员管理
+                li.pull-left#menu-service
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 班务管理
+                li.pull-left#menu-statistics
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 统计与评估
+                li.pull-left#menu-evaluate
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 学习效果考评
+                li.pull-left#menu-summary
+                    .managements-tabs-item
+                        .managements-tabs-circle
+                            .managements-tabs-smallcircle
+                    p.layout-mt-small.sub-title 培训总结
 
 view('main')
     div(data-dynamic-key=state.menu)

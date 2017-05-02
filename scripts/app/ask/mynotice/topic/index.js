@@ -7,6 +7,7 @@ exports.store = {
     models: {
         topic: { url: '../ask-bar/trends/focus-topic' },
         topicType: { url: '../system/topic-type' },
+        down: { url: '../human/file/download' },
         unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {

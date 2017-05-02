@@ -4,7 +4,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        topic: { url: '../ask-bar/topic/hot-topic' }
+        topic: { url: '../ask-bar/topic/hot-topic' },
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function() {

@@ -1,0 +1,15 @@
+#!handlebars
+
+module > .choise
+    div(data-region='content')
+    .options(data-region='subs')
+
+
+view('content')
+    p.question(name='mlj' + state.id) > @echo(state.content)
+
+view('subs')
+    each(subs)
+        echo('(' index ')')
+        div(data-dynamic-key=id)
+

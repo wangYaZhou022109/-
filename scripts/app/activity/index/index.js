@@ -38,7 +38,10 @@ exports.store = {
             root: 'items',
             pageSize: 60
         },
-        down: { url: '../human/file/download' }
+        down: { url: '../human/file/download' },
+        classSignupInfo: {
+            url: '../train/sign-up/find-by-code'
+        }
     },
     callbacks: {
         init: function() {
@@ -79,6 +82,12 @@ exports.store = {
             return _.find(this.models.researchActivitys.data, function(r) {
                 return r.id === payload.id;
             });
+        },
+        getClassSignupInfo: function(payload) {
+            var classSignupInfo = this.models.classSignupInfo;
+            classSignupInfo.clear();
+            classSignupInfo.params = payload;
+            return this.get(classSignupInfo);
         }
     }
 };

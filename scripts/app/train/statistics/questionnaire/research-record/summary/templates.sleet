@@ -1,0 +1,27 @@
+#! handlebars
+module
+    .exam-base-info.add-info-popup
+        div(data-region='title')
+        .row
+            .col-sm-9.statistics-left
+                div(data-region='main')
+            .col-sm-3
+                div(data-region='side')
+
+view('title')
+    .statistics-top > echo(summaryDetail.name)
+
+view('main')
+    each(dimensions)
+        h3 > echo(dimensionIndex '、' name)
+        ul.statistics-ul
+            each(questions)
+                li
+                    div(data-dynamic-key=id)
+
+view('side')
+    ul.p-top.m-top.statistics-right > each(dimensions)
+        li
+            echo(name)
+            .research-list-num.clearfix.m-top > each(questions)
+                span > echo(questionIndex)

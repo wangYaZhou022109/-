@@ -269,11 +269,20 @@ module.exports = {
     'trainee-show-auditStatus': {
         0: '待审核', 1: '-'
     },
+    'trainee-commit-questionary': {
+        0: '未提交', 1: '已提交'
+    },
+    'project-approval-result': {
+        1: '待预定', 2: '待审核', 3: '已审核', 4: '已审核', 5: '已审核'
+    },
     'project-address': {
         1: '移动学院', 2: '南方基地'
     },
     'class-classroom': {
         0: '暂不分配', 1: '红枫叶温泉酒店', 2: '东方文化'
+    },
+    'display-rule': {
+        0: '显示全部', 1: '显示前10名'
     },
     'class-table-type': {
         1: '其他', 2: '圆形'
@@ -391,6 +400,9 @@ module.exports = {
     },
     'exam-person-center-status': {
         1: '待考试', 2: '待开始', 3: '待审核', 4: '待评卷', 5: '已完成'
+    },
+    'train-project-status': {
+        1: '未实施', 2: '进行中', 3: '已结束'
     },
     get: function(k) {
         return _.map(this[k], function(value, key) {

@@ -1,0 +1,22 @@
+#!handlebars
+
+module > .choise.preview-content
+    div(data-region='content')
+    .options(data-region='options')
+
+view('content')
+    # .row
+    #   .col-xs-6 > .com-title 问答题
+    #   .col-xs-6 > .m-top.text-right
+    #      | 本题分数：
+    #      echo(state.score)
+    p.question
+        echo(state.index '.')
+        span.sub-text [问答题] &nbsp;
+        a.normal(name='mlj-' + state.id) > @echo(state.content)
+
+
+view('options') > .answer
+    ul > each(options)
+        li(id='item-' + index)
+            .inline-block > label.no-margin(for='answer-item-1') > @echo(content)

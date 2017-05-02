@@ -1,0 +1,16 @@
+#!handlebars
+
+module > .unit-page
+    .unit(data-region='main')
+
+view('main')
+    if(situation.id)
+        echo('培训班报名情况列表：') + echo(situation.signUpNumber) + echo('/') + echo(situation.amount)
+        compare(situation.type 'eq' 2)
+            table.table
+                thead > tr
+                    th > echo('公司部门')
+                    th > echo('成员/配额')
+                tbody > each(situation.classQuotaDetails) > tr
+                    td > echo(organizationName)
+                    td > echo(signUpNumber) + echo('/') + echo(quantity)

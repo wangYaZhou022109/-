@@ -20,5 +20,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { memberId: this.renderOptions.memberId });
+    return this.dispatch('init', this.renderOptions.memberId);
 };
