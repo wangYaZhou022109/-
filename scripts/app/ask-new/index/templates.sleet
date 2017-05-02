@@ -419,7 +419,7 @@ view('main')
                     .user-pic > img(src='images/1.png')
                     .comment-content
                         .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题
                         .user-info
                             a(href='javascript:;') 我
                             span ·提问·
@@ -429,13 +429,17 @@ view('main')
                             .text-right
                                 .item > span.color-ing 待审核
                                 .item.color-err > span 被拒绝
-                                .item 删除
+                                .item
+                                    i.iconfont.icon-trash
+                                    span 删除
                                 .item
                                     | +
                                     span 关注
                                 .item 赞（8）
                                 .item 2条讨论
-                                .item > span 分享
+                                .item
+                                    i.iconfont.icon-share-2
+                                    span 分享
                                 .item > span#report 举报
 
                 li
