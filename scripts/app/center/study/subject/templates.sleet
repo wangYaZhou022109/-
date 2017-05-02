@@ -35,7 +35,7 @@ view('main')
                 compare(finishStatus 'eq' 0)
                     map('course-info-study-status' finishStatus)
                 else
-                    echo('累计学习时长：' studyTotalTime)
+                    echo('累计学习时长：' studyTotalTime '分钟')
             .btn-row
                 a.normal(href=btnUrl target='_blank')
                     .btn > echo(btnText)
