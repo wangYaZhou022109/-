@@ -11,8 +11,6 @@ exports.events = {
     'mouseout list-*': 'hideClose'
 };
 
-
-
 exports.handlers = {
     showClose: function(id) {
         $(this.$('delete-' + id)).addClass('fade-in').removeClass('fade-out');
