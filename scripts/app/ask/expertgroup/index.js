@@ -38,22 +38,14 @@ exports.store = {
             return this.post(expert);
         },
         follow: function(payload) {
-            var follow = this.models.follow,
-                me = this;
+            var follow = this.models.follow;
             follow.set(payload);
-            return this.post(follow).then(function() {
-                me.app.message.success('关注成功');
-                me.app.show('content', 'ask/expert');
-            });
+            return this.post(follow);
         },
         unfollow: function(payload) {
-            var unfollow = this.models.unfollow,
-                me = this;
+            var unfollow = this.models.unfollow;
             unfollow.set(payload);
-            return this.put(unfollow).then(function() {
-                me.app.message.success('取消成功');
-                me.app.show('content', 'ask/expert');
-            });
+            return this.put(unfollow);
         }
     }
 };

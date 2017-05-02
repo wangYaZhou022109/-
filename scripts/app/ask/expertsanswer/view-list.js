@@ -122,10 +122,26 @@ exports.handlers = {
 exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
     'click reply-*': 'reply'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     follow: function(payload) {
         var id = payload.id,
             data = {};
@@ -156,13 +172,21 @@ exports.actionCallbacks = {
         this.app.message.success('操作成功！');
         this.module.dispatch('init');
     },
-    follow: function() {
+    follow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        follow.hidden = true;
+        unfollow.hidden = false;
         this.app.message.success('关注成功！');
-        this.module.dispatch('init');
     },
-    unfollow: function() {
+    unfollow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        follow.hidden = false;
+        unfollow.hidden = true;
         this.app.message.success('取消成功！');
-        this.module.dispatch('init');
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
@@ -178,16 +202,6 @@ exports.actionCallbacks = {
     }
 };
 exports.dataForTemplate = {
-    // trends: function(data) {
-    //     var trends = data.trends;
-    //     _.forEach(trends, function(value) {
-    //         var obj = value,
-    //             date = new Date(obj.createTime);
-    //         obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    //         + '   ' + date.getHours() + ':' + date.getMinutes();
-    //     });
-    //     return trends;
-    // },
     page: function(data) {
         var trends = data.expertdiscuss;
         var page = this.bindings.page.data;
@@ -199,7 +213,11 @@ exports.dataForTemplate = {
             var praiseNum = obj.questionDiscuss.praiseNum;
             var replyNum = obj.questionDiscuss.replyNum;
             var url = obj.member.headPortrait;
-            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
             if (praiseNum === null) {
                 obj.questionDiscuss.praiseNum = 0;
             }

@@ -1,6 +1,7 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
-    signUpExam, isInApplantTimeRange, waitApprove, examCanceled;
+    signUpExam, isInApplantTimeRange, waitApprove, examCanceled,
+    isFirstTimeToExam;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -33,20 +34,21 @@ exports.getUserStatusOfExam = function(exam) {
         if (signUp !== 0 && signUp !== 3) {
             return signUp;
         }
-        if (canExamMore(exam) && canViewDetailImmd(exam)) {
+        if (overExam(exam) && canExamMore(exam) && canViewDetailImmd(exam)) {
             return 6;
-        }
-        if (canExamMore(exam)) {
-            return 14;
-        }
-        if (canViewDetailImmd(exam)) {
+        } else if (overExam(exam) && canViewDetailImmd(exam)) {
             return 7;
-        }
-        if (overExam(exam)) {
+        } else if (overExam(exam) && canExamMore(exam)) {
+            return 14;
+        } else if (isFirstTimeToExam(exam)) {
+            return 5;
+        } else if (overExam(exam)) {
             return 8;
         }
+
         return 5;
     }
+
     if (afterExam(exam.endTime)) {
         if (exam.hasCert && exam.examRecord && exam.examRecord.status > 5) {
             return 11;
@@ -118,4 +120,8 @@ waitApprove = function(exam) {
 
 examCanceled = function(exam) {
     return exam.status === 1;
+};
+
+isFirstTimeToExam = function(exam) {
+    return exam.examedTimes === 0;
 };

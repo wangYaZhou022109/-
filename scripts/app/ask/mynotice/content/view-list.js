@@ -9,34 +9,34 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click myquiz-details-*': 'showDetails',
+    // 'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
     'click trend-report-*': 'report',
     'click shareTo-*': 'shareTo',
-    'click myshares-details-*': 'sharesDetails',
+    // 'click myshares-details-*': 'sharesDetails',
 };
 
 exports.handlers = {
-    sharesDetails: function(payload) {
-        var data = { },
-            id = payload;
-        $('.dialog-main').unbind('scroll');
-        this.app.viewport.closeModal();
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            this.app.show('content', 'ask/myshares/details', { id: data[1] });
-        }
-    },
-    showDetails: function(payload) {
-        var data = { },
-            id = payload;
-        $('.dialog-main').unbind('scroll');
-        this.app.viewport.closeModal();
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
-        }
-    },
+    // sharesDetails: function(payload) {
+    //     var data = { },
+    //         id = payload;
+    //     $('.dialog-main').unbind('scroll');
+    //     this.app.viewport.closeModal();
+    //     if (id.indexOf('_') !== -1) {
+    //         data = id.split('_');
+    //         this.app.show('content', 'ask/myshares/details', { id: data[1] });
+    //     }
+    // },
+    // showDetails: function(payload) {
+    //     var data = { },
+    //         id = payload;
+    //     $('.dialog-main').unbind('scroll');
+    //     this.app.viewport.closeModal();
+    //     if (id.indexOf('_') !== -1) {
+    //         data = id.split('_');
+    //         this.app.show('content', 'ask/myquiz/details', { id: data[1] });
+    //     }
+    // },
     discuss: function(payload) {
         $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
@@ -203,6 +203,11 @@ exports.dataForTemplate = {
                 date = new Date(obj.createTime);
             var url = obj.createUser.headPortrait;
             obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.createUser.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {

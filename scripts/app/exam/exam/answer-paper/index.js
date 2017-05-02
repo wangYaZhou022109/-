@@ -177,37 +177,43 @@ exports.store = {
                         paperSortRule = exam.paperSortRule;
                     if (paperSortRule === sort.QUESTION) {
                         this.data = _.map(this.data, function(t) {
-                            return _.map(t.questions.sort(function() {
-                                return Math.random() - 0.5;
-                            }), function(q, i) {
-                                return D.assign(q, { index: i + 1 });
+                            return D.assign(t, {
+                                questions: _.map(t.questions.sort(function() {
+                                    return Math.random() - 0.5;
+                                }), function(q, i) {
+                                    return D.assign(q, { index: i + 1 });
+                                })
                             });
                         });
                     }
 
                     if (paperSortRule === sort.QUESTION_ATTR) {
                         this.data = _.map(this.data, function(t) {
-                            return _.map(t.questions, function(q) {
-                                return D.assign(q, {
-                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
-                                        return Math.random() - 0.5;
-                                    })
-                                });
+                            return D.assign(t, {
+                                questions: _.map(t.questions, function(q) {
+                                    return D.assign(q, {
+                                        questionAttrCopys: q.questionAttrCopys.sort(function() {
+                                            return Math.random() - 0.5;
+                                        })
+                                    });
+                                })
                             });
                         });
                     }
 
                     if (paperSortRule === sort.QUESTION_AND_ATTR) {
                         this.data = _.map(this.data, function(t) {
-                            return _.map(t.questions.sort(function() {
-                                return Math.random() - 0.5;
-                            }), function(q, i) {
-                                return D.assign(q, {
-                                    index: i + 1,
-                                    questionAttrCopys: q.questionAttrCopys.sort(function() {
-                                        return Math.random() - 0.5;
-                                    })
-                                });
+                            return D.assign(t, {
+                                questions: _.map(t.questions.sort(function() {
+                                    return Math.random() - 0.5;
+                                }), function(q, i) {
+                                    return D.assign(q, {
+                                        index: i + 1,
+                                        questionAttrCopys: q.questionAttrCopys.sort(function() {
+                                            return Math.random() - 0.5;
+                                        })
+                                    });
+                                })
                             });
                         });
                     }
