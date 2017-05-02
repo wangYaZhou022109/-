@@ -20,7 +20,7 @@ exports.store = {
             return this.put(this.models.pass);
         },
         out: function(payload) {           // 审核拒绝
-            this.models.pass.set(payload);
+            this.models.out.set(payload);
             return this.put(this.models.out);
         },
     }

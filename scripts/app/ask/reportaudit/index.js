@@ -42,6 +42,7 @@ exports.buttons = [{
         var params = data;
         params.auditStatus = 1;
         params.auditType = 4;
+        console.log(params);
         return this.dispatch('pass', params);
     }
 }];
