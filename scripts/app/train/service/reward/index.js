@@ -34,9 +34,15 @@ exports.store = {
             return this.get(edit);
         },
         updateClass: function(payload) {
-            var updateClass = this.models.updateClass;
-            updateClass.set(payload);
-            return this.put(updateClass);
+            var updateClass = this.models.updateClass,
+                me = this,
+                courseSalary = payload;
+            courseSalary.classId = me.models.state.data.classId;
+            updateClass.set(courseSalary);
+            return this.save(updateClass).then(function() {
+                me.app.message.success('保存成功！');
+                me.module.dispatch('courseSalaryList', me.models.state.data);
+            });
         },
     }
 };
