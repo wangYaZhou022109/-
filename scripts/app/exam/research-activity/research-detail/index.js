@@ -39,6 +39,19 @@ exports.store = {
                 resetCurrentQuestion: function() {
                     var dimensions = this.module.store.models.dimensions;
                     D.assign(this.data, { currentQuestion: dimensions.getCurrentQuestion() });
+                },
+                calculate: function() {
+                    var answer = this.module.store.models.answer,
+                        questions = this.module.store.models.questions.data || [],
+                        answeredCount = answer.answeredCount();
+                    D.assign(this.data, {
+                        answeredCount: answeredCount,
+                        noAnswerCount: questions.length - answeredCount
+                    });
+                    this.save();
+                },
+                isComplete: function() {
+                    return this.data.noAnswerCount === 0;
                 }
             }
         },
@@ -181,6 +194,11 @@ exports.store = {
                     }
                     return null;
                 },
+                answeredCount: function() {
+                    return _.filter(this.data, function(a) {
+                        return a.value[0].value !== '';
+                    }).length;
+                },
                 getData: function() {
                     var me = this;
                     return {
@@ -246,6 +264,7 @@ exports.store = {
         },
         saveAnswer: function(data) {
             this.models.answer.saveAnswer(data);
+            this.models.state.calculate();
             this.models.dimensions.updateStatus(data.key, itemStatus.ACTIVE);
             this.models.dimensions.changed();
         },
