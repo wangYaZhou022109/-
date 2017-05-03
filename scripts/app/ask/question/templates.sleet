@@ -9,8 +9,14 @@ module > form.form.align-left
 view('top')
     .form-row
         label.required > string('question-title')
-        .content > input.input(name='title'  value=''  x-rule='required') + .tips 0/60
-
+        .content
+            input.input#selectquestion(name='title'  value=''  x-rule='required')
+            .tips 0/60
+            .select-drop.border.around
+                .select-drop-item 问题一
+                .select-drop-item 问题一问题一问题一
+                .select-drop-item 问题一问题一问题一
+                .select-drop-item 问题一问题一问题一
 view('topic')
     .form-row.textarea-row
         label > string('related-topics')

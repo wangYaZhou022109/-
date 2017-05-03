@@ -4,7 +4,8 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     state: false,
-    details: true
+    details: true,
+    down: false
 };
 exports.events = {
     'click discuss-answer-*': 'discussanswer',
@@ -200,6 +201,14 @@ exports.dataForTemplate = {
     details: function(data) {
         var obj = data,
             date = new Date(data.details.createTime);
+        // console.log(data);
+        var url = obj.details.member.headPortrait;
+        // console.log(url);
+        if (typeof url === 'undefined' || url === null || url === '') {
+            obj.details.member.headPortrait = 'images/default-userpic.png';
+        } else {
+            obj.details.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+        }
         obj.details.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
         + '   ' + date.getHours() + ':' + date.getMinutes();
         return obj.details;

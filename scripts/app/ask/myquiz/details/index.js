@@ -35,6 +35,7 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' },
         shut: { url: '../ask-bar/myquiz' },
+        down: { url: '../human/file/download' },
         speech: {
             url: '../system/speech-set',
             mixin: {
@@ -49,7 +50,7 @@ exports.store = {
                 }
             }
         },
-        expert: { url: '../ask-bar//myquiz/findExpert' }
+        expert: { url: '../ask-bar/myquiz/findExpert' }
     },
     callbacks: {
         refreshrelpy: function() {

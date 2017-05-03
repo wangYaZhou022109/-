@@ -12,6 +12,7 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         shut: { url: '../ask-bar/myquiz' },
         discuss: { url: '../ask-bar/question-discuss' },
+        down: { url: '../human/file/download' },
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
@@ -20,6 +21,20 @@ exports.store = {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
+                }
+            }
+        },
+        speech: {
+            url: '../system/speech-set',
+            mixin: {
+                getData: function(id) {
+                    var speechset;
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            speechset = d;
+                        }
+                    });
+                    return speechset;
                 }
             }
         }
@@ -61,10 +76,20 @@ exports.store = {
             return this.put(this.models.shut);
         },
         publish: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
+            // var discuss = this.models.discuss;
+            // discuss.set(payload);
+            // return this.save(discuss);
+            var discuss = this.models.discuss,
+                data = payload,
+                speechset = this.models.speech.getData('2');
+            data.speechset = speechset.status;
+            discuss.set(data);
             return this.save(discuss);
-        }
+        },
+        speech: function() {
+            var speech = this.models.speech;
+            return this.get(speech);
+        },
     }
 };
 
@@ -78,6 +103,7 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
-    return this.dispatch('page');
+    this.dispatch('page');
+    this.dispatch('speech');
 };
 

@@ -36,9 +36,7 @@ exports.store = {
             data.activeStatus = 0;
             data.memberId = expert.member.id;
             data.topicIds = topic.toString();
-            if (data.introduce === '') {
-                this.app.message.success('请填写您的优势！');
-            }
+
             if (data.introduce !== '') {
                 activation.set(data);
                 this.post(activation).then(function() {
@@ -72,6 +70,11 @@ exports.title = '专家激活';
 exports.buttons = [{
     text: '提交申请',
     fn: function(payload) {
+        var introduce = payload.introduce.replace(/(^\s*)|(\s*$)/g, '');
+        if (introduce === '') {
+            this.app.message.success('请填写您的优势！');
+            return false;
+        }
         return this.dispatch('saveInner', payload);
     }
 }];
