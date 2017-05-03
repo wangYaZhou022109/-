@@ -19,7 +19,8 @@ view('offline')
                             each(weeks)
                                 option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
                 .pull-right
-                    .tag-btn.radius#theme-offline 配置周主题
+                    if(isShowWeeks)
+                        .tag-btn.radius#theme-offline 配置周主题
                     .tag-btn.radius#addOfflineCourse 添加课程
                     .tag-btn.radius#importOffline 导入课程
                     .inline-block

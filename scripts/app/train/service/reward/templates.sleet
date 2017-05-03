@@ -32,7 +32,7 @@ view('edit') > form.vertical
         .classedit-title.clearfix
             .pull-left
                 .inline-block.com-title > echo('课程名称') :
-                label > echo(edit.classOfflineCourse.name)
+                label > echo(edit.name)
             .pull-right
                 label 学习方式：面授
         .classedit-form.form.layout-mt-small
@@ -40,46 +40,47 @@ view('edit') > form.vertical
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师姓名') :
                     .content
-                        input.input.w-full(name='lectrerName' readonly='true' value= edit.classOfflineCourse.teacherName)
+                        input.input.w-full(name='lectrerName' readonly='true' value= edit.teacherName)
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师电话') :
                     .content
-                        input.input.w-full(name='id' readonly='true' value= edit.classOfflineCourse.teacherPhone)
+                        input.input.w-full(name='phone' value= edit.teacherPhone)
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师部门') :
                     .content
-                        input.input(name='lectrerName' readonly='true' value= edit.classOfflineCourse.teacherOrganization)
+                        input.input(name='lectrerName' readonly='true' value= edit.teacherOrganization)
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师职务') :
                     .content
-                        input.input(name='phone' value= edit.classOfflineCourse.teacherTitle)
+                        input.input(name='teacherTitle' value= edit.teacherTitle)
             .form-row
                 label.label.required 讲师身份证
                 .content
-                    input.input(name='lecturerCard' value= edit.lecturerCard)
+                    input.input(name='lecturerCard' value= edit.courseSalary.lecturerCard)
             .form-row
                 label.label.required 开户银行
                 .content
-                    input.input(name='lecturerBankName' value= edit.lecturerBankName)
+                    input.input(name='lecturerBankName' value= edit.courseSalary.lecturerBankName)
             .form-row
                 label.label.required 银行卡号
                 .content
-                    input.input(name='lecturerBankCard' value= edit.lecturerBankCard)
+                    input.input(name='lecturerBankCard' value= edit.courseSalary.lecturerBankCard)
             .clearfix
                 .form-row.pull-left.classedit-form-width
                     label.label.required 实付
                     .content
-                        input.input(name='paidPay' value= edit.paidPay)
+                        input.input(name='paidPay' value= edit.courseSalary.paidPay)
                 .form-row.pull-left.classedit-form-width
                     label.label.required 酬金
                     .content
-                        input.input(name='pay' value= edit.pay)
+                        input.input(name='pay' value= edit.courseSalary.pay)
                 .form-row.pull-left.classedit-form-width
                     label.label.required 税金
                     .content
-                        input.input(name='tax' value= edit.tax)
+                        input.input(name='tax' value= edit.courseSalary.tax)
             .form-row
-                label.label.required
                 .content
-                    input.input(type='hidden' name='id' value=edit.id)
+                    input.input(type='hidden' name='id' value=edit.courseSalary.id)
+                    input.input(type='hidden' name='classOfflineCourseId' value= edit.id)
+                    input.input(type='hidden' name='lecturerId' value= edit.lecturer.id)
 

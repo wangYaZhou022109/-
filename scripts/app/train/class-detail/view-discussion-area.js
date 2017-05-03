@@ -5,7 +5,7 @@ exports.bindings = {
 exports.components = [
     function() {
         var classId = this.bindings.classInfo.data.id,
-            title = this.bindings.classInfo.data.name,
+            title = this.bindings.classInfo.data.className,
             obj = {};
         if (classId) {
             obj = {

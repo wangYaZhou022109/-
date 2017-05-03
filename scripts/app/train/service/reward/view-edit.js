@@ -25,14 +25,10 @@ exports.mixin = {
             paypay: $(this.$$('[name="paypay"]')),
             pay: $(this.$$('[name="pay"]')),
             tax: $(this.$$('[name="tax"]')),
+            classOfflineCourseId: $(this.$$('[name="classOfflineCourseId"]')),
+            lecturerId: $(this.$$('[name="lecturerId"]')),
+            id: $(this.$$('[name="id"]'))
         };
     },
 
-};
-exports.actionCallbacks = {
-    validate: function() {
-        this.app.message.success('保存成功！');
-        this.app.viewport.closeModal();
-        this.module.dispatch('courseSalaryList', this.bindings.state.data);
-    }
 };

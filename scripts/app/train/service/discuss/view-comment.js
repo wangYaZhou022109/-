@@ -1,20 +1,22 @@
 exports.bindings = {
-    state: true
+    classInfo: true
 };
 
 exports.components = [
     function() {
-        var courseId = this.bindings.state.data.id,
+        var classId = this.bindings.classInfo.data.id,
+            title = this.bindings.classInfo.data.className,
             obj = {};
-        if (courseId) {
+        if (classId) {
             obj = {
                 id: 'comment-area',
                 name: 'picker',
                 options: {
                     picker: 'comment-area',
                     componentId: 'comment-area',
-                    businessId: courseId,
-                    businessType: 3
+                    businessId: classId,
+                    businessType: 4,
+                    title: title
                 }
             };
             return obj;
