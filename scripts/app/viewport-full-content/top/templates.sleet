@@ -12,8 +12,7 @@ view('nav')
     .nav-list
         if(navs.length)
             each(navs)
-                if(show)
-                    .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color(class='active')&if(active) > echo(name)
+                .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color(class='active')&if(active) > echo(name)
         else
             each(menus)
                 .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
@@ -40,12 +39,11 @@ view('shortcut')
             .drop-down-btn
                 span#selected-name > echo(organization.name)
                 i.iconfont.icon-triangle-down
-                input(type='hidden' id='orgId' name='orgId' value=organization.id)
             .drop-down-content > .content
-                ul > each(organizations)
-                    if(shortName)
-                        li(id='org-'+id) > echo(shortName)
-                    else
+                ul
+                    if(Global.organization)
+                        li(id='org-'+Global.organization.id) > echo(Global.organization.name)
+                    each(organizations)
                         li(id='org-'+id) > echo(name)
 
         if(Global.currentUser.id)
