@@ -1,8 +1,9 @@
-
+var _ = require('lodash/collection');
 var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
-    topic: true
+    topic: true,
+    down: true
 };
 
 exports.events = {
@@ -22,4 +23,18 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
+    topic: function(data) {
+        var topic = data.topic,
+            me = this;
+        _.forEach(topic, function(value) {
+            var obj = value,
+                url = obj.attachmentId;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.attachmentId = 'images/default-cover/default_topic.jpg';
+            } else {
+                obj.attachmentId = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return topic;
+    }
 };

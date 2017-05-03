@@ -1,4 +1,4 @@
-var types = require('./app/train/service/views/research-question-types'),
+var types = require('./app/train/class-detail/research-question-types'),
     D = require('drizzlejs'),
     _ = require('lodash/collection'),
     ANSWER_DETAIL_MODE = 2,

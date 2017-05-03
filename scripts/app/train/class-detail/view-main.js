@@ -12,12 +12,12 @@ exports.events = {
 
 exports.handlers = {
     showTaskList: function() {
-        var view = this.module.items['train/service/views/commit-task'];
+        var view = this.module.items['train/class-detail/commit-task'];
         var classId = this.bindings.classId.data.classId;
         this.app.viewport.modal(view, { classId: classId });
     },
     classMembers: function() {
-        var view = this.module.items['train/service/views/school-yearbook'];
+        var view = this.module.items['train/class-detail/school-yearbook'];
         var classId = this.bindings.classId.data.classId;
         this.app.viewport.modal(view, { classId: classId });
     },

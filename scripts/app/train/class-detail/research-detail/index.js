@@ -226,7 +226,7 @@ exports.store = {
             return this.post(this.models.form).then(function() {
                 var record = me.models.researchRecord.data;
                 me.app.message.success(strings.get('submit-success'));
-                me.app.navigate('train/service/views/research-answer/' + record.id, true);
+                me.app.navigate('train/class-detail/research-answer/' + record.id, true);
             });
         },
         selectDimension: function(payload) {

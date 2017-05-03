@@ -15,7 +15,7 @@ var map = {
         4: 'preview'
     },
     typeToName = function(t, m) {
-        return 'train/service/views/question/types/' + mode[m] + '/' + map[t];
+        return 'train/class-detail/question/types/' + mode[m] + '/' + map[t];
     };
 
 exports.get = function(t, m) {

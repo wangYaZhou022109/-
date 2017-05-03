@@ -25,7 +25,7 @@ exports.events = {
 
 exports.handlers = {
     showAttach: function(id) {
-        var view = this.module.items['train/service/views/online-attach'];
+        var view = this.module.items['train/class-detail/online-attach'];
         this.app.viewport.modal(view, { id: id });
     }
 };

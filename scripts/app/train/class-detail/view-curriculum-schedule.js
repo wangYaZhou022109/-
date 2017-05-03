@@ -101,7 +101,7 @@ exports.events = {
 
 exports.handlers = {
     showCourseware: function(id) {
-        var view = this.module.items['train/service/views/courseware'];
+        var view = this.module.items['train/class-detail/courseware'];
         this.app.viewport.modal(view, { id: id });
     },
     changeTheme: function() {

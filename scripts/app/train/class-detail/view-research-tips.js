@@ -15,7 +15,7 @@ exports.dataForTemplate = {
                 buttons.push({
                     id: 'research-detail',
                     text: '开始答题',
-                    url: '#/train/service/views/research-detail/' + research.id,
+                    url: '#/train/class-detail/research-detail/' + research.id,
                     target: true
                 });
             } else {
@@ -23,7 +23,7 @@ exports.dataForTemplate = {
                 buttons.push({
                     id: 'research-answer',
                     text: '查看详情',
-                    url: '#/train/service/views/research-answer/' + researchRecord.id,
+                    url: '#/train/class-detail/research-answer/' + researchRecord.id,
                     target: true
                 });
             }

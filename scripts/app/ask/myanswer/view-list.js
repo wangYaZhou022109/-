@@ -131,7 +131,11 @@ exports.dataForTemplate = {
                 date = new Date(obj.questionDiscuss.createTime),
                 replyNum = obj.questionDiscuss.replyNum;
             var url = obj.member.headPortrait;
-            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+            }
             if (replyNum === null) {
                 obj.questionDiscuss.replyNum = 0;
             }

@@ -12,9 +12,10 @@ exports.routes = {
     'statistics/questionnaire/count/:classId': 'showCount',
     'programme/preview-task/:id': 'previewTask',
     'signup/:id': 'showSignupPage',
-    signup: 'showUnregisterSignupPage',
-    'service/views/research-answer/:id': 'showResearchAnswerDetail',
-    'service/views/research-detail/:id': 'showResearchDetail'
+    signup: 'showRegisterPage',
+    'class-detail/research-answer/:id': 'showResearchAnswerDetail',
+    'class-detail/research-detail/:id': 'showResearchDetail',
+    'class-detail/:id': 'showClassDetail'
 };
 
 exports.showIndex = function(id) {
@@ -42,7 +43,7 @@ exports.showTrain = function(id) {
 };
 
 exports.showTaskDetail = function(fir, id) {
-    return this.app.viewport.showIt('content', 'train/service/views/commit-task/task-detail', { id: id });
+    return this.app.viewport.showIt('content', 'train/class-detail/commit-task/task-detail', { id: id });
 };
 
 exports.showCount = function(fir, classId) {
@@ -61,16 +62,20 @@ exports.showSignupPage = function(classId) {
     return this.app.show('content', 'train/signup', { classId: classId });
 };
 
-exports.showUnregisterSignupPage = function() {
-    return this.app.show('content', 'train/unregister-signup');
+exports.showRegisterPage = function() {
+    return this.app.show('content', 'train/register');
 };
 
 exports.showResearchDetail = function(fir, id) {
-    return this.app.viewport.showIt('content', 'train/service/views/research-detail', { researchQuestionaryId: id });
+    return this.app.viewport.showIt('content', 'train/class-detail/research-detail', { researchQuestionaryId: id });
 };
 
 exports.showResearchAnswerDetail = function(fir, id) {
-    return this.app.viewport.showIt('content', 'train/service/views/research-answer', { researchRecordId: id });
+    return this.app.viewport.showIt('content', 'train/class-detail/research-answer', { researchRecordId: id });
+};
+
+exports.showClassDetail = function(classId) {
+    return this.app.show('content', 'train/class-detail', { classId: classId });
 };
 
 exports.interceptors = {
@@ -78,8 +83,8 @@ exports.interceptors = {
     'statistics/task/audit-task/': 'clearHeadAndBottom',
     'statistics/questionnaire/count/': 'clearHeadAndBottom',
     'programme/preview-task': 'clearHeadAndBottom',
-    'service/views/research-answer/': 'clearHeadAndBottom',
-    'service/views/research-detail/': 'clearHeadAndBottom'
+    'class-detail/research-answer/': 'clearHeadAndBottom',
+    'class-detail/research-detail/': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {

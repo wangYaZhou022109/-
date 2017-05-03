@@ -1,4 +1,4 @@
-var $ = require('jquery');
+// var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
@@ -7,18 +7,18 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click expert-*': 'details'
+    // 'click expert-*': 'details',
 };
 
 exports.handlers = {
-    details: function(id) {
-        $(window).unbind('scroll');
-        if (id === 'more') {
-            this.app.show('content', 'ask/expert');
-        } else {
-            this.app.show('content', 'ask/expertdetails', { id: id });
-        }
-    }
+    // details: function(id) {
+    //     $(window).unbind('scroll');
+    //     if (id === 'more') {
+    //         this.app.show('content', 'ask/expert');
+    //     } else {
+    //         this.app.show('content', 'ask/expertdetails', { id: id });
+    //     }
+    // }
 };
 
 exports.dataForTemplate = {
@@ -28,7 +28,11 @@ exports.dataForTemplate = {
         _.forEach(expert, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
-            obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
         });
         return expert;
     }
