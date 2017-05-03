@@ -1,7 +1,29 @@
 #!handlebars
 
-module
-    div(data-region='main')
+#  module
+#      div(data-region='main')
 
-view('main')
-    div(data-dynamic-key=state.menu)
+#  view('main')
+#      div(data-dynamic-key=state.menu)
+module > .ask-page > .container
+    .page-main-wrapper
+        #  .page-side.side-min(data-region='right')
+        .page-side.side-min
+            div(data-region='top')
+            div(data-region='middle')
+            div(data-region='bottom')
+        .page-main(data-region='left' class = 'activity-category')
+             
+
+view('left')
+    div(data-dynamic-key='contentleft')
+
+#  view('right')
+#      div(data-dynamic-key='contentright')
+
+view('top')
+    div(data-dynamic-key='questionandarticles')
+view('middle')
+    div(data-dynamic-key='indexmenu')
+view('bottom')
+    div(data-dynamic-key='contentright/bottom')
