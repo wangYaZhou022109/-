@@ -83,14 +83,15 @@
 
                 & .class-info-left {
                     width: 25%;
-                    float: left;
+                    display: inline-block;
                     text-align: right;
                     color: var(--font-tip-color);
+                    margin-right: calc(var(--large-space)/2);
                 }
 
                 & .class-info-right {
                     width: 65%;
-                    float: right;
+                    display: inline-block;
                 }
             }
         }
