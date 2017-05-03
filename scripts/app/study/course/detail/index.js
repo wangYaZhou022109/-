@@ -54,7 +54,7 @@ exports.store = {
         playerState: {},
         examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
         researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
-        researchActivity: { url: '../exam/research-activity' }
+        researchActivity: { url: '../exam/research-activity/simple-data' }
     },
     callbacks: {
         init: function(payload) {
