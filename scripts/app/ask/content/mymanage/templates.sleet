@@ -6,7 +6,7 @@ module > .ask-page > .container
         .page-main(data-region='left' class = 'activity-category') 
 
 view('left')
-    div(data-dynamic-key='contentleft')
+    div(data-dynamic-key=leftstate.menu)
 
 view('right')
     div(data-dynamic-key='contentright')

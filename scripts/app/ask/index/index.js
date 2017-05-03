@@ -10,17 +10,21 @@
 // });
 
 exports.items = {
-    main: 'main'
+    left: 'left',
+   // right: 'right'
+    top: 'top',
+    middle: 'middle',
+    bottom: 'bottom'
 };
 
 exports.store = {
     models: {
-        state: { data: { menu: 'content' } }
+        leftstate: { },
+        topstate: {},
+        middlestate: {},
+        bottomstate: {}
     },
-    callbacks: {
-        init: function() {
-        }
-    }
+    callbacks: {}
 };
 
 

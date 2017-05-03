@@ -7,7 +7,7 @@ module
     div(data-region='hottopic')
     #  div(data-region='activeexpert')
 view('hottopic')
-    div(data-dynamic-key='hottopic')
+    div(data-dynamic-key='activeexpert')
 
 #  view('activeexpert')
 #      div(data-dynamic-key='activeexpert')

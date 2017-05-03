@@ -14,7 +14,7 @@ view('list')
                 compare(user.expert.auditStatus 'eq' 0)
                     .pull-right.btn > string('auditStatus3')
                 compare(user.expert.auditStatus 'eq' 1)  
-                    .pull-right.btn#myself > string('iam') + string('expert')  
+                    .pull-right.btn > a.normal(href='#/ask/iamexpertdetails') > string('iam') + string('expert')  
                 compare(user.expert.auditStatus 'eq' 2)
                     .pull-right.btn#apply > string('auditStatus4')
         compare(user.expert 'eq' null)
@@ -37,6 +37,8 @@ view('list')
                     .sub-text.text-overflow > echo(introduce)
                 compare(concernList.length 'gt' 0)
                     .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                    .btn.small( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) 关注
                 else
+                    .btn.small( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
                     .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) 关注
        

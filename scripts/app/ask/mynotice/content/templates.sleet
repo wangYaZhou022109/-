@@ -11,9 +11,11 @@ view('list')
             .comment-content
                 .h4
                     compare(trendsType 'eq' '1')
-                        a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
-                    else
-                        a(id='myshares-details-' + id + '_' + questionDiscuss.questionId ) > echo(title)
+                        a(href='#/ask/noticerquestiondetails/'+ questionId ) > echo(title)
+                    compare(trendsType 'eq' '2')
+                        a(href='#/ask/noticerarticledetails/' + questionId ) > echo(title)
+                    compare(trendsType 'eq' '3')
+                        a(href='#/ask/noticerquestiondetails/'+  questionDiscuss.questionId ) > echo(title)
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)

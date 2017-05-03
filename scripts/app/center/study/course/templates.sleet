@@ -29,7 +29,7 @@ view('filter')
             .btn#searchByName > i.iconfont.icon-search
 view('main')
     ul.list-text.border.top > each(progressList)
-        li.border.bottom
+        li.border.bottom(id='list-'+id)
             .title-row
                 .img > .img-cont > img(src=imgUrl)
                 .inline-block.title > echo(courseName)
@@ -41,7 +41,7 @@ view('main')
                 a.normal(href=btnUrl target='_blank')
                     .btn > echo(btnText)
                 compare(isRequired 'eq' 0)
-                    i.iconfont.icon-close(id='delete-'+id data-name='id' data-value=id)
+                    i.iconfont.icon-close.fade-out(id='delete-'+id data-name='id' data-value=id)
                 else
                     i.iconfont.icon-blank &nbsp;
 

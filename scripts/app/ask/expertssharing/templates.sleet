@@ -8,9 +8,9 @@ view('list')
             .comment-content
                 .h4
                     compare(trendsType 'eq' '1')
-                        a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
+                        a(href='#/ask/questiondetails/'+ questionId ) > echo(title)
                     else
-                        a(id='myshares-details-' + id + '_' + questionId ) > echo(title)
+                        a(href='#/ask/articledetails/' + questionId ) > echo(title)
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
@@ -32,11 +32,18 @@ view('list')
                     .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                     .text-right
                         compare(trendsType 'eq' '2')
-                            .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                            .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
+                            compare(isPraise 'gt' 0)
+                                .item(id='unpraise-3_'+ questionId data-name='id' data-value='3_' + questionId)
+                                    i.iconfont.icon-zan > string('unpraise') +  echo('（'+ question.praiseNum +'）')
+                            else
+                                .item(id='praise-3_'+ questionId data-name='id' data-value='3_' + questionId) 
+                                    i.iconfont.icon-zan > string('praise') +  echo('（'+ question.praiseNum +'）')
+                            .item(id='discuss-' + id ) > i.iconfont.icon-message > string('comment') + echo('(' + discussList.length +')')
                             compare(concernNum 'gt' 0)
                                 .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
+                                .item( 'hidden' id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
                             else
+                                .item( 'hidden' id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
                                 .item(id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
                             .item > .share-bar
                                 .drop-down-wrapper
@@ -44,7 +51,8 @@ view('list')
                                     form.drop-down-content > .content
                                         .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                            .item > span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
+                            .item
+                                i.iconfont.icon-info > span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
                             compare(createUserId 'eq' me)
                                 compare(discussList.length 'eq' 0)
                                     .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
