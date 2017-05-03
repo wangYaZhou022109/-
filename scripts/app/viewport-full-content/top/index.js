@@ -74,7 +74,7 @@ exports.store = {
             url: '../system/message',
             params: { page: 1, pageSize: 5, type: 1, readStatus: 0 }
         },
-        organizations: { url: '../system/home-config/organization', autoLoad: 'after' },
+        organizations: { url: '../system/home-config/organization' },
         integral: { url: '../system/integral-result/grade' }, // 积分和等级
         courseTime: { url: '../course-study/course-study-progress/total-time' } // 总学习时长
     },
@@ -113,25 +113,23 @@ exports.store = {
             this.models.message.clear();
             return this.get(this.models.message);
         },
-        loadMessage: function() {
+        loadDataByUser: function() {
+            var me = this;
             if (this.app.global.currentUser.id) {
                 this.models.message.clear();
-                this.get(this.models.message);
-            }
-        },
-        loadIntegral: function() {
-            if (this.app.global.currentUser.id) {
                 this.models.integral.clear();
-                this.get(this.models.integral);
-            }
-        },
-        loadCourseTime: function() {
-            if (this.app.global.currentUser.id) {
-                this.get(this.models.courseTime);
+                this.models.courseTime.clear();
+                this.models.organizations.clear();
+                this.chain(
+                    me.get(me.models.message),
+                    me.get(me.models.integral),
+                    me.get(me.models.courseTime),
+                    me.get(me.models.organizations)
+                );
             }
         },
         showSetting: function() {
-            if (this.app.global.currentUser && this.app.global.currentUser.initSetting === 0) {
+            if (this.app.global.currentUser.initSetting && this.app.global.currentUser.initSetting !== 1) {
                 this.app.viewport.modal(this.module.items['home/member-info']);
             }
         }
@@ -151,8 +149,6 @@ exports.beforeRender = function() {
 };
 
 exports.afterRender = function() {
-    this.dispatch('loadMessage');
-    this.dispatch('loadIntegral');
-    this.dispatch('loadCourseTime');
+    this.dispatch('loadDataByUser');
     this.dispatch('showSetting');
 };

@@ -99,15 +99,14 @@ exports.dataForTemplate = {
         var progress = this.bindings.progress;
         if (course.name) {
             currentSectionId = data.state.sectionId || null;
-            _.forEach(course.courseChapters, function(item, i) {
+            _.forEach(course.courseChapters, function(item) {
                 var r = item;
-                r.seq = courseUtil.seqName(i, 1);
                 _.forEach(r.courseChapterSections, function(obj, j) {
                     var rr = obj;
                     var examStatus;
                     var researchStatus;
                     var sectionProcess = progress.findProgress(rr.referenceId);
-                    rr.seq = courseUtil.seqName(j, 2);
+                    rr.seq = courseUtil.seqName(j + 1, 2);
                     if (currentSectionId === rr.id) {
                         rr.focus = true;
                     }

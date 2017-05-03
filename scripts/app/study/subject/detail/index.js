@@ -23,7 +23,7 @@ exports.store = {
             return me.post(register).then(function(data) {
                 var obj = data[0],
                     styles;
-                if (obj.styles) {
+                if (obj.styles && obj.styles !== 'null') {
                     styles = JSON.parse(obj.styles);
                     state.set({
                         key: styles.code
