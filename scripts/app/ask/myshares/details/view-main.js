@@ -5,7 +5,8 @@ exports.type = 'dynamic';
 exports.bindings = {
     state: false,
     details: true,
-    concern: true
+    concern: true,
+    down: false
 };
 exports.events = {
     'click discuss-answer-*': 'discussanswer',
@@ -126,6 +127,12 @@ exports.dataForTemplate = {
     details: function(data) {
         var obj = data,
             date = new Date(data.details.createTime);
+        var url = obj.details.member.headPortrait;
+        if (typeof url === 'undefined' || url === null || url === '') {
+            obj.details.member.headPortrait = 'images/default-userpic.png';
+        } else {
+            obj.details.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+        }
         obj.details.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
         + '   ' + date.getHours() + ':' + date.getMinutes();
         return obj.details;

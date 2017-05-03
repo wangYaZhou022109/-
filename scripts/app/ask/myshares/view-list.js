@@ -4,7 +4,8 @@ exports.type = 'dynamic';
 exports.bindings = {
     params: false,
     myshares: true,
-    page: true
+    page: true,
+    down: false
 };
 
 exports.events = {
@@ -134,6 +135,12 @@ exports.dataForTemplate = {
         _.forEach(myshares, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
+            var url = obj.member.headPortrait;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {

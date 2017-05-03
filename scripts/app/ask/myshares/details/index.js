@@ -34,6 +34,7 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        down: { url: '../human/file/download' },
         speech: {
             url: '../system/speech-set',
             mixin: {

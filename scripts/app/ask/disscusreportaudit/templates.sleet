@@ -31,7 +31,7 @@ view('reportaudit') > form.vertical
                 span > map('ask-source-type' reportaudit.type)
             .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
             input.input(name='id' type='hidden' value=reportaudit.id)
-            input.input(name='questionId' type='hidden' value=reportaudit.question.id)
+            input.input(name='questionId' type='hidden' value='-1')
             input.input(name='objectId' type='hidden' value=reportaudit.objectId)
     textarea.layout-mt-small(placeholder="审核备注" cols="100%" rows="5" name="auditNote")
 #  module > .course-page
