@@ -1,8 +1,9 @@
 var options = {
-        sequence: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+        chnNumChar: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+        chnUnitChar: ['', '十', '百', '千'],
         prefix: '第',
-        suffixSection: '节',
-        suffixChapter: '章'
+        suffixChapter: '章',
+        suffixSection: '节'
     },
     chapterOrSection = { 1: options.suffixChapter, 2: options.suffixSection },
     sectionCode = {
@@ -20,8 +21,27 @@ var options = {
         // 12: 'evaluate'
     };
 
+var numberToChinese = function(number) {
+    var num = number,
+        resetStr = [],
+        unitPos = 0,
+        v;
+    if (number > 9999) return number;
+    while (num > 0) {
+        v = num % 10;
+        resetStr.unshift(options.chnUnitChar[unitPos++]);
+        resetStr.unshift(options.chnNumChar[v]);
+        num = Math.floor(num / 10);
+    }
+    return resetStr.join('')
+    .replace(/^一十/, '十')
+    .replace(/零$/, '')
+    .replace(/零./g, '零')
+    .replace(/零+/, '零');
+};
+
 exports.seqName = function(order, type) {
-    return options.prefix + options.sequence[order] + chapterOrSection[type];
+    return options.prefix + numberToChinese(order) + chapterOrSection[type];
 };
 
 exports.sectionCode = sectionCode;
@@ -33,4 +53,3 @@ exports.judgeSection = function(sectionType) {
     }
     return false;
 };
-
