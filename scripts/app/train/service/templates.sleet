@@ -1,9 +1,9 @@
 #!handlebars
 
-module > .membership.container.bg-highlight
+module > .container.bg-highlight
     section.section
         .tabs.line(data-region='tab')
-        .membership-contents(data-region='main')
+        .main(data-region='main')
 
 view('tab')
     if(state.tab)
@@ -19,4 +19,4 @@ view('tab')
 
 view('main')
     if(state.tab)
-        div.container(data-dynamic-key=state.tab)
+        .container(style='padding:0px;margin:0px;')(data-dynamic-key=state.tab)
