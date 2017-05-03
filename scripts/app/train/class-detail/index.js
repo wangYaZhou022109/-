@@ -238,5 +238,4 @@ exports.store = {
 
 exports.beforeRender = function() {
     this.dispatch('init', this.renderOptions);
-    console.log(this.renderOptions);
 };
