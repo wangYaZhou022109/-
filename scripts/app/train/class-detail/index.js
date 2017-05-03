@@ -14,12 +14,12 @@ exports.items = {
     bus: '',
     'two-brings': '',
     questionnaire: '',
-    'train/service/views/commit-task': { isModule: true },
-    'train/service/views/school-yearbook': { isModule: true },
+    'train/class-detail/commit-task': { isModule: true },
+    'train/class-detail/school-yearbook': { isModule: true },
     banner: 'banner',
-    'train/service/views/courseware': { isModule: true },
+    'train/class-detail/courseware': { isModule: true },
     'research-tips': '',
-    'train/service/views/online-attach': { isModule: true }
+    'train/class-detail/online-attach': { isModule: true }
 };
 
 exports.store = {
@@ -63,7 +63,7 @@ exports.store = {
             url: '../train/class-group/get'
         },
         checkMember: {
-            url: '../train/trainee/find-by-memberId'
+            url: '../train/trainee/current-trainee'
         },
         classDetail: {
             url: '../train/class-detail/find'
@@ -237,5 +237,6 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions.state);
+    this.dispatch('init', this.renderOptions);
+    console.log(this.renderOptions);
 };

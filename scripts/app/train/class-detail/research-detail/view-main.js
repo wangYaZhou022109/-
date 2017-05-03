@@ -1,6 +1,6 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
-    types = require('./app/train/service/views/research-question-types'),
+    types = require('./app/train/class-detail/research-question-types'),
     ANSWER_MODE = 3,
     MUTIPLE_CHOOSE = 2,
     MUTIPLE_TYPE = 1;

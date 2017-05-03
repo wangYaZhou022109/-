@@ -5,7 +5,7 @@ exports.bindings = {
 };
 
 exports.getEntityModuleName = function(key) {
-    return 'train/unregister-signup/' + key;
+    return 'train/register/' + key;
 };
 
 exports.getEntity = function() {
