@@ -654,7 +654,7 @@ exports.afterRender = function() {
 
         WS.connect(examId, function() {
             me.app.message.error(strings.get('exam.answer-paper.force-submit'));
-            return me.dispatch('submit', { submitType: submitType.Hand }).then(function() {
+            return me.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
                 WS.closeConnect();
             });
         }, function(delay) {
