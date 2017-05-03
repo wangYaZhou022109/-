@@ -1,7 +1,7 @@
 #!handlebars
 
 module > .membership-content-5
-    .div(data-region='main')
+    .div(data-region='main' style='margin-left:4%;')
     
 
 view('main')

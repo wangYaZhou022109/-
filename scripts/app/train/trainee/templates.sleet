@@ -17,4 +17,4 @@ view('tab')
 
 view('main')
     if(state.tab)
-        div.container(data-dynamic-key=state.tab)
+        .container(style='padding:0px;margin:0px;')(data-dynamic-key=state.tab)
