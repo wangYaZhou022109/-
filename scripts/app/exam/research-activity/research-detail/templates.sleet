@@ -11,7 +11,7 @@ view('head')
     .pull-left.title > echo('正在参与: ' researchRecord.researchQuestionary.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right > echo('调研人: ' researchRecord.member.fullName)
+            li.border.right > echo(memberTitle ': ' researchRecord.member.fullName)
         .btn#submit > string('exam.research.research-detail.submit')
 
 view('side')

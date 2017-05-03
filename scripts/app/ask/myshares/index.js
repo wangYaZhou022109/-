@@ -23,7 +23,22 @@ exports.store = {
             }
         },
         praise: { url: '../ask-bar/my-share/praise' },
-        unpraise: { url: '../ask-bar/my-share/unpraise' }
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
+        down: { url: '../human/file/download' },
+        speech: {
+            url: '../system/speech-set',
+            mixin: {
+                getData: function(id) {
+                    var speechset;
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            speechset = d;
+                        }
+                    });
+                    return speechset;
+                }
+            }
+        }
     },
     callbacks: {
         init: function() {
@@ -69,8 +84,14 @@ exports.store = {
             return this.put(this.models.shut);
         },
         publish: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
+            // var discuss = this.models.discuss;
+            // discuss.set(payload);
+            // return this.save(discuss);
+            var discuss = this.models.discuss,
+                speechset = this.models.speech.getData('2'),
+                data = payload;
+            data.speechset = speechset.status;
+            discuss.set(data);
             return this.save(discuss);
         },
         praise: function(payload) {
@@ -101,7 +122,11 @@ exports.store = {
             // var unpraise = this.models.unpraise;
             // unpraise.set(payload);
             // return this.post(unpraise);
-        }
+        },
+        speech: function() {
+            var speech = this.models.speech;
+            return this.get(speech);
+        },
     }
 };
 
@@ -115,6 +140,7 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
-    return this.dispatch('page');
+    this.dispatch('page');
+    this.dispatch('speech');
 };
 

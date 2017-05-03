@@ -12,12 +12,12 @@ view('list')
         each(page)
             compare(auditStatus 'eq' 0)
                 li
-                    .user-pic > img(src='images/d2.jpg')
+                    .user-pic > img(src=member.headPortrait)
                     .comment-content
                         .h4 > a(id='myquiz-auditdetails-' + id) > echo(title)
                         .comment-text
-                            compare(jsonImg.length 'gt' 0)
-                                img(src=jsonImg)
+                            compare(thumbnail.length 'gt' 0)
+                                img(src=thumbnail)
                             @echo(content)
                         .user-info
                             a(href='javascript:;') > echo('我')
@@ -31,7 +31,7 @@ view('list')
             compare(auditStatus 'eq' 1)
                 compare(essenceStatus 'eq' 1)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             img.boutique.pull-left(src="images/boutique.png")
                             .h4 > a(id='myquiz-details-' + id) > echo(title)
@@ -70,7 +70,7 @@ view('list')
                                 .btn 回复
                 else
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > a(id='myquiz-details-' + id) > echo(title)
                             .comment-text
@@ -108,7 +108,7 @@ view('list')
                                 .btn 回复
             compare(auditStatus 'eq' 2)
                 li
-                    .user-pic > img(src='images/d2.jpg')
+                    .user-pic > img(src=member.headPortrait)
                     .comment-content
                         .h4 > a(id='myquiz-auditdetails-' + id) > echo(title)
                         .comment-text

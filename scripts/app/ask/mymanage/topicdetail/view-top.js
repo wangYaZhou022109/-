@@ -3,6 +3,7 @@ exports.type = 'dynamic';
 
 exports.bindings = {
     followcount: true,
+    topicname: true
 };
 
 exports.getEntityModuleName = function(key) {
