@@ -1,4 +1,3 @@
-exports.type = '班级详情页';
 exports.bindings = {
     classId: true,
     bus: true
