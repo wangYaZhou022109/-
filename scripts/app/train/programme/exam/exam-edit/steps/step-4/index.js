@@ -7,7 +7,7 @@ exports.items = {
     'train/programme/exam/paper/select-paper': { isModule: true },
     'train/programme/exam/paper/preview-paper': { isModule: true },
     'train/programme/exam/paper/add-paper': { isModule: true },
-    'train/programme/exam/exam-edit/steps/step-4/random-question': {
+    'train/programme/exam/question/random-question': {
         isModule: true
     }
 };

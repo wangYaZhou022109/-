@@ -30,6 +30,12 @@ exports.dataForTemplate = {
             single: data.exam.paperShowRule === 1,
             mutiple: data.exam.paperShowRule === 2,
         };
+    },
+    isOverByPassExam: function(data) {
+        return {
+            yes: data.exam.isOverByPassExam === 1,
+            no: data.exam.isOverByPassExam === 0
+        };
     }
 };
 
@@ -64,11 +70,12 @@ exports.mixin = {
             flag = false;
         }
         if (duration.val() !== '') {
-            if (!this.keepDecimal.fn(duration.val(), 0)) {
+            if (validators.number.fn(duration.val()) && validators.range.fn(duration.val(), 1, 500) &&
+            !this.keepDecimal.fn(duration.val(), 0)) {
                 markers.text.invalid(duration, this.keepDecimal.message);
                 flag = false;
             }
-            if (!validators.range.fn(duration.val(), 1, 500)) {
+            if (validators.number.fn(duration.val()) && !validators.range.fn(duration.val(), 1, 500)) {
                 markers.text.invalid(duration, '必须在1~500之间');
                 flag = false;
             }
@@ -82,11 +89,12 @@ exports.mixin = {
             flag = false;
         }
         if (passScore.val() !== '') {
-            if (!this.keepDecimal.fn(passScore.val(), 0)) {
+            if (validators.number.fn(passScore.val()) && validators.range.fn(passScore.val(), 0, 1000) &&
+            !this.keepDecimal.fn(passScore.val(), 0)) {
                 markers.text.invalid(passScore, this.keepDecimal.message);
                 flag = false;
             }
-            if (!validators.range.fn(passScore.val(), 0, 1000)) {
+            if (validators.number.fn(passScore.val()) && !validators.range.fn(passScore.val(), 0, 1000)) {
                 markers.text.invalid(passScore, '必须在0~1000之间');
                 flag = false;
             }

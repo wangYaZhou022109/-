@@ -1,0 +1,6 @@
+#!handlebars
+module
+    div(data-region='depot-tree')
+
+view('depot-tree')
+    #tree

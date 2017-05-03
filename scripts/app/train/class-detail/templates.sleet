@@ -1,24 +1,23 @@
 #!handlebars
-module
-    br
-    .subject-detail-page
-        .top#banner(data-region='banner')
-        .page-main-wrapper
-            .side
-                .page-side > .container
-                    section.section(data-region='main')
-                    section.section(data-region='fmtrainees')
-                    section.section(data-region='class-information')
-                    section.section(data-region='class-notice')
-                    section.section(data-region='class-member')
-                    section.section(data-region='ranking-list')
-            .main
-                .subject-detail-main.page-main > .container
-                    section.section(data-region='curriculum-schedule')
-                    section.section(data-region='online-resources')
-                    section.section(data-region='pannel')
-                    section.section(data-region='swipe')
-                    section.section(data-region='discussion-area')
+
+module > .class-details-page
+    .class-details-box#banner(data-region='banner')
+    .page-main-wrapper
+        .side
+            .page-side > .container
+                section.section(data-region='main')
+                section.section(data-region='fmtrainees')
+                section.section(data-region='class-information')
+                section.section(data-region='class-notice')
+                section.section(data-region='class-member')
+                section.section(data-region='ranking-list')
+        .main
+            .subject-detail-main.page-main > .container
+                section.section(data-region='curriculum-schedule')
+                section.section(data-region='online-resources')
+                section.section(data-region='pannel')
+                section.section(data-region='swipe')
+                section.section(data-region='discussion-area')
 
 view('banner')
     .subject-banner.banner
@@ -31,13 +30,13 @@ view('banner')
                 .inline-block.m-right.m-bottom.bg-white.sub-title > echo(shortName)
 
 view('main')
-    .buttons
-        .btn#twoBring > i.icon-plus + span > echo('两个带来')
-        .btn#shuttleBusInformation > i.icon-plus + span > echo('班车信息统计')
-        .btn#commitTask > i.icon-plus + span > echo('作业提交')
-        .btn#addCourse1 > i.icon-plus + span > echo('学员满意度')
-        .btn#questionnaire > i.icon-plus + span > echo('调研与考试')
-        .btn#classMembers > i.icon-plus + span > echo('同学录')
+    .btn#twoBring > echo('两个带来')
+    .btn#shuttleBusInformation > echo('班车信息统计')
+    .btn#commitTask > echo('作业提交')
+    .btn#addCourse1 > echo('学员满意度')
+    .btn#questionnaire > echo('调研与考试')
+    .btn#classMembers > echo('同学录')
+
 view('class-information')
     .row
         .col-sm-4
@@ -220,14 +219,14 @@ view('bus')
                                         label(for='check-item'+id)
 
 view('research-tips')
-        div
-            if(research.content)
-                echo(research.content)
+    div
+        if(research.content)
+            echo(research.content)
+        else
+            echo('暂无学员满意度问卷')
+    div
+        each(research.buttons)
+            if(target)
+                a(id='button-' + id href=url target=target) > echo(text)
             else
-                echo('暂无学员满意度问卷')
-        div
-            each(research.buttons)
-                if(target)
-                    a(id='button-' + id href=url target=target) > echo(text)
-                else
-                    a(id='button-' + id) > echo(text)
+                a(id='button-' + id) > echo(text)

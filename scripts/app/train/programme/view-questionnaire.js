@@ -1,6 +1,8 @@
 var _ = require('lodash/collection'),
     $ = require('jquery'),
-    editHander;
+    editHander,
+    viewHander,
+    attachmentId;
     // $ = require('jquery'),
     // markers = require('./app/ext/views/form/markers'),
     // validators = require('./app/ext/views/form/validators');
@@ -15,7 +17,8 @@ exports.events = {
     'click addSurvey': 'addSurvey',
     'click addEva': 'addEva',
     'click addExam': 'addExam',
-    'click minimize-*': 'showMinimize'
+    'click minimize-*': 'showMinimize',
+    'click view-qnr-*': 'viewQuestionar'
 };
 
 exports.handlers = {
@@ -62,12 +65,15 @@ exports.handlers = {
             sourceType: 2,
             callback: function(data) {
                 var param = {
-                    type: 3,
+                    type: 1,
                     resourceId: data.id,
                     resourceName: data.name,
                     startTime: data.startTime,
-                    endTime: data.endTime
+                    endTime: data.endTime,
+                    isAdd: data.isAdd,
+                    attachmentId: data.paperClassId,
                 };
+                attachmentId = data.paperClassId;
                 me.module.dispatch('saveResearch', param);
             }
         });
@@ -80,6 +86,19 @@ exports.handlers = {
         } else {
             $(this.$('min-' + id)).text('最小化');
             $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
+    },
+    viewQuestionar: function(id) {
+        var questionnaireList = this.bindings.questionnaireList,
+            questionary,
+            type;
+        questionary = _.find(questionnaireList.data, { id: id });
+        type = questionary.type;
+        if (viewHander[type]) {
+            viewHander[type].call(this, {
+                id: questionary.resourceId,
+                questionary: questionary,
+            });
         }
     }
 };
@@ -150,8 +169,16 @@ editHander = {
         return this.app.viewport.modal(view, {
             id: questionnaire.resourceId,
             sourceType: 2,
+            startTime: questionnaire.startTime,
+            endTime: questionnaire.endTime,
             callback: function(exam) {
-                return callback({ id: payload.id, resourceName: exam.name, item: exam });
+                return callback({
+                    id: payload.id,
+                    resourceName: exam.name,
+                    startTime: exam.startTime,
+                    endTime: exam.endTime,
+                    item: exam
+                });
             }
         });
     },
@@ -162,6 +189,8 @@ editHander = {
             researchId: questionnaire.resourceId,
             titleType: questionnaire.resourceId ? 'edit' : 'add',
             sourceType: 2,
+            startTime: questionnaire.startTime,
+            endTime: questionnaire.endTime,
             callback: function(research) {
                 return callback({
                     id: payload.id,
@@ -194,5 +223,23 @@ editHander = {
                 });
             }
         });
+    }
+};
+
+viewHander = {
+    1: function(payload) {
+        var questionary = payload.questionary;
+        var view = this.module.items['train/programme/exam/paper/preview-paper'];
+        this.app.viewport.modal(view, { paperId: attachmentId, exam: { name: questionary.resourceName } });
+    },
+    2: function(payload) {
+        var questionary = payload.questionary;
+        var view = this.module.items['train/programme/research-activity/preview-questionary'];
+        this.app.viewport.modal(view, { researchId: questionary.resourceId, name: questionary.resourceName });
+    },
+    3: function(payload) {
+        var questionary = payload.questionary;
+        var view = this.module.items['train/programme/research-activity/preview-questionary'];
+        this.app.viewport.modal(view, { researchId: questionary.resourceId, name: questionary.resourceName });
     }
 };

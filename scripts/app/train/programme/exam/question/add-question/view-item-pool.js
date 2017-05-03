@@ -6,7 +6,7 @@ var $ = require('jquery'),
 // exports.type = 'form';
 
 exports.bindings = {
-    state: false,
+    state: true,
     itemPool: true
 };
 
@@ -28,6 +28,8 @@ exports.handlers = {
 
 exports.components = [function() {
     var operatorType = this.app.global.EDIT,
+        state = this.bindings.state,
+        me = this,
         obj = {
             id: 'owner',
             name: 'picker',
@@ -35,23 +37,33 @@ exports.components = [function() {
                 module: 'exam/question-depot',
                 picker: 'owner',
                 required: true,
-                params: { operatorType: operatorType },
-                data: {}
+                params: {
+                    operatorType: operatorType,
+                },
+                data: {},
+                selectChanged: function(data) {
+                    return me.module.dispatch('selectOwnerChanged', data);
+                }
             }
         },
-        question = this.bindings.state.data,
+        question = state.data,
         itemPool = this.bindings.itemPool.data;
 
     if (question.organization) {
         obj.options.data.id = question.organization.id;
         obj.options.data.text = question.organization.name;
+    } else if (state.params.organization) {
+        obj.options.data.id = state.params.organization.id;
+        obj.options.data.text = state.params.organization.name;
     }
+
     if (itemPool.entryDepot) {
         return obj;
     }
     return null;
 }, function() {
-    var obj = {
+    var params = this.bindings.state.params,
+        obj = {
             id: 'questionDepot',
             name: 'picker',
             options: {
@@ -59,17 +71,21 @@ exports.components = [function() {
                 required: true,
                 inputName: 'questionDepotId',
                 params: {
-                    operatorType: this.app.global.EDIT
+                    operatorType: this.app.global.EDIT,
+                    organizationId: params.organization && params.organization.id,
+                    state: 1
                 },
                 data: {}
             }
         },
         question = this.bindings.state.data,
         itemPool = this.bindings.itemPool.data;
-
     if (question.questionDepot) {
         obj.options.data.id = question.questionDepot.id;
         obj.options.data.name = question.questionDepot.name;
+    } else if (params && params.questionDepot) {
+        obj.options.data.id = params.questionDepot.id;
+        obj.options.data.name = params.questionDepot.name;
     }
 
     if (itemPool.entryDepot) {
@@ -77,6 +93,7 @@ exports.components = [function() {
     }
     return null;
 }];
+
 
 exports.mixin = {
     getData: function() {
@@ -94,21 +111,24 @@ exports.mixin = {
         return null;
     },
     validate: function() {
-        var organizationId = $(this.$('organizationId')),
-            depot = $(this.$('questionDepotId')),
-            flag = true;
+        var organizationId = $(this.$$('[name="organizationId"]')),
+            depot = $(this.$$('[name="questionDepotId"]')),
+            org = $(this.$('organization')),
+            dep = $(this.$('questionName')),
+            flag = true,
+            itemPool = this.bindings.itemPool.data;
 
         markers.text.valid(organizationId);
         markers.text.valid(depot);
-
-        if (organizationId.val() === '') {
-            markers.text.invalid(organizationId, validators.required.message);
-            flag = false;
-        }
-
-        if (depot.val() === '') {
-            markers.text.invalid(depot, validators.required.message);
-            flag = false;
+        if (itemPool.entryDepot) {
+            if (!organizationId.val()) {
+                markers.text.invalid(org, validators.required.message);
+                flag = false;
+            }
+            if (!depot.val()) {
+                markers.text.invalid(dep, validators.required.message);
+                flag = false;
+            }
         }
         return flag;
     }

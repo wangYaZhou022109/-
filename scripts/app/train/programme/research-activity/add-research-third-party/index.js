@@ -24,7 +24,8 @@ exports.store = {
         },
         form: {
             url: '../exam/research-activity/insert-of-other-module'
-        }
+        },
+        time: {}
     },
     callbacks: {
         init: function(payload) {
@@ -33,11 +34,14 @@ exports.store = {
                     id: payload.researchId,
                     sourceType: payload.sourceType || EXAM_SOURCE_TYPE
                 });
+                this.models.time.data = {
+                    startTime: payload.startTime,
+                    endTime: payload.endTime
+                };
                 return this.get(this.models.research);
             }
-
             D.assign(this.models.research.data, {
-                sourceType: payload.sourceType || EXAM_SOURCE_TYPE
+                sourceType: payload.sourceType || EXAM_SOURCE_TYPE,
             });
             return '';
         },

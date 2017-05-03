@@ -63,7 +63,9 @@ exports.store = {
                 state = me.models.state,
                 callback = me.module.renderOptions.callback,
                 currentUser = this.app.global.currentUser,
-                organizationId = payload.organizationId || currentUser.companyOrganization.id,
+                organizationId = payload.organizationId
+                    || (currentUser.companyOrganization && currentUser.companyOrganization.id)
+                    || currentUser.rootOrganization.id,
                 r;
 
             this.models.question.set(
@@ -96,6 +98,15 @@ exports.store = {
         },
         reloadItemPool: function() {
             this.models.itemPool.changed();
+        },
+        selectOwnerChanged: function(data) {
+            D.assign(this.models.state.params, {
+                organization: {
+                    id: data.id,
+                    name: data.text
+                }
+            });
+            this.models.state.changed();
         }
     }
 };
@@ -112,26 +123,40 @@ exports.buttons = function() {
             var mod = this.items.question.getEntities()[0],
                 mainView = this.items.main,
                 itemPoolView = this.items['item-pool'],
+                optionData = mod.getValue(),
                 validate1 = itemPoolView.validate(),
                 validate2 = mainView.validate(),
                 validate3 = mod.isValidate(),
-                data0 = this.items['item-pool'].getData(),
-                data1 = this.items.main.getData(),
-                data2 = mod.getValue(),
-                result = getData(D.assign({}, data0, data1, data2)),
-                me = this;
+                result;
 
             if (!validate1 || !validate2 || !validate3) {
                 return false;
             }
 
-            if (!data2) {
-                return false;
+            if (!optionData) return false;
+            if (Number(optionData.type) === 6) {
+                _.forEach(optionData.questionAttrs, function(q) {
+                    var qq = q;
+                    qq.score = q.score * 100;
+                });
+            }
+            result = getData(
+                D.assign(
+                    {},
+                    optionData,
+                    itemPoolView.getData(),
+                    mainView.getData(),
+                    { score: Number(optionData.score * 100).toFixed(0) }
+                )
+            );
+            mod.clear();
+            if (this.renderOptions.callback) {
+                D.assign(this.store.models.state.data, result);
             }
 
             if (Number(result.type) === 6) result.subs = result.questionAttrs;
-            this.store.models.state.set(result);
-            me.app.viewport.modal(me.items.preview);
+            this.store.models.state.set(D.assign({}, result, { score: result.score / 100 }));
+            this.app.viewport.modal(this.items.preview);
             return false;
         }
     };
@@ -191,7 +216,7 @@ exports.buttons = function() {
         }
     };
 
-    if (interim) {
+    if (interim && this.renderOptions.titleType === 'add') {
         buttons.push(save);
         buttons.push(saveAndAdd);
     } else {

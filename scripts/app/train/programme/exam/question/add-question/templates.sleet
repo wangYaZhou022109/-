@@ -17,11 +17,13 @@ view('item-pool') > form.vertical
         div
             div(style='margin: 10px;float: left;')
                 label(class='required') 所属部门
-                #owner
+                div(id='organization')
+                    #owner
 
             div(style='margin: 10px;float: left;')
                 label(class='required') 所属目录
-                #questionDepot
+                div(id='questionName')
+                    #questionDepot
                 
 view('main') > form.vertical
     div(style='width: 100%;')

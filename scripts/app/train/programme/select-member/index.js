@@ -37,7 +37,10 @@ exports.store = {
     },
     callbacks: {
         refreshList: function(options) {
-            var data = D.assign({}, this.models.search.getQueryParams(), options),
+            var data = D.assign({
+                    status: 1,
+                    uri: this.app.global.uri
+                }, this.models.search.getQueryParams(), options),
                 model = this.models.members;
             model.params = data;
             this.get(model);

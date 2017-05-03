@@ -46,6 +46,6 @@ exports.beforeRender = function() {
     return this.dispatch('init', {
         organizationId: this.app.global.currentUser.organization.id,
         name: this.renderOptions.name,
-        type: 1
+        type: null
     });
 };

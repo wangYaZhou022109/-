@@ -1,5 +1,8 @@
 var _ = require('lodash/collection'),
-    maps = require('./app/util/maps');
+    maps = require('./app/util/maps'),
+    $ = require('jquery'),
+    markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators');
 
 // exports.type = 'form';
 
@@ -42,6 +45,38 @@ exports.mixin = {
             data.difficulty = this.$('difficulty').value;
         }
         return data;
+    },
+    validate: function() {
+        var content = $(this.$('content')),
+            difficulty = $(this.$('difficulty')),
+            components = this.components.content.html(),
+            ans = this.components.answer.html(),
+            answer = $(this.$('answer')),
+            flag = true;
+
+        markers.text.valid(content);
+        markers.text.valid(difficulty);
+
+        if (components === '') {
+            markers.text.invalid(content, validators.required.message);
+            flag = false;
+        }
+
+        if (!validators.maxLength.fn(components, 3000)) {
+            markers.text.invalid(content, '最大长度为3000');
+            flag = false;
+        }
+
+        if (!ans) {
+            markers.text.invalid(answer, validators.required.message);
+            flag = false;
+        }
+
+        if (difficulty.val() === '') {
+            markers.text.invalid(difficulty, validators.required.message);
+            flag = false;
+        }
+        return flag;
     }
 };
 

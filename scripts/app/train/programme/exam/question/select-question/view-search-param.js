@@ -52,10 +52,14 @@ exports.components = [function() {
 
 exports.dataForTemplate = {
     types: function() {
-        return maps.get('question-types');
+        var result = maps.get('question-types');
+        result.unshift({ key: '999', value: '全部' });
+        return result;
     },
     difficultys: function() {
-        return maps.get('question-difficultys');
+        var result = maps.get('question-difficultys');
+        result.unshift({ key: '999', value: '全部' });
+        return result;
     }
 };
 

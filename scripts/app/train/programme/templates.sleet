@@ -19,7 +19,8 @@ view('offline')
                             each(weeks)
                                 option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
                 .pull-right
-                    .tag-btn.radius#theme-offline 配置周主题
+                    if(isShowWeeks)
+                        .tag-btn.radius#theme-offline 配置周主题
                     .tag-btn.radius#addOfflineCourse 添加课程
                     .tag-btn.radius#importOffline 导入课程
                     .inline-block
@@ -113,7 +114,7 @@ view('questionnaire')
                     td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
-                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id startTime=startTime endTime=endTime)
                         i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-qnr-'+id data-name='id' data-value=id)
                         i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
 
