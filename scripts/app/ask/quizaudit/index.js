@@ -64,17 +64,25 @@ exports.buttons = [{
     text: '拒绝',
     fn: function(data) {
         var params = data;
+        var me = this;
         params.auditStatus = 2;
         params.auditType = 1;
-        return this.dispatch('out', params);
+        this.dispatch('out', params).then(function() {
+            this.app.message.success('拒绝成功');
+            me.dispatch('init');
+        });
     }
 }, {
     text: '通过',
     fn: function(data) {
         var params = data;
+        var me = this;
         params.auditStatus = 1;
         params.auditType = 1;
-        return this.dispatch('pass', params);
+        this.dispatch('pass', params).then(function() {
+            this.app.message.success('完成审核！');
+            me.dispatch('init');
+        });
     }
 
 }];
