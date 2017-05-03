@@ -24,6 +24,8 @@ exports.items = {
     editQnrTime: '',
     'train/programme/research-activity/add-research-third-party': { isModule: true },
     'train/programme/evaluate-questionary/select-evaluate-questionary/add-research-refrence': { isModule: true },
+    'train/programme/exam/paper/preview-paper': { isModule: true },
+    'train/programme/research-activity/preview-questionary': { isModule: true }
 };
 
 exports.store = {

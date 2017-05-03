@@ -271,7 +271,6 @@ exports.store = {
             _.forEach(this.models, function(m) {
                 m.clear();
             });
-
             this.models.exam.set(exam);
             this.models.paper.set({ id: payload.paperId });
             D.assign(data, {

@@ -4,11 +4,14 @@ var D = require('drizzlejs'),
 
 exports.RESEARCH_TYPE = 2;
 
+exports.SELECT_MODULE = 'train/programme/research-activity/add-research-third-party';
+
 exports.items = {
     search: 'search',
     content: 'content',
     'train/trainee/select-member-radio': { isModule: true },
-    'train/programme/research-activity/add-research-third-party': { isModule: true }
+    'train/programme/research-activity/add-research-third-party': { isModule: true },
+    'train/programme/research-activity/preview-questionary': { isModule: true }
 };
 
 exports.title = '选择问卷';
@@ -65,7 +68,7 @@ exports.buttons = [{
 }, {
     text: '新增',
     fn: function() {
-        var mod = this.items['train/programme/research-activity/add-research-third-party'],
+        var mod = this.items[this.options.SELECT_MODULE],
             research = this.store.models.research.data,
             me = this;
         this.app.viewport.modal(mod, {

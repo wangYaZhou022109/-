@@ -7,7 +7,6 @@ exports.title = function() {
     return this.renderOptions.id ? '编辑试卷' : '新增试卷';
 };
 exports.items = {
-    info: 'info',
     summary: 'summary',
     'question-classes': 'question-classes',
     'train/programme/exam/question/add-question': {
@@ -71,7 +70,8 @@ exports.store = {
             D.assign(me.models.paper.data, payload, {
                 paperClassQuestions: JSON.stringify(paperClassQuestions),
                 type: me.module.renderOptions.type || 1,
-                totalScore: me.models.paper.data.totalScore * 100
+                totalScore: me.models.paper.data.totalScore * 100,
+                name: this.module.renderOptions.paperName
             });
             return me.save(me.models.paper);
         },
@@ -124,6 +124,7 @@ exports.store = {
             questionClass.questionId = q.id;
             questionClass.score = Number(q.score);
             questionClass.sequence = paperClassQuestions.size;
+            questionClass.isFromSelected = q.isFromSelected || 0;
             questionClass.question = q;
             paperClassQuestions.push(questionClass);
             me.models.paper.changed();

@@ -29,7 +29,7 @@ view('options')
                         @echo(content)
                         input(type='hidden' id='content-' + index value=content)
                 else
-                    textarea(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3 cols='100%') > echo(content)
+                    textarea.input(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3 cols='100%') > echo(content)
             div(style='margin-top: -1px;position: relative;padding: 5px 10px;border: 1px solid transparent;overflow: hidden;')
                 div(style='float: left;')
                     span.set-answer(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected'))

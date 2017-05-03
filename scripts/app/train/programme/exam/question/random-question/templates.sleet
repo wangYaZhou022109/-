@@ -1,0 +1,64 @@
+#!handlebars
+module
+    div(style='width: 100%;')
+        div(style='float: left;width: 16.6%;')
+            div(data-region='organization')
+        div(style='float: left;width: 16.7%;')
+            div(data-region='depot')
+        div(style='float: left;width: 66%;')
+            div(data-region='question-setting')
+            div(data-region='setting-popup')
+
+
+view('depot')
+    div(data-dynamic-key='depot')
+
+view('question-setting') > form.vertical
+    .list.border.around.add-random-question-list.add-random.select
+        .total(style='text-align: right;padding: 10px;') > echo('共' summary.totalAmount '题' summary.totalScore '分')
+        ul > each(setting)
+            li.clearfix.border.border-top(style='border-top-width: 1px;padding: 10px;')
+                .com-title(style='float: left;width: 40px;margin: 3px 0 0;font-size: 16px;line-height: 1;') > strong > echo(title)
+                .clearfix.cont(style='margin-left: 60px;') > each(diffcults)
+                    .select-question-item(style='float: left;width: 33.33%;padding-right: 10px;')
+                        .level.m-bottom(style='margin-bottom: 10px;')
+                            span > echo(title)
+                            span.text-tips.m-left > echo('共' useableAmount '题可用')
+                        .inline-block
+                            if(show)
+                                i.pointer.iconfont.icon-add-full.custom-color-4.p-right(id='add-' + id)
+                            compare(usedAmount 'ge' 1)
+                                span.selected-question-bar(style='display: inline-block;vertical-align: middle;padding: 2px 5px;border: 1px solid #dedede;border-radius: 3px;font-size: 12px;')
+                                    | 已选
+                                    strong > echo(usedAmount)
+                                    | 题共
+                                    strong > echo(totalScore)
+                                    | 分
+                                i.pointer.iconfont.icon-delete-solid.custom-color-3.p-left(id='remove-' + id)
+
+view('setting-popup')
+    .setting-popup(id='setting-popup')
+        form.vertical
+            div(style='margin: 7px 0;')
+                label.clearfix(style='margin: 7px 0;')
+                    .pull-left(style='font-size:12px;') 数量
+                    .text-right.text-tips > echo('共' popupCurrent.useableAmount '题可用')
+            div(style='margin: 7px 0;')
+                label.clearfix(style='margin: 7px 0;')
+                    input.input(style='outline: none;padding: 7px;min-width: 100px;width: 100%;min-height: 28px;')(id='popupAmount' name='amount' value=popupCurrent.tactic.amount x-rule='number,range:0:' + popupCurrent.useableAmount +',keepDecimal:0')
+            div(style='margin: 7px 0;')
+                label.clearfix(style='margin: 7px 0;')
+            div(style='margin: 7px 0;')
+                label.clearfix(style='margin: 7px 0;')
+                    .pull-left(style='font-size:12px;') 每题分数
+                    .text-right.text-tips
+            div(style='margin: 7px 0;')
+                label.clearfix(style='margin: 7px 0;')
+                    input.input(style='outline: none;padding: 7px;min-width: 100px;width: 100%;min-height: 28px;')(id='popupScore' name='score' value=popupCurrent.tactic.score x-rule='number,interval:0:1:1000:1,keepDecimal:1')
+                    input(type='hidden' name='difficulty' value=popupCurrent.difficulty)
+                    input(type='hidden' name='type' value=popupCurrent.type)
+            div(style='margin: 7px 0;')
+                label.clearfix(style='margin: 7px 0;')
+            label > .text-right(style='text-align: right;')
+                .btn#cancel 取消
+                .btn(id='save-tactic') 添加

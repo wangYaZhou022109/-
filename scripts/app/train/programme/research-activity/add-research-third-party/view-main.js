@@ -5,7 +5,8 @@ var $ = require('jquery'),
 exports.ADD_QUESTIONARY = 'train/programme/research-activity/add-research-activity/steps/step-2';
 
 exports.bindings = {
-    research: true
+    research: true,
+    time: false
 };
 
 exports.type = 'dynamic';

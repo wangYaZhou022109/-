@@ -1,21 +1,17 @@
 #!handlebars
 module > .exam-base-info.add-info-popup
-    div(data-region='info')
     div(data-region='summary')
     br
     div(data-region='question-classes')
 
-
-view('info') > form.vertical
-    .row
+view('summary')
+    form.vertical
+        .row
         .col-sm-12
             .choose-question
                 .btn#select-question > .i.pe-7s-photo-gallery.pe-va.m-left + span.m-left.m-right 选择试题
                 .btn#temporary-question > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right 临时试题
                 .btn#import-question > .i.pe-7s-cloud-download.pe-va.m-left + span.m-left.m-right 导入试题
-
-view('summary')
-    form.vertical
         .add-paper-list
             .bottom.dashed
                 .paper-mark.clearfix
@@ -55,18 +51,18 @@ view('question-classes') > form.vertical
                 .inline-block.m-right
                     b.error 题目难度：
                     echo(question.difficulty)
-                .input-box.inline-block
-                    .text 题目分数：
-                    input.input.input-left(id ='score-' + questionId name ='score'  placeholder='请输入题目分数（分）' value=score x-rule='required,digits,min:0')
+                .input-box.inline-block(style='vertical-align: middle;')
+                    .text(style='padding-top:10px;') 题目分数：
+                    input.input.input-left(style='padding-left: 100px;')(id ='score-' + questionId name ='score'  placeholder='请输入题目分数（分）' value=score x-rule='required,digits,min:0')
                 .btn(id='move-up-' + question.id style='float: right;') 上移
                 .btn(id='move-down-' + question.id style='float: right;') 下移
                 compare(isFromSelected 'eq' 0)
                     .btn(id='edit-question-' + question.id style='float: right;') > i.pe-7s-note.pe-2x.pe-va.pointer
                 .btn(id='remove-question-' + question.id style='float: right;') 移除
-    .top-bottom(style='position: fixed;right: var(--space);bottom: calc(var(--space)*15);')
-        .back-box#backToTop(style='background-color: rgba(255,255,255,.5);width: 50px;height: 50px;padding-top: 3px;margin-bottom: 10px;border: 1px solid #ddd;')
-            a(style='color: #363a3e;line-height: 20px;text-align: center;display: block;') 返回
-            a 顶部
-        .back-box#goToBottom(style='background-color: rgba(255,255,255,.5);width: 50px;height: 50px;padding-top: 3px;margin-bottom: 10px;border: 1px solid #ddd;')
-            a 返回
-            a 底部
+    #  .top-bottom
+    #      .back-box#backToTop
+    #          a 返回
+    #          a 顶部
+    #      .back-box#goToBottom
+    #          a 返回
+    #          a 底部

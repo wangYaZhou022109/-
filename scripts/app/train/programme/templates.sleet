@@ -114,7 +114,7 @@ view('questionnaire')
                     td > dateTime(startTime)
                     td > dateTime(endTime)
                     td
-                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id)
+                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id startTime=startTime endTime=endTime)
                         i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-qnr-'+id data-name='id' data-value=id)
                         i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
 

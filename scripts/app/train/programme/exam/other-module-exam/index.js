@@ -74,7 +74,7 @@ exports.buttons = [{
                     sourceType: that.renderOptions.sourceType || REMOTE_COURSE_TYPE
                 });
                 return that.store.module.dispatch('save', payload).then(function() {
-                    var examData = D.assign(that.store.models.otherModuelExam.data, payload);
+                    var examData = D.assign(that.store.models.otherModuelExam.data, payload, { isAdd: 1 });
                     callback && callback(examData);
                 });
             }

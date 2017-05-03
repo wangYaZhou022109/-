@@ -21,7 +21,7 @@ exports.dataForTemplate = {
 };
 
 exports.components = [
-    { id: 'pager', name: 'background-pager', options: { model: 'researchActivities' } }
+    { id: 'pager', name: 'pager', options: { model: 'researchActivities' } }
 ];
 
 exports.mixin = {

@@ -11,9 +11,9 @@ view('main')
             br
             br
             label.required > echo('开始时间')
-            input(id='start-time' name='startTime' value=research.startTime)
+            input(id='start-time' name='startTime' value=dateTime(time.startTime))
             label.required > echo('结束时间')
-            input(id='end-time' name='endTime' value=research.endTime)
+            input(id='end-time' name='endTime' value=dateTime(time.endTime))
             br
             br
             label.required > setting('exam.research.questionary-detail')

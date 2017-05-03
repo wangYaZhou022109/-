@@ -82,12 +82,13 @@ exports.handlers = {
         if (this.bindings.paperClass.data && this.bindings.paperClass.data.type === 3) { // 随机组卷
             paperClassId = this.bindings.paperClass.data.id;
         }
-        me.app.viewport.modal(me.module.items['train/programme/exam/exam-edit/steps/step-4/random-question'], {
+        me.app.viewport.modal(me.module.items['train/programme/exam/question/random-question'], {
             paperClassId: paperClassId,
             organizationId: exam.ownedOrganizationId || currentUser.organization.id,
             callback: function(data) {
-                me.app.viewport.closeModal();
-                me.module.dispatch('selectPaperId', data);
+                return me.module.dispatch('selectPaperId', data).then(function() {
+                    me.app.viewport.closeModal();
+                });
             }
         });
     }
