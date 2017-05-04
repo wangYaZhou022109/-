@@ -30,7 +30,9 @@ view('side')
         .h3 TA们也参加了调研
         .layout-mt-small.user-picture
             .grid-row > each(relativeMembers)
-                .col-md-4 > img(src=headPortrait)
+                .col-md-4.text-center
+                    img(src=headPortrait)
+                    div > echo(fullName)
 
 view('main')
     .h3 问卷须知
