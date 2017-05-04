@@ -10,7 +10,7 @@ exports.dataForTemplate = {
     relativeMembers: function(data) {
         var me = this;
         return _.map(data.relativeMembers, function(r) {
-            var url = 'images/d2.jpg';
+            var url = 'images/default-userpic.png';
             if (r.headPortrait) {
                 url = me.bindings.down.getFullUrl() + '?id=' + r.headPortrait;
             }
