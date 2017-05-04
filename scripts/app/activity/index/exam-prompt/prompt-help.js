@@ -1,7 +1,7 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
-    signUpExam, isInApplantTimeRange, waitApprove, examCanceled,
-    isFirstTimeToExam;
+    signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
+    isFirstTimeToExam, overApplcantTime;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -17,6 +17,7 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 12: 考试已撤销
 // 13: 考试结束，没有详情
 // 14: 可考多次 不能马上查看详情
+// 15: 报名时间截止
 exports.getUserStatusOfExam = function(exam) {
     var signUp = signUpExam(exam);
 
@@ -30,10 +31,12 @@ exports.getUserStatusOfExam = function(exam) {
         }
         return 4;
     }
+
     if (processExam(exam.startTime, exam.endTime)) {
         if (signUp !== 0 && signUp !== 3) {
             return signUp;
         }
+
         if (overExam(exam) && canExamMore(exam) && canViewDetailImmd(exam)) {
             return 6;
         } else if (overExam(exam) && canViewDetailImmd(exam)) {
@@ -77,8 +80,10 @@ afterExam = function(endTime) {
 signUpExam = function(exam) {
     if (isSignUpType(exam)) {
         if (needSignUp(exam)) {
-            if (isInApplantTimeRange(exam)) {
+            if (isInApplcantTimeRange(exam)) {
                 return 1;
+            } else if (overApplcantTime(exam)) {
+                return 15;
             }
             return 10;
         } else if (waitApprove(exam)) {
@@ -109,7 +114,7 @@ overExam = function(exam) {
     return exam.examRecord && exam.examRecord.status >= 4;
 };
 
-isInApplantTimeRange = function(exam) {
+isInApplcantTimeRange = function(exam) {
     var currentTime = new Date().getTime();
     return currentTime >= exam.applicantStartTime && currentTime <= exam.applicantEndTime;
 };
@@ -124,4 +129,8 @@ examCanceled = function(exam) {
 
 isFirstTimeToExam = function(exam) {
     return exam.examedTimes === 0;
+};
+
+overApplcantTime = function(exam) {
+    return new Date().getTime() > exam.applicantEndTime && !exam.signUp;
 };
