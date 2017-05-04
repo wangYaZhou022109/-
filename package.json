@@ -84,7 +84,8 @@
         "pick",
         "routerLink",
         "downloadUrl",
-        "dateMinute"
+        "dateMinute",
+        "monthDay"
       ]
     }
   }
