@@ -5,4 +5,8 @@
 @import "live-details/main.css";
 @import "class-details/side.css";
 @import "class-details/main.css";
-@import "class-register"
+@import "class-details/businfo.css";
+@import "class-details/commitwork.css";
+@import "class-details/surveyexam.css";
+@import "class-register";
+
