@@ -24,7 +24,7 @@ view('list')
                             span > echo('提问·')
                             span.sub-text > echo(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-ing > string('auditStatus0')
                                 .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
@@ -120,7 +120,7 @@ view('list')
                             span > echo('提问·')
                             span.sub-text > echo(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
                                 .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
