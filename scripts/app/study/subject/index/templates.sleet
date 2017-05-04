@@ -26,7 +26,7 @@ view('list')
                 .clearfix
                     .pull-right.small-font.m-left
                         i.iconfont.icon-view(title='浏览')
-                        span.m-let > echo(studyMemberCount) > string('study.member.count')
+                        span.m-let > echo(visits)
                     .title.text-overflow > echo(name)
                     .sub-text.text-overflow
                         if(description)
