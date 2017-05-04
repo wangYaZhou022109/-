@@ -18,14 +18,29 @@
 
 	& .besure {
 		width: 45%;
+		position: relative;
 		& > img {
 			width: 100%;
+		}
+		& > span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			color: var(--white);
 		}
 	}
 	& .info {
 		width: 45%;
 		& > img {
 			width: 100%;
+		}
+		& > span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			color: var(--font-tip-color);
 		}
 	}
 	& .form {

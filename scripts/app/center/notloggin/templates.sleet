@@ -12,11 +12,15 @@ view('notloggin-title')
 		span o
 
 view('notloggin-content')
-	.notloggin#notloggin
-		.notloggin-form.border.around#notloggin-content
+	.notloggin
+		.notloggin-form.border.around
 			.notloggin-info.text-center
-				.besure.m-right.inline-block > img(src='images/besure.png')
-				.info.inline-block > img(src='images/info.png')
+				.besure.m-right.inline-block 
+					img(src='images/left.jpg')
+					span 报名码确认
+				.info.inline-block 
+					img(src='images/right2.jpg')
+					span 报名信息
 				.layout-mt.text-center
 					.form
 						.form-row
@@ -31,7 +35,7 @@ view('notloggin-content')
 						.form-row
 							label.label.required 验证码
 							.content > input.input(placeholder="请输入您收到的验证码")
-					.btn.radius.gray.tag-height#next 下一步
+					.btn.radius.gray.tag-height 下一步
 				.layout-mt
 					p.text-main-color Q/A
 					.sub-text
@@ -51,6 +55,6 @@ view('notloggin-content')
 						.text-left
 							.timeone 早7:30—8:50 午餐12:00—13:00
 							.timetwo 晚餐18:00—19:00 培训结束当天餐厅提前至17:30开餐
-	.loggin#loggin
+	.loggin
 		aaaaaaaaaaaaaaaaaa
 		
