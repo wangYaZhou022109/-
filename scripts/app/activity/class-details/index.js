@@ -8,5 +8,9 @@ exports.items = {
     schedule: 'schedule',
     resources: 'resources',
     gallery: 'gallery',
-    comment: 'comment'
+    comment: 'comment',
+    'activity/class-details/twobring': { isModule: true },
+    'activity/class-details/businfo': { isModule: true },
+    'activity/class-details/commitwork': { isModule: true },
+    'activity/class-details/surveyexam': { isModule: true }
 };
