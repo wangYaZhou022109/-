@@ -1,0 +1,12 @@
+.commitwork-page {
+    & .commitwork {
+        & .commitwork-title {
+            height: var(--nav-height);
+            padding: var(--space) calc(var(--large-space)/2);
+        }
+        & .tag-btn {
+            background: var(--font-sub-color);
+            color: var(--white);
+        }
+    }
+}

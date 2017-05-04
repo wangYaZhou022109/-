@@ -1,0 +1,22 @@
+#!handlebars
+
+module > .commitwork-page
+    .commitwork(data-region="commitwork")
+
+view('commitwork')
+    .bg-highlight
+        .commitwork-title.clearfix.layout-mb-small.bg-white.m-top
+            .h4.pull-left 作业名称作业名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                .tag-btn 提交
+        .commitwork-title.clearfix.layout-mb-small.bg-white.m-top
+            .h4.pull-left 作业名称作业名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                .tag-btn 提交
+        .commitwork-title.clearfix.layout-mb-small.bg-white.m-top
+            .h4.pull-left 作业名称作业名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                .tag-btn.tag-gray 提交
