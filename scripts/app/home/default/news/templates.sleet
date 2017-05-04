@@ -7,7 +7,7 @@ module
 view('news')
     .news-list.clearfix > .container
         .pull-left.m-right > i.iconfont.icon-notice
-        b.title 资讯动态：
+        b.title > echo(moduleHomeConfig.name) + echo(':')
         .navigator
             .icon.arrow.prev > .iconfont.icon-arrow-down#next
             .icon.arrow.next > .iconfont.icon-arrow-up#pre
