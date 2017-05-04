@@ -1,4 +1,5 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    _ = require('lodash/collection');
 exports.bindings = {
     menus: true,
     navs: true
@@ -7,6 +8,11 @@ exports.bindings = {
 exports.dataForTemplate = {
     menus: function(data) {
         return data.menus;
+    },
+    navs: function(data) {
+        var navs = data.navs || [];
+        navs = _.reject(navs, ['show', 0]);
+        return navs;
     }
 };
 

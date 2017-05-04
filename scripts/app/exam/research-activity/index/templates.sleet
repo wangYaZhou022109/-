@@ -63,9 +63,3 @@ view('main')
 
 view('research-tips')
         div > @echo(research.content)
-        div
-            each(research.buttons)
-                if(target)
-                    a(id='button-' + id href=url target=target) > echo(text)
-                else
-                    a(id='button-' + id) > echo(text)

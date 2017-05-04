@@ -1,28 +1,25 @@
 exports.items = {
-    shareaudit: 'shareaudit'
+    reportaudit: 'reportaudit'
 };
 exports.store = {
     models: {
-        state: {},
         params: { data: { isOverdue: '1' } },
-        shareaudit: { url: '../ask-bar/questionReviewed' },
+        reportaudit: { url: '../ask-bar/pending-audit/accuseRecord' },
         pass: { url: '../ask-bar/pending-audit/pass' },
         out: { url: '../ask-bar/pending-audit/out' },
     },
     callbacks: {
         init: function(paylaod) {
-            var shareaudit = this.models.shareaudit;
-            shareaudit.set({ id: paylaod.id });
-            return this.get(shareaudit);
+            var reportaudit = this.models.reportaudit;
+            reportaudit.set({ id: paylaod.id });
+            return this.get(reportaudit);
         },
-        pass: function(payload) {
-            this.models.pass.clear();           // 审核通过
+        pass: function(payload) {           // 审核通过
             this.models.pass.set(payload);
             return this.put(this.models.pass);
         },
-        out: function(payload) {
-            this.models.out.clear();           // 审核拒绝
-            this.models.out.set(payload);
+        out: function(payload) {           // 审核拒绝
+            this.models.pass.set(payload);
             return this.put(this.models.out);
         },
     }
@@ -30,14 +27,14 @@ exports.store = {
 exports.afterRender = function() {
     this.dispatch('init', this.renderOptions);
 };
-exports.title = '文章审核';
+exports.title = '讨论举报审核';
 exports.buttons = [{
     text: '拒绝',
     fn: function(data) {
         var params = data;
         var me = this;
         params.auditStatus = 2;
-        params.auditType = 12;
+        params.auditType = 5;
         this.dispatch('out', params).then(function() {
             this.app.message.success('拒绝成功！');
             me.dispatch('init');
@@ -49,9 +46,11 @@ exports.buttons = [{
         var params = data;
         var me = this;
         params.auditStatus = 1;
-        params.auditType = 12;
+        params.auditType = 5;
+        // params.questionId = '-1';
+        // console.log(params);
         this.dispatch('pass', params).then(function() {
-            this.app.message.success('审核成功！');
+            this.app.message.success('完成审核！');
             me.dispatch('init');
         });
     }

@@ -76,6 +76,16 @@ exports.title = '专家申请';
 exports.buttons = [{
     text: '提交申请',
     fn: function(payload) {
+        var introduce = payload.introduce.replace(/(^\s*)|(\s*$)/g, '');
+        var topicIds = payload.topicIds;
+        if (introduce === '') {
+            this.app.message.success('请填写您的优势！');
+            return false;
+        }
+        if (typeof topicIds === 'undefined' || topicIds === '') {
+            this.app.message.success('请选择您擅长话题！');
+            return false;
+        }
         return this.dispatch('saveInner', payload);
     }
 }];

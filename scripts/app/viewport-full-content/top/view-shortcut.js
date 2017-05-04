@@ -58,9 +58,10 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     organization: function(data) {
-        var orgs = data.organizations,
+        var organization = data.organization || {},
             params = {},
-            org = {};
+            rootOrganization = this.app.global.organization,
+            companyOrganization = this.app.global.currentUser.companyOrganization || {};
         if (document.cookie) {
             document.cookie.split('; ').forEach(function(item) {
                 var arr = item.split('=');
@@ -68,15 +69,18 @@ exports.dataForTemplate = {
                     params[arr[0]] = arr[1];
                 }
             });
+            if (params.orgId && params.orgId === companyOrganization.id) {
+                organization = companyOrganization;
+            } else {
+                organization = rootOrganization;
+            }
         }
-        if (params.orgId) {
-            org = _.find(orgs, ['id', params.orgId]);
-        } else {
-            org = _.find(orgs, function(item) {
-                return !item.parentId;
-            });
-        }
-        return org;
+        return organization;
+    },
+    organizations: function(data) {
+        var organizations = data.organizations || [];
+        organizations = _.reject(organizations, ['id', this.app.global.organization.id]);
+        return organizations;
     },
     courseTime: function(data) {
         var time = '',
