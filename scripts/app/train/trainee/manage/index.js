@@ -2,7 +2,8 @@ exports.items = {
     main: 'main',
     search: 'search',
     situation: '',
-    audit: ''
+    audit: '',
+    detail: ''
 };
 
 exports.store = {
@@ -14,6 +15,9 @@ exports.store = {
         },
         situation: { url: '../train/class-quota/situation' },
         auditTrainee: { url: '../train/trainee/audit' },
+        levels: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 8 } },
+        trainee: { url: '../train/trainee/update' },
+        detail: { data: {} },
         state: { data: { auditStatus: 0 } }
     },
     callbacks: {
@@ -47,6 +51,12 @@ exports.store = {
             params.quotaType = state.quotaType;
             auditTrainee.set(params);
             return this.put(auditTrainee);
+        },
+        updateTrainee: function(payload) {
+            var trainee = this.models.trainee;
+            trainee.clear();
+            trainee.set(payload);
+            return this.put(trainee);
         }
     }
 };
