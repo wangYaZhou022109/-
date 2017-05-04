@@ -30,21 +30,29 @@ exports.store = {
 exports.afterRender = function() {
     this.dispatch('init', this.renderOptions);
 };
-exports.title = '分享审核';
+exports.title = '文章审核';
 exports.buttons = [{
     text: '拒绝',
     fn: function(data) {
         var params = data;
+        var me = this;
         params.auditStatus = 2;
         params.auditType = 12;
-        return this.dispatch('out', params);
+        this.dispatch('out', params).then(function() {
+            this.app.message.success('拒绝成功！');
+            me.dispatch('init');
+        });
     }
 }, {
     text: '通过',
     fn: function(data) {
         var params = data;
+        var me = this;
         params.auditStatus = 1;
         params.auditType = 12;
-        return this.dispatch('pass', params);
+        this.dispatch('pass', params).then(function() {
+            this.app.message.success('审核成功！');
+            me.dispatch('init');
+        });
     }
 }];

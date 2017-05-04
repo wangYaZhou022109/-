@@ -218,7 +218,7 @@ exports.dataForTemplate = {
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.createUser.headPortrait = 'images/default-userpic.png';
             } else {
-                obj.createUser.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+                obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
             + '   ' + date.getHours() + ':' + date.getMinutes();

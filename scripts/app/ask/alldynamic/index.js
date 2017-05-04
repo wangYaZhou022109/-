@@ -134,7 +134,6 @@ exports.store = {
             var page = this.models.page;
             page.data = [];
             params.id = 'null';
-            params.page = 1;
             trends.set(params);
             this.post(trends);
         },

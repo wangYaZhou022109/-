@@ -33,7 +33,7 @@ view('chapter')
             each(course.courseChapters)
                 li
                     compare(../course.addType 'eq' 2)
-                        .common-title > echo(seq ': ' name)
+                        .common-title > echo(name)
                     each(courseChapterSections)
                         dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType data-chapter-learnSequence = ./learnSequence)
                             dt

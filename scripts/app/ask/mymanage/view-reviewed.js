@@ -55,6 +55,10 @@ exports.handlers = {
         }
         if (auditType === '12') {
             this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
+        } if (auditType === '5') {
+            this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
+        } if (auditType === '13') {
+            this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
         }
     },
     display: function(id, e) {
