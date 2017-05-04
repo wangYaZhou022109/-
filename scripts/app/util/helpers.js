@@ -58,7 +58,14 @@ module.exports = {
         if (!value) return '';
         return toDateString(value);
     },
-
+    monthDay: function(value) {
+        var v = value,
+            arr = [];
+        if (!v) return '';
+        v = toDateString(value);
+        arr = v.split('-');
+        return arr[1] + '-' + arr[2];
+    },
     dateTime: function(value) {
         if (!value) return '';
         return toDateString(value) + ' ' + toTimeString(value);
@@ -134,7 +141,7 @@ module.exports = {
             url = rootPath + '/human/file/download?id=' + fileId;
         return fileId && url;
     },
-    
+
     routerLink: function() {
         var Self = arguments[arguments.length - 1].data.root.Self,
             prefix = Self.app.options.routerPrefix,
