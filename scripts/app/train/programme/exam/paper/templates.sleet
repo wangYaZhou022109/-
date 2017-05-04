@@ -1,0 +1,57 @@
+#!handlebars
+
+view('filter') > form.vertical
+    label > setting('exam.paper.name')
+    input.input(name='name')
+
+view('content')
+    .buttons
+    isGrant(@root.Global.EDIT false)
+        .btn#add-paper > i.icon-plus + | 新增
+
+    .list
+        table.table
+            thead > tr
+                th(width='10px') > echo('#')
+                th > setting('exam.paper.name')
+                th > setting('exam.paper.is-subjective')
+                th > setting('exam.paper.question-num')
+                th > setting('exam.paper.total-score')
+                th > setting('exam.paper.exam-count')
+                th > setting('exam.paper.status')
+                th > setting('system.all.create-time')
+                th > setting('system.all.operator')
+                tbody > each(papers)
+                    tr
+                        td > echo(i)
+                        td > echo(name)
+                        td > map('yes-or-no',isSubjective)
+                        td > echo(questionNum)
+                        td > echo(totalScore)
+                        td > a(id='exam-count-'+ id data-name='id' data-value=id) > echo(examCount)
+                        td > map('publish-status',status)
+                        td > dateTime(createTime)
+                        td.operation
+                            compare(status 'eq' 0)
+                                a(id='publish-paper-'+id data-name='id' data-value=id) > string('exam.buttons.publish')
+                                echo(' | ')
+                                a(id='edit-paper-'+id data-name='id' data-value=id) > string('edit')
+                                echo(' | ')
+                                a(id='preview-paper-'+id data-name='id' data-value=id) > string('preview')
+                                echo(' | ')
+                                a(id='remove-paper-'+id data-name='id' data-value=id) > string('remove')
+                                echo(' | ')
+                                a(id='copy-paper-'+id data-name='id' data-value=id) > string('copy')
+                            isGrant(@root.Global.REMOVE organization.id)
+                                compare(status 'eq' '0')
+                                    echo(' | ')
+                                    a(id='remove-paper-'+id data-name='id' data-value=id) > string('remove')
+                            compare(status 'eq' 1)
+                                a(id='undo-paper-'+id data-name='id' data-value=id) > string('exam.buttons.undo')
+                                echo(' | ')
+                                a(id='preview-paper-'+id data-name='id' data-value=id) > string('preview')
+                                echo(' | ')
+                                a(id='copy-paper-'+id data-name='id' data-value=id) > string('copy')
+                        else
+                            tr > td(colspan='8') > p.text-center > string('no-data')
+    #pager.pagination

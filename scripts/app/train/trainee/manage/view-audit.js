@@ -4,6 +4,8 @@ exports.bindings = {
     state: false
 };
 
+exports.small = true;
+
 exports.buttons = [{
     text: '确认',
     fn: function(payload) {

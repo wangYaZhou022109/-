@@ -12,9 +12,9 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 66,
+    clientId: 13,
     provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://192.168.1.10'
+    returnTo: 'http://localhost'
 };
 // @endif
 
@@ -62,7 +62,7 @@ require('./app/ext/tree');
 require('./app/ext/background-pager');
 require('./app/ext/qr-code');
 require('./app/ext/rich-text');
-
+require('./app/util/arrays');
 D.adapt({
     getFormData: function(form) {
         var result = {};
@@ -120,6 +120,7 @@ require('./app/util/global').setup(app).then(function(data) {
     D.assign(app.global, { setting: setting });
     D.assign(app.global, { currentUser: currentUser });
     D.assign(app.global, { webConfig: webConfig });
+    D.assign(app.global, { organization: data.organization });
 }, function() {
     app.message.error('加载初始化数据出错');
     return app.Promise.reject();

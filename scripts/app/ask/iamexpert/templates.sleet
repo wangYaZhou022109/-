@@ -14,7 +14,7 @@ view('banner')
             .title-row
                 .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
             .title-row
-                .inline-block.m-right > string('be-good-at') + string('topic') + echo(':') 
+                .inline-block.m-right > string('me') + string('be-good-at') + string('topic') + echo(':') 
                 each(expert.topicList)
                     .inline-block.m-right.bg-white.sub-title > echo(name)
                 .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
@@ -26,27 +26,20 @@ view('left')
     section.section
         .tabs.line.mb-1 > ul 
             compare(leftstate.menu 'eq' 'inviteanswer')
-                li#menu-inviteanswer.active > string('question') + string('answer') 
+                li#menu-inviteanswer.active > string('wait-for-me-to-answer') 
             else
-                li#menu-inviteanswer > string('question') + string('answer') 
+                li#menu-inviteanswer > string('wait-for-me-to-answer')
+            compare(leftstate.menu 'eq' 'myanswer')
+                li#menu-myanswer.active > string('my') + string('answer')
+            else
+                li#menu-myanswer > string('my') + string('answer')
             compare(leftstate.menu 'eq' 'expertssharing')
                 li#menu-expertssharing.active > string('my') + string('share') 
             else
                 li#menu-expertssharing > string('my') + string('share')
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
-                .person-list 
-                    compare(leftstate.menu 'eq' 'inviteanswer')
-                        .filter
-                            .pull-left
-                                .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
-                                .item(id ='item-myanswer') > span > string('my') + string('answer')
-                    compare(leftstate.menu 'eq' 'myanswer')
-                        .filter
-                            .pull-left
-                                .item.active(id ='item-inviteanswer') > span > string('invitation') + string('answer')
-                                .item(id ='item-myanswer') > span > string('my') + string('answer')
-                    .comment-list.ask-list > ul
-                        div(data-dynamic-key=leftstate.menu)
+                .comment-list.ask-list > ul
+                    div(data-dynamic-key=leftstate.menu)
 
                     

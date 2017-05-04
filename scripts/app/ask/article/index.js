@@ -11,7 +11,7 @@ exports.items = {
 exports.store = {
     models: {
         state: { data: [] },
-        task: { data: [] },
+        task: { data: [{ sectionAttachments: 222 }] },
         trends: { url: '../ask-bar/trends' },
         imgParse: { url: '../human/file/upload-parse-file' },
         article: { url: '../ask-bar/question/insert-article' },
@@ -48,13 +48,7 @@ exports.store = {
     callbacks: {
         addFile: function(payload) {
             var me = this,
-                attachments = me.models.task.data.attachments || [];
-            _.forEach(payload || [], function(data, i) {
-                var obj = data,
-                    index = i + 1;
-                obj.idx = attachments.length + index;
-                attachments.push(obj);
-            });
+                attachments = payload;
             me.models.task.data.attachments = attachments;
             me.models.task.changed();
         },
@@ -78,20 +72,20 @@ exports.store = {
             if (task.attachments) {
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
-                data.enclosureType = task.attachments[0].idex;
+                data.enclosureType = 1;
                 data.enclosureSuffix = task.attachments[0].contentType;
-                data.transferViewUrl = '';
+                data.transferViewUrl = task.attachments[0].attachmentId;
                 data.transferFlag = 1;
-                data.enclosureSuffixImg = '';
+                data.enclosureSuffixImg = 'null';
             }
             data.speechset = speechset.status;
             data.id = '1';
             article.set(data);
             this.post(article).then(function() {
                 me.app.message.success('操作成功');
-                setTimeout(function() {
-                    me.app.show('content', 'ask/content');
-                }, 2000);
+                // setTimeout(function() {
+                //     me.app.show('content', 'ask/content');
+                // }, 2000);
             });
         }
     }
@@ -102,11 +96,13 @@ exports.afterRender = function() {
 };
 
 
-exports.title = '发表文章';
+exports.title = '写文章';
 
 exports.buttons = [{
     text: '发布',
     fn: function(payload) {
+        var title = payload.title;
+        var topicIds = payload.topicIds;
         var stepView = this.items.edit;
         var obj = stepView.getData();
         var content = obj.html();
@@ -114,15 +110,28 @@ exports.buttons = [{
             begin,
             end,
             data = payload;
-        data.jsonImg = 'null';
-        if (content.indexOf('<img') !== -1) {
-            begin = content.indexOf('<img');
-            end = content.indexOf('/>');
-            img = $(content.substring(begin, end + 2));
-            data.jsonImg = img[0].src;
+        title = title.replace(/(^\s*)|(\s*$)/g, '');
+        if (typeof title === 'undefined' || title === '') {
+            this.app.message.success('请填写文章标题！');
+            return false;
         }
-        data.content = content;
-        data.content_txt = obj.text();
+        if (typeof topicIds === 'undefined' || topicIds === '') {
+            data.topicIds = 'null';
+        }
+        data.jsonImg = 'null';
+        if (typeof content === 'undefined' || content === '') {
+            data.content = 'null';
+            data.content_txt = 'null';
+        } else {
+            if (content.indexOf('<img') !== -1) {
+                begin = content.indexOf('<img');
+                end = content.indexOf('/>');
+                img = $(content.substring(begin, end + 2));
+                data.jsonImg = img[0].src;
+            }
+            data.content = content;
+            data.content_txt = obj.text();
+        }
         return this.dispatch('release', data);
     }
 }];

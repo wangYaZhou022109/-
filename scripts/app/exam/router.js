@@ -1,6 +1,7 @@
 exports.routes = {
     'index/:id': 'showIndex',
     'exam/paper/:id': 'showPaper',
+    'exam/index/:id': 'showExamIndex',
     'exam/answer-paper/:id': 'showAnswerPaper',
     'exam/mark-paper/:id': 'showMarkPaper',
     'exam/score-detail/:id': 'showScoreDetail',
@@ -16,6 +17,10 @@ exports.showIndex = function(id) {
 
 exports.showPaper = function(id) {
     return this.app.viewport.showIt('content', 'exam/exam/paper', { examId: id });
+};
+
+exports.showExamIndex = function(id) {
+    return this.app.viewport.showIt('content', 'exam/exam/index', { examId: id });
 };
 
 exports.showMarkPaper = function(id) {

@@ -1,0 +1,64 @@
+#!handlebars
+
+module > .taskmarking-content.main-side
+    .taskmarking-side.bg-highlight
+        div(data-region='side')
+    .taskmarking-head(data-region='head')
+    .taskmarking-main(data-region='main')
+
+view('head')
+    .pull-left.title > echo(all.task.name)
+    .pull-right.title
+        if(all.taskApproval.id)
+            echo('提交人:' + all.member.fullName)
+            echo('审核人:' + all.taskApproval.approvalMemberFullName)
+            echo('得分:' + all.taskApproval.score)
+            .btn.white.m#closeTask 关闭批阅
+        else
+            echo('提交人:' + all.member.fullName)
+            .btn.blue.m#approval 确定
+            .btn.white.m#closeTask 关闭批阅
+
+view('side') > form.vertical
+    .btn.block.gray.layout-mt-small#explain 作业说明
+    .h4.m-top 作业附件：
+    each(all.task.attachList)
+        .side-item.clearfix.m-top
+            a.inline-block(id='preview-'+attachmentId href='javascript:;') > echo(attachmentName)
+            a.inline-block.pull-right(href=downUrl download=attachmentName) 下载
+    .h4.m-top 用户提交：
+    .btn.block.gray.layout-mt-small#description 作业详情
+    .side-item.clearfix.m-top
+        if(all.attachmentId)
+            a(id='preview-'+all.attachmentId href='javascript:;') > echo(all.name) 
+            a.inline-block.pull-right(href=all.downUrl download=all.name) 下载
+        else
+            .inline-blockecho > echo(all.name)
+    if(all.taskApproval.id)
+        .m-top
+        label.block 评语：
+        textarea.w-full.m-top#comment(name='comment' value='' rows=5) > echo(all.taskApproval.comment)
+    else
+        .layout-mt-small
+            input.inline-block#state-0(name='state' type='radio' value='0')('checked')&if(checked)
+            label.layout-mr-small 通过
+            input.inline-block#state-1(name='state' type='radio' value='1')('checked')&unless(checked)
+            .inline-block 打回重新提交
+        .layout-mt-small
+            label 评分：
+            input.w-full.m-top#score(name='score' value=all.taskApproval.score)
+        .m-top
+            label.block 评语：
+            textarea.w-full.m-top#comment(name='comment' value='' rows=5) > echo(all.taskApproval.comment)
+
+view('main')
+    .preview-content
+        if(mainState.isExplain)
+            if(mainState.isDescription)
+                .h3.m-bottom.strong 任务说明:
+                span.small-font > echo(all.task.explain)
+            else
+                .h3.m-bottom.strong 任务详情:
+                span.small-font > echo(all.description)
+        else
+            #viewPdf

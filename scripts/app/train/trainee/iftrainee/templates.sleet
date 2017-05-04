@@ -1,17 +1,16 @@
 #!handlebars
 
 module
-    br
-    .div(data-region='main')
+    .membership-table.layout-mt-small.clearfix(data-region='main')
 
 view('main')
-    div.text-center
-        p.col-sm-2 > echo('学员列表')
-    .buttons
-        input.input(id='add-iftrainee-input' placeholder='人员编号')
-        .btn#addIftrainee > echo('添加')
-        .btn#addAllIftrainee > echo('人员选择')
-    table.table
+    .h5.pull-left.strong > echo('学员列表')
+    .pull-right
+        label.pull-left.tag-height.m-right > echo('员工编号')
+        input.tag-height.pull-left(id='add-iftrainee-input')
+        .small-btn.pull-left.m-right#addIftrainee > echo('添加')
+        .btn.tag-btn#addAllIftrainee > echo('人员选择')
+    table.table.layout-mt-small
         thead > tr
             th > echo('序号')
             th > echo('姓名')

@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    $ = require('jquery');
 
 exports.bindings = {
     taskList: true,
@@ -8,6 +9,7 @@ exports.bindings = {
 
 exports.events = {
     'click addTask': 'addTask',
+    'click minimize-*': 'showMinimize'
 };
 
 exports.handlers = {
@@ -16,6 +18,16 @@ exports.handlers = {
         this.bindings.task.clear();
         this.app.viewport.modal(this.module.items.editTask);
     },
+    showMinimize: function(id) {
+        $(this.$('minitable-' + id)).toggle();
+        if ($(this.$('min-' + id)).text() === '最小化') {
+            $(this.$('min-' + id)).text('最大化');
+            $(this.$('minimize-' + id)).addClass('icon-add-full').removeClass('icon-minus-full');
+        } else {
+            $(this.$('min-' + id)).text('最小化');
+            $(this.$('minimize-' + id)).addClass('icon-minus-full').removeClass('icon-add-full');
+        }
+    }
 };
 
 exports.actions = {

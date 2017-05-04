@@ -18,7 +18,11 @@ exports.dataForTemplate = {
             url = { };
         if (typeof expert.member !== 'undefined') {
             url = expert.member.headPortrait;
-            expert.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                expert.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                expert.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+            }
         }
         return expert;
     }

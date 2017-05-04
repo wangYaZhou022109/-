@@ -1,0 +1,46 @@
+#! handlebars
+
+module > .achievement-content.content
+    .achievement-side(data-region='side')
+    .achievement-main(data-region='main')
+
+view('side')
+    .achievement-preview-top
+        .com-title.text-center
+        | 提交评卷
+    ul.achievement-preview > each(questionTypes)
+        li.border.bottom(id='list-item-'+ @index)
+            label
+                echo(data.name '题' '(共' data.totalScore '分)')
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(data.data)
+                div(class='num min-btn ' + if(isCurrent 'correct' ''))(id='q-'+id) > echo(i)
+
+view('main')
+    .title-row.row
+        .col-sm-4 > .com-title > echo(state.name)
+        .col-sm-4
+            if(anonymityMark)
+                echo('考生： ' state.member.name)
+
+    .hr
+    .preview-content
+        if(state.isOnePageOneQuestion)
+            .row
+                .col-xs-6
+                    .com-title.inline-block > echo(state.questionType '(' state.questionIndex '/' state.questionTotalInType ')')
+                .col-xs-6 > .text-right
+                    if(state.isOnePageOneQuestion)
+                        .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev')
+                        .icon.pe-7s-angle-right-circle.pe-3x(id='next')
+        .row
+            if(state.isOnePageOneQuestion)
+                if(state.questionId)
+                    div(data-dynamic-key=state.questionId)
+            else
+                div
+                    each(questionTypes)
+                        label
+                            .com-title > echo(data.name '题' '(共' data.totalScore '分)')
+                            each(data.data)
+                                echo(i)
+                                div(data-dynamic-key=id)

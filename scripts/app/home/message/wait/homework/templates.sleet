@@ -5,7 +5,8 @@ module
 
 view('main')
     .mt-1
-        .checkbox > input(type='checkbox' id='waitTodo-1' value=1)('checked')&if(state.checked) + label 显示待处理
+        .checkbox > input(type='checkbox' id='waitTodo-3') + label(for='waitTodo-3')  
+        span 显示待处理
     ul.list
         li
             .clearfix

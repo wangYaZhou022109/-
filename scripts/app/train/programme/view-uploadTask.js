@@ -18,7 +18,7 @@ exports.components = function() {
                 max_file_size: '100mb',
                 mime_types: [{
                     title: 'files',
-                    extensions: 'xls,xlsx,doc,docx,ppt,pptx,zip,txt,rar,pdf,epub,mp3,mp4'
+                    extensions: 'xls,xlsx,doc,docx,ppt,pptx,txt,pdf,zip'
                 }]
             }
         }

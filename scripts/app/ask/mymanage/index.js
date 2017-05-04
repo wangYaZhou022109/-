@@ -10,6 +10,8 @@ exports.items = {
     'ask/discussdeal': { isModule: true },
     'ask/reportdeal': { isModule: true },
     'ask/sharedeal': { isModule: true },
+    'ask/sharereportaudit': { isModule: true },
+    'ask/disscusreportaudit': { isModule: true },
     'ask/mymanage/topicdetail': { isModule: true }
 };
 
@@ -36,7 +38,6 @@ exports.store = {
                     params.push(d.id);
                 });
                 todayadd.set({ id: params.toString() });
-                // console.log(todayadd);
                 me.get(todayadd);
             });
         },

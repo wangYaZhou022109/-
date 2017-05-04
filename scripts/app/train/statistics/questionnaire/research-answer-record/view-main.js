@@ -42,9 +42,8 @@ exports.events = {
 };
 
 exports.handlers = {
-    edit: function(data) {
-        var id = data,
-            url = '#/exam/research-activity/research-detail/' + id;
+    edit: function(id) {
+        var url = '#/exam/research-activity/research-answer/' + id;
         window.open(url, '_blank');
     }
 };

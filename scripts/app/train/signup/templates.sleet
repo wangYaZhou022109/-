@@ -1,0 +1,143 @@
+#!handlebars
+
+module > .class-register-page
+    .class-register-banner > .clearfix.container(data-region='banner')
+    .page-main-wrapper
+        .page-side > .container(data-region='side')
+        .page-main > .container(data-region='main')
+
+view('banner')
+    if(classSignupInfo.id)
+        .cover.pull-left > img(src = bannerUrl)
+        .banner-con.pull-left
+            h2 > echo(classSignupInfo.classInfo.className)
+            p > echo('起至时间：') + dateTime(classSignupInfo.startTime) + echo('~') + dateTime(classSignupInfo.endTime)
+            p > echo('往返日期：') + dateTime(classSignupInfo.classInfo.arriveDate) + echo('~') + dateTime(classSignupInfo.classInfo.returnDate)
+            p > echo('培训地点：') + echo(classSignupInfo.classInfo.address)
+        .banner-btn.pull-right.text-center > .btn.white 报名中
+
+view('side')
+    .h3 中国移动学院响应中心
+    .register-tel
+        i.iconfont.icon-phone
+        span.sub-title 15801696688 - 27260
+    .h3.layout-mt-small 中国移动学院培训须知
+    a.normal.clearfix.train-notice
+        span.pull-left 培训须知.docx
+        a.iconfont.icon-cloud-down.pull-right#download-doc(href=docUrl)
+    .h3.layout-mt-small 常见问题解答
+    ul.qaq-list.layout-mt-small
+        li
+            .qaq-tit 1、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 2、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 3、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 4、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 5、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+        li
+            .qaq-tit 6、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 报到日将有四趟班车位于天通苑北地铁站南行（右）100米，上天桥行至马路对面，由右侧下天桥，即可看到班车。时间为11点，15点，17:30以及20点。返程日班车一般安排为课程结束当天的18点以及次日的8点分别送于机场、集团。
+        li
+            .qaq-tit 7、学员报名时报名链接无法访问?
+            .qaq-con
+                b 答：
+                | 请核对报名链接是否完整、正确。如正确且重启IE浏览器后仍打不开请和响应中心联系。
+
+view('main') > form.vertical
+    if(member.id)
+        compare(state.auditStatus 'eq' 3)
+            .h3 填写报名信息
+            hr
+            .form
+                input.input(name='id' value=member.id type='hidden')
+                input.input(name='organizationId' value=member.organizationId type='hidden')
+                .form-row
+                    label 培训班名称
+                    .content > input.input(value=classSignupInfo.classInfo.className disabled=true)
+                .form-row
+                    label 报名码
+                    .content > input.input(value=classSignupInfo.signupCode disabled=true)
+                .form-row
+                    label 姓名
+                    .content > input.input(value=member.fullName disabled=true)
+                .form-row
+                    label 公司
+                    .content > input.input(value=member.companyName disabled=true)
+                .form-row
+                    label 二级部门/单位
+                    .content > input.input(value=member.organizationName disabled=true)
+                .form-row
+                    label 职务
+                    .content > input.input(value=member.jobName disabled=true)
+                .form-row
+                    label 职级
+                    .content
+                        select.input(name='levelId')
+                            each(levels)
+                                option(value = id)('selected')&if(selected) > echo(value)
+                .form-row
+                    label.required 性别
+                    .content
+                        select.input(name='sex')
+                            each(sexs)
+                                option(value = key)('selected')&if(selected) > echo(value)
+                .form-row
+                    label.required 民族
+                    .content
+                        select.input(name='nation')
+                            each(nations)
+                                option(value = id)('selected')&if(selected) > echo(value)
+                .form-row
+                    label.required 移动电话
+                    .content > input.input(name='phoneNumber' value=member.phoneNumber placeholder=member.phoneNumber+'（引用个人信息数据，点击可修改）')
+                .form-row
+                    label.required 邮箱
+                    .content > input.input(name='email' value=member.email placeholder=member.email+'（引用个人信息数据，点击可修改）')
+                .form-row
+                    label.auto 备注
+                    .content > textarea.input(name='remark'  rows='3' placeholder='补充信息')
+                .form-row
+                    label
+                    .content > .btn(id='commit-signup') 提交
+                #auditMembers
+        compare(state.auditStatus 'eq' 0)
+            .text-center
+                h3(style='color:green') 审核中
+                span 您的报名已经成功提交，请耐心等待管理员审核，
+                br
+                span 审核结果将会通过邮件或消息发送给您。
+                br
+                br
+                a.btn(href='#/activity/index') 返回活动页
+        compare(state.auditStatus 'eq' 2)
+            .text-center
+                h3(style='color:red') 审核未通过
+                span 审核意见：
+                echo(trainee.auditOpinion)
+                br
+                br
+                .buttons
+                    a.btn(href='#/activity/index') 返回活动页
+                    .btn#reSignup 重新报名
+
+

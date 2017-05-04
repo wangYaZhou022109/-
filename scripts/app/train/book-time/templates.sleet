@@ -1,0 +1,67 @@
+#!handlebars
+
+module > .choosedate-page
+    .choosedate(data-region='toolbox')
+    .choosedate(data-region='content')
+
+
+view('toolbox')
+    .form.clearfix
+        .form-row.w-third.pull-left
+            label.required.tag-height 报到日
+            .content > .relative
+                input.input.date.tag-height#arriveDate(name='arriveDate' style='width:200px')
+                .iconfont.icon-riqi
+        .form-row.w-third.pull-left
+            label.required.tag-height 返程日
+            .content > input.input.tag-height#backDate(name='backDate' readonly='readonly' style='width:200px')
+        .form-row.w-third.pull-left
+            label.required.tag-height 计划人数
+            .content > .num.tag-height > echo(project.amount)
+    .clearfix
+        p.pull-left.small-font  注:图显示的是本月已预定的资源信息,不显示代表本月无预定,本月可用的资源数为<<300>>。
+        .form.pull-right.w-three > .form-row
+            label.required.small-font.tag-height 月份
+            .content
+                .relative
+                    input.input.date.tag-height#month(name='month' style='width:200px' value=month)
+                    .iconfont.icon-riqi
+                
+view('content')
+    .layout-mt-small
+        table
+            tr
+                th(rowspan="3") 培训班可用资源
+                th(colspan="31") > echo(month + '月')
+            tr > each(state)
+                td > echo(day)
+            tr > each(state)
+                td > echo(week)
+            tr
+                td 可用资源
+                each(state)
+                    if(green)
+                        td.custom-bg-color-4 > echo(allowed)
+                    else
+                        td.custom-bg-color-3 > echo(allowed)
+            each(projects) > tr
+                td > echo(name + ' ' + amount + '人' + days + '天')
+                each(occupyDays)
+                    if(isPass)
+                        echo('')
+                    else
+                        if(isOccupy)
+                            td.bg-main-color(colspan=colspan) > echo(text)
+                        else
+                            td > echo('')
+    .layout-mt-small.clearfix > .small-btn.pull-right.radius#rule 查看预定规则
+
+
+
+view('tips')
+    ol
+        li > echo('5天班，周日报到，周一至周五上课，周六返程；')
+        li > echo('4天班，周一报到，周二至周五上课，周六返程（如有培训班要求周日报到，根据培训班实际情况酌情满足）；')
+        li > echo('3天班，周一报到，周二至周四上课，周五返程（如有培训班要求周二或周日报到，根据培训班实际情况酌情满足）；')
+        li > echo('2天班，周日报到，周一二上课，周三返程；或周三报到，周四五上课，周六返程')
+

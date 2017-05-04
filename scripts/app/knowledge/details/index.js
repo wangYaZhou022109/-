@@ -17,7 +17,8 @@ exports.store = {
         integral: { url: '../system/integral-result', autoLoad: 'after' },
         readerMembers: { url: '../course-study/knowledge/readerMembers' },
         downCount: { url: '../course-study/knowledge/down' },
-        topics: { url: '../system/topic/ids' }
+        courseTopics: { url: '../course-study/topic' },
+        topics: { url: '../system/topic/ids' },
     },
     callbacks: {
         init: function(payload) {
@@ -31,15 +32,26 @@ exports.store = {
             model.set(payload);
             this.get(collect);
             this.get(recommends);
+
+            // 查询标签
+            this.chain(
+                function() {
+                    this.models.courseTopics.set({ id: payload.id });
+                    return this.get(this.models.courseTopics);
+                },
+                function(data) {
+                    var ids = _.map(data[0], 'topicId').join();
+                    if (ids) {
+                        this.models.topics.params = { ids: ids };
+                        this.get(this.models.topics);
+                    }
+                }
+            );
+
             return this.get(model).then(function(data) {
                 var knowledgeId = data[0].id;
-                var topicIds = _.map(data[0].businessTopics, 'id').join();
                 readerMembers.params = { knowledgeId: knowledgeId };
                 me.get(readerMembers);
-                if (topicIds) {
-                    me.models.topics.params = { ids: topicIds };
-                    me.get(me.models.topics);
-                }
             });
         },
         score: function(payload) {

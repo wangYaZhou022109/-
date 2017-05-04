@@ -7,22 +7,26 @@ module > .train-class-page
             .div(data-region='main')
 
 view('count') > form.vertical
-    echo('作业名称:')
-    echo(taskOne.name)
-    br
-    echo('已提交人数')
-    echo(taskOne.number)
+    .layout-mt-small
+        echo('作业名称:')
+        echo(taskOne.name)
+    .layout-mt-small
+        echo('已提交人数')
+        echo(taskOne.number)
 
 view('search') > form.vertical
-    div.row.text-center
-        div.col-sm-3
-            echo('用户名')
-            input.input(name='name')
-        div.col-sm-3
-            echo('姓名')
-            input.input(name='fullName')
-        div.col-sm-3
-            btn.btn#search > echo('查询')
+    .layout-mt-small
+        .filter-row
+            .filter-item
+                echo('用户名')
+                input.input(name='name')
+            .filter-item
+                echo('姓名')
+                input.input(name='fullName')
+            .filter-item
+                btn.btn#search > echo('查询')
+    .layout-mt-small.clearfix
+        a.btn.small.radius.pull-right(href=taskDetail.downUrl download='') 下载全部
 
 view('main')
     div.text-center
@@ -42,7 +46,7 @@ view('main')
                 td > dateTime(createTime)
                 td
                     if(score)
-                        a(id='audit-preview'+id data-name='id' data-value=id) > echo(score) 
+                        a(href='#/train/statistics/task/audit-task/'+id target='_blank') > echo(score) 
                     else
-                        a(id='audit-preview'+id data-name='id' data-value=id) > echo('详情')
+                        a(href='#/train/statistics/task/audit-task/'+id target='_blank') > echo('审核')
     #pager.pagination

@@ -11,9 +11,11 @@ view('list')
             .comment-content
                 .h4
                     compare(trendsType 'eq' '1')
-                        a(id='myquiz-details-' + id + '_' + questionId ) > echo(title)
-                    else
-                        a(id='myshares-details-' + id + '_' + questionDiscuss.questionId ) > echo(title)
+                        a(href='#/ask/noticerquestiondetails/'+ questionId ) > echo(title)
+                    compare(trendsType 'eq' '2')
+                        a(href='#/ask/noticerarticledetails/' + questionId ) > echo(title)
+                    compare(trendsType 'eq' '3')
+                        a(href='#/ask/noticerquestiondetails/'+  questionDiscuss.questionId ) > echo(title)
                 .comment-text
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
@@ -35,9 +37,9 @@ view('list')
                     .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                     .text-right
                         compare(trendsType 'eq' '1')
+                            .item(id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
                             .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                             .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
-                            .item(id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     i.iconfont.icon-share-2(title='分享')
@@ -54,9 +56,9 @@ view('list')
                                 input.input(type='hidden' name='id' value=questionId)
                                 .btn(id='publish-' + questionId) > string('publish')
                         compare(trendsType 'eq' '2')
+                            .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
                             .item > string('praise') +  echo('（'+ question.praiseNum +'）')
                             .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
-                            .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('unfollow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     i.iconfont.icon-share-2(title='分享')
@@ -73,9 +75,9 @@ view('list')
                                 input.input(type='hidden' name='id' value=questionId)
                                 .btn(id='publish-' + id) > string('publish')
                         compare(trendsType 'eq' '3') 
+                            .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > echo('+') + string('unfollow')
                             .item > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
                             .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-                            .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > echo('+') + string('unfollow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     i.iconfont.icon-share-2(title='分享')

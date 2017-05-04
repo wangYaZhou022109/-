@@ -1,0 +1,21 @@
+#!handlebars
+module
+    .page-main-wrapper
+        .main(data-region='main')
+view('main')
+    .list.m-top
+        table.table
+            thead > tr
+                td(colspan=8)
+                    .col-sm-2
+                        label 附件
+            thead > tr
+                th 序号
+                th(width='50%') 附件名称
+                th 操作
+            tbody > each(files) > tr
+                td > echo(i)
+                td
+                    label > echo(name)
+                td
+                    a(href=downUrl download=name) 下载

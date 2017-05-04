@@ -1,3 +1,4 @@
+var _ = require('lodash/collection');
 exports.items = {
     main: 'main',
     relevantexperts: 'relevantexperts',
@@ -32,7 +33,22 @@ exports.store = {
         },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' },
-        unpraise: { url: '../ask-bar/my-share/unpraise' }
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
+        down: { url: '../human/file/download' },
+        speech: {
+            url: '../system/speech-set',
+            mixin: {
+                getData: function(id) {
+                    var speechset;
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            speechset = d;
+                        }
+                    });
+                    return speechset;
+                }
+            }
+        }
     },
     callbacks: {
         refreshrelpy: function() {
@@ -56,7 +72,11 @@ exports.store = {
             followcount.data.id = data[1];
             followcount.changed();
             question.set({ id: data[0] });
-            this.get(question);
+            return this.get(question);
+        },
+        speech: function() {
+            var speech = this.models.speech;
+            return this.get(speech);
         },
         questionDetails: function(payload) {
             var details = this.models.details,
@@ -87,10 +107,18 @@ exports.store = {
             return this.post(boutique);
         },
         discuss: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
+            var discuss = this.models.discuss,
+                data = payload,
+                speechset = this.models.speech.getData('2');
+            data.speechset = speechset.status;
+            discuss.set(data);
             return this.save(discuss);
         },
+        // discuss: function(payload) {
+        //     var discuss = this.models.discuss;
+        //     discuss.set(payload);
+        //     return this.save(discuss);
+        // },
         discussdel: function(payload) {
             var discussdel = this.models.discuss;
             discussdel.set(payload);
@@ -201,6 +229,7 @@ exports.store = {
 
 exports.beforeRender = function() {
     this.dispatch('questionDetails', this.renderOptions);
-    this.dispatch('concern', this.renderOptions);
+    // this.dispatch('concern', this.renderOptions);
+    this.dispatch('speech');
 };
 

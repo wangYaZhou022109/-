@@ -21,7 +21,12 @@ exports.store = {
                 },
                 countPercent: function(name) {
                     var selectedCount = _.filter(this.data.answerRecords, function(a) {
-                            return a.answer === name;
+                            if (a && a.answer) {
+                                return _.some(a.answer.split(','), function(as) {
+                                    return as === name;
+                                });
+                            }
+                            return false;
                         }).length,
                         p = this.data.answerRecords.length !== 0
                             ? (selectedCount / this.data.answerRecords.length) : 0;
@@ -29,9 +34,17 @@ exports.store = {
                 },
                 isChecked: function(name) {
                     var answerRecord = _.find(this.data.answerRecords, [
-                        'researchRecordId', this.data.researchRecordId
-                    ]);
-                    return answerRecord && name === answerRecord.answer;
+                            'researchRecordId', this.data.researchRecordId
+                        ]),
+                        isChecked = false,
+                        answer = [];
+                    if (answerRecord && answerRecord.answer) {
+                        answer = answerRecord.answer.split(',');
+                        isChecked = _.some(answer, function(a) {
+                            return a === name;
+                        });
+                    }
+                    return isChecked;
                 }
             }
         }

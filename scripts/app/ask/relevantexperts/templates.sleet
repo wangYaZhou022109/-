@@ -5,7 +5,8 @@ module
 view('list') 
     .section
         span.h3 > string('relevant') + string('expert')
-        span.more(id='relevantexperts') more
+        span.more > a.normal(href='#/ask/expert/index') > echo('more')
         .layout-mt-small.user-picture
             .grid-row > each(expert)
-                .col-md-4 > a(href="javascript:;" title=member.fullName id='expert-' + id data-name='id' data-value=id  ) > img.block(src=member.headPortrait)
+                .col-md-4 > a(href='#/ask/expertdetails/'+ id + ',' + member.id title=member.fullName  ) 
+                    img.block(src=member.headPortrait)

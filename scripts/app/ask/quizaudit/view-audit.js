@@ -24,9 +24,9 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    pass: function() {
-        this.app.message.success('完成审核！');
-    },
+    // pass: function() {
+    //     this.app.message.success('完成审核！');
+    // },
     out: function() {
         this.app.message.success('完成审核！');
     }

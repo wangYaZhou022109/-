@@ -16,17 +16,29 @@ exports.handlers = {
     audit: function(data, e, target) {
         var id = data,
             auditType = target.getAttribute('auditType');
+            // 1提问审核
         if (auditType === '1') {
             this.app.viewport.modal(this.module.items['ask/quizaudit'], { id: id });
         }
+        // 2讨论审核
         if (auditType === '2') {
             this.app.viewport.modal(this.module.items['ask/discussaudit'], { id: id });
         }
+        // 4提问举报审核
         if (auditType === '4') {
             this.app.viewport.modal(this.module.items['ask/reportaudit'], { id: id });
         }
+        // 5讨论举报审核
+        if (auditType === '5') {
+            this.app.viewport.modal(this.module.items['ask/disscusreportaudit'], { id: id });
+        }
+        // 12文章审核',
         if (auditType === '12') {
             this.app.viewport.modal(this.module.items['ask/shareaudit'], { id: id });
+        }
+        //   13文章举报审核',
+        if (auditType === '13') {
+            this.app.viewport.modal(this.module.items['ask/sharereportaudit'], { id: id });
         }
     },
     deal: function(data, e, target) {
@@ -42,6 +54,10 @@ exports.handlers = {
             this.app.viewport.modal(this.module.items['ask/reportdeal'], { id: id });
         }
         if (auditType === '12') {
+            this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
+        } if (auditType === '5') {
+            this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
+        } if (auditType === '13') {
             this.app.viewport.modal(this.module.items['ask/sharedeal'], { id: id });
         }
     },

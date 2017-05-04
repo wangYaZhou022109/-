@@ -1,0 +1,14 @@
+#! handlebars
+module
+    .news-detail-page > .container(data-region='main')
+
+view('main')
+    .h3 > echo(advertisement.title)
+    .sub-title
+        .item
+            i.iconfont.icon-time
+            span > echo('发布时间：' advertisement.createTime)
+        # .item
+        #     i.iconfont.icon-view
+        #     span > echo('浏览数：' advertisement.visitors)
+    p.introduction > @echo(advertisement.content)

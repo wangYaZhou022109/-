@@ -1,0 +1,48 @@
+#! handlebars
+
+module
+    .exam-manage
+        div(data-region='search')
+        div(data-region='content')
+
+
+view('search')
+    form.vertical
+        .row
+            .col-sm-6
+                label > setting('exam.research.name') > echo(':')
+                input.input#name(name='name')
+            .col-sm-6
+                label > setting('exam.research.publish-member') > echo(':')
+                input.input#publishMemberName(name='publishMemberName')
+                input#publishMemberId(name='publishMemberId' type='hidden')
+                .btn.inline-block#btnMember 选择
+        .row
+            .col-sm-12
+                label > setting('system.all.create-time') > echo(':')
+                input.input#create-time(name='createTime')
+        br
+        .row
+            .col-sm-12
+                .text-right > .btn.inline-block#search 搜索
+
+view('content')
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th 选择
+                th > setting('exam.questionnaire.name')
+                th > setting('exam.research.publish-member')
+                th > setting('system.all.create-time')
+                th > setting('exam.all.operator')
+            tbody > each(researchActivities)
+                tr
+                    td > input(type='radio' name='select-research' value=id)('checked')&if(checked)
+                    td > echo(name)
+                    td > echo(publishMember.name)
+                    td > dateTime(createTime)
+                    td.operation
+                        a(id='preview-'+id data-name='id' data-value=id) > string('preview')
+                else
+                    tr > td(colspan='5') > p.text-center > string('no-data')
+    #pager.pagination

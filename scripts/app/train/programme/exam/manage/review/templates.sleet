@@ -1,0 +1,72 @@
+#! handlebars
+
+module > .exam-manage-review
+    .review-search(data-region='search')
+    .review-main(data-region='main')
+
+view('search')
+    form.vertical
+        .row.m-bottom
+            .col-sm-3 > .inline-block.m-right > .input-box
+                .text 用户名:
+                input.input-left60.input(name='memberName')
+            .col-sm-3 > .inline-block.m-right > .input-box
+                .text 姓名:
+                input.input-left60.input(name='memberFullName')
+            .col-sm-3 > .inline-block.m-right > .input-box
+                .text 审核状态:
+                .input.cont > .min-input > select.input#status(name='status')> each(status)
+                    option(value=key)('selected')&if(selected) > echo(value)
+            .col-sm-3.clearfix
+                .text-right > .btn.large.inline-block#search 搜索
+        .row
+            .col-sm-3 > .inline-block.m-right > .input-box
+                .text 报名时间(开始):
+                input.input-left110.input#start-time(name='createStartTime')
+            .col-sm-3 > .inline-block.m-right > .input-box
+                .text 报名时间(结束):
+                input.input-left110.input#end-time(name='createEndTime')
+            .col-sm-3 > .inline-block.m-right > .input-box
+                .text 所属部门:
+                #owner
+
+
+view('main')
+    .hr
+    .clearfix
+        .pull-left.m-top 报名考生列表
+        .pull-right
+            .btn#batchPass 批量通过
+            .btn#batchReject 批量拒绝
+    .list.m-top
+        table.table.table2.text-center
+            thead > tr
+                th > .checkbox.no-margin
+                    input(type='checkbox' id='check-all')
+                    label(for='check-all')
+                th 考生账号
+                th 部门
+                th 岗位
+                th 报名时间
+                th 审核状态
+                th 操作
+            tbody > each(signups)
+                tr
+                    td > .checkbox.no-margin
+                        input(type='checkbox' id='check-item'+id name='signupId' value=id)
+                        label(for='check-item'+id)
+                    td > echo(member.name)
+                    td > echo(organization.name)
+                    td > echo(member.majorPositionName)
+                    td > dateTime(createTime)
+                    td > map('signup-status' status)
+                    td
+                        compare(status 'eq' 1)
+                            a(id='pass-'+id data-name='id' data-value=id) > string('pass')
+                            echo('|')
+                            a(id='reject-'+id data-name='id' data-value=id) > string('reject')
+                        compare(status 'eq' 2)
+                            a(id='reject-'+id data-name='id' data-value=id) > string('reject')
+                        compare(status 'eq' 3)
+                            a(id='pass-'+id data-name='id' data-value=id) > string('pass')
+    #pager.pagination

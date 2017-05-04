@@ -1,15 +1,17 @@
 var prompts = {
-        1: '您好,本次考试需要进行报名，请点击下方“我要报名”进行报名，谢谢',
-        2: '您好,本次考试您已经报名，正在审核中，如要取消报名请点击下方“取消报名',
-        3: '您好,本次考试您已经报名，请在考试时间内参与考试，谢谢',
-        4: '您好,请在考试时间内参与考试，谢谢',
+        1: '您好，本次考试需要进行报名，请点击下方“我要报名”进行报名，谢谢',
+        2: '您好，本次考试您已报名，正在审核中，如要取消报名请点击下方“取消报名”',
+        3: '您好，本次考试您已报名成功，请在考试时间内参与考试，谢谢。',
+        4: '您好，本次考试尚未到考试时间，请在考试时间{0}内进行考试，谢谢',
         5: '点击下方“开始考试”后将会立即进入考试，该考试时长为{0}分钟',
-        6: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即进行考试，点击下方“查看详情”可查看上次考试成绩详情',
+        6: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，点击下方“查看详情”可查看上次考试成绩详情',
         7: '点击下方“查看详情”可查看上次考试成绩详情',
-        8: '您好，本次考试已经结束, 待考试活动结束后可查看详情',
+        8: '您好，本次考试尚未到结束时间，您还无法查看答卷情况，谢谢。',
         9: '您好,本次考试已结束或已到进入考试截止时间, 点击下方“查看详情”可查看上次考试成绩详情',
-        10: '您好,本次考试尚未到报名时间，请在报名时间{0}内报名，谢谢',
-        12: '您好，本次考试已撤销'
+        10: '您好，本次考试尚未到报名时间，请在报名时间{0}内报名，谢谢',
+        12: '您好，本次考试已撤销',
+        13: '您好,本次考试已结束',
+        14: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，成绩详情待考试活动结束后方可查看'
     },
     P = require('./app/activity/index/exam-prompt/prompt-help'),
     getWithParams,
@@ -33,6 +35,9 @@ exports.dataForTemplate = {
 
 exports.events = {
     'click close-button': 'close',
+    'click had-knew-button': 'close',
+    'click exam-later-button': 'close',
+    'click come-later-button': 'close',
     'click to-exam-button': 'toExam',
     'click view-detail-button': 'viewDetail',
     'click exam-again-button': 'toExam'
@@ -90,27 +95,32 @@ exports.handlers = {
 // 9: 考试活动结束 可查看考试详情
 // 10: 报名考试，超出报名时间范围
 // 12: 考试已撤销
+// 14: 可考多次 不能马上查看详情
 getCurrentExam = function(exam) {
     var status = P.getUserStatusOfExam(exam),
-        closeButton = { id: 'close-button', text: '我已经知道了' },
+        knewButton = { id: 'had-knew-button', text: '我已经知道了' },
+        examLaterButton = { id: 'exam-later-button', text: '以后再考' },
+        comeLaterButton = { id: 'come-later-button', text: '以后再来' },
+        closeButton = { id: 'close-button', text: '关闭页面' },
         cancelButton = { id: 'cancel-button', text: '取消报名' },
         signupButton = { id: 'signup-button', text: '我要报名' },
-        toExamButton = { id: 'to-exam-button', text: '进入考试' },
+        toExamButton = { id: 'to-exam-button', text: '开始考试' },
         viewDetailButton = { id: 'view-detail-button', text: '查看详情' },
         examAgainButton = { id: 'exam-again-button', text: '重新考试' },
         buttonMap = {
-            1: [signupButton, closeButton],
-            2: [cancelButton, closeButton],
-            3: [cancelButton, closeButton],
-            4: [closeButton],
-            5: [toExamButton, closeButton],
-            6: [examAgainButton, viewDetailButton, closeButton],
-            7: [viewDetailButton, closeButton],
-            8: [closeButton],
+            1: [comeLaterButton, signupButton],
+            2: [closeButton, cancelButton],
+            3: [cancelButton, knewButton],
+            4: [knewButton],
+            5: [examLaterButton, toExamButton],
+            6: [examAgainButton, viewDetailButton, knewButton],
+            7: [viewDetailButton, knewButton],
+            8: [knewButton],
             9: [viewDetailButton],
-            10: [closeButton],
-            12: [closeButton],
-            13: [closeButton]
+            10: [knewButton],
+            12: [knewButton],
+            13: [knewButton],
+            14: [examAgainButton, knewButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 5) {
@@ -122,6 +132,12 @@ getCurrentExam = function(exam) {
                     helper.dateMinute(exam0.applicantStartTime)
                         + '  ~  ' + helper.dateMinute(exam0.applicantEndTime)
                 );
+            }
+            if (status0 === 4) {
+                return getWithParams(
+                    str,
+                    helper.dateMinute(exam0.startTime)
+                        + '  ~  ' + helper.dateMinute(exam0.endTime));
             }
             return str;
         };

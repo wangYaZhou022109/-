@@ -46,3 +46,4 @@ view('content')
                 else
                     tr > td(colspan='5') > p.text-center > string('no-data')
     #pager.pagination
+    

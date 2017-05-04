@@ -5,11 +5,13 @@ exports.routes = {
     'share/:id/:type': 'showShare', // 分享跳转
     'message/detail/:id': 'showMessageDetail',
     'center/demand': 'showDmand',
+    'center/responsecenter': 'showResponsecenter',
     'center/class-service': 'classService',
     'center/managements': 'showManagements',
     'center/managements/statistics': 'showStatistics',
     'center/managements/taskmarking': 'showTaskmarking',
-    'search-page': 'showSearchPage'
+    'search-page': 'showSearchPage',
+    'home/home-advertisement/:id': 'showDetail'
 
 };
 
@@ -67,6 +69,9 @@ exports.showShare = function(id, type) {
 exports.showDmand = function() {
     return this.app.show('content', 'center/demand');
 };
+exports.showResponsecenter = function() {
+    return this.app.show('content', 'center/responsecenter');
+};
 exports.classService = function() {
     return this.app.show('content', 'center/class-service');
 };
@@ -81,4 +86,7 @@ exports.showTaskmarking = function() {
 };
 exports.showSearchPage = function() {
     return this.app.show('content', 'search-page');
+};
+exports.showDetail = function(id) {
+    return this.app.show('content', 'home/advertisement', { id: id });
 };

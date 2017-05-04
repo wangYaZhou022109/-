@@ -10,10 +10,14 @@ exports.events = {
 };
 
 exports.handlers = {
-    edit: function(data) {
+    edit: function(data, e, target) {
         var me = this;
+        var cId = target.getAttribute('cId');
         var view1 = me.module.items['train/statistics/study-details/particulars'];
-        this.app.viewport.modal(view1, { memberId: data });
+        var options = {};
+        options.memberId = data;
+        options.courseId = cId;
+        this.app.viewport.modal(view1, { payload: options });
     }
 };
 

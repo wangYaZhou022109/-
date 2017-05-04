@@ -13,12 +13,15 @@ exports.store = {
         task: {
             url: '../train/task'
         },
-        state: { data: { classId: 1 } },
+        state: { data: {} },
     },
     callbacks: {
         init: function(payload) {
-            var tasks = this.models.tasks;
+            var tasks = this.models.tasks,
+                state = this.models.state;
             tasks.params = payload;
+            state.data.classId = payload;
+            state.changed();
             return this.get(tasks);
         },
         search: function(payload) {
@@ -30,6 +33,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var classId = this.store.models.state.data;
-    this.dispatch('init', classId);
+    return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

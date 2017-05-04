@@ -1,0 +1,36 @@
+#!handlebars
+
+module
+    form.vertical(data-region='main')
+
+view('main')
+
+    h1 通知配置
+    .row
+        .col-sm-12
+            label
+                .inline-block.m-right
+                .checkbox.inline-block.no-margin
+                    input(type='checkbox' id='test1')
+                    label(for='test1') 发送给门户管理员
+        .col-sm-12
+            textarea.col-sm-12
+    .row
+        .col-sm-12
+            label
+                .inline-block.m-right
+                .checkbox.inline-block.no-margin
+                    input(type='checkbox' id='test2')
+                    label(for='test2') 通知相关用户
+        .col-sm-12
+            textarea.col-sm-12 > echo(message.members)
+
+    .row
+        .col-sm-12
+            label
+                .inline-block.m-right
+                .checkbox.inline-block.no-margin
+                    input(type='checkbox' id='test3')
+                    label(for='test3') 通知相关评卷老师
+        .col-sm-12
+            textarea.col-sm-12 > echo(message.teachers)

@@ -12,61 +12,106 @@ view('list')
         each(page)
             compare(auditStatus 'eq' 0)
                 li
-                    .user-pic > img(src='images/d2.jpg')
+                    .user-pic > img(src=member.headPortrait)
                     .comment-content
                         .h4 > a(id='myshares-sharedetails-' + id + '_' + id ) > echo(title)
                         .comment-text
-                            compare(thumbnail.length 'gt' 0)
-                                img(src=thumbnail)
+                            compare(jsonImg.length 'gt' 0)
+                                img(src=jsonImg)
                             @echo(content) 
                         #  > echo(problem.content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('·分享的文章·')
-                            span.sub-text > data(enjoyTime)
+                            span.sub-text > echo(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-ing > string('auditStatus0')
                                 .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
             compare(auditStatus 'eq' 1)
-                li
-                    .user-pic > img(src='images/d2.jpg')
-                    .comment-content
-                        .h4 > a(id='myshares-details-' + id + '_' + id ) > echo(title)
-                        .comment-text
-                            compare(thumbnail.length 'gt' 0)
-                                img(src=thumbnail)
-                            @echo(content) 
-                        #  > echo(problem.content)
-                        .user-info
-                            a(href='javascript:;') > echo('我')
-                            span > echo('·分享的文章·')
-                            span.sub-text > data(enjoyTime)
-                        .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
-                            .text-right
-                                compare(concernNum 'gt' 0)  
-                                    .item(id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
-                                else
-                                    .item(id='trend-follow-3_'  + id data-name='id' data-value='3_' + id) > echo('+') + string('follow')
-                                .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-                            
-                                .item > .share-bar
-                                    .drop-down-wrapper
-                                        i.iconfont.icon-share-2(title='分享')
-                                        form.drop-down-content > .content
-                                            .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                            .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
-                                form.comment-reply(id ='comment-reply-' + id)
-                                    textarea.input.w-full.block(rows=1 name='t_content' value='')
-                                    input.input(type='hidden' name='organizationId' value=organizationId)
-                                    input.input(type='hidden' name='id' value=id)
-                                    .btn(id='publish-' + id) > string('publish')
+                compare(essenceStatus 'eq' 1)
+                    li
+                        .user-pic > img(src=member.headPortrait)
+                        .comment-content
+                            img.boutique.pull-left(src="images/boutique.png")
+                            .h4 > a(id='myshares-details-' + id + '_' + id ) > echo(title)
+                            .comment-text
+                                compare(thumbnail.length 'gt' 0)
+                                    img(src=thumbnail)
+                                @echo(content) 
+                            #  > echo(problem.content)
+                            .user-info
+                                a(href='javascript:;') > echo('我')
+                                span > echo('·分享的文章·')
+                                span.sub-text > echo(createTime)
+                            .comment-operation
+                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .text-right
+                                    compare(concernNum 'gt' 0)  
+                                        .item(id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                    else
+                                        .item(id='trend-follow-3_'  + id data-name='id' data-value='3_' + id) > echo('+') + string('follow')
+                                    compare(praiseNum 'gt' 0)
+                                        .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                    else
+                                        .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                
+                                    .item > .share-bar
+                                        .drop-down-wrapper
+                                            i.iconfont.icon-share-2(title='分享')
+                                            form.drop-down-content > .content
+                                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')
+                else
+                    li
+                        .user-pic > img(src=member.headPortrait)
+                        .comment-content
+                            .h4 > a(id='myshares-details-' + id + '_' + id ) > echo(title)
+                            .comment-text
+                                compare(thumbnail.length 'gt' 0)
+                                    img(src=thumbnail)
+                                @echo(content) 
+                            #  > echo(problem.content)
+                            .user-info
+                                a(href='javascript:;') > echo('我')
+                                span > echo('·分享的文章·')
+                                span.sub-text > echo(createTime)
+                            .comment-operation
+                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .text-right
+                                    compare(concernNum 'gt' 0)  
+                                        .item(id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                    else
+                                        .item(id='trend-follow-3_'  + id data-name='id' data-value='3_' + id) > echo('+') + string('follow')
+                                    compare(praiseNum 'gt' 0)
+                                        .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                    else
+                                        .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                
+                                    .item > .share-bar
+                                        .drop-down-wrapper
+                                            i.iconfont.icon-share-2(title='分享')
+                                            form.drop-down-content > .content
+                                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')
             compare(auditStatus 'eq' 2)
                 li
-                    .user-pic > img(src='images/d2.jpg')
+                    .user-pic > img(src=member.headPortrait)
                     .comment-content
                         .h4 > a(id='myshares-sharedetails-' + id + '_' + id ) > echo(title)
                         .comment-text
@@ -76,7 +121,7 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('·分享的文章·')
-                            span.sub-text > data(enjoyTime)
+                            span.sub-text > echo(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right

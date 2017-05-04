@@ -11,6 +11,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        // 课程详情
         course: {
             url: '../course-study/course-front/info',
             mixin: {
@@ -35,6 +36,7 @@ exports.store = {
                 }
             }
         },
+        // 课程进度
         progress: { url: '../course-study/course-front/course-progress',
             mixin: {
                 findProgress: function(sectionId) {
@@ -42,6 +44,8 @@ exports.store = {
                 }
             }
         },
+        courseTopics: { url: '../course-study/topic' },
+        topics: { url: '../system/topic/ids' },
         mediaProgress: { url: '../course-study/course-front/video-progress' },
         docProgress: { url: '../course-study/course-front/doc-progress' },
         // 注册课程
@@ -54,7 +58,7 @@ exports.store = {
         playerState: {},
         examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
         researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
-        researchActivity: { url: '../exam/research-activity' }
+        researchActivity: { url: '../exam/research-activity/simple-data' }
     },
     callbacks: {
         init: function(payload) {
@@ -73,7 +77,21 @@ exports.store = {
 
             this.get(courseRelated);
             this.get(collect);
-            this.post(register);
+
+            // 查询标签
+            this.chain(
+                function() {
+                    this.models.courseTopics.set({ id: payload.id });
+                    return this.get(this.models.courseTopics);
+                },
+                function(data) {
+                    var ids = _.map(data[0], 'topicId').join();
+                    if (ids) {
+                        this.models.topics.params = { ids: ids };
+                        this.get(this.models.topics);
+                    }
+                }
+            );
 
             return this.chain([this.get(course), this.post(register)]).then(function(data) {
                 var sectionId = data[1][0].currentSectionId;
@@ -83,22 +101,7 @@ exports.store = {
                 progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
 
                 return me.chain(
-                    [me.get(progress),
-                    (function() {
-                        var researchIdArr = _.map(course.findSectionsForType(12), 'resourceId') || [];
-                        var researchQueIdArr = _.map(course.findSectionsForType(13), 'resourceId') || [];
-                        var researchIds = researchIdArr.concat(researchQueIdArr).join();
-                        if (researchIds) {
-                            me.models.researchStatus.params = { researchIds: researchIds };
-                            me.get(me.models.researchStatus);
-                        }
-                    }()), (function() {
-                        var examIds = _.map(course.findSectionsForType(9), 'resourceId').join();
-                        if (examIds) {
-                            me.models.examStatus.params = { examIds: examIds };
-                            me.get(me.models.examStatus);
-                        }
-                    }())],
+                    me.get(progress),
                     playerState.set({ id: payload.id, sectionId: sectionId }, true)
                 );
             });
