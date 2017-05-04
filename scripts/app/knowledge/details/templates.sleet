@@ -27,6 +27,8 @@ view('main')
                 else
                     .item#collect
                         i.iconfont.icon-favorite(title='收藏')
+    p > echo(topics)
+        .tag-btn > echo(name)
     p
         | 发布人：管理员
         span.layout-ml-small
@@ -34,11 +36,7 @@ view('main')
             date(knowledge.releaseTime)
         span.layout-ml-small
             | 下载积分：
-            echo(knowledge.integral)
-        span.layout-ml-small
-            | 相关话题：
-            each(topics)
-                a.normal.m-right > echo(name)
+            pick(knowledge.integral 0)
     p > echo('描述：') + @echo(knowledge.description)
 view('commit')
     #comment-area
