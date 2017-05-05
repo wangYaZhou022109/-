@@ -110,7 +110,7 @@ exports.store = {
             this.post(selecttitle);
         },
         selectquestion: function(payload) {
-            var selecttitle = this.models.selecttitle.getData(payload);
+            // var selecttitle = this.models.selecttitle.getData(payload);
             // console.log(selecttitle);
         }
 
