@@ -1,4 +1,5 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    _ = require('lodash/collection');
 
 exports.items = {
     main: 'main',
@@ -7,28 +8,67 @@ exports.items = {
 
 exports.store = {
     models: {
-        list: { url: '../exam/question-depot' },
+        list: {
+            url: '../exam/question-depot',
+            mixin: {
+                merge: function(list) {
+                    var me = this,
+                        obj = {};
+                    _.forEach(list, function(l) {
+                        me.data.unshift(l);
+                    });
+                    _.forEach(this.data, function(d) {
+                        obj[d.id] = d;
+                    });
+                    this.data = _.map(obj, function(v) {
+                        return v;
+                    });
+                }
+            }
+        },
+        shareAndPublic: { url: '../exam/question-depot/share-public', cache: true }, //  上级允许下级的目录，和 所有公开的
         state: {}
     },
 
     callbacks: {
         init: function(payload) {
-            var me = this;
-            if (payload.data) D.assign(this.models.state.data, payload.data);
-            if (payload.params) {
-                D.assign(this.models.list.params, payload.params);
-                return this.get(this.models.list).then(function() {
+            var me = this,
+                list = this.models.list,
+                shareAndPublic = this.models.shareAndPublic,
+                state = this.models.state;
+
+            if (payload.data) D.assign(state.data, payload.data);
+
+            if (payload.params && payload.params.organizationId) {
+                D.assign(list.params, payload.params);
+                if (payload.params.share) {
+                    return this.get(list).then(function() {
+                        return me.get(shareAndPublic).then(function() {
+                            list.merge(shareAndPublic.data);
+                            me.models.state.changed();
+                        });
+                    });
+                }
+                return this.get(list).then(function() {
                     me.models.state.changed();
                 });
             }
             return '';
         },
         selectChanged: function(payload) {
-            D.assign(this.models.state.data, {
+            var state = this.models.state;
+            D.assign(state.data, {
                 id: payload.id,
                 name: payload.text,
-                text: payload.text
+                text: payload.text,
+                path: payload.data.path || ''
             });
+            state.data.selectChanged && state.data.selectChanged(payload);
+            state.changed();
+        },
+        clear: function() {
+            this.models.state.data.id = '';
+            this.models.state.data.text = '';
             this.models.state.changed();
         }
     }
@@ -44,7 +84,8 @@ exports.afterRender = function() {
             id: data.id,
             text: data.name,
             inputName: inputName,
-            required: this.renderOptions.required
+            required: this.renderOptions.required,
+            selectChanged: this.renderOptions.selectChanged
         }
     });
 };
@@ -59,5 +100,11 @@ exports.mixin = {
             return data;
         }
         return null;
+    },
+    clear: function() {
+        return this.dispatch('clear');
+    },
+    reset: function(params) {
+        return this.dispatch('init', { params: params });
     }
 };

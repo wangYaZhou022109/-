@@ -7,8 +7,8 @@ module
 view('main')
     .div(style='margin-bottom: 15px;')
         .div(style='width: 60%;float: left;margin: 10px;') > label
-            .btn#add-temp-paper > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('临时组卷')
-            .btn#add-tactic > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('随机组卷')
+            .btn#add-temp-paper(class='btn ' + if(previousStatusIsStarting 'disabled')) > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('临时组卷')
+            .btn#add-tactic(class='btn ' + if(previousStatusIsStarting 'disabled')) > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('随机组卷')
             input.input#paperClassId(type='hidden' name='paperClassId' value=paperClass.id x-rule='required' x-marker='show-error' x-message='请选择试卷')
         .div(style='width: 3%;float: right;margin: 10px;') > .btn#preview-paper 预览
         .div(style='width: 30%;float: right;margin: 10px;')
@@ -48,8 +48,13 @@ view('main')
         br
         .text-tips 考卷显示设置
         br
-        label
-            select#paperShowRule(name='paperShowRule' style='width: 50%;height: 40px;')
+        if(previousStatusIsStarting)
+            select.input#paperShowRule('disabled')
+                option(value='1')('selected')&if(checked.paperShowRule1) 一屏一题显示(采用左右切换方式,客观题选择后,即自动切换下一题)
+                option(value='2')('selected')&if(checked.paperShowRule2) 所有题目一并显示（采用上下滚动的方式）
+            input(type='hidden' name='paperShowRule' value=exam.paperShowRule)
+        else
+            select.input#paperShowRule(name='paperShowRule')
                 option(value='1')('selected')&if(checked.paperShowRule1) 一屏一题显示(采用左右切换方式,客观题选择后,即自动切换下一题)
                 option(value='2')('selected')&if(checked.paperShowRule2) 所有题目一并显示（采用上下滚动的方式）
 

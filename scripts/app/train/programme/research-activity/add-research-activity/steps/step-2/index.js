@@ -3,7 +3,7 @@ var _ = require('lodash/collection'),
 
 exports.items = {
     main: 'main',
-    side: 'side',
+    // side: 'side',
     'train/programme/research-activity/add-dimension': { isModule: true },
     'train/programme/research-activity/question/add-question': { isModule: true },
     'train/programme/research-activity/preview-questionary': { isModule: true },

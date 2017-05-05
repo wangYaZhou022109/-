@@ -12,7 +12,8 @@ var maps = require('./app/util/maps'),
         { id: 8, type: 6, name: '阅读理解' }
     ],
     $ = require('jquery'),
-    markers = require('./app/ext/views/form/markers');
+    markers = require('./app/ext/views/form/markers'),
+    STARTING = 5;
 
 // exports.type = 'form';
 
@@ -38,10 +39,12 @@ exports.handlers = {
         }
         this.app.viewport.modal(view, {
             id: paperClassId,
+            url: this.module.renderOptions.url,
+            paperName: this.bindings.exam.data.name,
             type: 2,
             callback: function(id) {
-                that.app.viewport.closeModal();
-                that.module.dispatch('selectPaperId', id);
+                that.app.viewport.closeGround();
+                return that.module.dispatch('selectPaperId', id);
             }
         });
     },
@@ -84,6 +87,7 @@ exports.handlers = {
         }
         me.app.viewport.modal(me.module.items['train/programme/exam/question/random-question'], {
             paperClassId: paperClassId,
+            url: this.module.renderOptions.url,
             organizationId: exam.ownedOrganizationId || currentUser.organization.id,
             callback: function(data) {
                 return me.module.dispatch('selectPaperId', data).then(function() {
@@ -160,6 +164,12 @@ exports.dataForTemplate = {
             paperSortRule3: '' + exam.paperSortRule === '3',
             paperSortRule4: '' + exam.paperSortRule === '4',
         };
+    },
+    showPaperShowRule: function() {
+        return this.module.renderOptions.hidePaperShowRule !== 1;
+    },
+    previousStatusIsStarting: function(data) {
+        return data.exam.previousStatus && data.exam.previousStatus === STARTING;
     }
 };
 

@@ -24,7 +24,8 @@ exports.store = {
                 }
             }
         },
-        state: { data: {} }
+        state: { data: {} },
+        orgs: { url: '../system/grant/granted-organization', cache: false }
     },
     callbacks: {
         init: function(payload) {

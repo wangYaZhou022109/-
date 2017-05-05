@@ -1,49 +1,45 @@
 #! handlebars
 
-module
-    .exam-manage
-        div(data-region='search')
-        div(data-region='content')
+module > .addevaluation-page
+    .addevaluation(data-region='search')
+    .addevaluation(data-region='content')
 
 
 view('search')
-    form.vertical
-        .row
-            .col-sm-6
-                label > setting('exam.research.name') > echo(':')
-                input.input#name(name='name')
-            .col-sm-6
-                label > setting('exam.research.publish-member') > echo(':')
-                input.input#publishMemberName(name='publishMemberName')
-                input#publishMemberId(name='publishMemberId' type='hidden')
-                .btn.inline-block#btnMember 选择
-        .row
-            .col-sm-12
-                label > setting('system.all.create-time') > echo(':')
-                input.input#create-time(name='createTime')
-        br
-        .row
-            .col-sm-12
-                .text-right > .btn.inline-block#search 搜索
+    .bg-highlight
+        .form.align-left
+            .form-row.pull-left.w-half.r-padding.row-block
+                label.label.tag-height 调研名称
+                input.input.tag-height#name(name='name')
+            .form-row.pull-left.w-half.r-padding.row-block
+                label.label.tag-height 创建人
+                .relative
+                    input.input.tag-height#publishMemberName(name='publishMemberName')
+                    .choice#btnMember 选择
+                    input#publishMemberId(name='publishMemberId' type='hidden')
+            label.label.tag-height 创建时间
+            .relative
+                input.input.date.w-full.tag-height#create-time(name='createTime')
+                .iconfont.icon-riqi
+        .text-center.layout-mt-small > .btn.circle-radius.gray.tag-height#search 搜索
 
 view('content')
-    .list.m-top
-        table.table.table2.text-center
-            thead > tr
-                th 选择
-                th > setting('exam.research.name')
-                th > setting('exam.research.publish-member')
-                th > setting('system.all.create-time')
-                th > setting('exam.all.operator')
-            tbody > each(researchActivities)
-                tr
-                    td > input(type='radio' name='select-research' value=id)('checked')&if(checked)
-                    td > echo(name)
-                    td > echo(publishMember.name)
-                    td > dateTime(createTime)
-                    td.operation
-                        a(id='preview-'+id data-name='id' data-value=id) > string('preview')
-                else
-                    tr > td(colspan='5') > p.text-center > string('no-data')
+    table.table.layout-mt-small
+        thead > tr
+            th 选择
+            th 问卷名称
+            th 创建人
+            th 创建时间
+            th 操作
+        tbody > each(researchActivities)
+            tr
+                td > input(type='radio' name='select-research' value=id)('checked')&if(checked)
+                td > echo(name)
+                td > echo(publishMember.name)
+                td > dateTime(createTime)
+                td
+                    a(id='preview-'+id data-name='id' data-value=id) 预览
+            else
+                tr > td(colspan='5') > p.text-center > string('no-data')
     #pager.pagination
     

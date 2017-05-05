@@ -43,7 +43,9 @@ exports.afterRender = function() {
     return this.store.module.dispatch('init', this.renderOptions).then(function() {
         var paperItem = that.items[PAPER_MODULE];
         that.regions.paper.show(paperItem, {
-            exam: that.store.models.exam.data || {}
+            hidePaperShowRule: 1,
+            exam: that.store.models.exam.data || {},
+            url: that.renderOptions.url
         });
     });
 };

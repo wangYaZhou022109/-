@@ -1,8 +1,7 @@
 var _ = require('lodash/collection'),
     $ = require('jquery'),
     editHander,
-    viewHander,
-    attachmentId;
+    viewHander;
     // $ = require('jquery'),
     // markers = require('./app/ext/views/form/markers'),
     // validators = require('./app/ext/views/form/validators');
@@ -62,7 +61,9 @@ exports.handlers = {
         var model = this.module.items['train/programme/exam/other-module-exam'],
             me = this;
         me.app.viewport.modal(model, {
+            id: null,
             sourceType: 2,
+            url: 'train/programme',
             callback: function(data) {
                 var param = {
                     type: 1,
@@ -71,9 +72,8 @@ exports.handlers = {
                     startTime: data.startTime,
                     endTime: data.endTime,
                     isAdd: data.isAdd,
-                    attachmentId: data.paperClassId,
+                    paperClassId: data.paperClassId,
                 };
-                attachmentId = data.paperClassId;
                 me.module.dispatch('saveResearch', param);
             }
         });
@@ -230,7 +230,7 @@ viewHander = {
     1: function(payload) {
         var questionary = payload.questionary;
         var view = this.module.items['train/programme/exam/paper/preview-paper'];
-        this.app.viewport.modal(view, { paperId: attachmentId, exam: { name: questionary.resourceName } });
+        this.app.viewport.modal(view, { paperId: questionary.paperClassId, exam: { name: questionary.resourceName } });
     },
     2: function(payload) {
         var questionary = payload.questionary;
