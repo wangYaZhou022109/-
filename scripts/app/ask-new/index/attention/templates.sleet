@@ -102,33 +102,38 @@ view('tabs')
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow(title='温暖气氛') 温暖气氛
-                            .info 36关注 ｜ 1专家 ｜ 2问题
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 温暖气氛
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1专家 ｜ 2问题
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow(title='脱口秀') 脱口秀
-                            .info 36关注 ｜ 1专家 ｜ 2问题
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 脱口秀
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1专家 ｜ 2问题
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow(title='梦想常有') 梦想常有
-                            .info 36关注 ｜ 1专家 ｜ 2问题
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 梦想常有
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1专家 ｜ 2问题
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow 脱口秀
-                            .info 36关注 ｜ 1专家 ｜ 2问题
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 温暖气氛
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1专家 ｜ 2问题
                     li.topic-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/demo/1.jpg")
-                            h4.text-overflow 梦想常有
-                            .info 36关注 ｜ 1专家 ｜ 2问题
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 温暖气氛
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1专家 ｜ 2问题
         li.tabs-cont-item#tabs-cont-item-3
             .person-list
                 .filter.layout-mt-small
@@ -142,55 +147,60 @@ view('tabs')
                     li.expert-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/d2.jpg")
-                            h4.text-overflow 赵小茵
-                            .info 36关注 ｜ 1回答 ｜ 2分享
-                            .row
-                                .tag-btn 话题
-                                .tag-btn 话题二
-                                .tag-btn 梦想
-                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 赵小茵
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1回答 ｜ 2分享
+                        .row
+                            .tag-btn 话题
+                            .tag-btn 话题二
+                            .tag-btn 梦想
+                        .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
                     li.expert-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/d4.jpg")
-                            h4.text-overflow 晓杨杨
-                            .info 36关注 ｜ 1回答 ｜ 2分享
-                            .row
-                                .tag-btn 话题
-                                .tag-btn 话题二
-                                .tag-btn 梦想
-                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 赵小茵
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1回答 ｜ 2分享
+                        .row
+                            .tag-btn 话题
+                            .tag-btn 话题二
+                            .tag-btn 梦想
+                        .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
                     li.expert-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/d1.jpg")
-                            h4.text-overflow 赵小茵
-                            .info 36关注 ｜ 1回答 ｜ 2分享
-                            .row
-                                .tag-btn 话题
-                                .tag-btn 话题二
-                                .tag-btn 梦想
-                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 赵小茵
+                                .btn.small.pull-right 取消关注
+                        .info 36关注 ｜ 1回答 ｜ 2分享
+                        .row
+                            .tag-btn 话题
+                            .tag-btn 话题二
+                            .tag-btn 梦想
+                        .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
                     li.expert-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/d5.jpg")
-                            h4.text-overflow 晓杨杨
-                            .info 36关注 ｜ 1回答 ｜ 2分享
-                            .row
-                                .tag-btn 话题
-                                .tag-btn 话题二
-                                .tag-btn 梦想
-                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 赵小茵
+                                .btn.small.pull-right  +&nbsp;关注
+                        .info 36关注 ｜ 1回答 ｜ 2分享
+                        .row
+                            .tag-btn 话题
+                            .tag-btn 话题二
+                            .tag-btn 梦想
+                        .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
                     li.expert-item
                         a.normal(href="javascript:;")
                             .img > .img-cont > img(src="images/d3.jpg")
-                            h4.text-overflow 赵小茵
-                            .info 36关注 ｜ 1回答 ｜ 2分享
-                            .row
-                                .tag-btn 话题
-                                .tag-btn 话题二
-                                .tag-btn 梦想
-                            .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...
-                        .btn.small 取消关注
+                            .clearfix.overflow
+                                h4.text-overflow.pull-left.w-half(title='温暖气氛') 赵小茵
+                                .btn.small.pull-right.gray 已关注
+                        .info 36关注 ｜ 1回答 ｜ 2分享
+                        .row
+                            .tag-btn 话题
+                            .tag-btn 话题二
+                            .tag-btn 梦想
+                        .sub-text 个人简介个人简介个人简介个人简介个人简介个人简介个人...

@@ -58,7 +58,7 @@ view('notloggin-content')
 	.loggin#loggin
 		.notloggin-form.border.around
 			.notloggin-info.text-center
-				.besure.m-right.inline-block 
+				.besure.m-right.inline-block.pointer#besure
 					img(src='images/left.jpg')
 					span 报名码确认
 				.info.info2.inline-block
