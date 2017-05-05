@@ -111,7 +111,7 @@ exports.store = {
         },
         selectquestion: function(payload) {
             var selecttitle = this.models.selecttitle.getData(payload);
-            console.log(selecttitle);
+            // console.log(selecttitle);
         }
 
     }
