@@ -144,7 +144,7 @@ view('task')
                         i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-task-'+id data-name='id' data-value=id)
                         i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-task-'+id data-name='id' data-value=id)
 
-view('configOffline')
+view('config-offline')
     section.section
         table.table
             tr
@@ -159,7 +159,7 @@ view('configOffline')
                     input(id='input-theme-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
 
 
-view('configOnline') > form.vertical
+view('config-online') > form.vertical
     table.table
         tr
             th 序号
@@ -180,7 +180,7 @@ view('configOnline') > form.vertical
             .btn.addtopic-btn#addTheme 添加主题
 
 
-view('editOffline') > form.vertical
+view('edit-offline') > form.vertical
     .form
         .form-row
             label.required 课程类型
@@ -320,7 +320,7 @@ view('import-upload')
     .row
         #uploader2
 
-view('editTask') > form.vertical
+view('edit-task') > form.vertical
     .col-sm-2(style='text-align:right')
         if(task.id)
             a.btn(href='#/train/programme/preview-task/'+task.id target='_blank') 预览
@@ -380,11 +380,11 @@ view('editTask') > form.vertical
                     .btn#clearMembers 清空
                     .btn#selectMember 继续添加
 
-view('uploadTask')
+view('upload-task')
     .row
         #uploader
 
-view('editQnrTime')
+view('edit-qnrtime')
     form.vertical
         div
             label > echo('问卷名称：')

@@ -74,7 +74,7 @@ exports.handlers = {
         me.components.tags.clear();
     },
     uploadTaskFile: function() {
-        var view = this.module.items.uploadTask,
+        var view = this.module.items['upload-task'],
             task = this.bindings.task.data,
             files = this.bindings.files.data,
             state = this.bindings.state;

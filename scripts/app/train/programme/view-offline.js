@@ -28,12 +28,13 @@ exports.events = {
 
 exports.handlers = {
     addOfflineCourse: function() {
+        var model = this.module.items['edit-offline'];
         this.bindings.state.data.type = 'add';
         this.bindings.offlineCourse.clear();
-        this.app.viewport.modal(this.module.items.editOffline);
+        this.app.viewport.modal(model);
     },
     showOfflineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOffline);
+        this.app.viewport.modal(this.module.items['config-offline']);
     },
     changeOfflineName: function(id) {
         $(this.$('input-name-offline-' + id)).css('display', 'block');
@@ -142,7 +143,7 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     editOfflineCourse: function() {
-        this.app.viewport.modal(this.module.items.editOffline);
+        this.app.viewport.modal(this.module.items['edit-offline']);
     },
     showCourseware: function() {
         this.app.viewport.modal(this.module.items.courseware);

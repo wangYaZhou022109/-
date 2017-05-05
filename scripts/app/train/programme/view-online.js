@@ -27,7 +27,7 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     showOnlineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOnline);
+        this.app.viewport.modal(this.module.items['config-online']);
     }
 };
 

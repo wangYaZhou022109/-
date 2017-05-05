@@ -10,7 +10,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'courseList' }
+    id: 'pager', name: 'pager', options: { model: 'courseList' }
 }];
 
 exports.events = {
