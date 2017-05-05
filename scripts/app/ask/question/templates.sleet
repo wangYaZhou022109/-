@@ -10,13 +10,14 @@ view('top')
     .form-row
         label.required > string('question-title')
         .content
-            input.input#selectquestion(name='title'  value=''  x-rule='required')
+            input.input#selectquestion(name='title'  value= title  x-rule='required')
             .tips 0/60
             .select-drop.border.around
                 .select-drop-item 问题一
                 .select-drop-item 问题一问题一问题一
                 .select-drop-item 问题一问题一问题一
                 .select-drop-item 问题一问题一问题一
+
 view('topic')
     .form-row.textarea-row
         label > string('related-topics')

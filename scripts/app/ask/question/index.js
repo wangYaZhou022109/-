@@ -44,7 +44,21 @@ exports.store = {
                 }
             }
         },
-        question: { url: '../ask-bar/question/insert-question' }
+        question: { url: '../ask-bar/question/insert-question' },
+        selecttitle: {
+            url: '../ask-bar/question/selecttitle',
+            mixin: {
+                getData: function(title) {
+                    var selecttitle = [];
+                    _.forEach(this.data, function(d) {
+                        if (d.title.indexOf(title) !== -1) {
+                            selecttitle.push(d);
+                        }
+                    });
+                    return selecttitle;
+                }
+            }
+        }
     },
     callbacks: {
         addFile: function(payload) {
@@ -71,7 +85,6 @@ exports.store = {
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
             if (task.attachments) {
-                // console.log(task);
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
                 data.enclosureType = 1;
@@ -85,16 +98,28 @@ exports.store = {
             question.set(data);
             this.post(question).then(function() {
                 me.app.message.success('操作成功');
-                // setTimeout(function() {
-                //     me.app.show('content', 'ask/index');
-                // }, 2000);
             });
+        },
+        selecttitle: function() {
+            var selecttitle = this.models.selecttitle;
+            selecttitle.set({
+                id: 'null',
+                size: 10000,
+                type: 1
+            });
+            this.post(selecttitle);
+        },
+        selectquestion: function(payload) {
+            var selecttitle = this.models.selecttitle.getData(payload);
+            console.log(selecttitle);
         }
+
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    this.dispatch('selecttitle');
+    this.dispatch('init');
 };
 
 exports.title = '我要提问';
