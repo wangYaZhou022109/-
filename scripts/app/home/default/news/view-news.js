@@ -11,5 +11,12 @@ module.exports = {
         preNews: function() {
             this.module.dispatch('changeIndex', -1);
         }
+    },
+    dataForTemplate: {
+        moduleHomeConfig: function(data) {
+            var moduleHomeConfig = data.moduleHomeConfig || {};
+            moduleHomeConfig = this.module.renderOptions.moduleHomeConfig;
+            return moduleHomeConfig;
+        }
     }
 };

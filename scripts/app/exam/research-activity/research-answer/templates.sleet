@@ -12,13 +12,14 @@ view('title')
     .pull-left.title > echo(researchRecord.researchQuestionary.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right > echo('调研人:' + researchRecord.member.name)
+            li.border.right > echo(memberTitle ': ' + researchRecord.member.name)
 
 view('main')
     .preview-content
         if(isMutiple)
             each(dimensions)
-                .h3.m-bottom > echo(dimensionIndex '、' name)
+                if(dimensionIndex)
+                    .h3.m-bottom > echo(dimensionIndex '、' name)
                 each(questions)
                     div(data-dynamic-key=id)
         else

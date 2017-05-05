@@ -8,9 +8,11 @@ exports.routes = {
     'center/responsecenter': 'showResponsecenter',
     'center/class-service': 'classService',
     'center/managements': 'showManagements',
+    'center/notloggin': 'showNotloggin',
     'center/managements/statistics': 'showStatistics',
     'center/managements/taskmarking': 'showTaskmarking',
-    'search-page': 'showSearchPage'
+    'search-page': 'showSearchPage',
+    'home/home-advertisement/:id': 'showDetail'
 
 };
 
@@ -77,6 +79,9 @@ exports.classService = function() {
 exports.showManagements = function() {
     return this.app.show('content', 'center/managements');
 };
+exports.showNotloggin = function() {
+    return this.app.show('content', 'center/notloggin');
+};
 exports.showStatistics = function() {
     return this.app.viewport.showIt('content', 'center/managements/statistics');
 };
@@ -85,4 +90,7 @@ exports.showTaskmarking = function() {
 };
 exports.showSearchPage = function() {
     return this.app.show('content', 'search-page');
+};
+exports.showDetail = function(id) {
+    return this.app.show('content', 'home/advertisement', { id: id });
 };

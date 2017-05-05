@@ -11,9 +11,7 @@ exports.store = {
         download: {
             url: '../human/file/download'
         },
-        photos: {
-            url: '../course-study/course-info/photo'
-        },
+        photos: { data: {} },
         state: {
             data: {
                 index: 0

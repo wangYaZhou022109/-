@@ -129,7 +129,7 @@ exports.store = {
             }
         },
         showSetting: function() {
-            if (this.app.global.currentUser.initSetting && this.app.global.currentUser.initSetting !== 1) {
+            if (this.app.global.currentUser && this.app.global.currentUser.initSetting === 0) {
                 this.app.viewport.modal(this.module.items['home/member-info']);
             }
         }

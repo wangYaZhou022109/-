@@ -8,7 +8,7 @@ exports.items = {
 exports.store = {
     models: {
         comments: {
-            url: '../system/comment',
+            url: '../system/comment/front',
             root: 'items',
             type: 'pageable'
         },
