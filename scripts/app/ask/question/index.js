@@ -109,7 +109,9 @@ exports.store = {
             });
             this.post(selecttitle);
         },
-        selectquestion: function(payload) {
+        selectquestion: function() {
+            // var data = payload;
+            //     data.id = 1;
             // var selecttitle = this.models.selecttitle.getData(payload);
             // console.log(selecttitle);
         }
