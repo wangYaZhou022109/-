@@ -37,7 +37,8 @@ view('main')
     .preview-content
         if(isMutiple)
             div > each(dimensions)
-                .h3.m-bottom > echo(dimensionIndex '、' name)
+                if(dimensionIndex)
+                    .h3.m-bottom > echo(dimensionIndex '、' name)
                 each(questions)
                     div(data-dynamic-key=id)
         else

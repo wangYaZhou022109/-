@@ -1,0 +1,36 @@
+#!handlebars
+
+module > .surveyexam-page
+    .surveyexam(data-region='surveyexam')
+
+view('surveyexam')
+    .surveyexam-item.border.bottom
+        .surveyexam-title.inline-block.sub-text 【调研】
+        .surveyexam-content.border.left.clearfix.inline-block
+            .inline-block.survey-name
+                .h3 调研名称调研名称
+                .small-font.sub-text.m-top 2017-3-2 19：00~2017-3-2 20：00
+            .inline-block.h4.sub-text 未完成
+        .surveyexam-btn.inline-block.btn 开始调研
+    .surveyexam-item.border.bottom.m-top
+        .surveyexam-title.inline-block.sub-text 【调研】
+        .surveyexam-content.border.left.clearfix.inline-block
+            .inline-block.survey-name
+                .h3 调研名称调研名称
+                .small-font.sub-text.m-top 2017-3-2 19：00~2017-3-2 20：00
+            .inline-block.h4.sub-text 未完成
+        .surveyexam-btn.inline-block.btn 开始考试
+    .surveyexam-item.border.bottom.m-top
+        .surveyexam-title.inline-block.sub-text 【调研】
+        .surveyexam-content.border.left.clearfix.inline-block
+            .inline-block.survey-name
+                .h3 调研名称调研名称
+                .small-font.sub-text.m-top 2017-3-2 19：00~2017-3-2 20：00
+            .inline-block.h4.sub-text 未完成
+        .surveyexam-btn.inline-block.btn 查看
+
+
+
+
+
+

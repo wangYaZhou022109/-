@@ -2,7 +2,7 @@
 
 module > .class-details-page
     .class-details-box(data-region='banner')
-    .page-main-wrapper
+    .page-main-wrapper.layout-mt-small
         .side
             .page-side > .container
                 section.section.domain(data-region='domain')
@@ -18,22 +18,22 @@ module > .class-details-page
                 section.section(data-region='comment')
 
 view('banner')
-    .banner > img(src='images/ke.png')
+    .banner > img.w-full(src='images/ke.png')
 
 view('domain')
     .domain.clearfix.small-font
-        .domain01.pull-left.m-bottom
+        .domain01.pull-left.m-bottom.pointer#twobring
             i.iconfont.icon-favorite
             br
             | 两个带来
-        .domain02.pull-left
+        .domain02.pull-left.pointer#businfo
             i.iconfont.icon-bus
             br
             | 班车信息统计
-        .domain03.pull-left.m-bottom
+        .domain03.pull-left.m-bottom.pointer#commitwork
             i.iconfont.icon-exam
             | 作业提交
-        .domain04.pull-left
+        .domain04.pull-left.pointer
             i.iconfont.icon-smile
             br
             | 学员满意度
@@ -41,7 +41,7 @@ view('domain')
             | 作业提交
         .domain06.pull-left.m-bottom
             | 学员满意度
-        .domain07.pull-left
+        .domain07.pull-left.pointer#surveyexam
             | 调研与考试
 
 view('class-info')
@@ -110,7 +110,7 @@ view('class-clerk')
 view('charts')
     .charts
         .h3.clearfix.m-bottom
-            a.pull-right.small-font > | more
+            a.pull-right.more > | more
             span.strong 排行榜
             small 学员时长排行榜
         .clearfix.charts-list
@@ -370,9 +370,53 @@ view('gallery')
 
 
 view('comment')
-    form.vertical
-        .h3 讨论区
-        .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
-        textarea.input.w-full(name='content' rows='5')
-        if(state.available)
+    section.section
+        form.vertical
+            .h3 讨论区
+            .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
+            textarea.input.w-full(name='content' rows='5')
             .m-top.text-right > .btn#add-comment 发表
+            .layout-mt
+                .comment-list > ul
+                    li
+                        .user-pic > img(src="images/demo/1.jpg")
+                        .comment-content
+                            .user-info
+                                a(href="javascript:;") 张三
+                                span 互联网中心
+                                span.sub-text 2分钟前
+                            .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
+                            .comment-operation
+                                .text-left
+                                    .item
+                                        i.iconfont.icon-zan
+                                        | 赞43
+                                    .item
+                                        i.iconfont.icon-message
+                                        | 评论43
+                                    .item
+                                        i.iconfont.icon-info
+                                        | 举报43
+                            .comment-reply
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+                            .comment-list.border > ul
+                                li
+                                    .user-pic > img(src="images/demo/2.jpg")
+                                    .comment-content
+                                        .user-info
+                                            a(href="javascript:;") 张三
+                                            span 互联网中心
+                                            span.sub-text 8分钟前
+                                        .comment-text 压力是当人们去适应由周围环境引起的刺激时，人们的身体或者精神上的生理反应，人们的身体或者精神
+                                        .comment-operation
+                                            .text-left
+                                                .item
+                                                    i.iconfont.icon-zan
+                                                    | 赞43
+                                                .item
+                                                    i.iconfont.icon-message
+                                                    | 评论43
+                                                .item
+                                                    i.iconfont.icon-info
+                                                    | 举报43

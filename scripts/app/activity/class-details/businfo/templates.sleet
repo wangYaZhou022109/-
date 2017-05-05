@@ -1,0 +1,76 @@
+#!handlebars
+
+module > .businfo-page
+    .businfo(data-region="businfo")
+
+view('businfo')
+    section.section
+        .businfo-title.clearfix.layout-mb-small
+            .h4.pull-left 班车统计名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                i.iconfont.icon-triangle-up#icon-1
+        #businfo-1.hide
+            .bg-businfo
+                .businfo-main.inline-block
+                    .bus-title  
+                        span.m-right 班车一
+                        span 目的地：去往集团
+                    .sub-text.m-top
+                        span.m-right 时间：2016-1-9 19：00      
+                        span 地点：大堂门口
+                        .m-top 说明说明说明说明
+                .businfo-side.inline-block.layout-mr-small
+                    input(type="checkbox")
+                    label 选择
+            .bg-businfo.m-top
+                .businfo-main.inline-block
+                    .bus-title  
+                        span.m-right 班车一
+                        span 目的地：去往集团
+                    .sub-text.m-top
+                        span.m-right 时间：2016-1-9 19：00      
+                        span 地点：大堂门口
+                        .m-top 说明说明说明说明
+                .businfo-side.inline-block.layout-mr-small
+                    input(type="checkbox")
+                    label 选择
+            .bg-businfo.m-top
+                .businfo-main.inline-block
+                    .bus-title  
+                        span.m-right 班车一
+                        span 目的地：去往集团
+                    .sub-text.m-top
+                        span.m-right 时间：2016-1-9 19：00      
+                        span 地点：大堂门口
+                        .m-top 说明说明说明说明
+                .businfo-side.inline-block.layout-mr-small
+                    input(type="checkbox")
+                    label 选择
+    .layout-mt
+        .businfo-title.clearfix
+            .h4.pull-left 班车统计名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                i.iconfont.icon-triangle-down#icon-2
+        .sub-text.m-top#businfo-2
+            span.m-right 当前预约：班车1
+            span 目的地：去往集团
+        .businfo-title.clearfix.layout-mt-small
+            .h4.pull-left 班车统计名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                i.iconfont.icon-triangle-down#icon-3
+        .sub-text.m-top#businfo-3 
+            span.m-right 当前预约：班车1
+            span 目的地：去往集团
+        .businfo-title.clearfix.layout-mt-small
+            .h4.pull-left 班车统计名称
+            .pull-right 
+                span.sub-text.layout-mr 2017-2-22 09：00 -  2017-2-22 09：00
+                i.iconfont.icon-triangle-down#icon-4
+        .sub-text.m-top#businfo-4 
+            span.m-right 当前预约：班车1
+            span 目的地：去往集团
+
+
