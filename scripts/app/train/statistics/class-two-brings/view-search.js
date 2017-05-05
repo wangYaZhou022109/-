@@ -34,7 +34,8 @@ exports.components = [function() {
 
 exports.bindings = {
     classTwoBrings: true,
-    state: true
+    state: true,
+    org: true
 };
 
 exports.actions = {
@@ -48,9 +49,13 @@ exports.events = {
 exports.handlers = {
     show: function() {
         var me = this,
-            model = me.module.items['train/statistics/classTwoBrings/owner'];
-        me.app.viewport.modal(model, { module: 'train/project',
-            callback: function() {
+            model = me.module.items['train/statistics/navigate-tree'],
+            org = me.bindings.org.data;
+        me.app.viewport.modal(model, {
+            callback: function(payload) {
+                org.id = payload.id;
+                org.name = payload.name;
+                me.bindings.org.changed();
             }
         });
     }
@@ -59,10 +64,13 @@ exports.handlers = {
 exports.dataForActions = {
     search: function() {
         return {
+            page: 1,
+            pageSize: 100000,
             classId: this.bindings.state.data.classId,
             name: $(this.$$('[name="name"]')).val(),
-            memberFullName: $(this.$$('[name="fullName"]')).val(),
-            organizationName: $(this.$$('[name="organizationName"]')).val()
+            fullName: $(this.$$('[name="fullName"]')).val(),
+            organizationId: $(this.$$('[name="organizationId"]')).val()
         };
     }
 };
+

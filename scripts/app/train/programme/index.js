@@ -7,12 +7,12 @@ exports.items = {
     online: 'online',
     questionnaire: 'questionnaire',
     task: 'task',
-    configOffline: '',
-    configOnline: '',
-    editOffline: '',
-    editTask: '',
+    'config-offline': '',
+    'config-online': '',
+    'edit-offline': '',
+    'edit-task': '',
     upload: '',
-    uploadTask: '',
+    'upload-task': '',
     courseware: '',
     'train/programme/select-course': { isModule: true },
     'train/programme/select-member': { isModule: true },
@@ -21,7 +21,7 @@ exports.items = {
     import: '',
     'import-upload': '',
     'train/programme/exam/other-module-exam': { isModule: true },
-    editQnrTime: '',
+    'edit-qnrtime': '',
     'train/programme/research-activity/add-research-third-party': { isModule: true },
     'train/programme/evaluate-questionary/select-evaluate-questionary/add-research-refrence': { isModule: true },
     'train/programme/exam/paper/preview-paper': { isModule: true },
@@ -100,7 +100,7 @@ exports.store = {
                 me = this;
             themeList.params.classId = state.data.classId;
             themeList.params.type = 2;
-            me.get(themeList);
+            return me.get(themeList);
         },
         delTheme: function(id) {
             var themeList = this.models.themeList.data,
@@ -594,6 +594,14 @@ exports.store = {
                 me.app.message.success('操作成功');
                 me.get(me.models.questionnaireList);
             });
+        },
+        addCourse: function() {
+            var themeList = this.models.themeList,
+                state = this.models.state,
+                me = this;
+            themeList.params.classId = state.data.classId;
+            themeList.params.type = 2;
+            return me.get(themeList);
         }
     }
 };

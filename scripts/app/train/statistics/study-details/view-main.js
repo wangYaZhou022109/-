@@ -22,7 +22,7 @@ exports.handlers = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'courseStudyProgresss' }
+    id: 'pager', name: 'pager', options: { model: 'courseStudyProgresss' }
 }];
 
 exports.dataForTemplate = {

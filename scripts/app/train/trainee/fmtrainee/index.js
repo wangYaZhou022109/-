@@ -7,6 +7,7 @@ exports.items = {
     import: '',
     group: '',
     groupTrainees: '',
+    detail: '',
     'train/trainee/select-member': { isModule: true },
     'train/trainee/fmtrainee/group-manage': { isModule: true }
 };
@@ -36,6 +37,9 @@ exports.store = {
         groupModel: { url: '../train/trainee-group' },
         updateTraineeGroup: { url: '../train/trainee/update-group' },
         exportGroupTrainee: { url: '../train/trainee/export-group-trainee' },
+        levels: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 8 } },
+        updateFmtrainee: { url: '../train/trainee/update' },
+        detail: { data: {} },
         delGroups: { data: [] },
         state: { data: { auditStatus: 1 } }
     },
@@ -204,6 +208,12 @@ exports.store = {
             memberIds.clear();
             memberIds.params = { classId: state.classId, type: 0 };
             return this.get(memberIds);
+        },
+        updateFmtrainee: function(payload) {
+            var updateFmtrainee = this.models.updateFmtrainee;
+            updateFmtrainee.clear();
+            updateFmtrainee.set(payload);
+            return this.put(updateFmtrainee);
         }
     }
 };

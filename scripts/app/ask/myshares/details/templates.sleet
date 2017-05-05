@@ -18,12 +18,11 @@ module
 view('main')
     .comment-list.ask-list > ul
         li
-            .user-pic
-            #   > img(src='images/1.png' alt='张三丰')
+            .user-pic > img(src=details.member.headPortrait)
             .comment-content
                 .user-info.m-top
                     a(href='javascript:;') > echo(details.member.fullName)
-                    span > echo('·文章·')
+                    span > echo('·发表文章·')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') + each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
@@ -33,15 +32,13 @@ view('main')
                 @echo(details.content)
             .comment-operation
                 .pull-right
-                    .item
+                    .item > .share-bar
                         .drop-down-wrapper
-                            .drop-down-btn 分享
-                            .drop-down-content > .content
-                                ul
-                                    li 分享1
-                                    li 分享2
-                                    li 分享3
-                    .item > span(id ='report-' + details.type + '_' + details.id data-name='id' data-value=details.type +'_' + details.id) > string('report')
+                            i.iconfont.icon-share-2(title='分享')
+                            form.drop-down-content > .content
+                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                    .item > span(id ='report-' + 2 + '_' + details.id +'_' + details.createMemberId data-name='id' data-value= 2 +'_' + details.id +'_' + details.createMemberId) > string('report')
                 .pull-left
                     span.pull-left 附件：
                     i.iconfont.icon-image.pull-left.m-right
@@ -69,7 +66,7 @@ view('main')
                         .text-right
                             #  .item > span > echo('赞（' + praiseNum +'）')                           
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
-                            .item > span(id ='report-' + details.type + '_' + id data-name='id' data-value=details.type +'_' + id) > string('report')
+                            .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section

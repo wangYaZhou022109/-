@@ -2,6 +2,7 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     positionList: true,
+    currentPosition: true,
     currentPId: true,
     studyList: true,
     download: false
@@ -20,6 +21,9 @@ exports.handlers = {
             var obj = m;
             if (obj.id === positionId) {
                 obj.current = true;
+                me.bindings.currentPosition.set(obj);
+                me.module.get(me.bindings.currentPosition);
+                me.bindings.currentPosition.changed();
             } else {
                 obj.current = false;
             }
@@ -64,6 +68,13 @@ exports.dataForTemplate = {
             return obj;
         });
         return studyList;
+    },
+    currentPosition: function(data) {
+        _.map(data.currentPosition.studyConfigs || [], function(innerObj, i) {
+            var obj = innerObj;
+            obj.i = i + 1;
+        });
+        return data.currentPosition;
     }
 };
 

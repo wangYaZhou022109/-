@@ -123,6 +123,11 @@ exports.title = '选择话题';
 exports.buttons = [{
     text: '选择',
     fn: function() {
+        var data = this.items.contents.module.store.models.state.data;
+        if (typeof data === 'undefined' || data.length <= 0) {
+            this.app.message.success('请选择您要变更的擅长话题！');
+            return false;
+        }
         return this.dispatch('submit');
     }
 }];

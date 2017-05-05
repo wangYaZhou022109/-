@@ -11,7 +11,8 @@ exports.routes = {
     'center/notloggin': 'showNotloggin',
     'center/managements/statistics': 'showStatistics',
     'center/managements/taskmarking': 'showTaskmarking',
-    'search-page': 'showSearchPage'
+    'search-page': 'showSearchPage',
+    'home/home-advertisement/:id': 'showDetail'
 
 };
 
@@ -89,4 +90,7 @@ exports.showTaskmarking = function() {
 };
 exports.showSearchPage = function() {
     return this.app.show('content', 'search-page');
+};
+exports.showDetail = function(id) {
+    return this.app.show('content', 'home/advertisement', { id: id });
 };

@@ -3,7 +3,8 @@ var _ = require('lodash/collection');
 exports.bindings = {
     trainees: true,
     state: false,
-    auditTrainee: false
+    auditTrainee: false,
+    detail: false
 };
 
 exports.components = [{
@@ -14,7 +15,8 @@ exports.events = {
     'click checkAll': 'checkAll',
     'click check-item*': 'checkItem',
     'click audit*': 'audit',
-    'click allAudit': 'auditAll'
+    'click allAudit': 'auditAll',
+    'click detail*': 'detail'
 };
 
 exports.actions = {
@@ -48,6 +50,14 @@ exports.handlers = {
         } else {
             this.app.message.alert('请至少选择一位学员！');
         }
+    },
+    detail: function(data) {
+        var id = data,
+            trainees = this.bindings.trainees.data,
+            view = this.module.items.detail;
+        this.bindings.detail.data = _.find(trainees, ['id', id]);
+        this.bindings.detail.changed();
+        this.app.viewport.modal(view);
     }
 };
 

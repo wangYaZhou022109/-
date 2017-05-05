@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'exams' }
+    id: 'pager', name: 'pager', options: { model: 'exams' }
 }];
 
 exports.dataForTemplate = {
@@ -38,7 +38,8 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click edit-exams*': 'edit'
+    'click edit-exams*': 'edit',
+    'click mark-paper-*': 'markPaper'
 };
 
 exports.handlers = {
@@ -46,5 +47,11 @@ exports.handlers = {
         var id = data,
             url = '#/exam/exam/score-detail/' + id;
         window.open(url, '_blank');
+    },
+    markPaper: function(id) {
+        var mod = this.module.items['train/statistics/questionnaire/exam/mark-paper'];
+        this.app.viewport.ground(mod, {
+            examRecordId: id
+        });
     }
 };

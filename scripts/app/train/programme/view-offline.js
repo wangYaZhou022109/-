@@ -6,7 +6,8 @@ exports.bindings = {
     state: false,
     offlineCourse: false,
     offlineThemeList: true,
-    export: false
+    export: false,
+    files: false
 };
 
 exports.events = {
@@ -28,12 +29,16 @@ exports.events = {
 
 exports.handlers = {
     addOfflineCourse: function() {
+        var model = this.module.items['edit-offline'],
+            files = this.bindings.files,
+            offlineCourse = this.bindings.offlineCourse;
         this.bindings.state.data.type = 'add';
-        this.bindings.offlineCourse.clear();
-        this.app.viewport.modal(this.module.items.editOffline);
+        offlineCourse.clear();
+        files.clear();
+        this.app.viewport.modal(model);
     },
     showOfflineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOffline);
+        this.app.viewport.modal(this.module.items['config-offline']);
     },
     changeOfflineName: function(id) {
         $(this.$('input-name-offline-' + id)).css('display', 'block');
@@ -142,7 +147,7 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     editOfflineCourse: function() {
-        this.app.viewport.modal(this.module.items.editOffline);
+        this.app.viewport.modal(this.module.items['edit-offline']);
     },
     showCourseware: function() {
         this.app.viewport.modal(this.module.items.courseware);

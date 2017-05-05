@@ -23,9 +23,25 @@ exports.actions = {
     'click group-trainee-delete*': 'deleteTraineeGroup'
 };
 
+exports.dataForActions = {
+    deleteTraineeGroup: function(payload) {
+        var groupTrainees = this.bindings.groupTrainees.data;
+        groupTrainees = _.filter(groupTrainees, function(t) {
+            return t.id !== payload.id;
+        });
+        this.bindings.groupTrainees.data = groupTrainees;
+        this.bindings.groupTrainees.changed();
+        return payload;
+    }
+};
+
 exports.actionCallbacks = {
-    deleteTraineeGroup: function() {
-        this.module.dispatch('groupTrainees');
+    deleteTraineeGroup: function(data) {
+        if (data[0]) {
+            this.app.message.success('移除成功！');
+        } else {
+            this.app.message.error('移除失败！');
+        }
     }
 };
 

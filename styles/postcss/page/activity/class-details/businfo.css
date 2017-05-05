@@ -1,0 +1,23 @@
+.businfo-page {
+    & .businfo {
+        & .bg-businfo {
+            background: var(--border-color);
+            padding: var(--space);
+            &:hover {
+                background: var(--font-tip-color);
+                & .sub-text {
+                    color: var(--border-color);
+                }
+            }
+        }
+        & .businfo-main {
+            width: 80%;
+        }
+        & .hide {
+            display: none;
+        }
+        & .show {
+            display: block;
+        }
+    }
+}

@@ -44,20 +44,24 @@ exports.store = {
                 }
             }
         },
-        question: { url: '../ask-bar/question/insert-question' }
+        question: { url: '../ask-bar/question/insert-question' },
+        selecttitle: {
+            url: '../ask-bar/question/selecttitle',
+            mixin: {
+                getData: function(title) {
+                    var selecttitle = [];
+                    _.forEach(this.data, function(d) {
+                        if (d.title.indexOf(title) !== -1) {
+                            selecttitle.push(d);
+                        }
+                    });
+                    return selecttitle;
+                }
+            }
+        }
     },
     callbacks: {
         addFile: function(payload) {
-            // var me = this,
-            //     attachments = me.models.task.data.attachments || [];
-            // _.forEach(payload || [], function(data, i) {
-            //     var obj = data,
-            //         index = i + 1;
-            //     obj.idx = attachments.length + index;
-            //     attachments.push(obj);
-            // });
-            // me.models.task.data.attachments = attachments;
-            // me.models.task.changed();
             var me = this,
                 attachments = payload;
             me.models.task.data.attachments = attachments;
@@ -81,7 +85,6 @@ exports.store = {
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
             if (task.attachments) {
-                // console.log(task);
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
                 data.enclosureType = 1;
@@ -95,16 +98,30 @@ exports.store = {
             question.set(data);
             this.post(question).then(function() {
                 me.app.message.success('操作成功');
-                setTimeout(function() {
-                    me.app.show('content', 'ask/content');
-                }, 2000);
             });
+        },
+        selecttitle: function() {
+            var selecttitle = this.models.selecttitle;
+            selecttitle.set({
+                id: 'null',
+                size: 10000,
+                type: 1
+            });
+            this.post(selecttitle);
+        },
+        selectquestion: function() {
+            // var data = payload;
+            //     data.id = 1;
+            // var selecttitle = this.models.selecttitle.getData(payload);
+            // console.log(selecttitle);
         }
+
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    this.dispatch('selecttitle');
+    this.dispatch('init');
 };
 
 exports.title = '我要提问';
@@ -112,6 +129,8 @@ exports.title = '我要提问';
 exports.buttons = [{
     text: '发布',
     fn: function(payload) {
+        var title = payload.title;
+        var topicIds = payload.topicIds;
         var stepView = this.items.edit;
         var obj = stepView.getData();
         var content = obj.html();
@@ -119,15 +138,28 @@ exports.buttons = [{
             begin,
             end,
             data = payload;
-        data.jsonImg = 'null';
-        if (content.indexOf('<img') !== -1) {
-            begin = content.indexOf('<img');
-            end = content.indexOf('/>');
-            img = $(content.substring(begin, end + 2));
-            data.jsonImg = img[0].src;
+        title = title.replace(/(^\s*)|(\s*$)/g, '');
+        if (typeof title === 'undefined' || title === '') {
+            this.app.message.success('请填写问题标题！');
+            return false;
         }
-        data.content = content;
-        data.content_txt = obj.text();
+        if (typeof topicIds === 'undefined' || topicIds === '') {
+            data.topicIds = 'null';
+        }
+        data.jsonImg = 'null';
+        if (typeof content === 'undefined' || content === '') {
+            data.content = 'null';
+            data.content_txt = 'null';
+        } else {
+            if (content.indexOf('<img') !== -1) {
+                begin = content.indexOf('<img');
+                end = content.indexOf('/>');
+                img = $(content.substring(begin, end + 2));
+                data.jsonImg = img[0].src;
+            }
+            data.content = content;
+            data.content_txt = obj.text();
+        }
         return this.dispatch('release', data);
     }
 }];

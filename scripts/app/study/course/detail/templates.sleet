@@ -33,7 +33,7 @@ view('chapter')
             each(course.courseChapters)
                 li
                     compare(../course.addType 'eq' 2)
-                        .common-title > echo(seq ': ' name)
+                        .common-title > echo(name)
                     each(courseChapterSections)
                         dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType data-chapter-learnSequence = ./learnSequence)
                             dt
@@ -65,6 +65,8 @@ view('info')
                     i#cancel-collect.iconfont.icon-favorite-full.custom-color-1(data-name='id' data-value=collect.id title='取消收藏')
                 else
                     i#collect.iconfont.icon-favorite(title='收藏')
+    p.course-info-detail > each(topics)
+        .tag-btn > echo(name)
 
     .sub-title-row.mt-1.m-bottom
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)

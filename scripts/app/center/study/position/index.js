@@ -8,8 +8,9 @@ exports.store = {
     models: {
         positionList: { url: '../human/position/my' },
         currentPId: { data: { value: '' } }, // 当前职位id
+        currentPosition: { url: '../human/position' },
         studyList: { url: '../course-study/study-push/position-push' },
-        download: { url: '../human/file/preview' }
+        download: { url: '../human/file/preview' },
     },
     callbacks: {
         init: function() {
@@ -19,6 +20,9 @@ exports.store = {
             return me.get(positionList).then(function(data) {
                 var list = data[0];
                 if (list && list.length > 0) {
+                    me.models.currentPosition.set(list[0]);
+                    me.get(me.models.currentPosition);
+                    me.models.currentPosition.changed();
                     D.assign(studyList.params, {
                         positionId: list[0].id,
                         jobId: list[0].jobId

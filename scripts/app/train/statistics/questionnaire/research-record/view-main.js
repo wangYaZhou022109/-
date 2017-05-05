@@ -8,7 +8,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'researchQuestionarys' }
+    id: 'pager', name: 'pager', options: { model: 'researchQuestionarys' }
 }];
 
 exports.dataForTemplate = {
@@ -53,8 +53,7 @@ exports.handlers = {
             me = this;
         this.app.viewport.ground(mod, {
             researchQuestionaryId: me.bindings.researchQuestionary.data.id,
-            callback: function() {
-            }
+            businessId: me.bindings.researchQuestionary.data.classId
         });
     }
 };

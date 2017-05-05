@@ -134,7 +134,7 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     showOnlineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOnline);
+        this.app.viewport.modal(this.module.items['config-online']);
     },
     toEdit: function() {
         var isAdd = this.bindings.research.data.isAdd,
@@ -156,7 +156,7 @@ exports.actionCallbacks = {
         }
 
         if (isAdd === 0) {
-            result = this.app.viewport.modal(this.module.items.editQnrTime);
+            result = this.app.viewport.modal(this.module.items['edit-qnrtime']);
         }
         return result;
     }

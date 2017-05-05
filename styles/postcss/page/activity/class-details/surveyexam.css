@@ -1,0 +1,21 @@
+.surveyexam-page {
+    & .surveyexam {
+        & .surveyexam-item {
+            padding: var(--space);
+            & .btn {
+                width: calc(var(--base-gap)*3);
+            }
+        }
+        & .surveyexam-title {
+            width: 10%;
+            text-align: center;
+        }
+        & .surveyexam-content {
+            width: 70%;
+            padding-left: var(--space);
+            & .survey-name {
+                width: 70%;
+            }
+        }
+    }
+}

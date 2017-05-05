@@ -120,6 +120,7 @@ require('./app/util/global').setup(app).then(function(data) {
     D.assign(app.global, { setting: setting });
     D.assign(app.global, { currentUser: currentUser });
     D.assign(app.global, { webConfig: webConfig });
+    D.assign(app.global, { organization: data.organization });
 }, function() {
     app.message.error('加载初始化数据出错');
     return app.Promise.reject();

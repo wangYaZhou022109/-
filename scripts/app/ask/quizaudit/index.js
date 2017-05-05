@@ -23,6 +23,7 @@ exports.store = {
         //     }
         // },
         out: { url: '../ask-bar/pending-audit/out' },
+        reviewed: { url: '../ask-bar/my-manage/reviewed' }
     },
     callbacks: {
         init: function(paylaod) {
@@ -53,10 +54,17 @@ exports.store = {
             this.models.out.set(payload);
             return this.put(this.models.out);
         },
+        // reviewed: function() {
+        //     var reviewed = this.models.reviewed;
+        //     reviewed.clear();
+        //     reviewed.params = { auditStatus: 1 };
+        //     return this.get(reviewed);
+        // }
     }
 };
 exports.afterRender = function() {
     this.dispatch('init', this.renderOptions);
+    // this.dispatch('reviewed');
 };
 
 exports.title = '提问审核';
@@ -64,17 +72,25 @@ exports.buttons = [{
     text: '拒绝',
     fn: function(data) {
         var params = data;
+        var me = this;
         params.auditStatus = 2;
         params.auditType = 1;
-        return this.dispatch('out', params);
+        this.dispatch('out', params).then(function() {
+            this.app.message.success('拒绝成功');
+            me.dispatch('init');
+        });
     }
 }, {
     text: '通过',
     fn: function(data) {
         var params = data;
+        var me = this;
         params.auditStatus = 1;
         params.auditType = 1;
-        return this.dispatch('pass', params);
+        this.dispatch('pass', params).then(function() {
+            this.app.message.success('完成审核！');
+            me.dispatch('init');
+        });
     }
 
 }];

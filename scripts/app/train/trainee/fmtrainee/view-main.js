@@ -4,7 +4,8 @@ var $ = require('jquery');
 exports.bindings = {
     fmtrainees: true,
     state: false,
-    download: false
+    download: false,
+    detail: false
 };
 
 exports.events = {
@@ -12,7 +13,8 @@ exports.events = {
     'change input-sort*': 'updateSort',
     'click addTrainee': 'addTrainee',
     'click addAllTrainee': 'showMembers',
-    'click importTrainee': 'importTrainee'
+    'click importTrainee': 'importTrainee',
+    'click detail*': 'detail'
 };
 
 exports.actions = {
@@ -111,6 +113,14 @@ exports.handlers = {
     importTrainee: function() {
         var importView = this.module.items.import;
         this.app.viewport.modal(importView);
+    },
+    detail: function(data) {
+        var id = data,
+            fmtrainees = this.bindings.fmtrainees.data,
+            view = this.module.items.detail;
+        this.bindings.detail.data = _.find(fmtrainees, ['id', id]);
+        this.bindings.detail.changed();
+        this.app.viewport.modal(view);
     }
 };
 

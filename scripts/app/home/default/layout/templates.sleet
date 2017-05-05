@@ -114,7 +114,8 @@ view('layout') > .container
                         .descoration.sub-text.textoverflow > @echo(dataSummary)
                         .sub-text.small-font
                             .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                            .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                            .icon-item > i.iconfont.icon-date(title='时间安排') + span
+                                monthDay(beginTime) + echo(' 至 ') + monthDay(endTime)
                     .home-tag > .tag > span > map('home-data-type' dataType)
 
             .base-list
@@ -127,7 +128,8 @@ view('layout') > .container
                                 .descoration.sub-text > @echo(dataSummary)
                                 .sub-text.small-font
                                     .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                                    .icon-item > i.iconfont.icon-date(title='时间安排') + span
+                                        monthDay(beginTime) + echo(' 至 ') + monthDay(endTime)
                             .home-tag > .tag > span > map('home-data-type' dataType)
                     inner(contents '3')
                         a.normal(href=dataUrl) > .item > .content
@@ -136,7 +138,8 @@ view('layout') > .container
                                 .descoration.sub-text > @echo(dataSummary)
                                 .sub-text.small-font
                                     .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                                    .icon-item > i.iconfont.icon-date(title='时间安排') + span
+                                        monthDay(beginTime) + echo(' 至 ') + monthDay(endTime)
                             .img >  img(src=imageUrl) + .home-tag > .tag > span > map('home-data-type' dataType)
 
                 .list-bar.big-height
@@ -148,7 +151,8 @@ view('layout') > .container
                                 .descoration.sub-text > @echo(dataSummary)
                                 .sub-text.small-font
                                     .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
-                                    .icon-item > i.iconfont.icon-date(title='浏览人次') + span 09-28 至 12-25
+                                    .icon-item > i.iconfont.icon-date(title='时间安排') + span
+                                        monthDay(beginTime) + echo(' 至 ') + monthDay(endTime)
                             .home-tag > .tag > span > map('home-data-type' dataType)
     compare(moduleHomeConfig.style 'eq' 'layout-4')
         .layout-4

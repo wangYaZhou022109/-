@@ -34,17 +34,19 @@ view('main')
             th > echo('单位')
             th > echo('部门')
             th > echo('职务')
+            th > echo('职级')
             th > echo('手机')
             th > echo('状态')
             th > echo('操作')
         tbody > each(trainees) > tr
             td > input(type='checkbox' id='check-item'+id name='traineeId' value=id)
             td > echo(i)
-            td > echo(member.fullName)
+            td > a(id='detail'+id data-name='id' data-value=id) > echo(member.fullName)
             td > echo(member.name)
             td > echo(companyName)
             td > echo(organizationName)
-            td > echo(member.positionName)
+            td > echo(member.jobName)
+            td > echo(levelName)
             td > echo(phoneNumber)
             td > map('trainee-show-auditStatus' auditStatus)
             td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId href='javascript:;') > echo('审核')
@@ -83,4 +85,41 @@ view('audit') > form.verify-page.verify
                 label.pull-left.layout-mr > echo('审核意见')
                 textarea(name='auditOpinion' x-rule='required' rows='3' placeholder='编辑审核意见')
 
-
+view('detail') > form.vertical
+    input.input(name='id' value=detail.id type='hidden')
+    .form-row
+        label 姓名
+        .content > input.input(value=detail.member.fullName disabled=true)
+    .form-row
+        label 公司
+        .content > input.input(value=detail.companyName disabled=true)
+    .form-row
+        label 二级部门/单位
+        .content > input.input(value=detail.organizationName disabled=true)
+    .form-row
+        label 职务
+        .content > input.input(value=detail.member.jobName disabled=true)
+    .form-row
+        label 职级
+        .content
+            select.input(name='levelId')
+                each(levels)
+                    option(value = id)('selected')&if(selected) > echo(value)
+    .form-row
+        label.required 性别
+        .content
+            select.input(name='sex')
+                each(sexs)
+                    option(value = key)('selected')&if(selected) > echo(value)
+    .form-row
+        label.required 民族
+        .content > input.input(value=detail.nationName disabled=true)
+    .form-row
+        label.required 移动电话
+        .content > input.input(name='phoneNumber' value=detail.phoneNumber disabled=true)
+    .form-row
+        label.required 邮箱
+        .content > input.input(name='email' value=detail.email disabled=true)
+    .form-row
+        label.auto 备注
+        .content > textarea.input(name='remark'  rows='3' disabled=true) > echo(detail.remark)

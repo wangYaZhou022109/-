@@ -1,7 +1,8 @@
 exports.items = {
     details: 'details',
     main: 'main',
-    search: 'search'
+    search: 'search',
+    'train/statistics/questionnaire/exam/mark-paper': { isModule: true }
 };
 
 exports.large = true;
@@ -9,11 +10,11 @@ exports.large = true;
 exports.store = {
     models: {
         exams: {
-            url: '../train/questionnaire-survey/exam-record',
+            url: '../exam/exam-record',
             type: 'pageable',
             root: 'items'
         },
-        exam: { url: '../train/questionnaire-survey/exam' },
+        exam: { url: '../exam/exam-record/exam' },
         download: { url: '../train/questionnaire-survey/exam-download' },
         state: { data: {} }
     },
@@ -23,11 +24,9 @@ exports.store = {
                 exam = this.models.exam,
                 state = this.models.state;
             exams.params = {};
-            exams.params.resourceId = payload.id;
-            exams.params.classId = payload.classId.classId;
-            exam.params.resourceId = payload.id;
-            exam.params.classId = payload.classId.classId;
-            state.data.resourceId = payload.id;
+            exams.params.examId = payload.resourceId;
+            exam.params.examId = payload.resourceId;
+            state.data.resourceId = payload.resourceId;
             state.data.classId = payload.classId.classId;
             exam.clear();
             this.get(exam);

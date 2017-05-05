@@ -26,7 +26,7 @@ exports.dataForTemplate = {
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.headPortrait = 'images/default-userpic.png';
             } else {
-                obj.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+                obj.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
             _.forEach(me.bindings.page.data, function(v) {
                 if (v.id === obj.id) {

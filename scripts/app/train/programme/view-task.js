@@ -16,7 +16,7 @@ exports.handlers = {
     addTask: function() {
         this.bindings.state.data.type = 'add';
         this.bindings.task.clear();
-        this.app.viewport.modal(this.module.items.editTask);
+        this.app.viewport.modal(this.module.items['edit-task']);
     },
     showMinimize: function(id) {
         $(this.$('minitable-' + id)).toggle();
@@ -55,7 +55,7 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     editTask: function() {
-        this.app.viewport.modal(this.module.items.editTask);
+        this.app.viewport.modal(this.module.items['edit-task']);
     },
 };
 

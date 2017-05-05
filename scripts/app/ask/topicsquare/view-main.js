@@ -1,4 +1,5 @@
 var D = require('drizzlejs');
+var _ = require('lodash/collection');
 var $ = require('jquery');
 exports.bindings = {
     state: true,
@@ -68,4 +69,19 @@ exports.actionCallbacks = {
         this.module.dispatch('init');
     }
 };
-
+exports.dataForTemplate = {
+    topicname: function(data) {
+        var topicname = data.topicname,
+            me = this;
+        _.forEach(topicname, function(value) {
+            var obj = value,
+                url = obj.attachmentId;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.attachmentId = 'images/default-cover/default_topic.jpg';
+            } else {
+                obj.attachmentId = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return topicname;
+    }
+};
