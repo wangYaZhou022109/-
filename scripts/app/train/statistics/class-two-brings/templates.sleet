@@ -15,8 +15,9 @@ view('search') > form.vertical
             label 姓名
             input.input(name='fullName')
         .filter-item.clearfix.vertical-top
-            label.tag-height.pull-left.m-right 所属单位
-            input.input.pull-left
+            label.tag-height.pull-left.m-right 归属部门
+            input.input.pull-left(value=org.name name='organizationName')
+            input(type='hidden' name='organizationId' value=org.id)
             a.btn.gray.small.pull-left#showOrganization 选择
         .filter-item.vertical-top
             label |
@@ -30,14 +31,14 @@ view('main')
         .m-top
             table.table
                 thead > tr
-                    th > echo('序号')
-                    th > echo('学员姓名')
-                    th > echo('员工编号')
-                    th > echo('单位')
-                    th > echo('提交时间')
+                    th(width=60) > echo('序号')
+                    th(width=100) > echo('学员姓名')
+                    th(width=100) > echo('员工编号')
+                    th(width=100) > echo('归属部门')
+                    th(width=100) > echo('提交时间')
                     th > echo('经验/案例主题')
                     th > echo('问题/困难主题')
-                    th > echo('操作')
+                    th(width=60) > echo('操作')
                 tbody > each(classTwoBrings) > tr
                     td > echo(i)
                     td > echo(member.fullName)
@@ -67,12 +68,12 @@ view('edit') > form.vertical
             span > dateTime(classTwoBring.createTime)
     .watchbring-content
         .watchbring-item.layout-mt-small.overflow
-            p 1.优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新
+            p > echo('1.' + classTwoBring.classSignupInfo.question1)
             .form.align-left > .form-row
                 span > echo('经典/案例主题：' + classTwoBring.title1)
             textarea.w-full.m-top(placeholder="输入问题内容" rows="5" value= classTwoBring.content1) > echo(classTwoBring.content1)
         .watchbring-item.layout-mt-small.overflow
-            p 2.棘手问题：您当前最关心的、当前工作中最棘手的一个问题
+            p > echo('2.' + classTwoBring.classSignupInfo.question2)
             .form.align-left > .form-row
                 span > echo('经典/案例主题：' + classTwoBring.title2)
             textarea.w-full.m-top(placeholder="输入问题内容" rows="5" value= classTwoBring.content2) > echo(classTwoBring.content1)

@@ -23,11 +23,11 @@ exports.actions = {
 exports.dataForActions = {
     search: function() {
         return {
-            resourceId: this.bindings.state.data.resourceId,
-            classId: this.bindings.state.data.classId,
+            researchQuestionaryId: this.bindings.state.data.resourceId,
+            businessId: this.bindings.state.data.classId,
             name: $(this.$$('[name="name"]')).val(),
             fullName: $(this.$$('[name="fullName"]')).val(),
-            startTime: $(this.$$('[name="startTime"]')).val()
+            startTimeStart: $(this.$$('[name="startTime"]')).val()
         };
     }
 };

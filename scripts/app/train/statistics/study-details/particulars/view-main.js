@@ -5,7 +5,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'particularss' }
+    id: 'pager', name: 'pager', options: { model: 'particularss' }
 }];
 
 exports.dataForTemplate = {

@@ -23,8 +23,7 @@ exports.handlers = {
         var view2 = me.module.items['train/statistics/questionnaire/research-record'];
         var view3 = me.module.items['train/statistics/questionnaire/research-answer-record'];
         var options = {};
-        options.id = data;
-        options.type = typeId;
+        options.resourceId = data;
         options.classId = this.bindings.state.data.classId;
         if (typeId === '1') {
             this.app.viewport.modal(view1, { payload: options });

@@ -10,8 +10,8 @@ view('details') > form.vertical
     .watchsurvey-title
         p > echo('调研名称：' + researchQuestionary.name)
         p
-            if(researchQuestionary.num)
-                echo('已参加人数：' + researchQuestionary.num)
+            if(researchQuestionary.joinNumber)
+                echo('已参加人数：' + researchQuestionary.joinNumber)
             else
                 echo('已参加人数：0')
 
@@ -40,7 +40,7 @@ view('main')
                 th > echo('序号')
                 th > echo('员工编号')
                 th > echo('姓名')
-                th > echo('所属部门')
+                th > echo('归属部门')
                 th > echo('开始时间')
                 th > echo('提交时间')
                 th > echo('操作')
@@ -48,7 +48,7 @@ view('main')
                 td > echo(i)
                 td > echo(member.name)
                 td > echo(member.fullName)
-                td > echo(organization.name)
+                td > echo(member.organization.name)
                 td > dateTime(startTime)
                 td > dateTime(submitTime)
                 td > a(id='edit_researchQuestionarys'+id data-name='id' data-value=id) > echo('详情')

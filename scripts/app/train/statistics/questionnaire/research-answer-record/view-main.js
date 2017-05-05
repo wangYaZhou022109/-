@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'researchQuestionarys' }
+    id: 'pager', name: 'pager', options: { model: 'researchQuestionarys' }
 }];
 
 exports.dataForTemplate = {
