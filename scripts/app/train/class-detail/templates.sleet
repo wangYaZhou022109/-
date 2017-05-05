@@ -1,135 +1,322 @@
 #!handlebars
 
 module > .class-details-page
-    .class-details-box#banner(data-region='banner')
-    .page-main-wrapper
-        .side
-            .page-side > .container
-                section.section(data-region='main')
-                section.section(data-region='fmtrainees')
-                section.section(data-region='class-information')
-                section.section(data-region='class-notice')
-                section.section(data-region='class-member')
-                section.section(data-region='ranking-list')
-        .main
-            .subject-detail-main.page-main > .container
-                section.section(data-region='curriculum-schedule')
-                section.section(data-region='online-resources')
-                section.section(data-region='pannel')
-                section.section(data-region='swipe')
-                section.section(data-region='discussion-area')
+    .class-details-box(data-region='banner')
+    .container
+        .page-main-wrapper.layout-mt-small
+            .side
+                .page-side > .container
+                    section.section.domain(data-region='main')
+                    section.section.class-info(data-region='class-information')
+                    section.section.class-notice(data-region='class-notice')
+                    section.section.class-clerk(data-region='class-member')
+                    section.section.charts(data-region='ranking-list')
+            .main
+                .class-details-page.page-main > .container
+                    section.section(data-region='curriculum-schedule')
+                    section.section(data-region='online-resources')
+                    section.section(data-region='pannel')
+                    section.section(data-region='swipe')
+                    section.section(data-region='discussion-area')
 
 view('banner')
-    .subject-banner.banner
-        ul > li > img(src=classDetail.bannerUrl)
+    .banner > img.w-full(src=classDetail.bannerUrl style='max-height:100%;')
         section.section.banner-info
             .title-row
                 .inline-block.layout-mr(style='color:#000000') > .h3 > echo(classInfo.className)
-
             .title-row > each(groups)
                 .inline-block.m-right.m-bottom.bg-white.sub-title > echo(shortName)
 
 view('main')
-    .btn#twoBring > echo('两个带来')
-    .btn#shuttleBusInformation > echo('班车信息统计')
-    .btn#commitTask > echo('作业提交')
-    .btn#addCourse1 > echo('学员满意度')
-    .btn#questionnaire > echo('调研与考试')
-    .btn#classMembers > echo('同学录')
+    .domain.clearfix.small-font
+        .domain01.pull-left.m-bottom.pointer#twoBring
+            i.iconfont.icon-favorite
+            br
+            | 两个带来
+        .domain02.pull-left.pointer#shuttleBusInformation
+            i.iconfont.icon-bus
+            br
+            | 班车信息统计
+        .domain03.pull-left.m-bottom.pointer#commitTask
+            i.iconfont.icon-exam
+            | 作业提交
+        .domain04.pull-left.pointer#addCourse1
+            i.iconfont.icon-smile
+            br
+            | 学员满意度
+        .domain05.pull-left.m-bottom
+            | 培训效果评估
+        .domain06.pull-left.m-bottom#classMembers
+            | 同学录
+        .domain07.pull-left.pointer#questionnaire
+            | 调研与考试
 
 view('class-information')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('班级信息')
-    .row
-        .col-sm-4
-            .inline-block > echo('班级名称：' + classInfo.className)
-    .row
-        .col-sm-4
-            .inline-block > echo('主办单位：' + classInfo.organization)
-    .row
-        .col-sm-4
-            .inline-block > echo('起止时间：') + date(classInfo.arriveDate) + echo('~') + date(classInfo.returnDate)
-    .row
-        .col-sm-4
-            .inline-block > echo('培训地点：' + classInfo.address)
-    .row
-        .col-sm-4
-            .inline-block > echo('教室：' + classInfo.classRoomName)
-    .row
-        .col-sm-4
-            .inline-block > echo('餐厅：' + classInfo.diningRoom)
+    .class-info
+        .h3.clearfix
+            span.strong 班级信息
+            i.iconfont.icon-zhishiku.pull-right
+        ul.m-top
+            li
+                .class-info-left > | 班级名称
+                .class-info-right > echo(classInfo.className)
+            li
+                .class-info-left > | 主办单位
+                .class-info-right > echo(classInfo.organization)
+            li
+                .class-info-left > | 起止时间
+                .class-info-right
+                    date(classInfo.arriveDate) > echo('~')
+                    br
+                    date(classInfo.returnDate)
+            li
+                .class-info-left > | 培训地点
+                .class-info-right > echo(classInfo.address)
+            li
+                .class-info-left > | 教室
+                .class-info-right > echo(classInfo.classRoomName)
+            li
+                .class-info-left > | 餐厅
+                .class-info-right > echo(classInfo.diningRoom)
+            li
+                .class-info-left > | 标签
+                .class-info-right
+                    .btn-white 团队管理
+                    .btn-white 管理
 
 view('class-notice')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('班级公告')
-    label > echo(classDetail.notice)
+    .class-notice
+        .h3.m-bottom.strong 班级公告
+        p.small-font > echo(classDetail.notice)
+
 view('class-member')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('班务人员')
-    each(staff)
-        .inline-block > echo(member.fullName + '   ' + callName + '   ' + member.phoneNumber)
+    .class-clerk
+        .h3.m-bottom.strong 班务人员
+        ul > each(staff)
+            li
+                .pull-left.class-clerk-img > img(src='images/1.png')
+                .pull-left.m-right > echo(member.fullName)
+                .pull-left.class-clerk-zhi > echo(callName)
+                .pull-right > i.iconfont.icon-phone + echo(member.phoneNumber)
+
 view('ranking-list')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('排行榜')
+    .charts
+        .h3.clearfix.m-bottom
+            a.pull-right.more > | more
+            span.strong 排行榜
+            small 学员时长排行榜
+        .clearfix.charts-list
+            .pull-left.charts-img > img(src='images/1.png')
+            .pull-left.charts-user
+                | 王英雄
+                br
+                | 互联网中心
+            .pull-left > | 120分钟
+            .pull-right.charts-nub > b.charts01 1
+        .clearfix.charts-list
+            .pull-left.charts-img > img(src='images/1.png')
+            .pull-left.charts-user
+                | 王英雄
+                br
+                | 互联网中心
+            .pull-left > | 120分钟
+            .pull-right.charts-nub > b.charts02 2
+        .clearfix.charts-list
+            .pull-left.charts-img > img(src='images/1.png')
+            .pull-left.charts-user
+                | 王英雄
+                br
+                | 互联网中心
+            .pull-left > | 120分钟
+            .pull-right.charts-nub > b.charts03 3
+        .clearfix.charts-list
+            .pull-left.charts-nub > b 4
+            .pull-left.m-left.strong > | 王英雄
+            .pull-left.m-left > | 互联网中心
+            .pull-right.strong > | 120分钟
+        .clearfix.charts-list
+            .pull-left.charts-nub > b 5
+            .pull-left.m-left.strong > | 王英雄
+            .pull-left.m-left > | 互联网中心
+            .pull-right.strong > | 120分钟
+        .clearfix.charts-list
+            .pull-left.charts-nub > b 6
+            .pull-left.m-left.strong > | 王英雄
+            .pull-left.m-left > | 互联网中心
+            .pull-right.strong > | 120分钟
+
 view('curriculum-schedule')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('课程表')
-    if(isShowTheme)
-        select#theme-list > each(offlineThemeList)
-            option(value=id)('selected')&if(checked) > echo(name)
-    if(isShowPrevious)
-        a#previous > echo('查看之前的课程')
-    each(content)
-        li
-            .catalog-state
-                .inline-block.layout-mr > .title-state > date(date)
-                .pull-right
-                    a.normal.layout-mr.sub-text
-            div > each(courses)
-                .catalog-state-info
-                    .item.block
-                        echo(startTime+'~'+endTime)
-                        .inline-block.title.text-overflow
-                            map('class-offline-type' type) + echo(':' + name) 
-                    .item.block
-                        .inline-block.title.text-overflow
-                            compare(type 'eq' 1)
-                                echo(classRoom.classroomName + '   ') 
-                            echo(teacherTitle + ':' + teacherName)
-                            .btn.radius(id='courseware-view-'+id) > string('download')
-                            compare(onlineCourseStatus 'eq' 1)
-                                a.btn.radius(href=courseUrl target='_blank') > string('view')
-    if(isShowMore)
-        a#next > echo('查看更多课程')
+    .schedule
+        .form.align-left > .form-row.m-bottom
+            label.h3 > echo('课程表')
+        if(isShowTheme)
+            .content
+                select.w-full#theme-list > each(offlineThemeList)
+                    option(value=id)('selected')&if(checked) > echo(name)
+        if(isShowPrevious)
+            a.btn.block.m-bottom#previous > echo('查看之前的课程')
+        .schedule-list.clearfix
+            .pull-left.data
+                .h3.m-bottom 25
+                .small-font 2017-02
+            .pull-right.clearfix.right-line
+                .pull-left.time
+                    i.spot
+                    | 08:30 - 10:00
+                .pull-right.right-info
+                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
+                    .clearfix
+                        .pull-right
+                            i.iconfont.icon-favorite.icon-down
+                            | 下载
+                            span.m-left.gray-line |
+                            i.iconfont.icon-view.m-left.icon-see
+                            | 查看
+                        a
+                            i.iconfont.icon-logout
+                            | 进入直播
+                        span.m-left.gray-line |
+                        i.iconfont.icon-user-1.m-left.sub-text
+                        span.sub-text 高级讲师：
+                        | 华凯华
+            .pull-right.clearfix.right-line
+                .pull-left.time
+                    i.spot
+                    | 08:30 - 10:00
+                .pull-right.right-info
+                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
+                    .clearfix
+                        .pull-right
+                            i.iconfont.icon-favorite.icon-down
+                            | 下载
+                            span.m-left.gray-line |
+                            i.iconfont.icon-view.m-left.icon-see
+                            | 查看
+                        a
+                            i.iconfont.icon-logout
+                            | 进入直播
+                        span.m-left.gray-line |
+                        i.iconfont.icon-user-1.m-left.sub-text
+                        span.sub-text 高级讲师：
+                        | 华凯华
+            .pull-right.clearfix.right-line
+                .pull-left.time
+                    i.spot
+                    | 08:30 - 10:00
+                .pull-right.right-info
+                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
+                    .clearfix
+                        .pull-right
+                            i.iconfont.icon-favorite.icon-down
+                            | 下载
+                            span.m-left.gray-line |
+                            i.iconfont.icon-view.m-left.icon-see
+                            | 查看
+                        span.sub-text
+                            i.iconfont.icon-favorite
+                            | 教室一
+                        span.m-left.gray-line |
+                        i.iconfont.icon-user-1.m-left.sub-text
+                        span.sub-text 高级讲师：
+                        | 华凯华
+        .schedule-list.clearfix
+            .pull-left.data
+                .h3.m-bottom 25
+                .small-font 2017-02
+            .pull-right.clearfix.right-line
+                .pull-left.time
+                    i.spot
+                    | 08:30 - 10:00
+                .pull-right.right-info
+                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
+                    .clearfix
+                        .pull-right
+                            i.iconfont.icon-favorite.icon-down
+                            | 下载
+                            span.m-left.gray-line |
+                            i.iconfont.icon-view.m-left.icon-see
+                            | 查看
+                        a
+                            i.iconfont.icon-logout
+                            | 进入直播
+                        span.m-left.gray-line |
+                        i.iconfont.icon-user-1.m-left.sub-text
+                        span.sub-text 高级讲师：
+                        | 华凯华
+            .pull-right.clearfix.right-line
+                .pull-left.time
+                    i.spot
+                    | 08:30 - 10:00
+                .pull-right.right-info
+                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
+                    .clearfix
+                        .pull-right
+                            i.iconfont.icon-favorite.icon-down
+                            | 下载
+                            span.m-left.gray-line |
+                            i.iconfont.icon-view.m-left.icon-see
+                            | 查看
+                        a
+                            i.iconfont.icon-logout
+                            | 进入直播
+                        span.m-left.gray-line |
+                        i.iconfont.icon-user-1.m-left.sub-text
+                        span.sub-text 高级讲师：
+                        | 华凯华
+            .pull-right.clearfix.right-line
+                .pull-left.time
+                    i.spot
+                    | 08:30 - 10:00
+                .pull-right.right-info
+                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
+                    .clearfix
+                        .pull-right
+                            i.iconfont.icon-favorite.icon-down
+                            | 下载
+                            span.m-left.gray-line |
+                            i.iconfont.icon-view.m-left.icon-see
+                            | 查看
+                        span.sub-text
+                            i.iconfont.icon-favorite
+                            | 教室一
+                        span.m-left.gray-line |
+                        i.iconfont.icon-user-1.m-left.sub-text
+                        span.sub-text 高级讲师：
+                        | 华凯华
+        if(isShowMore)
+            .btn.block.m-bottom#next > echo('查看更多课程')
 
 view('online-resources')
-    .row
-        .col-sm-4
-            .inline-block.com-title > echo('在线资源')
-    each(onlineCourseList)
-        .catalog-state-info
-            .item.block
-                echo('[在线课程]')
-                if(required)
-                    echo('[必修]')
-                else
-                    echo(themeName)
-                echo(resourceName)
-                .btn.radius(id='online-attach-'+resourceId) > string('download')
-                a.btn.radius(href=courseUrl target='_blank') > string('view')
+    .resources
+        .h3.m-bottom.layout-mt-small 在线资源
+        hr
+        ul.schedule-online > each(onlineCourseList)
+            li
+                .pull-right
+                    i.iconfont.icon-favorite.icon-down(id='online-attach-'+resourceId)
+                    | 下载
+                    span.m-left.gray-line |
+                    a.iconfont.icon-view.m-left.icon-see(href=courseUrl target='_blank')
+                    | 查看
+                .schedule-online-left.pull-left
+                    | [在线课程]
+                    if(required)
+                        span.sub-text.m-left > echo('[必修]')
+                    else
+                        span.sub-text.m-left > echo(themeName)
+                span.schedule-online-tit.m-left.pull-left > echo('面授：'+resourceName)
+
 view('pannel')
-    .h3 > echo('图库')
-    #album.swiper-container
-        .swiper-wrapper
-            each(photos)
-                .swiper-slide > img(id="showSwipe-"+attachmentId src=imageUrl alt=name)
-        .swiper-button-prev(id='turnPage-prev' title=string('left.page')) > .iconfont.icon-arrow-left
-        .swiper-button-next(id='turnPage-next' title=string('right.page')) > .iconfont.icon-arrow-right
+    .gallery
+        .h3.strong.layout-mb-small > echo('图库')
+        #album.swiper-container
+            .gallery-banner
+                each(photos)
+                    .gallery-item > a > img(id="showSwipe-"+attachmentId src=imageUrl alt=name)
+            .gallery-arrow-prev.gallery-arrow(id='turnPage-prev' title=string('left.page'))
+                .iconfont.icon-arrow-left
+            .gallery-arrow-next.gallery-arrow(id='turnPage-next' title=string('right.page'))
+                .iconfont.icon-arrow-right
 
 view('swipe')
     #classphotoSwipe
