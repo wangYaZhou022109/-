@@ -27,7 +27,7 @@ exports.dataForActions = {
             businessId: this.bindings.state.data.classId,
             name: $(this.$$('[name="name"]')).val(),
             fullName: $(this.$$('[name="fullName"]')).val(),
-            startTimeStart: $(this.$$('[name="startTime"]')).val()
+            startTimeStart: new Date($(this.$$('[name="startTime"]')).val()).getTime() || ''
         };
     }
 };

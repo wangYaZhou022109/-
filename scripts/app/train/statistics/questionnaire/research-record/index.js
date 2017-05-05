@@ -26,17 +26,18 @@ exports.store = {
             researchQuestionarys.params = {};
             researchQuestionarys.params.researchQuestionaryId = payload.resourceId;
             researchQuestionarys.params.businessId = payload.classId.classId;
+            researchQuestionary.clear();
             researchQuestionary.set({ id: payload.resourceId });
             researchQuestionary.params.businessId = payload.classId.classId;
             state.data.resourceId = payload.resourceId;
             state.data.classId = payload.classId.classId;
-            researchQuestionary.clear();
             this.get(researchQuestionary);
             return this.get(researchQuestionarys);
         },
         search: function(payload) {
             var researchQuestionarys = this.models.researchQuestionarys;
             researchQuestionarys.params = payload;
+            researchQuestionarys.clear();
             return this.get(researchQuestionarys);
         }
     }
