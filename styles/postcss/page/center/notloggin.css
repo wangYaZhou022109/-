@@ -73,7 +73,7 @@
 			transform: translateX(130%) translateY(-50%);
 		}
 	}
-	& .notloggin, .loggin {
+	& .notloggin, & .loggin {
 		&.show {
 			display: block;
 		}
