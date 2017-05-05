@@ -16,6 +16,8 @@ view('main')
                 li
                     .user-pic > img(src=avatarId)
                     .comment-content
+                        compare(essenceStatus 'eq' 1)
+                            img.boutique.pull-left(src="images/boutique.png")
                         .user-info
                             a(href='javascript:;') > echo(memberName)
                             span > echo(memberOrg.name)
