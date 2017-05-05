@@ -6,7 +6,8 @@ exports.bindings = {
     state: false,
     offlineCourse: false,
     offlineThemeList: true,
-    export: false
+    export: false,
+    files: false
 };
 
 exports.events = {
@@ -28,9 +29,12 @@ exports.events = {
 
 exports.handlers = {
     addOfflineCourse: function() {
-        var model = this.module.items['edit-offline'];
+        var model = this.module.items['edit-offline'],
+            files = this.bindings.files,
+            offlineCourse = this.bindings.offlineCourse;
         this.bindings.state.data.type = 'add';
-        this.bindings.offlineCourse.clear();
+        offlineCourse.clear();
+        files.clear();
         this.app.viewport.modal(model);
     },
     showOfflineTheme: function() {
