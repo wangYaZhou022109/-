@@ -25,7 +25,7 @@ view('main')
             tbody > each(progressList)
                 tr
                     td > echo(i)
-                    td.nowrap > .text-overflow > echo(courseName)
+                    td.nowrap > .text-overflow > echo(courseInfo.name)
                     td > map('course-register-type' type)
                     td > map('is-required' isRequired)
                     td
