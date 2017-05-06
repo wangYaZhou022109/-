@@ -200,6 +200,7 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
+
     this.dispatch('speech');
     this.dispatch('page');
 };
