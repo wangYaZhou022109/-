@@ -9,6 +9,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        img: { url: '../system/file/upload' },
         concern: { url: '../ask-bar/my-share/findconcern' },
         followcount: { data: { menu: 'followcount' } },
         relevantexperts: { data: { menu: 'relevantexperts' } },
@@ -25,7 +26,7 @@ exports.store = {
         boutique: {
             url: '../ask-bar/question-details/boutique'
         },
-        discuss: { url: '../ask-bar/question-discuss' },
+        discuss: { url: '../ask-bar/question-discuss/discuss' },
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} },
         follow: {
@@ -112,6 +113,7 @@ exports.store = {
                 speechset = this.models.speech.getData('2');
             data.speechset = speechset.status;
             discuss.set(data);
+            // console.log(payload);
             return this.save(discuss);
         },
         // discuss: function(payload) {
