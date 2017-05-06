@@ -3,19 +3,20 @@ exports.bindings = {
     selecttitle: true
 };
 exports.events = {
-    'click selectquestion': 'showSelectquestion',
-    // 'change selectquestion': 'hideSelectquestion',
+    // 'click selectquestion': 'showSelectquestion',
+    // 'focusout selectquestion': 'hideSelectquestion',
     'input selectquestion': 'showMaxlength'
 };
 
 exports.handlers = {
-    showSelectquestion: function() {
-        $(this.$('selectquestion')).parent().css('overflow', 'inherit');
-        // console.log(this.$('selectquestion'));
-       // $(this.$('selectquestion'))[0].foucs();
-    },
+    // showSelectquestion: function() {
+    //     $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
+    //     // console.log(this.$('selectquestion'));
+    //    // $(this.$('selectquestion'))[0].foucs();
+    // },
     // hideSelectquestion: function() {
-    //     $(this.$('selectquestion')).parent().css('overflow', 'hidden');
+    //     console.log(111);
+    //     $(this.$('selectquestion')).parent().parent().css('overflow', 'hidden');
     // },
     showMaxlength: function() {
         if ($(this.$('selectquestion')).val().trim().length > 0) {
@@ -27,12 +28,24 @@ exports.handlers = {
 };
 
 exports.actions = {
+    'click selectquestion': 'showSelectquestion',
     'keyup selectquestion': 'selectquestion'
 };
 
 exports.dataForActions = {
+    showSelectquestion: function() {
+        var title = $(this.$('selectquestion'))[0].value;
+        $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
+        return title;
+    },
     selectquestion: function() {
         var title = $(this.$('selectquestion'))[0].value;
+        var obj = this.bindings.selecttitle.getData(title);
+        if (obj.length <= 0) {
+            $(this.$('selectquestion')).parent().parent().css('overflow', 'hidden');
+        } else {
+            $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
+        }
         return title;
     }
 };
@@ -46,8 +59,5 @@ exports.dataForTemplate = {
             title = data.selecttitle[0].oldTitle;
         }
         return title;
-    },
-    selectdrop: function() {
-
     }
 };
