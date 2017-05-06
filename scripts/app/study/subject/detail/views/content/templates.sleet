@@ -29,11 +29,15 @@ view('pannel')
                                             .btn.small(class=btnColor) > echo(btnText)
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
-                                .inline-block.title.text-overflow(title=name) > echo(name)
+                                .inline-block.title.text-overflow
+                                    p.no-margin(title=name) > echo(name)
+                                    # p.no-margin
+                                    #     | 2017-04-05 至 2017-05-05
+                                    #     span.custom-color-3 待评卷
 
-view('exam-tips')
-    .text-center
-        label 点击下方"开始考试"将会立即进入考试，该考卷考试时长为60分钟
+# view('exam-tips')
+#     .text-center
+#         label 点击下方"开始考试"将会立即进入考试，该考卷考试时长为60分钟
 
 view('research-tips')
     .container
