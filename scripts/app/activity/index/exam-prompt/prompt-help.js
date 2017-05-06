@@ -111,7 +111,7 @@ canViewDetailImmd = function(exam) {
 };
 
 overExam = function(exam) {
-    return exam.examRecord && exam.examRecord.status >= 4;
+    return exam.examRecord && exam.examRecord.status > 4;
 };
 
 isInApplcantTimeRange = function(exam) {
@@ -132,5 +132,5 @@ isFirstTimeToExam = function(exam) {
 };
 
 overApplcantTime = function(exam) {
-    return new Date().getTime() > exam.applicantEndTime && !exam.signUp;
+    return new Date().getTime() > exam.applicantEndTime && !exam.signUp.id;
 };
