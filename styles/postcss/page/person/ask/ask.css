@@ -60,6 +60,14 @@
         &:hover {
             & .btn { @apply --fade-in}
         }
+        & h4 {
+            line-height: calc(var(--base-gap)/2);
+        }
+        & .btn {
+            margin-top: 0;
+            padding: 0 .4em;
+            line-height: calc(var(--large-space));
+        }
     }
     & li.expert-item {
         width: 50%;
