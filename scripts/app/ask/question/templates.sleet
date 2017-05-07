@@ -11,7 +11,6 @@ module > form.form.align-left
     div(data-region='topic')
 
 view('top')
-<<<<<<< HEAD
     .form-row
         label.required > string('question-title')
         .content
@@ -22,7 +21,6 @@ view('top')
                 .select-drop-item 问题一问题一问题一
                 .select-drop-item 问题一问题一问题一
                 .select-drop-item 问题一问题一问题一
-=======
     input.input#selectquestion(name='title'  value= title  x-rule='required')
     .tips 0/60
 
@@ -30,7 +28,6 @@ view('selectdrop')
     .select-drop.border.around#selectdrop
         each(titledata)
             .select-drop-item(id='select-srop-' + id data-name='id' data-value=id ) > echo(title)
->>>>>>> master
 
 view('topic')
     .form-row.textarea-row

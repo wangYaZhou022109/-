@@ -202,11 +202,7 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
-<<<<<<< HEAD
-
-=======
     this.dispatch('set', this.renderOptions.callback);
->>>>>>> master
     this.dispatch('speech');
     this.dispatch('page');
 };

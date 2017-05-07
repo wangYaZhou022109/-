@@ -3,18 +3,14 @@ exports.bindings = {
     selecttitle: true
 };
 exports.events = {
-<<<<<<< HEAD
     'click selectquestion': 'showSelectquestion',
     // 'change selectquestion': 'hideSelectquestion',
-=======
     // 'click selectquestion': 'showSelectquestion',
     // 'focusout selectquestion': 'hideSelectquestion',
->>>>>>> master
     'input selectquestion': 'showMaxlength'
 };
 
 exports.handlers = {
-<<<<<<< HEAD
     showSelectquestion: function() {
         $(this.$('selectquestion')).parent().css('overflow', 'inherit');
         // console.log(this.$('selectquestion'));
@@ -22,7 +18,6 @@ exports.handlers = {
     },
     // hideSelectquestion: function() {
     //     $(this.$('selectquestion')).parent().css('overflow', 'hidden');
-=======
     // showSelectquestion: function() {
     //     $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
     //     // console.log(this.$('selectquestion'));
@@ -31,7 +26,6 @@ exports.handlers = {
     // hideSelectquestion: function() {
     //     console.log(111);
     //     $(this.$('selectquestion')).parent().parent().css('overflow', 'hidden');
->>>>>>> master
     // },
     showMaxlength: function() {
         if ($(this.$('selectquestion')).val().trim().length > 0) {
@@ -43,18 +37,14 @@ exports.handlers = {
 };
 
 exports.actions = {
-<<<<<<< HEAD
-=======
     'click selectquestion': 'showSelectquestion',
->>>>>>> master
     'keyup selectquestion': 'selectquestion'
 };
 
 exports.dataForActions = {
-<<<<<<< HEAD
-    selectquestion: function() {
-        var title = $(this.$('selectquestion'))[0].value;
-=======
+    // selectquestion: function() {
+    //     var title = $(this.$('selectquestion'))[0].value;
+    // }
     showSelectquestion: function() {
         var title = $(this.$('selectquestion'))[0].value;
         $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
@@ -68,7 +58,6 @@ exports.dataForActions = {
         } else {
             $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
         }
->>>>>>> master
         return title;
     }
 };
@@ -82,11 +71,5 @@ exports.dataForTemplate = {
             title = data.selecttitle[0].oldTitle;
         }
         return title;
-<<<<<<< HEAD
-    },
-    selectdrop: function() {
-
-=======
->>>>>>> master
     }
 };
