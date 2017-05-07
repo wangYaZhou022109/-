@@ -5,7 +5,8 @@ exports.items = {
     topic: 'topic',
     upload: '',
     edit: 'edit',
-    details: 'details'
+    details: 'details',
+    selectdrop: 'selectdrop'
 };
 
 exports.store = {
@@ -50,9 +51,35 @@ exports.store = {
             mixin: {
                 getData: function(title) {
                     var selecttitle = [];
+<<<<<<< HEAD
                     _.forEach(this.data, function(d) {
                         if (d.title.indexOf(title) !== -1) {
                             selecttitle.push(d);
+=======
+                    if (typeof title !== 'string'
+                        || title === ''
+                        || title === null) {
+                        selecttitle = [];
+                    } else {
+                        _.forEach(this.data, function(d) {
+                            if (d.title.indexOf(title) !== -1) {
+                                selecttitle.push(d);
+                            }
+                        });
+                    }
+                    return selecttitle;
+                }
+            }
+        },
+        titledata: {
+            data: [],
+            mixin: {
+                getData: function(id) {
+                    var selecttitle = '';
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            selecttitle = d.title;
+>>>>>>> master
                         }
                     });
                     return selecttitle;
@@ -64,7 +91,7 @@ exports.store = {
         addFile: function(payload) {
             var me = this,
                 attachments = payload;
-            me.models.task.data.attachments = attachments;
+            me.models.task.data = attachments[0];
             me.models.task.changed();
         },
         init: function() {
@@ -109,11 +136,28 @@ exports.store = {
             });
             this.post(selecttitle);
         },
+<<<<<<< HEAD
         selectquestion: function() {
             // var data = payload;
             //     data.id = 1;
             // var selecttitle = this.models.selecttitle.getData(payload);
             // console.log(selecttitle);
+=======
+        selectquestion: function(payload) {
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(payload);
+            titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
+        },
+        showSelectquestion: function(payload) {
+            var title = payload;
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(title);
+            this.models.titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
+>>>>>>> master
         }
 
     }

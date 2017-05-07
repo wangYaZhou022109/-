@@ -78,7 +78,8 @@ exports.store = {
                     });
                     return data;
                 }
-            }
+            },
+            callback: {}
         },
         speech: {
             url: '../system/speech-set',
@@ -96,12 +97,12 @@ exports.store = {
         }
     },
     callbacks: {
-        // refresh: function() {
-        //     // this.models.middlestate.changed();
-        //    // var callback = this.module.middlestate;
-        //     //payload.changed();
-        //    // console.log(payload);
-        // },
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
@@ -192,6 +193,7 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    // console.log(this.renderOptions);
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
@@ -200,7 +202,11 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
+<<<<<<< HEAD
 
+=======
+    this.dispatch('set', this.renderOptions.callback);
+>>>>>>> master
     this.dispatch('speech');
     this.dispatch('page');
 };

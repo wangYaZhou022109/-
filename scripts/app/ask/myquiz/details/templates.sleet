@@ -41,14 +41,15 @@ view('main')
                                 #  .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
                     .item > span(id ='report-' + 1 + '_' + details.id+'_' + details.createMemberId data-name='id' data-value=1 +'_' + details.id+'_' + details.createMemberId) > string('report')
                 .pull-left
-                    span.pull-left 附件：
-                    i.iconfont.icon-image.pull-left.m-right
-                    a.normal(href="javascript") > each(details.questionAttachList) > echo(' '+ name)
+                    if(haveAttachments)
+                        span.pull-left 附件：
+                        i.iconfont.icon-image.pull-left.m-right
+                        a.normal(href="javascript") > each(details.questionAttachList) > echo(' '+ name)
     section.section
         form.vertical
             .h3 讨论区
             .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
-            textarea.input.w-full(name='t_content' rows='5')
+            textarea.input.w-full#content(name='t_content')
             input.input(type='hidden' name='organizationId' value=details.organizationId)
             input.input(type='hidden' name='id' value=details.id)
             .m-top.text-right > .btn#discuss 发表

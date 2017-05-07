@@ -51,11 +51,11 @@ exports.store = {
             this.models.search.changed();
             return this.get(this.models.subjects);
         },
-        register: function(paylaod) {
+        register: function(payload) {
             var register = this.models.register,
                 me = this;
             register.set({
-                courseId: paylaod.id
+                courseId: payload.id
             });
             return me.post(register);
         }

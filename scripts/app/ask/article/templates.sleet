@@ -1,22 +1,23 @@
 #!handlebars
 
 module > form.form.align-left
-    div(data-region='top')
+    .form-row
+        label.required > string('question-title')
+        .content
+            div(data-region='top')
+            div(data-region='selectdrop')
     div(data-region='edit')
     div(data-region='details')
     div(data-region='topic')
 
 view('top')
-    .form-row
-        label.required > string('article-title')
-        .content
-            input.input#selectquestion(name='title'  value=''  x-rule='required')
-            .tips 0/60
-            .select-drop.border.around
-                .select-drop-item 问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
+    input.input#selectquestion(name='title'  value= title  x-rule='required')
+    .tips 0/60
+
+view('selectdrop')
+    .select-drop.border.around#selectdrop
+        each(titledata)
+            .select-drop-item(id='select-srop-' + id data-name='id' data-value=id ) > echo(title)
 
 view('topic')
     .form-row.textarea-row
@@ -25,8 +26,13 @@ view('topic')
 
 view('details')
     .form-row
-        .content > a > i.iconfont.icon-link#uploadFile + span(id='attachments')
-            string('upload-attachments')
+        .content 
+            a(href="javascript:;") > i.iconfont.icon-link#uploadFile
+            span
+                compare(task.name.length 'gt' 0)
+                    echo(task.name)
+                else
+                    string('upload-attachments')
 
 view('edit')
     .form-row.textarea-row

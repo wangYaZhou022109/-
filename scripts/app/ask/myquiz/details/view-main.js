@@ -3,6 +3,7 @@ var _ = require('lodash/collection');
 // exports.type = 'dynamic';
 
 exports.bindings = {
+    img: true,
     state: false,
     details: true,
     down: false
@@ -39,14 +40,14 @@ exports.handlers = {
     shareTo: function(data) {
         var value = data.split('_');
         // var subject = this.bindings.page.findById(value[1]);
-        var subject = this.bindings.details.id;
+        var subject = this.bindings.details;
         var templateContent = '',
             templateCode = value[0],
             webUrl = window.location.protocol + '//' + window.location.host, // 域名加端口
             id = subject.id, // 分享对象id
             type = subject.shareType, // 分享类型
             pics = subject.thumbnail || 'images/default-cover/default_spceial.jpg', // 图片，多图传数组 ['','']
-            title = subject.title, // 分享内容的标题
+            title = subject.data.title, // 分享内容的标题
             typeName = '',
             fullUrl = '',
             pic = '';// 图片地址
@@ -130,6 +131,8 @@ exports.dataForActions = {
     },
     discuss: function(payload) {
         var data = payload;
+        data.t_content = this.components.content.html();
+        data.txt = this.components.content.text();
         return data;
     },
     discussdel: function(payload) {
@@ -212,5 +215,16 @@ exports.dataForTemplate = {
         obj.details.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
         + '   ' + date.getHours() + ':' + date.getMinutes();
         return obj.details;
+    },
+    noAttachments: function(data) {
+        return data.details.questionAttachList && data.details.questionAttachList.length > 0;
     }
 };
+
+exports.components = [{
+    id: 'content',
+    name: 'rich-text',
+    options: {
+        model: 'img'
+    }
+}];
