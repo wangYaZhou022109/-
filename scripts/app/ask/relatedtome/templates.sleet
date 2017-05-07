@@ -5,8 +5,10 @@ module
 view('list')
     each(page)
         li
-            .user-pic > img(src=createUser.headPortrait)
+            .user-pic > img.pointer(src=createUser.headPortrait)
             .comment-content
+                compare(question.essenceStatus 'eq' 1)
+                    img.boutique.pull-left(src="images/boutique.png")
                 .h4
                     compare(trendsType 'eq' '1')
                         a(href='#/ask/questiondetails/'+ questionId ) > echo(title)

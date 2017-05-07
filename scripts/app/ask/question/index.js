@@ -124,6 +124,8 @@ exports.store = {
                     message = '等待审核';
                 }
                 me.app.message.success(message);
+                me.module.dispatch('leftrefresh');
+                me.module.dispatch('bottomsrefresh');
             });
         },
         selecttitle: function() {
@@ -154,6 +156,8 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
     this.dispatch('selecttitle');
     this.dispatch('init');
 };

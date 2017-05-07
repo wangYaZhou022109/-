@@ -236,7 +236,6 @@ exports.dataForTemplate = {
                 page.push(obj);
             }
         });
-        console.log(page);
         return page;
     }
 };

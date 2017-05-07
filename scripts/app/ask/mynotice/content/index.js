@@ -113,13 +113,6 @@ exports.store = {
         }
     },
     callbacks: {
-        // refresh: function(payload) {
-        //     var data = payload.data;
-        //     var followData = this.models.page.followData(data.concernId, data.concernType);
-        //     this.models.page.clear();
-        //     this.models.page.data = [];
-        //     this.models.page.changed();
-        // },
         praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
@@ -128,9 +121,11 @@ exports.store = {
                 var obj = data[0];
                 var page = me.models.page;
                 var pageData = me.models.page.praise(obj.objectId, obj.objectType);
-                me.app.message.success('点赞成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    me.app.message.success('点赞成功');
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         unpraise: function(payload) {
@@ -141,9 +136,12 @@ exports.store = {
                 var obj = data[0];
                 var page = me.models.page;
                 var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
-                me.app.message.success('取消成功');
-                page.data = pageData;
-                page.changed();
+                me.module.dispatch('leftrefresh');
+                setTimeout(function() {
+                    me.app.message.success('取消成功');
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         init: function() {
@@ -177,13 +175,12 @@ exports.store = {
             return this.put(follow).then(function(data) {
                 var obj = data[0];
                 var page = me.models.page;
-                var trends = me.models.content;
                 var pageData = me.models.page.followData(obj.concernId, obj.concernType);
                 me.app.message.success('取消成功');
-                // trends.data = pageData;
+                me.module.dispatch('leftrefresh');
+                me.module.dispatch('bottomsrefresh');
+                me.module.dispatch('refresh');
                 page.data = pageData;
-                console.log(pageData.length);
-                console.log(page);
                 page.changed();
             });
         },
@@ -220,6 +217,9 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
+    this.options.store.callbacks.refresh = this.renderOptions.refresh;
     $('.dialog-main').scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;

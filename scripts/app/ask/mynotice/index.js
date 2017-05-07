@@ -18,5 +18,8 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
+    this.options.store.callbacks.refresh = this.renderOptions.refresh;
     return this.dispatch('init', this.renderOptions.id);
 };

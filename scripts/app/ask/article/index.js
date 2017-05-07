@@ -117,12 +117,13 @@ exports.store = {
             data.id = '1';
             article.set(data);
             this.post(article).then(function() {
-                var message = '提问成功';
+                var message = '发布成功';
                 var speech = me.models.speech.getData('1');
                 if (speech.status === 1) {
                     message = '等待审核';
                 }
                 me.app.message.success(message);
+                me.module.dispatch('leftrefresh');
             });
         },
         selecttitle: function() {
@@ -153,6 +154,7 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
     this.dispatch('selecttitle');
     this.dispatch('init');
 };
