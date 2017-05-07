@@ -1,14 +1,17 @@
-var strings = require('./app/util/strings');
+var options = require('./app/exam/exam/base-paper/view-head'),
+    strings = require('./app/util/strings'),
+    D = require('drizzlejs'),
+    obj = D.assign({}, options),
+    actions = D.assign({}, obj.actions),
+    dataForActions = D.assign({}, obj.dataForActions);
 
-exports.bindings = {
-    state: true
-};
-
-exports.actions = {
+obj.actions = actions;
+D.assign(obj.actions, {
     'click submit': 'submitPaper'
-};
+});
 
-exports.dataForActions = {
+obj.dataForActions = dataForActions;
+D.assign(obj.dataForActions, {
     submitPaper: function() {
         var me = this;
         return this.Promise.create(function(resolve) {
@@ -25,4 +28,6 @@ exports.dataForActions = {
             });
         });
     }
-};
+});
+
+module.exports = obj;
