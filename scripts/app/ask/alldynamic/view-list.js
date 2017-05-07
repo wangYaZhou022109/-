@@ -1,4 +1,3 @@
-// var D = require('drizzlejs');
 var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
@@ -17,13 +16,6 @@ exports.events = {
 };
 
 exports.handlers = {
-    // refresh: function(id, e, target) {
-    //     console.log(11111111);
-    //     // var region;
-    //     // var el = $(target).parents('.comment-list')[0];
-    //     // region = new D.Region(this.app, this.module, el, id);
-    //     // region.show('ask/myquiz/details', { id: id });
-    // },
     sharesDetails: function(payload) {
         var data = { },
             id = payload;

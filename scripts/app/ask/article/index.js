@@ -117,10 +117,12 @@ exports.store = {
             data.id = '1';
             article.set(data);
             this.post(article).then(function() {
-                me.app.message.success('操作成功');
-                // setTimeout(function() {
-                //     me.app.show('content', 'ask/content');
-                // }, 2000);
+                var message = '提问成功';
+                var speech = me.models.speech.getData('1');
+                if (speech.status === 1) {
+                    message = '等待审核';
+                }
+                me.app.message.success(message);
             });
         },
         selecttitle: function() {
@@ -169,11 +171,27 @@ exports.buttons = [{
         var img,
             begin,
             end,
-            data = payload;
+            data = payload,
+            length = 0,
+            contentLength = 0;
         title = title.replace(/(^\s*)|(\s*$)/g, '');
         if (typeof title === 'undefined' || title === '') {
             this.app.message.success('请填写文章标题！');
             return false;
+        }
+        if (title.length > 0) {
+            length = title.replace(/[\u0391-\uFFE5]/g, 'aa').length;
+            if (length > 60) {
+                this.app.message.success('标题不能超过60字-发布失败！');
+                return false;
+            }
+        }
+        if (content.length > 0) {
+            contentLength = content.replace(/[\u0391-\uFFE5]/g, 'aa').length;
+            if (contentLength > 3000) {
+                this.app.message.success('详细描述不能超过3000字-发布失败！');
+                return false;
+            }
         }
         if (typeof topicIds === 'undefined' || topicIds === '') {
             data.topicIds = 'null';

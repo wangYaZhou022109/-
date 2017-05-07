@@ -96,6 +96,12 @@ exports.store = {
         }
     },
     callbacks: {
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
@@ -199,6 +205,7 @@ exports.afterRender = function() {
             me.dispatch('page', me.renderOptions);
         }
     });
+    this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
     return this.dispatch('page', this.renderOptions);
 };

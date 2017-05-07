@@ -4,8 +4,8 @@ module
         div(data-region='main')
 view('main') 
     .section.follow
-        .clearfixa > a(id = 'follow-me-')
-            dl
+        .clearfixa 
+            dl > a(id = 'follow-me-' href='javascript:;')
                 dt > echo(follow.concernNum)
                 dd > string('followers') 
             dl

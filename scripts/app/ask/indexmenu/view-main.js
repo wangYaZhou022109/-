@@ -2,7 +2,8 @@ var D = require('drizzlejs');
 var $ = require('jquery');
 
 exports.bindings = {
-    follow: true
+    follow: true,
+    topicmanage: true
 };
 
 exports.events = {

@@ -117,12 +117,28 @@ exports.actions = {
     'click trend-unfollow-*': 'unfollow',
     'click publish-*': 'publish',
     'click reply-*': 'reply',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
     'click del-question-*': 'delquestion',
     'click del-share-*': 'delshare',
     'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     delquestion: function(payload) {
         var data = payload;
         data.auditType = '1';
@@ -174,10 +190,10 @@ exports.actionCallbacks = {
         this.app.message.success('关注成功！');
         this.module.dispatch('init');
     },
-    unfollow: function() {
-        this.app.message.success('取消成功！');
-        this.module.dispatch('init');
-    },
+    // unfollow: function(data) {
+    //     this.app.message.success('取消成功！');
+    //     this.module.dispatch('refresh', { data: data[0] });
+    // },
     delquestion: function() {
         this.app.message.success('删除成功！');
         this.module.dispatch('init');
@@ -202,6 +218,7 @@ exports.dataForTemplate = {
             var obj = value,
                 date = new Date(obj.createTime);
             var url = obj.createUser.headPortrait;
+            obj.concernNum = date.concernNum + '';
             obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.createUser.headPortrait = 'images/default-userpic.png';
@@ -219,6 +236,7 @@ exports.dataForTemplate = {
                 page.push(obj);
             }
         });
+        console.log(page);
         return page;
     }
 };
