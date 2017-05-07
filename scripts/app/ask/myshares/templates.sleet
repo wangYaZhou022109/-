@@ -22,7 +22,7 @@ view('list')
                         #  > echo(problem.content)
                         .user-info
                             a(href='javascript:;') > echo('我')
-                            span > echo('·分享的文章·')
+                            span > echo('·发表文章·')
                             span.sub-text > echo(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
@@ -43,7 +43,7 @@ view('list')
                             #  > echo(problem.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
-                                span > echo('·分享的文章·')
+                                span > echo('·发表文章·')
                                 span.sub-text > echo(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
@@ -82,7 +82,7 @@ view('list')
                             #  > echo(problem.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
-                                span > echo('·分享的文章·')
+                                span > echo('·发表文章·')
                                 span.sub-text > echo(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
@@ -91,10 +91,14 @@ view('list')
                                         .item(id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
                                     else
                                         .item(id='trend-follow-3_'  + id data-name='id' data-value='3_' + id) > echo('+') + string('follow')
+                                    #  compare(praiseNum 'gt' 0)
+                                    #      .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                    #  else
+                                    #      .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                     compare(praiseNum 'gt' 0)
-                                        .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                        .item(id='unpraise-'+ id data-name='id' data-value= id ) > string('unpraise') +  echo('（'+ praiseNum +'）')
                                     else
-                                        .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                        .item(id='praise-'+ id data-name='id' data-value= id ) > string('praise') +  echo('（'+ praiseNum +'）') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                                 
                                     .item > .share-bar
@@ -120,7 +124,7 @@ view('list')
                             @echo(content)
                         .user-info
                             a(href='javascript:;') > echo('我')
-                            span > echo('·分享的文章·')
+                            span > echo('·发表文章·')
                             span.sub-text > echo(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')

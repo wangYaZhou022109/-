@@ -27,7 +27,7 @@ view('main')
         li.border.bottom
             .title-row
                 .img > .img-cont > img(src=imgUrl)
-                .inline-block.title > echo(courseName)
+                .inline-block.title > echo(courseInfo.name)
                 compare(isRequired 'eq' 1)
                     span.custom-color-1 > map('is-required' isRequired)
                 .time > echo(prefixText)
@@ -37,6 +37,6 @@ view('main')
                 else
                     echo('累计学习时长：' studyTotalTime '分钟')
             .btn-row
-                a.normal(href=btnUrl target='_blank')
+                a.normal(id='beginStudy-'+id)
                     .btn > echo(btnText)
     #pager.pagination

@@ -12,9 +12,11 @@ exports.getEntityModuleName = function(key) {
     return 'ask/' + url;
 };
 exports.getEntity = function() {
+    var me = this;
     return {
         me: this.bindings.state,
-        state: this.bindings.state.data
+        state: this.bindings.state.data,
+        callback: me.module.renderOptions.callback
     };
 };
 

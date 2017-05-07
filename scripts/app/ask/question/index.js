@@ -5,7 +5,8 @@ exports.items = {
     topic: 'topic',
     upload: '',
     edit: 'edit',
-    details: 'details'
+    details: 'details',
+    selectdrop: 'selectdrop'
 };
 
 exports.store = {
@@ -44,13 +45,47 @@ exports.store = {
                 }
             }
         },
-        question: { url: '../ask-bar/question/insert-question' }
+        question: { url: '../ask-bar/question/insert-question' },
+        selecttitle: {
+            url: '../ask-bar/question/selecttitle',
+            mixin: {
+                getData: function(title) {
+                    var selecttitle = [];
+                    if (typeof title !== 'string'
+                        || title === ''
+                        || title === null) {
+                        selecttitle = [];
+                    } else {
+                        _.forEach(this.data, function(d) {
+                            if (d.title.indexOf(title) !== -1) {
+                                selecttitle.push(d);
+                            }
+                        });
+                    }
+                    return selecttitle;
+                }
+            }
+        },
+        titledata: {
+            data: [],
+            mixin: {
+                getData: function(id) {
+                    var selecttitle = '';
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            selecttitle = d.title;
+                        }
+                    });
+                    return selecttitle;
+                }
+            }
+        }
     },
     callbacks: {
         addFile: function(payload) {
             var me = this,
                 attachments = payload;
-            me.models.task.data.attachments = attachments;
+            me.models.task.data = attachments[0];
             me.models.task.changed();
         },
         init: function() {
@@ -71,7 +106,6 @@ exports.store = {
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
             if (task.attachments) {
-                // console.log(task);
                 data.enclosureUrl = task.attachments[0].attachmentId;
                 data.enclosureName = task.attachments[0].name;
                 data.enclosureType = 1;
@@ -85,16 +119,38 @@ exports.store = {
             question.set(data);
             this.post(question).then(function() {
                 me.app.message.success('操作成功');
-                // setTimeout(function() {
-                //     me.app.show('content', 'ask/index');
-                // }, 2000);
             });
+        },
+        selecttitle: function() {
+            var selecttitle = this.models.selecttitle;
+            selecttitle.set({
+                id: 'null',
+                size: 10000,
+                type: 1
+            });
+            this.post(selecttitle);
+        },
+        selectquestion: function(payload) {
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(payload);
+            titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
+        },
+        showSelectquestion: function(payload) {
+            var title = payload;
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(title);
+            this.models.titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    this.dispatch('selecttitle');
+    this.dispatch('init');
 };
 
 exports.title = '我要提问';
