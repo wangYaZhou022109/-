@@ -25,3 +25,13 @@ exports.dataForTemplate = {
         return url;
     }
 };
+
+exports.actions = {
+    'click view-*': 'viewCertificate'
+};
+
+exports.actionCallbacks = {
+    viewCertificate: function() {
+        this.app.viewport.modal(this.module.items.preview, {});
+    }
+};
