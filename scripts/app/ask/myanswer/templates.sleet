@@ -20,15 +20,15 @@ view('list')
                             .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
                         else
                             compare(pendingAudit.auditStatus 'eq' 1) 
-                                .item > i.iconfont.icon-zan > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
-                                .item > i.iconfont.icon-message > string('comment') +  echo('（' + questionDiscuss.replyNum +'）')
+                                .item > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
+                                .item > string('comment') +  echo('（' + questionDiscuss.replyNum +'）')
                                 .item > .share-bar
                                     .drop-down-wrapper
                                         i.iconfont.icon-share-2(title='分享')
                                         form.drop-down-content > .content
                                             .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间1
                                             .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                .item > i.iconfont.icon-info > span(id ='trend-report-' + trendsType + '_' + questionDiscuss.id data-name='id' data-value=trendsType +'_' + questionDiscuss.id) > string('report')
+                                .item > span(id ='trend-report-' + trendsType + '_' + questionDiscuss.id data-name='id' data-value=trendsType +'_' + questionDiscuss.id) > string('report')
                                 compare(questionDiscuss.replyNum 'eq' 0)
                                     .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
                             else
@@ -36,8 +36,8 @@ view('list')
                                     .item > span.color-ing > string('auditStatus2')
                                     .item(id = 'remove-' + questionDiscuss.id data-name='id' data-value=questionDiscuss.id) > string('delete')
                                 else
-                                    .item > i.iconfont.icon-zan > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
-                                    .item(id='discuss-' + questionDiscuss.id ) > i.iconfont.icon-message > string('comment') + echo('（' + questionDiscuss.replyNum +'）')
+                                    .item > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
+                                    .item(id='discuss-' + questionDiscuss.id ) > string('comment') + echo('（' + questionDiscuss.replyNum +'）')
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             i.iconfont.icon-share-2(title='分享')

@@ -2,7 +2,8 @@ var D = require('drizzlejs');
 var $ = require('jquery');
 
 exports.bindings = {
-    follow: true
+    follow: true,
+    topicmanage: true
 };
 
 exports.events = {
@@ -19,7 +20,22 @@ exports.handlers = {
         region.show('ask/' + id);
     },
     follow: function(payload) {
-        $(window).unbind('scroll');
-        this.app.viewport.modal(this.module.items['ask/mynotice'], { id: payload });
+        var me = this;
+        // $(window).unbind('scroll');
+        // this.app.viewport.modal(this.module.items['ask/mynotice'], { id: payload });
+        this.app.viewport.modal(this.module.items['ask/mynotice'],
+            {
+                leftrefresh: function() {
+                    me.module.dispatch('leftrefresh');
+                },
+                bottomsrefresh: function() {
+                    me.module.dispatch('bottomsrefresh');
+                },
+                refresh: function() {
+                    me.module.dispatch('refresh');
+                },
+                id: payload
+            }
+        );
     }
 };

@@ -78,8 +78,7 @@ exports.store = {
                     });
                     return data;
                 }
-            },
-            callback: {}
+            }
         },
         speech: {
             url: '../system/speech-set',
@@ -112,8 +111,10 @@ exports.store = {
                 var page = me.models.page;
                 var pageData = me.models.page.praise(obj.objectId, obj.objectType);
                 me.app.message.success('点赞成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         unpraise: function(payload) {
@@ -125,8 +126,10 @@ exports.store = {
                 var page = me.models.page;
                 var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
                 me.app.message.success('取消成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         init: function() {
@@ -193,7 +196,6 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
-    // console.log(this.renderOptions);
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;

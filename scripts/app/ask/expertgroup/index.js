@@ -18,6 +18,15 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {
+        refresh: function() {
+            var expert = this.models.expertlist;
+            this.models.callback();
+            expert.set({ id: 'all' });
+            this.post(expert);
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         init: function() {
             var expert = this.models.expertlist;
             expert.set({ id: 'all' });
@@ -51,6 +60,7 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    this.dispatch('set', this.renderOptions.callback);
     this.dispatch('topicType', this.renderOptions);
     this.dispatch('init', this.renderOptions);
     this.dispatch('user');
