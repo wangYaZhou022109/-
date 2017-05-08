@@ -1,5 +1,6 @@
 exports.items = {
-    choosequestion: 'choosequestion'
+    choosequestion: 'choosequestion',
+    'center/managements/addevaluation/newevaluation/choosequestion/highedit': { isModule: true }
 };
 
 exports.title = '新增题目';

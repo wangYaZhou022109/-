@@ -37,3 +37,34 @@ view('choosequestion')
                 td > textarea.w-full
             tr
                 td(colspan="2") > a 添加选项
+
+    .layout-mt-small
+        ul.w-full.clearfix
+            li.choosequestion-item.w-half.pull-left#deletecot-1
+                .relative
+                    .text > span.strong 选项A：
+                    textarea.input.block(placeholder="输入描述" rows="3")
+                .set-row.clearfix
+                    .pull-left > input.input(placeholder="输入分数")
+                    .pull-right.text-tips.m-top 
+                        a#highedit-1 高级编辑
+                        a#delete-1 删除
+            li.choosequestion-item.w-half.pull-left#deletecot-2
+                .relative
+                    .text > span.strong 选项B：
+                    textarea.input.block(placeholder="输入描述" rows="3")
+                .set-row.clearfix
+                    .pull-left > input.input(placeholder="输入分数")
+                    .pull-right.text-tips.m-top 
+                        a#highedit-2 高级编辑
+                        a#delete-2 删除
+            li.choosequestion-item.w-half.pull-left#deletecot-3
+                .relative
+                    .text > span.strong 选项C：
+                    textarea.input.block(placeholder="输入描述" rows="3")
+                .set-row.clearfix
+                    .pull-left > input.input(placeholder="输入分数")
+                    .pull-right.text-tips.m-top 
+                        a#highedit-3 高级编辑
+                        a#delete-3 删除
+
