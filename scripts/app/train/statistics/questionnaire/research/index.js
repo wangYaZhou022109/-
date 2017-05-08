@@ -19,9 +19,9 @@ exports.store = {
             var researchQuestionarys = this.models.researchQuestionarys,
                 state = this.models.state;
             researchQuestionarys.params = {};
-            researchQuestionarys.params.resourceId = payload.resourceId;
+            researchQuestionarys.params.resourceId = payload.id;
             researchQuestionarys.params.classId = payload.classId.classId;
-            state.data.resourceId = payload.resourceId;
+            state.data.resourceId = payload.id;
             state.data.classId = payload.classId.classId;
             return this.get(researchQuestionarys);
         },
