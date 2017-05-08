@@ -1,36 +1,5 @@
 
-// exports.bindings = {
-//     classTwoBrings: true
-// };
-
-// exports.type = 'form';
-
-// // exports.actions = {
-// //     'click search': 'search'
-// // };
-
-// // exports.dataForActions = {
-// //     search: function(data) {
-// //         return data;
-// //     }
-// // };
 var $ = require('jquery');
-
-exports.components = [function() {
-    var operatorType = this.app.global.EDIT,
-        data = {};
-    return {
-        id: 'owner',
-        name: 'picker',
-        options: {
-            module: 'train/project',
-            picker: 'owner',
-            required: false,
-            params: { operatorType: operatorType },
-            data: data
-        }
-    };
-}];
 
 exports.bindings = {
     classTwoBrings: true,
@@ -64,8 +33,6 @@ exports.handlers = {
 exports.dataForActions = {
     search: function() {
         return {
-            page: 1,
-            pageSize: 100000,
             classId: this.bindings.state.data.classId,
             name: $(this.$$('[name="name"]')).val(),
             fullName: $(this.$$('[name="fullName"]')).val(),
