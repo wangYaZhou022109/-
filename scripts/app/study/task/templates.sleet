@@ -51,7 +51,7 @@ view('edit')
             input.input(name='name' value=attachment.name)
             a.btn#uploadFile 上传附件
         .row
-            label 附件描述:
+            label 作业详情:
             textarea.input.w-full#description(name='description' rows='5') > echo(attachment.description)
 view('upload')
     .row
