@@ -11,7 +11,8 @@ var prompts = {
         10: '您好，本次考试尚未到报名时间，请在报名时间{0}内报名，谢谢',
         12: '您好，本次考试已撤销',
         13: '您好,本次考试已结束',
-        14: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，成绩详情待考试活动结束后方可查看'
+        14: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，成绩详情待考试活动结束后方可查看',
+        15: '您好，本次考试已截止报名，如有疑问请联系系统管理员，谢谢'
     },
     P = require('./app/activity/index/exam-prompt/prompt-help'),
     getWithParams,
@@ -68,6 +69,11 @@ exports.actionCallbacks = {
 
 exports.handlers = {
     close: function() {
+        if (this.module.renderOptions.toActivityHome) {
+            this.app.navigate('activity/index', true);
+            this.app.viewport.closeModal();
+            return;
+        }
         this.app.viewport.closeModal();
     },
     toExam: function() {
@@ -120,7 +126,8 @@ getCurrentExam = function(exam) {
             10: [knewButton],
             12: [knewButton],
             13: [knewButton],
-            14: [examAgainButton, knewButton]
+            14: [examAgainButton, knewButton],
+            15: [knewButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 5) {
