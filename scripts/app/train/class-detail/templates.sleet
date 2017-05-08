@@ -147,143 +147,45 @@ view('ranking-list')
 view('curriculum-schedule')
     .schedule
         .form.align-left > .form-row.m-bottom
-            label.h3 > echo('课程表')
-        if(isShowTheme)
+            label.h3 课程表
             .content
-                select.w-full#theme-list > each(offlineThemeList)
-                    option(value=id)('selected')&if(checked) > echo(name)
+                if(isShowTheme)
+                    select.w-full#theme-list > each(offlineThemeList)
+                        option(value=id)('selected')&if(checked) > echo(name)
         if(isShowPrevious)
-            a.btn.block.m-bottom#previous > echo('查看之前的课程')
-        .schedule-list.clearfix
-            .pull-left.data
-                .h3.m-bottom 25
-                .small-font 2017-02
-            .pull-right.clearfix.right-line
-                .pull-left.time
-                    i.spot
-                    | 08:30 - 10:00
-                .pull-right.right-info
-                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
-                    .clearfix
-                        .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
-                            span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
-                            i.iconfont.icon-logout
-                            | 进入直播
-                        span.m-left.gray-line |
-                        i.iconfont.icon-user-1.m-left.sub-text
-                        span.sub-text 高级讲师：
-                        | 华凯华
-            .pull-right.clearfix.right-line
-                .pull-left.time
-                    i.spot
-                    | 08:30 - 10:00
-                .pull-right.right-info
-                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
-                    .clearfix
-                        .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
-                            span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
-                            i.iconfont.icon-logout
-                            | 进入直播
-                        span.m-left.gray-line |
-                        i.iconfont.icon-user-1.m-left.sub-text
-                        span.sub-text 高级讲师：
-                        | 华凯华
-            .pull-right.clearfix.right-line
-                .pull-left.time
-                    i.spot
-                    | 08:30 - 10:00
-                .pull-right.right-info
-                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
-                    .clearfix
-                        .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
-                            span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        span.sub-text
-                            i.iconfont.icon-favorite
-                            | 教室一
-                        span.m-left.gray-line |
-                        i.iconfont.icon-user-1.m-left.sub-text
-                        span.sub-text 高级讲师：
-                        | 华凯华
-        .schedule-list.clearfix
-            .pull-left.data
-                .h3.m-bottom 25
-                .small-font 2017-02
-            .pull-right.clearfix.right-line
-                .pull-left.time
-                    i.spot
-                    | 08:30 - 10:00
-                .pull-right.right-info
-                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
-                    .clearfix
-                        .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
-                            span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
-                            i.iconfont.icon-logout
-                            | 进入直播
-                        span.m-left.gray-line |
-                        i.iconfont.icon-user-1.m-left.sub-text
-                        span.sub-text 高级讲师：
-                        | 华凯华
-            .pull-right.clearfix.right-line
-                .pull-left.time
-                    i.spot
-                    | 08:30 - 10:00
-                .pull-right.right-info
-                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
-                    .clearfix
-                        .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
-                            span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
-                            i.iconfont.icon-logout
-                            | 进入直播
-                        span.m-left.gray-line |
-                        i.iconfont.icon-user-1.m-left.sub-text
-                        span.sub-text 高级讲师：
-                        | 华凯华
-            .pull-right.clearfix.right-line
-                .pull-left.time
-                    i.spot
-                    | 08:30 - 10:00
-                .pull-right.right-info
-                    .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
-                    .clearfix
-                        .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
-                            span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        span.sub-text
-                            i.iconfont.icon-favorite
-                            | 教室一
-                        span.m-left.gray-line |
-                        i.iconfont.icon-user-1.m-left.sub-text
-                        span.sub-text 高级讲师：
-                        | 华凯华
+            .btn.block.m-bottom#previous 查看之前的课程
+        each(content)
+            .schedule-list.clearfix
+                .pull-left.data
+                    .h3.m-bottom > echo(day)
+                    .small-font > echo(month)
+                each(courses)
+                    .pull-right.clearfix.right-line
+                        .pull-left.time
+                            i.spot
+                            echo(startTime+'-'+endTime)
+                        .pull-right.right-info
+                            .schedule-tit.m-bottom > map('class-offline-type' type) + echo(':' + name) 
+                            .clearfix
+                                .pull-right
+                                    .inline-block.pointer
+                                        i.iconfont.icon-favorite.icon-down 
+                                        span(id='courseware-view-'+id) 下载
+                                    compare(onlineCourseStatus 'eq' 1)
+                                        span.m-left.gray-line |
+                                        .inline-block.pointer
+                                        i.iconfont.icon-view.m-left.icon-see
+                                        span(id='course-view-'+onlineCourseId) 查看
+                                compare(type 'eq' 1)
+                                    span.sub-text
+                                        i.iconfont.icon-favorite
+                                        echo(classRoom.classroomName)
+                                    span.m-left.gray-line |
+                                i.iconfont.icon-user-1.m-left.sub-text
+                                span.sub-text > echo(teacherTitle + '：')
+                                echo(teacherName)
         if(isShowMore)
-            .btn.block.m-bottom#next > echo('查看更多课程')
+            .btn.block.m-bottom#next 查看更多课程
 
 view('online-resources')
     .resources
@@ -292,18 +194,20 @@ view('online-resources')
         ul.schedule-online > each(onlineCourseList)
             li
                 .pull-right
-                    i.iconfont.icon-favorite.icon-down(id='online-attach-'+resourceId)
-                    | 下载
+                    .inline-block.pointer
+                        i.iconfont.icon-favorite.icon-down
+                        span(id='online-attach-'+resourceId) 下载
                     span.m-left.gray-line |
-                    a.iconfont.icon-view.m-left.icon-see(href=courseUrl target='_blank')
-                    | 查看
+                    .inline-block.pointer
+                        i.iconfont.icon-view.m-left.icon-see
+                        span(id='course-view-'+resourceId) 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
                     if(required)
                         span.sub-text.m-left > echo('[必修]')
                     else
                         span.sub-text.m-left > echo(themeName)
-                span.schedule-online-tit.m-left.pull-left > echo('面授：'+resourceName)
+                span.schedule-online-tit.m-left.pull-left > echo(resourceName)
 
 view('pannel')
     .gallery

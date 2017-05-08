@@ -20,12 +20,18 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click online-attach-*': 'showAttach'
+    'click online-attach-*': 'showAttach',
+    'click course-view-*': 'showOnlineCourse'
 };
 
 exports.handlers = {
     showAttach: function(id) {
         var view = this.module.items['train/class-detail/online-attach'];
         this.app.viewport.modal(view, { id: id });
+    },
+    showOnlineCourse: function(id) {
+        var url = window.location.protocol + '//' + window.location.host + '/';
+        url += '#/study/course/detail/' + id;
+        window.open(url, '_blank');
     }
 };

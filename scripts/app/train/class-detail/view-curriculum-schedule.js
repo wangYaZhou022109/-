@@ -28,6 +28,9 @@ exports.dataForTemplate = {
                     arr.push(d);
                 }
             });
+            if (courseList.data.length > 0 && arr.length === 0) {
+                arr = courseList.data.slice(0, 8);
+            }
             if (arr.length > 0) {
                 bridge.start = arr[0];
                 bridge.end = arr[arr.length - 1];
@@ -38,6 +41,8 @@ exports.dataForTemplate = {
                 var date = helpers.date(Number(key));
                 var con = {};
                 con.date = date;
+                con.day = date.split('-')[2];
+                con.month = date.split('-')[0] + '-' + date.split('-')[1];
                 con.courses = value;
                 content.data.push(con);
             });
@@ -96,7 +101,8 @@ exports.events = {
     'click courseware-view-*': 'showCourseware',
     'change theme-list': 'changeTheme',
     'click previous': 'showPrevious',
-    'click next': 'showMore'
+    'click next': 'showMore',
+    'click course-view-*': 'showOnlineCourse'
 };
 
 exports.handlers = {
@@ -138,6 +144,8 @@ exports.handlers = {
             var date = helpers.date(Number(key));
             var con = {};
             con.date = date;
+            con.day = date.split('-')[2];
+            con.month = date.split('-')[0] + '-' + date.split('-')[1];
             con.courses = value;
             content.data.push(con);
         });
@@ -171,6 +179,8 @@ exports.handlers = {
             var date = helpers.date(Number(key));
             var con = {};
             con.date = date;
+            con.day = date.split('-')[2];
+            con.month = date.split('-')[0] + '-' + date.split('-')[1];
             con.courses = value;
             content.data.push(con);
         });
@@ -202,9 +212,16 @@ exports.handlers = {
             var date = helpers.date(Number(key));
             var con = {};
             con.date = date;
+            con.day = date.split('-')[2];
+            con.month = date.split('-')[0] + '-' + date.split('-')[1];
             con.courses = value;
             content.data.push(con);
         });
         this.bindings.content.changed();
+    },
+    showOnlineCourse: function(id) {
+        var url = window.location.protocol + '//' + window.location.host + '/';
+        url += '#/study/course/detail/' + id;
+        window.open(url, '_blank');
     }
 };

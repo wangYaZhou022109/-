@@ -20,7 +20,9 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             project: projectInfo.data,
             callback: function(arriveDate, backDate) {
-                me.module.dispatch('changeDate', { arriveDate: arriveDate, backDate: backDate });
+                me.$('arriveDate').value = arriveDate;
+                me.$('returnDate').value = backDate;
+                me.$('roundDate').value = arriveDate + '~' + backDate;
             }
         });
     }
