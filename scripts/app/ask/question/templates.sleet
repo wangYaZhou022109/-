@@ -11,6 +11,16 @@ module > form.form.align-left
     div(data-region='topic')
 
 view('top')
+    .form-row
+        label.required > string('question-title')
+        .content
+            input.input#selectquestion(name='title'  value= title  x-rule='required')
+            .tips 0/60
+            .select-drop.border.around
+                .select-drop-item 问题一
+                .select-drop-item 问题一问题一问题一
+                .select-drop-item 问题一问题一问题一
+                .select-drop-item 问题一问题一问题一
     input.input#selectquestion(name='title'  value= title  x-rule='required')
     .tips 0/60
 

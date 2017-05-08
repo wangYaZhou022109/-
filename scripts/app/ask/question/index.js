@@ -137,6 +137,11 @@ exports.store = {
             });
             this.post(selecttitle);
         },
+        // selectquestion: function() {
+        //     // var data = payload;
+        //     //     data.id = 1;
+        //     // var selecttitle = this.models.selecttitle.getData(payload);
+        //     // console.log(selecttitle);
         selectquestion: function(payload) {
             var titledata = this.models.titledata;
             var selecttitle = this.models.selecttitle.getData(payload);
@@ -152,6 +157,7 @@ exports.store = {
             titledata.data = selecttitle;
             titledata.changed();
         }
+
     }
 };
 
@@ -217,3 +223,4 @@ exports.buttons = [{
         return this.dispatch('release', data);
     }
 }];
+

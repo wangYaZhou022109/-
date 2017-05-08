@@ -3,12 +3,21 @@ exports.bindings = {
     selecttitle: true
 };
 exports.events = {
+    'click selectquestion': 'showSelectquestion',
+    // 'change selectquestion': 'hideSelectquestion',
     // 'click selectquestion': 'showSelectquestion',
     // 'focusout selectquestion': 'hideSelectquestion',
     'input selectquestion': 'showMaxlength'
 };
 
 exports.handlers = {
+    showSelectquestion: function() {
+        $(this.$('selectquestion')).parent().css('overflow', 'inherit');
+        // console.log(this.$('selectquestion'));
+       // $(this.$('selectquestion'))[0].foucs();
+    },
+    // hideSelectquestion: function() {
+    //     $(this.$('selectquestion')).parent().css('overflow', 'hidden');
     // showSelectquestion: function() {
     //     $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
     //     // console.log(this.$('selectquestion'));
@@ -33,6 +42,9 @@ exports.actions = {
 };
 
 exports.dataForActions = {
+    // selectquestion: function() {
+    //     var title = $(this.$('selectquestion'))[0].value;
+    // }
     showSelectquestion: function() {
         var title = $(this.$('selectquestion'))[0].value;
         $(this.$('selectquestion')).parent().parent().css('overflow', 'inherit');
