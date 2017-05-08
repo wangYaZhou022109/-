@@ -8,6 +8,6 @@ exports.components = [{
     options: {
         picker: 'topics',
         inputName: 'topicIds',
-        limit: 4
+        limit: 5
     }
 }];

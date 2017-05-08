@@ -179,6 +179,7 @@ exports.actionCallbacks = {
         follow.hidden = true;
         unfollow.hidden = false;
         this.app.message.success('关注成功！');
+        this.module.dispatch('refresh');
     },
     unfollow: function(data) {
         var concern = data[0];
@@ -187,6 +188,7 @@ exports.actionCallbacks = {
         follow.hidden = false;
         unfollow.hidden = true;
         this.app.message.success('取消成功！');
+        this.module.dispatch('refresh');
     },
     delquestion: function() {
         this.app.message.success('删除成功！');

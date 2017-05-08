@@ -11,19 +11,9 @@ module > form.form.align-left
     div(data-region='topic')
 
 view('top')
-    .form-row
-        label.required > string('question-title')
-        .content
-            input.input#selectquestion(name='title'  value= title  x-rule='required')
-            .tips 0/60
-            .select-drop.border.around
-                .select-drop-item 问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
     input.input#selectquestion(name='title'  value= title  x-rule='required')
     .tips 0/60
-
+    
 view('selectdrop')
     .select-drop.border.around#selectdrop
         each(titledata)
@@ -31,22 +21,23 @@ view('selectdrop')
 
 view('topic')
     .form-row.textarea-row
-        label > string('related-topics')
+        label > string('from-topic')
         #select-topic
 
 view('details')
     .form-row
         .content
-            a(href="javascript:;") > i.iconfont.icon-link#uploadFile
-            span
-                compare(task.name.length 'gt' 0)
-                    echo(task.name)
-                else
-                    string('upload-attachments')
+            a(href="javascript:;" id = 'uploadFile' )
+                i.iconfont.icon-link
+                span
+                    compare(task.name.length 'gt' 0)
+                        echo(task.name)
+                    else
+                        string('upload-attachments')
 view('edit') > form
     .form-row.textarea-row
         label > string('detailed-description')
-        .content > textarea.input(rows='5' name='content' id='content' value='') + .tips 0/60
+        .content > textarea.input(rows='5' name='content' id='content' value='')
 
 view('upload')
     .row

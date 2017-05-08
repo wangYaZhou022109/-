@@ -172,6 +172,7 @@ exports.actionCallbacks = {
         follow.hidden = true;
         unfollow.hidden = false;
         this.app.message.success('关注成功！');
+        this.module.dispatch('refresh');
     },
     unfollow: function(data) {
         var concern = data[0];
@@ -180,6 +181,7 @@ exports.actionCallbacks = {
         follow.hidden = false;
         unfollow.hidden = true;
         this.app.message.success('取消成功！');
+        this.module.dispatch('refresh');
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
@@ -196,16 +198,6 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    // trends: function(data) {
-    //     var trends = data.trends;
-    //     _.forEach(trends, function(value) {
-    //         var obj = value,
-    //             date = new Date(obj.createTime);
-    //         obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    //         + '   ' + date.getHours() + ':' + date.getMinutes();
-    //     });
-    //     return trends;
-    // }
     page: function(data) {
         var trends = data.trends;
         var page = this.bindings.page.data;
