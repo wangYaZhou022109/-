@@ -91,7 +91,7 @@ exports.dataForActions = {
         var subject = this.bindings.subject.data;
         return {
             businessId: subject.id,
-            businessType: 1,
+            businessType: 2,
             collectName: subject.name
         };
     },

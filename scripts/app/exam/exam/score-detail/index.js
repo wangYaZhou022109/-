@@ -174,6 +174,9 @@ var setOptions = {
             init: function(payload) {
                 var data = payload.data,
                     me = this;
+
+                this.module.dispatch('clearModels');
+
                 if (data) {
                     this.models.exam.set(data.exam);
                     this.models.types.set(data.types);

@@ -33,7 +33,7 @@ exports.dataForTemplate = {
             downUrl = this.bindings.img.getFullUrl(),
             defultImg = 'images/default-cover/default_spceial.jpg',
             prefix = { 0: '推送学习时间：', 1: '上次学习时间：', 2: '完成学习时间：', 4: '完成学习时间：' },
-            btnText = { 0: '开始学习', 1: '继续学习', 2: '重新学习', 4: '重新学习' };
+            btnText = { 0: '开始学习' };
         _.map(progressList, function(opt) {
             var progress = opt,
                 course = progress.courseInfo || {},
@@ -46,7 +46,7 @@ exports.dataForTemplate = {
             } else {
                 progress.prefixText = prefix[progress.finishStatus] + helpers.dateMinute(progress.lastAccessTime);
             }
-            progress.btnText = btnText[progress.finishStatus];
+            progress.btnText = btnText[progress.finishStatus] || '查看详情';
             progress.btnUrl = '#/study/subject/detail/' + progress.courseId;
             if (course.url) progress.btnUrl = course.url;
             progress.studyTotalTime = (Number(studyTotalTime) / 60).toFixed(1);
