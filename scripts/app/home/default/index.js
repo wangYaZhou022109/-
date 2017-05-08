@@ -20,6 +20,7 @@ module.exports = {
                 return this.get(homeConfig).then(function() {
                     if (homeConfig.data) {
                         modules.params.homeConfigId = homeConfig.data.id;
+                        modules.params.clientType = 1;
                         return that.get(modules);
                     }
                     return null;
