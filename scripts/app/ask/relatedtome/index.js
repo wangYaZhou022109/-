@@ -96,6 +96,12 @@ exports.store = {
         }
     },
     callbacks: {
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
@@ -105,8 +111,10 @@ exports.store = {
                 var page = me.models.page;
                 var pageData = me.models.page.praise(obj.objectId, obj.objectType);
                 me.app.message.success('点赞成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         unpraise: function(payload) {
@@ -118,8 +126,10 @@ exports.store = {
                 var page = me.models.page;
                 var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
                 me.app.message.success('取消成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         init: function() {
@@ -188,17 +198,12 @@ exports.afterRender = function() {
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
-        // if ($(window).scrollTop() === ($(document).height() - $(window).height() - 1)) {
-        //     if (me.store.models.page.data.length > 0 && (page * size) === me.store.models.page.data.length) {
-        //         me.store.models.page.params.page++;
-        //         me.dispatch('page');
-        //     }
-        // }
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
     });
+    this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
     this.dispatch('page');
 };

@@ -69,11 +69,11 @@ exports.dataForTemplate = {
                     params[arr[0]] = arr[1];
                 }
             });
-            if (params.orgId && params.orgId === companyOrganization.id) {
-                organization = companyOrganization;
-            } else {
-                organization = rootOrganization;
-            }
+        }
+        if (params.orgId && params.orgId === companyOrganization.id) {
+            organization = companyOrganization;
+        } else {
+            organization = rootOrganization;
         }
         return organization;
     },
