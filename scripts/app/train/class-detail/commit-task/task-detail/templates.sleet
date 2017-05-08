@@ -1,4 +1,5 @@
 #!handlebars
+
 module > .taskmarking-content.main-side
     .taskmarking-side.bg-highlight
         div(data-region='side')

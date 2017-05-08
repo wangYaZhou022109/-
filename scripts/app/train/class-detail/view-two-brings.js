@@ -7,7 +7,7 @@ exports.bindings = {
     twoBrings: true,
     twoBringsResult: true,
     classId: true,
-    signUpInfo: true,
+    signUpInfo: true
 };
 
 exports.buttons = [{

@@ -24,6 +24,7 @@ exports.store = {
     }
 };
 
+
 exports.beforeRender = function() {
     var me = this;
     me.dispatch('init', this.renderOptions.classId).then(function() {

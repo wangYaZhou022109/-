@@ -1,5 +1,4 @@
 #!handlebars
-
 module
     .addcarinfo-page
         .page-main-wrapper

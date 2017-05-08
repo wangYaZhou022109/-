@@ -33,7 +33,7 @@ exports.store = {
             url: '../train/class-info/get'
         },
         state: { data: {} },
-        delOptionList: { data: [] },
+        delOptionList: { data: [] }
     },
     callbacks: {
         init: function(payload) {

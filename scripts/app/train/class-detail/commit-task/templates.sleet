@@ -1,4 +1,5 @@
 #!handlebars
+
 module > .commitwork-page
     .commitwork(data-region='main')
 view('main')

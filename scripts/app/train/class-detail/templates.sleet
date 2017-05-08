@@ -1,5 +1,4 @@
 #!handlebars
-
 module > .class-details-page
     .class-details-box(data-region='banner')
     .container
