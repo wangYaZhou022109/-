@@ -25,19 +25,15 @@ view('pannel')
                                     if(current)
                                         i.iconfont.icon-hand-right.m-right.text-main-color
                                     if(preview)
-                                        a.normal(href='javascript:;' id='studyBtn-'+id data-resource-id=resourceId data-url=btnUrl data-section-type=sectionType)
-                                            .btn.small(class=btnColor) > echo(btnText)
+                                        a.normal(href='javascript:;' id='studyBtn-'+id data-resource-id=resourceId data-section-type=sectionType)
+                                            .btn.small(class=item.btnColor) > echo(item.btnText)
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
                                 .inline-block.title.text-overflow
                                     p.no-margin(title=name) > echo(name)
-                                    # p.no-margin
-                                    #     | 2017-04-05 至 2017-05-05
-                                    #     span.custom-color-3 待评卷
-
-# view('exam-tips')
-#     .text-center
-#         label 点击下方"开始考试"将会立即进入考试，该考卷考试时长为60分钟
+                                    p.no-margin
+                                        echo(item.timeText)
+                                        span.custom-color-3 > echo(item.statusText)
 
 view('research-tips')
     .container
