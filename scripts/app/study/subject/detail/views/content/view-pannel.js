@@ -44,7 +44,7 @@ exports.handlers = {
             // view = this.module.items['exam-tips'];
             // this.bindings.state.examId = resourceId;
             // me.app.viewport.modal(view);
-            me.app.viewport.modal(me.module.items['activity/index/exam-prompt'], { examId: resourceId });
+            me.app.viewport.modal(me.module.items['exam/exam/other-exam-prompt'], { examId: resourceId });
             return;
         } else {
             window.open(url);
