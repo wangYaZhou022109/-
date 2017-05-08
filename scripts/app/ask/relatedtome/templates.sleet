@@ -33,7 +33,7 @@ view('list')
                     .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                     .text-right
                         compare(trendsType 'eq' '1')
-                            .item(id='discuss-' + id ) > i.iconfont.icon-message > string('comment') + echo('（' + discussList.length +'）')
+                            .item(id='discuss-' + id ) > string('comment') + echo('（' + discussList.length +'）')
                             compare(concernNum 'gt' 0)
                                 .item( id='trend-unfollow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('unfollow')
                                 .item( 'hidden' id='trend-follow-2_' + questionId data-name='id' data-value='2_' + questionId ) > echo('+') + string('follow')
@@ -47,7 +47,7 @@ view('list')
                                         .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item 
-                                i.iconfont.icon-info > span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
+                                span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
                             compare(createUserId 'eq' me)
                                 compare(discussList.length 'eq' 0)
                                     .item(id = 'del-question-' + questionId data-name='id' data-value=questionId) > string('delete')
@@ -77,7 +77,7 @@ view('list')
                                         .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item 
-                                i.iconfont.icon-info > span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
+                                span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
                             compare(createUserId 'eq' me)
                                 compare(discussList.length 'eq' 0)
                                     .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
@@ -89,10 +89,10 @@ view('list')
                         compare(trendsType 'eq' '3') 
                             compare(isPraise 'gt' 0)
                                 .item(id='unpraise-1_'+ discussId data-name='id' data-value='1_' + discussId) 
-                                    i.iconfont.icon-zan > string('unpraise') +  echo('（'+ questionDiscuss.praiseNum +'）')
+                                    string('unpraise') +  echo('（'+ questionDiscuss.praiseNum +'）')
                             else
                                 .item(id='praise-1_'+ discussId data-name='id' data-value='1_' + discussId) 
-                                    i.iconfont.icon-zan > string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
+                                    string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
                             .item(id='discuss-' + id ) > i.iconfont.icon-message > string('comment') +  echo('（' + discussList.length +'）')
                             compare(concernNum 'gt' 0)
                                 .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > echo('+') + string('unfollow')
@@ -107,7 +107,7 @@ view('list')
                                         .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item 
-                                i.iconfont.icon-info > span(id ='trend-report-' + trendsType + '_' + discussId+'_' + createUserId data-name='id' data-value=trendsType +'_' + discussId+'_' + createUserId) > string('report')
+                                span(id ='trend-report-' + trendsType + '_' + discussId+'_' + createUserId data-name='id' data-value=trendsType +'_' + discussId+'_' + createUserId) > string('report')
                             compare(createUserId 'eq' me)
                                 compare(discussList.length 'eq' 0)
                                     .item(id = 'del-discuss-' + discussId data-name='id' data-value=discussId) > string('delete')

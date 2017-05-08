@@ -80,7 +80,7 @@ exports.setBtn = function(chapters, type, currentSectionId) {
 btnTextStudy = {
     8: function(progress) {
         var auditSocre = progress.score || 0,
-            score = (auditSocre / 100).toFixed(1);
+            score = auditSocre;
         if (progress.finishStatus === 5) return '待评审';
         if (progress.finishStatus === 1 || progress.finishStatus === 2) return '成绩' + score;
         return '查看作业';

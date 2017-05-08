@@ -5,13 +5,14 @@ exports.items = {
     topic: 'topic',
     upload: '',
     edit: 'edit',
-    details: 'details'
+    details: 'details',
+    selectdrop: 'selectdrop'
 };
 
 exports.store = {
     models: {
         state: { data: [] },
-        task: { data: [{ sectionAttachments: 222 }] },
+        task: { data: [] },
         trends: { url: '../ask-bar/trends' },
         imgParse: { url: '../human/file/upload-parse-file' },
         article: { url: '../ask-bar/question/insert-article' },
@@ -43,13 +44,47 @@ exports.store = {
                     return speechset;
                 }
             }
+        },
+        selecttitle: {
+            url: '../ask-bar/question/selecttitle',
+            mixin: {
+                getData: function(title) {
+                    var selecttitle = [];
+                    if (typeof title !== 'string'
+                        || title === ''
+                        || title === null) {
+                        selecttitle = [];
+                    } else {
+                        _.forEach(this.data, function(d) {
+                            if (d.title.indexOf(title) !== -1) {
+                                selecttitle.push(d);
+                            }
+                        });
+                    }
+                    return selecttitle;
+                }
+            }
+        },
+        titledata: {
+            data: [],
+            mixin: {
+                getData: function(id) {
+                    var selecttitle = '';
+                    _.forEach(this.data, function(d) {
+                        if (d.id === id) {
+                            selecttitle = d.title;
+                        }
+                    });
+                    return selecttitle;
+                }
+            }
         }
     },
     callbacks: {
         addFile: function(payload) {
             var me = this,
                 attachments = payload;
-            me.models.task.data.attachments = attachments;
+            me.models.task.data = attachments[0];
             me.models.task.changed();
         },
         init: function() {
@@ -87,12 +122,37 @@ exports.store = {
                 //     me.app.show('content', 'ask/content');
                 // }, 2000);
             });
+        },
+        selecttitle: function() {
+            var selecttitle = this.models.selecttitle;
+            selecttitle.set({
+                id: 'null',
+                size: 10000,
+                type: 2
+            });
+            this.post(selecttitle);
+        },
+        selectquestion: function(payload) {
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(payload);
+            titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
+        },
+        showSelectquestion: function(payload) {
+            var title = payload;
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(title);
+            this.models.titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    this.dispatch('selecttitle');
+    this.dispatch('init');
 };
 
 

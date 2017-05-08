@@ -10,7 +10,7 @@ view('audit') > form.vertical
         @echo(audit.question.content)
     .detail1-person.layout-mt-small
         span > echo(audit.member.fullName)
-        span 分享时间：
+        span 提问时间：
         span > date(audit.createTime)
     .detail1-alink.layout-mt-small > each(topicList) > echo(name) + echo(' ')
     input.input(name='id' type='hidden' value=audit.id)

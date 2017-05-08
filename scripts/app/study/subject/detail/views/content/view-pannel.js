@@ -1,8 +1,9 @@
 var util = require('./app/study/subject/util'),
+    // _ = require('lodash/collection'),
     $ = require('jquery');
 exports.bindings = {
     region: false,
-    subject: false,
+    subject: true,
     state: false,
     examStatus: true,
     researchStatus: true
@@ -35,14 +36,16 @@ exports.handlers = {
                 me.app.viewport.modal(view);
             });
         } else if (sectionType === 9) {
-            if (progress.finishStatus === 2) {
-                url = '#/exam/exam/paper/' + resourceId;
-                window.open(url);
-                return;
-            }
-            view = this.module.items['exam-tips'];
-            this.bindings.state.examId = resourceId;
-            me.app.viewport.modal(view);
+            // if (progress.finishStatus === 2) {
+            //     url = '#/exam/exam/paper/' + resourceId;
+            //     window.open(url);
+            //     return;
+            // }
+            // view = this.module.items['exam-tips'];
+            // this.bindings.state.examId = resourceId;
+            // me.app.viewport.modal(view);
+            me.app.viewport.modal(me.module.items['activity/index/exam-prompt'], { examId: resourceId });
+            return;
         } else {
             window.open(url);
         }
@@ -86,6 +89,9 @@ exports.dataForTemplate = {
         if (progress.createTime) {
             subject.restDays = util.restStudyDays(progress.createTime, subject.studyDays);
         }
+        // var sections = this.bindings.subject.findAllSections();
+        // var maxTime = _.max(sections, 'lastAccessTime');
+        // console.log(maxTime);
         // 配置按钮地址
         subject.courseChapters = util.setBtn(subject.courseChapters,
           state.type,
