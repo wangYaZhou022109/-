@@ -12,8 +12,18 @@ exports.getEntityModuleName = function(key) {
     return 'ask/mynotice/' + url;
 };
 exports.getEntity = function() {
+    var me = this;
     return {
-        state: this.bindings.state.data
+        state: this.bindings.state.data,
+        leftrefresh: function() {
+            me.module.dispatch('leftrefresh');
+        },
+        bottomsrefresh: function() {
+            me.module.dispatch('bottomsrefresh');
+        },
+        refresh: function() {
+            me.module.dispatch('refresh');
+        }
     };
 };
 

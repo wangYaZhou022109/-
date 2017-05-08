@@ -5,6 +5,6 @@ module
 view('main')
     .section
         .btn.block.big(id='question-question' data-name='id' data-value='1')
-            span.iconfont.icon-question-2 + span > string('send') + string('question')
+            span.iconfont + span > string('send') + string('question')
         .btn.block.big.custom-bg-color-5.m-top(id='article-article' data-name='id' data-value='2')
-            span.iconfont.icon-edit-2 + span > string('writing') + string('article')
+            span.iconfont + span > string('writing') + string('article')
