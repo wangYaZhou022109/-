@@ -28,10 +28,13 @@ view('main')
                     td > echo(businessName)
                     td > dateTime(certificateTime)
                     td
-                        a > setting('person.archives.certificate.look')
+                        a(id='view-'+id data-name='id' data-value=id) > setting('person.archives.certificate.look')
                         echo('|')
                         a > setting('person.archives.certificate.down')
                     else
                         tr > td(colspan='8') > p.text-center > string('no-data')
         #pager.pagination
-
+view('preview')
+    .col-sm-12
+        .certificate-content.border.around(style='margin:0 auto;width:847px;height:583px;background-image:url('+certificate.coverUrl+'); background-position: center top; background-repeat: no-repeat;')
+            @echo(certificate.htmlExamples)

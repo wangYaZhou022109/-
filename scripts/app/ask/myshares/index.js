@@ -19,6 +19,34 @@ exports.store = {
                 findById: function(id) {
                     var myshares = this.module.store.models.page.data;
                     return _.find(myshares, ['id', id]);
+                },
+                praise: function() {
+                    var data = [];
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        if (d.question.praiseNum >= 0) {
+                            obj.question.praiseNum = d.question.praiseNum + 1;
+                        } else {
+                            obj.question.praiseNum = 1;
+                        }
+                        obj.isPraise = 1;
+                        data.push(obj);
+                    });
+                    return data;
+                },
+                unpraise: function() {
+                    var data = [];
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        if (d.question.praiseNum > 0) {
+                            obj.question.praiseNum = d.question.praiseNum - 1;
+                        } else {
+                            obj.question.praiseNum = 0;
+                        }
+                        obj.isPraise = 0;
+                        data.push(obj);
+                    });
+                    return data;
                 }
             }
         },
@@ -41,6 +69,32 @@ exports.store = {
         }
     },
     callbacks: {
+        praise: function(payload) {
+            var praise = this.models.praise,
+                me = this;
+            praise.set(payload);
+            return this.post(praise).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.praise(obj.objectId, obj.objectType);
+                me.app.message.success('点赞成功');
+                page.data = pageData;
+                page.changed();
+            });
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this;
+            unpraise.set(payload);
+            return this.put(unpraise).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
+                me.app.message.success('取消成功');
+                page.data = pageData;
+                page.changed();
+            });
+        },
         init: function() {
             var myshares = this.models.myshares;
             myshares.set({ id: 1 });
@@ -93,35 +147,6 @@ exports.store = {
             data.speechset = speechset.status;
             discuss.set(data);
             return this.save(discuss);
-        },
-        praise: function(payload) {
-            var praise = this.models.praise,
-                me = this,
-                init = this.models.init;
-            praise.set(payload);
-            init.set({ id: this.models.init.data.id, concernType: '3' });
-            return this.post(praise).then(function() {
-                me.app.message.success('点赞成功');
-                me.get(init);
-            });
-            // var praise = this.models.praise;
-            // praise.set(payload);
-            // return this.post(praise);
-        },
-        unpraise: function(payload) {
-            var unpraise = this.models.unpraise,
-                me = this,
-                init = this.models.init;
-            init.set({ id: this.models.init.data.id, objectType: '3' });
-            // console.log(details);
-            unpraise.set({ id: payload.id, objectType: '3' });
-            return this.put(unpraise).then(function() {
-                me.app.message.success('取消成功');
-                me.get(init);
-            });
-            // var unpraise = this.models.unpraise;
-            // unpraise.set(payload);
-            // return this.post(unpraise);
         },
         speech: function() {
             var speech = this.models.speech;

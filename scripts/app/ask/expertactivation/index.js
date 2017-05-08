@@ -14,6 +14,13 @@ exports.store = {
         expert: { url: '../ask-bar/expert/findExpert' }
     },
     callbacks: {
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            // console.log(payload);
+            this.models.callback = payload;
+        },
         init: function() {
             var topicname = this.models.topicname;
             var state = this.models.state;
@@ -41,6 +48,7 @@ exports.store = {
                 activation.set(data);
                 this.post(activation).then(function() {
                     me.app.message.success('激活申请成功！');
+                    me.module.dispatch('refresh');
                 });
             }
         },
@@ -61,6 +69,8 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    // console.log(this.renderOptions.callback);
+    this.dispatch('set', this.renderOptions.callback);
     this.dispatch('init');
     this.dispatch('findExpert');
 };

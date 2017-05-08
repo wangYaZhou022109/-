@@ -96,12 +96,12 @@ exports.store = {
         }
     },
     callbacks: {
-        // refresh: function() {
-        //     // this.models.middlestate.changed();
-        //    // var callback = this.module.middlestate;
-        //     //payload.changed();
-        //    // console.log(payload);
-        // },
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
@@ -111,8 +111,10 @@ exports.store = {
                 var page = me.models.page;
                 var pageData = me.models.page.praise(obj.objectId, obj.objectType);
                 me.app.message.success('点赞成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         unpraise: function(payload) {
@@ -124,8 +126,10 @@ exports.store = {
                 var page = me.models.page;
                 var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
                 me.app.message.success('取消成功');
-                page.data = pageData;
-                page.changed();
+                setTimeout(function() {
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
             });
         },
         init: function() {
@@ -200,6 +204,7 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
+    this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
     this.dispatch('page');
 };

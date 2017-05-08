@@ -1,21 +1,25 @@
 exports.items = {
     left: 'left',
-    right: 'right'
+    // right: 'right'
+    top: 'top',
+    middle: 'middle',
+    bottom: 'bottom'
 };
 
 exports.store = {
     models: {
         leftstate: {},
-        rightstate: {}
+        // rightstate: {}
+        topstate: {},
+        middlestate: {},
+        bottomstate: {}
     },
     callbacks: {
-        init: function() {
-        },
-        search: function() {
+        refresh: function() {
+            this.models.middlestate.changed();
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
 };

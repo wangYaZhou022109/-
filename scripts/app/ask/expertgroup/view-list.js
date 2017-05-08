@@ -1,5 +1,5 @@
 var _ = require('lodash/collection');
-exports.type = 'dynamic';
+// exports.type = 'dynamic';
 exports.bindings = {
     expertlist: true,
     topicType: true,
@@ -17,14 +17,23 @@ exports.events = {
 exports.handlers = {
     activate: function() {
         var model = this.module.items['ask/expertactivation'];
-        this.app.viewport.modal(model);
+        var me = this;
+        this.app.viewport.modal(model, { callback: function() {
+            me.module.dispatch('user');
+        }
+        });
     },
     // myself: function() {
     //     this.app.show('content', 'ask/iamexpert');
     // },
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
-        this.app.viewport.modal(model, { bindings: this.bindings });
+        var me = this;
+        // this.app.viewport.modal(model, { bindings: this.bindings });
+        this.app.viewport.modal(model, { callback: function() {
+            me.module.dispatch('user');
+        }
+        });
     },
     details: function(id) {
         this.app.show('content', 'ask/expertdetails', { id: id });
@@ -54,21 +63,23 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    follow: function(data) {
-        var concern = data[0];
-        var unf = this.$('unfollow-expert-' + concern.concernId);
-        var f = this.$('follow-expert-' + concern.concernId);
+    follow: function() {
+        // var concern = data[0];
+        // var unf = this.$('unfollow-expert-' + concern.concernId);
+        // var f = this.$('follow-expert-' + concern.concernId);
         this.app.message.success('关注成功');
-        f.hidden = true;
-        unf.hidden = false;
+        // f.hidden = true;
+        // unf.hidden = false;
+        this.module.dispatch('refresh');
     },
-    unfollow: function(data) {
-        var concern = data[0];
-        var unf = this.$('unfollow-expert-' + concern.concernId);
-        var f = this.$('follow-expert-' + concern.concernId);
+    unfollow: function() {
+        // var concern = data[0];
+        // var unf = this.$('unfollow-expert-' + concern.concernId);
+        // var f = this.$('follow-expert-' + concern.concernId);
         this.app.message.success('取消成功');
-        f.hidden = false;
-        unf.hidden = true;
+        // f.hidden = false;
+        // unf.hidden = true;
+        this.module.dispatch('refresh');
     }
 };
 

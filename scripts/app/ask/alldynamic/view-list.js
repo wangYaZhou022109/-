@@ -1,4 +1,3 @@
-// var D = require('drizzlejs');
 var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
@@ -17,13 +16,6 @@ exports.events = {
 };
 
 exports.handlers = {
-    // refresh: function(id, e, target) {
-    //     console.log(11111111);
-    //     // var region;
-    //     // var el = $(target).parents('.comment-list')[0];
-    //     // region = new D.Region(this.app, this.module, el, id);
-    //     // region.show('ask/myquiz/details', { id: id });
-    // },
     sharesDetails: function(payload) {
         var data = { },
             id = payload;
@@ -193,39 +185,42 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     reply: function() {
         this.app.message.success('操作成功！');
-        this.module.dispatch('init');
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        this.module.dispatch('init');
     },
     follow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
         var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
         follow.hidden = true;
         unfollow.hidden = false;
-        this.app.message.success('关注成功！');
+        setTimeout(function() {
+            me.app.message.success('关注成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
     unfollow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
         var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
         follow.hidden = false;
         unfollow.hidden = true;
-        this.app.message.success('取消成功！');
+        setTimeout(function() {
+            me.app.message.success('取消成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
     },
     delshare: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
     },
     deldiscuss: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
     }
 };
 

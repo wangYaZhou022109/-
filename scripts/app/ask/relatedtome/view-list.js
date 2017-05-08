@@ -195,17 +195,25 @@ exports.actionCallbacks = {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
         var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
         follow.hidden = true;
         unfollow.hidden = false;
-        this.app.message.success('关注成功！');
+        setTimeout(function() {
+            me.app.message.success('关注成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
     unfollow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
         var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
         follow.hidden = false;
         unfollow.hidden = true;
-        this.app.message.success('取消成功！');
+        setTimeout(function() {
+            me.app.message.success('取消成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
     delquestion: function() {
         this.app.message.success('删除成功！');

@@ -5,4 +5,4 @@ module
 
 view('main')
     .section
-        .btn.block.big.custom-bg-color-5.m-top(id='article-article' data-name='id' data-value='2') > .inline-block.iconfont.icon-edit-2 + .inline-block > string('writing') + string('article')
+        .btn.block.big.custom-bg-color-5.m-top(id='article-article' data-name='id' data-value='2') > .inline-block.iconfont + .inline-block > string('writing') + string('article')
