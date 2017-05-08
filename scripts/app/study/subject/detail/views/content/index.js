@@ -2,7 +2,7 @@ var _ = require('lodash/collection');
 exports.items = {
     pannel: 'pannel',
     'research-tips': '',
-    'activity/index/exam-prompt': { isModule: true }
+    'exam/exam/other-exam-prompt': { isModule: true }
 };
 
 exports.store = {
