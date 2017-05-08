@@ -135,11 +135,11 @@ exports.handlers = {
             if (startTime !== '' && startTime !== null) {
                 if (startTime >= endTime) {
                     this.app.message.alert('结束时间不能早于开始时间');
-                    $(this.$('end-time')).val('');
+                    $(this.$('endTime')).val('');
                 }
             } else {
                 this.app.message.alert('请先填写开始时间');
-                $(this.$('end-time')).val('');
+                $(this.$('endTime')).val('');
             }
         }
     }

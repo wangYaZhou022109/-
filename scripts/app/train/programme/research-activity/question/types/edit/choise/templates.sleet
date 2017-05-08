@@ -6,11 +6,10 @@ module > form.vertical
     .choosequestion(data-region='score')
 
 view('content')
-    .form
-        .form-row
+    .form.align-left
+        .form-row.r-padding
             label.required 试题信息
-            .content
-                textarea.w-full#content(name='content' rows='5')
+            textarea.w-full#content(name='content' rows='5')
         if(showDiffculty)
             div
                 label(class='required') 难易度
@@ -21,11 +20,14 @@ view('options')
     .layout-mt-small
         table.table
             tr
-                th(colspan="2") 选项
-                th > a.m-left#add(href='javascript:;') 添加选项
+                th 选项
+                th(colspan='3') > a.m-left#add(href='javascript:;') 添加选项
             tr
                 td 题号
                 td 描述
+                compare(mode 'eq' 1)
+                    td 分数
+                td 操作
             each(options)
                 tr(id='item-' + index)
                     td
@@ -36,11 +38,10 @@ view('options')
                             input(type='hidden' id='content-' + index value=content)
                         else
                             textarea.w-full(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3 cols='100%') > echo(content)
-                    .clearfix.set-row
-                        compare(mode 'eq' 1)
-                            .pull-left
-                                input.input(placeholder='输入分数' id='score-' + index x-rule='required,number,interval:0:1:10:0,keepDecimal:0')
-                        .pull-right.text-tips
-                            span(data-dynamic-key=index)
-                            a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
+                    compare(mode 'eq' 1)
+                        td
+                            input.input(placeholder='输入分数' id='score-' + index x-rule='required,number,interval:0:1:10:0,keepDecimal:0')
+                    td
+                        span(data-dynamic-key=index)
+                        a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
 

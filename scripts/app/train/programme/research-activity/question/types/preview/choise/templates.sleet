@@ -19,5 +19,7 @@ view('options')
             label.no-margin(for='answer-item-' + index)
                 compare(mode 'eq' 1)
                     .answer-options > echo(score '分')
-                .answer-options > .option-num > @echo(code)
-                .answer-options > @echo(content)
+                #  .answer-options > .option-num > 
+                @echo(code)
+                @echo(content)
+                #  .answer-options > 

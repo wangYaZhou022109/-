@@ -59,6 +59,9 @@ exports.buttons = [{
             paperData = paperItem.getData(),
             inputScore;
 
+        if (!payload.paperClassId) {
+            that.app.message.error('请选择试卷');
+        }
         if (!paperItem.isValidator()) {
             return false;
         }

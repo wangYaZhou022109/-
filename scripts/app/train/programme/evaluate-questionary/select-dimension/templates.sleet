@@ -1,0 +1,35 @@
+#!handlebars
+module > .choosenewevaluation-page
+    .choosenewevaluation(data-region='toolbox')
+    .choosenewevaluation(data-region='content')
+
+view('toolbox') > form.vertical
+    .filter-row
+        .filter-item
+            label 维度名称
+            input
+        .filter-item
+            label 创建时间
+            .relative.inline-block
+                input.input.date
+                .iconfont.icon-riqi
+        .btn 搜索
+
+view('content')
+    .layout-mt-small
+        table.table
+            thead > tr
+                th
+                    input(type='checkbox' id='check-all')
+                    label(for='check-all')
+                th 维度名称
+                th 业务类型
+                th 创建人
+            tbody > each(wei) > tr
+                td
+                    input(type='checkbox' id='check-item'+id name='conId' value=id weiName=name)
+                    label(for='check-item'+id)
+                td > echo(name)
+                td > echo('评估')
+                td > echo(mName)
+        #pager.pagination(style='float:none')

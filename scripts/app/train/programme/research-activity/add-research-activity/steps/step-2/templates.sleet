@@ -31,12 +31,12 @@ view('main')
             .btn-item.layout-mt
                 .tag-btn.radius.pull-left#question-1
                     | +单选
-                .tag-btn.radius.pull-right#question-2
-                    | +多选
-                .tag-btn.radius.pull-left#question-5
+                .tag-btn.radius.pull-right#question-5
                     | +问答
                 .tag-btn.radius.pull-right#import
                     | +导入
+                .tag-btn.radius.pull-left#question-2
+                    | +多选
             .btn.m-top.w-full.gray#preview 预览
         .page-main
             h3 > echo(research.name)

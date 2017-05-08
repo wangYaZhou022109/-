@@ -10,7 +10,7 @@ var options = require('./app/train/programme/research-activity/add-research-acti
 obj.items = items;
 
 D.assign(obj.items, {
-    'picker/select-dimension': { isModule: true }
+    'train/programme/evaluate-questionary/select-dimension': { isModule: true }
 });
 
 obj.store.models = models;

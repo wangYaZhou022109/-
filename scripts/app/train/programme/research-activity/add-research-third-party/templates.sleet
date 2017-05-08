@@ -15,6 +15,6 @@ view('main') > form
             label.required 结束时间
             input.input(id='end-time' name='endTime' value=dateTime(time.endTime))
         .form-row.r-padding
-            label.required 考卷须知
+            label.required 问卷须知
             textarea.w-full(name='questionaryDetail' id='questionaryDetail' placeholder='问卷须知...' rows='4') > echo(research.questionaryDetail)
     div(data-dynamic-key='')

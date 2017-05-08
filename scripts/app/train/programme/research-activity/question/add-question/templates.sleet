@@ -5,13 +5,13 @@ module > .choosequestion-page
     .choosequestion(data-region='question')
 
 view('main')
-    form.form
-        .form-row
+    form.form.align-left
+        .form-row.r-padding
             input(type='hidden')
             label.required 试题类型
-            .content
-                select.w-half#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
-                    option(value=key)('selected')&if(selected) > echo(value)
+            select.w-half#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
+                option(value=key)('selected')&if(selected) > echo(value)
+            #  .content
 
 view('question')
     form.vertical
