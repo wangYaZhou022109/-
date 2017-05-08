@@ -160,13 +160,18 @@ exports.handlers = {
         return true;
     },
     preview: function() {
-        var mod = this.module.items['train/programme/research-activity/preview-questionary'];
-        this.app.viewport.modal(mod, {
-            hideScore: this.options.HIDE_SCORE,
-            research: D.assign(this.bindings.research.data, {
-                dimensions: this.bindings.dimensions.data
-            })
+        // var mod = this.module.items['train/programme/research-activity/preview-questionary'];
+        // this.app.viewport.ground(mod, {
+        //     hideScore: this.options.HIDE_SCORE,
+        //     research: D.assign(this.bindings.research.data, {
+        //         dimensions: this.bindings.dimensions.data
+        //     })
+        // });
+        var research = D.assign(this.bindings.research.data, {
+            dimensions: this.bindings.dimensions.data
         });
+        var url = '#/train/programme/research-activity/preview-questionary?research=' + research;
+        window.open(url, '_blank');
     },
     importResearch: function() {
         var me = this;
@@ -198,12 +203,16 @@ exports.dataForTemplate = {
 };
 
 exports.getEntity = function(id) {
-    var question = this.bindings.questions.getQuestionById(id);
-    question = D.assign({}, question, {
-        questionAttrs: _.orderBy(question.questionAttrs, ['name'], ['asc']),
-        score: question.score / 100
+    var question = this.bindings.questions.getQuestionById(id),
+        newQuestion = JSON.parse(JSON.stringify(question));
+    newQuestion = D.assign({}, newQuestion, {
+        questionAttrs: _.orderBy(_.map(newQuestion.questionAttrs, function(qr) {
+            if (qr.score) return D.assign(qr, { score: qr.score / 100 });
+            return qr;
+        }), ['name'], ['asc']),
+        score: newQuestion.score / 100
     });
-    return question;
+    return newQuestion;
 };
 
 exports.getEntityModuleName = function(id, question) {

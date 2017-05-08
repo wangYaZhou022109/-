@@ -27,7 +27,7 @@ view('content')
     table.table.layout-mt-small
         thead > tr
             th 选择
-            th 问卷名称
+            th 调研名称
             th 创建人
             th 创建时间
             th 操作
