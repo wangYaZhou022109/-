@@ -151,5 +151,26 @@ module.exports = {
             uri += arguments[i];
         }
         return uri;
+    },
+    // 修改样式 keeley
+    secondToMinute: function(time) {
+        var parseInt = window.parseInt;
+        var second = time;
+        var min = 0; // 分
+        var hour = 0; // 小时
+        var supple = function(str) {
+            if (str <= 9) return '0' + str;
+            return str;
+        };
+        if (!time) return '-';
+        if (time > 60) {
+            second = parseInt(time % 60);
+            min = parseInt(time / 60);
+            if (min > 60) {
+                min = parseInt(time / 60) % 60;
+                hour = parseInt(parseInt(time / 60) / 60);
+            }
+        }
+        return supple(hour) + ':' + supple(min) + ':' + supple(second);
     }
 };

@@ -34,27 +34,7 @@ exports.dataForTemplate = {
             r.i = i + 1 + ((pageNum - 1) * 10);
         });
         data.progressList.forEach(function(obj) {
-            var progress = obj || {},
-                time = '',
-                second = window.parseInt(progress.studyTotalTime), // 秒
-                minute = 0, // 分
-                hour = 0; // 小时
-            if (second > 60) {
-                minute = window.parseInt(second / 60);
-                second = window.parseInt(second % 60);
-                if (minute > 60) {
-                    hour = window.parseInt(minute / 60);
-                    minute = window.parseInt(minute % 60);
-                }
-            }
-            time = second;
-            if (minute > 0) {
-                time = minute + ':' + time;
-            }
-            if (hour > 0) {
-                time = hour + ':' + time;
-            }
-            progress.studyTotalTime = time;
+            var progress = obj || {};
             progress.beginTimeStr = helpers.dateMinute(progress.beginTime);
             progress.finishTimeStr = helpers.dateMinute(progress.finishTime);
         });
