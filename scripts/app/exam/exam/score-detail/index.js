@@ -174,7 +174,7 @@ var setOptions = {
             init: function(payload) {
                 var data = payload.data,
                     me = this;
-                debugger;
+
                 this.module.dispatch('clearModels');
 
                 if (data) {
