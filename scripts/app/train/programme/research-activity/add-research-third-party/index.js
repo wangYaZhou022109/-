@@ -70,7 +70,9 @@ exports.store = {
         changeInfoDetaile: function(payload) {
             var main = this.module.items.main.getEntities()[0];
             D.assign(this.models.research.data, payload, main.getData());
+            D.assign(this.models.time.data, payload, main.getData());
             this.models.research.changed();
+            this.models.time.changed();
         }
     }
 };

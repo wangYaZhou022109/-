@@ -36,6 +36,7 @@ exports.handlers = {
                 $(this.$('end-time')).val('');
             }
         }
+        return this.module.dispatch('changeInfoDetaile', this.getData());
     }
 };
 

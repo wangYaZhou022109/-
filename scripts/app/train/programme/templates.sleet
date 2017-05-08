@@ -386,12 +386,13 @@ view('upload-task')
 
 view('edit-qnrtime')
     form.vertical
-        div
-            label > echo('问卷名称：')
+        div(style='margin: 10px;')
+            label 问卷名称
             input(name='resourceName' value=research.resourceName readonly='readonly' style='border-style: none;')
-        div
-            label > echo('开始时间：')
-            input(id='startTime' style='width:300px;' name='startTime' value=dateTime(research.startTime))
-            label > echo('结束时间：')
-            input(id='endTime' style='width:300px;' name='endTime' value=dateTime(research.endTime))
+        div(style='margin: 10px;')
+            label 开始时间
+            input(id='startTime' name='startTime' value=dateTime(research.startTime))
+        div(style='margin: 10px;')
+            label 结束时间
+            input(id='endTime' name='endTime' value=dateTime(research.endTime))
             input(name='id' value=research.id type='hidden')

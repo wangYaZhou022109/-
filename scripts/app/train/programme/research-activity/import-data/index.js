@@ -6,13 +6,14 @@ exports.items = {
 
 exports.title = '导入';
 
-exports.large = true;
+// exports.large = true;
 
 exports.store = {
     models: {
         file: { url: '../human/file/upload-file' },
         importData: { url: '../exam/dimension/import' },
-        exportQuestionTemplate: { url: '../exam/dimension/export' }
+        exportQuestionTemplate: { url: '../exam/dimension/export' },
+        state: {}
     },
     callbacks: {
         importData: function(payload) {
@@ -39,6 +40,14 @@ exports.store = {
         displayErrorUrl: function() {
             this.models.importData.data.showErrorUrl = false;
             this.models.importData.changed();
+        },
+        init: function(payload) {
+            var state = this.models.state;
+            return state.set({ type: payload.type });
         }
     }
+};
+
+exports.beforeRender = function() {
+    return this.dispatch('init', this.renderOptions);
 };

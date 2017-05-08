@@ -131,8 +131,10 @@ exports.handlers = {
         });
     },
     importResearch: function() {
-        var me = this;
+        var me = this,
+            research = this.bindings.research.data;
         this.app.viewport.modal(this.module.items['train/programme/research-activity/import-data'], {
+            type: research.type,
             callback: function(data) {
                 return me.module.dispatch('insertDimensions', data);
             }

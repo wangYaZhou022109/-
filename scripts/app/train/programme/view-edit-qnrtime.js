@@ -10,6 +10,8 @@ exports.bindings = {
     research: true
 };
 
+exports.small = true;
+
 exports.buttons = [{
     text: '保存',
     action: 'editTime'
