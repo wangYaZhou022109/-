@@ -326,59 +326,46 @@ view('discussion-area')
 
 
 view('two-brings') > form.vertical
-    .row
-        .col-sm-2
-            echo('1.优秀经验：所在公司与本次培训主题相关的工作领域中的先进或创新')
-    .row
-        .col-sm-2
-            .inline-block.com-title > echo('经验/案例主题') :
-            .inline-block > input.input(name='title1'  value=twoBringsResult.title1  x-rule='required')
-    br
-    .row
-        .col-sm-10
-            textarea#content1(name='content1' value='' rows=2 x-rule='required') > echo(twoBringsResult.content1)
-    br
-    .row
-        .col-sm-2
-            echo('2.棘手问题：您当前最关心的、当前工作中最棘手的一个问题')
-    br
-    .row
-        .col-sm-2
-            .inline-block.com-title > echo('问题/困难主题') :
-            .inline-block > input.input(name='title2'  value=twoBringsResult.title2  x-rule='required')
-    br
-    .row
-        .col-sm-10
-            textarea#content2(name='content2' value='' rows=2 x-rule='required') > echo(twoBringsResult.content2)
-    br
-    .row
-        if(twoBringsResult.id)
-            .col-sm-2           
-                btn.btn(id='close') > echo('确定')
-        else
-            .col-sm-2
-                btn.btn(id='commit') > echo('提交')
+    .watchbring-content
+        .watchbring-item.layout-mt-small.overflow
+            p > echo('1.' + signUpInfo.question1)
+            .form.align-left > .form-row
+                label 经典/案例
+                .content > input.border.bottom.w-full(name='title1'  value=twoBringsResult.title1  x-rule='required')
+            .h5.m-top 主题：
+            textarea.w-full.m-top#content1(placeholder="输入问题内容" name='content1' rows="5" x-rule='required') > echo(twoBringsResult.content1)
+        .watchbring-item.layout-mt-small.overflow
+            p > echo('1.' + signUpInfo.question2)
+            .form.align-left > .form-row
+                label 经典/案例
+                .content > input.border.bottom.w-full(name='title2'  value=twoBringsResult.title2  x-rule='required')
+            .h5.m-top 主题：
+            textarea.w-full.m-top#content2(placeholder="输入问题内容" name='content2' rows="5" x-rule='required') > echo(twoBringsResult.content2)
+        br
+        .row
+            if(twoBringsResult.id)
+                .col-sm-2           
+                    btn.btn(id='close') > echo('确定')
+            else
+                .col-sm-2
+                    btn.btn(id='save') > echo('提交')
 
-view('questionnaire')
-    table.table
-        tbody > each(questionnaire) > tr
-            td > map('questionnaire-type' type)
-            td > echo(resourceName)
-            td
-                compare(type 'eq' 1)
-                    dateTime(exam.startTime)
-                else
-                    dateTime(researchQuestionary.startTime)
-            td
-                compare(type 'eq' 1)
-                    dateTime(exam.endTime)
-                else
-                    dateTime(researchQuestionary.endTime)
-            td
-                compare(type 'eq' 1)
-                    a(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
-                else
-                    a(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
+view('questionnaire') > .surveyexam-page > .surveyexam
+    each(questionnaire)
+        .surveyexam-item.border.bottom
+            .surveyexam-title.inline-block.sub-text > echo('【') + map('questionnaire-type' type) + echo('】')
+            .surveyexam-content.border.left.clearfix.inline-block
+                .inline-block.survey-name
+                    .h3 > echo(resourceName)
+                    compare(type 'eq' 1)
+                        .small-font.sub-text.m-top > dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
+                    else
+                        .small-font.sub-text.m-top > dateTime(researchQuestionary.startTime) + echo('~') + dateTime(researchQuestionary.endTime)
+                .inline-block.h4.sub-text 未完成
+            compare(type 'eq' 1)
+                .surveyexam-btn.inline-block.btn > a(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+            else
+                .surveyexam-btn.inline-block.btn > a(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
                 
 view('bus')
     tbody > each(bus)

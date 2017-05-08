@@ -53,6 +53,9 @@ exports.store = {
         twoBringsResult: {
             url: '../train/class-two-brings/result',
         },
+        signUpInfo: {
+            url: '../train/sign-up',
+        },
         questionnaire: {
             url: '../train/questionnaire-survey/class-evaluate'
         },
@@ -204,10 +207,16 @@ exports.store = {
         },
         twoBring: function() {
             var twoBringsResult = this.models.twoBringsResult,
-                classId = this.models.classId.data.classId;
+                classId = this.models.classId.data.classId,
+                signUpInfo = this.models.signUpInfo,
+                me = this;
             twoBringsResult.clear();
             twoBringsResult.params = { classId: classId };
-            return this.get(twoBringsResult);
+            signUpInfo.clear();
+            signUpInfo.params = { classId: classId };
+            return me.get(twoBringsResult).then(function() {
+                me.get(signUpInfo);
+            });
         },
         commitTwoBrings: function(payload) {
             var twoBrings = this.models.twoBrings,

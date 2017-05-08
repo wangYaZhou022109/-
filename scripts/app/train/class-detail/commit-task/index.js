@@ -4,8 +4,6 @@ exports.items = {
     main: 'main'
 };
 
-exports.auto = true;
-
 exports.store = {
     models: {
         state: { data: {} },

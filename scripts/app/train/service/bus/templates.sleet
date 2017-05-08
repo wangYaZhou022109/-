@@ -61,4 +61,4 @@ view('edit') > form.vertical > .addcarinfo-page > .addcarinfo-content
                     textarea.sub-text.small-font.w-full(id='input-explain-' + id value=explain placeholder="说明内容(可为空)") > echo(explain)
                 .addcarinfo-close.inline-block(id='del-option-'+id data-name='id' data-value=id) —
         .row.text-center
-            a.btn#addOption 添加
+            a.btn#addOption 添加选项

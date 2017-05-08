@@ -49,6 +49,7 @@ exports.store = {
             var classInfo = this.models.classInfo,
                 state = this.models.state;
             classInfo.params = { id: state.data.classId };
+            classInfo.clear();
             return this.get(classInfo);
         },
         editBus: function(payload) {
