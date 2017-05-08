@@ -45,18 +45,22 @@ view('addexam-titlebar')
 
 
 view('addexam-content')
-    .test.clearfix
-        .pull-left
-            .btn 临时组卷
-            .btn 随机组卷
-    .clearfix
-        .layout-mt-small.pull-right
-            select.tag-select.m-right
-                option 默认顺序
-                option 试题打乱顺序
-                option 选项打乱顺序
-                option 试题及选项打乱顺序
-            .btn.tag-height.circle-radius.gray 预览
+    .test.border.top
+        .clearfix.layout-mt-small
+            .pull-left
+                .btn#temporarypaper
+                    i.iconfont.icon-note.m-right
+                    span 临时组卷
+                .btn#randomtest
+                    i.iconfont.icon-note.m-right
+                    span 随机组卷
+            .pull-right 
+                select.select.m-right
+                    option 默认顺序
+                    option 试题打乱顺序
+                    option 选项打乱顺序
+                    option 试题及选项打乱顺序
+                .btn 预览
     table.table.layout-mt-small
         tr
             th 类型

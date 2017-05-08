@@ -36,7 +36,7 @@ exports.handlers = {
         this.app.viewport.modal(model);
     },
     showAddexam: function() {
-        var model = this.module.items['center/managements/addexam'];
+        var model = this.module.items['center/managements/addexam2'];
         this.app.viewport.modal(model);
     },
     showMinimize: function(id) {

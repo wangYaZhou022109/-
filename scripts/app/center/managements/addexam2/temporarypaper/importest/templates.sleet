@@ -1,0 +1,20 @@
+#!handlebars
+
+module > .importest-page
+    .importest(data-region="importest")
+
+view('importest')
+    p 导入步骤
+    p.small-font.color-error 1.下载标准模板，按示例格式和示例说明填写需要导入的电子表格文件。
+        span （
+        a 下载导入模板
+        span ）
+    p.small-font.color-error 2.点击“浏览”按钮，选择您要导入的电子表格文件。
+    p.small-font.color-error 3.点击“浏览”按钮，选择您要导入的电子表格文件。
+    p.small-font.color-error 4.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。
+    .form.pull-left.layout-mr-small
+        .form-row
+            .content
+                input.input
+                .choice 选择文件
+    .btn.pull-left.layout-mr-small 导入数据
