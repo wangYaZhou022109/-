@@ -19,7 +19,8 @@ exports.components = [function() {
             id: 'activitys-ul',
             name: 'swiper',
             options: {
-                current: 1
+                current: 1,
+                navigation: true
             }
         };
 

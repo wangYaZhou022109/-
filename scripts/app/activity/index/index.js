@@ -1,5 +1,5 @@
 var D = require('drizzlejs'),
-    RECOMMEND_SIZE = 6,
+    // RECOMMEND_SIZE = 6,
     RESEARCH_TYPE = 1,
     _ = require('lodash/collection');
 
@@ -50,7 +50,7 @@ exports.store = {
                 gensees = this.models.gensees,
                 researchActivitys = this.models.researchActivitys,
                 search = this.models.search;
-            D.assign(activitys.params, { size: RECOMMEND_SIZE });
+            // D.assign(activitys.params, { size: RECOMMEND_SIZE }); // 暂时不限制最大条数，将所有推荐的数据查询出来
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
             this.get(gensees);
