@@ -94,7 +94,6 @@ view('top')
 view('relevantexperts')
     #  div(data-dynamic-key=relevantexperts.menu)
     .h3 > echo('相关专家')
-        
     .comment-list.ask-list > ul.clearfix
         each(expert)
             li.topic-item.pull-left 
