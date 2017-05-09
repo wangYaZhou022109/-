@@ -20,6 +20,10 @@
                 overflow: hidden;
                 background: #f9f9f9;
                 border-color: #979797;
+                &.answer {
+                    padding: 0;
+                    padding-right: 5px;
+                }
             }
             & .input {
                 border-color: #979797;
@@ -31,6 +35,13 @@
                 min-height: 28px;
                 border-width: 1px;
                 border-style: solid;
+            }
+            & .setanswer {
+                background: var(--main-color);
+                color: var(--white);
+                padding: 5px;
+                text-align: center;
+                font-size: .8em;
             }
         }
         & a {
