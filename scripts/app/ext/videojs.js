@@ -31,7 +31,7 @@ var initVideo = function(payload) {
 
     return {
         getLearnTime: function() {
-            return Math.floor(learnTime / 1000);
+            return Math.floor(learnTime / 1000) || 0;
         },
         resetLearnTime: function() {
             // 重制learnTime
@@ -43,6 +43,12 @@ var initVideo = function(payload) {
 D.ComponentManager.register('videojs', function(view, el, options) {
     var handle = handlerView(view);
     var opt = {
+        controlBar: {
+            currentTimeDisplay: true,
+            timeDivider: true,
+            durationDisplay: true,
+            remainingTimeDisplay: false
+        },
         controls: true,
         loop: false,
         techOrder: ['html5', 'flash']
