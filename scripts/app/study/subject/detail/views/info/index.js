@@ -12,16 +12,7 @@ exports.store = {
     callbacks: {
         init: function(options) {
             var subject = options.subject,
-                studyProgress = subject.studyProgress,
-                courseChapters = subject.courseChapters,
-                collect = this.models.collect,
-                courseChapterSections = courseChapters[0].courseChapterSections;
-            if (studyProgress && (!studyProgress.currentChapterId || !studyProgress.currentSectionId)) {
-                studyProgress.currentChapterId = courseChapters[0].id;
-                studyProgress.currentSectionId = courseChapterSections[0].id;
-                subject.studyProgress = studyProgress;
-            }
-
+                collect = this.models.collect;
             this.models.region.set(options.region);
             this.models.subject.set(subject);
             this.models.state.set(options.state);

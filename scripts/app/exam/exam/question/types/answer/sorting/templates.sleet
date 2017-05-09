@@ -27,7 +27,7 @@ view('options')
             .clearfix
                 .pull-left > .common-title
                     if(state.isShowAnswer)
-                        echo('答案：' state.answer)
+                        @echo('答案：' state.answer)
                 .text-right
                     if(state.isShowGainScore)
                         span > echo('本题得分：' state.gainScore)

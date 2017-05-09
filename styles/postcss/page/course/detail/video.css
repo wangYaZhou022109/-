@@ -25,7 +25,47 @@ tianjun  video use
 }
 */
 
+.video-js .vjs-current-time, .vjs-no-flex .vjs-current-time {
+    display: inline
+}
+
+.video-js .vjs-duration,
+.vjs-no-flex .vjs-duration {
+  display: inline
+}
+
+.vjs-time-divider {
+  display: inline
+}
+
+.video-js .vjs-time-control {
+    padding-left: 0px;
+    padding-right: 0px;
+    min-width: 0px;
+}
+
 .plyr__play-large {
     height: auto;
 }
 
+.video-js {
+    width: 100% !important;
+    height: 100% !important;
+}
+.video-js:after {
+    content: '.';
+    display: block;
+    position: relative;
+    padding: 0;
+    padding-top: 40.1%; /* set this to (height/width)*100% (eg. 56%=16:9, 75%=4:3) */
+    margin: 0 0 0 -100%;
+    visibility: hidden;
+    height: 0;
+}
+.vjs-poster {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
