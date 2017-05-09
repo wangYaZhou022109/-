@@ -1,0 +1,7 @@
+#!handlebars
+
+moudle > .highedit-page
+    .highedit(data-region="highedit")
+
+view('highedit')
+    textarea.w-full(rows="5")

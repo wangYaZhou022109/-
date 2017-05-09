@@ -175,14 +175,16 @@ view('schedule')
                     .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
                     .clearfix
                         .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
+                            .inline-block.pointer
+                                i.iconfont.icon-favorite.icon-down 
+                                span 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
+                            .inline-block.pointer
+                                i.iconfont.icon-view.m-left.icon-see
+                                span 查看
+                        .inline-block.text-main-color.pointer
                             i.iconfont.icon-logout
-                            | 进入直播
+                            span 进入直播
                         span.m-left.gray-line |
                         i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
@@ -195,14 +197,16 @@ view('schedule')
                     .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
                     .clearfix
                         .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
+                            .inline-block.pointer
+                                i.iconfont.icon-favorite.icon-down 
+                                span 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
+                            .inline-block.pointer
+                                i.iconfont.icon-view.m-left.icon-see
+                                span 查看
+                        .inline-block.text-main-color.pointer
                             i.iconfont.icon-logout
-                            | 进入直播
+                            span 进入直播
                         span.m-left.gray-line |
                         i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
@@ -215,14 +219,16 @@ view('schedule')
                     .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
                     .clearfix
                         .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
+                            .inline-block.pointer
+                                i.iconfont.icon-favorite.icon-down 
+                                span 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        span.sub-text
+                            .inline-block.pointer
+                                i.iconfont.icon-view.m-left.icon-see
+                                span 查看
+                        .inline-block.pointer
                             i.iconfont.icon-favorite
-                            | 教室一
+                            span 教室一
                         span.m-left.gray-line |
                         i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
@@ -239,14 +245,16 @@ view('schedule')
                     .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
                     .clearfix
                         .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
+                            .inline-block.pointer
+                                i.iconfont.icon-favorite.icon-down 
+                                span 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
+                            .inline-block.pointer
+                                i.iconfont.icon-view.m-left.icon-see
+                                span 查看
+                        .inline-block.text-main-color.pointer
                             i.iconfont.icon-logout
-                            | 进入直播
+                            span 进入直播
                         span.m-left.gray-line |
                         i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
@@ -259,14 +267,16 @@ view('schedule')
                     .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
                     .clearfix
                         .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
+                            .inline-block.pointer
+                                i.iconfont.icon-favorite.icon-down 
+                                span 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        a
+                            .inline-block.pointer
+                                i.iconfont.icon-view.m-left.icon-see
+                                span 查看
+                        .inline-block.text-main-color.pointer
                             i.iconfont.icon-logout
-                            | 进入直播
+                            span 进入直播
                         span.m-left.gray-line |
                         i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
@@ -279,14 +289,16 @@ view('schedule')
                     .schedule-tit.m-bottom > | 面授：不忽悠的网络营销实战课
                     .clearfix
                         .pull-right
-                            i.iconfont.icon-favorite.icon-down
-                            | 下载
+                            .inline-block.pointer
+                                i.iconfont.icon-favorite.icon-down 
+                                span 下载
                             span.m-left.gray-line |
-                            i.iconfont.icon-view.m-left.icon-see
-                            | 查看
-                        span.sub-text
+                            .inline-block.pointer
+                                i.iconfont.icon-view.m-left.icon-see
+                                span 查看
+                        .inline-block.pointer
                             i.iconfont.icon-favorite
-                            | 教室一
+                            span 教室一
                         span.m-left.gray-line |
                         i.iconfont.icon-user-1.m-left.sub-text
                         span.sub-text 高级讲师：
@@ -300,55 +312,65 @@ view('resources')
         ul.schedule-online
             li
                 .pull-right
-                    i.iconfont.icon-favorite.icon-down
-                    | 下载
+                    .inline-block.pointer
+                        i.iconfont.icon-favorite.icon-down 
+                        span 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-view.m-left.icon-see
-                    | 查看
+                    .inline-block.pointer
+                        i.iconfont.icon-view.m-left.icon-see
+                        span 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
                     span.sub-text.m-left [选修]
                 span.schedule-online-tit.m-left.pull-left 面授：不忽悠的网络营销实战课
             li
                 .pull-right
-                    i.iconfont.icon-favorite.icon-down
-                    | 下载
+                    .inline-block.pointer
+                        i.iconfont.icon-favorite.icon-down 
+                        span 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-view.m-left.icon-see
-                    | 查看
+                    .inline-block.pointer
+                        i.iconfont.icon-view.m-left.icon-see
+                        span 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
                     span.sub-text.m-left [选修]
                 span.schedule-online-tit.m-left.pull-left 面授：不忽悠的网络营销实战课
             li
                 .pull-right
-                    i.iconfont.icon-favorite.icon-down
-                    | 下载
+                    .inline-block.pointer
+                        i.iconfont.icon-favorite.icon-down 
+                        span 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-view.m-left.icon-see
-                    | 查看
+                    .inline-block.pointer
+                        i.iconfont.icon-view.m-left.icon-see
+                        span 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
                     span.sub-text.m-left [选修]
                 span.schedule-online-tit.m-left.pull-left 面授：不忽悠的网络营销实战课
             li
                 .pull-right
-                    i.iconfont.icon-favorite.icon-down
-                    | 下载
+                    .inline-block.pointer
+                        i.iconfont.icon-favorite.icon-down 
+                        span 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-view.m-left.icon-see
-                    | 查看
+                    .inline-block.pointer
+                        i.iconfont.icon-view.m-left.icon-see
+                        span 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
                     span.sub-text.m-left [选修]
                 span.schedule-online-tit.m-left.pull-left 面授：不忽悠的网络营销实战课
             li
                 .pull-right
-                    i.iconfont.icon-favorite.icon-down
-                    | 下载
+                    .inline-block.pointer
+                        i.iconfont.icon-favorite.icon-down 
+                        span 下载
                     span.m-left.gray-line |
-                    i.iconfont.icon-view.m-left.icon-see
-                    | 查看
+                    .inline-block.pointer
+                        i.iconfont.icon-view.m-left.icon-see
+                        span 查看
                 .schedule-online-left.pull-left
                     | [在线课程]
                     span.sub-text.m-left [选修]

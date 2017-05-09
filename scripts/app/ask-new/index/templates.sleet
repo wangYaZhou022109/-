@@ -85,128 +85,128 @@ view('main')
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-1
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-1
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-2
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-2
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-3
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-3
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-4
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-4
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-5
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-5
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-6
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-6
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-7
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-7
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-8
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-8
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-9
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-9
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-10
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-10
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-11
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-11
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-12
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-12
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-13
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-13
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-14
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-14
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-15
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-15
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-16
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-16
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-17
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-17
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-18
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-18
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-19
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-19
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-20
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-20
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
                             li.aboutme-li.pull-left.relative.layout-mb-small
                                 .img-dv.relative
                                     img.w-full(src="images/img.png")
-                                    .true-icon#icon-21
-                                        .iconfont.icon-tick-circle
+                                    .true-icon.text-center#icon-21
+                                        .iconfont.icon-tick
                                     p.text-center.introduce 财会
 
                     .aboutme-btn.text-center
@@ -529,6 +529,12 @@ view('main')
                                                 span.pointer 分享
                                                 span |
                                                 span.pointer 举报
+
+
+
+
+
+
 
 
 
