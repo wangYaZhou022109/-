@@ -1,7 +1,10 @@
 var $ = require('jquery');
+var setanswer;
+var that;
 exports.events = {
     'click highedit-*': 'showHightedit',
-    'click delete-*': 'deleteItem'
+    'click delete-*': 'deleteItem',
+    'click setanswer-*': 'setAnswer'
 };
 
 exports.handlers = {
@@ -11,6 +14,14 @@ exports.handlers = {
     },
     deleteItem: function(id) {
         $(this.$('deletecot-' + id)).hide();
+    },
+    setAnswer: function(id) {
+        if ($(this.$('answercot-' + id)).val().length > 0) {
+            $(this.$('setanswer-' + id)).text('√设为答案').css('background', '#f1a77b');
+            setanswer = $(this.$('deletecot-' + id)).siblings().children().eq(1);
+            that = setanswer.children().eq(0);
+            that.text('设为答案').css('background', '#537fd5');
+        }
     }
 };
 
