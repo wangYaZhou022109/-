@@ -51,7 +51,8 @@ var setOptions = {
                     initWithSuject: function(exam) {
                         var types = this.module.store.models.types,
                             questions = exam.paper.questions;
-                        this.data = {
+
+                        D.assign(this.data, exam, {
                             name: exam.name,
                             examinee: this.app.global.currentUser.name,
                             totalCount: exam.paper.questionNum,
@@ -62,32 +63,35 @@ var setOptions = {
                             errorNum: 0,
                             noAnswerCount: 0,
                             examineeTotalScore: 0
-                        };
-                        this.data.correctNum = _.filter(questions, function(q) {
-                            if (q.type === 6) {
-                                return _.every(q.subs, function(s) {
-                                    return s.answerRecord && s.answerRecord.isRight === 1;
-                                });
-                            }
-                            if (q.answerRecord) {
-                                return q.answerRecord.isRight === 1;
-                            }
-                            return false;
-                        }).length;
+                        });
 
-                        this.data.errorNum = _.filter(questions, function(q) {
-                            if (q.type === 6) {
-                                return !_.every(q.subs, function(s) {
-                                    return s.answerRecord && s.answerRecord.isRight === 1;
-                                });
-                            }
-                            if (q.answerRecord) {
-                                return q.answerRecord.isRight === 0;
-                            }
-                            return false;
-                        }).length;
-                        this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
-                        this.data.examineeTotalScore = exam.examRecord.score / 100;
+                        if (exam.examRecord.status > 5) {
+                            this.data.correctNum = _.filter(questions, function(q) {
+                                if (q.type === 6) {
+                                    return _.every(q.subs, function(s) {
+                                        return s.answerRecord && s.answerRecord.isRight === 1;
+                                    });
+                                }
+                                if (q.answerRecord) {
+                                    return q.answerRecord.isRight === 1;
+                                }
+                                return false;
+                            }).length;
+
+                            this.data.errorNum = _.filter(questions, function(q) {
+                                if (q.type === 6) {
+                                    return !_.every(q.subs, function(s) {
+                                        return s.answerRecord && s.answerRecord.isRight === 1;
+                                    });
+                                }
+                                if (q.answerRecord) {
+                                    return q.answerRecord.isRight === 0;
+                                }
+                                return false;
+                            }).length;
+                            this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
+                            this.data.examineeTotalScore = exam.examRecord.score / 100;
+                        }
                     },
                     selectQuestion: function(id) {
                         var types = this.module.store.models.types;
@@ -141,29 +145,27 @@ var setOptions = {
                             subjective = function(question) {
                                 return [{ id: question.id, value: question.answerRecord.answer }];
                             };
-
                         this.data = _.map(questions, function(q) {
                             var values = [];
                             if (q.answerRecord) {
                                 if (q.type === 1 || q.type === 2) {
                                     values = choose(q);
-                                } else if (q.type === 6) {
-                                    values = _.map(q.subs, function(s) {
-                                        var subValues = [];
-                                        if (s.answerRecord) {
-                                            if (s.type === 1 || s.type === 2) {
-                                                subValues = choose(s);
-                                            } else {
-                                                subValues = subjective(s);
-                                            }
-                                        }
-                                        return { key: s.id, value: subValues };
-                                    });
                                 } else {
                                     values = subjective(q);
                                 }
+                            } else if (q.type === 6) {
+                                values = _.map(q.subs, function(s) {
+                                    var subValues = [];
+                                    if (s.answerRecord) {
+                                        if (s.type === 1 || s.type === 2) {
+                                            subValues = choose(s);
+                                        } else {
+                                            subValues = subjective(s);
+                                        }
+                                    }
+                                    return { key: s.id, value: subValues };
+                                });
                             }
-
                             return { key: q.id, value: values };
                         });
                     }
