@@ -53,5 +53,8 @@ exports.dataForEntityModule = function(entity) {
                 return me.module.dispatch('updateProgress');
             });
         },
+        updateProgress: function() {
+            return me.module.dispatch('updateProgress');
+        }
     };
 };
