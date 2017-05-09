@@ -38,10 +38,6 @@ exports.dataForActions = {
     uploadFile: function(payload) {
         var view = this.module.items.upload,
             progress = this.bindings.progress;
-        if (progress.data.attachments && progress.data.attachments.length >= 3) {
-            this.app.message.error('最多只能添加一个附件!');
-            return false;
-        }
         progress.set(D.assign(progress.data, payload));
         this.app.viewport.modal(view);
         return false;

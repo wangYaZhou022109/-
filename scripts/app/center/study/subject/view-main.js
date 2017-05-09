@@ -49,7 +49,7 @@ exports.dataForTemplate = {
             progress.btnText = btnText[progress.finishStatus] || '查看详情';
             progress.btnUrl = '#/study/subject/detail/' + progress.courseId;
             if (course.url) progress.btnUrl = course.url;
-            progress.studyTotalTime = (Number(studyTotalTime) / 60).toFixed(1);
+            progress.studyTotalTime = Number(studyTotalTime) / 60;
             return progress;
         });
         return progressList;
