@@ -13,7 +13,7 @@ exports.dataForTemplate = {
         _.map(lists, function(opt, i) {
             var list = opt;
             list.i = i + 1;
-            list.studyTotalTime = Number(list.studyTotalTime) / 60; // 转换为分钟
+            list.studyTotalTime = window.parseInt(Number(list.studyTotalTime) / 60); // 转换为分钟
             if (i <= 2) {
                 if (list.member.headPortrait) {
                     list.cover = me.bindings.download.getFullUrl() + '?id=' + list.member.headPortrait;
