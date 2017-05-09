@@ -49,6 +49,7 @@ exports.store = {
         courseTime: { url: '../course-study/course-study-progress/total-time', autoLoad: 'after' }, // 总学习时长
         lecturer: { url: '../course-study/gensee/find-lecturer', autoLoad: 'after' }, // 是否为讲师
         expert: { url: '../ask-bar/expert/find-expert', autoLoad: 'after' }, // 是否专家
+        expertMe: { url: '../ask-bar/expert/me', autoLoad: 'after' }, // 当前用户的专家信息
         contact: { url: '../train/project/find-contact', autoLoad: 'after' }, // 是否需求方
         classstff: { url: '../train/classstaff/find-classstaff', autoLoad: 'after' }, // 是否班务
         announcements: { url: '../system/operation/announcement/person-list' } // 公告
