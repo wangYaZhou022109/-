@@ -22,8 +22,12 @@
                 top: var(--space);
                 right: var(--space);
                 cursor: pointer;
+                width: var(--font-title);
+                height: var(--font-title);
+                border-radius: 50%;
+                background: var(--danger-color);
                 & .iconfont {
-                    color: var(--custom-color-1);
+                    color: var(--white);
                 }
             }
         }

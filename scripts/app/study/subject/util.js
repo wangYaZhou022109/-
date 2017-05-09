@@ -76,9 +76,9 @@ items = {
         var progress = section.progress || { finishStatus: 0 },
             resource = section.resource || {},
             examScore = progress.examScore || 0,
-            score = (examScore / 100).toFixed(1),
-            btnText = { 0: '进入考试', 1: '查看详情', 2: '查看详情', 7: '查看详情' },
-            statusText = { 1: '成绩：' + score, 2: '成绩：' + score, 7: '待评卷' },
+            score = examScore / 100,
+            btnText = { 0: '参与考试', 1: '查看详情', 2: '查看详情', 6: '重新考试', 7: '查看详情' },
+            statusText = { 1: '成绩：' + score, 2: '成绩：' + score, 6: '成绩：' + score, 7: '待评卷' },
             timeText;
         if (resource && resource.startTime && resource.endTime) {
             timeText = helper.dateMinute(resource.startTime) + ' 至 ' + helper.dateMinute(resource.endTime);

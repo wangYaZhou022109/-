@@ -1,0 +1,137 @@
+#!handlebars
+
+module > .addexam-page > .temporarypaper2-page
+    .temporarypaper2-title(data-region="temporarypaper2-title")
+    .temporarypaper2-content(data-region="temporarypaper2-content")
+
+view('temporarypaper2-title')
+    .layout-mt-small.clearfix
+        .test.pull-left
+            .btn#choosepapertopic
+                i.iconfont.icon-note.m-right
+                span 选择试题
+            .btn#temporarytest
+                i.iconfont.icon-tag.m-right
+                span 临时试题
+            .btn#importest
+                i.iconfont.icon-cloud-up.m-right
+                span 导入试题
+        .pull-right 
+            span 试题总数：
+            span.strong.m-right 0
+            span 试题总分：
+            span.strong 0
+    .layout-mt-small
+        table.table
+            tr
+                th 类型
+                th.text-main-color 单选
+                th.text-main-color 多选
+                th.text-main-color 判断
+                th.text-main-color 填空
+                th.text-main-color 问答
+                th.text-main-color 阅读理解
+                th.text-main-color 排序
+                th.text-main-color 连线
+                th.custom-color-3 全部
+            tr
+                td 数量
+                td 2
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td 2
+            tr
+                td 分数
+                td 20
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td -
+                td 20
+
+view('temporarypaper2-content')
+    .test-box.layout-mt-small.border.around
+        .test-1
+            .h4 单选题
+            .h4.m-top 测试  课程原型
+            .answer
+                ul
+                    li 
+                        label.answer-item A
+                        span.sub-text shdjajsh
+                    li 
+                        label.answer-item B
+                        span.sub-text shdjajsh
+                    li 
+                        label.answer-item C
+                        span.sub-text shdjajsh
+                    li 
+                        label.answer-item D
+                        span.sub-text shdjajsh
+            .clearfix > .pull-right 
+                span.m-right 标准答案：A
+                span.m-right 题型：单选
+                span 难度：低
+            .m-top.border.top.dashed.m-bottom 
+            .clearfix 
+                .pull-left
+                    .inline-block.m-right   
+                        b.error 题目难度：
+                        | 低
+                    .input-box.inline-block
+                        .text 题目分数：
+                        input.input(value='2')
+                .pull-right.m-top
+                    i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                    i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
+                    i.iconfont.icon-trash
+        .test-2.layout-mt-small
+            .h4.layout-mb-small 排序
+            .small-font 题目8
+            .answer
+                ul
+                    li 
+                        .option-item A
+                        .sub-text shdjajsh
+                    li 
+                        .option-item B
+                        .sub-text shdjajsh
+                    li 
+                        .option-item C
+                        .sub-text shdjajsh
+                    li 
+                        .option-item D
+                        .sub-text shdjajsh
+            .clearfix > .pull-right 
+                span.m-right 标准答案：A
+                span.m-right 题型：单选
+                span 难度：低
+            .clearfix 
+                .pull-left
+                    .inline-block.m-right   
+                        b.error 题目难度：
+                        | 低
+                    .input-box.inline-block
+                        .text 题目分数：
+                        input.input(value='2')
+                .pull-right.m-top
+                    i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
+                    i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
+                    i.iconfont.icon-trash
+
+
+
+
+
+        
+
+
+

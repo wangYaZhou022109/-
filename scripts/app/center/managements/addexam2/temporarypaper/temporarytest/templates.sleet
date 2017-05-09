@@ -1,0 +1,77 @@
+#!handlebars
+
+module > .temporarytest-page
+    .temporarytest(data-region="temporarytest")
+
+view('temporarytest')
+    .form.align-left
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 试题类型
+            .conent
+                select.tag-height
+                    option 单选
+                    option 多选
+                    option 填空
+                    option 判断
+                    option 问答
+                    option 阅读理解
+                    option 排序
+                    option 连线
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 难易度
+            .conent
+                select.tag-height
+                    option 全部
+                    option 低
+                    option 中
+                    option 难
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 试题分数
+            .content > input.input.tag-height
+        .form-row.pull-left.w-fourth.row-block
+            label.required.tag-height 添至试题库
+            .content
+                input.input.tag-height
+                .btn.choice.tag-height 选择
+        .form-row
+            label 试题信息
+            textarea.w-full(rows="5")
+    .layout-mt-small
+        table.table
+            tr
+                th(colspan="4") 选项
+            tr
+                td 题号
+                td 描述
+                td 答案
+                td 操作
+            tr
+                td A
+                td > textarea.w-full
+                td > input(type="radio")
+                td
+                    a 高级编辑
+                    a 删除
+            tr
+                td B
+                td > textarea.w-full
+                td > input(type="radio")
+                td
+                    a 高级编辑
+                    a 删除
+            tr
+                td C
+                td > textarea.w-full
+                td > input(type="radio")
+                td
+                    a 高级编辑
+                    a 删除
+            tr
+                td D
+                td > textarea.w-full
+                td > input(type="radio")
+                td
+                    a 高级编辑
+                    a 删除
+            tr
+                th.text-main-color(colspan="4") 添加选项时

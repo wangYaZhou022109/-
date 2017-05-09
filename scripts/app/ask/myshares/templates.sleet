@@ -3,7 +3,11 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你共分享了'+countNum+'个文章')
+        #  .pull-right > echo('你共分享了'+countNum+'个文章')
+        .pull-right.m-top
+            span 你共发表了
+            span.h3.custom-color-3 99
+            span 篇文章
         ul
             li.active > echo('我的文章')
     .comment-list.ask-list > ul
@@ -48,10 +52,12 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
-                                    compare(concernNum 'gt' 0)  
-                                        .item(id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
-                                    else
-                                        .item(id='trend-follow-3_'  + id data-name='id' data-value='3_' + id) > echo('+') + string('follow')
+                                    compare(concernNum 'gt' 0)
+                                        .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
+                                    else 
+                                        .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow') 
                                     compare(praiseNum 'gt' 0)
                                         .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                                     else
@@ -87,18 +93,18 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
-                                    compare(concernNum 'gt' 0)  
-                                        .item(id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
-                                    else
-                                        .item(id='trend-follow-3_'  + id data-name='id' data-value='3_' + id) > echo('+') + string('follow')
-                                    #  compare(praiseNum 'gt' 0)
-                                    #      .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
-                                    #  else
-                                    #      .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                    compare(concernNum 'gt' 0)
+                                        .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
+                                    else 
+                                        .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
                                     compare(praiseNum 'gt' 0)
-                                        .item(id='unpraise-'+ id data-name='id' data-value= id ) > string('unpraise') +  echo('（'+ praiseNum +'）')
+                                        .item(id='unpraise-3_'+ id data-name='id' data-value='3_' + id)
+                                            string('unpraise') +  echo('（'+ praiseNum +'）')
                                     else
-                                        .item(id='praise-'+ id data-name='id' data-value= id ) > string('praise') +  echo('（'+ praiseNum +'）') 
+                                        .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
+                                            string('praise') +  echo('（'+ praiseNum +'）') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                                 
                                     .item > .share-bar

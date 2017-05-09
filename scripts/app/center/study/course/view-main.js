@@ -46,7 +46,7 @@ exports.dataForTemplate = {
             }
             progress.btnText = btnText[progress.finishStatus];
             progress.btnUrl = '#/study/course/detail/' + progress.courseId;
-            progress.studyTotalTime = (Number(studyTotalTime) / 60).toFixed(1);
+            progress.studyTotalTime = Number(studyTotalTime) / 60;
             return progress;
         });
         return progressList;

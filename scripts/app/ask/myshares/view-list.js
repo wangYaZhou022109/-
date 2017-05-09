@@ -84,16 +84,30 @@ exports.dataForActions = {
     publish: function(payload) {
         return payload;
     },
+    // praise: function(payload) {
+    //     var data = payload;
+    //     data.objectType = 3;
+    //     return payload;
+    // },
+    // unpraise: function(payload) {
+    //     var data = payload;
+    //     data.objectType = 3;
+    //     return payload;
+    // }
     praise: function(payload) {
-        var data = payload;
-        data.objectType = 3;
-        return payload;
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
     },
     unpraise: function(payload) {
-        var data = payload;
-        data.objectType = 3;
-        return payload;
-    }
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
 };
 
 exports.actionCallbacks = {
@@ -101,14 +115,30 @@ exports.actionCallbacks = {
         this.app.message.success('删除成功！');
         this.module.dispatch('init');
     },
-    follow: function() {
-        this.app.message.success('关注成功！');
-        // this.module.dispatch('init');
+    follow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
+        follow.hidden = true;
+        unfollow.hidden = false;
+        setTimeout(function() {
+            me.app.message.success('关注成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
-    // unfollow: function() {
-    //     this.app.message.success('取消成功！');
-    //     // this.module.dispatch('init');
-    // },
+    unfollow: function(data) {
+        var concern = data[0];
+        var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
+        var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
+        follow.hidden = false;
+        unfollow.hidden = true;
+        setTimeout(function() {
+            me.app.message.success('取消成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
+    },
     shut: function() {
         this.app.message.success('删除成功!');
         // this.module.dispatch('init');
