@@ -1,0 +1,13 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+
+view('main')
+    p > echo(currentExam.examNotes)
+    hr
+    p > echo(currentExam.content)
+    .layout-mt-small
+        each(currentExam.buttons)
+            button.btn(id=id) > echo(text)

@@ -26,7 +26,7 @@ exports.store = {
                     return _.find(this.findAllSections(), { id: sectionId });
                 },
                 findSectionForReferId: function(referenceId) {
-                    return _.find(this.findAllSections(), { referenceId: referenceId });
+                    return _.find(this.findAllSections(), { referenceId: referenceId }) || {};
                 },
                 findSectionsForType: function(type) {
                     return _.filter(this.findAllSections(), { sectionType: type });

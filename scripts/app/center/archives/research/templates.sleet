@@ -25,7 +25,7 @@ view('main')
                     td > echo(startTimeStr)
                     td > echo(endTimeStr)
                     td > map('research-activity-status' researchQuestionary.status)
-                    td > map('research-record' status)
+                    td > echo(statusStr)
                     td > echo(createTimeStr)
                     td > a(href='#/exam/research-activity/research-summary-detail/'+id target='_blank') > setting('person.archives.exam.detail')
                     else

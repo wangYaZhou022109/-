@@ -26,14 +26,11 @@ exports.actions = {
 exports.dataForActions = {
     submitTask: function(payload) {
         var attachments = this.bindings.progress.data.sectionAttachments || [];
-        if (!payload.name) {
-            this.app.message.error('附件名称不能为空!');
+        if (attachments.length === 0 && !payload.description) {
+            this.app.message.error('附件名称、作业详情不能同时为空!');
             return false;
-        } else if (!payload.description) {
-            this.app.message.error('附件描述不能为空!');
-            return false;
-        } else if (attachments.length === 0) {
-            this.app.message.error('请上传附件!');
+        } else if (!payload.name && !payload.description) {
+            this.app.message.error('附件、作业详情不能同时为空!');
             return false;
         }
         return payload;
