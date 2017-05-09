@@ -123,6 +123,7 @@ exports.store = {
                 var pageData = me.models.page.praise(obj.objectId, obj.objectType);
                 setTimeout(function() {
                     me.app.message.success('点赞成功');
+                    me.module.dispatch('leftrefresh');
                     page.data = pageData;
                     page.changed();
                 }, 1000);
@@ -136,9 +137,9 @@ exports.store = {
                 var obj = data[0];
                 var page = me.models.page;
                 var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
-                me.module.dispatch('leftrefresh');
                 setTimeout(function() {
                     me.app.message.success('取消成功');
+                    me.module.dispatch('leftrefresh');
                     page.data = pageData;
                     page.changed();
                 }, 1000);

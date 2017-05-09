@@ -110,27 +110,37 @@ exports.store = {
                 // me.models.page.params.page++;
             });
         },
+        // follow: function(payload) {
+        //     var follow = this.models.follow,
+        //         me = this,
+        //         myshares = this.models.myshares;
+        //     follow.set(payload);
+        //     myshares.set({ id: this.models.myshares.data.id, concernType: '3' });
+        //     return this.post(follow).then(function() {
+        //         me.app.message.success('关注成功');
+        //         me.get(myshares);
+        //     });
+        // },
+        // unfollow: function(payload) {
+        //     var unfollow = this.models.unfollow,
+        //         me = this,
+        //         myshares = this.models.myshares;
+        //     myshares.set({ id: this.models.myshares.data.id, concernType: '3' });
+        //     unfollow.set({ id: payload.id, concernType: '3' });
+        //     return this.put(unfollow).then(function() {
+        //         me.app.message.success('取消成功');
+        //         me.get(myshares);
+        //     });
+        // },
         follow: function(payload) {
-            var follow = this.models.follow,
-                me = this,
-                myshares = this.models.myshares;
+            var follow = this.models.follow;
             follow.set(payload);
-            myshares.set({ id: this.models.myshares.data.id, concernType: '3' });
-            return this.post(follow).then(function() {
-                me.app.message.success('关注成功');
-                me.get(myshares);
-            });
+            return this.post(follow);
         },
         unfollow: function(payload) {
-            var unfollow = this.models.unfollow,
-                me = this,
-                myshares = this.models.myshares;
-            myshares.set({ id: this.models.myshares.data.id, concernType: '3' });
-            unfollow.set({ id: payload.id, concernType: '3' });
-            return this.put(unfollow).then(function() {
-                me.app.message.success('取消成功');
-                me.get(myshares);
-            });
+            var unfollow = this.models.unfollow;
+            unfollow.set(payload);
+            return this.put(unfollow);
         },
         shut: function(payload) {
             // console.log(payload);
