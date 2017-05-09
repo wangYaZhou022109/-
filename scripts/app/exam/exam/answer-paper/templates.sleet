@@ -40,6 +40,7 @@ view('head')
     .pull-left.title > echo('正在作答: ' state.name)
     .text-right
         ul.head-info.inline-block
+            li > i.iconfont.icon-notice(style='color:#39fe2c')
             li.border.right > echo('本卷共' state.totalCount '题，总分' state.totalScore '分')
             li.border.right > echo('已答：' state.answeredCount)
             li.border.right > echo('未答：' state.noAnswerCount)
@@ -70,6 +71,11 @@ view('main')
                             div.question-type-item.checked(data-dynamic-key=id)
                         compare(status 'ne' 'check')
                             div.question-type-item(data-dynamic-key=id)
+
+    .text-right
+        .btn.white.border.m-right 上一题
+        .btn.white.border 下一题
+
 
 view('answer-detail')
     if(state.showAnswerDetail)
