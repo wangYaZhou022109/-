@@ -27,4 +27,8 @@ view('list')
         li.tabs-cont-item.active
             .comment-list.ask-list > ul
                 div(data-dynamic-key=state.menu)
+    .text-center
+        .content(style="margin: 15% 0")
+            img(src="images/nothing.png")
+            p.text-center 暂无与你相关的信息哦！
         

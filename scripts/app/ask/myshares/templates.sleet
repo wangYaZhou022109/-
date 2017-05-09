@@ -3,7 +3,11 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你共分享了'+countNum+'个文章')
+        #  .pull-right > echo('你共分享了'+countNum+'个文章')
+        .pull-right.m-top
+            span 你共发表了
+            span.h3.custom-color-3 99
+            span 篇文章
         ul
             li.active > echo('我的文章')
     .comment-list.ask-list > ul
