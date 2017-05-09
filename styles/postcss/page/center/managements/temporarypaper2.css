@@ -1,0 +1,37 @@
+.temporarypaper2-page {
+    & .test-box {
+        padding: 1em 2.5em;
+        & li {
+            margin: 1em 0;
+            & .answer-item {
+                    display: inline-block;
+                    width: calc(var(--space)*2);
+                    height: calc(var(--space)*2);
+                    background: #e9eef1;
+                    text-align: center;
+                    line-height: calc(var(--space)*2);
+                    margin-right: var(--space);
+            }
+        }
+        & .input-box {
+            position: relative;
+            & .text {
+                position: absolute;
+                padding: 7px 0 7px 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            & .input {
+                outline: none;
+                padding: 7px;
+                min-width: 100px;
+                width: 100%;
+                min-height: 28px;
+                padding-left: 80px;
+            }
+        }
+        & .option-item {
+            background: #e9eef1;
+        }
+    }
+}

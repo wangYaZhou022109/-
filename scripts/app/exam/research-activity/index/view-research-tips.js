@@ -74,7 +74,9 @@ exports.buttons = function() {
             }
         };
 
-    if (now >= research.startTime && now <= research.endTime) { // 进行中
+    if (!researchRecord.id || research.startTime > now) { // 没有权限
+        return buttons;
+    } else if (now >= research.startTime && now <= research.endTime) { // 进行中
         if (researchRecord.status === 0) {
             buttons.push(beginBtn);
         } else {

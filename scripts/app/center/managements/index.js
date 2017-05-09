@@ -34,7 +34,7 @@ exports.items = {
     'center/managements/addtopicclass': { isModule: true },
     'center/managements/addwork': { isModule: true },
     'center/managements/addevaluation': { isModule: true },
-    'center/managements/addexam': { isModule: true },
+    'center/managements/addexam2': { isModule: true },
     'center/managements/addunit': { isModule: true },
     'center/managements/addcarinfo': { isModule: true },
     'center/managements/choosedate': { isModule: true }

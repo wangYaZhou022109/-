@@ -32,7 +32,7 @@ exports.afterRender = function() {
     };
 
     setTimeout(function() {
-        me.commitProgress(false);
+        me.commitProgress();
     }, 1000 * 10); // 10秒后完成 10秒提交一次
     // 加载完毕之后 开始进度
     return this.module.dispatch('startProgress');
@@ -40,8 +40,9 @@ exports.afterRender = function() {
 
 exports.mixin = {
     commitProgress: function(flag) {
+        var me = this;
         return this.module.dispatch('updateProgress', { logId: logId }).then(function() {
-            if (flag !== false) this.module.dispatch('startProgress');
+            if (flag !== false) me.module.dispatch('startProgress');
         });
     }
 };

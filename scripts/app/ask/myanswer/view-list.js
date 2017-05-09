@@ -111,16 +111,6 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    // myreply: function(data) {
-    //     var trends = data.myreply;
-    //     _.forEach(trends, function(value) {
-    //         var obj = value,
-    //             date = new Date(obj.createTime);
-    //         obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    //         + '   ' + date.getHours() + ':' + date.getMinutes();
-    //     });
-    //     return trends;
-    // },
     page: function(data) {
         var trends = data.myreply;
         var page = this.bindings.page.data;
@@ -131,6 +121,27 @@ exports.dataForTemplate = {
                 date = new Date(obj.questionDiscuss.createTime),
                 replyNum = obj.questionDiscuss.replyNum;
             var url = obj.member.headPortrait;
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var d = date.getDate();
+            var h = date.getHours();
+            var mi = date.getMinutes();
+            if (y <= 9) {
+                y = '0' + y;
+            }
+            if (m <= 9) {
+                m = '0' + m;
+            }
+            if (d <= 9) {
+                d = '0' + d;
+            }
+            if (h <= 9) {
+                h = '0' + h;
+            }
+            if (mi <= 9) {
+                mi = '0' + mi;
+            }
+            obj.questionDiscuss.createTime = y + '-' + m + '-' + d + '   ' + h + ':' + mi;
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.member.headPortrait = 'images/default-userpic.png';
             } else {
@@ -139,8 +150,6 @@ exports.dataForTemplate = {
             if (replyNum === null) {
                 obj.questionDiscuss.replyNum = 0;
             }
-            obj.questionDiscuss.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-            + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {
                 if (v.id === obj.questionDiscuss.id) {
                     flag = false;
