@@ -6,15 +6,15 @@ exports.events = {
 
 exports.handlers = {
     showChoosepapertopic: function() {
-        var model = this.module.items['center/managements/addexam/temporarypaper/choosepapertopic'];
+        var model = this.module.items['center/managements/addexam2/temporarypaper/choosepapertopic'];
         this.app.viewport.modal(model);
     },
     showTemporarytest: function() {
-        var model = this.module.items['center/managements/addexam/temporarypaper/temporarytest'];
+        var model = this.module.items['center/managements/addexam2/temporarypaper/temporarytest'];
         this.app.viewport.modal(model);
     },
     showImportest: function() {
-        var model = this.module.items['center/managements/addexam/temporarypaper/importest'];
+        var model = this.module.items['center/managements/addexam2/temporarypaper/importest'];
         this.app.viewport.modal(model);
     }
 };

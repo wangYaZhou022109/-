@@ -45,7 +45,8 @@ view('choosequestion')
                     .text > span.strong 选项A：
                     textarea.input.block(placeholder="输入描述" rows="3")
                 .set-row.clearfix
-                    .pull-left > input.input(placeholder="输入分数")
+                    .pull-left 
+                        span 设为答案
                     .pull-right.text-tips.m-top 
                         a#highedit-1 高级编辑
                         a#delete-1 删除
