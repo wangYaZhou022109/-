@@ -165,6 +165,10 @@
                 line-height: 2em;
                 margin-right: var(--space);
                 vertical-align: top;
+
+                & + label {
+                    width: 14px;
+                }
             }
 
             & .checkbox,
