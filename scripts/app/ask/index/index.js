@@ -24,7 +24,17 @@ exports.store = {
         middlestate: {},
         bottomstate: {}
     },
-    callbacks: {}
+    callbacks: {
+        refresh: function() {
+            this.models.middlestate.changed();
+        },
+        leftrefresh: function() {
+            this.models.leftstate.changed();
+        },
+        bottomsrefresh: function() {
+            this.models.bottomstate.changed();
+        }
+    }
 };
 
 

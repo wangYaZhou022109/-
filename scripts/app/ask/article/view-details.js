@@ -4,6 +4,7 @@ exports.bindings = {
 };
 exports.actions = {
     'click uploadFile': 'uploadFile',
+    'click upfile': 'uploadFile',
 };
 
 exports.dataForActions = {

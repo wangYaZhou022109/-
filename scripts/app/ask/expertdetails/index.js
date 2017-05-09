@@ -25,6 +25,9 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' }
     },
     callbacks: {
+        refresh: function() {
+            this.models.followcount.changed();
+        },
         init: function(payload) {
             var expert = this.models.expert,
                 relevantexperts = this.models.relevantexperts,

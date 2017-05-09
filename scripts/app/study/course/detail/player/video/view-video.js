@@ -22,8 +22,7 @@ exports.components = [function() {
         options: {
             currentTime: currentTime,
             video: {
-                height: 500, // 自动缩放 aspectRatio
-                // aspectRatio: true,
+                // height: 500, // 自动缩放 aspectRatio
                 autoplay: true
             },
         }
@@ -65,13 +64,15 @@ exports.mixin = {
     commitProgress: function() {
         var player = this.components.player;
         var time = player.getLearnTime();
+        var resourceTotalTime = Math.floor(player.duration());
         var process = {
             logId: logId,
             lessonLocation: Math.floor(player.currentTime()),
             studyTime: player.getLearnTime(),
-            resourceTotalTime: Math.floor(player.duration()),
+            resourceTotalTime: resourceTotalTime,
         };
         if (time < 1) return false;
+        if (resourceTotalTime === 0) return false;
         return this.chain([
             this.module.dispatch('updateProgress', process),
             function() { player.resetLearnTime(); }

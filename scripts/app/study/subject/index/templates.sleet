@@ -20,7 +20,7 @@ view('list')
                     .detail-wrapper
                         p
                             if(description)
-                                @echo(description)
+                                echo(description)
                             else
                                 echo('暂无')
                 .clearfix
@@ -30,7 +30,7 @@ view('list')
                     .title.text-overflow > echo(name)
                     .sub-text.text-overflow
                         if(description)
-                            @echo(description)
+                            echo(description)
                         else
                             echo('&nbsp;')
         #pager.pagination

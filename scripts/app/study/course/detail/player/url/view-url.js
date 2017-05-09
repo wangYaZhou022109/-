@@ -40,8 +40,9 @@ exports.afterRender = function() {
 
 exports.mixin = {
     commitProgress: function(flag) {
+        var me = this;
         return this.module.dispatch('updateProgress', { logId: logId }).then(function() {
-            if (flag !== false) this.module.dispatch('startProgress');
+            if (flag !== false) me.module.dispatch('startProgress');
         });
     }
 };

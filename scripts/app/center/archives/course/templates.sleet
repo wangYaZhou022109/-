@@ -25,7 +25,7 @@ view('main')
             tbody > each(progressList)
                 tr
                     td > echo(i)
-                    td.nowrap > .text-overflow > echo(courseName)
+                    td.nowrap > .text-overflow > echo(courseInfo.name)
                     td > map('course-register-type' type)
                     td > map('is-required' isRequired)
                     td
@@ -38,7 +38,7 @@ view('main')
                             echo(finishTimeStr)
                         else
                             echo('—')
-                    td > echo(studyTotalTime)
+                    td > secondToMinute(studyTotalTime)
                     td > map('course-info-study-status' finishStatus)
                     else
                         tr > td(colspan='9') > p.text-center > string('no-data')

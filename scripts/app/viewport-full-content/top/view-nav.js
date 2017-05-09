@@ -12,6 +12,13 @@ exports.dataForTemplate = {
     navs: function(data) {
         var navs = data.navs || [];
         navs = _.reject(navs, ['show', 0]);
+        _.map(navs, function(item) {
+            var r = item;
+            r.link = false;
+            if (r.url.indexOf('http') > -1) {
+                r.link = true;
+            }
+        });
         return navs;
     }
 };
