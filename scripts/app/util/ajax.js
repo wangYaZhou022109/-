@@ -3,7 +3,7 @@ var WS = window.WebSocket || null,
     _ = require('lodash/collection'),
     D = require('drizzlejs'),
     messages = require('./errors'),
-    timeout = 5000,
+    timeout = 30000,
     cache = {},
     Socket, errors, handleError, doAjax, toCacheKey;
 

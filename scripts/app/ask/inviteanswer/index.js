@@ -40,6 +40,12 @@ exports.store = {
         }
     },
     callbacks: {
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         init: function(payload) {
             var trends = this.models.trends;
             var params = this.models.page.params;
@@ -96,6 +102,7 @@ exports.afterRender = function() {
                 me.dispatch('page', me.renderOptions);
             }
         });
+        this.dispatch('set', this.renderOptions.callback);
         this.dispatch('speech');
         this.dispatch('init', this.renderOptions);
     }

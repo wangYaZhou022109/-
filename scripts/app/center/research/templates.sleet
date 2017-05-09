@@ -24,9 +24,9 @@ view('main') > form
                     .img > .img-cont > img(src=imgUrl)
                     .inline-block.title > echo(researchQuestionary.name)
                     .time 调研时间：
-                        dateTime(researchQuestionary.startTime) 
+                        dateMinute(researchQuestionary.startTime) 
                         | 至
-                        dateTime(researchQuestionary.endTime)
+                        dateMinute(researchQuestionary.endTime)
                 .state > map('research-person-center-status', status)
                 .btn-row
                     compare(status 'eq' 3)

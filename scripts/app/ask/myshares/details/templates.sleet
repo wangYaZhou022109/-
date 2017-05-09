@@ -22,7 +22,7 @@ view('main')
             .comment-content
                 .user-info.m-top
                     a(href='javascript:;') > echo(details.member.fullName)
-                    span > echo('·文章·')
+                    span > echo('·发表文章·')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') + each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
@@ -40,14 +40,15 @@ view('main')
                                 .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                     .item > span(id ='report-' + 2 + '_' + details.id +'_' + details.createMemberId data-name='id' data-value= 2 +'_' + details.id +'_' + details.createMemberId) > string('report')
                 .pull-left
-                    span.pull-left 附件：
-                    i.iconfont.icon-image.pull-left.m-right
-                    a.normal(href="javascript") > each(details.questionAttachList) > echo(' '+ name)
+                    if(haveAttachments)
+                        span.pull-left 附件：
+                        i.iconfont.icon-image.pull-left.m-right
+                        a.normal(href="javascript") > each(details.questionAttachList) > echo(' '+ name)
     section.section
-        form.vertical
+        form
             .h3 讨论区
             .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
-            textarea.input.w-full(name='t_content' rows='5')
+            textarea.input.w-full#content(name='t_content')
             input.input(type='hidden' name='organizationId' value=details.organizationId)
             input.input(type='hidden' name='id' value=details.id)
             .m-top.text-right > .btn#discuss 发表

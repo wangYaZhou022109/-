@@ -23,6 +23,7 @@ exports.store = {
         //     }
         // },
         out: { url: '../ask-bar/pending-audit/out' },
+        reviewed: { url: '../ask-bar/my-manage/reviewed' }
     },
     callbacks: {
         init: function(paylaod) {
@@ -53,10 +54,17 @@ exports.store = {
             this.models.out.set(payload);
             return this.put(this.models.out);
         },
+        // reviewed: function() {
+        //     var reviewed = this.models.reviewed;
+        //     reviewed.clear();
+        //     reviewed.params = { auditStatus: 1 };
+        //     return this.get(reviewed);
+        // }
     }
 };
 exports.afterRender = function() {
     this.dispatch('init', this.renderOptions);
+    // this.dispatch('reviewed');
 };
 
 exports.title = '提问审核';

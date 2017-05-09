@@ -14,6 +14,9 @@ exports.store = {
         rightstate: {}
     },
     callbacks: {
+        refresh: function() {
+            this.models.rightstate.changed();
+        },
         init: function() {
             var expert = this.models.expert,
                 state = this.models.leftstate;

@@ -12,7 +12,7 @@ view('notloggin-title')
 		span o
 
 view('notloggin-content')
-	.notloggin
+	.notloggin#notloggin
 		.notloggin-form.border.around
 			.notloggin-info.text-center
 				.besure.m-right.inline-block 
@@ -35,7 +35,7 @@ view('notloggin-content')
 						.form-row
 							label.label.required 验证码
 							.content > input.input(placeholder="请输入您收到的验证码")
-					.btn.radius.gray.tag-height 下一步
+					.btn.radius.gray.tag-height#next 下一步
 				.layout-mt
 					p.text-main-color Q/A
 					.sub-text
@@ -55,6 +55,68 @@ view('notloggin-content')
 						.text-left
 							.timeone 早7:30—8:50 午餐12:00—13:00
 							.timetwo 晚餐18:00—19:00 培训结束当天餐厅提前至17:30开餐
-	.loggin
-		aaaaaaaaaaaaaaaaaa
+	.loggin#loggin
+		.notloggin-form.border.around
+			.notloggin-info.text-center
+				.besure.m-right.inline-block.pointer#besure
+					img(src='images/left.jpg')
+					span 报名码确认
+				.info.info2.inline-block
+					img(src='images/right.jpg')
+					span 报名信息
+				.layout-mt-small.text-center
+					span.h3.m-right 您要报名的是
+					span.text-main-color.h3 活动名称
+					span.sub-text.small-font （2017-01-25 - 2017-02-02）
+					.layout-mt > .form.length
+						.form-row
+							label.label 培训班名称
+							.content > input.input(placeholder="中国移动学院PMP三期")
+						.form-row.relative
+							label.label 报名码
+							.content
+								input.input(placeholder="98524556")
+						.form-row
+							label.label 姓名
+							.content > input.input(placeholder="陈柱端")
+						.form-row
+							label.label 单位
+							.content > input.input(placeholder="个人信息引入")
+						.form-row
+							label.label 二级部门/单位
+							.content > input.input(placeholder="个人信息引入")
+						.form-row
+							label.label 职务
+							.content > input.input(placeholder="个人信息引入")
+						.form-row	
+							label.label 职级
+							.content
+								select.w-full
+									option 集团公司领导
+						.form-row	
+							label.label.required 性别
+							.content
+								select.w-full
+									option 男
+									option 女
+						.form-row	
+							label.label.required 民族
+							.content
+								select.w-full
+									option 汉族
+									option 回族
+									option 满族
+						.form-row
+							label.label.required 移动电话
+							.content > input.input(placeholder="18576787846（引用个人信息数据，点击可修改，不回填）")
+						.form-row
+							label.label.required 邮箱
+							.content > input.input(placeholder="18576787846（引用个人信息数据，点击可修改，不回填）")
+						.form-row	
+							label 备注
+							.content > textarea.w-full(rows="5")
+						.btn.circle-radius.gray 提交
+
+				
+
 		

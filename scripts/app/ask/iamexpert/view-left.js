@@ -30,8 +30,12 @@ exports.getEntityModuleName = function(key) {
     return 'ask/' + url;
 };
 exports.getEntity = function() {
+    var me = this;
     return {
-        state: this.bindings.leftstate.data
+        state: this.bindings.leftstate.data,
+        callback: function() {
+            me.module.dispatch('refresh');
+        }
     };
 };
 

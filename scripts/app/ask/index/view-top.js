@@ -12,8 +12,15 @@ exports.getEntityModuleName = function(key) {
     return 'ask/' + url;
 };
 exports.getEntity = function() {
+    var me = this;
     return {
-        state: this.bindings.topstate.data
+        state: this.bindings.topstate.data,
+        leftrefresh: function() {
+            me.module.dispatch('leftrefresh');
+        },
+        bottomsrefresh: function() {
+            me.module.dispatch('bottomsrefresh');
+        }
     };
 };
 

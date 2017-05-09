@@ -5,13 +5,13 @@ module
 view('main') 
     .section.follow
         .clearfix
-            dl > a(id='follow-9' href='javascript:;')
+            dl > a(id='follow-content' href='javascript:;')
                 dt > echo(follow.contentCount)
                 dd > string('follow') + string('content')
-            dl > a(id='follow-10' href='javascript:;')
+            dl > a(id='follow-topic' href='javascript:;')
                 dt > echo(follow.topicCount)
                 dd >  string('follow') + string('topic')
-            dl > a(id='follow-11' href='javascript:;')
+            dl > a(id='follow-expert' href='javascript:;')
                 dt > echo(follow.expertCount)
                 dd > string('follow') + string('expert')
         ul
@@ -24,4 +24,5 @@ view('main')
             #  li > a(id='middle-menu-replyme' href='javascript:;') > string('reply') + string('my')
             li > a(href='#/ask/indexmenu/replyme') > string('reply') + string('my')
             #  li > a(id='middle-menu-mymanage' href='javascript:;') > string('iam') + string('manage')
-            li > a(href='#/ask/indexmenu/mymanage') > string('iam') + string('manage')
+            compare(topicmanage.length 'gt' 0)
+                li > a(href='#/ask/indexmenu/mymanage') > string('iam') + string('manage')

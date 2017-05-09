@@ -14,6 +14,8 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         del: { url: '../ask-bar/trends/del' },
         down: { url: '../human/file/download' },
+        praise: { url: '../ask-bar/my-share/praise' },
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
         page: {
             data: [],
             params: { page: 1, size: 3 },
@@ -21,6 +23,77 @@ exports.store = {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
+                },
+                followData: function(concernId, concernType) {
+                    var data = [];
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        if (concernType === 5 && d.discussId === concernId && d.trendsType === '3') { // 讨论
+                            obj.concernNum = 9;
+                        } else if (concernType === 2 && d.questionId === concernId && d.trendsType === '1') { // 问题
+                            obj.concernNum = 9;
+                        } else if (concernType === 3 && d.questionId === concernId && d.trendsType === '2') { // 文章
+                            obj.concernNum = 9;
+                        } else if (concernType === 6) { // 外部分享
+                            obj.concernNum = 9;
+                        }
+                        data.push(obj);
+                    });
+                    return data;
+                },
+                praise: function(id, type) {
+                    var data = [];
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        if (type === 1 && d.discussId === id && d.trendsType === '3') { // 讨论
+                            if (d.questionDiscuss.praiseNum >= 0) {
+                                obj.questionDiscuss.praiseNum = d.questionDiscuss.praiseNum + 1;
+                            } else {
+                                obj.questionDiscuss.praiseNum = 1;
+                            }
+                            obj.isPraise = 1;
+                        } else if (type === 2) { // 回复
+                            obj.isPraise = 1;
+                        } else if (type === 3 && d.questionId === id && d.trendsType === '2') { // 文章
+                            if (d.question.praiseNum >= 0) {
+                                obj.question.praiseNum = d.question.praiseNum + 1;
+                            } else {
+                                obj.question.praiseNum = 1;
+                            }
+                            obj.isPraise = 1;
+                        } else if (type === 4) { // 分享
+                            obj.isPraise = 1;
+                        }
+                        data.push(obj);
+                    });
+                    return data;
+                },
+                unpraise: function(id, type) {
+                    var data = [];
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        if (type === 1 && d.discussId === id && d.trendsType === '3') { // 讨论
+                            if (d.questionDiscuss.praiseNum > 0) {
+                                obj.questionDiscuss.praiseNum = d.questionDiscuss.praiseNum - 1;
+                            } else {
+                                obj.questionDiscuss.praiseNum = 0;
+                            }
+                            obj.isPraise = 0;
+                        } else if (type === 2) { // 回复
+                            obj.isPraise = 0;
+                        } else if (type === 3 && d.questionId === id && d.trendsType === '2') { // 文章
+                            if (d.question.praiseNum > 0) {
+                                obj.question.praiseNum = d.question.praiseNum - 1;
+                            } else {
+                                obj.question.praiseNum = 0;
+                            }
+                            obj.isPraise = 0;
+                        } else if (type === 4) { // 分享
+                            obj.isPraise = 0;
+                        }
+                        data.push(obj);
+                    });
+                    return data;
                 }
             }
         },
@@ -40,6 +113,37 @@ exports.store = {
         }
     },
     callbacks: {
+        praise: function(payload) {
+            var praise = this.models.praise,
+                me = this;
+            praise.set(payload);
+            return this.post(praise).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.praise(obj.objectId, obj.objectType);
+                setTimeout(function() {
+                    me.app.message.success('点赞成功');
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
+            });
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this;
+            unpraise.set(payload);
+            return this.put(unpraise).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
+                me.module.dispatch('leftrefresh');
+                setTimeout(function() {
+                    me.app.message.success('取消成功');
+                    page.data = pageData;
+                    page.changed();
+                }, 1000);
+            });
+        },
         init: function() {
             var content = this.models.content;
             var params = this.models.page.params;
@@ -66,8 +170,19 @@ exports.store = {
         },
         unfollow: function(payload) {
             var follow = this.models.unfollow;
+            var me = this;
             follow.set(payload);
-            return this.put(follow);
+            return this.put(follow).then(function(data) {
+                var obj = data[0];
+                var page = me.models.page;
+                var pageData = me.models.page.followData(obj.concernId, obj.concernType);
+                me.app.message.success('取消成功');
+                me.module.dispatch('leftrefresh');
+                me.module.dispatch('bottomsrefresh');
+                me.module.dispatch('refresh');
+                page.data = pageData;
+                page.changed();
+            });
         },
         publish: function(payload) {
             var discuss = this.models.discuss,
@@ -102,6 +217,9 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
+    this.options.store.callbacks.refresh = this.renderOptions.refresh;
     $('.dialog-main').scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;

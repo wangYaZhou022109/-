@@ -16,14 +16,9 @@ exports.store = {
         img: { url: '../human/file/download' }
     },
     callbacks: {
-        init: function(options) {
-            var menu = options.state.menu,
-                searchModel = this.models.search,
+        init: function() {
+            var searchModel = this.models.search,
                 progressList = this.models.progressList;
-            if (menu === 'study/subject') { // 专题
-                searchModel.data.businessType = 2;
-                searchModel.data.registerTimeOrder = 'desc';
-            }
             progressList.clear();
             D.assign(progressList.params, searchModel.data);
             return this.get(progressList);
@@ -44,5 +39,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
+    this.dispatch('init');
 };

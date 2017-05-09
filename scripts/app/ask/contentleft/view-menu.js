@@ -36,7 +36,7 @@ exports.actionCallbacks = {
             menu = 'relatedtome';
         state.data = {};
         if (typeof data[0] !== 'undefined') {
-            if (data[0].concernList.length <= 0) {
+            if (data[0].topicCount <= 0 || data[0].expertCount <= 0) {
                 menu = 'attentionselection';
             }
             state.data.menu = menu;
