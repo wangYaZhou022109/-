@@ -16,8 +16,8 @@ view('banner')
                     .details
                         .title.text-overflow > echo(name)
                         .time
-                            p > echo('起：') + dateTime(startTime)
-                            p > echo('至：') + dateTime(endTime)
+                            p > echo('起：') + dateMinute(startTime)
+                            p > echo('至：') + dateMinute(endTime)
                         .information > echo(description)
                         .how-many
                             | 已有
@@ -46,7 +46,8 @@ view('filter')
 
 view('list')
     .container
-        .h3.m-bottom 直播
+        if(hasGensee)
+            .h3.m-bottom 直播
         #swiper-2.swiper-pic-list > ul.full > each(genseesArray)
             li > .main-list > ul
                 each(a)
@@ -73,7 +74,6 @@ view('list')
                                 span > echo(subNumber)
                                 i.iconfont.icon-date.m-left
                                 span > date(startTime)
-
         .h3.m-bottom 考试
         #swiper-3 > ul.full > each(examArray)
             li.list-item > .main-list
@@ -86,7 +86,6 @@ view('list')
                                     a(id='exam-' + id) > echo(name)
                                     .text-tips.m-top.text-overflow
                                         dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
-
         .h3.m-bottom 调研
         #swiper-5 > ul.full > each(researchArray)
             li.list-item > .main-list
