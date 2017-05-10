@@ -60,7 +60,8 @@ view('shortcut')
                         .text-center.small-font > a#message-more 查看更多
                     else
                         .text-center.small-font 暂无新消息
-            .item > a.normal(href='/admin/') > i.iconfont.icon-setting
+            compare(Global.roleLength 'gt' 0)
+                .item > a.normal(href='/admin/') > i.iconfont.icon-setting
             .item.drop-down-wrapper.right
                 .drop-down-btn.user-info.inline-block.user-pic
                     if(Global.currentUser.headPortrait)

@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'picker/share/askshare': { isModule: true }
 };
 
 exports.store = {
