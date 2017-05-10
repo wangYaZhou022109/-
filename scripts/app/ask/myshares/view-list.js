@@ -78,22 +78,12 @@ exports.dataForActions = {
     },
     shut: function(payload) {
         var data = payload;
-        // data.closeStatus = 1;
+
         return data;
     },
     publish: function(payload) {
         return payload;
     },
-    // praise: function(payload) {
-    //     var data = payload;
-    //     data.objectType = 3;
-    //     return payload;
-    // },
-    // unpraise: function(payload) {
-    //     var data = payload;
-    //     data.objectType = 3;
-    //     return payload;
-    // }
     praise: function(payload) {
         var data = {};
         var obj = payload.id.split('_');
