@@ -18,8 +18,13 @@
             padding: 3px 5px;
             font-weight: 500;
             color: var(--white);
-            background: rgba(0,0,0,.3);
-
+            background: rgba(0,0,0,.2);
+            & label {
+                font-size: 12px;
+            }
+            & input {
+                margin-right: 0;
+            }
         }
     }
 }

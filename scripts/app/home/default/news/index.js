@@ -18,6 +18,7 @@ exports.store = {
             var newsList = this.models.newsList;
             newsList.clear();
             newsList.params.moduleHomeConfigId = payload.id;
+            newsList.params.size = 10;
             return this.get(newsList);
         },
         changeIndex: function(num) {
