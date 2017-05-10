@@ -28,7 +28,7 @@ exports.afterRender = function() {
     };
 
     setTimeout(function() {
-        me.commitProgress(false);
+        me.commitProgress();
     }, 1000 * 10); // 10秒后完成 10秒提交一次
     // 加载完毕之后 开始进度
     return this.module.dispatch('startProgress');

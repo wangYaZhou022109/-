@@ -51,7 +51,7 @@ view('chapter')
                                 else
                                     .item.start
                                         i.iconfont.icon-play-full
-                                        span 未开始
+                                        span > echo(beginStatus)
 
 view('info')
     .title-row

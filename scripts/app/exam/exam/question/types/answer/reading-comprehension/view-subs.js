@@ -22,13 +22,16 @@ exports.dataForTemplate = {
 };
 
 exports.getEntity = function(id) {
-    var question = this.module.store.models.sub.getQuestionById(id);
+    var question = this.module.store.models.sub.getQuestionById(id),
+        target = D.assign({}, question),
+        answerRecord = D.assign({}, question.answerRecord);
     if (!question.questionAttrs) {
-        D.assign(question, {
-            questionAttrs: question.questionAttrCopys
+        D.assign(target, {
+            questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
+            answerRecord: D.assign(answerRecord, { score: answerRecord.score / 100 })
         });
     }
-    return question;
+    return target;
 };
 
 exports.getEntityModuleName = function(id, question) {
@@ -46,6 +49,6 @@ exports.dataForEntityModule = function(question) {
             return me.module.dispatch('save');
         },
         answer: this.bindings.answer.getAnswer(question.id),
-        mode: this.bindings.state.data.mode
+        mode: this.bindings.state.data.detailMode
     };
 };

@@ -30,7 +30,7 @@ view('side')
         .h3 TA们也参加了调研
         .layout-mt-small.user-picture
             .grid-row > each(relativeMembers)
-                .col-md-4.text-center
+                .col-md-4.text-center(style="float:none; display:inline-block; vertical-align:top;width:32%")
                     img(src=headPortrait)
                     div > echo(fullName)
 

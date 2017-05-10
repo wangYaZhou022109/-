@@ -1,5 +1,8 @@
-var types = require('./app/exam/exam-question-types'),
+var options = require('./app/exam/exam/base-paper/view-main'),
     D = require('drizzlejs'),
+    obj = D.assign({}, options),
+    bindings = D.assign({}, obj.bindings),
+    types = require('./app/exam/exam-question-types'),
     constant = {
         ANSWER_PAPER_MODE: 3,
         NO_DETAIL_MODE: -1, // 除了题目内容，其他答案以及信息看不到
@@ -8,41 +11,40 @@ var types = require('./app/exam/exam-question-types'),
     getModuleDataForQuestion,
     getModuleDataForCorrect;
 
-exports.bindings = {
-    state: true,
-    types: true,
+
+obj.bindings = bindings;
+D.assign(obj.bindings, {
     mark: false,
     answer: false
-};
+});
 
-exports.type = 'dynamic';
+D.assign(obj, {
+    type: 'dynamic',
+    getEntity: function(id) {
+        var question,
+            questionId;
+        questionId = id;
+        if (this.bindings.mark.isCorrectView(id)) {
+            questionId = id.replace('correct-', '');
+        }
 
-exports.getEntity = function(id) {
-    var question,
-        questionId;
-    questionId = id;
-    if (this.bindings.mark.isCorrectView(id)) {
-        questionId = id.replace('correct-', '');
+        question = this.bindings.types.getQuestionById(questionId);
+        D.assign(question, { questionAttrs: question.questionAttrCopys });
+
+        return this.bindings.mark.isCorrectView(id)
+            ? { isCorrect: true, data: question } : { isCorrect: false, data: question };
+    },
+    getEntityModuleName: function(id, entity) {
+        return entity.isCorrect
+            ? constant.WAITING_CHECK_CORRECT
+            : types.get(entity.data.type, constant.ANSWER_PAPER_MODE);
+    },
+    dataForEntityModule: function(entity) {
+        return entity.isCorrect
+            ? getModuleDataForCorrect.call(this, entity.data)
+            : getModuleDataForQuestion.call(this, entity.data);
     }
-
-    question = this.bindings.types.getQuestionById(questionId);
-    D.assign(question, { questionAttrs: question.questionAttrCopys });
-
-    return this.bindings.mark.isCorrectView(id)
-        ? { isCorrect: true, data: question } : { isCorrect: false, data: question };
-};
-
-exports.getEntityModuleName = function(id, entity) {
-    return entity.isCorrect
-        ? constant.WAITING_CHECK_CORRECT
-        : types.get(entity.data.type, constant.ANSWER_PAPER_MODE);
-};
-
-exports.dataForEntityModule = function(entity) {
-    return entity.isCorrect
-        ? getModuleDataForCorrect.call(this, entity.data)
-        : getModuleDataForQuestion.call(this, entity.data);
-};
+});
 
 getModuleDataForQuestion = function(question) {
     var me = this;
@@ -73,3 +75,5 @@ getModuleDataForCorrect = function(question) {
     };
 };
 
+
+module.exports = obj;

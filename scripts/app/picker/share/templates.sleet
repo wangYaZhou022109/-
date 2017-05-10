@@ -10,4 +10,4 @@ view('main')
             .drop-down-content > .content
                 .item > #shareTo-qzone > i.iconfont.icon-q-zone + span 分享到QQ空间
                 .item > #shareTo-weibo > i.iconfont.icon-sina + span 分享到新浪微博
-                .item > #shareTo-bar > i.iconfont.icon-ask + span 分享到问吧
+                .item > #askshare > i.iconfont.icon-ask + span 分享到问吧

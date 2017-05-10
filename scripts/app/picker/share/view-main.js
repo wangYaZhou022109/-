@@ -6,7 +6,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click shareTo-*': 'shareTo'
+    'click shareTo-*': 'shareTo',
+    'click askshare': 'showAskshare'
 };
 
 exports.handlers = {
@@ -97,5 +98,9 @@ exports.handlers = {
             //    shareType: type
             // });
         }
+    },
+    showAskshare: function() {
+        var model = this.module.items['picker/share/askshare'];
+        this.app.viewport.modal(model);
     }
 };

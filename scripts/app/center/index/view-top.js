@@ -5,6 +5,7 @@ exports.bindings = {
     courseTime: true,
     lecturer: true,
     expert: true,
+    expertMe: true,
     contact: true,
     classstff: true
 };
@@ -34,6 +35,7 @@ exports.dataForTemplate = {
         }
         if (data.expert === 1) {
             member.isExpert = true;
+            member.expertDetailId = data.expertMe.id + ',' + member.id;
         }
         if (data.contact === 1) {
             member.isContact = true;

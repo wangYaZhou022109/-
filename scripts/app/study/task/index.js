@@ -59,13 +59,16 @@ exports.store = {
         submitTask: function(payload) {
             var progressModel = this.models.progress,
                 section = this.models.section.data,
+                attachment = progressModel.data.sectionAttachments[0] || {},
                 params = payload,
                 me = this,
-                attachments = [D.assign(progressModel.data.sectionAttachments[0], payload)],
+                attachments = [D.assign(attachment, payload)],
                 progress = section.progress;
             params.sectionId = section.referenceId;
             params.clientType = 0;
-            params.attachments = JSON.stringify(attachments);
+            if (attachments && attachments.length > 0) {
+                params.attachments = JSON.stringify(attachments);
+            }
             progressModel.set(params);
             return this.save(progressModel).then(function() {
                 me.app.message.success('提交成功!');

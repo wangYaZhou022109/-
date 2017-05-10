@@ -16,8 +16,12 @@ exports.dataForTemplate = {
         var smallBanners = data.smallBanners || [];
         _.map(smallBanners, function(item) {
             var r = item;
+            r.outerLink = false;
             if (r.linkType === 5) {
                 r.linkAddress += r.id;
+            }
+            if (r.linkType === 4) {
+                r.outerLink = true;
             }
         });
         return smallBanners;
