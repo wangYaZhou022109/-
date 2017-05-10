@@ -88,12 +88,16 @@ exports.dataForTemplate = {
 
 exports.dataForActions = {
     collect: function() {
-        var subject = this.bindings.subject.data;
-        return {
-            businessId: subject.id,
-            businessType: 2,
-            collectName: subject.name
-        };
+        var subject = this.bindings.subject.data,
+            result = {
+                businessId: subject.id,
+                businessType: 2,
+                collectName: subject.name
+            };
+        if (subject.cover) {
+            result.cover = subject.cover;
+        }
+        return result;
     },
     cancelCollect: function(payload) {
         return payload;
