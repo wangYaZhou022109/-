@@ -72,8 +72,17 @@ exports.store = {
             return this.put(follow);
         },
         shut: function(payload) {
-            this.models.shut.set(payload);
-            return this.put(this.models.shut);
+            var shut = this.models.shut,
+                page = this.models.page,
+                me = this;
+
+            shut.set(payload);
+            return this.chain(me.put(this.models.shut), function() {
+                page.data = _.filter(page.data, function(item) {
+                    return item.id !== payload.id;
+                });
+                page.changed();
+            });
         },
         publish: function(payload) {
             // var discuss = this.models.discuss;
