@@ -123,7 +123,6 @@ exports.store = {
                                 status: itemStatus.INIT
                             }));
                         });
-
                         this.data = _.map(map, function(o) {
                             if (j === constant.ZERO) {
                                 D.assign(o.questions[0], { status: itemStatus.CURRENT });
