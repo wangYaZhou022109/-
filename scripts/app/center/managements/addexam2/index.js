@@ -10,4 +10,3 @@ exports.title = '添加考试';
 exports.buttons = [{
     text: '添加'
 }];
-
