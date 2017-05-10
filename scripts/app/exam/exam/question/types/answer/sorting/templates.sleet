@@ -19,7 +19,7 @@ view('options')
                     .answer-options > @echo(content)
         form.vertical.layout-mb
             .inline-block
-                input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
+                input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)('disabled')&if(isDisabled)
             .inline-block(id='error')
 
     if(isShowDetail)

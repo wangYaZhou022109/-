@@ -43,7 +43,8 @@ var _ = require('lodash/collection'),
 exports.items = {
     side: 'side',
     main: 'main',
-    head: 'head'
+    head: 'head',
+    'exam-notes': ''
 };
 
 exports.store = {
@@ -52,11 +53,14 @@ exports.store = {
             type: 'localStorage',
             mixin: {
                 init: function(exam) {
-                    var types = this.module.store.models.types;
+                    var types = this.module.store.models.types,
+                        examRecord = exam.examRecord;
                     this.load();
                     if (!this.data) {
                         this.data = {
                             name: exam.name,
+                            examNotes: exam.examNotes,
+                            examinee: examRecord.member.fullName || examRecord.member.name,
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
@@ -127,6 +131,7 @@ exports.store = {
 
                             _.map(o.questions, function(q) {
                                 D.assign(q, {
+                                    typeIndex: j,
                                     totalCount: o.size,
                                     questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc'])
                                 });
@@ -268,13 +273,23 @@ exports.store = {
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
                         }),
-                        question = type.questions[index + payload.offset];
+                        offset = payload.offset,
+                        question = type.questions[index + offset],
+                        temp;
+
                     if (question) {
                         question.status = itemStatus.CURRENT;
                         type.questions[index].status =
                             this.module.options.getCurrentStatus.call(this.module, type.questions[index].id);
+                    } else if (this.data[Number(payload.id) + offset]) {
+                        temp = this.data[Number(payload.id) + offset];
+                        question = temp.questions[offset > 0 ? 0 : temp.questions.length - 1];
+                        question.status = itemStatus.CURRENT;
+                        this.initStatus('notCurrent');
+                        temp.isCurrent = true;
+                        type.questions[index].status =
+                            this.module.options.getCurrentStatus.call(this.module, type.questions[index].id);
                     }
-                    this.save();
                 },
                 decryptAnswer: function(answers) {
                     var afterDecryptQuestion = function(q, answer) {
@@ -334,10 +349,10 @@ exports.store = {
                     });
                     this.save();
                 },
-                initStatus: function() {
+                initStatus: function(isCurrent) {
                     this.data = _.map(this.data, function(t) {
                         return D.assign(t, {
-                            isCurrent: true
+                            isCurrent: !isCurrent
                         });
                     });
                 }
@@ -365,6 +380,12 @@ exports.store = {
             _.forEach(this.models, function(m) {
                 m.clear();
             });
+        },
+        notice: function() {
+            D.assign(this.models.exam.data, {
+                noticed: true
+            });
+            this.models.exam.changed();
         }
     }
 };

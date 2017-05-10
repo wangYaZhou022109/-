@@ -1,34 +1,35 @@
-var types = require('./app/exam/exam-question-types'),
+var options = require('./app/exam/exam/base-paper/view-main'),
     D = require('drizzlejs'),
+    obj = D.assign({}, options),
+    bindings = D.assign({}, obj.bindings),
+    types = require('./app/exam/exam-question-types'),
     constant = {
         MARK_PAPER_MODE: 4,
         NO_DETAIL_MODE: -1 // 除了题目内容，其他答案以及信息看不到
     },
     getModuleDataForQuestion;
 
-exports.bindings = {
-    state: true,
-    types: false,
+obj.bindings = bindings;
+D.assign(obj.bindings, {
     grades: true
-};
+});
 
-exports.type = 'dynamic';
+D.assign(obj, {
+    type: 'dynamic',
+    getEntity: function(id) {
+        var question;
+        question = this.bindings.types.getQuestionById(id);
+        question = D.assign({}, question, { questionAttrs: question.questionAttrCopys });
 
-exports.getEntity = function(id) {
-    var question;
-    question = this.bindings.types.getQuestionById(id);
-    question = D.assign({}, question, { questionAttrs: question.questionAttrCopys });
-
-    return { isCorrect: true, data: question };
-};
-
-exports.getEntityModuleName = function(id, entity) {
-    return types.get(entity.data.type, constant.MARK_PAPER_MODE);
-};
-
-exports.dataForEntityModule = function(entity) {
-    return getModuleDataForQuestion.call(this, entity.data);
-};
+        return { isCorrect: true, data: question };
+    },
+    getEntityModuleName: function(id, entity) {
+        return types.get(entity.data.type, constant.MARK_PAPER_MODE);
+    },
+    dataForEntityModule: function(entity) {
+        return getModuleDataForQuestion.call(this, entity.data);
+    }
+});
 
 getModuleDataForQuestion = function(question) {
     var me = this;
@@ -40,3 +41,6 @@ getModuleDataForQuestion = function(question) {
         }
     };
 };
+
+module.exports = obj;
+

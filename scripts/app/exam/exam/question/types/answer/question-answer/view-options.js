@@ -30,14 +30,18 @@ exports.dataForTemplate = {
         if (answer.data.value.length > 0) return answer.data.value[0].value;
         return '';
     },
-    isShowDetail: function() {
-        var mode = this.bindings.state.data.detailMode;
-        return mode && mode > 0;
+    isShowDetail: function(data) {
+        var mode = data.state.detailMode;
+        return mode && mode > 0 && mode < 4;
     },
     state: function(data) {
         return D.assign(data.state, {
             errorRate: data.state.errorRate / 10000
         });
+    },
+    isDisabled: function(data) {
+        var mode = data.state.detailMode;
+        return mode && mode > 0;
     }
 };
 

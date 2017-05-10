@@ -82,17 +82,10 @@ getCurrentExam = function(exam) {
             6: [knewButton, viewDetailButton]
         },
         getContent = function(exam0, str, status0) {
-            if (status0 === 5) {
+            if (status0 === 4) {
                 return getWithParams(str, exam0.duration);
             }
-            if (status0 === 10) {
-                return getWithParams(
-                    str,
-                    helper.dateMinute(exam0.applicantStartTime)
-                        + '  ~  ' + helper.dateMinute(exam0.applicantEndTime)
-                );
-            }
-            if (status0 === 4) {
+            if (status0 === 1) {
                 return getWithParams(
                     str,
                     helper.dateMinute(exam0.startTime)

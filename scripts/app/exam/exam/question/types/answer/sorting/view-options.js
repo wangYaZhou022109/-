@@ -33,12 +33,16 @@ exports.dataForTemplate = {
     },
     isShowDetail: function() {
         var mode = this.bindings.state.data.detailMode;
-        return mode && mode > 0;
+        return mode && mode > 0 && mode < 4;
     },
     state: function(data) {
         return D.assign(data.state, {
             errorRate: data.state.errorRate / 10000
         });
+    },
+    isDisabled: function(data) {
+        var mode = data.state.detailMode;
+        return mode && mode > 0;
     }
 };
 
