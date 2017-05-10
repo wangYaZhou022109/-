@@ -34,7 +34,7 @@ exports.dataForTemplate = {
     isOverByPassExam: function(data) {
         return {
             yes: data.exam.isOverByPassExam === 1,
-            no: data.exam.isOverByPassExam === 0
+            no: data.exam.isOverByPassExam === 0 || !data.exam.isOverByPassExam
         };
     }
 };

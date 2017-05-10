@@ -6,10 +6,10 @@ module > .choosequestion-page
 
 view('main')
     form.form.align-left
-        .form-row.r-padding
+        .form-row
             input(type='hidden')
-            label.required 试题类型
-            select.w-half#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
+            label.required.tag-height 试题类型
+            select.w-full.tag-height#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
                 option(value=key)('selected')&if(selected) > echo(value)
             #  .content
 

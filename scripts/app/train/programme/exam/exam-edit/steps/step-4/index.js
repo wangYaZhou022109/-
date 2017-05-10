@@ -1,4 +1,5 @@
 var _ = require('lodash/collection'),
+    D = require('drizzlejs'),
     check;
 
 exports.items = {
@@ -26,7 +27,7 @@ exports.store = {
     },
     callbacks: {
         selectPaperId: function(id) {
-            this.models.paperClass.data = { id: id };
+            D.assign(this.models.paperClass.params, { paperId: id });
             return this.get(this.models.paperClass);
         },
         selectPaper: function(paper) {

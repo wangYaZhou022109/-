@@ -1,7 +1,7 @@
 #!handlebars
-module > .choosenewevaluation-page
-    .choosenewevaluation(data-region='toolbox')
-    .choosenewevaluation(data-region='content')
+module
+    div(data-region='toolbox')
+    div(data-region='content')
 
 view('toolbox') > form.vertical
     .filter-row

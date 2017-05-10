@@ -1,37 +1,32 @@
 #!handlebars
 
-module > .choise
+module
     div(data-region='content')
-    .options(data-region='options')
+    div(data-region='options')
 
 view('content')
-    .row
-        .col-xs-6 > .com-title 排序
+    .h4 排序
         #  .col-xs-6 > .m-top.text-right
         #      | 本题分数：
         #      echo(state.score)
-    p.question > @echo(state.content)
+    .h4.m-top > @echo(state.content)
 
 
-view('options') > .answer
-    ul > each(state.options)
-        li(id='item-' + index)
-            label.no-margin(for='answer-item-' + i)
-                .answer-options > .option-num > @echo(code)
-                .answer-options > @echo(content)
+view('options')
+    .answer
+        ul > each(options)
+            li(id='item-' + index)
+                label.answer-item(for='answer-item-' + index) > @echo(code)
+                span.sub-text > @echo(content)
 
-    .clearfix
-        .pull-right.m-bottom
-            .inline-block
-                span.text-tips 标准答案:
-                span > @echo(state.answer)
-            .inline-block.m-left
-                span.text-tips 题型:
-                span > echo(state.type)
-            if(showScore)
-                .inline-block.m-left
-                    span.text-tips 分数:
-                    span > echo(state.score)
-            .inline-block.m-left
-                span.text-tips 难度:
-                span > echo(state.difficulty)
+    .clearfix > .pull-right
+        span.m-right 标准答案:
+            @echo(state.answer)
+        span.m-right 题型:
+            echo(state.type)
+        if(showScore)
+            span.m-right 分数:
+                echo(state.score)
+        span 难度：
+            echo(state.difficulty)
+    .m-top.border.top.dashed.m-bottom
