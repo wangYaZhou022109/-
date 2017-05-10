@@ -152,7 +152,7 @@
                 & label {
                     display: inline-block;
                     width: 100%;
-                    vertical-align: top;
+                    min-width: 14px;
                 }
 
                 &:nth-child(even) {
@@ -165,6 +165,15 @@
                 line-height: 2em;
                 margin-right: var(--space);
                 vertical-align: top;
+
+                & + label {
+                    width: 14px;
+                }
+            }
+
+            & .checkbox,
+            & .radio {
+                margin-right: var(--space);
             }
         }
 
