@@ -1,0 +1,26 @@
+.topbanner {
+    position: relative;
+    padding: 1em 0;
+    background: rgba(0,0,0,.6);
+    position: fixed;
+    width: 100%;
+    bottom: 5em;
+    overflow: hidden;
+    & span {
+        color: var(--white);
+    }
+    & li {
+        margin-right: var(--space);
+    }
+    & img {
+        height: 4em;
+        width: auto;
+    }
+    & .iconfont {
+        position: absolute;
+        top: var(--space);
+        right: 20px;
+        color: var(--border-color);
+        cursor: pointer;
+    }
+}
