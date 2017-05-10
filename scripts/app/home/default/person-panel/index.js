@@ -6,13 +6,24 @@ exports.store = {
     models: {
         personPanels: {
             url: '../system/person-panel'
+        },
+        newsList: {
+            url: '../system/home-news/person-panel'
         }
     },
     callbacks: {
         init: function(payload) {
-            var personPanels = this.models.personPanels;
+            var personPanels = this.models.personPanels,
+                newsList = this.models.newsList;
             personPanels.params.moduleConfigId = payload.id;
-            return this.get(personPanels);
+            newsList.params.configId = payload.homeConfigId;
+            newsList.params.size = 4;
+            personPanels.clear();
+            newsList.clear();
+            return this.chain(
+                this.get(personPanels),
+                this.get(newsList)
+            );
         }
     }
 };
