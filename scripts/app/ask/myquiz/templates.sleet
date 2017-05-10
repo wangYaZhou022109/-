@@ -22,7 +22,7 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('提问·')
-                            span.sub-text > echo(createTime)
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
@@ -42,7 +42,7 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('提问·')
-                                span.sub-text > echo(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
@@ -80,7 +80,7 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('提问·')
-                                span.sub-text > echo(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
@@ -118,7 +118,7 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('提问·')
-                            span.sub-text > echo(createTime)
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right

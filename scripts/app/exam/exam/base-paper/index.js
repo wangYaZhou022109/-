@@ -60,7 +60,7 @@ exports.store = {
                         this.data = {
                             name: exam.name,
                             examNotes: exam.examNotes,
-                            examinee: examRecord.member.fullName || examRecord.member.name,
+                            examinee: examRecord.member && (examRecord.member.fullName || examRecord.member.name),
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
@@ -123,7 +123,6 @@ exports.store = {
                                 status: itemStatus.INIT
                             }));
                         });
-
                         this.data = _.map(map, function(o) {
                             if (j === constant.ZERO) {
                                 D.assign(o.questions[0], { status: itemStatus.CURRENT });

@@ -20,7 +20,7 @@ view('content') > form
                 .comment-text > echo(content)
                 .comment-operation
                     .text-right
-                        .item > i.iconfont.icon-zan > echo('赞（' + praiseNum +'）')                           
+                        #  .item > i.iconfont.icon-zan > echo('赞（' + praiseNum +'）')                           
                         .item > i.iconfont.icon-message(id='answer-'+ id) > echo('回复')
                         .item > i.iconfont.icon-info(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                         #  .item > echo('赞（' + praiseNum +'）')                           
