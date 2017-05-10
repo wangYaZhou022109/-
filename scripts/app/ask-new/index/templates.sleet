@@ -1,10 +1,23 @@
 #! handlebars
 
-module > .ask-page > .container
-    .page-main-wrapper
-        .page-side.side-min(data-region='side')
-        .page-main.topic-main(data-region='main')
+module > .ask-page 
+    .topicbanner(data-region="topicbanner")
+    .container
+        .page-main-wrapper
+            .page-side.side-min(data-region='side')
+            .page-main.topic-main(data-region='main')
 
+view('topicbanner')
+    .topbanner#topbanner > .container
+        i.iconfont.icon-close#closetopic
+        span.small-font 推荐话题：
+        ul.m-top.clearfix
+            li.pull-left
+                img(src="images/d1.jpg")
+            li.pull-left
+                img(src="images/d2.jpg")
+            li.pull-left
+                img(src="images/d3.jpg")
 view('main')
     .pull-right.hidden
         span 你共分享了
