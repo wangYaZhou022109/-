@@ -6,7 +6,11 @@ exports.items = {
     comment: 'comment',
     download: 'download',
     'releated-course': 'releated-course',
-    'research-tips': ''
+    'research-tips': '',
+    'preview-pdf': '',
+    'preview-img': '',
+    'preview-video': '',
+    'preview-audio': '',
 };
 
 exports.store = {
@@ -33,6 +37,39 @@ exports.store = {
                 },
                 findFirstSection: function() {
                     return this.findAllSections()[0];
+                },
+                // 是否是相同章或者下一章。
+                isChapterSequence: function(beforeSectionId, currentSectionId) {
+                    var beforeSection = this.findSection(beforeSectionId);
+                    var currentSection = this.findSection(currentSectionId);
+                    var nextIndex = 0;
+                    if (beforeSection.chapterId === currentSection.chapterId) return true;
+
+                    _.each(this.data.courseChapters, function(v, i) {
+                        if (v.id === beforeSection.chapterId) {
+                            nextIndex = i + 1;
+                            return false;
+                        }
+                        return i;
+                    });
+                    // 如果前面学习的章节是最后一章 也直接为true
+                    if (nextIndex === this.data.courseChapters.length) return true;
+
+                    return this.data.courseChapters[nextIndex].id === currentSection.chapterId;
+                },
+                // 后面的章节是什么
+                findNextSectionId: function(sectionId) {
+                    var list = this.findAllSections();
+                    var nextIndex = 0;
+                    _.each(list, function(v, i) {
+                        if (v.id === sectionId) {
+                            nextIndex = i + 1;
+                            return false;
+                        }
+                        return v;
+                    });
+                    if (nextIndex === list.length) return null;
+                    return list[nextIndex].id;
                 }
             }
         },
@@ -52,12 +89,12 @@ exports.store = {
         register: { url: '../course-study/course-front/registerStudy' },
         collect: { url: '../system/collect' }, // 收藏
         courseRelated: { url: '../course-study/course-front/related' },
+        preview: { url: '../human/file/preview' },
         download: { url: '../human/file/download' },
+        attachment: { url: '../human/file' },
         score: { url: '../course-study/course-front/score' },
         state: {},
         playerState: {},
-        examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
-        researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
         researchActivity: { url: '../exam/research-activity/simple-data' }
     },
     callbacks: {
@@ -158,6 +195,11 @@ exports.store = {
             var model = this.models.researchActivity;
             model.set({ id: payload.id });
             return this.get(model);
+        },
+        getAttachment: function(payload) {
+            var attachment = this.models.attachment;
+            attachment.set({ id: payload.id });
+            return this.get(attachment);
         }
     }
 };
