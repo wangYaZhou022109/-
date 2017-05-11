@@ -2,7 +2,8 @@ exports.items = {
     main: 'main',
     side: 'side',
     'ask-new/apply-expert-aptitude': { isModule: true },
-    'ask-new/apply-expert-info': { isModule: true }
+    'ask-new/apply-expert-info': { isModule: true },
+    'ask-new/apply-verify': { isModule: true }
 };
 
 exports.store = {
@@ -20,3 +21,4 @@ exports.store = {
 exports.beforeRender = function() {
     this.dispatch('init');
 };
+
