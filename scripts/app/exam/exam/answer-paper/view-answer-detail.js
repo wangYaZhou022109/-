@@ -23,7 +23,6 @@ exports.getEntityModuleName = function() {
 };
 
 exports.dataForEntityModule = function(data) {
-    this.module.dispatch('clearModels');
     return {
         data: data
     };

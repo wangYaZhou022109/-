@@ -44,8 +44,10 @@ D.assign(obj.dataForActions, {
             me.app.message.confirm(message, function() {
                 resolve({ submitType: 'Hand' });
             }, function() {
-                resolve(false);
+                return false;
             });
+        }).then(function() {
+            me.app.message.success(strings.get('exam.answer-paper.submit-success'));
         });
     }
 });

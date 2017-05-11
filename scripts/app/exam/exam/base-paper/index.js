@@ -54,6 +54,7 @@ exports.store = {
             mixin: {
                 init: function(exam) {
                     var types = this.module.store.models.types,
+                        answer = this.module.store.models.answer,
                         examRecord = exam.examRecord;
                     this.load();
                     if (!this.data) {
@@ -69,6 +70,9 @@ exports.store = {
                             currentQuestion: types.getFirstQuestion()
                         };
                         this.save();
+                    }
+                    if (answer && answer.data.length > 0) {
+                        this.calculate();
                     }
                 },
                 selectQuestion: function(id) {
@@ -98,7 +102,8 @@ exports.store = {
             mixin: {
                 init: function(questions) {
                     var map = {},
-                        j = 0;
+                        j = 0,
+                        me = this;
 
                     this.load();
                     if (!this.data && questions) {
@@ -123,6 +128,7 @@ exports.store = {
                                 status: itemStatus.INIT
                             }));
                         });
+
                         this.data = _.map(map, function(o) {
                             if (j === constant.ZERO) {
                                 D.assign(o.questions[0], { status: itemStatus.CURRENT });
@@ -132,7 +138,10 @@ exports.store = {
                                 D.assign(q, {
                                     typeIndex: j,
                                     totalCount: o.size,
-                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc'])
+                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc']),
+                                    status: q.status === itemStatus.CURRENT
+                                        ? itemStatus.CURRENT
+                                            : me.module.options.getCurrentStatus.call(me.module, q.id)
                                 });
                             });
 
@@ -143,6 +152,7 @@ exports.store = {
                                 isCurrent: j++ === constant.ZERO
                             });
                         });
+
                         this.sortQuestion();
                         this.save();
                     }

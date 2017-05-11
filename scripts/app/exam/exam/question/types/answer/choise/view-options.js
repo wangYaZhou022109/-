@@ -16,7 +16,7 @@ exports.dataForTemplate = {
             item.code = String.fromCharCode(item.index + 'A'.charCodeAt(0));
             item.questionId = me.bindings.state.data.id;
             item.isDisabled = data.state.detailMode > 0;
-            if (_.find(answer.value, ['id', item.id])) item.checked = true;
+            if (_.find(answer.value, ['value', item.name])) item.checked = true;
         });
         return data.state.options;
     },
