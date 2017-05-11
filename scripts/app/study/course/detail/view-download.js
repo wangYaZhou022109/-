@@ -19,7 +19,7 @@ exports.handlers = {
             });
         }
     }
-}
+};
 
 exports.dataForTemplate = {
     attachments: function(data) {
