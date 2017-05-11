@@ -18,7 +18,7 @@ view('main')
                 .clearfix.layout-mb-small
                     .pull-left.layout-mr-small
                         .inline-block
-                            .checkbox.no-margin
+                            .checkbox
                                 input(type='checkbox' id='checkbox-' +@index disabled='disabled')('checked')&if(checked)
                                 label(for='checkbox-' + @index)
                         b > echo(code '.')
