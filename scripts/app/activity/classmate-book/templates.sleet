@@ -1,0 +1,28 @@
+#!handlebars
+
+module > .classmate-book-page
+    .classmate-book-box(data-region='banner')
+    .classmate-content(data-region="classmate-content")
+
+
+view('banner')
+    .banner > img.w-full(src='images/ke.png')
+
+view('classmate-content')
+    .clearfix > .pull-right 返回
+    .container.m-top.clearfix
+        .classmate-side
+            ul
+                li > .btn 第一组组名
+                li > .btn 第二组组名
+                li > .btn 第三组组名
+                li > .btn 第四组组名
+        .classmate-content
+            table.table   
+                tr
+                    th 序号
+                    th 姓名
+                    th 单位
+                    th 部门
+                    th 职位
+                    th 手机

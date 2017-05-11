@@ -7,7 +7,9 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click preview-*': 'preview'
+    'click viewDesc': 'viewDesc',
+    'click preview-*': 'preview',
+    'click viewUseDesc-*': 'viewUseDesc'
 };
 
 exports.handlers = {
@@ -23,6 +25,15 @@ exports.handlers = {
                 docUrl: docUrl
             };
         this.module.dispatch('preview', param);
+    },
+    viewUseDesc: function(id) {
+        var progress = this.bindings.section.data.progress || {},
+            attachments = progress.sectionAttachments,
+            attachment = _.find(attachments, { attachmentId: id });
+        this.module.dispatch('preview', {
+            flag: 'useDesc',
+            description: attachment.description
+        });
     }
 };
 
@@ -41,4 +52,20 @@ exports.dataForTemplate = {
         });
         return task;
     },
+    userAttachments: function(data) {
+        var progress = data.section.progress || {},
+            attachments = progress.sectionAttachments,
+            me = this;
+        if (attachments && attachments.length > 0) {
+            return _.map(attachments, function(attach) {
+                var obj = attach;
+                obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
+                if (obj.contentType && obj.contentType === 1) {
+                    obj.preview = true;
+                }
+                return obj;
+            });
+        }
+        return null;
+    }
 };
