@@ -12,12 +12,8 @@ exports.bindings = {
 
 exports.buttons = [{
     text: '提交',
-    action: 'save',
+    action: 'commitTwoBrings',
 }];
-
-exports.actions = {
-    'click save': 'commitTwoBrings',
-};
 
 exports.dataForActions = {
     commitTwoBrings: function() {
@@ -55,7 +51,6 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     commitTwoBrings: function() {
         this.app.message.success('提交成功！');
-        this.app.viewport.closeModal();
     }
 };
 

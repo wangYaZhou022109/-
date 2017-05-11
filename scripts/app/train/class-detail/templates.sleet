@@ -244,14 +244,6 @@ view('two-brings') > form.vertical
                 .content > input.border.bottom.w-full(name='title2'  value=twoBringsResult.title2  x-rule='required')
             .h5.m-top 主题：
             textarea.w-full.m-top#content2(placeholder="输入问题内容" name='content2' rows="5" x-rule='required') > echo(twoBringsResult.content2)
-        br
-        .row
-            if(twoBringsResult.id)
-                .col-sm-2           
-                    btn.btn(id='close') > echo('确定')
-            else
-                .col-sm-2
-                    btn.btn(id='save') > echo('提交')
 
 view('questionnaire') > .surveyexam-page > .surveyexam
     each(questionnaire)
@@ -260,9 +252,10 @@ view('questionnaire') > .surveyexam-page > .surveyexam
             .surveyexam-content.border.left.clearfix.inline-block
                 .inline-block.survey-name
                     .h3 > echo(resourceName)
+                    echo(type)
                     compare(type 'eq' 1)
                         .small-font.sub-text.m-top > dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
-                    else
+                    else 
                         .small-font.sub-text.m-top > dateTime(researchQuestionary.startTime) + echo('~') + dateTime(researchQuestionary.endTime)
                 .inline-block.h4.sub-text 未完成
             compare(type 'eq' 1)
