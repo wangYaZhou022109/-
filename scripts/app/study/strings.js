@@ -14,5 +14,7 @@ module.exports = {
     'study.total.time': '学习累计时长',
     'left.page': '向左翻',
     'right.page': '向右翻',
-    'reset.page': '换一组'
+    'reset.page': '换一组',
+    'study.task.attachment': '作业附件',
+    'study.user.attachment': '我提交的'
 };
