@@ -59,7 +59,7 @@
         }
 
         & .domain06 {
-            width: 60%;
+            width: 100%;
             height: calc(var(--nav-height) + var(--large-space));
             line-height: calc(var(--nav-height) + var(--large-space));
             background: #dbe3f8;

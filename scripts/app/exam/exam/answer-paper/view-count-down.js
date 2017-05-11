@@ -12,7 +12,7 @@ exports.type = 'dynamic';
 exports.getEntity = function() {
     var data = this.bindings.exam.data;
     return {
-        endTime: getEndTime.call(this, data.endTime, data.duration),
+        endTime: getEndTime.call(this, data.examRecord.endTime),
         isDelay: this.bindings.countDown.data.isDeday
     };
 };
@@ -29,7 +29,7 @@ exports.dataForEntityModule = function(data) {
             time: 0,
             doing: function() {
                 me.app.message.success(strings.get('exam.answer-paper.time-out.submit'));
-                me.module.dispatch('submitPaper', { submitType: 'Hand' });
+                return me.module.dispatch('submitPaper', { submitType: 'Hand' });
             }
         }, {
             time: 1,
@@ -45,25 +45,19 @@ exports.dataForEntityModule = function(data) {
     };
 };
 
-getEndTime = function(examActivityEndTime, duration) {
-    var nowTime = new Date(),
-        data = this.bindings.countDown.data,
+getEndTime = function(examRecordEndTime) {
+    var data = this.bindings.countDown.data,
         endTime;
 
     if (!data.firstInTime) {
-        data.firstInTime = new Date(nowTime).getTime();
-        nowTime.setMinutes(nowTime.getMinutes() + duration, nowTime.getSeconds(), 0);
-        // 考试结束时间已经跟活动结束时间无关
-        // if (nowTime.getTime() > examActivityEndTime) {
-        //     data.endTime = examActivityEndTime;
-        // }
-        data.endTime = new Date(nowTime).getTime();
+        data.firstInTime = new Date().getTime();
+        data.endTime = new Date(examRecordEndTime).getTime();
         data.isDeday = false;
         this.bindings.countDown.data = data;
     }
 
     if (data.delay) {
-        endTime = new Date(data.endTime);
+        endTime = new Date(examRecordEndTime);
         endTime.setMinutes(
             endTime.getMinutes() + data.delay,
             endTime.getSeconds(),

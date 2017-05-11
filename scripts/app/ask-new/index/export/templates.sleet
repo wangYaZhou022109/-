@@ -5,18 +5,19 @@ module > .export-page
 
 view('export')
     .container
-        .inline-block(style="width:49%;")
+        .inline-block.w-half.inbox
             input(type="radio")
             label 违反法律犯规
-        .inline-block(style="width:49%;")
+        .inline-block.w-half.inbox
             input(type="radio")
             label 内容不准确
-        .inline-block.layout-mt-small(style="width:49%;")
+        .inline-block.layout-mt-small.w-half.inbox
             input(type="radio")
             label 垃圾信息
-        .inline-block.layout-mt-small(style="width:49%;")
+        .inline-block.layout-mt-small.w-half.inbox
             input(type="radio")
             label 其他
         .layout-mt-small
             label 举报说明
             textarea.w-full.m-top(rows="5" placeholder="请描述你举报理由")
+
