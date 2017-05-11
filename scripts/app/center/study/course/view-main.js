@@ -28,15 +28,15 @@ exports.components = [{
 exports.dataForTemplate = {
     progressList: function(data) {
         var progressList = data.progressList,
-            search = data.search,
             downUrl = this.bindings.img.getFullUrl(),
             defultImg = 'images/default-cover/default_course.jpg',
             prefix = { 0: '推送学习时间：', 1: '上次学习时间：', 2: '完成学习时间：', 4: '完成学习时间：' },
             btnText = { 0: '开始学习', 1: '继续学习', 2: '重新学习', 4: '重新学习' };
         _.map(progressList, function(opt) {
             var progress = opt,
+                course = progress.courseInfo || {},
                 studyTotalTime = progress.studyTotalTime || 0;
-            progress.imgUrl = progress.cover ? (downUrl + '?id=' + progress.cover) : defultImg;
+            progress.imgUrl = course.cover ? (downUrl + '?id=' + course.cover) : defultImg;
             if (progress.finishStatus === 0) { // 推送学习时间取值为注册时间
                 progress.prefixText = prefix[progress.finishStatus] + helpers.dateMinute(progress.registerTime);
             } else if (progress.finishStatus === 2 || progress.finishStatus === 4) {
@@ -46,10 +46,7 @@ exports.dataForTemplate = {
             }
             progress.btnText = btnText[progress.finishStatus];
             progress.btnUrl = '#/study/course/detail/' + progress.courseId;
-            if (search.businessType === 2) {
-                progress.btnUrl = '#/study/subject/detail/' + progress.courseId;
-            }
-            progress.studyTotalTime = (Number(studyTotalTime) / 60).toFixed(1);
+            progress.studyTotalTime = Number(studyTotalTime) / 60;
             return progress;
         });
         return progressList;

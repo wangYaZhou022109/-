@@ -1,4 +1,3 @@
-// var D = require('drizzlejs');
 var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
@@ -17,13 +16,6 @@ exports.events = {
 };
 
 exports.handlers = {
-    // refresh: function(id, e, target) {
-    //     console.log(11111111);
-    //     // var region;
-    //     // var el = $(target).parents('.comment-list')[0];
-    //     // region = new D.Region(this.app, this.module, el, id);
-    //     // region.show('ask/myquiz/details', { id: id });
-    // },
     sharesDetails: function(payload) {
         var data = { },
             id = payload;
@@ -193,39 +185,42 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     reply: function() {
         this.app.message.success('操作成功！');
-        this.module.dispatch('init');
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        this.module.dispatch('init');
     },
     follow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
         var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
         follow.hidden = true;
         unfollow.hidden = false;
-        this.app.message.success('关注成功！');
+        setTimeout(function() {
+            me.app.message.success('关注成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
     unfollow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
         var follow = this.$('trend-follow-' + concern.concernType + '_' + concern.concernId);
+        var me = this;
         follow.hidden = false;
         unfollow.hidden = true;
-        this.app.message.success('取消成功！');
+        setTimeout(function() {
+            me.app.message.success('取消成功！');
+            me.module.dispatch('refresh');
+        }, 1000);
     },
     delquestion: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
     },
     delshare: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
     },
     deldiscuss: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
     }
 };
 
@@ -239,13 +234,32 @@ exports.dataForTemplate = {
             var obj = value,
                 date = new Date(obj.createTime);
             var url = obj.createUser.headPortrait;
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var d = date.getDate();
+            var h = date.getHours();
+            var mi = date.getMinutes();
+            if (y <= 9) {
+                y = '0' + y;
+            }
+            if (m <= 9) {
+                m = '0' + m;
+            }
+            if (d <= 9) {
+                d = '0' + d;
+            }
+            if (h <= 9) {
+                h = '0' + h;
+            }
+            if (mi <= 9) {
+                mi = '0' + mi;
+            }
+            obj.createTime = y + '-' + m + '-' + d + '   ' + h + ':' + mi;
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.createUser.headPortrait = 'images/default-userpic.png';
             } else {
                 obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
-            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-            + '   ' + date.getHours() + ':' + date.getMinutes();
             _.forEach(me.bindings.page.data, function(v) {
                 if (v.id === obj.id) {
                     flag = false;

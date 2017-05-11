@@ -37,12 +37,10 @@ view('domain')
             i.iconfont.icon-smile
             br
             | 学员满意度
-        .domain05.pull-left.m-bottom
-            | 作业提交
-        .domain06.pull-left.m-bottom
-            | 学员满意度
-        .domain07.pull-left.pointer#surveyexam
+        .domain06.pull-left.m-bottom.pointer#surveyexam
             | 调研与考试
+        .domain07.pull-left.pointer
+            | 同学录
 
 view('class-info')
     .class-info

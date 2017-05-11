@@ -22,7 +22,7 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('提问·')
-                            span.sub-text > echo(createTime)
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
@@ -42,16 +42,16 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('提问·')
-                                span.sub-text > echo(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
-                                    #  .item > a(id='setcareNum-'+id data-name='id' data-value=id) > echo('关注')
-                                    compare(concernNum 'gt' 0)  
-                                        .item(id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                    else
-                                        .item(id='trend-follow-2_'  + id data-name='id' data-value='2_' + id) > echo('+') + string('follow')
-                                    #  .item > a.normal(href='javascript:;') 添加讨论
+                                    compare(concernNum 'gt' 0) 
+                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
+                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')
+                                    else 
+                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
+                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')                   
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                                     .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar
@@ -80,16 +80,16 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('提问·')
-                                span.sub-text > echo(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
-                                    #  .item > a(id='setcareNum-'+id data-name='id' data-value=id) > echo('关注')
-                                    compare(concernNum 'gt' 0)  
-                                        .item(id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                    else
-                                        .item(id='trend-follow-2_'  + id data-name='id' data-value='2_' + id) > echo('+') + string('follow')
-                                    #  .item > a.normal(href='javascript:;') 添加讨论
+                                    compare(concernNum 'gt' 0)
+                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
+                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')
+                                    else 
+                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
+                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
                                     .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar
@@ -118,7 +118,7 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('提问·')
-                            span.sub-text > echo(createTime)
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right

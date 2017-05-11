@@ -3,7 +3,6 @@ var $ = require('jquery'),
     courseUtil = require('../course-util'),
     maps = require('./app/util/maps'),
     _ = require('lodash/collection');
-var currentSectionId = null;
 var showHandler = function(payload) {
     // var innerType = [1, 2, 3, 5, 6]; // 内嵌的播放器
     var detailUrlMap = {
@@ -12,26 +11,57 @@ var showHandler = function(payload) {
     };
     return function() {
         var me = this;
+        var callback = function() {
+            me.module.dispatch('updateProgress');
+        };
+        var winOpen;
+        var timer = setInterval(function() {
+            if (winOpen && winOpen.closed) {
+                clearInterval(timer);
+                setTimeout(callback, 3000);
+            }
+        }, 1000);
         if (payload.sectionType === 8) {
-            window.open(detailUrlMap[payload.sectionType] + '' + payload.referenceId);
-        } else if (detailUrlMap[payload.sectionType]) {
-            window.open(detailUrlMap[payload.sectionType] + '' + payload.resourceId);
-        } else if (payload.sectionType === 12 || payload.sectionType === 13) {
-            this.bindings.state.data.currentType = payload.sectionType;
-            this.module.dispatch('getResearchById', { id: payload.resourceId }).then(function() {
-                me.app.viewport.modal(me.module.items['research-tips']);
-            });
+            winOpen = window.open(detailUrlMap[8] + '' + payload.referenceId, '_blank');
+        } else if (payload.sectionType === 9) {
+            winOpen = window.open(detailUrlMap[9] + '' + payload.resourceId, '_blank');
         }
         this.module.dispatch('showSection', payload);
     };
 };
 
+var statusMap = {
+    8: {
+        0: '查看作业',
+        5: '待评审',
+        2: '',
+        6: '重新提交',
+    },
+    9: {
+        0: '参与考试',
+        5: '待评卷',
+        2: '',
+        6: '重新考试',
+    },
+    12: {
+        0: '参与调研',
+        5: '待评审',
+        2: '查看详情',
+        6: '重新提交',
+    },
+    13: {
+        0: '参与评估',
+        5: '待评审',
+        2: '查看详情',
+        6: '重新提交',
+    }
+};
+
 exports.bindings = {
     course: true,
     state: true,
-    examStatus: true,
-    researchStatus: true,
-    progress: true
+    progress: true,
+    playerState: false
 };
 
 exports.events = {
@@ -50,35 +80,45 @@ exports.handlers = {
     },
     showSection: function(id, e, element) {
         var courseModel = this.bindings.course,
-            course = courseModel.data,
-            studyProgress = course.studyProgress,
-            chapterId = element.getAttribute('data-chapterId'),
-            chapterLearnSequence = element.getAttribute('data-chapter-learnSequence'),
+            progress = this.bindings.progress,
             sectionType = element.getAttribute('data-sectionType'),
-            section = courseModel.findSection(id);
-
+            section = courseModel.findSection(id),
+            chapter = courseModel.findChapter(section.chapterId);
+        var beforeSectionId = this.bindings.playerState.data.sectionId;
         var hander = showHandler(section).bind(this);
-
-        // e.stopPropagation();
-        // 首先要判断该课程是否注册,如果没有注册,要为其注册,并且要在注册后更新course数据,刷新页面
-        // 麻烦之处在于如何处理好刷新,不影响正在播放的当前节,让用户感知不到我们做了注册这一动作(待做)
+        var beforeProcess = progress.findProgress(beforeSectionId);
         e.preventDefault();
         // 如果点击的是当前节,直接返回
-        if (currentSectionId === id && courseUtil.judgeSection(sectionType)) {
+        if (beforeSectionId === id && courseUtil.judgeSection(sectionType)) {
             return false;
         }
-        currentSectionId = id;
-        // 判断章是否按顺序
-        // 这里按顺序学,要获取上一节的学习进度completeRate,麻烦之处在于,我们更新上一节的进度是在
-        // beforeClose中做的,我们点击这下一节时,上一节的进度可能还没有保存成功,所以可能需要在前端算
-        // completeRate了,(待做)
-        if (course.learnSequence === 1 && studyProgress.currentChapterId !== chapterId) {
-            return this.app.message.error('该课程必须按章节顺序学');
+
+        // 如果没学习过的 才判断顺序
+        if (!progress.findProgress(section.referenceId)) {
+            // 如果必须按章顺序
+            if (courseModel.data.learnSequence === 1) {
+                if (!courseModel.isChapterSequence(beforeSectionId, id)) {
+                    this.app.message.error('必须按章顺序学习');
+                    return false;
+                }
+                // if (beforeProcess === null || beforeProcess.finishStatus === 1) {
+                //     this.app.message.error('上一节没学完');
+                //     return false;
+                // }
+            }
+            // 如果当前所在章的规则必须按顺序
+            if (chapter.learnSequence === 1) {
+                if (courseModel.findNextSectionId(beforeSectionId) !== id) {
+                    this.app.message.error('必须按节顺序学习');
+                    return false;
+                }
+                if (!beforeProcess || beforeProcess.finishStatus === 1) {
+                    this.app.message.error('上一节没学完');
+                    return false;
+                }
+            }
         }
-        // 判断节是否按顺序
-        if (chapterLearnSequence === 1 && studyProgress.currentSectionId !== chapterId) {
-            return this.app.message.error('该章节必须按顺序学');
-        }
+
         // 设置样式
         if (element.nodeName === 'DL') {
             $(element).siblings().removeClass('focus');
@@ -98,39 +138,34 @@ exports.dataForTemplate = {
         var course = data.course;
         var progress = this.bindings.progress;
         if (course.name) {
-            currentSectionId = data.state.sectionId || null;
             _.forEach(course.courseChapters, function(item) {
                 var r = item;
                 _.forEach(r.courseChapterSections, function(obj, j) {
                     var rr = obj;
-                    var examStatus;
-                    var researchStatus;
                     var sectionProcess = progress.findProgress(rr.referenceId);
                     rr.seq = courseUtil.seqName(j + 1, 2);
-                    if (currentSectionId === rr.id) {
+                    if (data.playerState.sectionId === rr.id) {
                         rr.focus = true;
                     }
-                    rr.showRate = [5, 6].indexOf(rr.sectionType) !== -1;
-
+                    rr.beginStatus = '开始学习';
+                    if (statusMap[rr.sectionType]) rr.beginStatus = statusMap[rr.sectionType][0];
                     if (!sectionProcess) return;
-
+                    rr.showRate = [5, 6].indexOf(rr.sectionType) !== -1
+                        && sectionProcess.finishStatus === 1;
                     rr.completedRate = sectionProcess.completedRate || 0;
                     // Rate
-                    rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
-                    if (rr.sectionType === 9) {
-                        examStatus = _.find(data.examStatus, { examId: rr.resourceId });
-                        if (examStatus && examStatus.status) {
-                            rr.finishStatus = examStatus.score ? '成绩' +
-                            (Number(examStatus.score) / 100).toFixed(1) :
-                            maps.getValue('exam-record-status', examStatus.status);
-                        }
+                    // rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
+                    rr.finishStatus = '';
+                    if (rr.sectionType === 8 && sectionProcess.score > 0) {
+                        rr.finishStatus += '成绩' + sectionProcess.score + ' ';
                     }
-                    if (rr.sectionType === 12 || rr.sectionType === 13) {
-                        researchStatus = _.find(data.researchStatus, { researchQuestionaryId: rr.resourceId });
-                        if (researchStatus && researchStatus.status) {
-                            rr.finishStatus = researchStatus.status === 1 ?
-                            '查看详情' : maps.getValue('research-record', researchStatus.status);
-                        }
+                    if (rr.sectionType === 9 && sectionProcess.examScore > 0) {
+                        rr.finishStatus += '成绩' + sectionProcess.examScore + ' ';
+                    }
+                    if (statusMap[rr.sectionType]) {
+                        rr.finishStatus += statusMap[rr.sectionType][sectionProcess.finishStatus];
+                    } else {
+                        rr.finishStatus += maps.getValue('course-study-status', sectionProcess.finishStatus);
                     }
                 });
             });

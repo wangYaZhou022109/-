@@ -35,7 +35,7 @@ view('chapter')
                     compare(../course.addType 'eq' 2)
                         .common-title > echo(name)
                     each(courseChapterSections)
-                        dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType data-chapter-learnSequence = ./learnSequence)
+                        dl.required(class = if(focus 'focus') id='show-sections'+id data-sectionType = sectionType)
                             dt
                                 compare(required 'ne' 1)
                                     .required-tag > echo('选修')
@@ -51,7 +51,7 @@ view('chapter')
                                 else
                                     .item.start
                                         i.iconfont.icon-play-full
-                                        span 未开始
+                                        span > echo(beginStatus)
 
 view('info')
     .title-row
@@ -83,8 +83,8 @@ view('download')
         each(attachments)
             .block.layout-mt-small
                 .pull-right
-                    if(isView)
-                        a(id='viewPdf-'+attachmentId href='javascript:;') > string('view')
+                    if(canPreview)
+                        a(id = 'preview-'+attachmentId data-attachmentType=attachmentType data-name=name) > string('view')
                     a(href=downUrl download=name) > string('download')
                 a.text-overflow.underline(title=name) > echo(name)
         else
@@ -116,3 +116,13 @@ view('student')
 view('research-tips')
     .container
         @echo(researchActivity.questionaryDetail)
+view('preview-pdf')
+    #viewPdf
+view('preview-video')
+    video#course-video('controls')
+        source(src=url type="video/mp4")
+view('preview-audio') > div(style='padding: 20px 0px;')
+    audio#course-audio('controls')
+        source(src=url type="audio/mp3")
+view('preview-img')
+    img(src=url style='max-height:34em')

@@ -1,0 +1,11 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    div
+        p 问卷须知
+        p > echo(researchActivity.questionaryDetail)
+    div
+        .btn#submit 进入评估

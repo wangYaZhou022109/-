@@ -1,4 +1,5 @@
 exports.items = {
+    topicbanner: 'topicbanner',
     main: 'main',
     side: 'side',
     'ask-new/index/export': { isModule: true },

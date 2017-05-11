@@ -25,7 +25,7 @@ exports.getEntity = function(id) {
         q = {};
     D.assign(q, question, {
         score: question.score / 100,
-        questionAttrs: question.questionAttrCopys
+        questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc'])
     });
     return q;
 };

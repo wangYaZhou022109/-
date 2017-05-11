@@ -11,13 +11,13 @@ view('content')
 
 
 view('options') > form.vertical.layout-mb-small
-    textarea.input.w-full(id='answer' name='value' rows='5' placeholder='请输入答案') > @echo(answer)
+    textarea.input.w-full(id='answer' name='value' rows='5' placeholder='请输入答案')('disabled')&if(isDisabled) > @echo(answer)
     if(isShowDetail)
         .show-answer
             .clearfix
                 .pull-left > .common-title
                     if(state.isShowAnswer)
-                        echo('答案：' state.answer)
+                        @echo('答案：' state.answer)
                 .text-right
                     if(state.isShowGainScore)
                         span > echo('本题得分：' state.gainScore)

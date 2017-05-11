@@ -9,6 +9,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        img: { url: '../system/file/upload' },
         // concern: { url: '../ask-bar/my-share/findconcern' },
         followcount: { data: { menu: 'followcount' } },
         // expert: { url: '../ask-bar/expert' },
@@ -26,7 +27,7 @@ exports.store = {
         boutique: {
             url: '../ask-bar/question-details/boutique'
         },
-        discuss: { url: '../ask-bar/question-discuss' },
+        discuss: { url: '../ask-bar/question-discuss/discuss' },
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} },
         follow: {
@@ -91,10 +92,10 @@ exports.store = {
                 expert = this.models.expert,
                 d = payload;
             details.set({ id: d.id });
-            this.get(details).then(function(data) {
+            return this.get(details).then(function(data) {
                 var params = _.map(data[0].topicList, 'id').join(',');
                 expert.params.ids = params;
-                me.get(expert);
+                return me.get(expert);
             });
         },
         details: function(payload) {
@@ -204,7 +205,6 @@ exports.store = {
 
 exports.beforeRender = function() {
     // this.dispatch('init', this.renderOptions);
-    this.dispatch('questionDetails', this.renderOptions);
-    this.dispatch('speech');
+    return this.chain([this.dispatch('questionDetails', this.renderOptions), this.dispatch('speech')]);
 };
 
