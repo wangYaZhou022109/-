@@ -48,7 +48,6 @@ exports.dataForEntityModule = function(data) {
 getEndTime = function(examRecordEndTime) {
     var data = this.bindings.countDown.data,
         endTime;
-
     if (!data.firstInTime) {
         data.firstInTime = new Date().getTime();
         data.endTime = new Date(examRecordEndTime).getTime();
