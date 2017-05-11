@@ -50,7 +50,7 @@ tianjun  video use
 
 .video-js {
     width: 100% !important;
-    height: 100% !important;
+    height: 34em !important;
 }
 .video-js:after {
     content: '.';
