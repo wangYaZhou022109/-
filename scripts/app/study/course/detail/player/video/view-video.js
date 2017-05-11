@@ -9,12 +9,16 @@ exports.bindings = {
 exports.components = [function() {
     var state = this.bindings.state.data;
     var localLocation = state.localLocation;
+    var maxTime = state.section.timeSecond;
     var currentTime = 0;
     if (state.progress) {
         currentTime = state.progress.lessonLocation;
     }
     if (localLocation) {
         currentTime = Math.floor(localLocation);
+    }
+    if ((maxTime - currentTime) < 2) {
+        currentTime = 0;
     }
     return {
         id: 'player',
