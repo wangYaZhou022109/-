@@ -20,7 +20,7 @@ view('options') > .answer
             else
                 .radio.m-right
                     input(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('disabled')&if(isDisabled)('checked')&if(checked)
-                    label(for='radio-'+@index')
+                    label(for='radio-'+@index)
             label(for='answer-item-' + index)
                 span.pull-left.option-num > @echo(code '：')
                 .answer-options > @echo(content)
