@@ -32,12 +32,16 @@ exports.store = {
             return this.put(unfollow).then(function() {
                 me.app.message.success('取消成功');
                 me.module.dispatch('init');
+                me.module.dispatch('bottomsrefresh');
+                me.module.dispatch('refresh');
             });
         }
     }
 };
 
 exports.afterRender = function() {
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
+    this.options.store.callbacks.refresh = this.renderOptions.refresh;
     this.dispatch('topicType');
     this.dispatch('init');
 };

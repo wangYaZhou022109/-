@@ -32,7 +32,7 @@ view('head')
     .pull-left.title > echo('考试名称: ' state.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right > echo('考生： ' state.member.name)
+            li.border.right > echo('考生： ' state.examinee)
         .btn#submit 提交评卷
 
 view('main')
@@ -50,3 +50,8 @@ view('main')
                     .h3.m-bottom > echo(name '(共' totalScore '分)')
                     each(questions)
                         div(data-dynamic-key=id)
+
+    if(state.singleMode)
+        .text-right
+            .btn.white.border.m-right(id='prev-' + state.currentQuestion.typeIndex) 上一题
+            .btn.white.border(id='next-' + state.currentQuestion.typeIndex) 下一题

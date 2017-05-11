@@ -5,7 +5,8 @@ exports.items = {
     topic: 'topic',
     upload: '',
     edit: 'edit',
-    details: 'details'
+    details: 'details',
+    selectdrop: 'selectdrop'
 };
 
 exports.store = {
@@ -50,9 +51,29 @@ exports.store = {
             mixin: {
                 getData: function(title) {
                     var selecttitle = [];
+                    if (typeof title !== 'string'
+                        || title === ''
+                        || title === null) {
+                        selecttitle = [];
+                    } else {
+                        _.forEach(this.data, function(d) {
+                            if (d.title.indexOf(title) !== -1) {
+                                selecttitle.push(d);
+                            }
+                        });
+                    }
+                    return selecttitle;
+                }
+            }
+        },
+        titledata: {
+            data: [],
+            mixin: {
+                getData: function(id) {
+                    var selecttitle = '';
                     _.forEach(this.data, function(d) {
-                        if (d.title.indexOf(title) !== -1) {
-                            selecttitle.push(d);
+                        if (d.id === id) {
+                            selecttitle = d.title;
                         }
                     });
                     return selecttitle;
@@ -64,7 +85,7 @@ exports.store = {
         addFile: function(payload) {
             var me = this,
                 attachments = payload;
-            me.models.task.data.attachments = attachments;
+            me.models.task.data = attachments[0];
             me.models.task.changed();
         },
         init: function() {
@@ -97,7 +118,14 @@ exports.store = {
             data.id = '1';
             question.set(data);
             this.post(question).then(function() {
-                me.app.message.success('操作成功');
+                var message = '提问成功';
+                var speech = me.models.speech.getData('1');
+                if (speech.status === 1) {
+                    message = '等待审核';
+                }
+                me.app.message.success(message);
+                me.module.dispatch('leftrefresh');
+                me.module.dispatch('bottomsrefresh');
             });
         },
         selecttitle: function() {
@@ -109,22 +137,38 @@ exports.store = {
             });
             this.post(selecttitle);
         },
-        selectquestion: function() {
-            // var data = payload;
-            //     data.id = 1;
-            // var selecttitle = this.models.selecttitle.getData(payload);
-            // console.log(selecttitle);
+        // selectquestion: function() {
+        //     // var data = payload;
+        //     //     data.id = 1;
+        //     // var selecttitle = this.models.selecttitle.getData(payload);
+        //     // console.log(selecttitle);
+        selectquestion: function(payload) {
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(payload);
+            titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
+        },
+        showSelectquestion: function(payload) {
+            var title = payload;
+            var titledata = this.models.titledata;
+            var selecttitle = this.models.selecttitle.getData(title);
+            this.models.titledata.clear();
+            titledata.data = selecttitle;
+            titledata.changed();
         }
 
     }
 };
 
 exports.afterRender = function() {
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
     this.dispatch('selecttitle');
     this.dispatch('init');
 };
 
-exports.title = '我要提问';
+exports.title = '提问题';
 
 exports.buttons = [{
     text: '发布',
@@ -137,11 +181,27 @@ exports.buttons = [{
         var img,
             begin,
             end,
-            data = payload;
+            data = payload,
+            length = 0,
+            contentLength = 0;
         title = title.replace(/(^\s*)|(\s*$)/g, '');
         if (typeof title === 'undefined' || title === '') {
             this.app.message.success('请填写问题标题！');
             return false;
+        }
+        if (title.length > 0) {
+            length = title.replace(/[\u0391-\uFFE5]/g, 'aa').length;
+            if (length > 60) {
+                this.app.message.success('标题不能超过60字-发布失败！');
+                return false;
+            }
+        }
+        if (content.length > 0) {
+            contentLength = content.replace(/[\u0391-\uFFE5]/g, 'aa').length;
+            if (contentLength > 3000) {
+                this.app.message.success('详细描述不能超过3000字-发布失败！');
+                return false;
+            }
         }
         if (typeof topicIds === 'undefined' || topicIds === '') {
             data.topicIds = 'null';
@@ -163,3 +223,4 @@ exports.buttons = [{
         return this.dispatch('release', data);
     }
 }];
+

@@ -1,0 +1,29 @@
+.classmate-book-page {
+    & .classmate-side {
+        width: 15%;
+        display: inline-block;
+        & ul {
+            width: 100%;
+            & li {
+                width: 100%;
+                text-align: center;
+                line-height: var(--nav-height);
+                cursor: pointer;
+                &.active {
+                    background: var(--main-color);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+    & .classmate-table {
+        display: inline-block;
+        width: 85%;
+        margin-right: -4px;
+        vertical-align: top;
+        & table,
+        & table.table {
+            margin: 0;
+        }
+    }
+}

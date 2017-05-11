@@ -20,6 +20,8 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
+            this.models.exam.clear();
+            this.models.otherModuelExam.clear();
             if (payload.id) {
                 this.models.exam.data = { id: payload.id };
                 return this.get(this.models.exam);

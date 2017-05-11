@@ -11,7 +11,6 @@ exports.bindings = {
 exports.afterRender = function() {
     var exam = this.bindings.exam.data,
         examRecord = exam.examRecord;
-
     if (examRecord && examRecord.status === WAIT_MARK_PAPER) {
         return this.module.regions.main.show(SCORE_DETAIL, {
             examRecordId: examRecord.id

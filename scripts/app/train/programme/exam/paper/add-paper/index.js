@@ -47,7 +47,9 @@ exports.store = {
             var me = this,
                 id = me.module.renderOptions.id;
             if (id) {
-                me.models.paper.set({ id: id });
+                D.assign(me.models.paper.params, {
+                    paperId: id
+                });
                 me.get(me.models.paper).then(function() {
                     me.module.reload();
                 });
@@ -64,9 +66,9 @@ exports.store = {
                 delete target.question;
                 return target;
             });
-            if (me.module.renderOptions.isCopy) {
-                delete me.models.paper.data.id;
-            }
+            // if (me.module.renderOptions.isCopy) {
+            //     delete me.models.paper.data.id;
+            // }
             D.assign(me.models.paper.data, payload, {
                 paperClassQuestions: JSON.stringify(paperClassQuestions),
                 type: me.module.renderOptions.type || 1,
@@ -142,6 +144,7 @@ exports.store = {
                 questionClass.questionId = q.id;
                 questionClass.score = Number(q.score);
                 questionClass.sequence = paperClassQuestions.size;
+                questionClass.isFromSelected = q.isFromSelected || 0;
                 questionClass.question = q;
                 paperClassQuestions.push(questionClass);
             });

@@ -33,12 +33,16 @@ exports.dataForTemplate = {
     },
     isShowDetail: function() {
         var mode = this.bindings.state.data.detailMode;
-        return mode && mode > 0;
+        return mode && mode > 0 && mode < 4;
     },
     state: function(data) {
         return D.assign(data.state, {
             errorRate: data.state.errorRate / 10000
         });
+    },
+    isDisabled: function(data) {
+        var mode = data.state.detailMode;
+        return mode && mode > 0;
     }
 };
 
@@ -89,7 +93,7 @@ exports.handlers = {
 
         if (k >= 65 && k <= 122 && _.find(this.bindings.state.data.options, ['code', char])) {
             if (answer.length > 0 && isRepeat(answer.toLocaleUpperCase(), char)) {
-                setError.call(this, '出现重复字母');
+                setError.call(this, '有重复的字母顺序');
                 e.preventDefault();
                 return false;
             }
@@ -97,7 +101,7 @@ exports.handlers = {
             return true;
         }
 
-        setError.call(this, '输入字母超出范围');
+        setError.call(this, '仅支持字母顺序');
         e.preventDefault();
         return false;
     }

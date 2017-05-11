@@ -1,4 +1,4 @@
-var $ = require('jquery');
+// var $ = require('jquery');
 exports.bindings = {
 };
 
@@ -9,11 +9,33 @@ exports.events = {
 
 exports.handlers = {
     question: function(payload) {
-        $(window).unbind('scroll');
-        this.app.viewport.modal(this.module.items['ask/question'], { id: payload });
+        var me = this;
+        // $(window).unbind('scroll');
+        this.app.viewport.modal(
+            this.module.items['ask/question'],
+            {
+                leftrefresh: function() {
+                    me.module.dispatch('leftrefresh');
+                },
+                bottomsrefresh: function() {
+                    me.module.dispatch('bottomsrefresh');
+                },
+                id: payload
+            }
+        );
     },
     article: function(payload) {
-        $(window).unbind('scroll');
-        this.app.viewport.modal(this.module.items['ask/article'], { id: payload });
+        var me = this;
+        // $(window).unbind('scroll');
+        // this.app.viewport.modal(this.module.items['ask/article'], { id: payload });
+        this.app.viewport.modal(
+            this.module.items['ask/article'],
+            {
+                leftrefresh: function() {
+                    me.module.dispatch('leftrefresh');
+                },
+                id: payload
+            }
+        );
     }
 };

@@ -163,6 +163,9 @@ section.section {
 .inline-block {
     display: inline-block;
     vertical-align: middle;
+    &.inbox {
+        margin-right: -4px;
+    }
 }
 
 .hide,

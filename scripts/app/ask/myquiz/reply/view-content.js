@@ -109,5 +109,17 @@ exports.dataForTemplate = {
             obj.reply.questionReplylist[i].time = text;
         });
         return obj.reply;
-    }
+    },
+    // reply: function(data) {
+    //     var obj = data,
+    //         // date = new Date(data.reply.createTime);
+    //     // console.log(data);
+    //     var url = obj.reply.member.headPortrait;
+    //     // console.log(url);
+    //     if (typeof url === 'undefined' || url === null || url === '') {
+    //         obj.reply.member.headPortrait = 'images/default-userpic.png';
+    //     } else {
+    //         obj.reply.member.headPortrait = this.bindings.down.getFullUrl() + '?id=' + url;
+    //     }
+    // }
 };

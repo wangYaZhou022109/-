@@ -20,7 +20,7 @@ exports.handlers = {
             addQuestionClass = this.module.renderOptions.callback.addQuestionClass,
             removeQuestionClass = this.module.renderOptions.callback.removeQuestionClass;
         if (target.target.checked) {
-            addQuestionClass(question);
+            addQuestionClass(D.assign(question, { isFromSelected: 1 }));
         } else {
             removeQuestionClass(question.id);
         }
@@ -32,7 +32,9 @@ exports.handlers = {
             removeQuestionClasses = this.module.renderOptions.callback.removeQuestionClasses;
         if (target.checked) {
             state.data.checkAll = true;
-            addQuestionClasses(questions);
+            addQuestionClasses(_.map(questions, function(q) {
+                return D.assign(q, { isFromSelected: 1 });
+            }));
         } else {
             state.data.checkAll = false;
             removeQuestionClasses(questions);

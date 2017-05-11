@@ -3,6 +3,7 @@ var maps = require('./app/util/maps'),
     markers = require('./app/ext/views/form/markers'),
     validators = require('./app/ext/views/form/validators'),
     getFirstNode,
+    D = require('drizzlejs'),
     _ = require('lodash/collection');
 
 exports.bindings = {
@@ -18,7 +19,16 @@ exports.actions = {
 
 exports.dataForActions = {
     searchQuestion: function(payload) {
-        return this.validate() ? payload : false;
+        var check = function(data) {
+            if (data.type === '999') {
+                D.assign(data, { type: null });
+            }
+            if (data.difficulty === '999') {
+                D.assign(data, { difficulty: null });
+            }
+            return data;
+        };
+        return this.validate() ? check(payload) : false;
     }
 };
 

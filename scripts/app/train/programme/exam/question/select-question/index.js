@@ -34,7 +34,10 @@ exports.store = {
         },
         searchQuestion: function(payload) {
             this.models.state.data.checkAll = false;
-            this.models.questions.params = D.assign(payload, { status: 1 });
+            D.assign(this.models.questions.params, payload, {
+                status: 1,
+                url: this.module.renderOptions.url
+            });
             return this.get(this.models.questions);
         },
         refresh: function() {

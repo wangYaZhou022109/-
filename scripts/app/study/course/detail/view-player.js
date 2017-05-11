@@ -4,7 +4,9 @@ var sectionCode = {
     3: 'url',
     5: 'audio-new',
     6: 'video',
-    7: 'epub'
+    7: 'epub',
+    12: 'research',
+    13: 'questionary'
 };
 exports.type = 'dynamic';
 
@@ -51,5 +53,8 @@ exports.dataForEntityModule = function(entity) {
                 return me.module.dispatch('updateProgress');
             });
         },
+        updateProgress: function() {
+            return me.module.dispatch('updateProgress');
+        }
     };
 };

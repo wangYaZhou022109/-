@@ -1,0 +1,30 @@
+.askshare-page {
+    & .askshare {
+        & .askshare-left {
+            position: relative;
+            width: 25%;
+            float: left;
+            & img {
+                max-width: 100%;
+                vertical-align: top;
+            }
+        }
+        & .choosepaper {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            margin-bottom: 0;
+            cursor: pointer;
+            padding: 3px 5px;
+            font-weight: 500;
+            color: var(--white);
+            background: rgba(0,0,0,.2);
+            & label {
+                font-size: 12px;
+            }
+            & input {
+                margin-right: 0;
+            }
+        }
+    }
+}

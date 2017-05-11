@@ -53,6 +53,9 @@ exports.dataForTemplate = {
             gensee.cover = gensee.cover ? (downUrl + '?id=' + gensee.cover) : defultImg;
         });
         return toArray(data.gensees, 5);
+    },
+    hasGensee: function(data) {
+        return data.gensees && data.gensees.length > 0;
     }
 };
 

@@ -55,7 +55,7 @@ exports.store = {
             var score = this.models.score,
                 subject = this.models.subject;
             score.data.businessId = subject.data.id;
-            score.data.businessType = 1;
+            score.data.businessType = 2;
             return this.save(score).then(function(data) {
                 subject.data.avgScore = data[0].avgScore || subject.data.avgScore;
                 subject.changed();

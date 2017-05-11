@@ -1,73 +1,58 @@
 #!handlebars
 
 module
-    div(data-region='main')
+    .addexam-content(data-region='main')
 
 view('main')
-    .row
-        .clearfix > .col-sm-12
-            label.com-title.pull-left 评卷配置
-    br
-    .row
-        .col-sm-8
-            .inline-block.m-right.pull-left
-                .text 评卷方式:
-                #  .input.cont > .min-input > select.input#mark-type > each(markTypes)
-                #      option(value=key)('selected')&if(selected) > echo(value)
-            each(markTypes)
-                input.inline-block(id='mark-type-'+ key type='radio' name='judge' value=key)('checked')&if(selected)
-                .inline-block > echo(value)
+    .layout-mt-small 评卷配置
+    .layout-mt-small.small-font
+        label.layout-mr-small 评卷方式:
+        #  .input.cont > .min-input > select.input#mark-type > each(markTypes)
+        #      option(value=key)('selected')&if(selected) > echo(value)
+        each(markTypes)
+            input(id='mark-type-'+ key type='radio' name='judge' value=key)('checked')&if(selected)
+            label.layout-mr-small > echo(value)
+        .pull-right
+            input(type='checkbox' name='anonymityMark' id='anonymity-mark' value='1')('checked')&if(anonymityMark)
+            label(for='anonymity-mark') 匿名评卷 （勾选后将隐藏参考人信息）
+    if(state.isPaper)
+        table.table.layout-mt-small
+            thead > tr
+                th 试卷名称
+                th 评卷老师
+                th 操作
+            tbody > each(state.markPapers)
+                tr
+                    td > echo(name)
+                    td
+                        each(markMembers)
+                            echo(name '&nbsp;&nbsp;&nbsp;')
+                    td > a(id='choose-p-' + @index) 配置
 
-        .col-sm-4
-            label
-                .checkbox.inline-block.no-margin
-                    input(type='checkbox' name='anonymityMark' id='anonymity-mark' value='1')('checked')&if(anonymityMark)
-                    label(for='anonymity-mark')
-                .inline-block.m-right 匿名评卷 （勾选后将隐藏参考人信息）
-    br
-    .row
-        .col-sm-12
-            if(state.isPaper)
-                .list
-                    table.table.table2
-                        thead > tr
-                            th 试卷名称
-                            th 评卷老师
-                            th 操作
-                        tbody > each(state.markPapers)
-                            tr
-                                td > echo(name)
-                                td
-                                    each(markMembers)
-                                        echo(name '&nbsp;&nbsp;&nbsp;')
-                                td > a(id='choose-p-' + @index) 配置
-        
-            if(state.isQuestionType)
-                .list
-                    table.table.table2
-                        thead > tr
-                            th 题型名称
-                            th 评卷老师
-                            th 操作
-                        tbody > each(state.markQuestionTypes)
-                            tr
-                                td > echo(name)
-                                td
-                                    each(markMembers)
-                                        echo(name '    ')
-                                td > a(id='choose-qt-' + @index) 配置
-        
-            if(state.isQuestion)
-                .list
-                    table.table.table2
-                        thead > tr
-                            th 试题名称
-                            th 评卷老师
-                            th 操作
-                        tbody > each(state.markQuestions)
-                            tr
-                                td > .td-content > @echo(name)
-                                td
-                                    each(markMembers)
-                                        echo(name '    ')
-                                td > a(id='choose-q-' + @index) 配置
+    if(state.isQuestionType)
+        table.table.layout-mt-small
+            thead > tr
+                th 题型名称
+                th 评卷老师
+                th 操作
+            tbody > each(state.markQuestionTypes)
+                tr
+                    td > echo(name)
+                    td
+                        each(markMembers)
+                            echo(name '    ')
+                    td > a(id='choose-qt-' + @index) 配置
+
+    if(state.isQuestion)
+        table.table.layout-mt-small
+            thead > tr
+                th 试题名称
+                th 评卷老师
+                th 操作
+            tbody > each(state.markQuestions)
+                tr
+                    td > .td-content > @echo(name)
+                    td
+                        each(markMembers)
+                            echo(name '    ')
+                    td > a(id='choose-q-' + @index) 配置

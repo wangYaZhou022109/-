@@ -8,11 +8,18 @@ exports.store = {
         state: { data: { menu: 'content' } }
     },
     callbacks: {
-        init: function() {
+        init: function(payload) {
+            var state = this.models.state;
+            var id = payload;
+            state.data = { menu: id };
+            state.changed();
         }
     }
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init');
+    this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
+    this.options.store.callbacks.bottomsrefresh = this.renderOptions.bottomsrefresh;
+    this.options.store.callbacks.refresh = this.renderOptions.refresh;
+    return this.dispatch('init', this.renderOptions.id);
 };

@@ -5,43 +5,47 @@ module
     div(data-region='mark')
 
 view('main')
-    .div(style='margin-bottom: 15px;')
-        .div(style='width: 60%;float: left;margin: 10px;') > label
-            .btn#add-temp-paper(class='btn ' + if(previousStatusIsStarting 'disabled')) > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('临时组卷')
-            .btn#add-tactic(class='btn ' + if(previousStatusIsStarting 'disabled')) > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right > echo('随机组卷')
-            input.input#paperClassId(type='hidden' name='paperClassId' value=paperClass.id x-rule='required' x-marker='show-error' x-message='请选择试卷')
-        .div(style='width: 3%;float: right;margin: 10px;') > .btn#preview-paper 预览
-        .div(style='width: 30%;float: right;margin: 10px;')
-            if(previousStatusIsStarting)
-                .pull-right.m-right.col-sm-7 > select.input#paperSortRule('disabled')
-                    option(value='1')('selected')&if(checked.paperSortRule1) 默认顺序
-                    option(value='2')('selected')&if(checked.paperSortRule2) 试题打乱顺序
-                    option(value='3')('selected')&if(checked.paperSortRule3) 选项打乱顺序
-                    option(value='4')('selected')&if(checked.paperSortRule4) 试题及选项打乱顺序
-                input(type='hidden' name='paperSortRule' value=exam.paperSortRule)
-            else
-                .pull-right.m-right.col-sm-7 > select.input#paperSortRule(name='paperSortRule' style='width: 70%;height: 40px;')
-                    option(value='1')('selected')&if(checked.paperSortRule1) 默认顺序
-                    option(value='2')('selected')&if(checked.paperSortRule2) 试题打乱顺序
-                    option(value='3')('selected')&if(checked.paperSortRule3) 选项打乱顺序
-                    option(value='4')('selected')&if(checked.paperSortRule4) 试题及选项打乱顺序
-    .div > .row.list
-        table.table
-            thead > tr
-                th > | 类型
-                each(paperCount)
-                    th > echo(name)
-                th > | 共计
-            tbody > tr
-                th > | 数量
-                each(paperCount)
-                    td > echo(count)
-                td > echo(paperCount.count)
-            tbody > tr
-                th > | 分数
-                each(paperCount)
-                    td > echo(score)
-                td > echo(paperCount.score)
+    .test.border.top
+        .clearfix.layout-mt-small
+            .pull-left
+                .btn#add-temp-paper(class='btn ' + if(previousStatusIsStarting 'disabled'))
+                    i.iconfont.icon-note.m-right
+                    span 临时组卷
+                .btn#add-tactic(class='btn ' + if(previousStatusIsStarting 'disabled'))
+                    i.iconfont.icon-note.m-right
+                    span 随机组卷
+                input.input#paperClassId(type='hidden' name='paperClassId' value=paperClass.id x-rule='required' x-marker='show-error' x-message='请选择试卷')
+            .pull-right
+                if(previousStatusIsStarting)
+                    select.select.m-right#paperSortRule('disabled')
+                        option(value='1')('selected')&if(checked.paperSortRule1) 默认顺序
+                        option(value='2')('selected')&if(checked.paperSortRule2) 试题打乱顺序
+                        option(value='3')('selected')&if(checked.paperSortRule3) 选项打乱顺序
+                        option(value='4')('selected')&if(checked.paperSortRule4) 试题及选项打乱顺序
+                    input(type='hidden' name='paperSortRule' value=exam.paperSortRule)
+                else
+                    select.select.m-right#paperSortRule(name='paperSortRule')
+                        option(value='1')('selected')&if(checked.paperSortRule1) 默认顺序
+                        option(value='2')('selected')&if(checked.paperSortRule2) 试题打乱顺序
+                        option(value='3')('selected')&if(checked.paperSortRule3) 选项打乱顺序
+                        option(value='4')('selected')&if(checked.paperSortRule4) 试题及选项打乱顺序
+                .btn#preview-paper 预览
+    table.table.layout-mt-small
+        thead > tr
+            th > | 类型
+            each(paperCount)
+                th > echo(name)
+            th > | 共计
+        tbody > tr
+            th > | 数量
+            each(paperCount)
+                td > echo(count)
+            td > echo(paperCount.count)
+        tbody > tr
+            th > | 分数
+            each(paperCount)
+                td > echo(score)
+            td > echo(paperCount.score)
     if(showPaperShowRule)
         label.com-title > echo('考卷显示规则')
         br

@@ -244,14 +244,6 @@ view('two-brings') > form.vertical
                 .content > input.border.bottom.w-full(name='title2'  value=twoBringsResult.title2  x-rule='required')
             .h5.m-top 主题：
             textarea.w-full.m-top#content2(placeholder="输入问题内容" name='content2' rows="5" x-rule='required') > echo(twoBringsResult.content2)
-        br
-        .row
-            if(twoBringsResult.id)
-                .col-sm-2           
-                    btn.btn(id='close') > echo('确定')
-            else
-                .col-sm-2
-                    btn.btn(id='save') > echo('提交')
 
 view('questionnaire') > .surveyexam-page > .surveyexam
     each(questionnaire)
@@ -260,15 +252,12 @@ view('questionnaire') > .surveyexam-page > .surveyexam
             .surveyexam-content.border.left.clearfix.inline-block
                 .inline-block.survey-name
                     .h3 > echo(resourceName)
-                    compare(type 'eq' 1)
-                        .small-font.sub-text.m-top > dateTime(exam.startTime) + echo('~') + dateTime(exam.endTime)
-                    else
-                        .small-font.sub-text.m-top > dateTime(researchQuestionary.startTime) + echo('~') + dateTime(researchQuestionary.endTime)
+                    .small-font.sub-text.m-top > dateTime(startTime) + echo('~') + dateTime(endTime)
                 .inline-block.h4.sub-text 未完成
             compare(type 'eq' 1)
-                .surveyexam-btn.inline-block.btn > a(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+                a.surveyexam-btn.inline-block.btn(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
             else
-                .surveyexam-btn.inline-block.btn > a(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
+                a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
                 
 view('bus')
     section.section.businfo-page > .businfo

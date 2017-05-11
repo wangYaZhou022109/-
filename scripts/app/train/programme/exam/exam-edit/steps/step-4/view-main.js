@@ -1,5 +1,6 @@
 var maps = require('./app/util/maps'),
     qtypes = maps['question-types'],
+    D = require('drizzlejs'),
     _ = require('lodash/collection'),
     types = [
         { id: 1, type: 1, name: '单选' },
@@ -70,7 +71,9 @@ exports.handlers = {
         if (id) {
             return this.app.viewport.modal(view, {
                 paperId: id,
-                exam: this.bindings.exam.data
+                exam: D.assign(this.bindings.exam.data, {
+                    paperShowRule: $(this.$('paperSortRule')).val()
+                })
             });
         }
         this.app.message.error('请先选择试卷');

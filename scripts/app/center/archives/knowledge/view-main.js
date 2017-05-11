@@ -27,7 +27,7 @@ exports.dataForTemplate = {
             if (!r.browseMemberCount) {
                 r.browseMemberCount = '0';
             }
-            if (r.type === '0' || r.type === '1') {
+            if (r.type === 0 || r.type === 1) {
                 r.type = '音／视频';
             } else {
                 r.type = '文档';

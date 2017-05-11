@@ -7,19 +7,21 @@ module > form.vertical
 
 view('content')
     .form.align-left
-        .form-row.r-padding
+        .form-row
             label.required 试题信息
             textarea.w-full#content(name='content' rows='5')
         if(showDiffculty)
-            div
-                label(class='required') 难易度
+            .form-row
+                label.required 难易度
                 select.input#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
                     option(value=key)('selected')&if(selected) > echo(value)
 
 view('options')
     .layout-mt-small
-        ul.w-full.clearfix
-            each(options) > li.choosequestion-item.w-half.pull-left(id='item-' + index)
+        label 选项
+        a.m-left#add(href='javascript:;') 添加选项
+        ul.layout-mt-small
+            each(options) > li.choosequestion-item.w-half.inline-block(id='item-' + index)
                 .relative
                     .text > span.strong > echo('选项' + code ':')
                     if(isRichText)
