@@ -61,7 +61,7 @@ exports.afterRender = function() {
                 if (hour === 0) {
                     clearInterval(si);
                     if (callback) {
-                        callback();
+                        doSomeInCountDown(getTimeStr(hour, minitus, second));
                     }
                     return;
                 }
