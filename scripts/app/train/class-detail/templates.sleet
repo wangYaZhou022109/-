@@ -271,29 +271,35 @@ view('questionnaire') > .surveyexam-page > .surveyexam
                 .surveyexam-btn.inline-block.btn > a(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
                 
 view('bus')
-    tbody > each(bus)
-        div
-            tr
-                td > echo(name+'       '+startTime+'-'+endTime)
+    section.section.businfo-page > .businfo
+        each(bus)
+            .businfo-title.clearfix.layout-mt-small
+                .h4.pull-left > echo(name)
                 .pull-right
+                    span.sub-text.layout-mr > dateTime(startTime) + echo('-') + dateTime(endTime)
                     a.normal.layout-mr.sub-text(id='sectionDisplay-'+ id href="javascript:;")
                         label(id='label-' + id)
-                        i.iconfont.icon-arrow-up(id='icon-' + id)
+                        i.iconfont.icon-triangle-up(id='icon-' + id)
             if(show)
                 div(id='sectionDiv-' + id display = none )
-                    if(falg)
-                        each(busDetails)
-                            .item.block
-                                tr
-                                    td > echo(id)
-                    else
-                        each(optionList)
-                            .item.block
-                                tr
-                                    td > echo(id)
-                                    td > .checkbox.no-margin
-                                        input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
-                                        label(for='check-item'+id)
+                if(falg)
+                    each(busDetails)
+                        .bg-businfo.m-top
+                            .businfo-main.inline-block
+                                .small-font > echo(name)
+                                .sub-text.m-top.small-font > echo(explain)
+                else
+                    each(optionList)
+                        .bg-businfo.m-top
+                            .businfo-main.inline-block 
+                                .small-font > echo(name)
+                                .sub-text.m-top.small-font > echo(explain)
+                            .businfo-side.inline-block.layout-mr-small
+                                input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                label(for='check-item'+id) 选择
+                                    #  td > .checkbox.no-margin
+                                    #      input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                    #      label(for='check-item'+id)
 
 view('research-tips')
     div

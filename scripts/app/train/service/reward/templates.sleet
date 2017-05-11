@@ -48,7 +48,7 @@ view('edit') > form.vertical
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师部门') :
                     .content
-                        input.input(name='lectrerName' readonly='true' value= edit.teacherOrganization)
+                        input.input(name='teacherOrganization' readonly='true' value= edit.teacherOrganization)
                 .form-row.pull-left.w-half
                     label.label.required > echo('讲师职务') :
                     .content

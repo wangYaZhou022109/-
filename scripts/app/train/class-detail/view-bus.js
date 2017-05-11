@@ -1,4 +1,5 @@
-exports.type = '班车餐饮信息统计';
+var _ = require('lodash/collection');
+exports.title = '班车餐饮信息统计';
 exports.bindings = {
     bus: true
 };
@@ -23,5 +24,14 @@ exports.handlers = {
                 me.app.message.success('删除成功');
             });
         }
+    }
+};
+exports.dataForTemplate = {
+    sectionDisplay: function(data) {
+        _.map(data.bus || [], function(bus) {
+            var e = bus;
+            console.log(e);
+        });
+        return data.bus;
     }
 };

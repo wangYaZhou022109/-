@@ -1,7 +1,9 @@
-var $ = require('jquery');
+var $ = require('jquery'),
+    validators = require('./app/ext/views/form/validators');
 exports.bindings = {
     settlement: true
 };
+
 exports.events = {
     'change input-class-*': 'updateName'
 };
@@ -19,6 +21,19 @@ exports.handlers = {
 exports.dataForActions = {
     updateClass: function(payload) {
         return this.validate() ? payload : false;
+    },
+    save: function(payload) {
+        var peopleNumber = $(this.$$('[name="peopleNumber"]')).val();
+        var createMouth = $(this.$$('[name="createMouth"]')).val();
+        if (!validators.required.fn(peopleNumber)) {
+            this.app.message.error('结算人数必填');
+            return false;
+        }
+        if (!validators.required.fn(createMouth)) {
+            this.app.message.error('结算月份必填');
+            return false;
+        }
+        return payload;
     }
 };
 exports.actionCallbacks = {

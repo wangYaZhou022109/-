@@ -1,7 +1,6 @@
 exports.items = {
     content: 'content'
 };
-
 exports.store = {
     models: {
         settlement: {
@@ -19,6 +18,7 @@ exports.store = {
         },
         save: function(payload) {
             var saveManage = this.models.save;
+            console.log(payload);
             saveManage.clear();
             saveManage.set(payload);
             return this.save(saveManage);
