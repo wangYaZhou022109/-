@@ -27,6 +27,9 @@ exports.store = {
         },
         file: {
             url: '../human/file/upload-parse-file'
+        },
+        img: {
+            url: '../system/file/upload'
         }
     },
     callbacks: {

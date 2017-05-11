@@ -4,7 +4,7 @@ module.exports = {
     'exam.research.questionary-detail': '问卷须知',
     'exam.begin-answer-question': '开始答题',
     'exam.submit-paper-confirm': '确定要提交试卷吗',
-    'exam.submit-paper-confirm.no-finish': '还有未答的题目，是否确定交卷',
+    'exam.submit-paper-confirm.no-finish': '{0}题未答',
     'exam.submit-mark-paper-confirm': '确定要提交评卷吗',
     'exam.mark-paper-check': '存在还没评分的题目',
     'exam.answer-paper.auto-submit-success': '答案已自动保存成功',
@@ -14,5 +14,7 @@ module.exports = {
     'exam.answer-paper.switch-screen.remain-times': '还剩余{0}次切屏',
     'exam.answer-paper.time-out.submit': '交卷时间到,你本次考试已被强制交卷',
     'exam.answer-paper.remain-one-mins': '离考试结束不到1分钟，考试时间结束后系统将自动为你提交答案',
-    'exam.answer-paper.remain-five-mins': '你好，离考试结束还有5分钟'
+    'exam.answer-paper.remain-five-mins': '你好，离考试结束还有5分钟',
+    'exam.submit-paper-confirm.has-waiting-check': '{0}题标记为待检查',
+    'exam.answer-paper.close-window': '您确定关闭当前考试页面吗，关闭后考试时间将会后台持续计算'
 };

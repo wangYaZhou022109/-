@@ -4,7 +4,6 @@ var options = require('./app/exam/exam/base-paper/index'),
     _ = require('lodash/collection'),
     $ = require('jquery'),
     strings = require('./app/util/strings'),
-    getCurrentStatus,
     constant = {
         PC_CLIENT_TYPE: 1,
         SHOW_ANSWER_IMMED: 1
@@ -72,6 +71,9 @@ var setOptions = {
                     },
                     getWaitingCheck: function(questionId) {
                         return _.find(this.data.waitingChecks, ['key', questionId]);
+                    },
+                    hasWatingCheck: function() {
+                        return this.data.waitingChecks.length > 0;
                     }
                 }
             },
@@ -193,7 +195,7 @@ var setOptions = {
                     } else {
                         this.models.types.updateStatus(
                             payload.questionId,
-                            getCurrentStatus.call(this.module, payload.questionId)
+                            this.module.options.getCurrentStatus.call(this.module, payload.questionId)
                         );
                     }
                     this.models.types.changed();
@@ -329,6 +331,7 @@ var target = D.assign({}, {
             });
         }
         helper.switchScreen.call(this, this.store.models.exam.data);
+        helper.closeListener.call(this, strings.get('exam.answer-paper.close-window'));
     },
     getCurrentStatus: function(id) {
         var answer = this.store.models.answer.data,

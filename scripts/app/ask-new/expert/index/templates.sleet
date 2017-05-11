@@ -6,7 +6,8 @@ module > .ask-page > .container
         .page-main(data-region='main')
 view('main')
     .tabs.line.mb-1
-        .pull-right.btn#apply-expert 申请成为专家
+        #  .pull-right.btn#apply-expert 申请成为专家
+        .pull-right.btn#verify 审核中
         ul
             li.active 专家荟萃
     .border.bottom.dashed
