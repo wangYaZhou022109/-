@@ -14,11 +14,13 @@ view('options') > .answer
     .preview-list > dl > each(options)
         dd(id='item-' + index)
             if(mutiple)
-                .checkbox.no-margin
+                .checkbox
                     input(type='checkbox' id='check-'+@index value=@index)('disabled')&if(isDisabled)('checked')&if(checked)
                     label(for='check-'+@index)
             else
-                input.m-right(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('disabled')&if(isDisabled)('checked')&if(checked)
+                .radio.m-right
+                    input(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('disabled')&if(isDisabled)('checked')&if(checked)
+                    label(for='radio-'+@index)
             label(for='answer-item-' + index)
                 span.pull-left.option-num > @echo(code '：')
                 .answer-options > @echo(content)
