@@ -73,9 +73,8 @@ view('main')
 
 view('edit')
     form.vertical
-        .row
-            label 附件名称:
-            input.input(name='name' value=attachment.name)
+        .row.col-sm-12
+            input.input(name='name' value=attachment.name placeholder='附件名称(可修改)')
             a.btn#uploadFile 上传附件
         .row
             label 作业详情:
