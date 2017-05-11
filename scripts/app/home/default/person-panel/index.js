@@ -17,7 +17,7 @@ exports.store = {
                 newsList = this.models.newsList;
             personPanels.params.moduleConfigId = payload.id;
             newsList.params.configId = payload.homeConfigId;
-            newsList.params.size = 4;
+            newsList.params.size = 5;
             personPanels.clear();
             newsList.clear();
             return this.chain(
