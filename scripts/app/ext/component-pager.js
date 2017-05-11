@@ -67,7 +67,7 @@ getPageHtml = function(pageCount, currentPage) {
             html.push('<li class="hover-main-color" data-dir="prev">',
                 '<i class="iconfont icon-arrow-left scale-1"></i></li>');
         }
-        if (pageCount > pageBtns) {
+        if (pageCount > (pageBtns + 1)) {
             if (currentPage <= pageBtns) {
                 html = getPageBtnHtml(html, [1, 2, 3, 4, 5], currentPage);
                 if (currentPage === pageBtns) html = getPageBtnHtml(html, [6], currentPage);

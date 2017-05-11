@@ -5,7 +5,7 @@ module
 
 view('main')
     p.question
-        span > a(name='question-' + question.id) > echo(question.index '.')
+        span > a.normal(name='question-' + question.id) > echo(question.index '.')
         echo('【')
         map('research-question-types' question.type)
         echo('】')

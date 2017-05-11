@@ -6,23 +6,22 @@ module
 view('main')
     #main
     p.question
-        span > a(name='question-' + question.id) > echo(question.index '.')
+        span > a.normal(name='question-' + question.id) > echo(question.index '.')
         echo('【')
         map('research-question-types' question.type)
         echo('】')
         @echo(question.content)
 
-    if(mutiple)
-        table.table.m-top > each(question.options)
+    table.table.m-top
+        each(question.options)
             tr
                 td
-                    .checkbox.no-margin
-                    input(type='checkbox' id='checkbox-' +@index disabled='disabled')('checked')&if(checked)
-                    label(for='checkbox-' + @index)
-                    span > echo(code '.' text)
-    else
-        table.table.m-top > each(question.options)
-            tr
-                td
-                    input(type='radio' disabled='disabled')('checked')&if(checked)
-                    span > echo(code '.' text)
+                    if(mutiple)
+                        .checkbox
+                            input(type='checkbox' id='checkbox-' +@index disabled='disabled')('checked')&if(checked)
+                            label(for='checkbox-' + @index)
+                    else
+                        .radio
+                            input(type='radio' disabled='disabled' id='radio-' +@index)('checked')&if(checked)
+                            label(for='radio-' +@index)
+                    label > echo(code '.' text)
