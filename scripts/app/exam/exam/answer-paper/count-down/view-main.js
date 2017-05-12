@@ -60,9 +60,6 @@ exports.afterRender = function() {
             if (minitus === 0) {
                 if (hour === 0) {
                     clearInterval(si);
-                    if (callback) {
-                        doSomeInCountDown(getTimeStr(hour, minitus, second));
-                    }
                     return;
                 }
                 hour -= 1;

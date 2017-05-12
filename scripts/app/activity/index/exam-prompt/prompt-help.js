@@ -113,7 +113,8 @@ canViewDetailImmd = function(exam) {
 };
 
 overExam = function(exam) {
-    return exam.examRecord && exam.examRecord.status > 4;
+    return (exam.examRecord && exam.examRecord.status > 4)
+        || exam.examedTimes > 1;
 };
 
 isInApplcantTimeRange = function(exam) {

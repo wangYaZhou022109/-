@@ -89,9 +89,59 @@ var setOptions = {
             answer: {
                 type: 'localStorage',
                 mixin: {
-                    init: function() {
-                        this.data = [];
-                        this.save();
+                    init: function(answers) {
+                        var exam = this.module.store.models.exam.data,
+                            temp,
+                            readingAnswer;
+
+                        if (answers) {
+                            temp = _.map(answers, function(a) {
+                                if (a.questionCopy.type === 1 || a.questionCopy.type === 2) {
+                                    return {
+                                        key: a.questionId,
+                                        value: _.map(a.answer.split(','), function(v) {
+                                            return { id: a.questionId, value: v };
+                                        })
+                                    };
+                                }
+                                return {
+                                    key: a.questionId,
+                                    value: [{ id: a.questionId, value: a.answer }]
+                                };
+                            });
+
+                            readingAnswer = _.map(_.filter(exam.paper.questions, function(q) {
+                                return q.type === 6;
+                            }), function(reading) {
+                                return {
+                                    key: reading.id,
+                                    type: 6,
+                                    value: _.map(reading.subs, function(sub) {
+                                        var answer = _.find(temp, ['key', sub.id]);
+                                        if (answer) {
+                                            temp = _.reject(temp, ['key', sub.id]);
+                                            return answer;
+                                        }
+                                        return { key: sub.id, value: [] };
+                                    })
+                                };
+                            });
+
+                            _.forEach(readingAnswer, function(ra) {
+                                var flag = _.some(ra.value, function(sub) {
+                                    return sub.value.length > 0 && _.every(sub.value, function(sv) {
+                                        return sv.value;
+                                    });
+                                });
+                                if (flag) temp.push(ra);
+                            });
+
+                            this.data = temp;
+                            this.save();
+                        } else {
+                            this.data = [];
+                            this.save();
+                        }
                     },
                     saveAnswer: function(data) {
                         this.data = _.reject(this.data, ['key', data.key]);
@@ -101,7 +151,10 @@ var setOptions = {
                     answeredCount: function() {
                         return _.filter(this.data, function(a) {
                             var readingQuetion = !_.every(a.value, function(sub) {
-                                    return sub.value.length === 0 || sub.value[0].value === '';
+                                    return sub.value.length === 0
+                                        || _.every(sub.value, function(sv) {
+                                            return !sv.value;
+                                        });
                                 }),
                                 otherQuestion = a.value[0].value !== '';
                             return Number(a.type) === 6 ? readingQuetion : otherQuestion;
@@ -147,6 +200,9 @@ var setOptions = {
             },
             decryptKey: {
                 url: '../exam/exam/decrypt-key'
+            },
+            examRecord: {
+                url: '../exam/exam-record/cache'
             }
         },
         callbacks: {
@@ -156,24 +212,36 @@ var setOptions = {
                     state = this.models.state,
                     countDown = this.models.countDown,
                     mark = this.models.mark,
-                    answer = this.models.answer;
-                exam.load();
-                if (!exam.data || (exam.data && exam.data.id !== payload.examId)) {
-                    _.forEach(this.models, function(m) {
-                        m.clear();
-                    });
+                    answer = this.models.answer,
+                    examRecord = this.models.examRecord,
+                    me = this;
 
-                    D.assign(exam.params, { examId: payload.examId });
-                    return this.get(exam).then(function() {
-                        exam.save();
-                        types.init(exam.data.paper.questions);
-                        state.init(exam.data);
-                        countDown.init();
-                        mark.init();
-                        answer.init();
-                    });
-                }
-                return '';
+                exam.load();
+                _.forEach(me.models, function(m) {
+                    m.clear();
+                });
+                D.assign(examRecord.params, { examId: payload.examId });
+                // 先请求一次考试记录判断是否重置
+                return this.get(examRecord).then(function() {
+                    if (!exam.data
+                        || (exam.data && exam.data.id !== payload.examId)
+                        || (examRecord.data.isReset && examRecord.data.isReset === 1)) {
+                        _.forEach(me.models, function(m) {
+                            m.clear();
+                        });
+
+                        D.assign(exam.params, { examId: payload.examId });
+                        return me.get(exam).then(function() {
+                            exam.save();
+                            answer.init(exam.data.paper.answerRecords);
+                            types.init(exam.data.paper.questions);
+                            state.init(exam.data);
+                            countDown.init();
+                            mark.init();
+                        });
+                    }
+                    return '';
+                });
             },
             saveAnswer: function(payload) {
                 this.models.answer.saveAnswer(payload);
@@ -226,16 +294,8 @@ var setOptions = {
                         if (payload.submitType === submitType.Auto) {
                             me.models.modify.clear();
                         } else {
-                            this.app.message.success(strings.get('exam.answer-paper.submit-success'));
                             helper.WS.closeConnect();
-                            if (!viewAnswerDetail.call(me)) {
-                                setTimeout(function() {
-                                    _.forEach(me.models, function(m) {
-                                        m.clear();
-                                    });
-                                    window.close();
-                                }, 500);
-                            }
+                            viewAnswerDetail.call(me);
                         }
                     });
                 }
@@ -278,6 +338,10 @@ var setOptions = {
                     me.models.state.data.showAnswerDetail = 1;
                     me.models.state.changed();
                 });
+            },
+            showTips: function(payload) {
+                D.assign(this.models.state.data, payload);
+                this.models.state.changed();
             }
         }
     }
@@ -322,9 +386,11 @@ var target = D.assign({}, {
             helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
 
             helper.WS.connect(examId, function() {
-                me.app.message.error(strings.get('exam.answer-paper.force-submit'));
                 return me.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
                     helper.WS.closeConnect();
+                    return me.dispatch('showTips', {
+                        tips: strings.get('exam.answer-paper.force-submit')
+                    });
                 });
             }, function(delay) {
                 return me.dispatch('delay', { delay: Number(delay) });
@@ -352,19 +418,9 @@ viewAnswerDetail = function() {
     var exam = this.models.exam.data,
         me = this;
     if (exam.isShowAnswerImmed === constant.SHOW_ANSWER_IMMED) {
-        this.app.message.confirm('提交成功，是否马上查看详情', function() {
-            $('.achievement-content').html('');
-            $('.achievement-content').hide();
+        $('.achievement-content').html('');
+        $('.achievement-content').hide();
 
-            return me.module.dispatch('showAnswerDetail');
-        }, function() {
-            _.forEach(me.models, function(m) {
-                m.clear();
-            });
-            window.close();
-            return false;
-        });
-        return true;
+        me.module.dispatch('showAnswerDetail');
     }
-    return false;
 };

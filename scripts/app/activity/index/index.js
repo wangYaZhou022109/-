@@ -30,13 +30,13 @@ exports.store = {
             url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 18
+            pageSize: 24
         },
         researchActivitys: {
             url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 18
+            pageSize: 24
         },
         down: { url: '../human/file/download' },
         classSignupInfo: {

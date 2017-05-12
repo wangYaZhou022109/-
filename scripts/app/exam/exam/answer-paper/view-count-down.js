@@ -4,7 +4,7 @@ var D = require('drizzlejs'),
 
 exports.bindings = {
     exam: false,
-    countDown: true
+    countDown: false
 };
 
 exports.type = 'dynamic';
@@ -28,8 +28,13 @@ exports.dataForEntityModule = function(data) {
         callback: [{
             time: 0,
             doing: function() {
-                me.app.message.success(strings.get('exam.answer-paper.time-out.submit'));
-                return me.module.dispatch('submitPaper', { submitType: 'Hand' });
+                return me.module.dispatch('submitPaper', { submitType: 'Hand' }).then(function() {
+                    return me.module.dispatch('showTips', {
+                        tips: strings.get('exam.answer-paper.time-out.submit')
+                    }).then(function() {
+                        me.app.viewport.modal(me.module.items['exam-notes']);
+                    });
+                });
             }
         }, {
             time: 1,
