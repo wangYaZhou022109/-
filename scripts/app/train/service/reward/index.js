@@ -37,7 +37,6 @@ exports.store = {
             var updateClass = this.models.updateClass,
                 me = this,
                 courseSalary = payload;
-            console.log(payload);
             courseSalary.classId = me.models.state.data.classId;
             updateClass.set(courseSalary);
             return this.save(updateClass).then(function() {
