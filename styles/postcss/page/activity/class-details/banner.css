@@ -1,0 +1,15 @@
+.banner {
+    position: relative;
+    & .classes {
+        position: absolute;
+        bottom: calc(var(--large-space)*2);
+        right: var(--base-gap);
+        & a {
+            padding: calc(var(--large-space)/10) calc(var(--large-space)/2);
+            color: var(--white);
+            background: var(--main-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}
