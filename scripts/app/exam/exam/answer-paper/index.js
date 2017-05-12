@@ -217,9 +217,6 @@ var setOptions = {
                     me = this;
 
                 exam.load();
-                _.forEach(me.models, function(m) {
-                    m.clear();
-                });
                 D.assign(examRecord.params, { examId: payload.examId });
                 // 先请求一次考试记录判断是否重置
                 return this.get(examRecord).then(function() {
