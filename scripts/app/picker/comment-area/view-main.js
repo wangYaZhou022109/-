@@ -61,13 +61,16 @@ exports.dataForActions = {
         var data = payload;
         data.content = $.trim(data.content);
         if (!$.trim(data.content).length) {
-            return this.app.message.error('评论内容不能为空');
+            this.app.message.error('评论内容不能为空');
+            return false;
         }
         if ($.trim(data.content).length > 3000) {
-            return this.app.message.error('评论内容过长');
+            this.app.message.error('评论内容过长');
+            return false;
         }
         if (sensitive.judge(data.content) > 0) {
-            return this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
         }
         return data;
     },
@@ -75,13 +78,16 @@ exports.dataForActions = {
         var data = payload;
         data.content = $.trim(data.content);
         if (!$.trim(data.content).length) {
-            return this.app.message.error('回复内容不能为空');
+            this.app.message.error('回复内容不能为空');
+            return false;
         }
         if ($.trim(data.content).length > 300) {
-            return this.app.message.error('回复内容过长');
+            this.app.message.error('回复内容过长');
+            return false;
         }
         if (sensitive.judge(data.content) > 0) {
-            return this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
         }
         return data;
     },
