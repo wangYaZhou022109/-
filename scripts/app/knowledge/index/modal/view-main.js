@@ -14,6 +14,9 @@ var parseType = function(ext) {
             txt: 7,
         },
         defaule = 8;
+    if (types[ext] === 0) {
+        return 0;
+    }
     return types[ext] || defaule;
 };
 
