@@ -1,0 +1,50 @@
+#!handlebars
+
+module > .classmate-book-page
+    .class-details-box(data-region='banner')
+    .container
+        .main
+            .classmate-content(data-region="classmate")
+                
+view('banner')
+    .banner > img.w-full(src=classDetail.bannerUrl style='max-height:100%;')
+        section.section.banner-info
+            .title-row
+                .inline-block.layout-mr(style='color:#000000') > .h3 > echo(classInfo.className)
+            .title-row > each(groups)
+                .inline-block.m-right.m-bottom.bg-white.sub-title > echo(shortName)
+
+view('classmate')
+    .clearfix 
+        .pull-right.m-right.pointer
+            i.iconfont.icon-arrow-up
+            span#return 返回
+    .m-top.clearfix.layout-ml
+        .classmate-side
+            ul
+                if(menu)
+                    each(menu)
+                        li(id='menu-'+id class = if(active 'active')) > echo(name)
+                    li(id='menu-'+ 0 class = if(rest 'active')) > echo('其他')
+                else
+                    li(id='menu-'+ 0 class ='active') > echo('其他')
+        .classmate-table
+            table.table   
+                thead > tr
+                    th > echo('序号')
+                    th > echo('姓名')
+                    th > echo('员工编号')
+                    th > echo('机构')
+                    th > echo('部门')
+                    th > echo('职务')
+                    th > echo('手机')
+                tbody > each(list) > tr
+                    td > echo(i)
+                    td > echo(member.fullName)
+                    td > echo(member.name)
+                    td > echo(companyName)
+                    td > echo(organizationName)
+                    td > echo(member.positionName)
+                    td > echo(phoneNumber)
+            #pager.pagination(style='float:none')
+        

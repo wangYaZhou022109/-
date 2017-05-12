@@ -16,9 +16,8 @@ exports.handlers = {
         this.app.viewport.modal(view, { classId: classId });
     },
     classMembers: function() {
-        var view = this.module.items['train/class-detail/school-yearbook'];
         var classId = this.bindings.classId.data.classId;
-        this.app.viewport.modal(view, { classId: classId });
+        this.app.show('content', 'train/classmate-book', { classId: classId });
     },
     addCourse1: function() {
         var me = this;
