@@ -104,6 +104,7 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    // console.log(this.renderOptions);
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
