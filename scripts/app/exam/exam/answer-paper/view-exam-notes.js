@@ -20,7 +20,7 @@ D.assign(obj, {
                 window.close();
             });
         }
-        return '';
+        return this.module.dispatch('clearModels');
     }
 });
 
