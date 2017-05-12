@@ -22,7 +22,7 @@ D.assign(obj.dataForActions, {
         var me = this,
             state = this.bindings.state.data,
             mark = this.bindings.mark.data;
-        return this.Promise.create(function(resolve) {
+        return this.Promise.create(function() {
             var message = [];
             if (state.noAnswerCount > 0) {
                 message.push(strings.getWithParams(
@@ -42,12 +42,18 @@ D.assign(obj.dataForActions, {
                     : strings.get('exam.submit-paper-confirm');
 
             me.app.message.confirm(message, function() {
-                resolve({ submitType: 'Hand' });
+                return me.module.dispatch('submitPaper', { submitType: 'Hand' }).then(function() {
+                    return me.module.dispatch('showTips', {
+                        tips: state.paper.isSubjective === 1
+                            ? strings.get('exam.answer-paper.submit-success-mark')
+                                : strings.get('exam.answer-paper.submit-success')
+                    }).then(function() {
+                        me.app.viewport.modal(me.module.items['exam-notes']);
+                    });
+                });
             }, function() {
                 return false;
             });
-        }).then(function() {
-            me.app.message.success(strings.get('exam.answer-paper.submit-success'));
         });
     }
 });

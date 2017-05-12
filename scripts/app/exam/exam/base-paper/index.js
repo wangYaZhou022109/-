@@ -67,7 +67,8 @@ exports.store = {
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE,
-                            currentQuestion: types.getFirstQuestion()
+                            currentQuestion: types.getFirstQuestion(),
+                            paper: exam.paper
                         };
                         this.save();
                     }
