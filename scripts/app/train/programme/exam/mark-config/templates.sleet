@@ -5,7 +5,7 @@ module
 
 view('main')
     .layout-mt-small 评卷配置
-    .layout-mt-small.small-font
+    .layout-mt-small
         label.layout-mr-small 评卷方式:
         #  .input.cont > .min-input > select.input#mark-type > each(markTypes)
         #      option(value=key)('selected')&if(selected) > echo(value)

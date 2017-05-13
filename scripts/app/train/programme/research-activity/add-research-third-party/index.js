@@ -42,6 +42,7 @@ exports.store = {
             }
             D.assign(this.models.research.data, {
                 sourceType: payload.sourceType || EXAM_SOURCE_TYPE,
+                type: this.module.options.RESEARCH_TYPE
             });
             return '';
         },

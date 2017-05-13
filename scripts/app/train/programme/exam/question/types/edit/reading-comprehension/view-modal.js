@@ -1,4 +1,4 @@
-var types = require('./app/exam/exam-question-types');
+var types = require('./app/train/programme/exam/exam-question-types');
 
 exports.bindings = {
     sub: true

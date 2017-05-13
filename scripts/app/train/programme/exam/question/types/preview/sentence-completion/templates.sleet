@@ -5,23 +5,22 @@ module > .choise
     .options(data-region='options')
 
 view('content')
-    .row
-        .col-xs-6 > .com-title 填空题
+    .h4 填空题
         #  .col-xs-6 > .m-top.text-right
         #      | 本题分数：
         #      echo(state.score)
-    p.question > @echo(state.content)
+    .h4.m-top > @echo(state.content)
 
 
-view('options') > .answer
-    p.question > @echo(state.answer)
+view('options')
+    .m-top > @echo(state.answer)
+    .inline-block.m-top
+        span.text-tips 标准答案:
+        span > @echo(state.answer)
 
 
     .clearfix
         .pull-right.m-bottom
-            .inline-block
-                span.text-tips 标准答案:
-                span > @echo(state.answer)
             .inline-block.m-left
                 span.text-tips 题型:
                 span > echo(state.type)

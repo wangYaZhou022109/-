@@ -3,6 +3,8 @@ var _ = require('lodash/collection'),
 
 exports.title = '选择试题';
 
+exports.large = 'true';
+
 exports.items = {
     'search-param': 'search-param',
     questions: 'questions'
@@ -29,8 +31,15 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
+            var orgs = this.models.orgs,
+                me = this;
             this.models.questions.clear();
-            return this.module.dispatch('searchQuestion', payload);
+            D.assign(orgs.params, {
+                uri: this.module.renderOptions.url || 'exam/question-depot'
+            });
+            return this.get(orgs).then(function() {
+                return me.module.dispatch('searchQuestion', payload);
+            });
         },
         searchQuestion: function(payload) {
             this.models.state.data.checkAll = false;

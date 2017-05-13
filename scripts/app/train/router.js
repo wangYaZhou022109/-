@@ -15,7 +15,8 @@ exports.routes = {
     signup: 'showRegisterPage',
     'class-detail/research-answer/:id': 'showResearchAnswerDetail',
     'class-detail/research-detail/:id': 'showResearchDetail',
-    'class-detail/:id': 'showClassDetail'
+    'class-detail/:id': 'showClassDetail',
+    'programme/research-activity/preview-questionary/:researchId': 'showResearchPreview'
 };
 
 exports.showIndex = function(id) {
@@ -78,13 +79,19 @@ exports.showClassDetail = function(classId) {
     return this.app.show('content', 'train/class-detail', { classId: classId });
 };
 
+exports.showResearchPreview = function(fir, researchId) {
+    return this.app.viewport.showIt('content', 'train/programme/research-activity/preview-questionary',
+    { researchId: researchId });
+};
+
 exports.interceptors = {
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
     'statistics/questionnaire/count/': 'clearHeadAndBottom',
     'programme/preview-task': 'clearHeadAndBottom',
     'class-detail/research-answer/': 'clearHeadAndBottom',
-    'class-detail/research-detail/': 'clearHeadAndBottom'
+    'class-detail/research-detail/': 'clearHeadAndBottom',
+    'programme/research-activity/preview-questionary': 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {

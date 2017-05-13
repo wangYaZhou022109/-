@@ -17,14 +17,14 @@ view('main')
                 input.input#paperClassId(type='hidden' name='paperClassId' value=paperClass.id x-rule='required' x-marker='show-error' x-message='请选择试卷')
             .pull-right
                 if(previousStatusIsStarting)
-                    select.select.m-right#paperSortRule('disabled')
+                    select.input.select.m-right#paperSortRule('disabled')
                         option(value='1')('selected')&if(checked.paperSortRule1) 默认顺序
                         option(value='2')('selected')&if(checked.paperSortRule2) 试题打乱顺序
                         option(value='3')('selected')&if(checked.paperSortRule3) 选项打乱顺序
                         option(value='4')('selected')&if(checked.paperSortRule4) 试题及选项打乱顺序
                     input(type='hidden' name='paperSortRule' value=exam.paperSortRule)
                 else
-                    select.select.m-right#paperSortRule(name='paperSortRule')
+                    select.input.select.m-right#paperSortRule(name='paperSortRule')
                         option(value='1')('selected')&if(checked.paperSortRule1) 默认顺序
                         option(value='2')('selected')&if(checked.paperSortRule2) 试题打乱顺序
                         option(value='3')('selected')&if(checked.paperSortRule3) 选项打乱顺序

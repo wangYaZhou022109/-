@@ -17,10 +17,11 @@ exports.components = [{
     options: {
         model: 'img'
     }
-}, {
-    id: 'difficulty',
-    name: 'selectize'
 }];
+// }, {
+//     id: 'difficulty',
+//     name: 'selectize'
+// }];
 
 exports.dataForTemplate = {
     showDiffculty: function() {
@@ -36,7 +37,7 @@ exports.dataForTemplate = {
                 }
             });
         }
-        return difficultys;
+        return _.orderBy(difficultys, ['key'], ['desc']);
     }
 };
 

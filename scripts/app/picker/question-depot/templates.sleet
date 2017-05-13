@@ -3,10 +3,10 @@
 module
     div(data-region='main')
 
-view('main') > .input-group
-    input#nodeName.input(value=state.text 'readonly')(x-rule='required' x-marker='group')&if(state.required)
+view('main')
     input#nodeId(type='hidden' name=state.inputName value=state.id)
-    .addon.btn#select-depot > i.icon-search
+    input.input.tag-height#nodeName(value=state.text 'readonly')(x-rule='required' x-marker='group')&if(state.required)
+    .btn.choice#select-depot 选择
 
 view('modal') > form.vertical
     label > string('picker.depot.label.select')

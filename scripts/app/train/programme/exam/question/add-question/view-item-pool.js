@@ -37,6 +37,7 @@ exports.components = [function() {
                 module: 'exam/question-depot',
                 picker: 'owner',
                 required: true,
+                autoFill: true,
                 params: {
                     operatorType: operatorType,
                 },
@@ -48,13 +49,9 @@ exports.components = [function() {
         },
         question = state.data,
         itemPool = this.bindings.itemPool.data;
-
     if (question.organization) {
         obj.options.data.id = question.organization.id;
         obj.options.data.text = question.organization.name;
-    } else if (state.params.organization) {
-        obj.options.data.id = state.params.organization.id;
-        obj.options.data.text = state.params.organization.name;
     }
 
     if (itemPool.entryDepot) {

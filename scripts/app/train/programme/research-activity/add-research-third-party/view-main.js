@@ -79,12 +79,13 @@ exports.mixin = {
         var name = $(this.$('name')),
             start = $(this.$('start-time')),
             end = $(this.$('end-time')),
+            startTime = $(this.$('start')),
             questionaryDetail = $(this.$('questionaryDetail')),
             flag = true,
             reg = new RegExp('\\{' + 0 + '\\}', 'g');
 
         markers.text.valid(name);
-        markers.text.valid(start);
+        markers.text.valid(startTime);
         markers.text.valid(end);
         markers.text.valid(questionaryDetail);
 
@@ -94,7 +95,7 @@ exports.mixin = {
         }
 
         if (start.val() === '' || start.val() === null) {
-            markers.text.invalid(start, validators.required.message);
+            markers.text.invalid(startTime, validators.required.message);
             flag = false;
         }
         if (end.val() === '' || end.val() === null) {

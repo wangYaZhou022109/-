@@ -33,26 +33,25 @@ exports.dataForActions = {
 };
 
 exports.components = [function() {
-    var me = this;
-    var obj = {
-        id: 'owner',
-        name: 'picker',
-        options: {
-            module: this.module.renderOptions.url || 'exam/question-depot',
-            // module: 'exam/question-depot',
-            picker: 'owner',
-            required: false,
-            autoFill: true,
-            selectChanged: function(payload) {
-                return me.components['question-depot'].reset({
-                    operatorType: me.app.global.EDIT,
-                    state: 1,
-                    organizationId: payload.id,
-                    share: false
-                });
+    var me = this,
+        obj = {
+            id: 'owner',
+            name: 'picker',
+            options: {
+                module: this.module.renderOptions.url || 'exam/question-depot',
+                picker: 'owner',
+                required: false,
+                autoFill: true,
+                selectChanged: function(payload) {
+                    return me.components['question-depot'].reset({
+                        operatorType: me.app.global.EDIT,
+                        state: 1,
+                        organizationId: payload.id,
+                        share: false
+                    });
+                }
             }
-        }
-    };
+        };
     return obj;
 }, function() {
     var orgs = this.bindings.orgs,

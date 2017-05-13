@@ -18,10 +18,10 @@ view('options')
             li(id='item-' + index)
                 label.answer-item(for='answer-item-' + index) > @echo(code)
                 span.sub-text > @echo(content)
+        span.text-tip.m-top 标准答案:
+        span > @echo(state.answer)
 
     .clearfix > .pull-right
-        span.m-right 标准答案:
-            @echo(state.answer)
         span.m-right 题型:
             echo(state.type)
         if(showScore)

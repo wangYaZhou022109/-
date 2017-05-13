@@ -1,38 +1,47 @@
 #! handlebars
 
-module > .achievement-content.main-side
-    .achievement-side.bg-color
+module > .achievement-content.main-side(style="margin-top:-2.1em;")
+    .achievement-side.bg-color.pull-left(style='width: 20%;position:relative;')
         div(data-region='side')
-    .achievement-main(data-region='main')
+    .achievement-head(data-region='head')
+    .achievement-main.pull-left(style='width: 80%;')(data-region='main')
+
+view('head')
+    .pull-left.title > echo('调研名称: ' research.name)
+    .pull-right.title
+        .btn.white.m#closeResearch 关闭预览
 
 view('side')
-    .achievement-preview-top
-        .com-title.text-center 关闭
+    #  .achievement-preview-top
+    #      .com-title.text-center 关闭
+    
 
     ul.list > each(dimensions)
-        li(id='list-item-' + @index)
+        li.border.bottom(id='list-item-' + @index)
             .list-title > i.iconfont.icon-type.m-right + echo(name)
             div(class='min-btn-groups') > each(questions)
                 compare(statuss 'eq' 'init')
                     a.list-item(href='#mlj' + id id='q-' + id) > echo(questionIndex)
                 compare(statuss 'eq' 'current')
                     a.list-item.current(href='#mlj' + id id='q-' + id) > echo(questionIndex)
+    .text-center#questionaryDetail
+        | 问卷须知
+        i.iconfont.icon-info
 
 view('main')
-    .achievement-main-head
-        .h3 > echo(research.name)
-    .title
-        span 问卷须知：
-        echo(research.questionaryDetail)
-    .preview-content
+    #  .achievement-main-head
+    #      .h3 > echo(research.name)
+    #  .achievement-head
+    #      .pull-left.title > echo('调研名称: ' research.name)
+    .preview-content.m-top.border.top
         if(isMutiple)
             div > each(dimensions)
                 if(dimensionIndex)
-                    .h3.m-bottom > echo(dimensionIndex '、' name)
+                    .h3.m-bottom.m-top > echo(dimensionIndex '、' name)
                 each(questions)
                     div(data-dynamic-key=id)
         else
-            .h3
+            .h3.m-bottom.m-top
                 echo(state.currentDimension.name)
                 if(hasQuestion)
                     echo('(' state.currentQuestion.index '/' state.currentDimension.questionSize ')')
@@ -50,3 +59,6 @@ view('main')
         #  else
         #      .h3 > echo(state.currentDimension.name '(' state.currentQuestion.questionIndex '/' state.currentDimension.questionSize ')')
         #      div(data-dynamic-key=state.currentQuestion.id)
+
+view('description')
+    @echo(research.questionaryDetail)

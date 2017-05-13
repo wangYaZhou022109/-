@@ -1,6 +1,6 @@
 #!handlebars
 
-module > .addexam-page > .temporarypaper2-page(style='font-size: 12px;')
+module > .addexam-page > .temporarypaper2-page
     .temporarypaper2-title(data-region='search-param')
     .temporarypaper2-content(data-region='questions')
 
@@ -15,19 +15,19 @@ view('search-param') > form.vertical
                 label.required.tag-height 归属部门
                 .content
                     #owner
-            .form-row.w-half.pull-left.row-block.r-padding
+            .form-row.w-half.pull-left.row-block
                 label.required.tag-height 所属题库
                 .content
                     #question-depot
             .form-row.w-half.pull-left.row-block.r-padding
                 label.tag-height 试题类型
                 .content
-                    select.w-full.tag-height#type(name='type') > each(types)
+                    select.input.w-full.tag-height#type(name='type') > each(types)
                         option(value=key)('selected')&if(selected) > echo(value)
-            .form-row.w-half.pull-left.row-block.r-padding
+            .form-row.w-half.pull-left.row-block
                 label.tag-height 难易度
                 .content
-                    select.w-full.tag-height#level(name='difficulty' x-marker='selectize')
+                    select.input.w-full.tag-height#level(name='difficulty' x-marker='selectize')
                         option(value='') > echo('全选')
                         each(difficultys)
                             option(value=key)('selected')&if(selected) > echo(value)

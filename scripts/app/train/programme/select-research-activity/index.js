@@ -34,7 +34,8 @@ exports.store = {
             }
 
             D.assign(this.models.researchActivities.params, {
-                type: this.module.options.RESEARCH_TYPE
+                type: this.module.options.RESEARCH_TYPE,
+                uri: this.app.global.uri
             });
 
             D.assign(research.data, {

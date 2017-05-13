@@ -40,15 +40,15 @@ exports.store = {
                 this.models.state.callback = payload.callback;
             }
             D.assign(questionDepots.params, payload.data, {
-                organizationId: this.app.global.currentUser.rootOrganization.id,
+                organizationId: null,
                 state: 1
             });
-            return this.get(questionDepots).then(function() {
-                // return me.get(shareAndPublic).then(function() {
-                //     questionDepots.merge(shareAndPublic.data);
-                // });
-                questionDepots.changed();
-            });
+            // return this.get(questionDepots).then(function() {
+            //     // return me.get(shareAndPublic).then(function() {
+            //     //     questionDepots.merge(shareAndPublic.data);
+            //     // });
+            //     questionDepots.changed();
+            // });
         },
         changeDepot: function(payload) {
             this.models.state.callback({

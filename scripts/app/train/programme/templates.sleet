@@ -181,7 +181,7 @@ view('config-online') > form.vertical
 
 
 view('edit-offline') > form.vertical
-    .form
+    .form 
         .form-row
             label.required 课程类型
             .content
@@ -197,54 +197,58 @@ view('edit-offline') > form.vertical
                 input.input#name(name='name' value=offlineCourse.name x-rule='required,maxLength:30')
                 input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
         .clearfix
-            .class-form-width.pull-left
-                .form-row
-                    label.required 开始时间
-                    .content
-                        .relative
-                            input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
-                            .iconfont.icon-riqi.text-main-color
-            .class-form-width.pull-left
-                .form-row
-                    label.required 结束时间
-                    .content
-                        .relative
-                            input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
-                            .iconfont.icon-riqi.text-main-color
-            .class-form-width.pull-left
-                .form-row
-                    label.required 教室
-                    .content
-                        select.tag-input#classroomId(name='classroomId' x-rule='required')
-                            each(classroomList)
-                                option(value=id)('selected')&if(selected) > echo(classroomName)
-            .class-form-width.pull-left
-                .form-row
-                    label 讲师姓名
-                    .content
-                        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
-            .class-form-width.pull-left
-                .form-row
-                    label 讲师单位
-                    .content
-                        input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization x-rule='maxLength:30')
-            .class-form-width.pull-left
-                .form-row
-                    label 讲师类别
-                    .content
-                        select.tag-input#teacherType(name='teacherType' x-rule='required')
-                            option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
-                            option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
-            .class-form-width.pull-left
-                .form-row
-                    label 讲师职务
-                    .content
-                        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle  x-rule='maxLength:30')
-            .class-form-width.pull-left
-                .form-row
-                    label.required 联系电话
-                    .content
-                        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
+            .row
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 开始时间
+                        .content
+                            .relative
+                                input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
+                                .iconfont.icon-riqi.text-main-color
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 结束时间
+                        .content
+                            .relative
+                                input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
+                                .iconfont.icon-riqi.text-main-color
+            .row
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 教室
+                        .content
+                            select.tag-input#classroomId(name='classroomId' x-rule='required')
+                                each(classroomList)
+                                    option(value=id)('selected')&if(selected) > echo(classroomName)
+                .class-form-width.pull-left
+                    .form-row
+                        label 讲师姓名
+                        .content
+                            input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
+            .row
+                .class-form-width.pull-left
+                    .form-row
+                        label 讲师单位
+                        .content
+                            input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization x-rule='maxLength:30')
+                .class-form-width.pull-left
+                    .form-row
+                        label 讲师类别
+                        .content
+                            select.tag-input#teacherType(name='teacherType' x-rule='required')
+                                option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
+                                option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
+            .row
+                .class-form-width.pull-left
+                    .form-row
+                        label 讲师职务
+                        .content
+                            input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle  x-rule='maxLength:30')
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 联系电话
+                        .content
+                            input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
     .layout-mt-small
         .pull-left > label.label 课件（最多上传三个）
         .pull-right

@@ -44,5 +44,7 @@ exports.handlers = {
             callback: function() {
             }
         });
+        // var url = '#/train/programme/research-activity/preview-questionary/' + id;
+        // window.open(url, '_blank');
     }
 };

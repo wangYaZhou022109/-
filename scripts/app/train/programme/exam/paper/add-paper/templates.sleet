@@ -1,5 +1,5 @@
 #!handlebars
-module > .addexam-page > .temporarypaper2-page(style='font-size: 12px;')
+module > .addexam-page > .temporarypaper2-page
     .temporarypaper2-title(data-region='summary')
     .temporarypaper2-content(data-region='question-classes')
 

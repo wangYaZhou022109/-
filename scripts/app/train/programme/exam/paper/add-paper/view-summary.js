@@ -52,6 +52,7 @@ exports.handlers = {
     selectQuestion: function() {
         var me = this;
         this.app.viewport.modal(this.module.items['train/programme/exam/question/select-question'], {
+            url: this.module.renderOptions.url,
             name: '',
             callback: {
                 addQuestionClass: function(data) {
@@ -75,9 +76,9 @@ exports.handlers = {
     temporaryQuestion: function() {
         var me = this;
         this.app.viewport.modal(this.module.items['train/programme/exam/question/add-question'], {
-            params: {
-                organization: this.app.global.currentUser.rootOrganization
-            },
+            // params: {
+            //     organization: this.app.global.currentUser.rootOrganization
+            // },
             callback: function(data) {
                 return me.module.dispatch('addQuestionClass', data);
             },

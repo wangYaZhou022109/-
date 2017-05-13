@@ -18,13 +18,15 @@ D.assign(obj.events, {
 obj.handlers = handlers;
 D.assign(obj.handlers, {
     selectDimension: function() {
-        var mod = this.module.items['train/programme/evaluate-questionary/select-dimension'],
-            me = this;
-        this.app.viewport.modal(mod, {
-            callback: function(data) {
-                return me.module.dispatch('saveSelectDimension', { dimensions: data });
-            }
-        });
+        this.app.message.error('此服务暂未开放');
+        return false;
+        // var mod = this.module.items['picker/select-dimension'],
+        //     me = this;
+        // this.app.viewport.modal(mod, {
+        //     callback: function(data) {
+        //         return me.module.dispatch('saveSelectDimension', { dimensions: data });
+        //     }
+        // });
     }
 });
 module.exports = obj;

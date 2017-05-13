@@ -7,11 +7,7 @@ exports.large = true;
 exports.title = '随机组卷';
 
 exports.items = {
-    'human/organization/navigate-tree': {
-        isModule: true,
-        uri: 'exam/question-depot',
-        region: 'organization'
-    },
+    organization: 'organization',
     depot: 'depot',
     'question-setting': 'question-setting',
     'setting-popup': 'setting-popup'
@@ -277,14 +273,10 @@ exports.store = {
 exports.mixin = {
     nodeChanged: function(data) {
         var depot = this.items.depot.getEntities()[0],
-            param = {
-                organizationId: data.id,
-                organization: { id: data.id, name: data.text }
-            },
             me = this;
         return this.dispatch('clearDepotId').then(function() {
-            return me.dispatch('saveSearch', param).then(function() {
-                return depot.refreshTree(param);
+            return me.dispatch('saveSearch', data).then(function() {
+                return depot.refreshTree(data);
             });
         });
     }

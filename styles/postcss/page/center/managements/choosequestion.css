@@ -45,6 +45,9 @@
                 padding: 5px;
                 text-align: center;
                 font-size: .8em;
+                &.selected {
+                    background: var(--custom-color-3);
+                }
             }
         }
         & a {

@@ -33,7 +33,6 @@ exports.store = {
                 itemPool = this.models.itemPool,
                 tempAddQuestionOptions = this.models.tempAddQuestionOptions,
                 interim = payload.interim || false;
-
             tempAddQuestionOptions.set(payload);
 
             state.clear();
@@ -205,13 +204,16 @@ exports.buttons = function() {
     saveAndAdd = {
         text: '保存并新增',
         fn: function() {
-            var me = this;
-            save.fn.call(this).then(function() {
-                return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
-                    me.store.models.state.changed();
-                    me.store.models.itemPool.changed();
+            var me = this,
+                savePromise = save.fn.call(this);
+            if (savePromise) {
+                savePromise.then(function() {
+                    return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
+                        me.store.models.state.changed();
+                        me.store.models.itemPool.changed();
+                    });
                 });
-            });
+            }
             return false;
         }
     };

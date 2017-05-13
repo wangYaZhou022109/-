@@ -14,7 +14,7 @@ view('content')
             if(showDiffculty)
                 .form-row
                     label.required 难易度
-                    select.w-full#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
+                    select.input.w-full#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
                         option(value=key)('selected')&if(selected) > echo(value)
 
 view('options')
@@ -31,10 +31,8 @@ view('options')
                             input(type='hidden' id='content-' + index value=content)
                     else
                         textarea.input.block(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3) > echo(content)
-                .set-row.clearfix
-                    .pull-left
-                        span(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected'))
-                            echo('设为答案')
+                .set-row.answer.clearfix
+                    .pull-left.setanswer.pointer(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected')) 设为答案
                     .pull-right.text-tips.m-top
                         span(data-dynamic-key=index)
                         a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
@@ -42,7 +40,8 @@ view('options')
 
 view('score')
     if(showScore)
-        .row
-            .col-sm-6
-                label(class='required') 试题分数
-                input.input(id='score' width='40%' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值,可保留一位小数')
+        .choosequestion
+            .form.align-left
+                .form-row.w-half
+                    label.required 试题分数
+                    .content > input.w-half(id='score' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值,可保留一位小数')

@@ -1,44 +1,44 @@
 #!handlebars
 
-module > .choise
+module > form.vertical(style='font-size: 12px;')
     div(data-region='content')
-    .options(data-region='options')
+    div(data-region='options')
     div(data-region='score')
 
 view('content')
-    .row > .col-sm-12
-        label(class='required') 试题信息
-        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
+    .choosequestion
+        .form.align-left
+            .form-row
+                label.required 试题信息
+                textarea.w-full#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
 
 view('options')
-    label
-        | 选项
+    .choosequestion-page > .choosequestion > .layout-mt-small
+        label 选项
         a.m-left#add(href='javascript:;') 添加选项
-    ul.row > each(options)
-        li.col-sm-6.options(id='item-' + index)
-            if(isRichText)
-                div
-                    @echo(content)
-                    input(type='hidden' id='content-' + index value=cotent)
-            else
-                .input-box
-                    .text
-                        span.list-option > echo('选项' + code ':')
-                    textarea.input(placeholder='输入描述' id='content-' + index data-name='index' data-value=index) > echo(content)
-                .clearfix.set-row
-                    .pull-right.text-tips
+        ul.layout-mt-small
+            each(options) > li.choosequestion-item.w-half.inline-block(id='item-' + index)
+                .relative
+                    .text > span.strong > echo('选项' + code ':')
+                    if(isRichText)
+                        .input.block.choise-content(style='padding-left: 5em;')
+                            @echo(content)
+                            input(type='hidden' id='content-' + index value=cotent)
+                    else
+                        textarea.input.bock(placeholder='输入描述' id='content-' + index data-name='index' data-value=index) > echo(content)
+                .set-row.clearfix
+                    .pull-right.text-tips.m-top
                         span(data-dynamic-key=index)
                         a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
 view('score')
-    .row 
-        .col-sm-6
-            .m-bottom 在此位置选择题目序号,请输入ABCD 答案
-            input.input(id='answer' value=state.answer)
-        .col-md-3
-            div(id='error')
-
-    .hr
-    .row
-        .col-sm-6
-            label(class='required') 试题分数
-            input.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，小数点最多保留一位')
+    .choosequestion
+        .form.align-left
+            .form-row.w-half
+                span 在此位置选择题目序号,请输入ABCD 答案
+                input.input.m-top(id='answer' value=state.answer)
+            .form-row.w-half
+                div(id='error') 
+            .hr 
+            .form-row.w-half
+                label.required 试题分数
+                .content > input.w-full.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，小数点最多保留一位')

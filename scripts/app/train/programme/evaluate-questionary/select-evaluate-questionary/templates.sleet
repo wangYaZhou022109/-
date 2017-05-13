@@ -38,7 +38,8 @@ view('content')
                 td > echo(publishMember.name)
                 td > dateTime(createTime)
                 td
-                    a(id='preview-'+id data-name='id' data-value=id) 预览
+                    a(id='preview-' + id data-name='id' data-value=id) 预览
+                    #  a(href='#/train/programme/research-activity/preview-questionary/' + id target='_blank') 预览
             else
                 tr > td(colspan='5') > p.text-center > string('no-data')
     #pager.pagination

@@ -1,6 +1,6 @@
 #!handlebars
 
-module > div(style='font-size: 12px;')
+module
     div(data-region='item-pool')
     div(data-region='main')
     div(data-region='question')
@@ -16,12 +16,12 @@ view('item-pool') > form.vertical
                         span 加入题库
                 if(itemPool.entryDepot)
                     .form-row.w-half.pull-left.row-block.r-padding
-                        label.required.tag-height 所属部门
-                        div(id='organization')
+                        label.required.tag-height 归属部门
+                        .content(id='organization')
                             #owner
-                    .form-row.w-half.pull-left.row-block.r-padding
+                    .form-row.w-half.pull-left.row-block
                         label.required.tag-height 所属目录
-                        div(id='questionName')
+                        .content(id='questionName')
                             #questionDepot
                 
 view('main') > form.vertical
@@ -30,11 +30,11 @@ view('main') > form.vertical
             .form.align-left
                 .form-row.w-half.pull-left.row-block.r-padding
                     label.required.tag-height 试题类型
-                    select.w-full.tag-height#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
+                    select.w-full.tag-height.input#type(name='type' x-rule='required' x-marker='selectize' readonly='readonly') > each(types)
                         option(value=key)('selected')&if(selected) > echo(value)
                 .form-row.w-half.pull-left.row-block
                     label.required.tag-height 难易度
-                    select.w-full.tag-height#level(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
+                    select.w-full.tag-height.input#level(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
                         option(value=key)('selected')&if(selected) > echo(value)
 
 view('question')

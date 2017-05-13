@@ -23,10 +23,11 @@ exports.components = [{
     options: {
         model: 'img'
     }
-}, {
-    id: 'difficulty',
-    name: 'selectize'
 }];
+// }, {
+//     id: 'difficulty',
+//     name: 'selectize'
+// }];
 
 exports.mixin = {
     getResult: function() {

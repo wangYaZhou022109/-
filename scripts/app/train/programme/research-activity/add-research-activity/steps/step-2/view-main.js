@@ -160,22 +160,24 @@ exports.handlers = {
         return true;
     },
     preview: function() {
-        // var mod = this.module.items['train/programme/research-activity/preview-questionary'];
-        // this.app.viewport.ground(mod, {
-        //     hideScore: this.options.HIDE_SCORE,
-        //     research: D.assign(this.bindings.research.data, {
-        //         dimensions: this.bindings.dimensions.data
-        //     })
-        // });
-        var research = D.assign(this.bindings.research.data, {
-            dimensions: this.bindings.dimensions.data
+        var mod = this.module.items['train/programme/research-activity/preview-questionary'];
+        this.app.viewport.modal(mod, {
+            hideScore: this.options.HIDE_SCORE,
+            research: D.assign(this.bindings.research.data, {
+                dimensions: this.bindings.dimensions.data
+            })
         });
-        var url = '#/train/programme/research-activity/preview-questionary?research=' + research;
-        window.open(url, '_blank');
+        // var research = D.assign(this.bindings.research.data, {
+        //     dimensions: this.bindings.dimensions.data
+        // });
+        // var url = '#/train/programme/research-activity/preview-questionary?research=' + research;
+        // window.open(url, '_blank');
     },
     importResearch: function() {
-        var me = this;
+        var me = this,
+            research = this.bindings.research.data;
         this.app.viewport.modal(this.module.items['train/programme/research-activity/import-data'], {
+            type: research.type,
             callback: function(data) {
                 return me.module.dispatch('insertDimensions', data);
             }

@@ -63,7 +63,8 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             id: null,
             sourceType: 2,
-            url: 'train/programme',
+            // url: 'train/programme',
+            url: 'course-study/course-info', // 用于权限的控制，但是学员端没有，等待处理
             callback: function(data) {
                 var param = {
                     type: 1,
