@@ -28,17 +28,16 @@ exports.components = [{
 
 exports.dataForTemplate = {
     progressList: function(data) {
-        var pageNum = this.bindings.progressList.getPageInfo().page;
-        _.map(data.progressList || [], function(role, i) {
+        var pageNum = this.bindings.progressList.getPageInfo().page,
+            businessType = this.bindings.businessType.value || 0;
+        return _.map(data.progressList || [], function(role, i) {
             var r = role;
             r.i = i + 1 + ((pageNum - 1) * 10);
+            r.busType = businessType;
+            r.beginTimeStr = helpers.dateMinute(r.beginTime);
+            r.finishTimeStr = helpers.dateMinute(r.finishTime);
+            return r;
         });
-        data.progressList.forEach(function(obj) {
-            var progress = obj || {};
-            progress.beginTimeStr = helpers.dateMinute(progress.beginTime);
-            progress.finishTimeStr = helpers.dateMinute(progress.finishTime);
-        });
-        return data.progressList;
     },
     exportUrl: function() {
         var url = this.bindings.progress.getFullUrl() + '?',
@@ -52,4 +51,3 @@ exports.dataForTemplate = {
         return this.bindings.businessType.value;
     }
 };
-

@@ -62,7 +62,7 @@ exports.components = [function() {
             picker: 'topics',
             inputName: 'topicIds',
             limit: 4,
-            topics: topics
+            tags: topics
         }
     };
 }, function() {

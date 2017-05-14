@@ -70,8 +70,12 @@ getPageHtml = function(pageCount, currentPage) {
         if (pageCount > (pageBtns + 1)) {
             if (currentPage <= pageBtns) {
                 html = getPageBtnHtml(html, [1, 2, 3, 4, 5], currentPage);
-                if (currentPage === pageBtns) html = getPageBtnHtml(html, [6], currentPage);
-                html.push('<li class="hover-main-color">...</li>');
+                if (currentPage === pageBtns) {
+                    html = getPageBtnHtml(html, [6], currentPage);
+                }
+                if ((pageCount - 2) > currentPage) {
+                    html.push('<li class="hover-main-color">...</li>');
+                }
                 html = getPageBtnHtml(html, [pageCount], currentPage);
             } else {
                 html = getPageBtnHtml(html, [1, 2, 3], currentPage);
@@ -88,7 +92,7 @@ getPageHtml = function(pageCount, currentPage) {
                             currentPage);
                     } else {
                         if (currentPage === pageCount - 3) html = getPageBtnHtml(html, [pageCount - 4], currentPage);
-                        html = getPageBtnHtml(html, [pageCount - 3, pageCount - 2, pageCount - 1, pageCount],
+                        html = getPageBtnHtml(html, [pageCount - 2, pageCount - 1, pageCount],
                             currentPage);
                     }
                 }
