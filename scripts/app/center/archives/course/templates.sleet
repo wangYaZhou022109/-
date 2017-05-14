@@ -21,7 +21,8 @@ view('main')
                     th > setting('person.archives.course.startTime')
                     th > setting('person.archives.course.finishTime')
                     th > setting('person.archives.course.totalTime')
-                    th > setting('person.archives.course.status')
+                    compare(businessType 'eq' '0')
+                        th > setting('person.archives.course.status')
             tbody > each(progressList)
                 tr
                     td > echo(i)
@@ -39,9 +40,10 @@ view('main')
                         else
                             echo('—')
                     td > secondToMinute(studyTotalTime)
-                    td > map('course-info-study-status' finishStatus)
-                    else
-                        tr > td(colspan='9') > p.text-center > string('no-data')
+                    compare(busType 'eq' '0')
+                        td > map('course-info-study-status' finishStatus)
+                else
+                    tr > td(colspan='9') > p.text-center > string('no-data')
         #pager.pagination
 
 view('detail')
