@@ -22,14 +22,19 @@ D.assign(obj.dataForActions, {
         var me = this,
             state = this.bindings.state.data,
             mark = this.bindings.mark.data;
+
         return this.Promise.create(function() {
             var message = [];
+
+            //  多少题未答
             if (state.noAnswerCount > 0) {
                 message.push(strings.getWithParams(
                     'exam.submit-paper-confirm.no-finish',
                     state.noAnswerCount
                 ));
             }
+
+            //  多少题标记待检查
             if (mark.waitingChecks.length > 0) {
                 message.push(strings.getWithParams(
                     'exam.submit-paper-confirm.has-waiting-check',
@@ -43,6 +48,7 @@ D.assign(obj.dataForActions, {
 
             me.app.message.confirm(message, function() {
                 return me.module.dispatch('submitPaper', { submitType: 'Hand' }).then(function() {
+                    //  提交成功后弹出提示框
                     return me.module.dispatch('showTips', {
                         tips: state.paper.isSubjective === 1
                             ? strings.get('exam.answer-paper.submit-success-mark')

@@ -66,7 +66,8 @@ exports.store = {
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
-                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
+                            singleMode: exam.paperShowRule === constant.SINGLE_MODE
+                                && exam.paper.questions.length > 1,
                             currentQuestion: types.getFirstQuestion(),
                             paper: exam.paper
                         };
@@ -395,7 +396,7 @@ exports.store = {
             D.assign(this.models.exam.data, {
                 noticed: true
             });
-            this.models.exam.changed();
+            this.models.state.changed();
         }
     }
 };

@@ -273,7 +273,9 @@ var setOptions = {
             submitPaper: function(payload) {
                 var me = this,
                     f = true,
-                    examRecordId = this.module.store.models.exam.data.examRecord.id,
+                    state = this.models.state,
+                    countDown = this.module.items['count-down'].getEntities()[0],
+                    examRecordId = this.models.exam.data.examRecord.id,
                     data = {
                         examRecordId: examRecordId,
                         submitType: payload.submitType,
@@ -291,7 +293,9 @@ var setOptions = {
                         if (payload.submitType === submitType.Auto) {
                             me.models.modify.clear();
                         } else {
+                            D.assign(state.data, { over: true });
                             helper.WS.closeConnect();
+                            if (countDown.clearIntervalIt) countDown.clearIntervalIt();
                             viewAnswerDetail.call(me);
                         }
                     });
@@ -415,9 +419,14 @@ viewAnswerDetail = function() {
     var exam = this.models.exam.data,
         me = this;
     if (exam.isShowAnswerImmed === constant.SHOW_ANSWER_IMMED) {
-        $('.achievement-content').html('');
-        $('.achievement-content').hide();
-
-        me.module.dispatch('showAnswerDetail');
+        this.app.message.confirm(strings.get('exam.view-detail-confirm'), function() {
+            $('.achievement-content').html('');
+            $('.achievement-content').hide();
+            return me.module.dispatch('showAnswerDetail');
+        }, function() {
+            return me.module.dispatch('clearModels').then(function() {
+                window.close();
+            });
+        });
     }
 };
