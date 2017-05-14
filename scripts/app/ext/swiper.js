@@ -10,6 +10,8 @@ Swiper = function(el, options) {
         autuoplay: 自动滚动，
         slider: 提供左右翻屏滚动按钮，
         current: 当前定位。
+        gocurrent: 点击是否跳转到当前选项卡，true代表需要，默认不需要
+        navigation: 是否显示小圆点，true代表显示，默认不显示
     */
 
     this.current = options.current || 0;
@@ -170,6 +172,10 @@ D.assign(Swiper.prototype, {
                     var idx = Number(e.target.getAttribute('data-index'));
                     me.goto(idx);
                 },
+                gocurrent: function(e) {
+                    var idx = Number(e.currentTarget.getAttribute('data-index'));
+                    me.goto(idx);
+                },
 
                 translateLeft: function() {
                     num++;
@@ -200,6 +206,11 @@ D.assign(Swiper.prototype, {
             };
         }
 
+        if (this.options.gocurrent) {
+            _.forEach(this.items, function(item) {
+                item.addEventListener('click', me.actions.gocurrent, false);
+            });
+        }
         _.forEach(this.items, function(item) {
             item.addEventListener('mouseover', me.actions.in, false);
             item.addEventListener('mouseout', me.actions.out, false);
