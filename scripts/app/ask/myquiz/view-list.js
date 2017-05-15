@@ -196,7 +196,6 @@ exports.actionCallbacks = {
     },
     shut: function() {
         this.app.message.success('删除成功!');
-        // this.module.dispatch('init');
     },
     publish: function() {
         this.app.message.success('操作成功！');
@@ -205,40 +204,22 @@ exports.actionCallbacks = {
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var questions = data.questions;
-        var page = this.bindings.page.data;
+        var page = data.page;
         var me = this;
-        var flag = true;
-        _.forEach(questions, function(value) {
+        // var flag = true;
+        _.forEach(page, function(value) {
             var obj = value,
-                date = new Date(obj.createTime);
-            var url = obj.member.headPortrait;
+                url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.member.headPortrait = 'images/default-userpic.png';
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
-            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-            + '   ' + date.getHours() + ':' + date.getMinutes();
-            _.forEach(me.bindings.page.data, function(v) {
-                if (v.id === obj.id) {
-                    flag = false;
-                }
-            });
-            if (flag) {
-                page.push(obj);
-            }
         });
         return page;
     },
     countNum: function(data) {
-        // console.log(data);
-        var page = data.page,
-            countNum = 0;
-        if (page.length > 0) {
-            countNum = page[0].countNum;
-        }
-        return countNum;
+        return data.page.length || 0;
     }
 };
 

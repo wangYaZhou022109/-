@@ -3,7 +3,6 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
-    myshares: true,
     page: true,
     down: false
 };
@@ -139,49 +138,29 @@ exports.actionCallbacks = {
     },
     praise: function() {
         this.app.message.success('点赞成功！');
-        // this.module.dispatch('init');
     },
     unpraise: function() {
         this.app.message.success('取消点赞成功！');
-        // this.module.dispatch('init');
     }
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var myshares = data.myshares;
-        var page = this.bindings.page.data;
+        var page = data.page;
         var me = this;
-        var flag = true;
-        _.forEach(myshares, function(value) {
+        // var flag = true;
+        _.forEach(page, function(value) {
             var obj = value,
-                date = new Date(obj.createTime);
-            var url = obj.member.headPortrait;
+                url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
                 obj.member.headPortrait = 'images/default-userpic.png';
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
-            obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-            + '   ' + date.getHours() + ':' + date.getMinutes();
-            _.forEach(me.bindings.page.data, function(v) {
-                if (v.id === obj.id) {
-                    flag = false;
-                }
-            });
-            if (flag) {
-                page.push(obj);
-            }
         });
         return page;
     },
     countNum: function(data) {
-        // console.log(data);
-        var myshares = data.myshares,
-            countNum = 0;
-        if (myshares.length > 0) {
-            countNum = myshares[0].countNum;
-        }
-        return countNum;
+        return data.page.length || 0;
     }
 };
 

@@ -6,7 +6,8 @@ view('list')
         #  .pull-right > echo('你共分享了'+countNum+'个文章')
         .pull-right.m-top
             span 你共发表了
-            span.h3.custom-color-3 99
+            span.h3.custom-color-3 
+                echo(countNum)
             span 篇文章
         ul
             li.active > echo('我的文章')
@@ -27,7 +28,7 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('·发表文章·')
-                            span.sub-text > echo(createTime)
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
@@ -48,17 +49,17 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('·发表文章·')
-                                span.sub-text > echo(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
-                                        .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) >  string('unfollow')
                                         .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
                                     else 
-                                        .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
                                         .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow') 
-                                    compare(praiseNum 'gt' 0)
+                                    compare(praise 'eq' true)
                                         .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
@@ -89,17 +90,17 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('·发表文章·')
-                                span.sub-text > echo(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
-                                        .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
                                         .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
                                     else 
-                                        .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('unfollow')
+                                        .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
                                         .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
-                                    compare(praiseNum 'gt' 0)
+                                    compare(praise 'eq' true)
                                         .item(id='unpraise-3_'+ id data-name='id' data-value='3_' + id)
                                             string('unpraise') +  echo('（'+ praiseNum +'）')
                                     else
@@ -131,41 +132,10 @@ view('list')
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('·发表文章·')
-                            span.sub-text > echo(createTime)
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
                                 .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
-#      div(data-region='list')
-#  view('list')
-#      ul 
-#          li
-#              echo('我的分享  '+'你共分享了'+myshares.length+'个问题') 
-#          hr
-#      each(myshares)
-#          ul 
-#              li(style='font-weight:bold')
-#                  a(id='myshares-details-' + problem.id data-name='id' data-value=id href='javascript:;')(class ='active') > echo(problem.title) 
-#                  .img(style='height:30px;width:30px;float:right;') > img(src=jsonImg )
-#              li
-#                  echo(problem.content) 
-#              li
-#                  echo('我' + '分享·')
-#              li
-#                  date(enjoyTime) 
-#              li
-#                  echo('来自话题 ：')
-#                  each(topicList)
-#                      echo(name + ' ')
-#                  a(id='quiz-concern-' + id href='javascript:;')(class ='active') 关注  
-#                  echo('条讨论')
-#                  a(id='quiz-enjoy-' + id href='javascript:;')(class ='active') 分享
-#                  echo('|')
-#                  echo(auditStatus)
-#                  a(id='quiz-report-' + id href='javascript:;')(class ='active') 举报
-#                  a(id='quiz-remove-' + id href='javascript:;')(class ='active') 删除
-#                  hr
-#              li 
-#                  a('更多》》')
                     

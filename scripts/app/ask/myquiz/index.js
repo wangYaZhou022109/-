@@ -40,19 +40,49 @@ exports.store = {
         }
     },
     callbacks: {
-        init: function() {
-            var questions = this.models.questions;
-            questions.set({ id: 1 });
-            return this.get(questions);
+        refresh: function() {
+            this.models.callback();
         },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
+        // init: function() {
+        //     var questions = this.models.questions;
+        //     questions.set({ id: 1 });
+        //     return this.get(questions);
+        // },
+        init: function() {
+            var questions = this.models.questions,
+                params = this.models.page.params,
+                page = this.models.page;
+
+            params.id = 'null';
+            questions.set(params);
+            return this.post(questions).then(function() {
+                page.data = questions.data;
+                page.changed();
+            });
+        },
+        // page: function() {
+        //     var questions = this.models.questions;
+        //     var params = this.models.page.params;
+        //     // var me = this;
+        //     params.id = 'null';
+        //     questions.set(params);
+        //     this.post(questions).then(function() {
+        //         // me.models.page.params.page++;
+        //     });
+        // },
         page: function() {
             var questions = this.models.questions;
             var params = this.models.page.params;
+            var page = this.models.page;
             // var me = this;
             params.id = 'null';
             questions.set(params);
             this.post(questions).then(function() {
-                // me.models.page.params.page++;
+                page.data.push.apply(page.data, questions.data);
+                page.changed();
             });
         },
         remove: function(payload) {
@@ -85,9 +115,6 @@ exports.store = {
             });
         },
         publish: function(payload) {
-            // var discuss = this.models.discuss;
-            // discuss.set(payload);
-            // return this.save(discuss);
             var discuss = this.models.discuss,
                 data = payload,
                 speechset = this.models.speech.getData('2');
@@ -113,6 +140,7 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
+    this.dispatch('set', this.renderOptions.callback);
     this.dispatch('page');
     this.dispatch('speech');
 };
