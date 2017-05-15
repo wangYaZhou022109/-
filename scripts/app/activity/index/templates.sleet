@@ -8,7 +8,7 @@ module > .activity-page
 view('banner')
     .bg-img > .container > #activitys-ul.banner > ul.activity-banner-list
         each(activitys)
-            li
+            li(data-index=i)
                 .content
                     .covers
                         .img > img(src=coverId alt=name)
