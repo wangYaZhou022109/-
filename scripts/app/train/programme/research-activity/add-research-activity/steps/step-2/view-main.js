@@ -30,8 +30,8 @@ exports.events = {
     'click edit-dimension': 'editDimension',
     'click question-*': 'addQuestion',
     'click d-*': 'chooseDimension',
-    'click up-*': 'upDimension',
-    'click down-*': 'downDimension',
+    'click goup-*': 'upDimension',
+    'click godown-*': 'downDimension',
     'click delete-dimension': 'deleteDimension',
     'click preview': 'preview',
     'click import': 'importResearch'
@@ -188,11 +188,18 @@ exports.handlers = {
 exports.dataForTemplate = {
     dimensions: function(data) {
         var questionTypes = maps.get('research-question-types'),
-            chineseNumber = maps.get('chineseNumber');
-
+            chineseNumber = maps.get('chineseNumber'),
+            emptyIndex = data.dimensions.findIndex(function(d) {
+                return d.isEmpty === 1;
+            }); // 空维度不计入序号
         return _.map(data.dimensions, function(d, i) {
+            var dimensionIndex = _.find(chineseNumber, ['key', (i + 1).toString()]).value;
+            if (emptyIndex !== -1 && emptyIndex < i) {
+                dimensionIndex = _.find(chineseNumber, ['key', i.toString()]).value;
+            }
+            if (emptyIndex === i) dimensionIndex = '';
             return D.assign(d, {
-                dimensionIndex: _.find(chineseNumber, ['key', (i + 1).toString()]).value,
+                dimensionIndex: dimensionIndex,
                 questions: _.map(d.questions, function(q, n) {
                     return D.assign(q, {
                         questionIndex: n + 1,

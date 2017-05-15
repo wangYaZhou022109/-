@@ -1,46 +1,43 @@
 #! handlebars
 
-module > div
-    div(style='width: 35%;float: left;')(data-region='side')
-    div(style='width: 60%;float: right;')(data-region='main')
+module > .achievement-content.main-side(style="margin-top:-2.1em;")
+    .achievement-side.bg-color.pull-left.inline-block(style='width: 20%;position:relative;min-height: 100%;padding-top: 0;')
+        div(data-region='side')
+    .pull-right(style='width: 79.5%;')(data-region='main')
 
 view('side')
-    .row
-        .btn.block.col-sm-12
-            | 本卷共
-            echo(state.totalCount)
-            | 题，总分
-            echo(state.totalScore)
-            | 分
-    if(showExamNotes)
-        .achievement-tips.pointer#show-exam-notes
-            | 考试须知
-            i.iconfont.icon-info
-    .achievement-preview > ul > each(types)
-        li.border.bottom
-            label(id='list-item-'+ @index)
-                echo(name '题' '(共' totalScore '分)')
-            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(questions)
-                compare(status 'eq' 'init')
-                    div(class='num min-btn ')(id='question-' + id) > a(href='#question-' + id) > echo(index)
-                compare(status 'eq' 'current')
-                    div(class='num min-btn correct')(id='question-' + id) > a(href='#question-' + id) > echo(index)
+    .btn.block.col-sm-12(style='height: 3.5em;line-height: 3.5em')
+        | 本卷共
+        echo(state.totalCount)
+        | 题，总分
+        echo(state.totalScore)
+        | 分
+    ul.list
+        each(types)
+            li.border.bottom
+                .list-title(id='list-item-'+ @index) > echo(name '题' '(共' totalScore '分)')
+                div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(questions)
+                    compare(status 'eq' 'init')
+                        a.list-item(id='question-' + id) > echo(index)
+                    compare(status 'eq' 'current')
+                        a.list-item.current(id='question-' + id) > echo(index)
+        if(showExamNotes)
+            .text-left#show-exam-notes(style="position:absolute; left:10px; bottom:10px;")
+                | 考试须知
+                i.iconfont.icon-info
 
 view('main')
-    .achievement-main-head
-        .col-sm-7.text-overflow > .h3
-            strong > echo(state.name)
+    .achievement-head
+        .pull-left.title > strong > echo(state.name)
 
-    .preview-content
+    .preview-content.m-top.border.top
         if(state.singleMode)
-            .row
-                .col-xs-6
-                    .com-title.inline-block > echo(state.currentQuestion.typeDesc '(' state.currentQuestion.index '/' state.currentQuestion.totalCount ')')
-                    .inline-block > echo('本题分数:' state.currentQuestion.score)
-                .col-xs-6 > .text-right
-                    if(state.singleMode)
-                        .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev-' + state.currentQuestion.typeIndex)
-                        .icon.pe-7s-angle-right-circle.pe-3x(id='next-' + state.currentQuestion.typeIndex)
+            .h3.m-bottom.m-top > echo(state.currentQuestion.typeDesc '(' state.currentQuestion.index '/' state.currentQuestion.totalCount ')')
+                .inline-block > echo('本题分数:' state.currentQuestion.score)
+            .col-xs-6 > .text-right
+                if(state.singleMode)
+                    .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev-' + state.currentQuestion.typeIndex)
+                    .icon.pe-7s-angle-right-circle.pe-3x(id='next-' + state.currentQuestion.typeIndex)
 
         if(state.singleMode)
             if(state.currentQuestion.id)
@@ -49,7 +46,7 @@ view('main')
             div
                 each(types)
                     label
-                        .com-title > echo(name '题' '(共' totalScore '分)')
+                        .h3.m-bottom.m-top > echo(name '题' '(共' totalScore '分)')
                         each(questions)
                             div(data-dynamic-key=id)
 

@@ -1,39 +1,42 @@
 #! handlebars
 
 module > .achievement-content.main-side(style="margin-top:-2.1em;")
-    .achievement-side.bg-color.pull-left(style='width: 20%;position:relative;')
+    .achievement-side.bg-color.pull-left(style='position:relative;min-height: 100%;width: 20%;padding-top: 0')
         div(data-region='side')
-    .achievement-head(data-region='head')
-    .achievement-main.pull-left(style='width: 80%;')(data-region='main')
+    #  .achievement-head(style='background: #f9f9f9;color: black')(data-region='head')
+    #  .achievement-head(data-region='head')
+    
+    .pull-right(style='width: 79.5%;')(data-region='main')
 
 view('head')
     .pull-left.title > echo('调研名称: ' research.name)
-    .pull-right.title
-        .btn.white.m#closeResearch 关闭预览
+    #  .pull-right.title
+    #      .btn.white.m#closeResearch 关闭预览
 
 view('side')
     #  .achievement-preview-top
     #      .com-title.text-center 关闭
     
 
-    ul.list > each(dimensions)
-        li.border.bottom(id='list-item-' + @index)
-            .list-title > i.iconfont.icon-type.m-right + echo(name)
-            div(class='min-btn-groups') > each(questions)
-                compare(statuss 'eq' 'init')
-                    a.list-item(href='#mlj' + id id='q-' + id) > echo(questionIndex)
-                compare(statuss 'eq' 'current')
-                    a.list-item.current(href='#mlj' + id id='q-' + id) > echo(questionIndex)
-    .text-center#questionaryDetail
+    ul.list
+        each(dimensions)
+            li.border.bottom(id='list-item-' + @index)
+                .list-title > i.iconfont.icon-type.m-right + echo(name)
+                div(class='min-btn-groups') > each(questions)
+                    compare(statuss 'eq' 'init')
+                        a.list-item(href='#mlj' + id id='q-' + id) > echo(questionIndex)
+                    compare(statuss 'eq' 'current')
+                        a.list-item.current(href='#mlj' + id id='q-' + id) > echo(questionIndex)
+    .text-left#questionaryDetail(style="position:absolute; left:10px; bottom:10px;")
         | 问卷须知
         i.iconfont.icon-info
 
 view('main')
     #  .achievement-main-head
     #      .h3 > echo(research.name)
-    #  .achievement-head
-    #      .pull-left.title > echo('调研名称: ' research.name)
-    .preview-content.m-top.border.top
+    .achievement-head
+        .pull-left.title > strong > echo('调研名称: ' research.name)
+    .preview-content.border.top
         if(isMutiple)
             div > each(dimensions)
                 if(dimensionIndex)

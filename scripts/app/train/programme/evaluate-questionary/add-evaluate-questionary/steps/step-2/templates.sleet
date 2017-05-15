@@ -47,7 +47,7 @@ view('main')
                             span > echo(dimensionIndex)
                             span > echo(name)
                     each(questions)
-                        li
+                        li.m-top
                             spqn.heading.pull-left.m-right >  echo(questionIndex)
                             div(data-dynamic-key=id)
                         .layout-mt-small.clearfix

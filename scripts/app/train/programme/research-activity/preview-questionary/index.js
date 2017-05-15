@@ -8,7 +8,7 @@ exports.title = '问卷预览';
 exports.items = {
     side: 'side',
     main: 'main',
-    head: 'head',
+    // head: 'head',
     description: ''
 };
 

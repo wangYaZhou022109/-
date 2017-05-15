@@ -45,13 +45,13 @@ exports.mixin = {
     validate: function() {
         var content = $(this.$('content')),
             difficulty = $(this.$('difficulty')),
-            components = this.components.content.html(),
+            components = this.components.content.text(),
             flag = true;
 
         markers.text.valid(content);
         markers.text.valid(difficulty);
 
-        if (components === '') {
+        if (components.trim() === '') {
             markers.text.invalid(content, validators.required.message);
             flag = false;
         }

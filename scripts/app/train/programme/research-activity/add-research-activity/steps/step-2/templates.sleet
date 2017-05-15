@@ -24,8 +24,8 @@ view('main')
                         input(type='radio' id='d-' + id name='dimension-radio' value=id)('checked')&if(checked)
                         label.small-font > echo(name)
                     .pull-right
-                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font(id='up-' + id)
-                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(id='down-' + id)
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray-font(id='goup-' + id)
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(id='godown-' + id)
                 .m-top > each(questions)
                     span.choice.m-top > echo(questionIndex)
             .btn-item.layout-mt
@@ -47,7 +47,7 @@ view('main')
                             span > echo(dimensionIndex)
                             span > echo(name)
                     each(questions)
-                        li
+                        li.m-top
                             spqn.heading.pull-left.m-right >  echo(questionIndex)
                             div(data-dynamic-key=id)
                         .layout-mt-small.clearfix

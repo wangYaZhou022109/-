@@ -31,15 +31,20 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var orgs = this.models.orgs,
-                me = this;
+            // var orgs = this.models.orgs,
+            //     me = this;
             this.models.questions.clear();
-            D.assign(orgs.params, {
-                uri: this.module.renderOptions.url || 'exam/question-depot'
+            // D.assign(orgs.params, {
+            //     uri: this.module.renderOptions.url || 'exam/question-depot'
+            // });
+            D.assign(this.models.questions.params, payload, {
+                status: 1,
+                url: this.module.renderOptions.url
             });
-            return this.get(orgs).then(function() {
-                return me.module.dispatch('searchQuestion', payload);
-            });
+            return this.get(this.models.questions);
+            // return this.get(orgs).then(function() {
+            //     return me.module.dispatch('searchQuestion', payload);
+            // });
         },
         searchQuestion: function(payload) {
             this.models.state.data.checkAll = false;

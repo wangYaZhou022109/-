@@ -27,6 +27,7 @@ exports.store = {
     },
     callbacks: {
         selectPaperId: function(id) {
+            this.models.paperClass.clear();
             D.assign(this.models.paperClass.params, { paperId: id });
             return this.get(this.models.paperClass);
         },

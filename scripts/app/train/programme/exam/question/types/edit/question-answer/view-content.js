@@ -50,15 +50,15 @@ exports.mixin = {
     validate: function() {
         var content = $(this.$('content')),
             difficulty = $(this.$('difficulty')),
-            components = this.components.content.html(),
-            ans = this.components.answer.html(),
+            components = this.components.content.text(),
+            ans = this.components.answer.text(),
             answer = $(this.$('answer')),
             flag = true;
 
         markers.text.valid(content);
         markers.text.valid(difficulty);
 
-        if (components === '') {
+        if (components.trim() === '') {
             markers.text.invalid(content, validators.required.message);
             flag = false;
         }
@@ -68,7 +68,7 @@ exports.mixin = {
             flag = false;
         }
 
-        if (!ans) {
+        if (!ans.trim()) {
             markers.text.invalid(answer, validators.required.message);
             flag = false;
         }

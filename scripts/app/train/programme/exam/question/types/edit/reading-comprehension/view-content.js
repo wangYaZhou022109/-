@@ -36,12 +36,12 @@ exports.components = [{
 exports.mixin = {
     validate: function() {
         var content = $(this.$('content')),
-            components = this.components.content.html(),
+            components = this.components.content.text(),
             flag = true;
 
         markers.text.valid(content);
 
-        if (components === '') {
+        if (components.trim() === '') {
             markers.text.invalid(content, validators.required.message);
             flag = false;
         }

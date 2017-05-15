@@ -82,7 +82,8 @@ var target = D.assign({}, {
     },
     getCurrentStatus: function() {
         return itemStatus.INIT;
-    }
+    },
+    title: '试卷预览',
 });
 
 module.exports = target;

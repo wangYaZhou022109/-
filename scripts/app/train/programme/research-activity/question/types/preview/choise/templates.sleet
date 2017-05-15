@@ -15,11 +15,11 @@ view('content')
 
 view('options')
     .layout-mt-small > each(options)
-        p(id='item-' + index)
+        p(id='item-' + index)(style='padding: 1em 2.5em;')
             label.no-margin(for='answer-item-' + index)
                 compare(mode 'eq' 1)
                     echo(score '分')
                 #  .answer-options > .option-num > 
-                @echo(code)
-                @echo(content)
+            label.answer-item > @echo(code)
+            span.sub-text > @echo(content)
                 #  .answer-options > 

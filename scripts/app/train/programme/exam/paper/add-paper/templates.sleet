@@ -55,7 +55,7 @@ view('question-classes')
                             echo(question.difficulty)
                         .input-box.inline-block
                             .text 题目分数：
-                            input.input.r-left(id ='score-' + questionId name ='score'  placeholder='请输入题目分数（分）' value=score x-rule='required,digits,min:0')
+                            input.input.r-left(style='padding-left: 90px;')(id ='score-' + questionId name ='score'  placeholder='请输入题目分数（分）' value=score x-rule='required,digits,min:0')
                     .pull-right.m-top
                         i.pointer.m-right.iconfont.icon-arrow-up-solid.gray(id='move-up-' + question.id)
                         i.pointer.m-right.iconfont.icon-arrow-down-solid.gray(id='move-down-' + question.id)
