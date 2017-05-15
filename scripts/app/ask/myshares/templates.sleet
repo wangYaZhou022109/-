@@ -107,19 +107,18 @@ view('list')
                                         .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
                                             string('praise') +  echo('（'+ praiseNum +'）') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-                                
+
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             i.iconfont.icon-share-2(title='分享')
                                             form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                    .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=organizationId)
                                         input.input(type='hidden' name='id' value=id)
-                                        .btn(id='publish-' + id) > string('publish')
+                                        .btn(id='publish-' + id) > string('publish') 
             compare(auditStatus 'eq' 2)
                 li
                     .user-pic > img(src=member.headPortrait)
@@ -137,5 +136,6 @@ view('list')
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
-                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                compare(careNum 'neq' 0)
+                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                     
