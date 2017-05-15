@@ -30,7 +30,7 @@ exports.store = {
             url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 24
+            pageSize: 60
         },
         researchActivitys: {
             url: '../exam/research-activity/activity-list',

@@ -19,8 +19,10 @@ D.assign(obj, {
             return this.module.dispatch('clearModels').then(function() {
                 window.close();
             });
+        } else if (state.over) {
+            return this.module.dispatch('clearModels');
         }
-        return this.module.dispatch('clearModels');
+        return '';
     }
 });
 

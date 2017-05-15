@@ -3,6 +3,7 @@ module.exports = {
     'exam.research.research-detail.confirm-submit': '确定要提交吗？',
     'exam.research.questionary-detail': '问卷须知',
     'exam.begin-answer-question': '开始答题',
+    'exam.view-detail-confirm': '是否查看详情',
     'exam.submit-paper-confirm': '确定要提交试卷吗',
     'exam.submit-paper-confirm.no-finish': '{0}题未答',
     'exam.submit-mark-paper-confirm': '确定要提交评卷吗',
