@@ -16,7 +16,11 @@ exports.routes = {
     'class-detail/research-answer/:id': 'showResearchAnswerDetail',
     'class-detail/research-detail/:id': 'showResearchDetail',
     'class-detail/:id': 'showClassDetail',
-    'programme/research-activity/preview-questionary/:researchId': 'showResearchPreview'
+    'programme/research-activity/preview-questionary/:researchId': 'showResearchPreview',
+    'manage/:id': 'showManage', // 资源管理员
+    'sponsor/:id': 'showSponsor', // 需求方
+    'service/:id': 'showService', // 班务
+    'assist/:id': 'showAssist' // 培训协理
 };
 
 exports.showIndex = function(id) {
@@ -82,6 +86,22 @@ exports.showClassDetail = function(classId) {
 exports.showResearchPreview = function(fir, researchId) {
     return this.app.viewport.showIt('content', 'train/programme/research-activity/preview-questionary',
     { researchId: researchId });
+};
+
+exports.showManage = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 1 });
+};
+
+exports.showSponsor = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 2 });
+};
+
+exports.showService = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 3 });
+};
+
+exports.showAssist = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 4 });
 };
 
 exports.interceptors = {
