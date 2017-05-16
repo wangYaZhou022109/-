@@ -23,7 +23,7 @@ view('content') > form
                         .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')
                         .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                     .text-right
-                        .item > span(id='answer-'+ id) > echo('回复')
+                        .item > span(id='answer-'+ id) > echo('举报')
                         .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                 div(id='replyandreply-answer-'+id style='display:none')
                     input.input(name='content-' + id value='' )

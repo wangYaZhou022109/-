@@ -57,15 +57,20 @@ view('main')
                     .comment-text > echo(contentTxt)
                     .comment-operation
                         .pull-left 
-                            .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')
+                            compare(praise1 'eq' true)
+                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                            else
+                                .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                         .text-right
                             .item > .share-bar
                                 .drop-down-wrapper
                                     i.iconfont.icon-share-2(title='分享')
                                     form.drop-down-content > .content
-                                        .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                        .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                        .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                        .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item > span(id ='report-' + 3 + '_' + id+'_' + createMemberId data-name='id' data-value= 3+'_' + id+'_' + createMemberId) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')        
@@ -98,8 +103,9 @@ view('relevantexperts')
                     img.block(src=headPhoto)
 
 view('relatedquestions')
-    #  div(data-dynamic-key=relatedquestions.menu)
-    span.h3 > echo('相关问题')
-    .layout-mt-small.m-top
-            .block.layout-mt-small.m-top
-                a.text-overflow(href="javascript:;")
+    section.section.relevant-course
+        span.h3 > echo('相关问题')
+        .layout-mt-small.m-top
+            each(question)
+                .block.layout-mt-small.m-top 
+                    a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)
