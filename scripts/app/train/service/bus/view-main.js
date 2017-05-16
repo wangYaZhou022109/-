@@ -8,7 +8,7 @@ exports.bindings = {
 
 exports.components = [{
     id: 'pager',
-    name: 'background-pager',
+    name: 'pager',
     options: { model: 'buss' }
 }];
 

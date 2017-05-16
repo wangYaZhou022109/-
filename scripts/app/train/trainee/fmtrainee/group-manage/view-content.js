@@ -85,7 +85,7 @@ exports.actions = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'waitTrainees' }
+    id: 'pager', name: 'pager', options: { model: 'waitTrainees' }
 }];
 
 exports.dataForTemplate = {

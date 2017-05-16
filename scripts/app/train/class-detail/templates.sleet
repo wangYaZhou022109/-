@@ -77,11 +77,11 @@ view('class-information')
             li
                 .class-info-left > | 餐厅
                 .class-info-right > echo(classInfo.diningRoom)
-            li
-                .class-info-left > | 标签
-                .class-info-right
-                    .btn-white 团队管理
-                    .btn-white 管理
+            # li
+            #     .class-info-left > | 标签
+            #     .class-info-right
+            #         .btn-white 团队管理
+            #         .btn-white 管理
 
 view('class-notice')
     .class-notice

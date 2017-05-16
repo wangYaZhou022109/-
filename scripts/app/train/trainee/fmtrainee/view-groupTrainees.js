@@ -11,7 +11,7 @@ exports.bindings = {
 exports.auto = true;
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'groupTrainees' }
+    id: 'pager', name: 'pager', options: { model: 'groupTrainees' }
 }];
 
 exports.events = {
