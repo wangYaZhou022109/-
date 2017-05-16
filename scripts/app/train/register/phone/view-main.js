@@ -33,7 +33,7 @@ exports.dataForActions = {
             return false;
         }
         if (!member) {
-            this.app.message.error('该手机号无效');
+            this.app.message.error('系统中不存在该号码');
             return false;
         }
         return {

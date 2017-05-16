@@ -1,6 +1,7 @@
 var D = require('drizzlejs');
 
 exports.items = {
+    title: 'title',
     step: 'step',
     main: 'main'
 };

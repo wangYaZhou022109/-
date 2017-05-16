@@ -68,7 +68,7 @@ exports.showSignupPage = function(classId) {
 };
 
 exports.showRegisterPage = function() {
-    return this.app.show('content', 'train/register');
+    return this.app.viewport.showIt('content', 'train/register');
 };
 
 exports.showResearchDetail = function(fir, id) {
@@ -111,7 +111,8 @@ exports.interceptors = {
     'programme/preview-task': 'clearHeadAndBottom',
     'class-detail/research-answer/': 'clearHeadAndBottom',
     'class-detail/research-detail/': 'clearHeadAndBottom',
-    'programme/research-activity/preview-questionary': 'clearHeadAndBottom'
+    'programme/research-activity/preview-questionary': 'clearHeadAndBottom',
+    signup: 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {
