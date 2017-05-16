@@ -51,7 +51,8 @@ exports.store = {
                 }
             }
         },
-        expert: { url: '../ask-bar/myquiz/findExpert' }
+        expert: { url: '../ask-bar/myquiz/findExpert' },
+        question: { url: '../ask-bar/myquiz/findQuestion' },
     },
     callbacks: {
         refreshrelpy: function() {
@@ -65,6 +66,11 @@ exports.store = {
             var expert = this.models.expert;
             expert.set(payload);
             return this.get(expert);
+        },
+        question: function(payload) {
+            var question = this.models.question;
+            question.set(payload);
+            return this.get(question);
         },
         init: function(payload) {
                 // var question = payload.question;
@@ -90,12 +96,14 @@ exports.store = {
             var details = this.models.details,
                 me = this,
                 expert = this.models.expert,
+                question = this.models.question,
                 d = payload;
             details.set({ id: d.id });
             return this.get(details).then(function(data) {
                 var params = _.map(data[0].topicList, 'id').join(',');
                 expert.params.ids = params;
-                return me.get(expert);
+                me.get(expert);
+                me.get(question);
             });
         },
         details: function(payload) {

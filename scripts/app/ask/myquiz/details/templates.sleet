@@ -1,12 +1,5 @@
 #!handlebars
 
-#  module > .ask-page > .container
-#      .page-main-wrapper.knowledge-side
-#          .page-side.side-min
-#              div(data-region='top')
-#              div(data-region='relevantexperts')
-#              div(data-region='relatedquestions')
-#          .page-main(data-region='main')
 module
     .ask-page > .container
         .page-main-wrapper.knowledge-side
@@ -36,9 +29,8 @@ view('main')
                         .drop-down-wrapper
                             i.iconfont.icon-share-2(title='分享')
                             form.drop-down-content > .content
-                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                #  .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
+                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                     .item > span(id ='report-' + 1 + '_' + details.id+'_' + details.createMemberId data-name='id' data-value=1 +'_' + details.id+'_' + details.createMemberId) > string('report')
                 .pull-left
                     if(haveAttachments)
@@ -57,18 +49,23 @@ view('main')
     .layout-mt
         .comment-list > each(details.questionDiscussList) > ul
             li
-                .user-pic > img(src="images/1.png")
+                .user-pic > img(src=headPhoto)
                 .comment-content
                     .user-info
                         a(href='#') > echo( member.fullName)
                         span > echo(organization.name)
-                    .comment-text > echo(content)
+                    .comment-text > echo(contentTxt)
                     .comment-operation
                         .pull-left 
                             .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                         .text-right
-                            
+                            .item > .share-bar
+                                .drop-down-wrapper
+                                    i.iconfont.icon-share-2(title='分享')
+                                    form.drop-down-content > .content
+                                        .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                        .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item > span(id ='report-' + 3 + '_' + id+'_' + createMemberId data-name='id' data-value= 3+'_' + id+'_' + createMemberId) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')        
@@ -93,14 +90,16 @@ view('top')
     #  div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
-    #  div(data-dynamic-key=relevantexperts.menu)
-    .h3 > echo('相关专家')
-    .comment-list.ask-list > ul.clearfix
-        each(expert)
-            li.topic-item.pull-left 
-                a.normal(href="javascript:;")
-                    .img > .img-cont > img(src="images/demo/1.jpg")
-                    h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
+    span.h3 > echo('相关专家')
+    .layout-mt-small.user-picture
+        .grid-row
+            each(expert)
+                .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
+                    img.block(src=headPhoto)
 
 view('relatedquestions')
-    div(data-dynamic-key=relatedquestions.menu)
+    #  div(data-dynamic-key=relatedquestions.menu)
+    span.h3 > echo('相关问题')
+    .layout-mt-small.m-top
+            .block.layout-mt-small.m-top
+                a.text-overflow(href="javascript:;")
