@@ -14,7 +14,7 @@ exports.store = {
     models: {
         themeList: { url: '../train/theme' },
         selectedList: { url: '../train/online-course' },
-        courseList: { url: '../course-study/course-info', type: 'pageable', root: 'items' },
+        courseList: { url: '../course-study/course-info/select-for-train', type: 'pageable', root: 'items' },
         state: { data: {} },
         targetList: { data: [] },
         delList: { data: [] }

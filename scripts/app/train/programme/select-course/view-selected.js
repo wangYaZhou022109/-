@@ -212,7 +212,7 @@ exports.dataForActions = {
     doSearch: function() {
         return {
             name: this.$('name').value,
-            categoryId: this.$('categoryId').value,
+            category: this.$('categoryId').value,
             businessType: 0,
             categoryName: this.$('categoryName').value,
             organizationId: this.$('organizationId').value,
