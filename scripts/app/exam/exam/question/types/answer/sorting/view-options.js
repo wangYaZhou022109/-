@@ -93,7 +93,7 @@ exports.handlers = {
 
         if (k >= 65 && k <= 122 && _.find(this.bindings.state.data.options, ['code', char])) {
             if (answer.length > 0 && isRepeat(answer.toLocaleUpperCase(), char)) {
-                setError.call(this, '出现重复字母');
+                setError.call(this, '有重复的字母顺序');
                 e.preventDefault();
                 return false;
             }
@@ -101,7 +101,7 @@ exports.handlers = {
             return true;
         }
 
-        setError.call(this, '输入字母超出范围');
+        setError.call(this, '仅支持字母顺序');
         e.preventDefault();
         return false;
     }

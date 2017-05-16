@@ -3,10 +3,9 @@ module
     .banner-notice(data-region='banner-notice')
 
 view('banner-notice')
-    .notice-img > img.block(src='images/2.png') + .img-title 图片的标题图片的标题图片的标题图片的标题
-    ul
-        li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
-        li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
-        li > a.underline lsfjlsdfjsldkfjsdlfkjsldfjsldfkjljl
+    .notice-img > img.block(src=downloadUrl(news.cover))&if(news.cover) + .img-title
+        a.underline(href='/#/news/detail/'+news.id+'/0') > echo(news.title)
+    ul > each(newsList)
+        li > a.underline(href='/#/news/detail/'+id+'/0') > echo(title)
     .notice-bottom > each(personPanels)
         .item > i.iconfont.icon-type + span > a.underline(href='/#/'+url) > echo(name)

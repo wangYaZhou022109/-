@@ -18,6 +18,12 @@ exports.handlers = {
     hideClose: function(id) {
         $(this.$('delete-' + id)).addClass('fade-out').removeClass('fade-in');
     }
+    // navigate: function(courseId, e, element) {
+    //     var versionId = element.getAttribute('data-versionId');
+    //     if (!versionId) this.app.message.error('该课程还未上架');
+    //     else window.open('#/study/course/detail/' + courseId);
+    //     return false;
+    // }
 };
 
 
@@ -47,6 +53,7 @@ exports.dataForTemplate = {
             progress.btnText = btnText[progress.finishStatus];
             progress.btnUrl = '#/study/course/detail/' + progress.courseId;
             progress.studyTotalTime = Number(studyTotalTime) / 60;
+            progress.noVersion = !progress.courseInfo.versionId;
             return progress;
         });
         return progressList;

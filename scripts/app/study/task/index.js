@@ -13,34 +13,30 @@ exports.store = {
     models: {
         state: {},
         task: {},
-        section: {
-            url: '../course-study/course-front/section'
-        },
-        progress: {
-            url: '../course-study/course-front/submit-progress'
-        },
-        preview: {
-            url: '../human/file/preview'
-        },
-        download: {
-            url: '../human/file/download'
-        },
-        file: {
-            url: '../human/file/upload-parse-file'
-        }
+        section: { url: '../course-study/course-front/section' },
+        progress: { url: '../course-study/course-front/submit-progress' },
+        startStudy: { url: '../course-study/course-front/start-study' },
+        preview: { url: '../human/file/preview' },
+        download: { url: '../human/file/download' },
+        file: { url: '../human/file/upload-parse-file' },
+        img: { url: '../system/file/upload' }
     },
     callbacks: {
         init: function(options) {
-            var sectionModel = this.models.section,
-                taskModel = this.models.task,
-                progressModel = this.models.progress;
-            sectionModel.set({
-                id: options.id
-            });
-            return this.get(sectionModel).then(function(data) {
+            var taskModel = this.models.task,
+                sectionModel = this.models.section,
+                progressModel = this.models.progress,
+                startStudyModel = this.models.startStudy,
+                me = this;
+            sectionModel.set({ id: options.id });
+            startStudyModel.set({ sectionId: options.id, clientType: 0 });
+            this.get(sectionModel).then(function(data) {
                 if (data[0]) {
                     taskModel.set(data[0].studyTask);
                     progressModel.set(data[0].progress);
+                    if (!data[0].progress || !data[0].progress.id) {
+                        me.save(startStudyModel);
+                    }
                     taskModel.changed();
                 }
             });

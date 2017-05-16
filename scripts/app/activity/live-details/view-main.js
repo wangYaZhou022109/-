@@ -146,7 +146,7 @@ exports.dataForTemplate = {
         }
         return {
             hasScore: !!gensee.courseScore,
-            scorePercent: gensee.avgScore,
+            scorePercent: scorePercent,
             avgScore: avgScore
         };
     }

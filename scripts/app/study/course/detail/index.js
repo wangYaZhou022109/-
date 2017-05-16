@@ -6,7 +6,11 @@ exports.items = {
     comment: 'comment',
     download: 'download',
     'releated-course': 'releated-course',
-    'research-tips': ''
+    'research-tips': '',
+    'preview-pdf': '',
+    'preview-img': '',
+    'preview-video': '',
+    'preview-audio': '',
 };
 
 exports.store = {
@@ -33,14 +37,48 @@ exports.store = {
                 },
                 findFirstSection: function() {
                     return this.findAllSections()[0];
+                },
+                // 是否是相同章或者下一章。
+                isChapterSequence: function(beforeSectionId, currentSectionId) {
+                    var beforeSection = this.findSection(beforeSectionId);
+                    var currentSection = this.findSection(currentSectionId);
+                    var nextIndex = 0;
+                    if (beforeSection.chapterId === currentSection.chapterId) return true;
+
+                    _.each(this.data.courseChapters, function(v, i) {
+                        if (v.id === beforeSection.chapterId) {
+                            nextIndex = i + 1;
+                            return false;
+                        }
+                        return i;
+                    });
+                    // 如果前面学习的章节是最后一章 也直接为true
+                    if (nextIndex === this.data.courseChapters.length) return true;
+
+                    return this.data.courseChapters[nextIndex].id === currentSection.chapterId;
+                },
+                // 前面的章节是什么
+                findBeforeSection: function(sectionId) {
+                    var section = this.findSection(sectionId);
+                    var chapter = this.findChapter(section.chapterId);
+                    var nextIndex = 0;
+                    _.each(chapter.courseChapterSections, function(v, i) {
+                        if (v.id === sectionId) {
+                            nextIndex = i - 1;
+                            return false;
+                        }
+                        return v;
+                    });
+                    if (nextIndex === -1) return null;
+                    return chapter.courseChapterSections[nextIndex];
                 }
             }
         },
         // 课程进度
         progress: { url: '../course-study/course-front/course-progress',
             mixin: {
-                findProgress: function(sectionId) {
-                    return _.find(this.data, { sectionId: sectionId });
+                findProgress: function(referenceId) {
+                    return _.find(this.data, { sectionId: referenceId });
                 }
             }
         },
@@ -52,19 +90,18 @@ exports.store = {
         register: { url: '../course-study/course-front/registerStudy' },
         collect: { url: '../system/collect' }, // 收藏
         courseRelated: { url: '../course-study/course-front/related' },
+        preview: { url: '../human/file/preview' },
         download: { url: '../human/file/download' },
+        attachment: { url: '../human/file' },
         score: { url: '../course-study/course-front/score' },
         state: {},
         playerState: {},
-        examStatus: { url: '../exam/exam/status' }, // { examIds: jsonstr }
-        researchStatus: { url: '../exam/research-activity/status' }, // { researchIds: jsonstr }
         researchActivity: { url: '../exam/research-activity/simple-data' }
     },
     callbacks: {
         init: function(payload) {
             // 初始化当前课程
-            var me = this,
-                course = this.models.course,
+            var course = this.models.course,
                 courseRelated = this.models.courseRelated,
                 collect = this.models.collect,
                 playerState = this.models.playerState,
@@ -93,18 +130,19 @@ exports.store = {
                 }
             );
 
-            return this.chain([this.get(course), this.post(register)]).then(function(data) {
-                var sectionId = data[1][0].currentSectionId;
-                if (sectionId) sectionId = course.findSectionForReferId(sectionId).id;
-                if (!sectionId) sectionId = course.findFirstSection().id;
-
-                progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
-
-                return me.chain(
-                    me.get(progress),
-                    playerState.set({ id: payload.id, sectionId: sectionId }, true)
-                );
-            });
+            return this.chain(
+                this.get(course),
+                function() {
+                    return this.post(register);
+                },
+                function(data) {
+                    var sectionId = data[0].currentSectionId;
+                    if (sectionId) sectionId = course.findSectionForReferId(sectionId).id;
+                    if (!sectionId) sectionId = course.findFirstSection().id;
+                    progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
+                    playerState.set({ id: payload.id, sectionId: sectionId }, true);
+                    return this.get(progress);
+                });
         },
         mediaProgress: function(payload) {
             var model = this.models.mediaProgress;
@@ -158,6 +196,11 @@ exports.store = {
             var model = this.models.researchActivity;
             model.set({ id: payload.id });
             return this.get(model);
+        },
+        getAttachment: function(payload) {
+            var attachment = this.models.attachment;
+            attachment.set({ id: payload.id });
+            return this.get(attachment);
         }
     }
 };

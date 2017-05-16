@@ -1,0 +1,17 @@
+.classmate-book-page {
+    & .classmate-side {
+        width: 25%;
+        float: left;
+        & ul {
+            width: 100%;
+            & li {
+                width: 100%;
+                background: var(--main-color);
+                color: var(--white);
+            }
+        }
+    }
+    & .classmate-content {
+        float: left;
+    }
+}
