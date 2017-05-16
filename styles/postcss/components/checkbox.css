@@ -1,5 +1,8 @@
 .checkbox,
 .radio {
+   display: inline-block;
+   vertical-align: middle;
+
     & input {
         display: none;
 

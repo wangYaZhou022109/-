@@ -19,6 +19,7 @@ exports.dataForTemplate = {
     types: function(data) {
         var types = [
             { text: '全部', value: '' },
+            { text: 'word', value: '2' },
             { text: 'excel', value: '4' },
             { text: 'ppt', value: '5' },
             { text: 'pdf', value: '3' },

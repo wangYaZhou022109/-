@@ -57,27 +57,28 @@ exports.store = {
 
                     return this.data.courseChapters[nextIndex].id === currentSection.chapterId;
                 },
-                // 后面的章节是什么
-                findNextSectionId: function(sectionId) {
-                    var list = this.findAllSections();
+                // 前面的章节是什么
+                findBeforeSection: function(sectionId) {
+                    var section = this.findSection(sectionId);
+                    var chapter = this.findChapter(section.chapterId);
                     var nextIndex = 0;
-                    _.each(list, function(v, i) {
+                    _.each(chapter.courseChapterSections, function(v, i) {
                         if (v.id === sectionId) {
-                            nextIndex = i + 1;
+                            nextIndex = i - 1;
                             return false;
                         }
                         return v;
                     });
-                    if (nextIndex === list.length) return null;
-                    return list[nextIndex].id;
+                    if (nextIndex === -1) return null;
+                    return chapter.courseChapterSections[nextIndex];
                 }
             }
         },
         // 课程进度
         progress: { url: '../course-study/course-front/course-progress',
             mixin: {
-                findProgress: function(sectionId) {
-                    return _.find(this.data, { sectionId: sectionId });
+                findProgress: function(referenceId) {
+                    return _.find(this.data, { sectionId: referenceId });
                 }
             }
         },
@@ -100,8 +101,7 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             // 初始化当前课程
-            var me = this,
-                course = this.models.course,
+            var course = this.models.course,
                 courseRelated = this.models.courseRelated,
                 collect = this.models.collect,
                 playerState = this.models.playerState,
@@ -130,18 +130,19 @@ exports.store = {
                 }
             );
 
-            return this.chain([this.get(course), this.post(register)]).then(function(data) {
-                var sectionId = data[1][0].currentSectionId;
-                if (sectionId) sectionId = course.findSectionForReferId(sectionId).id;
-                if (!sectionId) sectionId = course.findFirstSection().id;
-
-                progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
-
-                return me.chain(
-                    me.get(progress),
-                    playerState.set({ id: payload.id, sectionId: sectionId }, true)
-                );
-            });
+            return this.chain(
+                this.get(course),
+                function() {
+                    return this.post(register);
+                },
+                function(data) {
+                    var sectionId = data[0].currentSectionId;
+                    if (sectionId) sectionId = course.findSectionForReferId(sectionId).id;
+                    if (!sectionId) sectionId = course.findFirstSection().id;
+                    progress.params = { ids: _.map(course.findAllSections(), 'referenceId').join() };
+                    playerState.set({ id: payload.id, sectionId: sectionId }, true);
+                    return this.get(progress);
+                });
         },
         mediaProgress: function(payload) {
             var model = this.models.mediaProgress;

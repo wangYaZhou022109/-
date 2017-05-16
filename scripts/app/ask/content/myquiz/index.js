@@ -1,18 +1,43 @@
 
+// exports.items = {
+//     left: 'left',
+//     right: 'right'
+// };
+// exports.store = {
+//     models: {
+//         leftstate: { data: { menu: 'myquiz' } },
+//         rightstate: { }
+//     },
+//     callbacks: {
+//         init: function() {
+//         }
+//     }
+// };
+
+// exports.afterRender = function() {
+// };
 exports.items = {
     left: 'left',
-    right: 'right'
+   // right: 'right'
+    top: 'top',
+    middle: 'middle',
+    bottom: 'bottom'
 };
+
 exports.store = {
     models: {
         leftstate: { data: { menu: 'myquiz' } },
-        rightstate: { }
+        topstate: {},
+        middlestate: {},
+        bottomstate: {}
     },
     callbacks: {
-        init: function() {
+        refresh: function() {
+            this.models.middlestate.changed();
         }
     }
 };
+
 
 exports.afterRender = function() {
 };

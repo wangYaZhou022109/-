@@ -66,7 +66,7 @@ exports.store = {
                 data.type = types[Number(question.type) - 1].value;
                 if (Number(question.type) === 2) data.title = '多选题';
 
-                if (question.answerRecord) {
+                if (!data.gainScore && question.answerRecord) {
                     data.gainScore = question.answerRecord.score;
                 }
             }

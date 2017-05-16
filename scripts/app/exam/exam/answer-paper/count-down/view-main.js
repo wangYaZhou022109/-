@@ -60,9 +60,6 @@ exports.afterRender = function() {
             if (minitus === 0) {
                 if (hour === 0) {
                     clearInterval(si);
-                    if (callback) {
-                        callback();
-                    }
                     return;
                 }
                 hour -= 1;
@@ -79,4 +76,5 @@ exports.afterRender = function() {
         second -= 1;
         el.innerHTML = doSomeInCountDown(getTimeStr(hour, minitus, second));
     }, time);
+    return this.module.dispatch('setInterval', { si: si });
 };

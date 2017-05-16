@@ -3,7 +3,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click notice': 'notice'
+    'mouseover notice': 'notice'
 };
 
 exports.handlers = {

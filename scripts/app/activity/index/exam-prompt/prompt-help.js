@@ -104,17 +104,17 @@ needSignUp = function(exam) {
 
 canExamMore = function(exam) {
     return exam.allowExamTimes > exam.examedTimes
-        || exam.allowExamTimes === 0
-        || exam.examedTimes > 0;
+        || exam.allowExamTimes === 0;
 };
 
 canViewDetailImmd = function(exam) {
-    return ((exam.examRecord && exam.examRecord.status >= 4) || exam.examedTimes > 0)
+    return (exam.examRecord && exam.examRecord.status >= 4)
         && exam.isShowAnswerImmed === 1;
 };
 
 overExam = function(exam) {
-    return (exam.examRecord && exam.examRecord.status > 4) || exam.examedTimes > 0;
+    return (exam.examRecord && exam.examRecord.status > 4)
+        || exam.examedTimes > 1;
 };
 
 isInApplcantTimeRange = function(exam) {

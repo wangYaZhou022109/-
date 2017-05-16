@@ -10,8 +10,15 @@ exports.bindings = {
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
+    var exam = this.bindings.exam.data,
+        examRecord = exam.examRecord;
+
     return D.assign({}, {
-        exam: this.bindings.exam.data,
+        exam: D.assign(exam, {
+            examRecord: D.assign(examRecord, {
+                status: exam.paper.isSubjective === 1 ? 5 : 6 //  马上查看详情，初始化考试记录的状态
+            })
+        }),
         state: this.bindings.state.data,
         types: this.bindings.types.data,
         answer: this.bindings.answer.data,
@@ -23,7 +30,6 @@ exports.getEntityModuleName = function() {
 };
 
 exports.dataForEntityModule = function(data) {
-    this.module.dispatch('clearModels');
     return {
         data: data
     };

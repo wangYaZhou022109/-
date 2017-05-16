@@ -1,7 +1,7 @@
 var E = require('./app/exam/exam-websocket'),
     CryptoJS = require('crypto-js'),
     IV = '1234567890123456',
-    webSocket, timeout, switchScreen, decryptAnswer;
+    webSocket, timeout, switchScreen, decryptAnswer, closeListener;
 
 webSocket = {
     connect: function(examId, submitPaper, timeExpand) {
@@ -38,6 +38,17 @@ switchScreen = function(exam) {
     }
 };
 
+closeListener = function(msg) {
+    var message = msg;
+    window.onbeforeunload = function() {
+        this.app.message.confirm(message, function() {
+            window.close();
+        }, function() {
+            return false;
+        });
+    };
+};
+
 decryptAnswer = function(v, k) {
     var hex = CryptoJS.enc.Hex.parse(v),
         base64Str = CryptoJS.enc.Base64.stringify(hex),
@@ -54,5 +65,6 @@ module.exports = {
     WS: webSocket,
     TO: timeout,
     switchScreen: switchScreen,
-    decryptAnswer: decryptAnswer
+    decryptAnswer: decryptAnswer,
+    closeListener: closeListener
 };

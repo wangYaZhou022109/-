@@ -61,7 +61,7 @@ exports.store = {
                 data.answer = answer.split('|').join('');
             }
 
-            if (question.answerRecord) {
+            if (!data.gainScore && question.answerRecord) {
                 data.gainScore = question.answerRecord.score;
             }
 
