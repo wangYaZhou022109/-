@@ -18,7 +18,12 @@ module > .class-details-page
                 section.section(data-region='comment')
 
 view('banner')
-    .banner > img.w-full(src='images/ke.png')
+    .banner
+        img.w-full(src='images/ke.png' style="max-height:100%")
+        .classes
+            a.m-right 第一期
+            a.m-right 第二期
+            a.m-right 第三期
 
 view('domain')
     .domain.clearfix.small-font

@@ -1,0 +1,29 @@
+#!handlebars
+
+module > .stuname-page
+    .stuname(data-region="stuname")
+
+view('stuname')
+    .form
+        .form-row
+            label 姓名
+            .content > input.input(placeholder="陈柱端")
+        .form-row   
+            label 公司
+            .content > input.input(placeholder="报名信息带入")
+        .form-row   
+            label 二级部门/单位
+            .content > input.input(placeholder="报名信息带入")
+        .form-row   
+            label 职务
+            .content > input.input(placeholder="报名信息带入")
+        .form-row   
+            label 职级
+            .content 
+                select
+                    option 集团公司领导
+                    option 总经理级
+                    option 副总经理级
+                    option 
+        .form-row
+            

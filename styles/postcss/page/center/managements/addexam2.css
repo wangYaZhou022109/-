@@ -1,4 +1,12 @@
 .addexam-page {
+    .form {
+        & .form-row {
+            float: none;
+            vertical-align: top;
+            display: inline-block;
+            margin-right: -4px;
+        }
+    }
     & .test {
         & .btn {
             padding: 0 1em;
