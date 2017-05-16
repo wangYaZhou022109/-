@@ -206,7 +206,15 @@ exports.dataForTemplate = {
             date = new Date(data.details.createTime);
         // console.log(data);
         var url = obj.details.member.headPortrait;
-        // console.log(url);
+        // console.log(obj.details.questionDiscussList.member.headPortrait);
+        var defultImg = 'images/default-userpic.png',
+            downUrl = this.bindings.down.getFullUrl();
+        _.map(obj.details.questionDiscussList || [], function(item) {
+            var r = item;
+            if (r.member) {
+                r.headPhoto = r.member.headPortrait ? (downUrl + '?id=' + r.member.headPortrait) : defultImg;
+            }
+        });
         if (typeof url === 'undefined' || url === null || url === '') {
             obj.details.member.headPortrait = 'images/default-userpic.png';
         } else {

@@ -3,7 +3,12 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你共提出了'+countNum+'个问题')
+        #  .pull-right > echo('你共提出了'+countNum+'个问题')
+        .pull-right.m-top
+            span 你共发表了
+            span.h3.custom-color-3 
+                echo(countNum)
+            span 篇文章
         ul
             li.active > echo('我的提问')
     .comment-list.ask-list > ul

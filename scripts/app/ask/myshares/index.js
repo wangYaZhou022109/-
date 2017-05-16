@@ -69,16 +69,23 @@ exports.store = {
         }
     },
     callbacks: {
+        refresh: function() {
+            this.models.callback();
+        },
+        set: function(payload) {
+            this.models.callback = payload;
+        },
         praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
             praise.set(payload);
-            return this.post(praise).then(function(data) {
-                var obj = data[0];
+            return this.post(praise).then(function() {
                 var page = me.models.page;
-                var pageData = me.models.page.praise(obj.objectId, obj.objectType);
-                me.app.message.success('点赞成功');
-                page.data = pageData;
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = true;
+                curObj.praiseNum ++;
+
                 page.changed();
             });
         },
@@ -86,52 +93,40 @@ exports.store = {
             var unpraise = this.models.unpraise,
                 me = this;
             unpraise.set(payload);
-            return this.put(unpraise).then(function(data) {
-                var obj = data[0];
+            return this.chain(me.put(this.models.unpraise), function() {
                 var page = me.models.page;
-                var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
-                me.app.message.success('取消成功');
-                page.data = pageData;
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = false;
+                curObj.praiseNum = curObj.praiseNum === 0 ? 0 : curObj.praiseNum - 1;
+
                 page.changed();
             });
         },
         init: function() {
-            var myshares = this.models.myshares;
-            myshares.set({ id: 1 });
-            return this.get(myshares);
+            var myshares = this.models.myshares,
+                params = this.models.page.params,
+                page = this.models.page;
+
+            params.id = 'null';
+            myshares.set(params);
+            return this.post(myshares).then(function() {
+                page.data = myshares.data;
+                page.changed();
+            });
         },
         page: function() {
             var myshares = this.models.myshares;
             var params = this.models.page.params;
+            var page = this.models.page;
             // var me = this;
             params.id = 'null';
             myshares.set(params);
             this.post(myshares).then(function() {
-                // me.models.page.params.page++;
+                page.data.push.apply(page.data, myshares.data);
+                page.changed();
             });
         },
-        // follow: function(payload) {
-        //     var follow = this.models.follow,
-        //         me = this,
-        //         myshares = this.models.myshares;
-        //     follow.set(payload);
-        //     myshares.set({ id: this.models.myshares.data.id, concernType: '3' });
-        //     return this.post(follow).then(function() {
-        //         me.app.message.success('关注成功');
-        //         me.get(myshares);
-        //     });
-        // },
-        // unfollow: function(payload) {
-        //     var unfollow = this.models.unfollow,
-        //         me = this,
-        //         myshares = this.models.myshares;
-        //     myshares.set({ id: this.models.myshares.data.id, concernType: '3' });
-        //     unfollow.set({ id: payload.id, concernType: '3' });
-        //     return this.put(unfollow).then(function() {
-        //         me.app.message.success('取消成功');
-        //         me.get(myshares);
-        //     });
-        // },
         follow: function(payload) {
             var follow = this.models.follow;
             follow.set(payload);
@@ -143,9 +138,17 @@ exports.store = {
             return this.put(unfollow);
         },
         shut: function(payload) {
-            // console.log(payload);
-            this.models.shut.set(payload);
-            return this.put(this.models.shut);
+            var shut = this.models.shut,
+                page = this.models.page,
+                me = this;
+
+            shut.set(payload);
+            return this.chain(me.put(this.models.shut), function() {
+                page.data = _.filter(page.data, function(item) {
+                    return item.id !== payload.id;
+                });
+                page.changed();
+            });
         },
         publish: function(payload) {
             // var discuss = this.models.discuss;
@@ -175,7 +178,8 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
-    this.dispatch('page');
+    this.dispatch('set', this.renderOptions.callback);
+    this.dispatch('init');
     this.dispatch('speech');
 };
 
