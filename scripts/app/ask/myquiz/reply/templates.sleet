@@ -11,7 +11,7 @@ view('content') > form
     .btn(id='discuss-answer-' + reply.id ) > echo('回复')
     each(reply.questionReplylist) > ul
         li
-            .user-pic > img(src="images/1.png")
+            .user-pic > img(src=member.headPortrait)
             .comment-content
                 .user-info
                     a(href='#') > echo( member.fullName)
@@ -19,13 +19,12 @@ view('content') > form
                     span > echo(toMember.fullName + '   ' + time)
                 .comment-text > echo(content)
                 .comment-operation
+                    .pull-left 
+                        .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')
+                        .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                     .text-right
-                        #  .item > i.iconfont.icon-zan > echo('赞（' + praiseNum +'）')                           
-                        .item > i.iconfont.icon-message(id='answer-'+ id) > echo('回复')
-                        .item > i.iconfont.icon-info(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
-                        #  .item > echo('赞（' + praiseNum +'）')                           
-                        #  .item >(id='answer-'+ id) > echo('回复')
-                        #  .item >(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
+                        .item > span(id='answer-'+ id) > echo('回复')
+                        .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                 div(id='replyandreply-answer-'+id style='display:none')
                     input.input(name='content-' + id value='' )
                     .btn(id='reply-answer-' + id  data-name='id' data-value=id) > echo('回复')
