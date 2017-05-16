@@ -1,0 +1,290 @@
+#! handlebars
+
+module > .search-layout
+    .top.top-bg-img.bg-main-color
+        .container.clearfix.text-center
+            .search-bar
+                input.input(id='searchContent' placeholder='请输入您要找的内容')
+                i#search.iconfont.icon-search.scale-1.text-hover-main-color
+            .filter
+                .item.active 全部
+                .item 课程
+                .item 专题
+                .item 慕课
+                .item 班级
+                .item 考试
+                .item 调研
+                .item 直播
+                .item 知识
+                .item 问题
+                .item 文章
+                .item 专家
+                .item 话题
+
+    .search-page(data-region='main')
+
+view('main') > .container
+    .layout-mt-small
+        span.sub-text 为您找到相关结果约
+        span.color-pass 100
+        span.sub-text 个
+
+    .search-content
+        .content-type
+            .h3.inline-block 课程
+            a.more(href='#/search-page/details') more
+        .main-list
+            ul
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+
+    .search-content
+        .content-type
+            .h3.inline-block 专题
+            a.more(href='javascript:;') more
+        .main-list
+            ul
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='images/default-cover/default_spceial.jpg')
+                        .detail-wrapper
+                            p 专题简介专题简介
+
+                    .clearfix
+                        .pull-right.small-font.m-left
+                            i.iconfont.icon-view(title='浏览')
+                            span.m-let 25
+                        .title.text-overflow 专题标题1
+                        .sub-text.text-overflow 专题简介专题简介
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p 专题简介专题简介
+
+                    .clearfix
+                        .pull-right.small-font.m-left
+                            i.iconfont.icon-view(title='浏览')
+                            span.m-let 25
+                        .title.text-overflow 专题标题2
+                        .sub-text.text-overflow 专题简介专题简介
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p 专题简介专题简介
+
+                    .clearfix
+                        .pull-right.small-font.m-left
+                            i.iconfont.icon-view(title='浏览')
+                            span.m-let 25
+                        .title.text-overflow 专题标题3
+                        .sub-text.text-overflow 专题简介专题简介
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p 专题简介专题简介
+
+                    .clearfix
+                        .pull-right.small-font.m-left
+                            i.iconfont.icon-view(title='浏览')
+                            span.m-let 25
+                        .title.text-overflow 专题标题4
+                        .sub-text.text-overflow 专题简介专题简介
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p 专题简介专题简介
+
+                    .clearfix
+                        .pull-right.small-font.m-left
+                            i.iconfont.icon-view(title='浏览')
+                            span.m-let 25
+                        .title.text-overflow 专题标题5
+                        .sub-text.text-overflow 专题简介专题简介
+
+    .search-content
+        .content-type
+            .h3.inline-block 慕课
+            a.more(href='javascript:;') more
+        .main-list
+            ul
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata慕课1
+                            a.normal.block(href='javascript:;') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata慕课1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata慕课2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata慕课1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='javascript:;')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='javascript:;') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+
+    .search-content
+        .content-type
+            .h3.inline-block 班级
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 考试
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 调研
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 直播
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 知识
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 问题
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 文章
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 专家
+            a.more(href='javascript:;') more
+        .main-list
+
+    .search-content
+        .content-type
+            .h3.inline-block 话题
+            a.more(href='javascript:;') more
+        .main-list
