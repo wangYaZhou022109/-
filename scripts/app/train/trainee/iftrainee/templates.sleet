@@ -29,5 +29,7 @@ view('main')
             td > echo(member.jobName)
             td > echo(phoneNumber)
             td > a(id='delete-iftrainee'+id data-name='id' data-value=id) > echo('删除')
+            else
+                tr > td(colspan='8') > p.text-center > string('no-data')
     #pager.pagination
     

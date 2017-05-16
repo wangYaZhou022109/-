@@ -23,7 +23,6 @@ view('main')
     .membership-table.layout-mt-small.clearfix
         .h5.pull-left.strong > echo('报名列表')
         .pull-right
-            button.btn.tag-btn#situation > echo('报名情况')
             button.btn.tag-btn#allAudit > echo('审核')
     table.table
         thead > tr
@@ -50,6 +49,8 @@ view('main')
             td > echo(phoneNumber)
             td > map('trainee-show-auditStatus' auditStatus)
             td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId href='javascript:;') > echo('审核')
+            else
+                tr > td(colspan='11') > p.text-center > string('no-data')
     #pager.pagination(style='float:none')
 
 view('situation') > .signup-page.signup

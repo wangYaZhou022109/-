@@ -60,6 +60,8 @@ view('main')
                     input(id='input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
                     span.text-main-color(id='shuxian'+id) > echo('|')
                     a(id='delete'+id data-name='id' data-value=id href='javascript:;') > echo('删除')
+                else
+                    tr > td(colspan='11') > p.text-center > string('no-data')
         #pager.pagination(style='float:none')
 
 view('situation') > .entersituation-page.entersituation
@@ -122,6 +124,8 @@ view('group') > .studentgroup-page.studentgroup
                 a.text-main-color(id='manage'+id data-name='id' data-value=id href='javascript:;' group-name=name) > echo('管理')
                 span.text-main-color > echo('|')
                 a.text-main-color(id='delGroup'+id data-name='id' data-value=id href='javascript:;') > echo('删除')
+            else
+                tr > td(colspan='5') > p.text-center > string('no-data')
 
 view('groupTrainees')
     .membership-table.layout-mt-small.clearfix
@@ -150,6 +154,8 @@ view('groupTrainees')
                     input(id='group-trainee-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
                     span.text-main-color(id='groupshuxian'+id) > echo('|')
                     a(id='group-trainee-delete'+id data-name='id' data-value=id) > echo('删除')
+                else
+                    tr > td(colspan='8') > p.text-center > string('no-data')
         #pager.pagination(style='float:none')
 
 view('detail') > form.vertical

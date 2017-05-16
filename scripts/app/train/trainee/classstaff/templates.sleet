@@ -36,4 +36,6 @@ view('main')
                     input(id='staff-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
                     span.text-main-color(id='staff-shuxian'+id) > echo('|')
                     a(id='staff-delete'+id data-name='id' data-value=id) > echo('删除')
+            else
+                tr > td(colspan='8') > p.text-center > string('no-data')
     #pager.pagination

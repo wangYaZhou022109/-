@@ -37,6 +37,8 @@ view('content')
                 td > echo(member.name)
                 td > echo(organizationName)
                 td > map('trainee-sex' sex)
+                else
+                    tr > td(colspan='5') > p.text-center > string('no-data')
         #pager.pagination(style='float:none')
 
 view('list')

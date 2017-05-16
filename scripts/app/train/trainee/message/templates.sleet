@@ -9,25 +9,25 @@ view('main')
         .clearfix.layout-mt-small
             .h5.pull-left.layout-mr-small.strong > echo('学员列表')
             .check.pull-left
-                input(type='checkbox' id='checkAllTrainee')
+                input(type='checkbox' id='checkAllTrainee' name='checkAllTrainee')
                 label(for='checkAllTrainee') > echo('全选')
         each(traineeGroups)
             .clearfix.layout-mt-small
                 .small-font.pull-left.layout-mr-small > echo(name)
                 .check.pull-left
-                    input(type='checkbox' id='checkGroup'+id)
+                    input(type='checkbox' id='checkGroup'+id name='checkGroup')
                     label(for='checkGroup'+id) > echo('全选')
             .student-list.layout-mt-small.overflow
                 each(traineeList)
-                    span.active(id='trainee-'+id) > echo(member.fullName)
+                    span(id='trainee-'+id name='trainee') > echo(member.fullName)
         .clearfix.layout-mt-small
             .h5.pull-left.layout-mr-small.strong > echo('班务人员列表')
             .check.pull-left
-                input(type='checkbox' id='checkAllStaff')
+                input(type='checkbox' id='checkAllStaff' name='checkAllStaff')
                 label(for='checkAllStaff') > echo('全选')
         .student-list.layout-mt-small.overflow
             each(classstaffs)
-                span.active(id='classstaff-'+id) > echo(member.fullName)
+                span(id='classstaff-'+id name='classstaff') > echo(member.fullName)
     .layout-mt
         .clearfix
             .pull-left.strong 短信内容

@@ -38,14 +38,14 @@ view('side')
         .h4.m-top 任务附件：
         each(task.attachList)
             .side-item.clearfix.m-top
-                a.inline-block.pull-right(id='attachment-'+attachmentId attachType='1' preview=preview href='javascript:;') > echo(attachmentName)
-                a.inline-blockr(href=downUrl download=attachmentName) > string('download')
+                a.inline-block(id='attachment-'+attachmentId attachType='1' preview=preview href='javascript:;') > echo(attachmentName)
+                a.inline-blockr.pull-right(href=downUrl download=attachmentName) > string('download')
     if(task.hasTaskMember)
         .h4.m-top 我提交的附件：
         each(task.taskMemberList)
             .side-item.clearfix.m-top
-                a.inline-block.pull-right(id='attachment-'+attachmentId attachType='2' preview=preview href='javascript:;') > echo(name)
-                a.inline-blockr(href=downUrl download=name) > string('download')
+                a.inline-block(id='attachment-'+attachmentId attachType='2' preview=preview href='javascript:;') > echo(name)
+                a.inline-blockr.pull-right(href=downUrl download=name) > string('download')
         compare(task.btnType 'eq' 1)
             .btn.block.gray.layout-mt-small.yellow#commitTask 提交作业
         compare(task.btnType 'eq' 2)
