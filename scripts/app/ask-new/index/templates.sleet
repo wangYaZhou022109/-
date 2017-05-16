@@ -542,6 +542,10 @@ view('main')
                                                 span.pointer 分享
                                                 span |
                                                 span.pointer 举报
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
 
 
 
