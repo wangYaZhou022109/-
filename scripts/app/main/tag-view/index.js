@@ -16,7 +16,7 @@ exports.store = {
             var limit = this.module.renderOptions.limit;
             if (state.data.list.length === limit) {
                 this.app.message.error('最多添加' + limit + '项');
-                return;
+                return false;
             }
 
             _.map(payload.items, function(item) {
@@ -24,7 +24,7 @@ exports.store = {
                 state.data.map[item.value] = item;
                 state.data.list.push(item);
             });
-            state.changed();
+            return state.changed();
         },
 
         remove: function(payload) {
