@@ -32,6 +32,9 @@
                     display: inline-block;
                     padding-right: calc(var(--space)*2);
                 }
+                & span:last-child {
+                    padding-right: 0;
+                }
             }
         }
 
@@ -42,5 +45,26 @@
                 margin-top: calc(var(--space)*1.5);
             }
         }
+    }
+}
+
+.main-list {
+    & .knowledge-list {
+        & li {
+            padding: 0 var(--main-list-gap) 0 0;
+            border-bottom: none;
+            cursor: default;
+
+            & .knowledge-box {
+                padding: calc(var(--space)*2);
+                border: 1px solid var(--border-color);
+            }
+            & a {
+                color: var(--font-color);
+            }
+        }
+    }
+    & .activity-item-box li {
+        margin-bottom: calc(var(--main-list-gap) + 1);
     }
 }
