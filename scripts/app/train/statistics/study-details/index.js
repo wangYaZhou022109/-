@@ -6,9 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         courseStudyProgresss: {
-            url: '../train/trainee/course-study-progresss',
-            type: 'pageable',
-            root: 'items'
+            url: '../train/study-details/study'
         },
         state: { data: { } }
     },

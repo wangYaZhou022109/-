@@ -7,8 +7,6 @@ module
         .div(data-region='main')
 
 view('main')
-    .clearfix.layout-mt-small
-        .h5.pull-left 学习详情列表
     .m-top
         table.table
             thead > tr
@@ -20,16 +18,15 @@ view('main')
                 th > echo('联系电话')
                 th > echo('学习时长')
                 th > echo('操作')
-            tbody > each(courseStudyProgresss) > tr
+            tbody > each(member) > tr
                 td > echo(i)
                 td > echo(member.name)
                 td > echo(member.fullName)
-                td > echo(organizationName)
+                td > echo(member.organizationName)
                 td > echo(member.positionName)
-                td > echo(phoneNumber)
-                td > date(studyTotalTime)
+                td > echo(phone)
+                td > echo(studyTotalTime)
                 td
-                    a(id='edit'+memberId data-name='id' data-value=memberId cId=id) > echo('详情')
+                    a(id='edit'+memberId data-name='id' data-value=memberId cId=classId) > echo('详情')
                 else
                     tr > td(colspan='11') > p.text-center > string('no-data')
-        #pager.pagination
