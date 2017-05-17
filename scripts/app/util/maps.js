@@ -404,6 +404,9 @@ module.exports = {
     'train-project-status': {
         1: '未实施', 2: '进行中', 3: '已结束'
     },
+    'my-task-status': {
+        1: '未完成', 2: '未开始'
+    },
     get: function(k) {
         return _.map(this[k], function(value, key) {
             return { key: key, value: value };
