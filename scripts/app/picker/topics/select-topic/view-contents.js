@@ -19,18 +19,14 @@ exports.handlers = {
             function(o) {
                 return o.id === value;
             });
-        var checked = this.$('hid_' + value).value,
-            state = false;
-        if (checked === 'true') {
-            this.$('hid_' + value).value = false;
-            state = false;
-            $(element).removeClass('active');
-        } else {
-            this.$('hid_' + value).value = true;
-            state = true;
-            $(element).addClass('active');
-        }
-        this.module.renderOptions.callback(member, state);
+        var state;
+        $(element).toggleClass('active');
+        state = $(element).hasClass('active');
+        this.module.renderOptions.callback(member, state).then(function(flag) {
+            if (flag === false) {
+                $(element).removeClass('active');
+            }
+        });
     }
 };
 exports.dataForTemplate = {
