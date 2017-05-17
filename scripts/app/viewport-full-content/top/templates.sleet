@@ -30,13 +30,32 @@ view('shortcut')
                     option 专题
                 .search-input > input.input#search(placeholder='请输入您要搜索的内容')
                 .search-btn > button.btn(type='button') > i.iconfont.icon-search
-                .search-more-bar#searchMore > ul
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-
+                .search-more-bar.border.around#searchMore
+                    ul
+                        li.text-hover-main-color
+                            i.iconfont.icon-close.pull-right.pointer
+                            | 热门搜索课程名称
+                        li.text-hover-main-color
+                            i.iconfont.icon-close.pull-right.pointer
+                            | 热门搜索课程名称
+                        li.text-hover-main-color
+                            i.iconfont.icon-close.pull-right.pointer
+                            | 热门搜索课程名称
+                        li.text-hover-main-color
+                            i.iconfont.icon-close.pull-right.pointer
+                            | 热门搜索课程名称
+                        li.text-hover-main-color
+                            i.iconfont.icon-close.pull-right.pointer
+                            | 热门搜索课程名称
+                    .layout-mt-small.sub-text.small-font.text-center.pointer 清空历史
+                    hr
+                    .m-left
+                        .m-top 热门搜索
+                        .clearfix.m-top
+                            .tag-btn.radius 搞疲了
+                            .tag-btn.radius 捣空
+                            .tag-btn.radius 互联网
+                            .tag-btn.radius 产品设计
         .item.small-font.drop-down-wrapper.right
             .drop-down-btn
                 span#selected-name > echo(organization.name)

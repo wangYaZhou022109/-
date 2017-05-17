@@ -63,6 +63,9 @@
             width: 50%;
         }
 
+        &.cell-1 li {
+            width: 100%;
+        }
         & .content {
             position: relative;
             transition: all .2s linear;

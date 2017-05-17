@@ -76,6 +76,13 @@
             width: calc(var(--large-space) * 4);
         }
     }
+    & .cell-3 li.expert-item {
+        width: 33.33%;
+    }
+    & .cell-4 li.topic-item {
+        width: 25%;
+        padding-bottom: var(--large-space);
+    }
     & li.my-topic-item {
         width: 100%;
         & .img {
