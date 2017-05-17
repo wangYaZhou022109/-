@@ -1,5 +1,5 @@
-var D = require('drizzlejs');
-var $ = require('jquery');
+// var D = require('drizzlejs');
+// var $ = require('jquery');
 
 exports.bindings = {
     follow: true,
@@ -12,12 +12,27 @@ exports.events = {
 };
 
 exports.handlers = {
-    showMenu: function(id, e, target) {
-        var region;
-        var el = $(target).parents('.page-side')[0].nextElementSibling;
-        $(window).unbind('scroll');
-        region = new D.Region(this.app, this.module, el);
-        region.show('ask/' + id);
+    showMenu: function(payload) {
+        var me = this;
+        this.app.show('content', 'ask/content/' + payload,
+            {
+                leftrefresh: function() {
+                    me.module.dispatch('leftrefresh');
+                },
+                bottomsrefresh: function() {
+                    me.module.dispatch('bottomsrefresh');
+                },
+                refresh: function() {
+                    me.module.dispatch('refresh');
+                },
+                id: payload
+            }
+        );
+        // var region;
+        // var el = $(target).parents('.page-side')[0].nextElementSibling;
+        // $(window).unbind('scroll');
+        // region = new D.Region(this.app, this.module, el);
+        // region.show('ask/' + id);
     },
     follow: function(payload) {
         var me = this;

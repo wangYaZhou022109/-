@@ -1,12 +1,5 @@
 #!handlebars
 
-#  module > .ask-page > .container
-#      .page-main-wrapper.knowledge-side
-#          .page-side.side-min
-#              div(data-region='top')
-#              div(data-region='relevantexperts')
-#              div(data-region='relatedquestions')
-#          .page-main(data-region='main')
 module
     .ask-page > .container
         .page-main-wrapper.knowledge-side
@@ -36,9 +29,8 @@ view('main')
                         .drop-down-wrapper
                             i.iconfont.icon-share-2(title='分享')
                             form.drop-down-content > .content
-                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                #  .item > div(id ='shareTo-bar' + questionId) > i.iconfont.icon-ask + span 分享到问吧
+                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                     .item > span(id ='report-' + 1 + '_' + details.id+'_' + details.createMemberId data-name='id' data-value=1 +'_' + details.id+'_' + details.createMemberId) > string('report')
                 .pull-left
                     if(haveAttachments)
@@ -46,7 +38,7 @@ view('main')
                         i.iconfont.icon-image.pull-left.m-right
                         a.normal(href="javascript") > each(details.questionAttachList) > echo(' '+ name)
     section.section
-        form.vertical
+        form
             .h3 讨论区
             .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
             textarea.input.w-full#content(name='t_content')
@@ -57,17 +49,28 @@ view('main')
     .layout-mt
         .comment-list > each(details.questionDiscussList) > ul
             li
-                .user-pic > img(src="images/1.png")
+                .user-pic > img(src=headPhoto)
                 .comment-content
                     .user-info
                         a(href='#') > echo( member.fullName)
                         span > echo(organization.name)
-                    .comment-text > echo(content)
+                    .comment-text > echo(contentTxt)
                     .comment-operation
-                        #  .pull-left > .sub-text 2017-01-17
-                        .text-right
-                            .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')                           
+                        .pull-left 
+                            compare(praise1 'eq' true)
+                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                            else
+                                .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
+                        .text-right
+                            .item > .share-bar
+                                .drop-down-wrapper
+                                    i.iconfont.icon-share-2(title='分享')
+                                    form.drop-down-content > .content
+                                        .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                        .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item > span(id ='report-' + 3 + '_' + id+'_' + createMemberId data-name='id' data-value= 3+'_' + id+'_' + createMemberId) > string('report')
                     div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')        
@@ -92,84 +95,17 @@ view('top')
     #  div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
-    #  div(data-dynamic-key=relevantexperts.menu)
-    .h3 > echo('相关专家')
-    .comment-list.ask-list > ul.clearfix
-        each(expert)
-            li.topic-item.pull-left 
-                a.normal(href="javascript:;")
-                    .img > .img-cont > img(src="images/demo/1.jpg")
-                    h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
+    span.h3 > echo('相关专家')
+    .layout-mt-small.user-picture
+        .grid-row
+            each(expert)
+                .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
+                    img.block(src=headPhoto)
 
 view('relatedquestions')
-    div(data-dynamic-key=relatedquestions.menu)
-
-
-#  module > .course-page
-#      div(data-region='main')
-#  view('main')
-#      table.table
-#          tr
-#              td(width='80%')
-#                  table.table(width='100%')
-#                      tr
-#                          td(rowspan='2')
-#                              img(src=details.member.headPortrait)
-#                          td(colspan='2') 
-#                              echo(details.member.fullName)
-#                              label(class='required') .提问.
-#                              echo(details.createTime)
-#                      tr
-#                          td > label(class='required') 来自话题：
-#                          td > each(details.topicList) > echo(' '+ name)
-#                      tr
-#                          td(colspan='3') > echo(details.title)
-#                      tr
-#                          td(colspan='3') > textarea.input > echo(details.content)
-#                      tr
-#                          td > echo('附件：')
-#                          td(colspan='2') > each(details.questionAttachList) > echo(' '+ name)
-#                      tr 
-#                          td > a(id='enjoy-' + details.id data-name='id' data-value=details.id href='javascript:;')(class ='active') 分享
-#                          td > a(id='report-' + details.id data-name='id' data-value=details.id href='javascript:;')(class ='active') 举报
-#              td(width='20%')
-#                  table.table
-#                      tr > td > echo('该分享已有' + details.careNum + '人关注')
-#                      tr > td 
-#                      tr > td > .btn(id='boutique' data-name='id' data-value=details.id) > echo('我要关注')
-#                      tr > td > label(class='required') 相关专家
-#                      tr > td(colspan='3') > each(details.expertList) > img(src=headPortrait)
-#                      tr > td > label(class='required') 相关问题
-#                      tr > td > each(details.questionList) > echo(title)
-#      table.table
-#          tr
-#              td
-#                  form.vertical
-#                      table.table((width='100%')
-#                          tr > td > echo('讨论区') 
-#                          tr > td > echo('文明上网、理性发言，请遵守企业发言纪律。')
-#                          tr 
-#                              td
-#                                  input.input(name='t_content' value='')
-#                                  input.input(type='hidden' name='organizationId' value=details.organizationId)
-#                          tr 
-#                              td
-#                                  input.input(type='hidden' name='id' value=details.id)
-#                                  .btn(id='discuss') > echo('发表')
-#      .list
-#          table.table > each(details.questionDiscussList)
-#              tr > td(rowspan='4') > img(src=createMemberId)
-#              tr > td > echo( member.fullName + '     ' + organization.name)
-#              tr > td > echo(content)
-#              tr
-#                  td
-#                      echo('赞（' + praiseNum +'）')
-#                      a(id='discuss-answer-'+id data-name='id' data-value=id) > echo('展开')
-#                      a(id='discuss-top-'+id data-name='id' data-value=id) > echo(' 置顶|')
-#                      a(id='discuss-boutique-'+id data-name='id' data-value=id) > echo(' 加精|')
-#                      a(id='discuss-del-'+id data-name='id' data-value=id) > echo(' 删除')
-#              tr 
-#                  td > echo('')
-#                  td
-#                      div(id='reply-'+id name='reply-' + id style='display:none')
-     
+    section.section.relevant-course
+        span.h3 > echo('相关问题')
+        .layout-mt-small.m-top
+            each(question)
+                .block.layout-mt-small.m-top 
+                    a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)

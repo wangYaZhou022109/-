@@ -1,0 +1,402 @@
+#! handlebars
+
+module > .search-layout
+    .top.top-bg-img.bg-main-color
+        .container.clearfix.text-center
+            .search-bar
+                input.input(id='searchContent' placeholder='请输入您要找的内容')
+                i#search.iconfont.icon-search.scale-1.text-hover-main-color
+            .filter
+                .item 全部
+                .item.active 课程
+                .item 专题
+                .item 慕课
+                .item 班级
+                .item 考试
+                .item 调研
+                .item 直播
+                .item 知识
+                .item 问题
+                .item 文章
+                .item 专家
+                .item 话题
+
+    .search-page(data-region='main')
+
+view('main') > .container
+    .layout-mt-small
+        span.sub-text 为您找到相关结果约
+        span.color-pass 100
+        span.sub-text 个
+
+    .search-content
+        .main-list
+            ul
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='images/default-cover/default_course.jpg')
+                        .detail-wrapper
+                            p bigdata课程1
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程2
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程3
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程4
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+                li > .content
+                    .img
+                        .img-cont > a.normal(href='#/study/course/detail/')
+                            img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+                        .detail-wrapper
+                            p bigdata课程5
+                            a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+
+                    .text-overflow.title bigdata课程1
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + | 5524
+                        .item(title='评分') > i.iconfont.icon-star + | 5
+
+            #pager.pagination
+                li.hover-main-color.active.bg-main-color 1
+                li.hover-main-color 2
+                li.hover-main-color 3

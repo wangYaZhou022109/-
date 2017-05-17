@@ -6,6 +6,7 @@ exports.bindings = {
     img: true,
     state: false,
     details: true,
+    question: true,
     down: false
 };
 exports.events = {
@@ -116,7 +117,8 @@ exports.actions = {
     'click discuss-boutique-*': 'discussboutique',
     'click discuss-del-*': 'discussdel',
     'click enjoy-*': 'enjoy',
-    'click praise-*': 'praise'
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
 };
 
 // actions绑定的方法调用前要干的事情
@@ -157,10 +159,19 @@ exports.dataForActions = {
         return payload;
     },
     praise: function(payload) {
-        var data = payload;
+        var data = {};
+        var obj = payload.id.split('_');
         data.objectType = 1;
-        return payload;
-    }
+        data.id = obj[0];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = 1;
+        data.id = obj[0];
+        return data;
+    },
 };
 
 // actions绑定的方法调用后要干的事情
@@ -196,7 +207,36 @@ exports.actionCallbacks = {
     report: function(payload) {
         this.app.message.success('举报成功！');
         this.module.dispatch('refresh', payload);
-    }
+    },
+    // praise: function() {
+    //     this.app.message.success('点赞成功！');
+    // },
+    // unpraise: function() {
+    //     this.app.message.success('取消点赞成功！');
+    // }
+    praise: function(data) {
+        // console.log(data);
+        var detail = data[0];
+        var unpraise = this.$('unpraise-' + detail.objectId);
+        var praise = this.$('praise-' + detail.objectId);
+        var me = this;
+        praise.hidden = true;
+        unpraise.hidden = false;
+        setTimeout(function() {
+            me.app.message.success('点赞成功！');
+        }, 1000);
+    },
+    unpraise: function(data) {
+        var detail = data[0];
+        var unpraise = this.$('unpraise-' + detail.objectId);
+        var praise = this.$('praise-' + detail.objectId);
+        var me = this;
+        praise.hidden = false;
+        unpraise.hidden = true;
+        setTimeout(function() {
+            me.app.message.success('取消成功！');
+        }, 1000);
+    },
 };
 
 
@@ -206,7 +246,15 @@ exports.dataForTemplate = {
             date = new Date(data.details.createTime);
         // console.log(data);
         var url = obj.details.member.headPortrait;
-        // console.log(url);
+        // console.log(obj.details.questionDiscussList.member.headPortrait);
+        var defultImg = 'images/default-userpic.png',
+            downUrl = this.bindings.down.getFullUrl();
+        _.map(obj.details.questionDiscussList || [], function(item) {
+            var r = item;
+            if (r.member) {
+                r.headPhoto = r.member.headPortrait ? (downUrl + '?id=' + r.member.headPortrait) : defultImg;
+            }
+        });
         if (typeof url === 'undefined' || url === null || url === '') {
             obj.details.member.headPortrait = 'images/default-userpic.png';
         } else {

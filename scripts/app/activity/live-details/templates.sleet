@@ -1,7 +1,7 @@
 #!handlebars
 
 module > .live-details-page
-    .live-details-banner.banner(data-region='live')
+    .live-details-banner(data-region='live')
     .page-main-wrapper
         .side(data-region='side')
         .main(data-region='main')
