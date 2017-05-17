@@ -102,6 +102,9 @@ exports.beforeRender = function() {
     var me = this;
     me.dispatch('init', this.renderOptions).then(function(data) {
         var proupId = 0;
+        if (data[0].length < 1) {
+            me.dispatch('list', proupId);
+        }
         if (data[0] != null || []) {
             proupId = data[0][0].id;
         }

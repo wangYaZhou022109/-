@@ -7,12 +7,10 @@ module > .classmate-book-page
             .classmate-content(data-region="classmate")
                 
 view('banner')
-    .banner > img.w-full(src=classDetail.bannerUrl style='max-height:100%;')
-        section.section.banner-info
-            .title-row
-                .inline-block.layout-mr(style='color:#000000') > .h3 > echo(classInfo.className)
-            .title-row > each(groups)
-                .inline-block.m-right.m-bottom.bg-white.sub-title > echo(shortName)
+    .banner
+        img.w-full(src=classDetail.bannerUrl style='max-height:100%;')
+        .classes > each(groups)
+            a.m-right(href=classUrl target='_blank') > echo(shortName)
 
 view('classmate')
     .clearfix 
