@@ -18,7 +18,7 @@ view('list')
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
-                                a(href='javascript:;') > echo(replyman)
+                                a(href='javascript:;') > echo(member.fullName)
                                 span > echo('讨论了我的问题') 
                                 span.sub-text > data(createTime)
                             .comment-operation
