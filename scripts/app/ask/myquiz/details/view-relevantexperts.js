@@ -1,14 +1,9 @@
 var _ = require('lodash/collection');
-exports.type = 'dynamic';
 exports.bindings = {
     state: false,
     details: true,
     expert: true,
     down: false
-};
-exports.events = {
-};
-exports.handlers = {
 };
 exports.dataForTemplate = {
     expert: function(data) {

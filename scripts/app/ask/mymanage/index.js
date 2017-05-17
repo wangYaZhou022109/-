@@ -58,6 +58,7 @@ exports.store = {
     }
 };
 exports.afterRender = function() {
-    this.dispatch('init');
-    this.dispatch('reviewed');
+    // this.dispatch('init');
+    // this.dispatch('reviewed');
+    return this.chain([this.dispatch('init'), this.dispatch('reviewed')]);
 };

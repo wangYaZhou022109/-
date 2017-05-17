@@ -67,8 +67,8 @@ exports.actionCallbacks = {
 
 exports.dataForTemplate = {
     knowledge: function(data) {
-        var d = data || {};
-        if (!d.knowledge.description) d.knowledge.description = '暂无';
+        var d = data.knowledge || {};
+        if (!d.description) d.description = '暂无';
         return d;
     }
 };

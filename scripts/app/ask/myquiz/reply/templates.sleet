@@ -11,7 +11,7 @@ view('content') > form
     .btn(id='discuss-answer-' + reply.id ) > echo('回复')
     each(reply.questionReplylist) > ul
         li
-            .user-pic > img(src=member.headPortrait)
+            .user-pic > img(src=headPhoto)
             .comment-content
                 .user-info
                     a(href='#') > echo( member.fullName)
@@ -20,10 +20,14 @@ view('content') > form
                 .comment-text > echo(content)
                 .comment-operation
                     .pull-left 
-                        .item > span(id='praise-'+ id data-name='id' data-value= id) > echo('赞（' + praiseNum +'）')
+                        compare(praise 'eq' true)
+                            .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
+                            .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                        else
+                            .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                            .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
                         .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                     .text-right
-                        .item > span(id='answer-'+ id) > echo('回复')
                         .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                 div(id='replyandreply-answer-'+id style='display:none')
                     input.input(name='content-' + id value='' )
