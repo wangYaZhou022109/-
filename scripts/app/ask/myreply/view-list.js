@@ -4,7 +4,8 @@ var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
-    myreply: true
+    myreply: true,
+    page: true,
 };
 
 exports.events = {
@@ -48,7 +49,8 @@ exports.handlers = {
     },
     shareTo: function(data) {
         var value = data.split('_');
-        var subject = this.bindings.page.findById(value[1]);
+        var page = this.bindings.page;
+        var subject = page.findById(value[1]);
         var templateContent = '',
             templateCode = value[0],
             webUrl = window.location.protocol + '//' + window.location.host, // 域名加端口
@@ -118,7 +120,9 @@ exports.handlers = {
 
 exports.actions = {
     'click del-question-*': 'shut',
-    'click publish-*': 'publish'
+    'click publish-*': 'publish',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
 };
 
 exports.dataForActions = {
@@ -129,7 +133,21 @@ exports.dataForActions = {
     },
     publish: function(payload) {
         return payload;
-    }
+    },
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
 };
 
 exports.actionCallbacks = {
@@ -139,3 +157,20 @@ exports.actionCallbacks = {
     }
 };
 
+exports.dataForTemplate = {
+    page: function(data) {
+        var page = data.page;
+        var me = this;
+        // var flag = true;
+        _.forEach(page, function(value) {
+            var obj = value,
+                url = obj.member.headPortrait;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return page;
+    },
+};
