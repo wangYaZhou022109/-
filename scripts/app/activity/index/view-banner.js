@@ -20,7 +20,9 @@ exports.components = [function() {
             name: 'swiper',
             options: {
                 current: 1,
-                navigation: true
+                navigation: true,
+                gocurrent: true
+
             }
         };
 
@@ -34,11 +36,12 @@ exports.components = [function() {
 exports.dataForTemplate = {
     activitys: function(data) {
         var downUrl = this.bindings.down.getFullUrl();
-        return _.map(data.activitys, function(a) {
+        return _.map(data.activitys, function(a, i) {
             return D.assign(a, {
                 coverId: a.coverId ? (downUrl + '?id=' + a.coverId) : defaultImg[a.type],
                 description: a.description
-                    && a.description.replace(/<[^>]+>/g, '').substr(0, 20)
+                    && a.description.replace(/<[^>]+>/g, '').substr(0, 20),
+                i: i
             });
         });
     }

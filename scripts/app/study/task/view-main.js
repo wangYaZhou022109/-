@@ -31,3 +31,11 @@ exports.components = [
         return false;
     }
 ];
+
+exports.dataForTemplate = {
+    state: function(data) {
+        var state = data.state;
+        state.flag = state.flag ? state.flag : 'desc';
+        return state;
+    }
+};

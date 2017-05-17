@@ -41,7 +41,7 @@ exports.store = {
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
 
-            if (question.answerRecord) {
+            if (!data.gainScore && question.answerRecord) {
                 data.gainScore = question.answerRecord.score;
             }
 

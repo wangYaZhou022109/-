@@ -67,11 +67,15 @@ getPageHtml = function(pageCount, currentPage) {
             html.push('<li class="hover-main-color" data-dir="prev">',
                 '<i class="iconfont icon-arrow-left scale-1"></i></li>');
         }
-        if (pageCount > pageBtns) {
+        if (pageCount > (pageBtns + 1)) {
             if (currentPage <= pageBtns) {
                 html = getPageBtnHtml(html, [1, 2, 3, 4, 5], currentPage);
-                if (currentPage === pageBtns) html = getPageBtnHtml(html, [6], currentPage);
-                html.push('<li class="hover-main-color">...</li>');
+                if (currentPage === pageBtns) {
+                    html = getPageBtnHtml(html, [6], currentPage);
+                }
+                if ((pageCount - 2) > currentPage) {
+                    html.push('<li class="hover-main-color">...</li>');
+                }
                 html = getPageBtnHtml(html, [pageCount], currentPage);
             } else {
                 html = getPageBtnHtml(html, [1, 2, 3], currentPage);
@@ -88,7 +92,7 @@ getPageHtml = function(pageCount, currentPage) {
                             currentPage);
                     } else {
                         if (currentPage === pageCount - 3) html = getPageBtnHtml(html, [pageCount - 4], currentPage);
-                        html = getPageBtnHtml(html, [pageCount - 3, pageCount - 2, pageCount - 1, pageCount],
+                        html = getPageBtnHtml(html, [pageCount - 2, pageCount - 1, pageCount],
                             currentPage);
                     }
                 }

@@ -21,7 +21,7 @@ exports.handlers = {
                 }
 
                 if (C.isOverRange(v, score)) {
-                    C.setError('分数超出范围', this.$('error'), this.$('goal'));
+                    C.setError('试题总分只有' + score + '分，请重新评分', this.$('error'), this.$('goal'));
                     this.$('goal').value = '';
                     return false;
                 }

@@ -39,7 +39,7 @@ exports.store = {
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             data.detailMode = payload.mode;
 
-            if (question.answerRecord) {
+            if (!data.gainScore && question.answerRecord) {
                 data.gainScore = question.answerRecord.score;
             }
 

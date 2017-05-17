@@ -1,0 +1,46 @@
+#!handlebars
+
+module > .stuname-page
+    .stuname(data-region="stuname")
+
+view('stuname')
+    .form.layout-mt-small
+        .form-row
+            label 姓名
+            .content > input.input(placeholder="陈柱端")
+        .form-row   
+            label 公司
+            .content > input.input(placeholder="报名信息带入")
+        .form-row   
+            label(style="width:7em;") 二级部门/单位
+            .content > input.input(placeholder="报名信息带入")
+        .form-row   
+            label 职务
+            .content > input.input(placeholder="报名信息带入")
+        .form-row   
+            label 职级
+            .content 
+                select.w-full
+                    option 集团公司领导
+                    option 总经理级
+                    option 副总经理级
+                    option 
+        .form-row
+            label.required 性别
+            .content 
+                select.w-full
+                    option 男
+                    option 女
+        .form-row   
+            label.required 民族
+            .content > input.input 汉族
+        .form-row
+            label.required 移动电话
+            .content > input.input(placeholder="1234567890（引用个人信息数据，点击可修改）")
+        .form-row
+            label.required 邮箱
+            .content > input.input(placeholder="aaa@126.com（引用个人信息数据，点击可修改）")
+        .form-row
+            label 备注
+            .content > textarea.w-full(rows="5" placeholder="补充信息")
+        

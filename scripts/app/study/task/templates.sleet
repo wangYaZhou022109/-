@@ -7,7 +7,10 @@ module > .achievement-content.main-side
     .achievement-main(data-region='main')
 
 view('side')
+    .row.col-sm-12
+        .btn.block#viewDesc 作业说明
     ul.m-top
+        .m-bottom > strong > string('study.task.attachment') ：
         each(task.attachments)
             li.mb-1
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
@@ -15,6 +18,24 @@ view('side')
                     a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
                 else
                     a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+    if(userAttachments)
+        br
+        ul.m-top
+            .m-bottom > strong > string('study.user.attachment') ：
+            each(userAttachments)
+                li.btn.block(id='viewUseDesc-'+attachmentId) 作业详情
+                li.mb-1
+                    a.pull-right.m-left(href=downUrl download=name) > string('download')
+                    if(preview)
+                        a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
+                    else
+                        a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+    if(section.progress.comments)
+        br
+        ul.m-top
+            .m-bottom > strong 评语
+            li
+                span > echo(section.progress.comments)
 view('head')
     .pull-left.title > echo(task.name)
     .text-right
@@ -34,25 +55,30 @@ view('head')
         compare(progress.finishStatus 'eq' 0)
             .btn#submitTask 提交作业
         compare(progress.finishStatus 'eq' 6)
-            .btn#submitTask 重新编辑
+            .btn#submitTask 重新提交
 
 view('main')
-    .preview-content
-        .h3.m-bottom 作业说明
-        p.text-overflow
-            span > @echo(task.description)
-            # a.pointer#viewDesc 查看详细
+    compare(state.flag 'eq' 'desc')
+        .preview-content
+            .h3.m-bottom 作业说明
+            p.text-overflow
+                span > @echo(task.description)
+    compare(state.flag 'eq' 'useDesc')
+        .preview-content
+            .h3.m-bottom 作业详情
+            p.text-overflow
+                span > @echo(state.description)
+    else
         #viewPdf
 
 view('edit')
     form.vertical
-        .row
-            label 附件名称:
-            input.input(name='name' value=attachment.name)
+        .row.col-sm-12
+            input.input(name='name' value=attachment.name placeholder='附件名称(可修改)')
             a.btn#uploadFile 上传附件
         .row
             label 作业详情:
-            textarea.input.w-full#description(name='description' rows='5') > echo(attachment.description)
+            textarea.input.w-full#description(name='description' rows='5') > @echo(attachment.description)
 view('upload')
     .row
         #uploader

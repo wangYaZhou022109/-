@@ -65,8 +65,8 @@ items = {
         var progress = section.progress || { finishStatus: 0 },
             auditSocre = progress.score || 0,
             score = auditSocre,
-            btnText = { 0: '查看作业', 1: '查看详情', 2: '查看详情', 5: '查看详情', 6: '重新提交' },
-            statusText = { 1: '成绩：' + score, 2: '成绩：' + score, 5: '待评审', 6: '成绩：' + score };
+            btnText = { 0: '查看作业', 1: '查看作业', 2: '查看详情', 5: '查看详情', 6: '重新提交' },
+            statusText = { 2: '成绩：' + score, 5: '待评审', 6: '成绩：' + score };
         return {
             btnText: btnText[progress.finishStatus],
             statusText: statusText[progress.finishStatus]

@@ -54,6 +54,7 @@ exports.store = {
             mixin: {
                 init: function(exam) {
                     var types = this.module.store.models.types,
+                        answer = this.module.store.models.answer,
                         examRecord = exam.examRecord;
                     this.load();
                     if (!this.data) {
@@ -65,10 +66,15 @@ exports.store = {
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             noAnswerCount: exam.paper.questionNum,
                             answeredCount: constant.ZERO,
-                            singleMode: exam.paperShowRule === constant.SINGLE_MODE,
-                            currentQuestion: types.getFirstQuestion()
+                            singleMode: exam.paperShowRule === constant.SINGLE_MODE
+                                && exam.paper.questions.length > 1,
+                            currentQuestion: types.getFirstQuestion(),
+                            paper: exam.paper
                         };
                         this.save();
+                    }
+                    if (answer && answer.data.length > 0) {
+                        this.calculate();
                     }
                 },
                 selectQuestion: function(id) {
@@ -98,7 +104,8 @@ exports.store = {
             mixin: {
                 init: function(questions) {
                     var map = {},
-                        j = 0;
+                        j = 0,
+                        me = this;
 
                     this.load();
                     if (!this.data && questions) {
@@ -123,6 +130,7 @@ exports.store = {
                                 status: itemStatus.INIT
                             }));
                         });
+
                         this.data = _.map(map, function(o) {
                             if (j === constant.ZERO) {
                                 D.assign(o.questions[0], { status: itemStatus.CURRENT });
@@ -132,7 +140,10 @@ exports.store = {
                                 D.assign(q, {
                                     typeIndex: j,
                                     totalCount: o.size,
-                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc'])
+                                    questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc']),
+                                    status: q.status === itemStatus.CURRENT
+                                        ? itemStatus.CURRENT
+                                            : me.module.options.getCurrentStatus.call(me.module, q.id)
                                 });
                             });
 
@@ -143,6 +154,7 @@ exports.store = {
                                 isCurrent: j++ === constant.ZERO
                             });
                         });
+
                         this.sortQuestion();
                         this.save();
                     }
@@ -384,7 +396,7 @@ exports.store = {
             D.assign(this.models.exam.data, {
                 noticed: true
             });
-            this.models.exam.changed();
+            this.models.state.changed();
         }
     }
 };

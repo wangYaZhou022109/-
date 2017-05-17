@@ -1,3 +1,5 @@
+var D = require('drizzlejs');
+
 exports.items = {
     main: 'main'
 };
@@ -26,6 +28,9 @@ exports.store = {
                 state.set({ duration: 0 });
             }
             state.callback = payload.callback;
+        },
+        setInterval: function(payload) {
+            D.assign(this.models.state.data, payload);
         }
     }
 };
@@ -33,3 +38,11 @@ exports.store = {
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
+
+exports.mixin = {
+    clearIntervalIt: function() {
+        var si = this.store.models.state.data.si;
+        clearInterval(si);
+    }
+};
+

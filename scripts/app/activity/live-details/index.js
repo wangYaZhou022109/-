@@ -1,3 +1,6 @@
+var STATUS_UNSTART = 1, // 直播状态-未开始
+    STATUS_FINISH = 3; // 直播状态-已完成
+
 exports.items = {
     live: 'live',
     main: 'main',
@@ -24,24 +27,30 @@ exports.store = {
                 access = this.models.access,
                 accessList = this.models.accessList,
                 collect = this.models.collect,
-                course = this.models.courses;
+                course = this.models.courses,
+                me = this;
             collect.params = { businessId: params.id };
             gensee.set(params);
             course.set(params);
             sub.set(params);
             accessList.set(params);
             access.set({ genseeId: params.id });
-            this.get(gensee);
-             // 收藏
-            this.get(collect);
-            // 直播回顾
-            this.get(course);
-            // 预约状态
-            this.get(sub);
-            // 参加用户
-            this.get(accessList);
-            // 保存参加用户
-            this.save(access);
+            return this.get(gensee).then(function() {
+                // 收藏
+                me.get(collect);
+                // 预约状态 - 未开始的直播才需要查询
+                if (gensee.data.status === STATUS_UNSTART) {
+                    me.get(sub);
+                }
+                // 直播回顾 - 已结束的直播才需要查询
+                if (gensee.data.status === STATUS_FINISH) {
+                    me.get(course);
+                }
+                // 参加用户
+                me.get(accessList);
+                // 保存参加用户
+                me.save(access);
+            });
         },
         cancelsubGensee: function(data) {
             var cancelsubGensee = this.models.cancelsubGensee,

@@ -84,36 +84,28 @@ exports.handlers = {
             sectionType = element.getAttribute('data-sectionType'),
             section = courseModel.findSection(id),
             chapter = courseModel.findChapter(section.chapterId);
-        var beforeSectionId = this.bindings.playerState.data.sectionId;
+        var oldSectionId = this.bindings.playerState.data.sectionId;
+        var beforeSection = courseModel.findBeforeSection(id);
         var hander = showHandler(section).bind(this);
-        var beforeProcess = progress.findProgress(beforeSectionId);
+        var beforeProcess = beforeSection ? progress.findProgress(beforeSection.referenceId) : null;
         e.preventDefault();
         // 如果点击的是当前节,直接返回
-        if (beforeSectionId === id && courseUtil.judgeSection(sectionType)) {
+        if (oldSectionId === id && courseUtil.judgeSection(sectionType)) {
             return false;
         }
-
         // 如果没学习过的 才判断顺序
         if (!progress.findProgress(section.referenceId)) {
             // 如果必须按章顺序
             if (courseModel.data.learnSequence === 1) {
-                if (!courseModel.isChapterSequence(beforeSectionId, id)) {
+                if (!courseModel.isChapterSequence(oldSectionId, id)) {
                     this.app.message.error('必须按章顺序学习');
                     return false;
                 }
-                // if (beforeProcess === null || beforeProcess.finishStatus === 1) {
-                //     this.app.message.error('上一节没学完');
-                //     return false;
-                // }
             }
             // 如果当前所在章的规则必须按顺序
             if (chapter.learnSequence === 1) {
-                if (courseModel.findNextSectionId(beforeSectionId) !== id) {
-                    this.app.message.error('必须按节顺序学习');
-                    return false;
-                }
                 if (!beforeProcess || beforeProcess.finishStatus === 1) {
-                    this.app.message.error('上一节没学完');
+                    this.app.message.error('前面的课节还没学完');
                     return false;
                 }
             }
