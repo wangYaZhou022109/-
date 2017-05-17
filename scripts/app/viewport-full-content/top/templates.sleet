@@ -50,12 +50,15 @@ view('shortcut')
                     .layout-mt-small.sub-text.small-font.text-center.pointer 清空历史
                     hr
                     .m-left
-                        .m-top 热门搜索
+                        .m-top.sub-text.small-font 热门搜索
                         .clearfix.m-top
                             .tag-btn.radius 搞疲了
                             .tag-btn.radius 捣空
                             .tag-btn.radius 互联网
                             .tag-btn.radius 产品设计
+                            .tag-btn.radius 捣空
+                            .tag-btn.radius 互联网
+                            
         .item.small-font.drop-down-wrapper.right
             .drop-down-btn
                 span#selected-name > echo(organization.name)
