@@ -1,5 +1,5 @@
 .addexam-page {
-    .form {
+    & .form {
         & .form-row {
             float: none;
             vertical-align: top;
