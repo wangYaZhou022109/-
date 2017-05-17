@@ -10,6 +10,7 @@ exports.store = {
         myreply: { url: '../ask-bar/my-reply/replys' },
         shut: { url: '../ask-bar/question/close-status' },
         discuss: { url: '../ask-bar/question-discuss' },
+        reply: { url: '../ask-bar/question-reply' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
         params: { data: { isOverdue: '1' } },
@@ -40,11 +41,6 @@ exports.store = {
         shut: function(payload) {
             this.models.shut.set(payload);
             return this.put(this.models.shut);
-        },
-        publish: function(payload) {
-            var discuss = this.models.discuss;
-            discuss.set(payload);
-            return this.save(discuss);
         },
         page: function() {
             var myreply = this.models.myreply;
@@ -85,6 +81,15 @@ exports.store = {
 
                 page.changed();
             });
+        },
+        publish: function(payload) {
+            // var discuss = this.models.discuss;
+            // discuss.set(payload);
+            // return this.save(discuss);
+            var reply = this.models.reply,
+                data = payload;
+            reply.set(data);
+            return this.save(reply);
         },
     }
 };

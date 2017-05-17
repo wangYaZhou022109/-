@@ -49,7 +49,9 @@ exports.store = {
                     return speechset;
                 }
             }
-        }
+        },
+        expert: { url: '../ask-bar/myquiz/findExpert' },
+        question: { url: '../ask-bar/myquiz/findQuestion' },
     },
     callbacks: {
         refreshrelpy: function() {
@@ -79,16 +81,36 @@ exports.store = {
             var speech = this.models.speech;
             return this.get(speech);
         },
+        // questionDetails: function(payload) {
+        //     var details = this.models.details,
+        //         data = payload;
+        //     details.set({ id: data.id });
+        //     return this.get(details);
+        // },
+        expert: function(payload) {
+            var expert = this.models.expert;
+            expert.set(payload);
+            return this.get(expert);
+        },
+        question: function(payload) {
+            var question = this.models.question;
+            question.set(payload);
+            return this.get(question);
+        },
         questionDetails: function(payload) {
             var details = this.models.details,
-                data = payload;
-            details.set({ id: data.id });
-            return this.get(details);
-        },
-        details: function(payload) {
-            var details = this.models.details;
-            details.set(payload);
-            return this.get(details);
+                me = this,
+                expert = this.models.expert,
+                question = this.models.question,
+                d = payload;
+            details.set({ id: d.id });
+            return this.get(details).then(function(data) {
+                var params = _.map(data[0].topicList, 'id').join(',');
+                expert.params.ids = params;
+                question.params.ids = params;
+                me.get(expert);
+                me.get(question);
+            });
         },
         refresh: function(payload) {
             var details = this.models.details,
@@ -182,45 +204,39 @@ exports.store = {
                 me.get(details);
             });
         },
-        praise: function(payload) {
-            var praise = this.models.praise,
-                me = this,
-                details = this.models.details;
-            praise.set(payload);
-            details.set({ id: this.models.details.data.id, concernType: '3' });
-            return this.post(praise).then(function() {
-                me.app.message.success('点赞成功');
-                me.get(details);
-            });
-        },
-        unpraise: function(payload) {
-            var unpraise = this.models.unpraise,
-                me = this,
-                details = this.models.details;
-            details.set({ id: this.models.details.data.id, objectType: '3' });
-            // console.log(details);
-            unpraise.set({ id: payload.id, objectType: '3' });
-            return this.put(unpraise).then(function() {
-                me.app.message.success('取消成功');
-                me.get(details);
-            });
-        },
-        // unfollow: function(payload) {
-        //     var unfollow = this.models.unfollow;
-        //     unfollow.set(payload);
-        //     return this.put(unfollow);
-        // },
         // praise: function(payload) {
-        //     var praise = this.models.praise;
+        //     var praise = this.models.praise,
+        //         me = this,
+        //         details = this.models.details;
         //     praise.set(payload);
-        //     return this.put(praise);
+        //     details.set({ id: this.models.details.data.id, concernType: '3' });
+        //     return this.post(praise).then(function() {
+        //         me.app.message.success('点赞成功');
+        //         me.get(details);
+        //     });
         // },
         // unpraise: function(payload) {
-        //     var unpraise = this.models.unpraise;
-        //     console.log(payload);
-        //     unpraise.set(payload);
-        //     return this.put(unpraise);
+        //     var unpraise = this.models.unpraise,
+        //         me = this,
+        //         details = this.models.details;
+        //     details.set({ id: this.models.details.data.id, objectType: '3' });
+        //     // console.log(details);
+        //     unpraise.set({ id: payload.id, objectType: '3' });
+        //     return this.put(unpraise).then(function() {
+        //         me.app.message.success('取消成功');
+        //         me.get(details);
+        //     });
         // },
+        praise: function(payload) {
+            var praise = this.models.praise;
+            praise.set(payload);
+            return this.post(praise);
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise;
+            unpraise.set(payload);
+            return this.put(unpraise);
+        },
         concern: function(payload) {
             var concern = this.models.concern;
             concern.set(payload);
@@ -230,8 +246,6 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('questionDetails', this.renderOptions);
-    // this.dispatch('concern', this.renderOptions);
-    this.dispatch('speech');
+    return this.chain([this.dispatch('questionDetails', this.renderOptions), this.dispatch('speech')]);
 };
 

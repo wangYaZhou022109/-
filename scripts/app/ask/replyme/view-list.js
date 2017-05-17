@@ -12,9 +12,13 @@ exports.events = {
     'click myreply-details-*': 'showDetails',
     'click report-*': 'report',
     'click shareTo-*': 'shareTo',
+    'click discuss-*': 'discuss',
 };
 
 exports.handlers = {
+    discuss: function(payload) {
+        $(this.$('comment-reply-' + payload)).toggleClass('show');
+    },
     toggleMore: function(id, e, target) {
         var region;
         var el = $(target).parents('.activity-category')[0];
@@ -117,7 +121,8 @@ exports.actions = {
     'click remove-*': 'remove',
     'click concern-*': 'concern',
     'click enjoy-*': 'enjoy',
-    'click report-*': 'report'
+    'click report-*': 'report',
+    'click publish-*': 'publish',
 };
 
 exports.dataForActions = {
@@ -132,6 +137,9 @@ exports.dataForActions = {
             });
         });
     },
+    publish: function(payload) {
+        return payload;
+    },
     concern: function() {
     },
     enjoy: function() {
@@ -144,7 +152,11 @@ exports.actionCallbacks = {
     remove: function() {
         this.app.message.success('删除成功！');
         this.module.dispatch('init');
-    }
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
+        // this.module.dispatch('init');
+    },
 };
 
 exports.dataForTemplate = {
