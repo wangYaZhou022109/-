@@ -16,6 +16,7 @@ exports.store = {
             state.data.classId = payload.classId;
             state.data.isAutoApprove = 0;
             state.data.quotaType = 1;
+            state.data.role = payload.role;
             this.get(classQuota).then(function(data) {
                 var ret = data[0];
                 if (ret) {
@@ -36,5 +37,8 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: this.renderOptions.state.classId });
+    return this.dispatch('init', {
+        classId: this.renderOptions.state.classId,
+        role: this.renderOptions.state.role
+    });
 };

@@ -75,11 +75,20 @@ exports.actionCallbacks = {
 exports.dataForTemplate = {
     trainees: function(data) {
         var trainees = data.trainees,
-            pageNum = this.bindings.trainees.getPageInfo().page;
+            pageNum = this.bindings.trainees.getPageInfo().page,
+            state = this.bindings.state.data;
         _.map(trainees || [], function(trainee, i) {
             var e = trainee;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = state.role !== 2;
         });
         return trainees;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 2) {
+            return true;
+        }
+        return false;
     }
 };

@@ -56,8 +56,11 @@ exports.handlers = {
         this.module.dispatch('moveDown', id);
     },
     showNameInput: function(id) {
-        $(this.$('input-group-name' + id)).css('display', 'block');
-        $(this.$('label-group-name' + id)).css('display', 'none');
+        var state = this.bindings.state.data;
+        if (state.role !== 2) {
+            $(this.$('input-group-name' + id)).css('display', 'block');
+            $(this.$('label-group-name' + id)).css('display', 'none');
+        }
     },
     updateName: function(id) {
         var val = $(this.$('input-group-name' + id)).val().trim();
@@ -105,6 +108,14 @@ exports.actions = {
 exports.dataForActions = {
     groupTrainees: function(id) {
         this.bindings.state.data.groupId = id.id;
+    },
+    saveGroup: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 2) {
+            this.app.viewport.closeModal();
+            return false;
+        }
+        return true;
     }
 };
 
@@ -126,10 +137,19 @@ exports.actionCallbacks = {
 exports.dataForTemplate = {
     group: function(data) {
         var group = data.group;
+        var state = this.bindings.state.data;
         _.map(group || [], function(g, i) {
             var e = g;
             e.i = i + 1;
+            e.isGrant = state.role !== 2;
         });
         return group;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role === 2) {
+            return false;
+        }
+        return true;
     }
 };

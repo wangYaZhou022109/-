@@ -5,7 +5,8 @@ exports.title = '分组学员详情';
 
 exports.bindings = {
     groupTrainees: true,
-    exportGroupTrainee: true
+    exportGroupTrainee: true,
+    state: false
 };
 
 exports.auto = true;
@@ -75,10 +76,12 @@ exports.handlers = {
 exports.dataForTemplate = {
     fmtrainees: function(data) {
         var groupTrainees = data.groupTrainees,
-            pageNum = this.bindings.groupTrainees.getPageInfo().page;
+            pageNum = this.bindings.groupTrainees.getPageInfo().page,
+            state = this.bindings.state.data;
         _.map(groupTrainees || [], function(gt, i) {
             var e = gt;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = state.role !== 2;
         });
         return groupTrainees;
     },
@@ -93,10 +96,20 @@ exports.dataForTemplate = {
         });
         url += ('access_token=' + token);
         return url;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role === 2) {
+            return false;
+        }
+        return true;
     }
 };
 
 
 exports.beforeClose = function() {
-    this.renderOptions.callback();
+    var state = this.bindings.state.data;
+    if (state.role !== 2) { // 不具有操作权限不需要回调刷新
+        this.renderOptions.callback();
+    }
 };

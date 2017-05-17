@@ -22,11 +22,15 @@ view('search') > form.vertical
 view('main')
     .membership-table.layout-mt-small.clearfix
         .h5.pull-left.strong > echo('报名列表')
-        .pull-right
-            button.btn.tag-btn#allAudit > echo('审核')
+        if(isGrant)
+            .pull-right
+                button.btn.tag-btn#allAudit > echo('审核')
+        else
+            br
     table.table
         thead > tr
-            th > input(type='checkbox' id='checkAll')
+            if(isGrant)
+                th > input(type='checkbox' id='checkAll')
             th > echo('序号')
             th > echo('姓名')
             th > echo('员工编号')
@@ -36,21 +40,32 @@ view('main')
             th > echo('职级')
             th > echo('手机')
             th > echo('状态')
-            th > echo('操作')
-        tbody > each(trainees) > tr
-            td > input(type='checkbox' id='check-item'+id name='traineeId' value=id)
-            td > echo(i)
-            td > a(id='detail'+id data-name='id' data-value=id) > echo(member.fullName)
-            td > echo(member.name)
-            td > echo(companyName)
-            td > echo(organizationName)
-            td > echo(member.jobName)
-            td > echo(levelName)
-            td > echo(phoneNumber)
-            td > map('trainee-show-auditStatus' auditStatus)
-            td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId href='javascript:;') > echo('审核')
+            if(isGrant)
+                th > echo('操作')
+        tbody
+            each(trainees) > tr
+                if(isGrant)
+                    td > input(type='checkbox' id='check-item'+id name='traineeId' value=id)
+                td > echo(i)
+                td
+                    if(isGrant)
+                        a(id='detail'+id data-name='id' data-value=id) > echo(member.fullName)
+                    else
+                        echo(member.fullName)
+                td > echo(member.name)
+                td > echo(companyName)
+                td > echo(organizationName)
+                td > echo(member.jobName)
+                td > echo(levelName)
+                td > echo(phoneNumber)
+                td > map('trainee-show-auditStatus' auditStatus)
+                if(isGrant)
+                    td > a(id='audit'+id data-name='id' data-value=id organizationId=organizationId href='javascript:;') > echo('审核')
             else
-                tr > td(colspan='11') > p.text-center > string('no-data')
+                if(isGrant)
+                    tr > td(colspan='11') > p.text-center > string('no-data')
+                else
+                    tr > td(colspan='9') > p.text-center > string('no-data')
     #pager.pagination(style='float:none')
 
 view('situation') > .signup-page.signup

@@ -110,11 +110,20 @@ exports.actionCallbacks = {
 exports.dataForTemplate = {
     iftrainees: function(data) {
         var iftrainees = data.iftrainees,
-            pageNum = this.bindings.iftrainees.getPageInfo().page;
+            pageNum = this.bindings.iftrainees.getPageInfo().page,
+            state = this.bindings.state.data;
         _.map(iftrainees || [], function(iftrainee, i) {
             var e = iftrainee;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = state.role !== 2;
         });
         return iftrainees;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 2) {
+            return true;
+        }
+        return false;
     }
 };

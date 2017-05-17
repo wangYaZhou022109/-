@@ -166,10 +166,12 @@ exports.components = [{
 exports.dataForTemplate = {
     fmtrainees: function(data) {
         var fmtrainees = data.fmtrainees,
-            pageNum = this.bindings.fmtrainees.getPageInfo().page;
+            pageNum = this.bindings.fmtrainees.getPageInfo().page,
+            state = this.bindings.state.data;
         _.map(fmtrainees || [], function(fmtrainee, i) {
             var e = fmtrainee;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = state.role !== 2;
         });
         return fmtrainees;
     },
@@ -184,5 +186,12 @@ exports.dataForTemplate = {
         });
         url += ('access_token=' + token);
         return url;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 2) {
+            return true;
+        }
+        return false;
     }
 };

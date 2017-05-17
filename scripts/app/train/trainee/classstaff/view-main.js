@@ -50,8 +50,11 @@ exports.handlers = {
         $(me.$('staff-shuxian' + id)).css('display', 'inline');
     },
     showCallNameInput: function(id) {
-        $(this.$('input-callName' + id)).css('display', 'block');
-        $(this.$('label-callName' + id)).css('display', 'none');
+        var state = this.bindings.state.data;
+        if (state.role !== 2) {
+            $(this.$('input-callName' + id)).css('display', 'block');
+            $(this.$('label-callName' + id)).css('display', 'none');
+        }
     },
     updateCallName: function(id) {
         var me = this;
@@ -143,11 +146,20 @@ exports.actionCallbacks = {
 exports.dataForTemplate = {
     classstaffs: function(data) {
         var classstaffs = data.classstaffs,
-            pageNum = this.bindings.classstaffs.getPageInfo().page;
+            pageNum = this.bindings.classstaffs.getPageInfo().page,
+            state = this.bindings.state.data;
         _.map(classstaffs || [], function(classstaff, i) {
             var e = classstaff;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = state.role !== 2;
         });
         return classstaffs;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 2) {
+            return true;
+        }
+        return false;
     }
 };
