@@ -51,7 +51,6 @@ exports.store = {
             // var discuss = this.models.discuss;
             // discuss.set(payload);
             // return this.save(discuss);
-            console.log(payload);
             var reply = this.models.reply,
                 data = payload;
             reply.set(data);
