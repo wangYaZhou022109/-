@@ -3,7 +3,7 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你共回复了'+myreply.length+'个问题')
+        .pull-right > echo('你共回复了'+myreply.length+'次')
         ul
             li.active > echo('我的回复')
     .comment-list.ask-list > ul
@@ -36,15 +36,13 @@ view('list')
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                    #  .item > span(id = 'del-question-' + question.id data-name='id' data-value=question.id) > string('delete')
+                                    .item > span(id = 'del-question-' + question.id data-name='id' data-value=question.id) > string('delete')
                                     form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=organizationId)
                                         input.input(type='hidden' name='id' value=questionDiscuss.id)
                                         .btn(id='publish-' + questionDiscuss.id) > string('publish')
-                            .comment-reply.m-top
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复
+                                        
                 compare(readStatus 'eq' 1)                               
                     li
                         .user-pic > img(src='images/d2.jpg')
@@ -66,10 +64,15 @@ view('list')
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
                                     .item > a.normal(href='javascript:;') 删除
-                            .comment-reply.m-top
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')
+
+                                    
             compare(question.type 'eq' 2)
                 compare(questionDiscuss.readStatus 'eq' 2)
                     #  compare(questionDiscuss.auditStatus 'eq' 0)
@@ -87,7 +90,12 @@ view('list')
                                 .text-right
                                     .item > span.color-ing > string('auditStatus0')
                                     .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')    
-                                      
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')
+
                     compare(questionDiscuss.auditStatus 'eq' 1)
                         li
                             .user-pic > img(src='images/d2.jpg')
@@ -110,9 +118,12 @@ view('list')
                                                     .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                     .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                         .item > a.normal(href='javascript:;') 删除
-                                .comment-reply.m-top
-                                    textarea.input.w-full.block(rows="1")
-                                    .btn 回复
+                                        form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')
+
                 compare(readStatus 'eq' 1)                              
                     li
                         .user-pic > img(src='images/d2.jpg')
@@ -134,9 +145,11 @@ view('list')
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                     .item > a.normal(href='javascript:;') 删除
-                            .comment-reply.m-top
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复                                                                        
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')                                                                     
 #  module
 #      div(data-region='list')
 #  view('list')

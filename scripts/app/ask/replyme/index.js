@@ -10,6 +10,8 @@ exports.store = {
     models: {
         replyme: { url: '../ask-bar/reply-me/reply-list' },
         params: { data: { isOverdue: '1' } },
+        discuss: { url: '../ask-bar/question-discuss' },
+        reply: { url: '../ask-bar/question-reply' },
         page: {
             data: [],
             params: { page: 1, size: 10 },
@@ -44,6 +46,16 @@ exports.store = {
                 page.data.push.apply(page.data, replyme.data);
                 page.changed();
             });
+        },
+        publish: function(payload) {
+            // var discuss = this.models.discuss;
+            // discuss.set(payload);
+            // return this.save(discuss);
+            console.log(payload);
+            var reply = this.models.reply,
+                data = payload;
+            reply.set(data);
+            return this.save(reply);
         },
     }
 };
