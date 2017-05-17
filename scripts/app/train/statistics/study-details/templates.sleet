@@ -18,7 +18,7 @@ view('main')
                 th > echo('联系电话')
                 th > echo('学习时长')
                 th > echo('操作')
-            tbody > each(member) > tr
+            tbody > each(courseStudyProgresss) > tr
                 td > echo(i)
                 td > echo(member.name)
                 td > echo(member.fullName)

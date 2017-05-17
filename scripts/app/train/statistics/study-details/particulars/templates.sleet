@@ -1,8 +1,7 @@
 #!handlebars
 
-module > .train-class-page
-    .page-main-wrapper
-        .div(data-region='main')
+module > .learndetail-page
+    .learndetail(data-region="main")
 
 view('main')
     table.table

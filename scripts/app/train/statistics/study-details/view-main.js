@@ -2,6 +2,8 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     courseStudyProgresss: true,
+    member: true,
+    course: true,
     state: true
 };
 
@@ -22,15 +24,18 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
-    member: function() {
-        var member = this.bindings.courseStudyProgresss.data,
+    courseStudyProgresss: function() {
+        var courseStudyProgresss = this.bindings.courseStudyProgresss.data || [],
+            course = this.bindings.course.data || [],
             a = 0,
             ss = 0, // 秒
             mm = 0, // 分
             hh = 0, // 小时
             length = '';
-        _.map(member || [], function(m, i) {
+        _.map(courseStudyProgresss || [], function(m, i) {
             var e = m;
+            var memberId = m.memberId;
+            e.studyTotalTime = _.find(course || [], ['memberId', memberId]).times;
             e.i = i + 1;
             a = e.studyTotalTime == null ? 0 : window.parseInt(e.studyTotalTime);
             hh = window.parseInt(a / 3600);
@@ -54,6 +59,6 @@ exports.dataForTemplate = {
             }
             return e.studyTotalTime;
         });
-        return member;
+        return courseStudyProgresss;
     },
 };

@@ -2,10 +2,12 @@ var _ = require('lodash/collection');
 
 exports.bindings = {
     particularss: true,
+    onLine: true
 };
 exports.dataForTemplate = {
     particularss: function() {
         var particularss = this.bindings.particularss.data,
+            onLine = this.bindings.onLine.data,
             a = 0,
             ss = 0, // 秒
             mm = 0, // 分
@@ -13,6 +15,8 @@ exports.dataForTemplate = {
             length = '';
         _.map(particularss || [], function(m, i) {
             var e = m;
+            var cId = m.courseInfo.id;
+            e.isRequired = _.find(onLine || [], ['resourceId', cId]).isRequired;
             e.i = i + 1;
             a = e.studyTotalTime == null ? 0 : window.parseInt(e.studyTotalTime);
             hh = window.parseInt(a / 3600);
