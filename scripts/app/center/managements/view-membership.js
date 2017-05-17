@@ -6,7 +6,8 @@ exports.events = {
     'click verify-*': 'showVerify',
     'click studentgroup': 'showStudentgroup',
     'click entersituation': 'showEntersituation',
-    'click addstudent': 'showAddstudent'
+    'click addstudent': 'showAddstudent',
+    'click stuname-*': 'showStuname'
 };
 
 exports.handlers = {
@@ -32,6 +33,10 @@ exports.handlers = {
     },
     showAddstudent: function() {
         var model = this.module.items['center/managements/addstudent'];
+        this.app.viewport.modal(model);
+    },
+    showStuname: function() {
+        var model = this.module.items['center/managements/stuname'];
         this.app.viewport.modal(model);
     }
 };

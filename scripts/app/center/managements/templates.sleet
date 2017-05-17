@@ -660,7 +660,7 @@ view('membership')
                             th 操作
                         tr
                             td 1
-                            td 学员名称
+                            td.text-main-color.pointer#stuname-1 学员名称
                             td 123
                             td 男
                             td 汉族
@@ -674,7 +674,7 @@ view('membership')
                                 a 删除
                         tr
                             td 2
-                            td 学员名称
+                            td.text-main-color.pointer#stuname-2 学员名称
                             td 123
                             td 男
                             td 汉族
@@ -688,7 +688,7 @@ view('membership')
                                 a 删除
                         tr
                             td 3
-                            td 学员名称
+                            td.text-main-color.pointer#stuname-3 学员名称
                             td 123
                             td 男
                             td 汉族
@@ -702,7 +702,7 @@ view('membership')
                                 a 删除
                         tr
                             td 4
-                            td 学员名称
+                            td.text-main-color.pointer#stuname-4 学员名称
                             td 123
                             td 男
                             td 汉族
@@ -716,7 +716,7 @@ view('membership')
                                 a 删除
                         tr
                             td 5
-                            td 学员名称
+                            td.text-main-color.pointer#stuname-5 学员名称
                             td 123
                             td 男
                             td 汉族
@@ -730,7 +730,7 @@ view('membership')
                                 a 删除
                         tr
                             td 6
-                            td 学员名称
+                            td.text-main-color.pointer#stuname-6 学员名称
                             td 123
                             td 男
                             td 汉族
