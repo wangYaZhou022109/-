@@ -1,6 +1,7 @@
 exports.bindings = {
     classId: true,
-    bus: true
+    bus: true,
+    trainee: true
 };
 
 exports.events = {
@@ -42,5 +43,15 @@ exports.actionCallbacks = {
     },
     questionnaire: function() {
         this.app.viewport.modal(this.module.items.questionnaire);
-    },
+    }
+};
+
+exports.dataForTemplate = {
+    isGrant: function() {
+        var trainee = this.bindings.trainee.data || {};
+        if (trainee.id) {
+            return true;
+        }
+        return false;
+    }
 };

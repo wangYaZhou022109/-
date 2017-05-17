@@ -95,6 +95,9 @@ exports.store = {
         },
         researchRecord: {
             url: '../train/questionnaire-survey/get-by-research'
+        },
+        trainee: {
+            url: '../train/trainee/current-trainee'
         }
     },
 
@@ -242,10 +245,16 @@ exports.store = {
                 D.assign(me.models.researchRecord.params, { researchId: data[0].id });
                 return me.get(me.models.researchRecord);
             });
+        },
+        getTrainee: function(payload) {
+            var trainee = this.models.trainee;
+            trainee.clear();
+            trainee.params = { type: 0, classId: payload.classId };
+            this.get(trainee);
         }
     }
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
+    this.chain([this.dispatch('init', this.renderOptions), this.dispatch('getTrainee', this.renderOptions)]);
 };
