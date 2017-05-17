@@ -59,7 +59,7 @@ module.exports = {
     'positive-bracket': '(',
     'previous-step': '上一步',
     'prompt-1': '暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧 ！',
-    'question-title': '问题标题',
+    'question-title': '文章标题',
     question: '问题',
     'updated-discussion': '参与讨论',
     share: '文章',
