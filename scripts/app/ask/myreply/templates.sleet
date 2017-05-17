@@ -9,7 +9,7 @@ view('list')
     .comment-list.ask-list > ul
         #  li.text-right
         #      echo('我的提问'+'你共提问了'+questions.length+'个问题') 
-        each(myreply)
+        each(page)
             compare(question.type 'eq' 1)
                 compare(questionDiscuss.readStatus 'eq' 2)        
                     li
@@ -19,13 +19,16 @@ view('list')
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
-                                span > echo('讨论了'+member.fullName + '的问题')
+                                span > echo('讨论了' + member.fullName + '的问题')
                                 span.sub-text > date(questionDiscuss.createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自问题:') + a(id='myreply-details-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
                                     #  .item > a.normal(href='javascript:;') 关注
-                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
+                                    compare(praise 'eq' true)
+                                        .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                    else
+                                        .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                     .item(id='discuss-' + questionDiscuss.id ) > string('comment') +  echo('(' + discussList.length +')')
                                     .item > .share-bar
                                         .drop-down-wrapper

@@ -9,115 +9,119 @@ view('list')
     .comment-list.ask-list > ul
         #  li.text-right
         #      echo('我的提问'+'你共提问了'+questions.length+'个问题') 
-        each(replyme)
+        each(page)
             compare(question.type 'eq' 1)
-                li
-                    .user-pic > img(src='images/d2.jpg')
-                    .comment-content
-                        .h4 > echo(title)
-                        .comment-text > echo(questionDiscuss.content)
-                        .user-info
-                            a(href='javascript:;') > echo(replyman)
-                            span > echo('讨论了我的问题') 
-                            span.sub-text > data(createTime)
-                        .comment-operation
-                            .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
-                            .text-right
-                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                .item > a.normal(href='javascript:;') 添加讨论
-                                .item > .share-bar
-                                    .drop-down-wrapper
-                                        i.iconfont.icon-share-2(title='分享')
-                                        form.drop-down-content > .content
-                                            .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                            .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                .item > a.normal(href='javascript:;') 删除
-                        .comment-reply.m-top
-                            textarea.input.w-full.block(rows="1")
-                            .btn 回复
-                li
-                    .user-pic > img(src='images/d2.jpg')
-                    .comment-content
-                        .h4 > echo(title)
-                        .comment-text > echo(content)
-                        .user-info
-                            a(href='javascript:;') > echo(replyman)
-                            span > echo('回复了我对问题的讨论') 
-                            span.sub-text > data(createTime)
-                        .comment-operation
-                            .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
-                            .text-right
-                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                .item > a.normal(href='javascript:;') 添加讨论
-                                .item
-                                    .drop-down-wrapper
-                                        .drop-down-btn 分享
-                                        .drop-down-content > .content
-                                            ul
-                                                li 分享1
-                                                li 分享2
-                                                li 分享3
-                                .item > a.normal(href='javascript:;') 删除
-                        .comment-reply.m-top
-                            textarea.input.w-full.block(rows="1")
-                            .btn 回复
+                compare(questionDiscuss.readStatus 'eq' 2)
+                    li
+                        .user-pic > img(src='images/d2.jpg')
+                        .comment-content
+                            .h4 > echo(title)
+                            .comment-text > echo(questionDiscuss.content)
+                            .user-info
+                                a(href='javascript:;') > echo(replyman)
+                                span > echo('讨论了我的问题') 
+                                span.sub-text > data(createTime)
+                            .comment-operation
+                                .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id + '_' + createTime) > echo(question.title)
+                                .text-right
+                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
+                                    .item > a.normal(href='javascript:;') 添加讨论
+                                    .item > .share-bar
+                                        .drop-down-wrapper
+                                            i.iconfont.icon-share-2(title='分享')
+                                            form.drop-down-content > .content
+                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    .item > a.normal(href='javascript:;') 删除
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+                compare(questionDiscuss.readStatus 'eq' 1)
+                    li
+                        .user-pic > img(src='images/d2.jpg')
+                        .comment-content
+                            .h4 > echo(title)
+                            .comment-text > echo(content)
+                            .user-info
+                                a(href='javascript:;') > echo(replyman)
+                                span > echo('回复了我对问题的讨论') 
+                                span.sub-text > data(createTime)
+                            .comment-operation
+                                .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
+                                .text-right
+                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
+                                    .item > a.normal(href='javascript:;') 添加讨论
+                                    .item
+                                        .drop-down-wrapper
+                                            .drop-down-btn 分享
+                                            .drop-down-content > .content
+                                                ul
+                                                    li 分享1
+                                                    li 分享2
+                                                    li 分享3
+                                    .item > a.normal(href='javascript:;') 删除
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
             compare(question.type 'eq' 2)
-                li
-                    .user-pic > img(src='images/d2.jpg')
-                    .comment-content
-                        .h4 > echo(title)
-                        .comment-text > echo(questionDiscuss.content)
-                        .user-info
-                            a(href='javascript:;') > echo(replyman)
-                            span > echo('讨论了我的分享') 
-                            span.sub-text > data(createTime)
-                        .comment-operation
-                            .pull-left > .sub-text 
-                                echo('来自分享：') 
-                                a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
-                            .text-right
-                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                .item > a.normal(href='javascript:;') 添加讨论
-                                .item
-                                    .drop-down-wrapper
-                                        .drop-down-btn 分享
-                                        .drop-down-content > .content
-                                            ul
-                                                li 分享1
-                                                li 分享2
-                                                li 分享3
-                                .item > a.normal(href='javascript:;') 删除
-                        .comment-reply.m-top
-                            textarea.input.w-full.block(rows="1")
-                            .btn 回复
-                li
-                    .user-pic > img(src='images/d2.jpg')
-                    .comment-content
-                        .h4 > echo(title)
-                        .comment-text > echo(content)
-                        .user-info
-                            a(href='javascript:;') > echo(replyman)
-                            span > echo('回复了我对分享的讨论') 
-                            span.sub-text > data(createTime)
-                        .comment-operation
-                            .pull-left > .sub-text
-                                echo('来自讨论:')
-                                a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
-                            .text-right
-                                .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                .item > a.normal(href='javascript:;') 添加讨论
-                                .item
-                                    .drop-down-wrapper
-                                        .drop-down-btn 分享
-                                        .drop-down-content > .content
-                                            ul
-                                                li 分享1
-                                                li 分享2
-                                                li 分享3
-                                .item > span(id ='report-' + question.type + '_' + id data-name='id' data-value=question.type +'_' + id) > string('report')
-                        .comment-reply.m-top
-                            textarea.input.w-full.block(rows="1")
-                            .btn 回复  
+                compare(questionDiscuss.readStatus 'eq' 2)
+                    li
+                        .user-pic > img(src='images/d2.jpg')
+                        .comment-content
+                            .h4 > echo(title)
+                            .comment-text > echo(questionDiscuss.content)
+                            .user-info
+                                a(href='javascript:;') > echo(replyman)
+                                span > echo('讨论了我的分享') 
+                                span.sub-text > data(createTime)
+                            .comment-operation
+                                .pull-left > .sub-text 
+                                    echo('来自分享：') 
+                                    a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
+                                .text-right
+                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
+                                    .item > a.normal(href='javascript:;') 添加讨论
+                                    .item
+                                        .drop-down-wrapper
+                                            .drop-down-btn 分享
+                                            .drop-down-content > .content
+                                                ul
+                                                    li 分享1
+                                                    li 分享2
+                                                    li 分享3
+                                    .item > a.normal(href='javascript:;') 删除
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复
+                compare(questionDiscuss.readStatus 'eq' 1)
+                    li
+                        .user-pic > img(src='images/d2.jpg')
+                        .comment-content
+                            .h4 > echo(title)
+                            .comment-text > echo(content)
+                            .user-info
+                                a(href='javascript:;') > echo(replyman)
+                                span > echo('回复了我对分享的讨论') 
+                                span.sub-text > data(createTime)
+                            .comment-operation
+                                .pull-left > .sub-text
+                                    echo('来自讨论:')
+                                    a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
+                                .text-right
+                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
+                                    .item > a.normal(href='javascript:;') 添加讨论
+                                    .item
+                                        .drop-down-wrapper
+                                            .drop-down-btn 分享
+                                            .drop-down-content > .content
+                                                ul
+                                                    li 分享1
+                                                    li 分享2
+                                                    li 分享3
+                                    .item > span(id ='report-' + question.type + '_' + id data-name='id' data-value=question.type +'_' + id) > string('report')
+                            .comment-reply.m-top
+                                textarea.input.w-full.block(rows="1")
+                                .btn 回复  
 #  module
 #      div(data-region='list')
 #  view('list')
