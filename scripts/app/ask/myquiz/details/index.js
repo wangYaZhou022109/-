@@ -218,12 +218,11 @@ exports.store = {
             var unpraise = this.models.unpraise;
             unpraise.set(payload);
             return this.put(unpraise);
-        },
+        }
     }
 };
 
 exports.beforeRender = function() {
-    // this.dispatch('init', this.renderOptions);
     return this.chain([this.dispatch('questionDetails', this.renderOptions), this.dispatch('speech')]);
 };
 

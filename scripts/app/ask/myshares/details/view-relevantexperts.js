@@ -1,27 +1,21 @@
 
-exports.type = 'dynamic';
-
-exports.events = {
-};
-
-exports.handlers = {
-    expert: true
-};
-
-
+var _ = require('lodash/collection');
 exports.bindings = {
-    relevantexperts: true
+    state: false,
+    expert: true,
+    down: false
 };
-
-exports.getEntityModuleName = function(key) {
-    return 'ask/' + key;
-};
-exports.getEntity = function() {
-    return {
-        state: this.bindings.relevantexperts.data
-    };
-};
-
-exports.dataForEntityModule = function(entity) {
-    return entity;
+exports.dataForTemplate = {
+    expert: function(data) {
+        var expert = data.expert;
+        var defultImg = 'images/default-userpic.png',
+            downUrl = this.bindings.down.getFullUrl();
+        _.map(data.expert || [], function(item) {
+            var r = item;
+            if (r.member) {
+                r.headPhoto = r.member.headPortrait ? (downUrl + '?id=' + r.member.headPortrait) : defultImg;
+            }
+        });
+        return expert;
+    }
 };

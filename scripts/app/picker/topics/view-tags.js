@@ -14,7 +14,7 @@ exports.components = [function() {
             emptyText: '请选择话题',
             limit: data.limit,
             placeholder: data.placeholder,
-            topics: data.topics,
+            tags: data.tags,
             entryCallback: function(d) {
                 return me.module.dispatch('quick-add', { name: d, typeName: data.insertTypeName }).then(function(t) {
                     var topic = t[0];

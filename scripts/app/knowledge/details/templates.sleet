@@ -27,7 +27,7 @@ view('main')
                 else
                     .item#collect
                         i.iconfont.icon-favorite(title='收藏')
-    p > echo(topics)
+    p > each(topics)
         .tag-btn > echo(name)
     p
         | 发布人：管理员
@@ -48,7 +48,7 @@ view('side')
             | 分
             a.btn.block.m-top.big.upload#download(href=downUrl download=knowledge.name)
                 span > echo('下载当前阅览知识')
-                span.small-font > pick('(-' + knowledge.integral 0) + echo('积分）')
+                span.small-font > echo('(-') + pick(knowledge.integral 0) + echo('积分)')
             .btn.block.m-top.big.custom-bg-color-5#upload
                 span 上传新知识
                 span.small-font （+2积分）

@@ -52,7 +52,7 @@ exports.store = {
             data.memberId = user.id;
             data.topicIds = payload.topicIds;
             if (data.topicIds === '') {
-                this.app.message.success('请填写您擅长话题！');
+                this.app.message.success('请选择您擅长话题！');
             }
             if (data.introduce === '') {
                 this.app.message.success('请填写您的优势！');
@@ -91,6 +91,10 @@ exports.buttons = [{
         var introduce = payload.introduce.replace(/(^\s*)|(\s*$)/g, '');
         var topicIds = payload.topicIds;
         var length = 0;
+        if (typeof topicIds === 'undefined' || topicIds === '') {
+            this.app.message.success('请选择您擅长话题！');
+            return false;
+        }
         if (introduce === '') {
             this.app.message.success('请填写您的优势！');
             return false;
@@ -102,10 +106,7 @@ exports.buttons = [{
                 return false;
             }
         }
-        if (typeof topicIds === 'undefined' || topicIds === '') {
-            this.app.message.success('请选择您擅长话题！');
-            return false;
-        }
+
         return this.dispatch('saveInner', payload);
     }
 }];
