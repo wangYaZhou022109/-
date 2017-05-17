@@ -274,7 +274,7 @@ var setOptions = {
                 var me = this,
                     f = true,
                     state = this.models.state,
-                    countDown = this.module.items['count-down'].getEntities()[0],
+                    countDown = this.module.items['count-down'].getEntities(),
                     examRecordId = this.models.exam.data.examRecord.id,
                     data = {
                         examRecordId: examRecordId,
@@ -295,7 +295,10 @@ var setOptions = {
                         } else {
                             D.assign(state.data, { over: true });
                             helper.WS.closeConnect();
-                            if (countDown.clearIntervalIt) countDown.clearIntervalIt();
+                            if (countDown) {
+                                countDown = countDown[0];
+                                countDown.clearIntervalIt();
+                            }
                             viewAnswerDetail.call(me);
                         }
                     });
