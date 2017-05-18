@@ -108,8 +108,9 @@ exports.dataForTemplate = {
 
 
 exports.beforeClose = function() {
-    var state = this.bindings.state.data;
+    var state = this.bindings.state.data,
+        groupTrainees = this.bindings.groupTrainees.data;
     if (state.role !== 2) { // 不具有操作权限不需要回调刷新
-        this.renderOptions.callback();
+        this.renderOptions.callback(groupTrainees.length);
     }
 };

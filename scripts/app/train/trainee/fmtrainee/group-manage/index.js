@@ -86,7 +86,7 @@ exports.buttons = [{
         }).then(function(data) {
             if (data[0]) {
                 me.app.message.success('保存成功!');
-                me.renderOptions.callback();
+                me.renderOptions.callback(data[0]);
             }
         });
     }

@@ -1,4 +1,5 @@
 var D = require('drizzlejs');
+var _ = require('lodash/collection');
 
 exports.items = {
     main: 'main',
@@ -181,6 +182,10 @@ exports.store = {
                 groupModel = this.models.groupModel,
                 me = this;
             groupModel.clear();
+            _.map(groups.data || [], function(group, i) {
+                var g = group;
+                g.sort = i + 1;
+            });
             D.assign(me.models.groupModel.data, {
                 newGroups: JSON.stringify(groups.data),
                 delGroups: JSON.stringify(delGroups.data),
@@ -197,9 +202,8 @@ exports.store = {
         },
         deleteTraineeGroup: function(payload) {
             var updateTraineeGroup = this.models.updateTraineeGroup;
-            var groupId = this.models.state.data.groupId;
             updateTraineeGroup.clear();
-            updateTraineeGroup.params = { id: payload.id, groupId: groupId };
+            updateTraineeGroup.params = { id: payload.id };
             return this.get(updateTraineeGroup);
         },
         getMemberIds: function() {
