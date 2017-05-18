@@ -21,6 +21,7 @@ module.exports = {
                     if (homeConfig.data) {
                         modules.params.homeConfigId = homeConfig.data.id;
                         modules.params.clientType = 1;
+                        console.log('chengzhi');
                         return that.get(modules);
                     }
                     return null;
