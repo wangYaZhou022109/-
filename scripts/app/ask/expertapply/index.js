@@ -60,7 +60,7 @@ exports.store = {
             if (data.introduce !== '') {
                 innerExpert.set(data);
                 this.post(innerExpert).then(function() {
-                    me.app.message.success('专家申请成功！');
+                    me.app.message.success('申请已提交，等待管理员审核！');
                     me.module.dispatch('refresh');
                    // me.app.show('content', 'ask/expert');
                 });
