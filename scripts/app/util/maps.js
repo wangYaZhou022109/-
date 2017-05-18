@@ -339,7 +339,7 @@ module.exports = {
         1: '课程', 2: '专题', 3: '培训班级', 4: '考试', 5: '直播', 6: '讲师', 7: '专家', 8: '认证'
     },
     'gensee-status': { // 直播状态
-        0: '未发布', 1: '未开始', 2: '进行中', 3: '已结束'
+        0: '未发布', 1: '未开始', 2: '进行中', 3: '已结束', 4: '已撤销'
     },
     'knowledge-audit-status': { // 知识审核状态
         0: '待审核', 1: '已通过', 2: '已拒绝'
@@ -406,6 +406,9 @@ module.exports = {
     },
     'my-task-status': {
         1: '未完成', 2: '未开始'
+    },
+    'gensee-access-status': { // 直播状态
+        1: '已参加', 2: '待开始', 3: '未参加'
     },
     get: function(k) {
         return _.map(this[k], function(value, key) {
