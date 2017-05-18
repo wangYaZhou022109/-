@@ -16,7 +16,13 @@ exports.dataForTemplate = {
         _.map(particularss || [], function(m, i) {
             var e = m;
             var cId = m.courseInfo.id;
-            e.isRequired = _.find(onLine || [], ['resourceId', cId]).isRequired;
+            if (onLine.length > 0) {
+                if (_.find(onLine, ['resourceId', cId])) {
+                    e.isRequired = _.find(onLine, ['resourceId', cId]).isRequired;
+                } else {
+                    e.isRequired = 0;
+                }
+            }
             e.i = i + 1;
             a = e.studyTotalTime == null ? 0 : window.parseInt(e.studyTotalTime);
             hh = window.parseInt(a / 3600);

@@ -16,11 +16,11 @@ exports.items = {
     'two-brings': '',
     questionnaire: '',
     'train/class-detail/commit-task': { isModule: true },
-    'train/class-detail/school-yearbook': { isModule: true },
     banner: 'banner',
     'train/class-detail/courseware': { isModule: true },
     'research-tips': '',
-    'train/class-detail/online-attach': { isModule: true }
+    'train/class-detail/online-attach': { isModule: true },
+    'ranking-list': 'ranking-list'
 };
 
 exports.store = {
@@ -98,7 +98,17 @@ exports.store = {
         },
         trainee: {
             url: '../train/trainee/current-trainee'
-        }
+        },
+        courseStudyProgresss: {
+            url: '../train/study-details/study'
+        },
+        members: {
+            url: '../train/study-details/member'
+        },
+        course: {
+            url: '../course-study/course-study-progress/total-study-time'
+        },
+        down: { url: '../human/file/download' },
     },
 
     callbacks: {
@@ -114,9 +124,19 @@ exports.store = {
                 offlineThemeList = this.models.offlineThemeList,
                 offlineCourseList = this.models.offlineCourseList,
                 onlineCourseList = this.models.onlineCourseList,
+                courseStudyProgresss = this.models.courseStudyProgresss,
+                members = this.models.members,
+                course = this.models.course,
                 me = this;
             this.models.classId.data.classId = classId;
             photos.params = { classId: classId };
+            courseStudyProgresss.params = { classId: classId };
+            members.params = { classId: classId };
+            me.get(courseStudyProgresss);
+            me.get(members).then(function(data) {
+                course.params = data[0];
+                me.get(course);
+            });
             this.get(photos).then(function(data) {
                 _.map(data[0], function(obj) {
                     var photo = obj;

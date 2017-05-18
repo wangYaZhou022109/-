@@ -99,45 +99,23 @@ view('ranking-list')
             a.pull-right.more > | more
             span.strong 排行榜
             small 学员时长排行榜
-        .clearfix.charts-list
-            .pull-left.charts-img > img(src='images/1.png')
-            .pull-left.charts-user
-                | 王英雄
-                br
-                | 互联网中心
-            .pull-left > | 120分钟
-            .pull-right.charts-nub > b.charts01 1
-        .clearfix.charts-list
-            .pull-left.charts-img > img(src='images/1.png')
-            .pull-left.charts-user
-                | 王英雄
-                br
-                | 互联网中心
-            .pull-left > | 120分钟
-            .pull-right.charts-nub > b.charts02 2
-        .clearfix.charts-list
-            .pull-left.charts-img > img(src='images/1.png')
-            .pull-left.charts-user
-                | 王英雄
-                br
-                | 互联网中心
-            .pull-left > | 120分钟
-            .pull-right.charts-nub > b.charts03 3
-        .clearfix.charts-list
-            .pull-left.charts-nub > b 4
-            .pull-left.m-left.strong > | 王英雄
-            .pull-left.m-left > | 互联网中心
-            .pull-right.strong > | 120分钟
-        .clearfix.charts-list
-            .pull-left.charts-nub > b 5
-            .pull-left.m-left.strong > | 王英雄
-            .pull-left.m-left > | 互联网中心
-            .pull-right.strong > | 120分钟
-        .clearfix.charts-list
-            .pull-left.charts-nub > b 6
-            .pull-left.m-left.strong > | 王英雄
-            .pull-left.m-left > | 互联网中心
-            .pull-right.strong > | 120分钟
+        each(study.arr)
+            .clearfix.charts-list
+                .pull-left.charts-img > img.block(src=headPhoto)
+                .pull-left.charts-user
+                    echo(member.fullName)
+                    br
+                    echo(member.organizationName)
+                .pull-left > echo(studyTotalTime + '分钟')
+                .pull-right.charts-nub > b(class=class) > echo(i)
+        else
+            .class-notice > p.small-font > echo('暂无学习排行榜数据')
+        each(study.arr1)
+            .clearfix.charts-list
+                .pull-left.charts-nub > b > echo(i)
+                .pull-left.m-left.strong > echo(member.fullName)
+                .pull-left.m-left > echo(member.organizationName)
+                .pull-right.strong > echo(studyTotalTime + '分钟')
 
 view('curriculum-schedule')
     .schedule

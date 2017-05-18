@@ -35,7 +35,13 @@ exports.dataForTemplate = {
         _.map(courseStudyProgresss || [], function(m, i) {
             var e = m;
             var memberId = m.memberId;
-            e.studyTotalTime = _.find(course || [], ['memberId', memberId]).times;
+            if (course.length > 0) {
+                if (_.find(course, ['memberId', memberId])) {
+                    e.studyTotalTime = _.find(course, ['memberId', memberId]).times;
+                } else {
+                    e.studyTotalTime = 0;
+                }
+            }
             e.i = i + 1;
             a = e.studyTotalTime == null ? 0 : window.parseInt(e.studyTotalTime);
             hh = window.parseInt(a / 3600);
