@@ -27,7 +27,7 @@ module.exports = {
     expert: '专家',
     'experts-sharing': '文章分享',
     explain: '说明',
-    'from-topic': '关联标签',
+    'from-topic': '来自话题',
     follow: '关注',
     followers: '关注者',
     finish: '完成',
