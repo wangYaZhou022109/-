@@ -50,6 +50,7 @@
 .container {
     margin-left: calc(var(--large-space) * 2);
     margin-right: calc(var(--large-space) * 2);
+    min-width: var(--min-width);
 }
 
 section.section {
