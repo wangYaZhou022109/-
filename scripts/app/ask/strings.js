@@ -33,6 +33,7 @@ module.exports = {
     finish: '完成',
     hot: '热门',
     'related-topics': '关联话题',
+    'related-label': '关联标签',
     release: '发布',
     report: '举报',
     relevant: '相关',
