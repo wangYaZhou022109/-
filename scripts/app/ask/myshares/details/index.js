@@ -35,6 +35,8 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        fabulous: { url: '../ask-bar/my-share/praise' },
+        unfabulous: { url: '../ask-bar/my-share/unpraise' },
         down: { url: '../human/file/download' },
         speech: {
             url: '../system/speech-set',
@@ -108,8 +110,9 @@ exports.store = {
                 var params = _.map(data[0].topicList, 'id').join(',');
                 expert.params.ids = params;
                 question.params.ids = params;
-                me.get(expert);
-                me.get(question);
+                // me.get(expert);
+                // me.get(question);
+                return me.chain([me.get(expert), me.get(question)]);
             });
         },
         refresh: function(payload) {
@@ -168,20 +171,6 @@ exports.store = {
             report.set(data);
             return this.post(report);
         },
-        // follow: function(payload) {
-        //     // var follow = this.models.follow,
-        //     //     me = this,
-        //     //     expert = this.models.expert;
-        //     // follow.set(payload);
-        //     // expert.set({ id: this.models.expert.data.id, concernType: '1' });
-        //     var follow = this.models.follow;
-        //     follow.set(payload);
-        //     return this.put(follow);
-        //     // return this.post(follow).then(function() {
-        //     //     me.app.message.success('关注成功');
-        //     //     me.get(expert);
-        //     // });
-        // },
         follow: function(payload) {
             var follow = this.models.follow,
                 me = this,
@@ -204,29 +193,30 @@ exports.store = {
                 me.get(details);
             });
         },
-        // praise: function(payload) {
-        //     var praise = this.models.praise,
-        //         me = this,
-        //         details = this.models.details;
-        //     praise.set(payload);
-        //     details.set({ id: this.models.details.data.id, concernType: '3' });
-        //     return this.post(praise).then(function() {
-        //         me.app.message.success('点赞成功');
-        //         me.get(details);
-        //     });
-        // },
-        // unpraise: function(payload) {
-        //     var unpraise = this.models.unpraise,
-        //         me = this,
-        //         details = this.models.details;
-        //     details.set({ id: this.models.details.data.id, objectType: '3' });
-        //     // console.log(details);
-        //     unpraise.set({ id: payload.id, objectType: '3' });
-        //     return this.put(unpraise).then(function() {
-        //         me.app.message.success('取消成功');
-        //         me.get(details);
-        //     });
-        // },
+        fabulous: function(payload) {
+            var fabulous = this.models.fabulous,
+                me = this,
+                details = this.models.details;
+            // console.log(payload);
+            fabulous.set(payload);
+            details.set({ id: this.models.details.data.id, concernType: '3' });
+            return this.post(fabulous).then(function() {
+                me.app.message.success('点赞成功');
+                me.get(details);
+            });
+        },
+        unfabulous: function(payload) {
+            var unfabulous = this.models.unfabulous,
+                me = this,
+                details = this.models.details;
+            details.set({ id: this.models.details.data.id, concernType: '3' });
+            // console.log(payload);
+            unfabulous.set(payload);
+            return this.put(unfabulous).then(function() {
+                me.app.message.success('取消成功');
+                me.get(details);
+            });
+        },
         praise: function(payload) {
             var praise = this.models.praise;
             praise.set(payload);

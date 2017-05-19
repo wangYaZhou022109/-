@@ -38,7 +38,7 @@ exports.store = {
                     params.push(d.id);
                 });
                 todayadd.set({ id: params.toString() });
-                me.get(todayadd);
+                return me.get(todayadd);
             });
         },
         reviewed: function() {

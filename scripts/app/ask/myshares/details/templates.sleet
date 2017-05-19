@@ -92,10 +92,10 @@ view('top')
             .btn.block.layout-mt-small.big(id='follow-question-3_'+ id data-name='id' data-value= details.id ) > string('my-follow')
         compare(details.praiseNum 'gt' 0)
             .btn.block.layout-mt-small.big.custom-bg-color-3
-                i.iconfont.icon-favorite(id='unpraise-'+ id data-name='id' data-value= details.id) > echo('已赞（' + details.praiseNum +'）')
+                i.iconfont.icon-favorite(id='unfabulous-'+ id data-name='id' data-value= details.id) > echo('已赞（' + details.praiseNum +'）')
         else
             .btn.block.layout-mt-small.big.custom-bg-color-3
-                i.iconfont.icon-favorite(id='praise-'+ id data-name='id' data-value= details.id) > echo('赞（' + details.praiseNum +'）')
+                i.iconfont.icon-favorite(id='fabulous-'+ id data-name='id' data-value= details.id) > echo('赞（' + details.praiseNum +'）')
 view('relevantexperts')
     span.h3 > echo('相关专家')
     .layout-mt-small.user-picture

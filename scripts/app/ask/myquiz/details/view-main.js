@@ -258,7 +258,7 @@ exports.dataForTemplate = {
         + '   ' + date.getHours() + ':' + date.getMinutes();
         return obj.details;
     },
-    noAttachments: function(data) {
+    haveAttachments: function(data) {
         return data.details.questionAttachList && data.details.questionAttachList.length > 0;
     }
 };

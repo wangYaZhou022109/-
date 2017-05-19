@@ -20,7 +20,7 @@ view('topicdetail')
 view('menu')
     .tabs.line.mb-1 > ul
         li > a(id='menu-news')(class ='active') 最新动态
-        li > a(id='menu-exp')(class ='active') 专家分享
+        li > a(id='menu-exp')(class ='active') 文章分享
         li > a(id='menu-reply' )(class ='active') 等你回答
 view('list') 
     .tabs-cont > ul
@@ -29,10 +29,10 @@ view('list')
                 div(data-dynamic-key=state.menu)
 view('top')
     .section
-        compare(question.concernList.length 'gt' 0)
-            .btn.block.layout-mt-small.big(id='unfollow-question' data-name='id' data-value=expert.member.id) > string('unfollow')
+        compare(topicdetail.concern 'eq' true)
+            .btn.block.layout-mt-small.big(id='unfollow-' data-name='id' data-value=topicdetail.id) > string('unfollow')
         else
-            .btn.block.layout-mt-small.big(id='follow-question' data-name='id' data-value=expert.member.id) > string('my-follow')
+            .btn.block.layout-mt-small.big(id='follow-' data-name='id' data-value=topicdetail.id) > string('my-follow')
     div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
