@@ -15,6 +15,8 @@ exports.routes = {
     register: 'showRegisterPage',
     'class-detail/research-answer/:id': 'showResearchAnswerDetail',
     'class-detail/research-detail/:id': 'showResearchDetail',
+    'research-activity/research-detail/:id/:classId': 'showExamResearchDetail',
+    'class-detail/summary/:id/:classId': 'showSummary',
     'class-detail/:id': 'showClassDetail',
     'programme/research-activity/preview-questionary/:researchId': 'showResearchPreview',
     'manage/:id': 'showManage', // 资源管理员
@@ -104,13 +106,29 @@ exports.showAssist = function(id) {
     return this.app.show('content', 'train/index', { id: id, role: 4 });
 };
 
+exports.showExamResearchDetail = function(id, classId) {
+    return this.app.viewport.showIt('content', 'exam/research-activity/research-answer', {
+        researchRecordId: id,
+        businessId: classId
+    });
+};
+
+exports.showSummary = function(id, classId) {
+    return this.app.viewport.showIt('content', 'train/class-detail/summary', {
+        researchQuestionaryId: id,
+        businessId: classId
+    });
+};
+
 exports.interceptors = {
+    'research-activity/research-detail/': 'clearHeadAndBottom',
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
     'statistics/questionnaire/count/': 'clearHeadAndBottom',
     'programme/preview-task': 'clearHeadAndBottom',
     'class-detail/research-answer/': 'clearHeadAndBottom',
     'class-detail/research-detail/': 'clearHeadAndBottom',
+    'class-detail/summary/': 'clearHeadAndBottom',
     'programme/research-activity/preview-questionary': 'clearHeadAndBottom',
     signup: 'clearHeadAndBottom'
 };

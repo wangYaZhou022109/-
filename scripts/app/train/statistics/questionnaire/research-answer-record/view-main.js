@@ -43,7 +43,8 @@ exports.events = {
 
 exports.handlers = {
     edit: function(id) {
-        var url = '#/exam/research-activity/research-answer/' + id;
+        var classId = this.bindings.state.data;
+        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId;
         window.open(url, '_blank');
     }
 };

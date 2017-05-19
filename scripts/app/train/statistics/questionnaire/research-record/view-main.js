@@ -45,15 +45,14 @@ exports.events = {
 
 exports.handlers = {
     edit: function(id) {
-        var url = '#/exam/research-activity/research-answer/' + id;
+        var classId = this.bindings.state.data;
+        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId;
         window.open(url, '_blank');
     },
     summary: function() {
-        var mod = this.module.items['train/statistics/questionnaire/research-record/summary'],
-            me = this;
-        this.app.viewport.ground(mod, {
-            researchQuestionaryId: me.bindings.researchQuestionary.data.id,
-            businessId: me.bindings.researchQuestionary.data.classId
-        });
+        var classId = this.bindings.state.data;
+        var id = this.bindings.researchQuestionary.data.id;
+        var url = '#/train/class-detail/summary/' + id + '/' + classId;
+        window.open(url, '_blank');
     }
 };

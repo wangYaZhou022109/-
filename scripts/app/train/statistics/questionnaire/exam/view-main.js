@@ -12,12 +12,7 @@ exports.components = [{
 
 exports.dataForTemplate = {
     exams: function(data) {
-        var exams = data.exams,
-            pageNum = this.bindings.exams.getPageInfo().page;
-        _.map(exams || [], function(exam, i) {
-            var e = exam;
-            e.i = i + 1 + ((pageNum - 1) * 10);
-        });
+        var exams = data.exams;
         return exams;
     },
     exportUrl: function() {
@@ -48,10 +43,9 @@ exports.handlers = {
             url = '#/exam/exam/score-detail/' + id;
         window.open(url, '_blank');
     },
-    markPaper: function(id) {
-        var mod = this.module.items['train/statistics/questionnaire/exam/mark-paper'];
-        this.app.viewport.ground(mod, {
-            examRecordId: id
-        });
+    markPaper: function(data) {
+        var id = data,
+            url = '#/exam/exam/mark-paper/' + id;
+        window.open(url, '_blank');
     }
 };

@@ -26,7 +26,7 @@ exports.events = {
 
 exports.handlers = {
     edit: function(id) {
-        var url = '#/train/service/views/research-answer/' + id;
+        var url = '#/train/class-detail/research-answer/' + id;
         window.open(url, '_blank');
     }
 };
