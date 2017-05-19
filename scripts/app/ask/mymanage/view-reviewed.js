@@ -62,6 +62,7 @@ exports.handlers = {
         }
     },
     display: function(id, e) {
+        // console.log(id);
         var status;
         if (e.checked) {
             status = 0;

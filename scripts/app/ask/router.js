@@ -7,6 +7,7 @@ exports.routes = {
     topicsquare: 'showtopicsquare',
     'topic/index': 'showTopic',
     'expertdetails/:id': 'showExpertDetail',
+    'askExpertdetails/:expertId/:memberId': 'showAskExpertDetail',
     'noticerexpertdetails/:id': 'showNoticerExpertDetail',
     iamexpertdetails: 'showIamExpertDetails',
     'questiondetails/:id': 'showQuestionDetails',
@@ -39,6 +40,9 @@ exports.showNoticerTopicDetails = function(id) {
 };
 exports.showExpertDetail = function(id) {
     return this.app.show('content', 'ask/expertdetails', { id: id });
+};
+exports.showAskExpertDetail = function(expertId, memberId) {
+    return this.app.show('content', 'ask/expertdetails', { expertId: expertId, memberId: memberId });
 };
 exports.showNoticerExpertDetail = function(id) {
     this.app.viewport.closeModal();

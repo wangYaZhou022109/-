@@ -3,4 +3,5 @@ module
     div(data-region='main')
 
 view('main')
-    #waveform
+    audio#player(class='video-js vjs-default-skin' 'controls' style="height:40em;width:100%" poster='./images/default-cover/music.jpg')
+        source(src=url type="audio/mp3" )

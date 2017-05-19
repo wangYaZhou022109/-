@@ -1,7 +1,6 @@
 var D = require('drizzlejs'),
     _ = require('lodash/collection'),
     STATUS_UNSTART = 1, // 直播状态-未开始
-    STATUS_LIVING = 2, // 直播状态-进行中
     STATUS_FINISH = 3; // 直播状态-已完成
 
 exports.items = {
@@ -47,15 +46,13 @@ exports.store = {
                     sub.set(params);
                     me.get(sub);
                 }
-                // 保存参加用户
-                if (gensee.data.status === STATUS_LIVING) {
-                    me.save(access);
-                }
                 // 直播回顾 - 已结束的直播才需要查询
                 if (gensee.data.status === STATUS_FINISH) {
                     course.set(params);
                     me.get(course);
                 }
+                 // 浏览人数+1，同时如果是已开始的直播，保存参与用户并更新参与人数
+                me.save(access);
             }, function() {
                 D.assign(topics.params, {
                     ids: _.map(gensee.data.businessTopics, 'topicId').join(',')

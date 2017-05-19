@@ -6,8 +6,12 @@ module
 view('filter')
     .person-list
         .filter
-            .pull-right.m-right.pointer
-                i.iconfont.icon-sort-desc
+            .pull-right.m-right.pointer#startTimeOrderBy
+                | 开始时间
+                compare(search.startTimeOrderBy 'eq' 1)
+                    i.iconfont.icon-sort-asc
+                compare(search.startTimeOrderBy 'ne' 1)
+                    i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 状态：
                 .item#status-all(class=if(search.statusAll 'active')) > span 全部
@@ -22,9 +26,9 @@ view('main')
         li.border.bottom
             .title-row
                 .img > .img-cont > img(src=imgUrl)
-                .inline-block.title > echo(subject)
-                .time > echo('讲师：' names '直播开始时间：') + dateTime(startTime)
-            .state > map('live-status' status)
-            .btn-row > each(buttons)
+                .inline-block.title > echo(genseeWebCast.subject)
+                .time(title=genseeWebCast.lecturerNames) > echo('讲师：' genseeWebCast.lecturerNamesSub '&nbsp;&nbsp;直播开始时间：') + dateTime(genseeWebCast.startTime)
+            .state > map('gensee-status' genseeWebCast.status)
+            .btn-row > each(genseeWebCast.buttons)
                 .btn(id=id) > echo(text)
     #pager.pagination
