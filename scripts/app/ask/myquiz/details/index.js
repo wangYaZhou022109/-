@@ -108,8 +108,9 @@ exports.store = {
                 var params = _.map(data[0].topicList, 'id').join(',');
                 expert.params.ids = params;
                 question.params.ids = params;
-                me.get(expert);
-                me.get(question);
+                // me.get(expert);
+                // me.get(question);
+                return me.chain([me.get(expert), me.get(question)]);
             });
         },
         details: function(payload) {

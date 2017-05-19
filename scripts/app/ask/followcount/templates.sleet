@@ -6,10 +6,10 @@ view('main')
         .clearfix
             dl
                 dt > echo(follow.contentCount)
-                dd > string('follow') + string('content')
+                dd > string('followers')
             dl
                 dt > echo(follow.topicCount)
-                dd > string('follow') + string('topic')
+                dd > string('answer')
             dl
                 dt > echo(follow.expertCount)
-                dd > string('follow') + string('expert')
+                dd > string('share')

@@ -83,9 +83,6 @@ exports.store = {
             });
         },
         publish: function(payload) {
-            // var discuss = this.models.discuss;
-            // discuss.set(payload);
-            // return this.save(discuss);
             var reply = this.models.reply,
                 data = payload;
             reply.set(data);

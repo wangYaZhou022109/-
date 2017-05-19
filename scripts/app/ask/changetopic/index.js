@@ -107,7 +107,7 @@ exports.store = {
                 data.newTopic = topic.toString();
                 submit.set(data);
                 return this.put(submit).then(function() {
-                    me.app.message.success('操作成功');
+                    me.app.message.success('操作成功，等待管理员审核！');
                 });
             }
             return null;

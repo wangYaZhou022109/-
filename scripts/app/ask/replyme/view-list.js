@@ -123,6 +123,8 @@ exports.actions = {
     'click enjoy-*': 'enjoy',
     'click report-*': 'report',
     'click publish-*': 'publish',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
 };
 
 exports.dataForActions = {
@@ -140,12 +142,26 @@ exports.dataForActions = {
     publish: function(payload) {
         return payload;
     },
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
     concern: function() {
     },
     enjoy: function() {
     },
     report: function() {
-    }
+    },
 };
 
 exports.actionCallbacks = {
