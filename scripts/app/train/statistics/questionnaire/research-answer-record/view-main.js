@@ -44,7 +44,7 @@ exports.events = {
 exports.handlers = {
     edit: function(id) {
         var classId = this.bindings.state.data;
-        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId;
+        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId.classId;
         window.open(url, '_blank');
     }
 };

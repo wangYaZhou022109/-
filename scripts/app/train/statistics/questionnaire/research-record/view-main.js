@@ -46,13 +46,13 @@ exports.events = {
 exports.handlers = {
     edit: function(id) {
         var classId = this.bindings.state.data;
-        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId;
+        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId.classId;
         window.open(url, '_blank');
     },
     summary: function() {
         var classId = this.bindings.state.data;
         var id = this.bindings.researchQuestionary.data.id;
-        var url = '#/train/class-detail/summary/' + id + '/' + classId;
+        var url = '#/train/class-detail/summary/' + id + '/' + classId.classId;
         window.open(url, '_blank');
     }
 };
