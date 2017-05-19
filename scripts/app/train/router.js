@@ -12,7 +12,7 @@ exports.routes = {
     'statistics/questionnaire/count/:classId': 'showCount',
     'programme/preview-task/:id': 'previewTask',
     'signup/:id': 'showSignupPage',
-    signup: 'showRegisterPage',
+    register: 'showRegisterPage',
     'class-detail/research-answer/:id': 'showResearchAnswerDetail',
     'class-detail/research-detail/:id': 'showResearchDetail',
     'class-detail/:id': 'showClassDetail',
@@ -63,8 +63,8 @@ exports.previewTask = function(fir, id) {
     return this.app.viewport.showIt('content', 'train/programme/preview-task', { id: id });
 };
 
-exports.showSignupPage = function(classId) {
-    return this.app.show('content', 'train/signup', { classId: classId });
+exports.showSignupPage = function(id) {
+    return this.app.show('content', 'train/signup', { classId: id });
 };
 
 exports.showRegisterPage = function() {

@@ -84,7 +84,7 @@ exports.buttons = [{
             groupId: state.groupId,
             ids: ids.join(',')
         }).then(function(data) {
-            if (data[0]) {
+            if (data) {
                 me.app.message.success('保存成功!');
                 me.renderOptions.callback(data[0]);
             }

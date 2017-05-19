@@ -72,7 +72,7 @@ exports.handlers = {
     },
     manage: function(id, e, target) {
         var me = this,
-            view = me.module.items['train/trainee/fmtrainee/group-manage'],
+            view = me.module.items['train/trainee/formal-trainee/group-manage'],
             state = me.bindings.state.data,
             allGroup = me.bindings.group;
         if (id.substring(0, 4) === 'new-') {    // 如果管理的是新添加的分组，要先保存再操作

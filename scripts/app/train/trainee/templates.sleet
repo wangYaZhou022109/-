@@ -10,9 +10,9 @@ view('tab')
         ul
             compare(state.isAutoApprove 'ne' 1)
                 li#tab-manage(class = if(isManage 'active')) > echo('报名管理')
-            li#tab-fmtrainee(class = if(isFmtrainee 'active')) > echo('学员')
+            li#tab-formal-trainee(class = if(isFmtrainee 'active')) > echo('学员')
             li#tab-classstaff(class = if(isClassstaff 'active')) > echo('班务人员')
-            li#tab-iftrainee(class = if(isIftrainee 'active')) > echo('非正式成员')
+            li#tab-informal-trainee(class = if(isIftrainee 'active')) > echo('非正式成员')
             li#tab-message(class = if(isMessage 'active')) > echo('短信发送')
 
 view('main')

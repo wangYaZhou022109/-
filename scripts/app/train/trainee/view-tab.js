@@ -37,7 +37,7 @@ exports.dataForTemplate = {
     },
     isFmtrainee: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'fmtrainee') {
+        if (state.data.tab === 'formal-trainee') {
             return true;
         }
         return false;
@@ -51,7 +51,7 @@ exports.dataForTemplate = {
     },
     isIftrainee: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'iftrainee') {
+        if (state.data.tab === 'informal-trainee') {
             return true;
         }
         return false;

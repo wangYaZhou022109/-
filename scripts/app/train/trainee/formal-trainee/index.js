@@ -10,7 +10,7 @@ exports.items = {
     groupTrainees: '',
     detail: '',
     'train/trainee/select-member': { isModule: true },
-    'train/trainee/fmtrainee/group-manage': { isModule: true }
+    'train/trainee/formal-trainee/group-manage': { isModule: true }
 };
 
 exports.store = {

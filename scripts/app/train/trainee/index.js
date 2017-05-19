@@ -23,7 +23,7 @@ exports.store = {
                     state.data.isAutoApprove = ret.isAutoApprove;
                     state.data.quotaType = ret.type;
                     if (ret.isAutoApprove === 1) {
-                        state.data.tab = 'fmtrainee';
+                        state.data.tab = 'formal-trainee';
                         state.data.fmtrainee = true;
                     } else {
                         state.data.tab = 'manage';
