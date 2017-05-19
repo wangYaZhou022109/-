@@ -50,13 +50,6 @@ exports.store = {
             });
         },
         publish: function(payload) {
-            // var discuss = this.models.discuss;
-            // discuss.set(payload);
-            // return this.save(discuss);
-<<<<<<< Updated upstream
-=======
-            // console.log(payload);
->>>>>>> Stashed changes
             var reply = this.models.reply,
                 data = payload;
             reply.set(data);
