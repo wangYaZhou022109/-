@@ -71,7 +71,7 @@ view('list')
                                     echo(subject)
                             .bottom.text-tips
                                 i.iconfont.icon-view
-                                span > echo(attendNumber)
+                                span > echo(viewNumber)
                                 i.iconfont.icon-date.m-left
                                 span > dateMinute(startTime)
         .h3.m-bottom 考试

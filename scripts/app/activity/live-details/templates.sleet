@@ -75,9 +75,9 @@ view('main')
                 .pull-right
                     compare(gensee.status 'eq' 1)
                         compare(sub.subStatus 'eq' 0)
-                            .btn.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
+                            .btn.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 报名
                         else
-                            .btn.white.border.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
+                            .btn.white.border.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消报名
                 .live-details-teacher
                     .lecturer.clearfix
                         .user-pic.pull-left > i.iconfont.icon-user
