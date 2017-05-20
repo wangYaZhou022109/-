@@ -25,6 +25,7 @@ exports.store = {
             return this.get(this.models.exams);
         },
         selectItem: function(payload) {
+            this.models.exams.clear();
             D.assign(this.models.search.data, payload);
             this.models.search.changed();
             D.assign(this.models.exams.params, this.models.search.data);

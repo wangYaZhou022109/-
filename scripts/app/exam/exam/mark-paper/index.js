@@ -16,7 +16,11 @@ var options = require('./app/exam/exam/base-paper/index'),
         CHECK: 'check',
         ACTIVE: 'active',
         CURRENT: 'current'
-    };
+    },
+    $ = require('jquery'),
+    validator = require('./app/ext/views/form/validators'),
+    markers = require('./app/ext/views/form/markers'),
+    checkScore;
 
 var setOptions = {
     store: {
@@ -43,7 +47,7 @@ var setOptions = {
                                     }), function(ss) {
                                         return {
                                             key: ss.id,
-                                            value: ss.answerRecord ? '' : 0,
+                                            value: '',
                                             type: ss.type,
                                             isRight: 0
                                         };
@@ -52,7 +56,7 @@ var setOptions = {
                                     isRight: constant.ZERO
                                 };
                             }
-                            return { key: q.id, value: q.answerRecord ? '' : 0, type: q.type, isRight: constant.ZERO };
+                            return { key: q.id, value: '', type: q.type, isRight: constant.ZERO };
                         });
                         this.save();
                     },
@@ -88,7 +92,16 @@ var setOptions = {
                         return result;
                     },
                     check: function(types) {
-                        var me = this;
+                        var me = this,
+                            goals = $('[name="goal"]'),
+                            flag = _.every(goals, function(goal) {
+                                return checkScore.call(me.module, goal);
+                            });
+
+                        if (!flag) {
+                            return false;
+                        }
+
                         return _.every(types, function(t) {
                             var f = _.every(t.questions, function(q) {
                                 var grade = _.find(me.data, ['key', q.id]);
@@ -178,17 +191,17 @@ var target = D.assign({}, {
         return this.dispatch('init', this.renderOptions);
     },
     getCurrentStatus: function(id) {
-        var grades = this.store.models.grades.data,
+        var grades = this.store.models.grades.data || [],
             grade = _.find(grades, ['key', id]),
             reading;
-        if (grade.value.length > 0) {
+        if (grade && grade.value.length > 0) {
             reading = _.some(grade.value, function(v) {
                 return v.value !== 0;
             });
             if (reading) {
                 return itemStatus.ACTIVE;
             }
-        } else if (grade.value !== '' && grade.value !== 0) {
+        } else if (grade && grade.value !== '' && grade.value !== 0) {
             return itemStatus.ACTIVE;
         }
         return itemStatus.INIT;
@@ -196,3 +209,33 @@ var target = D.assign({}, {
 });
 
 module.exports = target;
+
+checkScore = function(e) {
+    var el = e,
+        value = $(el).val();
+
+    markers.text.valid($(el));
+    if (!validator.required.fn(value)) {
+        this.app.message.error('必填项');
+        return false;
+    }
+
+    if (!validator.digits.fn(value)) {
+        this.app.message.error('只能填整数');
+        $(el).val('');
+        return false;
+    }
+
+    if (!validator.keepDecimal.fn(value, 1)) {
+        this.app.message.error('只能保留1位小数');
+        $(el).val('');
+        return false;
+    }
+
+    if (!validator.range.fn(value, 0, 100)) {
+        this.app.message.error('只能填0分~100分');
+        $(el).val('');
+        return false;
+    }
+    return true;
+};
