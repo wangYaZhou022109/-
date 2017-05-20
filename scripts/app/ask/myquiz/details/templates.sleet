@@ -58,11 +58,11 @@ view('main')
                     .comment-operation
                         .pull-left 
                             compare(praise1 'eq' true)
-                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
                                 .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                             else
                                 .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
                             .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
                         .text-right
                             .item > .share-bar

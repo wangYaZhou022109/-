@@ -1,21 +1,24 @@
 exports.bindings = {
     knowledge: true,
-    download: false
+    attachment: false
 };
 
 exports.components = [function() {
     return {
         id: 'player',
         name: 'videojs',
-        video: {
-            fluid: true,
-            autoplay: true
+        options: {
+            video: {
+                autoplay: true
+            }
         }
     };
 }];
+
 exports.dataForTemplate = {
     url: function(data) {
-        return this.bindings.download.getFullUrl() + '?id=' + data.knowledge.resourceId;
+        var path = data.attachment.path;
+        return '/' + path + '?type=mp4';
     }
 };
 

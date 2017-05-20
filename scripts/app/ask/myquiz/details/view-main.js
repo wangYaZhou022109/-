@@ -171,7 +171,7 @@ exports.dataForActions = {
         data.objectType = 1;
         data.id = obj[0];
         return data;
-    },
+    }
 };
 
 // actions绑定的方法调用后要干的事情
@@ -208,12 +208,6 @@ exports.actionCallbacks = {
         this.app.message.success('举报成功！');
         this.module.dispatch('refresh', payload);
     },
-    // praise: function() {
-    //     this.app.message.success('点赞成功！');
-    // },
-    // unpraise: function() {
-    //     this.app.message.success('取消点赞成功！');
-    // }
     praise: function(data) {
         // console.log(data);
         var detail = data[0];
@@ -264,7 +258,7 @@ exports.dataForTemplate = {
         + '   ' + date.getHours() + ':' + date.getMinutes();
         return obj.details;
     },
-    noAttachments: function(data) {
+    haveAttachments: function(data) {
         return data.details.questionAttachList && data.details.questionAttachList.length > 0;
     }
 };

@@ -20,11 +20,8 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             ids: comp.getValue(),
             callback: function(payload, flag) {     // 选中添加，非选中取消添加。
-                if (flag) {
-                    comp.addItem({ value: payload.id, text: payload.name });
-                } else {
-                    comp.removeItem(payload.id);
-                }
+                if (flag) return comp.addItem({ value: payload.id, text: payload.name });
+                return comp.removeItem(payload.id);
             }
         });
     },

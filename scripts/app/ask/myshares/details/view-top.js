@@ -24,8 +24,8 @@ exports.dataForEntityModule = function(entity) {
 exports.actions = {
     'click follow-question-*': 'follow',
     'click unfollow-question-*': 'unfollow',
-    'click praise-*': 'praise',
-    'click unpraise-*': 'unpraise',
+    'click fabulous-*': 'fabulous',
+    'click unfabulous-*': 'unfabulous',
 };
 
 exports.dataForActions = {
@@ -39,12 +39,12 @@ exports.dataForActions = {
         data.concernType = 3;
         return payload;
     },
-    praise: function(payload) {
+    fabulous: function(payload) {
         var data = payload;
         data.objectType = 3;
         return payload;
     },
-    unpraise: function(payload) {
+    unfabulous: function(payload) {
         var data = payload;
         data.objectType = 3;
         return payload;

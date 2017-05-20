@@ -10,6 +10,10 @@ exports.store = {
     models: {
         replyme: { url: '../ask-bar/reply-me/reply-list' },
         params: { data: { isOverdue: '1' } },
+        discuss: { url: '../ask-bar/question-discuss' },
+        reply: { url: '../ask-bar/question-reply' },
+        praise: { url: '../ask-bar/my-share/praise' },
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
         page: {
             data: [],
             params: { page: 1, size: 10 },
@@ -42,6 +46,40 @@ exports.store = {
             replyme.set(params);
             this.post(replyme).then(function() {
                 page.data.push.apply(page.data, replyme.data);
+                page.changed();
+            });
+        },
+        publish: function(payload) {
+            var reply = this.models.reply,
+                data = payload;
+            reply.set(data);
+            return this.save(reply);
+        },
+        praise: function(payload) {
+            var praise = this.models.praise,
+                me = this;
+            praise.set(payload);
+            return this.post(praise).then(function() {
+                var page = me.models.page;
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = true;
+                curObj.praiseNum ++;
+
+                page.changed();
+            });
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this;
+            unpraise.set(payload);
+            return this.chain(me.put(this.models.unpraise), function() {
+                var page = me.models.page;
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = false;
+                curObj.praiseNum = curObj.praiseNum === 0 ? 0 : curObj.praiseNum - 1;
+
                 page.changed();
             });
         },

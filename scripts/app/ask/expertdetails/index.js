@@ -34,17 +34,19 @@ exports.store = {
                 state = this.models.state,
                 relatedquestions = this.models.relatedquestions,
                 followcount = this.models.followcount,
-                data = payload.id.split(',');
-            relevantexperts.data.id = data[0];
-            relevantexperts.changed();
-            relatedquestions.data.id = data[0];
-            relatedquestions.changed();
-            state.data.id = data[1];
-            state.changed();
-            followcount.data.id = data[1];
-            followcount.changed();
-            expert.set({ id: data[0] });
-            this.get(expert);
+                data = payload;
+            if (data.length === 2) {
+                relevantexperts.data.id = data[0];
+                relevantexperts.changed();
+                relatedquestions.data.id = data[0];
+                relatedquestions.changed();
+                state.data.id = data[1];
+                state.changed();
+                followcount.data.id = data[1];
+                followcount.changed();
+                expert.set({ id: data[0] });
+                this.get(expert);
+            }
         },
         follow: function(payload) {
             var follow = this.models.follow,
@@ -72,5 +74,13 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    return this.dispatch('init', this.renderOptions);
+    var data = [],
+        id = this.renderOptions.id;
+    if (typeof id === 'string') {
+        data = id.split(',');
+    } else {
+        data.push(this.renderOptions.expertId);
+        data.push(this.renderOptions.memberId);
+    }
+    return this.dispatch('init', data);
 };

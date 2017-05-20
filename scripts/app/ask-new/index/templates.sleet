@@ -514,12 +514,12 @@ view('main')
                                             | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
                                             | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
                                         .comment-operation
-                                            .pull-left > .sub-text 2017-01-17
+                                            .pull-left 
+                                                div
+                                                    span.pointer 赞（8）
+                                                    span 
+                                                    span.pointer 添加回复
                                             .text-right
-                                                span.pointer 赞（8）
-                                                span |
-                                                span.pointer 添加回复
-                                                span |
                                                 span.pointer 分享
                                                 span |
                                                 span.pointer 举报

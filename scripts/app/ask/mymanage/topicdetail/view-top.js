@@ -3,7 +3,8 @@ exports.type = 'dynamic';
 
 exports.bindings = {
     followcount: true,
-    topicname: true
+    topicname: true,
+    topicdetail: true
 };
 
 exports.getEntityModuleName = function(key) {
@@ -21,23 +22,22 @@ exports.dataForEntityModule = function(entity) {
 
 
 exports.actions = {
-    'click follow-expert': 'follow',
-    'click unfollow-expert': 'unfollow'
+    'click follow-*': 'follow',
+    'click unfollow-*': 'unfollow'
 };
 
 exports.dataForActions = {
     follow: function(payload) {
         var data = payload;
-        data.concernType = '1';
+        data.concernType = 4;
         return data;
     },
     unfollow: function(payload) {
+        var data = payload;
+        data.concernType = 4;
         return payload;
     }
 };
 
 exports.actionCallbacks = {
-    // follow: function() {
-    //     this.app.message.success('关注成功！');
-    // }
 };

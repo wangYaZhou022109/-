@@ -9,10 +9,10 @@ view('list')
                 compare(user.activationApply 'eq' 0)
                     .pull-right.btn#activate > string('activation') + string('expert') + string('identity')
                 else
-                    .pull-right.btn > string('auditStatus3')
+                    .pull-right.btn#review > string('auditStatus3')
             else
                 compare(user.expert.auditStatus 'eq' 0)
-                    .pull-right.btn > string('auditStatus3')
+                    .pull-right.btn#review > string('auditStatus3')
                 compare(user.expert.auditStatus 'eq' 1)  
                     .pull-right.btn > a.normal(href='#/ask/iamexpertdetails') > string('iam') + string('expert')  
                 compare(user.expert.auditStatus 'eq' 2)
@@ -37,8 +37,8 @@ view('list')
                     .sub-text.text-overflow > echo(introduce)
                 compare(concernList.length 'gt' 0)
                     .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
-                    .btn.small( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) 关注
+                    .btn.small( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) +关注
                 else
                     .btn.small( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
-                    .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) 关注
+                    .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) +关注
        

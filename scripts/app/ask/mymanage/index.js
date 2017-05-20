@@ -38,7 +38,7 @@ exports.store = {
                     params.push(d.id);
                 });
                 todayadd.set({ id: params.toString() });
-                me.get(todayadd);
+                return me.get(todayadd);
             });
         },
         reviewed: function() {
@@ -58,6 +58,7 @@ exports.store = {
     }
 };
 exports.afterRender = function() {
-    this.dispatch('init');
-    this.dispatch('reviewed');
+    // this.dispatch('init');
+    // this.dispatch('reviewed');
+    return this.chain([this.dispatch('init'), this.dispatch('reviewed')]);
 };

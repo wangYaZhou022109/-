@@ -28,8 +28,9 @@ exports.handlers = {
         this.module.dispatch('search', params);
     },
     startTimeOrderBy: function() {
+        var search = this.bindings.search.data;
         this.module.dispatch('search', {
-            startTimeOrderBy: this.bindings.search.data.startTimeOrderBy
+            startTimeOrderBy: search.startTimeOrderBy === 1 ? 0 : 1
         });
     },
     searchByName: function() {

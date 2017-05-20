@@ -21,7 +21,7 @@ view('selectdrop')
 
 view('topic')
     .form-row.textarea-row
-        label > string('from-topic')
+        label > string('related-label')
         #select-topic
 
 view('details')

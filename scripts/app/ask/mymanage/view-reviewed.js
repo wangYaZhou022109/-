@@ -10,7 +10,7 @@ exports.bindings = {
 exports.events = {
     'click audit-*': 'audit',
     'click deal-*': 'deal',
-    'click display': 'display'
+    'click check': 'display'
 };
 exports.handlers = {
     audit: function(data, e, target) {
@@ -62,6 +62,7 @@ exports.handlers = {
         }
     },
     display: function(id, e) {
+        // console.log(id);
         var status;
         if (e.checked) {
             status = 0;

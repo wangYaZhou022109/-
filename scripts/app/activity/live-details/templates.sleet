@@ -21,11 +21,11 @@ view('side')
                         .block.layout-mt-small
                             .pull-right
                                 compare(businessType 'eq' 0)
-                                    a(href='#/exam/answer-paper/'+ businessId target='_blank') 参与考试
+                                    a(href='#/exam/exam/paper/'+ businessId target='_blank') 参与考试
                                 compare(businessType 'eq' 1)
-                                    a(href='#/exam/research-activity/index/'+ businessId target='_blank') 参与调研
+                                    a(href='#/exam/research-activity/paper/' + businessId + '/' + ../gensee.id target='_blank') 参与调研
                                 compare(businessType 'eq' 2)
-                                    a(href='#/exam/research-activity/index/'+ businessId target='_blank') 参与评估
+                                    a(href='#/exam/research-activity/paper/' + businessId + '/' + ../gensee.id target='_blank') 参与评估
                             .text-overflow
                                 echo(businessName)
 
@@ -73,11 +73,11 @@ view('main')
                                 i.iconfont.icon-favorite(title='收藏')
             .clearfix.layout-mt-small
                 .pull-right
-                    compare(sub.subStatus 'eq' 1)
+                    compare(gensee.status 'eq' 1)
                         compare(sub.subStatus 'eq' 0)
-                            .btn.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 预约
+                            .btn.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 报名
                         else
-                            .btn.white.border.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消预约
+                            .btn.white.border.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消报名
                 .live-details-teacher
                     .lecturer.clearfix
                         .user-pic.pull-left > i.iconfont.icon-user
@@ -89,13 +89,15 @@ view('main')
                         .user-pic.pull-left > i.iconfont.icon-time
                         | 直播时间
                         p
-                            date(gensee.startTime)
+                            dateMinute(gensee.startTime)
 
             .side-box.m-top
-                each(gensee.businessTopics)
-                    .tag-btn > echo(topicName)
+                each(gensee.topics)
+                    .tag-btn > echo(name)
+            .side-box.m-top
+                echo('简介：' gensee.genseeDesc)
 
-        if(courses)
+        compare(gensee.status 'eq' 3)
             section.section
                 .h3 直播回顾
                 .main-list.layout-mt-small

@@ -1,5 +1,5 @@
 :root {
-    --main-list-img-height: 12em;
+    --main-list-img-height: auto;
     --main-list-gap: calc(var(--font-size) * 3);
 }
 
@@ -63,6 +63,9 @@
             width: 50%;
         }
 
+        &.cell-1 li {
+            width: 100%;
+        }
         & .content {
             position: relative;
             transition: all .2s linear;

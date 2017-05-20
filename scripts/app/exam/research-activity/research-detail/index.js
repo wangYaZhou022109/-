@@ -48,7 +48,7 @@ exports.store = {
                         answeredCount: answeredCount,
                         noAnswerCount: questions.length - answeredCount
                     });
-                    this.save();
+                    // this.save();
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;

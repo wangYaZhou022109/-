@@ -3,7 +3,7 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你共回复了'+myreply.length+'个问题')
+        .pull-right > echo('你共回复了'+myreply.length+'次')
         ul
             li.active > echo('我的回复')
     .comment-list.ask-list > ul
@@ -22,29 +22,29 @@ view('list')
                                 span > echo('讨论了' + member.fullName + '的问题')
                                 span.sub-text > date(questionDiscuss.createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('来自问题:') + a(id='myreply-details-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
+                                .pull-left > .sub-text > echo('来自问题 :') + a(id='myreply-details-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
                                     #  .item > a.normal(href='javascript:;') 关注
                                     compare(praise 'eq' true)
-                                        .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                        .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已点赞')
                                     else
-                                        .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                        .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + praiseNum +'）')
                                     .item(id='discuss-' + questionDiscuss.id ) > string('comment') +  echo('(' + discussList.length +')')
                                     .item > .share-bar
                                         .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
+                                            span 分享
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                    #  .item > span(id = 'del-question-' + question.id data-name='id' data-value=question.id) > string('delete')
+                                    .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
-                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
-                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        textarea.input.w-full.block(rows=1 name='content' value='')
+                                        input.input(type='hidden' name='organizationId' value=question.organizationId)
                                         input.input(type='hidden' name='id' value=questionDiscuss.id)
+                                        input.input(type='hidden' name='toUserId' value=member.id)
+                                        input.input(type='hidden' name='questionId' value=question.id)
                                         .btn(id='publish-' + questionDiscuss.id) > string('publish')
-                            .comment-reply.m-top
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复
+                                        
                 compare(readStatus 'eq' 1)                               
                     li
                         .user-pic > img(src='images/d2.jpg')
@@ -58,18 +58,21 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自回复:') +  a(id='myreply-details-'  + id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
-                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                    #  .item > a.normal(href='javascript:;') 添加讨论
-                                    .item > .share-bar
-                                        .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
-                                            form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    compare(praise 'eq' true)
+                                        .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已点赞')
+                                    else
+                                        .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
                                     .item > a.normal(href='javascript:;') 删除
-                            .comment-reply.m-top
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='content' value='')
+                                        input.input(type='hidden' name='organizationId' value=question.organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        input.input(type='hidden' name='toUserId' value=member.id)
+                                        input.input(type='hidden' name='questionId' value=question.id)
+                                        .btn(id='publish-' + id) > string('publish')
+
+                                    
             compare(question.type 'eq' 2)
                 compare(questionDiscuss.readStatus 'eq' 2)
                     #  compare(questionDiscuss.auditStatus 'eq' 0)
@@ -85,34 +88,21 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自文章') + a(id='myreply-sharedetails-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
-                                    .item > span.color-ing > string('auditStatus0')
+                                    compare(praise 'eq' true)
+                                        .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已点赞')
+                                    else
+                                        .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
                                     .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')    
-                                      
-                    compare(questionDiscuss.auditStatus 'eq' 1)
-                        li
-                            .user-pic > img(src='images/d2.jpg')
-                            .comment-content
-                                .h4 > echo(title)
-                                .comment-text > echo(questionDiscuss.content)
-                                .user-info
-                                    a(href='javascript:;') > echo('我')
-                                    span > echo('讨论了'+member.fullName + '的文章') 
-                                    span.sub-text > date(questionDiscuss.createTime)
-                                .comment-operation
-                                    .pull-left > .sub-text > echo('来自讨论') + a(id='myreply-sharedetails-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
-                                    .text-right
-                                        .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                        .item > a.normal(href='javascript:;') 添加讨论
-                                        .item > .share-bar
-                                            .drop-down-wrapper
-                                                i.iconfont.icon-share-2(title='分享')
-                                                form.drop-down-content > .content
-                                                    .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                    .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                        .item > a.normal(href='javascript:;') 删除
-                                .comment-reply.m-top
-                                    textarea.input.w-full.block(rows="1")
-                                    .btn 回复
+                                    form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
+                                        textarea.input.w-full.block(rows=1 name='content' value='')
+                                        input.input(type='hidden' name='organizationId' value=question.organizationId)
+                                        input.input(type='hidden' name='id' value=questionDiscuss.id)
+                                        input.input(type='hidden' name='toUserId' value=member.id)
+                                        input.input(type='hidden' name='questionId' value=question.id)
+                                        .btn(id='publish-' + questionDiscuss.id) > string('publish')
+
+
                 compare(readStatus 'eq' 1)                              
                     li
                         .user-pic > img(src='images/d2.jpg')
@@ -126,17 +116,152 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自讨论') +  a(id='myreply-sharedetails-'+ id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
-                                    .item > string('praise') +  echo('（'+ question.praiseNum +'）')
-                                    .item > .share-bar
-                                        .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
-                                            form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    compare(praise 'eq' true)
+                                        .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已点赞')
+                                    else
+                                        .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
                                     .item > a.normal(href='javascript:;') 删除
-                            .comment-reply.m-top
-                                textarea.input.w-full.block(rows="1")
-                                .btn 回复                                                                        
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='content' value='')
+                                        input.input(type='hidden' name='organizationId' value=question.organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        input.input(type='hidden' name='toUserId' value=member.id)
+                                        input.input(type='hidden' name='questionId' value=question.id)
+                                        .btn(id='publish-' + id) > string('publish')                                                                    
+          
+                  
+
+                   
+#  module
+#      div(data-region='list')
+#  view('list')
+#      .tabs.line.mb-1
+#          .pull-right > echo('你共回复了'+myreply.length+'次')
+#          ul
+#              li.active > echo('我的回复')
+#      .comment-list.ask-list > ul
+#          #  li.text-right
+#          #      echo('我的提问'+'你共提问了'+questions.length+'个问题') 
+#          each(page)
+#              compare(question.type 'eq' 1)
+#                  compare(questionDiscuss.readStatus 'eq' 2)        
+#                      li
+#                          .user-pic > img(src='images/d2.jpg')
+#                          .comment-content
+#                              .h4 > echo(title)
+#                              .comment-text > echo(questionDiscuss.content)
+#                              .user-info
+#                                  a(href='javascript:;') > echo('我')
+#                                  span > echo('讨论了' + member.fullName + '的问题')
+#                                  span.sub-text > date(questionDiscuss.createTime)
+#                              .comment-operation
+#                                  .pull-left > .sub-text > echo('来自问题:') + a(id='myreply-details-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
+#                                  .text-right
+#                                      compare(praise 'eq' true)
+#                                          .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已点赞')
+#                                      else
+#                                          .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + praiseNum +'）')
+#                                      .item(id='discuss-' + questionDiscuss.id ) > string('comment') +  echo('(' + discussList.length +')')
+#                                      .item > .share-bar
+#                                          .drop-down-wrapper
+#                                              span 分享
+#                                              form.drop-down-content > .content
+#                                                  .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+#                                                  .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+#                                      .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+#                                      form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
+#                                          textarea.input.w-full.block(rows=1 name='content' value='')
+#                                          input.input(type='hidden' name='organizationId' value=question.organizationId)
+#                                          input.input(type='hidden' name='id' value=questionDiscuss.id)
+#                                          input.input(type='hidden' name='toUserId' value=member.id)
+#                                          input.input(type='hidden' name='questionId' value=question.id)
+#                                          .btn(id='publish-' + questionDiscuss.id) > string('publish')
+                                        
+#                  compare(readStatus 'eq' 1)                               
+#                      li
+#                          .user-pic > img(src='images/d2.jpg')
+#                          .comment-content
+#                              .h4 > echo(title)
+#                              .comment-text > echo(content)
+#                              .user-info
+#                                  a(href='javascript:;') > echo('我')
+#                                  span > echo('回复了'+member.fullName + '对问题的讨论') 
+#                                  span.sub-text > date(createTime)
+#                              .comment-operation
+#                                  .pull-left > .sub-text > echo('来自回复:') +  a(id='myreply-details-'  + id +'_' + question.id + '_' + createTime ) > echo(question.title)
+#                                  .text-right
+#                                      compare(praise 'eq' true)
+#                                          .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已点赞')
+#                                      else
+#                                          .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + praiseNum +'）')
+#                                      .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
+#                                      .item > a.normal(href='javascript:;') 删除
+#                                      form.comment-reply(id ='comment-reply-' + id)
+#                                          textarea.input.w-full.block(rows=1 name='content' value='')
+#                                          input.input(type='hidden' name='organizationId' value=question.organizationId)
+#                                          input.input(type='hidden' name='id' value=id)
+#                                          input.input(type='hidden' name='toUserId' value=member.id)
+#                                          input.input(type='hidden' name='questionId' value=question.id)
+#                                          .btn(id='publish-' + id) > string('publish')
+
+                                    
+#              compare(question.type 'eq' 2)
+#                  compare(questionDiscuss.readStatus 'eq' 2)
+#                      #  compare(questionDiscuss.auditStatus 'eq' 0)
+#                      li
+#                          .user-pic > img(src='images/d2.jpg')
+#                          .comment-content
+#                              .h4 > echo(title)
+#                              .comment-text > echo(questionDiscuss.content)
+#                              .user-info
+#                                  a(href='javascript:;') > echo('我')
+#                                  span > echo('讨论了'+member.fullName + '的文章') 
+#                                  span.sub-text > date(questionDiscuss.createTime)
+#                              .comment-operation
+#                                  .pull-left > .sub-text > echo('来自文章') + a(id='myreply-sharedetails-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
+#                                  .text-right
+#                                      compare(praise 'eq' true)
+#                                          .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已点赞')
+#                                      else
+#                                          .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + praiseNum +'）')
+#                                      .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
+#                                      .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')    
+#                                      form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
+#                                          textarea.input.w-full.block(rows=1 name='content' value='')
+#                                          input.input(type='hidden' name='organizationId' value=question.organizationId)
+#                                          input.input(type='hidden' name='id' value=questionDiscuss.id)
+#                                          input.input(type='hidden' name='toUserId' value=member.id)
+#                                          input.input(type='hidden' name='questionId' value=question.id)
+#                                          .btn(id='publish-' + questionDiscuss.id) > string('publish')
+
+                    
+#                  compare(readStatus 'eq' 1)                              
+#                      li
+#                          .user-pic > img(src='images/d2.jpg')
+#                          .comment-content
+#                              .h4 > echo(title)
+#                              .comment-text > echo(content)
+#                              .user-info
+#                                  a(href='javascript:;') > echo('我')
+#                                  span > echo('回复了'+member.fullName + '对文章的讨论') 
+#                                  span.sub-text > data(createTime)
+#                              .comment-operation
+#                                  .pull-left > .sub-text > echo('来自讨论') +  a(id='myreply-sharedetails-'+ id +'_' + question.id + '_' + createTime ) > echo(question.title)
+#                                  .text-right
+#                                      compare(praise 'eq' true)
+#                                          .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已点赞')
+#                                      else
+#                                          .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + praiseNum +'）')
+#                                      .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
+#                                      .item > a.normal(href='javascript:;') 删除
+#                                      form.comment-reply(id ='comment-reply-' + id)
+#                                          textarea.input.w-full.block(rows=1 name='content' value='')
+#                                          input.input(type='hidden' name='organizationId' value=question.organizationId)
+#                                          input.input(type='hidden' name='id' value=id)
+#                                          input.input(type='hidden' name='toUserId' value=member.id)
+#                                          input.input(type='hidden' name='questionId' value=question.id)
+#                                          .btn(id='publish-' + id) > string('publish')                                                                    
 #  module
 #      div(data-region='list')
 #  view('list')
