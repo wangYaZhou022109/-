@@ -1,6 +1,7 @@
 var _ = require('lodash/collection');
 exports.bindings = {
     state: false,
+    details: true,
     expert: true,
     down: false
 };

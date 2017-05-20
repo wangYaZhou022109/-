@@ -13,7 +13,9 @@ exports.routes = {
     'questiondetails/:id': 'showQuestionDetails',
     'noticerquestiondetails/:id': 'showNoticerQuestionDetails',
     'articledetails/:id': 'showArticleDetails',
-    'noticerarticledetails/:id': 'showNoticerArticleDetails'
+    'noticerarticledetails/:id': 'showNoticerArticleDetails',
+    'mymanagequestiondetails/:id': 'showMyQuestionDetails',
+    'mymanagesharedetails/:id': 'showMyShareDetails'
 };
 
 exports.showIndex = function() {
@@ -61,6 +63,13 @@ exports.showtopicsquare = function(id) {
 exports.showQuestionDetails = function(id) {
     return this.app.show('content', 'ask/myquiz/details', { id: id });
 };
+exports.showMyQuestionDetails = function(id) {
+    return this.app.show('content', 'ask/mymanage/topicdetail/news/mydetail', { id: id });
+};
+exports.showMyShareDetails = function(id) {
+    return this.app.show('content', 'ask/mymanage/topicdetail/exp/mydetails', { id: id });
+};
+
 exports.showNoticerQuestionDetails = function(id) {
     this.app.viewport.closeModal();
     return this.app.show('content', 'ask/myquiz/details', { id: id });
