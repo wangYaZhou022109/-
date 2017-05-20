@@ -118,7 +118,8 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click remove-*': 'remove',
+    'click del1-*': 'shut1',
+    'click del2-*': 'shut2',
     'click concern-*': 'concern',
     'click enjoy-*': 'enjoy',
     'click report-*': 'report',
@@ -128,7 +129,18 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    remove: function(data) {
+    shut1: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定要删除该数据?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
+    shut2: function(data) {
         var me = this;
         return this.Promise.create(function(resolve) {
             var message = '确定要删除该数据?';
@@ -165,9 +177,11 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    remove: function() {
+    shut1: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+    },
+    shut2: function() {
+        this.app.message.success('删除成功！');
     },
     publish: function() {
         this.app.message.success('操作成功！');
