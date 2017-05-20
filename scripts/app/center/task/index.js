@@ -20,6 +20,7 @@ exports.store = {
             return this.get(this.models.tasks);
         },
         search: function(payload) {
+            this.models.tasks.clear();
             D.assign(this.models.search.data, payload);
             D.assign(this.models.tasks.params, this.models.search.data);
             this.models.search.changed();

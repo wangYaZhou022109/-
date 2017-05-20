@@ -16,9 +16,9 @@ view('options')
         .answer-row
             p.question.color-pass > @echo('标准答案：' state.answer)
             .clearfix.mark-row.border.top.dashed
-                .inline-block > echo('本试题{{{state.score}}}分，')
+                .inline-block > echo('本试题' state.score '分，')
                 .inline-block 评分:
-                input.input.inline-block.min#goal(value=goal.value)
+                input.input.inline-block.min#goal(value=goal.value name='goal')
                 .inline-block 分
 
                 div(id='error')

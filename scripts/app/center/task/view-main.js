@@ -30,7 +30,7 @@ var D = require('drizzlejs'),
         3: '#/exam/exam/answer-paper/',
         4: '#/exam/research-activity/research-detail/',
         5: '#/',
-        6: '#/'
+        6: '#/activity/gensee/detail/'
     },
     getButton,
     getUrl;
