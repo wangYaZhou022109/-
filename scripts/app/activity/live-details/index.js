@@ -6,6 +6,8 @@ var D = require('drizzlejs'),
 exports.items = {
     live: 'live',
     main: 'main',
+    'relative-courses': 'relative-courses',
+    'relative-gensees': 'relative-gensees',
     side: 'side'
 };
 
@@ -15,6 +17,7 @@ exports.store = {
         courses: { url: '../course-study/gensee-student/course' },
         down: { url: '../human/file/download' },
         subGensee: { url: '../course-study/gensee-student/sub' },
+        relativeGensees: { url: '../course-study/gensee-student/relative-gensees' },
         cancelsubGensee: { url: '../course-study/gensee-student/cancelSub' },
         sub: { url: '../course-study/gensee-student/sub-status' },
         access: { url: '../course-study/gensee-student/access' },
@@ -32,11 +35,13 @@ exports.store = {
                 collect = this.models.collect,
                 course = this.models.courses,
                 topics = this.models.topics,
+                relativeGensees = this.models.relativeGensees,
                 me = this;
             collect.params = { businessId: params.id }; // 收藏
             gensee.set(params);
             accessList.set(params); // 参加用户
             access.set({ genseeId: params.id });
+            relativeGensees.params = { genseeId: params.id };
 
             return this.chain(this.get(gensee, {
                 slient: true // get完不触发changed事件
@@ -64,7 +69,7 @@ exports.store = {
                     topics: me.models.topics.data
                 });
                 me.models.gensee.changed();
-            }, [me.get(collect), me.get(accessList)]);
+            }, [me.get(relativeGensees), me.get(collect), me.get(accessList)]);
         },
         cancelsubGensee: function(data) {
             var cancelsubGensee = this.models.cancelsubGensee,

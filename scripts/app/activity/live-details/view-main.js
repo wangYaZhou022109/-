@@ -4,10 +4,10 @@ var $ = require('jquery');
 exports.bindings = {
     gensee: true,
     courses: true,
-    down: true,
+    down: false,
     sub: true,
     collect: true,
-    score: true,
+    score: true
 };
 
 exports.events = {
@@ -92,22 +92,6 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    relatedGensee: function(data) {
-        var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'images/default-cover/default_live.jpg';
-        _.map(data.gensee.relatedGensee || [], function(item) {
-            var info = item,
-                scorePercent = 0,
-                avgScore = 0.0;
-            info.cover = info.cover ? (downUrl + '?id=' + info.cover) : defultImg;
-            if (info.avgScore) {
-                scorePercent = info.avgScore;
-                avgScore = (scorePercent / 10).toFixed(1);
-            }
-            info.avgScore = avgScore;
-        });
-        return data.gensee.relatedGensee;
-    },
     gensee: function(data) {
         var info = data.gensee,
             lecturers = info.lecturers,

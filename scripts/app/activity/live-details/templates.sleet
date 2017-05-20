@@ -4,7 +4,11 @@ module > .live-details-page
     .live-details-banner(data-region='live')
     .page-main-wrapper
         .side(data-region='side')
-        .main(data-region='main')
+        .main.live-details-main.page-main
+            .container
+                section.section(data-region='main')
+                section.section(data-region='relative-courses')
+                section.section(data-region='relative-gensees')
 
 view('live')
     compare(gensee.status 'eq' 2)
@@ -38,109 +42,110 @@ view('side')
 
 
 view('main')
-    .live-details-main.page-main > .container
-        section.section
-            .clearfix
-                .pull-left
-                    .common-title.inline-block
-                        echo(gensee.subject)
-                    .inline-block
-                        .star-wrapper.drop-down-wrapper
-                            .star-bar
-                                .star(style='width:'+score.scorePercent+'%')
-                            if(score.avgScore)
-                                .num > echo(score.avgScore)
-                            else
-                                .inline-block.sub-text > echo('暂无评分')
-                            .drop-down-content(class = if(score.hasScore 'hide')) > .content
-                                .text-center 我来评分
-                                .star-grade
-                                    .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                                    .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                                    .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                                    .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                                    .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                                .block.btn#submit-score 提交评分
-                .inline-block.layout-mr
-                    .inline-block.layout-ml.m-right
-                        #share
-                    .inline-block
-                        if(collect.id)
-                            .item#cancel-collect(data-name='id' data-value=collect.id)
-                                i.iconfont.icon-favorite-full.custom-color-1(title='取消收藏')
-                        else
-                            .item#collect
-                                i.iconfont.icon-favorite(title='收藏')
-            .clearfix.layout-mt-small
-                .pull-right
-                    compare(gensee.status 'eq' 1)
-                        compare(sub.subStatus 'eq' 0)
-                            .btn.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 报名
-                        else
-                            .btn.white.border.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消报名
-                .live-details-teacher
-                    .lecturer.clearfix
-                        .user-pic.pull-left > i.iconfont.icon-user
-                        .teacher.pull-left
-                            | 讲师：
-                            b > echo(gensee.lecturerStr)
-                            p.text-overflow > echo(gensee.lecturerDesc)
-                    .time.clearfix.pull-left
-                        .user-pic.pull-left > i.iconfont.icon-time
-                        | 直播时间
-                        p
-                            dateMinute(gensee.startTime)
+    .clearfix
+        .pull-left
+            .common-title.inline-block
+                echo(gensee.subject)
+            .inline-block
+                .star-wrapper.drop-down-wrapper
+                    .star-bar
+                        .star(style='width:'+score.scorePercent+'%')
+                    if(score.avgScore)
+                        .num > echo(score.avgScore)
+                    else
+                        .inline-block.sub-text > echo('暂无评分')
+                    .drop-down-content(class = if(score.hasScore 'hide')) > .content
+                        .text-center 我来评分
+                        .star-grade
+                            .item(id='star-2' title='1星') > i.iconfont.icon-star-full
+                            .item(id='star-4' title='2星') > i.iconfont.icon-star-full
+                            .item(id='star-6' title='3星') > i.iconfont.icon-star-full
+                            .item(id='star-8' title='4星') > i.iconfont.icon-star-full
+                            .item(id='star-10' title='5星') > i.iconfont.icon-star-full
+                        .block.btn#submit-score 提交评分
+        .inline-block.layout-mr
+            .inline-block.layout-ml.m-right
+                #share
+            .inline-block
+                if(collect.id)
+                    .item#cancel-collect(data-name='id' data-value=collect.id)
+                        i.iconfont.icon-favorite-full.custom-color-1(title='取消收藏')
+                else
+                    .item#collect
+                        i.iconfont.icon-favorite(title='收藏')
+    .clearfix.layout-mt-small
+        .pull-right
+            compare(gensee.status 'eq' 1)
+                compare(sub.subStatus 'eq' 0)
+                    .btn.m-top(id='sub-'+gensee.id data-name='genseeId' data-value=gensee.id) 报名
+                else
+                    .btn.white.border.m-top(id='cancelsub-'+gensee.id data-name='genseeId' data-value=gensee.id) 取消报名
+        .live-details-teacher
+            .lecturer.clearfix
+                .user-pic.pull-left > i.iconfont.icon-user
+                .teacher.pull-left
+                    | 讲师：
+                    b > echo(gensee.lecturerStr)
+                    p.text-overflow > echo(gensee.lecturerDesc)
+            .time.clearfix.pull-left
+                .user-pic.pull-left > i.iconfont.icon-time
+                | 直播时间
+                p
+                    dateMinute(gensee.startTime)
 
-            .side-box.m-top
-                each(gensee.topics)
-                    .tag-btn > echo(name)
-            .side-box.m-top
-                echo('简介：' gensee.genseeDesc)
+    .side-box.m-top
+        each(gensee.topics)
+            .tag-btn > echo(name)
+    .side-box.m-top
+        echo('简介：' gensee.genseeDesc)
 
-        compare(gensee.status 'eq' 3)
-            section.section
-                .h3 直播回顾
-                .main-list.layout-mt-small
-                    ul.cell-4
-                        each(courses)
-                            li > .content > a.normal(href='#/study/course/detail/'+ id target='_blank')
-                                .img
-                                    .img-cont > img(src=cover)
-                                    .detail-wrapper
-                                        p > echo(description)
-                                .clearfix
-                                    .title.text-overflow > echo(name)
-                                .bottom
-                                    .item
-                                        i.iconfont.icon-view
-                                        if(studyMemberCount)
-                                            echo(studyMemberCount)
-                                        else
-                                            echo(0)
-                                    .item
-                                        i.iconfont.icon-star
-                                        if(avgScore)
-                                            echo(avgScore)
-                                        else
-                                            echo(0)
+view('relative-courses')
+    compare(gensee.status 'eq' 3)
+        .h3 直播回顾
+        .main-list.layout-mt-small
+            ul.cell-4
+                each(courses)
+                    li > .content > a.normal(href='#/study/course/detail/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src=cover)
+                            .detail-wrapper
+                                p > echo(description)
+                        .clearfix
+                            .title.text-overflow > echo(name)
+                        .bottom
+                            .item
+                                i.iconfont.icon-view
+                                if(studyMemberCount)
+                                    echo(studyMemberCount)
+                                else
+                                    echo(0)
+                            .item
+                                i.iconfont.icon-star
+                                if(avgScore)
+                                    echo(avgScore)
+                                else
+                                    echo(0)
 
-        if(relatedGensee)
-            section.section
-                .h3 相关直播
-                .main-list.layout-mt-small
-                    ul.cell-4
-                        each(relatedGensee)
-                            li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
-                                .img
-                                    .img-cont > img(src=cover)
-                                    .detail-wrapper
-                                        p > echo(genseeDesc)
-                                .clearfix
-                                    .title.text-overflow > echo(subject)
-                                .bottom
-                                    .item
-                                        i.iconfont.icon-view
-                                        echo(attendNumber)
-                                    .item
-                                        i.iconfont.icon-star
-                                        echo(avgScore)
+view('relative-gensees')
+    if(relativeGensees)
+        .h3 相关直播
+        .main-list.layout-mt-small
+            ul.cell-4
+                each(relativeGensees)
+                    li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src=cover)
+                            .detail-wrapper
+                                p > echo(genseeDesc)
+                        .clearfix
+                            .title.text-overflow > echo(subject)
+                        .bottom
+                            .item
+                                i.iconfont.icon-view
+                                echo(viewNumber)
+                            .item
+                                i.iconfont.icon-star
+                                if(avgScore)
+                                    echo(avgScore)
+                                else
+                                    echo(0)
