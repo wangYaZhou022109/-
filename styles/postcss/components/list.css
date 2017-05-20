@@ -1,5 +1,5 @@
 :root {
-    --main-list-img-height: 12em;
+    --main-list-img-height: auto;
     --main-list-gap: calc(var(--font-size) * 3);
 }
 

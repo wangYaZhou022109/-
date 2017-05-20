@@ -45,6 +45,16 @@
                 margin-top: calc(var(--space)*1.5);
             }
         }
+        & .img {
+            float: left;
+            width: 5em;
+            height: 3em;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            & img {
+                max-height: 100%;
+            }
+        }
     }
 }
 

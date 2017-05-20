@@ -1,5 +1,6 @@
 .header {
     & .nav {
+        min-width: var(--min-width);
         background: #3F4147;
 
         & .item {
