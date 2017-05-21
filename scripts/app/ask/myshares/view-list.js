@@ -146,7 +146,6 @@ exports.dataForActions = {
     },
     shut: function(payload) {
         var data = payload;
-
         return data;
     },
     publish: function(payload) {

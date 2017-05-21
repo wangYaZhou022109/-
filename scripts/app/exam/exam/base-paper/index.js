@@ -105,6 +105,7 @@ exports.store = {
                 init: function(questions) {
                     var map = {},
                         j = 0,
+                        k = 0,
                         me = this;
 
                     this.load();
@@ -119,7 +120,6 @@ exports.store = {
                                     name: _.find(qTypes, ['key', q.type.toString()]).value,
                                     totalScore: constant.ZERO,
                                     size: constant.ZERO,
-                                    status: itemStatus.INIT,
                                     questions: []
                                 });
                             }
@@ -132,22 +132,20 @@ exports.store = {
                         });
 
                         this.data = _.map(map, function(o) {
-                            if (j === constant.ZERO) {
-                                D.assign(o.questions[0], { status: itemStatus.CURRENT });
-                            }
-
+                            k = 0;
                             _.map(o.questions, function(q) {
                                 D.assign(q, {
                                     typeIndex: j,
                                     totalCount: o.size,
                                     questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc']),
-                                    status: q.status === itemStatus.CURRENT
+                                    status: j === constant.ZERO && k++ === constant.ZERO
                                         ? itemStatus.CURRENT
                                             : me.module.options.getCurrentStatus.call(me.module, q.id)
                                 });
                             });
 
                             return D.assign(o, {
+                                id: j,
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
                                 }),
@@ -366,6 +364,10 @@ exports.store = {
                             isCurrent: !isCurrent
                         });
                     });
+                },
+                isNeedMoveAfterSave: function(questionId) {
+                    var question = this.getQuestionById(questionId);
+                    return question.type === 1 || question.type === 3;
                 }
             }
         }

@@ -45,8 +45,14 @@ var setOptions = {
                             correctNum: questionSummary.correctNum,
                             errorNum: questionSummary.errorNum,
                             noAnswerCount: questionSummary.noAnswerCount,
-                            examineeTotalScore: questionSummary.totalScore
+                            examineeTotalScore: 0
                         };
+
+                        if (exam.examRecord.status > 5) {
+                            D.assign(this.data, {
+                                examineeTotalScore: questionSummary.totalScore
+                            });
+                        }
                     },
                     initWithSuject: function(exam) {
                         var types = this.module.store.models.types,
@@ -317,7 +323,7 @@ countSorting = function(question, answer, r) {
 countOther = function(question, answer, r) {
     var result = r;
     if (!answer) {
-        D.assign(result, { noAnswerCount: result.noAnswerCount++ });
+        D.assign(result, { noAnswerCount: ++result.noAnswerCount });
     }
     return result;
 };

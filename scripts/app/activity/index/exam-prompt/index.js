@@ -41,3 +41,10 @@ exports.store = {
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
+
+exports.afterClose = function() {
+    if (this.renderOptions.toActivityHome) {
+        this.app.navigate('activity/index');
+    }
+};
+
