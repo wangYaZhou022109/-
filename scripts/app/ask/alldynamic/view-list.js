@@ -42,7 +42,7 @@ exports.handlers = {
             data = { };
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            this.app.viewport.modal(this.module.items['ask-new/index/export'], {
+            this.app.viewport.modal(this.module.items['ask/report'], {
                 id: data[1],
                 objectType: data[0],
                 beUserId: data[2] });

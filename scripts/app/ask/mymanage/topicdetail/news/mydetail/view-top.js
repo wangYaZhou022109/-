@@ -1,9 +1,9 @@
+
 exports.type = 'dynamic';
 
 exports.bindings = {
     followcount: true,
-    details: true,
-    concern: true
+    details: true
 };
 
 exports.getEntityModuleName = function(key) {
@@ -21,10 +21,8 @@ exports.dataForEntityModule = function(entity) {
 
 
 exports.actions = {
-    'click follow-question-*': 'follow',
-    'click unfollow-question-*': 'unfollow',
-    'click fabulous-*': 'fabulous',
-    'click unfabulous-*': 'unfabulous',
+    'click follow-*': 'follow',
+    'click unfollow-*': 'unfollow',
     'click shut-*': 'shut',
     'click fire-*': 'fire',
     'click setEssenceStatus-*': 'setEssenceStatus',
@@ -33,24 +31,20 @@ exports.actions = {
 
 exports.dataForActions = {
     follow: function(payload) {
-        var data = payload;
-        data.concernType = 3;
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
         return data;
     },
     unfollow: function(payload) {
-        var data = payload;
-        data.concernType = 3;
-        return payload;
-    },
-    fabulous: function(payload) {
-        var data = payload;
-        data.objectType = 3;
-        return payload;
-    },
-    unfabulous: function(payload) {
-        var data = payload;
-        data.objectType = 3;
-        return payload;
+        var id = payload.id,
+            data = {};
+        var obj = id.split('_');
+        data.id = obj[1];
+        data.concernType = obj[0];
+        return data;
     },
     shut: function(payload) {
         var data = payload;
@@ -77,10 +71,8 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     // follow: function() {
     //     this.app.message.success('关注成功！');
-    //     // this.module.dispatch('refresh');
-    // },
-    unfollow: function() {
-        this.app.message.success('取消关注成功！');
-        // this.module.dispatch('refresh');
+    // }
+    shut: function() {
+        this.app.show('content');
     }
 };

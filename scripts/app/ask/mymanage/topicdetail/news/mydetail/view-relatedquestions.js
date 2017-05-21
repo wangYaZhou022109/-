@@ -1,3 +1,4 @@
+
 exports.bindings = {
-    share: true
+    question: true
 };
