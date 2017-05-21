@@ -19,7 +19,9 @@ view('main')
             .inline-block
                 #star-score
         .inline-block.layout-mr
-            .inline-block.layout-ml.m-right > #share
+            .inline-block.layout-ml.m-right
+                compare(knowledge.auditStatus 'eq' 1)
+                    #share
             .inline-block.m-left
                 if(collect.id)
                     .item#cancel-collect(data-name='id' data-value=collect.id)

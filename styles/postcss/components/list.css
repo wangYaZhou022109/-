@@ -162,7 +162,6 @@
 
     & .img,
     & .img img {
-        height: var(--main-list-img-height);
         width: 100%;
     }
 }

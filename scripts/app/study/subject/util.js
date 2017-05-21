@@ -76,7 +76,7 @@ items = {
         var progress = section.progress || { finishStatus: 0 },
             resource = section.resource || {},
             examScore = progress.examScore || 0,
-            score = examScore / 100,
+            score = (examScore % 100) > 0 ? (examScore / 100).toFixed(1) : window.parseInt(examScore / 100),
             btnText = { 0: '参与考试', 1: '查看详情', 2: '查看详情', 5: '查看详情', 6: '重新考试' },
             statusText = { 1: '成绩：' + score, 2: '成绩：' + score, 5: '待评卷', 6: '成绩：' + score },
             timeText;
