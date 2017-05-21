@@ -16,7 +16,6 @@ exports.store = {
             var historys = _.orderBy(viewUtil.getSearchHistory() || [], ['time'], ['desc']),
                 option = historys[0] || {};
             this.models.state.clear();
-            console.log(option);
             this.models.state.set({
                 key: viewUtil.typeMaps[option.searchType] || 'all',
                 searchContent: option.searchContent,
