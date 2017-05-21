@@ -1,0 +1,33 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(articles.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(articles.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .main-list
+        ul.knowledge-list.cell-1 > each(articles)
+            li(id='question-'+id) > .knowledge-box.pointer
+                .knowledge-tit-con
+                    .clearfix
+                        .pull-right.small-font.sub-text
+                            echo(member.fullName)
+                            string('ask-articles') > dateMinute(createTime)
+                        a.knowledge-tit.pull-left > echo(title)
+                    .text-tips.text-overflow
+                        span > echo(contentTxt)
+
+        #pager.pagination

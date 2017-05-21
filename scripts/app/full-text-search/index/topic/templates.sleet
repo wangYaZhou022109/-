@@ -1,0 +1,29 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(topics.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(topics.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .ask-list
+        ul.cell-4 > each(topics)
+            li.topic-item
+                a.normal(href="#/ask/noticertopicdetail/" + id target='_blank')
+                    .img > .img-cont > img(src=cover)
+                    h4.text-overflow(title=name) > a.normal(href="#/ask/noticertopicdetail/" + id target='_blank') > echo(name)
+                    .info > echo(concernNumber + '关注 ｜ ') + echo(expertNumber + '专家 ｜ ') + echo(questionNumber + '问题')
+
+        #pager.pagination

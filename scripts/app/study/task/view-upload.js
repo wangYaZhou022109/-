@@ -14,7 +14,6 @@ exports.components = function() {
         name: 'uploader',
         options: {
             model: 'file',
-            chunk_size: '3mb',
             multi_selection: false,
             filters: {
                 max_file_size: '100mb',

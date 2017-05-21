@@ -1,0 +1,29 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(specialist.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(specialist.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .ask-list > ul.cell-3 > each(specialist)
+        li.expert-item
+            a.normal(href="#/ask/noticerexpertdetails/" + id + '/' + member.id target='_blank')
+                .img > .img-cont > img(src=cover alt=member.fullName)
+                h4.text-overflow > a.normal(href="#/ask/noticerexpertdetails/" + id + '/' + member.id target='_blank') > echo(member.fullName)
+                .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
+                .sub-text.text-overflow > echo(introduce)
+
+        #pager.pagination

@@ -1,20 +1,26 @@
-#!handlebars
+#! handlebars
 
-module > .course-page.study-subject-page
-    .main > .container > .study-subject-list(data-region='list')
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
 
-view('list')
+view('main') > .container
+    compare(subjects.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(subjects.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
     .main-list
-        .filter
-            .pull-left > each(topics)
-                .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
-
-            .pull-right
-                .item#order-0 > span 最新
-                .item#order-1 > span 最热
-                .item#order-2 > span 好评
         ul > each(subjects)
-            li > a.normal(id='openDetail-'+id) > .content.pointer
+            li > a.normal(id='openDetail-'+id) > .content
                 .img
                     .img-cont > img(src=imageUrl)
                     .detail-wrapper
