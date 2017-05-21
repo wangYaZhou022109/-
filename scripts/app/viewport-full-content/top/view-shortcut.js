@@ -1,10 +1,16 @@
 var $ = require('jquery'),
-    _ = require('lodash/collection');
+    _ = require('lodash/collection'),
+    maps = require('./app/util/maps'),
+    D = require('drizzleJs'),
+    SEARCH_URL = 'search',
+    viewUtil = require('./app/full-text-search/view-util');
 exports.bindings = {
     message: true,
     integral: true,
     courseTime: true,
-    organizations: true
+    organizations: true,
+    state: true,
+    hotTopics: true
 };
 
 exports.events = {
@@ -13,11 +19,22 @@ exports.events = {
     'click register': 'toRegister',
     'click menu-*': 'taggleMenus',
     'click theme-*': 'changeTheme',
-    'click search': 'showSearchMore',
+    'click searchContent': 'showSearchMore',
     'click message-more': 'showMessage',
     'click message-div': 'showMessage',
     'mouseover message-div': 'refreshMessage',
-    'click org-*': 'changeHome'
+    'click org-*': 'changeHome',
+    'click remove-*': 'removeHistory',
+    'mouseover searchMore': 'showSearchMore',
+    'mouseout searchMore': 'hideSearchMore'
+};
+
+exports.actions = {
+    'click searchBtn': 'searchByName',
+    'click clearHistory': 'clearHistory',
+    'keypress searchContent': 'enterSearch',
+    'click historyName-*': 'historyName',
+    'click topic-*': 'searchByTopic'
 };
 
 exports.handlers = {
@@ -42,7 +59,9 @@ exports.handlers = {
     showSearchMore: function() {
         $(this.$('searchMore')).addClass('show');
     },
-
+    hideSearchMore: function() {
+        $(this.$('searchMore')).removeClass('show');
+    },
     showMessage: function() {
         var model = this.module.items['home/message'];
         this.app.viewport.modal(model);
@@ -53,6 +72,47 @@ exports.handlers = {
     },
     changeHome: function(id) {
         this.app.navigate('home/org/' + id, true);
+    },
+    removeHistory: function(id) {
+        this.module.dispatch('removeHistory', { id: id });
+    }
+};
+
+exports.dataForActions = {
+    searchByName: function(payload) {
+        var params = payload,
+            time = new Date().getTime();
+        params.id = D.uniqueId('search') + time;
+        params.time = time;
+        if (params.searchContent) {
+            $(this.$('searchPannel')).hide();
+            return params;
+        }
+        return false;
+    },
+    enterSearch: function(payload, e) {
+        var params = payload,
+            time = new Date().getTime();
+        if (e.keyCode === 13 && params.searchContent) {
+            params.id = D.uniqueId('search') + time;
+            params.time = time;
+            $(this.$('searchPannel')).hide();
+            return params;
+        }
+        return false;
+    },
+    historyName: function(payload) {
+        var type = $(this.$$('[name="searchType"]')).val();
+        $(this.$('searchPannel')).hide();
+        return { searchType: type, id: payload.id };
+    },
+    searchByTopic: function(payload) {
+        var params = payload,
+            time = new Date().getTime();
+        params.uniqueId = D.uniqueId('search') + time;
+        params.time = time;
+        $(this.$('searchPannel')).hide();
+        return params;
     }
 };
 
@@ -107,5 +167,34 @@ exports.dataForTemplate = {
             time = hour + '小时' + time;
         }
         return time;
+    },
+    searchTypes: function() {
+        return maps.get('search-type');
+    },
+    searchHistorys: function() {
+        var searchHistorys = viewUtil.getSearchHistory();
+        return _.orderBy(
+            _.filter(searchHistorys || [], function(o) { return o.searchContent; }) || [],
+            ['time'], ['desc']).slice(0, 6);
+    },
+    showSearch: function() {
+        var searchUrl = window.location.protocol + '//' + window.location.host + '/#/' + SEARCH_URL,
+            currentUrl = window.location.href;
+        return currentUrl !== searchUrl;
+    }
+};
+
+exports.actionCallbacks = {
+    searchByName: function() {
+        this.app.navigate(SEARCH_URL, true);
+    },
+    enterSearch: function() {
+        this.app.navigate(SEARCH_URL, true);
+    },
+    historyName: function() {
+        this.app.navigate(SEARCH_URL, true);
+    },
+    searchByTopic: function() {
+        this.app.navigate(SEARCH_URL, true);
     }
 };

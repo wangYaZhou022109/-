@@ -1,5 +1,6 @@
 exports.routes = {
     home: 'showHome',
+    search: 'showSearchPage',
     'home/:configId': 'previewHome',
     'home/org/:orgId': 'changeHome',
     'share/:id/:type': 'showShare', // 分享跳转
@@ -11,7 +12,6 @@ exports.routes = {
     'center/notloggin': 'showNotloggin',
     'center/managements/statistics': 'showStatistics',
     'center/managements/taskmarking': 'showTaskmarking',
-    'search-page': 'showSearchPage',
     'home/home-advertisement/:id': 'showDetail'
 
 };
