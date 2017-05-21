@@ -241,10 +241,21 @@ var setOptions = {
                 });
             },
             saveAnswer: function(payload) {
+                var types = this.models.types,
+                    me = this;
                 this.models.answer.saveAnswer(payload);
                 this.models.modify.saveAnswer(payload);
                 this.models.state.calculate();
                 if (this.models.state.data.singleMode) {
+                    //  是否需要保存答案后移动到下一题
+                    if (types.isNeedMoveAfterSave(payload.key)) {
+                        setTimeout(function() {
+                            me.module.dispatch('move', {
+                                id: types.getType(payload.key).id,
+                                offset: 1
+                            });
+                        }, 300);
+                    }
                     this.models.state.changed();
                 } else {
                     this.models.types.updateStatus(payload.key, itemStatus.ACTIVE);
@@ -293,6 +304,7 @@ var setOptions = {
                         if (payload.submitType === submitType.Auto) {
                             me.models.modify.clear();
                         } else {
+                            helper.refreshParentWindow();
                             D.assign(state.data, { over: true });
                             helper.WS.closeConnect();
                             if (countDown) {
@@ -372,7 +384,7 @@ var target = D.assign({}, {
             firstTime = 1,
             examId = this.store.models.exam.data.id,
             getRandom = function() {
-                var r = Math.random() * 1,
+                var r = Math.random() * 2,
                     min = Number(r.toFixed(2)),
                     ms = (min + 1) * (1000 * 60);
                 return ms;
@@ -380,18 +392,16 @@ var target = D.assign({}, {
             f = true,
             autoSubmit = function(time) {
                 if (!me.store.models.exam.data.id) return '';
-                if (time !== 1) {
-                    me.app.message.success(strings.get('exam.answer-paper.auto-submit-success'));
-                }
                 return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
                     helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
+                    if (time !== 1) {
+                        me.app.message.success(strings.get('exam.answer-paper.auto-submit-success'));
+                    }
                 });
             };
 
         if (f) {
-            autoSubmit(firstTime);
-
-            helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
+            helper.TO.timeOutId = autoSubmit(firstTime);
 
             helper.WS.connect(examId, function() {
                 return me.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
@@ -437,3 +447,4 @@ viewAnswerDetail = function() {
         });
     }
 };
+
