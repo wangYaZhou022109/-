@@ -13,7 +13,7 @@ exports.handlers = {
     search: function(id) {
         var data = {};
         if (id) {
-            D.assign(data, { status: id === 0 ? null : id });
+            D.assign(data, { status: Number(id) === 0 ? null : id });
         } else {
             D.assign(data, { name: this.$('name').value });
         }

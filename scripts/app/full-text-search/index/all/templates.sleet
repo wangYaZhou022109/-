@@ -1,0 +1,332 @@
+#! handlebars
+
+module > .search-page(data-region='main')
+
+view('main') > .container
+    compare(state.count 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(state.count)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+
+    compare(courses.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 课程
+                a.more(id='more-1' href='javascript:;') more
+            .main-list
+                ul
+                    each(courses)
+                        li > a.normal(href='#/study/course/detail/'+id) > .content
+                            .img
+                                .img-cont
+                                    img(src=img)
+                                .detail-wrapper
+                                    p > @echo(description)
+                                    compare(studyType 'eq' 0)
+                                        a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 开始学习
+                                    compare(studyType 'eq' 1)
+                                        a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 继续学习
+                                    compare(studyType 'eq' 2)
+                                        a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
+                            .text-overflow.title > echo(name)
+                            .bottom
+                                .item(title='浏览') > i.iconfont.icon-view + echo(visits)
+                                .item(title='评分') > i.iconfont.icon-star + echo(avgScore)
+
+    compare(courses.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 专题
+                a.more(id='more-2' href='javascript:;') more
+            .main-list
+                ul > each(subjects)
+                    li > a.normal(id='openDetail-'+id) > .content
+                        .img
+                            .img-cont > img(src=imageUrl)
+                            .detail-wrapper
+                                p
+                                    if(description)
+                                        echo(description)
+                                    else
+                                        echo('暂无')
+                        .clearfix
+                            .pull-right.small-font.m-left
+                                i.iconfont.icon-view(title='浏览')
+                                span.m-let > echo(visits)
+                            .title.text-overflow > echo(name)
+                            .sub-text.text-overflow
+                                if(description)
+                                    echo(description)
+                                else
+                                    echo('&nbsp;')
+
+    # .search-content
+    #     .content-type
+    #         .h3.inline-block 慕课
+    #         a.more(href='javascript:;') more
+    #     .main-list
+    #         ul
+    #             li > .content
+    #                 .img
+    #                     .img-cont > a.normal(href='javascript:;')
+    #                         img(src='images/default-cover/default_course.jpg')
+    #                     .detail-wrapper
+    #                         p bigdata慕课1
+    #                         a.normal.block(href='javascript:;') > .btn.radius.block 开始学习
+    #
+    #                 .text-overflow.title bigdata慕课1
+    #                 .bottom
+    #                     .item(title='浏览') > i.iconfont.icon-view + | 5524
+    #                     .item(title='评分') > i.iconfont.icon-star + | 5
+    #             li > .content
+    #                 .img
+    #                     .img-cont > a.normal(href='javascript:;')
+    #                         img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+    #                     .detail-wrapper
+    #                         p bigdata慕课2
+    #                         a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+    #
+    #                 .text-overflow.title bigdata慕课1
+    #                 .bottom
+    #                     .item(title='浏览') > i.iconfont.icon-view + | 5524
+    #                     .item(title='评分') > i.iconfont.icon-star + | 5
+    #             li > .content
+    #                 .img
+    #                     .img-cont > a.normal(href='javascript:;')
+    #                         img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+    #                     .detail-wrapper
+    #                         p bigdata课程3
+    #                         a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+    #
+    #                 .text-overflow.title bigdata课程1
+    #                 .bottom
+    #                     .item(title='浏览') > i.iconfont.icon-view + | 5524
+    #                     .item(title='评分') > i.iconfont.icon-star + | 5
+    #             li > .content
+    #                 .img
+    #                     .img-cont > a.normal(href='javascript:;')
+    #                         img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+    #                     .detail-wrapper
+    #                         p bigdata课程4
+    #                         a.normal.block(href='#/study/course/detail/') > .btn.radius.block 开始学习
+    #
+    #                 .text-overflow.title bigdata课程1
+    #                 .bottom
+    #                     .item(title='浏览') > i.iconfont.icon-view + | 5524
+    #                     .item(title='评分') > i.iconfont.icon-star + | 5
+    #             li > .content
+    #                 .img
+    #                     .img-cont > a.normal(href='javascript:;')
+    #                         img(src='/api/v1/human/file/download?id=7a9b9158-0bba-492e-afaa-f77648fe7a4a')
+    #                     .detail-wrapper
+    #                         p bigdata课程5
+    #                         a.normal.block(href='javascript:;') > .btn.radius.block 开始学习
+    #
+    #                 .text-overflow.title bigdata课程1
+    #                 .bottom
+    #                     .item(title='浏览') > i.iconfont.icon-view + | 5524
+    #                     .item(title='评分') > i.iconfont.icon-star + | 5
+    compare(classes.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 班级
+                a.more(href='javascript:;') more
+            .activity-page > .main-list
+                ul.arrow-box.activity-item-box.activity-item-class.cell-3
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-class.pull-left.activity-item-icon
+                            .overflow
+                                a(href='javascript:;') 班级班级班级班级班级标题
+                                .text-tips.m-top.text-overflow
+                                    | 3806人参与
+                                    i.iconfont.icon-date.m-left + | 05-15 至 05-18
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-class.pull-left.activity-item-icon
+                            .overflow
+                                a(href='javascript:;') 班级班级班级班级班级标题
+                                .text-tips.m-top.text-overflow
+                                    | 3806人参与
+                                    i.iconfont.icon-date.m-left + | 05-15 至 05-18
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-class.pull-left.activity-item-icon
+                            .overflow
+                                a(href='javascript:;') 班级班级班级班级班级标题
+                                .text-tips.m-top.text-overflow
+                                    | 3806人参与
+                                    i.iconfont.icon-date.m-left + | 05-15 至 05-18
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-class.pull-left.activity-item-icon
+                            .overflow
+                                a(href='javascript:;') 班级班级班级班级班级标题
+                                .text-tips.m-top.text-overflow
+                                    | 3806人参与
+                                    i.iconfont.icon-date.m-left + | 05-15 至 05-18
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-class.pull-left.activity-item-icon
+                            .overflow
+                                a(href='javascript:;') 班级班级班级班级班级标题
+                                .text-tips.m-top.text-overflow
+                                    | 3806人参与
+                                    i.iconfont.icon-date.m-left + | 05-15 至 05-18
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-class.pull-left.activity-item-icon
+                            .overflow
+                                a(href='javascript:;') 班级班级班级班级班级标题
+                                .text-tips.m-top.text-overflow
+                                    | 3806人参与
+                                    i.iconfont.icon-date.m-left + | 05-15 至 05-18
+
+    compare(exams.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 考试
+                a.more(id='more-5' href='javascript:;') more
+            .activity-page > .main-list
+                ul.arrow-box.activity-item-box.activity-item-exam.cell-3 > each(exams)
+                    li(id='exam-' + id)
+                        .activity-item.clearfix.pointer
+                            i.iconfont.icon-exam.pull-left.activity-item-icon
+                            .overflow
+                                echo(name)
+                                .text-tips.m-top.text-overflow
+                                    # | 3806人参与
+                                    # i.iconfont.icon-date.m-left
+                                    dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
+    compare(researchs 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 调研
+                a.more(id='more-6' href='javascript:;') more
+            .activity-page > .main-list
+                ul.arrow-box.activity-item-box.activity-item-research.cell-3 > each(researchs)
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-note.pull-left.activity-item-icon
+                            .overflow
+                                a(id='research-' + id) > echo(name)
+                                .text-tips.m-top.text-overflow
+                                    # | 3806人参与
+                                    # i.iconfont.icon-date.m-left
+                                    dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
+
+    compare(lives.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 直播
+                a.more(id='more-7' href='javascript:;') more
+            .main-list
+                ul > each(lives)
+                    li > .content
+                        .img
+                            .img-cont > a.normal(href='javascript:;')
+                                img(src=cover)
+                            .detail-wrapper
+                                p > echo(description)
+                                .btn.radius.block
+                                    compare(status 'eq' 1)
+                                        div(id='attendLive-'+id) 我要参与
+                                    compare(status 'eq' 2)
+                                        div(id='attendLive-'+id) 观看直播
+                                    compare(status 'eq' 3)
+                                        div(id='attendLive-'+id) 直播回顾
+
+                        .text-overflow.title > echo(subject)
+                        .bottom.text-tips
+                            i.iconfont.icon-view
+                            span > echo(subNumber)
+                            i.iconfont.icon-date.m-left
+                            span > date(startTime)
+
+    compare(knowledges.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 知识
+                a.more(id='more-12' href='javascript:;') more
+            .main-list
+                ul.knowledge-list.cell-2 > each(knowledges)
+                    li(id = 'knowledge-'+id) > .knowledge-box
+                        i.iconfont.pull-left.m-right.icon-word
+                        .knowledge-tit-con
+                            .clearfix
+                                a.knowledge-tit.pull-left > echo(name)
+                            .text-tips
+                                span > echo('发布人:') + echo(uploadMember.fullName)
+                                span > echo('发布日期：') + date(uploadTime)
+                                span > echo('浏览数：') + echo(browseCount)
+                                span > echo('下载数：') + echo(downloadMemberCount)
+
+
+    compare(askBar.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 问题
+                a.more(id='more-8' href='javascript:;') more
+            .main-list
+                ul.knowledge-list.cell-1 > each(askBar)
+                    li(id='question-'+id) > .knowledge-box.pointer
+                        .img > .img-cont > @echo(cover)
+                        .knowledge-tit-con
+                            .clearfix
+                                .pull-right.small-font.sub-text
+                                    echo(member.fullName)
+                                    string('ask-a-question') > dateMinute(createTime)
+                                .knowledge-tit.pull-left > echo(title)
+                            .text-tips.text-overflow
+                                span > echo(contentTxt)
+
+    compare(articles.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 文章
+                a.more(id='more-9' href='javascript:;') more
+            .main-list
+                ul.knowledge-list.cell-1 > each(articles)
+                    li(id='question-'+id) > .knowledge-box.pointer
+                        .knowledge-tit-con
+                            .clearfix
+                                .pull-right.small-font.sub-text
+                                    echo(member.fullName)
+                                    string('ask-articles') > dateMinute(createTime)
+                                a.knowledge-tit.pull-left > echo(title)
+                            .text-tips.text-overflow
+                                span > echo(contentTxt)
+
+    compare(specialist.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 专家
+                a.more(id='more-10' href='javascript:;') more
+            .ask-list > ul.cell-3 > each(specialist)
+                li.expert-item
+                    a.normal(href="#/ask/askExpertdetails/" + id + '/' + member.id target='_blank')
+                        .img > .img-cont > img(src=cover alt=member.fullName)
+                        h4.text-overflow > a.normal(href="#/ask/noticerexpertdetails/" + id + '/' + member.id target='_blank') > echo(member.fullName)
+                        .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
+                        .sub-text.text-overflow > echo(introduce)
+
+    compare(topics.length 'gt' 0)
+        .search-content
+            .content-type
+                .h3.inline-block 话题
+                a.more(id='more-11' href='javascript:;') more
+            .ask-list > ul.cell-4 > each(topics)
+                li.topic-item
+                    a.normal(href="#/ask/noticertopicdetail/" + id target='_blank')
+                        .img > .img-cont > img(src=cover)
+                        h4.text-overflow(title=name) > a.normal(href="#/ask/noticertopicdetail/" + id target='_blank') > echo(name)
+                        .info > echo(concernNumber + '关注 ｜ ') + echo(expertNumber + '专家 ｜ ') + echo(questionNumber + '问题')

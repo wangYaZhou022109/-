@@ -33,20 +33,13 @@ switchScreen = function(exam) {
             }
             return true;
         });
-        window.onblur = function() {
-            return me.dispatch('lowerSwitchTimes');
-        };
     }
 };
 
 closeListener = function(msg) {
     var message = msg;
     window.onbeforeunload = function() {
-        this.app.message.confirm(message, function() {
-            window.close();
-        }, function() {
-            return false;
-        });
+        return message;
     };
 };
 

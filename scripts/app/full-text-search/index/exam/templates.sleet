@@ -1,0 +1,33 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(exams.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(exams.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .activity-page > .main-list
+        ul.arrow-box.activity-item-box.activity-item-exam.cell-3 > each(exams)
+            li(id='exam-' + id)
+                .activity-item.clearfix.pointer
+                    i.iconfont.icon-exam.pull-left.activity-item-icon
+                    .overflow
+                        a(id='exam-' + id) > echo(name)
+                        .text-tips.m-top.text-overflow
+                            # | 3806人参与
+                            # i.iconfont.icon-date.m-left
+                            dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
+
+        #pager.pagination

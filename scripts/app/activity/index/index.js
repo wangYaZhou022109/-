@@ -21,7 +21,7 @@ exports.store = {
             url: '../exam/activity/recommends-activity-list'
         },
         gensees: {
-            url: '../course-study/gensee/details',
+            url: '../course-study/gensee/activity-list',
             type: 'pageable',
             root: 'items',
             pageSize: 50
@@ -30,7 +30,7 @@ exports.store = {
             url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 60
+            pageSize: 90
         },
         researchActivitys: {
             url: '../exam/research-activity/activity-list',

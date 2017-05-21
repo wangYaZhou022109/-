@@ -1,0 +1,42 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(subjects.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(subjects.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .main-list
+        ul > each(subjects)
+            li > a.normal(id='openDetail-'+id) > .content
+                .img
+                    .img-cont > img(src=imageUrl)
+                    .detail-wrapper
+                        p
+                            if(description)
+                                echo(description)
+                            else
+                                echo('暂无')
+                .clearfix
+                    .pull-right.small-font.m-left
+                        i.iconfont.icon-view(title='浏览')
+                        span.m-let > echo(visits)
+                    .title.text-overflow > echo(name)
+                    .sub-text.text-overflow
+                        if(description)
+                            echo(description)
+                        else
+                            echo('&nbsp;')
+        #pager.pagination

@@ -311,12 +311,16 @@ var setOptions = {
             },
             lowerSwitchTimes: function() {
                 var exam = this.models.exam.data,
+                    me = this,
                     message;
                 if (exam.allowSwitchTimes) {
                     if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
-                        this.app.message.error(strings.get('exam.answer-paper.switch-screen.full-times'));
                         return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
-                            helper.WS.closeConnect();
+                            return me.module.dispatch('showTips', {
+                                tips: strings.get('exam.answer-paper.switch-screen.full-times')
+                            }).then(function() {
+                                me.app.viewport.modal(me.module.items['exam-notes']);
+                            });
                         });
                     }
 
