@@ -81,7 +81,7 @@ exports.store = {
 
 
 exports.afterRender = function() {
-    this.dispatch('init', this.renderOptions);
+    return this.dispatch('init', this.renderOptions);
 };
 
 exports.mixin = {

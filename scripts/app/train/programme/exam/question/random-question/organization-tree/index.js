@@ -14,7 +14,6 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    // var uri = this.renderOptions.url || this.app.global.uri;
-    var uri = 'course-study/course-info';
+    var uri = this.renderOptions.url || this.app.global.uri;
     return this.dispatch('initPage', uri);
 };

@@ -20,7 +20,7 @@ exports.store = {
     models: {
         search: {},
         researchActivities: {
-            url: '../exam/research-activity/find-for-course',
+            url: '../exam/research-activity/front/find-for-train',
             type: 'pageable',
             root: 'items'
         },
@@ -35,19 +35,29 @@ exports.store = {
 
             D.assign(this.models.researchActivities.params, {
                 type: this.module.options.RESEARCH_TYPE,
-                uri: this.app.global.uri
+                organizationId: payload.organizationId
             });
 
             D.assign(research.data, {
                 sourceType: payload.sourceType || EXAM_SOURCE_TYPE
             });
+            this.models.researchActivities.clear();
             return this.get(this.models.researchActivities);
         },
         search: function(payload) {
-            var createTimeRange = payload.createTime || 'to';
+            var createTimeRange = payload.createTime || 'to',
+                publishTimeStart,
+                publishTimeEnd,
+                start,
+                end;
+            publishTimeEnd = createTimeRange.split('to')[1].trim();
+            publishTimeStart = createTimeRange.split('to')[0].trim();
+            start = new Date(publishTimeStart).getTime();
+            end = new Date(publishTimeEnd).getTime();
+            this.models.researchActivities.clear();
             D.assign(this.models.researchActivities.params || {}, payload, {
-                createTimeStart: createTimeRange.split('to')[0].trim(),
-                createTimeEnd: createTimeRange.split('to')[1].trim()
+                publishTimeStart: start || '',
+                publishTimeEnd: end || ''
             });
             return this.get(this.models.researchActivities);
         }

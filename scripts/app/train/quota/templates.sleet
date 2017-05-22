@@ -50,21 +50,23 @@ view('main')
                     .text-center.layout-mt
                         .h3 当前班级配额方式为整体配额!
 
-view('company')
-    div(style='padding:20px 50px 50px 20px;')
-        .col-sm-6(style='text-align:center;')
-            each(groupList)
-                a(id='group-'+id data-name='id' data-value=id style='float:left;margin-left:10px;') > echo(groupName)
-        .row(style='line-height:50px;')
-            .col-sm-6(style='text-align:center;')
-            input#check-all(type='checkbox')
-            label(for='check-all') 全选
-        each(organizationList)
-            input(type='checkbox' id='box-'+organizationId data-name='organizationId' data-value=organizationId value=organizationId name='box-org')
-            label(for='box-'+organizationId) > echo(organization.name)
-        .row(style='line-height:50px;')
-            .col-sm-6
-                label > echo('剩余配额：' + quotaInfo.overplus)
-                label 配置额度
-                input#quota-input(name='quota' maxLength=5)
-                a.btn#addQuota 添加
+view('company') > .addunit-page
+    .tabs.line > ul
+        each(groupList) > li
+            a(id='group-'+id data-name='id' data-value=id style='float:left;margin-left:10px;') > echo(groupName)
+    .tabs-cont > ul
+        li.active
+            .clearfix.layout-mt-small > .pull-right
+                input#check-all(type='checkbox')
+                label(for='check-all') 全选
+            ul.companyname.m-top.clearfix
+                each(organizationList) > li.active
+                    input(type='checkbox' id='box-'+organizationId data-name='organizationId' data-value=organizationId value=organizationId name='box-org')
+                    label(for='box-'+organizationId) > echo(organization.name)
+            .layout-mt-small.layout-mb-small
+                .inline-block.layout-mr
+                    span > echo('剩余配额：' + quotaInfo.overplus)
+                .inline-block
+                    label.addunit-label.tag-height 配置额度：
+                    input.tag-height.m-right#quota-input(name='quota' maxLength=5)
+                    a.btn.tag-height.gray#addQuota 添加

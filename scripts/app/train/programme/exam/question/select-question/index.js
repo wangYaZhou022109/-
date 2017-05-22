@@ -52,6 +52,7 @@ exports.store = {
                 status: 1,
                 url: this.module.renderOptions.url
             });
+            this.models.questions.clear();
             return this.get(this.models.questions);
         },
         refresh: function() {

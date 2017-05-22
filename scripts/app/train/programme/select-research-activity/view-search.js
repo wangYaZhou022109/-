@@ -20,7 +20,7 @@ exports.handlers = {
     search: function() {
         var param = {
             name: this.$('name').value,
-            publishMemberId: this.$('publishMemberId').value,
+            publishMember: this.$('publishMemberName').value,
             createTime: this.$('create-time').value
         };
         this.module.dispatch('search', param);

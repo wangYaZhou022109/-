@@ -21,9 +21,11 @@ exports.components = [function() {
             }
         }
     };
+
     if (this.module.renderOptions) {
         obj.options.renderOptions = this.module.renderOptions;
     }
+
     return obj;
 }];
 
@@ -54,3 +56,4 @@ exports.updateDepots = function() {
     this.components.tree.reset(this.bindings.questionDepots.data);
     nodeChanged.call(this, this.components.tree.selectRoot());
 };
+

@@ -23,8 +23,8 @@ exports.store = {
                // { id: '2-0', name: '我的mooc', url: 'mooc' },
                 { id: '2-0', name: '我的直播', url: 'live' },
                 { id: '2-1', name: '我的考试', url: 'exam' },
-               // { id: '2-2', name: '我的班级', url: 'class' },
-                { id: '2-2', name: '我的调研', url: 'research' }
+                { id: '2-2', name: '我的班级', url: 'class' },
+                { id: '2-3', name: '我的调研', url: 'research' }
             ] },
             { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'ask', childs: [ // eslint-disable-line object-property-newline,max-len
                 { id: '3-0', name: '我的回答', url: 'answer' },

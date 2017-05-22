@@ -5,19 +5,16 @@ module > .addevaluation-page
     .addevaluation(data-region='content')
 
 
-view('search')
+view('search') > form.vertical
     .bg-highlight
         .form.align-left
             .form-row.pull-left.w-half.r-padding.row-block
                 label.label.tag-height 调研名称
                 input.input.tag-height#name(name='name')
-            .form-row.pull-left.w-half.r-padding.row-block
-                label.label.tag-height 创建人
-                .relative
-                    input.input.tag-height#publishMemberName(name='publishMemberName')
-                    .choice#btnMember 选择
-                    input#publishMemberId(name='publishMemberId' type='hidden')
-            label.label.tag-height 创建时间
+            .form-row.pull-left.w-half.row-block
+                label.label.tag-height 发布人
+                input.input.tag-height#publishMemberName(name='publishMember')
+            label.label.tag-height 发布时间
             .relative
                 input.input.date.w-full.tag-height#create-time(name='createTime')
                 .iconfont.icon-riqi
@@ -28,15 +25,15 @@ view('content')
         thead > tr
             th 选择
             th 调研名称
-            th 创建人
-            th 创建时间
+            th 发布人
+            th 发布时间
             th 操作
         tbody > each(researchActivities)
             tr
                 td > input(type='radio' name='select-research' value=id)('checked')&if(checked)
                 td > echo(name)
-                td > echo(publishMember.name)
-                td > dateTime(createTime)
+                td > echo(publishMember.fullName)
+                td > dateTime(publishTime)
                 td
                     a(id='preview-' + id data-name='id' data-value=id) 预览
                     #  a(href='#/train/programme/research-activity/preview-questionary/' + id target='_blank') 预览

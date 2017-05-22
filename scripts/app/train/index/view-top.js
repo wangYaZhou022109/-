@@ -24,6 +24,7 @@ exports.handlers = {
             if (projectInfo.classInfo) {
                 state.data.classId = projectInfo.classInfo.id;
             }
+            state.data.organizationId = projectInfo.organization.id;
             state.changed();
             $(this.$('menu-' + menu)).addClass('active').prevAll('li').addClass('active');
             $(this.$('menu-' + menu)).nextAll('li').removeClass('active');

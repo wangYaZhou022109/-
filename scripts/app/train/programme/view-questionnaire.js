@@ -23,9 +23,11 @@ exports.events = {
 exports.handlers = {
     addSurvey: function() {
         var model = this.module.items['train/programme/select-research-activity'],
-            me = this;
+            me = this,
+            organizationId = this.module.renderOptions.state.organizationId;
         me.app.viewport.modal(model, {
             sourceType: 2,
+            organizationId: organizationId,
             callback: function(data) {
                 var param = {
                     type: 2,
@@ -41,9 +43,11 @@ exports.handlers = {
     },
     addEva: function() {
         var model = this.module.items['train/programme/evaluate-questionary/select-evaluate-questionary'],
-            me = this;
+            me = this,
+            organizationId = this.module.renderOptions.state.organizationId;
         me.app.viewport.modal(model, {
             sourceType: 2,
+            organizationId: organizationId,
             callback: function(data) {
                 var param = {
                     type: 3,
