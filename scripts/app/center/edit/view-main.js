@@ -43,6 +43,7 @@ exports.handlers = {
             member = this.bindings.member.data,
             memberForm = this.bindings.memberForm.data;
         var summary = $(this.$$('[name="summary"]')).val();
+        var topicIds = $(this.$$('[name="topicIds"]')).val();
         var headPortrait = $(this.$$('[name="headPortrait"]')).val();
         var sex = $(this.$$('[name="sex"]:checked')).val();
         var oldPassword = $(this.$$('[name="oldPassword"]')).val();
@@ -74,6 +75,7 @@ exports.handlers = {
             member.sex = sex;
             memberForm.summary = summary;
             memberForm.sex = sex;
+            memberForm.topicIds = topicIds;
         } else if (menuId === '0') {
             if (password) {
                 if (!oldPassword) {

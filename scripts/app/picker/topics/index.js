@@ -16,6 +16,9 @@ exports.store = {
         init: function(payload) {
             this.models.state.set(payload);
             this.models.hot.params = { type: payload.hotType, limit: payload.hotsize };
+            if (payload.group) {
+                this.models.hot.params.group = payload.group;
+            }
             this.get(this.models.hot);
         },
         'quick-add': function(payload) {
