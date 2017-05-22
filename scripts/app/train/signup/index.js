@@ -49,8 +49,7 @@ exports.store = {
 
 exports.beforeRender = function() {
     var state = this.store.models.state.data,
-        me = this,
-        url = window.location.protocol + '//' + window.location.host + '/#/train/class-detail/';
+        me = this;
     me.dispatch('classSignupInfo', me.renderOptions);
     me.dispatch('member');
     me.dispatch('trainee', me.renderOptions).then(function(data) {
@@ -63,10 +62,8 @@ exports.beforeRender = function() {
                     // 审核中
                     state.auditStatus = 0;
                 } else if (trainee.auditStatus === 1) {
-                    // 跳转班级详情页
+                    // 学员已报名成功
                     state.auditStatus = 1;
-                    url += me.renderOptions.classId;
-                    window.open(url, '_self');
                 } else if (trainee.auditStatus === 2) {
                     // 审核未通过
                     state.auditStatus = 2;
