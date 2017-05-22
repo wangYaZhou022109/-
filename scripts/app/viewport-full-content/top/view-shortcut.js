@@ -139,7 +139,7 @@ exports.dataForTemplate = {
     },
     organizations: function(data) {
         var organizations = data.organizations || [];
-        organizations = _.reject(organizations, ['id', this.app.global.currentUser.organization.id]);
+        organizations = _.reject(organizations, ['id', this.app.global.organization.id]);
         return organizations;
     },
     courseTime: function(data) {
