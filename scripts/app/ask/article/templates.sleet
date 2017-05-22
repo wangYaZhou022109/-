@@ -2,7 +2,7 @@
 
 module > form.form.align-left
     .form-row
-        label.required > string('question-title')
+        label.required > string('article-title')
         .content
             div(data-region='top')
             div(data-region='selectdrop')
