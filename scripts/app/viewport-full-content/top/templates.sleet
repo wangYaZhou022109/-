@@ -68,7 +68,7 @@ view('shortcut')
                     else
                         .text-center.small-font 暂无新消息
             compare(Global.roleLength 'gt' 0)
-                .item > a.normal(href='/admin/') > i.iconfont.icon-setting
+                .item > a.normal(href='/admin/' title='进入管理后台') > i.iconfont.icon-setting
             .item.drop-down-wrapper.right
                 .drop-down-btn.user-info.inline-block.user-pic
                     if(Global.currentUser.headPortrait)
