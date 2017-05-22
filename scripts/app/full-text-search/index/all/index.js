@@ -44,7 +44,7 @@ exports.store = {
             root: 'items'
         },
         lives: {
-            url: '../course-study/gensee/details',
+            url: '../course-study/gensee/activity-list',
             type: 'pageable',
             pageSize: 5,
             root: 'items'

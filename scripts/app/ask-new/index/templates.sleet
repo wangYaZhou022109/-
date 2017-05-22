@@ -46,7 +46,7 @@ view('main')
                                 .pull-left > .sub-text 关联标签：标签名称
                                 .text-right
                                     .item > span.color-ing 待审核
-                                    .item 删除
+                                    .item#delete 删除
                 li
                     .user-pic > img(src='images/1.png')
                     .comment-content
