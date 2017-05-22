@@ -1,0 +1,15 @@
+#! handlebars
+
+module > .delete-page
+    .delete(data-region="delete")
+
+view('delete')
+    .layout-mt-small
+        .container
+            p.text-center 对象删除后将无法恢复，是否确定删除该对象
+            .color-error
+                p.text-center 说明：对象是个参数，可以是课程，
+                p.text-center 可以是试题或者其他的对象
+            .layout-mt-small.text-center  
+                .btn.circle-radius.gray.m-right 是
+                .btn.circle-radius.gray(style="background:#555;") 否
