@@ -1,4 +1,4 @@
-var D = require('drizzleJs'),
+var D = require('drizzlejs'),
     getCourses,
     getSubjects,
     getExams,
