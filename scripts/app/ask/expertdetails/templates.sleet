@@ -31,9 +31,9 @@ view('list')
             else
                 li#menu-expertsanswer > string('expert') + string('answer')
             compare(state.menu 'eq' 'expertssharing')
-                li#menu-expertssharing.active > string('experts') + string('share')
+                li#menu-expertssharing.active > string('expert') + string('share')
             else
-                li#menu-expertssharing > string('experts') + string('share')
+                li#menu-expertssharing > string('expert') + string('share')
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
                 .comment-list.ask-list > ul
