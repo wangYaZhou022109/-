@@ -1,7 +1,7 @@
 var $ = require('jquery'),
     _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
-    D = require('drizzleJs'),
+    D = require('drizzlejs'),
     SEARCH_URL = 'search',
     viewUtil = require('./app/full-text-search/view-util');
 exports.bindings = {
