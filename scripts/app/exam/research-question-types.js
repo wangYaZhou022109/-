@@ -12,7 +12,8 @@ var map = {
         1: 'summary-detail',
         2: 'answer-detail',
         3: 'answer',
-        4: 'preview'
+        4: 'preview',
+        5: 'summary'
     },
     typeToName = function(t, m) {
         return 'exam/research-activity/question/types/' + mode[m] + '/' + map[t];
