@@ -5,7 +5,7 @@ module
 view('list')
     .section
         span.h3 > string('active') + string('expert')
-        span.more > a.normal(href='#/ask/expert/index') > echo('more')
+        span.more.pull-right > a.normal(href='#/ask/expert/index') > echo('more')
         .layout-mt-small.user-picture
             .grid-row
                 each(expert)
