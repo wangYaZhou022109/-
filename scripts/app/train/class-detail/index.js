@@ -12,7 +12,6 @@ exports.items = {
     'online-resources': 'online-resources',
     swipe: '',
     main: 'main',
-    bus: '',
     'two-brings': '',
     questionnaire: '',
     'train/class-detail/commit-task': { isModule: true },
@@ -20,7 +19,8 @@ exports.items = {
     'train/class-detail/courseware': { isModule: true },
     'research-tips': '',
     'train/class-detail/online-attach': { isModule: true },
-    'ranking-list': 'ranking-list'
+    'ranking-list': 'ranking-list',
+    'train/class-detail/class-bus': { isModule: true }
 };
 
 exports.store = {
@@ -186,48 +186,6 @@ exports.store = {
                 index: index
             });
             this.models.state.changed();
-        },
-        shuttleBusInformation: function() {
-            var bus = this.models.bus,
-                classId = this.models.classId.data.classId;
-            bus.set({ id: classId });
-            return this.get(bus).then(function(data) {
-                _.map(data[0] || [], function(cinfo, i) {
-                    var e = cinfo;
-                    e.flag = true;
-                    if (i === 0) {
-                        e.show = true;
-                    } else {
-                        e.show = false;
-                    }
-                    if (cinfo.busDetails.length == null) {
-                        e.flag = false;
-                    }
-                    return e;
-                });
-                return data;
-            });
-        },
-        sectionDisplay: function(id) {
-            var bus = this.models.bus;
-            _.map(bus.data || [], function(buss) {
-                var busObj = buss;
-                if (busObj.id === id) {
-                    busObj.show = !busObj.show;
-                }
-                return busObj;
-            });
-            bus.changed();
-        },
-        detailInsert: function(params) {
-            var detail = this.models.detailInsert;
-            detail.set({ id: params });
-            return this.post(detail);
-        },
-        detaildelete: function(params) {
-            var detail = this.models.detaildelete;
-            detail.set({ id: params });
-            return this.del(detail);
         },
         twoBring: function() {
             var twoBringsResult = this.models.twoBringsResult,

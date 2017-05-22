@@ -7,12 +7,18 @@ exports.bindings = {
 exports.events = {
     'click commitTask': 'showTaskList',
     'click classMembers': 'classMembers',
-    'click addCourse1': 'addCourse1'
+    'click addCourse1': 'addCourse1',
+    'click shuttleBusInformation': 'shuttleBusInformation'
 };
 
 exports.handlers = {
     showTaskList: function() {
         var view = this.module.items['train/class-detail/commit-task'];
+        var classId = this.bindings.classId.data.classId;
+        this.app.viewport.modal(view, { classId: classId });
+    },
+    shuttleBusInformation: function() {
+        var view = this.module.items['train/class-detail/class-bus'];
         var classId = this.bindings.classId.data.classId;
         this.app.viewport.modal(view, { classId: classId });
     },
@@ -29,7 +35,6 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click shuttleBusInformation': 'shuttleBusInformation',
     'click twoBring': 'twoBring',
     'click questionnaire': 'questionnaire',
 };
@@ -37,9 +42,6 @@ exports.actions = {
 exports.actionCallbacks = {
     twoBring: function() {
         this.app.viewport.modal(this.module.items['two-brings']);
-    },
-    shuttleBusInformation: function() {
-        this.app.viewport.modal(this.module.items.bus);
     },
     questionnaire: function() {
         this.app.viewport.modal(this.module.items.questionnaire);
