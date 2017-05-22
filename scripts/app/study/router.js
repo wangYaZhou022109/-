@@ -33,7 +33,7 @@ exports.showPreview = function(config) {
 };
 
 exports.showTask = function(id) {
-    return this.app.show('content', 'study/task', { id: id });
+    return this.app.viewport.showIt('content', 'study/task', { id: id });
 };
 
 exports.showSubjectNewDetail = function() {

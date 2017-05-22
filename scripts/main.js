@@ -97,7 +97,7 @@ app = window.app = new D.Application({
         return require('./' + path);    // eslint-disable-line global-require
     },
     routers: ['', 'home', 'study', 'activity', 'exam', 'person', 'news', 'train', 'knowledge', 'ask-new', 'center',
-        'ask', 'full-text-search']
+        'ask']
 });
 
 D.PageableModel.setDefault({
