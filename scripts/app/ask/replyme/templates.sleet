@@ -35,7 +35,8 @@ view('list')
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                    .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                    # .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                    .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
                                         textarea.input.w-full.block(rows=1 name='content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
@@ -62,7 +63,8 @@ view('list')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
                                     .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
-                                    .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
+                                    # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
+                                    .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
@@ -98,7 +100,8 @@ view('list')
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                    .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                    # .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                    .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
@@ -127,7 +130,8 @@ view('list')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
                                     .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
-                                    .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
+                                    # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
+                                    .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
