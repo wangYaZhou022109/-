@@ -63,4 +63,11 @@ exports.dataForTemplate = {
         }
         return false;
     },
+    haveMessage: function() {
+        var state = this.bindings.state;
+        if (state.data.role !== 4) {
+            return true;
+        }
+        return false;
+    }
 };

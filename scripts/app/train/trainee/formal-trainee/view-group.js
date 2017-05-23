@@ -57,7 +57,7 @@ exports.handlers = {
     },
     showNameInput: function(id) {
         var state = this.bindings.state.data;
-        if (state.role !== 2) {
+        if (state.role !== 4) {
             $(this.$('input-group-name' + id)).css('display', 'block');
             $(this.$('label-group-name' + id)).css('display', 'none');
         }
@@ -115,7 +115,7 @@ exports.dataForActions = {
     },
     saveGroup: function() {
         var state = this.bindings.state.data;
-        if (state.role === 2) {
+        if (state.role === 4) {
             this.app.viewport.closeModal();
             return false;
         }
@@ -148,13 +148,13 @@ exports.dataForTemplate = {
         _.map(group || [], function(g, i) {
             var e = g;
             e.i = i + 1;
-            e.isGrant = state.role !== 2;
+            e.isGrant = state.role !== 4;
         });
         return group;
     },
     isGrant: function() {   // 通过角色判断是否有操作权限
         var state = this.bindings.state.data;
-        if (state.role === 2) {
+        if (state.role === 4) {
             return false;
         }
         return true;

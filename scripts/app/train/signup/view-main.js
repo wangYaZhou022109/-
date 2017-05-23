@@ -38,6 +38,7 @@ exports.dataForActions = {
         var settleOrganizationId = $(this.$$('[name="organizationId"]')).val();
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
+        var className = this.bindings.classSignupInfo.data.classInfo.className;
         if (!validators.phone.fn(phoneNumber)) {
             this.app.message.error('手机号输入不正确');
             return false;
@@ -55,7 +56,8 @@ exports.dataForActions = {
             remark: remark,
             classId: classId,
             settleOrganizationId: settleOrganizationId,
-            memberId: memberId
+            memberId: memberId,
+            className: className
         };
     }
 };

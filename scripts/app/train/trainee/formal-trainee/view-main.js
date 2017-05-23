@@ -171,7 +171,7 @@ exports.dataForTemplate = {
         _.map(fmtrainees || [], function(fmtrainee, i) {
             var e = fmtrainee;
             e.i = i + 1 + ((pageNum - 1) * 10);
-            e.isGrant = state.role !== 2;
+            e.isGrant = state.role !== 4;
         });
         return fmtrainees;
     },
@@ -189,7 +189,7 @@ exports.dataForTemplate = {
     },
     isGrant: function() {   // 通过角色判断是否有操作权限
         var state = this.bindings.state.data;
-        if (state.role !== 2) {
+        if (state.role !== 4) {
             return true;
         }
         return false;
