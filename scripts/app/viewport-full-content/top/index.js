@@ -89,7 +89,7 @@ exports.store = {
             homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
             homeConfig.clear();
             if (this.app.global.currentUser.organization) {
-                this.models.hotTopics.set({ limit: 10 });
+                this.models.hotTopics.params.limit = 10;
                 this.get(this.models.hotTopics);
             }
             return this.get(homeConfig).then(function() {
