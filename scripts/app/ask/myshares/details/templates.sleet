@@ -105,7 +105,7 @@ view('relevantexperts')
                     img.block(src=headPhoto)    
 view('relatedquestions')
     section.section.relevant-course
-        span.h3 > echo('相关问题')
+        span.h3 > echo('相关文章')
         .layout-mt-small.m-top
             each(question)
                 .block.layout-mt-small.m-top 
