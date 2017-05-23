@@ -1,0 +1,39 @@
+#! handlebars
+
+module > .achievement-content.content
+    #  div(data-region='title')
+    .achievement-side(data-region='side')
+    .achievement-main(data-region='main')
+
+#  view('title')
+
+
+view('main')
+    .achievement-main-head
+        .col-sm-7.text-overflow > .h3
+            strong > echo(summaryDetail.name)
+    .preview-content
+        each(dimensions)
+            if(dimensionIndex)
+                h3 > echo(dimensionIndex '、' name)
+            ul.statistics-ul
+                each(questions)
+                    li
+                        div(data-dynamic-key=id)
+
+view('side')
+    .achievement-tips.pointer#questionaryDetail
+        | 问卷须知
+        i.iconfont.icon-info
+
+    .achievement-preview > ul > each(dimensions)
+        li.border.bottom(id='list-item-' + @index)
+            label > echo(name)
+            div(class='min-btn-groups') > each(questions)
+                compare(status 'eq' 'init')
+                    a.num.min-btn(href='#mlj-' + id id='q-' + id) > echo(questionIndex)
+                compare(status 'eq' 'current')
+                    a.num.min-btn.correct(href='#mlj-' + id id='q-' + id) > echo(questionIndex)
+
+view('description')
+    @echo(summaryDetail.questionaryDetail)
