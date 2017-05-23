@@ -18,8 +18,10 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var bus = this.models.bus,
-                classId = payload;
+                classId = payload.classId,
+                busId = payload.busId;
             bus.set({ id: classId });
+            bus.params = { busId: busId };
             return this.get(bus).then(function(data) {
                 _.map(data[0] || [], function(cinfo, i) {
                     var e = cinfo;
@@ -62,5 +64,5 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions.classId);
+    this.dispatch('init', this.renderOptions);
 };
