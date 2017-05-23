@@ -100,6 +100,9 @@ view('shortcut')
                         form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
                             input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
 
+            # .item.small-font > a(href='javascript:;' title='登录') 登录
+            # .item.small-font > a(href='javascript:;' title='注册') 注册
+
 view('logo')
     if(homeConfig.logo)
         .item > a.underline(href='/#/home') > img(src='/api/v1/human/file/download?id='+homeConfig.logo)

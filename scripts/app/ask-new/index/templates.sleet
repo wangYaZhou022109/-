@@ -503,7 +503,7 @@ view('main')
                                     input.input(type='hidden')
                                     input.input(type='hidden')
                                     .btn 评论
-                            .border.around.hide#comment-list-1(style="margin-top:-1.5em;") > ul.layout-ml-small.layout-mr-small.layout-mb-small
+                            .border.around.hide#comment-list-1(style="margin-top:-1.5em; height:20em; overflow:auto;") > ul.layout-ml-small.layout-mr-small.layout-mb-small
                                 li
                                     .user-pic > img(src="images/1.png")
                                     .comment-content

@@ -1,4 +1,3 @@
-var D = require('drizzlejs');
 
 exports.items = {
     main: 'main'
@@ -9,26 +8,28 @@ exports.store = {
         positionList: { url: '../human/position/my' },
         currentPId: { data: { value: '' } }, // 当前职位id
         currentPosition: { url: '../human/position' },
-        studyList: { url: '../course-study/study-push/position-push' },
+        studyList: { url: '../course-study/study-push/push-objects' },
         download: { url: '../human/file/preview' },
     },
     callbacks: {
         init: function() {
-            var positionList = this.models.positionList;
-            var studyList = this.models.studyList;
-            var me = this;
-            return me.get(positionList).then(function(data) {
-                var list = data[0];
-                if (list && list.length > 0) {
-                    me.models.currentPosition.set(list[0]);
-                    me.get(me.models.currentPosition);
-                    me.models.currentPosition.changed();
-                    D.assign(studyList.params, {
-                        positionId: list[0].id,
-                        jobId: list[0].jobId
+            var me = this,
+                positionList = me.models.positionList,
+                studyList = me.models.studyList,
+                currentPosition = me.models.currentPosition;
+            return me.get(positionList).then(function() {
+                var list = positionList.data;
+                if (list.length) {
+                    currentPosition.set(list[0]);
+                    return me.get(currentPosition).then(function() {
+                        if (currentPosition.data && currentPosition.data.studyConfig) {
+                            studyList.set({ id: currentPosition.data.studyConfig.studyPushId });
+                            return me.get(studyList);
+                        }
+                        return true;
                     });
-                    me.get(studyList);
                 }
+                return true;
             });
         }
     }

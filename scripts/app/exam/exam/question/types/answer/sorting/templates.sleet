@@ -17,10 +17,10 @@ view('options')
                 label(for='answer-item-' + i)
                     span.option-num > @echo(code '：')
                     .answer-options > @echo(content)
-        form.vertical.layout-mb
-            .inline-block
+        form.vertical.form
+            .w-half.form-row
                 input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)('disabled')&if(isDisabled)
-            .inline-block(id='error')
+            div(id='error')
 
     if(isShowDetail)
         .show-answer
