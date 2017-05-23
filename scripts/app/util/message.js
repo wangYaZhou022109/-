@@ -5,7 +5,8 @@ alertify.set({
     labels: {
         ok: '确定',
         cancel: '取消'
-    }
+    },
+    delay: 1000
 });
 
 confirm = alertify.confirm;
