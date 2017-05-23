@@ -425,6 +425,9 @@ module.exports = {
     'gensee-access-status': { // 直播状态
         1: '已参加', 2: '待开始', 3: '未参加'
     },
+    'push-object-progress-status': {
+        0: '未完成', 1: '学习中', 2: '已完成', 3: '未完成', 4: '已完成'
+    },
     get: function(k) {
         return _.map(this[k], function(value, key) {
             return { key: key, value: value };

@@ -31,7 +31,7 @@ view('chart')
                     .div#bar
             .bar > .cont
                 .title-row.clearfix
-                    .pull-left 积分汇总
+                    .pull-left 积分统计
                     a.pull-right 如何获得积分？
                 .content
                     .div#pie
