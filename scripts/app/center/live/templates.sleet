@@ -28,7 +28,7 @@ view('main')
                 .img > .img-cont > img(src=imgUrl)
                 .inline-block.title > echo(genseeWebCast.subject)
                 .time(title=genseeWebCast.lecturerNames) > echo('讲师：' genseeWebCast.lecturerNamesSub '&nbsp;&nbsp;直播开始时间：') + dateMinute(genseeWebCast.startTime)
-            .state > map('gensee-status' genseeWebCast.status)
+            .state > map('gensee-status-center' genseeWebCast.status)
             .btn-row > each(genseeWebCast.buttons)
                 .btn(id=id) > echo(text)
     #pager.pagination
