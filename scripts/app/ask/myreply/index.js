@@ -8,7 +8,6 @@ exports.items = {
 exports.store = {
     models: {
         myreply: { url: '../ask-bar/my-reply/replys' },
-        shut: { url: '../ask-bar/question/close-status' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         praise: { url: '../ask-bar/my-share/praise' },
@@ -38,9 +37,30 @@ exports.store = {
                 page.changed();
             });
         },
-        shut: function(payload) {
-            this.models.shut.set(payload);
-            return this.put(this.models.shut);
+        shut1: function(payload) {
+            var discuss = this.models.discuss,
+                page = this.models.page,
+                me = this;
+            discuss.set(payload);
+            return this.chain(me.del(discuss), function() {
+                page.data = _.filter(page.data, function(item) {
+                    return item.id !== payload.id;
+                });
+                page.changed();
+            });
+        },
+        shut2: function(payload) {
+            var reply = this.models.reply,
+                page = this.models.page,
+                me = this;
+
+            reply.set(payload);
+            return this.chain(me.del(reply), function() {
+                page.data = _.filter(page.data, function(item) {
+                    return item.id !== payload.id;
+                });
+                page.changed();
+            });
         },
         page: function() {
             var myreply = this.models.myreply;

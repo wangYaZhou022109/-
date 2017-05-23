@@ -1,0 +1,31 @@
+.right-page {
+    & ul {
+        margin-right: -var(--large-space);
+    }
+    & li {
+        width: 25%;
+        padding-right: var(--nav-height);
+        text-align: center;
+        & .icon-circle {
+            display: inline-block;
+            width: calc(var(--nav-height)*2);
+            height: calc(var(--nav-height)*2);
+            line-height: calc(var(--nav-height)*2);
+            text-align: center;
+            background: var(--custom-color-4);
+            border-radius: 50%;
+            & .iconfont {
+                font-size: var(--nav-height);
+                color: var(--white);
+            }
+        }
+        & .text {
+            overflow-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+        }
+    }
+}

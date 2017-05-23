@@ -1,5 +1,5 @@
 var _ = require('lodash/collection'),
-    D = require('drizzleJs'),
+    D = require('drizzlejs'),
     viewUtil = require('./app/full-text-search/view-util');
 exports.bindings = {
     courses: true,

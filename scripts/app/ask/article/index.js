@@ -123,7 +123,7 @@ exports.store = {
                     message = '等待审核';
                 }
                 me.app.message.success(message);
-                me.module.dispatch('leftrefresh');
+                me.module.renderOptions.leftrefresh;
             });
         },
         selecttitle: function() {

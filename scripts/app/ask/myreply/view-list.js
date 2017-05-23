@@ -119,17 +119,35 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click del-question-*': 'shut',
+    'click del1-*': 'shut1',
     'click publish-*': 'publish',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
+    'click del2-*': 'shut2',
 };
 
 exports.dataForActions = {
-    shut: function(payload) {
-        var data = payload;
-        data.closeStatus = 1;
-        return data;
+    shut1: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定要删除该数据?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
+    shut2: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '确定要删除该数据?';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     publish: function(payload) {
         return payload;
@@ -151,9 +169,11 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    remove: function() {
+    shut1: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+    },
+    shut2: function() {
+        this.app.message.success('删除成功！');
     }
 };
 

@@ -2,7 +2,7 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
-    'ask-new/index/export': { isModule: true }
+    'ask/report': { isModule: true }
 };
 
 exports.store = {

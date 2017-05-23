@@ -1,0 +1,19 @@
+.right-page {
+    & .right {
+        & ul {
+            margin-right: -3em;
+            & li {
+                float: left;
+                width: 25%;
+                padding-right: 3em;
+                text-align: center;
+            }
+        }
+    }
+    & .circle-img {
+        display: inline-block;
+        width: 3em;
+        height: 3em;
+        background: var(--custom-color-4);
+    }
+}

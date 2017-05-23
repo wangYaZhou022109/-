@@ -1,4 +1,4 @@
-var D = require('drizzleJs'),
+var D = require('drizzlejs'),
     _ = require('lodash/collection'),
     viewUtil = require('./app/full-text-search/view-util');
 

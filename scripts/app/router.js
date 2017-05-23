@@ -89,7 +89,7 @@ exports.showTaskmarking = function() {
     return this.app.viewport.showIt('content', 'center/managements/taskmarking');
 };
 exports.showSearchPage = function() {
-    return this.app.show('content', 'search-page');
+    return this.app.show('content', 'full-text-search/index');
 };
 exports.showDetail = function(id) {
     return this.app.show('content', 'home/advertisement', { id: id });

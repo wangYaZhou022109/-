@@ -25,7 +25,7 @@ exports.handlers = {
         });
     },
     review: function() {
-        var model = this.module.items['ask-new/apply-verify'];
+        var model = this.module.items['ask/apply-verify'];
         this.app.viewport.modal(model);
     },
     // myself: function() {

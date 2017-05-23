@@ -36,13 +36,8 @@ view('main')
                         span.sub-text > echo(prefixText)
                     .comment-operation
                         .text-right
-                            compare(auditStatus 'eq' 0)
-                                .item > span.color-ing > map('ask-audit-status' auditStatus)
-                                .item 删除
-                            compare(auditStatus 'eq' 2)
-                                .item > span.color-ing > map('ask-audit-status' auditStatus)
-                                .item 删除
-                            compare(auditStatus 'eq' 1)
-                                
+                            if(textFont)
+                                .item > span(class=textFont) > map('ask-audit-status' auditStatus)
+                            .item(id='remove-' + id) 删除
+
     #pager.pagination
-            

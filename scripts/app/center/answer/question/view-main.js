@@ -2,32 +2,11 @@ var _ = require('lodash/collection'),
     helpers = require('./app/util/helpers');
 exports.bindings = {
     list: true,
-    img: false
+    img: false,
+    speech: true
 };
 
-exports.actions = {
-    'click delete*': 'delete'
-};
-
-exports.dataForActions = {
-    delete: function(data) {
-        var me = this;
-        return this.Promise.create(function(resolve) {
-            var message = '是否确定删除该问题?';
-            me.app.message.confirm(message, function() {
-                resolve(data);
-            }, function() {
-                resolve(false);
-            });
-        });
-    }
-};
-
-exports.actionCallbacks = {
-    delete: function() {
-        this.app.message.success('删除成功');
-    }
-};
+exports.type = 'dynamic';
 
 exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'list' }
@@ -47,4 +26,22 @@ exports.dataForTemplate = {
         });
         return list;
     }
+};
+
+exports.getEntityModuleName = function() {
+    return 'center/answer/question/operator';
+};
+exports.getEntity = function(id) {
+    var question = _.find(this.bindings.list.data, { id: id });
+    return {
+        question: question,
+        speech: this.bindings.speech.data,
+        callback: function(payload) {
+            this.module.dispatch('remove', payload);
+        }
+    };
+};
+
+exports.dataForEntityModule = function(entity) {
+    return entity;
 };

@@ -1,7 +1,7 @@
 var maps = require('./app/util/maps'),
     $ = require('jquery'),
     _ = require('lodash/collection'),
-    D = require('drizzleJs'),
+    D = require('drizzlejs'),
     viewUtil = require('./app/full-text-search/view-util');
 
 exports.bindings = {
