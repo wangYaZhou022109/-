@@ -32,12 +32,13 @@ exports.getEntityModuleName = function() {
     return 'center/answer/question/operator';
 };
 exports.getEntity = function(id) {
-    var question = _.find(this.bindings.list.data, { id: id });
+    var question = _.find(this.bindings.list.data, { id: id }),
+        me = this;
     return {
         question: question,
         speech: this.bindings.speech.data,
         callback: function(payload) {
-            this.module.dispatch('remove', payload);
+            me.module.dispatch('remove', payload);
         }
     };
 };

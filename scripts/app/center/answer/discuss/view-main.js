@@ -5,6 +5,8 @@ exports.bindings = {
     img: false
 };
 
+exports.type = 'dynamic';
+
 exports.actions = {
     'click remove-*': 'remove'
 };
@@ -47,4 +49,23 @@ exports.dataForTemplate = {
         });
         return list;
     }
+};
+
+exports.getEntityModuleName = function() {
+    return 'center/answer/discuss/operator';
+};
+exports.getEntity = function(id) {
+    var answer = _.find(this.bindings.list.data, { id: id }),
+        me = this;
+    return {
+        answer: answer,
+        // speech: this.bindings.speech.data,
+        callback: function(payload) {
+            me.module.dispatch('remove', payload);
+        }
+    };
+};
+
+exports.dataForEntityModule = function(entity) {
+    return entity;
 };
