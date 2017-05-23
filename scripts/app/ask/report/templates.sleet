@@ -2,21 +2,21 @@
 module > .export-page
     .export-form(data-region="details")
 
-view('details') 
+view('details')
     .export-form-title.container
         form.clearfix.form.align-left
-            .inline-block.w-half.inbox
+            .inline-block.w-half.inbox.m-bottom
                 input.border.radius#input1(type='checkbox' name='input1')
                 label(for='input1') > string('report-1')
-            .inline-block.w-half.inbox
+            .inline-block.w-half.inbox.m-bottom
                 input#input2(type='checkbox' name='input2')
                 label(for='input2') > string('report-2')
-            .inline-block.layout-mt-small.w-half.inbox
+            .inline-block.w-half.inbox.m-bottom
                 input#input3(type='checkbox' name='input3')
                 label(for='input3') > string('report-3')
-            .inline-block.layout-mt-small.w-half.inbox
+            .inline-block.w-half.inbox.m-bottom
                 input#input4(type='checkbox' name='input4')
                 label(for='input4') > string('report-4')
-            .layout-mt-small.form-row
+            .form-row
                 label.required(for='accuseNote') > string('report') + string('explain')
                 textarea#accuseNote.w-full.m-top(rows="10" name='accuseNote' x-rule="required" placeholder="请描述你举报理由")

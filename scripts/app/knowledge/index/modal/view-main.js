@@ -1,6 +1,7 @@
 var _ = require('lodash/collection');
 
-var parseType = function(ext) {
+var parseType = function(data) {
+    var ext = data.toLocaleLowerCase();
     var types = {
             xls: 4,
             xlsx: 4,

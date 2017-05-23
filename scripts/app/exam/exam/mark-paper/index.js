@@ -20,7 +20,8 @@ var options = require('./app/exam/exam/base-paper/index'),
     $ = require('jquery'),
     validator = require('./app/ext/views/form/validators'),
     markers = require('./app/ext/views/form/markers'),
-    checkScore;
+    checkScore,
+    refreshParentWindow;
 
 var setOptions = {
     store: {
@@ -166,10 +167,9 @@ var setOptions = {
                 });
                 return this.post(this.models.form).then(function() {
                     me.app.message.success(strings.get('operation-success'));
-                    me.models.state.clear();
-                    me.models.types.clear();
-                    me.models.grades.clear();
+                    me.module.dispatch('clearModels');
                     setTimeout(function() {
+                        refreshParentWindow();
                         window.close();
                     }, 500);
                 });
@@ -239,3 +239,17 @@ checkScore = function(e) {
     }
     return true;
 };
+
+//  暂时用这种方式刷新父窗口
+/* eslint-disable no-underscore-dangle */
+refreshParentWindow = function() {
+    var parent = window.opener.app,
+        markPaperListMod;
+
+    _.forEach(parent._modules, function(v, k) {
+        if (k.indexOf('mark-paper') > -1) markPaperListMod = v;
+    });
+
+    return markPaperListMod.dispatch('init');
+};
+

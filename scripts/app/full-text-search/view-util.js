@@ -1,6 +1,6 @@
 var _ = require('lodash/collection'),
     FULL_TEXT_SEARCH = 'full-text-search',
-    D = require('drizzleJs');
+    D = require('drizzlejs');
 
 exports.typeMaps = {
     0: 'all',

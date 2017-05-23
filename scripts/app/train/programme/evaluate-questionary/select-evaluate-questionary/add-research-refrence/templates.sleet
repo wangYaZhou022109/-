@@ -5,7 +5,7 @@ module
 
 view('main')
     form.vertical
-        .exam-base-info.row 
+        .exam-base-info.row
             .col-sm-12
                 label.required > echo('评估名称')
                 input.input( name='name' id='name' value=research.name)

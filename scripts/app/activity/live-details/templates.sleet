@@ -4,11 +4,12 @@ module > .live-details-page
     .live-details-banner(data-region='live')
     .page-main-wrapper
         .side(data-region='side')
-        .main.live-details-main.page-main
-            .container
-                section.section(data-region='main')
-                section.section(data-region='relative-courses')
-                section.section(data-region='relative-gensees')
+        .main
+            .live-details-main.page-main
+                .container
+                    section.section(data-region='main')
+                    section.section(data-region='relative-courses')
+                    section.section(data-region='relative-gensees')
 
 view('live')
     compare(gensee.status 'eq' 2)

@@ -28,7 +28,7 @@ exports.store = {
             this.get(list);
             searchModel.changed();
         },
-        delete: function(payload) {
+        remove: function(payload) {
             var object = this.models.object,
                 me = this;
             object.set(payload);

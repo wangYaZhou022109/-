@@ -88,7 +88,7 @@ view('download')
                     a(href=downUrl download=name) > string('download')
                 a.text-overflow.underline(title=name) > echo(name)
         else
-            .text-tips 暂无
+            .content-empty-side > .img-box + p 暂无资料下载
 
 view('releated-course')
     .clearfix

@@ -1,0 +1,31 @@
+#!handlebars
+
+module
+    div(data-region='head')
+    div(data-region='main')
+
+view('head') > form
+    .row > .col-sm-12
+        h3 > echo(question.researchQuestionary.name)
+    .row > .col-sm-12
+        @echo('问题：' question.content)
+    hr
+    .row > .col-sm-12
+        .text-right
+            input.input(name='answer' placeholder='请输入查询答案内容')
+            button.btn#search 查询
+
+view('main')
+    .row > .col-sm-12
+        .list
+            table.table.table2.text-center
+                thead > tr
+                    th(width='150') 姓名
+                    th 答案内容
+                    th(width='200') 答题时间
+                tbody > each(answers)
+                    tr
+                        td > echo(member.fullName)
+                        td > echo(answer)
+                        td > dateMinute(createTime)
+        #pager.pagination

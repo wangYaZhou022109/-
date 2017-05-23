@@ -1,0 +1,16 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    echo(question.index '.' '【')
+    map('research-question-types' question.type)
+    echo('】')
+    a.normal(name='mlj-' + question.id) > @echo(question.content)
+    each(answerRecords)
+        .clearfix.statistics-list
+            .statistics-list-tit > echo(member.fullName '的回答：' answer)
+            .statistics-list-time > dateMinute(createTime)
+    if(biggerThan)
+        a#more.center-text > string('exam.research.question.question-answer.view-more')

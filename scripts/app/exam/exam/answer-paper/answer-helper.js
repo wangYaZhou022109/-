@@ -1,7 +1,10 @@
 var E = require('./app/exam/exam-websocket'),
     CryptoJS = require('crypto-js'),
+    D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     IV = '1234567890123456',
-    webSocket, timeout, switchScreen, decryptAnswer, closeListener;
+    webSocket, timeout, switchScreen, decryptAnswer, closeListener,
+    refreshParentWindow;
 
 webSocket = {
     connect: function(examId, submitPaper, timeExpand) {
@@ -28,9 +31,11 @@ switchScreen = function(exam) {
         isAllowSwitch = exam.isAllowSwitch;
     if (isAllowSwitch && isAllowSwitch === 1) {
         document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'hidden') {
+            if (exam.visibilityState === 'hidden' && document.visibilityState === 'visible') {
+                D.assign(exam, { visibilityState: 'visible' });
                 return me.dispatch('lowerSwitchTimes');
             }
+            D.assign(exam, { visibilityState: 'hidden' });
             return true;
         });
     }
@@ -55,10 +60,26 @@ decryptAnswer = function(v, k) {
     return value;
 };
 
+/* eslint-disable no-underscore-dangle */
+refreshParentWindow = function() {
+    var parent = window.opener && window.opener.app,
+        mod;
+    if (parent) {
+        _.forEach(parent._modules, function(v, k) {
+            if (k.indexOf('center/exam') > -1) mod = v;
+        });
+        if (mod) {
+            return mod.dispatch('selectItem');
+        }
+    }
+    return '';
+};
+
 module.exports = {
     WS: webSocket,
     TO: timeout,
     switchScreen: switchScreen,
     decryptAnswer: decryptAnswer,
-    closeListener: closeListener
+    closeListener: closeListener,
+    refreshParentWindow: refreshParentWindow
 };

@@ -96,6 +96,12 @@ exports.store = {
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;
+                },
+                saveLastSubmitTime: function(lastCacheTime) {
+                    D.assign(this.data, {
+                        lastCacheTime: lastCacheTime
+                    });
+                    this.save();
                 }
             }
         },
@@ -145,6 +151,7 @@ exports.store = {
                             });
 
                             return D.assign(o, {
+                                id: j,
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
                                 }),
@@ -363,6 +370,10 @@ exports.store = {
                             isCurrent: !isCurrent
                         });
                     });
+                },
+                isNeedMoveAfterSave: function(questionId) {
+                    var question = this.getQuestionById(questionId);
+                    return question.type === 1 || question.type === 3;
                 }
             }
         }

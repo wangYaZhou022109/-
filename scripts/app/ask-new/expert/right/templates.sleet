@@ -1,0 +1,44 @@
+#!handlebars
+
+module > .right-page
+    .right(data-region="right")
+
+view('right')
+    .h2.text-center 为什么要成为专家
+    .layout-mt
+        ul.clearfix
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-exam
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-user-3
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-zan-full
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-zhishiku
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    .h2.text-center.layout-mt-small 成为专家有哪些要求
+    .layout-mt
+        ul.clearfix
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-exam
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-user-3
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-zan-full
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            li.pull-left 
+                .icon-circle 
+                    i.iconfont.icon-zhishiku
+                .text.sub-text.layout-mt-small xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

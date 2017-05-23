@@ -11,6 +11,12 @@ view('pannel')
             .swiper-wrapper
                 each(photos)
                     .swiper-slide > img(id="showSwipe-"+attachmentId src=imageUrl alt=name)
+                else
+                    .swiper-slide > img(src='images/default-cover/default_album.jpg')
+                    .swiper-slide > img(src='images/default-cover/default_album.jpg')
+                    .swiper-slide > img(src='images/default-cover/default_album.jpg')
+                    .swiper-slide > img(src='images/default-cover/default_album.jpg')
+                    .swiper-slide > img(src='images/default-cover/default_album.jpg')
             .swiper-button-prev(id='turnPage-prev' title=string('left.page')) > .iconfont.icon-arrow-left
             .swiper-button-next(id='turnPage-next' title=string('right.page')) > .iconfont.icon-arrow-right
 

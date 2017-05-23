@@ -5,7 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         lives: {
-            url: '../course-study/gensee/details',
+            url: '../course-study/gensee/activity-list',
             type: 'pageable',
             pageSize: 40,
             root: 'items'
