@@ -102,51 +102,53 @@ view('main')
 
 view('relative-courses')
     compare(gensee.status 'eq' 3)
-        .h3 直播回顾
-        .main-list.layout-mt-small
-            ul.cell-4
-                each(courses)
-                    li > .content > a.normal(href='#/study/course/detail/'+ id target='_blank')
-                        .img
-                            .img-cont > img(src=cover)
-                            .detail-wrapper
-                                p > echo(description)
-                        .clearfix
-                            .title.text-overflow > echo(name)
-                        .bottom
-                            .item
-                                i.iconfont.icon-view
-                                if(studyMemberCount)
-                                    echo(studyMemberCount)
-                                else
-                                    echo(0)
-                            .item
-                                i.iconfont.icon-star
-                                if(avgScore)
-                                    echo(avgScore)
-                                else
-                                    echo(0)
+        if(courses)
+            .h3 直播回顾
+            .main-list.layout-mt-small
+                ul.cell-4
+                    each(courses)
+                        li > .content > a.normal(href='#/study/course/detail/'+ id target='_blank')
+                            .img
+                                .img-cont > img(src=cover)
+                                .detail-wrapper
+                                    p > echo(description)
+                            .clearfix
+                                .title.text-overflow > echo(name)
+                            .bottom
+                                .item
+                                    i.iconfont.icon-view
+                                    if(studyMemberCount)
+                                        echo(studyMemberCount)
+                                    else
+                                        echo(0)
+                                .item
+                                    i.iconfont.icon-star
+                                    if(avgScore)
+                                        echo(avgScore)
+                                    else
+                                        echo(0)
 
 view('relative-gensees')
-    if(relativeGensees)
-        .h3 相关直播
-        .main-list.layout-mt-small
-            ul.cell-4
-                each(relativeGensees)
-                    li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
-                        .img
-                            .img-cont > img(src=cover)
-                            .detail-wrapper
-                                p > echo(genseeDesc)
-                        .clearfix
-                            .title.text-overflow > echo(subject)
-                        .bottom
-                            .item
-                                i.iconfont.icon-view
-                                echo(viewNumber)
-                            .item
-                                i.iconfont.icon-star
-                                if(avgScore)
-                                    echo(avgScore)
-                                else
-                                    echo(0)
+    .h3 相关直播
+    .main-list.layout-mt-small
+        ul.cell-4
+            each(relativeGensees)
+                li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
+                    .img
+                        .img-cont > img(src=cover)
+                        .detail-wrapper
+                            p > echo(genseeDesc)
+                    .clearfix
+                        .title.text-overflow > echo(subject)
+                    .bottom
+                        .item
+                            i.iconfont.icon-view
+                            echo(viewNumber)
+                        .item
+                            i.iconfont.icon-star
+                            if(avgScore)
+                                echo(avgScore)
+                            else
+                                echo(0)
+            else
+                .content-empty > .img-box.img-type-1 + p 暂无相关的直播

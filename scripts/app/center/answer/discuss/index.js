@@ -12,7 +12,8 @@ exports.store = {
             root: 'items'
         },
         img: { url: '../human/file/download?id=' },
-        object: { url: '../ask-bar/my-reply' },
+        reply: { url: '../ask-bar/question-reply' },
+        discuss: { url: '../ask-bar/question-discuss' },
         search: { data: { } },
     },
     callbacks: {
@@ -29,10 +30,10 @@ exports.store = {
             searchModel.changed();
         },
         remove: function(payload) {
-            var object = this.models.object,
+            var model = payload.objectType === 1 ? this.models.discuss : this.models.reply,
                 me = this;
-            object.set(payload);
-            return me.del(object).then(function() {
+            model.set(payload);
+            return me.del(model).then(function() {
                 return me.get(me.models.list);
             });
         }

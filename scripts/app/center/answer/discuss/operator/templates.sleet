@@ -1,0 +1,15 @@
+#!handlebars
+
+module > div(data-region='main')
+
+view('main')
+    if(answer.textFont)
+        .item > span(class=answer.textFont) > map('ask-audit-status' answer.auditStatus)
+    compare(answer.auditStatus 'eq' 1)
+        .item(id='praise') > echo(answer.praiseTxt)
+        .item(id='answer') > echo(answer.answerTxt)
+        .item > #share
+    .item(id='remove') 删除
+    form.comment-reply(id ='comment-reply')
+        textarea.input.w-full.block(rows=1 name='t_content' value='')
+        .btn(id='publish') > string('publish')
