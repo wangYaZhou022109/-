@@ -8,7 +8,8 @@ exports.events = {
     'click report': 'showExport',
     'click discuss-*': 'discuss',
     'click selectquestion-*': 'showSlectdrop',
-    'change selectquestion-*': 'hideSlectdrop'
+    'change selectquestion-*': 'hideSlectdrop',
+    'click delete': 'showDelete'
 };
 
 exports.handlers = {
@@ -53,5 +54,9 @@ exports.handlers = {
     hideSlectdrop: function(id) {
         $(this.$('selectquestion-' + id)).parent().css('overflow', 'hidden');
         $(this.$('selectdrop-' + id)).css('margin-top', '0');
+    },
+    showDelete: function() {
+        var model = this.module.items['ask-new/index/delete'];
+        this.app.viewport.modal(model);
     }
 };

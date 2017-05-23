@@ -1,7 +1,7 @@
 var $ = require('jquery'),
     _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
-    D = require('drizzleJs'),
+    D = require('drizzlejs'),
     SEARCH_URL = 'search',
     viewUtil = require('./app/full-text-search/view-util');
 exports.bindings = {
@@ -139,7 +139,7 @@ exports.dataForTemplate = {
     },
     organizations: function(data) {
         var organizations = data.organizations || [];
-        organizations = _.reject(organizations, ['id', this.app.global.currentUser.organization.id]);
+        organizations = _.reject(organizations, ['id', this.app.global.organization.id]);
         return organizations;
     },
     courseTime: function(data) {

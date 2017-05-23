@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .editsummary-page
+    .editsummary(data-region="editsummary")
+
+view('editsummary')
+    .container > textarea.w-full(rows="10" placeholder="简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介")
