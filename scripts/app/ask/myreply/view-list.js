@@ -178,7 +178,10 @@ exports.actionCallbacks = {
     },
     shut2: function() {
         this.app.message.success('删除成功！');
-    }
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
+    },
 };
 
 exports.dataForTemplate = {
