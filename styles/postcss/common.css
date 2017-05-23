@@ -428,3 +428,22 @@ section.section {
         text-align: center;
     }
 }
+
+.content-empty-side {
+    text-align: center;
+    & .img-box {
+        display: inline-block;
+        vertical-align: middle;
+        width: 80px;
+        height: 71px;
+        background-position: center;
+        background-image: url(../images/empty2.png);
+    }
+    & p {
+        display: inline-block;
+        margin: 0;
+        font-size: 16px;
+        color: var(--font-sub-color);
+        vertical-align: middle;
+    }
+}
