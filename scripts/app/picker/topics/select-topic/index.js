@@ -18,6 +18,15 @@ exports.store = {
         types: { url: '../system/topic-type', autoLoad: 'after' }
     },
     callbacks: {
+        init: function(payload) {
+            var topics = this.models.topics;
+            topics.clear();
+            if (payload.group) {
+                topics.params.group = payload.group;
+                D.assign(this.models.search.data, { group: payload.group });
+            }
+            return this.get(topics);
+        },
         changeSearch: function(payload) {
             var search = this.models.search;
             search.set(D.assign(search.data, payload), true);
@@ -28,4 +37,7 @@ exports.store = {
             this.get(model);
         }
     }
+};
+exports.afterRender = function() {
+    this.dispatch('init', this.renderOptions);
 };

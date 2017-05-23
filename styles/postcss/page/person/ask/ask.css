@@ -70,7 +70,10 @@
         }
     }
     & li.expert-item {
-        width: 50%;
+        width: 49%;
+        float: none;
+        display: inline-block;
+        vertical-align: top;
         & .img {
             margin-bottom: var(--large-space);
             width: calc(var(--large-space) * 4);

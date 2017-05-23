@@ -46,5 +46,7 @@ view('list')
                     .bottom
                         .item(title='浏览') > i.iconfont.icon-view + echo(visits)
                         .item(title='评分') > i.iconfont.icon-star + echo(avgScore)
+            else
+                .content-empty > .img-box.img-type-1 + p 暂无您可学习的课程
 
         #pager.pagination
