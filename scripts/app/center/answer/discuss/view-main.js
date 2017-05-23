@@ -6,11 +6,11 @@ exports.bindings = {
 };
 
 exports.actions = {
-    'click delete*': 'delete'
+    'click remove-*': 'remove'
 };
 
 exports.dataForActions = {
-    delete: function(data) {
+    remove: function(data) {
         var me = this;
         return this.Promise.create(function(resolve) {
             var message = '是否确定删除该问题?';
@@ -24,7 +24,7 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    delete: function() {
+    remove: function() {
         this.app.message.success('删除成功');
     }
 };
@@ -36,11 +36,13 @@ exports.components = [{
 exports.dataForTemplate = {
     list: function(data) {
         var list = data.list,
-            downUrl = this.bindings.img.getFullUrl();
+            downUrl = this.bindings.img.getFullUrl(),
+            textFont = { 0: 'color-ing', 2: 'color-error' };
         _.map(list, function(opt) {
             var obj = opt;
             obj.toMember.headPortrait = !obj.toMember.headPortrait ? 'images/default-userpic.png' : downUrl + obj.toMember.headPortrait; // eslint-disable-line max-len
             obj.prefixText = helpers.dateMinute(obj.createTime);
+            obj.textFont = textFont[obj.auditStatus];
             obj.contentImg = 'images/1.png';
         });
         return list;

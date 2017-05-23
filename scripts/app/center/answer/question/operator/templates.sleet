@@ -1,0 +1,19 @@
+#!handlebars
+
+module > div(data-region='main')
+
+view('main')
+    if(question.canDelete)
+        .item > span(class=question.canDelete) > map('ask-audit-status' question.auditStatus)
+        .item(id='remove') 删除
+    compare(question.auditStatus 'eq' 1)
+        .item(id='discuss') > echo(question.discussTxt)
+        .item(id='follow')
+            if(question.follow)
+                string('unfollow')
+            else
+                echo('+') + string('follow')
+        .item > #share
+    form.comment-reply(id ='comment-reply')
+        textarea.input.w-full.block(rows=1 name='t_content' value='')
+        .btn(id='publish') > string('publish')
