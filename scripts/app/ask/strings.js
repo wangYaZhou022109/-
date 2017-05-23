@@ -8,7 +8,7 @@ module.exports = {
     article: '文章',
     'article-title': '文章标题',
     'article-content': '文章内容',
-    'ask-a-question': '提问',
+    'ask-a-question': '我的提问',
     advantage: '优势',
     answer: '回答',
     active: '活跃',
