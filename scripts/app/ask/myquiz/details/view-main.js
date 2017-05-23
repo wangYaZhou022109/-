@@ -19,6 +19,7 @@ exports.handlers = {
     discussanswer: function(id) {
         var region;
         var el = this.$('reply-' + id);
+        console.log(el);
         if (el.style.display === 'none') {
             el.style.display = 'inline';
             region = new D.Region(this.app, this.module, el, id);
