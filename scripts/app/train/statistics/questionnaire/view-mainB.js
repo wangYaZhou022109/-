@@ -32,8 +32,11 @@ exports.handlers = {
         this.app.viewport.modal(view4, { payload: options });
     },
     changeStartTime: function(id) {
-        $(this.$('input-startTime-')).css('display', 'block');
-        $(this.$('label-startTime-' + id)).css('display', 'none');
+        var state = this.bindings.state.data;
+        if (state.role !== 3 && state.role !== 4) {
+            $(this.$('input-startTime-')).css('display', 'block');
+            $(this.$('label-startTime-' + id)).css('display', 'none');
+        }
     },
     updateStartTime: function() {
         var classEvaluate = this.bindings.classEvaluate.data[0].id;
@@ -48,8 +51,11 @@ exports.handlers = {
         }
     },
     changeEndTime: function(id) {
-        $(this.$('input-endTime-')).css('display', 'block');
-        $(this.$('label-endTime-' + id)).css('display', 'none');
+        var state = this.bindings.state.data;
+        if (state.role !== 3 && state.role !== 4) {
+            $(this.$('input-endTime-')).css('display', 'block');
+            $(this.$('label-endTime-' + id)).css('display', 'none');
+        }
     },
     updateEndTime: function() {
         var classEvaluate = this.bindings.classEvaluate.data[0].id;
