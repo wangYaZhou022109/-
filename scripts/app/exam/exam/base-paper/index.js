@@ -96,6 +96,12 @@ exports.store = {
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;
+                },
+                saveLastSubmitTime: function(lastCacheTime) {
+                    D.assign(this.data, {
+                        lastCacheTime: lastCacheTime
+                    });
+                    this.save();
                 }
             }
         },
