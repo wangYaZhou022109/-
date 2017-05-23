@@ -26,15 +26,10 @@ exports.handlers = {
         region.show('ask/replyme/mydetail', { id: id });
     },
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myshares/details', { id: data[1] });
         }
     },
@@ -43,7 +38,10 @@ exports.handlers = {
             data = { };
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            this.app.viewport.modal(this.module.items['ask/report'], { id: data[1], objectType: data[0] });
+            this.app.viewport.modal(this.module.items['ask/report'], {
+                id: data[1],
+                objectType: data[0],
+                beUserId: data[2] });
         }
     },
     shareTo: function(data) {
@@ -122,7 +120,6 @@ exports.actions = {
     'click del2-*': 'shut2',
     'click concern-*': 'concern',
     'click enjoy-*': 'enjoy',
-    'click report-*': 'report',
     'click publish-*': 'publish',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
@@ -175,12 +172,6 @@ exports.dataForActions = {
         data.objectType = obj[0];
         data.id = obj[1];
         return data;
-    },
-    concern: function() {
-    },
-    enjoy: function() {
-    },
-    report: function() {
     },
 };
 
