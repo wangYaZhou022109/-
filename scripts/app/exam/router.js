@@ -8,7 +8,8 @@ exports.routes = {
     'research-activity/research-answer/:id': 'showResearchAnswerDetail',
     'research-activity/research-detail/:id/:businessId': 'showResearchDetail',
     'research-activity/paper/:id/:businessId': 'showResearchPaper',
-    'research-activity/index/:id': 'showIndex'
+    'research-activity/index/:id': 'showIndex',
+    'research-activity/summary/:id/:businessId': 'showResearchSummary'
 };
 
 exports.showIndex = function(id) {
@@ -57,4 +58,11 @@ exports.showResearchPaper = function(id, businessId) {
 
 exports.showIndex = function(id) {
     return this.app.show('content', 'exam/research-activity/index', { researchId: id });
+};
+
+exports.showResearchSummary = function(id, businessId) {
+    return this.app.viewport.showIt('content', 'exam/research-activity/summary', {
+        researchQuestionaryId: id,
+        businessId: businessId
+    });
 };

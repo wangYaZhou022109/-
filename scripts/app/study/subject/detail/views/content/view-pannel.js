@@ -53,14 +53,6 @@ exports.handlers = {
             url = prefixUrl[8] + section.referenceId;
             window.open(url);
         } else if (sectionType === 9) {
-            // if (progress.finishStatus === 2) {
-            //     url = '#/exam/exam/paper/' + resourceId;
-            //     window.open(url);
-            //     return;
-            // }
-            // view = this.module.items['exam-tips'];
-            // this.bindings.state.examId = resourceId;
-            // me.app.viewport.modal(view);
             me.app.viewport.modal(me.module.items['exam/exam/other-exam-prompt'], { examId: resourceId });
             return;
         } else {
