@@ -53,13 +53,7 @@ exports.store = {
             this.models.out.clear();
             this.models.out.set(payload);
             return this.put(this.models.out);
-        },
-        // reviewed: function() {
-        //     var reviewed = this.models.reviewed;
-        //     reviewed.clear();
-        //     reviewed.params = { auditStatus: 1 };
-        //     return this.get(reviewed);
-        // }
+        }
     }
 };
 exports.afterRender = function() {
@@ -77,7 +71,7 @@ exports.buttons = [{
         params.auditType = 1;
         this.dispatch('out', params).then(function() {
             this.app.message.success('拒绝成功');
-            me.dispatch('init');
+            me.renderOptions.callback();
         });
     }
 }, {
@@ -89,7 +83,7 @@ exports.buttons = [{
         params.auditType = 1;
         this.dispatch('pass', params).then(function() {
             this.app.message.success('完成审核！');
-            me.dispatch('init');
+            me.renderOptions.callback();
         });
     }
 

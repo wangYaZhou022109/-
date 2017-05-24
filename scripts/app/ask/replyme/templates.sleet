@@ -3,7 +3,11 @@ module
     div(data-region='list')
 view('list')
     .tabs.line.mb-1
-        .pull-right > echo('你有回复了'+replyme.length+'条')
+        .pull-right.m-top 
+            span 你有回复了
+            span.h3.custom-color-3
+                echo(replyme.length)
+            span 条
         ul
             li.active > echo('回复我的')
     .comment-list.ask-list > ul
@@ -25,10 +29,10 @@ view('list')
                                 .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id + '_' + createTime) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
-                                        .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已点赞')
+                                        .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + questionDiscuss.id ) > string('publish') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + questionDiscuss.id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             span 分享
@@ -59,16 +63,16 @@ view('list')
                                 .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
-                                        .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已点赞')
+                                        .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
-                                        input.input(type='hidden' name='id' value=id)
+                                        input.input(type='hidden' name='id' value=discussId)
                                         input.input(type='hidden' name='toUserId' value=member.id)
                                         input.input(type='hidden' name='questionId' value=question.id)
                                         .btn(id='publish-' + id) > string('publish')
@@ -90,10 +94,10 @@ view('list')
                                     a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
-                                        .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已点赞')
+                                        .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             span 分享
@@ -103,7 +107,7 @@ view('list')
                                     # .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
-                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        textarea.input.w-full.block(rows=1 name='content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
                                         input.input(type='hidden' name='id' value=questionDiscuss.id)
                                         input.input(type='hidden' name='toUserId' value=member.id)
@@ -126,16 +130,16 @@ view('list')
                                     a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
-                                        .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已点赞')
+                                        .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
-                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        textarea.input.w-full.block(rows=1 name='content' value='')
                                         input.input(type='hidden' name='organizationId' value=question.organizationId)
-                                        input.input(type='hidden' name='id' value=id)
+                                        input.input(type='hidden' name='id' value=discussId)
                                         input.input(type='hidden' name='toUserId' value=member.id)
                                         input.input(type='hidden' name='questionId' value=question.id)
                                         .btn(id='publish-' + id) > string('publish')
