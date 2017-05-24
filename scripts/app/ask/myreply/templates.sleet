@@ -17,7 +17,7 @@ view('list')
             compare(question.type 'eq' 1)
                 compare(questionDiscuss.readStatus 'eq' 2)        
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
@@ -51,7 +51,7 @@ view('list')
                                         
                 compare(readStatus 'eq' 1)                               
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
@@ -81,7 +81,7 @@ view('list')
                 compare(questionDiscuss.readStatus 'eq' 2)
                     #  compare(questionDiscuss.auditStatus 'eq' 0)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
@@ -109,7 +109,7 @@ view('list')
 
                 compare(readStatus 'eq' 1)                              
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)

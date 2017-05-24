@@ -17,7 +17,7 @@ view('list')
             compare(question.type 'eq' 1)
                 compare(questionDiscuss.readStatus 'eq' 2)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
@@ -51,7 +51,7 @@ view('list')
                                         
                 compare(readStatus 'eq' 1)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
@@ -66,7 +66,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + replyNum +')')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
@@ -80,7 +80,7 @@ view('list')
             compare(question.type 'eq' 2)
                 compare(questionDiscuss.readStatus 'eq' 2)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
@@ -116,7 +116,7 @@ view('list')
 
                 compare(readStatus 'eq' 1)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
@@ -133,7 +133,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + replyNum +')')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)

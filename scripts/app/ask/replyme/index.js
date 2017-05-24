@@ -14,6 +14,7 @@ exports.store = {
         reply: { url: '../ask-bar/question-reply' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        down: { url: '../human/file/download' },
         page: {
             data: [],
             params: { page: 1, size: 10 },
