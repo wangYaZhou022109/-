@@ -341,6 +341,9 @@ module.exports = {
     'gensee-status': { // 直播状态
         0: '未发布', 1: '未开始', 2: '进行中', 3: '已结束', 4: '已撤销'
     },
+    'gensee-status-center': { // 直播状态
+        0: '未发布', 1: '待开始', 2: '直播中', 3: '已结束', 4: '已撤销'
+    },
     'knowledge-audit-status': { // 知识审核状态
         0: '待审核', 1: '已通过', 2: '已拒绝'
     },
@@ -424,6 +427,9 @@ module.exports = {
     },
     'gensee-access-status': { // 直播状态
         1: '已参加', 2: '待开始', 3: '未参加'
+    },
+    'push-object-progress-status': {
+        0: '未完成', 1: '学习中', 2: '已完成', 3: '未完成', 4: '已完成'
     },
     get: function(k) {
         return _.map(this[k], function(value, key) {

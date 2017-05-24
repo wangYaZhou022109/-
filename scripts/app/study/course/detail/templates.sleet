@@ -104,7 +104,7 @@ view('releated-course')
                         .img-cont > img(src=imageUrl)
                     .title.text-overflow(title=name) > echo(name)
         else
-            .text-tips 暂无
+            .content-empty-side > .img-box + p 暂无相关课程
 
 view('student')
     .h3 最近TA们也学过

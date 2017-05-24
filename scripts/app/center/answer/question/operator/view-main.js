@@ -55,7 +55,7 @@ exports.handlers = {
         return this.Promise.create(function(resolve) {
             var message = '是否确定删除该问题?';
             me.app.message.confirm(message, function() {
-                me.module.renderOptions.callback(me, question.id);
+                me.module.renderOptions.callback({ id: question.id });
             }, function() {
                 resolve(false);
             });

@@ -35,9 +35,9 @@ view('main')
                         a(href='javascript:;') > echo(toMember.fullName)
                         span.sub-text > echo(prefixText)
                     .comment-operation
-                        .text-right
-                            if(textFont)
-                                .item > span(class=textFont) > map('ask-audit-status' auditStatus)
-                            .item(id='remove-' + id) 删除
+                        .text-right(data-dynamic-key=id)
+                            # if(textFont)
+                            #     .item > span(class=textFont) > map('ask-audit-status' auditStatus)
+                            # .item(id='remove-' + id) 删除
 
     #pager.pagination

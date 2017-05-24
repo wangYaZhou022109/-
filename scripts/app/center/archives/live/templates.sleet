@@ -25,7 +25,7 @@ view('main')
                     td(title=genseeWebCast.lecturerNames) > echo(genseeWebCast.lecturerNamesSub)
                     td > dateMinute(genseeWebCast.startTime)
                     td > dateMinute(genseeWebCast.endTime)
-                    td > map('gensee-status' genseeWebCast.status)
+                    td > map('gensee-status-center' genseeWebCast.status)
                     td > map('gensee-access-status' status)
                     td > dateMinute(accessTime)
                     else
