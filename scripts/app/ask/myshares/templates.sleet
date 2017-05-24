@@ -33,7 +33,7 @@ view('list')
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-ing > string('auditStatus0')
-                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
             
             compare(auditStatus 'eq' 1)
                 compare(essenceStatus 'eq' 1)
@@ -109,10 +109,8 @@ view('list')
                                         .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
                                             string('praise') +  echo('（'+ praiseNum +'）') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
-
                                     compare(careNum 'eq' 0)
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
-
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             span 分享
