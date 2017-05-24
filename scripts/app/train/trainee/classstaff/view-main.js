@@ -15,12 +15,12 @@ exports.events = {
     'change staff-input-sort*': 'updateSort',
     'click label-callName*': 'showCallNameInput',
     'change input-callName*': 'updateCallName',
-    'click addClassstaff': 'addClassstaff',
     'click addAllClassstaff': 'showMembers'
 };
 
 exports.actions = {
-    'click staff-delete*': 'delete'
+    'click staff-delete*': 'delete',
+    'click addClassstaff': 'addClassstaff'
 };
 
 exports.handlers = {
@@ -68,26 +68,6 @@ exports.handlers = {
             });
         }
     },
-    addClassstaff: function() {
-        var memberName = $(this.$('add-classstaff-input')).val().trim();
-        var state = this.bindings.state.data;
-        var params = {};
-        var me = this;
-        if (memberName === '') {
-            me.app.message.alert('请输入人员编号!');
-        } else {
-            params.classId = state.classId;
-            params.memberName = memberName;
-            me.module.dispatch('addClassstaff', params).then(function(result) {
-                if (result[0] === -1) {
-                    me.app.message.error('人员编号不存在!');
-                } else {
-                    me.app.message.success('添加成功!');
-                    me.module.dispatch('init', state);
-                }
-            });
-        }
-    },
     showMembers: function() {
         var me = this;
         var view = me.module.items['train/trainee/select-member'];
@@ -102,9 +82,19 @@ exports.handlers = {
                         params.classId = state.classId;
                         params.memberIds = data;
                         me.module.dispatch('addAllClassstaff', params).then(function(result) {
-                            if (result[0] !== -1) {
-                                me.app.message.success('添加成功!');
-                                me.module.dispatch('init', state);
+                            if (result[0]) {
+                                if (result[0][0] === 0) {
+                                    me.app.message.error('添加失败,班务人员数量已满');
+                                } else {
+                                    if (result[0][1] === 0) {
+                                        me.app.message.success('添加成功!');
+                                    } else {
+                                        me.app.message.success('添加成功' + result[0][0] + '条');
+                                        me.app.message.error('添加失败' + result[0][1] + '条');
+                                        me.app.message.error('班务人员数量已满');
+                                    }
+                                    me.module.dispatch('init', state);
+                                }
                             } else {
                                 me.app.message.error('添加失败!');
                             }
@@ -117,6 +107,20 @@ exports.handlers = {
 };
 
 exports.dataForActions = {
+    addClassstaff: function() {
+        var memberName = $(this.$('add-classstaff-input')).val().trim(),
+            state = this.bindings.state.data,
+            classstaffs = this.bindings.classstaffs.data;
+        if (memberName === '') {
+            this.app.message.alert('请输入员工编号!');
+            return false;
+        }
+        if (classstaffs.length >= 10) {
+            this.app.message.alert('班务人员数量已满!');
+            return false;
+        }
+        return { classId: state.classId, memberName: memberName };
+    },
     delete: function(data) {
         var me = this;
         var params = { id: data.id, delete: 1 };
@@ -132,6 +136,19 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
+    addClassstaff: function(data) {
+        var state = this.bindings.state.data;
+        if (data[0] === 1) {
+            this.app.message.success('添加成功!');
+            this.module.dispatch('init', state);
+        } else if (data[0] === -1) {
+            this.app.message.error('人员编号有误!');
+        } else if (data[0] === 999) {
+            this.app.message.error('班务人员已存在!');
+        } else if (data[0] === 10) {
+            this.app.message.error('班务人员数量已满!');
+        }
+    },
     delete: function(data) {
         var state = this.bindings.state.data;
         if (data[0]) {
