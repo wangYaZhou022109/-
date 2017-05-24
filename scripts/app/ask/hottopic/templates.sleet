@@ -5,7 +5,7 @@ module
 view('list')
     .section
     span.h3 > string('hot') + string('topic')
-    span.more > a.normal(href='#/ask/topic/index') > echo('more')
+    span.more.pull-right > a.normal(href='#/ask/topic/index') > echo('more')
     .layout-mt-small
         .comment-list.ask-list > ul
             each(topic)
