@@ -33,8 +33,7 @@ view('list')
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-ing > string('auditStatus0')
-                                compare(careNum 'ne' 0)
-                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
             
             compare(auditStatus 'eq' 1)
                 compare(essenceStatus 'eq' 1)
@@ -71,9 +70,15 @@ view('list')
                                         .drop-down-wrapper
                                             span 分享
                                             form.drop-down-content > .content
+<<<<<<< Updated upstream
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                     compare(careNum 'ne' 0)
+=======
+                                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    compare(careNum 'eq' 0)
+>>>>>>> Stashed changes
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
@@ -111,6 +116,9 @@ view('list')
                                             string('praise') +  echo('（'+ praiseNum +'）') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
 
+                                    compare(careNum 'eq' 0)
+                                        .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             span 分享
@@ -139,6 +147,6 @@ view('list')
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
-                                compare(careNum 'ne' 0)
+                                compare(careNum 'eq' 0)
                                     .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                     

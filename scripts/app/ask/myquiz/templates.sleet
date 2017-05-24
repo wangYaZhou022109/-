@@ -54,13 +54,13 @@ view('list')
                                 .pull-left > .sub-text > string('related-topics') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0) 
-                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')
-                                    else 
-                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')                   
+                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow')
+                                    else             
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
-                                    compare(careNum 'ne' 0)
+                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow')                   
+                                    compare(careNum 'eq' 0)
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar
                                         .drop-down-wrapper
