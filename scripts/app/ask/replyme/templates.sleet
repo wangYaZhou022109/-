@@ -24,7 +24,7 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('讨论了我的问题') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id + '_' + createTime) > echo(question.title)
                                 .text-right
@@ -58,7 +58,7 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('回复了我对问题的讨论') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
                                 .text-right
@@ -87,7 +87,7 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('讨论了我的分享') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text 
                                     echo('来自分享：') 
@@ -123,7 +123,7 @@ view('list')
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('回复了我对分享的讨论') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text
                                     echo('来自讨论:')

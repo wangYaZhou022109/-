@@ -117,10 +117,14 @@ exports.store = {
         publish: function(payload) {
             var discuss = this.models.discuss,
                 data = payload,
-                speechset = this.models.speech.getData('2');
+                speechset = this.models.speech.getData('2'),
+                me = this;
             data.speechset = speechset.status;
             discuss.set(data);
-            return this.save(discuss);
+            return this.save(discuss).then(function() {
+                var page = me.models.page;
+                page.changed();
+            });
         },
         speech: function() {
             var speech = this.models.speech;

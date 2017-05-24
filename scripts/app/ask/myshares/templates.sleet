@@ -65,7 +65,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
                                 
                                     .item > .share-bar
                                         .drop-down-wrapper
@@ -109,7 +109,7 @@ view('list')
                                     else
                                         .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
                                             string('praise') +  echo('（'+ praiseNum +'）') 
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
 
                                     .item > .share-bar
                                         .drop-down-wrapper

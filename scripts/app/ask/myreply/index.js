@@ -105,9 +105,13 @@ exports.store = {
         },
         publish: function(payload) {
             var reply = this.models.reply,
-                data = payload;
+                data = payload,
+                me = this;
             reply.set(data);
-            return this.save(reply);
+            return this.save(reply).then(function() {
+                var page = me.models.page;
+                page.changed();
+            });
         },
     }
 };

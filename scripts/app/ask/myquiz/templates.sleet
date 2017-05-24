@@ -59,7 +59,7 @@ view('list')
                                     else 
                                         .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
                                         .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')                   
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
                                     compare(careNum 'ne' 0)
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar
@@ -98,7 +98,7 @@ view('list')
                                     else 
                                         .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
                                         .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow') 
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
                                     compare(careNum 'eq' 0)    
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar

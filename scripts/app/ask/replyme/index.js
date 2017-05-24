@@ -52,9 +52,13 @@ exports.store = {
         },
         publish: function(payload) {
             var reply = this.models.reply,
-                data = payload;
+                data = payload,
+                me = this;
             reply.set(data);
-            return this.save(reply);
+            return this.save(reply).then(function() {
+                var page = me.models.page;
+                page.changed();
+            });
         },
         praise: function(payload) {
             var praise = this.models.praise,
@@ -63,10 +67,8 @@ exports.store = {
             return this.post(praise).then(function() {
                 var page = me.models.page;
                 var curObj = page.findById(payload.id);
-
                 curObj.praise = true;
                 curObj.praiseNum ++;
-
                 page.changed();
             });
         },
