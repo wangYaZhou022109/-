@@ -20,7 +20,7 @@ view('reviewed')
     .hr
     #  .checkbox > input(type='checkbox' id='display')('checked')&if(checked) + echo('显示待审核')
     .checkbox-slider.text-right
-        input(type='checkbox'  id='check' )('checked')&if(checked) + label(for='check')
+        input(type='checkbox'  id='check' name='checkbox')('checked')&if(checked) + label(for='check')
         span 显示待审核
             
     ul.manage-list
