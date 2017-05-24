@@ -64,7 +64,7 @@ view('shortcut')
                             li
                                 a.underline(href='#/message/detail/'+id  target='_blank') > .text-overflow > echo(subject)
                                 .sub-text.text-overflow > echo(textContent)
-                        .text-center.small-font > a#message-more 查看更多
+                        .text-center.small-font > a.pointer#message-more 查看更多
                     else
                         .text-center.small-font 暂无新消息
             compare(Global.roleLength 'gt' 0)
@@ -74,14 +74,14 @@ view('shortcut')
                     if(Global.currentUser.headPortrait)
                         img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
                     else
-                        img(src='images/default-userpic.png')
+                        img(src='images/default-cover/default_user.png')
                 .drop-down-content > .content
                     .user-info-top
                         .user-pic.inline-block
                             if(Global.currentUser.headPortrait)
                                 img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
                             else
-                                img(src='images/default-userpic.png')
+                                img(src='images/default-cover/default_user.png')
                         .user-info-main.inline-block
                             .item
                                 .inline-block.common-title > echo(Global.currentUser.name)
