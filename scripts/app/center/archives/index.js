@@ -1,5 +1,6 @@
 
 exports.items = {
+    condition: 'condition',
     chart: 'chart',
     detail: 'detail'
 };
