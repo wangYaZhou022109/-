@@ -1,4 +1,4 @@
-
+var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     reviewed: true,
@@ -15,10 +15,21 @@ exports.events = {
 exports.handlers = {
     audit: function(data, e, target) {
         var id = data,
-            auditType = target.getAttribute('auditType');
+            me = this,
+            auditType = target.getAttribute('auditType'),
+            checked = $(this.$$('[name="checkbox"]')).prop('checked');
             // 1提问审核
         if (auditType === '1') {
-            this.app.viewport.modal(this.module.items['ask/quizaudit'], { id: id });
+            this.app.viewport.modal(this.module.items['ask/quizaudit'], {
+                id: id,
+                callback: function() {
+                    if (checked) {
+                        me.module.dispatch('reviewed');
+                    } else {
+                        me.module.dispatch('display');
+                    }
+                }
+            });
         }
         // 2讨论审核
         if (auditType === '2') {

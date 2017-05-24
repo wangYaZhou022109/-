@@ -23,10 +23,11 @@ exports.dataForTemplate = {
             options = this.bindings.state.data.options,
             str = '';
         if (answer.data.value.length > 0) {
-            str = answer.data.value[0].value;
-            _.forEach(options, function(o) {
-                str = str.replace(o.name + '|', o.code);
-            });
+            str = _.map(_.filter(answer.data.value[0].value.split('|'), function(a) {
+                return a;
+            }), function(a) {
+                return _.find(options, ['name', a]).code;
+            }).join('');
         }
         return str;
     },

@@ -78,7 +78,7 @@ exports.store = {
         organizations: { url: '../system/home-config/organization' },
         integral: { url: '../system/integral-result/grade' }, // 积分和等级
         courseTime: { url: '../course-study/course-study-progress/total-time' }, // 总学习时长
-        hotTopics: { url: '../system/topic/hot-all?limit=10' }, // 热门标签
+        hotTopics: { url: '../system/topic/hot-all' }, // 热门标签
         state: {}
     },
     callbacks: {
@@ -89,6 +89,7 @@ exports.store = {
             homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
             homeConfig.clear();
             if (this.app.global.currentUser.organization) {
+                this.models.hotTopics.params.limit = 10;
                 this.get(this.models.hotTopics);
             }
             return this.get(homeConfig).then(function() {

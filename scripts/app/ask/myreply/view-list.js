@@ -127,27 +127,31 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    shut1: function(data) {
-        var me = this;
-        return this.Promise.create(function(resolve) {
-            var message = '确定要删除该数据?';
-            me.app.message.confirm(message, function() {
-                resolve(data);
-            }, function() {
-                resolve(false);
-            });
-        });
+    shut1: function(payload) {
+        // var me = this;
+        // return this.Promise.create(function(resolve) {
+        //     var message = '确定要删除该数据?';
+        //     me.app.message.confirm(message, function() {
+        //         resolve(data);
+        //     }, function() {
+        //         resolve(false);
+        //     });
+        // });
+        var data = payload;
+        return data;
     },
-    shut2: function(data) {
-        var me = this;
-        return this.Promise.create(function(resolve) {
-            var message = '确定要删除该数据?';
-            me.app.message.confirm(message, function() {
-                resolve(data);
-            }, function() {
-                resolve(false);
-            });
-        });
+    shut2: function(payload) {
+        // var me = this;
+        // return this.Promise.create(function(resolve) {
+        //     var message = '确定要删除该数据?';
+        //     me.app.message.confirm(message, function() {
+        //         resolve(data);
+        //     }, function() {
+        //         resolve(false);
+        //     });
+        // });
+        var data = payload;
+        return data;
     },
     publish: function(payload) {
         return payload;
@@ -174,7 +178,10 @@ exports.actionCallbacks = {
     },
     shut2: function() {
         this.app.message.success('删除成功！');
-    }
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
+    },
 };
 
 exports.dataForTemplate = {

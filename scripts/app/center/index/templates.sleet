@@ -37,7 +37,7 @@ view('top')
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师
                 if(member.isExpert)
-                    .item > a(href='#/ask/expertdetails/'+member.expertDetailId target='_parent')
+                    .item > a(href='#/ask/askExpertdetails/'+member.expertDetailId + '/' + member.id target='_parent')
                         i.iconfont.icon-type
                         echo('专家')
                 .item > a#edit-info 编辑资料

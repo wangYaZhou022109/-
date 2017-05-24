@@ -12,7 +12,8 @@ exports.store = {
             root: 'items'
         },
         img: { url: '../human/file/download?id=' },
-        object: { url: '../ask-bar/question' },
+        object: { url: '../ask-bar/myquiz' },
+        speech: { url: '../system/speech-set', autoLoad: 'after' },
         search: { data: { type: '1' } },
     },
     callbacks: {
@@ -36,11 +37,12 @@ exports.store = {
             this.get(list);
             searchModel.changed();
         },
-        delete: function(payload) {
+        remove: function(payload) {
             var object = this.models.object,
                 me = this;
             object.set(payload);
-            return me.del(object).then(function() {
+            return me.put(object).then(function() {
+                me.app.message.success('删除成功');
                 return me.get(me.models.list);
             });
         }
