@@ -73,6 +73,7 @@ exports.store = {
                 weeks = this.models.weeks,
                 me = this;
             classInfo.set(payload);
+            state.data.role = payload.role;
             this.get(classInfo).then(function(data) {
                 offlineThemeList.params.classId = data[0].id;
                 me.get(offlineThemeList).then(function(list) {
@@ -607,5 +608,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state.id });
+    return this.dispatch('init', { id: this.renderOptions.state.id, role: this.renderOptions.state.role });
 };

@@ -34,6 +34,10 @@ exports.store = {
         selectPaper: function(paper) {
             this.models.paperClass.data = paper;
             this.models.paperClass.changed();
+        },
+        setData: function(payload) {
+            D.assign(this.models.exam.data, payload);
+            this.models.exam.changed();
         }
     }
 };
@@ -55,7 +59,8 @@ exports.mixin = {
             return {
                 paperClass: paper,
                 markConfig: markConfig,
-                anonymityMark: '0'
+                anonymityMark: '0',
+                paperClassId: paper.id
             };
         }
         return null;
@@ -72,6 +77,9 @@ exports.mixin = {
             return true;
         };
         return this.items.main.validate() && check.call(this) && scoreValid.call(this);
+    },
+    setData: function(payload) {
+        return this.dispatch('setData', payload);
     }
 };
 
@@ -83,12 +91,22 @@ check = function() {
             if (!mc) return false;
             if (typeof mc === 'string') {
                 mcObj = JSON.parse(mc);
-                return mcObj.markPapers[0].markMembers.length > 0;
+                if (mcObj.markPapers && mcObj.markPapers.length > 0) {
+                    return mcObj.markPapers[0].markMembers.length > 0;
+                } else if (mcObj.markQuestionTypes && mcObj.markQuestionTypes.length > 0) {
+                    return _.every(mcObj.markQuestionTypes, function(mqt) {
+                        return mqt.markMembers.length > 0;
+                    });
+                } else if (mcObj.markQuestions && mcObj.markQuestions.length > 0) {
+                    return _.every(mcObj.markQuestions, function(mq) {
+                        return mq.markMembers.length > 0;
+                    });
+                }
             }
             return true;
         };
     if (Number(isSubjective) === 1 && !hasMarkMembers(markConfig)) {
-        this.app.message.error('试卷存在主观题，必须选择评卷老师');
+        this.app.message.error('请完整配置评卷老师信息');
         return false;
     }
     return true;

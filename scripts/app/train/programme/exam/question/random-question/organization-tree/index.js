@@ -8,12 +8,14 @@ exports.store = {
     },
     callbacks: {
         initPage: function(uri) {
-            return this.get(this.models.organizationTree, { data: { uri: uri } });
+            this.models.organizationTree.set(uri);
+            return this.get(this.models.organizationTree);
         }
     }
 };
 
 exports.afterRender = function() {
     var uri = this.renderOptions.url || this.app.global.uri;
-    return this.dispatch('initPage', uri);
+    // var uri = 'course-study/course-info';
+    return this.dispatch('initPage', { uri: uri });
 };

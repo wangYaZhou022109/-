@@ -148,6 +148,27 @@ exports.dataForTemplate = {
             }
         });
         return data.classroomList;
+    },
+    isManageAndSponsor: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 1 || state.role === 2) {
+            return true;
+        }
+        return false;
+    },
+    isAssist: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
+    },
+    isClassAndManage: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 1 || state.role === 3) {
+            return true;
+        }
+        return false;
     }
 };
 

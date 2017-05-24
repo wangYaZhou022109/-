@@ -8,13 +8,16 @@ view('search-param') > form.vertical
     # .row > .col-sm-12.text-right > label > .btn#selectQuestions > string('exam.buttons.select')
     .bg-highlight
         .form.align-left
-            .form-row
+            .form-row.w-full
                 label.tag-height 试题描述
                 input.input.tag-height(name='content')
             .form-row.w-half.pull-left.row-block.r-padding
-                label.required.tag-height 归属部门
+                label.tag-height.required 归属部门
                 .content
                     #owner
+                    #  input.input.tag-height(value=org.name name='organizationName')
+                    #  .btn.choice#showOrganization 选择
+                    #  input(type='hidden' id='organizatonId' name='organizationId' value=org.id)
             .form-row.w-half.pull-left.row-block
                 label.required.tag-height 所属题库
                 .content

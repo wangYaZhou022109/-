@@ -8,19 +8,33 @@ view('main')
         section.section.container
             .layout-mr-small.pull-left
                 .small-font.sub-title.inline-block.m-right 配额方式：
-                if(checked.isType1)
-                    .tag-btn#quota-type-2 分省配额
-                    .tag-btn.active#quota-type-1 整体配额
+                if(isGrant)
+                    if(checked.isType1)
+                        .tag-btn#quota-type-2 分省配额
+                        .tag-btn.active#quota-type-1 整体配额
+                    else
+                        .tag-btn.active#quota-type-2 分省配额
+                        .tag-btn#quota-type-1 整体配额
                 else
-                    .tag-btn.active#quota-type-2 分省配额
-                    .tag-btn#quota-type-1 整体配额
+                    if(checked.isType1)
+                        .tag-btn#quota-type-2(style='pointer-events:none') 分省配额
+                        .tag-btn.active#quota-type-1(style='pointer-events:none') 整体配额
+                    else
+                        .tag-btn.active#quota-type-2(style='pointer-events:none') 分省配额
+                        .tag-btn#quota-type-1(style='pointer-events:none') 整体配额
             .quotamanage-title.clearfix
                 .layout-mr-small.pull-left
                     .small-font.sub-title.inline-block.m-right 审核方式:
-                    input.r-input#is-auto-1(name='isAutoApprove' type='radio' value='1')('checked')&if(checked.isAutoApprove1)
-                    label.small-font.m-right 自动审批
-                    input.r-input#is-auto-0(name='isAutoApprove' type='radio' value='0')('checked')&unless(checked.isAutoApprove1)
-                    label.small-font 手动审批
+                    if(isGrant)
+                        input.r-input#is-auto-1(name='isAutoApprove' type='radio' value='1')('checked')&if(checked.isAutoApprove1)
+                        label.small-font.m-right 自动审批
+                        input.r-input#is-auto-0(name='isAutoApprove' type='radio' value='0')('checked')&unless(checked.isAutoApprove1)
+                        label.small-font 手动审批
+                    else
+                        input.r-input#is-auto-1(name='isAutoApprove' type='radio' value='1' disabled='disabled')('checked')&if(checked.isAutoApprove1)
+                        label.small-font.m-right 自动审批
+                        input.r-input#is-auto-0(name='isAutoApprove' type='radio' value='0' disabled='disabled')('checked')&unless(checked.isAutoApprove1)
+                        label.small-font 手动审批
                 .pull-right
                     span.small-font 该培训班总额度为：
                     span.small-font.text-main-color > echo(quotaInfo.amount)
@@ -32,19 +46,24 @@ view('main')
                         .quotamanage-content.layout-mt-small
                             .clearfix
                                 .pull-right
-                                    .tag-btn#add 添加单位
-                                    .tag-btn#deleteMulti 删除
+                                    if(isGrant)
+                                        .tag-btn#add 添加单位
+                                        .tag-btn#deleteMulti 删除
                             table.table
                                 tr
-                                    th > input#checkall(type='checkbox' name='checkall' )
+                                    if(isGrant)
+                                        th > input#checkall(type='checkbox' name='checkall' )
                                     th 单位
                                     th 配额数量
-                                    th 操作
+                                    if(isGrant)
+                                        th 操作
                                 each(quotaList) > tr
-                                    td > input(type='checkbox' name='ids' id='ids-'+id value=id data-name='id' data-value=id)
+                                    if(isGrant)
+                                        td > input(type='checkbox' name='ids' id='ids-'+id value=id data-name='id' data-value=id)
                                     td > echo(organizationName)
                                     td > echo(quantity)
-                                    td > a(id='del-quota-'+id data-name='id' data-value=id) 删除
+                                    if(isGrant)
+                                        td > a(id='del-quota-'+id data-name='id' data-value=id) 删除
                         .quotamanage-footer.text-center.layout-mt-small
                 else
                     .text-center.layout-mt

@@ -110,11 +110,20 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     questionnaireList: function(data) {
+        var state = this.bindings.state.data;
         _.map(data.questionnaireList || [], function(qnr, i) {
             var r = qnr;
             r.i = i + 1;
+            r.isGrant = state.role !== 4;
         });
         return data.questionnaireList;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };
 

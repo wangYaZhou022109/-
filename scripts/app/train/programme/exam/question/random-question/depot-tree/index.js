@@ -15,7 +15,7 @@ exports.store = {
                     var me = this,
                         obj = {};
                     _.forEach(list, function(l) {
-                        me.data.unshift(l);
+                        me.data.push(l);
                     });
                     _.forEach(this.data, function(d) {
                         obj[d.id] = d;
@@ -33,8 +33,6 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var questionDepots = this.models.questionDepots;
-                // shareAndPublic = this.models.shareAndPublic,
-                // me = this;
 
             if (payload.callback) {
                 this.models.state.callback = payload.callback;
@@ -43,12 +41,6 @@ exports.store = {
                 organizationId: null,
                 state: 1
             });
-            // return this.get(questionDepots).then(function() {
-            //     // return me.get(shareAndPublic).then(function() {
-            //     //     questionDepots.merge(shareAndPublic.data);
-            //     // });
-            //     questionDepots.changed();
-            // });
         },
         changeDepot: function(payload) {
             this.models.state.callback({
@@ -57,15 +49,16 @@ exports.store = {
             });
         },
         refreshTree: function(payload) {
-            var questionDepots = this.models.questionDepots;
-                // shareAndPublic = this.models.shareAndPublic,
-                // me = this;
+            var questionDepots = this.models.questionDepots,
+                shareAndPublic = this.models.shareAndPublic,
+                me = this;
             D.assign(questionDepots.params, payload);
             return this.get(questionDepots).then(function() {
-                // return me.get(shareAndPublic).then(function() {
-                //     questionDepots.merge(shareAndPublic.data);
-                // });
-                questionDepots.changed();
+                D.assign(shareAndPublic.params, { organizationId: payload.organizationId });
+                return me.get(shareAndPublic).then(function() {
+                    questionDepots.merge(shareAndPublic.data);
+                    questionDepots.changed();
+                });
             });
         },
         remove: function(payload) {

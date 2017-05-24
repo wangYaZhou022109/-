@@ -7,7 +7,7 @@ var maps = require('./app/util/maps'),
         { id: 2, type: 2, name: '多选' },
         { id: 3, type: 3, name: '判断' },
         { id: 4, type: 8, name: '排序' },
-        { id: 5, type: 7, name: '连线' },
+        // { id: 5, type: 7, name: '连线' },
         { id: 6, type: 4, name: '填空' },
         { id: 7, type: 5, name: '问答' },
         { id: 8, type: 6, name: '阅读理解' }
@@ -24,7 +24,6 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click select-paper': 'selectPaper',
     'click add-temp-paper': 'addPaper',
     'click preview-paper': 'previewPaper',
     'click add-tactic': 'addTactic'
@@ -33,8 +32,8 @@ exports.events = {
 exports.handlers = {
     addPaper: function() {
         var view = this.module.items['train/programme/exam/paper/add-paper'],
-            that = this;
-        var paperClassId;
+            that = this,
+            paperClassId;
         if (this.bindings.paperClass.data && this.bindings.paperClass.data.type === 2) {
             paperClassId = this.bindings.paperClass.data.id;
         }
@@ -44,18 +43,7 @@ exports.handlers = {
             paperName: this.bindings.exam.data.name,
             type: 2,
             callback: function(id) {
-                that.app.viewport.closeGround();
                 return that.module.dispatch('selectPaperId', id);
-            }
-        });
-    },
-    selectPaper: function() {
-        var view = this.module.items['train/programme/exam/paper/select-paper'],
-            that = this;
-        this.app.viewport.modal(view, {
-            callback: function(data) {
-                that.app.viewport.closeModal();
-                that.module.dispatch('selectPaper', data);
             }
         });
     },
@@ -63,6 +51,7 @@ exports.handlers = {
         var paperClass = this.bindings.paperClass.data,
             id = paperClass && paperClass.id,
             type = paperClass && paperClass.type,
+            exam = this.bindings.exam.data,
             view = this.module.items['train/programme/exam/paper/preview-paper'];
         if (type === 3) {
             this.app.message.error('随机组卷不提供预览 ');
@@ -71,31 +60,31 @@ exports.handlers = {
         if (id) {
             return this.app.viewport.modal(view, {
                 paperId: id,
-                exam: D.assign(this.bindings.exam.data, {
-                    paperShowRule: $(this.$('paperSortRule')).val()
+                exam: D.assign(exam, {
+                    paperSortRule: $(this.$$('[name="paperSortRule"]')).val(),
+                    paperShowRule: $(this.$$('[name="paperShowRule"]')).val() || exam.paperShowRule //  兼容课程添加试卷
                 })
             });
         }
-        this.app.message.error('请先选择试卷');
+        this.app.message.error('没有试卷内容');
         return true;
     },
     addTactic: function() {
         var me = this,
             paperClassId,
             exam = this.bindings.exam.data,
+            paperClass = this.bindings.paperClass,
             currentUser = this.app.global.currentUser;
 
-        if (this.bindings.paperClass.data && this.bindings.paperClass.data.type === 3) { // 随机组卷
-            paperClassId = this.bindings.paperClass.data.id;
+        if (paperClass.data && paperClass.data.type === 3) { // 随机组卷
+            paperClassId = paperClass.data.id;
         }
         me.app.viewport.modal(me.module.items['train/programme/exam/question/random-question'], {
             paperClassId: paperClassId,
             url: this.module.renderOptions.url,
-            organizationId: exam.ownedOrganizationId || currentUser.organization.id,
+            organizationId: exam.organizationId || currentUser.organization.id,
             callback: function(data) {
-                return me.module.dispatch('selectPaperId', data).then(function() {
-                    me.app.viewport.closeModal();
-                });
+                return me.module.dispatch('selectPaperId', data);
             }
         });
     }
@@ -126,10 +115,10 @@ exports.dataForTemplate = {
                         type = question.type,
                         amount = question.amount,
                         countItem = count[type] || { score: 0, count: 0, name: qtypes[type] };
-                    countItem.score += score * amount;
+                    countItem.score += (score * amount) / 100;
                     countItem.count += amount;
                     count[type] = countItem;
-                    count.score += score * amount;
+                    count.score += (score * amount) / 100;
                     count.count += amount;
                 });
             } else if (questionClass) {
@@ -173,6 +162,9 @@ exports.dataForTemplate = {
     },
     previousStatusIsStarting: function(data) {
         return data.exam.previousStatus && data.exam.previousStatus === STARTING;
+    },
+    isPaperTactic: function(data) {
+        return data.paperClass.type === 3;
     }
 };
 
