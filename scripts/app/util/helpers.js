@@ -77,7 +77,23 @@ module.exports = {
         v = Number(new Date(value).getTime());
         return toDateString(v) + ' ' + toTimeString(v, 'minute');
     },
-
+    // value: yyyy-MM
+    firstDay: function(value) {
+        var v = value;
+        if (!v) return '';
+        v = Number(new Date(value).getTime());
+        return toDateString(v);
+    },
+    // value: yyyy-MM
+    lastDay: function(value) {
+        var v = value,
+            tempDate;
+        if (!v) return '';
+        tempDate = new Date(value);
+        tempDate.setMonth(tempDate.getMonth() + 1);
+        tempDate = tempDate.getTime() - (1000 * 60 * 60 * 24);
+        return toDateString(tempDate);
+    },
     setting: function(key) {
         var o = window.app.global.setting[key];
         return o || '';
