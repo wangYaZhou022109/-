@@ -9,7 +9,7 @@ exports.store = {
         courseSalary: {
             url: '../train/courseSalary',
         },
-        downloadexternal: { url: '../train/courseSalary/downloadexternal' },
+        downloadexternal: { url: '../train/courseSalary/download-excl-total' },
         edit: {
             url: '../train/courseSalary/get'
         },
