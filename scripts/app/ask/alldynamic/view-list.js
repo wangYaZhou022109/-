@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var _ = require('lodash/collection');
+var sensitive = require('./app/util/sensitive');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
@@ -176,9 +177,17 @@ exports.dataForActions = {
         return data;
     },
     publish: function(payload) {
+        if (sensitive.judge(payload.t_content) > 0 || sensitive.judge(payload.t_content) > 0) {
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
+        }
         return payload;
     },
     reply: function(payload) {
+        if (sensitive.judge(payload.content) > 0 || sensitive.judge(payload.content) > 0) {
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
+        }
         return payload;
     }
 };
