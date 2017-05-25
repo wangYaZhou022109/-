@@ -17,14 +17,14 @@ view('list')
             compare(question.type 'eq' 1)
                 compare(questionDiscuss.readStatus 'eq' 2)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('讨论了我的问题') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id + '_' + createTime) > echo(question.title)
                                 .text-right
@@ -51,14 +51,14 @@ view('list')
                                         
                 compare(readStatus 'eq' 1)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('回复了我对问题的讨论') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
                                 .text-right
@@ -66,7 +66,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + replyNum +')')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
@@ -80,14 +80,14 @@ view('list')
             compare(question.type 'eq' 2)
                 compare(questionDiscuss.readStatus 'eq' 2)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('讨论了我的分享') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text 
                                     echo('来自分享：') 
@@ -116,14 +116,14 @@ view('list')
 
                 compare(readStatus 'eq' 1)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('回复了我对分享的讨论') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text
                                     echo('来自讨论:')
@@ -133,7 +133,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + replyNum +')')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)

@@ -106,11 +106,11 @@ exports.store = {
             details.set({ id: d.id });
             return this.get(details).then(function(data) {
                 var params = _.map(data[0].topicList, 'id').join(',');
-                expert.params.ids = params;
-                question.params.ids = params;
-                // me.get(expert);
-                // me.get(question);
-                return me.chain([me.get(expert), me.get(question)]);
+                if (params !== '') {
+                    expert.params.ids = params;
+                    question.params.ids = params;
+                    me.chain([me.get(expert), me.get(question)]);
+                }
             });
         },
         details: function(payload) {

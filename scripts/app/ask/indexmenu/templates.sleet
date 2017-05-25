@@ -16,7 +16,7 @@ view('main')
                 dd > string('follow') + string('expert')
         ul
             #  li > a(id='middle-menu-myquiz' href='javascript:;') > string('my') + string('ask-a-question')
-            li > a(href='#/ask/indexmenu/myquiz') > string('ask-a-question')
+            li > a(href='#/ask/indexmenu/myquiz') > echo('我的提问')
             #  li > a(id='middle-menu-myshares' href='javascript:;') > string('my') + string('article')
             li > a(href='#/ask/indexmenu/myshares') > string('my') + string('article')
             #  li > a(id='middle-menu-myreply' href='javascript:;') > string('my') + string('reply')

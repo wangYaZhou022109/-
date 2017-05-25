@@ -24,32 +24,77 @@ exports.handlers = {
                 id: id,
                 callback: function() {
                     if (checked) {
-                        me.module.dispatch('reviewed');
+                        me.module.dispatch('display', { auditStatus: 0 });
                     } else {
-                        me.module.dispatch('display');
+                        me.module.dispatch('reviewed');
                     }
                 }
             });
         }
         // 2讨论审核
         if (auditType === '2') {
-            this.app.viewport.modal(this.module.items['ask/discussaudit'], { id: id });
+            this.app.viewport.modal(this.module.items['ask/discussaudit'], {
+                id: id,
+                callback: function() {
+                    if (checked) {
+                        me.module.dispatch('display', { auditStatus: 0 });
+                    } else {
+                        me.module.dispatch('reviewed');
+                    }
+                }
+            });
         }
         // 4提问举报审核
         if (auditType === '4') {
-            this.app.viewport.modal(this.module.items['ask/reportaudit'], { id: id });
+            this.app.viewport.modal(this.module.items['ask/reportaudit'], {
+                id: id,
+                callback: function() {
+                    if (checked) {
+                        me.module.dispatch('display', { auditStatus: 0 });
+                    } else {
+                        me.module.dispatch('reviewed');
+                    }
+                }
+            });
         }
         // 5讨论举报审核
         if (auditType === '5') {
-            this.app.viewport.modal(this.module.items['ask/disscusreportaudit'], { id: id });
+            this.app.viewport.modal(this.module.items['ask/disscusreportaudit'], {
+                id: id,
+                callback: function() {
+                    if (checked) {
+                        me.module.dispatch('display', { auditStatus: 0 });
+                    } else {
+                        me.module.dispatch('reviewed');
+                    }
+                }
+            });
         }
         // 12文章审核',
         if (auditType === '12') {
-            this.app.viewport.modal(this.module.items['ask/shareaudit'], { id: id });
+            this.app.viewport.modal(this.module.items['ask/shareaudit'], {
+                id: id,
+                callback: function() {
+                    if (checked) {
+                        me.module.dispatch('display', { auditStatus: 0 });
+                    } else {
+                        me.module.dispatch('reviewed');
+                    }
+                }
+            });
         }
         //   13文章举报审核',
         if (auditType === '13') {
-            this.app.viewport.modal(this.module.items['ask/sharereportaudit'], { id: id });
+            this.app.viewport.modal(this.module.items['ask/sharereportaudit'], {
+                id: id,
+                callback: function() {
+                    if (checked) {
+                        me.module.dispatch('display', { auditStatus: 0 });
+                    } else {
+                        me.module.dispatch('reviewed');
+                    }
+                }
+            });
         }
     },
     deal: function(data, e, target) {
