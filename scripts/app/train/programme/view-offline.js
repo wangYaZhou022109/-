@@ -168,6 +168,15 @@ exports.dataForTemplate = {
         });
         return weeks.data;
     },
+    offlineCourseList: function() {
+        var offlineCourseList = this.bindings.offlineCourseList.data,
+            state = this.bindings.state.data;
+        _.map(offlineCourseList || [], function(data) {
+            var r = data;
+            r.isGrant = state.role !== 4;
+        });
+        return offlineCourseList;
+    },
     isShowWeeks: function() {
         var weeks = this.bindings.offlineThemeList;
         if (weeks.data.length > 1) {
@@ -183,5 +192,12 @@ exports.dataForTemplate = {
         url += ('classId=' + state.classId);
         url += ('&access_token=' + token);
         return url;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };

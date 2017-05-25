@@ -55,13 +55,22 @@ exports.dataForTemplate = {
         return state;
     },
     onlineCourseList: function() {
-        var onlineCourseList = this.bindings.onlineCourseList;
+        var onlineCourseList = this.bindings.onlineCourseList,
+            state = this.bindings.state.data;
         _.map(onlineCourseList.data || [], function(course) {
             var r = course;
             r.isRequired1 = r.isRequired === 1;
             r.isRequired0 = r.isRequired === 0;
+            r.isGrant = state.role !== 4;
         });
         return onlineCourseList.data;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };
 

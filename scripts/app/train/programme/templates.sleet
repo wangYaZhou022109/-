@@ -19,10 +19,11 @@ view('offline')
                             each(weeks)
                                 option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
                 .pull-right
-                    if(isShowWeeks)
-                        .tag-btn.radius#theme-offline 配置周主题
-                    .tag-btn.radius#addOfflineCourse 添加课程
-                    .tag-btn.radius#importOffline 导入课程
+                    if(isGrant)
+                        if(isShowWeeks)
+                            .tag-btn.radius#theme-offline 配置周主题
+                        .tag-btn.radius#addOfflineCourse 添加课程
+                        .tag-btn.radius#importOffline 导入课程
                     .inline-block
                         span#min-1 最小化
                         i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-1
@@ -36,7 +37,8 @@ view('offline')
                         th 讲师职务
                         th 课酬实付
                         th 课件
-                        th 操作
+                        if(isGrant)
+                            th 操作
                     each(offlineCourseList) > tr
                         td > date(courseDate)
                         td > echo(startTime + '-' + endTime)
@@ -56,9 +58,10 @@ view('offline')
                             label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
                             input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
                         td > i.iconfont.icon-tag.custom-color-5(id='courseware-'+id data-name='id' data-value=id)
-                        td
-                            i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-offline-'+id data-name='id' data-value=id)
-                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-offline-'+id data-name='id' data-value=id)
+                        if(isGrant)
+                            td
+                                i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-offline-'+id data-name='id' data-value=id)
+                                i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-offline-'+id data-name='id' data-value=id)
 
 view('online') 
     .dateplan.container.bg-highlight.overflow.dateplan-padding
@@ -66,8 +69,9 @@ view('online')
             .clearfix
                 label.pull-left 在线资源
                 .pull-right
-                    .tag-btn.radius#theme-online 配置主题
-                    .tag-btn.radius#addCourse 添加课程
+                    if(isGrant)
+                        .tag-btn.radius#theme-online 配置主题
+                        .tag-btn.radius#addCourse 添加课程
                     span#min-2 最大化
                     i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-2
             table.table#minitable-2(style='display:none')
@@ -75,7 +79,8 @@ view('online')
                     th 主题
                     th 课程名称
                     th 是否必修
-                    th 操作
+                    if(isGrant)
+                        th 操作
                 each(onlineCourseList) > tr
                     td > echo(themeName)
                     td > echo(resourceName)
@@ -84,9 +89,10 @@ view('online')
                         select(id='input-online-' + id style='display:none;' data-name='id' data-value=id)
                             option(value='1')('selected')&if(isRequired1) > map('yes-or-no' '1')
                             option(value='0')('selected')&if(isRequired0) > map('yes-or-no' '0')
-                    td
-                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+resourceId data-name='resourceId' data-value=resourceId)
-                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
+                    if(isGrant)
+                        td
+                            i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+resourceId data-name='resourceId' data-value=resourceId)
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
 
 view('questionnaire') 
     .dateplan.container.bg-highlight.overflow.dateplan-padding
@@ -94,9 +100,10 @@ view('questionnaire')
             .clearfix
                 label.pull-left 调研与问卷
                 .pull-right
-                    .tag-btn.radius#addExam 添加考试
-                    .tag-btn.radius#addSurvey 添加调研
-                    .tag-btn.radius#addEva 添加评估
+                    if(isGrant)
+                        .tag-btn.radius#addExam 添加考试
+                        .tag-btn.radius#addSurvey 添加调研
+                        .tag-btn.radius#addEva 添加评估
                     span#min-3 最大化
                     i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-3
             table.table#minitable-3(style='display:none')
@@ -106,17 +113,19 @@ view('questionnaire')
                     th 类型
                     th 开始时间
                     th 结束时间
-                    th 操作
+                    if(isGrant)
+                        th 操作
                 each(questionnaireList) > tr
                     td > echo(i)
                     td > echo(resourceName)
                     td > map('class-questionnaire-type' type)
                     td > dateTime(startTime)
                     td > dateTime(endTime)
-                    td
-                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id startTime=startTime endTime=endTime)
-                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-qnr-'+id data-name='id' data-value=id)
-                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
+                    if(isGrant)
+                        td
+                            i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id startTime=startTime endTime=endTime)
+                            i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-qnr-'+id data-name='id' data-value=id)
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-qnr-'+id data-name='id' data-value=id)
 
 
 view('task')
@@ -125,7 +134,8 @@ view('task')
             .clearfix
                 label.pull-left 作业
                 .pull-right
-                    .tag-btn.radius#addTask 添加作业
+                    if(isGrant)
+                        .tag-btn.radius#addTask 添加作业
                     span#min-4 最大化
                     i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-4
             table.table#minitable-4(style='display:none')
@@ -134,15 +144,17 @@ view('task')
                     th 作业名称
                     th 开始时间
                     th 结束时间
-                    th 操作
+                    if(isGrant)
+                        th 操作
                 each(taskList) > tr
                     td > echo(i)
                     td > echo(name)
                     td > dateTime(startTime)
                     td > dateTime(endTime)
-                    td
-                        i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-task-'+id data-name='id' data-value=id)
-                        i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-task-'+id data-name='id' data-value=id)
+                    if(isGrant)
+                        td
+                            i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-task-'+id data-name='id' data-value=id)
+                            i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-task-'+id data-name='id' data-value=id)
 
 view('config-offline')
     section.section
@@ -389,14 +401,17 @@ view('upload-task')
         #uploader
 
 view('edit-qnrtime')
-    form.vertical
-        div(style='margin: 10px;')
+    form.vertical.form.label-mt-small
+        .form-row
             label 问卷名称
-            input(name='resourceName' value=research.resourceName readonly='readonly' style='border-style: none;')
-        div(style='margin: 10px;')
-            label 开始时间
-            input(id='startTime' name='startTime' value=dateTime(research.startTime))
-        div(style='margin: 10px;')
-            label 结束时间
-            input(id='endTime' name='endTime' value=dateTime(research.endTime))
-            input(name='id' value=research.id type='hidden')
+            .content
+                input(name='resourceName' value=research.resourceName readonly='readonly' style='border-style: none;')
+        .form-row
+            label.label.required 开始时间
+            .content
+                input(id='startTime' name='startTime' value=dateTime(research.startTime))
+        .form-row
+            label.label.required 结束时间
+            .content
+                input(id='endTime' name='endTime' value=dateTime(research.endTime))
+        input(name='id' value=research.id type='hidden')

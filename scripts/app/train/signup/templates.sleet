@@ -17,6 +17,7 @@ view('banner')
         .banner-btn.pull-right.text-center > .btn.white 报名中
 
 view('side')
+    br
     .h3 中国移动学院响应中心
     .register-tel
         i.iconfont.icon-phone
@@ -132,12 +133,20 @@ view('main') > form.vertical
         compare(state.auditStatus 'eq' 2)
             .text-center
                 h3(style='color:red') 审核未通过
-                span 审核意见：
-                echo(trainee.auditOpinion)
+                span 报名已满，请联系响应中心
                 br
                 br
                 .buttons
                     a.btn(href='#/activity/index') 返回活动页
                     .btn#reSignup 重新报名
+        compare(state.auditStatus 'eq' 1)
+            .text-center
+                h3(style='color:green') 您已是当前培训班学员
+                span 可通过我的班级进入班级页面
+        compare(state.auditStatus 'eq' 4)
+            .text-center
+                h3(style='color:green') 报名成功！
+                span 可通过我的班级进入班级页面
+            
 
 

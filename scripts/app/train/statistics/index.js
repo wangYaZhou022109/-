@@ -12,13 +12,16 @@ exports.store = {
         init: function(payload) {
             var state = this.models.state;
             state.data.tab = 'questionnaire';
-            state.data.id = payload.id;
-            state.data.classId = payload.id.classId;
+            state.data.classId = payload.classId;
+            state.data.role = payload.role;
             state.changed();
         }
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state });
+    return this.dispatch('init', {
+        classId: this.renderOptions.state.classId,
+        role: this.renderOptions.state.role
+    });
 };

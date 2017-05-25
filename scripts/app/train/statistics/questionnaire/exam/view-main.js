@@ -3,7 +3,8 @@ var _ = require('lodash/collection');
 exports.bindings = {
     exams: true,
     download: false,
-    exam: true
+    exam: true,
+    state: true
 };
 
 exports.components = [{
@@ -12,7 +13,19 @@ exports.components = [{
 
 exports.dataForTemplate = {
     exams: function(data) {
-        var exams = data.exams;
+        var exams = data.exams,
+            pageNum = this.bindings.exams.getPageInfo().page,
+            state = this.bindings.state.data;
+        _.map(exams || [], function(t, i) {
+            var e = t;
+            e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = {};
+            if (state.role !== 3 && state.role !== 4) {
+                e.isGrant = true;
+            } else {
+                e.isGrant = false;
+            }
+        });
         return exams;
     },
     exportUrl: function() {
@@ -29,6 +42,13 @@ exports.dataForTemplate = {
     },
     exam: function(data) {
         return data;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 3 && state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };
 

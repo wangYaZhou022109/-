@@ -61,10 +61,14 @@ view('main')
                 td > pick(usedTime '0') + echo('m')
                 td > map('exam-record-status' status)
                 td
-                    compare(status 'eq' 5)
-                        a(id='mark-paper-' + id) 评卷
-                    compare(status 'gt' 5)
-                        a(id='edit-exams' + id ) > echo(score)
+                    if(isGrant)
+                        compare(status 'eq' 5)
+                            a(id='mark-paper-' + id) 评卷
+                        compare(status 'gt' 5)
+                            a(id='edit-exams' + id ) > echo(score)
+                    else
+                        compare(status 'gt' 5)
+                            a(id='edit-exams' + id ) > echo(score)
                 else
                     tr > td(colspan='11') > p.text-center > string('no-data')
         #pager.pagination

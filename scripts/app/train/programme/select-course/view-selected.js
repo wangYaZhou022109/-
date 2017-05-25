@@ -34,7 +34,8 @@ exports.events = {
     'change selectTheme': 'changeTheme',
     'click submitOffline': 'save',
     'click showCategory': 'showCategory',
-    'click showOrganization': 'showOrganization'
+    'click showOrganization': 'showOrganization',
+    'click del-target-*': 'delTarget'
 };
 
 exports.handlers = {
@@ -160,6 +161,18 @@ exports.handlers = {
                 me.$('organizationName').value = payload.name;
             }
         });
+    },
+    delTarget: function(id) {
+        var courseList = this.bindings.courseList.data;
+        var targetList = this.bindings.targetList.data;
+        if (_.find(courseList, ['id', id])) {
+            targetList = _.filter(targetList, function(fm) {
+                return fm.id !== id;
+            });
+            this.bindings.targetList.data = targetList;
+        }
+        this.bindings.targetList.changed();
+        this.bindings.courseList.changed();
     }
 };
 

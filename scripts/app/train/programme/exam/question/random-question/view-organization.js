@@ -11,7 +11,8 @@ exports.getEntityModuleName = function() {
 exports.dataForEntityModule = function() {
     var me = this;
     return {
-        url: this.module.renderOptions.url || 'exam/question-depot',
+        // url: this.module.renderOptions.url || 'exam/question-depot',
+        url: 'exam/question-depot',
         callback: function(data) {
             return me.module.nodeChanged(data);
         }

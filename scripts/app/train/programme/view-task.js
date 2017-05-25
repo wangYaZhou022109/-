@@ -61,10 +61,19 @@ exports.actionCallbacks = {
 
 exports.dataForTemplate = {
     taskList: function(data) {
+        var state = this.bindings.state.data;
         _.map(data.taskList || [], function(task, i) {
             var r = task;
             r.i = i + 1;
+            r.isGrant = state.role !== 4;
         });
         return data.taskList;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };

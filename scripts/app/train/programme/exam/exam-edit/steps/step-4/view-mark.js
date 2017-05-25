@@ -1,4 +1,6 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs'),
+    checkReading;
 
 exports.type = 'dynamic';
 
@@ -9,10 +11,12 @@ exports.bindings = {
 };
 
 exports.getEntity = function() {
+    var exam = this.bindings.exam.data,
+        paperClass = this.bindings.paperClass.data;
     return {
-        paperClass: this.bindings.paperClass.data,
+        paperClass: D.assign(paperClass, { name: exam.name }),
         markConfig: this.bindings.markConfig.data,
-        exam: this.bindings.exam.data
+        exam: exam
     };
 };
 
@@ -36,7 +40,8 @@ exports.dataForTemplate = {
         if (paperClass.paperClassQuestions && paperClass.paperClassQuestions.length > 0) {
             return !_.every(this.bindings.paperClass.data.paperClassQuestions, function(q) {
                 var type = q.question && q.question.type;
-                return type !== 4 && type !== 5 && type !== 6;
+                return (type !== 4 && type !== 5 && type !== 6)
+                    || (type === 6 && checkReading(q.question));
             });
         }
         if (paperClass.paperClassTactics && paperClass.paperClassTactics.length > 0) {
@@ -47,3 +52,13 @@ exports.dataForTemplate = {
         return false;
     }
 };
+
+checkReading = function(reading) {
+    if (reading.type === 6) {
+        return _.every(reading.subs, function(sub) {
+            return sub.type !== 5;
+        });
+    }
+    return true;
+};
+

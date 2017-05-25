@@ -43,10 +43,11 @@ view('main')
             .text-center
                 .row
                     .col-sm-8(style='text-align:center')
-                        if(Evaluate.method)
-                            a.btn.circle-radius.gray#submit 保存
-                        else
-                            a.btn.circle-radius.gray#submit 提交  
+                        if(isGrant)
+                            if(Evaluate.method)
+                                a.btn.circle-radius.gray#submit 保存
+                            else
+                                a.btn.circle-radius.gray#submit 提交  
 
 view('upload')
     .row

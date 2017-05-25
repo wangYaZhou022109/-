@@ -55,6 +55,13 @@ exports.dataForTemplate = {
             state.returnDate = returnDate;
         }
         return state;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 1 || state.role === 2) {
+            return true;
+        }
+        return false;
     }
 };
 

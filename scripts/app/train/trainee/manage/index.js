@@ -17,6 +17,7 @@ exports.store = {
         auditTrainee: { url: '../train/trainee/audit' },
         levels: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 8 } },
         trainee: { url: '../train/trainee/update' },
+        classInfo: { url: '../train/class-info/get' },
         detail: { data: {} },
         state: { data: { auditStatus: 0 } }
     },
@@ -46,9 +47,11 @@ exports.store = {
         },
         auditTrainee: function(payload) {
             var auditTrainee = this.models.auditTrainee,
+                classInfo = this.models.classInfo,
                 state = this.models.state.data,
                 params = payload;
             params.quotaType = state.quotaType;
+            params.className = classInfo.data.className;
             auditTrainee.set(params);
             return this.put(auditTrainee);
         },
@@ -57,6 +60,11 @@ exports.store = {
             trainee.clear();
             trainee.set(payload);
             return this.put(trainee);
+        },
+        getClassInfo: function(payload) {
+            var classInfo = this.models.classInfo;
+            classInfo.params = { id: payload.classId };
+            return this.get(classInfo);
         }
     }
 };
@@ -65,5 +73,6 @@ exports.beforeRender = function() {
     var state = this.store.models.state;
     state.data.role = this.renderOptions.state.role;
     state.changed();
-    return this.dispatch('init', this.renderOptions.state);
+    this.dispatch('init', this.renderOptions.state);
+    this.dispatch('getClassInfo', this.renderOptions.state);
 };

@@ -53,7 +53,8 @@ view('main') > form.vertical
                     .content
                         input.input#question2(name='question2' value=signupInfo.question2 placeholder='棘手问题：您当前最关心的、当前工作中最棘手的一个问题')
                     .text-center.layout-mt
-                        a.btn#save 保存
+                        if(isGrant)
+                            a.btn#save 保存
             if(signupInfo.id)    
                 section.section
                     p 此为培训班的报名链接:

@@ -23,9 +23,11 @@ exports.events = {
 exports.handlers = {
     addSurvey: function() {
         var model = this.module.items['train/programme/select-research-activity'],
-            me = this;
+            me = this,
+            organizationId = this.module.renderOptions.state.organizationId;
         me.app.viewport.modal(model, {
             sourceType: 2,
+            organizationId: organizationId,
             callback: function(data) {
                 var param = {
                     type: 2,
@@ -41,9 +43,11 @@ exports.handlers = {
     },
     addEva: function() {
         var model = this.module.items['train/programme/evaluate-questionary/select-evaluate-questionary'],
-            me = this;
+            me = this,
+            organizationId = this.module.renderOptions.state.organizationId;
         me.app.viewport.modal(model, {
             sourceType: 2,
+            organizationId: organizationId,
             callback: function(data) {
                 var param = {
                     type: 3,
@@ -106,11 +110,20 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     questionnaireList: function(data) {
+        var state = this.bindings.state.data;
         _.map(data.questionnaireList || [], function(qnr, i) {
             var r = qnr;
             r.i = i + 1;
+            r.isGrant = state.role !== 4;
         });
         return data.questionnaireList;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };
 

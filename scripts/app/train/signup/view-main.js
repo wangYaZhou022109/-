@@ -38,6 +38,7 @@ exports.dataForActions = {
         var settleOrganizationId = $(this.$$('[name="organizationId"]')).val();
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
+        var className = this.bindings.classSignupInfo.data.classInfo.className;
         if (!validators.phone.fn(phoneNumber)) {
             this.app.message.error('手机号输入不正确');
             return false;
@@ -55,7 +56,8 @@ exports.dataForActions = {
             remark: remark,
             classId: classId,
             settleOrganizationId: settleOrganizationId,
-            memberId: memberId
+            memberId: memberId,
+            className: className
         };
     }
 };
@@ -65,12 +67,13 @@ exports.actionCallbacks = {
         var state = this.bindings.state.data;
         var trainee = data[0] || {};
         if (trainee.auditStatus === 0) {
-            // 报名成功，跳转审核中页面
+            // 跳转审核中页面
             state.auditStatus = 0;
             this.bindings.state.changed();
         } else if (trainee.auditStatus === 1) {
-            this.app.message.success('报名成功！');
-            // 跳转班级详情页
+            // 报名成功
+            state.auditStatus = 4;
+            this.bindings.state.changed();
         } else {
             // 报名失败，跳转审核失败页
             state.auditStatus = 2;

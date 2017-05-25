@@ -1,5 +1,6 @@
 var D = require('drizzlejs'),
-    _ = require('lodash/collection');
+    _ = require('lodash/collection'),
+    getFirstNode;
 
 exports.items = {
     main: 'main',
@@ -15,7 +16,7 @@ exports.store = {
                     var me = this,
                         obj = {};
                     _.forEach(list, function(l) {
-                        me.data.unshift(l);
+                        me.data.push(l);
                     });
                     _.forEach(this.data, function(d) {
                         obj[d.id] = d;
@@ -26,7 +27,7 @@ exports.store = {
                 }
             }
         },
-        shareAndPublic: { url: '../exam/question-depot/share-public', cache: true }, //  上级允许下级的目录，和 所有公开的
+        shareAndPublic: { url: '../exam/question-depot/share-public' }, //  上级允许下级的目录，和 所有公开的
         state: {}
     },
 
@@ -43,6 +44,7 @@ exports.store = {
                 D.assign(list.params, payload.params);
                 if (payload.params.share) {
                     return this.get(list).then(function() {
+                        D.assign(shareAndPublic.params, { organizationId: payload.params.organizationId });
                         return me.get(shareAndPublic).then(function() {
                             list.merge(shareAndPublic.data);
                             me.models.state.changed();
@@ -50,6 +52,12 @@ exports.store = {
                     });
                 }
                 return this.get(list).then(function() {
+                    var nodes = me.models.list.data,
+                        node = getFirstNode(nodes);
+                    D.assign(me.models.state.data, {
+                        id: node.id,
+                        text: node.text
+                    });
                     me.models.state.changed();
                 });
             }
@@ -108,3 +116,20 @@ exports.mixin = {
         return this.dispatch('init', { params: params });
     }
 };
+
+getFirstNode = function(nodes) {
+    var d = { map: {}, list: [] };
+    _.map(nodes, function(item) {
+        d.map[item.id] = item;
+    });
+    _.map(nodes, function(item) {
+        if (!item.parentId || !d.map[item.parentId]) {
+            d.list.push(d.map[item.id]);
+        }
+    });
+    if (d.list.length) {
+        return { id: d.list[0].id, text: d.list[0].name };
+    }
+    return {};
+};
+

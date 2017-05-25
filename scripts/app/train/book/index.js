@@ -12,8 +12,10 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var project = this.models.projectInfo,
-                me = this;
+                me = this,
+                state = this.models.state;
             project.set(payload);
+            state.data.role = payload.role;
             return me.get(project);
         },
         submit: function(payload) {
@@ -30,5 +32,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state.id });
+    return this.dispatch('init', { id: this.renderOptions.state.id, role: this.renderOptions.state.role });
 };

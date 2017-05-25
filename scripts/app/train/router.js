@@ -11,7 +11,7 @@ exports.routes = {
     'statistics/task/audit-task/:id': 'showAuditTask',
     'statistics/questionnaire/count/:classId': 'showCount',
     'programme/preview-task/:id': 'previewTask',
-    'signup/:id': 'showSignupPage',
+    'sign-up/:id': 'showSignupPage',
     register: 'showRegisterPage',
     'class-detail/research-answer/:id': 'showResearchAnswerDetail',
     'class-detail/research-detail/:id': 'showResearchDetail',

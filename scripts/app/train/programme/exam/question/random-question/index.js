@@ -57,6 +57,20 @@ exports.store = {
                             && Number(d.type) === Number(type)
                             && Number(d.difficulty) === Number(diff);
                     });
+                },
+                totalAmount: function() {
+                    return _.reduce(_.map(this.data, function(t) {
+                        return (t.amount && Number(t.amount)) || 0;
+                    }), function(sum, n) {
+                        return sum + n;
+                    }, 0);
+                },
+                totalScore: function() {
+                    return _.reduce(_.map(this.data, function(t) {
+                        return (t.score && (Number(t.score) * t.amount)) || 0;
+                    }), function(sum, n) {
+                        return sum + n;
+                    }, 0) / 100;
                 }
             }
         },
@@ -139,29 +153,7 @@ exports.store = {
         },
         popupCurrent: {},
         tacticsForm: {
-            url: '../exam/paper-tactic',
-            mixin: {
-                totalScore: function() {
-                    var setting = this.module.store.models.setting.data;
-                    return _.reduce(_.map(_.flatMap(setting, function(s) {
-                        return s.diffcults;
-                    }), function(d) {
-                        return (d.totalScore && Number(d.totalScore)) || 0;
-                    }), function(sum, n) {
-                        return sum + n;
-                    }, 0);
-                },
-                questionNum: function() {
-                    var setting = this.module.store.models.setting.data;
-                    return _.reduce(_.map(_.flatMap(setting, function(s) {
-                        return s.diffcults;
-                    }), function(d) {
-                        return (d.usedAmount && Number(d.usedAmount)) || 0;
-                    }), function(sum, n) {
-                        return sum + n;
-                    }, 0);
-                }
-            }
+            url: '../exam/paper-tactic'
         },
         removeTactic: {
             url: '../exam/paper-tactic'
@@ -179,13 +171,14 @@ exports.store = {
             var search = this.models.search,
                 questions = this.models.questions,
                 tactics = this.models.tactics,
-                setting = this.models.setting;
+                setting = this.models.setting,
+                paperClassId = this.module.renderOptions.paperClassId;
             D.assign(search.data, payload);
             if (search.data.organizationId && search.data.questionDepotId) {
                 D.assign(questions.params, search.data);
 
-                if (!tactics.data || tactics.data.length === 0) {
-                    D.assign(tactics.data = {}, { id: this.module.renderOptions.paperClassId });
+                if ((!tactics.data || tactics.data.length === 0) && paperClassId) {
+                    D.assign(tactics.data = {}, { id: paperClassId });
                     if (tactics.data.id) {
                         this.get(tactics);
                     }
@@ -199,7 +192,13 @@ exports.store = {
             return '';
         },
         clearDepotId: function() {
-            this.models.search.data.questionDepotId = null;
+            var search = this.models.search,
+                setting = this.models.setting,
+                questions = this.models.questions;
+            D.assign(search.data, { questionDepotId: null });
+            questions.clear();
+            setting.init(search.data.organizationId, search.data.questionDepotId);
+            setting.changed();
         },
         addTactic: function(payload) {
             var setting = this.models.setting;
@@ -210,8 +209,12 @@ exports.store = {
             this.models.popupCurrent.clear();
         },
         saveTactic: function(payload) {
-            var search = this.models.search;
-            this.models.tactics.saveIt({
+            var search = this.models.search,
+                tactics = this.models.tactics,
+                setting = this.models.setting,
+                popupCurrent = this.models.popupCurrent;
+
+            tactics.saveIt({
                 organizationId: search.data.organizationId,
                 questionDepotId: search.data.questionDepotId,
                 difficulty: payload.difficulty,
@@ -219,11 +222,23 @@ exports.store = {
                 amount: payload.amount,
                 score: payload.score
             });
-            this.models.popupCurrent.clear();
-            this.models.popupCurrent.changed();
-            this.models.setting.saveIt(payload);
-            this.models.setting.changed();
-            this.app.message.success('操作成功');
+
+            if (tactics.totalScore() > 1000) {
+                this.app.message.error('试卷分数不能超出1000分');
+                tactics.removeIt(
+                    search.data.organizationId,
+                    search.data.questionDepotId,
+                    payload.type,
+                    payload.difficulty
+                );
+                return false;
+            }
+
+            popupCurrent.clear();
+            popupCurrent.changed();
+            setting.saveIt(payload);
+            setting.changed();
+            return true;
         },
         removeTactic: function(payload) {
             var me = this,
@@ -255,10 +270,14 @@ exports.store = {
             var tacticsForm = this.models.tacticsForm,
                 tactics = this.models.tactics,
                 me = this;
+            if (tactics.totalScore() > 1000) {
+                this.app.message.error('试卷分数不能超出1000分');
+                return false;
+            }
             D.assign(tacticsForm.data, {
                 name: this.module.renderOptions.name,
-                totalScore: tacticsForm.totalScore() * 100,
-                questionNum: tacticsForm.questionNum(),
+                totalScore: tactics.totalScore(),
+                questionNum: tactics.totalAmount(),
                 paperClassTactics: JSON.stringify(tactics.data)
             });
             return this.save(tacticsForm).then(function() {
@@ -272,13 +291,17 @@ exports.store = {
 
 exports.mixin = {
     nodeChanged: function(data) {
-        var depot = this.items.depot.getEntities()[0],
+        var view = this.items.depot.getEntities(),
+            depot = view && view[0],
             me = this;
-        return this.dispatch('clearDepotId').then(function() {
-            return me.dispatch('saveSearch', data).then(function() {
-                return depot.refreshTree(data);
+        if (depot) {
+            return this.dispatch('clearDepotId').then(function() {
+                return me.dispatch('saveSearch', data).then(function() {
+                    return depot.refreshTree(data);
+                });
             });
-        });
+        }
+        return '';
     }
 };
 

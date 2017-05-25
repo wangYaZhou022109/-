@@ -7,7 +7,8 @@ exports.large = 'true';
 
 exports.items = {
     'search-param': 'search-param',
-    questions: 'questions'
+    questions: 'questions',
+    'train/statistics/navigate-tree': { isModule: true }
 };
 
 exports.buttons = [{
@@ -27,7 +28,8 @@ exports.store = {
             }
         },
         state: { data: {} },
-        orgs: { url: '../system/grant/granted-organization', cache: false }
+        orgs: { url: '../system/grant/granted-organization', cache: false },
+        organization: { data: {} }
     },
     callbacks: {
         init: function(payload) {
@@ -52,6 +54,7 @@ exports.store = {
                 status: 1,
                 url: this.module.renderOptions.url
             });
+            this.models.questions.clear();
             return this.get(this.models.questions);
         },
         refresh: function() {

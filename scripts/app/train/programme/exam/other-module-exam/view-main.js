@@ -10,6 +10,20 @@ exports.bindings = {
     exam: true
 };
 
+exports.events = {
+    'change name': 'changeName',
+    'change paperShowRule': 'changePaperShowRule'
+};
+
+exports.handlers = {
+    changeName: function() {
+        return this.module.dispatch('changeName', { name: this.$('name').value });
+    },
+    changePaperShowRule: function() {
+        return this.module.dispatch('changeName', { paperShowRule: $(this.$$('[name="paperShowRule"]')).val() });
+    }
+};
+
 exports.components = [{
     id: 'startTime',
     name: 'flatpickr',
@@ -25,19 +39,37 @@ exports.components = [{
 }];
 
 exports.dataForTemplate = {
+    exam: function(data) {
+        var exam = data.exam;
+        if (!exam.isOverByPassExam && exam.isOverByPassExam !== 0) {
+            exam.isOverByPassExam = 0;
+        }
+        return exam;
+    },
     paperShowRule: function(data) {
         return {
             single: data.exam.paperShowRule === 1,
             mutiple: data.exam.paperShowRule === 2,
         };
     },
-    isOverByPassExam: function(data) {
-        return {
-            yes: data.exam.isOverByPassExam === 1,
-            no: data.exam.isOverByPassExam === 0 || !data.exam.isOverByPassExam
-        };
+    showTimeRange: function() {
+        return this.module.renderOptions.showTimeRange === 1;
     }
 };
+
+exports.mixin = {
+    check: function() {
+        var startTime = this.$('startTime') && this.$('startTime').value,
+            endTime = this.$('endTime') && this.$('endTime').value;
+
+        if ((startTime && !endTime) || (!startTime && endTime)) {
+            this.app.message.error('必须完整填写考试时间范围或者全部不填');
+            return false;
+        }
+        return true;
+    }
+};
+
 
 exports.mixin = {
     validate: function() {
