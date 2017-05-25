@@ -106,13 +106,21 @@ exports.store = {
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
             if (task) {
-                data.enclosureUrl = task.attachmentId;
-                data.enclosureName = task.name;
                 data.enclosureType = 1;
-                data.enclosureSuffix = task.contentType;
-                data.transferViewUrl = task.attachmentId;
                 data.transferFlag = 1;
                 data.enclosureSuffixImg = 'null';
+                if (typeof data.attachmentId !== 'undefined') {
+                    data.enclosureUrl = task.attachmentId;
+                }
+                if (typeof data.name !== 'undefined') {
+                    data.enclosureName = task.name;
+                }
+                if (typeof data.contentType !== 'undefined') {
+                    data.enclosureSuffix = task.contentType;
+                }
+                if (typeof data.attachmentId !== 'undefined') {
+                    data.transferViewUrl = task.attachmentId;
+                }
             }
             data.speechset = speechset.status;
             data.id = '1';
