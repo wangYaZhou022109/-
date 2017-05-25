@@ -1,5 +1,6 @@
 var _ = require('lodash/collection');
 var $ = require('jquery');
+var sensitive = require('./app/util/sensitive');
 exports.items = {
     top: 'top',
     topic: 'topic',
@@ -195,6 +196,10 @@ exports.buttons = [{
                 this.app.message.success('详细描述不能超过3000字-发布失败！');
                 return false;
             }
+        }
+        if (sensitive.judge(title) > 0 || sensitive.judge(content) > 0) {
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
         }
         if (typeof topicIds === 'undefined' || topicIds === '') {
             data.topicIds = 'null';
