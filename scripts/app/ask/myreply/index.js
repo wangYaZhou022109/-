@@ -13,6 +13,7 @@ exports.store = {
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
         params: { data: { isOverdue: '1' } },
+        down: { url: '../human/file/download' },
         page: {
             data: [],
             params: { page: 1, size: 10 },
@@ -104,9 +105,13 @@ exports.store = {
         },
         publish: function(payload) {
             var reply = this.models.reply,
-                data = payload;
+                data = payload,
+                me = this;
             reply.set(data);
-            return this.save(reply);
+            return this.save(reply).then(function() {
+                var page = me.models.page;
+                page.changed();
+            });
         },
     }
 };

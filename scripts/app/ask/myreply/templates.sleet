@@ -17,14 +17,14 @@ view('list')
             compare(question.type 'eq' 1)
                 compare(questionDiscuss.readStatus 'eq' 2)        
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('讨论了' + member.fullName + '的问题')
-                                span.sub-text > date(questionDiscuss.createTime)
+                                span.sub-text > dateTime(questionDiscuss.createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自问题 :') + a(id='myreply-details-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
@@ -51,14 +51,14 @@ view('list')
                                         
                 compare(readStatus 'eq' 1)                               
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('回复了'+member.fullName + '对问题的讨论') 
-                                span.sub-text > date(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自回复:') +  a(id='myreply-details-'  + id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
@@ -81,14 +81,14 @@ view('list')
                 compare(questionDiscuss.readStatus 'eq' 2)
                     #  compare(questionDiscuss.auditStatus 'eq' 0)
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('讨论了'+member.fullName + '的文章') 
-                                span.sub-text > date(questionDiscuss.createTime)
+                                span.sub-text > dateTime(questionDiscuss.createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自文章') + a(id='myreply-sharedetails-' + questionDiscuss.id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
@@ -109,14 +109,14 @@ view('list')
 
                 compare(readStatus 'eq' 1)                              
                     li
-                        .user-pic > img(src='images/d2.jpg')
+                        .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
                             .comment-text > echo(content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('回复了'+member.fullName + '对文章的讨论') 
-                                span.sub-text > data(createTime)
+                                span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自讨论') +  a(id='myreply-sharedetails-'+ id +'_' + question.id + '_' + createTime ) > echo(question.title)
                                 .text-right
