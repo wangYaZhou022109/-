@@ -11,6 +11,7 @@ exports.bindings = {
 
 exports.events = {
     'click myreply-details-*': 'showDetails',
+    'click myreply-sharedetails-': 'showShareDetails',
     'click report-*': 'report',
     'click shareTo-*': 'shareTo',
     'click discuss-*': 'discuss',
@@ -27,6 +28,14 @@ exports.handlers = {
         region.show('ask/replyme/mydetail', { id: id });
     },
     showDetails: function(payload) {
+        var data = { },
+            id = payload;
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
+        }
+    },
+    showShareDetails: function(payload) {
         var data = { },
             id = payload;
         if (id.indexOf('_') !== -1) {

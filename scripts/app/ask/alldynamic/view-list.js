@@ -194,9 +194,11 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     reply: function() {
         this.app.message.success('操作成功！');
+        this.module.dispatch('init');
     },
     publish: function() {
         this.app.message.success('操作成功！');
+        this.module.dispatch('init');
     },
     follow: function(data) {
         var concern = data[0];
