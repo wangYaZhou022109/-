@@ -36,6 +36,7 @@ plupload = require('./vendors/upload/moxie.min');
 window.moxie = plupload.moxie;
 window.mOxie = plupload.mOxie;
 
+require('jquery-ui-monthpicker/jquery.ui.monthpicker');
 require('highcharts/highcharts.src');
 require('./vendors/alertify');
 require('./vendors/upload/plupload.min');
@@ -62,6 +63,7 @@ require('./app/ext/tree');
 require('./app/ext/background-pager');
 require('./app/ext/qr-code');
 require('./app/ext/rich-text');
+require('./app/ext/monthpicker');
 require('./app/util/arrays');
 D.adapt({
     getFormData: function(form) {

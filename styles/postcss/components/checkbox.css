@@ -8,10 +8,10 @@
 
         & + label {
             cursor: pointer;
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             text-align: center;
-            line-height: 14px;
+            line-height: 16px;
             border: 1px solid var(--border-color);
             background: white;
             display: inline-block;
