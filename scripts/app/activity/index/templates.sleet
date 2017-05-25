@@ -83,7 +83,7 @@ view('list')
                             .activity-item.clearfix
                                 i.iconfont.icon-exam.pull-left.activity-item-icon
                                 .overflow
-                                    a(id='exam-' + id) > echo(name)
+                                    .text-overflow > a(title=name id='exam-' + id) > echo(name)
                                     .text-tips.m-top.text-overflow
                                         dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
         .h3.m-bottom 调研
@@ -95,7 +95,7 @@ view('list')
                             .activity-item.clearfix
                                 i.iconfont.icon-note.pull-left.activity-item-icon
                                 .overflow
-                                    a(id='research-' + id) > echo(name)
+                                    .text-overflow > a(title=name id='research-' + id) > echo(name)
                                     .text-tips.m-top.text-overflow
                                         dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
 view('exam-tips')
