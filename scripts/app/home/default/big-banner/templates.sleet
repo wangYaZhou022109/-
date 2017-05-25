@@ -6,6 +6,6 @@ module
 view('advertising')
     #banner.banner.home-banner > ul
         each(adverts)
-            li(style='background-image:url('+../downUrl + pcImage+')')
-        else
-            li
+            li > a(href=linkAddress)(target='_blank')&if(outerLink) > img(src=downloadUrl(pcImage))
+            #  li(style='background-image:url('+../downUrl + pcImage+')') > a(href=linkAddress)(target='_blank')&if(outerLink)
+
