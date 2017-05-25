@@ -105,12 +105,12 @@ exports.store = {
             data.transferViewUrl = 'null';
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
-            if (task.attachments) {
-                data.enclosureUrl = task.attachments[0].attachmentId;
-                data.enclosureName = task.attachments[0].name;
+            if (task) {
+                data.enclosureUrl = task.attachmentId;
+                data.enclosureName = task.name;
                 data.enclosureType = 1;
-                data.enclosureSuffix = task.attachments[0].contentType;
-                data.transferViewUrl = task.attachments[0].attachmentId;
+                data.enclosureSuffix = task.contentType;
+                data.transferViewUrl = task.attachmentId;
                 data.transferFlag = 1;
                 data.enclosureSuffixImg = 'null';
             }
