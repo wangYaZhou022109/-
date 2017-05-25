@@ -110,10 +110,10 @@ view('main') > form.vertical
                                 option(value = id)('selected')&if(selected) > echo(value)
                 .form-row
                     label.required 移动电话
-                    .content > input.input(name='phoneNumber' value=member.phoneNumber placeholder=member.phoneNumber+'（引用个人信息数据，点击可修改）')
+                    .content > input.input(name='phoneNumber' value=member.phoneNumber)
                 .form-row
                     label.required 邮箱
-                    .content > input.input(name='email' value=member.email placeholder=member.email+'（引用个人信息数据，点击可修改）')
+                    .content > input.input(name='email' value=member.email)
                 .form-row
                     label.auto 备注
                     .content > textarea.input(name='remark'  rows='3' placeholder='补充信息')
@@ -140,10 +140,6 @@ view('main') > form.vertical
                     a.btn(href='#/activity/index') 返回活动页
                     .btn#reSignup 重新报名
         compare(state.auditStatus 'eq' 1)
-            .text-center
-                h3(style='color:green') 您已是当前培训班学员
-                span 可通过我的班级进入班级页面
-        compare(state.auditStatus 'eq' 4)
             .text-center
                 h3(style='color:green') 报名成功！
                 span 可通过我的班级进入班级页面

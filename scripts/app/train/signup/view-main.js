@@ -39,12 +39,12 @@ exports.dataForActions = {
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
         var className = this.bindings.classSignupInfo.data.classInfo.className;
-        if (!validators.phone.fn(phoneNumber)) {
-            this.app.message.error('手机号输入不正确');
+        if (!validators.phone.fn(phoneNumber) || phoneNumber === '') {
+            this.app.message.error('请输入正确的手机号');
             return false;
         }
-        if (!validators.email.fn(email)) {
-            this.app.message.error('邮箱输入不正确');
+        if (!validators.email.fn(email) || email === '') {
+            this.app.message.error('请输入正确的邮箱');
             return false;
         }
         return {
@@ -67,20 +67,18 @@ exports.actionCallbacks = {
         var state = this.bindings.state.data;
         var trainee = data[0] || {};
         if (trainee.auditStatus === 0) {
-            // 跳转审核中页面
+            // 报名审核中
             state.auditStatus = 0;
             this.bindings.state.changed();
         } else if (trainee.auditStatus === 1) {
-            // 报名成功
-            state.auditStatus = 4;
+            // 报名通过
+            state.auditStatus = 1;
             this.bindings.state.changed();
         } else {
-            // 报名失败，跳转审核失败页
+            // 报名未通过
             state.auditStatus = 2;
-            trainee.auditOpinion = '自动审核，配额已满！';
             this.bindings.trainee.data = trainee;
             this.bindings.state.changed();
-            this.bindings.trainee.changed();
         }
     }
 };
