@@ -13,10 +13,14 @@ view('content')
 view('options') > .answer
     .preview-list > dl
         dd
-            input.inline-block(type='radio' name='value-' + state.id value=1 id='check-0')('disabled')&if(isDisabled)('checked')&if(isCorrect)
-            .inline-block 正确
-            input.inline-block.m-left(type='radio' name='value-' + state.id value=0 id='check-1')('disabled')&if(isDisabled)('checked')&if(isError)
-            .inline-block 错误
+            .radio.no-margin
+                input(type='radio' name='value-' + state.id value=1 id='check-0')('disabled')&if(isDisabled)('checked')&if(isCorrect)
+                label(for='check-0')
+            span.m-right 正确
+            .radio.no-margin
+                input(type='radio' name='value-' + state.id value=0 id='check-1')('disabled')&if(isDisabled)('checked')&if(isError)
+                label(for='check-1')
+            span 错误
 
     if(isShowDetail)
         .show-answer
