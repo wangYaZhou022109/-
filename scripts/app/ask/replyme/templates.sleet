@@ -26,7 +26,7 @@ view('list')
                                 span > echo('讨论了我的问题') 
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + questionDiscuss.id + '_' + question.id + '_' + createTime) > echo(question.title)
+                                .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + id + '_' + question.id) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
                                         .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已赞（' + question.praiseNum +'）')
@@ -91,7 +91,7 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text 
                                     echo('来自分享：') 
-                                    a(id='myreply-details-' + questionDiscuss.id + '_' + question.id ) > echo(question.title)
+                                    a(id='myreply-sharedetails-' + id + '_' + question.id ) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
                                         .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已赞（' + question.praiseNum +'）')
@@ -127,7 +127,7 @@ view('list')
                             .comment-operation
                                 .pull-left > .sub-text
                                     echo('来自讨论:')
-                                    a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
+                                    a(id='myreply-sharedetails-' + id + '_' + question.id ) > echo(question.title)
                                 .text-right
                                     compare(praise 'eq' true)
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')

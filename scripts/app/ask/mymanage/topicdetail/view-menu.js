@@ -1,4 +1,6 @@
+var $ = require('jquery');
 exports.type = 'dynamic';
+
 exports.bindings = {
     state: true,
     topicdetail: true
@@ -12,6 +14,7 @@ exports.handlers = {
     showMenu: function(menu) {
         var topicdetail = this.bindings.topicdetail;
         var state = this.bindings.state;
+        $(window).unbind('scroll');
         state.data = {};
         state.data.topicid = topicdetail.data.id;
         state.data.menu = menu || 'news';

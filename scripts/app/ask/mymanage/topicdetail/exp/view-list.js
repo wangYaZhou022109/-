@@ -1,117 +1,4 @@
-// var D = require('drizzlejs');
-// var $ = require('jquery');
-// var _ = require('lodash/collection');
-// exports.type = 'dynamic';
-// exports.bindings = {
-//     trends: true
-// };
 
-// exports.events = {
-//     'click mymanage-details-*': 'showDetails'
-// };
-// exports.actions = {
-//     'click setEssenceStatus-*': 'setEssenceStatus',
-//     'click shut-*': 'shut',
-//     'click discuss-top-*': 'discusstop',
-//     'click follow-*': 'follow',
-//     'click unfollow-*': 'unfollow',
-//     'click publish-*': 'publish'
-// };
-// exports.handlers = {
-//     dynamic: function() {
-//     },
-//     toggleMore: function(id, e, target) {
-//         var region,
-//             data;
-//         var el = $(target).parents('.comment-list')[0];
-//         region = new D.Region(this.app, this.module, el, id);
-//         if (id.indexOf(',') !== -1) {
-//             data = id.split(',');
-//             region.show('ask/myquiz/details', { id: data[1] });
-//         }
-//     },
-//     showDetails: function(payload) {
-//        // var region,
-//        //     data = { };
-//        // var el = $(target).parents('.comment-list')[0];
-//         var data = { },
-//             id = payload;
-//         if (id.indexOf('_') !== -1) {
-//             data = id.split('_');
-//             // region = new D.Region(this.app, this.module, el, data[1]);
-//             // region.show('ask/myquiz/details', { id: data[1] });
-//             this.app.show('content', 'ask/mymanage/topicdetail/exp/details', { id: data[1] });
-//         }
-//     }
-// };
-// exports.dataForActions = {
-//     setEssenceStatus: function(payload) {
-//         var data = payload;
-//         data.essenceStatus = 1;
-//         return data;
-//     },
-//     shut: function(payload) {
-//         var data = payload;
-//         data.closeStatus = 1;
-//         return data;
-//     },
-//     discusstop: function(payload) {
-//         return payload;
-//     },
-//     follow: function(payload) {
-//         var id = payload.id,
-//             data = {};
-//         var obj = id.split('_');
-//         data.id = obj[1];
-//         data.concernType = obj[0];
-//         return data;
-//     },
-//     unfollow: function(payload) {
-//         var id = payload.id,
-//             data = {};
-//         var obj = id.split('_');
-//         data.id = obj[1];
-//         data.concernType = obj[0];
-//         return data;
-//     },
-//     publish: function(payload) {
-//         return payload;
-//     }
-// };
-// exports.actionCallbacks = {
-//     setEssenceStatus: function() {
-//         this.app.message.success('加精成功!');
-//         this.module.dispatch('init');
-//     },
-//     shut: function() {
-//         this.app.message.success('关闭成功!');
-//         this.module.dispatch('init');
-//     },
-//     discusstop: function(payload) {
-//         this.app.message.success('置顶成功！');
-//         this.module.dispatch('refresh', payload);
-//     },
-//     follow: function() {
-//         this.app.message.success('关注成功！');
-//         this.module.dispatch('init');
-//     },
-//     unfollow: function() {
-//         this.app.message.success('取消成功！');
-//         this.module.dispatch('init');
-//     }
-// };
-// exports.dataForTemplate = {
-//     trends: function(data) {
-//         var trends = data.trends;
-//         _.forEach(trends, function(value) {
-//             var obj = value,
-//                 date = new Date(obj.createTime);
-//             obj.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-//             + '   ' + date.getHours() + ':' + date.getMinutes();
-//         });
-//         return trends;
-//     }
-// };
 var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
@@ -122,44 +9,44 @@ exports.bindings = {
 };
 
 exports.events = {
+    'click myshares-details-*': 'showDetails',
     'click discuss-*': 'discuss',
-    'click trend-report-*': 'report',
-    'click myquiz-details-*': 'showDetails',
-    'click myshares-details-*': 'sharesDetails',
-    'click shareTo-*': 'shareTo'
+    'click shareTo-*': 'shareTo',
+    'click myshares-sharedetails-*': 'showShare',
+    'click report-*': 'report',
 };
 
 exports.handlers = {
-    sharesDetails: function(payload) {
+    showDetails: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
-        $(window).unbind('scroll');
+        // console.log(payload);
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
             this.app.show('content', 'ask/myshares/details', { id: data[1] });
         }
     },
-    showDetails: function(payload) {
+    showShare: function(payload) {
+       // var region,
+       //     data = { };
+       // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
+        // console.log(payload);
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
+            // region = new D.Region(this.app, this.module, el, data[1]);
+            // region.show('ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/myshares/sharedetails', { id: data[1] });
         }
     },
     discuss: function(payload) {
         $(this.$('comment-reply-' + payload)).toggleClass('show');
-    },
-    report: function(payload) {
-        var id = payload,
-            data = { };
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            this.app.viewport.modal(this.module.items['ask/report'], {
-                id: data[1],
-                objectType: data[0],
-                beUserId: data[2] });
-        }
     },
     shareTo: function(data) {
         var value = data.split('_');
@@ -228,51 +115,31 @@ exports.handlers = {
                 // });
             }
         }
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], {
+                id: data[1],
+                objectType: data[0],
+                beUserId: data[2] });
+        }
     }
 };
 
 exports.actions = {
+    'click report-*': 'report',
     'click trend-follow-*': 'follow',
-    'click publish-*': 'publish',
     'click trend-unfollow-*': 'unfollow',
-    'click reply-*': 'reply',
-    'click del-question-*': 'delquestion',
-    'click del-share-*': 'delshare',
+    'click del-question-*': 'shut',
+    'click publish-*': 'publish',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
-    'click del-discuss-*': 'deldiscuss'
 };
 
 exports.dataForActions = {
-    praise: function(payload) {
-        var data = {};
-        var obj = payload.id.split('_');
-        data.objectType = obj[0];
-        data.id = obj[1];
-        return data;
-    },
-    unpraise: function(payload) {
-        var data = {};
-        var obj = payload.id.split('_');
-        data.objectType = obj[0];
-        data.id = obj[1];
-        return data;
-    },
-    delquestion: function(payload) {
-        var data = payload;
-        data.auditType = '1';
-        return data;
-    },
-    delshare: function(payload) {
-        var data = payload;
-        data.auditType = '2';
-        return data;
-    },
-    deldiscuss: function(payload) {
-        var data = payload;
-        data.auditType = '3';
-        return data;
-    },
     follow: function(payload) {
         var id = payload.id,
             data = {};
@@ -289,20 +156,32 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
+    shut: function(payload) {
+        var data = payload;
+        return data;
+    },
     publish: function(payload) {
         return payload;
     },
-    reply: function(payload) {
-        return payload;
-    }
-};
-exports.actionCallbacks = {
-    reply: function() {
-        this.app.message.success('操作成功！');
-        this.module.dispatch('init');
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
     },
-    publish: function() {
-        this.app.message.success('操作成功！');
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+};
+
+exports.actionCallbacks = {
+    remove: function() {
+        this.app.message.success('删除成功！');
         this.module.dispatch('init');
     },
     follow: function(data) {
@@ -312,8 +191,8 @@ exports.actionCallbacks = {
         var me = this;
         follow.hidden = true;
         unfollow.hidden = false;
-        this.app.message.success('关注成功！');
         setTimeout(function() {
+            me.app.message.success('关注成功！');
             me.module.dispatch('refresh');
         }, 1000);
     },
@@ -324,22 +203,24 @@ exports.actionCallbacks = {
         var me = this;
         follow.hidden = false;
         unfollow.hidden = true;
-        this.app.message.success('取消成功！');
         setTimeout(function() {
+            me.app.message.success('取消成功！');
             me.module.dispatch('refresh');
         }, 1000);
     },
-    delquestion: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+    shut: function() {
+        this.app.message.success('删除成功!');
+        // this.module.dispatch('init');
     },
-    delshare: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+    publish: function() {
+        this.app.message.success('操作成功！');
+        // this.module.dispatch('init');
     },
-    deldiscuss: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+    praise: function() {
+        this.app.message.success('点赞成功！');
+    },
+    unpraise: function() {
+        this.app.message.success('取消点赞成功！');
     }
 };
 
@@ -350,34 +231,12 @@ exports.dataForTemplate = {
         var me = this;
         var flag = true;
         _.forEach(trends, function(value) {
-            var obj = value,
-                date = new Date(obj.createTime),
-                url = obj.createUser.headPortrait;
-            var y = date.getFullYear();
-            var m = date.getMonth() + 1;
-            var d = date.getDate();
-            var h = date.getHours();
-            var mi = date.getMinutes();
-            if (y <= 9) {
-                y = '0' + y;
-            }
-            if (m <= 9) {
-                m = '0' + m;
-            }
-            if (d <= 9) {
-                d = '0' + d;
-            }
-            if (h <= 9) {
-                h = '0' + h;
-            }
-            if (mi <= 9) {
-                mi = '0' + mi;
-            }
-            obj.createTime = y + '-' + m + '-' + d + '   ' + h + ':' + mi;
+            var obj = value;
+            var url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
-                obj.createUser.headPortrait = 'images/default-userpic.png';
+                obj.member.headPortrait = 'images/default-userpic.png';
             } else {
-                obj.createUser.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
             _.forEach(me.bindings.page.data, function(v) {
                 if (v.id === obj.id) {
