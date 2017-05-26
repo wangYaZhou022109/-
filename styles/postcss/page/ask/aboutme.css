@@ -44,7 +44,9 @@
                 top: var(--space);
                 cursor: pointer;
                 & .iconfont {
-                    color: var(--custom-color-1);
+                      color: var(--white);
+                      background: var(--danger-color);
+                      border-radius: 50%;
                 }
             }
             & .recommend-total {
