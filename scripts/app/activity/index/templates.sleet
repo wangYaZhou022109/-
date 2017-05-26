@@ -3,7 +3,11 @@
 module > .activity-page
     .activity-banner(data-region='banner')
     .activity-filter(data-region='filter')
-    .activity-list(data-region='list')
+    .activity-list
+        .container
+            div(data-region='gensee')
+            div(data-region='exam')
+            div(data-region='research')
 
 view('banner')
     .bg-img > .container > #activitys-ul.banner > ul.activity-banner-list
@@ -44,60 +48,63 @@ view('filter')
                 li#item-2(class = if(currentStep.notStart 'active')) 即将开始
                 li#item-3(class = if(currentStep.finish 'active')) 往期回顾
 
-view('list')
-    .container
-        if(hasGensee)
-            .h3.m-bottom 直播
-        #swiper-2.swiper-pic-list > ul.full > each(genseesArray)
-            li > .main-list > ul
+view('gensee')
+    if(hasGensee)
+        .h3.m-bottom 直播
+    #swiper-2.swiper-pic-list > ul.full > each(genseesArray)
+        li > .main-list > ul
+            each(a)
+                li
+                    .content
+                        .img
+                            .img-cont
+                                a.normal > img(src=cover)
+                            .detail-wrapper
+                                p > echo(genseeDesc)
+                                .btn.radius.block
+                                    compare(status 'eq' 1)
+                                        div(id='attendLive-'+id) 我要参与
+                                    compare(status 'eq' 2)
+                                        div(id='attendLive-'+id) 观看直播
+                                    compare(status 'eq' 3)
+                                        div(id='attendLive-'+id) 直播回顾
+                        .clearfix
+                            .pull-right.tip-text
+                            .title.text-overflow
+                                echo(subject)
+                        .bottom.text-tips
+                            i.iconfont.icon-view
+                            span > echo(viewNumber)
+                            i.iconfont.icon-date.m-left
+                            span > dateMinute(startTime)
+
+view('exam')
+    .h3.m-bottom 考试
+    #swiper-3 > ul.full > each(examArray)
+        li.list-item > .main-list
+            ul.arrow-box.activity-item-box.activity-item-exam.cell-3
                 each(a)
                     li
-                        .content
-                            .img
-                                .img-cont
-                                    a.normal > img(src=cover)
-                                .detail-wrapper
-                                    p > echo(genseeDesc)
-                                    .btn.radius.block
-                                        compare(status 'eq' 1)
-                                            div(id='attendLive-'+id) 我要参与
-                                        compare(status 'eq' 2)
-                                            div(id='attendLive-'+id) 观看直播
-                                        compare(status 'eq' 3)
-                                            div(id='attendLive-'+id) 直播回顾
-                            .clearfix
-                                .pull-right.tip-text
-                                .title.text-overflow
-                                    echo(subject)
-                            .bottom.text-tips
-                                i.iconfont.icon-view
-                                span > echo(viewNumber)
-                                i.iconfont.icon-date.m-left
-                                span > dateMinute(startTime)
-        .h3.m-bottom 考试
-        #swiper-3 > ul.full > each(examArray)
-            li.list-item > .main-list
-                ul.arrow-box.activity-item-box.activity-item-exam.cell-3
-                    each(a)
-                        li
-                            .activity-item.clearfix
-                                i.iconfont.icon-exam.pull-left.activity-item-icon
-                                .overflow
-                                    .text-overflow > a(title=name id='exam-' + id) > echo(name)
-                                    .text-tips.m-top.text-overflow
-                                        dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
-        .h3.m-bottom 调研
-        #swiper-5 > ul.full > each(researchArray)
-            li.list-item > .main-list
-                ul.arrow-box.activity-item-box.activity-item-exam.cell-3
-                    each(a)
-                        li
-                            .activity-item.clearfix
-                                i.iconfont.icon-note.pull-left.activity-item-icon
-                                .overflow
-                                    .text-overflow > a(title=name id='research-' + id) > echo(name)
-                                    .text-tips.m-top.text-overflow
-                                        dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
+                        .activity-item.clearfix
+                            i.iconfont.icon-exam.pull-left.activity-item-icon
+                            .overflow
+                                .text-overflow > a(title=name id='exam-' + id) > echo(name)
+                                .text-tips.m-top.text-overflow
+                                    dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
+
+view('research')
+    .h3.m-bottom 调研
+    #swiper-5 > ul.full > each(researchArray)
+        li.list-item > .main-list
+            ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+                each(a)
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-note.pull-left.activity-item-icon
+                            .overflow
+                                .text-overflow > a(title=name id='research-' + id) > echo(name)
+                                .text-tips.m-top.text-overflow
+                                    dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
 view('exam-tips')
     p > echo(currentExam.content)
     .layout-mt-small

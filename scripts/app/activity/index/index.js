@@ -6,7 +6,9 @@ var D = require('drizzlejs'),
 exports.items = {
     banner: 'banner',
     filter: 'filter',
-    list: 'list',
+    gensee: 'gensee',
+    exam: 'exam',
+    research: 'research',
     'activity/index/exam-prompt': { isModule: true }
 };
 
@@ -53,10 +55,10 @@ exports.store = {
             // D.assign(activitys.params, { size: RECOMMEND_SIZE }); // 暂时不限制最大条数，将所有推荐的数据查询出来
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
-            this.get(gensees);
             return this.chain([
-                this.get(exams),
                 this.get(activitys),
+                this.get(gensees),
+                this.get(exams),
                 this.get(researchActivitys)
             ]);
         },
