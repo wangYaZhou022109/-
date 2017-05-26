@@ -11,7 +11,7 @@ module > .ask-page > .container
             div(data-region='menu')
             div(data-region='list')
 view('topicdetail')
-    .topic-detail-title
+    .topic-detail-title.clearfix
         .img > .img-cont > img(src="images/demo/1.jpg" alt='温暖气氛')
         .w-full
             h4.text-overflow > echo(topicdetail.name)
@@ -36,7 +36,17 @@ view('top')
     div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
-    div(data-dynamic-key=relevantexperts.menu)
+    span.h3 > echo('相关专家')
+    .layout-mt-small.user-picture
+        .grid-row
+            each(expert)
+                .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
+                    img.block(src=headPhoto)
 
 view('relatedquestions')
-    div(data-dynamic-key=relatedquestions.menu)
+    section.section.relevant-course
+        span.h3 > echo('热门问题')
+        .layout-mt-small.m-top
+            each(question)
+                .block.layout-mt-small.m-top 
+                    a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)

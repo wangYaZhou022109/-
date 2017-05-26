@@ -43,10 +43,10 @@ view('list')
                             .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
                             compare(concernNum 'gt' 0)
                                 .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('unfollow')
-                                .item( 'hidden' id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
+                                .item( 'hidden' id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('follow')
                             else
                                 .item( 'hidden' id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('unfollow')
-                                .item(id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > echo('+') + string('follow')
+                                .item(id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('follow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     span 分享

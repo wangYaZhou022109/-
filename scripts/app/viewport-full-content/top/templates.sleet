@@ -44,18 +44,18 @@ view('shortcut')
                                 each(hotTopics)
                                     .tag-btn.radius(id='topic-'+id  data-name='id' data-value=id) > echo(name)
 
-        .item.small-font.drop-down-wrapper.right
-            .drop-down-btn
-                span#selected-name > echo(organization.name)
-                i.iconfont.icon-triangle-down
-            .drop-down-content > .content
-                ul
-                    if(Global.organization)
-                        li(id='org-'+Global.organization.id) > echo(Global.organization.name)
-                    each(organizations)
-                        li(id='org-'+id) > echo(name)
 
         if(Global.currentUser.id)
+            .item.small-font.drop-down-wrapper.right
+                .drop-down-btn
+                    span#selected-name > echo(organization.name)
+                    i.iconfont.icon-triangle-down
+                .drop-down-content > .content
+                    ul
+                        if(Global.organization)
+                            li(id='org-'+Global.organization.id) > echo(Global.organization.name)
+                        each(organizations)
+                            li(id='org-'+id) > echo(name)
             .item.drop-down-wrapper.right
                 a#message-div.normal(href='#') > i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content

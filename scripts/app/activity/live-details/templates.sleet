@@ -40,6 +40,8 @@ view('side')
                 .grid-row
                     each(accessList)
                         .col-md-4 > img.block(src=headPhoto)
+                    else
+                        .content-empty-side > .img-box + p 暂无相关的数据
 
 
 view('main')
@@ -98,7 +100,11 @@ view('main')
         each(gensee.topics)
             .tag-btn > echo(name)
     .side-box.m-top
-        echo('简介：' gensee.genseeDesc)
+        echo('简介：')
+        if(gensee.genseeDesc)
+            echo(gensee.genseeDesc)
+        else
+            echo('暂无')
 
 view('relative-courses')
     compare(gensee.status 'eq' 3)
