@@ -48,15 +48,14 @@ exports.handlers = {
     },
     shareTo: function(data) {
         var value = data.split('_');
-        var page = this.bindings.page;
-        var subject = page.findById(value[1]);
+        var subject = this.bindings.page.findById(value[1]);
         var templateContent = '',
             templateCode = value[0],
             webUrl = window.location.protocol + '//' + window.location.host, // 域名加端口
             id = subject.id, // 分享对象id
             type = subject.shareType, // 分享类型
             pics = subject.thumbnail || 'images/default-cover/default_spceial.jpg', // 图片，多图传数组 ['','']
-            title = subject.question.title, // 分享内容的标题
+            title = subject.title, // 分享内容的标题
             typeName = '',
             fullUrl = '',
             pic = '';// 图片地址

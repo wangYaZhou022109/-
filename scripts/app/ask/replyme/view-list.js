@@ -5,7 +5,8 @@ exports.type = 'dynamic';
 exports.bindings = {
     params: false,
     page: true,
-    replyme: true
+    replyme: true,
+    down: false,
 };
 
 exports.events = {

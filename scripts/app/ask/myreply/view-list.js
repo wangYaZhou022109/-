@@ -6,6 +6,7 @@ exports.bindings = {
     params: false,
     myreply: true,
     page: true,
+    down: false,
 };
 
 exports.events = {

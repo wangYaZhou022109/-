@@ -5,10 +5,10 @@ view('list')
     .tabs.line.mb-1
         #  .pull-right > echo('你共提出了'+countNum+'个问题')
         .pull-right.m-top
-            span 你共发表了
+            span 你共提出了
             span.h3.custom-color-3 
                 echo(countNum)
-            span 篇文章
+            span 个问题
         ul
             li.active > echo('我的提问')
     .comment-list.ask-list > ul
@@ -54,13 +54,13 @@ view('list')
                                 .pull-left > .sub-text > string('related-topics') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0) 
-                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')
+                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow')
                                     else 
-                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')                   
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-                                    compare(careNum 'ne' 0)
+                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow')                   
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
+                                    compare(careNum 'eq' 0)
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar
                                         .drop-down-wrapper
@@ -93,12 +93,12 @@ view('list')
                                 .pull-left > .sub-text > string('related-topics') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
-                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow')
+                                        .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                        .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow')
                                     else 
-                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('unfollow')
-                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+') + string('follow') 
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                        .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                        .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow') 
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
                                     compare(careNum 'eq' 0)    
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar

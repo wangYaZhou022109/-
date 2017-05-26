@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click answer-*': 'answer'
+    'click answer-*': 'answer',
 };
 
 exports.handlers = {
@@ -37,7 +37,8 @@ exports.actions = {
     'click reply-del-*': 'replydel',
     'click reply-answer-*': 'replyandreplyanswer',
     'click praise-*': 'praise',
-    'click unpraise-*': 'unpraise'
+    'click unpraise-*': 'unpraise',
+    'input enter-*': 'enter'
 };
 
 
@@ -67,6 +68,20 @@ exports.dataForActions = {
             if (key === 'questionId-' + obj.id) data.questionId = value;
             if (key === 'content-' + obj.id) data.content = value;
         });
+        return data;
+    },
+    enter: function(payload) {
+        var data = {},
+            obj = this.bindings.state.data;
+        if (event.keyCode === 13) {
+            _.forEach(payload, function(value, key) {
+                if (key === 'id-' + obj.id) data.id = value;
+                if (key === 'organizationId-' + obj.id) data.organizationId = value;
+                if (key === 'toUserId-' + obj.id) data.toUserId = value;
+                if (key === 'questionId-' + obj.id) data.questionId = value;
+                if (key === 'content-' + obj.id) data.content = value;
+            });
+        }
         return data;
     },
     praise: function(payload) {

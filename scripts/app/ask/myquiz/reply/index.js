@@ -10,6 +10,7 @@ exports.store = {
         down: { url: '../human/file/download' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        enter: { url: '../ask-bar/question-reply' }
     },
     callbacks: {
         init: function(payload) {
@@ -32,6 +33,11 @@ exports.store = {
             var reply = this.models.reply;
             reply.set(payload);
             return this.save(reply);
+        },
+        enter: function(payload) {
+            var enter = this.models.enter;
+            enter.set(payload);
+            return this.save(enter);
         },
         praise: function(payload) {
             var praise = this.models.praise;
