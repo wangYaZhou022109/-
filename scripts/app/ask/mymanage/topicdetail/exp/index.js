@@ -154,7 +154,8 @@ exports.store = {
                     return speechset;
                 }
             }
-        }
+        },
+        state: { data: {} }
     },
     callbacks: {
         refresh: function() {
@@ -162,36 +163,6 @@ exports.store = {
         },
         set: function(payload) {
             this.models.callback = payload;
-        },
-        praise: function(payload) {
-            var praise = this.models.praise,
-                me = this;
-            praise.set(payload);
-            return this.post(praise).then(function(data) {
-                var obj = data[0];
-                var page = me.models.page;
-                var pageData = me.models.page.praise(obj.objectId, obj.objectType);
-                setTimeout(function() {
-                    me.app.message.success('点赞成功');
-                    page.data = pageData;
-                    page.changed();
-                }, 1000);
-            });
-        },
-        unpraise: function(payload) {
-            var unpraise = this.models.unpraise,
-                me = this;
-            unpraise.set(payload);
-            return this.put(unpraise).then(function(data) {
-                var obj = data[0];
-                var page = me.models.page;
-                var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
-                setTimeout(function() {
-                    me.app.message.success('取消成功');
-                    page.data = pageData;
-                    page.changed();
-                }, 1000);
-            });
         },
         init: function(payload) {
             var trends = this.models.trends;
@@ -204,19 +175,45 @@ exports.store = {
             this.post(trends).then(function() {
             });
         },
-        speech: function() {
-            var speech = this.models.speech;
-            this.get(speech);
-        },
-        page: function(payload) {
+        page: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            params.id = 'all';
-            if (typeof payload.state.id !== 'undefined') {
-                params.id = payload.state.id;
-            }
-            trends.set(params);
+            // var page = this.models.page;
+            var id = this.models.state.data.topicid;
+            // if (typeof payload.state.id !== 'undefined') {
+            //     params.id = payload.state.id;
+            // }
+            trends.params = { id: id, page: params.page, size: params.size };
+            trends.set(trends.params);
             this.post(trends).then(function() {
+            });
+        },
+        praise: function(payload) {
+            var praise = this.models.praise,
+                me = this;
+            praise.set(payload);
+            return this.post(praise).then(function() {
+                var page = me.models.page;
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = true;
+                curObj.praiseNum ++;
+
+                page.changed();
+            });
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise,
+                me = this;
+            unpraise.set(payload);
+            return this.chain(me.put(this.models.unpraise), function() {
+                var page = me.models.page;
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = false;
+                curObj.praiseNum = curObj.praiseNum === 0 ? 0 : curObj.praiseNum - 1;
+
+                page.changed();
             });
         },
         follow: function(payload) {
@@ -224,53 +221,56 @@ exports.store = {
             follow.set(payload);
             return this.post(follow);
         },
+        unfollow: function(payload) {
+            var unfollow = this.models.unfollow;
+            unfollow.set(payload);
+            return this.put(unfollow);
+        },
+        shut: function(payload) {
+            var shut = this.models.shut,
+                page = this.models.page,
+                me = this;
+
+            shut.set(payload);
+            return this.chain(me.put(this.models.shut), function() {
+                page.data = _.filter(page.data, function(item) {
+                    return item.id !== payload.id;
+                });
+                page.changed();
+            });
+        },
         publish: function(payload) {
             var discuss = this.models.discuss,
+                data = payload,
                 speechset = this.models.speech.getData('2'),
-                data = payload;
+                me = this;
             data.speechset = speechset.status;
             discuss.set(data);
-            return this.save(discuss);
+            return this.save(discuss).then(function() {
+                var page = me.models.page;
+                page.changed();
+            });
         },
-        unfollow: function(payload) {
-            var follow = this.models.unfollow;
-            follow.set(payload);
-            return this.put(follow);
+        speech: function() {
+            var speech = this.models.speech;
+            return this.get(speech);
         },
-        reply: function(payload) {
-            var discuss = this.models.reply;
-            discuss.set(payload);
-            return this.save(discuss);
-        },
-        delquestion: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        },
-        delshare: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        },
-        deldiscuss: function(payload) {
-            var del = this.models.del;
-            del.set(payload);
-            return this.put(del);
-        }
     }
 };
 
 exports.afterRender = function() {
     var me = this;
+    var state = this.store.models.state;
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
-            me.dispatch('page', me.renderOptions);
+            me.dispatch('page');
         }
     });
+    state.data.topicid = this.renderOptions.state.data.topicid;
     this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
-    return this.dispatch('page', this.renderOptions);
+    return this.dispatch('page');
 };

@@ -52,7 +52,7 @@ view('list')
                                 span > echo('·发表文章·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) >  string('unfollow')
@@ -94,7 +94,7 @@ view('list')
                                 span > echo('·发表文章·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
