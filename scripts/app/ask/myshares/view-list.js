@@ -3,6 +3,7 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
+    myshares: true,
     page: true,
     down: false
 };
