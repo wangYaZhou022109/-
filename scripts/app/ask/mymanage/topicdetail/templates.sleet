@@ -36,12 +36,13 @@ view('top')
     div(data-dynamic-key=followcount.menu) 
 
 view('relevantexperts')
-    span.h3 > echo('相关专家')
-    .layout-mt-small.user-picture
-        .grid-row
-            each(expert)
-                .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
-                    img.block(src=headPhoto)
+    .section
+        span.h3 > string('active') + string('expert')
+        .layout-mt-small.user-picture
+            .grid-row
+                each(expert)
+                    .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
+                        img.block(src=member.headPortrait)
 
 view('relatedquestions')
     section.section.relevant-course
