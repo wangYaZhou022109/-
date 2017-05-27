@@ -11,7 +11,7 @@ exports.store = {
             rank.clear();
             rank.params.size = payload.size || 10;
             if (this.app.global.currentUser.id) {
-                if (payload.dataSource !== '' && payload.dataSource === 1) {
+                if (payload.dataSource !== '' && (payload.dataSource === '1' || payload.dataSource === 1)) {
                     rank.params.organizationId = this.app.global.currentUser.organization.id;
                 } else {
                     rank.params.organizationId = this.app.global.currentUser.rootOrganization.id;
