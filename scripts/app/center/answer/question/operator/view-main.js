@@ -48,6 +48,7 @@ exports.handlers = {
     },
     discuss: function() {
         $(this.$('comment-reply')).toggleClass('show');
+        // $(this.$('comment-list')).toggleClass('hide');
     },
     remove: function() {
         var me = this,
