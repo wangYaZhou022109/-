@@ -40,7 +40,7 @@ exports.buttons = [{
         params.auditType = 12;
         this.dispatch('out', params).then(function() {
             this.app.message.success('拒绝成功！');
-            me.dispatch('init');
+            me.renderOptions.callback();
         });
     }
 }, {
@@ -52,7 +52,7 @@ exports.buttons = [{
         params.auditType = 12;
         this.dispatch('pass', params).then(function() {
             this.app.message.success('审核成功！');
-            me.dispatch('init');
+            me.renderOptions.callback();
         });
     }
 }];

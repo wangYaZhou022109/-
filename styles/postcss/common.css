@@ -409,3 +409,41 @@ section.section {
 .ml25{
     margin-left:25px;
 }
+
+.content-empty {
+    text-align: center;
+    & .img-box {
+        display: inline-block;
+        width: 200px;
+        height: 143px;
+        background-position: center;
+    }
+    & .img-type-1 {
+        background-image: url(../images/empty1.png);
+    }
+    & p {
+        margin-top: 0;
+        font-size: 16px;
+        color: var(--font-sub-color);
+        text-align: center;
+    }
+}
+
+.content-empty-side {
+    text-align: center;
+    & .img-box {
+        display: inline-block;
+        vertical-align: middle;
+        width: 80px;
+        height: 71px;
+        background-position: center;
+        background-image: url(../images/empty2.png);
+    }
+    & p {
+        display: inline-block;
+        margin: 0;
+        font-size: 16px;
+        color: var(--font-sub-color);
+        vertical-align: middle;
+    }
+}

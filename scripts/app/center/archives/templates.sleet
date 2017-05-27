@@ -1,7 +1,9 @@
 #!handlebars
 
 module
-    div(data-region='chart')
+    .bg-highlight.graph-total-bar
+        div(data-region='condition')
+        div(data-region='chart')
     div(data-region='detail')
 
 
@@ -10,29 +12,30 @@ view('detail')
         li(id='detail-'+ id class = if(active 'active')) > echo(name)
     div(id=state.menu data-dynamic-key=state.menu)
 
+
+view('condition')
+    .top
+        .left.border.around
+            .item#all 汇总
+            .item#previousWeek 近一周
+            .item#previousThreeMonth 近三个月
+            .item#previousYear 近一年
+        .right.inline-block
+            input.input.monthpicker#start(name='start')
+            span.sub-text 至
+            input.input.monthpicker#end(name='end')
 view('chart')
-    .bg-highlight.graph-total-bar
-        .top
-            .left.border.around
-                .item#all 汇总
-                .item#previousWeek 近一周
-                .item#previousThreeMonth 近三个月
-                .item#previousYear 近一年
-            .right.inline-block
-                select.input.inline-block
-                span.sub-text 至
-                select.input.inline-block
-        .main.clearfix
-            .bar > .cont
-                .title-row.clearfix
-                    .pull-left 学习时长统计
-                    .pull-right > echo('总学习时长：' + totalStudyTime)
-                .content
-                    .div#bar
-            .bar > .cont
-                .title-row.clearfix
-                    .pull-left 积分汇总
-                    a.pull-right 如何获得积分？
-                .content
-                    .div#pie
+    .main.clearfix
+        .bar > .cont
+            .title-row.clearfix
+                .pull-left 学习时长统计
+                .pull-right > echo('总学习时长：' + totalStudyTime)
+            .content
+                .div#bar
+        .bar > .cont
+            .title-row.clearfix
+                .pull-left 积分统计
+                a.pull-right 如何获得积分？
+            .content
+                .div#pie
 

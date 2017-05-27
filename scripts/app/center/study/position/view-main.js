@@ -34,9 +34,10 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     position: function(data) {
-        var positionList = data.positionList;
-        var currentPId = this.bindings.currentPId.value;
-        var position = {};
+        var me = this,
+            positionList = data.positionList,
+            currentPId = this.bindings.currentPId.value,
+            position = {};
         if (positionList && positionList.length > 0) {
             if (!currentPId) {
                 this.bindings.currentPId.value = positionList[0].id;
@@ -47,7 +48,7 @@ exports.dataForTemplate = {
         }
         _.forEach(positionList, function(m) {
             var obj = m;
-            if (obj.id === currentPId) {
+            if (obj.id === me.bindings.currentPId.value) {
                 position.devPositions = obj.devPositions;
                 position.desc = obj.desc;
                 position.instructionId = obj.instructionId;
@@ -55,19 +56,19 @@ exports.dataForTemplate = {
         });
         return position;
     },
-    studyList: function(data) {
-        var studyList = data.studyList;
-        _.map(studyList, function(m) {
+    pushObjects: function(data) {
+        var index = 1;
+        return _.map(data.studyList, function(m) {
             var obj = m;
-            var opeText = { 1: '我要学习', 2: '继续学习', 3: '查看详情' };
-            obj.opeTxt = opeText[obj.taskStatus];
-            obj.btnUrl = '#/study/course/detail/' + obj.pushObject.businessId;
+            var opeText = { 0: '我要学习', 1: '继续学习', 2: '查看详情', 3: '我要学习', 4: '查看详情' };
+            obj.i = index++;
+            obj.opeTxt = obj.courseStudyProgress && opeText[obj.courseStudyProgress.finishStatus];
+            obj.btnUrl = '#/study/course/detail/' + obj.businessId;
             if (obj.businessType === '2') {
-                obj.btnUrl = '#/study/subject/detail/' + obj.pushObject.businessId;
+                obj.btnUrl = '#/study/subject/detail/' + obj.businessId;
             }
             return obj;
         });
-        return studyList;
     },
     currentPosition: function(data) {
         _.map(data.currentPosition.studyConfigs || [], function(innerObj, i) {

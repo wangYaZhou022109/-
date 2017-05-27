@@ -1,6 +1,5 @@
 var _ = require('lodash/collection'),
     $ = require('jquery'),
-    D = require('drizzlejs'),
     setError,
     clearError,
     checkChinese;
@@ -24,21 +23,17 @@ exports.dataForTemplate = {
             options = this.bindings.state.data.options,
             str = '';
         if (answer.data.value.length > 0) {
-            str = answer.data.value[0].value;
-            _.forEach(options, function(o) {
-                str = str.replace(o.name + '|', o.code);
-            });
+            str = _.map(_.filter(answer.data.value[0].value.split('|'), function(a) {
+                return a;
+            }), function(a) {
+                return _.find(options, ['name', a]).code;
+            }).join('');
         }
         return str;
     },
     isShowDetail: function() {
         var mode = this.bindings.state.data.detailMode;
         return mode && mode > 0 && mode < 4;
-    },
-    state: function(data) {
-        return D.assign(data.state, {
-            errorRate: data.state.errorRate / 10000
-        });
     },
     isDisabled: function(data) {
         var mode = data.state.detailMode;
@@ -79,7 +74,7 @@ exports.handlers = {
         return this.module.dispatch('save');
     },
     keypressAnswer: function(e) {
-        var k = e.keyCode,
+        var k = e.keyCode || e.which || e.charCode,
             char = String.fromCharCode(k).toLocaleUpperCase(),
             answer = this.$('answer').value,
             isRepeat = function(o, n) {
@@ -90,6 +85,10 @@ exports.handlers = {
                 }
                 return true;
             };
+
+        if (k === 8) {
+            return true;
+        }
 
         if (k >= 65 && k <= 122 && _.find(this.bindings.state.data.options, ['code', char])) {
             if (answer.length > 0 && isRepeat(answer.toLocaleUpperCase(), char)) {

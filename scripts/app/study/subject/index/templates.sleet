@@ -14,7 +14,7 @@ view('list')
                 .item#order-1 > span 最热
                 .item#order-2 > span 好评
         ul > each(subjects)
-            li > a.normal(id='openDetail-'+id) > .content
+            li > .content.pointer(id='openDetail-'+id)
                 .img
                     .img-cont > img(src=imageUrl)
                     .detail-wrapper

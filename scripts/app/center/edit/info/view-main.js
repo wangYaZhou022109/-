@@ -19,6 +19,30 @@ exports.components = [function() {
             data: data
         }
     };
+}, function() {
+    var topics = [];
+    var topicList = this.bindings.topicList.data;
+    if (topicList) {
+        _.map(topicList, function(opt) {
+            var topic = opt;
+            topics.push({
+                value: topic.id,
+                text: topic.name
+            });
+        });
+    }
+    return {
+        id: 'select-topic',
+        name: 'picker',
+        options: {
+            picker: 'topics',
+            inputName: 'topicIds',
+            limit: 10,
+            type: 1,
+            group: 1,
+            tags: topics
+        }
+    };
 }];
 
 exports.dataForTemplate = {

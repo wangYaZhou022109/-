@@ -11,7 +11,7 @@
   "dependencies": {
     "animate.css": "^3.5.1",
     "crypto-js": "^3.1.9-1",
-    "drizzlejs": "^0.4.15",
+    "drizzlejs": "^0.4.16",
     "es5-shim": "^4.5.9",
     "es6-promise": "^3.2.1",
     "flatpickr": "^2.3.4",
@@ -27,7 +27,8 @@
     "qrcodejs2": "^0.0.2",
     "selectize": "^0.12.2",
     "video.js": "^5.11.9",
-    "wavesurfer.js": "^1.2.7"
+    "wavesurfer.js": "^1.2.7",
+    "jquery-ui-monthpicker": "^1.0.2"
   },
   "devDependencies": {
     "browserify": "^13.1.0",

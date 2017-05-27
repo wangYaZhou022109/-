@@ -4,7 +4,8 @@ var D = require('drizzlejs'),
     activity = require('../activity/strings'),
     exam = require('../exam/strings'),
     picker = require('../picker/strings'),
-    center = require('../center/strings');
+    center = require('../center/strings'),
+    fullTextSearch = require('../full-text-search/strings');
 
 var strings = {
     ok: '确定',
@@ -26,7 +27,7 @@ var strings = {
     'operation-success': '操作成功'
 };
 
-var ss = D.assign({}, strings, study, activity, ask, exam, picker, center);
+var ss = D.assign({}, strings, study, activity, ask, exam, picker, center, fullTextSearch);
 
 exports.get = function(key) {
     if (!ss[key]) throw new Error('Key [' + key + '] is not defined');

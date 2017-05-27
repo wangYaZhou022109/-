@@ -69,6 +69,6 @@ exports.dataForTemplate = {
     knowledge: function(data) {
         var d = data || {};
         if (!d.knowledge.description) d.knowledge.description = '暂无';
-        return d;
+        return d.knowledge;
     }
 };

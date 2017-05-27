@@ -3,7 +3,8 @@ exports.items = {
     list: 'list',
     'ask/expertactivation': { isModule: true },
     'ask/expertapply': { isModule: true },
-    'ask/applyexpertaptitude': { isModule: true }
+    'ask/applyexpertaptitude': { isModule: true },
+    'ask/apply-verify': { isModule: true }
 };
 
 exports.store = {

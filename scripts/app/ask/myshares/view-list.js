@@ -3,6 +3,7 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
+    myshares: true,
     page: true,
     down: false
 };
@@ -48,8 +49,7 @@ exports.handlers = {
     },
     shareTo: function(data) {
         var value = data.split('_');
-        var page = this.bindings.page;
-        var subject = page.findById(value[1]);
+        var subject = this.bindings.page.findById(value[1]);
         var templateContent = '',
             templateCode = value[0],
             webUrl = window.location.protocol + '//' + window.location.host, // 域名加端口
@@ -146,7 +146,6 @@ exports.dataForActions = {
     },
     shut: function(payload) {
         var data = payload;
-
         return data;
     },
     publish: function(payload) {

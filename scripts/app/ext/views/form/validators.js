@@ -139,5 +139,16 @@ module.exports = {
         },
         length: 1,
         message: '格式不正确'
+    },
+    keepDecimal: {
+        fn: function(value, n) {
+            var v;
+            if (trim(value) === '') return true;
+            v = value.toString().split('.');
+            if (v.length > 1) return v[1].length <= n;
+            return true;
+        },
+        length: 1,
+        message: '超出保留小数位'
     }
 };

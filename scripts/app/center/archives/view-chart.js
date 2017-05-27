@@ -1,5 +1,4 @@
-var helper = require('./app/util/helpers'),
-    statisticsInfo = [{ type: 0, name: 'PC' }, { type: 1, name: 'APP' }],
+var statisticsInfo = [{ type: 0, name: 'PC' }, { type: 1, name: 'APP' }],
     integralInfo = [
         { type: 1, name: '讨论区' },
         { type: 2, name: '问道' },
@@ -20,36 +19,6 @@ var helper = require('./app/util/helpers'),
 
 exports.bindings = {
     statistics: true
-};
-
-exports.events = {
-    'click all': 'all',
-    'click previousWeek': 'previousWeek',
-    'click previousThreeMonth': 'previousThreeMonth',
-    'click previousYear': 'previousYear'
-};
-
-exports.handlers = {
-    all: function() {
-        this.module.dispatch('search', { startTime: '', endTime: '' });
-    },
-    previousWeek: function() {
-        var now = new Date(),
-            previousWeek = now.getTime() - (7 * 24 * hour);
-        this.module.dispatch('search', { startTime: helper.date(previousWeek), endTime: helper.date(now) });
-    },
-    previousThreeMonth: function() {
-        var now = new Date(),
-            previousThreeMonth = new Date();
-        previousThreeMonth.setMonth(previousThreeMonth.getMonth() - 3);
-        this.module.dispatch('search', { startTime: helper.date(previousThreeMonth), endTime: helper.date(now) });
-    },
-    previousYear: function() {
-        var now = new Date(),
-            previousYear = new Date();
-        previousYear.setFullYear(previousYear.getFullYear() - 1);
-        this.module.dispatch('search', { startTime: helper.date(previousYear), endTime: helper.date(now) });
-    }
 };
 
 exports.dataForTemplate = {

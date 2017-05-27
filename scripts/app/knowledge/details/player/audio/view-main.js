@@ -1,24 +1,24 @@
 exports.bindings = {
     knowledge: true,
-    download: false
+    attachment: false
 };
-exports.components = [
-    function() {
-        var knowledge = this.bindings.knowledge.data,
-            download = this.bindings.download,
-            url;
-        url = download.getFullUrl() + '?id=' + knowledge.resourceId;
-        return {
-            id: 'waveform',
-            name: 'audio-waveform',
-            options: {
-                url: url,
-                opt: {
-                    height: 400,
-                    barWidth: 2,
-                    cursorWidth: 0,
-                }
+
+exports.components = [function() {
+    return {
+        id: 'player',
+        name: 'videojs',
+        options: {
+            video: {
+                autoplay: true
             }
-        };
+        }
+    };
+}];
+
+exports.dataForTemplate = {
+    url: function(data) {
+        var path = data.attachment.path;
+        return '/' + path + '?type=mp4';
     }
-];
+};
+

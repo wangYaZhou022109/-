@@ -61,6 +61,7 @@ exports.store = {
             contents.clear();
             contents.params.moduleHomeConfigId = payload.id;
             contents.params.size = this.models.styleMap.data[style] || 7;
+            contents.params.clientType = 1;
             contents.clear();
             return this.chain(
                 function() {

@@ -4,7 +4,9 @@ var $ = require('jquery');
 exports.type = 'dynamic';
 exports.bindings = {
     params: false,
-    myreply: true
+    myreply: true,
+    page: true,
+    down: false,
 };
 
 exports.events = {
@@ -18,21 +20,15 @@ exports.handlers = {
     toggleMore: function(id, e, target) {
         var region;
         var el = $(target).parents('.comment-list')[0];
-        // console.log(id);
         region = new D.Region(this.app, this.module, el, id);
         region.show('ask/myquiz/details', { id: id });
     },
     showshareDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
         var data = { },
             id = payload;
         if (id.indexOf('_') !== -1) {
             data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
-            this.app.show('content', 'ask/myquiz/details', { id: data[1] });
+            this.app.show('content', 'ask/myshares/details', { id: data[1] });
         }
     },
     showDetails: function(payload) {
@@ -48,7 +44,8 @@ exports.handlers = {
     },
     shareTo: function(data) {
         var value = data.split('_');
-        var subject = this.bindings.page.findById(value[1]);
+        var page = this.bindings.page;
+        var subject = page.findById(value[1]);
         var templateContent = '',
             templateCode = value[0],
             webUrl = window.location.protocol + '//' + window.location.host, // 域名加端口
@@ -117,25 +114,85 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click del-question-*': 'shut',
-    'click publish-*': 'publish'
+    'click del1-*': 'shut1',
+    'click publish-*': 'publish',
+    'click praise-*': 'praise',
+    'click unpraise-*': 'unpraise',
+    'click del2-*': 'shut2',
 };
 
 exports.dataForActions = {
-    shut: function(payload) {
+    shut1: function(payload) {
+        // var me = this;
+        // return this.Promise.create(function(resolve) {
+        //     var message = '确定要删除该数据?';
+        //     me.app.message.confirm(message, function() {
+        //         resolve(data);
+        //     }, function() {
+        //         resolve(false);
+        //     });
+        // });
         var data = payload;
-        data.closeStatus = 1;
+        return data;
+    },
+    shut2: function(payload) {
+        // var me = this;
+        // return this.Promise.create(function(resolve) {
+        //     var message = '确定要删除该数据?';
+        //     me.app.message.confirm(message, function() {
+        //         resolve(data);
+        //     }, function() {
+        //         resolve(false);
+        //     });
+        // });
+        var data = payload;
         return data;
     },
     publish: function(payload) {
         return payload;
-    }
+    },
+    praise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
+    unpraise: function(payload) {
+        var data = {};
+        var obj = payload.id.split('_');
+        data.objectType = obj[0];
+        data.id = obj[1];
+        return data;
+    },
 };
 
 exports.actionCallbacks = {
-    remove: function() {
+    shut1: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    }
+    },
+    shut2: function() {
+        this.app.message.success('删除成功！');
+    },
+    publish: function() {
+        this.app.message.success('操作成功！');
+    },
 };
 
+exports.dataForTemplate = {
+    page: function(data) {
+        var page = data.page;
+        var me = this;
+        // var flag = true;
+        _.forEach(page, function(value) {
+            var obj = value,
+                url = obj.member.headPortrait;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return page;
+    },
+};

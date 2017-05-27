@@ -51,6 +51,7 @@ exports.handlers = {
         if (!pro || e.keyCode !== 13) return false;
         if (size >= limit) {
             element.value = '';
+            this.app.message.error('只能添加' + limit + '项');
             return false;
         }
         if (element.value.length > 10) {

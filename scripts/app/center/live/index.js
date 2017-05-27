@@ -7,7 +7,7 @@ exports.items = {
 exports.store = {
     models: {
         lives: {
-            url: '../course-study/gensee/details',
+            url: '../course-study/gensee/person-list',
             type: 'pageable',
             root: 'items'
         },

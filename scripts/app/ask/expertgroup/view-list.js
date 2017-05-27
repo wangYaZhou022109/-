@@ -9,6 +9,7 @@ exports.bindings = {
 
 exports.events = {
     'click activate*': 'activate',
+    'click review*': 'review',
     // 'click myself*': 'myself',
     'click apply*': 'apply',
     'click expert-*': 'details'
@@ -22,6 +23,10 @@ exports.handlers = {
             me.module.dispatch('user');
         }
         });
+    },
+    review: function() {
+        var model = this.module.items['ask/apply-verify'];
+        this.app.viewport.modal(model);
     },
     // myself: function() {
     //     this.app.show('content', 'ask/iamexpert');

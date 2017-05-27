@@ -14,7 +14,7 @@ exports.store = {
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 findById: function(id) {
                     var myshares = this.module.store.models.page.data;
@@ -156,10 +156,14 @@ exports.store = {
             // return this.save(discuss);
             var discuss = this.models.discuss,
                 speechset = this.models.speech.getData('2'),
-                data = payload;
+                data = payload,
+                me = this;
             data.speechset = speechset.status;
             discuss.set(data);
-            return this.save(discuss);
+            return this.save(discuss).then(function() {
+                var page = me.models.page;
+                page.changed();
+            });
         },
         speech: function() {
             var speech = this.models.speech;

@@ -7,7 +7,7 @@ module > .choise
 
 view('content')
     p.question
-        span > a.normal(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index '、')
         @echo(state.content)
 
 view('subs') > .m-bottom.reading-comprehension-view

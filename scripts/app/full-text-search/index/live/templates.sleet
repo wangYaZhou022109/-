@@ -1,0 +1,44 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(lives.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(lives.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .main-list
+        ul > each(lives)
+            li > .content
+                .img
+                    .img-cont > a.normal(href='javascript:;')
+                        img(src=cover)
+                    .detail-wrapper
+                        p > echo(description)
+                        .btn.radius.block
+                            compare(status 'eq' 1)
+                                div(id='attendLive-'+id) 我要参与
+                            compare(status 'eq' 2)
+                                div(id='attendLive-'+id) 观看直播
+                            compare(status 'eq' 3)
+                                div(id='attendLive-'+id) 直播回顾
+
+                .text-overflow.title > echo(subject)
+                .bottom.text-tips
+                    i.iconfont.icon-view
+                    span > echo(subNumber)
+                    i.iconfont.icon-date.m-left
+                    span > date(startTime)
+
+        #pager.pagination

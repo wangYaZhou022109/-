@@ -48,7 +48,7 @@ exports.store = {
                         answeredCount: answeredCount,
                         noAnswerCount: questions.length - answeredCount
                     });
-                    this.save();
+                    // this.save();
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;
@@ -101,7 +101,7 @@ exports.store = {
                                     status: i === 0 && n === 0 ? itemStatus.CURRENT : itemStatus.INIT
                                 });
                             }),
-                            questionSize: d.questions.length
+                            questionSize: d.questions ? d.questions.length : 0
                         });
                     });
                     return this.data;

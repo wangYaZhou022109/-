@@ -5,6 +5,12 @@
         overflow: hidden;
         margin-top: var(--large-space);
         width: 100%;
+        &:hover {
+            & .swiper-button-prev,
+            & .swiper-button-next {
+                display: block;
+            }
+        }
     }
 
     & .swiper-wrapper {
@@ -30,6 +36,7 @@
 
     & .swiper-button-prev,
     & .swiper-button-next {
+        display: none;
         position: absolute;
         z-index: 10;
         top: 0;
