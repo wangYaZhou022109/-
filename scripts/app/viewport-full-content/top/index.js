@@ -1,6 +1,7 @@
 var _ = require('lodash/collection'),
     $ = require('jquery'),
-    viewUtil = require('./app/full-text-search/view-util');
+    viewUtil = require('./app/full-text-search/view-util'),
+    D = require('drizzlejs');
 
 var menus = [{
     createTime: 1474538557153,
@@ -68,7 +69,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        menus: { data: menus },
+        // menus: { data: [] },
         navs: { url: '../system/home-nav' },
         homeConfig: { url: '../system/home-config/config' },
         message: {
@@ -96,9 +97,19 @@ exports.store = {
                 if (homeConfig.data) {
                     navs.params.homeConfigId = homeConfig.data.id;
                     navs.clear();
-                    return that.get(navs);
+                    that.get(navs).then(function() {
+                        if ((!navs.data) || navs.data.length === 0) {
+                            navs.clear();
+                            D.assign(navs.data, menus);
+                            navs.changed();
+                        }
+                    });
+                } else {
+                    navs.clear();
+                    D.assign(navs.data, menus);
+                    navs.changed();
                 }
-                return null;
+                // return null;
             });
         },
         'app.pushState': function(hash) {
