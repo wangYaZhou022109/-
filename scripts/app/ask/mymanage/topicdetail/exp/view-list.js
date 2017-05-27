@@ -130,7 +130,6 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click report-*': 'report',
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click del-question-*': 'shut',

@@ -1,27 +1,22 @@
-
+var _ = require('lodash/collection');
 exports.type = 'dynamic';
-
-exports.events = {
-};
-
-exports.handlers = {
-    expert: true
-};
-
-
 exports.bindings = {
-    relevantexperts: true
+    expert: true,
+    down: false
 };
-
-exports.getEntityModuleName = function(key) {
-    return 'ask/' + key;
-};
-exports.getEntity = function() {
-    return {
-        state: this.bindings.relevantexperts.data
-    };
-};
-
-exports.dataForEntityModule = function(entity) {
-    return entity;
+exports.dataForTemplate = {
+    expert: function(data) {
+        var expert = data.expert;
+        var me = this;
+        _.forEach(expert, function(value) {
+            var obj = value,
+                url = obj.member.headPortrait;
+            if (typeof url === 'undefined' || url === null || url === '') {
+                obj.member.headPortrait = 'images/default-userpic.png';
+            } else {
+                obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+        });
+        return expert;
+    }
 };
