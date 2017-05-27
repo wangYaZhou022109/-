@@ -12,7 +12,8 @@ exports.bindings = {
 
 exports.events = {
     'change name': 'changeName',
-    'change paperShowRule': 'changePaperShowRule'
+    'change paperShowRule': 'changePaperShowRule',
+    'change endTime': 'changeTime'
 };
 
 exports.handlers = {
@@ -21,6 +22,21 @@ exports.handlers = {
     },
     changePaperShowRule: function() {
         return this.module.dispatch('changeName', { paperShowRule: $(this.$$('[name="paperShowRule"]')).val() });
+    },
+    changeTime: function() {
+        var startTime = $(this.$('startTime')).val(),
+            endTime = $(this.$('endTime')).val();
+        if (endTime !== '' || endTime !== null) {
+            if (startTime !== '' && startTime !== null) {
+                if (startTime >= endTime) {
+                    this.app.message.alert('结束时间不能早于开始时间');
+                    $(this.$('endTime')).val('');
+                }
+            } else {
+                this.app.message.alert('请先填写开始时间');
+                $(this.$('endTime')).val('');
+            }
+        }
     }
 };
 
@@ -39,13 +55,6 @@ exports.components = [{
 }];
 
 exports.dataForTemplate = {
-    exam: function(data) {
-        var exam = data.exam;
-        if (!exam.isOverByPassExam && exam.isOverByPassExam !== 0) {
-            exam.isOverByPassExam = 0;
-        }
-        return exam;
-    },
     paperShowRule: function(data) {
         return {
             single: data.exam.paperShowRule === 1,
@@ -54,6 +63,16 @@ exports.dataForTemplate = {
     },
     showTimeRange: function() {
         return this.module.renderOptions.showTimeRange === 1;
+    },
+    isOverByPassExam: function(data) {
+        var no;
+        if (!data.exam.isOverByPassExam || data.exam.isOverByPassExam === 0) {
+            no = true;
+        }
+        return {
+            yes: data.exam.isOverByPassExam === 1,
+            no: no
+        };
     }
 };
 
@@ -67,11 +86,7 @@ exports.mixin = {
             return false;
         }
         return true;
-    }
-};
-
-
-exports.mixin = {
+    },
     validate: function() {
         var name = $(this.$('name')),
             duration = $(this.$('duration')),
@@ -152,27 +167,5 @@ exports.mixin = {
         },
         length: 1,
         message: '超出保留小数位'
-    }
-};
-
-exports.events = {
-    'change endTime': 'changeTime'
-};
-
-exports.handlers = {
-    changeTime: function() {
-        var startTime = $(this.$('startTime')).val(),
-            endTime = $(this.$('endTime')).val();
-        if (endTime !== '' || endTime !== null) {
-            if (startTime !== '' && startTime !== null) {
-                if (startTime >= endTime) {
-                    this.app.message.alert('结束时间不能早于开始时间');
-                    $(this.$('endTime')).val('');
-                }
-            } else {
-                this.app.message.alert('请先填写开始时间');
-                $(this.$('endTime')).val('');
-            }
-        }
     }
 };

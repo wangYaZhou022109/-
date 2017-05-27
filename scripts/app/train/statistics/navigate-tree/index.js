@@ -4,7 +4,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        organizationTree: { url: '../system/grant/granted-organization' },
+        organizationTree: { url: '../system/organization/company-orgs' },
         state: { data: {} }
     },
     callbacks: {

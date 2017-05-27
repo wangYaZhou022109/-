@@ -33,33 +33,12 @@ exports.dataForActions = {
     }
 };
 
-// exports.events = {
-//     'click showOrganization': 'show'
-// };
-
-// exports.handlers = {
-//     show: function() {
-//         var me = this,
-//             model = me.module.items['train/statistics/navigate-tree'],
-//             org = me.bindings.organization.data;
-//         me.app.viewport.modal(model, {
-//             callback: function(payload) {
-//                 org.id = payload.id;
-//                 org.name = payload.name;
-//                 me.bindings.org.changed();
-//             }
-//         });
-//     }
-// };
-
 exports.components = [function() {
     var me = this,
         obj = {
             id: 'owner',
             name: 'picker',
             options: {
-                // module: this.module.renderOptions.url || 'exam/question-depot',
-                module: 'exam/question-depot',
                 picker: 'owner',
                 required: false,
                 autoFill: false,
@@ -86,7 +65,6 @@ exports.components = [function() {
                 operatorType: this.app.global.EDIT,
                 state: 1,
                 share: false
-                // organizationId: 1
             },
             data: {}
         }
