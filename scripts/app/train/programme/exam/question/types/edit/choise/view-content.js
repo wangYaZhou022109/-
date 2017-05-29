@@ -1,5 +1,8 @@
 var maps = require('./app/util/maps'),
-    _ = require('lodash/collection');
+    _ = require('lodash/collection'),
+    $ = require('jquery'),
+    markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators');
 
 // exports.type = 'form';
 
@@ -14,10 +17,11 @@ exports.components = [{
     options: {
         model: 'img'
     }
-}, {
-    id: 'difficulty',
-    name: 'selectize'
 }];
+// }, {
+//     id: 'difficulty',
+//     name: 'selectize'
+// }];
 
 exports.dataForTemplate = {
     showDiffculty: function() {
@@ -33,6 +37,33 @@ exports.dataForTemplate = {
                 }
             });
         }
-        return difficultys;
+        return _.orderBy(difficultys, ['key'], ['desc']);
+    }
+};
+
+exports.mixin = {
+    validate: function() {
+        var content = $(this.$('content')),
+            difficulty = $(this.$('difficulty')),
+            components = this.components.content.text(),
+            flag = true;
+
+        markers.text.valid(content);
+        markers.text.valid(difficulty);
+
+        if (components.trim() === '') {
+            markers.text.invalid(content, validators.required.message);
+            flag = false;
+        }
+
+        if (!validators.maxLength.fn(components, 3000)) {
+            markers.text.invalid(content, '最大长度为3000');
+        }
+
+        if (difficulty.val() === '') {
+            markers.text.invalid(difficulty, validators.required.message);
+            flag = false;
+        }
+        return flag;
     }
 };

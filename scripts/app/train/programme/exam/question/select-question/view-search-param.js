@@ -1,10 +1,15 @@
 var maps = require('./app/util/maps'),
     $ = require('jquery'),
     markers = require('./app/ext/views/form/markers'),
-    validators = require('./app/ext/views/form/validators');
+    validators = require('./app/ext/views/form/validators'),
+    // getFirstNode,
+    D = require('drizzlejs');
+    // _ = require('lodash/collection');
 
 exports.bindings = {
-    questions: false
+    questions: false,
+    orgs: true,
+    organization: true
 };
 
 // exports.type = 'form';
@@ -15,27 +20,41 @@ exports.actions = {
 
 exports.dataForActions = {
     searchQuestion: function(payload) {
-        return this.validate() ? payload : false;
+        var check = function(data) {
+            if (data.type === '999') {
+                D.assign(data, { type: null });
+            }
+            if (data.difficulty === '999') {
+                D.assign(data, { difficulty: null });
+            }
+            return data;
+        };
+        return this.validate() ? check(payload) : false;
     }
 };
 
 exports.components = [function() {
-    var obj = {
-        id: 'owner',
-        name: 'picker',
-        options: {
-            module: 'exam/question-depot',
-            picker: 'owner',
-            required: true,
-            data: {
-                value: this.app.global.currentUser.organization.id,
-                text: this.app.global.currentUser.organization.name
+    var me = this,
+        obj = {
+            id: 'owner',
+            name: 'picker',
+            options: {
+                picker: 'owner',
+                required: false,
+                autoFill: false,
+                selectChanged: function(payload) {
+                    return me.components['question-depot'].reset({
+                        operatorType: me.app.global.EDIT,
+                        state: 1,
+                        organizationId: payload.id,
+                        share: true
+                    });
+                }
             }
-        }
-    };
+        };
     return obj;
 }, function() {
-    return {
+    var obj = {
         id: 'question-depot',
         name: 'picker',
         options: {
@@ -43,19 +62,29 @@ exports.components = [function() {
             required: false,
             inputName: 'questionDepotId',
             params: {
-                operatorType: this.app.global.EDIT
+                operatorType: this.app.global.EDIT,
+                state: 1,
+                share: false
             },
             data: {}
         }
     };
+    // if (orgs.data.length > 0) {
+    //     obj.options.params.organizationId = getFirstNode(orgs.data).id;
+    // }
+    return obj;
 }];
 
 exports.dataForTemplate = {
     types: function() {
-        return maps.get('question-types');
+        var result = maps.get('question-types');
+        result.unshift({ key: '999', value: '全部' });
+        return result;
     },
     difficultys: function() {
-        return maps.get('question-difficultys');
+        var result = maps.get('question-difficultys');
+        result.unshift({ key: '999', value: '全部' });
+        return result;
     }
 };
 
@@ -80,3 +109,19 @@ exports.mixin = {
         return flag;
     }
 };
+
+// getFirstNode = function(nodes) {
+//     var d = { map: {}, list: [] };
+//     _.map(nodes, function(item) {
+//         d.map[item.id] = item;
+//     });
+//     _.map(nodes, function(item) {
+//         if (!item.parentId || !d.map[item.parentId]) {
+//             d.list.push(d.map[item.id]);
+//         }
+//     });
+//     if (d.list.length) {
+//         return { id: d.list[0].id, text: d.list[0].name };
+//     }
+//     return {};
+// };

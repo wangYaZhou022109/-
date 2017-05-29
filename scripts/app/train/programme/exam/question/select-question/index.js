@@ -3,9 +3,12 @@ var _ = require('lodash/collection'),
 
 exports.title = '选择试题';
 
+exports.large = 'true';
+
 exports.items = {
     'search-param': 'search-param',
-    questions: 'questions'
+    questions: 'questions',
+    'train/statistics/navigate-tree': { isModule: true }
 };
 
 exports.buttons = [{
@@ -24,16 +27,34 @@ exports.store = {
                 }
             }
         },
-        state: { data: {} }
+        state: { data: {} },
+        orgs: { url: '../system/grant/granted-organization', cache: false },
+        organization: { data: {} }
     },
     callbacks: {
         init: function(payload) {
+            // var orgs = this.models.orgs,
+            //     me = this;
             this.models.questions.clear();
-            return this.module.dispatch('searchQuestion', payload);
+            // D.assign(orgs.params, {
+            //     uri: this.module.renderOptions.url || 'exam/question-depot'
+            // });
+            D.assign(this.models.questions.params, payload, {
+                status: 1,
+                url: this.module.renderOptions.url
+            });
+            return this.get(this.models.questions);
+            // return this.get(orgs).then(function() {
+            //     return me.module.dispatch('searchQuestion', payload);
+            // });
         },
         searchQuestion: function(payload) {
             this.models.state.data.checkAll = false;
-            this.models.questions.params = D.assign(payload, { status: 1 });
+            D.assign(this.models.questions.params, payload, {
+                status: 1,
+                url: this.module.renderOptions.url
+            });
+            this.models.questions.clear();
             return this.get(this.models.questions);
         },
         refresh: function() {
@@ -46,6 +67,6 @@ exports.beforeRender = function() {
     return this.dispatch('init', {
         organizationId: this.app.global.currentUser.organization.id,
         name: this.renderOptions.name,
-        type: 1
+        type: null
     });
 };

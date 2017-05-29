@@ -10,9 +10,9 @@ view('head')
     .pull-left.title > echo(all.task.name)
     .pull-right.title
         if(all.taskApproval.id)
-            echo('提交人:' + all.member.fullName)
-            echo('审核人:' + all.taskApproval.approvalMemberFullName)
-            echo('得分:' + all.taskApproval.score)
+            echo('提交人:' + all.member.fullName) + echo('&nbsp;&nbsp;')
+            echo('审核人:' + all.taskApproval.approvalMemberFullName) + echo('&nbsp;&nbsp;')
+            echo('得分:' + all.taskApproval.score) + echo('&nbsp;&nbsp;')
             .btn.white.m#closeTask 关闭批阅
         else
             echo('提交人:' + all.member.fullName)
@@ -37,7 +37,7 @@ view('side') > form.vertical
     if(all.taskApproval.id)
         .m-top
         label.block 评语：
-        textarea.w-full.m-top#comment(name='comment' value='' rows=5) > echo(all.taskApproval.comment)
+        textarea.w-full.m-top#comment(name='comment' value='' rows=5 disabled=true) > echo(all.taskApproval.comment)
     else
         .layout-mt-small
             input.inline-block#state-0(name='state' type='radio' value='0')('checked')&if(checked)

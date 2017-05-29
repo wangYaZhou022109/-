@@ -24,16 +24,17 @@ exports.store = {
         state: { data: {} },
         itemPool: { data: {} },
         tempAddQuestionOptions: {},
-        key: {}
+        key: {},
+        orgs: { url: '../system/organization/company-orgs', cache: false }
     },
     callbacks: {
         init: function(payload) {
             var question = payload.question,
                 state = this.models.state,
                 itemPool = this.models.itemPool,
+                orgs = this.models.orgs,
                 tempAddQuestionOptions = this.models.tempAddQuestionOptions,
                 interim = payload.interim || false;
-
             tempAddQuestionOptions.set(payload);
 
             state.clear();
@@ -55,6 +56,7 @@ exports.store = {
             } else {
                 itemPool.data = { entryDepot: true };
             }
+            return this.get(orgs);
         },
         saveQuestion: function(payload) {
             var me = this,
@@ -63,7 +65,9 @@ exports.store = {
                 state = me.models.state,
                 callback = me.module.renderOptions.callback,
                 currentUser = this.app.global.currentUser,
-                organizationId = payload.organizationId || currentUser.companyOrganization.id,
+                organizationId = payload.organizationId
+                    || (currentUser.companyOrganization && currentUser.companyOrganization.id)
+                    || currentUser.rootOrganization.id,
                 r;
 
             this.models.question.set(
@@ -96,6 +100,19 @@ exports.store = {
         },
         reloadItemPool: function() {
             this.models.itemPool.changed();
+        },
+        selectOwnerChanged: function(data) {
+            D.assign(this.models.state.params, {
+                organization: {
+                    id: data.id,
+                    name: data.text
+                }
+            });
+            this.models.state.changed();
+        },
+        changeType: function(payload) {
+            D.assign(this.models.state.data, payload);
+            this.models.state.changed();
         }
     }
 };
@@ -112,26 +129,40 @@ exports.buttons = function() {
             var mod = this.items.question.getEntities()[0],
                 mainView = this.items.main,
                 itemPoolView = this.items['item-pool'],
+                optionData = mod.getValue(),
                 validate1 = itemPoolView.validate(),
                 validate2 = mainView.validate(),
                 validate3 = mod.isValidate(),
-                data0 = this.items['item-pool'].getData(),
-                data1 = this.items.main.getData(),
-                data2 = mod.getValue(),
-                result = getData(D.assign({}, data0, data1, data2)),
-                me = this;
+                result;
 
             if (!validate1 || !validate2 || !validate3) {
                 return false;
             }
 
-            if (!data2) {
-                return false;
+            if (!optionData) return false;
+            if (Number(optionData.type) === 6) {
+                _.forEach(optionData.questionAttrs, function(q) {
+                    var qq = q;
+                    qq.score = q.score * 100;
+                });
+            }
+            result = getData(
+                D.assign(
+                    {},
+                    optionData,
+                    itemPoolView.getData(),
+                    mainView.getData(),
+                    { score: Number(optionData.score * 100).toFixed(0) }
+                )
+            );
+            mod.clear();
+            if (this.renderOptions.callback) {
+                D.assign(this.store.models.state.data, result);
             }
 
             if (Number(result.type) === 6) result.subs = result.questionAttrs;
-            this.store.models.state.set(result);
-            me.app.viewport.modal(me.items.preview);
+            this.store.models.state.set(D.assign({}, result, { score: result.score / 100 }));
+            this.app.viewport.modal(this.items.preview);
             return false;
         }
     };
@@ -180,18 +211,21 @@ exports.buttons = function() {
     saveAndAdd = {
         text: '保存并新增',
         fn: function() {
-            var me = this;
-            save.fn.call(this).then(function() {
-                return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
-                    me.store.models.state.changed();
-                    me.store.models.itemPool.changed();
+            var me = this,
+                savePromise = save.fn.call(this);
+            if (savePromise) {
+                savePromise.then(function() {
+                    return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
+                        me.store.models.state.changed();
+                        me.store.models.itemPool.changed();
+                    });
                 });
-            });
+            }
             return false;
         }
     };
 
-    if (interim) {
+    if (interim && this.renderOptions.titleType === 'add') {
         buttons.push(save);
         buttons.push(saveAndAdd);
     } else {

@@ -1,5 +1,6 @@
 var _ = require('lodash/collection'),
-    helpers = require('./app/util/helpers');
+    helpers = require('./app/util/helpers'),
+    D = require('drizzlejs');
 
 exports.title = '预定时间';
 
@@ -11,10 +12,11 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: { data: {} },
+        state: { data: [] },
         month: { data: {} },
         occupy: { url: '../train/occupy' },
         projects: { url: '../train/project/findByDate' },
+        limit: { url: '../train/limit-configuration/month' },
         project: { },
         result: { data: {} }
     },
@@ -25,12 +27,15 @@ exports.store = {
                 occupy = this.models.occupy,
                 projects = this.models.projects,
                 project = this.models.project,
+                limit = this.models.limit,
                 newdate,
                 days,
                 arrays,
                 weeks,
-                item;
+                item,
+                monthArray;
             month.data = payload.month;
+            monthArray = payload.month.split('-');
             project.data = payload.project;
             newdate = new Date(month.data.split('-')[0], month.data.split('-')[1], 0);
             days = newdate.getDate();
@@ -57,6 +62,9 @@ exports.store = {
             projects.params.month = payload.month;
             this.get(projects);
             projects.changed();
+            limit.clear();
+            D.assign(limit.params, { year: window.parseInt(monthArray[0]), month: window.parseInt(monthArray[1]) });
+            this.get(limit);
         }
     }
 };

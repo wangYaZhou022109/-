@@ -58,7 +58,8 @@ view('main') > form.vertical
                 .form-row
                     label.label.required 培训对象
                     .content > textarea.w-full#object(name='object' value='' rows=5) > echo(projectInfo.object)
-        if(projectInfo.isShowCommit)
-            .text-center.layout-mt > .btn#submit 提交
-        else
-            .text-center.layout-mt > .btn#submit 保存
+        if(isGrant)
+            if(projectInfo.isShowCommit)
+                .text-center.layout-mt > .btn#submit 提交
+            else
+                .text-center.layout-mt > .btn#submit 保存

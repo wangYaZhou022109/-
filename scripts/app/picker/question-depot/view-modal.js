@@ -13,7 +13,7 @@ exports.components = [{
 }];
 
 exports.buttons = [{
-    text: '确定选择',
+    text: '确定',
     fn: function() {
         var selected = this.components.tree.getSelectedNode();
         if (!selected.length) {

@@ -1,22 +1,20 @@
 #! handlebars
 
-module
-    div(data-region='main')
+module > .newevaluation-page
+    .newevaluation(data-region='main')
 
-view('main')
-    form.vertical(id='add-form')
-        .exam-base-info.row 
-            label.required > setting('exam.research.name')
+view('main') > form
+    .form.align-left
+        .form-row.r-padding 
+            label.required 调研名称
             input.input#name(name='name' value=research.name) + span#checkName
-            br
-            br
-            label.required > echo('开始时间')
-            input(id='start-time' name='startTime' value=research.startTime)
-            label.required > echo('结束时间')
-            input(id='end-time' name='endTime' value=research.endTime)
-            br
-            br
-            label.required > setting('exam.research.questionary-detail')
-            br
-            textarea.input(name='questionaryDetail' id='questionaryDetail' placeholder='问卷须知...' rows='5' cols='100%') > echo(research.questionaryDetail)
-        div(data-dynamic-key='' style='margin-top: 20px;')
+        .form-row.pull-left.r-padding.w-half
+            label.required 开始时间
+            input.input(id='start-time' name='startTime' value=dateTime(time.startTime))
+        .form-row.pull-left.r-padding.w-half
+            label.required 结束时间
+            input.input(id='end-time' name='endTime' value=dateTime(time.endTime))
+        .form-row.r-padding
+            label.required 问卷须知
+            textarea.w-full(name='questionaryDetail' id='questionaryDetail' placeholder='问卷须知...' rows='4') > echo(research.questionaryDetail)
+    div(data-dynamic-key='')

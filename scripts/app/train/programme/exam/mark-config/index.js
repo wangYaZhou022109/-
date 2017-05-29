@@ -5,7 +5,7 @@ var D = require('drizzlejs'),
 
 exports.items = {
     main: 'main',
-    'train/programme/select-member': { isModule: true, uri: 'train/programme' }
+    'train/programme/select-member': { isModule: true }
 };
 
 exports.store = {
@@ -79,6 +79,25 @@ exports.mixin = {
             break;
         }
         return JSON.stringify(result);
+    },
+    hasMarkMembers: function(mc) {
+        var mcObj;
+        if (!mc) return false;
+        if (typeof mc === 'string') {
+            mcObj = JSON.parse(mc);
+            if (mcObj.markPapers && mcObj.markPapers.length > 0) {
+                return mcObj.markPapers[0].markMembers.length > 0;
+            } else if (mcObj.markQuestionTypes && mcObj.markQuestionTypes.length > 0) {
+                return _.every(mcObj.markQuestionTypes, function(mqt) {
+                    return mqt.markMembers.length > 0;
+                });
+            } else if (mcObj.markQuestions && mcObj.markQuestions.length > 0) {
+                return _.every(mcObj.markQuestions, function(mq) {
+                    return mq.markMembers.length > 0;
+                });
+            }
+        }
+        return true;
     }
 };
 

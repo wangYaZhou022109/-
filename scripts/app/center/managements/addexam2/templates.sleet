@@ -104,6 +104,9 @@ view('addexam-content')
         label.layout-mr-small 题型
         input(type="radio" name="mark")
         label 试题
+        .pull-right
+            input(type="checkbox")
+            label 匿名评卷（勾选后将隐藏参考人信息）
     table.table.layout-mt-small
         tr
             th 试卷名称

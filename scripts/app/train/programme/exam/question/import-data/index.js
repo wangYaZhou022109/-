@@ -7,7 +7,7 @@ exports.items = {
 
 exports.title = '导入';
 
-exports.large = true;
+// exports.large = true;
 
 exports.store = {
     models: {

@@ -27,12 +27,16 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click q-*': 'selectQuestion'
+    'click q-*': 'selectQuestion',
+    'click questionaryDetail': 'questionaryDetail'
 };
 
 exports.handlers = {
     selectQuestion: function(id) {
         return this.module.dispatch('selectQuestion', { id: id });
+    },
+    questionaryDetail: function() {
+        return this.app.viewport.modal(this.module.items.description);
     }
 };
 

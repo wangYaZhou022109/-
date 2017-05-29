@@ -1,7 +1,9 @@
 var _ = require('lodash/collection');
 
 exports.items = {
-    selected: 'selected'
+    selected: 'selected',
+    'train/programme/course-category': { isModule: true },
+    'train/statistics/navigate-tree': { isModule: true, uri: 'human/member' }
 };
 
 exports.title = '添加课程';
@@ -12,7 +14,7 @@ exports.store = {
     models: {
         themeList: { url: '../train/theme' },
         selectedList: { url: '../train/online-course' },
-        courseList: { url: '../course-study/course-info', type: 'pageable', root: 'items' },
+        courseList: { url: '../course-study/course-info/select-for-train', type: 'pageable', root: 'items' },
         state: { data: {} },
         targetList: { data: [] },
         delList: { data: [] }

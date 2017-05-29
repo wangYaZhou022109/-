@@ -1,5 +1,6 @@
 exports.bindings = {
-    file: 'fileUpload'
+    file: 'fileUpload',
+    state: false
 };
 
 exports.components = [{
@@ -21,6 +22,7 @@ exports.components = [{
 exports.fileUpload = function() {
     this.app.viewport.closeModal();
     return this.module.dispatch('importData', {
-        fileId: this.bindings.file.data.imgId
+        fileId: this.bindings.file.data.imgId,
+        type: this.bindings.state.data.type
     });
 };

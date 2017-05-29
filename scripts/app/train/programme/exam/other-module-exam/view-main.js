@@ -10,6 +10,36 @@ exports.bindings = {
     exam: true
 };
 
+exports.events = {
+    'change name': 'changeName',
+    'change paperShowRule': 'changePaperShowRule',
+    'change endTime': 'changeTime'
+};
+
+exports.handlers = {
+    changeName: function() {
+        return this.module.dispatch('changeName', { name: this.$('name').value });
+    },
+    changePaperShowRule: function() {
+        return this.module.dispatch('changeName', { paperShowRule: $(this.$$('[name="paperShowRule"]')).val() });
+    },
+    changeTime: function() {
+        var startTime = $(this.$('startTime')).val(),
+            endTime = $(this.$('endTime')).val();
+        if (endTime !== '' || endTime !== null) {
+            if (startTime !== '' && startTime !== null) {
+                if (startTime >= endTime) {
+                    this.app.message.alert('结束时间不能早于开始时间');
+                    $(this.$('endTime')).val('');
+                }
+            } else {
+                this.app.message.alert('请先填写开始时间');
+                $(this.$('endTime')).val('');
+            }
+        }
+    }
+};
+
 exports.components = [{
     id: 'startTime',
     name: 'flatpickr',
@@ -30,10 +60,33 @@ exports.dataForTemplate = {
             single: data.exam.paperShowRule === 1,
             mutiple: data.exam.paperShowRule === 2,
         };
+    },
+    showTimeRange: function() {
+        return this.module.renderOptions.showTimeRange === 1;
+    },
+    isOverByPassExam: function(data) {
+        var no;
+        if (!data.exam.isOverByPassExam || data.exam.isOverByPassExam === 0) {
+            no = true;
+        }
+        return {
+            yes: data.exam.isOverByPassExam === 1,
+            no: no
+        };
     }
 };
 
 exports.mixin = {
+    check: function() {
+        var startTime = this.$('startTime') && this.$('startTime').value,
+            endTime = this.$('endTime') && this.$('endTime').value;
+
+        if ((startTime && !endTime) || (!startTime && endTime)) {
+            this.app.message.error('必须完整填写考试时间范围或者全部不填');
+            return false;
+        }
+        return true;
+    },
     validate: function() {
         var name = $(this.$('name')),
             duration = $(this.$('duration')),
@@ -64,11 +117,12 @@ exports.mixin = {
             flag = false;
         }
         if (duration.val() !== '') {
-            if (!this.keepDecimal.fn(duration.val(), 0)) {
+            if (validators.number.fn(duration.val()) && validators.range.fn(duration.val(), 1, 500) &&
+            !this.keepDecimal.fn(duration.val(), 0)) {
                 markers.text.invalid(duration, this.keepDecimal.message);
                 flag = false;
             }
-            if (!validators.range.fn(duration.val(), 1, 500)) {
+            if (validators.number.fn(duration.val()) && !validators.range.fn(duration.val(), 1, 500)) {
                 markers.text.invalid(duration, '必须在1~500之间');
                 flag = false;
             }
@@ -82,11 +136,12 @@ exports.mixin = {
             flag = false;
         }
         if (passScore.val() !== '') {
-            if (!this.keepDecimal.fn(passScore.val(), 0)) {
+            if (validators.number.fn(passScore.val()) && validators.range.fn(passScore.val(), 0, 1000) &&
+            !this.keepDecimal.fn(passScore.val(), 0)) {
                 markers.text.invalid(passScore, this.keepDecimal.message);
                 flag = false;
             }
-            if (!validators.range.fn(passScore.val(), 0, 1000)) {
+            if (validators.number.fn(passScore.val()) && !validators.range.fn(passScore.val(), 0, 1000)) {
                 markers.text.invalid(passScore, '必须在0~1000之间');
                 flag = false;
             }
@@ -112,27 +167,5 @@ exports.mixin = {
         },
         length: 1,
         message: '超出保留小数位'
-    }
-};
-
-exports.events = {
-    'change endTime': 'changeTime'
-};
-
-exports.handlers = {
-    changeTime: function() {
-        var startTime = $(this.$('startTime')).val(),
-            endTime = $(this.$('endTime')).val();
-        if (endTime !== '' || endTime !== null) {
-            if (startTime !== '' && startTime !== null) {
-                if (startTime >= endTime) {
-                    this.app.message.alert('结束时间不能早于开始时间');
-                    $(this.$('end-time')).val('');
-                }
-            } else {
-                this.app.message.alert('请先填写开始时间');
-                $(this.$('end-time')).val('');
-            }
-        }
     }
 };

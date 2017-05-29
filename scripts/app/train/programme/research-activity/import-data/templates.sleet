@@ -6,17 +6,17 @@ module
 
 view('main')
     form.vertical
-        .row > .col-sm-12 > span 导入步骤
-        label 1.下载标准模板，按示例格式和示例说明填写需要导入的电子表格文件
-        a#download-template(href=downloadTemplateUrl) > echo('(下载导入模板)')
-        label 2.点击“导入数据”按钮，选择您要导入的电子表格文件
-        label 3.导入成功后，页面会提示成功数量，失败数量，并显示相关信息
-        label 4.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。
-        br
-        .row > .col-sm-12
-            .btn#import 导入数据
-            if(importData.showErrorUrl)
-                a(href=errorDataUrl) > .btn#downloadError 下载错误的导入数据
+        p 导入步骤
+        p.small-font.color-error 1.下载标准模板，按示例格式和示例说明填写需要导入的电子表格文件。
+            span （
+            a#download-template(href=downloadTemplateUrl) 下载导入模板
+            span ）
+        p.small-font.color-error 2.点击“导入数据”按钮，选择您要导入的电子表格文件
+        p.small-font.color-error 3.导入成功后，页面会提示成功数量，失败数量，并显示相关信息
+        p.small-font.color-error 4.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。
+        .btn.layout-mr-small#import 导入数据
+        if(importData.showErrorUrl)
+            a(href=errorDataUrl) > .btn#downloadError 下载错误的导入数据
 
 view('file')
     #uploader

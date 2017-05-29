@@ -1,28 +1,27 @@
 #!handlebars
 
-module > .choise
+module
     div(data-region='content')
-    .options(data-region='options')
+    div(data-region='options')
 
 view('content')
-    .row
-        .col-xs-6 > .com-title 问答题
+    .h4 问答题
         #  .col-xs-6 > .m-top.text-right
         #      | 本题分数：
         #      echo(state.score)
-    p.question > @echo(state.content)
+    .h4.m-top > @echo(state.content)
 
 
 view('options') > .answer
     ul > each(options)
         li(id='item-' + index)
             .inline-block > label.no-margin(for='answer-item-1') > @echo(content)
+    .inline-block.m-top
+        span.text-tips 标准答案:
+        span > @echo(state.answer)
 
-    .clearfix
+    .clearfix      
         .pull-right.m-bottom
-            .inline-block
-                span.text-tips 标准答案:
-                span > @echo(state.answer)
             .inline-block.m-left
                 span.text-tips 题型:
                 span > echo(state.type)

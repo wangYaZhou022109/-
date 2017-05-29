@@ -19,19 +19,19 @@ view('content') > form.vertical
                         .content > input.input(name='peopleNumberEntity' readonly='true' value= settlement.peopleNumberEntity)
                     .form-row.pull-left.form-row-width.r-padding
                         label.label.required 结算人数
-                        .content > input.input( id ='input-class-1' name='peopleNumber' value= settlement.peopleNumber)
+                        .content > input.input( id ='input-class-1'  name='peopleNumber' value= settlement.peopleNumber)
                     .form-row.pull-left.form-row-width.r-padding
                         label.label.required 结算天数
-                        .content > input.input(name='dayNumber' value= settlement.dayNumber)
+                        .content > input.input(name='dayNumber' id ='input-class-2' readonly='true'  value= settlement.dayNumber)
                     .form-row.pull-left.form-row-width
                         label.label.required 结算人日
-                        .content > input.input(name='peopleDay' value= settlement.peopleDay)
+                        .content > input.input(name='peopleDay' value= settlement.peopleDay readonly='true')
                     .form-row.pull-left.form-row-width.r-padding
                         label.label.required 上课天数
-                        .content > input.input(name='attendDays' value= settlement.attendDays)
+                        .content > input.input(name='attendDays' value= settlement.attendDays readonly='true' )
                     .form-row.pull-left.form-row-width.r-padding
                         label.label.required 结算月份 
-                        .content > input.input(name='createMouth' value= settlement.createMouth)
+                        .content > input.input(name='createMouth' value= settlement.createMouth )
                 .form-row
                     label.label.required 说明
                     .content > textarea.width-full(name='explain' rows='5') > echo(settlement.explain)
