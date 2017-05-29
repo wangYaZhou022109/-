@@ -25,7 +25,7 @@ view('main')
     ul.list-text.border.top > each(lives)
         li.border.bottom
             .title-row
-                .img > .img-cont > img(src=imgUrl)
+                .img > .img-cont > img(src=genseeWebCast.imgUrl)
                 .inline-block.title > echo(genseeWebCast.subject)
                 .time(title=genseeWebCast.lecturerNames) > echo('讲师：' genseeWebCast.lecturerNamesSub '&nbsp;&nbsp;直播开始时间：') + dateMinute(genseeWebCast.startTime)
             .state > map('gensee-status-center' genseeWebCast.status)
