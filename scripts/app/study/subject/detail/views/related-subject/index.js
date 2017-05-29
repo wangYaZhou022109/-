@@ -25,7 +25,8 @@ exports.store = {
             if (businessTopics && businessTopics.length > 0) {
                 this.models.courseRelated.params = {
                     topicIds: _.map(businessTopics, 'topicId').join(','),
-                    businessType: 2
+                    businessType: 2,
+                    courseId: options.subject.id
                 };
                 this.get(this.models.courseRelated);
             }

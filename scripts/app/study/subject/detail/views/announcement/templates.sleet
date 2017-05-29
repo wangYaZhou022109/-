@@ -5,4 +5,7 @@ module > .notice(data-region='pannel')
 view('pannel')
     if(region.regionModule.display)
         .h3 > echo(region.regionModule.name)
-        .layout-mt-small > p > echo(region.regionModule.contentValue)
+        if(region.regionModule.contentValue)
+            .layout-mt-small > p > echo(region.regionModule.contentValue)
+        else
+            .empty 暂无公告
