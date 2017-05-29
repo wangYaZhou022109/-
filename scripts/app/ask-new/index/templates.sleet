@@ -37,7 +37,7 @@ view('main')
                         img.boutique.pull-left(src="images/boutique.png")
                         .comment-boutique
                             .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
                             .user-info
                                 a(href='javascript:;') 我
                                 span ·提问·
