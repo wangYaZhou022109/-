@@ -43,7 +43,7 @@ view('main')
                 td > date(arriveDate)
                 td > date(returnDate)
                 td > echo(status)
-                td > a(href='#/train/index/'+projectId) > echo('进入管理')
+                td > a(href='#/train/service/'+projectId) > echo('进入管理')
                 else
                     tr > td(colspan='9') > p.text-center > string('no-data')
         #pager.pagination

@@ -7,7 +7,6 @@ exports.title = function() {
     return this.renderOptions.id ? '编辑试卷' : '新增试卷';
 };
 exports.items = {
-    info: 'info',
     summary: 'summary',
     'question-classes': 'question-classes',
     'train/programme/exam/question/add-question': {
@@ -48,7 +47,9 @@ exports.store = {
             var me = this,
                 id = me.module.renderOptions.id;
             if (id) {
-                me.models.paper.set({ id: id });
+                D.assign(me.models.paper.params, {
+                    paperId: id
+                });
                 me.get(me.models.paper).then(function() {
                     me.module.reload();
                 });
@@ -65,13 +66,11 @@ exports.store = {
                 delete target.question;
                 return target;
             });
-            if (me.module.renderOptions.isCopy) {
-                delete me.models.paper.data.id;
-            }
             D.assign(me.models.paper.data, payload, {
                 paperClassQuestions: JSON.stringify(paperClassQuestions),
                 type: me.module.renderOptions.type || 1,
-                totalScore: me.models.paper.data.totalScore * 100
+                totalScore: me.models.paper.data.totalScore * 100,
+                name: this.module.renderOptions.paperName
             });
             return me.save(me.models.paper);
         },
@@ -124,6 +123,7 @@ exports.store = {
             questionClass.questionId = q.id;
             questionClass.score = Number(q.score);
             questionClass.sequence = paperClassQuestions.size;
+            questionClass.isFromSelected = q.isFromSelected || 0;
             questionClass.question = q;
             paperClassQuestions.push(questionClass);
             me.models.paper.changed();
@@ -141,6 +141,7 @@ exports.store = {
                 questionClass.questionId = q.id;
                 questionClass.score = Number(q.score);
                 questionClass.sequence = paperClassQuestions.size;
+                questionClass.isFromSelected = q.isFromSelected || 0;
                 questionClass.question = q;
                 paperClassQuestions.push(questionClass);
             });
@@ -173,6 +174,7 @@ exports.store = {
                 paperClassQuestions = me.models.paper.data.paperClassQuestions;
             target = _.find(paperClassQuestions, { questionId: q.id });
             target.question = q;
+            target.score = q.score;
             me.models.paper.changed();
         },
         removeQuestionClass: function(questionId) {
@@ -247,14 +249,12 @@ exports.buttons = [{
             organizationId = $('input[name="organizationId"]').val(),
             callback = this.renderOptions.callback;
         return me.dispatch('updatePaper', { key: 'organizationId', value: organizationId }).then(function() {
-            // if (!me.items.info.validate() || !me.items['question-classes'].validate())原版
-            if (!me.items['question-classes'].validate()) {
-                return false;
-            } else if (paperClassQuestions.length < 1) {
+            if (paperClassQuestions.length < 1) {
                 me.app.message.error('试题不能为空');
                 return false;
-            }
-            if (me.store.models.paper.data.totalScore > 1000) {
+            } else if (!me.items['question-classes'].validate()) {
+                return false;
+            } else if (me.store.models.paper.data.totalScore > 1000) {
                 me.app.message.error('试卷总分不能超过1000分');
                 return false;
             }
@@ -272,7 +272,7 @@ exports.buttons = [{
 
 exports.mixin = {
     reload: function() {
-        this.dispatch('reloadSummary');
+        return this.dispatch('reloadSummary');
     }
 };
 exports.beforeRender = function() {
@@ -282,6 +282,8 @@ exports.beforeRender = function() {
         paperClassQuestions: []
     };
 };
+
 exports.afterRender = function() {
-    this.dispatch('init');
+    return this.dispatch('init');
 };
+

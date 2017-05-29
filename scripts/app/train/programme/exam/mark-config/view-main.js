@@ -52,7 +52,7 @@ exports.handlers = {
                 if (state.isPaper) {
                     paperMembers = state.markPapers[data].markMembers;
                     if (flag) {
-                        paperMembers.push({ id: member.id, name: member.name });
+                        paperMembers.push({ id: member.id, name: member.fullName || member.name });
                     } else {
                         state.markPapers[data].markMembers = _.reject(paperMembers, ['id', member.id]);
                     }
@@ -60,7 +60,7 @@ exports.handlers = {
                 if (state.isQuestionType) {
                     questionTypeMembers = state.markQuestionTypes[data].markMembers;
                     if (flag) {
-                        questionTypeMembers.push({ id: member.id, name: member.name });
+                        questionTypeMembers.push({ id: member.id, name: member.fullName || member.name });
                     } else {
                         state.markQuestionTypes[data].markMembers = _.reject(questionTypeMembers, ['id', member.id]);
                     }
@@ -68,7 +68,7 @@ exports.handlers = {
                 if (state.isQuestion) {
                     questionMembers = state.markQuestions[data].markMembers;
                     if (flag) {
-                        questionMembers.push({ id: member.id, name: member.name });
+                        questionMembers.push({ id: member.id, name: member.fullName || member.name });
                     } else {
                         state.markQuestions[data].markMembers = _.reject(questionMembers, ['id', member.id]);
                     }
@@ -77,7 +77,6 @@ exports.handlers = {
             };
         this.app.viewport.modal(view, {
             ids: getIds(),
-            uri: 'course-study/course-info',
             callback: callback
         });
     },

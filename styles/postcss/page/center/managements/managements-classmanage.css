@@ -1,5 +1,8 @@
 .managements-page {
     & .classmanage {
+        & .classnotice {
+            width: 65%;
+        }
         & .form-row-width {
             width: 33.3%;
         }

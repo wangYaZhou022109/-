@@ -1,0 +1,53 @@
+#! handlebars
+
+module > .achievement-content.content
+    .achievement-side(data-region='side')
+    .achievement-main(data-region='main')
+
+view('side')
+    if(showExamNotes)
+        .achievement-tips.pointer#show-exam-notes
+            | 考试须知
+            i.iconfont.icon-info
+    .achievement-preview > ul > each(types)
+        li.border.bottom
+            label(id='list-item-'+ @index)
+                echo(name '题' '(共' totalScore '分)')
+            div(class='min-btn-groups ' + if(isCurrent '' 'hidden')) > each(questions)
+                compare(status 'eq' 'init')
+                    div(class='num min-btn')(id='question-' + id) > a(href='#question-' + id) > echo(index)
+                compare(status 'eq' 'current')
+                    div(class='num min-btn correct')(id='question-' + id) > a(href='#question-' + id) > echo(index)
+view('main')
+    .achievement-main-head
+        .col-sm-7.text-overflow > .h3
+            strong > echo(state.name)
+        .col-sm-5.text-right
+            echo('考生： ' state.examinee)
+
+    .preview-content.m-top
+        if(state.singleMode)
+            .row
+                .col-sm-6
+                    .com-title.inline-block > echo(state.currentQuestion.typeDesc '(' state.currentQuestion.index '/' state.currentQuestion.totalCount ')')
+                .col-sm-6.text-right
+                    if(state.singleMode)
+                        .icon.pe-7s-angle-left-circle.pe-3x.m-right(id='prev-' + state.currentQuestion.typeIndex)
+                        .icon.pe-7s-angle-right-circle.pe-3x(id='next-' + state.currentQuestion.typeIndex)
+
+        if(state.singleMode)
+            if(state.currentQuestion.id)
+                div(data-dynamic-key=state.currentQuestion.id)
+        else
+            div
+                each(types)
+                    label
+                        .com-title > echo(name '题' '(共' totalScore '分)')
+                        each(questions)
+                            echo(i)
+                            div(data-dynamic-key=id)
+
+
+view('exam-notes')
+    hr
+    echo(state.examNotes)

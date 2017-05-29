@@ -5,7 +5,8 @@ var $ = require('jquery'),
 exports.ADD_QUESTIONARY = 'train/programme/research-activity/add-research-activity/steps/step-2';
 
 exports.bindings = {
-    research: true
+    research: true,
+    time: false
 };
 
 exports.type = 'dynamic';
@@ -35,6 +36,7 @@ exports.handlers = {
                 $(this.$('end-time')).val('');
             }
         }
+        return this.module.dispatch('changeInfoDetaile', this.getData());
     }
 };
 
@@ -77,12 +79,13 @@ exports.mixin = {
         var name = $(this.$('name')),
             start = $(this.$('start-time')),
             end = $(this.$('end-time')),
+            startTime = $(this.$('start')),
             questionaryDetail = $(this.$('questionaryDetail')),
             flag = true,
             reg = new RegExp('\\{' + 0 + '\\}', 'g');
 
         markers.text.valid(name);
-        markers.text.valid(start);
+        markers.text.valid(startTime);
         markers.text.valid(end);
         markers.text.valid(questionaryDetail);
 
@@ -92,7 +95,7 @@ exports.mixin = {
         }
 
         if (start.val() === '' || start.val() === null) {
-            markers.text.invalid(start, validators.required.message);
+            markers.text.invalid(startTime, validators.required.message);
             flag = false;
         }
         if (end.val() === '' || end.val() === null) {

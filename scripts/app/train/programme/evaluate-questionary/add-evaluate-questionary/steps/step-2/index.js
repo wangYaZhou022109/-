@@ -1,7 +1,6 @@
 var options = require('./app/train/programme/research-activity/add-research-activity/steps/step-2/index'),
     D = require('drizzlejs'),
     _ = require('lodash/collection'),
-    strings = require('./app/util/strings'),
     obj = D.assign({}, options),
     items = D.assign({}, obj.items),
     callbacks = D.assign({}, obj.store.callbacks),
@@ -11,7 +10,7 @@ var options = require('./app/train/programme/research-activity/add-research-acti
 obj.items = items;
 
 D.assign(obj.items, {
-    'picker/select-dimension': { isModule: true }
+    'train/programme/evaluate-questionary/select-dimension': { isModule: true }
 });
 
 obj.store.models = models;
@@ -49,7 +48,7 @@ D.assign(obj.store.callbacks, {
 
         return this.post(this.models.batchDimension).then(function() {
             me.models.dimensions.changed();
-            me.app.message.success(strings.get('save-success'));
+            me.app.message.success('操作成功！');
         });
     }
 });

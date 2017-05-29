@@ -8,7 +8,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'researchQuestionarys' }
+    id: 'pager', name: 'pager', options: { model: 'researchQuestionarys' }
 }];
 
 exports.dataForTemplate = {
@@ -49,12 +49,9 @@ exports.handlers = {
         window.open(url, '_blank');
     },
     summary: function() {
-        var mod = this.module.items['train/statistics/questionnaire/research-record/summary'],
-            me = this;
-        this.app.viewport.ground(mod, {
-            researchQuestionaryId: me.bindings.researchQuestionary.data.id,
-            callback: function() {
-            }
-        });
+        var classId = this.bindings.state.data;
+        var id = this.bindings.researchQuestionary.data.id;
+        var url = '#/exam/research-activity/summary/' + id + '/' + classId.classId;
+        window.open(url, '_blank');
     }
 };

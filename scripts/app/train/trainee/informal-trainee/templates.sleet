@@ -1,0 +1,44 @@
+#!handlebars
+
+module
+    .membership-table.layout-mt-small.clearfix(data-region='main')
+
+view('main')
+    .h5.pull-left.strong > echo('学员列表')
+    if(isGrant)
+        .pull-right
+            label.pull-left.tag-height.m-right > echo('员工编号')
+            input.tag-height.pull-left(id='add-iftrainee-input')
+            .small-btn.pull-left.m-right#addIftrainee > echo('添加')
+            .btn.tag-btn#addAllIftrainee > echo('人员选择')
+    else
+        br
+    table.table.layout-mt-small
+        thead > tr
+            th > echo('序号')
+            th > echo('姓名')
+            th > echo('员工编号')
+            th > echo('单位')
+            th > echo('部门')
+            th > echo('职务')
+            th > echo('手机')
+            if(isGrant)
+                th > echo('操作')
+        tbody
+            each(iftrainees) > tr
+                td > echo(i)
+                td > echo(member.fullName)
+                td > echo(member.name)
+                td > echo(companyName)
+                td > echo(organizationName)
+                td > echo(member.jobName)
+                td > echo(phoneNumber)
+                if(isGrant)
+                    td > a(id='delete-iftrainee'+id data-name='id' data-value=id) > echo('删除')
+            else
+                if(isGrant)
+                    tr > td(colspan='8') > p.text-center > string('no-data')
+                else
+                    tr > td(colspan='7') > p.text-center > string('no-data')
+    #pager.pagination
+    

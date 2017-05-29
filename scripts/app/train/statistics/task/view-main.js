@@ -4,7 +4,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'tasks' }
+    id: 'pager', name: 'pager', options: { model: 'tasks' }
 }];
 
 exports.events = {

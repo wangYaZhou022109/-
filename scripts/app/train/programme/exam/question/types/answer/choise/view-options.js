@@ -8,19 +8,21 @@ exports.bindings = {
 exports.dataForTemplate = {
     options: function() {
         var data = this.bindings.answer.data,
+            state = this.bindings.state.data,
             me = this;
         _.map(this.bindings.state.data.options, function(ii, i) {
             var item = ii;
             item.index = i;
             item.code = String.fromCharCode(item.index + 'A'.charCodeAt(0));
             item.questionId = me.bindings.state.data.id;
+            item.isDisabled = state.detailMode > 0;
             if (_.find(data.value, ['id', item.id])) item.checked = true;
         });
         return this.bindings.state.data.options;
     },
     isShowDetail: function() {
         var mode = this.bindings.state.data.detailMode;
-        return mode && mode > 0;
+        return mode && mode > 0 && mode < 4;
     }
 };
 

@@ -4,13 +4,16 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: {}
+        state: {},
+        classInfo: {
+            url: '../train/class-info/get'
+        }
     },
     callbacks: {
         init: function(payload) {
-            var state = this.models.state;
-            state.set(payload);
-            state.changed();
+            var classInfo = this.models.classInfo;
+            classInfo.params.id = payload.id;
+            return this.get(classInfo);
         }
     }
 };

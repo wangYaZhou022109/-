@@ -5,11 +5,14 @@ module
 
 view('main')
     .h5.pull-left.strong > echo('班务人员列表')
-    .pull-right
-        label.pull-left.tag-height.m-right > echo('员工编号')
-        input.tag-height.pull-left(id='add-classstaff-input')
-        .small-btn.pull-left.m-right#addClassstaff > echo('添加')
-        .btn.tag-btn#addAllClassstaff > echo('人员选择')
+    if(isGrant)
+        .pull-right
+            label.pull-left.tag-height.m-right > echo('员工编号')
+            input.tag-height.pull-left(id='add-classstaff-input')
+            .small-btn.pull-left.m-right#addClassstaff > echo('添加')
+            .btn.tag-btn#addAllClassstaff > echo('人员选择')
+    else
+        br
     table.table.layout-mt-small
         thead > tr
             th > echo('序号')
@@ -19,21 +22,29 @@ view('main')
             th > echo('称呼')
             th > echo('手机')
             th > echo('邮箱')
-            th > echo('操作')
-        tbody > each(classstaffs) > tr
-            td > echo(i)
-            td > echo(member.fullName)
-            td > echo(member.name)
-            td > echo(organizationName)
-            td 
-                label(id='label-callName'+id data-name='id' data-value=id) > echo(callName)
-                input(id='input-callName'+id value=callName style='display:none;width:100px;' data-name='id' data-value=id)
-            td > echo(member.phoneNumber)
-            td > echo(member.email)
-            td
-                compare(member.id 'ne' classTeacher)
-                    a(id='staff-sort'+id data-name='id' data-value=id) > echo('排序')
-                    input(id='staff-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
-                    span.text-main-color(id='staff-shuxian'+id) > echo('|')
-                    a(id='staff-delete'+id data-name='id' data-value=id) > echo('删除')
+            if(isGrant)
+                th > echo('操作')
+        tbody
+            each(classstaffs) > tr
+                td > echo(i)
+                td > echo(member.fullName)
+                td > echo(member.name)
+                td > echo(organizationName)
+                td 
+                    label(id='label-callName'+id data-name='id' data-value=id) > echo(callName)
+                    input(id='input-callName'+id value=callName style='display:none;width:100px;' data-name='id' data-value=id)
+                td > echo(member.phoneNumber)
+                td > echo(member.email)
+                if(isGrant)
+                    td
+                        compare(member.id 'ne' classTeacher)
+                            a(id='staff-sort'+id data-name='id' data-value=id) > echo('排序')
+                            input(id='staff-input-sort'+id value=sort style='display:none;' data-name='id' data-value=id)
+                            span.text-main-color(id='staff-shuxian'+id) > echo('|')
+                            a(id='staff-delete'+id data-name='id' data-value=id) > echo('删除')
+            else
+                if(isGrant)
+                    tr > td(colspan='8') > p.text-center > string('no-data')
+                else
+                    tr > td(colspan='7') > p.text-center > string('no-data')
     #pager.pagination

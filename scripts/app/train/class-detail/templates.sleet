@@ -1,0 +1,283 @@
+#!handlebars
+module > .class-details-page
+    .class-details-box(data-region='banner')
+    .container
+        .page-main-wrapper.layout-mt-small
+            .side
+                .page-side > .container
+                    section.section.domain(data-region='main')
+                    section.section.class-info(data-region='class-information')
+                    section.section.class-notice(data-region='class-notice')
+                    section.section.class-clerk(data-region='class-member')
+                    section.section.charts(data-region='ranking-list')
+            .main
+                .class-details-page.page-main > .container
+                    section.section(data-region='curriculum-schedule')
+                    section.section(data-region='online-resources')
+                    section.section(data-region='pannel')
+                    section.section(data-region='swipe')
+                    section.section(data-region='discussion-area')
+
+view('banner')
+    .banner
+        img.w-full(src=classDetail.bannerUrl style='max-height:100%;')
+        .classes > each(groups)
+            a.m-right(href=classUrl target='_blank') > echo(shortName)
+
+view('main')
+    .domain.clearfix.small-font
+        .domain01.pull-left.m-bottom.pointer(id='twoBring')&if(isGrant)
+            i.iconfont.icon-favorite
+            br
+            | 两个带来
+        .domain02.pull-left.pointer(id='shuttleBusInformation')&if(isGrant)
+            i.iconfont.icon-bus
+            br
+            | 班车信息统计
+        .domain03.pull-left.m-bottom.pointer(id='commitTask')&if(isGrant)
+            i.iconfont.icon-exam
+            | 作业提交
+        .domain04.pull-left.pointer(id='addCourse1')&if(isGrant)
+            i.iconfont.icon-smile
+            br
+            | 学员满意度
+        .domain06.pull-left.m-bottom.pointer(id='questionnaire')&if(isGrant)
+            | 调研与考试
+        .domain07.pull-left.pointer(id='classMembers')&if(isGrant)
+            | 同学录
+
+view('class-information')
+    .class-info
+        .h3.clearfix
+            span.strong 班级信息
+            i.iconfont.icon-zhishiku.pull-right
+        ul.m-top
+            li
+                .class-info-left > | 班级名称
+                .class-info-right > echo(classInfo.className)
+            li
+                .class-info-left > | 主办单位
+                .class-info-right > echo(classInfo.organization)
+            li
+                .class-info-left > | 起止时间
+                .class-info-right
+                    date(classInfo.arriveDate) + echo('~') + date(classInfo.returnDate)
+            li
+                .class-info-left > | 培训地点
+                .class-info-right > echo(classInfo.address)
+            li
+                .class-info-left > | 教室
+                .class-info-right > echo(classInfo.classRoomName)
+            li
+                .class-info-left > | 餐厅
+                .class-info-right > echo(classInfo.diningRoom)
+
+view('class-notice')
+    .class-notice
+        .h3.m-bottom.strong 班级公告
+        p.small-font
+            if(classDetail.notice)
+                echo(classDetail.notice)
+            else
+                echo('暂无班级公告')
+
+view('class-member')
+    .class-clerk
+        .h3.m-bottom.strong 班务人员
+        ul > each(staff)
+            li
+                .pull-left.class-clerk-img > img(src='images/1.png')
+                .pull-left.m-right > echo(member.fullName)
+                .pull-left.class-clerk-zhi > echo(callName)
+                .pull-right > i.iconfont.icon-phone + echo(member.phoneNumber)
+            else
+                .class-notice > p.small-font > echo('暂无班务人员')
+
+view('ranking-list')
+    .charts
+        .h3.clearfix.m-bottom
+            a.pull-right.more > | more
+            span.strong 排行榜
+            small 学员时长排行榜
+        each(study.arr)
+            .clearfix.charts-list
+                .pull-left.charts-img > img.block(src=headPhoto)
+                .pull-left.charts-user
+                    echo(member.fullName)
+                    br
+                    echo(member.organizationName)
+                .pull-left > echo(studyTotalTime + '分钟')
+                .pull-right.charts-nub > b(class=class) > echo(i)
+        else
+            .class-notice > p.small-font > echo('暂无学习排行榜数据')
+        each(study.arr1)
+            .clearfix.charts-list
+                .pull-left.charts-nub > b > echo(i)
+                .pull-left.m-left.strong > echo(member.fullName)
+                .pull-left.m-left > echo(member.organizationName)
+                .pull-right.strong > echo(studyTotalTime + '分钟')
+
+view('curriculum-schedule')
+    .schedule
+        .form.align-left > .form-row.m-bottom
+            label.h3 课程表
+            .content
+                if(isShowTheme)
+                    select.w-full#theme-list > each(offlineThemeList)
+                        option(value=id)('selected')&if(checked) > echo(name)
+        if(isShowPrevious)
+            .btn.block.m-bottom#previous 查看之前的课程
+        each(content)
+            .schedule-list.clearfix
+                .pull-left.data
+                    .h3.m-bottom > echo(day)
+                    .small-font > echo(month)
+                each(courses)
+                    .pull-right.clearfix.right-line
+                        .pull-left.time
+                            i.spot
+                            echo(startTime+'-'+endTime)
+                        .pull-right.right-info
+                            .schedule-tit.m-bottom > map('class-offline-type' type) + echo(':' + name) 
+                            .clearfix
+                                .pull-right
+                                    .inline-block.pointer
+                                        i.iconfont.icon-favorite.icon-down 
+                                        span(id='courseware-view-'+id) 下载
+                                    compare(onlineCourseStatus 'eq' 1)
+                                        span.m-left.gray-line |
+                                        .inline-block.pointer
+                                        i.iconfont.icon-view.m-left.icon-see
+                                        span(id='course-view-'+onlineCourseId) 查看
+                                compare(type 'eq' 1)
+                                    span.sub-text
+                                        i.iconfont.icon-favorite
+                                        echo(classRoom.classroomName)
+                                    span.m-left.gray-line |
+                                i.iconfont.icon-user-1.m-left.sub-text
+                                span.sub-text > echo(teacherTitle + '：')
+                                echo(teacherName)
+        if(isShowMore)
+            .btn.block.m-bottom#next 查看更多课程
+
+view('online-resources')
+    .resources
+        .h3.m-bottom.layout-mt-small 在线资源
+        hr
+        ul.schedule-online
+            each(onlineCourseList)
+                li
+                    .pull-right
+                        .inline-block.pointer
+                            i.iconfont.icon-favorite.icon-down
+                            span(id='online-attach-'+resourceId) 下载
+                        span.m-left.gray-line |
+                        .inline-block.pointer
+                            i.iconfont.icon-view.m-left.icon-see
+                            span(id='course-view-'+resourceId) 查看
+                    .schedule-online-left.pull-left
+                        | [在线课程]
+                        if(required)
+                            span.sub-text.m-left > echo('[必修]')
+                        else
+                            span.sub-text.m-left > echo(themeName)
+                    span.schedule-online-tit.m-left.pull-left > echo(resourceName)
+            else
+                .class-notice > p.small-font > echo('暂无在线资源')
+
+view('pannel')
+    .gallery
+        .h3.strong.layout-mb-small > echo('图库')
+        if(photos)
+            #album.swiper-container
+                .gallery-banner
+                    each(photos)
+                        .gallery-item > a > img(id="showSwipe-"+attachmentId src=imageUrl alt=name)
+                .gallery-arrow-prev.gallery-arrow(id='turnPage-prev' title=string('left.page'))
+                    .iconfont.icon-arrow-left
+                .gallery-arrow-next.gallery-arrow(id='turnPage-next' title=string('right.page'))
+                    .iconfont.icon-arrow-right
+        else
+            .class-notice > p.small-font > echo('暂无图片')
+
+view('swipe')
+    #classphotoSwipe
+    
+view('discussion-area')
+    #comment-area
+
+
+view('two-brings') > form.vertical
+    .watchbring-content
+        .watchbring-item.layout-mt-small.overflow
+            p > echo('1.' + signUpInfo.question1)
+            .form.align-left > .form-row
+                label 经典/案例
+                .content > input.border.bottom.w-full(name='title1'  value=twoBringsResult.title1  x-rule='required')
+            .h5.m-top 主题：
+            textarea.w-full.m-top#content1(placeholder="输入问题内容" name='content1' rows="5" x-rule='required') > echo(twoBringsResult.content1)
+        .watchbring-item.layout-mt-small.overflow
+            p > echo('1.' + signUpInfo.question2)
+            .form.align-left > .form-row
+                label 经典/案例
+                .content > input.border.bottom.w-full(name='title2'  value=twoBringsResult.title2  x-rule='required')
+            .h5.m-top 主题：
+            textarea.w-full.m-top#content2(placeholder="输入问题内容" name='content2' rows="5" x-rule='required') > echo(twoBringsResult.content2)
+
+view('questionnaire') > .surveyexam-page > .surveyexam
+    each(questionnaire)
+        .surveyexam-item.border.bottom
+            .surveyexam-title.inline-block.sub-text > echo('【') + map('questionnaire-type' type) + echo('】')
+            .surveyexam-content.border.left.clearfix.inline-block
+                .inline-block.survey-name
+                    .h3 > echo(resourceName)
+                    .small-font.sub-text.m-top > dateTime(startTime) + echo('~') + dateTime(endTime)
+                .inline-block.h4.sub-text 未完成
+            compare(type 'eq' 1)
+                a.surveyexam-btn.inline-block.btn(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+            else
+                a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
+                
+view('bus')
+    section.section.businfo-page > .businfo
+        each(bus)
+            .businfo-title.clearfix.layout-mt-small
+                .h4.pull-left > echo(name)
+                .pull-right
+                    span.sub-text.layout-mr > dateTime(startTime) + echo('-') + dateTime(endTime)
+                    a.normal.layout-mr.sub-text(id='sectionDisplay-'+ id href="javascript:;")
+                        label(id='label-' + id)
+                        i.iconfont.icon-triangle-up(id='icon-' + id)
+            if(show)
+                div(id='sectionDiv-' + id display = none )
+                if(falg)
+                    each(busDetails)
+                        .bg-businfo.m-top
+                            .businfo-main.inline-block
+                                .small-font > echo(name)
+                                .sub-text.m-top.small-font > echo(explain)
+                else
+                    each(optionList)
+                        .bg-businfo.m-top
+                            .businfo-main.inline-block 
+                                .small-font > echo(name)
+                                .sub-text.m-top.small-font > echo(explain)
+                            .businfo-side.inline-block.layout-mr-small
+                                input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                label(for='check-item'+id) 选择
+                                    #  td > .checkbox.no-margin
+                                    #      input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                    #      label(for='check-item'+id)
+
+view('research-tips')
+    div
+        if(research.content)
+            echo(research.content)
+        else
+            echo('暂无学员满意度问卷')
+    div
+        each(research.buttons)
+            if(target)
+                a(id='button-' + id href=url target=target) > echo(text)
+            else
+                a(id='button-' + id) > echo(text)

@@ -1,7 +1,8 @@
+
 exports.items = {
     main: 'main',
     search: 'search',
-    'train/statistics/class-two-brings/owner': { isModule: true },
+    'train/statistics/navigate-tree': { isModule: true, uri: 'human/member' },
     edit: ''
 };
 
@@ -14,26 +15,31 @@ exports.store = {
         },
         classTwoBring: { url: '../train/class-two-brings' },
         download: { url: '../train/class-two-brings/download' },
-        state: { data: { } }
+        state: { data: { } },
+        org: { data: { } }
     },
     callbacks: {
         init: function(payload) {
             var classTwoBrings = this.models.classTwoBrings,
                 state = this.models.state;
             classTwoBrings.params = payload;
-            state.data.classId = payload;
+            state.data.classId = payload.classId;
             return this.get(classTwoBrings);
         },
         search: function(payload) {
-            var classTwoBrings = this.models.classTwoBrings;
+            var classTwoBrings = this.models.classTwoBrings,
+                org = this.models.org;
             classTwoBrings.params = payload;
-            return this.get(classTwoBrings);
+            this.get(classTwoBrings);
+            org.clear();
         },
         edit: function(payload) {
             var model = this.models.classTwoBring,
-                me = this;
+                me = this,
+                state = this.models.state;
+            state.data.id = payload.id;
             model.clear();
-            model.params = payload;
+            model.params = state.data;
             return me.get(model);
         }
     }

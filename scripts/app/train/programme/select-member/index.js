@@ -6,12 +6,12 @@ exports.title = '选择用户';
 exports.items = {
     content: 'content',
     toolbox: 'toolbox',
-    'human/organization/navigate-tree': { isModule: true, region: 'left', uri: 'human/member' }
+    'train/statistics/navigate-tree': { isModule: true, region: 'left' }
 };
 
 exports.store = {
     models: {
-        members: { url: '../human/member', type: 'pageable', root: 'items' },
+        members: { url: '../human/member/picker-for-train', type: 'pageable', root: 'items' },
         state: {
             data: {},
             mixin: {
@@ -37,7 +37,9 @@ exports.store = {
     },
     callbacks: {
         refreshList: function(options) {
-            var data = D.assign({}, this.models.search.getQueryParams(), options),
+            var data = D.assign({
+                    status: 1,
+                }, this.models.search.getQueryParams(), options),
                 model = this.models.members;
             model.params = data;
             this.get(model);

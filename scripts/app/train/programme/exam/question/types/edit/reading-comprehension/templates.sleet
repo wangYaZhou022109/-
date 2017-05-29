@@ -1,34 +1,35 @@
 #!handlebars
 
-module > .choise
+module
     div(data-region='content')
     div(data-region='subs')
     div(data-region='score')
 
 view('content')
-    .row > .col-sm-12
-        label(class='required') 试题信息
-        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
-    label
-        .btn#add-question-1 添加单选题
-        .btn#add-question-2 添加多选题
-        .btn#add-question-5 添加问答题
+    .choosequestion > .form.align-left
+        .form-row
+            label.required 试题信息
+            textarea.w-full#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
+        .form-row
+            .btn#add-question-1 添加单选题
+            .btn#add-question-2 添加多选题
+            .btn#add-question-5 添加问答题
 
-view('subs') > .preview-content
-    .question-list > each(subs)
-        echo('(' index ')')
-        .question-item
-            div(data-dynamic-key=id)
-            .text-right > .m-top
-                a.pe-7s-trash.pe-2x.m-right(id='delete-' + id href='javascript:;')
-                a.pe-7s-edit.pe-2x(id='edit-' + id href='javascript:;')
+view('subs')
+    .addexam-page > .temporarypaper2-page > .temporarypaper2-content
+        ul.layout-mt-small.border.around
+            each(subs) > li.test-box.test-1
+                spqn.heading.pull-left.m-right > echo('(' index ')')
+                div(data-dynamic-key=id)
+                .layout-mt-small.clearfix > .icons.w-full.text-right
+                    i.iconfont.icon-trash(id='delete-' + id href='javascript:;')
+                    i.iconfont.icon-edit-solid(id='edit-' + id href='javascript:;')
 
 view('modal')
-    form.vertical
+    form.vertical(style='font-size: 12px;')
         div(data-dynamic-key='modal')
 
 view('score')
-    .row
-        .col-sm-6
-            label(class='required') 试题分数
-            input.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')
+    .choosequestion > .form.align-left > .form-row.w-half
+        label(class='required') 试题分数
+        input.w-full.input(id='score' x-rule='required,number,interval:0:1:100:1,keepDecimal:1' value=state.score placeholder='输入0-100之间的分值，不包括100分，小数点最多保留一位')

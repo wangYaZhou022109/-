@@ -16,7 +16,7 @@ exports.handlers = {
     addTask: function() {
         this.bindings.state.data.type = 'add';
         this.bindings.task.clear();
-        this.app.viewport.modal(this.module.items.editTask);
+        this.app.viewport.modal(this.module.items['edit-task']);
     },
     showMinimize: function(id) {
         $(this.$('minitable-' + id)).toggle();
@@ -55,16 +55,25 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     editTask: function() {
-        this.app.viewport.modal(this.module.items.editTask);
+        this.app.viewport.modal(this.module.items['edit-task']);
     },
 };
 
 exports.dataForTemplate = {
     taskList: function(data) {
+        var state = this.bindings.state.data;
         _.map(data.taskList || [], function(task, i) {
             var r = task;
             r.i = i + 1;
+            r.isGrant = state.role !== 4;
         });
         return data.taskList;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };

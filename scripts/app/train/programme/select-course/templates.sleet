@@ -13,6 +13,7 @@ view('selected')
                     td
                         i.iconfont.icon-sort-asc(id='move-up-'+id data-name='id' data-value=id)
                         i.iconfont.icon-sort-desc(id='move-down-'+id data-name='id' data-value=id)
+                        i.iconfont.icon-delete-solid(id='del-target-'+id data-name='id' data-value=id)
 
         .page-main
             .choosetopic.clearfix
@@ -28,12 +29,14 @@ view('selected')
                         input#name(name='name' value=search.name)
                     .filter-item.clearfix
                         label.pull-left.m-right 课程分类
-                        input.pull-left(placeholder="全部")
-                        .btn.pull-left 选择
+                        input.pull-left#categoryName(placeholder="全部" name='categoryName' readonly='readonly' value=search.categoryName)
+                        input#categoryId(type='hidden' name='category' value=search.category)
+                        .btn.pull-left#showCategory 选择
                     .filter-item.clearfix
                         label.pull-left.m-right 归属部门
-                        input.pull-left(placeholder="全部")
-                        .btn.pull-left 选择
+                        input.pull-left#organizationName(placeholder="全部" name='organizationName' value=search.organizationName readonly='readonly')
+                        input#organizationId(type='hidden' name='organizationId' value=search.organizationId)
+                        .btn.pull-left#showOrganization 选择
                 .pull-right > .btn.addtopic-btn#btnSearch 搜索
             table.table
                 tr

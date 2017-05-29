@@ -3,7 +3,8 @@ var _ = require('lodash/collection');
 exports.bindings = {
     trainees: true,
     state: false,
-    auditTrainee: false
+    auditTrainee: false,
+    detail: false
 };
 
 exports.components = [{
@@ -14,7 +15,8 @@ exports.events = {
     'click checkAll': 'checkAll',
     'click check-item*': 'checkItem',
     'click audit*': 'audit',
-    'click allAudit': 'auditAll'
+    'click allAudit': 'auditAll',
+    'click detail*': 'detail'
 };
 
 exports.actions = {
@@ -48,6 +50,14 @@ exports.handlers = {
         } else {
             this.app.message.alert('请至少选择一位学员！');
         }
+    },
+    detail: function(data) {
+        var id = data,
+            trainees = this.bindings.trainees.data,
+            view = this.module.items.detail;
+        this.bindings.detail.data = _.find(trainees, ['id', id]);
+        this.bindings.detail.changed();
+        this.app.viewport.modal(view);
     }
 };
 
@@ -65,11 +75,20 @@ exports.actionCallbacks = {
 exports.dataForTemplate = {
     trainees: function(data) {
         var trainees = data.trainees,
-            pageNum = this.bindings.trainees.getPageInfo().page;
+            pageNum = this.bindings.trainees.getPageInfo().page,
+            state = this.bindings.state.data;
         _.map(trainees || [], function(trainee, i) {
             var e = trainee;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            e.isGrant = state.role !== 4;
         });
         return trainees;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };

@@ -44,11 +44,14 @@ view('top')
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
                     p.layout-mt-small.sub-title 成员管理
-                li.pull-left#menu-service
-                    .managements-tabs-item
-                        .managements-tabs-circle
-                            .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 班务管理
+
+                compare(state.role 'ne' 2)
+                    li.pull-left#menu-service
+                        .managements-tabs-item
+                            .managements-tabs-circle
+                                .managements-tabs-smallcircle
+                        p.layout-mt-small.sub-title 班务管理
+
                 li.pull-left#menu-statistics
                     .managements-tabs-item
                         .managements-tabs-circle
@@ -59,11 +62,11 @@ view('top')
                         .managements-tabs-circle
                             .managements-tabs-smallcircle
                     p.layout-mt-small.sub-title 学习效果考评
-                li.pull-left#menu-summary
-                    .managements-tabs-item
-                        .managements-tabs-circle
-                            .managements-tabs-smallcircle
-                    p.layout-mt-small.sub-title 培训总结
+                # li.pull-left#menu-summary
+                #     .managements-tabs-item
+                #         .managements-tabs-circle
+                #             .managements-tabs-smallcircle
+                #     p.layout-mt-small.sub-title 培训总结
 
 view('main')
     div(data-dynamic-key=state.menu)

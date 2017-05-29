@@ -1,0 +1,18 @@
+#!handlebars
+
+module > .commitwork-page
+    .commitwork(data-region='main')
+view('main')
+    .bg-highlight
+        each(tasks)
+            .commitwork-title.clearfix.layout-mb-small.bg-white.m-top
+                .h4.pull-left > echo(name)
+                .pull-right
+                    dateTime(startTime) + echo('-') + dateTime(endTime)
+                    if(taskMember.id)
+                        compare(taskMember.state 'ne' 4)
+                            a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('查看')
+                        else
+                            a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')
+                    else
+                        a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')

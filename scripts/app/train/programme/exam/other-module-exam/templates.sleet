@@ -1,63 +1,47 @@
 #!handlebars
 
-module
-    form.vertical
-        .div(style='height: 40%;margin-bottom: 15px;')(data-region='main')
-        .div(style='height: 55%;')(data-region='paper')
+module > form.vertical
+    .addexam-page
+        .addexam-titlebar(data-region='main')
+        .addexam-content(data-region='paper')
 
 view('main')
-    div.exam-base-info.row
-        div(style='width: 100%;float: left;')
-            div
-                .div(style='width: 50%;float: left;margin:10px;')
-                    label.required > setting('exam.exam.name')
-                    span(style='color: red;') > echo('*')
-                    br
-                    br
-                    input.input#name(x-rule='required' name='name' value=exam.name style='width: 80%;')
-                .div(style='width: 20%;float: left;margin-top: 10px;margin-bottom: 10px;')
-                    label 开始时间
-                    br
-                    br
-                    input#startTime(name='startTime' value=exam.startTime)
-                    echo('--')
-                .div(style='width: 20%;float: left;margin-top: 10px;margin-bottom: 10px;')
-                    label 结束时间
-                    br
-                    br
-                    input#endTime(name='endTime' value=exam.endTime)
-            div
-                .div(style='float: left;width: 22%;margin: 10px;')
-                    label.required > setting('exam.exam.duration')
-                    span(style='color: red;') > echo('*')
-                    br
-                    br
-                    input.input.mark#duration(x-rule='required,number,keepDecimal:0,range:1:500' name='duration' value=exam.duration)
-                .div(style='float: left;width: 20%;margin: 10px;')
-                    label.required > setting('exam.exam.pass-score')
-                    span(style='color: red;') > echo('*')
-                    br
-                    br
-                    input.input.mark#passScore(x-rule='required,number,keepDecimal:0,range:0:1000' name='passScore' value=exam.passScore)
-                .div(style='float: left;width: 20%;margin: 10px;')
-                    label.required > setting('exam.exam.paper-show-rule')
-                    span(style='color: red;') > echo('*')
-                    br
-                    br
-                    select.input#paperShowRule(name='paperShowRule' style='heigth: 40%')
-                        option(value='1')('checked')&if(paperShowRule.single) 一页一题
-                        option(value='2')('checked')&if(paperShowRule.mutiple) 一页多题
-                .div(style='float: left;width: 20%;margin: 10px;')
-                    label.required > echo('是否考试及格才算完成')
-                    span(style='color: red;') > echo('*')
-                    br
-                    br
-                    #is-over-by-pass-exam(x-rule='required' x-target='is-over-by-pass-exam' x-marker='radiox' value=exam.isOverByPassExam)
-                        span
-                            input(name='isOverByPassExam' type='radio' value=1)
-                            | 是
-                        span
-                            input(name='isOverByPassExam' type='radio' value=0)
-                            | 否
-        div(style='width: 100%;float: left;')
-            hr
+    .form.align-left.clearfix
+        div.aa
+            .form-row.pull-left.r-padding.w-half.row-block(style="float:none;display:inline-block;vertical-align:top;")
+                label.required 考试名称
+                .content
+                    input.input.tag-height#name(name='name' value=exam.name)
+                    .tips 0/30
+            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;")
+                label 开始时间
+                .content
+                    .relative
+                        input.input.date.tag-height#startTime(name='startTime' value=dateTime(exam.startTime))
+                        .iconfont.icon-riqi
+            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;width:24%;")
+                label 结束时间
+                .content
+                    .relative
+                        input.input.date.tag-height#endTime(name='endTime' value=dateTime(exam.endTime))
+                        .iconfont.icon-riqi
+        div.bb
+            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;")
+                label.required 考试时长（分）
+                .content > input.input.tag-height#duration(x-rule='required,number,keepDecimal:0,range:1:500' name='duration' value=exam.duration)
+            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;")
+                label.required 及格成绩
+                .content > input.input.tag-height#passScore(x-rule='required,number,keepDecimal:0,range:0:1000' name='passScore' value=exam.passScore)
+            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;width: 24%;")
+                label.required 考卷显示规则
+                .content
+                    select.input.tag-height.w-full#paperShowRule(name='paperShowRule')
+                        option(value='1')('selected')&if(paperShowRule.single) 一页一题
+                        option(value='2')('selected')&if(paperShowRule.mutiple) 一页多题         
+            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;width:24%;")
+                label.required 是否考试及格才算完成
+                .content.tag-height#is-over-by-pass-exam
+                    input(type="radio" name="isOverByPassExam" value=1)('checked')&if(isOverByPassExam.yes)
+                    label.m-right 是
+                    input(type="radio" name="isOverByPassExam" value=0)('checked')&if(isOverByPassExam.no)
+                    label 否

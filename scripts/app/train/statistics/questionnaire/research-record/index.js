@@ -10,11 +10,11 @@ exports.large = true;
 exports.store = {
     models: {
         researchQuestionarys: {
-            url: '../train/questionnaire-survey/research-record',
+            url: '../exam/research-record',
             type: 'pageable',
             root: 'items'
         },
-        researchQuestionary: { url: '../train/questionnaire-survey/research-questionary' },
+        researchQuestionary: { url: '../exam/research-activity/simple-data' },
         download: { url: '../train/questionnaire-survey/research-record-download' },
         state: { data: {} }
     },
@@ -24,19 +24,20 @@ exports.store = {
                 researchQuestionary = this.models.researchQuestionary,
                 state = this.models.state;
             researchQuestionarys.params = {};
-            researchQuestionarys.params.resourceId = payload.id;
-            researchQuestionarys.params.classId = payload.classId.classId;
-            researchQuestionary.params.resourceId = payload.id;
-            researchQuestionary.params.classId = payload.classId.classId;
-            state.data.resourceId = payload.id;
-            state.data.classId = payload.classId.classId;
+            researchQuestionarys.params.researchQuestionaryId = payload.resourceId;
+            researchQuestionarys.params.businessId = payload.classId.classId;
             researchQuestionary.clear();
+            researchQuestionary.set({ id: payload.resourceId });
+            researchQuestionary.params.businessId = payload.classId.classId;
+            state.data.resourceId = payload.resourceId;
+            state.data.classId = payload.classId.classId;
             this.get(researchQuestionary);
             return this.get(researchQuestionarys);
         },
         search: function(payload) {
             var researchQuestionarys = this.models.researchQuestionarys;
             researchQuestionarys.params = payload;
+            researchQuestionarys.clear();
             return this.get(researchQuestionarys);
         }
     }
