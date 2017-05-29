@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    helper = require('./app/util/helpers');
 exports.items = {
     pannel: 'pannel',
     swipe: ''
@@ -30,6 +31,7 @@ exports.store = {
                 photo.imageUrl = download.getFullUrl() + '?id=' + photo.attachmentId;
                 img.src = photo.imageUrl;
                 photo.image = img;
+                photo.title = obj.name + '&nbsp;&nbsp;&nbsp;&nbsp;' + helper.dateMinute(obj.createTime);
                 return photo;
             });
             this.models.photos.set(options.subject.photos);

@@ -29,7 +29,7 @@ exports.handlers = {
     viewUseDesc: function(id) {
         var progress = this.bindings.section.data.progress || {},
             attachments = progress.sectionAttachments,
-            attachment = _.find(attachments, { attachmentId: id });
+            attachment = _.find(attachments, { id: id });
         this.module.dispatch('preview', {
             flag: 'useDesc',
             description: attachment.description
