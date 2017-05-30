@@ -6,7 +6,7 @@ module > .choise
 
 view('content')
     p.question
-        span > a.normal(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index)
         @echo(state.content)
     echo('答：' state.answerRecord.answer)
 
