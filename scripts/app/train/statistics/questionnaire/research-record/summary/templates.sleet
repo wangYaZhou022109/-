@@ -1,27 +1,39 @@
 #! handlebars
-module
-    .exam-base-info.add-info-popup
-        div(data-region='title')
-        .row
-            .col-sm-9.statistics-left
-                div(data-region='main')
-            .col-sm-3
-                div(data-region='side')
 
-view('title')
-    .statistics-top > echo(summaryDetail.name)
+module > .achievement-content.content
+    #  div(data-region='title')
+    .achievement-side(data-region='side')
+    .achievement-main(data-region='main')
+
+#  view('title')
+
 
 view('main')
-    each(dimensions)
-        h3 > echo(dimensionIndex '、' name)
-        ul.statistics-ul
-            each(questions)
-                li
-                    div(data-dynamic-key=id)
+    .achievement-main-head
+        .col-sm-7.text-overflow > .h3
+            strong > echo(summaryDetail.name)
+    .preview-content
+        each(dimensions)
+            if(dimensionIndex)
+                h3 > echo(dimensionIndex '、' name)
+            ul.statistics-ul
+                each(questions)
+                    li
+                        div(data-dynamic-key=id)
 
 view('side')
-    ul.p-top.m-top.statistics-right > each(dimensions)
-        li
-            echo(name)
-            .research-list-num.clearfix.m-top > each(questions)
-                span > echo(questionIndex)
+    .achievement-tips.pointer#questionaryDetail
+        | 问卷须知
+        i.iconfont.icon-info
+
+    .achievement-preview > ul > each(dimensions)
+        li.border.bottom(id='list-item-' + @index)
+            label > echo(name)
+            div(class='min-btn-groups') > each(questions)
+                compare(status 'eq' 'init')
+                    a.num.min-btn(href='#mlj-' + id id='q-' + id) > echo(questionIndex)
+                compare(status 'eq' 'current')
+                    a.num.min-btn.correct(href='#mlj-' + id id='q-' + id) > echo(questionIndex)
+
+view('description')
+    @echo(summaryDetail.questionaryDetail)

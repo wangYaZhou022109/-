@@ -12,7 +12,7 @@ view('title')
     .pull-left.title > echo(researchRecord.researchQuestionary.name)
     .text-right
         ul.head-info.inline-block
-            li.border.right > echo(memberTitle ': ' + researchRecord.member.name)
+            li.border.right > echo(memberTitle ': ' + researchRecord.member.fullName)
 
 view('main')
     .preview-content

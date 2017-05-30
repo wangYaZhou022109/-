@@ -114,7 +114,7 @@ exports.buttons = function() {
                 questionValidate = mod.isValidate(),
                 result;
 
-            if (!mainValidate && !questionValidate) {
+            if (!mainValidate || !questionValidate) {
                 return false;
             }
 

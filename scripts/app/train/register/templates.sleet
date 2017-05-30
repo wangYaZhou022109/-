@@ -1,0 +1,31 @@
+#!handlebars
+
+module > .notloggin-page
+    .notloggin-title(data-region="title")
+    .notloggin-content
+        .notloggin-form.border.around
+            .notloggin-info.text-center
+                div(data-region='step')
+                div(data-region='main')
+
+view('title') > .logobar.border.bottom
+    span l
+    span o
+    span g
+    span o
+
+view('step')
+    .besure.m-right.inline-block#step-1
+        img(src='images/left.jpg')
+        span 报名码确认
+    if(currentStep.phone)
+        .info.inline-block#step-3
+            img(src='images/right2.jpg')
+            span 报名信息
+    else
+        .info.info2.inline-block
+            img(src='images/right.jpg')
+            span 报名信息
+
+view('main')
+    div(data-dynamic-key=state.step)

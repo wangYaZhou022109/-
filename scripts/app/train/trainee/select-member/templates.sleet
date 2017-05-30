@@ -6,7 +6,7 @@ module
     .content-main(data-region='content')
 
 view('toolbox') > form.vertical
-    echo('账号')
+    echo('员工编号')
     input(name='name')
     echo('姓名')
     input(name='fullName')

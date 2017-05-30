@@ -1,15 +1,14 @@
 #!handlebars
 
-module > .choise
+module > .choise.col-sm-12
     div(data-region='content')
     .options(data-region='subs')
 
 
 view('content')
-    p.question(name='mlj' + state.id) > @echo(state.content)
+    a.inline-block(name='question-' + state.id) > echo(state.index '、') + @echo(state.content)
 
 view('subs')
     each(subs)
-        echo('(' index ')')
+        # echo('(' index ')')
         div(data-dynamic-key=id)
-

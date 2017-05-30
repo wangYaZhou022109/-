@@ -1,40 +1,38 @@
 #!handlebars
 
-module > .choise
+module > .choise.col-sm-12
     div(data-region='content')
     .options(data-region='options')
 
 view('content')
-    p.question(name='mlj' + state.id) > @echo(state.content)
+    a.inline-block(name='question-' + state.id) > echo(state.index '、') + @echo(state.content)
 
 
 view('options')
-    .answer
+    .answer.m-top
         ul > each(state.options)
             li(id='item-' + index)
                 label.no-margin(for='answer-item-' + i)
                     .answer-options > .option-num > @echo(code)
                     .answer-options > @echo(content)
         form.vertical
-            .row
-                .col-md-3
-                    input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
-                .col-md-3
-                    div(id='error')
+            if(isShowDetail)
+                .row
+                    .col-md-3
+                        input.input(id='answer' name='value' placeholder='请输入顺序' value=answer 'disabled')
+                    .col-md-3
+                        div(id='error')
+            else
+                .row
+                    .col-md-3
+                        input.input(id='answer' name='value' placeholder='请输入顺序' value=answer)
+                    .col-md-3
+                        div(id='error')
 
-    if(isShowDetail)
-        .show-answer
-            .clearfix
-                .pull-left > .common-title
-                    if(state.isShowAnswer)
+        if(isShowDetail)
+            .show-answer
+                .clearfix
+                    .pull-left > .common-title
                         echo('答案：' state.answer)
-                .text-right
-                    if(state.isShowGainScore)
-                        span > echo('本题得分：' state.gainScore)
-                    span.layout-ml > echo('本题易错率：' state.errorRate '%')
-    else
-        .show-answer
-            .clearfix
-                .pull-left > .common-title
-                    echo('答案：' state.answer)
-
+                    .text-right
+                        span > echo('本题得分：' state.gainScore) + echo('本题易错率: ' state.errorRate)

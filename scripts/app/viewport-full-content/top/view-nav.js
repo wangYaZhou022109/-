@@ -1,21 +1,19 @@
 var $ = require('jquery'),
     _ = require('lodash/collection');
 exports.bindings = {
-    menus: true,
     navs: true
 };
 
 exports.dataForTemplate = {
-    menus: function(data) {
-        return data.menus;
-    },
     navs: function(data) {
-        var navs = data.navs || [];
+        var url,
+            navs = data.navs || [];
         navs = _.reject(navs, ['show', 0]);
         _.map(navs, function(item) {
             var r = item;
             r.link = false;
-            if (r.url.indexOf('http') > -1) {
+            url = r.url || '';
+            if (url.indexOf('http') > -1) {
                 r.link = true;
             }
         });

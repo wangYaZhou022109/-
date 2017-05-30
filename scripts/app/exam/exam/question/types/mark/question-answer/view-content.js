@@ -16,7 +16,7 @@ exports.dataForTemplate = {
             });
         }
         return D.assign(state, {
-            index: state.index + '：'
+            index: state.index + '、'
         });
     }
 };

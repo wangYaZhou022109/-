@@ -39,7 +39,7 @@ exports.changeFile = function() {
         };
     });
     state.data = items[0];
-    state.changed();
+    // state.changed();
     this.module.dispatch('importFile', { attachmentId: items[0].attachmentId, classId: classId });
-    this.app.viewport.closeModal();
+    // this.app.viewport.closeModal();
 };

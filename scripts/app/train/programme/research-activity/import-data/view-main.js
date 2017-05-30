@@ -1,6 +1,7 @@
 exports.bindings = {
     exportQuestionTemplate: true,
-    importData: true
+    importData: true,
+    state: false
 };
 
 exports.events = {
@@ -23,16 +24,18 @@ exports.handlers = {
 exports.dataForTemplate = {
     downloadTemplateUrl: function() {
         var model = this.bindings.exportQuestionTemplate,
+            state = this.bindings.state.data,
             url = model.getFullUrl() + '?',
             token = this.app.global.OAuth.token.access_token;
-        url += ('exportType=1&access_token=' + token);
+        url += ('exportType=1&type=' + state.type + '&access_token=' + token);
         return url;
     },
     errorDataUrl: function() {
         var model = this.bindings.exportQuestionTemplate,
             url = model.getFullUrl() + '?',
+            state = this.bindings.state.data,
             token = this.app.global.OAuth.token.access_token;
-        url += ('exportType=3&access_token=' + token);
+        url += ('exportType=3&type=' + state.type + '&access_token=' + token);
         return url;
     }
 };

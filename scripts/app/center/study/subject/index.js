@@ -22,7 +22,7 @@ exports.store = {
                 progressList = this.models.progressList;
             progressList.clear();
             searchModel.data.businessType = 2;
-            searchModel.data.registerTimeOrder = 'desc';
+            searchModel.data.studyTimeOrder = 'desc';
             D.assign(progressList.params, searchModel.data);
             return this.get(progressList);
         },

@@ -45,7 +45,7 @@ view('main')
                 td > date(classInfo.arriveDate)
                 td > date(classInfo.returnDate)
                 td > map('project-approval-result' status)
-                td > a(href='#/train/index/'+id) > echo('进入管理')
+                td > a(href='#/train/sponsor/'+id) > echo('进入管理')
                 else
                     tr > td(colspan='10') > p.text-center > string('no-data')
         #pager.pagination

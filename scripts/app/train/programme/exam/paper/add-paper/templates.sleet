@@ -1,72 +1,71 @@
 #!handlebars
-module > .exam-base-info.add-info-popup
-    div(data-region='info')
-    div(data-region='summary')
-    br
-    div(data-region='question-classes')
-
-
-view('info') > form.vertical
-    .row
-        .col-sm-12
-            .choose-question
-                .btn#select-question > .i.pe-7s-photo-gallery.pe-va.m-left + span.m-left.m-right 选择试题
-                .btn#temporary-question > .i.pe-7s-notebook.pe-va.m-left + span.m-left.m-right 临时试题
-                .btn#import-question > .i.pe-7s-cloud-download.pe-va.m-left + span.m-left.m-right 导入试题
+module > .addexam-page > .temporarypaper2-page
+    .temporarypaper2-title(data-region='summary')
+    .temporarypaper2-content(data-region='question-classes')
 
 view('summary')
     form.vertical
-        .add-paper-list
-            .bottom.dashed
-                .paper-mark.clearfix
-                    .choose-question.text-right.pull-right
-                        span 试题总数：
-                        b > echo(paper.questionNum)
-                        span 试卷总分：
-                        b > echo(paper.totalScore)
-                .container-fluid > .row.list
-                    table.table
-                        thead > tr
-                            th 类型
-                            each(summary.rows)
-                                th > echo(typeName)
-                            th 全部
-                        tbody > tr
-                            th 数量
-                            each(summary.rows)
-                                td > echo(total.amount)
-                            td > echo(paper.questionNum)
-                        tbody > tr
-                            th 分数
-                            each(summary.rows)
-                                td > echo(total.score)
-                            td > echo(paper.totalScore)
-            #  ul > each(summary.rows)
-            #      li
-            #          span.title > echo(typeName ':')
-            #          span > echo(total.amount '道共' total.score '分')
+        .layout-mt-small.clearfix
+            .test.pull-left
+                .btn#select-question
+                    i.iconfont.icon-note.m-right
+                    span 选择试题
+                .btn#temporary-question
+                    i.iconfont.icon-tag.m-right
+                    span 临时试题
+                .btn#import-question
+                    i.iconfont.icon-cloud-up.m-right
+                    span 导入试题
+            .pull-right
+                span 试题总数：
+                span.strong.m-right > echo(paper.questionNum)
+                span 试卷总分：
+                span.strong > echo(paper.totalScore)
+        .layout-mt-small
+            table.table
+                thead > tr
+                    th 类型
+                    each(summary.rows)
+                        th.text-main-color > echo(typeName)
+                    th.custom-color-3 全部
+                tbody > tr
+                    th 数量
+                    each(summary.rows)
+                        td > echo(total.amount)
+                    td > echo(paper.questionNum)
+                tbody > tr
+                    th 分数
+                    each(summary.rows)
+                        td > echo(total.score)
+                    td > echo(paper.totalScore)
+                #  ul > each(summary.rows)
+                #      li
+                #          span.title > echo(typeName ':')
+                #          span > echo(total.amount '道共' total.score '分')
 
-view('question-classes') > form.vertical
-    ul.question-list.paper > each(paperClassQuestions)
-        li.question-item > .row
-            .col-md-12
+view('question-classes')
+    form.vertical
+        ul.layout-mt-small.border.around
+            each(paperClassQuestions) > li.test-box.test-1
                 div(data-dynamic-key=question.id)
-            .div(style='width: 100%;')
-                .inline-block.m-right
-                    b.error 题目难度：
-                    echo(question.difficulty)
-                .input-box.inline-block
-                    .text 题目分数：
-                    input.input.input-left(id ='score-' + questionId name ='score'  placeholder='请输入题目分数（分）' value=score x-rule='required,digits,min:0')
-                .btn(id='move-up-' + question.id style='float: right;') 上移
-                .btn(id='move-down-' + question.id style='float: right;') 下移
-                compare(isFromSelected 'eq' 0)
-                    .btn(id='edit-question-' + question.id style='float: right;') > i.pe-7s-note.pe-2x.pe-va.pointer
-                .btn(id='remove-question-' + question.id style='float: right;') 移除
-    .top-bottom(style='position: fixed;right: var(--space);bottom: calc(var(--space)*15);')
-        .back-box#backToTop(style='background-color: rgba(255,255,255,.5);width: 50px;height: 50px;padding-top: 3px;margin-bottom: 10px;border: 1px solid #ddd;')
-            a(style='color: #363a3e;line-height: 20px;text-align: center;display: block;') 返回
-            a 顶部
-        .back-box#goToBottom(style='background-color: rgba(255,255,255,.5);width: 50px;height: 50px;padding-top: 3px;margin-bottom: 10px;border: 1px solid #ddd;')
-            a 返回
-            a 底部
+                .clearfix
+                    .pull-left
+                        .inline-block.m-right
+                            b.error 题目难度：
+                            echo(question.difficulty)
+                        .input-box.inline-block
+                            .text 题目分数：
+                            input.input.r-left(style='padding-left: 90px;')(id ='score-' + questionId name ='score'  placeholder='请输入题目分数（分）' value=score x-rule='required,digits,min:0')
+                    .pull-right.m-top
+                        i.pointer.m-right.iconfont.icon-arrow-up-solid.gray(id='move-up-' + question.id)
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.gray(id='move-down-' + question.id)
+                        compare(isFromSelected 'eq' 0)
+                            i.pointer.m-right.iconfont.icon-edit-solid(id='edit-question-' + question.id)
+                        i.iconfont.icon-trash(id='remove-question-' + question.id)
+    #  .top-bottom
+    #      .back-box#backToTop
+    #          a 返回
+    #          a 顶部
+    #      .back-box#goToBottom
+    #          a 返回
+    #          a 底部

@@ -1,48 +1,47 @@
 #!handlebars
 
-module > .choise > form.vertical
+module > form.vertical
     div(data-region='content')
-    .options(data-region='options')
+    div(data-region='options')
     div(data-region='score')
 
 view('content')
-    .row > .col-sm-12
-        label(class='required') 试题信息
-        textarea.input#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
-    if(showDiffculty)
-        .row > .col-sm-12
-            label(class='required') 难易度
-            select.input#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
-                option(value=key)('selected')&if(selected) > echo(value)
+    .choosequestion
+        .form.align-left
+            .form-row
+                label.required 试题信息
+                textarea.w-full#content(name='content' x-rule='required,maxLength:3000' x-marker='rich-text' x-target='content')
+            if(showDiffculty)
+                .form-row
+                    label.required 难易度
+                    select.input.w-full#difficulty(name='difficulty' x-rule='required' x-marker='selectize' readonly='readonly') > each(difficultys)
+                        option(value=key)('selected')&if(selected) > echo(value)
 
 view('options')
-    label
-        | 选项
+    .choosequestion-page > .choosequestion > .layout-mt-small
+        label 选项
         a.m-left#add(href='javascript:;') 添加选项
-    ul.row > each(options)
-        li.col-sm-6.options(id='item-' + index)
-            .input-box
-                .text
-                    span.list-option > echo('选项' + code ':')
-                if(isRichText)
-                    .input.block.choise-content
-                        @echo(content)
-                        input(type='hidden' id='content-' + index value=content)
-                else
-                    textarea(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3 cols='100%') > echo(content)
-            div(style='margin-top: -1px;position: relative;padding: 5px 10px;border: 1px solid transparent;overflow: hidden;')
-                div(style='float: left;')
-                    span.set-answer(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected'))
-                        span.tick > .pe-7s-check
-                        echo('设为答案')
-                div(style='float: right;')
-                    span(data-dynamic-key=index)
-                    a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
+        ul.layout-mt-small
+            each(options) > li.choosequestion-item.w-half.inline-block(id='item-' + index)
+                .relative
+                    .text > span.strong > echo('选项' + code ':')
+                    if(isRichText)
+                        .input.block.choise-content(style='padding-left: 5em;')
+                            @echo(content)
+                            input(type='hidden' id='content-' + index value=content)
+                    else
+                        textarea.input.block(placeholder='输入描述' id='content-' + index data-name='index' data-value=index rows=3) > echo(content)
+                .set-row.answer.clearfix
+                    .pull-left.setanswer.pointer(id='is-answer-' + index data-name='index' data-value=index)(class='pointer m-right ' + if(isAnswer 'selected')) 设为答案
+                    .pull-right.text-tips.m-top
+                        span(data-dynamic-key=index)
+                        a(href='javascript:;' id='remove-' + index data-name='index' data-value=index) 删除
  
 
 view('score')
     if(showScore)
-        .row
-            .col-sm-6
-                label(class='required') 试题分数
-                input.input(id='score' width='40%' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值,可保留一位小数')
+        .choosequestion
+            .form.align-left
+                .form-row.w-half
+                    label.required 试题分数
+                    .content > input.w-half(id='score' value=bottom.score x-rule='required,number,interval:0:1:100:1,keepDecimal:1' placeholder='输入0-100之间的分值,可保留一位小数')

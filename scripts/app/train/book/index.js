@@ -12,8 +12,10 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var project = this.models.projectInfo,
-                me = this;
+                me = this,
+                state = this.models.state;
             project.set(payload);
+            state.data.role = payload.role;
             return me.get(project);
         },
         submit: function(payload) {
@@ -25,21 +27,10 @@ exports.store = {
                 this.app.message.success('提交成功');
                 me.get(project);
             });
-        },
-        changeDate: function(payload) {
-            var state = this.models.state,
-                projectInfo = this.models.projectInfo.data,
-                classInfo;
-            classInfo = projectInfo.classInfo;
-            if (classInfo) {
-                classInfo.arriveDate = new Date(payload.arriveDate).getTime();
-                classInfo.returnDate = new Date(payload.backDate).getTime();
-            }
-            state.changed();
         }
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state.id });
+    return this.dispatch('init', { id: this.renderOptions.state.id, role: this.renderOptions.state.role });
 };

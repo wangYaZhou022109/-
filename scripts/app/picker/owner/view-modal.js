@@ -9,14 +9,22 @@ exports.components = [{
 }];
 
 exports.buttons = [{
-    text: '确定选择',
+    text: '确定',
     fn: function() {
-        var selected = this.components.tree.getSelectedNode();
+        var me = this,
+            selected = this.components.tree.getSelectedNode();
         if (!selected.length) {
             this.app.message.error('请选择一个部门');
             return false;
         }
-        this.module.dispatch('selectChanged', selected[0]);
-        return true;
+        return me.module.dispatch('selectTrigger', selected[0]).then(function(data) {
+            return data ? me.module.dispatch('selectChanged', selected[0]) : false;
+        });
     }
 }];
+
+exports.mixin = {
+    rootNode: function() {
+        return this.components.tree.selectRoot();
+    }
+};

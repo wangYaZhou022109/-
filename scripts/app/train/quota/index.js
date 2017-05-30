@@ -22,6 +22,7 @@ exports.store = {
                 quotaList = this.models.quotaList,
                 me = this;
             state.data.classId = payload.id;
+            state.data.role = payload.role;
             quotaInfo.params.classId = payload.id;
             this.get(quotaInfo).then(function() {
                 quotaList.params.classId = payload.id;
@@ -98,5 +99,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state.classId });
+    return this.dispatch('init', { id: this.renderOptions.state.classId, role: this.renderOptions.state.role });
 };

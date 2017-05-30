@@ -8,9 +8,11 @@ exports.items = {
     'human/organization/navigate-tree': { isModule: true, region: 'left', uri: 'human/member' }
 };
 
+exports.large = true;
+
 exports.store = {
     models: {
-        members: { url: '../human/member', type: 'pageable', root: 'items' },
+        members: { url: '../human/member/picker-for-train', type: 'pageable', root: 'items' },
         state: { data: [] },
         search: {
             data: {},

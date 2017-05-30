@@ -1,7 +1,7 @@
 #!handlebars
 
 module > .classmanage-page
-    classmanage(data-region='comment')
+    .div.classmanage(data-region='comment' style='margin-left:6%;margin-right:6%;')
 
 view('comment')
     br

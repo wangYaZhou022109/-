@@ -20,11 +20,15 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
+            var me = this;
             if (payload.id) {
                 this.models.exam.data = { id: payload.id };
-                return this.get(this.models.exam);
+                return this.get(this.models.exam).then(function() {
+                    if (payload.name) D.assign(me.models.exam.data, { name: payload.name });
+                    me.models.exam.changed();
+                });
             }
-            return this.models.exam.clear();
+            return '';
         },
         save: function(payload) {
             var otherModuelExam = this.models.otherModuelExam,
@@ -32,18 +36,33 @@ exports.store = {
                 me = this;
             D.assign(otherModuelExam.data, exam.data, payload);
             return this.save(otherModuelExam).then(function() {
-                me.app.message.success('操作成功！');
+                me.app.message.success('保存成功！');
             });
+        },
+        changeName: function(payload) {
+            D.assign(this.models.exam.data, payload);
+            this.module.items[PAPER_MODULE].setData(payload);
         }
     }
 };
 
+exports.beforeRender = function() {
+    var exam = this.store.models.exam,
+        otherModuelExam = this.store.models.otherModuelExam;
+    exam.clear();
+    otherModuelExam.clear();
+};
+
 exports.afterRender = function() {
-    var that = this;
+    var that = this,
+        exam = this.store.models.exam;
+
     return this.store.module.dispatch('init', this.renderOptions).then(function() {
         var paperItem = that.items[PAPER_MODULE];
         that.regions.paper.show(paperItem, {
-            exam: that.store.models.exam.data || {}
+            hidePaperShowRule: 1,
+            exam: exam.data.id ? exam.data : { paperShowRule: 1, paperSortRule: 1 },
+            url: that.renderOptions.url
         });
     });
 };
@@ -57,13 +76,16 @@ exports.buttons = [{
             paperData = paperItem.getData(),
             inputScore;
 
+        if (!payload.paperClassId) {
+            that.app.message.error('请选择试卷');
+        }
         if (!paperItem.isValidator()) {
             return false;
         }
 
         inputScore = 0;
 
-        if (that.items.main.validate()) {
+        if (that.items.main.validate() && that.items.main.check()) {
             if (payload.paperClassId) {
                 inputScore = payload.passScore * 100;
                 if (inputScore > paperData.paperClass.totalScore) {
@@ -74,7 +96,7 @@ exports.buttons = [{
                     sourceType: that.renderOptions.sourceType || REMOTE_COURSE_TYPE
                 });
                 return that.store.module.dispatch('save', payload).then(function() {
-                    var examData = D.assign(that.store.models.otherModuelExam.data, payload);
+                    var examData = D.assign(that.store.models.otherModuelExam.data, payload, { isAdd: 1 });
                     callback && callback(examData);
                 });
             }

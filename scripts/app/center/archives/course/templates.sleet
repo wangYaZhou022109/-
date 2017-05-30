@@ -19,7 +19,8 @@ view('main')
                     th > setting('person.archives.course.source')
                     th > setting('person.archives.course.select')
                     th > setting('person.archives.course.startTime')
-                    th > setting('person.archives.course.finishTime')
+                    compare(businessType 'eq' '0')
+                        th > setting('person.archives.course.finishTime')
                     th > setting('person.archives.course.totalTime')
                     compare(businessType 'eq' '0')
                         th > setting('person.archives.course.status')
@@ -34,11 +35,12 @@ view('main')
                             echo(beginTimeStr)
                         else
                             echo('—')
-                    td
-                        if(finishTime)
-                            echo(finishTimeStr)
-                        else
-                            echo('—')
+                    compare(busType 'eq' '0')
+                        td
+                            if(finishTime)
+                                echo(finishTimeStr)
+                            else
+                                echo('—')
                     td > secondToMinute(studyTotalTime)
                     compare(busType 'eq' '0')
                         td > map('course-info-study-status' finishStatus)

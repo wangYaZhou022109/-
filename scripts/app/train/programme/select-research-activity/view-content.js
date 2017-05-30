@@ -21,7 +21,7 @@ exports.dataForTemplate = {
 };
 
 exports.components = [
-    { id: 'pager', name: 'background-pager', options: { model: 'researchActivities' } }
+    { id: 'pager', name: 'pager', options: { model: 'researchActivities' } }
 ];
 
 exports.mixin = {
@@ -44,5 +44,7 @@ exports.handlers = {
             callback: function() {
             }
         });
+        // var url = '#/train/programme/research-activity/preview-questionary/' + id;
+        // window.open(url, '_blank');
     }
 };

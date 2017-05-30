@@ -11,63 +11,52 @@ view('main')
                 i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 要求：
-                .item.active > span 全部
-                .item > span 开班中
-                .item > span 待开始
-                .item > span 待审核
-                .item > span 已结束
+                .inline-block
+                    .item(id='item-0')(class = if(isAll 'active')) > span 全部
+                    .item(id='item-1')(class = if(isNotFinish 'active')) > span 开班中
+                    .item(id='item-2')(class = if(isNotStart 'active')) > span 待开始
+                    .item > span 待审核
+                    .item(id='item-3')(class = if(isFinish 'active')) > span 已结束
         .list-search
-            input.input(placeholder='请输入您要搜索的内容名称')
-            .btn > i.iconfont.icon-search
-        ul.list-text.border.top
+            input.input#name(name='name' value=state.name placeholder='请输入您要搜索的内容名称')
+            .btn#search > i.iconfont.icon-search
+        ul.list-text.border.top > each(classInfo)
             li.border.bottom
                 .title-row
                     i.iconfont.icon-class
-                    .inline-block.title 中国品牌第一人李光斗脱口秀
-                    .time 开班起止时间：2017-03-01 10:00 至 2017-03-05 14:00
-                .state 开班中
+                    .inline-block.title > echo(className)
+                    .time > echo('开班起止时间：') + dateMinute(arriveDate) + echo('至') + dateMinute(returnDate)
+                .state
+                    compare(status 'eq' 1)
+                        | 开班中
+                    compare(status 'eq' 2)
+                        | 待开始
+                    compare(status 'eq' 3)
+                        | 已结束
                 .btn-row
-                    .btn 进入班级
-                .info-row
-                    .info-block
-                        i.iconfont.icon-bus
-                        .h5 返程日班车统计
-                        .sub-text.small-font 截止时间：2017-03-04 16:00
-                    .info-block
-                        i.iconfont.icon-exam
-                        .h5 班级考试
-                        .sub-text.small-font 截止时间：2017-03-04 16:00
-                    .info-block
-                        i.iconfont.icon-smile
-                        .h5 学员满意度评估
-                        .sub-text.small-font 截止时间：2017-03-04 16:00
+                    compare(status 'eq' 1)
+                        .btn 进入班级
+                    else
+                        .btn 查看详情
+                    #  compare(status 'eq' 2)
+                    #      .btn 查看详情
+                .info-row(style='margin-top: 1.3em;')
+                    each(busList)
+                        compare(size 'eq' 1)
+                            .info-block.m-top
+                                i.iconfont.icon-bus
+                                .h5(id='busView-' + id busClassId = classId) > echo(name)
+                                .sub-text.small-font > echo('截止时间：') + dateMinute(endTime)
+                    each(classEvaluate)
+                        compare(pass 'eq' 1)
+                            compare(type 'eq' 1)
+                                .info-block.m-top
+                                    i.iconfont.icon-exam
+                                    .h5(id='toExam-' + resourceId) > echo(resourceName)
+                                    .sub-text.small-font > echo('截止时间：') + dateMinute(endTime)
+                            compare(type 'eq' 4)
+                                .info-block.m-top
+                                    i.iconfont.icon-smile
+                                    .h5(id='satisfaction-' + resourceId) > echo(resourceName)
+                                    .sub-text.small-font > echo('截止时间：') + dateMinute(endTime)
 
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-class
-                    .inline-block.title 思维导图软件·自学速成指南
-                    .time 开班起止时间：2017-03-01 10:00 至 2017-03-05 14:00
-                .state 待开始
-                .btn-row
-                    .btn 查看详情
-                .info-row
-                    .info-block
-                        i.iconfont.icon-bus
-                        .h5 返程日班车统计
-                        .sub-text.small-font 截止时间：2017-03-04 16:00
-
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-class
-                    .inline-block.title 经济学人的动态图表与交互设计
-                    .time 开班起止时间：2017-03-01 10:00 至 2017-03-05 14:00
-                .state 待审核
-                .btn-row
-            li.border.bottom
-                .title-row
-                    i.iconfont.icon-class
-                    .inline-block.title 隐藏在互联网并购潮背后的推手竟然是TA？
-                    .time 开班起止时间：2017-03-01 10:00 至 2017-03-05 14:00
-                .state 已结束
-                .btn-row
-                    .btn 查看详情
