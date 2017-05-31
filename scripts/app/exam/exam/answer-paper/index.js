@@ -199,7 +199,7 @@ var setOptions = {
                 url: '../exam/exam/decrypt-key'
             },
             examRecord: {
-                url: '../exam/exam-record/cache'
+                url: '../exam/exam/exam-record-cache'
             }
         },
         callbacks: {
