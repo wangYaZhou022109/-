@@ -16,7 +16,7 @@ exports.store = {
         down: { url: '../human/file/download' },
         page: {
             data: [],
-            params: { page: 1, size: 10 },
+            params: { page: 1, size: 2 },
             mixin: {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;

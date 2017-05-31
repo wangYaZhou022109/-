@@ -11,28 +11,8 @@ view('audit')
     .detail1-person.layout-mt-small
         span > echo(audit.member.fullName)
         span 分享时间：
-        span > date(audit.createTime)
+        span > dateTime(audit.createTime)
     .detail1-alink.layout-mt-smal > echo(audit.topicStr)
     input.input(name='id' type='hidden' value=audit.id)
     input.input(name='questionId' type='hidden' value=audit.question.id)
     textarea.w-full.layout-mt-small(rows="5" readonly = readonly) > echo(audit.auditNote)
-#  module > .course-page
-#      div(data-region='audit' style='height:100%;')
-
-#  view('audit') > form.vertical
-#      echo('提问审核')
-#      echo(audit.question.title)
-#      br
-#      echo(audit.question.content)
-#      br
-#      echo(audit.member.fullName)
-#      br
-#      echo('提问时间：')
-#      date(audit.createTime)
-#      br
-#      echo('关联话题')
-#      echo(audit.topicStr)
-#      input.input(name='id' type='hidden' value=audit.id)
-#      echo('审核备注:')
-#      echo(audit.auditNote)
-
