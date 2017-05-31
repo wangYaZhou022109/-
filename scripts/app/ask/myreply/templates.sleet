@@ -183,6 +183,12 @@ view('list')
                                         else
                                             .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + question.praiseNum +'）')
                                         .item(id='discuss-' + id ) > string('publish') +  echo('（' + questionDiscuss.replyNum +'）')
+                                        .item > .share-bar
+                                            .drop-down-wrapper
+                                                span 分享
+                                                form.drop-down-content > .content
+                                                    .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                    .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                         .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')  
                                         form.comment-reply(id ='comment-reply-' + questionDiscuss.id)
                                             textarea.input.w-full.block(rows=1 name='content' value='')
