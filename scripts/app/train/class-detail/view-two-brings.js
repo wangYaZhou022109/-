@@ -10,10 +10,14 @@ exports.bindings = {
     signUpInfo: true
 };
 
-exports.buttons = [{
-    text: '提交',
-    action: 'commitTwoBrings',
-}];
+// exports.buttons = [{
+//     text: '提交',
+//     action: 'commitTwoBrings',
+// }];
+
+exports.actions = {
+    'click save': 'commitTwoBrings'
+};
 
 exports.dataForActions = {
     commitTwoBrings: function() {
@@ -51,6 +55,7 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     commitTwoBrings: function() {
         this.app.message.success('提交成功！');
+        this.module.dispatch('twoBring');
     }
 };
 

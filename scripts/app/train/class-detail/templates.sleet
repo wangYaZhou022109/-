@@ -223,6 +223,9 @@ view('two-brings') > form.vertical
                 .content > input.border.bottom.w-full(name='title2'  value=twoBringsResult.title2  x-rule='required')
             .h5.m-top 主题：
             textarea.w-full.m-top#content2(placeholder="输入问题内容" name='content2' rows="5" x-rule='required') > echo(twoBringsResult.content2)
+        p.text-center
+            compare(twoBringsResult.id 'eq' null)
+                btn.btn(id='save') > echo('提交')
 
 view('questionnaire') > .surveyexam-page > .surveyexam
     each(questionnaire)
