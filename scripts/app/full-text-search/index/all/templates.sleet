@@ -42,7 +42,7 @@ view('main') > .container
                                 .item(title='浏览') > i.iconfont.icon-view + echo(visits)
                                 .item(title='评分') > i.iconfont.icon-star + echo(avgScore)
 
-    compare(courses.length 'gt' 0)
+    compare(subjects.length 'gt' 0)
         .search-content
             .content-type
                 .h3.inline-block 专题
