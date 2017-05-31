@@ -20,13 +20,15 @@ exports.store = {
         follow: {
             url: '../ask-bar/question-details/boutique'
         },
-        expert: { url: '../ask-bar/expert/active-expert' }
+        expert: { url: '../ask-bar/expert/active-expert' },
+        hotquestion: { url: '../ask-bar/question/browseRanking' }
     },
     callbacks: {
         init: function(paylaod) {
             var topicdetail = this.models.topicdetail;
             var topicname = this.models.topicname;
             var expert = this.models.expert;
+            var hotquestion = this.models.hotquestion;
             var state = this.models.state;
             var id = paylaod.id;
             var me = this;
@@ -40,10 +42,11 @@ exports.store = {
             .then(function() {
                 topicname.params = id;
                 expert.set({ id: 'undefined', size: 6 });
+                hotquestion.set({ size: 8 });
                 // topic.params.ids = params;
                 // me.get(expert);
                 // me.get(question);
-                me.chain([me.get(topicname), me.post(expert)]);
+                me.chain([me.get(topicname), me.post(expert), me.post(hotquestion)]);
                 // return me.get(topicname);
             });
         },

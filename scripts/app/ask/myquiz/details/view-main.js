@@ -7,7 +7,7 @@ exports.bindings = {
     state: false,
     details: true,
     question: true,
-    down: false
+    down: false,
 };
 exports.events = {
     'click discuss-answer-*': 'discussanswer',
@@ -240,6 +240,7 @@ exports.dataForTemplate = {
             date = new Date(data.details.createTime);
         // console.log(data);
         var url = obj.details.member.headPortrait;
+        var me = this;
         // console.log(obj.details.questionDiscussList.member.headPortrait);
         var defultImg = 'images/default-userpic.png',
             downUrl = this.bindings.down.getFullUrl();
@@ -249,6 +250,15 @@ exports.dataForTemplate = {
                 r.headPhoto = r.member.headPortrait ? (downUrl + '?id=' + r.member.headPortrait) : defultImg;
             }
         });
+        _.map(obj.details.questionAttachList || [], function(attach) {
+            var obj1 = attach;
+            obj1.downUrl = me.bindings.down.getFullUrl() + '?id=' + obj1.viewName;
+            obj1.preview = 1;
+            if (obj1.attachmentType === 'application/octet-stream') {
+                obj1.preview = 0;
+            }
+            return obj1;
+        });
         if (typeof url === 'undefined' || url === null || url === '') {
             obj.details.member.headPortrait = 'images/default-userpic.png';
         } else {
@@ -256,6 +266,7 @@ exports.dataForTemplate = {
         }
         obj.details.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
         + '   ' + date.getHours() + ':' + date.getMinutes();
+        console.log(obj);
         return obj.details;
     },
     haveAttachments: function(data) {
