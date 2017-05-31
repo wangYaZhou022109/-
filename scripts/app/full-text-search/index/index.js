@@ -9,7 +9,8 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: {}
+        state: {},
+        history: {}
     },
     callbacks: {
         init: function() {
@@ -54,11 +55,11 @@ exports.store = {
         },
         clearHistory: function() {
             viewUtil.clearSearchHistory();
-            this.models.state.changed();
+            this.models.history.changed();
         },
         removeHistory: function(payload) {
             viewUtil.removeSearchHistory(payload);
-            this.models.state.changed();
+            this.models.history.changed();
         }
     }
 };
