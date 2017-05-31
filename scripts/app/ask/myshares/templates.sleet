@@ -108,7 +108,7 @@ view('list')
                                     else
                                         .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
                                             string('praise') +  echo('（'+ praiseNum +'）') 
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
+                                    .item(id='discuss-' + id ) > echo('参与讨论') +  echo('(' + shareReplyNum +')')
                                     compare(careNum 'eq' 0)
                                         .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar

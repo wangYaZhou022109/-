@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'change answer': 'changeAnswer'
+    'focusout answer': 'changeAnswer'
 };
 
 exports.handlers = {

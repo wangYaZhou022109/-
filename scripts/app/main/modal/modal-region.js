@@ -4,7 +4,7 @@ var D = require('drizzlejs'),
     zIndex = 1000;
 
 animates = {
-    modal: { IN: 'flipInY', OUT: 'flipOutY' },
+    modal: { IN: 'fadeIn', OUT: 'fadeOut' },
     popup: { IN: 'fadeInRightBig', OUT: 'bounceOutRight' },
     ground: { IN: 'slideInUp', OUT: 'slideOutDown' }
 };
