@@ -12,7 +12,8 @@ exports.events = {
     'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
     'click shareTo-*': 'shareTo',
-    'click myquiz-auditdetails-*': 'showauditDetails'
+    'click myquiz-auditdetails-*': 'showauditDetails',
+    'click test-*': 'showTest'
 };
 
 exports.handlers = {

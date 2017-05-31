@@ -23,7 +23,9 @@ view('list')
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
-                                span > echo('讨论了我的问题') 
+                                span > echo('讨论了')
+                                a(href='javascript:;') > echo('我')
+                                span > echo('我的问题')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + id + '_' + question.id) > echo(question.title)
@@ -32,7 +34,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + questionDiscuss.id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
+                                    .item(id='discuss-' + questionDiscuss.id ) > string('publish') +  echo('（' + questionDiscuss.replyNum +'）')
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             span 分享
@@ -57,7 +59,9 @@ view('list')
                             .comment-text > echo(content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
-                                span > echo('回复了我对问题的讨论') 
+                                span > echo('回复了')
+                                a(href='javascript:;') > echo('我')
+                                span > echo('对问题的讨论')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自讨论：') + a(id='myreply-details-' + id + '_' + question.id ) > echo(question.title)
@@ -66,7 +70,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('（' + replyNum +'）')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)
@@ -86,7 +90,9 @@ view('list')
                             .comment-text > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
-                                span > echo('讨论了我的分享') 
+                                span > echo('讨论了')
+                                a(href='javascript:;') > echo('我')
+                                span > echo('的分享') 
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text 
@@ -97,7 +103,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='1_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='1_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + questionDiscuss.replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('（' + questionDiscuss.replyNum +'）')
                                     .item > .share-bar
                                         .drop-down-wrapper
                                             span 分享
@@ -122,7 +128,9 @@ view('list')
                             .comment-text > echo(content)
                             .user-info
                                 a(href='javascript:;') > echo(member.fullName)
-                                span > echo('回复了我对分享的讨论') 
+                                span > echo('回复了')
+                                a(href='javascript:;') > echo('我')
+                                span > echo('对分享的讨论')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text
@@ -133,7 +141,7 @@ view('list')
                                         .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + question.praiseNum +'）')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + question.praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('publish') +  echo('(' + replyNum +')')
+                                    .item(id='discuss-' + id ) > string('publish') +  echo('（' + replyNum +'）')
                                     # .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                     .item > span(id ='report-' + 1 +'_' + id + '_' + member.id data-name='id' data-value=1 +'_' + id + '_' + member.id) > string('report')
                                     form.comment-reply(id ='comment-reply-' + id)

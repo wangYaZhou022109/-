@@ -34,7 +34,8 @@ view('main')
                 .pull-right
                     .item > .share-bar
                         .drop-down-wrapper
-                            i.iconfont.icon-share-2(title='分享')
+                            #  i.iconfont.icon-share-2(title='分享')
+                            span 分享
                             form.drop-down-content > .content
                                 .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                 .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
@@ -55,31 +56,34 @@ view('main')
         
     .layout-mt
         .comment-list > each(details.questionDiscussList) > ul
-            li
-                .user-pic > img(src=headPhoto)
-                .comment-content
-                    .user-info
-                        a(href='#') > echo( member.fullName)
-                        span > echo(organization.name)
-                    .comment-text > echo(content)
-                    .comment-operation
-                        .pull-left 
-                            compare(praise1 'eq' true)
-                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
-                                .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                            else
-                                .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
-                            .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
-                        .text-right
-                            .item > .share-bar
-                                .drop-down-wrapper
-                                    i.iconfont.icon-share-2(title='分享')
-                                    form.drop-down-content > .content
-                                        .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                        .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博                     
-                            .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
-                    div(id='reply-'+id name='reply-' + id style='display:none')
+            compare(auditStatus 'eq' "0")
+                li
+                    .user-pic > img(src=headPhoto)
+                    .comment-content
+                        .clearfix.inline-block.w-full
+                            .user-info.pull-left
+                                a(href='#') > echo( member.fullName)
+                                span > echo(organization.name)
+                            .text-right > dateTime(createTime)
+                        .comment-text > echo(content)
+                        .comment-operation
+                            .pull-left 
+                                compare(praise1 'eq' true)
+                                    .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                    .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                else
+                                    .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                    .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
+                            .text-right
+                                .item > .share-bar
+                                    .drop-down-wrapper
+                                        i.iconfont.icon-share-2(title='分享')
+                                        form.drop-down-content > .content
+                                            .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                            .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博                     
+                                .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
+                        div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section
         .h4.text-center
