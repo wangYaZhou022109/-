@@ -431,6 +431,7 @@ var target = D.assign({}, {
             });
         }
         helper.switchScreen.call(this, this.store.models.exam.data);
+        return this.dispatch('reloadState');
         // helper.closeListener.call(this, strings.get('exam.answer-paper.close-window'));
     },
     getCurrentStatus: function(id) {
