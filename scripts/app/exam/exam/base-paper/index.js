@@ -154,7 +154,7 @@ exports.store = {
                                 id: j,
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
-                                }),
+                                }).toFixed(1),
                                 isCurrent: j++ === constant.ZERO
                             });
                         });
@@ -404,6 +404,9 @@ exports.store = {
             D.assign(this.models.exam.data, {
                 noticed: true
             });
+            this.models.state.changed();
+        },
+        reloadState: function() {
             this.models.state.changed();
         }
     }
