@@ -266,7 +266,6 @@ exports.dataForTemplate = {
         }
         obj.details.createTime = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
         + '   ' + date.getHours() + ':' + date.getMinutes();
-        console.log(obj);
         return obj.details;
     },
     haveAttachments: function(data) {
