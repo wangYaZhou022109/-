@@ -6,8 +6,10 @@ module > .course-page.study-subject-page
 view('list')
     .main-list
         .filter
-            .pull-left > each(topics)
-                .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
+            .pull-left
+                span 热门标签：
+                each(topics)
+                    .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
 
             .pull-right
                 .item#order-0 > span 最新

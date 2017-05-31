@@ -25,9 +25,10 @@ exports.store = {
             var classEvaluates = this.models.classEvaluates,
                 classEvaluate = this.models.classEvaluate,
                 state = this.models.state;
-            classEvaluates.params = payload;
-            classEvaluate.params = payload;
-            state.data.classId = payload;
+            classEvaluates.params = { classId: payload.classId };
+            classEvaluate.params = { classId: payload.classId };
+            state.data.classId = payload.classId;
+            state.data.role = payload.role;
             this.get(classEvaluate);
             this.get(classEvaluates);
         },
@@ -38,6 +39,7 @@ exports.store = {
             model.clear();
             model.set(payload);
             this.save(model).then(function() {
+                this.app.message.success('保存成功！');
                 me.get(classEvaluate);
             });
         },
@@ -48,6 +50,7 @@ exports.store = {
             model.clear();
             model.set(payload);
             this.save(model).then(function() {
+                this.app.message.success('保存成功！');
                 me.get(classEvaluate);
             });
         }
@@ -55,5 +58,8 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: this.renderOptions.state.classId });
+    return this.dispatch('init', {
+        classId: this.renderOptions.state.classId,
+        role: this.renderOptions.state.role
+    });
 };

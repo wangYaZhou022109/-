@@ -10,7 +10,21 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'courseList' }
+    id: 'pager', name: 'pager', options: { model: 'courseList' }
+}, function() {
+    var categoryId = '';
+    var categoryName = '';
+    return {
+        id: 'categoryId',
+        name: 'picker',
+        options: {
+            picker: 'course-category',
+            inputName: 'categoryId',
+            required: true,
+            searchType: 'knowledge',
+            data: { id: categoryId, name: categoryName }
+        }
+    };
 }];
 
 exports.events = {
@@ -18,7 +32,10 @@ exports.events = {
     'click move-down-*': 'moveDown',
     'click course-*': 'selected',
     'change selectTheme': 'changeTheme',
-    'click submitOffline': 'save'
+    'click submitOffline': 'save',
+    'click showCategory': 'showCategory',
+    'click showOrganization': 'showOrganization',
+    'click del-target-*': 'delTarget'
 };
 
 exports.handlers = {
@@ -124,6 +141,38 @@ exports.handlers = {
         var themeId = this.$('selectTheme').value;
         this.module.renderOptions.callback(themeId, targetList, delList);
         this.app.viewport.closeModal();
+    },
+    showCategory: function() {
+        var model = this.module.items['train/programme/course-category'],
+            me = this;
+        me.app.viewport.modal(model, {
+            callback: function(data) {
+                me.$('categoryId').value = data.id;
+                me.$('categoryName').value = data.name;
+            }
+        });
+    },
+    showOrganization: function() {
+        var me = this,
+            model = me.module.items['train/statistics/navigate-tree'];
+        me.app.viewport.modal(model, {
+            callback: function(payload) {
+                me.$('organizationId').value = payload.id;
+                me.$('organizationName').value = payload.name;
+            }
+        });
+    },
+    delTarget: function(id) {
+        var courseList = this.bindings.courseList.data;
+        var targetList = this.bindings.targetList.data;
+        if (_.find(courseList, ['id', id])) {
+            targetList = _.filter(targetList, function(fm) {
+                return fm.id !== id;
+            });
+            this.bindings.targetList.data = targetList;
+        }
+        this.bindings.targetList.changed();
+        this.bindings.courseList.changed();
     }
 };
 
@@ -176,10 +225,11 @@ exports.dataForActions = {
     doSearch: function() {
         return {
             name: this.$('name').value,
-            // categoryId: this.$('categoryId').value,
-            // categoryName: this.$('categoryName').value,
-            // organizationId: this.$('organizationId').value,
-            // organizationName: this.$('organizationName').value
+            category: this.$('categoryId').value,
+            businessType: 0,
+            categoryName: this.$('categoryName').value,
+            organizationId: this.$('organizationId').value,
+            organizationName: this.$('organizationName').value
         };
     }
 };

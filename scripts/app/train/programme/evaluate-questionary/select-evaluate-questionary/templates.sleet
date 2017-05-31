@@ -1,48 +1,43 @@
 #! handlebars
 
-module
-    .exam-manage
-        div(data-region='search')
-        div(data-region='content')
+module > .addevaluation-page
+    .addevaluation(data-region='search')
+    .addevaluation(data-region='content')
 
 
 view('search')
-    form.vertical
-        .row
-            .col-sm-6
-                label > setting('exam.research.name') > echo(':')
-                input.input#name(name='name')
-            .col-sm-6
-                label > setting('exam.research.publish-member') > echo(':')
-                input.input#publishMemberName(name='publishMemberName')
-                input#publishMemberId(name='publishMemberId' type='hidden')
-                .btn.inline-block#btnMember 选择
-        .row
-            .col-sm-12
-                label > setting('system.all.create-time') > echo(':')
-                input.input#create-time(name='createTime')
-        br
-        .row
-            .col-sm-12
-                .text-right > .btn.inline-block#search 搜索
+    .bg-highlight
+        .form.align-left
+            .form-row.pull-left.w-half.r-padding.row-block
+                label.label.tag-height 评估名称
+                input.input.tag-height#name(name='name')
+            .form-row.pull-left.w-half.row-block
+                label.label.tag-height 发布人
+                input.input.tag-height#publishMemberName(name='publishMember')
+            label.label.tag-height 发布时间
+            .relative
+                input.input.date.w-full.tag-height#create-time(name='createTime')
+                .iconfont.icon-riqi
+        .text-center.layout-mt-small > .btn.circle-radius.gray.tag-height#search 搜索
 
 view('content')
-    .list.m-top
-        table.table.table2.text-center
-            thead > tr
-                th 选择
-                th > setting('exam.questionnaire.name')
-                th > setting('exam.research.publish-member')
-                th > setting('system.all.create-time')
-                th > setting('exam.all.operator')
-            tbody > each(researchActivities)
-                tr
-                    td > input(type='radio' name='select-research' value=id)('checked')&if(checked)
-                    td > echo(name)
-                    td > echo(publishMember.name)
-                    td > dateTime(createTime)
-                    td.operation
-                        a(id='preview-'+id data-name='id' data-value=id) > string('preview')
-                else
-                    tr > td(colspan='5') > p.text-center > string('no-data')
+    table.table.layout-mt-small
+        thead > tr
+            th 选择
+            th 评估名称
+            th 发布人
+            th 发布时间
+            th 操作
+        tbody > each(researchActivities)
+            tr
+                td > input(type='radio' name='select-research' value=id)('checked')&if(checked)
+                td > echo(name)
+                td > echo(publishMember.fullName)
+                td > dateTime(publishTime)
+                td
+                    a(id='preview-' + id data-name='id' data-value=id) 预览
+                    #  a(href='#/train/programme/research-activity/preview-questionary/' + id target='_blank') 预览
+            else
+                tr > td(colspan='5') > p.text-center > string('no-data')
     #pager.pagination
+    

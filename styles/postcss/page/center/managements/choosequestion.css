@@ -1,7 +1,10 @@
 .choosequestion-page {
     & .choosequestion {
+        & ul {
+            margin-right: -30px;
+        }
         & .choosequestion-item {
-            padding: 0 15px;
+            padding-right: 30px;
             margin-bottom: 30px;
             & .text {
                 padding: 7px 0 7px 10px;
@@ -42,6 +45,9 @@
                 padding: 5px;
                 text-align: center;
                 font-size: .8em;
+                &.selected {
+                    background: var(--custom-color-3);
+                }
             }
         }
         & a {

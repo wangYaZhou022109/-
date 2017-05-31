@@ -17,7 +17,7 @@ exports.dataForActions = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'classTwoBrings' }
+    id: 'pager', name: 'pager', options: { model: 'classTwoBrings' }
 }];
 
 exports.dataForTemplate = {

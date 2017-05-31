@@ -16,11 +16,9 @@ view('count') > form.vertical
             span > dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
  
 view('option')
-    .count
-        .clearfix
-            each(busOption)
-                .count-sub-item.pull-left > span
-                    echo(optionName) + echo(':') + echo(count) + echo('人')
+    .count-sub.layout-mt-small.clearfix
+        each(busOption)
+            .count-sub-item.pull-left.layout-mr > span.inline-block.m-right > echo(optionName) + echo(':') + echo(count) + echo('人')
 
 view('main')
     .count-search.clearfix.m-top

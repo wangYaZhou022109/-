@@ -20,7 +20,9 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             project: projectInfo.data,
             callback: function(arriveDate, backDate) {
-                me.module.dispatch('changeDate', { arriveDate: arriveDate, backDate: backDate });
+                me.$('arriveDate').value = arriveDate;
+                me.$('returnDate').value = backDate;
+                me.$('roundDate').value = arriveDate + '~' + backDate;
             }
         });
     }
@@ -53,6 +55,13 @@ exports.dataForTemplate = {
             state.returnDate = returnDate;
         }
         return state;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 1 || state.role === 2) {
+            return true;
+        }
+        return false;
     }
 };
 

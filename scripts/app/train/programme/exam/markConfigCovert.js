@@ -112,7 +112,7 @@ checkMarkConfig = function(markConfig) {
                 markMembers: _.map(papers, function(p) {
                     return {
                         id: p.member.id,
-                        name: p.member.name
+                        name: p.member.fullName || p.member.name
                     };
                 })
             };

@@ -4,7 +4,8 @@ exports.bindings = {
     state: true,
     project: false,
     month: true,
-    result: false
+    result: false,
+    limit: true
 };
 
 exports.actions = {
@@ -58,6 +59,10 @@ exports.dataForTemplate = {
     month: function() {
         var month = this.bindings.month.data;
         return month;
+    },
+    limit: function() {
+        var limit = this.bindings.limit.data;
+        return limit;
     }
 };
 

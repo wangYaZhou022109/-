@@ -10,3 +10,5 @@ view('pannel')
             each(courseRelated)
                 .block.layout-mt-small.m-top
                     a.text-overflow(href='#/study/subject/detail/'+id title=name) > echo(name)
+            else
+                .empty 暂无相关的专题

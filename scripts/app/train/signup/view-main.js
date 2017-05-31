@@ -38,12 +38,13 @@ exports.dataForActions = {
         var settleOrganizationId = $(this.$$('[name="organizationId"]')).val();
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
-        if (!validators.phone.fn(phoneNumber)) {
-            this.app.message.error('手机号输入不正确');
+        var className = this.bindings.classSignupInfo.data.classInfo.className;
+        if (!validators.phone.fn(phoneNumber) || phoneNumber === '') {
+            this.app.message.error('请输入正确的手机号');
             return false;
         }
-        if (!validators.email.fn(email)) {
-            this.app.message.error('邮箱输入不正确');
+        if (!validators.email.fn(email) || email === '') {
+            this.app.message.error('请输入正确的邮箱');
             return false;
         }
         return {
@@ -55,7 +56,8 @@ exports.dataForActions = {
             remark: remark,
             classId: classId,
             settleOrganizationId: settleOrganizationId,
-            memberId: memberId
+            memberId: memberId,
+            className: className
         };
     }
 };
@@ -65,19 +67,18 @@ exports.actionCallbacks = {
         var state = this.bindings.state.data;
         var trainee = data[0] || {};
         if (trainee.auditStatus === 0) {
-            // 报名成功，跳转审核中页面
+            // 报名审核中
             state.auditStatus = 0;
             this.bindings.state.changed();
         } else if (trainee.auditStatus === 1) {
-            this.app.message.success('报名成功！');
-            // 跳转班级详情页
+            // 报名通过
+            state.auditStatus = 1;
+            this.bindings.state.changed();
         } else {
-            // 报名失败，跳转审核失败页
+            // 报名未通过
             state.auditStatus = 2;
-            trainee.auditOpinion = '自动审核，配额已满！';
             this.bindings.trainee.data = trainee;
             this.bindings.state.changed();
-            this.bindings.trainee.changed();
         }
     }
 };

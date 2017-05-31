@@ -1,16 +1,12 @@
-var maps = require('./app/util/maps'),
-    $ = require('jquery');
+var $ = require('jquery');
 exports.bindings = {
     detail: true
 };
 
-exports.components = [{
-    id: 'rankingRule',
-    name: 'selectize'
-}];
 exports.dataForTemplate = {
     rankingRule: function() {
-        return maps.get('display-rule');
+        var rankingRule = $(this.$('rankingRule')).val();
+        return rankingRule;
     },
     detail: function(data) {
         var detail = data.detail;

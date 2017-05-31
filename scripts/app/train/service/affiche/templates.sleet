@@ -1,11 +1,11 @@
 #!handlebars
 
-module > .train-class-page
-    .div(data-region='content')
+module > .managements-page
+    .classmanage(data-region='content')
 
 view('content') > form.vertical
     .container
-        section.section.w-half
+        section.section.classnotice
             .classnotice-title.clearfix
                 span.strong.layout-mr 是否显示排行榜
                 input( id = 'detail_1' name='detail' type='radio' value=1)('checked')&if(detail.type)
@@ -14,8 +14,9 @@ view('content') > form.vertical
                 label.layout-mr 否
                 compare(detail.showRanking 'eq' 1)
                     label.strong 显示规则：
-                    select#rankingRule.tag-select(name='rankingRule' style="border:solid 1px #ccc;") > each(rankingRule)
-                        option(value=key) > echo(value)
+                    select.tag-select(name = 'rankingRule')
+                        option(value = '0')('selected')&if(detail.rankingRule) 显示全部
+                        option(value = '1')('selected')&if(detail.rankingRule) 显示前十名
             .classnotice-content.layout-mt
                 .strong 班级公告
                 textarea.m-top.w-full#notice(name='notice' value=detail.notice rows=5 cols=80 x-rule='maxLength:1000') > echo(detail.notice)

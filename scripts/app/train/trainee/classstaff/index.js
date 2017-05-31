@@ -64,5 +64,8 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
+    var state = this.store.models.state;
+    state.data.role = this.renderOptions.state.role;
+    state.changed();
     return this.dispatch('init', { classId: this.renderOptions.state.classId });
 };

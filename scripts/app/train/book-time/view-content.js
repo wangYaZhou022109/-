@@ -25,32 +25,31 @@ exports.dataForTemplate = {
                 currentDateLong,
                 index,
                 flag = false,
-                days = state,
                 colspan = 0;
+            project.occupyDays = state.slice(0);
             _.map(arrays, function(arr, i) {
-                var seconds = i * 24 * 60 * 60 * 1000;
+                var seconds = i * 24 * 60 * 60 * 1000,
+                    td = {};
                 currentDateLong = project.classInfo.arriveDate + seconds;
                 currentDate = helpers.date(currentDateLong);
                 if (currentDate.indexOf(month) > -1) {
                     index = window.parseInt(currentDate.split('-')[2]) - 1;
-                    if (days[index]) {
-                        days[index].isOccupy = true;
-                        days[index].text = '占用' + project.amount;
-                        if (flag) {
-                            days[index].isPass = true;
-                        }
-                        flag = true;
-                        colspan++;
+                    td.isOccupy = true;
+                    td.text = '占用' + project.amount;
+                    if (flag) {
+                        td.isPass = true;
                     }
+                    flag = true;
+                    colspan++;
+                    project.occupyDays[index] = td;
                 }
             });
-            _.map(days, function(day) {
+            _.map(project.occupyDays, function(day) {
                 var d = day;
-                if (d.isOccupy && !d.isPass) {
+                if (d && d.isOccupy && !d.isPass) {
                     d.colspan = colspan;
                 }
             });
-            project.occupyDays = days;
         });
         return projects;
     }

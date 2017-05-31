@@ -183,5 +183,25 @@ exports.dataForTemplate = {
             quotaInfo.data.overplus = quotaInfo.data.amount - sum;
         }
         return quotaInfo.data;
+    },
+    quotaList: function() {
+        var quotaList = this.bindings.quotaList,
+            state = this.bindings.state.data;
+        _.map(quotaList.data, function(q) {
+            var x = q;
+            if (state.role === 2 || state.role === 1) {
+                x.isGrant = true;
+            } else {
+                x.isGrant = false;
+            }
+        });
+        return quotaList.data;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 2 || state.role === 1) {
+            return true;
+        }
+        return false;
     }
 };

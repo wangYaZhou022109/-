@@ -23,6 +23,7 @@ exports.store = {
                 me = this;
             classInfo.set(payload);
             state.data.classId = payload.id;
+            state.data.role = payload.role;
             return me.get(classInfo);
         },
         submit: function(payload) {
@@ -76,5 +77,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state.id });
+    return this.dispatch('init', { id: this.renderOptions.state.id, role: this.renderOptions.state.role });
 };

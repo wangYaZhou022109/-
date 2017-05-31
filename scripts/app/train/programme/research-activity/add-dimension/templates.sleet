@@ -1,13 +1,15 @@
 #!handlebars
 
-module > .exam-manage
-    div(data-region='main')
+module > .addnewevaluation-page
+    .addnewevaluation(data-region='main')
 
 view('main')
-    form.vertical
-        label(class='required') > setting('exam.dimension.name')
-        input.input#name(name='name' value=dimension.name x-rule='required,maxLength:10')
-        br
-        br
-        label > setting('exam.dimension.description')
-        textarea.input(placeholder='输入描述' cols='100%' name='description') >  echo(dimension.description)
+    form.form
+        .form-row
+            label.required 维度名称
+            .content
+                input.input#name(name='name' value=dimension.name x-rule='required,maxLength:10')
+                .tips 0/10
+        .form-row
+            label 维度描述
+            .content > textarea.w-full(placeholder='输入描述' rows='5' name='description') >  echo(dimension.description)

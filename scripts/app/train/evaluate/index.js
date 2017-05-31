@@ -23,11 +23,13 @@ exports.store = {
             this.get(Evaluate).then(function(data) {
                 var d = data,
                     newFile = {};
-                newFile.id = d[0].id;
-                newFile.attachId = d[0].attachmentId;
-                newFile.attachName = d[0].attachmentName;
-                files.data.push(newFile);
-                files.changed();
+                if (d[0]) {
+                    newFile.id = d[0].id;
+                    newFile.attachId = d[0].attachmentId;
+                    newFile.attachName = d[0].attachmentName;
+                    files.data.push(newFile);
+                    files.changed();
+                }
             });
             return null;
         },
@@ -69,5 +71,8 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
+    var state = this.store.models.state;
+    state.data.role = this.renderOptions.state.role;
+    state.changed();
     return this.dispatch('init', { id: this.renderOptions.state });
 };

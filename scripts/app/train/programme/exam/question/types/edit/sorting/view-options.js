@@ -113,7 +113,7 @@ exports.getEntity = function(id) {
 };
 
 exports.getEntityModuleName = function() {
-    return 'exam/question/senior-editor';
+    return 'train/programme/exam/question/senior-editor';
 };
 
 exports.dataForEntityModule = function(data) {

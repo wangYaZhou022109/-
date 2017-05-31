@@ -1,11 +1,6 @@
 #!handlebars
 module
-    div(data-region='main')
-
-view('main') > .input-group
-    input#nodeName.input(value=state.parent.name 'readonly')(x-rule='required' x-marker='group')&if(state.required)
-    input#nodeId(type='hidden' name=state.inputName value=state.parent.id)
-    .addon.btn#select > i.icon-search
+    div(data-region='modal')
 
 view('modal') > form.vertical
     .frame

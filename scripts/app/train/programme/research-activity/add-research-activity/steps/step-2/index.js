@@ -3,7 +3,7 @@ var _ = require('lodash/collection'),
 
 exports.items = {
     main: 'main',
-    side: 'side',
+    // side: 'side',
     'train/programme/research-activity/add-dimension': { isModule: true },
     'train/programme/research-activity/question/add-question': { isModule: true },
     'train/programme/research-activity/preview-questionary': { isModule: true },
@@ -30,9 +30,11 @@ exports.store = {
                     this.data.push(data);
                 },
                 editDimension: function(data) {
+                    var editData = data;
                     var index = this.data.findIndex(function(d) {
                         return d.id === data.id;
                     });
+                    editData.questions = this.data[index].questions;// 防止问题丢失
                     this.data[index] = data;
                 },
                 addQuestion: function(question) {
@@ -93,7 +95,8 @@ exports.store = {
                 },
                 sortingQuestion: function(payload) {
                     var question = _.find(this.module.store.models.questions.data, ['id', payload.id]),
-                        index = this.data.findIndex(function(d) {
+                        data = this.data,
+                        index = data.findIndex(function(d) {
                             return d.id === question.dimensionId;
                         }),
                         questions = this.data[index].questions,
@@ -224,8 +227,13 @@ exports.store = {
         getDimension: function(payload) {
             var dimension = this.models.dimension,
                 dimensions = this.models.dimensions;
-            if (!payload.id && !_.find(dimensions.data, ['name', null])) {
-                dimension.set({ order: dimensions.data.length + 1 });
+            if (!payload.id && !_.find(dimensions.data, ['isEmpty', 1])) {
+                // 没有选择维度且没有空维度就新增一个空维度
+                dimension.set({
+                    order: dimensions.data.length + 1,
+                    isEmpty: 1,
+                    researchQuestionaryId: this.models.research.data.id
+                });
                 return this.post(this.models.dimension).then(function() {
                     dimensions.data.push(dimension.data);
                 });
@@ -242,10 +250,23 @@ exports.beforeRender = function() {
 exports.mixin = {
     getData: function() {
         return {
-            dimensions: this.store.models.dimensions.data
+            dimensions: _.map(this.store.models.dimensions.data, function(d) {
+                return D.assign(d, {
+                    questions: _.map(d.questions, function(q) {
+                        return D.assign(q, { status: 1 });
+                    })
+                });
+            })
         };
     },
-    isValidator: function() {
-        return this.store.models.dimensions.data.length > 0;
+    isValidator: function(isPublish) { // 1 保存 2 发布
+        var flag = true;
+        if (isPublish === 2) { // 保存不需要校验，发布才需要校验
+            flag = this.store.models.dimensions.data.length > 0 && this.store.models.questions.data.length > 0;
+            if (!flag) {
+                this.app.message.error('问卷内容不完整，无法发布');
+            }
+        }
+        return flag;
     }
 };

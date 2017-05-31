@@ -24,7 +24,7 @@ view('main')
                 th > echo('序号')
                 th > echo('员工编号')
                 th > echo('姓名')
-                th > echo('所属部门')
+                th > echo('归属部门')
                 th > echo('得分')
                 th > echo('操作')
             tbody > each(researchQuestionarys) > tr

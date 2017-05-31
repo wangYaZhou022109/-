@@ -9,11 +9,13 @@ exports.events = {
 exports.handlers = {
     showTab: function(tab) {
         var state = this.bindings.state,
-            classId = state.data.classId;
+            classId = state.data.classId,
+            role = this.bindings.state.data.role;
         state.data = {};
         state.data.tab = tab || 'questionnaire';
         state.data.classId = classId;
         state.data[tab] = true;
+        state.data.role = role;
         state.changed();
     }
 };

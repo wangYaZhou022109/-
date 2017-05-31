@@ -12,16 +12,16 @@ view('details') > form.vertical
     .exam-total.layout-mt-small
         .examtitle-item
             span
-                if(exam.applicantNumber)
-                    echo('参考人数：' + exam.applicantNumber)
+                if(exam.joinNumber)
+                    echo('参考人数：' + exam.joinNumber)
                 else
                     echo('已参加人数：0')
         .examtitle-item
             span > echo('及格分数：' + exam.passScore)
         .examtitle-item
-            span > echo('及格分数：' + exam.count)
+            span > echo('及格人数：' + exam.passNumber)
         .examtitle-item
-            span > echo('及格分数：' + exam.passPercent)
+            span > pick('及格率：' + exam.passRatio '-')
 
 view('search') > form.vertical
     .filter-row
@@ -47,7 +47,7 @@ view('main')
                 th > echo('序号')
                 th > echo('员工编号')
                 th > echo('姓名')
-                th > echo('所属部门')
+                th > echo('归属部门')
                 th > echo('交卷时间')
                 th > echo('用时')
                 th > echo('状态')
@@ -58,13 +58,17 @@ view('main')
                 td > echo(member.fullName)
                 td > echo(organization.name)
                 td > dateTime(submitTime)
-                td > dateTime(examTime)
+                td > pick(usedTime '0') + echo('m')
                 td > map('exam-record-status' status)
                 td
-                    if(score)
-                        a(id='edit-exams'+id data-name='id' data-value=id) > echo(score)
+                    if(isGrant)
+                        compare(status 'eq' 5)
+                            a(id='mark-paper-' + id) 评卷
+                        compare(status 'gt' 5)
+                            a(id='edit-exams' + id ) > echo(score)
                     else
-                        a(id='edit-exams'+id data-name='id' data-value=id) > echo('评卷')
+                        compare(status 'gt' 5)
+                            a(id='edit-exams' + id ) > echo(score)
                 else
                     tr > td(colspan='11') > p.text-center > string('no-data')
         #pager.pagination

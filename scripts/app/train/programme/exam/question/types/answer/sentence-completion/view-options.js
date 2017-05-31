@@ -31,6 +31,10 @@ exports.dataForTemplate = {
     },
     isShowDetail: function() {
         var mode = this.bindings.state.data.detailMode;
+        return mode && mode > 0 && mode < 4;
+    },
+    isDisabled: function() {
+        var mode = this.bindings.state.data.detailMode;
         return mode && mode > 0;
     }
 };
