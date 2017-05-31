@@ -58,7 +58,7 @@ D.assign(obj.dataForActions, {
                     });
                 });
             }, function() {
-                return false;
+                return me.module.dispatch('reloadState');
             });
         });
     }
