@@ -11,8 +11,8 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var state = this.models.state,
-                getDuration = function(endTime) {
-                    var duration = (new Date(endTime).getTime() - new Date().getTime()) / (1000 * 60);
+                getDuration = function(endTime, startTime) {
+                    var duration = (new Date(endTime).getTime() - new Date(startTime).getTime()) / (1000 * 60);
                     return duration.toFixed(2);
                 },
                 minute;
@@ -21,8 +21,9 @@ exports.store = {
                 this.app.message.success('您被延时了');
             }
 
-            if (payload.data.endTime && payload.data.endTime > new Date().getTime()) {
-                minute = getDuration(payload.data.endTime);
+            if (payload.data.endTime
+                && payload.data.endTime > new Date(payload.data.startTime).getTime()) {
+                minute = getDuration(payload.data.endTime, payload.data.startTime);
                 state.data = { duration: minute };
             } else {
                 state.set({ duration: 0 });
