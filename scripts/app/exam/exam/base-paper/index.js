@@ -154,7 +154,7 @@ exports.store = {
                                 id: j,
                                 totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
-                                }),
+                                }).toFixed(1),
                                 isCurrent: j++ === constant.ZERO
                             });
                         });
@@ -376,7 +376,9 @@ exports.store = {
                     return question.type === 1 || question.type === 3;
                 }
             }
-        }
+        },
+        head: {},
+        main: {}
     },
     callbacks: {
         selectType: function(payload) {
@@ -394,6 +396,7 @@ exports.store = {
             this.models.types.changed();
             this.models.state.resetCurrentQuestion();
             this.models.state.changed();
+            this.models.main.changed();
         },
         clearModels: function() {
             _.forEach(this.models, function(m) {
@@ -404,6 +407,12 @@ exports.store = {
             D.assign(this.models.exam.data, {
                 noticed: true
             });
+            this.models.state.changed();
+        },
+        reloadHead: function() {
+            this.models.head.changed();
+        },
+        reloadState: function() {
             this.models.state.changed();
         }
     }
