@@ -14,10 +14,10 @@ build:
   script:
     - gulp lint-build
 
-deploy-release:
+deploy-master:
   stage: deploy
   only:
-    - release
+    - master
   script:
     - export PRODUCTION=true
     - gulp build
