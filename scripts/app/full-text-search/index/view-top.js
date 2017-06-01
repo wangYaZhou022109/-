@@ -5,7 +5,8 @@ var maps = require('./app/util/maps'),
     viewUtil = require('./app/full-text-search/view-util');
 
 exports.bindings = {
-    state: true
+    state: true,
+    history: true
 };
 
 exports.dataForTemplate = {
@@ -34,7 +35,8 @@ exports.events = {
     'click searchType-*': 'changeSearchType',
     'click searchContent': 'showSearchMore',
     'mouseover searchMore': 'showSearchMore',
-    'mouseout searchMore': 'hideSearchMore'
+    'mouseout searchMore': 'hideSearchMore',
+    'click remove-*': 'removeHistory',
 };
 
 exports.actions = {
@@ -55,6 +57,9 @@ exports.handlers = {
     },
     hideSearchMore: function() {
         $(this.$('searchMore')).removeClass('show');
+    },
+    removeHistory: function(id) {
+        this.module.dispatch('removeHistory', { id: id });
     }
 };
 

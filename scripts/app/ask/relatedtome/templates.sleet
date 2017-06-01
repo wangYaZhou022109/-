@@ -32,7 +32,7 @@ view('list')
                             echo('.') + string('share') + echo('.') 
                     span.sub-text > echo(createTime)
                 .comment-operation
-                    .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                    .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > a(href='#/ask/topicdetail/' + id ) >  echo(name) + echo(' ')
                     .text-right
                         compare(trendsType 'eq' '1')
                             .item(id='discuss-' + id ) > string('comment') + echo('（' + discussList.length +'）')
