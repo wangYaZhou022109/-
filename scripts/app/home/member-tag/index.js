@@ -27,7 +27,7 @@ exports.buttons = [{
 }];
 exports.store = {
     models: {
-        topics: { url: '../system/topic/select', params: { group: 1 }, autoLoad: 'after' },
+        topics: { url: '../system/topic/select', params: { group: 1, recommend: 1 }, autoLoad: 'after' },
         selectedTopics: { data: [] },
         memberSetting: { url: '../human/member/init-setting' },
         memberTopic: { url: '../human/member/topic' }
