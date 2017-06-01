@@ -4,7 +4,13 @@ exports.items = {
     main: 'main'
 };
 
-exports.title = '选择标签';
+exports.title = '  ';
+
+exports.closeText = '跳过，直接进入首页';
+
+exports.closeAction = function(module) {
+    return module.dispatch('skipSetting');
+};
 
 exports.buttons = [{
     text: '确定',
@@ -47,7 +53,6 @@ exports.store = {
             memberSetting.set({ memberId: memberId });
             return this.post(memberSetting).then(function() {
                 D.assign(me.app.global.currentUser, { initSetting: 1 });
-                me.app.viewport.closePopup();
                 return true;
             });
         },
