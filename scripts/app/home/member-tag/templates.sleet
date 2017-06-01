@@ -5,9 +5,10 @@ module
 
 view('main')
     .clearfix.layout-mb-small
-        a.pull-right.layout-ml-small 换一批
+        a.pull-right.layout-ml-small(id='skip' href='javascript:;') > echo('跳过，直接进入首页')
         .pull-left
             span.m-right 选择你喜欢的，让我们更了解你
+            a.pull-right 换一批
     ul.list > each(topics)
         if(selected)
             li.selected(id='cancel-' + id) > echo(name)

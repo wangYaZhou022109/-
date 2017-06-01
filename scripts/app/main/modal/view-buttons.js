@@ -88,9 +88,6 @@ exports.handlers = {
     },
 
     closeIt: function() {
-        var module = this.module.renderOptions.options.view,
-            closeAction = module.options.closeAction;
-        closeAction && closeAction(module);
         this.module.close();
     }
 };

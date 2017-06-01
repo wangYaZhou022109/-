@@ -8,7 +8,9 @@ exports.events = {
     'click cancel-*': 'cancelSelected',
     'click selected-*': 'selected'
 };
-
+exports.actions = {
+    'click skip': 'skipSetting'
+};
 exports.handlers = {
     cancelSelected: function(id) {
         var topics = this.bindings.topics.data,
