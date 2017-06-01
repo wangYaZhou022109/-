@@ -11,10 +11,18 @@ exports.routes = {
     'statistics/task/audit-task/:id': 'showAuditTask',
     'statistics/questionnaire/count/:classId': 'showCount',
     'programme/preview-task/:id': 'previewTask',
-    'signup/:id': 'showSignupPage',
-    signup: 'showUnregisterSignupPage',
-    'service/views/research-answer/:id': 'showResearchAnswerDetail',
-    'service/views/research-detail/:id': 'showResearchDetail'
+    'sign-up/:id': 'showSignupPage',
+    register: 'showRegisterPage',
+    'class-detail/research-answer/:id': 'showResearchAnswerDetail',
+    'class-detail/research-detail/:id': 'showResearchDetail',
+    'research-activity/research-detail/:id/:classId': 'showExamResearchDetail',
+    'class-detail/summary/:id/:classId': 'showSummary',
+    'class-detail/:id': 'showClassDetail',
+    'programme/research-activity/preview-questionary/:researchId': 'showResearchPreview',
+    'manage/:id': 'showManage', // 资源管理员
+    'sponsor/:id': 'showSponsor', // 需求方
+    'service/:id': 'showService', // 班务
+    'assist/:id': 'showAssist' // 培训协理
 };
 
 exports.showIndex = function(id) {
@@ -42,7 +50,7 @@ exports.showTrain = function(id) {
 };
 
 exports.showTaskDetail = function(fir, id) {
-    return this.app.viewport.showIt('content', 'train/service/views/commit-task/task-detail', { id: id });
+    return this.app.viewport.showIt('content', 'train/class-detail/commit-task/task-detail', { id: id });
 };
 
 exports.showCount = function(fir, classId) {
@@ -57,29 +65,72 @@ exports.previewTask = function(fir, id) {
     return this.app.viewport.showIt('content', 'train/programme/preview-task', { id: id });
 };
 
-exports.showSignupPage = function(classId) {
-    return this.app.show('content', 'train/signup', { classId: classId });
+exports.showSignupPage = function(id) {
+    return this.app.show('content', 'train/signup', { classId: id });
 };
 
-exports.showUnregisterSignupPage = function() {
-    return this.app.show('content', 'train/unregister-signup');
+exports.showRegisterPage = function() {
+    return this.app.viewport.showIt('content', 'train/register');
 };
 
 exports.showResearchDetail = function(fir, id) {
-    return this.app.viewport.showIt('content', 'train/service/views/research-detail', { researchQuestionaryId: id });
+    return this.app.viewport.showIt('content', 'train/class-detail/research-detail', { researchQuestionaryId: id });
 };
 
 exports.showResearchAnswerDetail = function(fir, id) {
-    return this.app.viewport.showIt('content', 'train/service/views/research-answer', { researchRecordId: id });
+    return this.app.viewport.showIt('content', 'train/class-detail/research-answer', { researchRecordId: id });
+};
+
+exports.showClassDetail = function(classId) {
+    return this.app.show('content', 'train/class-detail', { classId: classId });
+};
+
+exports.showResearchPreview = function(fir, researchId) {
+    return this.app.viewport.showIt('content', 'train/programme/research-activity/preview-questionary',
+    { researchId: researchId });
+};
+
+exports.showManage = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 1 });
+};
+
+exports.showSponsor = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 2 });
+};
+
+exports.showService = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 3 });
+};
+
+exports.showAssist = function(id) {
+    return this.app.show('content', 'train/index', { id: id, role: 4 });
+};
+
+exports.showExamResearchDetail = function(id, classId) {
+    return this.app.viewport.showIt('content', 'exam/research-activity/research-answer', {
+        researchRecordId: id,
+        businessId: classId
+    });
+};
+
+exports.showSummary = function(id, classId) {
+    return this.app.viewport.showIt('content', 'train/class-detail/summary', {
+        researchQuestionaryId: id,
+        businessId: classId
+    });
 };
 
 exports.interceptors = {
+    'research-activity/research-detail/': 'clearHeadAndBottom',
     'class-detail/task-detail/': 'clearHeadAndBottom',
     'statistics/task/audit-task/': 'clearHeadAndBottom',
     'statistics/questionnaire/count/': 'clearHeadAndBottom',
     'programme/preview-task': 'clearHeadAndBottom',
-    'service/views/research-answer/': 'clearHeadAndBottom',
-    'service/views/research-detail/': 'clearHeadAndBottom'
+    'class-detail/research-answer/': 'clearHeadAndBottom',
+    'class-detail/research-detail/': 'clearHeadAndBottom',
+    'class-detail/summary/': 'clearHeadAndBottom',
+    'programme/research-activity/preview-questionary': 'clearHeadAndBottom',
+    signup: 'clearHeadAndBottom'
 };
 
 exports.clearHeadAndBottom = function() {

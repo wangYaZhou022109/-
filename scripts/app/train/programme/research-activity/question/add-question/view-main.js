@@ -31,16 +31,16 @@ exports.handlers = {
     }
 };
 
-exports.components = [{
-    id: 'type',
-    name: 'selectize'
-}, {
-    id: 'level',
-    name: 'selectize'
-}, {
-    id: 'mark',
-    name: 'selectize'
-}];
+// exports.components = [{
+//     id: 'type',
+//     name: 'selectize'
+// }, {
+//     id: 'level',
+//     name: 'selectize'
+// }, {
+//     id: 'mark',
+//     name: 'selectize'
+// }];
 
 exports.dataForTemplate = {
     types: function() {

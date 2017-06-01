@@ -14,7 +14,7 @@ exports.store = {
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
-            params: { page: 1, size: 10 },
+            params: { page: 1, size: 2 },
             mixin: {
                 findById: function(id) {
                     var myshares = this.module.store.models.page.data;

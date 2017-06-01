@@ -15,6 +15,7 @@ exports.store = {
             state.data.menu = 'book';
             state.data.book = true;
             state.data.id = payload.id;
+            state.data.role = payload.role;
             state.changed();
             projectInfo.set(payload);
             this.get(projectInfo);
@@ -23,5 +24,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.id });
+    return this.dispatch('init', { id: this.renderOptions.id, role: this.renderOptions.role });
 };

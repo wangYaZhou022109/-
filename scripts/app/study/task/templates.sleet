@@ -23,13 +23,14 @@ view('side')
         ul.m-top
             .m-bottom > strong > string('study.user.attachment') ：
             each(userAttachments)
-                li.btn.block(id='viewUseDesc-'+attachmentId) 作业详情
-                li.mb-1
-                    a.pull-right.m-left(href=downUrl download=name) > string('download')
-                    if(preview)
-                        a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
-                    else
-                        a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+                li.btn.block(id='viewUseDesc-'+id) 作业详情
+                if(attachmentId)
+                    li.mb-1
+                        a.pull-right.m-left(href=downUrl download=name) > string('download')
+                        if(preview)
+                            a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
+                        else
+                            a.text-overflow.pointer(href=downUrl download=name) > echo(name)
     if(section.progress.comments)
         br
         ul.m-top

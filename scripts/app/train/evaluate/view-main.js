@@ -80,6 +80,13 @@ exports.dataForTemplate = {
             return item;
         });
         return data.files;
+    },
+    isGrant: function() {   // 通过角色判断是否有操作权限
+        var state = this.bindings.state.data;
+        if (state.role !== 3 && state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };
 

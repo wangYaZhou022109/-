@@ -3,12 +3,14 @@ var $ = require('jquery'),
 
 exports.bindings = {
     onlineCourseList: true,
-    state: true
+    state: true,
+    themeList: true
 };
 
 exports.actions = {
     'click theme-online': 'showOnlineTheme',
-    'click del-online-*': 'delOnlineCourse'
+    'click del-online-*': 'delOnlineCourse',
+    'click addCourse': 'addCourse'
 };
 
 exports.dataForActions = {
@@ -27,7 +29,23 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     showOnlineTheme: function() {
-        this.app.viewport.modal(this.module.items.configOnline);
+        this.app.viewport.modal(this.module.items['config-online']);
+    },
+    addCourse: function() {
+        var model = this.module.items['train/programme/select-course'],
+            state = this.bindings.state,
+            themeList = this.bindings.themeList.data,
+            me = this;
+        if (themeList && themeList.length > 0) {
+            me.app.viewport.modal(model, {
+                id: state.data.classId,
+                callback: function(themeId, target, del) {
+                    me.module.dispatch('saveOnlineCourse', { themeId: themeId, target: target, del: del });
+                }
+            });
+        } else {
+            me.app.message.error('请先配置主题！');
+        }
     }
 };
 
@@ -37,18 +55,26 @@ exports.dataForTemplate = {
         return state;
     },
     onlineCourseList: function() {
-        var onlineCourseList = this.bindings.onlineCourseList;
+        var onlineCourseList = this.bindings.onlineCourseList,
+            state = this.bindings.state.data;
         _.map(onlineCourseList.data || [], function(course) {
             var r = course;
             r.isRequired1 = r.isRequired === 1;
             r.isRequired0 = r.isRequired === 0;
+            r.isGrant = state.role !== 4;
         });
         return onlineCourseList.data;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role !== 4) {
+            return true;
+        }
+        return false;
     }
 };
 
 exports.events = {
-    'click addCourse': 'addCourse',
     'click label-online-*': 'changeRequired',
     'change input-online-*': 'updateRequired',
     'click minimize-*': 'showMinimize',
@@ -56,17 +82,6 @@ exports.events = {
 };
 
 exports.handlers = {
-    addCourse: function() {
-        var model = this.module.items['train/programme/select-course'],
-            state = this.bindings.state,
-            me = this;
-        me.app.viewport.modal(model, {
-            id: state.data.classId,
-            callback: function(themeId, target, del) {
-                me.module.dispatch('saveOnlineCourse', { themeId: themeId, target: target, del: del });
-            }
-        });
-    },
     changeRequired: function(id) {
         $(this.$('input-online-' + id)).css('display', 'block');
         $(this.$('label-online-' + id)).css('display', 'none');

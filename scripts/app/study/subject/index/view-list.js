@@ -53,7 +53,7 @@ exports.handlers = {
     selectTopic: function(id) {
         var search = this.bindings.search.data,
             param = { topicId: id };
-        if (search.topicId === param.topicId) delete param.topicId;
+        if (search.topicId === param.topicId) param.topicId = null;
         this.module.dispatch('search', param);
     },
     openDetail: function(id) {

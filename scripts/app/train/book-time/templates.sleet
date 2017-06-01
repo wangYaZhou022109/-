@@ -19,7 +19,7 @@ view('toolbox')
             label.required.tag-height 计划人数
             .content > .num.tag-height > echo(project.amount)
     .clearfix
-        p.pull-left.small-font  注:图显示的是本月已预定的资源信息,不显示代表本月无预定,本月可用的资源数为<<300>>。
+        p.pull-left.small-font > echo('注:图显示的是本月已预定的资源信息,不显示代表本月无预定,本月可用的资源数为<<' + limit.limit + '>>。')
         .form.pull-right.w-three > .form-row
             label.required.small-font.tag-height 月份
             .content

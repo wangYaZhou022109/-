@@ -1,7 +1,6 @@
 exports.items = {
     content: 'content'
 };
-
 exports.store = {
     models: {
         settlement: {

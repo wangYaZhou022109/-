@@ -1,5 +1,4 @@
 #!handlebars
-
 module
     .addcarinfo-page
         .page-main-wrapper
@@ -11,29 +10,29 @@ view('main')
             label.pull-left 班车/订餐信息
             .small-btn.pull-right#addBus 
                 | +添加
-    table.table
-        thead > tr
-            th > echo('主题')
-            th > echo('发布日期')
-            th > echo('截至日期')
-            th > echo('状态')
-            th > echo('操作')
-        tbody > each(buss) > tr
-            td > echo(name)
-            td > dateTime(startTime)
-            td > dateTime(endTime)
-            td > map('train-bus-state' state)
-            td.operation
-                compare(state 'eq' 0)
-                    a(id='edit'+id data-name='id' data-value=id) > echo('编辑')
-                    echo(' | ')
-                    a(id='count'+id data-name='id' data-value=id) > echo('统计')
-                    echo(' | ')
-                    a(id='remove'+id data-name='id' data-value=id) > echo('删除')
-                else
-                    a(id='count'+id data-name='id' data-value=id) > echo('统计')
-                    echo(' | ')
-                    a(id='remove'+id data-name='id' data-value=id) > echo('删除')
+        table.table
+            thead > tr
+                th > echo('主题')
+                th > echo('发布日期')
+                th > echo('截至日期')
+                th > echo('状态')
+                th > echo('操作')
+            tbody > each(buss) > tr
+                td > echo(name)
+                td > dateTime(startTime)
+                td > dateTime(endTime)
+                td > map('train-bus-state' state)
+                td.operation
+                    compare(state 'eq' 0)
+                        a(id='edit'+id data-name='id' data-value=id) > echo('编辑')
+                        echo(' | ')
+                        a(id='count'+id data-name='id' data-value=id) > echo('统计')
+                        echo(' | ')
+                        a(id='remove'+id data-name='id' data-value=id) > echo('删除')
+                    else
+                        a(id='count'+id data-name='id' data-value=id) > echo('统计')
+                        echo(' | ')
+                        a(id='remove'+id data-name='id' data-value=id) > echo('删除')
     #pager.pagination
 
 view('edit') > form.vertical > .addcarinfo-page > .addcarinfo-content
@@ -61,4 +60,4 @@ view('edit') > form.vertical > .addcarinfo-page > .addcarinfo-content
                     textarea.sub-text.small-font.w-full(id='input-explain-' + id value=explain placeholder="说明内容(可为空)") > echo(explain)
                 .addcarinfo-close.inline-block(id='del-option-'+id data-name='id' data-value=id) —
         .row.text-center
-            a.btn#addOption 添加
+            a.btn#addOption 添加选项

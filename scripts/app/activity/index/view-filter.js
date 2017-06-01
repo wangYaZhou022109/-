@@ -39,7 +39,7 @@ exports.actionCallbacks = {
     getClassSignupInfo: function(data) {
         var classSignupInfo = data[0];
         var nowTime = (new Date()).getTime();
-        var url = '#/train/signup/' + classSignupInfo.classId;
+        var url = '#/train/sign-up/' + classSignupInfo.classId;
         if (classSignupInfo) {
             if (classSignupInfo.isOpen === 0) {
                 this.app.message.error('该培训班暂未开放报名!');

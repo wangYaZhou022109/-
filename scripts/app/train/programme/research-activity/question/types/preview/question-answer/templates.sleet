@@ -1,8 +1,8 @@
 #!handlebars
 
-module > .choise.preview-content
-    div(data-region='content')
-    .options(data-region='options')
+module
+    .newevaluation(data-region='content')
+    .newevaluation(data-region='options')
 
 view('content')
     # .row
@@ -10,13 +10,15 @@ view('content')
     #   .col-xs-6 > .m-top.text-right
     #      | 本题分数：
     #      echo(state.score)
-    p.question
+    spqn
         echo(state.index '.')
-        span.sub-text [问答题] &nbsp;
-        a.normal(name='mlj-' + state.id) > @echo(state.content)
+        | [
+        echo('问答题')
+        | ] &nbsp;
+    a.normal(name='mlj-' + state.id) > @echo(state.content)
 
 
-view('options') > .answer
-    ul > each(options)
+view('options')
+    ul.layout-mt-small > each(options)
         li(id='item-' + index)
             .inline-block > label.no-margin(for='answer-item-1') > @echo(content)

@@ -24,7 +24,8 @@ exports.store = {
         },
         form: {
             url: '../exam/research-activity/insert-of-other-module'
-        }
+        },
+        time: {}
     },
     callbacks: {
         init: function(payload) {
@@ -33,11 +34,15 @@ exports.store = {
                     id: payload.researchId,
                     sourceType: payload.sourceType || EXAM_SOURCE_TYPE
                 });
+                this.models.time.data = {
+                    startTime: payload.startTime,
+                    endTime: payload.endTime
+                };
                 return this.get(this.models.research);
             }
-
             D.assign(this.models.research.data, {
-                sourceType: payload.sourceType || EXAM_SOURCE_TYPE
+                sourceType: payload.sourceType || EXAM_SOURCE_TYPE,
+                type: this.module.options.RESEARCH_TYPE
             });
             return '';
         },
@@ -66,7 +71,9 @@ exports.store = {
         changeInfoDetaile: function(payload) {
             var main = this.module.items.main.getEntities()[0];
             D.assign(this.models.research.data, payload, main.getData());
+            D.assign(this.models.time.data, payload, main.getData());
             this.models.research.changed();
+            this.models.time.changed();
         }
     }
 };

@@ -92,6 +92,13 @@ exports.dataForTemplate = {
         url += ('classId=' + state.classId);
         url += ('&access_token=' + token);
         return url;
+    },
+    isGrant: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 1 || state.role === 2) {
+            return true;
+        }
+        return false;
     }
 };
 

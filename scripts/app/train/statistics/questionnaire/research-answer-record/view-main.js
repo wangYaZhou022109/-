@@ -7,7 +7,7 @@ exports.bindings = {
 };
 
 exports.components = [{
-    id: 'pager', name: 'background-pager', options: { model: 'researchQuestionarys' }
+    id: 'pager', name: 'pager', options: { model: 'researchQuestionarys' }
 }];
 
 exports.dataForTemplate = {
@@ -43,7 +43,8 @@ exports.events = {
 
 exports.handlers = {
     edit: function(id) {
-        var url = '#/exam/research-activity/research-answer/' + id;
+        var classId = this.bindings.state.data;
+        var url = '#/exam/research-activity/research-answer/' + id + '/' + classId.classId;
         window.open(url, '_blank');
     }
 };

@@ -1,0 +1,78 @@
+.setting-popup {
+    display: none;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(0,0,0,.35);
+    padding: var(--space);
+    top: 10%;
+    left: 50%;
+    transition: all .2s linear;
+    width: 300px;
+    margin-left: -150px;
+    background: var(--white);
+
+    &.show {
+        display: block;
+        z-index: 2;
+        transform: scale(1);
+    }
+}
+
+.top-bottom {
+    position: fixed;
+    right: var(--space);
+    bottom: calc(var(--space)*15);
+
+    & .back-box {
+        background-color: rgba(255, 255, 255, 0.5);
+        width: calc(var(--space)*5);
+        height: calc(var(--space)*5);
+        padding-top: 3px;
+        margin-bottom: var(--space);
+        border: 1px solid #ddd;
+
+        & a {
+            color: #363a3e;
+            line-height: calc(var(--space)*2);
+            text-align: center;
+            display: block;
+        }
+
+        & a:hover {
+            text-decoration: none;
+        }
+
+        &:hover {
+            background: #537fd5;
+
+            & a {
+                color: white;
+            }
+        }
+    }
+}
+
+.input-box {
+    position: relative;
+
+    & .text {
+        position: absolute;
+        padding: 7px 0 7px 10px;
+    }
+
+    & .input {
+        padding-left: 5em;
+
+        &.cont {
+            padding: 0 0 0 5em;
+
+            & .input {
+                padding-left: 0;
+                border: none;
+            }
+
+            & .btn {
+                border: none;
+            }
+        }
+    }
+}

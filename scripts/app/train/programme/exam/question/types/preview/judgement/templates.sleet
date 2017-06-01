@@ -1,29 +1,29 @@
 #!handlebars
 
-module > .choise
+module
     div(data-region='content')
-    .options(data-region='options')
+    div(data-region='options')
 
 view('content')
-    .row
-        .col-xs-6 > .com-title 判断题
+    .h4 判断题
         #  .col-xs-6 > .m-top.text-right
         #      | 本题分数：
         #      echo(state.score)
-    p.question > @echo(state.content)
+    .h4.m-top > @echo(state.content)
 
 
-view('options') 
-    input.inline-block(type='radio' name='judge' value=1)('checked')&if(state.correct)
-    .inline-block 正确
-    input.inline-block.m-left(type='radio' name='judge' value=0)('checked')&if(state.error)
-    .inline-block 错误
+view('options')
+    .m-top 
+        input.inline-block(type='radio' name='judge' value=1)('checked')&if(state.correct)
+        .inline-block 正确
+        input.inline-block.m-left(type='radio' name='judge' value=0)('checked')&if(state.error)
+        .inline-block 错误
+    .inline-block.m-top
+        span.text-tips 标准答案:
+        span > @echo(state.answer)
 
-    .clearfix
+    .clearfix            
         .pull-right.m-bottom
-            .inline-block
-                span.text-tips 标准答案:
-                span > @echo(state.answer)
             .inline-block.m-left
                 span.text-tips 题型:
                 span > echo(state.type)

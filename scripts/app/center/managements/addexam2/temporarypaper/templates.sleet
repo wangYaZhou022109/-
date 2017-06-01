@@ -92,6 +92,7 @@ view('temporarypaper2-content')
                 .pull-right.m-top
                     i.pointer.m-right.iconfont.icon-arrow-up-solid.gray
                     i.pointer.m-right.iconfont.icon-arrow-down-solid.gray
+                    i.pointer.m-right.iconfont.icon-edit-solid
                     i.iconfont.icon-trash
         .test-2.layout-mt-small
             .h4.layout-mb-small 排序

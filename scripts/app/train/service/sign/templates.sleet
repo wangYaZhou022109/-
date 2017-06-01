@@ -4,7 +4,7 @@ module
     .addattendance-page
         .addattendance(data-region='main')
 
-view('main')        
+view('main')
     .clearfix.layout-mt-small
         .pull-left
             label 签到规则：

@@ -10,10 +10,12 @@ exports.events = {
 
 exports.handlers = {
     showTab: function(tab) {
-        var state = this.bindings.state;
-        var classId = this.bindings.state.data.classId;
-        var isAutoApprove = this.bindings.state.data.isAutoApprove;
-        var quotaType = this.bindings.state.data.quotaType;
+        var state = this.bindings.state,
+            classId = state.data.classId,
+            isAutoApprove = state.data.isAutoApprove,
+            quotaType = state.data.quotaType,
+            role = state.data.role,
+            isOpen = state.data.isOpen;
         $(this.$('tab-' + tab)).addClass('active').siblings().removeClass('active');
         state.data = {};
         state.data.tab = tab || 'manage';
@@ -21,6 +23,8 @@ exports.handlers = {
         state.data.classId = classId;
         state.data.isAutoApprove = isAutoApprove;
         state.data.quotaType = quotaType;
+        state.data.role = role;
+        state.data.isOpen = isOpen;
         state.changed();
     }
 };
@@ -35,7 +39,7 @@ exports.dataForTemplate = {
     },
     isFmtrainee: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'fmtrainee') {
+        if (state.data.tab === 'formal-trainee') {
             return true;
         }
         return false;
@@ -49,7 +53,7 @@ exports.dataForTemplate = {
     },
     isIftrainee: function() {
         var state = this.bindings.state;
-        if (state.data.tab === 'iftrainee') {
+        if (state.data.tab === 'informal-trainee') {
             return true;
         }
         return false;
@@ -61,4 +65,11 @@ exports.dataForTemplate = {
         }
         return false;
     },
+    haveMessage: function() {
+        var state = this.bindings.state;
+        if (state.data.role !== 4) {
+            return true;
+        }
+        return false;
+    }
 };

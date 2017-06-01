@@ -1155,7 +1155,7 @@ view('classmanage')
                             .text-center > .btn.gray.tag-height 提交
                 #classmanage-content-5.display-none
                     .container
-                        section.section.w-half
+                        section.section.classnotice
                             .classnotice-title.clearfix
                                 span.strong.layout-mr 是否显示排行榜
                                 input(type="radio" name="rank" checked="true")

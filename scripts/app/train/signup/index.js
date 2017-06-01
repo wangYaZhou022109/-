@@ -62,7 +62,7 @@ exports.beforeRender = function() {
                     // 审核中
                     state.auditStatus = 0;
                 } else if (trainee.auditStatus === 1) {
-                    // 跳转班级详情页
+                    // 学员已报名成功
                     state.auditStatus = 1;
                 } else if (trainee.auditStatus === 2) {
                     // 审核未通过

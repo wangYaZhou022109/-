@@ -5,36 +5,53 @@ exports.items = {
 
 exports.store = {
     models: {
-        state: { data: {} },
-        classQuota: { url: '../train/class-quota' }
+        state: { data: { isAutoApprove: 0, quotaType: 1 } },
+        classQuota: { url: '../train/class-quota' },
+        signUpInfo: { url: '../train/sign-up' }
     },
     callbacks: {
         init: function(payload) {
-            var state = this.models.state;
             var classQuota = this.models.classQuota;
-            classQuota.params = { classId: payload.classId };
-            state.data.classId = payload.classId;
-            state.data.isAutoApprove = 0;
-            state.data.quotaType = 1;
-            this.get(classQuota).then(function(data) {
-                var ret = data[0];
-                if (ret) {
-                    state.data.isAutoApprove = ret.isAutoApprove;
-                    state.data.quotaType = ret.type;
-                    if (ret.isAutoApprove === 1) {
-                        state.data.tab = 'fmtrainee';
-                        state.data.fmtrainee = true;
-                    } else {
-                        state.data.tab = 'manage';
-                        state.data.manage = true;
-                    }
-                }
-                state.changed();
-            });
+            var signUpInfo = this.models.signUpInfo;
+            classQuota.clear();
+            signUpInfo.clear();
+            classQuota.params = { classId: payload };
+            signUpInfo.params = { classId: payload };
+            return this.chain(this.get(classQuota), this.get(signUpInfo));
         }
     }
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { classId: this.renderOptions.state.classId });
+    var me = this,
+        state = me.store.models.state.data,
+        payload = me.renderOptions.state,
+        classId = payload.classId;
+    state.classId = payload.classId;
+    state.role = payload.role;
+    return me.dispatch('init', classId).then(function() {
+        var classQuota = me.store.models.classQuota.data;
+        var signUpInfo = me.store.models.signUpInfo.data;
+        if (classQuota.id) {
+            if (signUpInfo.id) {
+                state.isAutoApprove = classQuota.isAutoApprove;
+                state.quotaType = classQuota.type;
+                state.isOpen = signUpInfo.isOpen;
+                // 如果手动审核并且开放报名,显示manage
+                if (classQuota.isAutoApprove === 0 && signUpInfo.isOpen === 1) {
+                    state.tab = 'manage';
+                    state.manage = true;
+                // 否则显示学员列表
+                } else {
+                    state.tab = 'formal-trainee';
+                    state.fmtrainee = true;
+                }
+                me.store.models.state.changed();
+            } else {
+                me.app.message.alert('当前班级尚未发布通知！');
+            }
+        } else {
+            me.app.message.alert('当前班级尚未配额！');
+        }
+    });
 };

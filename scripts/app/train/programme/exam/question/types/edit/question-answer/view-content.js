@@ -1,5 +1,8 @@
 var _ = require('lodash/collection'),
-    maps = require('./app/util/maps');
+    maps = require('./app/util/maps'),
+    $ = require('jquery'),
+    markers = require('./app/ext/views/form/markers'),
+    validators = require('./app/ext/views/form/validators');
 
 // exports.type = 'form';
 
@@ -20,10 +23,11 @@ exports.components = [{
     options: {
         model: 'img'
     }
-}, {
-    id: 'difficulty',
-    name: 'selectize'
 }];
+// }, {
+//     id: 'difficulty',
+//     name: 'selectize'
+// }];
 
 exports.mixin = {
     getResult: function() {
@@ -42,6 +46,38 @@ exports.mixin = {
             data.difficulty = this.$('difficulty').value;
         }
         return data;
+    },
+    validate: function() {
+        var content = $(this.$('content')),
+            difficulty = $(this.$('difficulty')),
+            components = this.components.content.text(),
+            ans = this.components.answer.text(),
+            answer = $(this.$('answer')),
+            flag = true;
+
+        markers.text.valid(content);
+        markers.text.valid(difficulty);
+
+        if (components.trim() === '') {
+            markers.text.invalid(content, validators.required.message);
+            flag = false;
+        }
+
+        if (!validators.maxLength.fn(components, 3000)) {
+            markers.text.invalid(content, '最大长度为3000');
+            flag = false;
+        }
+
+        if (!ans.trim()) {
+            markers.text.invalid(answer, validators.required.message);
+            flag = false;
+        }
+
+        if (difficulty.val() === '') {
+            markers.text.invalid(difficulty, validators.required.message);
+            flag = false;
+        }
+        return flag;
     }
 };
 

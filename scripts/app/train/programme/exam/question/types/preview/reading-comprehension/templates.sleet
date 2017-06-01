@@ -1,23 +1,24 @@
 #!handlebars
 
-module > .choise
+module
     div(data-region='content')
-    .options(data-region='subs')
+    div(data-region='subs')
     div(data-region='score')
 
 
 view('content')
-    .row
-        .col-xs-6 > .com-title 阅读理解
+    .h4 阅读理解
         #  .col-xs-6 > .m-top.text-right
         #      | 本题分数：
         #      echo(state.score)
-    p.question > @echo(state.content)
+    .h4.m-top > @echo(state.content)
 
 view('subs')
-    each(subs)
-        echo('(' index ')')
-        div(data-dynamic-key=id)
+    .answer
+        ul
+            each(subs) > li
+                spqn.pull-left.m-right > echo('(' index ')')
+                div(data-dynamic-key=id)
 
 view('score')
     .clearfix

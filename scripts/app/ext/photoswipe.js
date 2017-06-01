@@ -14,7 +14,8 @@ D.ComponentManager.register('photoswipe', function(view, el, option) {
         items.push({
             src: photo.imageUrl,
             w: img.width,
-            h: img.height
+            h: img.height,
+            title: photo.title
         });
     });
     gallery = new PhotoSwipe(el, uiDefault, items, options);
