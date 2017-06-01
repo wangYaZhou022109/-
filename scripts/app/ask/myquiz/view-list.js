@@ -200,7 +200,7 @@ exports.actionCallbacks = {
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        // this.module.dispatch('init');
+        this.module.dispatch('page');
     }
 };
 exports.dataForTemplate = {

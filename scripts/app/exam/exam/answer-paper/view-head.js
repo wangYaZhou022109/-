@@ -1,23 +1,26 @@
 var options = require('./app/exam/exam/base-paper/view-head'),
     strings = require('./app/util/strings'),
+    $ = require('jquery'),
     D = require('drizzlejs'),
     obj = D.assign({}, options),
-    actions = D.assign({}, obj.actions),
+    events = D.assign({}, obj.events),
     bindings = D.assign({}, obj.bindings),
-    dataForActions = D.assign({}, obj.dataForActions);
+    handlers = D.assign({}, obj.handlers);
 
 obj.bindings = bindings;
 D.assign(obj.bindings, {
-    mark: false
+    mark: false,
+    head: true,
+    state: 'changeAnswerCount'
 });
 
-obj.actions = actions;
-D.assign(obj.actions, {
+obj.events = events;
+D.assign(obj.events, {
     'click submit': 'submitPaper'
 });
 
-obj.dataForActions = dataForActions;
-D.assign(obj.dataForActions, {
+obj.handlers = handlers;
+D.assign(obj.handlers, {
     submitPaper: function() {
         var me = this,
             state = this.bindings.state.data,
@@ -58,9 +61,17 @@ D.assign(obj.dataForActions, {
                     });
                 });
             }, function() {
-                return me.module.dispatch('reloadState');
+                return true;
             });
         });
+    }
+});
+
+D.assign(obj, {
+    changeAnswerCount: function() {
+        var state = this.bindings.state.data;
+        $(this.$('answered-count')).html(state.answeredCount);
+        $(this.$('no-answer-count')).html(state.noAnswerCount);
     }
 });
 
