@@ -13,6 +13,7 @@ exports.getEntity = function() {
     var data = this.bindings.exam.data;
     return {
         endTime: getEndTime.call(this, data.examRecord.endTime),
+        startTime: data.examRecord.startTime,
         isDelay: this.bindings.countDown.data.isDeday
     };
 };
