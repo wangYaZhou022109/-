@@ -43,6 +43,6 @@ view('main')
                             echo('|')
                             a > setting('person.archives.exam.cert.down')
                     else
-                        tr > td(colspan='13') > p.text-center > string('no-data')
+                        tr > td(colspan='13') > p.text-center > string('center.archives.no-data')
         #pager.pagination
 
