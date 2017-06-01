@@ -25,9 +25,10 @@ view('bus')
                             .businfo-main.inline-block 
                                 .small-font > echo(name)
                                 .sub-text.m-top.small-font > echo(explain)
-                            .businfo-side.inline-block.layout-mr-small
-                                input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
-                                label(for='check-item'+id) 选择
-                                    #  td > .checkbox.no-margin
-                                    #      input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
-                                    #      label(for='check-item'+id)
+                            if(isGrant)
+                                .businfo-side.inline-block.layout-mr-small
+                                    input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                    label(for='check-item'+id) 选择
+                                        #  td > .checkbox.no-margin
+                                        #      input(type='checkbox' id='check-item'+id name='selected' value=id)('checked')&if(selected)
+                                        #      label(for='check-item'+id)

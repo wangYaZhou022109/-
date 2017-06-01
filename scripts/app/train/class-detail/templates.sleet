@@ -26,24 +26,24 @@ view('banner')
 
 view('main')
     .domain.clearfix.small-font
-        .domain01.pull-left.m-bottom.pointer(id='twoBring')&if(isGrant)
+        .domain01.pull-left.m-bottom.pointer(id='twoBring')
             i.iconfont.icon-favorite
             br
             | 两个带来
-        .domain02.pull-left.pointer(id='shuttleBusInformation')&if(isGrant)
+        .domain02.pull-left.pointer(id='shuttleBusInformation')
             i.iconfont.icon-bus
             br
             | 班车信息统计
-        .domain03.pull-left.m-bottom.pointer(id='commitTask')&if(isGrant)
+        .domain03.pull-left.m-bottom.pointer(id='commitTask')
             i.iconfont.icon-exam
             | 作业提交
         .domain04.pull-left.pointer(id='addCourse1')&if(isGrant)
             i.iconfont.icon-smile
             br
             | 学员满意度
-        .domain06.pull-left.m-bottom.pointer(id='questionnaire')&if(isGrant)
+        .domain06.pull-left.m-bottom.pointer(id='questionnaire')
             | 调研与考试
-        .domain07.pull-left.pointer(id='classMembers')&if(isGrant)
+        .domain07.pull-left.pointer(id='classMembers')
             | 同学录
 
 view('class-information')
@@ -217,15 +217,16 @@ view('two-brings') > form.vertical
             .h5.m-top 主题：
             textarea.w-full.m-top#content1(placeholder="输入问题内容" name='content1' rows="5" x-rule='required') > echo(twoBringsResult.content1)
         .watchbring-item.layout-mt-small.overflow
-            p > echo('1.' + signUpInfo.question2)
+            p > echo('2.' + signUpInfo.question2)
             .form.align-left > .form-row
                 label 经典/案例
                 .content > input.border.bottom.w-full(name='title2'  value=twoBringsResult.title2  x-rule='required')
             .h5.m-top 主题：
             textarea.w-full.m-top#content2(placeholder="输入问题内容" name='content2' rows="5" x-rule='required') > echo(twoBringsResult.content2)
         p.text-center
-            compare(twoBringsResult.id 'eq' null)
-                btn.btn(id='save') > echo('提交')
+            if(isGrant)
+                compare(twoBringsResult.id 'eq' null)
+                    btn.btn(id='save') > echo('提交')
 
 view('questionnaire') > .surveyexam-page > .surveyexam
     each(questionnaire)
@@ -236,10 +237,11 @@ view('questionnaire') > .surveyexam-page > .surveyexam
                     .h3 > echo(resourceName)
                     .small-font.sub-text.m-top > dateTime(startTime) + echo('~') + dateTime(endTime)
                 .inline-block.h4.sub-text 未完成
-            compare(type 'eq' 1)
-                a.surveyexam-btn.inline-block.btn(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
-            else
-                a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
+            if(isGrant)
+                compare(type 'eq' 1)
+                    a.surveyexam-btn.inline-block.btn(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
+                else
+                    a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
                 
 view('bus')
     section.section.businfo-page > .businfo

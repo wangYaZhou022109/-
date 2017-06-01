@@ -10,7 +10,9 @@ exports.events = {
     'click toExam-*': 'toExam',
     'click busView-*': 'toBusView',
     'click item-*': 'toggleclass',
-    'click search': 'toSearch'
+    'click search': 'toSearch',
+    'click inClass*': 'comeInClass',
+    'click seeClass*': 'seeClass'
 };
 
 exports.dataForTemplate = {
@@ -90,6 +92,14 @@ exports.handlers = {
     toSearch: function() {
         var name = this.$('name').value;
         this.module.dispatch('refreshList', { name: name });
+    },
+    comeInClass: function(id) {
+        var url = '#/train/class-detail/' + id;
+        window.open(url, '_blank');
+    },
+    seeClass: function(id) {
+        var url = '#/train/class-detail/' + id + '?see';
+        window.open(url, '_blank');
     }
 };
 

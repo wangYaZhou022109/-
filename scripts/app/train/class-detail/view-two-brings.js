@@ -7,7 +7,8 @@ exports.bindings = {
     twoBrings: true,
     twoBringsResult: true,
     classId: true,
-    signUpInfo: true
+    signUpInfo: true,
+    trainee: true
 };
 
 // exports.buttons = [{
@@ -63,5 +64,12 @@ exports.dataForTemplate = {
     twoBrings: function(data) {
         var twoBrings = data.twoBrings;
         return twoBrings;
+    },
+    isGrant: function() {
+        var trainee = this.bindings.trainee.data || {};
+        if (trainee.id) {
+            return true;
+        }
+        return false;
     }
 };
