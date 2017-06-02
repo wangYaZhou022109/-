@@ -103,6 +103,10 @@ exports.dataForTemplate = {
                 m.checked = true;
                 length++;
             }
+            if (m.organizationLevel && m.organizationLevel <= 3) {
+                m.companyName = m.organizationName;
+                m.organizationName = '';
+            }
         });
         waitTrainees.checkStatus = false;
         if (length === waitTrainees.length) {

@@ -6,7 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         iftrainees: {
-            url: '../train/trainee/iftrainees',
+            url: '../train/trainee/informal-trainees',
             type: 'pageable',
             root: 'items'
         },

@@ -3,15 +3,9 @@ var $ = require('jquery'),
     _ = require('lodash/collection');
 
 exports.bindings = {
-    trainees: true,
     state: false,
     organizations: true
 };
-
-exports.components = [{
-    id: 'auditStatus',
-    name: 'selectize'
-}];
 
 exports.actions = {
     'click search': 'search'
@@ -38,7 +32,7 @@ exports.dataForActions = {
 
 exports.dataForTemplate = {
     auditStatus: function() {
-        var result = maps.get('trainee-auditStatus').sort(function(a, b) {
+        var result = maps.get('trainee-response-auditStatus').sort(function(a, b) {
             return Number(a.key) - Number(b.key);
         });
         result.unshift({ key: '999', value: '全部' });

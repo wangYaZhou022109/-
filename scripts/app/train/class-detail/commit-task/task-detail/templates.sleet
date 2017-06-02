@@ -46,10 +46,10 @@ view('side')
             .side-item.clearfix.m-top
                 a.inline-block(id='attachment-'+attachmentId attachType='2' preview=preview href='javascript:;') > echo(name)
                 a.inline-blockr.pull-right(href=downUrl download=name) > string('download')
-        compare(task.btnType 'eq' 1)
-            .btn.block.gray.layout-mt-small.yellow#commitTask 提交作业
-        compare(task.btnType 'eq' 2)
-            .btn.block.gray.layout-mt-small.yellow#commitTask 重新提交
+    compare(task.btnType 'eq' 1)
+        .btn.block.gray.layout-mt-small.yellow#commitTask 提交作业
+    compare(task.btnType 'eq' 2)
+        .btn.block.gray.layout-mt-small.yellow#commitTask 重新提交
     if(taskMemberModel.hasComment)
         .m-top
         label.block 评语：
