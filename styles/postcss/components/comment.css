@@ -64,6 +64,9 @@
             &:hover {
                 color: var(--link-color);
             }
+            &.inline {
+                margin-left: var(--space);
+            }
         }
 
         & .drop-down-content {

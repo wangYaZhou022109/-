@@ -28,13 +28,13 @@ view('list')
     .comment-list.ask-list
         ul > each(expertlist)
             li.expert-item
-                a.normal(href="javascript:;")
-                    .img(id='expert-' + id + ',' + member.id data-name='id' data-value=id + id + ',' + member.id) > .img-cont > img(src=member.headPortrait alt=member.fullName)
-                    h4.text-overflow > echo(member.fullName)
-                    .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
-                    .row > each(topicList) 
-                        .tag-btn > echo(name)
-                    .sub-text.text-overflow > echo(introduce)
+                .img > .img-cont > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
+                h4.text-overflow > echo(member.fullName)
+                .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
+                .row > each(topicList) 
+                    .tag-btn 
+                        a.normal(href='#/ask/topicdetail/'+ id ) > echo(name)
+                .sub-text.text-overflow > echo(introduce)
                 compare(member.id 'ne' me)
                     compare(concernList.length 'gt' 0)
                         .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
