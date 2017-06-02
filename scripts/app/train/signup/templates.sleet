@@ -72,6 +72,7 @@ view('main') > form.vertical
             .form
                 input.input(name='id' value=member.id type='hidden')
                 input.input(name='organizationId' value=member.organizationId type='hidden')
+                input.input(name='settleOrganizationId' value=member.companyId type='hidden')
                 .form-row
                     label 培训班名称
                     .content > input.input(value=classSignupInfo.classInfo.className disabled=true)
