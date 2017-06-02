@@ -14,18 +14,18 @@ exports.handlers = {
     doResearch: function() {
         var me = this;
         return this.module.dispatch('getRecordByResearch').then(function() {
-            // 如果是一开始的直接进入答题页面，不需要弹窗
+            // 如果是已开始的直接进入答题页面，不需要弹窗
             var researchRecord = me.bindings.researchRecord.data,
                 research = researchRecord.researchQuestionary,
                 now = new Date().getTime(),
                 url = '';
-            // 正在进行中的调研直接进入答题（详情）界面咯
-            if (researchRecord.id && now >= research.startTime && now <= research.endTime) { // 进行中
+            // 调研直接进入答题(正在进行中的)/详情界面咯
+            if (researchRecord.id && researchRecord.status === 1) { // 已完成
+                url = '#/exam/research-activity/research-answer/' + researchRecord.id;
+                window.open(url, '_blank');
+            } else if (researchRecord.id && now >= research.startTime && now <= research.endTime) { // 进行中
                 if (researchRecord.status === 0) { // 未答题
                     url = '#/exam/research-activity/research-detail/' + research.id + '/' + research.id;
-                    window.open(url, '_blank');
-                } else {
-                    url = '#/exam/research-activity/research-answer/' + researchRecord.id;
                     window.open(url, '_blank');
                 }
             } else {
