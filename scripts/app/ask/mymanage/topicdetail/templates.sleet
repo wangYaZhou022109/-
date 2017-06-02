@@ -48,6 +48,6 @@ view('relatedquestions')
     section.section.relevant-course
         span.h3 > echo('热门问题')
         .layout-mt-small.m-top
-            each(question)
+            each(hotquestion)
                 .block.layout-mt-small.m-top 
                     a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)

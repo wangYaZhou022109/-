@@ -29,6 +29,6 @@ view('main')
                     td > echo(createTimeStr)
                     td > a(href='#/exam/research-activity/research-summary-detail/'+id target='_blank') > setting('person.archives.exam.detail')
                     else
-                        tr > td(colspan='8') > p.text-center > string('no-data')
+                        tr > td(colspan='8') > p.text-center > string('center.archives.no-data')
         #pager.pagination
 

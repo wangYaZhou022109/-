@@ -39,23 +39,23 @@ view('head')
             if(showExamNotes)
                 li > i.iconfont.icon-notice(id='notice' style=if(noticed '' 'color:#39fe2c'))
             li.border.right > echo('本卷共' state.totalCount '题，总分' state.totalScore '分')
-            li.border.right > echo('已答：' state.answeredCount)
-            li.border.right > echo('未答：' state.noAnswerCount)
+            li.border.right > echo('已答：') + span(id='answered-count')
+            li.border.right > echo('未答：') + span(id='no-answer-count')
         .btn#submit 我要交卷
 
 view('main')
     .preview-content
-        if(state.singleMode)
-            if(state.currentQuestion.id)
+        if(main.singleMode)
+            if(main.currentQuestion.id)
                 .m-bottom
-                    .h3.inline-block > echo(state.currentQuestion.typeDesc '(' state.currentQuestion.index '/' state.currentQuestion.totalCount ')')
-                    .inline-block > echo('本题分数:' state.currentQuestion.score)
+                    .h3.inline-block > echo(main.currentQuestion.typeDesc '(' main.currentQuestion.index '/' main.currentQuestion.totalCount ')')
+                    .inline-block > echo('本题分数:' main.currentQuestion.score)
                 .bottom.text-right
-                    div(data-dynamic-key='correct-' + state.currentQuestion.id)
-                compare(state.currentQuestion.status 'eq' 'check')
-                    div.question-type-item.checked(data-dynamic-key=state.currentQuestion.id)
-                compare(state.currentQuestion.status 'ne' 'check')
-                    div.question-type-item(data-dynamic-key=state.currentQuestion.id)
+                    div(data-dynamic-key='correct-' + main.currentQuestion.id)
+                compare(main.currentQuestion.status 'eq' 'check')
+                    div.question-type-item.checked(data-dynamic-key=main.currentQuestion.id)
+                compare(main.currentQuestion.status 'ne' 'check')
+                    div.question-type-item(data-dynamic-key=main.currentQuestion.id)
 
 
         else
@@ -68,10 +68,10 @@ view('main')
                             div.question-type-item.checked(data-dynamic-key=id)
                         compare(status 'ne' 'check')
                             div.question-type-item(data-dynamic-key=id)
-    if(state.singleMode)
+    if(main.singleMode)
         .text-right
-            .btn.white.border.m-right(id='prev-' + state.currentQuestion.typeIndex) 上一题
-            .btn.white.border(id='next-' + state.currentQuestion.typeIndex) 下一题
+            .btn.white.border.m-right(id='prev-' + main.currentQuestion.typeIndex) 上一题
+            .btn.white.border(id='next-' + main.currentQuestion.typeIndex) 下一题
 
 
 view('answer-detail')

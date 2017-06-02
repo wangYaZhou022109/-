@@ -2,6 +2,11 @@
 module
     div(data-region='list')
 view('list')
+    compare(page.length 'lt' 1) 
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
     each(page)
         li
             .user-pic > img.pointer(src=createUser.headPortrait)
@@ -31,7 +36,7 @@ view('list')
                             echo('.') + string('share') + echo('.')
                     span.sub-text > echo(createTime)
                 .comment-operation
-                    .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                    .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > a(href='#/ask/topicdetail/' + id ) >  echo(name) + echo(' ')
                     .text-right
                         compare(trendsType 'eq' '2')
                             compare(isPraise 'gt' 0)

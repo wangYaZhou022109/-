@@ -34,17 +34,17 @@ view('list')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
-                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > echo('取消加精|')
-                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > echo('置顶|')
-                                    .item > .share-bar
+                                    .item.inline(id='unEssenceStatus-' + id data-name='id' data-value=id) > echo('取消加精|')
+                                    .item.inline(id = 'del-question1-' + id data-name='id' data-value=id) > echo('置顶|')
+                                    .item.inline > .share-bar
                                         .drop-down-wrapper
                                             span 分享
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                    
-                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > echo('举报|')
-                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > echo('关闭')
+                                    .item.inline(id ='report-' + 2 + '_' + id +'_' + createMemberId data-name='id' data-value= 2 +'_' + id +'_' + createMemberId) > echo('举报|')
+                                    .item.inline(id = 'del-question3-' + id data-name='id' data-value=id) > echo('关闭')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=organizationId)
@@ -80,17 +80,16 @@ view('list')
                                         .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
                                             string('praise') +  echo('（'+ praiseNum +'）') 
                                     .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
-                                    .item 
-                                        span(id = 'set-' + id data-name='id' data-value=id) > echo('加精|')
-                                        span(id = 'top-' + id data-name='id' data-value=id) > echo('置顶|')
-                                        span(id ='report-' + 2 + '_' + id +'_' + createMemberId data-name='id' data-value= 2 +'_' + id +'_' + createMemberId) > echo('举报|')
-                                        span(id = 'close-' + id data-name='id' data-value=id) > echo('关闭')
-                                    .item > .share-bar
+                                    .item.inline(id='setEssenceStatus-' + id data-name='id' data-value=id) > echo('加精|')                            
+                                    .item.inline(id = 'top-' + id data-name='id' data-value=id) > echo('置顶|')
+                                    .item.inline > .share-bar
                                         .drop-down-wrapper
-                                            span 分享
+                                            span 分享|
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    .item.inline(id ='report-' + 2 + '_' + id +'_' + createMemberId data-name='id' data-value= 2 +'_' + id +'_' + createMemberId) > echo('举报|')
+                                    .item.inline(id = 'close-' + id data-name='id' data-value=id) > echo('关闭')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=organizationId)

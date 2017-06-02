@@ -15,4 +15,5 @@ view('main')
         .item
             i.iconfont.icon-view
             span > echo('浏览数：' news.visitors)
+    p.introduction > @echo(news.summary)
     p.introduction > @echo(news.content)

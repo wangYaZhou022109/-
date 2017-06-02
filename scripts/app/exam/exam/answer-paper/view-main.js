@@ -2,6 +2,7 @@ var options = require('./app/exam/exam/base-paper/view-main'),
     D = require('drizzlejs'),
     obj = D.assign({}, options),
     bindings = D.assign({}, obj.bindings),
+    dataForTemplate = D.assign({}, obj.dataForTemplate),
     types = require('./app/exam/exam-question-types'),
     constant = {
         ANSWER_PAPER_MODE: 3,
@@ -15,7 +16,16 @@ var options = require('./app/exam/exam/base-paper/view-main'),
 obj.bindings = bindings;
 D.assign(obj.bindings, {
     mark: false,
-    answer: false
+    answer: false,
+    state: false,
+    main: true
+});
+
+obj.dataForTemplate = dataForTemplate;
+D.assign(obj.dataForTemplate, {
+    main: function(data) {
+        return D.assign({}, data.state);
+    }
 });
 
 D.assign(obj, {

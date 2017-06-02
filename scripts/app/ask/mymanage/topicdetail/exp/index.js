@@ -13,6 +13,8 @@ exports.store = {
         follow: { url: '../ask-bar/question-details/boutique' },
         reply: { url: '../ask-bar/question-reply' },
         unfollow: { url: '../ask-bar/concern/unfollow' },
+        setEssenceStatus: { url: '../ask-bar/question/essence-status' },
+        unEssenceStatus: { url: '../ask-bar/question/essence-status' },
         del: { url: '../ask-bar/trends/del' },
         down: { url: '../human/file/download' },
         praise: { url: '../ask-bar/my-share/praise' },
@@ -120,6 +122,7 @@ exports.store = {
             var params = this.models.page.params;
             // var page = this.models.page;
             var id = this.models.state.data.topicid;
+            // console.log(this.models.state.data.topicid);
             // if (typeof payload.state.id !== 'undefined') {
             //     params.id = payload.state.id;
             // }
@@ -158,6 +161,7 @@ exports.store = {
         },
         follow: function(payload) {
             var follow = this.models.follow;
+            // console.log(payload);
             follow.set(payload);
             return this.post(follow);
         },
@@ -165,6 +169,16 @@ exports.store = {
             var unfollow = this.models.unfollow;
             unfollow.set(payload);
             return this.put(unfollow);
+        },
+        setEssenceStatus: function(payload) {
+            var setEssenceStatus = this.models.setEssenceStatus;
+            setEssenceStatus.set(payload);
+            return this.put(setEssenceStatus);
+        },
+        unEssenceStatus: function(payload) {
+            var unEssenceStatus = this.models.unEssenceStatus;
+            unEssenceStatus.set(payload);
+            return this.put(unEssenceStatus);
         },
         shut: function(payload) {
             var shut = this.models.shut,
