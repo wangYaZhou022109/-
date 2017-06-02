@@ -122,31 +122,31 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    shut1: function(payload) {
-        // var me = this;
-        // return this.Promise.create(function(resolve) {
-        //     var message = '确定要删除该数据?';
-        //     me.app.message.confirm(message, function() {
-        //         resolve(data);
-        //     }, function() {
-        //         resolve(false);
-        //     });
-        // });
-        var data = payload;
-        return data;
+    shut1: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '讨论删除后将无法恢复，是否确定删除该讨论？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+        // var data = payload;
+        // return data;
     },
-    shut2: function(payload) {
-        // var me = this;
-        // return this.Promise.create(function(resolve) {
-        //     var message = '确定要删除该数据?';
-        //     me.app.message.confirm(message, function() {
-        //         resolve(data);
-        //     }, function() {
-        //         resolve(false);
-        //     });
-        // });
-        var data = payload;
-        return data;
+    shut2: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '回复删除后将无法恢复，是否确定删除该回复？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+        // var data = payload;
+        // return data;
     },
     publish: function(payload) {
         return payload;
