@@ -29,6 +29,6 @@ view('main')
                     td > map('gensee-access-status' status)
                     td > dateMinute(accessTime)
                     else
-                        tr > td(colspan='7') > p.text-center > string('no-data')
+                        tr > td(colspan='8') > p.text-center > string('center.archives.no-data')
         #pager.pagination
 

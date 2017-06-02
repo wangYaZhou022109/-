@@ -3,9 +3,15 @@ module
     .banner-notice(data-region='banner-notice')
 
 view('banner-notice')
-    .notice-img > img.block(src=downloadUrl(news.cover))&if(news.cover) + .img-title
-        a.underline(href='/#/news/detail/'+news.id+'/0') > echo(news.title)
-    ul > each(newsList)
-        li > a.underline(href='/#/news/detail/'+id+'/0') > echo(title)
-    .notice-bottom > each(personPanels)
-        .item > i.iconfont.icon-type + span > a.underline(href='/#/'+url) > echo(name)
+    if(Global.currentUser.id)
+        .notice-img > img.block(src=downloadUrl(task.coverId))&if(task.coverId) + .img-title
+            a.underline(href=task.url target='_blank' title=task.name) > echo(task.name)
+        ul > each(tasks)
+            li > a.underline(href=url target='_blank' title=name) > echo(name)
+        .notice-bottom > each(personPanels) 
+            .item > i.iconfont.icon-type + span > a.underline(href='/#/'+url) > echo(name)
+    else
+        .notice-img > img.block(src=downloadUrl(news.cover))&if(news.cover) + .img-title
+            a.underline(href='/#/news/detail/'+news.id+'/0' title=news.title) > echo(news.title)
+        ul > each(newsList)
+            li > a.underline(href='/#/news/detail/'+id+'/0' title=title) > echo(title)        
