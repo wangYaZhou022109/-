@@ -78,7 +78,10 @@ exports.handlers = {
     toBusView: function(busId, e, target) {
         var model = this.module.items['train/class-detail/class-bus'],
             classId = target.getAttribute('busClassId');
-        this.app.viewport.modal(model, { busId: busId, classId: classId });
+        this.module.dispatch('getTrainee', { classId: classId }).then(function(data) {
+            var trainee = data[0];
+            this.app.viewport.modal(model, { busId: busId, classId: classId, traineeId: trainee.id });
+        });
     },
     toggleclass: function(id) {
         var state = this.bindings.state,

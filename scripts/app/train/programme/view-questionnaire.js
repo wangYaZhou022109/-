@@ -76,6 +76,8 @@ exports.handlers = {
                     endTime: data.endTime,
                     isAdd: data.isAdd,
                     paperClassId: data.paperClassId,
+                    duration: data.duration,
+                    markConfig: data.markConfig
                 };
                 me.module.dispatch('saveResearch', param);
             }
