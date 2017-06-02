@@ -1,6 +1,7 @@
 var _ = require('lodash/collection'),
     types = require('./app/exam/exam-question-types'),
-    D = require('drizzlejs');
+    D = require('drizzlejs'),
+    READING_SUB_INDEX_TYPE = 1;
 
 exports.type = 'dynamic';
 
@@ -44,6 +45,7 @@ exports.dataForEntityModule = function(question) {
             me.bindings.goal.save(data);
             return me.module.dispatch('save');
         },
-        goal: this.bindings.goal.getGoal(question.id)
+        goal: this.bindings.goal.getGoal(question.id),
+        indexType: READING_SUB_INDEX_TYPE //  区分阅读题子题目时，索引展示类型
     };
 };

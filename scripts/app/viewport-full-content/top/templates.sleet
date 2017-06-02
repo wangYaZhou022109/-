@@ -15,40 +15,47 @@ view('nav')
                 .item> a.normal.nav-color(href=url target='_blank') > echo(name)
             else
                 .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color(class='active')&if(active) > echo(name)
-        else
-            each(menus)
-                .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
+        #  else
+        #      each(menus)
+        #          .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
 
 view('shortcut')
     .toggle-shortcut > i.pe-7s-angle-down
     .shortcut-list
-        .item
-            .header-search-bar.border-main-color
-                .search-select > select.input
-                    option 全部
-                    option 课程
-                    option 专题
-                .search-input > input.input#search(placeholder='请输入您要搜索的内容')
-                .search-btn > button.btn(type='button') > i.iconfont.icon-search
-                .search-more-bar#searchMore > ul
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
-                    li.text-hover-main-color 热门搜索课程名称
+        if(showSearch)
+            .item > form.vertical
+                .header-search-bar.border-main-color#searchPannel
+                    .search-select > select.input(name='searchType')
+                        each(searchTypes)
+                            option(value=key) > echo(value)
+                    .search-input > input.input#searchContent(name='searchContent' autocomplete='off' placeholder='请输入您要搜索的内容' value=searchContent)
+                    .search-btn > button.btn(id='searchBtn' type='button') > i.iconfont.icon-search
+                    .search-more-bar.border.around#searchMore > ul
+                        each(searchHistorys)
+                            li.text-hover-main-color
+                                i.iconfont.icon-close.pull-right.pointer(id='remove-'+id href='javascript:;')
+                                a(id='historyName-'+id data-name='id' data-value=id) > echo(searchContent)
+                        if(searchHistorys)
+                            .layout-mt-small.sub-text.small-font.text-center.pointer > a(id='clearHistory' href='javascript:;') 清空历史
+                            .hr
+                        .m-left
+                            .m-top 热门搜索
+                            .clearfix.m-top
+                                each(hotTopics)
+                                    .tag-btn.radius(id='topic-'+id  data-name='id' data-value=id) > echo(name)
 
-        .item.small-font.drop-down-wrapper.right
-            .drop-down-btn
-                span#selected-name > echo(organization.name)
-                i.iconfont.icon-triangle-down
-            .drop-down-content > .content
-                ul
-                    if(Global.organization)
-                        li(id='org-'+Global.organization.id) > echo(Global.organization.name)
-                    each(organizations)
-                        li(id='org-'+id) > echo(name)
 
         if(Global.currentUser.id)
+            .item.small-font.drop-down-wrapper.right
+                .drop-down-btn
+                    span#selected-name > echo(organization.name)
+                    i.iconfont.icon-triangle-down
+                .drop-down-content > .content
+                    ul
+                        if(Global.organization)
+                            li(id='org-'+Global.organization.id) > echo(Global.organization.name)
+                        each(organizations)
+                            li(id='org-'+id) > echo(name)
             .item.drop-down-wrapper.right
                 a#message-div.normal(href='#') > i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content
@@ -57,24 +64,24 @@ view('shortcut')
                             li
                                 a.underline(href='#/message/detail/'+id  target='_blank') > .text-overflow > echo(subject)
                                 .sub-text.text-overflow > echo(textContent)
-                        .text-center.small-font > a#message-more 查看更多
+                        .text-center.small-font > a.pointer#message-more 查看更多
                     else
                         .text-center.small-font 暂无新消息
             compare(Global.roleLength 'gt' 0)
-                .item > a.normal(href='/admin/') > i.iconfont.icon-setting
+                .item > a.normal(href='/admin/' title='进入管理后台') > i.iconfont.icon-setting
             .item.drop-down-wrapper.right
                 .drop-down-btn.user-info.inline-block.user-pic
                     if(Global.currentUser.headPortrait)
                         img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
                     else
-                        img(src='images/default-userpic.png')
+                        img(src='images/default-cover/default_user.png')
                 .drop-down-content > .content
                     .user-info-top
                         .user-pic.inline-block
                             if(Global.currentUser.headPortrait)
                                 img(src='/api/v1/human/file/download?id='+Global.currentUser.headPortrait)
                             else
-                                img(src='images/default-userpic.png')
+                                img(src='images/default-cover/default_user.png')
                         .user-info-main.inline-block
                             .item
                                 .inline-block.common-title > echo(Global.currentUser.name)
@@ -92,6 +99,9 @@ view('shortcut')
                     .hide
                         form#logoutForm(method='POST' action=Global.OAuth.logoutUrl)
                             input(type='hidden' name='redirect_uri' value=Global.OAuth.redirectUri)
+        unless(Global.currentUser.id)
+            .item.small-font > a#login(href='javascript:;' title='登录') 登录
+            # .item.small-font > a(href='javascript:;' title='注册') 注册
 
 view('logo')
     if(homeConfig.logo)

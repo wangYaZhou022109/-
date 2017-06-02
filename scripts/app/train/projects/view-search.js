@@ -1,9 +1,5 @@
 var $ = require('jquery');
 
-exports.bindings = {
-    projects: true
-};
-
 exports.actions = {
     'click search': 'search'
 };

@@ -1,0 +1,34 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list(data-region='main')
+
+view('main') > .container
+    compare(knowledges.length 'gt' 0)
+        .layout-mt-small
+            span.sub-text > string('search-result-prefix')
+            span.color-pass > echo(knowledges.length)
+            span.sub-text > string('search-result-end')
+    else
+        .empty
+            string('search-empty-prefix')
+            if(state.searchContent)
+                echo(state.searchContent)
+            else
+                echo(state.topicName)
+            string('search-empty-end')
+    .main-list
+        ul.knowledge-list.cell-2 > each(knowledges)
+            li(id = 'knowledge-'+id) > .knowledge-box
+                i.iconfont.pull-left.m-right.icon-word
+                .knowledge-tit-con
+                    .clearfix
+                        a.knowledge-tit.pull-left > echo(name)
+                    .text-tips
+                        span > echo('发布人:') + echo(uploadMember.fullName)
+                        span > echo('发布日期：') + date(uploadTime)
+                        span > echo('浏览数：') + echo(browseCount)
+                        span > echo('下载数：') + echo(downloadMemberCount)
+
+        #pager.pagination

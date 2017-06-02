@@ -1,22 +1,23 @@
+
 exports.items = {
     tree: 'tree'
 };
 
 exports.store = {
     models: {
-        organizationTree: { url: '../system/grant/granted-organization' },
+        organizationTree: { url: '../system/organization/company-orgs' },
         state: { data: {} }
     },
     callbacks: {
-        initPage: function(uri) {
-            this.get(this.models.organizationTree, { data: { uri: uri } });
+        initPage: function() {
+            var organizationTree = this.models.organizationTree;
+            this.get(organizationTree);
         }
     }
 };
 
 exports.afterRender = function() {
-    var uri = this.moduleOptions.uri || this.app.global.uri;
-    this.dispatch('initPage', uri);
+    this.dispatch('initPage');
 };
 
 exports.buttons = [{

@@ -10,13 +10,17 @@ exports.items = {
 exports.store = {
     models: {
         img: { url: '../system/file/upload' },
-        // concern: { url: '../ask-bar/my-share/findconcern' },
         followcount: { data: { menu: 'followcount' } },
-        // expert: { url: '../ask-bar/expert' },
         relevantexperts: { data: { menu: 'relevantexperts' } },
         relatedquestions: { data: { menu: 'relatedquestions' } },
         details: {
-            url: '../ask-bar/question-details'
+            url: '../ask-bar/question-details',
+            mixin: {
+                findById: function(id) {
+                    var questionDiscussList = this.module.store.models.details.data.questionDiscussList;
+                    _.find(questionDiscussList, ['id', id]);
+                }
+            }
         },
         enjoy: {
             url: '../ask-bar/question-details/enjoy'
@@ -35,6 +39,7 @@ exports.store = {
         },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         praise: { url: '../ask-bar/my-share/praise' },
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
         shut: { url: '../ask-bar/myquiz' },
         down: { url: '../human/file/download' },
         speech: {
@@ -101,9 +106,11 @@ exports.store = {
             details.set({ id: d.id });
             return this.get(details).then(function(data) {
                 var params = _.map(data[0].topicList, 'id').join(',');
-                expert.params.ids = params;
-                me.get(expert);
-                me.get(question);
+                if (params !== '') {
+                    expert.params.ids = params;
+                    question.params.ids = params;
+                    me.chain([me.get(expert), me.get(question)]);
+                }
             });
         },
         details: function(payload) {
@@ -207,12 +214,16 @@ exports.store = {
             var praise = this.models.praise;
             praise.set(payload);
             return this.post(praise);
+        },
+        unpraise: function(payload) {
+            var unpraise = this.models.unpraise;
+            unpraise.set(payload);
+            return this.put(unpraise);
         }
     }
 };
 
 exports.beforeRender = function() {
-    // this.dispatch('init', this.renderOptions);
     return this.chain([this.dispatch('questionDetails', this.renderOptions), this.dispatch('speech')]);
 };
 

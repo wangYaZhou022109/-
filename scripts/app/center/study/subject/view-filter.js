@@ -1,13 +1,13 @@
 var D = require('drizzlejs'),
     options = require('./app/center/study/course/view-filter');
 D.assign(options.events, {
-    'click registerTimeOrder': 'registerTimeOrder'
+    'click studyTimeOrder': 'studyTimeOrder'
 });
 D.assign(options.handlers, {
-    registerTimeOrder: function() {
-        var registerTimeOrder = this.bindings.search.data.registerTimeOrder,
+    studyTimeOrder: function() {
+        var studyTimeOrder = this.bindings.search.data.studyTimeOrder,
             params = {
-                registerTimeOrder: registerTimeOrder === 'desc' ? 'asc' : 'desc'
+                studyTimeOrder: studyTimeOrder === 'desc' ? 'asc' : 'desc'
             };
         this.module.dispatch('search', params);
     }

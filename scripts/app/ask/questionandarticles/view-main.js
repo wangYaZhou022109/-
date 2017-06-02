@@ -15,10 +15,7 @@ exports.handlers = {
             this.module.items['ask/question'],
             {
                 leftrefresh: function() {
-                    me.module.dispatch('leftrefresh');
-                },
-                bottomsrefresh: function() {
-                    me.module.dispatch('bottomsrefresh');
+                    me.module.renderOptions.leftrefresh();
                 },
                 id: payload
             }
@@ -32,7 +29,7 @@ exports.handlers = {
             this.module.items['ask/article'],
             {
                 leftrefresh: function() {
-                    me.module.dispatch('leftrefresh');
+                    me.module.renderOptions.leftrefresh();
                 },
                 id: payload
             }

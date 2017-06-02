@@ -12,6 +12,7 @@ exports.store = {
             smallBanners.clear();
             smallBanners.params.moduleHomeConfigId = payload.id;
             smallBanners.params.clientType = 1;
+            smallBanners.params.size = 5;
             return this.get(smallBanners);
         }
     }

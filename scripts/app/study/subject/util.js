@@ -2,18 +2,35 @@ var D = require('drizzlejs'),
     _ = require('lodash/collection'),
     helper = require('./app/util/helpers'),
     options = {
-        charset: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
-        before: '第',
-        after: '节'
+        chnNumChar: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+        chnUnitChar: ['', '十', '百', '千']
     },
     studyBtnColor = { 2: 'custom-bg-color-5', 4: 'custom-bg-color-5' },
-    items;
+    items,
+    numberToChinese = function(number) {
+        var num = number,
+            resetStr = [],
+            unitPos = 0,
+            v;
+        if (number > 9999) return number;
+        while (num > 0) {
+            v = num % 10;
+            resetStr.unshift(options.chnUnitChar[unitPos++]);
+            resetStr.unshift(options.chnNumChar[v]);
+            num = Math.floor(num / 10);
+        }
+        return resetStr.join('')
+        .replace(/^一十/, '十')
+        .replace(/零$/, '')
+        .replace(/零./g, '零')
+        .replace(/零+/, '零');
+    };
 // 阶段序号转义
 exports.rowHeader = function(arr, payload) {
     var opt = D.assign(options, payload);
     _.map(arr || [], function(obj, i) {
         var c = obj;
-        c.i = opt.before + opt.charset[i] + opt.after;
+        c.i = opt.before + numberToChinese(i + 1) + opt.after;
         if (i === 0) c.first = true;
         if (i === arr.length - 1) c.last = true;
     });
@@ -76,7 +93,7 @@ items = {
         var progress = section.progress || { finishStatus: 0 },
             resource = section.resource || {},
             examScore = progress.examScore || 0,
-            score = examScore / 100,
+            score = (examScore % 100) > 0 ? (examScore / 100).toFixed(1) : window.parseInt(examScore / 100),
             btnText = { 0: '参与考试', 1: '查看详情', 2: '查看详情', 5: '查看详情', 6: '重新考试' },
             statusText = { 1: '成绩：' + score, 2: '成绩：' + score, 5: '待评卷', 6: '成绩：' + score },
             timeText;
@@ -106,10 +123,9 @@ items = {
     },
     14: function(section) {
         var resource = section.resource || {},
-            currentTime = new Date().getTime(),
             btnText,
             statusText;
-        if (resource.endTime && currentTime > resource.endTime) {
+        if (resource.status && resource.status === 3) {
             btnText = '查看详情';
             statusText = '已结束';
         } else {

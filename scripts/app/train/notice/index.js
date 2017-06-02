@@ -16,6 +16,7 @@ exports.store = {
             var state = this.models.state,
                 signupInfo = this.models.signupInfo;
             state.data.classId = payload.id;
+            state.data.role = payload.role;
             signupInfo.params.classId = payload.id;
             this.get(signupInfo);
         },
@@ -35,5 +36,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    return this.dispatch('init', { id: this.renderOptions.state.classId });
+    return this.dispatch('init', { id: this.renderOptions.state.classId, role: this.renderOptions.state.role });
 };

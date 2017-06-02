@@ -1,5 +1,7 @@
 var _ = require('lodash/collection'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    viewUtil = require('./app/full-text-search/view-util'),
+    D = require('drizzlejs');
 
 var menus = [{
     createTime: 1474538557153,
@@ -67,7 +69,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        menus: { data: menus },
+        // menus: { data: [] },
         navs: { url: '../system/home-nav' },
         homeConfig: { url: '../system/home-config/config' },
         message: {
@@ -76,7 +78,9 @@ exports.store = {
         },
         organizations: { url: '../system/home-config/organization' },
         integral: { url: '../system/integral-result/grade' }, // 积分和等级
-        courseTime: { url: '../course-study/course-study-progress/total-time' } // 总学习时长
+        courseTime: { url: '../course-study/course-study-progress/total-time' }, // 总学习时长
+        hotTopics: { url: '../system/topic/hot-all' }, // 热门标签
+        state: {}
     },
     callbacks: {
         init: function(payload) {
@@ -85,13 +89,27 @@ exports.store = {
                 navs = this.models.navs;
             homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
             homeConfig.clear();
+            if (this.app.global.currentUser.organization) {
+                this.models.hotTopics.params.limit = 10;
+                this.get(this.models.hotTopics);
+            }
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     navs.params.homeConfigId = homeConfig.data.id;
                     navs.clear();
-                    return that.get(navs);
+                    that.get(navs).then(function() {
+                        if ((!navs.data) || navs.data.length === 0) {
+                            navs.clear();
+                            D.assign(navs.data, menus);
+                            navs.changed();
+                        }
+                    });
+                } else {
+                    navs.clear();
+                    D.assign(navs.data, menus);
+                    navs.changed();
                 }
-                return null;
+                // return null;
             });
         },
         'app.pushState': function(hash) {
@@ -132,6 +150,41 @@ exports.store = {
             if (this.app.global.currentUser && this.app.global.currentUser.initSetting === 0) {
                 this.app.viewport.modal(this.module.items['home/member-info']);
             }
+        },
+        searchByName: function(payload) {
+            viewUtil.addSearchHistory(payload);
+            return true;
+        },
+        enterSearch: function(payload) {
+            viewUtil.addSearchHistory(payload);
+            return true;
+        },
+        historyName: function(payload) {
+            viewUtil.editSearchHistory(payload);
+            return true;
+        },
+        clearHistory: function() {
+            viewUtil.clearSearchHistory();
+            this.models.state.changed();
+        },
+        removeHistory: function(payload) {
+            viewUtil.removeSearchHistory(payload);
+            this.models.state.changed();
+        },
+        searchByTopic: function(payload) {
+            var topic = _.find(this.models.hotTopics.data || [], { id: payload.id });
+            var param = {
+                id: payload.uniqueId,
+                type: payload.searchType,
+                topicId: topic.id,
+                topicName: topic.name,
+                time: payload.time
+            };
+            viewUtil.editSearchHistory(param);
+            return true;
+        },
+        changeTop: function() {
+            this.models.state.changed();
         }
     }
 };

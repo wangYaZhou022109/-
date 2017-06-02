@@ -1,0 +1,58 @@
+#!handlebars
+
+module > div(data-region='main')
+
+view('main')
+    if(question.canDelete)
+        .item > span(class=question.canDelete) > map('ask-audit-status' question.auditStatus)
+        .item(id='remove') 删除
+    compare(question.auditStatus 'eq' 1)
+        .item(id='discuss') > echo(question.discussTxt)
+        .item(id='follow')
+            if(question.follow)
+                string('unfollow')
+            else
+                echo('+') + string('follow')
+        .item > #share
+    form.comment-reply(id ='comment-reply')
+        textarea.input.w-full.block(rows=1 name='t_content' value='')
+        .btn(id='publish') > string('publish')
+    # .border.around.hide#comment-list(style="margin-top:-1.5em; height:20em; overflow:auto;") > ul.layout-ml-small.layout-mr-small.layout-mb-small
+    #     li
+    #         .user-pic > img(src="images/1.png")
+    #         .comment-content
+    #             .user-info
+    #                 a(href='#') 张三
+    #                 span 互联网中心
+    #             .comment-text
+    #                 | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+    #                 | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+    #             .comment-operation
+    #                 .pull-left
+    #                     div
+    #                         span.pointer 赞（8）
+    #                         span
+    #                         span.pointer 添加回复
+    #                 .text-right
+    #                     span.pointer 分享
+    #                     span |
+    #                     span.pointer 举报
+    #     li
+    #         .user-pic > img(src="images/1.png")
+    #         .comment-content
+    #             .user-info
+    #                 a(href='#') 张三
+    #                 span 互联网中心
+    #             .comment-text
+    #                 | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+    #                 | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
+    #             .comment-operation
+    #                 .pull-left > .sub-text 2017-01-17
+    #                 .text-right
+    #                     span.pointer 赞（8）
+    #                     span |
+    #                     span.pointer 添加回复
+    #                     span |
+    #                     span.pointer 分享
+    #                     span |
+    #                     span.pointer 举报

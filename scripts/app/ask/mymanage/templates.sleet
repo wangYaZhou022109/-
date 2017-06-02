@@ -20,47 +20,8 @@ view('reviewed')
     .hr
     #  .checkbox > input(type='checkbox' id='display')('checked')&if(checked) + echo('显示待审核')
     .checkbox-slider.text-right
-        input(type='checkbox'  id='check') + label(for='check')
+        input(type='checkbox'  id='check' name='checkbox')('checked')&if(checked) + label(for='check')
         span 显示待审核
-
-    #  each(reviewed)
-    #      br
-    #      compare(auditStatus 'eq' 0) 
-    #          echo('【')
-    #          map('ask-audit-type' auditType)
-    #          echo('】 ')
-    #          map('ask-audit-status' auditStatus)
-    #          echo('提交人：')
-    #          echo(member.fullName)
-    #          echo('提交时间: ')
-    #          date(createTime)
-    #          echo('内容:')
-    #          echo(question.content)
-    #          a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') 详情
-    #      compare(auditStatus 'eq' 1)
-    #          echo('【')
-    #          map('ask-audit-type' auditType)
-    #          echo('】 ')
-    #          map('ask-audit-status' auditStatus)
-    #          echo('审核人：')
-    #          echo(auditor)
-    #          echo('审核时间: ')
-    #          date(auditTime)
-    #          echo('内容:')
-    #          echo(question.content)
-    #          a(id='deal-' + id href='javascript:;' auditType=auditType)(class ='active') 详情
-    #      compare(auditStatus 'eq' 2)
-    #          echo('【')
-    #          map('ask-audit-type' auditType)
-    #          echo('】 ')
-    #          map('ask-audit-status' auditStatus)
-    #          echo('审核人：')
-    #          echo(auditor)
-    #          echo('审核时间: ')
-    #          date(auditTime)
-    #          echo('内容:')
-    #          echo(question.content)
-    #          a(id='deal-' + id href='javascript:;' auditType=auditType)(class ='active') 详情
             
     ul.manage-list
         each(reviewed)

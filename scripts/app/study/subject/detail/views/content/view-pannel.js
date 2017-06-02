@@ -38,6 +38,15 @@ exports.handlers = {
                 finishStatus: 2, // 已完成
                 completedRate: 100, // 已完成
             });
+        } if (sectionType === 14) {
+            window.open(prefixUrl[sectionType] + section.resourceId);
+            this.module.dispatch('updateProgress', {
+                sectionId: id,
+                beginTime: new Date().getTime(),
+                clientType: 0,
+                finishStatus: 2, // 已完成
+                completedRate: 100, // 已完成
+            });
         } else if (sectionType === 12 || sectionType === 13) {
             if (progress.finishStatus === 2) {
                 url = '#/exam/research-activity/paper/' + resourceId + '/' + subject.id;
@@ -53,14 +62,6 @@ exports.handlers = {
             url = prefixUrl[8] + section.referenceId;
             window.open(url);
         } else if (sectionType === 9) {
-            // if (progress.finishStatus === 2) {
-            //     url = '#/exam/exam/paper/' + resourceId;
-            //     window.open(url);
-            //     return;
-            // }
-            // view = this.module.items['exam-tips'];
-            // this.bindings.state.examId = resourceId;
-            // me.app.viewport.modal(view);
             me.app.viewport.modal(me.module.items['exam/exam/other-exam-prompt'], { examId: resourceId });
             return;
         } else {
@@ -89,7 +90,7 @@ exports.dataForTemplate = {
             state = data.state || {};
         util.rowHeader(subject.courseChapters, {
             after: '',
-            before: '阶段'
+            before: '主题'
         });
         // 计算剩余天数
         subject.studyDays = subject.studyDays ? subject.studyDays : 0;

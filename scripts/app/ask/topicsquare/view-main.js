@@ -4,7 +4,8 @@ var $ = require('jquery');
 exports.bindings = {
     state: true,
     topicname: true,
-    topicType: true
+    topicType: true,
+    down: false
 };
 
 exports.events = {

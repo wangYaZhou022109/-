@@ -33,7 +33,8 @@ view('list')
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-ing > string('auditStatus0')
-                                .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+            
             compare(auditStatus 'eq' 1)
                 compare(essenceStatus 'eq' 1)
                     li
@@ -51,27 +52,28 @@ view('list')
                                 span > echo('·发表文章·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) >  string('unfollow')
-                                        .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
+                                        .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > string('follow')
                                     else 
                                         .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
-                                        .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow') 
+                                        .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > string('follow') 
                                     compare(praise 'eq' true)
                                         .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                                     else
                                         .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
                                 
                                     .item > .share-bar
                                         .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
+                                            span 分享
                                             form.drop-down-content > .content
-                                                .item > div(id ='shareTo-qzone' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > div(id ='shareTo-weibo' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                    .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    compare(careNum 'eq' 0)
+                                        .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     form.comment-reply(id ='comment-reply-' + id)
                                         textarea.input.w-full.block(rows=1 name='t_content' value='')
                                         input.input(type='hidden' name='organizationId' value=organizationId)
@@ -92,25 +94,26 @@ view('list')
                                 span > echo('·发表文章·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
-                                        .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
+                                        .item( 'hidden' id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > string('follow')
                                     else 
                                         .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
-                                        .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > echo('+') + string('follow')
+                                        .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > string('follow')
                                     compare(praise 'eq' true)
                                         .item(id='unpraise-3_'+ id data-name='id' data-value='3_' + id)
                                             string('unpraise') +  echo('（'+ praiseNum +'）')
                                     else
                                         .item(id='praise-3_'+ id data-name='id' data-value='3_' + id) 
                                             string('praise') +  echo('（'+ praiseNum +'）') 
-                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-
+                                    .item(id='discuss-' + id ) > string('comment') +  echo('(' + shareReplyNum +')')
+                                    compare(careNum 'eq' 0)
+                                        .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                     .item > .share-bar
                                         .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
+                                            span 分享
                                             form.drop-down-content > .content
                                                 .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                                 .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
@@ -136,6 +139,6 @@ view('list')
                             .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
-                                compare(careNum 'neq' 0)
+                                compare(careNum 'eq' 0)
                                     .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                     

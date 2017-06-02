@@ -1,5 +1,4 @@
 #! handlebars
-
 module
     li.active.tabs-cont-item
         div(data-region='main')
@@ -37,12 +36,9 @@ view('main') > .base-info
             .form-row
                 .inline-block > setting('person.index.info.department')
                 .inline-block > echo(member.organization.name)
-            .form-row
-                .inline-block > setting('person.index.info.like')
-                .inline-block > each(topicList)
-                    .tag-btn > echo(name)
-                    else
-                        .tag-btn > echo('暂无')
+            .form-row.textarea-row
+                label > setting('person.index.info.like')
+                #select-topic
             .form-row
                 label.auto > setting('person.index.info.introduce')
                 .content > textarea.input(id='summary' name='summary' rows='3' x-rule='maxLength:200') > echo(member.memberDetail.summary)

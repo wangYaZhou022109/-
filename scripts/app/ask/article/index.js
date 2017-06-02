@@ -1,5 +1,6 @@
 var _ = require('lodash/collection');
 var $ = require('jquery');
+var sensitive = require('./app/util/sensitive');
 exports.items = {
     top: 'top',
     topic: 'topic',
@@ -104,14 +105,23 @@ exports.store = {
             data.transferViewUrl = 'null';
             data.transferFlag = -1;
             data.enclosureSuffixImg = 'null';
-            if (task.attachments) {
-                data.enclosureUrl = task.attachments[0].attachmentId;
-                data.enclosureName = task.attachments[0].name;
+
+            if (task) {
                 data.enclosureType = 1;
-                data.enclosureSuffix = task.attachments[0].contentType;
-                data.transferViewUrl = task.attachments[0].attachmentId;
                 data.transferFlag = 1;
                 data.enclosureSuffixImg = 'null';
+                if (typeof data.attachmentId !== 'undefined') {
+                    data.enclosureUrl = task.attachmentId;
+                }
+                if (typeof data.name !== 'undefined') {
+                    data.enclosureName = task.name;
+                }
+                if (typeof data.contentType !== 'undefined') {
+                    data.enclosureSuffix = task.contentType;
+                }
+                if (typeof data.attachmentId !== 'undefined') {
+                    data.transferViewUrl = task.attachmentId;
+                }
             }
             data.speechset = speechset.status;
             data.id = '1';
@@ -123,7 +133,7 @@ exports.store = {
                     message = '等待审核';
                 }
                 me.app.message.success(message);
-                me.module.dispatch('leftrefresh');
+                me.module.renderOptions.leftrefresh;
             });
         },
         selecttitle: function() {
@@ -194,6 +204,14 @@ exports.buttons = [{
                 this.app.message.success('详细描述不能超过3000字-发布失败！');
                 return false;
             }
+        }
+        if (sensitive.judge(title) > 0) {
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
+        }
+        if (content && sensitive.judge(content) > 0) {
+            this.app.message.error('您好，您发表的内容被系统检测到包含敏感词，请重新编辑，谢谢合作');
+            return false;
         }
         if (typeof topicIds === 'undefined' || topicIds === '') {
             data.topicIds = 'null';

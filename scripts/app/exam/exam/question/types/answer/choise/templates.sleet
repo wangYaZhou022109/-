@@ -6,7 +6,7 @@ module > .choise.preview-content
 
 view('content')
     p.question
-        span > a.normal(name='question-' + state.id) > echo(state.index '：')
+        span > a.normal(name='question-' + state.id) > echo(state.index)
         @echo(state.content)
 
 
@@ -22,8 +22,8 @@ view('options') > .answer
                     input(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('disabled')&if(isDisabled)('checked')&if(checked)
                     label(for='radio-'+@index)
             label(for='answer-item-' + index)
-                span.pull-left.option-num > @echo(code '：')
-                .answer-options > @echo(content)
+                span.pull-left.option-num > @echo(code '.')
+                .answer-options.m-left > @echo(content)
 
     if(isShowDetail)
         .show-answer

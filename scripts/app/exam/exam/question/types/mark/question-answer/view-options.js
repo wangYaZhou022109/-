@@ -41,10 +41,11 @@ exports.handlers = {
         return this.module.dispatch('save');
     },
     keypressGoal: function(e) {
-        var k = e.keyCode,
+        var k = e.keyCode || e.which || e.charCode,
             goal = this.$('goal'),
             char = String.fromCharCode(k);
 
+        if (k === 8) return true;
         if (!C.isInputNumber(k) || !C.isKeepOneDecimal(Number(goal.value + char))) {
             C.setError('非法输入， 只能输入数字，小数保留1位', this.$('error'), this.$('goal'));
             e.preventDefault();

@@ -1,0 +1,10 @@
+#!handlebars
+
+moudle > .apply-verify-page
+    div(data-region="apply-verify")
+
+view('apply-verify')
+    .text-center.layout-mt.container
+        .h1.text-main-color.layout-mt 审核中...
+        p.layout-mt-small.text-center.h4 您的申请已经提交，请耐心等该管理员审核，
+        p.text-center.h4 审核结果将会通过邮件或消息发送给您。

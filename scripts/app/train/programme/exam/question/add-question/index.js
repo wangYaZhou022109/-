@@ -24,13 +24,15 @@ exports.store = {
         state: { data: {} },
         itemPool: { data: {} },
         tempAddQuestionOptions: {},
-        key: {}
+        key: {},
+        orgs: { url: '../system/organization/company-orgs', cache: false }
     },
     callbacks: {
         init: function(payload) {
             var question = payload.question,
                 state = this.models.state,
                 itemPool = this.models.itemPool,
+                orgs = this.models.orgs,
                 tempAddQuestionOptions = this.models.tempAddQuestionOptions,
                 interim = payload.interim || false;
             tempAddQuestionOptions.set(payload);
@@ -54,6 +56,7 @@ exports.store = {
             } else {
                 itemPool.data = { entryDepot: true };
             }
+            return this.get(orgs);
         },
         saveQuestion: function(payload) {
             var me = this,
@@ -105,6 +108,10 @@ exports.store = {
                     name: data.text
                 }
             });
+            this.models.state.changed();
+        },
+        changeType: function(payload) {
+            D.assign(this.models.state.data, payload);
             this.models.state.changed();
         }
     }

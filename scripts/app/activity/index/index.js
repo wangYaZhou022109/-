@@ -6,7 +6,9 @@ var D = require('drizzlejs'),
 exports.items = {
     banner: 'banner',
     filter: 'filter',
-    list: 'list',
+    gensee: 'gensee',
+    exam: 'exam',
+    research: 'research',
     'activity/index/exam-prompt': { isModule: true }
 };
 
@@ -21,7 +23,7 @@ exports.store = {
             url: '../exam/activity/recommends-activity-list'
         },
         gensees: {
-            url: '../course-study/gensee/details',
+            url: '../course-study/gensee/activity-list',
             type: 'pageable',
             root: 'items',
             pageSize: 50
@@ -30,7 +32,7 @@ exports.store = {
             url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 60
+            pageSize: 90
         },
         researchActivitys: {
             url: '../exam/research-activity/activity-list',
@@ -53,10 +55,10 @@ exports.store = {
             // D.assign(activitys.params, { size: RECOMMEND_SIZE }); // 暂时不限制最大条数，将所有推荐的数据查询出来
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
-            this.get(gensees);
             return this.chain([
-                this.get(exams),
                 this.get(activitys),
+                this.get(gensees),
+                this.get(exams),
                 this.get(researchActivitys)
             ]);
         },

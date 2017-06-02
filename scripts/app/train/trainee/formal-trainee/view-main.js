@@ -100,7 +100,7 @@ exports.handlers = {
                 } else if (code === 888) {
                     this.app.message.error('学员已存在!');
                 } else if (code === 666) {
-                    this.app.message.error('人员编号不存在！');
+                    this.app.message.error('员工编号不存在！');
                 } else if (code === 999) {
                     this.app.message.error('配额已满!');
                 } else if (code === 777) {

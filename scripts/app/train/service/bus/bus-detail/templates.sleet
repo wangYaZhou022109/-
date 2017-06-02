@@ -3,7 +3,7 @@ module > .train-class-page
     .page-main-wrapper
         .activity-category
             .div(data-region='count')
-            .div(data-region='option')
+            .count-page(data-region='option')
             .div(data-region='main')
 
 view('count') > form.vertical
@@ -14,10 +14,11 @@ view('count') > form.vertical
         .count-title-item.pull-left
             span 统计时间：
             span > dateTime(busOne.startTime) + echo(' 至 ') + dateTime(busOne.endTime)
-
+ 
 view('option')
-    each(busOption)
-        echo(name)
+    .count-sub.layout-mt-small.clearfix
+        each(busOption)
+            .count-sub-item.pull-left.layout-mr > span.inline-block.m-right > echo(optionName) + echo(':') + echo(count) + echo('人')
 
 view('main')
     .count-search.clearfix.m-top

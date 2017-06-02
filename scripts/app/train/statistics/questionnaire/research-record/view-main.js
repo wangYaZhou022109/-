@@ -51,7 +51,7 @@ exports.handlers = {
     summary: function() {
         var classId = this.bindings.state.data;
         var id = this.bindings.researchQuestionary.data.id;
-        var url = '#/train/class-detail/summary/' + id + '/' + classId.classId;
+        var url = '#/exam/research-activity/summary/' + id + '/' + classId.classId;
         window.open(url, '_blank');
     }
 };

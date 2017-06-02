@@ -10,7 +10,7 @@ view('item-pool') > form.vertical
         .bg-highlight
             .form.align-left
                 if(itemPool.interim)
-                    .form-row
+                    .form-row.w-full
                         input(type='checkbox' name='selectBox' id='check-owner')('checked')&if(itemPool.entryDepot)
                         label(for='check-owner')
                         span 加入题库

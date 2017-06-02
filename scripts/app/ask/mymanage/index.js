@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+// var $ = require('jquery');
 exports.items = {
     mymanage: 'mymanage',
     reviewed: 'reviewed',
@@ -20,6 +21,16 @@ exports.store = {
         params: { data: { isOverdue: '1' } },
         mymanage: { url: '../system/topic/find-by-manager' },
         todayadd: { url: '../ask-bar/my-manage' },
+        // page: {
+        //     data: [],
+        //     params: { page: 1, size: 2 },
+        //     mixin: {
+        //         findById: function(id) {
+        //             var trends = this.module.store.models.page.data;
+        //             return _.find(trends, ['id', id]);
+        //         }
+        //     }
+        // },
         reviewed: { url: '../ask-bar/my-manage/reviewed' },
         display: { url: '../ask-bar/my-manage/reviewed' },
         audit: { url: '../ask-bar/questionReviewed' },
@@ -38,7 +49,7 @@ exports.store = {
                     params.push(d.id);
                 });
                 todayadd.set({ id: params.toString() });
-                me.get(todayadd);
+                return me.get(todayadd);
             });
         },
         reviewed: function() {
@@ -58,6 +69,17 @@ exports.store = {
     }
 };
 exports.afterRender = function() {
-    this.dispatch('init');
-    this.dispatch('reviewed');
+    // this.dispatch('init');
+    // this.dispatch('reviewed');
+    // var me = this;
+    // // console.log(this.renderOptions);
+    // $(window).scroll(function() {
+    //     var page = me.store.models.page.params.page;
+    //     var size = me.store.models.page.params.size;
+    //     if (page * size === me.store.models.page.data.length) {
+    //         me.store.models.page.params.page++;
+    //         me.dispatch('page');
+    //     }
+    // });
+    return this.chain([this.dispatch('init'), this.dispatch('reviewed')]);
 };

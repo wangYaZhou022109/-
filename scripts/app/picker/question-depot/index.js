@@ -35,7 +35,6 @@ exports.store = {
         init: function(payload) {
             var me = this,
                 list = this.models.list,
-                shareAndPublic = this.models.shareAndPublic,
                 state = this.models.state;
 
             if (payload.data) D.assign(state.data, payload.data);
@@ -43,12 +42,9 @@ exports.store = {
             if (payload.params && payload.params.organizationId) {
                 D.assign(list.params, payload.params);
                 if (payload.params.share) {
+                    D.assign(list.params, { share: 1 });
                     return this.get(list).then(function() {
-                        D.assign(shareAndPublic.params, { organizationId: payload.params.organizationId });
-                        return me.get(shareAndPublic).then(function() {
-                            list.merge(shareAndPublic.data);
-                            me.models.state.changed();
-                        });
+                        me.models.state.changed();
                     });
                 }
                 return this.get(list).then(function() {

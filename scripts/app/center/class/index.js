@@ -6,7 +6,10 @@ exports.items = {
 exports.store = {
     models: {
         classInfo: { url: '../train/class-info/find-my-class-info' },
-        state: {}
+        state: {},
+        trainee: {
+            url: '../train/trainee/current-trainee'
+        }
     },
     callbacks: {
         init: function() {
@@ -21,6 +24,12 @@ exports.store = {
             classInfo.params = { status: paylaod.status, name: paylaod.name };
             this.models.state.data.name = paylaod.name;
             this.get(classInfo);
+        },
+        getTrainee: function(payload) {
+            var trainee = this.models.trainee;
+            trainee.clear();
+            trainee.params = { type: 0, classId: payload.classId };
+            return this.get(trainee);
         }
     }
 };

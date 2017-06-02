@@ -4,18 +4,15 @@ exports.items = {
 
 exports.store = {
     models: {
-        organizationTree: { url: '../system/grant/granted-organization' }
+        organizationTree: { url: '../system/organization/company-orgs' }
     },
     callbacks: {
-        initPage: function(uri) {
-            this.models.organizationTree.set(uri);
+        initPage: function() {
             return this.get(this.models.organizationTree);
         }
     }
 };
 
 exports.afterRender = function() {
-    var uri = this.renderOptions.url || this.app.global.uri;
-    // var uri = 'course-study/course-info';
-    return this.dispatch('initPage', { uri: uri });
+    return this.dispatch('initPage');
 };

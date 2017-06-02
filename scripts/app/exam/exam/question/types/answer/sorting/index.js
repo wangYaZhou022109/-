@@ -35,6 +35,7 @@ exports.store = {
                 i = 0,
                 code,
                 answer = '';
+
             D.assign(data, question);
             data.type = types[Number(question.type) - 1].value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
@@ -51,14 +52,14 @@ exports.store = {
             for (i; i < attrs.length; i++) {
                 code = String.fromCharCode(i + 'A'.charCodeAt(0));
                 data.options.push({ content: attrs[i].value, name: attrs[i].name, code: code, i: i });
-                answer = answer.replace(
-                    Number(attrs[i].name) + '|',
-                    String.fromCharCode(Number(attrs[i].name) + 'A'.charCodeAt(0))
-                );
             }
 
             if (answer !== '') {
-                data.answer = answer.split('|').join('');
+                data.answer = _.map(_.filter(answer.split('|'), function(a) {
+                    return a;
+                }), function(a) {
+                    return String.fromCharCode(Number(a) + 'A'.charCodeAt(0));
+                }).join('');
             }
 
             if (!data.gainScore && question.answerRecord) {

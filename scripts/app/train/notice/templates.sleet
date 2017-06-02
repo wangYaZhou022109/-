@@ -52,8 +52,8 @@ view('main') > form.vertical
                     label.label.auto.layout-mr-small.required 问题2
                     .content
                         input.input#question2(name='question2' value=signupInfo.question2 placeholder='棘手问题：您当前最关心的、当前工作中最棘手的一个问题')
-                    .text-center.layout-mt
-                        if(isGrant)
+                    if(isGrant)
+                        .text-center.layout-mt
                             a.btn#save 保存
             if(signupInfo.id)    
                 section.section

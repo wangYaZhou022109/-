@@ -1,21 +1,19 @@
 var $ = require('jquery'),
     _ = require('lodash/collection');
 exports.bindings = {
-    menus: true,
     navs: true
 };
 
 exports.dataForTemplate = {
-    menus: function(data) {
-        return data.menus;
-    },
     navs: function(data) {
-        var navs = data.navs || [];
+        var url,
+            navs = data.navs || [];
         navs = _.reject(navs, ['show', 0]);
         _.map(navs, function(item) {
             var r = item;
             r.link = false;
-            if (r.url.indexOf('http') > -1) {
+            url = r.url || '';
+            if (url.indexOf('http') > -1) {
                 r.link = true;
             }
         });
@@ -32,6 +30,7 @@ exports.handlers = {
         var url = element.getAttribute('href').slice(2),
             params = {};
         $(window).unbind('scroll');
+        this.module.dispatch('changeTop');
         if (url === 'home' && document.cookie) {
             document.cookie.split('; ').forEach(function(item) {
                 var arr = item.split('=');

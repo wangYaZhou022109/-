@@ -16,7 +16,7 @@ view('user') > .form-row.textarea-row
     .content > input.input(placeholder='输入您的名称' name ='name' value= findUser.fullName readonly='readonly')
 view('topic') 
     .form-row.textarea-row
-        label.required > label 擅长话题： 
+        label.required > label 关联标签：
         #select-topic
 #  > .form-row.textarea-row
 #      label 擅长话题：

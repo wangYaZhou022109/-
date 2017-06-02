@@ -8,9 +8,9 @@ module
 view('filter')
     form.vertical
         .filter
-            .pull-right.m-right.pointer#registerTimeOrder
-                | 注册时间
-                compare(search.registerTimeOrder 'eq' 'asc')
+            .pull-right.m-right.pointer#studyTimeOrder
+                | 学习时间
+                compare(search.studyTimeOrder 'eq' 'asc')
                     i.iconfont.icon-sort-asc
                 else
                     i.iconfont.icon-sort-desc

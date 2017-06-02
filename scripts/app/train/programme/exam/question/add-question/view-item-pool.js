@@ -1,13 +1,16 @@
 var $ = require('jquery'),
     D = require('drizzlejs'),
+    _ = require('lodash/collection'),
     markers = require('./app/ext/views/form/markers'),
-    validators = require('./app/ext/views/form/validators');
+    validators = require('./app/ext/views/form/validators'),
+    getFirstNode;
 
 // exports.type = 'form';
 
 exports.bindings = {
     state: true,
-    itemPool: true
+    itemPool: true,
+    orgs: true
 };
 
 exports.events = {
@@ -34,7 +37,6 @@ exports.components = [function() {
             id: 'owner',
             name: 'picker',
             options: {
-                module: 'exam/question-depot',
                 picker: 'owner',
                 required: true,
                 autoFill: true,
@@ -52,6 +54,9 @@ exports.components = [function() {
     if (question.organization) {
         obj.options.data.id = question.organization.id;
         obj.options.data.text = question.organization.name;
+    } else if (state.params.organization) {
+        obj.options.data.id = state.params.organization.id;
+        obj.options.data.text = state.params.organization.name;
     }
 
     if (itemPool.entryDepot) {
@@ -60,6 +65,7 @@ exports.components = [function() {
     return null;
 }, function() {
     var params = this.bindings.state.params,
+        orgs = this.bindings.orgs,
         obj = {
             id: 'questionDepot',
             name: 'picker',
@@ -77,12 +83,20 @@ exports.components = [function() {
         },
         question = this.bindings.state.data,
         itemPool = this.bindings.itemPool.data;
+
     if (question.questionDepot) {
         obj.options.data.id = question.questionDepot.id;
         obj.options.data.name = question.questionDepot.name;
     } else if (params && params.questionDepot) {
         obj.options.data.id = params.questionDepot.id;
         obj.options.data.name = params.questionDepot.name;
+    }
+    if (!obj.options.params.organizationId && orgs.data.length > 0) {
+        obj.options.params.organizationId = getFirstNode(orgs.data).id;
+    }
+
+    if (params.organization) {
+        obj.options.params.organizationId = params.organization.id;
     }
 
     if (itemPool.entryDepot) {
@@ -129,4 +143,20 @@ exports.mixin = {
         }
         return flag;
     }
+};
+
+getFirstNode = function(nodes) {
+    var d = { map: {}, list: [] };
+    _.map(nodes, function(item) {
+        d.map[item.id] = item;
+    });
+    _.map(nodes, function(item) {
+        if (!item.parentId || !d.map[item.parentId]) {
+            d.list.push(d.map[item.id]);
+        }
+    });
+    if (d.list.length) {
+        return { id: d.list[0].id, text: d.list[0].name };
+    }
+    return {};
 };
