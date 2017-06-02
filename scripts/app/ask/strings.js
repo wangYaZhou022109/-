@@ -1,7 +1,7 @@
 module.exports = {
     auditStatus0: '待审核',
     auditStatus1: '通过',
-    auditStatus2: '拒绝',
+    auditStatus2: '被拒绝',
     auditStatus3: '审核中',
     auditStatus4: '审核未通过',
     ask: '提问',

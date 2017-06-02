@@ -3,6 +3,11 @@ module
     div(data-region='list')
 
 view('list')
+    compare(page.length 'lt' 1) 
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
     each(page)
         li
             .user-pic > img.pointer(src=createUser.headPortrait)
