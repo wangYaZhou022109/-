@@ -17,6 +17,7 @@ exports.store = {
         },
         search: function(payload) {
             var classinfos = this.models.classinfos;
+            classinfos.clear();
             classinfos.params = payload;
             return this.get(classinfos);
         },
