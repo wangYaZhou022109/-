@@ -28,7 +28,7 @@ exports.dataForTemplate = {
     lives: function(data) {
         var lives = data.lives,
             downUrl = this.bindings.img.getFullUrl(),
-            defultImg = 'images/default-cover/default_course.jpg';
+            defultImg = 'images/default-cover/default_live.jpg';
         _.map(lives, function(opt) {
             var live = opt.genseeWebCast,
                 toLiveButton = { id: 'to-live-button-' + live.id, text: '进入直播' },

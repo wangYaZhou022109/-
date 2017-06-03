@@ -4,43 +4,87 @@ module
 
 view('list')
     .comment-list.ask-list > ul
-            each(reply)
+        each(page)
+            compare(essenceStatus 'eq' 1)
                 li
-                    .user-pic > img(src='images/d2.jpg')
+                    .user-pic > img(src=member.headPortrait)
                     .comment-content
-                        .h4 > a(id='reply-' + id ) > echo(title)
-                        .comment-text 
+                        img.boutique.pull-left(src="images/boutique.png")
+                        .h4 > a(id='myquiz-details-' + id) > echo(title)
+                        .comment-text
                             compare(jsonImg.length 'gt' 0)
                                 img(src=jsonImg)
-                            @echo(questionDiscuss.content)
+                            @echo(content)
                         .user-info
-                            a(href='javascript:;') > echo(member.fullName)
-                            span > echo('提问')
-                            span.sub-text > echo(createTime)
+                            a(href='javascript:;') > echo('我')
+                            span > echo('提问·')
+                            span.sub-text > dateTime(createTime)
                         .comment-operation
                             .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
                             .text-right
-                                #  .item > a.normal(href='javascript:;') 取消关注
-                                compare(concernNum 'gt' 0)  
-                                    .item(id='unfollow-1_' + id data-name='id' data-value='1_' + id ) > echo('+') + string('unfollow')
-                                else
-                                    .item(id='follow-1_'  + id data-name='id' data-value='1_' + id) > echo('+') + string('follow')
-                                .item(id='discuss-' + id ) > string('comment') +  echo('(' + discussList.length +')')
-                                .item
+                                compare(concernNum 'gt' 0) 
+                                    .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                    .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+关注')
+                                else 
+                                    .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                    .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > echo('+关注')                   
+                                .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
+                                #  compare(careNum 'eq' 0)
+                                #      .item > span(id = 'del-question-' + id data-name='id' data-value=id) > echo('删除|')
+                                .item.inline > .share-bar
                                     .drop-down-wrapper
-                                        .drop-down-btn 分享
-                                        .drop-down-content > .content
-                                            ul
-                                                li 分享1
-                                                li 分享2
-                                                li 分享3
-                                .item > span(id ='report-' + type + '_' + id data-name='id' data-value=type +'_' + id) > string('report')
-                                .item > span(id = 'shut-' + id data-name='id' data-value=id) > string('delete')
+                                        span 分享|
+                                        form.drop-down-content > .content
+                                            .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                            .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                .item.inline(id ='report-' + 2 + '_' + id +'_' + createMemberId data-name='id' data-value= 2 +'_' + id +'_' + createMemberId) > echo('举报|')
+                                .item.inline(id = 'del-question-' + id data-name='id' data-value=id) > echo('删除|')
                                 form.comment-reply(id ='comment-reply-' + id)
                                     textarea.input.w-full.block(rows=1 name='t_content' value='')
                                     input.input(type='hidden' name='organizationId' value=organizationId)
                                     input.input(type='hidden' name='id' value=id)
-                                    .btn(id='publish-' + id) > string('publish')
+                                    .btn(id='publish-' + id) > string('publish')      
+                        .comment-reply.m-top
+                            textarea.input.w-full.block(rows="1")
+                            .btn 回复
+            else
+                li
+                    .user-pic > img(src=member.headPortrait)
+                    .comment-content
+                        .h4 > a(id='myquiz-details-' + id) > echo(title)
+                        .comment-text
+                            compare(jsonImg.length 'gt' 0)
+                                img(src=jsonImg)
+                            @echo(content)
+                        .user-info
+                            a(href='javascript:;') > echo('我')
+                            span > echo('提问·')
+                            span.sub-text > dateTime(createTime)
+                        .comment-operation
+                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .text-right
+                                compare(concernNum 'gt' 0)
+                                    .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                    .item( 'hidden' id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow')
+                                else 
+                                    .item( 'hidden' id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
+                                    .item(  id='trend-follow-2_' + id data-name='id' data-value='2_' + id ) > string('follow') 
+                                .item(id='discuss-' + id ) > string('comment') +  echo('(' + questionReplyNum +')')
+                                #  compare(careNum 'eq' 0)    
+                                #      .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                .item.inline > .share-bar
+                                    .drop-down-wrapper
+                                        span 分享|
+                                        form.drop-down-content > .content
+                                            .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                            .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                .item.inline(id ='report-' + 2 + '_' + id +'_' + createMemberId data-name='id' data-value= 2 +'_' + id +'_' + createMemberId) > echo('举报|')
+                                .item.inline(id = 'del-question-' + id data-name='id' data-value=id) > echo('删除|')
+                                form.comment-reply(id ='comment-reply-' + id)
+                                    textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                    input.input(type='hidden' name='organizationId' value=organizationId)
+                                    input.input(type='hidden' name='id' value=id)
+                                    .btn(id='publish-' + id) > string('publish')      
                         .comment-reply.m-top
                             textarea.input.w-full.block(rows="1")
                             .btn 回复

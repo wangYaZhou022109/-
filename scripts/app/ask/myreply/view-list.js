@@ -177,6 +177,14 @@ exports.actionCallbacks = {
     publish: function() {
         this.app.message.success('操作成功！');
     },
+    praise: function() {
+        this.app.message.success('点赞成功');
+        this.module.dispatch('init');
+    },
+    unpraise: function() {
+        this.app.message.success('取消点赞成功');
+        this.module.dispatch('init');
+    },
 };
 
 exports.dataForTemplate = {

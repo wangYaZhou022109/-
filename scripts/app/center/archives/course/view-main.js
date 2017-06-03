@@ -1,5 +1,6 @@
 var _ = require('lodash/collection'),
     helpers = require('./app/util/helpers');
+
 exports.bindings = {
     progressList: true,
     progress: false,
@@ -36,6 +37,9 @@ exports.dataForTemplate = {
             r.busType = businessType;
             r.beginTimeStr = helpers.dateMinute(r.beginTime);
             r.finishTimeStr = helpers.dateMinute(r.finishTime);
+            if (businessType !== 0) {
+                r.studyStatusStr = r.finishStatus === 0 || !r.beginTime ? '未学习' : '已学习';
+            }
             return r;
         });
     },

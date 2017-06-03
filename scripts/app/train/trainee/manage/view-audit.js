@@ -14,14 +14,9 @@ exports.buttons = [{
 exports.dataForActions = {
     auditTrainee: function(payload) {
         var auditStatus = payload.auditStatus || '',
-            auditOpinion = payload.auditOpinion || '',
             id = payload.id || '';
         if (!validators.required.fn(auditStatus)) {
             this.app.message.error('请选择审核状态');
-            return false;
-        }
-        if (!validators.required.fn(auditOpinion)) {
-            this.app.message.error('请填写审核意见');
             return false;
         }
         if (!validators.required.fn(id)) {

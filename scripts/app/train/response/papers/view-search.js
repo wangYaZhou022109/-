@@ -3,15 +3,9 @@ var $ = require('jquery'),
     _ = require('lodash/collection');
 
 exports.bindings = {
-    trainees: true,
     state: false,
     organizations: true
 };
-
-exports.components = [{
-    id: 'commitQuestionary',
-    name: 'selectize'
-}];
 
 exports.actions = {
     'click search': 'search'
@@ -21,6 +15,7 @@ exports.dataForActions = {
     search: function() {
         var data = {
             classId: this.bindings.state.data.classId,
+            auditStatus: 1,
             commitQuestionary: $(this.$$('[name="commitQuestionary"]')).val(),
             memberFullName: $(this.$$('[name="memberFullName"]')).val(),
             organizationId: $(this.$$('[name="organizationId"]')).val()

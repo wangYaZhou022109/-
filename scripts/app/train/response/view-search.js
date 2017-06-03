@@ -2,15 +2,6 @@ var maps = require('./app/util/maps'),
     $ = require('jquery'),
     _ = require('lodash/collection');
 
-exports.bindings = {
-    classinfos: true
-};
-
-exports.components = [{
-    id: 'classStatus',
-    name: 'selectize'
-}];
-
 exports.actions = {
     'click search': 'search'
 };

@@ -6,20 +6,18 @@ module > .achievement-content.main-side
     .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
-view('side')
-    .row.col-sm-12
-        .btn.block#viewDesc 作业说明
+view('side') > .list
+    .btn.block#viewDesc 作业说明
     ul.m-top
         .m-bottom > strong > string('study.task.attachment') ：
         each(task.attachments)
-            li.mb-1
+            li.no-margin
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
                 if(preview)
                     a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
                 else
                     a.text-overflow.pointer(href=downUrl download=name) > echo(name)
     if(userAttachments)
-        br
         ul.m-top
             .m-bottom > strong > string('study.user.attachment') ：
             each(userAttachments)
@@ -32,11 +30,9 @@ view('side')
                         else
                             a.text-overflow.pointer(href=downUrl download=name) > echo(name)
     if(section.progress.comments)
-        br
-        ul.m-top
+        .m-top
             .m-bottom > strong 评语
-            li
-                span > echo(section.progress.comments)
+            div > echo(section.progress.comments)
 view('head')
     .pull-left.title > echo(task.name)
     .text-right

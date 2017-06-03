@@ -10,7 +10,9 @@ exports.events = {
     'click toExam-*': 'toExam',
     'click busView-*': 'toBusView',
     'click item-*': 'toggleclass',
-    'click search': 'toSearch'
+    'click search': 'toSearch',
+    'click inClass*': 'comeInClass',
+    'click seeClass*': 'seeClass'
 };
 
 exports.dataForTemplate = {
@@ -76,7 +78,10 @@ exports.handlers = {
     toBusView: function(busId, e, target) {
         var model = this.module.items['train/class-detail/class-bus'],
             classId = target.getAttribute('busClassId');
-        this.app.viewport.modal(model, { busId: busId, classId: classId });
+        this.module.dispatch('getTrainee', { classId: classId }).then(function(data) {
+            var trainee = data[0];
+            this.app.viewport.modal(model, { busId: busId, classId: classId, traineeId: trainee.id });
+        });
     },
     toggleclass: function(id) {
         var state = this.bindings.state,
@@ -90,6 +95,14 @@ exports.handlers = {
     toSearch: function() {
         var name = this.$('name').value;
         this.module.dispatch('refreshList', { name: name });
+    },
+    comeInClass: function(id) {
+        var url = '#/train/class-detail/' + id;
+        window.open(url, '_blank');
+    },
+    seeClass: function(id) {
+        var url = '#/train/class-detail/' + id + '?see';
+        window.open(url, '_blank');
     }
 };
 

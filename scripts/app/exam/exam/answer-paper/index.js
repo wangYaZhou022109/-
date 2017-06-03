@@ -199,7 +199,7 @@ var setOptions = {
                 url: '../exam/exam/decrypt-key'
             },
             examRecord: {
-                url: '../exam/exam-record/cache'
+                url: '../exam/exam/exam-record-cache'
             }
         },
         callbacks: {
@@ -431,6 +431,7 @@ var target = D.assign({}, {
             });
         }
         helper.switchScreen.call(this, this.store.models.exam.data);
+        return this.dispatch('reloadState');
         // helper.closeListener.call(this, strings.get('exam.answer-paper.close-window'));
     },
     getCurrentStatus: function(id) {

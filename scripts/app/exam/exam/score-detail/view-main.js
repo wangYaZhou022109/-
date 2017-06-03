@@ -31,7 +31,9 @@ D.assign(obj, {
                     questionAttrs: _.orderBy(sub.questionAttrCopys, ['name', 'asc']),
                     errorRate: s.errorRate / 10000,
                     answerRecord: s.answerRecord === null
-                        ? { score: 0 } : D.assign({}, s.answerRecord, { score: s.answerRecord.score / 100 })
+                        ? { score: 0 } : D.assign({}, s.answerRecord, {
+                            score: s.answerRecord ? s.answerRecord.score / 100 : 0
+                        })
                 });
             });
         return D.assign(target, {

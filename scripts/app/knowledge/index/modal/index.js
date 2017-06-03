@@ -58,25 +58,26 @@ exports.buttons = [
             var integral = payload.integral;
             var r = /^\+?[1-9][0-9]*$/;
             name = name.replace(/(^\s*)|(\s*$)/g, '');
+            integral = integral.replace(/(^\s*)|(\s*$)/g, '');
             if (typeof name === 'undefined' || name === '') {
-                this.app.message.success('请填写知识名称！');
+                this.app.message.error('请填写知识名称！');
                 return false;
             }
             if (name.length > 0) {
                 length = name.replace(/[\u0391-\uFFE5]/g, 'aa').length;
                 if (length > 60) {
-                    this.app.message.success('知识名称不能超过60字！');
+                    this.app.message.error('知识名称不能超过60字！');
                     return false;
                 }
             }
-            if (!r.test(integral)) {
-                this.app.message.success('下载积分必须为正整数！');
+            if (integral !== 'undefined' && integral !== '' && !r.test(integral)) {
+                this.app.message.error('下载积分必须为正整数！');
                 return false;
             }
             if (description.length > 0) {
                 descLength = description.replace(/[\u0391-\uFFE5]/g, 'aa').length;
                 if (descLength > 3000) {
-                    this.app.message.success('知识简介不能超过3000字！');
+                    this.app.message.error('知识简介不能超过3000字！');
                     return false;
                 }
             }

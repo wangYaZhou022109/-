@@ -3,7 +3,7 @@ var D = require('drizzlejs'),
 
 exports.bindings = {
     types: true,
-    state: true
+    state: false
 };
 
 exports.events = {
@@ -21,7 +21,7 @@ exports.dataForTemplate = {
 
 exports.handlers = {
     selectQuestion: function(id) {
-        this.module.dispatch('selectQuestion', { id: id });
+        return this.module.dispatch('selectQuestion', { id: id });
     },
     toggleMore: function(id) {
         return this.module.dispatch('selectType', { id: id });

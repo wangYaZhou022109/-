@@ -22,7 +22,11 @@ exports.dataForTemplate = {
     rankModules: function(data) {
         var moduleHomeConfig = this.module.renderOptions.moduleHomeConfig,
             rankModules = data.rankModules || {};
-        rankModules = _.orderBy(JSON.parse(moduleHomeConfig.regionCode), 'sort');
+        rankModules = JSON.parse(moduleHomeConfig.regionCode);
+        if (!this.app.global.currentUser.organization) {
+            rankModules = _.filter(rankModules, ['enableHomeBrowse', 0]);
+        }
+        rankModules = _.orderBy(rankModules, 'sort');
         return rankModules;
     }
 };

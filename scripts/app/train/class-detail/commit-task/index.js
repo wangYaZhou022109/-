@@ -12,7 +12,8 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var state = this.models.state.data;
-            state.classId = payload;
+            state.classId = payload.classId;
+            state.traineeId = payload.traineeId;
             this.models.state.changed();
         },
         refeshList: function() {
@@ -27,7 +28,7 @@ exports.store = {
 
 exports.beforeRender = function() {
     var me = this;
-    me.dispatch('init', this.renderOptions.classId).then(function() {
+    me.dispatch('init', this.renderOptions).then(function() {
         me.dispatch('refeshList');
     });
 };

@@ -12,7 +12,8 @@ exports.events = {
     'click myquiz-details-*': 'showDetails',
     'click discuss-*': 'discuss',
     'click shareTo-*': 'shareTo',
-    'click myquiz-auditdetails-*': 'showauditDetails'
+    'click myquiz-auditdetails-*': 'showauditDetails',
+    'click test-*': 'showTest'
 };
 
 exports.handlers = {
@@ -199,7 +200,7 @@ exports.actionCallbacks = {
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        // this.module.dispatch('init');
+        this.module.dispatch('page');
     }
 };
 exports.dataForTemplate = {

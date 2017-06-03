@@ -38,10 +38,10 @@ view('reviewed')
                     .clearfix.m-top
                         .pull-right > a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow 
-                            compare(thumbnail.length 'gt' 0)
-                                img(src=thumbnail)
+                            #  compare(thumbnail.length 'gt' 0)
+                            #      img(src=thumbnail)
                             compare(auditType 'eq' 1)
-                                @echo(question.content)
+                                echo(question.content)
                             else
                                 @echo(questionDiscuss.content)
                         #   echo(question.content)
