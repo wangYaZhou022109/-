@@ -11,7 +11,7 @@ exports.store = {
     models: {
         state: {},
         trainees: {
-            url: '../train/trainee/response',
+            url: '../train/trainee/response-trainees',
             type: 'pageable',
             root: 'items'
         },

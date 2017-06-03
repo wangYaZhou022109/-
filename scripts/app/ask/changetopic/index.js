@@ -87,8 +87,12 @@ exports.store = {
                 }
             });
             if (typeof data === 'object' && falg) {
-                state.data.push(data);
-                state.changed();
+                if (state.data.length > 4) {
+                    this.app.message.success('最多可选择5个要变更的擅长话题！');
+                } else {
+                    state.data.push(data);
+                    state.changed();
+                }
             }
         },
         submit: function() {
@@ -101,8 +105,9 @@ exports.store = {
             });
             if (topic.length === 0) {
                 this.app.message.success('请选择您要变更的擅长话题！');
-            }
-            if (topic.length > 0) {
+            } else if (topic.length > 5) {
+                this.app.message.success('最多可选择5个要变更的擅长话题！');
+            } else {
                 data.id = this.models.state.expertId;
                 data.newTopic = topic.toString();
                 submit.set(data);

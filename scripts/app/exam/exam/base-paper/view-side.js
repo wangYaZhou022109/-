@@ -3,7 +3,7 @@ var D = require('drizzlejs'),
 
 exports.bindings = {
     types: true,
-    state: true
+    state: false
 };
 
 exports.events = {

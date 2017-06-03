@@ -15,7 +15,7 @@ view('search') > form.vertical
         .filter-item
             span > echo('班级状态')
         .filter-item
-            select.tag-select#classStatus(name='classStatus' x-marker='selectize')
+            select.input#classStatus(name='classStatus' x-marker='selectize')
                 each(classStatus)
                     option(value=key) > echo(value)
         .filter-item

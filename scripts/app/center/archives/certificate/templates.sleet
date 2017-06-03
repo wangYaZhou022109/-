@@ -32,7 +32,7 @@ view('main')
                         echo('|')
                         a > setting('person.archives.certificate.down')
                     else
-                        tr > td(colspan='8') > p.text-center > string('no-data')
+                        tr > td(colspan='8') > p.text-center > string('center.archives.no-data')
         #pager.pagination
 view('preview')
     .col-sm-12

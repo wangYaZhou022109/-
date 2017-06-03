@@ -19,7 +19,7 @@ exports.store = {
         trainee: { url: '../train/trainee/update' },
         classInfo: { url: '../train/class-info/get' },
         detail: { data: {} },
-        state: { data: { auditStatus: 0 } }
+        state: { data: { } }
     },
     callbacks: {
         init: function(payload) {

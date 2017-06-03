@@ -1,7 +1,8 @@
 
 exports.items = {
     content: 'content',
-    edit: ''
+    edit: '',
+    redio: ''
 };
 
 exports.store = {

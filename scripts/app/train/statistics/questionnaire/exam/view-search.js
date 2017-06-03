@@ -33,11 +33,6 @@ exports.dataForActions = {
     }
 };
 
-exports.components = [{
-    id: 'examStatus',
-    name: 'selectize'
-}];
-
 exports.dataForTemplate = {
     examStatus: function() {
         var result = maps.get('exam-record-status').sort(function(a, b) {

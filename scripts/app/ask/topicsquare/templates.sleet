@@ -18,7 +18,7 @@ view('main')
             li.topic-item
                 a.normal(href="javascript:;")
                     .img > .img-cont > img(src=attachmentId)
-                    h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
+                    h4.text-overflow(title=description) > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
                 compare(concernNumber 'eq' 0)
                     .btn.small(id="follow-4_"  + id data-name='id' data-value='4_' + id) > echo('关注')

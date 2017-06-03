@@ -104,8 +104,8 @@ view('shortcut')
             # .item.small-font > a(href='javascript:;' title='注册') 注册
 
 view('logo')
-    if(homeConfig.logo)
-        .item > a.underline(href='/#/home') > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
-    else
-        .item > a.underline(href='/#/home') > img(src='images/cmou-logo.png')
+    #  if(homeConfig.logo)
+    #      .item > a.underline(href='/#/home') > img(src='/api/v1/human/file/download?id='+homeConfig.logo)
+    #  else
+    .item > a.underline(href='/#/home') > img(src='images/cmou-logo.png')
     .item > img(src='images/dx-logo.png')

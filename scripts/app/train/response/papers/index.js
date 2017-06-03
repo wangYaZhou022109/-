@@ -11,7 +11,7 @@ exports.store = {
     models: {
         state: {},
         trainees: {
-            url: '../train/trainee/response',
+            url: '../train/trainee/trainees',
             type: 'pageable',
             root: 'items'
         },
@@ -23,7 +23,8 @@ exports.store = {
                 state = this.models.state;
             state.clear();
             state.data = payload;
-            trainees.params = payload;
+            state.data.auditStatus = 1;
+            trainees.params = state.data;
             return this.get(trainees);
         },
         search: function(payload) {

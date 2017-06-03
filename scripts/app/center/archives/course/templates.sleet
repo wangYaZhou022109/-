@@ -46,7 +46,7 @@ view('main')
                     else
                         td > echo(studyStatusStr)
                 else
-                    tr > td(colspan='9') > p.text-center > string('no-data')
+                    tr > td(colspan='7') > p.text-center > string('center.archives.no-data')
         #pager.pagination
 
 view('detail')

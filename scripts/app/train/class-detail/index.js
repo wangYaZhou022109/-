@@ -127,7 +127,11 @@ exports.store = {
                 courseStudyProgresss = this.models.courseStudyProgresss,
                 members = this.models.members,
                 course = this.models.course,
-                me = this;
+                me = this,
+                see = options.see,
+                state = this.models.state;
+            state.data.see = see;
+            state.changed();
             this.models.classId.data.classId = classId;
             photos.params = { classId: classId };
             courseStudyProgresss.params = { classId: classId };
@@ -234,5 +238,20 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.chain([this.dispatch('init', this.renderOptions), this.dispatch('getTrainee', this.renderOptions)]);
+    var payload = this.renderOptions.classId,
+        classId,
+        see,
+        index;
+    index = payload.indexOf('?');
+    if (Number(index) !== -1) {
+        classId = payload.split('?')[0].trim();
+        see = payload.split('?')[1].trim();
+        this.dispatch('init', { classId: classId, see: see });
+    } else {
+        classId = payload;
+        this.chain([
+            this.dispatch('init', { classId: classId }),
+            this.dispatch('getTrainee', { classId: classId })
+        ]);
+    }
 };

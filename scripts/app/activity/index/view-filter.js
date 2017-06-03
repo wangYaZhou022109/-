@@ -37,10 +37,10 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     getClassSignupInfo: function(data) {
-        var classSignupInfo = data[0];
+        var classSignupInfo = data[0] || {};
         var nowTime = (new Date()).getTime();
         var url = '#/train/sign-up/' + classSignupInfo.classId;
-        if (classSignupInfo) {
+        if (classSignupInfo.id) {
             if (classSignupInfo.isOpen === 0) {
                 this.app.message.error('该培训班暂未开放报名!');
             } else if (nowTime < classSignupInfo.startTime) {
@@ -51,7 +51,7 @@ exports.actionCallbacks = {
                 window.location.href = url;
             }
         } else {
-            this.app.message.error('报名码不存在!');
+            this.app.message.error('报名码无效!');
         }
     }
 };
