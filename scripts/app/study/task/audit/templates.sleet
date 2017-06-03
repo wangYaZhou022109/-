@@ -10,15 +10,24 @@ view('side') > form.vertical.list
     .m-top
         .m-bottom > strong > string('study.task.attachment') ：
         .m-bottom
-            a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') 作业附件郁郁葱葱
-            a.pull-right(href=downUrl download=name) 下载
-
+            each(task.attachments)
+                if(preview)
+                    a.text-overflow.pointer(id='taskAttachment'+attachmentId href='javascript:;') > echo(name)
+                else
+                    a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+                a.pull-right(href=downUrl download=name) > string('download')
+                br
     .m-bottom > strong > string('study.user.attachment') ：
-    .m-top
-        a(id='viewUseDesc-'+id) 作业详情
-    .m-top
-        a(id='sectionAttachment'+id href='javascript:;') 作业名称名称名称
-        a.pull-right(href=downUrl download=name) 下载
+    each(sectionStudyProgress.sectionAttachments)
+        .m-top
+            a(id='viewUseDesc-'+id) 作业详情
+        .m-top
+            if(preview)
+                a(id='sectionAttachment'+id href='javascript:;') > echo(name)
+            else
+                a(href=downUrl download=name) > echo(name)
+            if(downUrl)
+                a.pull-right(href=downUrl download=name) > string('download')
 
     .m-top
         .text-center.border.top.mt-1 > .m-top
