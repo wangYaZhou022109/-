@@ -25,7 +25,7 @@ view('list')
                                 a(href='javascript:;') > echo(member.fullName)
                                 span > echo('讨论了')
                                 a(href='javascript:;') > echo('我')
-                                span > echo('我的问题')
+                                span > echo('的问题')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
                                 .pull-left > .sub-text > echo('来自问题：') + a(id='myreply-details-' + id + '_' + question.id) > echo(question.title)

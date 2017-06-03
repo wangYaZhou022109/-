@@ -47,7 +47,7 @@ exports.store = {
             if (data.introduce !== '') {
                 activation.set(data);
                 this.post(activation).then(function() {
-                    me.app.message.success('激活申请成功！');
+                    me.app.message.success('申请已提交，等待管理员审核！');
                     me.module.dispatch('refresh');
                 });
             }
