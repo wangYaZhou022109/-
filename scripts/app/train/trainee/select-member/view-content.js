@@ -40,6 +40,10 @@ exports.dataForTemplate = {
         _.map(data.members || [], function(x) {
             var m = x || {};
             if (ids.indexOf(m.id) !== -1 || memberIds.indexOf(m.id) !== -1) m.checked = true;
+            if (m.organization.level && m.organization.level <= 3) {
+                m.organization.companyName = m.organization.name;
+                m.organization.name = '';
+            }
         });
         return data.members;
     }

@@ -45,7 +45,7 @@ exports.store = {
         list: function(params) {
             var list = this.models.list,
                 state = this.models.state;
-            state.data = params;
+            state.data.groupId = params;
             D.assign(list.params, {
                 classId: this.models.classId.data.classId,
                 auditStatus: 1,
@@ -62,10 +62,14 @@ exports.store = {
                 groups = this.models.groups,
                 classDetail = this.models.classDetail,
                 checkMember = this.models.checkMember,
-                me = this;
+                me = this,
+                state = this.models.state,
+                see = options.see;
             this.models.classId.data.classId = classId;
             menu.params = { classId: options.classId };
             photos.params = { classId: classId };
+            state.data.see = see;
+            state.changed();
             this.get(photos).then(function(data) {
                 _.map(data[0], function(obj) {
                     var photo = obj;

@@ -8,7 +8,7 @@ view('content')
     section.section
         .clearfix
             .pull-right
-                a(href=inside target = "_blank") > .btn > echo('导出内部讲师')
+                .btn#inside > echo('导出内部讲师')
         table.table.layout-mt-small
             thead > tr
                 th > echo('课程名称')
@@ -83,4 +83,12 @@ view('edit') > form.vertical
                     input.input(type='hidden' name='id' value=edit.courseSalary.id)
                     input.input(type='hidden' name='classOfflineCourseId' value= edit.id)
                     input.input(type='hidden' name='lecturerId' value= edit.lecturer.id)
-
+view('redio') > form.vertical
+    label.label.required > echo('请选择管理费税金比例')
+    .layout-mt
+        .w-half.text-center.inline-block.pull-left
+            input.input(type = 'radio' name = 'radio'value= '0.09')
+            label > echo('9%')
+        .w-half.text-center.inline-block
+            input.input(type = 'radio' name = 'radio'value ='0.25')
+            label > echo('25%')

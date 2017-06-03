@@ -23,7 +23,7 @@ view('main')
                 td > echo(member.name)
                 td > echo(member.fullName)
                 td > echo(member.organizationName)
-                td > echo(member.positionName)
+                td > echo(member.jobName)
                 td > echo(phone)
                 td > echo(studyTotalTime)
                 td

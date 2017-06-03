@@ -14,3 +14,6 @@ view('main')
                 tbody > each(situation.classQuotaDetails) > tr
                     td > echo(organizationName)
                     td > echo(signUpNumber) + echo('/') + echo(quantity)
+    else
+        .text-center
+            echo('暂无配额信息')

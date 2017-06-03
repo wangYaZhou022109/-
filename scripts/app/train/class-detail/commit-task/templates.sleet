@@ -13,6 +13,8 @@ view('main')
                         compare(taskMember.state 'ne' 4)
                             a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('查看')
                         else
-                            a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')
+                            if(isGrant)
+                                a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')
                     else
-                        a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')
+                        if(isGrant)
+                            a.tag-btn(href='#/train/class-detail/task-detail/'+id target='_blank') > echo('提交')

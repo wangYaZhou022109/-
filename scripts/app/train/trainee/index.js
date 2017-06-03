@@ -30,8 +30,8 @@ exports.beforeRender = function() {
     state.classId = payload.classId;
     state.role = payload.role;
     return me.dispatch('init', classId).then(function() {
-        var classQuota = me.store.models.classQuota.data;
-        var signUpInfo = me.store.models.signUpInfo.data;
+        var classQuota = me.store.models.classQuota.data || {};
+        var signUpInfo = me.store.models.signUpInfo.data || {};
         if (classQuota.id) {
             if (signUpInfo.id) {
                 state.isAutoApprove = classQuota.isAutoApprove;

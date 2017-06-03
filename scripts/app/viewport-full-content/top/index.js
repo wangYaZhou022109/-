@@ -11,7 +11,7 @@ var menus = [{
     name: '首页',
     order: 0,
     parentId: null,
-    uri: 'home'
+    url: 'home'
 }, {
     createTime: 1474538557153,
     icon: null,
@@ -20,7 +20,7 @@ var menus = [{
     name: '课程',
     order: 0,
     parentId: null,
-    uri: 'study/course/index'
+    url: 'study/course/index'
 }, {
     createTime: 1474538557153,
     icon: null,
@@ -29,7 +29,7 @@ var menus = [{
     name: '活动',
     order: 0,
     parentId: null,
-    uri: 'activity/index'
+    url: 'activity/index'
 }, {
     createTime: 1474538557153,
     icon: null,
@@ -38,7 +38,7 @@ var menus = [{
     name: '问道',
     order: 0,
     parentId: null,
-    uri: 'ask/index'
+    url: 'ask/index'
 }, {
     createTime: 1474538557153,
     icon: null,
@@ -47,7 +47,7 @@ var menus = [{
     name: '专题',
     order: 0,
     parentId: null,
-    uri: 'study/subject/index'
+    url: 'study/subject/index'
 }, {
     createTime: 1474538557153,
     icon: null,
@@ -56,7 +56,7 @@ var menus = [{
     name: '知识',
     order: 0,
     parentId: null,
-    uri: 'knowledge/index'
+    url: 'knowledge/index'
 }];
 
 exports.items = {

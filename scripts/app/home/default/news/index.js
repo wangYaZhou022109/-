@@ -22,7 +22,13 @@ exports.store = {
             return this.get(newsList);
         },
         changeIndex: function(num) {
-            var current = this.models.state.data.currentIndex + num;
+            var current = this.models.state.data.currentIndex + num,
+                length = this.models.newsList.data.length;
+            if (length === current) {
+                current = 0;
+            } else if (current < 0) {
+                current = length + current;
+            }
             if (this.models.newsList.data[current]) {
                 this.models.state.data.currentIndex = current;
                 this.models.state.changed();
