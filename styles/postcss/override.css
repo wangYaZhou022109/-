@@ -173,7 +173,13 @@
 
 
 .pswp__preloader--active {
-  opacity: 1; }
-  .pswp__preloader--active .pswp__preloader__icn {
+  opacity: 1;
+}
+.pswp__preloader--active .pswp__preloader__icn {
     /* We use .gif in browsers that don't support CSS animation */
-    background: url(../images/preloader.gif) 0 0 no-repeat; }
+    background: url(../images/preloader.gif) 0 0 no-repeat;
+}
+.pswp__caption__center {
+    text-align: center;
+    max-width: none;
+}
