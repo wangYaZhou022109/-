@@ -22,7 +22,7 @@ exports.store = {
             data.beUserId = this.models.state.beUserId;
             report.set(data);
             return this.save(report).then(function() {
-                this.app.message.success('举报成功！');
+                this.app.message.success('举报成功，等待管理员处理');
             });
         }
 

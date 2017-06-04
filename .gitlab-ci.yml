@@ -4,7 +4,7 @@ before_script:
 cache:
   paths:
     - node_modules
- 
+
 stages:
   - build
   - deploy
@@ -22,7 +22,7 @@ deploy-master:
     - export PRODUCTION=true
     - gulp build
     - tar -zcf dist.tgz dist
-    - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" dev9.zhixueyun.com:8005/frontend/student"
-    
-    #- "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.162.70.87:8005/frontend/student"
+    - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.27.224.129:8005/frontend/student"
+   
+     #- "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.162.70.87:8005/frontend/student"
     - rm -f dist.tgz

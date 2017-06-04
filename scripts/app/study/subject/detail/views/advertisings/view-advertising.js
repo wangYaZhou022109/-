@@ -101,6 +101,10 @@ exports.dataForActions = {
     },
     cancelCollect: function(payload) {
         return payload;
+    },
+    score: function() {
+        var data = this.bindings.score.data;
+        return data.score ? data : false;
     }
 };
 

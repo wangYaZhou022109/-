@@ -144,9 +144,16 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
-    shut: function(payload) {
-        var data = payload;
-        return data;
+    shut: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '文章删除后将无法恢复，是否确定删除该文章？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     publish: function(payload) {
         return payload;
@@ -202,7 +209,7 @@ exports.actionCallbacks = {
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        // this.module.dispatch('init');
+        this.module.dispatch('page');
     },
     praise: function() {
         this.app.message.success('点赞成功！');

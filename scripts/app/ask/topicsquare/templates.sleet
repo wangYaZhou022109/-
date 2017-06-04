@@ -21,7 +21,12 @@ view('main')
                     h4.text-overflow(title=description) > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
                 compare(concernNumber 'eq' 0)
-                    .btn.small(id="follow-4_"  + id data-name='id' data-value='4_' + id) > echo('关注')
-                else
-                    .btn.small(id="unfollow-4_"  + id data-name='id' data-value='4_' + id) > echo('取消关注')
+                    .btn.small( id='follow-4_' + id data-name='id' data-value='4_' + id ) > string('follow')
+                    #  .btn.small( 'hidden' id='follow-4_' + id data-name='id' data-value='4_' + id ) > string('follow')
+                else 
+                    #  .btn.small( 'hidden' id='unfollow-4_' + id data-name='id' data-value='4_' + id ) > string('unfollow')
+                    .btn.small( id='unfollow-4_' + id data-name='id' data-value='4_' + id ) > string('unfollow')
+                #      .btn.small(id="follow-4_"  + id data-name='id' data-value='4_' + id) > echo('关注')
+                #  else
+                #      .btn.small(id="unfollow-4_"  + id data-name='id' data-value='4_' + id) > echo('取消关注')
     

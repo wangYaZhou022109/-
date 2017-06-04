@@ -15,11 +15,19 @@
 #      div(data-dynamic-key='topicright')
 module > .ask-page > .container
     .page-main-wrapper
-        .page-side.side-min(data-region='right')
+        .page-side.side-min
+            .content
+                div(data-region='top')
+                div(data-region='middle')
+                div(data-region='bottom')
         .page-main(data-region='left' class = 'activity-category') 
 
 view('left')
     div(data-dynamic-key='topicsquare')
 
-view('right')
-    div(data-dynamic-key='topicright')
+view('top')
+    div(data-dynamic-key='questionandarticles')
+view('middle')
+    div(data-dynamic-key='indexmenu')
+view('bottom')
+    div(data-dynamic-key='topicright/bottom')

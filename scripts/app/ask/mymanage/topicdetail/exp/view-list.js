@@ -136,6 +136,8 @@ exports.actions = {
     'click publish-*': 'publish',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
+    'click setEssenceStatus-*': 'setEssenceStatus',
+    'click unEssenceStatus-*': 'unEssenceStatus'
 };
 
 exports.dataForActions = {
@@ -176,6 +178,16 @@ exports.dataForActions = {
         data.id = obj[1];
         return data;
     },
+    setEssenceStatus: function(payload) {
+        var data = payload;
+        data.essenceStatus = 1;
+        return data;
+    },
+    unEssenceStatus: function(payload) {
+        var data = payload;
+        data.essenceStatus = 0;
+        return data;
+    }
 };
 
 exports.actionCallbacks = {
@@ -190,6 +202,8 @@ exports.actionCallbacks = {
         var me = this;
         follow.hidden = true;
         unfollow.hidden = false;
+        me.app.message.success('关注成功！');
+        me.module.dispatch('refresh');
         setTimeout(function() {
             me.app.message.success('关注成功！');
             me.module.dispatch('refresh');
@@ -220,7 +234,26 @@ exports.actionCallbacks = {
     },
     unpraise: function() {
         this.app.message.success('取消点赞成功！');
-    }
+    },
+    setEssenceStatus: function() {
+        // var essence = data[0];
+        // var unEssenceStatus = this.$('unEssenceStatus-' + essence.id);
+        // var setEssenceStatus = this.$('setEssenceStatus-' + essence.id);
+        // var me = this;
+        // setEssenceStatus.hidden = true;
+        // unEssenceStatus.hidden = false;
+        this.module.dispatch('page');
+    },
+    unEssenceStatus: function() {
+        // console.log(data);
+        // var essence = data[0];
+        // var unEssenceStatus = this.$('unEssenceStatus-' + essence.id);
+        // var setEssenceStatus = this.$('setEssenceStatus-' + essence.id);
+        // var me = this;
+        // setEssenceStatus.hidden = false;
+        // unEssenceStatus.hidden = true;
+        this.module.dispatch('page');
+    },
 };
 
 exports.dataForTemplate = {

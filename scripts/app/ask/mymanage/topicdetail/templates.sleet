@@ -12,7 +12,7 @@ module > .ask-page > .container
             div(data-region='list')
 view('topicdetail')
     .topic-detail-title.clearfix
-        .img > .img-cont > img(src="images/demo/1.jpg" alt='温暖气氛')
+        .img > .img-cont > img(src="images/default-cover/default_topic.jpg")
         .w-full
             h4.text-overflow > echo(topicdetail.name)
             .info > echo(topicdetail.description)

@@ -151,17 +151,20 @@ exports.store = {
             });
         },
         publish: function(payload) {
-            // var discuss = this.models.discuss;
-            // discuss.set(payload);
-            // return this.save(discuss);
             var discuss = this.models.discuss,
-                speechset = this.models.speech.getData('2'),
                 data = payload,
+                speechset = this.models.speech.getData('2'),
                 me = this;
             data.speechset = speechset.status;
             discuss.set(data);
-            return this.save(discuss).then(function() {
+            this.save(discuss).then(function() {
+                var message = '发布成功';
                 var page = me.models.page;
+                var speech = me.models.speech.getData('2');
+                if (speech.status === 1) {
+                    message = '等待审核';
+                }
+                me.app.message.success(message);
                 page.changed();
             });
         },

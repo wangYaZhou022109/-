@@ -1,13 +1,26 @@
+var _ = require('lodash/collection');
+
 exports.title = '调研与考试';
 
 exports.bindings = {
     questionnaire: true,
-    state: true
+    state: true,
+    trainee: false
 };
 
 exports.dataForTemplate = {
     questionnaire: function(data) {
         var questionnaire = data.questionnaire;
+        var trainee = this.bindings.trainee.data || {};
+        _.map(questionnaire || {}, function(q) {
+            var u = q;
+            if (trainee.id) {
+                u.isGrant = true;
+            } else {
+                u.isGrant = false;
+            }
+            return u;
+        });
         return questionnaire;
     }
 };

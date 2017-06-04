@@ -15,6 +15,10 @@ exports.dataForTemplate = {
         _.map(trainees || [], function(trainee, i) {
             var e = trainee;
             e.i = i + 1 + ((pageNum - 1) * 10);
+            if (e.organizationLevel && e.organizationLevel <= 3) {
+                e.companyName = e.organizationName;
+                e.organizationName = '';
+            }
         });
         return trainees;
     }

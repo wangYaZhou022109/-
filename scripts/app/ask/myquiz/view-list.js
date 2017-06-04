@@ -119,7 +119,6 @@ exports.handlers = {
 };
 
 exports.actions = {
-    'click remove-*': 'remove',
     'click concern-*': 'concern',
     'click enjoy-*': 'enjoy',
     'click report-*': 'report',
@@ -130,20 +129,16 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    remove: function(data) {
+    shut: function(data) {
         var me = this;
         return this.Promise.create(function(resolve) {
-            var message = '确定要删除该数据?';
+            var message = '提问删除后将无法恢复，是否确定删除该提问？';
             me.app.message.confirm(message, function() {
                 resolve(data);
             }, function() {
                 resolve(false);
             });
         });
-    },
-    shut: function(payload) {
-        var data = payload;
-        return data;
     },
     follow: function(payload) {
         var id = payload.id,
@@ -200,7 +195,7 @@ exports.actionCallbacks = {
     },
     publish: function() {
         this.app.message.success('操作成功！');
-        // this.module.dispatch('init');
+        this.module.dispatch('page');
     }
 };
 exports.dataForTemplate = {
