@@ -1,0 +1,68 @@
+#! handlebars
+
+module > .achievement-content.main-side
+    .achievement-side.bg-color(data-region='side')
+    .achievement-head(data-region='head')
+    .achievement-main(data-region='main')
+
+view('side')
+    .list
+        .btn.block#taskDescription 作业说明
+        .m-top
+            .m-bottom > strong > string('study.task.attachment') ：
+            .m-bottom
+                each(task.attachments)
+                    if(preview)
+                        a.text-overflow.pointer(id='taskAttachment'+attachmentId href='javascript:;') > echo(name)
+                    else
+                        a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+                    a.pull-right(href=downUrl download=name) > string('download')
+                    br
+        .m-bottom > strong > string('study.user.attachment') ：
+        each(sectionStudyProgress.sectionAttachments)
+            .m-top
+                a(id='viewUseDesc-'+id) 作业详情
+            .m-top
+                if(preview)
+                    a(id='sectionAttachment'+id href='javascript:;') > echo(name)
+                else
+                    a(href=downUrl download=name) > echo(name)
+                if(downUrl)
+                    a.pull-right(href=downUrl download=name) > string('download')
+        .m-top
+            .text-center.border.top.mt-1 > .m-top
+                input.inline-block(type='radio' name='auditPass' value='1' id='radio-y')('checked')&unless(checked)
+                .inline-block > label.no-margin(for='radio-y') 通过
+                input.inline-block.m-left(type='radio' name='auditPass' value='2' id='radio-n')('checked')&if(checked)
+                .inline-block > label.no-margin(for='radio-n') 打回重新提交
+            .m-top
+                label 评分：
+                input.input.w-full(name='score')
+            .m-top
+                label 评语：
+                textarea.input#comments(name='comments' rows='4' cols='25')
+
+view('head')
+    .pull-left.title > echo(task.name)
+    .text-right
+        ul.head-info.inline-block
+            li.border.right > echo('提交人：' sectionStudyProgress.commitMemberName)
+        .btn#audit 确定
+
+view('main')
+    .preview-content
+        compare(state.flag 'eq' 'pdf')
+            #viewPdf
+        if(state.description)
+            .row
+                .col-sm-12
+                    p 作业详情：
+                    p > @echo(state.description)
+        compare(state.flag 'eq' 'desc')
+            .row
+                .col-sm-12
+                    p 作业说明 ：
+                    p > @echo(task.description)
+
+view('tips')
+    span 操作成功！

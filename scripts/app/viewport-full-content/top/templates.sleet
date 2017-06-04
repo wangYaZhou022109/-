@@ -28,7 +28,7 @@ view('shortcut')
                     .search-select > select.input(name='searchType')
                         each(searchTypes)
                             option(value=key) > echo(value)
-                    .search-input > input.input#searchContent(name='searchContent' autocomplete='off' placeholder='请输入您要搜索的内容' value=searchContent)
+                    .search-input > input.input#searchContent(name='searchContent' autocomplete='off' placeholder='请输入您要搜索的内容' maxlength='50' value=searchContent)
                     .search-btn > button.btn(id='searchBtn' type='button') > i.iconfont.icon-search
                     .search-more-bar.border.around#searchMore > ul
                         each(searchHistorys)
