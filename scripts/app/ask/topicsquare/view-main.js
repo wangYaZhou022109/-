@@ -62,11 +62,25 @@ exports.dataForActions = {
 };
 exports.actionCallbacks = {
     follow: function() {
+        // var concern = data[0];
+        // var unfollow = this.$('unfollow-' + concern.concernType + '_' + concern.concernId);
+        // var follow = this.$('follow-' + concern.concernType + '_' + concern.concernId);
+        // // var me = this;
+        // follow.hidden = true;
+        // unfollow.hidden = false;
         this.app.message.success('关注成功！');
+        this.module.dispatch('refresh');
         this.module.dispatch('init');
     },
     unfollow: function() {
+        // var concern = data[0];
+        // var unfollow = this.$('unfollow-' + concern.concernType + '_' + concern.concernId);
+        // var follow = this.$('follow-' + concern.concernType + '_' + concern.concernId);
+        // // var me = this;
+        // follow.hidden = false;
+        // unfollow.hidden = true;
         this.app.message.success('取消成功！');
+        this.module.dispatch('refresh');
         this.module.dispatch('init');
     }
 };

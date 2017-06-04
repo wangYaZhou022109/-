@@ -7,13 +7,18 @@ exports.bindings = {
     twoBrings: true,
     twoBringsResult: true,
     classId: true,
-    signUpInfo: true
+    signUpInfo: true,
+    trainee: true
 };
 
-exports.buttons = [{
-    text: '提交',
-    action: 'commitTwoBrings',
-}];
+// exports.buttons = [{
+//     text: '提交',
+//     action: 'commitTwoBrings',
+// }];
+
+exports.actions = {
+    'click save': 'commitTwoBrings'
+};
 
 exports.dataForActions = {
     commitTwoBrings: function() {
@@ -51,6 +56,7 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     commitTwoBrings: function() {
         this.app.message.success('提交成功！');
+        this.module.dispatch('twoBring');
     }
 };
 
@@ -58,5 +64,12 @@ exports.dataForTemplate = {
     twoBrings: function(data) {
         var twoBrings = data.twoBrings;
         return twoBrings;
+    },
+    isGrant: function() {
+        var trainee = this.bindings.trainee.data || {};
+        if (trainee.id) {
+            return true;
+        }
+        return false;
     }
 };

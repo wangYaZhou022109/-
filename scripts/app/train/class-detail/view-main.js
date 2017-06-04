@@ -1,7 +1,8 @@
 exports.bindings = {
     classId: true,
     bus: true,
-    trainee: true
+    trainee: true,
+    state: false
 };
 
 exports.events = {
@@ -15,16 +16,19 @@ exports.handlers = {
     showTaskList: function() {
         var view = this.module.items['train/class-detail/commit-task'];
         var classId = this.bindings.classId.data.classId;
-        this.app.viewport.modal(view, { classId: classId });
+        var trainee = this.bindings.trainee.data || {};
+        this.app.viewport.modal(view, { classId: classId, traineeId: trainee.id });
     },
     shuttleBusInformation: function() {
         var view = this.module.items['train/class-detail/class-bus'];
         var classId = this.bindings.classId.data.classId;
-        this.app.viewport.modal(view, { classId: classId });
+        var trainee = this.bindings.trainee.data || {};
+        this.app.viewport.modal(view, { classId: classId, traineeId: trainee.id });
     },
     classMembers: function() {
         var classId = this.bindings.classId.data.classId;
-        this.app.show('content', 'train/classmate-book', { classId: classId });
+        var see = this.bindings.state.data.see;
+        this.app.show('content', 'train/classmate-book', { classId: classId, see: see });
     },
     addCourse1: function() {
         var me = this;

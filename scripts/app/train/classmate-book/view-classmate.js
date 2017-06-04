@@ -15,6 +15,10 @@ exports.events = {
 exports.handlers = {
     toggleActive: function() {
         var classId = this.bindings.classId.data.classId;
+        var see = this.bindings.state.data.see;
+        if (see) {
+            classId = classId + '?' + see;
+        }
         this.app.show('content', 'train/class-detail', { classId: classId });
     },
     menuBySelect: function(id) {
@@ -37,7 +41,7 @@ exports.dataForTemplate = {
     },
     menu: function(data) {
         var menu = data.menu || [],
-            staste = this.bindings.state.data || {};
+            staste = this.bindings.state.data.groupId || {};
         if (menu) {
             _.map(menu, function(m) {
                 var d = m;

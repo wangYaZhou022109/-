@@ -35,9 +35,9 @@ view('main')
                         | 已结束
                 .btn-row
                     compare(status 'eq' 1)
-                        .btn 进入班级
+                        .btn(id='inClass' + id) 进入班级
                     else
-                        .btn 查看详情
+                        .btn(id='seeClass' + id) 查看详情
                     #  compare(status 'eq' 2)
                     #      .btn 查看详情
                 .info-row(style='margin-top: 1.3em;')

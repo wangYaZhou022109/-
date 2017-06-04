@@ -50,7 +50,7 @@ view('main')
         
     .layout-mt
         .comment-list > each(details.questionDiscussList) > ul
-            compare(auditStatus 'eq' "0")
+            compare(auditStatus 'eq' 1)
                 li
                     .user-pic > img(src=headPhoto)
                     #  .comment-content
@@ -63,7 +63,7 @@ view('main')
                                 a(href='#') > echo( member.fullName)
                                 span > echo(organization.name)
                             .text-right > dateTime(createTime)
-                        .comment-text > echo(contentTxt)
+                        .comment-text > echo(content)
                         .comment-operation
                             .pull-left 
                                 compare(praise1 'eq' true)

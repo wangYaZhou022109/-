@@ -35,7 +35,8 @@ exports.dataForActions = {
         var sex = $(this.$$('[name="sex"]')).val();
         var nation = $(this.$$('[name="nation"]')).val();
         var remark = $(this.$$('[name="remark"]')).val();
-        var settleOrganizationId = $(this.$$('[name="organizationId"]')).val();
+        var organizationId = $(this.$$('[name="organizationId"]')).val();
+        var settleOrganizationId = $(this.$$('[name="settleOrganizationId"]')).val();
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
         var className = this.bindings.classSignupInfo.data.classInfo.className;
@@ -55,6 +56,7 @@ exports.dataForActions = {
             nation: nation,
             remark: remark,
             classId: classId,
+            organizationId: organizationId,
             settleOrganizationId: settleOrganizationId,
             memberId: memberId,
             className: className
@@ -114,5 +116,14 @@ exports.dataForTemplate = {
                 return sex;
             });
         return sexs;
+    },
+    member: function(data) {
+        var member = data.member || {};
+        if (member.organizationLevel && member.organizationLevel <= 3) {
+            member.companyId = member.organizationId;
+            member.companyName = member.organizationName;
+            member.organizationName = '';
+        }
+        return member;
     }
 };

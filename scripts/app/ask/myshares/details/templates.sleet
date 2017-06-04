@@ -56,7 +56,7 @@ view('main')
         
     .layout-mt
         .comment-list > each(details.questionDiscussList) > ul
-            compare(auditStatus 'eq' "0")
+            compare(auditStatus 'eq' 1)
                 li
                     .user-pic > img(src=headPhoto)
                     .comment-content

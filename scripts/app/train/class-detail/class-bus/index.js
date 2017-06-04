@@ -14,14 +14,19 @@ exports.store = {
         detaildelete: {
             url: '../train/bus-detail'
         },
+        state: {}
     },
     callbacks: {
         init: function(payload) {
             var bus = this.models.bus,
                 classId = payload.classId,
-                busId = payload.busId;
+                busId = payload.busId,
+                state = this.models.state,
+                traineeId = payload.traineeId;
             bus.set({ id: classId });
             bus.params = { busId: busId };
+            state.data = { traineeId: traineeId };
+            state.changed();
             return this.get(bus).then(function(data) {
                 _.map(data[0] || [], function(cinfo, i) {
                     var e = cinfo;

@@ -6,7 +6,7 @@ exports.bindings = {
 
 exports.dataForTemplate = {
     trainees: function(data) {
-        var situation = data.situation;
+        var situation = data.situation || '';
         if (situation.signUpNumber === null) {
             situation.signUpNumber = 0;
         }

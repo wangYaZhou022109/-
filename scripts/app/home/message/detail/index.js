@@ -4,7 +4,7 @@ exports.items = {
 
 exports.store = {
     models: {
-        message: { url: '../system/message' }
+        message: { url: '../system/message-notice' }
     },
     callbacks: {
         init: function(paylaod) {
