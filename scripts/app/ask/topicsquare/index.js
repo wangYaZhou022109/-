@@ -19,6 +19,12 @@ exports.store = {
         state: {}
     },
     callbacks: {
+        refresh: function() {
+            this.models.refresh();
+        },
+        set: function(payload) {
+            this.models.refresh = payload;
+        },
         init: function() {
             var topicname = this.models.topicname;
             // topicname.params = { id: 5 };
@@ -78,6 +84,8 @@ exports.store = {
     }
 };
 exports.beforeRender = function() {
+    this.dispatch('set', this.renderOptions.refresh);
+    // console.log(this.renderOptions);
     this.dispatch('init');
     this.dispatch('topicType', this.renderOptions);
 };

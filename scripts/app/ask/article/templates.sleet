@@ -11,7 +11,7 @@ module > form.form.align-left
     div(data-region='topic')
 
 view('top')
-    input.input#selectquestion(name='title'  value= title  x-rule='article-title')
+    input.input#selectquestion(name='title'  value= title  x-rule='article-title' maxlength='60')
     .tips 0/60
 
 view('selectdrop')
@@ -38,7 +38,7 @@ view('details')
 view('edit')
     .form-row.textarea-row
         label > string('detailed-description')
-        .content > textarea.input(rows='5')(name='content' id='content') 
+        .content > textarea.input(rows='5')(name='content' id='content' maxlength='3000')
 
 view('upload')
     .row
