@@ -43,6 +43,11 @@ D.assign(obj.dataForTemplate, {
                 examNotes: data.state.tips
             });
         }
+        if (data.state.message) {
+            return D.assign(data.state, {
+                examNotes: data.state.message
+            });
+        }
         return data.state;
     },
     canShowDetail: function(data) {

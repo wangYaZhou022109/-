@@ -45,7 +45,9 @@ var setOptions = {
                             correctNum: questionSummary.correctNum,
                             errorNum: questionSummary.errorNum,
                             noAnswerCount: questionSummary.noAnswerCount,
-                            examineeTotalScore: 0
+                            examineeTotalScore: 0,
+                            hasPrevious: false,
+                            hasNext: exam.paper.questions.length > 1
                         };
 
                         if (exam.examRecord.status > 5) {
@@ -68,7 +70,9 @@ var setOptions = {
                             correctNum: 0,
                             errorNum: 0,
                             noAnswerCount: 0,
-                            examineeTotalScore: 0
+                            examineeTotalScore: 0,
+                            hasPrevious: false,
+                            hasNext: exam.paper.questions.length > 1
                         });
 
                         if (exam.examRecord.status > 5) {
