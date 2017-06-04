@@ -30,7 +30,6 @@ exports.handlers = {
         var url = element.getAttribute('href').slice(2),
             params = {};
         $(window).unbind('scroll');
-        this.module.dispatch('changeTop');
         if (url === 'home' && document.cookie) {
             document.cookie.split('; ').forEach(function(item) {
                 var arr = item.split('=');

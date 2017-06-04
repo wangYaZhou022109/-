@@ -248,9 +248,9 @@ view('main') > .container
                         .text-overflow.title > echo(subject)
                         .bottom.text-tips
                             i.iconfont.icon-view
-                            span > echo(subNumber)
+                            span > echo(viewNumber)
                             i.iconfont.icon-date.m-left
-                            span > date(startTime)
+                            span > dateMinute(startTime)
 
     compare(knowledges.length 'gt' 0)
         .search-content

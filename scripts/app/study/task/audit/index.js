@@ -2,7 +2,8 @@ var D = require('drizzlejs');
 exports.items = {
     head: 'head',
     side: 'side',
-    main: 'main'
+    main: 'main',
+    tips: ''
 };
 
 exports.store = {
@@ -41,8 +42,12 @@ exports.store = {
                 }
             );
         },
-        saveAudit: function(payload) {
-            this.models.audit.set(payload);
+        saveAudit: function() {
+            var progress = this.models.sectionStudyProgress.data,
+                data = this.module.items.side.getData();
+            if (!data) return false;
+            data.id = progress.id;
+            this.models.audit.set(data);
             return this.save(this.models.audit);
         },
         updateState: function(payload) {

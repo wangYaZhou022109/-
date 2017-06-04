@@ -19,7 +19,7 @@ exports.dataForTemplate = {
                 opt.status = '待审核';
                 opt.timeStr = '提交时间：';
             } else {
-                opt.status = maps.get(opt.auditPass);
+                opt.status = maps.getValue('audit-pass', opt.auditPass);
                 opt.timeStr = '评卷时间：';
             }
             return opt;
@@ -44,5 +44,6 @@ exports.handlers = {
     },
     auditTask: function(id) {
         window.open('#/study/task/audit/' + id);
+        this.app.viewport.closeModal();
     }
 };

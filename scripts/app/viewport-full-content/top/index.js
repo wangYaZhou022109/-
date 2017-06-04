@@ -73,8 +73,8 @@ exports.store = {
         navs: { url: '../system/home-nav' },
         homeConfig: { url: '../system/home-config/config' },
         message: {
-            url: '../system/message',
-            params: { page: 1, pageSize: 5, type: 1, readStatus: 0 }
+            url: '../system/message-notice',
+            params: { page: 1, pageSize: 5, readStatus: 0 }
         },
         organizations: { url: '../system/home-config/organization' },
         integral: { url: '../system/integral-result/grade' }, // 积分和等级
@@ -182,9 +182,6 @@ exports.store = {
             };
             viewUtil.editSearchHistory(param);
             return true;
-        },
-        changeTop: function() {
-            this.models.state.changed();
         }
     }
 };
@@ -202,6 +199,10 @@ exports.beforeRender = function() {
 };
 
 exports.afterRender = function() {
+    var me = this;
     this.dispatch('loadDataByUser');
     this.dispatch('showSetting');
+    $(window).on('hashchange', function() {
+        me.store.models.state.changed();
+    });
 };
