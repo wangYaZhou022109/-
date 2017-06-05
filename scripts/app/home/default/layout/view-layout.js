@@ -124,6 +124,7 @@ exports.dataForTemplate = {
             r.dataUrl = dataUrl + r.dataId;
             array[i + 1] = r;
         });
+        array.length = data.contents.length;
         return array;
     }
 };
