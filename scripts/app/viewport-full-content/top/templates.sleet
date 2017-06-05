@@ -12,9 +12,9 @@ view('nav')
     .nav-list
         each(navs)
             if(link)
-                .item> a.normal.nav-color(href=url target='_blank') > echo(name)
+                .item > a.normal.nav-color(href=url target='_blank') > echo(name)
             else
-                .item(id='menu-' + id href='#/' + url data-menu=url)(class='active')&if(active) > a.normal.nav-color > echo(name)
+                .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color > echo(name)
         #  else
         #      each(menus)
         #          .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)

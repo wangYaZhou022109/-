@@ -17,18 +17,16 @@ view('main')
                     th > setting('person.archives.research.status')
                     th > setting('person.archives.research.joinStatus')
                     th > setting('person.archives.research.submitTime')
-                    th > setting('person.archives.exam.operation')
             tbody > each(list)
                 tr
                     td > echo(i)
                     td.nowrap > .text-overflow > echo(researchQuestionary.name)
-                    td > echo(startTimeStr)
-                    td > echo(endTimeStr)
+                    td > dateMinute(researchQuestionary.startTime)
+                    td > dateMinute(researchQuestionary.endTime)
                     td > map('research-activity-status' researchQuestionary.status)
                     td > echo(statusStr)
-                    td > echo(createTimeStr)
-                    td > a(href='#/exam/research-activity/research-summary-detail/'+id target='_blank') > setting('person.archives.exam.detail')
+                    td > dateMinute(submitTime)
                     else
-                        tr > td(colspan='8') > p.text-center > string('center.archives.no-data')
+                        tr > td(colspan='7') > p.text-center > string('center.archives.no-data')
         #pager.pagination
 

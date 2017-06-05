@@ -27,7 +27,7 @@ exports.store = {
             url: '../course-study/gensee/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 50
+            pageSize: 5
         },
         exams: {
             url: '../exam/exam/activity-list',
@@ -72,7 +72,7 @@ exports.store = {
             url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 24
+            pageSize: 6
         },
         down: { url: '../human/file/download' },
         classSignupInfo: {
@@ -106,6 +106,8 @@ exports.store = {
                 researchActivitys = this.models.researchActivitys,
                 search = this.models.search;
 
+            gensees.clear();
+            researchActivitys.clear();
             D.assign(gensees.params, payload);
             D.assign(exams.params, payload);
             D.assign(researchActivitys.params, payload);
@@ -146,6 +148,16 @@ exports.store = {
         changeExamPage: function(payload) {
             var examMores = this.models.examMores;
             examMores.changePage(payload.page);
+        },
+        turnToModelPage: function(payload) {
+            var model = this.models[payload.model],
+                pageInfo = model.getPageInfo(),
+                currentPage = pageInfo.page;
+            model[payload.dir + 'Page']();
+            if (currentPage !== model.getPageInfo().page) {
+                return this.get(model);
+            }
+            return true;
         }
     }
 };

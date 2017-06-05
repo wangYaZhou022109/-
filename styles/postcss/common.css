@@ -447,3 +447,7 @@ section.section {
         vertical-align: middle;
     }
 }
+
+.padding-s {
+    padding: 2px;
+}
