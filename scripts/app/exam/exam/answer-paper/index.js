@@ -158,10 +158,10 @@ var setOptions = {
                     answeredCount: function() {
                         return _.filter(this.data, function(a) {
                             var readingQuetion = !_.every(a.value, function(sub) {
-                                    return sub.value.length === 0
+                                    return D.isArray(sub.value) && (sub.value.length === 0
                                         || _.every(sub.value, function(sv) {
                                             return !sv.value;
-                                        });
+                                        }));
                                 }),
                                 otherQuestion = (a.value.length > 0 && _.some(a.value, function(v) {
                                     return v.value !== '';
@@ -491,10 +491,10 @@ var target = D.assign({}, {
         answer = _.find(answers, ['key', id]);
         if (answer) {
             readingQuetion = !_.every(answer.value, function(sub) {
-                return sub.value.length === 0
+                return D.isArray(sub.value) && (sub.value.length === 0
                     || _.every(sub.value, function(sv) {
                         return !sv.value;
-                    });
+                    }));
             });
             otherQuestion = (answer.value.length > 0 && _.some(answer.value, function(v) {
                 return v.value !== '';
