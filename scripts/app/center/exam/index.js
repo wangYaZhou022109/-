@@ -18,7 +18,8 @@ exports.store = {
                 startTimeOrderBy: 0
             }
         },
-        signUp: { url: '../exam/sign-up' }
+        signUp: { url: '../exam/sign-up' },
+        validateExam: { url: '../exam/exam/validate-exam' }
     },
     callbacks: {
         init: function() {
@@ -44,6 +45,10 @@ exports.store = {
             return this.post(this.models.signUp).then(function() {
                 return me.get(me.models.exams);
             });
+        },
+        validateExam: function(payload) {
+            D.assign(this.models.validateExam.params, payload);
+            return this.get(this.models.validateExam);
         }
     }
 };

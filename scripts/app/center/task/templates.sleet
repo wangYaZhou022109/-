@@ -26,4 +26,8 @@ view('main')
             .state > map('my-task-status', status)
             .btn-row
                 a.btn(href=url target='_blank') > echo(button)
+        else
+            li.border.bottom
+                .title-row
+                    h4 真厉害，你的任务完成了
     #pager.pagination
