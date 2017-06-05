@@ -132,6 +132,10 @@
     background-color: var(--custom-color-5);
 }
 
+.danger-color {
+    background-color: var(--danger-color);
+}
+
 /* text-color-class */
 .custom-color-1 {
     color: var(--custom-color-1);
