@@ -40,8 +40,8 @@ exports.handlers = {
     showCheckone: function(id) {
         $(this.$('checkOne-' + id)).addClass('active').siblings().removeClass('active');
     },
-    showCheckall: function(id) {
-        $(this.$('checkAll-')).addClass('active').siblings().removeClass('active');
+    showCheckall: function() {
+        $(this.$('checkAll')).addClass('active').siblings().removeClass('active');
     }
 };
 exports.actions = {
