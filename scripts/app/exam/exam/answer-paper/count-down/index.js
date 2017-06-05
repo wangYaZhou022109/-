@@ -1,7 +1,8 @@
 var D = require('drizzlejs');
 
 exports.items = {
-    main: 'main'
+    main: 'main',
+    tips: ''
 };
 
 exports.store = {
@@ -18,15 +19,18 @@ exports.store = {
                 minute;
 
             if (payload.data.isDelay) {
-                this.app.message.success('您被延时了');
+                D.assign(state.data, {
+                    isDelay: payload.data.isDelay,
+                    delay: payload.data.delay
+                });
             }
 
             if (payload.data.endTime
                 && payload.data.endTime > new Date(payload.data.startTime).getTime()) {
                 minute = getDuration(payload.data.endTime, payload.data.startTime);
-                state.data = { duration: minute };
+                D.assign(state.data, { duration: minute });
             } else {
-                state.set({ duration: 0 });
+                D.assign(state.data, { duration: 0 });
             }
             state.callback = payload.callback;
         },
@@ -38,6 +42,15 @@ exports.store = {
 
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
+};
+
+exports.afterRender = function() {
+    var state = this.store.models.state.data;
+    if (state.isDelay) {
+        this.app.viewport.modal(this.items.tips, {
+            tips: '您被延时了' + state.delay + '分钟'
+        });
+    }
 };
 
 exports.mixin = {

@@ -18,6 +18,11 @@ Swiper = function(el, options) {
     this.list = el.querySelectorAll('ul')[0];
     this.items = Array.prototype.slice.call(this.list.children);
 
+    // 活动首页分页
+    if (options.translateLeft) this.translateLeft = options.translateLeft;
+    if (options.translateRight) this.translateRight = options.translateRight;
+    if (options.turnToPage) this.turnToPage = options.turnToPage;
+
     this.init();
 };
 
@@ -37,6 +42,11 @@ D.assign(Swiper.prototype, {
         this.insertBtn();
         this.bindListener();
         this.start();
+
+        if (this.turnToPage > 0) {
+            this.translate(-this.turnToPage);
+            this.actions.changeNum(-this.turnToPage);
+        }
     },
 
     goto: function(number) {
@@ -184,12 +194,13 @@ D.assign(Swiper.prototype, {
                         num = 0;
                         return;
                     }
-
                     me.translate(num);
+                    me.translateLeft(Math.abs(num));
                 },
 
                 translateRight: function() {
                     num--;
+                    me.translateRight(Math.abs(num));
                     if (num < -Math.floor(listWidth / transformWidth)) {
                         num = -Math.floor(listWidth / transformWidth);
                         return;
@@ -199,6 +210,10 @@ D.assign(Swiper.prototype, {
                         return;
                     }
                     me.translate(num);
+                },
+
+                changeNum: function(n) {
+                    num = n;
                 },
 
                 toPrev: function() { me.toPrev(); },
@@ -253,6 +268,14 @@ D.assign(Swiper.prototype, {
             this.btnNext.removeEventListener('click', me.actions.toNext);
         }
     },
+
+    translateLeft: function() {
+    },
+
+    translateRight: function() {
+    },
+
+    turnToPage: 0,
 
     destroy: function() {
         if (!this.items.length) return;

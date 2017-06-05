@@ -1,8 +1,8 @@
-var toArray;
+var D = require('drizzlejs');
 
 exports.bindings = {
     down: false,
-    exams: true
+    examMores: true
 };
 
 exports.events = {
@@ -22,40 +22,31 @@ exports.handlers = {
 };
 
 exports.dataForTemplate = {
-    examArray: function() {
-        var data = this.bindings.exams.data;
-        return toArray(data, 6);
+    examArray: function(data) {
+        return data.examMores.examArray;
     }
 };
 
-toArray = function(objs, pageSize) {
-    var array = [],
-        temp = [],
-        obj,
-        i;
-    if (objs && objs.length) {
-        for (i = 1; i <= objs.length; i++) {
-            temp.push(objs[i - 1]);
-            if (i % pageSize === 0) {
-                obj = {};
-                obj.a = temp;
-                array.push(obj);
-                temp = [];
+exports.components = [function() {
+    var me = this,
+        examMores = this.bindings.examMores,
+        obj = {
+            id: 'swiper-3',
+            name: 'swiper',
+            options: {
+                slider: true,
+                translateLeft: function(page) {
+                    return me.module.dispatch('changeExamPage', { page: page });
+                },
+                translateRight: function(page) {
+                    return me.module.dispatch('pushMoreExams', { page: page });
+                }
             }
-        }
-        if (temp.length > 0) {
-            obj = {};
-            obj.a = temp;
-            array.push(obj);
-        }
-        return array;
+        };
+    if (examMores.data.page > 0) {
+        D.assign(obj.options, {
+            turnToPage: examMores.data.page,
+        });
     }
-    return [];
-};
-exports.components = [{
-    id: 'swiper-3',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
+    return obj;
 }];

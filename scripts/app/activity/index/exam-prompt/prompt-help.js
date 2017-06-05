@@ -1,7 +1,7 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
     signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
-    isFirstTimeToExam, overApplcantTime;
+    isFirstTimeToExam, overApplcantTime, hasExamed;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -26,6 +26,11 @@ exports.getUserStatusOfExam = function(exam) {
     }
 
     if (beforeExam(exam.startTime)) {
+        //  兼容撤销后已考过
+        if (hasExamed(exam) && canViewDetailImmd(exam)) {
+            return 7;
+        }
+
         if (signUp !== 0) {
             return signUp;
         }
@@ -95,7 +100,7 @@ signUpExam = function(exam) {
 };
 
 isSignUpType = function(exam) {
-    return exam.needApplicant === 1;
+    return exam.needApplicant === 1 && exam.examedTimes === 0;
 };
 
 needSignUp = function(exam) {
@@ -136,4 +141,8 @@ isFirstTimeToExam = function(exam) {
 
 overApplcantTime = function(exam) {
     return new Date().getTime() > exam.applicantEndTime && !exam.signUp.id;
+};
+
+hasExamed = function(exam) {
+    return exam.examedTimes > 0;
 };
