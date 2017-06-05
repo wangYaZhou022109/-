@@ -103,6 +103,7 @@ exports.store = {
         search: function(payload) {
             var gensees = this.models.gensees,
                 exams = this.models.exams,
+                examMores = this.models.examMores,
                 researchActivitys = this.models.researchActivitys,
                 search = this.models.search;
 
@@ -116,7 +117,10 @@ exports.store = {
                 this.get(gensees),
                 this.get(exams),
                 this.get(researchActivitys)
-            ]);
+            ]).then(function() {
+                examMores.init(exams.data);
+                examMores.changed();
+            });
         },
         getResearchById: function(payload) {
             return _.find(this.models.researchActivitys.data, function(r) {

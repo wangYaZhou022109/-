@@ -369,7 +369,7 @@ exports.store = {
                                 if (q.type === READING) {
                                     return D.assign(q, {
                                         subs: _.map(q.subs, function(s) {
-                                            return afterDecryptQuestion(s, a);
+                                            return afterDecryptQuestion(s, _.find(a.answer, ['questionId', s.id]));
                                         })
                                     });
                                 }
