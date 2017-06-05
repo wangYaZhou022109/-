@@ -34,7 +34,7 @@ view('reviewed')
                                 span > echo('提交时间: ') + date(createTime)
                         .title-row
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
-                            .inline-block.custom-bg-color-2.padding-s > map('ask-audit-status' auditStatus)
+                            .inline-block.custom-bg-color-2.padding-s.small-font > map('ask-audit-status' auditStatus)
                     .clearfix.m-top
                         .pull-right > a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow 
@@ -54,7 +54,7 @@ view('reviewed')
                                 span > echo('审核时间: ') + date(auditTime)
                         .title-row
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
-                            .inline-block.custom-bg-color-4.padding-s > map('ask-audit-status' auditStatus)
+                            .inline-block.custom-bg-color-4.padding-s.small-font > map('ask-audit-status' auditStatus)
                     .clearfix.m-top
                         .pull-right > a(id='deal-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow
@@ -74,7 +74,7 @@ view('reviewed')
                                 span > echo('审核时间: ') + date(auditTime)
                         .title-row
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
-                            .inline-block.danger-color.padding-s > map('ask-audit-status' auditStatus)
+                            .inline-block.danger-color.padding-s.small-font > map('ask-audit-status' auditStatus)
                     .clearfix.m-top
                         .pull-right > a(id='deal-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow
