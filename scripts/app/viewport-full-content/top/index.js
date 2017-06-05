@@ -114,8 +114,8 @@ exports.store = {
         },
         'app.pushState': function(hash) {
             // 设置top菜单的active状态
-            var muduleName = hash.slice(0, hash.indexOf('/')),
-                dataMenus = this.module.items.nav.$$('a[data-menu]'),
+            var muduleName = hash, // hash.slice(0, hash.indexOf('/')),
+                dataMenus = this.module.items.nav.$$('div[data-menu]'),
                 matchModule;
             if (!(muduleName)) {
                 return false;
