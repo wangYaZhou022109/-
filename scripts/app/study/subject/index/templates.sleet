@@ -7,7 +7,7 @@ view('list')
     .main-list
         .filter
             .pull-left
-                span 热门标签：
+                span.m-left 热门标签：
                 each(topics)
                     .item(class = if(active 'active')) > span(id='topic-'+id) > echo(name)
 
