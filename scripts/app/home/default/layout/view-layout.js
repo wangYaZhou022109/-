@@ -4,6 +4,7 @@ var _ = require('lodash/collection'),
 exports.bindings = {
     contents: true,
     down: false,
+    styleMap: false,
     course: true,
     subject: true,
     gensee: true,
@@ -19,6 +20,8 @@ exports.dataForTemplate = {
     },
     contents: function(data) {
         var array = {},
+            size,
+            styleMap = this.bindings.styleMap.data,
             downUrl = this.bindings.down.getFullUrl(),
             courseData = this.bindings.course.data || [],
             subjectData = this.bindings.subject.data || [],
@@ -125,6 +128,12 @@ exports.dataForTemplate = {
             array[i + 1] = r;
         });
         array.length = data.contents.length;
+        if (array.length > 0) {
+            size = styleMap[data.moduleHomeConfig.style || 7];
+            if (array.length === size) {
+                array.more = true;
+            }
+        }
         return array;
     }
 };

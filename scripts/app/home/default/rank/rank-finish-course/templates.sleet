@@ -8,7 +8,8 @@ view('main')
         .right-title
             .home-title-row.horizontail.border
                 .title > echo(rankModule.name)
-                .more more
+                compare(studyRank.length 'eq' 10)
+                    .more more
             .title-more
                 span.sub-title 学员榜
 
