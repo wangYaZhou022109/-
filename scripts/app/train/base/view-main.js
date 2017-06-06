@@ -169,11 +169,32 @@ exports.dataForTemplate = {
             return true;
         }
         return false;
+    },
+    isSubmit: function() {
+        var state = this.bindings.state.data,
+            classInfo = this.bindings.classInfo.data;
+        if (state.role === 2 && classInfo.confirm === 1) {
+            return false;
+        }
+        return true;
+    },
+    isService: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 3) {
+            return true;
+        }
+        return false;
     }
 };
 
 exports.dataForActions = {
     submit: function(payload) {
+        // if (this.validate()) {
+        //     this.bindings.state.data.submit = true;
+        //     return payload;
+        // }
+        // this.bindings.state.data.submit = false;
+        // return false;
         return this.validate() ? payload : false;
     },
     save: function(payload) {

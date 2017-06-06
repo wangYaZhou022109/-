@@ -7,6 +7,7 @@ module > .activity-page
         .container
             div(data-region='gensee')
             div(data-region='exam')
+            div(data-region='class-info')
             div(data-region='research')
 
 view('banner')
@@ -91,6 +92,20 @@ view('exam')
                                 .text-overflow > a(title=name id='exam-' + id) > echo(name)
                                 .text-tips.m-top.text-overflow
                                     dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
+
+view('class-info')
+    .h3.m-bottom 班级
+    #swiper-4 > ul.full > each(classArray)
+        li.list-item > .main-list
+            ul.arrow-box.activity-item-box.activity-item-exam.cell-3
+                each(a)
+                    li
+                        .activity-item.clearfix
+                            i.iconfont.icon-exam.pull-left.activity-item-icon
+                            .overflow
+                                .text-overflow > a(title=name id='class-' + id) > echo(className)
+                                .text-tips.m-top.text-overflow
+                                    dateMinute(arriveDate) + echo(' ~ ') + dateMinute(returnDate)
 
 view('research')
     .h3.m-bottom 调研
