@@ -4,13 +4,9 @@ exports.bindings = {
     works: true
 };
 
-exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'works' }
-}];
-
 exports.dataForTemplate = {
     works: function(data) {
-        var works = data.works;
+        var works = data.works.items;
         _.map(works || [], function(work) {
             var opt = work,
                 course = opt.courseInfo || {};
@@ -22,19 +18,32 @@ exports.dataForTemplate = {
                 opt.status = maps.getValue('audit-pass', opt.auditPass);
                 opt.timeStr = '评卷时间：';
             }
+            if (opt.score) opt.score = Number(opt.score) / 10;
             return opt;
         });
-        return data.works;
+        return works;
     },
     checked: function() {
         var params = this.bindings.works.params;
         return params.finishStatus;
+    },
+    showMore: function() {
+        var recordCount = this.bindings.works.data.recordCount,
+            pageSize = this.bindings.works.params.pageSize;
+        if ((!recordCount || recordCount === 0) && pageSize > 10) {
+            return 2;
+        }
+        return 1;
     }
 };
 
 exports.events = {
     'click waitAudit': 'selectWaitAudit',
     'click audit-*': 'auditTask'
+};
+
+exports.actions = {
+    'click showMore': 'showMore'
 };
 
 exports.handlers = {

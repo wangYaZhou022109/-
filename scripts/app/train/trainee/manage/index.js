@@ -15,11 +15,12 @@ exports.store = {
         },
         situation: { url: '../train/class-quota/situation' },
         auditTrainee: { url: '../train/trainee/audit' },
+        nations: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 2 } },
         levels: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 8 } },
         trainee: { url: '../train/trainee/update' },
         classInfo: { url: '../train/class-info/get' },
         detail: { data: {} },
-        state: { data: { } }
+        state: { data: {} }
     },
     callbacks: {
         init: function(payload) {

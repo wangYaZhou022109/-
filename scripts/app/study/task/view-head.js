@@ -14,6 +14,7 @@ exports.dataForTemplate = {
         var section = data.section,
             progress = section.progress || {};
         progress.finishStatus = progress.finishStatus || 0;
+        if (progress.score) progress.score = Number(progress.score) / 10;
         return progress;
     }
 };

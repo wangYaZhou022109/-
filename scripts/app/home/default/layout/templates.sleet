@@ -5,7 +5,8 @@ module
 view('layout') > .container
     .home-title-row
         .title > echo(moduleHomeConfig.name)
-        .more more
+        if(contents.more)
+            .more more
     compare(moduleHomeConfig.style 'eq' 'layout-1')
         .layout-1
             compare(contents.length 'gt' 0)
