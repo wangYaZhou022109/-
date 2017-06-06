@@ -12,13 +12,22 @@
         line-height: 1em;
         margin: 1em 0 var(--large-space);
         font-size: var(--small-font);
-        padding: 1em 0;
+        padding-top: var(--space);
         background: var(--bg-color);
         border: 1px solid var(--border-color);
 
+        & .pull-left {
+            width: 70%;
+        }
+        & .pull-right {
+            width: 30%;
+            text-align: right;
+        }
+
         & .item {
             display: inline-block;
-            padding: 0 var(--large-space);
+            margin-bottom: var(--space);
+            padding: 0 var(--space);
             border-right: 1px solid var(--border-color);
             cursor: pointer;
 
@@ -92,7 +101,7 @@
                 }
 
                 & .title {
-                    font-weight: bold;
+                    /*font-weight: bold;*/
                 }
 
                 & img {
@@ -103,6 +112,7 @@
 
         & .title {
             margin: var(--space) 0;
+            font-size: var(--font-title);
         }
 
         & .bottom {

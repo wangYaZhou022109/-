@@ -44,7 +44,6 @@ exports.store = {
             if (question) {
                 D.assign(data, question);
                 questionAttrs = question.questionAttrs;
-
                 for (i = 0; i < questionAttrs.length; i++) {
                     data.options.push({
                         content: questionAttrs[i].value,

@@ -42,9 +42,9 @@ switchScreen = function(exam) {
 };
 
 closeListener = function() {
-    var me = this;
+    // var me = this;
     window.onunload = function() {
-        return me.dispatch('submitPaper', { submitType: 'Auto' });
+        // return me.dispatch('submitPaper', { submitType: 'Auto' });
     };
 };
 

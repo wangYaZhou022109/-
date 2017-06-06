@@ -58,7 +58,8 @@ D.assign(obj, {
                     || question.type === constant.MUTIPLE
                     || question.type === constant.JUDGE
                     || question.type === constant.SORT
-                ) ? exam.showAnswerRule : 4
+                ) ? exam.showAnswerRule : 4,
+            subMode: exam.showAnswerRule
         };
     }
 });
