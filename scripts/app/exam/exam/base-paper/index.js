@@ -69,7 +69,10 @@ exports.store = {
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE
                                 && exam.paper.questions.length > 1,
                             currentQuestion: types.getFirstQuestion(),
-                            paper: exam.paper
+                            paper: exam.paper,
+                            hasPrevious: false,
+                            hasNext: exam.paper.questions.length > 1,
+                            anonymityMark: exam.anonymityMark
                         };
                         this.save();
                     }
@@ -80,10 +83,12 @@ exports.store = {
                 selectQuestion: function(id) {
                     var types = this.module.store.models.types;
                     D.assign(this.data, { currentQuestion: types.getQuestionById(id) });
+                    this.save();
                 },
                 resetCurrentQuestion: function() {
                     var types = this.module.store.models.types;
                     D.assign(this.data, { currentQuestion: types.getCurrentQuestion() });
+                    this.save();
                 },
                 calculate: function() {
                     var answer = this.module.store.models.answer,
@@ -96,12 +101,6 @@ exports.store = {
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;
-                },
-                saveLastSubmitTime: function(lastCacheTime) {
-                    D.assign(this.data, {
-                        lastCacheTime: lastCacheTime
-                    });
-                    this.save();
                 }
             }
         },
@@ -245,12 +244,15 @@ exports.store = {
                         index = type.questions.findIndex(function(q) {
                             return q.status === itemStatus.CURRENT;
                         }),
-                        me = this;
+                        me = this,
+                        target = this.getQuestionById(id),
+                        state = this.module.store.models.state.data;
+
                     if (index > -1) {
                         type.questions[index].status =
                             this.module.options.getCurrentStatus.call(this.module, type.questions[index].id);
                     }
-                    D.assign(this.getQuestionById(id), {
+                    D.assign(target, {
                         status: itemStatus.CURRENT
                     });
 
@@ -269,7 +271,10 @@ exports.store = {
                             });
                         }
                     });
-                    this.module.store.models.state.data.selectQuestion = true;
+
+                    state.selectQuestion = true;
+                    state.hasPrevious = type.questions[(target.index - 1) - 1] || this.data[Number(type.id) - 1];
+                    state.hasNext = type.questions[(target.index - 1) + 1] || this.data[Number(type.id) + 1];
                     this.save();
                 },
                 getCurrentQuestion: function() {
@@ -290,12 +295,21 @@ exports.store = {
                         }),
                         offset = payload.offset,
                         question = type.questions[index + offset],
-                        temp;
+                        temp,
+                        state = this.module.store.models.state.data;
 
                     if (question) {
                         question.status = itemStatus.CURRENT;
                         type.questions[index].status =
                             this.module.options.getCurrentStatus.call(this.module, type.questions[index].id);
+
+                        state.hasPrevious = offset > 0
+                            || type.questions[(index + offset) - 1]
+                            || this.data[Number(payload.id) + offset];
+
+                        state.hasNext = offset < 0
+                            || type.questions[(index + offset) + 1]
+                            || this.data[Number(payload.id) + offset];
                     } else if (this.data[Number(payload.id) + offset]) {
                         temp = this.data[Number(payload.id) + offset];
                         question = temp.questions[offset > 0 ? 0 : temp.questions.length - 1];
@@ -304,7 +318,13 @@ exports.store = {
                         temp.isCurrent = true;
                         type.questions[index].status =
                             this.module.options.getCurrentStatus.call(this.module, type.questions[index].id);
+
+                        state.hasPrevious = offset > 0 || this.data[Number(payload.id) + offset];
+                        state.hasNext = offset < 0
+                            || temp.questions[0 + 1]
+                            || this.data[Number(payload.id) + offset + 1];
                     }
+                    this.save();
                 },
                 decryptAnswer: function(answers) {
                     var afterDecryptQuestion = function(q, answer) {
@@ -349,7 +369,7 @@ exports.store = {
                                 if (q.type === READING) {
                                     return D.assign(q, {
                                         subs: _.map(q.subs, function(s) {
-                                            return afterDecryptQuestion(s, a);
+                                            return afterDecryptQuestion(s, _.find(a.answer, ['questionId', s.id]));
                                         })
                                     });
                                 }
@@ -404,7 +424,7 @@ exports.store = {
             });
         },
         notice: function() {
-            D.assign(this.models.exam.data, {
+            D.assign(this.models.state.data, {
                 noticed: true
             });
             this.models.state.changed();

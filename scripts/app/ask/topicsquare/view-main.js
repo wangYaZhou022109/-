@@ -10,7 +10,9 @@ exports.bindings = {
 
 exports.events = {
     'click apply-topic': 'showApplyTopic',
-    'click detail-*': 'showDetails'
+    'click detail-*': 'showDetails',
+    'click checkOne-*': 'showCheckone',
+    'click checkAll': 'showCheckall'
 };
 
 exports.handlers = {
@@ -34,11 +36,15 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
         this.app.show('content', 'ask/mymanage/topicdetail', { id: payload });
         // }
+    },
+    showCheckone: function(id) {
+        $(this.$('checkOne-' + id)).addClass('active').siblings().removeClass('active');
+    },
+    showCheckall: function() {
+        $(this.$('checkAll')).addClass('active').siblings().removeClass('active');
     }
 };
 exports.actions = {
-    'click checkOne-*': 'checkOne',
-    'click checkAll*': 'checkAll',
     'click follow-*': 'follow',
     'click unfollow-*': 'unfollow',
 };

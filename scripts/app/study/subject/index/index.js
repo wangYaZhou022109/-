@@ -35,7 +35,9 @@ exports.store = {
         order: function(payload) {
             var search = this.models.search.data,
                 order = 1;
-            if (search && search.order === 1) {
+            if (search.orderBy !== payload.orderBy) {
+                order = 2;
+            } else if (search.order === 1) {
                 order = 2;
             }
             this.models.subjects.params.order = order;

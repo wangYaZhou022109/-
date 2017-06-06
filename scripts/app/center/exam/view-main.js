@@ -9,7 +9,8 @@ var _ = require('lodash/collection'),
     };
 
 exports.bindings = {
-    exams: true
+    exams: true,
+    validateExam: true
 };
 
 exports.actions = {
@@ -35,7 +36,15 @@ exports.events = {
 
 exports.handlers = {
     toExam: function(examId) {
-        window.open(urlMap.answer + examId, '_blank');
+        var validateExam = this.bindings.validateExam,
+            me = this;
+        return this.module.dispatch('validateExam', { examId: examId }).then(function() {
+            if (validateExam.data.validate === 1) {
+                window.open(urlMap.answer + examId, '_blank');
+            } else {
+                me.app.messag.error('数据异常, 请联系管理员');
+            }
+        });
     },
     toCert: function(examId) {
         window.open(urlMap.cert + examId, '_blank');
@@ -44,7 +53,15 @@ exports.handlers = {
         window.open(urlMap.detail + examId, '_blank');
     },
     retry: function(examId) {
-        window.open(urlMap.answer + examId, '_blank');
+        var validateExam = this.bindings.validateExam,
+            me = this;
+        return this.module.dispatch('validateExam', { examId: examId }).then(function() {
+            if (validateExam.data.validate === 1) {
+                window.open(urlMap.answer + examId, '_blank');
+            } else {
+                me.app.messag.error('数据异常, 请联系管理员');
+            }
+        });
     }
 };
 

@@ -9,13 +9,13 @@ exports.items = {
 exports.store = {
     models: {
         list: {
-            url: '../system/message',
+            url: '../system/message-notice',
             params: { type: 1 }
         },
         img: { url: '../human/file/download?id=' },
         readStatus: { data: { value: '' } },
-        removeAll: { url: '../system/message/removeAll' },
-        markRead: { url: '../system/message/markRead' },
+        removeAll: { url: '../system/message-notice/removeAll' },
+        markRead: { url: '../system/message-notice/markRead' },
         dataList: { data: [] }, // 用于拼接组合分页数据
         scrollFlag: { data: false },
         attr: { data: { value: '0' } } // 消息属性 0为通知 1为@我
