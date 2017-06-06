@@ -147,10 +147,6 @@ exports.store = {
             var id = this.models.state.data.topicId;
             trends.params = { id: id, page: params.page, size: params.size };
             trends.set(trends.params);
-            console.log(1111111111111111111);
-            console.log(id);
-            console.log(this.models.state);
-            console.log(1111111111111111111);
             this.post(trends).then(function() {
             });
         },
@@ -202,7 +198,6 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     var state = this.store.models.state;
-    console.log(this.renderOptions.state.data.topicId);
     if (this.renderOptions.state.data.topicId) {
         $(window).scroll(function() {
             var page = me.store.models.page.params.page;

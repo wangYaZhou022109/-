@@ -128,7 +128,6 @@ exports.store = {
             // }
             trends.params = { id: id, page: params.page, size: params.size };
             trends.set(trends.params);
-            console.log(trends.params);
             this.post(trends).then(function() {
             });
         },
