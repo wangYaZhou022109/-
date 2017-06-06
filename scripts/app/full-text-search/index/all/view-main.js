@@ -26,7 +26,8 @@ exports.events = {
     'click more-*': 'openMore',
     'click knowledge-*': 'knowledgeDetail',
     'click question-*': 'questionDetail',
-    'click attendLive-*': 'attendLive'
+    'click attendLive-*': 'attendLive',
+    'click research-*': 'showResearchIndex'
 };
 
 exports.handlers = {
@@ -52,5 +53,8 @@ exports.handlers = {
     },
     attendLive: function(id) {
         window.open('#/activity/gensee/detail/' + id);
+    },
+    showResearchIndex: function(id) {
+        window.open('#/exam/research-activity/index/' + id);
     }
 };

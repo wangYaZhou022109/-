@@ -59,10 +59,20 @@ toArray = function(objs, pageSize) {
     }
     return [];
 };
-exports.components = [{
-    id: 'swiper-2',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
+exports.components = [function() {
+    var me = this,
+        obj = {
+            id: 'swiper-2',
+            name: 'swiper',
+            options: {
+                slider: true,
+                translateLeft: function() {
+                    return me.module.dispatch('turnToModelPage', { model: 'gensees', dir: 'prev' });
+                },
+                translateRight: function() {
+                    return me.module.dispatch('turnToModelPage', { model: 'gensees', dir: 'next' });
+                }
+            }
+        };
+    return obj;
 }];

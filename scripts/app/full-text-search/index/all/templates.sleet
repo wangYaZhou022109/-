@@ -207,7 +207,7 @@ view('main') > .container
                                     # | 3806人参与
                                     # i.iconfont.icon-date.m-left
                                     dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
-    compare(researchs 'gt' 0)
+    compare(researchs.length 'gt' 0)
         .search-content
             .content-type
                 .h3.inline-block 调研
