@@ -1,0 +1,55 @@
+.rank-list {
+    @apply --clearfix;
+    & .list-text {
+        @apply --clearfix;
+        margin-top: var(--large-space);
+        margin-bottom: var(--large-space);
+        & li {
+            @apply --clearfix;
+            padding-top: var(--space);
+            padding-bottom: var(--space);
+            line-height: var(--large-space);
+        }
+        & .num {
+            float: left;
+            width: var(--large-space);
+            height: var(--large-space);
+            line-height: var(--large-space);
+            text-align: center;
+            font-weight: bold;
+            color: var(--white);
+            background-color: var(--custom-color-3);
+        }
+        & .user-pic {
+            float: left;
+            width: var(--large-space);
+            height: var(--large-space);
+            overflow: hidden;
+            img {
+                width: 100%;
+            }
+        }
+        & .name {
+            @apply --text-overflow;
+            float: left;
+            width: 15%;
+        }
+        & .department {
+            @apply --text-overflow;
+            float: left;
+            width: 25%;
+        }
+        & .title {
+            @apply --text-overflow;
+            float: left;
+            width: 70%;
+        }
+        & .data {
+            float: right;
+            width: 30%;
+            text-align: right;
+            font-size: var(--h3);
+            font-weight: 700;
+        }
+
+}
