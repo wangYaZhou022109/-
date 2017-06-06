@@ -6,17 +6,17 @@ view('details')
     .export-form-title.container
         form.clearfix.form.align-left
             .inline-block.w-half.inbox.m-bottom
-                input.border.radius#input1(type='checkbox' name='input1')
+                input.border.radius#input1(type='radio' name='type' value='1')
                 label(for='input1') > string('report-1')
             .inline-block.w-half.inbox.m-bottom
-                input#input2(type='checkbox' name='input2')
+                input#input2(type='radio' name='type' value='2')
                 label(for='input2') > string('report-2')
             .inline-block.w-half.inbox.m-bottom
-                input#input3(type='checkbox' name='input3')
+                input#input3(type='radio' name='type' value='3')
                 label(for='input3') > string('report-3')
             .inline-block.w-half.inbox.m-bottom
-                input#input4(type='checkbox' name='input4')
+                input#input4(type='radio' name='type' value='4')
                 label(for='input4') > string('report-4')
             .form-row
-                label.required(for='accuseNote') > string('report') + string('explain')
-                textarea#accuseNote.w-full.m-top(rows="10" name='accuseNote' x-rule="required" placeholder="请描述你举报理由")
+                label(for='accuseNote') > string('report') + string('explain')
+                textarea#accuseNote.w-full.m-top(rows="10" name='accuseNote' placeholder="请描述你举报理由")
