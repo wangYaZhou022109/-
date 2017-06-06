@@ -98,11 +98,12 @@ view('main') > form.vertical
                             select.select-width#classRoom(name='classRoom' x-rule='required')
                                 each(classroomList)
                                     option(value=id)('selected')&if(selected) > echo(classroomName)
-                    .clearfix.layout-mt-small
-                        .pull-left.layout-mr
-                            span.m-right.pull-left.m-right 班级首页图片
-                            span.sub-text.pull-left 推荐图片分辨率为：1000*290；图片大小小于1M。
-                        .tag-btn.pull-left.active#uploadBanner 上传
+                    .layout-mt-small
+                        .top
+                            .inline-block.layout-mr
+                                span.m-right.m-right 班级首页图片
+                                span.sub-text 推荐图片分辨率为：1000*290；图片大小小于1M。
+                            .tag-btn.active#uploadBanner 上传
                         img(src = state.bannerUrl width=500 height=145)
                         input(type='hidden' name='bannerId' value=state.bannerId)
             if(isAssist)

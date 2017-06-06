@@ -231,13 +231,15 @@ exports.mixin = {
             markers.text.invalid(otherRequirement, validators.maxLength.message.replace(reg, 1000));
             flag = false;
         }
-        if (!validators.maxLength.fn(restRoom.val(), 200)) {
-            markers.text.invalid(restRoom, validators.maxLength.message.replace(reg, 200));
-            flag = false;
-        }
-        if (!validators.maxLength.fn(diningRoom.val(), 200)) {
-            markers.text.invalid(diningRoom, validators.maxLength.message.replace(reg, 200));
-            flag = false;
+        if (this.bindings.state.data.role === 1 || this.bindings.state.data.role === 3) {
+            if (!validators.maxLength.fn(restRoom.val(), 200)) {
+                markers.text.invalid(restRoom, validators.maxLength.message.replace(reg, 200));
+                flag = false;
+            }
+            if (!validators.maxLength.fn(diningRoom.val(), 200)) {
+                markers.text.invalid(diningRoom, validators.maxLength.message.replace(reg, 200));
+                flag = false;
+            }
         }
         return flag;
     }
