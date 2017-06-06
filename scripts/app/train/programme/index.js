@@ -468,7 +468,6 @@ exports.store = {
             } else {
                 this.save(task).then(function() {
                     this.app.message.success('提交成功');
-                    this.app.viewport.closeModal();
                     me.get(taskList);
                 });
             }
