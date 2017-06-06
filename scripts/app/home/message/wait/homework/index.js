@@ -8,9 +8,7 @@ exports.store = {
         state: {},
         works: {
             url: '../course-study/course-front/audit-works',
-            type: 'pageable',
-            pageSize: 20,
-            root: 'items'
+            params: { page: 1, pageSize: 10 }
         }
     },
     callbacks: {
@@ -19,6 +17,11 @@ exports.store = {
         },
         refreshList: function(payload) {
             D.assign(this.models.works.params, payload);
+            return this.get(this.models.works);
+        },
+        showMore: function() {
+            var pageSize = this.models.works.params.pageSize;
+            this.models.works.params.pageSize = Number(pageSize) + 10;
             return this.get(this.models.works);
         }
     }
