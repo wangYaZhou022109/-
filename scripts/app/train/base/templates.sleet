@@ -15,7 +15,7 @@ view('main') > form.vertical
                         input(type='hidden' name='id' value=classInfo.id)
                     .pull-left
                         span 学习地点：
-                        span > echo(classInfo.addressText)
+                        span > echo(classInfo.address)
                 .clearfix.layout-mt-small
                     .pull-left.m-right
                         span.layout-mr-small 培训起止时间
@@ -24,10 +24,10 @@ view('main') > form.vertical
                 .clearfix.layout-mt-small
                     .pull-left.layout-mr
                         span 学习地点：
-                        span > echo(classInfo.addressText)
+                        span > echo(classInfo.address)
                     .pull-left.layout-mr
                         span 客房：
-                        span > echo(classInfo.rommText)
+                        span > echo(classInfo.restRoom)
                     .pull-left.layout-mr
                         span 餐厅：
                         span > echo(classInfo.diningRoomText)
@@ -61,7 +61,7 @@ view('main') > form.vertical
                             label.label.required 合影时间
                             .content
                                 .relative
-                                    input.input.date#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))('disabled')&if(isService)
+                                    input.input.date#photoTime(class = if(state.needGroupPhotoCheck 'hide')(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))('disabled')&if(isService)
                                     .iconfont.icon-riqi.text-main-color
                         .form-row.pull-left.w-half
                             label.label.required 课程制作
@@ -72,13 +72,13 @@ view('main') > form.vertical
                                 label 否
                         .form-row.pull-left.w-half
                             label.label.required 制作需求
-                            .content > input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)('disabled')&if(isService)
+                            .content > input.input#courseVideoRequirement(class = if(state.needMakeCourseCheck 'hide')(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)('disabled')&if(isService)
                         .form-row.pull-left.w-half
                             label.label.required 教室桌型
                             .content
                                 select.w-full#tableType(name='tableType')('disabled')&if(isService)
-                                    option(value='1')('selected')&if(checked.tableType1) > map('class-table-type' '1')
-                                    option(value='2')('selected')&if(checked.tableType2) > map('class-table-type' '2')
+                                    each(trainTypes)
+                                        option(value=id)('selected')&if(selected) > echo(name)
                         .form-row.pull-left.w-half
                             .content > a 查看移动通信学院资源
                     .form-row
@@ -89,7 +89,7 @@ view('main') > form.vertical
                     .clearfix
                         .classinfo-bottom-item.pull-left
                             label 客房：
-                            input.input#restRoom(name='restRoom' value=classInfo.romm)
+                            input.input#restRoom(name='restRoom' value=classInfo.restRoom)
                         .classinfo-bottom-item.pull-left
                             label 餐厅：
                             input.input#diningRoom(name='diningRoom' value=classInfo.diningRoom)
