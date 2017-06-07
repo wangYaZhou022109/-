@@ -19,9 +19,19 @@ view('topicdetail')
     
 view('menu')
     .tabs.line.mb-1 > ul
-        li > a(id='menu-news')(class ='active') 最新动态
-        li > a(id='menu-exp')(class ='active') 文章分享
-        li > a(id='menu-reply' )(class ='active') 等你回答
+        compare(state.menu 'eq' 'news')
+            li(id='menu-news' href='javascript:;')(class ='active') > string('news')
+        else
+            li(id='menu-news' href='javascript:;') > string('news')
+        compare(state.menu 'eq' 'exp')
+            li(id='menu-exp' href='javascript:;')(class ='active') > string('exp')
+        else
+            li(id='menu-exp' href='javascript:;') > string('exp')
+        compare(state.menu 'eq' 'reply')
+            li(id='menu-reply' href='javascript:;')(class ='active') > echo('等待回答')
+        else
+            li(id='menu-reply' href='javascript:;') > echo('等待回答')
+       
 view('list') 
     .tabs-cont > ul
         li.tabs-cont-item.active#tabs-cont-item

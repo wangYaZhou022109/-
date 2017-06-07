@@ -41,6 +41,7 @@
             float: left;
             margin-right: calc(var(--large-space) / 1.5);
             width: calc(var(--large-space) * 3);
+            max-height: calc(var(--large-space) * 3);
         }
         & h4 {
             margin-top: 0;

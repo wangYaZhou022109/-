@@ -134,7 +134,7 @@ exports.store = {
                     message = '等待审核';
                 }
                 me.app.message.success(message);
-                me.module.renderOptions.leftrefresh;
+                me.module.renderOptions.leftrefresh();
             });
         },
         selecttitle: function() {
@@ -165,6 +165,7 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    console.log(this.renderOptions.leftrefresh);
     this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
     this.dispatch('selecttitle');
     this.dispatch('init');
