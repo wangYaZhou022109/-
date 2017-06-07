@@ -1,12 +1,5 @@
 #!handlebars
 
-#  module > .ask-page > .container
-#      .page-main-wrapper.knowledge-side
-#          .page-side.side-min
-#              div(data-region='top')
-#              div(data-region='relevantexperts')
-#              div(data-region='relatedquestions')
-#          .page-main(data-region='main')
 module
     .ask-page > .container
         .page-main-wrapper.knowledge-side
@@ -19,7 +12,7 @@ view('main')
     .comment-list.ask-list > ul
         li
             .user-pic > img(src=details.member.headPortrait)
-            .comment-content
+            .comment-content.layout-mb
                 .user-info.m-top
                     a(href='javascript:;') > echo(details.member.fullName)
                     span > echo('·发表文章·')
@@ -56,7 +49,7 @@ view('main')
         
     .layout-mt
         .comment-list > each(details.questionDiscussList) > ul
-            compare(auditStatus 'eq' 1)
+            compare(auditStatus 'eq' "1")
                 li
                     .user-pic > img(src=headPhoto)
                     .comment-content
@@ -88,7 +81,7 @@ view('top')
     .section
         .h4.text-center
             | 该问题已有
-            b.h2.custom-color-3 > echo(details.concernNum)
+            b.h2.custom-color-3 > echo(details.careNum)
             | 人关注
         compare(details.concernNum 'gt' 0)
             .btn.block.layout-mt-small.big(id='unfollow-question-3_'+ id data-name='id' data-value=details.id) > string('unfollow')

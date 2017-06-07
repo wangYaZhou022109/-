@@ -40,10 +40,12 @@ view('reviewed')
                         .text-overflow 
                             #  compare(thumbnail.length 'gt' 0)
                             #      img(src=thumbnail)
-                            compare(auditType 'eq' 1)
-                                echo(question.content)
+                            compare(auditType 'eq' "2")
+                                echo(questionDiscuss.content)
+                            compare(auditType 'eq' "5")
+                                echo(questionDiscuss.content)
                             else
-                                @echo(questionDiscuss.content)
+                                @echo(question.content)
                         #   echo(question.content)
             compare(auditStatus 'eq' 1)
                 li
@@ -60,10 +62,12 @@ view('reviewed')
                         .text-overflow
                             compare(thumbnail.length 'gt' 0)
                                 img(src=thumbnail)
-                            compare(auditType 'eq' 1)
-                                @echo(question.content)
+                            compare(auditType 'eq' "2")
+                                @echo(questionDiscuss.content)
+                            compare(auditType 'eq' "5")
+                                @echo(questionDiscuss.content)
                             else
-                                @echo(questionDiscuss.content) 
+                                @echo(question.content) 
                         #  > echo(question.content)
             compare(auditStatus 'eq' 2)
                 li
@@ -80,8 +84,10 @@ view('reviewed')
                         .text-overflow
                             compare(thumbnail.length 'gt' 0)
                                 img(src=thumbnail)
-                            compare(auditType 'eq' 1)
-                                @echo(question.content)
-                            else
+                            compare(auditType 'eq' "2")
                                 @echo(questionDiscuss.content)
+                            compare(auditType 'eq' "5")
+                                @echo(questionDiscuss.content)
+                            else
+                                @echo(question.content)
                         #   > echo(question.content)
