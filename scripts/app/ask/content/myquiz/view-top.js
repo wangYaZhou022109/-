@@ -17,9 +17,6 @@ exports.getEntity = function() {
         state: this.bindings.topstate.data,
         leftrefresh: function() {
             me.module.dispatch('leftrefresh');
-        },
-        bottomsrefresh: function() {
-            me.module.dispatch('bottomsrefresh');
         }
     };
 };

@@ -1,14 +1,14 @@
 var _ = require('lodash/collection');
 
 exports.bindings = {
-    gensee: true,
+    businessProgress: true,
     accessList: true,
     down: true,
 };
 
 exports.dataForTemplate = {
     businesses: function(data) {
-        return data.gensee.businesses;
+        return data.businessProgress;
     },
     accessList: function(data) {
         var defultImg = 'images/default-userpic.png',

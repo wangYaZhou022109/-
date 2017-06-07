@@ -9,7 +9,8 @@ exports.events = {
 exports.handlers = {
     changetopic: function(payload) {
         var model = this.module.items['ask/changetopic'];
-        this.app.viewport.modal(model, { id: payload });
+        var topicList = this.bindings.expert.data.topicList;
+        this.app.viewport.modal(model, { id: payload, topicList: topicList });
     }
 };
 exports.dataForTemplate = {
