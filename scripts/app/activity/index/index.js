@@ -10,7 +10,8 @@ exports.items = {
     gensee: 'gensee',
     exam: 'exam',
     research: 'research',
-    'activity/index/exam-prompt': { isModule: true }
+    'activity/index/exam-prompt': { isModule: true },
+    'class-info': 'class-info'
 };
 
 exports.store = {
@@ -77,6 +78,12 @@ exports.store = {
         down: { url: '../human/file/download' },
         classSignupInfo: {
             url: '../train/sign-up/find-by-code'
+        },
+        classDetailes: {
+            url: '../train/class-info/find-activity-classinfo',
+            type: 'pageable',
+            root: 'items',
+            pageSize: 90
         }
     },
     callbacks: {

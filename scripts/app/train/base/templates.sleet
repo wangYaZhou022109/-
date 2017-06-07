@@ -39,51 +39,51 @@ view('main') > form.vertical
                         .form-row.pull-left.w-half.special
                             label.label.required 是否有省公司二级经理参加
                             .content
-                                input(name='haveProvinceLeader' type='radio' value='1')('checked')&if(checked.provinceLeaderCheck)
+                                input(name='haveProvinceLeader' type='radio' value='1')('checked')&if(checked.provinceLeaderCheck)('disabled')&if(isService)
                                 label.layout-mr-small 是
-                                input(name='haveProvinceLeader' type='radio' value='0')('checked')&unless(checked.provinceLeaderCheck)
+                                input(name='haveProvinceLeader' type='radio' value='0')('checked')&unless(checked.provinceLeaderCheck)('disabled')&if(isService)
                                 label 否
                         .form-row.pull-left.w-half.special
                             label.label.required 是否有部长级及以上领导参加
                             .content
-                                input(name='haveMinister' type='radio' value='1')('checked')&if(checked.haveMinisterCheck)
+                                input(name='haveMinister' type='radio' value='1')('checked')&if(checked.haveMinisterCheck)('disabled')&if(isService)
                                 label.layout-mr-small 是
-                                input(name='haveMinister' type='radio' value='0')('checked')&unless(checked.haveMinisterCheck)
+                                input(name='haveMinister' type='radio' value='0')('checked')&unless(checked.haveMinisterCheck)('disabled')&if(isService)
                                 label 否
                         .form-row.pull-left.w-half
                             label.label.required 班级合影
                             .content
-                                input#needGroupPhoto-1(name='needGroupPhoto' type='radio' value='1')('checked')&if(checked.needGroupPhotoCheck)
+                                input#needGroupPhoto-1(name='needGroupPhoto' type='radio' value='1')('checked')&if(checked.needGroupPhotoCheck)('disabled')&if(isService)
                                 label.layout-mr-small 是
-                                input#needGroupPhoto-0(name='needGroupPhoto' type='radio' value='0')('checked')&unless(checked.needGroupPhotoCheck)
+                                input#needGroupPhoto-0(name='needGroupPhoto' type='radio' value='0')('checked')&unless(checked.needGroupPhotoCheck)('disabled')&if(isService)
                                 label 否
                         .form-row.pull-left.w-half
                             label.label.required 合影时间
                             .content
                                 .relative
-                                    input.input.date#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))
+                                    input.input.date#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))('disabled')&if(isService)
                                     .iconfont.icon-riqi.text-main-color
                         .form-row.pull-left.w-half
                             label.label.required 课程制作
                             .content
-                                input#needMakeCourse-1(name='needMakeCourse' type='radio' value='1')('checked')&if(checked.needMakeCourseCheck)
+                                input#needMakeCourse-1(name='needMakeCourse' type='radio' value='1')('checked')&if(checked.needMakeCourseCheck)('disabled')&if(isService)
                                 label.m-right 是
-                                input#needMakeCourse-0(name='needMakeCourse' type='radio' value='0')('checked')&unless(checked.needMakeCourseCheck)
+                                input#needMakeCourse-0(name='needMakeCourse' type='radio' value='0')('checked')&unless(checked.needMakeCourseCheck)('disabled')&if(isService)
                                 label 否
                         .form-row.pull-left.w-half
                             label.label.required 制作需求
-                            .content > input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)
+                            .content > input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)('disabled')&if(isService)
                         .form-row.pull-left.w-half
                             label.label.required 教室桌型
                             .content
-                                select.w-full#tableType(name='tableType')
+                                select.w-full#tableType(name='tableType')('disabled')&if(isService)
                                     option(value='1')('selected')&if(checked.tableType1) > map('class-table-type' '1')
                                     option(value='2')('selected')&if(checked.tableType2) > map('class-table-type' '2')
                         .form-row.pull-left.w-half
                             .content > a 查看移动通信学院资源
                     .form-row
                         label.label.required 其他需求
-                        .content > textarea.w-full.pull-left#otherRequirement(name='otherRequirement' rows=2) > echo(classInfo.classDetail.otherRequirement)
+                        .content > textarea.w-full.pull-left#otherRequirement(name='otherRequirement' rows=2)('disabled')&if(isService) > echo(classInfo.classDetail.otherRequirement)
             if(isClassAndManage)
                 .classinfo-bottom.layout-mt
                     .clearfix
@@ -98,17 +98,19 @@ view('main') > form.vertical
                             select.select-width#classRoom(name='classRoom' x-rule='required')
                                 each(classroomList)
                                     option(value=id)('selected')&if(selected) > echo(classroomName)
-                    .clearfix.layout-mt-small
-                        .pull-left.layout-mr
-                            span.m-right.pull-left.m-right 班级首页图片
-                            span.sub-text.pull-left 推荐图片分辨率为：1000*290；图片大小小于1M。
-                        .tag-btn.pull-left.active#uploadBanner 上传
+                    .layout-mt-small
+                        .top
+                            .inline-block.layout-mr
+                                span.m-right.m-right 班级首页图片
+                                span.sub-text 推荐图片分辨率为：1000*290；图片大小小于1M。
+                            .tag-btn.active#uploadBanner 上传
                         img(src = state.bannerUrl width=500 height=145)
                         input(type='hidden' name='bannerId' value=state.bannerId)
             if(isAssist)
                 .text-center.layout-mt
                     if(isManageAndSponsor)
-                        .btn#submit 提交
+                        if(isSubmit)                        
+                            .btn#submit 提交
                     else
                         .btn#save 保存
 

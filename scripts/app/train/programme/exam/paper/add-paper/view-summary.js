@@ -83,7 +83,8 @@ exports.handlers = {
                 return me.module.dispatch('addQuestionClass', data);
             },
             interim: true,
-            titleType: 'add'
+            titleType: 'add',
+            isTemp: 1
         });
     },
     importQuestion: function() {

@@ -83,7 +83,7 @@ view('edit') > form.vertical
                     input.input(type='hidden' name='id' value=edit.courseSalary.id)
                     input.input(type='hidden' name='classOfflineCourseId' value= edit.id)
                     input.input(type='hidden' name='lecturerId' value= edit.lecturer.id)
-view('redio') > form.vertical
+view('radio') > form.vertical
     label.label.required > echo('请选择管理费税金比例')
     .layout-mt
         .w-half.text-center.inline-block.pull-left

@@ -8,7 +8,8 @@ view('main')
         .right-title
             .home-title-row.horizontail.border
                 .title > echo(rankModule.name)
-                .more more
+                compare(rank.length 'eq' 10)
+                    .more more
             .title-more
                 span.sub-title 浏览人数排行榜
 

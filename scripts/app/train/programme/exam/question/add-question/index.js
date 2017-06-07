@@ -73,10 +73,10 @@ exports.store = {
             this.models.question.set(
                 D.assign(payload, {
                     organizationId: organizationId,
-                    id: this.models.key.data.id
+                    id: this.models.key.data.id,
+                    isTemp: this.module.renderOptions.isTemp
                 })
             );
-
             return this.save(this.models.question).then(function() {
                 me.app.message.success('保存成功');
                 if (callback) {
