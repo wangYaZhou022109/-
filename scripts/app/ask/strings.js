@@ -80,5 +80,8 @@ module.exports = {
     invitation: '邀请',
     'next-step': '下一步',
     you: '你的',
-    unfollow: '已关注'
+    unfollow: '已关注',
+    news: '最新动态',
+    exp: '文章分享',
+    youreply: '等你回答'
 };
