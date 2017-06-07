@@ -28,7 +28,7 @@ exports.items = {
 };
 
 exports.beforeRender = function() {
-    this.treeOptions = this.moduleOptions || this.renderOptions;
+    this.treeOptions = D.assign({}, this.renderOptions, this.moduleOptions);
     if (!this.treeOptions.idKey) this.treeOptions.idKey = 'id';
     if (!this.treeOptions.textKey) this.treeOptions.textKey = 'name';
     if (!this.treeOptions.parentKey) this.treeOptions.parentKey = 'parentId';
