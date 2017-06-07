@@ -17,7 +17,7 @@ view('main')
                 .pull-right.text-tips
                     if(waitMark)
                         echo('提交时间：')
-                        dateMinute(examRecord.lastSubmitTime)
+                        dateMinute(examRecord.submitTime)
                     else
                         echo('评卷时间：')
                         dateMinute(submitTime)
@@ -29,4 +29,9 @@ view('main')
                     else
                         echo('成绩：' score)
                 .pull-right > echo('参考人：' examRecord.member.name ' ｜ 所属部门： ' examRecord.member.organization.name '  ')
-    .empty 没有更多了
+    compare(showMore 'eq' 0)
+        .empty 暂无内容
+    compare(showMore 'eq' 1)
+        #loadMore.empty(style='cursor:pointer;') 查看更多
+    compare(showMore 'eq' 2)
+        .empty 没有更多了
