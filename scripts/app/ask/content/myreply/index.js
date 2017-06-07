@@ -9,7 +9,8 @@ exports.store = {
         rightstate: { }
     },
     callbacks: {
-        init: function() {
+        leftrefresh: function() {
+            this.models.leftstate.changed();
         }
     }
 };

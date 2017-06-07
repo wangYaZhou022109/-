@@ -32,8 +32,11 @@ exports.store = {
         bottomstate: {}
     },
     callbacks: {
-        refresh: function() {
-            this.models.middlestate.changed();
+        // refresh: function() {
+        //     this.models.middlestate.changed();
+        // },
+        leftrefresh: function() {
+            this.models.leftstate.changed();
         }
     }
 };
