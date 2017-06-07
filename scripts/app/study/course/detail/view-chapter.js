@@ -25,8 +25,19 @@ var showHandler = function(payload) {
             winOpen = window.open(detailUrlMap[8] + '' + payload.referenceId, '_blank');
         } else if (payload.sectionType === 9) {
             winOpen = window.open(detailUrlMap[9] + '' + payload.resourceId, '_blank');
+        } else if (payload.sectionType === 4) {
+            this.module.dispatch('getAttachment', { id: payload.attachmentId }).then(function(data) {
+                var att = data[0];
+                var view = me.module.items['preview-scrom'];
+                if (att.translateFlag !== 1) {
+                    return me.app.message.error('文档还未处理完，请稍后查看');
+                }
+                return me.module.dispatch('getScormTree', { id: payload.attachmentId }).then(function() {
+                    return me.app.viewport.ground(view, { section: payload, path: att.path });
+                });
+            });
         }
-        this.module.dispatch('showSection', payload);
+        this.module.dispatch('showSection', { section: payload });
     };
 };
 

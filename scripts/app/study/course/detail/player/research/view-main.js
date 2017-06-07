@@ -28,6 +28,7 @@ exports.afterRender = function() {
     if (!this.bindings.researchActivity.data.questionaryDetail) {
         callback = this.module.renderOptions.updateProgress;
         winOpen = window.open(url, '_blank');
+        if (!winOpen) return;
         timer = setInterval(function() {
             if (winOpen.closed) {
                 clearInterval(timer);
