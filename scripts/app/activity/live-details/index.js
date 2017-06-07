@@ -24,7 +24,8 @@ exports.store = {
         accessList: { url: '../course-study/gensee-student/access-list' },
         collect: { url: '../system/collect' },
         score: { url: '../course-study/course-front/score' },
-        topics: { url: '../system/topic/ids' }
+        topics: { url: '../system/topic/ids' },
+        businessProgress: { url: '../course-study/gensee-student/business' }
     },
     callbacks: {
         init: function(params) {
@@ -36,6 +37,7 @@ exports.store = {
                 course = this.models.courses,
                 topics = this.models.topics,
                 relativeGensees = this.models.relativeGensees,
+                businessProgress = this.models.businessProgress,
                 me = this;
             collect.params = { businessId: params.id }; // 收藏
             gensee.set(params);
@@ -58,6 +60,10 @@ exports.store = {
                 }
                  // 浏览人数+1，同时如果是已开始的直播，保存参与用户并更新参与人数
                 me.save(access);
+
+                // 直播资源记录（含当前登录人的参与记录）
+                businessProgress.set(params);
+                me.get(businessProgress);
             }, function() {
                 D.assign(topics.params, {
                     ids: _.map(gensee.data.businessTopics, 'topicId').join(',')

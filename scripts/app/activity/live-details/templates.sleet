@@ -25,14 +25,28 @@ view('side')
                     each(businesses)
                         .block.layout-mt-small
                             .pull-right
-                                compare(businessType 'eq' 0)
-                                    a(href='#/exam/exam/paper/'+ businessId target='_blank') 参与考试
-                                compare(businessType 'eq' 1)
-                                    a(href='#/exam/research-activity/paper/' + businessId + '/' + ../gensee.id target='_blank') 参与调研
-                                compare(businessType 'eq' 2)
-                                    a(href='#/exam/research-activity/paper/' + businessId + '/' + ../gensee.id target='_blank') 参与评估
+                                compare(genseeBusiness.businessType 'eq' 0)
+                                    compare(finishStatus 'eq' 0)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') 参与考试
+                                    compare(finisfinishStatushStatus 'eq' 2)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') 待评卷
+                                    compare(finishStatus 'eq' 3)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') > echo('成绩:' score)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') 重新考试
+                                    compare(finishStatus 'eq' 1)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') > echo('成绩:' score)
+                                compare(genseeBusiness.businessType 'eq' 1)
+                                    compare(finishStatus 'eq' 0)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 参与调研
+                                    compare(finishStatus 'eq' 1)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 调研详情
+                                compare(genseeBusiness.businessType 'eq' 2)
+                                    compare(finishStatus 'eq' 0)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 参与评估
+                                    compare(finishStatus 'eq' 1)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 评估详情
                             .text-overflow
-                                echo(businessName)
+                                echo(genseeBusiness.businessName)
 
         section.section.student
             .h3 TA们也参加了直播
