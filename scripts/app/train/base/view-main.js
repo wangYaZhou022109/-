@@ -8,7 +8,8 @@ exports.bindings = {
     classInfo: true,
     down: false,
     state: true,
-    classroomList: true
+    classroomList: true,
+    trainTypes: true
 };
 
 exports.events = {
@@ -16,7 +17,7 @@ exports.events = {
     'click needGroupPhoto-*': 'changePhotoType',
     'click needVideo-*': 'changeNeedVideo',
     'click needMakeCourse-*': 'changeMakeCourse',
-    'click uploadBanner': 'uploadBanner'
+    'click uploadBanner': 'uploadBanner',
 };
 
 exports.handlers = {
@@ -28,8 +29,10 @@ exports.handlers = {
     },
     changePhotoType: function(data) {
         var d = data;
-        if (d === '0') {
-            $(this.$('photoTime')).val('');
+        if (d === '1') {
+            $(this.$('photoTime')).removeClass('hide').addClass('show');
+        } else {
+            $(this.$('photoTime')).removeClass('show').addClass('hide');
         }
     },
     changeNeedVideo: function(data) {
@@ -43,11 +46,10 @@ exports.handlers = {
     },
     changeMakeCourse: function(data) {
         var d = data;
-        if (d === '0') {
-            $(this.$('courseVideoRequirement')).val('');
-            $(this.$('courseVideoRequirement')).attr('readonly', 'readonly');
+        if (d === '1') {
+            $(this.$('courseVideoRequirement')).removeClass('hide').addClass('show');
         } else {
-            $(this.$('courseVideoRequirement')).attr('readonly', false);
+            $(this.$('courseVideoRequirement')).removeClass('show').addClass('hide');
         }
     },
     uploadBanner: function() {
@@ -73,6 +75,14 @@ exports.handlers = {
         classInfo.classRoom.classRoom = this.$('classRoom').value;
         state.type = 'banner';
         this.app.viewport.modal(view);
+    },
+    showHeyingInput: function() {
+        $(this.$('photoTime')).show();
+    },
+    showZhizuoInput: function() {
+        var state = this.bindings.state.data;
+        state.needMakeCourseCheck = true;
+        this.bindings.state.changed();
     }
 };
 
@@ -96,9 +106,10 @@ exports.dataForTemplate = {
         returnDate.setDate(returnDate.getDate() - 1);
         classInfo.startDate = helpers.date(arriveDate);
         classInfo.endDate = helpers.date(returnDate);
-        address = helpers.map('project-address', classInfo.address);
+        // address = helpers.map('project-address', classInfo.address);
+        address = classInfo.address;
         classInfo.addressText = address !== '' ? address : '暂未分配';
-        romm = classInfo.romm;
+        romm = classInfo.classRoomName;
         classInfo.rommText = romm !== '' ? romm : '暂未分配';
         diningRoom = classInfo.diningRoom !== null ? classInfo.diningRoom : '暂未分配';
         classInfo.diningRoomText = diningRoom;
@@ -109,8 +120,6 @@ exports.dataForTemplate = {
     checked: function() {
         var classInfo = this.bindings.classInfo.data;
         return {
-            tableType1: classInfo.classDetail.tableType === 1,
-            tableType2: classInfo.classDetail.tableType === 2,
             provinceLeaderCheck: classInfo.classDetail.haveProvinceLeader === 1,
             haveMinisterCheck: classInfo.classDetail.haveMinister === 1,
             needGroupPhotoCheck: classInfo.classDetail.needGroupPhoto === 1,
@@ -138,6 +147,8 @@ exports.dataForTemplate = {
         }
         state.downUrl = url;
         state.bannerUrl = bannerUrl;
+        state.needGroupPhotoCheck = !(classInfo.classDetail.needGroupPhoto === 1);
+        state.needMakeCourseCheck = !(classInfo.classDetail.needMakeCourse === 1);
         return state;
     },
     classroomList: function(data) {
@@ -173,7 +184,7 @@ exports.dataForTemplate = {
     isSubmit: function() {
         var state = this.bindings.state.data,
             classInfo = this.bindings.classInfo.data;
-        if (state.role === 2 && classInfo.confirm === 1) {
+        if ((state.role === 2 || state.role === 1) && classInfo.confirm === 1) {
             return false;
         }
         return true;
@@ -184,17 +195,25 @@ exports.dataForTemplate = {
             return true;
         }
         return false;
+    },
+    trainTypes: function(data) {
+        var tableTypes = data.trainTypes,
+            classTableType = data.classInfo.classDetail.tableType;
+        _.map(tableTypes.data, function(t) {
+            var a = t;
+            if (classTableType === a.id) {
+                a.selected = true;
+            } else {
+                a.selected = false;
+            }
+            return a;
+        });
+        return tableTypes;
     }
 };
 
 exports.dataForActions = {
     submit: function(payload) {
-        // if (this.validate()) {
-        //     this.bindings.state.data.submit = true;
-        //     return payload;
-        // }
-        // this.bindings.state.data.submit = false;
-        // return false;
         return this.validate() ? payload : false;
     },
     save: function(payload) {
