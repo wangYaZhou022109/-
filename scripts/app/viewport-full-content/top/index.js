@@ -140,13 +140,19 @@ exports.store = {
                 this.models.courseTime.clear();
                 this.models.organizations.clear();
                 this.models.msgCount.clear();
-                this.chain(
-                    me.get(me.models.message),
-                    me.get(me.models.integral),
-                    me.get(me.models.courseTime),
-                    me.get(me.models.organizations),
-                    me.get(me.models.msgCount)
-                );
+
+                me.get(me.models.message);
+                me.get(me.models.integral);
+                me.get(me.models.courseTime);
+                me.get(me.models.organizations);
+                me.get(me.models.msgCount);
+                // this.chain(
+                //     me.get(me.models.message),
+                //     me.get(me.models.integral),
+                //     me.get(me.models.courseTime),
+                //     me.get(me.models.organizations),
+                //     me.get(me.models.msgCount)
+                // );
             }
         },
         showSetting: function() {

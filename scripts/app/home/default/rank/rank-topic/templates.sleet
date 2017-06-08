@@ -19,6 +19,6 @@ view('main')
                     .pull-right
                         b > echo(watchedCount)
                     .cont.text-overflow
-                        span(title=name) > echo(name)
+                        span(title=name id='detail-'+id) > echo(name)
         else
             .content-empty > .img-box.img-type-1 + p 暂无内容
