@@ -8,37 +8,37 @@ module > form.vertical
 view('main')
     .form.align-left.clearfix
         div.aa
-            .form-row.pull-left.r-padding.w-half.row-block(style="float:none;display:inline-block;vertical-align:top;")
+            .form-row.inline-block.row-block.col-sm-6.r-padding
                 label.required 考试名称
                 .content
                     input.input.tag-height#name(name='name' value=exam.name)
                     .tips 0/30
-            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;")
+            .form-row.inline-block.row-block.col-sm-3.r-padding
                 label 开始时间
                 .content
                     .relative
                         input.input.date.tag-height#startTime(name='startTime' value=dateTime(exam.startTime))
                         .iconfont.icon-riqi
-            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;width:24%;")
+            .form-row.inline-block.row-block.col-sm-3.r-padding
                 label 结束时间
                 .content
                     .relative
                         input.input.date.tag-height#endTime(name='endTime' value=dateTime(exam.endTime))
                         .iconfont.icon-riqi
         div.bb
-            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;")
+            .form-row.inline-block.row-block.col-sm-3.r-padding
                 label.required 考试时长（分）
                 .content > input.input.tag-height#duration(x-rule='required,number,keepDecimal:0,range:1:500' name='duration' value=exam.duration)
-            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;")
+            .form-row.inline-block.row-block.col-sm-3.r-padding
                 label.required 及格成绩
                 .content > input.input.tag-height#passScore(x-rule='required,number,keepDecimal:0,range:0:1000' name='passScore' value=exam.passScore)
-            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;width: 24%;")
+            .form-row.inline-block.row-block.col-sm-3.r-padding
                 label.required 考卷显示规则
                 .content
                     select.input.tag-height.w-full#paperShowRule(name='paperShowRule')
                         option(value='1')('selected')&if(paperShowRule.single) 一页一题
-                        option(value='2')('selected')&if(paperShowRule.mutiple) 一页多题         
-            .form-row.pull-left.r-padding.w-fourth.row-block(style="float:none;display:inline-block;vertical-align:top;width:24%;")
+                        option(value='2')('selected')&if(paperShowRule.mutiple) 一页多题
+            .form-row.inline-block.row-block.col-sm-3.r-padding
                 label.required 是否考试及格才算完成
                 .content.tag-height#is-over-by-pass-exam
                     input(type="radio" name="isOverByPassExam" value=1)('checked')&if(isOverByPassExam.yes)

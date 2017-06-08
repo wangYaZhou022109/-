@@ -1,0 +1,19 @@
+#! handlebars
+module
+    .course-page-new > .main > .container(data-region='layout')
+
+view('layout')
+    .course-list > .main-list
+        .h3 
+            echo('---')
+        ul
+            each(contents)
+                li > .content
+                    .img
+                        .img-cont
+                            a.normal(href=dataUrl) > img(src=imageUrl)
+                    .text-overflow.title > a.normal(href=dataUrl) > echo(dataName)
+                    .bottom
+                        .item(title='浏览人次') > i.iconfont.icon-view + echo(browseCount)
+                        #  .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+          

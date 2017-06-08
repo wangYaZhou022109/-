@@ -25,14 +25,27 @@ view('side')
                     each(businesses)
                         .block.layout-mt-small
                             .pull-right
-                                compare(businessType 'eq' 0)
-                                    a(href='#/exam/exam/paper/'+ businessId target='_blank') 参与考试
-                                compare(businessType 'eq' 1)
-                                    a(href='#/exam/research-activity/paper/' + businessId + '/' + ../gensee.id target='_blank') 参与调研
-                                compare(businessType 'eq' 2)
-                                    a(href='#/exam/research-activity/paper/' + businessId + '/' + ../gensee.id target='_blank') 参与评估
+                                compare(genseeBusiness.businessType 'eq' 0)
+                                    compare(finishStatus 'eq' 0)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') 参与考试
+                                    compare(finishStatus 'eq' 2)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') 待评卷
+                                    compare(finishStatus 'eq' 3)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') > i.iconfont.icon-reload-full + echo('成绩' score '&nbsp;重新考试')
+                                    compare(finishStatus 'eq' 1)
+                                        a(href='#/exam/exam/paper/'+ genseeBusiness.businessId target='_blank') > echo('成绩' score)
+                                compare(genseeBusiness.businessType 'eq' 1)
+                                    compare(finishStatus 'eq' 0)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 参与调研
+                                    compare(finishStatus 'eq' 1)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 调研详情
+                                compare(genseeBusiness.businessType 'eq' 2)
+                                    compare(finishStatus 'eq' 0)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 参与评估
+                                    compare(finishStatus 'eq' 1)
+                                        a(href='#/exam/research-activity/paper/' + genseeBusiness.businessId + '/' + genseeBusiness.genseeId target='_blank') 评估详情
                             .text-overflow
-                                echo(businessName)
+                                echo(genseeBusiness.businessName)
 
         section.section.student
             .h3 TA们也参加了直播
@@ -50,22 +63,7 @@ view('main')
             .common-title.inline-block
                 echo(gensee.subject)
             .inline-block
-                .star-wrapper.drop-down-wrapper
-                    .star-bar
-                        .star(style='width:'+score.scorePercent+'%')
-                    if(score.avgScore)
-                        .num > echo(score.avgScore)
-                    else
-                        .inline-block.sub-text > echo('暂无评分')
-                    .drop-down-content(class = if(score.hasScore 'hide')) > .content
-                        .text-center 我来评分
-                        .star-grade
-                            .item(id='star-2' title='1星') > i.iconfont.icon-star-full
-                            .item(id='star-4' title='2星') > i.iconfont.icon-star-full
-                            .item(id='star-6' title='3星') > i.iconfont.icon-star-full
-                            .item(id='star-8' title='4星') > i.iconfont.icon-star-full
-                            .item(id='star-10' title='5星') > i.iconfont.icon-star-full
-                        .block.btn#submit-score 提交评分
+                #star-score
         .inline-block.layout-mr
             .inline-block.layout-ml.m-right
                 #share
@@ -135,26 +133,25 @@ view('relative-courses')
                                         echo(0)
 
 view('relative-gensees')
-    .h3 相关直播
-    .main-list.layout-mt-small
-        ul.cell-4
-            each(relativeGensees)
-                li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
-                    .img
-                        .img-cont > img(src=cover)
-                        .detail-wrapper
-                            p > echo(genseeDesc)
-                    .clearfix
-                        .title.text-overflow > echo(subject)
-                    .bottom
-                        .item
-                            i.iconfont.icon-view
-                            echo(viewNumber)
-                        .item
-                            i.iconfont.icon-star
-                            if(avgScore)
-                                echo(avgScore)
-                            else
-                                echo(0)
-            else
-                .content-empty > .img-box.img-type-1 + p 暂无相关的直播
+    if(relativeGensees)
+        .h3 相关直播
+        .main-list.layout-mt-small
+            ul.cell-4
+                each(relativeGensees)
+                    li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src=cover)
+                            .detail-wrapper
+                                p > echo(genseeDesc)
+                        .clearfix
+                            .title.text-overflow > echo(subject)
+                        .bottom
+                            .item
+                                i.iconfont.icon-view
+                                echo(viewNumber)
+                            .item
+                                i.iconfont.icon-star
+                                if(avgScore)
+                                    echo(avgScore)
+                                else
+                                    echo(0)
