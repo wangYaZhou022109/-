@@ -45,7 +45,10 @@ view('list')
                             else
                                 .item(id='praise-3_'+ questionId data-name='id' data-value='3_' + questionId)
                                     string('praise') +  echo('（'+ question.praiseNum +'）')
-                            .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
+                            compare(question.discussNum 'eq' 0)
+                                .item(id='discuss-' + id ) > string('updated-discussion')
+                            else
+                                .item(id='discuss-' + id ) > echo(question.discussNum) + string('strip') + string('discuss')
                             compare(concernNum 'gt' 0)
                                 .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('unfollow')
                                 .item( 'hidden' id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('follow')

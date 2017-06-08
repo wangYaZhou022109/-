@@ -451,3 +451,11 @@ section.section {
 .padding-s {
     padding: 2px;
 }
+
+.col-sm-6 {
+    width: 48.99999%;
+}
+
+.col-sm-3 {
+    width: 23.99999%;
+}
