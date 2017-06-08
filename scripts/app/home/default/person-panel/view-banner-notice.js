@@ -8,6 +8,22 @@ var D = require('drizzlejs'),
         5: '#/',
         6: '#/activity/gensee/detail/'
     },
+    types = {
+        1: '课程',
+        2: '专题',
+        3: '考试',
+        4: '调研',
+        5: '班级',
+        6: '直播'
+    },
+    taskDefaultImage = {
+        1: 'images/default-cover/default_course.jpg',
+        2: 'images/default-cover/default_spceial.jpg',
+        3: 'images/default-cover/default_exam.jpg',
+        4: 'images/default-cover/default_survey.jpg',
+        5: 'images/default-cover/default_class.jpg',
+        6: 'images/default-cover/default_live.jpg'
+    },
     getUrl;
 
 exports.bindings = {
@@ -27,6 +43,8 @@ exports.dataForTemplate = {
     task: function(data) {
         var t = _.map(data.tasks.items, function(task) {
             return D.assign(task, {
+                img: task.coverId || taskDefaultImage[task.businessType],
+                typeDesc: types[task.businessType],
                 url: getUrl(task)
             });
         });
@@ -35,6 +53,7 @@ exports.dataForTemplate = {
     tasks: function(data) {
         var t = _.map(data.tasks.items, function(task) {
             return D.assign(task, {
+                typeDesc: types[task.businessType],
                 url: getUrl(task)
             });
         });
