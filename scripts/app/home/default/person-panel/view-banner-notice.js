@@ -44,7 +44,7 @@ exports.dataForTemplate = {
         var t = _.map(data.tasks.items, function(task) {
             return D.assign(task, {
                 img: task.coverId || taskDefaultImage[task.businessType],
-                typeDesc: types[task.businessType],
+                typeDesc: '[' + types[task.businessType] + ']',
                 url: getUrl(task)
             });
         });
@@ -53,7 +53,7 @@ exports.dataForTemplate = {
     tasks: function(data) {
         var t = _.map(data.tasks.items, function(task) {
             return D.assign(task, {
-                typeDesc: types[task.businessType],
+                typeDesc: '[' + types[task.businessType] + ']',
                 url: getUrl(task)
             });
         });
