@@ -165,7 +165,6 @@ exports.store = {
 };
 
 exports.afterRender = function() {
-    console.log(this.renderOptions.leftrefresh);
     this.options.store.callbacks.leftrefresh = this.renderOptions.leftrefresh;
     this.dispatch('selecttitle');
     this.dispatch('init');
