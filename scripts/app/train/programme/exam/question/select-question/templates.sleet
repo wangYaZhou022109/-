@@ -31,7 +31,6 @@ view('search-param') > form.vertical
                 label.tag-height 难易度
                 .content
                     select.input.w-full.tag-height#level(name='difficulty' x-marker='selectize')
-                        option(value='') > echo('全选')
                         each(difficultys)
                             option(value=key)('selected')&if(selected) > echo(value)
         .text-center > .btn.layout-mt-small.gray.circle-radius#searchQuestion 搜索

@@ -6,7 +6,7 @@ view('layout') > .container
     .home-title-row
         .title > echo(moduleHomeConfig.name)
         if(contents.more)
-            .more more
+            .more(id='more-'+moduleHomeConfig.id) more
     compare(moduleHomeConfig.style 'eq' 'layout-1')
         .layout-1
             compare(contents.length 'gt' 0)
@@ -61,7 +61,7 @@ view('layout') > .container
                                     .title > echo(dataName)
                                     .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
             else
-                .content-empty > .img-box.img-type-1 + p 暂无数据
+                .content-empty > .img-box.img-type-1 + p 暂无内容
     compare(moduleHomeConfig.style 'eq' 'layout-2')
         .layout-2
             compare(contents.length 'gt' 0)
@@ -110,7 +110,7 @@ view('layout') > .container
                                     .title > echo(dataName)
                                     .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
             else
-                .content-empty > .img-box.img-type-1 + p 暂无数据
+                .content-empty > .img-box.img-type-1 + p 暂无内容
     compare(moduleHomeConfig.style 'eq' 'layout-3')
         .layout-3
             compare(contents.length 'gt' 0)
@@ -163,7 +163,7 @@ view('layout') > .container
                                             monthDay(beginTime) + echo(' 至 ') + monthDay(endTime)
                                 .home-tag > .tag > span > map('home-data-type' dataType)
             else
-                .content-empty > .img-box.img-type-1 + p 暂无数据
+                .content-empty > .img-box.img-type-1 + p 暂无内容
     compare(moduleHomeConfig.style 'eq' 'layout-4')
         .layout-4
             compare(contents.length 'gt' 0)
@@ -220,7 +220,7 @@ view('layout') > .container
                                     .title > echo(dataName)
                                     .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
             else
-                .content-empty > .img-box.img-type-1 + p 暂无数据
+                .content-empty > .img-box.img-type-1 + p 暂无内容
     compare(moduleHomeConfig.style 'eq' 'layout-5')
         .layout-5
             compare(contents.length 'gt' 0)
@@ -286,4 +286,4 @@ view('layout') > .container
                                     .title > echo(dataName)
                                     .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
             else
-                .content-empty > .img-box.img-type-1 + p 暂无数据
+                .content-empty > .img-box.img-type-1 + p 暂无内容
