@@ -12,6 +12,16 @@ exports.bindings = {
     research: true
 };
 
+exports.events = {
+    'click more-*': 'more'
+};
+
+exports.handlers = {
+    more: function(id) {
+        this.app.navigate('home/more/layout/' + id, true);
+    }
+};
+
 exports.dataForTemplate = {
     moduleHomeConfig: function(data) {
         var moduleHomeConfig = data.moduleHomeConfig || {};
@@ -123,6 +133,7 @@ exports.dataForTemplate = {
             if (r.image) {
                 imageUrl = downUrl + '?id=' + r.image;
             }
+            r.browseCount = r.browseCount || 0;
             r.imageUrl = imageUrl;
             r.dataUrl = dataUrl + r.dataId;
             array[i + 1] = r;
