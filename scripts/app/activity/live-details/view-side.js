@@ -8,6 +8,12 @@ exports.bindings = {
 
 exports.dataForTemplate = {
     businesses: function(data) {
+        _.map(data.businessProgress || [], function(item) {
+            var r = item;
+            if (r.score) {
+                r.score = Number(r.score) / 100;
+            }
+        });
         return data.businessProgress;
     },
     accessList: function(data) {
