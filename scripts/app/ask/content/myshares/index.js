@@ -1,17 +1,26 @@
 
 exports.items = {
     left: 'left',
-    right: 'right',
+    // right: 'right',
+    top: 'top',
+    middle: 'middle',
+    bottom: 'bottom'
 };
 
 exports.store = {
     models: {
         leftstate: { data: { menu: 'myshares' } },
-        rightstate: {}
+        // rightstate: {}
+        topstate: {},
+        middlestate: {},
+        bottomstate: {}
     },
     callbacks: {
         refresh: function() {
-            this.models.rightstate.changed();
+            this.models.middlestate.changed();
+        },
+        leftrefresh: function() {
+            this.models.leftstate.changed();
         }
     }
 };
