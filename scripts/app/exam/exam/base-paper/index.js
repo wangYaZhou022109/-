@@ -143,10 +143,11 @@ exports.store = {
                                     typeIndex: j,
                                     totalCount: o.size,
                                     questionAttrCopys: _.orderBy(q.questionAttrCopys, ['name'], ['asc']),
-                                    status: j === constant.ZERO && k++ === constant.ZERO
+                                    status: j === constant.ZERO && k === constant.ZERO
                                         ? itemStatus.CURRENT
                                             : me.module.options.getCurrentStatus.call(me.module, q.id)
                                 });
+                                k++;
                             });
 
                             return D.assign(o, {
@@ -207,6 +208,16 @@ exports.store = {
                             });
                         });
                     }
+
+                    this.data = _.map(this.data, function(t, j) {
+                        return D.assign(t, {
+                            questions: _.map(t.questions, function(q, i) {
+                                return D.assign(q, {
+                                    status: (j === 0 && i === 0) ? itemStatus.CURRENT : itemStatus.INIT
+                                });
+                            })
+                        });
+                    });
                 },
                 getQuestionById: function(id) {
                     var question;
