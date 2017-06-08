@@ -11,12 +11,10 @@ exports.dataForTemplate = {
         var defultImg = 'images/default-cover/default_live.jpg';
         _.map(data.relativeGensees || [], function(item) {
             var info = item,
-                scorePercent = 0,
-                avgScore = 0.0;
+                avgScore = 0;
             info.cover = info.cover ? (downUrl + '?id=' + info.cover) : defultImg;
             if (info.avgScore) {
-                scorePercent = info.avgScore;
-                avgScore = (scorePercent / 10).toFixed(1);
+                avgScore = info.avgScore / 10;
             }
             info.avgScore = avgScore;
         });

@@ -41,6 +41,23 @@ exports.components = [function() { // 分享组件
             data: data
         }
     };
+}, function() {
+    var me = this;
+    var gensee = this.bindings.gensee.data;
+    return {
+        id: 'star-score',
+        name: 'picker',
+        options: {
+            picker: 'star-score',
+            data: {
+                id: gensee.id,
+                avgScore: gensee.avgScore / 10
+            },
+            callback: function(score) {
+                me.module.dispatch('score', { score: score, businessId: gensee.id, businessType: 5 });
+            }
+        }
+    };
 }];
 
 exports.actions = {
@@ -74,6 +91,10 @@ exports.dataForActions = {
     cancelCollect: function(payload) {
         return payload;
     },
+    score: function() {
+        var data = this.bindings.score.data;
+        return data.score ? data : false;
+    }
 
 };
 
@@ -84,23 +105,21 @@ exports.actionCallbacks = {
     cancelCollect: function() {
         this.app.message.success('取消收藏成功');
     },
-    score: function(data) {
-        this.module.dispatch('initScore', data[0]).then(function() {
-            this.app.message.success('评分成功');
-        });
+    score: function() {
+        this.app.message.success('评分成功');
     }
 };
 
 exports.dataForTemplate = {
     gensee: function(data) {
-        var info = data.gensee,
-            lecturers = info.lecturers,
+        var gensee = data.gensee,
+            lecturers = gensee.lecturers,
             nameArray = [];
         if (lecturers) {
             nameArray = _.map(lecturers, function(item) {
                 return item.lecturerName;
             });
-            info.lecturerStr = nameArray.join(',');
+            gensee.lecturerStr = nameArray.join(',');
         }
         return data.gensee;
     },
@@ -119,20 +138,6 @@ exports.dataForTemplate = {
             info.avgScore = avgScore;
         });
         return data.courses;
-    },
-    score: function(data) {
-        var gensee = data.gensee,
-            avgScore = 0.0,
-            scorePercent = 0;
-        if (gensee.avgScore) {
-            scorePercent = gensee.avgScore;
-            avgScore = (scorePercent / 10).toFixed(1);
-        }
-        return {
-            hasScore: !!gensee.courseScore,
-            scorePercent: scorePercent,
-            avgScore: avgScore
-        };
     }
 };
 
