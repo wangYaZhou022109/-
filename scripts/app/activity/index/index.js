@@ -34,7 +34,7 @@ exports.store = {
             url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 36
+            pageSize: 18
         },
         examMores: {
             data: {},
@@ -83,7 +83,7 @@ exports.store = {
             url: '../train/class-info/find-activity-classinfo',
             type: 'pageable',
             root: 'items',
-            pageSize: 90
+            pageSize: 30
         }
     },
     callbacks: {
