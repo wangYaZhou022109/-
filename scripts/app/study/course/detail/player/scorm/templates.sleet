@@ -1,0 +1,10 @@
+#!handlebars
+module
+    div(data-region='main')
+
+view('main')
+    .content-wrapper.clearfix
+        .content-left(data-region='left')
+            #tree
+        .content-main(data-region='content')
+            iframe#frame(style='width:100%;height:34em;' frameborder='no' border='0' marginwidth='0' marginheight='0' scrolling='yes' allowtransparency='yes')

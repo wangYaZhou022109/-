@@ -25,25 +25,15 @@ var showHandler = function(payload) {
             winOpen = window.open(detailUrlMap[8] + '' + payload.referenceId, '_blank');
         } else if (payload.sectionType === 9) {
             winOpen = window.open(detailUrlMap[9] + '' + payload.resourceId, '_blank');
-        } else if (payload.sectionType === 4) {
-            this.module.dispatch('getAttachment', { id: payload.attachmentId }).then(function(data) {
-                var att = data[0];
-                var view = me.module.items['preview-scrom'];
-                if (att.translateFlag !== 1) {
-                    return me.app.message.error('文档还未处理完，请稍后查看');
-                }
-                return me.module.dispatch('getScormTree', { id: payload.attachmentId }).then(function() {
-                    return me.app.viewport.ground(view, { section: payload, path: att.path });
-                });
-            });
         }
-        this.module.dispatch('showSection', { section: payload });
+        this.module.dispatch('showSection', payload);
     };
 };
 
 var statusMap = {
     8: {
         0: '查看作业',
+        1: '学习中',
         5: '待评审',
         2: '',
         6: '重新提交',
@@ -51,17 +41,20 @@ var statusMap = {
     9: {
         0: '参与考试',
         5: '待评卷',
+        1: '学习中',
         2: '',
         6: '重新考试',
     },
     12: {
         0: '参与调研',
+        1: '学习中',
         5: '待评审',
         2: '查看详情',
         6: '重新提交',
     },
     13: {
         0: '参与评估',
+        1: '学习中',
         5: '待评审',
         2: '查看详情',
         6: '重新提交',
