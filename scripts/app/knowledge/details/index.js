@@ -19,6 +19,7 @@ exports.store = {
         downCount: { url: '../course-study/knowledge/down' },
         courseTopics: { url: '../course-study/topic' },
         topics: { url: '../system/topic/ids' },
+        collectCount: { url: '../course-study/knowledge/collectCount' }
     },
     callbacks: {
         init: function(payload) {
@@ -66,14 +67,25 @@ exports.store = {
         },
         collect: function(payload) {
             var collect = this.models.collect;
+            var collectCount = this.models.collectCount;
+            var knowledgeId = this.models.knowledge.data.id;
+            var me = this;
             collect.set(payload);
-            return this.save(collect);
+            return this.save(collect).then(function() {
+                collectCount.set({ id: knowledgeId, updateType: 0 });
+                return me.put(collectCount);
+            });
         },
         cancelCollect: function(payload) {
             var collect = this.models.collect;
+            var collectCount = this.models.collectCount;
+            var knowledgeId = this.models.knowledge.data.id;
+            var me = this;
             collect.set(payload);
             return this.del(collect, { slient: true }).then(function() {
                 collect.set({}, true);
+                collectCount.set({ id: knowledgeId, updateType: 1 });
+                return me.put(collectCount);
             });
         },
         changeRecommends: function() {
