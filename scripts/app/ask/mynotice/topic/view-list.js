@@ -1,4 +1,4 @@
-var _ = require('lodash/collection');
+var _ = require('lodash');
 exports.type = 'dynamic';
 exports.bindings = {
     topic: true,
@@ -35,6 +35,11 @@ exports.dataForTemplate = {
     topic: function(data) {
         var topic = data.topic,
             me = this;
+        if (_.isEmpty(topic.topicList)) {
+            topic.topicListFlag = true;
+        } else {
+            topic.topicListFlag = false;
+        }
         _.forEach(topic.topicList, function(value) {
             var obj = value,
                 url = obj.attachmentId;

@@ -7,18 +7,25 @@ view('main')
     .mt-1
         .checkbox > input(type='checkbox' id='waitAudit')('checked')&if(checked) + label(for='waitAudit')
         span 显示待审核
-    ul.list > each(works)
-        li
-            .clearfix
-                .pull-left
-                    span.m-right > echo(source)
-                    span.color-ing > echo(status)
-                .pull-right.text-tips > echo(timeStr) + dateMinute(lastAccessTime)
-            .clearfix.mt-1
-                .pull-left > echo('作业名称：' courseChapterSection.name)
-                .pull-right
-                    span.text-tips > echo('提交人：' member.fullName ' | 所属部门：' member.organization.name)
-                    compare(finishStatus 'eq' 5)
-                        a(id='audit-' + id data-task-id=courseChapterSection.resourceId) 点击审核
-                    else
-                        span.text-tips > echo(' | 成绩：' score)
+    ul.list
+        each(works)
+            li
+                .clearfix
+                    .pull-left
+                        span.m-right > echo(source)
+                        span.color-ing > echo(status)
+                    .pull-right.text-tips > echo(timeStr) + dateMinute(lastAccessTime)
+                .clearfix.mt-1
+                    .pull-left > echo('作业名称：' courseChapterSection.name)
+                    .pull-right
+                        span.text-tips > echo('提交人：' member.fullName ' | 所属部门：' member.organization.name)
+                        compare(finishStatus 'eq' 5)
+                            a(id='audit-' + id data-task-id=courseChapterSection.resourceId) 点击审核
+                        else
+                            span.text-tips > echo(' | 成绩：' score)
+        else
+            .empty 暂无内容
+    compare(showMore 'eq' 1)
+        #showMore.empty(style='cursor:pointer;') 查看更多
+    compare(showMore 'eq' 2)
+        .empty 没有更多了

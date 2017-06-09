@@ -10,7 +10,8 @@ exports.items = {
     gensee: 'gensee',
     exam: 'exam',
     research: 'research',
-    'activity/index/exam-prompt': { isModule: true }
+    'activity/index/exam-prompt': { isModule: true },
+    'class-info': 'class-info'
 };
 
 exports.store = {
@@ -27,13 +28,13 @@ exports.store = {
             url: '../course-study/gensee/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 50
+            pageSize: 5
         },
         exams: {
             url: '../exam/exam/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 36
+            pageSize: 18
         },
         examMores: {
             data: {},
@@ -72,11 +73,17 @@ exports.store = {
             url: '../exam/research-activity/activity-list',
             type: 'pageable',
             root: 'items',
-            pageSize: 24
+            pageSize: 6
         },
         down: { url: '../human/file/download' },
         classSignupInfo: {
             url: '../train/sign-up/find-by-code'
+        },
+        classDetailes: {
+            url: '../train/class-info/find-activity-classinfo',
+            type: 'pageable',
+            root: 'items',
+            pageSize: 30
         }
     },
     callbacks: {
@@ -103,9 +110,12 @@ exports.store = {
         search: function(payload) {
             var gensees = this.models.gensees,
                 exams = this.models.exams,
+                examMores = this.models.examMores,
                 researchActivitys = this.models.researchActivitys,
                 search = this.models.search;
 
+            gensees.clear();
+            researchActivitys.clear();
             D.assign(gensees.params, payload);
             D.assign(exams.params, payload);
             D.assign(researchActivitys.params, payload);
@@ -116,7 +126,10 @@ exports.store = {
                 this.get(gensees),
                 this.get(exams),
                 this.get(researchActivitys)
-            ]);
+            ]).then(function() {
+                examMores.init(exams.data);
+                examMores.changed();
+            });
         },
         getResearchById: function(payload) {
             return _.find(this.models.researchActivitys.data, function(r) {
@@ -146,6 +159,16 @@ exports.store = {
         changeExamPage: function(payload) {
             var examMores = this.models.examMores;
             examMores.changePage(payload.page);
+        },
+        turnToModelPage: function(payload) {
+            var model = this.models[payload.model],
+                pageInfo = model.getPageInfo(),
+                currentPage = pageInfo.page;
+            model[payload.dir + 'Page']();
+            if (currentPage !== model.getPageInfo().page) {
+                return this.get(model);
+            }
+            return true;
         }
     }
 };

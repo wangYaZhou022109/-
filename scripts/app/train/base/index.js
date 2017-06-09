@@ -14,6 +14,7 @@ exports.store = {
         down: { url: '../human/file/download' },
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         quota: { url: '../train/class-quota/init' },
+        trainTypes: { url: '../train/configuration-value', autoLoad: 'after', params: { typeId: '10' } },
         state: { data: {} }
     },
     callbacks: {

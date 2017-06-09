@@ -176,14 +176,20 @@ exports.components = [{
 }, function() {
     var data = this.bindings.state.data;
     var inputName = data.inputName || 'memberIds',
-        tags = data.tags || [];
+        task = this.bindings.task.data,
+        labelItem = [];
+    if (task.taskReviewer) {
+        _.map(task.taskReviewer, function(x) {
+            labelItem.push({ text: x.memberFullName, value: x.memberId });
+        });
+    }
     return {
         id: 'tags',
         name: 'tag-view',
         options: {
             name: inputName,
             emptyText: '请选择人员',
-            tags: tags
+            tags: labelItem
         }
     };
 }];

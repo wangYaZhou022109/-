@@ -149,6 +149,7 @@ exports.dataForTemplate = {
                     // rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
                     rr.finishStatus = '';
                     if (rr.sectionType === 8 && sectionProcess.score > 0) {
+                        if (sectionProcess.score) sectionProcess.score = Number(sectionProcess.score) / 10;
                         rr.finishStatus += '成绩' + sectionProcess.score + ' ';
                     }
                     if (rr.sectionType === 9 && sectionProcess.examScore > 0) {

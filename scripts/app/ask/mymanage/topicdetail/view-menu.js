@@ -21,4 +21,16 @@ exports.handlers = {
         state.data[menu] = true;
         state.changed();
     }
+    // showMenu: function(menu) {
+    //     var state = this.bindings.state;
+    //     var topicdetail = this.bindings.topicdetail;
+    //     $(window).unbind('scroll');
+    //     $(this.$('menu-' + menu)).addClass('active').siblings().removeClass('active');
+    //    // $(this.$('tabs-cont-item-' + menu)).addClass('active').siblings().removeClass('active');
+    //     state.data = {};
+    //     state.data.topicid = topicdetail.data.id;
+    //     state.data.menu = menu || 'news';
+    //     state.data[menu] = true;
+    //     state.changed();
+    // }
 };

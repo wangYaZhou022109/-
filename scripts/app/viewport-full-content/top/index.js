@@ -80,6 +80,7 @@ exports.store = {
         integral: { url: '../system/integral-result/grade' }, // 积分和等级
         courseTime: { url: '../course-study/course-study-progress/total-time' }, // 总学习时长
         hotTopics: { url: '../system/topic/hot-all' }, // 热门标签
+        msgCount: { url: '../system/msg-count' }, // 消息数
         state: {}
     },
     callbacks: {
@@ -114,8 +115,8 @@ exports.store = {
         },
         'app.pushState': function(hash) {
             // 设置top菜单的active状态
-            var muduleName = hash.slice(0, hash.indexOf('/')),
-                dataMenus = this.module.items.nav.$$('a[data-menu]'),
+            var muduleName = hash, // hash.slice(0, hash.indexOf('/')),
+                dataMenus = this.module.items.nav.$$('div[data-menu]'),
                 matchModule;
             if (!(muduleName)) {
                 return false;
@@ -138,12 +139,20 @@ exports.store = {
                 this.models.integral.clear();
                 this.models.courseTime.clear();
                 this.models.organizations.clear();
-                this.chain(
-                    me.get(me.models.message),
-                    me.get(me.models.integral),
-                    me.get(me.models.courseTime),
-                    me.get(me.models.organizations)
-                );
+                this.models.msgCount.clear();
+
+                me.get(me.models.message);
+                me.get(me.models.integral);
+                me.get(me.models.courseTime);
+                me.get(me.models.organizations);
+                me.get(me.models.msgCount);
+                // this.chain(
+                //     me.get(me.models.message),
+                //     me.get(me.models.integral),
+                //     me.get(me.models.courseTime),
+                //     me.get(me.models.organizations),
+                //     me.get(me.models.msgCount)
+                // );
             }
         },
         showSetting: function() {

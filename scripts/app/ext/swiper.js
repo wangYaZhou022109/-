@@ -190,12 +190,12 @@ D.assign(Swiper.prototype, {
                 translateLeft: function() {
                     num++;
 
+                    me.translateLeft(Math.abs(num));
                     if (num > 0) {
                         num = 0;
                         return;
                     }
                     me.translate(num);
-                    me.translateLeft(Math.abs(num));
                 },
 
                 translateRight: function() {

@@ -31,19 +31,21 @@ view('reviewed')
                         .pull-right
                             .sub-text.small-font
                                 span.m-right > echo('提交人：') + echo(member.fullName)
-                                span > echo('提交时间: ') + date(createTime)
+                                span > echo('提交时间: ') + dateTime(createTime)
                         .title-row
-                            .inline-block.color-ing > map('ask-audit-status' auditStatus)
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
+                            .inline-block.custom-bg-color-2.padding-s.small-font > map('ask-audit-status' auditStatus)
                     .clearfix.m-top
                         .pull-right > a(id='audit-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow 
                             #  compare(thumbnail.length 'gt' 0)
                             #      img(src=thumbnail)
-                            compare(auditType 'eq' 1)
-                                echo(question.content)
+                            compare(auditType 'eq' "2")
+                                echo(questionDiscuss.content)
+                            compare(auditType 'eq' "5")
+                                echo(questionDiscuss.content)
                             else
-                                @echo(questionDiscuss.content)
+                                @echo(question.content)
                         #   echo(question.content)
             compare(auditStatus 'eq' 1)
                 li
@@ -51,19 +53,21 @@ view('reviewed')
                         .pull-right
                             .sub-text.small-font
                                 span.m-right > echo('审核人：') + echo(auditor)
-                                span > echo('审核时间: ') + date(auditTime)
+                                span > echo('审核时间: ') + dateTime(auditTime)
                         .title-row
-                            .inline-block.color-pass > map('ask-audit-status' auditStatus)
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
+                            .inline-block.custom-bg-color-4.padding-s.small-font > map('ask-audit-status' auditStatus)
                     .clearfix.m-top
                         .pull-right > a(id='deal-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow
                             compare(thumbnail.length 'gt' 0)
                                 img(src=thumbnail)
-                            compare(auditType 'eq' 1)
-                                @echo(question.content)
+                            compare(auditType 'eq' "2")
+                                @echo(questionDiscuss.content)
+                            compare(auditType 'eq' "5")
+                                @echo(questionDiscuss.content)
                             else
-                                @echo(questionDiscuss.content) 
+                                @echo(question.content) 
                         #  > echo(question.content)
             compare(auditStatus 'eq' 2)
                 li
@@ -71,17 +75,19 @@ view('reviewed')
                         .pull-right
                             .sub-text.small-font
                                 span.m-right > echo('审核人：') + echo(auditor)
-                                span > echo('审核时间: ') + date(auditTime)
+                                span > echo('审核时间: ') + dateTime(auditTime)
                         .title-row
-                            .inline-block.color-error > map('ask-audit-status' auditStatus)
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
+                            .inline-block.danger-color.padding-s.small-font > map('ask-audit-status' auditStatus)
                     .clearfix.m-top
                         .pull-right > a(id='deal-' + id href='javascript:;' auditType=auditType )(class ='active') > echo('查看详情')
                         .text-overflow
                             compare(thumbnail.length 'gt' 0)
                                 img(src=thumbnail)
-                            compare(auditType 'eq' 1)
-                                @echo(question.content)
-                            else
+                            compare(auditType 'eq' "2")
                                 @echo(questionDiscuss.content)
+                            compare(auditType 'eq' "5")
+                                @echo(questionDiscuss.content)
+                            else
+                                @echo(question.content)
                         #   > echo(question.content)

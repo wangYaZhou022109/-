@@ -4,11 +4,22 @@ var _ = require('lodash/collection'),
 exports.bindings = {
     contents: true,
     down: false,
+    styleMap: false,
     course: true,
     subject: true,
     gensee: true,
     exam: true,
     research: true
+};
+
+exports.events = {
+    'click more-*': 'more'
+};
+
+exports.handlers = {
+    more: function(id) {
+        this.app.navigate('home/more/layout/' + id, true);
+    }
 };
 
 exports.dataForTemplate = {
@@ -19,6 +30,8 @@ exports.dataForTemplate = {
     },
     contents: function(data) {
         var array = {},
+            size,
+            styleMap = this.bindings.styleMap.data,
             downUrl = this.bindings.down.getFullUrl(),
             courseData = this.bindings.course.data || [],
             subjectData = this.bindings.subject.data || [],
@@ -120,10 +133,18 @@ exports.dataForTemplate = {
             if (r.image) {
                 imageUrl = downUrl + '?id=' + r.image;
             }
+            r.browseCount = r.browseCount || 0;
             r.imageUrl = imageUrl;
             r.dataUrl = dataUrl + r.dataId;
             array[i + 1] = r;
         });
+        array.length = data.contents.length;
+        if (array.length > 0) {
+            size = styleMap[data.moduleHomeConfig.style || 7];
+            if (array.length === size) {
+                array.more = true;
+            }
+        }
         return array;
     }
 };

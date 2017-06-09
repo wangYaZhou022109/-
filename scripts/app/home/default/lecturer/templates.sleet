@@ -5,11 +5,16 @@ module > section.section(data-region='lecturer')
 view('lecturer') > .container
     .home-title-row
         .title > echo(moduleHomeConfig.name)
-        .more more
-    .lecture-list > ul > each(lecturers)
-        li
-            .lecture-pic > img(src=downloadUrl(lecturer.memberHeadPortrait))
-            .lecture-info
-                .title > echo(lecturer.memberName)
-                .sub-text > echo(lecturer.organizationName)
-                .sub-text > echo(lecturer.levelName)
+        compare(lecturers.length 'eq' 6)
+            .more more
+    .lecture-list
+        if(lecturers)
+            ul > each(lecturers)
+                li
+                    .lecture-pic > img(src=downloadUrl(lecturer.memberHeadPortrait))
+                    .lecture-info
+                        .title > echo(lecturer.memberName)
+                        .sub-text > echo(lecturer.organizationName)
+                        .sub-text > echo(lecturer.levelName)
+        else
+            .content-empty > .img-box.img-type-1 + p 暂无内容

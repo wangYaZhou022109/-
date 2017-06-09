@@ -51,7 +51,7 @@ exports.handlers = {
     },
     showCallNameInput: function(id) {
         var state = this.bindings.state.data;
-        if (state.role !== 2) {
+        if (state.role !== 4) {
             $(this.$('input-callName' + id)).css('display', 'block');
             $(this.$('label-callName' + id)).css('display', 'none');
         }

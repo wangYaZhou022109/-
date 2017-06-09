@@ -24,15 +24,17 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        research: {}
+        research: {},
+        state: {}
     },
     callbacks: {
         init: function(payload) {
-            var research = this.models.research;
+            var research = this.models.research,
+                state = this.models.state.data;
             if (payload.researchId) {
                 this.models.research.set({ id: payload.researchId });
             }
-
+            state.organizationId = payload.organizationId;
             D.assign(this.models.researchActivities.params, {
                 type: this.module.options.RESEARCH_TYPE,
                 organizationId: payload.organizationId
@@ -81,14 +83,15 @@ exports.buttons = [{
     fn: function() {
         var mod = this.items[this.options.SELECT_MODULE],
             research = this.store.models.research.data,
-            me = this;
+            me = this,
+            organizationId = this.store.models.state.data.organizationId;
         this.app.viewport.modal(mod, {
             researchId: research.id,
             sourceType: research.sourceType || EXAM_SOURCE_TYPE,
             titleType: research.id ? titleType.EDIT : titleType.ADD,
             callback: function(data) {
                 var callback = me.renderOptions.callback;
-                return me.dispatch('init', {}).then(function() {
+                return me.dispatch('init', { organizationId: organizationId }).then(function() {
                     if (callback) callback(D.assign(data, { isAdd: 1 }));
                 });
             }

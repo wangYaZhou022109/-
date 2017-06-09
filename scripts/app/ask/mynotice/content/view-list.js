@@ -1,4 +1,4 @@
-var _ = require('lodash/collection');
+var _ = require('lodash');
 var $ = require('jquery');
 
 exports.type = 'dynamic';
@@ -214,6 +214,11 @@ exports.dataForTemplate = {
         var page = this.bindings.page.data;
         var me = this;
         var flag = true;
+        if (_.isEmpty(trends)) {
+            page.trendsListFlag = true;
+        } else {
+            page.trendsListFlag = false;
+        }
         _.forEach(trends, function(value) {
             var obj = value,
                 date = new Date(obj.createTime);
