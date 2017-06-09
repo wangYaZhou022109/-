@@ -232,6 +232,7 @@ exports.dataForTemplate = {
         var obj = data,
             date = new Date(data.details.createTime);
         // console.log(data);
+        var me = this;
         var url = obj.details.member.headPortrait;
         var defultImg = 'images/default-userpic.png',
             downUrl = this.bindings.down.getFullUrl();
@@ -240,6 +241,15 @@ exports.dataForTemplate = {
             if (r.member) {
                 r.headPhoto = r.member.headPortrait ? (downUrl + '?id=' + r.member.headPortrait) : defultImg;
             }
+        });
+        _.map(obj.details.questionAttachList || [], function(attach) {
+            var obj1 = attach;
+            obj1.downUrl = me.bindings.down.getFullUrl() + '?id=' + obj1.viewName;
+            obj1.preview = 1;
+            if (obj1.attachmentType === 'application/octet-stream') {
+                obj1.preview = 0;
+            }
+            return obj1;
         });
         if (typeof url === 'undefined' || url === null || url === '') {
             obj.details.member.headPortrait = 'images/default-userpic.png';
@@ -250,7 +260,7 @@ exports.dataForTemplate = {
         + '   ' + date.getHours() + ':' + date.getMinutes();
         return obj.details;
     },
-    noAttachments: function(data) {
+    haveAttachments: function(data) {
         return data.details.questionAttachList && data.details.questionAttachList.length > 0;
     }
 };
