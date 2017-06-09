@@ -4,12 +4,14 @@ var _ = require('lodash/collection'),
 var rootUrl = 'http://localhost/zxy-scorm/scorm_api.jsp?';
 var viewScorm;
 exports.bindings = {
-    scormTree: true
+    scormTree: true,
+    section: true,
+    attachment: true
 };
 exports.large = true;
 
 exports.title = function() {
-    return this.renderOptions.section.name;
+    return this.bindings.section.data.name;
 };
 
 
@@ -33,11 +35,12 @@ exports.handlers = {
     }
 };
 viewScorm = function(node) {
-    var section = this.renderOptions.section;
+    var section = this.bindings.section.data;
+    var path = this.bindings.attachment.data.path;
     var params = {},
         url = rootUrl;
     if (!node.href) return;
-    params.scoUrl = 'http://localhost' + this.renderOptions.path + '/' + node.href;
+    params.scoUrl = 'http://localhost' + path + '/' + node.href;
     params.courseId = section.courseId;
     params.scormId = section.referenceId || section.id;
     params.scormItemId = node.id;
@@ -52,15 +55,19 @@ viewScorm = function(node) {
 
 exports.afterRender = function() {
     var trees = this.bindings.scormTree.data;
+    var node;
+
     if (trees.length === 1) {
-        viewScorm.call(this, trees[0]);
+        node = trees[0];
         $('.content-left').remove();
         $('.content-main').css('margin-left', '0px');
+    } else {
+        node = this.components.tree.selectByIndex(0, 0).data;
     }
+    viewScorm.call(this, node);
 };
 
 exports.beforeClose = function() {
-    var me = this;
-    var fun = function() { me.module.dispatch('updateProgress'); };
-    setTimeout(fun, 3000);
+    var callback = this.module.renderOptions.updateProgress;
+    setTimeout(callback, 3000);
 };

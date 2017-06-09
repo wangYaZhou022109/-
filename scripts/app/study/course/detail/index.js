@@ -10,8 +10,7 @@ exports.items = {
     'preview-pdf': '',
     'preview-img': '',
     'preview-video': '',
-    'preview-audio': '',
-    'preview-scrom': ''
+    'preview-audio': ''
 };
 
 exports.store = {
@@ -94,7 +93,6 @@ exports.store = {
         preview: { url: '../human/file/preview' },
         download: { url: '../human/file/download' },
         attachment: { url: '../human/file' },
-        scormTree: { url: '../course-study/course-file/scorm/tree' },
         score: { url: '../course-study/course-front/score' },
         state: {},
         playerState: {},
@@ -203,11 +201,6 @@ exports.store = {
             var attachment = this.models.attachment;
             attachment.set({ id: payload.id });
             return this.get(attachment);
-        },
-        getScormTree: function(payload) {
-            var scormTree = this.models.scormTree;
-            scormTree.set({ id: payload.id });
-            return this.get(scormTree);
         }
     }
 };

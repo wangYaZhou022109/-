@@ -253,7 +253,15 @@ exports.mixin = {
         var root = null;
         if (this.store.models.tree.data.list.length > 0) {
             root = this.store.models.tree.data.list[0];
-            this.select(root.id);
+            if (root) this.select(root.id);
+        }
+        return root;
+    },
+    selectByIndex: function(x, y) {
+        var root = null;
+        if (this.store.models.tree.data.list.length > 0) {
+            root = this.store.models.tree.data.list[x].children[y];
+            if (root) this.select(root.id);
         }
         return root;
     },
