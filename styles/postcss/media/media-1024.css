@@ -11,6 +11,11 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .page-main-wrapper .page-main .container {
+        margin: 0;
+        padding-right: var(--large-space);
+        width: 100%;
+    }
     .dialog .container {
         width: auto;
     }
