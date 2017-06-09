@@ -47,13 +47,13 @@ exports.store = {
             return this.get(this.models.researchActivities);
         },
         search: function(payload) {
-            var createTimeRange = payload.createTime || 'to',
+            var createTimeRange = payload.createTime || '至',
                 publishTimeStart,
                 publishTimeEnd,
                 start,
                 end;
-            publishTimeEnd = createTimeRange.split('to')[1].trim();
-            publishTimeStart = createTimeRange.split('to')[0].trim();
+            publishTimeEnd = createTimeRange.split('至')[1].trim();
+            publishTimeStart = createTimeRange.split('至')[0].trim();
             start = new Date(publishTimeStart).getTime();
             end = new Date(publishTimeEnd).getTime();
             this.models.researchActivities.clear();

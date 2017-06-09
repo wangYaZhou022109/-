@@ -45,3 +45,6 @@ view('main')
                     label.m-right 是
                     input(type="radio" name="isOverByPassExam" value=0)('checked')&if(isOverByPassExam.no)
                     label 否
+
+view('paper')
+    div(data-dynamic-key='paper')
