@@ -124,7 +124,7 @@
     & .dialog-header .title {
         margin-left: -calc(var(--space) * 3);
         padding: 1em calc(var(--space) * 3);
-        min-height: var(--base-gap);
+        min-height: 40px;
         background: var(--bg-color);
         border-bottom: 1px solid var(--border-color);
     }

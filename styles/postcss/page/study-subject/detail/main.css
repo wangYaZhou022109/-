@@ -152,7 +152,7 @@
         width: 40%;
         right: calc(var(--base-gap) * 3);
         z-index: 3;
-        text-shadow: 1px 1px rgba(0,0,0,.3);
+        /*text-shadow: 1px 1px rgba(0,0,0,.3);*/
         & .h3 {
             font-size: var(--h2);
         }
