@@ -8,3 +8,13 @@ exports.dataForTemplate = {
         return rankModule;
     }
 };
+
+exports.events = {
+    'click details-*': 'detail'
+};
+
+exports.handlers = {
+    detail: function(id) {
+        window.location.href = '#/knowledge/detail/' + id;
+    }
+};

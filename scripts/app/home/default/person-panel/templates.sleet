@@ -10,9 +10,9 @@ view('banner-notice')
             else
                 img.block(src=task.img)
             
-            .img-title > a.underline(href=task.url target='_blank' title=task.name) > echo('['+task.typeDesc+']') + echo(task.name)
+            .img-title > a.underline(href=task.url target='_blank' title=task.name) > echo(task.typeDesc) + echo(task.name)
         ul > each(tasks)
-            li > a.underline(href=url target='_blank' title=name) > echo('['+typeDesc+']') + echo(name)
+            li > a.underline(href=url target='_blank' title=name) > echo(typeDesc) + echo(name)
         .notice-bottom > each(personPanels) 
             .item > i.iconfont.icon-type + span > a.underline(href='/#/'+url) > echo(name)
     else

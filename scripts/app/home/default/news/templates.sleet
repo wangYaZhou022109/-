@@ -14,7 +14,7 @@ view('news')
                 .icon.arrow.next > .iconfont.icon-arrow-up#pre
                 #  .icon > .iconfont.icon-more
 
-        compare(newsList.length 'gt' 1)
+        compare(newsList.length 'gt' 0)
             ul > inner(newsList state.currentIndex)
                 li > a(href='/#/news/detail/'+id+'/0') > echo(title)
         else

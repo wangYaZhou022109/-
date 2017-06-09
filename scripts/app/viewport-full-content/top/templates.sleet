@@ -55,7 +55,10 @@ view('shortcut')
                         if(Global.organization)
                             li(id='org-'+Global.organization.id) > echo(Global.organization.name)
                         each(organizations)
-                            li(id='org-'+id) > echo(name)
+                            if(shortName)
+                                li(id='org-'+id) > echo(shortName)
+                            else
+                                li(id='org-'+id) > echo(name)
             .item.drop-down-wrapper.right
                 a#message-div.normal(href='#')(title=msgCount)&if(msgCount) > i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content

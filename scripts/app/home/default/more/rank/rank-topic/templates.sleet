@@ -1,0 +1,16 @@
+#! handlebars
+module
+    .rank-list(data-region='main')
+
+view('main')
+    .h3  话题
+    if(topicRank)
+        ul.list-text > each(topicRank)
+            li.border.bottom
+                .user-pic > img(src='images/default-cover/default_topic.jpg')
+                .department(title=name) > echo(name)
+                .data > echo(watchedCount)
+    p.text-center.m-top
+        a(href='#/ask/topic/index') 进入话题广场
+
+
