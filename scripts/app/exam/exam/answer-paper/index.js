@@ -234,9 +234,9 @@ var setOptions = {
                             if (exam0.id !== payload.examId) return true;
 
                             //  最后保存时间不同
-                            if (!exam0.lastCacheTime || (exam0.lastCacheTime
+                            if (exam0.lastCacheTime
                                 && examRecord0
-                                && exam0.lastCacheTime !== examRecord0.lastCacheTime)) {
+                                && exam0.lastCacheTime !== examRecord0.lastCacheTime) {
                                 return true;
                             }
 

@@ -36,7 +36,8 @@ var libs = [
         './vendors/upload/jquery.plupload.queue.min',
         './vendors/upload/zh_CN',
         './vendors/upload/moxie.min',
-        'crypto-js', 'flatpickr', 'kindeditor', 'kindeditor/kindeditor-all', 'kindeditor/lang/zh-CN'
+        'crypto-js', 'flatpickr', 'kindeditor', 'kindeditor/kindeditor-all', 'kindeditor/lang/zh-CN',
+        './vendors/image-cropper/swfobject'
     ],
     options = {
         entries: ['./main.js'],
@@ -181,6 +182,15 @@ gulp.task('font', ['clean-build'], function() {
         .pipe(gulp.dest('./dist/font'));
 });
 
+gulp.task('image-cropper', ['clean-build', 'images', 'font'], function() {
+    return gulp.src([
+            'scripts/vendors/image-cropper/**/*.swf'
+        ], {
+            base: 'scripts/vendors/image-cropper'
+        })
+        .pipe(gulp.dest('./dist/scripts/image-cropper'));
+});
+
 gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
     return gulp.src([
         'node_modules/pdfjs-dist/build/pdf.worker.js'
@@ -190,7 +200,7 @@ gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
     .pipe(gulp.dest('./dist/scripts/pdfjs-dist'));
 });
 
-gulp.task('files', ['clean-build', 'images', 'font', 'kindeditor', 'pdf-worker', 'jquery-ui'], function() {
+gulp.task('files', ['clean-build', 'images', 'font', 'kindeditor', 'pdf-worker','jquery-ui', 'image-cropper'], function() {
     return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
         .pipe(gulp.dest('./dist/scripts'));
 });
@@ -201,6 +211,7 @@ gulp.task('build', ['clean-build', 'lint', 'sleet', 'postcss', 'common', 'build-
         .pipe(gulpif('*.js', preprocess({ context: {
             KINDEDITOR_THEME: 'scripts/kindeditor/themes/',
             KINDEDITOR_PLUGIN: 'scripts/kindeditor/plugins/',
+            IMAGE_CROPPER: 'scripts/image-cropper/',
             PDF_WORKER: 'scripts/pdfjs-dist/'
         } })))
         .pipe(gulpif('*.js', uglify()))
