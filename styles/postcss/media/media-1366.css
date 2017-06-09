@@ -1,0 +1,161 @@
+@media (min-width: 1300px) {
+    .container,
+    .page-main-wrapper {
+        width: 1200px;
+    }
+    .page-main-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .course-list,
+    .study-subject-list {
+        & .img img { max-height: 140px;}
+    }
+    .home-page.layout img {
+        height: 100%;
+    }
+    .home-page .layout-1 {
+        & .big-pic,
+        & .base-list {
+            height: 500px;
+        }
+        & .base-list .content {
+            height: 190px;
+        }
+    }
+    .home-page .layout-2,
+    .home-page .layout-3 {
+        & .big-pic {
+            width: 468px;
+            height: 420px;
+        }
+        & .base-list {
+            margin-left: 468px;
+            height: 420px;
+        }
+    }
+    .home-page .layout-2 {
+        & .big-pic {
+            & .content {
+                height: 370px;
+            }
+        }
+        & .base-list {
+            & .item {
+                margin-left: 20px;
+                padding: 0;
+                width: 224px;
+            }
+            & .img {
+                width: 224px;
+                height: 149px;
+            }
+            & .content {
+                height: 149px;
+            }
+        }
+        & .list-bar .p-top {
+            padding-top:10px;
+        }
+        & .list-bar.big-height {
+            & .content {
+                height: 250px;
+            }
+            & .img {
+                height: 250px;
+                margin-bottom: 0;
+            }
+            & .descoration {
+                margin-bottom: 5px;
+                height: auto;
+                max-height: 115px;
+            }
+        }
+    }
+
+    .home-page .layout-3 {
+        & .big-pic {
+            & .img {
+                height: 311px;
+                background-color: var(--bg-color-3);
+            }
+            & .bottom {
+                height: auto;
+                padding-bottom: 0;
+            }
+            & .descoration {
+                height: 25px;
+            }
+        }
+        & .list-bar .item:nth-child(odd) {
+            padding-bottom: 0;
+        }
+        & .list-bar .p-bottom {
+            padding-bottom:10px;
+        }
+        & .list-bar .p-top {
+            padding-top:10px;
+        }
+        & .big-width .item.p-top:nth-child(1) {
+            & .bottom:before {
+                left:inherit;
+                border-right-color: transparent;
+                right: -2em;
+                border-left-color: var(--bg-color);
+            }
+        }
+        & .list-bar.big-height .descoration {
+            height: auto;
+            max-height: 120px;
+        }
+        & .small-font {
+            margin-top: var(--space);
+        }
+        & .list-bar.big-height .bottom {
+            height: auto;
+        }
+    }
+    .home-page .layout-4 {
+        & .big-pic {
+            width: 588px;
+            height: 490px;
+            & .above {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                height: 230px;
+            }
+            & .below {
+                height: auto;
+                & .item:nth-child(odd) {
+                    padding-top: 20px;
+                    padding-right: 0;
+                }
+                & .content {
+                    width: 282px;
+                    height: 188px;
+                }
+                & .item.p-left .content{
+                    float: right;
+                }
+            }
+        }
+        & .base-list {
+            width: 306px;
+            height: 490px;
+            & .content {
+                height: 190px;
+            }
+            & .item.p-top {
+                padding-top: 5px;
+            }
+        }
+    }
+    .home-page .layout-5 {
+        & .base-list {
+            height: 500px;
+        }
+        & .content {
+            height: 190px;
+        }
+    }
+}

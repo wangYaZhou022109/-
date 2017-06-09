@@ -74,6 +74,9 @@ view('layout') > .container
                 inner(contents '1')
                     .big-pic > a.normal(href=dataUrl) > .content
                         .img >  img(src=imageUrl style='height: 100%;')
+                        .bottom
+                            .title > echo(dataName)
+                            .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                 .base-list
                     .list-bar
                         compare(contents.length 'gt' 1)
@@ -129,7 +132,7 @@ view('layout') > .container
                         .img >  img(src=imageUrl)
                         .bottom
                             .title > echo(dataName)
-                            .descoration.sub-text.textoverflow > @echo(dataSummary)
+                            .descoration.sub-text.text-overflow > @echo(dataSummary)
                             .sub-text.small-font
                                 .icon-item > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                                 .icon-item > i.iconfont.icon-date(title='时间安排') + span
@@ -143,7 +146,7 @@ view('layout') > .container
                     .list-bar.big-width
                         compare(contents.length 'gt' 1)
                             inner(contents '2')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl) > .item.p-bottom > .content
                                     .img >  img(src=imageUrl)
                                     .bottom
                                         .title > echo(dataName)
@@ -158,7 +161,7 @@ view('layout') > .container
                                     .home-tag > .tag > span > map('home-data-type' dataType)
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl) > .item.p-top > .content
                                     .bottom
                                         .title > echo(dataName)
                                         .descoration.sub-text > @echo(dataSummary)
@@ -207,7 +210,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl) > .item.p-left > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -225,7 +228,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 4)
                             inner(contents '5')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl) > .item.p-top > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -244,12 +247,13 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 6)
                             inner(contents '7')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl) > .item.p-top > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
                                         .title > echo(dataName)
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
+
             else
                 .content-empty > .img-box.img-type-1 + p 暂无内容
     compare(moduleHomeConfig.style 'eq' 'layout-5')
