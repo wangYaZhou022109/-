@@ -37,6 +37,7 @@ exports.components = [function() {
             id: 'owner',
             name: 'picker',
             options: {
+                // module: this.module.renderOptions.url || 'exam/question-depot',
                 picker: 'owner',
                 required: true,
                 autoFill: true,
@@ -51,7 +52,7 @@ exports.components = [function() {
         },
         question = state.data,
         itemPool = this.bindings.itemPool.data;
-    if (question.organization) {
+    if (question.organization && !state.params.priority) {
         obj.options.data.id = question.organization.id;
         obj.options.data.text = question.organization.name;
     } else if (state.params.organization) {
@@ -76,7 +77,8 @@ exports.components = [function() {
                 params: {
                     operatorType: this.app.global.EDIT,
                     organizationId: params.organization && params.organization.id,
-                    state: 1
+                    state: 1,
+                    autoFill: true
                 },
                 data: {}
             }
@@ -84,21 +86,20 @@ exports.components = [function() {
         question = this.bindings.state.data,
         itemPool = this.bindings.itemPool.data;
 
+    //  修改时初始化
     if (question.questionDepot) {
         obj.options.data.id = question.questionDepot.id;
         obj.options.data.name = question.questionDepot.name;
+    //  从管理列表的左侧目录传入的参数
     } else if (params && params.questionDepot) {
         obj.options.data.id = params.questionDepot.id;
         obj.options.data.name = params.questionDepot.name;
-    }
-    if (!obj.options.params.organizationId && orgs.data.length > 0) {
+    //  当选择了别的部门，默认取部门对应目录的第一个
+    } else if (!obj.options.params.organizationId && orgs.data.length > 0) {
         obj.options.params.organizationId = getFirstNode(orgs.data).id;
     }
 
-    if (params.organization) {
-        obj.options.params.organizationId = params.organization.id;
-    }
-
+    //  是否入库
     if (itemPool.entryDepot) {
         return obj;
     }

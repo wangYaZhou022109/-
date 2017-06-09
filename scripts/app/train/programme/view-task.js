@@ -5,6 +5,7 @@ exports.bindings = {
     taskList: true,
     task: false,
     state: false,
+    files: false
 };
 
 exports.events = {
@@ -16,6 +17,7 @@ exports.handlers = {
     addTask: function() {
         this.bindings.state.data.type = 'add';
         this.bindings.task.clear();
+        this.bindings.files.clear();
         this.app.viewport.modal(this.module.items['edit-task']);
     },
     showMinimize: function(id) {

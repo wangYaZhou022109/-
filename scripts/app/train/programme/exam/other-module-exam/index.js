@@ -1,6 +1,6 @@
 var D = require('drizzlejs'),
-    PAPER_MODULE = 'train/programme/exam/exam-edit/steps/step-4',
-    REMOTE_COURSE_TYPE = 2;
+    REMOTE_COURSE_TYPE = 2,
+    strings = require('./app/util/strings');
 
 exports.title = function() {
     return this.renderOptions.id ? '修改考试' : '添加考试';
@@ -10,7 +10,7 @@ exports.large = true;
 
 exports.items = {
     main: 'main',
-    'train/programme/exam/exam-edit/steps/step-4': { isModule: true }
+    paper: 'paper'
 };
 
 exports.store = {
@@ -36,12 +36,13 @@ exports.store = {
                 me = this;
             D.assign(otherModuelExam.data, exam.data, payload);
             return this.save(otherModuelExam).then(function() {
-                me.app.message.success('保存成功！');
+                me.app.message.success(strings.get('save-success'));
             });
         },
         changeName: function(payload) {
+            var paper = this.module.items.paper.getEntities()[0];
             D.assign(this.models.exam.data, payload);
-            this.module.items[PAPER_MODULE].setData(payload);
+            paper.setData(payload);
         }
     }
 };
@@ -49,22 +50,13 @@ exports.store = {
 exports.beforeRender = function() {
     var exam = this.store.models.exam,
         otherModuelExam = this.store.models.otherModuelExam;
+
     exam.clear();
     otherModuelExam.clear();
 };
 
 exports.afterRender = function() {
-    var that = this,
-        exam = this.store.models.exam;
-
-    return this.store.module.dispatch('init', this.renderOptions).then(function() {
-        var paperItem = that.items[PAPER_MODULE];
-        that.regions.paper.show(paperItem, {
-            hidePaperShowRule: 1,
-            exam: exam.data.id ? exam.data : { paperShowRule: 1, paperSortRule: 1 },
-            url: that.renderOptions.url
-        });
-    });
+    return this.dispatch('init', this.renderOptions);
 };
 
 exports.buttons = [{
@@ -72,9 +64,10 @@ exports.buttons = [{
     fn: function(payload) {
         var that = this,
             callback = that.renderOptions.callback,
-            paperItem = this.items[PAPER_MODULE],
+            paperItem = this.items.paper.getEntities()[0],
             paperData = paperItem.getData(),
-            inputScore;
+            inputScore,
+            main = this.items.main;
 
         if (!payload.paperClassId) {
             that.app.message.error('请选择试卷');
@@ -85,22 +78,22 @@ exports.buttons = [{
 
         inputScore = 0;
 
-        if (that.items.main.validate() && that.items.main.check()) {
+        if (main.validate() && main.check()) {
             if (payload.paperClassId) {
                 inputScore = payload.passScore * 100;
                 if (inputScore > paperData.paperClass.totalScore) {
-                    that.app.message.error('及格分数不得大于试卷分数');
+                    this.app.message.error('及格分数不得大于试卷分数');
                     return false;
                 }
                 D.assign(payload, paperData, {
                     sourceType: that.renderOptions.sourceType || REMOTE_COURSE_TYPE
                 });
-                return that.store.module.dispatch('save', payload).then(function() {
-                    var examData = D.assign(that.store.models.otherModuelExam.data, payload, { isAdd: 1 });
+                return this.store.module.dispatch('save', payload).then(function() {
+                    var examData = D.assign(that.store.models.otherModuelExam.data, payload);
                     callback && callback(examData);
                 });
             }
-            that.app.message.error('请选择试卷');
+            this.app.message.error('请选择试卷');
         }
         return false;
     }

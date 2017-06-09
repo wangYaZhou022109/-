@@ -43,10 +43,10 @@ exports.store = {
             return this.get(leave);
         },
         search: function(payload) {
-            var leave = this.models.leave,
-                id = this.models.state.data.id;
+            var leave = this.models.leave;
+                // id = this.models.state.data.id;
             leave.params = payload;
-            leave.params.id = id;
+            leave.params.id = this.renderOptions.id;
             return this.get(leave);
         },
         refreshList: function(options) {
@@ -76,7 +76,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var data = this.store.models.state.data;
-    data.id = this.renderOptions.id;
+    // var data = this.store.models.state.data;
+    // data.id = this.renderOptions.id;
     this.dispatch('init', { id: this.renderOptions.id });
 };
