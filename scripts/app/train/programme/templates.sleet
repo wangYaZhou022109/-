@@ -184,8 +184,8 @@ view('config-online') > form.vertical
                 label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
                 input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
             td
-                i.iconfont.icon-sort-asc.color-warn(id='move-theme-up-'+id data-name='id' data-value=id)
-                i.iconfont.icon-sort-desc.color-pass(id='move-theme-down-'+id data-name='id' data-value=id)
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray(id='move-theme-up-'+id data-name='id' data-value=id)
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(id='move-theme-down-'+id data-name='id' data-value=id)
             td > a(id='del-theme-'+id data-name='id' data-value=id) 删除
     .add-topic.text-center.clearfix
         .line.relative.border.bottom
@@ -311,10 +311,10 @@ view('courseware')
                 td > map('class-file-type' fileType)
                 td
                     if(canPreview)
-                        a(href='javascript:;' id='preview-'+attachId) 预览
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(href='javascript:;' id='preview-'+attachId) 预览
                     else
-                        a(href=downUrl download=attachName) 下载
-                    a(id='del-courseware-'+id data-name='id' data-value=id) 删除
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(href=downUrl download=attachName) 下载
+                    i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-courseware-'+id data-name='id' data-value=id) 删除
 
 view('import')
     div > form(method='post' id='importCourse' target='_blank')
@@ -349,10 +349,10 @@ view('edit-task') > form.vertical
         .clearfix
             .form-row.pull-left.w-half.start-time.row-block.r-padding
                 label.label.required 开始时间
-                .content > input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
+                .content > input.input#startTime(name='startTime'  style='float:left' x-rule='required' value=dateTime(task.startTime))
             .form-row.pull-left.w-half.row-block
                 label.label.required 结束时间
-                .content > input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
+                .content > input.input#endTime(name='endTime'  style='float:left' x-rule='required' value=dateTime(task.endTime))
         .form-row
             .clearfix
                 label.label.required.pull-left 任务说明
@@ -382,7 +382,7 @@ view('edit-task') > form.vertical
                             if(canPreview)
                                 i.pointer.m-right.iconfont.icon-preview.custom-color-5(href='javascript:;' id='preview-attach-'+attachmentId)
                             else
-                                a(href=downUrl download=attachmentName) 下载
+                                a.i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(href=downUrl download=attachmentName)
                             i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-attach-'+id data-name='id' data-value=id)
         .form.layout-mt-small.align-left
             .form-choice
