@@ -198,8 +198,8 @@ exports.dataForTemplate = {
         return quotaList.data;
     },
     isGrant: function() {
-        var state = this.bindings.state.data;
-        if (state.role === 2 || state.role === 1) {
+        var role = this.module.renderOptions.state.role;
+        if (role === 2 || role === 1) {
             return true;
         }
         return false;

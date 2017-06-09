@@ -38,8 +38,9 @@ view('main')
                 .pull-right
                     span.small-font 该培训班总额度为：
                     span.small-font.text-main-color > echo(quotaInfo.amount)
-                    span.small-font 剩余额度为：
-                    span.small-font.text-main-color > echo(quotaInfo.overplus)
+                    compare(quotaInfo.type 'eq' 2)
+                        span.small-font 剩余额度为：
+                        span.small-font.text-main-color > echo(quotaInfo.overplus)
             .quota-toggle
                 compare(quotaInfo.type 'eq' 2)
                     #quota-contents-1
