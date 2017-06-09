@@ -7,9 +7,12 @@
         margin-left: auto;
         margin-right: auto;
     }
-    .dialog .container {
-        width: auto;
+    .page-main-wrapper .page-main .container {
+        margin: 0;
+        padding-right: var(--large-space);
+        width: 100%;
     }
+
     .course-list,
     .study-subject-list {
         & .img img { max-height: 140px;}
@@ -71,7 +74,7 @@
             & .descoration {
                 margin-bottom: 5px;
                 height: auto;
-                max-height: 100px;
+                max-height: 115px;
             }
         }
     }
