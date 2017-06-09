@@ -48,8 +48,8 @@
 
 /* layout */
 .container {
-    margin-left: calc(var(--large-space) * 2);
-    margin-right: calc(var(--large-space) * 2);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 section.section {
@@ -423,7 +423,7 @@ section.section {
     }
     & p {
         margin-top: 0;
-        font-size: 16px;
+        font-size: var(--font-size);
         color: var(--font-sub-color);
         text-align: center;
     }
@@ -442,7 +442,7 @@ section.section {
     & p {
         display: inline-block;
         margin: 0;
-        font-size: 16px;
+        font-size: var(--font-size);
         color: var(--font-sub-color);
         vertical-align: middle;
     }
@@ -458,4 +458,27 @@ section.section {
 
 .col-sm-3 {
     width: 23.99999%;
+}
+
+
+.loading {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+    & .icon-loading {
+    	display:inline-block;
+        margin-top: -2px;
+        margin-right: 10px;
+    	width:30px;
+    	height:30px;
+    	vertical-align:middle;
+    	background-size:cover;
+        background-image:url(../images/loading.gif);
+    }
 }

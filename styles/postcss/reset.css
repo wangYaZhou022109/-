@@ -13,7 +13,7 @@ html {
 }
 
 body, button, input, select, textarea {
-    font-family: PingFangSC-Light,'helvetica neue','hiragino sans gb',tahoma,'microsoft yahei ui','microsoft yahei',simsun,sans-serif;
+    font-family: 'microsoft yahei',PingFangSC-Light,'helvetica neue','hiragino sans gb',tahoma,'microsoft yahei ui',simsun,sans-serif;
     text-autospace: ideograph-alpha ideograph-numeric ideograph-parenthesis;
     outline: 0;
 }

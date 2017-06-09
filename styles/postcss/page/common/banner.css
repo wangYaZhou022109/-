@@ -6,6 +6,7 @@
     }
 
     &.home-banner {
+        background-color: var(--bg-color-3);
         & li {
             position: absolute;
             width: 100%;
