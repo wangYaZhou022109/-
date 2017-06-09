@@ -29,7 +29,7 @@ view('reportaudit') > form.vertical
             .small-font.pull-left.m-bottom.sub-title
                 span 举报类型:
                 span > map('ask-source-type' reportaudit.type)
-            .small-font.pull-right.m-bottom.sub-title > date(reportaudit.createTime)
+            .small-font.pull-right.m-bottom.sub-title > dateTime(reportaudit.createTime)
             input.input(name='id' type='hidden' value=reportaudit.id)
             input.input(name='questionId' type='hidden' value=reportaudit.question.id)
             input.input(name='objectId' type='hidden' value=reportaudit.objectId)
