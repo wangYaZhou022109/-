@@ -198,20 +198,20 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     var state = this.store.models.state;
-    if (this.renderOptions.state.data.topicId) {
-        $(window).scroll(function() {
-            var page = me.store.models.page.params.page;
-            var size = me.store.models.page.params.size;
-            if (page * size === me.store.models.page.data.length) {
-                me.store.models.page.params.page++;
-                me.dispatch('page');
-            }
-        });
-        state.data.topicId = this.renderOptions.state.data.topicId;
-        // console.log(this.renderOptions.state.data);
-        // console.log(this.renderOptions.state);
-        this.dispatch('set', this.renderOptions.callback);
-        this.dispatch('speech');
-        this.dispatch('page');
-    }
+    // if (this.renderOptions.state.data.topicId) {
+    $(window).scroll(function() {
+        var page = me.store.models.page.params.page;
+        var size = me.store.models.page.params.size;
+        if (page * size === me.store.models.page.data.length) {
+            me.store.models.page.params.page++;
+            me.dispatch('page');
+        }
+    });
+    state.data.topicId = this.renderOptions.state.data.topicId;
+    // console.log(this.renderOptions.state.data);
+    // console.log(this.renderOptions.state);
+    this.dispatch('set', this.renderOptions.callback);
+    this.dispatch('speech');
+    this.dispatch('page');
+    // }
 };

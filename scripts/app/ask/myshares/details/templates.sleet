@@ -37,7 +37,8 @@ view('main')
                     if(haveAttachments)
                         span.pull-left 附件：
                         i.iconfont.icon-image.pull-left.m-right
-                        a.normal(href="javascript") > each(details.questionAttachList) > echo(' '+ name)
+                        each(details.questionAttachList)
+                            a.normal(href=downUrl download=originalFile) > echo(' '+ originalFile)
     section.section
         form
             .h3 讨论区
