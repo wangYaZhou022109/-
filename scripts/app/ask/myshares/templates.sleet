@@ -66,6 +66,7 @@ view('list')
                                 compare(thumbnail.length 'gt' 0)
                                     img(src=thumbnail)
                                 @echo(content)
+
                             #  > echo(problem.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')

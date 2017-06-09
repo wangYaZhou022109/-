@@ -1,3 +1,4 @@
+/*
 :root {
     --font-size: 1em;
     --font-title: 1.2em;
@@ -18,7 +19,25 @@
     --subject-banner-height: 22em;
     --min-width: 1000px;
 }
+*/
+:root {
+    --font-size: 12px;
+    --font-title: 14px;
+    --small-font: 12px;
+    --h4: 14px;
+    --h3: 16px;
+    --h2: 18px;
+    --h1: 22px;
 
+    --space: 10px;
+    --large-space: 30px;
+    --base-gap: 50px;
+    --nav-height: 50px;
+    --section-gap: 50px;
+    --input-height: 35px;
+    --banner-height: 400px;
+    --subject-banner-height: 330px;
+}
 h1,.h1 {
     font-size: var(--h1);
 }

@@ -28,6 +28,7 @@ view('list')
                     .drop-down-content > .content
                         ul > each(companyTypes)
                             li(id = 'companyType-'+key) > echo(value)
+        # .loading > .icon-loading + | 我们正在拼命加载中...
         ul
             each(courses)
                 li > .content
