@@ -39,6 +39,7 @@
             border: 1px solid #dedede;
             border-top: none;
             background: white;
+            min-height: var(--large-space);
 
             & .item {
                 font-size: var(--small-font);

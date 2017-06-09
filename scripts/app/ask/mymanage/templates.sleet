@@ -31,7 +31,7 @@ view('reviewed')
                         .pull-right
                             .sub-text.small-font
                                 span.m-right > echo('提交人：') + echo(member.fullName)
-                                span > echo('提交时间: ') + date(createTime)
+                                span > echo('提交时间: ') + dateTime(createTime)
                         .title-row
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
                             .inline-block.custom-bg-color-2.padding-s.small-font > map('ask-audit-status' auditStatus)
@@ -53,7 +53,7 @@ view('reviewed')
                         .pull-right
                             .sub-text.small-font
                                 span.m-right > echo('审核人：') + echo(auditor)
-                                span > echo('审核时间: ') + date(auditTime)
+                                span > echo('审核时间: ') + dateTime(auditTime)
                         .title-row
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
                             .inline-block.custom-bg-color-4.padding-s.small-font > map('ask-audit-status' auditStatus)
@@ -75,7 +75,7 @@ view('reviewed')
                         .pull-right
                             .sub-text.small-font
                                 span.m-right > echo('审核人：') + echo(auditor)
-                                span > echo('审核时间: ') + date(auditTime)
+                                span > echo('审核时间: ') + dateTime(auditTime)
                         .title-row
                             .inline-block > echo('【') + map('ask-audit-type' auditType) + echo('】 ')
                             .inline-block.danger-color.padding-s.small-font > map('ask-audit-status' auditStatus)

@@ -1,0 +1,16 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .default-cover
+        img(src=downUrl)
+        input#headImageId( type='hidden' name=state.inputName value=fileId)
+        .btn.block.white#select > echo(btnName)
+
+view('upload')
+    div(id='uploader' style='width:750px;height:450px')
+        div(id=state.cropperId)
+            h1 AvatarUpload
+            p > a(href="http://www.adobe.com/go/getflashplayer") 请安装 Adobe Flash player

@@ -171,6 +171,7 @@
 }
 .subject-banner {
     height: var(--subject-banner-height);
+    background-color: var(--bg-color-3);
 
     & img {
         display: block;
