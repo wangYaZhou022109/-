@@ -2,7 +2,7 @@
 .banner-notice {
     position: absolute;
     width: 18em;
-    top: 14em;
+    top: var(--large-space);
     right: var(--section-gap);
     background: white;
     font-size: var(--small-font);
@@ -27,9 +27,7 @@
 
     & li {
         @apply --text-overflow;
-
         padding: var(--space) var(--large-space);
-        margin-top: calc(var(--space) / 2);
 
     }
 

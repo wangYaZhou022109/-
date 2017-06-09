@@ -60,7 +60,10 @@ view('shortcut')
                             else
                                 li(id='org-'+id) > echo(name)
             .item.drop-down-wrapper.right
-                a#message-div.normal(href='#')(title=msgCount)&if(msgCount) > i.iconfont.icon-message.drop-down-btn
+                a#message-div.normal.msg(href='#')
+                    if(msgCount)
+                        span.tip-num > echo(msgCount)
+                    i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content
                     compare(message.recordCount 'gt' 0)
                         ul.message-list > each(message.items)
