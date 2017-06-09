@@ -60,6 +60,8 @@ exports.showShare = function(id, type) {
         webUrl += '/#/exam/index/' + id;
     } else if (type === '8') { // 专题
         webUrl += '/#/study/subject/detail/' + id;
+    } else if (type === '9') { // 直播
+        webUrl += '/#/activity/gensee/detail/' + id;
     } else if (type === '10') { // 问题
         webUrl += '/#//' + id;
     } else if (type === '11') { // 讨论

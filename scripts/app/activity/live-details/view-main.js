@@ -1,5 +1,6 @@
 var _ = require('lodash/collection');
-var $ = require('jquery');
+var $ = require('jquery'),
+    GENSEE_SHARE_TYPE = 9;
 
 exports.bindings = {
     gensee: true,
@@ -29,8 +30,8 @@ exports.components = [function() { // 分享组件
         gensee = this.bindings.gensee.data;
     if (gensee) {
         data.id = gensee.id;
-        data.type = 5;
-        data.pics = gensee.cover ? gensee.cover : 'images/default-cover/default_course.jpg';
+        data.type = GENSEE_SHARE_TYPE;
+        data.pics = gensee.cover ? gensee.cover : 'images/default-cover/default_live.jpg';
         data.title = gensee.subject;
     }
     return {
