@@ -20,8 +20,7 @@ module > .course-detail-page
             section.section(data-region='comment')
 
 view('player')
-    div(data-dynamic-key=playerState.sectionId)
-
+    div#container(data-dynamic-key=playerState.sectionId)
 view('chapter')
     .toggle-catalog#toggle-catalog > i.iconfont.icon-arrow-left.left + i.iconfont.icon-arrow-right.right
     .chapter-main
@@ -126,3 +125,10 @@ view('preview-audio') > div(style='padding: 20px 0px;')
         source(src=url type="audio/mp3")
 view('preview-img')
     img(src=url style='max-height:34em')
+
+view('preview-scrom')
+    .content-wrapper.clearfix
+        .content-left(data-region='left')
+            #tree
+        .content-main(data-region='content')
+            iframe#frame(width='100%' height='100%' frameborder='no' border='0' marginwidth='0' marginheight='0' scrolling='yes' allowtransparency='yes')
