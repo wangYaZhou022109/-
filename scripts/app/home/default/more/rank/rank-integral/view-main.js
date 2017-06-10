@@ -1,27 +1,31 @@
+var _ = require('lodash/collection');
 exports.bindings = {
-    rank: true
+    integralRank: true,
+    myRankCount: true
 };
+
 exports.dataForTemplate = {
     rankModule: function(data) {
         var rankModule = data.moduleHomeConfig || {};
         rankModule = this.module.renderOptions.rankModule;
         return rankModule;
-    }
+    },
+    integralRank: function(data) {
+        _.map(data.integralRank || [], function(integralRank, i) {
+            var r = integralRank;
+            r.i = i + 1;
+        });
+        return data.integralRank;
+    },
 };
 
 exports.events = {
-    'click more-*': 'more',
     'click details-*': 'detail'
 };
 
 exports.handlers = {
-    more: function() {
-        // this.app.navigate('home/more/rank-topic/' + payload, true);
-        var mod = this.module.items['home/default/more/rank/rank-question'],
-            me = this;
-        me.app.viewport.modal(mod, { data: this.module.renderOptions.rankModule });
-    },
     detail: function(id) {
+        this.app.viewport.closeModal();
         window.location.href = '#/ask/questiondetails/' + id;
     }
 };

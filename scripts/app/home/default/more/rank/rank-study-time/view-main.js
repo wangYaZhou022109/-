@@ -1,6 +1,7 @@
 var _ = require('lodash/collection');
 exports.bindings = {
-    studyRank: true
+    studyRank: true,
+    myRankCount: true
 };
 exports.dataForTemplate = {
     rankModule: function(data) {
@@ -10,7 +11,7 @@ exports.dataForTemplate = {
     },
     studyRank: function(data) {
         var studyRank = data.studyRank;
-        _.map(studyRank, function(rank) {
+        _.map(studyRank, function(rank, i) {
             var r = rank,
                 time = '',
                 second = 0, // 秒
@@ -36,25 +37,25 @@ exports.dataForTemplate = {
                 time = hour + '小时' + time;
             }
             r.time = time;
+
+            // if (this.app.global.currentUser.id) {
+            //     if (r.memberId === this.app.global.currentUser.id) {
+            //         // me.bindings.ranking = '';
+            //     }
+            // }
+            r.i = i + 1;
         });
         return studyRank;
     }
 };
 
 exports.events = {
-    'click more-*': 'more',
-    'click detail-*': 'showDetails'
+    'click details-*': 'detail'
 };
 
 exports.handlers = {
-    more: function() {
-        // this.app.navigate('home/more/rank-topic/' + payload, true);
-        var mod = this.module.items['home/default/more/rank/rank-study-time'],
-            me = this;
-        me.app.viewport.modal(mod, { rankModule: this.module.renderOptions.rankModule });
-    },
-    showDetails: function(payload) {
-        window.location.href = '#/ask/topicdetail/' + payload;
-        // this.app.show('content', 'ask/mymanage/topicdetail', { id: payload });
+    detail: function(id) {
+        this.app.viewport.closeModal();
+        window.location.href = '#/ask/questiondetails/' + id;
     }
 };

@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'home/default/more/rank/rank-topic': { isModule: true }
 };
 exports.store = {
     models: {
