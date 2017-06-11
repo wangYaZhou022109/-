@@ -1,7 +1,10 @@
-var D = require('drizzlejs');
+var D = require('drizzlejs'),
+    _ = require('lodash/collection');
+
 exports.items = {
     main: 'main',
-    filter: 'filter'
+    filter: 'filter',
+    tips: ''
 };
 
 exports.store = {
@@ -19,7 +22,8 @@ exports.store = {
             }
         },
         signUp: { url: '../exam/sign-up' },
-        validateExam: { url: '../exam/exam/validate-exam' }
+        validateExam: { url: '../exam/exam/validate-exam' },
+        examRecord: { url: '../exam/exam/user-record' }
     },
     callbacks: {
         init: function() {
@@ -49,6 +53,16 @@ exports.store = {
         validateExam: function(payload) {
             D.assign(this.models.validateExam.params, payload);
             return this.get(this.models.validateExam);
+        },
+        getExamRecordByExamId: function(payload) {
+            var exam = _.find(this.models.exams.data, function(e) {
+                    return e.examRecord.id === payload.examRecordId;
+                }),
+                me = this;
+            this.models.examRecord.set({ id: exam.id });
+            return this.get(this.models.examRecord).then(function() {
+                return me.models.examRecord.data.examRecord || {};
+            });
         }
     }
 };
