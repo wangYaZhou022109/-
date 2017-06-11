@@ -10,18 +10,17 @@ exports.dataForTemplate = {
 };
 
 exports.events = {
-    'click more-*': 'more',
-    'click details-*': 'detail'
+    'click details-*': 'detail',
+    'click rankClose': 'rankClose'
 };
 
 exports.handlers = {
-    more: function() {
-        // this.app.navigate('home/more/rank-topic/' + payload, true);
-        var mod = this.module.items['home/default/more/rank/rank-question'],
-            me = this;
-        me.app.viewport.modal(mod, { data: this.module.renderOptions.rankModule });
-    },
     detail: function(id) {
+        this.app.viewport.closeModal();
         window.location.href = '#/ask/questiondetails/' + id;
+    },
+    rankClose: function() {
+        this.app.viewport.closeModal();
+        window.location.href = '#/ask/index';
     }
 };

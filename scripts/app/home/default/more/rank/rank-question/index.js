@@ -6,21 +6,21 @@ exports.title = function() {
 };
 exports.store = {
     models: {
-        topicRank: { url: '../system/topic/rank-watch' }
+        rank: { url: '../ask-bar/question/homeBrowseRanking' }
     },
     callbacks: {
         init: function(payload) {
-            var topicRank = this.models.topicRank;
-            topicRank.clear();
-            topicRank.params.size = 30;
+            var rank = this.models.rank;
+            rank.clear();
+            rank.params.size = 30;
             if (this.app.global.currentUser.id) {
                 if (payload.dataSource !== '' && (payload.dataSource === '1' || payload.dataSource === 1)) {
-                    topicRank.params.organizationId = this.app.global.currentUser.organization.id;
+                    rank.params.organizationId = this.app.global.currentUser.organization.id;
                 } else {
-                    topicRank.params.organizationId = this.app.global.currentUser.rootOrganization.id;
+                    rank.params.organizationId = this.app.global.currentUser.rootOrganization.id;
                 }
             }
-            return this.get(topicRank);
+            return this.get(rank);
         }
     }
 };

@@ -9,7 +9,7 @@ view('main')
             .home-title-row.horizontail.border
                 .title > echo(rankModule.name)
                 compare(topicRank.length 'eq' 10)
-                    .more(id='more-'+rankModule.name) more
+                    .more(id='more-'+rankModule.id) more
             .title-more
                 span.sub-title 浏览人数排行榜
 
