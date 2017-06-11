@@ -50,7 +50,7 @@ exports.components = [function() {
     if (research) {
         data.id = research.id;
         data.type = RESEARCH_TYPE;
-        data.pics = research.coverId;
+        data.pics = research.coverId ? research.coverId : 'images/default-cover/default_survey.jpg';
         data.title = research.name;
     }
     return {

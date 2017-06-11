@@ -47,13 +47,15 @@ exports.components = [function() {
                         operatorType: me.app.global.EDIT,
                         state: 1,
                         organizationId: payload.id,
-                        share: true
+                        share: true,
+                        autoFill: true
                     });
                 }
             }
         };
     return obj;
 }, function() {
+    var me = this;
     var obj = {
         id: 'question-depot',
         name: 'picker',
@@ -66,7 +68,11 @@ exports.components = [function() {
                 state: 1,
                 share: false
             },
-            data: {}
+            data: {},
+            canShowModal: function() {
+                return me.components.owner.getValue();
+            },
+            errorMsg: '请先选择部门'
         }
     };
     // if (orgs.data.length > 0) {

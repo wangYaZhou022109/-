@@ -1,7 +1,9 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 
 exports.bindings = {
-    setting: true
+    setting: true,
+    tactics: false
 };
 
 
@@ -36,22 +38,30 @@ exports.handlers = {
 
 exports.dataForTemplate = {
     summary: function(data) {
-        var obj = {
-            totalAmount: _.reduce(_.map(_.flatMap(data.setting, function(s) {
-                return s.diffcults;
-            }), function(d) {
-                return (d.usedAmount && Number(d.usedAmount)) || 0;
-            }), function(sum, n) {
-                return sum + n;
-            }, 0),
-            totalScore: _.reduce(_.map(_.flatMap(data.setting, function(s) {
-                return s.diffcults;
-            }), function(d) {
-                return (d.totalScore && Number(d.totalScore)) || 0;
-            }), function(sum, n) {
-                return sum + n;
-            }, 0),
-        };
+        var obj = {};
+        if (data.tactics && data.tactics.length > 0) {
+            obj = {
+                totalAmount: _.reduce(_.map(data.tactics, function(t) {
+                    return (t.amount && Number(t.amount)) || 0;
+                }), function(sum, n) {
+                    return sum + n;
+                }, 0),
+                totalScore: _.reduce(_.map(data.tactics, function(t) {
+                    return (t.score && (Number(t.score) * t.amount)) || 0;
+                }), function(sum, n) {
+                    return sum + n;
+                }, 0) / 100,
+            };
+        }
         return obj;
+    },
+    setting: function(data) {
+        return _.map(data.setting, function(s) {
+            return D.assign(s, {
+                diffcults: _.map(s.diffcults, function(d) {
+                    return D.assign(d, { totalScore: d.totalScore / 100 });
+                })
+            });
+        });
     }
 };

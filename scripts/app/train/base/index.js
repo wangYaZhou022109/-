@@ -15,7 +15,8 @@ exports.store = {
         classroomList: { url: '../train/config-classroom/findList', params: { type: 6 }, autoLoad: 'after' },
         quota: { url: '../train/class-quota/init' },
         trainTypes: { url: '../train/configuration-value', autoLoad: 'after', params: { typeId: '10' } },
-        state: { data: {} }
+        state: { data: {} },
+        classTypes: { url: '../train/configuration-value', autoLoad: 'after', params: { typeId: '5' } }
     },
     callbacks: {
         init: function(payload) {

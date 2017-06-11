@@ -56,16 +56,24 @@ exports.store = {
                 quota = this.models.quota;
             quotaInfo.data.type = payload.type;
             quota.data = quotaInfo.data;
-            this.save(quota).then(function() {
-                quotaInfo.changed();
-            });
+            quota.changed();
+            quotaInfo.changed();
+            // this.save(quota).then(function() {
+            //     quotaInfo.changed();
+            // });
         },
         changeApproval: function(payload) {
             var quotaInfo = this.models.quotaInfo,
                 quota = this.models.quota;
             quotaInfo.data.isAutoApprove = payload.isAutoApprove;
             quota.data = quotaInfo.data;
-            this.save(quota);
+            this.save(quota).then(function() {
+                quotaInfo.changed();
+                // quotaInfo.set({ classId: me.models.state.data.id });
+                // quotaList.set({ classId: me.models.state.data.id });
+                // me.get(quotaInfo);
+                // me.get(quotaList);
+            });
         },
         showGroup: function() {
             var groupList = this.models.groupList,

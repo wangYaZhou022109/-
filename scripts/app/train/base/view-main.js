@@ -9,7 +9,8 @@ exports.bindings = {
     down: false,
     state: true,
     classroomList: true,
-    trainTypes: true
+    trainTypes: true,
+    classTypes: true
 };
 
 exports.events = {
@@ -28,11 +29,12 @@ exports.handlers = {
         this.app.viewport.modal(view);
     },
     changePhotoType: function(data) {
-        var d = data;
+        var d = data,
+            state = this.bindings.state.data;
         if (d === '1') {
-            $(this.$('photoTime')).removeClass('hide').addClass('show');
+            state.needGroupPhotoCheck = true;
         } else {
-            $(this.$('photoTime')).removeClass('show').addClass('hide');
+            state.needGroupPhotoCheck = false;
         }
     },
     changeNeedVideo: function(data) {
@@ -45,11 +47,12 @@ exports.handlers = {
         }
     },
     changeMakeCourse: function(data) {
-        var d = data;
+        var d = data,
+            state = this.bindings.state.data;
         if (d === '1') {
-            $(this.$('courseVideoRequirement')).removeClass('hide').addClass('show');
+            state.needMakeCourseCheck = true;
         } else {
-            $(this.$('courseVideoRequirement')).removeClass('show').addClass('hide');
+            state.needMakeCourseCheck = false;
         }
     },
     uploadBanner: function() {
@@ -75,14 +78,6 @@ exports.handlers = {
         classInfo.classRoom.classRoom = this.$('classRoom').value;
         state.type = 'banner';
         this.app.viewport.modal(view);
-    },
-    showHeyingInput: function() {
-        $(this.$('photoTime')).show();
-    },
-    showZhizuoInput: function() {
-        var state = this.bindings.state.data;
-        state.needMakeCourseCheck = true;
-        this.bindings.state.changed();
     }
 };
 
@@ -147,8 +142,8 @@ exports.dataForTemplate = {
         }
         state.downUrl = url;
         state.bannerUrl = bannerUrl;
-        state.needGroupPhotoCheck = !(classInfo.classDetail.needGroupPhoto === 1);
-        state.needMakeCourseCheck = !(classInfo.classDetail.needMakeCourse === 1);
+        state.needGroupPhotoCheck = classInfo.classDetail.needGroupPhoto === 1;
+        state.needMakeCourseCheck = classInfo.classDetail.needMakeCourse === 1;
         return state;
     },
     classroomList: function(data) {
@@ -199,7 +194,7 @@ exports.dataForTemplate = {
     trainTypes: function(data) {
         var tableTypes = data.trainTypes,
             classTableType = data.classInfo.classDetail.tableType;
-        _.map(tableTypes.data, function(t) {
+        _.map(tableTypes, function(t) {
             var a = t;
             if (classTableType === a.id) {
                 a.selected = true;
@@ -209,6 +204,20 @@ exports.dataForTemplate = {
             return a;
         });
         return tableTypes;
+    },
+    classTypes: function(data) {
+        var classTypes = data.classTypes,
+            classInfoType = data.classInfo.classInfoType;
+        _.map(classTypes, function(t) {
+            var c = t;
+            if (classInfoType === c.id) {
+                c.selected = true;
+            } else {
+                c.selected = false;
+            }
+            return c;
+        });
+        return classTypes;
     }
 };
 

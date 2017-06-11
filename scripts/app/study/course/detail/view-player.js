@@ -1,7 +1,9 @@
+var $ = require('jquery');
 var sectionCode = {
     1: 'pdf',
     2: 'image',
     3: 'url',
+    4: 'scorm',
     5: 'audio-new',
     6: 'video',
     7: 'epub',
@@ -57,4 +59,23 @@ exports.dataForEntityModule = function(entity) {
             return me.module.dispatch('updateProgress');
         }
     };
+};
+
+exports.events = {
+    'click fullScream': 'fullScream'
+};
+exports.handlers = {
+    fullScream: function() {
+        var container = $('.player-content')[0];
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+            container.mozRequestFullScreen();
+        } else if (container.webkitRequestFullscreen) {
+            $(container).css('height', '100%');
+            container.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (container.msRequestFullscreen) {
+            container.msRequestFullscreen();
+        }
+    }
 };

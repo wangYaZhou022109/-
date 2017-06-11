@@ -119,6 +119,10 @@ exports.actions = {
 
 exports.dataForActions = {
     saveTask: function(payload) {
+        if (payload.memberIds === '') {
+            this.app.message.error('审核人为必填项！');
+            return false;
+        }
         return this.validate() ? payload : false;
     },
     delTaskAttach: function(payload) {

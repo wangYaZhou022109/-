@@ -9,7 +9,7 @@ view('main')
             .home-title-row.horizontail.border
                 .title > echo(rankModule.name)
                 compare(studyRank.length 'eq' 10)
-                    .more more
+                    .more(id='more-'+rankModule.id) more
             .title-more
                 span.sub-title 学员榜
 

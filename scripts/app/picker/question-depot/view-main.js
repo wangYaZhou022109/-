@@ -10,6 +10,19 @@ exports.events = {
 
 exports.handlers = {
     showDepotTree: function() {
-        this.app.viewport.modal(this.module.items.modal);
+        var canShowModal = this.module.renderOptions.canShowModal;
+        if (canShowModal) {
+            canShowModal() ? this.app.viewport.modal(this.module.items.modal)
+                : this.app.message.error(this.module.renderOptions.errorMsg);
+        } else {
+            this.app.viewport.modal(this.module.items.modal);
+        }
+    }
+};
+
+exports.dataForTemplate = {
+    state: function(payload) {
+        var data = payload.state;
+        return data;
     }
 };
