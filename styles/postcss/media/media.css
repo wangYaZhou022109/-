@@ -1,3 +1,4 @@
+/*
 @import "media-1136.css" (max-width: 1137px);
 @import "media-960.css" (max-width: 961px);
 @import "media-1600.css" (min-width: 1599px);
@@ -18,4 +19,11 @@
         margin-right: auto;
         max-width: 1800px;
     }
+}
+*/
+@import "media-1024.css";
+@import "media-1366.css";
+
+html,body {
+    font-size: 12px;
 }

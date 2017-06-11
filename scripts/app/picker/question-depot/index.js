@@ -27,7 +27,6 @@ exports.store = {
                 }
             }
         },
-        shareAndPublic: { url: '../exam/question-depot/share-public' }, //  上级允许下级的目录，和 所有公开的
         state: {}
     },
 
@@ -39,21 +38,42 @@ exports.store = {
 
             if (payload.data) D.assign(state.data, payload.data);
 
+            //  根据组织ID查询对应目录
             if (payload.params && payload.params.organizationId) {
                 D.assign(list.params, payload.params);
+                //  是否开关允许下级部门的目录或者公开的目录
                 if (payload.params.share) {
                     D.assign(list.params, { share: 1 });
                     return this.get(list).then(function() {
+                        var node = getFirstNode(list.data);
+                        //  场景：选择试题选择器，选择部门后出发刷新目录，默认选择第一个
+                        if (payload.params.autoFill) {
+                            D.assign(state.data, {
+                                id: node.id,
+                                text: node.text
+                            });
+                        }
                         me.models.state.changed();
                     });
                 }
+                //  场景： 新增试题目录
+                D.assign(list.params, { share: null });
                 return this.get(list).then(function() {
-                    var nodes = me.models.list.data,
+                    var nodes = list.data,
                         node = getFirstNode(nodes);
-                    D.assign(me.models.state.data, {
-                        id: node.id,
-                        text: node.text
-                    });
+                    //  判断是否默认选中值
+                    if (state.data.text && payload.params.autoFill) {
+                        D.assign(state.data, {
+                            id: payload.data.id,
+                            text: payload.data.text
+                        });
+                    } else if ((!state.data.text || state.data.text !== node.text)
+                        && payload.params.autoFill) {
+                        D.assign(state.data, {
+                            id: node.id,
+                            text: node.text
+                        });
+                    }
                     me.models.state.changed();
                 });
             }
@@ -74,6 +94,12 @@ exports.store = {
             this.models.state.data.id = '';
             this.models.state.data.text = '';
             this.models.state.changed();
+        },
+        clearPicker: function() {
+            var state = this.models.state;
+            state.data.id = '';
+            state.data.text = '';
+            state.changed();
         }
     }
 };

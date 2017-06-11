@@ -18,7 +18,7 @@ exports.dataForTemplate = {
             info.cover = info.cover ? (downUrl + '?id=' + info.cover) : defultImg;
             if (info.avgScore) {
                 scorePercent = info.avgScore;
-                avgScore = (scorePercent / 10).toFixed(1);
+                avgScore = scorePercent / 10;
             }
             info.avgScore = avgScore;
         });

@@ -18,6 +18,8 @@
 
         & .pull-left {
             width: 70%;
+            height: 22px;
+            overflow: hidden;
         }
         & .pull-right {
             width: 30%;

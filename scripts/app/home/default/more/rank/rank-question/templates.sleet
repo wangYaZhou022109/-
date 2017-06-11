@@ -1,0 +1,13 @@
+#! handlebars
+module
+    .rank-list(data-region='main')
+
+view('main')
+    if(rank)
+        ul.list-text > each(rank)
+            li.border.bottom(title=title id='details-'+id)
+                .title > echo(title)
+                .data > echo(browseNum)
+    p.text-center.m-top
+        a(id='rankClose') 进入问吧
+

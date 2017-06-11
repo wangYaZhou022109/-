@@ -1,13 +1,15 @@
 exports.items = {
     main: 'main'
 };
+exports.title = function() {
+    return this.renderOptions.data.name;
+};
 exports.store = {
     models: {
         topicRank: { url: '../system/topic/rank-watch' }
     },
     callbacks: {
         init: function(payload) {
-            // debugger;
             var topicRank = this.models.topicRank;
             topicRank.clear();
             topicRank.params.size = 30;
@@ -23,6 +25,5 @@ exports.store = {
     }
 };
 exports.afterRender = function() {
-    // debugger;
-    this.dispatch('init', this.renderOptions);
+    this.dispatch('init', this.renderOptions.data);
 };

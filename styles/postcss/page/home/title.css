@@ -100,7 +100,7 @@
 .home-title-row {
     margin-bottom: calc(var(--space) * 2);
     & .title {
-        font-size: 2em;
+        font-size: var(--h1);
         display: inline-block;
         vertical-align: bottom;
     }

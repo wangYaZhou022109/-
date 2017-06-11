@@ -1,6 +1,7 @@
 var $ = require('jquery'),
     markers = require('./app/ext/views/form/markers'),
-    validators = require('./app/ext/views/form/validators');
+    validators = require('./app/ext/views/form/validators'),
+    D = require('drizzlejs');
 var trim = function(str) {
     return str.replace(/^\s+|\s+$/g, '');
 };
@@ -28,13 +29,29 @@ exports.actions = {
 
 exports.dataForActions = {
     saveTactic: function(data) {
-        return this.validate() ? data : false;
+        return this.validate()
+            ? D.assign(data, { score: data.score * 100 }) : false;
     }
 };
 
 exports.actionCallbacks = {
     saveTactic: function() {
+        this.app.message.success('操作成功');
         $(this.$('setting-popup')).removeClass('show');
+    }
+};
+
+exports.dataForTemplate = {
+    popupCurrent: function(data) {
+        var popupCurrent = data.popupCurrent;
+        if (popupCurrent.tactic) {
+            return D.assign(popupCurrent, {
+                tactic: D.assign(popupCurrent.tactic, {
+                    score: popupCurrent.tactic.score / 100
+                })
+            });
+        }
+        return popupCurrent;
     }
 };
 
@@ -43,6 +60,7 @@ exports.afterRender = function() {
         $(this.$('setting-popup')).addClass('show');
     }
 };
+
 
 exports.mixin = {
     interval: {

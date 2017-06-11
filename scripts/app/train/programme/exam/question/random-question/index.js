@@ -92,7 +92,7 @@ exports.store = {
                                     title: d.value + '难度',
                                     useableAmount: questions.useableAmount(qt.key, d.key),
                                     usedAmount: used && used.amount,
-                                    totalScore: used && used.score,
+                                    totalScore: used && (used.amount * used.score).toFixed(1),
                                     orgId: organizationId,
                                     depotId: questionDepotId,
                                     show: questions.useableAmount(qt.key, d.key) > 0,
@@ -276,7 +276,7 @@ exports.store = {
             }
             D.assign(tacticsForm.data, {
                 name: this.module.renderOptions.name,
-                totalScore: tactics.totalScore(),
+                totalScore: (tactics.totalScore() * 100).toFixed(0),
                 questionNum: tactics.totalAmount(),
                 paperClassTactics: JSON.stringify(tactics.data)
             });

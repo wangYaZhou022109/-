@@ -5,8 +5,8 @@ module > section.section(data-region='lecturer')
 view('lecturer') > .container
     .home-title-row
         .title > echo(moduleHomeConfig.name)
-        compare(lecturers.length 'eq' 6)
-            .more more
+        #  compare(lecturers.length 'eq' 6)
+        #      .more more
     .lecture-list
         if(lecturers)
             ul > each(lecturers)
