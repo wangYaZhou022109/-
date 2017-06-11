@@ -121,8 +121,8 @@ view('relative-courses')
                             .bottom
                                 .item
                                     i.iconfont.icon-view
-                                    if(studyMemberCount)
-                                        echo(studyMemberCount)
+                                    if(visits)
+                                        echo(visits)
                                     else
                                         echo(0)
                                 .item
