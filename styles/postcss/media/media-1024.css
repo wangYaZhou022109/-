@@ -11,14 +11,21 @@
         margin-left: auto;
         margin-right: auto;
     }
-    .page-main-wrapper .page-main .container {
-        margin: 0;
-        padding-right: var(--large-space);
-        width: 100%;
+    .page-main-wrapper {
+        & .page-main .container {
+            margin: 0;
+            padding-right: var(--large-space);
+            width: 100%;
+        }
+        & .page-side .container {
+            width: auto;
+        }
     }
     .dialog .container {
         width: auto;
     }
+
+
     .course-list,
     .study-subject-list {
         & .img img { max-height: 114px;}
