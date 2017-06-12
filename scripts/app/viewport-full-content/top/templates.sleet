@@ -48,7 +48,11 @@ view('shortcut')
         if(Global.currentUser.id)
             .item.small-font.drop-down-wrapper.right
                 .drop-down-btn
-                    span#selected-name > echo(organization.name)
+                    span#selected-name
+                        if(organization.shortName)
+                            echo(organization.shortName)
+                        else
+                            echo(organization.name)
                     i.iconfont.icon-triangle-down
                 .drop-down-content > .content
                     ul
