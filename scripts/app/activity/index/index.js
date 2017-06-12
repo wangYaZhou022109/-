@@ -116,6 +116,7 @@ exports.store = {
 
             gensees.clear();
             researchActivitys.clear();
+            exams.clear();
             D.assign(gensees.params, payload);
             D.assign(exams.params, payload);
             D.assign(researchActivitys.params, payload);
