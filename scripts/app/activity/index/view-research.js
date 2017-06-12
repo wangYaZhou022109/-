@@ -17,9 +17,10 @@ exports.handlers = {
     showResearchIndex: function(id) {
         var url = 'exam/research-activity/index/' + id,
             me = this;
-        return this.module.dispatch('getResearchById', { id: id }).then(function() {
-            me.app.navigate(url, true);
-        });
+        // return this.module.dispatch('getResearchById', { id: id }).then(function() {
+        //     me.app.navigate(url, true);
+        // });
+        return me.app.navigate(url, true);
     }
 };
 
@@ -54,10 +55,20 @@ toArray = function(objs, pageSize) {
     }
     return [];
 };
-exports.components = [{
-    id: 'swiper-5',
-    name: 'swiper',
-    options: {
-        slider: true
-    }
+exports.components = [function() {
+    var me = this,
+        obj = {
+            id: 'swiper-5',
+            name: 'swiper',
+            options: {
+                slider: true,
+                translateLeft: function() {
+                    return me.module.dispatch('turnToModelPage', { model: 'researchActivitys', dir: 'prev' });
+                },
+                translateRight: function() {
+                    return me.module.dispatch('turnToModelPage', { model: 'researchActivitys', dir: 'next' });
+                }
+            }
+        };
+    return obj;
 }];

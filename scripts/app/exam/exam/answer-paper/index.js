@@ -158,10 +158,10 @@ var setOptions = {
                     answeredCount: function() {
                         return _.filter(this.data, function(a) {
                             var readingQuetion = !_.every(a.value, function(sub) {
-                                    return sub.value.length === 0
+                                    return D.isArray(sub.value) && (sub.value.length === 0
                                         || _.every(sub.value, function(sv) {
                                             return !sv.value;
-                                        });
+                                        }));
                                 }),
                                 otherQuestion = (a.value.length > 0 && _.some(a.value, function(v) {
                                     return v.value !== '';
@@ -234,9 +234,9 @@ var setOptions = {
                             if (exam0.id !== payload.examId) return true;
 
                             //  最后保存时间不同
-                            if (!exam0.lastCacheTime || (exam0.lastCacheTime
+                            if (exam0.lastCacheTime
                                 && examRecord0
-                                && exam0.lastCacheTime !== examRecord0.lastCacheTime)) {
+                                && exam0.lastCacheTime !== examRecord0.lastCacheTime) {
                                 return true;
                             }
 
@@ -282,15 +282,15 @@ var setOptions = {
                 this.models.answer.saveAnswer(payload);
                 this.models.modify.saveAnswer(payload);
                 this.models.state.calculate();
-                if (this.models.state.data.singleMode) {
+                if (me.models.state.data.singleMode) {
                     //  是否需要保存答案后移动到下一题
                     if (types.isNeedMoveAfterSave(payload.key)) {
-                        setTimeout(function() {
-                            me.module.dispatch('move', {
-                                id: types.getType(payload.key).id,
-                                offset: 1
-                            });
-                        }, 300);
+                        // setTimeout(function() {
+                        //     me.module.dispatch('move', {
+                        //         id: types.getType(payload.key).id,
+                        //         offset: 1
+                        //     });
+                        // }, 300);
                     }
                     this.models.state.changed();
                 } else {
@@ -491,10 +491,10 @@ var target = D.assign({}, {
         answer = _.find(answers, ['key', id]);
         if (answer) {
             readingQuetion = !_.every(answer.value, function(sub) {
-                return sub.value.length === 0
+                return D.isArray(sub.value) && (sub.value.length === 0
                     || _.every(sub.value, function(sv) {
                         return !sv.value;
-                    });
+                    }));
             });
             otherQuestion = (answer.value.length > 0 && _.some(answer.value, function(v) {
                 return v.value !== '';

@@ -2,7 +2,7 @@
 module
     div(data-region='list')
 view('list')
-    compare(page.length 'lt' 1) 
+    compare(page.length 'lt' 1)
         .text-center
             .content(style="margin: 15% 0")
                 img(src="images/nothing.png")
@@ -18,7 +18,7 @@ view('list')
                         a(href='#/ask/questiondetails/'+ questionId ) > echo(title)
                     else
                         a(href='#/ask/articledetails/' + questionId ) > echo(title)
-                .comment-text
+                .comment-text.text-overflow
                     compare(thumbnail.length 'gt' 0)
                         img(src=thumbnail)
                     @echo(content)
@@ -43,9 +43,12 @@ view('list')
                                 .item(id='unpraise-3_'+ questionId data-name='id' data-value='3_' + questionId)
                                     string('unpraise') +  echo('（'+ question.praiseNum +'）')
                             else
-                                .item(id='praise-3_'+ questionId data-name='id' data-value='3_' + questionId) 
+                                .item(id='praise-3_'+ questionId data-name='id' data-value='3_' + questionId)
                                     string('praise') +  echo('（'+ question.praiseNum +'）')
-                            .item(id='discuss-' + id ) > string('comment') + echo('(' + discussList.length +')')
+                            compare(question.discussNum 'eq' 0)
+                                .item(id='discuss-' + id ) > string('updated-discussion')
+                            else
+                                .item(id='discuss-' + id ) > echo(question.discussNum) + string('strip') + string('discuss')
                             compare(concernNum 'gt' 0)
                                 .item(id='trend-unfollow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('unfollow')
                                 .item( 'hidden' id='trend-follow-3_' + questionId data-name='id' data-value='3_' + questionId ) > string('follow')
@@ -64,7 +67,7 @@ view('list')
                                 compare(discussList.length 'eq' 0)
                                     .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
                             form.comment-reply(id ='comment-reply-' + id)
-                                textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
                                 input.input(type='hidden' name='organizationId' value=createUser.organizationId)
                                 input.input(type='hidden' name='id' value=questionId)
                                 .btn(id='publish-' + id) > string('publish')

@@ -1,0 +1,23 @@
+#! handlebars
+
+module > .course-page-new
+    .main > .container
+        .course-list > .main-list
+            .h3  更多推荐课程
+            ul
+                li > .content
+                    .img
+                        .img-cont
+                            a.normal(href='#/study/course/detail/'+id) > img(src=img)
+                        .detail-wrapper
+                            p > @echo(description)
+                            compare(studyType 'eq' 0)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 开始学习
+                            compare(studyType 'eq' 1)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 继续学习
+                            compare(studyType 'eq' 2)
+                                a.normal.block(href='#/study/course/detail/'+id) > .btn.radius.block 重新学习
+                    .text-overflow.title > a.normal(href='#/study/course/detail/'+id) > echo(name)
+                    .bottom
+                        .item(title='浏览') > i.iconfont.icon-view + echo(visits)
+                        .item(title='评分') > i.iconfont.icon-star + echo(avgScore)

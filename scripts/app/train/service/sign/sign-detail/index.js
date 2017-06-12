@@ -78,7 +78,7 @@ exports.store = {
         },
         search: function(payload) {
             var signDetail = this.models.signDetail,
-                id = this.models.state.data.id;
+                id = this.module.renderOptions.id;
             signDetail.params = payload;
             signDetail.params.id = id;
             return this.get(signDetail);
@@ -93,7 +93,7 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    var data = this.store.models.state.data;
-    data.id = this.renderOptions.id;
+    // var data = this.store.models.state.data;
+    // data.id = this.renderOptions.id;
     this.dispatch('init', { id: this.renderOptions.id });
 };

@@ -6,16 +6,16 @@ module > .addwork-page
     .main(data-region='questionnaire')
     .addwork(data-region='task')
 
-view('offline') 
+view('offline')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
                 a.small-btn.radius.pull-right#export(href=downUrl) 导出安排
             .clearfix.m-top
-                .pull-left
+                .pull-left.col-sm-6
                     label.m-right 线下课程安排
                     if(isShowWeeks)
-                        select.tag-select#selectOffline(name='selectOffline')
+                        select.tag-height#selectOffline(name='selectOffline')
                             each(weeks)
                                 option(value=id)('selected')&if(checked) > echo(name + '(' + descr + ')')
                 .pull-right
@@ -63,7 +63,7 @@ view('offline')
                                 i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-offline-'+id data-name='id' data-value=id)
                                 i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-offline-'+id data-name='id' data-value=id)
 
-view('online') 
+view('online')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
@@ -94,7 +94,7 @@ view('online')
                             i.pointer.m-right.iconfont.icon-preview.custom-color-5(id='view-online-'+resourceId data-name='resourceId' data-value=resourceId)
                             i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-online-'+id data-name='id' data-value=id)
 
-view('questionnaire') 
+view('questionnaire')
     .dateplan.container.bg-highlight.overflow.dateplan-padding
         section.layout-mt-small
             .clearfix
@@ -184,20 +184,19 @@ view('config-online') > form.vertical
                 label(id='label-theme-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
                 input(id='input-theme-' + id value=name style='display:none;' data-name='id' data-value=id)
             td
-                i.iconfont.icon-sort-asc.color-warn(id='move-theme-up-'+id data-name='id' data-value=id)
-                i.iconfont.icon-sort-desc.color-pass(id='move-theme-down-'+id data-name='id' data-value=id)
+                i.pointer.m-right.iconfont.icon-arrow-up-solid.gray(id='move-theme-up-'+id data-name='id' data-value=id)
+                i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(id='move-theme-down-'+id data-name='id' data-value=id)
             td > a(id='del-theme-'+id data-name='id' data-value=id) 删除
     .add-topic.text-center.clearfix
-        .line.relative.border.bottom
-            .btn.addtopic-btn#addTheme 添加主题
+        .btn.addtopic-btn#addTheme 添加主题
 
 
 view('edit-offline') > form.vertical
-    .form 
+    .form
         .form-row
             label.required 课程类型
             .content
-                select.w-half#type(name='type' x-rule='required') 
+                select.w-half#type(name='type' x-rule='required')
                     option(value='1')('selected')&if(checked.type1) > map('class-offline-type' '1')
                     option(value='2')('selected')&if(checked.type2) > map('class-offline-type' '2')
                     option(value='3')('selected')&if(checked.type3) > map('class-offline-type' '3')
@@ -210,57 +209,49 @@ view('edit-offline') > form.vertical
                 input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
         .clearfix
             .row
-                .class-form-width.pull-left
-                    .form-row
-                        label.required 开始时间
-                        .content
-                            .relative
-                                input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
-                                .iconfont.icon-riqi.text-main-color
-                .class-form-width.pull-left
-                    .form-row
-                        label.required 结束时间
-                        .content
-                            .relative
-                                input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
-                                .iconfont.icon-riqi.text-main-color
+                .form-row.col-sm-6.inline-block
+                    label.required 开始时间
+                    .content
+                        .relative
+                            input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
+                            .iconfont.icon-riqi.text-main-color
+                .form-row.col-sm-6.inline-block
+                    label.required 结束时间
+                    .content
+                        .relative
+                            input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
+                            .iconfont.icon-riqi.text-main-color
             .row
-                .class-form-width.pull-left
-                    .form-row
-                        label.required 教室
-                        .content
-                            select.tag-input#classroomId(name='classroomId' x-rule='required')
-                                each(classroomList)
-                                    option(value=id)('selected')&if(selected) > echo(classroomName)
-                .class-form-width.pull-left
-                    .form-row
-                        label 讲师姓名
-                        .content
-                            input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
+                .form-row.col-sm-6.inline-block
+                    label.required 教室
+                    .content
+                        select.w-full#classroomId(name='classroomId' x-rule='required')
+                            each(classroomList)
+                                option(value=id)('selected')&if(selected) > echo(classroomName)
+                .form-row.col-sm-6.inline-block
+                    label 讲师姓名
+                    .content
+                        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
             .row
-                .class-form-width.pull-left
-                    .form-row
-                        label 讲师单位
-                        .content
-                            input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization x-rule='maxLength:30')
-                .class-form-width.pull-left
-                    .form-row
-                        label 讲师类别
-                        .content
-                            select.tag-input#teacherType(name='teacherType' x-rule='required')
-                                option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
-                                option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
+                .form-row.col-sm-6.inline-block
+                    label 讲师单位
+                    .content
+                        input.input#teacherOrganization(name='teacherOrganization' value=offlineCourse.teacherOrganization x-rule='maxLength:30')
+                .form-row.col-sm-6.inline-block
+                    label 讲师类别
+                    .content
+                        select.w-full#teacherType(name='teacherType' x-rule='required')
+                            option(value='0')('selected')&if(checked.teacherType0) > map('lecturer-type' '0')
+                            option(value='1')('selected')&if(checked.teacherType1) > map('lecturer-type' '1')
             .row
-                .class-form-width.pull-left
-                    .form-row
-                        label 讲师职务
-                        .content
-                            input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle  x-rule='maxLength:30')
-                .class-form-width.pull-left
-                    .form-row
-                        label.required 联系电话
-                        .content
-                            input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
+                .form-row.col-sm-6.inline-block
+                    label 讲师职务
+                    .content
+                        input.input#teacherTitle(name='teacherTitle' value=offlineCourse.teacherTitle  x-rule='maxLength:30')
+                .form-row.col-sm-6.inline-block
+                    label.required 联系电话
+                    .content
+                        input.input#teacherPhone(name='teacherPhone' value=offlineCourse.teacherPhone x-rule='required,phone')
     .layout-mt-small
         .pull-left > label.label 课件（最多上传三个）
         .pull-right
@@ -311,10 +302,10 @@ view('courseware')
                 td > map('class-file-type' fileType)
                 td
                     if(canPreview)
-                        a(href='javascript:;' id='preview-'+attachId) 预览
+                        i.pointer.m-right.iconfont.icon-preview.custom-color-5(href='javascript:;' id='preview-'+attachId) 预览
                     else
-                        a(href=downUrl download=attachName) 下载
-                    a(id='del-courseware-'+id data-name='id' data-value=id) 删除
+                        i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(href=downUrl download=attachName) 下载
+                    i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-courseware-'+id data-name='id' data-value=id) 删除
 
 view('import')
     div > form(method='post' id='importCourse' target='_blank')
@@ -349,10 +340,10 @@ view('edit-task') > form.vertical
         .clearfix
             .form-row.pull-left.w-half.start-time.row-block.r-padding
                 label.label.required 开始时间
-                .content > input.input#startTime(name='startTime' value=dateTime(task.startTime) size=8 style='float:left' x-rule='required')
+                .content > input.input#startTime(name='startTime'  style='float:left' x-rule='required' value=dateTime(task.startTime))
             .form-row.pull-left.w-half.row-block
                 label.label.required 结束时间
-                .content > input.input#endTime(name='endTime' value=dateTime(task.endTime) size=8 style='float:left' x-rule='required')
+                .content > input.input#endTime(name='endTime'  style='float:left' x-rule='required' value=dateTime(task.endTime))
         .form-row
             .clearfix
                 label.label.required.pull-left 任务说明
@@ -382,7 +373,7 @@ view('edit-task') > form.vertical
                             if(canPreview)
                                 i.pointer.m-right.iconfont.icon-preview.custom-color-5(href='javascript:;' id='preview-attach-'+attachmentId)
                             else
-                                a(href=downUrl download=attachmentName) 下载
+                                a.i.pointer.m-right.iconfont.icon-arrow-down-solid.custom-color-4(href=downUrl download=attachmentName)
                             i.pointer.m-right.iconfont.icon-delete-solid.custom-color-3(id='del-attach-'+id data-name='id' data-value=id)
         .form.layout-mt-small.align-left
             .form-choice

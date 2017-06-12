@@ -10,6 +10,7 @@ exports.bindings = {
     courseTime: true,
     organizations: true,
     state: true,
+    msgCount: true,
     hotTopics: true
 };
 
@@ -117,6 +118,17 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
+    msgCount: function(data) {
+        var msgCount = data.msgCount;
+        if (msgCount) {
+            if (msgCount.count > 0) {
+                return msgCount.count;
+            } else if (msgCount.count > 99) {
+                return '99+';
+            }
+        }
+        return '';
+    },
     organization: function(data) {
         var organization = data.organization || {},
             params = {},

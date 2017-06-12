@@ -36,6 +36,9 @@ exports.store = {
     callbacks: {
         init: function(payload) {
             var topicname = this.models.topicname;
+            var state = this.models.state;
+            state.data = payload.topicList;
+            state.changed();
             this.models.state.expertId = payload.id;
             return this.get(topicname);
         },

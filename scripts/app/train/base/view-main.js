@@ -8,7 +8,9 @@ exports.bindings = {
     classInfo: true,
     down: false,
     state: true,
-    classroomList: true
+    classroomList: true,
+    trainTypes: true,
+    classTypes: true
 };
 
 exports.events = {
@@ -16,7 +18,7 @@ exports.events = {
     'click needGroupPhoto-*': 'changePhotoType',
     'click needVideo-*': 'changeNeedVideo',
     'click needMakeCourse-*': 'changeMakeCourse',
-    'click uploadBanner': 'uploadBanner'
+    'click uploadBanner': 'uploadBanner',
 };
 
 exports.handlers = {
@@ -27,9 +29,12 @@ exports.handlers = {
         this.app.viewport.modal(view);
     },
     changePhotoType: function(data) {
-        var d = data;
-        if (d === '0') {
-            $(this.$('photoTime')).val('');
+        var d = data,
+            state = this.bindings.state.data;
+        if (d === '1') {
+            state.needGroupPhotoCheck = true;
+        } else {
+            state.needGroupPhotoCheck = false;
         }
     },
     changeNeedVideo: function(data) {
@@ -42,12 +47,12 @@ exports.handlers = {
         }
     },
     changeMakeCourse: function(data) {
-        var d = data;
-        if (d === '0') {
-            $(this.$('courseVideoRequirement')).val('');
-            $(this.$('courseVideoRequirement')).attr('readonly', 'readonly');
+        var d = data,
+            state = this.bindings.state.data;
+        if (d === '1') {
+            state.needMakeCourseCheck = true;
         } else {
-            $(this.$('courseVideoRequirement')).attr('readonly', false);
+            state.needMakeCourseCheck = false;
         }
     },
     uploadBanner: function() {
@@ -96,9 +101,10 @@ exports.dataForTemplate = {
         returnDate.setDate(returnDate.getDate() - 1);
         classInfo.startDate = helpers.date(arriveDate);
         classInfo.endDate = helpers.date(returnDate);
-        address = helpers.map('project-address', classInfo.address);
+        // address = helpers.map('project-address', classInfo.address);
+        address = classInfo.address;
         classInfo.addressText = address !== '' ? address : '暂未分配';
-        romm = classInfo.romm;
+        romm = classInfo.classRoomName;
         classInfo.rommText = romm !== '' ? romm : '暂未分配';
         diningRoom = classInfo.diningRoom !== null ? classInfo.diningRoom : '暂未分配';
         classInfo.diningRoomText = diningRoom;
@@ -109,8 +115,6 @@ exports.dataForTemplate = {
     checked: function() {
         var classInfo = this.bindings.classInfo.data;
         return {
-            tableType1: classInfo.classDetail.tableType === 1,
-            tableType2: classInfo.classDetail.tableType === 2,
             provinceLeaderCheck: classInfo.classDetail.haveProvinceLeader === 1,
             haveMinisterCheck: classInfo.classDetail.haveMinister === 1,
             needGroupPhotoCheck: classInfo.classDetail.needGroupPhoto === 1,
@@ -138,6 +142,8 @@ exports.dataForTemplate = {
         }
         state.downUrl = url;
         state.bannerUrl = bannerUrl;
+        state.needGroupPhotoCheck = classInfo.classDetail.needGroupPhoto === 1;
+        state.needMakeCourseCheck = classInfo.classDetail.needMakeCourse === 1;
         return state;
     },
     classroomList: function(data) {
@@ -169,6 +175,49 @@ exports.dataForTemplate = {
             return true;
         }
         return false;
+    },
+    isSubmit: function() {
+        var state = this.bindings.state.data,
+            classInfo = this.bindings.classInfo.data;
+        if ((state.role === 2 || state.role === 1) && classInfo.confirm === 1) {
+            return false;
+        }
+        return true;
+    },
+    isService: function() {
+        var state = this.bindings.state.data;
+        if (state.role === 3) {
+            return true;
+        }
+        return false;
+    },
+    trainTypes: function(data) {
+        var tableTypes = data.trainTypes,
+            classTableType = data.classInfo.classDetail.tableType;
+        _.map(tableTypes, function(t) {
+            var a = t;
+            if (classTableType === a.id) {
+                a.selected = true;
+            } else {
+                a.selected = false;
+            }
+            return a;
+        });
+        return tableTypes;
+    },
+    classTypes: function(data) {
+        var classTypes = data.classTypes,
+            classInfoType = data.classInfo.classInfoType;
+        _.map(classTypes, function(t) {
+            var c = t;
+            if (classInfoType === c.id) {
+                c.selected = true;
+            } else {
+                c.selected = false;
+            }
+            return c;
+        });
+        return classTypes;
     }
 };
 
@@ -231,13 +280,15 @@ exports.mixin = {
             markers.text.invalid(otherRequirement, validators.maxLength.message.replace(reg, 1000));
             flag = false;
         }
-        if (!validators.maxLength.fn(restRoom.val(), 200)) {
-            markers.text.invalid(restRoom, validators.maxLength.message.replace(reg, 200));
-            flag = false;
-        }
-        if (!validators.maxLength.fn(diningRoom.val(), 200)) {
-            markers.text.invalid(diningRoom, validators.maxLength.message.replace(reg, 200));
-            flag = false;
+        if (this.bindings.state.data.role === 1 || this.bindings.state.data.role === 3) {
+            if (!validators.maxLength.fn(restRoom.val(), 200)) {
+                markers.text.invalid(restRoom, validators.maxLength.message.replace(reg, 200));
+                flag = false;
+            }
+            if (!validators.maxLength.fn(diningRoom.val(), 200)) {
+                markers.text.invalid(diningRoom, validators.maxLength.message.replace(reg, 200));
+                flag = false;
+            }
         }
         return flag;
     }

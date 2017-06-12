@@ -2,7 +2,7 @@
 exports.items = {
     content: 'content',
     edit: '',
-    redio: ''
+    radio: ''
 };
 
 exports.store = {

@@ -1,7 +1,7 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
     signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
-    isFirstTimeToExam, overApplcantTime, hasExamed;
+    isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -18,6 +18,8 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 13: 考试结束，没有详情
 // 14: 可考多次 不能马上查看详情
 // 15: 报名时间截止
+// 16: 答卷完，能重新考，试卷处理中
+// 17: 答卷完，不能重新考，试卷处理中
 exports.getUserStatusOfExam = function(exam) {
     var signUp = signUpExam(exam);
 
@@ -42,8 +44,12 @@ exports.getUserStatusOfExam = function(exam) {
             return signUp;
         }
 
-        if (overExam(exam) && canExamMore(exam) && canViewDetailImmd(exam)) {
+        if (overExam(exam) && canExamMore(exam) && paperProcess(exam)) {
+            return 16;
+        } else if (overExam(exam) && canExamMore(exam) && canViewDetailImmd(exam)) {
             return 6;
+        } else if (overExam(exam) && paperProcess(exam)) {
+            return 17;
         } else if (overExam(exam) && canViewDetailImmd(exam)) {
             return 7;
         } else if (overExam(exam) && canExamMore(exam)) {
@@ -113,13 +119,14 @@ canExamMore = function(exam) {
 };
 
 canViewDetailImmd = function(exam) {
-    return (exam.examRecord && exam.examRecord.status >= 4)
+    return ((exam.examRecord && exam.examRecord.status > 4) || exam.examRecord.submitTime)
         && exam.isShowAnswerImmed === 1;
 };
 
 overExam = function(exam) {
     return (exam.examRecord && exam.examRecord.status > 4)
-        || exam.examedTimes > 0;
+        || exam.examedTimes > 0 ||
+        (exam.examRecord && exam.examRecord.status < 4 && exam.examRecord.submitTime);
 };
 
 isInApplcantTimeRange = function(exam) {
@@ -145,4 +152,10 @@ overApplcantTime = function(exam) {
 
 hasExamed = function(exam) {
     return exam.examedTimes > 0;
+};
+
+
+paperProcess = function(exam) {
+    return exam.examRecord
+        && exam.examRecord.status < 4 && exam.examRecord.submitTime;
 };

@@ -12,9 +12,9 @@ view('nav')
     .nav-list
         each(navs)
             if(link)
-                .item> a.normal.nav-color(href=url target='_blank') > echo(name)
+                .item > a.normal.nav-color(href=url target='_blank') > echo(name)
             else
-                .item(id='menu-' + id href='#/' + url data-menu=url)(class='active')&if(active) > a.normal.nav-color > echo(name)
+                .item(id='menu-' + id)(href='#/' + url)(data-menu=url) > a.normal.nav-color > echo(name)
         #  else
         #      each(menus)
         #          .item(id='menu-' + id)(href='#/' + uri)(data-menu=uri) > a.normal.nav-color(class='active')&if(active) > echo(name)
@@ -55,9 +55,15 @@ view('shortcut')
                         if(Global.organization)
                             li(id='org-'+Global.organization.id) > echo(Global.organization.name)
                         each(organizations)
-                            li(id='org-'+id) > echo(name)
+                            if(shortName)
+                                li(id='org-'+id) > echo(shortName)
+                            else
+                                li(id='org-'+id) > echo(name)
             .item.drop-down-wrapper.right
-                a#message-div.normal(href='#') > i.iconfont.icon-message.drop-down-btn
+                a#message-div.normal.msg(href='#')
+                    if(msgCount)
+                        span.tip-num > echo(msgCount)
+                    i.iconfont.icon-message.drop-down-btn
                 .drop-down-content > .content
                     compare(message.recordCount 'gt' 0)
                         ul.message-list > each(message.items)

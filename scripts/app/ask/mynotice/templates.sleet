@@ -23,4 +23,3 @@ view('menu')
 view('list') 
     li.tabs-cont-item.active#tabs-cont-item-1
         div(data-dynamic-key=state.menu)
-    .container.text-center > .content(style="margin: 20% 0") 暂无内容哦！

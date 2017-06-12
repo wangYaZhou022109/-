@@ -1,6 +1,6 @@
 #!handlebars
 
-module > .home-page.layout
+module > .home-page.layout.relative
     div(data-region='main')
     # .banner(data-region='banner')
     # .banner-notice(data-region='banner-notice')

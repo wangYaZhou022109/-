@@ -12,9 +12,10 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 241,
-    provider: 'https://oauth9.zhixueyun.com/',
-    returnTo: 'http://localhost'
+    clientId: 3,
+    // provider: 'https://oauth9.zhixueyun.com/',
+    provider: 'https://zxyoauth9.zhixueyun.com/',
+    returnTo: 'http://localhost/front'
 };
 // @endif
 
@@ -64,6 +65,8 @@ require('./app/ext/qr-code');
 require('./app/ext/rich-text');
 require('./app/ext/monthpicker');
 require('./app/util/arrays');
+require('./app/ext/image-cropper');
+
 D.adapt({
     getFormData: function(form) {
         var result = {};

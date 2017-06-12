@@ -38,6 +38,7 @@ exports.store = {
         groupModel: { url: '../train/trainee-group' },
         updateTraineeGroup: { url: '../train/trainee/update-group' },
         exportGroupTrainee: { url: '../train/trainee/export-group-trainee' },
+        nations: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 2 } },
         levels: { url: '../human/member-config/list', autoLoad: 'after', params: { key: 8 } },
         updateFmtrainee: { url: '../train/trainee/update' },
         detail: { data: {} },

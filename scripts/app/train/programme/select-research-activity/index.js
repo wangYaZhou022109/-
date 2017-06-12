@@ -24,15 +24,17 @@ exports.store = {
             type: 'pageable',
             root: 'items'
         },
-        research: {}
+        research: {},
+        state: {}
     },
     callbacks: {
         init: function(payload) {
-            var research = this.models.research;
+            var research = this.models.research,
+                state = this.models.state.data;
             if (payload.researchId) {
                 this.models.research.set({ id: payload.researchId });
             }
-
+            state.organizationId = payload.organizationId;
             D.assign(this.models.researchActivities.params, {
                 type: this.module.options.RESEARCH_TYPE,
                 organizationId: payload.organizationId
@@ -45,13 +47,13 @@ exports.store = {
             return this.get(this.models.researchActivities);
         },
         search: function(payload) {
-            var createTimeRange = payload.createTime || 'to',
+            var createTimeRange = payload.createTime || '至',
                 publishTimeStart,
                 publishTimeEnd,
                 start,
                 end;
-            publishTimeEnd = createTimeRange.split('to')[1].trim();
-            publishTimeStart = createTimeRange.split('to')[0].trim();
+            publishTimeEnd = createTimeRange.split('至')[1].trim();
+            publishTimeStart = createTimeRange.split('至')[0].trim();
             start = new Date(publishTimeStart).getTime();
             end = new Date(publishTimeEnd).getTime();
             this.models.researchActivities.clear();
@@ -81,14 +83,15 @@ exports.buttons = [{
     fn: function() {
         var mod = this.items[this.options.SELECT_MODULE],
             research = this.store.models.research.data,
-            me = this;
+            me = this,
+            organizationId = this.store.models.state.data.organizationId;
         this.app.viewport.modal(mod, {
             researchId: research.id,
             sourceType: research.sourceType || EXAM_SOURCE_TYPE,
             titleType: research.id ? titleType.EDIT : titleType.ADD,
             callback: function(data) {
                 var callback = me.renderOptions.callback;
-                return me.dispatch('init', {}).then(function() {
+                return me.dispatch('init', { organizationId: organizationId }).then(function() {
                     if (callback) callback(D.assign(data, { isAdd: 1 }));
                 });
             }
