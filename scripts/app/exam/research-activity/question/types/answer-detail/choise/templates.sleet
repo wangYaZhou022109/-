@@ -24,4 +24,4 @@ view('main')
                         .radio
                             input(type='radio' disabled='disabled' id='radio-' +@index)('checked')&if(checked)
                             label(for='radio-' +@index)
-                    label > echo(code '.' text)
+                    label > @echo(code '.' text)

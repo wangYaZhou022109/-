@@ -18,9 +18,12 @@ exports.handlers = {
         // 防止重复提交
         if ($(param.target).hasClass(disabledClass)) return true;
         $(param.target).addClass(disabledClass);
-        // 还有未答的题目
-        if (!me.bindings.state.isComplete()) {
-            message = strings.get('exam.submit-paper-confirm.no-finish');
+        //  还有未答的题目：提示还有多少题未答
+        if (me.bindings.state.data.noAnswerCount > 0) { // 您有{}题未答，确定要提交吗
+            message = '您有' + strings.getWithParams(
+                'exam.submit-paper-confirm.no-finish',
+                me.bindings.state.data.noAnswerCount
+            ) + '，' + message;
         }
         return this.app.message.confirm(message, function() {
             return me.module.dispatch('saveResearchDetail').then(function() {

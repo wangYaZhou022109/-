@@ -8,4 +8,4 @@ view('pannel')
         if(region.regionModule.contentValue)
             .layout-mt-small > p > echo(region.regionModule.contentValue)
         else
-            .empty 暂无公告
+            .content-empty-side > .img-box + p 暂无公告
