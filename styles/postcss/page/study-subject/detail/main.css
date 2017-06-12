@@ -1,6 +1,7 @@
 
 .subject-catalog {
     margin-top: calc(var(--large-space) * 1.5);
+    padding-left: calc(var(--large-space) / 2);
     & ul {
         @apply --clearfix;
         position: relative;
