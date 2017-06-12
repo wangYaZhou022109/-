@@ -23,9 +23,12 @@ exports.store = {
             mixin: {
                 init: function() {
                     var dimensions = this.module.store.models.dimensions,
+                        questions = this.module.store.models.questions,
                         currentDimension = dimensions.getFirstDimension();
                     this.data = {
                         currentDimension: currentDimension,
+                        noAnswerCount: questions.data.length,
+                        answeredCount: 0,
                         currentQuestion: currentDimension.questions[0]
                     };
                 },
