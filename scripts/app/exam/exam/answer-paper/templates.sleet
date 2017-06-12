@@ -83,5 +83,5 @@ view('answer-detail')
 view('exam-notes')
     echo(state.examNotes)
     hr
-    if(canShowDetail)
-        button.btn(id='show-answer-detail') 查看详情
+    #  if(canShowDetail)
+    #      button.btn(id='show-answer-detail') 查看详情

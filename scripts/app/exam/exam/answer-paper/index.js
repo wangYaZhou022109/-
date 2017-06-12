@@ -282,15 +282,15 @@ var setOptions = {
                 this.models.answer.saveAnswer(payload);
                 this.models.modify.saveAnswer(payload);
                 this.models.state.calculate();
-                if (this.models.state.data.singleMode) {
+                if (me.models.state.data.singleMode) {
                     //  是否需要保存答案后移动到下一题
                     if (types.isNeedMoveAfterSave(payload.key)) {
-                        setTimeout(function() {
-                            me.module.dispatch('move', {
-                                id: types.getType(payload.key).id,
-                                offset: 1
-                            });
-                        }, 300);
+                        // setTimeout(function() {
+                        //     me.module.dispatch('move', {
+                        //         id: types.getType(payload.key).id,
+                        //         offset: 1
+                        //     });
+                        // }, 300);
                     }
                     this.models.state.changed();
                 } else {
