@@ -50,6 +50,11 @@
             & p {
                 color: var(--main-color);
             }
+            &.selected {
+                & p {
+                    margin-top: calc(var(--space)*3);
+                }
+            }
         }
     }
 }
