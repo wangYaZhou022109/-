@@ -71,5 +71,5 @@ exports.beforeRender = function() {
 };
 
 sortByQuestionType = function(subs) {
-    return _.orderBy(subs, ['createTime', 'type'], ['asc', 'asc']);
+    return _.orderBy(subs, ['type'], ['asc']);
 };
