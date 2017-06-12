@@ -15,7 +15,10 @@
             background: var(--bg-color-3);
             color: var(--main-color);
         }
-
+        &.msg .tip-num {
+            top: -5px;
+            left: 65px;
+        }
     }
 
     &.line {
@@ -27,7 +30,7 @@
         & li {
             border-bottom: 3px solid transparent;
             margin-bottom: -1px;
-            
+
             &:hover,
             &.active {
                 border-color: var(--main-color);

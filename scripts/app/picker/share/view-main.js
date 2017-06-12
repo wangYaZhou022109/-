@@ -100,7 +100,10 @@ exports.handlers = {
         }
     },
     showAskshare: function() {
-        var model = this.module.items['picker/share/askshare'];
-        this.app.viewport.modal(model);
+        var view = this.module.items['picker/share/askshare'];
+        var options = this.bindings.share.data.data;
+        var id = options.id; // 分享对象id
+        var type = options.type; // 分享类型
+        this.app.viewport.modal(view, { shareObjectId: id, shareType: type });
     }
 };

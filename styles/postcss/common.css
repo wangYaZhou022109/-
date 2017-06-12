@@ -482,3 +482,15 @@ section.section {
         background-image:url(../images/loading.gif);
     }
 }
+
+.none-more {
+    display: none;
+    padding: 50px 0;
+    text-align: center;
+    & p {
+        display: inline-block;
+        color: #999;
+        border-bottom: 1px solid #ccc;
+    }
+}
+

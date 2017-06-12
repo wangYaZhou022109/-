@@ -4,6 +4,9 @@ module
 
 view('list')
     each(page)
+
+
+
         li
             .user-pic
                 img.pointer(src=createUser.headPortrait)
@@ -133,3 +136,6 @@ view('list')
                                 input.input(type='hidden' name='id' value=discussId)
                                 input.input(type='hidden' name='toUserId' value=createUserId)
                                 .btn(id='reply-' + id ) > string('publish')
+    .none-more 
+        p 没有更多了
+        

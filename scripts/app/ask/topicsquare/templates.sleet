@@ -1,6 +1,6 @@
 #!handlebars
 
-module > .ask-page > .container
+module > div > .container
     .page-main-wrapper.knowledge-side
         .page-side.side-min(data-region='side')
         .page-main(data-region='main')
@@ -8,7 +8,7 @@ view('main')
     .tabs.line.mb-1
         #  .pull-right.btn#apply-topic 申请话题
         ul
-            li.active > echo('话题广场')
+            li.active.h4 > echo('话题广场')
     .border.bottom.dashed
         a.tag-btn.active(id='checkAll' data-name='id' data-value=id ) > echo('全部')
         each(topicType)
