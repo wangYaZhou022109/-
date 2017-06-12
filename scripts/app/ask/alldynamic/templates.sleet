@@ -3,6 +3,11 @@ module
     div(data-region='list')
 
 view('list')
+    compare(page.length 'lt' 1)
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
     each(page)
         li
             .user-pic
@@ -34,7 +39,12 @@ view('list')
                     span.sub-text > echo(createTime)
                 .comment-operation
                     if(topicList)
-                        .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > a(href='#/ask/topicdetail/' + id ) > echo(name) + echo(' ')
+                        .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) 
+                            compare(group 'eq' 1)
+                                a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                echo('&nbsp;&nbsp;')
+                            else
+                                echo(name) + echo('&nbsp;&nbsp;')
                     else
                         .pull-left > .sub-text > string('from-topic') + echo(' ：') + echo('暂无')
                     .text-right
