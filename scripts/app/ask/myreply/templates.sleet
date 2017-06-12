@@ -227,6 +227,8 @@ view('list')
                                             input.input(type='hidden' name='toUserId' value=member.id)
                                             input.input(type='hidden' name='questionId' value=question.id)
                                             .btn(id='publish-' + id) > string('publish')
+    .none-more 
+        p 没有更多了
 
 
 
