@@ -1,6 +1,6 @@
 var D = require('drizzlejs');
 var $ = require('jquery');
-var _ = require('lodash/collection');
+var _ = require('lodash');
 exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
@@ -70,15 +70,15 @@ exports.dataForActions = {
         var data = payload;
         var topics = [],
             expert = [];
-        this.$$('input[name="topics"]').forEach(function(x) {
+        _.forIn(this.$$('input[name="topics"]'), function(x) {
             var element = x || {};
             var value = element.value;
             topics.push(value);
         });
-        this.$$('input[name="expert"]').forEach(function(x) {
+        _.forIn(this.$$('input[name="expert"]'), function(x) {
             var element = x || {};
             var value = element.value;
-            expert.push(value);
+            topics.push(value);
         });
         data.id = 1;
         if (topics.length > 0) {
@@ -141,4 +141,3 @@ exports.dataForTemplate = {
         return expert;
     }
 };
-

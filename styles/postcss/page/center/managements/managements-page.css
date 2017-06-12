@@ -1,4 +1,8 @@
 .managements-page {
+
+    & a {
+        text-decoration: none;
+    }
     & .display-none {
         display: none;
     }

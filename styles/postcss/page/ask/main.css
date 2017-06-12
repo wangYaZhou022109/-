@@ -1,6 +1,9 @@
 .ask-page {
     margin: var(--base-gap) 0;
-
+    
+    & a {
+		text-decoration: none;
+	}
     & .follow {
         & dl {
             float: left;
