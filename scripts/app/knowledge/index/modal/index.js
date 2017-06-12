@@ -70,8 +70,9 @@ exports.buttons = [
                     return false;
                 }
             }
-            if (integral !== 'undefined' && integral !== '' && !r.test(integral)) {
-                this.app.message.error('下载积分必须为正整数！');
+            if (integral !== 'undefined' && integral !== '' && (!r.test(integral)
+                || window.parseInt(integral, 10) > 100)) {
+                this.app.message.error('下载积分必须为小于100的正整数！');
                 return false;
             }
             if (description.length > 0) {
