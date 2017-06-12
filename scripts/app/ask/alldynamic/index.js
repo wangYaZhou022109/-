@@ -207,8 +207,8 @@ exports.afterRender = function() {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        if ((scrollTop + clientHeight) >= (scrollHeight-footerHeight)) {
-           $('.none-more').css('display', 'block');
+        if ((scrollTop + clientHeight) >= (scrollHeight - footerHeight)) {
+            $('.none-more').css('display', 'block');
         }
     });
     this.dispatch('set', this.renderOptions.callback);

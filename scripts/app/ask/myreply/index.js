@@ -18,7 +18,7 @@ exports.store = {
             data: [],
             params: { page: 1, size: 10 },
             mixin: {
-                findById: function (id) {
+                findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
                 }
@@ -26,60 +26,60 @@ exports.store = {
         },
     },
     callbacks: {
-        init: function () {
+        init: function() {
             var myreply = this.models.myreply,
                 params = this.models.page.params,
                 page = this.models.page;
 
             params.id = 'null';
             myreply.set(params);
-            return this.post(myreply).then(function () {
+            return this.post(myreply).then(function() {
                 page.data = myreply.data;
                 page.changed();
             });
         },
-        shut1: function (payload) {
+        shut1: function(payload) {
             var discuss = this.models.discuss,
                 page = this.models.page,
                 me = this;
             discuss.set(payload);
-            return this.chain(me.del(discuss), function () {
-                page.data = _.filter(page.data, function (item) {
+            return this.chain(me.del(discuss), function() {
+                page.data = _.filter(page.data, function(item) {
                     return item.id !== payload.id;
                 });
                 page.changed();
             });
         },
-        shut2: function (payload) {
+        shut2: function(payload) {
             var reply = this.models.reply,
                 page = this.models.page,
                 me = this;
 
             reply.set(payload);
-            return this.chain(me.del(reply), function () {
-                page.data = _.filter(page.data, function (item) {
+            return this.chain(me.del(reply), function() {
+                page.data = _.filter(page.data, function(item) {
                     return item.id !== payload.id;
                 });
                 page.changed();
             });
         },
-        page: function () {
+        page: function() {
             var myreply = this.models.myreply;
             var params = this.models.page.params;
             var page = this.models.page;
             // var me = this;
             params.id = 'null';
             myreply.set(params);
-            this.post(myreply).then(function () {
+            this.post(myreply).then(function() {
                 page.data.push.apply(page.data, myreply.data);
                 page.changed();
             });
         },
-        praise: function (payload) {
+        praise: function(payload) {
             var praise = this.models.praise,
                 me = this;
             praise.set(payload);
-            return this.post(praise).then(function () {
+            return this.post(praise).then(function() {
                 var page = me.models.page;
                 var curObj = page.findById(payload.id);
 
@@ -89,11 +89,11 @@ exports.store = {
                 page.changed();
             });
         },
-        unpraise: function (payload) {
+        unpraise: function(payload) {
             var unpraise = this.models.unpraise,
                 me = this;
             unpraise.set(payload);
-            return this.chain(me.put(this.models.unpraise), function () {
+            return this.chain(me.put(this.models.unpraise), function() {
                 var page = me.models.page;
                 var curObj = page.findById(payload.id);
 
@@ -103,12 +103,12 @@ exports.store = {
                 page.changed();
             });
         },
-        publish: function (payload) {
+        publish: function(payload) {
             var reply = this.models.reply,
                 data = payload,
                 me = this;
             reply.set(data);
-            return this.save(reply).then(function () {
+            return this.save(reply).then(function() {
                 var page = me.models.page;
                 page.changed();
             });
@@ -116,10 +116,10 @@ exports.store = {
     }
 };
 
-exports.afterRender = function () {
+exports.afterRender = function() {
     var me = this;
     // console.log(this.renderOptions);
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
         var scrollTop = $(document).scrollTop();
