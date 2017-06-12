@@ -23,7 +23,7 @@ view('main')
                                 label(for='checkbox-' + @index)
                         b > echo(code '.')
                     .overflow
-                        .m-bottom > echo(text)
+                        .m-bottom > @echo(text)
                         .w-half > .progress-box
                             .progress.m-right > .progress-bar(style='width:' + selectPercent + '%')
                             span.m-left.text-left > echo(selectPercent '%')
@@ -36,7 +36,7 @@ view('main')
                         input(type='radio' disabled='disabled')('checked')&if(checked)
                         b > echo(code '.')
                     .overflow
-                        .m-bottom > echo(text)
+                        .m-bottom > @echo(text)
                         .w-half > .progress-box
                             .progress.m-right > .progress-bar(style='width:' + selectPercent + '%')
                             span.m-left.text-left > echo(selectPercent '%')

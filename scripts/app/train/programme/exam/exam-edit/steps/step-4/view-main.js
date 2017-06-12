@@ -42,6 +42,7 @@ exports.handlers = {
             url: this.module.renderOptions.url,
             paperName: this.bindings.exam.data.name,
             type: 2,
+            isOtherModuleType: this.module.renderOptions.isOtherModuleType,
             callback: function(id) {
                 return that.module.dispatch('selectPaperId', id);
             }

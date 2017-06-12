@@ -59,7 +59,7 @@ exports.dataForTemplate = {
         var ids = _.map(quotaList.data, 'organizationId').join(',');
         _.map(orgList.data, function(x) {
             var ele = x || {};
-            if (ids.indexOf(ele.organizationId) === -1) {
+            if (ids.indexOf(ele.organizationId) === -1) { // 有bug，需要修改
                 organizationList.push(ele);
             }
         });

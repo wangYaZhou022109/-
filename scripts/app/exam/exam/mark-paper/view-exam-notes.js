@@ -6,7 +6,7 @@ var options = require('./app/exam/exam/base-paper/view-exam-notes'),
 obj.dataForTemplate = dataForTemplate;
 D.assign(obj.dataForTemplate, {
     errors: function(data) {
-        return data.state.errors;
+        return '您有' + data.state.errors.length + '题还没有评分，请评分完整才可以进行提交';
     }
 });
 

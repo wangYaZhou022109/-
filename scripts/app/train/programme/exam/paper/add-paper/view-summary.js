@@ -90,6 +90,8 @@ exports.handlers = {
     importQuestion: function() {
         var me = this;
         this.app.viewport.modal(this.module.items['train/programme/exam/question/import-data'], {
+            templateType: 1,
+            isOtherModuleType: this.module.renderOptions.isOtherModuleType,
             callback: function(data) {
                 return me.module.dispatch('addQuestionClass', data);
             },
