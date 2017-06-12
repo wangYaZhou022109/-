@@ -9,6 +9,9 @@ view('list')
                 img(src="images/nothing.png")
                 p.text-center 暂无与你相关的信息哦！
     each(page)
+
+
+
         li
             .user-pic
                 img.pointer(src=createUser.headPortrait)
@@ -143,3 +146,6 @@ view('list')
                                 input.input(type='hidden' name='id' value=discussId)
                                 input.input(type='hidden' name='toUserId' value=createUserId)
                                 .btn(id='reply-' + id ) > string('publish')
+    .none-more 
+        p 没有更多了
+        

@@ -177,3 +177,6 @@ view('list')
                                 .item > span.color-error > string('auditStatus2')
                                 compare(careNum 'ne' 0)
                                     .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+    
+    .none-more 
+        p 没有更多了

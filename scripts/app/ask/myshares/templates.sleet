@@ -159,4 +159,36 @@ view('list')
                                 .text-right
                                     .item > span.color-error > string('auditStatus2')
                                     compare(careNum 'eq' 0)
-                                        .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                        .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                    .item > .share-bar
+                                        .drop-down-wrapper
+                                            span 分享
+                                            form.drop-down-content > .content
+                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='')
+                                        input.input(type='hidden' name='organizationId' value=organizationId)
+                                        input.input(type='hidden' name='id' value=id)
+                                        .btn(id='publish-' + id) > string('publish')
+            compare(auditStatus 'eq' 2)
+                li
+                    .user-pic > img(src=member.headPortrait)
+                    .comment-content
+                        .h4 > a(id='myshares-sharedetails-' + id + '_' + id ) > echo(title)
+                        .comment-text.text-overflow
+                            compare(thumbnail.length 'gt' 0)
+                                img(src=thumbnail)
+                            @echo(content)
+                        .user-info
+                            a(href='javascript:;') > echo('我')
+                            span > echo('·发表文章·')
+                            span.sub-text > dateTime(createTime)
+                        .comment-operation
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .text-right
+                                .item > span.color-error > string('auditStatus2')
+                                compare(careNum 'eq' 0)
+                                    .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+    .none-more 
+        p 没有更多了

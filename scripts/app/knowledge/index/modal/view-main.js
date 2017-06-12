@@ -62,7 +62,7 @@ exports.components = [function() {
         options: {
             picker: 'topics',
             inputName: 'topicIds',
-            limit: 4,
+            limit: 5,
             tags: topics
         }
     };
