@@ -30,12 +30,9 @@ exports.handlers = {
     },
     changePhotoType: function(data) {
         var d = data,
-            state = this.bindings.state.data;
-        if (d === '1') {
-            state.needGroupPhotoCheck = true;
-        } else {
-            state.needGroupPhotoCheck = false;
-        }
+            classDetail = this.bindings.classInfo.data.classDetail;
+        classDetail.needGroupPhoto = Number(d);
+        this.bindings.classInfo.changed();
     },
     changeNeedVideo: function(data) {
         var d = data;
@@ -48,12 +45,9 @@ exports.handlers = {
     },
     changeMakeCourse: function(data) {
         var d = data,
-            state = this.bindings.state.data;
-        if (d === '1') {
-            state.needMakeCourseCheck = true;
-        } else {
-            state.needMakeCourseCheck = false;
-        }
+            classDetail = this.bindings.classInfo.data.classDetail;
+        classDetail.needMakeCourse = Number(d);
+        this.bindings.classInfo.changed();
     },
     uploadBanner: function() {
         var view = this.module.items.upload,
@@ -259,7 +253,6 @@ exports.mixin = {
         markers.text.valid(otherRequirement);
         markers.text.valid(restRoom);
         markers.text.valid(diningRoom);
-
         if (needGroupPhoto.val() === '1' && photoTime.val() === '') {
             markers.text.invalid(photoTime, validators.required.message);
             flag = false;
@@ -272,7 +265,8 @@ exports.mixin = {
             markers.text.invalid(otherRequirement, validators.required.message);
             flag = false;
         }
-        if (courseVideoRequirement.val() !== '' && !validators.maxLength.fn(courseVideoRequirement.val(), 1000)) {
+        if (needMakeCourse.val() === '1' &&
+        courseVideoRequirement.val() !== '' && !validators.maxLength.fn(courseVideoRequirement.val(), 1000)) {
             markers.text.invalid(courseVideoRequirement, validators.maxLength.message.replace(reg, 1000));
             flag = false;
         }
