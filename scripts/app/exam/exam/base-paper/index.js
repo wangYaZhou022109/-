@@ -159,9 +159,56 @@ exports.store = {
                             });
                         });
 
-                        this.sortQuestion();
+                        this.sortQuestion2();
                         this.save();
                     }
+                },
+                sortQuestion2: function() {
+                    var exam = this.module.store.models.exam.data,
+                        orders = JSON.parse(exam.examRecord.orderContent);
+
+                    this.data = _.map(this.data, function(t) {
+                        return D.assign(t, {
+                            questions: _.orderBy(_.map(t.questions, function(q) {
+                                var order = _.find(orders, ['questionId', q.id]),
+                                    attrOrder = order.attrOrder,
+                                    subsOrder = order.subsOrder || [];
+                                return D.assign(q, {
+                                    order: order.order,
+                                    questionAttrCopys: _.orderBy(_.map(q.questionAttrCopys, function(attr) {
+                                        var aOrder = _.find(attrOrder, ['attrId', attr.id]);
+                                        return D.assign(attr, {
+                                            order: aOrder && aOrder.order
+                                        });
+                                    }), ['order'], ['asc']),
+                                    subs: _.orderBy(_.map(q.subs, function(s) {
+                                        var subOrder = _.find(subsOrder, ['questionId', s.id]),
+                                            sattrOrder = subOrder.attrOrder;
+                                        return D.assign(s, {
+                                            order: subOrder.order,
+                                            questionAttrCopys: _.orderBy(_.map(s.questionAttrCopys, function(sattr) {
+                                                var saOrder = _.find(sattrOrder, ['attrId', sattr.id]);
+                                                return D.assign(sattr, {
+                                                    order: saOrder && saOrder.order,
+                                                });
+                                            }), ['order'], ['asc'])
+                                        });
+                                    }), ['order'], ['asc'])
+                                });
+                            }), ['order'], ['asc'])
+                        });
+                    });
+
+                    this.data = _.map(this.data, function(t, j) {
+                        return D.assign(t, {
+                            questions: _.map(t.questions, function(q, i) {
+                                return D.assign(q, {
+                                    index: i + 1,
+                                    status: (j === 0 && i === 0) ? itemStatus.CURRENT : itemStatus.INIT
+                                });
+                            })
+                        });
+                    });
                 },
                 sortQuestion: function() {
                     var exam = this.module.store.models.exam.data,

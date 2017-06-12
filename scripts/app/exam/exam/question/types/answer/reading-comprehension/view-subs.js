@@ -29,7 +29,8 @@ exports.getEntity = function(id) {
         answerRecord = D.assign({}, question.answerRecord);
     if (!question.questionAttrs) {
         D.assign(target, {
-            questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
+            // questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
+            questionAttrs: question.questionAttrCopys,
             answerRecord: D.assign(answerRecord, { score: answerRecord.score / 100 })
         });
     }

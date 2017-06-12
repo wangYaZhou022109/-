@@ -120,10 +120,12 @@ exports.dataForActions = {
 exports.dataForTemplate = {
     msgCount: function(data) {
         var msgCount = data.msgCount;
-        if (msgCount > 0) {
-            return msgCount;
-        } else if (msgCount > 99) {
-            return '99+';
+        if (msgCount) {
+            if (msgCount.count > 0) {
+                return msgCount.count;
+            } else if (msgCount.count > 99) {
+                return '99+';
+            }
         }
         return '';
     },
