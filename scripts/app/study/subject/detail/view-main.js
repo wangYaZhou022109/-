@@ -5,6 +5,16 @@ exports.bindings = {
     state: true
 };
 
+exports.events = {
+    'click closeWindow': 'closeWindow'
+};
+
+exports.handlers = {
+    closeWindow: function() {
+        window.close();
+    }
+};
+
 exports.getEntityModuleName = function(key) {
     return 'study/subject/detail/' + key;
 };

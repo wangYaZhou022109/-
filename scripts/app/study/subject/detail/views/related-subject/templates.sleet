@@ -9,6 +9,6 @@ view('pannel')
         .layout-mt-small.m-top
             each(courseRelated)
                 .block.layout-mt-small.m-top
-                    a.text-overflow(href='#/study/subject/detail/'+id title=name) > echo(name)
+                    a.text-overflow(id='openDetail-'+id) > echo(name)
             else
-                .empty 暂无相关的专题
+                .content-empty-side > .img-box + p 暂无相关的专题

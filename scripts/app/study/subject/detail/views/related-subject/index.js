@@ -15,7 +15,8 @@ exports.store = {
             type: 'pageable',
             pageSize: 4,
             root: 'items'
-        }
+        },
+        register: { url: '../course-study/course-front/register' }
     },
     callbacks: {
         init: function(options) {
@@ -39,6 +40,14 @@ exports.store = {
                 this.models.courseRelated.nextPage();
             }
             return this.get(this.models.courseRelated);
+        },
+        register: function(payload) {
+            var register = this.models.register,
+                me = this;
+            register.set({
+                courseId: payload.id
+            });
+            return me.post(register);
         }
     }
 };

@@ -41,4 +41,5 @@ view('advertising')
                                 i.iconfont.icon-favorite(title='收藏')
             .title-row > each(subject.businessTopics)
                 .inline-block.m-right.m-bottom.bg-white.sub-title > echo(name)
-            p.info-detail > string('subject.description') > echo(':' subject.description)
+            p.info-detail > string('subject.description') ：
+                pick(subject.description '暂无')
