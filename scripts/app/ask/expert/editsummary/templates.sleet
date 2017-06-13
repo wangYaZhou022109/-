@@ -1,0 +1,7 @@
+#!handlebars
+
+module > .editsummary-page
+    .editsummary(data-region="editsummary")
+
+view('editsummary')
+    form.container > textarea.w-full(rows="10" name="introduce" placeholder="请填写专家简介" value=state.introduce maxlength="500")
