@@ -5,8 +5,11 @@ module
 
 view('advertising')
     #banner.subject-banner.banner
-        ul > each(advertisings)
-            li > a(href=linkUrl target='_blank') > img(src=downUrl)
+        ul
+            each(advertisings)
+                li > a(href=linkUrl target='_blank') > img(src=downUrl)
+            else
+                li > img(src='images/default-cover/subject_banner.jpg')
         section.section.banner-info
             .title-row
                 .inline-block.layout-mr > .h3 > echo(subject.name)
@@ -40,6 +43,6 @@ view('advertising')
                             .item#collect
                                 i.iconfont.icon-favorite(title='收藏')
             .title-row > each(subject.businessTopics)
-                .inline-block.m-right.m-bottom.bg-white.sub-title > echo(name)
+                .inline-block.m-right.m-bottom.bg-white.sub-title.pointer(id='topicDetail-'+id data-group=group) > echo(name)
             p.info-detail > string('subject.description') ：
                 pick(subject.description '暂无')
