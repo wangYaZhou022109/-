@@ -4,9 +4,9 @@ exports.binding = {
 
 exports.title = '温馨提示';
 
-exports.afterClose = function() {
-    this.app.navigate('activity/index');
-};
+// exports.afterClose = function() {
+//     this.app.navigate('activity/index');
+// };
 
 exports.dataForTemplate = {
     state: function() {

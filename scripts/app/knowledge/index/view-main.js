@@ -25,10 +25,15 @@ exports.dataForTemplate = {
             'icon-ppt', 'icon-note', 'icon-zhishiku'];
         return _.map(data.knowledges, function(k) {
             var know = k || {};
+            var index = know.name.lastIndexOf('.');
+            var reg = /^[A-Za-z]+$/;
+            know.browseCount = (know.browseCount == null) ? 0 : know.browseCount;
+            know.downloadMemberCount = (know.downloadMemberCount == null) ? 0 : know.downloadMemberCount;
             know.avgScore *= 10;
             know.icon = icons[know.type] || defaultIcons;
-            if (know.name.lastIndexOf('.') !== -1) {
-                know.name = know.name.substring(0, know.name.lastIndexOf('.'));
+            if (index !== -1 && reg.test(know.name.substring(index + 1))
+                && know.name.substring(index + 1).length < 5) {
+                know.name = know.name.substring(0, index);
             }
             return know;
         });
