@@ -240,6 +240,11 @@ var setOptions = {
                                 return true;
                             }
 
+                            //  A浏览器没自动存DB ，B浏览器自动存DB ，取B浏览器
+                            if (!exam0.lastCacheTime && examRecord0.lastCacheTime) {
+                                return true;
+                            }
+
                             // 考试记录不同
                             if (exam0.examRecord.id !== examRecord0.id) {
                                 return true;
@@ -424,6 +429,9 @@ var setOptions = {
                     if (m.name !== 'examRecord') m.clear();
                 });
             },
+            saveLastCacheTime: function() {
+                this.models.saveLastCacheTime(new Date().getTime());
+            }
         }
     }
 };

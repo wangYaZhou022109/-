@@ -62,6 +62,10 @@ view('main') > form.vertical
             if(projectInfo.isShowCommit)
                 .text-center.layout-mt.layout-mb 
                     .btn#submit 提交
+                    .notes 
+                        p.small-font 注：1 提交后提交按钮变保存按钮
+                        p.small-font &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 提交后往返日期不可修改
+                        p.small-font &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 审核不通过可以重新提交
             else
                 .text-center.layout-mt.layout-mb.relative
                     .btn#submit 保存
