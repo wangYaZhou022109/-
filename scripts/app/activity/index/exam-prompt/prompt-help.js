@@ -2,7 +2,7 @@ var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
     signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
     isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess,
-    isReset;
+    isReset, examStarting;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -17,7 +17,7 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 11: 查看证书 查看详情
 // 12: 考试已撤销
 // 13: 考试结束，没有详情
-// 14: 可考多次 不能马上查看详情
+// 14: 可考多次 不能马上查看详情,或者 第一次答卷，进行一半关闭了页面
 // 15: 报名时间截止
 // 16: 答卷完，能重新考，试卷处理中
 // 17: 答卷完，不能重新考，试卷处理中
@@ -56,6 +56,9 @@ exports.getUserStatusOfExam = function(exam) {
         } else if (overExam(exam) && canExamMore(exam)) {
             return 14;
         } else if (isFirstTimeToExam(exam)) {
+            if (examStarting(exam)) {
+                return 14;
+            }
             return 5;
         } else if (overExam(exam)) {
             return 8;
@@ -164,4 +167,8 @@ paperProcess = function(exam) {
 
 isReset = function(exam) {
     return exam.examRecord && exam.examRecord.isReset === 1;
+};
+
+examStarting = function(exam) {
+    return exam.examRecord && exam.examRecord.status <= 4;
 };
