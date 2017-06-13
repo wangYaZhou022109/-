@@ -81,7 +81,7 @@ exports.store = {
         courseTime: { url: '../course-study/course-study-progress/total-time' }, // 总学习时长
         hotTopics: { url: '../system/topic/hot-all' }, // 热门标签
         msgCount: { url: '../system/msg-count' }, // 消息数
-        state: {}
+        state: { data: {} }
     },
     callbacks: {
         init: function(payload) {
@@ -112,21 +112,6 @@ exports.store = {
                 }
                 // return null;
             });
-        },
-        'app.pushState': function(hash) {
-            // 设置top菜单的active状态
-            var muduleName = hash, // hash.slice(0, hash.indexOf('/')),
-                dataMenus = this.module.items.nav.$$('div[data-menu]'),
-                matchModule;
-            if (!(muduleName)) {
-                return false;
-            }
-            matchModule = _.find(dataMenus, function(menu) {
-                return $(menu).attr('data-menu') && $(menu).attr('data-menu').indexOf(muduleName) > -1;
-            });
-            $(dataMenus).removeClass('active');
-            $(matchModule).addClass('active');
-            return true;
         },
         refreshMessage: function() {
             this.models.message.clear();
@@ -192,7 +177,13 @@ exports.store = {
             viewUtil.editSearchHistory(param);
             return true;
         },
-        changeTop: function() {
+        changeTop: function(menu) {
+            D.assign(this.models.state.data, menu);
+            this.models.state.changed();
+        },
+        'app.pushState': function(hash) {
+            var url = hash.slice(1);
+            D.assign(this.models.state.data, { url: url });
             this.models.state.changed();
         }
     }
