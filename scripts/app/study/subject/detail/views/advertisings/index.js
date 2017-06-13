@@ -17,10 +17,11 @@ exports.store = {
     },
     callbacks: {
         init: function(options) {
-            var collect = this.models.collect,
-                topicModel = this.models.topic,
+            var me = this,
+                collect = me.models.collect,
+                topicModel = me.models.topic,
                 businessTopics = options.subject.businessTopics,
-                subject = this.models.subject,
+                subject = me.models.subject,
                 ids;
             this.models.region.set(options.region);
             this.models.state.set(options.state || {});

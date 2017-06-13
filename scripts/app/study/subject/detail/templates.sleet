@@ -4,3 +4,10 @@ module > div(data-region='main')
 view('main')
     if(state.key)
         div(style='background-color:'+styles.backgroundColor)&if(styles.backgroundColor)(data-dynamic-key=state.key)
+    else
+        compare(state.error.errorCode 'eq' 40205)
+            .content-empty > .img-box.img-type-1 + p 您暂无该资源学习权限，去看看其它资源吧
+        compare(state.error.errorCode 'eq' 40206)
+            .content-empty > .img-box.img-type-1 + p 该资源已不存在
+        if(state.error.errorCode)
+            .text-center > button.btn#closeWindow 确定并关闭

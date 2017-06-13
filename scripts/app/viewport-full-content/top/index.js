@@ -191,6 +191,9 @@ exports.store = {
             };
             viewUtil.editSearchHistory(param);
             return true;
+        },
+        changeTop: function() {
+            this.models.state.changed();
         }
     }
 };

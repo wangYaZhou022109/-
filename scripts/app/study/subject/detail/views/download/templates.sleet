@@ -4,10 +4,11 @@ module > .download(data-region='pannel')
 
 view('pannel')
     if(region.regionModule.display)
-        .h3 > echo(region.regionModule.name)
-        .layout-mt-small
-            each(courseAttachments)
-                .block.layout-mt-small
-                    .pull-right
-                        a(href=downUrl download=name) > string('download')
-                    .text-overflow(title=name) > echo(name)
+        if(courseAttachments)
+            .h3 > echo(region.regionModule.name)
+            .layout-mt-small
+                each(courseAttachments)
+                    .block.layout-mt-small
+                        .pull-right
+                            a(href=downUrl download=name) > string('download')
+                        .text-overflow(title=name) > echo(name)
