@@ -36,7 +36,8 @@ exports.components = [{
 }];
 
 exports.events = {
-    'click star-*': 'star'
+    'click star-*': 'star',
+    'click topicDetail-*': 'topicDetail'
 };
 
 exports.handlers = {
@@ -46,6 +47,12 @@ exports.handlers = {
         $(target).parent().addClass('active');
         $(target).siblings().removeClass('active');
         $(target).addClass('active');
+    },
+    topicDetail: function(id, e, element) {
+        var group = element.getAttribute('data-group');
+        if (group === '1') {
+            window.open('#/ask/topicdetail/' + id);
+        }
     }
 };
 
