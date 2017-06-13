@@ -1,7 +1,8 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
     signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
-    isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess;
+    isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess,
+    isReset;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -39,7 +40,7 @@ exports.getUserStatusOfExam = function(exam) {
         return 4;
     }
 
-    if (processExam(exam.startTime, exam.endTime)) {
+    if (processExam(exam.startTime, exam.endTime) || isReset(exam)) {
         if (signUp !== 0 && signUp !== 3) {
             return signUp;
         }
@@ -81,7 +82,7 @@ beforeExam = function(startTime) {
 
 processExam = function(startTime, endTime) {
     var currentTime = new Date().getTime();
-    return currentTime >= startTime && currentTime <= endTime;
+    return (currentTime >= startTime && currentTime <= endTime);
 };
 
 afterExam = function(endTime) {
@@ -158,4 +159,8 @@ hasExamed = function(exam) {
 paperProcess = function(exam) {
     return exam.examRecord
         && exam.examRecord.status < 4 && exam.examRecord.submitTime;
+};
+
+isReset = function(exam) {
+    return exam.examRecord && exam.examRecord.isReset === 1;
 };

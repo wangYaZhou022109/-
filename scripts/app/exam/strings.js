@@ -7,7 +7,7 @@ module.exports = {
     'exam.submit-paper-confirm': '确定要提交试卷吗',
     'exam.submit-paper-confirm.no-finish': '{0}题未答',
     'exam.submit-mark-paper-confirm': '确定要提交评卷吗',
-    'exam.mark-paper-check': '存在还没评分的题目',
+    'exam.mark-paper-check': '您好，请检查题目，存在没有评分，或数据格式错误的分数，且分数只能保留1位小数',
     'exam.answer-paper.auto-submit-success': '答案已自动保存成功',
     'exam.answer-paper.force-submit': '你本次考试已被管理员强制交卷',
     'exam.answer-paper.submit-success-mark': '交卷成功，评卷老师将会尽快为你评卷',

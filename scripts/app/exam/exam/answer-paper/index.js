@@ -301,7 +301,7 @@ var setOptions = {
             },
             waitingCheck: function(payload) {
                 var f = this.models.mark.waitingCheck(payload.questionId);
-                if (!this.models.state.singleMode) {
+                if (!this.models.state.data.singleMode) {
                     if (f) {
                         this.models.types.updateStatus(payload.questionId, itemStatus.CHECK);
                     } else {

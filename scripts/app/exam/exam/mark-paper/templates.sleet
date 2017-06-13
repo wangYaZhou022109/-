@@ -54,3 +54,9 @@ view('main')
                 .btn.white.border.m-right(id='prev-' + state.currentQuestion.typeIndex) 上一题
             if(state.hasNext)
                 .btn.white.border(id='next-' + state.currentQuestion.typeIndex) 下一题
+
+
+view('exam-notes')
+    div
+        p.error > echo(errors)
+    hr
