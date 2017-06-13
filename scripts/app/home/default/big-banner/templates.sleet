@@ -4,8 +4,11 @@ module
         #banner(data-region='advertising')
 
 view('advertising')
-    #banner.banner.home-banner > ul
-        each(adverts)
-            li > a(href=linkAddress)(target='_blank')&if(outerLink) > img(src=downloadUrl(pcImage))
-            #  li(style='background-image:url('+../downUrl + pcImage+')') > a(href=linkAddress)(target='_blank')&if(outerLink)
-
+    #banner.banner.home-banner
+        if(adverts)
+            ul
+                each(adverts)
+                    li > a(href=linkAddress)(target='_blank')&if(outerLink) > img(src=downloadUrl(pcImage))
+                    #  li(style='background-image:url('+../downUrl + pcImage+')') > a(href=linkAddress)(target='_blank')&if(outerLink)
+        else
+            .content-empty > .img-box.img-type-1 + p 暂无内容

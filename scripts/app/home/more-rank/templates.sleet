@@ -1,0 +1,100 @@
+#! handlebars
+
+module
+    # 积分排行榜
+    .rank-list
+        ul.list-text
+            li.border.bottom
+                .num 1
+                .user-pic > img(src='images/default-cover/default_user.png')
+                .name 张三丰
+                .department 互联网发展事业群
+                .data 816
+            li.border.bottom
+                .num 2
+                .user-pic > img(src='images/default-cover/default_user.png')
+                .name 张三丰
+                .department 互联网发展事业群
+                .data 808
+        p.text-center.m-top
+            | 您排名
+            span.custom-color-3 118
+            | 位
+
+    # 时长排行榜
+    .rank-list
+        ul.list-text
+            li.border.bottom
+                .num 1
+                .user-pic > img(src='images/default-cover/default_user.png')
+                .name 张三丰
+                .department 互联网发展事业群
+                .data 18小时36分
+            li.border.bottom
+                .num 2
+                .user-pic > img(src='images/default-cover/default_user.png')
+                .name 张三丰
+                .department 互联网发展事业群
+                .data 16小时08分
+        p.text-center.m-top
+            | 您排名
+            span.custom-color-3 118
+            | 位
+
+    # 课程排行榜
+    .rank-list
+        ul.list-text
+            li.border.bottom
+                .num 1
+                .user-pic > img(src='images/default-cover/default_user.png')
+                .name 张三丰
+                .department 互联网发展事业群
+                .data 28
+            li.border.bottom
+                .num 2
+                .user-pic > img(src='images/default-cover/default_user.png')
+                .name 张三丰
+                .department 互联网发展事业群
+                .data 26
+        p.text-center.m-top
+            | 您排名
+            span.custom-color-3 118
+            | 位
+
+    # 热门知识
+    .rank-list
+        ul.list-text
+            li.border.bottom
+                .title 零基础PPT快速入门—秋叶系列课程
+                .data 28
+            li.border.bottom
+                .title AE CC 2017 零基础影视合成与特效
+                .data 26
+        p.text-center.m-top
+            a(href='javascript:;') 进入知识中心
+
+    # 热门问题
+    .rank-list
+        ul.list-text
+            li.border.bottom
+                .title 零基础PPT快速入门—秋叶系列课程
+                .data 28
+            li.border.bottom
+                .title AE CC 2017 零基础影视合成与特效
+                .data 26
+        p.text-center.m-top
+            a(href='javascript:;') 进入问吧
+
+    # 热门话题
+    .rank-list
+        ul.list-text
+            li.border.bottom
+                .user-pic > img(src='images/default-cover/default_topic.jpg')
+                .department 话题名称
+                .data 28
+            li.border.bottom
+                .user-pic > img(src='images/default-cover/default_topic.jpg')
+                .department 话题名称话题名称
+                .data 26
+        p.text-center.m-top
+            a(href='javascript:;') 进入话题广场

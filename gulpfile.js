@@ -36,18 +36,21 @@ var libs = [
         './vendors/upload/jquery.plupload.queue.min',
         './vendors/upload/zh_CN',
         './vendors/upload/moxie.min',
-        'crypto-js', 'flatpickr', 'kindeditor', 'kindeditor/kindeditor-all', 'kindeditor/lang/zh-CN'
+        'crypto-js', 'flatpickr', 'kindeditor', 'kindeditor/kindeditor-all', 'kindeditor/lang/zh-CN',
+        './vendors/image-cropper/swfobject'
     ],
     options = {
         entries: ['./main.js'],
         extensions: ['.html', '.hbs'],
         basedir: './scripts',
         debug: false,
-        cache: {}, packageCache: {}
+        cache: {},
+        packageCache: {}
     },
     requireDrizzleModules = function(dir, root, b) {
         fs.readdirSync(dir).forEach(function(file) {
-            var filename = path.join(dir, file), ext;
+            var filename = path.join(dir, file),
+                ext;
             if (fs.statSync(filename).isDirectory()) {
                 requireDrizzleModules(filename, root, b);
             } else {
@@ -56,7 +59,7 @@ var libs = [
                     filename = path.relative(root, filename);
                     filename = path.join(path.dirname(filename), path.basename(filename, ext));
                     filename = './' + filename.replace(/\\/g, '/');
-                    b.require({file: filename}, {basedir: root});
+                    b.require({ file: filename }, { basedir: root });
                 }
             }
         });
@@ -74,33 +77,36 @@ var libs = [
             .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .pipe(source('main.js'))
             .pipe(buffer())
-            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(sourcemaps.init({ loadMaps: true }))
             .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest('./bundle'));
     };
 gulp.task('kindeditor', ['clean-build', 'images', 'font'], function() {
     return gulp.src([
-            'node_modules/kindeditor/plugins/**/*', 'node_modules/kindeditor/themes/**/*'
-        ], {
-            base: 'node_modules/kindeditor'
-        })
-        .pipe(gulp.dest('./dist/scripts/kindeditor'));
+        'node_modules/kindeditor/plugins/**/*', 'node_modules/kindeditor/themes/**/*'
+    ], {
+        base: 'node_modules/kindeditor'
+    })
+    .pipe(gulp.dest('./dist/scripts/kindeditor'));
 });
 
-gulp.task('files', ['clean-build', 'images', 'font', 'kindeditor', 'pdf-worker'], function() {
-    return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
-        .pipe(gulp.dest('./dist/scripts'));
+gulp.task('jquery-ui', ['clean-build', 'images', 'font'], function() {
+    return gulp.src([
+        'node_modules/jquery-ui/themes/base/images/*'
+    ], {
+        base: 'node_modules/jquery-ui/themes/base/images'
+    })
+    .pipe(gulp.dest('./dist/styles/images/'));
 });
-
 
 gulp.task('postcss', function() {
     return gulp.src([
-            'styles/postcss/main.css'
-        ])
-        .pipe(sourcemaps.init())
-        .pipe(postcss([cssimport(), cssnext()]))
-        .pipe(sourcemaps.write('bundle/'))
-        .pipe(gulp.dest('bundle/'));
+        'styles/postcss/main.css'
+    ])
+    .pipe(sourcemaps.init())
+    .pipe(postcss([cssimport(), cssnext()]))
+    .pipe(sourcemaps.write('bundle/'))
+    .pipe(gulp.dest('bundle/'));
 });
 
 gulp.task('watch-css', function() {
@@ -124,17 +130,17 @@ gulp.task('lint-build', function() {
 
 gulp.task('common', function() {
     var b = browserify();
-    b.require(libs.filter(function(item) { return item.charAt(0) !== '.';}));
+    b.require(libs.filter(function(item) { return item.charAt(0) !== '.'; }));
     // b.require(libs.filter(function(item) { return item.charAt(0) === '.';}), { basedir: './scripts' });
 
-    libs.filter(function(item) { return item.charAt(0) === '.';}).forEach(function(item) {
-        b.require(path.resolve('./scripts', item + '.js'), {expose: item});
+    libs.filter(function(item) { return item.charAt(0) === '.'; }).forEach(function(item) {
+        b.require(path.resolve('./scripts', item + '.js'), { expose: item });
     });
 
     return b.bundle()
         .pipe(source('common.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./bundle'));
 });
@@ -149,7 +155,7 @@ gulp.task('build-main', ['sleet', 'postcss'], function() {
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source('main.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./bundle'));
 });
@@ -176,16 +182,25 @@ gulp.task('font', ['clean-build'], function() {
         .pipe(gulp.dest('./dist/font'));
 });
 
-gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
+gulp.task('image-cropper', ['clean-build', 'images', 'font'], function() {
     return gulp.src([
-            'node_modules/pdfjs-dist/build/pdf.worker.js'
+            'scripts/vendors/image-cropper/**/*.swf'
         ], {
-            base: 'node_modules/pdfjs-dist/build'
+            base: 'scripts/vendors/image-cropper'
         })
-        .pipe(gulp.dest('./dist/scripts/pdfjs-dist'));
+        .pipe(gulp.dest('./dist/scripts/image-cropper'));
 });
 
-gulp.task('files', ['clean-build', 'images', 'font','kindeditor', 'pdf-worker'], function() {
+gulp.task('pdf-worker', ['clean-build', 'images', 'font'], function() {
+    return gulp.src([
+        'node_modules/pdfjs-dist/build/pdf.worker.js'
+    ], {
+        base: 'node_modules/pdfjs-dist/build'
+    })
+    .pipe(gulp.dest('./dist/scripts/pdfjs-dist'));
+});
+
+gulp.task('files', ['clean-build', 'images', 'font', 'kindeditor', 'pdf-worker','jquery-ui', 'image-cropper'], function() {
     return gulp.src('node_modules/es6-promise/dist/es6-promise.js')
         .pipe(gulp.dest('./dist/scripts'));
 });
@@ -193,21 +208,22 @@ gulp.task('files', ['clean-build', 'images', 'font','kindeditor', 'pdf-worker'],
 gulp.task('build', ['clean-build', 'lint', 'sleet', 'postcss', 'common', 'build-main', 'files'], function() {
     gulp.src('./index.html')
         .pipe(useref())
-        .pipe(gulpif('*.js', preprocess({context: {
+        .pipe(gulpif('*.js', preprocess({ context: {
             KINDEDITOR_THEME: 'scripts/kindeditor/themes/',
             KINDEDITOR_PLUGIN: 'scripts/kindeditor/plugins/',
+            IMAGE_CROPPER: 'scripts/image-cropper/',
             PDF_WORKER: 'scripts/pdfjs-dist/'
-        }})))
+        } })))
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', csso()))
         .pipe(gulpif('!index.html', rev()))
-        .pipe(gulpif('index.html', preprocess({context: { ES6PROMISE: 'scripts/es6-promise.js' }})))
+        .pipe(gulpif('index.html', preprocess({ context: { ES6PROMISE: 'scripts/es6-promise.js' } })))
         .pipe(revReplace())
         .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('default', ['main', 'common', 'watch-css'], function() {
-    var app = express()
+    var app = express();
 
     app.use(function(req, res, next) {
         next();
@@ -221,7 +237,7 @@ gulp.task('default', ['main', 'common', 'watch-css'], function() {
 });
 
 gulp.task('serve-dist', function() {
-    var app = express()
+    var app = express();
     app.use(function(req, res, next) {
         next();
     });
@@ -231,5 +247,4 @@ gulp.task('serve-dist', function() {
         console.log('Server started at http://localhost:8002');
         console.log('in nginx you can started at http://localhost');
     });
-
 });

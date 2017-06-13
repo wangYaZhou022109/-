@@ -1,5 +1,5 @@
 #!handlebars
-module 
+module
     div(data-region='list')
 
 view('list')
@@ -9,7 +9,7 @@ view('list')
             .common-title.m-bottom > string('recommend') + string('topic')
             .aboutme-contents
                 ul.aboutme-ul.clearfix > each(topic)
-                    input(type='hidden' id='topics-item' + id name='topics' value= id ) 
+                    input(type='hidden' id='topics-item' + id name='topics' value= id )
                     li.aboutme-li.pull-left.relative.layout-mb-small
                         .img-dv.relative
                             img.w-full(src=attachmentId)
@@ -23,20 +23,16 @@ view('list')
             .common-title.m-bottom > string('recommend') + string('expert')
             .recommend-contents
                 ul.recommend-ul.clearfix > each(expert)
-                    input(type='hidden' id='expert-item' + id name='expert' value=id) 
+                    input(type='hidden' id='expert-item' + id name='expert' value=id)
                     li.recommend-li.pull-left.relative.mb-1
                         .recommend-total.relative
                             img(src=member.headPortrait)
                             .recommend-item.relative.text-center
-                                p.text-center > echo(member.fullName)
-                                p.text-center
+                                .text-center.m-top.m-bottom > echo(member.fullName)
+                                .text-center.text-overflow
                                     span > echo(topicStr)
                             .recommend-icon.text-right(id = 'icon-' + id)
                                 .iconfont.icon-tick-circle
             .recommend-btn.text-center
-                .btn#button-2 > string('previous-step') 
+                .btn#button-2 > string('previous-step')
                 .btn#end > string('finish')
-   
-                
-
-    

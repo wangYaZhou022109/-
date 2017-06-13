@@ -24,7 +24,8 @@ exports.store = {
         accessList: { url: '../course-study/gensee-student/access-list' },
         collect: { url: '../system/collect' },
         score: { url: '../course-study/course-front/score' },
-        topics: { url: '../system/topic/ids' }
+        topics: { url: '../system/topic/ids' },
+        businessProgress: { url: '../course-study/gensee-student/business' }
     },
     callbacks: {
         init: function(params) {
@@ -36,6 +37,7 @@ exports.store = {
                 course = this.models.courses,
                 topics = this.models.topics,
                 relativeGensees = this.models.relativeGensees,
+                businessProgress = this.models.businessProgress,
                 me = this;
             collect.params = { businessId: params.id }; // 收藏
             gensee.set(params);
@@ -43,33 +45,46 @@ exports.store = {
             access.set({ genseeId: params.id });
             relativeGensees.params = { genseeId: params.id };
 
-            return this.chain(this.get(gensee, {
-                slient: true // get完不触发changed事件
-            }), function() {
-                // 预约状态 - 未开始的直播才需要查询
-                if (gensee.data.status === STATUS_UNSTART) {
-                    sub.set(params);
-                    me.get(sub);
-                }
-                // 直播回顾 - 已结束的直播才需要查询
-                if (gensee.data.status === STATUS_FINISH) {
-                    course.set(params);
-                    me.get(course);
-                }
-                 // 浏览人数+1，同时如果是已开始的直播，保存参与用户并更新参与人数
-                me.save(access);
+            // 浏览人数+1，同时如果是已开始的直播，保存参与用户并更新参与人数
+            return me.save(access).then(function() {
+                return me.chain(me.get(gensee, {
+                    slient: true // get完不触发changed事件
+                }), function() {
+                    // 预约状态 - 未开始的直播才需要查询
+                    if (gensee.data.status === STATUS_UNSTART) {
+                        sub.set(params);
+                        me.get(sub);
+                    }
+                    // 直播回顾 - 已结束的直播才需要查询
+                    if (gensee.data.status === STATUS_FINISH) {
+                        course.set(params);
+                        me.get(course);
+                    }
+
+                    // 直播资源记录（含当前登录人的参与记录）
+                    businessProgress.set(params);
+                    me.get(businessProgress);
+                }, function() {
+                    D.assign(topics.params, {
+                        ids: _.map(gensee.data.businessTopics, 'topicId').join(',')
+                    });
+                    if (!topics.params.ids) return false;
+                    return me.get(this.models.topics);
+                }, function() {
+                    D.assign(me.models.gensee.data, {
+                        topics: me.models.topics.data
+                    });
+                    me.models.gensee.changed();
+                }, [me.get(relativeGensees), me.get(collect), me.get(accessList)]);
             }, function() {
-                D.assign(topics.params, {
-                    ids: _.map(gensee.data.businessTopics, 'topicId').join(',')
+                return me.Promise.create(function(resolve, reject) {
+                    me.app.message.alert('当前直播参与人数超出限制，不允许继续参加', function() {
+                        window.close();
+                        resolve(true);
+                    });
+                    reject();
                 });
-                if (!topics.params.ids) return false;
-                return me.get(this.models.topics);
-            }, function() {
-                D.assign(me.models.gensee.data, {
-                    topics: me.models.topics.data
-                });
-                me.models.gensee.changed();
-            }, [me.get(relativeGensees), me.get(collect), me.get(accessList)]);
+            });
         },
         cancelsubGensee: function(data) {
             var cancelsubGensee = this.models.cancelsubGensee,
@@ -101,20 +116,21 @@ exports.store = {
                 collect.set({}, true);
             });
         },
-        score: function() {
+        score: function(payload) {
             // 评分
             var score = this.models.score,
                 gensee = this.models.gensee;
-            score.data.businessId = gensee.data.id;
-            score.data.businessType = 5;
+            score.data.businessId = payload.businessId;
+            score.data.businessType = payload.businessType;
+            score.data.score = payload.score;
             return this.save(score).then(function(data) {
-                gensee.data.courseScore = data[0];
+                gensee.data.avgScore = data[0].avgScore || gensee.data.avgScore;
                 gensee.changed();
             });
         },
     }
 };
 
-exports.afterRender = function() {
+exports.beforeRender = function() {
     return this.dispatch('init', { id: this.renderOptions.genseeId });
 };

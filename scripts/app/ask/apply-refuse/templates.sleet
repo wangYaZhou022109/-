@@ -1,0 +1,11 @@
+#!handlebars
+
+moudle > .apply-verify-page
+    div(data-region="refuse-verify")
+
+view('refuse-verify')
+    .text-center.layout-mt.container
+        .h1.color-error.layout-mt 被拒绝
+        p.layout-mt-small.text-center.h4 非常抱歉的通知您，经过管理员的审核，目前没
+        p.text-center.h4 有适合您担任专家的话题，谢谢。
+    .text-center.layout-mt > a(id='reapply') 重新申请

@@ -9,9 +9,10 @@ exports.bindings = {
 
 exports.events = {
     'click activate*': 'activate',
-    'click review*': 'review',
+    'click review*': 'review', // 审核中
     // 'click myself*': 'myself',
-    'click apply*': 'apply',
+    'click apply*': 'apply', // 申请成为专家
+    'click refuse*': 'refuse', // 审核未通过
     'click expert-*': 'details'
 };
 
@@ -24,6 +25,7 @@ exports.handlers = {
         }
         });
     },
+    // 审核中
     review: function() {
         var model = this.module.items['ask/apply-verify'];
         this.app.viewport.modal(model);
@@ -31,14 +33,18 @@ exports.handlers = {
     // myself: function() {
     //     this.app.show('content', 'ask/iamexpert');
     // },
+    // 申请成为专家
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
         var me = this;
-        // this.app.viewport.modal(model, { bindings: this.bindings });
         this.app.viewport.modal(model, { callback: function() {
             me.module.dispatch('user');
         }
         });
+    },
+    refuse: function() {
+        var model = this.module.items['ask/apply-refuse'];
+        this.app.viewport.modal(model);
     },
     details: function(id) {
         this.app.show('content', 'ask/expertdetails', { id: id });

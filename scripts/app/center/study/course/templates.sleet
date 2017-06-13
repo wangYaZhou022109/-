@@ -38,11 +38,8 @@ view('main')
                 .time > echo(prefixText)
             .state > map('course-info-study-status' finishStatus)
             .btn-row
-                if(noVersion)
-                    .btn 已下架
-                else
-                    a.normal(id='navigate-'+courseId href=btnUrl target='_blank')
-                        .btn > echo(btnText)
+                a.normal(id='navigate-'+courseId href=btnUrl target='_blank' data-versionId=courseInfo.versionId)
+                    .btn > echo(btnText)
                 compare(isRequired 'eq' 0)
                     i.iconfont.icon-close.fade-out(id='delete-'+id data-name='id' data-value=id)
                 else

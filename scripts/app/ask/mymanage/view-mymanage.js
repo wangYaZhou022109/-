@@ -39,6 +39,10 @@ exports.dataForTemplate = {
             }
         });
         return mymanage;
+    },
+    todayadd: function(data) {
+        var todayadd = data.todayadd;
+        return todayadd;
     }
 };
 

@@ -1,5 +1,4 @@
-var _ = require('lodash/collection'),
-    helpers = require('./app/util/helpers');
+var _ = require('lodash/collection');
 
 exports.bindings = {
     list: true,
@@ -18,9 +17,6 @@ exports.dataForTemplate = {
                 rStatus = r.researchQuestionary.status,
                 pStatus = r.status;
             r.i = i + 1 + ((pageNum - 1) * 10);
-            r.startTimeStr = helpers.dateMinute(r.researchQuestionary.startTime);
-            r.endTimeStr = helpers.dateMinute(r.researchQuestionary.endTime);
-            r.createTimeStr = helpers.dateMinute(r.createTime);
             r.statusStr = '';
 
             if (rStatus === 1) {

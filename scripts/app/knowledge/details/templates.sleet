@@ -63,8 +63,7 @@ view('side')
             ul.relevant-knowledge.layout-mt-small > each(recommends)
                 li
                     .pull-right > echo(integral) + | 积分
-                    a.underline > echo(name)
-
+                    .inline-block.title > a.normal.block(href='#/knowledge/detail/'+id target='_blank') > echo(name)
         section.section.student
             .h3 最近查看的用户
             .layout-mt-small.user-picture

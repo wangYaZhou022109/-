@@ -20,7 +20,7 @@ view('main') > .container
             string('search-empty-end')
     .activity-page > .main-list
         ul.arrow-box.activity-item-box.activity-item-exam.cell-3 > each(exams)
-            li(id='exam-' + id)
+            li
                 .activity-item.clearfix.pointer
                     i.iconfont.icon-exam.pull-left.activity-item-icon
                     .overflow

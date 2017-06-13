@@ -5,3 +5,8 @@ module
 
 view('main')
     #time.time
+
+
+view('tips')
+    echo(state.tips)
+    hr

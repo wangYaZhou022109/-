@@ -48,6 +48,6 @@ exports.sectionCode = sectionCode;
 
 exports.judgeSection = function(sectionType) {
     var type = window.parseInt(sectionType);
-    var innerType = [8, 9];
+    var innerType = [8, 9, 12, 13];
     return innerType.indexOf(type) === -1;
 };

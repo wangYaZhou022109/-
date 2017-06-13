@@ -14,21 +14,9 @@ exports.components = [{
     id: 'pager', name: 'pager', options: { model: 'researchRecords' }
 }];
 
-exports.actions = {
-    'click search': 'search'
-};
-
-exports.dataForActions = {
-    search: function(payload) {
-        var data = payload;
-        data.status = this.bindings.search.data.status;
-        return data;
-    }
-};
 
 exports.events = {
     'click do-research-*': 'showResearchPaper',
-    'click item-*': 'search',
     'click view-detail-*': 'showResearchAnswerDetail'
 };
 
@@ -37,12 +25,6 @@ exports.handlers = {
         return this.module.dispatch('getResearchById', { id: id }).then(function(data) {
             var url = '#/exam/research-activity/index/' + data.id;
             window.open(url, '_blank');
-        });
-    },
-    search: function(status) {
-        return this.module.dispatch('search', {
-            status: status,
-            name: this.$('name').value
         });
     },
     showResearchAnswerDetail: function(id) {

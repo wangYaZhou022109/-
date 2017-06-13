@@ -12,7 +12,9 @@ var prompts = {
         12: '您好，本次考试已撤销',
         13: '您好,本次考试已结束',
         14: '您好，本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试，成绩详情待考试活动结束后方可查看',
-        15: '您好，本次考试已截止报名，如有疑问请联系系统管理员，谢谢'
+        15: '您好，本次考试已截止报名，如有疑问请联系系统管理员，谢谢',
+        16: '您好，系统正在处理您的考卷，稍后可查看详情。本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试',
+        17: '系统正在处理您的考卷，稍后可查看详情'
     },
     P = require('./app/activity/index/exam-prompt/prompt-help'),
     getWithParams,
@@ -127,7 +129,8 @@ getCurrentExam = function(exam) {
             12: [knewButton],
             13: [knewButton],
             14: [examAgainButton, knewButton],
-            15: [knewButton]
+            15: [knewButton],
+            16: [examAgainButton, knewButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 5) {

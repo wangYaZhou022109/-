@@ -33,6 +33,7 @@ var showHandler = function(payload) {
 var statusMap = {
     8: {
         0: '查看作业',
+        1: '学习中',
         5: '待评审',
         2: '',
         6: '重新提交',
@@ -40,17 +41,20 @@ var statusMap = {
     9: {
         0: '参与考试',
         5: '待评卷',
+        1: '学习中',
         2: '',
         6: '重新考试',
     },
     12: {
         0: '参与调研',
+        1: '学习中',
         5: '待评审',
         2: '查看详情',
         6: '重新提交',
     },
     13: {
         0: '参与评估',
+        1: '学习中',
         5: '待评审',
         2: '查看详情',
         6: '重新提交',
@@ -149,6 +153,7 @@ exports.dataForTemplate = {
                     // rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
                     rr.finishStatus = '';
                     if (rr.sectionType === 8 && sectionProcess.score > 0) {
+                        if (sectionProcess.score) sectionProcess.score = Number(sectionProcess.score) / 10;
                         rr.finishStatus += '成绩' + sectionProcess.score + ' ';
                     }
                     if (rr.sectionType === 9 && sectionProcess.examScore > 0) {

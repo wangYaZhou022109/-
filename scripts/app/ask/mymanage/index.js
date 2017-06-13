@@ -40,6 +40,7 @@ exports.store = {
         init: function() {
             var mymanage = this.models.mymanage;
             var todayadd = this.models.todayadd;
+            var reviewed = this.models.reviewed;
             var me = this;
             // mymanage.set({ id: 1 });
             return me.get(mymanage).then(function(data) {
@@ -49,6 +50,9 @@ exports.store = {
                     params.push(d.id);
                 });
                 todayadd.set({ id: params.toString() });
+                // console.log(params.toString());
+                reviewed.set({ id: params.toString(), auditStatus: 1 });
+                // console.log(reviewed);
                 return me.get(todayadd);
             });
         },

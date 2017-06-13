@@ -45,31 +45,9 @@ exports.title = '举报';
 exports.buttons = [{
     text: '提交',
     fn: function(payload) {
-        var data = payload,
-            type = [];
-        if (data.input1 === 'on') {
-            data.type = '1,';
-            type.push(1);
-        }
-        if (data.input2 === 'on') {
-            data.type = '1,';
-            type.push(2);
-        }
-        if (data.input3 === 'on') {
-            data.type = '1,';
-            type.push(3);
-        }
-        if (data.input4 === 'on') {
-            data.type = '1,';
-            type.push(4);
-        }
-        data.type = type.toString();
+        var data = payload;
         if (!data.type) {
             this.app.message.error('请选择举报类型');
-            return false;
-        }
-        if (!data.accuseNote || $.trim(data.accuseNote) === '') {
-            this.app.message.error('请填写举报理由');
             return false;
         }
         data.accuseNote = $.trim(data.accuseNote);

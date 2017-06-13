@@ -4,7 +4,8 @@ exports.items = {
     'ask/expertactivation': { isModule: true },
     'ask/expertapply': { isModule: true },
     'ask/applyexpertaptitude': { isModule: true },
-    'ask/apply-verify': { isModule: true }
+    'ask/apply-verify': { isModule: true },
+    'ask/apply-refuse': { isModule: true }
 };
 
 exports.store = {

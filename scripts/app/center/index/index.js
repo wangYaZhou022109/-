@@ -74,17 +74,17 @@ exports.store = {
                 }
             }
             recommendList.clear();
-            recommendList.params = { page: '1' };
+            recommendList.params = { page: 1, pageSize: 5 };
             me.get(recommendList);
             announcements.clear();
-            announcements.params = { page: '1', pageSize: '1' };
+            announcements.params = { page: 1, pageSize: 1 };
             me.get(announcements);
         },
         changeRecommend: function() {
             var me = this,
                 recommendList = me.models.recommendList,
                 page = this.models.page.data.value;
-            recommendList.params = { page: page };
+            recommendList.params = { page: page, pageSize: 5 };
             me.get(recommendList);
         },
         prevNotice: function(payload) {

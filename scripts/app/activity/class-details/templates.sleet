@@ -113,7 +113,7 @@ view('class-clerk')
 view('charts')
     .charts
         .h3.clearfix.m-bottom
-            a.pull-right.more > | more
+            a.pull-right.more(href='#/activity/class-details/lengthranking' target='_self') > | more
             span.strong 排行榜
             small 学员时长排行榜
         .clearfix.charts-list
@@ -179,7 +179,7 @@ view('schedule')
                     .clearfix
                         .pull-right
                             .inline-block.pointer
-                                i.iconfont.icon-favorite.icon-down 
+                                i.iconfont.icon-favorite.icon-down
                                 span 下载
                             span.m-left.gray-line |
                             .inline-block.pointer
@@ -201,7 +201,7 @@ view('schedule')
                     .clearfix
                         .pull-right
                             .inline-block.pointer
-                                i.iconfont.icon-favorite.icon-down 
+                                i.iconfont.icon-favorite.icon-down
                                 span 下载
                             span.m-left.gray-line |
                             .inline-block.pointer
@@ -223,7 +223,7 @@ view('schedule')
                     .clearfix
                         .pull-right
                             .inline-block.pointer
-                                i.iconfont.icon-favorite.icon-down 
+                                i.iconfont.icon-favorite.icon-down
                                 span 下载
                             span.m-left.gray-line |
                             .inline-block.pointer
@@ -249,7 +249,7 @@ view('schedule')
                     .clearfix
                         .pull-right
                             .inline-block.pointer
-                                i.iconfont.icon-favorite.icon-down 
+                                i.iconfont.icon-favorite.icon-down
                                 span 下载
                             span.m-left.gray-line |
                             .inline-block.pointer
@@ -271,7 +271,7 @@ view('schedule')
                     .clearfix
                         .pull-right
                             .inline-block.pointer
-                                i.iconfont.icon-favorite.icon-down 
+                                i.iconfont.icon-favorite.icon-down
                                 span 下载
                             span.m-left.gray-line |
                             .inline-block.pointer
@@ -293,7 +293,7 @@ view('schedule')
                     .clearfix
                         .pull-right
                             .inline-block.pointer
-                                i.iconfont.icon-favorite.icon-down 
+                                i.iconfont.icon-favorite.icon-down
                                 span 下载
                             span.m-left.gray-line |
                             .inline-block.pointer
@@ -316,7 +316,7 @@ view('resources')
             li
                 .pull-right
                     .inline-block.pointer
-                        i.iconfont.icon-favorite.icon-down 
+                        i.iconfont.icon-favorite.icon-down
                         span 下载
                     span.m-left.gray-line |
                     .inline-block.pointer
@@ -329,7 +329,7 @@ view('resources')
             li
                 .pull-right
                     .inline-block.pointer
-                        i.iconfont.icon-favorite.icon-down 
+                        i.iconfont.icon-favorite.icon-down
                         span 下载
                     span.m-left.gray-line |
                     .inline-block.pointer
@@ -342,7 +342,7 @@ view('resources')
             li
                 .pull-right
                     .inline-block.pointer
-                        i.iconfont.icon-favorite.icon-down 
+                        i.iconfont.icon-favorite.icon-down
                         span 下载
                     span.m-left.gray-line |
                     .inline-block.pointer
@@ -355,7 +355,7 @@ view('resources')
             li
                 .pull-right
                     .inline-block.pointer
-                        i.iconfont.icon-favorite.icon-down 
+                        i.iconfont.icon-favorite.icon-down
                         span 下载
                     span.m-left.gray-line |
                     .inline-block.pointer
@@ -368,7 +368,7 @@ view('resources')
             li
                 .pull-right
                     .inline-block.pointer
-                        i.iconfont.icon-favorite.icon-down 
+                        i.iconfont.icon-favorite.icon-down
                         span 下载
                     span.m-left.gray-line |
                     .inline-block.pointer

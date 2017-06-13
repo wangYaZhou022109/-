@@ -7,7 +7,7 @@ module > .search-layout
 
 view('top')
     .search-bar > form
-        input.input#searchContent(name='searchContent' autocomplete='off' placeholder='请输入您要找的内容' value=state.searchContent)
+        input.input#searchContent(name='searchContent' autocomplete='off' placeholder='请输入您要找的内容' maxlength='50' value=state.searchContent)
         i#searchBtn.iconfont.icon-search.scale-1.text-hover-main-color
         .search-more-bar.border.around#searchMore
             ul > each(searchHistorys)

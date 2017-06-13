@@ -1,11 +1,10 @@
 
-var _ = require('lodash/collection');
+var _ = require('lodash');
 exports.type = 'dynamic';
 exports.bindings = {
     experts: true,
     topicType: true,
-    down: true,
-    page: true
+    down: true
 };
 
 exports.events = {
@@ -34,10 +33,15 @@ exports.actionCallbacks = {
 };
 
 exports.dataForTemplate = {
-    page: function(data) {
-        var expert = data.experts.concernList;
+    experts: function(data) {
+        var experts = data.experts;
         var me = this;
-        _.forEach(expert, function(value) {
+        if (_.isEmpty(experts.concernList)) {
+            experts.concernListFlag = true;
+        } else {
+            experts.concernListFlag = false;
+        }
+        _.forEach(experts.concernList, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
@@ -46,6 +50,6 @@ exports.dataForTemplate = {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
         });
-        return expert;
+        return experts;
     }
 };
