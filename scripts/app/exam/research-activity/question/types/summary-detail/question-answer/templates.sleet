@@ -13,4 +13,4 @@ view('main')
 
     .clearfix.statistics-list
         .statistics-list-tit > echo('答：' question.answerRecord.answer)
-        .statistics-list-time > dateTime(question.answerRecord.createTime)
+        .statistics-list-time > dateMinute(question.answerRecord.createTime)
