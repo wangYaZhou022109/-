@@ -30,8 +30,24 @@ exports.handlers = {
     },
     changePhotoType: function(data) {
         var d = data,
-            classDetail = this.bindings.classInfo.data.classDetail;
-        classDetail.needGroupPhoto = Number(d);
+            classInfo = this.bindings.classInfo.data,
+            state = this.bindings.state.data;
+        classInfo.classDetail.needGroupPhoto = Number(d);
+        classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
+        classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
+        classInfo.classDetail.needMakeCourse = Number($(this.$$('[name="needMakeCourse"]:checked')).val());
+        if (Number($(this.$$('[name="needMakeCourse"]:checked')).val()) === 1) {
+            classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
+        }
+        classInfo.classDetail.tableType = this.$('tableType').value;
+        classInfo.classDetail.photoTime = '';
+        classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
+        classInfo.classInfoType = this.$('classType').value;
+        if (state.role === 1 || state.role === 3) {
+            classInfo.restRoom = this.$('restRoom').value;
+            classInfo.diningRoom = this.$('diningRoom').value;
+            classInfo.classRoom = this.$('classRoom').value;
+        }
         this.bindings.classInfo.changed();
     },
     changeNeedVideo: function(data) {
@@ -45,8 +61,25 @@ exports.handlers = {
     },
     changeMakeCourse: function(data) {
         var d = data,
-            classDetail = this.bindings.classInfo.data.classDetail;
-        classDetail.needMakeCourse = Number(d);
+            classInfo = this.bindings.classInfo.data,
+            state = this.bindings.state.data;
+        classInfo.classDetail.needMakeCourse = Number(d);
+        classInfo.classDetail.needGroupPhoto = Number(d);
+        classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
+        classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
+        classInfo.classDetail.needGroupPhoto = Number($(this.$$('[name="needGroupPhoto"]:checked')).val());
+        if (Number($(this.$$('[name="needGroupPhoto"]:checked')).val()) === 1 && this.$('photoTime').value) {
+            classInfo.classDetail.photoTime = new Date(this.$('photoTime').value.replace('-', '/')).getTime();
+        }
+        classInfo.classDetail.tableType = this.$('tableType').value;
+        classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
+        classInfo.classInfoType = this.$('classType').value;
+        classInfo.classDetail.courseVideoRequirement = null;
+        if (state.role === 1 || state.role === 3) {
+            classInfo.restRoom = this.$('restRoom').value;
+            classInfo.diningRoom = this.$('diningRoom').value;
+            classInfo.classRoom = this.$('classRoom').value;
+        }
         this.bindings.classInfo.changed();
     },
     uploadBanner: function() {
@@ -62,14 +95,18 @@ exports.handlers = {
         classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
         classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
         classInfo.classDetail.needGroupPhoto = Number($(this.$$('[name="needGroupPhoto"]:checked')).val());
-        classInfo.classDetail.photoTime = this.$('photoTime').value;
+        if (Number($(this.$$('[name="needGroupPhoto"]:checked')).val()) === 1) {
+            classInfo.classDetail.photoTime = this.$('photoTime').value;
+        }
         classInfo.classDetail.needMakeCourse = Number($(this.$$('[name="needMakeCourse"]:checked')).val());
-        classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
+        if (Number($(this.$$('[name="needMakeCourse"]:checked')).val()) === 1) {
+            classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
+        }
         classInfo.classDetail.tableType = Number(this.$('tableType').value);
         classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
-        classInfo.romm = this.$('restRoom').value;
+        classInfo.restRoom = this.$('restRoom').value;
         classInfo.diningRoom = this.$('diningRoom').value;
-        classInfo.classRoom.classRoom = this.$('classRoom').value;
+        classInfo.classRoom = this.$('classRoom').value;
         state.type = 'banner';
         this.app.viewport.modal(view);
     }

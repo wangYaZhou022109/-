@@ -209,18 +209,20 @@ view('edit-offline') > form.vertical
                 input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
         .clearfix
             .row
-                .form-row.col-sm-6.inline-block
-                    label.required 开始时间
-                    .content
-                        .relative
-                            input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
-                            .iconfont.icon-riqi.text-main-color
-                .form-row.col-sm-6.inline-block
-                    label.required 结束时间
-                    .content
-                        .relative
-                            input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
-                            .iconfont.icon-riqi.text-main-color
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 开始时间
+                        .content
+                            .relative
+                                input.input.date#courseDate(name='courseDate'  x-rule='required' value=dateTime(offlineCourse.courseDate))
+                                .iconfont.icon-riqi.text-main-color
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 结束时间
+                        .content
+                            .relative
+                                input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
+                                .iconfont.icon-riqi.text-main-color
             .row
                 .form-row.col-sm-6.inline-block
                     label.required 教室
