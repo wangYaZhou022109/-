@@ -207,7 +207,8 @@ exports.store = {
                                     return D.assign(q, {
                                         index: i + 1,
                                         status: (j === 0 && i === 0)
-                                            ? itemStatus.CURRENT : me.module.options.getCurrentStatus.call(me.module, q.id)
+                                            ? itemStatus.CURRENT
+                                                : me.module.options.getCurrentStatus.call(me.module, q.id)
                                     });
                                 })
                             });
