@@ -5,12 +5,13 @@ module
 
 view('main')
     #main
-    p.question
-        span > a.normal(name='question-' + question.id) > echo(question.index '.')
-        echo('【')
-        map('research-question-types' question.type)
-        echo('】')
-        @echo(question.content)
+    p.question(style='display:inline;')
+        span.sub-text.inline-block
+            echo(question.index '.')
+            | 【
+            map('research-question-types' question.type)
+            | 】 &nbsp;
+        span > a.normal(name='question-' + question.id) > @echo(question.content)
 
     table.table.m-top
         each(question.options)
