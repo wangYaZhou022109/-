@@ -76,6 +76,7 @@ exports.getUserStatusOfExam = function(exam) {
     return 0;
 };
 
+//  开考前
 beforeExam = function(startTime) {
     return new Date().getTime() < startTime;
 };

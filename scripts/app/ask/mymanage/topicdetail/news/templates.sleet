@@ -4,6 +4,11 @@ module
     div(data-region='list')
 
 view('list')
+    compare(page.length 'lt' 1)
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
     each(page)
         compare(type 'eq' 1)
             compare(essenceStatus 'eq' 1)
@@ -21,7 +26,12 @@ view('list')
                             span > echo('提问·')
                             span.sub-text > dateTime(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList)
+                                compare(group 'eq' 1)
+                                    a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                    echo('&nbsp;&nbsp;')
+                                else
+                                    echo(name) + echo('&nbsp;&nbsp;')
                             .text-right
                                 compare(concernNum 'gt' 0) 
                                     .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
@@ -59,7 +69,12 @@ view('list')
                             span > echo('提问·')
                             span.sub-text > dateTime(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList)
+                                compare(group 'eq' 1)
+                                    a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                    echo('&nbsp;&nbsp;')
+                                else
+                                    echo(name) + echo('&nbsp;&nbsp;')
                             .text-right
                                 compare(concernNum 'gt' 0)
                                     .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
@@ -100,7 +115,12 @@ view('list')
                             span > echo('·发表文章·')
                             span.sub-text > dateTime(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList)
+                                compare(group 'eq' 1)
+                                    a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                    echo('&nbsp;&nbsp;')
+                                else
+                                    echo(name) + echo('&nbsp;&nbsp;')
                             .text-right
                                 compare(concernNum 'gt' 0)
                                     .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) >  string('unfollow')
@@ -120,8 +140,6 @@ view('list')
                                         form.drop-down-content > .content
                                             .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                             .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                #  compare(careNum 'eq' 0)
-                                #      .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
                                 form.comment-reply(id ='comment-reply-' + id)
                                     textarea.input.w-full.block(rows=1 name='t_content' value='')
                                     input.input(type='hidden' name='organizationId' value=organizationId)
@@ -136,13 +154,17 @@ view('list')
                             compare(thumbnail.length 'gt' 0)
                                 img(src=thumbnail)
                             @echo(content) 
-                        #  > echo(problem.content)
                         .user-info
                             a(href='javascript:;') > echo('我')
                             span > echo('·发表文章·')
                             span.sub-text > dateTime(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > echo('来自话题') + echo(' ：') + each(topicList)
+                                compare(group 'eq' 1)
+                                    a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                    echo('&nbsp;&nbsp;')
+                                else
+                                    echo(name) + echo('&nbsp;&nbsp;')
                             .text-right
                                 compare(concernNum 'gt' 0)
                                     .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')

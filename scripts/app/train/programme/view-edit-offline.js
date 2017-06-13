@@ -83,7 +83,9 @@ exports.handlers = {
         } else {
             offlineCourse.type = $(this.$('type')).val();
             offlineCourse.name = $(this.$('name')).val();
-            offlineCourse.courseDate = $(this.$('courseDate')).val();
+            if ($(this.$('courseDate')).val()) {
+                offlineCourse.courseDate = new Date($(this.$('courseDate')).val().replace('-', '/')).getTime();
+            }
             offlineCourse.endTime = $(this.$('endTime')).val();
             offlineCourse.classroomId = $(this.$('classroomId')).val();
             offlineCourse.teacherName = $(this.$('teacherName')).val();

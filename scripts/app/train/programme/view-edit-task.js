@@ -83,8 +83,12 @@ exports.handlers = {
             this.app.message.alert('课件最多只能上传3个');
         } else {
             task.name = $(this.$('name')).val();
-            task.startTime = $(this.$('startTime')).val();
-            task.endTime = $(this.$('endTime')).val();
+            if ($(this.$('startTime')).val()) {
+                task.startTime = new Date($(this.$('startTime')).val().replace('-', '/')).getTime();
+            }
+            if ($(this.$('startTime')).val()) {
+                task.endTime = new Date($(this.$('endTime')).val().replace('-', '/')).getTime();
+            }
             task.explain = $(this.$('explain')).val();
             task.memberIds = this.components.tags.getValue();
             this.app.viewport.modal(view);

@@ -10,10 +10,14 @@ exports.events = {
 };
 
 exports.handlers = {
-    beginStudy: function(id) {
+    beginStudy: function(id, e) {
         var progress = _.find(this.bindings.progressList.data, { id: id }),
             course = progress.courseInfo,
             studyUrl = '#/study/subject/detail/' + progress.courseId;
+        if (!course.versionId) {
+            e.preventDefault();
+            this.app.message.error('该专题已经下架，无法继续学习');
+        }
         if (course.url) {
             studyUrl = course.url;
             this.module.dispatch('register', { id: progress.courseId });
@@ -47,6 +51,9 @@ exports.dataForTemplate = {
                 progress.prefixText = prefix[progress.finishStatus] + helpers.dateMinute(progress.lastAccessTime);
             }
             progress.btnText = btnText[progress.finishStatus] || '查看详情';
+            if (!course.versionId) {
+                progress.btnText = '已下架';
+            }
             progress.btnUrl = '#/study/subject/detail/' + progress.courseId;
             if (course.url) progress.btnUrl = course.url;
             progress.studyTotalTime = window.parseInt(Number(studyTotalTime) / 60);
