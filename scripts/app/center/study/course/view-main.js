@@ -8,7 +8,8 @@ exports.bindings = {
 };
 exports.events = {
     'mouseover list-*': 'showClose',
-    'mouseout list-*': 'hideClose'
+    'mouseout list-*': 'hideClose',
+    'click navigate-*': 'navigate'
 };
 
 exports.handlers = {
@@ -17,13 +18,15 @@ exports.handlers = {
     },
     hideClose: function(id) {
         $(this.$('delete-' + id)).addClass('fade-out').removeClass('fade-in');
+    },
+    navigate: function(courseId, e, element) {
+        var versionId = element.getAttribute('data-versionId');
+        if (!versionId) {
+            e.preventDefault();
+            this.app.message.error('该课程已经下架，无法继续学习');
+        }
+        return false;
     }
-    // navigate: function(courseId, e, element) {
-    //     var versionId = element.getAttribute('data-versionId');
-    //     if (!versionId) this.app.message.error('该课程还未上架');
-    //     else window.open('#/study/course/detail/' + courseId);
-    //     return false;
-    // }
 };
 
 

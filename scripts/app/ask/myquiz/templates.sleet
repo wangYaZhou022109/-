@@ -14,6 +14,11 @@ view('list')
     .comment-list.ask-list > ul
         #  li.text-right
         #      echo('我的提问'+'你共提问了'+questions.length+'个问题')
+        compare(page.length 'lt' 1)
+            .text-center
+                .content(style="margin: 15% 0")
+                    img(src="images/nothing.png")
+                    p.text-center 暂无与你相关的信息哦！
         each(page)
             compare(auditStatus 'eq' 0)
                 li
@@ -29,7 +34,12 @@ view('list')
                             span > echo('提问·')
                             span.sub-text > dateTime(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) 
+                                compare(group 'eq' 1)
+                                    a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                    echo('&nbsp;&nbsp;')
+                                else
+                                    echo(name) + echo('&nbsp;&nbsp;')
                             .text-right
                                 .item > span.color-ing > string('auditStatus0')
                                 .item(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
@@ -69,7 +79,12 @@ view('list')
                                 span > echo('提问·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) 
+                                    compare(group 'eq' 1)
+                                        a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                        echo('&nbsp;&nbsp;')
+                                    else
+                                        echo(name) + echo('&nbsp;&nbsp;')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
@@ -108,7 +123,12 @@ view('list')
                                 span > echo('提问·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) 
+                                    compare(group 'eq' 1)
+                                        a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                        echo('&nbsp;&nbsp;')
+                                    else
+                                        echo(name) + echo('&nbsp;&nbsp;')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-2_' + id data-name='id' data-value='2_' + id ) > string('unfollow')
@@ -147,7 +167,12 @@ view('list')
                             span > echo('提问·')
                             span.sub-text > dateTime(createTime)
                         .comment-operation
-                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                            .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) 
+                                compare(group 'eq' 1)
+                                    a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                    echo('&nbsp;&nbsp;')
+                                else
+                                    echo(name) + echo('&nbsp;&nbsp;')
                             .text-right
                                 .item > span.color-error > string('auditStatus2')
                                 compare(careNum 'ne' 0)
