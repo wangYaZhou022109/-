@@ -28,9 +28,13 @@ exports.dataForTemplate = {
         return params.finishStatus;
     },
     showMore: function() {
-        var recordCount = this.bindings.works.data.recordCount,
-            pageSize = this.bindings.works.params.pageSize;
-        if ((!recordCount || recordCount === 0) && pageSize > 10) {
+        // var recordCount = this.bindings.works.data.recordCount,
+        //     pageSize = this.bindings.works.params.pageSize;
+        // if ((!recordCount || recordCount === 0) && pageSize > recordCount) {
+        //     return 2;
+        // }
+        var length = this.bindings.works.data.items.length;
+        if (length < 10) {
             return 2;
         }
         return 1;
