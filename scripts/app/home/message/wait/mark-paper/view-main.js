@@ -32,6 +32,10 @@ exports.dataForTemplate = {
         });
     },
     showMore: function() { // 是否显示加载更多
+        var length = this.bindings.waitMarkPapers.data.length;
+        if (length < 10) {
+            return 2;
+        }
         return 1;
     },
 };

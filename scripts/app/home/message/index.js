@@ -8,8 +8,8 @@ exports.store = {
     models: {
         menus: { data: [
             { id: '0', name: '通知', url: 'notice', current: true },
-            { id: '1', name: '待办', url: 'wait' },
-            { id: '2', name: '@我的', url: 'atme' }
+            { id: '1', name: '待办', url: 'wait' } // ,
+            // { id: '2', name: '@我的', url: 'atme' }
         ] },
         msgCount: { url: '../system/msg-count' }, // 消息数
         state: {
