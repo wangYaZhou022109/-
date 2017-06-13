@@ -61,6 +61,9 @@ exports.video = {
     ended: function() {
         var flag = this.commitProgress();
         if (flag) this.module.dispatch('startProgress');
+    },
+    seeked: function(player) {
+        player.play();
     }
 };
 

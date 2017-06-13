@@ -5,33 +5,42 @@ module
 
 view('main')
     .mt-1
-        .checkbox > input(type='checkbox' id='waitTodo-2')('checked')&if(state.checked) + label(for='waitTodo-2')  
-        span 显示待评卷
-    ul.list > each(waitMarkPapers)
-        li
-            .clearfix
-                .pull-left
-                    span.m-right 来自
-                    span.m-right > map('exam-source-type', examRecord.exam.sourceType)
-                    span.color-ing > echo(statusDec)
-                .pull-right.text-tips
-                    if(waitMark)
-                        echo('提交时间：')
-                        dateMinute(examRecord.submitTime)
-                    else
-                        echo('评卷时间：')
-                        dateMinute(submitTime)
-            .clearfix.m-top
-                .pull-left > echo('考试名称： ' examRecord.exam.name)
-                .pull-right.ml-1
-                    if(waitMark)
-                        a(id='mark-' + examRecord.id) 点击评卷
-                    else
-                        echo('成绩：' score)
-                .pull-right > echo('参考人：' examRecord.member.name ' ｜ 所属部门： ' examRecord.member.organization.name '  ')
-    compare(showMore 'eq' 0)
-        .empty 暂无内容
-    compare(showMore 'eq' 1)
-        #loadMore.empty(style='cursor:pointer;') 查看更多
-    compare(showMore 'eq' 2)
-        .empty 没有更多了
+        #  .checkbox > input(type='checkbox' id='waitTodo-2')('checked')&if(state.checked) + label(for='waitTodo-2')  
+        #  span 显示待评卷
+        .checkbox-slider.inline-block.m-right > input(type='checkbox' id='waitTodo-2')('checked')&if(state.checked) + label(for='waitTodo-2') + sapn 显示待评卷
+    ul.list 
+        each(waitMarkPapers)
+            li
+                .clearfix
+                    .pull-left
+                        span.m-right > echo('来自') + map('exam-source-type', examRecord.exam.sourceType)
+                        span.color-ing > echo(statusDec)
+                    .pull-right.text-tips
+                        if(waitMark)
+                            echo('提交时间：')
+                            dateMinute(examRecord.submitTime)
+                        else
+                            echo('评卷时间：')
+                            dateMinute(submitTime)
+                .clearfix.m-top
+                    .pull-left > echo('考试名称： ' examRecord.exam.name)
+                    .pull-right.ml-1
+                        if(waitMark)
+                            a(id='mark-' + examRecord.id) 点击评卷
+                        else
+                            echo('成绩：' score)
+                    .pull-right > echo('参考人：' examRecord.member.fullName ' ｜ 所属部门： ' examRecord.member.organization.name '  ')
+        else
+            .content-empty > .img-box.img-type-1 + p 暂无代办
+    if(waitMarkPapers)
+        compare(showMore 'eq' 1)
+            #showMore.empty(style='cursor:pointer;') 查看更多
+        compare(showMore 'eq' 2)
+            .empty 没有更多了
+    
+    #  compare(showMore 'eq' 0)
+    #      .empty 暂无内容
+    #  compare(showMore 'eq' 1)
+    #      #loadMore.empty(style='cursor:pointer;') 查看更多
+    #  compare(showMore 'eq' 2)
+    #      .empty 没有更多了
