@@ -165,6 +165,7 @@ exports.store = {
                 },
                 sortQuestion2: function() {
                     var exam = this.module.store.models.exam.data,
+                        me = this,
                         orders = JSON.parse(exam.examRecord.orderContent);
                     if (orders) {
                         this.data = _.map(this.data, function(t) {
@@ -205,7 +206,8 @@ exports.store = {
                                 questions: _.map(t.questions, function(q, i) {
                                     return D.assign(q, {
                                         index: i + 1,
-                                        status: (j === 0 && i === 0) ? itemStatus.CURRENT : itemStatus.INIT
+                                        status: (j === 0 && i === 0)
+                                            ? itemStatus.CURRENT : me.module.options.getCurrentStatus.call(me.module, q.id)
                                     });
                                 })
                             });
