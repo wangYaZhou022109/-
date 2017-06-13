@@ -36,7 +36,12 @@ view('list')
                             echo('.') + string('share') + echo('.')
                     span.sub-text > echo(createTime)
                 .comment-operation
-                    .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) > a(href='#/ask/topicdetail/' + id ) >  echo(name) + echo(' ')
+                    .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList)
+                        compare(group 'eq' 1)
+                            a(href='#/ask/topicdetail/' + id ) > echo(name)
+                            echo('&nbsp;&nbsp;')
+                        else
+                            echo(name) + echo('&nbsp;&nbsp;')
                     .text-right
                         compare(trendsType 'eq' '2')
                             compare(isPraise 'gt' 0)

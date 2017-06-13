@@ -3,6 +3,11 @@ module
     div(data-region='list')
 
 view('list')
+    compare(page.length 'lt' 1)
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
     .comment-list.ask-list > ul
             each(page)
                 compare(essenceStatus 'eq' 1)
@@ -21,7 +26,12 @@ view('list')
                                 span > echo('·发表文章·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList)
+                                    compare(group 'eq' 1)
+                                        a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                        echo('&nbsp;&nbsp;')
+                                    else
+                                        echo(name) + echo('&nbsp;&nbsp;')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) >  string('unfollow')
@@ -65,7 +75,12 @@ view('list')
                                 span > echo('·发表文章·')
                                 span.sub-text > dateTime(createTime)
                             .comment-operation
-                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList) > echo(name) + echo(' ')
+                                .pull-left > .sub-text > echo('关联话题') + echo(' ：') + each(topicList)
+                                    compare(group 'eq' 1)
+                                        a(href='#/ask/topicdetail/' + id ) > echo(name)
+                                        echo('&nbsp;&nbsp;')
+                                    else
+                                        echo(name) + echo('&nbsp;&nbsp;')
                                 .text-right
                                     compare(concernNum 'gt' 0)
                                         .item( id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
