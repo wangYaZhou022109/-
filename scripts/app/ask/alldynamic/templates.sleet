@@ -9,9 +9,6 @@ view('list')
                 img(src="images/nothing.png")
                 p.text-center 暂无与你相关的信息哦！
     each(page)
-
-
-
         li
             .user-pic
                 img.pointer(src=createUser.headPortrait)
@@ -70,9 +67,12 @@ view('list')
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item
                                 span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
-                            compare(createUserId 'eq' me)
-                                compare(discussList.length 'eq' 0)
-                                    .item(id = 'del-question-' + questionId data-name='id' data-value=questionId) > string('delete')
+                            compare(del 'eq' false)
+                                .item(id = 'del-question-' + questionId data-name='id' data-value=questionId) > string('delete')
+                            compare(question.closeStatus 'eq' 0)
+                                .item(id = 'close-question-' + questionId data-name='id' data-value=questionId ) > string('close')
+                            compare(question.closeStatus 'eq' 1)
+                                .item > string('closed')
                             form.comment-reply(id ='comment-reply-' + id)
                                 textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
                                 input.input(type='hidden' name='organizationId' value=createUser.organizationId)
@@ -103,9 +103,12 @@ view('list')
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item
                                 span(id ='trend-report-' + trendsType + '_' + questionId+'_' + createUserId data-name='id' data-value=trendsType +'_' + questionId+'_' + createUserId) > string('report')
-                            compare(createUserId 'eq' me)
-                                compare(discussList.length 'eq' 0)
-                                    .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
+                            compare(del 'eq' false)
+                                .item(id = 'del-share-' + questionId data-name='id' data-value=questionId) > string('delete')
+                            compare(question.closeStatus 'eq' 0)
+                                .item(id = 'close-question-' + questionId data-name='id' data-value=questionId ) > string('close')
+                            compare(question.closeStatus 'eq' 1)
+                                .item > string('closed')
                             form.comment-reply(id ='comment-reply-' + id)
                                 textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
                                 input.input(type='hidden' name='organizationId' value=createUser.organizationId)
