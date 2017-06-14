@@ -20,9 +20,9 @@ view('main') > .container
             string('search-empty-end')
     .ask-list > ul.cell-3 > each(specialist)
         li.expert-item
-            a.normal(href="#/ask/noticerexpertdetails/" + id + '/' + member.id target='_blank')
+            a.normal(href="#/ask/askExpertdetails/" + id + '/' + member.id target='_blank')
                 .img > .img-cont > img(src=cover alt=member.fullName)
-                h4.text-overflow > a.normal(href="#/ask/noticerexpertdetails/" + id + '/' + member.id target='_blank') > echo(member.fullName)
+                h4.text-overflow > a.normal(href="#/ask/askExpertdetails/" + id + '/' + member.id target='_blank') > echo(member.fullName)
                 .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
                 .sub-text.text-overflow > echo(introduce)
 
