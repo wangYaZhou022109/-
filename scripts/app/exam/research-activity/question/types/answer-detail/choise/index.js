@@ -14,7 +14,8 @@ exports.store = {
                         return {
                             code: String.fromCharCode(i + 'A'.charCodeAt(0)),
                             text: attr.value,
-                            checked: me.isChecked(attr.name)
+                            checked: me.isChecked(attr.name),
+                            mutiple: Number(me.data.type) === 2
                         };
                     });
                 },

@@ -107,7 +107,7 @@ app = window.app = new D.Application({
 D.PageableModel.setDefault({
     pageKey: 'page'
 });
-
+require('./app/util/push-state').setup(app);
 require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);
