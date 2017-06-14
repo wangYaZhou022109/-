@@ -26,6 +26,7 @@ exports.store = {
                 me = this;
             signupInfo.set(payload);
             signupInfo.data.classId = state.classId;
+            signupInfo.data.notice = 1;
             this.save(signupInfo).then(function() {
                 me.app.message.success('保存成功');
                 signupInfo.clear();

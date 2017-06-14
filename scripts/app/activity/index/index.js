@@ -83,8 +83,9 @@ exports.store = {
             url: '../train/class-info/find-activity-classinfo',
             type: 'pageable',
             root: 'items',
-            pageSize: 30
-        }
+            pageSize: 90
+        },
+        classSignupByclassId: { url: '../train/sign-up' }
     },
     callbacks: {
         init: function() {
@@ -93,7 +94,8 @@ exports.store = {
                 examMores = this.models.examMores,
                 gensees = this.models.gensees,
                 researchActivitys = this.models.researchActivitys,
-                search = this.models.search;
+                search = this.models.search,
+                classDetailes = this.models.classDetailes;
             // D.assign(activitys.params, { size: RECOMMEND_SIZE }); // 暂时不限制最大条数，将所有推荐的数据查询出来
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
@@ -101,7 +103,8 @@ exports.store = {
                 this.get(activitys),
                 this.get(gensees),
                 this.get(exams),
-                this.get(researchActivitys)
+                this.get(researchActivitys),
+                this.get(classDetailes)
             ]).then(function() {
                 examMores.init(exams.data);
                 examMores.changed();
@@ -112,7 +115,8 @@ exports.store = {
                 exams = this.models.exams,
                 examMores = this.models.examMores,
                 researchActivitys = this.models.researchActivitys,
-                search = this.models.search;
+                search = this.models.search,
+                classDetailes = this.models.classDetailes;
 
             gensees.clear();
             researchActivitys.clear();
@@ -120,13 +124,15 @@ exports.store = {
             D.assign(gensees.params, payload);
             D.assign(exams.params, payload);
             D.assign(researchActivitys.params, payload);
+            D.assign(classDetailes.params, payload);
             D.assign(search.data, payload);
             search.changed();
 
             return this.chain([
                 this.get(gensees),
                 this.get(exams),
-                this.get(researchActivitys)
+                this.get(researchActivitys),
+                this.get(classDetailes)
             ]).then(function() {
                 examMores.init(exams.data);
                 examMores.changed();
@@ -170,6 +176,12 @@ exports.store = {
                 return this.get(model);
             }
             return true;
+        },
+        getClassSignupByclassId: function(payload) {
+            var classSignupByclassId = this.models.classSignupByclassId;
+            classSignupByclassId.clear();
+            classSignupByclassId.params = { classId: payload.id };
+            return this.get(classSignupByclassId);
         }
     }
 };
