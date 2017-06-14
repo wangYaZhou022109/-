@@ -277,6 +277,16 @@ exports.dataForTemplate = {
                 }
             });
             if (flag) {
+                if (obj.trendsType === '3') {
+                    obj.del = true;
+                } else {
+                    obj.del = true;
+                    if (obj.createUserId === obj.me && obj.question.discussNum) { // 是否为当前用户
+                        obj.del = true;
+                    } else {
+                        obj.del = false;
+                    }
+                }
                 page.push(obj);
             }
         });
