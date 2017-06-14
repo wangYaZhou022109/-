@@ -25,23 +25,32 @@ view('filter') > form
             .btn#search > i.iconfont.icon-search
 
 view('main')
-    ul.list-text.border.top > each(researchRecords)
-        li.border.bottom
-            .title-row
-                .img > .img-cont > img(src=imgUrl)
-                .inline-block.title > echo(researchQuestionary.name)
-                .time 调研时间：
-                    dateMinute(researchQuestionary.startTime) 
-                    | 至
-                    dateMinute(researchQuestionary.endTime)
-            .state > map('research-person-center-status', status)
-            .btn-row
-                compare(status 'eq' 3)
-                    .btn(id='view-detail-' + id) 查看详情
-                compare(status 'eq' 2)
-                    .btn(id='do-research-' + id) 参加调研
-                compare(status 'eq' 1)
-                    .btn.disabled(id='do-research-' + id) 参加调研
+    ul.list-text.border.top
+        each(researchRecords)
+            li.border.bottom
+                .title-row
+                    .img > .img-cont > img(src=imgUrl)
+                    .inline-block.title > echo(researchQuestionary.name)
+                    .time 调研时间：
+                        dateMinute(researchQuestionary.startTime) 
+                        | 至
+                        dateMinute(researchQuestionary.endTime)
+                .state > map('research-person-center-status', status)
+                .btn-row
+                    compare(status 'eq' 3)
+                        .btn(id='view-detail-' + id) 查看详情
+                    compare(status 'eq' 2)
+                        .btn(id='do-research-' + id) 参加调研
+                    compare(status 'eq' 1)
+                        .btn.disabled(id='do-research-' + id) 参加调研
+        else
+            .content-empty-side
+                if(search.name)
+                    p 很抱歉，暂未找到相关内容
+                    br
+                    p 您可以尝试更换关键字进行搜索
+                else
+                    p > echo('好好学习，天天向上！') + a(title='跳转至活动' href='#/activity/index') >  echo('跳转至活动')
     #pager.pagination
 
 view('research-tips')
