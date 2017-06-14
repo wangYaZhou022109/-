@@ -170,5 +170,5 @@ isReset = function(exam) {
 };
 
 examStarting = function(exam) {
-    return exam.examRecord && exam.examRecord.status <= 4;
+    return exam.examRecord.id && exam.examRecord.status <= 4;
 };
