@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    $ = require('jquery');
 exports.bindings = {
     list: true,
     readStatus: false,
@@ -7,7 +8,8 @@ exports.bindings = {
 
 exports.events = {
     'click check-all': 'checkAll',
-    'click check-item*': 'checkItem'
+    'click check-item*': 'checkItem',
+    'click details-*': 'detail'
 };
 
 exports.handlers = {
@@ -29,6 +31,11 @@ exports.handlers = {
     checkItem: function() {
         var flag = this.$$('input[name="messageId"]').length === this.$$('input[name="messageId"]:checked').length;
         this.$('check-all').checked = flag;
+    },
+    detail: function(id) {
+        $(this.$('li-' + id)).removeClass('sub-text');
+        $(this.$('li-' + id)).addClass('sub-text');
+        window.open('#/message/detail/' + id, '_blank');
     }
 };
 
