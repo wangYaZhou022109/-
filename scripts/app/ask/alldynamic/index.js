@@ -16,6 +16,7 @@ exports.store = {
         down: { url: '../human/file/download' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
             params: { page: 1, size: 2 },
@@ -96,6 +97,10 @@ exports.store = {
         }
     },
     callbacks: {
+        closequestion: function(payload) {
+            this.models.close.set(payload);
+            return this.put(this.models.close);
+        },
         refresh: function() {
             this.models.callback();
         },
