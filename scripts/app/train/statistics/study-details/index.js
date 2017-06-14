@@ -28,8 +28,10 @@ exports.store = {
             member.params = payload;
             me.get(courseStudyProgresss);
             me.get(member).then(function(data) {
-                course.params = data[0];
-                me.get(course);
+                if (data[0].courseIds !== '' && data[0].memberIds !== '') {
+                    course.params = data[0];
+                    me.get(course);
+                }
             });
         }
     }

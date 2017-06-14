@@ -192,7 +192,7 @@ exports.setup = function(app) {
     }
     sockets.push(new Socket(app, 'system'));
     sockets.push(new Socket(app, 'human'));
-    sockets.push(new Socket(app, 'exam'));
+    // sockets.push(new Socket(app, 'exam'));
 
     D.adapt({ ajax: function(options, model) {
         var socket = false;

@@ -1,18 +1,27 @@
 #!handlebars
 
-module > .ask-page > .container
+module > div > .container
     .page-main-wrapper.knowledge-side
         .page-side.side-min(data-region='side')
         .page-main(data-region='main')
+        .page-main(data-region='list')
 view('main')
     .tabs.line.mb-1
         #  .pull-right.btn#apply-topic 申请话题
         ul
-            li.active > echo('话题广场')
+            li.active.h4 > echo('话题广场')
     .border.bottom.dashed
-        a.tag-btn.active(id='checkAll' data-name='id' data-value=id ) > echo('全部')
+        compare(state.typeId 'eq' 'checkAll')
+            a.tag-btn.active(id='checkAll' data-name='id' data-value=id ) > echo('全部')
+        else
+            a.tag-btn(id='checkAll' data-name='id' data-value=id ) > echo('全部')
         each(topicType)
-            a.tag-btn(id='checkOne-' + id data-name='id' data-value=id ) > echo(name)
+            #  compare(state.typeId 'eq' id)
+            #      a.tag-btn.active(id='checkOne-' + id data-name='id' data-value=id ) > echo(name)
+            #  else
+            #      a.tag-btn(id='checkOne-' + id data-name='id' data-value=id ) > echo(name)
+            a.tag-btn(id='checkOne-' + id data-name='id' data-value=id class=if(current 'active')) > echo(name)
+view('list')
     .comment-list.ask-list > ul
         each(topicname)
             li.topic-item
@@ -21,7 +30,12 @@ view('main')
                     h4.text-overflow(title=description) > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
                 compare(concernNumber 'eq' 0)
-                    .btn.small(id="follow-4_"  + id data-name='id' data-value='4_' + id) > echo('关注')
-                else
-                    .btn.small(id="unfollow-4_"  + id data-name='id' data-value='4_' + id) > echo('取消关注')
+                    .btn.small( id='follow-4_' + id data-name='id' data-value='4_' + id ) > string('follow')
+                    #  .btn.small( 'hidden' id='follow-4_' + id data-name='id' data-value='4_' + id ) > string('follow')
+                else 
+                    #  .btn.small( 'hidden' id='unfollow-4_' + id data-name='id' data-value='4_' + id ) > string('unfollow')
+                    .btn.small( id='unfollow-4_' + id data-name='id' data-value='4_' + id ) > string('unfollow')
+                #      .btn.small(id="follow-4_"  + id data-name='id' data-value='4_' + id) > echo('关注')
+                #  else
+                #      .btn.small(id="unfollow-4_"  + id data-name='id' data-value='4_' + id) > echo('取消关注')
     

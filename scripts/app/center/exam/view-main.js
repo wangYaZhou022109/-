@@ -9,7 +9,8 @@ var _ = require('lodash/collection'),
     };
 
 exports.bindings = {
-    exams: true
+    exams: true,
+    validateExam: true
 };
 
 exports.actions = {
@@ -35,16 +36,41 @@ exports.events = {
 
 exports.handlers = {
     toExam: function(examId) {
-        window.open(urlMap.answer + examId, '_blank');
+        var validateExam = this.bindings.validateExam,
+            me = this;
+        return this.module.dispatch('validateExam', { examId: examId }).then(function() {
+            if (validateExam.data.validate === 1) {
+                window.open(urlMap.answer + examId, '_blank');
+            } else {
+                me.app.messag.error('数据异常, 请联系管理员');
+            }
+        });
     },
     toCert: function(examId) {
         window.open(urlMap.cert + examId, '_blank');
     },
-    toDetail: function(examId) {
-        window.open(urlMap.detail + examId, '_blank');
+    toDetail: function(examRecordId) {
+        var me = this;
+        return this.module.dispatch('getExamRecordByExamId', { examRecordId: examRecordId }).then(function(data) {
+            if (data.status < 4 && data.submitTime) {
+                me.app.viewport.modal(me.module.items.tips, {
+                    tips: '系统正在处理您的考卷，请稍后再试'
+                });
+            } else {
+                window.open(urlMap.detail + examRecordId, '_blank');
+            }
+        });
     },
     retry: function(examId) {
-        window.open(urlMap.answer + examId, '_blank');
+        var validateExam = this.bindings.validateExam,
+            me = this;
+        return this.module.dispatch('validateExam', { examId: examId }).then(function() {
+            if (validateExam.data.validate === 1) {
+                window.open(urlMap.answer + examId, '_blank');
+            } else {
+                me.app.messag.error('数据异常, 请联系管理员');
+            }
+        });
     }
 };
 
@@ -65,6 +91,9 @@ exports.components = [{
 // 11: 查看证书
 // 12: 考试已撤销
 // 14: 可考多次 不能马上查看详情
+// 15: 报名时间截止
+// 16: 答卷完，能重新考，试卷处理中
+// 17: 答卷完，不能重新考，试卷处理中
 exports.dataForTemplate = {
     exams: function(data) {
         var exams = data.exams;
@@ -93,7 +122,10 @@ exports.dataForTemplate = {
                     11: [toDetailButton, toCertButton],
                     12: [],
                     13: [],
-                    14: [retryButton]
+                    14: [retryButton],
+                    15: [],
+                    16: [retryButton, toDetailButton],
+                    17: [toDetailButton]
                 };
             return D.assign(e, {
                 status: getRecordStatus(e),

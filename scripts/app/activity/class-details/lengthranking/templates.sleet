@@ -1,0 +1,23 @@
+#!handlebars
+
+module
+	.lengthranking(data-region="lengthranking")
+
+view('lengthranking')
+	.container > .h3.layout-mt-small.layout-mb-small.strong 学员时长排行榜
+	table.table
+		tr
+			th 排名
+			th 姓名
+			th 部门
+			th 时长
+		each(study.arr)
+			tr
+				td > echo(i)
+				td > echo(member.fullName)
+				td > echo(member.organizationName)
+				td > echo(studyTotalTime)
+
+	.layout-mt#nomore
+		.text-center
+			.sub-text.h3 没有更多了...

@@ -37,7 +37,7 @@ exports.store = {
                 answer = '';
 
             D.assign(data, question);
-            data.type = types[Number(question.type) - 1].value;
+            data.type = _.find(types, ['key', question.type.toString()]).value;
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             data.options = [];
 

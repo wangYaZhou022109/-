@@ -3,7 +3,7 @@
 
     & ul.activity-banner-list {
         position: relative;
-        margin-top: 3rem;
+        margin-top: var(--large-space);
 
         & > li {
             z-index: 1;

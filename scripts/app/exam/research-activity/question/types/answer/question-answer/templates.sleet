@@ -5,12 +5,13 @@ module > .choise
     .options(data-region='options')
 
 view('content')
-    p.question
-        span > a.normal(name='question-' + state.id) > echo(state.index '.')
-        echo('【')
-        map('research-question-types' state.type)
-        echo('】')
-        @echo(state.content)
+    p.question(style='display:inline;')
+        span.sub-text.inline-block
+            echo(state.index '.')
+            | 【
+            map('research-question-types' state.type)
+            | 】 &nbsp;
+        span > a.normal(name='question-' + state.id) > @echo(state.content)
 
 
 view('options') > form.vertical.m-bottom

@@ -7,6 +7,7 @@ exports.components = [{
     options: {
         picker: 'topics',
         inputName: 'topicIds',
-        limit: 5
+        limit: 5,
+        isPublic: true
     }
 }];

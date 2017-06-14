@@ -48,3 +48,7 @@ view('main')
             .btn-row > each(buttons)
                 .btn(id=id data-name='id' data-value=value) > echo(text)
     #pager.pagination
+
+view('tips')
+    p > echo(state.tips)
+    hr

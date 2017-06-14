@@ -17,7 +17,7 @@ view('shareaudit') > form.vertical
     .detail1-person.layout-mt-small
         span > echo(shareaudit.member.fullName)
         span 分享时间：
-        span > date(shareaudit.createTime)
+        span > dateTime(shareaudit.createTime)
     .detail1-alink.layout-mt-smal > each(topicList) > echo(name) + echo(' ')
     input.input(name='id' type='hidden' value=shareaudit.id)
     input.input(name='questionId' type='hidden' value=shareaudit.question.id)

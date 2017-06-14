@@ -3,5 +3,9 @@ module
     .min-banner(data-region='min-banner')
 
 view('min-banner') > .container
-    #swiper > ul > each(smallBanners)
-        li > a(href=linkAddress)(target='_blank')&if(outerLink) > img(src=downloadUrl(pcImage))
+    #swiper
+        if(smallBanners)
+            ul > each(smallBanners)
+                li > a(href=linkAddress)(target='_blank')&if(outerLink) > img(src=downloadUrl(pcImage))
+        else
+            .content-empty > .img-box.img-type-1 + p 暂无内容

@@ -38,6 +38,7 @@ exports.handlers = {
                 finishStatus: 2, // 已完成
                 completedRate: 100, // 已完成
             });
+            return;
         } if (sectionType === 14) {
             window.open(prefixUrl[sectionType] + section.resourceId);
             this.module.dispatch('updateProgress', {
@@ -47,6 +48,7 @@ exports.handlers = {
                 finishStatus: 2, // 已完成
                 completedRate: 100, // 已完成
             });
+            return;
         } else if (sectionType === 12 || sectionType === 13) {
             if (progress.finishStatus === 2) {
                 url = '#/exam/research-activity/paper/' + resourceId + '/' + subject.id;
@@ -58,16 +60,17 @@ exports.handlers = {
             this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
                 me.app.viewport.modal(view);
             });
+            return;
         } else if (sectionType === 8) {
             url = prefixUrl[8] + section.referenceId;
             window.open(url);
+            return;
         } else if (sectionType === 9) {
             me.app.viewport.modal(me.module.items['exam/exam/other-exam-prompt'], { examId: resourceId });
             return;
-        } else {
-            url = prefixUrl[sectionType] + section.resourceId;
-            window.open(url);
         }
+        url = prefixUrl[sectionType] + section.resourceId;
+        window.open(url);
     },
     sectionDisplay: function(id) {
         var display = this.$('sectionDiv-' + id).style.display;

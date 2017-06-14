@@ -35,6 +35,12 @@ var setOptions = {
                             encryptContent: helper.decryptAnswer.call(this, this.data.paper.encryptContent, key)
                         });
                         return this.data.encryptContent;
+                    },
+                    saveLastCacheTime: function(lastCacheTime) {
+                        D.assign(this.data, {
+                            lastCacheTime: lastCacheTime
+                        });
+                        this.save();
                     }
                 }
             },
@@ -79,8 +85,11 @@ var setOptions = {
                 type: 'localStorage',
                 mixin: {
                     init: function() {
-                        this.data = {};
-                        this.save();
+                        this.load();
+                        if (!this.data) {
+                            this.data = {};
+                            this.save();
+                        }
                     }
                 }
             },
@@ -149,12 +158,14 @@ var setOptions = {
                     answeredCount: function() {
                         return _.filter(this.data, function(a) {
                             var readingQuetion = !_.every(a.value, function(sub) {
-                                    return sub.value.length === 0
+                                    return D.isArray(sub.value) && (sub.value.length === 0
                                         || _.every(sub.value, function(sv) {
                                             return !sv.value;
-                                        });
+                                        }));
                                 }),
-                                otherQuestion = a.value[0].value !== '';
+                                otherQuestion = (a.value.length > 0 && _.some(a.value, function(v) {
+                                    return v.value !== '';
+                                }));
                             return Number(a.type) === 6 ? readingQuetion : otherQuestion;
                         }).length;
                     },
@@ -199,6 +210,7 @@ var setOptions = {
                 url: '../exam/exam/decrypt-key'
             },
             examRecord: {
+                type: 'localStorage',
                 url: '../exam/exam/exam-record-cache'
             }
         },
@@ -222,9 +234,19 @@ var setOptions = {
                             if (exam0.id !== payload.examId) return true;
 
                             //  最后保存时间不同
-                            if (!state0.lastCacheTime || (state0.lastCacheTime
+                            if (exam0.lastCacheTime
                                 && examRecord0
-                                && state0.lastCacheTime !== examRecord0.lastCacheTime)) {
+                                && exam0.lastCacheTime !== examRecord0.lastCacheTime) {
+                                return true;
+                            }
+
+                            //  A浏览器没自动存DB ，B浏览器自动存DB ，取B浏览器
+                            if (!exam0.lastCacheTime && examRecord0.lastCacheTime) {
+                                return true;
+                            }
+
+                            // 考试记录不同
+                            if (exam0.examRecord.id !== examRecord0.id) {
                                 return true;
                             }
 
@@ -239,39 +261,42 @@ var setOptions = {
                     };
 
                 exam.load();
+                state.load();
                 D.assign(examRecord.params, { examId: payload.examId });
                 // 先请求一次考试记录判断是否重置
+                examRecord.clear();
                 return this.get(examRecord).then(function() {
                     if (needLoadService(exam.data, state.data, examRecord.data)) {
                         me.module.dispatch('clearModels');
-
                         D.assign(exam.params, { examId: payload.examId });
                         return me.get(exam).then(function() {
                             exam.save();
                             answer.init(exam.data.paper.answerRecords);
+                            mark.init();
                             types.init(exam.data.paper.questions);
                             state.init(exam.data);
                             countDown.init();
-                            mark.init();
                         });
                     }
                     return '';
                 });
             },
             saveAnswer: function(payload) {
+                var types = this.models.types,
+                    me = this;
                 this.models.answer.saveAnswer(payload);
                 this.models.modify.saveAnswer(payload);
                 this.models.state.calculate();
-                if (this.models.state.data.singleMode) {
+                if (me.models.state.data.singleMode) {
                     //  是否需要保存答案后移动到下一题
-                    // if (types.isNeedMoveAfterSave(payload.key)) {
-                    //     setTimeout(function() {
-                    //         me.module.dispatch('move', {
-                    //             id: types.getType(payload.key).id,
-                    //             offset: 1
-                    //         });
-                    //     }, 300);
-                    // }
+                    if (types.isNeedMoveAfterSave(payload.key)) {
+                        // setTimeout(function() {
+                        //     me.module.dispatch('move', {
+                        //         id: types.getType(payload.key).id,
+                        //         offset: 1
+                        //     });
+                        // }, 300);
+                    }
                     this.models.state.changed();
                 } else {
                     this.models.types.updateStatus(payload.key, itemStatus.ACTIVE);
@@ -281,7 +306,7 @@ var setOptions = {
             },
             waitingCheck: function(payload) {
                 var f = this.models.mark.waitingCheck(payload.questionId);
-                if (!this.models.state.singleMode) {
+                if (!this.models.state.data.singleMode) {
                     if (f) {
                         this.models.types.updateStatus(payload.questionId, itemStatus.CHECK);
                     } else {
@@ -301,6 +326,7 @@ var setOptions = {
                 var me = this,
                     f = true,
                     state = this.models.state,
+                    exam = this.models.exam,
                     countDown = this.module.items['count-down'].getEntities(),
                     examRecordId = this.models.exam.data.examRecord.id,
                     lastCacheTime = new Date().getTime(),
@@ -316,7 +342,6 @@ var setOptions = {
                     helper.TO.cancel();
                 }
 
-                state.saveLastSubmitTime(lastCacheTime);
                 this.models.form.set(data);
                 if (f) {
                     return this.post(this.models.form).then(function() {
@@ -331,12 +356,26 @@ var setOptions = {
                                 countDown.clearIntervalIt();
                             }
                         }
+                        exam.saveLastCacheTime(lastCacheTime);
                     });
                 }
                 return '';
             },
             delay: function(payload) {
+                var endTime,
+                    exam = this.models.exam.data;
                 this.models.countDown.data.delay = payload.delay;
+                endTime = new Date(exam.examRecord.endTime);
+                endTime.setMinutes(
+                    endTime.getMinutes() + payload.delay,
+                    endTime.getSeconds(),
+                    0
+                );
+                D.assign(exam, {
+                    examRecord: D.assign(exam.examRecord, {
+                        endTime: endTime.getTime()
+                    })
+                });
                 this.models.countDown.changed();
             },
             lowerSwitchTimes: function() {
@@ -344,7 +383,7 @@ var setOptions = {
                     me = this,
                     message;
                 if (exam.allowSwitchTimes) {
-                    if (exam.allowSwitchTimes === exam.lowerSwitchTimes + 1) {
+                    if (exam.allowSwitchTimes === (exam.lowerSwitchTimes || 0) + 1) {
                         return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
                             return me.module.dispatch('showTips', {
                                 tips: strings.get('exam.answer-paper.switch-screen.full-times')
@@ -359,10 +398,14 @@ var setOptions = {
 
                     message = strings.getWithParams(
                         'exam.answer-paper.switch-screen.remain-times',
-                        exam.allowSwitchTimes - exam.lowerSwitchTimes
+                        (exam.allowSwitchTimes - exam.lowerSwitchTimes) + '次'
                     );
 
-                    this.app.message.success(message);
+                    return me.module.dispatch('showTips', {
+                        message: message
+                    }).then(function() {
+                        me.app.viewport.modal(me.module.items['exam-notes']);
+                    });
                 }
                 return true;
             },
@@ -380,6 +423,14 @@ var setOptions = {
             showTips: function(payload) {
                 D.assign(this.models.state.data, payload);
                 this.models.state.changed();
+            },
+            clearModels: function() {
+                _.forEach(this.models, function(m) {
+                    if (m.name !== 'examRecord') m.clear();
+                });
+            },
+            saveLastCacheTime: function() {
+                this.models.saveLastCacheTime(new Date().getTime());
             }
         }
     }
@@ -424,6 +475,8 @@ var target = D.assign({}, {
                     helper.WS.closeConnect();
                     return me.dispatch('showTips', {
                         tips: strings.get('exam.answer-paper.force-submit')
+                    }).then(function() {
+                        me.app.viewport.modal(me.items['exam-notes']);
                     });
                 });
             }, function(delay) {
@@ -431,17 +484,32 @@ var target = D.assign({}, {
             });
         }
         helper.switchScreen.call(this, this.store.models.exam.data);
+        helper.closeListener.call(this, strings.get('exam.answer-paper.close-window'));
         return this.dispatch('reloadState');
-        // helper.closeListener.call(this, strings.get('exam.answer-paper.close-window'));
     },
     getCurrentStatus: function(id) {
-        var answer = this.store.models.answer.data,
+        var answers = this.store.models.answer.data,
+            answer, readingQuetion, otherQuestion,
             waitingChecks = this.store.models.mark.data.waitingChecks;
+
         if (_.find(waitingChecks, ['key', id])) {
             return itemStatus.CHECK;
         }
-        if (_.find(answer, ['key', id])) {
-            return itemStatus.ACTIVE;
+
+        answer = _.find(answers, ['key', id]);
+        if (answer) {
+            readingQuetion = !_.every(answer.value, function(sub) {
+                return D.isArray(sub.value) && (sub.value.length === 0
+                    || _.every(sub.value, function(sv) {
+                        return !sv.value;
+                    }));
+            });
+            otherQuestion = (answer.value.length > 0 && _.some(answer.value, function(v) {
+                return v.value !== '';
+            }));
+            if (readingQuetion || otherQuestion) {
+                return itemStatus.ACTIVE;
+            }
         }
         return itemStatus.INIT;
     }

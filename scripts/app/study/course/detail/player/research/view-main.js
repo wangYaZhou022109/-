@@ -20,4 +20,3 @@ exports.handlers = {
         }, 1000);
     }
 };
-

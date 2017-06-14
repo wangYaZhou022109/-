@@ -1,10 +1,12 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 
 exports.type = 'dynamic';
 
 exports.bindings = {
     state: true,
-    menus: true
+    menus: true,
+    msgCount: true
 };
 
 exports.getEntityModuleName = function(key) {
@@ -25,6 +27,38 @@ exports.getEntity = function() {
 
 exports.dataForEntityModule = function(entity) {
     return entity;
+};
+
+exports.dataForTemplate = {
+    menus: function(data) {
+        var msgCount = data.msgCount,
+            menus = data.menus;
+        if (msgCount) {
+            _.map(menus, function(r) {
+                if (r.id === '0') {
+                    if (msgCount.innerCount > 0) {
+                        D.assign(r, { count: msgCount.innerCount });
+                    } else if (msgCount.innerCount > 99) {
+                        D.assign(r, { count: '99+' });
+                    }
+                } else if (r.id === '1') {
+                    if (msgCount.todoCount > 0) {
+                        D.assign(r, { count: msgCount.todoCount });
+                    } else if (msgCount.todoCount > 99) {
+                        D.assign(r, { count: '99+' });
+                    }
+                } else if (r.id === '2') {
+                    if (msgCount.atCount > 0) {
+                        D.assign(r, { count: msgCount.atCount });
+                    } else if (msgCount.atCount > 99) {
+                        D.assign(r, { count: '99+' });
+                    }
+                }
+                return r;
+            });
+        }
+        return menus;
+    }
 };
 
 exports.events = {

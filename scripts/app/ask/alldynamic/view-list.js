@@ -193,11 +193,11 @@ exports.dataForActions = {
 };
 exports.actionCallbacks = {
     reply: function() {
-        this.app.message.success('操作成功！');
+        this.app.message.success('发表成功，等待管理员审核！');
         this.module.dispatch('page');
     },
     publish: function() {
-        this.app.message.success('操作成功！');
+        this.app.message.success('发表成功，等待管理员审核！');
         this.module.dispatch('page');
     },
     follow: function(data) {
@@ -277,6 +277,16 @@ exports.dataForTemplate = {
                 }
             });
             if (flag) {
+                if (obj.trendsType === '3') {
+                    obj.del = true;
+                } else {
+                    obj.del = true;
+                    if (obj.createUserId === obj.me && obj.question.discussNum) { // 是否为当前用户
+                        obj.del = true;
+                    } else {
+                        obj.del = false;
+                    }
+                }
                 page.push(obj);
             }
         });

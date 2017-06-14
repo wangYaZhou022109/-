@@ -3,12 +3,12 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.items = {
     list: 'list',
-    'ask-new/index/export': { isModule: true }
+    'ask/report': { isModule: true }
 };
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/trends/all-dynamic' },
+        trends: { url: '../ask-bar/trends/all-news' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         follow: { url: '../ask-bar/question-details/boutique' },
@@ -94,7 +94,8 @@ exports.store = {
                     return speechset;
                 }
             }
-        }
+        },
+        state: { data: {} }
     },
     callbacks: {
         refresh: function() {
@@ -107,30 +108,28 @@ exports.store = {
             var praise = this.models.praise,
                 me = this;
             praise.set(payload);
-            return this.post(praise).then(function(data) {
-                var obj = data[0];
+            return this.post(praise).then(function() {
                 var page = me.models.page;
-                var pageData = me.models.page.praise(obj.objectId, obj.objectType);
-                me.app.message.success('点赞成功');
-                setTimeout(function() {
-                    page.data = pageData;
-                    page.changed();
-                }, 1000);
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = true;
+                curObj.praiseNum ++;
+
+                page.changed();
             });
         },
         unpraise: function(payload) {
             var unpraise = this.models.unpraise,
                 me = this;
             unpraise.set(payload);
-            return this.put(unpraise).then(function(data) {
-                var obj = data[0];
+            return this.chain(me.put(this.models.unpraise), function() {
                 var page = me.models.page;
-                var pageData = me.models.page.unpraise(obj.objectId, obj.objectType);
-                me.app.message.success('取消成功');
-                setTimeout(function() {
-                    page.data = pageData;
-                    page.changed();
-                }, 1000);
+                var curObj = page.findById(payload.id);
+
+                curObj.praise = false;
+                curObj.praiseNum = curObj.praiseNum === 0 ? 0 : curObj.praiseNum - 1;
+
+                page.changed();
             });
         },
         init: function() {
@@ -145,8 +144,9 @@ exports.store = {
         page: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            params.id = 'null';
-            trends.set(params);
+            var id = this.models.state.data.topicId;
+            trends.params = { id: id, page: params.page, size: params.size };
+            trends.set(trends.params);
             this.post(trends).then(function() {
             });
         },
@@ -197,6 +197,8 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    var state = this.store.models.state;
+    // if (this.renderOptions.state.data.topicId) {
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
@@ -205,7 +207,11 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
+    state.data.topicId = this.renderOptions.state.data.topicId;
+    // console.log(this.renderOptions.state.data);
+    // console.log(this.renderOptions.state);
     this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
     this.dispatch('page');
+    // }
 };

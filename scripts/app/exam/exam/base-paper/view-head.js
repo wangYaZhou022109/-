@@ -4,6 +4,7 @@ exports.bindings = {
 
 exports.events = {
     'mouseover notice': 'notice'
+    // 'mouseout leave-notice': 'closeNotice'
 };
 
 exports.handlers = {
@@ -13,6 +14,12 @@ exports.handlers = {
             me.app.viewport.modal(me.module.items['exam-notes']);
         });
     }
+    // closeNotice: function() {
+    //     if (this.bindings.state.data.noticed) {
+    //         this.app.viewport.closeModal();
+    //         this.bindings.state.data.noticed = false;
+    //     }
+    // }
 };
 
 exports.dataForTemplate = {

@@ -4,17 +4,22 @@ var D = require('drizzlejs'),
 
 exports.bindings = {
     exam: false,
-    countDown: false
+    examRecord: false,
+    countDown: true
 };
 
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
-    var data = this.bindings.exam.data;
+    var examRecord = this.bindings.examRecord.data,
+        exam = this.bindings.exam.data,
+        countDown = this.bindings.countDown.data,
+        delay = countDown.delay;
     return {
-        endTime: getEndTime.call(this, data.examRecord.endTime),
-        startTime: data.examRecord.startTime,
-        isDelay: this.bindings.countDown.data.isDeday
+        endTime: getEndTime.call(this, exam.examRecord.endTime),
+        startTime: examRecord.currentTime,
+        isDelay: countDown.isDeday,
+        delay: delay
     };
 };
 
@@ -53,6 +58,7 @@ exports.dataForEntityModule = function(data) {
 
 getEndTime = function(examRecordEndTime) {
     var data = this.bindings.countDown.data,
+        exam = this.bindings.exam.data,
         endTime;
     if (!data.firstInTime) {
         data.firstInTime = new Date().getTime();
@@ -71,6 +77,11 @@ getEndTime = function(examRecordEndTime) {
         D.assign(this.bindings.countDown.data, {
             endTime: endTime.getTime(),
             isDeday: true
+        });
+        D.assign(exam, {
+            examRecord: D.assign(exam.examRecord, {
+                endTime: endTime.getTime()
+            })
         });
     }
     data.delay = 0;

@@ -34,7 +34,7 @@ view('side')
 
 view('head')
     .pull-left.title > echo('正在作答: ' state.name)
-    .text-right
+    .text-right(id='leave-notice')
         ul.head-info.inline-block
             if(showExamNotes)
                 li > i.iconfont.icon-notice(id='notice' style=if(noticed '' 'color:#39fe2c'))
@@ -70,8 +70,10 @@ view('main')
                             div.question-type-item(data-dynamic-key=id)
     if(main.singleMode)
         .text-right
-            .btn.white.border.m-right(id='prev-' + main.currentQuestion.typeIndex) 上一题
-            .btn.white.border(id='next-' + main.currentQuestion.typeIndex) 下一题
+            if (main.hasPrevious)
+                .btn.white.border.m-right(id='prev-' + main.currentQuestion.typeIndex) 上一题
+            if (main.hasNext)
+                .btn.white.border(id='next-' + main.currentQuestion.typeIndex) 下一题
 
 
 view('answer-detail')
@@ -81,5 +83,5 @@ view('answer-detail')
 view('exam-notes')
     echo(state.examNotes)
     hr
-    if(canShowDetail)
-        button.btn(id='show-answer-detail') 查看详情
+    #  if(canShowDetail)
+    #      button.btn(id='show-answer-detail') 查看详情

@@ -6,7 +6,7 @@ exports.routes = {
     'subject/preview/:config': 'showPreview',
     'task/:id': 'showTask',
     'subject/detail/new-template1': 'showSubjectNewDetail',
-    'task-audit': 'showTaskAudit'
+    'task/audit/:id': 'showTaskAudit'
 };
 
 exports.showCourseIndex = function() {
@@ -41,6 +41,6 @@ exports.showSubjectNewDetail = function() {
     return this.app.show('content', 'study/subject/detail/new-template1');
 };
 
-exports.showTaskAudit = function() {
-    return this.app.viewport.showIt('content', 'study/task-audit');
+exports.showTaskAudit = function(id) {
+    return this.app.viewport.showIt('content', 'study/task/audit', { id: id });
 };

@@ -17,7 +17,7 @@
         width: 30%;
         float: right;
         background: var(--bg-color);
-        padding: 0 var(--base-gap) 99999px;
+        padding: 0 var(--large-space) 99999px;
         margin-bottom: -99999px;
 
         & .container {
