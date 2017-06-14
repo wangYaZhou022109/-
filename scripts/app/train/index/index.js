@@ -6,6 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         projectInfo: { url: '../train/project' },
+        classInfo: { url: '../train/class-info/find-by-project-id' },
         state: {}
     },
     callbacks: {
@@ -19,6 +20,12 @@ exports.store = {
             state.changed();
             projectInfo.set(payload);
             this.get(projectInfo);
+        },
+        changeMenu: function() {
+            var classInfo = this.models.classInfo;
+            var id = this.module.renderOptions.id;
+            classInfo.set({ id: id });
+            return this.get(classInfo);
         }
     }
 };
