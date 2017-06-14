@@ -11,6 +11,12 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .page-main-wrapper .page-main-wrapper {
+        width: auto;
+    }
+    .page-main-wrapper .page-side.side-min {
+        margin-left: auto;
+    }
     .page-main-wrapper {
         & .page-main .container {
             margin: 0;
