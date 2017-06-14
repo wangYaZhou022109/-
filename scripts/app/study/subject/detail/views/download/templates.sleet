@@ -10,5 +10,19 @@ view('pannel')
                 each(courseAttachments)
                     .block.layout-mt-small
                         .pull-right
+                            if(canPreview)
+                                a(id = 'preview-'+attachmentId data-attachmentType=attachmentType data-name=name) > string('view')
                             a(href=downUrl download=name) > string('download')
                         .text-overflow(title=name) > echo(name)
+
+
+view('preview-pdf')
+    #viewPdf
+view('preview-video')
+    video#course-video('controls')
+        source(src=url type="video/mp4")
+view('preview-audio') > div(style='padding: 20px 0px;')
+    audio#course-audio('controls')
+        source(src=url type="audio/mp3")
+view('preview-img')
+    img(src=url style='max-height:34em')
