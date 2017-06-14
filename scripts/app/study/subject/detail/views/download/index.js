@@ -1,6 +1,9 @@
 exports.items = {
     pannel: 'pannel',
-    pdf: ''
+    'preview-pdf': '',
+    'preview-img': '',
+    'preview-video': '',
+    'preview-audio': ''
 };
 
 exports.store = {
@@ -10,7 +13,17 @@ exports.store = {
         down: {
             url: '../human/file/download'
         },
-        attachment: {}
+        preview: {
+            url: '../human/file/preview'
+        },
+        attachment: { url: '../human/file' }
+    },
+    callbacks: {
+        getAttachment: function(payload) {
+            var attachment = this.models.attachment;
+            attachment.set({ id: payload.id });
+            return this.get(attachment);
+        }
     }
 };
 
