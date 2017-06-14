@@ -31,7 +31,7 @@ view('main')
                             echo('成绩：' score)
                     .pull-right > echo('参考人：' examRecord.member.fullName ' ｜ 所属部门： ' examRecord.member.organization.name '  ')
         else
-            .content-empty > .img-box.img-type-1 + p 暂无代办
+            .content-empty > .img-box.img-type-1 + p 暂无待办
     if(waitMarkPapers)
         compare(showMore 'eq' 1)
             #showMore.empty(style='cursor:pointer;') 查看更多
