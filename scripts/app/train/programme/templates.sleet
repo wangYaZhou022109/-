@@ -258,7 +258,7 @@ view('edit-offline') > form.vertical
         .pull-left > label.label 课件（最多上传三个）
         .pull-right
             .tag-btn.radius.active#chooseFile 选择
-            .inline-block.help ?
+            a.inline-block.ask-help(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
     table.table
         tr
             th  序号
@@ -338,6 +338,7 @@ view('edit-task') > form.vertical
             label.label.required 作业名称
             .content
                 input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
+                .tips 0/30
                 input.input#id(type= 'hidden' name='id' value=task.id)
         .clearfix
             .form-row.pull-left.w-half.start-time.row-block.r-padding
@@ -349,6 +350,7 @@ view('edit-task') > form.vertical
         .form-row
             .clearfix
                 label.label.required.pull-left 任务说明
+                .text-right 0/5000
                 textarea.input#explain(name='explain' rows='3' x-rule='maxLength:1000,required') > echo(task.explain)
 
         .task-table.layout-mt-small

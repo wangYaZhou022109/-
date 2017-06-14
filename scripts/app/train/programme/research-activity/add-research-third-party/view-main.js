@@ -1,6 +1,7 @@
 var $ = require('jquery'),
     markers = require('./app/ext/views/form/markers'),
     validators = require('./app/ext/views/form/validators');
+    // _ = require('lodash/collection');
 
 exports.ADD_QUESTIONARY = 'train/programme/research-activity/add-research-activity/steps/step-2';
 
@@ -39,6 +40,18 @@ exports.handlers = {
         return this.module.dispatch('changeInfoDetaile', this.getData());
     }
 };
+
+// exports.dataForTemplate = {
+//     research: function(data) {
+//         var me = this;
+//         return _.map(data.research, function(r) {
+//             var s = r;
+//             s.startTime = me.module.renderOptions.startTime;
+//             s.endTime = me.module.renderOptions.endTime;
+//             return s;
+//         });
+//     }
+// };
 
 exports.components = [{
     id: 'start-time',

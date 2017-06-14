@@ -78,7 +78,13 @@ view('main') > form.vertical
                     .content > input.input(value=classSignupInfo.classInfo.className disabled=true)
                 .form-row
                     label 报名码
-                    .content > input.input(value=classSignupInfo.signupCode disabled=true)
+                        .content > input.input(value=classSignupInfo.signupCode disabled=true)
+                    #  if(state.activity)
+                    #      label 报名码
+                    #      .content > input.input#signupCode(name='signupCode')
+                    #  else
+                    #      label.required 报名码
+                    #      .content > input.input(value=classSignupInfo.signupCode disabled=true)
                 .form-row
                     label 姓名
                     .content > input.input(value=member.fullName disabled=true)

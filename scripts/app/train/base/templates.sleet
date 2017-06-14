@@ -27,7 +27,7 @@ view('main') > form.vertical
                         span > echo(classInfo.address)
                     .pull-left.layout-mr
                         span 客房：
-                        span > echo(classInfo.restRoom)
+                        span > echo(classInfo.rommText)
                     .pull-left.layout-mr
                         span 餐厅：
                         span > echo(classInfo.diningRoomText)
