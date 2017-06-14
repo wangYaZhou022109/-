@@ -3,7 +3,9 @@ exports.items = {
     banner: 'banner',
     left: 'left',
     right: 'right',
-    'ask/changetopic': { isModule: true }
+    'ask/changetopic': { isModule: true },
+    'ask/expert/right': { isModule: true },
+    'ask/expert/editsummary': { isModule: true }
 };
 
 exports.store = {
