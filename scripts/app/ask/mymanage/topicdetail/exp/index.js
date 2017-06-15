@@ -21,7 +21,7 @@ exports.store = {
         unpraise: { url: '../ask-bar/my-share/unpraise' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
