@@ -36,7 +36,7 @@ view('list')
                             echo('.') + string('ask-a-question') + echo('.')
                         compare(trendsType 'eq' '2')
                             echo('.') + string('share') + echo('.')
-                    span.sub-text > echo(createTime)
+                    span.sub-text > echo(createTime + ',' + show)
                 .comment-operation
                     if(topicList)
                         .pull-left > .sub-text > string('from-topic') + echo(' ：') + each(topicList) 

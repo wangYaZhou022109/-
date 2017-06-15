@@ -291,12 +291,12 @@ exports.dataForTemplate = {
                     obj.show = 0;
                 } else {
                     obj.show = 0;
-                    if (obj.createUserId === obj.me && obj.question.discussNum) { // 是否为当前用户
+                    if (obj.createUserId === obj.me) { // 是否为当前用户
                         if (obj.question.discussNum) {
                             if (obj.question.closeStatus) {
-                                obj.show = 2;
-                            } else {
                                 obj.show = 3;
+                            } else {
+                                obj.show = 2;
                             }
                         } else {
                             obj.show = 1;
