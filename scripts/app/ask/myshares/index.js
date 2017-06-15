@@ -14,7 +14,7 @@ exports.store = {
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 findById: function(id) {
                     var myshares = this.module.store.models.page.data;
@@ -183,12 +183,11 @@ exports.afterRender = function() {
         var scrollTop = $(document).scrollTop();
         var clientHeight = $(window).height();
         var scrollHeight = $(document).height();
-        var footerHeight = $('.footer').height();
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        if ((scrollTop + clientHeight) >= (scrollHeight - footerHeight)) {
+        if ((scrollTop + clientHeight) >= scrollHeight) {
             $('.none-more').css('display', 'block');
         }
     });
