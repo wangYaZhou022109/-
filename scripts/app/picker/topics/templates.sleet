@@ -6,9 +6,9 @@ module
 view('tags')
     #tags
 view('main')
-    .clearfix
-        .pull-right > .tag-btn.radius.no-margin#selectTopic > i.iconfont.icon-more
-        .sub-row.overflow.text-overflow#tag-list
-            .inline-block.small-font 推荐标签：
+    .clearfix.topics-list
+        .topics-right > .tag-btn.radius.no-margin#selectTopic > i.iconfont.icon-more
+        .sub-row.overflow#tag-list.pull-left
+            .small-font.pull-left 推荐标签：
             each(hot)
-                .tag-btn.radius(id='hot-'+id)(class = if(selected 'selected')) > echo(name)
+                .tag-btn.radius.pull-left(id='hot-'+id)(class = if(selected 'selected')) > echo(name)
