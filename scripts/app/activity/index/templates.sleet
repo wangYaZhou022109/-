@@ -103,7 +103,7 @@ view('class-info')
                         .activity-item.clearfix
                             i.iconfont.icon-exam.pull-left.activity-item-icon
                             .overflow
-                                .text-overflow > a(title=name id='class-' + id) > echo(className)
+                                .text-overflow > a(title=name id='class-' + id data-name='id' data-value=id) > echo(className)
                                 .text-tips.m-top.text-overflow
                                     dateMinute(arriveDate) + echo(' ~ ') + dateMinute(returnDate)
 

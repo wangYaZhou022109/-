@@ -134,9 +134,9 @@ exports.dataForTemplate = {
         classInfo.endDate = helpers.date(returnDate);
         // address = helpers.map('project-address', classInfo.address);
         address = classInfo.address;
-        classInfo.addressText = address !== '' ? address : '暂未分配';
-        romm = classInfo.classRoomName;
-        classInfo.rommText = romm !== '' ? romm : '暂未分配';
+        classInfo.addressText = address !== null ? address : '暂未分配';
+        romm = classInfo.restRoom;
+        classInfo.rommText = romm !== null ? romm : '暂未分配';
         diningRoom = classInfo.diningRoom !== null ? classInfo.diningRoom : '暂未分配';
         classInfo.diningRoomText = diningRoom;
         classRoom = classInfo.classRoomName !== null ? classInfo.classRoomName : '暂未分配';

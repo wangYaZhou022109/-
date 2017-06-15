@@ -66,6 +66,8 @@ view('main')
                         .comment-text > echo(content)
                         .comment-operation
                             .pull-left 
+                                
+                            .text-right
                                 compare(praise1 'eq' true)
                                     .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
                                     .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
@@ -73,7 +75,6 @@ view('main')
                                     .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                     .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
                                 .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复')
-                            .text-right
                                 .item > .share-bar
                                     .drop-down-wrapper
                                         #  i.iconfont.icon-share-2(title='分享')

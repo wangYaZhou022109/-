@@ -16,9 +16,10 @@ exports.store = {
         down: { url: '../human/file/download' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
@@ -96,6 +97,10 @@ exports.store = {
         }
     },
     callbacks: {
+        closequestion: function(payload) {
+            this.models.close.set(payload);
+            return this.put(this.models.close);
+        },
         refresh: function() {
             this.models.callback();
         },
@@ -202,12 +207,11 @@ exports.afterRender = function() {
         var scrollTop = $(document).scrollTop();
         var clientHeight = $(window).height();
         var scrollHeight = $(document).height();
-        var footerHeight = $('.footer').height();
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        if ((scrollTop + clientHeight) >= (scrollHeight - footerHeight)) {
+        if ((scrollTop + clientHeight) >= scrollHeight) {
             $('.none-more').css('display', 'block');
         }
     });

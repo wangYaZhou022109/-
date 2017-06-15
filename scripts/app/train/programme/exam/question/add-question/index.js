@@ -74,8 +74,7 @@ exports.store = {
                 D.assign(payload, {
                     organizationId: organizationId,
                     id: this.models.key.data.id,
-                    isTemp: this.module.renderOptions.isTemp,
-                    contentText: payload.content
+                    isTemp: this.module.renderOptions.isTemp
                 })
             );
 

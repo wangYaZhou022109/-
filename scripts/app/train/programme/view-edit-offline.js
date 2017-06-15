@@ -31,6 +31,7 @@ exports.bindings = {
 exports.dataForTemplate = {
     checked: function(data) {
         var offlineCourse = data.offlineCourse;
+        // console.log(offlineCourse.courseDate);
         return {
             type1: offlineCourse.type === '1' || offlineCourse.type === 1,
             type2: offlineCourse.type === '2' || offlineCourse.type === 2,
