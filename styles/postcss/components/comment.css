@@ -77,8 +77,10 @@
         }
 
         & textarea {
+            padding: 5px;
             padding-right: calc(var(--font-size) * 6);
             height: var(--input-height);
+            line-height: 25px;
         }
 
         & .btn {
