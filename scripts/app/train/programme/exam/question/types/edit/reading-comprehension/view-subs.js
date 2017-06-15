@@ -1,4 +1,5 @@
 var _ = require('lodash/collection'),
+    D = require('drizzlejs'),
     types = require('./app/train/programme/exam/exam-question-types');
 
 exports.type = 'dynamic';
@@ -29,11 +30,13 @@ exports.handlers = {
             questions = this.bindings.sub.data.questions;
 
         me.app.message.confirm(message, function() {
-            var qq = _.filter(questions, function(q) {
+            var qq = _.map(_.filter(questions, function(q) {
                 return q.id !== id;
+            }), function(q, n) {
+                return D.assign(q, { id: 'q-' + n });
             });
             me.bindings.sub.data.questions = qq;
-            me.module.dispatch('refreshSub');
+            return me.module.dispatch('refreshSub');
         }, function() {
             return false;
         });
@@ -52,7 +55,8 @@ exports.dataForTemplate = {
 };
 
 exports.getEntity = function(id) {
-    return this.module.store.models.sub.getQuestionById(id);
+    var question = this.module.store.models.sub.getQuestionById(id);
+    return question;
 };
 
 exports.getEntityModuleName = function(id, question) {
@@ -63,6 +67,7 @@ exports.dataForEntityModule = function(question) {
     return {
         type: question.type,
         data: question,
-        multiple: question.type === 2
+        multiple: question.type === 2,
+        previewMode: 1
     };
 };

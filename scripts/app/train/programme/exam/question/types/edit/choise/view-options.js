@@ -110,6 +110,7 @@ exports.mixin = {
         }
         data.questionAttrs = result;
         data.content = view.components.content.html();
+        data.contentText = view.components.content.text();
         if (this.module.renderOptions.editMode === 2) {
             data.difficulty = view.$('difficulty').value;
         }
@@ -133,17 +134,16 @@ exports.mixin = {
             el,
             validate = true,
             checkOption = function(e) {
-                $(e).removeClass('error');
+                $(e).parent('.input-box').removeClass('input error');
 
                 if (!V.required.fn(e.value)) {
-                    // this.app.message.error('选项不能为空');
-                    $(e).addClass('error');
+                    $(e).parent('.input-box').addClass('input error');
                     return false;
                 }
 
                 if (!V.maxLength.fn(e.value, OPTION_MAX_LENGTH)) {
                     this.app.message.error('选项最大长度;' + OPTION_MAX_LENGTH);
-                    $(e).addClass('error');
+                    $(e).parent('.input-box').addClass('input error');
                     return false;
                 }
                 return true;
