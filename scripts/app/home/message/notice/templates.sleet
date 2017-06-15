@@ -16,9 +16,9 @@ view('main')
                 .tag-btn.m-right.radius#markRead.m-left 标记已读
                 .tag-btn.radius#removeAll.m-left 删除
         ul.list > each(dataList)
-            li(class = if(isRead 'sub-text'))
+            li(id='li-'+id class = if(isRead 'sub-text'))
                 .pull-left.layout-mr-small > .checkbox > input(type='checkbox' id='check-item'+id name='messageId' value=id) + label(for='check-item'+id)
-                .overflow > a.underline(href='#/message/detail/'+id  target='_blank')
+                .overflow > a.underline(id='details-'+id  target='_blank')
                     .clearfix
                         .pull-left.common-titlea > echo(subject)
                         .pull-right.text-tips > echo('发送时间：') + dateTime(createTime)
