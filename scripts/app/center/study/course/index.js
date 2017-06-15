@@ -12,7 +12,7 @@ exports.store = {
             root: 'items'
         },
         progress: { url: '../course-study/course-study-progress/give-up' },
-        search: { data: { businessType: 0, findStudy: 0 } },
+        search: { data: { businessType: 0, findStudy: 0, studyTimeOrder: 'desc' } },
         img: { url: '../human/file/download' }
     },
     callbacks: {

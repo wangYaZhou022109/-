@@ -19,6 +19,11 @@ view('banner')
                     .inline-block.m-right.bg-white.sub-title > echo(name)
                 .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
             p.info-detail > echo(expert.introduce)
+            .expert-about.clearfix
+                a.normal(id = 'right'+ expert.id data-name='id' data-value=expert.id href='javascript:;')
+                    i.iconfont.icon-warn
+                    | 专家的权利与义务
+                a.pull-right.pointer(id = 'editsummary'+ expert.id data-name='id' data-value=expert.id styke="text-decoration: none;") 编辑简介
 
 view('right') 
     div(data-dynamic-key='iamexpertright')
