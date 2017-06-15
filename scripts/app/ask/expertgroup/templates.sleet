@@ -28,17 +28,20 @@ view('list')
     .comment-list.ask-list
         ul > each(expertlist)
             li.expert-item
-                .img > .img-cont > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
-                h4.text-overflow > echo(member.fullName)
-                .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
-                .row > each(topicList) 
-                    .tag-btn 
-                        a.normal(href='#/ask/topicdetail/'+ id ) > echo(name)
-                .sub-text.text-overflow > echo(introduce)
-                compare(member.id 'ne' me)
-                    compare(concernList.length 'gt' 0)
-                        .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
-                        .btn.small( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) +关注
-                    else
-                        .btn.small( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
-                        .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) +关注
+                .img> .img-cont > a.normal.block(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
+                .pull-right.right-box
+                    div.clearfix
+                        h4.text-overflow.pull-left > echo(member.fullName)
+                        compare(member.id 'ne' me)
+                            compare(concernList.length 'gt' 0)
+                                .btn.small.pull-right(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                                .btn.small.pull-right( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) +关注
+                            else
+                                .btn.small.pull-right( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                                .btn.small.pull-right(id='follow-expert-'  + id  data-name='id' data-value=id) +关注
+                    .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
+                    .row > each(topicList) 
+                        .tag-btn 
+                            a.normal(href='#/ask/topicdetail/'+ id ) > echo(name)
+                    .sub-text.text-overflow > echo(introduce)
+               
