@@ -27,7 +27,7 @@ exports.store = {
     },
     callbacks: {
         init: function(payload) {
-            var question = payload.question,
+            var question = payload.question || payload.data,
                 state = this.models.state,
                 tempAddQuestionOptions = this.models.tempAddQuestionOptions;
 
@@ -35,6 +35,7 @@ exports.store = {
 
             state.clear();
             state.data.type = payload.type || SINGLE_CHOOSE;
+
 
             this.models.question.set(question);
             if (question) this.models.key.set({ id: question.id });
@@ -47,13 +48,15 @@ exports.store = {
                 question = me.models.question,
                 state = me.models.state,
                 callback = me.module.renderOptions.callback,
+                tempAddQuestionOptions = me.models.tempAddQuestionOptions,
                 r;
             this.models.question.set(D.assign(state.data, payload, this.module.renderOptions.data));
-            return this.save(this.models.question).then(function() {
-                me.app.message.success('保存成功！');
+            return this.save(this.models.question).then(function(data) {
+                me.app.message.success('保存成功');
                 if (callback) {
                     r = D.assign(state.data, {
                         id: question.data.id,
+                        dimensionId: question.data.dimensionId,
                         questionAttrs: state.data.questionAttrs
                     });
                     callback(covert(r));
@@ -63,6 +66,10 @@ exports.store = {
                 me.models.state.clear();
                 me.models.key.clear();
                 me.renderOptions = {};
+                D.assign(tempAddQuestionOptions.data.data, {
+                    dimensionId: question.data.dimensionId
+                });
+                return data;
             });
         },
         refresh: function() {
@@ -133,6 +140,7 @@ exports.buttons = function() {
             if (this.renderOptions.callback) {
                 D.assign(this.store.models.state.data, result);
             }
+
             return this.dispatch('saveQuestion', result);
         }
     };
@@ -141,19 +149,25 @@ exports.buttons = function() {
         text: '保存并新增',
         fn: function() {
             var me = this;
-            save.fn.call(this).then(function() {
-                return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
-                    me.store.models.state.changed();
+            if (save.fn.call) {
+                return save.fn.call(this).then(function() {
+                    return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
+                        me.store.models.state.changed();
+                        return false;
+                    });
                 });
-            });
+            }
             return false;
         }
     };
 
     // buttons.push(preview);
-    buttons.push(save);
-    buttons.push(saveAndAdd);
-
+    if (this.renderOptions.titleType === 'edit') {
+        buttons.push(save);
+    } else {
+        buttons.push(save);
+        buttons.push(saveAndAdd);
+    }
     return buttons;
 };
 

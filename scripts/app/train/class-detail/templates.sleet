@@ -240,10 +240,10 @@ view('questionnaire') > .surveyexam-page > .surveyexam
             if(isGrant)
                 compare(type 'eq' 1)
                     a.surveyexam-btn.inline-block.btn(id='edit-exams'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始考试')
-                else
+                compare(type 'eq' 2)
+                    a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始调研')
+                compare(type 'eq' 3)
                     a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始评估')
-                #  compare(type 'eq' 2)
-                #      a.surveyexam-btn.inline-block.btn(id='edit-questionary'+resourceId data-name='resourceId' data-value=resourceId) > echo('开始调研')
                 
 view('bus')
     section.section.businfo-page > .businfo

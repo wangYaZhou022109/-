@@ -40,7 +40,17 @@ exports.dataForActions = {
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
         var className = this.bindings.classSignupInfo.data.classInfo.className;
-        // var signupCode;
+        var signupCode;
+        if (this.bindings.state.data.activity) {
+            signupCode = $(this.$('signupCode')).val();
+            if (signupCode === '') {
+                this.app.message.error('请输入报名码');
+                return false;
+            } else if (signupCode !== this.bindings.classSignupInfo.data.signupCode) {
+                this.app.message.error('请输入正确的报名码');
+                return false;
+            }
+        }
         if (!validators.phone.fn(phoneNumber) || phoneNumber === '') {
             this.app.message.error('请输入正确的手机号');
             return false;
@@ -49,16 +59,6 @@ exports.dataForActions = {
             this.app.message.error('请输入正确的邮箱');
             return false;
         }
-        // if (this.bindings.state.data.activity) {
-        //     signupCode = $(this.$('signupCode')).val();
-        //     if (signupCode === '') {
-        //         this.app.message.error('请输入报名码');
-        //         return false;
-        //     } else if (signupCode !== this.bindings.classSignupInfo.data.signupCode) {
-        //         this.app.message.error('请输入正确的报名码');
-        //         return false;
-        //     }
-        // }
         return {
             phoneNumber: phoneNumber,
             email: email,
@@ -71,7 +71,6 @@ exports.dataForActions = {
             settleOrganizationId: settleOrganizationId,
             memberId: memberId,
             className: className
-            // signupCode: signupCode
         };
     }
 };

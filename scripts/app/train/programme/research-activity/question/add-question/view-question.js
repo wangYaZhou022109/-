@@ -1,6 +1,7 @@
 var types = require('./app/train/programme/research-activity/research-question-types'),
     D = require('drizzlejs'),
-    EDIT = 3;
+    EDIT = 3,
+    _ = require('lodash/collection');
 
 exports.type = 'dynamic';
 
@@ -9,9 +10,18 @@ exports.bindings = {
 };
 
 exports.getEntity = function() {
-    var question = this.module.renderOptions.question;
+    var question = this.module.renderOptions.question,
+        newQuestion = {};
     if (question) {
-        question = D.assign({}, question, { score: question.score / 100 });
+        newQuestion = JSON.parse(JSON.stringify(question)); // clone一份，不改变对象值
+        newQuestion = D.assign({}, newQuestion, {
+            questionAttrs: _.orderBy(_.map(newQuestion.questionAttrs, function(qr) {
+                if (qr.score) return D.assign(qr, { score: qr.score / 100 });
+                return qr;
+            }), ['name'], ['asc']),
+            score: newQuestion.score / 100
+        });
+        return newQuestion;
     }
     return question;
 };

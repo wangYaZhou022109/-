@@ -60,7 +60,7 @@ view('main') > form.vertical
                     .content > textarea.w-full#object(name='object' value='' rows=5) > echo(projectInfo.object)
         if(isGrant)
             if(projectInfo.isShowCommit)
-                .text-center.layout-mt.layout-mb 
+                .text-center.layout-mt.layout-mb.relative
                     .btn#submit 提交
                     .notes 
                         p.small-font 注：1 提交后提交按钮变保存按钮
