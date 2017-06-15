@@ -241,6 +241,9 @@ module.exports = {
     'research-question-types': {
         1: '单选', 2: '多选', 5: '问答'
     },
+    'evaluate-question-types': {
+        1: '单选', 5: '问答'
+    },
     chineseNumber: {
         1: '一',
         2: '二',

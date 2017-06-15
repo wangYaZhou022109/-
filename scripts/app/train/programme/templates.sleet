@@ -215,7 +215,7 @@ view('edit-offline') > form.vertical
                         label.required 开始时间
                         .content
                             .relative
-                                input.input.date#courseDate(name='courseDate'  x-rule='required' value=dateTime(offlineCourse.courseDate))
+                                input.input.date#courseDate(name='courseDate'  x-rule='required' value=offlineCourse.courseDate)
                                 .iconfont.icon-riqi.text-main-color
                 .class-form-width.pull-left
                     .form-row
@@ -236,7 +236,7 @@ view('edit-offline') > form.vertical
                     .form-row
                         label 讲师姓名
                         .content
-                            input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
+                            input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='maxLength:30')
             .row
                 .class-form-width.pull-left
                     .form-row
@@ -357,7 +357,7 @@ view('edit-task') > form.vertical
         .form-row
             .clearfix
                 label.label.required.pull-left 任务说明
-                .text-right 0/5000
+                .text-right.tag-height 0/5000
                 textarea.input#explain(name='explain' rows='3' x-rule='maxLength:1000,required') > echo(task.explain)
 
         .task-table.layout-mt-small

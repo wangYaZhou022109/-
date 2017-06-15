@@ -5,6 +5,19 @@ module
     #  .newevaluation(data-region='side')
 
 view('main')
+            #  .clearfix
+            #      span.h3.pull-left.test-list.strong 内容列表
+            #      #  select.pull-right.test-list
+            #      #      option 多维度
+            #      #      option 单维度
+            #  .h4.clearfix.border.bottom.p-bottom
+            #      .tag-btn.radius.pull-right#add-dimension 新增维度
+            #      | 维度管理
+            #      #  a#add-dimension 新增
+            #      #  span |
+            #      #  a#edit-dimension 编辑
+            #      #  span |
+            #      #  a#delete-dimension 删除
     .page-main-wrapper.layout-mb-small
         .page-side
             .clearfix

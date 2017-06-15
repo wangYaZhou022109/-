@@ -76,6 +76,7 @@ exports.mixin = {
         result.push({ value: answerReplace, name: 0, type: 0 });
         data.questionAttrs = result;
         data.content = contentItem.components.content.html();
+        data.contentText = contentItem.components.content.text();
         data.score = scoreItem.$('score').value;
         data.id = this.bindings.state.data.id;
         return data;
