@@ -72,11 +72,12 @@ exports.store = {
                             paper: exam.paper,
                             hasPrevious: false,
                             hasNext: exam.paper.questions.length > 1,
-                            anonymityMark: exam.anonymityMark
+                            anonymityMark: exam.anonymityMark,
+                            examRecordId: examRecord.id
                         };
                         this.save();
                     }
-                    if (answer && answer.data.length > 0) {
+                    if (answer && answer.data && answer.data.length > 0) {
                         this.calculate();
                     }
                 },
@@ -101,20 +102,26 @@ exports.store = {
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;
+                },
+                saveLastCacheTime: function(lastCacheTime) {
+                    D.assign(this.data, {
+                        lastCacheTime: lastCacheTime
+                    });
+                    this.save();
                 }
             }
         },
         types: {
             type: 'localStorage',
             mixin: {
-                init: function(questions) {
+                init: function(questions, forceUpdate) {
                     var map = {},
                         j = 0,
                         k = 0,
                         me = this;
 
                     this.load();
-                    if (!this.data && questions) {
+                    if ((!this.data && questions) || forceUpdate) {
                         _.forEach(questions, function(q) {
                             var type = orderMap[q.type];
 

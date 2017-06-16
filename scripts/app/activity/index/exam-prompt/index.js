@@ -7,7 +7,7 @@ exports.title = '考试须知';
 exports.store = {
     models: {
         exam: {
-            url: '../exam/exam/user-record'
+            url: '../exam/exam/front/user-record/'
         },
         signUp: { url: '../exam/sign-up' },
 
@@ -16,7 +16,7 @@ exports.store = {
         init: function(payload) {
             if (payload.examId) {
                 this.models.exam.set({ id: payload.examId });
-                return this.get(this.models.exam);
+                return this.get(this.models.exam, { loading: true });
             }
             return '';
         },

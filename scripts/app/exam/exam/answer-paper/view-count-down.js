@@ -11,13 +11,12 @@ exports.bindings = {
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
-    var examRecord = this.bindings.examRecord.data,
-        exam = this.bindings.exam.data,
+    var exam = this.bindings.exam.data,
         countDown = this.bindings.countDown.data,
         delay = countDown.delay;
     return {
         endTime: getEndTime.call(this, exam.examRecord.endTime),
-        startTime: examRecord.currentTime,
+        startTime: exam.examRecord.currentTime,
         isDelay: countDown.isDeday,
         delay: delay
     };
