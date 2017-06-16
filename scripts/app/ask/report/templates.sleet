@@ -3,20 +3,20 @@ module > .export-page
     .export-form(data-region="details")
 
 view('details')
-    .export-form-title.container
+    .export-form-title
         form.clearfix.form.align-left
             .inline-block.w-half.inbox.m-bottom
-                input.border.radius#input1(type='radio' name='type' value='1')
+                input.border.radius#input1(type='checkbox' name='input1')
                 label(for='input1') > string('report-1')
             .inline-block.w-half.inbox.m-bottom
-                input#input2(type='radio' name='type' value='2')
+                input#input2(type='checkbox' name='input2')
                 label(for='input2') > string('report-2')
             .inline-block.w-half.inbox.m-bottom
-                input#input3(type='radio' name='type' value='3')
+                input#input3(type='checkbox' name='input3')
                 label(for='input3') > string('report-3')
             .inline-block.w-half.inbox.m-bottom
-                input#input4(type='radio' name='type' value='4')
+                input#input4(type='checkbox' name='input4')
                 label(for='input4') > string('report-4')
             .form-row
-                label(for='accuseNote') > string('report') + string('explain')
-                textarea#accuseNote.w-full.m-top(rows="10" name='accuseNote' placeholder="请描述你举报理由")
+                label.required(for='accuseNote') > string('report') + string('explain')
+                textarea#accuseNote.w-full.m-top(rows="2" name='accuseNote' placeholder="请描述你举报理由")

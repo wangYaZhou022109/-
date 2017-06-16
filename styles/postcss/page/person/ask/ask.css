@@ -48,19 +48,24 @@
             margin-bottom: var(--space);
         }
         & .btn {
-            @apply --fade-out;
+            /*@apply --fade-out;*/
             margin-top: var(--space);
             height: auto;
+            background-color: #577DD7;
         }
+
         & .row {
             margin-top: var(--space);
         }
         & .sub-text {
             margin-top: var(--space);
         }
-        &:hover {
-            & .btn { @apply --fade-in}
-        }
+        /*&:hover {
+            & .btn {
+                @apply --fade-in;
+                background-color: #577DD7;
+            }
+        }*/
         & h4 {
             line-height: calc(var(--base-gap)/2);
         }
@@ -78,6 +83,12 @@
         & .img {
             margin-bottom: var(--large-space);
             width: calc(var(--large-space) * 4);
+            & img {
+                width: 100%;
+            }
+        }
+        & .right-box {
+            width:261px;
         }
     }
     & .cell-3 li.expert-item {

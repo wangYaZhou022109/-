@@ -35,7 +35,7 @@ exports.store = {
             state.data = {};
             state.data.menu = 'news';
             state.data.news = true;
-            state.data.topicId = paylaod.id;
+            state.data.topicid = paylaod.id;
             state.changed();
             topicdetail.set({ id: paylaod.id });
             this.get(topicdetail)

@@ -1,6 +1,7 @@
 var _ = require('lodash/collection'),
     $ = require('jquery'),
     validator = require('./app/ext/views/form/validators'),
+    D = require('drizzlejs'),
     OPTION_SCORE = 1,
     trim = function(str) {
         return str.replace(/^\s+|\s+$/g, '');
@@ -68,67 +69,82 @@ exports.dataForEntityModule = function(data) {
 exports.mixin = {
     checkAnswer: function() {
         if (this.checkEmptyOption()) {
-            this.app.message.error('存在选项数据填写不完整');
             return false;
         }
         if (this.checkMaxLengthOption()) {
-            this.app.message.error('存在选项内容最大长度为：5000');
             return false;
         }
         return true;
     },
-    getResult: function(options) {
+    setResult: function() { // 将页面文本编辑器的数据保存进options
+        var result = [],
+            i,
+            content,
+            state = this.bindings.state.data;
+
+        for (i = 0; i < state.options.length; i++) {
+            content = $(this.$('content-' + i)).val();
+            result.push(D.assign(state.options[i], {
+                content: content,
+                score: state.mode === OPTION_SCORE ? $(this.$('score-' + i)).val() : 0
+            }));
+        }
+        state.options = result;
+    },
+    getResult: function() { // 将options的值组装成question
         var result = [],
             data = {},
             i,
             value,
             view = this.module.items.content,
-            state = this.bindings.state.data;
+            state = this.bindings.state.data,
+            options = state.options;
 
+        this.setResult();
         for (i = 0; i < options.length; i++) {
             value = $(this.$('content-' + i)).val();
-            if (!value) {
-                value = options[i].content;
-            }
-            if (value !== '') {
-                result.push({
-                    value: value,
-                    name: i,
-                    type: state.multiple ? 2 : 1,
-                    score: state.mode === OPTION_SCORE ? ($(this.$('score-' + i)).val() * 100) : 0
-                });
-            }
+            result.push({
+                value: value,
+                valueText: options[i].contentText || value,
+                name: i,
+                type: state.multiple ? 2 : 1,
+                score: state.mode === OPTION_SCORE ? ($(this.$('score-' + i)).val() * 100) : 0
+            });
         }
         data.questionAttrs = result;
         data.content = view.components.content.html();
+        data.contentText = view.components.content.text();
         if (this.module.renderOptions.editMode === 2) {
             data.difficulty = view.$('difficulty').value;
         }
         data.id = state.id;
         return data;
     },
-    changeOptionContent: function(index, content) {
-        var options = this.bindings.state.data.options,
-            data = this.getResult(options),
-            isRichText = this.bindings.state.isRichText(content);
-        options[index].content = content;
-        options[index].isRichText = isRichText;
-        return this.module.dispatch('init', { data: data });
+    changeOptionContent: function(index, content, text) {
+        var isRichText = this.bindings.state.isRichText(content);
+        this.setResult();
+        this.bindings.state.data.options[index].content = content;
+        this.bindings.state.data.options[index].contentText = text;
+        this.bindings.state.data.options[index].isRichText = isRichText;
+        this.bindings.state.changed();
     },
     checkEmptyOption: function() {
         var options = this.bindings.state.data.options,
             i = 0,
             contentEl,
             scoreEl,
+            code,
             isEmpty = false,
             state = this.bindings.state.data;
 
         if (options) {
             for (i; i < options.length; i++) {
+                code = String.fromCharCode(i + 'A'.charCodeAt(0));
                 contentEl = this.$('content-' + i);
                 if (contentEl.value === '') {
                     isEmpty = true;
                     $(contentEl).addClass('error');
+                    this.app.message.error('选项' + code + '填写不完整');
                 } else {
                     $(contentEl).removeClass('error');
                 }
@@ -140,7 +156,7 @@ exports.mixin = {
                         $(scoreEl).addClass('error');
                     } else {
                         $(scoreEl).removeClass('error');
-                        if (!this.checkScore(scoreEl.value)) {
+                        if (!this.checkScore(scoreEl.value, code)) {
                             isEmpty = true;
                             $(scoreEl).addClass('error');
                         }
@@ -154,15 +170,18 @@ exports.mixin = {
         var options = this.bindings.state.data.options,
             i = 0,
             contentEl,
+            code,
             isGtMaxLength = false,
-            maxLength = 3000;
+            maxLength = 5000;
 
         if (options) {
             for (i; i < options.length; i++) {
+                code = String.fromCharCode(i + 'A'.charCodeAt(0));
                 contentEl = this.$('content-' + i);
                 if (contentEl.value.length > maxLength) {
                     isGtMaxLength = true;
                     $(contentEl).addClass('error');
+                    this.app.message.error('选项' + code + '内容超出最大长度：5000');
                 } else {
                     $(contentEl).removeClass('error');
                 }
@@ -170,19 +189,19 @@ exports.mixin = {
         }
         return isGtMaxLength;
     },
-    checkScore: function(value) {
+    checkScore: function(value, code) {
         if (!validator.number.fn(value)) {
-            this.app.message.error('分数' + validator.number.message);
+            this.app.message.error('选项' + code + '分数' + validator.number.message);
             return false;
         }
 
         if (!this.interval.fn(value, 0, 1, 9999999.99, 0)) {
-            this.app.message.error('分数范围为0-9999999.99');
+            this.app.message.error('选项' + code + '分数范围为0-9999999.99');
             return false;
         }
 
         if (!this.keepDecimal.fn(value, 2)) {
-            this.app.message.error('分数最多保留两位小数');
+            this.app.message.error('选项' + code + '分数最多保留两位小数');
             return false;
         }
 

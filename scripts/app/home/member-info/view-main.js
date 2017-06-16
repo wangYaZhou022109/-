@@ -16,6 +16,7 @@ exports.components = [function() {
             picker: 'upload-head',
             inputName: 'headPortrait',
             btnName: '修改头像',
+            defaultImg: 'images/default-cover/default-user.png',
             data: data
         }
     };

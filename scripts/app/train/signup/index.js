@@ -48,45 +48,21 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    // var state = this.store.models.state.data,
-    //     me = this,
-    //     payload = this.renderOptions.classId,
-    //     index,
-    //     classId;
-    // index = Number(payload.indexOf('?'));
-    // if (index !== -1) {
-    //     classId = payload.split('?')[0].trim();
-    //     state.activity = true;
-    // } else {
-    //     classId = payload;
-    // }
-    // me.dispatch('classSignupInfo', { classId: classId });
-    // me.dispatch('member');
-    // me.dispatch('trainee', { classId: classId }).then(function(data) {
-    //     var trainee = data[0];
-    //     // 初次报名
-    //     state.auditStatus = 3;
-    //     if (trainee) {
-    //         if (trainee.deleteFlag === 0) {
-    //             if (trainee.auditStatus === 0) {
-    //                 // 审核中
-    //                 state.auditStatus = 0;
-    //             } else if (trainee.auditStatus === 1) {
-    //                 // 学员已报名成功
-    //                 state.auditStatus = 1;
-    //             } else if (trainee.auditStatus === 2) {
-    //                 // 审核未通过
-    //                 state.auditStatus = 2;
-    //             }
-    //         }
-    //     }
-    //     me.store.models.state.changed();
-    // });
     var state = this.store.models.state.data,
-        me = this;
-    me.dispatch('classSignupInfo', me.renderOptions);
+        me = this,
+        payload = this.renderOptions.classId,
+        index,
+        classId;
+    index = Number(payload.indexOf('?'));
+    if (index !== -1) {
+        classId = payload.split('?')[0].trim();
+        state.activity = true;
+    } else {
+        classId = payload;
+    }
+    me.dispatch('classSignupInfo', { classId: classId });
     me.dispatch('member');
-    me.dispatch('trainee', me.renderOptions).then(function(data) {
+    me.dispatch('trainee', { classId: classId }).then(function(data) {
         var trainee = data[0];
         // 初次报名
         state.auditStatus = 3;
@@ -106,4 +82,28 @@ exports.beforeRender = function() {
         }
         me.store.models.state.changed();
     });
+    // var state = this.store.models.state.data,
+    //     me = this;
+    // me.dispatch('classSignupInfo', me.renderOptions);
+    // me.dispatch('member');
+    // me.dispatch('trainee', me.renderOptions).then(function(data) {
+    //     var trainee = data[0];
+    //     // 初次报名
+    //     state.auditStatus = 3;
+    //     if (trainee) {
+    //         if (trainee.deleteFlag === 0) {
+    //             if (trainee.auditStatus === 0) {
+    //                 // 审核中
+    //                 state.auditStatus = 0;
+    //             } else if (trainee.auditStatus === 1) {
+    //                 // 学员已报名成功
+    //                 state.auditStatus = 1;
+    //             } else if (trainee.auditStatus === 2) {
+    //                 // 审核未通过
+    //                 state.auditStatus = 2;
+    //             }
+    //         }
+    //     }
+    //     me.store.models.state.changed();
+    // });
 };

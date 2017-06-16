@@ -10,7 +10,7 @@ view('audit') > form.vertical
         span > echo(audit.member.fullName)
         span 提问时间：
         span > dateTime(audit.createTime)
-    .detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  each(topicList) > echo(name) + echo(' ')
+    .detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  echo(audit.topicStr) + echo(' ')
     input.input(name='id' type='hidden' value=audit.id)
     input.input(name='questionId' type='hidden' value=audit.question.id)
     input.input(name='objectId' type='hidden' value=audit.objectId)

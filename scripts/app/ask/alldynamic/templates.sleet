@@ -125,12 +125,12 @@ view('list')
                                 .item(id='discuss-' + id ) > string('reply')
                             else
                                 .item(id='discuss-' + id ) > echo(questionDiscuss.replyNum) + string('strip') + string('reply')
-                            compare(concernNum 'gt' 0)
-                                .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
-                                .item( 'hidden' id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')
-                            else
-                                .item( 'hidden' id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
-                                .item(id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')
+                            #  compare(concernNum 'gt' 0)
+                            #      .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
+                            #      .item( 'hidden' id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')
+                            #  else
+                            #      .item( 'hidden' id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
+                            #      .item(id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     span 分享
@@ -139,9 +139,12 @@ view('list')
                                         .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                             .item
                                 span(id ='trend-report-' + trendsType + '_' + discussId+'_' + createUserId data-name='id' data-value=trendsType +'_' + discussId+'_' + createUserId) > string('report')
-                            compare(createUserId 'eq' me)
-                                compare(discussList.length 'eq' 0)
-                                    .item(id = 'del-discuss-' + discussId data-name='id' data-value=discussId) > string('delete')
+                            compare(show 'eq' 1)
+                                .item(id = 'del-discuss-' + discussId data-name='id' data-value=discussId) > string('delete')
+                            compare(show 'eq' 2)
+                                .item(id = 'close-discuss-' + discussId data-name='id' data-value=discussId) > string('delete')
+                            compare(show 'eq' 3)
+                                .item > string('closed')
                             form.comment-reply(id = 'comment-reply-' + id)
                                 textarea.input.w-full.block(rows=1 name='content' value='' maxLength='3000')
                                 input.input(type='hidden' name='organizationId' value=createUser.organizationId)
