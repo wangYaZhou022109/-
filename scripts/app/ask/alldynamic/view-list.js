@@ -300,12 +300,8 @@ exports.dataForTemplate = {
                 if (obj.trendsType === '3') {
                     obj.show = 0;
                     if (obj.createUserId === obj.me) { // 是否为当前用户
-                        if (obj.questionDiscuss.replyNum) {
-                            if (obj.questionDiscuss.closeStatus) {
-                                obj.show = 3;
-                            } else {
-                                obj.show = 2;
-                            }
+                        if (obj.questionDiscuss.replyNum > 0) {
+                            obj.show = 2;
                         } else {
                             obj.show = 1;
                         }
@@ -313,15 +309,14 @@ exports.dataForTemplate = {
                 } else {
                     obj.show = 0;
                     if (obj.createUserId === obj.me) { // 是否为当前用户
-                        if (obj.question.discussNum) {
-                            if (obj.question.closeStatus) {
-                                obj.show = 3;
-                            } else {
-                                obj.show = 2;
-                            }
+                        if (obj.question.discussNum > 0) {
+                            obj.show = 2;
                         } else {
                             obj.show = 1;
                         }
+                    }
+                    if (obj.question !== null && obj.question.closeStatus) {
+                        obj.show = 3;
                     }
                 }
                 page.push(obj);
