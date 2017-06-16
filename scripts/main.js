@@ -15,7 +15,7 @@ oauthOptions = {
     clientId: 3,
     // provider: 'https://oauth9.zhixueyun.com/',
     provider: 'https://zxyoauth9.zhixueyun.com/',
-    returnTo: 'http://localhost'
+    returnTo: 'http://localhost/front'
 };
 // @endif
 
