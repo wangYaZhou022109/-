@@ -19,7 +19,7 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
@@ -97,6 +97,10 @@ exports.store = {
         }
     },
     callbacks: {
+        closediscuss: function(payload) {
+            this.models.close.set(payload);
+           // return this.put(this.models.close);
+        },
         closequestion: function(payload) {
             this.models.close.set(payload);
             return this.put(this.models.close);
