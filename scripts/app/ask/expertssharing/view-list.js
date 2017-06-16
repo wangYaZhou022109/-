@@ -146,19 +146,43 @@ exports.dataForActions = {
         return data;
     },
     delquestion: function(payload) {
-        var data = payload;
+        var data = payload,
+            me = this;
         data.auditType = '1';
-        return data;
+        return this.Promise.create(function(resolve) {
+            var message = '问题删除后将无法恢复，是否确定删除该問題？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     delshare: function(payload) {
-        var data = payload;
+        var data = payload,
+            me = this;
         data.auditType = '2';
-        return data;
+        return this.Promise.create(function(resolve) {
+            var message = '文章删除后将无法恢复，是否确定删除该文章？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     deldiscuss: function(payload) {
-        var data = payload;
+        var data = payload,
+            me = this;
         data.auditType = '3';
-        return data;
+        return this.Promise.create(function(resolve) {
+            var message = '讨论删除后将无法恢复，是否确定删除该讨论？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     follow: function(payload) {
         var id = payload.id,
