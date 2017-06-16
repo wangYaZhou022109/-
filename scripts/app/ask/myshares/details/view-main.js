@@ -118,7 +118,8 @@ exports.actions = {
     'click discuss-del-*': 'discussdel',
     'click enjoy-*': 'enjoy',
     'click praise-*': 'praise',
-    'click unpraise-*': 'unpraise'
+    'click unpraise-*': 'unpraise',
+    'click del1-*': 'shut1',
 };
 
 // actions绑定的方法调用前要干的事情
@@ -176,7 +177,20 @@ exports.dataForActions = {
         data.objectType = 1;
         data.id = obj[0];
         return data;
-    }
+    },
+    shut1: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '讨论删除后将无法恢复，是否确定删除该讨论？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+        // var data = payload;
+        // return data;
+    },
 };
 
 // actions绑定的方法调用后要干的事情
@@ -223,7 +237,10 @@ exports.actionCallbacks = {
         setTimeout(function() {
             me.app.message.success('取消成功！');
         }, 1000);
-    }
+    },
+    shut1: function() {
+        this.app.message.success('删除成功！');
+    },
 };
 
 
