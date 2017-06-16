@@ -67,7 +67,7 @@ exports.handlers = {
 exports.actions = {
     'click check-*': 'check',
     'click follow-expert-*': 'follow',
-    'click unfollow-expert-*': 'unfollow'
+    'click unfollow-expert-*': 'unfollow',
 };
 
 exports.dataForActions = {
