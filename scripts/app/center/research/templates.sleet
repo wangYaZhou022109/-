@@ -9,7 +9,7 @@ view('filter') > form
     .person-list
         .filter
             .pull-right.m-right.pointer#joinTimeOrderBy
-                | 参与时间
+                | 开始时间
                 compare(search.joinTimeOrderBy 'eq' 1)
                     i.iconfont.icon-sort-asc
                 compare(search.joinTimeOrderBy 'ne' 1)

@@ -14,7 +14,8 @@ var prompts = {
         14: '点击下方“继续考试”将会继续您上次的答题',
         15: '您好，本次考试已截止报名，如有疑问请联系系统管理员，谢谢',
         16: '您好，系统正在处理您的考卷，稍后可查看详情。本次考试可以进行多次，点击下方“重新考试”后将会立即重新考试',
-        17: '系统正在处理您的考卷，稍后可查看详情'
+        17: '系统正在处理您的考卷，稍后可查看详情',
+        18: '您好，本次考试您被重置了，点击下方"重新考试"后将会立即重新考试'
     },
     P = require('./app/activity/index/exam-prompt/prompt-help'),
     getWithParams,
@@ -135,7 +136,9 @@ getCurrentExam = function(exam) {
             13: [knewButton],
             14: [goOnExamButton, knewButton],
             15: [knewButton],
-            16: [examAgainButton, knewButton]
+            16: [examAgainButton, knewButton],
+            17: [],
+            18: [examAgainButton, knewButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 5) {

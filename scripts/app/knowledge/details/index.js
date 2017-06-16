@@ -71,9 +71,12 @@ exports.store = {
             var knowledgeId = this.models.knowledge.data.id;
             var me = this;
             collect.set(payload);
-            return this.save(collect).then(function() {
-                collectCount.set({ id: knowledgeId, updateType: 0 });
-                return me.put(collectCount);
+            return this.save(collect).then(function(data) {
+                if (data && data != null) {
+                    collectCount.set({ id: knowledgeId, updateType: 0 });
+                    return me.put(collectCount);
+                }
+                return false;
             });
         },
         cancelCollect: function(payload) {
@@ -82,10 +85,13 @@ exports.store = {
             var knowledgeId = this.models.knowledge.data.id;
             var me = this;
             collect.set(payload);
-            return this.del(collect, { slient: true }).then(function() {
-                collect.set({}, true);
-                collectCount.set({ id: knowledgeId, updateType: 1 });
-                return me.put(collectCount);
+            return this.del(collect, { slient: true }).then(function(data) {
+                if (data && data != null) {
+                    collect.set({}, true);
+                    collectCount.set({ id: knowledgeId, updateType: 1 });
+                    return me.put(collectCount);
+                }
+                return false;
             });
         },
         changeRecommends: function() {

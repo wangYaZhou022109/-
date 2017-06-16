@@ -16,6 +16,7 @@ exports.mixin = {
             state = this.bindings.state.data;
 
         data.content = contentItem.components.content.html();
+        data.contentText = contentItem.components.content.text();
         data.questionAttrs = [{ value: value, name: value, type: 3 }];
         data.score = scoreItem.$('score').value;
         data.id = state.id;

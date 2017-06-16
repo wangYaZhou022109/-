@@ -1,0 +1,17 @@
+.topics-list {
+    position: relative;
+    padding-right: 50px;
+    & .sub-row {
+        width: 580px;
+        height: 25px;
+        & .small-font {
+            line-height: 25px;
+            height: 25px;
+        }
+    }
+    & .topics-right {
+        position: absolute;
+        right: 0;
+        top: 10px;
+    }
+}

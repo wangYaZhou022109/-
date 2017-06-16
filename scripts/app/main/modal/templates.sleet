@@ -15,3 +15,5 @@ view('buttons')
     .btn.white.border#close > echo(state.closeText)
     each(btns)
         .btn(id='btn-' + id) > echo(text)
+
+

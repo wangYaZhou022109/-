@@ -21,6 +21,7 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 15: 报名时间截止
 // 16: 答卷完，能重新考，试卷处理中
 // 17: 答卷完，不能重新考，试卷处理中
+// 18: 重置
 exports.getUserStatusOfExam = function(exam) {
     var signUp = signUpExam(exam);
 
@@ -55,6 +56,8 @@ exports.getUserStatusOfExam = function(exam) {
             return 7;
         } else if (overExam(exam) && canExamMore(exam)) {
             return 14;
+        } else if (isReset(exam)) {
+            return 18;
         } else if (isFirstTimeToExam(exam)) {
             if (examStarting(exam)) {
                 return 14;
