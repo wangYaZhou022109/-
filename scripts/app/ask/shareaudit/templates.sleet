@@ -13,12 +13,12 @@ view('shareaudit') > form.vertical
         | 附件：
         a
             .iconfont.icon-tag-1
-            span > echo(shareaudit.questionAttach.name)
+            span > each(shareaudit.questionAttachList) > echo(originalFile)
     .detail1-person.layout-mt-small
         span > echo(shareaudit.member.fullName)
-        span 分享时间：
+        span 发表文章时间：
         span > dateTime(shareaudit.createTime)
-    .detail1-alink.layout-mt-smal > each(topicList) > echo(name) + echo(' ')
+    .detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  echo(shareaudit.topicStr) + echo(' ')
     input.input(name='id' type='hidden' value=shareaudit.id)
     input.input(name='questionId' type='hidden' value=shareaudit.question.id)
     input.input(name='objectId' type='hidden' value=shareaudit.objectId)
