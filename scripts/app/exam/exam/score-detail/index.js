@@ -199,7 +199,7 @@ var setOptions = {
                     this.models.state.initNoSujective(data.exam);
                 } else {
                     D.assign(this.models.exam.params, payload);
-                    return this.get(this.models.exam).then(function() {
+                    return this.get(this.models.exam, { loading: true }).then(function() {
                         var exam = me.models.exam.data;
                         me.models.answer.init(exam.paper.questions);
                         me.models.types.init(exam.paper.questions);

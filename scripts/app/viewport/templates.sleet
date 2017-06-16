@@ -3,3 +3,5 @@
 module
     div(data-region='content')
     div(data-region='modal:modal')
+    .dialog-overlay.topLoading.hidden(style="z-index:1500;background-color:white;opacity:0.67")
+        .loading(style="padding-top:20%") > .icon-loading + | 我们正在拼命加载中...

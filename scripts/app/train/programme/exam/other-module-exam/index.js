@@ -1,6 +1,5 @@
 var D = require('drizzlejs'),
-    REMOTE_COURSE_TYPE = 2,
-    strings = require('./app/util/strings');
+    REMOTE_COURSE_TYPE = 2;
 
 exports.title = function() {
     return this.renderOptions.id ? '修改考试' : '添加考试';
@@ -36,7 +35,7 @@ exports.store = {
                 me = this;
             D.assign(otherModuelExam.data, exam.data, payload);
             return this.save(otherModuelExam).then(function() {
-                me.app.message.success(strings.get('save-success'));
+                me.app.message.success('保存成功');
             });
         },
         changeName: function(payload) {

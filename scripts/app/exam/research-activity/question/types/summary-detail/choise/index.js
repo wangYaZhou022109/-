@@ -29,8 +29,9 @@ exports.store = {
                             return false;
                         }).length,
                         p = this.data.answerRecords.length !== 0
-                            ? (selectedCount / this.data.answerRecords.length) : 0;
-                    return Number(p * 100).toFixed(2);
+                            ? (selectedCount / this.data.answerRecords.length) : 0,
+                        percent = (p * 100) + '';
+                    return percent.indexOf('.') > 0 ? Number(percent).toFixed(2) : percent;
                 },
                 isChecked: function(name) {
                     var answerRecord = _.find(this.data.answerRecords, [

@@ -31,20 +31,21 @@ exports.store = {
             if (question) {
                 questionAttrs = question.questionAttrs;
                 bottom.data.score = question.score;
-                if (!data.options) {
-                    D.assign(data, question);
-                    data.options = [];
-                    // questionAttrs 需要按照name排序，防止选项被打乱
-                    questionAttrs = _.sortBy(questionAttrs, 'name');
-                    for (i = 0; i < questionAttrs.length; i++) {
-                        isRichText = this.models.state.isRichText(questionAttrs[i].value);
-                        data.options.push({
-                            content: questionAttrs[i].value,
-                            score: questionAttrs[i].score || 0,
-                            isRichText: isRichText
-                        });
-                    }
+                // if (!data.options) {
+                D.assign(data, question);
+                data.options = [];
+                // questionAttrs 需要按照name排序，防止选项被打乱
+                questionAttrs = _.sortBy(questionAttrs, 'name');
+                for (i = 0; i < questionAttrs.length; i++) {
+                    isRichText = this.models.state.isRichText(questionAttrs[i].value);
+                    data.options.push({
+                        content: questionAttrs[i].value,
+                        contentText: questionAttrs[i].valueText,
+                        score: questionAttrs[i].score || 0,
+                        isRichText: isRichText
+                    });
                 }
+                // }
                 view.components.content.html(question.content);
             } else {
                 data.options = [];
@@ -56,8 +57,8 @@ exports.store = {
                 }
                 data.type = this.module.renderOptions.type;
             }
-            data.multiple = payload.multiple;
-            data.mode = payload.mode;
+            data.multiple = payload.multiple || data.multiple;
+            data.mode = payload.mode || data.mode;
             this.models.state.changed();
             bottom.changed();
         },
@@ -85,8 +86,12 @@ exports.store = {
 
         removeOption: function(payload) {
             var options = this.models.state.data.options;
+            if (options.length <= 2) {
+                this.app.message.error('至少需要两个选项');
+                return false;
+            }
             options.splice(Number(payload.index), 1);
-            this.models.state.changed();
+            return this.models.state.changed();
         }
 
     }
@@ -94,13 +99,11 @@ exports.store = {
 
 exports.mixin = {
     getValue: function() {
-        var view = this.items.options,
-            options = this.store.models.state.data.options;
-
-        if (!view.checkAnswer(options)) {
+        var view = this.items.options;
+        if (!view.checkAnswer()) {
             return false;
         }
-        return view.getResult(options);
+        return view.getResult();
     },
     isValidate: function() {
         return this.items.content.validate();

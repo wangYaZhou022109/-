@@ -100,11 +100,11 @@ exports.store = {
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
             return this.chain([
-                this.get(activitys),
-                this.get(gensees),
-                this.get(exams),
-                this.get(researchActivitys),
-                this.get(classDetailes)
+                this.get(activitys, { loading: true }),
+                this.get(gensees, { loading: true }),
+                this.get(exams, { loading: true }),
+                this.get(researchActivitys, { loading: true }),
+                this.get(classDetailes, { loading: true })
             ]).then(function() {
                 examMores.init(exams.data);
                 examMores.changed();
