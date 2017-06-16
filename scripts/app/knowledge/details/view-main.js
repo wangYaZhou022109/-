@@ -53,7 +53,7 @@ exports.dataForActions = {
             businessId: knowledge.id,
             businessType: 7,
             collectName: knowledge.name,
-            releaseMemberId: knowledge.releaseMemberId,
+            uploadMemberId: knowledge.uploadMemberId,
             collectionMemberCount: knowledge.collectionMemberCount
         };
     }
