@@ -139,15 +139,15 @@ exports.store = {
             page.data = [];
             params.id = 'null';
             trends.set(params);
-            this.post(trends);
+            this.get(trends);
         },
         page: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            var id = this.models.state.data.topicId;
+            var id = this.models.state.data.topicid;
             trends.params = { id: id, page: params.page, size: params.size };
             trends.set(trends.params);
-            this.post(trends).then(function() {
+            this.get(trends).then(function() {
             });
         },
         speech: function() {
@@ -198,7 +198,6 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     var state = this.store.models.state;
-    // if (this.renderOptions.state.data.topicId) {
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
@@ -207,11 +206,10 @@ exports.afterRender = function() {
             me.dispatch('page');
         }
     });
-    state.data.topicId = this.renderOptions.state.data.topicId;
-    // console.log(this.renderOptions.state.data);
-    // console.log(this.renderOptions.state);
-    this.dispatch('set', this.renderOptions.callback);
+    state.data.topicid = this.renderOptions.state.data.topicid;
+    // this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
-    this.dispatch('page');
-    // }
+    if (typeof state.data.topicid !== 'undefined') {
+        this.dispatch('page');
+    }
 };

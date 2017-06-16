@@ -2,4 +2,3 @@
 exports.bindings = {
     shareaudit: true
 };
-
