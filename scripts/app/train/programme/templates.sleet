@@ -217,7 +217,7 @@ view('edit-offline') > form.vertical
                         label.required 开始时间
                         .content
                             .relative
-                                input.input.date#courseDate(name='courseDate'  x-rule='required' value=offlineCourse.courseDate)
+                                input.input.date#courseDate(name='courseDate'  x-rule='required' value=dateTime(offlineCourse.courseDate))
                                 .iconfont.icon-riqi.text-main-color
                 .class-form-width.pull-left
                     .form-row

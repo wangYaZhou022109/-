@@ -38,5 +38,13 @@ exports.dataForTemplate = {
             return data.researchRecord.researchQuestionary.answerPaperRule === MUTIPLE_TYPE;
         }
         return true;
+    },
+    dimensions: function(data) {
+        var dim = _.orderBy(data.dimensions, ['order'], ['asc']);
+        return _.map(dim, function(d) {
+            return D.assign(d, {
+                singleMode: data.researchRecord.researchQuestionary.answerPaperRule === 2
+            });
+        });
     }
 };

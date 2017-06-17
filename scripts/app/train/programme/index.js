@@ -101,7 +101,9 @@ exports.store = {
                 me = this;
             themeList.params.classId = state.data.classId;
             themeList.params.type = 2;
-            return me.get(themeList);
+            return me.get(themeList).then(function() {
+                me.module.items.online.updataCss();
+            });
         },
         delTheme: function(id) {
             var themeList = this.models.themeList.data,
@@ -181,6 +183,7 @@ exports.store = {
             this.models.themeList.changed();
             state.data.index = index;
             state.changed();
+            this.module.items.online.updataCss();
         },
         saveTheme: function() {
             var themeList = this.models.themeList,
@@ -225,13 +228,15 @@ exports.store = {
         editOfflineCourse: function(payload) {
             var model = this.models.offlineCourse,
                 files = this.models.files;
+            model.clear();
             model.set(payload);
             files.clear();
             this.get(model).then(function(data) {
                 var d = data;
+                var newt = new Date((helpers.date(d[0].courseDate) + ' ' + d[0].startTime).replace('-', '/')).getTime();
                 files.data = d[0].attachList;
                 files.changed();
-                d[0].courseDate = helpers.date(d[0].courseDate) + ' ' + d[0].startTime;
+                d[0].courseDate = newt;
             });
         },
         delOfflineCourse: function(payload) {
@@ -375,7 +380,9 @@ exports.store = {
             });
             this.save(onlineCourse).then(function() {
                 this.app.message.success('提交成功');
-                me.get(onlineCourseList);
+                me.get(onlineCourseList).then(function() {
+                    me.module.items.online.updataCss();
+                });
             });
         },
         delOnlineCourse: function(payload) {
@@ -384,7 +391,9 @@ exports.store = {
                 me = this;
             model.set(payload);
             this.del(model).then(function() {
-                me.get(onlineCourseList);
+                me.get(onlineCourseList).then(function() {
+                    me.module.items.online.updataCss();
+                });
             });
         },
         updateRequired: function(payload) {
@@ -393,7 +402,9 @@ exports.store = {
                 me = this;
             model.set(payload);
             this.save(model).then(function() {
-                me.get(onlineCourseList);
+                me.get(onlineCourseList).then(function() {
+                    me.module.items.online.updataCss();
+                });
             });
         },
         updateOfflineName: function(payload) {

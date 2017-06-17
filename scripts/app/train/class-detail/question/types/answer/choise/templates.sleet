@@ -25,7 +25,7 @@ view('options') > .answer
                 input.m-right(type='radio' name='value-' + questionId id='radio-'+@index value=@index)('checked')&if(checked)
             label(for='answer-item-' + index)
                 span.pull-left.option-num > @echo(code '：')
-                .answer-options > @echo(content)
+                .answer-options.space > @echo(content)
     .form.vertical.layout-mb-small
         textarea.input.w-full(id='input-idea-' + index name='idea' rows='5' placeholder='如果选择D选项，请先填写意见再选择') > @echo(answer.value.[0].idea)
 
