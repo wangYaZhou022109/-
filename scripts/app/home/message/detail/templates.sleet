@@ -10,3 +10,5 @@ view('main')
             i.iconfont.icon-time
             span > echo('发送时间: ') + dateTime(message.createTime)
     p > @echo(message.content)
+    if(message.link)
+        p > a(href = message.link target='_blank') > echo(message.link)
