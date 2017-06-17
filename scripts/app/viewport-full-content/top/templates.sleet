@@ -20,6 +20,8 @@ view('nav')
                 else
                     .item(id='menu-' + id href='#/' + url data-menu=url)
                         a.normal.nav-color > echo(name)
+        else
+            .item
 
         #  else
         #      each(menus)
@@ -52,23 +54,24 @@ view('shortcut')
 
 
         if(Global.currentUser.id)
-            .item.small-font.drop-down-wrapper.right
-                .drop-down-btn
-                    span#selected-name
-                        if(organization.shortName)
-                            echo(organization.shortName)
-                        else
-                            echo(organization.name)
-                    i.iconfont.icon-triangle-down
-                .drop-down-content > .content
-                    ul
-                        if(Global.organization)
-                            li(id='org-'+Global.organization.id) > echo(Global.organization.name)
-                        each(organizations)
-                            if(shortName)
-                                li(id='org-'+id) > echo(shortName)
+            if(organizations)
+                .item.small-font.drop-down-wrapper.right
+                    .drop-down-btn
+                        span#selected-name
+                            if(organization.shortName)
+                                echo(organization.shortName)
                             else
-                                li(id='org-'+id) > echo(name)
+                                echo(organization.name)
+                        i.iconfont.icon-triangle-down
+                    .drop-down-content > .content
+                        ul
+                            if(Global.organization)
+                                li(id='org-'+Global.organization.id) > echo(Global.organization.name)
+                            each(organizations)
+                                if(shortName)
+                                    li(id='org-'+id) > echo(shortName)
+                                else
+                                    li(id='org-'+id) > echo(name)
             .item.drop-down-wrapper.right
                 a#message-div.normal.msg(href='#')
                     if(msgCount)
