@@ -187,6 +187,7 @@ exports.store = {
                 state = this.models.state.data,
                 delThemeList = this.models.delThemeList,
                 themeModel = this.models.themeModel,
+                onlineCourseList = this.models.onlineCourseList,
                 me = this;
             themeModel.clear();
             D.assign(me.models.themeModel.data, {
@@ -195,7 +196,9 @@ exports.store = {
                 classId: state.classId,
                 type: 2
             });
-            return me.save(me.models.themeModel);
+            me.save(me.models.themeModel).then(function() {
+                me.get(onlineCourseList);
+            });
         },
         submitOffline: function(payload) {
             var offlineCourse = this.models.offlineCourse,

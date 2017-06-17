@@ -40,7 +40,8 @@ view('offline')
                         if(isGrant)
                             th 操作
                     each(offlineCourseList) > tr
-                        td > date(courseDate)
+                        if(isRowspan)
+                            td(rowspan=rowspan) > date(courseDate)
                         td > echo(startTime + '-' + endTime)
                         td
                             label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
@@ -82,7 +83,8 @@ view('online')
                     if(isGrant)
                         th 操作
                 each(onlineCourseList) > tr
-                    td > echo(themeName)
+                    if(isRowspan)
+                        td(rowspan=rowspan) > echo(themeName)
                     td > echo(resourceName)
                     td
                         label(id='label-online-' + id data-name='id' data-value=id) > map('yes-or-no' isRequired)

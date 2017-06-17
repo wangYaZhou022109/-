@@ -56,12 +56,20 @@ exports.dataForTemplate = {
     },
     onlineCourseList: function() {
         var onlineCourseList = this.bindings.onlineCourseList,
-            state = this.bindings.state.data;
+            state = this.bindings.state.data,
+            themes,
+            tmpThemeId = '0';
+        themes = _.groupBy(onlineCourseList.data, 'themeId');
         _.map(onlineCourseList.data || [], function(course) {
             var r = course;
             r.isRequired1 = r.isRequired === 1;
             r.isRequired0 = r.isRequired === 0;
             r.isGrant = state.role !== 4;
+            if (tmpThemeId !== r.themeId) {
+                tmpThemeId = r.themeId;
+                r.isRowspan = true;
+                r.rowspan = themes[r.themeId].length;
+            }
         });
         return onlineCourseList.data;
     },
