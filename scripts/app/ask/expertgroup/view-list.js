@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+var $ = require('jquery');
 // exports.type = 'dynamic';
 exports.bindings = {
     expertlist: true,
@@ -13,7 +14,9 @@ exports.events = {
     // 'click myself*': 'myself',
     'click apply*': 'apply', // 申请成为专家
     'click refuse*': 'refuse', // 审核未通过
-    'click expert-*': 'details'
+    'click expert-*': 'details',
+    'click open': 'showTopics',
+    'click close': 'closeTopics'
 };
 
 exports.handlers = {
@@ -48,6 +51,16 @@ exports.handlers = {
     },
     details: function(id) {
         this.app.show('content', 'ask/expertdetails', { id: id });
+    },
+    showTopics: function() {
+        $(this.$('open')).addClass('hide');
+        $(this.$('close')).removeClass('hide');
+        $(this.$('topictags')).css('height', 'auto');
+    },
+    closeTopics: function() {
+        $(this.$('close')).addClass('hide');
+        $(this.$('open')).removeClass('hide');
+        $(this.$('topictags')).css('height', '71px');
     }
 };
 
@@ -111,5 +124,17 @@ exports.dataForTemplate = {
             }
         });
         return expertlist;
+    }
+};
+
+exports.afterRender = function() {
+    if ($(this.$('topictags')).height() <= 71) {
+        $(this.$('open')).addClass('hide');
+    } else {
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).css('height', '71px');
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).addClass('overflow');
+        $(this.$('open')).show();
     }
 };
