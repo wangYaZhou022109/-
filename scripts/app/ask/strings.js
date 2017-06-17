@@ -85,5 +85,5 @@ module.exports = {
     unfollow: '已关注',
     news: '最新动态',
     exp: '文章分享',
-    youreply: '等你回答'
+    youreply: '等待回答'
 };
