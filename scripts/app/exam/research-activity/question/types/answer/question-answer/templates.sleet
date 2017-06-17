@@ -15,7 +15,7 @@ view('content')
 
 
 view('options') > form.vertical.m-bottom
-    textarea.input.w-full(id='answer' name='value' rows='5' placeholder='请输入答案') > @echo(answer)
+    textarea.input.w-full(id='answer' x-rule='maxLength:5000' name='value' rows='5' placeholder='请输入答案' maxlength='5000') > @echo(answer)
     if(isShowDetail)
         .show-answer
             .clearfix
