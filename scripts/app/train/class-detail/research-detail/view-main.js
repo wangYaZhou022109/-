@@ -43,5 +43,13 @@ exports.dataForEntityModule = function(question) {
 exports.dataForTemplate = {
     isMutiple: function(data) {
         return data.researchRecord.researchQuestionary.answerPaperRule === MUTIPLE_TYPE;
+    },
+    dimensions: function(data) {
+        var dim = _.orderBy(data.dimensions, ['order'], ['asc']);
+        return _.map(dim, function(d) {
+            return D.assign(d, {
+                singleMode: data.researchRecord.researchQuestionary.answerPaperRule === 2
+            });
+        });
     }
 };
