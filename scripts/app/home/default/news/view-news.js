@@ -2,7 +2,8 @@ module.exports = {
     bindings: { newsList: true, state: true },
     events: {
         'click next': 'nextNews',
-        'click pre': 'preNews'
+        'click pre': 'preNews',
+        'click more-*': 'moreNews'
     },
     handlers: {
         nextNews: function() {
@@ -10,6 +11,10 @@ module.exports = {
         },
         preNews: function() {
             this.module.dispatch('changeIndex', -1);
+        },
+        moreNews: function(id) {
+            window.location.href = '#/news/index';
+            this.app.navigate('news/index/' + id, true);
         }
     },
     dataForTemplate: {

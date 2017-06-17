@@ -49,7 +49,7 @@ view('head')
                 li.border.right > echo('审核人：' progress.auditMemberName)
                 li.border.right > echo('得分：' progress.score)
         .btn.white.m-right#closeTask 关闭作业
-        compare(progress.finishStatus 'eq' 0)
+        if(progress.submitBtn)
             .btn#submitTask 提交作业
         compare(progress.finishStatus 'eq' 6)
             .btn#submitTask 重新提交

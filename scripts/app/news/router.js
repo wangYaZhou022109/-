@@ -1,11 +1,11 @@
 exports.routes = {
-    index: 'showIndex',
+    'index/:id': 'showIndex',
     'detail/:id/:type': 'showDetail',
     'preview/:config': 'showPreview'
 };
 
-exports.showIndex = function() {
-    return this.app.show('content', 'news/index');
+exports.showIndex = function(id) {
+    return this.app.show('content', 'news/index', { id: id });
 };
 
 exports.showDetail = function(id, type) {
