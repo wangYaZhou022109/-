@@ -34,19 +34,97 @@ view('main')
                     .user-pic
                         img.pointer(src='images/1.png')
                     .comment-content
-                        img.boutique.pull-left(src="images/boutique.png")
-                        .comment-boutique
-                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                            .user-info
+                        div.clearfix
+                            .h4.pull-left 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                            .pull-right.iconfont.icon-more.m-right.pointer
+                                .drop-down-more
+                                    i.iconfont.icon-triangle-up
+                                    ul
+                                        li#trend-report
+                                            i.iconfont.icon-info 
+                                            span 举报
+                                        li#del-question
+                                            i.iconfont.icon-trash 
+                                            spsn 删除
+                                        li#close
+                                            i.iconfont.icon-close 
+                                            span 关闭
+                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                        
+                        .comment-operation
+                            .com-topic > .sub-text 来自话题：标签名称
+                            .user-info.pull-left
                                 a(href='javascript:;') 我
                                 span ·提问·
                                 span.sub-text 2016-09-09 09:09
-                            .comment-operation
-                                .pull-left > .sub-text 关联标签：标签名称
-                                .text-right
-                                    .item > span.color-ing 待审核
-                                    .item#delete 删除
+                            .text-right
+                                .item
+                                    i.iconfont.icon-add 
+                                    span 关注
+                                .item#discuss-
+                                    i.iconfont.icon-message
+                                    span 讨论
+                                    
+                                .item 
+                                    .share-bar
+                                        .drop-down-wrapper
+                                            i.iconfont.icon-share-2
+                                            span 分享
+                                            form.drop-down-content > .content
+                                                .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                form.comment-reply(id ='comment-reply-' + id)
+                                    textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                                    input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                                    input.input(type='hidden' name='id' value=questionId)
+                                    .btn(id='publish-' + questionId) > string('publish')
+                                ul
+                                    li
+                                        .user-pic
+                                            img.pointer(src='images/1.png')
+                                        .comment-content
+                                            div.clearfix
+                                                .pull-left 
+                                                    a 张三
+                                                    span 回复
+                                                    span 张三
+                                                .pull-right.iconfont.icon-more.m-right.pointer
+                                                    .drop-down-more
+                                                        i.iconfont.icon-triangle-up
+                                                        ul
+                                                            li#trend-report
+                                                                i.iconfont.icon-info 
+                                                                span 举报
+                                                            li#del-question
+                                                                i.iconfont.icon-trash 
+                                                                spsn 删除
+                                            .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                                            
+                                            .comment-operation
+                                                .user-info.pull-left
+                                                    span.sub-text 2016-09-09 09:09
+                                                .text-right
+                                                    .item
+                                                        i.iconfont.icon-zan-full
+                                                        span 赞(123)
+                                                    .item#discuss-
+                                                        i.iconfont.icon-message
+                                                        span 回复(123)
+                                                        
+                                                    .item 
+                                                        .share-bar
+                                                            .drop-down-wrapper
+                                                                i.iconfont.icon-share-2
+                                                                span 分享
+                                                                form.drop-down-content > .content
+                                                                    .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                                    .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                                    form.comment-reply(id ='comment-reply-' + id)
+                                                        textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                                                        input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                                                        input.input(type='hidden' name='id' value=questionId)
+                                                        .btn(id='publish-' + questionId) > string('publish')
+                                           
                 li
                     .user-pic > img(src='images/1.png')
                     .comment-content
@@ -62,7 +140,7 @@ view('main')
                             .text-right
                                 .item > span.color-error 被拒绝
                                 .item 删除
-                li
+                #  li
                     .user-pic > img(src='images/1.png')
                     .comment-content
                         .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
@@ -88,8 +166,8 @@ view('main')
                                                 .item > #shareTo-bar > i.iconfont.icon-ask + span 分享到问吧
 
 
-        li.tabs-cont-item#tabs-cont-item-2.relative
-            .page-contents2
+        #  li.tabs-cont-item#tabs-cont-item-2.relative
+            #  .page-contents2
                 .page1#page1
                     section.section.sub-title.text-center 暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧！
                     .common-title.m-bottom 推荐话题
@@ -426,7 +504,7 @@ view('main')
                                         .item 评论(2)
                                         .item +关注
                                         .item 分享
-        li.tabs-cont-item#tabs-cont-item-3
+        #  li.tabs-cont-item#tabs-cont-item-3
             .comment-list.ask-list > ul
                 li
                     .user-pic > img(src='images/1.png')
