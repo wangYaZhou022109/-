@@ -11,7 +11,7 @@ exports.dataForTemplate = {
             now = new Date().getTime(),
             buttons = [{ id: 'answer-next-time', text: '下次再答', target: false }];
         if (now >= research.startTime && now <= research.endTime) {
-            if (researchRecord.status === 0) {
+            if (researchRecord.status === 0 || researchRecord.status === null) {
                 buttons.push({
                     id: 'research-detail',
                     text: '开始答题',

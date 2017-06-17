@@ -262,6 +262,9 @@
         word-wrap: break-word;
         word-break: break-all;
         overflow: hidden;
+        &.space {
+            white-space: inherit;
+        }
     }
 
     & img {

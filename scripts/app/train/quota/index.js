@@ -56,11 +56,11 @@ exports.store = {
                 quota = this.models.quota;
             quotaInfo.data.type = payload.type;
             quota.data = quotaInfo.data;
-            quota.changed();
-            quotaInfo.changed();
-            // this.save(quota).then(function() {
-            //     quotaInfo.changed();
-            // });
+            // quota.changed();
+            // quotaInfo.changed();
+            this.save(quota).then(function() {
+                quotaInfo.changed();
+            });
         },
         changeApproval: function(payload) {
             var quotaInfo = this.models.quotaInfo,

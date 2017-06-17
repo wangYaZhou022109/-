@@ -170,10 +170,18 @@ exports.dataForTemplate = {
     },
     offlineCourseList: function() {
         var offlineCourseList = this.bindings.offlineCourseList.data,
-            state = this.bindings.state.data;
+            state = this.bindings.state.data,
+            themes,
+            tmpThemeId = 0;
+        themes = _.groupBy(offlineCourseList, 'courseDate');
         _.map(offlineCourseList || [], function(data) {
             var r = data;
             r.isGrant = state.role !== 4;
+            if (tmpThemeId !== r.courseDate) {
+                tmpThemeId = r.courseDate;
+                r.isRowspan = true;
+                r.rowspan = themes[r.courseDate].length;
+            }
         });
         return offlineCourseList;
     },
