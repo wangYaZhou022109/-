@@ -76,7 +76,7 @@ exports.handlers = {
         if (templateCode === 'qzone') { // QQ空间分享
             fullUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
             fullUrl += 'title=' + typeName + ' ' + title;
-            fullUrl += '&desc=' + templateContent;
+            fullUrl += '&desc=' + encodeURIComponent(templateContent);
             fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share/' + id + '/' + type);
             if (pic) {
                 fullUrl += '&pics=' + pic;
@@ -84,7 +84,7 @@ exports.handlers = {
             window.open(fullUrl, '_blank');
         } else if (templateCode === 'weibo') { // 新浪微博分享
             fullUrl = 'http://v.t.sina.com.cn/share/share.php?';
-            fullUrl += 'title=' + templateContent + ' ' + typeName + ' ' + title;
+            fullUrl += 'title=' + encodeURIComponent(templateContent) + ' ' + typeName + ' ' + title;
             fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share/' + id + '/' + type);
             if (pic) {
                 fullUrl += '&pic=' + pic;
