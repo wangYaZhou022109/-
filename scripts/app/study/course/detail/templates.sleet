@@ -69,7 +69,7 @@ view('info')
 
     .sub-title-row.mt-1.m-bottom
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)
-        .inline-block.layout-mr > echo('发布时间: ') + date(course.releaseTime)
+        .inline-block.layout-mr > echo('发布时间: ') + date(course.shelveTime)
     p.course-info-detail > echo('讲师: ') + pick(course.lecturer '-')
     p.course-info-detail > echo('描述: ') + pick(course.description '-')
 
