@@ -41,10 +41,10 @@ switchScreen = function(exam) {
     }
 };
 
-closeListener = function(msg) {
-    var message = msg;
-    window.onbeforeunload = function() {
-        return message;
+closeListener = function() {
+    // var me = this;
+    window.onunload = function() {
+        // return me.dispatch('saveLastCacheTime');
     };
 };
 

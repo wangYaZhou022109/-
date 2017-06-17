@@ -1,4 +1,4 @@
-var STAISFACTION = 'satisfaction',
+var STAISFACTION = 'mark-paper',
     D = require('drizzlejs');
 
 exports.title = '待办';
@@ -16,8 +16,8 @@ exports.store = {
         init: function() {
             this.models.state.set({
                 menu: STAISFACTION,
-                satisfaction: true,
-                markpaper: false,
+                satisfaction: false,
+                markpaper: true,
                 homework: false,
                 wait: 0
             });

@@ -4,7 +4,9 @@ var prompts = {
         3: '您好，本次考试没有通过，点击下方“重新考试”后将会立即重新考试，点击下方“查看详情”可查看考试成绩详情',
         4: '点击下方“开始考试”后将会立即进入考试，该考试时长为{0}分钟',
         5: '您好,本次考试已结束',
-        6: '点击下方“查看详情”可查看考试成绩详情'
+        6: '点击下方“查看详情”可查看考试成绩详情',
+        7: '系统正在处理您的考卷，请稍后再试',
+        8: '您好，本次考试处于待评卷状态，点击下方“查看详情”可查看考试详情'
     },
     P = require('./app/exam/exam/other-exam-prompt/prompt-help'),
     getWithParams,
@@ -65,6 +67,7 @@ exports.handlers = {
 // 4: 进入考试
 // 5: 考试结束
 // 6： 查看详情
+// 7： 试卷处理中
 getCurrentExam = function(exam) {
     var status = P.getUserStatusOfExam(exam),
         knewButton = { id: 'had-knew-button', text: '我已经知道了' },
@@ -79,7 +82,9 @@ getCurrentExam = function(exam) {
             3: [comeLaterButton, examAgainButton],
             4: [examLaterButton, toExamButton],
             5: [knewButton],
-            6: [knewButton, viewDetailButton]
+            6: [knewButton, viewDetailButton],
+            7: [],
+            8: [viewDetailButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 4) {

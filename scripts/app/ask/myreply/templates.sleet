@@ -21,7 +21,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(questionDiscuss.content)
+                                .comment-text.text-overflow > echo(questionDiscuss.content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('讨论了')
@@ -40,7 +40,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(questionDiscuss.content)
+                                .comment-text.text-overflow > echo(questionDiscuss.content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('讨论了')
@@ -61,7 +61,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(questionDiscuss.content)
+                                .comment-text.text-overflow > echo(questionDiscuss.content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('讨论了')
@@ -98,7 +98,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(content)
+                                .comment-text.text-overflow > echo(content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('回复了')
@@ -112,7 +112,7 @@ view('list')
                                             .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + praNum +'）')
                                         else
                                             .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + praNum +'）')
-                                        .item(id='discuss-' + id ) > string('publish') +  echo('（' + replyNum +'）')
+                                        .item(id='discuss-' + id ) > string('publish') +  echo('（' + replyNum2 +'）')
                                         .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                         form.comment-reply(id ='comment-reply-' + id)
                                             textarea.input.w-full.block(rows=1 name='content' value='')
@@ -120,6 +120,7 @@ view('list')
                                             input.input(type='hidden' name='id' value=discussId)
                                             input.input(type='hidden' name='toUserId' value=member.id)
                                             input.input(type='hidden' name='questionId' value=question.id)
+                                            input.input(type='hidden' name='replyId' value=id)
                                             .btn(id='publish-' + id) > string('publish')
 
                                     
@@ -130,7 +131,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(questionDiscuss.content)
+                                .comment-text.text-overflow > echo(questionDiscuss.content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('讨论了')
@@ -149,7 +150,7 @@ view('list')
                         .user-pic > img(src=member.headPortrait)
                         .comment-content
                             .h4 > echo(title)
-                            .comment-text > echo(questionDiscuss.content)
+                            .comment-text.text-overflow > echo(questionDiscuss.content)
                             .user-info
                                 a(href='javascript:;') > echo('我')
                                 span > echo('讨论了')
@@ -168,7 +169,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(questionDiscuss.content)
+                                .comment-text.text-overflow > echo(questionDiscuss.content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('讨论了')
@@ -204,7 +205,7 @@ view('list')
                             .user-pic > img(src=member.headPortrait)
                             .comment-content
                                 .h4 > echo(title)
-                                .comment-text > echo(content)
+                                .comment-text.text-overflow > echo(content)
                                 .user-info
                                     a(href='javascript:;') > echo('我')
                                     span > echo('回复了') 
@@ -218,7 +219,7 @@ view('list')
                                             .item(id='unpraise-'+ id data-name='id' data-value='2_'+ id ) > echo('已赞（' + praNum +'）')
                                         else
                                             .item(id='praise-'+ id data-name='id' data-value='2_'+ id ) >  echo('赞（' + praNum +'）')
-                                        .item(id='discuss-' + id ) > string('publish') +  echo('（' + replyNum +'）')
+                                        .item(id='discuss-' + id ) > string('publish') +  echo('（' + replyNum2 +'）')
                                         .item > span(id = 'del2-' + id data-name='id' data-value=id) > string('delete')
                                         form.comment-reply(id ='comment-reply-' + id)
                                             textarea.input.w-full.block(rows=1 name='content' value='')
@@ -226,8 +227,11 @@ view('list')
                                             input.input(type='hidden' name='id' value=discussId)
                                             input.input(type='hidden' name='toUserId' value=member.id)
                                             input.input(type='hidden' name='questionId' value=question.id)
+                                            input.input(type='hidden' name='replyId' value=id)
                                             .btn(id='publish-' + id) > string('publish')                                                                    
-          
+    .none-more 
+        p 没有更多了     
+
                   
 
                    

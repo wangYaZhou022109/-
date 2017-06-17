@@ -2,7 +2,8 @@ exports.bindings = {
     knowledge: true,
     collect: true,
     score: true,
-    topics: true
+    topics: true,
+    collectCount: false
 };
 exports.components = [function() { // 分享组件
     var data = {},
@@ -51,7 +52,9 @@ exports.dataForActions = {
         return {
             businessId: knowledge.id,
             businessType: 7,
-            collectName: knowledge.name
+            collectName: knowledge.name,
+            uploadMemberId: knowledge.uploadMemberId,
+            collectionMemberCount: knowledge.collectionMemberCount
         };
     }
 };

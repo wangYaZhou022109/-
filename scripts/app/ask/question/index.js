@@ -91,6 +91,7 @@ exports.store = {
         },
         init: function() {
             var speech = this.models.speech;
+            this.models.task.clear();
             return this.get(speech);
         },
         release: function(payload) {
@@ -110,16 +111,16 @@ exports.store = {
                 data.enclosureType = 1;
                 data.transferFlag = 1;
                 data.enclosureSuffixImg = 'null';
-                if (typeof data.attachmentId !== 'undefined') {
+                if (typeof task.attachmentId !== 'undefined') {
                     data.enclosureUrl = task.attachmentId;
                 }
-                if (typeof data.name !== 'undefined') {
+                if (typeof task.name !== 'undefined') {
                     data.enclosureName = task.name;
                 }
-                if (typeof data.contentType !== 'undefined') {
+                if (typeof task.contentType !== 'undefined') {
                     data.enclosureSuffix = task.contentType;
                 }
-                if (typeof data.attachmentId !== 'undefined') {
+                if (typeof task.attachmentId !== 'undefined') {
                     data.transferViewUrl = task.attachmentId;
                 }
             }
@@ -133,7 +134,7 @@ exports.store = {
                     message = '等待审核';
                 }
                 me.app.message.success(message);
-                me.module.renderOptions.leftrefresh;
+                me.module.renderOptions.leftrefresh();
             });
         },
         selecttitle: function() {

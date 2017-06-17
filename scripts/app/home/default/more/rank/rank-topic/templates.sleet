@@ -1,0 +1,16 @@
+#! handlebars
+module
+    .rank-list(data-region='main')
+
+view('main')
+    if(topicRank)
+        ul.list-text > each(topicRank)
+            li.border.text-overflow.bottom(title=name id='detail-'+id)
+                if(attachmentId)
+                    .user-pic > img(src=downloadUrl(attachmentId))
+                else
+                    .user-pic > img(src='images/default-cover/default_topic.jpg')
+                .department > echo(name)
+                .data > echo(watchedCount)
+    p.text-center.m-top
+        a(id='rankClose') 进入话题广场

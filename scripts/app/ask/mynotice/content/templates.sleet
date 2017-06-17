@@ -106,4 +106,5 @@ view('list')
                                 input.input(type='hidden' name='id' value=discussId)
                                 input.input(type='hidden' name='toUserId' value=createUserId)
                                 .btn(id='reply-' + id ) > string('publish')
-        
+    if(page.trendsListFlag)
+        .container.text-center > .content(style="margin: 20% 0") 暂无内容哦！

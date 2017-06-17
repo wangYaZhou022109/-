@@ -20,6 +20,8 @@ view('list')
                         .tag-btn > echo(name)
                     .sub-text.text-overflow > echo(introduce)
                 .btn.small(id='unfollow-expert-' + member.expert.id  data-name='id' data-value=member.expert.id) 已关注
+        if(experts.concernListFlag)
+            .container.text-center > .content(style="margin: 20% 0") 暂无内容哦！
 
                 
 

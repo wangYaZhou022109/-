@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'home/default/more/rank/rank-study-time': { isModule: true }
 };
 
 exports.store = {

@@ -6,8 +6,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click shareTo-*': 'shareTo',
-    'click askshare': 'showAskshare'
+    'click shareTo-*': 'shareTo'
 };
 
 exports.handlers = {
@@ -92,15 +91,12 @@ exports.handlers = {
             }
             fullUrl += '&appkey=3697029777';
             window.open(fullUrl, '_blank');
-        } else if (templateCode === 'bar') { // 分享到问吧
-            // me.app.viewport.modal(me.module.items.bar, {
-            //    shareObjId: id,
-            //    shareType: type
-            // });
+        } else if (templateCode === 'askBar') { // 分享到问吧
+            this.app.viewport.modal(this.module.items['picker/share/askshare'], {
+                shareObjectId: id,
+                shareType: type,
+                pics: pics
+            });
         }
-    },
-    showAskshare: function() {
-        var model = this.module.items['picker/share/askshare'];
-        this.app.viewport.modal(model);
     }
 };

@@ -26,8 +26,7 @@ exports.store = {
             autoLoad: 'after',
         },
         categories: {
-            url: '../course-study/knowledge-category/front',
-            autoLoad: 'after',
+            url: '../course-study/knowledge-category/chooser',
             mixin: {
                 get: function(id) {
                     return _.find(this.data, { id: id });
@@ -50,9 +49,16 @@ exports.store = {
     },
     callbacks: {
         init: function() {
-            var search = this.models.search;
+            var search = this.models.search,
+                categories = this.models.categories,
+                companyOrganization = this.app.global.currentUser.companyOrganization || {};
             search.set({ orderType: '0' }, true);
             this.models.menu2.set(this.models.categories.findLevel(3));
+            categories.params = {
+                companyId: companyOrganization.id,
+                rootOrganizationId: this.app.global.currentUser.rootOrganization.id
+            };
+            return this.get(categories);
         },
         search: function(payload) {
             var search = this.models.search;
@@ -81,4 +87,3 @@ exports.store = {
 exports.afterRender = function() {
     return this.dispatch('init');
 };
-

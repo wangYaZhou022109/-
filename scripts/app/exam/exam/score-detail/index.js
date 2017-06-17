@@ -45,10 +45,12 @@ var setOptions = {
                             correctNum: questionSummary.correctNum,
                             errorNum: questionSummary.errorNum,
                             noAnswerCount: questionSummary.noAnswerCount,
-                            examineeTotalScore: 0
+                            examineeTotalScore: 0,
+                            hasPrevious: false,
+                            hasNext: exam.paper.questions.length > 1
                         };
-
-                        if (exam.examRecord.status > 5) {
+                        //  这里是马上查看详情，或者 点击查看详情，答案没有算完分，试卷全部是客观题
+                        if (exam.examRecord.status > 5 || exam.paper.isSubjective === 0) {
                             D.assign(this.data, {
                                 examineeTotalScore: questionSummary.totalScore
                             });
@@ -68,10 +70,12 @@ var setOptions = {
                             correctNum: 0,
                             errorNum: 0,
                             noAnswerCount: 0,
-                            examineeTotalScore: 0
+                            examineeTotalScore: 0,
+                            hasPrevious: false,
+                            hasNext: exam.paper.questions.length > 1
                         });
 
-                        if (exam.examRecord.status > 5) {
+                        if (exam.examRecord.status >= 5) {
                             this.data.correctNum = _.filter(questions, function(q) {
                                 if (q.type === 6) {
                                     return _.every(q.subs, function(s) {
@@ -96,6 +100,8 @@ var setOptions = {
                                 return false;
                             }).length;
                             this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
+                        }
+                        if (exam.examRecord.status > 5) {
                             this.data.examineeTotalScore = exam.examRecord.score / 100;
                         }
                     },
@@ -193,11 +199,16 @@ var setOptions = {
                     this.models.state.initNoSujective(data.exam);
                 } else {
                     D.assign(this.models.exam.params, payload);
-                    return this.get(this.models.exam).then(function() {
+                    return this.get(this.models.exam, { loading: true }).then(function() {
                         var exam = me.models.exam.data;
                         me.models.answer.init(exam.paper.questions);
                         me.models.types.init(exam.paper.questions);
-                        me.models.state.initWithSuject(exam);
+                        //  兼容提交试卷后，考试纪录排队列存储，状态还没有改变
+                        if (exam.examRecord.status < 5) {
+                            me.models.state.initNoSujective(exam);
+                        } else {
+                            me.models.state.initWithSuject(exam);
+                        }
                     });
                 }
                 return '';
@@ -235,7 +246,7 @@ countChoose = function(question, answer, r) {
         isCorrect,
         result = r;
 
-    if (!answer) {
+    if (!answer || answer.value.length === 0) {
         D.assign(question, { gainScore: 0 });
         D.assign(result, { noAnswerCount: ++result.noAnswerCount });
     } else {
@@ -284,7 +295,7 @@ countChoose = function(question, answer, r) {
 
 countJudge = function(question, answer, r) {
     var result = r;
-    if (!answer) {
+    if (!answer || answer.value.length === 0) {
         D.assign(question, { gainScore: 0 });
         D.assign(result, { noAnswerCount: ++result.noAnswerCount });
     } else if (answer.value[0].value === question.questionAttrCopys[0].value) {
@@ -303,7 +314,7 @@ countJudge = function(question, answer, r) {
 
 countSorting = function(question, answer, r) {
     var result = r;
-    if (!answer) {
+    if (!answer || answer.value.length === 0) {
         D.assign(question, { gainScore: 0 });
         D.assign(result, { noAnswerCount: ++result.noAnswerCount });
     } else if (_.find(question.questionAttrCopys, ['type', '0']).value === answer.value[0].value) {
@@ -322,7 +333,10 @@ countSorting = function(question, answer, r) {
 
 countOther = function(question, answer, r) {
     var result = r;
-    if (!answer) {
+    if (!answer || answer.value.length === 0) {
+        D.assign(question, { gainScore: 0 });
+        D.assign(result, { noAnswerCount: ++result.noAnswerCount });
+    } else if (!answer) {
         D.assign(result, { noAnswerCount: ++result.noAnswerCount });
     }
     return result;

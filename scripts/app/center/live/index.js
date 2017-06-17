@@ -24,6 +24,7 @@ exports.store = {
         search: function(params) {
             var searchModel = this.models.search,
                 lives = this.models.lives;
+            lives.clear();
             D.assign(lives.params, D.assign(searchModel.data, params));
             this.get(lives);
             searchModel.changed();

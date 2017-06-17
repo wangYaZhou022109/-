@@ -3,7 +3,7 @@ module > .export-page
     .export-form(data-region="details")
 
 view('details')
-    .export-form-title.container
+    .export-form-title
         form.clearfix.form.align-left
             .inline-block.w-half.inbox.m-bottom
                 input.border.radius#input1(type='checkbox' name='input1')
@@ -19,4 +19,4 @@ view('details')
                 label(for='input4') > string('report-4')
             .form-row
                 label.required(for='accuseNote') > string('report') + string('explain')
-                textarea#accuseNote.w-full.m-top(rows="10" name='accuseNote' x-rule="required" placeholder="请描述你举报理由")
+                textarea#accuseNote.w-full.m-top(rows="2" name='accuseNote' placeholder="请描述你举报理由")

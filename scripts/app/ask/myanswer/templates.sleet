@@ -2,6 +2,11 @@
 module
     div(data-region='list')
 view('list')
+    compare(page.length 'lt' 1)
+        .text-center
+            .content(style="margin: 15% 0")
+                img(src="images/nothing.png")
+                p.text-center 暂无与你相关的信息哦！
     each(page)
         li
             .user-pic > img(src=member.headPortrait)
@@ -10,7 +15,11 @@ view('list')
                 .user-info
                     a(href='javascript:;') 我
                     span ·讨论了· 
-                    span > echo(member.fullName)
+                    span 
+                        compare(type 'eq' 1) 
+                            echo(member.fullName) + echo('的问题')
+                        compare(type 'eq' 2) 
+                            echo(member.fullName) + echo('的文章')
                     span.sub-text > echo(questionDiscuss.createTime)
                 .comment-operation
                     .pull-left > .sub-text > echo('来自问题：') + a(id='myquiz-details-' + questionDiscuss.id + '_' + id ) > echo(title)

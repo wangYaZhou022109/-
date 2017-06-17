@@ -3,3 +3,25 @@
     float: right;
     background: var(--bg-color);
 }
+
+.player-content{
+    & .content-wrapper {
+        height: 80%;
+    }
+
+    & .content-left {
+        width: 200px;
+        float: left;
+        height: 100%;
+        overflow: auto;
+    }
+
+    & .content-main {
+        margin-left: 230px;
+        overflow: auto;
+        height: 100%;
+    }
+    & .dtree-node-content {
+        color: #fff;
+    }
+}

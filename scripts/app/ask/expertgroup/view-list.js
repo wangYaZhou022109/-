@@ -1,4 +1,5 @@
 var _ = require('lodash/collection');
+var $ = require('jquery');
 // exports.type = 'dynamic';
 exports.bindings = {
     expertlist: true,
@@ -9,10 +10,13 @@ exports.bindings = {
 
 exports.events = {
     'click activate*': 'activate',
-    'click review*': 'review',
+    'click review*': 'review', // 审核中
     // 'click myself*': 'myself',
-    'click apply*': 'apply',
-    'click expert-*': 'details'
+    'click apply*': 'apply', // 申请成为专家
+    'click refuse*': 'refuse', // 审核未通过
+    'click expert-*': 'details',
+    'click open': 'showTopics',
+    'click close': 'closeTopics'
 };
 
 exports.handlers = {
@@ -24,6 +28,7 @@ exports.handlers = {
         }
         });
     },
+    // 审核中
     review: function() {
         var model = this.module.items['ask/apply-verify'];
         this.app.viewport.modal(model);
@@ -31,24 +36,38 @@ exports.handlers = {
     // myself: function() {
     //     this.app.show('content', 'ask/iamexpert');
     // },
+    // 申请成为专家
     apply: function() {
         var model = this.module.items['ask/applyexpertaptitude'];
         var me = this;
-        // this.app.viewport.modal(model, { bindings: this.bindings });
         this.app.viewport.modal(model, { callback: function() {
             me.module.dispatch('user');
         }
         });
     },
+    refuse: function() {
+        var model = this.module.items['ask/apply-refuse'];
+        this.app.viewport.modal(model);
+    },
     details: function(id) {
         this.app.show('content', 'ask/expertdetails', { id: id });
+    },
+    showTopics: function() {
+        $(this.$('open')).addClass('hide');
+        $(this.$('close')).removeClass('hide');
+        $(this.$('topictags')).css('height', 'auto');
+    },
+    closeTopics: function() {
+        $(this.$('close')).addClass('hide');
+        $(this.$('open')).removeClass('hide');
+        $(this.$('topictags')).css('height', '71px');
     }
 };
 
 exports.actions = {
     'click check-*': 'check',
     'click follow-expert-*': 'follow',
-    'click unfollow-expert-*': 'unfollow'
+    'click unfollow-expert-*': 'unfollow',
 };
 
 exports.dataForActions = {
@@ -105,5 +124,17 @@ exports.dataForTemplate = {
             }
         });
         return expertlist;
+    }
+};
+
+exports.afterRender = function() {
+    if ($(this.$('topictags')).height() <= 71) {
+        $(this.$('open')).addClass('hide');
+    } else {
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).css('height', '71px');
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).addClass('overflow');
+        $(this.$('open')).show();
     }
 };

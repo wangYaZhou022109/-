@@ -16,7 +16,7 @@ exports.store = {
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
@@ -145,9 +145,22 @@ exports.afterRender = function() {
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
+        var scrollTop = $(document).scrollTop();
+        var clientHeight = $(window).height();
+        var scrollHeight = $(document).height();
+        // var dataLength = me.store.models.page.data.length;
+        // var data = me.store.models.page.data;
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
+        }
+        // $.each(data, function(i) {
+        //     if (i === dataLength - 1) {
+        //         $('.none-more').css('display', 'block');
+        //     }
+        // });
+        if ((scrollTop + clientHeight) >= scrollHeight) {
+            $('.none-more').css('display', 'block');
         }
     });
     this.dispatch('set', this.renderOptions.callback);

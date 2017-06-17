@@ -41,13 +41,13 @@ exports.store = {
         init: function() {
             var search = this.models.search;
             search.set({ type: 0, companyType: 0, orderBy: 0 }, true);
-            this.models.menu2.set(this.models.categories.findLevel(3));
+            this.models.menu2.set(this.models.categories.findLevel(2));
         },
         selectMenu1: function(payload) {
             var menu2 = this.models.menu2;
             var categories2;
             if (payload.id) categories2 = this.models.categories.filterPid(payload.id);
-            else categories2 = this.models.categories.findLevel(3);
+            else categories2 = this.models.categories.findLevel(2);
             return menu2.set(categories2, true);
         },
         clearMenu1: function() {

@@ -5,7 +5,7 @@
 
 .home-page {
     & section.section {
-        padding: var(--base-gap) 0;
+        padding: var(--large-space) 0;
         overflow: hidden;
         margin: 0;
     }
@@ -26,10 +26,12 @@
             @apply --clearfix;
             position: relative;
             height: 100%;
+            background-color: var(--bg-color);
 
             & .title {
                 @apply --text-overflow;
-                margin: var(--space) 0;
+                margin: var(--space) 0 5px;
+                font-size: var(--font-title);
             }
 
             & .bottom {
@@ -112,6 +114,7 @@
             & .img {
                 height: 70%;
                 margin-bottom: var(--large-space);
+                background-color: var(--bg-color-3);
             }
 
         }
@@ -122,6 +125,12 @@
             overflow: hidden;
             margin-bottom: calc(var(--font-size) - var(--small-font) + 1);
 
+        }
+    }
+
+    & .layout-2 {
+        & .content {
+            background-color: var(--bg-color);
         }
     }
 
@@ -350,7 +359,7 @@
             }
 
             & .title {
-                font-weight: bold;
+                /*font-weight: bold;*/
             }
 
             & img {

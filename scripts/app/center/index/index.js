@@ -27,7 +27,7 @@ exports.store = {
                 { id: '2-3', name: '我的调研', url: 'research' }
             ] },
             { id: '3', name: '我的问吧', icon: 'icon-wen', url: 'ask', childs: [ // eslint-disable-line object-property-newline,max-len
-                { id: '3-0', name: '我的回答', url: 'answer' },
+                { id: '3-0', name: '我的问答', url: 'answer' },
                 { id: '3-1', name: '我的关注', url: 'follow' }
             ] },
             { id: '4', name: '我的收藏', icon: 'icon-favorite', url: 'collection' },
@@ -74,17 +74,17 @@ exports.store = {
                 }
             }
             recommendList.clear();
-            recommendList.params = { page: '1' };
+            recommendList.params = { page: 1, pageSize: 5 };
             me.get(recommendList);
             announcements.clear();
-            announcements.params = { page: '1', pageSize: '1' };
+            announcements.params = { page: 1, pageSize: 1 };
             me.get(announcements);
         },
         changeRecommend: function() {
             var me = this,
                 recommendList = me.models.recommendList,
                 page = this.models.page.data.value;
-            recommendList.params = { page: page };
+            recommendList.params = { page: page, pageSize: 5 };
             me.get(recommendList);
         },
         prevNotice: function(payload) {

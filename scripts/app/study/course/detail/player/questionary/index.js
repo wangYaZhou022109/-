@@ -16,5 +16,5 @@ exports.store = {
 };
 
 exports.beforeRender = function() {
-    this.dispatch('init', this.renderOptions);
+    return this.dispatch('init', this.renderOptions);
 };

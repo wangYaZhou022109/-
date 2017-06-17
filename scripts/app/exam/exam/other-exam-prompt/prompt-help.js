@@ -1,5 +1,5 @@
 var beforeExam, processExam, afterExam,
-    isFinished, examAgain, viewDetail;
+    isFinished, examAgain, viewDetail, paperProcessing, waitMark;
 
 // 1: 考试时间没到
 // 2: 考试完成
@@ -7,18 +7,28 @@ var beforeExam, processExam, afterExam,
 // 4: 进入考试
 // 5: 考试结束
 // 6： 查看详情
+// 7: 试卷处理中
 exports.getUserStatusOfExam = function(exam) {
     if (beforeExam(exam.startTime)) {
         return 1;
     }
 
     if (processExam(exam.startTime, exam.endTime)) {
+        //  试卷处理中
+        if (paperProcessing(exam)) {
+            return 7;
+        }
+        // 已完成
         if (isFinished(exam)) {
             return 2;
         }
-
+        // 没有通过，继续考
         if (examAgain(exam)) {
             return 3;
+        }
+        // 待评卷
+        if (waitMark(exam)) {
+            return 8;
         }
 
         return 4;
@@ -61,4 +71,12 @@ afterExam = function(exam) {
 
 viewDetail = function(exam) {
     return exam.examRecord && exam.examRecord.status > 4;
+};
+
+paperProcessing = function(exam) {
+    return exam.examRecord && exam.examRecord.status < 4 && exam.examRecord.submitTime;
+};
+
+waitMark = function(exam) {
+    return exam.examRecord && exam.examRecord.status === 5;
 };

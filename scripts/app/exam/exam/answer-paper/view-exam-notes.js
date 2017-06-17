@@ -12,7 +12,7 @@ var options = require('./app/exam/exam/base-paper/view-exam-notes'),
 D.assign(obj, {
     title: function() {
         var state = this.bindings.state.data;
-        if (state.tips) {
+        if (state.tips || state.message) {
             return title.tips;
         }
         return title.examNote;
@@ -38,10 +38,21 @@ D.assign(obj.bindings, {
 obj.dataForTemplate = dataForTemplate;
 D.assign(obj.dataForTemplate, {
     state: function(data) {
+        //  交卷后提示
         if (data.state.tips) {
             return D.assign(data.state, {
                 examNotes: data.state.tips
             });
+        }
+        //  开始过程中提示
+        if (data.state.message) {
+            return D.assign(data.state, {
+                examNotes: data.state.message
+            });
+        }
+        //  须知
+        if (data.state.noticed) {
+            return data.state;
         }
         return data.state;
     },

@@ -10,6 +10,7 @@ exports.bindings = {
     courseTime: true,
     organizations: true,
     state: true,
+    msgCount: true,
     hotTopics: true
 };
 
@@ -117,6 +118,17 @@ exports.dataForActions = {
 };
 
 exports.dataForTemplate = {
+    msgCount: function(data) {
+        var msgCount = data.msgCount;
+        if (msgCount) {
+            if (msgCount.count > 0) {
+                return msgCount.count;
+            } else if (msgCount.count > 99) {
+                return '99+';
+            }
+        }
+        return '';
+    },
     organization: function(data) {
         var organization = data.organization || {},
             params = {},
@@ -173,9 +185,16 @@ exports.dataForTemplate = {
     },
     searchHistorys: function() {
         var searchHistorys = viewUtil.getSearchHistory();
-        return _.orderBy(
+        var arrays = _.orderBy(
             _.filter(searchHistorys || [], function(o) { return o.searchContent; }) || [],
             ['time'], ['desc']).slice(0, 6);
+        return _.map(arrays, function(obj) {
+            var history = obj;
+            if (history.searchContent.length > 20) {
+                history.searchContent = history.searchContent.substring(0, 20) + '...';
+            }
+            return history;
+        });
     },
     showSearch: function() {
         var searchUrl = window.location.protocol + '//' + window.location.host + '/#/' + SEARCH_URL,

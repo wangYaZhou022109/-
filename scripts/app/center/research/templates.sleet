@@ -1,14 +1,19 @@
 #!handlebars
 
 module
-    div(data-region='main')
+    .person-list
+        div(data-region='filter')
+        div(data-region='main')
 
-view('main') > form
+view('filter') > form
     .person-list
         .filter
-            .pull-right.m-right.pointer
-                | 参与时间
-                i.iconfont.icon-sort-desc
+            .pull-right.m-right.pointer#joinTimeOrderBy
+                | 开始时间
+                compare(search.joinTimeOrderBy 'eq' 1)
+                    i.iconfont.icon-sort-asc
+                compare(search.joinTimeOrderBy 'ne' 1)
+                    i.iconfont.icon-sort-desc
             .pull-left
                 .inline-block.m-left.sub-text 状态：
                 .item(id='item-all' class=if(search.all 'active' '')) > span 全部
@@ -18,7 +23,10 @@ view('main') > form
         .list-search
             input.input(id='name' name='name' value=search.name placeholder='请输入您要搜索的内容名称')
             .btn#search > i.iconfont.icon-search
-        ul.list-text.border.top > each(researchRecords)
+
+view('main')
+    ul.list-text.border.top
+        each(researchRecords)
             li.border.bottom
                 .title-row
                     .img > .img-cont > img(src=imgUrl)
@@ -35,7 +43,15 @@ view('main') > form
                         .btn(id='do-research-' + id) 参加调研
                     compare(status 'eq' 1)
                         .btn.disabled(id='do-research-' + id) 参加调研
-        #pager.pagination
+        else
+            .content-empty-side
+                if(search.name)
+                    p 很抱歉，暂未找到相关内容
+                    br
+                    p 您可以尝试更换关键字进行搜索
+                else
+                    p > echo('好好学习，天天向上！') + a(title='跳转至活动' href='#/activity/index') >  echo('跳转至活动')
+    #pager.pagination
 
 view('research-tips')
     .container

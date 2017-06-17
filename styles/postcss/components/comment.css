@@ -32,23 +32,8 @@
     }
 
     & .comment-text {
-        position: relative;
-        line-height: 2em;
-        height: 4em;
+        line-height: 2;
         margin: var(--space) 0;
-        /*多行文本省略*/
-        overflow : hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
-    & .comment-text:before {
-        content:"...";
-        position:absolute;
-        bottom:0;
-        right:0;
-        background:#FFF;
     }
 
     & .comment-operation {
@@ -92,8 +77,10 @@
         }
 
         & textarea {
+            padding: 5px;
             padding-right: calc(var(--font-size) * 6);
             height: var(--input-height);
+            line-height: 25px;
         }
 
         & .btn {

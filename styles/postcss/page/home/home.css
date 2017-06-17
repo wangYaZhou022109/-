@@ -8,6 +8,7 @@
 @import "config.css";
 @import "banner-notice.css";
 @import "tags.css";
+@import "more-rank.css";
 
 :root {
     --recommend-bar-height: 15em;

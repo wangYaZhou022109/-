@@ -17,6 +17,8 @@ view('list')
                     h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
                 .btn.small(id='unfollow-topic-' + id  data-name='id' data-value=id) > echo('已关注')
+        if(topic.topicListFlag)
+            .container.text-center > .content(style="margin: 20% 0") 暂无内容哦！
    
                 
 

@@ -207,7 +207,7 @@ view('main') > .container
                                     # | 3806人参与
                                     # i.iconfont.icon-date.m-left
                                     dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
-    compare(researchs 'gt' 0)
+    compare(researchs.length 'gt' 0)
         .search-content
             .content-type
                 .h3.inline-block 调研
@@ -248,9 +248,9 @@ view('main') > .container
                         .text-overflow.title > echo(subject)
                         .bottom.text-tips
                             i.iconfont.icon-view
-                            span > echo(subNumber)
+                            span > echo(viewNumber)
                             i.iconfont.icon-date.m-left
-                            span > date(startTime)
+                            span > dateMinute(startTime)
 
     compare(knowledges.length 'gt' 0)
         .search-content
@@ -315,7 +315,7 @@ view('main') > .container
                 li.expert-item
                     a.normal(href="#/ask/askExpertdetails/" + id + '/' + member.id target='_blank')
                         .img > .img-cont > img(src=cover alt=member.fullName)
-                        h4.text-overflow > a.normal(href="#/ask/noticerexpertdetails/" + id + '/' + member.id target='_blank') > echo(member.fullName)
+                        h4.text-overflow > a.normal(href="#/ask/askExpertdetails/" + id + '/' + member.id target='_blank') > echo(member.fullName)
                         .info > echo(careNum + '关注 ｜ ') + echo(answerNum + '回答 ｜ ') + echo(shareNum + '文章')
                         .sub-text.text-overflow > echo(introduce)
 
@@ -326,7 +326,7 @@ view('main') > .container
                 a.more(id='more-11' href='javascript:;') more
             .ask-list > ul.cell-4 > each(topics)
                 li.topic-item
-                    a.normal(href="#/ask/noticertopicdetail/" + id target='_blank')
+                    a.normal(href="#/ask/topicdetail/" + id target='_blank')
                         .img > .img-cont > img(src=cover)
-                        h4.text-overflow(title=name) > a.normal(href="#/ask/noticertopicdetail/" + id target='_blank') > echo(name)
+                        h4.text-overflow(title=name) > a.normal(href="#/ask/topicdetail/" + id target='_blank') > echo(name)
                         .info > echo(concernNumber + '关注 ｜ ') + echo(expertNumber + '专家 ｜ ') + echo(questionNumber + '问题')

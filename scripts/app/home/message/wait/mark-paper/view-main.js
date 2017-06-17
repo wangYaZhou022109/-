@@ -6,6 +6,9 @@ exports.bindings = {
     state: true
 };
 
+exports.actions = {
+    'click loadMore': 'loadMore'
+};
 
 exports.dataForTemplate = {
     waitMarkPapers: function(data) {
@@ -27,7 +30,14 @@ exports.dataForTemplate = {
                 score: p.examRecord.score / 100
             });
         });
-    }
+    },
+    showMore: function() { // 是否显示加载更多
+        var length = this.bindings.waitMarkPapers.data.length;
+        if (length < 10) {
+            return 2;
+        }
+        return 1;
+    },
 };
 
 exports.events = {

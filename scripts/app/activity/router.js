@@ -4,7 +4,8 @@ exports.routes = {
     'gensee/detail/:id': 'showLiveDetails',
     'class-details': 'showClassDetails',
     'class-register': 'showClassRegister',
-    'classmate-book': 'showClassmatebook'
+    'classmate-book': 'showClassmatebook',
+    'class-details/lengthranking': 'showLengthranking'
 };
 
 exports.showIndex = function() {
@@ -27,3 +28,6 @@ exports.showClassmatebook = function() {
     return this.app.show('content', 'activity/classmate-book');
 };
 
+exports.showLengthranking = function() {
+    return this.app.show('content', 'activity/class-details/lengthranking');
+};

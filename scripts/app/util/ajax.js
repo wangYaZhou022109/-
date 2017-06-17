@@ -192,15 +192,45 @@ exports.setup = function(app) {
     }
     sockets.push(new Socket(app, 'system'));
     sockets.push(new Socket(app, 'human'));
-    sockets.push(new Socket(app, 'exam'));
+    // sockets.push(new Socket(app, 'exam'));
 
     D.adapt({ ajax: function(options, model) {
-        var socket = false;
-        if (model.options.ajax) return doAjax(options, model);
+        var socket = false,
+            loading = function(load) {
+                if (load) $('.topLoading').removeClass('hidden');
+            },
+            clearLoaing = function(load) {
+                if (load) $('.topLoading').addClass('hidden');
+            };
+
+        loading(options.loading);
+        if (model.options.ajax) {
+            return doAjax(options, model).then(function(data) {
+                clearLoaing(options.loading);
+                return data;
+            }, function(data) {
+                clearLoaing(options.loading);
+                return data;
+            });
+        }
 
         socket = sockets.filter(function(item) { return item.match(options.url); })[0];
-        if (!socket) return doAjax(options, model);
+        if (!socket) {
+            return doAjax(options, model).then(function(data) {
+                clearLoaing(options.loading);
+                return data;
+            }, function(data) {
+                clearLoaing(options.loading);
+                return data;
+            });
+        }
 
-        return socket.send(options, model);
+        return socket.send(options, model).then(function(data) {
+            clearLoaing(options.loading);
+            return data;
+        }, function(data) {
+            clearLoaing(options.loading);
+            return data;
+        });
     } });
 };
