@@ -37,11 +37,19 @@ exports.dataForActions = {
 exports.dataForTemplate = {
     recommendList: function() {
         var downUrl = this.bindings.down.getFullUrl();
-        var defultImg = 'images/default-cover/default_course.jpg';
+        var defultImgs = {
+            0: 'images/default-cover/default_course.jpg',
+            1: 'images/default-cover/default_spceial.jpg'
+        };
+        var detailUrls = {
+            0: '#/study/course/detail/',
+            1: '#/study/subject/detail/'
+        };
         var recommendList = this.bindings.recommendList.data.items;
         _.forEach(recommendList, function(obj) {
             var course = obj || {};
-            course.img = course.cover ? (downUrl + '?id=' + course.cover) : defultImg;
+            course.img = course.cover ? (downUrl + '?id=' + course.cover) : defultImgs[course.isSubject];
+            course.url = detailUrls[course.isSubject] + course.id;
         });
         return recommendList;
     },
