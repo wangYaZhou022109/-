@@ -87,7 +87,7 @@ view('interest')
                     a#closeRecommend.normal(href="javascript:;") > string('center.index.close')
                 string('center.index.guess')
             .main-list > ul > each(recommendList)
-                li > .content > a.normal(href='#/study/course/detail/'+id target='_blank')
+                li > .content > a.normal(href=url target='_blank')
                     .img > .img-cont > img(src=img)
                     .clearfix
                         .title.text-overflow > echo(name)
