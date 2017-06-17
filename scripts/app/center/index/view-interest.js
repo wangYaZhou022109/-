@@ -37,19 +37,17 @@ exports.dataForActions = {
 exports.dataForTemplate = {
     recommendList: function() {
         var downUrl = this.bindings.down.getFullUrl();
-        var defultImgs = {
-            0: 'images/default-cover/default_course.jpg',
-            1: 'images/default-cover/default_spceial.jpg'
-        };
-        var detailUrls = {
-            0: '#/study/course/detail/',
-            1: '#/study/subject/detail/'
-        };
+        var defaultImg = 'images/default-cover/default_course.jpg';
+        var defaultUrl = '#/study/course/detail/';
         var recommendList = this.bindings.recommendList.data.items;
         _.forEach(recommendList, function(obj) {
             var course = obj || {};
-            course.img = course.cover ? (downUrl + '?id=' + course.cover) : defultImgs[course.isSubject];
-            course.url = detailUrls[course.isSubject] + course.id;
+            if (course.businessType && course.businessType === 2) {
+                defaultImg = 'images/default-cover/default_spceial.jpg';
+                defaultUrl = '#/study/subject/detail/';
+            }
+            course.img = course.cover ? (downUrl + '?id=' + course.cover) : defaultImg;
+            course.url = defaultUrl + course.id;
         });
         return recommendList;
     },
