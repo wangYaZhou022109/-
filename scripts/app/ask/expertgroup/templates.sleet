@@ -37,10 +37,15 @@ view('list')
                 .clearfix
                     .img > .img-cont > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
                     .expert-item-right.overflow
-                        .w-full
+                        .w-full.clearfix
                             .title > echo(member.fullName)
-                            a.h4.text-right.block
-                                | +关注
+                            compare(member.id 'ne' me)
+                                compare(concernList.length 'gt' 0)
+                                    a.h4.text-right.block(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                                    a.h4.text-right.block( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) +关注
+                                else
+                                    a.h4.text-right.block( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
+                                    a.h4.text-right.block(id='follow-expert-'  + id  data-name='id' data-value=id) +关注
                         .expert-introduce.m-top.sub-text
                             p > echo(introduce)
                         .info.sub-text
@@ -50,10 +55,3 @@ view('list')
                 .row > each(topicList)
                     .tag-btn
                         a.normal(href='#/ask/topicdetail/'+ id ) > echo(name)
-                    # compare(member.id 'ne' me)
-                    #     compare(concernList.length 'gt' 0)
-                    #         .btn.small(id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
-                    #         .btn.small( 'hidden' id= 'follow-expert-'  + id  data-name='id' data-value=id) +关注
-                    #     else
-                    #         .btn.small( 'hidden' id='unfollow-expert-' + id  data-name='id' data-value=id) 已关注
-                    #         .btn.small(id='follow-expert-'  + id  data-name='id' data-value=id) +关注
