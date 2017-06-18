@@ -60,7 +60,7 @@ view('main')
                     .comment-content
                         .clearfix.inline-block.w-full
                             .user-info.pull-left
-                                a(href='#') > echo( member.fullName)
+                                a(href='#') > echo(member.fullName)
                                 span > echo(organization.name)
                             .text-right > dateTime(createTime)
                         .comment-text > echo(content)
@@ -69,7 +69,7 @@ view('main')
                                 
                             .text-right
                                 compare(praise1 'eq' true)
-                                    .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞')
+                                    .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
                                     .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                 else
                                     .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
