@@ -27,6 +27,7 @@ exports.store = {
             url: '../ask-bar/question-details/boutique'
         },
         discuss: { url: '../ask-bar/question-discuss/discuss' },
+        discussd: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
         state: { data: {} },
         follow: {
@@ -233,6 +234,11 @@ exports.store = {
             var concern = this.models.concern;
             concern.set(payload);
             return this.get(concern);
+        },
+        shut1: function(payload) {
+            var discussd = this.models.discussd;
+            discussd.set(payload);
+            return this.del(discussd);
         },
     }
 };
