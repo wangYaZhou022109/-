@@ -4,21 +4,18 @@ exports.actions = {
     'click search': 'search'
 };
 
-// exports.components = [{
-//     id: 'month',
-//     name: 'monthpicker',
-//     // options: {
-//     //     dateFormat: 'yy'
-//     // }
-// }];
-
 exports.components = [{
     id: 'month',
-    name: 'flatpickr',
-    options: {
-        dateFormat: 'Y-m'
-    }
+    name: 'monthpicker'
 }];
+
+// exports.components = [{
+//     id: 'month',
+//     name: 'flatpickr',
+//     options: {
+//         dateFormat: 'Y-m'
+//     }
+// }];
 
 exports.dataForActions = {
     search: function() {

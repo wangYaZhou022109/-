@@ -5,7 +5,7 @@ module
 
 view('main') > .base-info
     .form.align-left
-        .pic(style='background-image:url(images/default-userpic.png)')
+        .pic
             #headFile
         .info
             .form-row

@@ -456,6 +456,10 @@ section.section {
     width: 48.99999%;
 }
 
+.col-sm-4 {
+    width: 31.99999%;
+}
+
 .col-sm-3 {
     width: 23.99999%;
 }
@@ -493,4 +497,3 @@ section.section {
         border-bottom: 1px solid #ccc;
     }
 }
-

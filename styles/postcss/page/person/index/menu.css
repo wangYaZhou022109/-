@@ -7,12 +7,13 @@
 
         & li {
             border-bottom: 1px solid var(--white);
-            line-height: 3;
+            line-height: 40px;
         }
 
         & .iconfont {
             width: 2em;
             float: left;
+            font-size: 16px;
 
             &.down,
             &.up {

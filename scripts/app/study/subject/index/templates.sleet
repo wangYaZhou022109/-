@@ -31,8 +31,5 @@ view('list')
                         span.m-let > echo(visits)
                     .title.text-overflow > echo(name)
                     .sub-text.text-overflow
-                        if(description)
-                            echo(description)
-                        else
-                            echo('&nbsp;')
+                        echo('&nbsp;')
         #pager.pagination

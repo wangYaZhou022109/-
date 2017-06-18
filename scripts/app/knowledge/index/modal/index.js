@@ -56,6 +56,7 @@ exports.buttons = [
             var description = payload.description;
             var descLength = 0;
             var integral = payload.integral;
+            var categoryId = payload.categoryId;
             var r = /^\+?[1-9][0-9]*$/;
             name = name.replace(/(^\s*)|(\s*$)/g, '');
             integral = integral.replace(/(^\s*)|(\s*$)/g, '');
@@ -71,8 +72,12 @@ exports.buttons = [
                 }
             }
             if (integral !== 'undefined' && integral !== '' && (!r.test(integral)
-                || window.parseInt(integral, 10) > 100)) {
+                || window.parseInt(integral, 10) >= 100)) {
                 this.app.message.error('下载积分必须为小于100的正整数！');
+                return false;
+            }
+            if (typeof categoryId === 'undefined' || categoryId === '') {
+                this.app.message.error('请选择目录！');
                 return false;
             }
             if (description.length > 0) {

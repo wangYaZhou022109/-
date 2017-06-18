@@ -97,8 +97,8 @@ exports.store = {
                 init: function(dimensions) {
                     var questionTypes = maps.get('research-question-types'),
                         chineseNumber = maps.get('chineseNumber');
-
-                    this.data = _.map(dimensions, function(d, i) {
+                    var dim = _.orderBy(dimensions, ['order'], ['asc']);
+                    this.data = _.map(dim, function(d, i) {
                         return D.assign(d, {
                             isCurrent: true,
                             dimensionIndex: _.find(chineseNumber, ['key', (i + 1).toString()]).value,
