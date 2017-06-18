@@ -20,7 +20,7 @@ exports.store = {
             if (payload.examId) {
                 state.set({ examId: payload.examId });
                 D.assign(audience.params, { examId: payload.examId });
-                return this.get(audience).then(function() {
+                return this.get(audience, { loading: true }).then(function() {
                     if (audience.data.isGrant === 1) {
                         D.assign(state.data, { isGrant: true });
                     } else {

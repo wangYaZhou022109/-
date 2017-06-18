@@ -50,16 +50,7 @@ D.assign(obj.handlers, {
                     : strings.get('exam.submit-paper-confirm');
 
             me.app.message.confirm(message, function() {
-                return me.module.dispatch('submitPaper', { submitType: 'Hand' }).then(function() {
-                    //  提交成功后弹出提示框
-                    return me.module.dispatch('showTips', {
-                        tips: state.paper.isSubjective === 1
-                            ? strings.get('exam.answer-paper.submit-success-mark')
-                                : strings.get('exam.answer-paper.submit-success')
-                    }).then(function() {
-                        me.app.viewport.modal(me.module.items['exam-notes']);
-                    });
-                });
+                return me.module.dispatch('submitPaper', { submitType: 'Hand' });
             }, function() {
                 return true;
             });

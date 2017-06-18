@@ -45,12 +45,18 @@ exports.beforeRender = function() {
 };
 
 exports.afterRender = function() {
-    var state = this.store.models.state.data;
+    var state = this.store.models.state.data,
+        me = this;
     if (state.isDelay) {
-        this.app.viewport.modal(this.items.tips, {
+        return this.app.viewport.modal(this.items.tips, {
             tips: '您被延时了' + state.delay + '分钟'
+        }).then(function() {
+            if (me.renderOptions.resetDelay) {
+                me.renderOptions.resetDelay();
+            }
         });
     }
+    return '';
 };
 
 exports.mixin = {
