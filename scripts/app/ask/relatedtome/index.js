@@ -96,6 +96,10 @@ exports.store = {
         }
     },
     callbacks: {
+        closequestion: function(payload) {
+            this.models.close.set(payload);
+            return this.put(this.models.close);
+        },
         refresh: function() {
             this.models.callback();
         },

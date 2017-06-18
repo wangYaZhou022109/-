@@ -38,39 +38,39 @@ exports.store = {
                 findFirstSection: function() {
                     return this.findAllSections()[0];
                 },
-                // 是否是相同章或者下一章。
-                isChapterSequence: function(beforeSectionId, currentSectionId) {
-                    var beforeSection = this.findSection(beforeSectionId);
-                    var currentSection = this.findSection(currentSectionId);
-                    var nextIndex = 0;
-                    if (beforeSection.chapterId === currentSection.chapterId) return true;
-
-                    _.each(this.data.courseChapters, function(v, i) {
-                        if (v.id === beforeSection.chapterId) {
-                            nextIndex = i + 1;
-                            return false;
-                        }
-                        return i;
-                    });
-                    // 如果前面学习的章节是最后一章 也直接为true
-                    if (nextIndex === this.data.courseChapters.length) return true;
-
-                    return this.data.courseChapters[nextIndex].id === currentSection.chapterId;
-                },
-                // 前面的章节是什么
-                findBeforeSection: function(sectionId) {
+                // 前面的所有章节是否学习完毕。
+                checkChapter: function(sectionId) {
+                    var me = this;
                     var section = this.findSection(sectionId);
                     var chapter = this.findChapter(section.chapterId);
-                    var nextIndex = 0;
-                    _.each(chapter.courseChapterSections, function(v, i) {
-                        if (v.id === sectionId) {
-                            nextIndex = i - 1;
-                            return false;
+                    var flag = true;
+
+                    _.each(this.data, function(v) {
+                        if (v.id === chapter.id) return false;
+                        flag = me.checkSection(sectionId); // 是否学完
+                        return flag;
+                    });
+                    return flag;
+                },
+                // 判断同章节前面的必修课程是否都学完了
+                checkSection: function(sectionId) {
+                    var progress = this.module.store.models.progress;
+                    var section = this.findSection(sectionId);
+                    var chapter = this.findChapter(section.chapterId);
+                    var flag = true;
+                    _.each(chapter.courseChapterSections, function(v) {
+                        var prog;
+                        if (v.id === sectionId) return false; // 循环到自己的时候退出
+                        if (v.required !== 1) return true; // 如果不是必修 不处理
+                        prog = progress.findProgress(v.referenceId);
+                        // 如果进度不存在 或者不是2和4 说明没完成
+                        if (!prog || (prog.finishStatus !== 2 && prog.finishStatus !== 4)) {
+                            flag = false;
+                            return flag;
                         }
                         return v;
                     });
-                    if (nextIndex === -1) return null;
-                    return chapter.courseChapterSections[nextIndex];
+                    return flag;
                 }
             }
         },

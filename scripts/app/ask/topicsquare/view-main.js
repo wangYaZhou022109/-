@@ -9,7 +9,9 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click apply-topic': 'showApplyTopic'
+    'click apply-topic': 'showApplyTopic',
+    'click open': 'showTopics',
+    'click close': 'closeTopics'
     // 'click detail-*': 'showDetails'
     // 'click checkOne-*': 'checkOne',
     // 'click checkAll': 'checkAll'
@@ -36,13 +38,23 @@ exports.handlers = {
             // region.show('ask/myquiz/details', { id: data[1] });
         this.app.show('content', 'ask/mymanage/topicdetail', { id: payload });
         // }
-    }
+    },
     // checkOne: function(id) {
     //     $(this.$('checkOne-' + id)).addClass('active').siblings().removeClass('active');
     // },
     // checkAll: function() {
     //     $(this.$('checkAll')).addClass('active').siblings().removeClass('active');
     // }
+    showTopics: function() {
+        $(this.$('open')).addClass('hide');
+        $(this.$('close')).removeClass('hide');
+        $(this.$('topictags')).css('height', 'auto');
+    },
+    closeTopics: function() {
+        $(this.$('close')).addClass('hide');
+        $(this.$('open')).removeClass('hide');
+        $(this.$('topictags')).css('height', '71px');
+    }
 };
 exports.actions = {
     // 'click follow-*': 'follow',
@@ -96,5 +108,17 @@ exports.dataForTemplate = {
             d.push(obj);
         });
         return d;
+    }
+};
+
+exports.afterRender = function() {
+    if ($(this.$('topictags')).height() <= 71) {
+        $(this.$('open')).addClass('hide');
+    } else {
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).css('height', '71px');
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).addClass('overflow');
+        $(this.$('open')).show();
     }
 };
