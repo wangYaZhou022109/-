@@ -128,16 +128,10 @@ exports.actions = {
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
     'click del-discuss-*': 'deldiscuss',
-    'click close-discuss-*': 'closediscuss',
     'click close-question-*': 'closequestion'
 };
 
 exports.dataForActions = {
-    closediscuss: function(payload) {
-        var data = payload;
-        data.closeStatus = 1;
-        return data;
-    },
     closequestion: function(payload) {
         var data = payload;
         data.closeStatus = 1;
@@ -228,10 +222,6 @@ exports.dataForActions = {
     }
 };
 exports.actionCallbacks = {
-    closediscuss: function() {
-        this.app.message.success('关闭成功!');
-        // this.module.dispatch('init');
-    },
     closequestion: function() {
         this.app.message.success('关闭成功!');
         // this.module.dispatch('init');

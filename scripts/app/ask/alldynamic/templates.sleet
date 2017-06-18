@@ -125,10 +125,10 @@ view('list')
                             else
                                 .item(id='praise-1_'+ discussId data-name='id' data-value='1_' + discussId)
                                     string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
-                            compare(questionDiscuss.replyNum 'eq' 0)
-                                .item(id='discuss-' + id ) > string('reply')
-                            else
+                            compare(questionDiscuss.replyNum 'gt' 0)
                                 .item(id='discuss-' + id ) > echo(questionDiscuss.replyNum) + string('strip') + string('reply')
+                            else
+                                .item(id='discuss-' + id ) > string('reply')
                             #  compare(concernNum 'gt' 0)
                             #      .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
                             #      .item( 'hidden' id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')

@@ -127,10 +127,16 @@ exports.actions = {
     'click del-share-*': 'delshare',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
-    'click del-discuss-*': 'deldiscuss'
+    'click del-discuss-*': 'deldiscuss',
+    'click close-question-*': 'closequestion'
 };
 
 exports.dataForActions = {
+    closequestion: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
+    },
     praise: function(payload) {
         var data = {};
         var obj = payload.id.split('_');
@@ -212,6 +218,10 @@ exports.dataForActions = {
     }
 };
 exports.actionCallbacks = {
+    closequestion: function() {
+        this.app.message.success('关闭成功!');
+        // this.module.dispatch('init');
+    },
     reply: function() {
         this.app.message.success('发表成功，等待管理员审核！');
         this.module.dispatch('init');
@@ -300,6 +310,17 @@ exports.dataForTemplate = {
                 }
             });
             if (flag) {
+                obj.show = 0;
+                if (obj.createUserId === obj.me) { // 是否为当前用户
+                    if (obj.question.discussNum > 0) {
+                        obj.show = 2;
+                    } else {
+                        obj.show = 1;
+                    }
+                }
+                if (obj.question !== null && obj.question.closeStatus) {
+                    obj.show = 3;
+                }
                 page.push(obj);
             }
         });
