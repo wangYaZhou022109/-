@@ -1,6 +1,4 @@
-var D = require('drizzlejs'),
-    strings = require('./app/util/strings'),
-    getEndTime;
+var strings = require('./app/util/strings');
 
 exports.bindings = {
     exam: false,
@@ -15,7 +13,7 @@ exports.getEntity = function() {
         countDown = this.bindings.countDown.data,
         delay = countDown.delay;
     return {
-        endTime: getEndTime.call(this, exam.examRecord.endTime),
+        endTime: exam.examRecord.endTime,
         startTime: exam.examRecord.currentTime,
         isDelay: countDown.isDeday,
         delay: delay
@@ -51,40 +49,9 @@ exports.dataForEntityModule = function(data) {
             doing: function() {
                 me.app.message.success(strings.get('exam.answer-paper.remain-five-mins'));
             }
-        }]
+        }],
+        resetDelay: function() {
+            return me.module.dispatch('resetDelay');
+        }
     };
-};
-
-getEndTime = function(examRecordEndTime) {
-    var data = this.bindings.countDown.data,
-        exam = this.bindings.exam.data,
-        endTime;
-    if (!data.firstInTime) {
-        data.firstInTime = new Date().getTime();
-        data.endTime = new Date(examRecordEndTime).getTime();
-        data.isDeday = false;
-        this.bindings.countDown.data = data;
-    }
-
-    if (data.delay) {
-        endTime = new Date(examRecordEndTime);
-        endTime.setMinutes(
-            endTime.getMinutes() + data.delay,
-            endTime.getSeconds(),
-            0
-        );
-        D.assign(this.bindings.countDown.data, {
-            endTime: endTime.getTime(),
-            isDeday: true
-        });
-        D.assign(exam, {
-            examRecord: D.assign(exam.examRecord, {
-                endTime: endTime.getTime()
-            })
-        });
-    }
-    data.delay = 0;
-
-    this.bindings.countDown.save();
-    return new Date(data.endTime);
 };

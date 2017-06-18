@@ -363,7 +363,6 @@ var setOptions = {
                 var me = this,
                     f = true,
                     state = this.models.state,
-                    exam = this.models.exam,
                     countDown = this.module.items['count-down'].getEntities(),
                     examRecordId = this.models.exam.data.examRecord.id,
                     lastCacheTime = new Date().getTime(),
@@ -383,8 +382,10 @@ var setOptions = {
                 if (f) {
                     return this.post(this.models.form, {
                         loading: payload.submitType !== submitType.Auto }).then(function() {
+                            state.saveLastCacheTime(lastCacheTime);
                             if (payload.submitType === submitType.Auto) {
                                 me.models.modify.clear();
+                                me.app.message.success(strings.get('exam.answer-paper.auto-submit-success'));
                             } else {
                                 helper.refreshParentWindow();
                                 D.assign(state.data, { over: true });
@@ -393,28 +394,51 @@ var setOptions = {
                                     countDown = countDown[0];
                                     countDown.clearIntervalIt();
                                 }
+
+                                //  提交成功后弹出提示框
+                                return me.module.dispatch('showTips', {
+                                    tips: state.paper.isSubjective === 1
+                                        ? strings.get('exam.answer-paper.submit-success-mark')
+                                            : strings.get('exam.answer-paper.submit-success')
+                                }).then(function() {
+                                    me.app.viewport.modal(me.module.items['exam-notes']);
+                                });
                             }
-                            exam.saveLastCacheTime(lastCacheTime);
-                            state.saveLastCacheTime(lastCacheTime);
+                            return '';
+                        }, function() {
+                            //  提交异常提示
+                            return me.module.dispatch('showTips', {
+                                message: '网络已断开，无法继续考试，请检查本地网络'
+                            }).then(function() {
+                                me.app.viewport.modal(me.module.items['exam-notes']);
+                            });
                         });
                 }
                 return '';
             },
             delay: function(payload) {
                 var endTime,
-                    exam = this.models.exam.data;
-                this.models.countDown.data.delay = payload.delay;
+                    exam = this.models.exam.data,
+                    countDown = this.models.countDown;
+
+                D.assign(countDown.data, {
+                    delay: payload.delay,
+                    isDeday: true
+                });
+
                 endTime = new Date(exam.examRecord.endTime);
                 endTime.setMinutes(
                     endTime.getMinutes() + payload.delay,
                     endTime.getSeconds(),
                     0
                 );
+
                 D.assign(exam, {
                     examRecord: D.assign(exam.examRecord, {
                         endTime: endTime.getTime()
                     })
                 });
+
                 this.models.countDown.changed();
             },
             lowerSwitchTimes: function() {
@@ -494,6 +518,7 @@ var setOptions = {
                     D.assign(answerRecord.params, { examId: exam.id });
                     return me.get(answerRecord, { loading: true }).then(function() {
                         answer.init(answerRecord.data);
+                        types.clear();
                         types.init(exam.paper.questions, true);
                         me.models.state.init(exam);
                         me.models.state.resetCurrentQuestion();
@@ -509,6 +534,11 @@ var setOptions = {
                     });
                 }
                 return '';
+            },
+            resetDelay: function() {
+                var countDown = this.models.countDown;
+                D.assign(countDown.data, { isDeday: false });
+                countDown.save();
             }
         }
     }
@@ -536,19 +566,17 @@ var target = D.assign({}, {
                 return ms;
             },
             f = true,
-            autoSubmit = function(time) {
+
+            //  自动提交
+            autoSubmit = function() {
                 if (!me.store.models.exam.data.id) return '';
                 return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
                     helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
-                    if (time !== 1) {
-                        me.app.message.success(strings.get('exam.answer-paper.auto-submit-success'));
-                    }
                 });
-            };
+            },
 
-        if (f) {
-            helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
-            helper.WS.connect(examId, function() {
+            //  后台主动强制交卷回调
+            forceSubmitPaper = function() {
                 return me.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
                     helper.WS.closeConnect();
                     return me.dispatch('showTips', {
@@ -557,12 +585,18 @@ var target = D.assign({}, {
                         me.app.viewport.modal(me.items['exam-notes']);
                     });
                 });
-            }, function(delay) {
-                return me.dispatch('delay', { delay: Number(delay) });
+            };
+
+        if (f) {
+            helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
+            helper.WS.connect(examId, forceSubmitPaper, function(time) {
+                return me.dispatch('delay', { delay: Number(time) });
             });
         }
+
         helper.switchScreen.call(this, this.store.models.exam.data);
         helper.closeListener.call(this, strings.get('exam.answer-paper.close-window'));
+
         return this.dispatch('reloadState').then(function() {
             return me.dispatch('loadAnswerRecord');
         });
