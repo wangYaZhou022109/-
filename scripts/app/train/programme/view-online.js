@@ -19,12 +19,10 @@ exports.dataForActions = {
         me.updataCss();
         return this.Promise.create(function(resolve) {
             var message = '确定删除此课程吗?';
+            me.updataCss();
             me.app.message.confirm(message, function() {
-                me.module.dispatch('delOnlineCourse', payload).then(function() {
-                    me.updataCss();
-                });
+                me.module.dispatch('delOnlineCourse', payload);
             }, function() {
-                me.updataCss();
                 resolve(false);
             });
         });
