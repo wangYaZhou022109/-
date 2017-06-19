@@ -30,7 +30,7 @@ view('content') > form
                         .item > span(id='answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum2 +'）')
                     .text-right
                         .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
-                div(id='replyandreply-answer-'+id)
+                div(id='replyandreply-answer-'+id style='display:none')
                     textarea.input.w-full.block(name='content-' + id value='' )
                     .btn(id='reply-answer-' + id  data-name='id' data-value=id) > echo('回复')
                     input.input(type='hidden' name='id-' + id value=discussId id='id-' + id)
