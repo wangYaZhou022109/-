@@ -254,17 +254,10 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    delquestion: function() {
+    delshare: function(data) {
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
-    delshare: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
-    deldiscuss: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
     }
 };
 

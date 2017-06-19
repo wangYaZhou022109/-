@@ -258,17 +258,20 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    delquestion: function() {
+    delquestion: function(data) {
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 1 });
     },
-    delshare: function() {
+    delshare: function(data) {
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
     },
-    deldiscuss: function() {
+    deldiscuss: function(data) {
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 3 });
     }
 };
 

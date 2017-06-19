@@ -3,7 +3,7 @@ var _ = require('lodash/collection');
 var sensitive = require('./app/util/sensitive');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: true,
+    trends: false,
     page: true,
     down: false
 };
@@ -259,19 +259,19 @@ exports.actionCallbacks = {
         }, 1000);
     },
     delquestion: function(data) {
-        console.log(data);
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('delrefresh', data);
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 1 });
     },
     delshare: function(data) {
-        console.log(data);
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('delrefresh', data);
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
     },
     deldiscuss: function(data) {
-        console.log(data);
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('delrefresh', data);
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 3 });
     }
 };
 
