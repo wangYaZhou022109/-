@@ -114,7 +114,7 @@ exports.mixin = {
         }
         data.questionAttrs = result;
         data.content = view.components.content.html();
-        data.contentText = view.components.content.getText();
+        data.contentText = view.components.content.text();
         if (this.module.renderOptions.editMode === 2) {
             data.difficulty = view.$('difficulty').value;
         }
