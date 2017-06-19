@@ -19,14 +19,14 @@ exports.store = {
             var searchModel = this.models.search,
                 lives = this.models.lives;
             D.assign(lives.params, searchModel.data);
-            return this.get(lives);
+            return this.get(lives, { loading: true });
         },
         search: function(params) {
             var searchModel = this.models.search,
                 lives = this.models.lives;
             lives.clear();
             D.assign(lives.params, D.assign(searchModel.data, params));
-            this.get(lives);
+            this.get(lives, { loading: true });
             searchModel.changed();
         },
         refreshList: function() {

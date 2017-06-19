@@ -10,10 +10,10 @@ view('main') > .form
             input.input#selectquestion(maxlength='60')
             .tips 0/60
             .select-drop.border.around
-                .select-drop-item 问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
+                .select-drop-item.border.bottom 问题一
+                .select-drop-item.border.bottom 问题一问题一问题一
+                .select-drop-item.border.bottom 问题一问题一问题一
+                .select-drop-item.border.bottom 问题一问题一问题一
     .form-row
         label.required 关联话题
         .content > input.input + .choice 选择

@@ -1,6 +1,7 @@
 .asknew-list {
     & ul {
         @apply --clearfix;
+        margin-bottom: var(--base-gap);
     }
     & li {
         padding-bottom: 0;

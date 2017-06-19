@@ -20,10 +20,15 @@ exports.handlers = {
         $(this.$('delete-' + id)).addClass('fade-out').removeClass('fade-in');
     },
     navigate: function(courseId, e, element) {
+        var process = this.bindings.progressList.findByCourseId(courseId);
         var versionId = element.getAttribute('data-versionId');
         if (!versionId) {
             e.preventDefault();
             this.app.message.error('该课程已经下架，无法继续学习');
+        }
+        if (process.courseInfo.publishClient === 2) {
+            e.preventDefault();
+            this.app.message.error('该课程只支持APP学习');
         }
         return false;
     }
