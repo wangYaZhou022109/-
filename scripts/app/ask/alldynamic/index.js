@@ -19,8 +19,24 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 10 },
+            params: { page: 1, size: 2 },
             mixin: {
+                closerefresh: function(id, trendsType) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        var store = d;
+                        if (trendsType === 1 && d.questionId === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else if (trendsType === 2 && d.questionId === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else {
+                            newData.push(store);
+                        }
+                    });
+                    return newData;
+                },
                 delrefresh: function(id, trendsType) {
                     var newData = [];
                     _.forEach(this.data, function(d) {
@@ -117,6 +133,19 @@ exports.store = {
         refresh: function() {
             this.models.callback();
         },
+        closeefresh: function(payload) {
+            var data = this.models.page.closerefresh(payload.id, payload.trendsType),
+                trends = this.models.trends,
+                page = this.models.page;
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
         delrefresh: function(payload) {
             var id = payload.id,
                 page = this.models.page,
@@ -126,7 +155,6 @@ exports.store = {
             var params = this.models.page.params;
             page.data = [];
             page.data = data;
-            // page.changed();
             params.id = 'null';
             params.page++;
             trends.set(params);
