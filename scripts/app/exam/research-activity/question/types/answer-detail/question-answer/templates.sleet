@@ -4,13 +4,14 @@ module
     div(data-region='main')
 
 view('main')
-    p.question
-        span > a.normal(name='question-' + question.id) > echo(question.index '.')
-        echo('【')
-        map('research-question-types' question.type)
-        echo('】')
-        @echo(question.content)
+    p.question(style='display:inline;')
+        span.sub-text.inline-block
+            echo(question.index '.')
+            | 【
+            map('research-question-types' question.type)
+            | 】 &nbsp;
+        span > a.normal(name='question-' + question.id) > @echo(question.content)
 
     .clearfix.statistics-list
         .statistics-list-tit > echo('答：' question.answerRecord.answer)
-        .statistics-list-time > dateTime(question.answerRecord.createTime)
+        .statistics-list-time > dateMinute(question.answerRecord.createTime)

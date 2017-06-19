@@ -31,6 +31,7 @@ exports.bindings = {
 exports.dataForTemplate = {
     checked: function(data) {
         var offlineCourse = data.offlineCourse;
+        // console.log(offlineCourse.courseDate);
         return {
             type1: offlineCourse.type === '1' || offlineCourse.type === 1,
             type2: offlineCourse.type === '2' || offlineCourse.type === 2,
@@ -83,7 +84,9 @@ exports.handlers = {
         } else {
             offlineCourse.type = $(this.$('type')).val();
             offlineCourse.name = $(this.$('name')).val();
-            offlineCourse.courseDate = $(this.$('courseDate')).val();
+            if ($(this.$('courseDate')).val()) {
+                offlineCourse.courseDate = new Date($(this.$('courseDate')).val()).getTime();
+            }
             offlineCourse.endTime = $(this.$('endTime')).val();
             offlineCourse.classroomId = $(this.$('classroomId')).val();
             offlineCourse.teacherName = $(this.$('teacherName')).val();

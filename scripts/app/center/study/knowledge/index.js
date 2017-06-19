@@ -14,7 +14,8 @@ exports.store = {
         },
         img: { url: '../human/file/download' },
         search: {},
-        object: { url: '../course-study/knowledge' }
+        object: { url: '../course-study/knowledge' },
+        logicDel: { url: '../course-study/knowledge/logicDel' }
     },
     callbacks: {
         init: function() {
@@ -30,10 +31,10 @@ exports.store = {
             searchModel.changed();
         },
         delete: function(payload) {
-            var object = this.models.object,
+            var logicDel = this.models.logicDel,
                 me = this;
-            object.set(payload);
-            return me.del(object).then(function() {
+            logicDel.set(payload);
+            return me.put(logicDel).then(function() {
                 return me.get(me.models.list);
             });
         },

@@ -5,16 +5,17 @@ module > .choise
     .options(data-region='options')
 
 view('content')
-    p.question
-        span > a.normal(name='question-' + state.id) > echo(state.index '.')
-        echo('【')
-        map('research-question-types' state.type)
-        echo('】')
-        @echo(state.content)
+    p.question(style='display:inline;')
+        span.sub-text.inline-block
+            echo(state.index '.')
+            | 【
+            map('research-question-types' state.type)
+            | 】 &nbsp;
+        span > a.normal(name='question-' + state.id) > @echo(state.content)
 
 
 view('options') > form.vertical.m-bottom
-    textarea.input.w-full(id='answer' name='value' rows='5' placeholder='请输入答案') > @echo(answer)
+    textarea.input.w-full(id='answer' x-rule='maxLength:5000' name='value' rows='5' placeholder='请输入答案' maxlength='5000') > @echo(answer)
     if(isShowDetail)
         .show-answer
             .clearfix

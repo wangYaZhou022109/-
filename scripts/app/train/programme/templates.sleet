@@ -40,7 +40,8 @@ view('offline')
                         if(isGrant)
                             th 操作
                     each(offlineCourseList) > tr
-                        td > date(courseDate)
+                        if(isRowspan)
+                            td(rowspan=rowspan) > date(courseDate)
                         td > echo(startTime + '-' + endTime)
                         td
                             label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
@@ -82,7 +83,8 @@ view('online')
                     if(isGrant)
                         th 操作
                 each(onlineCourseList) > tr
-                    td > echo(themeName)
+                    if(isRowspan)
+                        td(rowspan=rowspan) > echo(themeName)
                     td > echo(resourceName)
                     td
                         label(id='label-online-' + id data-name='id' data-value=id) > map('yes-or-no' isRequired)
@@ -209,29 +211,33 @@ view('edit-offline') > form.vertical
                 input.input#id(type= 'hidden' name='id' value=offlineCourse.id)
         .clearfix
             .row
-                .form-row.col-sm-6.inline-block
-                    label.required 开始时间
-                    .content
-                        .relative
-                            input.input.date#courseDate(name='courseDate' value=dateTime(offlineCourse.courseDate) x-rule='required')
-                            .iconfont.icon-riqi.text-main-color
-                .form-row.col-sm-6.inline-block
-                    label.required 结束时间
-                    .content
-                        .relative
-                            input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
-                            .iconfont.icon-riqi.text-main-color
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 开始时间
+                        .content
+                            .relative
+                                input.input.date#courseDate(name='courseDate'  x-rule='required' value=dateTime(offlineCourse.courseDate))
+                                .iconfont.icon-riqi.text-main-color
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 结束时间
+                        .content
+                            .relative
+                                input.input.date#endTime(name='endTime' value=offlineCourse.endTime x-rule='required')
+                                .iconfont.icon-riqi.text-main-color
             .row
-                .form-row.col-sm-6.inline-block
-                    label.required 教室
-                    .content
-                        select.w-full#classroomId(name='classroomId' x-rule='required')
-                            each(classroomList)
-                                option(value=id)('selected')&if(selected) > echo(classroomName)
-                .form-row.col-sm-6.inline-block
-                    label 讲师姓名
-                    .content
-                        input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='required,maxLength:30')
+                .class-form-width.pull-left
+                    .form-row
+                        label.required 教室
+                        .content
+                            select.tag-input#classroomId(name='classroomId' x-rule='required')
+                                each(classroomList)
+                                    option(value=id)('selected')&if(selected) > echo(classroomName)
+                .class-form-width.pull-left
+                    .form-row
+                        label 讲师姓名
+                        .content
+                            input.input#teacherName(name='teacherName' value=offlineCourse.teacherName  x-rule='maxLength:30')
             .row
                 .form-row.col-sm-6.inline-block
                     label 讲师单位
@@ -256,7 +262,7 @@ view('edit-offline') > form.vertical
         .pull-left > label.label 课件（最多上传三个）
         .pull-right
             .tag-btn.radius.active#chooseFile 选择
-            .inline-block.help ?
+            a.inline-block.ask-help(title='上传附件支持格式：.xls/.xlsx/.doc/.docx/.ppt/.pptx/.txt/.pdf/.zip(大小<100M)') > echo('?')
     table.table
         tr
             th  序号
@@ -336,6 +342,7 @@ view('edit-task') > form.vertical
             label.label.required 作业名称
             .content
                 input.input#name(name='name' value=task.name x-rule='required,maxLength:30')
+                .tips 0/30
                 input.input#id(type= 'hidden' name='id' value=task.id)
         .clearfix
             .form-row.pull-left.w-half.start-time.row-block.r-padding
@@ -347,6 +354,7 @@ view('edit-task') > form.vertical
         .form-row
             .clearfix
                 label.label.required.pull-left 任务说明
+                .text-right.tag-height 0/5000
                 textarea.input#explain(name='explain' rows='3' x-rule='maxLength:1000,required') > echo(task.explain)
 
         .task-table.layout-mt-small

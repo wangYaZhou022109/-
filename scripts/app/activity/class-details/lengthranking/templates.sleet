@@ -11,16 +11,13 @@ view('lengthranking')
 			th 姓名
 			th 部门
 			th 时长
-		tr
-			td 1
-			td 姓名1
-			td 部门1
-			td 120
-		tr
-			td 2
-			td 姓名2
-			td 部门2
-			td 120
-	.layout-mt
+		each(study.arr)
+			tr
+				td > echo(i)
+				td > echo(member.fullName)
+				td > echo(member.organizationName)
+				td > echo(studyTotalTime)
+
+	.layout-mt#nomore
 		.text-center
 			.sub-text.h3 没有更多了...

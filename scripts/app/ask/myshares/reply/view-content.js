@@ -52,8 +52,16 @@ exports.dataForActions = {
         });
         return data;
     },
-    replydel: function(payload) {
-        return payload;
+    replydel: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '讨论删除后将无法恢复，是否确定删除该讨论？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     replyandreplyanswer: function(payload) {
         var data = {},

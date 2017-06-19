@@ -5,8 +5,9 @@ module
 
 view('main')
     .mt-1
-        .checkbox > input(type='checkbox' id='waitAudit')('checked')&if(checked) + label(for='waitAudit')
-        span 显示待审核
+        #  .checkbox > input(type='checkbox' id='waitAudit')('checked')&if(checked) + label(for='waitAudit')
+        #  span 显示待审核
+        .checkbox-slider.inline-block.m-right > input(type='checkbox' id='waitAudit')('checked')&if(checked) + label(for='waitAudit') + sapn 显示待审核
     ul.list
         each(works)
             li
@@ -24,8 +25,9 @@ view('main')
                         else
                             span.text-tips > echo(' | 成绩：' score)
         else
-            .empty 暂无内容
-    compare(showMore 'eq' 1)
-        #showMore.empty(style='cursor:pointer;') 查看更多
-    compare(showMore 'eq' 2)
-        .empty 没有更多了
+            .content-empty > .img-box.img-type-1 + p 暂无待办
+    if(works)
+        compare(showMore 'eq' 1)
+            #showMore.empty(style='cursor:pointer;') 查看更多
+        compare(showMore 'eq' 2)
+            .empty 没有更多了

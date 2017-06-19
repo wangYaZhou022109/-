@@ -98,7 +98,7 @@ exports.dataForTemplate = {
                         dataId: research.id,
                         dataName: research.name,
                         dataSummary: research.questionaryDetail || '',
-                        browseCount: 0,
+                        browseCount: research.viewNumber || 0,
                         beginTime: research.startTime,
                         endTime: research.endTime,
                         dataImage: research.cover
@@ -115,7 +115,7 @@ exports.dataForTemplate = {
                         dataId: gensee.id,
                         dataName: gensee.subject,
                         dataSummary: gensee.genseeDesc || '',
-                        browseCount: gensee.attendNumber,
+                        browseCount: gensee.viewNumber,
                         beginTime: gensee.startTime,
                         endTime: gensee.endTime,
                         dataImage: gensee.cover

@@ -72,11 +72,12 @@ exports.store = {
                             paper: exam.paper,
                             hasPrevious: false,
                             hasNext: exam.paper.questions.length > 1,
-                            anonymityMark: exam.anonymityMark
+                            anonymityMark: exam.anonymityMark,
+                            examRecordId: examRecord.id
                         };
                         this.save();
                     }
-                    if (answer && answer.data.length > 0) {
+                    if (answer && answer.data && answer.data.length > 0) {
                         this.calculate();
                     }
                 },
@@ -101,20 +102,26 @@ exports.store = {
                 },
                 isComplete: function() {
                     return this.data.noAnswerCount === 0;
+                },
+                saveLastCacheTime: function(lastCacheTime) {
+                    D.assign(this.data, {
+                        lastCacheTime: lastCacheTime
+                    });
+                    this.save();
                 }
             }
         },
         types: {
             type: 'localStorage',
             mixin: {
-                init: function(questions) {
+                init: function(questions, forceUpdate) {
                     var map = {},
                         j = 0,
                         k = 0,
                         me = this;
 
                     this.load();
-                    if (!this.data && questions) {
+                    if ((!this.data && questions) || forceUpdate) {
                         _.forEach(questions, function(q) {
                             var type = orderMap[q.type];
 
@@ -165,50 +172,55 @@ exports.store = {
                 },
                 sortQuestion2: function() {
                     var exam = this.module.store.models.exam.data,
+                        me = this,
                         orders = JSON.parse(exam.examRecord.orderContent);
-
-                    this.data = _.map(this.data, function(t) {
-                        return D.assign(t, {
-                            questions: _.orderBy(_.map(t.questions, function(q) {
-                                var order = _.find(orders, ['questionId', q.id]),
-                                    attrOrder = order.attrOrder,
-                                    subsOrder = order.subsOrder || [];
-                                return D.assign(q, {
-                                    order: order.order,
-                                    questionAttrCopys: _.orderBy(_.map(q.questionAttrCopys, function(attr) {
-                                        var aOrder = _.find(attrOrder, ['attrId', attr.id]);
-                                        return D.assign(attr, {
-                                            order: aOrder && aOrder.order
-                                        });
-                                    }), ['order'], ['asc']),
-                                    subs: _.orderBy(_.map(q.subs, function(s) {
-                                        var subOrder = _.find(subsOrder, ['questionId', s.id]),
-                                            sattrOrder = subOrder.attrOrder;
-                                        return D.assign(s, {
-                                            order: subOrder.order,
-                                            questionAttrCopys: _.orderBy(_.map(s.questionAttrCopys, function(sattr) {
-                                                var saOrder = _.find(sattrOrder, ['attrId', sattr.id]);
-                                                return D.assign(sattr, {
-                                                    order: saOrder && saOrder.order,
-                                                });
-                                            }), ['order'], ['asc'])
-                                        });
-                                    }), ['order'], ['asc'])
-                                });
-                            }), ['order'], ['asc'])
+                    if (orders) {
+                        this.data = _.map(this.data, function(t) {
+                            return D.assign(t, {
+                                questions: _.orderBy(_.map(t.questions, function(q) {
+                                    var order = _.find(orders, ['questionId', q.id]),
+                                        attrOrder = order.attrOrder,
+                                        subsOrder = order.subsOrder || [];
+                                    return D.assign(q, {
+                                        order: order.order,
+                                        questionAttrCopys: _.orderBy(_.map(q.questionAttrCopys, function(attr) {
+                                            var aOrder = _.find(attrOrder, ['attrId', attr.id]);
+                                            return D.assign(attr, {
+                                                order: aOrder && aOrder.order
+                                            });
+                                        }), ['order'], ['asc']),
+                                        subs: _.orderBy(_.map(q.subs, function(s) {
+                                            var subOrder = _.find(subsOrder, ['questionId', s.id]),
+                                                sattrOrder = subOrder.attrOrder;
+                                            return D.assign(s, {
+                                                order: subOrder.order,
+                                                questionAttrCopys: _.orderBy(
+                                                    _.map(s.questionAttrCopys, function(sattr) {
+                                                        var saOrder = _.find(sattrOrder, ['attrId', sattr.id]);
+                                                        return D.assign(sattr, {
+                                                            order: saOrder && saOrder.order,
+                                                        });
+                                                    }), ['order'], ['asc'])
+                                            });
+                                        }), ['order'], ['asc'])
+                                    });
+                                }), ['order'], ['asc'])
+                            });
                         });
-                    });
 
-                    this.data = _.map(this.data, function(t, j) {
-                        return D.assign(t, {
-                            questions: _.map(t.questions, function(q, i) {
-                                return D.assign(q, {
-                                    index: i + 1,
-                                    status: (j === 0 && i === 0) ? itemStatus.CURRENT : itemStatus.INIT
-                                });
-                            })
+                        this.data = _.map(this.data, function(t, j) {
+                            return D.assign(t, {
+                                questions: _.map(t.questions, function(q, i) {
+                                    return D.assign(q, {
+                                        index: i + 1,
+                                        status: (j === 0 && i === 0)
+                                            ? itemStatus.CURRENT
+                                                : me.module.options.getCurrentStatus.call(me.module, q.id)
+                                    });
+                                })
+                            });
                         });
-                    });
+                    }
                 },
                 sortQuestion: function() {
                     var exam = this.module.store.models.exam.data,
@@ -483,7 +495,8 @@ exports.store = {
         },
         notice: function() {
             D.assign(this.models.state.data, {
-                noticed: true
+                noticed: true,
+                message: null
             });
             this.models.state.changed();
         },

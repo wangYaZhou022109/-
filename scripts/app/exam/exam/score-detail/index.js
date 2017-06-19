@@ -21,7 +21,8 @@ var options = require('./app/exam/exam/base-paper/index'),
     countChoose,
     countJudge,
     countSorting,
-    countOther;
+    countOther,
+    NO_SHOW_ANYTHING = -1;
 
 var setOptions = {
     store: {
@@ -41,14 +42,21 @@ var setOptions = {
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE,
-                            currentQuestion: types.getFirstQuestion(),
-                            correctNum: questionSummary.correctNum,
-                            errorNum: questionSummary.errorNum,
-                            noAnswerCount: questionSummary.noAnswerCount,
                             examineeTotalScore: 0,
                             hasPrevious: false,
                             hasNext: exam.paper.questions.length > 1
                         };
+
+                        //  查看详情全部不显示模式
+                        if (exam.showAnswerRule !== NO_SHOW_ANYTHING) {
+                            D.assign(this.data, {
+                                currentQuestion: types.getFirstQuestion(),
+                                correctNum: questionSummary.correctNum,
+                                errorNum: questionSummary.errorNum,
+                                noAnswerCount: questionSummary.noAnswerCount,
+                            });
+                        }
+
                         //  这里是马上查看详情，或者 点击查看详情，答案没有算完分，试卷全部是客观题
                         if (exam.examRecord.status > 5 || exam.paper.isSubjective === 0) {
                             D.assign(this.data, {
@@ -75,7 +83,7 @@ var setOptions = {
                             hasNext: exam.paper.questions.length > 1
                         });
 
-                        if (exam.examRecord.status >= 5) {
+                        if (exam.showAnswerRule !== NO_SHOW_ANYTHING && exam.examRecord.status >= 5) {
                             this.data.correctNum = _.filter(questions, function(q) {
                                 if (q.type === 6) {
                                     return _.every(q.subs, function(s) {
@@ -101,7 +109,7 @@ var setOptions = {
                             }).length;
                             this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
                         }
-                        if (exam.examRecord.status > 5) {
+                        if (exam.showAnswerRule !== exam.NO_SHOW_ANYTHING && exam.examRecord.status > 5) {
                             this.data.examineeTotalScore = exam.examRecord.score / 100;
                         }
                     },
@@ -190,7 +198,6 @@ var setOptions = {
                     me = this;
 
                 this.module.dispatch('clearModels');
-
                 if (data) {
                     this.models.exam.set(data.exam);
                     this.models.types.set(data.types);
@@ -199,9 +206,11 @@ var setOptions = {
                     this.models.state.initNoSujective(data.exam);
                 } else {
                     D.assign(this.models.exam.params, payload);
-                    return this.get(this.models.exam).then(function() {
+                    return this.get(this.models.exam, { loading: true }).then(function() {
                         var exam = me.models.exam.data;
-                        me.models.answer.init(exam.paper.questions);
+                        if (exam.showAnswerRule !== NO_SHOW_ANYTHING) {
+                            me.models.answer.init(exam.paper.questions);
+                        }
                         me.models.types.init(exam.paper.questions);
                         //  兼容提交试卷后，考试纪录排队列存储，状态还没有改变
                         if (exam.examRecord.status < 5) {

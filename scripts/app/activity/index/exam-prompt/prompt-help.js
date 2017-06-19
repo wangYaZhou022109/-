@@ -1,7 +1,8 @@
 var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
     signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
-    isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess;
+    isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess,
+    isReset, examStarting;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -16,10 +17,11 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 11: 查看证书 查看详情
 // 12: 考试已撤销
 // 13: 考试结束，没有详情
-// 14: 可考多次 不能马上查看详情
+// 14: 可考多次 不能马上查看详情,或者 第一次答卷，进行一半关闭了页面
 // 15: 报名时间截止
 // 16: 答卷完，能重新考，试卷处理中
 // 17: 答卷完，不能重新考，试卷处理中
+// 18: 重置
 exports.getUserStatusOfExam = function(exam) {
     var signUp = signUpExam(exam);
 
@@ -39,12 +41,14 @@ exports.getUserStatusOfExam = function(exam) {
         return 4;
     }
 
-    if (processExam(exam.startTime, exam.endTime)) {
+    if (processExam(exam.startTime, exam.endTime) || isReset(exam)) {
         if (signUp !== 0 && signUp !== 3) {
             return signUp;
         }
 
-        if (overExam(exam) && canExamMore(exam) && paperProcess(exam)) {
+        if (isReset(exam)) {
+            return 18;
+        } else if (overExam(exam) && canExamMore(exam) && paperProcess(exam)) {
             return 16;
         } else if (overExam(exam) && canExamMore(exam) && canViewDetailImmd(exam)) {
             return 6;
@@ -55,6 +59,9 @@ exports.getUserStatusOfExam = function(exam) {
         } else if (overExam(exam) && canExamMore(exam)) {
             return 14;
         } else if (isFirstTimeToExam(exam)) {
+            if (examStarting(exam)) {
+                return 14;
+            }
             return 5;
         } else if (overExam(exam)) {
             return 8;
@@ -75,13 +82,14 @@ exports.getUserStatusOfExam = function(exam) {
     return 0;
 };
 
+//  开考前
 beforeExam = function(startTime) {
     return new Date().getTime() < startTime;
 };
 
 processExam = function(startTime, endTime) {
     var currentTime = new Date().getTime();
-    return currentTime >= startTime && currentTime <= endTime;
+    return (currentTime >= startTime && currentTime <= endTime);
 };
 
 afterExam = function(endTime) {
@@ -158,4 +166,14 @@ hasExamed = function(exam) {
 paperProcess = function(exam) {
     return exam.examRecord
         && exam.examRecord.status < 4 && exam.examRecord.submitTime;
+};
+
+isReset = function(exam) {
+    return exam.examRecord && exam.examRecord.isReset === 1;
+};
+
+examStarting = function(exam) {
+    return exam.examRecord.id
+        && exam.examRecord.startTime
+        && exam.examRecord.status <= 4;
 };

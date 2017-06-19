@@ -94,8 +94,8 @@ items = {
             resource = section.resource || {},
             examScore = progress.examScore || 0,
             score = (examScore % 100) > 0 ? (examScore / 100).toFixed(1) : window.parseInt(examScore / 100),
-            btnText = { 0: '参与考试', 1: '查看详情', 2: '查看详情', 5: '查看详情', 6: '重新考试' },
-            statusText = { 1: '成绩：' + score, 2: '成绩：' + score, 5: '待评卷', 6: '成绩：' + score },
+            btnText = { 0: '参与考试', 1: '参与考试', 2: '查看详情', 5: '查看详情', 6: '重新考试' },
+            statusText = { 2: '成绩：' + score, 5: '待评卷', 6: '成绩：' + score },
             timeText;
         if (resource && resource.startTime && resource.endTime) {
             timeText = helper.dateMinute(resource.startTime) + ' 至 ' + helper.dateMinute(resource.endTime);
@@ -113,12 +113,12 @@ items = {
     },
     12: function(section) {
         var progress = section.progress || { finishStatus: 0 },
-            btnText = { 0: '参与调研', 2: '查看详情' };
+            btnText = { 0: '参与调研', 1: '参与调研', 2: '查看详情' };
         return { btnText: btnText[progress.finishStatus] };
     },
     13: function(section) {
         var progress = section.progress || { finishStatus: 0 },
-            btnText = { 0: '参与评估', 2: '查看详情' };
+            btnText = { 0: '参与评估', 1: '参与评估', 2: '查看详情' };
         return { btnText: btnText[progress.finishStatus] };
     },
     14: function(section) {

@@ -33,6 +33,7 @@ exports.store = {
             themeList.params.type = 2;
             courseList.params = {};
             this.get(courseList);
+            // this.models.targetList.clear();
             this.get(themeList).then(function(data) {
                 selectedList.params.classId = state.classId;
                 me.models.targetList.data = [];

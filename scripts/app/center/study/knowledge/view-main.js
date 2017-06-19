@@ -2,7 +2,8 @@ var _ = require('lodash/collection'),
     helpers = require('./app/util/helpers');
 exports.bindings = {
     list: true,
-    img: false
+    img: false,
+    logicDel: true
 };
 
 exports.events = {

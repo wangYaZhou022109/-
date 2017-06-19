@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    viewHandler;
 exports.bindings = {
     region: false,
     subject: false,
@@ -7,7 +8,20 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click viewPdf-*': 'viewPdf'
+    'click preview-*': 'preview'
+};
+
+exports.handlers = {
+    preview: function(id, e, ele) {
+        var type = ele.getAttribute('data-attachmentType');
+        var name = ele.getAttribute('data-name');
+        if (viewHandler[type]) {
+            viewHandler[type].call(this, {
+                id: id,
+                name: name
+            });
+        }
+    }
 };
 
 exports.dataForTemplate = {
@@ -17,22 +31,30 @@ exports.dataForTemplate = {
         _.map(subject.courseAttachments, function(attachment) {
             var atta = attachment;
             atta.downUrl = me.bindings.down.getFullUrl() + '?id=' + atta.attachmentId;
-            if (atta.attachmentType === 'application/pdf') {
-                atta.isView = true;
-            }
+            atta.canPreview = !!viewHandler[attachment.attachmentType];
             return atta;
         });
         return subject.courseAttachments;
     }
 };
 
-exports.handlers = {
-    viewPdf: function(id) {
-        var view = this.module.items.pdf,
-            subject = this.bindings.subject.data;
-        this.bindings.attachment.set(_.find(subject.courseAttachments, {
-            attachmentId: id
-        }));
-        this.app.viewport.modal(view);
+
+viewHandler = {
+    // audio
+    1: function(payload) {
+        var view = this.module.items['preview-pdf'];
+        this.app.viewport.ground(view, { name: payload.name, attachmentId: payload.id });
+    },
+    2: function(payload) {
+        var view = this.module.items['preview-img'];
+        this.app.viewport.ground(view, { name: payload.name, attachmentId: payload.id });
+    },
+    6: function(payload) {
+        var view = this.module.items['preview-video'];
+        this.app.viewport.modal(view, { name: payload.name, attachmentId: payload.id });
+    },
+    5: function(payload) {
+        var view = this.module.items['preview-audio'];
+        this.app.viewport.modal(view, { name: payload.name, attachmentId: payload.id });
     }
 };

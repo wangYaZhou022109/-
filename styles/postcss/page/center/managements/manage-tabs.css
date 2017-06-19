@@ -50,6 +50,24 @@
             & p {
                 color: var(--main-color);
             }
+            &.selected {
+                & p {
+                    margin-top: calc(var(--space)*3);
+                }
+            }
+        }
+        & .complete {
+            & .managements-tabs-item {
+                background-color: var(--custom-color-4);
+                & .managements-tabs-circle {
+                    & .managements-tabs-smallcircle {
+                        background-color: var(--custom-color-4);
+                    }
+                }
+            }
+            & p {
+                color: var(--custom-color-4);
+            }
         }
     }
 }

@@ -77,6 +77,7 @@ exports.store = {
                     isTemp: this.module.renderOptions.isTemp
                 })
             );
+
             return this.save(this.models.question).then(function() {
                 me.app.message.success('保存成功');
                 if (callback) {
@@ -106,12 +107,18 @@ exports.store = {
                 organization: {
                     id: data.id,
                     name: data.text
-                }
+                },
+                questionDepot: {},
+                priority: true,
+            });
+            D.assign(this.models.state.data, {
+                questionDepot: {}
             });
             this.models.state.changed();
         },
         changeType: function(payload) {
             D.assign(this.models.state.data, payload);
+            D.assign(this.models.tempAddQuestionOptions.data, payload);
             this.models.state.changed();
         }
     }
@@ -143,7 +150,7 @@ exports.buttons = function() {
             if (Number(optionData.type) === 6) {
                 _.forEach(optionData.questionAttrs, function(q) {
                     var qq = q;
-                    qq.score = q.score * 100;
+                    qq.score = q.score;
                 });
             }
             result = getData(
@@ -152,7 +159,7 @@ exports.buttons = function() {
                     optionData,
                     itemPoolView.getData(),
                     mainView.getData(),
-                    { score: Number(optionData.score * 100).toFixed(0) }
+                    { score: Number(optionData.score) }
                 )
             );
             mod.clear();
@@ -161,7 +168,7 @@ exports.buttons = function() {
             }
 
             if (Number(result.type) === 6) result.subs = result.questionAttrs;
-            this.store.models.state.set(D.assign({}, result, { score: result.score / 100 }));
+            this.store.models.state.set(result);
             this.app.viewport.modal(this.items.preview);
             return false;
         }
@@ -187,7 +194,7 @@ exports.buttons = function() {
             if (Number(optionData.type) === 6) {
                 _.forEach(optionData.questionAttrs, function(q) {
                     var qq = q;
-                    qq.score = q.score * 100;
+                    qq.score = (q.score * 100).toFixed(0);
                 });
             }
             result = getData(
@@ -214,11 +221,12 @@ exports.buttons = function() {
             var me = this,
                 savePromise = save.fn.call(this);
             if (savePromise) {
-                savePromise.then(function() {
-                    return me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
+                return savePromise.then(function() {
+                    me.dispatch('init', me.store.models.tempAddQuestionOptions.data).then(function() {
                         me.store.models.state.changed();
                         me.store.models.itemPool.changed();
                     });
+                    return false;
                 });
             }
             return false;

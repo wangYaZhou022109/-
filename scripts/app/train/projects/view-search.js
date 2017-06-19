@@ -6,11 +6,16 @@ exports.actions = {
 
 exports.components = [{
     id: 'month',
-    name: 'flatpickr',
-    options: {
-        dateFormat: 'Y-m'
-    }
+    name: 'monthpicker'
 }];
+
+// exports.components = [{
+//     id: 'month',
+//     name: 'flatpickr',
+//     options: {
+//         dateFormat: 'Y-m'
+//     }
+// }];
 
 exports.dataForActions = {
     search: function() {

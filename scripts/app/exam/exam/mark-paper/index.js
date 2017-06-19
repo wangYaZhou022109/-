@@ -17,23 +17,20 @@ var options = require('./app/exam/exam/base-paper/index'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    $ = require('jquery'),
+    // $ = require('jquery'),
     validator = require('./app/ext/views/form/validators'),
-    markers = require('./app/ext/views/form/markers'),
+    // markers = require('./app/ext/views/form/markers'),
+    maps = require('./app/util/maps'),
     checkScore,
-    refreshParentWindow;
+    refreshParentWindow,
+    checkQuestionGrade;
 
 var setOptions = {
     store: {
         models: {
             exam: {
                 type: 'localStorage',
-                url: '../exam/exam/exam-mark-paper/front',
-                mixin: {
-                    getExam: function() {
-                        return this.data;
-                    }
-                }
+                url: '../exam/exam/exam-mark-paper/front'
             },
             grades: {
                 type: 'localStorage',
@@ -94,32 +91,51 @@ var setOptions = {
                     },
                     check: function(types) {
                         var me = this,
-                            goals = $('[name="goal"]'),
-                            flag = _.every(goals, function(goal) {
-                                return checkScore.call(me.module, goal);
-                            });
+                            // goals = $('[name="goal"]'),
+                            errors = [];
+                            // flag = _.every(goals, function(goal) {
+                            //     return checkScore.call(me.module, goal);
+                            // });
 
-                        if (!flag) {
-                            return false;
-                        }
+                        // if (!flag) {
+                        //     return false;
+                        // }
 
-                        return _.every(types, function(t) {
-                            var f = _.every(t.questions, function(q) {
-                                var grade = _.find(me.data, ['key', q.id]);
-                                if (q.type === 6) {
-                                    return _.every(grade.value, function(v) {
-                                        return v.value !== '';
-                                    });
-                                }
-                                return grade.value !== '';
+                        _.forEach(types, function(t) {
+                            _.forEach(t.questions, function(q) {
+                                var grade = _.find(me.data, ['key', q.id]),
+                                    error = checkQuestionGrade.call(me, grade.value, q);
+                                if (error.index) errors.push(error);
                             });
-                            return f;
                         });
+
+                        return errors;
+
+                        // return _.every(types, function(t) {
+                        //     var f = _.every(t.questions, function(q) {
+                        //         var grade = _.find(me.data, ['key', q.id]);
+                        //         if (q.type === 6) {
+                        //             return _.every(grade.value, function(v) {
+                        //                 return v.value !== '';
+                        //             });
+                        //         }
+                        //         return grade.value !== '';
+                        //     });
+                        //     return f;
+                        // });
                     }
                 }
             },
             form: {
                 url: '../exam/exam/mark-paper-info'
+            },
+            errors: {
+                data: [],
+                mixin: {
+                    saveError: function(data) {
+                        this.data.push(data);
+                    }
+                }
             }
         },
         callbacks: {
@@ -152,11 +168,17 @@ var setOptions = {
                 }
             },
             submitGrade: function() {
-                var exam = this.models.exam.getExam(),
-                    me = this;
+                var exam = this.models.exam.data,
+                    state = this.models.state.data,
+                    me = this,
+                    errors = this.models.grades.check(this.models.types.data);
 
-                if (!this.models.grades.check(this.models.types.data)) {
-                    this.app.message.error(strings.get('exam.mark-paper-check'));
+                if (errors.length > 0) {
+                    // this.app.message.error(strings.get('exam.mark-paper-check'));
+                    D.assign(state, { errors: errors });
+                    this.app.viewport.modal(this.module.items['exam-notes']);
+                    this.models.types.initStatus();
+                    this.models.types.changed();
                     return false;
                 }
 
@@ -193,6 +215,8 @@ var target = D.assign({}, {
     getCurrentStatus: function(id) {
         var grades = this.store.models.grades.data || [],
             grade = _.find(grades, ['key', id]),
+            errors = this.store.models.errors.data,
+            error = _.find(errors, ['questionId', id]),
             reading;
         if (grade && grade.value.length > 0) {
             reading = _.some(grade.value, function(v) {
@@ -204,40 +228,63 @@ var target = D.assign({}, {
         } else if (grade && grade.value !== '' && grade.value !== 0) {
             return itemStatus.ACTIVE;
         }
+        if (error) {
+            return itemStatus.CHECK;
+        }
         return itemStatus.INIT;
     }
 });
 
 module.exports = target;
 
-checkScore = function(e) {
-    var el = e,
-        value = $(el).val();
-
-    markers.text.valid($(el));
+checkScore = function(value) {
+    var str = [];
     if (!validator.required.fn(value)) {
-        this.app.message.error('必填项');
-        return false;
+        str.push('必填项');
     }
 
-    if (!validator.digits.fn(value)) {
-        this.app.message.error('只能填整数');
-        $(el).val('');
-        return false;
+    if (!validator.number.fn(value)) {
+        str.push('只能填数字');
     }
 
     if (!validator.keepDecimal.fn(value, 1)) {
-        this.app.message.error('只能保留1位小数');
-        $(el).val('');
-        return false;
+        str.push('只能保留1位小数');
     }
 
     if (!validator.range.fn(value, 0, 100)) {
-        this.app.message.error('只能填0分~100分');
-        $(el).val('');
-        return false;
+        str.push('只能填0分~100分');
     }
-    return true;
+    return str;
+};
+
+checkQuestionGrade = function(value, q) {
+    var f,
+        errors = this.module.store.models.errors,
+        questionTypes = maps.get('question-types');
+
+    if (q.type === 6) {
+        f = _.filter(_.map(value, function(v) {
+            var str = checkScore(v.value);
+            if (str.length > 0) {
+                return str;
+            }
+            return [];
+        }), function(s) {
+            return s.length > 0;
+        });
+    } else {
+        f = checkScore(value);
+    }
+    if (f.length > 0) {
+        D.assign(q, { status: itemStatus.CHECK });
+        errors.saveError({ questionId: q.id });
+        return {
+            type: _.find(questionTypes, ['key', q.type.toString()]).value,
+            index: q.index,
+            errorStr: f.join(',')
+        };
+    }
+    return {};
 };
 
 //  暂时用这种方式刷新父窗口

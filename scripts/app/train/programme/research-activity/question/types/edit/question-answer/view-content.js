@@ -22,6 +22,7 @@ exports.mixin = {
             state = this.bindings.state.data;
         data.questionAttrs = [{ value: '', name: '', type: 5 }];
         data.content = this.components.content.html();
+        data.contentText = this.components.content.getText();
         data.type = state.type;
         data.id = state.id;
         return data;

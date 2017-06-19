@@ -32,11 +32,12 @@ exports.components = [{
 exports.mixin = {
     getResult: function() {
         var data = {},
-            value = this.components.answer.html(),
+            value = $(this.$$('[name="answer"]')).val(),
             scoreItem = this.module.items.score,
             state = this.bindings.state.data;
         data.questionAttrs = [{ value: value, name: value, type: 5 }];
         data.content = this.components.content.html();
+        data.contentText = this.components.content.text();
         if (!this.module.renderOptions.hideScore) {
             data.score = scoreItem.$('score').value;
         }

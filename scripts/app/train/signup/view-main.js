@@ -40,6 +40,17 @@ exports.dataForActions = {
         var memberId = $(this.$$('[name="id"]')).val();
         var classId = this.bindings.classSignupInfo.data.classId;
         var className = this.bindings.classSignupInfo.data.classInfo.className;
+        var signupCode;
+        if (this.bindings.state.data.activity) {
+            signupCode = $(this.$('signupCode')).val();
+            if (signupCode === '') {
+                this.app.message.error('请输入报名码');
+                return false;
+            } else if (signupCode !== this.bindings.classSignupInfo.data.signupCode) {
+                this.app.message.error('请输入正确的报名码');
+                return false;
+            }
+        }
         if (!validators.phone.fn(phoneNumber) || phoneNumber === '') {
             this.app.message.error('请输入正确的手机号');
             return false;

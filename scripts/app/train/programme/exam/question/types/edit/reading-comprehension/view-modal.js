@@ -7,7 +7,8 @@ exports.bindings = {
 exports.type = 'dynamic';
 
 exports.getEntity = function() {
-    return this.renderOptions.data;
+    var question = this.renderOptions.data;
+    return question;
 };
 
 exports.getEntityModuleName = function(id, question) {
@@ -32,7 +33,6 @@ exports.buttons = [{
             sub = this.bindings.sub.data,
             isExist = false,
             i = 0;
-
         if (!mod.isValidate() || !question) return false;
         for (i; i < sub.questions.length; i++) {
             if (sub.questions[i].id === question.id) {
