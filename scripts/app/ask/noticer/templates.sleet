@@ -3,9 +3,9 @@ module
     div(data-region='list')
 
 view('list') 
-    .section
-        span.h3 关注我的人
-        span.more#follow-me more
+    .section.ask-noticer.clearfix
+        span.h3.pull-left 关注我的人
+        span.more#follow-me.pull-right more
         .layout-mt-small.user-picture
             .grid-row
                 each(page)
