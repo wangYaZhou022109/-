@@ -363,6 +363,7 @@ var setOptions = {
                 var me = this,
                     f = true,
                     state = this.models.state,
+                    exam = this.models.exam,
                     countDown = this.module.items['count-down'].getEntities(),
                     examRecordId = this.models.exam.data.examRecord.id,
                     lastCacheTime = new Date().getTime(),
@@ -397,7 +398,7 @@ var setOptions = {
 
                                 //  提交成功后弹出提示框
                                 return me.module.dispatch('showTips', {
-                                    tips: state.paper.isSubjective === 1
+                                    tips: exam.data.paper.isSubjective === 1
                                         ? strings.get('exam.answer-paper.submit-success-mark')
                                             : strings.get('exam.answer-paper.submit-success')
                                 }).then(function() {
