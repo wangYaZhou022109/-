@@ -102,6 +102,9 @@ exports.mixin = {
             if (!/^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(score)) {
                 this.app.message.error('评分只能输入数字!');
                 return false;
+            } else if (score.length > 4) {
+                this.app.message.error('评分最长4位数字!');
+                return false;
             } else if (arr.length > 1 && arr[1].length > 1) {
                 this.app.message.error('最多只能保留小数点1位!');
                 return false;
