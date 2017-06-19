@@ -29,36 +29,36 @@ view('offline')
                         i.iconfont.icon-minus-full.text-main-color.m-right.pointer#minimize-1
                 table.table#minitable-1
                     tr
-                        th 日期
-                        th 时间
-                        th 课程名称
-                        th 讲师名称
-                        th 讲师单位
-                        th 讲师职务
-                        th 课酬实付
-                        th 课件
+                        th.border.right 日期
+                        th.border.right 时间
+                        th.border.right 课程名称
+                        th.border.right 讲师名称
+                        th.border.right 讲师单位
+                        th.border.right 讲师职务
+                        th.border.right 课酬实付
+                        th(class='border right')&if(isGrant) 课件
                         if(isGrant)
                             th 操作
-                    each(offlineCourseList) > tr
+                    each(offlineCourseList) > tr.border.bottom
                         if(isRowspan)
-                            td(rowspan=rowspan) > date(courseDate)
-                        td > echo(startTime + '-' + endTime)
-                        td
+                            td.border.right(rowspan=rowspan) > date(courseDate)
+                        td.border.right > echo(startTime + '-' + endTime)
+                        td.border.right
                             label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
                             input(id='input-name-offline-' + id value=name style='display:none;' data-name='id' data-value=id)
-                        td
+                        td.border.right
                             label(id='label-teacher-offline-' + id data-name='id' data-value=id) > echo(teacherName + '(点击可修改)')
                             input(id='input-teacher-offline-' + id value=teacherName style='display:none;' data-name='id' data-value=id)
-                        td
+                        td.border.right
                             label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
                             input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
-                        td
-                            label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
-                            input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
-                        td
+                        td.border.right
+                            label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle)
+                            #  input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
+                        td.border.right
                             label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
                             input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
-                        td > i.iconfont.icon-tag.custom-color-5(id='courseware-'+id data-name='id' data-value=id)
+                        td(class='border right')&if(isGrant) > i.iconfont.icon-tag.custom-color-5(id='courseware-'+id data-name='id' data-value=id)
                         if(isGrant)
                             td
                                 i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-offline-'+id data-name='id' data-value=id)
@@ -77,16 +77,16 @@ view('online')
                     i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-2
             table.table#minitable-2(style='display:none')
                 tr
-                    th 主题
-                    th 课程名称
-                    th 是否必修
+                    th.border.right 主题
+                    th.border.right 课程名称
+                    th(class='border right')&if(isGrant) 是否必修
                     if(isGrant)
                         th 操作
-                each(onlineCourseList) > tr
+                each(onlineCourseList) > tr.border.bottom
                     if(isRowspan)
-                        td(rowspan=rowspan) > echo(themeName)
-                    td > echo(resourceName)
-                    td
+                        td.border.right(rowspan=rowspan) > echo(themeName)
+                    td.border.right > echo(resourceName)
+                    td(class='border right')&if(isGrant)
                         label(id='label-online-' + id data-name='id' data-value=id) > map('yes-or-no' isRequired)
                         select(id='input-online-' + id style='display:none;' data-name='id' data-value=id)
                             option(value='1')('selected')&if(isRequired1) > map('yes-or-no' '1')
@@ -110,19 +110,19 @@ view('questionnaire')
                     i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-3
             table.table#minitable-3(style='display:none')
                 tr
-                    th 序号
-                    th 问卷名称
-                    th 类型
-                    th 开始时间
-                    th 结束时间
+                    th.border.right 序号
+                    th.border.right 问卷名称
+                    th.border.right 类型
+                    th.border.right 开始时间
+                    th(class='border right')&if(isGrant) 结束时间
                     if(isGrant)
                         th 操作
-                each(questionnaireList) > tr
-                    td > echo(i)
-                    td > echo(resourceName)
-                    td > map('class-questionnaire-type' type)
-                    td > dateTime(startTime)
-                    td > dateTime(endTime)
+                each(questionnaireList) > tr.border.bottom
+                    td.border.right > echo(i)
+                    td.border.right > echo(resourceName)
+                    td.border.right > map('class-questionnaire-type' type)
+                    td.border.right > dateTime(startTime)
+                    td(class='border right')&if(isGrant) > dateTime(endTime)
                     if(isGrant)
                         td
                             i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-qnr-'+id data-name='id' data-value=id startTime=startTime endTime=endTime)
@@ -142,17 +142,17 @@ view('task')
                     i.iconfont.icon-add-full.text-main-color.m-right.pointer#minimize-4
             table.table#minitable-4(style='display:none')
                 tr
-                    th 序号
-                    th 作业名称
-                    th 开始时间
-                    th 结束时间
+                    th.border.right 序号
+                    th.border.right 作业名称
+                    th.border.right 开始时间
+                    th(class='border right')&if(isGrant) 结束时间
                     if(isGrant)
                         th 操作
-                each(taskList) > tr
-                    td > echo(i)
-                    td > echo(name)
-                    td > dateTime(startTime)
-                    td > dateTime(endTime)
+                each(taskList) > tr.border.bottom
+                    td.border.right > echo(i)
+                    td.border.right > echo(name)
+                    td.border.right > dateTime(startTime)
+                    td(class='border right')&if(isGrant) > dateTime(endTime)
                     if(isGrant)
                         td
                             i.pointer.m-right.iconfont.icon-edit-solid.custom-color-4(id='edit-task-'+id data-name='id' data-value=id)

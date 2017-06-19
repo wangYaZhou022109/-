@@ -38,6 +38,10 @@ exports.store = {
                     startTime: payload.startTime,
                     endTime: payload.endTime
                 };
+                this.models.research.data = {
+                    startTime: payload.startTime,
+                    endTime: payload.endTime
+                };
                 return this.get(this.models.research);
             }
             D.assign(this.models.research.data, {
