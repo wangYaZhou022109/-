@@ -46,7 +46,9 @@ exports.getUserStatusOfExam = function(exam) {
             return signUp;
         }
 
-        if (overExam(exam) && canExamMore(exam) && paperProcess(exam)) {
+        if (isReset(exam)) {
+            return 18;
+        } else if (overExam(exam) && canExamMore(exam) && paperProcess(exam)) {
             return 16;
         } else if (overExam(exam) && canExamMore(exam) && canViewDetailImmd(exam)) {
             return 6;
@@ -56,8 +58,6 @@ exports.getUserStatusOfExam = function(exam) {
             return 7;
         } else if (overExam(exam) && canExamMore(exam)) {
             return 14;
-        } else if (isReset(exam)) {
-            return 18;
         } else if (isFirstTimeToExam(exam)) {
             if (examStarting(exam)) {
                 return 14;
@@ -173,5 +173,7 @@ isReset = function(exam) {
 };
 
 examStarting = function(exam) {
-    return exam.examRecord.id && exam.examRecord.status <= 4;
+    return exam.examRecord.id
+        && exam.examRecord.startTime
+        && exam.examRecord.status <= 4;
 };

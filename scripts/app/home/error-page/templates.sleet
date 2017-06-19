@@ -1,0 +1,7 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .content-empty > .img-box.img-type-1 + p > .h1.error > echo(state.message)

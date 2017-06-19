@@ -3,6 +3,7 @@ var WS = window.WebSocket || null,
     _ = require('lodash/collection'),
     D = require('drizzlejs'),
     messages = require('./errors'),
+    specialError = require('./special-errors'),
     timeout = 30000,
     cache = {},
     Socket, errors, handleError, doAjax, toCacheKey;
@@ -15,7 +16,11 @@ errors = {
         app.message.error(messages.get('1'));
     },
     422: function(app, obj) {
-        app.message.error(messages.get(obj.errorCode || '2'));
+        if (specialError.hasCode(obj.errorCode || '')) {
+            app.navigate('home/error-page/' + obj.errorCode);
+        } else {
+            app.message.error(messages.get(obj.errorCode || '2'));
+        }
     },
     500: function(app) {
         app.message.error(messages.get('3'));
