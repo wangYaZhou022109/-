@@ -134,8 +134,10 @@ ExamSocket = {
         }
 
         if (msg && msg.indexOf('joined:') > -1) {
-            this.requests[msg.substring(7)].resolve();
-            delete this.requests[msg.substring(7)];
+            if (ExamSocket.requests[msg.substring(7)].resolve) {
+                ExamSocket.requests[msg.substring(7)].resolve();
+                delete ExamSocket.requests[msg.substring(7)];
+            }
         }
     },
 
@@ -148,7 +150,7 @@ ExamSocket = {
         this.stopHeartBeat();
         this.heartBeat = setInterval(function() {
             var current = new Date().getTime(),
-                delta = current - this.lastTime;
+                delta = current - me.lastTime;
 
             if (!me.isActive()) {
                 me.stopHeartBeat();
