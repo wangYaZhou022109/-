@@ -111,4 +111,4 @@ view('relatedquestions')
         .layout-mt-small.m-top
             each(question)
                 .block.layout-mt-small.m-top 
-                    a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)
+                    a.text-overflow(href='#/ask/sharedetails/'+id)> echo(title)

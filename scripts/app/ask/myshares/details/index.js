@@ -54,7 +54,7 @@ exports.store = {
             }
         },
         expert: { url: '../ask-bar/myquiz/findExpert' },
-        question: { url: '../ask-bar/myquiz/findQuestion' },
+        question: { url: '../ask-bar/myquiz/findShare' },
     },
     callbacks: {
         refreshrelpy: function() {
