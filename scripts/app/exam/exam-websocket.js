@@ -133,12 +133,12 @@ ExamSocket = {
             callbacks[TIME_EXPAND](msg.substring(11));
         }
 
-        if (msg && msg.indexOf('joined:') > -1) {
-            if (ExamSocket.requests[msg.substring(7)].resolve) {
-                ExamSocket.requests[msg.substring(7)].resolve();
-                delete ExamSocket.requests[msg.substring(7)];
-            }
-        }
+        // if (msg && msg.indexOf('joined:') > -1) {
+        //     if (ExamSocket.requests[msg.substring(7)].resolve) {
+        //         ExamSocket.requests[msg.substring(7)].resolve();
+        //         delete ExamSocket.requests[msg.substring(7)];
+        //     }
+        // }
     },
 
     onClose: function(e) {
