@@ -21,6 +21,16 @@ exports.store = {
             data: [],
             params: { page: 1, size: 10 },
             mixin: {
+                delrefresh: function(id) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        if (this.data.id !== id) {
+                            newData.push(d);
+                        }
+                    });
+                    this.data = newData;
+                    this.data.changed();
+                },
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
@@ -103,6 +113,10 @@ exports.store = {
         },
         refresh: function() {
             this.models.callback();
+        },
+        delrefresh: function(payload) {
+            var id = payload;
+            this.models.page.delrefresh(id);
         },
         set: function(payload) {
             this.models.callback = payload;

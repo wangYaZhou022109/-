@@ -258,14 +258,20 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    delquestion: function() {
+    delquestion: function(data) {
+        console.log(data);
         this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', data);
     },
-    delshare: function() {
+    delshare: function(data) {
+        console.log(data);
         this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', data);
     },
-    deldiscuss: function() {
+    deldiscuss: function(data) {
+        console.log(data);
         this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', data);
     }
 };
 
