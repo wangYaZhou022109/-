@@ -3,8 +3,8 @@ var WS = window.WebSocket || null,
     timeout = 5000,
     DELTA = 45000,
     ExamSocket = {},
-    STOP = 'stop',
-    RUNNING = 'running',
+    // STOP = 'stop',
+    // RUNNING = 'running',
     SUBMIT_PAPER = 'submitPaper',
     TIME_EXPAND = 'timeExpand';
 
@@ -21,101 +21,29 @@ ExamSocket = {
     open: function(app, examId, callbacks) {
         var prefix = app.options.urlRoot + '/exam',
             url = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-
         // url += window.location.host + window.location.pathname;
         url += window.location.host;
 
         if (url.slice(-1) === '/') url = url.slice(0, -1);
 
-        D.assign(ExamSocket, {
+        D.assign(this, {
             app: app,
             url: url + prefix + '/ws/exam',
             requests: {},
             lastTime: new Date().getTime(),
             examId: examId,
-            callbacks: callbacks,
-            state: STOP
+            callbacks: callbacks
+            // state: STOP
         });
 
-        ExamSocket.connect();
+        this.connect();
     },
 
     //  创建websocket，进行连接
     connect: function() {
-        ExamSocket.state = RUNNING;
+        if (this.isActive()) return;
 
-        if (ExamSocket.isActive()) ExamSocket.socket.close();
-
-        ExamSocket.socket = ExamSocket.createSocket(ExamSocket.url);
-    },
-
-    //  发送消息
-    send: function(data) {
-        var opt = { headers: {} },
-            oauth = ExamSocket.app.global.OAuth,
-            requests = ExamSocket.requests,
-            timeoutId,
-            //  设置请求权限
-            setHeaderAuth = function() {
-                opt.headers.Authorization = oauth.tokenType + '__' + oauth.token.access_token;
-            };
-
-        if (oauth) setHeaderAuth();
-
-        D.assign(opt, {
-            data: data,
-            id: D.uniqueId('S'),
-            url: ''
-        });
-
-        ExamSocket.socket.send(JSON.stringify(opt));
-        ExamSocket.lastTime = new Date().getTime();
-
-        //  定时清除请求缓存
-        timeoutId = setTimeout(function() {
-            if (!requests[opt.id]) return;
-            requests[opt.id].reject();
-            delete requests[opt.id];
-        }, timeout);
-
-        return ExamSocket.app.Promise.create(function(resolve, reject) {
-            requests[opt.id] = { resolve: resolve, reject: reject, timeoutId: timeoutId };
-        });
-    },
-
-    close: function() {
-        ExamSocket.state = STOP;
-        if (ExamSocket.isActive()) ExamSocket.socket.close();
-        delete ExamSocket.socket;
-    },
-
-    // 连接后发送消息
-    onOpen: function() {
-        ExamSocket.send({ examId: ExamSocket.examId }).then(function() {
-            ExamSocket.startHeartBeat();
-        }, function() {
-            if (ExamSocket.state !== STOP) ExamSocket.connect();
-        });
-    },
-
-    //  回调业务
-    onMessage: function(msg) {
-        var callbacks = ExamSocket.callbacks;
-
-        if (msg === SUBMIT_PAPER) callbacks[SUBMIT_PAPER]();
-
-        if (msg && msg.indexOf('timeExpand_') > -1) {
-            callbacks[TIME_EXPAND](msg.substring(11));
-        }
-
-        if (msg && msg.indexOf('joined:') > -1) {
-            ExamSocket.requests[msg.substring(7)].resolve();
-            delete ExamSocket.requests[msg.substring(7)];
-        }
-    },
-
-    onClose: function() {
-        if (ExamSocket.state !== STOP) ExamSocket.connect();
+        this.socket = this.createSocket(ExamSocket.url);
     },
 
     createSocket: function(url) {
@@ -146,31 +74,103 @@ ExamSocket = {
         return socket;
     },
 
-    startHeartBeat: function() {
-        ExamSocket.stopHeartBeat();
-        ExamSocket.heartBeat = setInterval(function() {
-            var current = new Date().getTime(),
-                delta = current - ExamSocket.lastTime;
+    //  发送消息
+    send: function(data) {
+        var opt = { headers: {} },
+            oauth = this.app.global.OAuth,
+            requests = this.requests,
+            timeoutId,
+            //  设置请求权限
+            setHeaderAuth = function() {
+                opt.headers.Authorization = oauth.tokenType + '__' + oauth.token.access_token;
+            };
 
-            if (!ExamSocket.isActive()) {
-                ExamSocket.stopHeartBeat();
+        if (oauth) setHeaderAuth();
+
+        D.assign(opt, {
+            data: data,
+            id: D.uniqueId('S'),
+            url: ''
+        });
+
+        this.socket.send(JSON.stringify(opt));
+        this.lastTime = new Date().getTime();
+
+        //  定时清除请求缓存
+        timeoutId = setTimeout(function() {
+            if (!requests[opt.id]) return;
+            requests[opt.id].reject();
+            delete requests[opt.id];
+        }, timeout);
+
+        return this.app.Promise.create(function(resolve, reject) {
+            requests[opt.id] = { resolve: resolve, reject: reject, timeoutId: timeoutId };
+        });
+    },
+
+    close: function() {
+        if (this.isActive()) this.socket.close();
+        delete this.socket;
+    },
+
+    // 连接后发送消息
+    onOpen: function() {
+        var me = this;
+        this.send({ examId: this.examId }).then(function() {
+            me.startHeartBeat();
+        }, function() {
+            me.connect();
+        });
+    },
+
+    //  回调业务
+    onMessage: function(msg) {
+        var callbacks = this.callbacks;
+
+        if (msg === SUBMIT_PAPER) callbacks[SUBMIT_PAPER]();
+
+        if (msg && msg.indexOf('timeExpand_') > -1) {
+            callbacks[TIME_EXPAND](msg.substring(11));
+        }
+
+        // if (msg && msg.indexOf('joined:') > -1) {
+        //     if (ExamSocket.requests[msg.substring(7)].resolve) {
+        //         ExamSocket.requests[msg.substring(7)].resolve();
+        //         delete ExamSocket.requests[msg.substring(7)];
+        //     }
+        // }
+    },
+
+    onClose: function(e) {
+        if (e.code === 1013) this.connect();
+    },
+
+    startHeartBeat: function() {
+        var me = this;
+        this.stopHeartBeat();
+        this.heartBeat = setInterval(function() {
+            var current = new Date().getTime(),
+                delta = current - me.lastTime;
+
+            if (!me.isActive()) {
+                me.stopHeartBeat();
                 return;
             }
 
             if (delta > DELTA) {
-                ExamSocket.socket.send('PING');
-                ExamSocket.lastTime = new Date().getTime();
+                me.socket.send('PING');
+                me.lastTime = new Date().getTime();
             }
         }, 10000);
     },
 
     stopHeartBeat: function() {
-        if (!ExamSocket.heartBeat) return;
-        clearInterval(ExamSocket.heartBeat);
-        delete ExamSocket.heartBeat;
+        if (!this.heartBeat) return;
+        clearInterval(this.heartBeat);
+        delete this.heartBeat;
     },
 
     isActive: function() {
-        return ExamSocket.socket && ExamSocket.socket.readyState === WS.OPEN;
+        return this.socket && this.socket.readyState === WS.OPEN;
     }
 };
