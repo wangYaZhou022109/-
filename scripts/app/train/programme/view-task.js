@@ -79,3 +79,11 @@ exports.dataForTemplate = {
         return false;
     }
 };
+
+exports.mixin = {
+    updataCss: function() {
+        $(this.$('minitable-4')).toggle();
+        $(this.$('min-4')).text('最小化');
+        $(this.$('minimize-4')).addClass('icon-minus-full').removeClass('icon-add-full');
+    }
+};

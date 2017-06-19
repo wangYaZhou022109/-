@@ -39,9 +39,9 @@ view('offline')
                         th 课件
                         if(isGrant)
                             th 操作
-                    each(offlineCourseList) > tr
+                    each(offlineCourseList) > tr.border.bottom
                         if(isRowspan)
-                            td(rowspan=rowspan) > date(courseDate)
+                            td.border.right(rowspan=rowspan) > date(courseDate)
                         td > echo(startTime + '-' + endTime)
                         td
                             label(id='label-name-offline-' + id data-name='id' data-value=id) > echo(name + '(点击可修改)')
@@ -53,8 +53,8 @@ view('offline')
                             label(id='label-torg-offline-' + id data-name='id' data-value=id) > echo(teacherOrganization + '(点击可修改)')
                             input(id='input-torg-offline-' + id value=teacherOrganization style='display:none;' data-name='id' data-value=id)
                         td
-                            label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle + '(点击可修改)')
-                            input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
+                            label(id='label-title-offline-' + id data-name='id' data-value=id) > echo(teacherTitle)
+                            #  input(id='input-title-offline-' + id value=teacherTitle style='display:none;' data-name='id' data-value=id)
                         td
                             label(id='label-paidPay-offline-' + id data-name='id' data-value=id) > echo(courseSalary.paidPay + '(点击可修改)')
                             input(id='input-paidPay-offline-' + id value=courseSalary.paidPay style='display:none;' data-name='id' data-value=id)
@@ -82,9 +82,9 @@ view('online')
                     th 是否必修
                     if(isGrant)
                         th 操作
-                each(onlineCourseList) > tr
+                each(onlineCourseList) > tr.border.bottom
                     if(isRowspan)
-                        td(rowspan=rowspan) > echo(themeName)
+                        td.border.right(rowspan=rowspan) > echo(themeName)
                     td > echo(resourceName)
                     td
                         label(id='label-online-' + id data-name='id' data-value=id) > map('yes-or-no' isRequired)

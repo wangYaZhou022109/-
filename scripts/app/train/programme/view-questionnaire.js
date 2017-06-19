@@ -162,6 +162,7 @@ exports.actionCallbacks = {
                 });
             },
             result;
+        me.updataCss();
         if (isAdd === 1) {
             result = editHander[type].call(this, {
                 id: id,
@@ -255,5 +256,13 @@ viewHander = {
         var questionary = payload.questionary;
         var view = this.module.items['train/programme/research-activity/preview-questionary'];
         this.app.viewport.modal(view, { researchId: questionary.resourceId, name: questionary.resourceName });
+    }
+};
+
+exports.mixin = {
+    updataCss: function() {
+        $(this.$('minitable-3')).toggle();
+        $(this.$('min-3')).text('最小化');
+        $(this.$('minimize-3')).addClass('icon-minus-full').removeClass('icon-add-full');
     }
 };
