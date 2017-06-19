@@ -126,6 +126,9 @@ exports.dataForActions = {
         if (payload.memberIds === '') {
             this.app.message.error('审核人为必填项！');
             return false;
+        } else if (payload.startTime > payload.endTime) {
+            this.app.message.error('结束时间必须大于开始时间！');
+            return false;
         }
         return this.validate() ? payload : false;
     },
