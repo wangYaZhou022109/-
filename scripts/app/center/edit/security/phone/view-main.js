@@ -30,6 +30,10 @@ exports.actions = {
 exports.dataForActions = {
     savePhone: function() {
         var phone = this.$('phone').value;
+        if (!phone) {
+            this.app.message.error('手机号输入为空');
+            return false;
+        }
         if (!validators.phone.fn(phone)) {
             this.app.message.error('手机号输入不正确');
             return false;
