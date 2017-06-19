@@ -17,7 +17,9 @@ view('content') > form
                 .user-info
                     a(href='#') > echo( member.fullName)
                     span > echo('回复')
-                    span > echo(toMember.fullName + '   ' + time)
+                    span > echo(toMember.fullName)
+                    .text-right    
+                        span > dateMinute(createTime)
                 .comment-text > echo(content)
                 .comment-operation
                     .pull-left 
@@ -29,6 +31,7 @@ view('content') > form
                             .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
                         .item > span(id='answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum2 +'）')
                     .text-right
+                        .item > span(id ='report-' + 6 + '_' + id +'_' + createMemberId data-name='id' data-value= 6 +'_' + id+'_' + createMemberId) > string('report')
                         .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                 div(id='replyandreply-answer-'+id style='display:none')
                     textarea.input.w-full.block(name='content-' + id value='' )

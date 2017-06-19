@@ -16,12 +16,15 @@ view('content') > form
                 .user-info
                     a(href='#') > echo( member.fullName)
                     span > echo('回复')
-                    span > echo(toMember.fullName + '   ' + time)
+                    span > echo(toMember.fullName)
+                    .text-right
+                        span > dateMinute(createTime)
                 .comment-text > echo(content)
                 .comment-operation
                     .text-right
                         .item > i.iconfont.icon-zan > echo('赞（' + praiseNum +'）')                           
                         #  .item > i.iconfont.icon-message(id='answer-'+ id) > echo('回复')
+                        .item > span(id ='report-' + 6 + '_' + id +'_' + createMemberId data-name='id' data-value= 6 +'_' + id+'_' + createMemberId) > string('report')
                         .item > i.iconfont.icon-info(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
                 div(id='replyandreply-answer-'+id style='display:none')
                     input.input(name='content-' + id value='' )
