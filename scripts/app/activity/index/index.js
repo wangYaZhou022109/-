@@ -178,7 +178,7 @@ exports.store = {
                 currentPage = pageInfo.page;
             model[payload.dir + 'Page']();
             if (currentPage !== model.getPageInfo().page) {
-                return this.get(model);
+                return this.get(model, { loading: true });
             }
             return true;
         },
