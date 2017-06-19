@@ -59,3 +59,4 @@ exports.mixin = {
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
+
