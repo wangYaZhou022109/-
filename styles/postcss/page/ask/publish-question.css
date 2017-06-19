@@ -1,15 +1,16 @@
 
 .select-drop {
     width: 100%;
-    padding: 1.4em;
+    padding: 1em 1.4em;
     position: absolute;
     top: 100%;
     left: 0;
     background: var(--white);
     z-index: 10;
     & .select-drop-item {
-        height: var(--input-height);
-        line-height: var(--input-height);
+        font-size: 10px;
+        height: var(--large-space);
+        line-height: var(--large-space);
         cursor: pointer;
         &:hover {
             color:var(--main-color);

@@ -1,6 +1,5 @@
 
 exports.items = {
-    banner: 'banner',
     list: 'list',
     relevantexperts: 'relevantexperts',
     relatedquestions: 'relatedquestions',
