@@ -23,53 +23,6 @@
 
     & .comment-content {
         margin-left: calc(var(--font-size) * 5);
-        & .clearfix {
-            height: var(--h3);
-            line-height: var(--h3);
-        }
-     
-        & .icon-more {
-            font-size: var(--h3);
-            & .drop-down-more {
-                display: none;
-                width: calc(var(--space) * 8);
-                position:absolute;
-                right: -5px;
-                top: calc(var(--space) * 2 - 4 );
-                border: 1px solid var(--border-color);
-                background-color:var(--bg-color);
-                padding: 0 var(--space);
-                font-size: var(--small-font);
-                z-index: 100;
-                & .icon-triangle-up {
-                    position: absolute;
-                    right: calc(var(--space) / 2);
-                    top: -calc(var(--space) + 1);
-                    color: var(--border-color);
-                }
-            
-            
-                & li {
-                    color: #999;
-                    height: var(--large-space);
-                    line-height:  var(--large-space);
-                    padding: 0 calc(var(--space) / 2);
-                    border-bottom: 1px solid var(--border-color);
-                    & .iconfont {
-                        margin-right: calc(var(--space) / 2);
-                        vertical-align: bottom;
-                    }
-                }
-                & li:last-child {
-                    border-bottom: none;
-                }
-            }
-        }
-        & .icon-more:hover .drop-down-more {
-            display: block;
-        }
-        
-        
     }
 
     & .boutique {
@@ -81,20 +34,10 @@
     & .comment-text {
         line-height: 2;
         margin: var(--space) 0;
-        color: #999;
-        text-align: left;
     }
 
     & .comment-operation {
         @apply --clearfix;
-
-        & .com-topic .sub-text {
-            margin-bottom:var(--space);
-            color: var(--black);
-        }
-        & .user-info .sub-text {
-            color: var(--font-tip-color);
-        }
 
         & .item {
             display: inline-block;
@@ -108,14 +51,6 @@
             }
             &.inline {
                 margin-left: var(--space);
-            }
-            & .icon-q-zone {
-                color: var(----color-ing);
-                margin-right: var(--space);
-            }
-            & .icon-sina {
-                color: var(----color-error);
-                margin-right: var(--space);
             }
         }
 
