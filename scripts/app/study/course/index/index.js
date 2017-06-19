@@ -40,7 +40,7 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search;
-            search.set({ type: 0, companyType: 0, orderBy: 0 }, true);
+            search.set({ type: 0, publishClient: 1, companyType: 0, orderBy: 0 }, true);
             this.models.menu2.set(this.models.categories.findLevel(2));
         },
         selectMenu1: function(payload) {
