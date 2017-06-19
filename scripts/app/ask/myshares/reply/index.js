@@ -1,6 +1,7 @@
 
 exports.items = {
-    content: 'content'
+    content: 'content',
+    'ask/report': { isModule: true }
 };
 
 exports.store = {
@@ -8,7 +9,8 @@ exports.store = {
         state: { data: {} },
         reply: { url: '../ask-bar/question-reply' },
         praise: { url: '../ask-bar/my-share/praise' },
-        unpraise: { url: '../ask-bar/my-share/unpraise' }
+        unpraise: { url: '../ask-bar/my-share/unpraise' },
+        report: { url: '../ask-bar/question-details/report' },
     },
     callbacks: {
         init: function(payload) {
@@ -41,7 +43,13 @@ exports.store = {
             var unpraise = this.models.unpraise;
             unpraise.set(payload);
             return this.put(unpraise);
-        }
+        },
+        report: function(payload) {
+            var data = payload;
+            var report = this.models.report;
+            report.set(data);
+            return this.post(report);
+        },
     }
 };
 
@@ -51,3 +59,4 @@ exports.mixin = {
 exports.beforeRender = function() {
     return this.dispatch('init', this.renderOptions);
 };
+
