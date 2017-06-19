@@ -35,7 +35,10 @@ view('list')
         ul > each(expertlist)
             li.expert-item
                 .clearfix
-                    .img > .img-cont > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
+                compare(member.id 'ne' me)
+                    .img> .img-cont > a.normal.block(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
+                else
+                    .img> .img-cont > a.normal.block(href='#/ask/iamexpertdetails ') > img(src=member.headPortrait alt=member.fullName)
                     .expert-item-right.overflow
                         .w-full.clearfix
                             .title > echo(member.fullName)
