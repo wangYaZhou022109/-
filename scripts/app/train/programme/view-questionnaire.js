@@ -28,6 +28,7 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             sourceType: 2,
             organizationId: organizationId,
+            url: 'course-study/course-info',
             callback: function(data) {
                 var param = {
                     type: 2,
@@ -48,6 +49,7 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             sourceType: 2,
             organizationId: organizationId,
+            url: 'course-study/course-info',
             callback: function(data) {
                 var param = {
                     type: 3,
@@ -67,6 +69,7 @@ exports.handlers = {
         me.app.viewport.modal(model, {
             id: null,
             sourceType: 2,
+            url: 'course-study/course-info',
             callback: function(data) {
                 var param = {
                     type: 1,

@@ -464,7 +464,9 @@ exports.store = {
                 me = this;
             model.set(payload);
             this.del(model).then(function() {
-                me.get(taskList);
+                me.get(taskList).then(function() {
+                    me.module.items.task.updataCss();
+                });
             });
         },
         editTask: function(payload) {
@@ -493,7 +495,9 @@ exports.store = {
             task.set(payload);
             this.save(task).then(function() {
                 this.app.message.success('提交成功');
-                me.get(taskList);
+                me.get(taskList).then(function() {
+                    me.module.items.task.updataCss();
+                });
             });
         },
         uploadTaskFile: function(payload) {

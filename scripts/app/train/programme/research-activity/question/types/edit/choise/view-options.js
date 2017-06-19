@@ -28,16 +28,17 @@ exports.dataForTemplate = {
 
 exports.actions = {
     'click add': 'addOption',
-    'click remove-*': 'removeOption',
-    'change content-*': 'changeContent'
+    'click remove-*': 'removeOption'
 };
 
 exports.dataForActions = {
-    changeContent: function(data) {
-        var d = data;
-        d.content = this.$('content-' + data.index).value;
-        this.checkEmptyOption();
-        return d;
+    addOption: function(payload) {
+        this.setResult();
+        return payload;
+    },
+    removeOption: function(payload) {
+        this.setResult();
+        return payload;
     }
 };
 
@@ -46,7 +47,7 @@ exports.getEntity = function(id) {
 };
 
 exports.getEntityModuleName = function() {
-    return 'train/programme/exam/question/senior-editor';
+    return 'exam/question/senior-editor';
 };
 
 exports.dataForEntityModule = function(data) {
@@ -57,8 +58,8 @@ exports.dataForEntityModule = function(data) {
             id: data,
             value: state.data.options[data].content
         },
-        callback: function(i, content) {
-            me.changeOptionContent(i, content);
+        callback: function(i, content, text) {
+            me.changeOptionContent(i, content, text);
         },
         getValue: function() {
             return $(me.$('content-' + data)).val();
@@ -113,7 +114,7 @@ exports.mixin = {
         }
         data.questionAttrs = result;
         data.content = view.components.content.html();
-        data.contentText = view.components.content.text();
+        data.contentText = view.components.content.getText();
         if (this.module.renderOptions.editMode === 2) {
             data.difficulty = view.$('difficulty').value;
         }
@@ -195,13 +196,18 @@ exports.mixin = {
             return false;
         }
 
-        if (!this.interval.fn(value, 0, 1, 9999999.99, 0)) {
+        if (!validator.interval.fn(value, 0, 1, 9999999.99, 0)) {
             this.app.message.error('选项' + code + '分数范围为0-9999999.99');
             return false;
         }
 
-        if (!this.keepDecimal.fn(value, 2)) {
+        if (!validator.keepDecimal.fn(value, 2)) {
             this.app.message.error('选项' + code + '分数最多保留两位小数');
+            return false;
+        }
+
+        if (new RegExp('^0').test(value)) {
+            this.app.message.error('选项' + code + '分数不能以0开头');
             return false;
         }
 
