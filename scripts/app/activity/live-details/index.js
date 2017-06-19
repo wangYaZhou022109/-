@@ -47,9 +47,10 @@ exports.store = {
             relativeGensees.params = { genseeId: params.id };
 
             // 浏览人数+1，同时如果是已开始的直播，保存参与用户并更新参与人数
-            return me.save(access).then(function() {
+            return me.save(access, { loading: true }).then(function() {
                 return me.chain(me.get(gensee, {
-                    slient: true // get完不触发changed事件
+                    slient: true, // get完不触发changed事件
+                    loading: true
                 }), function() {
                     // 预约状态 - 未开始的直播才需要查询
                     if (gensee.data.status === STATUS_UNSTART) {

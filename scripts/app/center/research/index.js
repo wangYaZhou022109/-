@@ -22,7 +22,7 @@ exports.store = {
     },
     callbacks: {
         init: function() {
-            return this.get(this.models.researchRecords);
+            return this.get(this.models.researchRecords, { loading: true });
         },
         search: function(payload) {
             var searchModel = this.models.search,
@@ -30,7 +30,7 @@ exports.store = {
             researchRecords.clear();
             D.assign(researchRecords.params, D.assign(searchModel.data, payload));
             searchModel.changed();
-            return this.get(researchRecords);
+            return this.get(researchRecords, { loading: true });
         },
         getResearchById: function(payload) {
             return _.find(this.models.researchRecords.data, ['id', payload.id]).researchQuestionary;
