@@ -467,8 +467,6 @@ exports.store = {
                 taskList = this.models.taskList,
                 state = this.models.state,
                 fileList = this.models.files,
-                startTime = payload.startTime,
-                endTime = payload.endTime,
                 me = this;
             D.assign(payload, {
                 fileList: JSON.stringify(fileList.data),
@@ -477,14 +475,10 @@ exports.store = {
             });
             task.clear();
             task.set(payload);
-            if (startTime >= endTime) {
-                this.app.message.alert('结束时间必须大于开始时间');
-            } else {
-                this.save(task).then(function() {
-                    this.app.message.success('提交成功');
-                    me.get(taskList);
-                });
-            }
+            this.save(task).then(function() {
+                this.app.message.success('提交成功');
+                me.get(taskList);
+            });
         },
         uploadTaskFile: function(payload) {
             var img = payload[0],
