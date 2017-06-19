@@ -17,7 +17,8 @@ exports.handlers = {
         var i;
         var checked = this.$$('input[name="messageId"]');
         if (checked.length === 0) {
-            return this.app.message.error('请选择要标记的消息');
+            this.app.message.error('请选择要标记的消息');
+            return false;
         }
         for (i = 0; i < checked.length; i++) {
             checked[i].checked = obj.checked;
@@ -59,7 +60,8 @@ exports.dataForActions = {
         // });
         var checked = this.$$('input[name="messageId"]:checked');
         if (checked.length === 0) {
-            return this.app.message.error('请选择要标记的消息');
+            this.app.message.error('请选择要标记的消息');
+            return false;
         }
         for (i = 0; i < checked.length; i++) {
             ids.push(checked[i].value);
@@ -93,7 +95,8 @@ exports.dataForActions = {
         var ids = [];
         var checked = this.$$('input[name="messageId"]:checked');
         if (checked.length === 0) {
-            return this.app.message.error('请选择要标记的消息');
+            this.app.message.error('请选择要标记的消息');
+            return false;
         }
         for (i = 0; i < checked.length; i++) {
             ids.push(checked[i].value);

@@ -1,6 +1,7 @@
 exports.routes = {
     'more/layout/:configId': 'showHomeMore',
-    'more/rank-topic/:configId': 'showHomeRankTopicMore'
+    'more/rank-topic/:configId': 'showHomeRankTopicMore',
+    'error-page/:code': 'showErrorPage'
 };
 
 exports.showHomeMore = function(configId) {
@@ -12,3 +13,8 @@ exports.showHomeRankTopicMore = function(configId) {
     return this.app.show('content', 'home/default/more/rank/rank-topic',
         { moduleConfigId: configId, forceRender: true });
 };
+
+exports.showErrorPage = function(code) {
+    return this.app.show('content', 'home/error-page', { code: code });
+};
+

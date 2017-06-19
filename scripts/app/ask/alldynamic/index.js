@@ -97,10 +97,6 @@ exports.store = {
         }
     },
     callbacks: {
-        closediscuss: function(payload) {
-            this.models.close.set(payload);
-           // return this.put(this.models.close);
-        },
         closequestion: function(payload) {
             this.models.close.set(payload);
             return this.put(this.models.close);

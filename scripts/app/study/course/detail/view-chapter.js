@@ -34,7 +34,7 @@ var statusMap = {
     8: {
         0: '查看作业',
         1: '学习中',
-        5: '待评审',
+        5: '待审核',
         2: '',
         6: '重新提交',
     },
@@ -48,14 +48,14 @@ var statusMap = {
     12: {
         0: '参与调研',
         1: '答卷中',
-        5: '待评审',
+        5: '待审核',
         2: '查看详情',
         6: '重新提交',
     },
     13: {
         0: '参与评估',
         1: '答卷中',
-        5: '待评审',
+        5: '待审核',
         2: '查看详情',
         6: '重新提交',
     }
@@ -84,34 +84,28 @@ exports.handlers = {
     },
     showSection: function(id, e, element) {
         var courseModel = this.bindings.course,
-            progress = this.bindings.progress,
             sectionType = element.getAttribute('data-sectionType'),
             section = courseModel.findSection(id),
             chapter = courseModel.findChapter(section.chapterId);
-        var oldSectionId = this.bindings.playerState.data.sectionId;
-        var beforeSection = courseModel.findBeforeSection(id);
         var hander = showHandler(section).bind(this);
-        var beforeProcess = beforeSection ? progress.findProgress(beforeSection.referenceId) : null;
+        var oldSectionId = this.bindings.playerState.data.sectionId;
         e.preventDefault();
         // 如果点击的是当前节,直接返回
         if (oldSectionId === id && courseUtil.judgeSection(sectionType)) {
             return false;
         }
-        // 如果没学习过的 才判断顺序
-        if (!progress.findProgress(section.referenceId)) {
-            // 如果必须按章顺序
-            if (courseModel.data.learnSequence === 1) {
-                if (!courseModel.isChapterSequence(oldSectionId, id)) {
-                    this.app.message.error('必须按章顺序学习');
-                    return false;
-                }
+        // 如果当前所在章的规则必须按顺序
+        if (chapter.learnSequence === 1) {
+            if (!courseModel.checkSection(id)) {
+                this.app.message.error('前面的课节还没学完');
+                return false;
             }
-            // 如果当前所在章的规则必须按顺序
-            if (chapter.learnSequence === 1) {
-                if (!beforeProcess || beforeProcess.finishStatus === 1) {
-                    this.app.message.error('前面的课节还没学完');
-                    return false;
-                }
+        }
+        // 如果必须按章顺序
+        if (courseModel.data.learnSequence === 1) {
+            if (!courseModel.checkChapter(id)) {
+                this.app.message.error('必须按章顺序学习');
+                return false;
             }
         }
 
@@ -152,12 +146,12 @@ exports.dataForTemplate = {
                     // Rate
                     // rr.finishStatus = maps.getValue('course-study-status', sectionProcess.finishStatus);
                     rr.finishStatus = '';
-                    if (rr.sectionType === 8 && sectionProcess.score > 0) {
+                    if (rr.sectionType === 8 && sectionProcess.score >= 0) {
                         if (sectionProcess.score) sectionProcess.score = Number(sectionProcess.score) / 10;
-                        rr.finishStatus += '成绩' + sectionProcess.score + ' ';
+                        rr.finishStatus += '成绩' + (sectionProcess.score / 10) + ' ';
                     }
-                    if (rr.sectionType === 9 && sectionProcess.examScore > 0) {
-                        rr.finishStatus += '成绩' + sectionProcess.examScore + ' ';
+                    if (rr.sectionType === 9 && sectionProcess.examScore >= 0) {
+                        rr.finishStatus += '成绩' + (sectionProcess.examScore / 100) + ' ';
                     }
                     if (statusMap[rr.sectionType]) {
                         rr.finishStatus += statusMap[rr.sectionType][sectionProcess.finishStatus];

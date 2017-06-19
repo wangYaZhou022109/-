@@ -56,3 +56,4 @@ exports.beforeRender = function() {
         this.bindings.answer.data = {};
     }
 };
+

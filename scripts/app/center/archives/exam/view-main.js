@@ -1,36 +1,43 @@
 var _ = require('lodash/collection'),
-    helpers = require('./app/util/helpers');
+    D = require('drizzlejs'),
+    helpers = require('./app/util/helpers'),
+    getJoinStatus,
+    getPassStatusStr,
+    getShowCert,
+    joinStatus = {
+        1: '待开始',
+        2: '待审核',
+        3: '被拒绝',
+        4: '已完成',
+        5: '待考试',
+        6: '未参加',
+        7: '异常',
+        8: ''
+    };
 
 exports.bindings = {
-    list: true,
+    exams: true,
     export: false
 };
 
 exports.components = [{
-    id: 'pager', name: 'pager', options: { model: 'list' }
+    id: 'pager', name: 'pager', options: { model: 'exams' }
 }];
 
 exports.dataForTemplate = {
-    list: function(data) {
-        var pageNum = this.bindings.list.getPageInfo().page;
-        _.map(data.list || [], function(role, i) {
-            var r = role,
-                totalScore = r.totalScore,
-                score = r.score;
-            r.i = i + 1 + ((pageNum - 1) * 10);
-            r.totalScore = totalScore / 100;
-            r.score = score / 100;
-            r.showCert = r.exam.hasCert === 1;// 是否有证书
-            if (r.score >= r.exam.passScore) {
-                r.isPass = '是';
-            } else {
-                r.isPass = '否';
-            }
-            r.startTimeStr = helpers.dateMinute(r.exam.startTime);
-            r.endTimeStr = helpers.dateMinute(r.exam.endTime);
-            r.submitTimeStr = helpers.dateMinute(r.submitTime);
+    exams: function(data) {
+        return _.map(data.exams, function(e, n) {
+            return D.assign(e, {
+                i: n + 1,
+                totalScore: e.examRecord.totalScore / 100,
+                score: e.examRecord.status > 4 ? e.examRecord.score / 100 : '-',
+                joinStatus: getJoinStatus(e),
+                submitTime: helpers.dateTime(e.examRecord.submitTime) || '-',
+                passStatusStr: getPassStatusStr(e),
+                showCert: getShowCert(e),
+                passScore: e.passScore || '-'
+            });
         });
-        return data.list;
     },
     exportUrl: function() {
         var url = this.bindings.export.getFullUrl() + '?',
@@ -40,3 +47,32 @@ exports.dataForTemplate = {
     }
 };
 
+getJoinStatus = function(exam) {
+    var currentTime = new Date().getTime();
+    //  待开始
+    if (exam.startTime > currentTime) return joinStatus['1'];
+    //  待审核
+    if (exam.signUp && exam.signUp.status === 1) return joinStatus['2'];
+    //  被拒绝
+    if (exam.signUp && exam.signUp.status === 3) return joinStatus['3'];
+    //  已完成
+    if (exam.examRecord.status > 4) return joinStatus['4'];
+    //  待考试
+    if (exam.startTime < currentTime && exam.examRecord.status === 1) return joinStatus['5'];
+    //  未参加
+    if (exam.endTime < currentTime && exam.examRecord.status === 1) return joinStatus['6'];
+    //  异常
+    if (exam.examRecord.status === 4) return joinStatus['7'];
+    return joinStatus['8'];
+};
+
+getPassStatusStr = function(exam) {
+    if (exam.passScore && exam.examRecord.status > 5) {
+        return (exam.examRecord.score / 100) > exam.passScore ? '是' : '否';
+    }
+    return '-';
+};
+
+getShowCert = function(exam) {
+    return exam.examRecord.status > 5 && exam.hasCert === 1;
+};
