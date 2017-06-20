@@ -26,17 +26,14 @@ exports.store = {
             var taskModel = this.models.task,
                 sectionModel = this.models.section,
                 progressModel = this.models.progress,
-                startStudyModel = this.models.startStudy,
-                me = this;
+                startStudyModel = this.models.startStudy;
             sectionModel.set({ id: options.id });
             startStudyModel.set({ sectionId: options.id, clientType: 0 });
+            this.save(startStudyModel);
             this.get(sectionModel).then(function(data) {
                 if (data[0]) {
                     taskModel.set(data[0].studyTask);
                     progressModel.set(data[0].progress);
-                    if (!data[0].progress || !data[0].progress.id) {
-                        me.save(startStudyModel);
-                    }
                     taskModel.changed();
                 }
             });

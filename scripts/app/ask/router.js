@@ -11,6 +11,7 @@ exports.routes = {
     'noticerexpertdetails/:id': 'showNoticerExpertDetail',
     iamexpertdetails: 'showIamExpertDetails',
     'questiondetails/:id': 'showQuestionDetails',
+    'sharedetails/:id': 'showShareDetails',
     'noticerquestiondetails/:id': 'showNoticerQuestionDetails',
     'articledetails/:id': 'showArticleDetails',
     'noticerarticledetails/:id': 'showNoticerArticleDetails',
@@ -60,12 +61,18 @@ exports.showtopicsquare = function(id) {
     return this.app.show('content', 'ask/topicsquare', { id: id });
 };
 
+exports.showShareDetails = function(id) {
+    return this.app.show('content', 'ask/myshares/details', { id: id });
+};
+
 exports.showQuestionDetails = function(id) {
     return this.app.show('content', 'ask/myquiz/details', { id: id });
 };
+
 exports.showMyQuestionDetails = function(id) {
     return this.app.show('content', 'ask/mymanage/topicdetail/news/mydetail', { id: id });
 };
+
 exports.showMyShareDetails = function(id) {
     return this.app.show('content', 'ask/mymanage/topicdetail/exp/mydetails', { id: id });
 };

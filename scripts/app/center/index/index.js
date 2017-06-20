@@ -98,6 +98,11 @@ exports.store = {
                 announcements = me.models.announcements;
             D.assign(announcements.params, payload);
             me.get(announcements);
+        },
+        refreshMember: function() {
+            var me = this,
+                member = me.models.member;
+            return me.get(member);
         }
     }
 };

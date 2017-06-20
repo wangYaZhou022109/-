@@ -5,6 +5,7 @@ exports.items = {
 exports.store = {
     models: {
         startProgress: { url: '../course-study/course-front/start-progress' },
+        duration: { url: '../course-study/course-front/update-media-time' },
         attachment: { url: '../human/file' },
         download: { url: '../human/file/download' },
         state: {}
@@ -19,6 +20,12 @@ exports.store = {
         },
         updateProgress: function(payload) {
             return this.models.state.data.mediaProgress(payload);
+        },
+        duration: function(payload) {
+            var id = this.models.state.data.section.id;
+            var model = this.models.duration;
+            model.set({ sectionId: id, duration: payload.duration });
+            return this.post(model);
         },
         startProgress: function() {
             var id = this.models.state.data.section.id;

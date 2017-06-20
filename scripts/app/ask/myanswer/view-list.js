@@ -104,9 +104,14 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    remove: function() {
+    // remove: function() {
+    //     this.app.message.success('删除成功！');
+    //     this.module.dispatch('init');
+    // },
+    remove: function(data) {
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 3 });
     }
 };
 
