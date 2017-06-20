@@ -5,3 +5,4 @@ module
 
 view('main')
     .content-empty > .img-box.img-type-1 + p > .h1.error > echo(state.message)
+    .text-center > a.btn#toHome(href='/#/home') 返回到首页
