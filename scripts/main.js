@@ -12,7 +12,7 @@ oauthOptions = {
 
 // @ifndef PRODUCTION
 oauthOptions = {
-    clientId: 241,
+    clientId: 66,
     provider: 'https://oauth9.zhixueyun.com/',
     returnTo: 'http://localhost'
 };
@@ -64,6 +64,7 @@ require('./app/ext/qr-code');
 require('./app/ext/rich-text');
 require('./app/ext/monthpicker');
 require('./app/util/arrays');
+require('./app/ext/clipboard');
 D.adapt({
     getFormData: function(form) {
         var result = {};
