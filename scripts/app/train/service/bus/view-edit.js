@@ -39,6 +39,8 @@ exports.handlers = {
     },
     updateExplain: function(id) {
         var val = $(this.$('input-explain-' + id)).val();
+        console.log(13456);
+        console.log(val);
         this.module.dispatch('updateExplain', { id: id, explain: val });
     },
     delOption: function(id) {
