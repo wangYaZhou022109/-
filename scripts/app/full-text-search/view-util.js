@@ -60,7 +60,7 @@ exports.dataForTemplate = {
         return _.map(data.knowledges, function(k) {
             var know = k || {};
             var index = know.name.lastIndexOf('.');
-            var reg = /^[A-Za-z]+$/;
+            var reg = /^[0-9a-zA-Z]*$/g;
             know.avgScore *= 10;
             know.icon = icons[know.type] || defaultIcons;
             if (index !== -1 && reg.test(know.name.substring(index + 1))
