@@ -47,6 +47,9 @@
             overflow: hidden;
             position: relative;
             margin-left: 8em;
+            &.no-hidden {
+                overflow: inherit;
+            }
         }
 
         & .sub-text {
