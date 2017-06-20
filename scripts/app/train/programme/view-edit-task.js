@@ -100,7 +100,7 @@ exports.handlers = {
                 dd = date[2];
                 hour = times[0];
                 min = times[1];
-                task.startTime = new Date(year, month, dd, hour, min).getTime();
+                task.startTime = new Date(year, month - 1, dd, hour, min).getTime();
             }
             if ($(this.$('endTime')).val()) {
                 dateTime = $(this.$('endTime')).val().split(' ');
@@ -111,7 +111,7 @@ exports.handlers = {
                 dd = date[2];
                 hour = times[0];
                 min = times[1];
-                task.endTime = new Date(year, month, dd, hour, min).getTime();
+                task.endTime = new Date(year, month - 1, dd, hour, min).getTime();
             }
             task.explain = $(this.$('explain')).val();
             task.memberIds = this.components.tags.getValue();

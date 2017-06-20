@@ -66,7 +66,7 @@ require('./app/ext/rich-text');
 require('./app/ext/monthpicker');
 require('./app/util/arrays');
 require('./app/ext/image-cropper');
-
+require('./app/ext/clipboard');
 D.adapt({
     getFormData: function(form) {
         var result = {};
