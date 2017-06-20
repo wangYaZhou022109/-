@@ -18,22 +18,27 @@ exports.handlers = {
             flag: 'desc'
         });
     },
-    preview: function(id) {
+    preview: function(id, e, element) {
         var docUrl = this.bindings.preview.getFullUrl() + '/' + id,
+            contentType = element.getAttribute('content-type'),
             param = {
                 flag: 'doc',
                 docUrl: docUrl
             };
+        if (Number(contentType) !== 1) param.flag = 'down';
         this.module.dispatch('preview', param);
     },
-    viewUseDesc: function(id) {
+    viewUseDesc: function(id, e, element) {
         var progress = this.bindings.section.data.progress || {},
             attachments = progress.sectionAttachments,
-            attachment = _.find(attachments, { id: id });
-        this.module.dispatch('preview', {
-            flag: 'useDesc',
-            description: attachment.description
-        });
+            contentType = element.getAttribute('content-type'),
+            attachment = _.find(attachments, { id: id }),
+            param = {
+                flag: 'useDesc',
+                description: attachment.description
+            };
+        if (Number(contentType) !== 1) param.flag = 'down';
+        this.module.dispatch('preview', param);
     }
 };
 
@@ -45,9 +50,6 @@ exports.dataForTemplate = {
         _.map(task.attachments || [], function(attach) {
             var obj = attach;
             obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
-            if (obj.contentType && obj.contentType === 1) {
-                obj.preview = true;
-            }
             return obj;
         });
         return task;
@@ -60,9 +62,6 @@ exports.dataForTemplate = {
             return _.map(attachments, function(attach) {
                 var obj = attach;
                 obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
-                if (obj.contentType && obj.contentType === 1) {
-                    obj.preview = true;
-                }
                 return obj;
             });
         }

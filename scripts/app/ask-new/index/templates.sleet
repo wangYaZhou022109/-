@@ -1,23 +1,15 @@
 #! handlebars
 
 module > .ask-page 
-    .topicbanner(data-region="topicbanner")
+    
     .container
         .page-main-wrapper
             .page-side.side-min(data-region='side')
             .page-main.topic-main(data-region='main')
+            .topicbanner(data-region="topicbanner")
+            
 
-view('topicbanner')
-    .topbanner#topbanner > .container
-        i.iconfont.icon-close#closetopic
-        span.small-font 推荐话题：
-        ul.m-top.clearfix
-            li.pull-left
-                img(src="images/d1.jpg")
-            li.pull-left
-                img(src="images/d2.jpg")
-            li.pull-left
-                img(src="images/d3.jpg")
+
 view('main')
     .pull-right.hidden
         span 你共分享了
@@ -29,531 +21,184 @@ view('main')
         li#item-3 专家分享
     .tabs-cont > ul
         li.tabs-cont-item#tabs-cont-item-1.active
-            .comment-list.ask-list > ul
-                li
-                    .user-pic
-                        img.pointer(src='images/1.png')
-                    .comment-content
-                        img.boutique.pull-left(src="images/boutique.png")
-                        .comment-boutique
-                            .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+            .alldynamic
+                .comment-list.ask-list > ul
+                    li
+                        .user-pic
+                            img.pointer(src='images/1.png')
+                        .comment-content
+                            div.clearfix
+                                .h4.pull-left 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                                .pull-right.iconfont.icon-more.m-right.pointer
+                                    .drop-down-more
+                                        i.iconfont.icon-triangle-up
+                                        ul
+                                            li#trend-report
+                                                i.iconfont.icon-info 
+                                                span 举报
+                                            li#del-question
+                                                i.iconfont.icon-trash 
+                                                spsn 删除
+                                            li#close
+                                                i.iconfont.icon-close 
+                                                span 关闭
                             .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                            .user-info
-                                a(href='javascript:;') 我
-                                span ·提问·
-                                span.sub-text 2016-09-09 09:09
-                            .comment-operation
-                                .pull-left > .sub-text 关联标签：标签名称
+
+                            .comment-operation.box
+                                .com-topic > .sub-text 来自话题：标签名称
+                                .user-info.pull-left
+                                    a(href='javascript:;') 我
+                                    span ·提问·
+                                    span.sub-text 2016-09-09 09:09
                                 .text-right
-                                    .item > span.color-ing 待审核
-                                    .item#delete 删除
-                li
-                    .user-pic > img(src='images/1.png')
-                    .comment-content
-                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                        .user-info
-                            a(href='javascript:;') 我
-                            span ·提问·
-                            span.sub-text 2016-09-09 09:09
-                        .color-error.small-font.m-top 被拒绝的理由被拒绝的理由被拒绝的理由被拒绝的理由
-                        .comment-operation
-                            .pull-left > .sub-text 关联标签：标签名称
-                            .text-right
-                                .item > span.color-error 被拒绝
-                                .item 删除
-                li
-                    .user-pic > img(src='images/1.png')
-                    .comment-content
-                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text
-                            img(src='images/1.png')
-                            | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                        .user-info
-                            a(href='javascript:;') 我
-                            span ·提问·
-                            span.sub-text 2016-09-09 09:09
-                        .comment-operation
-                            .pull-left > .sub-text 关联标签：标签名称
-                            .text-right
-                                .item 评论(2)
-                                .item +关注
-                                .item
-                                    .share-bar
-                                        .drop-down-wrapper
-                                            i.iconfont.icon-share-2(title='分享')
-                                            .drop-down-content > .content
-                                                .item > #shareTo-qzone > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                                .item > #shareTo-weibo > i.iconfont.icon-sina + span 分享到新浪微博
-                                                .item > #shareTo-bar > i.iconfont.icon-ask + span 分享到问吧
+                                    .item
+                                        i.iconfont.icon-add 
+                                        span 关注
+                                    .item#discuss-
+                                        i.iconfont.icon-message
+                                        span 讨论
+
+                                    .item 
+                                        .share-bar
+                                            .drop-down-wrapper
+                                                i.iconfont.icon-share-2
+                                                span 分享
+                                                form.drop-down-content > .content
+                                                    .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                    .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                    form.comment-reply(id ='comment-reply-' + id)
+                                        textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                                        input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                                        input.input(type='hidden' name='id' value=questionId)
+                                        .btn(id='publish-' + questionId) > string('publish')
 
 
-        li.tabs-cont-item#tabs-cont-item-2.relative
-            .page-contents2
-                .page1#page1
-                    section.section.sub-title.text-center 暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧！
-                    .common-title.m-bottom 推荐话题
-                    .aboutme-contents
-                        ul.aboutme-ul.clearfix
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-1
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-2
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-3
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-4
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-5
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-6
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-7
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-8
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-9
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-10
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-11
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-12
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-13
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-14
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-15
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-16
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-17
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-18
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-19
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-20
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
-                            li.aboutme-li.pull-left.relative.layout-mb-small
-                                .img-dv.relative
-                                    img.w-full(src="images/img.png")
-                                    .true-icon.text-center#icon-21
-                                        .iconfont.icon-tick
-                                    p.text-center.introduce 财会
+                                    ul.topic-item
+                                        li
+                                            .user-pic
+                                                img.pointer(src='images/1.png')
+                                            .comment-content
+                                                div.clearfix
+                                                    .pull-left 
+                                                        a 张三
 
-                    .aboutme-btn.text-center
-                        .btn#button-1 下一步
-                .page2#page2
-                    section.section.sub-title.text-center 暂无与你相关的信息哦，关注一下你喜欢的话题或专家吧！
-                    .common-title.m-bottom 推荐专家
-                    .recommend-contents
-                        ul.recommend-ul.clearfix
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-22.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-23.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-24.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-25.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-26.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-27.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-28.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-29.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-30.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-31.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-32.text-right
-                                        .iconfont.icon-tick-circle
-                            li.recommend-li.pull-left.relative.mb-1
-                                .recommend-total.relative
-                                    .recommend-item.relative.text-center
-                                        p.text-center 某某某
-                                        p.text-center
-                                            span 互联网
-                                            | |
-                                            span 文学
-                                            | |
-                                            span 中医
-                                    .recommend-icon#icon-33.text-right
-                                        .iconfont.icon-tick-circle
+                                                    .pull-right.iconfont.icon-more.m-right.pointer
+                                                        .drop-down-more
+                                                            i.iconfont.icon-triangle-up
+                                                            ul
+                                                                li#trend-report
+                                                                    i.iconfont.icon-info 
+                                                                    span 举报
+                                                                li#del-question
+                                                                    i.iconfont.icon-trash 
+                                                                    spsn 删除
+                                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+
+                                                .comment-operation
+                                                    .user-info.pull-left
+                                                        span.sub-text 2016-09-09 09:09
+                                                    .text-right
+                                                        .item
+                                                            i.iconfont.icon-zan-full
+                                                            span 赞(123)
+                                                        .item#discuss-
+                                                            i.iconfont.icon-message
+                                                            span 回复(123)
+
+                                                        .item 
+                                                            .share-bar
+                                                                .drop-down-wrapper
+                                                                    i.iconfont.icon-share-2
+                                                                    span 分享
+                                                                    form.drop-down-content > .content
+                                                                        .item > div(id ='shareTo-qzone_' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                                                        .item > div(id ='shareTo-weibo_' + id) > i.iconfont.icon-sina + span 分享到新浪微博
+                                                        form.comment-reply(id ='comment-reply-' + id)
+                                                            textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                                                            input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                                                            input.input(type='hidden' name='id' value=questionId)
+                                                            .btn(id='publish-' + questionId) > string('publish')
 
 
-                    .recommend-btn.text-center
-                        .btn#button-2 上一步
-                        .btn#button-3 完成
-                .page3#page3
-                    .comment-list.ask-list > ul
-                        li
-                            .user-pic > img(src='images/1.png')
-                            .comment-content
-                                .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                                .user-info
-                                    a(href='javascript:;') 我
-                                    span ·提问·
-                                    span.sub-text 2016-09-09 09:09
-                                .comment-operation
-                                    .pull-left > .sub-text 关联标签：标签名称
-                                    .text-right
-                                        .item > span.color-ing 待审核
-                                        .item 删除
-                        li
-                            .user-pic > img(src='images/1.png')
-                            .comment-content
-                                .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                                .user-info
-                                    a(href='javascript:;') 我
-                                    span ·提问·
-                                    span.sub-text 2016-09-09 09:09
-                                .color-error.small-font.m-top 被拒绝的理由被拒绝的理由被拒绝的理由被拒绝的理由
-                                .comment-operation
-                                    .pull-left > .sub-text 关联标签：标签名称
-                                    .text-right
-                                        .item > span.color-error 被拒绝
-                                        .item 删除
-                        li
-                            .user-pic > img(src='images/1.png')
-                            .comment-content
-                                .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                                .comment-text
-                                    img(src='images/1.png')
-                                    | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                                .user-info
-                                    a(href='javascript:;') 我
-                                    span ·提问·
-                                    span.sub-text 2016-09-09 09:09
-                                .comment-operation
-                                    .pull-left > .sub-text 关联标签：标签名称
-                                    .text-right
-                                        .item 评论(2)
-                                        .item +关注
-                                        .item 分享
-        li.tabs-cont-item#tabs-cont-item-3
-            .comment-list.ask-list > ul
-                li
-                    .user-pic > img(src='images/1.png')
-                    .comment-content
-                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题
-                        .user-info
-                            a(href='javascript:;') 我
-                            span ·提问·
-                            span.sub-text 2016-09-09 09:09
-                        .comment-operation
-                            .pull-left > .sub-text 关联标签：标签名称
-                            .text-right
-                                .item > span.color-ing 待审核
-                                .item.color-err > span 被拒绝
-                                .item
-                                    i.iconfont.icon-trash
-                                    span 删除
-                                .item
-                                    | +
-                                    span 关注
-                                .item 赞（8）
-                                .item 2条讨论
-                                .item
-                                    i.iconfont.icon-share-2
-                                    span 分享
-                                .item > span#report 举报
+                                    ul.topic-item
+                                        li
+                                            .user-pic
+                                                img.pointer(src='images/1.png')
+                                            .comment-content
+                                                div.clearfix
+                                                    .pull-left 
+                                                        a 张三
+                                                        span 回复
+                                                        span 张三
+                                                    .pull-right.iconfont.icon-more.m-right.pointer
+                                                        .drop-down-more
+                                                            i.iconfont.icon-triangle-up
+                                                            ul
+                                                                li#trend-report
+                                                                    i.iconfont.icon-info 
+                                                                    span 举报
+                                                                li#del-question
+                                                                    i.iconfont.icon-trash 
+                                                                    spsn 删除
+                                                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
 
-                li
-                    .user-pic > img(src='images/1.png')
-                    .comment-content
-                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                        .user-info
-                            a(href='javascript:;') 我
-                            span ·提问·
-                            span.sub-text 2016-09-09 09:09
-                        .color-error.small-font.m-top 被拒绝的理由被拒绝的理由被拒绝的理由被拒绝的理由
-                        .comment-operation
-                            .pull-left > .sub-text 关联标签：标签名称
-                            .text-right
-                                .item#discuss-2 评论
-                                .item > span.color-error 被拒绝
-                                .item 删除
-                                form.comment-reply#comment-reply-2
-                                    textarea.input.w-full.block#selectquestion-1(rows=1)
-                                    input.input(type='hidden')
-                                    input.input(type='hidden')
-                                    .btn 评论
-                                    .select-drop.border.around.text-left#selectdrop-1
-                                        .select-drop-item 问题一
-                                        .select-drop-item 问题一问题一问题一
-                                        .select-drop-item 问题一问题一问题一
-                                        .select-drop-item 问题一问题一问题一
-                li
-                    .user-pic > img(src='images/1.png')
-                    .comment-content
-                        .h4 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
-                        .comment-text
-                            img(src='images/1.png')
-                            | 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
-                        .user-info
-                            a(href='javascript:;') 我
-                            span ·提问·
-                            span.sub-text 2016-09-09 09:09
-                        .comment-operation
-                            .pull-left > .sub-text 关联标签：标签名称
-                            .text-right
-                                .item#discuss-1 评论(2)
-                                .item +关注
-                                .item 分享
-                                form.comment-reply#comment-reply-1
-                                    textarea.input.w-full.block(rows=1)
-                                    input.input(type='hidden')
-                                    input.input(type='hidden')
-                                    .btn 评论
-                            .border.around.hide#comment-list-1(style="margin-top:-1.5em; height:20em; overflow:auto;") > ul.layout-ml-small.layout-mr-small.layout-mb-small
-                                li
-                                    .user-pic > img(src="images/1.png")
-                                    .comment-content
-                                        .user-info
-                                            a(href='#') 张三
-                                            span 互联网中心
-                                        .comment-text
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                        .comment-operation
-                                            .pull-left 
-                                                div
-                                                    span.pointer 赞（8）
-                                                    span 
-                                                    span.pointer 添加回复
-                                            .text-right
-                                                span.pointer 分享
-                                                span |
-                                                span.pointer 举报
-                                li
-                                    .user-pic > img(src="images/1.png")
-                                    .comment-content
-                                        .user-info
-                                            a(href='#') 张三
-                                            span 互联网中心
-                                        .comment-text
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                            | 这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能这个有两种可能
-                                        .comment-operation
-                                            .pull-left > .sub-text 2017-01-17
-                                            .text-right
-                                                span.pointer 赞（8）
-                                                span |
-                                                span.pointer 添加回复
-                                                span |
-                                                span.pointer 分享
-                                                span |
-                                                span.pointer 举报
-        .text-center
-            .content(style="margin: 15% 0")
-                img(src="images/nothing.png")
-                p.text-center 暂无与你相关的信息哦！
+                                                .comment-operation
+                                                    .user-info.pull-left
+                                                        span.sub-text 2016-09-09 09:09
+                                                    .text-right
+                                                        .item
+                                                            i.iconfont.icon-zan-full
+                                                            span 赞(123)
+                                                        .item#discuss-
+                                                            i.iconfont.icon-message
+                                                            span 回复(123)
 
-
-
-
-
-
-
-
+                                                        
+                                                        form.comment-reply(id ='comment-reply-' + id)
+                                                            textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                                                            input.input(type='hidden' name='organizationId' value=createUser.organizationId)
+                                                            input.input(type='hidden' name='id' value=questionId)
+                                                            .btn(id='publish-' + questionId) > string('publish')
+    .none-more 
+        p 没有更多了
+    
+view('topicbanner')
+    .recommend-topic#recommend-topic
+        .h4 我们向您推荐的话题：
+        ul.clearfix
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer
+                    i.iconfont.icon-add 
+                    span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+            li.pull-right
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+                   
+    
+        
 
 view('side')
     .section
@@ -607,3 +252,8 @@ view('side')
                 .col-md-4 > img.block(src='images/1.png')
                 .col-md-4 > img.block(src='images/1.png')
                 .col-md-4 > img.block(src='images/1.png')
+
+                                
+                                           
+               
+      

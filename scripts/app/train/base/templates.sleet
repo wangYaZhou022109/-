@@ -33,7 +33,7 @@ view('main') > form.vertical
                         span > echo(classInfo.diningRoomText)
                     .pull-left.layout-mr
                         span 教室
-                        span > echo(classInfo.classRoomName)
+                        span > echo(classInfo.classRoom)
                 .form.align-left.m-top
                     .clearfix
                         .form-row.pull-left.w-half.special
@@ -108,7 +108,7 @@ view('main') > form.vertical
                             label 教室：
                             select.select-width#classRoom(name='classRoom' x-rule='required')
                                 each(classroomList)
-                                    option(value=id)('selected')&if(selected) > echo(classroomName)
+                                    option(value=id)('selected')&if(selected) > echo(classroom)
                     .layout-mt-small
                         .top
                             .inline-block.layout-mr

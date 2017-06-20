@@ -1,5 +1,5 @@
 var _ = require('lodash/collection'),
-    studyUtil = require('./app/study/util/study_util');
+    getFileType;
 
 exports.title = '文件上传';
 
@@ -29,12 +29,31 @@ exports.components = function() {
 exports.changeFile = function() {
     var imgs = this.bindings.file.data.imgs;
     var items = _.map(imgs, function(v) {
+        var extend = v.filename.split('.').pop();
+        var fileType = getFileType(extend);
         return {
-            contentType: studyUtil.getContentType(v.contentType),
+            contentType: fileType,
             attachmentId: v.id,
             name: v.filename
         };
     });
     this.module.dispatch('addFile', items);
     this.app.viewport.closeModal();
+};
+
+getFileType = function(data) {
+    var extend = data.toLocaleLowerCase();
+    var fileTypes = {
+        1: ['xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt', 'pdf'],
+        5: ['mp3'],
+        6: ['mp4'],
+        4: ['rar', 'zip'],
+        2: ['jpg', 'jpeg', 'png', 'bmp', 'gif'],
+        7: ['epub']
+    };
+    return (function() {
+        return _.find(Object.keys(fileTypes), function(type) {
+            return fileTypes[type].indexOf(extend) !== -1;
+        }) || 0;
+    }());
 };

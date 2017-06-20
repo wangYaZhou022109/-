@@ -55,13 +55,15 @@ D.assign(obj, {
         return {
             data: question,
             answer: answer.getAnswer(question.id),
-            mode: exam.examRecord.status > constant.TO_BE_OVER
-                || (question.type === constant.SINGLE
-                    || question.type === constant.MUTIPLE
-                    || question.type === constant.JUDGE
-                    || question.type === constant.SORT
-                ) ? exam.showAnswerRule : 4,
-            subMode: exam.showAnswerRule
+            // mode: exam.examRecord.status > constant.TO_BE_OVER
+            //     || (question.type === constant.SINGLE
+            //         || question.type === constant.MUTIPLE
+            //         || question.type === constant.JUDGE
+            //         || question.type === constant.SORT
+            //     ) ? exam.showAnswerRule : 4,
+            mode: exam.showAnswerRule,
+            subMode: exam.showAnswerRule,
+            status: exam.examRecord.status
         };
     }
 });
