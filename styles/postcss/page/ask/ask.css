@@ -13,6 +13,7 @@
 @import "publish-question.css";
 @import "topbanner.css";
 @import "right.css";
+@import "ask-noticer.css";
 
 .pr-60 {
 	padding-right: calc(var(--base-gap) + var(--space));

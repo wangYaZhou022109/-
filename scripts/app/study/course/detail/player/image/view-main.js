@@ -1,4 +1,4 @@
-var timeInterval, logId;
+var timeInterval, timeInterval2, logId;
 
 exports.bindings = {
     download: false,
@@ -14,6 +14,7 @@ exports.dataForTemplate = {
 };
 exports.beforeClose = function() {
     clearInterval(timeInterval);
+    clearTimeout(timeInterval2);
     this.commitProgress();
 };
 
@@ -24,10 +25,12 @@ exports.afterRender = function() {
     }, 1000 * 60);
 
     window.onunload = function() {
+        clearInterval(timeInterval);
+        clearTimeout(timeInterval2);
         me.commitProgress(false);
     };
 
-    setTimeout(function() {
+    timeInterval2 = setTimeout(function() {
         me.commitProgress();
     }, 1000 * 10); // 10秒后完成 10秒提交一次
     // 加载完毕之后 开始进度

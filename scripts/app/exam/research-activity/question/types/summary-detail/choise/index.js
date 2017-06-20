@@ -28,8 +28,11 @@ exports.store = {
                             }
                             return false;
                         }).length,
-                        p = this.data.answerRecords.length !== 0
-                            ? (selectedCount / this.data.answerRecords.length) : 0,
+                        effectiveCount = _.filter(this.data.answerRecords, function(a) {
+                            if (a && a.answer) return true;
+                            return false;
+                        }).length, // 有效答题人数
+                        p = effectiveCount === 0 ? 0 : (selectedCount / effectiveCount),
                         percent = (p * 100) + '';
                     return percent.indexOf('.') > 0 ? Number(percent).toFixed(2) : percent;
                 },

@@ -2,7 +2,7 @@
 module
     div(data-region='list')
 view('list')
-    compare(page.length 'lt' 1) 
+    compare(page.length 'lt' 1)
         .text-center
             .content(style="margin: 15% 0")
                 img(src="images/nothing.png")
@@ -11,43 +11,56 @@ view('list')
         li
             .user-pic > img(src=member.headPortrait)
             .comment-content
+                .comment-title
+                    .title 标题
+                    .text-right.pointer > i.iconfont.icon-more.strong
                 .comment-text > echo(questionDiscuss.content)
                 .user-info
-                    compare(createUserId 'eq' me) 
-                        a(href='javascript:;') > string('me')
+                    echo('来自问题：')
+                    compare(type 'eq' 1)
+                        a(href='#/ask/questiondetails/'+ questionDiscuss.questionId ) > echo(title)
                     else
-                        a(href='javascript:;') > echo(createUser.fullName)
-                    span ·讨论了· 
-                    span > echo(member.fullName)
-                    span.sub-text > echo(questionDiscuss.createTime)
+                        a(href='#/ask/articledetails/'+ questionDiscuss.questionId ) > echo(title)
                 .comment-operation
-                    .pull-left > .sub-text 
-                        echo('来自问题：')
-                        compare(type 'eq' 1)
-                            a(href='#/ask/questiondetails/'+ questionDiscuss.questionId ) > echo(title)
+                    .pull-left
+                        compare(createUserId 'eq' me)
+                            a(href='javascript:;') > string('me')
                         else
-                            a(href='#/ask/articledetails/'+ questionDiscuss.questionId ) > echo(title)
+                            a(href='javascript:;') > echo(createUser.fullName)
+                        span ·参与讨论·
+                        span > echo(member.fullName)
+                        span.sub-text.m-left > echo(questionDiscuss.createTime)
                     .text-right
                         compare(questionDiscuss.isPraise 'gt' 0)
-                            .item(id='unpraise-1_'+ questionDiscuss.id data-name='id' data-value='1_' + questionDiscuss.id) 
+                            .item(id='unpraise-1_'+ questionDiscuss.id data-name='id' data-value='1_' + questionDiscuss.id)
+                                i.iconfont.icon-zan
                                 string('unpraise') +  echo('（'+ questionDiscuss.praiseNum +'）')
                         else
-                            .item(id='praise-1_'+ questionDiscuss.id data-name='id' data-value='1_' + questionDiscuss.id) 
+                            .item(id='praise-1_'+ questionDiscuss.id data-name='id' data-value='1_' + questionDiscuss.id)
+                                i.iconfont.icon-zan
                                 string('praise') +  echo('（'+ questionDiscuss.praiseNum +'）')
-                        .item(id='discuss-' + questionDiscuss.id ) > string('comment') + echo('(' + questionDiscuss.replyNum +')')
+                        .item(id='discuss-' + questionDiscuss.id )
+                            i.iconfont.icon-message
+                            string('comment') + echo('(' + questionDiscuss.replyNum +')')
                         compare(concern 'ne' null)
                             .item(id='trend-unfollow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > string('unfollow')
-                            .item( 'hidden' id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('follow')
+                            .item( 'hidden' id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id )
+                                i.iconfont.icon-add.add
+                                string('follow')
                         else
                             .item( 'hidden' id='trend-unfollow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > string('unfollow')
-                            .item(id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('follow')
+                            .item(id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id )
+                                i.iconfont.icon-add.add
+                                string('follow')
                         .item > .share-bar
                             .drop-down-wrapper
                                 i.iconfont.icon-share-2(title='分享')
+                                span 分享
                                 form.drop-down-content > .content
                                     .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                     .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博
                         .item
+                            i.iconfont.icon-info
                             span(id ='trend-report-' + questionDiscuss.createMemberId + '_' + questionDiscuss.id data-name='id' data-value=questionDiscuss.createMemberId +'_' + questionDiscuss.id) > string('report')
                         form.comment-reply(id = 'comment-reply-' + questionDiscuss.id)
                             textarea.input.w-full.block(rows=1 name='content' value='' )
@@ -56,6 +69,3 @@ view('list')
                             input.input(type='hidden' name='id' value=questionDiscuss.id)
                             input.input(type='hidden' name='toUserId' value=questionDiscuss.createMemberId)
                             .btn(id='reply-' + questionDiscuss.id ) > string('publish')
-
-                
-            

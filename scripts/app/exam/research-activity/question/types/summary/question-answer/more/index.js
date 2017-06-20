@@ -16,7 +16,7 @@ exports.store = {
         init: function(payload) {
             var answers = this.models.answers;
             this.models.question.set(payload.question);
-            answers.params = { questionId: payload.question.id };
+            answers.params = { questionId: payload.question.id, researchId: payload.question.researchQuestionary.id };
             return this.get(answers);
         },
         search: function(payload) {
