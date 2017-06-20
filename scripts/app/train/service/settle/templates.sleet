@@ -22,7 +22,7 @@ view('content') > form.vertical
                         .content > input.input( id ='input-class-1'  name='peopleNumber' value= settlement.peopleNumber)
                     .form-row.pull-left.form-row-width.r-padding
                         label.label.required 结算天数
-                        .content > input.input(name='dayNumber' id ='input-class-2' readonly='true'  value= settlement.dayNumber)
+                        .content > input.input(name='dayNumber' id ='input-class-2' value= settlement.dayNumber)
                     .form-row.pull-left.form-row-width
                         label.label.required 结算人日
                         .content > input.input(name='peopleDay' value= settlement.peopleDay readonly='true')
