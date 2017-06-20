@@ -1,6 +1,8 @@
 var codes = [
     30117,
-    30126
+    30126,
+    40307,
+    30521
 ];
 
 exports.hasCode = function(code) {
