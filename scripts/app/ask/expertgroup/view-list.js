@@ -60,7 +60,7 @@ exports.handlers = {
     closeTopics: function() {
         $(this.$('close')).addClass('hide');
         $(this.$('open')).removeClass('hide');
-        $(this.$('topictags')).css('height', '71px');
+        $(this.$('topictags')).css('height', '70px');
     }
 };
 
@@ -132,7 +132,7 @@ exports.afterRender = function() {
         $(this.$('open')).addClass('hide');
     } else {
         // console.log($(this.$('topictags')).height());
-        $(this.$('topictags')).css('height', '71px');
+        $(this.$('topictags')).css('height', '70px');
         // console.log($(this.$('topictags')).height());
         $(this.$('topictags')).addClass('overflow');
         $(this.$('open')).show();
