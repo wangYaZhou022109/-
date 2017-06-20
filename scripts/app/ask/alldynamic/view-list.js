@@ -3,7 +3,7 @@ var _ = require('lodash/collection');
 var sensitive = require('./app/util/sensitive');
 exports.type = 'dynamic';
 exports.bindings = {
-    trends: false,
+    trends: true,
     page: true,
     down: false
 };
@@ -225,7 +225,7 @@ exports.actionCallbacks = {
     closequestion: function(data) {
         var question = data[0];
         this.app.message.success('关闭成功!');
-        this.module.dispatch('init', question);
+        this.module.dispatch('closeefresh', question);
     },
     reply: function() {
         this.app.message.success('发表成功，等待管理员审核！');

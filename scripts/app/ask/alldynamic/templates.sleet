@@ -129,12 +129,6 @@ view('list')
                                 .item(id='discuss-' + id ) > echo(questionDiscuss.replyNum) + string('strip') + string('reply')
                             else
                                 .item(id='discuss-' + id ) > string('reply')
-                            #  compare(concernNum 'gt' 0)
-                            #      .item(id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
-                            #      .item( 'hidden' id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')
-                            #  else
-                            #      .item( 'hidden' id='trend-unfollow-5_' + discussId data-name='id' data-value='5_' + discussId ) > string('unfollow')
-                            #      .item(id='trend-follow-5_' + discussId data-name='id' data-value='5_' + discussId ) >  string('follow')
                             .item > .share-bar
                                 .drop-down-wrapper
                                     span 分享
