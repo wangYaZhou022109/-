@@ -152,8 +152,8 @@ exports.dataForTemplate = {
                             else rr.finishStatus += '成绩' + (Number(sectionProcess.score) / 10) + ' ';
                         }
                         if (rr.sectionType === 9) {
-                            if (sectionProcess.examScore === null) rr.finishStatus += '成绩无';
-                            else rr.finishStatus += '成绩' + (sectionProcess.examScore / 100) + ' ';
+                            if (sectionProcess.score === null) rr.finishStatus += '成绩无';
+                            else rr.finishStatus += '成绩' + (sectionProcess.score / 100) + ' ';
                         }
                     }
                     if (statusMap[rr.sectionType]) {
