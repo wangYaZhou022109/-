@@ -16,5 +16,6 @@ module.exports = {
     'right.page': '向右翻',
     'reset.page': '换一组',
     'study.task.attachment': '作业附件',
-    'study.user.attachment': '用户提交的'
+    'study.user.attachment': '用户提交的：',
+    'study.my.submit': '我提交的：'
 };
