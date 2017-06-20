@@ -16,7 +16,7 @@ view('content') > form
                 .user-info
                     a(href='#') > echo( member.fullName)
                     span > echo('回复')
-                    span > echo(toMember.fullName)
+                    a(href='#') > echo(toMember.fullName)
                     .text-right
                         span > dateMinute(createTime)
                 .comment-text > echo(content)
