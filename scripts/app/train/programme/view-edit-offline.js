@@ -101,7 +101,7 @@ exports.handlers = {
                 dd = date[2];
                 hour = times[0];
                 min = times[1];
-                offlineCourse.courseDate = new Date(year, month, dd, hour, min).getTime();
+                offlineCourse.courseDate = new Date(year, month - 1, dd, hour, min).getTime();
             }
             offlineCourse.endTime = $(this.$('endTime')).val();
             offlineCourse.classroomId = $(this.$('classroomId')).val();
