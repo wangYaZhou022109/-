@@ -7,6 +7,9 @@
         @apply --clearfix;
 
         padding: calc(var(--font-size) * 2) 0;
+        &.s-padding {
+            padding-top: var(--space);
+        }
     }
 
     & .user-pic {
@@ -23,6 +26,21 @@
 
     & .comment-content {
         margin-left: calc(var(--font-size) * 5);
+        & .comment-title {
+            & .title {
+                font-size: 14px;
+                font-weight: bold;
+                width: 85%;
+                float: left;
+                cursor: pointer;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                & > a {
+                    color: var(--font-color);
+                }
+            }
+        }
     }
 
     & .boutique {
@@ -34,6 +52,10 @@
     & .comment-text {
         line-height: 2;
         margin: var(--space) 0;
+        color: var(--font-tip-color);
+        &.color-main {
+            color: var(--font-color);
+        }
     }
 
     & .comment-operation {
@@ -42,7 +64,7 @@
         & .item {
             display: inline-block;
             padding: 0;
-            margin-left: var(--base-gap);
+            margin-left: var(--input-height);
             cursor: pointer;
             color: var(--font-tip-color);
 
@@ -51,6 +73,9 @@
             }
             &.inline {
                 margin-left: var(--space);
+            }
+            & .add {
+                transform: scale(1);
             }
         }
 
