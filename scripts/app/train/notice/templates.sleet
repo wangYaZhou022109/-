@@ -34,7 +34,7 @@ view('main') > form.vertical
                         label.label.required 报名码
                         .content
                             span.m-right.form-line-height > echo(signupInfo.signupCode)
-                            .tag-btn.radius 复制
+                            .tag-btn.radius#copy(data-clipboard-text=signupInfo.signupCode) 复制
             span.layout-mt-small
                 | 引导语：请在下发培训公文时通知学员在报到前登录网大培训班填写“两个带来”问题，
                 | 培训期间进行交流分享(两个带来示例模板下载)。 “两个带来”，即带来一个优秀经验分享、带来一个棘手问题讨论，
@@ -60,7 +60,7 @@ view('main') > form.vertical
                     p 此为培训班的报名链接:
                     .alink.layout-mt-small
                         span.small-font.layout-mr http://sign.chinamobile.com
-                        .tag-btn.radius 复制
+                        .tag-btn.radius#copy-url(data-clipboard-text='http://sign.chinamobile.com') 复制
                         .enter.layout-mt-small
                             span.small-font.vertical-top.m-right 二维码报名入口:
                             #qrcode
