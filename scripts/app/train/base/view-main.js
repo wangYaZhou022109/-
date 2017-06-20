@@ -139,8 +139,8 @@ exports.dataForTemplate = {
         classInfo.rommText = romm !== null ? romm : '暂未分配';
         diningRoom = classInfo.diningRoom !== null ? classInfo.diningRoom : '暂未分配';
         classInfo.diningRoomText = diningRoom;
-        classRoom = classInfo.classRoomName !== null ? classInfo.classRoomName : '暂未分配';
-        classInfo.classRoomName = classRoom;
+        classRoom = classInfo.classRoom !== null ? classInfo.classRoom : '暂未分配';
+        classInfo.classRoom = classRoom;
         return classInfo;
     },
     checked: function() {

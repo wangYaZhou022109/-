@@ -108,6 +108,14 @@ var setOptions = {
                                 return false;
                             }).length;
                             this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
+
+                            this.data.examineeTotalScore = _.reduce(_.map(_.filter(questions, function(q) {
+                                return q.type !== 4 && q.type !== 5 && q.type !== 6;
+                            }), function(q) {
+                                return q.answerRecord ? q.answerRecord.score / 100 : 0;
+                            }), function(sum, n) {
+                                return sum + n;
+                            });
                         }
                         if (exam.showAnswerRule !== exam.NO_SHOW_ANYTHING && exam.examRecord.status > 5) {
                             this.data.examineeTotalScore = exam.examRecord.score / 100;

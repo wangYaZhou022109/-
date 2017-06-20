@@ -183,7 +183,6 @@ exports.store = {
             this.models.themeList.changed();
             state.data.index = index;
             state.changed();
-            this.module.items.online.updataCss();
         },
         saveTheme: function() {
             var themeList = this.models.themeList,
@@ -232,8 +231,25 @@ exports.store = {
             model.set(payload);
             files.clear();
             this.get(model).then(function(data) {
-                var d = data;
-                var newt = new Date((helpers.date(d[0].courseDate) + ' ' + d[0].startTime).replace('-', '/')).getTime();
+                var d = data,
+                    dateTime,
+                    date,
+                    year,
+                    month,
+                    dd,
+                    hour,
+                    min,
+                    times,
+                    newt;
+                dateTime = (helpers.date(d[0].courseDate) + ' ' + d[0].startTime).split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                newt = new Date(year, month, dd, hour, min).getTime();
                 files.data = d[0].attachList;
                 files.changed();
                 d[0].courseDate = newt;
@@ -448,7 +464,9 @@ exports.store = {
                 me = this;
             model.set(payload);
             this.del(model).then(function() {
-                me.get(taskList);
+                me.get(taskList).then(function() {
+                    me.module.items.task.updataCss();
+                });
             });
         },
         editTask: function(payload) {
@@ -467,8 +485,6 @@ exports.store = {
                 taskList = this.models.taskList,
                 state = this.models.state,
                 fileList = this.models.files,
-                startTime = payload.startTime,
-                endTime = payload.endTime,
                 me = this;
             D.assign(payload, {
                 fileList: JSON.stringify(fileList.data),
@@ -477,14 +493,12 @@ exports.store = {
             });
             task.clear();
             task.set(payload);
-            if (startTime >= endTime) {
-                this.app.message.alert('结束时间必须大于开始时间');
-            } else {
-                this.save(task).then(function() {
-                    this.app.message.success('提交成功');
-                    me.get(taskList);
+            this.save(task).then(function() {
+                this.app.message.success('提交成功');
+                me.get(taskList).then(function() {
+                    me.module.items.task.updataCss();
                 });
-            }
+            });
         },
         uploadTaskFile: function(payload) {
             var img = payload[0],
@@ -562,12 +576,17 @@ exports.store = {
             });
             if (questionary) {
                 questionnaireList.params.classId = state.classId;
-                me.get(questionnaireList);
+                me.get(questionnaireList).then(function() {
+                    me.module.items.questionnaire.updataCss();
+                });
             } else {
                 research.set(payload);
                 this.save(research).then(function() {
                     questionnaireList.params.classId = state.classId;
-                    me.get(questionnaireList);
+                    me.module.items.questionnaire.updataCss();
+                    me.get(questionnaireList).then(function() {
+                        me.module.items.questionnaire.updataCss();
+                    });
                 });
             }
         },
@@ -579,7 +598,10 @@ exports.store = {
             research.set(payload);
             this.del(research).then(function() {
                 questionnaireList.params.classId = state.classId;
-                me.get(questionnaireList);
+                me.module.items.questionnaire.updataCss();
+                me.get(questionnaireList).then(function() {
+                    me.module.items.questionnaire.updataCss();
+                });
             });
         },
         toEdit: function(payload) {
@@ -596,7 +618,9 @@ exports.store = {
             research.set(payload.data);
             me.put(research).then(function() {
                 me.app.message.success('操作成功');
-                me.get(questionnaireList);
+                me.get(questionnaireList).then(function() {
+                    me.module.items.questionnaire.updataCss();
+                });
             });
         },
         editTime: function(payload) {
@@ -606,7 +630,10 @@ exports.store = {
             research.set(payload);
             me.put(research).then(function() {
                 me.app.message.success('操作成功');
-                me.get(me.models.questionnaireList);
+                me.module.items.questionnaire.updataCss();
+                me.get(me.models.questionnaireList).then(function() {
+                    me.module.items.questionnaire.updataCss();
+                });
             });
         },
         addCourse: function() {

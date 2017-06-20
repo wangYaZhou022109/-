@@ -55,6 +55,7 @@ exports.store = {
             data.difficulty = difficultys[Number(question.difficulty) - 1].value;
             data.detailMode = payload.mode;
             data.subMode = payload.subMode;
+            data.status = payload.status;
             this.models.sub.data.questions = sortByQuestionType(question.subs);
             this.models.answer.init(payload.answer);
         },

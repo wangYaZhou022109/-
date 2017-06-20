@@ -34,7 +34,7 @@ exports.store = {
                 access.data = { researchQuestionaryId: payload.researchId };
 
                 return me.save(access).then(function() { // 访问量+1，同时判断调研是否取消发布
-                    return me.chain(me.get(me.models.research), function() {
+                    return me.chain(me.get(me.models.research, { loading: true }), function() {
                         D.assign(topics.params, {
                             ids: _.map(research.data.topics, 'topicId').join(',')
                         });
