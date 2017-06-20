@@ -43,7 +43,7 @@ view('list')
                             .item(id='trend-follow-5_' + questionDiscuss.id data-name='id' data-value='5_' + questionDiscuss.id ) > echo('+') + string('follow')
                         .item > .share-bar
                             .drop-down-wrapper
-                                i.iconfont.icon-share-2(title='分享')
+                                span 分享
                                 form.drop-down-content > .content
                                     .item > div(id ='shareTo-qzone_' + questionDiscuss.id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                     .item > div(id ='shareTo-weibo_' + questionDiscuss.id) > i.iconfont.icon-sina + span 分享到新浪微博

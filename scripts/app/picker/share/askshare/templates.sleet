@@ -28,7 +28,7 @@ view('selectdrop')
 
 view('topic')
     .form-row.textarea-row
-        label.required > echo('选择话题')
+        label.required > echo('关联标签')
         #select-topic
 
 view('edit')
