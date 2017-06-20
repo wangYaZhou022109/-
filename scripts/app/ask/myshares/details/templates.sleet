@@ -68,7 +68,10 @@ view('main')
                                 else
                                     .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                     .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞（' + praiseNum +'）')
-                                .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
+                                if(replyNum)
+                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
+                                else
+                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（0）')
                             .text-right
                                 .item > .share-bar
                                     .drop-down-wrapper
@@ -108,4 +111,4 @@ view('relatedquestions')
         .layout-mt-small.m-top
             each(question)
                 .block.layout-mt-small.m-top 
-                    a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)
+                    a.text-overflow(href='#/ask/sharedetails/'+id)> echo(title)

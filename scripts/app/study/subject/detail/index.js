@@ -32,11 +32,6 @@ exports.store = {
                 subject.set(obj);
                 me.models.styles.set(styles);
                 state.changed();
-            }, function(reason) {
-                if (reason[0] && reason[0].responseText) {
-                    state.data.error = JSON.parse(reason[0].responseText);
-                    state.changed();
-                }
             });
         }
     }

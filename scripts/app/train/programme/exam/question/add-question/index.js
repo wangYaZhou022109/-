@@ -38,13 +38,14 @@ exports.store = {
             tempAddQuestionOptions.set(payload);
 
             state.clear();
-            state.data.type = 1;
+            state.data.type = tempAddQuestionOptions.data.type || 1;
 
             this.models.question.set(question);
             if (question) this.models.key.set({ id: question.id });
 
             D.assign(state.data, question);
-            D.assign(state.params, payload.params || {});
+            D.assign(state.params, payload.params
+                || payload.question || {});
 
             itemPool.data.interim = interim;
             if (interim) {
@@ -56,6 +57,9 @@ exports.store = {
             } else {
                 itemPool.data = { entryDepot: true };
             }
+            D.assign(orgs.params, {
+                uri: this.module.renderOptions.url || 'exam/question-depot'
+            });
             return this.get(orgs);
         },
         saveQuestion: function(payload) {
@@ -77,7 +81,6 @@ exports.store = {
                     isTemp: this.module.renderOptions.isTemp
                 })
             );
-
             return this.save(this.models.question).then(function() {
                 me.app.message.success('保存成功');
                 if (callback) {

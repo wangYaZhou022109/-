@@ -4,7 +4,8 @@ var strings = require('./app/util/strings'),
         add: '新增',
         edit: '编辑'
     },
-    EXAM_SOURCE_TYPE = 1;
+    EXAM_SOURCE_TYPE = 1,
+    _ = require('lodash/collection');
 exports.RESEARCH_TYPE = 2;
 
 exports.items = {
@@ -25,12 +26,16 @@ exports.store = {
         form: {
             url: '../exam/research-activity/insert-of-other-module'
         },
+        img: { url: '../system/file/upload' },
         time: {}
     },
     callbacks: {
         init: function(payload) {
+            var research = this.models.research;
+            research.clear();
+            this.models.time.clear();
             if (payload.researchId) {
-                this.models.research.set({
+                research.set({
                     id: payload.researchId,
                     sourceType: payload.sourceType || EXAM_SOURCE_TYPE
                 });
@@ -38,45 +43,66 @@ exports.store = {
                     startTime: payload.startTime,
                     endTime: payload.endTime
                 };
-                this.models.research.data = {
-                    startTime: payload.startTime,
-                    endTime: payload.endTime
-                };
-                return this.get(this.models.research);
+                return this.chain(this.get(research), function() {
+                    research.data.name = payload.name || research.data.name;
+                });
             }
-            D.assign(this.models.research.data, {
+
+            D.assign(research.data, {
                 sourceType: payload.sourceType || EXAM_SOURCE_TYPE,
                 type: this.module.options.RESEARCH_TYPE
             });
             return '';
         },
         save: function(payload) {
-            var me = this,
-                right,
-                validate = payload.validate;
-            if (validate) {
-                this.models.form.set(D.assign(payload, {
-                    sourceType: this.models.research.data.sourceType
-                }));
-                right = me.save(me.models.form).then(function() {
-                    var callback = me.module.renderOptions.callback,
-                        data = me.models.form.data;
-                    data.startTime = payload.startTime;
-                    data.endTime = payload.endTime;
-                    if (callback) callback(data);
-                    me.models.research.clear();
-                    me.models.time.clear();
-                    me.app.message.success('保存成功！');
-                });
-            } else {
-                right = false;
-            }
-            return right;
+            var me = this;
+            this.models.form.set(D.assign(payload, {
+                sourceType: this.models.research.data.sourceType
+            }));
+            return this.save(this.models.form).then(function() {
+                var callback = me.module.renderOptions.callback,
+                    data = me.models.form.data;
+                data.startTime = payload.startTime;
+                data.endTime = payload.endTime;
+                if (callback) callback(data);
+                me.app.message.success('保存成功');
+            });
         },
-        changeInfoDetaile: function(payload) {
-            var main = this.module.items.main.getEntities()[0];
+        changeInfo: function(payload) {
+            var main = this.module.items.main.getEntities()[0],
+                dateTime,
+                date,
+                year,
+                month,
+                dd,
+                hour,
+                min,
+                times,
+                result = {};
+            if (payload.startTime) {
+                dateTime = payload.startTime.split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                result.startTime = new Date(year, month - 1, dd, hour, min).getTime();
+            }
+            if (payload.endTime) {
+                dateTime = payload.endTime.split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                result.endTime = new Date(year, month - 1, dd, hour, min).getTime();
+            }
             D.assign(this.models.research.data, payload, main.getData());
-            D.assign(this.models.time.data, payload, main.getData());
+            D.assign(this.models.time.data, result);
             this.models.research.changed();
             this.models.time.changed();
         }
@@ -91,14 +117,22 @@ exports.buttons = [{
     text: strings.get('ok'),
     fn: function() {
         var view = this.items.main.getEntities()[0],
-            me = this;
-        return me.dispatch('save', D.assign(
-            me.items.main.getData(),
+            validate = this.items.main.validate(),
+            dimensions = view.getData().dimensions || [],
+            everyQuestionHas = dimensions.length > 0 && _.every(dimensions, function(d) { // 每个维度必须有试题
+                return d.questions && d.questions.length > 0;
+            });
+        if (!validate) return false;
+        if (!everyQuestionHas) {
+            this.app.message.error('问卷内容不完整，无法保存');
+            return false;
+        }
+        return this.dispatch('save', D.assign(
+            this.items.main.getData(),
             {
                 dimensions: JSON.stringify(view.getData().dimensions),
                 id: this.store.models.research.data.id,
-                type: this.module.options.RESEARCH_TYPE,
-                validate: this.items.main.validate(),
+                type: this.options.RESEARCH_TYPE
             }
         ));
     }

@@ -22,29 +22,44 @@ exports.store = {
         },
     },
     callbacks: {
-        init: function() {
+        init: function(payload) {
+            D.assign(this.models.state.data, {
+                callbacks: payload.callback
+            });
             this.models.memberForm.clear();
         },
         save: function(options) {
             var memberForm = this.models.memberForm,
-                me = this;
+                me = this,
+                error,
+                callbacks;
             D.assign(memberForm.data, options);// 把新值和旧值合并,用新值覆盖旧值
             if (memberForm.data.id) {
                 memberForm.data.id = null;
             }
-            return this.put(memberForm).then(function(data) {
+            this.put(memberForm).then(function(data) {
                 if (data[0].password === '2') {
                     me.app.message.error('密码修改失败，旧密码输入不正确');
                 } else {
                     me.app.message.success('修改成功');
+                    callbacks = me.models.state.data.callbacks;
+                    callbacks.call();
+                }
+            }, function(reason) {
+                if (reason[0] && reason[0].responseText) {
+                    error = JSON.parse(reason[0].responseText);
+                    if (error.errorCode === 20116) {
+                        me.app.message.error('密码修改失败，旧密码输入不正确');
+                    }
                 }
             });
+            return false;
         }
     }
 };
 
 exports.afterRender = function() {
-    this.dispatch('init');
+    this.dispatch('init', this.renderOptions);
 };
 
 exports.buttons = [

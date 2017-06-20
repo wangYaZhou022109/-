@@ -129,9 +129,9 @@ view('list')
                                     .item( 'hidden' id='trend-unfollow-3_' + id data-name='id' data-value='3_' + id ) > string('unfollow')
                                     .item(  id='trend-follow-3_' + id data-name='id' data-value='3_' + id ) > string('follow') 
                                 compare(praise 'eq' true)
-                                    .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
+                                    .item(id='unpraise-3_'+ id data-name='id' data-value='3_' + id ) > echo('已点赞')
                                 else
-                                    .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='praise-3_'+ id data-name='id' data-value='3_' + id ) >  echo('赞（' + praiseNum +'）')
                                 .item(id='discuss-' + id ) > echo('参与讨论') +  echo('（' + shareReplyNum +'）')
                             
                                 .item > .share-bar

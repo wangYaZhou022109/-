@@ -12,8 +12,7 @@ exports.bindings = {
 
 exports.events = {
     'click isOpen-*': 'changeTime',
-    'click usingTwoBrings': 'changeQuestion',
-    'click copy': 'copyCode'
+    'click usingTwoBrings': 'changeQuestion'
 };
 
 exports.handlers = {
@@ -28,9 +27,6 @@ exports.handlers = {
             this.$('question1').value = '';
             this.$('question2').value = '';
         }
-    },
-    copyCode: function() {
-
     }
 };
 
@@ -125,6 +121,12 @@ exports.components = [{
             text: code
         }
     };
+}, {
+    id: 'copy',
+    name: 'clipboard'
+}, {
+    id: 'copy-url',
+    name: 'clipboard'
 }];
 
 exports.mixin = {
