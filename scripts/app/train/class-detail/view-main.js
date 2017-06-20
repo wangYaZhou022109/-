@@ -2,7 +2,8 @@ exports.bindings = {
     classId: true,
     bus: true,
     trainee: true,
-    state: false
+    state: false,
+    signUpInfo: false
 };
 
 exports.events = {
@@ -41,6 +42,17 @@ exports.handlers = {
 exports.actions = {
     'click twoBring': 'twoBring',
     'click questionnaire': 'questionnaire',
+};
+
+exports.dataForActions = {
+    twoBring: function() {
+        var signUpInfo = this.bindings.signUpInfo.data;
+        if (signUpInfo.usingTwoBrings === 1) {
+            return true;
+        }
+        this.app.message.error('该班级没有启用两个带来');
+        return false;
+    }
 };
 
 exports.actionCallbacks = {
