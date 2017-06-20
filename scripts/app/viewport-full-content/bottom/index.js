@@ -5,15 +5,20 @@ exports.items = {
 exports.store = {
     models: {
         bottom: { url: '../system/home-footer' },
-        homeConfig: { url: '../system/home-config/config' }
+        homeConfig: { url: '../system/home-config/config' },
+        announcements: { url: '../system/operation/announcement/person-list' } // 公告
     },
     callbacks: {
         init: function(payload) {
             var homeConfig = this.models.homeConfig,
                 bottom = this.models.bottom,
+                announcements = this.models.announcements,
                 me = this;
             homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
             homeConfig.clear();
+            announcements.clear();
+            announcements.params = { page: 1, pageSize: 1 };
+            this.get(announcements);
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     bottom.params.homeConfigId = homeConfig.data.id;
