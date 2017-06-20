@@ -42,7 +42,12 @@ exports.events = {
 
 exports.handlers = {
     showMore: function() {
-        var model = this.module.items['center/index/more'];
-        this.app.viewport.modal(model);
+        var me = this,
+            model = this.module.items['center/index/more'];
+        me.app.viewport.modal(model, {
+            callback: function() {
+                me.module.dispatch('insertReadState');
+            }
+        });
     }
 };

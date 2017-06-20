@@ -16,9 +16,8 @@ exports.events = {
 
 exports.handlers = {
     showEditInfo: function() {
-        var me = this,
-            model = this.module.items['center/edit'];
-        this.app.viewport.modal(model, { callback: function() { me.module.dispatch('refreshMember'); } });
+        var model = this.module.items['center/edit'];
+        this.app.viewport.modal(model);
     }
 };
 

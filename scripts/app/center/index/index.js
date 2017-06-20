@@ -52,7 +52,8 @@ exports.store = {
         expertMe: { url: '../ask-bar/expert/me', autoLoad: 'after' }, // 当前用户的专家信息
         contact: { url: '../train/project/find-contact', autoLoad: 'after' }, // 是否需求方
         classstff: { url: '../train/classstaff/find-classstaff', autoLoad: 'after' }, // 是否班务
-        announcements: { url: '../system/operation/announcement/person-list' } // 公告
+        announcements: { url: '../system/operation/announcement/person-list' }, // 公告
+        insertReadState: { url: '../system/operation/announcement/insertReadStatus' }
     },
     callbacks: {
         init: function(options) {
@@ -99,10 +100,11 @@ exports.store = {
             D.assign(announcements.params, payload);
             me.get(announcements);
         },
-        refreshMember: function() {
-            var me = this,
-                member = me.models.member;
-            return me.get(member);
+        insertReadState: function() {
+            var me = this;
+            this.put(this.models.insertReadState).then(function() {
+                me.get(me.models.announcements);
+            });
         }
     }
 };
