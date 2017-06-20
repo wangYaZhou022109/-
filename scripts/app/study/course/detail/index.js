@@ -112,6 +112,7 @@ exports.store = {
                 progress = this.models.progress;
             course.set(payload);
             courseRelated.params = { limit: 2, id: payload.id };
+            collect.clear();
             collect.params = { businessId: payload.id };
             register.set({ courseId: payload.id });
 
