@@ -19,7 +19,7 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 closerefresh: function(id, type) {
                     var newData = [];
@@ -209,7 +209,7 @@ exports.store = {
             params.id = 'null';
             trends.set(params);
             this.post(trends).then(function() {
-                console.log(this.$('topbanner').val());
+                // console.log(this.$('topbanner').val());
                 // this.$('topbanner').display = 'none';
                 $(this.$('topbanner')).hide();
             });
