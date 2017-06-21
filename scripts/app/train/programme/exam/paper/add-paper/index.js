@@ -2,10 +2,22 @@ var _ = require('lodash/collection'),
     maps = require('./app/util/maps'),
     $ = require('jquery'),
     D = require('drizzlejs'),
+    sortType = {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 5,
+        5: 6,
+        6: 7,
+        8: 4
+    },
     initTable;
 exports.title = function() {
     return this.renderOptions.id ? '编辑试卷' : '新增试卷';
 };
+
+exports.large = true;
+
 exports.items = {
     summary: 'summary',
     'question-classes': 'question-classes',
@@ -36,6 +48,14 @@ exports.store = {
                     var me = this;
                     return _.map(me.store.models.paper.data.paperClassQuestions, function(qc) {
                         return qc.questionId;
+                    });
+                },
+                sortQuestion: function() {
+                    var paperClassQuestions = this.data.paperClassQuestions;
+                    this.data.paperClassQuestions = _.map(_.orderBy(_.map(paperClassQuestions, function(q) {
+                        return D.assign(q, { sortType: sortType[q.question.type] });
+                    }), ['sortType', 'sequence'], ['asc', 'asc']), function(q, n) {
+                        return D.assign(q, { sequence: n + 1 });
                     });
                 }
             }
@@ -69,10 +89,15 @@ exports.store = {
             D.assign(me.models.paper.data, payload, {
                 paperClassQuestions: JSON.stringify(paperClassQuestions),
                 type: me.module.renderOptions.type || 1,
-                totalScore: me.models.paper.data.totalScore * 100,
+                totalScore: Math.round(me.models.paper.data.totalScore * 100),
                 name: this.module.renderOptions.paperName
             });
-            return me.save(me.models.paper);
+            return me.save(me.models.paper, { loading: true }).then(function() {
+                var callback = me.module.renderOptions.callback,
+                    result = me.models.paper.data.id || '';
+                me.app.message.success('保存成功');
+                if (callback) callback(result);
+            });
         },
         submitDataBack: function() {
             var me = this,
@@ -114,8 +139,9 @@ exports.store = {
         },
         addQuestionClass: function(q) {
             var me = this,
+                paper = me.models.paper,
                 questionClass = {},
-                paperClassQuestions = me.models.paper.data.paperClassQuestions;
+                paperClassQuestions = paper.data.paperClassQuestions;
             if (_.find(paperClassQuestions, { questionId: q.id })) {
                 return;
             }
@@ -126,12 +152,14 @@ exports.store = {
             questionClass.isFromSelected = q.isFromSelected || 0;
             questionClass.question = q;
             paperClassQuestions.push(questionClass);
-            me.models.paper.changed();
+            paper.sortQuestion();
+            paper.changed();
             me.module.dispatch('reloadSummary');
         },
         addQuestionClasses: function(questions) {
             var me = this,
-                paperClassQuestions = me.models.paper.data.paperClassQuestions;
+                paper = this.models.paper,
+                paperClassQuestions = paper.data.paperClassQuestions;
             _.forEach(questions, function(q) {
                 var questionClass = {};
                 if (_.find(paperClassQuestions, { questionId: q.id })) {
@@ -145,7 +173,8 @@ exports.store = {
                 questionClass.question = q;
                 paperClassQuestions.push(questionClass);
             });
-            // me.models.paper.changed();
+            paper.sortQuestion();
+            paper.changed();
             me.module.dispatch('reloadSummary');
         },
         updatePaper: function(map) {
@@ -246,8 +275,8 @@ exports.buttons = [{
     fn: function(payload) {
         var me = this,
             paperClassQuestions = me.store.models.paper.data.paperClassQuestions,
-            organizationId = $('input[name="organizationId"]').val(),
-            callback = this.renderOptions.callback;
+            organizationId = $('input[name="organizationId"]').val();
+
         return me.dispatch('updatePaper', { key: 'organizationId', value: organizationId }).then(function() {
             if (paperClassQuestions.length < 1) {
                 me.app.message.error('试题不能为空');
@@ -258,14 +287,8 @@ exports.buttons = [{
                 me.app.message.error('试卷总分不能超过1000分');
                 return false;
             }
-            return me.dispatch('savePaper', payload).then(function() {
-                var result = me.store.models.paper.data.id || '';
-                me.app.message.success('保存成功');
-                callback(result);
-            }, function() {
-                me.dispatch('submitDataBack');
-                return false;
-            });
+
+            return me.dispatch('savePaper', payload);
         });
     }
 }];

@@ -165,10 +165,16 @@ exports.handlers = {
     delTarget: function(id) {
         var courseList = this.bindings.courseList.data;
         var targetList = this.bindings.targetList.data;
+        var delList = this.bindings.delList.data,
+            index;
         if (_.find(courseList, ['id', id])) {
-            targetList = _.filter(targetList, function(fm) {
-                return fm.id !== id;
+            index = this.bindings.targetList.data.findIndex(function(e) {
+                return e.resourceId === id;
             });
+            targetList = _.filter(targetList, function(fm) {
+                return fm.resourceId !== id;
+            });
+            delList.push(this.bindings.targetList.data[index]);
             this.bindings.targetList.data = targetList;
         }
         this.bindings.targetList.changed();
