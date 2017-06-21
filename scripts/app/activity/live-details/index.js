@@ -1,6 +1,5 @@
 var D = require('drizzlejs'),
     _ = require('lodash/collection'),
-    errors = require('./app/util/errors'),
     STATUS_UNSTART = 1, // 直播状态-未开始
     STATUS_FINISH = 3; // 直播状态-已完成
 
