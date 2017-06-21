@@ -3,11 +3,12 @@ module > .watch-detail1-page
     .watch-detail1-total(data-region="shareaudit")
 
 view('shareaudit')
-    .h5 > echo(shareaudit.question.title)
-    .detail1-content.m-top.small-font
-        compare(jsonImg.length 'gt' 0)
-            img(src=jsonImg)
-        @echo(shareaudit.question.content)
+    .title-main    
+        .h5 > echo(shareaudit.question.title)
+        .detail1-content.m-top.small-font
+            compare(jsonImg.length 'gt' 0)
+                img(src=jsonImg)
+            @echo(shareaudit.question.content)
     .detail1-file.layout-mt-small
         | 附件：
         a
@@ -15,9 +16,9 @@ view('shareaudit')
             span > each(shareaudit.questionAttachList) > echo(originalFile)
     .detail1-person.layout-mt-small
         span > echo(shareaudit.member.fullName)
-        span 分享时间：
-        span > date(shareaudit.createTime)
-    .detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  echo(shareaudit.topicStr) + echo(' ')
+        span.sub-title 分享时间：
+        span.sub-title > date(shareaudit.createTime)
+    .text-main-color.detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  echo(shareaudit.topicStr) + echo(' ')
     textarea.w-full.layout-mt-small(rows="5"  readonly = readonly) > echo(shareaudit.auditNote)
 #  module > .course-page
 #      div(data-region='shareaudit' style='height:100%;')

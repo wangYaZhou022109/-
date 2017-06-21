@@ -45,9 +45,12 @@ exports.store = {
                     var chapter = this.findChapter(section.chapterId);
                     var flag = true;
 
-                    _.each(this.data, function(v) {
+                    _.each(this.data.courseChapters, function(v) {
+                        var sections = v.courseChapterSections;
                         if (v.id === chapter.id) return false;
-                        flag = me.checkSection(sectionId); // 是否学完
+                        if (sections.length > 0) {
+                            flag = me.checkSection(sections[sections.length - 1].id); // 是否学完
+                        }
                         return flag;
                     });
                     return flag;
@@ -109,6 +112,7 @@ exports.store = {
                 progress = this.models.progress;
             course.set(payload);
             courseRelated.params = { limit: 2, id: payload.id };
+            collect.clear();
             collect.params = { businessId: payload.id };
             register.set({ courseId: payload.id });
 

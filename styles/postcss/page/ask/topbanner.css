@@ -4,27 +4,27 @@
     & .h4 {
         padding: var(--space) 0;
     }
-    
-    & li {
+    & ul {
+        margin-right: -calc(var(--space) * 2);
+        margin-left: -calc(var(--space) * 2);
+        & li {
 
-        width: 15%;
-        text-align: center;
-        margin-right: calc(var(--base-gap) + 6);
-        & img {
-            width: 100%;
-        }
-        & .item-title {
+            width: 20%;
+            text-align: center;
+            padding: 0 calc(var(--space) * 2);
+            box-sizing: border-box;
+            & img {
+                width: 100%;
+            }
+            & .item-title {
+                padding: var(--space) 0;
+            }
+            & .item-attention {
+            background-color:var(--link-color); 
             padding: var(--space) 0;
-        }
-        & .item-attention {
-           background-color:var(--link-color); 
-           padding: var(--space) 0;
-           color:var(--white);
+            color:var(--white);
+            }
         }
     }
-    & li:last-child {
-        margin-right: 0;
-    }
-    
   
 }

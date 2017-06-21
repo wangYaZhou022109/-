@@ -8,8 +8,7 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    getCurrentStatus,
-    PC_TYPE = 1;
+    getCurrentStatus;
 
 exports.items = {
     side: 'side',
@@ -215,7 +214,7 @@ exports.store = {
                     // 这里去answer的数据只会保存已答题的数据，不会保存未答题的数据，所以要做处理，将交白卷的也保存
                     return {
                         researchAnswerRecords: JSON.stringify(_.map(me.store.models.questions.data, function(q) {
-                            var answer = _.find(me.data, ['key', q.id]);
+                            var answer = _.find(me.data, ['key', q.id]) || {};
                             return {
                                 questionId: q.id,
                                 answer: answer.value ? _.map(answer.value, 'value').join(',') : '',
@@ -240,8 +239,7 @@ exports.store = {
             } else if (payload.researchQuestionaryId) {
                 researchRecord.params = {
                     researchQuestionaryId: payload.researchQuestionaryId,
-                    businessId: payload.businessId,
-                    clientType: PC_TYPE
+                    businessId: payload.businessId
                 };
                 return this.get(researchRecord, { loading: true }).then(function() {
                     questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));

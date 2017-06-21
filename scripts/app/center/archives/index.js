@@ -2,7 +2,8 @@
 exports.items = {
     condition: 'condition',
     chart: 'chart',
-    detail: 'detail'
+    detail: 'detail',
+    'center/integral': { isModule: true }
 };
 exports.store = {
     models: {

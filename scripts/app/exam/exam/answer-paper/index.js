@@ -16,7 +16,16 @@ var options = require('./app/exam/exam/base-paper/index'),
     submitType = {
         Auto: 'Auto',
         Hand: 'Hand'
-    };
+    },
+    submitTipsType = {
+        AUTO: 1, //  自动提交
+        HAND: 2, //  手动点击提交
+        TIMEOUT: 3, //  超时提交
+        FORCE: 4, //  强制交卷
+        FULL_SWICH: 5 //  切屏满
+    },
+    showTips,
+    showMessage;
 
 var setOptions = {
     items: {
@@ -315,6 +324,8 @@ var setOptions = {
                         state.init(exam.data);
                         countDown.init();
                     }
+                }, function() {
+                    showMessage.call(me);
                 });
             },
             saveAnswer: function(payload) {
@@ -396,23 +407,11 @@ var setOptions = {
                                     countDown.clearIntervalIt();
                                 }
 
-                                //  提交成功后弹出提示框
-                                return me.module.dispatch('showTips', {
-                                    tips: exam.data.paper.isSubjective === 1
-                                        ? strings.get('exam.answer-paper.submit-success-mark')
-                                            : strings.get('exam.answer-paper.submit-success')
-                                }).then(function() {
-                                    me.app.viewport.modal(me.module.items['exam-notes']);
-                                });
+                                showTips.call(me, payload.submitTipsType, exam);
                             }
-                            return '';
                         }, function() {
                             //  提交异常提示
-                            return me.module.dispatch('showTips', {
-                                message: '网络已断开，无法继续考试，请检查本地网络'
-                            }).then(function() {
-                                me.app.viewport.modal(me.module.items['exam-notes']);
-                            });
+                            showMessage.call(me);
                         });
                 }
                 return '';
@@ -448,12 +447,8 @@ var setOptions = {
                     message;
                 if (exam.allowSwitchTimes) {
                     if (exam.allowSwitchTimes === (exam.lowerSwitchTimes || 0) + 1) {
-                        return this.module.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
-                            return me.module.dispatch('showTips', {
-                                tips: strings.get('exam.answer-paper.switch-screen.full-times')
-                            }).then(function() {
-                                me.app.viewport.modal(me.module.items['exam-notes']);
-                            });
+                        return this.module.dispatch('submitPaper', {
+                            submitType: submitType.Hand, submitTipsType: submitTipsType.FULL_SWICH
                         });
                     }
 
@@ -571,20 +566,20 @@ var target = D.assign({}, {
             //  自动提交
             autoSubmit = function() {
                 if (!me.store.models.exam.data.id) return '';
-                return me.dispatch('submitPaper', { submitType: submitType.Auto }).then(function() {
+                return me.dispatch('submitPaper', {
+                    submitType: submitType.Auto, submitTipsType: submitTipsType.AUTO
+                }).then(function() {
                     helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
                 });
             },
 
             //  后台主动强制交卷回调
             forceSubmitPaper = function() {
-                return me.dispatch('submitPaper', { submitType: submitType.Hand }).then(function() {
+                return me.dispatch('submitPaper', {
+                    submitType: submitType.Hand,
+                    submitTipsType: submitTipsType.FORCE
+                }).then(function() {
                     helper.WS.closeConnect();
-                    return me.dispatch('showTips', {
-                        tips: strings.get('exam.answer-paper.force-submit')
-                    }).then(function() {
-                        me.app.viewport.modal(me.items['exam-notes']);
-                    });
                 });
             };
 
@@ -648,3 +643,40 @@ module.exports = target;
 //     }
 // };
 
+showTips = function(type, exam) {
+    var me = this,
+        tips;
+    //  手动点击提交提示
+    if (type === submitTipsType.HAND) {
+        tips = exam.data.paper.isSubjective === 1
+                ? strings.get('exam.answer-paper.submit-success-mark')
+                    : strings.get('exam.answer-paper.submit-success');
+    }
+    //  强制交卷提示
+    if (type === submitTipsType.FORCE) {
+        tips = strings.get('exam.answer-paper.force-submit');
+    }
+    //  超时提示
+    if (type === submitTipsType.TIMEOUT) {
+        tips = strings.get('exam.answer-paper.time-out.submit');
+    }
+    //  切屏满强制交卷
+    if (type === submitTipsType.FULL_SWICH) {
+        tips = strings.get('exam.answer-paper.switch-screen.full-times');
+    }
+    return me.module.dispatch('showTips', {
+        tips: tips
+    }).then(function() {
+        me.app.viewport.modal(me.module.items['exam-notes']);
+    });
+};
+
+showMessage = function() {
+    var me = this;
+    this.models.state.data = {};
+    return me.module.dispatch('showTips', {
+        message: '网络已断开，无法继续考试，请检查本地网络'
+    }).then(function() {
+        me.app.viewport.modal(me.module.items['exam-notes']);
+    });
+};

@@ -26,7 +26,7 @@ exports.dataForTemplate = {
         return _.map(data.knowledges, function(k) {
             var know = k || {};
             var index = know.name.lastIndexOf('.');
-            var reg = /^[A-Za-z]+$/;
+            var reg = /^[0-9a-zA-Z]*$/g;
             know.browseCount = (know.browseCount == null) ? 0 : know.browseCount;
             know.downloadMemberCount = (know.downloadMemberCount == null) ? 0 : know.downloadMemberCount;
             know.avgScore *= 10;

@@ -4,17 +4,20 @@ module
 
 view('banner-notice')
     if(Global.currentUser.id)
-        .notice-img
-            if(task.coverId)
-                img.block(src=downloadUrl(task.coverId))
-            else
-                img.block(src=task.img)
-            
-            .img-title > a.underline(href=task.url target='_blank' title=task.name) > echo(task.typeDesc) + echo(task.name)
-        ul > each(tasks)
-            li > a.underline(href=url target='_blank' title=name) > echo(typeDesc) + echo(name)
-        .notice-bottom > each(personPanels) 
-            .item > i.iconfont.icon-type + span > a.underline(href='/#/'+url) > echo(name)
+        if(task)
+            .notice-img
+                if(task.coverId)
+                    img.block(src=downloadUrl(task.coverId))
+                else
+                    img.block(src=task.img)
+                
+                .img-title > a.underline(href=task.url target='_blank' title=task.name) > echo(task.typeDesc) + echo(task.name)
+            ul > each(tasks)
+                li > a.underline(href=url target='_blank' title=name) > echo(typeDesc) + echo(name)
+            .notice-bottom > each(personPanels) 
+                .item > i.iconfont.icon-type + span > a.underline(href='/#/'+url) > echo(name)
+        else
+            .content-empty > .img-box.img-type-1 + p 暂无内容
     else
         if(news)
             .notice-img > img.block(src=downloadUrl(news.cover))&if(news.cover) + .img-title
