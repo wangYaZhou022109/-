@@ -57,9 +57,9 @@ exports.store = {
             } else {
                 itemPool.data = { entryDepot: true };
             }
-            D.assign(orgs.params, {
-                uri: this.module.renderOptions.url || 'exam/question-depot'
-            });
+            // D.assign(orgs.params, {
+            //     uri: this.module.renderOptions.url || 'exam/question-depot'
+            // });
             return this.get(orgs);
         },
         saveQuestion: function(payload) {
@@ -81,6 +81,7 @@ exports.store = {
                     isTemp: this.module.renderOptions.isTemp
                 })
             );
+
             return this.save(this.models.question).then(function() {
                 me.app.message.success('保存成功');
                 if (callback) {

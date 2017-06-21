@@ -183,6 +183,7 @@ exports.store = {
             this.models.themeList.changed();
             state.data.index = index;
             state.changed();
+            this.module.items.online.updataCss();
         },
         saveTheme: function() {
             var themeList = this.models.themeList,
@@ -199,7 +200,10 @@ exports.store = {
                 type: 2
             });
             me.save(me.models.themeModel).then(function() {
-                me.get(onlineCourseList);
+                me.module.items.online.updataCss();
+                me.get(onlineCourseList).then(function() {
+                    me.module.items.online.updataCss();
+                });
             });
         },
         submitOffline: function(payload) {
@@ -619,6 +623,7 @@ exports.store = {
             research.set(payload.data);
             me.put(research).then(function() {
                 me.app.message.success('操作成功');
+                me.module.items.questionnaire.updataCss();
                 me.get(questionnaireList).then(function() {
                     me.module.items.questionnaire.updataCss();
                 });
