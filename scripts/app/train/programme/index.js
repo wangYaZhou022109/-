@@ -249,7 +249,8 @@ exports.store = {
                 dd = date[2];
                 hour = times[0];
                 min = times[1];
-                newt = new Date(year, month, dd, hour, min).getTime();
+                // console.log(new Date(year, month - 1, dd, hour, min));
+                newt = new Date(year, month - 1, dd, hour, min).getTime();
                 files.data = d[0].attachList;
                 files.changed();
                 d[0].courseDate = newt;

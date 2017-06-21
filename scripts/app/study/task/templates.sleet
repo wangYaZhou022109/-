@@ -14,9 +14,10 @@ view('side') > .list
             li.no-margin
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
                 a.text-overflow.pointer(id='preview-'+attachmentId content-type=contentType href='javascript:;') > echo(name)
+    br
     if(userAttachments)
         ul.m-top
-            .m-bottom > strong > string('study.user.attachment') ：
+            .m-bottom > strong > string('study.my.submit')
             each(userAttachments)
                 if(description)
                     li.btn.block(id='viewUseDesc-'+id) 作业详情

@@ -66,7 +66,7 @@ D.ComponentManager.register('videojs', function(view, el, options) {
             this.on('error', handle(view.options.video.error));
             this.on('seeking', handle(view.options.video.seeking));
             this.on('seeked', handle(view.options.video.seeked));
-            this.on('loadstart', handle(view.options.video.loadstart));
+            this.on('loadeddata', handle(view.options.video.loadeddata));
         }
         if (options.callbacks) options.callbacks.call(view, this);
     });

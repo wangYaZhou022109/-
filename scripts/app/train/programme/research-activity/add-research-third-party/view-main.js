@@ -1,5 +1,5 @@
 var $ = require('jquery'),
-    markers = require('./app/ext/views/form/markers'),
+    // markers = require('./app/ext/views/form/markers'),
     validators = require('./app/ext/views/form/validators');
     // _ = require('lodash/collection');
 
@@ -7,6 +7,7 @@ exports.ADD_QUESTIONARY = 'train/programme/research-activity/add-research-activi
 
 exports.bindings = {
     research: true,
+    img: false,
     time: false
 };
 
@@ -21,7 +22,7 @@ exports.events = {
 
 exports.handlers = {
     changeInfo: function() {
-        return this.module.dispatch('changeInfoDetaile', this.getData());
+        return this.module.dispatch('changeInfo', this.getData());
     },
     changeTime: function() {
         var start = $(this.$('start-time')).val(),
@@ -37,21 +38,21 @@ exports.handlers = {
                 $(this.$('end-time')).val('');
             }
         }
-        return this.module.dispatch('changeInfoDetaile', this.getData());
+        return this.module.dispatch('changeInfo', this.getData());
     }
 };
 
-// exports.dataForTemplate = {
-//     research: function(data) {
-//         var me = this;
-//         return _.map(data.research, function(r) {
-//             var s = r;
-//             s.startTime = me.module.renderOptions.startTime;
-//             s.endTime = me.module.renderOptions.endTime;
-//             return s;
-//         });
-//     }
-// };
+exports.dataForTemplate = {
+    research: function(data) {
+        var research = data.research;
+        if (research) {
+            research.startTime = this.module.renderOptions.startTime;
+            research.endTime = this.module.renderOptions.endTime;
+            // this.bindings.research.changed();
+        }
+        return research;
+    }
+};
 
 exports.components = [{
     id: 'start-time',
@@ -89,44 +90,61 @@ exports.mixin = {
         };
     },
     validate: function() {
-        var name = $(this.$('name')),
-            start = $(this.$('start-time')),
-            end = $(this.$('end-time')),
-            startTime = $(this.$('start')),
-            questionaryDetail = $(this.$('questionaryDetail')),
-            flag = true,
-            reg = new RegExp('\\{' + 0 + '\\}', 'g');
+        var name = this.$('name'),
+            start = this.$('start-time'),
+            end = this.$('end-time'),
+            // startTime = $(this.$('start')),
+            questionaryDetail = this.$('questionaryDetail'),
+            flag = true;
 
-        markers.text.valid(name);
-        markers.text.valid(startTime);
-        markers.text.valid(end);
-        markers.text.valid(questionaryDetail);
+        // markers.text.valid(name);
+        // markers.text.valid(start);
+        // markers.text.valid(end);
+        // markers.text.valid(questionaryDetail);
 
-        if (name.val().trim() === '' || name.val().trim() === null) {
-            markers.text.invalid(name, validators.required.message);
+        if (!validators.required.fn(name.value)) {
+            $(name).addClass('error');
+            if (this.module.options.RESEARCH_TYPE === 2) {
+                this.app.message.error('调研名称必填');
+            } else if (this.module.options.RESEARCH_TYPE === 3) {
+                this.app.message.error('评估名称必填');
+            }
             flag = false;
         }
+        if (!validators.maxLength.fn(name.value, 30)) {
+            $(name).addClass('error');
+            if (this.module.options.RESEARCH_TYPE === 2) {
+                this.app.message.error('调研名称最大长度为:30');
+            } else if (this.module.options.RESEARCH_TYPE === 3) {
+                this.app.message.error('评估名称必填最大长度为:30');
+            }
+            flag = false;
+        }
+        $(name).removeClass('error');
+        if (!validators.required.fn(questionaryDetail.value)) {
+            $(questionaryDetail).addClass('error');
+            this.app.message.error('调研名称必填');
+            flag = false;
+        }
+        if (!validators.maxLength.fn(questionaryDetail.value, 1000)) {
+            $(questionaryDetail).addClass('error');
+            this.app.message.error('问卷须知最大长度为:1000');
+            flag = false;
+        }
+        $(questionaryDetail).removeClass('error');
 
-        if (start.val() === '' || start.val() === null) {
-            markers.text.invalid(startTime, validators.required.message);
+        if (!validators.required.fn(start.value)) {
+            $(start).addClass('error');
+            this.app.message.error('开始时间必填');
             flag = false;
         }
-        if (end.val() === '' || end.val() === null) {
-            markers.text.invalid(end, validators.required.message);
+        $(start).removeClass('error');
+        if (!validators.required.fn(end.value)) {
+            $(end).addClass('error');
+            this.app.message.error('结束时间必填');
             flag = false;
         }
-        if (!validators.required.fn(questionaryDetail.val())) {
-            markers.text.invalid(questionaryDetail, validators.required.message);
-            flag = false;
-        }
-        if (name.val().trim() !== '' && !validators.maxLength.fn(name.val(), 30)) {
-            markers.text.invalid(name, validators.maxLength.message.replace(reg, 30));
-            flag = false;
-        }
-        if (!validators.maxLength.fn(questionaryDetail.val(), 1000)) {
-            markers.text.invalid(questionaryDetail, validators.maxLength.message.replace(reg, 1000));
-            flag = false;
-        }
+        $(end).removeClass('error');
         return flag;
     }
 };

@@ -43,7 +43,7 @@ exports.handlers = {
     changeOfflineName: function(id) {
         $(this.$('input-name-offline-' + id)).css('display', 'block');
         $(this.$('label-name-offline-' + id)).css('display', 'none');
-        // this.$('input-name-offline-' + id).addEvent('blur', 'updateOfflineName');
+        // this.addEvent(target, 'blur', this.updateOfflineName());
     },
     updateOfflineName: function(id) {
         var val = $(this.$('input-name-offline-' + id)).val();
@@ -213,10 +213,19 @@ exports.dataForTemplate = {
 
 // exports.mixin = {
 //     addEvent: function(el, event, fn) {
-//         console.log(this);
 //         if (el.addEventListener) {
 //             el.addEventListener(event, fn, false);
+//         } else {
+//             el.attachEvent('on' + event, fn);
 //         }
-//         el.attachEvent('on' + event, fn);
+//     },
+//     updateOfflineName: function(id) {
+//         var val = $(this.$('input-name-offline-' + id)).val();
+//         console.log(33);
+//         if (val === '') {
+//             this.app.message.alert('课程名称不能为空');
+//         } else {
+//             this.module.dispatch('updateOfflineName', { id: id, name: val });
+//         }
 //     }
 // };

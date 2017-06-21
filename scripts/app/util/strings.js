@@ -55,3 +55,14 @@ exports.getWithParams = function(key, params) {
     }
     return str;
 };
+
+
+ // 扩展方法，IE浏览器不兼容startsWith方法
+if (typeof String.prototype.startsWith !== 'function') {
+    D.assign(String.prototype, {
+        startsWith: function(prefix) {
+            return this.slice(0, prefix.length) === prefix;
+        }
+    });
+}
+

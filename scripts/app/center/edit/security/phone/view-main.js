@@ -43,7 +43,7 @@ exports.dataForActions = {
     deletePhone: function(id) {
         var me = this;
         return this.Promise.create(function(resolve) {
-            var message = '是否确定删除该手机号?';
+            var message = '手机号删除后将无法恢复，是否确定删除该对象?';
             me.app.message.confirm(message, function() {
                 resolve(id);
             }, function() {

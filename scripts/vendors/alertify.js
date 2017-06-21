@@ -390,7 +390,11 @@
 				log.className = "alertify-log" + ((typeof type === "string" && type !== "") ? " alertify-log-" + type : "");
 				log.innerHTML = message;
 				// prepend child
-				elLog.insertBefore(log, elLog.firstChild);
+				if (elLog.firstChild) {
+					elLog.replaceChild(log, elLog.firstChild)
+				} else {
+					elLog.insertBefore(log, elLog.firstChild);
+				}
 				// triggers the CSS animation
 				setTimeout(function() { log.className = log.className + " alertify-log-show"; }, 50);
 				this.close(log, wait);

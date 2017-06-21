@@ -92,7 +92,7 @@ items = {
     9: function(section) {
         var progress = section.progress || { finishStatus: 0 },
             resource = section.resource || {},
-            examScore = progress.examScore || 0,
+            examScore = progress.score || 0,
             score = (examScore % 100) > 0 ? (examScore / 100).toFixed(1) : window.parseInt(examScore / 100),
             btnText = { 0: '参与考试', 1: '参与考试', 2: '查看详情', 5: '查看详情', 6: '重新考试' },
             statusText = { 2: '成绩：' + score, 5: '待评卷', 6: '成绩：' + score },

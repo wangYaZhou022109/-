@@ -1,3 +1,4 @@
+var PC_TYPE = 1;
 exports.items = {
     main: 'main'
 };
@@ -13,7 +14,8 @@ exports.store = {
             if (payload.researchId) {
                 this.models.research.params = {
                     researchId: payload.researchId,
-                    businessId: payload.businessId
+                    businessId: payload.businessId,
+                    clientType: PC_TYPE
                 };
                 return this.get(this.models.research);
             }
