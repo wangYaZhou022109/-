@@ -229,8 +229,10 @@ exports.buttons = [{
                 data.jsonImg = img[0].src;
             }
             data.content = content;
-            data.content_txt = obj.text();
+            // data.content_txt = obj.text();
+            data.content_txt = content.replace(/<[^>]+>/g, '');
         }
+        console.log(data);
         return this.dispatch('release', data);
     }
 }];

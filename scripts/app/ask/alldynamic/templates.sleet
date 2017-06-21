@@ -23,8 +23,8 @@ view('list')
                             a(href='#/ask/articledetails/' + questionId ) > echo(title)
                     .text-right.pointer > i.iconfont.icon-more.strong
                 .comment-text.text-overflow
-                    compare(thumbnail.length 'gt' 0)
-                        .img(src=thumbnail)
+                    compare(thumbnail 'ne' null)
+                    .img(src=thumbnail)
                     @echo(content)
                 .user-info
                     if(topicList)

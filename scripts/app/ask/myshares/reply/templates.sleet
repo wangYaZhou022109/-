@@ -36,7 +36,7 @@ view('content')
         .btn(id='discuss-answer-' + reply.id ) > echo('回复')
         each(reply.questionReplylist) > ul
             li
-                .user-pic > img(src="images/1.png")
+                .user-pic > img(src=headPhoto)
                 .comment-content
                     .user-info
                         a(href='#') > echo( member.fullName)
