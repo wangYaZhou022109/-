@@ -13,6 +13,7 @@ var parseType = function(data) {
             ppt: 5,
             pptx: 5,
             txt: 7,
+            epub: 6
         },
         defaule = 8;
     if (types[ext] === 0) {
