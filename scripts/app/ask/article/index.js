@@ -231,8 +231,10 @@ exports.buttons = [{
             data.content = content;
             // data.content_txt = obj.text();
             data.content_txt = content.replace(/<[^>]+>/g, '');
+            if (data.content_txt === '') {
+                data.content_txt = 'null';
+            }
         }
-        console.log(data);
         return this.dispatch('release', data);
     }
 }];

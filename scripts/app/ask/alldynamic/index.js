@@ -209,6 +209,9 @@ exports.store = {
             params.id = 'null';
             trends.set(params);
             this.post(trends).then(function() {
+                console.log(this.$('topbanner').val());
+                // this.$('topbanner').display = 'none';
+                $(this.$('topbanner')).hide();
             });
         },
         speech: function() {

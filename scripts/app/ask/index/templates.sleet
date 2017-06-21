@@ -12,15 +12,50 @@ module > .ask-page > .container
             div(data-region='top')
             div(data-region='middle')
             div(data-region='bottom')
-        .page-main(data-region='left' class = 'activity-category')
-             
+        #  .page-main(data-region='left' class = 'activity-category')
+        .page-main.topic-main(data-region='left')
+        .topicbanner(data-region="topicbanner")     
 
 view('left')
     div(data-dynamic-key='contentleft')
 
 #  view('right')
 #      div(data-dynamic-key='contentright')
-
+view('topicbanner')
+    .recommend-topic(id = 'recommend-topic')
+        .h4 我们向您推荐的话题：
+        ul.clearfix
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer
+                    i.iconfont.icon-add 
+                    span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+            li.pull-right
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer 
+                    i.iconfont
+                    span 关注
+                   
 view('top')
     div(data-dynamic-key='questionandarticles')
 view('middle')
