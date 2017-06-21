@@ -28,7 +28,8 @@ view('main')
                         i.iconfont.icon-favorite-full(title='取消收藏')
                 else
                     .item#collect
-                        i.iconfont.icon-favorite(title='收藏')
+                        i.iconfont.icon-favorite
+                        span 收藏
     p > each(topics)
         .tag-btn > echo(name)
     p

@@ -105,6 +105,11 @@ exports.store = {
             this.put(this.models.insertReadState).then(function() {
                 me.get(me.models.announcements);
             });
+        },
+        refreshMember: function() {
+            var me = this,
+                member = me.models.member;
+            return me.get(member);
         }
     }
 };

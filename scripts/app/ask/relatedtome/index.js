@@ -16,10 +16,27 @@ exports.store = {
         down: { url: '../human/file/download' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
+                closerefresh: function(id, type) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        var store = d;
+                        if (type === 1 && d.questionId === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else if (type === 2 && d.questionId === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else {
+                            newData.push(store);
+                        }
+                    });
+                    return newData;
+                },
                 delrefresh: function(id, trendsType) {
                     var newData = [];
                     _.forEach(this.data, function(d) {
@@ -109,6 +126,19 @@ exports.store = {
         }
     },
     callbacks: {
+        closeefresh: function(payload) {
+            var data = this.models.page.closerefresh(payload.id, payload.type),
+                trends = this.models.trends,
+                page = this.models.page;
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
         delrefresh: function(payload) {
             var id = payload.id,
                 page = this.models.page,

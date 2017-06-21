@@ -19,16 +19,16 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
-                closerefresh: function(id, trendsType) {
+                closerefresh: function(id, type) {
                     var newData = [];
                     _.forEach(this.data, function(d) {
                         var store = d;
-                        if (trendsType === 1 && d.questionId === id) {
+                        if (type === 1 && d.questionId === id) {
                             store.show = 3;
                             newData.push(store);
-                        } else if (trendsType === 2 && d.questionId === id) {
+                        } else if (type === 2 && d.questionId === id) {
                             store.show = 3;
                             newData.push(store);
                         } else {
@@ -134,7 +134,7 @@ exports.store = {
             this.models.callback();
         },
         closeefresh: function(payload) {
-            var data = this.models.page.closerefresh(payload.id, payload.trendsType),
+            var data = this.models.page.closerefresh(payload.id, payload.type),
                 trends = this.models.trends,
                 page = this.models.page;
             var params = this.models.page.params;
@@ -197,8 +197,8 @@ exports.store = {
         init: function() {
             var trends = this.models.trends;
             var params = this.models.page.params;
-            var page = this.models.page;
-            page.data = [];
+            // var page = this.models.page;
+            // page.data = [];
             params.id = 'null';
             trends.set(params);
             this.post(trends);
