@@ -12,13 +12,10 @@ view('side')
             .m-bottom > strong > string('study.task.attachment') ：
             .m-bottom
                 each(task.attachments)
-                    if(preview)
-                        a.text-overflow.pointer(id='taskAttachment'+attachmentId href='javascript:;') > echo(name)
-                    else
-                        a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+                    a.text-overflow.pointer(id='taskAttachment'+attachmentId content-type=contentType href='javascript:;') > echo(name)
                     a.pull-right(href=downUrl download=name) > string('download')
                     br
-        .m-bottom > strong > string('study.user.attachment') ：
+        .m-bottom > strong > string('study.user.attachment')
         each(sectionStudyProgress.sectionAttachments)
             .m-top
                 a(id='viewUseDesc-'+id) 作业详情
@@ -53,6 +50,10 @@ view('main')
     .preview-content
         compare(state.flag 'eq' 'pdf')
             #viewPdf
+        compare(state.flag 'eq' 'down')
+            .content-empty
+                .img-box.img-type-1
+                p 附件不支持预览，可直接下载
         if(state.description)
             .row
                 .col-sm-12

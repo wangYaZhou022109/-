@@ -14,9 +14,6 @@ exports.dataForTemplate = {
             me = this;
         _.map(task.attachments || [], function(attach) {
             var obj = attach;
-            if (obj.contentType && obj.contentType === 1) {
-                obj.preview = true;
-            }
             obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
         });
         return task;
@@ -26,9 +23,6 @@ exports.dataForTemplate = {
             me = this;
         _.map(sectionStudyProgress.sectionAttachments || [], function(attach) {
             var obj = attach;
-            if (obj.contentType && obj.contentType === 1) {
-                obj.preview = true;
-            }
             if (obj.attachmentId) {
                 obj.downUrl = me.bindings.download.getFullUrl() + '?id=' + obj.attachmentId;
             }
@@ -51,16 +45,19 @@ exports.handlers = {
             description: ''
         });
     },
-    taskAttachment: function(id) {
+    taskAttachment: function(id, e, element) {
         var attachUrl = this.bindings.preview.getFullUrl() + '/' + id,
+            contentType = element.getAttribute('content-type'),
             param = {
                 flag: 'pdf',
                 attachUrl: attachUrl
             };
+        if (Number(contentType) !== 1) param.flag = 'down';
         this.module.dispatch('updateState', param);
     },
-    sectionAttachment: function(id) {
+    sectionAttachment: function(id, e, element) {
         var sectionAttachments = this.bindings.sectionStudyProgress.data.sectionAttachments || [],
+            contentType = element.getAttribute('content-type'),
             attachment = _.find(sectionAttachments, {
                 id: id
             }),
@@ -70,6 +67,7 @@ exports.handlers = {
                 attachUrl: attachUrl,
                 description: ''
             };
+        if (Number(contentType) !== 1) param.flag = 'down';
         this.module.dispatch('updateState', param);
     },
     viewUseDesc: function(id) {
