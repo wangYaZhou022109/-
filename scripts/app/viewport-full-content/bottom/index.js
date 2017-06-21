@@ -16,9 +16,11 @@ exports.store = {
                 me = this;
             homeConfig.params = { configId: payload.configId || '', orgId: payload.orgId || '' };
             homeConfig.clear();
-            announcements.clear();
-            announcements.params = { page: 1, pageSize: 1 };
-            this.get(announcements);
+            if (this.app.global.currentUser.id) {
+                announcements.clear();
+                announcements.params = { page: 1, pageSize: 1 };
+                this.get(announcements);
+            }
             return this.get(homeConfig).then(function() {
                 if (homeConfig.data) {
                     bottom.params.homeConfigId = homeConfig.data.id;
