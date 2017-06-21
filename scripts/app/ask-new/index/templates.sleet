@@ -28,7 +28,7 @@ view('main')
                             img.pointer(src='images/1.png')
                         .comment-content
                             div.clearfix
-                                .h4.pull-left 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
+                                .h4.pull-left.text-overflow.overflow 提问标题提问标题提问标题提问标题提问标题提问标题提问标题
                                 .pull-right.iconfont.icon-more.m-right.pointer
                                     .drop-down-more
                                         i.iconfont.icon-triangle-up
@@ -176,25 +176,25 @@ view('topicbanner')
                 img(src="images/d1.jpg")
                 .item-title 话题名称
                 .item-attention.pointer 
-                    i.iconfont
+                    i.iconfont.icon-add
                     span 关注
             li.pull-left
                 img(src="images/d1.jpg")
                 .item-title 话题名称
                 .item-attention.pointer 
-                    i.iconfont
+                    i.iconfont.icon-add
                     span 关注
             li.pull-left
                 img(src="images/d1.jpg")
                 .item-title 话题名称
                 .item-attention.pointer 
-                    i.iconfont
+                    i.iconfont.icon-add
                     span 关注
-            li.pull-right
+            li.pull-left
                 img(src="images/d1.jpg")
                 .item-title 话题名称
                 .item-attention.pointer 
-                    i.iconfont
+                    i.iconfont.icon-add
                     span 关注
                    
     
