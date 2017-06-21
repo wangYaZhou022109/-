@@ -21,3 +21,7 @@ exports.store = {
 exports.beforeRender = function() {
     this.dispatch('init');
 };
+
+exports.afterRender = function() {
+    this.renderOptions.callback();
+};

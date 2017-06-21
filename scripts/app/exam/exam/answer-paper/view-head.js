@@ -5,7 +5,13 @@ var options = require('./app/exam/exam/base-paper/view-head'),
     obj = D.assign({}, options),
     events = D.assign({}, obj.events),
     bindings = D.assign({}, obj.bindings),
-    handlers = D.assign({}, obj.handlers);
+    handlers = D.assign({}, obj.handlers),
+    submitTipsType = {
+        AUTO: 1, //  自动提交
+        HAND: 2, //  手动点击提交
+        TIMEOUT: 3, //  超时提交
+        FORCE: 4 //  强制交卷
+    };
 
 obj.bindings = bindings;
 D.assign(obj.bindings, {
@@ -50,15 +56,9 @@ D.assign(obj.handlers, {
                     : strings.get('exam.submit-paper-confirm');
 
             me.app.message.confirm(message, function() {
-                return me.module.dispatch('submitPaper', { submitType: 'Hand' }).then(function() {
-                    //  提交成功后弹出提示框
-                    return me.module.dispatch('showTips', {
-                        tips: state.paper.isSubjective === 1
-                            ? strings.get('exam.answer-paper.submit-success-mark')
-                                : strings.get('exam.answer-paper.submit-success')
-                    }).then(function() {
-                        me.app.viewport.modal(me.module.items['exam-notes']);
-                    });
+                return me.module.dispatch('submitPaper', {
+                    submitType: 'Hand',
+                    submitTipsType: submitTipsType.HAND
                 });
             }, function() {
                 return true;

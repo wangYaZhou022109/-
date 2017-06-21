@@ -1,24 +1,25 @@
 #!handlebars
-module > .watch-detail1-page
-    .watch-detail1-total(data-region="shareaudit")
+module > .ask-exam-page
+    .ask-exam-total(data-region="shareaudit")
 
 view('shareaudit') > form.vertical
-    .h5 > echo(shareaudit.question.title)
-    .detail1-content.m-top.small-font
-        compare(jsonImg.length 'gt' 0)
-            img(src=jsonImg)
-        @echo(shareaudit.question.content)
+    .title-main
+        .h5 > echo(shareaudit.question.title)
+        .detail1-content.m-top.small-font
+            compare(jsonImg.length 'gt' 0)
+                img(src=jsonImg)
+            @echo(shareaudit.question.content)
     .detail-img.layout-mt-small
     .detail1-file.layout-mt-small
         | 附件：
         a
             .iconfont.icon-tag-1
-            span > echo(shareaudit.questionAttach.name)
+            span > each(shareaudit.questionAttachList) > echo(originalFile)
     .detail1-person.layout-mt-small
         span > echo(shareaudit.member.fullName)
-        span 分享时间：
-        span > dateTime(shareaudit.createTime)
-    .detail1-alink.layout-mt-smal > each(topicList) > echo(name) + echo(' ')
+        span.sub-title 发表文章时间：
+        span.sub-title > dateTime(shareaudit.createTime)
+    .text-main-color.detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  echo(shareaudit.topicStr) + echo(' ')
     input.input(name='id' type='hidden' value=shareaudit.id)
     input.input(name='questionId' type='hidden' value=shareaudit.question.id)
     input.input(name='objectId' type='hidden' value=shareaudit.objectId)

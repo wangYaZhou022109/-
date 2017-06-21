@@ -36,7 +36,7 @@
     & .recommend-ul {
         & .recommend-li {
             width: 16%;
-            height: calc(var(--section-gap)*3);
+            height: calc(var(--section-gap)*2.5);
             padding-right: var(--space);
             & .recommend-icon {
                 position: absolute;
@@ -55,12 +55,21 @@
                     width: 100%;
                     height: 100%;
                 }
+                &:hover {
+                    & .recommend-item {
+                        height: 50%;
+                        background: var(--font-tip-color);
+                    }
+                }
             }
             & .recommend-item {
                 width: 100%;
                 cursor: pointer;
                 position: absolute;
                 bottom: 0;
+                height: 0;
+                overflow: hidden;
+                @apply --transition;
             }
             & .recommend-icon {
                 position: absolute;

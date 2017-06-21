@@ -1,7 +1,7 @@
 #!handlebars
 
 module
-    div(data-region='banner')
+    # div(data-region='banner')
     .ask-page > .container
         .page-main-wrapper.knowledge-side
             .page-side.side-min
@@ -11,20 +11,20 @@ module
             .page-main(data-region='list')
 
 
-view('banner')
-    .expert-detail-top(style='background-image:url(images/bg-usercenter.png)') > .container
+# view('banner')
+
+view('list')
+    .expert-detail-top > .container
         .head > img(src= expert.member.headPortrait alt=expert.member.fullName)
-        section.section
+        section.titleintro
             .title-row
                 .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
             .title-row
-                .inline-block.m-right > string('be-good-at') + string('topic') + echo(':') 
+                .topic.m-right.sub-text > string('be-good-at') + string('topic') + echo(':')
                 each(expert.topicList)
-                    .inline-block.m-right.bg-white.sub-title > echo(name)
-            p.info-detail > echo(expert.introduce)
-
-view('list')
-    section.section
+                    .tag-btn.radius > echo(name)
+            p.info-detail.sub-text > echo(expert.introduce)
+    section.expert-detail-content
         .tabs.line.mb-1 > ul
             compare(state.menu 'eq' 'expertsanswer')
                 li#menu-expertsanswer.active > string('expert') + string('answer')
@@ -44,7 +44,7 @@ view('top')
             .btn.block.layout-mt-small.big(id='unfollow-expert' data-name='id' data-value=expert.id) > string('unfollow')
         else
             .btn.block.layout-mt-small.big(id='follow-expert' data-name='id' data-value=expert.id) > string('my-follow')
-    div(data-dynamic-key=followcount.menu) 
+    div(data-dynamic-key=followcount.menu)
 
 view('relevantexperts')
     div(data-dynamic-key=relevantexperts.menu)

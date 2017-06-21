@@ -19,17 +19,15 @@ exports.dataForTemplate = {
             r.i = i + 1 + ((pageNum - 1) * 10);
             r.statusStr = '';
 
-            if (rStatus === 1) {
-                r.statusStr = '未参与';
-            } else if (rStatus === 2) {
+            if (rStatus === 2) { // 调研活动-未开始
                 r.statusStr = '待开始';
-            } else if (rStatus === 3) {
+            } else if (rStatus === 3) { // 调研活动-进行中
                 if (pStatus === 1) {
                     r.statusStr = '已完成';
                 } else {
                     r.statusStr = '待参加';
                 }
-            } else if (rStatus === 4 || rStatus === 5) {
+            } else if (rStatus === 4) { // 调研活动-已结束
                 if (pStatus === 1) {
                     r.statusStr = '已完成';
                 } else {

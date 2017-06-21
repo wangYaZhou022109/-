@@ -13,7 +13,7 @@ view('pannel')
             each(subject.courseChapters)
                 li
                     .catalog-state
-                        .inline-block.layout-mr-small > .title-state > echo(i ': ' name)
+                        .inline-block.layout-mr-small > .title-state > echo(title)
                         .pull-right
                             a.normal.layout-mr-small.sub-text(id='sectionDisplay-' + id href="javascript:;")
                                 label(id='label-' + id) 收起

@@ -16,10 +16,40 @@ exports.store = {
         down: { url: '../human/file/download' },
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
+        close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
+                closerefresh: function(id, type) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        var store = d;
+                        if (type === 1 && d.questionId === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else if (type === 2 && d.questionId === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else {
+                            newData.push(store);
+                        }
+                    });
+                    return newData;
+                },
+                delrefresh: function(id, trendsType) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        if (trendsType === 1 && d.questionId !== id) {
+                            newData.push(d);
+                        } else if (trendsType === 2 && d.questionId !== id) {
+                            newData.push(d);
+                        } else if (trendsType === 3 && d.discussId !== id) {
+                            newData.push(d);
+                        }
+                    });
+                    return newData;
+                },
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
@@ -96,6 +126,38 @@ exports.store = {
         }
     },
     callbacks: {
+        closeefresh: function(payload) {
+            var data = this.models.page.closerefresh(payload.id, payload.type),
+                trends = this.models.trends,
+                page = this.models.page;
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
+        delrefresh: function(payload) {
+            var id = payload.id,
+                page = this.models.page,
+                trends = this.models.trends,
+                trendsType = payload.trendsType,
+                data = this.models.page.delrefresh(id, trendsType);
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            trends.set(params);
+            this.post(trends).then(function() {
+            });
+        },
+        closequestion: function(payload) {
+            this.models.close.set(payload);
+            return this.put(this.models.close);
+        },
         refresh: function() {
             this.models.callback();
         },
@@ -196,9 +258,9 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
-        var page = me.store.models.page.params.page;
+        // var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
-        if (page * size === me.store.models.page.data.length) {
+        if (size === me.store.models.trends.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }

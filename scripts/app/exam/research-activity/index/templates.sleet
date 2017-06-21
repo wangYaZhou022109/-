@@ -20,7 +20,11 @@ view('banner')
         .m-top
             span.m-right 相关标签
             each(research.topics)
-                span.tag-btn > echo(name)
+                span.tag-btn
+                    compare(group 'eq' 1)
+                        a.normal(href='#/ask/topicdetail/'+id target='_blank') > echo(name)
+                    else
+                        echo(name)
         if(research.name)
             .m-top > .btn#do-research 进入调研
 

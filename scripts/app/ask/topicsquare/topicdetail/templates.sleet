@@ -20,7 +20,7 @@ view('menu')
     .tabs.line.mb-1 > ul
         li > a(id='menu-news')(class ='active') 最新动态
         li > a(id='menu-exp')(class ='active') 专家分享
-        li > a(id='menu-reply' )(class ='active') 等你回答
+        li > a(id='menu-reply' )(class ='active') 等待回答
 view('list') 
     .tabs-cont > ul
         li.tabs-cont-item.active#tabs-cont-item

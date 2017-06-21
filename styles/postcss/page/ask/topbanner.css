@@ -1,26 +1,30 @@
-.topbanner {
-    position: relative;
-    padding: 1em 0;
-    background: rgba(0,0,0,.6);
-    position: fixed;
-    width: 100%;
-    bottom: 5em;
+.recommend-topic {
+    width:75%;
     overflow: hidden;
-    & span {
-        color: var(--white);
+    & .h4 {
+        padding: var(--space) 0;
     }
-    & li {
-        margin-right: var(--space);
+    & ul {
+        margin-right: -calc(var(--space) * 2);
+        margin-left: -calc(var(--space) * 2);
+        & li {
+
+            width: 20%;
+            text-align: center;
+            padding: 0 calc(var(--space) * 2);
+            box-sizing: border-box;
+            & img {
+                width: 100%;
+            }
+            & .item-title {
+                padding: var(--space) 0;
+            }
+            & .item-attention {
+            background-color:var(--link-color); 
+            padding: var(--space) 0;
+            color:var(--white);
+            }
+        }
     }
-    & img {
-        height: 4em;
-        width: auto;
-    }
-    & .iconfont {
-        position: absolute;
-        top: var(--space);
-        right: 20px;
-        color: var(--border-color);
-        cursor: pointer;
-    }
+  
 }

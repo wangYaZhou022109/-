@@ -96,7 +96,11 @@ view('main')
 
     .side-box.m-top
         each(gensee.topics)
-            .tag-btn > echo(name)
+            .tag-btn
+                compare(group 'eq' 1)
+                    a.normal(href='#/ask/topicdetail/'+id target='_blank') > echo(name)
+                else
+                    echo(name)
     .side-box.m-top
         echo('简介：')
         if(gensee.genseeDesc)
@@ -121,8 +125,8 @@ view('relative-courses')
                             .bottom
                                 .item
                                     i.iconfont.icon-view
-                                    if(studyMemberCount)
-                                        echo(studyMemberCount)
+                                    if(visits)
+                                        echo(visits)
                                     else
                                         echo(0)
                                 .item

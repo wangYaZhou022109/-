@@ -143,8 +143,8 @@
         }
 
         & .user-pic {
-            width: 2em;
-            height: 2em;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             overflow: hidden;
             border: 1px solid var(--border-color);

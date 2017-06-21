@@ -57,10 +57,24 @@ exports.dataForTemplate = {
             quotaList = this.bindings.quotaList,
             organizationList = [];
         var ids = _.map(quotaList.data, 'organizationId').join(',');
-        _.map(orgList.data, function(x) {
-            var ele = x || {};
-            if (ids.indexOf(ele.organizationId) === -1) {
-                organizationList.push(ele);
+        var arr = ids.split(',');
+        // _.map(orgList.data, function(x) {
+        //     var ele = x || {};
+        //     if (ids.indexOf(ele.organizationId) === -1) { // 有bug，需要修改
+        //         organizationList.push(ele);
+        //     }
+        // });
+        _.map(orgList.data, function(s) {
+            var o = s || {};
+            var i = 0;
+            _.map(arr, function(a) {
+                var id = a;
+                if (id.trim() === o.organizationId) {
+                    i = 1;
+                }
+            });
+            if (i !== 1) {
+                organizationList.push(o);
             }
         });
         return organizationList;

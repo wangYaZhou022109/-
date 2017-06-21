@@ -1,4 +1,5 @@
-var _ = require('lodash/collection');
+var _ = require('lodash/collection'),
+    $ = require('jquery');
 exports.bindings = {
     list: true,
     readStatus: false,
@@ -7,19 +8,35 @@ exports.bindings = {
 
 exports.events = {
     'click check-all': 'checkAll',
-    'click check-item*': 'checkItem'
+    'click check-item*': 'checkItem',
+    'click details-*': 'detail'
 };
 
 exports.handlers = {
     checkAll: function(events, obj) {
-        this.$$('input[name="messageId"]').forEach(function(x) {
-            var element = x || {};
-            element.checked = obj.checked;
-        });
+        var i;
+        var checked = this.$$('input[name="messageId"]');
+        if (checked.length === 0) {
+            this.app.message.error('请选择要标记的消息');
+            return false;
+        }
+        for (i = 0; i < checked.length; i++) {
+            checked[i].checked = obj.checked;
+        }
+        return checked;
+        // this.$$('input[name="messageId"]').forEach(function(x) {
+        //     var element = x || {};
+        //     element.checked = obj.checked;
+        // });
     },
     checkItem: function() {
         var flag = this.$$('input[name="messageId"]').length === this.$$('input[name="messageId"]:checked').length;
         this.$('check-all').checked = flag;
+    },
+    detail: function(id) {
+        $(this.$('li-' + id)).removeClass('sub-text');
+        $(this.$('li-' + id)).addClass('sub-text');
+        window.open('#/message/detail/' + id, '_blank');
     }
 };
 
@@ -35,11 +52,20 @@ exports.dataForActions = {
         var me = this;
         var data = {};
         var ids = [];
-        this.$$('input[name="messageId"]:checked').forEach(function(x) {
-            var element = x || {};
-            var id = element.value;
-            ids.push(id);
-        });
+        var i;
+        // this.$$('input[name="messageId"]:checked').forEach(function(x) {
+        //     var element = x || {};
+        //     var id = element.value;
+        //     ids.push(id);
+        // });
+        var checked = this.$$('input[name="messageId"]:checked');
+        if (checked.length === 0) {
+            this.app.message.error('请选择要标记的消息');
+            return false;
+        }
+        for (i = 0; i < checked.length; i++) {
+            ids.push(checked[i].value);
+        }
         if (ids.length === 0) {
             this.app.message.error('请选择要删除的消息');
             return false;
@@ -64,17 +90,24 @@ exports.dataForActions = {
         return data;
     },
     markRead: function() {
+        var i;
         var data = {};
         var ids = [];
-        this.$$('input[name="messageId"]:checked').forEach(function(x) {
-            var element = x || {};
-            var id = element.value;
-            ids.push(id);
-        });
-        if (ids.length === 0) {
+        var checked = this.$$('input[name="messageId"]:checked');
+        if (checked.length === 0) {
             this.app.message.error('请选择要标记的消息');
             return false;
         }
+        for (i = 0; i < checked.length; i++) {
+            ids.push(checked[i].value);
+        }
+        // console.log(checked[0].value);
+        // console.log(checked instanceof Array);
+        // checked.forEach(function(x) {
+        //     var element = x || {};
+        //     var id = element.value;
+        //     ids.push(id);
+        // });
         data.ids = ids.join(',');
         return data;
     },
@@ -83,11 +116,11 @@ exports.dataForActions = {
 exports.actionCallbacks = {
     removeAll: function() {
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('init', this.module.renderOptions);
     },
     markRead: function() {
         this.app.message.success('标记成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('init', this.module.renderOptions);
     }
 };
 

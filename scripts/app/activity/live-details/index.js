@@ -1,5 +1,6 @@
 var D = require('drizzlejs'),
     _ = require('lodash/collection'),
+    errors = require('./app/util/errors'),
     STATUS_UNSTART = 1, // 直播状态-未开始
     STATUS_FINISH = 3; // 直播状态-已完成
 
@@ -46,9 +47,10 @@ exports.store = {
             relativeGensees.params = { genseeId: params.id };
 
             // 浏览人数+1，同时如果是已开始的直播，保存参与用户并更新参与人数
-            return me.save(access).then(function() {
+            return me.save(access, { loading: true }).then(function() {
                 return me.chain(me.get(gensee, {
-                    slient: true // get完不触发changed事件
+                    slient: true, // get完不触发changed事件
+                    loading: true
                 }), function() {
                     // 预约状态 - 未开始的直播才需要查询
                     if (gensee.data.status === STATUS_UNSTART) {
@@ -76,11 +78,12 @@ exports.store = {
                     });
                     me.models.gensee.changed();
                 }, [me.get(relativeGensees), me.get(collect), me.get(accessList)]);
-            }, function() {
+            }, function(data) {
+                var errorCode = JSON.parse(data[0].responseText).errorCode;
+                var message = errors.get(errorCode);
                 return me.Promise.create(function(resolve, reject) {
-                    me.app.message.alert('当前直播参与人数超出限制，不允许继续参加', function() {
-                        window.close();
-                        resolve(true);
+                    me.app.message.alert(message, function() {
+                        reject();
                     });
                     reject();
                 });

@@ -2,9 +2,13 @@
 
 module > .message-page
     div(data-region='main')
-    
+
 view('main')
     .tabs.line > ul > each(menus)
-        li.item(id='switch-'+id class = if(current 'active')) > echo(name)
+        li.item.msg(id='switch-'+id class = if(current 'active'))
+            echo(name)
+            if(count)
+                span.tip-num > echo(count)
+
     .tabs-cont > ul
         div(id=state.menu data-dynamic-key=state.menu)

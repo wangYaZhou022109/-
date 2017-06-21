@@ -1,4 +1,5 @@
-var D = require('drizzlejs');
+var _ = require('lodash/collection'),
+    D = require('drizzlejs');
 exports.items = {
     main: 'main',
     filter: 'filter'
@@ -9,10 +10,17 @@ exports.store = {
         progressList: {
             url: '../course-study/course-study-progress/person-list',
             type: 'pageable',
-            root: 'items'
+            root: 'items',
+            mixin: {
+                findByCourseId: function(id) {
+                    return _.find(this.data, {
+                        courseId: id
+                    });
+                }
+            }
         },
         progress: { url: '../course-study/course-study-progress/give-up' },
-        search: { data: { businessType: 0, findStudy: 0 } },
+        search: { data: { businessType: 0, findStudy: 0, studyTimeOrder: 'desc' } },
         img: { url: '../human/file/download' }
     },
     callbacks: {

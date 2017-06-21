@@ -6,8 +6,7 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click shareTo-*': 'shareTo',
-    'click askshare': 'showAskshare'
+    'click shareTo-*': 'shareTo'
 };
 
 exports.handlers = {
@@ -77,7 +76,7 @@ exports.handlers = {
         if (templateCode === 'qzone') { // QQ空间分享
             fullUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
             fullUrl += 'title=' + typeName + ' ' + title;
-            fullUrl += '&desc=' + templateContent;
+            fullUrl += '&desc=' + encodeURIComponent(templateContent);
             fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share/' + id + '/' + type);
             if (pic) {
                 fullUrl += '&pics=' + pic;
@@ -85,22 +84,19 @@ exports.handlers = {
             window.open(fullUrl, '_blank');
         } else if (templateCode === 'weibo') { // 新浪微博分享
             fullUrl = 'http://v.t.sina.com.cn/share/share.php?';
-            fullUrl += 'title=' + templateContent + ' ' + typeName + ' ' + title;
+            fullUrl += 'title=' + encodeURIComponent(templateContent) + ' ' + typeName + ' ' + title;
             fullUrl += '&url=' + encodeURIComponent(webUrl + '/#/share/' + id + '/' + type);
             if (pic) {
                 fullUrl += '&pic=' + pic;
             }
             fullUrl += '&appkey=3697029777';
             window.open(fullUrl, '_blank');
-        } else if (templateCode === 'bar') { // 分享到问吧
-            // me.app.viewport.modal(me.module.items.bar, {
-            //    shareObjId: id,
-            //    shareType: type
-            // });
+        } else if (templateCode === 'askBar') { // 分享到问吧
+            this.app.viewport.modal(this.module.items['picker/share/askshare'], {
+                shareObjectId: id,
+                shareType: type,
+                pics: pics
+            });
         }
-    },
-    showAskshare: function() {
-        var model = this.module.items['picker/share/askshare'];
-        this.app.viewport.modal(model);
     }
 };

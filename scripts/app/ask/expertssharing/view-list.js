@@ -127,10 +127,16 @@ exports.actions = {
     'click del-share-*': 'delshare',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
-    'click del-discuss-*': 'deldiscuss'
+    'click del-discuss-*': 'deldiscuss',
+    'click close-question-*': 'closequestion'
 };
 
 exports.dataForActions = {
+    closequestion: function(payload) {
+        var data = payload;
+        data.closeStatus = 1;
+        return data;
+    },
     praise: function(payload) {
         var data = {};
         var obj = payload.id.split('_');
@@ -146,19 +152,43 @@ exports.dataForActions = {
         return data;
     },
     delquestion: function(payload) {
-        var data = payload;
+        var data = payload,
+            me = this;
         data.auditType = '1';
-        return data;
+        return this.Promise.create(function(resolve) {
+            var message = '问题删除后将无法恢复，是否确定删除该問題？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     delshare: function(payload) {
-        var data = payload;
+        var data = payload,
+            me = this;
         data.auditType = '2';
-        return data;
+        return this.Promise.create(function(resolve) {
+            var message = '文章删除后将无法恢复，是否确定删除该文章？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     deldiscuss: function(payload) {
-        var data = payload;
+        var data = payload,
+            me = this;
         data.auditType = '3';
-        return data;
+        return this.Promise.create(function(resolve) {
+            var message = '讨论删除后将无法恢复，是否确定删除该讨论？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     follow: function(payload) {
         var id = payload.id,
@@ -188,6 +218,11 @@ exports.dataForActions = {
     }
 };
 exports.actionCallbacks = {
+    closequestion: function(data) {
+        var question = data[0];
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('closeefresh', question);
+    },
     reply: function() {
         this.app.message.success('发表成功，等待管理员审核！');
         this.module.dispatch('init');
@@ -220,17 +255,10 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    delquestion: function() {
+    delshare: function(data) {
+        var trends = data[0];
         this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
-    delshare: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
-    deldiscuss: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
     }
 };
 
@@ -276,6 +304,17 @@ exports.dataForTemplate = {
                 }
             });
             if (flag) {
+                obj.show = 0;
+                if (obj.createUserId === obj.me) { // 是否为当前用户
+                    if (obj.question.discussNum > 0) {
+                        obj.show = 2;
+                    } else {
+                        obj.show = 1;
+                    }
+                }
+                if (obj.question !== null && obj.question.closeStatus) {
+                    obj.show = 3;
+                }
                 page.push(obj);
             }
         });

@@ -68,7 +68,7 @@ exports.store = {
                 var page = me.models.page;
                 var curObj = page.findById(payload.id);
                 curObj.praise = true;
-                curObj.praiseNum ++;
+                curObj.praiseNum++;
                 page.changed();
             });
         },
@@ -120,9 +120,15 @@ exports.afterRender = function() {
     $(window).scroll(function() {
         var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
+        var scrollTop = $(document).scrollTop();
+        var clientHeight = $(window).height();
+        var scrollHeight = $(document).height();
         if (page * size === me.store.models.page.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
+        }
+        if ((scrollTop + clientHeight) >= scrollHeight) {
+            $('.none-more').css('display', 'block');
         }
     });
     this.dispatch('init');

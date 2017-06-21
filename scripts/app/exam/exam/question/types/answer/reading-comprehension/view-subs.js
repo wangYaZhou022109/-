@@ -1,7 +1,7 @@
 var _ = require('lodash/collection'),
     types = require('./app/exam/exam-question-types'),
     D = require('drizzlejs'),
-    getMode,
+    // getMode,
     READING_SUB_INDEX_TYPE = 1;
 
 exports.type = 'dynamic';
@@ -29,7 +29,8 @@ exports.getEntity = function(id) {
         answerRecord = D.assign({}, question.answerRecord);
     if (!question.questionAttrs) {
         D.assign(target, {
-            questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
+            // questionAttrs: _.orderBy(question.questionAttrCopys, ['name'], ['asc']),
+            questionAttrs: question.questionAttrCopys,
             answerRecord: D.assign(answerRecord, { score: answerRecord.score / 100 })
         });
     }
@@ -52,15 +53,17 @@ exports.dataForEntityModule = function(question) {
             return me.module.dispatch('save');
         },
         answer: this.bindings.answer.getAnswer(question.id),
-        mode: getMode(state, question.type),
+        // mode: getMode(state, question.type),
+        mode: state.detailMode,
+        status: state.status,
         indexType: READING_SUB_INDEX_TYPE //  区分阅读题子题目时，索引展示类型
     };
 };
 
-getMode = function(state, type) {
-    if (state.detailMode === -1) return -1;
-    if (type === 1 || type === 2) {
-        return state.subMode;
-    }
-    return state.detailMode;
-};
+// getMode = function(state, type) {
+//     if (state.detailMode === -1) return -1;
+//     if (type === 1 || type === 2) {
+//         return state.subMode;
+//     }
+//     return state.detailMode;
+// };

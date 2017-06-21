@@ -21,9 +21,9 @@ view('main') > .container
     .ask-list
         ul.cell-4 > each(topics)
             li.topic-item
-                a.normal(href="#/ask/noticertopicdetail/" + id target='_blank')
+                a.normal(href="#/ask/topicdetail/" + id target='_blank')
                     .img > .img-cont > img(src=cover)
-                    h4.text-overflow(title=name) > a.normal(href="#/ask/noticertopicdetail/" + id target='_blank') > echo(name)
+                    h4.text-overflow(title=name) > a.normal(href="#/ask/topicdetail/" + id target='_blank') > echo(name)
                     .info > echo(concernNumber + '关注 ｜ ') + echo(expertNumber + '专家 ｜ ') + echo(questionNumber + '问题')
 
         #pager.pagination

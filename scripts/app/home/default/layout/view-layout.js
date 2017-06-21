@@ -84,7 +84,7 @@ exports.dataForTemplate = {
                         browseCount: exam.applicantNumber || 0,
                         beginTime: exam.startTime,
                         endTime: exam.endTime,
-                        dataImage: exam.cover
+                        dataImage: exam.coverId
                     });
                 }
             });
@@ -98,10 +98,10 @@ exports.dataForTemplate = {
                         dataId: research.id,
                         dataName: research.name,
                         dataSummary: research.questionaryDetail || '',
-                        browseCount: 0,
+                        browseCount: research.viewNumber || 0,
                         beginTime: research.startTime,
                         endTime: research.endTime,
-                        dataImage: research.cover
+                        dataImage: research.coverId
                     });
                 }
             });
@@ -115,7 +115,7 @@ exports.dataForTemplate = {
                         dataId: gensee.id,
                         dataName: gensee.subject,
                         dataSummary: gensee.genseeDesc || '',
-                        browseCount: gensee.attendNumber,
+                        browseCount: gensee.viewNumber,
                         beginTime: gensee.startTime,
                         endTime: gensee.endTime,
                         dataImage: gensee.cover

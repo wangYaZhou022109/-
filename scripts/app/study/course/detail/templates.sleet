@@ -65,11 +65,14 @@ view('info')
                 else
                     i#collect.iconfont.icon-favorite(title='收藏')
     p.course-info-detail > each(topics)
-        .tag-btn > echo(name)
+        compare(group 'eq' 1)
+            a(href='#/ask/topicdetail/'+id) > .tag-btn > echo(name)
+        else
+            .tag-btn > echo(name)
 
     .sub-title-row.mt-1.m-bottom
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)
-        .inline-block.layout-mr > echo('发布时间: ') + date(course.releaseTime)
+        .inline-block.layout-mr > echo('发布时间: ') + date(course.shelveTime)
     p.course-info-detail > echo('讲师: ') + pick(course.lecturer '-')
     p.course-info-detail > echo('描述: ') + pick(course.description '-')
 

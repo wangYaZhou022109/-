@@ -1,20 +1,26 @@
 var $ = require('jquery'),
     _ = require('lodash/collection');
 exports.bindings = {
-    navs: true
+    navs: true,
+    state: true
 };
 
 exports.dataForTemplate = {
     navs: function(data) {
         var url,
-            navs = data.navs || [];
+            navs = data.navs || [],
+            state = this.bindings.state.data || [];
         navs = _.reject(navs, ['show', 0]);
         _.map(navs, function(item) {
             var r = item;
             r.link = false;
+            r.active = false;
             url = r.url || '';
             if (url.indexOf('http') > -1) {
                 r.link = true;
+            }
+            if (state.url === r.url) {
+                r.active = true;
             }
         });
         return navs;
@@ -30,8 +36,6 @@ exports.handlers = {
         var url = element.getAttribute('href').slice(2),
             params = {};
         $(window).unbind('scroll');
-        // this.module.dispatch('changeTop');
-        this.module.dispatch('app.pushState', url);
         if (url === 'home' && document.cookie) {
             document.cookie.split('; ').forEach(function(item) {
                 var arr = item.split('=');
@@ -45,5 +49,6 @@ exports.handlers = {
             this.app.navigate(url, true);
         }
         this.app.navigate(url, true);
+        this.module.dispatch('changeTop', { url: url });
     }
 };

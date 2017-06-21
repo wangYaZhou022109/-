@@ -1,25 +1,37 @@
 #!handlebars
 
-module > .askshare-page
-    .askshare(data-region="askshare")
+module > .askshare-page > form.askshare
+    div(data-region="askshare")
+    .overflow
+        .form.m-left
+            .form-row
+                label.required > echo('标题')
+                .content
+                    div(data-region='top')
+                    div(data-region='selectdrop')
+            div(data-region='topic')
+            div(data-region='edit')
+
 
 view('askshare')
     .askshare-left.border.around
-        img(src="/api/v1/human/file/download?id=6ac8444c-a7cd-4892-81ab-139dc763b142")
-        .choosepaper
-            input(type="checkbox")
-            label 选择封面
-    .form.overflow
-        .form-row
-            label.required 标题
-            .content > input.input
-        .form-row
-            label.required 选择话题
-            .content 
-                input.input.m-bottom(placeholder="搜索话题或添加以下相关话题")
-                .tag-btn aaaa
-                .tag-btn bbb
-                .small-font.m-top.sub-title 至少添加一个话题，您最多可以选择3个话题
-        .form-row
-            label 详细描述
-            .content > textarea.w-full(placeholder="大家一起来围观吧！" rows="5")
+        #chooseCover
+
+view('top')
+    input.input#selectquestion(name='title' x-rule='article-title' maxlength='60')
+    .tips 0/60
+
+view('selectdrop')
+    .select-drop.border.around#selectdrop
+        each(titledata)
+            .select-drop-item(id='select-srop-' + id data-name='id' data-value=id ) > echo(title)
+
+view('topic')
+    .form-row.textarea-row
+        label.required > echo('关联标签')
+        #select-topic
+
+view('edit')
+    .form-row.textarea-row
+        label > string('detailed-description')
+        .content > textarea.input(rows='5')(name='content' id='content')

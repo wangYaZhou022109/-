@@ -10,10 +10,23 @@ view('main') > .form
             input.input#selectquestion(maxlength='60')
             .tips 0/60
             .select-drop.border.around
-                .select-drop-item 问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
-                .select-drop-item 问题一问题一问题一
+                .select-drop-item.border.bottom
+                    span.sub-title 你的问题可能已经有答案
+                .select-drop-item.border.bottom
+                    span.m-right 问题一问题一问题一？
+                    span.sub-title 1365个回答
+                .select-drop-item.border.bottom
+                    span.m-right 问题一问题一问题一？
+                    span.sub-title 1365个回答
+                .select-drop-item.border.bottom
+                    span.m-right 问题一问题一问题一？
+                    span.sub-title 1365个回答
+                .select-drop-item.border.bottom
+                    span.m-right 问题一问题一问题一？
+                    span.sub-title 1365个回答
+                .select-drop-item.border.bottom
+                    span.m-right 问题一问题一问题一？
+                    span.sub-title 1365个回答
     .form-row
         label.required 关联话题
         .content > input.input + .choice 选择

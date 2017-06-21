@@ -16,7 +16,7 @@ view('main')
             th(width='45%')   比例
         each(question.options)
             tr
-                td > echo(code '.' text)
+                td > @echo(code '.' text)
                 td > echo(selectCount)
                 td 
                     .progress-box

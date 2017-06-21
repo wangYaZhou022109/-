@@ -77,14 +77,42 @@ exports.handlers = {
         var view = this.module.items['upload-task'],
             task = this.bindings.task.data,
             files = this.bindings.files.data,
-            state = this.bindings.state;
+            state = this.bindings.state,
+            dateTime,
+            date,
+            year,
+            month,
+            dd,
+            hour,
+            min,
+            times;
         state.data.uploadType = false;
         if (files.length >= 3) {
             this.app.message.alert('课件最多只能上传3个');
         } else {
             task.name = $(this.$('name')).val();
-            task.startTime = $(this.$('startTime')).val();
-            task.endTime = $(this.$('endTime')).val();
+            if ($(this.$('startTime')).val()) {
+                dateTime = $(this.$('startTime')).val().split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                task.startTime = new Date(year, month - 1, dd, hour, min).getTime();
+            }
+            if ($(this.$('endTime')).val()) {
+                dateTime = $(this.$('endTime')).val().split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                task.endTime = new Date(year, month - 1, dd, hour, min).getTime();
+            }
             task.explain = $(this.$('explain')).val();
             task.memberIds = this.components.tags.getValue();
             this.app.viewport.modal(view);
@@ -121,6 +149,9 @@ exports.dataForActions = {
     saveTask: function(payload) {
         if (payload.memberIds === '') {
             this.app.message.error('审核人为必填项！');
+            return false;
+        } else if (payload.startTime > payload.endTime) {
+            this.app.message.error('结束时间必须大于开始时间！');
             return false;
         }
         return this.validate() ? payload : false;

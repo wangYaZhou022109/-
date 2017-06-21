@@ -31,6 +31,7 @@ exports.bindings = {
 exports.dataForTemplate = {
     checked: function(data) {
         var offlineCourse = data.offlineCourse;
+        // console.log(offlineCourse.courseDate);
         return {
             type1: offlineCourse.type === '1' || offlineCourse.type === 1,
             type2: offlineCourse.type === '2' || offlineCourse.type === 2,
@@ -76,14 +77,32 @@ exports.handlers = {
         var view = this.module.items.upload,
             offlineCourse = this.bindings.offlineCourse.data,
             files = this.bindings.files.data,
-            state = this.bindings.state;
+            state = this.bindings.state,
+            dateTime,
+            date,
+            year,
+            month,
+            dd,
+            hour,
+            min,
+            times;
         state.data.uploadType = false;
         if (files.length >= 3) {
             this.app.message.alert('课件最多只能上传3个');
         } else {
             offlineCourse.type = $(this.$('type')).val();
             offlineCourse.name = $(this.$('name')).val();
-            offlineCourse.courseDate = $(this.$('courseDate')).val();
+            if ($(this.$('courseDate')).val()) {
+                dateTime = $(this.$('courseDate')).val().split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                offlineCourse.courseDate = new Date(year, month - 1, dd, hour, min).getTime();
+            }
             offlineCourse.endTime = $(this.$('endTime')).val();
             offlineCourse.classroomId = $(this.$('classroomId')).val();
             offlineCourse.teacherName = $(this.$('teacherName')).val();

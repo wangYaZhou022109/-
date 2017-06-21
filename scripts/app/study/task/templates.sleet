@@ -13,22 +13,18 @@ view('side') > .list
         each(task.attachments)
             li.no-margin
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
-                if(preview)
-                    a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
-                else
-                    a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+                a.text-overflow.pointer(id='preview-'+attachmentId content-type=contentType href='javascript:;') > echo(name)
+    br
     if(userAttachments)
         ul.m-top
-            .m-bottom > strong > string('study.user.attachment') ：
+            .m-bottom > strong > string('study.my.submit')
             each(userAttachments)
-                li.btn.block(id='viewUseDesc-'+id) 作业详情
+                if(description)
+                    li.btn.block(id='viewUseDesc-'+id) 作业详情
                 if(attachmentId)
                     li.mb-1
                         a.pull-right.m-left(href=downUrl download=name) > string('download')
-                        if(preview)
-                            a.text-overflow.pointer(id='preview-'+attachmentId href='javascript:;') > echo(name)
-                        else
-                            a.text-overflow.pointer(href=downUrl download=name) > echo(name)
+                        a.text-overflow.pointer(id='preview-'+attachmentId  content-type=contentType href='javascript:;') > echo(name)
     if(section.progress.comments)
         .m-top
             .m-bottom > strong 评语
@@ -49,7 +45,7 @@ view('head')
                 li.border.right > echo('审核人：' progress.auditMemberName)
                 li.border.right > echo('得分：' progress.score)
         .btn.white.m-right#closeTask 关闭作业
-        compare(progress.finishStatus 'eq' 0)
+        if(progress.submitBtn)
             .btn#submitTask 提交作业
         compare(progress.finishStatus 'eq' 6)
             .btn#submitTask 重新提交
@@ -58,12 +54,16 @@ view('main')
     compare(state.flag 'eq' 'desc')
         .preview-content
             .h3.m-bottom 作业说明
-            p.text-overflow
+            p
                 span > @echo(task.description)
+    compare(state.flag 'eq' 'down')
+        .content-empty
+            .img-box.img-type-1
+            p 附件不支持预览，可直接下载
     compare(state.flag 'eq' 'useDesc')
         .preview-content
             .h3.m-bottom 作业详情
-            p.text-overflow
+            p
                 span > @echo(state.description)
     else
         #viewPdf

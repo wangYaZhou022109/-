@@ -37,7 +37,7 @@ view('top')
                 if(member.isLecture)
                     .item > i.iconfont.icon-user-1 + span 讲师
                 if(member.isExpert)
-                    .item > a(href='#/ask/askExpertdetails/'+member.expertDetailId + '/' + member.id target='_parent')
+                    .item > a(href='#/ask/iamexpertdetails' target='_parent')
                         i.iconfont.icon-type
                         echo('专家')
                 .item > a#edit-info 编辑资料
@@ -56,7 +56,7 @@ view('notice')
             ul > each(announcements)
                 li.clearfix
                     .pull-right.sub-text.layout-mr > dateTime(publishTime)
-                    .m-right > echo(title)
+                    .m-right > echo('new-> ' title)
 
 view('menu')
     .person-menu
@@ -87,7 +87,7 @@ view('interest')
                     a#closeRecommend.normal(href="javascript:;") > string('center.index.close')
                 string('center.index.guess')
             .main-list > ul > each(recommendList)
-                li > .content > a.normal(href='#/study/course/detail/'+id target='_blank')
+                li > .content > a.normal(href=url target='_blank')
                     .img > .img-cont > img(src=img)
                     .clearfix
                         .title.text-overflow > echo(name)

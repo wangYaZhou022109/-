@@ -8,11 +8,11 @@ exports.events = {
 };
 
 exports.handlers = {
-    more: function(id) {
-        this.app.navigate('home/more/rank-topic/' + id, true);
-        // var mod = this.module.items['activity/index/exam-prompt'],
-        //     me = this;
-        // me.app.viewport.modal(mod, { name: payload });
+    more: function() {
+        // this.app.navigate('home/more/rank-topic/' + payload, true);
+        var mod = this.module.items['home/default/more/rank/rank-topic'],
+            me = this;
+        me.app.viewport.modal(mod, { data: this.module.renderOptions.rankModule });
     },
     showDetails: function(payload) {
         window.location.href = '#/ask/topicdetail/' + payload;

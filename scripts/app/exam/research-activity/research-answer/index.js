@@ -218,7 +218,7 @@ exports.store = {
                 researchRecord.params = {
                     researchRecordId: payload.researchRecordId
                 };
-                return this.get(researchRecord).then(function() {
+                return this.get(researchRecord, { loading: true }).then(function() {
                     questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));
                     dimensions.changed();
                     state.init();

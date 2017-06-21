@@ -16,8 +16,10 @@ exports.actions = {
 exports.dataForActions = {
     delOnlineCourse: function(payload) {
         var me = this;
+        me.updataCss();
         return this.Promise.create(function(resolve) {
             var message = '确定删除此课程吗?';
+            me.updataCss();
             me.app.message.confirm(message, function() {
                 me.module.dispatch('delOnlineCourse', payload);
             }, function() {
@@ -29,7 +31,10 @@ exports.dataForActions = {
 
 exports.actionCallbacks = {
     showOnlineTheme: function() {
-        this.app.viewport.modal(this.module.items['config-online']);
+        var me = this;
+        this.app.viewport.modal(this.module.items['config-online']).then(function() {
+            me.updataCss();
+        });
     },
     addCourse: function() {
         var model = this.module.items['train/programme/select-course'],
@@ -46,6 +51,7 @@ exports.actionCallbacks = {
         } else {
             me.app.message.error('请先配置主题！');
         }
+        me.updataCss();
     }
 };
 
@@ -56,12 +62,20 @@ exports.dataForTemplate = {
     },
     onlineCourseList: function() {
         var onlineCourseList = this.bindings.onlineCourseList,
-            state = this.bindings.state.data;
+            state = this.bindings.state.data,
+            themes,
+            tmpThemeId = '0';
+        themes = _.groupBy(onlineCourseList.data, 'themeId');
         _.map(onlineCourseList.data || [], function(course) {
             var r = course;
             r.isRequired1 = r.isRequired === 1;
             r.isRequired0 = r.isRequired === 0;
             r.isGrant = state.role !== 4;
+            if (tmpThemeId !== r.themeId) {
+                tmpThemeId = r.themeId;
+                r.isRowspan = true;
+                r.rowspan = themes[r.themeId].length;
+            }
         });
         return onlineCourseList.data;
     },
@@ -83,7 +97,7 @@ exports.events = {
 
 exports.handlers = {
     changeRequired: function(id) {
-        $(this.$('input-online-' + id)).css('display', 'block');
+        $(this.$('input-online-' + id)).css('display', 'inline-block');
         $(this.$('label-online-' + id)).css('display', 'none');
     },
     updateRequired: function(id) {
@@ -102,5 +116,13 @@ exports.handlers = {
     },
     viewCourse: function(id) {
         window.open('#/study/course/detail/' + id, '_blank');
+    }
+};
+
+exports.mixin = {
+    updataCss: function() {
+        $(this.$('minitable-2')).toggle();
+        $(this.$('min-2')).text('最小化');
+        $(this.$('minimize-2')).addClass('icon-minus-full').removeClass('icon-add-full');
     }
 };

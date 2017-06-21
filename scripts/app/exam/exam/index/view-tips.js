@@ -5,7 +5,7 @@ exports.binding = {
 exports.title = '温馨提示';
 
 exports.afterClose = function() {
-    this.app.navigate('activity/index');
+    this.app.navigate('home');
 };
 
 exports.dataForTemplate = {

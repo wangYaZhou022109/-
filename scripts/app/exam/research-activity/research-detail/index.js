@@ -8,8 +8,7 @@ var _ = require('lodash/collection'),
         ACTIVE: 'active',
         CURRENT: 'current'
     },
-    getCurrentStatus,
-    PC_TYPE = 1;
+    getCurrentStatus;
 
 exports.items = {
     side: 'side',
@@ -23,9 +22,12 @@ exports.store = {
             mixin: {
                 init: function() {
                     var dimensions = this.module.store.models.dimensions,
+                        questions = this.module.store.models.questions,
                         currentDimension = dimensions.getFirstDimension();
                     this.data = {
                         currentDimension: currentDimension,
+                        noAnswerCount: questions.data.length,
+                        answeredCount: 0,
                         currentQuestion: currentDimension.questions[0]
                     };
                 },
@@ -192,7 +194,7 @@ exports.store = {
             data: [],
             mixin: {
                 saveAnswer: function(data) {
-                    var temp = _.reject(this.data, ['key', data.key]);
+                    var temp = _.reject(this.data, ['key', data.key]); // 答题
                     temp.push(data);
                     this.data = temp;
                 },
@@ -209,12 +211,14 @@ exports.store = {
                 },
                 getData: function() {
                     var me = this;
+                    // 这里去answer的数据只会保存已答题的数据，不会保存未答题的数据，所以要做处理，将交白卷的也保存
                     return {
-                        researchAnswerRecords: JSON.stringify(_.map(this.data, function(a) {
+                        researchAnswerRecords: JSON.stringify(_.map(me.store.models.questions.data, function(q) {
+                            var answer = _.find(me.data, ['key', q.id]) || {};
                             return {
-                                questionId: a.key,
-                                answer: _.map(a.value, 'value').join(','),
-                                score: a.value[0].score,
+                                questionId: q.id,
+                                answer: answer.value ? _.map(answer.value, 'value').join(',') : '',
+                                score: answer.value ? answer.value[0].score : 0,
                                 researchRecordId: me.store.models.researchRecord.data.id
                             };
                         }))
@@ -235,10 +239,9 @@ exports.store = {
             } else if (payload.researchQuestionaryId) {
                 researchRecord.params = {
                     researchQuestionaryId: payload.researchQuestionaryId,
-                    businessId: payload.businessId,
-                    clientType: PC_TYPE
+                    businessId: payload.businessId
                 };
-                return this.get(researchRecord).then(function() {
+                return this.get(researchRecord, { loading: true }).then(function() {
                     questions.init(dimensions.init(researchRecord.data.researchQuestionary.dimensions));
                     state.init();
                     questions.changed();

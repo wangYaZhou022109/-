@@ -28,7 +28,8 @@ D.assign(obj, {
             subs = _.map(question.subs, function(sub) {
                 var s = D.assign({}, sub);
                 return D.assign(s, {
-                    questionAttrs: _.orderBy(sub.questionAttrCopys, ['name', 'asc']),
+                    // questionAttrs: _.orderBy(sub.questionAttrCopys, ['name', 'asc']),
+                    questionAttrs: sub.questionAttrCopys,
                     errorRate: s.errorRate / 10000,
                     answerRecord: s.answerRecord === null
                         ? { score: 0 } : D.assign({}, s.answerRecord, {
@@ -38,7 +39,8 @@ D.assign(obj, {
             });
         return D.assign(target, {
             errorRate: target.errorRate / 10000,
-            questionAttrs: _.orderBy(question.questionAttrCopys, ['name', 'asc']),
+            // questionAttrs: _.orderBy(question.questionAttrCopys, ['name', 'asc']),
+            questionAttrs: question.questionAttrCopys,
             answerRecord: !target.answerRecord || target.answerRecord === null
                 ? { score: 0 } : D.assign({}, target.answerRecord, { score: target.answerRecord.score / 100 }),
             subs: subs
@@ -53,13 +55,15 @@ D.assign(obj, {
         return {
             data: question,
             answer: answer.getAnswer(question.id),
-            mode: exam.examRecord.status > constant.TO_BE_OVER
-                || (question.type === constant.SINGLE
-                    || question.type === constant.MUTIPLE
-                    || question.type === constant.JUDGE
-                    || question.type === constant.SORT
-                ) ? exam.showAnswerRule : 4,
-            subMode: exam.showAnswerRule
+            // mode: exam.examRecord.status > constant.TO_BE_OVER
+            //     || (question.type === constant.SINGLE
+            //         || question.type === constant.MUTIPLE
+            //         || question.type === constant.JUDGE
+            //         || question.type === constant.SORT
+            //     ) ? exam.showAnswerRule : 4,
+            mode: exam.showAnswerRule,
+            subMode: exam.showAnswerRule,
+            status: exam.examRecord.status
         };
     }
 });

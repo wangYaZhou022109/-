@@ -451,9 +451,15 @@ section.section {
 .padding-s {
     padding: 2px;
 }
-
+.padding-b {
+    padding-bottom: 30px;
+}
 .col-sm-6 {
     width: 48.99999%;
+}
+
+.col-sm-4 {
+    width: 31.99999%;
 }
 
 .col-sm-3 {
@@ -480,5 +486,16 @@ section.section {
     	vertical-align:middle;
     	background-size:cover;
         background-image:url(../images/loading.gif);
+    }
+}
+
+.none-more {
+    display: none;
+    padding: 50px 0;
+    text-align: center;
+    & p {
+        display: inline-block;
+        color: #999;
+        border-bottom: 1px solid #ccc;
     }
 }

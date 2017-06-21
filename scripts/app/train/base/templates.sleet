@@ -27,13 +27,13 @@ view('main') > form.vertical
                         span > echo(classInfo.address)
                     .pull-left.layout-mr
                         span 客房：
-                        span > echo(classInfo.restRoom)
+                        span > echo(classInfo.rommText)
                     .pull-left.layout-mr
                         span 餐厅：
                         span > echo(classInfo.diningRoomText)
                     .pull-left.layout-mr
                         span 教室
-                        span > echo(classInfo.classRoomName)
+                        span > echo(classInfo.classRoom)
                 .form.align-left.m-top
                     .clearfix
                         .form-row.pull-left.w-half.special
@@ -50,37 +50,40 @@ view('main') > form.vertical
                                 label.layout-mr-small 是
                                 input(name='haveMinister' type='radio' value='0')('checked')&unless(checked.haveMinisterCheck)('disabled')&if(isService)
                                 label 否
-                        .form-row.pull-left.w-half
-                            label.label.required 班级合影
-                            .content
-                                input#needGroupPhoto-1(name='needGroupPhoto' type='radio' value='1')('checked')&if(checked.needGroupPhotoCheck)('disabled')&if(isService)
-                                label.layout-mr-small 是
-                                input#needGroupPhoto-0(name='needGroupPhoto' type='radio' value='0')('checked')&unless(checked.needGroupPhotoCheck)('disabled')&if(isService)
-                                label 否
-                        if(state.needGroupPhotoCheck)
+                        .clearfix.w-full
                             .form-row.pull-left.w-half
-                                label.label.required 合影时间
+                                label.label.required 班级合影
                                 .content
-                                    .relative
-                                        input.input.date#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))('disabled')&if(isService)
-                                        .iconfont.icon-riqi.text-main-color
-                        .form-row.pull-left.w-half
-                            label.label.required 课程制作
-                            .content
-                                input#needMakeCourse-1(name='needMakeCourse' type='radio' value='1')('checked')&if(checked.needMakeCourseCheck)('disabled')&if(isService)
-                                label.m-right 是
-                                input#needMakeCourse-0(name='needMakeCourse' type='radio' value='0')('checked')&unless(checked.needMakeCourseCheck)('disabled')&if(isService)
-                                label 否
-                        if(state.needMakeCourseCheck)
+                                    input#needGroupPhoto-1(name='needGroupPhoto' type='radio' value='1')('checked')&if(checked.needGroupPhotoCheck)('disabled')&if(isService)
+                                    label.layout-mr-small 是
+                                    input#needGroupPhoto-0(name='needGroupPhoto' type='radio' value='0')('checked')&unless(checked.needGroupPhotoCheck)('disabled')&if(isService)
+                                    label 否
+                            if(state.needGroupPhotoCheck)
+                                .form-row.pull-left.w-half
+                                    label.label.required 合影时间
+                                    .content
+                                        .relative
+                                            input.input.date#photoTime(name='photoTime' value=dateTime(classInfo.classDetail.photoTime))('disabled')&if(isService)
+                                            .iconfont.icon-riqi.text-main-color
+                        .clearfix.w-full
                             .form-row.pull-left.w-half
-                                label.label.required 制作需求
-                                .content > input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)('disabled')&if(isService)
-                        .form-row.pull-left.w-half.r-padding
-                            label.label.required 班级类别
-                            .content
-                                select.w-full#classType(name='classInfoType')('disabled')&if(isService)
-                                    each(classTypes)
-                                        option(value=id)('selected')&if(selected) > echo(name)
+                                label.label.required 课程制作
+                                .content
+                                    input#needMakeCourse-1(name='needMakeCourse' type='radio' value='1')('checked')&if(checked.needMakeCourseCheck)('disabled')&if(isService)
+                                    label.m-right 是
+                                    input#needMakeCourse-0(name='needMakeCourse' type='radio' value='0')('checked')&unless(checked.needMakeCourseCheck)('disabled')&if(isService)
+                                    label 否
+                            if(state.needMakeCourseCheck)
+                                .form-row.pull-left.w-half
+                                    label.label.required 制作需求
+                                    .content > input.input#courseVideoRequirement(name='courseVideoRequirement' value=classInfo.classDetail.courseVideoRequirement)('disabled')&if(isService)
+                        .clearfix.w-full
+                            .form-row.pull-left.w-half
+                                label.label.required 班级类别
+                                .content
+                                    select.w-full#classType(name='classInfoType')('disabled')&if(isService)
+                                        each(classTypes)
+                                            option(value=id)('selected')&if(selected) > echo(name)
                         .form-row.pull-left.w-half
                             label.label.required 教室桌型
                             .content
@@ -105,7 +108,7 @@ view('main') > form.vertical
                             label 教室：
                             select.select-width#classRoom(name='classRoom' x-rule='required')
                                 each(classroomList)
-                                    option(value=id)('selected')&if(selected) > echo(classroomName)
+                                    option(value=id)('selected')&if(selected) > echo(classroom)
                     .layout-mt-small
                         .top
                             .inline-block.layout-mr

@@ -1,5 +1,5 @@
 #!handlebars
-module 
+module
     div(data-region='list')
 
 view('list')
@@ -14,4 +14,3 @@ view('list')
                         .img > .img-cont > img(src=attachmentId)
                         h4.text-overflow > echo(name)
                         .info > echo(concernList.length) + string('follow') + echo(' | ') + echo(expertList.length) + string('expert') + echo(' | ') + echo(questionList.length) + string('question')
-    

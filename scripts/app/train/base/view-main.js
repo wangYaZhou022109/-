@@ -30,12 +30,25 @@ exports.handlers = {
     },
     changePhotoType: function(data) {
         var d = data,
+            classInfo = this.bindings.classInfo.data,
             state = this.bindings.state.data;
-        if (d === '1') {
-            state.needGroupPhotoCheck = true;
-        } else {
-            state.needGroupPhotoCheck = false;
+        classInfo.classDetail.needGroupPhoto = Number(d);
+        classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
+        classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
+        classInfo.classDetail.needMakeCourse = Number($(this.$$('[name="needMakeCourse"]:checked')).val());
+        if (Number($(this.$$('[name="needMakeCourse"]:checked')).val()) === 1) {
+            classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
         }
+        classInfo.classDetail.tableType = this.$('tableType').value;
+        classInfo.classDetail.photoTime = '';
+        classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
+        classInfo.classInfoType = this.$('classType').value;
+        if (state.role === 1 || state.role === 3) {
+            classInfo.restRoom = this.$('restRoom').value;
+            classInfo.diningRoom = this.$('diningRoom').value;
+            classInfo.classRoom = this.$('classRoom').value;
+        }
+        this.bindings.classInfo.changed();
     },
     changeNeedVideo: function(data) {
         var d = data;
@@ -48,12 +61,26 @@ exports.handlers = {
     },
     changeMakeCourse: function(data) {
         var d = data,
+            classInfo = this.bindings.classInfo.data,
             state = this.bindings.state.data;
-        if (d === '1') {
-            state.needMakeCourseCheck = true;
-        } else {
-            state.needMakeCourseCheck = false;
+        classInfo.classDetail.needMakeCourse = Number(d);
+        classInfo.classDetail.needGroupPhoto = Number(d);
+        classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
+        classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
+        classInfo.classDetail.needGroupPhoto = Number($(this.$$('[name="needGroupPhoto"]:checked')).val());
+        if (Number($(this.$$('[name="needGroupPhoto"]:checked')).val()) === 1 && this.$('photoTime').value) {
+            classInfo.classDetail.photoTime = new Date(this.$('photoTime').value.replace('-', '/')).getTime();
         }
+        classInfo.classDetail.tableType = this.$('tableType').value;
+        classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
+        classInfo.classInfoType = this.$('classType').value;
+        classInfo.classDetail.courseVideoRequirement = null;
+        if (state.role === 1 || state.role === 3) {
+            classInfo.restRoom = this.$('restRoom').value;
+            classInfo.diningRoom = this.$('diningRoom').value;
+            classInfo.classRoom = this.$('classRoom').value;
+        }
+        this.bindings.classInfo.changed();
     },
     uploadBanner: function() {
         var view = this.module.items.upload,
@@ -68,14 +95,18 @@ exports.handlers = {
         classInfo.classDetail.haveProvinceLeader = Number($(this.$$('[name="haveProvinceLeader"]:checked')).val());
         classInfo.classDetail.haveMinister = Number($(this.$$('[name="haveMinister"]:checked')).val());
         classInfo.classDetail.needGroupPhoto = Number($(this.$$('[name="needGroupPhoto"]:checked')).val());
-        classInfo.classDetail.photoTime = this.$('photoTime').value;
+        if (Number($(this.$$('[name="needGroupPhoto"]:checked')).val()) === 1) {
+            classInfo.classDetail.photoTime = this.$('photoTime').value;
+        }
         classInfo.classDetail.needMakeCourse = Number($(this.$$('[name="needMakeCourse"]:checked')).val());
-        classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
+        if (Number($(this.$$('[name="needMakeCourse"]:checked')).val()) === 1) {
+            classInfo.classDetail.courseVideoRequirement = this.$('courseVideoRequirement').value;
+        }
         classInfo.classDetail.tableType = Number(this.$('tableType').value);
         classInfo.classDetail.otherRequirement = this.$('otherRequirement').value;
-        classInfo.romm = this.$('restRoom').value;
+        classInfo.restRoom = this.$('restRoom').value;
         classInfo.diningRoom = this.$('diningRoom').value;
-        classInfo.classRoom.classRoom = this.$('classRoom').value;
+        classInfo.classRoom = this.$('classRoom').value;
         state.type = 'banner';
         this.app.viewport.modal(view);
     }
@@ -103,13 +134,13 @@ exports.dataForTemplate = {
         classInfo.endDate = helpers.date(returnDate);
         // address = helpers.map('project-address', classInfo.address);
         address = classInfo.address;
-        classInfo.addressText = address !== '' ? address : '暂未分配';
-        romm = classInfo.classRoomName;
-        classInfo.rommText = romm !== '' ? romm : '暂未分配';
+        classInfo.addressText = address !== null ? address : '暂未分配';
+        romm = classInfo.restRoom;
+        classInfo.rommText = romm !== null ? romm : '暂未分配';
         diningRoom = classInfo.diningRoom !== null ? classInfo.diningRoom : '暂未分配';
         classInfo.diningRoomText = diningRoom;
-        classRoom = classInfo.classRoomName !== null ? classInfo.classRoomName : '暂未分配';
-        classInfo.classRoomName = classRoom;
+        classRoom = classInfo.classRoom !== null ? classInfo.classRoom : '暂未分配';
+        classInfo.classRoom = classRoom;
         return classInfo;
     },
     checked: function() {
@@ -259,7 +290,6 @@ exports.mixin = {
         markers.text.valid(otherRequirement);
         markers.text.valid(restRoom);
         markers.text.valid(diningRoom);
-
         if (needGroupPhoto.val() === '1' && photoTime.val() === '') {
             markers.text.invalid(photoTime, validators.required.message);
             flag = false;
@@ -272,7 +302,8 @@ exports.mixin = {
             markers.text.invalid(otherRequirement, validators.required.message);
             flag = false;
         }
-        if (courseVideoRequirement.val() !== '' && !validators.maxLength.fn(courseVideoRequirement.val(), 1000)) {
+        if (needMakeCourse.val() === '1' &&
+        courseVideoRequirement.val() !== '' && !validators.maxLength.fn(courseVideoRequirement.val(), 1000)) {
             markers.text.invalid(courseVideoRequirement, validators.maxLength.message.replace(reg, 1000));
             flag = false;
         }

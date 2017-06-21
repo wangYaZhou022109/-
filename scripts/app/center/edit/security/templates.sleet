@@ -20,7 +20,7 @@ view('main')
                     .content > input.input(name='password' value=member.password type='password' placeholder='请输入新密码'  x-rule='required,minLength:6,maxLength:20')
                 .form-row
                     label> setting('person.index.info.confromPasw')
-                    .content
+                    .content.no-hidden
                         input.input(name='rePassword' value=member.rePassword type='password' placeholder='请再次输入新密码' x-rule='required,minLength:6,maxLength:20')
                         .sub-text 6~20位字符（由字母、数字和符号组成）
 
@@ -28,8 +28,8 @@ view('main')
             .form.align-left
                 .form-row
                     label > setting('person.index.info.email')
-                    .content
-                        input.input(name='newEmail' value=member.newEmail placeholder='请输入邮箱，绑定后可用于登录账号，接收邮件通知')
+                    .content.no-hidden
+                        input.input(name='newEmail' value=member.newEmail placeholder='请输入邮箱，绑定后可用于登录账号，接收邮件通知' x-rule='required,email,maxLength:30')
                         .sub-text 您将收到一封激活邮件，点击邮件中的链接即可激活邮箱
 
         li.tabs-cont-item#tabs-cont-item-3

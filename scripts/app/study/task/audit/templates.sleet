@@ -37,7 +37,7 @@ view('side')
                 .inline-block > label.no-margin(for='radio-n') 打回重新提交
             .m-top
                 label 评分：
-                input.input.w-full(name='score')
+                input.input.w-full(name='score' maxlength='4')
             .m-top
                 label 评语：
                 textarea.input#comments(name='comments' rows='4' cols='25')

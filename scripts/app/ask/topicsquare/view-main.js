@@ -4,15 +4,17 @@ var $ = require('jquery');
 exports.bindings = {
     state: true,
     topicname: true,
-    topicType: true,
-    down: false
+    topicType: true
+    // down: false
 };
 
 exports.events = {
     'click apply-topic': 'showApplyTopic',
-    'click detail-*': 'showDetails',
-    'click checkOne-*': 'showCheckone',
-    'click checkAll': 'showCheckall'
+    'click open': 'showTopics',
+    'click close': 'closeTopics'
+    // 'click detail-*': 'showDetails'
+    // 'click checkOne-*': 'checkOne',
+    // 'click checkAll': 'checkAll'
 };
 
 exports.handlers = {
@@ -37,72 +39,86 @@ exports.handlers = {
         this.app.show('content', 'ask/mymanage/topicdetail', { id: payload });
         // }
     },
-    showCheckone: function(id) {
-        $(this.$('checkOne-' + id)).addClass('active').siblings().removeClass('active');
+    // checkOne: function(id) {
+    //     $(this.$('checkOne-' + id)).addClass('active').siblings().removeClass('active');
+    // },
+    // checkAll: function() {
+    //     $(this.$('checkAll')).addClass('active').siblings().removeClass('active');
+    // }
+    showTopics: function() {
+        $(this.$('open')).addClass('hide');
+        $(this.$('close')).removeClass('hide');
+        $(this.$('topictags')).css('height', 'auto');
     },
-    showCheckall: function() {
-        $(this.$('checkAll')).addClass('active').siblings().removeClass('active');
+    closeTopics: function() {
+        $(this.$('close')).addClass('hide');
+        $(this.$('open')).removeClass('hide');
+        $(this.$('topictags')).css('height', '71px');
     }
 };
 exports.actions = {
-    'click follow-*': 'follow',
-    'click unfollow-*': 'unfollow',
+    // 'click follow-*': 'follow',
+    // 'click unfollow-*': 'unfollow',
+    'click checkOne-*': 'checkOne',
+    'click checkAll': 'checkAll'
 };
 exports.dataForActions = {
-    follow: function(payload) {
-        var id = payload.id,
-            data = {};
-        var obj = id.split('_');
-        data.id = obj[1];
-        data.concernType = obj[0];
-        return data;
+    // follow: function(payload) {
+    //     var id = payload.id,
+    //         data = {};
+    //     var obj = id.split('_');
+    //     data.id = obj[1];
+    //     data.concernType = obj[0];
+    //     return data;
+    // },
+    // unfollow: function(payload) {
+    //     var id = payload.id,
+    //         data = {};
+    //     var obj = id.split('_');
+    //     data.id = obj[1];
+    //     data.concernType = obj[0];
+    //     return data;
+    // },
+    checkOne: function(payload) {
+        this.bindings.state.data.typeId = payload.id;
+        // console.log(this.bindings.state);
+        $(this.$('checkOne-' + payload.id)).addClass('active').siblings().removeClass('active');
+        return payload;
     },
-    unfollow: function(payload) {
-        var id = payload.id,
-            data = {};
-        var obj = id.split('_');
-        data.id = obj[1];
-        data.concernType = obj[0];
-        return data;
+    checkAll: function(payload) {
+        this.bindings.state.data.typeId = 'checkAll';
+        $(this.$('checkAll')).addClass('active').siblings().removeClass('active');
+        return payload;
     }
 };
 exports.actionCallbacks = {
-    follow: function() {
-        // var concern = data[0];
-        // var unfollow = this.$('unfollow-' + concern.concernType + '_' + concern.concernId);
-        // var follow = this.$('follow-' + concern.concernType + '_' + concern.concernId);
-        // // var me = this;
-        // follow.hidden = true;
-        // unfollow.hidden = false;
-        this.app.message.success('关注成功！');
-        this.module.dispatch('refresh');
-        this.module.dispatch('init');
-    },
-    unfollow: function() {
-        // var concern = data[0];
-        // var unfollow = this.$('unfollow-' + concern.concernType + '_' + concern.concernId);
-        // var follow = this.$('follow-' + concern.concernType + '_' + concern.concernId);
-        // // var me = this;
-        // follow.hidden = false;
-        // unfollow.hidden = true;
-        this.app.message.success('取消成功！');
-        this.module.dispatch('refresh');
-        this.module.dispatch('init');
-    }
 };
 exports.dataForTemplate = {
-    topicname: function(data) {
-        var topicname = data.topicname,
+    topicType: function(data) {
+        var topicType = data.topicType,
+            d = [],
             me = this;
-        _.forEach(topicname, function(value) {
-            var obj = value,
-                url = obj.attachmentId;
-            if (typeof url === 'undefined' || url === null || url === '') {
-                obj.attachmentId = 'images/default-cover/default_topic.jpg';
+        _.forEach(topicType, function(value) {
+            var obj = value;
+            if (obj.id === me.bindings.state.data.typeId) {
+                obj.current = true;
             } else {
-                obj.attachmentId = me.bindings.down.getFullUrl() + '?id=' + url;
+                obj.current = false;
             }
+            d.push(obj);
         });
-        return topicname;
+        return d;
+    }
+};
+
+exports.afterRender = function() {
+    if ($(this.$('topictags')).height() <= 71) {
+        $(this.$('open')).addClass('hide');
+    } else {
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).css('height', '71px');
+        // console.log($(this.$('topictags')).height());
+        $(this.$('topictags')).addClass('overflow');
+        $(this.$('open')).show();
     }
 };

@@ -23,7 +23,7 @@ exports.store = {
         init: function(payload) {
             var question = payload.data,
                 data = this.models.state.data = {
-                    gainScore: 0,
+                    gainScore: payload.status === 5 ? '-' : 0,
                     errorRate: 0
                 },
                 types = maps.get('question-types'),

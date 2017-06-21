@@ -1,0 +1,22 @@
+#! handlebars
+module
+    .rank-list(data-region='main')
+
+view('main')
+    if(studyRank)
+        ul.list-text > each(studyRank)
+            li.border.bottom
+                .num > echo(i)
+                if(headPortrait)
+                    .user-pic > img(src=downloadUrl(headPortrait))
+                else
+                    .user-pic > img(src='images/default-cover/default_user.png')
+                .name > echo(memberName)
+                .department > echo(organizationName)
+                .data > echo(courseCount)
+    compare(myRankCount 'gt' 100)
+        p.text-center.m-top
+            span 您排名
+            span.custom-color-3 > echo(myRankCount)
+            span 位
+    

@@ -1,6 +1,7 @@
 var D = require('drizzlejs'),
     study = require('../study/errors'),
     exam = require('../exam/errors'),
+    center = require('../center/errors'),
     activity = require('../activity/errors');
 
 var messages = {
@@ -15,7 +16,7 @@ var messages = {
     900004: '文件类型不支持'
 };
 
-var ms = D.assign({}, messages, study, exam, activity);
+var ms = D.assign({}, messages, study, exam, activity, center);
 
 exports.get = function(key) {
     if (!ms[key]) throw new Error('Key [' + key + '] is not defined');

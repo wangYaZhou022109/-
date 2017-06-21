@@ -66,7 +66,7 @@ require('./app/ext/rich-text');
 require('./app/ext/monthpicker');
 require('./app/util/arrays');
 require('./app/ext/image-cropper');
-
+require('./app/ext/clipboard');
 D.adapt({
     getFormData: function(form) {
         var result = {};
@@ -107,7 +107,7 @@ app = window.app = new D.Application({
 D.PageableModel.setDefault({
     pageKey: 'page'
 });
-
+require('./app/util/push-state').setup(app);
 require('./app/util/oauth').setup(app, oauthOptions);
 require('./app/util/message').setup(app);
 require('./app/util/ajax').setup(app);

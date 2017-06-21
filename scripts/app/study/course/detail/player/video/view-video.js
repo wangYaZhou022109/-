@@ -7,24 +7,10 @@ exports.bindings = {
     startProgress: 'startProgress'
 };
 exports.components = [function() {
-    var state = this.bindings.state.data;
-    var localLocation = state.localLocation;
-    var maxTime = state.section.timeSecond;
-    var currentTime = 0;
-    if (state.progress) {
-        currentTime = state.progress.lessonLocation;
-    }
-    if (localLocation) {
-        currentTime = Math.floor(localLocation);
-    }
-    if ((maxTime - currentTime) < 2) {
-        currentTime = 0;
-    }
     return {
         id: 'player',
         name: 'videojs',
         options: {
-            currentTime: currentTime,
             video: {
                 // height: 500, // 自动缩放 aspectRatio
                 autoplay: true
@@ -61,6 +47,22 @@ exports.video = {
     ended: function() {
         var flag = this.commitProgress();
         if (flag) this.module.dispatch('startProgress');
+    },
+    seeked: function(player) {
+        player.play();
+    },
+    loadeddata: function(player) {
+        var state = this.bindings.state.data;
+        var duration = Math.floor(player.duration());
+        var localLocation = 0;
+        if (state.progress) {
+            localLocation = state.progress.lessonLocation;
+        }
+        if ((duration - localLocation) < 2) {
+            localLocation = 0;
+        }
+        player.currentTime(localLocation);
+        // this.module.dispatch('duration', { duration: duration });
     }
 };
 

@@ -1,16 +1,17 @@
 #!handlebars
-module > .watch-detail1-page
-    .watch-detail1-total(data-region="audit")
+module > .ask-exam-page
+    .ask-exam-total(data-region="audit")
 
 view('audit') > form.vertical
-    .h5 > echo(audit.question.title)
-    .detail1-content.m-top.small-font
-        echo(audit.question.content)
+    .title-main
+        .h5 > echo(audit.question.title)
+        .detail1-content.m-top.small-font
+            echo(audit.question.content)
     .detail1-person.layout-mt-small
         span > echo(audit.member.fullName)
-        span 提问时间：
-        span > dateTime(audit.createTime)
-    .detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  each(topicList) > echo(name) + echo(' ')
+        span.sub-title 提问时间：
+        span.sub-title > dateTime(audit.createTime)
+    .text-main-color.detail1-alink.layout-mt-small > string('from-topic') + echo(' ：') +  echo(audit.topicStr) + echo(' ')
     input.input(name='id' type='hidden' value=audit.id)
     input.input(name='questionId' type='hidden' value=audit.question.id)
     input.input(name='objectId' type='hidden' value=audit.objectId)

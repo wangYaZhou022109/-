@@ -1,5 +1,6 @@
 exports.items = {
-    main: 'main'
+    main: 'main',
+    'home/default/more/rank/rank-finish-course': { isModule: true }
 };
 
 exports.store = {

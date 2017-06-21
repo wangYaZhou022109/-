@@ -176,6 +176,8 @@ exports.store = {
             this.get(staff);
             onlineCourseList.params.classId = classId;
             this.get(onlineCourseList);
+            this.models.signUpInfo.params.classId = classId;
+            this.get(this.models.signUpInfo);
         },
         turnPage: function(data) {
             var state = this.models.state.data,

@@ -83,8 +83,9 @@ exports.store = {
             url: '../train/class-info/find-activity-classinfo',
             type: 'pageable',
             root: 'items',
-            pageSize: 30
-        }
+            pageSize: 90
+        },
+        classSignupByclassId: { url: '../train/sign-up' }
     },
     callbacks: {
         init: function() {
@@ -93,43 +94,46 @@ exports.store = {
                 examMores = this.models.examMores,
                 gensees = this.models.gensees,
                 researchActivitys = this.models.researchActivitys,
-                search = this.models.search;
+                search = this.models.search,
+                classDetailes = this.models.classDetailes;
             // D.assign(activitys.params, { size: RECOMMEND_SIZE }); // 暂时不限制最大条数，将所有推荐的数据查询出来
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
-            return this.chain([
-                this.get(activitys),
-                this.get(gensees),
-                this.get(exams),
-                this.get(researchActivitys)
-            ]).then(function() {
+            this.get(exams, { loading: true }).then(function() {
                 examMores.init(exams.data);
                 examMores.changed();
             });
+            this.get(researchActivitys, { loading: true });
+            this.get(activitys, { loading: true });
+            this.get(gensees, { loading: true });
+            return this.get(classDetailes, { loading: true });
         },
         search: function(payload) {
             var gensees = this.models.gensees,
                 exams = this.models.exams,
                 examMores = this.models.examMores,
                 researchActivitys = this.models.researchActivitys,
-                search = this.models.search;
+                search = this.models.search,
+                classDetailes = this.models.classDetailes;
 
             gensees.clear();
             researchActivitys.clear();
+            exams.clear();
             D.assign(gensees.params, payload);
             D.assign(exams.params, payload);
             D.assign(researchActivitys.params, payload);
+            D.assign(classDetailes.params, payload);
             D.assign(search.data, payload);
             search.changed();
 
-            return this.chain([
-                this.get(gensees),
-                this.get(exams),
-                this.get(researchActivitys)
-            ]).then(function() {
+
+            this.get(gensees);
+            this.get(exams).then(function() {
                 examMores.init(exams.data);
                 examMores.changed();
             });
+            this.get(researchActivitys);
+            return this.get(classDetailes);
         },
         getResearchById: function(payload) {
             return _.find(this.models.researchActivitys.data, function(r) {
@@ -144,11 +148,19 @@ exports.store = {
         },
         pushMoreExams: function(payload) {
             var examMores = this.models.examMores,
-                exams = this.models.exams;
-            if (payload.page > examMores.data.pageCount - 1) {
+                exams = this.models.exams,
+                pageInfo = exams.getPageInfo(),
+                currentCount = examMores.data.list.length || 0;
+
+            if (pageInfo.total === currentCount) {
+                this.app.message.error('已到最后一页');
+            }
+
+            if (payload.page > examMores.data.pageCount - 1
+                && pageInfo.total > currentCount) {
                 examMores.changePage(payload.page);
                 exams.turnToPage(exams.params.page + 1);
-                return this.get(exams).then(function() {
+                return this.get(exams, { loading: true }).then(function() {
                     examMores.pushExams(exams.data);
                     examMores.changed();
                 });
@@ -166,9 +178,15 @@ exports.store = {
                 currentPage = pageInfo.page;
             model[payload.dir + 'Page']();
             if (currentPage !== model.getPageInfo().page) {
-                return this.get(model);
+                return this.get(model, { loading: true });
             }
             return true;
+        },
+        getClassSignupByclassId: function(payload) {
+            var classSignupByclassId = this.models.classSignupByclassId;
+            classSignupByclassId.clear();
+            classSignupByclassId.params = { classId: payload.id };
+            return this.get(classSignupByclassId);
         }
     }
 };

@@ -1,7 +1,9 @@
+// var $ = require('jquery');
 exports.items = {
     main: 'main',
     // side: 'side',
-    'ask/topicsquare/apply-topic': { isModule: true }
+    'ask/topicsquare/apply-topic': { isModule: true },
+    list: 'list'
 };
 
 exports.store = {
@@ -16,7 +18,7 @@ exports.store = {
         },
         unfollow: { url: '../ask-bar/concern/unfollow' },
         down: { url: '../human/file/download' },
-        state: {}
+        state: { data: { typeId: 'checkAll' } }
     },
     callbacks: {
         refresh: function() {
@@ -36,13 +38,15 @@ exports.store = {
         },
         checkOne: function(payload) {
             var topicname = this.models.topicname;
-            var checkOne = this.models.checkOne;
-            checkOne.params = payload;
-            return this.get(checkOne).then(function() {
-                topicname.clear();
-                topicname.data = checkOne.data;
-                topicname.changed();
-            });
+            // var checkOne = this.models.checkOne;
+            topicname.clear();
+            topicname.params = payload;
+            return this.get(topicname);
+            // topicname.changed();
+            // .then(function() {
+            //     topicname.data = checkOne.data;
+            //     // topicname.changed();
+            // });
         },
         checkAll: function() {
             var topicname = this.models.topicname;

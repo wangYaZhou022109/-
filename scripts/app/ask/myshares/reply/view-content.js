@@ -6,7 +6,8 @@ exports.bindings = {
 };
 
 exports.events = {
-    'click answer-*': 'answer'
+    'click answer-*': 'answer',
+    'click report-*': 'report',
 };
 
 exports.handlers = {
@@ -27,7 +28,18 @@ exports.handlers = {
             el.style.display = 'inline';
         }
         this.bindings.state.data.id = id;
-    }
+    },
+    report: function(payload) {
+        var id = payload,
+            data = { };
+        if (id.indexOf('_') !== -1) {
+            data = id.split('_');
+            this.app.viewport.modal(this.module.items['ask/report'], {
+                id: data[1],
+                objectType: data[0],
+                beUserId: data[2] });
+        }
+    },
 };
 
 exports.actions = {
@@ -52,8 +64,16 @@ exports.dataForActions = {
         });
         return data;
     },
-    replydel: function(payload) {
-        return payload;
+    replydel: function(data) {
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '讨论删除后将无法恢复，是否确定删除该讨论？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
     },
     replyandreplyanswer: function(payload) {
         var data = {},
@@ -158,3 +178,4 @@ exports.dataForTemplate = {
         return obj.reply;
     }
 };
+

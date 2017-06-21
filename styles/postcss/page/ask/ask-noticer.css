@@ -1,0 +1,5 @@
+.ask-noticer {
+    & span {
+        margin-top: 50px;
+    }
+}

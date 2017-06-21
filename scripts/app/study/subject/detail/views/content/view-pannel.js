@@ -51,22 +51,17 @@ exports.handlers = {
             if (progress.finishStatus === 2) {
                 url = '#/exam/research-activity/paper/' + resourceId + '/' + subject.id;
                 window.open(url);
-                return;
+            } else {
+                view = this.module.items['research-tips'];
+                this.bindings.state.data.currentType = sectionType;
+                this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
+                    me.app.viewport.modal(view);
+                });
             }
-            view = this.module.items['research-tips'];
-            this.bindings.state.data.currentType = sectionType;
-            this.module.dispatch('getResearchById', { id: resourceId }).then(function() {
-                me.app.viewport.modal(view);
-            });
         } else if (sectionType === 8) {
-            url = prefixUrl[8] + section.referenceId;
-            window.open(url);
+            window.open(url = prefixUrl[8] + section.referenceId);
         } else if (sectionType === 9) {
             me.app.viewport.modal(me.module.items['exam/exam/other-exam-prompt'], { examId: resourceId });
-            return;
-        } else {
-            url = prefixUrl[sectionType] + section.resourceId;
-            window.open(url);
         }
     },
     sectionDisplay: function(id) {

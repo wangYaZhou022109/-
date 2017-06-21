@@ -46,6 +46,9 @@ exports.dataForTemplate = {
     types: function() {
         var types = maps.get('research-question-types'),
             data = this.bindings.state.data;
+        if (data.sourceType === 4) { // 评估问卷不需要多选题
+            types = maps.get('evaluate-question-types');
+        }
         if (data) {
             _.map(types, function(t) {
                 var obj = t;

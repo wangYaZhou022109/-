@@ -12,7 +12,7 @@ exports.store = {
             var me = this,
                 list = me.models.list;
             list.clear();
-            me.get(list);
+            me.get(list, { loading: true });
         }
     }
 };

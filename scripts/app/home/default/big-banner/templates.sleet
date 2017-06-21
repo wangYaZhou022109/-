@@ -8,7 +8,6 @@ view('advertising')
         if(adverts)
             ul
                 each(adverts)
-                    li > a(href=linkAddress)(target='_blank')&if(outerLink) > img(src=downloadUrl(pcImage))
-                    #  li(style='background-image:url('+../downUrl + pcImage+')') > a(href=linkAddress)(target='_blank')&if(outerLink)
+                    li(style='background-image:url('+downloadUrl(pcImage)+')') > a(href=linkAddress)(target='_blank')&if(outerLink)
         else
             .content-empty > .img-box.img-type-1 + p 暂无内容
