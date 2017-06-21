@@ -39,7 +39,7 @@
             & .icon-more {
                 font-size: var(--h3);
                 & .drop-down-more {
-                    display: none;
+                    display: block;
                     width: calc(var(--space) * 8);
                     position:absolute;
                     right: -calc(var(--space)  + 2 );
@@ -53,8 +53,8 @@
                         top: -calc(var(--space) + 1);
                         color: var(--border-color);
                     }
-                
-                
+
+
                     & li {
                         transform:scale(0.8);
                         color: var(--font-tip-color);
@@ -70,6 +70,13 @@
                     & li:last-child {
                         border-bottom: none;
                     }
+                    /*& .iconfont {
+                        font-size: 1em;
+                        display: inline-block;
+                        vertical-align: middle;
+                        -webkit-transform: scale(1);
+                        transform: scale(1);
+                    }*/
                 }
             }
             & .icon-more:hover .drop-down-more {
@@ -148,14 +155,16 @@
             @apply --transition;
 
             position: relative;
-            height: 0;
+            /*height: 0;*/
+            display: none;
             overflow: hidden;
 
             &.show {
                 @apply --fade-in;
 
                 margin: 1em 0;
-                height: 3em;
+                display: block;
+                /*height: 3em;*/
             }
 
             & textarea {
