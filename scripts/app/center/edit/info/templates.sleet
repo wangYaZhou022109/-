@@ -25,7 +25,7 @@ view('main') > .base-info
                         if(member.majoyPosition) > echo(member.majoyPosition.name)
                 .layout-mr
                     .inline-block > setting('person.index.info.joinTime')
-                    .inline-block > date(member.memberDetail.entryTime)
+                    .inline-block > date(member.memberDetail.entryDate)
                 .layout-mr
                     .inline-block > setting('person.index.info.no')
                     .inline-block > echo(member.name)
