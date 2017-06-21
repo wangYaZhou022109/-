@@ -47,6 +47,14 @@
             left: 1em;
             top: 0;
         }
+        & .sub-text {
+            width: 500px;
+            word-wrap:break-word;
+        	word-break:break-all;
+            text-align: left;
+            white-space: normal;
+            line-height: 1.5;
+        }
     }
 
     &.right {

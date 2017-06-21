@@ -38,6 +38,10 @@ view('head')
         ul.head-info.inline-block
             if(showExamNotes)
                 li > i.iconfont.icon-notice(id='notice' style=if(noticed '' 'color:#39fe2c'))
+            # li.drop-down-wrapper.right
+            #    i.iconfont.icon-notice.drop-down-btn
+            #    .drop-down-content > .content
+            #        .sub-text 课程简介, 本课程从信息技术基础上介绍教该主题的深化与理解。
             li.border.right > echo('本卷共' state.totalCount '题，总分' state.totalScore '分')
             li.border.right > echo('已答：') + span(id='answered-count')
             li.border.right > echo('未答：') + span(id='no-answer-count')
