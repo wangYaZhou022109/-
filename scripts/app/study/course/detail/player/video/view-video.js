@@ -38,7 +38,7 @@ exports.afterRender = function() {
         if (flag) me.module.dispatch('startProgress');
     }, 1000 * 60);
 
-    window.onunload = function() {
+    window.onbeforeunload = function() {
         me.commitProgress();
     };
     return this.module.dispatch('startProgress');
