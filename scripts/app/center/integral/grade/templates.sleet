@@ -1,0 +1,17 @@
+#!handlebars
+module
+    div(data-region='list')
+
+view('list')
+    form.vertical
+        each(gradeList)
+            .row
+                .col-sm-11 > .row > .col-sm-12
+                    .inline-block.m-right
+                        echo(gradeName)
+                    .inline-block.m-right
+                        .text 大于等于
+                    .inline-block.m-right
+                        echo(gradeScore)
+                    .inline-block.m-right
+                        .text 分

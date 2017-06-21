@@ -31,13 +31,12 @@ exports.store = {
         save: function(options) {
             var memberForm = this.models.memberForm,
                 me = this,
-                error,
                 callbacks;
             D.assign(memberForm.data, options);// 把新值和旧值合并,用新值覆盖旧值
             if (memberForm.data.id) {
                 memberForm.data.id = null;
             }
-            this.put(memberForm).then(function(data) {
+            return this.put(memberForm).then(function(data) {
                 if (data[0].password === '2') {
                     me.app.message.error('密码修改失败，旧密码输入不正确');
                 } else {
@@ -45,15 +44,23 @@ exports.store = {
                     callbacks = me.models.state.data.callbacks;
                     callbacks.call();
                 }
-            }, function(reason) {
-                if (reason[0] && reason[0].responseText) {
-                    error = JSON.parse(reason[0].responseText);
-                    if (error.errorCode === 20116) {
-                        me.app.message.error('密码修改失败，旧密码输入不正确');
-                    }
-                }
+            // }, function(data) {
+            //     var errorCode = JSON.parse(data[0].responseText).errorCode;
+            //     var message = errors.get(errorCode);
+            //     return me.Promise.create(function(resolve, reject) {
+            //         me.app.message.error(message, function() {
+            //             reject();
+            //         });
+            //         reject();
+            //     });
+            // }, function(reason) {
+            //     if (reason[0] && reason[0].responseText) {
+            //         error = JSON.parse(reason[0].responseText);
+            //         if (error.errorCode === 20116) {
+            //             me.app.message.error('密码修改失败，旧密码输入不正确');
+            //         }
+            //     }
             });
-            return false;
         }
     }
 };

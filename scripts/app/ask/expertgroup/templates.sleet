@@ -18,7 +18,7 @@ view('list')
                 compare(user.expert.auditStatus 'eq' 2)
                     .pull-right#refuse > string('auditStatus4')
         compare(user.expert 'eq' null)
-            .pull-right.btn#apply > string('apply') + string('become') + string('expert')
+            .pull-right#apply > string('apply') + string('become') + string('expert')
         ul
             li.h3 > string('expert') + string('meta')
     .pr-60#topictags
@@ -35,10 +35,10 @@ view('list')
         ul > each(expertlist)
             li.expert-item
                 .clearfix
-                compare(member.id 'ne' me)
-                    .img> .img-cont > a.normal.block(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
-                else
-                    .img> .img-cont > a.normal.block(href='#/ask/iamexpertdetails ') > img(src=member.headPortrait alt=member.fullName)
+                    compare(member.id 'ne' me)
+                        .img > .img-cont > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id) > img(src=member.headPortrait alt=member.fullName)
+                    else
+                        .img > .img-cont > a.normal(href='#/ask/iamexpertdetails ') > img(src=member.headPortrait alt=member.fullName)
                     .expert-item-right.overflow
                         .w-full.clearfix
                             .title > echo(member.fullName)

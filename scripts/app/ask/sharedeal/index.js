@@ -1,3 +1,5 @@
+exports.title = '文章审核';
+
 exports.items = {
     shareaudit: 'shareaudit'
 };
