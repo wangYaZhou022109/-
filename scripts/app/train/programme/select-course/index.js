@@ -40,9 +40,11 @@ exports.store = {
                 targetList = [];
                 me.get(selectedList).then(function(list) {
                     state.index = data[0].length;
+                    // console.log(data[0]);// 主题集合
                     if (data[0].length > 0) {
                         themeId = data[0][0].id;
                         state.themeId = themeId;
+                        // console.log(themeId);// 主题的id
                         _.map(list[0] || [], function(course) {
                             var r = course;
                             if (r.themeId === themeId) {
