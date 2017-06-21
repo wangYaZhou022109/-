@@ -61,11 +61,11 @@ exports.dataForActions = {
         var data = payload;
         data.content = $.trim(data.content);
         if (!$.trim(data.content).length) {
-            this.app.message.error('评论内容不能为空');
+            this.app.message.error('讨论内容不能为空');
             return false;
         }
         if ($.trim(data.content).length > 3000) {
-            this.app.message.error('您评论内容超过3000字符！');
+            this.app.message.error('讨论内容须在3000字符以内');
             return false;
         }
         if (sensitive.judge(data.content) > 0) {
