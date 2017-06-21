@@ -16,7 +16,12 @@ view('main')
         p.small-font.color-error 4.如有失败记录，删掉电子表格里已经成功的记录，然后修正失败的记录，再次上传导入。
         .btn.layout-mr-small#import 导入数据
         if(importData.showErrorUrl)
-            a(href=errorDataUrl) > .btn#downloadError 下载错误的导入数据
+            a.btn(href=errorDataUrl download='导入失败记录.xlsx' target='_blank') 下载导入失败记录
+        if(importResult.importFinished)
+            h3 > echo('导入成功记录' importResult.successCount '条, ') + echo('导入失败记录' importResult.errorCount '条')
+            div
+                each(errorMsg)
+                    p.error > echo(this)
 
 view('file')
     #uploader

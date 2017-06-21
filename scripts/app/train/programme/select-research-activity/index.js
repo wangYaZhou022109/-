@@ -51,9 +51,39 @@ exports.store = {
                 publishTimeStart,
                 publishTimeEnd,
                 start,
-                end;
+                end,
+                dateTime,
+                date,
+                year,
+                month,
+                dd,
+                hour,
+                min,
+                times;
             publishTimeEnd = createTimeRange.split('to')[1].trim();
             publishTimeStart = createTimeRange.split('to')[0].trim();
+            if (publishTimeStart) {
+                dateTime = publishTimeStart.split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                start = new Date(year, month - 1, dd, hour, min).getTime();
+            }
+            if (publishTimeEnd) {
+                dateTime = publishTimeEnd.split(' ');
+                date = dateTime[0].split('-');
+                times = dateTime[1].split(':');
+                year = date[0];
+                month = date[1];
+                dd = date[2];
+                hour = times[0];
+                min = times[1];
+                end = new Date(year, month - 1, dd, hour, min).getTime();
+            }
             start = new Date(publishTimeStart).getTime();
             end = new Date(publishTimeEnd).getTime();
             this.models.researchActivities.clear();

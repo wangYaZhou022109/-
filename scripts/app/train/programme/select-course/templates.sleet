@@ -11,9 +11,9 @@ view('selected')
                 each(targetList) > tr
                     td > echo(resourceName)
                     td
-                        i.iconfont.icon-sort-asc(id='move-up-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-sort-desc(id='move-down-'+id data-name='id' data-value=id)
-                        i.iconfont.icon-delete-solid(id='del-target-'+id data-name='id' data-value=id)
+                        i.iconfont.icon-sort-asc(id='move-up-'+resourceId data-name='resourceId' data-value=resourceId)
+                        i.iconfont.icon-sort-desc(id='move-down-'+resourceId data-name='resourceId' data-value=resourceId)
+                        i.iconfont.icon-delete-solid(id='del-target-'+resourceId data-name='resourceId' data-value=resourceId)
 
         .page-main
             .choosetopic.clearfix

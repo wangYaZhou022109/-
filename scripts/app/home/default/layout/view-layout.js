@@ -84,7 +84,7 @@ exports.dataForTemplate = {
                         browseCount: exam.applicantNumber || 0,
                         beginTime: exam.startTime,
                         endTime: exam.endTime,
-                        dataImage: exam.cover
+                        dataImage: exam.coverId
                     });
                 }
             });
@@ -101,7 +101,7 @@ exports.dataForTemplate = {
                         browseCount: research.viewNumber || 0,
                         beginTime: research.startTime,
                         endTime: research.endTime,
-                        dataImage: research.cover
+                        dataImage: research.coverId
                     });
                 }
             });

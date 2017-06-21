@@ -1,37 +1,37 @@
 #!handlebars
 
-module 
-    div(data-region='banner')
+module
     .ask-page > .container
         .page-main-wrapper.knowledge-side
             .page-side.side-min(data-region='right')
             .page-main(data-region='left')
 
-view('banner')
-    .expert-detail-top(style='background-image:url(images/bg-usercenter.png)') > .container
+
+
+
+view('right')
+    div(data-dynamic-key='iamexpertright')
+view('left')
+    .expert-detail-top > .container
         .head > img(src= expert.member.headPortrait alt=expert.member.fullName)
-        section.section
+        .titleintro
             .title-row
                 .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
-            .title-row
-                .inline-block.m-right > string('me') + string('be-good-at') + string('topic') + echo(':') 
+            .title-row.m-top
+                .topic.m-right > string('me') + string('be-good-at') + string('topic') + echo(':')
                 each(expert.topicList)
-                    .inline-block.m-right.bg-white.sub-title > echo(name)
-                .inline-block.m-right.bg-white.sub-title.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
+                    .tag-btn.topic.radius > echo(name)
+                a.topic.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
             p.info-detail > echo(expert.introduce)
             .expert-about.clearfix
                 a.normal(id = 'right'+ expert.id data-name='id' data-value=expert.id href='javascript:;')
                     i.iconfont.icon-warn
                     | 专家的权利与义务
                 a.pull-right.pointer(id = 'editsummary'+ expert.id data-name='id' data-value=expert.id styke="text-decoration: none;") 编辑简介
-
-view('right') 
-    div(data-dynamic-key='iamexpertright')
-view('left') 
     section.section
-        .tabs.line.mb-1 > ul 
+        .tabs.line.mb-1 > ul
             compare(leftstate.menu 'eq' 'inviteanswer')
-                li#menu-inviteanswer.active > string('wait-for-me-to-answer') 
+                li#menu-inviteanswer.active > string('wait-for-me-to-answer')
             else
                 li#menu-inviteanswer > string('wait-for-me-to-answer')
             compare(leftstate.menu 'eq' 'myanswer')
@@ -39,12 +39,10 @@ view('left')
             else
                 li#menu-myanswer > string('my') + string('answer')
             compare(leftstate.menu 'eq' 'expertssharing')
-                li#menu-expertssharing.active > string('my') + string('share') 
+                li#menu-expertssharing.active > string('my') + string('share')
             else
                 li#menu-expertssharing > string('my') + string('share')
         .tabs-cont > ul
             li.tabs-cont-item.active#tabs-cont-item-1
                 .comment-list.ask-list > ul
                     div(data-dynamic-key=leftstate.menu)
-
-                    

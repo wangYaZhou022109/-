@@ -50,7 +50,7 @@ view('main')
                 compare(details.closeStatus 'eq' 0)
                     .btn#discuss 发表
         
-    .layout-mt
+    .layout-mt.padding-b
         .comment-list > each(details.questionDiscussList) > ul
             compare(auditStatus 'eq' "1")
                 li
@@ -70,10 +70,7 @@ view('main')
                                 else
                                     .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
                                     .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞（' + praiseNum +'）')
-                                if(replyNum)
-                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
-                                else
-                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（0）')
+                                .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
                             .text-right
                                 .item > .share-bar
                                     .drop-down-wrapper
@@ -114,4 +111,4 @@ view('relatedquestions')
         .layout-mt-small.m-top
             each(question)
                 .block.layout-mt-small.m-top 
-                    a.text-overflow(href='#/ask/sharedetails/'+id)> echo(title)
+                    a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)
