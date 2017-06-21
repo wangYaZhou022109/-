@@ -148,11 +148,11 @@ exports.dataForTemplate = {
                     rr.finishStatus = '';
                     if (sectionProcess.finishStatus === 6 || sectionProcess.finishStatus === 2) {
                         if (rr.sectionType === 8) {
-                            if (sectionProcess.score === null) rr.finishStatus += '成绩：无';
+                            if (sectionProcess.score === null) rr.finishStatus += '成绩：无 ';
                             else rr.finishStatus += '成绩' + (Number(sectionProcess.score) / 10) + ' ';
                         }
                         if (rr.sectionType === 9) {
-                            if (sectionProcess.score === null) rr.finishStatus += '成绩：无';
+                            if (sectionProcess.score === null) rr.finishStatus += '成绩0 ';
                             else rr.finishStatus += '成绩' + (sectionProcess.score / 100) + ' ';
                         }
                     }
