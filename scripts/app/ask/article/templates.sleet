@@ -1,6 +1,6 @@
 #!handlebars
 
-module > form.form.align-left
+module > form.form
     .form-row
         label.required > string('article-title')
         .content
@@ -17,7 +17,7 @@ view('top')
 view('selectdrop')
     .select-drop.border.around#selectdrop
         each(titledata)
-            .select-drop-item(id='select-srop-' + id data-name='id' data-value=id ) > echo(title)
+            .select-drop-item.border.bottom(id='select-srop-' + id data-name='id' data-value=id ) > echo(title)
 
 view('topic')
     .form-row.textarea-row
