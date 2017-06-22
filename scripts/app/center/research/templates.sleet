@@ -30,9 +30,9 @@ view('main')
             li.border.bottom
                 .title-row
                     .img > .img-cont > img(src=imgUrl)
-                    .inline-block.title > echo(researchQuestionary.name)
+                    .text-overflow.title > echo(researchQuestionary.name)
                     .time 调研时间：
-                        dateMinute(researchQuestionary.startTime) 
+                        dateMinute(researchQuestionary.startTime)
                         | 至
                         dateMinute(researchQuestionary.endTime)
                 .state > map('research-person-center-status', status)

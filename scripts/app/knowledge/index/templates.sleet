@@ -49,7 +49,7 @@ view('side')
     section.section
         .h3.m-bottom 热门标签
         .side-box.tag-group > each(topics)
-            .tag-btn.white(id='topic-'+id)(class = if(active 'active')) > echo(name)
+            .tag-btn.radius(id='topic-'+id)(class = if(active 'active')) > echo(name)
     .layout-mt
         .h3.m-bottom 知识达人
         .charts.knowledge-talent > each(talents)

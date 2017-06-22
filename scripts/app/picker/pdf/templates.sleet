@@ -27,5 +27,5 @@ view('viewer')
     .pdf-progress
         #progress.btn(style='display:none;')
         label#progressLabel
-    #viewerContainer.viewerContainer(style='height:34em;')
+    #viewerContainer.viewerContainer(style='height:32em;')
         .pdfViewer#viewer
