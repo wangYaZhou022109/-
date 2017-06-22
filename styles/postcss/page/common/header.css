@@ -8,6 +8,7 @@
             padding: 0 calc(var(--large-space) * 1.5);
             height: var(--nav-height);
             line-height: var(--nav-height);
+            margin-right: -4px;
         }
 
         & a {

@@ -6,7 +6,7 @@ module > .report-exam-page
 view('reportaudit') > form.vertical
     .report-person.clearfix
         .item.pull-left.layout-mr
-            span > echo('举报人：') > echo(member.fullName) 
+            span > echo('举报人：') > echo(reportaudit.member.fullName) 
             #  img.inline-block(src="images/1.png")
             #  img.inline-block(src="images/2.png")
             #  img.inline-block(src="images/3.png")

@@ -2,7 +2,8 @@ var ANSWER_PAPER = 'exam/exam/answer-paper',
     SCORE_DETAIL = 'exam/exam/score-detail',
     EXAM_TIME_EXCEPTION = 4,
     WAIT_MARK_PAPER = 5,
-    IS_FINISHED = 1;
+    IS_FINISHED = 1,
+    EXAM_PUBLISHING = 2;
 
 exports.bindings = {
     exam: true
@@ -11,6 +12,13 @@ exports.bindings = {
 exports.afterRender = function() {
     var exam = this.bindings.exam.data,
         examRecord = exam.examRecord;
+
+    if (exam.status === EXAM_PUBLISHING) {
+        this.app.viewport.modal(this.module.items.tips, {
+            tips: '试卷正在生成中，请稍后再试'
+        });
+        return true;
+    }
     //  待评卷
     if (examRecord && examRecord.status === WAIT_MARK_PAPER) {
         return this.module.regions.main.show(SCORE_DETAIL, {

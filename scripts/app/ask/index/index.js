@@ -11,7 +11,7 @@
 
 exports.items = {
     left: 'left',
-   // right: 'right'
+    topicbanner: 'topicbanner',
     top: 'top',
     middle: 'middle',
     bottom: 'bottom'
