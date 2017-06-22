@@ -47,7 +47,7 @@
             left: 1em;
             top: 0;
         }
-        & .sub-text {
+        & .sub-tip {
             width: 500px;
             word-wrap:break-word;
         	word-break:break-all;

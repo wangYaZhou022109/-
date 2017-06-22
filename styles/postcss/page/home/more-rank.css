@@ -2,13 +2,15 @@
     @apply --clearfix;
     & .list-text {
         @apply --clearfix;
-        margin-top: var(--large-space);
         margin-bottom: var(--large-space);
         & li {
             @apply --clearfix;
             padding-top: var(--space);
             padding-bottom: var(--space);
             line-height: var(--large-space);
+            &:hover {
+                background-color: var(--bg-color);
+            }
         }
         & .num {
             float: left;
@@ -22,30 +24,34 @@
         }
         & .user-pic {
             float: left;
-            width: var(--large-space);
+            padding-left: var(--space);
             height: var(--large-space);
             overflow: hidden;
             & img {
-                width: 100%;
+                width: var(--large-space);
             }
         }
         & .name {
             @apply --text-overflow;
             float: left;
+            padding-left: var(--space);
             width: 15%;
         }
         & .department {
             @apply --text-overflow;
             float: left;
+            padding-left: var(--space);
             width: 25%;
         }
         & .title {
             @apply --text-overflow;
+            padding-left: var(--space);
             float: left;
             width: 70%;
         }
         & .data {
             float: right;
+            padding-right: var(--space);
             width: 30%;
             text-align: right;
             font-size: var(--h3);

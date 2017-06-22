@@ -67,6 +67,15 @@
             }
         }
 
+        & .task-list {
+            padding: 0 var(--large-space) var(--large-space);
+            margin-top: var(--large-space);
+
+            & li {
+                margin-bottom: var(--space);
+            }
+        }
+
         & .min-btn-groups {
             position: relative;
 

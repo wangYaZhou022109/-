@@ -13,13 +13,13 @@ view('main')
         li
             .user-pic > img(src=details.member.headPortrait)
             .comment-content.layout-mb
-                .user-info.m-top
+                .user-info
                     a(href='javascript:;') > echo(details.member.fullName)
                     span > echo('·发表文章·')
                     span.sub-text > echo(details.createTime)
                 .sub-text.m-top > echo('来自话题：') + each(details.topicList) > echo(' '+ name)
             .h4.mt-1 > echo(details.title)
-            .comment-text.m-top 
+            .comment-text.m-top
                 compare(jsonImg.length 'gt' 0)
                     img(src=jsonImg)
                 @echo(details.content)
@@ -46,8 +46,9 @@ view('main')
             textarea.input.w-full#content(name='t_content')
             input.input(type='hidden' name='organizationId' value=details.organizationId)
             input.input(type='hidden' name='id' value=details.id)
-            .m-top.text-right > .btn#discuss 发表
-        
+            .m-top.text-right
+                compare(details.closeStatus 'eq' 0)
+                    .btn#discuss 发表
     .layout-mt.padding-b
         .comment-list > each(details.questionDiscussList) > ul
             compare(auditStatus 'eq' "1")
@@ -61,7 +62,7 @@ view('main')
                             .text-right > dateTime(createTime)
                         .comment-text > echo(content)
                         .comment-operation
-                            .pull-left 
+                            .pull-left
                                 compare(praise1 'eq' true)
                                     .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
                                     .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
@@ -75,9 +76,10 @@ view('main')
                                         span 分享
                                         form.drop-down-content > .content
                                             .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
-                                            .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博                     
+                                            .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                 .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
-                                .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete') 
+                                .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                        #  .comment-reply(id='reply-'+id name='reply-' + id style='display:none')
                         div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section
@@ -101,11 +103,11 @@ view('relevantexperts')
         .grid-row
             each(expert)
                 .col-md-4 > a.normal(href='#/ask/expertdetails/'+ id + ',' + member.id)
-                    img.block(src=headPhoto)    
+                    img.block(src=headPhoto)
 view('relatedquestions')
     section.section.relevant-course
         span.h3 > echo('相关文章')
         .layout-mt-small.m-top
             each(question)
-                .block.layout-mt-small.m-top 
+                .block.layout-mt-small.m-top
                     a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)

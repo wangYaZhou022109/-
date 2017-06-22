@@ -232,7 +232,7 @@ view('edit-offline') > form.vertical
                         .content
                             select.tag-input#classroomId(name='classroomId' x-rule='required')
                                 each(classroomList)
-                                    option(value=id)('selected')&if(selected) > echo(classroomName)
+                                    option(value=id)('selected')&if(selected) > echo(classroom)
                 .class-form-width.pull-left
                     .form-row
                         label 讲师姓名

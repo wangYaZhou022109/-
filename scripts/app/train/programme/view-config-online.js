@@ -67,6 +67,7 @@ exports.handlers = {
         });
     },
     addTheme: function() {
+        // var me = this;
         this.module.dispatch('addTheme', '新的主题');
     }
 };
