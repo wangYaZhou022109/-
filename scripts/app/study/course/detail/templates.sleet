@@ -2,7 +2,7 @@
 
 module > .course-detail-page
     .top
-        .course-detail-top.top-bg
+        .course-detail-top.top-bg > .container
             .course-side-catalog#course-side-catalog > .side-content
                 .course-chapter(data-region='chapter')
                 .course-note(data-region='note')
@@ -66,9 +66,9 @@ view('info')
                     i#collect.iconfont.icon-favorite(title='收藏')
     p.course-info-detail > each(topics)
         compare(group 'eq' 1)
-            a(href='#/ask/topicdetail/'+id) > .tag-btn > echo(name)
+            a(href='#/ask/topicdetail/'+id) > .tag-btn.radius > echo(name)
         else
-            .tag-btn > echo(name)
+            .tag-btn.radius > echo(name)
 
     .sub-title-row.mt-1.m-bottom
         .inline-block.layout-mr > echo('发布部门: ' + course.releaseOrg.name)
@@ -98,7 +98,7 @@ view('releated-course')
             i.iconfont.icon-reload-full
             span > string('reset.page')
         .h3 > echo('相关课程')
-    .mt-1.grid-row 
+    .mt-1.grid-row
         each(courseRelated)
             .col-md-6
                 .img

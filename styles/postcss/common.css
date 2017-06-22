@@ -186,6 +186,11 @@ section.section {
     max-width: 100%;
 }
 
+.break-word {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
 .fade-in {
     @apply --fade-in;
 }

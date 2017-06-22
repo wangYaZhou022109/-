@@ -2,6 +2,12 @@
 .radio {
    display: inline-block;
    vertical-align: middle;
+   font-size: 0;
+
+   & label {
+       vertical-align: middle;
+       font-size: 1rem;
+   }
 
     & input {
         display: none;
@@ -15,6 +21,8 @@
             border: 1px solid var(--border-color);
             background: white;
             display: inline-block;
+            vertical-align: middle;
+            margin-right: var(--space);
         }
 
         &:checked + label{
@@ -74,6 +82,7 @@
             height: 4px;
             vertical-align: middle;
             box-sizing: content-box;
+            margin-right: var(--space);
 
             &:before {
                 content: ' ';
