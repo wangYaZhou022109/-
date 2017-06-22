@@ -17,18 +17,19 @@ exports.events = {
 
 exports.handlers = {
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
-        var data = { },
-            id = payload;
-        // console.log(payload);
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
-            this.app.show('content', 'ask/myshares/details', { id: data[1] });
-        }
+    //    // var region,
+    //    //     data = { };
+    //    // var el = $(target).parents('.comment-list')[0];
+    //     var data = { },
+    //         id = payload;
+    //     // console.log(payload);
+    //     if (id.indexOf('_') !== -1) {
+    //         data = id.split('_');
+    //         // region = new D.Region(this.app, this.module, el, data[1]);
+    //         // region.show('ask/myquiz/details', { id: data[1] });
+    //         this.app.show('content', 'ask/myshares/details', { id: data[1] });
+    //     }
+        this.app.show('content', 'ask/myshares/sharedetails', { id: payload });
     },
     showShare: function(payload) {
        // var region,
