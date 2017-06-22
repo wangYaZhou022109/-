@@ -135,3 +135,6 @@ view('preview-scrom')
             #tree
         .content-main(data-region='content')
             iframe#frame(width='100%' height='100%' frameborder='no' border='0' marginwidth='0' marginheight='0' scrolling='yes' allowtransparency='yes')
+
+view('msg')
+    p 您离开了页面哦，等您回来。

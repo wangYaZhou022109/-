@@ -79,3 +79,14 @@ exports.handlers = {
         }
     }
 };
+
+// exports.afterRender = function() {
+//     var me = this;
+//     $(window).on('blur', function() {
+//         me.module.dispatch('showSection', {});
+//         me.app.viewport.modal(me.module.items.msg);
+//     });
+// };
+// exports.beforeClose = function() {
+//     $(window).off('blur');
+// };
