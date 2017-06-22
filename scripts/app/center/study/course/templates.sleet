@@ -32,7 +32,7 @@ view('main')
         li.border.bottom(id='list-'+id)
             .title-row
                 .img > .img-cont > img(src=imgUrl)
-                .inline-block.title > echo(courseInfo.name)
+                .text-overflow.title > echo(courseInfo.name)
                 compare(isRequired 'eq' 1)
                     span.custom-color-1 > map('is-required' isRequired)
                 .time > echo(prefixText)

@@ -14,15 +14,15 @@ build:
   script:
     - gulp lint-build
 
-deploy-release:
+deploy-master:
   stage: deploy
   only:
-    - release
+    - master
   script:
     - export PRODUCTION=true
     - gulp build
     - tar -zcf dist.tgz dist
-    # - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.27.224.129:8005/frontend/student"
+    - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.27.224.129:8005/frontend/student"
    
-    - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.162.70.87:8005/frontend/student"
+    # - "curl -XPOST -H \"Content-Type: multipart/form-data\" -F \"password=passit\" -F \"file=@dist.tgz\" 10.162.70.87:8005/frontend/student"
     - rm -f dist.tgz

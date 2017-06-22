@@ -59,27 +59,27 @@ exports.dataForTemplate = {
     list: function(data) {
         var list = data.list,
             downUrl = this.bindings.img.getFullUrl(),
-            defultImg = '';
+            icon = '';
         _.map(list, function(opt) {
             var obj = opt;
             if (obj.type === 0) {
-                defultImg = 'images/default-cover/default_mp4.jpg';
+                icon = 'icon-mp4';
             } else if (obj.type === 1) {
-                defultImg = 'images/default-cover/default_mp3.jpg';
+                icon = 'icon-mp3';
             } else if (obj.type === 2) {
-                defultImg = 'images/default-cover/default_doc.jpg';
+                icon = 'icon-word';
             } else if (obj.type === 3) {
-                defultImg = 'images/default-cover/default_pdf.jpg';
+                icon = 'icon-pdf';
             } else if (obj.type === 4) {
-                defultImg = 'images/default-cover/default_xls.jpg';
+                icon = 'icon-excel';
             } else if (obj.type === 5) {
-                defultImg = 'images/default-cover/default_ppt.jpg';
+                icon = 'icon-ppt';
             } else if (obj.type === 6) {
-                defultImg = 'images/default-cover/default_epub.jpg';
+                icon = 'icon-mp4';
             } else {
-                defultImg = 'images/default-cover/default_txt.jpg';
+                icon = 'icon-zhishiku';
             }
-            obj.imgUrl = obj.cover ? (downUrl + '?id=' + obj.cover) : defultImg;
+            obj.icon = obj.cover ? (downUrl + '?id=' + obj.cover) : icon;
             obj.prefixText = '上传时间：' + helpers.dateMinute(obj.uploadTime);
 
             obj.downloadMemberCount = obj.downloadMemberCount == null ? 0 : obj.downloadMemberCount;

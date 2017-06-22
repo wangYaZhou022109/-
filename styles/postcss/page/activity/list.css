@@ -46,8 +46,14 @@
             margin-bottom: 2em;
 
             & .activity-item {
+                @apply --transition;
+
                 border: 1px solid var(--border-color);
                 padding: var(--space);
+
+                &:hover {
+                    box-shadow: 2px 2px 5px rgba(0,0,0,.1);
+                }
 
                 & .activity-item-icon {
                     font-size: calc(var(--font-size) * 2.5);
