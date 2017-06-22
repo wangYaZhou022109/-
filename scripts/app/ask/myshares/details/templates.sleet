@@ -46,8 +46,9 @@ view('main')
             textarea.input.w-full#content(name='t_content')
             input.input(type='hidden' name='organizationId' value=details.organizationId)
             input.input(type='hidden' name='id' value=details.id)
-            .m-top.text-right > .btn#discuss 发表
-
+            .m-top.text-right
+                compare(details.closeStatus 'eq' 0)
+                    .btn#discuss 发表
     .layout-mt.padding-b
         .comment-list > each(details.questionDiscussList) > ul
             compare(auditStatus 'eq' "1")
@@ -78,6 +79,7 @@ view('main')
                                             .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博
                                 .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
                                 .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                        #  .comment-reply(id='reply-'+id name='reply-' + id style='display:none')
                         div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section

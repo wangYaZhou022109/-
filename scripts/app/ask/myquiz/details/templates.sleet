@@ -52,7 +52,9 @@ view('main')
             textarea.input.w-full#content(name='t_content')
             input.input(type='hidden' name='organizationId' value=details.organizationId)
             input.input(type='hidden' name='id' value=details.id)
-            .m-top.text-right > .btn#discuss 发表
+            .m-top.text-right
+                compare(details.closeStatus 'eq' 0)
+                    .btn#discuss 发表
 
     .layout-mt.alldynamic
         .comment-list.ask-list > each(details.questionDiscussList) > ul
