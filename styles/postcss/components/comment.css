@@ -1,6 +1,9 @@
 .comment-list {
     & .comment-list {
         margin-top: calc(var(--font-size) * 2);
+        & ul {
+            margin-bottom: var(--input-height);
+        }
     }
 
     & li {
