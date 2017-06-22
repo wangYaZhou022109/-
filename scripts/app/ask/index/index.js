@@ -19,6 +19,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        trends: { url: '../ask-bar/topic/all-dynamic' },
         leftstate: { },
         topstate: {},
         middlestate: {},

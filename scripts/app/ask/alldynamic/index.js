@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var _ = require('lodash/collection');
+
 exports.items = {
     list: 'list',
     'ask/report': { isModule: true }
@@ -19,7 +20,7 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 10 },
+            params: { page: 1, size: 2 },
             mixin: {
                 closerefresh: function(id, type) {
                     var newData = [];
@@ -209,9 +210,6 @@ exports.store = {
             params.id = 'null';
             trends.set(params);
             this.post(trends).then(function() {
-                // console.log(this.$('topbanner').val());
-                // this.$('topbanner').display = 'none';
-                $(this.$('topbanner')).hide();
             });
         },
         speech: function() {
@@ -262,7 +260,7 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
-        // var page = me.store.models.page.params.page;
+        var page = me.store.models.page.data;
         var size = me.store.models.page.params.size;
         var scrollTop = $(document).scrollTop();
         var clientHeight = $(window).height();
@@ -274,8 +272,18 @@ exports.afterRender = function() {
         if ((scrollTop + clientHeight) >= scrollHeight) {
             $('.none-more').css('display', 'block');
         }
+        if (page.length >= 4 && page.length <= 4 + size) {
+            $('.recommend-topic')[0].style.display = 'inline';
+        } else if (page.length >= 300 && page.length <= 300 + size) {
+            $('.recommend-topic')[0].style.display = 'inline';
+        } else if (page.length >= 500 && page.length <= 500 + size) {
+            $('.recommend-topic')[0].style.display = 'inline';
+        } else {
+            $('.recommend-topic')[0].style.display = 'none';
+        }
     });
     this.dispatch('set', this.renderOptions.callback);
     this.dispatch('speech');
     this.dispatch('page');
 };
+

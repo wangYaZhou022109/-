@@ -22,7 +22,7 @@ view('left')
 #  view('right')
 #      div(data-dynamic-key='contentright')
 view('topicbanner')
-    .recommend-topic(id = 'recommend-topic')
+    .recommend-topic(id = 'recommend-topic' style='display:none')
         .h4 我们向您推荐的话题：
         ul.clearfix
             li.pull-left
