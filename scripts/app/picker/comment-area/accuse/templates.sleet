@@ -7,13 +7,13 @@ view('details')
         form.clearfix.form.align-left
             .grid-row
                 .col-md-6
-                    .radio > input#input1(type='radio' name='type' value='1') + label + label(for='input1') > string('report-1')
+                    .radio > input#input1(type='radio' name='type' value='1') + label(for='input1') + label(for='input1') > string('report-1')
                 .col-md-6
-                    .radio > input#input2(type='radio' name='type' value='2') + label + label(for='input2') > string('report-2')
+                    .radio > input#input2(type='radio' name='type' value='2') + label(for='input2') + label(for='input2') > string('report-2')
                 .col-md-6
-                    .radio > input#input3(type='radio' name='type' value='3') + label + label(for='input3') > string('report-3')
+                    .radio > input#input3(type='radio' name='type' value='3') + label(for='input3') + label(for='input3') > string('report-3')
                 .col-md-6
-                    .radio > input#input4(type='radio' name='type' value='4') + label + label(for='input4') > string('report-4')
+                    .radio > input#input4(type='radio' name='type' value='4') + label(for='input4') + label(for='input4') > string('report-4')
 
             .layout-mt-small
                 label.sub-text(for='accuseNote') > string('report') + string('explain')
