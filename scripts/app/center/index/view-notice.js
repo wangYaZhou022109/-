@@ -5,6 +5,9 @@ exports.bindings = {
 exports.dataForTemplate = {
     announcements: function() {
         var announcements = this.bindings.announcements.data.items;
+        if (announcements && announcements.length > 0 && !announcements[0].announcementDetail.readStatus) {
+            announcements[0].announcementDetail.readStatus = 0;
+        }
         return announcements;
     },
     recordCount: function() {
