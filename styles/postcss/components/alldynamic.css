@@ -38,8 +38,9 @@
 
             & .icon-more {
                 font-size: var(--h3);
+                cursor: pointer;
                 & .drop-down-more {
-                    display: block;
+                    display: none;
                     width: calc(var(--space) * 8);
                     position:absolute;
                     right: -calc(var(--space)  + 2 );
@@ -62,6 +63,7 @@
                         line-height:  var(--large-space);
                         padding: 0 calc(var(--space) / 2);
                         border-bottom: 1px solid var(--border-color);
+                        cursor: pointer;
                         & .iconfont {
                             margin-right: calc(var(--space) / 2);
                             vertical-align: bottom;
