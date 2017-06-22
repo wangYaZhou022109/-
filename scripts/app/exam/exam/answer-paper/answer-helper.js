@@ -21,6 +21,7 @@ webSocket = {
 timeout = {
     cancel: function() {
         clearTimeout(this.timeOutId);
+        delete this.timeOutId;
         return;
     },
     timeOutId: -1

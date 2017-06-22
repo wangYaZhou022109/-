@@ -1,5 +1,5 @@
 var timeInterval, timeInterval2, logId;
-
+var $ = require('jquery');
 exports.bindings = {
     download: false,
     state: false,
@@ -15,6 +15,9 @@ exports.dataForTemplate = {
 exports.beforeClose = function() {
     clearInterval(timeInterval);
     clearTimeout(timeInterval2);
+    $(window).off('blur');
+    $(window).off('focus');
+    $(window).off('beforeunload');
     this.commitProgress();
 };
 
@@ -24,11 +27,18 @@ exports.afterRender = function() {
         me.commitProgress();
     }, 1000 * 60);
 
-    window.onunload = function() {
+    $(window).on('beforeunload', function() {
         clearInterval(timeInterval);
         clearTimeout(timeInterval2);
         me.commitProgress(false);
-    };
+    });
+    $(window).on('blur', function() {
+        me.commitProgress(false);
+    });
+    $(window).on('focus', function() {
+        me.module.dispatch('startProgress');
+    });
+
 
     timeInterval2 = setTimeout(function() {
         me.commitProgress();
@@ -40,7 +50,9 @@ exports.afterRender = function() {
 exports.mixin = {
     commitProgress: function(flag) {
         var me = this;
+        if (!logId) return false;
         return this.module.dispatch('updateProgress', { logId: logId }).then(function() {
+            logId = null;
             if (flag !== false) me.module.dispatch('startProgress');
         });
     }

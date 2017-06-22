@@ -67,9 +67,7 @@ exports.handlers = {
         });
     },
     addTheme: function() {
-        var me = this;
-        this.module.dispatch('addTheme', '新的主题').then(function() {
-            me.module.items.online.updataCss();
-        });
+        // var me = this;
+        this.module.dispatch('addTheme', '新的主题');
     }
 };
