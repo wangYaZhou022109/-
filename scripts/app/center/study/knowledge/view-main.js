@@ -77,7 +77,7 @@ exports.dataForTemplate = {
             } else if (obj.type === 6) {
                 icon = 'icon-mp4';
             } else {
-                icon = 'icon-zhishiku';
+                icon = 'icon-other';
             }
             obj.icon = obj.cover ? (downUrl + '?id=' + obj.cover) : icon;
             obj.prefixText = '上传时间：' + helpers.dateMinute(obj.uploadTime);
