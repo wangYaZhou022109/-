@@ -91,14 +91,16 @@
         @apply --transition;
 
         position: relative;
-        height: 0;
+        /*height: 0;*/
         overflow: hidden;
+        display: none;
 
         &.show {
             @apply --fade-in;
 
             margin: 1em 0;
-            height: 3em;
+            display: block;
+            /*height: 3em;*/
         }
 
         & textarea {
