@@ -98,7 +98,7 @@ view('releated-course')
             i.iconfont.icon-reload-full
             span > string('reset.page')
         .h3 > echo('相关课程')
-    .mt-1
+    .mt-1.grid-row 
         each(courseRelated)
             .col-md-6
                 .img
