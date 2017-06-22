@@ -18,12 +18,12 @@ view('left')
             .title-row
                 .inline-block.layout-mr > .h3 > echo(expert.member.fullName)
             .title-row.m-top
-                .topic.m-right > string('me') + string('be-good-at') + string('topic') + echo(':')
+                .topic.m-right.sub-text > string('me') + string('be-good-at') + string('topic') + echo(':')
                 each(expert.topicList)
                     .tag-btn.topic.radius > echo(name)
                 a.topic.pointer(id = 'change-topic-'+ expert.id data-name='id' data-value=expert.id) > string('change')
             p.info-detail > echo(expert.introduce)
-            .expert-about.clearfix
+            .expert-about.clearfix.m-top
                 a.normal(id = 'right'+ expert.id data-name='id' data-value=expert.id href='javascript:;')
                     i.iconfont.icon-warn
                     | 专家的权利与义务

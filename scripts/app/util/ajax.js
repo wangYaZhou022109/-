@@ -235,7 +235,7 @@ exports.setup = function(app) {
             return data;
         }, function(data) {
             clearLoaing(options.loading);
-            return data;
+            return app.Promise.reject(data);
         });
     } });
 };

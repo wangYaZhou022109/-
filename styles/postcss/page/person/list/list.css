@@ -68,7 +68,7 @@
                 float: left;
                 margin-right: calc(var(--space) / 2);
                 margin-left: calc(var(--space) / 2);
-                font-size: var(--h1);
+                font-size: calc(var(--font-size) * 3);
             }
         }
         & .title {
