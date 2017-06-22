@@ -24,14 +24,14 @@ exports.store = {
             var me = this,
                 exam = this.models.exam;
             this.models.signUp.set({ id: exam.data.signUp.id });
-            return this.del(this.models.signUp).then(function() {
+            return this.del(this.models.signUp, { loading: true }).then(function() {
                 return me.get(me.models.exam);
             });
         },
         signUp: function(payload) {
             var me = this;
             this.models.signUp.set(payload);
-            return this.post(this.models.signUp).then(function() {
+            return this.post(this.models.signUp, { loading: true }).then(function() {
                 return me.get(me.models.exam);
             });
         }
