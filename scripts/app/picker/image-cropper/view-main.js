@@ -33,6 +33,12 @@ exports.dataForTemplate = {
     btnClass: function(data) {
         return data.state.data.btnClass;
     },
+    width: function(data) {
+        return data.state.width;
+    },
+    height: function(data) {
+        return data.state.height;
+    },
     defaultCss: function(data) {
         return data.state.data.defaultCss || 'user-pic';
     }
