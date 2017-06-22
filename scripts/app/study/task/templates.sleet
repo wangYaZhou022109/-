@@ -6,17 +6,17 @@ module > .achievement-content.main-side
     .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
-view('side') > .list
+view('side') > .task-list
     .btn.block#viewDesc 作业说明
-    ul.m-top
+    ul.layout-mt-small
         .m-bottom > strong > string('study.task.attachment') ：
         each(task.attachments)
-            li.no-margin
+            li
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
-                a.text-overflow.pointer(id='preview-'+attachmentId content-type=contentType href='javascript:;') > echo(name)
+                a.block.text-overflow.pointer(id='preview-'+attachmentId content-type=contentType href='javascript:;') > echo(name)
     br
     if(userAttachments)
-        ul.m-top
+        ul.layout-mt-small
             .m-bottom > strong > string('study.my.submit')
             each(userAttachments)
                 if(description)
@@ -24,7 +24,7 @@ view('side') > .list
                 if(attachmentId)
                     li.mb-1
                         a.pull-right.m-left(href=downUrl download=name) > string('download')
-                        a.text-overflow.pointer(id='preview-'+attachmentId  content-type=contentType href='javascript:;') > echo(name)
+                        a.block.text-overflow.pointer(id='preview-'+attachmentId  content-type=contentType href='javascript:;') > echo(name)
     if(section.progress.comments)
         .m-top
             .m-bottom > strong 评语
