@@ -20,7 +20,7 @@ D.assign(obj.handlers, {
     selectDimension: function() {
         this.app.message.error('此服务暂未开放');
         return false;
-        // var mod = this.module.items['picker/select-dimension'],
+        // var mod = this.module.items['train/programme/evaluate-questionary/select-dimension'],
         //     me = this;
         // this.app.viewport.modal(mod, {
         //     callback: function(data) {

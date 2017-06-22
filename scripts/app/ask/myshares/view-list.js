@@ -144,8 +144,10 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
-    shut: function(data) {
+    shut: function(payload) {
+        var data = payload;
         var me = this;
+        data.auditType = '2';
         return this.Promise.create(function(resolve) {
             var message = '文章删除后将无法恢复，是否确定删除该文章？';
             me.app.message.confirm(message, function() {
@@ -175,10 +177,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    remove: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
     follow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
@@ -203,9 +201,10 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    shut: function() {
-        this.app.message.success('删除成功!');
-        // this.module.dispatch('init');
+    shut: function(data) {
+        var trends = data[0];
+        this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
     },
     publish: function() {
         this.app.message.success('操作成功！');

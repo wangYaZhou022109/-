@@ -85,11 +85,11 @@ view('exam')
         li.list-item > .main-list
             ul.arrow-box.activity-item-box.activity-item-exam.cell-3
                 each(a)
-                    li
+                    li > a.normal(title=name id='exam-' + id)
                         .activity-item.clearfix
                             i.iconfont.icon-exam.pull-left.activity-item-icon
                             .overflow
-                                .text-overflow > a(title=name id='exam-' + id) > echo(name)
+                                .text-overflow > echo(name)
                                 .text-tips.m-top.text-overflow
                                     dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
 
@@ -99,11 +99,11 @@ view('class-info')
         li.list-item > .main-list
             ul.arrow-box.activity-item-box.activity-item-exam.cell-3
                 each(a)
-                    li
+                    li > a.normal(title=name id='class-' + id data-name='id' data-value=id)
                         .activity-item.clearfix
                             i.iconfont.icon-exam.pull-left.activity-item-icon
                             .overflow
-                                .text-overflow > a(title=name id='class-' + id data-name='id' data-value=id) > echo(className)
+                                .text-overflow > echo(className)
                                 .text-tips.m-top.text-overflow
                                     dateMinute(arriveDate) + echo(' ~ ') + dateMinute(returnDate)
 
@@ -113,11 +113,11 @@ view('research')
         li.list-item > .main-list
             ul.arrow-box.activity-item-box.activity-item-exam.cell-3
                 each(a)
-                    li
+                    li > a.normal(title=name id='research-' + id)
                         .activity-item.clearfix
                             i.iconfont.icon-note.pull-left.activity-item-icon
                             .overflow
-                                .text-overflow > a(title=name id='research-' + id) > echo(name)
+                                .text-overflow > echo(name)
                                 .text-tips.m-top.text-overflow
                                     dateMinute(startTime) + echo(' ~ ') + dateMinute(endTime)
 view('exam-tips')

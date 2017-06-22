@@ -17,12 +17,13 @@ exports.events = {
 
 exports.handlers = {
     discussanswer: function(id) {
-        var region;
+        var region,
+            details = this.bindings.details;
         var el = this.$('reply-' + id);
         if (el.style.display === 'none') {
             el.style.display = 'inline';
             region = new D.Region(this.app, this.module, el, id);
-            region.show('ask/myquiz/reply', { id: id });
+            region.show('ask/myquiz/reply', { id: id, closeStatus: details.data.closeStatus });
         } else {
             el.style.display = 'none';
         }
