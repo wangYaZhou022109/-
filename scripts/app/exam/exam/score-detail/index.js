@@ -28,7 +28,7 @@ var setOptions = {
     store: {
         models: {
             exam: {
-                url: '../exam/exam/score-detail'
+                url: '../exam/exam/front/score-detail'
             },
             state: {
                 mixin: {
@@ -66,7 +66,8 @@ var setOptions = {
                     },
                     initWithSuject: function(exam) {
                         var types = this.module.store.models.types,
-                            questions = exam.paper.questions;
+                            questions = exam.paper.questions,
+                            answeredCount = 0;
 
                         D.assign(this.data, exam, {
                             name: exam.name,
@@ -107,11 +108,30 @@ var setOptions = {
                                 }
                                 return false;
                             }).length;
-                            this.data.noAnswerCount = this.data.totalCount - this.data.correctNum - this.data.errorNum;
+
+                            _.forEach(questions, function(q) {
+                                if (q.type === 6 && _.some(q.subs, function(s) {
+                                    return s.answerRecord && s.answerRecord.answer;
+                                })) {
+                                    answeredCount++;
+                                } else if (q.answerRecord && q.answerRecord.answer) {
+                                    answeredCount++;
+                                }
+                            });
+                            this.data.noAnswerCount = this.data.totalCount - answeredCount;
 
                             this.data.examineeTotalScore = _.reduce(_.map(_.filter(questions, function(q) {
-                                return q.type !== 4 && q.type !== 5 && q.type !== 6;
+                                return q.type !== 4 && q.type !== 5;
                             }), function(q) {
+                                if (q.type === 6) {
+                                    return _.reduce(_.map(_.filter(q.subs, function(s) {
+                                        return s.type !== 5;
+                                    }), function(s) {
+                                        return s.answerRecord ? s.answerRecord.score / 100 : 0;
+                                    }), function(sum, n) {
+                                        return sum + n;
+                                    });
+                                }
                                 return q.answerRecord ? q.answerRecord.score / 100 : 0;
                             }), function(sum, n) {
                                 return sum + n;

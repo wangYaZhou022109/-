@@ -95,3 +95,12 @@ exports.components = [function() {
     };
 }];
 
+exports.events = {
+    'click rule': 'showRule'
+};
+
+exports.handlers = {
+    showRule: function() {
+        this.app.viewport.modal(this.module.items['center/integral']);
+    }
+};
