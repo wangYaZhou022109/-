@@ -93,7 +93,7 @@ exports.handlers = {
             templateType: 1,
             isOtherModuleType: this.module.renderOptions.isOtherModuleType,
             callback: function(data) {
-                return me.module.dispatch('addQuestionClass', data);
+                return me.module.dispatch('addQuestionClasses', data);
             },
         });
     }

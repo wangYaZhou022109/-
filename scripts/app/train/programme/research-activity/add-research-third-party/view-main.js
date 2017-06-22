@@ -30,7 +30,7 @@ exports.handlers = {
         if (end !== '' && end !== null) {
             if (start !== '' && start !== null) {
                 if (start >= end) {
-                    this.app.message.alert('结束时间不能早于开始时间');
+                    this.app.message.alert('开始时间不能大于或者等于结束时间');
                     $(this.$('end-time')).val('');
                 }
             } else {

@@ -6,7 +6,7 @@ exports.items = {
 exports.store = {
     models: {
         exam: {
-            url: '../exam/exam/user-record'
+            url: '../exam/exam/front/user-record'
         }
     },
     callbacks: {
