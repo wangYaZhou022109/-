@@ -38,6 +38,13 @@ exports.store = {
             this.get(progressList);
             searchModel.changed();
         },
+        enterSearch: function(params) {
+            var searchModel = this.models.search,
+                progressList = this.models.progressList;
+            D.assign(progressList.params, D.assign(searchModel.data, params));
+            this.get(progressList);
+            searchModel.changed();
+        },
         deleteProgress: function(params) {
             var progressModel = this.models.progress;
             progressModel.set(params);
