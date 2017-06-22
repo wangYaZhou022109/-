@@ -62,6 +62,8 @@ exports.handlers = {
             window.open(url = prefixUrl[8] + section.referenceId);
         } else if (sectionType === 9) {
             me.app.viewport.modal(me.module.items['exam/exam/other-exam-prompt'], { examId: resourceId });
+        } else if (sectionType === 10) {
+            window.open(url = prefixUrl[10] + section.resourceId);
         }
     },
     sectionDisplay: function(id) {

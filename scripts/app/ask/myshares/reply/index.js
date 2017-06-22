@@ -11,6 +11,7 @@ exports.store = {
         praise: { url: '../ask-bar/my-share/praise' },
         unpraise: { url: '../ask-bar/my-share/unpraise' },
         report: { url: '../ask-bar/question-details/report' },
+        down: { url: '../human/file/download' }
     },
     callbacks: {
         init: function(payload) {

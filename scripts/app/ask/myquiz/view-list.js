@@ -129,8 +129,10 @@ exports.actions = {
 };
 
 exports.dataForActions = {
-    shut: function(data) {
+    shut: function(payload) {
+        var data = payload;
         var me = this;
+        data.auditType = '1';
         return this.Promise.create(function(resolve) {
             var message = '提问删除后将无法恢复，是否确定删除该提问？';
             me.app.message.confirm(message, function() {
@@ -162,10 +164,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    remove: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
     follow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
@@ -190,8 +188,10 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    shut: function() {
-        this.app.message.success('删除成功!');
+    shut: function(data) {
+        var trends = data[0];
+        this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 1 });
     },
     publish: function() {
         this.app.message.success('操作成功！');

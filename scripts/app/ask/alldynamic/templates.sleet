@@ -24,7 +24,7 @@ view('list')
                     .text-right.pointer > i.iconfont.icon-more.strong
                 .comment-text.text-overflow
                     compare(thumbnail.length 'gt' 0)
-                        .img(src=thumbnail)
+                        img(src=thumbnail)
                     @echo(content)
                 .user-info
                     if(topicList)
@@ -151,3 +151,4 @@ view('list')
                                 .btn(id='reply-' + id ) > string('publish')
     .none-more
         p 没有更多了
+

@@ -6,16 +6,16 @@ view('details')
     .export-form-title
         form.clearfix.form.align-left
             .inline-block.w-half.inbox.m-bottom
-                input.border.radius#input1(type='radio' name='type')
+                input.border.radius#input1(type='radio' name='type' value='1')
                 label(for='input1') > string('report-1')
             .inline-block.w-half.inbox.m-bottom
-                input#input2(type='radio' name='type')
+                input#input2(type='radio' name='type' value='2')
                 label(for='input2') > string('report-2')
             .inline-block.w-half.inbox.m-bottom
-                input#input3(type='radio' name='type')
+                input#input3(type='radio' name='type' value='3')
                 label(for='input3') > string('report-3')
             .inline-block.w-half.inbox.m-bottom
-                input#input4(type='radio' name='type')
+                input#input4(type='radio' name='type' value='4')
                 label(for='input4') > string('report-4')
             .form-row
                 label.required(for='accuseNote') > string('report') + string('explain')
