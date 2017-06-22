@@ -1,44 +1,70 @@
 #!handlebars
 
 module
-    div(data-region='content')
-view('content') > form
-    input.input(type='hidden' name='id-' + reply.id value=reply.id)
-    input.input(type='hidden' name='organizationId-' + reply.id value=reply.organizationId)
-    input.input(type='hidden' name='toUserId-' + reply.id value=reply.createMemberId)
-    input.input(type='hidden' name='questionId-' + reply.id value=reply.questionId)
-    input.input(type='hidden' name='replyId-' + reply.id value=reply.id)
-    textarea.input.w-full.block(rows=1 name='content-' + reply.id value='')
-    .btn(id='discuss-answer-' + reply.id ) > echo('回复')
-    each(reply.questionReplylist) > ul
-        li
-            .user-pic > img(src=headPhoto)
-            .comment-content
-                .user-info
-                    a(href='#') > echo( member.fullName)
-                    span > echo('回复')
-                    a(href='#') > echo(toMember.fullName)
-                    .text-right    
-                        span > dateMinute(createTime)
-                .comment-text > echo(content)
-                .comment-operation
-                    .pull-left 
-                        compare(praise 'eq' true)
-                            .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
-                            .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                        else
-                            .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                            .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
-                        .item > span(id='answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum2 +'）')
-                    .text-right
-                        .item > span(id ='report-' + 6 + '_' + id +'_' + createMemberId data-name='id' data-value= 6 +'_' + id+'_' + createMemberId) > string('report')
-                        .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
-                div(id='replyandreply-answer-'+id style='display:none')
-                    textarea.input.w-full.block(name='content-' + id value='' )
-                    .btn(id='reply-answer-' + id  data-name='id' data-value=id) > echo('回复')
-                    input.input(type='hidden' name='id-' + id value=discussId id='id-' + id)
-                    input.input(type='hidden' name='organizationId-' + id value=organizationId id='organizationId-' + id)
-                    input.input(type='hidden' name='toUserId-' + id value=createMemberId id='toUserId-' + id)
-                    input.input(type='hidden' name='questionId-' + id value=questionId id='questionId-' + id)
-                    input.input(type='hidden' name='replyId-' + id value=id id='replyId-' + id)
+    .comment-reply(data-region='content' class = 'show' )
+view('content')
+    compare(state.closeStatus 'eq' 1)
+        each(reply.questionReplylist) > div > ul
+            li
+                .user-pic > img(src=headPhoto)
+                .comment-content
+                    .user-info
+                        a(href='#') > echo( member.fullName)
+                        span > echo('回复')
+                        a(href='#') > echo(toMember.fullName)
+                        .text-right    
+                            span > dateMinute(createTime)
+                    .comment-text > echo(content)
+                    .comment-operation
+                        .pull-left 
+                            compare(praise 'eq' true)
+                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
+                                .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                            else
+                                .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
+                            .item > span > echo('回复（' + replyNum2 +'）')
+                        .text-right
+                            .item > span(id ='report-' + 6 + '_' + id +'_' + createMemberId data-name='id' data-value= 6 +'_' + id+'_' + createMemberId) > string('report')
+                            .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
+    else > form
+        input.input(type='hidden' name='id-' + reply.id value=reply.id)
+        input.input(type='hidden' name='organizationId-' + reply.id value=reply.organizationId)
+        input.input(type='hidden' name='toUserId-' + reply.id value=reply.createMemberId)
+        input.input(type='hidden' name='questionId-' + reply.id value=reply.questionId)
+        input.input(type='hidden' name='replyId-' + reply.id value=reply.id)
+        textarea.input.w-full.block(rows=1 name='content-' + reply.id value='')
+        .btn(id='discuss-answer-' + reply.id ) > echo('回复')
+        each(reply.questionReplylist) > div > ul
+            li
+                .user-pic > img(src=headPhoto)
+                .comment-content
+                    .user-info
+                        a(href='#') > echo( member.fullName)
+                        span > echo('回复')
+                        a(href='#') > echo(toMember.fullName)
+                        .text-right    
+                            span > dateMinute(createTime)
+                    .comment-text > echo(content)
+                    .comment-operation
+                        .pull-left 
+                            compare(praise 'eq' true)
+                                .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
+                                .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                            else
+                                .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
+                            .item > span(id='answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum2 +'）')
+                        .text-right
+                            .item > span(id ='report-' + 6 + '_' + id +'_' + createMemberId data-name='id' data-value= 6 +'_' + id+'_' + createMemberId) > string('report')
+                            .item > span(id='reply-del-'+ id data-name='id' data-value=id) > echo('删除')
+                    div(id='replyandreply-answer-'+id style='display:none')
+                        .comment-reply(class = 'show' )
+                            textarea.input.w-full.block(name='content-' + id value='' )
+                            .btn(id='reply-answer-' + id  data-name='id' data-value=id) > echo('回复')
+                            input.input(type='hidden' name='id-' + id value=discussId id='id-' + id)
+                            input.input(type='hidden' name='organizationId-' + id value=organizationId id='organizationId-' + id)
+                            input.input(type='hidden' name='toUserId-' + id value=createMemberId id='toUserId-' + id)
+                            input.input(type='hidden' name='questionId-' + id value=questionId id='questionId-' + id)
+                            input.input(type='hidden' name='replyId-' + id value=id id='replyId-' + id)
 

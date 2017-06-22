@@ -16,8 +16,13 @@ view('top')
 
 view('selectdrop')
     .select-drop.border.around#selectdrop
-        each(titledata)
-            .select-drop-item.border.bottom(id='select-srop-' + id data-name='id' data-value=id ) > echo(title)
+        compare(titledata.length 'gt' 0)
+            .select-drop-item.border.bottom
+                echo('你的文章可能已经有答案')
+        each(titledata) 
+            .select-drop-item.border.bottom(id='select-srop-' + id data-name='id' data-value=id ) 
+                a(href='#/ask/articledetails/'+ id ) 
+                    echo(title + '&nbsp;&nbsp;&nbsp;&nbsp;' + discussNum + '个回答' )
 
 view('topic')
     .form-row.textarea-row
