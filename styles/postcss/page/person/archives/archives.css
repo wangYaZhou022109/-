@@ -35,6 +35,10 @@
                 &:last-child {
                     border: none;
                 }
+                &.active {
+                    color: var(--white);
+                    background-color: var(--main-color);
+                }
             }
         }
     }
