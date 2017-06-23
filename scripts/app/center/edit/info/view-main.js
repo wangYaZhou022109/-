@@ -16,6 +16,8 @@ exports.components = [function() {
             picker: 'upload-head',
             inputName: 'headPortrait',
             btnName: '修改头像',
+            signle_file: true,
+            extensions: 'jpg,jpeg,png,bmp,ico',
             defaultImg: 'images/default-userpic.png',
             data: data
         }
