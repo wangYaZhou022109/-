@@ -164,7 +164,9 @@ view('main')
     
 view('topicbanner')
     .recommend-topic#recommend-topic
-        .h4 我们向您推荐的话题：
+        .title.clearfix
+            .h4.pull-left 我们向您推荐的话题：
+            .iconfont.icon-close-circle.pull-right.m-right.m-top.pointer
         ul.clearfix
             li.pull-left
                 img(src="images/d1.jpg")
@@ -196,6 +198,9 @@ view('topicbanner')
                 .item-attention.pointer 
                     i.iconfont.icon-add
                     span 关注
+        .pull-right.layout-mt-smal.m-top.m-bottom.m-right
+            a.iconfont.icon-switch 更换一组
+    
                    
     
         
