@@ -25,7 +25,7 @@ view('filter')
                 .item#selectIsRequired-1(class=if(search.isb 'active')) > span 必修
                 .item#selectIsRequired-0(class=if(search.isx 'active')) > span 选修
         .list-search
-            input.input(name='name' value=search.name placeholder='请输入您要搜索的内容名称')
+            input.input#searchName(name='name' value=search.name placeholder='请输入您要搜索的内容名称')
             .btn#searchByName > i.iconfont.icon-search
 view('main')
     ul.list-text.border.top > each(progressList)

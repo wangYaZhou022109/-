@@ -101,7 +101,7 @@
             background: white;
             width: 1.8em;
             height: 1.8em;
-            line-height: 2em;
+            line-height: 1.8em;
             box-sizing: content-box;
             cursor: pointer;
             border-radius: 100%;
@@ -182,7 +182,7 @@
 
             & .checkbox,
             & .radio {
-                margin-right: var(--space);
+                margin-right: 0;
             }
         }
 

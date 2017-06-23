@@ -1,8 +1,8 @@
 
 exports.items = {
     main: 'main',
+    'center/edit/info/detailed': { isModule: true }
 };
-
 
 exports.store = {
     models: {

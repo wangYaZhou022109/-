@@ -9,9 +9,15 @@
     & li {
         @apply --clearfix;
 
+        border-bottom: 1px dashed var(--border-color);
         padding: calc(var(--font-size) * 2) 0;
+
         &.s-padding {
             padding-top: var(--space);
+        }
+
+        &:last-child {
+            border: none;
         }
     }
 
@@ -136,6 +142,7 @@
         /*height: 0;*/
         display: none;
         overflow: hidden;
+        display: none;
 
         &.show {
             @apply --fade-in;

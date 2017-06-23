@@ -22,40 +22,21 @@ view('left')
 #  view('right')
 #      div(data-dynamic-key='contentright')
 view('topicbanner')
-    .recommend-topic(id = 'recommend-topic')
-        .h4 我们向您推荐的话题：
+    #  compare(topic.length 'gt' 0)
+    .recommend-topic(id = 'recommend-topic' style='display:none')
+        .h4 > echo('我们向您推荐的话题：') + a(id='change-set' href='javascript:;') > echo('换一组')
         ul.clearfix
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer
-                    i.iconfont.icon-add 
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer 
-                    i.iconfont
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer 
-                    i.iconfont
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer 
-                    i.iconfont
-                    span 关注
-            li.pull-right
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer 
-                    i.iconfont
-                    span 关注
-                   
+            each(topic)
+                li.pull-left
+                    img(src=attachmentId)
+                    .item-title > echo(name)
+                    .item-attention.pointer
+                        .div(id='follow-4_' + id data-name='id' data-value='4_' + id )
+                            i.iconfont.icon-add
+                            span > string('follow')
+                        .div( 'hidden' id='unfollow-4_' + id data-name='id' data-value='4_' + id )
+                            span > string('unfollow')
+
 view('top')
     div(data-dynamic-key='questionandarticles')
 view('middle')

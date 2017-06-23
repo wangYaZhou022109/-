@@ -5,6 +5,7 @@ html,body,p,ul,dl,dt,dd,br,hr {
 
 html {
     font-size: 14px;
+    line-height: 1.4;
     color: var(--font-color);
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;

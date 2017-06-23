@@ -4,4 +4,4 @@ module
     div(data-region='url')
 
 view('url')
-    iframe(style='border: 0px;width:100%;height:500px;background-color:white' src=url)
+    iframe(style='border: 0px;width:100%;height:34em;background-color:white' src=url)
