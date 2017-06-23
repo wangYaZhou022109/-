@@ -88,10 +88,9 @@
             line-height: calc(var(--font-size) * 1.5);
 
             &:after {
-                top: calc(var(--large-space) / 2.5);
-                left: -var(--large-space);
-                border: calc(var(--large-space) / 2) solid transparent;
-                border-right-width: calc(var(--large-space) / 2);
+                top: var(--space);
+                left: -calc(var(--space) * 2);
+                border: var(--space) solid transparent;
                 border-right-style: solid;
             }
         }
@@ -142,7 +141,8 @@
 
     & .title {
         margin-right: calc(var(--large-space) / 2);
-        max-width: 40%;
+        max-width: 50%;
+        line-height: 1.8;
     }
 }
 .subject-detail-page {

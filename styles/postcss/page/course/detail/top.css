@@ -3,7 +3,7 @@
 }
 
 .course-detail-page .course-detail-top{
-    height: 40em;
+    height: 42em;
     overflow: hidden;
 
     & .container {
@@ -24,7 +24,7 @@
     & .player-wrapper {
         position: relative;
         height: 100%;
-        padding: var(--large-space) var(--large-space) var(--large-space) 0;
+        padding: var(--large-space) var(--large-space) calc(var(--space) * 5);
         overflow: hidden;
 
         & .player-start-btn {
@@ -66,6 +66,56 @@
         & .share-bar .item {
             margin-left: var(--large-space);
             display: inline-block;
+        }
+    }
+
+    & .player-toolbar {
+        text-align: right;
+        padding: var(--space) 0;
+        color: white;
+
+        & .ewm {
+            text-align: left;
+
+            & img {
+                max-width: 5em;
+            }
+        }
+
+        & .iconfont {
+            margin-right: calc(var(--space) / 2);
+        }
+
+        & > .item {
+            @apply --transition;
+
+            display: inline-block;
+            padding: 0 calc(var(--space) * 2);
+            border-right: 1px solid var(--fade-color);
+            color: var(--font-tip-color);
+            line-height: 1;
+            cursor: pointer;
+            text-align: left;
+
+            &.share {
+                & .drop-down-top {
+                    width: 4em;
+                    position: relative;
+                    z-index: 1;
+
+                    & + .inline-block {
+                        margin-left: -2em;
+                    }
+                }
+            }
+
+            &:hover {
+                color: white;
+            }
+
+            &:last-child {
+                border: none;
+            }
         }
     }
 

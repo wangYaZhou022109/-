@@ -35,11 +35,12 @@ view('main')
     ul.list-text.border.top > each(exams)
         li.border.bottom
             .title-row
-                i.iconfont.icon-edit
-                span.inline-block.tag > map('exam-type-simple' type)
-                .inline-block.title > echo(name)
-                .time
-                    echo('进入考试时间：') + dateMinute(startTime) + echo('至') + dateMinute(endTime) + echo('&nbsp;&nbsp; 总分：' examRecord.totalScore '&nbsp;&nbsp; 及格分：' passScore)
+                .img > .iconfont.icon-edit
+                .overflow.clearfix
+                    .pull-left.tag.m-right > map('exam-type-simple' type)
+                    .text-overflow.title > echo(name)
+                    .time.text-overflow
+                        echo('进入考试时间：') + dateMinute(startTime) + echo('至') + dateMinute(endTime) + echo('&nbsp;&nbsp; 总分：' examRecord.totalScore '&nbsp;&nbsp; 及格分：' passScore)
             .state
                 compare(examRecord.status 'ge' 6)
                     echo('成绩:' examRecord.score)
