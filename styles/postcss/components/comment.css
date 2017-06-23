@@ -1,14 +1,23 @@
 .comment-list {
     & .comment-list {
         margin-top: calc(var(--font-size) * 2);
+        background: var(--bg-color);
+        border: none;
+        padding: 0 var(--large-space);
     }
 
     & li {
         @apply --clearfix;
 
+        border-bottom: 1px dashed var(--border-color);
         padding: calc(var(--font-size) * 2) 0;
+
         &.s-padding {
             padding-top: var(--space);
+        }
+
+        &:last-child {
+            border: none;
         }
     }
 

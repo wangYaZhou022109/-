@@ -3,7 +3,8 @@ exports.bindings = {
     bus: true,
     trainee: true,
     state: false,
-    signUpInfo: false
+    signUpInfo: false,
+    staticfaction: false
 };
 
 exports.events = {
@@ -33,9 +34,14 @@ exports.handlers = {
     },
     addCourse1: function() {
         var me = this;
-        return this.module.dispatch('getRecordByResearch').then(function() {
-            me.app.viewport.modal(me.module.items['research-tips']);
-        });
+        var staticfaction = this.bindings.staticfaction.data;
+        if (staticfaction.release === 1) {
+            return this.module.dispatch('getRecordByResearch').then(function() {
+                me.app.viewport.modal(me.module.items['research-tips']);
+            });
+        }
+        me.app.message.alert('该学员满意度问卷为发布');
+        return false;
     }
 };
 

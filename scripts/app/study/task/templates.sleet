@@ -6,17 +6,17 @@ module > .achievement-content.main-side
     .achievement-head(data-region='head')
     .achievement-main(data-region='main')
 
-view('side') > .list
+view('side') > .task-list
     .btn.block#viewDesc 作业说明
-    ul.m-top
+    ul.layout-mt-small
         .m-bottom > strong > string('study.task.attachment') ：
         each(task.attachments)
-            li.no-margin
+            li
                 a.pull-right.m-left(href=downUrl download=name) > string('download')
-                a.text-overflow.pointer(id='preview-'+attachmentId content-type=contentType href='javascript:;') > echo(name)
+                a.block.text-overflow.pointer(id='preview-'+attachmentId content-type=contentType href='javascript:;') > echo(name)
     br
     if(userAttachments)
-        ul.m-top
+        ul.layout-mt-small
             .m-bottom > strong > string('study.my.submit')
             each(userAttachments)
                 if(description)
@@ -24,11 +24,12 @@ view('side') > .list
                 if(attachmentId)
                     li.mb-1
                         a.pull-right.m-left(href=downUrl download=name) > string('download')
-                        a.text-overflow.pointer(id='preview-'+attachmentId  content-type=contentType href='javascript:;') > echo(name)
+                        a.block.text-overflow.pointer(id='preview-'+attachmentId  content-type=contentType href='javascript:;') > echo(name)
+    br
     if(section.progress.comments)
-        .m-top
+        .layout-mt-small
             .m-bottom > strong 评语
-            div > echo(section.progress.comments)
+            p.break-word > echo(section.progress.comments)
 view('head')
     .pull-left.title > echo(task.name)
     .text-right
@@ -69,12 +70,12 @@ view('main')
         #viewPdf
 
 view('edit')
-    form.vertical
-        .row.col-sm-12
-            input.input(name='name' value=attachment.name placeholder='附件名称(可修改)')
-            a.btn#uploadFile 上传附件
+    form
         .row
-            label 作业详情:
+            a.btn.pull-right#uploadFile 上传附件
+            .overflow > input.input.w-full(name='name' value=attachment.name placeholder='附件名称(可修改)')
+        .row.layout-mt-small
+            p 作业详情:
             textarea.input.w-full#description(name='description' rows='5') > @echo(attachment.description)
 view('upload')
     .row

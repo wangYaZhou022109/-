@@ -20,9 +20,9 @@ exports.components = [{
 
 exports.dataForTemplate = {
     knowledges: function(data) {
-        var defaultIcons = 'icon-zhishiku';
+        var defaultIcons = 'icon-other';
         var icons = ['icon-mp4', 'icon-mp3', 'icon-word', 'icon-pdf', 'icon-excel',
-            'icon-ppt', 'icon-note', 'icon-zhishiku'];
+            'icon-ppt', 'icon-other', 'icon-other'];
         return _.map(data.knowledges, function(k) {
             var know = k || {};
             var index = know.name.lastIndexOf('.');

@@ -68,21 +68,23 @@ exports.components = [function() {
         }
     };
 }, function() {
-    var data = {};
+    var btnName = this.app.global.setting['exam.exam.cover-id'];
     var knowledge = this.bindings.knowledge.data;
-    if (knowledge.cover) data.value = knowledge.cover;
-    return {
+    var data = {
         id: 'headFile',
         name: 'picker',
         options: {
-            picker: 'upload',
+            picker: 'image-cropper',
             inputName: 'cover',
-            btnName: '选择图片',
-            defaultImg: 'images/d1.jpg',
-            extensions: 'jpg,jpeg,png,bmp',
-            data: data
+            width: 180,
+            height: 120,
+            defaultImg: 'images/default-cover/default_spceial.jpg',
+            avatarSize: '250,160',
+            data: { btnName: btnName, btnClass: 'block', defaultCss: 'exam-pic' }
         }
     };
+    data.options.data.value = knowledge.cover;
+    return data;
 }, function() {
     var knowledgeCategory = this.bindings.knowledge.data.knowledgeCategory;
     var categoryId = '';

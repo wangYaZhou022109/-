@@ -1,12 +1,14 @@
+var _ = require('lodash/collection'),
+    $ = require('jquery');
 
-var _ = require('lodash/collection');
 exports.bindings = {
     topics: true,
     selectedTopics: true
 };
 exports.events = {
     'click cancel-*': 'cancelSelected',
-    'click selected-*': 'selected'
+    'click selected-*': 'selected',
+    'click change': 'changeTopics',
 };
 
 exports.handlers = {
@@ -19,6 +21,14 @@ exports.handlers = {
         var topics = this.bindings.topics.data,
             payload = _.find(topics, ['id', id]);
         this.module.dispatch('selected', payload);
+    },
+    changeTopics: function() {
+        var topics = this.bindings.topics.data;
+        if (topics.enough) {
+            this.module.dispatch('refreshTopics');
+        } else {
+            $(this.$('enough')).show();
+        }
     }
 };
 

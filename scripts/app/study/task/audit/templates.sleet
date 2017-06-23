@@ -20,10 +20,7 @@ view('side')
             .m-top
                 a(id='viewUseDesc-'+id) 作业详情
             .m-top
-                if(preview)
-                    a(id='sectionAttachment'+id href='javascript:;') > echo(name)
-                else
-                    a(href=downUrl download=name) > echo(name)
+                a(id='sectionAttachment'+id content-type=contentType href='javascript:;') > echo(name)
                 if(downUrl)
                     a.pull-right(href=downUrl download=name) > string('download')
         .m-top

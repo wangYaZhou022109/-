@@ -51,5 +51,3 @@ exports.components = function() {
     components.push({ id: 'identyPager', name: 'pager', options: { model: 'identies' } });
     return components;
 };
-
-
