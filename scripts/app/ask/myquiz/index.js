@@ -21,7 +21,16 @@ exports.store = {
                 findById: function(id) {
                     var trends = this.module.store.models.page.data;
                     return _.find(trends, ['id', id]);
-                }
+                },
+                delrefresh: function(id, trendsType) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        if (trendsType === 1 && d.id !== id) {
+                            newData.push(d);
+                        }
+                    });
+                    return newData;
+                },
             }
         },
         speech: {
@@ -40,6 +49,20 @@ exports.store = {
         }
     },
     callbacks: {
+        delrefresh: function(payload) {
+            var id = payload.id,
+                page = this.models.page,
+                questions = this.models.questions,
+                trendsType = payload.trendsType,
+                data = this.models.page.delrefresh(id, trendsType);
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            questions.set(params);
+            return this.post(questions);
+        },
         refresh: function() {
             this.models.callback();
         },
@@ -47,22 +70,17 @@ exports.store = {
             this.models.callback = payload;
         },
         // init: function() {
-        //     var questions = this.models.questions;
-        //     questions.set({ id: 1 });
-        //     return this.get(questions);
-        // },
-        init: function() {
-            var questions = this.models.questions,
-                params = this.models.page.params,
-                page = this.models.page;
+        //     var questions = this.models.questions,
+        //         params = this.models.page.params,
+        //         page = this.models.page;
 
-            params.id = 'null';
-            questions.set(params);
-            return this.post(questions).then(function() {
-                page.data = questions.data;
-                page.changed();
-            });
-        },
+        //     params.id = 'null';
+        //     questions.set(params);
+        //     return this.post(questions).then(function() {
+        //         page.data = questions.data;
+        //         page.changed();
+        //     });
+        // },
         // page: function() {
         //     var questions = this.models.questions;
         //     var params = this.models.page.params;
@@ -73,16 +91,19 @@ exports.store = {
         //         // me.models.page.params.page++;
         //     });
         // },
+        init: function() {
+            var questions = this.models.questions;
+            var params = this.models.page.params;
+            params.id = 'null';
+            questions.set(params);
+            this.post(questions);
+        },
         page: function() {
             var questions = this.models.questions;
             var params = this.models.page.params;
-            var page = this.models.page;
-            // var me = this;
             params.id = 'null';
             questions.set(params);
             this.post(questions).then(function() {
-                page.data.push.apply(page.data, questions.data);
-                page.changed();
             });
         },
         remove: function(payload) {
@@ -101,18 +122,23 @@ exports.store = {
             follow.set(payload);
             return this.put(follow);
         },
-        shut: function(payload) {
-            var shut = this.models.shut,
-                page = this.models.page,
-                me = this;
+        // shut: function(payload) {
+        //     var shut = this.models.shut,
+        //         page = this.models.page,
+        //         me = this;
 
+        //     shut.set(payload);
+        //     return this.chain(me.put(this.models.shut), function() {
+        //         page.data = _.filter(page.data, function(item) {
+        //             return item.id !== payload.id;
+        //         });
+        //         page.changed();
+        //     });
+        // },
+        shut: function(payload) {
+            var shut = this.models.shut;
             shut.set(payload);
-            return this.chain(me.put(this.models.shut), function() {
-                page.data = _.filter(page.data, function(item) {
-                    return item.id !== payload.id;
-                });
-                page.changed();
-            });
+            return this.put(shut);
         },
         publish: function(payload) {
             var discuss = this.models.discuss,
@@ -141,30 +167,20 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
-    // console.log(this.renderOptions);
     $(window).scroll(function() {
-        var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
         var scrollTop = $(document).scrollTop();
         var clientHeight = $(window).height();
         var scrollHeight = $(document).height();
-        // var dataLength = me.store.models.page.data.length;
-        // var data = me.store.models.page.data;
-        if (page * size === me.store.models.page.data.length) {
+        if (size === me.store.models.questions.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        // $.each(data, function(i) {
-        //     if (i === dataLength - 1) {
-        //         $('.none-more').css('display', 'block');
-        //     }
-        // });
         if ((scrollTop + clientHeight) >= scrollHeight) {
             $('.none-more').css('display', 'block');
         }
     });
     this.dispatch('set', this.renderOptions.callback);
-    this.dispatch('page');
     this.dispatch('speech');
+    this.dispatch('page');
 };
-
