@@ -56,7 +56,11 @@ view('notice')
             ul > each(announcements)
                 li.clearfix
                     .pull-right.sub-text.layout-mr > dateTime(publishTime)
-                    .m-right > echo('new-> ' title)
+                    .m-right
+                        compare(announcementDetail.readStatus 'eq' 1)
+                            echo(title)
+                        compare(announcementDetail.readStatus 'eq' 0)
+                            echo('new-> ' title)
 
 view('menu')
     .person-menu

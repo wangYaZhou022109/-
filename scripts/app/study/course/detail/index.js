@@ -10,7 +10,8 @@ exports.items = {
     'preview-pdf': '',
     'preview-img': '',
     'preview-video': '',
-    'preview-audio': ''
+    'preview-audio': '',
+    msg: ''
 };
 
 exports.store = {

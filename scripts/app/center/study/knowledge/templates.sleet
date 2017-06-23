@@ -21,18 +21,19 @@ view('filter')
                 .item#selectStatus-1(class=if(search.statusb 'active')) > span 已通过
                 .item#selectStatus-2(class=if(search.statusc 'active')) > span 被拒绝
         .list-search
-            input.input(name='name' value=search.name  placeholder='请输入您要搜索的内容名称')
+            input.input#searchName(name='name' value=search.name  placeholder='请输入您要搜索的内容名称')
             .btn#searchByName > i.iconfont.icon-search
 
 view('main')
     ul.list-text.border.top > each(list)
         li.border.bottom
             .title-row
-                .img > .img-cont > img(src=imgUrl)
-                .inline-block.title > a.normal.block(href='#/knowledge/detail/'+id target='_blank') > echo(name)
-                .time
-                    echo(prefixText) &nbsp;&nbsp;
-                    echo(downAndViewText)
+                .img > .iconfont(class=icon)
+                .text-overflow
+                    .title > a.normal.block.text-overflow(href='#/knowledge/detail/'+id target='_blank') > echo(name)
+                    .time
+                        echo(prefixText) &nbsp;&nbsp;
+                        echo(downAndViewText)
             .state
                 compare(auditStatus 'eq' 0) > span.custom-color-2
                     map('knowledge-audit-status' auditStatus)

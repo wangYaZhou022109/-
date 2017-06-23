@@ -3,6 +3,10 @@
     .page-main-wrapper {
         width: 1000px;
     }
+    .course-detail-page .course-detail-top .container {
+        width: 100%;
+        padding-left: var(--large-space);
+    }
     .home-page.layout .banner,
     .header .nav {
         min-width: 1000px;

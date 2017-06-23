@@ -67,6 +67,15 @@
             }
         }
 
+        & .task-list {
+            padding: 0 var(--large-space) var(--large-space);
+            margin-top: var(--large-space);
+
+            & li {
+                margin-bottom: var(--space);
+            }
+        }
+
         & .min-btn-groups {
             position: relative;
 
@@ -92,7 +101,7 @@
             background: white;
             width: 1.8em;
             height: 1.8em;
-            line-height: 2em;
+            line-height: 1.8em;
             box-sizing: content-box;
             cursor: pointer;
             border-radius: 100%;
@@ -173,7 +182,7 @@
 
             & .checkbox,
             & .radio {
-                margin-right: var(--space);
+                margin-right: 0;
             }
         }
 

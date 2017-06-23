@@ -9,9 +9,10 @@ module > .class-register-page
 view('banner')
     .cover.pull-left > img(src=img)
     .banner-con.pull-left
-        .h2.inline-block > echo(research.name)
-        .inline-block.layout-ml-small
+        .pull-right.layout-ml-small
             #share
+        .h3.overflow.top-title > echo(research.name)
+
         p 调研时间：
             dateMinute(research.startTime)
             | ~
@@ -20,7 +21,7 @@ view('banner')
         .m-top
             span.m-right 相关标签
             each(research.topics)
-                span.tag-btn
+                .tag-btn.radius
                     compare(group 'eq' 1)
                         a.normal(href='#/ask/topicdetail/'+id target='_blank') > echo(name)
                     else

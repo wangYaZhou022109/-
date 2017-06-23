@@ -123,7 +123,7 @@ exports.mixin = {
         $(name).removeClass('error');
         if (!validators.required.fn(questionaryDetail.value)) {
             $(questionaryDetail).addClass('error');
-            this.app.message.error('调研名称必填');
+            this.app.message.error('问卷须知必填');
             flag = false;
         }
         if (!validators.maxLength.fn(questionaryDetail.value, 1000)) {

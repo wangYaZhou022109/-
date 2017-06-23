@@ -5,7 +5,7 @@ module
 
 view('main')
     .default-cover
-        img(src=downUrl)
+        img(src=downUrl width=width height=height)
         input#headImageId( type='hidden' name=state.inputName value=fileId)
         .btn.block.white#select > echo(btnName)
 

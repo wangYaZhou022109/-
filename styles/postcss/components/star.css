@@ -10,8 +10,8 @@
 
     &:before {
         content: '\e6f8  \e6f8  \e6f8  \e6f8  \e6f8';
-        opacity: .1;
-        filter: alpha(opacity=10);
+        opacity: .25;
+        filter: alpha(opacity=25);
     }
 
     & .star {
@@ -59,16 +59,16 @@
             @apply --transition;
 
             cursor: pointer;
-            opacity: .1;
-            filter: alpha(opacity=10);
+            opacity: .25;
+            filter: alpha(opacity=25);
             float: left;
             padding: 0 calc(var(--space) / 2);
 
 
             &:hover ~ .item,
             &.active ~ .item {
-                opacity: .1;
-                filter: alpha(opacity=10);
+                opacity: .25;
+                filter: alpha(opacity=25);
                 color: var(--font-color);
             }
         }
