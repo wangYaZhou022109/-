@@ -50,15 +50,18 @@ exports.store = {
     callbacks: {
         init: function() {
             var search = this.models.search,
+                me = this,
                 categories = this.models.categories,
                 companyOrganization = this.app.global.currentUser.companyOrganization || {};
             search.set({ orderType: '0' }, true);
-            this.models.menu2.set(this.models.categories.findLevel(3));
+            this.models.menu2.set(this.models.categories.findLevel(3), true);
             categories.params = {
                 companyId: companyOrganization.id,
                 rootOrganizationId: this.app.global.currentUser.rootOrganization.id
             };
-            return this.get(categories);
+            return this.get(categories).then(function() {
+                me.models.menu2.set(me.models.categories.findLevel(3), true);
+            });
         },
         search: function(payload) {
             var search = this.models.search;
