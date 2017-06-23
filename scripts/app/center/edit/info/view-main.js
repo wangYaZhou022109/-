@@ -57,3 +57,15 @@ exports.dataForTemplate = {
         return sexs;
     }
 };
+
+exports.events = {
+    'click detailed': 'detailed'
+};
+
+exports.handlers = {
+    detailed: function() {
+        var mod = this.module.items['center/edit/info/detailed'],
+            me = this;
+        me.app.viewport.modal(mod, { member: this.module.renderOptions.member });
+    }
+};
