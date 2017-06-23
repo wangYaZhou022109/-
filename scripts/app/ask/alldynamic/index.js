@@ -20,7 +20,7 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 2 },
+            params: { page: 1, size: 10 },
             mixin: {
                 closerefresh: function(id, type) {
                     var newData = [];
@@ -270,11 +270,11 @@ exports.afterRender = function() {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        if (page.length >= 4 && page.length <= 4 + (size * 3)) {
+        if (page.length >= 40 && page.length <= 40 + (size * 3)) {
             $('.recommend-topic')[0].style.display = 'inline';
-        } else if (page.length >= 300 && page.length <= 300 + size) {
+        } else if (page.length >= 300 && page.length <= 300 + (size * 3)) {
             $('.recommend-topic')[0].style.display = 'inline';
-        } else if (page.length >= 500 && page.length <= 500 + size) {
+        } else if (page.length >= 500 && page.length <= 500 + (size * 3)) {
             $('.recommend-topic')[0].style.display = 'inline';
         } else {
             $('.recommend-topic')[0].style.display = 'none';
