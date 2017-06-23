@@ -27,7 +27,5 @@ view('main')
             .btn-row
                 a.btn(id='task-' + id data-value=id data-name='id') > echo(button)
         else
-            li.border.bottom
-                .title-row
-                    h4 真厉害，你的任务完成了
+            .content-empty > .img-box.img-type-1 + p 真厉害，你的任务完成了
     #pager.pagination
