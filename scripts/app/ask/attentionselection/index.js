@@ -1,4 +1,4 @@
-
+// var $ = require('jquery');
 exports.items = {
     list: 'list'
 };
@@ -34,5 +34,6 @@ exports.store = {
 };
 
 exports.afterRender = function() {
+    // $('.recommend-topic')[0].style.display = 'none';
     return this.dispatch('init', this.renderOptions);
 };

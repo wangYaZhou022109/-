@@ -20,7 +20,7 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 10 },
+            params: { page: 1, size: 2 },
             mixin: {
                 closerefresh: function(id, type) {
                     var newData = [];
@@ -259,6 +259,7 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    $('.recommend-topic')[0].style.display = 'none';
     $(window).scroll(function() {
         var page = me.store.models.page.data;
         var size = me.store.models.page.params.size;
@@ -269,10 +270,7 @@ exports.afterRender = function() {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        if ((scrollTop + clientHeight) >= scrollHeight) {
-            $('.none-more').css('display', 'block');
-        }
-        if (page.length >= 4 && page.length <= 4 + size) {
+        if (page.length >= 4 && page.length <= 4 + (size * 3)) {
             $('.recommend-topic')[0].style.display = 'inline';
         } else if (page.length >= 300 && page.length <= 300 + size) {
             $('.recommend-topic')[0].style.display = 'inline';
@@ -280,6 +278,9 @@ exports.afterRender = function() {
             $('.recommend-topic')[0].style.display = 'inline';
         } else {
             $('.recommend-topic')[0].style.display = 'none';
+            if ((scrollTop + clientHeight) >= scrollHeight) {
+                $('.none-more').css('display', 'block');
+            }
         }
     });
     this.dispatch('set', this.renderOptions.callback);

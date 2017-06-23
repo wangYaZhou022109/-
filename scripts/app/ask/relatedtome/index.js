@@ -257,6 +257,7 @@ exports.store = {
 
 exports.afterRender = function() {
     var me = this;
+    // $('.recommend-topic')[0].style.display = 'none';
     $(window).scroll(function() {
         // var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;

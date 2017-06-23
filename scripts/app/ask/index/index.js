@@ -19,7 +19,10 @@ exports.items = {
 
 exports.store = {
     models: {
-        trends: { url: '../ask-bar/topic/all-dynamic' },
+        topic: { url: '../ask-bar/topic/topic-recommendation' },
+        down: { url: '../human/file/download' },
+        follow: { url: '../ask-bar/question-details/boutique' },
+        unfollow: { url: '../ask-bar/concern/unfollow' },
         leftstate: { },
         topstate: {},
         middlestate: {},
@@ -34,10 +37,26 @@ exports.store = {
         },
         bottomsrefresh: function() {
             this.models.bottomstate.changed();
-        }
+        },
+        init: function() {
+            var topic = this.models.topic;
+            topic.set({ size: 5 });
+            return this.post(topic);
+        },
+        follow: function(payload) {
+            var follow = this.models.follow;
+            follow.set(payload);
+            return this.post(follow);
+        },
+        unfollow: function(payload) {
+            var follow = this.models.unfollow;
+            follow.set(payload);
+            return this.put(follow);
+        },
     }
 };
 
 
 exports.afterRender = function() {
+    this.dispatch('init');
 };
