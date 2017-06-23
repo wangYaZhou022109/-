@@ -24,12 +24,13 @@ exports.dataForTemplate = {
     researchActivity: function(data) {
         var research = data.researchActivity;
         var progress = this.module.renderOptions.progress;
-        if (research.questionaryDetail) return research;
 
         if (!progress || progress.finishStatus === 0) {
-            research.questionaryDetail = '该章节为调研问卷,请点击下方按钮参与调研吧';
+            research.questionaryDetail = research.questionaryDetail || '该章节为调研问卷,请点击下方按钮参与调研吧';
+            research.btn = '参与调研';
         } else {
-            research.questionaryDetail = '您已参与调研,请点击下方按钮查看详情';
+            research.questionaryDetail = research.questionaryDetail || '您已参与调研,请点击下方按钮查看详情';
+            research.btn = '查看详情';
         }
         return research;
     }
