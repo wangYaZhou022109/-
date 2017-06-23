@@ -24,7 +24,7 @@ view('left')
 view('topicbanner')
     #  compare(topic.length 'gt' 0)
     .recommend-topic(id = 'recommend-topic' style='display:none')
-        .h4 我们向您推荐的话题：
+        .h4 > echo('我们向您推荐的话题：') + a(id='change-set' href='javascript:;') > echo('换一组')
         ul.clearfix
             each(topic)
                 li.pull-left

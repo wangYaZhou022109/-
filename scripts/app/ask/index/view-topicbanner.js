@@ -17,7 +17,8 @@ exports.handlers = {
 
 exports.actions = {
     'click follow-*': 'follow',
-    'click unfollow-*': 'unfollow'
+    'click unfollow-*': 'unfollow',
+    'click change-set': 'changeSet'
 };
 exports.dataForActions = {
     follow: function(payload) {

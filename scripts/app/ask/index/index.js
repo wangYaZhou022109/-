@@ -40,7 +40,7 @@ exports.store = {
         },
         init: function() {
             var topic = this.models.topic;
-            topic.set({ size: 5 });
+            topic.set({ size: 2 });
             return this.post(topic);
         },
         follow: function(payload) {
@@ -53,6 +53,11 @@ exports.store = {
             follow.set(payload);
             return this.put(follow);
         },
+        changeSet: function() {
+            var topic = this.models.topic;
+            topic.set({ size: 2 });
+            return this.post(topic);
+        }
     }
 };
 
