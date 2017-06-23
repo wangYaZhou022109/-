@@ -347,3 +347,6 @@ exports.dataForTemplate = {
     }
 };
 
+exports.beforeClose = function() {
+    $(window).unbind('scroll');
+};
