@@ -69,6 +69,9 @@
                     top: -calc(var(--space) + 1);
                     color: var(--border-color);
                 }
+                & ul {
+                    margin-bottom: 0;
+                }
                 & li {
                     color: var(--font-tip-color);
                     height: var(--large-space);
@@ -122,7 +125,7 @@
             &.inline {
                 margin-left: var(--space);
             }
-            & .add {
+            & .icon-add {
                 transform: scale(1);
             }
         }
