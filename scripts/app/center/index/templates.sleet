@@ -60,7 +60,8 @@ view('notice')
                         compare(announcementDetail.readStatus 'eq' 1)
                             echo(title)
                         compare(announcementDetail.readStatus 'eq' 0)
-                            echo('new-> ' title)
+                            span.tip-new.m-right.custom-bg-color-3 NEW
+                            echo(title)
 
 view('menu')
     .person-menu
