@@ -81,7 +81,7 @@ exports.dataForTemplate = {
                         dataId: exam.id,
                         dataName: exam.name,
                         dataSummary: exam.examNotes || '',
-                        browseCount: exam.applicantNumber || 0,
+                        browseCount: exam.joinPersonTime || 0,
                         beginTime: exam.startTime,
                         endTime: exam.endTime,
                         dataImage: exam.coverId
