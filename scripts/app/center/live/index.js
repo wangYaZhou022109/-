@@ -33,6 +33,9 @@ exports.store = {
             var lives = this.models.lives;
             D.assign(lives.params, this.models.search.data);
             return this.get(lives);
+        },
+        enterSearch: function(payload) {
+            return this.module.dispatch('search', payload);
         }
     }
 };
