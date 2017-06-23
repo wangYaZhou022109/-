@@ -11,6 +11,7 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         shut: { url: '../ask-bar/my-share' },
         discuss: { url: '../ask-bar/question-discuss' },
+        close: { url: '../ask-bar/my-share/close' },
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
@@ -25,6 +26,19 @@ exports.store = {
                     _.forEach(this.data, function(d) {
                         if (trendsType === 2 && d.id !== id) {
                             newData.push(d);
+                        }
+                    });
+                    return newData;
+                },
+                closerefresh: function(id, type) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        var store = d;
+                        if (type === 2 && d.id === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else {
+                            newData.push(store);
                         }
                     });
                     return newData;
@@ -78,6 +92,23 @@ exports.store = {
         }
     },
     callbacks: {
+        closerefresh: function(payload) {
+            var myshares = this.models.myshares,
+                page = this.models.page,
+                id = payload.id,
+                data = this.models.page.closerefresh(id, payload.type);
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            myshares.set(params);
+            return this.post(myshares);
+        },
+        close: function(payload) {
+            this.models.close.set(payload);
+            return this.put(this.models.close);
+        },
         delrefresh: function(payload) {
             var id = payload.id,
                 page = this.models.page,
