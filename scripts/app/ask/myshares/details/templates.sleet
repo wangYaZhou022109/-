@@ -9,6 +9,7 @@ module
                 div(data-region='relatedquestions')
             .page-main(data-region='main')
 view('main')
+
     .comment-list.ask-list > ul
         li
             .user-pic > img(src=details.member.headPortrait)
@@ -49,7 +50,7 @@ view('main')
             .m-top.text-right
                 compare(details.closeStatus 'eq' 0)
                     .btn#discuss 发表
-    .layout-mt.padding-b
+    .layout-mt.padding-b.alldynamic
         .comment-list > each(details.questionDiscussList) > ul
             compare(auditStatus 'eq' "1")
                 li
@@ -57,28 +58,52 @@ view('main')
                     .comment-content
                         .clearfix.inline-block.w-full
                             .user-info.pull-left
-                                a(href='#') > echo( member.fullName)
+                                a.normal.m-right(href='#') > echo( member.fullName)
                                 span > echo(organization.name)
-                            .text-right > dateTime(createTime)
-                        .comment-text > echo(content)
-                        .comment-operation
-                            .pull-left
-                                compare(praise1 'eq' true)
-                                    .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞')
-                                    .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                else
-                                    .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                    .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已点赞（' + praiseNum +'）')
-                                .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
+                            # .text-right > dateTime(createTime)
+                            .pull-right.normal.iconfont.icon-more.m-right
+                                .drop-down-more
+                                    i.iconfont.icon-triangle-up
+                                    ul
+                                        li#trend-report
+                                            i.iconfont.icon-info
+                                            span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
+                                        li#del-question
+                                            i.iconfont.icon-trash
+                                            span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                        li#close
+                                            i.iconfont.icon-close
+                                            span 关闭
+                        .comment-text.color-main > echo(content)
+                        .comment-operation.sub-text
+                            .pull-left > dateTime(createTime)
                             .text-right
+                                compare(praise1 'eq' true)
+                                    .item(id='unpraise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('已点赞')
+                                    .item('hidden' id='praise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('赞（' + praiseNum +'）')
+                                else
+                                    .item(id='praise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('赞（' + praiseNum +'）')
+                                    .item('hidden' id='unpraise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('已点赞（' + praiseNum +'）')
+                                .item
+                                    i.iconfont.icon-message
+                                    span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
                                 .item > .share-bar
                                     .drop-down-wrapper
+                                        i.iconfont.icon-fenxiang
                                         span 分享
                                         form.drop-down-content > .content
                                             .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                             .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
-                                .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                # .item > span(id ='report-' + 3 + '_' + id data-name='id' data-value=3 +'_' + id) > string('report')
+                                # .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
                         #  .comment-reply(id='reply-'+id name='reply-' + id style='display:none')
                         div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
