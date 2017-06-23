@@ -10,3 +10,7 @@ view('list')
             .grid-row > each(expert)
                 .col-md-4 > a(href='#/ask/expertdetails/'+ id + ',' + member.id title=member.fullName  ) 
                     img.block(src=member.headPortrait)
+        .text-center
+            .content
+                img(src='../../../../images/empty1.png')
+                p.text-center 暂无内容
