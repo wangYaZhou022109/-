@@ -4,7 +4,7 @@ module
 
 view('list')
     compare(page.length 'lt' 1)
-        .text-center
+        .text-center(id='test')
             .content(style="margin: 15% 0")
                 img(src="images/nothing.png")
                 p.text-center 暂无与你相关的信息哦！
@@ -24,7 +24,7 @@ view('list')
                     .text-right.pointer > i.iconfont.icon-more.strong
                 .comment-text.text-overflow
                     compare(thumbnail.length 'gt' 0)
-                        .img(src=thumbnail)
+                        img(src=thumbnail)
                     @echo(content)
                 .user-info
                     if(topicList)
@@ -151,3 +151,4 @@ view('list')
                                 .btn(id='reply-' + id ) > string('publish')
     .none-more
         p 没有更多了
+

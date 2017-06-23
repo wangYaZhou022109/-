@@ -107,6 +107,7 @@ input,button,select,.btn {
     border: 1px solid var(--border-color);
     margin-bottom: var(--space);
     margin-right: var(--space);
+    line-height: 1;
 
     &.active {
         background: var(--main-color);

@@ -5,8 +5,9 @@ var prompts = {
         4: '点击下方“开始考试”后将会立即进入考试，该考试时长为{0}分钟',
         5: '您好,本次考试已结束',
         6: '点击下方“查看详情”可查看考试成绩详情',
-        7: '系统正在处理您的考卷，请稍后再试',
-        8: '您好，本次考试处于待评卷状态，点击下方“查看详情”可查看考试详情'
+        7: '您好,系统正在处理您的考卷，请稍后再试',
+        8: '您好，本次考试处于待评卷状态，点击下方“查看详情”可查看考试详情',
+        9: '您好, 系统正在生成试卷，请稍后再试'
     },
     P = require('./app/exam/exam/other-exam-prompt/prompt-help'),
     getWithParams,
@@ -84,7 +85,8 @@ getCurrentExam = function(exam) {
             5: [knewButton],
             6: [knewButton, viewDetailButton],
             7: [],
-            8: [viewDetailButton]
+            8: [viewDetailButton],
+            9: [knewButton]
         },
         getContent = function(exam0, str, status0) {
             if (status0 === 4) {

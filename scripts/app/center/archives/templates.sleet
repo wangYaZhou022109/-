@@ -16,10 +16,10 @@ view('detail')
 view('condition')
     .top
         .left.border.around
-            .item#all 汇总
-            .item#previousWeek 近一周
-            .item#previousThreeMonth 近三个月
-            .item#previousYear 近一年
+            .item.pointer.active#all 汇总
+            .item.pointer#previousWeek 近一周
+            .item.pointer#previousThreeMonth 近三个月
+            .item.pointer#previousYear 近一年
         .right.inline-block
             input.input.monthpicker#start(name='start')
             span.sub-text 至
@@ -35,7 +35,6 @@ view('chart')
         .bar > .cont
             .title-row.clearfix
                 .pull-left 积分统计
-                a.pull-right 如何获得积分？
+                a.pull-right#rule 如何获得积分？
             .content
                 .div#pie
-

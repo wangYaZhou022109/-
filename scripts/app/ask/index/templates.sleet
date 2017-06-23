@@ -12,14 +12,30 @@ module > .ask-page > .container
             div(data-region='top')
             div(data-region='middle')
             div(data-region='bottom')
-        .page-main(data-region='left' class = 'activity-category')
-             
+        #  .page-main(data-region='left' class = 'activity-category')
+        .page-main.topic-main(data-region='left')
+        .topicbanner(data-region="topicbanner")     
 
 view('left')
     div(data-dynamic-key='contentleft')
 
 #  view('right')
 #      div(data-dynamic-key='contentright')
+view('topicbanner')
+    #  compare(topic.length 'gt' 0)
+    .recommend-topic(id = 'recommend-topic' style='display:none')
+        .h4 > echo('我们向您推荐的话题：') + a(id='change-set' href='javascript:;') > echo('换一组')
+        ul.clearfix
+            each(topic)
+                li.pull-left
+                    img(src=attachmentId)
+                    .item-title > echo(name)
+                    .item-attention.pointer
+                        .div(id='follow-4_' + id data-name='id' data-value='4_' + id )
+                            i.iconfont.icon-add
+                            span > string('follow')
+                        .div( 'hidden' id='unfollow-4_' + id data-name='id' data-value='4_' + id )
+                            span > string('unfollow')
 
 view('top')
     div(data-dynamic-key='questionandarticles')

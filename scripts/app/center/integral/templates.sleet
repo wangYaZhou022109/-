@@ -1,0 +1,39 @@
+#!handlebars
+
+module
+    div(data-region='tab')
+    div(data-region='main')
+
+view('tab')
+    .tabs.line
+        ul
+            li.active#rule 积分规则
+            li#grade 等级规则
+
+view('main')
+    each(integralList)
+        div.Integral-rule
+            div
+                h4 > echo(aspectDesc)
+            table.table
+                each(ruleList)
+                    tr
+                        td
+                            compare(showRule 'eq' 1)
+                                echo(descFirst)
+                                echo(ruleScore)
+                                echo(descSecond)
+                            compare(showRule 'eq' 2)
+                                echo(descFirst)
+                                echo(ruleScore)
+                                echo(descSecond)
+                                echo(ruleNum)
+                                echo(descThird)
+                            compare(showRule 'eq' 3)
+                                echo(descFirst)
+                                echo(ruleNum)
+                                echo(descSecond)
+                                echo(ruleScore)
+                                echo(descThird)
+        
+

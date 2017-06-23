@@ -49,9 +49,10 @@ D.ComponentManager.register('videojs', function(view, el, options) {
             durationDisplay: true,
             remainingTimeDisplay: false
         },
+        language: 'zh-CN',
         controls: true,
         loop: false,
-        techOrder: ['html5', 'flash']
+        techOrder: ['html5', 'flash', 'html4']
     };
     return videojs(el, D.assign(opt, options.video), function() {
         D.assign(this, initVideo(this));

@@ -39,6 +39,17 @@ exports.bindings = {
     tasks: true
 };
 
+exports.actions = {
+    'click task-*': 'clickTask'
+};
+
+exports.actionCallbacks = {
+    clickTask: function(data) {
+        var task = data;
+        window.open(getUrl(task), '_blank');
+    }
+};
+
 exports.dataForTemplate = {
     tasks: function(data) {
         return _.map(data.tasks, function(task) {

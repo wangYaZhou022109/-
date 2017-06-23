@@ -30,7 +30,7 @@ exports.handlers = {
         if (end !== '' && end !== null) {
             if (start !== '' && start !== null) {
                 if (start >= end) {
-                    this.app.message.alert('结束时间不能早于开始时间');
+                    this.app.message.alert('开始时间不能大于或者等于结束时间');
                     $(this.$('end-time')).val('');
                 }
             } else {
@@ -123,7 +123,7 @@ exports.mixin = {
         $(name).removeClass('error');
         if (!validators.required.fn(questionaryDetail.value)) {
             $(questionaryDetail).addClass('error');
-            this.app.message.error('调研名称必填');
+            this.app.message.error('问卷须知必填');
             flag = false;
         }
         if (!validators.maxLength.fn(questionaryDetail.value, 1000)) {

@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var timeInterval, logId;
 
 exports.bindings = {
@@ -29,18 +30,24 @@ exports.dataForTemplate = {
 exports.beforeClose = function() {
     clearInterval(timeInterval);
     this.commitProgress();
+    $(window).off('blur');
+    $(window).off('beforeunload');
 };
 
 exports.afterRender = function() {
     var me = this;
+    var player = this.components.player;
     timeInterval = setInterval(function() {
         var flag = me.commitProgress();
         if (flag) me.module.dispatch('startProgress');
     }, 1000 * 60);
 
-    window.onunload = function() {
+    $(window).on('beforeunload', function() {
         me.commitProgress();
-    };
+    });
+    $(window).on('blur', function() {
+        player.pause();
+    });
     return this.module.dispatch('startProgress');
 };
 exports.video = {

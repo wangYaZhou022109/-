@@ -1,14 +1,23 @@
 .comment-list {
     & .comment-list {
         margin-top: calc(var(--font-size) * 2);
+        background: var(--bg-color);
+        border: none;
+        padding: 0 var(--large-space);
     }
 
     & li {
         @apply --clearfix;
 
+        border-bottom: 1px dashed var(--border-color);
         padding: calc(var(--font-size) * 2) 0;
+
         &.s-padding {
             padding-top: var(--space);
+        }
+
+        &:last-child {
+            border: none;
         }
     }
 
@@ -40,6 +49,45 @@
                     color: var(--font-color);
                 }
             }
+        }
+        & .icon-more {
+            font-size: var(--h3);
+            & .drop-down-more {
+                display: none;
+                width: calc(var(--space) * 8);
+                position:absolute;
+                right: -5px;
+                top: -9px;
+                border: 1px solid var(--border-color);
+                background-color:var(--bg-color);
+                padding: 0 var(--space);
+                font-size: var(--small-font);
+                z-index: 100;
+                & .icon-triangle-up {
+                    position: absolute;
+                    right: calc(var(--space) / 2);
+                    top: -calc(var(--space) + 1);
+                    color: var(--border-color);
+                }
+                & li {
+                    color: var(--font-tip-color);
+                    height: var(--large-space);
+                    line-height:  var(--large-space);
+                    padding: 0 calc(var(--space) / 2);
+                    border-bottom: 1px solid var(--border-color);
+                    transform: scale(.8);
+                    & .iconfont {
+                        margin-right: calc(var(--space) / 2);
+                        vertical-align: bottom;
+                    }
+                }
+                & li:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        & .icon-more:hover .drop-down-more {
+            display: block;
         }
     }
 
@@ -91,14 +139,17 @@
         @apply --transition;
 
         position: relative;
-        height: 0;
+        /*height: 0;*/
+        display: none;
         overflow: hidden;
+        display: none;
 
         &.show {
             @apply --fade-in;
 
             margin-top: 1em;
-            height: 3em;
+            display: block;
+            /*height: 3em;*/
         }
 
         & textarea {

@@ -2,7 +2,8 @@ var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
     state: true,
-    reply: true
+    reply: true,
+    down: true
 };
 
 exports.events = {

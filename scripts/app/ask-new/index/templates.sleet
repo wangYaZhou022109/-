@@ -1,13 +1,13 @@
 #! handlebars
 
-module > .ask-page 
-    
+module > .ask-page
+
     .container
         .page-main-wrapper
             .page-side.side-min(data-region='side')
             .page-main.topic-main(data-region='main')
             .topicbanner(data-region="topicbanner")
-            
+
 
 
 view('main')
@@ -34,13 +34,19 @@ view('main')
                                         i.iconfont.icon-triangle-up
                                         ul
                                             li#trend-report
-                                                i.iconfont.icon-info 
+                                                i.iconfont.icon-info
                                                 span 举报
                                             li#del-question
-                                                i.iconfont.icon-trash 
+                                                i.iconfont.icon-trash
                                                 spsn 删除
                                             li#close
-                                                i.iconfont.icon-close 
+                                                i.iconfont.icon-close
+                                                span 关闭
+                                            li#close
+                                                i.iconfont.icon-close
+                                                span 关闭
+                                            li#close
+                                                i.iconfont.icon-close
                                                 span 关闭
                             .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
 
@@ -52,13 +58,13 @@ view('main')
                                     span.sub-text 2016-09-09 09:09
                                 .text-right
                                     .item
-                                        i.iconfont.icon-add 
+                                        i.iconfont.icon-add
                                         span 关注
                                     .item#discuss-
                                         i.iconfont.icon-message
                                         span 讨论
 
-                                    .item 
+                                    .item
                                         .share-bar
                                             .drop-down-wrapper
                                                 i.iconfont.icon-share-2
@@ -79,7 +85,7 @@ view('main')
                                                 img.pointer(src='images/1.png')
                                             .comment-content
                                                 div.clearfix
-                                                    .pull-left 
+                                                    .pull-left
                                                         a 张三
 
                                                     .pull-right.iconfont.icon-more.m-right.pointer
@@ -87,10 +93,10 @@ view('main')
                                                             i.iconfont.icon-triangle-up
                                                             ul
                                                                 li#trend-report
-                                                                    i.iconfont.icon-info 
+                                                                    i.iconfont.icon-info
                                                                     span 举报
                                                                 li#del-question
-                                                                    i.iconfont.icon-trash 
+                                                                    i.iconfont.icon-trash
                                                                     spsn 删除
                                                 .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
 
@@ -105,7 +111,7 @@ view('main')
                                                             i.iconfont.icon-message
                                                             span 回复(123)
 
-                                                        .item 
+                                                        .item
                                                             .share-bar
                                                                 .drop-down-wrapper
                                                                     i.iconfont.icon-share-2
@@ -126,7 +132,7 @@ view('main')
                                                 img.pointer(src='images/1.png')
                                             .comment-content
                                                 div.clearfix
-                                                    .pull-left 
+                                                    .pull-left
                                                         a 张三
                                                         span 回复
                                                         span 张三
@@ -135,10 +141,10 @@ view('main')
                                                             i.iconfont.icon-triangle-up
                                                             ul
                                                                 li#trend-report
-                                                                    i.iconfont.icon-info 
+                                                                    i.iconfont.icon-info
                                                                     span 举报
                                                                 li#del-question
-                                                                    i.iconfont.icon-trash 
+                                                                    i.iconfont.icon-trash
                                                                     spsn 删除
                                                 .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
 
@@ -153,15 +159,15 @@ view('main')
                                                             i.iconfont.icon-message
                                                             span 回复(123)
 
-                                                        
+
                                                         form.comment-reply(id ='comment-reply-' + id)
                                                             textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
                                                             input.input(type='hidden' name='organizationId' value=createUser.organizationId)
                                                             input.input(type='hidden' name='id' value=questionId)
                                                             .btn(id='publish-' + questionId) > string('publish')
-    .none-more 
+    .none-more
         p 没有更多了
-    
+
 view('topicbanner')
     .recommend-topic#recommend-topic
         .title.clearfix
@@ -172,38 +178,44 @@ view('topicbanner')
                 img(src="images/d1.jpg")
                 .item-title 话题名称
                 .item-attention.pointer
-                    i.iconfont.icon-add 
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer 
                     i.iconfont.icon-add
                     span 关注
             li.pull-left
                 img(src="images/d1.jpg")
                 .item-title 话题名称
-                .item-attention.pointer 
+                .item-attention.pointer
                     i.iconfont.icon-add
                     span 关注
             li.pull-left
                 img(src="images/d1.jpg")
                 .item-title 话题名称
-                .item-attention.pointer 
+                .item-attention.pointer
                     i.iconfont.icon-add
                     span 关注
             li.pull-left
                 img(src="images/d1.jpg")
                 .item-title 话题名称
-                .item-attention.pointer 
+                .item-attention.pointer
                     i.iconfont.icon-add
                     span 关注
+            li.pull-left
+                img(src="images/d1.jpg")
+                .item-title 话题名称
+                .item-attention.pointer
+                    i.iconfont.icon-add
+                    span 关注
+
         .pull-right.layout-mt-smal.m-top.m-bottom.m-right
             a.iconfont.icon-switch 更换一组
     
                    
     
         
+
+
+
+
+
 
 view('side')
     .section
@@ -257,8 +269,3 @@ view('side')
                 .col-md-4 > img.block(src='images/1.png')
                 .col-md-4 > img.block(src='images/1.png')
                 .col-md-4 > img.block(src='images/1.png')
-
-                                
-                                           
-               
-      

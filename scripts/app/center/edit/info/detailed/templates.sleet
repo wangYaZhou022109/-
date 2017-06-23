@@ -1,0 +1,43 @@
+#! handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    .tabs > ul
+        li.active#item-1 岗位工作信息
+        li#item-2 系统身份信息
+    .tabs-cont
+        .active.tabs-cont-item#tabs-cont-item-1
+            .list 
+                table.table
+                    thead > tr
+                        th(width='60px') 序号
+                        th 岗位
+                        th 归属部门
+                        th 开始时间
+                        th 结束时间
+                    tbody > each(inners) > tr
+                        td > echo(i)
+                        td > echo(positionName)
+                        td > echo(organizationName)
+                        td > date(startTime)
+                        td > date(endTime)
+            #innerPager.pagination
+
+        .tabs-cont-item#tabs-cont-item-2
+            .list 
+                table.table
+                    thead > tr
+                        th(width='60px') 序号
+                        th 身份属性
+                        th 聘用单位
+                        th 开始时间
+                        th 结束时间
+                    tbody > each(identies) > tr
+                        td > echo(i)
+                        td > echo(identyName)
+                        td > echo(employerName)
+                        td > date(startTime)
+                        td > date(endTime)
+            #identyPager.pagination

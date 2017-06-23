@@ -2,7 +2,6 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    params: false,
     myshares: true,
     page: true,
     down: false
@@ -17,18 +16,19 @@ exports.events = {
 
 exports.handlers = {
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
-        var data = { },
-            id = payload;
-        // console.log(payload);
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
-            this.app.show('content', 'ask/myshares/details', { id: data[1] });
-        }
+    //    // var region,
+    //    //     data = { };
+    //    // var el = $(target).parents('.comment-list')[0];
+    //     var data = { },
+    //         id = payload;
+    //     // console.log(payload);
+    //     if (id.indexOf('_') !== -1) {
+    //         data = id.split('_');
+    //         // region = new D.Region(this.app, this.module, el, data[1]);
+    //         // region.show('ask/myquiz/details', { id: data[1] });
+    //         this.app.show('content', 'ask/myshares/details', { id: data[1] });
+    //     }
+        this.app.show('content', 'ask/myshares/sharedetails', { id: payload });
     },
     showShare: function(payload) {
        // var region,
@@ -144,8 +144,10 @@ exports.dataForActions = {
         data.concernType = obj[0];
         return data;
     },
-    shut: function(data) {
+    shut: function(payload) {
+        var data = payload;
         var me = this;
+        data.auditType = '2';
         return this.Promise.create(function(resolve) {
             var message = '文章删除后将无法恢复，是否确定删除该文章？';
             me.app.message.confirm(message, function() {
@@ -175,10 +177,6 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
-    remove: function() {
-        this.app.message.success('删除成功！');
-        this.module.dispatch('init');
-    },
     follow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
@@ -203,9 +201,10 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    shut: function() {
-        this.app.message.success('删除成功!');
-        // this.module.dispatch('init');
+    shut: function(data) {
+        var trends = data[0];
+        this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
     },
     publish: function() {
         this.app.message.success('操作成功！');
@@ -220,10 +219,10 @@ exports.actionCallbacks = {
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var page = data.page;
+        var myshares = data.myshares;
+        var page = this.bindings.page.data;
         var me = this;
-        // var flag = true;
-        _.forEach(page, function(value) {
+        _.forEach(myshares, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
@@ -231,6 +230,7 @@ exports.dataForTemplate = {
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
+            page.push(obj);
         });
         return page;
     },

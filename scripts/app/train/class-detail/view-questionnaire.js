@@ -38,7 +38,7 @@ exports.handlers = {
     },
     editQuestionary: function(data) {
         var id = data,
-            url = '#/exam/research-activity/research-answer/' + id;
+            url = '#/exam/research-activity/paper/' + id + '/' + this.module.renderOptions.classId;
         window.open(url, '_blank');
     }
 };

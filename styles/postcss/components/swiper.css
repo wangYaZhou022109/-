@@ -46,6 +46,7 @@
             white-space: normal;
             overflow: hidden;
             width: 20%;
+            vertical-align: top;
         }
 
         &.full > li {

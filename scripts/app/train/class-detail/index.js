@@ -109,6 +109,10 @@ exports.store = {
             url: '../course-study/course-study-progress/total-study-time'
         },
         down: { url: '../human/file/download' },
+        staticfaction: { url: '../train/class-evaluate/front-class-detail' },
+        researchExam: {
+            url: '../exam/research-record/research'
+        }
     },
 
     callbacks: {
@@ -178,6 +182,11 @@ exports.store = {
             this.get(onlineCourseList);
             this.models.signUpInfo.params.classId = classId;
             this.get(this.models.signUpInfo);
+            this.models.staticfaction.params = {
+                classId: classId,
+                type: 4
+            };
+            this.get(this.models.staticfaction);
         },
         turnPage: function(data) {
             var state = this.models.state.data,

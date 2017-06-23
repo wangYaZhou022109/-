@@ -25,7 +25,7 @@ view('main')
                 .time > echo(timeDesc) + dateMinute(startTime) + echo('至') + dateMinute(endTime)
             .state > map('my-task-status', status)
             .btn-row
-                a.btn(href=url target='_blank') > echo(button)
+                a.btn(id='task-' + id data-value=id data-name='id') > echo(button)
         else
             li.border.bottom
                 .title-row

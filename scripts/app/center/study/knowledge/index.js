@@ -26,6 +26,14 @@ exports.store = {
         search: function(params) {
             var searchModel = this.models.search,
                 list = this.models.list;
+            list.clear();
+            D.assign(list.params, D.assign(searchModel.data, params));
+            this.get(list);
+            searchModel.changed();
+        },
+        enterSearch: function(params) {
+            var searchModel = this.models.search,
+                list = this.models.list;
             D.assign(list.params, D.assign(searchModel.data, params));
             this.get(list);
             searchModel.changed();

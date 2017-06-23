@@ -279,9 +279,9 @@ view('bus')
 view('research-tips')
     div
         if(research.content)
-            echo(research.content)
+            span > echo(research.content)
         else
-            echo('暂无学员满意度问卷')
+            span > echo('暂无学员满意度问卷')
     div
         each(research.buttons)
             if(target)

@@ -6,21 +6,25 @@
     height: 40em;
     overflow: hidden;
 
+    & .container {
+        height: 100%;
+    }
+
     &.top-bg {
         background: url(../images/course-bg.jpg) no-repeat center center;
         background-size: cover;
     }
 
     & .empty-img {
-        height: 36em;
-        background-size: auto;
+        height: 34em;
+        background-size: contain;
         opacity: .65;
     }
 
     & .player-wrapper {
         position: relative;
         height: 100%;
-        padding: var(--large-space);
+        padding: var(--large-space) var(--large-space) var(--large-space) 0;
         overflow: hidden;
 
         & .player-start-btn {
@@ -182,7 +186,7 @@
             transition: all .2s linear;
 
             & li {
-                margin-bottom: var(--large-space);
+                margin-bottom: var(--space);
                 padding: 0 var(--large-space);
 
                 & .common-title {

@@ -12,7 +12,7 @@ view('main')
             .pull-left
                 .checkbox > input(type='checkbox'  id='check-all') + label(for='check-all')
             .pull-right
-                .checkbox-slider.inline-block.m-right > input(type='checkbox' id='showRead')('checked')&if(readCheck) + label(for='showRead') + sapn 显示未读
+                .checkbox-slider.inline-block > input(type='checkbox' id='showRead')('checked')&if(readCheck) + label(for='showRead') + sapn 显示未读
                 .tag-btn.m-right.radius#markRead.m-left 标记已读
                 .tag-btn.radius#removeAll.m-left 删除
         ul.list > each(dataList)
