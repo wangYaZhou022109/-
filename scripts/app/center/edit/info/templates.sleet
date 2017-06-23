@@ -17,13 +17,12 @@ view('main') > .base-info
                     .inline-block
                         span.m-right > each(sexs)
                             input.inline-block(name='sex' type='radio' value=key)('checked')&if(selected)
-                            .inline-block.layout-mr-small > echo(value)
+                            .inline-block > echo(value)
             .form-row
                 .layout-mr
                     .inline-block > setting('person.index.info.position')
                     .inline-block
                         if(member.majoyPosition) > echo(member.majoyPosition.name)
-            .form-row
                 .layout-mr
                     .inline-block > setting('person.index.info.joinTime')
                     .inline-block > date(member.memberDetail.entryDate)
@@ -34,13 +33,15 @@ view('main') > .base-info
                 .layout-mr
                     .inline-block > setting('person.index.info.work')
                     .inline-block > echo(member.compOrganization.name)
-            .form-row
                 .layout-mr
                     .inline-block > setting('person.index.info.department')
                     .inline-block > echo(member.organization.name)
-        .form-row.textarea-row
-            label > setting('person.index.info.like')
-            #select-topic
-        .form-row
-            label.auto > setting('person.index.info.introduce')
-            .content > textarea.input(id='summary' name='summary' rows='3' x-rule='maxLength:200') > echo(member.memberDetail.summary)
+            .form-row
+                .layout-mr
+                    .inline-block#detailed 详细履历
+            .form-row.textarea-row
+                label > setting('person.index.info.like')
+                #select-topic
+            .form-row
+                label.auto > setting('person.index.info.introduce')
+                .content > textarea.input(id='summary' name='summary' rows='3' x-rule='maxLength:200') > echo(member.memberDetail.summary)

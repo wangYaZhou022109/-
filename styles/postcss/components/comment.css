@@ -142,6 +142,7 @@
         /*height: 0;*/
         display: none;
         overflow: hidden;
+        display: none;
 
         &.show {
             @apply --fade-in;
