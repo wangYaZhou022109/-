@@ -6,7 +6,6 @@ module > .ask-page
         .page-main-wrapper
             .page-side.side-min(data-region='side')
             .page-main.topic-main(data-region='main')
-            .topicbanner(data-region="topicbanner")
 
 
 
@@ -22,6 +21,44 @@ view('main')
     .tabs-cont > ul
         li.tabs-cont-item#tabs-cont-item-1.active
             .alldynamic
+                .recommend-topic#recommend-topic
+                    .title.clearfix
+                        .h4.pull-left 我们向您推荐的话题：
+                        .iconfont.icon-close-circle.pull-right.m-right.pointer
+                    ul.clearfix
+                        li.pull-left
+                            img(src="images/d1.jpg")
+                            .item-title 话题名称
+                            .item-attention.pointer
+                                i.iconfont.icon-add
+                                span 关注
+                        li.pull-left
+                            img(src="images/d1.jpg")
+                            .item-title 话题名称
+                            .item-attention.pointer
+                                i.iconfont.icon-add
+                                span 关注
+                        li.pull-left
+                            img(src="images/d1.jpg")
+                            .item-title 话题名称
+                            .item-attention.pointer
+                                i.iconfont.icon-add
+                                span 关注
+                        li.pull-left
+                            img(src="images/d1.jpg")
+                            .item-title 话题名称
+                            .item-attention.pointer
+                                i.iconfont.icon-add
+                                span 关注
+                        li.pull-left
+                            img(src="images/d1.jpg")
+                            .item-title 话题名称
+                            .item-attention.pointer
+                                i.iconfont.icon-add
+                                span 关注
+
+                    .pull-right.layout-mt-smal.m-top.m-bottom.m-right
+                        a.iconfont.icon-switch 更换一组
                 .comment-list.ask-list > ul
                     li
                         .user-pic
@@ -168,45 +205,7 @@ view('main')
     .none-more
         p 没有更多了
 
-view('topicbanner')
-    .recommend-topic#recommend-topic
-        .title.clearfix
-            .h4.pull-left 我们向您推荐的话题：
-            .iconfont.icon-close-circle.pull-right.m-right.m-top.pointer
-        ul.clearfix
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer
-                    i.iconfont.icon-add
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer
-                    i.iconfont.icon-add
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer
-                    i.iconfont.icon-add
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer
-                    i.iconfont.icon-add
-                    span 关注
-            li.pull-left
-                img(src="images/d1.jpg")
-                .item-title 话题名称
-                .item-attention.pointer
-                    i.iconfont.icon-add
-                    span 关注
 
-        .pull-right.layout-mt-smal.m-top.m-bottom.m-right
-            a.iconfont.icon-switch 更换一组
     
                    
     

@@ -1,10 +1,10 @@
-var $ = require('jquery');
-exports.events = {
-    'click closetopic': 'closeTopic'
-};
+// var $ = require('jquery');
+// exports.events = {
+//     'click closetopic': 'closeTopic'
+// };
 
-exports.handlers = {
-    closeTopic: function() {
-        $(this.$('topbanner')).hide();
-    }
-};
+// exports.handlers = {
+//     closeTopic: function() {
+//         $(this.$('topbanner')).hide();
+//     }
+// };

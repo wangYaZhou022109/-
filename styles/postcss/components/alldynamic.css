@@ -1,4 +1,34 @@
 .alldynamic {
+    & .recommend-topic {
+        width:100%;
+        overflow: hidden;
+        & .title {
+            padding: var(--space) 0;
+           
+        }
+        
+        & ul.clearfix {
+            margin-right: -calc(var(--space) * 4);
+            & li {
+
+                width: 20%;
+                text-align: center;
+                padding: 0 calc(var(--space) * 4);
+                box-sizing: border-box;
+                & img {
+                    width: 100%;
+                }
+                & .item-title {
+                    padding: var(--space) 0;
+                }
+                & .item-attention {
+                background-color:var(--link-color); 
+                padding: var(--space) 0;
+                color:var(--white);
+                }
+            }
+        }
+    }
     & .ask-list {
         border-bottom: 1px solid var(--border-color) !important;
     }
@@ -50,14 +80,14 @@
                     transform:scale(0.8);
                     & .icon-triangle-up {
                         position: absolute;
-                        right: calc(var(--space) / 2);
+                        right: calc(var(--space) - 2);
                         top: -calc(var(--space) + 1);
                         color: var(--border-color);
                     }
 
 
                     & li {
-                        transform:scale(0.9);
+                        transform:scale(1.0);
                         color: var(--font-tip-color);
                         height: var(--large-space);
                         line-height:  var(--large-space);

@@ -17,8 +17,17 @@ view('list')
                     h4.text-overflow(title='温暖气氛') > a(id='detail-' + id data-name='id' data-value=id href='javascript:;') > echo(name)
                     .info > echo(concernNumber + '关注' + '|' + expertNumber + '专家' + '|' + questionNumber + '问题')
                 .btn.small(id='unfollow-topic-' + id  data-name='id' data-value=id) > echo('已关注')
-        if(topic.topicListFlag)
-            .container.text-center > .content(style="margin: 20% 0") 暂无内容哦！
+        #  if(topic.topicListFlag)
+        #      .container.text-center > .content(style="margin: 20% 0") 没有
+        compare(topic.topicList.length 'gt' 0) 
+            .container.text-center > .content(style="margin-top: 10%") 没有更多了！
+        compare(topic.topicList 'eq' null) 
+            .container.text-center > .content(style="margin-top: 10%") 没有更多了！
+        compare(topic.topicList.length 'eq' 0) 
+            .container.text-center
+                .content(style="margin: 20% 0")
+                    img(src="images/empty1.png")
+                    p.text-center 暂无信息哦！ 
    
                 
 

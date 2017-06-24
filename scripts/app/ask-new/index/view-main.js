@@ -9,7 +9,8 @@ exports.events = {
     'click discuss-*': 'discuss',
     'click selectquestion-*': 'showSlectdrop',
     'change selectquestion-*': 'hideSlectdrop',
-    'click delete': 'showDelete'
+    'click delete': 'showDelete',
+    'click closetopic': 'closeTopic'
 };
 
 exports.handlers = {
@@ -58,5 +59,8 @@ exports.handlers = {
     showDelete: function() {
         var model = this.module.items['ask-new/index/delete'];
         this.app.viewport.modal(model);
+    },
+    closeTopic: function() {
+        $(this.$('topbanner')).hide();
     }
 };

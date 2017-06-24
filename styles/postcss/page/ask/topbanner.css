@@ -1,33 +1,3 @@
-.topicbanner {
+/*.topicbanner {
     width:75%;
-}
-.recommend-topic {
-    width:100%;
-    overflow: hidden;
-    & .h4 {
-        padding: var(--space) 0;
-    }
-    & ul {
-        margin-right: -calc(var(--space) * 4);
-        & li {
-
-            width: 20%;
-            text-align: center;
-            padding: 0 calc(var(--space) * 4);
-            box-sizing: border-box;
-            & img {
-                width: 100%;
-            }
-            & .item-title {
-                padding: var(--space) 0;
-            }
-            & .item-attention {
-            background-color:var(--link-color); 
-            padding: var(--space) 0;
-            color:var(--white);
-            }
-        }
-    }
-    
-  
-}
+}*/
