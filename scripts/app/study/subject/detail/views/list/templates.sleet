@@ -5,7 +5,7 @@ module > .rank(data-region='pannel')
 view('pannel')
     if(region.regionModule.display)
         .clearfix
-            .pull-right.text-tips.m-top#more more
+            .pull-right.text-tips.m-top.pointer#more more
             .pull-left
                 span.h3 > echo(region.regionModule.name)
                 span.sub-text 学员时长排行榜

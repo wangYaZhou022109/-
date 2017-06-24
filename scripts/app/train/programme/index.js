@@ -171,7 +171,8 @@ exports.store = {
             var themeList = this.models.themeList.data,
                 state = this.models.state,
                 newTheme = {},
-                index;
+                index,
+                me = this;
             index = state.data.index || themeList.length;
             index++;
             newTheme.id = 'new-' + index;
@@ -182,8 +183,9 @@ exports.store = {
             themeList.push(newTheme);
             this.models.themeList.changed();
             state.data.index = index;
-            state.changed();
-            this.module.items.online.updataCss();
+            state.changed().then(function() {
+                me.module.items.online.updataCss();
+            });
         },
         saveTheme: function() {
             var themeList = this.models.themeList,
@@ -200,7 +202,6 @@ exports.store = {
                 type: 2
             });
             me.save(me.models.themeModel).then(function() {
-                me.module.items.online.updataCss();
                 me.get(onlineCourseList).then(function() {
                     me.module.items.online.updataCss();
                 });

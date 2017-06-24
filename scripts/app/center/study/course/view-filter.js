@@ -17,7 +17,8 @@ exports.dataForTemplate = {
 };
 
 exports.actions = {
-    'click searchByName': 'search'
+    'click searchByName': 'search',
+    'keypress searchName': 'enterSearch'
 };
 
 exports.events = {
@@ -45,5 +46,12 @@ exports.handlers = {
                 studyTimeOrder: studyTimeOrder === 'desc' ? 'asc' : 'desc'
             };
         this.module.dispatch('search', params);
+    }
+};
+
+exports.dataForActions = {
+    enterSearch: function(payload, e) {
+        if (e.keyCode !== 13) return false;
+        return payload;
     }
 };

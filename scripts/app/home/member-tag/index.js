@@ -27,12 +27,24 @@ exports.buttons = [{
 }];
 exports.store = {
     models: {
-        topics: { url: '../system/topic/select', params: { group: 1, recommend: 1 }, autoLoad: 'after' },
+        topics: { url: '../system/topic/select', params: { group: 1, recommend: 1 } },
         selectedTopics: { data: [] },
         memberSetting: { url: '../human/member/init-setting' },
         memberTopic: { url: '../human/member/topic' }
     },
     callbacks: {
+        refreshTopics: function() {
+            var topics = this.models.topics,
+                topicResult;
+            return this.get(topics).then(function(data) {
+                if (data && D.isArray(data) && data.length > 0) {
+                    topicResult = data[0];
+                    // 不足20个，不能换一批，提示没有更多标签了
+                    topics.set({ enough: topicResult.length < 20 });
+                    topics.set(_.sampleSize(topicResult, 20), true);
+                }
+            });
+        },
         selected: function(payload) {
             var selectedTopics = this.models.selectedTopics;
             selectedTopics.data.push(payload);
@@ -72,4 +84,8 @@ exports.store = {
             });
         }
     }
+};
+
+exports.afterRender = function() {
+    this.dispatch('refreshTopics');
 };

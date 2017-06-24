@@ -35,15 +35,13 @@
             color: white;
             width: 50%;
             padding-left: var(--large-space);
-            padding-top: 1em;
-
-            & h2 {
-                margin: 0;
-            }
+            line-height: 1.5;
 
             & .tag-btn {
                 color: var(--font-color);
                 border: none;
+                line-height: 1;
+
             }
         }
 

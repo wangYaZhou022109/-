@@ -4,7 +4,7 @@ module
 
 view('list')
     compare(page.length 'lt' 1)
-        .text-center
+        .text-center(id='test')
             .content(style="margin: 15% 0")
                 img(src="images/nothing.png")
                 p.text-center 暂无与你相关的信息哦！

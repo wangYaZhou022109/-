@@ -8,12 +8,6 @@
             background: var(--bg-color);
         }
 
-        & .tag-group {
-            & .tag-btn {
-                border: none;
-            }
-        }
-
         & .btn.upload {
             height: auto;
             line-height: 1;

@@ -1,37 +1,44 @@
+var $ = require('jquery');
 exports.bindings = {
     course: true,
-    collect: true,
+    collect: false,
     score: true,
     download: false,
     topics: true
 };
 
-exports.actions = {
+exports.events = {
     'click collect': 'collect',
-    'click cancel-collect': 'cancelCollect'
 };
-
-exports.dataForActions = {
-    collect: function() {
+exports.handlers = {
+    collect: function(e, element) {
         var course = this.bindings.course.data;
-        return {
-            businessId: course.id,
-            businessType: 1,
-            collectName: course.name
-        };
-    },
-    cancelCollect: function(payload) {
-        return payload;
+        var collecId = element.getAttribute('data-collect-id');
+        if (collecId) {
+            this.chain(
+                this.module.dispatch('cancelCollect', { id: collecId }),
+                function() {
+                    element.setAttribute('data-collect-id', '');
+                    this.app.message.success('取消收藏成功');
+                }
+            );
+        } else {
+            this.chain(
+                this.module.dispatch('collect', {
+                    businessId: course.id,
+                    businessType: 1,
+                    collectName: course.name
+                }),
+                function(data) {
+                    element.setAttribute('data-collect-id', data[0].id);
+                    this.app.message.success('收藏成功');
+                }
+            );
+        }
+        $(element).toggleClass('icon-favorite-full');
+        $(element).toggleClass('custom-color-1');
+        $(element).toggleClass('icon-favorite');
     }
-};
-
-exports.actionCallbacks = {
-    collect: function() {
-        this.app.message.success('收藏成功');
-    },
-    cancelCollect: function() {
-        this.app.message.success('取消收藏成功');
-    },
 };
 
 exports.components = [function() { // 分享组件

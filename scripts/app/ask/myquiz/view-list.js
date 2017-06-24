@@ -2,7 +2,6 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    params: false,
     questions: true,
     page: true,
     down: false
@@ -200,10 +199,10 @@ exports.actionCallbacks = {
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var page = data.page;
+        var questions = data.questions;
+        var page = this.bindings.page.data;
         var me = this;
-        // var flag = true;
-        _.forEach(page, function(value) {
+        _.forEach(questions, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
@@ -211,6 +210,7 @@ exports.dataForTemplate = {
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
+            page.push(obj);
         });
         return page;
     },

@@ -6,7 +6,7 @@ module > .report-exam-page
 view('reportaudit') > form.vertical
     .report-person.clearfix
         .item.pull-left.layout-mr
-            span > echo('举报人：') > echo(reportaudit.member.fullName) 
+            span > echo('举报人：' + reportaudit.member.fullName) 
             #  img.inline-block(src="images/1.png")
             #  img.inline-block(src="images/2.png")
             #  img.inline-block(src="images/3.png")
@@ -18,7 +18,7 @@ view('reportaudit') > form.vertical
             span > map('ask-report-type' reportaudit.sourceType)
         .reported.pull-left.layout-mr
             span 被举报人：
-            span > echo(member.fullName)
+            span > echo(reportaudit.beUser)
     .report-content.layout-mt-small
         p 举报内容：
         .report-content-item.small-font > echo(reportaudit.question.title)

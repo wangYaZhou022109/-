@@ -7,7 +7,6 @@ view('main')
     .share-bar
         .drop-down-wrapper
             i.iconfont.icon-share-2
-            span 分享
             .drop-down-content > .content
                 .item > #shareTo-qzone > i.iconfont.icon-q-zone + span 分享到QQ空间
                 .item > #shareTo-weibo > i.iconfont.icon-sina + span 分享到新浪微博

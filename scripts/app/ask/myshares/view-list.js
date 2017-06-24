@@ -2,7 +2,6 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    params: false,
     myshares: true,
     page: true,
     down: false
@@ -17,18 +16,19 @@ exports.events = {
 
 exports.handlers = {
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
-        var data = { },
-            id = payload;
-        // console.log(payload);
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
-            this.app.show('content', 'ask/myshares/details', { id: data[1] });
-        }
+    //    // var region,
+    //    //     data = { };
+    //    // var el = $(target).parents('.comment-list')[0];
+    //     var data = { },
+    //         id = payload;
+    //     // console.log(payload);
+    //     if (id.indexOf('_') !== -1) {
+    //         data = id.split('_');
+    //         // region = new D.Region(this.app, this.module, el, data[1]);
+    //         // region.show('ask/myquiz/details', { id: data[1] });
+    //         this.app.show('content', 'ask/myshares/details', { id: data[1] });
+    //     }
+        this.app.show('content', 'ask/myshares/sharedetails', { id: payload });
     },
     showShare: function(payload) {
        // var region,
@@ -219,10 +219,10 @@ exports.actionCallbacks = {
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var page = data.page;
+        var myshares = data.myshares;
+        var page = this.bindings.page.data;
         var me = this;
-        // var flag = true;
-        _.forEach(page, function(value) {
+        _.forEach(myshares, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
@@ -230,6 +230,7 @@ exports.dataForTemplate = {
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
+            page.push(obj);
         });
         return page;
     },
