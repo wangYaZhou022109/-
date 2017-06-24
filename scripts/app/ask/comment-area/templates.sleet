@@ -4,87 +4,76 @@ module
     div(data-region='main')
 
 view('main')
-    form.vertical
-        .h3 讨论区
-        .sub-text.layout-mt-small.layout-mb-small 文明上网、理性发言、请遵守企业发言纪律
-        textarea#commentContent.input.w-full(name='content' rows='5')
-        if(state.available)
-            .m-top.text-right > .btn#add-comment 发表
-    .layout-mt
-        .comment-list > ul
-            each(comments)
-                li
-                    .user-pic > img(src=avatarId)
-                    .comment-content
-                        compare(essenceStatus 'eq' 1)
-                            img.boutique.pull-left(src="images/boutique.png")
-                        .user-info
-                            a(href='javascript:;') > echo(memberName)
-                            span > echo(memberOrg.name)
-                        .comment-text > echo(content)
-                        form
-                            input(type='hidden' name='toMemberId' value=memberId)
-                            input(type='hidden' name='commentId' value=id)
-                            input(type='hidden' name='objectId' value=id)
-                            input(type='hidden' name='objectType' value=1)
-                            .comment-operation
-                                .pull-left > .sub-text > echo(createTimeStr)
-                                .text-right
-                                    if(praiseId)
-                                        .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId)
-                                            i.iconfont.icon-zan
-                                            span.small-font > echo('已赞 ')
-                                            span.small-font > echo(praiseCount)
-                                    else
-                                        .item(id='praise'+id )
-                                            i.iconfont.icon-zan
-                                            span.small-font > echo('赞 ')
-                                            span.small-font > echo(praiseCount)
-                                    .item(id='showReply-'+id)
-                                        i.iconfont.icon-message
-                                        span.small-font > echo('回复 ')
-                                        span > echo(commentCount)
-                                    .item(id='accuse-1_'+id+'_'+memberId+'_'+content)
-                                        i.iconfont.icon-info
-                                        span.small-font > echo('举报')
-                            .comment-reply(id='reply-content-'+id)
-                                textarea.input.w-full.block(name='content' rows='1')
-                                .btn(id='add-reply-'+id) 回复
-                        compare(replies.length 'gt' 0)
-                            .comment-list.border.top > ul
-                                each(replies)
-                                    li
-                                        .user-pic > img(src=avatarId)
-                                        .comment-content
-                                            .user-info
-                                                a(href='javascript:;') > echo(memberName)
-                                                span 回复
-                                                a(href='javascript:;') > echo(toMemberName)
-                                            .comment-text > echo(content)
-                                            form
-                                                input(type='hidden' name='toMemberId' value=memberId)
-                                                input(type='hidden' name='commentId' value=../id)
-                                                input(type='hidden' name='objectId' value=id)
-                                                input(type='hidden' name='objectType' value=2)
-                                                .comment-operation
-                                                    .pull-left > .sub-text > echo(createTimeStr)
-                                                    .text-right
-                                                        if(praiseId)
-                                                            .item(id='cancel-praise'+id data-name='praiseId' data-value=praiseId)
-                                                                i.iconfont.icon-zan
-                                                                span.small-font > echo('取消赞 ')
-                                                                span.small-font > echo(praiseCount)
-                                                        else
-                                                            .item(id='praise'+id )
-                                                                i.iconfont.icon-zan
-                                                                span.small-font > echo('赞 ')
-                                                                span.small-font > echo(praiseCount)
-                                                        .item(id='showReply-'+id)
-                                                            i.iconfont.icon-message
-                                                            span.small-font > echo('评论')
-                                                        .item(id='accuse-2_'+id+'_'+memberId+'_'+content)
-                                                            i.iconfont.icon-info
-                                                            span.small-font > echo('举报')
-                                                .comment-reply(id='reply-content-'+id)
-                                                    textarea.input.w-full.block(name='content' rows='1')
-                                                    .btn(id='add-reply-'+id) 回复
+    ul.topic-item
+        li
+        .user-pic
+            img.pointer(src='images/1.png')
+        .comment-content
+        div.clearfix
+            .pull-left
+                a 张三
+            .pull-right.iconfont.icon-more.m-right.pointer
+                .drop-down-more
+                    i.iconfont.icon-triangle-up
+                    ul
+                        li(name = 'trend-report')
+                            i.iconfont.icon-info
+                            span 举报
+                        li(name = 'del-question')
+                            i.iconfont.icon-trash
+                            spsn 删除
+        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+        .comment-operation
+            .user-info.pull-left
+                span.sub-text 2016-09-09 09:09
+            .text-right
+                .item
+                    i.iconfont.icon-zan-full
+                    span 赞(123)
+                .item#discuss-
+                    i.iconfont.icon-message
+                    span 回复(123)
+                .item
+                    .share-bar
+                        .drop-down-wrapper
+                            i.iconfont.icon-share-2
+                            span 分享
+                            form.drop-down-content > .content
+                                .item > div(name ='shareTo-qzone_' + 'id') > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                .item > div(name ='shareTo-weibo_' + 'id') > i.iconfont.icon-sina + span 分享到新浪微博
+                form.comment-reply(name ='comment-reply-' + id)
+                    textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                    input.input(type='hidden' name='organizationId' value='createUser.organizationId')
+                    input.input(type='hidden' name='id' value='questionId')
+                    .btn(name='publish-' + 'questionId') > string('publish')
+    ul.topic-item
+        li
+            .user-pic
+                img.pointer(src='images/1.png')
+            .comment-content
+                div.clearfix
+                    .pull-left
+                        a 张三
+                        span 回复
+                        span 张三
+                    .pull-right.iconfont.icon-more.m-right.pointer
+                        .drop-down-more
+                            i.iconfont.icon-triangle-up
+                            ul
+                                li
+                                    i.iconfont.icon-info
+                                    span 举报
+                                li
+                                    i.iconfont.icon-trash
+                                    spsn 删除
+                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                .comment-operation
+                    .user-info.pull-left
+                        span.sub-text 2016-09-09 09:09
+                    .text-right
+                        .item
+                            i.iconfont.icon-zan-full
+                            span 赞(123)
+                        .item
+                            i.iconfont.icon-message
+                            span 回复(123)

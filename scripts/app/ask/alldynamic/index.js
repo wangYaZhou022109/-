@@ -8,6 +8,7 @@ exports.items = {
 
 exports.store = {
     models: {
+        state: { data: {} },
         trends: { url: '../ask-bar/trends/all-dynamic' },
         discuss: { url: '../ask-bar/question-discuss' },
         reply: { url: '../ask-bar/question-reply' },
@@ -270,7 +271,7 @@ exports.afterRender = function() {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
-        if (page.length >= 40 && page.length <= 40 + (size * 3)) {
+        if (page.length >= 4 && page.length <= 4 + (size * 3)) {
             $('.recommend-topic')[0].style.display = 'inline';
         } else if (page.length >= 300 && page.length <= 300 + (size * 3)) {
             $('.recommend-topic')[0].style.display = 'inline';
