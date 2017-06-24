@@ -35,10 +35,11 @@ var setOptions = {
                     initNoSujective: function(exam) {
                         var types = this.module.store.models.types,
                             answer = this.module.store.models.answer,
+                            examRecord = exam.examRecord,
                             questionSummary = answer.questionSummary();
                         this.data = {
                             name: exam.name,
-                            examinee: this.app.global.currentUser.name,
+                            examinee: examRecord.member && (examRecord.member.fullName || examRecord.member.name),
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE,
@@ -67,11 +68,12 @@ var setOptions = {
                     initWithSuject: function(exam) {
                         var types = this.module.store.models.types,
                             questions = exam.paper.questions,
+                            examRecord = exam.examRecord,
                             answeredCount = 0;
 
                         D.assign(this.data, exam, {
                             name: exam.name,
-                            examinee: this.app.global.currentUser.name,
+                            examinee: examRecord.member && (examRecord.member.fullName || examRecord.member.name),
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE,
