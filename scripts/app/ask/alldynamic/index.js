@@ -21,7 +21,7 @@ exports.store = {
         close: { url: '../ask-bar/question/close-status' },
         page: {
             data: [],
-            params: { page: 1, size: 10 },
+            params: { page: 1, size: 2 },
             mixin: {
                 closerefresh: function(id, type) {
                     var newData = [];
