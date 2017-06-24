@@ -5,8 +5,29 @@ exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
     page: true,
-    down: false
+    down: false,
+    state: true
 };
+
+exports.getEntityModuleName = function(key) {
+    var data = key.split('_'),
+        obj = {};
+    obj.type = data[1];
+    obj.id = data[2];
+    this.bindings.state.clear();
+    this.bindings.state.set(obj);
+    return 'ask/' + data[0];
+};
+exports.getEntity = function() {
+    return {
+        state: this.bindings.state.data
+    };
+};
+
+exports.dataForEntityModule = function(entity) {
+    return entity;
+};
+
 
 exports.events = {
     'click myquiz-details-*': 'showDetails',
@@ -36,6 +57,7 @@ exports.handlers = {
         }
     },
     discuss: function(payload) {
+        console.log(payload);
         $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
     report: function(payload) {

@@ -86,6 +86,10 @@ view('list')
                                         .item(id='discuss-' + id ) > echo('参与讨论') +  echo('（' + shareReplyNum +'）')
                                         compare(careNum 'eq' 0)
                                             .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                        compare(show 'eq' 2)
+                                            .item(id = 'close-question-' + id data-name='id' data-value=id ) > string('close')
+                                        compare(show 'eq' 3)
+                                            .item > string('closed')
                                         .item > .share-bar
                                             .drop-down-wrapper
                                                 span 分享
@@ -138,6 +142,10 @@ view('list')
                                         .item(id='discuss-' + id ) > echo('参与讨论') +  echo('（' + shareReplyNum +'）')
                                         compare(careNum 'eq' 0)
                                             .item > span(id = 'del-question-' + id data-name='id' data-value=id) > string('delete')
+                                        compare(show 'eq' 2)
+                                            .item(id = 'close-question-' + id data-name='id' data-value=id ) > string('close')
+                                        compare(show 'eq' 3)
+                                            .item > string('closed')
                                         .item > .share-bar
                                             .drop-down-wrapper
                                                 span 分享

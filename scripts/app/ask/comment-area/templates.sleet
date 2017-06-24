@@ -1,0 +1,79 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main')
+    ul.topic-item
+        li
+        .user-pic
+            img.pointer(src='images/1.png')
+        .comment-content
+        div.clearfix
+            .pull-left
+                a 张三
+            .pull-right.iconfont.icon-more.m-right.pointer
+                .drop-down-more
+                    i.iconfont.icon-triangle-up
+                    ul
+                        li(name = 'trend-report')
+                            i.iconfont.icon-info
+                            span 举报
+                        li(name = 'del-question')
+                            i.iconfont.icon-trash
+                            spsn 删除
+        .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+        .comment-operation
+            .user-info.pull-left
+                span.sub-text 2016-09-09 09:09
+            .text-right
+                .item
+                    i.iconfont.icon-zan-full
+                    span 赞(123)
+                .item#discuss-
+                    i.iconfont.icon-message
+                    span 回复(123)
+                .item
+                    .share-bar
+                        .drop-down-wrapper
+                            i.iconfont.icon-share-2
+                            span 分享
+                            form.drop-down-content > .content
+                                .item > div(name ='shareTo-qzone_' + 'id') > i.iconfont.icon-q-zone + span 分享到QQ空间
+                                .item > div(name ='shareTo-weibo_' + 'id') > i.iconfont.icon-sina + span 分享到新浪微博
+                form.comment-reply(name ='comment-reply-' + id)
+                    textarea.input.w-full.block(rows=1 name='t_content' value='' maxLength='3000')
+                    input.input(type='hidden' name='organizationId' value='createUser.organizationId')
+                    input.input(type='hidden' name='id' value='questionId')
+                    .btn(name='publish-' + 'questionId') > string('publish')
+    ul.topic-item
+        li
+            .user-pic
+                img.pointer(src='images/1.png')
+            .comment-content
+                div.clearfix
+                    .pull-left
+                        a 张三
+                        span 回复
+                        span 张三
+                    .pull-right.iconfont.icon-more.m-right.pointer
+                        .drop-down-more
+                            i.iconfont.icon-triangle-up
+                            ul
+                                li
+                                    i.iconfont.icon-info
+                                    span 举报
+                                li
+                                    i.iconfont.icon-trash
+                                    spsn 删除
+                .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
+                .comment-operation
+                    .user-info.pull-left
+                        span.sub-text 2016-09-09 09:09
+                    .text-right
+                        .item
+                            i.iconfont.icon-zan-full
+                            span 赞(123)
+                        .item
+                            i.iconfont.icon-message
+                            span 回复(123)
