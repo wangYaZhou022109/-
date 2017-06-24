@@ -1,6 +1,7 @@
 module.exports = {
     items: {
-        main: 'main'
+        main: 'main',
+        'first-login': 'first-login'
     },
     afterRender: function() {
         this.dispatch('init', this.renderOptions || {});

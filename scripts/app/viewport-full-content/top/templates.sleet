@@ -48,7 +48,7 @@ view('shortcut')
                             .hr
                         .m-left
                             .m-top 热门搜索
-                            .clearfix.m-top
+                            .clearfix.m-top.hot-tag
                                 each(hotTopics)
                                     .tag-btn.radius(id='topic-'+id  data-name='id' data-value=id) > echo(name)
 
