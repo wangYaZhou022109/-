@@ -26,7 +26,11 @@
             overflow: auto;
             padding-top: var(--large-space);
             padding-right: calc(var(--space) * 3);
-
+            word-wrap:break-word;
+	        word-break:break-all;
+            & img {
+                max-width: 100%;
+            }
         }
 
         &.animated {
@@ -229,7 +233,7 @@
 .cropper-layout {
     position: relative;
     width: 650px;
-    height: 460px;
+    height: 480px;
     & .cropper-cover {
         position: absolute;
         top: 60px;

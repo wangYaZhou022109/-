@@ -50,9 +50,9 @@ view('notice')
             .pull-left.m-right > i.iconfont.icon-notice
             b.title 公告：
             .navigator
-                .icon.arrow.prev#prevNotice > .iconfont.icon-arrow-down
-                .icon.arrow.next#nextNotice > .iconfont.icon-arrow-up
-                .icon#showMore > .iconfont.icon-more
+                .icon#showMore(title='更多') > .iconfont.icon-more
+                .icon.arrow.prev#prevNotice(title='下一条') > .iconfont.icon-arrow-down
+                .icon.arrow.next#nextNotice(title='上一条') > .iconfont.icon-arrow-up
             ul > each(announcements)
                 li.clearfix
                     .pull-right.sub-text.layout-mr > dateTime(publishTime)

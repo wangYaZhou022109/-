@@ -11,7 +11,7 @@ view('main')
 
 view('upload')
     .cropper-layout#uploader
-        .cropper-cover 上传图片在此裁剪
+        # .cropper-cover 上传图片在此裁剪
         div(id=state.cropperId)
             h1 AvatarUpload
             p > a(href="http://www.adobe.com/go/getflashplayer") 请安装 Adobe Flash player
