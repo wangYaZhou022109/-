@@ -120,7 +120,7 @@ exports.store = {
                 gensee.data.avgScore = data[0].avgScore || gensee.data.avgScore;
                 gensee.changed();
             });
-        },
+        }
     }
 };
 

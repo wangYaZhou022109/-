@@ -2,6 +2,7 @@ var D = require('drizzlejs'),
     // RECOMMEND_SIZE = 6,
     RESEARCH_TYPE = 1,
     toArray,
+    CLIENT_TYPE = '1',
     _ = require('lodash/collection');
 
 exports.items = {
@@ -99,6 +100,8 @@ exports.store = {
             // D.assign(activitys.params, { size: RECOMMEND_SIZE }); // 暂时不限制最大条数，将所有推荐的数据查询出来
             D.assign(researchActivitys.params, { type: RESEARCH_TYPE });
             D.assign(search.data, { searchStatus: 0 });
+
+            D.assign(exams.params, { clientType: CLIENT_TYPE });
             this.get(exams, { loading: true }).then(function() {
                 examMores.init(exams.data);
                 examMores.changed();
@@ -120,7 +123,7 @@ exports.store = {
             researchActivitys.clear();
             exams.clear();
             D.assign(gensees.params, payload);
-            D.assign(exams.params, payload);
+            D.assign(exams.params, D.assign(payload, { clientType: CLIENT_TYPE }));
             D.assign(researchActivitys.params, payload);
             D.assign(classDetailes.params, payload);
             D.assign(search.data, payload);

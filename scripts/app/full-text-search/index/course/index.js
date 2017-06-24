@@ -19,7 +19,7 @@ exports.store = {
             this.models.state.set(options.state);
             courses.params = {
                 type: 0,
-                clientType: 1,
+                publishClient: 1,
                 searchContent: options.state.searchContent,
                 topicId: options.state.topicId
             };

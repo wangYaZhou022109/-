@@ -7,4 +7,4 @@ view('main')
     .layout-mt-small.text-center(style="color:#fff;")
         p.text-center 问卷须知
         p.text-center.layout-mt-small > echo(researchActivity.questionaryDetail)
-        .btn.radius.layout-mt#submit 进入评估
+        .btn.radius.layout-mt#submit > echo(researchActivity.btn)

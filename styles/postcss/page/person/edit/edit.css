@@ -46,3 +46,33 @@
         }
     }
 }
+
+.first-login {
+    & .dialog-layout {
+        position: absolute;
+        z-index: 1005;
+        padding: 20px;
+        top: 100px;
+        left: 50%;
+        margin-left: -350px;
+        width: 700px;
+        box-shadow:0 2px 20px -5px rgba(0,0,0,.8);
+        background-color: white;
+    }
+    & .form-row {
+        margin-bottom: 10px;
+        & label {
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+            color: var(--font-sub-color);
+        }
+        & .inline-block {
+            height: 35px;
+            line-height: 35px;
+        }
+        & textarea {
+            width: 100%;
+        }
+    }
+}

@@ -34,8 +34,9 @@
     }
     & .comment-list {
         border-bottom: var(--border-color);
-        & .comment-list {
-            margin-top: calc(var(--font-size) * 2);
+        margin-top: calc(var(--font-size) * 2);
+        & ul {
+            margin-bottom: var(--input-height);
         }
 
         & li {
@@ -84,7 +85,9 @@
                         top: -calc(var(--space) + 1);
                         color: var(--border-color);
                     }
-
+                    & ul {
+                        margin-bottom: 0;
+                    }
 
                     & li {
                         transform:scale(1.0);
@@ -147,7 +150,7 @@
             & .item {
                 display: inline-block;
                 padding: 0;
-                margin-left: var(--base-gap);
+                margin-left: var(--input-height);
                 cursor: pointer;
                 color: var(--font-tip-color);
 
@@ -156,6 +159,9 @@
                 }
                 &.inline {
                     margin-left: var(--space);
+                }
+                & .icon-add {
+                    transform: scale(1);
                 }
                 & .icon-q-zone {
                     color: blue;

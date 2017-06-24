@@ -1,0 +1,99 @@
+#!handlebars
+
+module > .live-details-page
+    .live-details-banner(data-region='live')
+    .page-main-wrapper
+        .side(data-region='side')
+        .main
+            .live-details-main.page-main
+                .container
+                    section.section(data-region='main')
+                    section.section(data-region='relative-gensees')
+
+view('live')
+    compare(gensee.status 'eq' 2)
+        iframe(src=liveUrl frameborder='0' scrolling='no' width='100%'  align='middle' height='680px')
+    else
+        img(src=liveUrl  width='100%'  align='middle' height='100%')
+view('side')
+    .page-side > .container
+        if(businesses)
+            section.section.relevant-topic
+                .h3 直播资源
+                .layout-mt-small
+                    each(businesses)
+                        .block.layout-mt-small
+                            .pull-right
+                            .text-overflow
+                                echo(genseeBusiness.businessName)
+
+        section.section.student
+            .h3 TA们也参加了直播
+            .layout-mt-small.user-picture
+                .grid-row
+                    each(accessList)
+                        .col-md-4 > img.block(src=headPhoto)
+                    else
+                        .content-empty-side > .img-box + p 暂无相关的数据
+
+
+view('main')
+    .clearfix
+        .pull-left
+            .common-title.inline-block
+                echo(gensee.subject)
+            .inline-block
+                #star-score
+        .inline-block.layout-mr
+    .clearfix.layout-mt-small
+        .pull-right
+        .live-details-teacher
+            .lecturer.clearfix
+                .user-pic.pull-left > i.iconfont.icon-user
+                .teacher.pull-left
+                    | 讲师：
+                    b > echo(gensee.lecturerStr)
+                    p.text-overflow > echo(gensee.lecturerDesc)
+            .time.clearfix.pull-left
+                .user-pic.pull-left > i.iconfont.icon-time
+                | 直播时间
+                p
+                    dateMinute(gensee.startTime)
+
+    .side-box.m-top
+        each(gensee.topics)
+            .tag-btn
+                compare(group 'eq' 1)
+                    a.normal(href='#/ask/topicdetail/'+id target='_blank') > echo(name)
+                else
+                    echo(name)
+    .side-box.m-top
+        echo('简介：')
+        if(gensee.genseeDesc)
+            echo(gensee.genseeDesc)
+        else
+            echo('暂无')
+
+view('relative-gensees')
+    if(relativeGensees)
+        .h3 相关直播
+        .main-list.layout-mt-small
+            ul.cell-4
+                each(relativeGensees)
+                    li > .content > a.normal(href='#/activity/gensee/detail/'+ id target='_blank')
+                        .img
+                            .img-cont > img(src=cover)
+                            .detail-wrapper
+                                p > echo(genseeDesc)
+                        .clearfix
+                            .title.text-overflow > echo(subject)
+                        .bottom
+                            .item
+                                i.iconfont.icon-view
+                                echo(viewNumber)
+                            .item
+                                i.iconfont.icon-star
+                                if(avgScore)
+                                    echo(avgScore)
+                                else
+                                    echo(0)
