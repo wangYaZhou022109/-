@@ -124,7 +124,8 @@ exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click del-question-*': 'shut',
-    'click publish-*': 'publish'
+    'click publish-*': 'publish',
+    'click close-question-*': 'close',
 };
 
 exports.dataForActions = {
@@ -159,7 +160,19 @@ exports.dataForActions = {
     },
     publish: function(payload) {
         return payload;
-    }
+    },
+    close: function(payload) {
+        var data = payload;
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '提问关闭后将无法恢复，是否确定关闭该提问？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
 };
 
 exports.actionCallbacks = {
@@ -192,6 +205,11 @@ exports.actionCallbacks = {
         this.app.message.success('删除成功！');
         this.module.dispatch('delrefresh', { id: trends.id, trendsType: 1 });
     },
+    close: function(data) {
+        var question = data[0];
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('closerefresh', question);
+    },
     publish: function() {
         this.app.message.success('操作成功！');
         this.module.dispatch('page');
@@ -209,6 +227,11 @@ exports.dataForTemplate = {
                 obj.member.headPortrait = 'images/default-userpic.png';
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
+            }
+            if (obj !== null && obj.closeStatus) {
+                obj.show = 3;
+            } else {
+                obj.show = 2;
             }
             page.push(obj);
         });
