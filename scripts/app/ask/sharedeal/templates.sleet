@@ -3,6 +3,8 @@ module > .watch-detail1-page
     .watch-detail1-total(data-region="shareaudit")
 
 view('shareaudit')
+    .title-img.pull-left.layout-mr-small
+        img.title-radius(src=headPhoto)
     .title-main    
         .h5 > echo(shareaudit.question.title)
         .detail1-content.m-top.small-font

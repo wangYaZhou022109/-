@@ -4,7 +4,7 @@ module > .discuss-exam-page
 
 view('discussaudit')
     .title-img.pull-left.layout-mr-small
-        img.title-radius(src="images/3.png")
+        img.title-radius(src=headPhoto)
     .title-main
         .detail1-content.m-top.small-font > echo(discussaudit.content)
     .detail-img.layout-mt-small
@@ -13,7 +13,7 @@ view('discussaudit')
         span > echo(discussaudit.member.fullName)
         span.sub-title 讨论时间：
         span.sub-title > date(discussaudit.createTime)
-    .detail1-alink.layout-mt-small > echo('来自问题：') + echo(discussaudit.question.title)
+    .text-main-color.detail1-alink.layout-mt-small > echo('来自问题：') + echo(discussaudit.question.title)
     textarea.w-full.layout-mt-small(rows="5" placeholder="审核备注")
 #  module > .course-page
 #      div(data-region='discussaudit' style='height:100%;')
