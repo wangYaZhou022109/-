@@ -84,7 +84,7 @@ view('main')
                                         li#close
                                             i.iconfont.icon-close
                                             span 关闭
-                        .comment-text.color-main > echo(content)
+                        .comment-text.color-main > @echo(content)
                         .comment-operation.sub-text
                             .pull-left > dateTime(createTime)
                             .text-right

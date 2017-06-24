@@ -60,7 +60,7 @@ view('main')
                                 a(href='#') > echo( member.fullName)
                                 span > echo(organization.name)
                             .text-right > dateTime(createTime)
-                        .comment-text > echo(content)
+                        .comment-text > @echo(content)
                         .comment-operation
                             .pull-left
                                 compare(praise1 'eq' true)
