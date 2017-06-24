@@ -2,6 +2,7 @@
 exports.routes = {
     index: 'showIndex',
     'gensee/detail/:id': 'showLiveDetails',
+    'gensee/preview/:id': 'showLivePreview',
     'class-details': 'showClassDetails',
     'class-register': 'showClassRegister',
     'classmate-book': 'showClassmatebook',
@@ -14,6 +15,10 @@ exports.showIndex = function() {
 
 exports.showLiveDetails = function(targetId) {
     return this.app.show('content', 'activity/live-details', { genseeId: targetId });
+};
+
+exports.showLivePreview = function(targetId) {
+    return this.app.show('content', 'activity/live-preview', { genseeId: targetId });
 };
 
 exports.showClassDetails = function() {
