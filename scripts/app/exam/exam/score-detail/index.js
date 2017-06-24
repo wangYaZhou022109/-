@@ -195,7 +195,7 @@ var setOptions = {
                             };
                         this.data = _.map(questions, function(q) {
                             var values = [];
-                            if (q.answerRecord) {
+                            if (q.answerRecord && q.answerRecord.answer) {
                                 if (q.type === 1 || q.type === 2) {
                                     values = choose(q);
                                 } else {
@@ -204,7 +204,7 @@ var setOptions = {
                             } else if (q.type === 6) {
                                 values = _.map(q.subs, function(s) {
                                     var subValues = [];
-                                    if (s.answerRecord) {
+                                    if (s.answerRecord && s.answerRecord.answer) {
                                         if (s.type === 1 || s.type === 2) {
                                             subValues = choose(s);
                                         } else {

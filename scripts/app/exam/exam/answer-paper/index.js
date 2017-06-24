@@ -324,8 +324,6 @@ var setOptions = {
                         state.init(exam.data);
                         countDown.init();
                     }
-                }, function() {
-                    showMessage.call(me);
                 });
             },
             saveAnswer: function(payload) {

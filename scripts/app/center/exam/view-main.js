@@ -125,7 +125,9 @@ exports.dataForTemplate = {
                     14: [retryButton],
                     15: [],
                     16: [retryButton, toDetailButton],
-                    17: [toDetailButton]
+                    17: [toDetailButton],
+                    18: [],
+                    19: [toDetailButton]
                 };
             return D.assign(e, {
                 status: getRecordStatus(e),
@@ -134,7 +136,7 @@ exports.dataForTemplate = {
                     { score: e.examRecord.score ? e.examRecord.score / 100 : 0 },
                     { totalScore: e.examRecord.totalScore ? e.examRecord.totalScore / 100 : 0 }
                 ),
-                buttons: buttonMap[P.getUserStatusOfExam(e)],
+                buttons: buttonMap[P.getUserStatusOfExam(e, true)],
             });
         });
     }
