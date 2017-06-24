@@ -2,7 +2,7 @@ var beforeExam, processExam, afterExam, isSignUpType,
     needSignUp, canExamMore, canViewDetailImmd, overExam,
     signUpExam, isInApplcantTimeRange, waitApprove, examCanceled,
     isFirstTimeToExam, overApplcantTime, hasExamed, paperProcess,
-    isReset, examStarting;
+    isReset, examStarting, canViewDetail, currentRecordOver, currentRecordStarting;
 
 // 1: 报名考试， 需要报名
 // 2: 报名考试， 待审核
@@ -22,8 +22,17 @@ var beforeExam, processExam, afterExam, isSignUpType,
 // 16: 答卷完，能重新考，试卷处理中
 // 17: 答卷完，不能重新考，试卷处理中
 // 18: 重置
-exports.getUserStatusOfExam = function(exam) {
+// 19: 个人中心 考试撤销 如果考过，可以查看详情
+// 20: 最新考试已完成，不能马上查看详情，可以多次考
+exports.getUserStatusOfExam = function(exam, isPersonCenter) {
     var signUp = signUpExam(exam);
+
+    //  个人中心 考试撤销 如果考过，可以查看详情
+    if (isPersonCenter) {
+        if (examCanceled(exam) && canViewDetail(exam)) {
+            return 19;
+        }
+    }
 
     if (examCanceled(exam)) {
         return 12;
@@ -56,7 +65,9 @@ exports.getUserStatusOfExam = function(exam) {
             return 17;
         } else if (overExam(exam) && canViewDetailImmd(exam)) {
             return 7;
-        } else if (overExam(exam) && canExamMore(exam)) {
+        } else if (currentRecordOver(exam) && canExamMore(exam)) {
+            return 20;
+        } else if (currentRecordStarting(exam) && canExamMore(exam)) {
             return 14;
         } else if (isFirstTimeToExam(exam)) {
             if (examStarting(exam)) {
@@ -137,6 +148,19 @@ overExam = function(exam) {
         (exam.examRecord && exam.examRecord.status < 4 && exam.examRecord.submitTime);
 };
 
+//  判断最新的考试记录已经结束
+currentRecordOver = function(exam) {
+    return exam.examRecord && exam.examRecord.status > 4;
+};
+
+//  已经考过，最新考试记录为进行中
+currentRecordStarting = function(exam) {
+    return exam.examRecord
+        && exam.examRecord.status > 1
+        && exam.examRecord.status <= 4
+        && exam.examRecord.startTime;
+};
+
 isInApplcantTimeRange = function(exam) {
     var currentTime = new Date().getTime();
     return currentTime >= exam.applicantStartTime && currentTime <= exam.applicantEndTime;
@@ -177,3 +201,9 @@ examStarting = function(exam) {
         && exam.examRecord.startTime
         && exam.examRecord.status <= 4;
 };
+
+//  可以查看详情
+canViewDetail = function(exam) {
+    return exam.examRecord && exam.examRecord.status >= 5;
+};
+
