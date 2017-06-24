@@ -16,7 +16,7 @@ view('detail')
 view('condition')
     .top
         .left.border.around
-            .item.pointer.active#all 汇总
+            .item.pointer#all 汇总
             .item.pointer#previousWeek 近一周
             .item.pointer#previousThreeMonth 近三个月
             .item.pointer#previousYear 近一年
