@@ -8,7 +8,7 @@ D.ComponentManager.register('uploader', function(view, el, options) {
         url = model.getFullUrl(),
         opt = D.assign({}, {
             url: url,
-            runtimes: 'html5,flash',
+            runtimes: 'html5,flash,silverlight,html4',
             chunk_size: '1024mb',
             rename: true,
             dragdrop: false,

@@ -1,19 +1,124 @@
 #!handlebars
 
-module > .home-page.layout.relative
-    div(data-region='main')
-    # .banner(data-region='banner')
-    # .banner-notice(data-region='banner-notice')
-    # .min-banner(data-region='min-banner')
-    # .section-news(data-region='news')
-    # .section(data-region='layout-4')
-    # .section(data-region='layout-3')
-    # .section(data-region='layout-5')
-    # .section(data-region='layout-1')
-    # .section(data-region='layout-2')
-    # .section(data-region='lecture')
-    # .section(data-region='rank')
+module
+    .home-page.layout.relative
+        div(data-region='main')
+    div(data-region='first-login')
 
 view('main')
     each(modules)
         div(data-dynamic-key=id)
+
+view('first-login')
+    .first-login.hidden
+        .dialog-overlay
+        .dialog-layout
+            .edit-info-page
+
+                .base-info
+                    form.vertical
+                        .small-font
+                            strong 张三丰
+                            | ，您好！
+                            br
+                            | 欢迎来到网大，为保证您的数据准确性，请您核对您的基本信息。如有错误，请给予反馈，管理员会尽快为你处理！
+                        hr
+                        .form
+                            .pic
+                                .user-pic > img(src='images/default-cover/default_user.png')
+                                .btn.block#select 修改头像
+                            .info
+                                .form-row
+                                    .pull-left.w-half
+                                        label 姓&#12288;&#12288;名：
+                                        .inline-block 张三丰
+                                    .pull-left.w-half
+                                        label 性&#12288;&#12288;别：
+                                        .inline-block 男
+
+                                .form-row
+                                    .pull-left.w-full
+                                        label 身份证号：
+                                        .inline-block 445216521580025512
+
+                                .form-row
+                                    .pull-left.w-half
+                                        label 岗&#12288;&#12288;位：
+                                        .inline-block > select.input
+                                            option 请选择
+                                    .pull-left.w-half
+                                        label 员工编号：
+                                        .inline-block 880012356
+
+                                .form-row
+                                    .pull-left.w-half
+                                        label 单&#12288;&#12288;位：
+                                        .inline-block 中国移动通信集团
+                                    .pull-left.w-half
+                                        label 部&#12288;&#12288;门：
+                                        .inline-block 移动学习研发中心
+                                .form-row
+                                    .pull-left.w-half
+                                        label 手&#12288;&#12288;机：
+                                        .inline-block 13688006612
+                                    .pull-left.w-half
+                                        label 邮&#12288;&#12288;箱：
+                                        .inline-block test@test.com
+                        hr
+                        .text-center
+                            .btn.m-right 确定
+                            a(href='javascript:;') 反馈
+
+                .base-info.hidden
+                    form.vertical
+                        h3 意见反馈
+                        hr
+                        .form
+                            .form-row
+                                .pull-left.w-full
+                                    textarea(rows='8' placeholder='填下你的想反馈的意见，提交给我们，我们会尽早为你解决')
+                            .form-row
+                                a(href='javascript:;') > .iconfont.icon-image + | 上传图片
+                        hr
+                        .text-center
+                            .btn.m-right 提交
+                            a.sub-text(href='javascript:;') 取消
+
+                .base-info.hidden
+                    form.vertical
+                        .small-font.text-center
+                            a.pull-right(href='javascript:;') 换一批
+                            | 选择你喜欢的，让我们更了解你
+                        hr
+                        .form
+                            .form-row > .choise-tags-page
+                                ul.list
+                                    li.selected 标签1
+                                    li 生活
+                                    li 科学教育
+                                    li 发展经济学
+                                    li 社会民生
+                                    li 职业发展
+                                    li 博弈论
+                                    li 生活
+                                    li 科学教育
+                                    li 发展经济学
+                                    li 社会民生
+                                    li 职业发展
+                                    li 博弈论li 生活
+                                    li 科学教育
+                                    li 发展经济学
+                                    li 社会民生
+                                    li 职业发展
+                                    li 博弈论
+                                    li 发展经济学
+                                    li 社会民生
+                                .clearfix
+                                    .pull-left.text 已选：
+                                    ul.selected
+                                        li 生活
+                                        li 科学教育
+                        hr
+                        .text-center
+                            .btn.m-right 确定
+                            a.sub-text(href='javascript:;') 跳过直接进入首页

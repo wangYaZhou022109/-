@@ -144,6 +144,11 @@
             }
         }
 
+        & .hot-tag {
+            height: 100px;
+            overflow: hidden;
+        }
+
         & .user-pic {
             width: 30px;
             height: 30px;
