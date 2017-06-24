@@ -4,8 +4,9 @@
     }
     & .comment-list {
         border-bottom: var(--border-color);
-        & .comment-list {
-            margin-top: calc(var(--font-size) * 2);
+        margin-top: calc(var(--font-size) * 2);
+        & ul {
+            margin-bottom: var(--input-height);
         }
 
         & li {
@@ -47,17 +48,19 @@
                     top: calc(var(--space)  - 4 );
                     border: 1px solid var(--border-color);
                     background-color:var(--bg-color);
-                    transform:scale(0.75);
+                    transform:scale(0.8);
                     & .icon-triangle-up {
                         position: absolute;
                         right: calc(var(--space) / 2);
                         top: -calc(var(--space) + 1);
                         color: var(--border-color);
                     }
-
+                    & ul {
+                        margin-bottom: 0;
+                    }
 
                     & li {
-                        transform:scale(0.8);
+                        transform:scale(0.9);
                         color: var(--font-tip-color);
                         height: var(--large-space);
                         line-height:  var(--large-space);
@@ -117,7 +120,7 @@
             & .item {
                 display: inline-block;
                 padding: 0;
-                margin-left: var(--base-gap);
+                margin-left: var(--input-height);
                 cursor: pointer;
                 color: var(--font-tip-color);
 
@@ -126,6 +129,9 @@
                 }
                 &.inline {
                     margin-left: var(--space);
+                }
+                & .icon-add {
+                    transform: scale(1);
                 }
                 & .icon-q-zone {
                     color: blue;
@@ -142,7 +148,7 @@
                 right: 0;
             }
             & ul.topic-item {
-                background-color: var(--bg-color);
+                background-color: var(--bg-color-2);
                 padding: 0 calc(var(--space) * 2);
             }
              & ul.topic-item:last-child .comment-operation {
@@ -163,10 +169,10 @@
 
             &.show {
                 @apply --fade-in;
-
-                margin: 1em 0;
+                margin-top: 1em;
                 display: block;
                 /*height: 3em;*/
+
             }
 
             & textarea {

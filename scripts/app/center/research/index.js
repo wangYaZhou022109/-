@@ -34,6 +34,9 @@ exports.store = {
         },
         getResearchById: function(payload) {
             return _.find(this.models.researchRecords.data, ['id', payload.id]).researchQuestionary;
+        },
+        enterSearch: function(payload) {
+            return this.module.dispatch('search', payload);
         }
     }
 };

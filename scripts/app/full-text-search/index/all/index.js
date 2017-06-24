@@ -127,7 +127,7 @@ getCourses = function(option) {
         state = this.models.state;
     courses.params = {
         type: 0,
-        clientType: 1,
+        publishClient: 1,
         searchContent: option.searchContent,
         topicId: option.topicId
     };
@@ -142,7 +142,7 @@ getSubjects = function(option) {
         state = this.models.state;
     subjects.params = {
         type: 2,
-        clientType: 1,
+        publishClient: 1,
         searchContent: option.searchContent,
         topicId: option.topicId
     };

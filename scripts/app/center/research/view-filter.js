@@ -15,7 +15,8 @@ exports.dataForTemplate = {
 };
 
 exports.actions = {
-    'click search': 'search'
+    'click search': 'search',
+    'keypress name': 'enterSearch'
 };
 
 exports.dataForActions = {
@@ -23,6 +24,10 @@ exports.dataForActions = {
         var data = payload;
         data.status = this.bindings.search.data.status;
         return data;
+    },
+    enterSearch: function(payload, e) {
+        if (e.keyCode !== 13) return false;
+        return payload;
     }
 };
 

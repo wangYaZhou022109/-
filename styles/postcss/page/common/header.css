@@ -47,6 +47,7 @@
         & .item {
             display: inline-block;
             position: relative;
+            z-index: 20;
             margin-right: var(--large-space);
 
             &:nth-last-of-type(1) {
