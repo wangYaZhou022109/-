@@ -5,16 +5,16 @@ module
 
 view('main')
     .mt-1
-        #  .checkbox > input(type='checkbox' id='waitTodo-2')('checked')&if(state.checked) + label(for='waitTodo-2')  
+        #  .checkbox > input(type='checkbox' id='waitTodo-2')('checked')&if(state.checked) + label(for='waitTodo-2')
         #  span 显示待评卷
         .checkbox-slider.inline-block.m-right > input(type='checkbox' id='waitTodo-2')('checked')&if(state.checked) + label(for='waitTodo-2') + sapn 显示待评卷
-    ul.list 
+    ul.list
         each(waitMarkPapers)
             li
                 .clearfix
                     .pull-left
                         span.m-right > echo('来自') + map('exam-source-type', examRecord.exam.sourceType)
-                        span.color-ing > echo(statusDec)
+                        span.inline-block.padding-s.custom-bg-color-4 > echo(statusDec)
                     .pull-right.text-tips
                         if(waitMark)
                             echo('提交时间：')
@@ -37,7 +37,7 @@ view('main')
             #showMore.empty(style='cursor:pointer;') 查看更多
         compare(showMore 'eq' 2)
             .empty 没有更多了
-    
+
     #  compare(showMore 'eq' 0)
     #      .empty 暂无内容
     #  compare(showMore 'eq' 1)

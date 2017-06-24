@@ -2,7 +2,6 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    params: false,
     myshares: true,
     page: true,
     down: false
@@ -12,23 +11,24 @@ exports.events = {
     'click myshares-details-*': 'showDetails',
     'click discuss-*': 'discuss',
     'click shareTo-*': 'shareTo',
-    'click myshares-sharedetails-*': 'showShare'
+    'click myshares-sharedetails-*': 'showShare',
 };
 
 exports.handlers = {
     showDetails: function(payload) {
-       // var region,
-       //     data = { };
-       // var el = $(target).parents('.comment-list')[0];
-        var data = { },
-            id = payload;
-        // console.log(payload);
-        if (id.indexOf('_') !== -1) {
-            data = id.split('_');
-            // region = new D.Region(this.app, this.module, el, data[1]);
-            // region.show('ask/myquiz/details', { id: data[1] });
-            this.app.show('content', 'ask/myshares/details', { id: data[1] });
-        }
+    //    // var region,
+    //    //     data = { };
+    //    // var el = $(target).parents('.comment-list')[0];
+    //     var data = { },
+    //         id = payload;
+    //     // console.log(payload);
+    //     if (id.indexOf('_') !== -1) {
+    //         data = id.split('_');
+    //         // region = new D.Region(this.app, this.module, el, data[1]);
+    //         // region.show('ask/myquiz/details', { id: data[1] });
+    //         this.app.show('content', 'ask/myshares/details', { id: data[1] });
+    //     }
+        this.app.show('content', 'ask/myshares/sharedetails', { id: payload });
     },
     showShare: function(payload) {
        // var region,
@@ -125,6 +125,7 @@ exports.actions = {
     'click publish-*': 'publish',
     'click praise-*': 'praise',
     'click unpraise-*': 'unpraise',
+    'click close-question-*': 'close',
 };
 
 exports.dataForActions = {
@@ -157,6 +158,18 @@ exports.dataForActions = {
             });
         });
     },
+    close: function(payload) {
+        var data = payload;
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '文章关闭后将无法恢复，是否确定关闭该文章？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
     publish: function(payload) {
         return payload;
     },
@@ -177,6 +190,16 @@ exports.dataForActions = {
 };
 
 exports.actionCallbacks = {
+    close: function(data) {
+        var myshare = data[0];
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('closerefresh', myshare);
+    },
+    shut: function(data) {
+        var trends = data[0];
+        this.app.message.success('删除成功！');
+        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
+    },
     follow: function(data) {
         var concern = data[0];
         var unfollow = this.$('trend-unfollow-' + concern.concernType + '_' + concern.concernId);
@@ -201,11 +224,6 @@ exports.actionCallbacks = {
             me.module.dispatch('refresh');
         }, 1000);
     },
-    shut: function(data) {
-        var trends = data[0];
-        this.app.message.success('删除成功！');
-        this.module.dispatch('delrefresh', { id: trends.id, trendsType: 2 });
-    },
     publish: function() {
         this.app.message.success('操作成功！');
         this.module.dispatch('page');
@@ -219,10 +237,10 @@ exports.actionCallbacks = {
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var page = data.page;
+        var myshares = data.myshares;
+        var page = this.bindings.page.data;
         var me = this;
-        // var flag = true;
-        _.forEach(page, function(value) {
+        _.forEach(myshares, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
@@ -230,6 +248,12 @@ exports.dataForTemplate = {
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
+            if (obj !== null && obj.closeStatus) {
+                obj.show = 3;
+            } else {
+                obj.show = 2;
+            }
+            page.push(obj);
         });
         return page;
     },

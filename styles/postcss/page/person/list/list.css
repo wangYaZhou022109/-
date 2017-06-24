@@ -24,7 +24,7 @@
 
         & .item {
             display: inline-block;
-            padding: var(--space);
+            padding: 0 var(--space);
             cursor: pointer;
 
             &:last-child {
@@ -119,7 +119,7 @@
         & .img {
             float: left;
             margin-right: var(--large-space);
-            width: calc(var(--large-space) * 2.1);
+            width: calc(var(--font-size) * 5);
         }
         & .info-row {
             float: left;

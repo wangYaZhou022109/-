@@ -4,7 +4,7 @@ module
 
 view('list')
     compare(page.length 'lt' 1)
-        .text-center
+        .text-center(id='test')
             .content(style="margin: 15% 0")
                 img(src="images/nothing.png")
                 p.text-center 暂无与你相关的信息哦！
@@ -83,6 +83,7 @@ view('list')
                                 input.input(type='hidden' name='organizationId' value=createUser.organizationId)
                                 input.input(type='hidden' name='id' value=questionId)
                                 .btn(id='publish-' + questionId) > string('publish')
+                            div(data-dynamic-key='comment-area_1_' + questionId)
                         compare(trendsType 'eq' '2')
                             compare(isPraise 'gt' 0)
                                 .item(id='unpraise-3_'+ questionId data-name='id' data-value='3_' + questionId)
@@ -121,6 +122,7 @@ view('list')
                                 input.input(type='hidden' name='organizationId' value=createUser.organizationId)
                                 input.input(type='hidden' name='id' value=questionId)
                                 .btn(id='publish-' + id) > string('publish')
+                            div(data-dynamic-key='comment-area_2_' + questionId)
                         compare(trendsType 'eq' '3')
                             compare(isPraise 'gt' 0)
                                 .item(id='unpraise-1_'+ discussId data-name='id' data-value='1_' + discussId)
@@ -149,6 +151,8 @@ view('list')
                                 input.input(type='hidden' name='id' value=discussId)
                                 input.input(type='hidden' name='toUserId' value=createUserId)
                                 .btn(id='reply-' + id ) > string('publish')
+                            div(data-dynamic-key='comment-area_3_' + discussId)
+
     .none-more
         p 没有更多了
 

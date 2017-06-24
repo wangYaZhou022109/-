@@ -21,7 +21,7 @@ view('filter')
                 .item#selectStatus-1(class=if(search.statusb 'active')) > span 已通过
                 .item#selectStatus-2(class=if(search.statusc 'active')) > span 被拒绝
         .list-search
-            input.input(name='name' value=search.name  placeholder='请输入您要搜索的内容名称')
+            input.input#searchName(name='name' value=search.name  placeholder='请输入您要搜索的内容名称')
             .btn#searchByName > i.iconfont.icon-search
 
 view('main')

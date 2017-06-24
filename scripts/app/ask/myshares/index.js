@@ -11,6 +11,7 @@ exports.store = {
         unfollow: { url: '../ask-bar/concern/unfollow' },
         shut: { url: '../ask-bar/my-share' },
         discuss: { url: '../ask-bar/question-discuss' },
+        close: { url: '../ask-bar/my-share/close' },
         params: { data: { isOverdue: '1' } },
         page: {
             data: [],
@@ -19,6 +20,28 @@ exports.store = {
                 findById: function(id) {
                     var myshares = this.module.store.models.page.data;
                     return _.find(myshares, ['id', id]);
+                },
+                delrefresh: function(id, trendsType) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        if (trendsType === 2 && d.id !== id) {
+                            newData.push(d);
+                        }
+                    });
+                    return newData;
+                },
+                closerefresh: function(id, type) {
+                    var newData = [];
+                    _.forEach(this.data, function(d) {
+                        var store = d;
+                        if (type === 2 && d.id === id) {
+                            store.show = 3;
+                            newData.push(store);
+                        } else {
+                            newData.push(store);
+                        }
+                    });
+                    return newData;
                 },
                 praise: function() {
                     var data = [];
@@ -69,6 +92,37 @@ exports.store = {
         }
     },
     callbacks: {
+        closerefresh: function(payload) {
+            var myshares = this.models.myshares,
+                page = this.models.page,
+                id = payload.id,
+                data = this.models.page.closerefresh(id, payload.type);
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            myshares.set(params);
+            return this.post(myshares);
+        },
+        close: function(payload) {
+            this.models.close.set(payload);
+            return this.put(this.models.close);
+        },
+        delrefresh: function(payload) {
+            var id = payload.id,
+                page = this.models.page,
+                myshares = this.models.myshares,
+                trendsType = payload.trendsType,
+                data = this.models.page.delrefresh(id, trendsType);
+            var params = this.models.page.params;
+            page.data = [];
+            page.data = data;
+            params.id = 'null';
+            params.page++;
+            myshares.set(params);
+            return this.post(myshares);
+        },
         refresh: function() {
             this.models.callback();
         },
@@ -118,13 +172,11 @@ exports.store = {
         page: function() {
             var myshares = this.models.myshares;
             var params = this.models.page.params;
-            var page = this.models.page;
-            // var me = this;
             params.id = 'null';
             myshares.set(params);
             this.post(myshares).then(function() {
-                page.data.push.apply(page.data, myshares.data);
-                page.changed();
+                // page.data.push.apply(page.data, myshares.data);
+                // page.changed();
             });
         },
         follow: function(payload) {
@@ -137,18 +189,23 @@ exports.store = {
             unfollow.set(payload);
             return this.put(unfollow);
         },
-        shut: function(payload) {
-            var shut = this.models.shut,
-                page = this.models.page,
-                me = this;
+        // shut: function(payload) {
+        //     var shut = this.models.shut,
+        //         page = this.models.page,
+        //         me = this;
 
+        //     shut.set(payload);
+        //     return this.chain(me.put(this.models.shut), function() {
+        //         page.data = _.filter(page.data, function(item) {
+        //             return item.id !== payload.id;
+        //         });
+        //         page.changed();
+        //     });
+        // },
+        shut: function(payload) {
+            var shut = this.models.shut;
             shut.set(payload);
-            return this.chain(me.put(this.models.shut), function() {
-                page.data = _.filter(page.data, function(item) {
-                    return item.id !== payload.id;
-                });
-                page.changed();
-            });
+            return this.put(shut);
         },
         publish: function(payload) {
             var discuss = this.models.discuss,
@@ -178,12 +235,11 @@ exports.store = {
 exports.afterRender = function() {
     var me = this;
     $(window).scroll(function() {
-        var page = me.store.models.page.params.page;
         var size = me.store.models.page.params.size;
         var scrollTop = $(document).scrollTop();
         var clientHeight = $(window).height();
         var scrollHeight = $(document).height();
-        if (page * size === me.store.models.page.data.length) {
+        if (size === me.store.models.myshares.data.length) {
             me.store.models.page.params.page++;
             me.dispatch('page');
         }
@@ -192,7 +248,7 @@ exports.afterRender = function() {
         }
     });
     this.dispatch('set', this.renderOptions.callback);
-    this.dispatch('init');
     this.dispatch('speech');
+    this.dispatch('page');
 };
 

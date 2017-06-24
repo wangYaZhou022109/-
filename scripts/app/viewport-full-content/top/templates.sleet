@@ -103,7 +103,7 @@ view('shortcut')
                                 img(src='images/default-cover/default_user.png')
                         .user-info-main.inline-block
                             .item
-                                .inline-block.common-title > echo(Global.currentUser.name)
+                                .inline-block.common-title > echo(Global.currentUser.fullName)
                                 .inline-block.lv > echo(integral.integralGrade.gradeName)
                             .item.small-font
                                 a.mr-1(href='#/center/index') 进入个人中心

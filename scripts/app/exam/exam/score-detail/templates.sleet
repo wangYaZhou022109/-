@@ -10,12 +10,15 @@ module
 view('side')
     ul.list > each(types)
         li
-            .list-title(id='list-item-' + @index) > i.iconfont.icon-type.m-right + echo(name '(共' totalScore '分)')
+            .list-title(id='list-item-' + @index)
+                i.iconfont.icon-type
+                span.text-tips.m-right > i.iconfont(class='icon-triangle-up' + if(isCurrent '' 'hidden')) + i.iconfont(class='icon-triangle-down' + if(isCurrent 'hidden' ''))
+                echo(name '(共' totalScore '分)')
             div(class='min-btn-groups ' + if(isCurrent '' 'hidden'))
                 each(questions)
                     compare(status 'eq' 'current')
                         a.list-item.current(id='question-'+id href='#question-' + id) > echo(index)
-                   
+
                     compare(status 'eq' 'check')
                         a.list-item(id='question-'+id href='#question-' + id) > echo(index)
 

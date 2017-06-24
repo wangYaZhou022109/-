@@ -43,7 +43,7 @@ exports.afterRender = function() {
     }, 1000 * 60);
 
     $(window).on('beforeunload', function() {
-        me.commitProgress();
+        return me.commitProgress();
     });
     $(window).on('blur', function() {
         player.pause();
