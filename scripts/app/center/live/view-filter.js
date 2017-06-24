@@ -38,3 +38,15 @@ exports.handlers = {
         this.module.dispatch('search', { subject: name });
     }
 };
+
+exports.actions = {
+    'keypress live-name': 'enterSearch'
+};
+
+exports.dataForActions = {
+    enterSearch: function(payload, e) {
+        var name = $(this.$$('[name="live-name"]')).val();
+        if (e.keyCode !== 13) return false;
+        return { subject: name };
+    }
+};

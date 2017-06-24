@@ -74,13 +74,13 @@
         & .news-list {
             padding: 0 0 0 1em;
             background: var(--bg-color);
-            line-height: 2.5em;
+            line-height: var(--input-height);
             border: none;
 
             & .icon {
                 float: right;
                 margin: 0 2px 0 0;
-                line-height: 3em;
+                line-height: var(--input-height);
                 background: var(--bg-color-3);
 
                 &:hover {
@@ -91,6 +91,11 @@
                 &:first-child {
                     margin: 0;
                 }
+            }
+            & .tip-new {
+                display: inline-block;
+                line-height: 1;
+                padding: 2px;
             }
         }
     }

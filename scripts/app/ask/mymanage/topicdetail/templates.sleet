@@ -5,7 +5,7 @@ module > .ask-page > .container
         .page-side.side-min
             div(data-region='top')
             div(data-region='relevantexperts')
-            div(data-region='relatedquestions')    
+            div(data-region='relatedquestions')
         .page-main
             div(data-region='topicdetail')
             div(data-region='menu')
@@ -16,7 +16,7 @@ view('topicdetail')
         .w-full
             h4.text-overflow > echo(topicdetail.name)
             .info > echo(topicdetail.description)
-    
+
 view('menu')
     .tabs.line.mb-1 > ul
         compare(state.menu 'eq' 'news')
@@ -31,19 +31,20 @@ view('menu')
             li(id='menu-reply' href='javascript:;')(class ='active') > echo('等待回答')
         else
             li(id='menu-reply' href='javascript:;') > echo('等待回答')
-       
-view('list') 
+
+view('list')
     .tabs-cont > ul
         li.tabs-cont-item.active#tabs-cont-item
-            .comment-list.ask-list > ul
-                div(data-dynamic-key=state.menu)
+            .alldynamic
+                .comment-list.ask-list > ul
+                    div(data-dynamic-key=state.menu)
 view('top')
     .section
         compare(topicdetail.concern 'eq' true)
             .btn.block.layout-mt-small.big(id='unfollow-' data-name='id' data-value=topicdetail.id) > string('unfollow')
         else
             .btn.block.layout-mt-small.big(id='follow-' data-name='id' data-value=topicdetail.id) > string('my-follow')
-    div(data-dynamic-key=followcount.menu) 
+    div(data-dynamic-key=followcount.menu)
 
 view('relevantexperts')
     .section
@@ -59,5 +60,5 @@ view('relatedquestions')
         span.h3 > echo('热门问题')
         .layout-mt-small.m-top
             each(hotquestion)
-                .block.layout-mt-small.m-top 
+                .block.layout-mt-small.m-top
                     a.text-overflow(href='#/ask/questiondetails/'+id)> echo(title)
