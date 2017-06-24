@@ -89,8 +89,13 @@ exports.buttons = [
             }
             D.assign(opt, payload);
             return this.dispatch('save', opt).then(function() {
+                var callback = me.renderOptions.callbacks;
                 if (opt.id) {
-                    me.app.message.success('修改成功，等待审核');
+                    if (callback) {
+                        callback();
+                    } else {
+                        me.app.message.success('修改成功，等待审核');
+                    }
                 } else {
                     me.app.message.success('上传成功，等待审核');
                 }
