@@ -1,6 +1,6 @@
 var $ = require('jquery'),
-    sensitive = require('./app/util/sensitive'),
-    _ = require('lodash/collection');
+    sensitive = require('./app/util/sensitive');
+    // _ = require('lodash/collection');
 
 exports.bindings = {
     comments: true,

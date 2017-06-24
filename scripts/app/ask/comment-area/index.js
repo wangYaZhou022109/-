@@ -20,8 +20,8 @@ exports.store = {
         state: {}
     },
     callbacks: {
-        init: function(payload) {
-            console.log(payload);
+        init: function() {
+            // console.log(payload);
         },
         setTop: function(payload) {
             var comment = this.models.comment;
