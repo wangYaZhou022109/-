@@ -6,16 +6,11 @@ exports.items = {
 
 exports.store = {
     models: {
-        comments: {
-            url: '../system/comment/front',
-            root: 'items',
-            type: 'pageable'
+        discussList: {
+            url: '../ask-bar/discuss/discussList'
         },
-        comment: {
-            url: ''
-        },
-        reply: {
-            url: '../system/comment/reply'
+        replyList: {
+            url: '../ask-bar/question-reply/replyList'
         },
         state: {}
     },

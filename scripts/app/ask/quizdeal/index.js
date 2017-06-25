@@ -10,6 +10,7 @@ exports.store = {
         audit: { url: '../ask-bar/questionReviewed' },
         pass: { url: '../ask-bar/pending-audit/pass' },
         out: { url: '../ask-bar/pending-audit/out' },
+        down: { url: '../human/file/download' },
     },
     callbacks: {
         init: function(paylaod) {

@@ -1,5 +1,7 @@
+var _ = require('lodash');
 exports.bindings = {
-    discussaudit: true
+    discussaudit: true,
+    down: false,
 };
 exports.events = {
 };
@@ -34,6 +36,13 @@ exports.dataForTemplate = {
     discussaudit: function(data) {
         var discussaudit = data.discussaudit;
         return discussaudit;
-    }
-
+    },
+    headPhoto: function(data) {
+        var discussaudit = data.discussaudit,
+            headPhoto = 'images/default-userpic.png';
+        if (!_.isEmpty(discussaudit)) {
+            headPhoto = this.bindings.down.getFullUrl() + '?id=' + discussaudit.member.headPortrait;
+        }
+        return headPhoto;
+    },
 };

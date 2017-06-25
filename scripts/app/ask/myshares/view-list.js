@@ -28,7 +28,7 @@ exports.handlers = {
     //         // region.show('ask/myquiz/details', { id: data[1] });
     //         this.app.show('content', 'ask/myshares/details', { id: data[1] });
     //     }
-        this.app.show('content', 'ask/myshares/sharedetails', { id: payload });
+        this.app.show('content', 'ask/myshares/details', { id: payload });
     },
     showShare: function(payload) {
        // var region,
