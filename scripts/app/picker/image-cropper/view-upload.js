@@ -2,7 +2,7 @@ var D = require('drizzlejs');
 
 exports.title = '请选择图片';
 
-exports.large = true;
+exports.cropper = true;
 
 exports.bindings = {
     img: 'changeImageCropper',

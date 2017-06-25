@@ -11,7 +11,7 @@ view('layout') > .container
         .layout-1
             compare(contents.length 'gt' 0)
                 inner(contents '1')
-                    .big-pic > a.normal(href=dataUrl) > .content
+                    .big-pic > a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .content
                         .img > img(src=imageUrl)
 
                 .base-list
@@ -26,7 +26,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -35,7 +35,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 3)
                             inner(contents '4')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -43,7 +43,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 4)
                             inner(contents '5')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -52,7 +52,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 5)
                             inner(contents '6')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -60,7 +60,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 6)
                             inner(contents '7')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -72,7 +72,7 @@ view('layout') > .container
         .layout-2
             compare(contents.length 'gt' 0)
                 inner(contents '1')
-                    .big-pic > a.normal(href=dataUrl) > .content
+                    .big-pic > a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .content
                         .img >  img(src=imageUrl style='height: 100%;')
                         .bottom
                             .title > echo(dataName)
@@ -81,7 +81,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 1)
                             inner(contents '2')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -89,7 +89,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -98,7 +98,7 @@ view('layout') > .container
                     .list-bar.big-height
                         compare(contents.length 'gt' 3)
                             inner(contents '4')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .bottom
                                         .title > echo(dataName)
@@ -108,7 +108,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 4)
                             inner(contents '5')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -116,7 +116,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 5)
                             inner(contents '6')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -128,7 +128,7 @@ view('layout') > .container
         .layout-3
             compare(contents.length 'gt' 0)
                 inner(contents '1')
-                    .big-pic > a.normal(href=dataUrl) > .content
+                    .big-pic > a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .content
                         .img >  img(src=imageUrl)
                         .bottom
                             .title > echo(dataName)
@@ -146,7 +146,7 @@ view('layout') > .container
                     .list-bar.big-width
                         compare(contents.length 'gt' 1)
                             inner(contents '2')
-                                a.normal(href=dataUrl) > .item.p-bottom > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item.p-bottom > .content
                                     .img >  img(src=imageUrl)
                                     .bottom
                                         .title > echo(dataName)
@@ -161,7 +161,7 @@ view('layout') > .container
                                     .home-tag > .tag > span > map('home-data-type' dataType)
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item.p-top > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item.p-top > .content
                                     .bottom
                                         .title > echo(dataName)
                                         .descoration.sub-text > @echo(dataSummary)
@@ -177,7 +177,7 @@ view('layout') > .container
                     .list-bar.big-height
                         compare(contents.length 'gt' 3)
                             inner(contents '4')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .bottom
                                         .title > echo(dataName)
@@ -197,12 +197,12 @@ view('layout') > .container
             compare(contents.length 'gt' 0)
                 .big-pic
                     inner(contents '1')
-                        .item-bar.above > a.normal(href=dataUrl) > .content
+                        .item-bar.above > a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .content
                             .img >  img(src=imageUrl)
                     .item-bar.below
                         compare(contents.length 'gt' 1)
                             inner(contents '2')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -210,7 +210,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item.p-left > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item.p-left > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -220,7 +220,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 3)
                             inner(contents '4')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -228,7 +228,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 4)
                             inner(contents '5')
-                                a.normal(href=dataUrl) > .item.p-top > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item.p-top > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -239,7 +239,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 5)
                             inner(contents '6')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -247,7 +247,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 6)
                             inner(contents '7')
-                                a.normal(href=dataUrl) > .item.p-top > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item.p-top > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -262,7 +262,7 @@ view('layout') > .container
                 .base-list
                     .list-bar
                         inner(contents '1')
-                            a.normal(href=dataUrl) > .item > .content
+                            a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                 .img >  img(src=imageUrl)
                                 .detail-wrapper > @echo(dataSummary)
                                 .bottom
@@ -270,7 +270,7 @@ view('layout') > .container
                                     .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 1)
                             inner(contents '2')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -279,7 +279,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 2)
                             inner(contents '3')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -287,7 +287,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 3)
                             inner(contents '4')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -296,7 +296,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 4)
                             inner(contents '5')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -304,7 +304,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 5)
                             inner(contents '6')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -313,7 +313,7 @@ view('layout') > .container
                     .list-bar
                         compare(contents.length 'gt' 6)
                             inner(contents '7')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom
@@ -321,7 +321,7 @@ view('layout') > .container
                                         .sub-text.small-font > i.iconfont.icon-view(title='浏览人次') + span > echo(browseCount)
                         compare(contents.length 'gt' 7)
                             inner(contents '8')
-                                a.normal(href=dataUrl) > .item > .content
+                                a.normal(href=dataUrl)(target='_blank')&compare(dataType 'eq' 3) > .item > .content
                                     .img >  img(src=imageUrl)
                                     .detail-wrapper > @echo(dataSummary)
                                     .bottom

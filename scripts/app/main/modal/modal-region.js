@@ -25,6 +25,7 @@ D.extend(ModalRegion, D.MultiRegion, {
         if (renderable.options.large) this.style += ' large';
         if (renderable.options.small) this.style += ' small';
         if (renderable.options.auto) this.style += ' auto';
+        if (renderable.options.cropper) this.style += ' cropper';
         this._moveOverlay();
 
         return this.show('main/modal', {
