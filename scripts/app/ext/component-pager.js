@@ -91,7 +91,9 @@ getPageHtml = function(pageCount, currentPage) {
                         html = getPageBtnHtml(html, [pageCount - 2, pageCount - 1, pageCount],
                             currentPage);
                     } else {
-                        if (currentPage === pageCount - 3) html = getPageBtnHtml(html, [pageCount - 4], currentPage);
+                        if (currentPage === pageCount - 3) {
+                            html = getPageBtnHtml(html, [pageCount - 4, pageCount - 3], currentPage);
+                        }
                         html = getPageBtnHtml(html, [pageCount - 2, pageCount - 1, pageCount],
                             currentPage);
                     }
