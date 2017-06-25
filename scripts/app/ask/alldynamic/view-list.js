@@ -57,7 +57,6 @@ exports.handlers = {
         }
     },
     discuss: function(payload) {
-        console.log(payload);
         $(this.$('comment-reply-' + payload)).toggleClass('show');
     },
     report: function(payload) {

@@ -4,7 +4,7 @@ var E = require('./app/exam/exam-websocket'),
     _ = require('lodash/collection'),
     IV = '1234567890123456',
     webSocket, timeout, switchScreen, decryptAnswer, closeListener,
-    refreshParentWindow;
+    refreshParentWindow, removeCloseListener;
 
 webSocket = {
     connect: function(examId, submitPaper, timeExpand) {
@@ -43,11 +43,15 @@ switchScreen = function(exam) {
 };
 
 closeListener = function() {
-    // var me = this;
-    window.onbeforeunload = function() {
-        // return me.dispatch('saveLastCacheTime');
+    window.addEventListener('beforeunload', function() {
         return 'aa';
-    };
+    });
+};
+
+removeCloseListener = function() {
+    window.removeEventListener('beforeunload', function() {
+        return 'aa';
+    });
 };
 
 decryptAnswer = function(v, k) {
@@ -83,5 +87,6 @@ module.exports = {
     switchScreen: switchScreen,
     decryptAnswer: decryptAnswer,
     closeListener: closeListener,
-    refreshParentWindow: refreshParentWindow
+    refreshParentWindow: refreshParentWindow,
+    removeCloseListener: removeCloseListener
 };
