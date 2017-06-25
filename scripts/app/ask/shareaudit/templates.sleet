@@ -3,6 +3,8 @@ module > .ask-exam-page
     .ask-exam-total(data-region="shareaudit")
 
 view('shareaudit') > form.vertical
+    .title-img.pull-left.layout-mr-small
+        img.title-radius(src=headPhoto)
     .title-main
         .h5 > echo(shareaudit.question.title)
         .detail1-content.m-top.small-font

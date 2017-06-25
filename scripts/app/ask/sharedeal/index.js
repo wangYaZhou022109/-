@@ -6,7 +6,8 @@ exports.items = {
 exports.store = {
     models: {
         params: { data: { isOverdue: '1' } },
-        shareaudit: { url: '../ask-bar/questionReviewed' }
+        shareaudit: { url: '../ask-bar/questionReviewed' },
+        down: { url: '../human/file/download' },
     },
     callbacks: {
         init: function(paylaod) {

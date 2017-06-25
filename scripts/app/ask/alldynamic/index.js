@@ -23,6 +23,20 @@ exports.store = {
             data: [],
             params: { page: 1, size: 10 },
             mixin: {
+                commentReply: function(id, type) {
+                    _.forEach(this.data, function(d) {
+                        var obj = d;
+                        if (type === '1' && d.questionId === id && d.trendsType === '1') {
+                            obj.commentReply = 1;
+                        } else if (type === '2' && d.questionId === id && d.trendsType === '2') {
+                            obj.commentReply = 1;
+                        } else if (d.discussId === id && type === '3' && d.trendsType === '3') {
+                            obj.commentReply = 1;
+                        } else {
+                            obj.commentReply = 0;
+                        }
+                    });
+                },
                 closerefresh: function(id, type) {
                     var newData = [];
                     _.forEach(this.data, function(d) {
