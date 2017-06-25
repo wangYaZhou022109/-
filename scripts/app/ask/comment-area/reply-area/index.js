@@ -7,7 +7,7 @@ exports.items = {
 exports.store = {
     models: {
         comments: {
-            url: '../ask-bar/question-discuss/discussList'
+            url: '../ask-bar/question-reply'
         },
         reply: {
             url: '../system/comment/reply'
