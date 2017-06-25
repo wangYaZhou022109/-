@@ -1,0 +1,37 @@
+#!handlebars
+
+module
+    div(data-region='main')
+
+view('main') > each(comments.questionReplylist)
+    ul.topic-item
+        li
+            .user-pic
+                img.pointer(src=member.headPortrait)
+            .comment-content
+                div.clearfix
+                    .pull-left
+                        a > echo(member.fullName)
+                        span 回复
+                        span > echo(toMember.fullName)
+                    .pull-right.iconfont.icon-more.m-right.pointer
+                        .drop-down-more
+                            i.iconfont.icon-triangle-up
+                            ul
+                                li
+                                    i.iconfont.icon-info
+                                    span 举报
+                                li
+                                    i.iconfont.icon-trash
+                                    spsn 删除
+                .comment-text > @echo(content)
+                .comment-operation
+                    .user-info.pull-left
+                        span.sub-text > echo(createTime)
+                    .text-right
+                        .item
+                            i.iconfont.icon-zan-full
+                            span > string('praise') +  echo('('+ praiseNum +')')
+                        .item
+                            i.iconfont.icon-message
+                            span > string('strip') + string('discuss') +  echo('('+ replyNum2 +')')

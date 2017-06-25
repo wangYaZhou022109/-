@@ -154,7 +154,7 @@ view('list')
                                     input.input(type='hidden' name='id' value=discussId)
                                     input.input(type='hidden' name='toUserId' value=createUserId)
                                     .btn(id='reply-' + id ) > string('publish')
-                                div(data-dynamic-key='comment-area')
+                                div(data-dynamic-key='comment-area/reply-area')
 
     .none-more
         p 没有更多了
