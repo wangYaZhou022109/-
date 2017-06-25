@@ -567,7 +567,8 @@ var target = D.assign({}, {
                 return me.dispatch('submitPaper', {
                     submitType: submitType.Auto, submitTipsType: submitTipsType.AUTO
                 }).then(function() {
-                    helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
+                    var t = getRandom();
+                    helper.TO.timeOutId = setTimeout(autoSubmit, t);
                 });
             },
 

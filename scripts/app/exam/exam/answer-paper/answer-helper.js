@@ -44,8 +44,9 @@ switchScreen = function(exam) {
 
 closeListener = function() {
     // var me = this;
-    window.onunload = function() {
+    window.onbeforeunload = function() {
         // return me.dispatch('saveLastCacheTime');
+        return 'aa';
     };
 };
 
