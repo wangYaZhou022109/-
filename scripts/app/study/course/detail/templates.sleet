@@ -9,6 +9,7 @@ module > .course-detail-page
             .player-wrapper
                 .player-title-row(data-region='player-title')
                 .player-content(data-region='player' style='overflow:auto;position:relative;')
+                .player-toolbar(data-region='toolbar')
     .page-main-wrapper
         .page-side > .container
             section.section.download(data-region='download')
@@ -18,6 +19,24 @@ module > .course-detail-page
         .page-main.course-detail-main > .container
             section.section(data-region='info')
             section.section(data-region='comment')
+
+view('toolbar')
+    .item.share
+        .inline-block.drop-down-top#share + .inline-block 分享
+    .item
+        if(collect.id)
+            #cancel-collect
+                i.iconfont.icon-favorite-full.custom-color-1(data-name='id' data-value=collect.id title='取消收藏')
+                span 取消收藏
+        else
+            #collect
+                i.iconfont.icon-favorite(title='收藏')
+                span 收藏
+    .item.ewm.drop-down-wrapper.top
+        .iconfont.icon-ewm + span 手机看
+        .drop-down-content > .content
+            img.block(src='images/cmou-ewm.png')
+            .m-top.text-tips 扫描二维码
 
 view('player')
     div#container(data-dynamic-key=playerState.sectionId)
