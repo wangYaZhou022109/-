@@ -24,7 +24,9 @@ view('main')
                 .recommend-topic#recommend-topic
                     .title.clearfix
                         .h4.pull-left 我们向您推荐的话题：
-                        .iconfont.icon-close-circle.pull-right.m-right.pointer
+                        .iconfont.icon-close-circle.pull-right.m-right.m-left.pointer
+                        .pull-right.m-right
+                            a.iconfont.icon-switch 更换一组
                     ul.clearfix
                         li.pull-left
                             img(src="images/d1.jpg")
@@ -57,8 +59,7 @@ view('main')
                                 i.iconfont.icon-add
                                 span 关注
 
-                    .pull-right.layout-mt-smal.m-top.m-bottom.m-right
-                        a.iconfont.icon-switch 更换一组
+                    
                 .comment-list.ask-list > ul
                     li
                         .user-pic
