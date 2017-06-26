@@ -1,6 +1,7 @@
 var options = require('./app/exam/exam/base-paper/view-exam-notes'),
     D = require('drizzlejs'),
     $ = require('jquery'),
+    helper = require('./answer-helper'),
     obj = D.assign({}, options),
     title = { examNote: '考前须知', tips: '温馨提示' },
     bindings = D.assign({}, obj.bindings),
@@ -21,6 +22,7 @@ D.assign(obj, {
         var state = this.bindings.state.data;
         if (state.tips && state.showAnswerDetail !== 1) {
             return this.module.dispatch('clearModels').then(function() {
+                helper.removeCloseListener();
                 window.close();
             });
         } else if (state.over) {

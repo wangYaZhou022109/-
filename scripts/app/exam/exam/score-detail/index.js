@@ -69,6 +69,7 @@ var setOptions = {
                         var types = this.module.store.models.types,
                             questions = exam.paper.questions,
                             examRecord = exam.examRecord,
+                            answerSheet = this.module.store.models.answerSheet.data,
                             answeredCount = 0;
 
                         D.assign(this.data, exam, {
@@ -85,9 +86,9 @@ var setOptions = {
                             hasPrevious: false,
                             hasNext: exam.paper.questions.length > 1
                         });
-
                         if (exam.showAnswerRule !== NO_SHOW_ANYTHING && exam.examRecord.status >= 5) {
-                            this.data.correctNum = _.filter(questions, function(q) {
+                            //  正确试题
+                            answerSheet.corrects = _.filter(questions, function(q) {
                                 if (q.type === 6) {
                                     return _.every(q.subs, function(s) {
                                         return s.answerRecord && s.answerRecord.isRight === 1;
@@ -97,20 +98,25 @@ var setOptions = {
                                     return q.answerRecord.isRight === 1;
                                 }
                                 return false;
-                            }).length;
-
-                            this.data.errorNum = _.filter(questions, function(q) {
-                                if (q.type === 6) {
-                                    return !_.every(q.subs, function(s) {
-                                        return s.answerRecord && s.answerRecord.isRight === 1;
-                                    });
+                            });
+                            this.data.correctNum = answerSheet.corrects.length;
+                            //  错误试题
+                            answerSheet.errors = _.filter(questions, function(q) {
+                                if (q.type === 6 && _.every(q.subs, function(s) {
+                                    return s.answerRecord && s.answerRecord.score;
+                                }) && _.some(q.subs, function(s) {
+                                    return s.answerRecord && s.answerRecord.isRight === 0;
+                                })) {
+                                    return true;
                                 }
+
                                 if (q.answerRecord) {
                                     return q.answerRecord.isRight === 0;
                                 }
                                 return false;
-                            }).length;
-
+                            });
+                            this.data.errorNum = answerSheet.errors.length;
+                            //  未答
                             _.forEach(questions, function(q) {
                                 if (q.type === 6 && _.some(q.subs, function(s) {
                                     return s.answerRecord && s.answerRecord.answer;
@@ -122,17 +128,28 @@ var setOptions = {
                             });
                             this.data.noAnswerCount = this.data.totalCount - answeredCount;
 
+                            answerSheet.noAnswers = _.filter(questions, function(q) {
+                                if (q.type === 6) {
+                                    return _.every(q.subs, function(s) {
+                                        return !s.answerRecord;
+                                    });
+                                }
+                                return !q.answerRecord;
+                            });
+
                             this.data.examineeTotalScore = _.reduce(_.map(_.filter(questions, function(q) {
                                 return q.type !== 4 && q.type !== 5;
                             }), function(q) {
+                                var subs;
                                 if (q.type === 6) {
-                                    return _.reduce(_.map(_.filter(q.subs, function(s) {
+                                    subs = _.filter(q.subs, function(s) {
                                         return s.type !== 5;
-                                    }), function(s) {
+                                    });
+                                    return subs.length !== 0 ? _.reduce(_.map(subs, function(s) {
                                         return s.answerRecord ? s.answerRecord.score / 100 : 0;
                                     }), function(sum, n) {
                                         return sum + n;
-                                    });
+                                    }) : 0;
                                 }
                                 return q.answerRecord ? q.answerRecord.score / 100 : 0;
                             }), function(sum, n) {
@@ -219,6 +236,14 @@ var setOptions = {
                             return { key: q.id, value: values };
                         });
                     }
+                }
+            },
+            //  分析错误正确未答题目
+            answerSheet: {
+                data: {
+                    corrects: [],
+                    errors: [],
+                    noAnswers: []
                 }
             }
         },

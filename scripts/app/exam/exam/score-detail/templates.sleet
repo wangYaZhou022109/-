@@ -40,6 +40,7 @@ view('head')
             li.border.right > echo('考生: ' state.examinee)
             li.border.right > echo('总得分：' state.examineeTotalScore)
             li.border.right > echo(state.result)
+        .btn#close 关闭
 
 view('main')
     .preview-content
