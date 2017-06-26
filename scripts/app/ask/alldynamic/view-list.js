@@ -10,13 +10,7 @@ exports.bindings = {
 };
 
 exports.getEntityModuleName = function(key) {
-    var data = key.split('_'),
-        obj = {};
-    obj.type = data[1];
-    obj.id = data[2];
-    this.bindings.state.clear();
-    this.bindings.state.set(obj);
-    return 'ask/' + data[0];
+    return 'ask/' + key;
 };
 exports.getEntity = function() {
     return {
@@ -57,7 +51,15 @@ exports.handlers = {
         }
     },
     discuss: function(payload) {
-        $(this.$('comment-reply-' + payload)).toggleClass('show');
+        var state = this.bindings.state,
+            data = payload.split('_');
+        // $(this.$('comment-reply-' + data[1])).toggleClass('show');
+        state.data = {};
+        state.data.id = data[1];
+        state.data.type = data[0];
+        state.data.menu = 'comment-area';
+        this.bindings.page.commentReply(state.data.id, state.data.type);
+        state.changed();
     },
     report: function(payload) {
         var id = payload,

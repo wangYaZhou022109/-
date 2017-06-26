@@ -179,7 +179,7 @@ exports.actionCallbacks = {
 
 exports.dataForTemplate = {
     comments: function(data) {
-        _.forEach(data.comments.questionDiscussList || [], function(comment) {
+        _.forEach(data.comments.questionReplylist || [], function(comment) {
             var r = comment;
             var date = new Date(r.createTime);
             var y = date.getFullYear();
