@@ -126,7 +126,6 @@ ExamSocket = {
     //  回调业务
     onMessage: function(msg) {
         var callbacks = this.callbacks;
-
         if (msg === SUBMIT_PAPER) callbacks[SUBMIT_PAPER]();
 
         if (msg && msg.indexOf('timeExpand_') > -1) {

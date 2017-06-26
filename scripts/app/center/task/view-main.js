@@ -36,7 +36,8 @@ var D = require('drizzlejs'),
     getUrl;
 
 exports.bindings = {
-    tasks: true
+    tasks: true,
+    search: false
 };
 
 exports.actions = {
@@ -60,6 +61,26 @@ exports.dataForTemplate = {
                 url: getUrl(task)
             });
         });
+    },
+    taskFinished: function(data) {
+        var search = this.bindings.search,
+            hasSearch = function(d) {
+                return d.name || d.status;
+            };
+        if (!hasSearch(search.data) && data.tasks.length === 0) {
+            return true;
+        }
+        return false;
+    },
+    noData: function(data) {
+        var search = this.bindings.search,
+            hasSearch = function(d) {
+                return d.name || d.status;
+            };
+        if (hasSearch(search.data) && data.tasks.length === 0) {
+            return true;
+        }
+        return false;
     }
 };
 

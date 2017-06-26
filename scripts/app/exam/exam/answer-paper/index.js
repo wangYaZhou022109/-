@@ -349,6 +349,8 @@ var setOptions = {
                     this.models.state.changed();
                     this.models.types.changed();
                 }
+
+                return this.module.dispatch('checkOverTime');
             },
             waitingCheck: function(payload) {
                 var f = this.models.mark.waitingCheck(payload.questionId);
@@ -533,6 +535,16 @@ var setOptions = {
                 var countDown = this.models.countDown;
                 D.assign(countDown.data, { isDeday: false });
                 countDown.save();
+            },
+            checkOverTime: function() {
+                var exam = this.models.exam.data,
+                    current = new Date().getTime();
+                if (current > exam.examRecord.endTime) {
+                    return this.module.dispatch('submitPaper', {
+                        submitType: 'Hand', submitTipsType: submitTipsType.TIMEOUT
+                    });
+                }
+                return '';
             }
         }
     }
@@ -567,7 +579,8 @@ var target = D.assign({}, {
                 return me.dispatch('submitPaper', {
                     submitType: submitType.Auto, submitTipsType: submitTipsType.AUTO
                 }).then(function() {
-                    helper.TO.timeOutId = setTimeout(autoSubmit, getRandom());
+                    var t = getRandom();
+                    helper.TO.timeOutId = setTimeout(autoSubmit, t);
                 });
             },
 

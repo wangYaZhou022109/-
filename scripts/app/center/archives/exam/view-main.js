@@ -58,7 +58,9 @@ getJoinStatus = function(exam) {
     //  已完成
     if (exam.examRecord.status > 4) return joinStatus['4'];
     //  待考试
-    if (exam.startTime < currentTime && exam.examRecord.status === 1) return joinStatus['5'];
+    if (exam.startTime < currentTime
+        && exam.endTime > currentTime
+        && exam.examRecord.status === 1) return joinStatus['5'];
     //  未参加
     if (exam.endTime < currentTime && exam.examRecord.status === 1) return joinStatus['6'];
     //  异常

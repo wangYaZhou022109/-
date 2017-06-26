@@ -26,6 +26,8 @@ view('main')
             .state > map('my-task-status', status)
             .btn-row
                 a.btn(id='task-' + id data-value=id data-name='id') > echo(button)
-        else
-            .content-empty > .img-box.img-type-1 + p 真厉害，你的任务完成了
+    if(taskFinished)
+        .content-empty > .img-box.img-type-1 + p 真厉害，你的任务完成了
+    if(noData)
+        .content-empty > .img-box.img-type-1 + p 很抱歉，暂未找到相关内容
     #pager.pagination
