@@ -128,11 +128,11 @@ exports.dataForTemplate = {
 };
 
 exports.afterRender = function() {
-    if ($(this.$('topictags')).height() <= 71) {
+    if ($(this.$('topictags')).height() <= 64) {
         $(this.$('open')).addClass('hide');
     } else {
         // console.log($(this.$('topictags')).height());
-        $(this.$('topictags')).css('height', '70px');
+        $(this.$('topictags')).css('height', '64px');
         // console.log($(this.$('topictags')).height());
         $(this.$('topictags')).addClass('overflow');
         $(this.$('open')).show();

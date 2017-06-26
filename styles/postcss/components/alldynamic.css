@@ -40,6 +40,8 @@
             & .icon-more {
                 font-size: var(--h3);
                 cursor: pointer;
+                position: relative;
+                z-index: 20;
                 & .drop-down-more {
                     display: none;
                     width: calc(var(--space) * 8);
