@@ -16,6 +16,10 @@ exports.handlers = {
     all: function() {
         $(this.$('start')).val('');
         $(this.$('end')).val('');
+        $(this.$('all')).addClass('active');
+        $(this.$('previousWeek')).removeClass('active');
+        $(this.$('previousThreeMonth')).removeClass('active');
+        $(this.$('previousYear')).removeClass('active');
         this.module.dispatch('search', { startTime: '', endTime: '' });
     },
     previousWeek: function() {
@@ -23,6 +27,10 @@ exports.handlers = {
             previousWeek = now.getTime() - (7 * 24 * hour);
         $(this.$('start')).val('');
         $(this.$('end')).val('');
+        $(this.$('all')).removeClass('active');
+        $(this.$('previousWeek')).addClass('active');
+        $(this.$('previousThreeMonth')).removeClass('active');
+        $(this.$('previousYear')).removeClass('active');
         this.module.dispatch('search', { startTime: helper.date(previousWeek), endTime: helper.date(now) });
     },
     previousThreeMonth: function() {
@@ -30,6 +38,10 @@ exports.handlers = {
             previousThreeMonth = new Date();
         $(this.$('start')).val('');
         $(this.$('end')).val('');
+        $(this.$('all')).removeClass('active');
+        $(this.$('previousWeek')).removeClass('active');
+        $(this.$('previousThreeMonth')).addClass('active');
+        $(this.$('previousYear')).removeClass('active');
         previousThreeMonth.setMonth(previousThreeMonth.getMonth() - 3);
         this.module.dispatch('search', { startTime: helper.date(previousThreeMonth), endTime: helper.date(now) });
     },
@@ -38,10 +50,18 @@ exports.handlers = {
             previousYear = new Date();
         $(this.$('start')).val('');
         $(this.$('end')).val('');
+        $(this.$('all')).removeClass('active');
+        $(this.$('previousWeek')).removeClass('active');
+        $(this.$('previousThreeMonth')).removeClass('active');
+        $(this.$('previousYear')).addClass('active');
         previousYear.setFullYear(previousYear.getFullYear() - 1);
         this.module.dispatch('search', { startTime: helper.date(previousYear), endTime: helper.date(now) });
     },
     change: function() {
+        $(this.$('all')).removeClass('active');
+        $(this.$('previousWeek')).removeClass('active');
+        $(this.$('previousThreeMonth')).removeClass('active');
+        $(this.$('previousYear')).removeClass('active');
         this.module.dispatch('search', {
             startTime: helper.lastDay($(this.$('start')).val()),
             endTime: helper.lastDay($(this.$('end')).val())

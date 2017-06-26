@@ -2,7 +2,6 @@ var $ = require('jquery');
 var _ = require('lodash/collection');
 exports.type = 'dynamic';
 exports.bindings = {
-    params: false,
     questions: true,
     page: true,
     down: false
@@ -125,7 +124,8 @@ exports.actions = {
     'click trend-follow-*': 'follow',
     'click trend-unfollow-*': 'unfollow',
     'click del-question-*': 'shut',
-    'click publish-*': 'publish'
+    'click publish-*': 'publish',
+    'click close-question-*': 'close',
 };
 
 exports.dataForActions = {
@@ -160,7 +160,19 @@ exports.dataForActions = {
     },
     publish: function(payload) {
         return payload;
-    }
+    },
+    close: function(payload) {
+        var data = payload;
+        var me = this;
+        return this.Promise.create(function(resolve) {
+            var message = '提问关闭后将无法恢复，是否确定关闭该提问？';
+            me.app.message.confirm(message, function() {
+                resolve(data);
+            }, function() {
+                resolve(false);
+            });
+        });
+    },
 };
 
 exports.actionCallbacks = {
@@ -193,6 +205,11 @@ exports.actionCallbacks = {
         this.app.message.success('删除成功！');
         this.module.dispatch('delrefresh', { id: trends.id, trendsType: 1 });
     },
+    close: function(data) {
+        var question = data[0];
+        this.app.message.success('关闭成功!');
+        this.module.dispatch('closerefresh', question);
+    },
     publish: function() {
         this.app.message.success('操作成功！');
         this.module.dispatch('page');
@@ -200,10 +217,10 @@ exports.actionCallbacks = {
 };
 exports.dataForTemplate = {
     page: function(data) {
-        var page = data.page;
+        var questions = data.questions;
+        var page = this.bindings.page.data;
         var me = this;
-        // var flag = true;
-        _.forEach(page, function(value) {
+        _.forEach(questions, function(value) {
             var obj = value,
                 url = obj.member.headPortrait;
             if (typeof url === 'undefined' || url === null || url === '') {
@@ -211,6 +228,12 @@ exports.dataForTemplate = {
             } else {
                 obj.member.headPortrait = me.bindings.down.getFullUrl() + '?id=' + url;
             }
+            if (obj !== null && obj.closeStatus) {
+                obj.show = 3;
+            } else {
+                obj.show = 2;
+            }
+            page.push(obj);
         });
         return page;
     },

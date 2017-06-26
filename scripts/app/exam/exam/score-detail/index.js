@@ -35,10 +35,11 @@ var setOptions = {
                     initNoSujective: function(exam) {
                         var types = this.module.store.models.types,
                             answer = this.module.store.models.answer,
+                            examRecord = exam.examRecord,
                             questionSummary = answer.questionSummary();
                         this.data = {
                             name: exam.name,
-                            examinee: this.app.global.currentUser.name,
+                            examinee: examRecord.member && (examRecord.member.fullName || examRecord.member.name),
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE,
@@ -67,11 +68,12 @@ var setOptions = {
                     initWithSuject: function(exam) {
                         var types = this.module.store.models.types,
                             questions = exam.paper.questions,
+                            examRecord = exam.examRecord,
                             answeredCount = 0;
 
                         D.assign(this.data, exam, {
                             name: exam.name,
-                            examinee: this.app.global.currentUser.name,
+                            examinee: examRecord.member && (examRecord.member.fullName || examRecord.member.name),
                             totalCount: exam.paper.questionNum,
                             totalScore: exam.paper.totalScore / constant.ONE_HUNDRED,
                             singleMode: exam.paperShowRule === constant.SINGLE_MODE,
@@ -195,7 +197,7 @@ var setOptions = {
                             };
                         this.data = _.map(questions, function(q) {
                             var values = [];
-                            if (q.answerRecord) {
+                            if (q.answerRecord && q.answerRecord.answer) {
                                 if (q.type === 1 || q.type === 2) {
                                     values = choose(q);
                                 } else {
@@ -204,7 +206,7 @@ var setOptions = {
                             } else if (q.type === 6) {
                                 values = _.map(q.subs, function(s) {
                                     var subValues = [];
-                                    if (s.answerRecord) {
+                                    if (s.answerRecord && s.answerRecord.answer) {
                                         if (s.type === 1 || s.type === 2) {
                                             subValues = choose(s);
                                         } else {

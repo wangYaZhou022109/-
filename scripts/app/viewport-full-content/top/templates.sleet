@@ -48,7 +48,7 @@ view('shortcut')
                             .hr
                         .m-left
                             .m-top 热门搜索
-                            .clearfix.m-top
+                            .clearfix.m-top.hot-tag
                                 each(hotTopics)
                                     .tag-btn.radius(id='topic-'+id  data-name='id' data-value=id) > echo(name)
 
@@ -103,7 +103,7 @@ view('shortcut')
                                 img(src='images/default-cover/default_user.png')
                         .user-info-main.inline-block
                             .item
-                                .inline-block.common-title > echo(Global.currentUser.name)
+                                .inline-block.common-title > echo(Global.currentUser.fullName)
                                 .inline-block.lv > echo(integral.integralGrade.gradeName)
                             .item.small-font
                                 a.mr-1(href='#/center/index') 进入个人中心

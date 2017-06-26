@@ -8,7 +8,8 @@ exports.store = {
         audit: { url: '../ask-bar/questionReviewed' },
         pass: { url: '../ask-bar/pending-audit/pass' },
         out: { url: '../ask-bar/pending-audit/out' },
-        reviewed: { url: '../ask-bar/my-manage/reviewed' }
+        reviewed: { url: '../ask-bar/my-manage/reviewed' },
+        down: { url: '../human/file/download' },
     },
     callbacks: {
         init: function(paylaod) {

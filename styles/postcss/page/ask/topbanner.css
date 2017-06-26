@@ -1,17 +1,19 @@
-.recommend-topic {
+.topicbanner {
     width:75%;
+}
+.recommend-topic {
+    width:100%;
     overflow: hidden;
     & .h4 {
         padding: var(--space) 0;
     }
     & ul {
-        margin-right: -calc(var(--space) * 2);
-        margin-left: -calc(var(--space) * 2);
+        margin-right: -calc(var(--space) * 4);
         & li {
 
             width: 20%;
             text-align: center;
-            padding: 0 calc(var(--space) * 2);
+            padding: 0 calc(var(--space) * 4);
             box-sizing: border-box;
             & img {
                 width: 100%;
@@ -26,5 +28,6 @@
             }
         }
     }
+    
   
 }

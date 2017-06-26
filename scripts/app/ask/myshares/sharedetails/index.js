@@ -1,7 +1,5 @@
 exports.items = {
     main: 'main',
-    relevantexperts: 'relevantexperts',
-    relatedquestions: 'relatedquestions',
     top: 'top',
     'ask/report': { isModule: true }
 };

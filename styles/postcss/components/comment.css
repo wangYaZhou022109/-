@@ -1,9 +1,9 @@
 .comment-list {
     & .comment-list {
         margin-top: calc(var(--font-size) * 2);
-        background: var(--bg-color);
-        border: none;
-        padding: 0 var(--large-space);
+        & ul {
+            margin-bottom: var(--input-height);
+        }
     }
 
     & li {
@@ -69,6 +69,9 @@
                     top: -calc(var(--space) + 1);
                     color: var(--border-color);
                 }
+                & ul {
+                    margin-bottom: 0;
+                }
                 & li {
                     color: var(--font-tip-color);
                     height: var(--large-space);
@@ -122,7 +125,7 @@
             &.inline {
                 margin-left: var(--space);
             }
-            & .add {
+            & .icon-add {
                 transform: scale(1);
             }
         }
@@ -142,11 +145,12 @@
         /*height: 0;*/
         display: none;
         overflow: hidden;
+        display: none;
 
         &.show {
             @apply --fade-in;
 
-            margin: 1em 0;
+            margin-top: 1em;
             display: block;
             /*height: 3em;*/
         }

@@ -1,5 +1,6 @@
 var _ = require('lodash/collection'),
     D = require('drizzlejs'),
+    N = require('./app/util/number'),
     maps = require('./app/util/maps'),
     qTypes = maps.get('question-types'),
     constant = {
@@ -159,9 +160,9 @@ exports.store = {
 
                             return D.assign(o, {
                                 id: j,
-                                totalScore: _.reduce(_.map(o.questions, 'score'), function(sum, n) {
+                                totalScore: N.round(_.reduce(_.map(o.questions, 'score'), function(sum, n) {
                                     return sum + n;
-                                }).toFixed(1),
+                                }).toFixed(1)),
                                 isCurrent: j++ === constant.ZERO
                             });
                         });

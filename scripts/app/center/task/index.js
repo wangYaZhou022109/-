@@ -54,9 +54,12 @@ exports.store = {
                     return {};
                 };
             D.assign(validator.data, getValidatorPayload(business));
-            return this.save(validator, { loading: true }).then(function() {
-                return business;
-            });
+            if (validator.url) {
+                return this.save(validator, { loading: true }).then(function() {
+                    return business;
+                });
+            }
+            return business;
         }
     }
 };

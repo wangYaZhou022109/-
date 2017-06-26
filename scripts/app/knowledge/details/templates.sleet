@@ -50,8 +50,8 @@ view('side')
             b > pick(integral.totalScore 0)
             | 分
             a.btn.block.m-top.big.upload#download(href=downUrl download=knowledge.name)
-                span > echo('下载当前阅览知识')
-                span.small-font > echo('(-') + pick(knowledge.integral 0) + echo('积分)')
+                span > echo('下载当前知识')
+                span.small-font > echo('(') + pick(knowledge.integral 0) + echo('积分)')
             .btn.block.m-top.big.custom-bg-color-5#upload
                 span 上传新知识
                 span.small-font （+2积分）

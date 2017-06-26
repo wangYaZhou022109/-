@@ -19,8 +19,8 @@ var D = require('drizzlejs'),
     button = {
         1: '开始学习|继续学习',
         2: '开始学习|继续学习',
-        3: '开始考试',
-        4: '开始调研',
+        3: '进入考试',
+        4: '进入调研',
         5: '进入班级',
         6: '进入直播'
     },
@@ -28,7 +28,7 @@ var D = require('drizzlejs'),
         1: '#/study/course/detail/',
         2: '#/study/subject/detail/',
         3: '#/exam/exam/answer-paper/',
-        4: '#/exam/research-activity/research-detail/',
+        4: '#/exam/research-activity/index/',
         5: '#/',
         6: '#/activity/gensee/detail/'
     },
@@ -77,9 +77,7 @@ getButton = function(task) {
 //  调研的url  特殊情况
 getUrl = function(task) {
     if (!task.url) {
-        return task.businessType === 4
-            ? (url[task.businessType] + task.businessId + '/' + task.businessId)
-                : url[task.businessType] + task.businessId;
+        return url[task.businessType] + task.businessId;
     }
     return task.url;
 };

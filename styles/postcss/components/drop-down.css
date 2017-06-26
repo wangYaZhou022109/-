@@ -1,5 +1,6 @@
 .drop-down-wrapper {
     position: relative;
+    z-index: 10;
 
     & .drop-down-btn {
         cursor: pointer;
@@ -54,6 +55,7 @@
             text-align: left;
             white-space: normal;
             line-height: 1.5;
+            color: var(--font-color);
         }
     }
 

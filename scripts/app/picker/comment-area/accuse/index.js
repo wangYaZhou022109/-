@@ -49,6 +49,9 @@ exports.buttons = [{
         if (!data.type) {
             this.app.message.error('请选择举报类型');
             return false;
+        } else if (data.accuseNote.length > 1000) {
+            this.app.message.error('举报理由,最长不超过1000个字符');
+            return false;
         }
         data.accuseNote = $.trim(data.accuseNote);
         return this.dispatch('report', data);

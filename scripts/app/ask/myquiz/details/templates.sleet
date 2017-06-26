@@ -77,36 +77,49 @@ view('main')
                                     ul
                                         li#trend-report
                                             i.iconfont.icon-info
-                                            span 举报
+                                            span(id ='report-' + 3 + '_' + id+'_' + createMemberId data-name='id' data-value= 3+'_' + id+'_' + createMemberId) > string('report')
                                         li#del-question
                                             i.iconfont.icon-trash
-                                            spsn 删除
+                                            span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
                                         li#close
                                             i.iconfont.icon-close
                                             span 关闭
-                        .comment-text.color-main > echo(content)
+                        .comment-text.color-main > @echo(content)
                         .comment-operation.sub-text
                             .pull-left > dateTime(createTime)
                             .text-right
                                 compare(praise1 'eq' true)
-                                    .item(id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
-                                    .item('hidden' id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
+                                    .item(id='unpraise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('已赞（' + praiseNum +'）')
+                                    .item('hidden' id='praise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('赞（' + praiseNum +'）')
                                 else
-                                    .item(id='praise-'+ id data-name='id' data-value=id ) >  echo('赞（' + praiseNum +'）')
-                                    .item('hidden' id='unpraise-'+ id data-name='id' data-value=id ) > echo('已赞（' + praiseNum +'）')
+                                    .item(id='praise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('赞（' + praiseNum +'）')
+                                    .item('hidden' id='unpraise-'+ id data-name='id' data-value=id )
+                                        i.iconfont.icon-zan-full
+                                        span > echo('已赞（' + praiseNum +'）')
                                 if(replyNum)
-                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（' + replyNum +'）')
+                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id)
+                                        i.iconfont.icon-message
+                                        span > echo('回复（' + replyNum +'）')
                                 else
-                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id) > echo('回复（0）')
+                                    .item > span(id='discuss-answer-'+id data-name='id' data-value=id)
+                                        i.iconfont.icon-message
+                                        span > echo('回复（0）')
                                 .item > .share-bar
                                     .drop-down-wrapper
                                         #  i.iconfont.icon-share-2(title='分享')
+                                        i.iconfont.icon-fenxiang
                                         span 分享
                                         form.drop-down-content > .content
                                             .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间
                                             .item > div(id ='shareTo-weibo_1' + id) > i.iconfont.icon-sina + span 分享到新浪微博
-                                .item > span(id ='report-' + 3 + '_' + id+'_' + createMemberId data-name='id' data-value= 3+'_' + id+'_' + createMemberId) > string('report')
-                                .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
+                                # .item > span(id ='report-' + 3 + '_' + id+'_' + createMemberId data-name='id' data-value= 3+'_' + id+'_' + createMemberId) > string('report')
+                                # .item > span(id = 'del1-' + id data-name='id' data-value=id) > string('delete')
                         div(id='reply-'+id name='reply-' + id style='display:none')
 view('top')
     .section

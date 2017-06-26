@@ -3,6 +3,8 @@ module > .ask-reject-page
     .ask-reject-total(data-region="audit")
 
 view('audit')
+    .title-img.pull-left.layout-mr-small
+        img.title-radius(src=headPhoto)
     .title-main    
         .h5 > echo(audit.question.title)
         .detail1-content.m-top.small-font

@@ -5,8 +5,23 @@ exports.type = 'dynamic';
 exports.bindings = {
     trends: true,
     page: true,
-    down: false
+    down: false,
+    state: true
 };
+
+exports.getEntityModuleName = function(key) {
+    return 'ask/' + key;
+};
+exports.getEntity = function() {
+    return {
+        state: this.bindings.state.data
+    };
+};
+
+exports.dataForEntityModule = function(entity) {
+    return entity;
+};
+
 
 exports.events = {
     'click myquiz-details-*': 'showDetails',
@@ -36,7 +51,15 @@ exports.handlers = {
         }
     },
     discuss: function(payload) {
-        $(this.$('comment-reply-' + payload)).toggleClass('show');
+        var state = this.bindings.state,
+            data = payload.split('_');
+        // $(this.$('comment-reply-' + data[1])).toggleClass('show');
+        state.data = {};
+        state.data.id = data[1];
+        state.data.type = data[0];
+        state.data.menu = 'comment-area';
+        this.bindings.page.commentReply(state.data.id, state.data.type);
+        state.changed();
     },
     report: function(payload) {
         var id = payload,
@@ -321,7 +344,7 @@ exports.dataForTemplate = {
                 if (obj.trendsType === '3') {
                     obj.show = 0;
                     if (obj.createUserId === obj.me) { // 是否为当前用户
-                        if (obj.questionDiscuss.replyNum > 0) {
+                        if (obj.questionDiscuss != null && obj.questionDiscuss.replyNum > 0) {
                             obj.show = 2;
                         } else {
                             obj.show = 1;
@@ -330,7 +353,7 @@ exports.dataForTemplate = {
                 } else {
                     obj.show = 0;
                     if (obj.createUserId === obj.me) { // 是否为当前用户
-                        if (obj.question.discussNum > 0) {
+                        if (obj.question != null && obj.question.discussNum > 0) {
                             obj.show = 2;
                         } else {
                             obj.show = 1;
@@ -347,3 +370,6 @@ exports.dataForTemplate = {
     }
 };
 
+exports.beforeClose = function() {
+    $(window).unbind('scroll');
+};

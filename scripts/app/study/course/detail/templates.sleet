@@ -80,9 +80,9 @@ view('info')
             .inline-block.m-right > #share
             .inline-block.m-left
                 if(collect.id)
-                    i#cancel-collect.iconfont.icon-favorite-full.custom-color-1(data-name='id' data-value=collect.id title='取消收藏')
+                    i#collect.iconfont.icon-favorite-full.custom-color-1(data-collect-id=collect.id title='取消收藏')
                 else
-                    i#collect.iconfont.icon-favorite(title='收藏')
+                    i#collect.iconfont.icon-favorite(data-collect-id='', title='收藏')
     p.course-info-detail > each(topics)
         compare(group 'eq' 1)
             a(href='#/ask/topicdetail/'+id) > .tag-btn.radius > echo(name)
