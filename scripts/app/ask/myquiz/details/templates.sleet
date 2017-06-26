@@ -84,7 +84,7 @@ view('main')
                                         li#close
                                             i.iconfont.icon-close
                                             span 关闭
-                        .comment-text.color-main > echo(content)
+                        .comment-text.color-main > @echo(content)
                         .comment-operation.sub-text
                             .pull-left > dateTime(createTime)
                             .text-right
@@ -113,7 +113,7 @@ view('main')
                                 .item > .share-bar
                                     .drop-down-wrapper
                                         #  i.iconfont.icon-share-2(title='分享')
-                                        i.iconfont.icon-fenxiang
+                                        i.iconfont.icon-share-2
                                         span 分享
                                         form.drop-down-content > .content
                                             .item > div(id ='shareTo-qzone_1' + id) > i.iconfont.icon-q-zone + span 分享到QQ空间

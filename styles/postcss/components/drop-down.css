@@ -71,6 +71,15 @@
         }
     }
 
+    &.top {
+        & .drop-down-content {
+            top: auto;
+            bottom: 100%;
+            padding: 0 0 1em;
+            transform-origin: 100% 100%;
+        }
+    }
+
     &:hover {
         & .drop-down-content {
             @apply --fade-in;
@@ -79,5 +88,14 @@
             z-index: 10;
 
         }
+    }
+}
+
+.drop-down-top {
+    & .drop-down-content {
+        top: auto;
+        bottom: 100%;
+        padding: 0 0 1em;
+        transform-origin: 100% 100%;
     }
 }

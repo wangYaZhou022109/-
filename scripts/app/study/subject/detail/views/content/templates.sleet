@@ -30,8 +30,8 @@ view('pannel')
                                 .inline-block.attribute
                                     span > echo('[') + map('section-type' sectionType) + echo(']')
                                 .inline-block.title.text-overflow
-                                    p.no-margin(title=name) > echo(name)
-                                    p.no-margin
+                                    .text-overflow(title=name) > echo(name)
+                                    .text-overflow
                                         echo(item.timeText)
                                         span.custom-color-3 > echo(item.statusText)
 

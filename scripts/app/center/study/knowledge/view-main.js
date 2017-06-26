@@ -58,7 +58,7 @@ exports.components = [{
 exports.dataForTemplate = {
     list: function(data) {
         var list = data.list,
-            downUrl = this.bindings.img.getFullUrl(),
+            // downUrl = this.bindings.img.getFullUrl(),
             icon = '';
         _.map(list, function(opt) {
             var obj = opt;
@@ -79,7 +79,7 @@ exports.dataForTemplate = {
             } else {
                 icon = 'icon-other';
             }
-            obj.icon = obj.cover ? (downUrl + '?id=' + obj.cover) : icon;
+            obj.icon = icon;
             obj.prefixText = '上传时间：' + helpers.dateMinute(obj.uploadTime);
 
             obj.downloadMemberCount = obj.downloadMemberCount == null ? 0 : obj.downloadMemberCount;

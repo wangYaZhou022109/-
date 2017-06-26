@@ -11,7 +11,8 @@ exports.items = {
     'preview-img': '',
     'preview-video': '',
     'preview-audio': '',
-    msg: ''
+    msg: '',
+    toolbar: 'toolbar'
 };
 
 exports.store = {

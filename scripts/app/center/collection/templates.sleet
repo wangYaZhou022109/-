@@ -31,9 +31,10 @@ view('main')
             li.border.bottom
                 .title-row
                     .img > .img-cont > img(src=imgUrl)
-                    span.inline-block.tag > echo(typeName)
-                    .inline-block.title > a.normal.block(href=url target='_blank') > echo(collectName)
-                    .time > echo(prefixText)
+                    .text-overflow.clearfix
+                        .pull-left.tag.m-right > echo(typeName)
+                        .overflow.title > a.normal.block.text-overflow(href=url target='_blank') > echo(collectName)
+                        .time > echo(prefixText)
                 .state &nbsp;
                 .btn-row
                     .btn(id='delete'+id data-name='id' data-value=id) 取消收藏
