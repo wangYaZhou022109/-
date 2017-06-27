@@ -5,6 +5,7 @@
     }
     & li {
         padding-bottom: 0;
+        border-bottom: none;
     }
 
     & .comment-operation {
@@ -56,11 +57,11 @@
         & .row {
             margin-top: var(--input-height);
             margin-bottom: var(--input-height);
-            & .tag-btn {
+            & .tag-topic {
                 width: 17%;
                 padding:calc(var(--space) / 2) var(--space);
             }
-            & .tag-btn:last-child {
+            & .tag-topic:last-child {
                margin-right: 0;
             }
         }

@@ -4,6 +4,7 @@
     }
     & li {
         padding-bottom: 0;
+        border-bottom: none;
     }
 
     & .comment-operation {

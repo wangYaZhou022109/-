@@ -71,19 +71,19 @@ view('main')
                                     .drop-down-more
                                         i.iconfont.icon-triangle-up
                                         ul
-                                            li#trend-report
+                                            li
                                                 i.iconfont.icon-info
                                                 span 举报
-                                            li#del-question
+                                            li
                                                 i.iconfont.icon-trash
                                                 spsn 删除
-                                            li#close
+                                            li
                                                 i.iconfont.icon-close
                                                 span 关闭
-                                            li#close
+                                            li
                                                 i.iconfont.icon-close
                                                 span 关闭
-                                            li#close
+                                            li
                                                 i.iconfont.icon-close
                                                 span 关闭
                             .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
@@ -178,10 +178,10 @@ view('main')
                                                         .drop-down-more
                                                             i.iconfont.icon-triangle-up
                                                             ul
-                                                                li#trend-report
+                                                                li
                                                                     i.iconfont.icon-info
                                                                     span 举报
-                                                                li#del-question
+                                                                li
                                                                     i.iconfont.icon-trash
                                                                     spsn 删除
                                                 .comment-text 问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容
